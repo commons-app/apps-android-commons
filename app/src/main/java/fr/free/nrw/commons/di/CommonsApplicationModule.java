@@ -7,7 +7,6 @@ import android.content.Context;
 import android.view.inputmethod.InputMethodManager;
 import androidx.collection.LruCache;
 import androidx.room.Room;
-import com.github.varunpant.quadtree.QuadTree;
 import com.google.gson.Gson;
 import dagger.Module;
 import dagger.Provides;
@@ -220,16 +219,6 @@ public class CommonsApplicationModule {
     @Provides
     public String provideLoggedInUsername() {
         return Objects.toString(AppAdapter.get().getUserName(), "");
-    }
-
-    /**
-     * Provides quad tree
-     *
-     * @return
-     */
-    @Provides
-    public QuadTree providesQuadTres() {
-        return new QuadTree<>(-180, -90, +180, +90);
     }
 
     @Provides

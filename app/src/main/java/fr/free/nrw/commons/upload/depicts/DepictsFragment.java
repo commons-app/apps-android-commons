@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload.depicts;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,12 +102,13 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     @Override
     public void noDepictionSelected() {
         DialogUtil.showAlertDialog(getActivity(),
-                getString(R.string.no_depictions_selected),
-                getString(R.string.no_depictions_selected_warning_desc),
-                getString(R.string.no_go_back),
-                getString(R.string.yes_submit),
-                null,
-                () -> goToNextScreen());
+            getString(R.string.no_depictions_selected),
+            getString(R.string.no_depictions_selected_warning_desc),
+            getString(R.string.yes_submit),
+            getString(R.string.no_go_back),
+            this::goToNextScreen,
+            null
+        );
     }
 
     @Override
@@ -185,12 +185,11 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     /**
      * Search for depictions for the following query
+     *
      * @param query query string
      */
     private void searchForDepictions(String query) {
-        if (!TextUtils.isEmpty(query)) {
-            presenter.searchForDepictions(query);
-        }
+        presenter.searchForDepictions(query);
     }
 
 }

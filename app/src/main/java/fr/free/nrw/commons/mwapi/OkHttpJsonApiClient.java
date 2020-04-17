@@ -31,6 +31,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import timber.log.Timber;
 
 /**
@@ -167,14 +169,13 @@ public class OkHttpJsonApiClient {
     });
   }
 
-  public Observable<List<Place>> getNearbyPlaces(LatLng cur, String lang, double radius)
-      throws IOException {
-    String wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
-    String query = wikidataQuery
-        .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
-        .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.getLatitude()))
-        .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.getLongitude()))
-        .replace("${LANG}", lang);
+    public Observable<List<Place>> getNearbyPlaces(LatLng cur, String language, double radius) throws IOException {
+        String wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
+        String query = wikidataQuery
+                .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
+                .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.getLatitude()))
+                .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.getLongitude()))
+                .replace("${LANG}", language);
 
     HttpUrl.Builder urlBuilder = HttpUrl
         .parse(sparqlQueryUrl)

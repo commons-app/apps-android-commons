@@ -193,7 +193,7 @@ public class UploadModel {
     }
 
     public void useSimilarPictureCoordinates(final ImageCoordinates imageCoordinates, final int uploadItemIndex) {
-        fileProcessor.useImageCoords(imageCoordinates);
+        fileProcessor.prePopulateCategoriesAndDepictionsBy(imageCoordinates);
         items.get(uploadItemIndex).setGpsCoords(imageCoordinates);
     }
 

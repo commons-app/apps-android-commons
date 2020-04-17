@@ -97,7 +97,9 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
         Disposable searchDepictsDisposable = distinctDepictsObservable
                 .observeOn(mainThreadScheduler)
                 .subscribe(
-                        depictedItemList::add,
+                    e -> {
+                        depictedItemList.add(e);
+                    },
                         t -> {
                             view.showProgress(false);
                             view.showError(true);

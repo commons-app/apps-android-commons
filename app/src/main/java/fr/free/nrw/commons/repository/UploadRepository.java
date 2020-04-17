@@ -73,7 +73,7 @@ public class UploadRepository {
      */
     public void cleanup() {
         localDataSource.cleanUp();
-        remoteDataSource.clearSelectedCategories();
+        remoteDataSource.cleanUp();
     }
 
     /**
