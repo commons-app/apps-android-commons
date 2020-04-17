@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "code": "badtoken",
+      "text": "Invalid token"
+    }
+  ],
+  "docref": "See https://en.wikipedia.org/w/api.php for API usage",
+  "servedby": "mw1222"
+}

@@ -12,6 +12,7 @@
 * Sujan
 * Sushi
 * Tobi 406
+* Ubahnverleih
 * WikiBayer
 -->
 <resources>
@@ -517,9 +518,13 @@
   <string name="welcome_dont_upload_content_description">Beispiele von Bildern, die nicht hochgeladen werden sollen.</string>
   <string name="skip_image">Dieses bild überspringen</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download fehlgeschlagen! Wir konnten die Datei nicht ohne externe Speicherberechtigung herunterladen!</string>
+  <string name="manage_exif_tags">EXIF-Tags verwalten</string>
+  <string name="manage_exif_tags_summary">Auswahl, welche EXIF-Tags beim Upload behalten werden sollen</string>
   <string name="exif_tag_name_author">Autor</string>
   <string name="exif_tag_name_copyright">Urheberrecht</string>
   <string name="exif_tag_name_location">Standort</string>
+  <string name="exif_tag_name_cameraModel">Kamera-Modell</string>
+  <string name="exif_tag_name_lensModel">Kameralinse</string>
   <string name="exif_tag_name_serialNumbers">Seriennummer</string>
   <string name="share_text">Lade Fotos direkt von deinem Telefon auf Wikimedia Commons hoch. Lade die Commons-App jetzt herunter: %1$s</string>
   <string name="share_via">App teilen über …</string>
@@ -528,8 +533,14 @@
   <string name="upload_cancelled">Hochladen abbrechen</string>
   <string name="delete_helper_show_deletion_title_success">Erfolgreich</string>
   <string name="delete_helper_show_deletion_title_failed">Fehlgeschlagen</string>
+  <string name="delete_helper_ask_spam_selfie">Ein Selfie</string>
+  <string name="delete_helper_ask_spam_blurry">Unscharf</string>
+  <string name="delete_helper_ask_spam_nonsense">Unsinn</string>
   <string name="delete_helper_ask_spam_other">Andere</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Pressefoto</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Bild aus dem Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Andere</string>
   <string name="account_created">Benutzerkonto erstellt!</string>
+  <string name="title_app_shortcut_setting">Einstellungen</string>
 </resources>

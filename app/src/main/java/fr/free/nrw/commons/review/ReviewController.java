@@ -148,7 +148,6 @@ public class ReviewController {
                 .inject(this);
         ViewUtil.showShortToast(context, context.getString(R.string.send_thank_toast, media.getDisplayTitle()));
 
-        publishProgress(context, 0);
         if (firstRevision == null) {
             return;
         }
@@ -157,7 +156,6 @@ public class ReviewController {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((result) -> {
-                    publishProgress(context, 2);
                     String message;
                     String title;
                     if (result) {

@@ -5,7 +5,7 @@
 <resources>
   <string name="title_activity_explore">Esplora</string>
   <string name="navigation_item_explore">Esplora</string>
-  <string name="preference_category_appearance">Aspeto grafego</string>
+  <string name="preference_category_appearance">Siera de ła grafega</string>
   <string name="preference_category_general">Xenerałe</string>
   <string name="preference_category_feedback">Feedback</string>
   <string name="preference_category_privacy">Privacy</string>
@@ -102,7 +102,7 @@
   <string name="waiting_first_sync">Speta par ła prima sincronixasion...</string>
   <string name="no_uploads_yet">No te ghe njiancora cargà na foto</string>
   <string name="menu_retry_upload">Riproa</string>
-  <string name="menu_cancel_upload">Dasa stare</string>
+  <string name="menu_cancel_upload">Descançełare</string>
   <plurals name="share_license_summary">
     <item quantity="one">Sta imajine ła vegnarà ridasada in baxe a ła liçensa %1$s</item>
     <item quantity="other">Ste imajini łe vegnarà ridasae in baxe a ła liçensa %1$s</item>
@@ -165,7 +165,9 @@
   <string name="title_activity_nearby">Posti cuà rente</string>
   <string name="no_nearby">Nisun posto catà cuà rente</string>
   <string name="warning">Òcio!</string>
+  <string name="duplicate_image_found">Catada na imajine dopiada</string>
   <string name="upload_image_duplicate">Sto file xà el ghe xé so Common. Sito seguro de vołer ndar vanti?</string>
+  <string name="upload">Carga</string>
   <string name="yes">Sì</string>
   <string name="no">No</string>
   <string name="media_detail_title">Titoło</string>
@@ -208,7 +210,7 @@
   <string name="welcome_image_welcome_wikipedia">Benvegnuo Wikipedia</string>
   <string name="welcome_image_welcome_copyright">Benvegnuo Copyright</string>
   <string name="welcome_image_sydney_opera_house">Teatro de l\'opara de Sydney</string>
-  <string name="cancel">D\'asa star</string>
+  <string name="cancel">Descançełare</string>
   <string name="navigation_drawer_open">Verxi</string>
   <string name="navigation_drawer_close">Sara</string>
   <string name="navigation_item_home">Pajina prinçipale</string>
@@ -239,6 +241,7 @@
   <string name="upload_problem_different_geolocation">Sta foto ła xé sta fata so na poxision difarente.</string>
   <string name="upload_problem_fbmd">Carga soło łe foto che te ghè fato ti. No sta cargare imajini che te ghè catà n\'tei account Facebook de altra xente.</string>
   <string name="upload_problem_do_you_continue">Vuto cargare insteso sta imajine?</string>
+  <string name="upload_problem_image">Problemi catai in te l\'imajine</string>
   <string name="internet_downloaded">Carga soło łe foto che te ghè fato da soło. No sta cargar imajine catae so internet</string>
   <string name="give_permission">Dati autorixasion</string>
   <string name="use_external_storage">Dopara memoria esterna</string>
@@ -288,7 +291,7 @@
   <string name="about_translate_title">Lengue</string>
   <string name="about_translate_message">Eleji ła lengua e ła tradusion che te ne vołi enviar</string>
   <string name="about_translate_proceed">Va vanti</string>
-  <string name="about_translate_cancel">Scançeła</string>
+  <string name="about_translate_cancel">Descançełare</string>
   <string name="retry">Riproa</string>
   <string name="showcase_view_got_it_button">Capìo!</string>
   <string name="showcase_view_whole_nearby_activity">Sti cuà i xé i posti rente a ti che i vołe imajini par mostrar łe so voxi de Wikipedia.\n\nSchiciando so \"SERCA STA AREA\" se bloca ła mapa e se fa partire na riserca n\'tei posti cuà rente a ła poxision.</string>
