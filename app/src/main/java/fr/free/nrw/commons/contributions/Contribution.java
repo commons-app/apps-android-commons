@@ -65,15 +65,6 @@ public class  Contribution extends Media {
         this.dateCreatedSource = "";
     }
 
-    public Contribution(Uri localUri, String imageUrl, String filename, String description, long dataLength,
-                        Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords, int state) {
-        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
-        this.decimalCoords = decimalCoords;
-        this.editSummary = editSummary;
-        this.dateCreatedSource = "";
-        this.state=state;
-    }
-
     public Contribution(Media media) {
         super(media.localUri, media.thumbUrl, media.imageUrl, media.filename, media.description,
             media.discussion,
