@@ -87,7 +87,6 @@ public class UploadRemoteDataSource {
      * Clean up the selected categories
      */
     public void cleanUp(){
-        uploadController.cleanup();
         //This needs further refactoring, this should not be here, right now the structure wont suppoort rhis
         categoriesModel.cleanUp();
         depictModel.cleanUp();
