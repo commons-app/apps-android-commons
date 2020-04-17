@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.depictions.Media.DepictedImagesFragment;
-import fr.free.nrw.commons.depictions.SubClass.SubDepictionListFragment;
+import fr.free.nrw.commons.depictions.subClass.SubDepictionListFragment;
 import fr.free.nrw.commons.explore.ViewPagerAdapter;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;

@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.depictions
 
 import org.mockito.Mockito.verify
-import fr.free.nrw.commons.depictions.SubClass.SubDepictionListContract
-import fr.free.nrw.commons.depictions.SubClass.SubDepictionListPresenter
+import fr.free.nrw.commons.depictions.subClass.SubDepictionListContract
+import fr.free.nrw.commons.depictions.subClass.SubDepictionListPresenter
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient

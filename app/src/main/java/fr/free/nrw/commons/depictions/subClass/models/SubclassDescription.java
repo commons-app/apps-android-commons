@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.depictions.SubClass.models;
+package fr.free.nrw.commons.depictions.subClass.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

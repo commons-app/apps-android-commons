@@ -84,8 +84,7 @@ public class NetworkingModule {
                 toolsForgeUrl,
                 WIKIDATA_SPARQL_QUERY_URL,
                 BuildConfig.WIKIMEDIA_CAMPAIGNS_URL,
-                BuildConfig.WIKIMEDIA_API_HOST,
-                gson);
+            gson);
     }
 
     @Named(NAMED_COMMONS_CSRF)

@@ -1,11 +1,11 @@
-package fr.free.nrw.commons.depictions.SubClass.models;
+package fr.free.nrw.commons.depictions.subClass.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Model class for parsing SparqlQueryResponse
  */
-public class Subclass {
+public class SubclassLabel {
 
     @SerializedName("type")
     @Expose
@@ -13,33 +13,44 @@ public class Subclass {
     @SerializedName("value")
     @Expose
     private String value;
+    @SerializedName("xml:lang")
+    @Expose
+    private String xmlLang;
 
     /**
      * No args constructor for use in serialization
      *
      */
-    public Subclass() {
+    public SubclassLabel() {
     }
 
     /**
      *
      * @param value
+     * @param xmlLang
      * @param type
      */
-    public Subclass(String type, String value) {
+    public SubclassLabel(String type, String value, String xmlLang) {
         super();
         this.type = type;
         this.value = value;
+        this.xmlLang = xmlLang;
     }
 
     public String getType() {
         return type;
     }
 
+    /**
+     * returns type
+     */
     public void setType(String type) {
         this.type = type;
     }
 
+    /**
+     * gets value of the depiction
+     */
     public String getValue() {
         return value;
     }
@@ -48,4 +59,10 @@ public class Subclass {
         this.value = value;
     }
 
+    /**
+     * get language in which the depiction was requested
+     */
+    public String getXmlLang() {
+        return xmlLang;
+    }
 }
