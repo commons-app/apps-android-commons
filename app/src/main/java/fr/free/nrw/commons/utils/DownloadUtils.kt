@@ -20,27 +20,22 @@ object DownloadUtils {
      */
     @JvmStatic
     fun downloadMedia(activity: Activity?, m: Media) {
-        val imageUrl = m.getImageUrl()
-        var fileName = m.getFilename()
-        if (imageUrl == null || fileName == null || activity == null
-        ) {
-            Timber.d(
-                "Skipping download media as either imageUrl %s or filename %s activity is null",
-                imageUrl, fileName
-            )
+        val imageUrl = m.imageUrl
+        var fileName = m.filename
+        if (imageUrl == null || fileName == null || activity == null) {
+            Timber.d("Skipping download media as either imageUrl $imageUrl or filename $fileName activity is null")
             return
         }
         // Strip 'File:' from beginning of filename, we really shouldn't store it
-        fileName = fileName.replaceFirst("^File:".toRegex(), "")
+        fileName = fileName.substringAfter("File:")
         val imageUri = Uri.parse(imageUrl)
-        val req = DownloadManager.Request(imageUri)
-        //These are not the image title and description fields, they are download descs for notifications
-        req.setDescription(activity.getString(R.string.app_name))
-        req.setTitle(m.displayTitle)
-        req.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
-        // Modern Android updates the gallery automatically. Yay!
-        req.allowScanningByMediaScanner()
-        req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+        val req = DownloadManager.Request(imageUri).apply {
+            setTitle(m.displayTitle)
+            setDescription(activity.getString(R.string.app_name))
+            setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
+            allowScanningByMediaScanner()
+            setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+        }
         PermissionUtils.checkPermissionsAndPerformAction(
             activity,
             permission.WRITE_EXTERNAL_STORAGE,
