@@ -61,22 +61,6 @@ public class  Contribution extends Media {
     public Uri contentProviderUri;
     public String dateCreatedSource;
 
-    public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,
-                        int state, long dataLength, Date dateUploaded, long transferred,
-                        String source, String description, String creator, boolean isMultiple,
-                        int width, int height, String license) {
-        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
-        this.contentUri = contentUri;
-        this.state = state;
-        this.transferred = transferred;
-        this.source = source;
-        this.isMultiple = isMultiple;
-        this.width = width;
-        this.height = height;
-        this.license = license;
-        this.dateCreatedSource = "";
-    }
-
     public Contribution(Uri localUri, String imageUrl, String filename, String description, long dataLength,
                         Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords) {
         super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
