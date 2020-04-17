@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import org.wikipedia.wikidata.DataValue_partial.DataValueString_partial;
+import org.wikipedia.wikidata.DataValue.DataValueString;
 import org.wikipedia.wikidata.Statement_partial;
 
 /**
@@ -81,7 +81,7 @@ public class DepictsClient {
                 final List<Statement_partial> imageClaim = claimsResponse.getClaims()
                     .get(WikidataProperties.IMAGE.getPropertyName());
                 if (imageClaim != null) {
-                    final DataValueString_partial dataValue = (DataValueString_partial) imageClaim
+                    final DataValueString dataValue = (DataValueString) imageClaim
                         .get(0)
                         .getMainSnak()
                         .getDataValue();

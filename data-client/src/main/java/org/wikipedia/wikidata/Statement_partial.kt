@@ -18,5 +18,8 @@ import com.google.gson.annotations.SerializedName
     }
     ]
 }*/
-data class Statement_partial(@SerializedName("mainsnak")val mainSnak:Snak_partial) {
-}
+data class Statement_partial(
+    @SerializedName("mainsnak") val mainSnak: Snak_partial,
+    val type: String,
+    val rank: String
+)

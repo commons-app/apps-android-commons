@@ -1,8 +1,6 @@
 package org.wikipedia.wikidata
 
 import org.wikipedia.json.RuntimeTypeAdapterFactory
-import org.wikipedia.wikidata.DataValue_partial.DataValueEntityId_partial
-import org.wikipedia.wikidata.DataValue_partial.DataValueString_partial
 
 /*"datavalue": {
     "value": {
@@ -41,22 +39,13 @@ import org.wikipedia.wikidata.DataValue_partial.DataValueString_partial
                 "type": "time"
               }
     */
-sealed class DataValue_partial(val type: String) {
+sealed class DataValue(val type: String) {
     companion object {
         @JvmStatic
         val polymorphicTypeAdapter =
-            RuntimeTypeAdapterFactory.of(
-                DataValue_partial::class.java,
-                DataValue_partial::type.name
-            )
-                .registerSubtype(
-                    DataValueEntityId_partial::class.java,
-                    DataValueEntityId_partial.TYPE
-                )
-                .registerSubtype(
-                    DataValueString_partial::class.java,
-                    DataValueString_partial.TYPE
-                )
+            RuntimeTypeAdapterFactory.of(DataValue::class.java, DataValue::type.name)
+                .registerSubtype(DataValueEntityId::class.java, DataValueEntityId.TYPE)
+                .registerSubtype(DataValueString::class.java, DataValueString.TYPE)
                 .registerSubtype(
                     DataValueGloveCoordinate_partial::class.java,
                     DataValueGloveCoordinate_partial.TYPE
@@ -67,27 +56,27 @@ sealed class DataValue_partial(val type: String) {
                 )
     }
 
-    data class DataValueEntityId_partial(val value: WikiBaseEntityValue_partial) :
-        DataValue_partial(TYPE) {
+    data class DataValueEntityId(val value: WikiBaseEntityValue) :
+        DataValue(TYPE) {
         companion object {
             const val TYPE = "wikibase-entityid"
         }
     }
 
-    data class DataValueString_partial(val value: String) : DataValue_partial(TYPE) {
+    data class DataValueString(val value: String) : DataValue(TYPE) {
         companion object {
             const val TYPE = "string"
         }
     }
 
     class DataValueGloveCoordinate_partial() :
-        DataValue_partial(TYPE) {
+        DataValue(TYPE) {
         companion object {
             const val TYPE = "globecoordinate"
         }
     }
 
-    class DataValueTime_partial() : DataValue_partial(TYPE) {
+    class DataValueTime_partial() : DataValue(TYPE) {
         companion object {
             const val TYPE = "time"
         }

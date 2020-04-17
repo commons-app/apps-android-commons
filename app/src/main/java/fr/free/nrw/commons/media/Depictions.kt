@@ -4,7 +4,7 @@ import android.os.Parcelable
 import androidx.annotation.WorkerThread
 import fr.free.nrw.commons.wikidata.WikidataProperties.DEPICTS
 import kotlinx.android.parcel.Parcelize
-import org.wikipedia.wikidata.DataValue_partial.DataValueEntityId_partial
+import org.wikipedia.wikidata.DataValue.DataValueEntityId
 import org.wikipedia.wikidata.Entities
 import java.util.*
 
@@ -18,7 +18,7 @@ data class Depictions(val depictions: List<IdAndLabel>) : Parcelable {
                 entities.first?.statements
                     ?.getOrElse(DEPICTS.propertyName, { emptyList() })
                     ?.map { statement ->
-                        (statement.mainSnak.dataValue as DataValueEntityId_partial).value.id
+                        (statement.mainSnak.dataValue as DataValueEntityId).value.id
                     }
                     ?.map { id -> IdAndLabel(id, fetchLabel(mediaClient, id)) }
                     ?: emptyList()

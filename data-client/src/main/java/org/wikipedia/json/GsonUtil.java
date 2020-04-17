@@ -7,14 +7,14 @@ import com.google.gson.GsonBuilder;
 import org.wikipedia.dataclient.SharedPreferenceCookieManager;
 import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.page.Namespace;
-import org.wikipedia.wikidata.DataValue_partial;
+import org.wikipedia.wikidata.DataValue;
 
 public final class GsonUtil {
     private static final String DATE_FORMAT = "MMM dd, yyyy HH:mm:ss";
 
     private static final GsonBuilder DEFAULT_GSON_BUILDER = new GsonBuilder()
             .setDateFormat(DATE_FORMAT)
-            .registerTypeAdapterFactory(DataValue_partial.getPolymorphicTypeAdapter())
+            .registerTypeAdapterFactory(DataValue.getPolymorphicTypeAdapter())
             .registerTypeHierarchyAdapter(Uri.class, new UriTypeAdapter().nullSafe())
             .registerTypeHierarchyAdapter(Namespace.class, new NamespaceTypeAdapter().nullSafe())
             .registerTypeAdapter(WikiSite.class, new WikiSiteTypeAdapter().nullSafe())

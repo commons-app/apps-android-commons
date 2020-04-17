@@ -15,4 +15,8 @@ import com.google.gson.annotations.SerializedName
         "type": "wikibase-entityid"
     }
 }*/
-data class Snak_partial(@SerializedName("datavalue") val dataValue: DataValue_partial)
+data class Snak_partial(
+    @SerializedName("snaktype") val snakType: String,
+    val property: String,
+    @SerializedName("datavalue") val dataValue: DataValue
+)
