@@ -217,7 +217,7 @@ public class UploadController {
      */
     private void onUploadCompleted(Contribution contribution, ContributionUploadProgress onComplete) {
         //Starts the upload. If commented out, user can proceed to next Fragment but upload doesn't happen
-        uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
+        uploadService.queue(contribution);
         onComplete.onUploadStarted(contribution);
     }
 

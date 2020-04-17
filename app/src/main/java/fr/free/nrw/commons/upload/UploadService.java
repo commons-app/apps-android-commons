@@ -13,6 +13,7 @@ import android.os.Binder;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import io.reactivex.processors.PublishProcessor;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
@@ -46,8 +47,6 @@ import timber.log.Timber;
 public class UploadService extends CommonsDaggerService {
 
     private static final String EXTRA_PREFIX = "fr.free.nrw.commons.upload";
-
-    public static final int ACTION_UPLOAD_FILE = 1;
 
     public static final String ACTION_START_SERVICE = EXTRA_PREFIX + ".upload";
     public static final String EXTRA_SOURCE = EXTRA_PREFIX + ".source";
@@ -136,6 +135,8 @@ public class UploadService extends CommonsDaggerService {
 
     private final IBinder localBinder = new UploadServiceLocalBinder();
 
+    private PublishProcessor<Contribution> contributionsToUpload;
+
     @Override
     public IBinder onBind(Intent intent) {
         return localBinder;
@@ -148,46 +149,35 @@ public class UploadService extends CommonsDaggerService {
         compositeDisposable = new CompositeDisposable();
         notificationManager = NotificationManagerCompat.from(this);
         curNotification = getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
+        contributionsToUpload = PublishProcessor.create();
+        compositeDisposable.add(contributionsToUpload.subscribe(this::handleUpload));
     }
 
-    protected void handle(int what, Contribution contribution) {
-        switch (what) {
-            case ACTION_UPLOAD_FILE:
-                uploadContribution(contribution);
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown value for what");
-        }
-    }
-
-    public void queue(int what, Contribution contribution) {
+    public void handleUpload(Contribution contribution) {
         Timber.d("Upload service queue has contribution with wiki data entity id as %s", contribution.getWikiDataEntityId());
-        switch (what) {
-            case ACTION_UPLOAD_FILE:
-
-                contribution.setState(Contribution.STATE_QUEUED);
-                contribution.setTransferred(0);
-                toUpload++;
-                if (curNotification != null && toUpload != 1) {
-                    curNotification.setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload));
-                    Timber.d("%d uploads left", toUpload);
-                    notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
-                }
-                compositeDisposable.add(contributionDao
-                        .save(contribution)
-                        .subscribeOn(ioThreadScheduler)
-                        .observeOn(mainThreadScheduler)
-                        .subscribe(aLong->{
-                            contribution._id = aLong;
-                            handle(what, contribution);
-                        }, Throwable::printStackTrace));
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown value for what");
+        contribution.setState(Contribution.STATE_QUEUED);
+        contribution.setTransferred(0);
+        toUpload++;
+        if (curNotification != null && toUpload != 1) {
+            curNotification.setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload));
+            Timber.d("%d uploads left", toUpload);
+            notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
         }
+        compositeDisposable.add(contributionDao
+            .save(contribution)
+            .subscribeOn(ioThreadScheduler)
+            .observeOn(mainThreadScheduler)
+            .subscribe(aLong->{
+                contribution._id = aLong;
+                uploadContribution(contribution);
+            }, Throwable::printStackTrace));
     }
 
     private boolean freshStart = true;
+
+    public void queue(Contribution contribution) {
+        contributionsToUpload.offer(contribution);
+    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {

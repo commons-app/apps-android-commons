@@ -587,7 +587,7 @@ public class ContributionsFragment
     private void retryUpload(Contribution contribution) {
         if (NetworkUtils.isInternetConnectionEstablished(getContext())) {
             if (contribution.getState() == STATE_FAILED && null != uploadService) {
-                uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
+                uploadService.queue(contribution);
                 Timber.d("Restarting for %s", contribution.toString());
             } else {
                 Timber.d("Skipping re-upload for non-failed %s", contribution.toString());
