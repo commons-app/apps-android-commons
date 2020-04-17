@@ -7,9 +7,9 @@ import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.depictions.subClass.models.Binding;
+import fr.free.nrw.commons.depictions.subClass.models.ParentSparqlResponse;
 import fr.free.nrw.commons.depictions.subClass.models.SparqlQueryResponse;
 import fr.free.nrw.commons.depictions.subClass.models.SubclassDescription;
-import fr.free.nrw.commons.depictions.subClass.models.ParentSparqlResponse;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
@@ -31,8 +31,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import timber.log.Timber;
 
 /**
@@ -210,7 +208,7 @@ public class OkHttpJsonApiClient {
    * Get the QIDs of all Wikidata items that are subclasses of the given Wikidata item. Example:
    * bridge -> suspended bridge, aqueduct, etc
    */
-  public Observable<ArrayList<DepictedItem>> getChildQIDs(String qid) throws IOException {
+  public Observable<List<DepictedItem>> getChildQIDs(String qid) throws IOException {
     String queryString = FileUtils.readFromResource("/queries/subclasses_query.rq");
     String query = queryString.
         replace("${QID}", qid)
@@ -229,7 +227,7 @@ public class OkHttpJsonApiClient {
       String json = response.body().string();
       SparqlQueryResponse example = gson.fromJson(json, SparqlQueryResponse.class);
       List<Binding> bindings = example.getResults().getBindings();
-      ArrayList<DepictedItem> subItems = new ArrayList<>();
+      List<DepictedItem> subItems = new ArrayList<>();
       for (Binding binding : bindings) {
         if (binding.getSubclassLabel().getXmlLang() != null) {
           String label = binding.getSubclassLabel().getValue();

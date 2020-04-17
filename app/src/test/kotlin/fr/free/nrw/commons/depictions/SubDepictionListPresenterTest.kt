@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.depictions
 
-import org.mockito.Mockito.verify
 import fr.free.nrw.commons.depictions.subClass.SubDepictionListContract
 import fr.free.nrw.commons.depictions.subClass.SubDepictionListPresenter
 import fr.free.nrw.commons.explore.depictions.DepictsClient
@@ -15,6 +14,7 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
 class SubDepictionListPresenterTest {
@@ -34,7 +34,7 @@ class SubDepictionListPresenterTest {
     @Mock
     internal var okHttpJsonApiClient: OkHttpJsonApiClient? = null
 
-    var testObservable: Observable<ArrayList<DepictedItem>>? = null
+    var testObservable: Observable<List<DepictedItem>>? = null
 
     @Mock
     lateinit var depictedItem: DepictedItem
