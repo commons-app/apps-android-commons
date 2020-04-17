@@ -104,12 +104,15 @@ class PickedFiles implements Constants {
                 });
     }
 
-    static UploadableFile pickedExistingPicture(@NonNull Context context, Uri photoUri) throws IOException {
+    static UploadableFile pickedExistingPicture(@NonNull Context context, Uri photoUri) throws IOException, SecurityException {// SecurityException for those file providers who share URI but forget to grant necessary permissions
         InputStream pictureInputStream = context.getContentResolver().openInputStream(photoUri);
         File directory = tempImageDirectory(context);
         File photoFile = new File(directory, UUID.randomUUID().toString() + "." + getMimeType(context, photoUri));
-        photoFile.createNewFile();
-        writeToFile(pictureInputStream, photoFile);
+        if (photoFile.createNewFile()) {
+            writeToFile(pictureInputStream, photoFile);
+        } else {
+            throw new IOException("could not create photoFile to write upon");
+        }
         return new UploadableFile(photoUri, photoFile);
     }
 
