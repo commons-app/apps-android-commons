@@ -26,6 +26,12 @@
     <attr name="mainTabBackground" format="reference"/>
     <attr name="mainCardBackground" format="reference"/>
     <attr name="mainScreenNearbyPermissionbutton" format="reference"/>
+    <attr name="iconInfo24" format="reference" />
+    <attr name="iconMap24" format="reference" />
+    <attr name="mediaDetailsText" format="reference" />
+    <attr name="mediaDetailsHeadingText" format="reference" />
+    <attr name="mediaDetailNominationBackground" format="reference" />
+    <attr name="mediaDetailSpacerColor" format="reference" />
     <attr name="icon" format="reference"/>
     <attr name="aboutIconsColor" format="reference"/>
 
