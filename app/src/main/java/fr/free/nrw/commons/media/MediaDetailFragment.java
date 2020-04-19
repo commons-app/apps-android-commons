@@ -105,6 +105,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @BindView(R.id.mediaDetailImageView)
     SimpleDraweeView image;
+    @BindView(R.id.mediaDetailImageViewSpacer)
+    LinearLayout imageSpacer;
     @BindView(R.id.mediaDetailTitle)
     TextView title;
     @BindView(R.id.mediaDetailDesc)
@@ -205,7 +207,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         return view;
     }
 
-    @OnClick(R.id.mediaDetailImageView)
+    @OnClick(R.id.mediaDetailImageViewSpacer)
     public void launchZoomActivity(View view) {
         Context ctx = view.getContext();
         ctx.startActivity(
@@ -241,12 +243,21 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         compositeDisposable.add(disposable);
     }
 
+    /**
+     * The imageSpacer is Basically a transparent overlay for the SimpleDraweeView
+     * which holds the image to be displayed( moreover this image is out of
+     * the scroll view )
+     * @param imageInfo used to calculate height of the ImageSpacer
+     */
     private void updateAspectRatio(ImageInfo imageInfo) {
         if (imageInfo != null) {
             int finalHeight = (scrollView.getWidth()*imageInfo.getHeight()) / imageInfo.getWidth();
             ViewGroup.LayoutParams params = image.getLayoutParams();
+            ViewGroup.LayoutParams spacerParams = imageSpacer.getLayoutParams();
             params.height = finalHeight;
+            spacerParams.height = finalHeight;
             image.setLayoutParams(params);
+            imageSpacer.setLayoutParams(spacerParams);
         }
     }
 
