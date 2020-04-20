@@ -32,7 +32,7 @@ public class MediaClient {
 
     //OkHttpJsonApiClient used JsonKvStore for this. I don't know why.
     private Map<String, Map<String, String>> continuationStore;
-    public static final String NO_CAPTION = "No caption";
+    private static final String NO_CAPTION = "No caption";
     private static final String NO_DEPICTION = "No depiction";
 
     @Inject

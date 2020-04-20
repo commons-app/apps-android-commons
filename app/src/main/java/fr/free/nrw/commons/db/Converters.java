@@ -74,16 +74,6 @@ public class Converters {
     }
 
     @TypeConverter
-    public static String listOfMapToString(List<Map<String,String>> listOfMaps) {
-        return writeObjectToString(listOfMaps);
-    }
-
-    @TypeConverter
-    public static List<Map<String,String>> stringToListOfMap(String listOfMaps) {
-        return readObjectWithTypeToken(listOfMaps, new TypeToken<List<Map<String, String>>>() {});
-    }
-
-    @TypeConverter
     public static String wikidataPlaceToString(WikidataPlace wikidataPlace) {
         return writeObjectToString(wikidataPlace);
     }
@@ -104,12 +94,12 @@ public class Converters {
     }
 
     @TypeConverter
-    public static String aptionsAndDepictionsToString(Depictions depictedItems) {
+    public static String depictionsToString(Depictions depictedItems) {
         return writeObjectToString(depictedItems);
     }
 
     @TypeConverter
-    public static Depictions stringToCaptionsAndDepictions(String depictedItems) {
+    public static Depictions stringToDepictions(String depictedItems) {
         return readObjectFromString(depictedItems, Depictions.class);
     }
 

@@ -47,8 +47,8 @@ sealed class DataValue(val type: String) {
                 .registerSubtype(DataValueEntityId::class.java, DataValueEntityId.TYPE)
                 .registerSubtype(DataValueString::class.java, DataValueString.TYPE)
                 .registerSubtype(
-                    DataValueGloveCoordinate_partial::class.java,
-                    DataValueGloveCoordinate_partial.TYPE
+                    DataValueGlobeCoordinate_partial::class.java,
+                    DataValueGlobeCoordinate_partial.TYPE
                 )
                 .registerSubtype(
                     DataValueTime_partial::class.java,
@@ -69,7 +69,7 @@ sealed class DataValue(val type: String) {
         }
     }
 
-    class DataValueGloveCoordinate_partial() :
+    class DataValueGlobeCoordinate_partial() :
         DataValue(TYPE) {
         companion object {
             const val TYPE = "globecoordinate"
