@@ -130,7 +130,7 @@
   <string name="preference_license">مجوز پیش‌فرض</string>
   <string name="use_previous">از عنوان/توضیحات پیشین استفاده کن</string>
   <string name="allow_gps">دریافت خودکار موقعیت کنونی</string>
-  <string name="allow_gps_summary">درحال دریافت موقعیت برای پیشنهاد رده در صورتی که برچسب جغرافیایی وجود نداشته باشد.</string>
+  <string name="allow_gps_summary">در حال دریافت موقعیت برای پیشنهاد رده در صورتی که برچسب جغرافیایی وجود نداشته باشد.</string>
   <string name="preference_theme">پوسته</string>
   <string name="license_name_cc_by_sa_four">CC Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four">Attribution 4.0</string>
