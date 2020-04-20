@@ -578,9 +578,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      *
      */
     private void addActionToTitle() {
+        title.setOnLongClickListener(view -> {
+                Utils.copy("place", title.getText().toString(), getContext());
+                Toast.makeText(getContext(), R.string.text_copy, Toast.LENGTH_SHORT).show();
+                return true;
+            });
+
         title.setOnClickListener(view -> {
-            Utils.copy("place", title.getText().toString(), getContext());
-            Toast.makeText(getContext(), "Text copied to clipboard", Toast.LENGTH_SHORT).show();
             bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);

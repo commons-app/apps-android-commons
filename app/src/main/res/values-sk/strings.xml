@@ -177,6 +177,7 @@
   <string name="no_nearby">V okolí sa nenašli žiadne miesta</string>
   <string name="warning">Upozornenie</string>
   <string name="upload_image_duplicate">Tento súbor už na Commons existuje. Ste si istí, že chcete pokračovať?</string>
+  <string name="upload">Nahrať</string>
   <string name="yes">Áno</string>
   <string name="no">Nie</string>
   <string name="media_detail_title">Názov</string>

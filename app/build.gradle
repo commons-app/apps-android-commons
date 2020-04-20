@@ -17,6 +17,7 @@ if(isRunningOnTravisAndIsNotPRBuild) {
 
 dependencies {
 
+    implementation project(':wikimedia-data-client')
     // Utils
     implementation 'com.github.nicolas-raoul:Quadtree:ac16ea8035bf07'
     implementation 'in.yuvi:http.fluent:1.3'
@@ -31,7 +32,6 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.1.1'
     implementation 'com.facebook.fresco:fresco:1.13.0'
     implementation 'org.apache.commons:commons-lang3:3.8.1'
-    implementation 'com.github.maskaravivek:wikimedia-android-data-client:v0.0.30'
 
     // UI
     implementation 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
@@ -101,6 +101,7 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation "androidx.exifinterface:exifinterface:1.0.0"
+    implementation "androidx.core:core-ktx:$CORE_KTX_VERSION"
 
     //swipe_layout
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
@@ -217,7 +218,7 @@ android {
             buildConfigField "String", "SIGNUP_LANDING_URL", "\"https://commons.m.wikimedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes\""
             buildConfigField "String", "SIGNUP_SUCCESS_REDIRECTION_URL", "\"https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes\""
             buildConfigField "String", "FORGOT_PASSWORD_URL", "\"https://commons.wikimedia.org/wiki/Special:PasswordReset\""
-            buildConfigField "String", "PRIVACY_POLICY_URL", "\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\""
+            buildConfigField "String", "PRIVACY_POLICY_URL", "\"https://github.com/commons-app/commons-app-documentation/blob/master/android/Privacy-policy.md\""
             buildConfigField "String", "ACCOUNT_TYPE", "\"fr.free.nrw.commons\""
             buildConfigField "String", "CONTRIBUTION_AUTHORITY", "\"fr.free.nrw.commons.contributions.contentprovider\""
             buildConfigField "String", "MODIFICATION_AUTHORITY", "\"fr.free.nrw.commons.modifications.contentprovider\""
@@ -249,7 +250,7 @@ android {
             buildConfigField "String", "SIGNUP_LANDING_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes\""
             buildConfigField "String", "SIGNUP_SUCCESS_REDIRECTION_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Main_Page&welcome=yes\""
             buildConfigField "String", "FORGOT_PASSWORD_URL", "\"https://commons.wikimedia.beta.wmflabs.org/wiki/Special:PasswordReset\""
-            buildConfigField "String", "PRIVACY_POLICY_URL", "\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\""
+            buildConfigField "String", "PRIVACY_POLICY_URL", "\"https://github.com/commons-app/commons-app-documentation/blob/master/android/Privacy-policy.md\""
             buildConfigField "String", "ACCOUNT_TYPE", "\"fr.free.nrw.commons.beta\""
             buildConfigField "String", "CONTRIBUTION_AUTHORITY", "\"fr.free.nrw.commons.beta.contributions.contentprovider\""
             buildConfigField "String", "MODIFICATION_AUTHORITY", "\"fr.free.nrw.commons.beta.modifications.contentprovider\""

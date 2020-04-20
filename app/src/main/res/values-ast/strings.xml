@@ -173,7 +173,9 @@
   <string name="title_activity_nearby">Llugares cercanos</string>
   <string name="no_nearby">Nun s\'alcontraron llugares cercanos</string>
   <string name="warning">Avisu</string>
+  <string name="duplicate_image_found">Atopóse una imaxe duplicada</string>
   <string name="upload_image_duplicate">Esti ficheru yá esiste\'n Commons. ¿Confirmes que quies siguir?</string>
+  <string name="upload">Xubir</string>
   <string name="yes">Sí</string>
   <string name="no">Non</string>
   <string name="media_detail_title">Títulu</string>
@@ -247,6 +249,7 @@
   <string name="upload_problem_different_geolocation">Esta imaxe tomóse nun llugar distintu.</string>
   <string name="upload_problem_fbmd">Por favor xube solo fotografies que tomasti tu mesmu. Nun xubas imaxes qu\'atopasti nes cuentes de Facebook d\'otres persones.</string>
   <string name="upload_problem_do_you_continue">¿Inda quies xubir esta imaxe?</string>
+  <string name="upload_problem_image">Alcontráronse problemes na imaxe</string>
   <string name="internet_downloaded">Por favor xube solo fotografies que tomasti tu mesmu. Nun xubas imaxes que descargasti d\'Internet.</string>
   <string name="give_permission">Dar permisu</string>
   <string name="use_external_storage">Usar almacenamientu esternu</string>

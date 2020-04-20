@@ -305,7 +305,7 @@
   <string name="display_location_permission_title">Machtiging voor locatie weergeven</string>
   <string name="display_location_permission_explanation">Naar machtiging voor locatie vragen als dat nodig is voor de functie meldingskaart dichtbij weergeven.</string>
   <string name="no_image_uploaded">Geen afbeeldingen geüpload</string>
-  <string name="no_read_notification" fuzzy="true">U hebt geen gearchiveerde melding</string>
+  <string name="no_read_notification">U hebt geen gelezen melding</string>
   <string name="share_logs_using">Logboeken delen via</string>
   <string name="menu_option_read" fuzzy="true">Gearchiveerd bekijken</string>
   <string name="menu_option_unread">Ongelezen bekijken</string>
