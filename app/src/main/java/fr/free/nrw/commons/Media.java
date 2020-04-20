@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
@@ -50,6 +51,9 @@ public class Media implements Parcelable {
     public HashMap<String, String> descriptions; // multilingual descriptions as loaded
     public HashMap<String, String> tags = new HashMap<>();
     @Nullable public  LatLng coordinates;
+    @PrimaryKey
+    @NonNull
+    public int pageId;
 
     /**
      * Provides local constructor
@@ -154,6 +158,7 @@ public class Media implements Parcelable {
         if (metadata == null) {
             Media media = new Media(null, imageInfo.getOriginalUrl(),
                     page.title(), "", 0, null, null, null);
+            media.pageId=page.pageId();
             if (!StringUtils.isBlank(imageInfo.getThumbUrl())) {
                 media.setThumbUrl(imageInfo.getThumbUrl());
             }
@@ -169,6 +174,7 @@ public class Media implements Parcelable {
                 safeParseDate(metadata.dateTime()),
                 getArtist(metadata)
         );
+        media.pageId=page.pageId();
 
         if (!StringUtils.isBlank(imageInfo.getThumbUrl())) {
             media.setThumbUrl(imageInfo.getThumbUrl());

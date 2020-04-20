@@ -67,8 +67,8 @@ class ContributionsLocalDataSource {
         return contributionDao.fetchContributions();
     }
 
-    public Completable saveContributions(List<Contribution> contributions) {
-        return contributionDao.deleteAllAndSave(contributions);
+    public Single<List<Long>> saveContributions(List<Contribution> contributions) {
+        return contributionDao.save(contributions);
     }
 
     public void set(String key, long value) {

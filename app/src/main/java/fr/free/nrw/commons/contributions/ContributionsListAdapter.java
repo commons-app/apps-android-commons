@@ -19,9 +19,10 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
     private Callback callback;
     private List<Contribution> contributions;
 
-    public ContributionsListAdapter(Callback callback) {
+    public ContributionsListAdapter(final Callback callback) {
         this.callback = callback;
         contributions = new ArrayList<>();
+        setHasStableIds(true);
     }
 
     /**
@@ -54,12 +55,7 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
     }
 
     public void setContributions(@NonNull final List<Contribution> contributionList) {
-        contributions.addAll(contributionList);
-        final HashSet<Contribution> hashSet = new HashSet<>(contributions);
-        contributions.clear();
-        contributions.addAll(hashSet);
-        Collections.sort(contributions,
-            (o1, o2) -> -o1.getDateUploaded().compareTo(o2.getDateUploaded()));
+        contributions = contributionList;
         notifyDataSetChanged();
     }
 
@@ -69,7 +65,7 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
 
     @Override
     public long getItemId(int position) {
-        return contributions.get(position)._id;
+        return contributions.get(position).pageId;
     }
 
     public interface Callback {

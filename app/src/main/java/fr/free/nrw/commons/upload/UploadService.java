@@ -169,8 +169,7 @@ public class UploadService extends HandlerService<Contribution> {
                         .subscribeOn(ioThreadScheduler)
                         .observeOn(mainThreadScheduler)
                         .subscribe(aLong->{
-                            contribution._id = aLong;
-                            UploadService.super.queue(what, contribution);
+                            super.queue(what, contribution);
                         }, Throwable::printStackTrace));
                 break;
             default:

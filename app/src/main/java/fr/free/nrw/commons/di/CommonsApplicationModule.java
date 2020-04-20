@@ -7,6 +7,9 @@ import android.content.Context;
 import android.view.inputmethod.InputMethodManager;
 import androidx.collection.LruCache;
 import androidx.room.Room;
+import androidx.room.RoomDatabase.Builder;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.github.varunpant.quadtree.QuadTree;
 import com.google.gson.Gson;
 import dagger.Module;
@@ -231,9 +234,54 @@ public class CommonsApplicationModule {
     @Provides
     @Singleton
     public AppDatabase provideAppDataBase() {
-        appDatabase=Room.databaseBuilder(applicationContext, AppDatabase.class, "commons_room.db").build();
+        Builder<AppDatabase> appDatabaseBuilder = Room
+            .databaseBuilder(applicationContext, AppDatabase.class, "commons_room.db");
+        appDatabaseBuilder.addMigrations(MIGRATION_1_2);
+        appDatabase = appDatabaseBuilder.build();
         return appDatabase;
     }
+
+    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("DROP TABLE `contribution`");
+            database.execSQL("CREATE TABLE IF NOT EXISTS `contribution` ("
+                + "`localUri` TEXT,"
+                + " `thumbUrl` TEXT,"
+                + " `imageUrl` TEXT,"
+                + " `filename` TEXT,"
+                + " `description` TEXT,"
+                + " `discussion` TEXT,"
+                + " `dateCreated` INTEGER,"
+                + " `dateUploaded` INTEGER,"
+                + " `width` INTEGER NOT NULL,"
+                + " `height` INTEGER NOT NULL,"
+                + " `license` TEXT,"
+                + " `licenseUrl` TEXT,"
+                + " `creator` TEXT,"
+                + " `categories` TEXT,"
+                + " `requestedDeletion`"
+                + " INTEGER NOT NULL,"
+                + " `descriptions` TEXT,"
+                + " `tags` TEXT,"
+                + " `coordinates` TEXT,"
+                + " `pageId` INTEGER NOT NULL,"
+                + " `contentUri` TEXT,"
+                + " `source` TEXT,"
+                + " `editSummary` TEXT,"
+                + " `state` INTEGER NOT NULL,"
+                + " `transferred` INTEGER NOT NULL,"
+                + " `decimalCoords` TEXT,"
+                + " `isMultiple` INTEGER NOT NULL,"
+                + " `wikiDataEntityId` TEXT,"
+                + " `wikiItemName` TEXT,"
+                + " `p18Value` TEXT,"
+                + " `contentProviderUri` TEXT,"
+                + " `dateCreatedSource` TEXT,"
+                + " `dataLength` INTEGER NOT NULL,"
+                + " PRIMARY KEY(`pageId`))");
+        }
+    };
 
     @Provides
     public ContributionDao providesContributionsDao() {

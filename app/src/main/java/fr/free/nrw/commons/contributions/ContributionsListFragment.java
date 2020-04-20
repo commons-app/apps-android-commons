@@ -197,7 +197,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     }
 
     @Override
-    public void showContributions(List<Contribution> contributionList) {
+    public void showContributions(final List<Contribution> contributionList) {
         adapter.setContributions(contributionList);
     }
 
