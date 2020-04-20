@@ -52,7 +52,11 @@ class NearbyParentFragmentPresenterTest {
     fun testInitializeNearbyMapOperations() {
         nearbyPresenter.initializeMapOperations()
         verify(nearbyParentFragmentView).enableFABRecenter()
-        testPlacesPopulatedForLatestLocationWhenLocationSignificantlyChanged()
+        expectMapAndListUpdate()
+        nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+        verify(nearbyParentFragmentView).disableFABRecenter();
+        verify(nearbyParentFragmentView).setProgressBarVisibility(true)
+        verify(nearbyParentFragmentView).populatePlaces(latestLocation)
         verify(nearbyParentFragmentView).addSearchThisAreaButtonAction()
         verify(nearbyParentFragmentView).setCheckBoxAction()
     }
