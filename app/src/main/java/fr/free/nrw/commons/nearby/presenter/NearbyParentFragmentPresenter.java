@@ -38,8 +38,7 @@ public class NearbyParentFragmentPresenter
         WikidataEditListener.WikidataP18EditListener,
         LocationUpdateListener {
 
-    @VisibleForTesting
-    public boolean isNearbyLocked;
+    private boolean isNearbyLocked;
     private LatLng curLatLng;
 
     private boolean placesLoadedOnce;
@@ -83,7 +82,6 @@ public class NearbyParentFragmentPresenter
         this.nearbyParentFragmentView=DUMMY;
     }
 
-    @VisibleForTesting
     public void initializeMapOperations() {
         lockUnlockNearby(false);
         updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
