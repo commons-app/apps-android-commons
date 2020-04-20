@@ -223,6 +223,7 @@ public class OkHttpJsonApiClient {
       try (ResponseBody body = okHttpClient.newCall(request).execute().body()) {
         return gson.fromJson(body.string(), SparqlResponse.class).toDepictedItems();
       }catch (Exception e) {
+        Timber.e(e);
         return new ArrayList<DepictedItem>();
       }
     }).doOnError(Timber::e);
