@@ -2,49 +2,25 @@ package fr.free.nrw.commons.depictions.subClass.models
 
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 
-
-data class ParentSparqlResponse(val results: ParentResult) {
-    fun toDepictedItems() =
-        results.bindings
-            .filter { it.parentClassDescription != null }
-            .map {
-                DepictedItem(
-                    it.parentClassLabel.value,
-                    it.parentClassDescription!!.value,
-                    "",
-                    false,
-                    it.parentClass.value
-                )
-            }
-}
-
-data class SubclassSparqlResponse(val results: SubclassResult) {
+data class SparqlResponse(val results: Result) {
     fun toDepictedItems() =
         results.bindings.map {
             DepictedItem(
-                it.subclassLabel.value,
-                it.subclassDescription?.value ?: "",
+                it.itemLabel.value,
+                it.itemDescription?.value ?: "",
                 "",
                 false,
-                it.subclass.value.substringAfterLast("/")
+                it.item.value.substringAfterLast("/")
             )
         }
 }
 
-data class ParentResult(val bindings: List<ParentBinding>)
+data class Result(val bindings: List<Binding>)
 
-data class SubclassResult(val bindings: List<SubclassBinding>)
-
-data class ParentBinding(
-    val parentClass: SparqInfo,
-    val parentClassLabel: SparqInfo,
-    val parentClassDescription: SparqInfo? = null
-)
-
-data class SubclassBinding(
-    val subclass: SparqInfo,
-    val subclassLabel: SparqInfo,
-    val subclassDescription: SparqInfo? = null
+data class Binding(
+    val item: SparqInfo,
+    val itemLabel: SparqInfo,
+    val itemDescription: SparqInfo? = null
 )
 
 data class SparqInfo(val type: String, val value: String)

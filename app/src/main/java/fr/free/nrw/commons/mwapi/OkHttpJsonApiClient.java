@@ -6,8 +6,7 @@ import com.google.gson.Gson;
 import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
-import fr.free.nrw.commons.depictions.subClass.models.ParentSparqlResponse;
-import fr.free.nrw.commons.depictions.subClass.models.SubclassSparqlResponse;
+import fr.free.nrw.commons.depictions.subClass.models.SparqlResponse;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
@@ -29,6 +28,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import org.jetbrains.annotations.NotNull;
 import timber.log.Timber;
 
 /**
@@ -207,23 +207,7 @@ public class OkHttpJsonApiClient {
    * bridge -> suspended bridge, aqueduct, etc
    */
   public Observable<List<DepictedItem>> getChildQIDs(String qid) throws IOException {
-    String queryString = FileUtils.readFromResource("/queries/subclasses_query.rq");
-    String query = queryString.
-        replace("${QID}", qid)
-        .replace("${LANG}", "\"" + Locale.getDefault().getLanguage() + "\"");
-    Timber.e(query);
-    HttpUrl.Builder urlBuilder = HttpUrl
-        .parse(sparqlQueryUrl)
-        .newBuilder()
-        .addQueryParameter("query", query)
-        .addQueryParameter("format", "json");
-    Request request = new Request.Builder()
-        .url(urlBuilder.build())
-        .build();
-    return Observable.fromCallable(() -> {
-      Response response = okHttpClient.newCall(request).execute();
-      return gson.fromJson(response.body().string(), SubclassSparqlResponse.class).toDepictedItems();
-    }).doOnError(Timber::e);
+    return depictedItemsFrom(sparqlQuery(qid, "/queries/subclasses_query.rq"));
   }
 
   /**
@@ -231,27 +215,32 @@ public class OkHttpJsonApiClient {
    * bridge -> suspended bridge, aqueduct, etc
    */
   public Observable<List<DepictedItem>> getParentQIDs(String qid) throws IOException {
-    String queryString = FileUtils.readFromResource("/queries/parentclasses_query.rq");
-    String query = queryString.
+    return depictedItemsFrom(sparqlQuery(qid, "/queries/parentclasses_query.rq"));
+  }
+
+  private Observable<List<DepictedItem>> depictedItemsFrom(Request request) {
+    return Observable.fromCallable(() -> {
+      try (ResponseBody body = okHttpClient.newCall(request).execute().body()) {
+        return gson.fromJson(body.string(), SparqlResponse.class).toDepictedItems();
+      }catch (Exception e) {
+        return new ArrayList<DepictedItem>();
+      }
+    }).doOnError(Timber::e);
+  }
+
+  @NotNull
+  private Request sparqlQuery(String qid, String fileName) throws IOException {
+    String query = FileUtils.readFromResource(fileName).
         replace("${QID}", qid)
         .replace("${LANG}", "\"" + Locale.getDefault().getLanguage() + "\"");
-    Timber.e(query);
     HttpUrl.Builder urlBuilder = HttpUrl
         .parse(sparqlQueryUrl)
         .newBuilder()
         .addQueryParameter("query", query)
         .addQueryParameter("format", "json");
-    Request request = new Request.Builder()
+    return new Request.Builder()
         .url(urlBuilder.build())
         .build();
-    return Observable.fromCallable(() -> {
-      Response response = okHttpClient.newCall(request).execute();
-      try {
-        return gson.fromJson(response.body().string(), ParentSparqlResponse.class).toDepictedItems();
-      } catch (Exception e) {
-        return new ArrayList<DepictedItem>();
-      }
-    }).doOnError(Timber::e);
   }
 
   public Single<CampaignResponseDTO> getCampaigns() {
