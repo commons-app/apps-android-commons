@@ -121,9 +121,7 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testPlacesPopulatedForLatestLocationWhenLocationSignificantlyChanged() {
-        nearbyPresenter.lockUnlockNearby(false)
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
-        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
+        expectMapAndListUpdate()
         nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
         verify(nearbyParentFragmentView).disableFABRecenter();
         verify(nearbyParentFragmentView).setProgressBarVisibility(true)
@@ -136,9 +134,7 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testPlacesPopulatedForLatestLocationWhenLocationMapUpdated() {
-        nearbyPresenter.lockUnlockNearby(false)
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
-        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
+        expectMapAndListUpdate()
         nearbyPresenter.updateMapAndList(LocationChangeType.MAP_UPDATED)
         verify(nearbyParentFragmentView).disableFABRecenter()
         verify(nearbyParentFragmentView).setProgressBarVisibility(true)
@@ -151,9 +147,7 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testPlacesPopulatedForCameraTargetLocationWhenSearchCustomArea() {
-        nearbyPresenter.lockUnlockNearby(false)
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
-        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
+        expectMapAndListUpdate()
         whenever(nearbyParentFragmentView.getCameraTarget()).thenReturn(cameraTarget)
         nearbyPresenter.updateMapAndList(LocationChangeType.SEARCH_CUSTOM_AREA)
         verify(nearbyParentFragmentView).disableFABRecenter()
@@ -167,11 +161,9 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testUserTrackedWhenCurrentLocationMarkerVisible() {
-        nearbyPresenter.lockUnlockNearby(false)
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
-        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
+        expectMapAndListUpdate()
         whenever(nearbyParentFragmentView.isCurrentLocationMarkerVisible()).thenReturn(true)
-        nearbyPresenter.updateMapAndList(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
+        nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
         verify(nearbyParentFragmentView).recenterMap(latestLocation)
     }
 
@@ -181,11 +173,9 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testUserNotTrackedWhenCurrentLocationMarkerInvisible() {
-        nearbyPresenter.lockUnlockNearby(false)
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
-        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
+        expectMapAndListUpdate()
         whenever(nearbyParentFragmentView.isCurrentLocationMarkerVisible()).thenReturn(false)
-        nearbyPresenter.updateMapAndList(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
+        nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
         verify(nearbyParentFragmentView).enableFABRecenter()
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
         verify(nearbyParentFragmentView).getLastLocation()
@@ -342,5 +332,11 @@ class NearbyParentFragmentPresenterTest {
         NearbyController.currentLocationSearchRadius = 148307.0
         val isClose = nearbyPresenter?.searchCloseToCurrentLocation()
         assertTrue(isClose!!)
+    }
+
+    fun expectMapAndListUpdate() {
+        nearbyPresenter.lockUnlockNearby(false)
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
+        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
     }
 }

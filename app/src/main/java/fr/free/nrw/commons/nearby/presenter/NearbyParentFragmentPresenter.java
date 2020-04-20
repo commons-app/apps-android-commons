@@ -2,7 +2,6 @@ package fr.free.nrw.commons.nearby.presenter;
 
 import android.view.View;
 
-import androidx.annotation.VisibleForTesting;
 import com.mapbox.mapboxsdk.annotations.Marker;
 
 import java.lang.reflect.Proxy;
