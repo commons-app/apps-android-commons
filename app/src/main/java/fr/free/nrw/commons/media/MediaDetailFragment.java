@@ -102,6 +102,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @BindView(R.id.mediaDetailImageView)
     SimpleDraweeView image;
+    @BindView(R.id.mediaDetailImageViewSpacer)
+    LinearLayout imageSpacer;
     @BindView(R.id.mediaDetailTitle)
     TextView title;
     @BindView(R.id.caption_layout)
@@ -219,7 +221,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         return view;
     }
 
-    @OnClick(R.id.mediaDetailImageView)
+    @OnClick(R.id.mediaDetailImageViewSpacer)
     public void launchZoomActivity(View view) {
         Context ctx = view.getContext();
         ctx.startActivity(
@@ -263,13 +265,22 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         compositeDisposable.add(disposable);
     }
 
+    /**
+     * The imageSpacer is Basically a transparent overlay for the SimpleDraweeView
+     * which holds the image to be displayed( moreover this image is out of
+     * the scroll view )
+     * @param imageInfo used to calculate height of the ImageSpacer
+     */
     private void updateAspectRatio(ImageInfo imageInfo) {
         if (imageInfo != null) {
             int screenWidth = scrollView.getWidth();
             int finalHeight = (screenWidth*imageInfo.getHeight()) / imageInfo.getWidth();
             ViewGroup.LayoutParams params = image.getLayoutParams();
+            ViewGroup.LayoutParams spacerParams = imageSpacer.getLayoutParams();
             params.height = finalHeight;
+            spacerParams.height = finalHeight;
             image.setLayoutParams(params);
+            imageSpacer.setLayoutParams(spacerParams);
         }
     }
 
@@ -541,8 +552,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
      * Add view to depictions obtained also tapping on depictions should open the url
      */
     private View buildDepictLabel(String depictionName, String entityId, LinearLayout depictionContainer) {
-        final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_depicts_item, depictionContainer, false);
-        final CompatTextView textView = item.findViewById(R.id.media_detail_depicted_item_text);
+        final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, depictionContainer, false);
+        final CompatTextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(depictionName);
         if (depictionLoaded) {

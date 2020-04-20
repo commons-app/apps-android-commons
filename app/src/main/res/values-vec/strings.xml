@@ -165,7 +165,9 @@
   <string name="title_activity_nearby">Posti cuà rente</string>
   <string name="no_nearby">Nisun posto catà cuà rente</string>
   <string name="warning">Òcio!</string>
+  <string name="duplicate_image_found">Catada na imajine dopiada</string>
   <string name="upload_image_duplicate">Sto file xà el ghe xé so Common. Sito seguro de vołer ndar vanti?</string>
+  <string name="upload">Carga</string>
   <string name="yes">Sì</string>
   <string name="no">No</string>
   <string name="media_detail_title">Titoło</string>
@@ -239,6 +241,7 @@
   <string name="upload_problem_different_geolocation">Sta foto ła xé sta fata so na poxision difarente.</string>
   <string name="upload_problem_fbmd">Carga soło łe foto che te ghè fato ti. No sta cargare imajini che te ghè catà n\'tei account Facebook de altra xente.</string>
   <string name="upload_problem_do_you_continue">Vuto cargare insteso sta imajine?</string>
+  <string name="upload_problem_image">Problemi catai in te l\'imajine</string>
   <string name="internet_downloaded">Carga soło łe foto che te ghè fato da soło. No sta cargar imajine catae so internet</string>
   <string name="give_permission">Dati autorixasion</string>
   <string name="use_external_storage">Dopara memoria esterna</string>

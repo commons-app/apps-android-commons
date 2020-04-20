@@ -101,6 +101,7 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation "androidx.exifinterface:exifinterface:1.0.0"
+    implementation "androidx.core:core-ktx:$CORE_KTX_VERSION"
 
     //swipe_layout
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'

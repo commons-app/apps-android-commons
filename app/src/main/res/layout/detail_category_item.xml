@@ -10,15 +10,15 @@
         android:id="@+id/mediaDetailCategoryItemText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/subBackground"
+        android:background="?attr/mainBackground"
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center_vertical"
         android:minHeight="@dimen/overflow_button_dimen"
-        android:padding="@dimen/quarter_standard_height"
-        android:textColor="@android:color/white"
+        android:padding="@dimen/small_gap"
+        android:textColor="?attr/mediaDetailsText"
         android:textSize="@dimen/description_text_size"
-        app:drawablePadding="@dimen/small_gap"
-        app:drawableStart="@drawable/ic_info_outline_24dp"
+        app:drawablePadding="@dimen/tiny_gap"
+        app:drawableStart="?attr/iconInfo24"
         />
 
 </LinearLayout>
