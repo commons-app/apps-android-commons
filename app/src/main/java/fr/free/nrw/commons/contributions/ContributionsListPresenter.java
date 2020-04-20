@@ -96,10 +96,10 @@ public class ContributionsListPresenter implements UserActionListener {
 
   public void fetchContributions() {
     if (NetworkUtils.isInternetConnectionEstablished(CommonsApplication.getInstance())) {
-      view.showProgress(true);
-      this.user = sessionManager.getUserName();
-
-      view.showContributions(Collections.emptyList());
+      if (contributionList.isEmpty()) {
+        view.showProgress(true);
+      }
+      user = sessionManager.getUserName();
       compositeDisposable.add(mediaClient.getMediaListForUser(user)
           .subscribeOn(ioThreadScheduler)
           .observeOn(mainThreadScheduler)
@@ -146,7 +146,7 @@ public class ContributionsListPresenter implements UserActionListener {
     }
   }
 
-  private void saveContributionsToDB(List<Contribution> contributions) {
+  private void saveContributionsToDB(final List<Contribution> contributions) {
     repository.save(contributions).subscribeOn(ioThreadScheduler).subscribe();
     repository.set("last_fetch_timestamp", System.currentTimeMillis());
   }

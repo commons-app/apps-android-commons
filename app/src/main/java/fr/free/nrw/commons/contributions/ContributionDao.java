@@ -24,18 +24,8 @@ public abstract class ContributionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract Single<Long> save(Contribution contribution);
 
-    public Completable deleteAllAndSave(List<Contribution> contributions){
-        return Completable.fromAction(() -> deleteAllAndSaveTransaction(contributions));
-    }
-
-    @Transaction
-    public void deleteAllAndSaveTransaction(List<Contribution> contributions){
-        deleteAll(Contribution.STATE_COMPLETED);
-        save(contributions);
-    }
-
-    @Insert
-    public abstract void save(List<Contribution> contribution);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    public abstract Single<List<Long>> save(List<Contribution> contribution);
 
     @Delete
     public abstract Single<Integer> delete(Contribution contribution);

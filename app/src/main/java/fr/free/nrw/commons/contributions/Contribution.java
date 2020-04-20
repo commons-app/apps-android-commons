@@ -41,9 +41,7 @@ public class  Contribution extends Media {
     public static final String SOURCE_CAMERA = "camera";
     public static final String SOURCE_GALLERY = "gallery";
     public static final String SOURCE_EXTERNAL = "external";
-    @PrimaryKey (autoGenerate = true)
-    @NonNull
-    public long _id;
+
     public Uri contentUri;
     public String source;
     public String editSummary;
@@ -73,7 +71,7 @@ public class  Contribution extends Media {
             media.license, media.getLicenseUrl(), media.creator, media.getCategories(),
             media.requestedDeletion,
             media.descriptions, media.tags, media.coordinates);
-
+        this.pageId=media.pageId;
         this.state = STATE_COMPLETED;
     }
 
@@ -258,7 +256,6 @@ public class  Contribution extends Media {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeLong(this._id);
         dest.writeParcelable(this.contentUri, flags);
         dest.writeString(this.source);
         dest.writeString(this.editSummary);
@@ -275,7 +272,6 @@ public class  Contribution extends Media {
 
     protected Contribution(Parcel in) {
         super(in);
-        this._id = in.readLong();
         this.contentUri = in.readParcelable(Uri.class.getClassLoader());
         this.source = in.readString();
         this.editSummary = in.readString();
@@ -305,7 +301,7 @@ public class  Contribution extends Media {
     @NonNull
     @Override
     public String toString() {
-        return String.valueOf(_id);
+        return String.valueOf(pageId);
     }
 
     @Override
