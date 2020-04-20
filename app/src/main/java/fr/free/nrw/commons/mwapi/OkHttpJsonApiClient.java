@@ -6,10 +6,8 @@ import com.google.gson.Gson;
 import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
-import fr.free.nrw.commons.depictions.subClass.models.Binding;
 import fr.free.nrw.commons.depictions.subClass.models.ParentSparqlResponse;
-import fr.free.nrw.commons.depictions.subClass.models.SparqlQueryResponse;
-import fr.free.nrw.commons.depictions.subClass.models.SubclassDescription;
+import fr.free.nrw.commons.depictions.subClass.models.SubclassSparqlResponse;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
@@ -224,29 +222,8 @@ public class OkHttpJsonApiClient {
         .build();
     return Observable.fromCallable(() -> {
       Response response = okHttpClient.newCall(request).execute();
-      String json = response.body().string();
-      SparqlQueryResponse example = gson.fromJson(json, SparqlQueryResponse.class);
-      List<Binding> bindings = example.getResults().getBindings();
-      List<DepictedItem> subItems = new ArrayList<>();
-      for (Binding binding : bindings) {
-        if (binding.getSubclassLabel().getXmlLang() != null) {
-          String label = binding.getSubclassLabel().getValue();
-          String entityId = binding.getSubclass().getValue();
-          entityId = entityId.substring(entityId.lastIndexOf("/") + 1);
-          String description = "";
-          SubclassDescription subclassDescription = binding.getSubclassDescription();
-          if (subclassDescription != null
-              && subclassDescription.getXmlLang() != null) {
-            description = subclassDescription.getValue();
-          }
-          subItems.add(new DepictedItem(label, description, "", false, entityId));
-          Timber.e(label);
-        }
-      }
-      return subItems;
-    }).doOnError(throwable -> {
-      Timber.e(throwable.toString());
-    });
+      return gson.fromJson(response.body().string(), SubclassSparqlResponse.class).toDepictedItems();
+    }).doOnError(Timber::e);
   }
 
   /**
@@ -274,9 +251,7 @@ public class OkHttpJsonApiClient {
       } catch (Exception e) {
         return new ArrayList<DepictedItem>();
       }
-    }).doOnError(throwable -> {
-      Timber.e("line578" + throwable.toString());
-    });
+    }).doOnError(Timber::e);
   }
 
   public Single<CampaignResponseDTO> getCampaigns() {

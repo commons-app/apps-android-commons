@@ -18,12 +18,33 @@ data class ParentSparqlResponse(val results: ParentResult) {
             }
 }
 
+data class SubclassSparqlResponse(val results: SubclassResult) {
+    fun toDepictedItems() =
+        results.bindings.map {
+            DepictedItem(
+                it.subclassLabel.value,
+                it.subclassDescription?.value ?: "",
+                "",
+                false,
+                it.subclass.value.substringAfterLast("/")
+            )
+        }
+}
+
 data class ParentResult(val bindings: List<ParentBinding>)
+
+data class SubclassResult(val bindings: List<SubclassBinding>)
 
 data class ParentBinding(
     val parentClass: SparqInfo,
     val parentClassLabel: SparqInfo,
     val parentClassDescription: SparqInfo? = null
+)
+
+data class SubclassBinding(
+    val subclass: SparqInfo,
+    val subclassLabel: SparqInfo,
+    val subclassDescription: SparqInfo? = null
 )
 
 data class SparqInfo(val type: String, val value: String)
