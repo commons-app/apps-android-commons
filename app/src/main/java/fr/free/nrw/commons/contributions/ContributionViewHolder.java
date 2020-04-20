@@ -29,7 +29,6 @@ import timber.log.Timber;
 public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
     private static final long TIMEOUT_SECONDS = 15;
-    private static final String NO_CAPTION = "No caption";
     private final Callback callback;
     @BindView(R.id.contributionImage)
     SimpleDraweeView imageView;
@@ -124,7 +123,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
                     .observeOn(AndroidSchedulers.mainThread())
                     .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                     .subscribe(subscriber -> {
-                        if (!subscriber.trim().equals(NO_CAPTION)) {
+                        if (!subscriber.trim().equals(MediaClient.NO_CAPTION)) {
                             titleView.setText(subscriber);
                         } else {
                             titleView.setText(contribution.getDisplayTitle());
