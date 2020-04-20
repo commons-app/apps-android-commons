@@ -5,8 +5,7 @@ import static fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_I
 import android.annotation.SuppressLint;
 import android.content.Context;
 import androidx.annotation.Nullable;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.google.gson.Gson;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -24,8 +23,8 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-import org.jetbrains.annotations.NotNull;
 import org.wikipedia.dataclient.mwapi.MwPostResponse;
+import org.wikipedia.wikidata.EditClaim;
 import timber.log.Timber;
 
 /**
@@ -42,20 +41,22 @@ public class WikidataEditService {
     private final Context context;
     private final WikidataEditListener wikidataEditListener;
     private final JsonKvStore directKvStore;
-  private final WikiBaseClient wikiBaseClient;
+    private final WikiBaseClient wikiBaseClient;
     private final WikidataClient wikidataClient;
+    private final Gson gson;
 
   @Inject
     public WikidataEditService(final Context context,
       final WikidataEditListener wikidataEditListener,
       @Named("default_preferences") final JsonKvStore directKvStore,
       final WikiBaseClient wikiBaseClient,
-      final WikidataClient wikidataClient) {
+      final WikidataClient wikidataClient, final Gson gson) {
         this.context = context;
         this.wikidataEditListener = wikidataEditListener;
         this.directKvStore = directKvStore;
         this.wikiBaseClient = wikiBaseClient;
         this.wikidataClient = wikidataClient;
+    this.gson = gson;
   }
 
   /**
@@ -65,10 +66,13 @@ public class WikidataEditService {
   @SuppressLint("CheckResult")
   private Observable<Boolean> addDepictsProperty(final String fileEntityId,
       final WikidataItem depictedItem) {
-    // Wikipedia:Sandbox (Q10)
-    final String data = depictionJson(ConfigUtils.isBetaFlavour() ? "Q10" : depictedItem.getId());
 
-    return wikiBaseClient.postEditEntity(PAGE_ID_PREFIX + fileEntityId, data)
+    final EditClaim data = editClaim(
+        ConfigUtils.isBetaFlavour() ? "Q10" // Wikipedia:Sandbox (Q10)
+        : depictedItem.getId()
+    );
+
+    return wikiBaseClient.postEditEntity(PAGE_ID_PREFIX + fileEntityId, gson.toJson(data))
         .doOnNext(success -> {
           if (success) {
             Timber.d("DEPICTS property was set successfully for %s", fileEntityId);
@@ -83,34 +87,8 @@ public class WikidataEditService {
         .subscribeOn(Schedulers.io());
     }
 
-  @NotNull
-  private String depictionJson(final String entityId) {
-    final JsonObject value = new JsonObject();
-    value.addProperty("entity-type", "item");
-    value.addProperty("numeric-id", entityId.replace("Q", ""));
-    value.addProperty("id", entityId);
-
-    final JsonObject dataValue = new JsonObject();
-    dataValue.add("value", value);
-    dataValue.addProperty("type", "wikibase-entityid");
-
-    final JsonObject mainSnak = new JsonObject();
-    mainSnak.addProperty("snaktype", "value");
-    mainSnak.addProperty("property", WikidataProperties.DEPICTS.getPropertyName());
-    mainSnak.add("datavalue", dataValue);
-
-    final JsonObject claim = new JsonObject();
-    claim.add("mainsnak", mainSnak);
-    claim.addProperty("type", "statement");
-    claim.addProperty("rank", "preferred");
-
-    final JsonArray claims = new JsonArray();
-    claims.add(claim);
-
-    final JsonObject jsonData = new JsonObject();
-    jsonData.add("claims", claims);
-
-    return jsonData.toString();
+  private EditClaim editClaim(final String entityId) {
+    return EditClaim.from(entityId, WikidataProperties.DEPICTS.getPropertyName());
   }
 
   /**

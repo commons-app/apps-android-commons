@@ -58,7 +58,6 @@ import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Map;
 import javax.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.util.DateUtil;
@@ -145,7 +144,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
      * However unlike categories depictions is multi-lingual
      * Ex: key: en value: monument
      */
-    private ArrayList<Map<String, String>> depictions;
+    private Depictions depictions;
     private boolean categoriesLoaded = false;
     private boolean categoriesPresent = false;
     private boolean depictionLoaded = false;
@@ -200,8 +199,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
         categoryNames = new ArrayList<>();
         categoryNames.add(getString(R.string.detail_panel_cats_loading));
-
-        depictions = new ArrayList<>();
 
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
 
@@ -341,8 +338,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         categoryNames.clear();
         categoryNames.addAll(media.getCategories());
 
-        depictions.clear();
-        depictions.addAll(media.getDepiction());
+        depictions=media.getDepiction();
 
         depictionLoaded = true;
 
@@ -355,7 +351,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
         rebuildCatList();
 
-        if(depictions != null && depictions.size() != 0) {
+        if(depictions != null) {
             rebuildDepictionList();
         }
         else depictsLayout.setVisibility(GONE);
@@ -374,11 +370,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
      */
     private void rebuildDepictionList() {
         depictionContainer.removeAllViews();
-        for (int i = 0; i<depictions.size(); i++) {
-            String depictionName = depictions.get(i).get("label");
-            String entityId = depictions.get(i).get("id");
-            View depictLabel = buildDepictLabel(depictionName, entityId, depictionContainer);
-            depictionContainer.addView(depictLabel);
+        for (IdAndLabel depiction : depictions.getDepictions()) {
+            depictionContainer.addView(
+                buildDepictLabel(
+                    depiction.getEntityLabel(),
+                    depiction.getEntityId(),
+                    depictionContainer
+                ));
         }
     }
 

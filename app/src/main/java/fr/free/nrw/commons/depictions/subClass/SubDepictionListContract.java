@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.depictions.SubClass;
+package fr.free.nrw.commons.depictions.subClass;
 
 import java.io.IOException;
 import java.util.List;

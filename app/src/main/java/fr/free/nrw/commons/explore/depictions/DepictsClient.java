@@ -1,11 +1,16 @@
 package fr.free.nrw.commons.explore.depictions;
 
 import androidx.annotation.Nullable;
-
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
-
-
+import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.depictions.models.Search;
+import fr.free.nrw.commons.media.MediaInterface;
+import fr.free.nrw.commons.upload.depicts.DepictsInterface;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
+import fr.free.nrw.commons.utils.CommonsDateUtil;
+import fr.free.nrw.commons.wikidata.WikidataProperties;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -14,19 +19,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
-import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.depictions.models.Search;
-import fr.free.nrw.commons.media.MediaInterface;
-import fr.free.nrw.commons.upload.depicts.DepictsInterface;
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
-import fr.free.nrw.commons.utils.CommonsDateUtil;
-import io.reactivex.Observable;
-import io.reactivex.Single;
+import org.wikipedia.wikidata.DataValue.DataValueString;
+import org.wikipedia.wikidata.Statement_partial;
 
 /**
  * Depicts Client to handle custom calls to Commons Wikibase APIs
@@ -81,24 +77,19 @@ public class DepictsClient {
      */
     public Single<String> getP18ForItem(String entityId) {
         return depictsInterface.getImageForEntity(entityId)
-                .map(commonsFilename -> {
-                    String name;
-                    try {
-                        JsonObject claims = commonsFilename.getAsJsonObject("claims").getAsJsonObject();
-                        JsonObject p18 = claims.get("P18").getAsJsonArray().get(0).getAsJsonObject();
-                        JsonObject mainsnak = p18.get("mainsnak").getAsJsonObject();
-                        JsonObject datavalue = mainsnak.get("datavalue").getAsJsonObject();
-                        JsonPrimitive value = datavalue.get("value").getAsJsonPrimitive();
-                        name = value.toString();
-                        name = name.substring(1, name.length() - 1);
-                    } catch (Exception e) {
-                        name="";
-                    }
-                    if (!name.isEmpty()){
-                        return getThumbnailUrl(name);
-                    } else return NO_DEPICTED_IMAGE;
-                })
-                .singleOrError();
+            .map(claimsResponse -> {
+                final List<Statement_partial> imageClaim = claimsResponse.getClaims()
+                    .get(WikidataProperties.IMAGE.getPropertyName());
+                if (imageClaim != null) {
+                    final DataValueString dataValue = (DataValueString) imageClaim
+                        .get(0)
+                        .getMainSnak()
+                        .getDataValue();
+                    return getThumbnailUrl((dataValue.getValue()));
+                }
+                return NO_DEPICTED_IMAGE;
+            })
+            .singleOrError();
     }
 
     /**

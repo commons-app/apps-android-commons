@@ -1,19 +1,11 @@
 package fr.free.nrw.commons.media;
 
 
-import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.internal.LinkedTreeMap;
-import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -24,6 +16,9 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
+import org.wikipedia.wikidata.Entities;
+import org.wikipedia.wikidata.Entities.Entity;
+import org.wikipedia.wikidata.Entities.Label;
 import timber.log.Timber;
 
 /**
@@ -179,9 +174,9 @@ public class MediaClient {
         return mediaDetailInterface.getCaptionForImage(Locale.getDefault().getLanguage(), wikibaseIdentifier)
                 .map(mediaDetailResponse -> {
                     if (isSuccess(mediaDetailResponse)) {
-                        for (CommonsWikibaseItem wikibaseItem : mediaDetailResponse.getEntities().values()) {
-                            for (Caption caption : wikibaseItem.getLabels().values()) {
-                                return caption.getValue();
+                        for (Entity wikibaseItem : mediaDetailResponse.entities().values()) {
+                            for (Label label : wikibaseItem.labels().values()) {
+                                return label.value();
                             }
                         }
                     }
@@ -190,9 +185,8 @@ public class MediaClient {
                 .singleOrError();
     }
 
-    private boolean isSuccess(MediaDetailResponse response) {
-        return response != null && response.getSuccess() != null
-            && response.getSuccess() == 1 && response.getEntities() != null;
+    private boolean isSuccess(Entities response) {
+        return response != null && response.getSuccess() == 1 && response.entities() != null;
     }
 
     /**
@@ -201,102 +195,29 @@ public class MediaClient {
      * @param filename
      * @return a map containing caption and depictions (empty string in the map if no caption/depictions)
      */
-    public Single<JsonObject> getCaptionAndDepictions(String filename)  {
-        return mediaDetailInterface.fetchStructuredDataByFilename(Locale.getDefault().getLanguage(), filename)
-                .map(this::fetchCaptionandDepictionsFromMediaDetailResponse)
+    public Single<Depictions> getDepictions(String filename)  {
+        return mediaDetailInterface.fetchEntitiesByFileName(Locale.getDefault().getLanguage(), filename)
+                .map(entities -> Depictions.from(entities, this))
                 .singleOrError();
-    }
-
-    /**
-     * Parses the mediaDetailResponse from API to extract captions and depictions
-     * @param mediaDetailResponse Response obtained from API for Media Details
-     * @return a map containing caption and depictions (empty string in the map if no caption/depictions)
-     */
-    @SuppressLint("CheckResult")
-    private JsonObject fetchCaptionandDepictionsFromMediaDetailResponse(MediaDetailResponse mediaDetailResponse) {
-        JsonObject mediaDetails = new JsonObject();
-        if (isSuccess(mediaDetailResponse)) {
-            Map<String, CommonsWikibaseItem> entities = mediaDetailResponse.getEntities();
-            try {
-                Map.Entry<String, CommonsWikibaseItem> entry = entities.entrySet().iterator().next();
-                CommonsWikibaseItem commonsWikibaseItem = entry.getValue();
-                try {
-                    Map<String, Caption> labels = commonsWikibaseItem.getLabels();
-                    Map.Entry<String, Caption> captionEntry = labels.entrySet().iterator().next();
-                    Caption caption = captionEntry.getValue();
-                    JsonElement jsonElement = new JsonPrimitive(caption.getValue());
-                    mediaDetails.add("Caption", jsonElement);
-                } catch (Exception e) {
-                    JsonElement jsonElement = new JsonPrimitive(NO_CAPTION);
-                    mediaDetails.add("Caption", jsonElement);
-                }
-
-                try {
-                    LinkedTreeMap statements = (LinkedTreeMap) commonsWikibaseItem.getStatements();
-                    ArrayList<LinkedTreeMap> depictsItemList = (ArrayList<LinkedTreeMap>) statements.get(BuildConfig.DEPICTS_PROPERTY);
-                    JsonArray jsonArray = new JsonArray();
-                    for (int i = 0; i < depictsItemList.size(); i++) {
-                        LinkedTreeMap depictedItem = depictsItemList.get(i);
-                        LinkedTreeMap mainsnak = (LinkedTreeMap) depictedItem.get("mainsnak");
-                        Map<String, LinkedTreeMap> datavalue = (Map<String, LinkedTreeMap>) mainsnak.get("datavalue");
-                        LinkedTreeMap value = datavalue.get("value");
-                        String id = value.get("id").toString();
-                        JsonObject jsonObject = getLabelForDepiction(id, Locale.getDefault().getLanguage())
-                                .subscribeOn(Schedulers.newThread())
-                                .blockingGet();
-                                jsonArray.add(jsonObject);
-                    }
-                    mediaDetails.add("Depiction", jsonArray);
-                } catch (Exception e) {
-                    JsonElement jsonElement = new JsonPrimitive(NO_DEPICTION);
-                    mediaDetails.add("Depiction", jsonElement);
-                }
-            } catch (Exception e) {
-                JsonElement jsonElement = new JsonPrimitive(NO_CAPTION);
-                mediaDetails.add("Caption", jsonElement);
-                jsonElement = new JsonPrimitive(NO_DEPICTION);
-                mediaDetails.add("Depiction", jsonElement);
-            }
-        } else {
-            JsonElement jsonElement = new JsonPrimitive(NO_CAPTION);
-            mediaDetails.add("Caption", jsonElement);
-            jsonElement = null;
-            jsonElement = new JsonPrimitive(NO_DEPICTION);
-            mediaDetails.add("Depiction", jsonElement);
-        }
-
-        return mediaDetails;
     }
 
     /**
      * Gets labels for Depictions using Entity Id from MediaWikiAPI
      *
      * @param entityId  EntityId (Ex: Q81566) of the depict entity
-     * @return Json Object having label and Wikidata URL for the Depiction Entity
+     * @return label
      */
-    public Single<JsonObject> getLabelForDepiction(String entityId, String language) {
-        return mediaDetailInterface.getDepictions(entityId, language)
-                .map(jsonResponse -> {
-                    try {
-                        if (jsonResponse.get("success").toString().equals("1")) {
-                            JsonObject entities = (JsonObject) jsonResponse.getAsJsonObject().get("entities");
-                            JsonObject responseObject = (JsonObject) entities.getAsJsonObject().get(entityId);
-                            JsonObject labels = responseObject.getAsJsonObject("labels");
-                            JsonObject languageObject = labels.getAsJsonObject(language);
-                            String label = String.valueOf(languageObject.get("value"));
-
-
-                            JsonElement labelJson = new JsonPrimitive(label);
-                            JsonElement idJson = new JsonPrimitive(entityId);
-                            JsonObject jsonObject = new JsonObject();
-                            jsonObject.add("label", labelJson);
-                            jsonObject.add("id", idJson);
-                            return jsonObject;
+    public Single<String> getLabelForDepiction(String entityId, String language) {
+        return mediaDetailInterface.getEntity(entityId, language)
+                .map(entities -> {
+                    if (isSuccess(entities)) {
+                        for (Entity entity : entities.entities().values()) {
+                            for (Label label : entity.labels().values()) {
+                                return label.value();
+                            }
                         }
-                    } catch (Exception e) {
-                        Timber.e("Label not found");
-                        return new JsonObject();
-                    }return new JsonObject();
+                    }
+                    throw new RuntimeException("failed getEntities");
                 })
                 .singleOrError();
     }

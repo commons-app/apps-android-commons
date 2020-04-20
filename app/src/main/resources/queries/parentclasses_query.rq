@@ -1,4 +1,4 @@
-SELECT ?parentClass ?parentClassLabel ?parentClassDescription WHERE {
-    wd:${QID} wdt:P279 ?parentClass.
+SELECT ?item ?itemLabel ?itemDescription WHERE {
+    wd:${QID} wdt:P279 ?item.
     SERVICE wikibase:label { bd:serviceParam wikibase:language ${LANG}. }
 }

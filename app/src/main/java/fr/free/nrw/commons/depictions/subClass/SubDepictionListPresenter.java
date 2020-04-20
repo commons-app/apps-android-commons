@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.depictions.SubClass;
+package fr.free.nrw.commons.depictions.subClass;
 
 import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;

@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.depictions.SubClass;
+package fr.free.nrw.commons.depictions.subClass;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
