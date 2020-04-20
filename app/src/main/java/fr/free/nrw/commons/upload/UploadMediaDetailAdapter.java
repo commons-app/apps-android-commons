@@ -126,8 +126,8 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                 captionInputLayout.setEndIconOnClickListener(v ->
                     callback.showAlert(R.string.media_detail_caption, R.string.caption_info));
 
-                descInputLayout.setEndIconDrawable(R.drawable.mapbox_info_icon_default);
                 descInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
+                descInputLayout.setEndIconDrawable(R.drawable.mapbox_info_icon_default);
                 descInputLayout.setEndIconOnClickListener(v ->
                     callback.showAlert(R.string.media_detail_description, R.string.description_info));
 
