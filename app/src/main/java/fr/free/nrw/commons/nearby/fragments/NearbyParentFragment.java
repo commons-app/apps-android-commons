@@ -120,6 +120,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         implements NearbyParentFragmentContract.View,
         WikidataEditListener.WikidataP18EditListener, LocationUpdateListener {
 
+    private static final String CHECKBOX_STATE = "checkbox_state";
     @BindView(R.id.bottom_sheet) RelativeLayout rlBottomSheet;
     @BindView(R.id.bottom_sheet_details) View bottomSheetDetails;
     @BindView(R.id.transparentView) View transparentView;
@@ -220,6 +221,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //Restore checkbox's state
+        if (null != savedInstanceState) {
+            int checkBoxSavedState = savedInstanceState.getInt(CHECKBOX_STATE,
+                CheckBoxTriStates.UNKNOWN);
+            checkBoxTriStates.setState(checkBoxSavedState);
+        }
         isDarkTheme = systemThemeUtils.isDeviceInNightMode();
         cameraMoveListener= () -> presenter.onCameraMove(mapBox.getCameraPosition().target);
         addCheckBoxCallback();
@@ -363,6 +370,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
+        outState.putInt(CHECKBOX_STATE,checkBoxTriStates.getState());
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }
