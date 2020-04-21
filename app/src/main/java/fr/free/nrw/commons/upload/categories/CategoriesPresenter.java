@@ -1,15 +1,9 @@
 package fr.free.nrw.commons.upload.categories;
 
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
+
 import android.text.TextUtils;
-
-import java.lang.reflect.Proxy;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.repository.UploadRepository;
@@ -18,10 +12,13 @@ import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import java.lang.reflect.Proxy;
+import java.util.ArrayList;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
-import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 /**
  * The presenter class for UploadCategoriesFragment
@@ -86,9 +83,10 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
                 )
                 .filter(categoryItem -> !repository.containsYear(categoryItem.getName()))
                 .distinct();
-                if(!TextUtils.isEmpty(query)) {
-                distinctCategoriesObservable=distinctCategoriesObservable.sorted(repository.sortBySimilarity(query));
-                }
+
+        if(!TextUtils.isEmpty(query)) {
+            distinctCategoriesObservable=distinctCategoriesObservable.sorted(repository.sortBySimilarity(query));
+        }
         Disposable searchCategoriesDisposable = distinctCategoriesObservable
                 .observeOn(mainThreadScheduler)
                 .subscribe(
@@ -114,8 +112,9 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
     private List<String> getImageTitleList() {
         List<String> titleList = new ArrayList<>();
         for (UploadItem item : repository.getUploads()) {
-            if (item.getTitle().isSet()) {
-                titleList.add(item.getTitle().toString());
+            final String captionText = item.getUploadMediaDetails().get(0).getCaptionText();
+            if (!TextUtils.isEmpty(captionText)) {
+                titleList.add(captionText);
             }
         }
         return titleList;

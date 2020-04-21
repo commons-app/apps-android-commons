@@ -16,8 +16,10 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
+import java.util.*
 
 
 /**
@@ -42,10 +44,7 @@ class UploadMediaPresenterTest {
     private lateinit var uploadItem: UploadModel.UploadItem
 
     @Mock
-    private lateinit var title: Title
-
-    @Mock
-    private lateinit var descriptions: List<Description>
+    private lateinit var uploadMediaDetails: List<UploadMediaDetail>
 
     private lateinit var testObservableUploadItem: Observable<UploadModel.UploadItem>
     private lateinit var testSingleImageResult: Single<Int>
@@ -75,11 +74,10 @@ class UploadMediaPresenterTest {
             repository.preProcessImage(
                 ArgumentMatchers.any(UploadableFile::class.java),
                 ArgumentMatchers.any(Place::class.java),
-                ArgumentMatchers.anyString(),
                 ArgumentMatchers.any(UploadMediaPresenter::class.java)
             )
         ).thenReturn(testObservableUploadItem)
-        uploadMediaPresenter.receiveImage(uploadableFile, ArgumentMatchers.anyString(), place)
+        uploadMediaPresenter.receiveImage(uploadableFile, place)
         verify(view).showProgress(true)
         testScheduler.triggerActions()
         verify(view).onImageProcessed(
@@ -116,15 +114,49 @@ class UploadMediaPresenterTest {
         uploadMediaPresenter.handleImageResult(FILE_NAME_EXISTS)
         verify(view).showDuplicatePicturePopup()
 
-        //Empty Title test
-        uploadMediaPresenter.handleImageResult(EMPTY_TITLE)
+        //Empty Caption test
+        uploadMediaPresenter.handleImageResult(EMPTY_CAPTION)
         verify(view).showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
 
         //Bad Picture test
-        //Empty Title test
+        //Empty Caption test
         uploadMediaPresenter.handleImageResult(-7)
-        verify(view).showBadImagePopup(ArgumentMatchers.anyInt())
+        verify(view)?.showBadImagePopup(ArgumentMatchers.anyInt())
 
+    }
+
+    @Test
+    fun addSingleCaption() {
+        val uploadMediaDetail = UploadMediaDetail()
+        uploadMediaDetail.captionText = "added caption"
+        uploadMediaDetail.languageCode = "en"
+        val uploadMediaDetailList: ArrayList<UploadMediaDetail> = ArrayList()
+        uploadMediaDetailList.add(uploadMediaDetail)
+        uploadItem.setMediaDetails(uploadMediaDetailList)
+        Mockito.`when`(repository.getImageQuality(uploadItem)).then {
+            verify(view).showProgress(true)
+            testScheduler.triggerActions()
+            verify(view).showProgress(true)
+            verify(view).onImageValidationSuccess()
+            uploadMediaPresenter.setUploadItem(0, uploadItem)
+        }
+    }
+
+    @Test
+    fun addMultipleCaptions() {
+        val uploadMediaDetail = UploadMediaDetail()
+        uploadMediaDetail.captionText = "added caption"
+        uploadMediaDetail.languageCode = "en"
+        uploadMediaDetail.captionText = "added caption"
+        uploadMediaDetail.languageCode = "eo"
+        uploadItem.setMediaDetails(Collections.singletonList(uploadMediaDetail))
+        Mockito.`when`(repository.getImageQuality(uploadItem)).then {
+            verify(view).showProgress(true)
+            testScheduler.triggerActions()
+            verify(view).showProgress(true)
+            verify(view).onImageValidationSuccess()
+            uploadMediaPresenter.setUploadItem(0, uploadItem)
+        }
     }
 
     /**
@@ -134,12 +166,10 @@ class UploadMediaPresenterTest {
     fun fetchPreviousImageAndTitleTestPositive() {
         whenever(repository.getPreviousUploadItem(ArgumentMatchers.anyInt()))
             .thenReturn(uploadItem)
-        whenever(uploadItem.descriptions).thenReturn(descriptions)
-        whenever(uploadItem.title).thenReturn(title)
-        whenever(title.getTitleText()).thenReturn(ArgumentMatchers.anyString())
+        whenever(uploadItem.uploadMediaDetails).thenReturn(uploadMediaDetails)
 
         uploadMediaPresenter.fetchPreviousTitleAndDescription(0)
-        verify(view).setTitleAndDescription(ArgumentMatchers.anyString(), ArgumentMatchers.any())
+        verify(view).setCaptionsAndDescriptions(ArgumentMatchers.any())
     }
 
     /**

@@ -20,6 +20,8 @@ import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadController;
 import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
+import fr.free.nrw.commons.upload.structure.depictions.DepictModel;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
@@ -34,16 +36,17 @@ public class UploadRemoteDataSource {
     private UploadModel uploadModel;
     private UploadController uploadController;
     private CategoriesModel categoriesModel;
+    private DepictModel depictModel;
     private NearbyPlaces nearbyPlaces;
 
     @Inject
     public UploadRemoteDataSource(UploadModel uploadModel, UploadController uploadController,
-                                  CategoriesModel categoriesModel,
-                                  NearbyPlaces nearbyPlaces) {
+                                  CategoriesModel categoriesModel, NearbyPlaces nearbyPlaces, DepictModel depictModel) {
         this.uploadModel = uploadModel;
         this.uploadController = uploadController;
         this.categoriesModel = categoriesModel;
         this.nearbyPlaces = nearbyPlaces;
+        this.depictModel = depictModel;
     }
 
     /**
@@ -81,18 +84,12 @@ public class UploadRemoteDataSource {
     }
 
     /**
-     * Clean up the UploadController
-     */
-    public void cleanup() {
-        uploadController.cleanup();
-    }
-
-    /**
      * Clean up the selected categories
      */
-    public void clearSelectedCategories(){
+    public void cleanUp(){
         //This needs further refactoring, this should not be here, right now the structure wont suppoort rhis
         categoriesModel.cleanUp();
+        depictModel.cleanUp();
     }
 
     /**
@@ -167,13 +164,12 @@ public class UploadRemoteDataSource {
      *
      * @param uploadableFile
      * @param place
-     * @param source
      * @param similarImageInterface
      * @return
      */
     public Observable<UploadItem> preProcessImage(UploadableFile uploadableFile, Place place,
-                                                  String source, SimilarImageInterface similarImageInterface) {
-        return uploadModel.preProcessImage(uploadableFile, place, source, similarImageInterface);
+        SimilarImageInterface similarImageInterface) {
+        return uploadModel.preProcessImage(uploadableFile, place, similarImageInterface);
     }
 
     /**
@@ -204,7 +200,33 @@ public class UploadRemoteDataSource {
         }
     }
 
-  public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
-    uploadModel.useSimilarPictureCoordinates(imageCoordinates, uploadItemIndex);
-  }
+    /**
+     * handles category selection/unselection
+     * @param depictedItem
+     */
+
+    public void onDepictedItemClicked(DepictedItem depictedItem) {
+        uploadModel.onDepictItemClicked(depictedItem);
+    }
+
+    /**
+     * returns the list of selected depictions
+     * @return
+     */
+
+    public List<DepictedItem> getSelectedDepictions() {
+        return uploadModel.getSelectedDepictions();
+    }
+
+    /**
+     * get all depictions
+     */
+
+    public Observable<DepictedItem> searchAllEntities(String query) {
+        return depictModel.searchAllEntities(query);
+    }
+
+    public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
+        uploadModel.useSimilarPictureCoordinates(imageCoordinates, uploadItemIndex);
+    }
 }

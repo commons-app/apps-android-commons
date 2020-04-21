@@ -1,5 +1,9 @@
 package fr.free.nrw.commons.upload;
 
+import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
+import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -10,7 +14,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -20,14 +23,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -36,7 +31,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoriesModel;
-import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -44,6 +38,7 @@ import fr.free.nrw.commons.mwapi.UserClient;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
+import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
@@ -52,11 +47,12 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
-import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 public class UploadActivity extends BaseActivity implements UploadContract.View, UploadBaseFragment.Callback {
     @Inject
@@ -102,11 +98,10 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private UploadImageAdapter uploadImagesAdapter;
     private List<Fragment> fragments;
     private UploadCategoriesFragment uploadCategoriesFragment;
+    private DepictsFragment depictsFragment;
     private MediaLicenseFragment mediaLicenseFragment;
     private ThumbnailsAdapter thumbnailsAdapter;
 
-
-    private String source;
     private Place place;
     private List<UploadableFile> uploadableFiles = Collections.emptyList();
     private int currentSelectedPosition = 0;
@@ -288,6 +283,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -321,7 +317,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             fragments = new ArrayList<>();
             for (UploadableFile uploadableFile : uploadableFiles) {
                 UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
-                uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, source, place);
+                uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, place);
                 uploadMediaDetailFragment.setCallback(new UploadMediaDetailFragmentCallback() {
                     @Override
                     public void deletePictureAtIndex(int index) {
@@ -359,10 +355,13 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             uploadCategoriesFragment = new UploadCategoriesFragment();
             uploadCategoriesFragment.setCallback(this);
 
+            depictsFragment = new DepictsFragment();
+            depictsFragment.setCallback(this);
+
             mediaLicenseFragment = new MediaLicenseFragment();
             mediaLicenseFragment.setCallback(this);
 
-
+            fragments.add(depictsFragment);
             fragments.add(uploadCategoriesFragment);
             fragments.add(mediaLicenseFragment);
 
@@ -378,16 +377,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private void receiveInternalSharedItems() {
         Intent intent = getIntent();
 
-        if (intent.hasExtra(UploadService.EXTRA_SOURCE)) {
-            source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
-        } else {
-            source = Contribution.SOURCE_EXTERNAL;
-        }
-
-        Timber.d("Received intent %s with action %s and from source %s",
-                intent.toString(),
-                intent.getAction(),
-                source);
+        Timber.d("Received intent %s with action %s", intent.toString(), intent.getAction());
 
         uploadableFiles = intent.getParcelableArrayListExtra(EXTRA_FILES);
         Timber.i("Received multiple upload %s", uploadableFiles.size());

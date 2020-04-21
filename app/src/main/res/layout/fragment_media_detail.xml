@@ -54,6 +54,8 @@
                 android:background="?attr/mainBackground"
                 android:orientation="vertical">
 
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -96,6 +98,27 @@
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
                         tools:text="Media author user name goes here." />
+                </LinearLayout>
+
+                <LinearLayout
+                  android:id="@+id/caption_layout"
+                  style="@style/MediaDetailContainer"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+
+                    <TextView
+                      style="@style/MediaDetailTextLabelGeneric"
+                      android:layout_width="@dimen/widget_margin"
+                      android:layout_height="match_parent"
+                      android:text="@string/media_detail_caption" />
+
+                    <TextView
+                      android:id="@+id/media_detail_caption"
+                      android:layout_width="@dimen/widget_margin"
+                      android:layout_height="match_parent"
+                      style="@style/MediaDetailTextBody"
+                      tools:text="Captions of the media" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -181,6 +204,28 @@
                         app:drawablePadding="@dimen/tiny_gap"
                         app:drawableStart="?attr/iconMap24"
                         tools:text="Coordinates link" />
+                </LinearLayout>
+
+                <LinearLayout
+                  android:id="@+id/depicts_layout"
+                  style="@style/MediaDetailContainer"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:textStyle="bold">
+
+                  <TextView
+                    style="@style/MediaDetailTextLabelGeneric"
+                    android:layout_width="@dimen/widget_margin"
+                    android:layout_height="match_parent"
+                    android:text="@string/media_detail_depiction" />
+
+                  <LinearLayout
+                    android:id="@+id/media_detail_depiction_container"
+                    android:layout_width="@dimen/widget_margin"
+                    android:layout_height="match_parent"
+                    android:layout_weight="70"
+                    android:orientation="vertical" />
                 </LinearLayout>
 
                 <LinearLayout

@@ -10,33 +10,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.AbstractTextWatcher;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import timber.log.Timber;
 
-public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewHolder> {
+public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDetailAdapter.ViewHolder> {
 
-    private List<Description> descriptions;
+    private List<UploadMediaDetail> uploadMediaDetails;
     private Callback callback;
+    private EventListener eventListener;
 
     private HashMap<AdapterView, String> selectedLanguages;
-    private String savedLanguageValue;
+    private final String savedLanguageValue;
 
-    public DescriptionsAdapter(String savedLanguageValue) {
-        descriptions = new ArrayList<>();
+    public UploadMediaDetailAdapter(String savedLanguageValue) {
+        uploadMediaDetails = new ArrayList<>();
         selectedLanguages = new HashMap<>();
         this.savedLanguageValue = savedLanguageValue;
     }
@@ -45,8 +43,12 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
         this.callback = callback;
     }
 
-    public void setItems(List<Description> descriptions) {
-        this.descriptions = descriptions;
+    public void setEventListener(EventListener eventListener) {
+        this.eventListener = eventListener;
+    }
+
+    public void setItems(List<UploadMediaDetail> uploadMediaDetails) {
+        this.uploadMediaDetails = uploadMediaDetails;
         selectedLanguages = new HashMap<>();
         notifyDataSetChanged();
     }
@@ -60,12 +62,12 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.init(position);
+        holder.bind(position);
     }
 
     @Override
     public int getItemCount() {
-        return descriptions.size();
+        return uploadMediaDetails.size();
     }
 
     /**
@@ -73,13 +75,13 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
      *
      * @return List of descriptions
      */
-    public List<Description> getDescriptions() {
-        return descriptions;
+    public List<UploadMediaDetail> getUploadMediaDetails() {
+        return uploadMediaDetails;
     }
 
-    public void addDescription(Description description) {
-        this.descriptions.add(description);
-        notifyItemInserted(descriptions.size());
+    public void addDescription(UploadMediaDetail uploadMediaDetail) {
+        this.uploadMediaDetails.add(uploadMediaDetail);
+        notifyItemInserted(uploadMediaDetails.size());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -91,21 +93,43 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
         @BindView(R.id.description_item_edit_text)
         AppCompatEditText descItemEditText;
 
+        @BindView(R.id.caption_item_edit_text)
+        AppCompatEditText captionItemEditText;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             Timber.i("descItemEditText:" + descItemEditText);
         }
 
-        public void init(int position) {
-            Description description = descriptions.get(position);
-            Timber.d("Description is " + description);
-            if (!TextUtils.isEmpty(description.getDescriptionText())) {
-                descItemEditText.setText(description.getDescriptionText());
-            } else {
-                descItemEditText.setText("");
-            }
+        public void bind(int position) {
+            UploadMediaDetail uploadMediaDetail = uploadMediaDetails.get(position);
+            Timber.d("UploadMediaDetail is " + uploadMediaDetail);
+            captionItemEditText.setText(uploadMediaDetail.getCaptionText());
+            descItemEditText.setText(uploadMediaDetail.getDescriptionText());
+
+            captionItemEditText.addTextChangedListener(new AbstractTextWatcher(
+                value -> {
+                    if (position == 0) {
+                        eventListener.onPrimaryCaptionTextChange(value.length() != 0);
+                    }
+                }));
+
             if (position == 0) {
+                captionItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getInfoIcon(),
+                        null);
+                captionItemEditText.setOnTouchListener((v, event) -> {
+                    //2 is for drawable right
+                    if (event.getAction() == MotionEvent.ACTION_UP && (event.getRawX() >= (captionItemEditText.getRight() - captionItemEditText.getCompoundDrawables()[2].getBounds().width()))) {
+                        if (getAdapterPosition() == 0) {
+                            callback.showAlert(R.string.media_detail_caption,
+                                    R.string.caption_info);
+                        }
+                        return true;
+                    }
+                    return false;
+                });
+
                 descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getInfoIcon(),
                         null);
                 descItemEditText.setOnTouchListener((v, event) -> {
@@ -122,18 +146,23 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
                 });
 
             } else {
+                captionItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
                 descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
             }
 
+            captionItemEditText.addTextChangedListener(new AbstractTextWatcher(
+                    captionText -> uploadMediaDetails.get(position).setCaptionText(captionText)));
+            initLanguageSpinner(position, uploadMediaDetail);
+
             descItemEditText.addTextChangedListener(new AbstractTextWatcher(
-                    descriptionText -> descriptions.get(position).setDescriptionText(descriptionText)));
-            initLanguageSpinner(position, description);
+                    descriptionText -> uploadMediaDetails.get(position).setDescriptionText(descriptionText)));
+            initLanguageSpinner(position, uploadMediaDetail);
 
             //If the description was manually added by the user, it deserves focus, if not, let the user decide
-            if (description.isManuallyAdded()) {
-                descItemEditText.requestFocus();
+            if (uploadMediaDetail.isManuallyAdded()) {
+                captionItemEditText.requestFocus();
             } else {
-                descItemEditText.clearFocus();
+                captionItemEditText.clearFocus();
             }
         }
 
@@ -142,7 +171,7 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
          * @param position
          * @param description
          */
-        private void initLanguageSpinner(int position, Description description) {
+        private void initLanguageSpinner(int position, UploadMediaDetail description) {
             SpinnerLanguagesAdapter languagesAdapter = new SpinnerLanguagesAdapter(
                     spinnerDescriptionLanguages.getContext(),
                     selectedLanguages
@@ -203,6 +232,10 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
     public interface Callback {
 
         void showAlert(int mediaDetailDescription, int descriptionInfo);
+    }
+
+    public interface EventListener {
+        void onPrimaryCaptionTextChange(boolean isNotEmpty);
     }
 
     /**

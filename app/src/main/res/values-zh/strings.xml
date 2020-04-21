@@ -525,6 +525,7 @@
   <string name="images_via_nearby_explanation">通过附近位置上传的图片是指那些使用地图上发现位置功能上传的图片</string>
   <string name="thanks_received_explanation">这些功能允许编辑人员给那些做出了有用编辑的用户发送感谢通知-感谢通知通过使用在历史页面或差分页面上的一个小的感谢链接实现的。</string>
   <string name="previous_image_title_description">复制先前的标题及描述</string>
+  <string name="previous_image_caption_description">复制先前的标题及描述</string>
   <string name="previous_button_tooltip_message">点击复用您在先前图片中填写的标题及描述并稍加修改来匹配当前图像。</string>
   <string name="welcome_do_upload_content_description">上传好图片到Commons的例子</string>
   <string name="welcome_dont_upload_content_description">不能上传图片的例子</string>

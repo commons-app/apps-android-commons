@@ -1,5 +1,9 @@
 package fr.free.nrw.commons.category;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+import static fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_ID_PREFIX;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,15 +16,7 @@ import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
@@ -33,10 +29,11 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 
 /**
  * Displays images for a particular category with load more on scrolling incorporated
@@ -44,6 +41,10 @@ import static android.view.View.VISIBLE;
 public class CategoryImagesListFragment extends DaggerFragment {
 
     private static int TIMEOUT_SECONDS = 15;
+    /**
+     * counts the total number of items loaded from the API
+     */
+    private int mediaSize = 0;
 
     private GridViewAdapter gridAdapter;
 
@@ -256,6 +257,38 @@ public class CategoryImagesListFragment extends DaggerFragment {
         progressBar.setVisibility(GONE);
         isLoading = false;
         statusTextView.setVisibility(GONE);
+        for (Media m : collection) {
+            final String pageId = m.getPageId();
+            if (pageId != null) {
+                replaceTitlesWithCaptions(PAGE_ID_PREFIX + pageId, mediaSize++);
+            }
+        }
+    }
+
+    /**
+     * fetch captions for the image using filename and replace title of on the image thumbnail(if captions are available)
+     * else show filename
+     */
+    public void replaceTitlesWithCaptions(String wikibaseIdentifier, int i) {
+        compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseIdentifier)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .subscribe(subscriber -> {
+                    handleLabelforImage(subscriber, i);
+                }));
+
+    }
+
+    /**
+     * If caption is available for the image, then modify grid adapter
+     * to show captions
+     */
+    private void handleLabelforImage(String s, int position) {
+        if (!s.trim().equals(getString(R.string.detail_caption_empty))) {
+            gridAdapter.getItem(position).setThumbnailTitle(s);
+            gridAdapter.notifyDataSetChanged();
+        }
     }
 
     /**
