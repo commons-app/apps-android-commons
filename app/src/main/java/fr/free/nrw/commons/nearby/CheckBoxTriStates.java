@@ -1,9 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.widget.CompoundButton;
 
@@ -13,7 +10,6 @@ import androidx.appcompat.widget.AppCompatCheckBox;
 import java.util.List;
 
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 
 /**
  * Base on https://stackoverflow.com/a/40939367/3950497 answer.
