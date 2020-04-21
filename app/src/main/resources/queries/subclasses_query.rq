@@ -1,0 +1,4 @@
+SELECT ?item ?itemLabel ?itemDescription WHERE {
+    ?item wdt:P279 wd:${QID}.
+    SERVICE wikibase:label { bd:serviceParam wikibase:language ${LANG}. }
+}

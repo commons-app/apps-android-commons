@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.upload;
 
-import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
+import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION;
 import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
@@ -11,6 +11,7 @@ import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ImageUtilsWrapper;
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.commons.lang3.StringUtils;
@@ -38,6 +39,7 @@ public class ImageProcessingService {
         this.EXIFReader = EXIFReader;
         this.mediaClient = mediaClient;
     }
+
 
   /**
    * Check image quality before upload - checks duplicate image - checks dark image - checks
@@ -88,18 +90,18 @@ public class ImageProcessingService {
 
 
     /**
-     * Checks item title
-     * - empty title
-     * - existing title
+     * Checks item caption
+     * - empty caption
+     * - existing caption
      *
      * @param uploadItem
      * @return
      */
     private Single<Integer> validateItemTitle(UploadModel.UploadItem uploadItem) {
-        Timber.d("Checking for image title %s", uploadItem.getTitle());
-        Title title = uploadItem.getTitle();
-        if (title.isEmpty()) {
-            return Single.just(EMPTY_TITLE);
+        Timber.d("Checking for image title %s", uploadItem.getUploadMediaDetails());
+        List<UploadMediaDetail> captions = uploadItem.getUploadMediaDetails();
+        if (captions.isEmpty()) {
+            return Single.just(EMPTY_CAPTION);
         }
 
         return mediaClient.checkPageExistsUsingTitle("File:" + uploadItem.getFileName())

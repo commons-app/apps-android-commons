@@ -6,7 +6,7 @@ import org.junit.Test
 
 class GpsCategoryModelTest {
 
-    private lateinit var testObject : GpsCategoryModel
+    private lateinit var testObject: GpsCategoryModel
 
     @Before
     fun setUp() {
@@ -21,7 +21,7 @@ class GpsCategoryModelTest {
 
     @Test
     fun addingCategoriesToTheModel() {
-        testObject.add("one")
+        testObject.categoryList = listOf("one")
         assertTrue(testObject.gpsCatExists)
         assertFalse(testObject.categoryList.isEmpty())
         assertEquals(listOf("one"), testObject.categoryList)
@@ -29,14 +29,13 @@ class GpsCategoryModelTest {
 
     @Test
     fun duplicatesAreIgnored() {
-        testObject.add("one")
-        testObject.add("one")
+        testObject.categoryList = listOf("one", "one")
         assertEquals(listOf("one"), testObject.categoryList)
     }
 
     @Test
     fun modelProtectsAgainstExternalModification() {
-        testObject.add("one")
+        testObject.categoryList = listOf("one")
 
         val list = testObject.categoryList
         list.add("two")
@@ -46,19 +45,19 @@ class GpsCategoryModelTest {
 
     @Test
     fun clearingTheModel() {
-        testObject.add("one")
+        testObject.categoryList = listOf("one")
 
         testObject.clear()
         assertFalse(testObject.gpsCatExists)
         assertTrue(testObject.categoryList.isEmpty())
 
-        testObject.add("two")
+        testObject.categoryList = listOf("two")
         assertEquals(listOf("two"), testObject.categoryList)
     }
 
     @Test
     fun settingTheListHandlesNull() {
-        testObject.add("one")
+        testObject.categoryList = listOf("one")
 
         testObject.categoryList = null
 
@@ -68,7 +67,7 @@ class GpsCategoryModelTest {
 
     @Test
     fun settingTheListOverwritesExistingValues() {
-        testObject.add("one")
+        testObject.categoryList = listOf("one")
 
         testObject.categoryList = listOf("two")
 

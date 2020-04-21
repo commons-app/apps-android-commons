@@ -2,7 +2,6 @@ package fr.free.nrw.commons.contributions;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static fr.free.nrw.commons.contributions.ContributionsFragment.MEDIA_DETAIL_PAGER_FRAGMENT_TAG;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -16,21 +15,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.LayoutManager;
-import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider;
 import java.util.List;
 import javax.inject.Inject;
 import timber.log.Timber;
@@ -59,6 +55,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     LinearLayout fab_layout;
 
     @Inject ContributionController controller;
+  @Inject
+  MediaClient mediaClient;
 
     @Inject
     ContributionsListPresenter contributionsListPresenter;
@@ -94,7 +92,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     }
 
     private void initAdapter() {
-        adapter = new ContributionsListAdapter(this);
+      adapter = new ContributionsListAdapter(this, mediaClient);
         adapter.setHasStableIds(true);
     }
 

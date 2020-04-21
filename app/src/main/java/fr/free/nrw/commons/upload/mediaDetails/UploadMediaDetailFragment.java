@@ -3,15 +3,10 @@ package fr.free.nrw.commons.upload.mediaDetails;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -24,7 +19,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.github.chrisbanes.photoview.PhotoView;
-import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.filepicker.UploadableFile;
@@ -32,18 +26,16 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.upload.Description;
-import fr.free.nrw.commons.upload.DescriptionsAdapter;
 import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageDialogFragment;
-import fr.free.nrw.commons.upload.Title;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
+import fr.free.nrw.commons.upload.UploadMediaDetail;
+import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
 import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.disposables.Disposable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,8 +45,10 @@ import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
 
+//import fr.free.nrw.commons.upload.DescriptionsAdapter;
+
 public class UploadMediaDetailFragment extends UploadBaseFragment implements
-        UploadMediaDetailsContract.View {
+        UploadMediaDetailsContract.View, UploadMediaDetailAdapter.EventListener {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
@@ -64,8 +58,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     AppCompatImageButton ibExpandCollapse;
     @BindView(R.id.ll_container_media_detail)
     LinearLayout llContainerMediaDetail;
-    @BindView(R.id.et_title)
-    EditText etTitle;
     @BindView(R.id.rv_descriptions)
     RecyclerView rvDescriptions;
     @BindView(R.id.backgroundImage)
@@ -74,12 +66,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     AppCompatButton btnNext;
     @BindView(R.id.btn_previous)
     AppCompatButton btnPrevious;
-    private DescriptionsAdapter descriptionsAdapter;
+    private UploadMediaDetailAdapter uploadMediaDetailAdapter;
     @BindView(R.id.btn_copy_prev_title_desc)
     AppCompatButton btnCopyPreviousTitleDesc;
 
     private UploadModel.UploadItem uploadItem;
-    private List<Description> descriptions;
+    private List<UploadMediaDetail> descriptions;
 
     @Inject
     UploadMediaDetailsContract.UserActionListener presenter;
@@ -89,10 +81,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     JsonKvStore defaultKvStore;
 
     private UploadableFile uploadableFile;
-    private String source;
     private Place place;
 
-    private Title title;
     private boolean isExpanded = true;
 
     private UploadMediaDetailFragmentCallback callback;
@@ -106,9 +96,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         super.onCreate(savedInstanceState);
     }
 
-    public void setImageTobeUploaded(UploadableFile uploadableFile, String source, Place place) {
+    public void setImageTobeUploaded(UploadableFile uploadableFile, Place place) {
         this.uploadableFile = uploadableFile;
-        this.source = source;
         this.place = place;
     }
 
@@ -129,25 +118,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private void init() {
         tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
                 callback.getTotalNumberOfSteps()));
-        title = new Title();
         initRecyclerView();
         initPresenter();
-        Disposable disposable = RxTextView.textChanges(etTitle)
-                .subscribe(text -> {
-                    if (!TextUtils.isEmpty(text)) {
-                        btnNext.setEnabled(true);
-                        btnNext.setClickable(true);
-                        btnNext.setAlpha(1.0f);
-                        title.setTitleText(text.toString());
-                        uploadItem.setTitle(title);
-                    } else {
-                        btnNext.setAlpha(0.5f);
-                        btnNext.setEnabled(false);
-                        btnNext.setClickable(false);
-                    }
-                });
-        compositeDisposable.add(disposable);
-        presenter.receiveImage(uploadableFile, source, place);
+        presenter.receiveImage(uploadableFile, place);
 
         if (callback.getIndexInViewFlipper(this) == 0) {
             btnPrevious.setEnabled(false);
@@ -166,36 +139,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
         attachImageViewScaleChangeListener();
 
-        addEtTitleTouchListener();
-    }
-
-    /**
-     * Handles the drawable click listener for Edit Text
-     */
-    private void addEtTitleTouchListener() {
-        etTitle.setOnTouchListener((v, event) -> {
-            //2 is for drawable right
-            float twelveDpInPixels = convertDpToPixel(12, getContext());
-            if (event.getAction() == MotionEvent.ACTION_UP && etTitle.getCompoundDrawables() != null
-                    && etTitle.getCompoundDrawables().length > 2 && etTitle
-                    .getCompoundDrawables()[2].getBounds()
-                    .contains((int) (etTitle.getWidth() - (event.getX() + twelveDpInPixels)),
-                            (int) (event.getY() - twelveDpInPixels))) {
-                showInfoAlert(R.string.media_detail_title, R.string.title_info);
-                return true;
-            }
-            return false;
-        });
-    }
-
-    /**
-     * converts dp to pixel
-     * @param dp
-     * @param context
-     * @return
-     */
-    private float convertDpToPixel(float dp, Context context) {
-        return dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
     /**
@@ -217,13 +160,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     /**
-     * init the recycler veiw
+     * init the description recycler veiw and caption recyclerview
      */
     private void initRecyclerView() {
-        descriptionsAdapter = new DescriptionsAdapter(defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE, ""));
-        descriptionsAdapter.setCallback(this::showInfoAlert);
+        uploadMediaDetailAdapter = new UploadMediaDetailAdapter(defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE, ""));
+        uploadMediaDetailAdapter.setCallback(this::showInfoAlert);
+        uploadMediaDetailAdapter.setEventListener(this);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvDescriptions.setAdapter(descriptionsAdapter);
+        rvDescriptions.setAdapter(uploadMediaDetailAdapter);
     }
 
     /**
@@ -237,7 +181,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
-        uploadItem.setDescriptions(descriptionsAdapter.getDescriptions());
+        uploadItem.setMediaDetails(uploadMediaDetailAdapter.getUploadMediaDetails());
         presenter.verifyImageQuality(uploadItem);
     }
 
@@ -248,9 +192,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.btn_add_description)
     public void onButtonAddDescriptionClicked() {
-        Description description = new Description();
-        description.setManuallyAdded(true);//This was manually added by the user
-        descriptionsAdapter.addDescription(description);
+        UploadMediaDetail uploadMediaDetail = new UploadMediaDetail();
+        uploadMediaDetail.setManuallyAdded(true);//This was manually added by the user
+        uploadMediaDetailAdapter.addDescription(uploadMediaDetail);
     }
 
     @Override
@@ -279,11 +223,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void onImageProcessed(UploadItem uploadItem, Place place) {
         this.uploadItem = uploadItem;
-        if (uploadItem.getTitle() != null) {
-            etTitle.setText(uploadItem.getTitle().toString());
-        }
-
-        descriptions = uploadItem.getDescriptions();
+        descriptions = uploadItem.getUploadMediaDetails();
         photoViewBackgroundImage.setImageURI(uploadItem.getMediaUri());
         setDescriptionsInAdapter(descriptions);
     }
@@ -302,11 +242,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                         getString(R.string.upload_nearby_place_found_description),
                         place.getName()),
                 () -> {
-                    etTitle.setText(place.getName());
-                    Description description = new Description();
-                    description.setLanguageCode("en");
-                    description.setDescriptionText(place.getLongDescription());
-                    descriptions = Arrays.asList(description);
+                    descriptions = new ArrayList<>(Arrays.asList(new UploadMediaDetail(place)));
                     setDescriptionsInAdapter(descriptions);
                 },
                 () -> {
@@ -376,9 +312,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void setTitleAndDescription(String title, List<Description> descriptions) {
-        etTitle.setText(title);
-        setDescriptionsInAdapter(descriptions);
+    public void setCaptionsAndDescriptions(List<UploadMediaDetail> uploadMediaDetails) {
+        setDescriptionsInAdapter(uploadMediaDetails);
     }
 
     private void deleteThisPicture() {
@@ -412,6 +347,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 uploadItem.getGpsCoords().getDecLongitude(), 0.0f));
     }
 
+    @Override
+    public void onPrimaryCaptionTextChange(boolean isNotEmpty) {
+        btnNext.setEnabled(isNotEmpty);
+        btnNext.setClickable(isNotEmpty);
+        btnNext.setAlpha(isNotEmpty ? 1.0f: 0.5f);
+    }
+
 
     public interface UploadMediaDetailFragmentCallback extends Callback {
 
@@ -424,15 +366,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         presenter.fetchPreviousTitleAndDescription(callback.getIndexInViewFlipper(this));
     }
 
-    private void setDescriptionsInAdapter(List<Description> descriptions) {
-        if (descriptions == null) {
-            descriptions = new ArrayList<>();
-        }
-        if (descriptions.size() == 0) {
-            descriptionsAdapter.addDescription(new Description());
-        } else {
-            descriptionsAdapter.setItems(descriptions);
-        }
+    private void setDescriptionsInAdapter(List<UploadMediaDetail> uploadMediaDetails){
+        uploadMediaDetailAdapter.setItems(uploadMediaDetails);
     }
-
 }

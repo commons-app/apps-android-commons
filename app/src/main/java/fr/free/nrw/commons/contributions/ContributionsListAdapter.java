@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.R;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -17,10 +19,13 @@ import java.util.List;
 public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionViewHolder> {
 
     private Callback callback;
+    private final MediaClient mediaClient;
     private List<Contribution> contributions;
 
-    public ContributionsListAdapter(final Callback callback) {
+    public ContributionsListAdapter(Callback callback,
+        MediaClient mediaClient) {
         this.callback = callback;
+        this.mediaClient = mediaClient;
         contributions = new ArrayList<>();
         setHasStableIds(true);
     }
@@ -34,7 +39,7 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
     public ContributionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ContributionViewHolder viewHolder = new ContributionViewHolder(
                 LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.layout_contribution, parent, false), callback);
+                        .inflate(R.layout.layout_contribution, parent, false), callback, mediaClient);
         return viewHolder;
     }
 

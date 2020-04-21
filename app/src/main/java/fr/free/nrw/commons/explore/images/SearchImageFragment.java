@@ -1,5 +1,9 @@
 package fr.free.nrw.commons.explore.images;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+import static fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_ID_PREFIX;
+
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -8,23 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.pedrogomez.renderers.RVRendererAdapter;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.pedrogomez.renderers.RVRendererAdapter;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
@@ -37,10 +30,13 @@ import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 
 /**
  * Displays the image search screen.
@@ -66,6 +62,11 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     @Inject
     @Named("default_preferences")
     JsonKvStore defaultKvStore;
+
+    /**
+     * A variable to store number of list items for whom API has been called to fetch captions
+     */
+    private int mediaSize = 0;
 
     private RVRendererAdapter<Media> imagesAdapter;
     private List<Media> queryList = new ArrayList<>();
@@ -101,7 +102,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_browse_image, container, false);
         ButterKnife.bind(this, rootView);
-        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+        if (getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             imagesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         }
         else{
@@ -198,9 +199,38 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             progressBar.setVisibility(GONE);
             imagesAdapter.addAll(mediaList);
             imagesAdapter.notifyDataSetChanged();
-            ((SearchActivity) getContext()).viewPagerNotifyDataSetChanged();
+            ((SearchActivity)getContext()).viewPagerNotifyDataSetChanged();
+            for (Media m : mediaList) {
+                final String pageId = m.getPageId();
+                if (pageId != null) {
+                    replaceTitlesWithCaptions(PAGE_ID_PREFIX + pageId, mediaSize++);
+                }
+            }
         }
     }
+
+    /**
+     * In explore we first show title and simultaneously call the API to retrieve captions
+     * When captions are retrieved they replace title
+     */
+
+        public void replaceTitlesWithCaptions(String wikibaseIdentifier, int position) {
+            compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseIdentifier)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                    .subscribe(subscriber -> {
+                        handleLabelforImage(subscriber, position);
+                    }));
+
+        }
+
+        private void handleLabelforImage(String s, int position) {
+            if (!s.trim().equals(getString(R.string.detail_caption_empty))) {
+                imagesAdapter.getItem(position).setThumbnailTitle(s);
+                imagesAdapter.notifyDataSetChanged();
+            }
+        }
 
     /**
      * Logs and handles API error scenario
@@ -221,7 +251,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     private void initErrorView() {
         progressBar.setVisibility(GONE);
         imagesNotFoundView.setVisibility(VISIBLE);
-        imagesNotFoundView.setText(getString(R.string.images_not_found));
+        imagesNotFoundView.setText(getString(R.string.images_not_found,query));
     }
 
     /**

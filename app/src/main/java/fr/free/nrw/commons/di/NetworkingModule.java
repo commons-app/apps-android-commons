@@ -1,24 +1,8 @@
 package fr.free.nrw.commons.di;
 
 import android.content.Context;
-
 import androidx.annotation.NonNull;
-
 import com.google.gson.Gson;
-
-import org.wikipedia.csrf.CsrfTokenClient;
-import org.wikipedia.dataclient.Service;
-import org.wikipedia.dataclient.ServiceFactory;
-import org.wikipedia.dataclient.WikiSite;
-import org.wikipedia.json.GsonUtil;
-import org.wikipedia.login.LoginClient;
-
-import java.io.File;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
@@ -26,16 +10,30 @@ import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.actions.PageEditInterface;
 import fr.free.nrw.commons.category.CategoryInterface;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.media.MediaDetailInterface;
 import fr.free.nrw.commons.media.MediaInterface;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.mwapi.UserInterface;
 import fr.free.nrw.commons.review.ReviewInterface;
 import fr.free.nrw.commons.upload.UploadInterface;
+import fr.free.nrw.commons.upload.WikiBaseInterface;
+import fr.free.nrw.commons.upload.depicts.DepictsInterface;
 import fr.free.nrw.commons.wikidata.WikidataInterface;
+import java.io.File;
+import java.util.concurrent.TimeUnit;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import okhttp3.Cache;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
+import org.wikipedia.csrf.CsrfTokenClient;
+import org.wikipedia.dataclient.Service;
+import org.wikipedia.dataclient.ServiceFactory;
+import org.wikipedia.dataclient.WikiSite;
+import org.wikipedia.json.GsonUtil;
+import org.wikipedia.login.LoginClient;
 import timber.log.Timber;
 
 @Module
@@ -72,7 +70,7 @@ public class NetworkingModule {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> {
             Timber.tag("OkHttp").v(message);
         });
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        httpLoggingInterceptor.level(BuildConfig.DEBUG ? Level.BODY: Level.BASIC);
         return httpLoggingInterceptor;
     }
 
@@ -86,8 +84,7 @@ public class NetworkingModule {
                 toolsForgeUrl,
                 WIKIDATA_SPARQL_QUERY_URL,
                 BuildConfig.WIKIMEDIA_CAMPAIGNS_URL,
-                BuildConfig.WIKIMEDIA_API_HOST,
-                gson);
+            gson);
     }
 
     @Named(NAMED_COMMONS_CSRF)
@@ -133,6 +130,7 @@ public class NetworkingModule {
         return new WikiSite(BuildConfig.WIKIDATA_URL);
     }
 
+
     /**
      * Gson objects are very heavy. The app should ideally be using just one instance of it instead of creating new instances everywhere.
      * @return returns a singleton Gson instance
@@ -161,6 +159,18 @@ public class NetworkingModule {
     @Singleton
     public ReviewInterface provideReviewInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, ReviewInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public DepictsInterface provideDepictsInterface(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikidataWikiSite) {
+        return ServiceFactory.get(wikidataWikiSite, BuildConfig.WIKIDATA_URL, DepictsInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public WikiBaseInterface provideWikiBaseInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, WikiBaseInterface.class);
     }
 
     @Provides
@@ -196,6 +206,12 @@ public class NetworkingModule {
     @Singleton
     public MediaInterface provideMediaInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, MediaInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public MediaDetailInterface providesMediaDetailInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikisite) {
+        return ServiceFactory.get(commonsWikisite, BuildConfig.COMMONS_URL, MediaDetailInterface.class);
     }
 
     @Provides

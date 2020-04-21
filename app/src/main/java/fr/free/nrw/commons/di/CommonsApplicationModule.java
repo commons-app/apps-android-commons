@@ -7,10 +7,6 @@ import android.content.Context;
 import android.view.inputmethod.InputMethodManager;
 import androidx.collection.LruCache;
 import androidx.room.Room;
-import androidx.room.RoomDatabase.Builder;
-import androidx.room.migration.Migration;
-import androidx.sqlite.db.SupportSQLiteDatabase;
-import com.github.varunpant.quadtree.QuadTree;
 import com.google.gson.Gson;
 import dagger.Module;
 import dagger.Provides;
@@ -53,7 +49,6 @@ public class CommonsApplicationModule {
     private Context applicationContext;
     public static final String IO_THREAD="io_thread";
     public static final String MAIN_THREAD="main_thread";
-    private AppDatabase appDatabase;
 
     public CommonsApplicationModule(Context applicationContext) {
         this.applicationContext = applicationContext;
@@ -107,6 +102,11 @@ public class CommonsApplicationModule {
     public ContentProviderClient provideCategoryContentProviderClient(Context context) {
         return context.getContentResolver().acquireContentProviderClient(BuildConfig.CATEGORY_AUTHORITY);
     }
+
+    /**
+     * This method is used to provide instance of DepictsContentProviderClient
+     * @param context context
+     * @return DepictsContentProviderClient*/
 
     /**
      * This method is used to provide instance of RecentSearchContentProviderClient
@@ -221,71 +221,15 @@ public class CommonsApplicationModule {
         return Objects.toString(AppAdapter.get().getUserName(), "");
     }
 
-    /**
-     * Provides quad tree
-     *
-     * @return
-     */
-    @Provides
-    public QuadTree providesQuadTres() {
-        return new QuadTree<>(-180, -90, +180, +90);
-    }
-
     @Provides
     @Singleton
     public AppDatabase provideAppDataBase() {
-        Builder<AppDatabase> appDatabaseBuilder = Room
-            .databaseBuilder(applicationContext, AppDatabase.class, "commons_room.db");
-        appDatabaseBuilder.addMigrations(MIGRATION_1_2);
-        appDatabase = appDatabaseBuilder.build();
-        return appDatabase;
+        return Room.databaseBuilder(applicationContext, AppDatabase.class, "commons_room.db").build();
     }
 
-    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
-        @Override
-        public void migrate(SupportSQLiteDatabase database) {
-            database.execSQL("DROP TABLE `contribution`");
-            database.execSQL("CREATE TABLE IF NOT EXISTS `contribution` ("
-                + "`localUri` TEXT,"
-                + " `thumbUrl` TEXT,"
-                + " `imageUrl` TEXT,"
-                + " `filename` TEXT,"
-                + " `description` TEXT,"
-                + " `discussion` TEXT,"
-                + " `dateCreated` INTEGER,"
-                + " `dateUploaded` INTEGER,"
-                + " `width` INTEGER NOT NULL,"
-                + " `height` INTEGER NOT NULL,"
-                + " `license` TEXT,"
-                + " `licenseUrl` TEXT,"
-                + " `creator` TEXT,"
-                + " `categories` TEXT,"
-                + " `requestedDeletion`"
-                + " INTEGER NOT NULL,"
-                + " `descriptions` TEXT,"
-                + " `tags` TEXT,"
-                + " `coordinates` TEXT,"
-                + " `pageId` INTEGER NOT NULL,"
-                + " `contentUri` TEXT,"
-                + " `source` TEXT,"
-                + " `editSummary` TEXT,"
-                + " `state` INTEGER NOT NULL,"
-                + " `transferred` INTEGER NOT NULL,"
-                + " `decimalCoords` TEXT,"
-                + " `isMultiple` INTEGER NOT NULL,"
-                + " `wikiDataEntityId` TEXT,"
-                + " `wikiItemName` TEXT,"
-                + " `p18Value` TEXT,"
-                + " `contentProviderUri` TEXT,"
-                + " `dateCreatedSource` TEXT,"
-                + " `dataLength` INTEGER NOT NULL,"
-                + " PRIMARY KEY(`pageId`))");
-        }
-    };
-
     @Provides
-    public ContributionDao providesContributionsDao() {
-        return appDatabase.getContributionDao();
+    public ContributionDao providesContributionsDao(AppDatabase appDatabase) {
+        return appDatabase.contributionDao();
     }
 
     @Provides

@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload
 
 import androidx.exifinterface.media.ExifInterface
+import fr.free.nrw.commons.location.LatLng
 import timber.log.Timber
 import java.io.IOException
 import java.io.InputStream
@@ -22,15 +23,12 @@ class ImageCoordinates internal constructor(exif: ExifInterface?) {
      * Construct from a stream.
      */
     internal constructor(stream: InputStream) : this(ExifInterface(stream))
-
     /**
      * Construct from the file path of the image.
      * @param path file path of the image
      */
     @Throws(IOException::class)
     internal constructor(path: String) : this(ExifInterface(path))
-
-
 
     init {
         //If image has no EXIF data and user has enabled GPS setting, get user's location
@@ -54,6 +52,8 @@ class ImageCoordinates internal constructor(exif: ExifInterface?) {
             }
         }
     }
+
+    val latLng: LatLng? get() = LatLng(decLatitude, decLongitude, -1.0f)
 
     /**
      * Convert a string to an accurate Degree

@@ -471,7 +471,7 @@
   <string name="error_occurred_in_picking_images">Si è verificato un errore durante la selezione delle immagini</string>
   <string name="image_chooser_title">Scegli le immagini da caricare</string>
   <string name="please_wait">Attendi per favore…</string>
-  <string name="previous_image_title_description">Copia titolo/descrizione precedente</string>
+  <string name="previous_image_caption_description">Copia titolo/descrizione precedente</string>
   <string name="previous_button_tooltip_message">Clicca per riusare il titolo e la descrizione dell\'immagine precedente e adattarli all\'immagine attuale.</string>
   <string name="skip_image">Salta questa immagine</string>
   <string name="exif_tag_name_author">Autore</string>

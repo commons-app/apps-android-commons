@@ -1,62 +1,5 @@
 package fr.free.nrw.commons;
 
-import android.annotation.SuppressLint;
-import android.app.Application;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-import android.os.Build;
-import android.os.Process;
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.imagepipeline.core.ImagePipeline;
-import com.facebook.imagepipeline.core.ImagePipelineConfig;
-import com.mapbox.mapboxsdk.Mapbox;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
-
-import io.reactivex.Completable;
-import org.acra.ACRA;
-import org.acra.annotation.AcraCore;
-import org.acra.annotation.AcraDialog;
-import org.acra.annotation.AcraMailSender;
-import org.acra.data.StringFormat;
-import org.wikipedia.AppAdapter;
-import org.wikipedia.language.AppLanguageLookUpTable;
-
-import java.io.File;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
-import fr.free.nrw.commons.category.CategoryDao;
-import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler;
-import fr.free.nrw.commons.concurrency.ThreadPoolService;
-import fr.free.nrw.commons.data.DBOpenHelper;
-import fr.free.nrw.commons.db.AppDatabase;
-import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.logging.FileLoggingTree;
-import fr.free.nrw.commons.logging.LogUtils;
-import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.upload.FileUtils;
-import fr.free.nrw.commons.utils.ConfigUtils;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.internal.functions.Functions;
-import io.reactivex.plugins.RxJavaPlugins;
-import io.reactivex.schedulers.Schedulers;
-import timber.log.Timber;
-
 import static fr.free.nrw.commons.data.DBOpenHelper.CONTRIBUTIONS_TABLE;
 import static org.acra.ReportField.ANDROID_VERSION;
 import static org.acra.ReportField.APP_VERSION_CODE;
@@ -64,6 +7,57 @@ import static org.acra.ReportField.APP_VERSION_NAME;
 import static org.acra.ReportField.PHONE_MODEL;
 import static org.acra.ReportField.STACK_TRACE;
 import static org.acra.ReportField.USER_COMMENT;
+
+import android.annotation.SuppressLint;
+import android.app.Application;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
+import android.os.Process;
+import android.util.Log;
+import androidx.annotation.NonNull;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipeline;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.mapbox.mapboxsdk.Mapbox;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
+
+import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
+import fr.free.nrw.commons.category.CategoryDao;
+import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler;
+import fr.free.nrw.commons.concurrency.ThreadPoolService;
+import fr.free.nrw.commons.contributions.ContributionDao;
+import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.logging.FileLoggingTree;
+import fr.free.nrw.commons.logging.LogUtils;
+import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.upload.FileUtils;
+import fr.free.nrw.commons.utils.ConfigUtils;
+import io.reactivex.Completable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.internal.functions.Functions;
+import io.reactivex.plugins.RxJavaPlugins;
+import io.reactivex.schedulers.Schedulers;
+import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
+import javax.inject.Inject;
+import javax.inject.Named;
+import org.acra.ACRA;
+import org.acra.annotation.AcraCore;
+import org.acra.annotation.AcraDialog;
+import org.acra.annotation.AcraMailSender;
+import org.acra.data.StringFormat;
+import org.wikipedia.AppAdapter;
+import org.wikipedia.language.AppLanguageLookUpTable;
+import timber.log.Timber;
 
 @AcraCore(
         buildConfigClass = BuildConfig.class,
@@ -120,8 +114,7 @@ public class CommonsApplication extends Application {
         return languageLookUpTable;
     }
 
-    @Inject
-    AppDatabase appDatabase;
+    @Inject ContributionDao contributionDao;
 
     /**
      * Used to declare and initialize various components and dependencies
@@ -299,7 +292,7 @@ public class CommonsApplication extends Application {
 
         CategoryDao.Table.onDelete(db);
         dbOpenHelper.deleteTable(db,CONTRIBUTIONS_TABLE);//Delete the contributions table in the existing db on older versions
-        appDatabase.getContributionDao().deleteAll();
+        contributionDao.deleteAll();
         BookmarkPicturesDao.Table.onDelete(db);
         BookmarkLocationsDao.Table.onDelete(db);
     }

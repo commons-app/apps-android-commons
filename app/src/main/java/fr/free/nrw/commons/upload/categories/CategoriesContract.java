@@ -10,7 +10,7 @@ import fr.free.nrw.commons.category.CategoryItem;
  */
 public interface CategoriesContract {
 
-    public interface View {
+    interface View {
 
         void showProgress(boolean shouldShow);
 
@@ -20,16 +20,13 @@ public interface CategoriesContract {
 
         void setCategories(List<CategoryItem> categories);
 
-        void addCategory(CategoryItem category);
-
         void goToNextScreen();
 
         void showNoCategorySelected();
 
-        void setSelectedCategories(List<CategoryItem> selectedCategories);
     }
 
-    public interface UserActionListener extends BasePresenter<View> {
+    interface UserActionListener extends BasePresenter<View> {
 
         void searchForCategories(String query);
 
