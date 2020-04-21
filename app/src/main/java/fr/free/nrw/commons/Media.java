@@ -13,6 +13,7 @@ import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import org.apache.commons.lang3.StringUtils;
@@ -98,6 +99,40 @@ public class Media implements Parcelable {
         this.dateCreated = dateCreated;
         this.dateUploaded = dateUploaded;
         this.creator = creator;
+    }
+
+    public Media(String pageId,
+        Uri localUri,
+        String thumbUrl,
+        String imageUrl,
+        String filename,
+        String description,
+        String discussion,
+        long dataLength,
+        Date dateCreated,
+        Date dateUploaded,
+        String license,
+        String licenseUrl,
+        String creator,
+        List<String> categories,
+        boolean requestedDeletion,
+        LatLng coordinates) {
+        this.pageId = pageId;
+        this.localUri = localUri;
+        this.thumbUrl = thumbUrl;
+        this.imageUrl = imageUrl;
+        this.filename = filename;
+        this.description = description;
+        this.discussion = discussion;
+        this.dataLength = dataLength;
+        this.dateCreated = dateCreated;
+        this.dateUploaded = dateUploaded;
+        this.license = license;
+        this.licenseUrl = licenseUrl;
+        this.creator = creator;
+        this.categories = categories;
+        this.requestedDeletion = requestedDeletion;
+        this.coordinates = coordinates;
     }
 
     public Media(Uri localUri, String filename,

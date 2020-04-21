@@ -169,6 +169,17 @@ public class Contribution extends Media {
         dest.writeSerializable((HashMap) captions);
     }
 
+    public Contribution(Media media) {
+        super(media.getPageId(),
+            media.getLocalUri(), media.getThumbUrl(), media.getImageUrl(), media.getFilename(),
+            media.getDescription(),
+            media.getDiscussion(),
+            media.getDataLength(), media.getDateCreated(), media.getDateUploaded(),
+            media.getLicense(), media.getLicenseUrl(), media.getCreator(), media.getCategories(),
+            media.isRequestedDeletion(), media.getCoordinates());
+        this.state = STATE_COMPLETED;
+    }
+
     protected Contribution(final Parcel in) {
         super(in);
         _id = in.readLong();

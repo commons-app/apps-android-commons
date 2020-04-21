@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
 import fr.free.nrw.commons.BasePresenter;
-import fr.free.nrw.commons.Media;
 import java.util.List;
 
 /**
@@ -22,14 +21,6 @@ public class ContributionsListContract {
 
   public interface UserActionListener extends BasePresenter<View> {
 
-    Contribution getContributionsWithTitle(String uri);
-
     void deleteUpload(Contribution contribution);
-
-    Media getItemAtPosition(int i);
-
-    void updateContribution(Contribution contribution);
-
-    void fetchMediaDetails(Contribution contribution);
   }
 }

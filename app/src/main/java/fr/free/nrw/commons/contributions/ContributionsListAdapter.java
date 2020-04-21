@@ -1,16 +1,12 @@
 package fr.free.nrw.commons.contributions;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.R;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -22,8 +18,8 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
     private final MediaClient mediaClient;
     private List<Contribution> contributions;
 
-    public ContributionsListAdapter(Callback callback,
-        MediaClient mediaClient) {
+    ContributionsListAdapter(final Callback callback,
+        final MediaClient mediaClient) {
         this.callback = callback;
         this.mediaClient = mediaClient;
         contributions = new ArrayList<>();
@@ -36,21 +32,17 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
      */
     @NonNull
     @Override
-    public ContributionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ContributionViewHolder viewHolder = new ContributionViewHolder(
+    public ContributionViewHolder onCreateViewHolder(@NonNull final ViewGroup parent,
+        final int viewType) {
+        final ContributionViewHolder viewHolder = new ContributionViewHolder(
                 LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.layout_contribution, parent, false), callback, mediaClient);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ContributionViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ContributionViewHolder holder, final int position) {
         final Contribution contribution = contributions.get(position);
-        if (TextUtils.isEmpty(contribution.getThumbUrl())
-            && contribution.getState() == Contribution.STATE_COMPLETED) {
-            callback.fetchMediaUriFor(contribution);
-        }
-
         holder.init(position, contribution);
     }
 
@@ -64,13 +56,13 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
         notifyDataSetChanged();
     }
 
-    public Contribution getContributionForPosition(int position) {
+    Contribution getContributionForPosition(final int position) {
         return contributions.get(position);
     }
 
     @Override
-    public long getItemId(int position) {
-        return contributions.get(position).pageId;
+    public long getItemId(final int position) {
+        return Integer.parseInt(contributions.get(position).getPageId());
     }
 
     public interface Callback {
@@ -80,7 +72,5 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
         void deleteUpload(Contribution contribution);
 
         void openMediaDetail(int contribution);
-
-        void fetchMediaUriFor(Contribution contribution);
     }
 }

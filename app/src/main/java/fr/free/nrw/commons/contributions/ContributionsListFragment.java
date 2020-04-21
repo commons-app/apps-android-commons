@@ -214,12 +214,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         callback.showDetail(position);
     }
 
-    @Override
-    public void fetchMediaUriFor(Contribution contribution) {
-        Timber.d("Fetching thumbnail for %s", contribution.filename);
-        contributionsListPresenter.fetchMediaDetails(contribution);
-    }
-
     public Media getMediaAtPosition(int i) {
         return adapter.getContributionForPosition(i);
     }

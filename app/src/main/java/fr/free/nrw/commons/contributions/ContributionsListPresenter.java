@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,18 +8,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionsListContract.UserActionListener;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -37,8 +32,6 @@ public class ContributionsListPresenter implements UserActionListener {
 
   @Inject
   SessionManager sessionManager;
-  @Inject
-  MediaDataExtractor mediaDataExtractor;
   @Inject
   MediaClient mediaClient;
   private CompositeDisposable compositeDisposable;
@@ -157,11 +150,6 @@ public class ContributionsListPresenter implements UserActionListener {
     compositeDisposable.clear();
   }
 
-  @Override
-  public Contribution getContributionsWithTitle(String title) {
-    return repository.getContributionWithFileName(title);
-  }
-
   /**
    * Delete a failed contribution from the local db
    *
@@ -174,38 +162,4 @@ public class ContributionsListPresenter implements UserActionListener {
         .subscribe());
   }
 
-  /**
-   * Returns a contribution at the specified cursor position
-   *
-   * @param i
-   * @return
-   */
-  @Nullable
-  @Override
-  public Media getItemAtPosition(int i) {
-    if (i == -1 || contributionList.size() < i + 1) {
-      return null;
-    }
-    return contributionList.get(i);
-  }
-
-  @Override
-  public void updateContribution(Contribution contribution) {
-    compositeDisposable.add(repository
-        .updateContribution(contribution)
-        .subscribeOn(ioThreadScheduler)
-        .subscribe());
-  }
-
-  @Override
-  public void fetchMediaDetails(Contribution contribution) {
-    compositeDisposable.add(mediaDataExtractor
-        .getMediaFromFileName(contribution.filename)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(media -> {
-          contribution.thumbUrl = media.thumbUrl;
-          updateContribution(contribution);
-        }));
-  }
 }
