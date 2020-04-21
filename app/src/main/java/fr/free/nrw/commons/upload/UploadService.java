@@ -162,7 +162,7 @@ public class UploadService extends HandlerService<Contribution> {
                         .subscribeOn(ioThreadScheduler)
                         .observeOn(mainThreadScheduler)
                         .subscribe(aLong->{
-                            contribution.set_id(aLong);
+                            contribution.setPageId(String.valueOf(aLong));
                             UploadService.super.queue(what, contribution);
                         }, Throwable::printStackTrace));
                 break;

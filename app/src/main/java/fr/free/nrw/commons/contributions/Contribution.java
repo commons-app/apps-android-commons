@@ -2,7 +2,6 @@ package fr.free.nrw.commons.contributions;
 
 import android.os.Parcel;
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
@@ -24,8 +23,6 @@ public class Contribution extends Media {
     public static final int STATE_QUEUED = 2;
     public static final int STATE_IN_PROGRESS = 3;
 
-    @PrimaryKey (autoGenerate = true)
-    private long _id;
     private int state;
     private long transferred;
     private String decimalCoords;
@@ -108,14 +105,6 @@ public class Contribution extends Media {
         return wikidataPlace;
     }
 
-    public long get_id() {
-        return _id;
-    }
-
-    public void set_id(final long _id) {
-        this._id = _id;
-    }
-
     public String getDecimalCoords() {
         return decimalCoords;
     }
@@ -161,7 +150,6 @@ public class Contribution extends Media {
     @Override
     public void writeToParcel(final Parcel dest, final int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeLong(_id);
         dest.writeInt(state);
         dest.writeLong(transferred);
         dest.writeString(decimalCoords);
@@ -182,7 +170,6 @@ public class Contribution extends Media {
 
     protected Contribution(final Parcel in) {
         super(in);
-        _id = in.readLong();
         state = in.readInt();
         transferred = in.readLong();
         decimalCoords = in.readString();

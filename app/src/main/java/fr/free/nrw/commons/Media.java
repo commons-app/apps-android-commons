@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.media.Depictions;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
@@ -13,7 +14,6 @@ import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import org.apache.commons.lang3.StringUtils;
@@ -51,6 +51,8 @@ public class Media implements Parcelable {
     /**
      * Wikibase Identifier associated with media files
      */
+    @PrimaryKey
+    @NonNull
     private String pageId;
     private List<String> categories; // as loaded at runtime?
     /**
@@ -91,7 +93,7 @@ public class Media implements Parcelable {
         String description,
         long dataLength, Date dateCreated, Date dateUploaded, String creator) {
         this.localUri = localUri;
-        this.thumbUrl = imageUrl;
+        thumbUrl = imageUrl;
         this.imageUrl = imageUrl;
         this.filename = filename;
         this.description = description;
@@ -245,11 +247,30 @@ public class Media implements Parcelable {
         return filename != null ? getPageTitle().getDisplayTextWithoutNamespace().replaceFirst("[.][^.]+$", "") : "";
     }
 
-    /**
-     * Set Caption(if available) as the thumbnail title of the image
-     */
-    public void setThumbnailTitle(String title) {
-        this.thumbnailTitle = title;
+    protected Media(Parcel in) {
+        localUri = in.readParcelable(Uri.class.getClassLoader());
+        thumbUrl = in.readString();
+        imageUrl = in.readString();
+        filename = in.readString();
+        thumbnailTitle = in.readString();
+        caption = in.readString();
+        description = in.readString();
+        discussion = in.readString();
+        dataLength = in.readLong();
+        long tmpDateCreated = in.readLong();
+        dateCreated = tmpDateCreated == -1 ? null : new Date(tmpDateCreated);
+        long tmpDateUploaded = in.readLong();
+        dateUploaded = tmpDateUploaded == -1 ? null : new Date(tmpDateUploaded);
+        license = in.readString();
+        licenseUrl = in.readString();
+        creator = in.readString();
+        pageId = in.readString();
+        final ArrayList<String> list = new ArrayList<>();
+        in.readStringList(list);
+        categories = list;
+        in.readParcelable(Depictions.class.getClassLoader());
+        requestedDeletion = in.readByte() != 0;
+        coordinates = in.readParcelable(LatLng.class.getClassLoader());
     }
 
     /**
@@ -377,11 +398,10 @@ public class Media implements Parcelable {
     }
 
     /**
-     * Sets the creation date of the file.
-     * @param date creation date as a Date
+     * Set Caption(if available) as the thumbnail title of the image
      */
-    public void setDateCreated(Date date) {
-        this.dateCreated = date;
+    public void setThumbnailTitle(String title) {
+        thumbnailTitle = title;
     }
 
     /**
@@ -552,6 +572,14 @@ public class Media implements Parcelable {
     }
 
     /**
+     * Sets the creation date of the file.
+     * @param date creation date as a Date
+     */
+    public void setDateCreated(Date date) {
+        dateCreated = date;
+    }
+
+    /**
      * Creates a way to transfer information between two or more
      * activities.
      * @param dest Instance of Parcel
@@ -559,51 +587,25 @@ public class Media implements Parcelable {
      */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(this.localUri, flags);
-        dest.writeString(this.thumbUrl);
-        dest.writeString(this.imageUrl);
-        dest.writeString(this.filename);
-        dest.writeString(this.thumbnailTitle);
-        dest.writeString(this.caption);
-        dest.writeString(this.description);
-        dest.writeString(this.discussion);
-        dest.writeLong(this.dataLength);
-        dest.writeLong(this.dateCreated != null ? this.dateCreated.getTime() : -1);
-        dest.writeLong(this.dateUploaded != null ? this.dateUploaded.getTime() : -1);
-        dest.writeString(this.license);
-        dest.writeString(this.licenseUrl);
-        dest.writeString(this.creator);
-        dest.writeString(this.pageId);
-        dest.writeStringList(this.categories);
-        dest.writeParcelable(this.depictions, flags);
-        dest.writeByte(this.requestedDeletion ? (byte) 1 : (byte) 0);
-        dest.writeParcelable(this.coordinates, flags);
-    }
-
-    protected Media(Parcel in) {
-        this.localUri = in.readParcelable(Uri.class.getClassLoader());
-        this.thumbUrl = in.readString();
-        this.imageUrl = in.readString();
-        this.filename = in.readString();
-        this.thumbnailTitle = in.readString();
-        this.caption = in.readString();
-        this.description = in.readString();
-        this.discussion = in.readString();
-        this.dataLength = in.readLong();
-        long tmpDateCreated = in.readLong();
-        this.dateCreated = tmpDateCreated == -1 ? null : new Date(tmpDateCreated);
-        long tmpDateUploaded = in.readLong();
-        this.dateUploaded = tmpDateUploaded == -1 ? null : new Date(tmpDateUploaded);
-        this.license = in.readString();
-        this.licenseUrl = in.readString();
-        this.creator = in.readString();
-        this.pageId = in.readString();
-        final ArrayList<String> list = new ArrayList<>();
-        in.readStringList(list);
-        this.categories=list;
-        in.readParcelable(Depictions.class.getClassLoader());
-        this.requestedDeletion = in.readByte() != 0;
-        this.coordinates = in.readParcelable(LatLng.class.getClassLoader());
+        dest.writeParcelable(localUri, flags);
+        dest.writeString(thumbUrl);
+        dest.writeString(imageUrl);
+        dest.writeString(filename);
+        dest.writeString(thumbnailTitle);
+        dest.writeString(caption);
+        dest.writeString(description);
+        dest.writeString(discussion);
+        dest.writeLong(dataLength);
+        dest.writeLong(dateCreated != null ? dateCreated.getTime() : -1);
+        dest.writeLong(dateUploaded != null ? dateUploaded.getTime() : -1);
+        dest.writeString(license);
+        dest.writeString(licenseUrl);
+        dest.writeString(creator);
+        dest.writeString(pageId);
+        dest.writeStringList(categories);
+        dest.writeParcelable(depictions, flags);
+        dest.writeByte(requestedDeletion ? (byte) 1 : (byte) 0);
+        dest.writeParcelable(coordinates, flags);
     }
 
     public static final Creator<Media> CREATOR = new Creator<Media>() {
