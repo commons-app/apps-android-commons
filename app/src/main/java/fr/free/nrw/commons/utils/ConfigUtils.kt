@@ -11,7 +11,7 @@ object ConfigUtils {
     @JvmStatic
     private fun Context.getVersionName(): String {
         return try {
-            this.packageManager.getPackageInfo(this.packageName, 0).versionName
+            packageManager.getPackageInfo(packageName, 0).versionName
         } catch (e: PackageManager.NameNotFoundException) {
             BuildConfig.VERSION_NAME
         }
@@ -19,6 +19,6 @@ object ConfigUtils {
 
     @JvmStatic
     fun Context.getVersionNameWithSha(): String {
-        return "${this.getVersionName()}~${BuildConfig.COMMIT_SHA}"
+        return "${getVersionName()}~${BuildConfig.COMMIT_SHA}"
     }
 }
