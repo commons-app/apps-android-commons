@@ -118,7 +118,7 @@ import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 public class NearbyParentFragment extends CommonsDaggerSupportFragment
         implements NearbyParentFragmentContract.View,
-        WikidataEditListener.WikidataP18EditListener, LocationUpdateListener {
+        WikidataEditListener.WikidataP18EditListener, LocationUpdateListener ,CheckBoxTriStates.Callback{
 
     private static final String CHECKBOX_STATE = "checkbox_state";
     @BindView(R.id.bottom_sheet) RelativeLayout rlBottomSheet;
@@ -229,7 +229,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
         isDarkTheme = systemThemeUtils.isDeviceInNightMode();
         cameraMoveListener= () -> presenter.onCameraMove(mapBox.getCameraPosition().target);
-        addCheckBoxCallback();
         presenter.attachView(this);
         initRvNearbyList();
         initThemePreferences();
@@ -290,10 +289,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         rvNearbyList.setLayoutManager(new LinearLayoutManager(getContext()));
         adapterFactory = new NearbyAdapterFactory(this, controller);
         rvNearbyList.setAdapter(adapterFactory.create(null));
-    }
-
-    private void addCheckBoxCallback() {
-        checkBoxTriStates.setCallback((o, state, b, b1) -> presenter.filterByMarkerType(o,state,b,b1));
     }
 
     private void performMapReadyActions() {
@@ -644,7 +639,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public boolean isCurrentLocationMarkerVisible() {
-        if (latLngBounds == null) {
+        if (latLngBounds == null || currentLocationMarker==null) {
             Timber.d("Map projection bounds are null");
             return false;
         } else {
@@ -968,6 +963,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     public void backButtonClicked() {
         presenter.backButtonClicked();
+    }
+
+    @Override
+    public void filterByMarkerType(@Nullable List<Label> selectedLabels, int state, boolean b,
+        boolean b1) {
+        presenter.filterByMarkerType(selectedLabels,state,b,b1);
     }
 
     /**
@@ -1509,5 +1510,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void startTheMap() {
         mapView.onStart();
         performMapReadyActions();
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        checkBoxTriStates.setCallback(this);
     }
 }
