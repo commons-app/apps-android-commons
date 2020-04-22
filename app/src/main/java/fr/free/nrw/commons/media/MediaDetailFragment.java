@@ -590,21 +590,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
     }
 
-    /**
-    * Returns captions for media details
-     *
-     * @param media object of class media
-     * @return caption as string
-     */
-    private String prettyCaption(Media media) {
-        String caption = media.getCaption().trim();
-        if (caption.equals("")) {
-            return getString(R.string.detail_caption_empty);
-        } else {
-            return caption;
-        }
-    }
-
     private String prettyDescription(Media media) {
         // @todo use UI language when multilingual descs are available
         String desc = media.getDescription();
