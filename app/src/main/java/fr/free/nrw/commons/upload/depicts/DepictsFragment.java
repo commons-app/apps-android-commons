@@ -66,6 +66,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         init();
+        presenter.getDepictedItems().observe(getViewLifecycleOwner(), this::setDepictsList);
     }
 
     /**
@@ -125,9 +126,11 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     @Override
     public void showError(Boolean value) {
-        if (value)
-        depictsSearchContainer.setError(getString(R.string.no_depiction_found));
-        else depictsSearchContainer.setErrorEnabled(false);
+        if (value) {
+            depictsSearchContainer.setError(getString(R.string.no_depiction_found));
+        } else {
+            depictsSearchContainer.setErrorEnabled(false);
+        }
     }
 
     @Override
@@ -167,8 +170,8 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      * Fetch thumbnail for the given entityId at the given position
      */
     @Override
-    public void fetchThumbnailUrlForEntity(String entityId, int position) {
-        presenter.fetchThumbnailForEntityId(entityId,position);
+    public void fetchThumbnailUrlForEntity(DepictedItem depictedItem) {
+        presenter.fetchThumbnailForEntityId(depictedItem);
     }
 
     /**

@@ -46,14 +46,16 @@ public class DepictsClient {
      */
     public Observable<DepictedItem> searchForDepictions(String query, int limit, int offset) {
         return depictsInterface.searchForDepicts(
-                query,
-                String.valueOf(limit),
-                Locale.getDefault().getLanguage(),
-                Locale.getDefault().getLanguage(),
-                String.valueOf(offset)
+            query,
+            String.valueOf(limit),
+            Locale.getDefault().getLanguage(),
+            Locale.getDefault().getLanguage(),
+            String.valueOf(offset)
         )
-                .flatMap(depictSearchResponse ->Observable.fromIterable(depictSearchResponse.getSearch()))
-                .map(DepictedItem::new);
+            .toObservable()
+            .flatMap( depictSearchResponse ->
+                Observable.fromIterable(depictSearchResponse.getSearch()))
+            .map(DepictedItem::new);
     }
 
     /**

@@ -9,6 +9,7 @@
     </inspection_tool>
     <inspection_tool class="ControlFlowStatementWithoutBraces" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="DefaultNotLastCaseInSwitch" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ExplicitThis" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="FieldMayBeFinal" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="LocalCanBeFinal" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="REPORT_VARIABLES" value="true" />

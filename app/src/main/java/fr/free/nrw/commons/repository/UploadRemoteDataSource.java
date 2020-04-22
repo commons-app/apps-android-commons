@@ -1,14 +1,5 @@
 package fr.free.nrw.commons.repository;
 
-import fr.free.nrw.commons.upload.ImageCoordinates;
-import java.io.IOException;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -16,14 +7,22 @@ import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadController;
 import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.upload.structure.depictions.DepictModel;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import java.io.IOException;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Locale;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * This class would act as the data source for remote operations for UploadActivity
@@ -189,15 +188,13 @@ public class UploadRemoteDataSource {
      * @param longitude
      * @return
      */
-    public Place getNearbyPlaces(double latitude, double longitude) {
-        try {
-            List<Place> fromWikidataQuery = nearbyPlaces.getFromWikidataQuery(new LatLng(latitude, longitude, 0.0f),
-                    Locale.getDefault().getLanguage(),
-                    NEARBY_RADIUS_IN_KILO_METERS);
-            return fromWikidataQuery.size() > 0 ? fromWikidataQuery.get(0) : null;
-        } catch (IOException e) {
-            return null;
-        }
+    public Place getNearbyPlaces(double latitude, double longitude) throws IOException {
+        List<Place> fromWikidataQuery = nearbyPlaces
+            .getFromWikidataQuery(new LatLng(latitude, longitude, 0.0f),
+                Locale.getDefault().getLanguage(),
+                NEARBY_RADIUS_IN_KILO_METERS);
+        return fromWikidataQuery.size() > 0 ? fromWikidataQuery.get(0) : null;
+
     }
 
     /**
@@ -220,9 +217,10 @@ public class UploadRemoteDataSource {
 
     /**
      * get all depictions
+     * @return
      */
 
-    public Observable<DepictedItem> searchAllEntities(String query) {
+    public Flowable<List<DepictedItem>> searchAllEntities(String query) {
         return depictModel.searchAllEntities(query);
     }
 

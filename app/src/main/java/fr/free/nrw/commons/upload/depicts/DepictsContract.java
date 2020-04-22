@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload.depicts;
 
+import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import fr.free.nrw.commons.BasePresenter;
@@ -71,11 +72,8 @@ public interface DepictsContract {
          */
         void verifyDepictions();
 
-        /**
-         * Fetch thumbnail for the Wikidata Item
-         * @param entityId entityId of the item
-         * @param position position of the item
-         */
-        void fetchThumbnailForEntityId(String entityId, int position);
+        LiveData<List<DepictedItem>> getDepictedItems();
+
+        void fetchThumbnailForEntityId(DepictedItem depictedItem);
     }
 }

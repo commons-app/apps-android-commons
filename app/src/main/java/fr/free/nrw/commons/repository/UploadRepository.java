@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.repository;
 
 import fr.free.nrw.commons.upload.ImageCoordinates;
+import io.reactivex.Flowable;
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 
@@ -284,7 +286,7 @@ public class UploadRepository {
      * @return
      */
 
-    public Observable<DepictedItem> searchAllEntities(String query) {
+    public Flowable<List<DepictedItem>> searchAllEntities(String query) {
         return remoteDataSource.searchAllEntities(query);
     }
 
@@ -294,7 +296,7 @@ public class UploadRepository {
      * @param decLongitude
      * @return
      */
-    public Place checkNearbyPlaces(double decLatitude, double decLongitude) {
+    public Place checkNearbyPlaces(double decLatitude, double decLongitude) throws IOException {
         return remoteDataSource.getNearbyPlaces(decLatitude, decLongitude);
     }
 
