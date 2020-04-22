@@ -221,6 +221,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        checkBoxTriStates.setCallback(this);
         //Restore checkbox's state
         if (null != savedInstanceState) {
             int checkBoxSavedState = savedInstanceState.getInt(CHECKBOX_STATE,
