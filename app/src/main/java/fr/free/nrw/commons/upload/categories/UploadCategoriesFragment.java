@@ -151,8 +151,8 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         DialogUtil.showAlertDialog(getActivity(),
                 getString(R.string.no_categories_selected),
                 getString(R.string.no_categories_selected_warning_desc),
-                getString(R.string.yes_submit),
-                getString(R.string.no_go_back),
+                getString(R.string.continue_message),
+                getString(R.string.cancel),
                 () -> goToNextScreen(),
                 null);
 
