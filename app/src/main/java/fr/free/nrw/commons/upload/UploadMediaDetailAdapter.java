@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.upload;
 
-import android.content.Context;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -215,13 +213,4 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         void onPrimaryCaptionTextChange(boolean isNotEmpty);
     }
 
-    /**
-     * converts dp to pixel
-     * @param dp
-     * @param context
-     * @return
-     */
-    private float convertDpToPixel(float dp, Context context) {
-        return dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
-    }
 }

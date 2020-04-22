@@ -149,7 +149,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private boolean categoriesPresent = false;
     private boolean depictionLoaded = false;
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
-    private ViewTreeObserver.OnScrollChangedListener scrollListener;
 
     //Had to make this class variable, to implement various onClicks, which access the media, also I fell why make separate variables when one can serve the purpose
     private Media media;
@@ -211,9 +210,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             authorLayout.setVisibility(GONE);
         }
 
-        // Progressively darken the image in the background when we scroll detail pane up
-        scrollListener = this::updateTheDarkness;
-        view.getViewTreeObserver().addOnScrollChangedListener(scrollListener);
         locale = getResources().getConfiguration().locale;
         return view;
     }
@@ -312,10 +308,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (layoutListener != null && getView() != null) {
             getView().getViewTreeObserver().removeGlobalOnLayoutListener(layoutListener); // old Android was on crack. CRACK IS WHACK
             layoutListener = null;
-        }
-        if (scrollListener != null && getView() != null) {
-            getView().getViewTreeObserver().removeOnScrollChangedListener(scrollListener);
-            scrollListener = null;
         }
 
         compositeDisposable.clear();
@@ -583,16 +575,19 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         return item;
     }
 
-    private void updateTheDarkness() {
-        // You must face the darkness alone
-        int scrollY = scrollView.getScrollY();
-        int scrollMax = getView().getHeight();
-        float scrollPercentage = (float) scrollY / (float) scrollMax;
-        final float transparencyMax = 0.75f;
-        if (scrollPercentage > transparencyMax) {
-            scrollPercentage = transparencyMax;
+    /**
+    * Returns captions for media details
+     *
+     * @param media object of class media
+     * @return caption as string
+     */
+    private String prettyCaption(Media media) {
+        String caption = media.getCaption().trim();
+        if (caption.equals("")) {
+            return getString(R.string.detail_caption_empty);
+        } else {
+            return caption;
         }
-        image.setAlpha(1.0f - scrollPercentage);
     }
 
     /**
