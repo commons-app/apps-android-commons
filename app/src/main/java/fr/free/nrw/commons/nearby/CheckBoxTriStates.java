@@ -22,7 +22,7 @@ public class CheckBoxTriStates extends AppCompatCheckBox {
 
     static public final int CHECKED = 1;
 
-    private int state;
+    private int state=UNKNOWN;
 
     private Callback callback;
 
