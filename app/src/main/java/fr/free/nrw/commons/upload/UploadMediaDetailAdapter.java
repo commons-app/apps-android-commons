@@ -1,11 +1,7 @@
 package fr.free.nrw.commons.upload;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -17,6 +13,7 @@ import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.google.android.material.textfield.TextInputLayout;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.AbstractTextWatcher;
 import java.util.ArrayList;
@@ -93,8 +90,14 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         @BindView(R.id.description_item_edit_text)
         AppCompatEditText descItemEditText;
 
+        @BindView(R.id.description_item_edit_text_input_layout)
+        TextInputLayout descInputLayout;
+
         @BindView(R.id.caption_item_edit_text)
         AppCompatEditText captionItemEditText;
+
+        @BindView(R.id.caption_item_edit_text_input_layout)
+        TextInputLayout captionInputLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -116,38 +119,19 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                 }));
 
             if (position == 0) {
-                captionItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getInfoIcon(),
-                        null);
-                captionItemEditText.setOnTouchListener((v, event) -> {
-                    //2 is for drawable right
-                    if (event.getAction() == MotionEvent.ACTION_UP && (event.getRawX() >= (captionItemEditText.getRight() - captionItemEditText.getCompoundDrawables()[2].getBounds().width()))) {
-                        if (getAdapterPosition() == 0) {
-                            callback.showAlert(R.string.media_detail_caption,
-                                    R.string.caption_info);
-                        }
-                        return true;
-                    }
-                    return false;
-                });
+                captionInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
+                captionInputLayout.setEndIconDrawable(R.drawable.mapbox_info_icon_default);
+                captionInputLayout.setEndIconOnClickListener(v ->
+                    callback.showAlert(R.string.media_detail_caption, R.string.caption_info));
 
-                descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getInfoIcon(),
-                        null);
-                descItemEditText.setOnTouchListener((v, event) -> {
-                    //2 is for drawable right
-                    float twelveDpInPixels = convertDpToPixel(12, descItemEditText.getContext());
-                    if (event.getAction() == MotionEvent.ACTION_UP && descItemEditText.getCompoundDrawables()[2].getBounds().contains((int)(descItemEditText.getWidth()-(event.getX()+twelveDpInPixels)),(int)(event.getY()-twelveDpInPixels))){
-                        if (getAdapterPosition() == 0) {
-                            callback.showAlert(R.string.media_detail_description,
-                                    R.string.description_info);
-                        }
-                        return true;
-                    }
-                    return false;
-                });
+                descInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
+                descInputLayout.setEndIconDrawable(R.drawable.mapbox_info_icon_default);
+                descInputLayout.setEndIconOnClickListener(v ->
+                    callback.showAlert(R.string.media_detail_description, R.string.description_info));
 
             } else {
-                captionItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-                descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+                captionInputLayout.setEndIconDrawable(null);
+                descInputLayout.setEndIconDrawable(null);
             }
 
             captionItemEditText.addTextChangedListener(new AbstractTextWatcher(
@@ -218,15 +202,6 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                 selectedLanguages.put(spinnerDescriptionLanguages, description.getLanguageCode());
             }
         }
-
-        /**
-         * Extracted out the method to get the icon drawable
-         */
-        private Drawable getInfoIcon() {
-            return descItemEditText.getContext()
-                    .getResources()
-                    .getDrawable(R.drawable.mapbox_info_icon_default);
-        }
     }
 
     public interface Callback {
@@ -238,13 +213,4 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         void onPrimaryCaptionTextChange(boolean isNotEmpty);
     }
 
-    /**
-     * converts dp to pixel
-     * @param dp
-     * @param context
-     * @return
-     */
-    private float convertDpToPixel(float dp, Context context) {
-        return dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
-    }
 }

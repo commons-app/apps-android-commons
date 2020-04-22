@@ -460,13 +460,10 @@ Upload your first media by tapping on the add button.</string>
   <string name="desc_language_Pacific">Pacific</string>
 
   <string name="no_categories_selected">No Categories Selected</string>
-  <string name="no_categories_selected_warning_desc">Images without categories are rarely usable. Are you sure you want to submit without selecting categories?</string>
+  <string name="no_categories_selected_warning_desc">Images without categories are rarely usable. Are you sure you want to continue without selecting categories?</string>
 
   <string name="no_depictions_selected">No Depictions Selected</string>
-  <string name="no_depictions_selected_warning_desc">Depictions help when searching for images. Are you sure you want to submit without selecting depictions?</string>
-
-  <string name="yes_submit">Yes, Submit</string>
-  <string name="no_go_back">No, Go Back</string>
+  <string name="no_depictions_selected_warning_desc">Images with depictions are more easily found and more likely to be used. Are you sure you want to continue without selecting depictions?</string>
 
   <string name="upload_flow_all_images_in_set">(For all images in set)</string>
   <string name="search_this_area">Search this area</string>

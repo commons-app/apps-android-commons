@@ -104,8 +104,8 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         DialogUtil.showAlertDialog(getActivity(),
             getString(R.string.no_depictions_selected),
             getString(R.string.no_depictions_selected_warning_desc),
-            getString(R.string.yes_submit),
-            getString(R.string.no_go_back),
+            getString(R.string.continue_message),
+            getString(R.string.cancel),
             this::goToNextScreen,
             null
         );

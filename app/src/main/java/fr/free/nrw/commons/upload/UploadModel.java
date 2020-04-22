@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import androidx.annotation.Nullable;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.filepicker.MimeTypeMapWrapper;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
@@ -106,8 +108,8 @@ public class UploadModel {
         Timber.d("File created date is %d", fileCreatedDate);
         final ImageCoordinates imageCoordinates = fileProcessor
                 .processFileCoordinates(similarImageInterface, uploadableFile.getFilePath());
-        final UploadItem uploadItem = new UploadItem(uploadableFile.getContentUri(),
-                Uri.parse(uploadableFile.getFilePath()),
+        final UploadItem uploadItem = new UploadItem(
+            Uri.parse(uploadableFile.getFilePath()),
                 uploadableFile.getMimeType(context), imageCoordinates, place, fileCreatedDate,
                 createdTimestampSource);
         if (place != null) {
@@ -204,7 +206,6 @@ public class UploadModel {
     @SuppressWarnings("WeakerAccess")
     public static class UploadItem {
 
-        private final Uri originalContentUri;
         private final Uri mediaUri;
         private final String mimeType;
         private ImageCoordinates gpsCoords;
@@ -214,13 +215,12 @@ public class UploadModel {
         private final String createdTimestampSource;
         private final BehaviorSubject<Integer> imageQuality;
         @SuppressLint("CheckResult")
-        UploadItem(final Uri originalContentUri,
-            final Uri mediaUri, final String mimeType,
+        UploadItem(final Uri mediaUri,
+            final String mimeType,
             final ImageCoordinates gpsCoords,
             final Place place,
             final long createdTimestamp,
             final String createdTimestampSource) {
-            this.originalContentUri = originalContentUri;
             this.createdTimestampSource = createdTimestampSource;
             uploadMediaDetails = new ArrayList<>(Arrays.asList(new UploadMediaDetail()));
             this.place = place;
@@ -267,10 +267,6 @@ public class UploadModel {
             this.uploadMediaDetails = uploadMediaDetails;
         }
 
-        public Uri getContentUri() {
-            return originalContentUri;
-        }
-
         @Override
         public boolean equals(@Nullable final Object obj) {
             if (!(obj instanceof UploadItem)) {
@@ -290,15 +286,13 @@ public class UploadModel {
          * Currently, the caption is used as a filename. If several languages have been entered, the first language is used.
          */
         public String getFileName() {
-            return uploadMediaDetails.get(0).getCaptionText();
+            return Utils.fixExtension(uploadMediaDetails.get(0).getCaptionText(),
+                MimeTypeMapWrapper.getExtensionFromMimeType(mimeType));
         }
 
         public void setGpsCoords(final ImageCoordinates gpsCoords) {
             this.gpsCoords = gpsCoords;
         }
 
-        public String getMimeType() {
-            return mimeType;
-        }
     }
 }
