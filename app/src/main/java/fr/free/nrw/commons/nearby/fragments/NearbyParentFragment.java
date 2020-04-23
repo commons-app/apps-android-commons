@@ -360,7 +360,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putInt(CHECKBOX_STATE,checkBoxTriStates.getState());
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }
