@@ -209,7 +209,7 @@ class FileProcessor @Inject constructor(
             .filter { it.size >= MIN_NEARBY_RESULTS }
             .take(1)
             .subscribe(
-                { depictsModel.nearbyPlaces = it },
+                { depictsModel.nearbyPlaces.offer(it) },
                 { Timber.e(it) }
             )
     }

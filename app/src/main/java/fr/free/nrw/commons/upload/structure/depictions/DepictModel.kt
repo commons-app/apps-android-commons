@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload.structure.depictions
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.upload.depicts.DepictsInterface
 import io.reactivex.Flowable
+import io.reactivex.processors.BehaviorProcessor
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -13,7 +14,7 @@ import javax.inject.Singleton
 @Singleton
 class DepictModel @Inject constructor(private val depictsInterface: DepictsInterface) {
 
-    var nearbyPlaces: MutableList<Place>? = null
+    var nearbyPlaces: BehaviorProcessor<List<Place>> = BehaviorProcessor.createDefault(emptyList())
 
     companion object {
         private const val SEARCH_DEPICTS_LIMIT = 25
@@ -24,7 +25,7 @@ class DepictModel @Inject constructor(private val depictsInterface: DepictsInter
      */
     fun searchAllEntities(query: String): Flowable<List<DepictedItem>> {
         if (query.isBlank()) {
-            return Flowable.just(nearbyPlaces?.map { DepictedItem(it) } ?: emptyList())
+            return nearbyPlaces.map { it.map(::DepictedItem) }
         }
         return networkItems(query)
     }
@@ -38,7 +39,7 @@ class DepictModel @Inject constructor(private val depictsInterface: DepictsInter
     }
 
     fun cleanUp() {
-        nearbyPlaces = null
+        nearbyPlaces = BehaviorProcessor.createDefault(emptyList())
     }
 
 }

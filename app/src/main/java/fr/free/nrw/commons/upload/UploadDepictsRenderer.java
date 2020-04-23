@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.upload;
 
+import static fr.free.nrw.commons.explore.depictions.DepictsClient.NO_DEPICTED_IMAGE;
+
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -29,7 +31,6 @@ public class UploadDepictsRenderer extends Renderer<DepictedItem> {
     @BindView(R.id.description) TextView description;
     @BindView(R.id.depicted_image)
     SimpleDraweeView imageView;
-    private final static String NO_IMAGE_FOR_DEPICTION="No Image for Depiction";
 
     public UploadDepictsRenderer(UploadDepictsCallback listener) {
         this.listener = listener;
@@ -77,13 +78,15 @@ public class UploadDepictsRenderer extends Renderer<DepictedItem> {
         checkedView.setChecked(item.isSelected());
         depictsLabel.setText(item.getName());
         description.setText(item.getDescription());
-        if (!TextUtils.isEmpty(item.getImageUrl())) {
-          if (!item.getImageUrl().equals(NO_IMAGE_FOR_DEPICTION)) {
-            imageView.setImageURI(Uri.parse(item.getImageUrl()));
-          }
+        final String imageUrl = item.getImageUrl();
+        final boolean imageUrlIsEmpty = TextUtils.isEmpty(imageUrl);
+        if (imageUrlIsEmpty) {
+            listener.fetchThumbnailUrlForEntity(item);
+        }
+        if (TextUtils.isEmpty(imageUrl) || imageUrl.equals(NO_DEPICTED_IMAGE)) {
+            imageView.setImageURI(UriUtil.getUriForResourceId(R.drawable.ic_wikidata_logo_24dp));
         } else {
-          imageView.setImageURI(UriUtil.getUriForResourceId(R.drawable.ic_wikidata_logo_24dp));
-          listener.fetchThumbnailUrlForEntity(item);
+            imageView.setImageURI(Uri.parse(imageUrl));
         }
     }
 

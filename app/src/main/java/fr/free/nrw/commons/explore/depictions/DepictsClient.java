@@ -32,7 +32,7 @@ public class DepictsClient {
 
     private final DepictsInterface depictsInterface;
     private final MediaInterface mediaInterface;
-    private static final String NO_DEPICTED_IMAGE = "No Image for Depiction";
+    public static final String NO_DEPICTED_IMAGE = "No Image for Depiction";
 
     @Inject
     public DepictsClient(DepictsInterface depictsInterface, MediaInterface mediaInterface) {
@@ -82,15 +82,13 @@ public class DepictsClient {
             .map(claimsResponse -> {
                 final List<Statement_partial> imageClaim = claimsResponse.getClaims()
                     .get(WikidataProperties.IMAGE.getPropertyName());
-                if (imageClaim != null) {
                     final DataValueString dataValue = (DataValueString) imageClaim
                         .get(0)
                         .getMainSnak()
                         .getDataValue();
                     return getThumbnailUrl((dataValue.getValue()));
-                }
-                return NO_DEPICTED_IMAGE;
             })
+            .onErrorReturn(throwable -> NO_DEPICTED_IMAGE)
             .singleOrError();
     }
 

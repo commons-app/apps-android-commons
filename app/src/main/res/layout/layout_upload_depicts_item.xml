@@ -24,8 +24,7 @@
         android:paddingRight="@dimen/tiny_gap"
         app:layout_constraintLeft_toRightOf="@+id/depict_checkbox"
         app:layout_constraintTop_toTopOf="parent"
-        app:placeholderImage="@drawable/ic_wikidata_logo_24dp"
-        app:srcCompat="@drawable/ic_wikidata_logo_24dp"/>
+        app:placeholderImage="@drawable/ic_wikidata_logo_24dp"/>
 
     <TextView
         android:id="@+id/depicts_label"

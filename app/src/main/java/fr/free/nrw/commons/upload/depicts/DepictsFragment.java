@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.upload.depicts;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
+import org.jetbrains.annotations.NotNull;
 import timber.log.Timber;
 
 
@@ -142,13 +145,24 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         }
     }
 
-    /**
-     * Set thumbnail image for depicted item
-     */
     @Override
-    public void onImageUrlFetched(String response, int position) {
-        adapter.getItem(position).setImageUrl(response);
-        adapter.notifyItemChanged(position);
+    public void updateUrlInAdapter(@NotNull DepictedItem depictedItem, @NotNull String response) {
+        final Pair<DepictedItem, Integer> itemAndPosition = returnItemAndPosition(depictedItem);
+        if (itemAndPosition != null) {
+            itemAndPosition.first.setImageUrl(response);
+            adapter.notifyItemChanged(itemAndPosition.second);
+        }
+    }
+
+    @Nullable
+    private Pair<DepictedItem,Integer> returnItemAndPosition(@NotNull DepictedItem depictedItem) {
+        for (int i = 0; i < adapter.getItemCount(); i++) {
+            final DepictedItem item = adapter.getItem(i);
+            if(item.getId().equals(depictedItem.getId())){
+                return new Pair<>(item, i);
+            }
+        }
+        return null;
     }
 
     @OnClick(R.id.depicts_next)
