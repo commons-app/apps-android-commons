@@ -140,7 +140,7 @@ class DepictsPresenter @Inject constructor(
     }
 
     private fun imageUrlFromNetworkOrCache(depictedItem: DepictedItem): Single<String> =
-        if (idsToImageUrls.containsKey(depictedItem.imageUrl))
+        if (idsToImageUrls.containsKey(depictedItem.id))
             Single.just(idsToImageUrls[depictedItem.id])
         else
             depictsClient.getP18ForItem(depictedItem.id)
