@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload.depicts;
 
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -146,10 +145,10 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     }
 
     @Override
-    public void updateUrlInAdapter(@NotNull DepictedItem depictedItem, @NotNull String response) {
+    public void onUrlFetched(@NotNull DepictedItem depictedItem, @NotNull String url) {
         final Pair<DepictedItem, Integer> itemAndPosition = returnItemAndPosition(depictedItem);
         if (itemAndPosition != null) {
-            itemAndPosition.first.setImageUrl(response);
+            itemAndPosition.first.setImageUrl(url);
             adapter.notifyItemChanged(itemAndPosition.second);
         }
     }

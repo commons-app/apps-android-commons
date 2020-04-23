@@ -43,8 +43,7 @@ public interface DepictsContract {
         void setDepictsList(List<DepictedItem> depictedItemList);
 
 
-      void updateUrlInAdapter(@NotNull DepictedItem depictedItem,
-          @NotNull String response);
+        void onUrlFetched(@NotNull DepictedItem depictedItem, @NotNull String url);
     }
 
     interface UserActionListener extends BasePresenter<View> {

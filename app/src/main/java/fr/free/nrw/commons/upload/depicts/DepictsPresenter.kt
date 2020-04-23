@@ -40,7 +40,6 @@ class DepictsPresenter @Inject constructor(
     private val depictedItems: MutableLiveData<List<DepictedItem>> = MutableLiveData()
     private val idsToImageUrls = mutableMapOf<String, String>()
 
-
     override fun onAttachView(view: DepictsContract.View) {
         this.view = view
         compositeDisposable.add(
@@ -68,9 +67,7 @@ class DepictsPresenter @Inject constructor(
         return Flowable.zip(
             searchResults(it),
             Flowable.just(it),
-            BiFunction { results: List<DepictedItem>, term: String ->
-                Pair(results, term)
-            }
+            BiFunction { results: List<DepictedItem>, term: String -> Pair(results, term) }
         )
     }
 
@@ -84,9 +81,7 @@ class DepictsPresenter @Inject constructor(
 
     private fun addImageUrlsFromCache(depictions: List<DepictedItem>) =
         depictions.map { item ->
-            idsToImageUrls.getOrElse(item.id, { null })
-                ?.let { item.copy(imageUrl = it) }
-                ?: item
+            idsToImageUrls[item.id]?.let { item.copy(imageUrl = it) } ?: item
         }
 
     override fun onDetachView() {
@@ -120,9 +115,7 @@ class DepictsPresenter @Inject constructor(
      * from the depiction list
      */
     override fun verifyDepictions() {
-        val selectedDepictions =
-            repository.selectedDepictions
-        if (selectedDepictions.isNotEmpty()) {
+        if (repository.selectedDepictions.isNotEmpty()) {
             view.goToNextScreen()
         } else {
             view.noDepictionSelected()
@@ -140,7 +133,7 @@ class DepictsPresenter @Inject constructor(
                 .observeOn(mainThreadScheduler)
                 .filter { it != NO_DEPICTED_IMAGE }
                 .subscribe(
-                    { view.updateUrlInAdapter(depictedItem, it) },
+                    { view.onUrlFetched(depictedItem, it) },
                     { Timber.e(it) }
                 )
         )

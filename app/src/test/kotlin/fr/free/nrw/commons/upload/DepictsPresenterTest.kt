@@ -155,7 +155,7 @@ class DepictsPresenterTest {
         whenever(depictsClient.getP18ForItem(depictedItem.id)).thenReturn(Single.just("url"))
         depictsPresenter.fetchThumbnailForEntityId(depictedItem)
         testScheduler.triggerActions()
-        verify(view).updateUrlInAdapter(depictedItem, "url")
+        verify(view).onUrlFetched(depictedItem, "url")
     }
 
     @Test
@@ -165,7 +165,7 @@ class DepictsPresenterTest {
             .thenReturn(Single.just(NO_DEPICTED_IMAGE))
         depictsPresenter.fetchThumbnailForEntityId(depictedItem)
         testScheduler.triggerActions()
-        verify(view, never()).updateUrlInAdapter(depictedItem, NO_DEPICTED_IMAGE)
+        verify(view, never()).onUrlFetched(depictedItem, NO_DEPICTED_IMAGE)
     }
 
     @Test
@@ -174,10 +174,10 @@ class DepictsPresenterTest {
         whenever(depictsClient.getP18ForItem(depictedItem.id)).thenReturn(Single.just("url"))
         depictsPresenter.fetchThumbnailForEntityId(depictedItem)
         testScheduler.triggerActions()
-        verify(view).updateUrlInAdapter(depictedItem, "url")
+        verify(view).onUrlFetched(depictedItem, "url")
         depictsPresenter.fetchThumbnailForEntityId(depictedItem)
         testScheduler.triggerActions()
-        verify(view, times(2)).updateUrlInAdapter(depictedItem, "url")
+        verify(view, times(2)).onUrlFetched(depictedItem, "url")
     }
 }
 
