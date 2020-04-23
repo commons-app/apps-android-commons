@@ -16,10 +16,6 @@ public interface MediaInterface {
             "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal" +
             "|Artist|LicenseShortName|LicenseUrl";
 
-    String USER_MEDIA_PARAMS = "&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640" +
-        "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal"
-        +
-        "|Artist|LicenseShortName|LicenseUrl";
     /**
      * Checks if a page exists or not.
      *
@@ -54,15 +50,13 @@ public interface MediaInterface {
     /**
      * This method retrieves a list of Media objects for a given user name
      *
-     * @param username     the category name. Must start with "Category:"
+     * @param username     user's Wikimedia Commons username.
      * @param itemLimit    how many images are returned
      * @param continuation the continuation string from the previous query or empty map
      * @return
      */
     @GET("w/api.php?action=query&format=json&formatversion=2" + //Basic parameters
-        "&generator=allimages&gaisort=timestamp&gaidir=older" +
-        //Category parameters
-        USER_MEDIA_PARAMS)
+        "&generator=allimages&gaisort=timestamp&gaidir=older" + MEDIA_PARAMS)
     Observable<MwQueryResponse> getMediaListForUser(@Query("gaiuser") String username,
         @Query("gailimit") int itemLimit, @QueryMap Map<String, String> continuation);
 
@@ -103,16 +97,7 @@ public interface MediaInterface {
     @GET("w/api.php?format=json&action=parse&prop=text")
     Observable<MwParseResponse> getPageHtml(@Query("page") String title);
 
-  /**
-   * Fetches caption using file name
-   *
-   * @param filename name of the file to be used for fetching captions
-   */
-  @GET("w/api.php?action=wbgetentities&props=labels&format=json&languagefallback=1")
-  Observable<MwQueryResponse> fetchCaptionByFilename(@Query("language") String language,
-      @Query("titles") String filename);
-
-  /**
+    /**
    * Fetches list of images from a depiction entity
    *
    * @param query    depictionEntityId

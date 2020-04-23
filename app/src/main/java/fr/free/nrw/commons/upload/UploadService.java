@@ -24,6 +24,7 @@ import fr.free.nrw.commons.wikidata.WikidataEditService;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import java.io.File;
 import java.io.IOException;
@@ -146,28 +147,26 @@ public class UploadService extends HandlerService<Contribution> {
 
     @Override
     public void queue(int what, Contribution contribution) {
-        switch (what) {
-            case ACTION_UPLOAD_FILE:
-
-                contribution.setState(Contribution.STATE_QUEUED);
-                contribution.setTransferred(0);
-                toUpload++;
-                if (curNotification != null && toUpload != 1) {
-                    curNotification.setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload));
-                    Timber.d("%d uploads left", toUpload);
-                    notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
-                }
-                compositeDisposable.add(contributionDao
-                        .save(contribution)
-                        .subscribeOn(ioThreadScheduler)
-                        .observeOn(mainThreadScheduler)
-                        .subscribe(aLong->{
-                            contribution.setPageId(String.valueOf(aLong));
-                            UploadService.super.queue(what, contribution);
-                        }, Throwable::printStackTrace));
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown value for what");
+        if (what == ACTION_UPLOAD_FILE) {
+            contribution.setState(Contribution.STATE_QUEUED);
+            contribution.setTransferred(0);
+            toUpload++;
+            if (curNotification != null && toUpload != 1) {
+                curNotification.setContentText(getResources()
+                    .getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload,
+                        toUpload));
+                Timber.d("%d uploads left", toUpload);
+                notificationManager
+                    .notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_IN_PROGRESS,
+                        curNotification.build());
+            }
+            compositeDisposable.add(contributionDao
+                .save(contribution)
+                .subscribeOn(ioThreadScheduler)
+                .observeOn(mainThreadScheduler)
+                .subscribe(aLong -> super.queue(what, contribution), Throwable::printStackTrace));
+        } else {
+            throw new IllegalArgumentException("Unknown value for what");
         }
     }
 
@@ -300,11 +299,12 @@ public class UploadService extends HandlerService<Contribution> {
         contribution.setState(Contribution.STATE_COMPLETED);
         contribution.setDateUploaded(CommonsDateUtil.getIso8601DateFormatTimestamp()
             .parse(uploadResult.getImageinfo().getTimestamp()));
-        compositeDisposable.add(contributionDao
-            .save(contribution)
-            .subscribeOn(ioThreadScheduler)
-            .observeOn(mainThreadScheduler)
-            .subscribe());
+
+        Disposable disposable = contributionDao.delete(contribution)
+            .flatMap(integer -> mediaClient.getMedia("File:" + uploadResult.getFilename()))
+            .subscribe(media -> contributionDao.save(new Contribution(media)));
+
+        compositeDisposable.add(disposable);
     }
 
     @SuppressLint("StringFormatInvalid")

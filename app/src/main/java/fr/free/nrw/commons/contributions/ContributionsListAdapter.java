@@ -60,11 +60,6 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
         return contributions.get(position);
     }
 
-    @Override
-    public long getItemId(final int position) {
-        return Integer.parseInt(contributions.get(position).getPageId());
-    }
-
     public interface Callback {
 
         void retryUpload(Contribution contribution);

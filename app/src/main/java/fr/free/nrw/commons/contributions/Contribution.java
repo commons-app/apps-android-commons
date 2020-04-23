@@ -59,13 +59,6 @@ public class Contribution extends Media {
         wikidataPlace = WikidataPlace.from(item.getPlace());
     }
 
-    public Contribution(final MwQueryLogEvent queryLogEvent, final String user) {
-        super(queryLogEvent.title(),queryLogEvent.date(), user);
-        decimalCoords = "";
-        dateCreatedSource = "";
-        state = STATE_COMPLETED;
-    }
-
     public void setDateCreatedSource(final String dateCreatedSource) {
         this.dateCreatedSource = dateCreatedSource;
     }
