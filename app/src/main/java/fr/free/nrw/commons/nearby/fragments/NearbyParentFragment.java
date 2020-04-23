@@ -204,7 +204,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private MapboxMap.OnCameraMoveListener cameraMoveListener;
     private fr.free.nrw.commons.location.LatLng lastFocusLocation;
     private LatLngBounds latLngBounds;
-    private int restoredCheckBoxState=CheckBoxTriStates.UNKNOWN;
 
 
     @Override
@@ -233,9 +232,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             this.mapBox=mapBoxMap;
             initViews();
             presenter.setActionListeners(applicationKvStore);
-            if (restoredCheckBoxState != CheckBoxTriStates.UNKNOWN) {//The default state is UNKNOWN
-                checkBoxTriStates.setState(restoredCheckBoxState);
-            }
             initNearbyFilter();
             mapBoxMap.setStyle(isDarkTheme?Style.DARK:Style.OUTDOORS, style -> {
                 UiSettings uiSettings = mapBoxMap.getUiSettings();
@@ -1514,14 +1510,5 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         checkBoxTriStates.setCallback(this);
-        if (null != savedInstanceState) {
-            int checkBoxSavedState = savedInstanceState.getInt(CHECKBOX_STATE,
-                CheckBoxTriStates.UNKNOWN);
-            if(mapBox!=null && isMapBoxReady) {
-                checkBoxTriStates.setState(checkBoxSavedState);
-            }else{
-                restoredCheckBoxState =checkBoxSavedState;
-            }
-        }
     }
 }
