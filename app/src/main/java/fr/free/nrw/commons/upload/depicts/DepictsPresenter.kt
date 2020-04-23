@@ -10,11 +10,9 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Flowable
 import io.reactivex.Scheduler
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.BiFunction
 import io.reactivex.processors.PublishProcessor
-import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import java.lang.reflect.Proxy
 import javax.inject.Inject
@@ -95,7 +93,6 @@ class DepictsPresenter @Inject constructor(
         view = DUMMY
         compositeDisposable.dispose()
         idsToImageUrls.clear()
-
     }
 
     override fun onPreviousButtonClicked() {
@@ -125,7 +122,7 @@ class DepictsPresenter @Inject constructor(
     override fun verifyDepictions() {
         val selectedDepictions =
             repository.selectedDepictions
-        if (selectedDepictions != null && selectedDepictions.isNotEmpty()) {
+        if (selectedDepictions.isNotEmpty()) {
             view.goToNextScreen()
         } else {
             view.noDepictionSelected()
@@ -140,7 +137,7 @@ class DepictsPresenter @Inject constructor(
     override fun fetchThumbnailForEntityId(depictedItem: DepictedItem) {
         compositeDisposable.add(
             imageUrlFromNetworkOrCache(depictedItem)
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(mainThreadScheduler)
                 .filter { it != NO_DEPICTED_IMAGE }
                 .subscribe(
                     { view.updateUrlInAdapter(depictedItem, it) },
@@ -154,7 +151,7 @@ class DepictsPresenter @Inject constructor(
             Single.just(idsToImageUrls[depictedItem.id])
         else
             depictsClient.getP18ForItem(depictedItem.id)
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(ioScheduler)
                 .doOnSuccess { idsToImageUrls[depictedItem.id] = it }
 }
 

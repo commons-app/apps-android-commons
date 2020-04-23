@@ -1,22 +1,32 @@
 package fr.free.nrw.commons.upload
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.jraska.livedata.test
+import com.nhaarman.mockitokotlin2.never
+import com.nhaarman.mockitokotlin2.times
+import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.category.CategoryItem
+import fr.free.nrw.commons.explore.depictions.DepictsClient
+import fr.free.nrw.commons.explore.depictions.DepictsClient.NO_DEPICTED_IMAGE
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.DepictsContract
-import fr.free.nrw.commons.upload.depicts.DepictsFragment
 import fr.free.nrw.commons.upload.depicts.DepictsPresenter
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
-import io.reactivex.Observable
+import io.reactivex.Flowable
+import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
-import org.mockito.ArgumentMatchers
 import org.mockito.Mock
-import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
+
 class DepictsPresenterTest {
+
+    @get:Rule
+    var testRule = InstantTaskExecutorRule()
+
     @Mock
     internal lateinit var repository: UploadRepository
 
@@ -25,15 +35,10 @@ class DepictsPresenterTest {
 
     private lateinit var depictsPresenter: DepictsPresenter
 
-    private lateinit var depictsFragment: DepictsFragment
-
     private lateinit var testScheduler: TestScheduler
 
-    private val depictedItems: ArrayList<DepictedItem> = ArrayList()
-
     @Mock
-    lateinit var depictedItem: DepictedItem
-
+    lateinit var depictsClient: DepictsClient
 
     /**
      * initial setup
@@ -43,79 +48,143 @@ class DepictsPresenterTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         testScheduler = TestScheduler()
-        depictedItem = DepictedItem("label", "desc", "", false, "entityId")
-        depictedItems.add(depictedItem)
-        depictsPresenter = DepictsPresenter(repository, testScheduler, testScheduler, null)
-        depictsFragment = DepictsFragment()
+        depictsPresenter = DepictsPresenter(repository, testScheduler, testScheduler, depictsClient)
         depictsPresenter.onAttachView(view)
     }
 
     @Test
-    fun searchEnglishDepictionsTest() {
-        whenever(repository.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
-        whenever(repository.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
-        depictsPresenter.searchForDepictions("test")
-        verify(view).showProgress(true)
-        verify(view).setDepictsList(null)
+    fun `Search emission shows view progress`() {
+        depictsPresenter.searchForDepictions("")
         testScheduler.triggerActions()
         verify(view).showProgress(false)
     }
 
     @Test
-    fun searchOtherLanguageDepictions() {
-        whenever(repository.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
-        whenever(repository.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
-        depictsPresenter.searchForDepictions("वी")
-        verify(view).showProgress(true)
-        verify(view).setDepictsList(null)
+    fun `search results emission returns distinct results + selected items`() {
+        val searchResults = listOf(depictedItem(), depictedItem())
+        whenever(repository.searchAllEntities("")).thenReturn(Flowable.just(searchResults))
+        val selectedItem = depictedItem(id = "selected")
+        whenever(repository.selectedDepictions).thenReturn(listOf(selectedItem))
+        depictsPresenter.searchForDepictions("")
         testScheduler.triggerActions()
         verify(view).showProgress(false)
+        verify(view).showError(false)
+        depictsPresenter.depictedItems
+            .test()
+            .assertValue(listOf(selectedItem, depictedItem()))
     }
 
     @Test
-    fun searchForNonExistingDepictions() {
-        whenever(repository.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
-        whenever(repository.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
-        depictsPresenter.searchForDepictions("******")
-        verify(view).showProgress(true)
-        verify(view).setDepictsList(null)
+    fun `searchResults retrieve imageUrls from cache`() {
+        val depictedItem = depictedItem()
+        whenever(depictsClient.getP18ForItem(depictedItem.id)).thenReturn(Single.just("url"))
+        depictsPresenter.fetchThumbnailForEntityId(depictedItem)
         testScheduler.triggerActions()
-        verify(view).setDepictsList(null)
+        val searchResults = listOf(depictedItem(), depictedItem())
+        whenever(repository.searchAllEntities("")).thenReturn(Flowable.just(searchResults))
+        depictsPresenter.searchForDepictions("")
+        testScheduler.triggerActions()
+        depictsPresenter.depictedItems
+            .test()
+            .assertValue(listOf(depictedItem(imageUrl = "url")))
+    }
+
+    @Test
+    fun `empty search results with empty term do not show error`() {
+        whenever(repository.searchAllEntities("")).thenReturn(Flowable.just(emptyList()))
+        depictsPresenter.searchForDepictions("")
+        testScheduler.triggerActions()
         verify(view).showProgress(false)
+        verify(view).showError(false)
+        depictsPresenter.depictedItems
+            .test()
+            .assertValue(emptyList())
     }
 
     @Test
-    fun setSingleDepiction() {
-        whenever(repository.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
-        whenever(repository.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
-        depictsPresenter.onDepictItemClicked(depictedItem)
-        depictsPresenter.verifyDepictions()
-        verify(view).goToNextScreen()
-    }
-
-    @Test
-    fun setMultipleDepictions() {
-        whenever(repository.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
-        whenever(repository.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
-        depictsPresenter.onDepictItemClicked(depictedItem)
-        val depictedItem2 = DepictedItem("label2", "desc2", "", false, "entityid2")
-        depictsPresenter.onDepictItemClicked(depictedItem2)
-        depictsPresenter.verifyDepictions()
-        verify(view).goToNextScreen()
-    }
-
-    @Test
-    fun `on Search Exception Show Error And Stop Progress`() {
-        whenever(repository.searchAllEntities(ArgumentMatchers.anyString()))
-            .thenReturn(Observable.error(Exception()))
-        depictsPresenter.searchForDepictions("******")
+    fun `empty search results with non empty term do show error`() {
+        whenever(repository.searchAllEntities("a")).thenReturn(Flowable.just(emptyList()))
+        depictsPresenter.searchForDepictions("a")
         testScheduler.triggerActions()
+        verify(view).showProgress(false)
         verify(view).showError(true)
+        depictsPresenter.depictedItems
+            .test()
+            .assertValue(emptyList())
+    }
+
+    @Test
+    fun `search error shows error`() {
+        whenever(repository.searchAllEntities("")).thenReturn(Flowable.error(Exception()))
+        depictsPresenter.searchForDepictions("")
+        testScheduler.triggerActions()
         verify(view).showProgress(false)
+        verify(view).showError(true)
+    }
+
+    @Test
+    fun `onPreviousButtonClicked goes to previous screen`() {
+        depictsPresenter.onPreviousButtonClicked()
+        verify(view).goToPreviousScreen()
+    }
+
+    @Test
+    fun `onDepictItemClicked calls repository`() {
+        val depictedItem = depictedItem()
+        depictsPresenter.onDepictItemClicked(depictedItem)
+        verify(repository).onDepictItemClicked(depictedItem)
+    }
+
+    @Test
+    fun `verifyDepictions with non empty selectedDepictions goes to next screen`() {
+        whenever(repository.selectedDepictions).thenReturn(listOf(depictedItem()))
+        depictsPresenter.verifyDepictions()
+        verify(view).goToNextScreen()
+    }
+
+    @Test
+    fun `verifyDepictions with empty selectedDepictions goes to noDepictionSelected`() {
+        whenever(repository.selectedDepictions).thenReturn(emptyList())
+        depictsPresenter.verifyDepictions()
+        verify(view).noDepictionSelected()
+    }
+
+    @Test
+    fun `image urls fetched from network update the view`() {
+        val depictedItem = depictedItem()
+        whenever(depictsClient.getP18ForItem(depictedItem.id)).thenReturn(Single.just("url"))
+        depictsPresenter.fetchThumbnailForEntityId(depictedItem)
+        testScheduler.triggerActions()
+        verify(view).updateUrlInAdapter(depictedItem, "url")
+    }
+
+    @Test
+    fun `image urls fetched from network filter NO_DEPICTED_IMAGE`() {
+        val depictedItem = depictedItem()
+        whenever(depictsClient.getP18ForItem(depictedItem.id))
+            .thenReturn(Single.just(NO_DEPICTED_IMAGE))
+        depictsPresenter.fetchThumbnailForEntityId(depictedItem)
+        testScheduler.triggerActions()
+        verify(view, never()).updateUrlInAdapter(depictedItem, NO_DEPICTED_IMAGE)
+    }
+
+    @Test
+    fun `successive image urls fetched from cache`() {
+        val depictedItem = depictedItem()
+        whenever(depictsClient.getP18ForItem(depictedItem.id)).thenReturn(Single.just("url"))
+        depictsPresenter.fetchThumbnailForEntityId(depictedItem)
+        testScheduler.triggerActions()
+        verify(view).updateUrlInAdapter(depictedItem, "url")
+        depictsPresenter.fetchThumbnailForEntityId(depictedItem)
+        testScheduler.triggerActions()
+        verify(view, times(2)).updateUrlInAdapter(depictedItem, "url")
     }
 }
+
+fun depictedItem(
+    name: String = "label",
+    description: String = "desc",
+    imageUrl: String = "",
+    isSelected: Boolean = false,
+    id: String = "entityId"
+) = DepictedItem(name, description, imageUrl, isSelected, id)
