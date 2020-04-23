@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.upload;
 
-import static fr.free.nrw.commons.explore.depictions.DepictsClient.NO_DEPICTED_IMAGE;
-
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -79,12 +77,9 @@ public class UploadDepictsRenderer extends Renderer<DepictedItem> {
         depictsLabel.setText(item.getName());
         description.setText(item.getDescription());
         final String imageUrl = item.getImageUrl();
-        final boolean imageUrlIsEmpty = TextUtils.isEmpty(imageUrl);
-        if (imageUrlIsEmpty) {
-            listener.fetchThumbnailUrlForEntity(item);
-        }
-        if (TextUtils.isEmpty(imageUrl) || imageUrl.equals(NO_DEPICTED_IMAGE)) {
+        if (TextUtils.isEmpty(imageUrl)) {
             imageView.setImageURI(UriUtil.getUriForResourceId(R.drawable.ic_wikidata_logo_24dp));
+            listener.fetchThumbnailUrlForEntity(item);
         } else {
             imageView.setImageURI(Uri.parse(imageUrl));
         }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.explore.depictions.DepictsClient
+import fr.free.nrw.commons.explore.depictions.DepictsClient.NO_DEPICTED_IMAGE
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Flowable
@@ -140,6 +141,7 @@ class DepictsPresenter @Inject constructor(
         compositeDisposable.add(
             imageUrlFromNetworkOrCache(depictedItem)
                 .observeOn(AndroidSchedulers.mainThread())
+                .filter { it != NO_DEPICTED_IMAGE }
                 .subscribe(
                     { view.updateUrlInAdapter(depictedItem, it) },
                     { Timber.e(it) }
