@@ -324,12 +324,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private final ControllerListener aspectRatioListener = new BaseControllerListener<ImageInfo>() {
         @Override
         public void onIntermediateImageSet(String id, @Nullable ImageInfo imageInfo) {
-          imageInfoCache = imageInfo;
+            imageInfoCache = imageInfo;
             updateAspectRatio(scrollView.getWidth());
         }
         @Override
         public void onFinalImageSet(String id, @Nullable ImageInfo imageInfo, @Nullable Animatable animatable) {
-          imageInfoCache = imageInfo;
+            imageInfoCache = imageInfo;
             updateAspectRatio(scrollView.getWidth());
         }
     };
