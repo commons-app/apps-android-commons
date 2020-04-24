@@ -162,7 +162,7 @@
                         android:layout_height="match_parent"
                         android:text="@string/media_detail_license" />
 
-                    <fr.free.nrw.commons.ui.widget.CompatTextView
+                    <TextView
                         android:id="@+id/mediaDetailLicense"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
@@ -173,8 +173,8 @@
                         android:padding="@dimen/small_gap"
                         android:textColor="?attr/mediaDetailsText"
                         android:textSize="@dimen/description_text_size"
-                        app:drawablePadding="@dimen/tiny_gap"
-                        app:drawableStart="?attr/iconInfo24"
+                        android:drawablePadding="@dimen/tiny_gap"
+                        android:drawableStart="?attr/iconInfo24"
                         tools:text="License link" />
                 </LinearLayout>
 
@@ -190,7 +190,7 @@
                         android:layout_height="match_parent"
                         android:text="@string/media_detail_coordinates" />
 
-                    <fr.free.nrw.commons.ui.widget.CompatTextView
+                    <TextView
                         android:id="@+id/mediaDetailCoordinates"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
@@ -201,8 +201,8 @@
                         android:padding="@dimen/small_gap"
                         android:textColor="?attr/mediaDetailsText"
                         android:textSize="@dimen/description_text_size"
-                        app:drawablePadding="@dimen/tiny_gap"
-                        app:drawableStart="?attr/iconMap24"
+                        android:drawablePadding="@dimen/tiny_gap"
+                        android:drawableStart="?attr/iconMap24"
                         tools:text="Coordinates link" />
                 </LinearLayout>
 
