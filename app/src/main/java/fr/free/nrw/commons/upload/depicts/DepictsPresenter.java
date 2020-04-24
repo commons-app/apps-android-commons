@@ -15,7 +15,6 @@ import io.reactivex.schedulers.Schedulers;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -39,7 +38,6 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
     private DepictsContract.View view = DUMMY;
     private UploadRepository repository;
     private DepictsClient depictsClient;
-    private static int TIMEOUT_SECONDS = 15;
 
     private CompositeDisposable compositeDisposable;
 
@@ -144,7 +142,6 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
         compositeDisposable.add(depictsClient.getP18ForItem(entityId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(response -> {
                     view.onImageUrlFetched(response,position);
                 }));
