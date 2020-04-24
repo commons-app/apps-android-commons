@@ -118,9 +118,8 @@ import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 public class NearbyParentFragment extends CommonsDaggerSupportFragment
         implements NearbyParentFragmentContract.View,
-        WikidataEditListener.WikidataP18EditListener, LocationUpdateListener ,CheckBoxTriStates.Callback{
+        WikidataEditListener.WikidataP18EditListener, LocationUpdateListener {
 
-    private static final String CHECKBOX_STATE = "checkbox_state";
     @BindView(R.id.bottom_sheet) RelativeLayout rlBottomSheet;
     @BindView(R.id.bottom_sheet_details) View bottomSheetDetails;
     @BindView(R.id.transparentView) View transparentView;
@@ -221,9 +220,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        checkBoxTriStates.setCallback(this);
         isDarkTheme = systemThemeUtils.isDeviceInNightMode();
         cameraMoveListener= () -> presenter.onCameraMove(mapBox.getCameraPosition().target);
+        addCheckBoxCallback();
         presenter.attachView(this);
         initRvNearbyList();
         initThemePreferences();
@@ -284,6 +283,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         rvNearbyList.setLayoutManager(new LinearLayoutManager(getContext()));
         adapterFactory = new NearbyAdapterFactory(this, controller);
         rvNearbyList.setAdapter(adapterFactory.create(null));
+    }
+
+    private void addCheckBoxCallback() {
+        checkBoxTriStates.setCallback((o, state, b, b1) -> presenter.filterByMarkerType(o,state,b,b1));
     }
 
     private void performMapReadyActions() {
@@ -450,6 +453,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void setCheckBoxAction() {
         checkBoxTriStates.addAction();
+        checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
     }
 
     @Override
@@ -956,12 +960,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     public void backButtonClicked() {
         presenter.backButtonClicked();
-    }
-
-    @Override
-    public void filterByMarkerType(@Nullable List<Label> selectedLabels, int state, boolean b,
-        boolean b1) {
-        presenter.filterByMarkerType(selectedLabels,state,b,b1);
     }
 
     /**
@@ -1503,11 +1501,5 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void startTheMap() {
         mapView.onStart();
         performMapReadyActions();
-    }
-
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        checkBoxTriStates.setCallback(this);
     }
 }
