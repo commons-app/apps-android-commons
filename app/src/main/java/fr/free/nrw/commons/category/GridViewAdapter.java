@@ -87,9 +87,9 @@ public class GridViewAdapter extends ArrayAdapter {
         Media item = data.get(position);
         SimpleDraweeView imageView = convertView.findViewById(R.id.categoryImageView);
         TextView fileName = convertView.findViewById(R.id.categoryImageTitle);
-        TextView author = convertView.findViewById(R.id.categoryImageAuthor);
+        TextView uploader = convertView.findViewById(R.id.categoryImageUploader);
         fileName.setText(item.getThumbnailTitle());
-        setAuthorView(item, author);
+        setUploaderView(item, uploader);
         imageView.setImageURI(item.getThumbUrl());
         return convertView;
     }
@@ -105,16 +105,16 @@ public class GridViewAdapter extends ArrayAdapter {
 
 
     /**
-     * Shows author information if its present
+     * Shows uploader information if its present
      * @param item
-     * @param author
+     * @param uploader
      */
-    private void setAuthorView(Media item, TextView author) {
-        if (!TextUtils.isEmpty(item.getCreator())) {
-            author.setVisibility(View.VISIBLE);
-            author.setText(getContext().getString(R.string.image_uploaded_by, item.getCreator()));
+    private void setUploaderView(Media item, TextView uploader) {
+        if (!TextUtils.isEmpty(item.getUser())) {
+            uploader.setVisibility(View.VISIBLE);
+            uploader.setText(getContext().getString(R.string.image_uploaded_by, item.getUser()));
         } else {
-            author.setVisibility(View.GONE);
+            uploader.setVisibility(View.GONE);
         }
     }
 }

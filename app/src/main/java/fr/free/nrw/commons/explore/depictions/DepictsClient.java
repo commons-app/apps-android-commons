@@ -107,6 +107,7 @@ public class DepictsClient {
                                 0,
                                 safeParseDate(s.getTimestamp()),
                                 safeParseDate(s.getTimestamp()),
+                                "",
                                 ""
                         );
                         mediaList.add(media);

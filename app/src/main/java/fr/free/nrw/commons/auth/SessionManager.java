@@ -100,17 +100,6 @@ public class SessionManager {
     }
 
     @Nullable
-    private String getRawUserName() {
-        Account account = getCurrentAccount();
-        return account == null ? null : accountManager().getUserData(account, KEY_RAWUSERNAME);
-    }
-
-    public String getAuthorName(){
-        return getRawUserName() == null ? getUserName() : getRawUserName();
-    }
-
-
-    @Nullable
     public String getPassword() {
         Account account = getCurrentAccount();
         return account == null ? null : accountManager().getPassword(account);

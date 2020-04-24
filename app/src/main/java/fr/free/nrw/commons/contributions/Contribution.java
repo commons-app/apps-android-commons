@@ -53,7 +53,8 @@ public class Contribution extends Media {
         super(item.getMediaUri(),
             item.getFileName(),
             UploadMediaDetail.formatList(item.getUploadMediaDetails()),
-            sessionManager.getAuthorName(),
+            sessionManager.getUserName(),
+            sessionManager.getUserName(),
             categories);
         captions =  UploadMediaDetail.formatCaptions(item.getUploadMediaDetails());
         decimalCoords = item.getGpsCoords().getDecimalCoords();
@@ -63,7 +64,7 @@ public class Contribution extends Media {
     }
 
     public Contribution(final MwQueryLogEvent queryLogEvent, final String user) {
-        super(queryLogEvent.title(),queryLogEvent.date(), user);
+        super(queryLogEvent.title(),queryLogEvent.date(), user, user);
         decimalCoords = "";
         dateCreatedSource = "";
         state = STATE_COMPLETED;

@@ -108,7 +108,7 @@ public class UploadController {
                 sessionManager.forceLogin(context);
                 return;
             }
-            contribution.setCreator(sessionManager.getAuthorName());
+            contribution.setCreator(sessionManager.getUserName());
         }
 
         if (contribution.getDescription() == null) {

@@ -18,7 +18,7 @@ import fr.free.nrw.commons.R;
  **/
 class SearchImagesRenderer extends Renderer<Media> {
     @BindView(R.id.categoryImageTitle) TextView tvImageName;
-    @BindView(R.id.categoryImageAuthor) TextView categoryImageAuthor;
+    @BindView(R.id.categoryImageUploader) TextView categoryImageUploader;
     @BindView(R.id.categoryImageView) SimpleDraweeView browseImage;
 
     private final ImageClickedListener listener;
@@ -52,7 +52,7 @@ class SearchImagesRenderer extends Renderer<Media> {
         Media item = getContent();
         tvImageName.setText(item.getThumbnailTitle());
         browseImage.setImageURI(item.getThumbUrl());
-        setAuthorView(item, categoryImageAuthor);
+        setUploaderView(item, categoryImageUploader);
     }
 
     interface ImageClickedListener {
@@ -60,15 +60,15 @@ class SearchImagesRenderer extends Renderer<Media> {
     }
 
     /**
-     * formats author name as "Uploaded by: authorName" and sets it in textview
+     * formats uploader name as "Uploaded by: userName" and sets it in textview
      */
-    private void setAuthorView(Media item, TextView author) {
-        if (item.getCreator() != null && !item.getCreator().equals("")) {
-            author.setVisibility(View.VISIBLE);
+    private void setUploaderView(Media item, TextView uploader) {
+        if (item.getUser() != null && !item.getUser().equals("")) {
+            uploader.setVisibility(View.VISIBLE);
             String uploadedByTemplate = getContext().getString(R.string.image_uploaded_by);
-            author.setText(String.format(uploadedByTemplate, item.getCreator()));
+            uploader.setText(String.format(uploadedByTemplate, item.getUser()));
         } else {
-            author.setVisibility(View.GONE);
+            uploader.setVisibility(View.GONE);
         }
     }
 }

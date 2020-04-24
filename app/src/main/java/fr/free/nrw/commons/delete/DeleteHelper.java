@@ -98,7 +98,7 @@ public class DeleteHelper {
         if (creator == null || creator.isEmpty()) {
             throw new RuntimeException("Failed to nominate for deletion");
         }
-        String creatorName = creator.replace(" (page does not exist)", "");
+        String creatorName = creator;
 
         return pageEditClient.prependEdit(media.getFilename(), fileDeleteString + "\n", summary)
                 .flatMap(result -> {
