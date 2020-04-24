@@ -147,14 +147,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
      * However unlike categories depictions is multi-lingual
      * Ex: key: en value: monument
      */
-    private ImageInfo imageData;
-    private int oldWidth;
-    private int newWidth=0;
+    private ImageInfo imageInfoCache;
+    private int oldWidthOfImageView;
+    private int newWidthOfImageView;
     private Depictions depictions;
     private boolean categoriesLoaded = false;
     private boolean categoriesPresent = false;
     private boolean depictionLoaded = false;
-    private boolean heightVerifyingBoolean= true; // helps in maintaining aspect ratio
+    private boolean heightVerifyingBoolean = true; // helps in maintaining aspect ratio
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
 
     //Had to make this class variable, to implement various onClicks, which access the media, also I fell why make separate variables when one can serve the purpose
@@ -248,7 +248,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                     if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                         imageLandscape.setVisibility(VISIBLE);
                     }
-                    oldWidth = scrollView.getWidth();
+                    oldWidthOfImageView = scrollView.getWidth();
                     displayMediaDetails();
                 }
             }
@@ -262,10 +262,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             new OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
-                    if (scrollView.getWidth() != oldWidth) {
-                        if (newWidth == 0) {
-                            newWidth = scrollView.getWidth();
-                            updateAspectRatio(newWidth);
+                    if (scrollView.getWidth() != oldWidthOfImageView) {
+                        if (newWidthOfImageView == 0) {
+                            newWidthOfImageView = scrollView.getWidth();
+                            updateAspectRatio(newWidthOfImageView);
                         }
                         scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     }
@@ -280,10 +280,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
         // ensuring correct aspect ratio for landscape mode
         if (heightVerifyingBoolean) {
-            updateAspectRatio(newWidth);
+            updateAspectRatio(newWidthOfImageView);
             heightVerifyingBoolean = false;
         } else {
-            updateAspectRatio(oldWidth);
+            updateAspectRatio(oldWidthOfImageView);
             heightVerifyingBoolean = true;
         }
     }
@@ -309,8 +309,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
      * @param scrollWidth the current width of the scrollView
      */
     private void updateAspectRatio(int scrollWidth) {
-        if (imageData != null) {
-            int finalHeight = (scrollWidth*imageData.getHeight()) / imageData.getWidth();
+        if (imageInfoCache != null) {
+            int finalHeight = (scrollWidth*imageInfoCache.getHeight()) / imageInfoCache.getWidth();
             ViewGroup.LayoutParams params = image.getLayoutParams();
             ViewGroup.LayoutParams spacerParams = imageSpacer.getLayoutParams();
             params.height = finalHeight;
@@ -324,12 +324,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private final ControllerListener aspectRatioListener = new BaseControllerListener<ImageInfo>() {
         @Override
         public void onIntermediateImageSet(String id, @Nullable ImageInfo imageInfo) {
-            imageData = imageInfo;
+          imageInfoCache = imageInfo;
             updateAspectRatio(scrollView.getWidth());
         }
         @Override
         public void onFinalImageSet(String id, @Nullable ImageInfo imageInfo, @Nullable Animatable animatable) {
-            imageData = imageInfo;
+          imageInfoCache = imageInfo;
             updateAspectRatio(scrollView.getWidth());
         }
     };
