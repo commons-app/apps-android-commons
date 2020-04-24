@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload
 
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.Utils
+import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.license.MediaLicenseContract
 import fr.free.nrw.commons.upload.license.MediaLicensePresenter
@@ -24,13 +25,16 @@ import org.powermock.modules.junit4.PowerMockRunner
 @PrepareForTest(Utils::class)
 class MediaLicensePresenterTest {
     @Mock
-    internal var repository: UploadRepository? = null
+    internal lateinit var repository: UploadRepository
 
     @Mock
-    internal var view: MediaLicenseContract.View? = null
+    internal lateinit var defaultKvStore: JsonKvStore
+
+    @Mock
+    internal lateinit var view: MediaLicenseContract.View
 
     @InjectMocks
-    var mediaLicensePresenter: MediaLicensePresenter? = null
+    lateinit var mediaLicensePresenter: MediaLicensePresenter
 
     /**
      * initial setup test environemnt
@@ -39,7 +43,7 @@ class MediaLicensePresenterTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        mediaLicensePresenter?.onAttachView(view)
+        mediaLicensePresenter.onAttachView(view)
         PowerMockito.mockStatic(Utils::class.java)
         PowerMockito.`when`(Utils.licenseNameFor(ArgumentMatchers.anyString())).thenReturn(1)
     }
@@ -50,9 +54,9 @@ class MediaLicensePresenterTest {
      */
     @Test
     fun getLicenseTest() {
-        mediaLicensePresenter?.getLicenses()
-        verify(view)?.setLicenses(ArgumentMatchers.anyList())
-        verify(view)?.setSelectedLicense(ArgumentMatchers.any())
+        mediaLicensePresenter.getLicenses()
+        verify(view).setLicenses(ArgumentMatchers.anyList())
+        verify(view).setSelectedLicense(ArgumentMatchers.any())
     }
 
     /**
@@ -60,7 +64,7 @@ class MediaLicensePresenterTest {
      */
     @Test
     fun selectLicenseTest() {
-        mediaLicensePresenter?.selectLicense(ArgumentMatchers.anyString())
-        verify(view)?.updateLicenseSummary(ArgumentMatchers.any(), ArgumentMatchers.anyInt())
+        mediaLicensePresenter.selectLicense(ArgumentMatchers.anyString())
+        verify(view).updateLicenseSummary(ArgumentMatchers.any(), ArgumentMatchers.anyInt())
     }
 }
