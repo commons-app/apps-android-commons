@@ -55,14 +55,14 @@ class DeleteHelperTest {
 
         whenever(media.displayTitle).thenReturn("Test file")
 
-        val creatorName = "Creator"
-        whenever(media.creator).thenReturn("$creatorName (page does not exist)")
+        val authorName = "Author"
+        whenever(media.author).thenReturn("$authorName (page does not exist)")
         whenever(media.filename).thenReturn("Test file.jpg")
 
         val makeDeletion = deleteHelper.makeDeletion(context, media, "Test reason")?.blockingGet()
         assertNotNull(makeDeletion)
         assertTrue(makeDeletion!!)
-        verify(pageEditClient).appendEdit(eq("User_Talk:$creatorName"), ArgumentMatchers.anyString(), ArgumentMatchers.anyString())
+        verify(pageEditClient).appendEdit(eq("User_Talk:$authorName"), ArgumentMatchers.anyString(), ArgumentMatchers.anyString())
     }
 
     /**
@@ -78,7 +78,7 @@ class DeleteHelperTest {
                 .thenReturn(Observable.just(true))
         whenever(media.displayTitle).thenReturn("Test file")
         whenever(media.filename).thenReturn("Test file.jpg")
-        whenever(media.creator).thenReturn("Creator (page does not exist)")
+        whenever(media.author).thenReturn("Author")
 
         deleteHelper.makeDeletion(context, media, "Test reason")?.blockingGet()
     }
@@ -93,7 +93,7 @@ class DeleteHelperTest {
                 .thenReturn(Observable.just(false))
         whenever(media.displayTitle).thenReturn("Test file")
         whenever(media.filename).thenReturn("Test file.jpg")
-        whenever(media.creator).thenReturn("Creator (page does not exist)")
+        whenever(media.author).thenReturn("Author")
 
         deleteHelper.makeDeletion(context, media, "Test reason")?.blockingGet()
     }
@@ -108,7 +108,7 @@ class DeleteHelperTest {
                 .thenReturn(Observable.just(true))
         whenever(media.displayTitle).thenReturn("Test file")
         whenever(media.filename).thenReturn("Test file.jpg")
-        whenever(media.creator).thenReturn("Creator (page does not exist)")
+        whenever(media.author).thenReturn("Author")
 
         deleteHelper.makeDeletion(context, media, "Test reason")?.blockingGet()
     }
@@ -125,7 +125,7 @@ class DeleteHelperTest {
         whenever(media.displayTitle).thenReturn("Test file")
         media.filename ="Test file.jpg"
 
-        whenever(media.creator).thenReturn(null)
+        whenever(media.author).thenReturn(null)
 
         deleteHelper.makeDeletion(context, media, "Test reason")?.blockingGet()
     }

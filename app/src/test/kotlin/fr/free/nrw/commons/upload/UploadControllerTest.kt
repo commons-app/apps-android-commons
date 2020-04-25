@@ -49,7 +49,7 @@ class UploadControllerTest {
     @Test
     fun startUpload() {
         val contribution = mock(Contribution::class.java)
-        `when`(contribution.getCreator()).thenReturn("Creator")
+        `when`(contribution.getAuthor()).thenReturn("Author")
         uploadController!!.startUpload(contribution)
     }
 }

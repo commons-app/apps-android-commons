@@ -401,10 +401,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
         else depictsLayout.setVisibility(GONE);
 
-        if (media.getCreator() == null || media.getCreator().equals("")) {
+        if (media.getAuthor() == null || media.getAuthor().equals("")) {
             authorLayout.setVisibility(GONE);
         } else {
-            author.setText(media.getCreator());
+            author.setText(media.getAuthor());
         }
 
         checkDeletion(media);
@@ -453,7 +453,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.nominateDeletion)
     public void onDeleteButtonClicked(){
-            if (AccountUtil.getUserName(getContext()) != null && AccountUtil.getUserName(getContext()).equals(media.getCreator())) {
+            if (AccountUtil.getUserName(getContext()) != null && AccountUtil.getUserName(getContext()).equals(media.getAuthor())) {
                 final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(getActivity(),
                     R.layout.simple_spinner_dropdown_list, reasonList);
                 final Spinner spinner = new Spinner(getActivity());

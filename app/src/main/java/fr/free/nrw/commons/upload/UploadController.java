@@ -92,15 +92,15 @@ public class UploadController {
      */
     @SuppressLint("StaticFieldLeak")
     public void startUpload(final Contribution contribution) {
-        //Set creator, desc, and license
+        //Set author, desc, and license
 
         // If author name is enabled and set, use it
         if (store.getBoolean("useAuthorName", false)) {
             final String authorName = store.getString("authorName", "");
-            contribution.setCreator(authorName);
+            contribution.setAuthor(authorName);
         }
 
-        if (TextUtils.isEmpty(contribution.getCreator())) {
+        if (TextUtils.isEmpty(contribution.getAuthor())) {
             final Account currentAccount = sessionManager.getCurrentAccount();
             if (currentAccount == null) {
                 Timber.d("Current account is null");
@@ -108,7 +108,7 @@ public class UploadController {
                 sessionManager.forceLogin(context);
                 return;
             }
-            contribution.setCreator(sessionManager.getUserName());
+            contribution.setAuthor(sessionManager.getUserName());
         }
 
         if (contribution.getDescription() == null) {

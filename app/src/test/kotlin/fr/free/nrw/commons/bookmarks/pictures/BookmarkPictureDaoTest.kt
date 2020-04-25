@@ -34,7 +34,7 @@ class BookmarkPictureDaoTest {
 
     @Before
     fun setUp() {
-        exampleBookmark = Bookmark("mediaName", "creatorName", Uri.EMPTY)
+        exampleBookmark = Bookmark("mediaName", "authorName", Uri.EMPTY)
         testObject = BookmarkPicturesDao { client }
     }
 
@@ -59,7 +59,7 @@ class BookmarkPictureDaoTest {
             cursor.moveToFirst()
             testObject.fromCursor(cursor).let {
                 assertEquals("mediaName", it.mediaName)
-                assertEquals("creatorName", it.mediaCreator)
+                assertEquals("authorName", it.mediaAuthor)
             }
         }
     }
@@ -114,7 +114,7 @@ class BookmarkPictureDaoTest {
         captor.firstValue.let { cv ->
             assertEquals(2, cv.size())
             assertEquals(exampleBookmark.mediaName, cv.getAsString(COLUMN_MEDIA_NAME))
-            assertEquals(exampleBookmark.mediaCreator, cv.getAsString(COLUMN_CREATOR))
+            assertEquals(exampleBookmark.mediaAuthor, cv.getAsString(COLUMN_CREATOR))
         }
     }
 
@@ -212,7 +212,7 @@ class BookmarkPictureDaoTest {
 
     private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
         for (i in 0 until rowCount) {
-            addRow(listOf("mediaName", "creatorName"))
+            addRow(listOf("mediaName", "authorName"))
         }
     }
 }

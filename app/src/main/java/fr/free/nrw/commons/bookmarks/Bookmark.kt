@@ -2,7 +2,7 @@ package fr.free.nrw.commons.bookmarks
 
 import android.net.Uri
 
-class Bookmark(mediaName: String?, mediaCreator: String?,
+class Bookmark(mediaName: String?, mediaAuthor: String?,
                /**
                 * Modifies the content URI - marking this bookmark as already saved in the database
                 * @param contentUri the content URI
@@ -18,9 +18,9 @@ class Bookmark(mediaName: String?, mediaCreator: String?,
      */
     val mediaName: String = mediaName ?: ""
     /**
-     * Gets media creator
-     * @return creator name
+     * Gets media author
+     * @return author name
      */
-    val mediaCreator: String = mediaCreator ?: ""
+    val mediaAuthor: String = mediaAuthor ?: ""
 
 }

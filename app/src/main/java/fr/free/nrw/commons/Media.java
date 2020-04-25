@@ -46,7 +46,7 @@ public class Media implements Parcelable {
     @Nullable private Date dateUploaded;
     private String license;
     private String licenseUrl;
-    private String creator;
+    private String author;
     private String user;
     /**
      * Wikibase Identifier associated with media files
@@ -85,12 +85,12 @@ public class Media implements Parcelable {
      * @param dataLength Media date length
      * @param dateCreated Media creation date
      * @param dateUploaded Media date uploaded
-     * @param creator Media creator
+     * @param author Media author
      * @param user Media username
      */
     public Media(Uri localUri, String imageUrl, String filename,
         String description,
-        long dataLength, Date dateCreated, Date dateUploaded, String creator, String user) {
+        long dataLength, Date dateCreated, Date dateUploaded, String author, String user) {
         this.localUri = localUri;
         this.thumbUrl = imageUrl;
         this.imageUrl = imageUrl;
@@ -99,19 +99,19 @@ public class Media implements Parcelable {
         this.dataLength = dataLength;
         this.dateCreated = dateCreated;
         this.dateUploaded = dateUploaded;
-        this.creator = creator;
+        this.author = author;
         this.user = user;
     }
 
     public Media(Uri localUri, String filename,
-        String description, String creator, String user, List<String> categories) {
+        String description, String author, String user, List<String> categories) {
         this(localUri,null, filename,
-            description, -1, null, new Date(), creator, user);
+            description, -1, null, new Date(), author, user);
         this.categories = categories;
     }
 
-    public Media(String title, Date date, String creator, String user) {
-        this(null, null, title, "", -1, date, date, creator, user);
+    public Media(String title, Date date, String author, String user) {
+        this(null, null, title, "", -1, date, date, author, user);
     }
 
     /**
@@ -145,7 +145,7 @@ public class Media implements Parcelable {
                 0,
                 safeParseDate(metadata.dateTime()),
                 safeParseDate(metadata.dateTime()),
-                getArtist(metadata),
+                getAuthor(metadata),
                 imageInfo.getUser()
         );
 
@@ -179,15 +179,15 @@ public class Media implements Parcelable {
      * @param metadata
      * @return
      */
-    private static String getArtist(ExtMetadata metadata) {
+    private static String getAuthor(ExtMetadata metadata) {
         try {
-            String artistHtml = metadata.artist();
+            String authorHtml = metadata.artist();
             final String anchorStartTagTerminalChars = "\">";
             final String anchorCloseTag = "</a>";
 
-            return artistHtml.substring(
-                artistHtml.indexOf(anchorStartTagTerminalChars) + anchorStartTagTerminalChars
-                    .length(), artistHtml.indexOf(anchorCloseTag));
+            return authorHtml.substring(
+                authorHtml.indexOf(anchorStartTagTerminalChars) + anchorStartTagTerminalChars
+                    .length(), authorHtml.indexOf(anchorCloseTag));
         } catch (Exception ex) {
             return "";
         }
@@ -375,22 +375,26 @@ public class Media implements Parcelable {
         return user;
     }
 
+    /**
+     * Sets the user name..
+     * @param user  name as a string
+     */
     public void setUser(String user) { this.user = user; }
 
     /**
-     * Gets the name of the creator of the file.
-     * @return creator name as a String
+     * Gets the name of the author of the file.
+     * @return author name as a String
      */
-    public String getCreator() {
-        return creator;
+    public String getAuthor() {
+        return author;
     }
 
     /**
-     * Sets the creator name of the file.
-     * @param creator creator name as a string
+     * Sets the author name of the file.
+     * @param author author name as a string
      */
-    public void setCreator(String creator) {
-        this.creator = creator;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     /**
@@ -555,7 +559,7 @@ public class Media implements Parcelable {
         dest.writeLong(this.dateUploaded != null ? this.dateUploaded.getTime() : -1);
         dest.writeString(this.license);
         dest.writeString(this.licenseUrl);
-        dest.writeString(this.creator);
+        dest.writeString(this.author);
         dest.writeString(this.user);
         dest.writeString(this.pageId);
         dest.writeStringList(this.categories);
@@ -580,7 +584,7 @@ public class Media implements Parcelable {
         this.dateUploaded = tmpDateUploaded == -1 ? null : new Date(tmpDateUploaded);
         this.license = in.readString();
         this.licenseUrl = in.readString();
-        this.creator = in.readString();
+        this.author = in.readString();
         this.user = in.readString();
         this.pageId = in.readString();
         final ArrayList<String> list = new ArrayList<>();

@@ -163,7 +163,7 @@ public class BookmarkPicturesDao {
     private ContentValues toContentValues(Bookmark bookmark) {
         ContentValues cv = new ContentValues();
         cv.put(BookmarkPicturesDao.Table.COLUMN_MEDIA_NAME, bookmark.getMediaName());
-        cv.put(BookmarkPicturesDao.Table.COLUMN_CREATOR, bookmark.getMediaCreator());
+        cv.put(BookmarkPicturesDao.Table.COLUMN_CREATOR, bookmark.getMediaAuthor());
         return cv;
     }
 
