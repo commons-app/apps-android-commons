@@ -56,7 +56,7 @@ class DeleteHelperTest {
         whenever(media.displayTitle).thenReturn("Test file")
 
         val authorName = "Author"
-        whenever(media.author).thenReturn("$authorName (page does not exist)")
+        whenever(media.author).thenReturn("$authorName")
         whenever(media.filename).thenReturn("Test file.jpg")
 
         val makeDeletion = deleteHelper.makeDeletion(context, media, "Test reason")?.blockingGet()
