@@ -48,7 +48,6 @@ import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
 import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.ui.widget.CompatTextView;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
@@ -596,7 +595,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
      */
     private View buildDepictLabel(String depictionName, String entityId, LinearLayout depictionContainer) {
         final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, depictionContainer, false);
-        final CompatTextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
+        final TextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(depictionName);
         if (depictionLoaded) {
@@ -613,7 +612,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private View buildCatLabel(final String catName, ViewGroup categoryContainer) {
         final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, categoryContainer, false);
-        final CompatTextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
+        final TextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
