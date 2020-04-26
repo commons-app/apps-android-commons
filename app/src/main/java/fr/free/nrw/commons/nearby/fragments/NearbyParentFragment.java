@@ -636,7 +636,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public boolean isCurrentLocationMarkerVisible() {
-        if (latLngBounds == null) {
+        if (latLngBounds == null || currentLocationMarker==null) {
             Timber.d("Map projection bounds are null");
             return false;
         } else {
