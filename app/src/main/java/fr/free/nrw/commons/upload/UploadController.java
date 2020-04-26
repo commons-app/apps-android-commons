@@ -13,16 +13,7 @@ import android.net.Uri;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Date;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;

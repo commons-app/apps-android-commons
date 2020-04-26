@@ -58,9 +58,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
-import java.util.List;
-import javax.inject.Inject;
-import javax.inject.Named;
 
 public class ContributionsFragment
         extends CommonsDaggerSupportFragment
