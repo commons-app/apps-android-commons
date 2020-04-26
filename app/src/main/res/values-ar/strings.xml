@@ -13,6 +13,7 @@
 * Mr. Ibrahem
 * NEHAOUA
 * OsamaK
+* Tala Ali
 * ترجمان05
 * ديفيد
 * محمد أحمد عبد الفتاح
@@ -26,10 +27,10 @@
   <string name="preference_category_feedback">التعليقات</string>
   <string name="preference_category_privacy">الخصوصية</string>
   <string name="preference_category_location">الموقع</string>
-  <string name="app_name">كومنز</string>
+  <string name="app_name">المشاعات</string>
   <string name="bullet">•</string>
   <string name="menu_settings">الإعدادات</string>
-  <string name="intent_share_upload_label">رفع إلى كومنز</string>
+  <string name="intent_share_upload_label">رفع إلى المشاعات</string>
   <string name="username">اسم المستخدم</string>
   <string name="password">كلمة السر</string>
   <string name="login_credential">سجل الدخول إلى حسابك في كومنز بيتا</string>
@@ -547,7 +548,7 @@
   <string name="images_featured_explanation">الصور المختارة هي صور من مصورين ورسامين ذوي مهارات عالية اختارها مجتمع ويكيميديا ​​كومنز كبعض الأفضل جودة على الموقع.</string>
   <string name="images_via_nearby_explanation">الصور المرفوعة عبر الأماكن القريبة هي الصور المرفوعة عن طريق اكتشاف الأماكن على الخريطة.</string>
   <string name="thanks_received_explanation">تتيح هذه الميزة للمحررين إرسال إشعار شكر للمستخدمين الذين يقومون بتعديلات مفيدة - باستخدام رابط شكر صغير في صفحة التاريخ أو صفحة الفرق.</string>
-  <string name="previous_image_title_description">نسخ العنوان/الوصف السابق</string>
+  <string name="previous_image_caption_description">نسخ العنوان/الوصف السابق</string>
   <string name="previous_button_tooltip_message">انقر لإعادة استخدام العنوان والوصف الذي أدخلته في صورتك السابقة وتعديله ليناسب الحالي</string>
   <string name="welcome_do_upload_content_description">أمثلة على صور جيدة لرفعها إلى كومنز</string>
   <string name="welcome_dont_upload_content_description">أمثلة على صور لعدم رفعها</string>

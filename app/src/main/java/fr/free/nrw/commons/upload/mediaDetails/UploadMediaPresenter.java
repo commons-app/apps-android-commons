@@ -2,7 +2,7 @@ package fr.free.nrw.commons.upload.mediaDetails;
 
 import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
-import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
+import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION;
 import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
@@ -16,7 +16,7 @@ import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.UserActionListener;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.View;
-import io.reactivex.Observable;
+import io.reactivex.Maybe;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -64,16 +64,14 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
 
     /**
      * Receives the corresponding uploadable file, processes it and return the view with and uplaod item
-     *
-     * @param uploadableFile
-     * @param source
+     *  @param uploadableFile
      * @param place
      */
     @Override
-    public void receiveImage(UploadableFile uploadableFile, String source, Place place) {
+    public void receiveImage(UploadableFile uploadableFile, Place place) {
         view.showProgress(true);
         Disposable uploadItemDisposable = repository
-                .preProcessImage(uploadableFile, place, source, this)
+                .preProcessImage(uploadableFile, place, this)
                 .subscribeOn(ioScheduler)
                 .observeOn(mainThreadScheduler)
                 .subscribe(uploadItem ->
@@ -86,7 +84,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                                 checkNearbyPlaces(uploadItem);
                             }
                         },
-                        throwable -> Timber.e(throwable, "Error occurred in processing images"));
+                        throwable -> Timber.e(throwable, "Error occurred in pre-processing images"));
         compositeDisposable.add(uploadItemDisposable);
     }
 
@@ -95,14 +93,18 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param uploadItem
      */
     private void checkNearbyPlaces(UploadItem uploadItem) {
-        Disposable checkNearbyPlaces = Observable.fromCallable(() -> repository
+        Disposable checkNearbyPlaces = Maybe.fromCallable(() -> repository
                 .checkNearbyPlaces(uploadItem.getGpsCoords().getDecLatitude(),
                         uploadItem.getGpsCoords().getDecLongitude()))
                 .subscribeOn(ioScheduler)
                 .observeOn(mainThreadScheduler)
-                .subscribe(place -> view.onNearbyPlaceFound(uploadItem, place),
-                        throwable -> Timber.e(throwable, "Error occurred in processing images"));
-        compositeDisposable.add(checkNearbyPlaces);
+                .subscribe(place -> {
+                        if (place != null) {
+                            view.onNearbyPlaceFound(uploadItem, place);
+                        }
+                    },
+                    throwable -> Timber.e(throwable, "Error occurred in processing images"));
+            compositeDisposable.add(checkNearbyPlaces);
     }
 
     /**
@@ -143,7 +145,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     }
 
     /**
-     * Fetches and sets the title and desctiption of the previous item
+     * Fetches and sets the caption and desctiption of the previous item
      *
      * @param indexInViewFlipper
      */
@@ -151,7 +153,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     public void fetchPreviousTitleAndDescription(int indexInViewFlipper) {
         UploadItem previousUploadItem = repository.getPreviousUploadItem(indexInViewFlipper);
         if (null != previousUploadItem) {
-            view.setTitleAndDescription(previousUploadItem.getTitle().getTitleText(), previousUploadItem.getDescriptions());
+            view.setCaptionsAndDescriptions(previousUploadItem.getUploadMediaDetails());
         } else {
             view.showMessage(R.string.previous_image_title_description_not_found, R.color.color_error);
         }
@@ -176,7 +178,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     }
 
     /**
-     * Handle  images, say empty title, duplicate file name, bad picture(in all other cases)
+     * Handle  images, say empty caption, duplicate file name, bad picture(in all other cases)
      *
      * @param errorCode
      */
@@ -188,9 +190,9 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
         }
 
         switch (errorCode) {
-            case EMPTY_TITLE:
-                Timber.d("Title is empty. Showing toast");
-                view.showMessage(R.string.add_title_toast, R.color.color_error);
+            case EMPTY_CAPTION:
+                Timber.d("Captions are empty. Showing toast");
+                view.showMessage(R.string.add_caption_toast, R.color.color_error);
                 break;
             case FILE_NAME_EXISTS:
                 Timber.d("Trying to show duplicate picture popup");

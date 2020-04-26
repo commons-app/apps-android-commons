@@ -1,5 +1,9 @@
 package fr.free.nrw.commons.contributions;
 
+import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
+import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+
 import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
@@ -12,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -51,14 +54,13 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
-import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 public class ContributionsFragment
         extends CommonsDaggerSupportFragment
@@ -215,7 +217,7 @@ public class ContributionsFragment
 
             @Override
             public void fetchMediaUriFor(Contribution contribution) {
-                Timber.d("Fetching thumbnail for %s", contribution.filename);
+                Timber.d("Fetching thumbnail for %s", contribution.getFilename());
                 contributionsPresenter.fetchMediaDetails(contribution);
             }
         });

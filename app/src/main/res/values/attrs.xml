@@ -26,18 +26,15 @@
     <attr name="mainTabBackground" format="reference"/>
     <attr name="mainCardBackground" format="reference"/>
     <attr name="mainScreenNearbyPermissionbutton" format="reference"/>
+    <attr name="iconInfo24" format="reference" />
+    <attr name="iconMap24" format="reference" />
+    <attr name="mediaDetailsText" format="reference" />
+    <attr name="mediaDetailsHeadingText" format="reference" />
+    <attr name="mediaDetailNominationBackground" format="reference" />
+    <attr name="mediaDetailSpacerColor" format="reference" />
     <attr name="icon" format="reference"/>
     <attr name="aboutIconsColor" format="reference"/>
-
-
-    <declare-styleable name="CompatTextView">
-        <attr name="drawablePadding" format="dimension"/>
-        <attr name="drawableStart" format="reference"/>
-        <attr name="drawableTop" format="reference"/>
-        <attr name="drawableEnd" format="reference"/>
-        <attr name="drawableBottom" format="reference"/>
-    </declare-styleable>
-
+    
     <declare-styleable name="Badge">
         <attr name="boundary" format="color"/>
         <attr name="camera" format="color"/>

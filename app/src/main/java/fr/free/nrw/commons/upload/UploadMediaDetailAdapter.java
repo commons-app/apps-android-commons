@@ -1,42 +1,37 @@
 package fr.free.nrw.commons.upload;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.recyclerview.widget.RecyclerView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import com.google.android.material.textfield.TextInputLayout;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.utils.AbstractTextWatcher;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.utils.AbstractTextWatcher;
 import timber.log.Timber;
 
-public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewHolder> {
+public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDetailAdapter.ViewHolder> {
 
-    private List<Description> descriptions;
+    private List<UploadMediaDetail> uploadMediaDetails;
     private Callback callback;
+    private EventListener eventListener;
 
     private HashMap<AdapterView, String> selectedLanguages;
-    private String savedLanguageValue;
+    private final String savedLanguageValue;
 
-    public DescriptionsAdapter(String savedLanguageValue) {
-        descriptions = new ArrayList<>();
+    public UploadMediaDetailAdapter(String savedLanguageValue) {
+        uploadMediaDetails = new ArrayList<>();
         selectedLanguages = new HashMap<>();
         this.savedLanguageValue = savedLanguageValue;
     }
@@ -45,8 +40,12 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
         this.callback = callback;
     }
 
-    public void setItems(List<Description> descriptions) {
-        this.descriptions = descriptions;
+    public void setEventListener(EventListener eventListener) {
+        this.eventListener = eventListener;
+    }
+
+    public void setItems(List<UploadMediaDetail> uploadMediaDetails) {
+        this.uploadMediaDetails = uploadMediaDetails;
         selectedLanguages = new HashMap<>();
         notifyDataSetChanged();
     }
@@ -60,12 +59,12 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.init(position);
+        holder.bind(position);
     }
 
     @Override
     public int getItemCount() {
-        return descriptions.size();
+        return uploadMediaDetails.size();
     }
 
     /**
@@ -73,13 +72,13 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
      *
      * @return List of descriptions
      */
-    public List<Description> getDescriptions() {
-        return descriptions;
+    public List<UploadMediaDetail> getUploadMediaDetails() {
+        return uploadMediaDetails;
     }
 
-    public void addDescription(Description description) {
-        this.descriptions.add(description);
-        notifyItemInserted(descriptions.size());
+    public void addDescription(UploadMediaDetail uploadMediaDetail) {
+        this.uploadMediaDetails.add(uploadMediaDetail);
+        notifyItemInserted(uploadMediaDetails.size());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -91,49 +90,63 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
         @BindView(R.id.description_item_edit_text)
         AppCompatEditText descItemEditText;
 
+        @BindView(R.id.description_item_edit_text_input_layout)
+        TextInputLayout descInputLayout;
+
+        @BindView(R.id.caption_item_edit_text)
+        AppCompatEditText captionItemEditText;
+
+        @BindView(R.id.caption_item_edit_text_input_layout)
+        TextInputLayout captionInputLayout;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             Timber.i("descItemEditText:" + descItemEditText);
         }
 
-        public void init(int position) {
-            Description description = descriptions.get(position);
-            Timber.d("Description is " + description);
-            if (!TextUtils.isEmpty(description.getDescriptionText())) {
-                descItemEditText.setText(description.getDescriptionText());
-            } else {
-                descItemEditText.setText("");
-            }
-            if (position == 0) {
-                descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getInfoIcon(),
-                        null);
-                descItemEditText.setOnTouchListener((v, event) -> {
-                    //2 is for drawable right
-                    float twelveDpInPixels = convertDpToPixel(12, descItemEditText.getContext());
-                    if (event.getAction() == MotionEvent.ACTION_UP && descItemEditText.getCompoundDrawables()[2].getBounds().contains((int)(descItemEditText.getWidth()-(event.getX()+twelveDpInPixels)),(int)(event.getY()-twelveDpInPixels))){
-                        if (getAdapterPosition() == 0) {
-                            callback.showAlert(R.string.media_detail_description,
-                                    R.string.description_info);
-                        }
-                        return true;
+        public void bind(int position) {
+            UploadMediaDetail uploadMediaDetail = uploadMediaDetails.get(position);
+            Timber.d("UploadMediaDetail is " + uploadMediaDetail);
+            captionItemEditText.setText(uploadMediaDetail.getCaptionText());
+            descItemEditText.setText(uploadMediaDetail.getDescriptionText());
+
+            captionItemEditText.addTextChangedListener(new AbstractTextWatcher(
+                value -> {
+                    if (position == 0) {
+                        eventListener.onPrimaryCaptionTextChange(value.length() != 0);
                     }
-                    return false;
-                });
+                }));
+
+            if (position == 0) {
+                captionInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
+                captionInputLayout.setEndIconDrawable(R.drawable.mapbox_info_icon_default);
+                captionInputLayout.setEndIconOnClickListener(v ->
+                    callback.showAlert(R.string.media_detail_caption, R.string.caption_info));
+
+                descInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
+                descInputLayout.setEndIconDrawable(R.drawable.mapbox_info_icon_default);
+                descInputLayout.setEndIconOnClickListener(v ->
+                    callback.showAlert(R.string.media_detail_description, R.string.description_info));
 
             } else {
-                descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+                captionInputLayout.setEndIconDrawable(null);
+                descInputLayout.setEndIconDrawable(null);
             }
+
+            captionItemEditText.addTextChangedListener(new AbstractTextWatcher(
+                    captionText -> uploadMediaDetails.get(position).setCaptionText(captionText)));
+            initLanguageSpinner(position, uploadMediaDetail);
 
             descItemEditText.addTextChangedListener(new AbstractTextWatcher(
-                    descriptionText -> descriptions.get(position).setDescriptionText(descriptionText)));
-            initLanguageSpinner(position, description);
+                    descriptionText -> uploadMediaDetails.get(position).setDescriptionText(descriptionText)));
+            initLanguageSpinner(position, uploadMediaDetail);
 
             //If the description was manually added by the user, it deserves focus, if not, let the user decide
-            if (description.isManuallyAdded()) {
-                descItemEditText.requestFocus();
+            if (uploadMediaDetail.isManuallyAdded()) {
+                captionItemEditText.requestFocus();
             } else {
-                descItemEditText.clearFocus();
+                captionItemEditText.clearFocus();
             }
         }
 
@@ -142,7 +155,7 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
          * @param position
          * @param description
          */
-        private void initLanguageSpinner(int position, Description description) {
+        private void initLanguageSpinner(int position, UploadMediaDetail description) {
             SpinnerLanguagesAdapter languagesAdapter = new SpinnerLanguagesAdapter(
                     spinnerDescriptionLanguages.getContext(),
                     selectedLanguages
@@ -189,15 +202,6 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
                 selectedLanguages.put(spinnerDescriptionLanguages, description.getLanguageCode());
             }
         }
-
-        /**
-         * Extracted out the method to get the icon drawable
-         */
-        private Drawable getInfoIcon() {
-            return descItemEditText.getContext()
-                    .getResources()
-                    .getDrawable(R.drawable.mapbox_info_icon_default);
-        }
     }
 
     public interface Callback {
@@ -205,13 +209,8 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
         void showAlert(int mediaDetailDescription, int descriptionInfo);
     }
 
-    /**
-     * converts dp to pixel
-     * @param dp
-     * @param context
-     * @return
-     */
-    private float convertDpToPixel(float dp, Context context) {
-        return dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+    public interface EventListener {
+        void onPrimaryCaptionTextChange(boolean isNotEmpty);
     }
+
 }

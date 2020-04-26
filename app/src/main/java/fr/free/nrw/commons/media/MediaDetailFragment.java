@@ -1,10 +1,14 @@
 package fr.free.nrw.commons.media;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.annotation.SuppressLint;
-import android.graphics.drawable.Animatable;
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -22,28 +26,17 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.controller.BaseControllerListener;
-import com.facebook.drawee.controller.ControllerListener;
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.image.ImageInfo;
-import com.facebook.imagepipeline.request.ImageRequest;
-
-import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.util.DateUtil;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-
-import javax.inject.Inject;
-
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import androidx.annotation.Nullable;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.drawee.controller.ControllerListener;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.image.ImageInfo;
+import com.facebook.imagepipeline.request.ImageRequest;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
@@ -53,18 +46,22 @@ import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
+import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.ui.widget.CompatTextView;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import javax.inject.Inject;
+import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.util.DateUtil;
 import timber.log.Timber;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 
 public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
@@ -104,8 +101,18 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @BindView(R.id.mediaDetailImageView)
     SimpleDraweeView image;
+    @BindView(R.id.mediaDetailImageViewLandscape)
+    SimpleDraweeView imageLandscape;
+    @BindView(R.id.mediaDetailImageViewSpacer)
+    LinearLayout imageSpacer;
     @BindView(R.id.mediaDetailTitle)
     TextView title;
+    @BindView(R.id.caption_layout)
+    LinearLayout captionLayout;
+    @BindView(R.id.depicts_layout)
+    LinearLayout depictsLayout;
+    @BindView(R.id.media_detail_caption)
+    TextView mediaCaption;
     @BindView(R.id.mediaDetailDesc)
     HtmlTextView desc;
     @BindView(R.id.mediaDetailAuthor)
@@ -124,6 +131,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     LinearLayout nominatedForDeletion;
     @BindView(R.id.mediaDetailCategoryContainer)
     LinearLayout categoryContainer;
+    @BindView(R.id.media_detail_depiction_container)
+    LinearLayout depictionContainer;
     @BindView(R.id.authorLinearLayout)
     LinearLayout authorLayout;
     @BindView(R.id.nominateDeletion)
@@ -132,10 +141,20 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     ScrollView scrollView;
 
     private ArrayList<String> categoryNames;
+    /**
+     * Depicts is a feature part of Structured data. Multiple Depictions can be added for an image just like categories.
+     * However unlike categories depictions is multi-lingual
+     * Ex: key: en value: monument
+     */
+    private ImageInfo imageInfoCache;
+    private int oldWidthOfImageView;
+    private int newWidthOfImageView;
+    private Depictions depictions;
     private boolean categoriesLoaded = false;
     private boolean categoriesPresent = false;
+    private boolean depictionLoaded = false;
+    private boolean heightVerifyingBoolean = true; // helps in maintaining aspect ratio
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
-    private ViewTreeObserver.OnScrollChangedListener scrollListener;
 
     //Had to make this class variable, to implement various onClicks, which access the media, also I fell why make separate variables when one can serve the purpose
     private Media media;
@@ -197,14 +216,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             authorLayout.setVisibility(GONE);
         }
 
-        // Progressively darken the image in the background when we scroll detail pane up
-        scrollListener = this::updateTheDarkness;
-        view.getViewTreeObserver().addOnScrollChangedListener(scrollListener);
         locale = getResources().getConfiguration().locale;
         return view;
     }
 
-    @OnClick(R.id.mediaDetailImageView)
+    @OnClick(R.id.mediaDetailImageViewSpacer)
     public void launchZoomActivity(View view) {
         Context ctx = view.getContext();
         ctx.startActivity(
@@ -228,10 +244,47 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 @Override
                 public void onGlobalLayout() {
                     scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                        imageLandscape.setVisibility(VISIBLE);
+                    }
+                    oldWidthOfImageView = scrollView.getWidth();
                     displayMediaDetails();
                 }
             }
         );
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        scrollView.getViewTreeObserver().addOnGlobalLayoutListener(
+            new OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    if (scrollView.getWidth() != oldWidthOfImageView) {
+                        if (newWidthOfImageView == 0) {
+                            newWidthOfImageView = scrollView.getWidth();
+                            updateAspectRatio(newWidthOfImageView);
+                        }
+                        scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                }
+            }
+        );
+        // check orientation
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            imageLandscape.setVisibility(VISIBLE);
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            imageLandscape.setVisibility(GONE);
+        }
+        // ensuring correct aspect ratio for landscape mode
+        if (heightVerifyingBoolean) {
+            updateAspectRatio(newWidthOfImageView);
+            heightVerifyingBoolean = false;
+        } else {
+            updateAspectRatio(oldWidthOfImageView);
+            heightVerifyingBoolean = true;
+        }
     }
 
     private void displayMediaDetails() {
@@ -241,31 +294,42 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         desc.setHtmlText(media.getDescription());
         license.setText(media.getLicense());
 
-        Disposable disposable = mediaDataExtractor.fetchMediaDetails(media.getFilename())
+        Disposable disposable = mediaDataExtractor.fetchMediaDetails(media.getFilename(), media.getPageId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::setTextFields);
         compositeDisposable.add(disposable);
     }
 
-    private void updateAspectRatio(ImageInfo imageInfo) {
-        if (imageInfo != null) {
-            int screenWidth = scrollView.getWidth();
-            int finalHeight = (screenWidth*imageInfo.getHeight()) / imageInfo.getWidth();
+    /**
+     * The imageSpacer is Basically a transparent overlay for the SimpleDraweeView
+     * which holds the image to be displayed( moreover this image is out of
+     * the scroll view )
+     * @param scrollWidth the current width of the scrollView
+     */
+    private void updateAspectRatio(int scrollWidth) {
+        if (imageInfoCache != null) {
+            int finalHeight = (scrollWidth*imageInfoCache.getHeight()) / imageInfoCache.getWidth();
             ViewGroup.LayoutParams params = image.getLayoutParams();
+            ViewGroup.LayoutParams spacerParams = imageSpacer.getLayoutParams();
             params.height = finalHeight;
+            spacerParams.height = finalHeight;
             image.setLayoutParams(params);
+            imageSpacer.setLayoutParams(spacerParams);
+            imageLandscape.setLayoutParams(params);
         }
     }
 
     private final ControllerListener aspectRatioListener = new BaseControllerListener<ImageInfo>() {
         @Override
         public void onIntermediateImageSet(String id, @Nullable ImageInfo imageInfo) {
-            updateAspectRatio(imageInfo);
+            imageInfoCache = imageInfo;
+            updateAspectRatio(scrollView.getWidth());
         }
         @Override
         public void onFinalImageSet(String id, @Nullable ImageInfo imageInfo, @Nullable Animatable animatable) {
-            updateAspectRatio(imageInfo);
+            imageInfoCache = imageInfo;
+            updateAspectRatio(scrollView.getWidth());
         }
     };
 
@@ -281,7 +345,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 .setControllerListener(aspectRatioListener)
                 .setOldController(image.getController())
                 .build();
+        DraweeController controllerLandscape = Fresco.newDraweeControllerBuilder()
+            .setLowResImageRequest(ImageRequest.fromUri(media.getThumbUrl()))
+            .setImageRequest(ImageRequest.fromUri(media.getImageUrl()))
+            .setControllerListener(aspectRatioListener)
+            .setOldController(imageLandscape.getController())
+            .build();
         image.setController(controller);
+        imageLandscape.setController(controllerLandscape);
     }
 
     @Override
@@ -289,10 +360,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (layoutListener != null && getView() != null) {
             getView().getViewTreeObserver().removeGlobalOnLayoutListener(layoutListener); // old Android was on crack. CRACK IS WHACK
             layoutListener = null;
-        }
-        if (scrollListener != null && getView() != null) {
-            getView().getViewTreeObserver().removeOnScrollChangedListener(scrollListener);
-            scrollListener = null;
         }
 
         compositeDisposable.clear();
@@ -307,9 +374,17 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         coordinates.setText(prettyCoordinates(media));
         uploadedDate.setText(prettyUploadedDate(media));
         mediaDiscussion.setText(prettyDiscussion(media));
+        if (prettyCaption(media).equals(getContext().getString(R.string.detail_caption_empty))) {
+            captionLayout.setVisibility(GONE);
+        } else mediaCaption.setText(prettyCaption(media));
+
 
         categoryNames.clear();
         categoryNames.addAll(media.getCategories());
+
+        depictions=media.getDepiction();
+
+        depictionLoaded = true;
 
         categoriesLoaded = true;
         categoriesPresent = (categoryNames.size() > 0);
@@ -317,7 +392,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             // Stick in a filler element.
             categoryNames.add(getString(R.string.detail_panel_cats_none));
         }
+
         rebuildCatList();
+
+        if(depictions != null) {
+            rebuildDepictionList();
+        }
+        else depictsLayout.setVisibility(GONE);
 
         if (media.getCreator() == null || media.getCreator().equals("")) {
             authorLayout.setVisibility(GONE);
@@ -326,6 +407,21 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
 
         checkDeletion(media);
+    }
+
+    /**
+     * Populates media details fragment with depiction list
+     */
+    private void rebuildDepictionList() {
+        depictionContainer.removeAllViews();
+        for (IdAndLabel depiction : depictions.getDepictions()) {
+            depictionContainer.addView(
+                buildDepictLabel(
+                    depiction.getEntityLabel(),
+                    depiction.getEntityId(),
+                    depictionContainer
+                ));
+        }
     }
 
     @OnClick(R.id.mediaDetailLicense)
@@ -494,9 +590,29 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
     }
 
+    /**
+     * Add view to depictions obtained also tapping on depictions should open the url
+     */
+    private View buildDepictLabel(String depictionName, String entityId, LinearLayout depictionContainer) {
+        final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, depictionContainer, false);
+        final TextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
+
+        textView.setText(depictionName);
+        if (depictionLoaded) {
+            item.setOnClickListener(view -> {
+                DepictedItem depictedItem = new DepictedItem(depictionName, "", "", false, entityId);
+                Intent intent = new Intent(getContext(), WikidataItemDetailsActivity.class);
+                intent.putExtra("wikidataItemName", depictedItem.getName());
+                intent.putExtra("entityId", depictedItem.getId());
+                getContext().startActivity(intent);
+            });
+        }
+        return item;
+    }
+
     private View buildCatLabel(final String catName, ViewGroup categoryContainer) {
         final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, categoryContainer, false);
-        final CompatTextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
+        final TextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
@@ -511,21 +627,24 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         return item;
     }
 
-    private void updateTheDarkness() {
-        // You must face the darkness alone
-        int scrollY = scrollView.getScrollY();
-        int scrollMax = getView().getHeight();
-        float scrollPercentage = (float) scrollY / (float) scrollMax;
-        final float transparencyMax = 0.75f;
-        if (scrollPercentage > transparencyMax) {
-            scrollPercentage = transparencyMax;
+    /**
+    * Returns captions for media details
+     *
+     * @param media object of class media
+     * @return caption as string
+     */
+    private String prettyCaption(Media media) {
+        String caption = media.getCaption().trim();
+        if (caption.equals("")) {
+            return getString(R.string.detail_caption_empty);
+        } else {
+            return caption;
         }
-        image.setAlpha(1.0f - scrollPercentage);
     }
 
     private String prettyDescription(Media media) {
         // @todo use UI language when multilingual descs are available
-        String desc = media.getDescription(locale.getLanguage()).trim();
+        String desc = media.getDescription();
         if (desc.equals("")) {
             return getString(R.string.detail_description_empty);
         } else {
@@ -571,7 +690,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
     private void checkDeletion(Media media){
-        if (media.getRequestedDeletion()){
+        if (media.isRequestedDeletion()){
             delete.setVisibility(GONE);
             nominatedForDeletion.setVisibility(VISIBLE);
         } else if (!isCategoryImage) {

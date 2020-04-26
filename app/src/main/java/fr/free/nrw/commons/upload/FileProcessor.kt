@@ -5,29 +5,39 @@ import android.content.Context
 import android.net.Uri
 import androidx.exifinterface.media.ExifInterface
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.caching.CacheController
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.mwapi.CategoryApi
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.settings.Prefs
+import fr.free.nrw.commons.upload.structure.depictions.DepictModel
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import java.io.File
 import java.io.IOException
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Named
 
 /**
  * Processing of the image filePath that is about to be uploaded via ShareActivity is done here
  */
+
+private const val DEFAULT_SUGGESTION_RADIUS_IN_METRES = 100
+private const val MAX_SUGGESTION_RADIUS_IN_METRES = 1000
+private const val RADIUS_STEP_SIZE_IN_METRES = 100
+private const val MIN_NEARBY_RESULTS = 5
+
 class FileProcessor @Inject constructor(
     private val context: Context,
     private val contentResolver: ContentResolver,
-    private val cacheController: CacheController,
     private val gpsCategoryModel: GpsCategoryModel,
+    private val depictsModel: DepictModel,
     @param:Named("default_preferences") private val defaultKvStore: JsonKvStore,
-    private val apiCall: CategoryApi
+    private val apiCall: CategoryApi,
+    private val okHttpJsonApiClient: OkHttpJsonApiClient
 ) {
     private val compositeDisposable = CompositeDisposable()
 
@@ -57,7 +67,7 @@ class FileProcessor @Inject constructor(
                 similarImageInterface
             )
         } else {
-            useImageCoords(originalImageCoordinates)
+            prePopulateCategoriesAndDepictionsBy(originalImageCoordinates)
         }
         return originalImageCoordinates
     }
@@ -146,7 +156,7 @@ class FileProcessor @Inject constructor(
 
     private fun readImageCoordinates(file: File) =
         try {
-            ImageCoordinates(contentResolver.openInputStream(Uri.fromFile(file)))
+            ImageCoordinates(contentResolver.openInputStream(Uri.fromFile(file))!!)
         } catch (e: IOException) {
             Timber.e(e)
             try {
@@ -163,29 +173,44 @@ class FileProcessor @Inject constructor(
      *
      * @param imageCoordinates
      */
-    fun useImageCoords(imageCoordinates: ImageCoordinates) {
+    fun prePopulateCategoriesAndDepictionsBy(imageCoordinates: ImageCoordinates) {
         requireNotNull(imageCoordinates.decimalCoords)
-        cacheController.setQtPoint(imageCoordinates.decLongitude, imageCoordinates.decLatitude)
-        val displayCatList = cacheController.findCategory()
+        compositeDisposable.add(
+            apiCall.request(imageCoordinates.decimalCoords)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribe(
+                    { gpsCategoryModel.categoryList = it },
+                    {
+                        Timber.e(it)
+                        gpsCategoryModel.clear()
+                    }
+                )
+        )
 
-        // If no categories found in cache, call MediaWiki API to match image coords with nearby Commons categories
-        if (displayCatList.isEmpty()) {
-            compositeDisposable.add(
-                apiCall.request(imageCoordinates.decimalCoords)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(Schedulers.io())
-                    .subscribe(
-                        { gpsCategoryModel.categoryList = it },
-                        {
-                            Timber.e(it)
-                            gpsCategoryModel.clear()
-                        }
-                    )
+        compositeDisposable.add(
+            suggestNearbyDepictions(imageCoordinates)
+        )
+    }
+
+    private val radiiProgressionInMetres =
+        (DEFAULT_SUGGESTION_RADIUS_IN_METRES..MAX_SUGGESTION_RADIUS_IN_METRES step RADIUS_STEP_SIZE_IN_METRES)
+
+    private fun suggestNearbyDepictions(imageCoordinates: ImageCoordinates): Disposable {
+        return Observable.fromIterable(radiiProgressionInMetres.map { it / 1000.0 })
+            .concatMap {
+                okHttpJsonApiClient.getNearbyPlaces(
+                    imageCoordinates.latLng,
+                    Locale.getDefault().language,
+                    it
+                )
+            }
+            .subscribeOn(Schedulers.io())
+            .filter { it.size >= MIN_NEARBY_RESULTS }
+            .take(1)
+            .subscribe(
+                { depictsModel.nearbyPlaces.offer(it) },
+                { Timber.e(it) }
             )
-            Timber.d("displayCatList size 0, calling MWAPI %s", displayCatList)
-        } else {
-            Timber.d("Cache found, setting categoryList in model to %s", displayCatList)
-            gpsCategoryModel.categoryList = displayCatList
-        }
     }
 }

@@ -529,7 +529,7 @@
   <string name="images_featured_explanation">Вибрані зображення — це зображення від вправних фотографів та ілюстраторів, які спільнота Вікісховища визначила як такі, що мають найкращу якість на сайті.</string>
   <string name="images_via_nearby_explanation">Зображення, завантажені через «Поблизу», — це зображення, завантажені через дослідження місць на карті.</string>
   <string name="thanks_received_explanation">Ця функція дозволяє редакторам надіслати «дякую» користувачам, які роблять корисні редагування, — скориставшись невеличким посиланням на сторінці історії або порівняння версій.</string>
-  <string name="previous_image_title_description">Скопіювати попередні назву й опис</string>
+  <string name="previous_image_caption_description">Скопіювати попередні назву й опис</string>
   <string name="previous_button_tooltip_message">Натисніть, щоб використати назву та опис, які ви вводили для свого попереднього зображення, і змінити їх під поточне</string>
   <string name="welcome_do_upload_content_description">Приклади добрих зображень для завантаження у Вікісховище</string>
   <string name="welcome_dont_upload_content_description">Приклади зображень, які не слід завантажувати</string>

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.wikidata;
 
+import fr.free.nrw.commons.upload.WikidataItem;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
@@ -24,15 +25,16 @@ public class WikidataClient {
 
     /**
      * Create wikidata claim to add P18 value
-     * @param entityId wikidata entity ID
+     * @param entity wikidata entity ID
      * @param value value of the P18 edit
      * @return revisionID of the edit
      */
-    Observable<Long> createClaim(String entityId, String value) {
+    Observable<Long> createImageClaim(WikidataItem entity, String value) {
         return getCsrfToken()
-                .flatMap(csrfToken -> wikidataInterface.postCreateClaim(toRequestBody(entityId),
+                .flatMap(csrfToken -> wikidataInterface.postCreateClaim(
+                        toRequestBody(entity.getId()),
                         toRequestBody("value"),
-                        toRequestBody("P18"),
+                        toRequestBody(WikidataProperties.IMAGE.getPropertyName()),
                         toRequestBody(value),
                         toRequestBody("en"),
                         toRequestBody(csrfToken)))

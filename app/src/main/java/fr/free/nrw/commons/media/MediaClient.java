@@ -2,23 +2,23 @@ package fr.free.nrw.commons.media;
 
 
 import androidx.annotation.NonNull;
-
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-
+import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.utils.CommonsDateUtil;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
-import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.utils.CommonsDateUtil;
-import io.reactivex.Observable;
-import io.reactivex.Single;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
+import org.wikipedia.wikidata.Entities;
+import org.wikipedia.wikidata.Entities.Entity;
+import org.wikipedia.wikidata.Entities.Label;
 import timber.log.Timber;
 
 /**
@@ -28,13 +28,17 @@ import timber.log.Timber;
 public class MediaClient {
 
     private final MediaInterface mediaInterface;
+    private final MediaDetailInterface mediaDetailInterface;
 
     //OkHttpJsonApiClient used JsonKvStore for this. I don't know why.
     private Map<String, Map<String, String>> continuationStore;
+    public static final String NO_CAPTION = "No caption";
+    private static final String NO_DEPICTION = "No depiction";
 
     @Inject
-    public MediaClient(MediaInterface mediaInterface) {
+    public MediaClient(MediaInterface mediaInterface, MediaDetailInterface mediaDetailInterface) {
         this.mediaInterface = mediaInterface;
+        this.mediaDetailInterface = mediaDetailInterface;
         this.continuationStore = new HashMap<>();
     }
 
@@ -88,7 +92,7 @@ public class MediaClient {
      */
     public Single<List<Media>> getMediaListFromSearch(String keyword) {
         return responseToMediaList(
-                continuationStore.containsKey("search_" + keyword) ?
+                continuationStore.containsKey("search_" + keyword) && (continuationStore.get("search_" + keyword)  != null) ?
                         mediaInterface.getMediaListFromSearch(keyword, 10, continuationStore.get("search_" + keyword)) : //if true
                         mediaInterface.getMediaListFromSearch(keyword, 10, Collections.emptyMap()), //if false
                 "search_" + keyword);
@@ -108,7 +112,7 @@ public class MediaClient {
                 .map(Media::from)
                 .collect(ArrayList<Media>::new, List::add);
     }
-  
+
      /**
      * Fetches Media object from the imageInfo API
      *
@@ -152,6 +156,7 @@ public class MediaClient {
                 .single(Media.EMPTY);
     }
 
+
     @NonNull
     public Single<String> getPageHtml(String title){
         return mediaInterface.getPageHtml(title)
@@ -160,4 +165,62 @@ public class MediaClient {
                 .map(MwParseResult::text)
                 .first("");
     }
-}
+
+
+    /**
+     * @return  caption for image using wikibaseIdentifier
+     */
+    public Single<String> getCaptionByWikibaseIdentifier(String wikibaseIdentifier) {
+        return mediaDetailInterface.getCaptionForImage(Locale.getDefault().getLanguage(), wikibaseIdentifier)
+                .map(mediaDetailResponse -> {
+                    if (isSuccess(mediaDetailResponse)) {
+                        for (Entity wikibaseItem : mediaDetailResponse.entities().values()) {
+                            for (Label label : wikibaseItem.labels().values()) {
+                                return label.value();
+                            }
+                        }
+                    }
+                    return NO_CAPTION;
+                })
+                .singleOrError();
+    }
+
+    private boolean isSuccess(Entities response) {
+        return response != null && response.getSuccess() == 1 && response.entities() != null;
+    }
+
+    /**
+     * Fetches Structured data from API
+     *
+     * @param filename
+     * @return a map containing caption and depictions (empty string in the map if no caption/depictions)
+     */
+    public Single<Depictions> getDepictions(String filename)  {
+        return mediaDetailInterface.fetchEntitiesByFileName(Locale.getDefault().getLanguage(), filename)
+                .map(entities -> Depictions.from(entities, this))
+                .singleOrError();
+    }
+
+    /**
+     * Gets labels for Depictions using Entity Id from MediaWikiAPI
+     *
+     * @param entityId  EntityId (Ex: Q81566) of the depict entity
+     * @return label
+     */
+    public Single<String> getLabelForDepiction(String entityId, String language) {
+        return mediaDetailInterface.getEntity(entityId, language)
+                .map(entities -> {
+                    if (isSuccess(entities)) {
+                        for (Entity entity : entities.entities().values()) {
+                            for (Label label : entity.labels().values()) {
+                                return label.value();
+                            }
+                        }
+                    }
+                    throw new RuntimeException("failed getEntities");
+                })
+                .singleOrError();
+    }
+
+    }
+
