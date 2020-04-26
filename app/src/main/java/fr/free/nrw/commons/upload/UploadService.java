@@ -26,6 +26,7 @@ import fr.free.nrw.commons.wikidata.WikidataEditService;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.processors.PublishProcessor;
 import io.reactivex.schedulers.Schedulers;
 import java.io.File;
@@ -160,10 +161,7 @@ public class UploadService extends CommonsDaggerService {
             .save(contribution)
             .subscribeOn(ioThreadScheduler)
             .observeOn(mainThreadScheduler)
-            .subscribe(aLong->{
-                contribution.set_id(aLong);
-                uploadContribution(contribution);
-            }, Throwable::printStackTrace));
+            .subscribe(aLong -> uploadContribution(contribution), Throwable::printStackTrace));
     }
 
     private boolean freshStart = true;
@@ -300,7 +298,7 @@ public class UploadService extends CommonsDaggerService {
         contribution.setDateUploaded(CommonsDateUtil.getIso8601DateFormatTimestamp()
             .parse(uploadResult.getImageinfo().getTimestamp()));
 
-        Disposable disposable = contributionDao.delete(contribution)
+        final Disposable disposable = contributionDao.delete(contribution)
             .flatMap(integer -> mediaClient.getMedia("File:" + uploadResult.getFilename()))
             .subscribe(media -> contributionDao.save(new Contribution(media)));
 
