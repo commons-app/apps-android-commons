@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.explore.depictions;
 
+import static fr.free.nrw.commons.explore.depictions.DepictsClient.NO_DEPICTED_IMAGE;
+
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.text.TextUtils;
@@ -45,9 +47,6 @@ public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
 
     private DepictCallback listener;
 
-    int size = 0;
-    private final static String NO_IMAGE_FOR_DEPICTION = "No Image for Depiction";
-
     public SearchDepictionsRenderer(DepictCallback listener) {
         this.listener = listener;
     }
@@ -84,7 +83,7 @@ public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
 
         Timber.e("line86"+item.getImageUrl());
         if (!TextUtils.isEmpty(item.getImageUrl())) {
-            if (!item.getImageUrl().equals(NO_IMAGE_FOR_DEPICTION) && !item.getImageUrl().equals(""))
+            if (!item.getImageUrl().equals(NO_DEPICTED_IMAGE) && !item.getImageUrl().equals(""))
             {
                 ImageRequest imageRequest = ImageRequestBuilder
                         .newBuilderWithSource(Uri.parse(item.getImageUrl()))

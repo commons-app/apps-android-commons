@@ -16,7 +16,7 @@ import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.UserActionListener;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.View;
-import io.reactivex.Observable;
+import io.reactivex.Maybe;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -84,7 +84,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                                 checkNearbyPlaces(uploadItem);
                             }
                         },
-                        throwable -> Timber.e(throwable, "Error occurred in processing images"));
+                        throwable -> Timber.e(throwable, "Error occurred in pre-processing images"));
         compositeDisposable.add(uploadItemDisposable);
     }
 
@@ -93,14 +93,18 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param uploadItem
      */
     private void checkNearbyPlaces(UploadItem uploadItem) {
-        Disposable checkNearbyPlaces = Observable.fromCallable(() -> repository
+        Disposable checkNearbyPlaces = Maybe.fromCallable(() -> repository
                 .checkNearbyPlaces(uploadItem.getGpsCoords().getDecLatitude(),
                         uploadItem.getGpsCoords().getDecLongitude()))
                 .subscribeOn(ioScheduler)
                 .observeOn(mainThreadScheduler)
-                .subscribe(place -> view.onNearbyPlaceFound(uploadItem, place),
-                        throwable -> Timber.e(throwable, "Error occurred in processing images"));
-        compositeDisposable.add(checkNearbyPlaces);
+                .subscribe(place -> {
+                        if (place != null) {
+                            view.onNearbyPlaceFound(uploadItem, place);
+                        }
+                    },
+                    throwable -> Timber.e(throwable, "Error occurred in processing images"));
+            compositeDisposable.add(checkNearbyPlaces);
     }
 
     /**

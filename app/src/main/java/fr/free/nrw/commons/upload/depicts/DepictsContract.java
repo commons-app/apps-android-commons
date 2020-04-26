@@ -1,9 +1,10 @@
 package fr.free.nrw.commons.upload.depicts;
 
-import java.util.List;
-
+import androidx.lifecycle.LiveData;
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
+import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The contract with which DepictsFragment and its presenter would talk to each other
@@ -41,10 +42,8 @@ public interface DepictsContract {
          */
         void setDepictsList(List<DepictedItem> depictedItemList);
 
-        /**
-         * Set thumbnail image for depicted item
-         */
-        void onImageUrlFetched(String response, int position);
+
+        void onUrlFetched(@NotNull DepictedItem depictedItem, @NotNull String url);
     }
 
     interface UserActionListener extends BasePresenter<View> {
@@ -71,11 +70,8 @@ public interface DepictsContract {
          */
         void verifyDepictions();
 
-        /**
-         * Fetch thumbnail for the Wikidata Item
-         * @param entityId entityId of the item
-         * @param position position of the item
-         */
-        void fetchThumbnailForEntityId(String entityId, int position);
+        LiveData<List<DepictedItem>> getDepictedItems();
+
+        void fetchThumbnailForEntityId(DepictedItem depictedItem);
     }
 }

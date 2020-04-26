@@ -23,7 +23,6 @@ import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.campaigns.Campaign;
@@ -103,7 +102,7 @@ public class ContributionsFragment
     private ServiceConnection uploadServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
-            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder) binder)
+            uploadService = (UploadService) ((UploadService.UploadServiceLocalBinder) binder)
                     .getService();
             isUploadServiceConnected = true;
         }
@@ -474,7 +473,7 @@ public class ContributionsFragment
     public void retryUpload(Contribution contribution) {
         if (NetworkUtils.isInternetConnectionEstablished(getContext())) {
             if (contribution.getState() == STATE_FAILED && null != uploadService) {
-                uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
+                uploadService.queue(contribution);
                 Timber.d("Restarting for %s", contribution.toString());
             } else {
                 Timber.d("Skipping re-upload for non-failed %s", contribution.toString());

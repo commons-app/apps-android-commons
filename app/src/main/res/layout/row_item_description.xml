@@ -19,6 +19,7 @@
         android:orientation="vertical"
         android:layout_weight="8">
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/caption_item_edit_text_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -33,6 +34,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/description_item_edit_text_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >

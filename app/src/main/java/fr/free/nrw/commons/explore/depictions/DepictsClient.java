@@ -32,7 +32,7 @@ public class DepictsClient {
 
     private final DepictsInterface depictsInterface;
     private final MediaInterface mediaInterface;
-    private static final String NO_DEPICTED_IMAGE = "No Image for Depiction";
+    public static final String NO_DEPICTED_IMAGE = "No Image for Depiction";
 
     @Inject
     public DepictsClient(DepictsInterface depictsInterface, MediaInterface mediaInterface) {
@@ -46,14 +46,16 @@ public class DepictsClient {
      */
     public Observable<DepictedItem> searchForDepictions(String query, int limit, int offset) {
         return depictsInterface.searchForDepicts(
-                query,
-                String.valueOf(limit),
-                Locale.getDefault().getLanguage(),
-                Locale.getDefault().getLanguage(),
-                String.valueOf(offset)
+            query,
+            String.valueOf(limit),
+            Locale.getDefault().getLanguage(),
+            Locale.getDefault().getLanguage(),
+            String.valueOf(offset)
         )
-                .flatMap(depictSearchResponse ->Observable.fromIterable(depictSearchResponse.getSearch()))
-                .map(DepictedItem::new);
+            .toObservable()
+            .flatMap( depictSearchResponse ->
+                Observable.fromIterable(depictSearchResponse.getSearch()))
+            .map(DepictedItem::new);
     }
 
     /**
@@ -80,15 +82,13 @@ public class DepictsClient {
             .map(claimsResponse -> {
                 final List<Statement_partial> imageClaim = claimsResponse.getClaims()
                     .get(WikidataProperties.IMAGE.getPropertyName());
-                if (imageClaim != null) {
                     final DataValueString dataValue = (DataValueString) imageClaim
                         .get(0)
                         .getMainSnak()
                         .getDataValue();
                     return getThumbnailUrl((dataValue.getValue()));
-                }
-                return NO_DEPICTED_IMAGE;
             })
+            .onErrorReturn(throwable -> NO_DEPICTED_IMAGE)
             .singleOrError();
     }
 

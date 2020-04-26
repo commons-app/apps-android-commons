@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -47,7 +48,6 @@ import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
 import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.ui.widget.CompatTextView;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
@@ -101,6 +101,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @BindView(R.id.mediaDetailImageView)
     SimpleDraweeView image;
+    @BindView(R.id.mediaDetailImageViewLandscape)
+    SimpleDraweeView imageLandscape;
     @BindView(R.id.mediaDetailImageViewSpacer)
     LinearLayout imageSpacer;
     @BindView(R.id.mediaDetailTitle)
@@ -144,12 +146,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
      * However unlike categories depictions is multi-lingual
      * Ex: key: en value: monument
      */
+    private ImageInfo imageInfoCache;
+    private int oldWidthOfImageView;
+    private int newWidthOfImageView;
     private Depictions depictions;
     private boolean categoriesLoaded = false;
     private boolean categoriesPresent = false;
     private boolean depictionLoaded = false;
+    private boolean heightVerifyingBoolean = true; // helps in maintaining aspect ratio
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
-    private ViewTreeObserver.OnScrollChangedListener scrollListener;
 
     //Had to make this class variable, to implement various onClicks, which access the media, also I fell why make separate variables when one can serve the purpose
     private Media media;
@@ -211,9 +216,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             authorLayout.setVisibility(GONE);
         }
 
-        // Progressively darken the image in the background when we scroll detail pane up
-        scrollListener = this::updateTheDarkness;
-        view.getViewTreeObserver().addOnScrollChangedListener(scrollListener);
         locale = getResources().getConfiguration().locale;
         return view;
     }
@@ -242,10 +244,47 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 @Override
                 public void onGlobalLayout() {
                     scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                        imageLandscape.setVisibility(VISIBLE);
+                    }
+                    oldWidthOfImageView = scrollView.getWidth();
                     displayMediaDetails();
                 }
             }
         );
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        scrollView.getViewTreeObserver().addOnGlobalLayoutListener(
+            new OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    if (scrollView.getWidth() != oldWidthOfImageView) {
+                        if (newWidthOfImageView == 0) {
+                            newWidthOfImageView = scrollView.getWidth();
+                            updateAspectRatio(newWidthOfImageView);
+                        }
+                        scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                }
+            }
+        );
+        // check orientation
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            imageLandscape.setVisibility(VISIBLE);
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            imageLandscape.setVisibility(GONE);
+        }
+        // ensuring correct aspect ratio for landscape mode
+        if (heightVerifyingBoolean) {
+            updateAspectRatio(newWidthOfImageView);
+            heightVerifyingBoolean = false;
+        } else {
+            updateAspectRatio(oldWidthOfImageView);
+            heightVerifyingBoolean = true;
+        }
     }
 
     private void displayMediaDetails() {
@@ -266,29 +305,31 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
      * The imageSpacer is Basically a transparent overlay for the SimpleDraweeView
      * which holds the image to be displayed( moreover this image is out of
      * the scroll view )
-     * @param imageInfo used to calculate height of the ImageSpacer
+     * @param scrollWidth the current width of the scrollView
      */
-    private void updateAspectRatio(ImageInfo imageInfo) {
-        if (imageInfo != null) {
-            int screenWidth = scrollView.getWidth();
-            int finalHeight = (screenWidth*imageInfo.getHeight()) / imageInfo.getWidth();
+    private void updateAspectRatio(int scrollWidth) {
+        if (imageInfoCache != null) {
+            int finalHeight = (scrollWidth*imageInfoCache.getHeight()) / imageInfoCache.getWidth();
             ViewGroup.LayoutParams params = image.getLayoutParams();
             ViewGroup.LayoutParams spacerParams = imageSpacer.getLayoutParams();
             params.height = finalHeight;
             spacerParams.height = finalHeight;
             image.setLayoutParams(params);
             imageSpacer.setLayoutParams(spacerParams);
+            imageLandscape.setLayoutParams(params);
         }
     }
 
     private final ControllerListener aspectRatioListener = new BaseControllerListener<ImageInfo>() {
         @Override
         public void onIntermediateImageSet(String id, @Nullable ImageInfo imageInfo) {
-            updateAspectRatio(imageInfo);
+            imageInfoCache = imageInfo;
+            updateAspectRatio(scrollView.getWidth());
         }
         @Override
         public void onFinalImageSet(String id, @Nullable ImageInfo imageInfo, @Nullable Animatable animatable) {
-            updateAspectRatio(imageInfo);
+            imageInfoCache = imageInfo;
+            updateAspectRatio(scrollView.getWidth());
         }
     };
 
@@ -304,7 +345,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 .setControllerListener(aspectRatioListener)
                 .setOldController(image.getController())
                 .build();
+        DraweeController controllerLandscape = Fresco.newDraweeControllerBuilder()
+            .setLowResImageRequest(ImageRequest.fromUri(media.getThumbUrl()))
+            .setImageRequest(ImageRequest.fromUri(media.getImageUrl()))
+            .setControllerListener(aspectRatioListener)
+            .setOldController(imageLandscape.getController())
+            .build();
         image.setController(controller);
+        imageLandscape.setController(controllerLandscape);
     }
 
     @Override
@@ -312,10 +360,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (layoutListener != null && getView() != null) {
             getView().getViewTreeObserver().removeGlobalOnLayoutListener(layoutListener); // old Android was on crack. CRACK IS WHACK
             layoutListener = null;
-        }
-        if (scrollListener != null && getView() != null) {
-            getView().getViewTreeObserver().removeOnScrollChangedListener(scrollListener);
-            scrollListener = null;
         }
 
         compositeDisposable.clear();
@@ -551,7 +595,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
      */
     private View buildDepictLabel(String depictionName, String entityId, LinearLayout depictionContainer) {
         final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, depictionContainer, false);
-        final CompatTextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
+        final TextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(depictionName);
         if (depictionLoaded) {
@@ -568,7 +612,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private View buildCatLabel(final String catName, ViewGroup categoryContainer) {
         final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, categoryContainer, false);
-        final CompatTextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
+        final TextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
@@ -581,18 +625,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             });
         }
         return item;
-    }
-
-    private void updateTheDarkness() {
-        // You must face the darkness alone
-        int scrollY = scrollView.getScrollY();
-        int scrollMax = getView().getHeight();
-        float scrollPercentage = (float) scrollY / (float) scrollMax;
-        final float transparencyMax = 0.75f;
-        if (scrollPercentage > transparencyMax) {
-            scrollPercentage = transparencyMax;
-        }
-        image.setAlpha(1.0f - scrollPercentage);
     }
 
     /**
