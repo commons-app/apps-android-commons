@@ -51,8 +51,7 @@
   <string name="provider_contributions">Fy uwchlwythiadau</string>
   <string name="menu_share">Rhannu</string>
   <string name="menu_open_in_browser">Agor yn y Porwr</string>
-  <string name="share_title_hint">Teitl (angenrheidiol)</string>
-  <string name="add_title_toast">Rhowch deitl i\'r ffeil</string>
+  <string name="share_title_hint" fuzzy="true">Teitl (angenrheidiol)</string>
   <string name="share_description_hint">Disgrifiad</string>
   <string name="login_failed_network">Yn methu mewngofnodi - methodd y rhwydwaith</string>
   <string name="login_failed_wrong_credentials">Methwyd mewngofnodi - gwirwch eich enw defnyddiwr a\'ch cyfrinair</string>

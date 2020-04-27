@@ -7,6 +7,7 @@
 * Leduyquang753
 * Minh Nguyen
 * Nhatminh01
+* Phjtieudoc
 * Thanhtai2009
 * Thienhau2003
 * Tuankiet65
@@ -60,8 +61,7 @@
   <string name="provider_contributions">Tập tin tôi tải lên</string>
   <string name="menu_share">Chia sẻ</string>
   <string name="menu_open_in_browser">Mở trong Trình duyệt</string>
-  <string name="share_title_hint">Tựa đề (Yêu cầu)</string>
-  <string name="add_title_toast">Xin hãy đặt tiêu đề cho tập tin này</string>
+  <string name="share_title_hint" fuzzy="true">Tựa đề (Yêu cầu)</string>
   <string name="share_description_hint">Miêu tả</string>
   <string name="login_failed_network">Không thể đăng nhập – có lỗi mạng</string>
   <string name="login_failed_wrong_credentials">Không thể đăng nhập – vui lòng kiểm tra tên người dùng và mật khẩu của bạn</string>
@@ -72,7 +72,7 @@
   <string name="share_upload_button">Tải lên</string>
   <string name="multiple_share_base_title">Đặt tên nhóm này</string>
   <string name="add_set_name_toast">Vui lòng đặt tên cho tập tin này</string>
-  <string name="provider_modifications">Các thay đổi</string>
+  <string name="provider_modifications">Sửa đổi</string>
   <string name="menu_upload_single">Tải lên</string>
   <string name="categories_search_text_hint">Tìm thể loại</string>
   <string name="menu_save_categories">Lưu</string>
@@ -102,7 +102,7 @@
   <string name="about_license">Ứng dụng Wikimedia Commons là ứng dụng mã nguồn mở được sáng tạo và quản lý bởi các tình nguyện viên và những người được tin tưởng của cộng đồng Wikipedia. Wikimedia Foundation không tham gia vào sự tạo lập, phát triển cũng như quản lý của ứng dụng.</string>
   <string name="about_improve">Báo cáo lỗi cũng như đưa ra các ý tưởng &lt;a href=\"%1$s\"&gt;trên GitHub&lt;/a&gt;.</string>
   <string name="about_privacy_policy">Chính sách riêng tư</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;Công trạng&lt;/u&gt;</string>
+  <string name="about_credits">Ghi công</string>
   <string name="title_activity_about">Giới thiệu</string>
   <string name="menu_feedback">Gửi Phản hồi (qua Thư điện tử)</string>
   <string name="no_email_client">Không có chương trình thư điện tử nào được cài đặt</string>
@@ -111,11 +111,14 @@
   <string name="no_uploads_yet">Bạn chưa tải lên hình nào.</string>
   <string name="menu_retry_upload">Thử lại</string>
   <string name="menu_cancel_upload">Hủy bỏ</string>
-  <string name="share_license_summary" fuzzy="true">Hình này sẽ được phát hành theo giấy phép %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Hình này sẽ được phát hành theo giấy phép %1$s</item>
+    <item quantity="other">Những hình này sẽ được phát hành theo giấy phép %1$s</item>
+  </plurals>
   <string name="media_upload_policy">Với việc đăng hình này, tôi tuyên bố rằng nó là tác phẩm của chính mình, rằng nó không chứa nội dung có bản quyền hoặc ảnh tự chụp, và về mặt khác thì hoàn toàn tuân theo &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines?uselang=vi\"&gt;các quy định Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Tải về</string>
   <string name="preference_license">Giấy phép mặc định</string>
-  <string name="use_previous" fuzzy="true">Sử dụng tiêu đề/miêu tả trước</string>
+  <string name="use_previous">Sử dụng tiêu đề và miêu tả trước</string>
   <string name="allow_gps">Lấy vị trí hiện tại tự động</string>
   <string name="allow_gps_summary" fuzzy="true">Định vị hiện tại để nhận gợi ý thể loại trong trường hợp hình ảnh chưa được gắn thẻ địa lý</string>
   <string name="preference_theme">Giao diện</string>
@@ -175,6 +178,7 @@
   <string name="no_nearby">Không tìm thấy nơi lân cận</string>
   <string name="warning">Cảnh báo</string>
   <string name="upload_image_duplicate">Tập tin này đã tồn tại trên Commons. Bạn có chắc muốn tiếp tục</string>
+  <string name="upload">Tải lên</string>
   <string name="yes">Có</string>
   <string name="no">Không</string>
   <string name="media_detail_title">Tiêu đề</string>
@@ -251,6 +255,7 @@
   <string name="nominate_deletion">Bầu chọn để xóa</string>
   <string name="nominated_for_deletion">Có đề nghị xóa hình này.</string>
   <string name="view_browser">Hiện lên ở trang xem browse</string>
+  <string name="skip_login">Bỏ qua</string>
   <string name="navigation_item_login">Đăng nhập</string>
   <string name="nearby_location_has_not_changed">Vị trí không thay đổi.</string>
   <string name="nearby_location_not_available" fuzzy="true">Vị trí không có sẵn.</string>
@@ -266,13 +271,13 @@
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us" fuzzy="true">&lt;u&gt;Đánh giá chúng tôi&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;Câu thường hỏi&lt;/u&gt;</string>
+  <string name="about_faq">Câu thường hỏi</string>
   <string name="welcome_skip_button">Bỏ qua Hướng dẫn</string>
   <string name="no_internet">Internet không có sẵn</string>
   <string name="internet_established">Internet có sẵn</string>
   <string name="error_notifications">Lỗi khi lấy thông báo</string>
   <string name="no_notifications">Không tìm thấy thông báo</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;Biên dịch&lt;/u&gt;</string>
+  <string name="about_translate">Biên dịch</string>
   <string name="about_translate_title">Ngôn ngữ</string>
   <string name="about_translate_message">Chọn ngôn ngữ để gửi bản dịch</string>
   <string name="about_translate_proceed">Tiến hành</string>

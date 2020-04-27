@@ -52,8 +52,7 @@
   <string name="provider_contributions">Unjalan kami</string>
   <string name="menu_share">Bagikeun</string>
   <string name="menu_open_in_browser">Tęmbong dina panyungsi</string>
-  <string name="share_title_hint">Judul (Kudu)</string>
-  <string name="add_title_toast">Béré judul koropakna</string>
+  <string name="share_title_hint" fuzzy="true">Judul (Kudu)</string>
   <string name="share_description_hint">Pedaran</string>
   <string name="login_failed_network">Teu bisa login - gangguan jaringan</string>
   <string name="login_failed_wrong_credentials">Teu bisa asup log - pariksa deui sandiasma jeung kecap sandina</string>
@@ -396,8 +395,6 @@
   <string name="desc_language_Asia">Asia</string>
   <string name="desc_language_Pacific">Pasifik</string>
   <string name="no_categories_selected">Euwuh Kategori Dipilih</string>
-  <string name="yes_submit">Nya, Kirim</string>
-  <string name="no_go_back">Teu, Balik Deui</string>
   <string name="upload_flow_all_images_in_set">(Pikeun kabéh gambar dina sét)</string>
   <string name="search_this_area">Paluruh ieu aréa</string>
   <string name="nearby_card_permission_title">Pamundut Idin</string>
@@ -453,7 +450,6 @@
   <string name="image_chooser_title">Pilih Gambar unjalkeuneun</string>
   <string name="please_wait">Mangga tungguan...</string>
   <string name="previous_image_caption_description">Tiron judul &amp; pedaran saméméhna</string>
-  <string name="previous_image_title_description">Tiron judul &amp; pedaran saméméhna</string>
   <string name="skip_image">Iwalkeun ieu gambar</string>
   <string name="exif_tag_name_author">Karya</string>
   <string name="exif_tag_name_copyright">Hak cipta</string>

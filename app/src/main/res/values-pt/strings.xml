@@ -64,8 +64,7 @@
   <string name="provider_contributions">Carregamentos</string>
   <string name="menu_share">Partilhar</string>
   <string name="menu_open_in_browser">Ver no navegador</string>
-  <string name="share_title_hint">Título (obrigatório)</string>
-  <string name="add_title_toast">Forneça um título para este ficheiro, por favor</string>
+  <string name="share_title_hint" fuzzy="true">Título (obrigatório)</string>
   <string name="share_description_hint">Descrição</string>
   <string name="login_failed_network">Não é possível iniciar uma sessão - falha de rede</string>
   <string name="login_failed_wrong_credentials">Não é possível iniciar uma sessão - verifique o seu nome de utilizador e a palavra-passe, por favor</string>
@@ -174,6 +173,7 @@
   <string name="detail_panel_cats_label">Categorias</string>
   <string name="detail_panel_cats_loading">A carregar…</string>
   <string name="detail_panel_cats_none">Nenhuma selecionada</string>
+  <string name="detail_caption_empty">Sem legenda</string>
   <string name="detail_description_empty">Sem descrição</string>
   <string name="detail_discussion_empty">Não há nenhuma discussão</string>
   <string name="detail_license_empty">Licença desconhecida</string>
@@ -190,6 +190,7 @@
   <string name="upload_image_duplicate">Este ficheiro já existe na wiki Commons. Tem a certeza de que deseja continuar?</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
+  <string name="media_detail_caption">Legenda</string>
   <string name="media_detail_title">Título</string>
   <string name="media_detail_description">Descrição</string>
   <string name="media_detail_discussion">Discussão</string>
@@ -435,9 +436,7 @@
   <string name="desc_language_Asia">Ásia</string>
   <string name="desc_language_Pacific">Pacífico</string>
   <string name="no_categories_selected">Não foi selecionada nenhuma categoria</string>
-  <string name="no_categories_selected_warning_desc">As imagens não categorizadas só raramente são utilizáveis. Tem a certeza de que deseja enviar sem selecionar categorias?</string>
-  <string name="yes_submit">Sim, enviar</string>
-  <string name="no_go_back">Não, voltar</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">As imagens não categorizadas só raramente são utilizáveis. Tem a certeza de que deseja enviar sem selecionar categorias?</string>
   <string name="upload_flow_all_images_in_set">(Para todas as imagens do conjunto)</string>
   <string name="search_this_area">Pesquisar nesta área</string>
   <string name="nearby_card_permission_title">Pedido de permissões</string>
@@ -515,7 +514,6 @@
   <string name="images_featured_explanation">As fotografias destacadas são imagens de fotógrafos e ilustradores altamente qualificados, que a comunidade da wiki Wikimedia Commons escolheu como as de melhor qualidade do \'\'site\'\'.</string>
   <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo locais do mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidade permite que os editores enviem uma notificação de agradecimento aos utilizadores que fizerem edições úteis - usando uma pequena hiperligação de agradecimento na página do historial ou na de diferenças.</string>
-  <string name="previous_image_caption_description">Copiar título e descrição anteriores</string>
   <string name="previous_button_tooltip_message">Clique para reutilizar o título e a descrição que inseriu na sua fotografia anterior e adequá-los à atual</string>
   <string name="welcome_do_upload_content_description">Exemplos de imagens que podem ser carregadas na wiki Commons</string>
   <string name="welcome_dont_upload_content_description">Exemplos de imagens que não devem ser carregadas</string>

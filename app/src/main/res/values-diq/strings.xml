@@ -57,8 +57,7 @@
   <string name="provider_contributions">Barkerdışê mı</string>
   <string name="menu_share">Vıla ke</string>
   <string name="menu_open_in_browser">Rovıte dı akê</string>
-  <string name="share_title_hint">Sername (lazımo)</string>
-  <string name="add_title_toast">Kerem ke, seba na dosya rê yew sername cı ke</string>
+  <string name="share_title_hint" fuzzy="true">Sername (lazımo)</string>
   <string name="share_description_hint">Şınasnayış</string>
   <string name="login_failed_network">Xırabiya kewten-network xeta</string>
   <string name="login_failed_wrong_credentials">Nêgêriyeno miyan - kerem ke, parola û nameyê xo kontrol ke</string>
@@ -150,6 +149,7 @@
   <string name="ok">TEMAM</string>
   <string name="title_activity_nearby">Cayê Nezdiy</string>
   <string name="warning">Tembe kem</string>
+  <string name="upload">Bar ke</string>
   <string name="yes">Eya</string>
   <string name="no">Nê</string>
   <string name="media_detail_title">Sername</string>
@@ -255,6 +255,7 @@
   <string name="preference_author_name_toggle">Nameyê nuştekariyo xısusiyi bıgurene</string>
   <string name="preference_author_name">Nameyê nuştekariyo xısusi</string>
   <string name="contributions_fragment">İştıraki</string>
+  <string name="notifications">Tebliği</string>
   <string name="read_notifications">Pêhesnayışi (waniyayê)</string>
   <string name="list_sheet">Liste</string>
   <string name="next">Bahdoyên</string>
@@ -274,8 +275,6 @@
   <string name="desc_language_Asia">Asya</string>
   <string name="desc_language_Pacific">Pasifik</string>
   <string name="no_categories_selected">Kategoriyê ke nêweçiniyê</string>
-  <string name="yes_submit">Eya, bırışe</string>
-  <string name="no_go_back">Nê, Peyser Şo</string>
   <string name="nominate_for_deletion_done">Temam</string>
   <string name="review_thanks_yes_button_text">Eya, çıra mebo</string>
   <string name="no_notification">Beyanatên şımayê nêwendeyi çıniyê</string>
@@ -301,5 +300,6 @@
   <string name="place_state">Weziyetê cayi:</string>
   <string name="place_state_exists">Esto</string>
   <string name="place_state_needs_photo">Fotraf gani</string>
+  <string name="theme_dark_name">Tari</string>
   <string name="theme_light_name">Akerde</string>
 </resources>

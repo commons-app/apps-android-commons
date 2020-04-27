@@ -54,8 +54,7 @@
   <string name="provider_contributions">Moja postavljanja</string>
   <string name="menu_share">Podijeli</string>
   <string name="menu_open_in_browser">Pogledaj u pregledniku</string>
-  <string name="share_title_hint">Naziv (obavezno)</string>
-  <string name="add_title_toast">Molimo imenujte ovu datoteku</string>
+  <string name="share_title_hint" fuzzy="true">Naziv (obavezno)</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Prijava nije moguća - mrežna pogrješka</string>
   <string name="login_failed_wrong_credentials">Prijava nije moguća - molimo provjerite suradničko ime i zaportku</string>

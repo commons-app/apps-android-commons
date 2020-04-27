@@ -56,9 +56,10 @@
   <string name="provider_contributions">Mina uppladdningar</string>
   <string name="menu_share">Dela</string>
   <string name="menu_open_in_browser">Visa i webbläsaren</string>
-  <string name="share_title_hint">Titel (nödvändigt)</string>
-  <string name="add_title_toast">Var god ange en titel för denna fil</string>
+  <string name="share_title_hint">Bildtext (nödvändigt)</string>
+  <string name="add_caption_toast">Var god ange en bildtext för denna fil</string>
   <string name="share_description_hint">Beskrivning</string>
+  <string name="share_caption_hint">Bildtext (maximalt 255 tecken)</string>
   <string name="login_failed_network">Det gick inte att logga in - nätverksfel</string>
   <string name="login_failed_wrong_credentials">Kunde inte logga in - kontrollera ditt användarnamn och lösenord</string>
   <string name="login_failed_throttled">För många misslyckade försök. Var god försök igen om några minuter.</string>
@@ -71,6 +72,7 @@
   <string name="provider_modifications">Ändringar</string>
   <string name="menu_upload_single">Ladda upp</string>
   <string name="categories_search_text_hint">Sök kategorier</string>
+  <string name="depicts_search_text_hint">Sök efter objekt som din mediafil skildrar (berg, Taj Mahal, etc.)</string>
   <string name="menu_save_categories">Spara</string>
   <string name="refresh_button">Uppdatera</string>
   <string name="display_list_button">Lista</string>
@@ -91,6 +93,10 @@
     <item quantity="other">%1$d uppladdningar</item>
   </plurals>
   <string name="categories_not_found">Inga kategorier som stämmer överens med %1$s hittades</string>
+  <string name="depictions_not_found">Inga Wikidata-objekt som matchar %1$s hittades</string>
+  <string name="no_child_classes">%1$s har inga underordnade klasser</string>
+  <string name="no_parent_classes">%1$s har inga överordnade klasser</string>
+  <string name="depictions_image_not_found">Inga bilder att skildra</string>
   <string name="categories_skip_explanation">Lägg till kategorier för att göra dina bilder enklare att hitta på Wikimedia Commons.\n\nBörja skriva för att lägga till kategorier.</string>
   <string name="categories_activity_title">Kategorier</string>
   <string name="title_activity_settings">Inställningar</string>
@@ -107,6 +113,7 @@
   <string name="menu_feedback">Skicka feedback (via e-post)</string>
   <string name="no_email_client">Ingen e-postklient är installerad</string>
   <string name="provider_categories">Nyligen använda kategorier</string>
+  <string name="provider_depictions">Senast använda skildringar</string>
   <string name="waiting_first_sync">Väntar på första synkroniseringen…</string>
   <string name="no_uploads_yet">Du har inte lagt upp några bilder ännu.</string>
   <string name="menu_retry_upload">Försök igen</string>
@@ -166,6 +173,8 @@
   <string name="detail_panel_cats_label">Kategorier</string>
   <string name="detail_panel_cats_loading">Läser in…</string>
   <string name="detail_panel_cats_none">Ingen markerad</string>
+  <string name="detail_caption_empty">Ingen bildtext</string>
+  <string name="detail_depiction_empty">Ingen skildring</string>
   <string name="detail_description_empty">Ingen beskrivning</string>
   <string name="detail_discussion_empty">Ingen diskussion</string>
   <string name="detail_license_empty">Okänd licens</string>
@@ -184,7 +193,9 @@
   <string name="upload">Ladda upp</string>
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
+  <string name="media_detail_caption">Bildtext</string>
   <string name="media_detail_title">Titel</string>
+  <string name="media_detail_depiction">Skildringar</string>
   <string name="media_detail_description">Beskrivning</string>
   <string name="media_detail_discussion">Diskussion</string>
   <string name="media_detail_author">Skapare</string>
@@ -246,6 +257,7 @@
   <string name="error_while_cache">Fel uppstod när bilder cachelagras</string>
   <string name="title_info">En unik beskrivande titel för filen, som kommer att fungera som ett filnamn. Du kan använda klarspråk med mellanslag. Ta inte med filändelsen</string>
   <string name="description_info">Beskriv mediafilen så mycket som möjligt. Var togs den? Vad visar den? Vad är sammanhanget? Beskriv föremålen eller personerna. Ge information som inte kan gissas fram, t.ex. tidpunkten om det är ett landskap. Om mediafilen visar någonting ovanligt, förklara vad som gör den ovanlig.</string>
+  <string name="caption_info">Var god skriv en kort beskrivning av bilden. (Maximalt 255 tecken)</string>
   <string name="upload_image_too_dark">Denna bild är för mörk, är du säker på att du vill ladda upp den? Wikimedia Commons är endast till för bilder med encyklopediskt värde.</string>
   <string name="upload_image_blurry">Denna bild är suddig, är du säker på att du vill ladda upp den? Wikimedia Commons är endast till för bilder med encyklopediskt värde.</string>
   <string name="upload_problem_exist">Möjliga problem med denna bild:</string>
@@ -325,9 +337,11 @@
   <string name="search_recent_header">Senaste sökningar:</string>
   <string name="provider_searches">Senaste sökfrågor</string>
   <string name="error_loading_categories">Fel uppstod när kategorier lästes in.</string>
+  <string name="error_loading_depictions">Fel uppstod när skildringar lästes in.</string>
   <string name="error_loading_subcategories">Fel uppstod när underkategorier lästes in.</string>
   <string name="search_tab_title_media">Media</string>
   <string name="search_tab_title_categories">Kategorier</string>
+  <string name="search_tab_title_depictions">Objekt</string>
   <string name="explore_tab_title_featured">Utvald</string>
   <string name="explore_tab_title_mobile">Laddades upp via mobil</string>
   <string name="successful_wikidata_edit">Bilden lades till i %1$s på Wikidata!</string>
@@ -430,9 +444,9 @@
   <string name="desc_language_Asia">Asien</string>
   <string name="desc_language_Pacific">Stilla havet</string>
   <string name="no_categories_selected">Inga kategorier har valts</string>
-  <string name="no_categories_selected_warning_desc">Bilder utan kategorier används sällan. Är du säker på att du vill skicka in den utan att välja kategorier?</string>
-  <string name="yes_submit">Ja, skicka in</string>
-  <string name="no_go_back">Nej, gå tillbaka</string>
+  <string name="no_categories_selected_warning_desc">Bilder utan kategorier används sällan. Är du säker på att du vill fortsätta utan att välja kategorier?</string>
+  <string name="no_depictions_selected">Inga skildringar har valts</string>
+  <string name="no_depictions_selected_warning_desc">Bilder med skildringar kan hittas lättare och kommer mer sannolikt användas. Är du säker på att du vill fortsätta utan att välja skildringar?</string>
   <string name="upload_flow_all_images_in_set">(För alla bilder i uppsättningen)</string>
   <string name="search_this_area">Sök i detta område</string>
   <string name="nearby_card_permission_title">Begäran om behörighet</string>
@@ -511,7 +525,7 @@
   <string name="images_featured_explanation">Utmärkta bilder är bilder från skickliga fotografer och illustratörer som gemenskapen på Wikimedia Commons har valt ut som bilder med den högsta kvalitetet på webbplatsen.</string>
   <string name="images_via_nearby_explanation">Bilder som har laddats upp via \"Platser i närheten\" är bilderna som laddas upp genom att upptäcka platser på kartan.</string>
   <string name="thanks_received_explanation">Denna funktion låter redigerare skicka en tackavisering till användare som gör användbara redigeringar – genom att använda en liten tacklänk på historik- eller diff-sidor.</string>
-  <string name="previous_image_caption_description">Kopiera föregående titel och beskrivning</string>
+  <string name="previous_image_caption_description">Kopiera föregående bildtexter och beskrivning</string>
   <string name="previous_button_tooltip_message">Klicka för att återanvända titeln och beskrivningen du använde i din föregående bild och ändra det för att passa din nuvarande</string>
   <string name="welcome_do_upload_content_description">Exempel på bra bilder att ladda upp på Commons</string>
   <string name="welcome_dont_upload_content_description">Exempel på bilder att inte ladda upp</string>
@@ -530,6 +544,7 @@
   <string name="share_via">Dela appen via...</string>
   <string name="image_info">Bildinfo</string>
   <string name="no_categories_found">Inga kategorier hittades</string>
+  <string name="no_depiction_found">Inga skildringar hittades</string>
   <string name="upload_cancelled">Uppladdning avbröts</string>
   <string name="previous_image_title_description_not_found">Det finns ingen data för den föregående bildens titel eller beskrivning</string>
   <string name="dialog_box_text_nomination">Varför bör %1$s raderas?</string>
@@ -562,6 +577,9 @@
   <string name="place_type">Platstyp:</string>
   <string name="nearby_search_hint">Bro, museum, hotell, etc.</string>
   <string name="you_must_reset_your_passsword">Någonting gick fel med inloggningen, du måste återställa ditt lösenord!</string>
+  <string name="title_for_media">MEDIA</string>
+  <string name="title_for_child_classes">UNDERORDNADE KLASSER</string>
+  <string name="title_for_parent_classes">ÖVERORDNADE KLASSER</string>
   <string name="upload_nearby_place_found_title">Hittade platser i närheten</string>
   <string name="upload_nearby_place_found_description">Är detta ett foto av platsen %1$s?</string>
   <string name="title_app_shortcut_explore">Utforska</string>

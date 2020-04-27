@@ -67,8 +67,7 @@
   <string name="provider_contributions">Wysłane przeze mnie pliki</string>
   <string name="menu_share">Udostępnij</string>
   <string name="menu_open_in_browser">Zobacz w przeglądarce</string>
-  <string name="share_title_hint">Tytuł (wymagany)</string>
-  <string name="add_title_toast">Podaj tytuł tego pliku</string>
+  <string name="share_title_hint" fuzzy="true">Tytuł (wymagany)</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Nie można zalogować - błąd sieci</string>
   <string name="login_failed_wrong_credentials">Nie można się zalogować - sprawdź swoją nazwę użytkownika i hasło</string>
@@ -410,8 +409,6 @@
   <string name="desc_language_Middle_East">Bliski Wschód</string>
   <string name="desc_language_Africa">Afryka</string>
   <string name="desc_language_Asia">Azja</string>
-  <string name="yes_submit">Tak, prześlij</string>
-  <string name="no_go_back">Nie, zawróć</string>
   <string name="never_ask_again">Nigdy więcej nie pytaj o to</string>
   <string name="display_location_permission_title">Wyświetl pozwolenie na lokalizację</string>
   <string name="display_location_permission_explanation">W razie potrzeby zapytaj o pozwolenie na lokalizację w przypadku funkcji widoku pobliskiej karty powiadomień.</string>
@@ -463,7 +460,6 @@
   <string name="images_featured_explanation">Polecane zdjęcia to zdjęcia wysoko wykwalifikowanych fotografów i ilustratorów, które społeczność Wikimedia Commons wybrała jako jedne z najwyższych jakości na stronie.</string>
   <string name="images_via_nearby_explanation">Obrazy przesłane przez Pobliskie miejsca to obrazy, które są przesyłane przez odkrywanie miejsc na mapie.</string>
   <string name="thanks_received_explanation">Ta funkcja umożliwia redaktorom wysyłanie powiadomień z podziękowaniem do użytkowników, którzy dokonują przydatnych zmian - za pomocą małego linku z podziękowaniem na stronie historii lub na stronie diff.</string>
-  <string name="previous_image_title_description">Skopiuj poprzedni tytuł i opis</string>
   <string name="previous_button_tooltip_message">Kliknij, aby ponownie użyć tytułu i opisu podanego na poprzednim zdjęciu i zmodyfikuj go, aby pasował do bieżącego</string>
   <string name="welcome_do_upload_content_description">Przykłady dobrych zdjęć do przesłania na Commons</string>
   <string name="welcome_dont_upload_content_description">Przykłady obrazów, których nie można przesyłać</string>

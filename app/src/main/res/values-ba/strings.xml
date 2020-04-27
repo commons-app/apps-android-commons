@@ -48,7 +48,6 @@
   <string name="menu_share">Уртаҡлашырға</string>
   <string name="menu_open_in_browser">Браузерҙа асырға</string>
   <string name="share_title_hint" fuzzy="true">Исем</string>
-  <string name="add_title_toast">Был файлдың атамаһын күрһәт</string>
   <string name="share_description_hint">Тасуирлама</string>
   <string name="login_failed_network">Инеп булмай - интернет хатаһы</string>
   <string name="login_failed_throttled">Күп тапҡыр яңылыштың. Зинһар, бер-нисә минуттан тағы ла инеп ҡара</string>

@@ -62,8 +62,7 @@
   <string name="provider_contributions">Meine hochgeladenen Dateien</string>
   <string name="menu_share">Teilen</string>
   <string name="menu_open_in_browser">Im Browser anzeigen</string>
-  <string name="share_title_hint">Titel (erforderlich)</string>
-  <string name="add_title_toast">Bitte gib einen Titel für diese Datei an</string>
+  <string name="share_title_hint" fuzzy="true">Titel (erforderlich)</string>
   <string name="share_description_hint">Beschreibung</string>
   <string name="login_failed_network">Anmeldung fehlgeschlagen – Netzwerkfehler</string>
   <string name="login_failed_wrong_credentials">Anmeldung fehlgeschlagen. Bitte Benutzernamen und Passwort überprüfen.</string>
@@ -172,6 +171,7 @@
   <string name="detail_panel_cats_label">Kategorien</string>
   <string name="detail_panel_cats_loading">Lade …</string>
   <string name="detail_panel_cats_none">Keine ausgewählt</string>
+  <string name="detail_caption_empty">Keine Beschriftung</string>
   <string name="detail_description_empty">Keine Beschreibung</string>
   <string name="detail_discussion_empty">Keine Diskussion</string>
   <string name="detail_license_empty">Unbekannte Lizenz</string>
@@ -187,6 +187,7 @@
   <string name="upload_image_duplicate">Diese Datei ist bereits auf Commons vorhanden. Bist du sicher, dass du fortfahren möchtest?</string>
   <string name="yes">Ja</string>
   <string name="no">Nein</string>
+  <string name="media_detail_caption">Beschriftung</string>
   <string name="media_detail_title">Titel</string>
   <string name="media_detail_description">Beschreibung</string>
   <string name="media_detail_discussion">Diskussion</string>
@@ -432,9 +433,7 @@
   <string name="desc_language_Asia">Asien</string>
   <string name="desc_language_Pacific">Pazifik</string>
   <string name="no_categories_selected">Keine Kategorien ausgewählt</string>
-  <string name="no_categories_selected_warning_desc">Bilder ohne Kategorien sind selten nutzbar. Bist du sicher, dass du ohne die Auswahl von Kategorien hochladen möchtest?</string>
-  <string name="yes_submit">Ja, einreichen</string>
-  <string name="no_go_back">Nein, zurück gehen</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">Bilder ohne Kategorien sind selten nutzbar. Bist du sicher, dass du ohne die Auswahl von Kategorien hochladen möchtest?</string>
   <string name="upload_flow_all_images_in_set">(für alle Bilder im Satz)</string>
   <string name="search_this_area">Diesen Bereich durchsuchen</string>
   <string name="nearby_card_permission_title">Berechtigungsanfrage</string>
@@ -512,7 +511,6 @@
   <string name="images_featured_explanation">Vorgestellte Bilder sind Bilder von professionellen Fotografen und Zeichnern, die die Gemeinschaft von Wikimedia Commons als diejenigen mit der höchsten Qualität auf der Website ausgewählt hat.</string>
   <string name="images_via_nearby_explanation">Über Orte in der Nähe hochgeladene Bilder sind die Bilder, die von entdeckten Orten auf der Karte hochgeladen wurden.</string>
   <string name="thanks_received_explanation">Diese Funktion erlaubt es Autoren, eine Dankeschön-Benachrichtigung an Benutzer zu senden, die nützliche Bearbeitungen durchgeführt haben – durch die Benutzung eines kleinen Dankeschön-Links in der Versionsgeschichte oder Unterschiedsseite.</string>
-  <string name="previous_image_caption_description">Vorherigen Titel und vorherige Beschreibung kopieren</string>
   <string name="previous_button_tooltip_message">Klicke, um den Titel und die Beschreibung des vorherigen Bildes wieder zu verwenden und verändere sie, damit dein aktuelles Bild passt.</string>
   <string name="welcome_do_upload_content_description">Beispiele guter Bilder zum Hochladen auf Commons</string>
   <string name="welcome_dont_upload_content_description">Beispiele von Bildern, die nicht hochgeladen werden sollen.</string>

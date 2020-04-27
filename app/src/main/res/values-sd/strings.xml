@@ -52,7 +52,6 @@
   <string name="menu_share">ونڊيو</string>
   <string name="menu_open_in_browser">جھانگوءَ ۾ ڏسو</string>
   <string name="share_title_hint">عنوان (گھربل)</string>
-  <string name="add_title_toast">هن فائيل لاءِ ڪا سُرخي ڏيو</string>
   <string name="share_description_hint">تشريح</string>
   <string name="login_failed_network">ناقابلِ داخل ٿيڻ - باھمڄار ناڪامي</string>
   <string name="login_failed_wrong_credentials">داخل نه ٿيا آهيو - مهرباني ڪري پاسورڊ ۽ کاتي جو نالو چيڪ ڪيو</string>
@@ -309,8 +308,6 @@
   <string name="desc_language_Asia">ايشيا</string>
   <string name="desc_language_Pacific">پئسفڪ</string>
   <string name="no_categories_selected">زمرا چونڊيل ناھن</string>
-  <string name="yes_submit">ھا، اماڻيو</string>
-  <string name="no_go_back">نہ، واپس وڃو</string>
   <string name="search_this_area">ھي علائقو ڳوليو</string>
   <string name="nearby_card_permission_title">اجازت جي درخواست</string>
   <string name="never_ask_again">ھي ٻيھر ڪڏھن نہ پڇو</string>

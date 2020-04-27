@@ -63,8 +63,7 @@
   <string name="provider_contributions">自分のアップロード</string>
   <string name="menu_share">共有</string>
   <string name="menu_open_in_browser">ブラウザーで表示</string>
-  <string name="share_title_hint">タイトル (必須)</string>
-  <string name="add_title_toast">ファイル名をつけてください</string>
+  <string name="share_title_hint" fuzzy="true">タイトル (必須)</string>
   <string name="share_description_hint">説明</string>
   <string name="login_failed_network">ログインできません - ネットワークのエラーです</string>
   <string name="login_failed_wrong_credentials">ログインできません - 利用者名とパスワードを確認してください</string>
@@ -431,9 +430,7 @@
   <string name="desc_language_Asia">アジア</string>
   <string name="desc_language_Pacific">太平洋地域</string>
   <string name="no_categories_selected">カテゴリが選択されていません</string>
-  <string name="no_categories_selected_warning_desc">カテゴリを指定しない画像は使用されることがほとんどありません。ほんとうにカテゴリを選択しないまま投稿しますか？</string>
-  <string name="yes_submit">はい、投稿します</string>
-  <string name="no_go_back">いいえ、前の画面に戻ります</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">カテゴリを指定しない画像は使用されることがほとんどありません。ほんとうにカテゴリを選択しないまま投稿しますか？</string>
   <string name="upload_flow_all_images_in_set">（画像全点を組み写真にする場合）</string>
   <string name="search_this_area">この地域を検索</string>
   <string name="nearby_card_permission_title">許可を申請</string>
@@ -511,7 +508,6 @@
   <string name="images_featured_explanation">秀逸な画像とは、技術力の高い写真家や作画家による作品で、ウィキメディアコモンズのコミュニティから最高の品質を誇るものとして選出されています。</string>
   <string name="images_via_nearby_explanation">「近くの場所でアップロードした画像」とは、地図上で検索した結果に基づいてアップロードした画像のことです。</string>
   <string name="thanks_received_explanation">この機能を使うと有効な編集をしたユーザーに感謝を伝えることができます – 変更履歴もしくは差分のページに小さな感謝リンクが表示されます。</string>
-  <string name="previous_image_title_description">以前のファイル名と説明をコピーする</string>
   <string name="previous_button_tooltip_message">クリックして前の画像に使ったファイル名と説明文をコピーし、投稿画像に合わせて文字を編集</string>
   <string name="welcome_do_upload_content_description">コモンズへの投稿画像の良い例</string>
   <string name="welcome_dont_upload_content_description">投稿に適さない画像のサンプル</string>

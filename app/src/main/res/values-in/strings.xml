@@ -55,8 +55,7 @@
   <string name="provider_contributions">Unggahan saya</string>
   <string name="menu_share">Bagikan</string>
   <string name="menu_open_in_browser">Buka di Peramban</string>
-  <string name="share_title_hint">Judul (wajib)</string>
-  <string name="add_title_toast">Tolong berikan judul untuk berkas ini</string>
+  <string name="share_title_hint" fuzzy="true">Judul (wajib)</string>
   <string name="share_description_hint">Deskripsi</string>
   <string name="login_failed_network">Tidak dapat login - kesalahan pada jaringan</string>
   <string name="login_failed_wrong_credentials">Tak berhasil masuk - silakan periksa nama pengguna dan kata sandi</string>
@@ -419,9 +418,7 @@
   <string name="desc_language_Asia">Asia</string>
   <string name="desc_language_Pacific">Pasifik</string>
   <string name="no_categories_selected">Tidak ada Kategori yang Dipilih</string>
-  <string name="no_categories_selected_warning_desc">Gambar tanpa kategori jarang dapat digunakan. Yakin ingin mengirim tanpa memilih kategori?</string>
-  <string name="yes_submit">Ya, Kirim</string>
-  <string name="no_go_back">Tidak, Kembali</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">Gambar tanpa kategori jarang dapat digunakan. Yakin ingin mengirim tanpa memilih kategori?</string>
   <string name="upload_flow_all_images_in_set">(Untuk semua gambar dalam set)</string>
   <string name="search_this_area">Cari area ini</string>
   <string name="nearby_card_permission_title">Permintaan Izin</string>

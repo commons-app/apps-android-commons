@@ -66,8 +66,7 @@
   <string name="provider_contributions">ההעלאות שלי</string>
   <string name="menu_share">שיתוף</string>
   <string name="menu_open_in_browser">הצגה בדפדפן</string>
-  <string name="share_title_hint">כותרת (נדרש)</string>
-  <string name="add_title_toast">נא לתת כותרת לקובץ הזה</string>
+  <string name="share_title_hint" fuzzy="true">כותרת (נדרש)</string>
   <string name="share_description_hint">תיאור</string>
   <string name="login_failed_network">לא ניתן להיכנס – כשל בתקשורת</string>
   <string name="login_failed_wrong_credentials">לא ניתן להיכנס לחשבון – נא לבדוק את שם המשתמש ואת הסיסמה</string>
@@ -440,9 +439,7 @@
   <string name="desc_language_Asia">אסיה</string>
   <string name="desc_language_Pacific">האוקיינוס השקט</string>
   <string name="no_categories_selected">לא נבחרו קטגוריות</string>
-  <string name="no_categories_selected_warning_desc">תמונות ללא קטגוריות בדרך כלל אינן שימושיות. לשלוח ללא בחירת קטגוריות?</string>
-  <string name="yes_submit">כן, לשלוח</string>
-  <string name="no_go_back">לא, חזור אחורה</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">תמונות ללא קטגוריות בדרך כלל אינן שימושיות. לשלוח ללא בחירת קטגוריות?</string>
   <string name="upload_flow_all_images_in_set">(לכל התמונות בסדרה)</string>
   <string name="search_this_area">חיפוש באזור הזה</string>
   <string name="nearby_card_permission_title">בקשת הרשאה</string>
@@ -521,7 +518,6 @@
   <string name="images_featured_explanation">תמונות מובילות הן תמונות של צלמים ומאיירים מיומנים אותם בחרה קהילת ויקישיתוף בזכות איכות התוצר שהם תורמים לאתר.</string>
   <string name="images_via_nearby_explanation">תמונות שהועלו דרך מקומות בסביבה הן התמונות שנשלחות על ידי גילוי מקומות במפה.</string>
   <string name="thanks_received_explanation">תכונה זו מאפשרת לעורכים לשלוח מסרי תודה למשתמשים שביצעו עריכות מועילות - על ידי שימוש בקישור תודה בעמוד ההיסטוריה או עמוד ההבדלים.</string>
-  <string name="previous_image_caption_description">העתקת הכותרת והתיאור הקודמים</string>
   <string name="previous_button_tooltip_message">יש ללחוץ כדי להשתמש מחדש בכותרת ובתיאור שהקלדת בתמונה הקודמת ולשנות אותה כדי להתאים לנוכחית</string>
   <string name="welcome_do_upload_content_description">דוגמאות של תמונות טובות להעלאה לוויקישיתוף</string>
   <string name="welcome_dont_upload_content_description">דוגמאות של תמונות שאין להעלות</string>

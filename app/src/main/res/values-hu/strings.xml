@@ -62,8 +62,7 @@
   <string name="provider_contributions">Feltöltéseim</string>
   <string name="menu_share">Megosztás</string>
   <string name="menu_open_in_browser">Megtekintés böngészőben</string>
-  <string name="share_title_hint">Cím (kötelező)</string>
-  <string name="add_title_toast">Kérlek, adj címet a fájlnak</string>
+  <string name="share_title_hint" fuzzy="true">Cím (kötelező)</string>
   <string name="share_description_hint">Leírás</string>
   <string name="login_failed_network">Nem lehet bejelentkezni - hálózati hiba</string>
   <string name="login_failed_wrong_credentials">Nem sikerült bejelentkezni – kérlek, ellenőrizd a felhasználónevedet és a jelszavadat</string>
@@ -427,9 +426,7 @@
   <string name="desc_language_Asia">Ázsia</string>
   <string name="desc_language_Pacific">Csendes-óceáni</string>
   <string name="no_categories_selected">Nincs kiválasztott kategória</string>
-  <string name="no_categories_selected_warning_desc">A kategória nélküli képek ritkán használhatóak. Biztos, hogy kategória kiválasztása nélkül akarod feltölteni?</string>
-  <string name="yes_submit">Igen, küldés</string>
-  <string name="no_go_back">Nem, visszalépés</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">A kategória nélküli képek ritkán használhatóak. Biztos, hogy kategória kiválasztása nélkül akarod feltölteni?</string>
   <string name="upload_flow_all_images_in_set">(az összes képre)</string>
   <string name="search_this_area">Keresés ezen a helyen</string>
   <string name="nearby_card_permission_title">Engedély kérése</string>
@@ -502,7 +499,6 @@
   <string name="please_wait">Kérlek várj…</string>
   <string name="images_featured_explanation">A \"kiemelt kép\"-eket tapasztalt fényképészek vagy illusztrátorok készítik. A képeket a Wikimedia Commons közössége választja ki a minőségük alapján.</string>
   <string name="thanks_received_explanation">Ez a funkció lehetővé teszi, hogy \"Köszönöm\" üzenetet küldj annak a felhasználónak, aki hasznos szerkesztést végzett. A kattintható link a Laptörténet oldalon található.</string>
-  <string name="previous_image_title_description">Előző cím és leírás másolása</string>
   <string name="previous_button_tooltip_message">Kattints, ha az előző képed címét és leírását újra akarod használni, és az aktuális kép igényeinek megfelelően módosítod.</string>
   <string name="welcome_do_upload_content_description">Példák a Commons-ra feltöltött jó képekre</string>
   <string name="welcome_dont_upload_content_description">Példák nem feltöltendő képekre</string>

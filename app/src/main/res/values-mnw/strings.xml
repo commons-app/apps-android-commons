@@ -9,6 +9,7 @@
   <string name="preference_category_appearance">မံက်ပြာကတ်</string>
   <string name="preference_category_general">နာနာ</string>
   <string name="preference_category_feedback">ကဵုကသပ်</string>
+  <string name="preference_category_privacy">မဒှ်ဒြပ်ပူဂဵု</string>
   <string name="preference_category_location">ဒၞာဲဌာန်ဒတန်</string>
   <string name="app_name">ကောမ္မောန်</string>
   <string name="bullet">•</string>
@@ -22,14 +23,40 @@
   <string name="logging_in_message">ပဂုန်တုဲ မင်မွဲလစုတ်...</string>
   <string name="login_success">လုက်အေန် အာစိုပ်ဒတုဲ!</string>
   <string name="login_failed">လံက်အေန် လီုလာ်!</string>
-  <string name="upload_completed_notification_title">%1$s ပတိုန်ပၠောပ်!</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s ပတိုန်ပၠောပ်ဒၟံၚ်</string>
-  <string name="upload_progress_notification_title_finishing">ပတိုန်ပၠောပ်ဒၟံၚ် တုဲဒှ်ဒၟံၚ် %1$s</string>
+  <string name="upload_failed">ဝှာင် ဟွံဂွံဆဵု၊ ပဂုန်တုဲ ဂၠာဲ ဝှာင်တၞဟ်။</string>
+  <string name="authentication_failed">ပွမစၟဳစၟတ်ဂှ် ဟွံအံင်ဇၞး။ ပဂုန်တုဲ လံက်အေန် မွဲဝါပၠန်</string>
+  <string name="uploading_started">ပတိုန်ဝှာင် စဒၟံင်ရ!</string>
+  <string name="upload_completed_notification_title">%1$s ပတိုန်ပၠုပ်တုဲ!</string>
+  <string name="upload_completed_notification_text">ဒၞာဲမကလေင်ရံင် ဝှာင်ပတိုန်ပၠုပ် မၞး</string>
+  <string name="upload_progress_notification_title_start">စဒၟံင် %1$s ပတိုန်ပၠုပ်။</string>
+  <string name="upload_progress_notification_title_in_progress">%1$s ပတိုန်ပၠုပ်ဒၟံၚ်</string>
+  <string name="upload_progress_notification_title_finishing">ပတုဲဒၟံင် ပတိုန်ပၠုပ် %1$s</string>
+  <string name="upload_failed_notification_title">ပတိုန်ပၠုပ် %1$s ဟွံအံင်ဇၞး</string>
+  <string name="upload_failed_notification_subtitle">ဒၞာဲ သွက်ကလေင်ရံင်</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">ဝှာင် %1$d file uploadingဂှ် ပတိုန်ပၠုပ်ဒၟံင်</item>
+    <item quantity="other">ဝှာင် %1$d files uploadingဂှ် ပတိုန်ပၠုပ်ဒၟံင်</item>
+  </plurals>
+  <string name="title_activity_contributions">အရာအဲ မပတိုန်ပၠုပ်လဝ် ခြာဟွံလအ်ဂမၠိုင်</string>
+  <string name="contribution_state_queued">ရေင်မင်ဒၟံင်</string>
+  <string name="contribution_state_failed">ဟွံအံင်ဇၞး</string>
+  <string name="contribution_state_in_progress">%1$d%% တုဲဒှ်</string>
+  <string name="contribution_state_starting">ပတိုန်ပၠုပ်ဒၟံင်</string>
+  <string name="menu_from_gallery">နူခန်ထ္ၜး</string>
   <string name="menu_from_camera">ကေတ်ရုပ်</string>
   <string name="menu_nearby">ဗဒဲါဒၞာဲဏအ်</string>
+  <string name="provider_contributions">ပတိုန်ပၠုပ် ဇကုဂမၠိုင်</string>
   <string name="menu_share">ပါ်ပရအ်</string>
-  <string name="share_title_hint" fuzzy="true">က္ဍိုပ်လိက်</string>
+  <string name="menu_open_in_browser">ရံင် ပ္ဍဲဗရောက်သာ</string>
+  <string name="share_title_hint">က္ဍိုပ်လိက် (အာတ်မိက်ဒၟံင်)</string>
+  <string name="add_caption_toast">ပဂုန်တုဲ ကဵု က္ဍိုပ်လိက် ဝှာင်ဏအ်ညိ</string>
   <string name="share_description_hint">မဗမံက်ထ္ၜး</string>
+  <string name="share_caption_hint">က္ဍိုပ်လိက် (ပိုင်ခြာလဝ် လၟိဟ်မလိက် ၂၅၅)</string>
+  <string name="login_failed_network">လုပ်လံက်အေန် ဟွံဂွံ - ဇာဇၞိက် ဗၠေတ်</string>
+  <string name="login_failed_wrong_credentials">လုပ်လံက်အေန် ဟွံဂွံ - ပဂုန်တုဲ ကလေင်ရံင် ယၟုလွပ် ကေုာံ မလိက်ပၞုက် မၞးညိ</string>
+  <string name="login_failed_throttled">ပရေင်ဂိုတ်ဂစာန် ဟွံအံင်ဇၞး ဂၠိုင်လောန်အာရ။ ပဂုန်တုဲ မိနေတ်ညိညပၠန် ကလေင်စမ်ပၠန်။</string>
+  <string name="login_failed_blocked">သၠးအခေါင်၊ ညးလွပ်ဏအ် ဒးဒုင်ကၟာတ်လဒဵုလဝ် ပ္ဍဲ ကောမ်မောန်</string>
+  <string name="login_failed_2fa_needed">ကုစၟဳစၟတ်မၞးၜါဂှ် သ္ဒးပါ်လဝ် ဗွဲတၞဟ်ခြာရောင်။</string>
   <string name="login_failed_generic">လံက်အေန် လီု</string>
   <string name="share_upload_button">ပတိုန်</string>
   <string name="provider_modifications">တင်မပြုပြောၚ်ဂမၠိုၚ်</string>
@@ -70,7 +97,7 @@
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_3_text">သ္ပဂုဏ်တုဲ လ္ပပတိုန်ညိ:</string>
   <string name="welcome_final_button_text">ယွံ!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;ပရိုၚ်တၚ်ဂၞၚ် မဂၠိုၚ်&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;ပရိုၚ်တၚ်ဂၞၚ် မဂၠိုၚ်&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">ကဏ္ဍဂမၠိုင်</string>
   <string name="detail_panel_cats_loading">ပတိုန်ဒၟံၚ်...</string>
   <string name="detail_panel_cats_none">ဟွံမွဲကဵု ပရေၚ်ရုဲစှ်</string>
@@ -121,8 +148,8 @@
   <string name="nearby_wikidata" fuzzy="true">ဝဳကဳဒေတ</string>
   <string name="nearby_wikipedia" fuzzy="true">ဝဳကဳပဳဒဳယာ</string>
   <string name="nearby_commons" fuzzy="true">COMMONS</string>
-  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
-  <string name="about_translate">&lt;u&gt;တြာဲကၠာဲ&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;တြာဲကၠာဲ&lt;/u&gt;</string>
   <string name="about_translate_title">အရေဝ်ဘာသာဂမၠိုင်</string>
   <string name="about_translate_cancel">တးပဲါ</string>
   <string name="retry">ကလေင်ကၠောန်</string>
