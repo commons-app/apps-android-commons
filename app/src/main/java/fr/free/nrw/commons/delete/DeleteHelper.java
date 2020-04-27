@@ -1,22 +1,12 @@
 package fr.free.nrw.commons.delete;
 
+import static fr.free.nrw.commons.notification.NotificationHelper.NOTIFICATION_DELETE;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-
 import androidx.appcompat.app.AlertDialog;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
-import java.util.concurrent.Callable;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -29,9 +19,15 @@ import io.reactivex.Single;
 import io.reactivex.SingleSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.concurrent.Callable;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.notification.NotificationHelper.NOTIFICATION_DELETE;
 
 /**
  * Refactored async task to Rx
@@ -104,7 +100,7 @@ public class DeleteHelper {
         }
         String creatorName = creator.replace(" (page does not exist)", "");
 
-        return pageEditClient.prependEdit(media.filename, fileDeleteString + "\n", summary)
+        return pageEditClient.prependEdit(media.getFilename(), fileDeleteString + "\n", summary)
                 .flatMap(result -> {
                     if (result) {
                         return pageEditClient.edit("Commons:Deletion_requests/" + media.getFilename(), subpageString + "\n", summary);

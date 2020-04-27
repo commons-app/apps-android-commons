@@ -80,7 +80,7 @@
   <string name="gps_disabled">GPS er slått av på denne enheten. Ønsker du å slå den på?</string>
   <string name="enable_gps">Slå på GPS</string>
   <string name="contributions_subtitle_zero">Ingen opplastinger ennå</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -384,11 +384,10 @@
   <string name="preference_author_name_toggle">Bruk egendefinert opphavspersonnavn</string>
   <string name="preference_author_name_toggle_summary">Bruk et egendefinert opphavspersonnavn i stedet for brukernavnet ditt når bilder lastes opp</string>
   <string name="preference_author_name">Egendefinert opphavspersonnavn</string>
-  <string name="preference_author_name_summary">Det egendefinerte opphavspersonnavnet som skal brukes i stedet for brukernavnet ditt i opplastinger</string>
   <string name="contributions_fragment">Bidrag</string>
   <string name="nearby_fragment">I nærheten</string>
   <string name="notifications">Varsler</string>
-  <string name="archived_notifications">Varsler (arkivert)</string>
+  <string name="read_notifications" fuzzy="true">Varsler (arkivert)</string>
   <string name="display_nearby_notification">Vis varsel for steder i nærheten</string>
   <string name="display_nearby_notification_summary">Trykk her for å se det nærmeste stedet som trenger bilder</string>
   <string name="no_close_nearby">Ingen steder funnet i nærheten av deg</string>
@@ -501,9 +500,9 @@
   <string name="no_image_reverted">Ingen bilder tilbakestilt</string>
   <string name="no_image_uploaded">Ingen bilder lastet opp</string>
   <string name="no_notification">Du har uleste varsler</string>
-  <string name="no_archived_notification">Du har ingen arkiverte varsler</string>
+  <string name="no_read_notification" fuzzy="true">Du har ingen arkiverte varsler</string>
   <string name="share_logs_using">Del logger ved hjelp av</string>
-  <string name="menu_option_archived">Vis arkiverte</string>
+  <string name="menu_option_read" fuzzy="true">Vis arkiverte</string>
   <string name="menu_option_unread">Vis uleste</string>
   <string name="error_occurred_in_picking_images">Feil under utvalg av bilder</string>
   <string name="image_chooser_title">Velg bilder å laste opp</string>

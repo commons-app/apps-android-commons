@@ -70,8 +70,8 @@
         <option name="com.jetbrains.cidr.lang.util.OCDeclarationKind" value="DeallocMethod" />	
       </class>	
       <extensions>
-        <pair source="cc" header="h" />
-        <pair source="c" header="h" />
+        <pair source="cc" header="h" fileNamingConvention="NONE" />
+        <pair source="c" header="h" fileNamingConvention="NONE" />
       </extensions>
     </Objective-C-extensions>
     <Python>

@@ -5,6 +5,8 @@
 * An13sa
 * EukeneFL
 * Fitoschido
+* Iñaki LL
+* Joseba
 * Mikel Ibaiba
 * Sator
 * Subi
@@ -77,7 +79,7 @@
   <string name="gps_disabled">GPSa desgaituta dago gailu honetan. Gaitu nahi duzu?</string>
   <string name="enable_gps">GPSa gaitu</string>
   <string name="contributions_subtitle_zero">Oraindik ez da ezer igo</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">igoera (%1$d)</item>
     <item quantity="other">(%1$d) igoera</item>
@@ -227,6 +229,7 @@
   <string name="error_while_cache">Argazkiak hartzerakoan sortutako akatsa</string>
   <string name="title_info">Fitxategi izenburu deskribatzaile bakarra, fitxategi-izen gisa balioko duena. Hizkuntza arrunta erabil dezakezu espazioekin. Ez sartu fitxategiaren luzapena.</string>
   <string name="description_info">Mesedez, deskribatu multimedia elementua ahal duzun gehien: non hartu zen? zer erakusten du? zein da bere testuingurua? Mesedez, objektuak eta pertsonak deskribatu. Eman asmatzeko erraza ez den informazioa, adibidez, paisaia bat izatekotan, eguneko zein orudtan hartu den. Multimediak zerbait berezia erakusten badu, mesedez azaldu zerk egiten duen berezia.</string>
+  <string name="upload_problem_image">arazoak aurkitu dira irudian</string>
   <string name="give_permission">Baimena eman</string>
   <string name="use_external_storage">Kanpo-biltegia erabili</string>
   <string name="use_external_storage_summary">Aplikazioaren kamerarekin ateratako argazkiak zure gailuan gorde</string>
@@ -248,7 +251,7 @@
   <string name="location_permission_rationale_nearby">Baimena beharrezkoa da hurbil dauden lekuen zerrende ikusteko</string>
   <string name="get_directions">Nola iritsi</string>
   <string name="read_article">Artikulua irakurri</string>
-  <string name="notifications_welcome">Ongi etorria Wikimedia Commons-era! Pozten gara zu hemen egoteaz.</string>
+  <string name="notifications_welcome">Ongi etorri Wikimedia Commons-era! Pozten gara zu hemen egoteaz.</string>
   <string name="notifications_talk_page_message">%1$s-(e)k mezu bat utzi du zure eztabaida orrian</string>
   <string name="notifications_thank_you_edit">Eskerrik asko aldaketa bat egiteagatik</string>
   <string name="notifications_mention">%1$s(e)k %2$s(e)an aipatu zaitu.</string>

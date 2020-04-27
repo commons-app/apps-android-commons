@@ -1,48 +1,22 @@
 package fr.free.nrw.commons.contributions;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Parcel;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.StringDef;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.lang.annotation.Retention;
-import java.util.Date;
-import java.util.Locale;
-
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.filepicker.UploadableFile;
-import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.utils.ConfigUtils;
-
-import static java.lang.annotation.RetentionPolicy.SOURCE;
+import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.upload.UploadMediaDetail;
+import fr.free.nrw.commons.upload.UploadModel.UploadItem;
+import fr.free.nrw.commons.upload.WikidataPlace;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.wikipedia.dataclient.mwapi.MwQueryLogEvent;
 
 @Entity(tableName = "contribution")
-public class  Contribution extends Media {
-
-    //{{According to Exif data|2009-01-09}}
-    private static final String TEMPLATE_DATE_ACC_TO_EXIF = "{{According to Exif data|%s}}";
-
-    //2009-01-09 → 9 January 2009
-    private static final String TEMPLATE_DATA_OTHER_SOURCE = "%s";
-
-    public static Creator<Contribution> CREATOR = new Creator<Contribution>() {
-        @Override
-        public Contribution createFromParcel(Parcel parcel) {
-            return new Contribution(parcel);
-        }
-
-        @Override
-        public Contribution[] newArray(int i) {
-            return new Contribution[0];
-        }
-    };
+public class Contribution extends Media {
 
     // No need to be bitwise - they're mutually exclusive
     public static final int STATE_COMPLETED = -1;
@@ -50,243 +24,170 @@ public class  Contribution extends Media {
     public static final int STATE_QUEUED = 2;
     public static final int STATE_IN_PROGRESS = 3;
 
-    @Retention(SOURCE)
-    @StringDef({SOURCE_CAMERA, SOURCE_GALLERY, SOURCE_EXTERNAL})
-    public @interface FileSource {}
-
-    public static final String SOURCE_CAMERA = "camera";
-    public static final String SOURCE_GALLERY = "gallery";
-    public static final String SOURCE_EXTERNAL = "external";
     @PrimaryKey (autoGenerate = true)
-    @NonNull
-    public long _id;
-    public Uri contentUri;
-    public String source;
-    public String editSummary;
-    public int state;
-    public long transferred;
-    public String decimalCoords;
-    public boolean isMultiple;
-    public String wikiDataEntityId;
-    private String p18Value;
-    public Uri contentProviderUri;
-    public String dateCreatedSource;
+    private long _id;
+    private int state;
+    private long transferred;
+    private String decimalCoords;
+    private String dateCreatedSource;
+    private WikidataPlace wikidataPlace;
+    /**
+     * Each depiction loaded in depictions activity is associated with a wikidata entity id,
+     * this Id is in turn used to upload depictions to wikibase
+     */
+    private List<DepictedItem> depictedItems = new ArrayList<>();
+    private String mimeType;
+    /**
+     * This hasmap stores the list of multilingual captions, where
+     * key of the HashMap is the language and value is the caption in the corresponding language
+     * Ex: key = "en", value: "<caption in short in English>"
+     *     key = "de" , value: "<caption in german>"
+     */
+    private Map<String, String> captions = new HashMap<>();
 
-    public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,
-                        int state, long dataLength, Date dateUploaded, long transferred,
-                        String source, String description, String creator, boolean isMultiple,
-                        int width, int height, String license) {
-        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
-        this.contentUri = contentUri;
-        this.state = state;
-        this.transferred = transferred;
-        this.source = source;
-        this.isMultiple = isMultiple;
-        this.width = width;
-        this.height = height;
-        this.license = license;
-        this.dateCreatedSource = "";
+    public Contribution() {
     }
 
-    public Contribution(Uri localUri, String imageUrl, String filename, String description, long dataLength,
-                        Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords) {
-        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
-        this.decimalCoords = decimalCoords;
-        this.editSummary = editSummary;
-        this.dateCreatedSource = "";
+    public Contribution(final UploadItem item, final SessionManager sessionManager,
+        final List<DepictedItem> depictedItems, final List<String> categories) {
+        super(item.getMediaUri(),
+            item.getFileName(),
+            UploadMediaDetail.formatList(item.getUploadMediaDetails()),
+            sessionManager.getAuthorName(),
+            categories);
+        captions =  UploadMediaDetail.formatCaptions(item.getUploadMediaDetails());
+        decimalCoords = item.getGpsCoords().getDecimalCoords();
+        dateCreatedSource = "";
+        this.depictedItems = depictedItems;
+        wikidataPlace = WikidataPlace.from(item.getPlace());
     }
 
-    public Contribution(Uri localUri, String imageUrl, String filename, String description, long dataLength,
-                        Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords, int state) {
-        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
-        this.decimalCoords = decimalCoords;
-        this.editSummary = editSummary;
-        this.dateCreatedSource = "";
-        this.state=state;
+    public Contribution(final MwQueryLogEvent queryLogEvent, final String user) {
+        super(queryLogEvent.title(),queryLogEvent.date(), user);
+        decimalCoords = "";
+        dateCreatedSource = "";
+        state = STATE_COMPLETED;
     }
 
-    public Contribution(Parcel in) {
-        super(in);
-        contentUri = in.readParcelable(Uri.class.getClassLoader());
-        source = in.readString();
-        state = in.readInt();
-        transferred = in.readLong();
-        isMultiple = in.readInt() == 1;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int flags) {
-        super.writeToParcel(parcel, flags);
-        parcel.writeParcelable(contentUri, flags);
-        parcel.writeString(source);
-        parcel.writeInt(state);
-        parcel.writeLong(transferred);
-        parcel.writeInt(isMultiple ? 1 : 0);
-    }
-
-    public void setDateCreatedSource(String dateCreatedSource) {
+    public void setDateCreatedSource(final String dateCreatedSource) {
         this.dateCreatedSource = dateCreatedSource;
     }
 
-    public boolean getMultiple() {
-        return isMultiple;
-    }
-
-    public void setMultiple(boolean multiple) {
-        isMultiple = multiple;
+    public String getDateCreatedSource() {
+        return dateCreatedSource;
     }
 
     public long getTransferred() {
         return transferred;
     }
 
-    public void setTransferred(long transferred) {
+    public void setTransferred(final long transferred) {
         this.transferred = transferred;
-    }
-
-    public String getEditSummary() {
-        return editSummary != null ? editSummary : CommonsApplication.DEFAULT_EDIT_SUMMARY;
-    }
-
-    public Uri getContentUri() {
-        return contentUri;
-    }
-
-    public void setContentUri(Uri contentUri) {
-        this.contentUri = contentUri;
     }
 
     public int getState() {
         return state;
     }
 
-    public void setState(int state) {
+    public void setState(final int state) {
         this.state = state;
     }
 
-    public void setDateUploaded(Date date) {
-        this.dateUploaded = date;
+    /**
+     * @return array list of entityids for the depictions
+     */
+    public List<DepictedItem> getDepictedItems() {
+        return depictedItems;
     }
 
-    public String getPageContents(Context applicationContext) {
-        StringBuilder buffer = new StringBuilder();
-        buffer
-                .append("== {{int:filedesc}} ==\n")
-                .append("{{Information\n")
-                .append("|description=").append(getDescription()).append("\n")
-                .append("|source=").append("{{own}}\n")
-                .append("|author=[[User:").append(creator).append("|").append(creator).append("]]\n");
+    public void setWikidataPlace(final WikidataPlace wikidataPlace) {
+        this.wikidataPlace = wikidataPlace;
+    }
 
-        String templatizedCreatedDate = getTemplatizedCreatedDate();
-        if (!StringUtils.isBlank(templatizedCreatedDate)) {
-            buffer.append("|date=").append(templatizedCreatedDate);
-        }
+    public WikidataPlace getWikidataPlace() {
+        return wikidataPlace;
+    }
 
-        buffer.append("}}").append("\n");
+    public long get_id() {
+        return _id;
+    }
 
-        //Only add Location template (e.g. {{Location|37.51136|-77.602615}} ) if coords is not null
-        if (decimalCoords != null) {
-            buffer.append("{{Location|").append(decimalCoords).append("}}").append("\n");
-        }
+    public void set_id(final long _id) {
+        this._id = _id;
+    }
 
-        buffer.append("== {{int:license-header}} ==\n")
-                .append(licenseTemplateFor(getLicense())).append("\n\n")
-                .append("{{Uploaded from Mobile|platform=Android|version=")
-                .append(ConfigUtils.getVersionNameWithSha(applicationContext)).append("}}\n");
-        if(categories!=null&&categories.size()!=0) {
-            for (int i = 0; i < categories.size(); i++) {
-                String category = categories.get(i);
-                buffer.append("\n[[Category:").append(category).append("]]");
-            }
-        }
-        else
-            buffer.append("{{subst:unc}}");
-        return buffer.toString();
+    public String getDecimalCoords() {
+        return decimalCoords;
+    }
+
+    public void setDecimalCoords(final String decimalCoords) {
+        this.decimalCoords = decimalCoords;
+    }
+
+    public void setDepictedItems(final List<DepictedItem> depictedItems) {
+        this.depictedItems = depictedItems;
+    }
+
+    public void setMimeType(String mimeType) {
+      this.mimeType = mimeType;
+    }
+
+    public String getMimeType() {
+      return mimeType;
     }
 
     /**
-     * Returns upload date in either TEMPLATE_DATE_ACC_TO_EXIF or TEMPLATE_DATA_OTHER_SOURCE
-     * @return
+     * Captions are a feature part of Structured data. They are meant to store short, multilingual descriptions about files
+     * This is a replacement of the previously used titles for images (titles were not multilingual)
+     * Also now captions replace the previous convention of using title for filename
+     *
+     * key of the HashMap is the language and value is the caption in the corresponding language
+     *
+     * returns list of captions stored in hashmap
      */
-    private String getTemplatizedCreatedDate() {
-        if (dateCreated != null) {
-            java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd");
-            if (UploadableFile.DateTimeWithSource.EXIF_SOURCE.equals(dateCreatedSource)) {
-                return String.format(Locale.ENGLISH, TEMPLATE_DATE_ACC_TO_EXIF, dateFormat.format(dateCreated)) + "\n";
-            } else {
-                return String.format(Locale.ENGLISH, TEMPLATE_DATA_OTHER_SOURCE, dateFormat.format(dateCreated)) + "\n";
-            }
-        }
-        return "";
+    public Map<String, String> getCaptions() {
+      return captions;
+    }
+
+    public void setCaptions(Map<String, String> captions) {
+      this.captions = captions;
     }
 
     @Override
-    public void setFilename(String filename) {
-        this.filename = filename;
+    public int describeContents() {
+        return 0;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    @Override
+    public void writeToParcel(final Parcel dest, final int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeLong(_id);
+        dest.writeInt(state);
+        dest.writeLong(transferred);
+        dest.writeString(decimalCoords);
+        dest.writeString(dateCreatedSource);
+        dest.writeSerializable((HashMap) captions);
     }
 
-    public Contribution() {
-
+    protected Contribution(final Parcel in) {
+        super(in);
+        _id = in.readLong();
+        state = in.readInt();
+        transferred = in.readLong();
+        decimalCoords = in.readString();
+        dateCreatedSource = in.readString();
+        captions = (HashMap<String, String>) in.readSerializable();
     }
 
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    @NonNull
-    private String licenseTemplateFor(String license) {
-        switch (license) {
-            case Prefs.Licenses.CC_BY_3:
-                return "{{self|cc-by-3.0}}";
-            case Prefs.Licenses.CC_BY_4:
-                return "{{self|cc-by-4.0}}";
-            case Prefs.Licenses.CC_BY_SA_3:
-                return "{{self|cc-by-sa-3.0}}";
-            case Prefs.Licenses.CC_BY_SA_4:
-                return "{{self|cc-by-sa-4.0}}";
-            case Prefs.Licenses.CC0:
-                return "{{self|cc-zero}}";
+    public static final Creator<Contribution> CREATOR = new Creator<Contribution>() {
+        @Override
+        public Contribution createFromParcel(final Parcel source) {
+            return new Contribution(source);
         }
 
-        throw new RuntimeException("Unrecognized license value: " + license);
-    }
-
-    public String getWikiDataEntityId() {
-        return wikiDataEntityId;
-    }
-
-    /**
-     * When the corresponding wikidata entity is known as in case of nearby uploads, it can be set
-     * using the setter method
-     * @param wikiDataEntityId wikiDataEntityId
-     */
-    public void setWikiDataEntityId(String wikiDataEntityId) {
-        this.wikiDataEntityId = wikiDataEntityId;
-    }
-
-    public String getP18Value() {
-        return p18Value;
-    }
-
-    /**
-     * When the corresponding image property of wiki entity is known as in case of nearby uploads,
-     * it can be set using the setter method
-     * @param p18Value p18 value, image property of the wikidata item
-     */
-    public void setP18Value(String p18Value) {
-        this.p18Value = p18Value;
-    }
-
-    public void setContentProviderUri(Uri contentProviderUri) {
-        this.contentProviderUri = contentProviderUri;
-    }
-
+        @Override
+        public Contribution[] newArray(final int size) {
+            return new Contribution[size];
+        }
+    };
 }

@@ -75,7 +75,7 @@
   <string name="gps_disabled">GPS estas malŝaltita en via aparato. Ĉu vi volas ŝalti ĝin?</string>
   <string name="enable_gps">Ŝalti la GPS</string>
   <string name="contributions_subtitle_zero">Neniuj alŝutaĵoj ĝis nun!</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -378,11 +378,10 @@
   <string name="preference_author_name_toggle">Uzi laŭmendan aŭtoran nomon</string>
   <string name="preference_author_name_toggle_summary">Uzi laŭmendan aŭtoran nomon anstataŭ via uzantnomon por alŝutado de fotoj</string>
   <string name="preference_author_name">Laŭmenda aŭtora nomo</string>
-  <string name="preference_author_name_summary">La laŭmenda aŭtora nomo uzota anstataŭ via uzantnomo por alŝutoj</string>
   <string name="contributions_fragment">Kontribuoj</string>
   <string name="nearby_fragment">Apude</string>
   <string name="notifications">Sciigoj</string>
-  <string name="archived_notifications">Sciigoj (enarkivigitaj)</string>
+  <string name="read_notifications" fuzzy="true">Sciigoj (enarkivigitaj)</string>
   <string name="display_nearby_notification">Montri sciigojn pri apudaĵoj</string>
   <string name="display_nearby_notification_summary">Tuŝetu ĉi tie por vidi apudan lokon kiu bezonas bildojn</string>
   <string name="no_close_nearby">Neniu proksima loko trovita ĉe vi.</string>
@@ -495,9 +494,9 @@
   <string name="no_image_reverted">Neniu bildo estis malfarita</string>
   <string name="no_image_uploaded">Neniu alŝutita bildo</string>
   <string name="no_notification">Vi ne havas nelegitajn sciigojn</string>
-  <string name="no_archived_notification">Vi ne havas enarkivigitajn sciigojn</string>
+  <string name="no_read_notification" fuzzy="true">Vi ne havas enarkivigitajn sciigojn</string>
   <string name="share_logs_using">Konigi protokolojn per</string>
-  <string name="menu_option_archived">Vidi enarkivigitojn</string>
+  <string name="menu_option_read" fuzzy="true">Vidi enarkivigitojn</string>
   <string name="menu_option_unread">Vidi nelegitojn</string>
   <string name="error_occurred_in_picking_images">Eraro okazis dum elektado de bildoj</string>
   <string name="image_chooser_title">Elekti alŝutotajn bildojn</string>
@@ -505,7 +504,7 @@
   <string name="images_featured_explanation">Elstaraj bildoj estas tiuj bildoj far tre spertaj fotografistoj kaj ilustristoj, kiujn la komunumo de Vikimedia Komunejo elektis kiel iujn de la plej alta kvalito en la retejo.</string>
   <string name="images_via_nearby_explanation">Bildoj Alŝutitaj per Apudaj lokoj estas bildoj alŝutitaj per trovado de lokoj sur la mapo.</string>
   <string name="thanks_received_explanation">Tiu funkcio ebligas sendi Dankantan sciigon al farinto de utila redakto – per malgranda dankiga ligilo ĉe la paĝo de historio aŭ diferenco.</string>
-  <string name="previous_image_title_description">Kopii antaŭajn titolon &amp; priskribon</string>
+  <string name="previous_image_caption_description">Kopii antaŭajn titolon &amp; priskribon</string>
   <string name="previous_button_tooltip_message">Alklaku por reuzi la titolon kaj priskribon vi enigis por via antaŭa bildo kaj modifi ĝin por via aktuala bildo</string>
   <string name="welcome_do_upload_content_description">Ekzemploj de alŝutindaj bildoj por Komunejo</string>
   <string name="welcome_dont_upload_content_description">Ekzemploj de ne alŝutindaj bildoj</string>
@@ -539,7 +538,7 @@
   <string name="delete_helper_ask_spam_blurry">Malklara</string>
   <string name="delete_helper_ask_spam_nonsense">Sensencaĵo</string>
   <string name="delete_helper_ask_spam_other">Alia</string>
-  <string name="delete_helper_ask_reason_copyright_press_photo">Gazetara foo</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Gazetara showImageWithItem</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Hazarda foto el Interreto</string>
   <string name="delete_helper_ask_reason_copyright_logo">Emblemo</string>
   <string name="delete_helper_ask_reason_copyright_other">Alia</string>

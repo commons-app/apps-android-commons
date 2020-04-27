@@ -83,7 +83,7 @@
   <string name="gps_disabled">GPS вимкнено на Вашому пристрої. Бажаєте увімкнути його?</string>
   <string name="enable_gps">Увімкнути GPS</string>
   <string name="contributions_subtitle_zero">Ще нема завантажень</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d завантаження</item>
     <item quantity="few">%1$d завантаження</item>
@@ -127,6 +127,7 @@
     <item quantity="one">Це зображення буде ліцензовано на умовах %1$s</item>
     <item quantity="few">Ці зображення буде ліцензовано на умовах %1$s</item>
     <item quantity="many">Ці зображення буде ліцензовано на умовах %1$s</item>
+    <item quantity="other">Ці зображення буде ліцензовано на умовах %1$s</item>
   </plurals>
   <string name="media_upload_policy">Подаючи це зображення, я підтверджую, що це моя власна робота, яка не містить захищених авторським правом матеріалів чи селфі, а також відповідає &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/uk\"&gt;правилам Вікісховища&lt;/a&gt;.</string>
   <string name="menu_download">Завантажити</string>
@@ -186,13 +187,15 @@
   <string name="storage_permission_title">Запит дозволу на зберігання</string>
   <string name="read_storage_permission_rationale">Обов\'язковий дозвіл: читання зовнішньої пам\'яті. Без цього дозволу програма не зможе отримати доступ до вашої галереї.</string>
   <string name="write_storage_permission_rationale">Обов\'язковий дозвіл: записування на зовнішнє сховище. Програма не зможе отримати доступ до камери/галереї без цього дозволу.</string>
-  <string name="location_permission_title">Запит на визначення місцезнаходження</string>
+  <string name="location_permission_title">Запит на визначення розташування</string>
   <string name="location_permission_rationale">Додатковий дозвіл: отримувати поточне розташування для підказок категорій</string>
   <string name="ok">Гаразд</string>
   <string name="title_activity_nearby">Місця поблизу</string>
   <string name="no_nearby">Не знайдено місць поблизу</string>
   <string name="warning">Попередження</string>
+  <string name="duplicate_image_found">Виявлено дублікат зображення</string>
   <string name="upload_image_duplicate">Цей файл вже існує на Вікісховищі. Ви впевнені, що хочете продовжити?</string>
+  <string name="upload">Вивантажити</string>
   <string name="yes">Так</string>
   <string name="no">Ні</string>
   <string name="media_detail_title">Назва</string>
@@ -266,6 +269,7 @@
   <string name="upload_problem_different_geolocation">Зображення виконано в іншому місці.</string>
   <string name="upload_problem_fbmd">Будь ласка, завантажуйте тільки ті зображення, які були зроблені вами. Не завантажуйте зображень, які ви знайшли у Фейсбуці.</string>
   <string name="upload_problem_do_you_continue">Ви все одно хочете завантажити це зображення?</string>
+  <string name="upload_problem_image">Виявлено проблеми із зображенням</string>
   <string name="internet_downloaded">Будь ласка, завантажуйте тільки ті зображення, які були зроблені вами. Не завантажуйте зображень, які ви знайшли в інтернеті.</string>
   <string name="give_permission">Надати дозвіл</string>
   <string name="use_external_storage">Використовувати зовнішнє сховище</string>
@@ -394,11 +398,10 @@
   <string name="preference_author_name_toggle">Використати альтернативне ім\'я автора</string>
   <string name="preference_author_name_toggle_summary">При завантаженні фото використовувати альтернативне ім\'я для зазначення авторства замість власного імені користувача</string>
   <string name="preference_author_name">Альтернативне ім\'я автора</string>
-  <string name="preference_author_name_summary">Альтернативне ім\'я для зазначення авторства, що буде використовуватись замість Вашого імені користувача у завантаженнях</string>
   <string name="contributions_fragment">Внесок</string>
   <string name="nearby_fragment">Поблизу</string>
   <string name="notifications">Сповіщення</string>
-  <string name="archived_notifications">Сповіщення (архівовані)</string>
+  <string name="read_notifications">Сповіщення (прочитані)</string>
   <string name="display_nearby_notification">Повідомляти мене про місця поблизу</string>
   <string name="display_nearby_notification_summary">Торкніться тут, щоб побачити найближчі місця, які ще не мають зображень</string>
   <string name="no_close_nearby">Не знайдено місць поблизу Вас</string>
@@ -417,6 +420,7 @@
     <item quantity="one">%1$d завантаження</item>
     <item quantity="few">%1$d завантаження</item>
     <item quantity="many">%1$d завантажень</item>
+    <item quantity="other">%1$d завантажень</item>
   </plurals>
   <string name="navigation_item_bookmarks">Закладки</string>
   <string name="title_activity_bookmarks">Закладки</string>
@@ -509,14 +513,15 @@
     <item quantity="one">Отримання спільного контенту. Обробка зображення може зайняти трохи часу, залежно від розміру зображення і від Вашого пристрою</item>
     <item quantity="few">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
     <item quantity="many">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
+    <item quantity="other">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
   </plurals>
   <string name="no_image">Використаних зображень немає</string>
   <string name="no_image_reverted">Відхилених зображень немає</string>
   <string name="no_image_uploaded">Завантажених зображень немає</string>
   <string name="no_notification">У вас немає непрочитаних сповіщень</string>
-  <string name="no_archived_notification">Немає архівованих сповіщень</string>
+  <string name="no_read_notification">Немає прочитаних сповіщень</string>
   <string name="share_logs_using">Поширення журналів</string>
-  <string name="menu_option_archived">Перегляд архівованих</string>
+  <string name="menu_option_read">Перегляд прочитаних</string>
   <string name="menu_option_unread">Перегляд непрочитаних</string>
   <string name="error_occurred_in_picking_images">Сталася помилка при завантаженні зображень</string>
   <string name="image_chooser_title">Оберіть зображення для завантаження</string>
@@ -524,7 +529,7 @@
   <string name="images_featured_explanation">Вибрані зображення — це зображення від вправних фотографів та ілюстраторів, які спільнота Вікісховища визначила як такі, що мають найкращу якість на сайті.</string>
   <string name="images_via_nearby_explanation">Зображення, завантажені через «Поблизу», — це зображення, завантажені через дослідження місць на карті.</string>
   <string name="thanks_received_explanation">Ця функція дозволяє редакторам надіслати «дякую» користувачам, які роблять корисні редагування, — скориставшись невеличким посиланням на сторінці історії або порівняння версій.</string>
-  <string name="previous_image_title_description">Скопіювати попередні назву й опис</string>
+  <string name="previous_image_caption_description">Скопіювати попередні назву й опис</string>
   <string name="previous_button_tooltip_message">Натисніть, щоб використати назву та опис, які ви вводили для свого попереднього зображення, і змінити їх під поточне</string>
   <string name="welcome_do_upload_content_description">Приклади добрих зображень для завантаження у Вікісховище</string>
   <string name="welcome_dont_upload_content_description">Приклади зображень, які не слід завантажувати</string>
@@ -585,7 +590,12 @@
   <string name="wallpaper_set_unsuccessfully">Щось трапилось. Не вдалося встановити шпалери робочого столу</string>
   <string name="setting_wallpaper_dialog_title">Встановити в якості шпалер робочого столу</string>
   <string name="setting_wallpaper_dialog_message">Встановлення робочого столу. Будь ласка зачекайте...</string>
-  <string name="theme_default_name">Стандартна</string>
+  <string name="theme_default_name">На взірець системи</string>
   <string name="theme_dark_name">Темна</string>
   <string name="theme_light_name">Світла</string>
+  <string name="cannot_open_location_settings">Не вдалося відкрити налаштування місця розташування. Будь ласка, увімкніть визначення місця розташування вручну</string>
+  <string name="recommend_high_accuracy_mode">Щоб отримати кращі результати, виберіть режим високої точності.</string>
+  <string name="ask_to_turn_location_on">Увімкнути визначення місця розташування?</string>
+  <string name="nearby_needs_location">«Поблизу» потребує увімкненого визначення місця розташування, щоб працювати належним чином</string>
+  <string name="use_location_from_similar_image">Ви зробили ці два знімки в одному й тому ж місці? Хочете використати широту/довготу зображення справа?</string>
 </resources>

@@ -1,43 +1,29 @@
 package fr.free.nrw.commons.contributions;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.database.DataSetObserver;
-import android.text.TextUtils;
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionsContract.UserActionListener;
 import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.mwapi.UserClient;
-import fr.free.nrw.commons.utils.ExecutorUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
-import io.reactivex.Observable;
 import io.reactivex.Scheduler;
-import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.contributions.Contribution.STATE_COMPLETED;
 
 /**
  * The presenter class for Contributions
@@ -62,6 +48,10 @@ public class ContributionsPresenter implements UserActionListener {
 
     @Inject
     SessionManager sessionManager;
+
+    @Inject
+    MediaDataExtractor mediaDataExtractor;
+
     private LifecycleOwner lifeCycleOwner;
 
     @Inject
@@ -100,12 +90,7 @@ public class ContributionsPresenter implements UserActionListener {
                     .observeOn(mainThreadScheduler)
                     .doOnNext(mwQueryLogEvent -> Timber.d("Received image %s", mwQueryLogEvent.title()))
                     .filter(mwQueryLogEvent -> !mwQueryLogEvent.isDeleted()).doOnNext(mwQueryLogEvent -> Timber.d("Image %s passed filters", mwQueryLogEvent.title()))
-                    .map(image -> {
-                        Contribution contribution = new Contribution(null, null, image.title(),
-                                "", -1, image.date(), image.date(), user,
-                                "", "", STATE_COMPLETED);
-                        return contribution;
-                    })
+                    .map(image -> new Contribution(image, user))
                     .toList()
                     .subscribe(this::saveContributionsToDB, error -> {
                         Timber.e("Failed to fetch contributions: %s", error.getMessage());
@@ -179,5 +164,25 @@ public class ContributionsPresenter implements UserActionListener {
             return null;
         }
         return contributionList.get(i);
+    }
+
+    @Override
+    public void updateContribution(Contribution contribution) {
+        compositeDisposable.add(repository
+            .updateContribution(contribution)
+            .subscribeOn(ioThreadScheduler)
+            .subscribe());
+    }
+
+    @Override
+    public void fetchMediaDetails(Contribution contribution) {
+        compositeDisposable.add(mediaDataExtractor
+            .getMediaFromFileName(contribution.getFilename())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(media -> {
+                contribution.setThumbUrl(media.getThumbUrl());
+                updateContribution(contribution);
+            }));
     }
 }

@@ -16,6 +16,10 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import java.lang.ref.SoftReference;
+import java.util.Collections;
+import java.util.List;
 import org.wikipedia.util.StringUtil;
 
 import butterknife.BindView;
@@ -136,14 +140,15 @@ public class AboutActivity extends NavigationBaseActivity {
 
     @OnClick(R.id.about_translate)
     public void launchTranslate(View view) {
+        @NonNull List<String> sortedLocalizedNamesRef = CommonsApplication.getInstance().getLanguageLookUpTable().getCanonicalNames();
+        Collections.sort(sortedLocalizedNamesRef);
         final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(AboutActivity.this,
-                android.R.layout.simple_spinner_dropdown_item, CommonsApplication.getInstance().getLanguageLookUpTable().getLocalizedNames());
+                android.R.layout.simple_spinner_dropdown_item, sortedLocalizedNamesRef);
         final Spinner spinner = new Spinner(AboutActivity.this);
         spinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         spinner.setAdapter(languageAdapter);
         spinner.setGravity(17);
         spinner.setPadding(50,0,0,0);
-
         AlertDialog.Builder builder = new AlertDialog.Builder(AboutActivity.this);
         builder.setView(spinner);
         builder.setTitle(R.string.about_translate_title)
@@ -152,7 +157,7 @@ public class AboutActivity extends NavigationBaseActivity {
                     String langCode = CommonsApplication.getInstance().getLanguageLookUpTable().getCodes().get(spinner.getSelectedItemPosition());
                     Utils.handleWebUrl(AboutActivity.this, Uri.parse(Urls.TRANSLATE_WIKI_URL + langCode));
                 });
-        builder.setNegativeButton(R.string.about_translate_cancel, (dialog, which) -> finish());
+        builder.setNegativeButton(R.string.about_translate_cancel, (dialog, which) -> dialog.cancel());
         builder.create().show();
 
     }

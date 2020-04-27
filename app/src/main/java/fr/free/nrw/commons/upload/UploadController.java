@@ -13,17 +13,7 @@ import android.net.Uri;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Date;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-import fr.free.nrw.commons.HandlerService;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -34,23 +24,26 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Date;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import timber.log.Timber;
 
 @Singleton
 public class UploadController {
     private UploadService uploadService;
-    private SessionManager sessionManager;
-    private Context context;
-    private JsonKvStore store;
-
-    public interface ContributionUploadProgress {
-        void onUploadStarted(Contribution contribution);
-    }
+    private final SessionManager sessionManager;
+    private final Context context;
+    private final JsonKvStore store;
 
     @Inject
-    public UploadController(SessionManager sessionManager,
-                            Context context,
-                            JsonKvStore store) {
+    public UploadController(final SessionManager sessionManager,
+                            final Context context,
+                            final JsonKvStore store) {
         this.sessionManager = sessionManager;
         this.context = context;
         this.store = store;
@@ -59,13 +52,13 @@ public class UploadController {
     private boolean isUploadServiceConnected;
     public ServiceConnection uploadServiceConnection = new ServiceConnection() {
         @Override
-        public void onServiceConnected(ComponentName componentName, IBinder binder) {
-            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder) binder).getService();
+        public void onServiceConnected(final ComponentName componentName, final IBinder binder) {
+            uploadService =  ((UploadService.UploadServiceLocalBinder) binder).getService();
             isUploadServiceConnected = true;
         }
 
         @Override
-        public void onServiceDisconnected(ComponentName componentName) {
+        public void onServiceDisconnected(final ComponentName componentName) {
             // this should never happen
             isUploadServiceConnected = false;
             Timber.e(new RuntimeException("UploadService died but the rest of the process did not!"));
@@ -76,7 +69,7 @@ public class UploadController {
      * Prepares the upload service.
      */
     public void prepareService() {
-        Intent uploadServiceIntent = new Intent(context, UploadService.class);
+        final Intent uploadServiceIntent = new Intent(context, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         context.startService(uploadServiceIntent);
         context.bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
@@ -96,28 +89,18 @@ public class UploadController {
      *
      * @param contribution the contribution object
      */
-    public void startUpload(Contribution contribution) {
-        startUpload(contribution, c -> {});
-    }
-
-    /**
-     * Starts a new upload task.
-     *
-     * @param contribution the contribution object
-     * @param onComplete   the progress tracker
-     */
     @SuppressLint("StaticFieldLeak")
-    private void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
+    public void startUpload(final Contribution contribution) {
         //Set creator, desc, and license
 
         // If author name is enabled and set, use it
         if (store.getBoolean("useAuthorName", false)) {
-            String authorName = store.getString("authorName", "");
+            final String authorName = store.getString("authorName", "");
             contribution.setCreator(authorName);
         }
 
         if (TextUtils.isEmpty(contribution.getCreator())) {
-            Account currentAccount = sessionManager.getCurrentAccount();
+            final Account currentAccount = sessionManager.getCurrentAccount();
             if (currentAccount == null) {
                 Timber.d("Current account is null");
                 ViewUtil.showLongToast(context, context.getString(R.string.user_not_logged_in));
@@ -131,23 +114,23 @@ public class UploadController {
             contribution.setDescription("");
         }
 
-        String license = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
+        final String license = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         contribution.setLicense(license);
 
-        uploadTask(contribution, onComplete);
+        uploadTask(contribution);
     }
 
     /**
      * Initiates the upload task
      * @param contribution
-     * @param onComplete
      * @return
      */
-    private Disposable uploadTask(Contribution contribution, ContributionUploadProgress onComplete) {
-        return Single.fromCallable(() -> makeUpload(contribution))
+    private Disposable uploadTask(final Contribution contribution) {
+        return Single.just(contribution)
+                .map(this::buildUpload)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(finalContribution -> onUploadCompleted(finalContribution, onComplete));
+                .subscribe(this::upload);
     }
 
     /**
@@ -155,71 +138,76 @@ public class UploadController {
      * @param contribution
      * @return
      */
-    private Contribution makeUpload(Contribution contribution) {
-        long length;
-        ContentResolver contentResolver = context.getContentResolver();
+    private Contribution buildUpload(final Contribution contribution) {
+        final ContentResolver contentResolver = context.getContentResolver();
+
+        contribution.setDataLength(resolveDataLength(contentResolver, contribution));
+
+        final String mimeType = resolveMimeType(contentResolver, contribution);
+
+        if (mimeType != null) {
+            Timber.d("MimeType is: %s", mimeType);
+            contribution.setMimeType(mimeType);
+            if(mimeType.startsWith("image/") && contribution.getDateCreated() == null){
+                contribution.setDateCreated(resolveDateTakenOrNow(contentResolver, contribution));
+            }
+        }
+
+        return contribution;
+    }
+
+    private String resolveMimeType(final ContentResolver contentResolver, final Contribution contribution) {
+        final String mimeType = contribution.getMimeType();
+        if (mimeType == null || TextUtils.isEmpty(mimeType) || mimeType.endsWith("*")) {
+            return contentResolver.getType(contribution.getLocalUri());
+        }
+        return mimeType;
+    }
+
+    private long resolveDataLength(final ContentResolver contentResolver, final Media contribution) {
         try {
             if (contribution.getDataLength() <= 0) {
                 Timber.d("UploadController/doInBackground, contribution.getLocalUri():%s", contribution.getLocalUri());
-                AssetFileDescriptor assetFileDescriptor = contentResolver
-                        .openAssetFileDescriptor(Uri.fromFile(new File(contribution.getLocalUri().getPath())), "r");
+                final AssetFileDescriptor assetFileDescriptor = contentResolver
+                    .openAssetFileDescriptor(Uri.fromFile(new File(contribution.getLocalUri().getPath())), "r");
                 if (assetFileDescriptor != null) {
-                    length = assetFileDescriptor.getLength();
-                    if (length == -1) {
-                        // Let us find out the long way!
-                        length = countBytes(contentResolver
-                                .openInputStream(contribution.getLocalUri()));
-                    }
-                    contribution.setDataLength(length);
+                    final long length = assetFileDescriptor.getLength();
+                    return length != -1 ? length
+                        : countBytes(contentResolver.openInputStream(contribution.getLocalUri()));
                 }
             }
-        } catch (IOException | NullPointerException | SecurityException e) {
+        } catch (final IOException | NullPointerException | SecurityException e) {
             Timber.e(e, "Exception occurred while uploading image");
         }
+        return contribution.getDataLength();
+    }
 
-        String mimeType = (String) contribution.getTag("mimeType");
-        boolean imagePrefix = false;
-
-        if (mimeType == null || TextUtils.isEmpty(mimeType) || mimeType.endsWith("*")) {
-            mimeType = contentResolver.getType(contribution.getLocalUri());
-        }
-
-        if (mimeType != null) {
-            contribution.setTag("mimeType", mimeType);
-            imagePrefix = mimeType.startsWith("image/");
-            Timber.d("MimeType is: %s", mimeType);
-        }
-
-        if (imagePrefix && contribution.getDateCreated() == null) {
-            Timber.d("local uri   %s", contribution.getLocalUri());
-            Cursor cursor = contentResolver.query(contribution.getLocalUri(),
-                    new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
+    private Date resolveDateTakenOrNow(final ContentResolver contentResolver, final Media contribution) {
+        Timber.d("local uri   %s", contribution.getLocalUri());
+        try(final Cursor cursor = dateTakenCursor(contentResolver, contribution)) {
             if (cursor != null && cursor.getCount() != 0 && cursor.getColumnCount() != 0) {
                 cursor.moveToFirst();
-                Date dateCreated = new Date(cursor.getLong(0));
-                Date epochStart = new Date(0);
-                if (dateCreated.equals(epochStart) || dateCreated.before(epochStart)) {
-                    // If date is incorrect (1st second of unix time) then set it to the current date
-                    dateCreated = new Date();
+                final Date dateCreated = new Date(cursor.getLong(0));
+                if (dateCreated.after(new Date(0))) {
+                    return dateCreated;
                 }
-                contribution.setDateCreated(dateCreated);
-                cursor.close();
-            } else {
-                contribution.setDateCreated(new Date());
             }
+            return new Date();
         }
-        return contribution;
+    }
+
+    private Cursor dateTakenCursor(final ContentResolver contentResolver, final Media contribution) {
+        return contentResolver.query(contribution.getLocalUri(),
+            new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
     }
 
     /**
      * When the contribution object is completely formed, the item is queued to the upload service
      * @param contribution
-     * @param onComplete
      */
-    private void onUploadCompleted(Contribution contribution, ContributionUploadProgress onComplete) {
+    private void upload(final Contribution contribution) {
         //Starts the upload. If commented out, user can proceed to next Fragment but upload doesn't happen
-        uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
-        onComplete.onUploadStarted(contribution);
+        uploadService.queue(contribution);
     }
 
 
@@ -230,9 +218,9 @@ public class UploadController {
      * @return the number of bytes in {@code stream}
      * @throws IOException if an I/O error occurs
      */
-    private long countBytes(InputStream stream) throws IOException {
+    private long countBytes(final InputStream stream) throws IOException {
         long count = 0;
-        BufferedInputStream bis = new BufferedInputStream(stream);
+        final BufferedInputStream bis = new BufferedInputStream(stream);
         while (bis.read() != -1) {
             count++;
         }

@@ -8,13 +8,17 @@
 * Neptune, the Mystic
 -->
 <resources>
+  <string name="title_activity_explore">Istraži</string>
+  <string name="navigation_item_explore">Istraži</string>
   <string name="preference_category_appearance">Izgled</string>
   <string name="preference_category_general">Opće</string>
   <string name="preference_category_feedback">Povratna informacija</string>
+  <string name="preference_category_privacy">Privatnost</string>
   <string name="preference_category_location">Lokacija</string>
   <string name="app_name">Zajednički poslužitelj</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Postavke</string>
+  <string name="intent_share_upload_label">Prenesi na Zajednički poslužitelj</string>
   <string name="username">Suradničko ime</string>
   <string name="password">Zaporka</string>
   <string name="login_credential">Prijavite se na Commons beta račun</string>
@@ -26,7 +30,7 @@
   <string name="login_success">Prijava uspješna!</string>
   <string name="login_failed">Prijava neuspješna!</string>
   <string name="upload_failed">Datoteka nije pronađena. Molimo probajte drugu.</string>
-  <string name="authentication_failed" fuzzy="true">Autentifikacija neuspješna!</string>
+  <string name="authentication_failed">Autentifikacija neuspješna. Molimo, prijavite se ponovno</string>
   <string name="uploading_started">Postavljanje započeto!</string>
   <string name="upload_completed_notification_title">%1$s postavljeno!</string>
   <string name="upload_completed_notification_text">Dodirnite da biste vidjeli datoteku</string>
@@ -35,7 +39,7 @@
   <string name="upload_progress_notification_title_finishing">Završeno postavljanje %1$s</string>
   <string name="upload_failed_notification_title">Postavljanje %1$s neuspješno</string>
   <string name="upload_failed_notification_subtitle">Dodirnite da biste vidjeli</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">Postavlja se %1$d datoteka</item>
     <item quantity="other">Postavljaju se %1$d datoteke</item>
   </plurals>
@@ -50,7 +54,7 @@
   <string name="provider_contributions">Moja postavljanja</string>
   <string name="menu_share">Podijeli</string>
   <string name="menu_open_in_browser">Pogledaj u pregledniku</string>
-  <string name="share_title_hint" fuzzy="true">Naziv</string>
+  <string name="share_title_hint">Naziv (obavezno)</string>
   <string name="add_title_toast">Molimo imenujte ovu datoteku</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Prijava nije moguća - mrežna pogrješka</string>
@@ -75,11 +79,11 @@
     <item quantity="one">%1$d postavljena datoteka</item>
     <item quantity="other">%1$d postavljene datoteke</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Započeto %1$d postavljanje</item>
     <item quantity="other">Započeta %1$d postavljanja</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d postavljanje</item>
     <item quantity="other">%1$d postavljanja</item>
   </plurals>
@@ -152,6 +156,7 @@
   <string name="welcome_copyright_subtext">Izbjegavajte materijale s autorskim pravima koje ste pronašli na internetu (slike plakata, naslovnice knjiga, i slično).</string>
   <string name="welcome_final_text">Jeste li razumjeli?</string>
   <string name="welcome_final_button_text">Da!</string>
+  <string name="welcome_help_button_text">Više informacija</string>
   <string name="detail_panel_cats_label">Kategorije</string>
   <string name="detail_panel_cats_loading">Učitavanje...</string>
   <string name="detail_panel_cats_none">Ništa nije odabrano</string>
@@ -159,16 +164,19 @@
   <string name="detail_license_empty">Nepoznata licencija</string>
   <string name="menu_refresh">Osvježi</string>
   <string name="read_storage_permission_rationale">Potrebno dopuštenje čitanja vanjske pohrane. Bez toga aplikacija ne može pristupiti Vašoj galeriji.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Potrebno dopuštenje spremanja na vanjsku pohranu. Bez toga aplikacija ne može pristupiti Vašoj kameri.</string>
+  <string name="write_storage_permission_rationale">Potrebno dopuštenje spremanja na vanjsku pohranu. Bez toga aplikacija ne može pristupiti Vašoj kameri/galeriji.</string>
   <string name="location_permission_rationale">Potrebno dopuštenje za određivanje trenutačne lokacije za prijedloge kategorija (nije obvezno)</string>
   <string name="ok">U redu</string>
   <string name="title_activity_nearby">Mjesta u blizini</string>
   <string name="no_nearby">Nisu pronađena mjesta u blizini</string>
   <string name="warning">Upozorenje</string>
+  <string name="duplicate_image_found">Pronađena duplirana slika</string>
+  <string name="upload">Postavi</string>
   <string name="yes">Da</string>
   <string name="no">Ne</string>
   <string name="media_detail_title">Naslov</string>
   <string name="media_detail_description">Opis</string>
+  <string name="media_detail_discussion">Razgovor</string>
   <string name="media_detail_author">Autor</string>
   <string name="media_detail_uploaded_date">Datum postavljanja</string>
   <string name="media_detail_license">Licencija</string>
@@ -180,7 +188,8 @@
   <string name="number_of_uploads">Moje ograničenje nedavnih postavljanja</string>
   <string name="maximum_limit">Najviše moguće</string>
   <string name="maximum_limit_alert">Nije moguće prikazati više od 500</string>
-  <string name="set_limit" fuzzy="true">Postavi ograničenje nedavnih postavljanja</string>
+  <string name="enter_valid">Unesite važeći broj</string>
+  <string name="set_limit">Ograničenje nedavnih postavljanja</string>
   <string name="login_failed_2fa_not_supported">Kôd za provjeru u 2 koraka nije podržan.</string>
   <string name="logout_verification">Zaista se želite odjaviti?</string>
   <string name="commons_logo">Logotip Zajedničkog poslužitelja</string>
@@ -190,6 +199,7 @@
   <string name="background_image">Pozadinska slika</string>
   <string name="mediaimage_failed">Slika nije uspjela</string>
   <string name="no_image_found">Slika nije pronađena</string>
+  <string name="no_subcategory_found">Potkategorije nisu pronađene</string>
   <string name="upload_image">Postavi sliku</string>
   <string name="welcome_image_mount_zao">Planina Zao</string>
   <string name="welcome_image_llamas">Ljame</string>
@@ -221,6 +231,17 @@
   <string name="error_while_cache">Pogrješka predmemoriranja slika</string>
   <string name="title_info">Jedinstveni naziv datoteke koji će služiti kao njeno ime. Možete koristiti uobičajeni jezik s razmacima. Ne uključuje datotečni nastavak.</string>
   <string name="description_info">Opišite medij što je više moguće: gdje je napravljen, što prikazuje,... Opišite objekte ili osobe. Napišite informacije koje ne mogu biti lako okrivene, npr. doba dana ako je u pitanju pejzaž. Ako medij prikazuje nešto neobično, molimo objasnite što je neobično.</string>
+  <string name="upload_image_too_dark">Ova je slika pretamna, jeste li sigurni da je želite postaviti? Zajednički poslužitelj samo je za slike od enciklopedijskog značaja.</string>
+  <string name="upload_image_blurry">Ova je slika mutna, jeste li sigurni da je želite postaviti? Zajednički poslužitelj samo je za slike od enciklopedijskog značaja.</string>
+  <string name="upload_problem_exist">Mogući problemi s ovom slikom:</string>
+  <string name="upload_problem_image_dark">Slika je pretamna.</string>
+  <string name="upload_problem_image_blurry">Slika je mutna.</string>
+  <string name="upload_problem_image_duplicate">Slika se već nalazi na Zajedničkom poslužitelju.</string>
+  <string name="upload_problem_different_geolocation">Slika je snimljena na drugoj lokaciji.</string>
+  <string name="upload_problem_fbmd">Molimo Vas da samo postavljate slike koje ste sami snimili. Ne postavljajte slike koje ste našli na profilima drugih ljudi na Facebooku.</string>
+  <string name="upload_problem_do_you_continue">Želite li i dalje postaviti ovu sliku?</string>
+  <string name="upload_problem_image">Pronađeni problemi sa slikom</string>
+  <string name="internet_downloaded">Molimo Vas da samo postavljate slike koje ste sami snimili. Ne postavljajte slike koje ste preuzeli s interneta.</string>
   <string name="give_permission">Daj dopuštenje</string>
   <string name="use_external_storage">Rabi vanjsku pohranu</string>
   <string name="use_external_storage_summary">Spremite slike načinjene kamerom Vašeg uređaja</string>
@@ -231,7 +252,13 @@
   <string name="null_url">Pogrješka! URL nije pronađen</string>
   <string name="nominate_deletion">Predloži za brisanje</string>
   <string name="nominated_for_deletion">Slika je predložena za brisanje</string>
+  <string name="nominated_see_more">Pogledajte mrežnu stranicu za više informacija</string>
   <string name="view_browser">Pogledaj u pregledniku</string>
+  <string name="skip_login">Preskoči</string>
+  <string name="navigation_item_login">Prijavite se</string>
+  <string name="skip_login_title">Želite li zbilja preskočiti prijavu?</string>
+  <string name="skip_login_message">U budućnosti ćete se morati prijaviti kako biste postavili slike.</string>
+  <string name="login_alert_message">Molimo da se prijavite kako biste se mogli koristiti ovom mogućnošću</string>
   <string name="nearby_location_has_not_changed">Lokacija nepromijenjena.</string>
   <string name="nearby_location_not_available">„U blizini“ možda ne radi kako treba. Lokacija nije dostupna.</string>
   <string name="location_permission_rationale_nearby">Potrebno je dopuštenje za popis mjesta u blizini</string>
@@ -266,20 +293,45 @@
   <string name="no_images_found">Slike nisu pronađene!</string>
   <string name="error_loading_images">Pogrješka prilikom učitavanja slika.</string>
   <string name="image_uploaded_by">Postavio: %1$s</string>
+  <string name="block_notification">Onemogućeno Vam je uređivanje na Zajedničkom poslužitelju</string>
+  <string name="appwidget_img">Slika dana</string>
+  <string name="app_widget_heading">Slika dana</string>
+  <string name="menu_search_button">Pretraži</string>
+  <string name="search_commons">Pretraga na Zajedničkom poslužitelju</string>
   <string name="error_loading_categories">Dogodila se pogrješka prilikom učitavanja kategorija.</string>
   <string name="error_loading_subcategories">Dogodila se pogrješka prilikom učitavanja potkategorija</string>
   <string name="search_tab_title_media">Mediji</string>
   <string name="search_tab_title_categories">Kategorije</string>
   <string name="explore_tab_title_featured">Istaknuto</string>
   <string name="explore_tab_title_mobile">Učitaj pomoću mobitela</string>
+  <string name="menu_set_wallpaper">Postavi kao pozadinu</string>
+  <string name="wallpaper_set_successfully">Pozadina je uspješno postavljena!</string>
+  <string name="quiz">Kviz</string>
+  <string name="quiz_question_string">Želite li postaviti ovu sliku?</string>
+  <string name="question">Pitanje</string>
+  <string name="result">Rezultat</string>
+  <string name="quiz_back_button">Ako nastavite postavljati slike koje je potrebno izbrisati, Vaš će račun vjerojatno biti blokiran. Jeste li sigurni da želite završiti kviz?</string>
+  <string name="construction_event_answer">Slike koje prikazuju tehnologiju ili kulturu dobrodošle su na Zajedničkom poslužitelju.</string>
+  <string name="warning_for_no_answer">Izaberite jednu opciju od dvije da biste odgovorili na pitanje</string>
+  <string name="quiz_result_share_message">Podijelite kviz s prijateljima!</string>
+  <string name="correct">Točan odgovor</string>
+  <string name="wrong">Pogrešan odgovor</string>
+  <string name="quiz_screenshot_question">Želite li postaviti ovu snimku zaslona?</string>
   <string name="share_app_title">Aplikacija za dijeljenje</string>
   <string name="share_coordinates_not_present">Prilikom označavanja slike koordinate nisu navedene</string>
   <string name="error_fetching_nearby_places">Pogrješka prilikom dohvaćanja mjesta u blizini.</string>
+  <string name="delete_search_dialog">Želite li izbrisati ovu pretragu?</string>
+  <string name="nominate_delete">Predloži za brisanje</string>
   <string name="delete">Izbriši</string>
   <string name="statistics">Statistike</string>
   <string name="level">Razina</string>
   <string name="error_occurred">Došlo je do pogrješke!</string>
   <string name="notifications_channel_name_all">Obavijesti Zajedničkoga poslužitelja</string>
+  <string name="title_page_bookmarks_pictures">Slike</string>
+  <string name="deletion_reason_uploaded_by_mistake">Slučajno sam je postavio/la</string>
+  <string name="deletion_reason_publicly_visible">Nisam znao/la da će biti javno vidljiva</string>
+  <string name="deletion_reason_bad_for_my_privacy">Shvatio/la sam da šteti mojoj privatnosti</string>
+  <string name="deletion_reason_no_longer_want_public">Promijenio/la sam mišljenje, ne želim da više bude javno vidljivo</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Toliko ste pridonijeli projektu da se naš sustav za računanje postignuća ne može nositi s time. To je vrhunsko postignuće.</string>
   <string name="error_processing_image">Došlo je do pogrješke tijekom obradbe slike. Molimo Vas, pokušajte ponovo!</string>
   <string name="please_wait">Molimo Vas, pričekajte ...</string>
@@ -293,7 +345,7 @@
   <string name="wallpaper_set_unsuccessfully">Nešto je pošlo po zlu. Ne možemo postaviti pozadinu</string>
   <string name="setting_wallpaper_dialog_title">Postavi kao pozadinu</string>
   <string name="setting_wallpaper_dialog_message">Postavljanje pozadine. Molimo, pričekajte...</string>
-  <string name="theme_default_name">Zadano</string>
+  <string name="theme_default_name" fuzzy="true">Zadano</string>
   <string name="theme_dark_name">Tamno</string>
   <string name="theme_light_name">Svijetlo</string>
 </resources>

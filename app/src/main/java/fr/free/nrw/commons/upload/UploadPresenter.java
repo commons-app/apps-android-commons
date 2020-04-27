@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload;
 import android.annotation.SuppressLint;
 
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -89,7 +90,6 @@ public class UploadPresenter implements UploadContract.UserActionListener {
         if (index == uploadableFiles.size() - 1) {//If the next fragment to be shown is not one of the MediaDetailsFragment, lets hide the top card
             view.showHideTopCard(false);
         }
-        //Ask the repository to delete the picture
         repository.deletePicture(uploadableFiles.get(index).getFilePath());
         if (uploadableFiles.size() == 1) {
             view.showMessage(R.string.upload_cancelled);

@@ -97,7 +97,7 @@
   <string name="gps_disabled">El GPS está desactivado en tu dispositivo. ¿Quieres activarlo?</string>
   <string name="enable_gps">Activar GPS</string>
   <string name="contributions_subtitle_zero">No hay subidas aún</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -199,7 +199,9 @@
   <string name="title_activity_nearby">Lugares cercanos</string>
   <string name="no_nearby">No se encontraron lugares cercanos</string>
   <string name="warning">Atención</string>
+  <string name="duplicate_image_found">Se encontró una imagen duplicada</string>
   <string name="upload_image_duplicate">Este archivo ya existe en Commons. ¿Deseas continuar?</string>
+  <string name="upload">Cargar</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
   <string name="media_detail_title">Título</string>
@@ -273,6 +275,7 @@
   <string name="upload_problem_different_geolocation">Esta imagen fue tomada en una ubicación diferente.</string>
   <string name="upload_problem_fbmd">Por favor sube solo fotografías que tu mismo hayas tomado. No subas imágenes o fotografías que hayas encontrado en las cuentas de Facebook de otros.</string>
   <string name="upload_problem_do_you_continue">¿Todavía quieres cargar esta imagen?</string>
+  <string name="upload_problem_image">Problemas encontrados en la imagen</string>
   <string name="internet_downloaded">Carga únicamente fotografías que hayas creado tú. No cargues imágenes o fotografías que hayas descargado de Internet.</string>
   <string name="give_permission">Otorgar permiso</string>
   <string name="use_external_storage">Utilizar almacenamiento externo</string>
@@ -401,11 +404,10 @@
   <string name="preference_author_name_toggle">Usar nombre de autor personalizado</string>
   <string name="preference_author_name_toggle_summary">Usar un nombre de autor personalizado en vez de tu nombre de usuario al subir fotos</string>
   <string name="preference_author_name">Nombre de autor personalizado</string>
-  <string name="preference_author_name_summary">El nombre de autor personalizado para usar en las subidas en vez de tu nombre de usuario</string>
   <string name="contributions_fragment">Contribuciones</string>
   <string name="nearby_fragment">Cercanos</string>
   <string name="notifications">Notificaciones</string>
-  <string name="archived_notifications">Notificaciones (archivadas)</string>
+  <string name="read_notifications">Notificaciones (leídas)</string>
   <string name="display_nearby_notification">Mostrar notificaciones de cercanía</string>
   <string name="display_nearby_notification_summary">Toca aquí para ver el lugar más cercano que necesita fotos</string>
   <string name="no_close_nearby">No se encontraron lugares cercanos cerca de ti</string>
@@ -518,9 +520,9 @@
   <string name="no_image_reverted">Ninguna imagen revertida</string>
   <string name="no_image_uploaded">Ninguna imagen subida</string>
   <string name="no_notification">No tienes notificaciones sin leer</string>
-  <string name="no_archived_notification">No tienes notificaciones archivadas</string>
+  <string name="no_read_notification">No tienes ninguna notificación leída</string>
   <string name="share_logs_using">Compartir registros usando</string>
-  <string name="menu_option_archived">Ver archivados</string>
+  <string name="menu_option_read">Ver leídas</string>
   <string name="menu_option_unread">Ver no leidas</string>
   <string name="error_occurred_in_picking_images">Ocurrió un error mientras se elegían imagenes</string>
   <string name="image_chooser_title">Elige imágenes para cargar</string>
@@ -528,7 +530,7 @@
   <string name="images_featured_explanation">Las imágenes destacadas son creaciones de talentosos fotógrafos e ilustradores que la comunidad de Wikimedia Commons ha reconocido como las de mayor calidad del sitio.</string>
   <string name="images_via_nearby_explanation">Las imágenes subidas via Lugares Cercanos son las imágenes que han sido cargadas al descubrir lugares en el mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidad permite a los editores enviar una notificación de agradecimiento a aquellos usuarios que realicen ediciones útiles mediante un pequeño enlace en la página de historial o de diferencias.</string>
-  <string name="previous_image_title_description">Copiar título y descripción anteriores</string>
+  <string name="previous_image_caption_description">Copiar título y descripción anteriores</string>
   <string name="previous_button_tooltip_message">Haz clic para reutilizar el título y descripción que introdujiste en la imagen anterior y modificarlos para la imagen actual</string>
   <string name="welcome_do_upload_content_description">Ejemplos de imágenes adecuadas para Commons</string>
   <string name="welcome_dont_upload_content_description">Ejemplos de imágenes que no deben cargarse</string>
@@ -583,7 +585,7 @@
   <string name="title_app_shortcut_explore">Explorar</string>
   <string name="title_app_shortcut_bookmark">Marcadores</string>
   <string name="title_app_shortcut_setting">Configuración</string>
-  <string name="theme_default_name">Predeterminado</string>
+  <string name="theme_default_name">Seguir sistema</string>
   <string name="theme_dark_name">Oscuro</string>
   <string name="theme_light_name">Claro</string>
 </resources>

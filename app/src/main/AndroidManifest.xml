@@ -15,9 +15,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
-    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
     <uses-permission android:name="com.google.android.apps.photos.permission.GOOGLE_PHOTOS" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.SET_WALLPAPER"/>
 
 
@@ -120,6 +118,11 @@
             android:parentActivityName=".contributions.MainActivity" />
 
         <activity
+            android:name=".depictions.WikidataItemDetailsActivity"
+            android:label="@string/title_activity_featured_images"
+            android:parentActivityName=".contributions.MainActivity" />
+
+        <activity
             android:name=".explore.categories.ExploreActivity"
             android:label="@string/title_activity_explore"
             android:parentActivityName=".contributions.MainActivity"
@@ -178,7 +181,7 @@
             android:authorities="${applicationId}.categories.contentprovider"
             android:exported="false"
             android:label="@string/provider_categories"
-            android:syncable="false" />
+          android:syncable="false" />
 
         <provider
             android:name=".explore.recentsearches.RecentSearchesContentProvider"

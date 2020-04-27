@@ -2,10 +2,8 @@ package fr.free.nrw.commons.upload
 
 import android.content.ComponentName
 import android.content.Context
-import fr.free.nrw.commons.HandlerService
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.Contribution
-import fr.free.nrw.commons.kvstore.BasicKvStore
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import org.junit.Before
 import org.junit.Test
@@ -31,7 +29,7 @@ class UploadControllerTest {
     fun setup() {
         MockitoAnnotations.initMocks(this)
         val uploadService = mock(UploadService::class.java)
-        val binder = mock(HandlerService.HandlerServiceLocalBinder::class.java)
+        val binder = mock(UploadService.UploadServiceLocalBinder::class.java)
         `when`(binder.service).thenReturn(uploadService)
         uploadController!!.uploadServiceConnection.onServiceConnected(mock(ComponentName::class.java), binder)
     }

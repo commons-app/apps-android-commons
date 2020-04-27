@@ -71,7 +71,7 @@
   <string name="gps_disabled">GPS is uitgesit in uw apparaat. Wil u die aansit?</string>
   <string name="enable_gps">GPS aansit</string>
   <string name="contributions_subtitle_zero">Nog geen uploads</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -369,11 +369,10 @@
   <string name="preference_author_name_toggle">Gebruik die gepaste outeur se naam</string>
   <string name="preference_author_name_toggle_summary">Gebruik \'n pasgemaakte outeurnaam in plaas van u gebruikersnaam terwyl u foto\'s oplaai</string>
   <string name="preference_author_name">Pasgemaakte outeurnaam</string>
-  <string name="preference_author_name_summary">Die pasgemaakte outeur se naam om te gebruik in plaas van u gebruikersnaam in oplaaie</string>
   <string name="contributions_fragment">bydraes</string>
   <string name="nearby_fragment">Naby</string>
   <string name="notifications">Kennisgewings</string>
-  <string name="archived_notifications">Kennisgewings (geargiveer)</string>
+  <string name="read_notifications" fuzzy="true">Kennisgewings (geargiveer)</string>
   <string name="display_nearby_notification">Vertoon kennisgewing in die buurt</string>
   <string name="display_nearby_notification_summary">Tik hier om die naaste plek te sien waar u foto\'s benodig</string>
   <string name="no_close_nearby">Geen nabygeleë plekke gevind nie</string>

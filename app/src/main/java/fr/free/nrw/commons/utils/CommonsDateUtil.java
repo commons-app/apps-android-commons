@@ -13,11 +13,22 @@ public class CommonsDateUtil {
 
     /**
      * Gets SimpleDateFormat for short date pattern
-     * @return
+     * @return simpledateformat
      */
     public static SimpleDateFormat getIso8601DateFormatShort() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ROOT);
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         return simpleDateFormat;
+    }
+
+    /**
+     * Gets the timestamp pattern for a date
+     * @return timestamp
+     */
+        public static SimpleDateFormat getIso8601DateFormatTimestamp() {
+            final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX",
+                Locale.ROOT);
+            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            return simpleDateFormat;
     }
 }

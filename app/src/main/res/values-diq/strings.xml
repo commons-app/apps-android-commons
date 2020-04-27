@@ -111,7 +111,7 @@
   <string name="menu_cancel_upload">Bıtexelne</string>
   <string name="menu_download">Biya war</string>
   <string name="preference_license">Lisanso hesebiyaye</string>
-  <string name="preference_theme" fuzzy="true">Modo tarı</string>
+  <string name="preference_theme">Thema</string>
   <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -134,8 +134,11 @@
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_3_text">Bar mekeri:</string>
   <string name="tutorial_4_text">Misal bar kerden:</string>
+  <string name="tutorial_4_subtext_1">Serek:Keyey Operay Sidney</string>
+  <string name="tutorial_4_subtext_2">Şınastiye: Keyey Operay Sidneyi be overê golfezi ra asayışê cı</string>
   <string name="welcome_final_text">Şıma fam kerdê?</string>
   <string name="welcome_final_button_text">Eya!</string>
+  <string name="welcome_help_button_text">Tayêna melumat</string>
   <string name="detail_panel_cats_label">Kategoriyi</string>
   <string name="detail_panel_cats_loading">Bar beno…</string>
   <string name="detail_panel_cats_none">Theba nêweçineya</string>
@@ -143,6 +146,7 @@
   <string name="detail_discussion_empty">Mışewre çıniyo</string>
   <string name="detail_license_empty">Lisans nizaneyeno</string>
   <string name="menu_refresh">Newe ke</string>
+  <string name="storage_permission_title">Mısadey waştışê Depoy</string>
   <string name="ok">TEMAM</string>
   <string name="title_activity_nearby">Cayê Nezdiy</string>
   <string name="warning">Tembe kem</string>
@@ -155,12 +159,24 @@
   <string name="media_detail_uploaded_date">Tarixê barkerdışi</string>
   <string name="media_detail_license">Lisans</string>
   <string name="media_detail_coordinates">Koordinati</string>
+  <string name="media_detail_coordinates_empty">Tedarik nêbiyo</string>
+  <string name="become_a_tester_title">Bıbe karberê Beta Testi</string>
   <string name="_2fa_code">2FA-Code (Dı faktorın raşt kerdış)</string>
   <string name="number_of_uploads">Peyên limitê barkerdışê mı</string>
   <string name="maximum_limit">Maksimum Limit</string>
   <string name="invalid_zero">Sıfır vêrde niyo</string>
   <string name="invalid_input">Cıkerdışo nêvêrde</string>
+  <string name="maximum_limit_alert">500 ra zêde nêmocneyêno</string>
   <string name="enter_valid">Yew amaro vêrde cı ke</string>
+  <string name="cannot_be_zero">Sinorê barkerdışi 0 nêbeno</string>
+  <string name="set_limit">Barkerdışê sinorê peyêni</string>
+  <string name="login_failed_2fa_not_supported">Be dı faktorın kamiye araşt kerdış enewke pheşti nêgêno</string>
+  <string name="logout_verification">Şıma qayılê cı ra bıvıciyê?</string>
+  <string name="commons_logo">Logoy Commonsi</string>
+  <string name="commons_website">Websitey Commonsi</string>
+  <string name="commons_facebook">Pela Facebookiya Commonsi</string>
+  <string name="commons_github">Kodê Çımeyê GitHubê Commonsi</string>
+  <string name="background_image">Resimê peyeniye</string>
   <string name="upload_image">Resım bar ke</string>
   <string name="welcome_image_mount_zao">Koyê Zao</string>
   <string name="welcome_image_llamas">Lamay</string>
@@ -193,9 +209,13 @@
   <string name="upload_problem_image_dark">Resım zehf tariyo.</string>
   <string name="upload_problem_image_blurry">Resım areste niyo.</string>
   <string name="give_permission">Destur bıde</string>
+  <string name="login_to_your_account">Hesabê ho kewê</string>
+  <string name="send_log_file">Pela qeydi bırışê</string>
   <string name="view_browser">Browser de bıvinê</string>
   <string name="skip_login">Ser çek</string>
   <string name="navigation_item_login">Cı kewe</string>
+  <string name="read_article">Meqaley bıwanê</string>
+  <string name="toggle_view_button">Asayışi bıvurnê</string>
   <string name="nearby_directions">Telimati</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -211,10 +231,13 @@
   <string name="about_translate_cancel">Bıtexelne</string>
   <string name="retry">Anciya bıcerrebne</string>
   <string name="showcase_view_got_it_button">Mı fehm kerd!</string>
+  <string name="block_notification_title">Biyo bloqe</string>
   <string name="appwidget_img">Fotrafê roci</string>
   <string name="app_widget_heading">Fotrafê roci</string>
   <string name="menu_search_button">Cıgeyrayış</string>
+  <string name="search_commons">Commonsi sero cıgeyrayış</string>
   <string name="title_activity_search">Cıgeyrayış</string>
+  <string name="search_recent_header">Cıgeyrayışê peyêni:</string>
   <string name="search_tab_title_media">Medya</string>
   <string name="search_tab_title_categories">Kategoriyi</string>
   <string name="explore_tab_title_featured">Weçinaye</string>
@@ -225,14 +248,14 @@
   <string name="continue_message">Dewam kerê</string>
   <string name="correct">Cewabo raşt</string>
   <string name="wrong">Cewabo ğelet</string>
-  <string name="delete" fuzzy="true">BESTERE</string>
-  <string name="statistics" fuzzy="true">İSTATİSTİKİ</string>
+  <string name="delete">Bestere</string>
+  <string name="statistics">İstatistiki</string>
   <string name="statistics_thanks">Teşekurê gêriyayi</string>
-  <string name="level" fuzzy="true">SEWİYA</string>
+  <string name="level">Sewiya</string>
   <string name="preference_author_name_toggle">Nameyê nuştekariyo xısusiyi bıgurene</string>
   <string name="preference_author_name">Nameyê nuştekariyo xısusi</string>
   <string name="contributions_fragment">İştıraki</string>
-  <string name="archived_notifications">Xeberi (arşifkerdeyi)</string>
+  <string name="read_notifications">Pêhesnayışi (waniyayê)</string>
   <string name="list_sheet">Liste</string>
   <string name="next">Bahdoyên</string>
   <string name="previous">Verên</string>
@@ -256,15 +279,27 @@
   <string name="nominate_for_deletion_done">Temam</string>
   <string name="review_thanks_yes_button_text">Eya, çıra mebo</string>
   <string name="no_notification">Beyanatên şımayê nêwendeyi çıniyê</string>
-  <string name="no_archived_notification">Beyanatên şımayê arçivkerdeyi çıniyê</string>
-  <string name="menu_option_archived">Arşivkerdeyan bıvêne</string>
+  <string name="no_read_notification">Pêhesnayışê toyê wendışi çıniyê</string>
+  <string name="menu_option_read">Wendışi bıvêne</string>
   <string name="menu_option_unread">Nêwendeyan bıvêne</string>
   <string name="please_wait">Kerem kerên, bıpawên...</string>
-  <string name="skip_image" fuzzy="true">NÊ RESIMİ RAVİYARNE</string>
+  <string name="skip_image">Nê resımi raviyarnê</string>
   <string name="image_info">Melumatê resımi</string>
+  <string name="delete_helper_ask_spam_blurry">Xesratın</string>
+  <string name="delete_helper_ask_spam_other">Zewbi</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Fotrafi çap kerê</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">İnternet ra resimo raştameye</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_other">Zewbi</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">Çıkı wıniyo</string>
+  <string name="share_image_via">Resımi vıla kerê pê</string>
+  <string name="no_achievements_yet">Hewna to iştirak nêkerdo</string>
   <string name="account_created">Hesab vıraziya!</string>
   <string name="text_copy">Metın kopyayê panoyi biyo</string>
+  <string name="notification_mark_read">Pêhesnayışi wanaye nışan bıkerê</string>
   <string name="some_error">Yew xeta biye!</string>
+  <string name="place_state">Weziyetê cayi:</string>
+  <string name="place_state_exists">Esto</string>
+  <string name="place_state_needs_photo">Fotraf gani</string>
   <string name="theme_light_name">Akerde</string>
 </resources>

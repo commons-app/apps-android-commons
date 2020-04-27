@@ -52,7 +52,7 @@
   <string name="upload_progress_notification_title_finishing">Dokončení nahrávání souboru %1$s</string>
   <string name="upload_failed_notification_title">Načítání souboru %1$s se nezdařilo</string>
   <string name="upload_failed_notification_subtitle">Klepnutím zobrazíte</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">%1$d soubor se nahrává</item>
     <item quantity="other">%1$d souborů se nahrává</item>
   </plurals>
@@ -88,16 +88,16 @@
   <string name="gps_disabled">GPS ve vašem zařízení není povoleno. Chtěli byste ho spustit?</string>
   <string name="enable_gps">Spustit GPS</string>
   <string name="contributions_subtitle_zero">Žádné nahrané soubory</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Spouští se nahrávání %1$d souboru</item>
     <item quantity="other">Spouští se nahrávání %1$d souborů</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d nahrávání</item>
     <item quantity="other">%1$d nahrávání</item>
   </plurals>
@@ -122,7 +122,7 @@
   <string name="no_uploads_yet">Zatím jste nenahrál žádné fotky.</string>
   <string name="menu_retry_upload">Opakovat</string>
   <string name="menu_cancel_upload">Zrušit</string>
-  <plurals name="share_license_summary">
+  <plurals name="share_license_summary" fuzzy="true">
     <item quantity="one">Tento obrázek bude zveřejněn pod licencí %1$s</item>
     <item quantity="other">Tyto obrázky budou zveřejněny pod licencí %1$s</item>
   </plurals>
@@ -132,7 +132,7 @@
   <string name="use_previous">Použít předchozí název a popis</string>
   <string name="allow_gps">Automaticky získat aktuální polohu</string>
   <string name="allow_gps_summary">Nabídnout kategorie na základě aktuální polohy (pokud není obrázek opatřen souřadnicemi). Varování: Tímto krokem poskytujete svou současnou polohu.</string>
-  <string name="preference_theme" fuzzy="true">Noční režim</string>
+  <string name="preference_theme">Vzhled</string>
   <string name="license_name_cc_by_sa_four">Uveďte autora-Zachovejte licenci 4.0</string>
   <string name="license_name_cc_by_four">Uveďte autora 4.0</string>
   <string name="license_name_cc_by_sa"> Uveďte autora-Zachovejte licenci 3.0</string>
@@ -392,11 +392,10 @@
   <string name="preference_author_name_toggle">Použít vlastní název autora</string>
   <string name="preference_author_name_toggle_summary">Při nahrávání fotografií používejte vlastní jméno autora namísto uživatelského jména</string>
   <string name="preference_author_name">Vlastní název autora</string>
-  <string name="preference_author_name_summary">Vlastní název autora, který chcete používat místo uživatelského jména v nahrávání</string>
   <string name="contributions_fragment">Příspěvky</string>
   <string name="nearby_fragment">Poblíž</string>
   <string name="notifications">Upozornění</string>
-  <string name="archived_notifications">Upozornění (přečtená)</string>
+  <string name="read_notifications">Upozornění (přečtená)</string>
   <string name="display_nearby_notification">Zobrazit upozornění v okolí</string>
   <string name="display_nearby_notification_summary">Klepnutím sem zobrazíte nejbližší místo, které potřebuje obrázky</string>
   <string name="no_close_nearby">Nebyla nalezena žádná místa v okolí</string>
@@ -411,7 +410,7 @@
   <string name="submit">Odeslat</string>
   <string name="upload_title_duplicate">Soubor s názvem %1$s již existuje. Opravdu chcete pokračovat?</string>
   <string name="map_application_missing">Na vašem zařízení nebyla nalezena žádná kompatibilní aplikace poskytující mapy. Pro použití této funkce nainstalujte aplikaci poskytující mapy.</string>
-  <plurals name="upload_count_title">
+  <plurals name="upload_count_title" fuzzy="true">
     <item quantity="one">%1$d nahrání</item>
     <item quantity="other">%1$d nahrání</item>
   </plurals>
@@ -501,7 +500,7 @@
   <string name="review_thanks_no_button_text">Další soubor</string>
   <string name="skip_image_explanation">Kliknutím na toto tlačítko se zobrazí další nedávno nahraný obrázek z Wikimedia Commons</string>
   <string name="review_image_explanation">Můžete kontrolovat obrázky a zlepšit kvalitu Wikimedia Commons.\n\nTři aspekty, které se posuzují:\n  - Je tento obrázek v pořádku?\n  - Dodržuje tento obrázok pravidla autorských práv?\n  - Je tento obrázek správně kategorizován?\n\nPokud je vše v pořádku, autorovi můžete poděkovat.</string>
-  <plurals name="receiving_shared_content">
+  <plurals name="receiving_shared_content" fuzzy="true">
     <item quantity="one">Probíhá příjem sdíleného obsahu. Zpracování obrázku může chvíli trvat v závislosti na velikosti obrázku a vašem zařízení</item>
     <item quantity="other">Probíhá příjem sdíleného obsahu. Zpracování obrázků může chvíli trvat v závislosti na velikosti obrázků a vašem zařízení</item>
   </plurals>
@@ -509,9 +508,9 @@
   <string name="no_image_reverted">Žádné revertované obrázky</string>
   <string name="no_image_uploaded">Žádné nahrané obrázky</string>
   <string name="no_notification">Nemáte žádná nepřečtená upozornění</string>
-  <string name="no_archived_notification">Nemáte nepřečtená upozornění</string>
+  <string name="no_read_notification">Nemáte žádná přečtená upozornění</string>
   <string name="share_logs_using">Sdílet logy pomocí</string>
-  <string name="menu_option_archived">Zobrazit přečtené</string>
+  <string name="menu_option_read">Zobrazit přečtené</string>
   <string name="menu_option_unread">Zobrazit nepřečtené</string>
   <string name="error_occurred_in_picking_images">Nastala chyba při vybírání obrázků</string>
   <string name="image_chooser_title">Vyberte obrázky, které chcete nahrát</string>

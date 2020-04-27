@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.repository;
 
+import fr.free.nrw.commons.upload.ImageCoordinates;
+import io.reactivex.Flowable;
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 
@@ -12,6 +15,8 @@ import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
+
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
@@ -70,7 +75,7 @@ public class UploadRepository {
      */
     public void cleanup() {
         localDataSource.cleanUp();
-        remoteDataSource.clearSelectedCategories();
+        remoteDataSource.cleanUp();
     }
 
     /**
@@ -173,14 +178,12 @@ public class UploadRepository {
      *
      * @param uploadableFile
      * @param place
-     * @param source
      * @param similarImageInterface
      * @return
      */
     public Observable<UploadItem> preProcessImage(UploadableFile uploadableFile, Place place,
-                                                  String source, SimilarImageInterface similarImageInterface) {
-        return remoteDataSource
-                .preProcessImage(uploadableFile, place, source, similarImageInterface);
+        SimilarImageInterface similarImageInterface) {
+        return remoteDataSource.preProcessImage(uploadableFile, place, similarImageInterface);
     }
 
     /**
@@ -262,13 +265,42 @@ public class UploadRepository {
         localDataSource.setSelectedLicense(licenseName);
     }
 
+    public void onDepictItemClicked(DepictedItem depictedItem) {
+        remoteDataSource.onDepictedItemClicked(depictedItem);
+    }
+
+    /**
+     * Fetches and returns the selected depictions for the current upload
+     *
+     * @return
+     */
+
+    public List<DepictedItem> getSelectedDepictions() {
+        return remoteDataSource.getSelectedDepictions();
+    }
+
+    /**
+     * Search all depictions from
+     *
+     * @param query
+     * @return
+     */
+
+    public Flowable<List<DepictedItem>> searchAllEntities(String query) {
+        return remoteDataSource.searchAllEntities(query);
+    }
+
     /**
      * Returns nearest place matching the passed latitude and longitude
      * @param decLatitude
      * @param decLongitude
      * @return
      */
-    public Place checkNearbyPlaces(double decLatitude, double decLongitude) {
+    public Place checkNearbyPlaces(double decLatitude, double decLongitude) throws IOException {
         return remoteDataSource.getNearbyPlaces(decLatitude, decLongitude);
+    }
+
+    public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
+        remoteDataSource.useSimilarPictureCoordinates(imageCoordinates, uploadItemIndex);
     }
 }

@@ -12,6 +12,7 @@
 * Sujan
 * Sushi
 * Tobi 406
+* Ubahnverleih
 * WikiBayer
 -->
 <resources>
@@ -82,7 +83,7 @@
   <string name="gps_disabled">GPS ist auf deinem Gerät deaktiviert. Möchtest du es aktivieren?</string>
   <string name="enable_gps">GPS aktivieren</string>
   <string name="contributions_subtitle_zero">Noch keine hochgeladenen Dateien</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">Eine hochgeladene Datei</item>
     <item quantity="other">%1$d hochgeladene Dateien</item>
@@ -385,11 +386,10 @@
   <string name="preference_author_name_toggle">Benutzerdefinierten Namen des Autors verwenden</string>
   <string name="preference_author_name_toggle_summary">Einen benutzerdefinierten Namen des Autors anstelle deines Benutzernamens beim Hochladen von Fotos verwenden</string>
   <string name="preference_author_name">Benutzerdefinierter Name des Autors</string>
-  <string name="preference_author_name_summary">Der benutzerdefinierte Name des Autors, der anstelle deines Benutzernamens in den hochgeladenen Dateien erscheinen soll.</string>
   <string name="contributions_fragment">Beiträge</string>
   <string name="nearby_fragment">In der Nähe</string>
   <string name="notifications">Benachrichtigungen</string>
-  <string name="archived_notifications">Benachrichtigungen (archiviert)</string>
+  <string name="read_notifications" fuzzy="true">Benachrichtigungen (archiviert)</string>
   <string name="display_nearby_notification">Benachrichtigungen in der Nähe anzeigen</string>
   <string name="display_nearby_notification_summary">Hier tippen, um Orte in der Nähe anzusehen, die Bilder benötigen.</string>
   <string name="no_close_nearby">Keine Orte in deiner Umgebung gefunden.</string>
@@ -502,9 +502,9 @@
   <string name="no_image_reverted">Keine Bilder zurückgesetzt</string>
   <string name="no_image_uploaded">Keine Bilder hochgeladen</string>
   <string name="no_notification">Du hast keine ungelesenen Benachrichtigungen</string>
-  <string name="no_archived_notification">Du hast keine archivierten Benachrichtigungen</string>
+  <string name="no_read_notification" fuzzy="true">Du hast keine archivierten Benachrichtigungen</string>
   <string name="share_logs_using">Lognutzung teilen</string>
-  <string name="menu_option_archived">Archivierte ansehen</string>
+  <string name="menu_option_read" fuzzy="true">Archivierte ansehen</string>
   <string name="menu_option_unread">Ungelesene ansehen</string>
   <string name="error_occurred_in_picking_images">Beim Auswählen der Bilder ist ein Fehler aufgetreten</string>
   <string name="image_chooser_title">Hochzuladende Bilder auswählen</string>
@@ -512,15 +512,19 @@
   <string name="images_featured_explanation">Vorgestellte Bilder sind Bilder von professionellen Fotografen und Zeichnern, die die Gemeinschaft von Wikimedia Commons als diejenigen mit der höchsten Qualität auf der Website ausgewählt hat.</string>
   <string name="images_via_nearby_explanation">Über Orte in der Nähe hochgeladene Bilder sind die Bilder, die von entdeckten Orten auf der Karte hochgeladen wurden.</string>
   <string name="thanks_received_explanation">Diese Funktion erlaubt es Autoren, eine Dankeschön-Benachrichtigung an Benutzer zu senden, die nützliche Bearbeitungen durchgeführt haben – durch die Benutzung eines kleinen Dankeschön-Links in der Versionsgeschichte oder Unterschiedsseite.</string>
-  <string name="previous_image_title_description">Vorherigen Titel und vorherige Beschreibung kopieren</string>
+  <string name="previous_image_caption_description">Vorherigen Titel und vorherige Beschreibung kopieren</string>
   <string name="previous_button_tooltip_message">Klicke, um den Titel und die Beschreibung des vorherigen Bildes wieder zu verwenden und verändere sie, damit dein aktuelles Bild passt.</string>
   <string name="welcome_do_upload_content_description">Beispiele guter Bilder zum Hochladen auf Commons</string>
   <string name="welcome_dont_upload_content_description">Beispiele von Bildern, die nicht hochgeladen werden sollen.</string>
   <string name="skip_image">Dieses bild überspringen</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download fehlgeschlagen! Wir konnten die Datei nicht ohne externe Speicherberechtigung herunterladen!</string>
+  <string name="manage_exif_tags">EXIF-Tags verwalten</string>
+  <string name="manage_exif_tags_summary">Auswahl, welche EXIF-Tags beim Upload behalten werden sollen</string>
   <string name="exif_tag_name_author">Autor</string>
   <string name="exif_tag_name_copyright">Urheberrecht</string>
   <string name="exif_tag_name_location">Standort</string>
+  <string name="exif_tag_name_cameraModel">Kamera-Modell</string>
+  <string name="exif_tag_name_lensModel">Kameralinse</string>
   <string name="exif_tag_name_serialNumbers">Seriennummer</string>
   <string name="share_text">Lade Fotos direkt von deinem Telefon auf Wikimedia Commons hoch. Lade die Commons-App jetzt herunter: %1$s</string>
   <string name="share_via">App teilen über …</string>
@@ -529,8 +533,14 @@
   <string name="upload_cancelled">Hochladen abbrechen</string>
   <string name="delete_helper_show_deletion_title_success">Erfolgreich</string>
   <string name="delete_helper_show_deletion_title_failed">Fehlgeschlagen</string>
+  <string name="delete_helper_ask_spam_selfie">Ein Selfie</string>
+  <string name="delete_helper_ask_spam_blurry">Unscharf</string>
+  <string name="delete_helper_ask_spam_nonsense">Unsinn</string>
   <string name="delete_helper_ask_spam_other">Andere</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Pressefoto</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Bild aus dem Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Andere</string>
   <string name="account_created">Benutzerkonto erstellt!</string>
+  <string name="title_app_shortcut_setting">Einstellungen</string>
 </resources>

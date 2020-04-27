@@ -28,6 +28,8 @@ public interface NearbyParentFragmentContract {
         void setFABRecenterAction(android.view.View.OnClickListener onClickListener);
         void animateFABs();
         void recenterMap(LatLng curLatLng);
+        void showLocationOffDialog();
+        void openLocationSettings();
         void hideBottomSheet();
         void hideBottomDetailsSheet();
         void displayBottomSheetWithInfo(Marker marker);
@@ -69,6 +71,9 @@ public interface NearbyParentFragmentContract {
         LatLng getLastLocation();
 
         com.mapbox.mapboxsdk.geometry.LatLng getLastFocusLocation();
+
+        boolean isCurrentLocationMarkerVisible();
+        void setProjectorLatLngBounds();
     }
 
     interface NearbyListView {

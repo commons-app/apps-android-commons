@@ -1,6 +1,6 @@
 **Description (required)**
 
-Fixes #{GitHub issue number} {Github issue title}
+Fixes #INSERT_ISSUE_NUMBER_HERE
 
 What changes did you make and why?
 
@@ -8,7 +8,7 @@ What changes did you make and why?
 
 Tested {build variant, e.g. ProdDebug} on {name of device or emulator} with API level {API level}.
 
-**Screenshots showing what changed (optional - for UI changes)**
+**Screenshots (for UI changes only)**
 
 Need help? See https://support.google.com/android/answer/9075928
 

@@ -1,37 +1,34 @@
 package fr.free.nrw.commons.contributions;
 
+import static fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_ID_PREFIX;
+
+import android.net.Uri;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import androidx.collection.LruCache;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.facebook.drawee.view.SimpleDraweeView;
-
-import org.apache.commons.lang3.StringUtils;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import fr.free.nrw.commons.MediaDataExtractor;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
-import fr.free.nrw.commons.contributions.model.DisplayableContribution;
-import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.upload.FileUtils;
+import fr.free.nrw.commons.media.MediaClient;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 import timber.log.Timber;
 
 public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
+    private static final long TIMEOUT_SECONDS = 15;
     private final Callback callback;
     @BindView(R.id.contributionImage)
     SimpleDraweeView imageView;
@@ -41,32 +38,35 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.contributionProgress) ProgressBar progressView;
     @BindView(R.id.failed_image_options) LinearLayout failedImageOptions;
 
-    @Inject
-    MediaDataExtractor mediaDataExtractor;
 
-    @Inject
-    @Named("thumbnail-cache")
-    LruCache<String, String> thumbnailCache;
-
-    private DisplayableContribution contribution;
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private int position;
+    private Contribution contribution;
+    private Random random = new Random();
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final MediaClient mediaClient;
 
-    ContributionViewHolder(View parent, Callback callback) {
+    ContributionViewHolder(View parent, Callback callback,
+        MediaClient mediaClient) {
         super(parent);
+        this.mediaClient = mediaClient;
         ButterKnife.bind(this, parent);
         this.callback=callback;
     }
 
-    public void init(int position, DisplayableContribution contribution) {
-        ApplicationlessInjection.getInstance(itemView.getContext())
-                .getCommonsApplicationComponent().inject(this);
-        this.position=position;
+    public void init(int position, Contribution contribution) {
         this.contribution = contribution;
-        fetchAndDisplayThumbnail(contribution);
-        titleView.setText(contribution.getDisplayTitle());
+        fetchAndDisplayCaption(contribution);
+        this.position = position;
+        String imageSource = chooseImageSource(contribution.getThumbUrl(), contribution.getLocalUri());
+        if (!TextUtils.isEmpty(imageSource)) {
+            final ImageRequest imageRequest =
+                ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageSource))
+                    .setProgressiveRenderingEnabled(true)
+                    .build();
+            imageView.setImageRequest(imageRequest);
+        }
 
-        seqNumView.setText(String.valueOf(contribution.getPosition() + 1));
+        seqNumView.setText(String.valueOf(position + 1));
         seqNumView.setVisibility(View.VISIBLE);
 
         switch (contribution.getState()) {
@@ -104,40 +104,50 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     }
 
     /**
-     * This method fetches the thumbnail url from file name
-     * If the thumbnail url is present in cache, then it is used otherwise API call is made to fetch the thumbnail
-     * This can be removed once #2904 is in place and contribution contains all metadata beforehand
+     * In contributions first we show the title for the image stored in cache,
+     * then we fetch captions associated with the image and replace title on the thumbnail with caption
+     *
      * @param contribution
      */
-    private void fetchAndDisplayThumbnail(DisplayableContribution contribution) {
-        String keyForLRUCache = contribution.getFilename();
-        String cacheUrl = thumbnailCache.get(keyForLRUCache);
-        if (!StringUtils.isBlank(cacheUrl)) {
-            imageView.setImageURI(cacheUrl);
-            return;
-        }
-
-        imageView.setBackground(null);
-        if ((contribution.getState() != Contribution.STATE_COMPLETED) && FileUtils.fileExists(
-                contribution.getLocalUri())) {
-            imageView.setImageURI(contribution.getLocalUri());
+    private void fetchAndDisplayCaption(Contribution contribution) {
+        if ((contribution.getState() != Contribution.STATE_COMPLETED)) {
+            titleView.setText(contribution.getDisplayTitle());
         } else {
-            Timber.d("Fetching thumbnail for %s", contribution.getFilename());
-            Disposable disposable = mediaDataExtractor
-                    .getMediaFromFileName(contribution.getFilename())
+            final String pageId = contribution.getPageId();
+            if (pageId != null) {
+                Timber.d("Fetching caption for %s", contribution.getFilename());
+                String wikibaseMediaId = PAGE_ID_PREFIX
+                    + pageId; // Create Wikibase media id from the page id. Example media id: M80618155 for https://commons.wikimedia.org/wiki/File:Tantanmen.jpeg with has the pageid 80618155
+                compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseMediaId)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(media -> {
-                        thumbnailCache.put(keyForLRUCache, media.getThumbUrl());
-                        imageView.setImageURI(media.getThumbUrl());
-                    });
-            compositeDisposable.add(disposable);
+                    .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                    .subscribe(subscriber -> {
+                        if (!subscriber.trim().equals(MediaClient.NO_CAPTION)) {
+                            titleView.setText(subscriber);
+                        } else {
+                            titleView.setText(contribution.getDisplayTitle());
+                        }
+                    }));
+            } else {
+                titleView.setText(contribution.getDisplayTitle());
+            }
         }
-
     }
 
-    public void clear() {
-        compositeDisposable.clear();
+    /**
+     * Returns the image source for the image view, first preference is given to thumbUrl if that is
+     * null, moves to local uri and if both are null return null
+     *
+     * @param thumbUrl
+     * @param localUri
+     * @return
+     */
+    @Nullable
+    private String chooseImageSource(String thumbUrl, Uri localUri) {
+        return !TextUtils.isEmpty(thumbUrl) ? thumbUrl :
+            localUri != null ? localUri.toString() :
+                null;
     }
 
     /**

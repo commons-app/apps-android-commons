@@ -71,7 +71,7 @@
   <string name="gps_disabled">GPS er óvirkt í tækinu þínu. Viltu virkja það?</string>
   <string name="enable_gps">Virkja GPS</string>
   <string name="contributions_subtitle_zero">Engar innsendingar ennþá</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -95,8 +95,8 @@
   <string name="menu_about">Um</string>
   <string name="about_license">Wikimedia Commons forritið er opinn og frjáls hugbúnaður sem gerður er og viðhaldið af stuðningsaðilum og sjálfboðaliðum Wikimedia samfélagsins. Wikimedia Foundation sjálfseignarstofnunin kemur ekki að gerð, forritun eða viðhaldi forritsins. \</string>
   <string name="about_improve">Útbúðu nýjar &lt;a href=\"%1$s\"&gt;GitHub tilkynningar (issue)&lt;/a&gt; til að koma villum og uppástungum á framfæri.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Meðferð persónuupplýsinga&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;Framlög&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Meðferð persónuupplýsinga</string>
+  <string name="about_credits">Framlög</string>
   <string name="title_activity_about">Um</string>
   <string name="menu_feedback">Senda umsögn (með tölvupósti)</string>
   <string name="no_email_client">Ekkert tölvupóstforrit er uppsett</string>
@@ -112,10 +112,10 @@
   <string name="media_upload_policy">Með því að senda inn þessa mynd, lýsi ég því hér með yfir að þetta er mitt eigið verk, það inniheldur ekkert höfundarréttarvarið efni eða sjálfsmyndir, og að það samræmist á allan hátt við &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;stefnu Wikimedia Commons varðandi notkun efnis&lt;/a&gt;.</string>
   <string name="menu_download">Sækja</string>
   <string name="preference_license">Sjálfgefið notkunarleyfi</string>
-  <string name="use_previous" fuzzy="true">Nota fyrri titil/lýsingu</string>
+  <string name="use_previous">Nota fyrri titil og lýsingu</string>
   <string name="allow_gps">Ná sjálfvirkt í núverandi staðsetningu</string>
   <string name="allow_gps_summary">Les núverandi staðsetningu til að geta stungið upp á flokkum ef myndin er ekki með hnattstaðsetningarhnitum. Aðvörun: þetta mun koma upp um staðsetninguna þína.</string>
-  <string name="preference_theme" fuzzy="true">Næturhamur</string>
+  <string name="preference_theme">Þema</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -156,7 +156,7 @@
   <string name="welcome_copyright_subtext">Forðastu höfundaréttarvarið efni sem finnst á netinu eins og myndir af veggspjöldum, bókarkápum, o.s.frv.</string>
   <string name="welcome_final_text">Heldurðu að þú hafir náð þessu?</string>
   <string name="welcome_final_button_text">Já!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Frekari upplýsingar&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Nánari upplýsingar</string>
   <string name="detail_panel_cats_label">Flokkar</string>
   <string name="detail_panel_cats_loading">Hleð…</string>
   <string name="detail_panel_cats_none">Ekkert valið</string>
@@ -174,6 +174,7 @@
   <string name="no_nearby">Engir staðir fundust í nágrenninu</string>
   <string name="warning">Aðvörun</string>
   <string name="upload_image_duplicate">Þessi skrá er þegar fyrirliggjandi á Commons. Ertu viss um að þú viljir halda áfram?</string>
+  <string name="upload">Senda inn</string>
   <string name="yes">Já</string>
   <string name="no">Nei</string>
   <string name="media_detail_title">Titill</string>
@@ -246,6 +247,7 @@
   <string name="upload_problem_image_duplicate">Myndin er þegar í Commons-almenningi.</string>
   <string name="upload_problem_different_geolocation">Myndin var tekin á öðrum stað.</string>
   <string name="upload_problem_do_you_continue">Viltu samt senda inn þessa mynd?</string>
+  <string name="upload_problem_image">Vandamál fannst í myndinni</string>
   <string name="give_permission">Gefa heimild</string>
   <string name="use_external_storage">Nota ytri gagnageymslu</string>
   <string name="use_external_storage_summary">Vistaðu myndir sem teknar hafa verið með innbyggðu myndavélinni í tækinu þínu</string>
@@ -256,7 +258,7 @@
   <string name="null_url">Villa: Slóð fannst ekki</string>
   <string name="nominate_deletion">Tilnefna til eyðingar</string>
   <string name="nominated_for_deletion">Þessi mynd hefur verið valin til eyðingar.</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Sjá nánar á vefsíðunni&lt;/u&gt;</string>
+  <string name="nominated_see_more">Sjá nánar á vefsíðunni</string>
   <string name="view_browser">Skoða í vafra</string>
   <string name="skip_login">Sleppa</string>
   <string name="navigation_item_login">Skrá inn</string>
@@ -279,14 +281,14 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Gefðu okkur einkunn&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;Algengar spurningar&lt;/u&gt;</string>
+  <string name="about_rate_us">Gefðu okkur einkunn</string>
+  <string name="about_faq">Algengar spurningar</string>
   <string name="welcome_skip_button">Sleppa kennslu</string>
   <string name="no_internet">Nettenging ekki tiltæk</string>
   <string name="internet_established">Nettenging í boði</string>
   <string name="error_notifications">Villa við að sækja tilkynningar</string>
   <string name="no_notifications">Engar tilkynningar fundust</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;Þýða&lt;/u&gt;</string>
+  <string name="about_translate">Þýða</string>
   <string name="about_translate_title">Tungumál</string>
   <string name="about_translate_message">Veldu tungumálið sem þú vill senda inn þýðingar fyrir</string>
   <string name="about_translate_proceed">Halda áfram</string>
@@ -313,7 +315,7 @@
   <string name="error_loading_subcategories">Villa kom upp við að hlaða inn undirflokkum.</string>
   <string name="search_tab_title_media">Margmiðlun</string>
   <string name="search_tab_title_categories">Flokkar</string>
-  <string name="explore_tab_title_featured" fuzzy="true">ÚRVAL</string>
+  <string name="explore_tab_title_featured">Efst á baugi</string>
   <string name="explore_tab_title_mobile">Sent inn úr snjalltæki</string>
   <string name="successful_wikidata_edit">Mynd bætt inn í %1$s á Wikidata!</string>
   <string name="wikidata_edit_failure">Mistókst að uppfæra samsvarandi Wikidata-einindi!</string>
@@ -369,11 +371,10 @@
   <string name="preference_author_name_toggle">Nota sérsniðið nafn höfundar</string>
   <string name="preference_author_name_toggle_summary">Nota sérsniðið nafn höfundar í stað notandanafnsins þíns þegar ljósmyndir eru sendar inn</string>
   <string name="preference_author_name">Sérsniðið nafn höfundar</string>
-  <string name="preference_author_name_summary">Sérsniðið nafn höfundar sem nota á í stað notandanafnsins þíns þegar myndir eru sendar inn</string>
   <string name="contributions_fragment">Framlög</string>
   <string name="nearby_fragment">Nálægt</string>
   <string name="notifications">Tilkynningar</string>
-  <string name="archived_notifications">Tilkynningar (í geymslu)</string>
+  <string name="read_notifications">Tilkynningar (lesnar)</string>
   <string name="display_nearby_notification">Birta tilkynningu um nágrenni</string>
   <string name="display_nearby_notification_summary">Ýttu hér til að sjá nálægasta staðinn sem þarfnast mynda</string>
   <string name="no_close_nearby">Engir staðir fundust í nágrenninu</string>
@@ -449,11 +450,13 @@
   <string name="no_image_reverted">Engar myndir endurstilltar</string>
   <string name="no_image_uploaded">Engar myndir sendar inn</string>
   <string name="no_notification">Þú ert ekki með neinar ólesnar tilkynningar</string>
-  <string name="menu_option_archived">Skoða í geymslu</string>
+  <string name="no_read_notification">Þú ert ekki með neinar lesnar tilkynningar</string>
+  <string name="menu_option_read">Skoða lesnar</string>
   <string name="menu_option_unread">Skoða ólesið</string>
   <string name="error_occurred_in_picking_images">Villa kom upp við að velja myndir</string>
   <string name="image_chooser_title">Veldu myndir til að senda inn</string>
   <string name="please_wait">Bíddu aðeins…</string>
+  <string name="previous_image_title_description">Afrita fyrri titil og lýsingu</string>
   <string name="skip_image">Sleppa þessari mynd</string>
   <string name="manage_exif_tags">Sýsla með EXIF-merki</string>
   <string name="exif_tag_name_author">Höfundur</string>
@@ -474,6 +477,10 @@
   <string name="delete_helper_ask_spam_nonsense">Vitleysa</string>
   <string name="delete_helper_ask_spam_other">Annað</string>
   <string name="delete_helper_ask_reason_copyright_logo">Táknmynd</string>
+  <string name="delete_helper_ask_reason_copyright_other">Annað</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Vegna þess að hún er</string>
   <string name="share_image_via">Deila mynd með</string>
+  <string name="account_created">Aðgangur búinn til!</string>
+  <string name="text_copy">Texti afritaður á klippispjaldið.</string>
+  <string name="some_error">Villa hefur komið upp!</string>
 </resources>

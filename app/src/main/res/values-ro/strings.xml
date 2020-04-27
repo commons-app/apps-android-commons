@@ -77,7 +77,7 @@
   <string name="gps_disabled">GPS-ul este dezactivat pe device-ul dumneavoastră. Doriți să-l activați?</string>
   <string name="enable_gps">Activează GPS</string>
   <string name="contributions_subtitle_zero">Niciun fișier încă!</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -112,7 +112,7 @@
   <string name="no_uploads_yet">Încă nu ați încărcat nicio fotografie.</string>
   <string name="menu_retry_upload">Reîncercare</string>
   <string name="menu_cancel_upload">Revocare</string>
-  <plurals name="share_license_summary">
+  <plurals name="share_license_summary" fuzzy="true">
     <item quantity="one">Această imagine va fi licențiată sub %1$s</item>
     <item quantity="other">Această imagine va fi licențiată sub %1$s</item>
   </plurals>
@@ -375,11 +375,10 @@
   <string name="preference_author_name_toggle">Utilizați numele de autor personalizat</string>
   <string name="preference_author_name_toggle_summary">Utilizați un nume de autor personalizat în locul numelui de utilizator în timp ce încărcați fotografii</string>
   <string name="preference_author_name">Numele autorului personalizat</string>
-  <string name="preference_author_name_summary">Numele autorului personalizat pe care doriți să îl utilizați în loc de numele dvs. de utilizator în încărcări</string>
   <string name="contributions_fragment">Contribuții</string>
   <string name="nearby_fragment">În apropiere</string>
   <string name="notifications">Notificări</string>
-  <string name="archived_notifications">Notificări (arhivate)</string>
+  <string name="read_notifications" fuzzy="true">Notificări (arhivate)</string>
   <string name="display_nearby_notification">Afișați notificarea din apropiere</string>
   <string name="display_nearby_notification_summary">Apăsați aici pentru a vedea cel mai apropiat loc care are nevoie de imagini</string>
   <string name="no_close_nearby">Nu există locuri apropiate găsite în apropierea dvs.</string>
@@ -394,7 +393,7 @@
   <string name="submit">Trimite</string>
   <string name="upload_title_duplicate">Există un fișier cu numele de fișier %1$s. Sunteți sigur că doriți să continuați?</string>
   <string name="map_application_missing">Nu s-a găsit nicio aplicație de hartă compatibilă pe dispozitiv. Instalați o aplicație de hartă pentru a utiliza această caracteristică.</string>
-  <plurals name="upload_count_title">
+  <plurals name="upload_count_title" fuzzy="true">
     <item quantity="one">%1$d Încărcați</item>
     <item quantity="other">%1$d Încărcări</item>
   </plurals>
@@ -447,7 +446,7 @@
   <string name="send_thank_notification_title">Trimitere mulțumiri</string>
   <string name="review_thanks_yes_button_text">Da, de ce nu</string>
   <string name="review_thanks_no_button_text">Următoarea imagine</string>
-  <plurals name="receiving_shared_content">
+  <plurals name="receiving_shared_content" fuzzy="true">
     <item quantity="one">Primirea conținutului partajat. Procesarea imaginii poate dura ceva timp, în funcție de dimensiunea imaginii și a dispozitivului dvs. </item>
     <item quantity="other"> Primirea conținutului partajat. Procesarea imaginilor poate dura ceva timp, în funcție de mărimea imaginilor și a dispozitivului</item>
   </plurals>

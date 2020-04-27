@@ -6,7 +6,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -212,6 +211,14 @@ public class LocationServiceManager implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
         Timber.d("Provider %s disabled", provider);
+    }
+
+    public boolean isNetworkProviderEnabled() {
+        return locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+    public boolean isGPSProviderEnabled() {
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
     public enum LocationChangeType{

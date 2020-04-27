@@ -187,7 +187,9 @@
   <string name="title_activity_nearby">Lugares próximos</string>
   <string name="no_nearby">Não fora encontrado locais próximos.</string>
   <string name="warning">Alerta</string>
+  <string name="duplicate_image_found">Imagem duplicada encontrada</string>
   <string name="upload_image_duplicate">Este arquivo já existe no Commons. Tem certeza de que deseja continuar?</string>
+  <string name="upload">Enviar</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
   <string name="media_detail_title">Título</string>
@@ -261,6 +263,7 @@
   <string name="upload_problem_different_geolocation">Esta foto foi tirada em um local diferente.</string>
   <string name="upload_problem_fbmd">Por favor, apenas envie fotos que você tirou sozinho. Não faça upload de fotos que você encontrou nas contas do Facebook de outras pessoas.</string>
   <string name="upload_problem_do_you_continue">Você ainda quer enviar esta foto?</string>
+  <string name="upload_problem_image">Problemas encontrados na imagem</string>
   <string name="internet_downloaded">Por favor, só envie fotos que você tirou. Não faça upload de fotos baixadas da Internet.</string>
   <string name="give_permission">Dar permissão</string>
   <string name="use_external_storage">Usar o armazenamento externo</string>
@@ -389,11 +392,10 @@
   <string name="preference_author_name_toggle">Usar o nome do autor personalizado</string>
   <string name="preference_author_name_toggle_summary">Usar um nome de autor personalizado em vez de seu nome de usuário ao carregar as fotos</string>
   <string name="preference_author_name">Nome do autor personalizado</string>
-  <string name="preference_author_name_summary">O nome do autor personalizado a usar em vez do seu nome de usuário nos carregamentos</string>
   <string name="contributions_fragment">Contribuições</string>
   <string name="nearby_fragment">Próximo</string>
   <string name="notifications">Notificações</string>
-  <string name="archived_notifications">Notificações (arquivadas)</string>
+  <string name="read_notifications">Notificações (lidas)</string>
   <string name="display_nearby_notification">Exibir notificação próxima</string>
   <string name="display_nearby_notification_summary">Toque aqui para ver o local mais próximo que precisa de fotos</string>
   <string name="no_close_nearby">Nenhum lugar próximo encontrado perto de você</string>
@@ -507,9 +509,9 @@
   <string name="no_image_reverted">Nenhuma imagem revertida</string>
   <string name="no_image_uploaded">Nenhuma imagem enviada</string>
   <string name="no_notification">Não tem nenhuma notificação por ler</string>
-  <string name="no_archived_notification">Não tem nenhuma notificação arquivada</string>
+  <string name="no_read_notification">Não tem nenhuma notificação lida</string>
   <string name="share_logs_using">Compartilhar registros usando</string>
-  <string name="menu_option_archived">Ver arquivadas</string>
+  <string name="menu_option_read">Ver leitura</string>
   <string name="menu_option_unread">Ver não lidas</string>
   <string name="error_occurred_in_picking_images">Ocorreu um erro ao escolher imagens</string>
   <string name="image_chooser_title">Escolha imagens para fazer o carregamento</string>
@@ -517,7 +519,7 @@
   <string name="images_featured_explanation">As fotografias destacadas são imagens de fotógrafos e ilustradores altamente qualificados, que a comunidade da wiki Wikimedia Commons escolheu como as de melhor qualidade do \'\'site\'\'.</string>
   <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo sítios do mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidade permite que os editores enviem uma notificação de agradecimento aos usuários que fizerem edições úteis - usando uma pequena hiperligação de agradecimento na página do historial ou na de diferenças.</string>
-  <string name="previous_image_title_description">Copiar título e descrição anterior</string>
+  <string name="previous_image_caption_description">Copiar título e descrição anterior</string>
   <string name="previous_button_tooltip_message">Clique para reutilizar o título e a descrição inseridos em sua foto anterior e modificá-lo para se adequar ao seu atual</string>
   <string name="welcome_do_upload_content_description">Exemplos de imagens que podem ser carregadas na wiki Commons</string>
   <string name="welcome_dont_upload_content_description">Exemplos de imagens que não devem ser carregadas</string>
@@ -578,7 +580,12 @@
   <string name="wallpaper_set_unsuccessfully">Algo deu errado. Não foi possível definir o papel de parede</string>
   <string name="setting_wallpaper_dialog_title">Definir como papel de parede</string>
   <string name="setting_wallpaper_dialog_message">Definir papel de parede. Por favor, espere…</string>
-  <string name="theme_default_name">Padrão</string>
+  <string name="theme_default_name">Seguir sistema</string>
   <string name="theme_dark_name">Escuro</string>
   <string name="theme_light_name">Claro</string>
+  <string name="cannot_open_location_settings">Falha ao abrir as configurações de localização. Ative o local manualmente</string>
+  <string name="recommend_high_accuracy_mode">Para obter melhores resultados, escolha o modo de alta precisão.</string>
+  <string name="ask_to_turn_location_on">Ativar a localização?</string>
+  <string name="nearby_needs_location">Proximidade precisa de localização ativado para funcionar corretamente</string>
+  <string name="use_location_from_similar_image">Você tirou essas duas fotos no mesmo lugar? Deseja usar a latitude/longitude da imagem à direita?</string>
 </resources>

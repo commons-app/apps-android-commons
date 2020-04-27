@@ -7,11 +7,10 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
-
-import java.util.List;
-
+import androidx.room.Update;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import java.util.List;
 
 @Dao
 public abstract class ContributionDao {
@@ -38,9 +37,6 @@ public abstract class ContributionDao {
     @Delete
     public abstract Single<Integer> delete(Contribution contribution);
 
-    @Query("SELECT * from contribution WHERE contentProviderUri=:uri")
-    public abstract List<Contribution> getContributionWithUri(String uri);
-
     @Query("SELECT * from contribution WHERE filename=:fileName")
     public abstract List<Contribution> getContributionWithTitle(String fileName);
 
@@ -52,4 +48,7 @@ public abstract class ContributionDao {
 
     @Query("Delete FROM contribution WHERE state = :state")
     public abstract void deleteAll(int state);
+
+    @Update
+    public abstract Single<Integer> update(Contribution contribution);
 }

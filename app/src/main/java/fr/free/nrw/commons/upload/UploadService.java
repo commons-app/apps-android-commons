@@ -6,49 +6,44 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Binder;
 import android.os.Bundle;
-
+import android.os.IBinder;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
+import fr.free.nrw.commons.di.CommonsDaggerService;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
-import io.reactivex.SingleObserver;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.processors.PublishProcessor;
 import io.reactivex.schedulers.Schedulers;
+import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
 
-public class UploadService extends HandlerService<Contribution> {
+public class UploadService extends CommonsDaggerService {
 
     private static final String EXTRA_PREFIX = "fr.free.nrw.commons.upload";
 
-    public static final int ACTION_UPLOAD_FILE = 1;
-
     public static final String ACTION_START_SERVICE = EXTRA_PREFIX + ".upload";
-    public static final String EXTRA_SOURCE = EXTRA_PREFIX + ".source";
     public static final String EXTRA_FILES = EXTRA_PREFIX + ".files";
     @Inject WikidataEditService wikidataEditService;
     @Inject SessionManager sessionManager;
@@ -77,10 +72,6 @@ public class UploadService extends HandlerService<Contribution> {
     // Seriously, Android?
     public static final int NOTIFICATION_UPLOAD_IN_PROGRESS = 1;
     public static final int NOTIFICATION_UPLOAD_FAILED = 3;
-
-    public UploadService() {
-        super("UploadService");
-    }
 
     protected class NotificationUpdateProgressListener{
 
@@ -130,6 +121,21 @@ public class UploadService extends HandlerService<Contribution> {
         Timber.d("UploadService.onDestroy; %s are yet to be uploaded", unfinishedUploads);
     }
 
+    public class UploadServiceLocalBinder extends Binder {
+        public UploadService getService() {
+            return UploadService.this;
+        }
+    }
+
+    private final IBinder localBinder = new UploadServiceLocalBinder();
+
+    private PublishProcessor<Contribution> contributionsToUpload;
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return localBinder;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -137,48 +143,34 @@ public class UploadService extends HandlerService<Contribution> {
         compositeDisposable = new CompositeDisposable();
         notificationManager = NotificationManagerCompat.from(this);
         curNotification = getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
+        contributionsToUpload = PublishProcessor.create();
+        compositeDisposable.add(contributionsToUpload.subscribe(this::handleUpload));
     }
 
-    @Override
-    protected void handle(int what, Contribution contribution) {
-        switch (what) {
-            case ACTION_UPLOAD_FILE:
+    public void handleUpload(Contribution contribution) {
+        contribution.setState(Contribution.STATE_QUEUED);
+        contribution.setTransferred(0);
+        toUpload++;
+        if (curNotification != null && toUpload != 1) {
+            curNotification.setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload));
+            Timber.d("%d uploads left", toUpload);
+            notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
+        }
+        compositeDisposable.add(contributionDao
+            .save(contribution)
+            .subscribeOn(ioThreadScheduler)
+            .observeOn(mainThreadScheduler)
+            .subscribe(aLong->{
+                contribution.set_id(aLong);
                 uploadContribution(contribution);
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown value for what");
-        }
-    }
-
-    @Override
-    public void queue(int what, Contribution contribution) {
-        Timber.d("Upload service queue has contribution with wiki data entity id as %s", contribution.getWikiDataEntityId());
-        switch (what) {
-            case ACTION_UPLOAD_FILE:
-
-                contribution.setState(Contribution.STATE_QUEUED);
-                contribution.setTransferred(0);
-                toUpload++;
-                if (curNotification != null && toUpload != 1) {
-                    curNotification.setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload));
-                    Timber.d("%d uploads left", toUpload);
-                    notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
-                }
-                compositeDisposable.add(contributionDao
-                        .save(contribution)
-                        .subscribeOn(ioThreadScheduler)
-                        .observeOn(mainThreadScheduler)
-                        .subscribe(aLong->{
-                            contribution._id = aLong;
-                            UploadService.super.queue(what, contribution);
-                        }, Throwable::printStackTrace));
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown value for what");
-        }
+            }, Throwable::printStackTrace));
     }
 
     private boolean freshStart = true;
+
+    public void queue(Contribution contribution) {
+        contributionsToUpload.offer(contribution);
+    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -217,7 +209,8 @@ public class UploadService extends HandlerService<Contribution> {
         Timber.d("Before execution!");
         curNotification.setContentTitle(getString(R.string.upload_progress_notification_title_start, contribution.getDisplayTitle()))
                 .setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
-                .setTicker(getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()));
+                .setTicker(getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()))
+                .setOngoing(true);
         notificationManager
                 .notify(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
 
@@ -251,53 +244,66 @@ public class UploadService extends HandlerService<Contribution> {
 
                     Timber.d("Stash upload response 1 is %s", uploadStash.toString());
 
-                    String resultStatus = uploadStash.getResult();
-                    if (!resultStatus.equals("Success")) {
-                        Timber.d("Contribution upload failed. Wikidata entity won't be edited");
-                        showFailedNotification(contribution);
-                        return Observable.never();
-                    } else {
+                    if (uploadStash.isSuccessful()) {
                         Timber.d("making sure of uniqueness of name: %s", filename);
                         String uniqueFilename = findUniqueFilename(filename);
                         unfinishedUploads.add(uniqueFilename);
                         return uploadClient.uploadFileFromStash(
-                                getApplicationContext(),
-                                contribution,
-                                uniqueFilename,
-                                uploadStash.getFilekey());
-                    }
-                })
-                .subscribe(uploadResult -> {
-                    Timber.d("Stash upload response 2 is %s", uploadResult.toString());
-
-                    notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
-
-                    String resultStatus = uploadResult.getResult();
-                    if (!resultStatus.equals("Success")) {
+                            getApplicationContext(),
+                            contribution,
+                            uniqueFilename,
+                            uploadStash.getFilekey());
+                    } else {
                         Timber.d("Contribution upload failed. Wikidata entity won't be edited");
                         showFailedNotification(contribution);
-                    } else {
-                        String canonicalFilename = "File:" + uploadResult.getFilename();
-                        Timber.d("Contribution upload success. Initiating Wikidata edit for"
-                                + " entity id %s if necessary (if P18 is null). P18 value is %s",
-                                contribution.getWikiDataEntityId(), contribution.getP18Value());
-                        wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(), canonicalFilename, contribution.getP18Value());
-                        contribution.setFilename(canonicalFilename);
-                        contribution.setImageUrl(uploadResult.getImageinfo().getOriginalUrl());
-                        contribution.setState(Contribution.STATE_COMPLETED);
-                        contribution.setDateUploaded(CommonsDateUtil.getIso8601DateFormatShort()
-                                .parse(uploadResult.getImageinfo().getTimestamp()));
-                        compositeDisposable.add(contributionDao
-                                .save(contribution)
-                                .subscribeOn(ioThreadScheduler)
-                                .observeOn(mainThreadScheduler)
-                                .subscribe());
+                        return Observable.never();
                     }
-                }, throwable -> {
+                })
+                .subscribe(
+                    uploadResult -> onUpload(contribution, notificationTag, uploadResult),
+                    throwable -> {
                     Timber.w(throwable, "Exception during upload");
                     notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
                     showFailedNotification(contribution);
                 });
+    }
+
+    private void onUpload(Contribution contribution, String notificationTag,
+        UploadResult uploadResult) throws ParseException {
+        Timber.d("Stash upload response 2 is %s", uploadResult.toString());
+
+        notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
+
+        if (uploadResult.isSuccessful()) {
+            onSuccessfulUpload(contribution, uploadResult);
+        } else {
+            Timber.d("Contribution upload failed. Wikidata entity won't be edited");
+            showFailedNotification(contribution);
+        }
+    }
+
+    private void onSuccessfulUpload(Contribution contribution, UploadResult uploadResult)
+        throws ParseException {
+        compositeDisposable
+            .add(wikidataEditService.addDepictionsAndCaptions(uploadResult, contribution));
+        WikidataPlace wikidataPlace = contribution.getWikidataPlace();
+        if (wikidataPlace != null && wikidataPlace.getImageValue() == null) {
+            wikidataEditService.createImageClaim(wikidataPlace, uploadResult);
+        }
+        saveCompletedContribution(contribution, uploadResult);
+    }
+
+    private void saveCompletedContribution(Contribution contribution, UploadResult uploadResult) throws ParseException {
+        contribution.setFilename(uploadResult.createCanonicalFileName());
+        contribution.setImageUrl(uploadResult.getImageinfo().getOriginalUrl());
+        contribution.setState(Contribution.STATE_COMPLETED);
+        contribution.setDateUploaded(CommonsDateUtil.getIso8601DateFormatTimestamp()
+            .parse(uploadResult.getImageinfo().getTimestamp()));
+        compositeDisposable.add(contributionDao
+            .save(contribution)
+            .subscribeOn(ioThreadScheduler)
+            .observeOn(mainThreadScheduler)
+            .subscribe());
     }
 
     @SuppressLint("StringFormatInvalid")
@@ -306,7 +312,8 @@ public class UploadService extends HandlerService<Contribution> {
         curNotification.setTicker(getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
                 .setContentTitle(getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
                 .setContentText(getString(R.string.upload_failed_notification_subtitle))
-                .setProgress(0, 0, false);
+                .setProgress(0, 0, false)
+                .setOngoing(false);
         notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_FAILED, curNotification.build());
 
         contribution.setState(Contribution.STATE_FAILED);

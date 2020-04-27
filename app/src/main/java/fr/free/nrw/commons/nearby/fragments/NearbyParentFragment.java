@@ -6,9 +6,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -48,6 +50,7 @@ import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.Style;
@@ -56,6 +59,7 @@ import com.mapbox.pluginscalebar.ScaleBarOptions;
 import com.mapbox.pluginscalebar.ScaleBarPlugin;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
+import fr.free.nrw.commons.utils.DialogUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -198,6 +202,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private boolean isVisibleToUser;
     private MapboxMap.OnCameraMoveListener cameraMoveListener;
     private fr.free.nrw.commons.location.LatLng lastFocusLocation;
+    private LatLngBounds latLngBounds;
 
 
     @Override
@@ -573,9 +578,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      *
      */
     private void addActionToTitle() {
+        title.setOnLongClickListener(view -> {
+                Utils.copy("place", title.getText().toString(), getContext());
+                Toast.makeText(getContext(), R.string.text_copy, Toast.LENGTH_SHORT).show();
+                return true;
+            });
+
         title.setOnClickListener(view -> {
-            Utils.copy("place", title.getText().toString(), getContext());
-            Toast.makeText(getContext(), "Text copied to clipboard", Toast.LENGTH_SHORT).show();
             bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -627,6 +636,22 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public LatLng getLastFocusLocation() {
         return lastFocusLocation==null?null:LocationUtils.commonsLatLngToMapBoxLatLng(lastFocusLocation);
+    }
+
+    @Override
+    public boolean isCurrentLocationMarkerVisible() {
+        if (latLngBounds == null) {
+            Timber.d("Map projection bounds are null");
+            return false;
+        } else {
+            Timber.d("Current location marker %s" , latLngBounds.contains(currentLocationMarker.getPosition()) ? "visible" : "invisible");
+            return latLngBounds.contains(currentLocationMarker.getPosition());
+        }
+    }
+
+    @Override
+    public void setProjectorLatLngBounds() {
+        latLngBounds = mapBox.getProjection().getVisibleRegion().latLngBounds;
     }
 
     @Override
@@ -903,9 +928,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void handleLocationUpdate(fr.free.nrw.commons.location.LatLng latLng, LocationServiceManager.LocationChangeType locationChangeType){
-        setMapBoxPosition(latLng);
-        this.lastKnownLocation=latLng;
-        NearbyController.currentLocation=lastKnownLocation;
+        this.lastKnownLocation = latLng;
+        NearbyController.currentLocation = lastKnownLocation;
         presenter.updateMapAndList(locationChangeType);
     }
 
@@ -936,14 +960,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (isMapBoxReady && latLng != null && !isUserBrowsing()) {//If the map has never ever shown the current location, lets do it know
             handleLocationUpdate(latLng, LOCATION_SIGNIFICANTLY_CHANGED);
         }
-    }
-
-    void setMapBoxPosition(fr.free.nrw.commons.location.LatLng latLng){
-        CameraPosition position = new CameraPosition.Builder()
-                .target(LocationUtils.commonsLatLngToMapBoxLatLng(latLng)) // Sets the new camera position
-                .zoom(ZOOM_LEVEL) // Same zoom level
-                .build();
-        mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
     }
 
     public void backButtonClicked() {
@@ -1251,6 +1267,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void recenterMap(fr.free.nrw.commons.location.LatLng curLatLng) {
         if (curLatLng == null) {
+            if (!(locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled())) {
+                showLocationOffDialog();
+            }
             return;
         }
         addCurrentLocationMarker(curLatLng);
@@ -1279,6 +1298,28 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
 
         mapBox.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
+    }
+
+    @Override
+    public void showLocationOffDialog() {
+        // This creates a dialog box that prompts the user to enable location
+        DialogUtil
+            .showAlertDialog(getActivity(), getString(R.string.ask_to_turn_location_on), getString(R.string.nearby_needs_location),
+                getString(R.string.yes), getString(R.string.no),  this::openLocationSettings, null);
+    }
+
+    @Override
+    public void openLocationSettings() {
+        // This method opens the location settings of the device along with a followup toast.
+        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        PackageManager packageManager = getActivity().getPackageManager();
+
+        if (intent.resolveActivity(packageManager)!= null) {
+            startActivity(intent);
+            Toast.makeText(getContext(), R.string.recommend_high_accuracy_mode, Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getContext(), R.string.cannot_open_location_settings, Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

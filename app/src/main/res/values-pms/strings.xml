@@ -173,7 +173,9 @@
   <string name="title_activity_nearby">Pòst davzin</string>
   <string name="no_nearby">Trovà gnente ant ij parage</string>
   <string name="warning">Avertensa</string>
+  <string name="duplicate_image_found">Plancia dobia trovà</string>
   <string name="upload_image_duplicate">St\'archivi a esist già su Commons. É-lo sigur ëd vorèj continué?</string>
+  <string name="upload">Carié</string>
   <string name="yes">Bò</string>
   <string name="no">Nò</string>
   <string name="media_detail_title">Tìtol</string>
@@ -247,6 +249,7 @@
   <string name="upload_problem_different_geolocation">Sa fòto a l\'é stàita fàita ant un pòst diferent.</string>
   <string name="upload_problem_fbmd">Për piasì, ch\'a caria mach dle fòto che a l\'ha fàit chiel-midem. Ch\'a caria pa dle fòto che a l\'ha trovà an sij cont Facebook d\'àutra gent.</string>
   <string name="upload_problem_do_you_continue">Veul-lo istess carié sta plancia?</string>
+  <string name="upload_problem_image">Trovà un problema con la plancia</string>
   <string name="internet_downloaded">Për piasì, ch\'a caria mach dle fòto ch\'a l\'ha fàit chiel-midem. Ch\'a caria pa dle fòto che a l\'ha dëscarià da \'ns l\'aragnà.</string>
   <string name="give_permission">Dé ël përmess</string>
   <string name="use_external_storage">Dovré n\'anmagasinament estern</string>
@@ -375,11 +378,10 @@
   <string name="preference_author_name_toggle">Ch\'a deuvra un nòm d\'autor përsonalisà</string>
   <string name="preference_author_name_toggle_summary">Ch\'a deuvra un nòm d\'autor përsonalisà al pòst ëd sò stranòm cand a caria dle fòto</string>
   <string name="preference_author_name">Nòm d\'autor përsonalisà</string>
-  <string name="preference_author_name_summary">Ël nòm d\'autor përsonalisà da dovré al pòst ëd sò stranòm për ij cariament</string>
   <string name="contributions_fragment">Contribussion</string>
   <string name="nearby_fragment">Davzin</string>
   <string name="notifications">Notìfiche</string>
-  <string name="archived_notifications">Notìfiche (archivià)</string>
+  <string name="read_notifications">Notìfiche (lesùe)</string>
   <string name="display_nearby_notification">Smon-e la notìfica ëd prossimità</string>
   <string name="display_nearby_notification_summary">Sgnaché sì për vëdde ël pòst pi davzin ch\'a l\'ha damanca ëd plance</string>
   <string name="no_close_nearby">Gnun pòst trovà davzin a chiel</string>
@@ -493,9 +495,9 @@
   <string name="no_image_reverted">Gnun-e plance anvertìe</string>
   <string name="no_image_uploaded">Gnun-e plance carià</string>
   <string name="no_notification">A l\'ha gnun-e notìfiche nen lesùe</string>
-  <string name="no_archived_notification">A l\'ha gnun-e notìfiche archivià</string>
+  <string name="no_read_notification">A l\'ha gnun-e notìfiche lesùe</string>
   <string name="share_logs_using">Partagé j\'argistr dovrand</string>
-  <string name="menu_option_archived">Vëdde l\'archivi</string>
+  <string name="menu_option_read">Vëdde lòn ch\'a l\'é stàit lesù</string>
   <string name="menu_option_unread">Vëdde lòn ch\'a l\'é ancor nen ëstàit lesù</string>
   <string name="error_occurred_in_picking_images">A-i é staje n\'eror an selessionand le plance</string>
   <string name="image_chooser_title">Serne le plance da carié</string>
@@ -503,7 +505,7 @@
   <string name="images_featured_explanation">Le fòto an evidensa a son ëd plance fàite da dij fotògraf e ilustrator motobin àbij che la comunità ëd Wikipedia Commons a l\'ha sernù tra cole ëd qualità pi àuta an sël sit.</string>
   <string name="images_via_nearby_explanation">Le plance carià dai pòst ëd prossimità a son le plance carià con la dëscuverta dij pòst an sla carta.</string>
   <string name="thanks_received_explanation">Costa fonsionalità a përmet ai contributor ëd mandé na notìfica d\'aringrassiament a j\'utent ch\'a fan dle modìfiche ùtij -  an dovrand na cita liura d\'aringrassiament an sla pàgina dla stòria o cola dle diferense.</string>
-  <string name="previous_image_title_description">Copié ël tìtol e la descrission precedent</string>
+  <string name="previous_image_caption_description">Copié ël tìtol e la descrission precedent</string>
   <string name="previous_button_tooltip_message">Ch\'a sgnaca për dovré torna ël tìtol e la descrission ch\'a l\'ha butà an soa plancia precedenta e modificheje për ch\'a corëspondo a cola atual</string>
   <string name="welcome_do_upload_content_description">Esempi ëd plance bon-e da carié su Commons</string>
   <string name="welcome_dont_upload_content_description">Esempi ëd plance da nen carié</string>
@@ -564,7 +566,12 @@
   <string name="wallpaper_set_unsuccessfully">A-i é cheicòs ch\'a l\'é andà stòrt. Impossìbil buté la tapissarìa</string>
   <string name="setting_wallpaper_dialog_title">Definì \'me tapissarìa</string>
   <string name="setting_wallpaper_dialog_message">Definission dla tapissarìa. Për piasì, ch\'a speta…</string>
-  <string name="theme_default_name">Stàndard</string>
+  <string name="theme_default_name">Conforma al sistema</string>
   <string name="theme_dark_name">Sombr</string>
   <string name="theme_light_name">Ciàir</string>
+  <string name="cannot_open_location_settings">Falì a duverté ij paràmeter ëd localisassion. Për piasì, ch\'a anvisca la localisassion a man</string>
+  <string name="recommend_high_accuracy_mode">Për dij mej arzultà, ch\'a serna ël meud Àuta precision.</string>
+  <string name="ask_to_turn_location_on">Anvisché la localisassion?</string>
+  <string name="nearby_needs_location">Nearby a l\'ha damanca dla localisassion abilità për marcé \'me ch\'as dev</string>
+  <string name="use_location_from_similar_image">A la fàit se doe fòto ant l\'istess pòst? A veul dovré la latitùdin e la longitùdin ëd la fòto an sla drita?</string>
 </resources>

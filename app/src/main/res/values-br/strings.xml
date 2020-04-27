@@ -38,7 +38,7 @@
   <string name="upload_progress_notification_title_finishing">Oc\'h echuiñ enporzhiadenn %1$s</string>
   <string name="upload_failed_notification_title">C\'hwitet en deus enporzhiañ %1$s</string>
   <string name="upload_failed_notification_subtitle">Pouezit evit diskwel</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">%1$d restr o vezañ karget</item>
     <item quantity="other">%1$d restr o vezañ karget</item>
   </plurals>
@@ -74,16 +74,16 @@
   <string name="gps_disabled">Diwerededkaet eo ar GPS war hoc\'h ardivink.\nHa c\'hoant ho peus da weredekaat anezhañ ?</string>
   <string name="enable_gps">Gweredekaat ar GPS</string>
   <string name="contributions_subtitle_zero">Enporzhiadenn ebet c\'hoazh !</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d bellgargadenn loc\'het</item>
     <item quantity="other">%1$d pellgargadennoù loc\'het</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d bellgargadenn</item>
     <item quantity="other">%1$d pellgargadennoù</item>
   </plurals>
@@ -107,7 +107,7 @@
   <string name="no_uploads_yet">N\'ho peus ket enporzhiet skeudennoù c\'hoazh.</string>
   <string name="menu_retry_upload">Klask en-dro</string>
   <string name="menu_cancel_upload">Nullañ</string>
-  <plurals name="share_license_summary">
+  <plurals name="share_license_summary" fuzzy="true">
     <item quantity="one">gant an aotre-implijout %1$s e vo ar skeudenn-mañ</item>
     <item quantity="other">gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
   </plurals>
@@ -161,7 +161,7 @@
   <string name="detail_panel_cats_loading">O kargañ…</string>
   <string name="detail_panel_cats_none">Hini ebet diuzet</string>
   <string name="detail_description_empty">Deskrivadur ebet</string>
-  <string name="detail_license_empty">Aotre-implijout dizanv</string>
+  <string name="detail_license_empty">Aotre-implijout dianav</string>
   <string name="menu_refresh">Freskaat</string>
   <string name="read_storage_permission_rationale">Aotre rekis : lenn ur stokañ diavaez. N\'hall ket an arload tizhout ho palier hep an dra-se.</string>
   <string name="write_storage_permission_rationale" fuzzy="true">Aotre ret ; skrivañ war al lec\'h stokañ diavaez. Ne c\'hall ket an arload tizhout ho kamera hep an dra-se.</string>
@@ -170,7 +170,9 @@
   <string name="title_activity_nearby">Lec\'hioù nes</string>
   <string name="no_nearby">N\'eus bet kavet netra tostik</string>
   <string name="warning">Diwallit</string>
+  <string name="duplicate_image_found">Kavet ez eus bet ur skeudenn e doubl</string>
   <string name="upload_image_duplicate">Ar restr zo anezhi e Commons dija. Ha sur eo hoc\'h eus c\'hoant da genderc\'hel ?</string>
+  <string name="upload">Enporzhiañ</string>
   <string name="yes">Ya</string>
   <string name="no">Ket</string>
   <string name="media_detail_title">Titl</string>
@@ -235,6 +237,7 @@
   <string name="upload_problem_image_blurry">Dispis eo ar skeudenn.</string>
   <string name="upload_problem_image_duplicate">War Commons eo ar skeudenn dija.</string>
   <string name="upload_problem_different_geolocation">Tennet eo bet ar skeudenn en ul lec\'h disheñvel.</string>
+  <string name="upload_problem_image">Kudennoù stag ouzh ar bajenn-mañ</string>
   <string name="give_permission">Reiñ ar gwir</string>
   <string name="use_external_storage">Implijout ar stokañ diavaez</string>
   <string name="use_external_storage_summary">Enrollit ar skeudennoù tennet gant luc\'hskeudennerez ho penveg</string>
@@ -319,7 +322,7 @@
   <string name="error_occurred">Ur fazi zo bet !</string>
   <string name="preference_author_name_toggle">Implijit un anv aozer personelaet</string>
   <string name="nearby_fragment">Nepell</string>
-  <string name="archived_notifications">Kemennoù(diellaouet)</string>
+  <string name="read_notifications" fuzzy="true">Kemennoù(diellaouet)</string>
   <string name="next">War-lerc\'h</string>
   <string name="previous">Kent</string>
   <string name="submit">Kas</string>

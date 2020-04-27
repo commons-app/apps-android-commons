@@ -1,5 +1,9 @@
 package fr.free.nrw.commons.contributions;
 
+import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
+import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+
 import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
@@ -12,22 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
-
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.campaigns.Campaign;
@@ -58,11 +54,10 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
-import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 public class ContributionsFragment
         extends CommonsDaggerSupportFragment
@@ -106,7 +101,7 @@ public class ContributionsFragment
     private ServiceConnection uploadServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
-            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder) binder)
+            uploadService = (UploadService) ((UploadService.UploadServiceLocalBinder) binder)
                     .getService();
             isUploadServiceConnected = true;
         }
@@ -215,6 +210,12 @@ public class ContributionsFragment
             @Override
             public Contribution getContributionForPosition(int position) {
                 return (Contribution) contributionsPresenter.getItemAtPosition(position);
+            }
+
+            @Override
+            public void fetchMediaUriFor(Contribution contribution) {
+                Timber.d("Fetching thumbnail for %s", contribution.getFilename());
+                contributionsPresenter.fetchMediaDetails(contribution);
             }
         });
 
@@ -437,8 +438,8 @@ public class ContributionsFragment
         DialogUtil.showAlertDialog(getActivity(),
                 getString(R.string.nearby_card_permission_title),
                 getString(R.string.nearby_card_permission_explanation),
-                this::displayYouWontSeeNearbyMessage,
                 this::requestLocationPermission,
+                this::displayYouWontSeeNearbyMessage,
                 checkBoxView,
                 false);
     }
@@ -585,7 +586,7 @@ public class ContributionsFragment
     private void retryUpload(Contribution contribution) {
         if (NetworkUtils.isInternetConnectionEstablished(getContext())) {
             if (contribution.getState() == STATE_FAILED && null != uploadService) {
-                uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
+                uploadService.queue(contribution);
                 Timber.d("Restarting for %s", contribution.toString());
             } else {
                 Timber.d("Skipping re-upload for non-failed %s", contribution.toString());

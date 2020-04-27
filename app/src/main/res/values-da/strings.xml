@@ -117,7 +117,7 @@
   <string name="use_previous">Brug forrige titel og beskrivelse</string>
   <string name="allow_gps">Hent automatisk nuværende placering</string>
   <string name="allow_gps_summary">Henter den nuværende placering for at tilbyde kategoriforslag hvis billedet ikke er geografisk mærket og geomærker billedet. Advarsel: Dette vil afsløre din nuværende placering.</string>
-  <string name="preference_theme" fuzzy="true">Nat-tilstand</string>
+  <string name="preference_theme">Tema</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -366,7 +366,7 @@
   <string name="review_thanks_no_button_text">Næste billede</string>
   <string name="no_image">Ingen billeder brugt</string>
   <string name="share_logs_using">Del logs ved hjælp af</string>
-  <string name="menu_option_archived">Vis arkiverede</string>
+  <string name="menu_option_read" fuzzy="true">Vis arkiverede</string>
   <string name="menu_option_unread">Vis ulæste</string>
   <string name="error_occurred_in_picking_images">Der opstod en fejl under udvælgelse af billeder</string>
   <string name="please_wait">Vent venligst…</string>
@@ -385,4 +385,8 @@
   <string name="place_state_exists">Findes</string>
   <string name="place_state_needs_photo">Mangler et billede</string>
   <string name="nearby_search_hint">Bro, museum, hotel, osv.</string>
+  <string name="title_app_shortcut_bookmark">Bogmærker</string>
+  <string name="theme_default_name" fuzzy="true">Standard</string>
+  <string name="theme_dark_name">Mørkt</string>
+  <string name="theme_light_name">Lyst</string>
 </resources>

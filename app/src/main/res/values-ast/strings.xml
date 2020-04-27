@@ -73,7 +73,6 @@
   <string name="enable_gps">Activar GPS</string>
   <string name="contributions_subtitle_zero">Inda nun hai xubes</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -116,7 +115,7 @@
   <string name="use_previous">Usar un títulu y descripción anterior</string>
   <string name="allow_gps">Llograr automáticamente l\'allugamientu actual</string>
   <string name="allow_gps_summary">Recupera la posición actual si la imaxe nun tien etiquetes xeográfiques, y marca la imaxe con ella. Atención: Esto revelará\'l to allugamientu actual.</string>
-  <string name="preference_theme" fuzzy="true">Mou nocherniegu</string>
+  <string name="preference_theme">Tema</string>
   <string name="license_name_cc_by_sa_four"> Reconocimientu-CompartirIgual 4.0</string>
   <string name="license_name_cc_by_four"> Reconocimientu 4.0</string>
   <string name="license_name_cc_by_sa"> Reconocimientu-CompartirIgual 3.0</string>
@@ -174,7 +173,9 @@
   <string name="title_activity_nearby">Llugares cercanos</string>
   <string name="no_nearby">Nun s\'alcontraron llugares cercanos</string>
   <string name="warning">Avisu</string>
+  <string name="duplicate_image_found">Atopóse una imaxe duplicada</string>
   <string name="upload_image_duplicate">Esti ficheru yá esiste\'n Commons. ¿Confirmes que quies siguir?</string>
+  <string name="upload">Xubir</string>
   <string name="yes">Sí</string>
   <string name="no">Non</string>
   <string name="media_detail_title">Títulu</string>
@@ -248,6 +249,7 @@
   <string name="upload_problem_different_geolocation">Esta imaxe tomóse nun llugar distintu.</string>
   <string name="upload_problem_fbmd">Por favor xube solo fotografies que tomasti tu mesmu. Nun xubas imaxes qu\'atopasti nes cuentes de Facebook d\'otres persones.</string>
   <string name="upload_problem_do_you_continue">¿Inda quies xubir esta imaxe?</string>
+  <string name="upload_problem_image">Alcontráronse problemes na imaxe</string>
   <string name="internet_downloaded">Por favor xube solo fotografies que tomasti tu mesmu. Nun xubas imaxes que descargasti d\'Internet.</string>
   <string name="give_permission">Dar permisu</string>
   <string name="use_external_storage">Usar almacenamientu esternu</string>
@@ -376,11 +378,10 @@
   <string name="preference_author_name_toggle">Usar nome d\'autor personalizáu</string>
   <string name="preference_author_name_toggle_summary">Usar un nome d\'autor personalizáu en cuenta del to nome d\'usuariu al xubir semeyes</string>
   <string name="preference_author_name">Nome d\'autor personalizáu</string>
-  <string name="preference_author_name_summary">El nome d\'autor personalizáu pa usar nes xubíes en cuenta del to nome d\'usuariu</string>
   <string name="contributions_fragment">Collaboraciones</string>
   <string name="nearby_fragment">Cercanu</string>
   <string name="notifications">Avisos</string>
-  <string name="archived_notifications">Avisos (archivaos)</string>
+  <string name="read_notifications">Avisos (lleíos)</string>
   <string name="display_nearby_notification">Amosar notificaciones de cercanía</string>
   <string name="display_nearby_notification_summary">Toca equí para ver el llugar más cercanu que precisa semeyes</string>
   <string name="no_close_nearby">Nun s\'atoparon llugares cercanos nos alredores</string>
@@ -435,6 +436,7 @@
   <string name="display_location_permission_title">Amosar permisu d\'allugamientu</string>
   <string name="display_location_permission_explanation">Pidir permisu d\'allugamientu cuando se precise pa la función de ver la tarxeta de notificación cercana.</string>
   <string name="achievements_fetch_failed">Daqué salió mal, nun pudimos recibir los tos llogros</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">Ficisti tantes collaboraciones que superen al nuesu sistema de cálculu de llogros. Esti ye\'l llogru definitivu.</string>
   <string name="ends_on">Remata el:</string>
   <string name="display_campaigns">Amosar campañes</string>
   <string name="display_campaigns_explanation">Ver les campañes en cursu</string>
@@ -484,7 +486,7 @@
   <string name="review_thanks_yes_button_text">Sí, por qué non</string>
   <string name="review_thanks_no_button_text">Imaxe siguiente</string>
   <string name="skip_image_explanation">Faciendo clic nesti botón recibirás otra imaxe de Wikimedia Commons xubida apocayá</string>
-  <string name="review_image_explanation">Puedes revisar imaxes y ameyorar la calidá de Wikimedia Commons.\nLos cuatro parámetros de revisión son: \n - ¿Ésta imaxe tien rellación col contestu? \n - ¿La imaxe cumple les riegles de copyright? \n - ¿La imaxe ta correchamente categorizada? \n - Si too ta correuto, tamién puedes dar les gracies al collaborador.</string>
+  <string name="review_image_explanation">Puedes revisar imaxes y ameyorar la calidá de Wikimedia Commons.\nLos cuatro parámetros de revisión son: \n - ¿Ésta imaxe tien rellación col contestu? \n - ¿La imaxe cumple les riegles de copyright? \n - ¿La imaxe ta correchamente categorizada? \n - Si too ta correuto, tamién pues dar les gracies al collaborador.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Recibiendo\'l conteníu compartíu. El procesamientu de la imaxe puede tardar ciertu tiempu, dependiendo del tamañu de la imaxe y del to preséu</item>
     <item quantity="other">Recibiendo\'l conteníu compartíu. El procesamientu de les imaxes puede tardar ciertu tiempu, dependiendo del tamañu de les imaxes y del to preséu</item>
@@ -493,9 +495,9 @@
   <string name="no_image_reverted">Nun se revertió nenguna imaxe</string>
   <string name="no_image_uploaded">Nun se xubió nenguna imaxe</string>
   <string name="no_notification">Nun tienes avisos ensin lleer</string>
-  <string name="no_archived_notification">Nun tienes avisos archivaos</string>
+  <string name="no_read_notification">Nun tienes avisos lleíos</string>
   <string name="share_logs_using">Compartir rexistros usando</string>
-  <string name="menu_option_archived">Ver los archivaos</string>
+  <string name="menu_option_read">Ver los lleíos</string>
   <string name="menu_option_unread">Ver los nun lleíos</string>
   <string name="error_occurred_in_picking_images">Asocedió un error al escoyer les imaxes</string>
   <string name="image_chooser_title">Escueyi les imaxes pa xubir</string>
@@ -564,4 +566,12 @@
   <string name="wallpaper_set_unsuccessfully">Daqué salió mal. Nun pudo ponese\'l fondu d\'escritoriu</string>
   <string name="setting_wallpaper_dialog_title">Poner como fondu d\'escritoriu</string>
   <string name="setting_wallpaper_dialog_message">Poniendo fondu d\'escritoriu. Espera…</string>
+  <string name="theme_default_name">Siguir sistema</string>
+  <string name="theme_dark_name">Escuru</string>
+  <string name="theme_light_name">Claru</string>
+  <string name="cannot_open_location_settings">Nun pudo abrise la configuración d\'allugamientu. Activa manualmente l\'allugamientu</string>
+  <string name="recommend_high_accuracy_mode">Pa meyores resultaos, escueye\'l mou d\'Alta Precisión.</string>
+  <string name="ask_to_turn_location_on">¿Activar l\'allugamientu?</string>
+  <string name="nearby_needs_location">«Cercano» precisa activar l\'allugamientu pa funcionar correutamente</string>
+  <string name="use_location_from_similar_image">¿Sacasti estes dos semeyes nel mesmu llugar? ¿Quies usar la llatitú/llonxitú da la semeya de la derecha?</string>
 </resources>

@@ -20,6 +20,7 @@
 * Redredsonia
 * Rubin16
 * Vlad5250
+* Wikisaurus
 * Wirbel78
 * Евгения
 * ЛингвоЧел
@@ -57,7 +58,12 @@
   <string name="upload_progress_notification_title_finishing">Завершение загрузки %1$s</string>
   <string name="upload_failed_notification_title">Загрузка %1$s не удалась</string>
   <string name="upload_failed_notification_subtitle">Нажмите для просмотра</string>
-  <string name="uploads_pending_notification_indicator">%1$d {{PLURAL:%1$d|one=файл загружается|few=файла загружается|файлов загружается}}</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d файл загружается</item>
+    <item quantity="few">%1$d файла загружается</item>
+    <item quantity="many">%1$d файлов загружается</item>
+    <item quantity="other">%1$d файлов загружается</item>
+  </plurals>
   <string name="title_activity_contributions">Мои недавние загрузки</string>
   <string name="contribution_state_queued">В очереди</string>
   <string name="contribution_state_failed">Ошибка загрузки.</string>
@@ -90,7 +96,7 @@
   <string name="gps_disabled">GPS отключён в вашем устройстве. Хотите включить его?</string>
   <string name="enable_gps">Включить GPS</string>
   <string name="contributions_subtitle_zero">Загрузок пока нет</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="few">(%1$d)</item>
@@ -99,11 +105,13 @@
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Начинается %1$d загрузка</item>
     <item quantity="few">Начинается %1$d загрузки</item>
+    <item quantity="many">Начинается %1$d загрузок</item>
     <item quantity="other">Начинается %1$d загрузок</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d загрузка</item>
     <item quantity="few">%1$d загрузки</item>
+    <item quantity="many">%1$d загрузок</item>
     <item quantity="other">%1$d загрузок</item>
   </plurals>
   <string name="categories_not_found">Не найдено категорий, соответствующих %1$s</string>
@@ -129,6 +137,8 @@
   <string name="menu_cancel_upload">Отмена</string>
   <plurals name="share_license_summary">
     <item quantity="one">Это изображение будет лицензировано под %1$s</item>
+    <item quantity="few">Эти изображения будут лицензированы под %1$s</item>
+    <item quantity="many">Эти изображения будут лицензированы под %1$s</item>
     <item quantity="other">Эти изображения будут лицензированы под %1$s</item>
   </plurals>
   <string name="media_upload_policy">Отправляя это изображение, я подтверждаю, что это моя собственная работа, которая не содержит защищённых авторским правом материалов или селфи, а также отвечает &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/ru\"&gt;правилам Викисклада&lt;/a&gt;.</string>
@@ -397,11 +407,10 @@
   <string name="preference_author_name_toggle">Использовать альтернативное имя автора</string>
   <string name="preference_author_name_toggle_summary">При загрузке изображений использовать альтернативное имя для указания авторства вместо имени пользователя</string>
   <string name="preference_author_name">Альтернативное имя автора</string>
-  <string name="preference_author_name_summary">Альтернативное имя автора, которое будет указываться в загрузках вместо имени пользователя</string>
   <string name="contributions_fragment">Вклад</string>
   <string name="nearby_fragment">Поблизости</string>
   <string name="notifications">Уведомления</string>
-  <string name="archived_notifications">Уведомления (архивированные)</string>
+  <string name="read_notifications" fuzzy="true">Уведомления (архивированные)</string>
   <string name="display_nearby_notification">Уведомлять меня о местах поблизости</string>
   <string name="display_nearby_notification_summary">Нажмите здесь, чтобы увидеть ближайшее место без изображений</string>
   <string name="no_close_nearby">Не найдено мест поблизости</string>
@@ -419,6 +428,7 @@
   <plurals name="upload_count_title">
     <item quantity="one">%1$d загрузка</item>
     <item quantity="few">%1$d загрузки</item>
+    <item quantity="many">%1$d загрузок</item>
     <item quantity="other">%1$d загрузок</item>
   </plurals>
   <string name="navigation_item_bookmarks">Закладки</string>
@@ -510,15 +520,17 @@
   <string name="review_image_explanation">Вы можете проверить файлы, и, таким образом, улучшить их качество на Викискладе.\n Есть четыре проверки:\n - Уместен ли файл на Викискладе?\n - Соответствует ли файл правилам об авторском праве?\n - Правильно ли файл категоризирован?\n - Если всё хорошо, можете поблагодарить загрузившего этот файл.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Получение общего содержимого. Обработка изображения может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>
+    <item quantity="few">Получение общего содержимого. Обработка изображений может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>
+    <item quantity="many">Получение общего содержимого. Обработка изображений может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>
     <item quantity="other">Получение общего содержимого. Обработка изображений может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>
   </plurals>
   <string name="no_image">Нет использованных изображений</string>
   <string name="no_image_reverted">Нет откаченых изображений</string>
   <string name="no_image_uploaded">Нет загруженных изображений</string>
   <string name="no_notification">У вас нет непрочитанных уведомлений</string>
-  <string name="no_archived_notification">Нет архивированных уведомлений</string>
+  <string name="no_read_notification" fuzzy="true">Нет архивированных уведомлений</string>
   <string name="share_logs_using">Поделиться лог-файлами</string>
-  <string name="menu_option_archived">См. архивированные</string>
+  <string name="menu_option_read" fuzzy="true">См. архивированные</string>
   <string name="menu_option_unread">См. непрочитанные</string>
   <string name="error_occurred_in_picking_images">Произошла ошибка при загрузке изображений</string>
   <string name="image_chooser_title">Выберите изображения для загрузки</string>
@@ -526,7 +538,7 @@
   <string name="images_featured_explanation">Избранные изображения обычно сделаны профессиональными фотографами и иллюстраторами. Такие изображения отмечены сообществом участников Викисклада как имеющие высшее качество на этом вебсайте.</string>
   <string name="images_via_nearby_explanation">Изображения, загруженные участниками, которые находили места с помощью функционала \"Места поблизости\".</string>
   <string name="thanks_received_explanation">Это функция позволяет участникам послать благодарность другим участникам за их полезные правки с помощью маленькой ссылки на странице истории страницы или странице разницы версий.</string>
-  <string name="previous_image_title_description">Скопировать предыдущие название и описание</string>
+  <string name="previous_image_caption_description">Скопировать предыдущие название и описание</string>
   <string name="previous_button_tooltip_message">Нажмите, чтобы использовать название и описание, которые вы ввели для предыдущего изображения, а потом потом модифицировать их</string>
   <string name="welcome_do_upload_content_description">Примеры изображений, подходящих для загрузки на Викисклад</string>
   <string name="welcome_dont_upload_content_description">Примеры изображений, которые не следует загружать на Викисклад</string>
@@ -587,7 +599,11 @@
   <string name="wallpaper_set_unsuccessfully">Что-то пошло не так. Не удалось установить фоновую заставку</string>
   <string name="setting_wallpaper_dialog_title">Сделать фоновой заставкой</string>
   <string name="setting_wallpaper_dialog_message">Идёт установка фоновой заставки...</string>
-  <string name="theme_default_name">По умолчанию</string>
+  <string name="theme_default_name" fuzzy="true">По умолчанию</string>
   <string name="theme_dark_name">Тёмная</string>
   <string name="theme_light_name">Светлая</string>
+  <string name="cannot_open_location_settings">Не удалось открыть настройки местоположения. Пожалуйста, включите местоположение вручную</string>
+  <string name="recommend_high_accuracy_mode">Для достижения наилучших результатов выберите режим высокой точности.</string>
+  <string name="ask_to_turn_location_on">Включить местоположение?</string>
+  <string name="nearby_needs_location">Рядом необходимо, чтобы местоположение было включено для правильной работы.</string>
 </resources>

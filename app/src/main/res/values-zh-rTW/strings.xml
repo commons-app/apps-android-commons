@@ -184,7 +184,9 @@
   <string name="title_activity_nearby">附近地點</string>
   <string name="no_nearby">找不到附近地點</string>
   <string name="warning">警告</string>
+  <string name="duplicate_image_found">發現重複圖片</string>
   <string name="upload_image_duplicate">維基共享資源已有此檔案。確定要繼續嗎？</string>
+  <string name="upload">上傳</string>
   <string name="yes">是</string>
   <string name="no">否</string>
   <string name="media_detail_title">標題</string>
@@ -258,6 +260,7 @@
   <string name="upload_problem_different_geolocation">此圖片是在不同的地點拍攝。</string>
   <string name="upload_problem_fbmd">請僅上傳您自己拍攝的圖片。不要上傳您從別人臉書帳號裡所找到的圖片。</string>
   <string name="upload_problem_do_you_continue">您仍要上傳此圖片嗎？</string>
+  <string name="upload_problem_image">在圖片裡發現問題</string>
   <string name="internet_downloaded">請僅上傳您自己拍攝的圖片。不要上傳您從網路下載來的圖片。</string>
   <string name="give_permission">給予權限</string>
   <string name="use_external_storage">使用外部存儲裝置</string>
@@ -386,11 +389,10 @@
   <string name="preference_author_name_toggle">使用自定義作者名稱</string>
   <string name="preference_author_name_toggle_summary">使用自定義作者名稱來取代在上傳照片時您的使用者名稱</string>
   <string name="preference_author_name">自定義作者名稱</string>
-  <string name="preference_author_name_summary">自定義作者名稱用來取代在上傳時您的使用者名稱</string>
   <string name="contributions_fragment">貢獻</string>
   <string name="nearby_fragment">附近</string>
   <string name="notifications">通知</string>
-  <string name="archived_notifications">通知（已存檔）</string>
+  <string name="read_notifications">通知（已讀）</string>
   <string name="display_nearby_notification">顯示附近地點通知</string>
   <string name="display_nearby_notification_summary">在此輕觸來查看缺少圖片的最近地點</string>
   <string name="no_close_nearby">查無靠近您的附近地點</string>
@@ -504,9 +506,9 @@
   <string name="no_image_reverted">沒有圖片被還原回復</string>
   <string name="no_image_uploaded">沒有圖片被上傳</string>
   <string name="no_notification">您有尚未讀取的通知</string>
-  <string name="no_archived_notification">您沒有已存檔通知</string>
+  <string name="no_read_notification">您沒有已讀的通知</string>
   <string name="share_logs_using">分享日誌使用</string>
-  <string name="menu_option_archived">檢視已存檔</string>
+  <string name="menu_option_read">檢視已讀</string>
   <string name="menu_option_unread">檢視未讀</string>
   <string name="error_occurred_in_picking_images">當挑選圖片時發生錯誤</string>
   <string name="image_chooser_title">選擇要上傳的圖片</string>
@@ -514,7 +516,7 @@
   <string name="images_featured_explanation">特色圖片是出自於高水準技巧的攝影師或繪圖師，且被維基共享資源社群挑選為在站台上的最高品質圖片。</string>
   <string name="images_via_nearby_explanation">以「附近地點」所上傳的圖片，是透過找出在地圖上地點來上傳的。</string>
   <string name="thanks_received_explanation">此功能允許編輯者透過利用在歷史頁面或是差異頁面上的感謝連結，來發送感謝通知給做出有用編輯的使用者。</string>
-  <string name="previous_image_title_description">複製先前標題與描述</string>
+  <string name="previous_image_caption_description">複製先前標題與描述</string>
   <string name="previous_button_tooltip_message">點擊來重新使用您在您的先前圖片所輸入之標題與描述，並修改來配合目前的圖片</string>
   <string name="welcome_do_upload_content_description">上傳到維基共享資源的優良圖片範例</string>
   <string name="welcome_dont_upload_content_description">未上傳範例圖片</string>
@@ -548,8 +550,8 @@
   <string name="delete_helper_ask_spam_blurry">糢糊</string>
   <string name="delete_helper_ask_spam_nonsense">無意義</string>
   <string name="delete_helper_ask_spam_other">其它</string>
-  <string name="delete_helper_ask_reason_copyright_press_photo">攝影作品</string>
-  <string name="delete_helper_ask_reason_copyright_internet_photo">來自網路的隨意照片</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">按壓照片</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">來自網路的隨機照片</string>
   <string name="delete_helper_ask_reason_copyright_logo">標誌</string>
   <string name="delete_helper_ask_reason_copyright_other">其它</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">因為這</string>
@@ -575,7 +577,12 @@
   <string name="wallpaper_set_unsuccessfully">發生錯誤，無法設定桌布</string>
   <string name="setting_wallpaper_dialog_title">設定為桌布</string>
   <string name="setting_wallpaper_dialog_message">正在設定桌布，請稍待…</string>
-  <string name="theme_default_name">預設</string>
+  <string name="theme_default_name">追蹤系統</string>
   <string name="theme_dark_name">暗黑</string>
   <string name="theme_light_name">明亮</string>
+  <string name="cannot_open_location_settings">開啟位置設定失敗，請手動打開位置</string>
+  <string name="recommend_high_accuracy_mode">為了獲得最佳結果，請選擇高精準度模式。</string>
+  <string name="ask_to_turn_location_on">打開位置？</string>
+  <string name="nearby_needs_location">附近功能需要啟用位置才能運作正常</string>
+  <string name="use_location_from_similar_image">您是否在同一地點拍攝了這兩張圖片？您要使用圖片右側的緯度/經度嗎？</string>
 </resources>

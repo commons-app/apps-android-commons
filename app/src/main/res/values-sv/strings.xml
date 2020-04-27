@@ -77,7 +77,7 @@
   <string name="gps_disabled">GPS:en är inaktiverad på denna enhet. Vill du aktivera den?</string>
   <string name="enable_gps">Aktivera GPS</string>
   <string name="contributions_subtitle_zero">Inga uppladdningar ännu</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -179,7 +179,9 @@
   <string name="title_activity_nearby">Platser i närheten</string>
   <string name="no_nearby">Inga platser i närheten hittades</string>
   <string name="warning">Varning</string>
+  <string name="duplicate_image_found">Dubblettbild hittades</string>
   <string name="upload_image_duplicate">Denna fil finns redan på Commons. Är du säker på att du vill fortsätta?</string>
+  <string name="upload">Ladda upp</string>
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
   <string name="media_detail_title">Titel</string>
@@ -253,6 +255,7 @@
   <string name="upload_problem_different_geolocation">Bilden togs på en annan plats.</string>
   <string name="upload_problem_fbmd">Var god ladda bara upp bilder som du själv har tagit. Ladda inte upp bilder som du har hittat på andra personers Facebook-konton.</string>
   <string name="upload_problem_do_you_continue">Vill du fortfarande ladda upp denna bild?</string>
+  <string name="upload_problem_image">Problem hittades i bilden</string>
   <string name="internet_downloaded">Var god ladda bara upp bilder som du själv har tagit. Ladda inte upp bilder som du har laddat ned från Internet.</string>
   <string name="give_permission">Ge behörighet</string>
   <string name="use_external_storage">Använd extern lagring</string>
@@ -381,11 +384,10 @@
   <string name="preference_author_name_toggle">Använd anpassat författarnamn</string>
   <string name="preference_author_name_toggle_summary">Använd ett anpassat författarnamn istället för ditt användarnamn när du laddar upp foton</string>
   <string name="preference_author_name">Anpassat författarnamn</string>
-  <string name="preference_author_name_summary">Det anpassade författarnamnet att använda istället för ditt användarnamn i uppladdningar</string>
   <string name="contributions_fragment">Bidrag</string>
   <string name="nearby_fragment">I närheten</string>
   <string name="notifications">Aviseringar</string>
-  <string name="archived_notifications">Aviseringar (arkiverade)</string>
+  <string name="read_notifications">Aviseringar (lästa)</string>
   <string name="display_nearby_notification">Visa avisering för i närheten</string>
   <string name="display_nearby_notification_summary">Tryck här för att se den närmaste platsen som behöver bilder</string>
   <string name="no_close_nearby">Inga platser i närheten hittades som är nära dig</string>
@@ -499,9 +501,9 @@
   <string name="no_image_reverted">Inga bilder återställdes</string>
   <string name="no_image_uploaded">Inga bilder laddades upp</string>
   <string name="no_notification">Du har inga olästa aviseringar</string>
-  <string name="no_archived_notification">Du har inga arkiverade aviseringar</string>
+  <string name="no_read_notification">Du har inga lästa aviseringar</string>
   <string name="share_logs_using">Dela loggar med</string>
-  <string name="menu_option_archived">Visa arkiverade</string>
+  <string name="menu_option_read">Visa lästa</string>
   <string name="menu_option_unread">Visa olästa</string>
   <string name="error_occurred_in_picking_images">Fel uppstod när bilder valdes ut</string>
   <string name="image_chooser_title">Välj bilder att ladda upp</string>
@@ -509,7 +511,7 @@
   <string name="images_featured_explanation">Utmärkta bilder är bilder från skickliga fotografer och illustratörer som gemenskapen på Wikimedia Commons har valt ut som bilder med den högsta kvalitetet på webbplatsen.</string>
   <string name="images_via_nearby_explanation">Bilder som har laddats upp via \"Platser i närheten\" är bilderna som laddas upp genom att upptäcka platser på kartan.</string>
   <string name="thanks_received_explanation">Denna funktion låter redigerare skicka en tackavisering till användare som gör användbara redigeringar – genom att använda en liten tacklänk på historik- eller diff-sidor.</string>
-  <string name="previous_image_title_description">Kopiera föregående titel och beskrivning</string>
+  <string name="previous_image_caption_description">Kopiera föregående titel och beskrivning</string>
   <string name="previous_button_tooltip_message">Klicka för att återanvända titeln och beskrivningen du använde i din föregående bild och ändra det för att passa din nuvarande</string>
   <string name="welcome_do_upload_content_description">Exempel på bra bilder att ladda upp på Commons</string>
   <string name="welcome_dont_upload_content_description">Exempel på bilder att inte ladda upp</string>
@@ -570,7 +572,12 @@
   <string name="wallpaper_set_unsuccessfully">Någonting gick fel. Kunde inte ändra bakgrundsbild</string>
   <string name="setting_wallpaper_dialog_title">Ange som bakgrundsbild</string>
   <string name="setting_wallpaper_dialog_message">Anger som bakgrundsbild. Var god vänta…</string>
-  <string name="theme_default_name">Standard</string>
+  <string name="theme_default_name">Följ systemet</string>
   <string name="theme_dark_name">Mörkt</string>
   <string name="theme_light_name">Ljust</string>
+  <string name="cannot_open_location_settings">Misslyckades att öppna platsinställningar. Aktivera plats manuellt</string>
+  <string name="recommend_high_accuracy_mode">För bästa resultat väljer du alternativet \"Öka precisionen\".</string>
+  <string name="ask_to_turn_location_on">Aktivera plats?</string>
+  <string name="nearby_needs_location">I närheten behöver ha plats aktiverat för att fungera ordentligt</string>
+  <string name="use_location_from_similar_image">Tog du dessa två bilder på samma plats? Vill du använda den högra bildens latitud/longitud?</string>
 </resources>

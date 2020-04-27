@@ -104,7 +104,7 @@
   <string name="menu_about">정보</string>
   <string name="about_license">위키미디어 공용 앱은 오픈 소스 애플리케이션이며 위키미디어 공동체 내의 자원봉사자에 의해 유지됩니다. 위키미디어 재단은 애플리케이션의 생성, 개발, 유지보수에 관여하지 않습니다.</string>
   <string name="about_improve">버그나 기타 제안은 &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub&lt;/a&gt;에 보고해주세요.</string>
-  <string name="about_privacy_policy">개인정보 정책</string>
+  <string name="about_privacy_policy">개인정보보호정책</string>
   <string name="about_credits">제작진</string>
   <string name="title_activity_about">정보</string>
   <string name="menu_feedback">(이메일로) 피드백 보내기</string>
@@ -124,7 +124,7 @@
   <string name="use_previous">이전의 제목과 설명을 사용하기</string>
   <string name="allow_gps">자동으로 현재 위치 가져오기</string>
   <string name="allow_gps_summary">영상의 위치 태그가 지정되지 않은 경우 현재 위치를 검색하여 영상에 현재 위치로 위치 태그를 지정하십시오. 경고: 당신의 현재 위치가 노출됩니다.</string>
-  <string name="preference_theme" fuzzy="true">야간 모드</string>
+  <string name="preference_theme">테마</string>
   <string name="license_name_cc_by_sa_four"> 저작자표시-동일조건변경허락 4.0</string>
   <string name="license_name_cc_by_four">저작자표시 4.0</string>
   <string name="license_name_cc_by_sa"> 저작자표시-동일조건변경허락 3.0</string>
@@ -182,7 +182,9 @@
   <string name="title_activity_nearby">근처의 장소</string>
   <string name="no_nearby">근처에 장소가 없습니다</string>
   <string name="warning">경고</string>
+  <string name="duplicate_image_found">중복 이미지가 있습니다</string>
   <string name="upload_image_duplicate">이 파일은 이미 공용에 존재합니다. 계속하시겠습니까?</string>
+  <string name="upload">업로드</string>
   <string name="yes">예</string>
   <string name="no">아니오</string>
   <string name="media_detail_title">제목</string>
@@ -254,6 +256,7 @@
   <string name="upload_problem_image_duplicate">이미지가 이미 공용에 있습니다.</string>
   <string name="upload_problem_different_geolocation">이 사진은 다른 위치에서 찍었습니다.</string>
   <string name="upload_problem_do_you_continue">그래도 이 사진을 업로드하시겠습니까?</string>
+  <string name="upload_problem_image">이미지에 문제가 있습니다</string>
   <string name="give_permission">권한 부여</string>
   <string name="use_external_storage">외부 저장소 사용하기</string>
   <string name="use_external_storage_summary">장치의 인앱 카메라로 찍은 사진 저장하기</string>
@@ -371,11 +374,10 @@
   <string name="preference_author_name_toggle">사용자 지정 저자 이름을 사용합니다</string>
   <string name="preference_author_name_toggle_summary">사진을 업로드하는 중에 사용자 이름 대신 사용자 지정 저자 이름을 사용합니다</string>
   <string name="preference_author_name">저자 이름 사용자 지정</string>
-  <string name="preference_author_name_summary">업로드할 때 사용자 이름 대신 사용할 사용자 지정 저자 이름</string>
   <string name="contributions_fragment">기여</string>
   <string name="nearby_fragment">근처</string>
   <string name="notifications">알림</string>
-  <string name="archived_notifications">알림 (보관됨)</string>
+  <string name="read_notifications">알림 (읽음)</string>
   <string name="display_nearby_notification">주변 알림 표시</string>
   <string name="display_nearby_notification_summary">사진이 필요한 주변 장소를 보려면 여기를 탭하세요</string>
   <string name="no_close_nearby">당신에게 가까운 주변 장소를 찾지 못했습니다</string>
@@ -404,7 +406,7 @@
   <string name="log_collection_started">로그 수집이 시작되었습니다. 이 앱을 다시 시작하고 기록을 원하는 동작을 수행한 다음 \'로그 파일 보내기\'를 다시 탭해 주십시오</string>
   <string name="deletion_reason_uploaded_by_mistake">실수로 업로드했습니다</string>
   <string name="deletion_reason_publicly_visible">공개가 되는 줄 몰랐습니다</string>
-  <string name="deletion_reason_bad_for_my_privacy">제 프라이버시에 부적절하다는 것을 인식했습니다</string>
+  <string name="deletion_reason_bad_for_my_privacy">제 개인정보에 부적절하다는 것을 인식했습니다</string>
   <string name="deletion_reason_no_longer_want_public">생각이 바뀌어서 더 이상 공개하고 싶지 않습니다</string>
   <string name="deletion_reason_not_interesting">죄송합니다. 이 사진은 백과사전의 관심 대상이 아닙니다</string>
   <string name="no_uploads">공용에 오신 것을 환영합니다!\n\n추가 버튼에 탭하여 당신의 첫 미디어를 올리십시오.</string>
@@ -447,14 +449,15 @@
   <string name="skip_image_explanation">이 버튼을 클릭하면 위키미디어 공용으로부터 최근 업로드된 다른 이미지를 제공합니다</string>
   <string name="review_image_explanation">이미지를 검토하고 위키미디어 공용의 품질을 개선할 수 있습니다.\n 4가지 검토 변수가 있습니다:\n - 이 이미지가 범위 내에 있는가? \n - 이 이미지가 저작권 규정을 준수하고 있는가? \n - 이 이미지가 올바르게 분류되어 있는가? \n - 모든 것이 문제 없다면 기여자에게 감사를 표할 수도 있습니다.</string>
   <string name="no_notification">읽지 않은 알림이 없습니다</string>
-  <string name="no_archived_notification">보관된 알림이 없습니다</string>
-  <string name="menu_option_archived">보관한 항목 보기</string>
+  <string name="no_read_notification">읽은 알림이 없습니다</string>
+  <string name="menu_option_read">읽은 항목 보기</string>
   <string name="menu_option_unread">읽지 않은 항목 보기</string>
   <string name="error_occurred_in_picking_images">이미지 선택 도중 오류가 발생했습니다</string>
   <string name="image_chooser_title">업로드할 이미지 선택</string>
   <string name="please_wait">기다려 주십시오...</string>
-  <string name="previous_image_title_description">이전의 제목 및 설명 복사</string>
+  <string name="previous_image_caption_description">이전의 제목 및 설명 복사</string>
   <string name="skip_image">이 이미지 건너뛰기</string>
+  <string name="previous_image_title_description">이전의 제목 및 설명 복사</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">다운로드를 실패했습니다!! 외장 스토리지 권한 없이 파일을 다운로드할 수 없습니다.</string>
   <string name="manage_exif_tags">EXIF 태그 관리</string>
   <string name="exif_tag_name_author">만든이</string>
@@ -492,4 +495,6 @@
   <string name="wallpaper_set_unsuccessfully">무언가 잘못되었습니다. 배경화면을 설정하지 못했습니다</string>
   <string name="setting_wallpaper_dialog_title">배경화면으로 설정</string>
   <string name="setting_wallpaper_dialog_message">배경화면을 설정 중입니다. 기다려 주십시오...</string>
+  <string name="theme_dark_name">어두움</string>
+  <string name="theme_light_name">밝음</string>
 </resources>

@@ -376,11 +376,10 @@
   <string name="preference_author_name_toggle">Користи прилагођено име аутора</string>
   <string name="preference_author_name_toggle_summary">Коришћење прилагођеног имена аутора уместо вашег корисничког имена при отпремању фотографија</string>
   <string name="preference_author_name">Прилагођено име аутора</string>
-  <string name="preference_author_name_summary">Прилагођено име аутора за коришћење уместо вашег корисничког имена у отпремањима</string>
   <string name="contributions_fragment">Доприноси</string>
   <string name="nearby_fragment">У близини</string>
   <string name="notifications">Обавештења</string>
-  <string name="archived_notifications">Обавештења (архивирана)</string>
+  <string name="read_notifications" fuzzy="true">Обавештења (архивирана)</string>
   <string name="display_nearby_notification">Прикажи обавештење у близини</string>
   <string name="display_nearby_notification_summary">Притисните овде да бисте видели најближе место којем треба слика</string>
   <string name="no_close_nearby">Нису пронађена места у близини близу вас</string>
@@ -476,9 +475,9 @@
   <string name="no_image_reverted">Нема враћених слика</string>
   <string name="no_image_uploaded">Нема отпремљених слика</string>
   <string name="no_notification">Немате непрочитаних обавештења.</string>
-  <string name="no_archived_notification">Немате архивираних обавештења</string>
+  <string name="no_read_notification" fuzzy="true">Немате архивираних обавештења</string>
   <string name="share_logs_using">Подели дневнике користећи</string>
-  <string name="menu_option_archived">Прикажи архивирано</string>
+  <string name="menu_option_read" fuzzy="true">Прикажи архивирано</string>
   <string name="menu_option_unread">Прикажи непрочитано</string>
   <string name="error_occurred_in_picking_images">Дошло је до грешке при избору слика</string>
   <string name="image_chooser_title">Одабир слика за отпремање</string>

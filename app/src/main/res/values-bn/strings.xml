@@ -81,7 +81,7 @@
   <string name="gps_disabled">GPS আপনার ডিভাইসে অক্ষম করা আছে। আপনি কি এটি সক্ষম করতে চান?</string>
   <string name="enable_gps">GPS সক্রিয় করুন</string>
   <string name="contributions_subtitle_zero">এখনো কোন আপলোড নেই</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
