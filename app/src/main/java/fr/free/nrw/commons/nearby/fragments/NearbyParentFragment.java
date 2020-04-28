@@ -1224,9 +1224,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * since grey icon may lead the users to believe that it is disabled or prohibited contribution
      */
     private void hideAllMArkers() {
-        if(currentLocationMarker==null){
-            return;
-        }
         VectorDrawableCompat vectorDrawable;
         vectorDrawable = VectorDrawableCompat.create(
                 getContext().getResources(), R.drawable.ic_custom_greyed_out_marker, getContext().getTheme());
