@@ -14,6 +14,7 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
+import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.*
 
 
 /**
@@ -127,9 +128,7 @@ class NearbyParentFragmentPresenterTest {
     fun testPlacesPopulatedForLatestLocationWhenLocationSignificantlyChanged() {
         expectMapAndListUpdate()
         nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
-        verify(nearbyParentFragmentView).disableFABRecenter();
-        verify(nearbyParentFragmentView).setProgressBarVisibility(true)
-        verify(nearbyParentFragmentView).populatePlaces(latestLocation)
+        updateMapSignificantly()
     }
 
     /**
@@ -140,6 +139,10 @@ class NearbyParentFragmentPresenterTest {
     fun testPlacesPopulatedForLatestLocationWhenLocationMapUpdated() {
         expectMapAndListUpdate()
         nearbyPresenter.updateMapAndList(LocationChangeType.MAP_UPDATED)
+        updateMapSignificantly()
+    }
+
+    fun updateMapSignificantly() {
         verify(nearbyParentFragmentView).disableFABRecenter()
         verify(nearbyParentFragmentView).setProgressBarVisibility(true)
         verify(nearbyParentFragmentView).populatePlaces(latestLocation)
@@ -343,4 +346,101 @@ class NearbyParentFragmentPresenterTest {
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
         whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
     }
+
+    @Test
+    fun testSetActionListeners() {
+        nearbyPresenter.setActionListeners(any())
+        verify(nearbyParentFragmentView).setFABPlusAction(any())
+        verify(nearbyParentFragmentView).setFABRecenterAction(any())
+    }
+
+    @Test
+    fun testBackButtonClickedWhenBottomSheetExpanded() {
+        whenever(nearbyParentFragmentView.isListBottomSheetExpanded()).thenReturn(true)
+        nearbyPresenter.backButtonClicked()
+        verify(nearbyParentFragmentView).listOptionMenuItemClicked()
+    }
+
+    @Test
+    fun testBackButtonClickedWhenDetailsBottomSheetVisible() {
+        whenever(nearbyParentFragmentView.isListBottomSheetExpanded()).thenReturn(false)
+        whenever(nearbyParentFragmentView.isDetailsBottomSheetVisible()).thenReturn(true)
+        nearbyPresenter.backButtonClicked()
+        verify(nearbyParentFragmentView).setBottomSheetDetailsSmaller()
+    }
+
+    @Test
+    fun testBackButtonClickedWhenNoSheetVisible() {
+        whenever(nearbyParentFragmentView.isListBottomSheetExpanded()).thenReturn(false)
+        whenever(nearbyParentFragmentView.isDetailsBottomSheetVisible()).thenReturn(false)
+        nearbyPresenter.backButtonClicked()
+        verify(nearbyParentFragmentView).setTabItemContributions()
+    }
+
+    @Test
+    fun testMarkerUnselected() {
+        nearbyPresenter.markerUnselected()
+        verify(nearbyParentFragmentView).hideBottomSheet();
+    }
+
+    @Test
+    fun testMarkerSelected() {
+        nearbyPresenter.markerSelected(any())
+        verify(nearbyParentFragmentView).displayBottomSheetWithInfo(any());
+    }
+
+    @Test
+    fun testOnWikidataEditSuccessful() {
+        nearbyPresenter.onWikidataEditSuccessful()
+        expectMapAndListUpdate()
+        nearbyPresenter.updateMapAndList(LocationChangeType.MAP_UPDATED)
+        updateMapSignificantly()
+    }
+
+    @Test
+    fun testOnLocationChangedSignificantly() {
+        nearbyPresenter.onLocationChangedSignificantly(latestLocation)
+        expectMapAndListUpdate()
+        nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+        updateMapSignificantly()
+    }
+
+    @Test
+    fun testOnLocationChangedSlightly() {
+        nearbyPresenter.onLocationChangedSlightly(latestLocation)
+        expectMapAndListUpdate()
+        whenever(nearbyParentFragmentView.isCurrentLocationMarkerVisible()).thenReturn(true)
+        nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
+        verify(nearbyParentFragmentView).recenterMap(latestLocation)
+    }
+
+    @Test
+    fun testOnCameraMoveWhenSearchLocationNull() {
+        NearbyController.latestSearchLocation == null
+        nearbyPresenter.onCameraMove(Mockito.mock(com.mapbox.mapboxsdk.geometry.LatLng::class.java))
+        verify(nearbyParentFragmentView).setProjectorLatLngBounds()
+        verify(nearbyParentFragmentView).setSearchThisAreaButtonVisibility(false)
+    }
+
+    @Test
+    fun testOnCameraMoveWhenNetworkConnectionNotEstablished() {
+        NearbyController.latestSearchLocation = latestLocation
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(false)
+        nearbyPresenter.onCameraMove(Mockito.mock(com.mapbox.mapboxsdk.geometry.LatLng::class.java))
+        verify(nearbyParentFragmentView).setProjectorLatLngBounds()
+        verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
+        verifyZeroInteractions(nearbyParentFragmentView)
+    }
+
+    @Test
+    fun testOnCameraMoveWhenNetworkConnectionEstablished() {
+        NearbyController.latestSearchLocation = latestLocation
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(false)
+        nearbyPresenter.onCameraMove(Mockito.mock(com.mapbox.mapboxsdk.geometry.LatLng::class.java))
+        verify(nearbyParentFragmentView).setProjectorLatLngBounds()
+        verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
+        verifyZeroInteractions(nearbyParentFragmentView)
+    }
+
+    
 }
