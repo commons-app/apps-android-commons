@@ -1,9 +1,9 @@
 package fr.free.nrw.commons.nearby
 
+import com.mapbox.mapboxsdk.annotations.Marker
 import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.location.LatLng
-import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
@@ -14,8 +14,6 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
-import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.*
-
 
 /**
  * The unit test class for NearbyParentFragmentPresenter
@@ -31,6 +29,8 @@ class NearbyParentFragmentPresenterTest {
     internal lateinit var cameraTarget: LatLng
     @Mock
     internal lateinit var selectedLabels: List<Label>
+    @Mock
+    internal lateinit var marker: Marker
 
     private lateinit var nearbyPresenter: NearbyParentFragmentPresenter
     private lateinit var mapboxCameraTarget: com.mapbox.mapboxsdk.geometry.LatLng
@@ -385,8 +385,8 @@ class NearbyParentFragmentPresenterTest {
 
     @Test
     fun testMarkerSelected() {
-        nearbyPresenter.markerSelected(any())
-        verify(nearbyParentFragmentView).displayBottomSheetWithInfo(any());
+        nearbyPresenter.markerSelected(marker)
+        verify(nearbyParentFragmentView).displayBottomSheetWithInfo(marker)
     }
 
     @Test
@@ -416,7 +416,7 @@ class NearbyParentFragmentPresenterTest {
 
     @Test
     fun testOnCameraMoveWhenSearchLocationNull() {
-        NearbyController.latestSearchLocation == null
+        NearbyController.latestSearchLocation = null
         nearbyPresenter.onCameraMove(Mockito.mock(com.mapbox.mapboxsdk.geometry.LatLng::class.java))
         verify(nearbyParentFragmentView).setProjectorLatLngBounds()
         verify(nearbyParentFragmentView).setSearchThisAreaButtonVisibility(false)
@@ -441,6 +441,4 @@ class NearbyParentFragmentPresenterTest {
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
         verifyZeroInteractions(nearbyParentFragmentView)
     }
-
-    
 }
