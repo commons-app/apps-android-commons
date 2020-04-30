@@ -141,6 +141,8 @@
   <string name="detail_panel_cats_label">Kategoriyi</string>
   <string name="detail_panel_cats_loading">Bar beno…</string>
   <string name="detail_panel_cats_none">Theba nêweçineya</string>
+  <string name="detail_caption_empty">Bınnuşte çıniyo</string>
+  <string name="detail_depiction_empty">Teswir çıniyo</string>
   <string name="detail_description_empty">Akerdenayış çıniyo</string>
   <string name="detail_discussion_empty">Mışewre çıniyo</string>
   <string name="detail_license_empty">Lisans nizaneyeno</string>
@@ -152,7 +154,9 @@
   <string name="upload">Bar ke</string>
   <string name="yes">Eya</string>
   <string name="no">Nê</string>
+  <string name="media_detail_caption">Bınnuşte</string>
   <string name="media_detail_title">Sername</string>
+  <string name="media_detail_depiction">Teswiri</string>
   <string name="media_detail_description">Şınasnayış</string>
   <string name="media_detail_discussion">Werênayış</string>
   <string name="media_detail_author">Nuştekar</string>

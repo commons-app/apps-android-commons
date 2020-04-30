@@ -88,6 +88,7 @@
     <item quantity="other">%1$d pellgargadennoù</item>
   </plurals>
   <string name="categories_not_found">N\'eus bet kavet rummad ebet o klotañ gant %1$s</string>
+  <string name="depictions_not_found">N\'eus bet kavet elfenn Wikidata ebet o klotañ gant %1$s</string>
   <string name="no_child_classes">N\'eus ket a glasoù bugale e %1$s</string>
   <string name="no_parent_classes">N\'eus ket a glasoù kerent e %1$s</string>
   <string name="depictions_image_not_found">Skeudenn ebet da zeskrivañ</string>

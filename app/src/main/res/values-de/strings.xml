@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Abijeet Patro
+* Bjarncraft
 * Envlh
 * FF11
 * Ferdinand0101
@@ -11,6 +12,7 @@
 * Pyscowicz
 * Sujan
 * Sushi
+* Tacsipacsi
 * Tobi 406
 * Ubahnverleih
 * WikiBayer
@@ -62,7 +64,7 @@
   <string name="provider_contributions">Meine hochgeladenen Dateien</string>
   <string name="menu_share">Teilen</string>
   <string name="menu_open_in_browser">Im Browser anzeigen</string>
-  <string name="share_title_hint" fuzzy="true">Titel (erforderlich)</string>
+  <string name="share_title_hint">Untertitel (erforderlich)</string>
   <string name="share_description_hint">Beschreibung</string>
   <string name="login_failed_network">Anmeldung fehlgeschlagen – Netzwerkfehler</string>
   <string name="login_failed_wrong_credentials">Anmeldung fehlgeschlagen. Bitte Benutzernamen und Passwort überprüfen.</string>
@@ -96,6 +98,7 @@
     <item quantity="other">%1$d hochgeladene Dateien</item>
   </plurals>
   <string name="categories_not_found">Die Kategorie „%1$s“ wurde nicht gefunden</string>
+  <string name="depictions_not_found">Keine Wikidata Gegenstände gefunden für %1$s</string>
   <string name="categories_skip_explanation">Füge Kategorien hinzu, um deine Bilder auf Wikimedia Commons auffindbarer zu machen.\nBeginne mit der Eingabe, um Kategorien hinzuzufügen.</string>
   <string name="categories_activity_title">Kategorien</string>
   <string name="title_activity_settings">Einstellungen</string>

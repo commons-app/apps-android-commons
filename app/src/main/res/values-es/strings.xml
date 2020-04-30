@@ -347,6 +347,7 @@
   <string name="error_loading_subcategories">Se produjo un error al cargar las subcategorías.</string>
   <string name="search_tab_title_media">Multimedia</string>
   <string name="search_tab_title_categories">Categorías</string>
+  <string name="search_tab_title_depictions">Elementos</string>
   <string name="explore_tab_title_featured">En destaque</string>
   <string name="explore_tab_title_mobile">Cargados vía móvil</string>
   <string name="successful_wikidata_edit">¡La imagen ha sido añadida en %1$s a Wikidata!</string>

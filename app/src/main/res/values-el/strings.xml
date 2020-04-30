@@ -5,6 +5,7 @@
 * Domdomegg
 * Evropi
 * Geraki
+* Giorgos456
 * Glavkos
 * KATRINE1992
 * KATRINE1993
@@ -313,6 +314,7 @@
   <string name="error_loading_subcategories">Συνέβη σφάλμα κατά τη φόρτωση υποκατηγοριών.</string>
   <string name="search_tab_title_media">Μέσα</string>
   <string name="search_tab_title_categories">Κατηγορίες</string>
+  <string name="search_tab_title_depictions">Αντικείμενα</string>
   <string name="successful_wikidata_edit" fuzzy="true">Η εικόνα προστέθηκε επιτυχώς στο %1$s στο Wikidata!</string>
   <string name="wikidata_edit_failure">Αποτυχία ενημέρωσης της αντιστοιχούσας οντότητας του Wikidata!</string>
   <string name="menu_set_wallpaper">Ρύθμιση ως ταπετσαρία</string>

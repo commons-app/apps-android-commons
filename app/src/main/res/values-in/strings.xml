@@ -6,6 +6,7 @@
 * Ilham151096
 * Iwan Novirion
 * Joseagush
+* Naufal06
 * Pebaryan
 * Rv77ax
 * William Surya Permana
@@ -55,7 +56,7 @@
   <string name="provider_contributions">Unggahan saya</string>
   <string name="menu_share">Bagikan</string>
   <string name="menu_open_in_browser">Buka di Peramban</string>
-  <string name="share_title_hint" fuzzy="true">Judul (wajib)</string>
+  <string name="share_title_hint">Takarir (Wajib)</string>
   <string name="share_description_hint">Deskripsi</string>
   <string name="login_failed_network">Tidak dapat login - kesalahan pada jaringan</string>
   <string name="login_failed_wrong_credentials">Tak berhasil masuk - silakan periksa nama pengguna dan kata sandi</string>

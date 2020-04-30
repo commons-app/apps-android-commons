@@ -64,7 +64,7 @@
   <string name="provider_contributions">Carregamentos</string>
   <string name="menu_share">Partilhar</string>
   <string name="menu_open_in_browser">Ver no navegador</string>
-  <string name="share_title_hint" fuzzy="true">Título (obrigatório)</string>
+  <string name="share_title_hint">Título (Obrigatório)</string>
   <string name="share_description_hint">Descrição</string>
   <string name="login_failed_network">Não é possível iniciar uma sessão - falha de rede</string>
   <string name="login_failed_wrong_credentials">Não é possível iniciar uma sessão - verifique o seu nome de utilizador e a palavra-passe, por favor</string>
@@ -334,6 +334,7 @@
   <string name="error_loading_subcategories">Ocorreu um erro ao carregar subcategorias.</string>
   <string name="search_tab_title_media">Multimédia</string>
   <string name="search_tab_title_categories">Categorias</string>
+  <string name="search_tab_title_depictions">Itens</string>
   <string name="explore_tab_title_featured">Destacadas</string>
   <string name="explore_tab_title_mobile">Carregada via telemóvel</string>
   <string name="successful_wikidata_edit">Imagem adicionada a %1$s na wiki Wikidata!</string>
@@ -564,6 +565,7 @@
   <string name="place_type">Tipo de local:</string>
   <string name="nearby_search_hint">Ponte, museu, hotel, etc.</string>
   <string name="you_must_reset_your_passsword">Ocorreu algo de errado com a sessão, tem de redefinir a sua palavra-passe!</string>
+  <string name="title_for_media">MULTIMÉDIA</string>
   <string name="upload_nearby_place_found_title">Foi encontrado um local próximo</string>
   <string name="upload_nearby_place_found_description">Isto é uma foto do local %1$s?</string>
   <string name="remove_bookmark">Removido dos marcadores</string>

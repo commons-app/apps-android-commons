@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Indus Asia
+* KaleemBhatti
 * Mehtab ahmed
 * Tweety
 -->
@@ -349,4 +350,5 @@
   <string name="delete_helper_ask_reason_copyright_logo">لوگو</string>
   <string name="delete_helper_ask_reason_copyright_other">ٻيو</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">ڇاڪاڻ تہ اھو آھي</string>
+  <string name="title_for_media">ميڊيا</string>
 </resources>

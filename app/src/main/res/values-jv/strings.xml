@@ -50,7 +50,7 @@
   <string name="provider_contributions">Unggahanku</string>
   <string name="menu_share">Dum</string>
   <string name="menu_open_in_browser">Deleng ing Pangluru</string>
-  <string name="share_title_hint" fuzzy="true">Sesirah (Kudu)</string>
+  <string name="share_title_hint">Sesirah (Kudu)</string>
   <string name="share_description_hint">Wedharan</string>
   <string name="login_failed_network">Ora bisa mlebu log - jaringané gagal</string>
   <string name="login_failed_wrong_credentials">Ora bisa mlebu log - priksa jeneng panganggo lan tembung wadi panjenengan</string>
