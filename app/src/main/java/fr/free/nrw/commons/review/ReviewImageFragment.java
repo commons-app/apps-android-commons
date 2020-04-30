@@ -81,18 +81,18 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
             case SPAM:
                 question = getString(R.string.review_spam);
                 explanation = getString(R.string.review_spam_explanation);
-                yesButtonText = getString(R.string.no);
-                noButtonText = getString(R.string.yes);
-                yesButton.setOnClickListener(view -> getReviewActivity()
+                yesButtonText = getString(R.string.yes);
+                noButtonText = getString(R.string.no);
+                noButton.setOnClickListener(view -> getReviewActivity()
                         .reviewController.reportSpam(requireActivity(), getReviewCallback()));
                 break;
             case COPYRIGHT:
                 enableButtons();
                 question = getString(R.string.review_copyright);
                 explanation = getString(R.string.review_copyright_explanation);
-                yesButtonText = getString(R.string.no);
-                noButtonText = getString(R.string.yes);
-                yesButton.setOnClickListener(view -> getReviewActivity()
+                yesButtonText = getString(R.string.yes);
+                noButtonText = getString(R.string.no);
+                noButton.setOnClickListener(view -> getReviewActivity()
                         .reviewController
                         .reportPossibleCopyRightViolation(requireActivity(), getReviewCallback()));
                 break;
@@ -100,9 +100,9 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 enableButtons();
                 question = getString(R.string.review_category);
                 explanation = updateCategoriesQuestion();
-                yesButtonText = getString(R.string.no);
-                noButtonText = getString(R.string.yes);
-                yesButton.setOnClickListener(view -> {
+                yesButtonText = getString(R.string.yes);
+                noButtonText = getString(R.string.no);
+                noButton.setOnClickListener(view -> {
                     getReviewActivity()
                             .reviewController
                             .reportWrongCategory(requireActivity(), getReviewCallback());
