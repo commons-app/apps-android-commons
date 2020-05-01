@@ -6,14 +6,16 @@
     android:orientation="horizontal"
     android:gravity="center">
     <TextView
-        android:id="@+id/tabContent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:text="@string/nearby_fragment"
-        android:textAllCaps="true"
-        android:gravity="center"/>
+      android:id="@+id/tabContent"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:text="@string/nearby_fragment"
+      android:textAlignment="center"
+      android:textAllCaps="true"
+      android:textColor="@android:color/white"
+      android:textSize="@dimen/description_text_size"
+      app:autoSizeTextType="uniform" />
     <ImageView
         android:layout_width="@dimen/normal_height"
         android:layout_height="@dimen/normal_height"

@@ -172,4 +172,10 @@
         <item name="android:textSize">@dimen/description_text_size</item>
     </style>
 
+    <style name="CustomTabLayoutStyle" parent="@android:style/TextAppearance.Widget.TabWidget" >
+        <item name="android:textSize">@dimen/description_text_size</item>
+        <item name="textAllCaps">true</item>
+
+    </style>
+
 </resources>
