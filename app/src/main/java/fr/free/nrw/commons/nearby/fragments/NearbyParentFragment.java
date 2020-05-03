@@ -1118,10 +1118,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param filterForAllNoneType true if we filter places with all none button
      */
     @Override
-    public void filterMarkersByLabels(List<Label> selectedLabels, boolean displayExists,
-                                      boolean displayNeedsPhoto,
-                                      boolean filterForPlaceState,
-                                      boolean filterForAllNoneType) {
+    public void filterMarkersByLabels(List<Label> selectedLabels,
+        boolean displayExists,
+        boolean displayNeedsPhoto,
+        boolean filterForPlaceState,
+        boolean filterForAllNoneType) {
 
         // Remove the previous markers before updating them
         hideAllMarkers();
@@ -1131,7 +1132,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
             // When label filter is engaged
             // then compare it against place's label
-            if ((selectedLabels.size() != 0 || !filterForPlaceState)
+            if (selectedLabels != null && (selectedLabels.size() != 0 || !filterForPlaceState)
                 && !selectedLabels.contains(place.getLabel())) {
                 continue;
             }
