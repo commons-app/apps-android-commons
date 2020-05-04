@@ -9,7 +9,7 @@
     android:layout_below="@+id/icon"
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
-    
+
     <LinearLayout
         android:id="@+id/cameraButton"
         android:layout_width="@dimen/dimen_0"
