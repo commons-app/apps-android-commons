@@ -1175,22 +1175,41 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         addPlaceToNearbyList(place);
 
         VectorDrawableCompat vectorDrawable;
-        if (isBookmarked) {
-            vectorDrawable = VectorDrawableCompat.create(
-                    getContext().getResources(), R.drawable.ic_custom_bookmark_marker, getContext().getTheme()
-            );
-        } else if (!place.pic.trim().isEmpty()) {
-            vectorDrawable = VectorDrawableCompat.create( // Means place has picture
-                    getContext().getResources(), R.drawable.ic_custom_map_marker_green, getContext().getTheme()
-            );
+        if (!place.pic.trim().isEmpty()) {
+            if (isBookmarked) {
+                vectorDrawable = VectorDrawableCompat.create(
+                    getContext().getResources(), R.drawable.ic_custom_map_marker_green_bookmarked,
+                    getContext().getTheme()
+                );
+            } else {
+                vectorDrawable = VectorDrawableCompat.create( // Means place has picture
+                    getContext().getResources(), R.drawable.ic_custom_map_marker_green,
+                    getContext().getTheme()
+                );
+            }
         } else if (!place.destroyed.trim().isEmpty()) { // Means place is destroyed
-            vectorDrawable = VectorDrawableCompat.create( // Means place has picture
-                    getContext().getResources(), R.drawable.ic_custom_map_marker_grey, getContext().getTheme()
-            );
+            if (isBookmarked) {
+                vectorDrawable = VectorDrawableCompat.create(
+                    getContext().getResources(), R.drawable.ic_custom_map_marker_gray_bookmarked,
+                    getContext().getTheme()
+                );
+            } else {
+                vectorDrawable = VectorDrawableCompat.create( // Means place has picture
+                    getContext().getResources(), R.drawable.ic_custom_map_marker_grey,
+                    getContext().getTheme()
+                );
+            }
         } else {
-            vectorDrawable = VectorDrawableCompat.create(
+            if (isBookmarked) {
+                vectorDrawable = VectorDrawableCompat.create(
+                    getContext().getResources(), R.drawable.ic_custom_map_marker_blue_bookmarked,
+                    getContext().getTheme()
+                );
+            } else {
+                vectorDrawable = VectorDrawableCompat.create(
                     getContext().getResources(), R.drawable.ic_custom_map_marker, getContext().getTheme()
-            );
+                );
+            }
         }
         for (Marker marker : mapBox.getMarkers()) {
             if (marker.getTitle() != null && marker.getTitle().equals(place.getName())) {
