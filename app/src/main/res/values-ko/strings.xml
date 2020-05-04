@@ -61,8 +61,9 @@
   <string name="provider_contributions">내 올린 파일</string>
   <string name="menu_share">공유</string>
   <string name="menu_open_in_browser">브라우저로 보기</string>
-  <string name="share_title_hint" fuzzy="true">제목 (필수)</string>
+  <string name="share_title_hint">캡션 (필수)</string>
   <string name="share_description_hint">설명</string>
+  <string name="share_caption_hint">캡션 (255자 제한)</string>
   <string name="login_failed_network">로그인할 수 없습니다 - 네트워크 오류입니다</string>
   <string name="login_failed_wrong_credentials">로그인할 수 없습니다 - 사용자 이름과 비밀번호를 확인해 주십시오</string>
   <string name="login_failed_throttled">실패한 시도가 너무 많습니다. 몇 분 후에 다시 시도하세요.</string>
@@ -322,6 +323,7 @@
   <string name="error_loading_subcategories">하위 분류를 불러오는 동안 오류가 발생했습니다.</string>
   <string name="search_tab_title_media">미디어</string>
   <string name="search_tab_title_categories">분류</string>
+  <string name="search_tab_title_depictions">항목</string>
   <string name="explore_tab_title_mobile">모바일을 통해 업로드됨</string>
   <string name="successful_wikidata_edit">위키데이터의 %1$s에 그림을 추가했습니다!</string>
   <string name="wikidata_edit_failure">일치하는 위키데이터 엔티티의 업데이트를 실패했습니다!</string>
@@ -486,6 +488,7 @@
   <string name="place_state_needs_photo">사진 필요</string>
   <string name="place_type">장소 유형:</string>
   <string name="nearby_search_hint">다리, 박물관, 호텔 등.</string>
+  <string name="title_for_media">미디어</string>
   <string name="title_app_shortcut_explore">찾아보기</string>
   <string name="title_app_shortcut_setting">설정</string>
   <string name="wallpaper_set_unsuccessfully">무언가 잘못되었습니다. 배경화면을 설정하지 못했습니다</string>

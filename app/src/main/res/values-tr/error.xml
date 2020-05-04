@@ -2,11 +2,12 @@
 <!-- Authors:
 * BaRaN6161 TURK
 * Emperyan
+* Hedda
 * Sayginer
 -->
 <resources>
   <string name="crash_dialog_title">Commons çöktü</string>
   <string name="crash_dialog_text">Hata. Bir şeyler yanlış gitti!</string>
-  <string name="crash_dialog_comment_prompt">Ne yaptığınızı bize söyleyin, ardından bize e-posta ile paylaşın. Düzeltmemize yardımcı olacak!</string>
+  <string name="crash_dialog_comment_prompt">Ne yaptığınızı bize söyleyin, ardından bizimle e-posta ile durumu paylaşın. Sorunu düzeltmemize yardımcı olacak!</string>
   <string name="crash_dialog_ok_toast">Teşekkürler!</string>
 </resources>

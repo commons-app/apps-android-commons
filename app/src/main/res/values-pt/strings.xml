@@ -437,7 +437,7 @@
   <string name="desc_language_Asia">Ásia</string>
   <string name="desc_language_Pacific">Pacífico</string>
   <string name="no_categories_selected">Não foi selecionada nenhuma categoria</string>
-  <string name="no_categories_selected_warning_desc" fuzzy="true">As imagens não categorizadas só raramente são utilizáveis. Tem a certeza de que deseja enviar sem selecionar categorias?</string>
+  <string name="no_categories_selected_warning_desc">As imagens sem categorias são utilizáveis raramente. Tem a certeza que deseja continuar sem selecionar categorias?</string>
   <string name="upload_flow_all_images_in_set">(Para todas as imagens do conjunto)</string>
   <string name="search_this_area">Pesquisar nesta área</string>
   <string name="nearby_card_permission_title">Pedido de permissões</string>
