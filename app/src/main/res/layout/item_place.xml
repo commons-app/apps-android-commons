@@ -6,6 +6,16 @@
     android:focusableInTouchMode="true"
     android:minHeight="@dimen/large_height">
 
+    <ImageView
+      android:id="@+id/bookmarkButtonImage"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="@dimen/standard_gap"
+      android:layout_marginStart="@dimen/standard_gap"
+      android:layout_marginTop="@dimen/standard_gap"
+      app:srcCompat="@drawable/ic_round_star_border_24px"
+      android:tint="?attr/rowButtonColor"/>
+
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/icon"
         android:layout_width="@dimen/dimen_40"
