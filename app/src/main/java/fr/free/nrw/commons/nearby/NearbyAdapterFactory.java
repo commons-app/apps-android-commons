@@ -41,4 +41,17 @@ public class NearbyAdapterFactory {
         rendererAdapter.notifyDataSetChanged();
         rendererAdapter.diffUpdate(newPlaceList);
     }
+
+    public void clear(RVRendererAdapter<Place> rendererAdapter){
+        rendererAdapter.clear();
+    }
+
+    public void add(Place place, RVRendererAdapter<Place> rendererAdapter){
+        rendererAdapter.add(place);
+    }
+
+    public void update(RVRendererAdapter<Place> rendererAdapter){
+        rendererAdapter.notifyDataSetChanged();
+    }
+
 }
