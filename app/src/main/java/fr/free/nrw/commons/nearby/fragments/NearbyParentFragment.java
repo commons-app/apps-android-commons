@@ -624,6 +624,18 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         adapterFactory.updateAdapterData(placeList, (RVRendererAdapter<Place>) rvNearbyList.getAdapter());
     }
 
+    public void clearNearbyList() {
+        adapterFactory.clear((RVRendererAdapter<Place>) rvNearbyList.getAdapter());
+    }
+
+    public void updateNearbyList() {
+        adapterFactory.update((RVRendererAdapter<Place>) rvNearbyList.getAdapter());
+    }
+
+    public void addPlaceToNearbyList(Place place) {
+        adapterFactory.add(place, (RVRendererAdapter<Place>) rvNearbyList.getAdapter());
+    }
+
     @Override
     public fr.free.nrw.commons.location.LatLng getLastLocation() {
         return lastKnownLocation;
@@ -1078,7 +1090,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void filterOutAllMarkers() {
-        hideAllMArkers();
+        hideAllMarkers();
+        updateNearbyList();
     }
 
     /**
@@ -1089,6 +1102,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
             updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
         }
+        updateNearbyList();
     }
 
     /**
@@ -1100,65 +1114,46 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param filterForAllNoneType true if we filter places with all none button
      */
     @Override
-    public void filterMarkersByLabels(List<Label> selectedLabels, boolean displayExists,
-                                      boolean displayNeedsPhoto,
-                                      boolean filterForPlaceState,
-                                      boolean filterForAllNoneType) {
-        if (selectedLabels.size() == 0 && filterForPlaceState) { // If nothing is selected, display all
-            // remove the previous markers before updating them
-            hideAllMArkers();
-            for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
-                if (displayExists && displayNeedsPhoto) {
-                    // Exists and needs photo
-                    if (markerPlaceGroup.getPlace().destroyed.trim().isEmpty() && markerPlaceGroup.getPlace().pic.trim().isEmpty()) {
-                        updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
-                    }
-                } else if (displayExists && !displayNeedsPhoto) {
-                    // Exists and all included needs and doesn't needs photo
-                    if (markerPlaceGroup.getPlace().destroyed.trim().isEmpty()) {
-                        updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
-                    }
-                } else if (!displayExists && displayNeedsPhoto) {
-                    // All and only needs photo
-                    if (markerPlaceGroup.getPlace().pic.trim().isEmpty()) {
-                        updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
-                    }
-                } else if (!displayExists && !displayNeedsPhoto) {
-                    // all
-                    updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
-                }
+    public void filterMarkersByLabels(List<Label> selectedLabels,
+        boolean displayExists,
+        boolean displayNeedsPhoto,
+        boolean filterForPlaceState,
+        boolean filterForAllNoneType) {
 
+        // Remove the previous markers before updating them
+        hideAllMarkers();
+
+        for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
+            Place place = markerPlaceGroup.getPlace();
+
+            // When label filter is engaged
+            // then compare it against place's label
+            if (selectedLabels != null && (selectedLabels.size() != 0 || !filterForPlaceState)
+                && !selectedLabels.contains(place.getLabel())) {
+                continue;
             }
-        } else {
-            // First remove all the markers
-            hideAllMArkers();
-            for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
-                for (Label label : selectedLabels) {
-                    if (markerPlaceGroup.getPlace().getLabel().toString().equals(label.toString())) {
 
-                        if (displayExists && displayNeedsPhoto) {
-                            // Exists and needs photo
-                            if (markerPlaceGroup.getPlace().destroyed.trim().isEmpty() && markerPlaceGroup.getPlace().pic.trim().isEmpty()) {
-                                updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
-                            }
-                        } else if (displayExists && !displayNeedsPhoto) {
-                            // Exists and all included needs and doesn't needs photo
-                            if (markerPlaceGroup.getPlace().destroyed.trim().isEmpty()) {
-                                updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
-                            }
-                        } else if (!displayExists && displayNeedsPhoto) {
-                            // All and only needs photo
-                            if (markerPlaceGroup.getPlace().pic.trim().isEmpty()) {
-                                updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
-                            }
-                        } else if (!displayExists && !displayNeedsPhoto) {
-                            // all
-                            updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
-                        }
-                    }
+            if (displayExists && displayNeedsPhoto) {
+                // Exists and needs photo
+                if (place.destroyed.trim().isEmpty() && place.pic.trim().isEmpty()) {
+                    updateMarker(markerPlaceGroup.getIsBookmarked(), place, NearbyController.currentLocation);
                 }
+            } else if (displayExists && !displayNeedsPhoto) {
+                // Exists and all included needs and doesn't needs photo
+                if (place.destroyed.trim().isEmpty()) {
+                    updateMarker(markerPlaceGroup.getIsBookmarked(), place, NearbyController.currentLocation);
+                }
+            } else if (!displayExists && displayNeedsPhoto) {
+                // All and only needs photo
+                if (place.pic.trim().isEmpty()) {
+                    updateMarker(markerPlaceGroup.getIsBookmarked(), place, NearbyController.currentLocation);
+                }
+            } else if (!displayExists && !displayNeedsPhoto) {
+                // all
+                updateMarker(markerPlaceGroup.getIsBookmarked(), place, NearbyController.currentLocation);
             }
         }
+        updateNearbyList();
     }
 
     @Override
@@ -1173,6 +1168,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param curLatLng current location
      */
     public void updateMarker(boolean isBookmarked, Place place, @Nullable fr.free.nrw.commons.location.LatLng curLatLng) {
+        addPlaceToNearbyList(place);
+
         VectorDrawableCompat vectorDrawable;
         if (isBookmarked) {
             vectorDrawable = VectorDrawableCompat.create(
@@ -1219,10 +1216,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * but it is transparent more than grey(as the name of the icon might suggest)
      * since grey icon may lead the users to believe that it is disabled or prohibited contribution
      */
+
     private void hideAllMArkers() {
-        if(currentLocationMarker==null){
-            return;
-        }
         VectorDrawableCompat vectorDrawable;
         vectorDrawable = VectorDrawableCompat.create(
                 getContext().getResources(), R.drawable.ic_custom_greyed_out_marker, getContext().getTheme());
@@ -1233,6 +1228,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
         }
         addCurrentLocationMarker(NearbyController.currentLocation);
+        clearNearbyList();
     }
 
     private void addNearbyMarkersToMapBoxMap(List<NearbyBaseMarker> nearbyBaseMarkers, Marker selectedMarker) {

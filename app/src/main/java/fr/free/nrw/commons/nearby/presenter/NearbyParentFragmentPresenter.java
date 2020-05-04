@@ -284,7 +284,11 @@ public class NearbyParentFragmentPresenter
                     nearbyParentFragmentView.setRecyclerViewAdapterItemsGreyedOut();
                     break;
                 case CHECKED:
-                    nearbyParentFragmentView.displayAllMarkers();
+                    // Despite showing all labels NearbyFilterState still should be applied
+                    nearbyParentFragmentView.filterMarkersByLabels(selectedLabels,
+                        NearbyFilterState.getInstance().isExistsSelected(),
+                        NearbyFilterState.getInstance().isNeedPhotoSelected(),
+                        filterForPlaceState, false);
                     nearbyParentFragmentView.setRecyclerViewAdapterAllSelected();
                     break;
             }
