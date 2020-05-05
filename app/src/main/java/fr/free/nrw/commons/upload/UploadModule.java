@@ -5,6 +5,7 @@ import dagger.Module;
 import fr.free.nrw.commons.upload.categories.CategoriesContract;
 import fr.free.nrw.commons.upload.categories.CategoriesPresenter;
 import fr.free.nrw.commons.upload.depicts.DepictsContract;
+import fr.free.nrw.commons.upload.depicts.DepictsPresenter;
 import fr.free.nrw.commons.upload.license.MediaLicenseContract;
 import fr.free.nrw.commons.upload.license.MediaLicensePresenter;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract;
