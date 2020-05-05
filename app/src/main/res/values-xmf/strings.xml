@@ -46,8 +46,7 @@
   <string name="provider_contributions">ჩქიმი ეხარგუეფი</string>
   <string name="menu_share">გობჟინაფა</string>
   <string name="menu_open_in_browser">ბრაუზერს გონწყუმა</string>
-  <string name="share_title_hint">დუდჯოხო (უციო)</string>
-  <string name="add_title_toast">ქორთხინთ, ქემიოწურეთ თე ფაილიშ ჯოხო</string>
+  <string name="share_title_hint" fuzzy="true">დუდჯოხო (უციო)</string>
   <string name="share_description_hint">ეჭარუა</string>
   <string name="login_failed_network">მიშულაქ ვემიხუჯინუ - რშვილიშ ჩილათა</string>
   <string name="login_failed_wrong_credentials">მიშულაქ ვემიხუჯინჷ - ქორთხინთ გეგნაჯინით თქვანი მახვარებუშ ჯოხოს დო პაროლს</string>

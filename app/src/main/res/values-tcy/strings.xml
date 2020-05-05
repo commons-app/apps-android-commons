@@ -53,8 +53,7 @@
   <string name="provider_contributions">ಎನ್ನ ದಿಂಜಯೀನಾ ವಿಚಾರೊಲು</string>
   <string name="menu_share">ಪಟ್ಟುಲೆ</string>
   <string name="menu_open_in_browser">ಬ್ರೌಸರ್‌ಡ್ ತೂಲೆ</string>
-  <string name="share_title_hint">ತರೆಬರವು (ಬೋಡಾಯಿನವು)</string>
-  <string name="add_title_toast">ದಯ ಮಾಲ್ತ್ ಈ ಫೈಲ್‌ಗ್ ಶೀರ್ಷಿಕೆನ್ ಒದಗಾಲೆ.</string>
+  <string name="share_title_hint" fuzzy="true">ತರೆಬರವು (ಬೋಡಾಯಿನವು)</string>
   <string name="share_description_hint">ವಿವರಣೆ</string>
   <string name="login_failed_network">ಲಾಗಿನ್ ಅತುಜಿ - ನೆಟ್ವರ್ಕ್ ತಿಕೊಂತಿಜ್ಜಿ</string>
   <string name="login_failed_wrong_credentials">ಲಾಗಿನ್ ಅಯರಾ ಸಾಧ್ಯ ಇಜ್ಜಿ - ಸದಸ್ಯೆರ್ನ ಪುದರ್ ಬುಕ್ಕೊ ಪ್ರವೇಸೊಪದೊನ್ ಸರಿ ಉಂಡ ತೂಲೆ.</string>

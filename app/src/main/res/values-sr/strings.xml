@@ -59,8 +59,7 @@
   <string name="provider_contributions">Моја отпремања</string>
   <string name="menu_share">Дели</string>
   <string name="menu_open_in_browser">Прикажи у прегледачу</string>
-  <string name="share_title_hint">Наслов (обавезно)</string>
-  <string name="add_title_toast">Пружите наслов за ову датотеку</string>
+  <string name="share_title_hint" fuzzy="true">Наслов (обавезно)</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Пријава није могућа — грешка на мрежи</string>
   <string name="login_failed_wrong_credentials">Пријава није могућа — проверите корисничко име и лозинку</string>
@@ -421,9 +420,7 @@
   <string name="desc_language_Asia">Азија</string>
   <string name="desc_language_Pacific">Пацифик</string>
   <string name="no_categories_selected">Категорије нису изабране</string>
-  <string name="no_categories_selected_warning_desc">Слике без категорија ретко су употребљиве. Заиста желите да пошаљете без избора категорија?</string>
-  <string name="yes_submit">Да, пошаљи</string>
-  <string name="no_go_back">Не, врати се</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">Слике без категорија ретко су употребљиве. Заиста желите да пошаљете без избора категорија?</string>
   <string name="upload_flow_all_images_in_set">(За све слике у скупу)</string>
   <string name="search_this_area">Претражите ову област</string>
   <string name="nearby_card_permission_title">Захтев за дозволу</string>
@@ -482,7 +479,6 @@
   <string name="error_occurred_in_picking_images">Дошло је до грешке при избору слика</string>
   <string name="image_chooser_title">Одабир слика за отпремање</string>
   <string name="please_wait">Сачекајте…</string>
-  <string name="previous_image_title_description">Копирај претходни наслов и опис</string>
   <string name="welcome_do_upload_content_description">Примери добрих слика за отпремање на Оставу</string>
   <string name="welcome_dont_upload_content_description">Примери слика које нису за отпремање</string>
   <string name="skip_image">Прескочи ову слику</string>

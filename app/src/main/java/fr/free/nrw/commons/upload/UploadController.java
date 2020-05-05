@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -54,7 +53,7 @@ public class UploadController {
     public ServiceConnection uploadServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(final ComponentName componentName, final IBinder binder) {
-            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder) binder).getService();
+            uploadService =  ((UploadService.UploadServiceLocalBinder) binder).getService();
             isUploadServiceConnected = true;
         }
 
@@ -208,7 +207,7 @@ public class UploadController {
      */
     private void upload(final Contribution contribution) {
         //Starts the upload. If commented out, user can proceed to next Fragment but upload doesn't happen
-        uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
+        uploadService.queue(contribution);
     }
 
 

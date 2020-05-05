@@ -6,5 +6,5 @@ package fr.free.nrw.commons.upload.structure.depictions;
 public interface UploadDepictsCallback {
     void depictsClicked(DepictedItem item);
 
-    void fetchThumbnailUrlForEntity(String entityId,int position);
+    void fetchThumbnailUrlForEntity(DepictedItem depictedItem);
 }

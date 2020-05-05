@@ -50,8 +50,7 @@
   <string name="provider_contributions">Innsendu skrárnar mínar</string>
   <string name="menu_share">Deila</string>
   <string name="menu_open_in_browser">Skoða í vafra</string>
-  <string name="share_title_hint">Titill (krafist)</string>
-  <string name="add_title_toast">Gefðu þessari skrá einhvern titil</string>
+  <string name="share_title_hint" fuzzy="true">Titill (krafist)</string>
   <string name="share_description_hint">Lýsing</string>
   <string name="login_failed_network">Innskráning mistókst - bilun í neti</string>
   <string name="login_failed_wrong_credentials">Innskráning mistókst - athugaðu notandanafn og lykilorðið þitt</string>
@@ -417,9 +416,7 @@
   <string name="desc_language_Asia">Asía</string>
   <string name="desc_language_Pacific">Kyrrahaf</string>
   <string name="no_categories_selected">Engir flokkar valdir</string>
-  <string name="no_categories_selected_warning_desc">Myndir án flokka eru sjaldnast nýtilegar. Ertu viss um að þú viljir senda þetta inn án þess að velja flokka?</string>
-  <string name="yes_submit">Já, senda inn</string>
-  <string name="no_go_back">Nei, fara til baka</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">Myndir án flokka eru sjaldnast nýtilegar. Ertu viss um að þú viljir senda þetta inn án þess að velja flokka?</string>
   <string name="upload_flow_all_images_in_set">(fyrir allar myndir í setti)</string>
   <string name="search_this_area">Leita á þessu svæði</string>
   <string name="nearby_card_permission_title">Beiðni um heimild</string>
@@ -456,7 +453,6 @@
   <string name="error_occurred_in_picking_images">Villa kom upp við að velja myndir</string>
   <string name="image_chooser_title">Veldu myndir til að senda inn</string>
   <string name="please_wait">Bíddu aðeins…</string>
-  <string name="previous_image_title_description">Afrita fyrri titil og lýsingu</string>
   <string name="skip_image">Sleppa þessari mynd</string>
   <string name="manage_exif_tags">Sýsla með EXIF-merki</string>
   <string name="exif_tag_name_author">Höfundur</string>

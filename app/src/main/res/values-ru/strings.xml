@@ -75,8 +75,7 @@
   <string name="provider_contributions">Мои загрузки</string>
   <string name="menu_share">Поделиться</string>
   <string name="menu_open_in_browser">Открыть в браузере</string>
-  <string name="share_title_hint">Название (обязательно)</string>
-  <string name="add_title_toast">Пожалуйста, укажите название этого файла</string>
+  <string name="share_title_hint" fuzzy="true">Название (обязательно)</string>
   <string name="share_description_hint">Описание</string>
   <string name="login_failed_network">Не удаётся войти — сбой сети</string>
   <string name="login_failed_wrong_credentials">Не удаётся войти — проверьте ваше имя пользователя и пароль</string>
@@ -455,9 +454,7 @@
   <string name="desc_language_Asia">Азия</string>
   <string name="desc_language_Pacific">Океания</string>
   <string name="no_categories_selected">Не выбраны категории</string>
-  <string name="no_categories_selected_warning_desc">Некатегоризованные изображения редко используются. Вы уверены, что хотите опубликовать файл без указанных категорий?</string>
-  <string name="yes_submit">Да, отправить</string>
-  <string name="no_go_back">Нет, вернуться</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">Некатегоризованные изображения редко используются. Вы уверены, что хотите опубликовать файл без указанных категорий?</string>
   <string name="upload_flow_all_images_in_set">(Для всех изображений в наборе)</string>
   <string name="search_this_area">Искать в этой области</string>
   <string name="nearby_card_permission_title">Запрос разрешения</string>
@@ -538,7 +535,6 @@
   <string name="images_featured_explanation">Избранные изображения обычно сделаны профессиональными фотографами и иллюстраторами. Такие изображения отмечены сообществом участников Викисклада как имеющие высшее качество на этом вебсайте.</string>
   <string name="images_via_nearby_explanation">Изображения, загруженные участниками, которые находили места с помощью функционала \"Места поблизости\".</string>
   <string name="thanks_received_explanation">Это функция позволяет участникам послать благодарность другим участникам за их полезные правки с помощью маленькой ссылки на странице истории страницы или странице разницы версий.</string>
-  <string name="previous_image_caption_description">Скопировать предыдущие название и описание</string>
   <string name="previous_button_tooltip_message">Нажмите, чтобы использовать название и описание, которые вы ввели для предыдущего изображения, а потом потом модифицировать их</string>
   <string name="welcome_do_upload_content_description">Примеры изображений, подходящих для загрузки на Викисклад</string>
   <string name="welcome_dont_upload_content_description">Примеры изображений, которые не следует загружать на Викисклад</string>

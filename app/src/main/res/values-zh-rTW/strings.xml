@@ -63,9 +63,10 @@
   <string name="provider_contributions">我的上傳</string>
   <string name="menu_share">分享</string>
   <string name="menu_open_in_browser">於瀏覽器檢視</string>
-  <string name="share_title_hint">標題（需要）</string>
-  <string name="add_title_toast">請提供此檔案的標題</string>
+  <string name="share_title_hint">說明（需要）</string>
+  <string name="add_caption_toast">請提供此檔案的說明</string>
   <string name="share_description_hint">描述</string>
+  <string name="share_caption_hint">說明（不能超過 255 個字元）</string>
   <string name="login_failed_network">無法登入－網路故障</string>
   <string name="login_failed_wrong_credentials">無法登入 - 請檢查您的使用者名稱與密碼</string>
   <string name="login_failed_throttled">失敗次數過多。請於幾分鐘後重試。</string>
@@ -78,6 +79,7 @@
   <string name="provider_modifications">修改</string>
   <string name="menu_upload_single">上傳</string>
   <string name="categories_search_text_hint">搜尋分類</string>
+  <string name="depicts_search_text_hint">搜尋您的媒體所描寫項目（高山、泰姬瑪哈陵、其它等等。）</string>
   <string name="menu_save_categories">儲存</string>
   <string name="refresh_button">重新整理</string>
   <string name="display_list_button">清單</string>
@@ -96,6 +98,10 @@
     <item quantity="one">%1$d 次上傳</item>
   </plurals>
   <string name="categories_not_found">沒有發現與 %1$s 相符的分類</string>
+  <string name="depictions_not_found">找不到符合%1$s的維基數據項目</string>
+  <string name="no_child_classes">%1$s沒有子類別</string>
+  <string name="no_parent_classes">%1$s沒有父類別</string>
+  <string name="depictions_image_not_found">沒有圖片的描寫</string>
   <string name="categories_skip_explanation">為您的圖片添加分類，使別人在維基共享資源更容易找到。\n\n開始輸入以添加分類。</string>
   <string name="categories_activity_title">分類</string>
   <string name="title_activity_settings">設定</string>
@@ -112,6 +118,7 @@
   <string name="menu_feedback">發送回饋 （通過電子郵件）</string>
   <string name="no_email_client">未安裝電子郵件客戶端</string>
   <string name="provider_categories">最近使用過的分類</string>
+  <string name="provider_depictions">近期使用的描寫</string>
   <string name="waiting_first_sync">等待首次同步…</string>
   <string name="no_uploads_yet">您尚未上傳過任何照片。</string>
   <string name="menu_retry_upload">重試</string>
@@ -171,6 +178,8 @@
   <string name="detail_panel_cats_label">分類</string>
   <string name="detail_panel_cats_loading">載入中…</string>
   <string name="detail_panel_cats_none">未選擇</string>
+  <string name="detail_caption_empty">沒有說明</string>
+  <string name="detail_depiction_empty">沒有描寫</string>
   <string name="detail_description_empty">無描述</string>
   <string name="detail_discussion_empty">沒有討論</string>
   <string name="detail_license_empty">不明授權</string>
@@ -189,7 +198,9 @@
   <string name="upload">上傳</string>
   <string name="yes">是</string>
   <string name="no">否</string>
+  <string name="media_detail_caption">說明</string>
   <string name="media_detail_title">標題</string>
+  <string name="media_detail_depiction">描寫</string>
   <string name="media_detail_description">描述</string>
   <string name="media_detail_discussion">討論</string>
   <string name="media_detail_author">作者</string>
@@ -251,6 +262,7 @@
   <string name="error_while_cache">在快取圖片時發生錯誤</string>
   <string name="title_info">用於本檔案的唯一描述性標題。您可以使用帶有空格的簡明語言，另外請不要包含副檔名。</string>
   <string name="description_info">請盡可能描述媒體內容：拍攝於何處？是顯示什麼事物？有什麼脈絡？請描述對象或人物。透露出一些較不易猜測的訊息，例如是風景的話，可以是一天裡的時間。如果媒體顯示出一些不正常的事物，請說明出造成不正常原因。</string>
+  <string name="caption_info">請寫入圖片的簡要描述（不能超過 255 個字元）</string>
   <string name="upload_image_too_dark">此圖片太暗，您確定您要上傳它嗎？維基共享資源僅適用對於百科全書有價值的圖片。</string>
   <string name="upload_image_blurry">此圖片太模糊，您確定您要上傳它嗎？維基共享資源僅適用對於百科全書有價值的圖片。</string>
   <string name="upload_problem_exist">此圖片有以下潛在問題：</string>
@@ -330,9 +342,11 @@
   <string name="search_recent_header">近期搜尋：</string>
   <string name="provider_searches">近期搜尋查詢</string>
   <string name="error_loading_categories">當載入分類時發生錯誤。</string>
+  <string name="error_loading_depictions">當載入描寫時發生錯誤。</string>
   <string name="error_loading_subcategories">當載入子分類時發生錯誤。</string>
   <string name="search_tab_title_media">媒體</string>
   <string name="search_tab_title_categories">分類</string>
+  <string name="search_tab_title_depictions">項目</string>
   <string name="explore_tab_title_featured">特色</string>
   <string name="explore_tab_title_mobile">透過行動設備上傳</string>
   <string name="successful_wikidata_edit">圖片已添加到維基數據上的%1$s！</string>
@@ -435,9 +449,9 @@
   <string name="desc_language_Asia">亞洲</string>
   <string name="desc_language_Pacific">太平洋</string>
   <string name="no_categories_selected">未選擇分類</string>
-  <string name="no_categories_selected_warning_desc">不帶分類的圖片很難有機會被利用到，您確定您要不選擇分類來直接提交嗎？</string>
-  <string name="yes_submit">是的，提交</string>
-  <string name="no_go_back">不，返回</string>
+  <string name="no_categories_selected_warning_desc">不帶分類的圖片很難有機會被利用到，您確定您要不選擇分類來繼續嗎？</string>
+  <string name="no_depictions_selected">沒有選擇描寫</string>
+  <string name="no_depictions_selected_warning_desc">帶有描寫的圖片會更容易被找到，並且更可能被拿來使用。您確定您要不選擇描寫來繼續嗎？</string>
   <string name="upload_flow_all_images_in_set">（在集合的所有圖片）</string>
   <string name="search_this_area">搜尋此區域</string>
   <string name="nearby_card_permission_title">權限請求</string>
@@ -516,7 +530,7 @@
   <string name="images_featured_explanation">特色圖片是出自於高水準技巧的攝影師或繪圖師，且被維基共享資源社群挑選為在站台上的最高品質圖片。</string>
   <string name="images_via_nearby_explanation">以「附近地點」所上傳的圖片，是透過找出在地圖上地點來上傳的。</string>
   <string name="thanks_received_explanation">此功能允許編輯者透過利用在歷史頁面或是差異頁面上的感謝連結，來發送感謝通知給做出有用編輯的使用者。</string>
-  <string name="previous_image_caption_description">複製先前標題與描述</string>
+  <string name="previous_image_caption_description">複製先前說明與描述</string>
   <string name="previous_button_tooltip_message">點擊來重新使用您在您的先前圖片所輸入之標題與描述，並修改來配合目前的圖片</string>
   <string name="welcome_do_upload_content_description">上傳到維基共享資源的優良圖片範例</string>
   <string name="welcome_dont_upload_content_description">未上傳範例圖片</string>
@@ -535,6 +549,7 @@
   <string name="share_via">分享應用程式透過…</string>
   <string name="image_info">圖片資訊</string>
   <string name="no_categories_found">找不到分類</string>
+  <string name="no_depiction_found">找不到描寫</string>
   <string name="upload_cancelled">已取消上傳</string>
   <string name="previous_image_title_description_not_found">前一張圖片的標題或描述沒有資料</string>
   <string name="dialog_box_text_nomination">為何應刪除%1$s？</string>
@@ -567,6 +582,9 @@
   <string name="place_type">地點類型：</string>
   <string name="nearby_search_hint">橋梁、美術館、旅館、其它。</string>
   <string name="you_must_reset_your_passsword">登入時發生一些問題，您必須重新設定您的密碼！！</string>
+  <string name="title_for_media">媒體</string>
+  <string name="title_for_child_classes">子類別</string>
+  <string name="title_for_parent_classes">父類別</string>
   <string name="upload_nearby_place_found_title">找到附近地點</string>
   <string name="upload_nearby_place_found_description">這是地點%1$s的照片嗎？</string>
   <string name="title_app_shortcut_explore">探索</string>

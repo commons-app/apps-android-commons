@@ -70,8 +70,7 @@
   <string name="provider_contributions">بارگذاری‌های من</string>
   <string name="menu_share">به اشتراک‌گذاشتن</string>
   <string name="menu_open_in_browser">مشاهده در مرورگر</string>
-  <string name="share_title_hint">عنوان (مورد نیاز)</string>
-  <string name="add_title_toast">لطفاً نامی را برای این پرونده انتخاب کنید</string>
+  <string name="share_title_hint" fuzzy="true">عنوان (مورد نیاز)</string>
   <string name="share_description_hint">توضیحات</string>
   <string name="login_failed_network">قادر به ورود نیست - شکست شبکه‌ای</string>
   <string name="login_failed_wrong_credentials">ورود به سیستم امکان پذیر نیست . لطفا نام کاربری و رمز عبور خود را بررسی کنید.</string>
@@ -417,9 +416,7 @@
   <string name="desc_language_Asia">آسیا</string>
   <string name="desc_language_Pacific">اقیانوس آرام</string>
   <string name="no_categories_selected">رده‌ای انتخاب نشده‌است</string>
-  <string name="no_categories_selected_warning_desc">تصاویر بدون رده به ندرت قابل‌استفاده هستند. آیا مطمئنید که می‌خواهید بدون انتخاب رده ادامه دهید؟</string>
-  <string name="yes_submit">بله، ارسال شود</string>
-  <string name="no_go_back">نه، به قبل بازگرد</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">تصاویر بدون رده به ندرت قابل‌استفاده هستند. آیا مطمئنید که می‌خواهید بدون انتخاب رده ادامه دهید؟</string>
   <string name="upload_flow_all_images_in_set">(برای همهٔ تصاویر موجود در مجموعه)</string>
   <string name="search_this_area">جستجوی این محدوده</string>
   <string name="nearby_card_permission_title">درخواست اجازه</string>
@@ -462,7 +459,6 @@
   <string name="menu_option_unread">مشاهده خوانده نشده ها</string>
   <string name="image_chooser_title">انتخاب تصویر برای بارگذاری</string>
   <string name="please_wait">لطفاً صبر کنید...</string>
-  <string name="previous_image_title_description">از عنوان/توضیحات پیشین استفاده کنید</string>
   <string name="welcome_dont_upload_content_description">نمونه تصاویری که برای بازگذاری مناسب نیستند</string>
   <string name="skip_image">از این تصویر صرف نظر کن</string>
   <string name="manage_exif_tags">مدیریت تگ‌های EXIF</string>
@@ -499,6 +495,7 @@
   <string name="place_state_needs_photo">تصویر لازم است</string>
   <string name="place_type">نوع مکان:</string>
   <string name="nearby_search_hint">پل، موزه، هتل، غیره.</string>
+  <string name="title_for_media">رسانه‌ها</string>
   <string name="title_app_shortcut_explore">کاوش</string>
   <string name="title_app_shortcut_bookmark">بوکمارک‌ها</string>
   <string name="title_app_shortcut_setting">تنظیمات</string>

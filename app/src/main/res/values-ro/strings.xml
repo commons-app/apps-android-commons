@@ -56,8 +56,7 @@
   <string name="provider_contributions">Încărcările mele</string>
   <string name="menu_share">Partajare</string>
   <string name="menu_open_in_browser">Afișează în navigator</string>
-  <string name="share_title_hint">Titlu</string>
-  <string name="add_title_toast">Furnizați un titlu pentru acest fișier</string>
+  <string name="share_title_hint" fuzzy="true">Titlu</string>
   <string name="share_description_hint">Descriere</string>
   <string name="login_failed_network">Autentificare nereușită – defecțiune de rețea</string>
   <string name="login_failed_wrong_credentials">Nu poți să te autentifici - verifică-ți numele de utilizator și parola</string>
@@ -421,9 +420,7 @@
   <string name="desc_language_Asia">Asia</string>
   <string name="desc_language_Pacific">Pacific</string>
   <string name="no_categories_selected">Nici o categorie selectată</string>
-  <string name="no_categories_selected_warning_desc">Imaginile fără categorii sunt rareori utilizabile. Sigur doriți să trimiteți fără a selecta categorii?</string>
-  <string name="yes_submit">Da, trimiteți</string>
-  <string name="no_go_back">Nu, du-te înapoi</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">Imaginile fără categorii sunt rareori utilizabile. Sigur doriți să trimiteți fără a selecta categorii?</string>
   <string name="upload_flow_all_images_in_set">(Pentru toate imaginile din set)</string>
   <string name="search_this_area">Căutați în acest domeniu</string>
   <string name="nearby_card_permission_title">Cerere de permisiune</string>

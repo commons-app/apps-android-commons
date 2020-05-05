@@ -64,9 +64,10 @@
   <string name="provider_contributions">Meus envios</string>
   <string name="menu_share">Compartilhar</string>
   <string name="menu_open_in_browser">Ver no navegador</string>
-  <string name="share_title_hint">Título (obrigatório)</string>
-  <string name="add_title_toast">Forneça um título para este arquivo</string>
+  <string name="share_title_hint">Legenda (obrigatório)</string>
+  <string name="add_caption_toast">Forneça uma legenda para este arquivo</string>
   <string name="share_description_hint">Descrição</string>
+  <string name="share_caption_hint">Legenda (limite de 255 caracteres)</string>
   <string name="login_failed_network">Erro ao efetuar o login - falha na rede</string>
   <string name="login_failed_wrong_credentials">Não é possível fazer o login - verifique seu nome de usuário e senha</string>
   <string name="login_failed_throttled">Muitas tentativas malsucedidas. Tente de novo daqui alguns minutos.</string>
@@ -79,6 +80,7 @@
   <string name="provider_modifications">Modificações</string>
   <string name="menu_upload_single">Enviar</string>
   <string name="categories_search_text_hint">Procurar categorias</string>
+  <string name="depicts_search_text_hint">Procure itens que sua mídia descreve (montanha, Taj Mahal, etc.)</string>
   <string name="menu_save_categories">Salvar</string>
   <string name="refresh_button">Atualizar</string>
   <string name="display_list_button">Lista</string>
@@ -99,6 +101,10 @@
     <item quantity="other">%1$d carregamentos</item>
   </plurals>
   <string name="categories_not_found">Nenhuma categoria correspondente %1$s encontrada</string>
+  <string name="depictions_not_found">Nenhum item do Wikidata correspondente a %1$s encontrado</string>
+  <string name="no_child_classes">%1$s não tem classes filho</string>
+  <string name="no_parent_classes">%1$s não tem classes pai</string>
+  <string name="depictions_image_not_found">Nenhuma imagem para representação</string>
   <string name="categories_skip_explanation">Adicione categorias para fazer suas imagens mais vistas no Wikimedia Commons. \n\nComece a digitar para adicionar categorias.\nAperte nesta mensagem (ou aperte para voltar) para pular este passo</string>
   <string name="categories_activity_title">Categorias</string>
   <string name="title_activity_settings">Configurações</string>
@@ -115,6 +121,7 @@
   <string name="menu_feedback">Enviar comentários (por e-mail)</string>
   <string name="no_email_client">Nenhum cliente de e-mail instalado</string>
   <string name="provider_categories">Categorias usadas recentemente</string>
+  <string name="provider_depictions">Representações usadas recentemente</string>
   <string name="waiting_first_sync">Aguardando pela primeira sincronização…</string>
   <string name="no_uploads_yet">Você ainda não carregou nenhuma foto.</string>
   <string name="menu_retry_upload">Repetir</string>
@@ -174,6 +181,8 @@
   <string name="detail_panel_cats_label">Categorias</string>
   <string name="detail_panel_cats_loading">Carregando…</string>
   <string name="detail_panel_cats_none">Nenhum selecionado</string>
+  <string name="detail_caption_empty">Sem legenda</string>
+  <string name="detail_depiction_empty">Nenhuma representação</string>
   <string name="detail_description_empty">Sem descrição</string>
   <string name="detail_discussion_empty">Nenhuma discussão</string>
   <string name="detail_license_empty">Licença desconhecida</string>
@@ -192,7 +201,9 @@
   <string name="upload">Enviar</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
+  <string name="media_detail_caption">Legenda</string>
   <string name="media_detail_title">Título</string>
+  <string name="media_detail_depiction">Representações</string>
   <string name="media_detail_description">Descrição</string>
   <string name="media_detail_discussion">Discussão</string>
   <string name="media_detail_author">Autor</string>
@@ -254,6 +265,7 @@
   <string name="error_while_cache">Erro durante o cache de imagens</string>
   <string name="title_info">Um título descritivo exclusivo para o arquivo, que servirá como um nome de arquivo. Você pode usar linguagem simples com espaços. Não inclua a extensão do arquivo</string>
   <string name="description_info">Por favor, descreva a mídia tanto quanto possível: onde foi tomada? O que isso mostra? Qual é o contexto? Descreva os objetos ou pessoas. Revelar informações que não podem ser facilmente adivinhadas, por exemplo, a hora do dia, se for uma paisagem. Se a mídia mostrar algo incomum, explique o que torna incomum.</string>
+  <string name="caption_info">Por favor, escreva uma breve descrição da imagem. (Limite a 255 caracteres)</string>
   <string name="upload_image_too_dark">Esta foto está muito escura, você tem certeza de que deseja enviá-la? O Wikimedia Commons é apenas para imagens com valor enciclopédico.</string>
   <string name="upload_image_blurry">Esta foto está embaçada, tem certeza de que deseja enviá-la? O Wikimedia Commons é apenas para imagens com valor enciclopédico.</string>
   <string name="upload_problem_exist">Problemas potenciais com esta imagem:</string>
@@ -333,9 +345,11 @@
   <string name="search_recent_header">Pesquisas recentes:</string>
   <string name="provider_searches">Consultas recentemente pesquisadas</string>
   <string name="error_loading_categories">Ocorreu um erro ao carregar categorias.</string>
+  <string name="error_loading_depictions">Ocorreu um erro ao carregar as representações.</string>
   <string name="error_loading_subcategories">Ocorreu um erro ao carregar subcategorias.</string>
   <string name="search_tab_title_media">Mídia</string>
   <string name="search_tab_title_categories">Categorias</string>
+  <string name="search_tab_title_depictions">Itens</string>
   <string name="explore_tab_title_featured">Destacadas</string>
   <string name="explore_tab_title_mobile">Carregado via celular</string>
   <string name="successful_wikidata_edit">Imagem adicionada a %1$s na Wikidata!</string>
@@ -438,9 +452,9 @@
   <string name="desc_language_Asia">Ásia</string>
   <string name="desc_language_Pacific">Pacífico</string>
   <string name="no_categories_selected">Nenhuma categoria selecionada</string>
-  <string name="no_categories_selected_warning_desc">Imagens sem categorias raramente são utilizáveis. Tem certeza de que deseja enviar sem selecionar categorias?</string>
-  <string name="yes_submit">Sim, enviar</string>
-  <string name="no_go_back">Não, voltar</string>
+  <string name="no_categories_selected_warning_desc">Imagens sem categorias raramente são utilizáveis. Tem certeza de que deseja continuar sem selecionar categorias?</string>
+  <string name="no_depictions_selected">Nenhuma representação selecionada</string>
+  <string name="no_depictions_selected_warning_desc">Imagens com representações são mais facilmente encontradas e mais propensas a serem usadas. Tem certeza de que deseja continuar sem selecionar representações?</string>
   <string name="upload_flow_all_images_in_set">(Para todas as imagens no conjunto)</string>
   <string name="search_this_area">Pesquisar nesta área</string>
   <string name="nearby_card_permission_title">Pedido de Permissão</string>
@@ -519,7 +533,7 @@
   <string name="images_featured_explanation">As fotografias destacadas são imagens de fotógrafos e ilustradores altamente qualificados, que a comunidade da wiki Wikimedia Commons escolheu como as de melhor qualidade do \'\'site\'\'.</string>
   <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo sítios do mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidade permite que os editores enviem uma notificação de agradecimento aos usuários que fizerem edições úteis - usando uma pequena hiperligação de agradecimento na página do historial ou na de diferenças.</string>
-  <string name="previous_image_caption_description">Copiar título e descrição anterior</string>
+  <string name="previous_image_caption_description">Copiar legendas e descrição anteriores</string>
   <string name="previous_button_tooltip_message">Clique para reutilizar o título e a descrição inseridos em sua foto anterior e modificá-lo para se adequar ao seu atual</string>
   <string name="welcome_do_upload_content_description">Exemplos de imagens que podem ser carregadas na wiki Commons</string>
   <string name="welcome_dont_upload_content_description">Exemplos de imagens que não devem ser carregadas</string>
@@ -538,6 +552,7 @@
   <string name="share_via">Compartilhar aplicativo via...</string>
   <string name="image_info">Informação da imagem</string>
   <string name="no_categories_found">Nenhuma categoria encontrada</string>
+  <string name="no_depiction_found">Nenhuma representação encontrada</string>
   <string name="upload_cancelled">Carregamento cancelado</string>
   <string name="previous_image_title_description_not_found">Não há dados para o título ou descrição da imagem anterior</string>
   <string name="dialog_box_text_nomination">Por que %1$s deve ser excluído?</string>
@@ -570,6 +585,9 @@
   <string name="place_type">Tipo de local:</string>
   <string name="nearby_search_hint">Ponte, museu, hotel etc.</string>
   <string name="you_must_reset_your_passsword">Algo deu errado com a entrada, você deve redefinir sua senha!</string>
+  <string name="title_for_media">MÍDIA</string>
+  <string name="title_for_child_classes">CLASSES INFANTIS</string>
+  <string name="title_for_parent_classes">CLASSES PAIS</string>
   <string name="upload_nearby_place_found_title">Local próximo encontrado</string>
   <string name="upload_nearby_place_found_description">Esta é uma foto desse lugar %1$s?</string>
   <string name="title_app_shortcut_explore">Explorar</string>

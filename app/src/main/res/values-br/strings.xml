@@ -53,9 +53,9 @@
   <string name="provider_contributions">Ma enporzhiadennoù</string>
   <string name="menu_share">Rannañ</string>
   <string name="menu_open_in_browser">Diskwel er meerder</string>
-  <string name="share_title_hint">Titl (ret)</string>
-  <string name="add_title_toast">Roit un titl d\'ar restr-mañ, mar plij</string>
+  <string name="share_title_hint">Alc\'hwez (ret)</string>
   <string name="share_description_hint">Deskrivadur</string>
+  <string name="share_caption_hint">Alc\'hwez (bevennet da 255 arouezenn)</string>
   <string name="login_failed_network">Ne c\'haller ket kevreañ - rouedad sac\'het</string>
   <string name="login_failed_wrong_credentials">Ne c\'haller ket kevreañ - gwiriit hoc\'h anv implijer hag ho ker-tremen mar plij</string>
   <string name="login_failed_throttled">Re a daolioù-esae. Klaskit en-dro a-benn ur pennadig amzer.</string>
@@ -88,6 +88,10 @@
     <item quantity="other">%1$d pellgargadennoù</item>
   </plurals>
   <string name="categories_not_found">N\'eus bet kavet rummad ebet o klotañ gant %1$s</string>
+  <string name="depictions_not_found">N\'eus bet kavet elfenn Wikidata ebet o klotañ gant %1$s</string>
+  <string name="no_child_classes">N\'eus ket a glasoù bugale e %1$s</string>
+  <string name="no_parent_classes">N\'eus ket a glasoù kerent e %1$s</string>
+  <string name="depictions_image_not_found">Skeudenn ebet da zeskrivañ</string>
   <string name="categories_skip_explanation">Ouzhpennit rummadoù evit ma vo aesoc\'h kavout ho skeudennoù war Wikimedia Commons.\n\nKrogit da skrivañ evit ouzhpennañ rummadoù.</string>
   <string name="categories_activity_title">Rummadoù</string>
   <string name="title_activity_settings">Arventennoù</string>
@@ -103,6 +107,7 @@
   <string name="menu_feedback">Kas ho soñj (dre bostel)</string>
   <string name="no_email_client">N\'eus bet staliet arval postel ebet</string>
   <string name="provider_categories">Rummadoù bet implijet n\'eus ket pell</string>
+  <string name="provider_depictions">Deskrivadurioù implijet nevez zo</string>
   <string name="waiting_first_sync">O c\'hortoz ar sinkroneladur kentañ…</string>
   <string name="no_uploads_yet">N\'ho peus ket enporzhiet skeudennoù c\'hoazh.</string>
   <string name="menu_retry_upload">Klask en-dro</string>
@@ -160,6 +165,7 @@
   <string name="detail_panel_cats_label">Rummadoù</string>
   <string name="detail_panel_cats_loading">O kargañ…</string>
   <string name="detail_panel_cats_none">Hini ebet diuzet</string>
+  <string name="detail_depiction_empty">Deskrivadur ebet</string>
   <string name="detail_description_empty">Deskrivadur ebet</string>
   <string name="detail_license_empty">Aotre-implijout dianav</string>
   <string name="menu_refresh">Freskaat</string>
@@ -176,6 +182,7 @@
   <string name="yes">Ya</string>
   <string name="no">Ket</string>
   <string name="media_detail_title">Titl</string>
+  <string name="media_detail_depiction">Deskrivadurioù</string>
   <string name="media_detail_description">Deskrivadur</string>
   <string name="media_detail_author">Aozer</string>
   <string name="media_detail_uploaded_date">Deiziad enporzhiañ</string>
@@ -296,8 +303,10 @@
   <string name="search_recent_header">Enklaskoù nevez :</string>
   <string name="provider_searches">Rekedoù enklask diwezhañ</string>
   <string name="error_loading_categories">Ur fazi zo bet pa\'z oc\'h bet o pellgargañ rummadoù</string>
+  <string name="error_loading_depictions">Ur fazi zo c\'hoarvezet en ur gargañ an deskrivadurioù.</string>
   <string name="search_tab_title_media" fuzzy="true">MEDIA</string>
   <string name="search_tab_title_categories" fuzzy="true">RUMMADOÙ</string>
+  <string name="search_tab_title_depictions">Elfennoù</string>
   <string name="successful_wikidata_edit" fuzzy="true">Skeudenn ouzhpennet mat da %1$s e Wikidata !</string>
   <string name="menu_set_wallpaper">Spisaat evel drekleur</string>
   <string name="quiz">Kwiz</string>
@@ -342,8 +351,11 @@
   <string name="desc_language_Asia">Azia</string>
   <string name="desc_language_Pacific">Habask</string>
   <string name="no_categories_selected">Rummad ebet diuzet</string>
-  <string name="yes_submit">Ya, kas</string>
-  <string name="no_go_back">Nann, distrei­ñ war-gil</string>
+  <string name="no_depictions_selected">Deskrivadur ebet diuzet</string>
   <string name="upload_flow_all_images_in_set">(Evit holl skeudennoù an  hollad)</string>
   <string name="nearby_card_permission_title">Goulenn aotre</string>
+  <string name="no_depiction_found">Deskrivadur ebet kavet</string>
+  <string name="title_for_media">MEDIA</string>
+  <string name="title_for_child_classes">KLASOÙ BUGALE</string>
+  <string name="title_for_parent_classes">KLASOÙ KERENT</string>
 </resources>
