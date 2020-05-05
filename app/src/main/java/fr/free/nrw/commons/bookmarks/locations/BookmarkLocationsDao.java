@@ -163,10 +163,9 @@ public class BookmarkLocationsDao {
                 location,
                 cursor.getString(cursor.getColumnIndex(Table.COLUMN_CATEGORY)),
                 builder.build(),
-                null,
+                cursor.getString(cursor.getColumnIndex(Table.COLUMN_PIC)),
                 null
         );
-        // TODO: add pic and destroyed to bookmark location dao
     }
 
     private ContentValues toContentValues(Place bookmarkLocation) {

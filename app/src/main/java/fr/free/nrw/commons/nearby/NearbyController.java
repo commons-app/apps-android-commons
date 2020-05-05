@@ -268,6 +268,9 @@ public class NearbyController {
             MarkerPlaceGroup markerPlaceGroup = iter.next();
             if (markerPlaceGroup.getPlace().getWikiDataEntityId().equals(place.getWikiDataEntityId())) {
                 iter.set(new MarkerPlaceGroup(markerPlaceGroup.getMarker(), isBookmarked, place));
+                if (!markerPlaceGroup.getPlace().pic.trim().isEmpty() && isBookmarked) {
+                    Log.d("deneme52","pic not empty and bookmarked:"+place.name);
+                }
             }
         }
     }
