@@ -67,8 +67,7 @@
   <string name="provider_contributions">Moje obrázky</string>
   <string name="menu_share">Sdílet</string>
   <string name="menu_open_in_browser">Zobrazit v prohlížeči</string>
-  <string name="share_title_hint">Název (povinný)</string>
-  <string name="add_title_toast">Vložte prosím název tohoto souboru</string>
+  <string name="share_title_hint" fuzzy="true">Název (povinný)</string>
   <string name="share_description_hint">Popis</string>
   <string name="login_failed_network">Nelze se přihlásit - selhání sítě</string>
   <string name="login_failed_wrong_credentials">Není možné se přihlásit – zkontrolujte své uživatelské jméno a heslo</string>
@@ -193,6 +192,7 @@
   <string name="upload_image_duplicate">Tento soubor již na Commons existuje. Jste si jist, že chcete pokračovat?</string>
   <string name="yes">Ano</string>
   <string name="no">Ne</string>
+  <string name="media_detail_caption">Titulek</string>
   <string name="media_detail_title">Název</string>
   <string name="media_detail_description">Popis</string>
   <string name="media_detail_discussion">Diskuse</string>
@@ -438,9 +438,7 @@
   <string name="desc_language_Asia">Asie</string>
   <string name="desc_language_Pacific">Tichomoří (Pacifik)</string>
   <string name="no_categories_selected">Nebyly vybrány žádné kategorie</string>
-  <string name="no_categories_selected_warning_desc">Obrázky bez kategorií jsou používány jen zřídka. Opravdu chcete nahrát obrázek bez výběru kategorií?</string>
-  <string name="yes_submit">Ano, nahrát</string>
-  <string name="no_go_back">Ne, vrátit se zpět</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">Obrázky bez kategorií jsou používány jen zřídka. Opravdu chcete nahrát obrázek bez výběru kategorií?</string>
   <string name="upload_flow_all_images_in_set">(Pro všechny snímky v sadě)</string>
   <string name="search_this_area">Prohledat tuto oblast</string>
   <string name="nearby_card_permission_title">Je požadováno oprávnění</string>
@@ -518,7 +516,6 @@
   <string name="images_featured_explanation">Nejlepší obrázky jsou soubory od vysoce zkušených fotografů a ilustrátorů, které vybrala komunita Wikimedia Commons jako jedny z nejkvalitnějších.</string>
   <string name="images_via_nearby_explanation">Obrázky nahrané přes Poblíž jsou obrázky, které jsou nahrané díky objevování míst na mapě.</string>
   <string name="thanks_received_explanation">Tato funkce umožňuje uživatelům poslat poděkování za užitečné editace – použitím odkazu poděkovat v historii stránky anebo na stránce rozdílu mezi revizemi.</string>
-  <string name="previous_image_title_description">Kopírovat předchozí název a popis</string>
   <string name="previous_button_tooltip_message">Kliknutím znovu použijete název a popis, který jste zadali v předcházejícím obrázku a upravíte jej tak, aby vyhovoval aktuálnímu obrázku</string>
   <string name="welcome_do_upload_content_description">Příklady dobrých obrázků k nahrání na Commons</string>
   <string name="welcome_dont_upload_content_description">Příklady obrázků, které byste neměli nahrávat</string>

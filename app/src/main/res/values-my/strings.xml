@@ -47,8 +47,7 @@
   <string name="provider_contributions">မိမိ တင်ထားသည်များ</string>
   <string name="menu_share">မျှဝေ</string>
   <string name="menu_open_in_browser">ဘရောက်ဆာတွင် ကြည့်ရန်</string>
-  <string name="share_title_hint">ခေါင်းစဉ် (လိုအပ်သည်)</string>
-  <string name="add_title_toast">ခေါင်းစဉ်</string>
+  <string name="share_title_hint" fuzzy="true">ခေါင်းစဉ် (လိုအပ်သည်)</string>
   <string name="share_description_hint">ဖော်ပြချက်</string>
   <string name="login_failed_network">လော့အင် မဝင်နိုင်ပါ - ကွန်ရက် အမှား</string>
   <string name="login_failed_wrong_credentials">လော့အင် မဝင်နိုင်ပါ - အသုံးပြုသူအမည်နှင့် စကားဝှက်ကို စစ်ဆေးပါ</string>
@@ -319,8 +318,6 @@
   <string name="desc_language_Asia">အာရှ</string>
   <string name="desc_language_Pacific">ပစိဖိတ်</string>
   <string name="no_categories_selected">ကဏ္ဍများ မရွေးချယ်ထားပါ</string>
-  <string name="yes_submit">ဟုတ်ကဲ့ ထည့်သွင်းမည်</string>
-  <string name="no_go_back">ဟင်းအင်း၊ ပြန်သွားမည်</string>
   <string name="search_this_area">ဤဧရိယာကို ရှာဖွေပါ</string>
   <string name="nearby_card_permission_title">ခွင့်ပြုချက် တောင်းခံရန်</string>
   <string name="never_ask_again">နောက်တခါ ထပ်မမေးပါနှင့်</string>
@@ -350,7 +347,6 @@
   <string name="no_notification">မဖတ်ရသေးသော အသိပေးချက်များ မရှိပါ</string>
   <string name="no_read_notification" fuzzy="true">မော်ကွန်းတင်ပြီးသော အသိပေးချက်များ မရှိပါ</string>
   <string name="please_wait">ကျေးဇူးပြု၍ ခဏစောင့်ပါ...</string>
-  <string name="previous_image_title_description">ယခင် ခေါင်းစဉ်/ဖော်ပြချက် မိတ္တူကူးရန်</string>
   <string name="welcome_dont_upload_content_description">နမူနာရုပ်ပုံများ အက်ပလုပ်တင်ရန် မဟုတ်ပါ</string>
   <string name="skip_image">ဤရုပ်ပုံအား ကျော်သွားမည်</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">ဒေါင်းလုဒ် မအောင်မြင်ပါ။ ပြင်ပသိုလှောင်မှုခွင့်ပြုချက်မရှိဘဲ ဖိုင်ဒေါင်းလုဒ်မဆွဲနိုင်ပါ။</string>

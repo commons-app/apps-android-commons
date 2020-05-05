@@ -52,7 +52,6 @@
   <string name="menu_share">Deli</string>
   <string name="menu_open_in_browser">Prikaži u pregledaču</string>
   <string name="share_title_hint" fuzzy="true">Naslov</string>
-  <string name="add_title_toast">Pružite naslov za ovu datoteku</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Prijava nije moguća — greška na mreži</string>
   <string name="login_failed_wrong_credentials">Prijava nije moguća — proverite svoje korisničko ime i lozinku</string>

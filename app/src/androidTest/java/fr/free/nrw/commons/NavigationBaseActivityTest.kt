@@ -1,5 +1,6 @@
 package fr.free.nrw.commons
 
+import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.contrib.DrawerActions
 import androidx.test.espresso.contrib.NavigationViewActions
@@ -32,14 +33,24 @@ class NavigationBaseActivityTest {
         // Bookmarks
         openNavigationDrawerAndNavigateTo(R.id.action_bookmarks)
 
-        // About
-        openNavigationDrawerAndNavigateTo(R.id.action_about)
+        // Reviews
+        openNavigationDrawerAndNavigateTo(R.id.action_review)
 
         // Settings
         openNavigationDrawerAndNavigateTo(R.id.action_settings)
 
+        // About
+        openNavigationDrawerAndNavigateTo(R.id.action_about)
+
+        // Tutorial
+        openNavigationDrawerAndNavigateTo(R.id.action_introduction)
+        Espresso.pressBack()
+
         // Achievements
         openNavigationDrawerAndNavigateTo(R.id.action_login)
+
+        // Feedback
+        openNavigationDrawerAndNavigateTo(R.id.action_feedback)
     }
 
     private fun openNavigationDrawerAndNavigateTo(menuItemId: Int) {
@@ -47,7 +58,7 @@ class NavigationBaseActivityTest {
         UITestHelper.sleep(500)
         onView(withId(R.id.navigation_view)).perform(NavigationViewActions.navigateTo(menuItemId))
     }
-
+  
     @Test
     fun orientationChange() {
         UITestHelper.changeOrientation(activityRule)

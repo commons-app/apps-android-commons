@@ -54,8 +54,7 @@
   <string name="provider_contributions">Miaj alŝutoj</string>
   <string name="menu_share">Konigi</string>
   <string name="menu_open_in_browser">Vidi en retumilo</string>
-  <string name="share_title_hint">Titolo (deviga)</string>
-  <string name="add_title_toast">Bonvolu doni titolon al ĉi tiu dosiero</string>
+  <string name="share_title_hint" fuzzy="true">Titolo (deviga)</string>
   <string name="share_description_hint">Priskribo</string>
   <string name="login_failed_network">Ne eblas ensaluti. Estas problemo pri la loka reto.</string>
   <string name="login_failed_wrong_credentials">Ne eblas ensaluti. Bonvolu kontroli viajn uzantnomon kaj pasvorton</string>
@@ -424,9 +423,7 @@
   <string name="desc_language_Asia">Azio</string>
   <string name="desc_language_Pacific">Pacifiko</string>
   <string name="no_categories_selected">Neniu Elektita Kategorio</string>
-  <string name="no_categories_selected_warning_desc">Bildo sen kategorioj estas malofte uzebla. Ĉu vi nepre volas aldoni sen elekti kategoriojn?</string>
-  <string name="yes_submit">Jes, Sendi</string>
-  <string name="no_go_back">Ne, Reen</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">Bildo sen kategorioj estas malofte uzebla. Ĉu vi nepre volas aldoni sen elekti kategoriojn?</string>
   <string name="upload_flow_all_images_in_set">(Je ĉiuj bildoj en aro)</string>
   <string name="search_this_area">Serĉi ĉi tiun areon</string>
   <string name="nearby_card_permission_title">Peto por Permeso</string>
@@ -504,7 +501,6 @@
   <string name="images_featured_explanation">Elstaraj bildoj estas tiuj bildoj far tre spertaj fotografistoj kaj ilustristoj, kiujn la komunumo de Vikimedia Komunejo elektis kiel iujn de la plej alta kvalito en la retejo.</string>
   <string name="images_via_nearby_explanation">Bildoj Alŝutitaj per Apudaj lokoj estas bildoj alŝutitaj per trovado de lokoj sur la mapo.</string>
   <string name="thanks_received_explanation">Tiu funkcio ebligas sendi Dankantan sciigon al farinto de utila redakto – per malgranda dankiga ligilo ĉe la paĝo de historio aŭ diferenco.</string>
-  <string name="previous_image_caption_description">Kopii antaŭajn titolon &amp; priskribon</string>
   <string name="previous_button_tooltip_message">Alklaku por reuzi la titolon kaj priskribon vi enigis por via antaŭa bildo kaj modifi ĝin por via aktuala bildo</string>
   <string name="welcome_do_upload_content_description">Ekzemploj de alŝutindaj bildoj por Komunejo</string>
   <string name="welcome_dont_upload_content_description">Ekzemploj de ne alŝutindaj bildoj</string>

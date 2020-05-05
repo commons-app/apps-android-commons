@@ -51,8 +51,7 @@
   <string name="provider_contributions">मेरा उर्ध्वभरणहरू</string>
   <string name="menu_share">बाड्ने</string>
   <string name="menu_open_in_browser">ब्राउजरमा हेर्ने</string>
-  <string name="share_title_hint">शीर्षक (आवश्यक)</string>
-  <string name="add_title_toast">कृपया यस फाइलकाे लागि शीर्षक प्रदान गर्नुहोस्</string>
+  <string name="share_title_hint" fuzzy="true">शीर्षक (आवश्यक)</string>
   <string name="share_description_hint">वर्णन</string>
   <string name="login_failed_network">प्रवेश गर्न असमर्थ - जडान खराबी</string>
   <string name="login_failed_wrong_credentials">प्रव्रश गर्न असमर्थ - कृपया तपाईको प्रयोगकर्ता नाम र पासवर्ड जाँच गर्नुहोस्</string>
@@ -274,7 +273,6 @@
   <string name="desc_language_Asia">एसिया</string>
   <string name="desc_language_Pacific">प्रशान्त</string>
   <string name="no_categories_selected">कुनैपनि श्रेणीहरू छानिएका छैनन्</string>
-  <string name="yes_submit">हो, बुझाउनुहोस्</string>
   <string name="search_this_area">यस क्षेत्रमा खोज्नुहोस्</string>
   <string name="nearby_card_permission_title">अनुमति अनुरोध</string>
   <string name="nominate_for_deletion_done">सम्पन्न</string>

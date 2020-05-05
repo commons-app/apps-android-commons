@@ -62,8 +62,7 @@
   <string name="provider_contributions">Omat tallennukset</string>
   <string name="menu_share">Jaa</string>
   <string name="menu_open_in_browser">Näytä selaimessa</string>
-  <string name="share_title_hint">Otsikko (Vaaditaan)</string>
-  <string name="add_title_toast">Anna tälle tiedostolle otsikko</string>
+  <string name="share_title_hint" fuzzy="true">Otsikko (Vaaditaan)</string>
   <string name="share_description_hint">Kuvaus</string>
   <string name="login_failed_network">Kirjautuminen epäonnistui - verkkovirhe</string>
   <string name="login_failed_wrong_credentials">Kirjautuminen epäonnistui - tarkista käyttäjänimesi ja salasanasi</string>
@@ -401,7 +400,6 @@
   <string name="desc_language_Asia">Aasia</string>
   <string name="desc_language_Pacific">Tyynenmeren alue</string>
   <string name="no_categories_selected">Luokkia ei valittu</string>
-  <string name="no_go_back">Ei, palaa takaisin</string>
   <string name="search_this_area">Hae tältä alueelta</string>
   <string name="nearby_card_permission_explanation">Haluaisitko, että käytämme nykyistä sijaintiasi näyttääksemme lähimmät paikat, jotka tarvitsevat kuvia?</string>
   <string name="never_ask_again">Älä kysy tätä uudelleen</string>

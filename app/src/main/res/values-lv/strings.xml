@@ -41,7 +41,7 @@
   <string name="provider_contributions">Manas augsupielades</string>
   <string name="menu_share">Dalīties</string>
   <string name="menu_open_in_browser">Skatīt pārlūkprogrammā</string>
-  <string name="share_title_hint">Nosaukums (obligāts)</string>
+  <string name="share_title_hint" fuzzy="true">Nosaukums (obligāts)</string>
   <string name="share_description_hint">Apraksts</string>
   <string name="login_failed_blocked">Atvainojiet, šis lietotājs tika bloķēts uz Commons</string>
   <string name="login_failed_generic">Pieteikšanās neizdevās</string>
@@ -178,8 +178,6 @@
   <string name="desc_language_Middle_East">Vidējie Austrumi</string>
   <string name="desc_language_Africa">Āfrika</string>
   <string name="desc_language_Asia">Āzija</string>
-  <string name="yes_submit">Jā, iesniegt</string>
-  <string name="no_go_back">Nē, doties atpakaļ</string>
   <string name="search_this_area">Meklēt šajā apgabalā</string>
   <string name="nearby_card_permission_title">Atļaujas pieprasījums</string>
   <string name="never_ask_again">Nekad vairs šo nejautāt</string>

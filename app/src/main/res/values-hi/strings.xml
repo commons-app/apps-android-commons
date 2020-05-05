@@ -66,8 +66,7 @@
   <string name="provider_contributions">मेरे अपलोड</string>
   <string name="menu_share">साझा करें</string>
   <string name="menu_open_in_browser">ब्राउज़र में देखें</string>
-  <string name="share_title_hint">शीर्षक (आवश्यक)</string>
-  <string name="add_title_toast">कृपया उचित शीर्षक प्रदान करें</string>
+  <string name="share_title_hint" fuzzy="true">शीर्षक (आवश्यक)</string>
   <string name="share_description_hint">विवरण</string>
   <string name="login_failed_network">प्रवेश नहीं हो रहा - नेटवर्क विफल</string>
   <string name="login_failed_wrong_credentials">लॉगिन विफल - कृपया अपना यूज़रनेम व पासवर्ड की जाँच करें</string>
@@ -380,9 +379,7 @@
   <string name="desc_language_Asia">एशिया</string>
   <string name="desc_language_Pacific">प्रशांत</string>
   <string name="no_categories_selected">कोई श्रेणी नहीं चुनी</string>
-  <string name="no_categories_selected_warning_desc">बिना श्रेणियों के चित्र बहुत कम उपयोगी होते हैं। क्या आप सचमुच बिना श्रेणी चुने चित्र जमा करना चाहते हैं?</string>
-  <string name="yes_submit">हाँ, जमा करें</string>
-  <string name="no_go_back">नहीं, पीछे जाएँ</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">बिना श्रेणियों के चित्र बहुत कम उपयोगी होते हैं। क्या आप सचमुच बिना श्रेणी चुने चित्र जमा करना चाहते हैं?</string>
   <string name="upload_flow_all_images_in_set">(सेट के सभी चित्रों के लिये)</string>
   <string name="search_this_area">इस क्षेत्र में ढूंढें</string>
   <string name="nearby_card_permission_title">स्वीकृति अनुरोध</string>

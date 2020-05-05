@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload.depicts;
 
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
+import org.jetbrains.annotations.NotNull;
 import timber.log.Timber;
 
 
@@ -66,6 +68,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         init();
+        presenter.getDepictedItems().observe(getViewLifecycleOwner(), this::setDepictsList);
     }
 
     /**
@@ -125,9 +128,11 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     @Override
     public void showError(Boolean value) {
-        if (value)
-        depictsSearchContainer.setError(getString(R.string.no_depiction_found));
-        else depictsSearchContainer.setErrorEnabled(false);
+        if (value) {
+            depictsSearchContainer.setError(getString(R.string.no_depiction_found));
+        } else {
+            depictsSearchContainer.setErrorEnabled(false);
+        }
     }
 
     @Override
@@ -139,13 +144,24 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         }
     }
 
-    /**
-     * Set thumbnail image for depicted item
-     */
     @Override
-    public void onImageUrlFetched(String response, int position) {
-        adapter.getItem(position).setImageUrl(response);
-        adapter.notifyItemChanged(position);
+    public void onUrlFetched(@NotNull DepictedItem depictedItem, @NotNull String url) {
+        final Pair<DepictedItem, Integer> itemAndPosition = returnItemAndPosition(depictedItem);
+        if (itemAndPosition != null) {
+            itemAndPosition.first.setImageUrl(url);
+            adapter.notifyItemChanged(itemAndPosition.second);
+        }
+    }
+
+    @Nullable
+    private Pair<DepictedItem,Integer> returnItemAndPosition(@NotNull DepictedItem depictedItem) {
+        for (int i = 0; i < adapter.getItemCount(); i++) {
+            final DepictedItem item = adapter.getItem(i);
+            if(item.getId().equals(depictedItem.getId())){
+                return new Pair<>(item, i);
+            }
+        }
+        return null;
     }
 
     @OnClick(R.id.depicts_next)
@@ -167,8 +183,8 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      * Fetch thumbnail for the given entityId at the given position
      */
     @Override
-    public void fetchThumbnailUrlForEntity(String entityId, int position) {
-        presenter.fetchThumbnailForEntityId(entityId,position);
+    public void fetchThumbnailUrlForEntity(DepictedItem depictedItem) {
+        presenter.fetchThumbnailForEntityId(depictedItem);
     }
 
     /**

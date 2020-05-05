@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Aue Nai
+* Htawmonzel
 -->
 <resources>
+  <string name="crash_dialog_title">ကောမ်မောန် ဇီုကပိုက်</string>
+  <string name="crash_dialog_text">တင်စၟတ် - မွဲမွဲဒၞာဲ ဗၠေတ်ဒၟံင်!</string>
+  <string name="crash_dialog_comment_prompt">မုမၞးမပဒၟံင်ဂှ် လဴကဵုပိုယ် နကဵုအဳမေဝ်ညိ။ မလဴကဵုဗီုဏအ်ဂှ် ဒှ်အရာ မရီုပိုယ် သွက်ဂွံကလေင်ပလေဝ် ပခိုဟ်ရ။</string>
   <string name="crash_dialog_ok_toast">တင်ဂုန်ရအဴ!</string>
 </resources>

@@ -52,7 +52,6 @@
   <string name="menu_share">सहभाग करा</string>
   <string name="menu_open_in_browser">न्याहाळकात उघडा</string>
   <string name="share_title_hint" fuzzy="true">शीर्षक</string>
-  <string name="add_title_toast">कृपया या फाईलसाठी शीर्षक प्रदान करा</string>
   <string name="share_description_hint">वर्णन</string>
   <string name="login_failed_network">सनोंद प्रवेश अशक्य - नेटवर्क नाही</string>
   <string name="login_failed_throttled">अनेक अयशस्वी प्रयत्न.काही मिनीटांनंतर पुन्हा प्रयत्न करा.</string>

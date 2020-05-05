@@ -51,8 +51,7 @@
   <string name="provider_contributions">ჩემი ატვირთვები</string>
   <string name="menu_share">გაზიარება</string>
   <string name="menu_open_in_browser">ბრაუზერში გახსნა</string>
-  <string name="share_title_hint">სათაური (საჭიროა)</string>
-  <string name="add_title_toast">გთხოვთ, მიუთითოთ სათაური ამ ფაილისთვის</string>
+  <string name="share_title_hint" fuzzy="true">სათაური (საჭიროა)</string>
   <string name="share_description_hint">აღწერა</string>
   <string name="login_failed_network">შესვლა ვერ ხერხდება - ქსელის შეცდომა</string>
   <string name="login_failed_wrong_credentials">შესვლა შეუძლებელია - გთხოვთ შეამოწმოთ თქვენი მომხმარებლის სახელი და პაროლი</string>
@@ -330,8 +329,6 @@
   <string name="desc_language_Asia">აზია</string>
   <string name="desc_language_Pacific">ოკეანეთი</string>
   <string name="no_categories_selected">კატეგორია არ არის არჩეული</string>
-  <string name="yes_submit">დიახ, გაგზავნა</string>
-  <string name="no_go_back">არა, უკან დაბრუნება</string>
   <string name="nearby_card_permission_title">ნებართვის თხოვნა</string>
   <string name="nominate_for_deletion_done">შესრულდა</string>
   <string name="notsure">არ ვიცი</string>

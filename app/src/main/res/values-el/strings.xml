@@ -5,6 +5,7 @@
 * Domdomegg
 * Evropi
 * Geraki
+* Giorgos456
 * Glavkos
 * KATRINE1992
 * KATRINE1993
@@ -62,8 +63,7 @@
   <string name="provider_contributions">Οι επιφορτώσεις μου</string>
   <string name="menu_share">Κοινοποίηση</string>
   <string name="menu_open_in_browser">Προβολή στον περιηγητή</string>
-  <string name="share_title_hint">Τίτλος (Υποχρεωτικό)</string>
-  <string name="add_title_toast">Παρακαλώ παρέχετε ένα τίτλο για αυτό το αρχείο</string>
+  <string name="share_title_hint" fuzzy="true">Τίτλος (Υποχρεωτικό)</string>
   <string name="share_description_hint">Περιγραφή</string>
   <string name="login_failed_network">Δεν είναι δυνατή η σύνδεση - αποτυχία του δικτύου</string>
   <string name="login_failed_wrong_credentials">Αποτυχία σύνδεσης - παρακαλώ ελέγξτε το όνομα χρήστη και τον κωδικό σας</string>
@@ -314,6 +314,7 @@
   <string name="error_loading_subcategories">Συνέβη σφάλμα κατά τη φόρτωση υποκατηγοριών.</string>
   <string name="search_tab_title_media">Μέσα</string>
   <string name="search_tab_title_categories">Κατηγορίες</string>
+  <string name="search_tab_title_depictions">Αντικείμενα</string>
   <string name="successful_wikidata_edit" fuzzy="true">Η εικόνα προστέθηκε επιτυχώς στο %1$s στο Wikidata!</string>
   <string name="wikidata_edit_failure">Αποτυχία ενημέρωσης της αντιστοιχούσας οντότητας του Wikidata!</string>
   <string name="menu_set_wallpaper">Ρύθμιση ως ταπετσαρία</string>
@@ -398,9 +399,7 @@
   <string name="desc_language_Africa">Αφρική</string>
   <string name="desc_language_Asia">Ασία</string>
   <string name="desc_language_Pacific">Ειρηνικός</string>
-  <string name="no_categories_selected_warning_desc">Εικόνες χωρίς κατηγορίες χρησιμοποιούνται σπάνια. Θέλετε πράγματι να στείλετε δίχως να επιλέξετε κατηγορίες?</string>
-  <string name="yes_submit">Ναι, υποβολή</string>
-  <string name="no_go_back">Όχι, Επιστροφή</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">Εικόνες χωρίς κατηγορίες χρησιμοποιούνται σπάνια. Θέλετε πράγματι να στείλετε δίχως να επιλέξετε κατηγορίες?</string>
   <string name="review_thanks_yes_button_text">Ναι, γιατί όχι</string>
   <string name="review_thanks_no_button_text">Επόμενη εικόνα</string>
   <string name="no_image">Δεν χρησιμοποιούνται εικόνες</string>

@@ -10,10 +10,11 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadController;
-import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.UploadItem;
+import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.structure.depictions.DepictModel;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -265,7 +266,7 @@ public class UploadRepository {
      * @return
      */
 
-    public Observable<DepictedItem> searchAllEntities(String query) {
+    public Flowable<List<DepictedItem>> searchAllEntities(String query) {
         return depictModel.searchAllEntities(query);
     }
 

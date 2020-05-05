@@ -62,8 +62,7 @@
   <string name="provider_contributions">Feltöltéseim</string>
   <string name="menu_share">Megosztás</string>
   <string name="menu_open_in_browser">Megtekintés böngészőben</string>
-  <string name="share_title_hint">Cím (kötelező)</string>
-  <string name="add_title_toast">Kérlek, adj címet a fájlnak</string>
+  <string name="share_title_hint">Képaláírás (kötelező)</string>
   <string name="share_description_hint">Leírás</string>
   <string name="login_failed_network">Nem lehet bejelentkezni - hálózati hiba</string>
   <string name="login_failed_wrong_credentials">Nem sikerült bejelentkezni – kérlek, ellenőrizd a felhasználónevedet és a jelszavadat</string>
@@ -106,7 +105,7 @@
   <string name="menu_about">Névjegy</string>
   <string name="about_license">A Wikimedia Commons applikáció egy nyílt forráskódú szoftver, amit a Wikimedia-közösség önkéntesei készítettek és tartanak karban. A Wikimédia Alapítvány nem vesz részt az applikáció megalkotásában, fejlesztésében és üzemeltetésében.</string>
   <string name="about_improve">Nyiss egy új &lt;a href=\"%1$s\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Adatvédelmi irányelvek&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Adatvédelmi irányelvek</string>
   <string name="about_credits" fuzzy="true">&lt;u&gt;Köszönetnyilvánítás&lt;/u&gt;</string>
   <string name="title_activity_about">Névjegy</string>
   <string name="menu_feedback">Visszajelzés küldése (e-mailben)</string>
@@ -123,7 +122,7 @@
   <string name="media_upload_policy">A kép feltöltésével kijelentem, hogy ez a saját munkám és nem tartalmaz jogvédett anyagot, nem szelfi és megfelel a&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons irányelveinek&lt;/a&gt;.</string>
   <string name="menu_download">Letöltés</string>
   <string name="preference_license">Alapértelmezett licenc</string>
-  <string name="use_previous" fuzzy="true">Előző cím/leírás használata</string>
+  <string name="use_previous">Előző cím és leírás használata</string>
   <string name="allow_gps">Automatikusan megkapja a jelenlegi helyet</string>
   <string name="allow_gps_summary">Ha a kép nem földrajzi címkézett, lekéri a jelenlegi helyet és ellátja a képet földrajzi címkével. Figyelem: ez felfedheti a tartózkodási helyedet.</string>
   <string name="preference_theme">Téma</string>
@@ -167,7 +166,7 @@
   <string name="welcome_copyright_subtext">Kerüld az internetről származó szerzői joggal védett anyagokat, valamint a posztereket, könyvborítókat stb.</string>
   <string name="welcome_final_text">Megértetted?</string>
   <string name="welcome_final_button_text">Igen!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;További információ&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">További információk</string>
   <string name="detail_panel_cats_label">Kategóriák</string>
   <string name="detail_panel_cats_loading">Betöltés…</string>
   <string name="detail_panel_cats_none">Nincs kijelölés</string>
@@ -269,7 +268,7 @@
   <string name="null_url">Hiba! URL nem található.</string>
   <string name="nominate_deletion">Törlésre jelölés</string>
   <string name="nominated_for_deletion">Ezt a képet törlésre jelölték.</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Weboldal megtekintése további részletekért&lt;/u&gt;</string>
+  <string name="nominated_see_more">Weboldal megtekintése további részletekért</string>
   <string name="nominating_file_for_deletion">%1$s jelölése törlésre.</string>
   <string name="nominating_for_deletion_status">Fájl törlésre jelölése: %1$s</string>
   <string name="view_browser">Megtekintés böngészőben</string>
@@ -294,8 +293,8 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipédia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Értékelj minket&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;GYIK&lt;/u&gt;</string>
+  <string name="about_rate_us">Értékelj minket</string>
+  <string name="about_faq">GYIK</string>
   <string name="welcome_skip_button">Útmutató átugrása</string>
   <string name="no_internet">Internet nem elérhető</string>
   <string name="internet_established">Internet elérhető</string>
@@ -303,7 +302,7 @@
   <string name="error_review">Hiba az kép ellenőrzésre történő betöltése során. Frissítés után próbáld újra!</string>
   <string name="error_review_categories">Hiba a kategóriák ellenőrzésre történő  betöltése során. Frissítés után próbáld újra!</string>
   <string name="no_notifications">Nincs értesítés</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;Fordítás&lt;/u&gt;</string>
+  <string name="about_translate">Fordítás</string>
   <string name="about_translate_title">Nyelvek</string>
   <string name="about_translate_message">Válaszd ki azt a nyelvet, amelyikre való fordítást akarsz beküldeni.</string>
   <string name="about_translate_proceed">Folytatás</string>
@@ -427,9 +426,7 @@
   <string name="desc_language_Asia">Ázsia</string>
   <string name="desc_language_Pacific">Csendes-óceáni</string>
   <string name="no_categories_selected">Nincs kiválasztott kategória</string>
-  <string name="no_categories_selected_warning_desc">A kategória nélküli képek ritkán használhatóak. Biztos, hogy kategória kiválasztása nélkül akarod feltölteni?</string>
-  <string name="yes_submit">Igen, küldés</string>
-  <string name="no_go_back">Nem, visszalépés</string>
+  <string name="no_categories_selected_warning_desc">A kategória nélküli képek ritkán használhatóak. Biztos, hogy kategória kiválasztása nélkül akarsz továbblépni?</string>
   <string name="upload_flow_all_images_in_set">(az összes képre)</string>
   <string name="search_this_area">Keresés ezen a helyen</string>
   <string name="nearby_card_permission_title">Engedély kérése</string>
@@ -502,7 +499,6 @@
   <string name="please_wait">Kérlek várj…</string>
   <string name="images_featured_explanation">A \"kiemelt kép\"-eket tapasztalt fényképészek vagy illusztrátorok készítik. A képeket a Wikimedia Commons közössége választja ki a minőségük alapján.</string>
   <string name="thanks_received_explanation">Ez a funkció lehetővé teszi, hogy \"Köszönöm\" üzenetet küldj annak a felhasználónak, aki hasznos szerkesztést végzett. A kattintható link a Laptörténet oldalon található.</string>
-  <string name="previous_image_title_description">Előző cím és leírás másolása</string>
   <string name="previous_button_tooltip_message">Kattints, ha az előző képed címét és leírását újra akarod használni, és az aktuális kép igényeinek megfelelően módosítod.</string>
   <string name="welcome_do_upload_content_description">Példák a Commons-ra feltöltött jó képekre</string>
   <string name="welcome_dont_upload_content_description">Példák nem feltöltendő képekre</string>
@@ -553,7 +549,7 @@
   <string name="place_type">Hely típusa:</string>
   <string name="nearby_search_hint">Híd, múzeum, szálloda, stb.</string>
   <string name="you_must_reset_your_passsword">A belépés nem sikerült, kérj új jelszót.</string>
-  <string name="theme_default_name" fuzzy="true">Alapértelmezett</string>
+  <string name="theme_default_name">Rendszerbeállítás követése</string>
   <string name="theme_dark_name">Sötét</string>
   <string name="theme_light_name">Világos</string>
 </resources>

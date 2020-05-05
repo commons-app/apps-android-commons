@@ -60,8 +60,7 @@
   <string name="provider_contributions">আমার আপলোড</string>
   <string name="menu_share">বণ্টন</string>
   <string name="menu_open_in_browser">ব্রাউজারে দেখুন</string>
-  <string name="share_title_hint">শিরোনাম (আবশ্যক)</string>
-  <string name="add_title_toast">এই ফাইলটির জন্য একটি শিরোনাম প্রদান করুন</string>
+  <string name="share_title_hint">ক্যাপশন (আবশ্যক)</string>
   <string name="share_description_hint">বিবরণ</string>
   <string name="login_failed_network">প্রবেশ করা যাচ্ছে না - নেটওয়ার্ক ব্যর্থতা</string>
   <string name="login_failed_wrong_credentials">প্রবেশ করতে অক্ষম - দয়া করে আপনার ব্যবহারকারী নাম এবং পাসওয়ার্ড পরীক্ষা করুন</string>
@@ -321,8 +320,6 @@
   <string name="desc_language_Africa">আফ্রিকা</string>
   <string name="desc_language_Asia">এশিয়া</string>
   <string name="desc_language_Pacific">প্রশান্ত মহাসাগরীয়</string>
-  <string name="yes_submit">হ্যাঁ, জমা দিন</string>
-  <string name="no_go_back">না, ফিরে যান</string>
   <string name="please_wait">অনুগ্রহ করে অপেক্ষা করুন...</string>
   <string name="exif_tag_name_location">অবস্থান</string>
   <string name="account_created">অ্যাকাউন্ট তৈরি করা হয়েছে!</string>

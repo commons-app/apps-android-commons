@@ -59,8 +59,7 @@
   <string name="provider_contributions">Mine opplastinger</string>
   <string name="menu_share">Del</string>
   <string name="menu_open_in_browser">Vis i nettleser</string>
-  <string name="share_title_hint">Tittel (påkrevd)</string>
-  <string name="add_title_toast">Angi en tittel for denne fila</string>
+  <string name="share_title_hint" fuzzy="true">Tittel (påkrevd)</string>
   <string name="share_description_hint">Beskrivelse</string>
   <string name="login_failed_network">Innlogging feilet - nettverksproblem</string>
   <string name="login_failed_wrong_credentials">Kunne ikke logge inn – sjekk brukernavnet og passordet ditt</string>
@@ -430,9 +429,7 @@
   <string name="desc_language_Asia">Asia</string>
   <string name="desc_language_Pacific">Stillehavsområdet</string>
   <string name="no_categories_selected">Ingen kategorier valgt</string>
-  <string name="no_categories_selected_warning_desc">Bilder uten kategorier er sjelden nyttige. Er du sikker på at du vil sende inn uten å velge kategorier?</string>
-  <string name="yes_submit">Ja, send inn</string>
-  <string name="no_go_back">Nei, gå tilbake</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">Bilder uten kategorier er sjelden nyttige. Er du sikker på at du vil sende inn uten å velge kategorier?</string>
   <string name="upload_flow_all_images_in_set">(For alle bilder i settet)</string>
   <string name="search_this_area">Søk i dette området</string>
   <string name="nearby_card_permission_title">Forespørsel om tillatelse</string>
@@ -510,7 +507,6 @@
   <string name="images_featured_explanation">Fremhevede bilder er bilder fra dyktige fotografer og illustratører som fellesskapet på Wikimedia Commons har utpekt som blant de bildene med høyest kvalitet på nettstedet.</string>
   <string name="images_via_nearby_explanation">Bilder lastet opp via steder i nærheten er bilder som lastes opp ved å oppdage steder på kartet.</string>
   <string name="thanks_received_explanation">Denne funksjonen lar brukere sende takk til brukere som gjør nyttige endringer – ved å bruke en liten takkelenke på historikksider eller diffsider.</string>
-  <string name="previous_image_title_description">Kopier forrige tittel og beskrivelse</string>
   <string name="previous_button_tooltip_message">Klikk for å gjenbruke tittelen og beskrivelsen du skrev inn i forrige bilde og endre dem til å passe det nåværende</string>
   <string name="welcome_do_upload_content_description">Eksempler på gode bilder å laste opp til Commons</string>
   <string name="welcome_dont_upload_content_description">Eksempler på bilder som ikke bør lastes opp</string>

@@ -67,9 +67,10 @@
   <string name="provider_contributions">Wysłane przeze mnie pliki</string>
   <string name="menu_share">Udostępnij</string>
   <string name="menu_open_in_browser">Zobacz w przeglądarce</string>
-  <string name="share_title_hint">Tytuł (wymagany)</string>
-  <string name="add_title_toast">Podaj tytuł tego pliku</string>
+  <string name="share_title_hint">Podpis (wymagany)</string>
+  <string name="add_caption_toast">Podaj podpis dla tego pliku</string>
   <string name="share_description_hint">Opis</string>
+  <string name="share_caption_hint">Podpis (limit 255 znaków)</string>
   <string name="login_failed_network">Nie można zalogować - błąd sieci</string>
   <string name="login_failed_wrong_credentials">Nie można się zalogować - sprawdź swoją nazwę użytkownika i hasło</string>
   <string name="login_failed_throttled">Zbyt wiele nieudanych prób zalogowania. Spróbuj ponownie za kilka minut.</string>
@@ -102,6 +103,7 @@
     <item quantity="other">%1$d przesłania</item>
   </plurals>
   <string name="categories_not_found">Nie znaleziono kategorii pasujących do %1$s</string>
+  <string name="depictions_not_found">Nie znaleziono przedmiotów Wikidata pasujących do %1$s</string>
   <string name="categories_skip_explanation">Dodaj kategorie, aby ułatwić odnalezienie plików w Wikimedia Commons.\nZacznij pisać, aby dodać kategorie.</string>
   <string name="categories_activity_title">Kategorie</string>
   <string name="title_activity_settings">Ustawienia</string>
@@ -118,6 +120,7 @@
   <string name="menu_feedback">Wyślij opinię (przez e-mail)</string>
   <string name="no_email_client">Klient e-mail nie jest zainstalowany</string>
   <string name="provider_categories">Niedawno używane kategorie</string>
+  <string name="provider_depictions">Ostatnio używane obrazy</string>
   <string name="waiting_first_sync">Oczekiwanie na pierwszą synchronizację…</string>
   <string name="no_uploads_yet">Nie przesłałeś jeszcze żadnych zdjęć.</string>
   <string name="menu_retry_upload">Ponów próbę</string>
@@ -176,6 +179,7 @@
   <string name="detail_panel_cats_label">Kategorie</string>
   <string name="detail_panel_cats_loading">Ładowanie…</string>
   <string name="detail_panel_cats_none">Nic nie zaznaczono</string>
+  <string name="detail_caption_empty">Brak podpisu</string>
   <string name="detail_description_empty">Brak opisu</string>
   <string name="detail_discussion_empty">Brak dyskusji</string>
   <string name="detail_license_empty">Nieznana licencja</string>
@@ -190,9 +194,12 @@
   <string name="no_nearby">Nie znaleziono niczego w pobliżu</string>
   <string name="warning">Ostrzeżenie</string>
   <string name="upload_image_duplicate">Ten plik już istnieje na Commons. Jesteś pewien, że chcesz kontynuować?</string>
+  <string name="upload">Prześlij</string>
   <string name="yes">Tak</string>
   <string name="no">Nie</string>
+  <string name="media_detail_caption">Podpis</string>
   <string name="media_detail_title">Tytuł</string>
+  <string name="media_detail_depiction">Opis</string>
   <string name="media_detail_description">Opis</string>
   <string name="media_detail_discussion">Dyskusja</string>
   <string name="media_detail_author">Autor</string>
@@ -332,6 +339,7 @@
   <string name="error_loading_categories">Wystąpił błąd podczas ładowania kategorii.</string>
   <string name="error_loading_subcategories">Wystąpił błąd podczas ładowania podkategorii.</string>
   <string name="search_tab_title_categories">Kategorie</string>
+  <string name="search_tab_title_depictions">Elementy</string>
   <string name="explore_tab_title_featured">Wyróżnione</string>
   <string name="explore_tab_title_mobile">Przesłane z aplikacji</string>
   <string name="successful_wikidata_edit">Dodano do %1$s w Wikidanych!</string>
@@ -410,8 +418,7 @@
   <string name="desc_language_Middle_East">Bliski Wschód</string>
   <string name="desc_language_Africa">Afryka</string>
   <string name="desc_language_Asia">Azja</string>
-  <string name="yes_submit">Tak, prześlij</string>
-  <string name="no_go_back">Nie, zawróć</string>
+  <string name="search_this_area">Przeszukaj ten obszar</string>
   <string name="never_ask_again">Nigdy więcej nie pytaj o to</string>
   <string name="display_location_permission_title">Wyświetl pozwolenie na lokalizację</string>
   <string name="display_location_permission_explanation">W razie potrzeby zapytaj o pozwolenie na lokalizację w przypadku funkcji widoku pobliskiej karty powiadomień.</string>
@@ -463,7 +470,6 @@
   <string name="images_featured_explanation">Polecane zdjęcia to zdjęcia wysoko wykwalifikowanych fotografów i ilustratorów, które społeczność Wikimedia Commons wybrała jako jedne z najwyższych jakości na stronie.</string>
   <string name="images_via_nearby_explanation">Obrazy przesłane przez Pobliskie miejsca to obrazy, które są przesyłane przez odkrywanie miejsc na mapie.</string>
   <string name="thanks_received_explanation">Ta funkcja umożliwia redaktorom wysyłanie powiadomień z podziękowaniem do użytkowników, którzy dokonują przydatnych zmian - za pomocą małego linku z podziękowaniem na stronie historii lub na stronie diff.</string>
-  <string name="previous_image_title_description">Skopiuj poprzedni tytuł i opis</string>
   <string name="previous_button_tooltip_message">Kliknij, aby ponownie użyć tytułu i opisu podanego na poprzednim zdjęciu i zmodyfikuj go, aby pasował do bieżącego</string>
   <string name="welcome_do_upload_content_description">Przykłady dobrych zdjęć do przesłania na Commons</string>
   <string name="welcome_dont_upload_content_description">Przykłady obrazów, których nie można przesyłać</string>

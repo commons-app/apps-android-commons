@@ -76,8 +76,7 @@
   <string name="provider_contributions">Mis subidas</string>
   <string name="menu_share">Compartir</string>
   <string name="menu_open_in_browser">Ver en el navegador</string>
-  <string name="share_title_hint">Título (Requerido)</string>
-  <string name="add_title_toast">Proporciona un título para este archivo</string>
+  <string name="share_title_hint" fuzzy="true">Título (Requerido)</string>
   <string name="share_description_hint">Descripción</string>
   <string name="login_failed_network">No se pudo iniciar sesión: error de red</string>
   <string name="login_failed_wrong_credentials">No se puede acceder. Revisa el nombre de usuario y la contraseña</string>
@@ -348,6 +347,7 @@
   <string name="error_loading_subcategories">Se produjo un error al cargar las subcategorías.</string>
   <string name="search_tab_title_media">Multimedia</string>
   <string name="search_tab_title_categories">Categorías</string>
+  <string name="search_tab_title_depictions">Elementos</string>
   <string name="explore_tab_title_featured">En destaque</string>
   <string name="explore_tab_title_mobile">Cargados vía móvil</string>
   <string name="successful_wikidata_edit">¡La imagen ha sido añadida en %1$s a Wikidata!</string>
@@ -450,9 +450,7 @@
   <string name="desc_language_Asia">Asia</string>
   <string name="desc_language_Pacific">Pacífico</string>
   <string name="no_categories_selected">No hay categorías seleccionadas</string>
-  <string name="no_categories_selected_warning_desc">Las imágenes sin categorías raramente se pueden usar. ¿Seguro que la quieres enviar sin seleccionar ninguna categoría?</string>
-  <string name="yes_submit">Sí, enviar</string>
-  <string name="no_go_back">No, regresar</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">Las imágenes sin categorías raramente se pueden usar. ¿Seguro que la quieres enviar sin seleccionar ninguna categoría?</string>
   <string name="upload_flow_all_images_in_set">(Para todas las imágenes en el conjunto)</string>
   <string name="search_this_area">Buscar en esta área</string>
   <string name="nearby_card_permission_title">Solicitud de permiso</string>
@@ -530,7 +528,6 @@
   <string name="images_featured_explanation">Las imágenes destacadas son creaciones de talentosos fotógrafos e ilustradores que la comunidad de Wikimedia Commons ha reconocido como las de mayor calidad del sitio.</string>
   <string name="images_via_nearby_explanation">Las imágenes subidas via Lugares Cercanos son las imágenes que han sido cargadas al descubrir lugares en el mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidad permite a los editores enviar una notificación de agradecimiento a aquellos usuarios que realicen ediciones útiles mediante un pequeño enlace en la página de historial o de diferencias.</string>
-  <string name="previous_image_caption_description">Copiar título y descripción anteriores</string>
   <string name="previous_button_tooltip_message">Haz clic para reutilizar el título y descripción que introdujiste en la imagen anterior y modificarlos para la imagen actual</string>
   <string name="welcome_do_upload_content_description">Ejemplos de imágenes adecuadas para Commons</string>
   <string name="welcome_dont_upload_content_description">Ejemplos de imágenes que no deben cargarse</string>

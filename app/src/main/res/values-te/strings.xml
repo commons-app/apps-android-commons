@@ -51,8 +51,7 @@
   <string name="provider_contributions">నా ఎక్కింపులు</string>
   <string name="menu_share">పంచుకోండి</string>
   <string name="menu_open_in_browser">విహారిణిలో చూపు</string>
-  <string name="share_title_hint">శీర్షిక (తప్పనిసరి)</string>
-  <string name="add_title_toast">ఈ ఫైలుకు శీర్షిక ఇవ్వండి</string>
+  <string name="share_title_hint" fuzzy="true">శీర్షిక (తప్పనిసరి)</string>
   <string name="share_description_hint">వివరణ</string>
   <string name="login_failed_network">లాగిన్ చెయ్యలేకపోయాం - నెట్‍వర్కు విఫలం</string>
   <string name="login_failed_wrong_credentials">లాగినవలేదు - మీ వాడుకరిపేరు, సంకేతపదం సరిచూసుకోండి</string>
@@ -420,9 +419,7 @@
   <string name="desc_language_Asia">ఆసియా</string>
   <string name="desc_language_Pacific">పసిఫిక్</string>
   <string name="no_categories_selected">వర్గాలేమీ ఎంచుకోలేదు</string>
-  <string name="no_categories_selected_warning_desc">వర్గాల్లేని బొమ్మలను అరుదుగా వాడగలం. వర్గాలేమీ ఎంచుకోకుండానే ఎక్కించాలని అనుకుంటున్నారా?</string>
-  <string name="yes_submit">అవును, పంపించు</string>
-  <string name="no_go_back">వద్దు, వెనక్కెళ్ళు</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">వర్గాల్లేని బొమ్మలను అరుదుగా వాడగలం. వర్గాలేమీ ఎంచుకోకుండానే ఎక్కించాలని అనుకుంటున్నారా?</string>
   <string name="upload_flow_all_images_in_set">(సెట్టులో ఉన్న బొమ్మలన్నిటికీ)</string>
   <string name="search_this_area">ఈ ప్రాంతంలో వెతుకు</string>
   <string name="nearby_card_permission_title">అనుమతి అభ్యర్ధన</string>
@@ -500,7 +497,6 @@
   <string name="images_featured_explanation">విశేష చిత్రాలు, అత్యుత్తమ నాణ్యత కలిగినవని వికీమీడియా కామన్స్ సముదాయం సైట్లో ఎంచిన, నిపుణులైన ఫోటోగ్రాఫర్లు చిత్రకారులూ చేసిన బొమ్మలు.</string>
   <string name="images_via_nearby_explanation">సమీప స్థలాలు ద్వారా ఎక్కించిన బొమ్మలంటే, మ్యాపులో గుర్తించిన సమీప స్థలాలకు సంబంధించిన బొమ్మలే.</string>
   <string name="thanks_received_explanation">ఈ విశేషం ద్వారా, ఉపయోగపడే దిద్దుబాట్లు చేసిన వాడుకరులకు చరిత్ర పేజీలో గానీ తేడా పేజీలో గానీ ఉండే ధన్యవాదాలు లింకు ద్వారా ధన్యవాదాలు పంపించవచ్చు</string>
-  <string name="previous_image_title_description">గత శీర్షిక, వివరణలను కాపీ చెయ్యి</string>
   <string name="previous_button_tooltip_message">గత శీర్షిక, వివరణలను తిరిగి వాడేందుకు, ఈ బొమ్మకు తగినట్లుగా మార్చేందుకూ నొక్కండి</string>
   <string name="welcome_do_upload_content_description">కామన్స్ లోకి ఎక్కించేందుకు మంచి బొమ్మలకు ఉదాహరణలు</string>
   <string name="welcome_dont_upload_content_description">ఎక్కించ కూడని బొమ్మలకు ఉదాహరణలు</string>

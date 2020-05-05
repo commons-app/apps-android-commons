@@ -52,8 +52,7 @@
   <string name="provider_contributions">การอัปโหลดของฉัน</string>
   <string name="menu_share">แชร์</string>
   <string name="menu_open_in_browser">ดูในเบราว์เซอร์</string>
-  <string name="share_title_hint">ชื่อเรื่อง (จำเป็น)</string>
-  <string name="add_title_toast">กรุณาระบุชืิ่อเรื่องของไฟล์นี้</string>
+  <string name="share_title_hint" fuzzy="true">ชื่อเรื่อง (จำเป็น)</string>
   <string name="share_description_hint">คำอธิบาย</string>
   <string name="login_failed_network">ไม่สามารถเข้าสู่ระบบได้ - ความล้มเหลวของเครือข่าย</string>
   <string name="login_failed_wrong_credentials">เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบชื่อผู้ใช้และรหัสผ้านและลองอีกครั้ง</string>
