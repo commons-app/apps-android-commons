@@ -1190,7 +1190,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         } else if (!place.destroyed.trim().isEmpty()) { // Means place is destroyed
             if (isBookmarked) {
                 vectorDrawable = VectorDrawableCompat.create(
-                    getContext().getResources(), R.drawable.ic_custom_map_marker_gray_bookmarked,
+                    getContext().getResources(), R.drawable.ic_custom_map_marker_grey_bookmarked,
                     getContext().getTheme()
                 );
             } else {

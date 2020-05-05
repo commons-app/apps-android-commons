@@ -9,6 +9,7 @@ import android.os.RemoteException;
 
 import androidx.annotation.NonNull;
 
+import fr.free.nrw.commons.nearby.NearbyController;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,8 +75,10 @@ public class BookmarkLocationsDao {
         boolean bookmarkExists = findBookmarkLocation(bookmarkLocation);
         if (bookmarkExists) {
             deleteBookmarkLocation(bookmarkLocation);
+            NearbyController.updateMarkerLabelListBookmark(bookmarkLocation, false);
         } else {
             addBookmarkLocation(bookmarkLocation);
+            NearbyController.updateMarkerLabelListBookmark(bookmarkLocation, true);
         }
         return !bookmarkExists;
     }

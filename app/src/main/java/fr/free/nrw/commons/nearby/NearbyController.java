@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 
+import android.util.Log;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
 
@@ -254,5 +256,19 @@ public class NearbyController {
         public LatLng[] boundaryCoordinates; // Corners of nearby area
         public LatLng curLatLng; // Current location when this places are populated
         public LatLng searchLatLng; // Search location for finding this places
+    }
+
+    /**
+     * Updates makerLabelList item isBookmarked value
+     * @param place place which is bookmarked
+     * @param isBookmarked true is bookmarked, false if bookmark removed
+     */
+    public static void updateMarkerLabelListBookmark(Place place, boolean isBookmarked) {
+        for (ListIterator<MarkerPlaceGroup> iter = markerLabelList.listIterator(); iter.hasNext();) {
+            MarkerPlaceGroup markerPlaceGroup = iter.next();
+            if (markerPlaceGroup.getPlace().getWikiDataEntityId().equals(place.getWikiDataEntityId())) {
+                iter.set(new MarkerPlaceGroup(markerPlaceGroup.getMarker(), isBookmarked, place));
+            }
+        }
     }
 }
