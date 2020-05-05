@@ -23,12 +23,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 import timber.log.Timber;
 
 public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
-    private static final long TIMEOUT_SECONDS = 15;
     private final Callback callback;
     @BindView(R.id.contributionImage)
     SimpleDraweeView imageView;
@@ -121,7 +119,6 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
                 compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseMediaId)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                     .subscribe(subscriber -> {
                         if (!subscriber.trim().equals(MediaClient.NO_CAPTION)) {
                             titleView.setText(subscriber);
