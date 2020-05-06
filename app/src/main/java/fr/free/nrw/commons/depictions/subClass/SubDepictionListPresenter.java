@@ -15,7 +15,6 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
@@ -47,7 +46,6 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
     public String query;
     protected CompositeDisposable compositeDisposable = new CompositeDisposable();
     DepictsClient depictsClient;
-    private static int TIMEOUT_SECONDS = 15;
     private List<DepictedItem> queryList = new ArrayList<>();
     OkHttpJsonApiClient okHttpJsonApiClient;
     /**
@@ -98,7 +96,6 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
         compositeDisposable.add(depictsClient.getP18ForItem(entityId)
                 .subscribeOn(ioScheduler)
                 .observeOn(mainThreadScheduler)
-                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(response -> {
                     view.onImageUrlFetched(response,position);
                 }));

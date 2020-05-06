@@ -27,7 +27,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import timber.log.Timber;
 
@@ -36,8 +35,6 @@ import timber.log.Timber;
  */
 
 public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
-
-    private static int TIMEOUT_SECONDS = 15;
 
     @BindView(R.id.imagesListBox)
     RecyclerView categoriesRecyclerView;
@@ -94,13 +91,11 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
             compositeDisposable.add(categoryClient.getParentCategoryList("Category:"+categoryName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                     .subscribe(this::handleSuccess, this::handleError));
         } else {
             compositeDisposable.add(categoryClient.getSubCategoryList("Category:"+categoryName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                     .subscribe(this::handleSuccess, this::handleError));
         }
     }
