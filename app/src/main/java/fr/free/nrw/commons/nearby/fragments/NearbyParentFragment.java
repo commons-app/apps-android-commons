@@ -1133,7 +1133,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             // When label filter is engaged
             // then compare it against place's label
             if (selectedLabels != null && (selectedLabels.size() != 0 || !filterForPlaceState)
-                && !selectedLabels.contains(place.getLabel())) {
+                && (!selectedLabels.contains(place.getFirstLabel())
+                    && !(selectedLabels.contains(Label.MY_BOOKMARKS) && markerPlaceGroup.getIsBookmarked()))) {
                 continue;
             }
 
@@ -1419,7 +1420,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         commonsButton.setVisibility(this.selectedPlace.hasCommonsLink()?View.VISIBLE:View.GONE);
         commonsButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), this.selectedPlace.siteLinks.getCommonsLink()));
 
-        icon.setImageResource(this.selectedPlace.getLabel().getIcon());
+        icon.setImageResource(this.selectedPlace.getFirstLabel().getIcon());
 
         title.setText(this.selectedPlace.name);
         distance.setText(this.selectedPlace.distance);
