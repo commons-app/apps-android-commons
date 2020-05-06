@@ -30,7 +30,6 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -62,8 +61,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     JsonKvStore directKvStore;
     @Inject
     UploadContract.UserActionListener presenter;
-    @Inject
-    CategoriesModel categoriesModel;
     @Inject
     SessionManager sessionManager;
     @Inject

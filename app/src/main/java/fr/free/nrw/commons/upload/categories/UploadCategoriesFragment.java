@@ -78,15 +78,6 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         presenter.onAttachView(this);
         initRecyclerView();
         addTextChangeListenerToEtSearch();
-        //get default categories for empty query
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (presenter != null && isVisible && (categories == null || categories.isEmpty())) {
-            presenter.searchForCategories(null);
-        }
     }
 
     private void addTextChangeListenerToEtSearch() {
@@ -179,7 +170,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         isVisible = isVisibleToUser;
 
         if (presenter != null && isResumed() && (categories == null || categories.isEmpty())) {
-            presenter.searchForCategories(null);
+            presenter.searchForCategories("");
         }
     }
 }

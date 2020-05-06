@@ -1,24 +1,20 @@
 package fr.free.nrw.commons.repository;
 
-import fr.free.nrw.commons.upload.ImageCoordinates;
-import io.reactivex.Flowable;
-import java.io.IOException;
-import java.util.Comparator;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
-
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import java.io.IOException;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * The repository class for UploadActivity
@@ -94,18 +90,8 @@ public class UploadRepository {
      * @param imageTitleList
      * @return
      */
-    public Observable<CategoryItem> searchAll(String query, List<String> imageTitleList) {
+    public Observable<List<CategoryItem>> searchAll(String query, List<String> imageTitleList) {
         return remoteDataSource.searchAll(query, imageTitleList);
-    }
-
-    /**
-     * returns the string list of categories
-     *
-     * @return
-     */
-
-    public List<String> getCategoryStringList() {
-        return remoteDataSource.getCategoryStringList();
     }
 
     /**
@@ -124,16 +110,6 @@ public class UploadRepository {
      */
     public void onCategoryClicked(CategoryItem categoryItem) {
         remoteDataSource.onCategoryClicked(categoryItem);
-    }
-
-    /**
-     * returns category sorted based on similarity with query
-     *
-     * @param query
-     * @return
-     */
-    public Comparator<? super CategoryItem> sortBySimilarity(String query) {
-        return remoteDataSource.sortBySimilarity(query);
     }
 
     /**

@@ -1,6 +1,9 @@
 package fr.free.nrw.commons.category;
 
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -9,21 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.pedrogomez.renderers.RVRendererAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.pedrogomez.renderers.RVRendererAdapter;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.categories.SearchCategoriesAdapterFactory;
@@ -31,10 +25,11 @@ import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
 import timber.log.Timber;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 
 /**
  * Displays the category search screen.
@@ -100,14 +95,12 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                    .collect(ArrayList<String>::new, ArrayList::add)
                     .subscribe(this::handleSuccess, this::handleError));
         } else {
             compositeDisposable.add(categoryClient.getSubCategoryList("Category:"+categoryName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                    .collect(ArrayList<String>::new, ArrayList::add)
                     .subscribe(this::handleSuccess, this::handleError));
         }
     }

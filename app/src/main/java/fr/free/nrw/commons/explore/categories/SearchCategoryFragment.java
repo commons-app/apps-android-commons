@@ -142,7 +142,6 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .doOnSubscribe(disposable -> saveQuery(query))
-                .collect(ArrayList<String>::new, ArrayList::add)
                 .subscribe(this::handleSuccess, this::handleError));
     }
 
@@ -160,7 +159,6 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .collect(ArrayList<String>::new, ArrayList::add)
                 .subscribe(this::handlePaginationSuccess, this::handleError));
     }
 
