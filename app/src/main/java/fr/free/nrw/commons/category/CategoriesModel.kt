@@ -19,7 +19,6 @@ class CategoriesModel @Inject constructor(
 ) {
     private val selectedCategories: MutableList<CategoryItem> = mutableListOf()
 
-
     /**
      * Returns if the item contains an year
      * @param item
@@ -38,11 +37,13 @@ class CategoriesModel @Inject constructor(
         //And that item does not equal the current year or previous year
         //And if it is an irrelevant category such as Media_needing_categories_as_of_16_June_2017(Issue #750)
         //Check if the year in the form of XX(X)0s is relevant, i.e. in the 2000s or 2010s as stated in Issue #1029
-        return (item.matches(".*(19|20)\\d{2}.*".toRegex()) && !item.contains(yearInString) && !item.contains(
-            prevYearInString
-        )
-                || item.matches("(.*)needing(.*)".toRegex()) || item.matches("(.*)taken on(.*)".toRegex())
-                || item.matches(".*0s.*".toRegex()) && !item.matches(".*(200|201)0s.*".toRegex()))
+        return item.matches(".*(19|20)\\d{2}.*".toRegex())
+                && !item.contains(yearInString)
+                && !item.contains(prevYearInString)
+                || item.matches("(.*)needing(.*)".toRegex())
+                || item.matches("(.*)taken on(.*)".toRegex())
+                || item.matches(".*0s.*".toRegex())
+                && !item.matches(".*(200|201)0s.*".toRegex())
     }
 
     /**
@@ -54,8 +55,7 @@ class CategoriesModel @Inject constructor(
 
         // Newly used category...
         if (category == null) {
-            category =
-                Category(null, item.name, Date(), 0)
+            category = Category(null, item.name, Date(), 0)
         }
         category.incTimesUsed()
         categoryDao.save(category)
@@ -124,27 +124,11 @@ class CategoriesModel @Inject constructor(
      */
     fun onCategoryItemClicked(item: CategoryItem) {
         if (item.isSelected) {
-            selectCategory(item)
+            selectedCategories.add(item)
             updateCategoryCount(item)
         } else {
-            unselectCategory(item)
+            selectedCategories.remove(item)
         }
-    }
-
-    /**
-     * Select's category
-     * @param item
-     */
-    fun selectCategory(item: CategoryItem) {
-        selectedCategories.add(item)
-    }
-
-    /**
-     * Unselect Category
-     * @param item
-     */
-    fun unselectCategory(item: CategoryItem) {
-        selectedCategories.remove(item)
     }
 
     /**
