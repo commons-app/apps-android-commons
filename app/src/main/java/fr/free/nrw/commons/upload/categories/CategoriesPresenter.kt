@@ -8,7 +8,7 @@ import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.proxy
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
@@ -30,7 +30,7 @@ class CategoriesPresenter @Inject constructor(
 
     var view = DUMMY
     private val compositeDisposable = CompositeDisposable()
-    private val searchTerms = BehaviorSubject.createDefault("")
+    private val searchTerms = PublishSubject.create<String>()
 
     override fun onAttachView(view: CategoriesContract.View) {
         this.view = view
