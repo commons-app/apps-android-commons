@@ -1134,7 +1134,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             // then compare it against place's label
             if (selectedLabels != null && (selectedLabels.size() != 0 || !filterForPlaceState)
                 && (!selectedLabels.contains(place.getLabel())
-                    && !(selectedLabels.contains(Label.MY_BOOKMARKS) && markerPlaceGroup.getIsBookmarked()))) {
+                    && !(selectedLabels.contains(Label.BOOKMARKS) && markerPlaceGroup.getIsBookmarked()))) {
                 continue;
             }
 
