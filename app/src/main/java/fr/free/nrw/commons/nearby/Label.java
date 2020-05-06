@@ -17,6 +17,7 @@ import fr.free.nrw.commons.R;
  */
 public enum Label {
 
+    MY_BOOKMARKS("BOOKMARK", R.drawable.ic_filled_star_24dp),
     BUILDING("Q41176", R.drawable.round_icon_generic_building),
     HOUSE("Q3947", R.drawable.round_icon_house),
     COTTAGE("Q5783996", R.drawable.round_icon_house),
