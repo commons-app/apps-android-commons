@@ -86,7 +86,7 @@ class DepictsPresenter @Inject constructor(
 
     override fun onDetachView() {
         view = DUMMY
-        compositeDisposable.dispose()
+        compositeDisposable.clear()
         idsToImageUrls.clear()
     }
 
