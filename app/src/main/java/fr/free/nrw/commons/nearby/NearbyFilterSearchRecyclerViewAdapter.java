@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
+import java.util.Collections;
 
 public class NearbyFilterSearchRecyclerViewAdapter
         extends RecyclerView.Adapter<NearbyFilterSearchRecyclerViewAdapter.RecyclerViewHolder>
@@ -120,6 +121,8 @@ public class NearbyFilterSearchRecyclerViewAdapter
                 }
 
                 if (constraint == null || constraint.length() == 0) {
+                    // set my bookmarks as the first item
+                    Collections.swap(labels, 0 , labels.indexOf(Label.fromText("BOOKMARK")));
                     // set the Original result to return
                     results.count = labels.size();
                     results.values = labels;
