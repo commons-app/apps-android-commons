@@ -93,7 +93,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private CompositeDisposable compositeDisposable;
     private ProgressDialog progressDialog;
     private UploadImageAdapter uploadImagesAdapter;
-    private List<Fragment> fragments;
+    private List<UploadBaseFragment> fragments;
     private UploadCategoriesFragment uploadCategoriesFragment;
     private DepictsFragment depictsFragment;
     private MediaLicenseFragment mediaLicenseFragment;
@@ -413,6 +413,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     public void onNextButtonClicked(int index) {
         if (index < fragments.size() - 1) {
             vpUpload.setCurrentItem(index + 1, false);
+            fragments.get(index + 1).onBecameVisible();
         } else {
             presenter.handleSubmit();
         }
@@ -422,6 +423,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     public void onPreviousButtonClicked(int index) {
         if (index != 0) {
             vpUpload.setCurrentItem(index - 1, true);
+            fragments.get(index - 1).onBecameVisible();
         }
     }
 
@@ -430,14 +432,14 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      */
 
     private class UploadImageAdapter extends FragmentStatePagerAdapter {
-        List<Fragment> fragments;
+        List<UploadBaseFragment> fragments;
 
         public UploadImageAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
             this.fragments = new ArrayList<>();
         }
 
-        public void setFragments(List<Fragment> fragments) {
+        public void setFragments(List<UploadBaseFragment> fragments) {
             this.fragments = fragments;
             notifyDataSetChanged();
         }

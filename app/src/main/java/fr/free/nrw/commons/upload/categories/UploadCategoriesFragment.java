@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload.categories;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,8 +51,6 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     CategoriesContract.UserActionListener presenter;
     private RVRendererAdapter<CategoryItem> adapter;
     private Disposable subscribe;
-    private List<CategoryItem> categories;
-    private boolean isVisible;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -126,7 +125,6 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     public void setCategories(List<CategoryItem> categories) {
         adapter.clear();
         if (categories != null) {
-            this.categories = categories;
             adapter.addAll(categories);
             adapter.notifyDataSetChanged();
         }
@@ -165,12 +163,11 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        isVisible = isVisibleToUser;
-
-        if (presenter != null && isResumed() && (categories == null || categories.isEmpty())) {
-            presenter.searchForCategories("");
+    protected void onBecameVisible() {
+        super.onBecameVisible();
+        final Editable text = etSearch.getText();
+        if (text != null) {
+            presenter.searchForCategories(text.toString());
         }
     }
 }

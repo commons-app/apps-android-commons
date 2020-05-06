@@ -22,6 +22,9 @@ public class UploadBaseFragment extends CommonsDaggerSupportFragment {
         this.callback = callback;
     }
 
+    protected void onBecameVisible() {
+    }
+
     public interface Callback {
 
         void onNextButtonClicked(int index);
