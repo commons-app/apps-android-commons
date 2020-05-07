@@ -75,7 +75,7 @@
   <string name="provider_contributions">Мои загрузки</string>
   <string name="menu_share">Поделиться</string>
   <string name="menu_open_in_browser">Открыть в браузере</string>
-  <string name="share_title_hint" fuzzy="true">Название (обязательно)</string>
+  <string name="share_title_hint">Подпись (Обязательна)</string>
   <string name="share_description_hint">Описание</string>
   <string name="login_failed_network">Не удаётся войти — сбой сети</string>
   <string name="login_failed_wrong_credentials">Не удаётся войти — проверьте ваше имя пользователя и пароль</string>
@@ -205,6 +205,7 @@
   <string name="no_nearby">Места поблизости не найдены</string>
   <string name="warning">Внимание</string>
   <string name="upload_image_duplicate">Этот файл уже существует на Викискладе. Вы уверены, что хотите продолжить?</string>
+  <string name="upload">Загрузить</string>
   <string name="yes">Да</string>
   <string name="no">Нет</string>
   <string name="media_detail_title">Название</string>
@@ -350,6 +351,7 @@
   <string name="error_loading_subcategories">При загрузке подкатегорий произошла ошибка.</string>
   <string name="search_tab_title_media">Мультимедиа</string>
   <string name="search_tab_title_categories">Категории</string>
+  <string name="search_tab_title_depictions">Элементы</string>
   <string name="explore_tab_title_featured">Избранное</string>
   <string name="explore_tab_title_mobile">Загружено текущим приложением</string>
   <string name="successful_wikidata_edit">Изображение добавлено на страницу %1$s Викиданных!</string>
@@ -454,7 +456,7 @@
   <string name="desc_language_Asia">Азия</string>
   <string name="desc_language_Pacific">Океания</string>
   <string name="no_categories_selected">Не выбраны категории</string>
-  <string name="no_categories_selected_warning_desc" fuzzy="true">Некатегоризованные изображения редко используются. Вы уверены, что хотите опубликовать файл без указанных категорий?</string>
+  <string name="no_categories_selected_warning_desc">Изображения без категорий используются редко. Вы уверены, что хотите продолжить, не выбрав категории?</string>
   <string name="upload_flow_all_images_in_set">(Для всех изображений в наборе)</string>
   <string name="search_this_area">Искать в этой области</string>
   <string name="nearby_card_permission_title">Запрос разрешения</string>
