@@ -19,7 +19,6 @@ import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import org.wikipedia.wikidata.Entities;
 import org.wikipedia.wikidata.Entities.Entity;
 import org.wikipedia.wikidata.Entities.Label;
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import timber.log.Timber;
 
 /**
@@ -93,13 +92,11 @@ public class MediaClient {
      * @return
      */
     public Single<List<Media>> getMediaListForUser(String userName) {
-        return responseToMediaList(
-            continuationStore.containsKey("user_" + userName) ?
-                mediaInterface.getMediaListForUser(userName, 10,
-                    continuationStore.get("user_" + userName)) : //if true
-                mediaInterface.getMediaListForUser(userName, 10, Collections.emptyMap()),
-            "user_" + userName); //if false
-
+        Map<String, String> continuation =
+            continuationStore.containsKey("user_" + userName) ? continuationStore
+                .get("user_" + userName) : Collections.emptyMap();
+        return responseToMediaList(mediaInterface
+            .getMediaListForUser(userName, 10, continuation), "user_" + userName);
     }
 
     /**

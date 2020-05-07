@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.UUID;
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
@@ -89,7 +90,7 @@ public class Media implements Parcelable {
      * @param filename Media filename
      */
     public Media(final String filename) {
-        pageId = UUID.randomUUID().toString();
+        this();
         this.filename = filename;
     }
 
@@ -108,7 +109,7 @@ public class Media implements Parcelable {
         final String description,
         final long dataLength, final Date dateCreated, final Date dateUploaded,
         final String creator) {
-        pageId = UUID.randomUUID().toString();
+        this();
         this.localUri = localUri;
         thumbUrl = imageUrl;
         this.imageUrl = imageUrl;
@@ -626,5 +627,44 @@ public class Media implements Parcelable {
         dest.writeParcelable(depictions, flags);
         dest.writeByte(requestedDeletion ? (byte) 1 : (byte) 0);
         dest.writeParcelable(coordinates, flags);
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Media)) {
+            return false;
+        }
+        final Media media = (Media) o;
+        return getDataLength() == media.getDataLength() &&
+            isRequestedDeletion() == media.isRequestedDeletion() &&
+            Objects.equals(getLocalUri(), media.getLocalUri()) &&
+            Objects.equals(getThumbUrl(), media.getThumbUrl()) &&
+            Objects.equals(getImageUrl(), media.getImageUrl()) &&
+            Objects.equals(getFilename(), media.getFilename()) &&
+            Objects.equals(getThumbnailTitle(), media.getThumbnailTitle()) &&
+            Objects.equals(getCaption(), media.getCaption()) &&
+            Objects.equals(getDescription(), media.getDescription()) &&
+            Objects.equals(getDiscussion(), media.getDiscussion()) &&
+            Objects.equals(getDateCreated(), media.getDateCreated()) &&
+            Objects.equals(getDateUploaded(), media.getDateUploaded()) &&
+            Objects.equals(getLicense(), media.getLicense()) &&
+            Objects.equals(getLicenseUrl(), media.getLicenseUrl()) &&
+            Objects.equals(getCreator(), media.getCreator()) &&
+            getPageId().equals(media.getPageId()) &&
+            Objects.equals(getCategories(), media.getCategories()) &&
+            Objects.equals(getDepictions(), media.getDepictions()) &&
+            Objects.equals(getCoordinates(), media.getCoordinates());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects
+            .hash(getLocalUri(), getThumbUrl(), getImageUrl(), getFilename(), getThumbnailTitle(),
+                getCaption(), getDescription(), getDiscussion(), getDataLength(), getDateCreated(),
+                getDateUploaded(), getLicense(), getLicenseUrl(), getCreator(), getPageId(),
+                getCategories(), getDepictions(), isRequestedDeletion(), getCoordinates());
     }
 }

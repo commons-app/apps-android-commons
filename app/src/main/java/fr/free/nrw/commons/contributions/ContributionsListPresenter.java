@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
+import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
@@ -8,7 +9,6 @@ import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionsListContract.UserActionListener;
@@ -31,11 +31,9 @@ public class ContributionsListPresenter implements UserActionListener {
   private final ContributionsRepository repository;
   private final Scheduler mainThreadScheduler;
   private final Scheduler ioThreadScheduler;
+  private final SessionManager sessionManager;
+  private final MediaClient mediaClient;
 
-  @Inject
-  SessionManager sessionManager;
-  @Inject
-  MediaClient mediaClient;
   private CompositeDisposable compositeDisposable;
   private ContributionsListContract.View view;
   private LifecycleOwner lifeCycleOwner;
@@ -50,24 +48,29 @@ public class ContributionsListPresenter implements UserActionListener {
   @Inject
   ContributionsListPresenter(ContributionsRepository repository,
       @Named(CommonsApplicationModule.MAIN_THREAD) Scheduler mainThreadScheduler,
-      @Named(CommonsApplicationModule.IO_THREAD) Scheduler ioThreadScheduler) {
+      @Named(CommonsApplicationModule.IO_THREAD) Scheduler ioThreadScheduler,
+      SessionManager sessionManager,
+      MediaClient mediaClient) {
     this.repository = repository;
     this.mainThreadScheduler = mainThreadScheduler;
     this.ioThreadScheduler = ioThreadScheduler;
+    this.sessionManager = sessionManager;
+    this.mediaClient = mediaClient;
     contributionList = new LivePagedListBuilder<>(repository.fetchContributions(), 50).build();
+    compositeDisposable = new CompositeDisposable();
   }
 
   @Override
   public void onAttachView(ContributionsListContract.View view) {
     this.view = view;
-    compositeDisposable = new CompositeDisposable();
   }
 
   public void setLifeCycleOwner(LifecycleOwner lifeCycleOwner) {
     this.lifeCycleOwner = lifeCycleOwner;
   }
 
-  public OnScrollListener getScrollListener(LinearLayoutManager layoutManager) {
+  public OnScrollListener getScrollListener(LinearLayoutManager layoutManager,
+      Context context) {
     return new OnScrollListener() {
       @Override
       public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -84,19 +87,17 @@ public class ContributionsListPresenter implements UserActionListener {
           if ((visibleItemCount + firstVisibleItemPosition + START_LOADING_SIZE) >= totalItemCount
               && firstVisibleItemPosition >= 0
               && totalItemCount >= PAGE_SIZE) {
-            loadMoreItems();
+            loadMoreItems(context);
           }
         }
       }
     };
   }
 
-  public void fetchContributions() {
-    if (NetworkUtils.isInternetConnectionEstablished(CommonsApplication.getInstance())) {
+  public void fetchContributions(Context context) {
+    if (NetworkUtils.isInternetConnectionEstablished(context)) {
       user = sessionManager.getUserName();
       compositeDisposable.add(mediaClient.getMediaListForUser(user)
-          .subscribeOn(ioThreadScheduler)
-          .observeOn(mainThreadScheduler)
           .map(mediaList -> {
             List<Contribution> contributions = new ArrayList<>();
             for (Media media : mediaList) {
@@ -113,10 +114,9 @@ public class ContributionsListPresenter implements UserActionListener {
     }
   }
 
-  private void loadMoreItems() {
-    Timber.d("RecyclerList Inside load more items.");
+  private void loadMoreItems(Context context) {
     isLoading = true;
-    fetchContributions();
+    fetchContributions(context);
   }
 
   void setupLiveData() {
@@ -138,7 +138,7 @@ public class ContributionsListPresenter implements UserActionListener {
   }
 
   private void saveContributionsToDB(final List<Contribution> contributions) {
-    repository.save(contributions).subscribeOn(ioThreadScheduler).subscribe();
+    repository.save(contributions);
     repository.set("last_fetch_timestamp", System.currentTimeMillis());
   }
 

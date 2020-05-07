@@ -29,20 +29,16 @@ public class ContributionsListAdapter extends
         setHasStableIds(true);
     }
 
-
     private static DiffUtil.ItemCallback<Contribution> DIFF_CALLBACK =
         new DiffUtil.ItemCallback<Contribution>() {
-            // Concert details may have changed if reloaded from the database,
-            // but ID is fixed.
             @Override
-            public boolean areItemsTheSame(Contribution oldConcert, Contribution newConcert) {
-                return oldConcert.getPageId() == newConcert.getPageId();
+            public boolean areItemsTheSame(Contribution oldContribution, Contribution newContribution) {
+                return oldContribution.getPageId().equals(newContribution.getPageId());
             }
 
             @Override
-            public boolean areContentsTheSame(Contribution oldConcert,
-                Contribution newConcert) {
-                return oldConcert.equals(newConcert);
+            public boolean areContentsTheSame(Contribution oldContribution, Contribution newContribution) {
+                return oldContribution.equals(newContribution);
             }
         };
 

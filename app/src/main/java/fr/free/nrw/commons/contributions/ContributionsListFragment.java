@@ -110,10 +110,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
       rvContributionsList.setLayoutManager(layoutManager);
 
         rvContributionsList.setAdapter(adapter);
-        rvContributionsList.addOnScrollListener(contributionsListPresenter.getScrollListener(layoutManager));
+        rvContributionsList.addOnScrollListener(contributionsListPresenter
+            .getScrollListener(layoutManager, getContext()));
 
       contributionsListPresenter.setupLiveData();
-      contributionsListPresenter.fetchContributions();
+      contributionsListPresenter.fetchContributions(getContext());
     }
 
     private int getSpanCount(int orientation) {

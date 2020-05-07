@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
 import android.os.Parcel;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -14,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Entity(tableName = "contribution")
 public class Contribution extends Media {
@@ -183,14 +182,29 @@ public class Contribution extends Media {
         }
     };
 
-    @NonNull
     @Override
-    public String toString() {
-        return getPageId();
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Contribution)) {
+            return false;
+        }
+        final Contribution that = (Contribution) o;
+        return ((Media) o).equals(this) &&
+            getState() == that.getState() && getTransferred() == that.getTransferred() && Objects
+            .equals(getDecimalCoords(), that.getDecimalCoords()) && Objects
+            .equals(getDateCreatedSource(), that.getDateCreatedSource()) && Objects
+            .equals(getWikidataPlace(), that.getWikidataPlace()) && Objects
+            .equals(getDepictedItems(), that.getDepictedItems()) && Objects
+            .equals(getMimeType(), that.getMimeType()) && Objects
+            .equals(getCaptions(), that.getCaptions());
     }
 
     @Override
-    public boolean equals(@Nullable final Object obj) {
-        return obj.toString() == toString();
+    public int hashCode() {
+        return Objects
+            .hash(super.hashCode(), getState(), getTransferred(), getDecimalCoords(), getDateCreatedSource(),
+                getWikidataPlace(), getDepictedItems(), getMimeType(), getCaptions());
     }
 }
