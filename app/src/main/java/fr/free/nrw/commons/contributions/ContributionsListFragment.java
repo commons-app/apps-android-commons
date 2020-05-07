@@ -69,14 +69,14 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     private Animation rotate_backward;
 
 
-    private boolean isFabOpen = false;
+    private boolean isFabOpen;
 
     private ContributionsListAdapter adapter;
 
     private Callback callback;
-    private String lastVisibleItemID;
 
-    private int SPAN_COUNT=3;
+  private int SPAN_COUNT_LANDSCAPE =3;
+  private int SPAN_COUNT_PORTRAIT =1;
 
     ContributionsListFragment(Callback callback) {
         this.callback = callback;
@@ -105,15 +105,9 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     }
 
     private void initRecyclerView() {
-        Timber.d("RecyclerList Recycler view Init.");
-        LinearLayoutManager layoutManager;
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            layoutManager = new GridLayoutManager(getContext(), SPAN_COUNT);
-            rvContributionsList.setLayoutManager(layoutManager);
-        } else {
-            layoutManager = new LinearLayoutManager(getContext());
-            rvContributionsList.setLayoutManager(layoutManager);
-        }
+      GridLayoutManager layoutManager = new GridLayoutManager(getContext(),
+          getSpanCount(getResources().getConfiguration().orientation));
+      rvContributionsList.setLayoutManager(layoutManager);
 
         rvContributionsList.setAdapter(adapter);
         rvContributionsList.addOnScrollListener(contributionsListPresenter.getScrollListener(layoutManager));
@@ -122,17 +116,19 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
       contributionsListPresenter.fetchContributions();
     }
 
+    private int getSpanCount(int orientation) {
+      return orientation == Configuration.ORIENTATION_LANDSCAPE?
+          SPAN_COUNT_LANDSCAPE: SPAN_COUNT_PORTRAIT;
+    }
+
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        // check orientation
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            fab_layout.setOrientation(LinearLayout.HORIZONTAL);
-            rvContributionsList.setLayoutManager(new GridLayoutManager(getContext(),SPAN_COUNT));
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            fab_layout.setOrientation(LinearLayout.VERTICAL);
-            rvContributionsList.setLayoutManager(new LinearLayoutManager(getContext()));
-        }
+      super.onConfigurationChanged(newConfig);
+      // check orientation
+      fab_layout.setOrientation(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE?
+          LinearLayout.HORIZONTAL:LinearLayout.VERTICAL);
+      rvContributionsList
+          .setLayoutManager(new GridLayoutManager(getContext(), getSpanCount(newConfig.orientation)));
     }
 
     private void initializeAnimations() {
@@ -222,20 +218,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         return adapter.getItemCount();
     }
 
-    public interface SourceRefresher {
-        void refreshSource();
-    }
-
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         LayoutManager layoutManager = rvContributionsList.getLayoutManager();
-        int lastVisibleItemPosition=0;
-        if(layoutManager instanceof  LinearLayoutManager){
-            lastVisibleItemPosition= ((LinearLayoutManager) layoutManager).findLastCompletelyVisibleItemPosition();
-        }else if(layoutManager instanceof GridLayoutManager){
-            lastVisibleItemPosition=((GridLayoutManager)layoutManager).findLastCompletelyVisibleItemPosition();
-        }
+        int lastVisibleItemPosition= ((GridLayoutManager)layoutManager).findLastCompletelyVisibleItemPosition();;
         String idOfItemWithPosition = findIdOfItemWithPosition(lastVisibleItemPosition);
         if (null != idOfItemWithPosition) {
             outState.putString(VISIBLE_ITEM_ID, idOfItemWithPosition);
@@ -246,7 +233,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         if(null!=savedInstanceState){
-            lastVisibleItemID =savedInstanceState.getString(VISIBLE_ITEM_ID, null);
         }
     }
 

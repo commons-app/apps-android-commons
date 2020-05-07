@@ -298,11 +298,9 @@ public class UploadService extends CommonsDaggerService {
         contribution.setDateUploaded(CommonsDateUtil.getIso8601DateFormatTimestamp()
             .parse(uploadResult.getImageinfo().getTimestamp()));
 
-        final Disposable disposable = contributionDao.delete(contribution)
+        compositeDisposable.add(contributionDao.delete(contribution)
             .flatMap(integer -> mediaClient.getMedia("File:" + uploadResult.getFilename()))
-            .subscribe(media -> contributionDao.save(new Contribution(media)));
-
-        compositeDisposable.add(disposable);
+            .subscribe(media -> contributionDao.save(new Contribution(media, Contribution.STATE_COMPLETED))));
     }
 
     @SuppressLint("StringFormatInvalid")

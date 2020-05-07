@@ -99,7 +99,7 @@ public class ContributionsListPresenter implements UserActionListener {
           .map(mediaList -> {
             List<Contribution> contributions = new ArrayList<>();
             for (Media media : mediaList) {
-              contributions.add(new Contribution(media));
+              contributions.add(new Contribution(media, Contribution.STATE_COMPLETED));
             }
             return contributions;
           })

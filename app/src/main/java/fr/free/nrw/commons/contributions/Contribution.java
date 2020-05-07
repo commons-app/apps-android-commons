@@ -150,7 +150,7 @@ public class Contribution extends Media {
         dest.writeSerializable((HashMap) captions);
     }
 
-    public Contribution(Media media) {
+    public Contribution(Media media, int state) {
         super(media.getPageId(),
             media.getLocalUri(), media.getThumbUrl(), media.getImageUrl(), media.getFilename(),
             media.getDescription(),
@@ -158,7 +158,7 @@ public class Contribution extends Media {
             media.getDataLength(), media.getDateCreated(), media.getDateUploaded(),
             media.getLicense(), media.getLicenseUrl(), media.getCreator(), media.getCategories(),
             media.isRequestedDeletion(), media.getCoordinates());
-        this.state = STATE_COMPLETED;
+        this.state = state;
     }
 
     protected Contribution(final Parcel in) {

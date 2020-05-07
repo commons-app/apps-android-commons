@@ -30,7 +30,6 @@ import fr.free.nrw.commons.campaigns.CampaignView;
 import fr.free.nrw.commons.campaigns.CampaignsPresenter;
 import fr.free.nrw.commons.campaigns.ICampaignsView;
 import fr.free.nrw.commons.contributions.ContributionsListFragment.Callback;
-import fr.free.nrw.commons.contributions.ContributionsListFragment.SourceRefresher;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
@@ -53,9 +52,6 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import java.util.List;
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
@@ -64,7 +60,6 @@ public class ContributionsFragment
         extends CommonsDaggerSupportFragment
         implements
         OnBackStackChangedListener,
-        SourceRefresher,
         LocationUpdateListener,
     MediaDetailProvider,
     ICampaignsView, ContributionsContract.View, Callback {
@@ -260,11 +255,6 @@ public class ContributionsFragment
         return intent;
     }
 
-    @Override
-    public void refreshSource() {
-
-    }
-
     @SuppressWarnings("ConstantConditions")
     private void setUploadCount() {
         compositeDisposable.add(okHttpJsonApiClient
@@ -307,10 +297,6 @@ public class ContributionsFragment
 
         boolean isSettingsChanged = store.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
         store.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
-        if (isSettingsChanged) {
-            refreshSource();
-        }
-
 
         if (store.getBoolean("displayNearbyCardView", true)) {
             checkPermissionsAndShowNearbyCardView();
