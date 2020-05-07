@@ -165,7 +165,7 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
      */
     @Override
     public void fetchThumbnailForEntityId(String entityId,int position) {
-         compositeDisposable.add(depictsClient.getP18ForItem(entityId)
+         compositeDisposable.add(depictsClient.getImagePropertyForItem(entityId)
                 .subscribeOn(ioScheduler)
                 .observeOn(mainThreadScheduler)
                 .subscribe(response -> {

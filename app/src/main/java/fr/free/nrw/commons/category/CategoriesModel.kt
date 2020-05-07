@@ -1,10 +1,12 @@
 package fr.free.nrw.commons.category
 
 import android.text.TextUtils
+import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.upload.GpsCategoryModel
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.utils.StringSortingUtils
 import io.reactivex.Observable
-import io.reactivex.functions.Function3
+import io.reactivex.functions.Function4
 import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
@@ -15,7 +17,8 @@ import javax.inject.Inject
 class CategoriesModel @Inject constructor(
     private val categoryClient: CategoryClient,
     private val categoryDao: CategoryDao,
-    private val gpsCategoryModel: GpsCategoryModel
+    private val gpsCategoryModel: GpsCategoryModel,
+    private val depictsClient: DepictsClient
 ) {
     private val selectedCategories: MutableList<CategoryItem> = mutableListOf()
 
@@ -67,30 +70,48 @@ class CategoriesModel @Inject constructor(
      * @param imageTitleList
      * @return
      */
-    fun searchAll(term: String, imageTitleList: List<String>): Observable<List<CategoryItem>> {
-        return suggestionsOrSearch(term, imageTitleList)
+    fun searchAll(
+        term: String,
+        imageTitleList: List<String>,
+        selectedDepictions: List<DepictedItem>
+    ): Observable<List<CategoryItem>> {
+        return suggestionsOrSearch(term, imageTitleList, selectedDepictions)
             .map { it.map { CategoryItem(it, false) } }
     }
 
-    private fun suggestionsOrSearch(term: String, imageTitleList: List<String>):
-            Observable<List<String>> {
+    private fun suggestionsOrSearch(
+        term: String,
+        imageTitleList: List<String>,
+        selectedDepictions: List<DepictedItem>
+    ): Observable<List<String>> {
         return if (TextUtils.isEmpty(term))
             Observable.combineLatest(
+                categoriesFromDepiction(selectedDepictions),
                 gpsCategoryModel.categoriesFromLocation,
                 titleCategories(imageTitleList),
                 Observable.just(categoryDao.recentCategories(SEARCH_CATS_LIMIT)),
-                Function3(::combine)
+                Function4(::combine)
             )
         else
             categoryClient.searchCategoriesForPrefix(term.toLowerCase(), SEARCH_CATS_LIMIT)
                 .map { it.sortedWith(StringSortingUtils.sortBySimilarity(term)) }
     }
 
+    private fun categoriesFromDepiction(selectedDepictions: List<DepictedItem>) =
+        if (selectedDepictions.isNotEmpty())
+            Observable.combineLatest(
+                selectedDepictions.map { depictsClient.getCategoryPropertyOf(it).toObservable() },
+                { results -> results.map { it as List<String> }.flatten() }
+            )
+        else
+            Observable.just(emptyList())
+
     private fun combine(
+        depictionCategories: List<String>,
         locationCategories: List<String>,
         titles: List<String>,
         recents: List<String>
-    ) = locationCategories + titles + recents
+    ) = depictionCategories + locationCategories + titles + recents
 
 
     /**
@@ -98,14 +119,13 @@ class CategoriesModel @Inject constructor(
      * @param titleList
      * @return
      */
-    private fun titleCategories(titleList: List<String>): Observable<List<String>> {
-        return if (titleList.isNotEmpty())
+    private fun titleCategories(titleList: List<String>) =
+        if (titleList.isNotEmpty())
             Observable.combineLatest(titleList.map { getTitleCategories(it) }) { searchResults ->
                 searchResults.map { it as List<String> }.flatten()
             }
         else
             Observable.just(emptyList())
-    }
 
     /**
      * Return category for single title

@@ -60,7 +60,7 @@ class SearchDepictionsPresenterTest {
     @Test
     fun fetchThumbnailForEntityId() {
         val singleString: Single<String> = Single.just(String())
-        Mockito.`when`(depictsClient?.getP18ForItem(ArgumentMatchers.anyString())).thenReturn(singleString)
+        Mockito.`when`(depictsClient?.getImagePropertyForItem(ArgumentMatchers.anyString())).thenReturn(singleString)
         searchDepictionsFragmentPresenter?.fetchThumbnailForEntityId("Q9394", 0)
         testScheduler?.triggerActions()
         verify(view)?.onImageUrlFetched("", 0)

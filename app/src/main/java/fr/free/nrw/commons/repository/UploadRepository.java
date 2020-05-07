@@ -88,10 +88,12 @@ public class UploadRepository {
      *
      * @param query
      * @param imageTitleList
+     * @param selectedDepictions
      * @return
      */
-    public Observable<List<CategoryItem>> searchAll(String query, List<String> imageTitleList) {
-        return remoteDataSource.searchAll(query, imageTitleList);
+    public Observable<List<CategoryItem>> searchAll(String query, List<String> imageTitleList,
+        List<DepictedItem> selectedDepictions) {
+        return remoteDataSource.searchAll(query, imageTitleList, selectedDepictions);
     }
 
     /**

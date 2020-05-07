@@ -6,12 +6,12 @@ import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import depictedItem
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.explore.depictions.DepictsClient.NO_DEPICTED_IMAGE
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.DepictsContract
 import fr.free.nrw.commons.upload.depicts.DepictsPresenter
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
@@ -77,7 +77,7 @@ class DepictsPresenterTest {
     @Test
     fun `searchResults retrieve imageUrls from cache`() {
         val depictedItem = depictedItem()
-        whenever(depictsClient.getP18ForItem(depictedItem.id)).thenReturn(Single.just("url"))
+        whenever(depictsClient.getImagePropertyForItem(depictedItem.id)).thenReturn(Single.just("url"))
         depictsPresenter.fetchThumbnailForEntityId(depictedItem)
         testScheduler.triggerActions()
         val searchResults = listOf(depictedItem(), depictedItem())
@@ -152,7 +152,7 @@ class DepictsPresenterTest {
     @Test
     fun `image urls fetched from network update the view`() {
         val depictedItem = depictedItem()
-        whenever(depictsClient.getP18ForItem(depictedItem.id)).thenReturn(Single.just("url"))
+        whenever(depictsClient.getImagePropertyForItem(depictedItem.id)).thenReturn(Single.just("url"))
         depictsPresenter.fetchThumbnailForEntityId(depictedItem)
         testScheduler.triggerActions()
         verify(view).onUrlFetched(depictedItem, "url")
@@ -161,7 +161,7 @@ class DepictsPresenterTest {
     @Test
     fun `image urls fetched from network filter NO_DEPICTED_IMAGE`() {
         val depictedItem = depictedItem()
-        whenever(depictsClient.getP18ForItem(depictedItem.id))
+        whenever(depictsClient.getImagePropertyForItem(depictedItem.id))
             .thenReturn(Single.just(NO_DEPICTED_IMAGE))
         depictsPresenter.fetchThumbnailForEntityId(depictedItem)
         testScheduler.triggerActions()
@@ -171,7 +171,7 @@ class DepictsPresenterTest {
     @Test
     fun `successive image urls fetched from cache`() {
         val depictedItem = depictedItem()
-        whenever(depictsClient.getP18ForItem(depictedItem.id)).thenReturn(Single.just("url"))
+        whenever(depictsClient.getImagePropertyForItem(depictedItem.id)).thenReturn(Single.just("url"))
         depictsPresenter.fetchThumbnailForEntityId(depictedItem)
         testScheduler.triggerActions()
         verify(view).onUrlFetched(depictedItem, "url")
@@ -181,10 +181,3 @@ class DepictsPresenterTest {
     }
 }
 
-fun depictedItem(
-    name: String = "label",
-    description: String = "desc",
-    imageUrl: String = "",
-    isSelected: Boolean = false,
-    id: String = "entityId"
-) = DepictedItem(name, description, imageUrl, isSelected, id)

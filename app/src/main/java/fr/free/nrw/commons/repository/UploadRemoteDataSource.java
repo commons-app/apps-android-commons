@@ -39,7 +39,7 @@ public class UploadRemoteDataSource {
 
     @Inject
     public UploadRemoteDataSource(UploadModel uploadModel, UploadController uploadController,
-                                  CategoriesModel categoriesModel, NearbyPlaces nearbyPlaces, DepictModel depictModel) {
+        CategoriesModel categoriesModel, NearbyPlaces nearbyPlaces, DepictModel depictModel) {
         this.uploadModel = uploadModel;
         this.uploadController = uploadController;
         this.categoriesModel = categoriesModel;
@@ -104,10 +104,12 @@ public class UploadRemoteDataSource {
      *
      * @param query
      * @param imageTitleList
+     * @param selectedDepictions
      * @return
      */
-    public Observable<List<CategoryItem>> searchAll(String query, List<String> imageTitleList) {
-        return categoriesModel.searchAll(query, imageTitleList);
+    public Observable<List<CategoryItem>> searchAll(String query, List<String> imageTitleList,
+        List<DepictedItem> selectedDepictions) {
+        return categoriesModel.searchAll(query, imageTitleList, selectedDepictions);
     }
 
     /**

@@ -5,12 +5,14 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.depictions.models.Search;
 import fr.free.nrw.commons.media.MediaInterface;
+import fr.free.nrw.commons.upload.WikidataItem;
 import fr.free.nrw.commons.upload.depicts.DepictsInterface;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.wikidata.WikidataProperties;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.schedulers.Schedulers;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -21,6 +23,7 @@ import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.jetbrains.annotations.NotNull;
 import org.wikipedia.wikidata.DataValue.DataValueString;
 import org.wikipedia.wikidata.Statement_partial;
 
@@ -77,19 +80,10 @@ public class DepictsClient {
      * Ex: entityId = Q357458
      * value returned = Elgin Baylor Night program.jpeg
      */
-    public Single<String> getP18ForItem(String entityId) {
-        return depictsInterface.getImageForEntity(entityId)
-            .map(claimsResponse -> {
-                final List<Statement_partial> imageClaim = claimsResponse.getClaims()
-                    .get(WikidataProperties.IMAGE.getPropertyName());
-                    final DataValueString dataValue = (DataValueString) imageClaim
-                        .get(0)
-                        .getMainSnak()
-                        .getDataValue();
-                    return getThumbnailUrl((dataValue.getValue()));
-            })
-            .onErrorReturn(throwable -> NO_DEPICTED_IMAGE)
-            .singleOrError();
+    public Single<String> getImagePropertyForItem(String entityId) {
+        return getStatements(entityId, WikidataProperties.IMAGE)
+            .map(imageStatements -> getThumbnailUrl(getValue(imageStatements.get(0))))
+            .onErrorResumeNext(throwable -> Single.just(NO_DEPICTED_IMAGE));
     }
 
     /**
@@ -171,5 +165,34 @@ public class DepictsClient {
         } catch (ParseException e) {
             return null;
         }
+    }
+
+    public Single<List<String>> getCategoryPropertyOf(WikidataItem wikidataItem) {
+        return getStatements(wikidataItem.getId(), WikidataProperties.COMMONS_CATEGORY)
+            .map(commonsCategories -> {
+                final List<String> categories = new ArrayList<>();
+                for (Statement_partial categoryStatement : commonsCategories) {
+                        categories.add(getValue(categoryStatement));
+                    }
+                    return categories;
+                }
+            )
+            .subscribeOn(Schedulers.io());
+    }
+
+    private Single<List<Statement_partial>> getStatements(String wikidataItemId,
+        WikidataProperties wikidataProperty) {
+        return depictsInterface.getPropertyForEntity(
+            wikidataItemId,
+            wikidataProperty.getPropertyName())
+            .map(response -> response.getClaims().get(wikidataProperty.getPropertyName()));
+    }
+
+    @NotNull
+    private String getValue(Statement_partial statement_partial) {
+        return ((DataValueString) statement_partial
+            .getMainSnak()
+            .getDataValue())
+            .getValue();
     }
 }

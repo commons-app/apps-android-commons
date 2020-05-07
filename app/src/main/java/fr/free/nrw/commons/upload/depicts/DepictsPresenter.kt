@@ -143,7 +143,7 @@ class DepictsPresenter @Inject constructor(
         if (idsToImageUrls.containsKey(depictedItem.id))
             Single.just(idsToImageUrls[depictedItem.id])
         else
-            depictsClient.getP18ForItem(depictedItem.id)
+            depictsClient.getImagePropertyForItem(depictedItem.id)
                 .subscribeOn(ioScheduler)
                 .doOnSuccess { idsToImageUrls[depictedItem.id] = it }
 }

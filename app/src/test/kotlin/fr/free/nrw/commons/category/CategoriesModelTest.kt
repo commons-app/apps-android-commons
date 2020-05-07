@@ -1,9 +1,13 @@
 package fr.free.nrw.commons.category
 
+import categoryItem
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
+import depictedItem
+import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.upload.GpsCategoryModel
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
 import org.junit.Before
 import org.junit.Test
@@ -28,7 +32,7 @@ class CategoriesModelTest {
     // Test Case for verifying that Categories search (MW api calls) are case-insensitive
     @Test
     fun searchAllFoundCaseTest() {
-        val categoriesModel = CategoriesModel(categoryClient, mock(), mock())
+        val categoriesModel = CategoriesModel(categoryClient, mock(), mock(), mock())
 
         val expectedList = listOf("Test")
         whenever(categoryClient.searchCategoriesForPrefix("tes", 25))
@@ -36,11 +40,11 @@ class CategoriesModelTest {
 
         // Checking if both return "Test"
         val expectedItems = expectedList.map { CategoryItem(it, false) }
-        categoriesModel.searchAll("tes", emptyList())
+        categoriesModel.searchAll("tes", emptyList(), emptyList())
             .test()
             .assertValues(expectedItems)
 
-        categoriesModel.searchAll("Tes", emptyList())
+        categoriesModel.searchAll("Tes", emptyList(), emptyList())
             .test()
             .assertValues(expectedItems)
     }
@@ -48,20 +52,24 @@ class CategoriesModelTest {
     @Test
     fun `searchAll with empty search terms creates results from gps, title search & recents`() {
         val gpsCategoryModel: GpsCategoryModel = mock()
+        val depictsClient: DepictsClient = mock()
+        val depictedItem = depictedItem()
 
         whenever(gpsCategoryModel.categoriesFromLocation)
             .thenReturn(BehaviorSubject.createDefault(listOf("gpsCategory")))
         whenever(categoryClient.searchCategories("tes", 25))
             .thenReturn(Observable.just(listOf("titleSearch")))
+        whenever(depictsClient.getCategoryPropertyOf(depictedItem)).thenReturn(Single.just(listOf("depictionCategory")))
         whenever(categoryDao.recentCategories(25)).thenReturn(listOf("recentCategories"))
-        CategoriesModel(categoryClient, categoryDao, gpsCategoryModel)
-            .searchAll("", listOf("tes"))
+        CategoriesModel(categoryClient, categoryDao, gpsCategoryModel, depictsClient)
+            .searchAll("", listOf("tes"), listOf(depictedItem))
             .test()
             .assertValue(
                 listOf(
-                    CategoryItem("gpsCategory", false),
-                    CategoryItem("titleSearch", false),
-                    CategoryItem("recentCategories", false)
+                    categoryItem("depictionCategory"),
+                    categoryItem("gpsCategory"),
+                    categoryItem("titleSearch"),
+                    categoryItem("recentCategories")
                 )
             )
     }
