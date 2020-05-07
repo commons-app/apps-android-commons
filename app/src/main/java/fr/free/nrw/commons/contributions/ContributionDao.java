@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.contributions;
 
 import androidx.lifecycle.LiveData;
+import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -16,7 +17,7 @@ import java.util.List;
 public abstract class ContributionDao {
 
     @Query("SELECT * FROM contribution order by dateUploaded DESC")
-    abstract LiveData<List<Contribution>> fetchContributions();
+    abstract DataSource.Factory<Integer, Contribution> fetchContributions();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract Single<Long> save(Contribution contribution);

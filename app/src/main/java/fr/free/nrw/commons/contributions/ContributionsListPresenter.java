@@ -3,6 +3,8 @@ package fr.free.nrw.commons.contributions;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
+import androidx.paging.LivePagedListBuilder;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
@@ -36,13 +38,14 @@ public class ContributionsListPresenter implements UserActionListener {
   MediaClient mediaClient;
   private CompositeDisposable compositeDisposable;
   private ContributionsListContract.View view;
-  private List<Contribution> contributionList = new ArrayList<>();
   private LifecycleOwner lifeCycleOwner;
   private String user;
   private static final int PAGE_SIZE = 10;
   private static final int START_LOADING_SIZE = 5;
   private boolean isLoading;
   private boolean isLastPage;
+
+  public final LiveData<PagedList<Contribution>> contributionList;
 
   @Inject
   ContributionsListPresenter(ContributionsRepository repository,
@@ -51,6 +54,7 @@ public class ContributionsListPresenter implements UserActionListener {
     this.repository = repository;
     this.mainThreadScheduler = mainThreadScheduler;
     this.ioThreadScheduler = ioThreadScheduler;
+    contributionList = new LivePagedListBuilder<>(repository.fetchContributions(), 50).build();
   }
 
   @Override
@@ -89,9 +93,6 @@ public class ContributionsListPresenter implements UserActionListener {
 
   public void fetchContributions() {
     if (NetworkUtils.isInternetConnectionEstablished(CommonsApplication.getInstance())) {
-      if (contributionList.isEmpty()) {
-        view.showProgress(true);
-      }
       user = sessionManager.getUserName();
       compositeDisposable.add(mediaClient.getMediaListForUser(user)
           .subscribeOn(ioThreadScheduler)
@@ -119,9 +120,8 @@ public class ContributionsListPresenter implements UserActionListener {
   }
 
   void setupLiveData() {
-    LiveData<List<Contribution>> liveDataContributions = repository.fetchContributions();
     if (null != lifeCycleOwner) {
-      liveDataContributions.observe(lifeCycleOwner, this::showContributions);
+      contributionList.observe(lifeCycleOwner, contributions -> showContributions(contributions));
     }
   }
 
@@ -134,8 +134,6 @@ public class ContributionsListPresenter implements UserActionListener {
       view.showWelcomeTip(false);
       view.showNoContributionsUI(false);
       view.showContributions(contributions);
-      contributionList.clear();
-      contributionList.addAll(contributions);
     }
   }
 

@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.contributions;
 
 import android.os.Parcel;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -12,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.wikipedia.dataclient.mwapi.MwQueryLogEvent;
 
 @Entity(tableName = "contribution")
 public class Contribution extends Media {
@@ -29,16 +30,15 @@ public class Contribution extends Media {
     private String dateCreatedSource;
     private WikidataPlace wikidataPlace;
     /**
-     * Each depiction loaded in depictions activity is associated with a wikidata entity id,
-     * this Id is in turn used to upload depictions to wikibase
+     * Each depiction loaded in depictions activity is associated with a wikidata entity id, this Id
+     * is in turn used to upload depictions to wikibase
      */
     private List<DepictedItem> depictedItems = new ArrayList<>();
     private String mimeType;
     /**
-     * This hasmap stores the list of multilingual captions, where
-     * key of the HashMap is the language and value is the caption in the corresponding language
-     * Ex: key = "en", value: "<caption in short in English>"
-     *     key = "de" , value: "<caption in german>"
+     * This hasmap stores the list of multilingual captions, where key of the HashMap is the language
+     * and value is the caption in the corresponding language Ex: key = "en", value: "<caption in
+     * short in English>" key = "de" , value: "<caption in german>"
      */
     private Map<String, String> captions = new HashMap<>();
 
@@ -52,7 +52,7 @@ public class Contribution extends Media {
             UploadMediaDetail.formatList(item.getUploadMediaDetails()),
             sessionManager.getAuthorName(),
             categories);
-        captions =  UploadMediaDetail.formatCaptions(item.getUploadMediaDetails());
+        captions = UploadMediaDetail.formatCaptions(item.getUploadMediaDetails());
         decimalCoords = item.getGpsCoords().getDecimalCoords();
         dateCreatedSource = "";
         this.depictedItems = depictedItems;
@@ -110,29 +110,30 @@ public class Contribution extends Media {
         this.depictedItems = depictedItems;
     }
 
-    public void setMimeType(String mimeType) {
-      this.mimeType = mimeType;
+    public String getMimeType() {
+        return mimeType;
     }
 
-    public String getMimeType() {
-      return mimeType;
+    public void setMimeType(final String mimeType) {
+        this.mimeType = mimeType;
     }
 
     /**
-     * Captions are a feature part of Structured data. They are meant to store short, multilingual descriptions about files
-     * This is a replacement of the previously used titles for images (titles were not multilingual)
-     * Also now captions replace the previous convention of using title for filename
-     *
+     * Captions are a feature part of Structured data. They are meant to store short, multilingual
+     * descriptions about files This is a replacement of the previously used titles for images (titles
+     * were not multilingual) Also now captions replace the previous convention of using title for
+     * filename
+     * <p>
      * key of the HashMap is the language and value is the caption in the corresponding language
-     *
+     * <p>
      * returns list of captions stored in hashmap
      */
     public Map<String, String> getCaptions() {
-      return captions;
+        return captions;
     }
 
     public void setCaptions(Map<String, String> captions) {
-      this.captions = captions;
+        this.captions = captions;
     }
 
     @Override
@@ -181,4 +182,15 @@ public class Contribution extends Media {
             return new Contribution[size];
         }
     };
+
+    @NonNull
+    @Override
+    public String toString() {
+        return getPageId();
+    }
+
+    @Override
+    public boolean equals(@Nullable final Object obj) {
+        return obj.toString() == toString();
+    }
 }

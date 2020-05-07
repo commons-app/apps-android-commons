@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
-import androidx.lifecycle.LiveData;
-
+import androidx.paging.DataSource.Factory;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -45,7 +44,7 @@ public class ContributionsRepository {
         return localDataSource.getContributionWithFileName(fileName);
     }
 
-    public LiveData<List<Contribution>> fetchContributions() {
+    public Factory<Integer, Contribution> fetchContributions() {
         return localDataSource.getContributions();
     }
 
