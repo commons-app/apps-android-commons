@@ -11,7 +11,6 @@ import io.reactivex.Flowable
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.BiFunction
 import io.reactivex.processors.PublishProcessor
 import timber.log.Timber
 import java.lang.reflect.Proxy
@@ -63,12 +62,8 @@ class DepictsPresenter @Inject constructor(
         )
     }
 
-    private fun searchResultsWithTerm(it: String): Flowable<Pair<List<DepictedItem>, String>> {
-        return Flowable.zip(
-            searchResults(it),
-            Flowable.just(it),
-            BiFunction { results: List<DepictedItem>, term: String -> Pair(results, term) }
-        )
+    private fun searchResultsWithTerm(term: String): Flowable<Pair<List<DepictedItem>, String>> {
+        return searchResults(term).map { Pair(it, term) }
     }
 
     private fun searchResults(it: String): Flowable<List<DepictedItem>> {

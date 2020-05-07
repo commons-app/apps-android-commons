@@ -14,7 +14,7 @@ import javax.inject.Singleton
 @Singleton
 class DepictModel @Inject constructor(private val depictsInterface: DepictsInterface) {
 
-    var nearbyPlaces: BehaviorProcessor<List<Place>> = BehaviorProcessor.createDefault(emptyList())
+    val nearbyPlaces: BehaviorProcessor<List<Place>> = BehaviorProcessor.createDefault(emptyList())
 
     companion object {
         private const val SEARCH_DEPICTS_LIMIT = 25
@@ -39,7 +39,7 @@ class DepictModel @Inject constructor(private val depictsInterface: DepictsInter
     }
 
     fun cleanUp() {
-        nearbyPlaces = BehaviorProcessor.createDefault(emptyList())
+        nearbyPlaces.offer(emptyList())
     }
 
 }
