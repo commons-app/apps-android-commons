@@ -1090,7 +1090,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void filterOutAllMarkers() {
-        hideAllMarkers();
         updateNearbyList();
     }
 
@@ -1119,9 +1118,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         boolean displayNeedsPhoto,
         boolean filterForPlaceState,
         boolean filterForAllNoneType) {
-
-        // Remove the previous markers before updating them
-        hideAllMarkers();
 
         for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
             Place place = markerPlaceGroup.getPlace();
