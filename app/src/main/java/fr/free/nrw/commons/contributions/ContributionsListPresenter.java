@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.contributions;
 
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.paging.LivePagedListBuilder;
@@ -23,7 +22,6 @@ public class ContributionsListPresenter implements UserActionListener {
 
   private CompositeDisposable compositeDisposable;
   private ContributionsListContract.View view;
-  private LifecycleOwner lifeCycleOwner;
 
   public LiveData<PagedList<Contribution>> contributionList;
   public MutableLiveData networkState;
@@ -42,10 +40,6 @@ public class ContributionsListPresenter implements UserActionListener {
   @Override
   public void onAttachView(ContributionsListContract.View view) {
     this.view = view;
-  }
-
-  public void setLifeCycleOwner(LifecycleOwner lifeCycleOwner) {
-    this.lifeCycleOwner = lifeCycleOwner;
   }
 
   void setup() {

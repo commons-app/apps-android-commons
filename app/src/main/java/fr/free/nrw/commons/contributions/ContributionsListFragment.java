@@ -13,11 +13,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -85,7 +83,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     final View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
         ButterKnife.bind(this, view);
         contributionsListPresenter.onAttachView(this);
-        contributionsListPresenter.setLifeCycleOwner(getViewLifecycleOwner());
         initAdapter();
         return view;
     }
@@ -106,9 +103,9 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
       final GridLayoutManager layoutManager = new GridLayoutManager(getContext(),
           getSpanCount(getResources().getConfiguration().orientation));
       rvContributionsList.setLayoutManager(layoutManager);
-      rvContributionsList.setAdapter(adapter);
       contributionsListPresenter.setup();
       contributionsListPresenter.contributionList.observe(this, adapter::submitList);
+      rvContributionsList.setAdapter(adapter);
     }
 
   private int getSpanCount(final int orientation) {
@@ -206,40 +203,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
     public int getTotalMediaCount() {
         return adapter.getItemCount();
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull final Bundle outState) {
-        super.onSaveInstanceState(outState);
-      final LayoutManager layoutManager = rvContributionsList.getLayoutManager();
-      final int lastVisibleItemPosition = ((GridLayoutManager) layoutManager)
-          .findLastCompletelyVisibleItemPosition();
-      ;
-      final String idOfItemWithPosition = findIdOfItemWithPosition(lastVisibleItemPosition);
-        if (null != idOfItemWithPosition) {
-            outState.putString(VISIBLE_ITEM_ID, idOfItemWithPosition);
-        }
-    }
-
-    @Override
-    public void onViewStateRestored(@Nullable final Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        if(null!=savedInstanceState){
-        }
-    }
-
-    /**
-     * Gets the id of the contribution from the db
-     * @param position
-     * @return
-     */
-    @Nullable
-    private String findIdOfItemWithPosition(final int position) {
-      final Contribution contributionForPosition = adapter.getContributionForPosition(position);
-        if (null != contributionForPosition) {
-            return contributionForPosition.getFilename();
-        }
-        return null;
     }
 
     public interface Callback {
