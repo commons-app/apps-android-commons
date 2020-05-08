@@ -6,13 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.AbstractTextWatcher;
@@ -76,28 +77,36 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         return uploadMediaDetails;
     }
 
-    public void addDescription(UploadMediaDetail uploadMediaDetail) {
+    public void addDescription(final UploadMediaDetail uploadMediaDetail) {
         this.uploadMediaDetails.add(uploadMediaDetail);
         notifyItemInserted(uploadMediaDetails.size());
+    }
+
+    private void removeDescription(final UploadMediaDetail uploadMediaDetail, final int pos) {
+        this.uploadMediaDetails.remove(uploadMediaDetail);
+        notifyItemRemoved(pos);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         @Nullable
         @BindView(R.id.spinner_description_languages)
-        AppCompatSpinner spinnerDescriptionLanguages;
+        Spinner spinnerDescriptionLanguages;
 
         @BindView(R.id.description_item_edit_text)
-        AppCompatEditText descItemEditText;
+        TextInputEditText descItemEditText;
 
         @BindView(R.id.description_item_edit_text_input_layout)
         TextInputLayout descInputLayout;
 
         @BindView(R.id.caption_item_edit_text)
-        AppCompatEditText captionItemEditText;
+        TextInputEditText captionItemEditText;
 
         @BindView(R.id.caption_item_edit_text_input_layout)
         TextInputLayout captionInputLayout;
+
+        @BindView(R.id.btn_remove)
+        ImageView removeButton;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -119,6 +128,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                 }));
 
             if (position == 0) {
+                removeButton.setVisibility(View.GONE);
                 captionInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
                 captionInputLayout.setEndIconDrawable(R.drawable.mapbox_info_icon_default);
                 captionInputLayout.setEndIconOnClickListener(v ->
@@ -130,9 +140,12 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                     callback.showAlert(R.string.media_detail_description, R.string.description_info));
 
             } else {
+                removeButton.setVisibility(View.VISIBLE);
                 captionInputLayout.setEndIconDrawable(null);
                 descInputLayout.setEndIconDrawable(null);
             }
+
+            removeButton.setOnClickListener(v -> removeDescription(uploadMediaDetail, position));
 
             captionItemEditText.addTextChangedListener(new AbstractTextWatcher(
                     captionText -> uploadMediaDetails.get(position).setCaptionText(captionText)));
@@ -148,6 +161,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
             } else {
                 captionItemEditText.clearFocus();
             }
+
         }
 
         /**
