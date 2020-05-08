@@ -15,8 +15,6 @@ public class ContributionsListContract {
     void showProgress(boolean shouldShow);
 
     void showNoContributionsUI(boolean shouldShow);
-
-    void showContributions(List<Contribution> contributionList);
   }
 
   public interface UserActionListener extends BasePresenter<View> {

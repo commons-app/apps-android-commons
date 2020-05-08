@@ -7,8 +7,6 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.media.MediaClient;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Represents The View Adapter for the List of Contributions
@@ -18,14 +16,12 @@ public class ContributionsListAdapter extends
 
     private Callback callback;
     private final MediaClient mediaClient;
-    private List<Contribution> contributions;
 
     ContributionsListAdapter(final Callback callback,
         final MediaClient mediaClient) {
         super(DIFF_CALLBACK);
         this.callback = callback;
         this.mediaClient = mediaClient;
-        contributions = new ArrayList<>();
         setHasStableIds(true);
     }
 
@@ -44,22 +40,14 @@ public class ContributionsListAdapter extends
 
     @Override
     public void onBindViewHolder(@NonNull final ContributionViewHolder holder, final int position) {
-        final Contribution contribution = contributions.get(position);
-        holder.init(position, contribution);
-    }
-
-    @Override
-    public int getItemCount() {
-        return contributions.size();
-    }
-
-    public void setContributions(@NonNull final List<Contribution> contributionList) {
-        contributions = contributionList;
-        notifyDataSetChanged();
+        Contribution contribution = getItem(position);
+        if (contribution != null) {
+            holder.init(position, contribution);
+        }
     }
 
     Contribution getContributionForPosition(final int position) {
-        return contributions.get(position);
+        return getItem(position);
     }
 
     /**

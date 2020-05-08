@@ -8,7 +8,6 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.media.MediaClient
-import fr.free.nrw.commons.utils.NetworkUtils
 import fr.free.nrw.commons.utils.NetworkUtilsTest
 import fr.free.nrw.commons.utils.createMockDataSourceFactory
 import io.reactivex.Scheduler
@@ -60,7 +59,9 @@ class ContributionsListPresenterTest {
         scheduler = TestScheduler()
         whenever(repository.fetchContributions())
             .thenReturn(createMockDataSourceFactory(listOf(mock(Contribution::class.java))))
-        contributionsListPresenter = ContributionsListPresenter(repository, scheduler, scheduler, sessionManager, mediaClient)
+        contributionsListPresenter = ContributionsListPresenter(
+            contributionBoundaryCallback, repository, scheduler
+        )
         contributionsListPresenter.onAttachView(view)
     }
 

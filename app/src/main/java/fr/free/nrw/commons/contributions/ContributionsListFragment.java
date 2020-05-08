@@ -16,7 +16,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 import butterknife.BindView;
@@ -27,9 +26,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import java.util.List;
 import javax.inject.Inject;
-import timber.log.Timber;
 
 /**
  * Created by root on 01.06.2018.
@@ -73,17 +70,19 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
     private ContributionsListAdapter adapter;
 
-    private Callback callback;
+  private final Callback callback;
 
-  private int SPAN_COUNT_LANDSCAPE =3;
-  private int SPAN_COUNT_PORTRAIT =1;
+  private final int SPAN_COUNT_LANDSCAPE = 3;
+  private final int SPAN_COUNT_PORTRAIT = 1;
 
-    ContributionsListFragment(Callback callback) {
+  ContributionsListFragment(final Callback callback) {
         this.callback = callback;
     }
 
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
+  public View onCreateView(
+      final LayoutInflater inflater, @Nullable final ViewGroup container,
+      @Nullable final Bundle savedInstanceState) {
+    final View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
         ButterKnife.bind(this, view);
         contributionsListPresenter.onAttachView(this);
         contributionsListPresenter.setLifeCycleOwner(getViewLifecycleOwner());
@@ -93,11 +92,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
     private void initAdapter() {
       adapter = new ContributionsListAdapter(this, mediaClient);
-        adapter.setHasStableIds(true);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initRecyclerView();
         initializeAnimations();
@@ -105,25 +103,21 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     }
 
     private void initRecyclerView() {
-      GridLayoutManager layoutManager = new GridLayoutManager(getContext(),
+      final GridLayoutManager layoutManager = new GridLayoutManager(getContext(),
           getSpanCount(getResources().getConfiguration().orientation));
       rvContributionsList.setLayoutManager(layoutManager);
-
-        rvContributionsList.setAdapter(adapter);
-        rvContributionsList.addOnScrollListener(contributionsListPresenter
-            .getScrollListener(layoutManager, getContext()));
-
-      contributionsListPresenter.setupLiveData();
-      contributionsListPresenter.fetchContributions(getContext());
+      rvContributionsList.setAdapter(adapter);
+      contributionsListPresenter.setup();
+      contributionsListPresenter.contributionList.observe(this, adapter::submitList);
     }
 
-    private int getSpanCount(int orientation) {
+  private int getSpanCount(final int orientation) {
       return orientation == Configuration.ORIENTATION_LANDSCAPE?
           SPAN_COUNT_LANDSCAPE: SPAN_COUNT_PORTRAIT;
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(final Configuration newConfig) {
       super.onConfigurationChanged(newConfig);
       // check orientation
       fab_layout.setOrientation(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE?
@@ -151,7 +145,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         });
     }
 
-    private void animateFAB(boolean isFabOpen) {
+  private void animateFAB(final boolean isFabOpen) {
         this.isFabOpen = !isFabOpen;
         if (fabPlus.isShown()){
             if (isFabOpen) {
@@ -174,7 +168,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     /**
      * Shows welcome message if user has no contributions yet i.e. new user.
      */
-    public void showWelcomeTip(boolean shouldShow) {
+    public void showWelcomeTip(final boolean shouldShow) {
         noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
     }
 
@@ -187,31 +181,26 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         progressBar.setVisibility(shouldShow ? VISIBLE : GONE);
     }
 
-    public void showNoContributionsUI(boolean shouldShow) {
+  public void showNoContributionsUI(final boolean shouldShow) {
         noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
     }
 
     @Override
-    public void showContributions(final List<Contribution> contributionList) {
-        adapter.setContributions(contributionList);
-    }
-
-    @Override
-    public void retryUpload(Contribution contribution) {
+    public void retryUpload(final Contribution contribution) {
         callback.retryUpload(contribution);
     }
 
     @Override
-    public void deleteUpload(Contribution contribution) {
+    public void deleteUpload(final Contribution contribution) {
         contributionsListPresenter.deleteUpload(contribution);
     }
 
     @Override
-    public void openMediaDetail(int position) {
+    public void openMediaDetail(final int position) {
         callback.showDetail(position);
     }
 
-    public Media getMediaAtPosition(int i) {
+  public Media getMediaAtPosition(final int i) {
         return adapter.getContributionForPosition(i);
     }
 
@@ -220,18 +209,20 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     }
 
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
-        LayoutManager layoutManager = rvContributionsList.getLayoutManager();
-        int lastVisibleItemPosition= ((GridLayoutManager)layoutManager).findLastCompletelyVisibleItemPosition();;
-        String idOfItemWithPosition = findIdOfItemWithPosition(lastVisibleItemPosition);
+      final LayoutManager layoutManager = rvContributionsList.getLayoutManager();
+      final int lastVisibleItemPosition = ((GridLayoutManager) layoutManager)
+          .findLastCompletelyVisibleItemPosition();
+      ;
+      final String idOfItemWithPosition = findIdOfItemWithPosition(lastVisibleItemPosition);
         if (null != idOfItemWithPosition) {
             outState.putString(VISIBLE_ITEM_ID, idOfItemWithPosition);
         }
     }
 
     @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+    public void onViewStateRestored(@Nullable final Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         if(null!=savedInstanceState){
         }
@@ -243,8 +234,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
      * @return
      */
     @Nullable
-    private String findIdOfItemWithPosition(int position) {
-        Contribution contributionForPosition = adapter.getContributionForPosition(position);
+    private String findIdOfItemWithPosition(final int position) {
+      final Contribution contributionForPosition = adapter.getContributionForPosition(position);
         if (null != contributionForPosition) {
             return contributionForPosition.getFilename();
         }
