@@ -6,7 +6,7 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
-import fr.free.nrw.commons.upload.UploadModel.UploadItem;
+import fr.free.nrw.commons.upload.UploadItem;
 import java.util.List;
 
 /**
@@ -28,27 +28,30 @@ public interface UploadMediaDetailsContract {
 
         void showMessage(String message, int colorResourceId);
 
-        void showDuplicatePicturePopup();
+        void showDuplicatePicturePopup(UploadItem uploadItem);
 
-        void showBadImagePopup(Integer errorCode);
+        void showBadImagePopup(Integer errorCode, UploadItem uploadItem);
 
         void showMapWithImageCoordinates(boolean shouldShow);
 
-        void setCaptionsAndDescriptions(List<UploadMediaDetail> uploadMediaDetails);
+        void showExternalMap(UploadItem uploadItem);
+
+        void updateMediaDetails(List<UploadMediaDetail> uploadMediaDetails);
     }
 
     interface UserActionListener extends BasePresenter<View> {
 
         void receiveImage(UploadableFile uploadableFile, Place place);
 
-        void verifyImageQuality(UploadItem uploadItem);
-
-        void setUploadItem(int index, UploadItem uploadItem);
+        void verifyImageQuality(int uploadItemIndex);
 
         void fetchPreviousTitleAndDescription(int indexInViewFlipper);
 
         void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex);
 
+        void onMapIconClicked(int indexInViewFlipper);
+
+        void onUserConfirmedUploadIsOfPlace(Place place, int uploadItemPosition);
     }
 
 }
