@@ -267,6 +267,7 @@ public class Media implements Parcelable {
         }
     }
 
+    @Nullable
     public String getThumbUrl() {
         return thumbUrl;
     }
