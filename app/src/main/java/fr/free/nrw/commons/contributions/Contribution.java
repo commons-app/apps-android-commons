@@ -191,8 +191,7 @@ public class Contribution extends Media {
             return false;
         }
         final Contribution that = (Contribution) o;
-        return ((Media) o).equals(this) &&
-            getState() == that.getState() && getTransferred() == that.getTransferred() && Objects
+        return getState() == that.getState() && getTransferred() == that.getTransferred() && Objects
             .equals(getDecimalCoords(), that.getDecimalCoords()) && Objects
             .equals(getDateCreatedSource(), that.getDateCreatedSource()) && Objects
             .equals(getWikidataPlace(), that.getWikidataPlace()) && Objects
@@ -204,7 +203,7 @@ public class Contribution extends Media {
     @Override
     public int hashCode() {
         return Objects
-            .hash(super.hashCode(), getState(), getTransferred(), getDecimalCoords(), getDateCreatedSource(),
+            .hash(getState(), getTransferred(), getDecimalCoords(), getDateCreatedSource(),
                 getWikidataPlace(), getDepictedItems(), getMimeType(), getCaptions());
     }
 }

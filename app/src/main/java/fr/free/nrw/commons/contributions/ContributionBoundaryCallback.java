@@ -8,9 +8,11 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.media.MediaClient;
 import io.reactivex.Scheduler;
+import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -52,12 +54,13 @@ public class ContributionBoundaryCallback extends PagedList.BoundaryCallback<Con
 
   @Override
   public void onZeroItemsLoaded() {
+    Timber.d("On zero item loaded");
     fetchContributions();
   }
 
   @Override
   public void onItemAtFrontLoaded(@NonNull final Contribution itemAtFront) {
-
+    Timber.d("On item front");
   }
 
   @Override
@@ -83,7 +86,8 @@ public class ContributionBoundaryCallback extends PagedList.BoundaryCallback<Con
   }
 
   private void saveContributionsToDB(final List<Contribution> contributions) {
-    repository.save(contributions);
+    Single<List<Long>> single = repository.save(contributions);
+    Timber.d(Arrays.toString(single.blockingGet().toArray()));
     repository.set("last_fetch_timestamp", System.currentTimeMillis());
     networkState.postValue(NetworkState.LOADED);
   }

@@ -37,9 +37,6 @@ public abstract class ContributionDao {
     @Query("Delete FROM contribution")
     public abstract void deleteAll();
 
-    @Query("Delete FROM contribution WHERE state = :state")
-    public abstract void deleteAll(int state);
-
     @Update
     public abstract Single<Integer> update(Contribution contribution);
 }

@@ -28,19 +28,19 @@ public class ContributionsListAdapter extends
     private static DiffUtil.ItemCallback<Contribution> DIFF_CALLBACK =
         new DiffUtil.ItemCallback<Contribution>() {
             @Override
-            public boolean areItemsTheSame(Contribution oldContribution, Contribution newContribution) {
+            public boolean areItemsTheSame(final Contribution oldContribution, final Contribution newContribution) {
                 return oldContribution.getPageId().equals(newContribution.getPageId());
             }
 
             @Override
-            public boolean areContentsTheSame(Contribution oldContribution, Contribution newContribution) {
+            public boolean areContentsTheSame(final Contribution oldContribution, final Contribution newContribution) {
                 return oldContribution.equals(newContribution);
             }
         };
 
     @Override
     public void onBindViewHolder(@NonNull final ContributionViewHolder holder, final int position) {
-        Contribution contribution = getItem(position);
+        final Contribution contribution = getItem(position);
         if (contribution != null) {
             holder.init(position, contribution);
         }
