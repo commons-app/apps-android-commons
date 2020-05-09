@@ -53,8 +53,7 @@
   <string name="provider_contributions">Moje obrázky</string>
   <string name="menu_share">Zdieľať</string>
   <string name="menu_open_in_browser">Otvoriť v prehliadači</string>
-  <string name="share_title_hint">Názov (povinné)</string>
-  <string name="add_title_toast">Prosím, dajte tomuto súboru názov</string>
+  <string name="share_title_hint" fuzzy="true">Názov (povinné)</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">prihlásenie zlyhalo - zlyhanie siete</string>
   <string name="login_failed_wrong_credentials">Nie je možné sa prihlásiť – skontrolujte, prosím, svoje používateľské meno a heslo</string>
@@ -425,9 +424,7 @@
   <string name="desc_language_Asia">Ázia</string>
   <string name="desc_language_Pacific">Tichomorie</string>
   <string name="no_categories_selected">Neboli vybrané žiadne kategórie</string>
-  <string name="no_categories_selected_warning_desc">Obrázky bez kategórií sú používané len zriedka. Naozaj chcete nahrať obrázok bez výberu kategórií?</string>
-  <string name="yes_submit">Áno, nahrať</string>
-  <string name="no_go_back">Nie, vrátiť sa späť</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">Obrázky bez kategórií sú používané len zriedka. Naozaj chcete nahrať obrázok bez výberu kategórií?</string>
   <string name="upload_flow_all_images_in_set">(Pre všetky obrázky v sade)</string>
   <string name="search_this_area">Prehľadať túto oblasť</string>
   <string name="nearby_card_permission_title">Je požadované oprávnenie</string>
@@ -506,7 +503,6 @@
   <string name="images_featured_explanation">Najlepšie obrázky sú fotografie od vysoko skúsených fotografov a ilustrátorov, ktoré vybrala komunita Wikimedie Commons ako jedny z najkvalitnejších na stránke.</string>
   <string name="images_via_nearby_explanation">Obrázky nahrané cez Miesta v okolí sú obrázky, ktoré sú nahrané vďaka objavovaniu miest na mape.</string>
   <string name="thanks_received_explanation">Táto funkcia umožňuje poslať poďakovanie za užitočné úpravy používateľom – použitím malého odkazu poďakovať v histórií stránky alebo na stránke rozdielu medzi revíziami.</string>
-  <string name="previous_image_title_description">Kopírovať predchádzajúci názov a popis</string>
   <string name="previous_button_tooltip_message">Kliknutím znovu použijete názov a popis, ktorý ste zadali pri predchádzajúcom obrázku, a upravíte ho tak, aby vyhovoval vášmu aktuálnemu obrázku</string>
   <string name="welcome_do_upload_content_description">Príklady dobrých obrázkov na nahranie na Commons</string>
   <string name="welcome_dont_upload_content_description">Príklady obrázkov, ktoré by ste nemali nahrávať</string>

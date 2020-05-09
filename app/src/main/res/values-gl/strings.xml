@@ -57,8 +57,7 @@
   <string name="provider_contributions">As miñas subidas</string>
   <string name="menu_share">Compartir</string>
   <string name="menu_open_in_browser">Amosar no navegador</string>
-  <string name="share_title_hint">Título (Requerido)</string>
-  <string name="add_title_toast">Por favor, proporcione un título para este ficheiro</string>
+  <string name="share_title_hint" fuzzy="true">Título (Requerido)</string>
   <string name="share_description_hint">Descrición</string>
   <string name="login_failed_network">Erro ao acceder ao sistema: Fallou a rede</string>
   <string name="login_failed_wrong_credentials">Non se pode acceder. Revise o nome de usuario e o contrasinal</string>
@@ -428,9 +427,7 @@
   <string name="desc_language_Asia">Asia</string>
   <string name="desc_language_Pacific">Pacífico</string>
   <string name="no_categories_selected">Non hai categorías seleccionadas</string>
-  <string name="no_categories_selected_warning_desc">As imaxes sen categorías só son utilizables en contadas ocasións. Está seguro de que quere cargar sen seleccionar categorías?</string>
-  <string name="yes_submit">Si, enviar</string>
-  <string name="no_go_back">Non, voltar</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">As imaxes sen categorías só son utilizables en contadas ocasións. Está seguro de que quere cargar sen seleccionar categorías?</string>
   <string name="upload_flow_all_images_in_set">(Para tódalas imaxes no conxunto)</string>
   <string name="search_this_area">Procurar nesta área</string>
   <string name="nearby_card_permission_title">Solicitude de permisos</string>

@@ -48,7 +48,6 @@
   <string name="menu_share">പങ്ക് വെയ്ക്കുക</string>
   <string name="menu_open_in_browser">ബ്രൗസറിൽ കാണുക</string>
   <string name="share_title_hint" fuzzy="true">തലക്കെട്ട്</string>
-  <string name="add_title_toast">ഈ പ്രമാണത്തിന് ഒരു തലക്കെട്ട് നൽകുക.</string>
   <string name="share_description_hint">വിവരണം</string>
   <string name="login_failed_network">പ്രവേശിക്കാനായില്ല - നെറ്റ്‌വർക്ക് പരാജയപ്പെട്ടു</string>
   <string name="login_failed_throttled">നിരവധി വിജയകരമല്ലാത്ത ശ്രമങ്ങൾ നടന്നിരിക്കുന്നു. വീണ്ടും ശ്രമിക്കുന്നതിനു മുമ്പ് ഏതാനം മിനിറ്റുകൾ വിശ്രമിക്കുക.</string>

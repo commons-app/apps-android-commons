@@ -30,7 +30,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
@@ -40,7 +39,6 @@ import timber.log.Timber;
  */
 public class CategoryImagesListFragment extends DaggerFragment {
 
-    private static int TIMEOUT_SECONDS = 15;
     /**
      * counts the total number of items loaded from the API
      */
@@ -121,7 +119,6 @@ public class CategoryImagesListFragment extends DaggerFragment {
         compositeDisposable.add(mediaClient.getMediaListFromCategory(categoryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(this::handleSuccess, this::handleError));
     }
 
@@ -227,7 +224,6 @@ public class CategoryImagesListFragment extends DaggerFragment {
         compositeDisposable.add(mediaClient.getMediaListFromCategory(categoryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(this::handleSuccess, this::handleError));
     }
 
@@ -273,7 +269,6 @@ public class CategoryImagesListFragment extends DaggerFragment {
         compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseIdentifier)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(subscriber -> {
                     handleLabelforImage(subscriber, i);
                 }));

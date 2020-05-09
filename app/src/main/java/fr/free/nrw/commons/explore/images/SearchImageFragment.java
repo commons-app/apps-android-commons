@@ -44,8 +44,6 @@ import timber.log.Timber;
 
 public class SearchImageFragment extends CommonsDaggerSupportFragment {
 
-    private static int TIMEOUT_SECONDS = 15;
-
     @BindView(R.id.imagesListBox)
     RecyclerView imagesRecyclerView;
     @BindView(R.id.imageSearchInProgress)
@@ -145,7 +143,6 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         compositeDisposable.add(mediaClient.getMediaListFromSearch(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .doOnSubscribe(disposable -> saveQuery(query))
                 .subscribe(this::handleSuccess, this::handleError));
     }
@@ -162,7 +159,6 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         compositeDisposable.add(mediaClient.getMediaListFromSearch(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(this::handlePaginationSuccess, this::handleError));
     }
 
@@ -218,7 +214,6 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseIdentifier)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                     .subscribe(subscriber -> {
                         handleLabelforImage(subscriber, position);
                     }));

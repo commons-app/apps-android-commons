@@ -52,7 +52,7 @@
   <string name="provider_contributions">Meng eropgeluede Fichieren</string>
   <string name="menu_share">Deelen</string>
   <string name="menu_open_in_browser">Am Browser kucken</string>
-  <string name="share_title_hint">Titel (Obligatoresch)</string>
+  <string name="share_title_hint">Erklärung (Obligatoresch)</string>
   <string name="share_description_hint">Beschreiwung</string>
   <string name="login_failed_network">Aloggen huet net funktionéiert - Feeler mam Reseau</string>
   <string name="login_failed_throttled">Ze dacks ouni Succès probéiert. Probéiert wgl. an e puer Minutten nach eng Kéier.</string>
@@ -272,6 +272,7 @@
   <string name="title_activity_search">Sichen</string>
   <string name="search_tab_title_media">Medien</string>
   <string name="search_tab_title_categories">Kategorien</string>
+  <string name="search_tab_title_depictions">Elementer</string>
   <string name="explore_tab_title_mobile">mobil eropgelueden</string>
   <string name="wikidata_edit_failure">Déi entspriechend Wikidata-Entitéit konnt net aktualiséiert ginn!</string>
   <string name="menu_set_wallpaper">Als Hannergrondbild festleeën</string>
@@ -320,8 +321,6 @@
   <string name="desc_language_Asia">Asien</string>
   <string name="desc_language_Pacific">Pazifik</string>
   <string name="no_categories_selected">Keng Kategorien erausgesicht</string>
-  <string name="yes_submit">Jo, schécken</string>
-  <string name="no_go_back">Neen, zréck goen</string>
   <string name="never_ask_again">Dëst ni méi froen</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Dir hutt esou vill Kontributioune gemaach datt eise Berechnungssystem iwwerfuerdert ass. Dëst ass déi bescht Leeschtung.</string>
   <string name="nominate_for_deletion_done">Fäerdeg</string>

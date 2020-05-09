@@ -56,8 +56,7 @@
   <string name="provider_contributions">Mine uploads</string>
   <string name="menu_share">Del</string>
   <string name="menu_open_in_browser">Åbn i browser</string>
-  <string name="share_title_hint">Titel (Påkrævet)</string>
-  <string name="add_title_toast">Angiv venligt en titel for denne fil</string>
+  <string name="share_title_hint">Billedtekst (Påkrævet)</string>
   <string name="share_description_hint">Beskrivelse</string>
   <string name="login_failed_network">Kan ikke logge på - netværksfejl</string>
   <string name="login_failed_wrong_credentials">Kunne ikke logge ind – check brugernavnet og adgangskoden</string>
@@ -297,6 +296,7 @@
   <string name="search_recent_header">Seneste søgninger:</string>
   <string name="search_tab_title_media">Medier</string>
   <string name="search_tab_title_categories">Kategorier</string>
+  <string name="search_tab_title_depictions">Emner</string>
   <string name="quiz_question_string">Er det i orden at lægge dette billede op?</string>
   <string name="question">Spørgsmål</string>
   <string name="result">Resultat</string>
@@ -349,8 +349,6 @@
   <string name="desc_language_Asia">Asien</string>
   <string name="desc_language_Pacific">Stillehavet</string>
   <string name="no_categories_selected">Ingen valgte kategorier</string>
-  <string name="yes_submit">Ja, indsend</string>
-  <string name="no_go_back">Nej, gå tilbage</string>
   <string name="search_this_area">Søg i dette område</string>
   <string name="never_ask_again">Spørg aldrig om dette igen</string>
   <string name="display_location_permission_title">Vis placeringstilladelse</string>

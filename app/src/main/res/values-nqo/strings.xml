@@ -44,8 +44,7 @@
   <string name="provider_contributions">ߒ ߠߊ߫ ߟߊ߬ߦߟߍ߬ߣߍ߲ ߠߎ߬</string>
   <string name="menu_share">ߊ߬ ߟߊߖߍ߲ߛߍ߲߫</string>
   <string name="menu_open_in_browser">ߊ߬ ߘߐߜߍ߫ ߛߏ߲߯ߓߊߟߊ߲ ߠߊ߫</string>
-  <string name="share_title_hint">ߞߎ߲߬ߕߐ߰ ߞߊ߬ߣߌ߲߬ߣߍ߲</string>
-  <string name="add_title_toast">ߞߎ߲߬ߕߐ߮ ߘߏ߫ ߓߌ߬ߟߊ߬ ߞߐߕߐ߮ ߣߌ߲߬ ߠߊ߫ ߖߊ߰ߣߌ߲߫</string>
+  <string name="share_title_hint" fuzzy="true">ߞߎ߲߬ߕߐ߰ ߞߊ߬ߣߌ߲߬ߣߍ߲</string>
   <string name="share_description_hint">ߞߊ߲߬ߛߓߍߟߌ</string>
   <string name="login_failed_network">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߛߐ߲߬ߣߍ߲߫ ߕߍ߫ ߞߍ߫ ߟߊ߫ - ߞߙߏߝߏ ߟߊ߫ ߗߌߙߏ߲ߠߌ߲</string>
   <string name="login_failed_wrong_credentials">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߛߐ߲߬ߣߍ߲߫ ߕߍ߫ ߞߍ߫ ߟߊ߫ - ߌ ߟߊ߫ ߕߐ߯ ߟߊߓߊ߯ߕߊ ߣߌ߫ ߕߊ߬ߡߌ߲߬ߞߊ߲ ߠߎ߬ ߡߊߝߟߍ߫ ߖߊ߰ߣߌ߲߬</string>
@@ -252,9 +251,7 @@
   <string name="desc_language_Asia">ߊߖ߭ߌ߫</string>
   <string name="desc_language_Pacific">ߖߐ߮ ߟߌ߲ߓߊ߲</string>
   <string name="no_categories_selected">ߦߌߟߡߊ߫ ߡߊ߫ ߓߊߕߐ߬ߡߐ߲߬</string>
-  <string name="no_categories_selected_warning_desc">ߦߌߟߡߊ߫ ߕߍ߫ ߖߌ߬ߦߊ߬ߓߍ ߡߍ߲ ߠߊ߫߸ ߏ߬ ߟߊߓߊ߯ߙߊ ߜߟߍ߬ߡߊ߲߫. ߌ ߦߴߊ߬ ߝߍ߬ ߞߵߊ߬ ߞߘߊߡߊ߫ ߓߊ߬ ߞߵߊ߬ ߕߘߍ߬ ߌ ߡߊ߫ ߦߌߟߡߊ ߘߏ߫ ߓߊߕߐ߬ߡߐ߲߬؟</string>
-  <string name="yes_submit">ߐ߲߬ߐ߲ߐ߲߫߸ ߊ߬ ߞߘߊߡߊ߫</string>
-  <string name="no_go_back">ߒ߬ߒ߫߸ ߌ ߞߐߛߊ߬ߦߌ߬</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">ߦߌߟߡߊ߫ ߕߍ߫ ߖߌ߬ߦߊ߬ߓߍ ߡߍ߲ ߠߊ߫߸ ߏ߬ ߟߊߓߊ߯ߙߊ ߜߟߍ߬ߡߊ߲߫. ߌ ߦߴߊ߬ ߝߍ߬ ߞߵߊ߬ ߞߘߊߡߊ߫ ߓߊ߬ ߞߵߊ߬ ߕߘߍ߬ ߌ ߡߊ߫ ߦߌߟߡߊ ߘߏ߫ ߓߊߕߐ߬ߡߐ߲߬؟</string>
   <string name="search_this_area">ߘߌ߲߬ߞߌߙߊ ߣߌ߲߬ ߢߌߣߌ߲߫</string>
   <string name="nearby_card_permission_title">ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ ߞߊ߬ߣߌ߲߬ߣߍ߲</string>
   <string name="nearby_card_permission_explanation">ߊ߬ ߞߊߘߴߌ ߦߋ߫ ߓߊ߬ ߞߊ߬ ߞߵߌ ߘߌ߲߬ߞߌߙߊ ߢߌ߲߬ ߠߊߓߊ߯ߙߊ߫ ߌ ߡߊߛߎߘߎ߲ߧߊ߫ ߦߙߐ ߘߌ߫ ߡߍ߲ ߡߊ߬ߞߏ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߊ߫؟</string>

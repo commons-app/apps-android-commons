@@ -55,8 +55,7 @@
   <string name="provider_contributions">Les meves càrregues</string>
   <string name="menu_share">Comparteix</string>
   <string name="menu_open_in_browser">Mostra al navegador</string>
-  <string name="share_title_hint">Títol (obligatori)</string>
-  <string name="add_title_toast">Proporcioneu un títol per al fitxer</string>
+  <string name="share_title_hint" fuzzy="true">Títol (obligatori)</string>
   <string name="share_description_hint">Descripció</string>
   <string name="login_failed_network">No s\'ha pogut iniciar la sessió – error de xarxa</string>
   <string name="login_failed_wrong_credentials">No es pot iniciar la sessió - comproveu el nom d\'usuari i la contrasenya</string>
@@ -395,9 +394,7 @@
   <string name="desc_language_Asia">Àsia</string>
   <string name="desc_language_Pacific">Pacífic</string>
   <string name="no_categories_selected">No s\'ha seleccionat cap categoria</string>
-  <string name="no_categories_selected_warning_desc">Les imatges sense categories rarament fan cap servei. Esteu segur que voleu procedir sense seleccionar cap categoria?</string>
-  <string name="yes_submit">Sí, envia</string>
-  <string name="no_go_back">No, vés enrere</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">Les imatges sense categories rarament fan cap servei. Esteu segur que voleu procedir sense seleccionar cap categoria?</string>
   <string name="upload_flow_all_images_in_set">(Per a totes les imatges en el conjunt)</string>
   <string name="search_this_area">Cerca en aquesta àrea</string>
   <string name="nearby_card_permission_title">Sol·licitud de permisos</string>
@@ -444,7 +441,6 @@
   <string name="error_occurred_in_picking_images">S\'ha produït un error en escollir les imatges</string>
   <string name="image_chooser_title">Trieu les imatges per carregar</string>
   <string name="please_wait">Espereu…</string>
-  <string name="previous_image_title_description">Copia el títol i descripció anteriors</string>
   <string name="welcome_do_upload_content_description">Exemples d’imatges adequades per a Commons</string>
   <string name="welcome_dont_upload_content_description">Exemples d’imatges que no s’han de pujar</string>
   <string name="skip_image">Omet aquesta imatge</string>

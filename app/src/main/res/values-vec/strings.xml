@@ -5,7 +5,7 @@
 <resources>
   <string name="title_activity_explore">Esplora</string>
   <string name="navigation_item_explore">Esplora</string>
-  <string name="preference_category_appearance">Siera de ła grafega</string>
+  <string name="preference_category_appearance">Siera de ła gràfega</string>
   <string name="preference_category_general">Xenerałe</string>
   <string name="preference_category_feedback">Feedback</string>
   <string name="preference_category_privacy">Privacy</string>
@@ -48,8 +48,7 @@
   <string name="provider_contributions">I me cargamenti</string>
   <string name="menu_share">Spartisi in jiro</string>
   <string name="menu_open_in_browser">Varda sol navegadore web</string>
-  <string name="share_title_hint">Titoło (obligatorio)</string>
-  <string name="add_title_toast">Par favore, daghe on titoło a sto file</string>
+  <string name="share_title_hint" fuzzy="true">Titoło (obligatorio)</string>
   <string name="share_description_hint">Descrision</string>
   <string name="login_failed_network">No xé posibiłe ndarghe drento - erore de rete</string>
   <string name="login_failed_wrong_credentials">Entrada no riusia - Daghe na ociada al nome utente e ciave</string>
@@ -416,9 +415,7 @@
   <string name="desc_language_Asia">Axia</string>
   <string name="desc_language_Pacific">Pasifego</string>
   <string name="no_categories_selected">Nisuna categoria sełesionà</string>
-  <string name="no_categories_selected_warning_desc">Le imajini sensa categorie łe xé poche olte doparabiłi. Sito seguro de vołer enviar sensa sełesionar categorie?</string>
-  <string name="yes_submit">Sì, envia</string>
-  <string name="no_go_back">No, torna indrio</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">Le imajini sensa categorie łe xé poche olte doparabiłi. Sito seguro de vołer enviar sensa sełesionar categorie?</string>
   <string name="upload_flow_all_images_in_set">(Par tute łe imajini n\'te l\'union)</string>
   <string name="search_this_area">Serca in sto posto</string>
   <string name="nearby_card_permission_title">Domanda de parmeso</string>
@@ -497,7 +494,6 @@
   <string name="images_featured_explanation">Le foto in primo pian łe xé imajini de fotografi altamente cuałifegai che ła comunità de Wikimedia Commons ła ga ełeto come fotografi de alta cuałità sol sito.</string>
   <string name="images_via_nearby_explanation">Imajini cargae via \"Posti cuà rente\", imajini che łe njien cargae scoerxendo posti n\'te ła mapa</string>
   <string name="thanks_received_explanation">Sta funsion ła consente ai editori de enviar na notifega de ringrasiamento ai uxuari che i fa modifeghe che serve, doparando on lingambo picenin de ringrasiamento n\'te ła pajina del storego o n\'te ła pajina de łe difarense.\n\nQuesta funzione consente agli editor di inviare una notifica di ringraziamento agli utenti che apportano modifiche utili, utilizzando un piccolo link di ringraziamento nella pagina della cronologia o nella pagina delle differenze.</string>
-  <string name="previous_image_title_description">Copia titoło/descrision preçedente</string>
   <string name="previous_button_tooltip_message">Schicia par ridoparar el titpło e ła descrision de l\'imajine preçedente e justarli a l\'imajine de deso.</string>
   <string name="welcome_do_upload_content_description">Exenpi de bone imajini da cargar so Commons</string>
   <string name="welcome_dont_upload_content_description">Exenpi de imajini da no cargar</string>

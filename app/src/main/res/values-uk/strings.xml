@@ -62,9 +62,10 @@
   <string name="provider_contributions">Мої завантаження</string>
   <string name="menu_share">Поширити</string>
   <string name="menu_open_in_browser">Відкрити у браузері</string>
-  <string name="share_title_hint">Назва (обов\'язково)</string>
-  <string name="add_title_toast">Будь ласка, вкажіть назву цього файлу</string>
+  <string name="share_title_hint">Підпис (обов\'язково)</string>
+  <string name="add_caption_toast">Будь ласка, вкажіть підпис цьому файлу</string>
   <string name="share_description_hint">Опис</string>
+  <string name="share_caption_hint">Підпис (не більше 255 символів)</string>
   <string name="login_failed_network">Неможливо увійти — збій у мережі</string>
   <string name="login_failed_wrong_credentials">Неможливо увійти — будь ласка перевірте ім\'я користувача та пароль</string>
   <string name="login_failed_throttled">Надто багато невдалих спроб. Будь ласка, спробуйте знову через кілька хвилин.</string>
@@ -77,6 +78,7 @@
   <string name="provider_modifications">Модифікації</string>
   <string name="menu_upload_single">Завантажити</string>
   <string name="categories_search_text_hint">Пошук категорій</string>
+  <string name="depicts_search_text_hint">Пошук об\'єктів, що зображено у цьому медіа (напр. гори, Тадж-Махал, тощо)</string>
   <string name="menu_save_categories">Зберегти</string>
   <string name="refresh_button">Оновити</string>
   <string name="display_list_button">Список</string>
@@ -103,6 +105,7 @@
     <item quantity="other">%1$d завантажень</item>
   </plurals>
   <string name="categories_not_found">Категорій, відповідних %1$s, не знайдено</string>
+  <string name="depictions_not_found">Не знайдено елементів вікіданих, що відповідають %1$s</string>
   <string name="categories_skip_explanation">Додайте категорії, щоб Ваші зображення було легше знайти у Вікісховищі. \n\nПочніть вводити текст, щоб додати категорії.</string>
   <string name="categories_activity_title">Категорії</string>
   <string name="title_activity_settings">Налаштування</string>
@@ -119,6 +122,7 @@
   <string name="menu_feedback">Надіслати відгук (електронною поштою)</string>
   <string name="no_email_client">Не встановлено програми електронної пошти</string>
   <string name="provider_categories">Недавно використані категорії</string>
+  <string name="provider_depictions">Останні об\'єкти, що зображено</string>
   <string name="waiting_first_sync">Очікується перша синхронізація…</string>
   <string name="no_uploads_yet">Ви ще не завантажили жодної світлини.</string>
   <string name="menu_retry_upload">Повторити</string>
@@ -180,6 +184,8 @@
   <string name="detail_panel_cats_label">Категорії</string>
   <string name="detail_panel_cats_loading">Завантаження…</string>
   <string name="detail_panel_cats_none">Нічого не обрано</string>
+  <string name="detail_caption_empty">Без підпису</string>
+  <string name="detail_depiction_empty">Немає об\'єктів, що зображено</string>
   <string name="detail_description_empty">Немає опису</string>
   <string name="detail_discussion_empty">Немає обговорень</string>
   <string name="detail_license_empty">Невідома ліцензія</string>
@@ -198,6 +204,7 @@
   <string name="upload">Вивантажити</string>
   <string name="yes">Так</string>
   <string name="no">Ні</string>
+  <string name="media_detail_caption">Підпис</string>
   <string name="media_detail_title">Назва</string>
   <string name="media_detail_description">Опис</string>
   <string name="media_detail_discussion">Обговорення</string>
@@ -255,11 +262,12 @@
   <string name="nearby_needs_permissions">Місця поблизу неможливо показати без дозволу на визначення місця розташування.</string>
   <string name="no_description_found">опис не знайдено</string>
   <string name="nearby_info_menu_commons_article">Сторінка файлу у Вікісховищі</string>
-  <string name="nearby_info_menu_wikidata_article">Елемент Вікіданих</string>
+  <string name="nearby_info_menu_wikidata_article">Елемент вікіданих</string>
   <string name="nearby_info_menu_wikipedia_article">Стаття Вікіпедії</string>
   <string name="error_while_cache">Помилка кешування зображень</string>
   <string name="title_info">Унікальна описова назва файлу. Ви можете використовувати простий текст з пробілами. Не вказуйте розширення файлу</string>
   <string name="description_info">Будь ласка, докладно опишіть файл: де його було зроблено? що на ньому зображено? який контекст? Будь ласка, опишіть об\'єкти чи осіб. Додайте інформацію, яку не можна легко здогадатися, наприклад, пору доби для фотографії пейзажу. Якщо зображено щось незвичайне, спробуйте пояснити, що робить його незвичайним.</string>
+  <string name="caption_info">Будь ласка, створіть короткий опис цього зображення (не більше 255 символів).</string>
   <string name="upload_image_too_dark">Це зображення надто темне; Ви впевнені, що хочете його завантажити? Вікісховище призначене для зображень, що мають енциклопедичне значення.</string>
   <string name="upload_image_blurry">Це зображення розмите; Ви впевнені, що хочете його завантажити? Вікісховище призначене для зображень, що мають енциклопедичне значення.</string>
   <string name="upload_problem_exist">Потенційні проблеми з цим зображенням:</string>
@@ -446,9 +454,8 @@
   <string name="desc_language_Asia">Азія</string>
   <string name="desc_language_Pacific">Океанія</string>
   <string name="no_categories_selected">Жодної категорії не вибрано</string>
-  <string name="no_categories_selected_warning_desc">Зображення без категорій рідко використовуються. Ви впевнені, що хочете надіслати без вибору категорій?</string>
-  <string name="yes_submit">Так, надіслати</string>
-  <string name="no_go_back">Ні, повернутись</string>
+  <string name="no_categories_selected_warning_desc">Зображення без категорій рідко використовуються. Ви впевнені, що хочете продовжити без вказаних категорій?</string>
+  <string name="no_depictions_selected_warning_desc">Медіа, у яких вказані зображувані об\'єкти, можуть бути легше знайдені та використані надалі. Ви впевнені, що хочете продовжити не вказавши що саме тут зображено?</string>
   <string name="upload_flow_all_images_in_set">(Для всіх зображень у наборі)</string>
   <string name="search_this_area">Шукати в цій зоні</string>
   <string name="nearby_card_permission_title">Запит на дозвіл</string>
@@ -529,7 +536,7 @@
   <string name="images_featured_explanation">Вибрані зображення — це зображення від вправних фотографів та ілюстраторів, які спільнота Вікісховища визначила як такі, що мають найкращу якість на сайті.</string>
   <string name="images_via_nearby_explanation">Зображення, завантажені через «Поблизу», — це зображення, завантажені через дослідження місць на карті.</string>
   <string name="thanks_received_explanation">Ця функція дозволяє редакторам надіслати «дякую» користувачам, які роблять корисні редагування, — скориставшись невеличким посиланням на сторінці історії або порівняння версій.</string>
-  <string name="previous_image_caption_description">Скопіювати попередні назву й опис</string>
+  <string name="previous_image_caption_description">Скопіювати попередні підпис та опис</string>
   <string name="previous_button_tooltip_message">Натисніть, щоб використати назву та опис, які ви вводили для свого попереднього зображення, і змінити їх під поточне</string>
   <string name="welcome_do_upload_content_description">Приклади добрих зображень для завантаження у Вікісховище</string>
   <string name="welcome_dont_upload_content_description">Приклади зображень, які не слід завантажувати</string>
