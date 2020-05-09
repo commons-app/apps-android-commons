@@ -14,7 +14,7 @@ import fr.free.nrw.commons.media.MediaClient;
 public class ContributionsListAdapter extends
     PagedListAdapter<Contribution, ContributionViewHolder> {
 
-    private Callback callback;
+    private final Callback callback;
     private final MediaClient mediaClient;
 
     ContributionsListAdapter(final Callback callback,
@@ -22,10 +22,10 @@ public class ContributionsListAdapter extends
         super(DIFF_CALLBACK);
         this.callback = callback;
         this.mediaClient = mediaClient;
-        setHasStableIds(true);
+        setHasStableIds(false);
     }
 
-    private static DiffUtil.ItemCallback<Contribution> DIFF_CALLBACK =
+    private static final DiffUtil.ItemCallback<Contribution> DIFF_CALLBACK =
         new DiffUtil.ItemCallback<Contribution>() {
             @Override
             public boolean areItemsTheSame(final Contribution oldContribution, final Contribution newContribution) {
