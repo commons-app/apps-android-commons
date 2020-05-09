@@ -87,7 +87,6 @@ public class ContributionBoundaryCallback extends PagedList.BoundaryCallback<Con
 
   private void saveContributionsToDB(final List<Contribution> contributions) {
     Single<List<Long>> single = repository.save(contributions);
-    Timber.d(Arrays.toString(single.blockingGet().toArray()));
     repository.set("last_fetch_timestamp", System.currentTimeMillis());
     networkState.postValue(NetworkState.LOADED);
   }

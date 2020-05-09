@@ -12,12 +12,14 @@ import fr.free.nrw.commons.utils.NetworkUtilsTest
 import fr.free.nrw.commons.utils.createMockDataSourceFactory
 import io.reactivex.Scheduler
 import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyList
 import org.mockito.ArgumentMatchers.anyString
+import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
@@ -26,7 +28,7 @@ import java.util.*
 /**
  * The unit test class for ContributionsPresenter
  */
-class ContributionsListPresenterTest {
+class ContributionBoundaryCallbackTest {
     var context: Context = NetworkUtilsTest.getContext(true);
 
     @Mock
@@ -38,10 +40,7 @@ class ContributionsListPresenterTest {
     @Mock
     internal lateinit var mediaClient: MediaClient
 
-    @Mock
-    internal lateinit var view: ContributionsListContract.View
-
-    private lateinit var contributionsListPresenter: ContributionsListPresenter
+    private lateinit var contributionBoundaryCallback: ContributionBoundaryCallback
 
     @Rule
     @JvmField
@@ -56,13 +55,11 @@ class ContributionsListPresenterTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        scheduler = TestScheduler()
+        scheduler = Schedulers.io()
+
+        contributionBoundaryCallback = ContributionBoundaryCallback(repository, sessionManager, mediaClient, scheduler);
         whenever(repository.fetchContributions())
             .thenReturn(createMockDataSourceFactory(listOf(mock(Contribution::class.java))))
-        contributionsListPresenter = ContributionsListPresenter(
-            contributionBoundaryCallback, repository, scheduler
-        )
-        contributionsListPresenter.onAttachView(view)
     }
 
     @Test
@@ -71,7 +68,7 @@ class ContributionsListPresenterTest {
         whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(
             Single.just(Arrays.asList(mock(Media::class.java)))
         )
-        contributionsListPresenter.fetchContributions(context)
+        contributionBoundaryCallback.fetchContributions()
         verify(repository, times(1)).save(anyList());
         verify(mediaClient, times(1)).getMediaListForUser(anyString());
     }

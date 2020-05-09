@@ -51,7 +51,6 @@ public class ContributionsListPresenter implements UserActionListener {
     networkState = contributionBoundaryCallback.getNetworkState();
     contributionList = (new LivePagedListBuilder(repository.fetchContributions(), pagedListConfig)
         .setBoundaryCallback(contributionBoundaryCallback)).build();
-
   }
 
   @Override
