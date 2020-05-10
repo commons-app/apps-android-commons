@@ -33,7 +33,7 @@ public class ContributionBoundaryCallback extends PagedList.BoundaryCallback<Con
   public ContributionBoundaryCallback(final ContributionsRepository repository,
       final SessionManager sessionManager,
       final MediaClient mediaClient,
-      @Named(CommonsApplicationModule.IO_THREAD) Scheduler ioThreadScheduler) {
+      @Named(CommonsApplicationModule.IO_THREAD) final Scheduler ioThreadScheduler) {
     super();
     this.ioThreadScheduler = ioThreadScheduler;
     networkState = new MutableLiveData();
@@ -48,19 +48,13 @@ public class ContributionBoundaryCallback extends PagedList.BoundaryCallback<Con
     return networkState;
   }
 
-  public MutableLiveData getInitialLoading() {
-    return initialLoading;
-  }
-
   @Override
   public void onZeroItemsLoaded() {
-    Timber.d("On zero item loaded");
     fetchContributions();
   }
 
   @Override
   public void onItemAtFrontLoaded(@NonNull final Contribution itemAtFront) {
-    Timber.d("On item front");
   }
 
   @Override

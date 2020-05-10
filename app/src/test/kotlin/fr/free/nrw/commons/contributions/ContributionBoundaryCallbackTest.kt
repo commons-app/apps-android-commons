@@ -55,18 +55,15 @@ class ContributionBoundaryCallbackTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        scheduler = Schedulers.io()
-
+        scheduler = Schedulers.trampoline()
         contributionBoundaryCallback = ContributionBoundaryCallback(repository, sessionManager, mediaClient, scheduler);
-        whenever(repository.fetchContributions())
-            .thenReturn(createMockDataSourceFactory(listOf(mock(Contribution::class.java))))
     }
 
     @Test
     fun testFetchContributions() {
         whenever(sessionManager.userName).thenReturn("Test")
         whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(
-            Single.just(Arrays.asList(mock(Media::class.java)))
+            Single.just(listOf(mock(Media::class.java)))
         )
         contributionBoundaryCallback.fetchContributions()
         verify(repository, times(1)).save(anyList());
