@@ -4,7 +4,7 @@ import fr.free.nrw.commons.BasePresenter;
 import java.util.List;
 
 /**
- * The contract for Contributions View & Presenter
+ * The contract for Contributions list View & Presenter
  */
 public class ContributionsListContract {
 

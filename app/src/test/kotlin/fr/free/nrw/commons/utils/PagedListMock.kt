@@ -26,17 +26,26 @@ fun <T> List<T>.asPagedList(config: PagedList.Config? = null): LiveData<PagedLis
     ).build()
 }
 
+/**
+ * Provides a mocked instance of the data source factory
+ */
 fun <T> createMockDataSourceFactory(itemList: List<T>): DataSource.Factory<Int, T> =
     object : DataSource.Factory<Int, T>() {
         override fun create(): DataSource<Int, T> = MockLimitDataSource(itemList)
     }
 
+/**
+ * Provides a mocked Room SQL query
+ */
 private fun mockQuery(): RoomSQLiteQuery? {
     val query = mock(RoomSQLiteQuery::class.java);
     whenever(query.sql).thenReturn("");
     return query;
 }
 
+/**
+ * Provides a mocked Room DB
+ */
 private fun mockDb(): RoomDatabase? {
     val roomDatabase = mock(RoomDatabase::class.java);
     val invalidationTracker = mock(InvalidationTracker::class.java)
@@ -44,6 +53,9 @@ private fun mockDb(): RoomDatabase? {
     return roomDatabase;
 }
 
+/**
+ * Class that defines the mocked data source
+ */
 class MockLimitDataSource<T>(private val itemList: List<T>) :
     LimitOffsetDataSource<T>(mockDb(), mockQuery(), false, null) {
     override fun convertRows(cursor: Cursor?): MutableList<T> = itemList.toMutableList()

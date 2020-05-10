@@ -18,6 +18,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
 
+/**
+ * Class that extends PagedList.BoundaryCallback for contributions list
+ * It defines the action that is triggered for various boundary conditions in the list
+ */
 public class ContributionBoundaryCallback extends PagedList.BoundaryCallback<Contribution> {
 
   private final ContributionsRepository repository;
@@ -41,24 +45,43 @@ public class ContributionBoundaryCallback extends PagedList.BoundaryCallback<Con
     compositeDisposable = new CompositeDisposable();
   }
 
+  /**
+   * Provides the current network state.
+   * @return
+   */
   public MutableLiveData getNetworkState() {
     return networkState;
   }
 
+  /**
+   * It is triggered when the list has no items
+   * User's Contributions are then fetched from the network
+   */
   @Override
   public void onZeroItemsLoaded() {
     fetchContributions();
   }
 
+  /**
+   * It is triggered when the user scrolls to the top of the list
+   * No action is taken at this point
+   */
   @Override
   public void onItemAtFrontLoaded(@NonNull final Contribution itemAtFront) {
   }
 
+  /**
+   * It is triggered when the user scrolls to the end of the list
+   * User's Contributions are then fetched from the network
+   */
   @Override
   public void onItemAtEndLoaded(@NonNull final Contribution itemAtEnd) {
     fetchContributions();
   }
 
+  /**
+   * Fetches contributions using the MediaWiki API
+   */
   public void fetchContributions() {
     networkState.postValue(NetworkState.LOADING);
     compositeDisposable.add(mediaClient.getMediaListForUser(sessionManager.getUserName())
@@ -76,6 +99,9 @@ public class ContributionBoundaryCallback extends PagedList.BoundaryCallback<Con
         }));
   }
 
+  /**
+   * Saves the contributions the the local DB
+   */
   private void saveContributionsToDB(final List<Contribution> contributions) {
     Single<List<Long>> single = repository.save(contributions);
     repository.set("last_fetch_timestamp", System.currentTimeMillis());

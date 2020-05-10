@@ -150,6 +150,11 @@ public class Contribution extends Media {
         dest.writeSerializable((HashMap) captions);
     }
 
+    /**
+     * Constructor that takes Media object and state as parameters and builds a new Contribution object
+     * @param media
+     * @param state
+     */
     public Contribution(Media media, int state) {
         super(media.getPageId(),
             media.getLocalUri(), media.getThumbUrl(), media.getImageUrl(), media.getFilename(),
@@ -182,6 +187,9 @@ public class Contribution extends Media {
         }
     };
 
+    /**
+     * Equals implementation of Contributions that compares all parameters for checking equality
+     */
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
@@ -200,6 +208,9 @@ public class Contribution extends Media {
             .equals(getCaptions(), that.getCaptions());
     }
 
+    /**
+     * Hash code implementation of contributions that considers all parameters for calculating hash.
+     */
     @Override
     public int hashCode() {
         return Objects

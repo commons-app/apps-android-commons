@@ -121,6 +121,9 @@ public class Media implements Parcelable {
         this.creator = creator;
     }
 
+    /**
+     * Constructor with all parameters
+     */
     public Media(final String pageId,
         final Uri localUri,
         final String thumbUrl,
@@ -630,6 +633,9 @@ public class Media implements Parcelable {
         dest.writeParcelable(coordinates, flags);
     }
 
+    /**
+     * Equals implementation that matches all parameters for equality check
+     */
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
@@ -660,6 +666,9 @@ public class Media implements Parcelable {
             Objects.equals(getCoordinates(), media.getCoordinates());
     }
 
+    /**
+     * Hashcode implementation that uses all parameters for calculating hash
+     */
     @Override
     public int hashCode() {
         return Objects

@@ -25,6 +25,10 @@ public class ContributionsListAdapter extends
         setHasStableIds(false);
     }
 
+    /**
+     * Uses DiffUtil to calculate the changes in the list
+     * It has methods that check ID and the content of the items to determine if its a new item
+     */
     private static final DiffUtil.ItemCallback<Contribution> DIFF_CALLBACK =
         new DiffUtil.ItemCallback<Contribution>() {
             @Override
@@ -38,6 +42,9 @@ public class ContributionsListAdapter extends
             }
         };
 
+    /**
+     * Initializes the view holder with contribution data
+     */
     @Override
     public void onBindViewHolder(@NonNull final ContributionViewHolder holder, final int position) {
         final Contribution contribution = getItem(position);

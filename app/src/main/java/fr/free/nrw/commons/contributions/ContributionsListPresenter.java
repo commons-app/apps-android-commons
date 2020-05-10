@@ -40,6 +40,11 @@ public class ContributionsListPresenter implements UserActionListener {
   public void onAttachView(ContributionsListContract.View view) {
   }
 
+  /**
+   * Setup the paged list.
+   * This method sets the configuration for paged list and ties it up with the live data object.
+   * This method can be tweaked to update the lazy loading behavior of the contributions list
+   */
   void setup() {
     final PagedList.Config pagedListConfig =
         (new PagedList.Config.Builder())
