@@ -20,12 +20,10 @@ import timber.log.Timber;
 
 public class ContributionBoundaryCallback extends PagedList.BoundaryCallback<Contribution> {
 
-  public static final String TAG = "ItemKeyedUserDataSource";
   private final ContributionsRepository repository;
   private final SessionManager sessionManager;
   private final MediaClient mediaClient;
   private final MutableLiveData networkState;
-  private final MutableLiveData initialLoading;
   private final CompositeDisposable compositeDisposable;
   private final Scheduler ioThreadScheduler;
 
@@ -37,7 +35,6 @@ public class ContributionBoundaryCallback extends PagedList.BoundaryCallback<Con
     super();
     this.ioThreadScheduler = ioThreadScheduler;
     networkState = new MutableLiveData();
-    initialLoading = new MutableLiveData();
     this.repository = repository;
     this.sessionManager = sessionManager;
     this.mediaClient = mediaClient;

@@ -198,6 +198,35 @@ class MediaClientTest {
     }
 
     @Test
+    fun getMediaListForUser() {
+        val mockContinuation= mapOf(Pair("gcmcontinue", "test"))
+        val imageInfo = ImageInfo()
+
+        val mwQueryPage = mock(MwQueryPage::class.java)
+        `when`(mwQueryPage.title()).thenReturn("Test")
+        `when`(mwQueryPage.imageInfo()).thenReturn(imageInfo)
+
+        val mwQueryResult = mock(MwQueryResult::class.java)
+        `when`(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
+
+        val mockResponse = mock(MwQueryResponse::class.java)
+        `when`(mockResponse.query()).thenReturn(mwQueryResult)
+        `when`(mockResponse.continuation()).thenReturn(mockContinuation)
+
+        `when`(mediaInterface!!.getMediaListForUser(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt(),
+            continuationCaptor!!.capture()))
+            .thenReturn(Observable.just(mockResponse))
+        val media1 = mediaClient!!.getMediaListForUser("Test").blockingGet().get(0)
+        val media2 = mediaClient!!.getMediaListForUser("Test").blockingGet().get(0)
+
+        assertEquals(continuationCaptor.allValues[0], emptyMap<String, String>())
+        assertEquals(continuationCaptor.allValues[1], mockContinuation)
+
+        assertEquals(media1.filename, "Test")
+        assertEquals(media2.filename, "Test")
+    }
+
+    @Test
     fun getPageHtmlTest() {
         val mwParseResult = mock(MwParseResult::class.java)
 

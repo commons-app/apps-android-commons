@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyZeroInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.SessionManager
@@ -26,11 +27,9 @@ import org.mockito.MockitoAnnotations
 import java.util.*
 
 /**
- * The unit test class for ContributionsPresenter
+ * The unit test class for ContributionBoundaryCallbackTest
  */
 class ContributionBoundaryCallbackTest {
-    var context: Context = NetworkUtilsTest.getContext(true);
-
     @Mock
     internal lateinit var repository: ContributionsRepository
 
@@ -56,7 +55,37 @@ class ContributionBoundaryCallbackTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         scheduler = Schedulers.trampoline()
-        contributionBoundaryCallback = ContributionBoundaryCallback(repository, sessionManager, mediaClient, scheduler);
+        contributionBoundaryCallback =
+            ContributionBoundaryCallback(repository, sessionManager, mediaClient, scheduler);
+    }
+
+    @Test
+    fun testOnZeroItemsLoaded() {
+        whenever(sessionManager.userName).thenReturn("Test")
+        whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(
+            Single.just(listOf(mock(Media::class.java)))
+        )
+        contributionBoundaryCallback.onZeroItemsLoaded()
+        verify(repository, times(1)).save(anyList());
+        verify(mediaClient, times(1)).getMediaListForUser(anyString());
+    }
+
+    @Test
+    fun testOnLastItemLoaded() {
+        whenever(sessionManager.userName).thenReturn("Test")
+        whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(
+            Single.just(listOf(mock(Media::class.java)))
+        )
+        contributionBoundaryCallback.onItemAtEndLoaded(mock(Contribution::class.java))
+        verify(repository, times(1)).save(anyList());
+        verify(mediaClient, times(1)).getMediaListForUser(anyString());
+    }
+
+    @Test
+    fun testOnFrontItemLoaded() {
+        contributionBoundaryCallback.onItemAtFrontLoaded(mock(Contribution::class.java))
+        verifyZeroInteractions(repository)
+        verifyZeroInteractions(mediaClient)
     }
 
     @Test

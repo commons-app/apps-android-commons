@@ -21,7 +21,6 @@ public class ContributionsListPresenter implements UserActionListener {
   private final Scheduler ioThreadScheduler;
 
   private CompositeDisposable compositeDisposable;
-  private ContributionsListContract.View view;
 
   public LiveData<PagedList<Contribution>> contributionList;
   public MutableLiveData networkState;
@@ -39,7 +38,6 @@ public class ContributionsListPresenter implements UserActionListener {
 
   @Override
   public void onAttachView(ContributionsListContract.View view) {
-    this.view = view;
   }
 
   void setup() {
@@ -55,7 +53,6 @@ public class ContributionsListPresenter implements UserActionListener {
 
   @Override
   public void onDetachView() {
-    this.view = null;
     compositeDisposable.clear();
   }
 
