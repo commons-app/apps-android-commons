@@ -22,7 +22,6 @@ public class ContributionsListAdapter extends
         super(DIFF_CALLBACK);
         this.callback = callback;
         this.mediaClient = mediaClient;
-        setHasStableIds(false);
     }
 
     /**

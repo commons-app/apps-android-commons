@@ -295,7 +295,6 @@ public class ContributionsFragment
         firstLocationUpdate = true;
         locationManager.addLocationListener(this);
 
-        boolean isSettingsChanged = store.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
         store.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
 
         if (store.getBoolean("displayNearbyCardView", true)) {

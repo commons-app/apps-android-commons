@@ -19,15 +19,14 @@ import javax.inject.Named;
 import timber.log.Timber;
 
 /**
- * Class that extends PagedList.BoundaryCallback for contributions list
- * It defines the action that is triggered for various boundary conditions in the list
+ * Class that extends PagedList.BoundaryCallback for contributions list It defines the action that
+ * is triggered for various boundary conditions in the list
  */
 public class ContributionBoundaryCallback extends PagedList.BoundaryCallback<Contribution> {
 
   private final ContributionsRepository repository;
   private final SessionManager sessionManager;
   private final MediaClient mediaClient;
-  private final MutableLiveData networkState;
   private final CompositeDisposable compositeDisposable;
   private final Scheduler ioThreadScheduler;
 
@@ -36,9 +35,7 @@ public class ContributionBoundaryCallback extends PagedList.BoundaryCallback<Con
       final SessionManager sessionManager,
       final MediaClient mediaClient,
       @Named(CommonsApplicationModule.IO_THREAD) final Scheduler ioThreadScheduler) {
-    super();
     this.ioThreadScheduler = ioThreadScheduler;
-    networkState = new MutableLiveData();
     this.repository = repository;
     this.sessionManager = sessionManager;
     this.mediaClient = mediaClient;
@@ -46,16 +43,8 @@ public class ContributionBoundaryCallback extends PagedList.BoundaryCallback<Con
   }
 
   /**
-   * Provides the current network state.
-   * @return
-   */
-  public MutableLiveData getNetworkState() {
-    return networkState;
-  }
-
-  /**
-   * It is triggered when the list has no items
-   * User's Contributions are then fetched from the network
+   * It is triggered when the list has no items User's Contributions are then fetched from the
+   * network
    */
   @Override
   public void onZeroItemsLoaded() {
@@ -63,16 +52,15 @@ public class ContributionBoundaryCallback extends PagedList.BoundaryCallback<Con
   }
 
   /**
-   * It is triggered when the user scrolls to the top of the list
-   * No action is taken at this point
+   * It is triggered when the user scrolls to the top of the list No action is taken at this point
    */
   @Override
   public void onItemAtFrontLoaded(@NonNull final Contribution itemAtFront) {
   }
 
   /**
-   * It is triggered when the user scrolls to the end of the list
-   * User's Contributions are then fetched from the network
+   * It is triggered when the user scrolls to the end of the list User's Contributions are then
+   * fetched from the network
    */
   @Override
   public void onItemAtEndLoaded(@NonNull final Contribution itemAtEnd) {
@@ -83,11 +71,10 @@ public class ContributionBoundaryCallback extends PagedList.BoundaryCallback<Con
    * Fetches contributions using the MediaWiki API
    */
   public void fetchContributions() {
-    networkState.postValue(NetworkState.LOADING);
     compositeDisposable.add(mediaClient.getMediaListForUser(sessionManager.getUserName())
         .map(mediaList -> {
           List<Contribution> contributions = new ArrayList<>();
-          for (Media media : mediaList) {
+          for (final Media media : mediaList) {
             contributions.add(new Contribution(media, Contribution.STATE_COMPLETED));
           }
           return contributions;
@@ -95,7 +82,6 @@ public class ContributionBoundaryCallback extends PagedList.BoundaryCallback<Con
         .subscribeOn(ioThreadScheduler)
         .subscribe(this::saveContributionsToDB, error -> {
           Timber.e("Failed to fetch contributions: %s", error.getMessage());
-          networkState.postValue(NetworkState.FAILED);
         }));
   }
 
@@ -103,10 +89,8 @@ public class ContributionBoundaryCallback extends PagedList.BoundaryCallback<Con
    * Saves the contributions the the local DB
    */
   private void saveContributionsToDB(final List<Contribution> contributions) {
-    Single<List<Long>> single = repository.save(contributions);
+    repository.save(contributions);
     repository.set("last_fetch_timestamp", System.currentTimeMillis());
-    networkState.postValue(NetworkState.LOADED);
   }
-
 }
 

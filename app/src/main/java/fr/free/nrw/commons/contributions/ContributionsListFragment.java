@@ -36,7 +36,6 @@ import javax.inject.Inject;
 public class ContributionsListFragment extends CommonsDaggerSupportFragment implements
     ContributionsListContract.View, ContributionsListAdapter.Callback {
 
-  private static final String VISIBLE_ITEM_ID = "visible_item_id";
   private static final String RV_STATE = "rv_scroll_state";
 
   @BindView(R.id.contributionsList)

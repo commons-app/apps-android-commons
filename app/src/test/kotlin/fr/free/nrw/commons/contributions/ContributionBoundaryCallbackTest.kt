@@ -18,8 +18,7 @@ import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.ArgumentMatchers.anyList
-import org.mockito.ArgumentMatchers.anyString
+import org.mockito.ArgumentMatchers.*
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.mock
@@ -66,8 +65,8 @@ class ContributionBoundaryCallbackTest {
             Single.just(listOf(mock(Media::class.java)))
         )
         contributionBoundaryCallback.onZeroItemsLoaded()
-        verify(repository, times(1)).save(anyList());
-        verify(mediaClient, times(1)).getMediaListForUser(anyString());
+        verify(repository).save(anyList());
+        verify(mediaClient).getMediaListForUser(anyString());
     }
 
     @Test
@@ -77,8 +76,8 @@ class ContributionBoundaryCallbackTest {
             Single.just(listOf(mock(Media::class.java)))
         )
         contributionBoundaryCallback.onItemAtEndLoaded(mock(Contribution::class.java))
-        verify(repository, times(1)).save(anyList());
-        verify(mediaClient, times(1)).getMediaListForUser(anyString());
+        verify(repository).save(anyList());
+        verify(mediaClient).getMediaListForUser(anyString());
     }
 
     @Test
@@ -95,7 +94,7 @@ class ContributionBoundaryCallbackTest {
             Single.just(listOf(mock(Media::class.java)))
         )
         contributionBoundaryCallback.fetchContributions()
-        verify(repository, times(1)).save(anyList());
-        verify(mediaClient, times(1)).getMediaListForUser(anyString());
+        verify(repository).save(anyList());
+        verify(mediaClient).getMediaListForUser(anyString());
     }
 }

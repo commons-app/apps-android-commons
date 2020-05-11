@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.media
 
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.utils.CommonsDateUtil
 import io.reactivex.Observable
@@ -203,17 +204,17 @@ class MediaClientTest {
         val imageInfo = ImageInfo()
 
         val mwQueryPage = mock(MwQueryPage::class.java)
-        `when`(mwQueryPage.title()).thenReturn("Test")
-        `when`(mwQueryPage.imageInfo()).thenReturn(imageInfo)
+        whenever(mwQueryPage.title()).thenReturn("Test")
+        whenever(mwQueryPage.imageInfo()).thenReturn(imageInfo)
 
         val mwQueryResult = mock(MwQueryResult::class.java)
-        `when`(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
+        whenever(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
 
         val mockResponse = mock(MwQueryResponse::class.java)
-        `when`(mockResponse.query()).thenReturn(mwQueryResult)
-        `when`(mockResponse.continuation()).thenReturn(mockContinuation)
+        whenever(mockResponse.query()).thenReturn(mwQueryResult)
+        whenever(mockResponse.continuation()).thenReturn(mockContinuation)
 
-        `when`(mediaInterface!!.getMediaListForUser(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt(),
+        whenever(mediaInterface!!.getMediaListForUser(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt(),
             continuationCaptor!!.capture()))
             .thenReturn(Observable.just(mockResponse))
         val media1 = mediaClient!!.getMediaListForUser("Test").blockingGet().get(0)

@@ -48,7 +48,6 @@ public class ContributionsListPresenter implements UserActionListener {
   void setup() {
     final PagedList.Config pagedListConfig =
         (new PagedList.Config.Builder())
-            .setEnablePlaceholders(true)
             .setPrefetchDistance(50)
             .setPageSize(10).build();
     networkState = contributionBoundaryCallback.getNetworkState();
