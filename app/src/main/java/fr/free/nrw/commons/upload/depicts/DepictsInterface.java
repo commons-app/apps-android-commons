@@ -1,9 +1,8 @@
 package fr.free.nrw.commons.upload.depicts;
 
 import fr.free.nrw.commons.wikidata.model.DepictSearchResponse;
-import io.reactivex.Observable;
 import io.reactivex.Single;
-import org.wikipedia.wikidata.ClaimsResponse;
+import org.wikipedia.wikidata.Entities;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -24,6 +23,6 @@ public interface DepictsInterface {
     @GET("/w/api.php?action=wbsearchentities&format=json&type=item&uselang=en")
     Single<DepictSearchResponse> searchForDepicts(@Query("search") String query, @Query("limit") String limit, @Query("language") String language, @Query("uselang") String uselang, @Query("continue") String offset);
 
-    @GET("/w/api.php?action=wbgetclaims&format=json&property=P18")
-    Observable<ClaimsResponse> getImageForEntity(@Query("entity") String entityId);
+    @GET("/w/api.php?format=json&action=wbgetentities")
+    Single<Entities> getEntities(@Query("ids")String ids, @Query("languages")String language);
 }
