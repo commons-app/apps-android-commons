@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 import fr.free.nrw.commons.contributions.ContributionsListContract.UserActionListener;
@@ -20,16 +19,15 @@ public class ContributionsListPresenter implements UserActionListener {
   private final ContributionsRepository repository;
   private final Scheduler ioThreadScheduler;
 
-  private CompositeDisposable compositeDisposable;
+  private final CompositeDisposable compositeDisposable;
 
-  public LiveData<PagedList<Contribution>> contributionList;
-  public MutableLiveData networkState;
+  LiveData<PagedList<Contribution>> contributionList;
 
   @Inject
   ContributionsListPresenter(
       final ContributionBoundaryCallback contributionBoundaryCallback,
-      ContributionsRepository repository,
-      @Named(CommonsApplicationModule.IO_THREAD) Scheduler ioThreadScheduler) {
+      final ContributionsRepository repository,
+      @Named(CommonsApplicationModule.IO_THREAD) final Scheduler ioThreadScheduler) {
     this.contributionBoundaryCallback = contributionBoundaryCallback;
     this.repository = repository;
     this.ioThreadScheduler = ioThreadScheduler;
@@ -37,7 +35,7 @@ public class ContributionsListPresenter implements UserActionListener {
   }
 
   @Override
-  public void onAttachView(ContributionsListContract.View view) {
+  public void onAttachView(final ContributionsListContract.View view) {
   }
 
   /**
@@ -50,7 +48,6 @@ public class ContributionsListPresenter implements UserActionListener {
         (new PagedList.Config.Builder())
             .setPrefetchDistance(50)
             .setPageSize(10).build();
-    networkState = contributionBoundaryCallback.getNetworkState();
     contributionList = (new LivePagedListBuilder(repository.fetchContributions(), pagedListConfig)
         .setBoundaryCallback(contributionBoundaryCallback)).build();
   }
@@ -62,8 +59,6 @@ public class ContributionsListPresenter implements UserActionListener {
 
   /**
    * Delete a failed contribution from the local db
-   *
-   * @param contribution
    */
   @Override
   public void deleteUpload(final Contribution contribution) {
