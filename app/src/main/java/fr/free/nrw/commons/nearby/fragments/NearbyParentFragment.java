@@ -1090,6 +1090,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void filterOutAllMarkers() {
+        hideAllMarkers();
         updateNearbyList();
     }
 
@@ -1119,6 +1120,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         boolean filterForPlaceState,
         boolean filterForAllNoneType) {
 
+        hideAllMarkers();
         for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
             Place place = markerPlaceGroup.getPlace();
 
@@ -1213,7 +1215,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * since grey icon may lead the users to believe that it is disabled or prohibited contribution
      */
 
-    private void hideAllMArkers() {
+    private void hideAllMarkers() {
         VectorDrawableCompat vectorDrawable;
         vectorDrawable = VectorDrawableCompat.create(
                 getContext().getResources(), R.drawable.ic_custom_greyed_out_marker, getContext().getTheme());
