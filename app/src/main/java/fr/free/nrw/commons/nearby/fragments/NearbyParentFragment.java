@@ -154,7 +154,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     MapView mapView;
     @BindView(R.id.rv_nearby_list)
     RecyclerView rvNearbyList;
-    @BindView(R.id.statusMessage) TextView statusTextView;
+    @BindView(R.id.no_results_message) TextView noResultsView;
 
     @Inject LocationServiceManager locationManager;
     @Inject NearbyController nearbyController;
@@ -628,10 +628,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void updateListFragment(List<Place> placeList) {
         adapterFactory.updateAdapterData(placeList, (RVRendererAdapter<Place>) rvNearbyList.getAdapter());
         if (placeList.size() <= 0) {
-            statusTextView.setText(R.string.nearby_empty);
-            statusTextView.setVisibility(View.VISIBLE);
+            noResultsView.setVisibility(View.VISIBLE);
         } else {
-            statusTextView.setVisibility(View.GONE);
+            noResultsView.setVisibility(View.GONE);
         }
     }
 
@@ -642,10 +641,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void updateNearbyList() {
         adapterFactory.update((RVRendererAdapter<Place>) rvNearbyList.getAdapter());
         if (rvNearbyList.getAdapter().getItemCount() <= 0) {
-            statusTextView.setText(R.string.nearby_empty);
-            statusTextView.setVisibility(View.VISIBLE);
+            noResultsView.setVisibility(View.VISIBLE);
         } else {
-            statusTextView.setVisibility(View.GONE);
+            noResultsView.setVisibility(View.GONE);
         }
     }
 
