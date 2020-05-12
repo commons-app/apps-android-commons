@@ -17,23 +17,19 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
-import com.pedrogomez.renderers.RVRendererAdapter;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.category.CategoryClickedListener;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
-import fr.free.nrw.commons.upload.UploadCategoriesAdapterFactory;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
+import kotlin.Unit;
 import timber.log.Timber;
 
-public class UploadCategoriesFragment extends UploadBaseFragment implements CategoriesContract.View,
-        CategoryClickedListener {
+public class UploadCategoriesFragment extends UploadBaseFragment implements CategoriesContract.View {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
@@ -48,15 +44,10 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     @Inject
     CategoriesContract.UserActionListener presenter;
-    private RVRendererAdapter<CategoryItem> adapter;
+    private UploadCategoryAdapter adapter;
     private Disposable subscribe;
     private List<CategoryItem> categories;
     private boolean isVisible;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Nullable
     @Override
@@ -103,8 +94,10 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     }
 
     private void initRecyclerView() {
-        adapter = new UploadCategoriesAdapterFactory(this)
-                .create(new ArrayList<>());
+        adapter = new UploadCategoryAdapter(categoryItem -> {
+            presenter.onCategoryItemClicked(categoryItem);
+            return Unit.INSTANCE;
+        });
         rvCategories.setLayoutManager(new LinearLayoutManager(getContext()));
         rvCategories.setAdapter(adapter);
     }
@@ -133,11 +126,12 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     @Override
     public void setCategories(List<CategoryItem> categories) {
-        adapter.clear();
-        if (categories != null) {
+        if(categories==null) {
+            adapter.clear();
+        }
+        else{
             this.categories = categories;
-            adapter.addAll(categories);
-            adapter.notifyDataSetChanged();
+            adapter.setItems(categories);
         }
     }
 
@@ -166,11 +160,6 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     @OnClick(R.id.btn_previous)
     public void onPreviousButtonClicked() {
         callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
-    }
-
-    @Override
-    public void categoryClicked(CategoryItem item) {
-        presenter.onCategoryItemClicked(item);
     }
 
     @Override
