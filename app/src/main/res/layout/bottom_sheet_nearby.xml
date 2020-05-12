@@ -4,13 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="bottom"
     app:behavior_hideable="true"
     android:visibility="visible"
     app:layout_behavior="@string/bottom_sheet_behavior"
-    android:background="@android:color/white">
+    android:background="@android:color/transparent">
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:background="@android:color/white">
+
+    <TextView
+      android:id="@+id/statusMessage"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingVertical="50dp"
+      android:paddingHorizontal="50dp"
+      android:layout_centerHorizontal="true"
+      android:layout_centerVertical="true"
+      android:layout_gravity="center"
+      android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_nearby_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"/>
+    </RelativeLayout>
 </RelativeLayout>
