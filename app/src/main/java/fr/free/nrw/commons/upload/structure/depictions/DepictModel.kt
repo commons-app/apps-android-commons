@@ -13,7 +13,7 @@ import javax.inject.Singleton
 @Singleton
 class DepictModel @Inject constructor(private val depictsClient: DepictsClient) {
 
-    var nearbyPlaces: BehaviorProcessor<List<Place>> = BehaviorProcessor.createDefault(emptyList())
+    val nearbyPlaces: BehaviorProcessor<List<Place>> = BehaviorProcessor.createDefault(emptyList())
 
 
     companion object {
@@ -45,7 +45,7 @@ class DepictModel @Inject constructor(private val depictsClient: DepictsClient) 
     }
 
     fun cleanUp() {
-        nearbyPlaces = BehaviorProcessor.createDefault(emptyList())
+        nearbyPlaces.offer(emptyList())
     }
 
 }
