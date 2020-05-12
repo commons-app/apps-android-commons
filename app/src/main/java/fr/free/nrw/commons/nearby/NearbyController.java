@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 
-import android.util.Log;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
@@ -268,9 +267,6 @@ public class NearbyController {
             MarkerPlaceGroup markerPlaceGroup = iter.next();
             if (markerPlaceGroup.getPlace().getWikiDataEntityId().equals(place.getWikiDataEntityId())) {
                 iter.set(new MarkerPlaceGroup(markerPlaceGroup.getMarker(), isBookmarked, place));
-                if (!markerPlaceGroup.getPlace().pic.trim().isEmpty() && isBookmarked) {
-                    Log.d("deneme52","pic not empty and bookmarked:"+place.name);
-                }
             }
         }
     }
