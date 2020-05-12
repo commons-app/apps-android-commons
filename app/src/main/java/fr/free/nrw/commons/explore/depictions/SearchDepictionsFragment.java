@@ -2,6 +2,7 @@ package fr.free.nrw.commons.explore.depictions;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static fr.free.nrw.commons.explore.depictions.DepictionAdapterDelegatesKt.depictionDelegate;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -12,12 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil.ItemCallback;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.pedrogomez.renderers.RVRendererAdapter;
+import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
@@ -28,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
+import kotlin.Unit;
 
 /**
  * Display depictions in search fragment
@@ -42,24 +45,17 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
     TextView depictionNotFound;
     @BindView(R.id.bottomProgressBar)
     ProgressBar bottomProgressBar;
-    RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.LayoutManager layoutManager;
     private boolean isLoading = true;
-    private int PAGE_SIZE = 25;
+    private final int PAGE_SIZE = 25;
     @Inject
     SearchDepictionsFragmentPresenter presenter;
-    private final SearchDepictionsAdapterFactory adapterFactory = new SearchDepictionsAdapterFactory(new SearchDepictionsRenderer.DepictCallback() {
-        @Override
-        public void depictsClicked(DepictedItem item) {
-            WikidataItemDetailsActivity.startYourself(getContext(), item);
-            presenter.saveQuery();
-        }
-    });
-    private RVRendererAdapter<DepictedItem> depictionsAdapter;
+    private DepictionAdapter depictionsAdapter;
     private boolean isLastPage;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_browse_image, container, false);
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+        final View rootView = inflater.inflate(R.layout.fragment_browse_image, container, false);
         ButterKnife.bind(this, rootView);
         if (getActivity().getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_PORTRAIT) {
@@ -68,20 +64,25 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
             layoutManager = new GridLayoutManager(getContext(), 2);
         }
         depictionsRecyclerView.setLayoutManager(layoutManager);
-        depictionsAdapter = adapterFactory.create();
+        depictionsAdapter = new DepictionAdapter(
+            depictedItem -> {
+                WikidataItemDetailsActivity.startYourself(getContext(), depictedItem);
+                presenter.saveQuery();
+                return Unit.INSTANCE;
+            });
         depictionsRecyclerView.setAdapter(depictionsAdapter);
         depictionsRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            public void onScrollStateChanged(final RecyclerView recyclerView, final int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
             }
 
             @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NonNull final RecyclerView recyclerView, final int dx, final int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                int visibleItemCount = layoutManager.getChildCount();
-                int totalItemCount = layoutManager.getItemCount();
+                final int visibleItemCount = layoutManager.getChildCount();
+                final int totalItemCount = layoutManager.getItemCount();
                 int firstVisibleItemPosition=0;
                 if(layoutManager instanceof GridLayoutManager){
                     firstVisibleItemPosition=((GridLayoutManager) layoutManager).findFirstVisibleItemPosition();
@@ -108,12 +109,12 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
     /**
      * Fetch PAGE_SIZE number of items
      */
-    private void loadMoreItems(boolean reInitialise) {
+    private void loadMoreItems(final boolean reInitialise) {
         presenter.updateDepictionList(presenter.getQuery(),PAGE_SIZE, reInitialise);
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(final Context context) {
         super.onAttach(context);
         presenter.onAttachView(this);
     }
@@ -124,7 +125,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
      *
      * @param query string searched in the Explore Activity
      */
-    public void updateDepictionList(String query) {
+    public void updateDepictionList(final String query) {
         presenter.initializeQuery(query);
          if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();
@@ -142,20 +143,8 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
         progressBar.setVisibility(GONE);
         bottomProgressBar.setVisibility(GONE);
         depictionNotFound.setVisibility(VISIBLE);
-        String no_depiction = getString(R.string.depictions_not_found);
+        final String no_depiction = getString(R.string.depictions_not_found);
         depictionNotFound.setText(String.format(Locale.getDefault(), no_depiction, presenter.getQuery()));
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        depictionsAdapter.clear();
-        depictionsRecyclerView.cancelPendingInputEvents();
     }
 
     /**
@@ -172,24 +161,18 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
      * like hiding empty labels, hiding progressbar and notifying the apdapter that list of items has been fetched from the API
      */
     @Override
-    public void onSuccess(List<DepictedItem> mediaList) {
+    public void onSuccess(final List<DepictedItem> mediaList) {
         isLoading = false;
-        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(GONE);
         depictionNotFound.setVisibility(GONE);
         bottomProgressBar.setVisibility(GONE);
-        int itemCount = layoutManager.getItemCount();
         depictionsAdapter.addAll(mediaList);
-        if(itemCount!=0) {
-            depictionsAdapter.notifyItemRangeInserted(itemCount, mediaList.size()-1);
-        }else{
-            depictionsAdapter.notifyDataSetChanged();
-        }
     }
 
     @Override
-    public void loadingDepictions(boolean isLoading) {
+    public void loadingDepictions(final boolean isLoading) {
         depictionNotFound.setVisibility(GONE);
-        bottomProgressBar.setVisibility(View.VISIBLE);
+        bottomProgressBar.setVisibility(VISIBLE);
         progressBar.setVisibility(GONE);
         this.isLoading = isLoading;
     }
@@ -204,18 +187,13 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
         ViewUtil.showShortSnackbar(depictionsRecyclerView, R.string.error_loading_depictions);
     }
 
-    @Override
-    public RVRendererAdapter<DepictedItem> getAdapter() {
-        return depictionsAdapter;
-    }
-
     /**
      * Inform the view that there are no more items to be loaded for this search query
      * or reset the isLastPage for the current query
      * @param isLastPage
      */
     @Override
-    public void setIsLastPage(boolean isLastPage) {
+    public void setIsLastPage(final boolean isLastPage) {
         this.isLastPage=isLastPage;
         progressBar.setVisibility(GONE);
     }

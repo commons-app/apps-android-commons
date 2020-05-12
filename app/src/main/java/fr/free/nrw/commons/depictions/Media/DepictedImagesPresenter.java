@@ -39,8 +39,8 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
      * Wikibase enitityId for the depicted Item
      * Ex: Q9394
      */
-    private String entityId = null;
     private List<Media> queryList = new ArrayList<>();
+    private String entityId;
 
     @Inject
     public DepictedImagesPresenter(@Named("default_preferences") JsonKvStore depictionKvStore, DepictsClient depictsClient, MediaClient mediaClient,  @Named(IO_THREAD) Scheduler ioScheduler,
@@ -68,6 +68,7 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
     @SuppressLint("CheckResult")
     @Override
     public void initList(String entityId) {
+        this.entityId = entityId;
         view.setLoadingStatus(true);
         view.progressBarVisible(true);
         view.setIsLastPage(false);

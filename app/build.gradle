@@ -11,7 +11,7 @@ apply from: 'quality.gradle'
 
 def isRunningOnTravisAndIsNotPRBuild = System.getenv("CI") == "true" && file('../play.p12').exists()
 
-if(isRunningOnTravisAndIsNotPRBuild) {
+if (isRunningOnTravisAndIsNotPRBuild) {
     apply plugin: 'com.github.triplet.play'
 }
 
@@ -43,8 +43,9 @@ dependencies {
     implementation 'com.dinuscxj:circleprogressbar:1.1.1'
     implementation 'com.karumi:dexter:5.0.0'
     implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
-
     kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
+    implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:$ADAPTER_DELEGATES_VERSION"
+    implementation "com.hannesdorfmann:adapterdelegates4-pagination:$ADAPTER_DELEGATES_VERSION"
 
     // Logging
     implementation 'ch.acra:acra-dialog:5.3.0'
@@ -112,7 +113,8 @@ dependencies {
     implementation "androidx.room:room-runtime:$ROOM_VERSION"
     implementation "androidx.room:room-ktx:$ROOM_VERSION"
     implementation "androidx.room:room-rxjava2:$ROOM_VERSION"
-    kapt "androidx.room:room-compiler:$ROOM_VERSION" // For Kotlin use kapt instead of annotationProcessor
+    kapt "androidx.room:room-compiler:$ROOM_VERSION"
+    // For Kotlin use kapt instead of annotationProcessor
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'
     testImplementation "androidx.arch.core:core-testing:2.1.0"
 
@@ -168,7 +170,7 @@ android {
         test.resources.srcDirs += 'src/main/resoures'
     }
 
-	signingConfigs {
+    signingConfigs {
         release
     }
 
@@ -177,7 +179,7 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             testProguardFile 'test-proguard-rules.txt'
-            if(isRunningOnTravisAndIsNotPRBuild) {
+            if (isRunningOnTravisAndIsNotPRBuild) {
                 signingConfig signingConfigs.release
             }
         }
@@ -206,7 +208,7 @@ android {
     productFlavors {
         prod {
 
-			applicationId 'fr.free.nrw.commons'
+            applicationId 'fr.free.nrw.commons'
 
             buildConfigField "String", "WIKIMEDIA_API_POTD", "\"https://commons.wikimedia.org/w/api.php?action=featuredfeed&feed=potd&feedformat=rss&language=en\""
             buildConfigField "String", "WIKIMEDIA_API_HOST", "\"https://commons.wikimedia.org/w/api.php\""
@@ -287,7 +289,7 @@ android {
     buildToolsVersion buildToolsVersion
 }
 
-if(isRunningOnTravisAndIsNotPRBuild) {
+if (isRunningOnTravisAndIsNotPRBuild) {
     play {
         track = "alpha"
         userFraction = 1
