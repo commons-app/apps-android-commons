@@ -23,6 +23,7 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
+import java.lang.RuntimeException
 import java.util.*
 
 /**
@@ -95,6 +96,15 @@ class ContributionBoundaryCallbackTest {
         )
         contributionBoundaryCallback.fetchContributions()
         verify(repository).save(anyList());
+        verify(mediaClient).getMediaListForUser(anyString());
+    }
+
+    @Test
+    fun testFetchContributionsFailed() {
+        whenever(sessionManager.userName).thenReturn("Test")
+        whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(Single.error(Exception("Error")))
+        contributionBoundaryCallback.fetchContributions()
+        verifyZeroInteractions(repository);
         verify(mediaClient).getMediaListForUser(anyString());
     }
 }

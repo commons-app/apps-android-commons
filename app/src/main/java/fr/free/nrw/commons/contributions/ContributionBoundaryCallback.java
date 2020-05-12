@@ -10,6 +10,7 @@ import fr.free.nrw.commons.media.MediaClient;
 import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -89,8 +90,9 @@ public class ContributionBoundaryCallback extends PagedList.BoundaryCallback<Con
    * Saves the contributions the the local DB
    */
   private void saveContributionsToDB(final List<Contribution> contributions) {
-    repository.save(contributions);
-    repository.set("last_fetch_timestamp", System.currentTimeMillis());
+    compositeDisposable.add(repository.save(contributions)
+        .subscribeOn(ioThreadScheduler)
+        .subscribe(longs -> repository.set("last_fetch_timestamp", System.currentTimeMillis())));
   }
 }
 
