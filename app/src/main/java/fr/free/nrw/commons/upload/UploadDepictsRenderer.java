@@ -79,7 +79,6 @@ public class UploadDepictsRenderer extends Renderer<DepictedItem> {
         final String imageUrl = item.getImageUrl();
         if (TextUtils.isEmpty(imageUrl)) {
             imageView.setImageURI(UriUtil.getUriForResourceId(R.drawable.ic_wikidata_logo_24dp));
-            listener.fetchThumbnailUrlForEntity(item);
         } else {
             imageView.setImageURI(Uri.parse(imageUrl));
         }

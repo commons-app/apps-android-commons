@@ -335,7 +335,7 @@
   <string name="warning_for_no_answer">Ełexi una de łe do opsion par rispondare a ła dimanda</string>
   <string name="user_not_logged_in">Sesion de login scadesta. Va drento da novo.</string>
   <string name="quiz_result_share_message">Spartisi el to quiz co i to amighi!</string>
-  <string name="continue_message">Continua</string>
+  <string name="continue_message">Sèvita</string>
   <string name="correct">Risposta justa</string>
   <string name="wrong">Risposta xbajada</string>
   <string name="quiz_screenshot_question">Sta schermada ła xé bona par esare cargada?</string>
@@ -399,7 +399,7 @@
   <string name="provider_bookmarks">Segnałibri</string>
   <string name="bookmark_empty">No te ghè njiancora xontà segnałibri</string>
   <string name="provider_bookmarks_location">Segnałibri</string>
-  <string name="log_collection_started">La rejistrasion ła xé scumisiada. RINPISA l\'aplicasion, fa na roba che te vołi rejistrar e dopo toca oncora \"Envia file de rejistro\"</string>
+  <string name="log_collection_started">La notasion ła xé scumisiada. RINPISA l\'aplicasion, fa na roba che te vołi notar e dopo toca oncora \"Envia file de rejistro\"</string>
   <string name="deletion_reason_uploaded_by_mistake">La go cargada par xbajo.</string>
   <string name="deletion_reason_publicly_visible">No saveo che ła saria sta vardabiłe par tuti</string>
   <string name="deletion_reason_bad_for_my_privacy">Me so rendesto conto che ła xé on małe par ła me privacy</string>

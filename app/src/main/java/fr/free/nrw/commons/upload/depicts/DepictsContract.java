@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData;
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * The contract with which DepictsFragment and its presenter would talk to each other
@@ -41,9 +40,6 @@ public interface DepictsContract {
          * add depictions to list
          */
         void setDepictsList(List<DepictedItem> depictedItemList);
-
-
-        void onUrlFetched(@NotNull DepictedItem depictedItem, @NotNull String url);
     }
 
     interface UserActionListener extends BasePresenter<View> {
@@ -71,7 +67,5 @@ public interface DepictsContract {
         void verifyDepictions();
 
         LiveData<List<DepictedItem>> getDepictedItems();
-
-        void fetchThumbnailForEntityId(DepictedItem depictedItem);
     }
 }

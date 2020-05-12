@@ -53,15 +53,6 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
             WikidataItemDetailsActivity.startYourself(getContext(), item);
             presenter.saveQuery();
         }
-
-        /**
-         *fetch thumbnail image for all the depicted items (if available)
-         */
-        @Override
-        public void fetchThumbnailUrlForEntity(String entityId, int position) {
-            presenter.fetchThumbnailForEntityId(entityId,position);
-        }
-
     });
     private RVRendererAdapter<DepictedItem> depictionsAdapter;
     private boolean isLastPage;
@@ -216,12 +207,6 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
     @Override
     public RVRendererAdapter<DepictedItem> getAdapter() {
         return depictionsAdapter;
-    }
-
-    @Override
-    public void onImageUrlFetched(String response, int position) {
-         depictionsAdapter.getItem(position).setImageUrl(response);
-        depictionsAdapter.notifyItemChanged(position);
     }
 
     /**
