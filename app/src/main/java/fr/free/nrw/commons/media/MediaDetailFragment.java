@@ -209,10 +209,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.mediaDetailImageViewSpacer)
     public void launchZoomActivity(View view) {
-        Context ctx = view.getContext();
-        ctx.startActivity(
-                new Intent(ctx,ZoomableActivity.class).setData(Uri.parse(media.getImageUrl()))
-        );
+        if (media.getImageUrl() != null) {
+            Context ctx = view.getContext();
+            ctx.startActivity(
+                new Intent(ctx, ZoomableActivity.class).setData(Uri.parse(media.getImageUrl()))
+            );
+        }
     }
 
     @Override
