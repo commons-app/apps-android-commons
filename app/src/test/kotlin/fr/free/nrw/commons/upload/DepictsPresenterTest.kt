@@ -2,18 +2,15 @@ package fr.free.nrw.commons.upload
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.jraska.livedata.test
-import com.nhaarman.mockitokotlin2.never
-import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.explore.depictions.DepictsClient
-import fr.free.nrw.commons.explore.depictions.DepictsClient.NO_DEPICTED_IMAGE
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.DepictsContract
 import fr.free.nrw.commons.upload.depicts.DepictsPresenter
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import fr.free.nrw.commons.wikidata.WikidataDisambiguationItems
 import io.reactivex.Flowable
-import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Rule
@@ -48,7 +45,7 @@ class DepictsPresenterTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         testScheduler = TestScheduler()
-        depictsPresenter = DepictsPresenter(repository, testScheduler, testScheduler, depictsClient)
+        depictsPresenter = DepictsPresenter(repository, testScheduler, testScheduler)
         depictsPresenter.onAttachView(view)
     }
 
@@ -60,8 +57,15 @@ class DepictsPresenterTest {
     }
 
     @Test
-    fun `search results emission returns distinct results + selected items`() {
-        val searchResults = listOf(depictedItem(), depictedItem())
+    fun `search results emission returns distinct results + selected items without disambiguations`() {
+        val searchResults = listOf(
+            depictedItem(id="nonUnique"),
+            depictedItem(id="nonUnique"),
+            depictedItem(
+                id = "unique",
+                instanceOfs = listOf(WikidataDisambiguationItems.CATEGORY.id)
+            )
+        )
         whenever(repository.searchAllEntities("")).thenReturn(Flowable.just(searchResults))
         val selectedItem = depictedItem(id = "selected")
         whenever(repository.selectedDepictions).thenReturn(listOf(selectedItem))
@@ -71,22 +75,7 @@ class DepictsPresenterTest {
         verify(view).showError(false)
         depictsPresenter.depictedItems
             .test()
-            .assertValue(listOf(selectedItem, depictedItem()))
-    }
-
-    @Test
-    fun `searchResults retrieve imageUrls from cache`() {
-        val depictedItem = depictedItem()
-        whenever(depictsClient.getP18ForItem(depictedItem.id)).thenReturn(Single.just("url"))
-        depictsPresenter.fetchThumbnailForEntityId(depictedItem)
-        testScheduler.triggerActions()
-        val searchResults = listOf(depictedItem(), depictedItem())
-        whenever(repository.searchAllEntities("")).thenReturn(Flowable.just(searchResults))
-        depictsPresenter.searchForDepictions("")
-        testScheduler.triggerActions()
-        depictsPresenter.depictedItems
-            .test()
-            .assertValue(listOf(depictedItem(imageUrl = "url")))
+            .assertValue(listOf(selectedItem, depictedItem(id="nonUnique")))
     }
 
     @Test
@@ -149,42 +138,14 @@ class DepictsPresenterTest {
         verify(view).noDepictionSelected()
     }
 
-    @Test
-    fun `image urls fetched from network update the view`() {
-        val depictedItem = depictedItem()
-        whenever(depictsClient.getP18ForItem(depictedItem.id)).thenReturn(Single.just("url"))
-        depictsPresenter.fetchThumbnailForEntityId(depictedItem)
-        testScheduler.triggerActions()
-        verify(view).onUrlFetched(depictedItem, "url")
-    }
 
-    @Test
-    fun `image urls fetched from network filter NO_DEPICTED_IMAGE`() {
-        val depictedItem = depictedItem()
-        whenever(depictsClient.getP18ForItem(depictedItem.id))
-            .thenReturn(Single.just(NO_DEPICTED_IMAGE))
-        depictsPresenter.fetchThumbnailForEntityId(depictedItem)
-        testScheduler.triggerActions()
-        verify(view, never()).onUrlFetched(depictedItem, NO_DEPICTED_IMAGE)
-    }
-
-    @Test
-    fun `successive image urls fetched from cache`() {
-        val depictedItem = depictedItem()
-        whenever(depictsClient.getP18ForItem(depictedItem.id)).thenReturn(Single.just("url"))
-        depictsPresenter.fetchThumbnailForEntityId(depictedItem)
-        testScheduler.triggerActions()
-        verify(view).onUrlFetched(depictedItem, "url")
-        depictsPresenter.fetchThumbnailForEntityId(depictedItem)
-        testScheduler.triggerActions()
-        verify(view, times(2)).onUrlFetched(depictedItem, "url")
-    }
 }
 
 fun depictedItem(
     name: String = "label",
     description: String = "desc",
     imageUrl: String = "",
+    instanceOfs: List<String> = listOf(),
     isSelected: Boolean = false,
     id: String = "entityId"
-) = DepictedItem(name, description, imageUrl, isSelected, id)
+) = DepictedItem(name, description, imageUrl, instanceOfs, isSelected, id)

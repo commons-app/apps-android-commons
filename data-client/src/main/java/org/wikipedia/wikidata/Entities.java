@@ -2,6 +2,7 @@ package org.wikipedia.wikidata;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +43,7 @@ public class Entities extends MwResponse implements PostProcessingTypeAdapter.Po
         @Nullable private Map<String, Label> labels;
         @Nullable private Map<String, Label> descriptions;
         @Nullable private Map<String, SiteLink> sitelinks;
-        @Nullable private Map<String, List<Statement_partial>> statements;
+        @Nullable @SerializedName(value = "statements", alternate = "claims") private Map<String, List<Statement_partial>> statements;
         @Nullable private String missing;
 
         @NonNull public String id() {

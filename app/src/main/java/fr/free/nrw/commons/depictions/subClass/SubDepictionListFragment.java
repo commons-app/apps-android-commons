@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.depictions.subClass;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,23 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.pedrogomez.renderers.RVRendererAdapter;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
-
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.pedrogomez.renderers.RVRendererAdapter;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity;
@@ -32,9 +26,10 @@ import fr.free.nrw.commons.explore.depictions.SearchDepictionsRenderer;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+import javax.inject.Inject;
 
 /**
  * Fragment for parent classes and child classes of Depicted items in Explore
@@ -54,10 +49,6 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
      */
     private boolean isParentClass = false;
     private RVRendererAdapter<DepictedItem> depictionsAdapter;
-    /**
-     * Used by scroll state listener, when hasMoreImages is false scrolling does not fetches any more images
-     */
-    private boolean hasMoreImages = true;
     RecyclerView.LayoutManager layoutManager;
     /**
      * Stores entityId for the depiction
@@ -77,12 +68,6 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
             getActivity().finish();
             WikidataItemDetailsActivity.startYourself(getContext(), item);
         }
-
-        @Override
-        public void fetchThumbnailUrlForEntity(String entityId, int position) {
-            presenter.fetchThumbnailForEntityId(entityId, position);
-        }
-
     });
 
     @Override
@@ -141,14 +126,7 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
     }
 
     @Override
-    public void onImageUrlFetched(String response, int position) {
-        depictionsAdapter.getItem(position).setImageUrl(response);
-        depictionsAdapter.notifyItemChanged(position);
-    }
-
-    @Override
     public void onSuccess(List<DepictedItem> mediaList) {
-        hasMoreImages = false;
         progressBar.setVisibility(View.GONE);
         depictionNotFound.setVisibility(GONE);
         bottomProgressBar.setVisibility(GONE);
@@ -164,7 +142,6 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
 
     @Override
     public void initErrorView() {
-        hasMoreImages = false;
         progressBar.setVisibility(GONE);
         bottomProgressBar.setVisibility(GONE);
         depictionNotFound.setVisibility(VISIBLE);
@@ -180,11 +157,6 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
 
     @Override
     public void setIsLastPage(boolean b) {
-        hasMoreImages = !b;
     }
 
-    @Override
-    public boolean isParentClass() {
-        return isParentClass;
-    }
 }
