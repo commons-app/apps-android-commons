@@ -167,36 +167,6 @@ public class NearbyController {
         VectorDrawableCompat vectorDrawable = null;
         VectorDrawableCompat vectorDrawableGreen = null;
         VectorDrawableCompat vectorDrawableGrey = null;
-        try {
-            vectorDrawable = VectorDrawableCompat.create(
-                    context.getResources(), R.drawable.ic_custom_bookmark_marker, context.getTheme()
-            );
-        } catch (Resources.NotFoundException e) {
-            // ignore when running tests.
-        }
-        if (vectorDrawable != null) {
-            Bitmap icon = UiUtils.getBitmap(vectorDrawable);
-
-            for (Place place : bookmarkplacelist) {
-
-                String distance = formatDistanceBetween(curLatLng, place.location);
-                place.setDistance(distance);
-
-                NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
-                nearbyBaseMarker.title(place.name);
-                nearbyBaseMarker.position(
-                        new com.mapbox.mapboxsdk.geometry.LatLng(
-                                place.location.getLatitude(),
-                                place.location.getLongitude()));
-                nearbyBaseMarker.place(place);
-                nearbyBaseMarker.icon(IconFactory.getInstance(context)
-                        .fromBitmap(icon));
-                placeList.remove(place);
-
-                baseMarkerOptions.add(nearbyBaseMarker);
-            }
-        }
-
         vectorDrawable = null;
         try {
             vectorDrawable = VectorDrawableCompat.create(
