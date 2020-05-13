@@ -231,7 +231,7 @@ class MediaClientTest {
 
         verify(mediaInterface, times(2))?.getMediaListForUser(
             ArgumentMatchers.anyString(),
-            ArgumentMatchers.anyInt(), ArgumentMatchers.anyMap()
+            ArgumentMatchers.anyInt(), ArgumentMatchers.anyMap<String, String>()
         )
     }
 

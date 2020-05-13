@@ -47,9 +47,7 @@ public class ContributionsListAdapter extends
     @Override
     public void onBindViewHolder(@NonNull final ContributionViewHolder holder, final int position) {
         final Contribution contribution = getItem(position);
-        if (contribution != null) {
-            holder.init(position, contribution);
-        }
+        holder.init(position, contribution);
     }
 
     Contribution getContributionForPosition(final int position) {

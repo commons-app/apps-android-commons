@@ -48,8 +48,8 @@ class ContributionsRepositoryTest {
         val contributions = listOf(mock(Contribution::class.java))
         whenever(localDataSource.saveContributions(ArgumentMatchers.anyList()))
             .thenReturn(Single.just(listOf(1L)))
-        val save = contributionsRepository.save(contributions).blockingGet()
-        assertEquals(1, save.size);
-        assertEquals(1, save.get(0));
+        val save = contributionsRepository.save(contributions).test().assertValueAt(0) {
+            it.size == 1 && it.get(0) == 1L
+        }
     }
 }

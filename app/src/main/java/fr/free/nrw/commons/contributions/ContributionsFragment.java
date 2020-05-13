@@ -295,8 +295,6 @@ public class ContributionsFragment
         firstLocationUpdate = true;
         locationManager.addLocationListener(this);
 
-        store.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
-
         if (store.getBoolean("displayNearbyCardView", true)) {
             checkPermissionsAndShowNearbyCardView();
             if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {

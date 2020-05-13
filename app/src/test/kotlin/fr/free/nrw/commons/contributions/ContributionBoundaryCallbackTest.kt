@@ -66,7 +66,7 @@ class ContributionBoundaryCallbackTest {
             Single.just(listOf(mock(Media::class.java)))
         )
         contributionBoundaryCallback.onZeroItemsLoaded()
-        verify(repository).save(anyList());
+        verify(repository).save(anyList<Contribution>());
         verify(mediaClient).getMediaListForUser(anyString());
     }
 

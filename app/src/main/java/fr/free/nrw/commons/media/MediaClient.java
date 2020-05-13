@@ -93,8 +93,9 @@ public class MediaClient {
      */
     public Single<List<Media>> getMediaListForUser(String userName) {
         Map<String, String> continuation =
-            continuationStore.containsKey("user_" + userName) ? continuationStore
-                .get("user_" + userName) : Collections.emptyMap();
+            continuationStore.containsKey("user_" + userName)
+                ? continuationStore.get("user_" + userName)
+                : Collections.emptyMap();
         return responseToMediaList(mediaInterface
             .getMediaListForUser(userName, 10, continuation), "user_" + userName);
     }
