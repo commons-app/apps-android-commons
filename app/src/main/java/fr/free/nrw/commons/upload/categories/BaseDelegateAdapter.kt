@@ -19,7 +19,6 @@ abstract class BaseDelegateAdapter<T>(
     },
     *delegates
 ) {
-    fun indexOf(item: T): Int = items.indexOf(item)
 
     fun getItemAt(position: Int) = items[position]
 
