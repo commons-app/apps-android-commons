@@ -42,6 +42,7 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AccountUtil;
+import fr.free.nrw.commons.category.CategoryClient;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteHelper;
@@ -619,7 +620,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (categoriesLoaded && categoriesPresent) {
             textView.setOnClickListener(view -> {
                 // Open Category Details page
-                String selectedCategoryTitle = "Category:" + catName;
+                String selectedCategoryTitle = CategoryClient.CATEGORY_PREFIX + catName;
                 Intent intent = new Intent(getContext(), CategoryDetailsActivity.class);
                 intent.putExtra("categoryName", selectedCategoryTitle);
                 getContext().startActivity(intent);

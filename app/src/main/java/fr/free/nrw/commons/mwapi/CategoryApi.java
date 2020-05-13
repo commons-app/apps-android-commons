@@ -2,6 +2,7 @@ package fr.free.nrw.commons.mwapi;
 
 import com.google.gson.Gson;
 
+import fr.free.nrw.commons.category.CategoryClient;
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 
@@ -60,7 +61,7 @@ public class CategoryApi {
                 for (MwQueryPage page : apiResponse.query().pages()) {
                     if (page.categories() != null) {
                         for (MwQueryPage.Category category : page.categories()) {
-                            categories.add(category.title().replace("Category:", ""));
+                            categories.add(category.title().replace(CategoryClient.CATEGORY_PREFIX, ""));
                         }
                     }
                 }

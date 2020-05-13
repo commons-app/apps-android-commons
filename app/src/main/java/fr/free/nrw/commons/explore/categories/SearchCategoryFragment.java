@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.pedrogomez.renderers.RVRendererAdapter;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryClient;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
@@ -33,6 +32,7 @@ import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
+import kotlin.Unit;
 import timber.log.Timber;
 
 /**
@@ -59,15 +59,8 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     @Named("default_preferences")
     JsonKvStore basicKvStore;
 
-    private RVRendererAdapter<String> categoriesAdapter;
+    private SearchCategoriesAdapter categoriesAdapter;
     private List<String> queryList = new ArrayList<>();
-
-    private final SearchCategoriesAdapterFactory adapterFactory = new SearchCategoriesAdapterFactory(item -> {
-        // Called on Click of a individual category Item
-        // Open Category Details activity
-        CategoryDetailsActivity.startYourself(getContext(), item);
-        saveQuery(query);
-    });
 
     /**
      * This method saves Search Query in the Recent Searches Database.
@@ -98,8 +91,11 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         else{
             categoriesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         }
-        ArrayList<String> items = new ArrayList<>();
-        categoriesAdapter = adapterFactory.create(items);
+        categoriesAdapter = new SearchCategoriesAdapter(item -> {
+            CategoryDetailsActivity.startYourself(getContext(), item);
+            saveQuery(query);
+            return Unit.INSTANCE;
+        });
         categoriesRecyclerView.setAdapter(categoriesAdapter);
         categoriesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -142,7 +138,9 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
      * Adds 25 more results to existing search results
      */
     public void addCategoriesToList(String query) {
-        if(isLoadingCategories) return;
+        if(isLoadingCategories) {
+            return;
+        }
         isLoadingCategories=true;
         this.query = query;
         bottomProgressBar.setVisibility(View.VISIBLE);
@@ -163,7 +161,6 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         progressBar.setVisibility(View.GONE);
         bottomProgressBar.setVisibility(GONE);
         categoriesAdapter.addAll(mediaList);
-        categoriesAdapter.notifyDataSetChanged();
         isLoadingCategories=false;
     }
 
@@ -183,7 +180,6 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
             bottomProgressBar.setVisibility(View.GONE);
             progressBar.setVisibility(GONE);
             categoriesAdapter.addAll(mediaList);
-            categoriesAdapter.notifyDataSetChanged();
         }
     }
 

@@ -21,6 +21,7 @@ import timber.log.Timber;
 @Singleton
 public class CategoryClient {
 
+    public static final String CATEGORY_PREFIX = "Category:";
     private final CategoryInterface CategoryInterface;
 
     @Inject
@@ -120,6 +121,6 @@ public class CategoryClient {
                 })
                 .map(MwQueryPage::title)
                 .doOnEach(s -> Timber.d("Category returned: %s", s))
-                .map(cat -> cat.replace("Category:", ""));
+                .map(cat -> cat.replace(CATEGORY_PREFIX, ""));
     }
 }
