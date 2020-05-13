@@ -5,7 +5,6 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryItem
 import kotlinx.android.synthetic.main.layout_upload_categories_item.*
 
-
 fun uploadCategoryDelegate(onCategoryClicked: (CategoryItem) -> Unit) =
     adapterDelegateLayoutContainer<CategoryItem, CategoryItem>(R.layout.layout_upload_categories_item) {
         containerView.setOnClickListener {
