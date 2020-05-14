@@ -1,18 +1,25 @@
 package fr.free.nrw.commons.repository;
 
+import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
-import fr.free.nrw.commons.upload.UploadModel.UploadItem;
+import fr.free.nrw.commons.upload.UploadController;
+import fr.free.nrw.commons.upload.UploadItem;
+import fr.free.nrw.commons.upload.UploadModel;
+import fr.free.nrw.commons.upload.structure.depictions.DepictModel;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -22,14 +29,25 @@ import javax.inject.Singleton;
 @Singleton
 public class UploadRepository {
 
-    private UploadLocalDataSource localDataSource;
-    private UploadRemoteDataSource remoteDataSource;
+    private final UploadModel uploadModel;
+    private final UploadController uploadController;
+    private final CategoriesModel categoriesModel;
+    private final NearbyPlaces nearbyPlaces;
+    private final DepictModel depictModel;
+
+    private static final double NEARBY_RADIUS_IN_KILO_METERS = 0.1; //100 meters
 
     @Inject
-    public UploadRepository(UploadLocalDataSource localDataSource,
-                            UploadRemoteDataSource remoteDataSource) {
-        this.localDataSource = localDataSource;
-        this.remoteDataSource = remoteDataSource;
+    public UploadRepository(UploadModel uploadModel,
+        UploadController uploadController,
+        CategoriesModel categoriesModel,
+        NearbyPlaces nearbyPlaces,
+        DepictModel depictModel) {
+        this.uploadModel = uploadModel;
+        this.uploadController = uploadController;
+        this.categoriesModel = categoriesModel;
+        this.nearbyPlaces = nearbyPlaces;
+        this.depictModel = depictModel;
     }
 
     /**
@@ -38,7 +56,7 @@ public class UploadRepository {
      * @return
      */
     public Observable<Contribution> buildContributions() {
-        return remoteDataSource.buildContributions();
+        return uploadModel.buildContributions();
     }
 
     /**
@@ -47,7 +65,7 @@ public class UploadRepository {
      * @param contribution
      */
     public void startUpload(Contribution contribution) {
-        remoteDataSource.startUpload(contribution);
+        uploadController.startUpload(contribution);
     }
 
     /**
@@ -56,22 +74,24 @@ public class UploadRepository {
      * @return
      */
     public List<UploadItem> getUploads() {
-        return remoteDataSource.getUploads();
+        return uploadModel.getUploads();
     }
 
     /**
      * asks the RemoteDataSource to prepare the Upload Service
      */
     public void prepareService() {
-        remoteDataSource.prepareService();
+        uploadController.prepareService();
     }
 
     /**
      *Prepare for a fresh upload
      */
     public void cleanup() {
-        localDataSource.cleanUp();
-        remoteDataSource.cleanUp();
+        uploadModel.cleanUp();
+        //This needs further refactoring, this should not be here, right now the structure wont suppoort rhis
+        categoriesModel.cleanUp();
+        depictModel.cleanUp();
     }
 
     /**
@@ -80,7 +100,7 @@ public class UploadRepository {
      * @return
      */
     public List<CategoryItem> getSelectedCategories() {
-        return remoteDataSource.getSelectedCategories();
+        return categoriesModel.getSelectedCategories();
     }
 
     /**
@@ -91,7 +111,7 @@ public class UploadRepository {
      * @return
      */
     public Observable<List<CategoryItem>> searchAll(String query, List<String> imageTitleList) {
-        return remoteDataSource.searchAll(query, imageTitleList);
+        return categoriesModel.searchAll(query, imageTitleList);
     }
 
     /**
@@ -100,7 +120,7 @@ public class UploadRepository {
      * @param categoryStringList
      */
     public void setSelectedCategories(List<String> categoryStringList) {
-        remoteDataSource.setSelectedCategories(categoryStringList);
+        uploadModel.setSelectedCategories(categoryStringList);
     }
 
     /**
@@ -109,7 +129,7 @@ public class UploadRepository {
      * @param categoryItem
      */
     public void onCategoryClicked(CategoryItem categoryItem) {
-        remoteDataSource.onCategoryClicked(categoryItem);
+        categoriesModel.onCategoryItemClicked(categoryItem);
     }
 
     /**
@@ -119,7 +139,7 @@ public class UploadRepository {
      * @return
      */
     public boolean containsYear(String name) {
-        return remoteDataSource.containsYear(name);
+        return categoriesModel.containsYear(name);
     }
 
     /**
@@ -128,7 +148,7 @@ public class UploadRepository {
      * @return
      */
     public List<String> getLicenses() {
-        return localDataSource.getLicenses();
+        return uploadModel.getLicenses();
     }
 
     /**
@@ -137,7 +157,7 @@ public class UploadRepository {
      * @return
      */
     public String getSelectedLicense() {
-        return localDataSource.getSelectedLicense();
+        return uploadModel.getSelectedLicense();
     }
 
     /**
@@ -146,7 +166,7 @@ public class UploadRepository {
      * @return
      */
     public int getCount() {
-        return localDataSource.getCount();
+        return uploadModel.getCount();
     }
 
     /**
@@ -159,7 +179,8 @@ public class UploadRepository {
      */
     public Observable<UploadItem> preProcessImage(UploadableFile uploadableFile, Place place,
         SimilarImageInterface similarImageInterface) {
-        return remoteDataSource.preProcessImage(uploadableFile, place, similarImageInterface);
+        return uploadModel.preProcessImage(uploadableFile, place,
+            similarImageInterface);
     }
 
     /**
@@ -169,17 +190,7 @@ public class UploadRepository {
      * @return
      */
     public Single<Integer> getImageQuality(UploadItem uploadItem) {
-        return remoteDataSource.getImageQuality(uploadItem);
-    }
-
-    /**
-     * asks the LocalDataSource to update the Upload Item
-     *
-     * @param index
-     * @param uploadItem
-     */
-    public void updateUploadItem(int index, UploadItem uploadItem) {
-        localDataSource.updateUploadItem(index, uploadItem);
+        return uploadModel.getImageQuality(uploadItem);
     }
 
     /**
@@ -188,7 +199,7 @@ public class UploadRepository {
      * @param filePath
      */
     public void deletePicture(String filePath) {
-        localDataSource.deletePicture(filePath);
+        uploadModel.deletePicture(filePath);
     }
 
     /**
@@ -198,38 +209,10 @@ public class UploadRepository {
      * @return
      */
     public UploadItem getPreviousUploadItem(int index) {
-        return localDataSource.getPreviousUploadItem(index);
-    }
-
-    /**
-     * Save boolean value locally
-     *
-     * @param key
-     * @param value
-     */
-    public void saveValue(String key, boolean value) {
-        localDataSource.saveValue(key, value);
-    }
-
-    /**
-     * save string value locally
-     *
-     * @param key
-     * @param value
-     */
-    public void saveValue(String key, String value) {
-        localDataSource.saveValue(key, value);
-    }
-
-    /**
-     * fetch the string value for the associated key
-     *
-     * @param key
-     * @param value
-     * @return
-     */
-    public String getValue(String key, String value) {
-        return localDataSource.getValue(key, value);
+        if (index - 1 >= 0) {
+            return uploadModel.getItems().get(index - 1);
+        }
+        return null; //There is no previous item to copy details
     }
 
     /**
@@ -238,11 +221,11 @@ public class UploadRepository {
      * @param licenseName
      */
     public void setSelectedLicense(String licenseName) {
-        localDataSource.setSelectedLicense(licenseName);
+        uploadModel.setSelectedLicense(licenseName);
     }
 
     public void onDepictItemClicked(DepictedItem depictedItem) {
-        remoteDataSource.onDepictedItemClicked(depictedItem);
+        uploadModel.onDepictItemClicked(depictedItem);
     }
 
     /**
@@ -252,7 +235,7 @@ public class UploadRepository {
      */
 
     public List<DepictedItem> getSelectedDepictions() {
-        return remoteDataSource.getSelectedDepictions();
+        return uploadModel.getSelectedDepictions();
     }
 
     /**
@@ -263,7 +246,7 @@ public class UploadRepository {
      */
 
     public Flowable<List<DepictedItem>> searchAllEntities(String query) {
-        return remoteDataSource.searchAllEntities(query);
+        return depictModel.searchAllEntities(query);
     }
 
     /**
@@ -272,11 +255,19 @@ public class UploadRepository {
      * @param decLongitude
      * @return
      */
-    public Place checkNearbyPlaces(double decLatitude, double decLongitude) throws IOException {
-        return remoteDataSource.getNearbyPlaces(decLatitude, decLongitude);
+    public Place checkNearbyPlaces(double decLatitude, double decLongitude) {
+        try {
+            List<Place> fromWikidataQuery = nearbyPlaces.getFromWikidataQuery(new LatLng(
+                    decLatitude, decLongitude, 0.0f),
+                    Locale.getDefault().getLanguage(),
+                    NEARBY_RADIUS_IN_KILO_METERS);
+            return fromWikidataQuery.size() > 0 ? fromWikidataQuery.get(0) : null;
+        } catch (IOException e) {
+            return null;
+        }
     }
 
     public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
-        remoteDataSource.useSimilarPictureCoordinates(imageCoordinates, uploadItemIndex);
+        uploadModel.useSimilarPictureCoordinates(imageCoordinates, uploadItemIndex);
     }
 }

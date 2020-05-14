@@ -33,7 +33,7 @@ class u {
     var imageProcessingService: ImageProcessingService? = null
 
     @Mock
-    internal lateinit var uploadItem: UploadModel.UploadItem
+    internal lateinit var uploadItem: UploadItem
 
     @Before
     @Throws(Exception::class)

@@ -1,6 +1,6 @@
 package org.wikipedia.wikidata
 
-import org.wikipedia.wikidata.DataValue.DataValueEntityId
+import org.wikipedia.wikidata.DataValue.EntityId
 
 
 data class EditClaim(val claims: List<Statement_partial>) {
@@ -14,7 +14,7 @@ data class EditClaim(val claims: List<Statement_partial>) {
                         Snak_partial(
                             "value",
                             propertyName,
-                            DataValueEntityId(
+                            EntityId(
                                 WikiBaseEntityValue(
                                     "item",
                                     entityId,

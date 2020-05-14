@@ -17,6 +17,8 @@ data class UploadMediaDetail constructor(
     var descriptionText: String = "",
     var captionText: String = ""
 ) {
+    fun javaCopy() = copy()
+
     constructor(place: Place) : this(
         Locale.getDefault().language,
         place.longDescription,
