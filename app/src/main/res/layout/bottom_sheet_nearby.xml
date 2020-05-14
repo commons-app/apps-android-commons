@@ -3,7 +3,6 @@
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="bottom"
     app:behavior_hideable="true"
     android:visibility="visible"
@@ -20,11 +19,8 @@
       android:id="@+id/no_results_message"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:paddingVertical="50dp"
-      android:paddingHorizontal="50dp"
-      android:layout_centerHorizontal="true"
-      android:layout_centerVertical="true"
-      android:layout_gravity="center"
+      android:padding="50dp"
+      android:layout_centerInParent="true"
       android:visibility="gone"
       android:text="@string/nearby_no_results"/>
 
