@@ -51,21 +51,14 @@ class ContributionBoundaryCallback @Inject constructor(
     fun fetchContributions() {
         compositeDisposable.add(
             mediaClient.getMediaListForUser(sessionManager.userName)
-                .map<List<Contribution>> { mediaList: List<Media?> ->
-                    val contributions: MutableList<Contribution> =
-                        ArrayList()
-                    for (media in mediaList) {
-                        contributions.add(Contribution(media, Contribution.STATE_COMPLETED))
+                .map { mediaList: List<Media?> ->
+                    mediaList.map {
+                        Contribution(it, Contribution.STATE_COMPLETED)
                     }
-                    contributions
                 }
                 .subscribeOn(ioThreadScheduler)
                 .subscribe(
-                    { contributions: List<Contribution> ->
-                        saveContributionsToDB(
-                            contributions
-                        )
-                    }
+                    ::saveContributionsToDB
                 ) { error: Throwable ->
                     Timber.e(
                         "Failed to fetch contributions: %s",
