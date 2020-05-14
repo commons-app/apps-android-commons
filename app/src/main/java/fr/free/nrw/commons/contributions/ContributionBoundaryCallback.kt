@@ -35,7 +35,9 @@ class ContributionBoundaryCallback @Inject constructor(
     /**
      * It is triggered when the user scrolls to the top of the list No action is taken at this point
      */
-    override fun onItemAtFrontLoaded(itemAtFront: Contribution) {}
+    override fun onItemAtFrontLoaded(itemAtFront: Contribution) {
+        fetchContributions()
+    }
 
     /**
      * It is triggered when the user scrolls to the end of the list User's Contributions are then
