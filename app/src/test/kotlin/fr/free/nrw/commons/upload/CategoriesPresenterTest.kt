@@ -50,10 +50,10 @@ class CategoriesPresenterTest {
      */
     @Test
     fun `searchForCategories combines selection and search results without years distinctly`() {
-        val nonEmptyCaptionUploadItem = mock<UploadModel.UploadItem>()
+        val nonEmptyCaptionUploadItem = mock<UploadItem>()
         whenever(nonEmptyCaptionUploadItem.uploadMediaDetails)
             .thenReturn(listOf(UploadMediaDetail(captionText = "nonEmpty")))
-        val emptyCaptionUploadItem = mock<UploadModel.UploadItem>()
+        val emptyCaptionUploadItem = mock<UploadItem>()
         whenever(emptyCaptionUploadItem.uploadMediaDetails)
             .thenReturn(listOf(UploadMediaDetail(captionText = "")))
         whenever(repository.uploads).thenReturn(
