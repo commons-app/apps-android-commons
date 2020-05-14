@@ -20,14 +20,22 @@ abstract class BaseDelegateAdapter<T>(
     *delegates
 ) {
 
-    fun getItemAt(position: Int) = items[position]
-
     fun addAll(newResults: List<T>) {
-        items = (items ?: emptyList<T>()) + newResults
+        items = itemsOrEmpty + newResults
     }
 
     fun clear() {
         items = emptyList()
     }
+
+    fun add(item: T) {
+        items = itemsOrEmpty + item
+    }
+
+    fun remove(item: T) {
+        items = itemsOrEmpty - item
+    }
+
+    private val itemsOrEmpty get() = items ?: emptyList<T>()
 }
 

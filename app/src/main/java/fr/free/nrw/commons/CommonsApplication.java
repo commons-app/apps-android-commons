@@ -9,7 +9,6 @@ import static org.acra.ReportField.STACK_TRACE;
 import static org.acra.ReportField.USER_COMMENT;
 
 import android.annotation.SuppressLint;
-import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -18,13 +17,13 @@ import android.os.Build;
 import android.os.Process;
 import android.util.Log;
 import androidx.annotation.NonNull;
+import androidx.multidex.MultiDexApplication;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
-
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
@@ -77,7 +76,7 @@ import timber.log.Timber;
         resCommentPrompt = R.string.crash_dialog_comment_prompt
 )
 
-public class CommonsApplication extends Application {
+public class CommonsApplication extends MultiDexApplication {
     @Inject SessionManager sessionManager;
     @Inject DBOpenHelper dbOpenHelper;
 

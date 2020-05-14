@@ -8,26 +8,21 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.pedrogomez.renderers.RVRendererAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.nearby.NearbyAdapterFactory;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.nearby.fragments.CommonPlaceClickActions;
+import fr.free.nrw.commons.nearby.fragments.PlaceAdapter;
+import java.util.List;
+import javax.inject.Inject;
+import kotlin.Unit;
 
 public class BookmarkLocationsFragment extends DaggerFragment {
 
@@ -37,8 +32,10 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     @BindView(R.id.parentLayout) RelativeLayout parentLayout;
 
     @Inject BookmarkLocationsController controller;
-    private NearbyAdapterFactory adapterFactory;
     @Inject ContributionController contributionController;
+    @Inject BookmarkLocationsDao bookmarkLocationDao;
+    @Inject CommonPlaceClickActions commonPlaceClickActions;
+    private PlaceAdapter adapter;
 
     /**
      * Create an instance of the fragment with the right bundle parameters
@@ -56,7 +53,6 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     ) {
         View v = inflater.inflate(R.layout.fragment_bookmarks_locations, container, false);
         ButterKnife.bind(this, v);
-        adapterFactory = new NearbyAdapterFactory(this, contributionController);
         return v;
     }
 
@@ -65,7 +61,15 @@ public class BookmarkLocationsFragment extends DaggerFragment {
         super.onViewCreated(view, savedInstanceState);
         progressBar.setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapterFactory.create(new ArrayList<>(), this::initList));
+        adapter = new PlaceAdapter(bookmarkLocationDao,
+            place -> Unit.INSTANCE,
+            (place, isBookmarked) -> {
+                adapter.remove(place);
+                return Unit.INSTANCE;
+            },
+            commonPlaceClickActions
+        );
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -79,7 +83,7 @@ public class BookmarkLocationsFragment extends DaggerFragment {
      */
     private void initList() {
         List<Place> places = controller.loadFavoritesLocations();
-        adapterFactory.updateAdapterData(places, (RVRendererAdapter<Place>) recyclerView.getAdapter());
+        adapter.setItems(places);
         progressBar.setVisibility(View.GONE);
         if (places.size() <= 0) {
             statusTextView.setText(R.string.bookmark_empty);
