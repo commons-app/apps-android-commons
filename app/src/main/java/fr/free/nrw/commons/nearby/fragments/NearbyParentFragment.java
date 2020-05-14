@@ -627,11 +627,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void updateListFragment(List<Place> placeList) {
         adapterFactory.updateAdapterData(placeList, (RVRendererAdapter<Place>) rvNearbyList.getAdapter());
-        if (placeList.size() <= 0) {
-            noResultsView.setVisibility(View.VISIBLE);
-        } else {
-            noResultsView.setVisibility(View.GONE);
-        }
+        noResultsView.setVisibility(placeList.size() <= 0 ? View.VISIBLE : View.GONE);
     }
 
     public void clearNearbyList() {
@@ -640,11 +636,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     public void updateNearbyList() {
         adapterFactory.update((RVRendererAdapter<Place>) rvNearbyList.getAdapter());
-        if (rvNearbyList.getAdapter().getItemCount() <= 0) {
-            noResultsView.setVisibility(View.VISIBLE);
-        } else {
-            noResultsView.setVisibility(View.GONE);
-        }
+        noResultsView.setVisibility(rvNearbyList.getAdapter().getItemCount() <= 0 ? View.VISIBLE : View.GONE);
     }
 
     public void addPlaceToNearbyList(Place place) {
