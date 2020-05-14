@@ -90,7 +90,6 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
             .subscribeOn(ioScheduler)
             .observeOn(mainThreadScheduler)
             .doOnSubscribe(disposable -> saveQuery())
-            .collect(ArrayList<DepictedItem>::new, ArrayList::add)
             .subscribe(this::handleSuccess, this::handleError));
     }
 
@@ -154,23 +153,6 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
             this.queryList.addAll(mediaList);
             view.onSuccess(mediaList);
             offset=queryList.size();
-            for (DepictedItem m : mediaList) {
-                fetchThumbnailForEntityId(m.getId(), size++);
-            }
         }
     }
-
-    /**
-     * After all the depicted items are loaded fetch thumbnail image for all the depicted items (if available)
-     */
-    @Override
-    public void fetchThumbnailForEntityId(String entityId,int position) {
-         compositeDisposable.add(depictsClient.getImagePropertyForItem(entityId)
-                .subscribeOn(ioScheduler)
-                .observeOn(mainThreadScheduler)
-                .subscribe(response -> {
-                    view.onImageUrlFetched(response,position);
-                }));
-    }
-
 }

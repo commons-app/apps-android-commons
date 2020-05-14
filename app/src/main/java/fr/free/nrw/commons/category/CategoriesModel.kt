@@ -98,13 +98,7 @@ class CategoriesModel @Inject constructor(
     }
 
     private fun categoriesFromDepiction(selectedDepictions: List<DepictedItem>) =
-        if (selectedDepictions.isNotEmpty())
-            Observable.combineLatest(
-                selectedDepictions.map { depictsClient.getCategoryPropertyOf(it).toObservable() },
-                { results -> results.map { it as List<String> }.flatten() }
-            )
-        else
-            Observable.just(emptyList())
+        Observable.just(selectedDepictions.map { it.commonsCategories }.flatten())
 
     private fun combine(
         depictionCategories: List<String>,

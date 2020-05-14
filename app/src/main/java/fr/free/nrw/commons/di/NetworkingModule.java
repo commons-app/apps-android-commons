@@ -9,6 +9,7 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.actions.PageEditInterface;
 import fr.free.nrw.commons.category.CategoryInterface;
+import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaDetailInterface;
 import fr.free.nrw.commons.media.MediaInterface;
@@ -77,10 +78,12 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public OkHttpJsonApiClient provideOkHttpJsonApiClient(OkHttpClient okHttpClient,
+                                                          DepictsClient depictsClient,
                                                           @Named("tools_forge") HttpUrl toolsForgeUrl,
                                                           @Named("default_preferences") JsonKvStore defaultKvStore,
                                                           Gson gson) {
         return new OkHttpJsonApiClient(okHttpClient,
+                depictsClient,
                 toolsForgeUrl,
                 WIKIDATA_SPARQL_QUERY_URL,
                 BuildConfig.WIKIMEDIA_CAMPAIGNS_URL,

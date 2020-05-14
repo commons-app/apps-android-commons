@@ -222,10 +222,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.mediaDetailImageViewSpacer)
     public void launchZoomActivity(View view) {
-        Context ctx = view.getContext();
-        ctx.startActivity(
-                new Intent(ctx,ZoomableActivity.class).setData(Uri.parse(media.getImageUrl()))
-        );
+        if (media.getImageUrl() != null) {
+            Context ctx = view.getContext();
+            ctx.startActivity(
+                new Intent(ctx, ZoomableActivity.class).setData(Uri.parse(media.getImageUrl()))
+            );
+        }
     }
 
     @Override
@@ -600,10 +602,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         textView.setText(depictionName);
         if (depictionLoaded) {
             item.setOnClickListener(view -> {
-                DepictedItem depictedItem = new DepictedItem(depictionName, "", "", false, entityId);
                 Intent intent = new Intent(getContext(), WikidataItemDetailsActivity.class);
-                intent.putExtra("wikidataItemName", depictedItem.getName());
-                intent.putExtra("entityId", depictedItem.getId());
+                intent.putExtra("wikidataItemName", depictionName);
+                intent.putExtra("entityId", entityId);
                 getContext().startActivity(intent);
             });
         }

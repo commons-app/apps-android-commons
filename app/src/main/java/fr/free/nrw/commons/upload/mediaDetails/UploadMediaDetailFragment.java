@@ -31,8 +31,7 @@ import fr.free.nrw.commons.upload.SimilarImageDialogFragment;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
-import fr.free.nrw.commons.upload.UploadModel;
-import fr.free.nrw.commons.upload.UploadModel.UploadItem;
+import fr.free.nrw.commons.upload.UploadItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -44,8 +43,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
-
-//import fr.free.nrw.commons.upload.DescriptionsAdapter;
 
 public class UploadMediaDetailFragment extends UploadBaseFragment implements
         UploadMediaDetailsContract.View, UploadMediaDetailAdapter.EventListener {
@@ -69,9 +66,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private UploadMediaDetailAdapter uploadMediaDetailAdapter;
     @BindView(R.id.btn_copy_prev_title_desc)
     AppCompatButton btnCopyPreviousTitleDesc;
-
-    private UploadModel.UploadItem uploadItem;
-    private List<UploadMediaDetail> descriptions;
 
     @Inject
     UploadMediaDetailsContract.UserActionListener presenter;
@@ -181,8 +175,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
-        uploadItem.setMediaDetails(uploadMediaDetailAdapter.getUploadMediaDetails());
-        presenter.verifyImageQuality(uploadItem);
+        presenter.verifyImageQuality(callback.getIndexInViewFlipper(this));
     }
 
     @OnClick(R.id.btn_previous)
@@ -222,10 +215,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @Override
     public void onImageProcessed(UploadItem uploadItem, Place place) {
-        this.uploadItem = uploadItem;
-        descriptions = uploadItem.getUploadMediaDetails();
         photoViewBackgroundImage.setImageURI(uploadItem.getMediaUri());
-        setDescriptionsInAdapter(descriptions);
     }
 
     /**
@@ -242,8 +232,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                         getString(R.string.upload_nearby_place_found_description),
                         place.getName()),
                 () -> {
-                    descriptions = new ArrayList<>(Arrays.asList(new UploadMediaDetail(place)));
-                    setDescriptionsInAdapter(descriptions);
+                    presenter.onUserConfirmedUploadIsOfPlace(place, callback.getIndexInViewFlipper(this));
                 },
                 () -> {
 
@@ -257,7 +246,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @Override
     public void onImageValidationSuccess() {
-        presenter.setUploadItem(callback.getIndexInViewFlipper(this), uploadItem);
         callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
     }
 
@@ -272,7 +260,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void showDuplicatePicturePopup() {
+    public void showDuplicatePicturePopup(UploadItem uploadItem) {
         String uploadTitleFormat = getString(R.string.upload_title_duplicate);
         DialogUtil.showAlertDialog(getActivity(),
                 getString(R.string.duplicate_image_found),
@@ -289,7 +277,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void showBadImagePopup(Integer errorCode) {
+    public void showBadImagePopup(Integer errorCode,
+        UploadItem uploadItem) {
         String errorMessageForResult = getErrorMessageForResult(getContext(), errorCode);
         if (!StringUtils.isBlank(errorMessageForResult)) {
             DialogUtil.showAlertDialog(getActivity(),
@@ -312,8 +301,15 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void setCaptionsAndDescriptions(List<UploadMediaDetail> uploadMediaDetails) {
-        setDescriptionsInAdapter(uploadMediaDetails);
+    public void showExternalMap(UploadItem uploadItem) {
+        Utils.handleGeoCoordinates(getContext(),
+            new LatLng(uploadItem.getGpsCoords().getDecLatitude(),
+                uploadItem.getGpsCoords().getDecLongitude(), 0.0f));
+    }
+
+    @Override
+    public void updateMediaDetails(List<UploadMediaDetail> uploadMediaDetails) {
+        uploadMediaDetailAdapter.setItems(uploadMediaDetails);
     }
 
     private void deleteThisPicture() {
@@ -342,9 +338,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @OnClick(R.id.ib_map) public void onIbMapClicked() {
-        Utils.handleGeoCoordinates(getContext(),
-            new LatLng(uploadItem.getGpsCoords().getDecLatitude(),
-                uploadItem.getGpsCoords().getDecLongitude(), 0.0f));
+        presenter.onMapIconClicked(callback.getIndexInViewFlipper(this));
     }
 
     @Override
@@ -353,7 +347,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         btnNext.setClickable(isNotEmpty);
         btnNext.setAlpha(isNotEmpty ? 1.0f: 0.5f);
     }
-
 
     public interface UploadMediaDetailFragmentCallback extends Callback {
 
@@ -366,7 +359,4 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         presenter.fetchPreviousTitleAndDescription(callback.getIndexInViewFlipper(this));
     }
 
-    private void setDescriptionsInAdapter(List<UploadMediaDetail> uploadMediaDetails){
-        uploadMediaDetailAdapter.setItems(uploadMediaDetails);
-    }
 }

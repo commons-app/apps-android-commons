@@ -76,7 +76,7 @@
   <string name="provider_contributions">Mis subidas</string>
   <string name="menu_share">Compartir</string>
   <string name="menu_open_in_browser">Ver en el navegador</string>
-  <string name="share_title_hint" fuzzy="true">Título (Requerido)</string>
+  <string name="share_title_hint">Leyenda (requerido)</string>
   <string name="share_description_hint">Descripción</string>
   <string name="login_failed_network">No se pudo iniciar sesión: error de red</string>
   <string name="login_failed_wrong_credentials">No se puede acceder. Revisa el nombre de usuario y la contraseña</string>

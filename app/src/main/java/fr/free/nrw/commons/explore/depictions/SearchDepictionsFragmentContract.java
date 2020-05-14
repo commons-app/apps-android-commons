@@ -49,8 +49,6 @@ public interface SearchDepictionsFragmentContract {
          */
         RVRendererAdapter<DepictedItem> getAdapter();
 
-        void onImageUrlFetched(String response, int position);
-
         /**
          * Inform the view that there are no more items to be loaded for this search query
          * or reset the isLastPage for the current query
@@ -85,10 +83,5 @@ public interface SearchDepictionsFragmentContract {
          * @return query
          */
         String getQuery();
-
-        /**
-         * After all the depicted items are loaded fetch thumbnail image for all the depicted items (if available)
-         */
-        void fetchThumbnailForEntityId(String entityId,int position);
     }
 }

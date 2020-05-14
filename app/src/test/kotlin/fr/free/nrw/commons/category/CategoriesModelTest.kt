@@ -7,7 +7,6 @@ import depictedItem
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.upload.GpsCategoryModel
 import io.reactivex.Observable
-import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
 import org.junit.Before
 import org.junit.Test
@@ -53,13 +52,12 @@ class CategoriesModelTest {
     fun `searchAll with empty search terms creates results from gps, title search & recents`() {
         val gpsCategoryModel: GpsCategoryModel = mock()
         val depictsClient: DepictsClient = mock()
-        val depictedItem = depictedItem()
+        val depictedItem = depictedItem(commonsCategories = listOf("depictionCategory"))
 
         whenever(gpsCategoryModel.categoriesFromLocation)
             .thenReturn(BehaviorSubject.createDefault(listOf("gpsCategory")))
         whenever(categoryClient.searchCategories("tes", 25))
             .thenReturn(Observable.just(listOf("titleSearch")))
-        whenever(depictsClient.getCategoryPropertyOf(depictedItem)).thenReturn(Single.just(listOf("depictionCategory")))
         whenever(categoryDao.recentCategories(25)).thenReturn(listOf("recentCategories"))
         CategoriesModel(categoryClient, categoryDao, gpsCategoryModel, depictsClient)
             .searchAll("", listOf("tes"), listOf(depictedItem))

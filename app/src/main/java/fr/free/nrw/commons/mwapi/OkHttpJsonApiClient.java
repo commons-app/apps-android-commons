@@ -7,6 +7,7 @@ import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.depictions.subClass.models.SparqlResponse;
+import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
@@ -38,6 +39,7 @@ import timber.log.Timber;
 public class OkHttpJsonApiClient {
 
   private final OkHttpClient okHttpClient;
+  private final DepictsClient depictsClient;
   private final HttpUrl wikiMediaToolforgeUrl;
   private final String sparqlQueryUrl;
   private final String campaignsUrl;
@@ -46,11 +48,13 @@ public class OkHttpJsonApiClient {
 
   @Inject
   public OkHttpJsonApiClient(OkHttpClient okHttpClient,
+      DepictsClient depictsClient,
       HttpUrl wikiMediaToolforgeUrl,
       String sparqlQueryUrl,
       String campaignsUrl,
       Gson gson) {
     this.okHttpClient = okHttpClient;
+    this.depictsClient = depictsClient;
     this.wikiMediaToolforgeUrl = wikiMediaToolforgeUrl;
     this.sparqlQueryUrl = sparqlQueryUrl;
     this.campaignsUrl = campaignsUrl;
@@ -219,14 +223,11 @@ public class OkHttpJsonApiClient {
   }
 
   private Observable<List<DepictedItem>> depictedItemsFrom(Request request) {
-    return Observable.fromCallable(() -> {
+    return depictsClient.toDepictions(Observable.fromCallable(() -> {
       try (ResponseBody body = okHttpClient.newCall(request).execute().body()) {
-        return gson.fromJson(body.string(), SparqlResponse.class).toDepictedItems();
-      }catch (Exception e) {
-        Timber.e(e);
-        return new ArrayList<DepictedItem>();
+        return gson.fromJson(body.string(), SparqlResponse.class);
       }
-    }).doOnError(Timber::e);
+    }).doOnError(Timber::e));
   }
 
   @NotNull
