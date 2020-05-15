@@ -93,6 +93,7 @@ class BookMarkLocationDaoTest {
                 assertEquals(builder.build().wikipediaLink, it.siteLinks.wikipediaLink)
                 assertEquals(builder.build().wikidataLink, it.siteLinks.wikidataLink)
                 assertEquals(builder.build().commonsLink, it.siteLinks.commonsLink)
+                assertEquals("picName",it.pic)
             }
         }
     }
