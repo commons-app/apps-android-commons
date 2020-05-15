@@ -133,7 +133,6 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> saveQuery(query))
-                .collect(ArrayList<String>::new, ArrayList::add)
                 .subscribe(this::handleSuccess, this::handleError));
     }
 
@@ -150,7 +149,6 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         compositeDisposable.add(categoryClient.searchCategories(query,25, queryList.size())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .collect(ArrayList<String>::new, ArrayList::add)
                 .subscribe(this::handlePaginationSuccess, this::handleError));
     }
 
