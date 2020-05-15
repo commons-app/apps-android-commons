@@ -40,7 +40,7 @@ class DepictsClient @Inject constructor(
         return depictsInterface.searchForDepicts(query, "$limit", language, language, "$offset")
             .map { it.search.joinToString("|") { searchItem -> searchItem.id } }
             .flatMap(::getEntities)
-            .map { it.entities()?.values?.map(::DepictedItem) ?: emptyList() }
+            .map { it.entities().values.map(::DepictedItem) }
     }
 
     /**
@@ -85,7 +85,7 @@ class DepictsClient @Inject constructor(
             }
         }
             .flatMap { getEntities(it).toObservable() }
-            .map { it.entities()?.values?.map(::DepictedItem) ?: emptyList() }
+            .map { it.entities().values.map(::DepictedItem) }
     }
 
     companion object {
