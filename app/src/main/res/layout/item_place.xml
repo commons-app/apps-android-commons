@@ -18,10 +18,9 @@
         android:id="@+id/icon"
         android:layout_width="@dimen/dimen_40"
         android:layout_height="@dimen/dimen_40"
-        android:layout_marginLeft="@dimen/standard_gap"
         android:layout_marginStart="@dimen/standard_gap"
         android:layout_marginTop="@dimen/standard_gap"
-        android:layout_alignLeft="@id/bookmarkButtonImage"
+        android:layout_alignStart="@id/bookmarkButtonImage"
         android:scaleType="centerCrop"
         tools:src="@drawable/empty_photo"
         />
