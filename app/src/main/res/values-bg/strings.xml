@@ -49,7 +49,7 @@
   <string name="provider_contributions">Моите качвания</string>
   <string name="menu_share">Споделяне</string>
   <string name="menu_open_in_browser">Преглед в браузъра</string>
-  <string name="share_title_hint" fuzzy="true">Заглавие (задълж.)</string>
+  <string name="share_title_hint">Описание (задълж.)</string>
   <string name="share_description_hint">Описание</string>
   <string name="login_failed_network">Неуспешно влизане – проблем в мрежата</string>
   <string name="login_failed_wrong_credentials">Неуспешно влизане. Проверете потребителското Ви име и паролата.</string>
@@ -96,7 +96,7 @@
   </plurals>
   <string name="menu_download">Изтегляне</string>
   <string name="preference_license">Лиценз по подразбиране</string>
-  <string name="preference_theme" fuzzy="true">Нощен режим</string>
+  <string name="preference_theme">Облик</string>
   <string name="license_name_cc_by_sa_four">Признание-Споделяне на Споделеното 4.0</string>
   <string name="license_name_cc_by_sa">Признание-Споделяне на Споделеното 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -188,7 +188,7 @@
   <string name="use_external_storage_summary">Съхраняване на направените картини в приложението с камерата на устройството Ви</string>
   <string name="nominate_deletion">Номиниране за изтриване</string>
   <string name="nominated_for_deletion">Изображението е предложено за изтриване.</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;По-подробно ще намерите на уеб страницата&lt;/u&gt;</string>
+  <string name="nominated_see_more">По-подробно ще намерите на уеб страницата</string>
   <string name="skip_login">Пропускане</string>
   <string name="navigation_item_login">Влизане</string>
   <string name="skip_login_message">Ще трябва да влезете, за да качвате картини в бъдеще.</string>
@@ -196,7 +196,7 @@
   <string name="copy_wikicode">Копиране на уикитекста в кеша</string>
   <string name="wikicode_copied">Уикитекстът е копиран в кеша</string>
   <string name="nearby_location_has_not_changed">Местоположението не е променено.</string>
-  <string name="nearby_location_not_available" fuzzy="true">Местоположението не е налично.</string>
+  <string name="nearby_location_not_available">„Близки места“ може да не работи правилно, тъй като местоположението не е налично.</string>
   <string name="toggle_view_button">Превключване на изгледа</string>
   <string name="nearby_wikidata">Уикиданни</string>
   <string name="nearby_wikipedia">Уикипедия</string>
@@ -213,7 +213,7 @@
   <string name="preference_author_name_toggle">Използване на персонализирано авторско име</string>
   <string name="preference_author_name_toggle_summary">При качването използвайте персонализирано авторско име вместо потребителското си име</string>
   <string name="preference_author_name">Персонализирано авторско име</string>
-  <string name="read_notifications" fuzzy="true">Известия (архивирани)</string>
+  <string name="read_notifications">Известия (прочетени)</string>
   <string name="list_sheet">Списък</string>
   <string name="next">Следваща</string>
   <string name="submit">Изпращане</string>
@@ -243,9 +243,9 @@
   <string name="no_image_reverted">Няма върнати изображения</string>
   <string name="no_image_uploaded">Няма качени изображения</string>
   <string name="no_notification">Нямате непрочетени известия</string>
-  <string name="no_read_notification" fuzzy="true">Нямате архивирани известия</string>
+  <string name="no_read_notification">Нямате прочетени известия</string>
   <string name="share_logs_using">Споделяне на дневници, използвайки</string>
-  <string name="menu_option_read" fuzzy="true">Преглеждане на архивирани</string>
+  <string name="menu_option_read">Преглеждане на прочетени</string>
   <string name="menu_option_unread">Преглеждане на непрочетени</string>
   <string name="error_occurred_in_picking_images">Възникна грешка при избирането на изображенията</string>
   <string name="image_chooser_title">Изберете изображения за качване</string>

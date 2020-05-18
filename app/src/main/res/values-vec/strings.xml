@@ -189,7 +189,7 @@
   <string name="cannot_be_zero">El limite de cargamento no\'l połe esare 0</string>
   <string name="set_limit">El me limite di cargamento ultimo</string>
   <string name="login_failed_2fa_not_supported">L\'autenticasion a do fatori no ła xé pa\'l momento suportada</string>
-  <string name="logout_verification">Vuto realmente ndar fora?</string>
+  <string name="logout_verification">Vuto seriamente sevitar a ndaxer fora?</string>
   <string name="commons_logo">Logo de Commons</string>
   <string name="commons_website">Sito web de Commons</string>
   <string name="commons_facebook">Pajina Facebook de Commons</string>
@@ -226,7 +226,7 @@
   <string name="nearby_needs_permissions">I posti cuà rente no i pole mia esar mostrai sensa ver autorixà l\'uxo de la poxision</string>
   <string name="no_description_found">Nisuna descrision catada</string>
   <string name="nearby_info_menu_commons_article">Pajina de Commons del file</string>
-  <string name="nearby_info_menu_wikidata_article">Elemento Wikidata</string>
+  <string name="nearby_info_menu_wikidata_article">Ełemento Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Articulo so Wikipedia</string>
   <string name="error_while_cache">Eror co se jera drio memorixare le imajini n\'te la cache</string>
   <string name="title_info">On unego titoło descrivitivo par el file, che el vegnarà doparà come so no,e. Te połi doparar on lenguajo senpliçe co spasi. No sta scrivere l\'estension del file</string>
@@ -272,7 +272,7 @@
   <string name="notifications_talk_page_message">%1$s el te ga dasà on mesajo n\'te ła to pajina de discusion</string>
   <string name="notifications_thank_you_edit">Grasie par ver fato na modifega!</string>
   <string name="notifications_mention">%1$s el te ga mensionà so %2$s.</string>
-  <string name="toggle_view_button">Ativa/Dixativa vixuałixasion</string>
+  <string name="toggle_view_button">Ativa/Dexativa vixuałixasion</string>
   <string name="nearby_directions">Indicasion</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
