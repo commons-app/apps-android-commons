@@ -313,10 +313,6 @@ public class NearbyParentFragmentPresenter
             //TODO: fix bookmark location
             NearbyController.markerExistsMap.put((nearbyBaseMarkers.get(i).getPlace().hasWikidataLink()), nearbyBaseMarkers.get(i).getMarker());
             NearbyController.markerNeedPicMap.put(((nearbyBaseMarkers.get(i).getPlace().pic == null) ? true : false), nearbyBaseMarkers.get(i).getMarker());
-            Log.d("deneme5","pics:"+nearbyBaseMarkers.get(i).getPlace().pic);
-            if (!nearbyBaseMarkers.get(i).getPlace().pic.trim().isEmpty() && bookmarkLocationDao.findBookmarkLocation(nearbyBaseMarker.getPlace())) {
-                Log.d("deneme5","pic not empty and bookmarked:"+nearbyBaseMarkers.get(i).getPlace().name);
-            }
         }
     }
 
