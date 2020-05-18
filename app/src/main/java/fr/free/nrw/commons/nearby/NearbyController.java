@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 
+import androidx.annotation.MainThread;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
@@ -232,6 +233,7 @@ public class NearbyController {
      * @param place place which is bookmarked
      * @param isBookmarked true is bookmarked, false if bookmark removed
      */
+    @MainThread
     public static void updateMarkerLabelListBookmark(Place place, boolean isBookmarked) {
         for (ListIterator<MarkerPlaceGroup> iter = markerLabelList.listIterator(); iter.hasNext();) {
             MarkerPlaceGroup markerPlaceGroup = iter.next();

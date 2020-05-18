@@ -3,6 +3,7 @@ package fr.free.nrw.commons.nearby.presenter;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.MainThread;
 import com.mapbox.mapboxsdk.annotations.Marker;
 
 import java.lang.reflect.Proxy;
@@ -302,6 +303,7 @@ public class NearbyParentFragmentPresenter
     }
 
     @Override
+    @MainThread
     public void updateMapMarkersToController(List<NearbyBaseMarker> nearbyBaseMarkers) {
         NearbyController.markerExistsMap = new HashMap<>();
         NearbyController.markerNeedPicMap = new HashMap<>();
