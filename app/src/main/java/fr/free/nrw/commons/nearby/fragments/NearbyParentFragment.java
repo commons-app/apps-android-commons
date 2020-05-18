@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -27,6 +28,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -1175,43 +1177,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void updateMarker(boolean isBookmarked, Place place, @Nullable fr.free.nrw.commons.location.LatLng curLatLng) {
         addPlaceToNearbyList(place);
 
-        VectorDrawableCompat vectorDrawable;
-        if (!place.pic.trim().isEmpty()) {
-            if (isBookmarked) {
-                vectorDrawable = VectorDrawableCompat.create(
-                    getContext().getResources(), R.drawable.ic_custom_map_marker_green_bookmarked,
-                    getContext().getTheme()
-                );
-            } else {
-                vectorDrawable = VectorDrawableCompat.create( // Means place has picture
-                    getContext().getResources(), R.drawable.ic_custom_map_marker_green,
-                    getContext().getTheme()
-                );
-            }
-        } else if (!place.destroyed.trim().isEmpty()) { // Means place is destroyed
-            if (isBookmarked) {
-                vectorDrawable = VectorDrawableCompat.create(
-                    getContext().getResources(), R.drawable.ic_custom_map_marker_grey_bookmarked,
-                    getContext().getTheme()
-                );
-            } else {
-                vectorDrawable = VectorDrawableCompat.create( // Means place has picture
-                    getContext().getResources(), R.drawable.ic_custom_map_marker_grey,
-                    getContext().getTheme()
-                );
-            }
-        } else {
-            if (isBookmarked) {
-                vectorDrawable = VectorDrawableCompat.create(
-                    getContext().getResources(), R.drawable.ic_custom_map_marker_blue_bookmarked,
-                    getContext().getTheme()
-                );
-            } else {
-                vectorDrawable = VectorDrawableCompat.create(
-                    getContext().getResources(), R.drawable.ic_custom_map_marker, getContext().getTheme()
-                );
-            }
-        }
+        VectorDrawableCompat vectorDrawable = VectorDrawableCompat.create(
+            getContext().getResources(), getIconFor(place, isBookmarked), getContext().getTheme());
+
         for (Marker marker : mapBox.getMarkers()) {
             if (marker.getTitle() != null && marker.getTitle().equals(place.getName())) {
 
@@ -1232,6 +1200,22 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         .fromBitmap(icon));
                 marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
             }
+        }
+    }
+
+    private @DrawableRes int getIconFor(Place place, Boolean isBookmarked) {
+        if (!place.pic.trim().isEmpty()) {
+            return (isBookmarked ?
+                R.drawable.ic_custom_map_marker_green_bookmarked :
+                R.drawable.ic_custom_map_marker_green);
+        } else if (!place.destroyed.trim().isEmpty()) { // Means place is destroyed
+            return (isBookmarked ?
+                R.drawable.ic_custom_map_marker_grey_bookmarked :
+                R.drawable.ic_custom_map_marker_grey);
+        } else {
+            return (isBookmarked ?
+                R.drawable.ic_custom_map_marker_blue_bookmarked :
+                R.drawable.ic_custom_map_marker);
         }
     }
 
