@@ -4,7 +4,9 @@ import android.os.Parcel;
 
 import androidx.annotation.DrawableRes;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import fr.free.nrw.commons.R;
@@ -92,5 +94,9 @@ public enum Label {
     public static Label fromText(String text) {
         Label label = TEXT_TO_DESCRIPTION.get(text);
         return label == null ? UNKNOWN : label;
+    }
+
+    public static List<Label> valuesAsList() {
+        return Arrays.asList(Label.values());
     }
 }

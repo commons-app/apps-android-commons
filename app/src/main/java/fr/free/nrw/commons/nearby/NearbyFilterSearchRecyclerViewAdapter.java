@@ -121,8 +121,6 @@ public class NearbyFilterSearchRecyclerViewAdapter
                 }
 
                 if (constraint == null || constraint.length() == 0) {
-                    // set my bookmarks as the first item
-                    Collections.swap(labels, 0 , labels.indexOf(Label.fromText("BOOKMARK")));
                     // set the Original result to return
                     results.count = labels.size();
                     results.values = labels;
