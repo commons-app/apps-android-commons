@@ -2,6 +2,7 @@ package fr.free.nrw.commons.media;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_PREFIX;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -42,7 +43,6 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AccountUtil;
-import fr.free.nrw.commons.category.CategoryClient;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteHelper;
@@ -50,7 +50,6 @@ import fr.free.nrw.commons.delete.ReasonBuilder;
 import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -620,7 +619,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (categoriesLoaded && categoriesPresent) {
             textView.setOnClickListener(view -> {
                 // Open Category Details page
-                String selectedCategoryTitle = CategoryClient.CATEGORY_PREFIX + catName;
+                String selectedCategoryTitle = CATEGORY_PREFIX + catName;
                 Intent intent = new Intent(getContext(), CategoryDetailsActivity.class);
                 intent.putExtra("categoryName", selectedCategoryTitle);
                 getContext().startActivity(intent);

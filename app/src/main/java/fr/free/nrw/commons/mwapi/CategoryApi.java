@@ -1,26 +1,23 @@
 package fr.free.nrw.commons.mwapi;
 
+import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_PREFIX;
+
 import com.google.gson.Gson;
-
-import fr.free.nrw.commons.category.CategoryClient;
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-
+import io.reactivex.Single;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import io.reactivex.Single;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import timber.log.Timber;
 
 /**
@@ -61,7 +58,7 @@ public class CategoryApi {
                 for (MwQueryPage page : apiResponse.query().pages()) {
                     if (page.categories() != null) {
                         for (MwQueryPage.Category category : page.categories()) {
-                            categories.add(category.title().replace(CategoryClient.CATEGORY_PREFIX, ""));
+                            categories.add(category.title().replace(CATEGORY_PREFIX, ""));
                         }
                     }
                 }
