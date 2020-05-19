@@ -180,7 +180,7 @@ class FileProcessor @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .subscribe(
-                    { gpsCategoryModel.categoryList = it },
+                    gpsCategoryModel::setCategoriesFromLocation,
                     {
                         Timber.e(it)
                         gpsCategoryModel.clear()
