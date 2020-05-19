@@ -151,6 +151,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     MapView mapView;
     @BindView(R.id.rv_nearby_list)
     RecyclerView rvNearbyList;
+    @BindView(R.id.no_results_message) TextView noResultsView;
 
     @Inject LocationServiceManager locationManager;
     @Inject NearbyController nearbyController;
@@ -633,12 +634,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void updateListFragment(final List<Place> placeList) {
         adapter.setItems(placeList);
+        noResultsView.setVisibility(placeList.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     public void clearNearbyList() {
         adapter.clear();
     }
-
 
     public void addPlaceToNearbyList(final Place place) {
         adapter.add(place);

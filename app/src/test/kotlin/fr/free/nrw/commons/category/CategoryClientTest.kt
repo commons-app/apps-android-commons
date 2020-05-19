@@ -1,20 +1,26 @@
 package fr.free.nrw.commons.category
 
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Observable
-import junit.framework.Assert.*
 import org.junit.Before
 import org.junit.Test
-import org.mockito.*
+import org.mockito.ArgumentMatchers.anyInt
+import org.mockito.ArgumentMatchers.anyString
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.Mockito.mock
+import org.mockito.MockitoAnnotations
 import org.wikipedia.dataclient.mwapi.MwQueryPage
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import org.wikipedia.dataclient.mwapi.MwQueryResult
 
 class CategoryClientTest {
     @Mock
-    internal var categoryInterface: CategoryInterface? = null
+    internal lateinit var categoryInterface: CategoryInterface
 
     @InjectMocks
-    var categoryClient: CategoryClient? = null
+    lateinit var categoryClient: CategoryClient
 
     @Before
     @Throws(Exception::class)
@@ -24,132 +30,111 @@ class CategoryClientTest {
 
     @Test
     fun searchCategoriesFound() {
-        val mwQueryPage = Mockito.mock(MwQueryPage::class.java)
-        Mockito.`when`(mwQueryPage.title()).thenReturn("Category:Test")
-        val mwQueryResult = Mockito.mock(MwQueryResult::class.java)
-        Mockito.`when`(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
-        val mockResponse = Mockito.mock(MwQueryResponse::class.java)
-        Mockito.`when`(mockResponse.query()).thenReturn(mwQueryResult)
-
-        Mockito.`when`(categoryInterface!!.searchCategories(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt()))
-                .thenReturn(Observable.just(mockResponse))
-
-        val actualCategoryName = categoryClient!!.searchCategories("tes", 10).blockingFirst()
-        assertEquals("Test", actualCategoryName)
-
-        val actualCategoryName2 = categoryClient!!.searchCategories("tes", 10, 10).blockingFirst()
-        assertEquals("Test", actualCategoryName2)
+        val mockResponse = withMockResponse("Category:Test")
+        whenever(categoryInterface.searchCategories(anyString(), anyInt(), anyInt()))
+            .thenReturn(Observable.just(mockResponse))
+        categoryClient.searchCategories("tes", 10)
+            .test()
+            .assertValues(listOf("Test"))
+        categoryClient.searchCategories("tes", 10, 10)
+            .test()
+            .assertValues(listOf("Test"))
     }
 
     @Test
     fun searchCategoriesNull() {
-        val mwQueryResult = Mockito.mock(MwQueryResult::class.java)
-        Mockito.`when`(mwQueryResult.pages()).thenReturn(null)
-        val mockResponse = Mockito.mock(MwQueryResponse::class.java)
-        Mockito.`when`(mockResponse.query()).thenReturn(mwQueryResult)
-
-        Mockito.`when`(categoryInterface!!.searchCategories(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt()))
-                .thenReturn(Observable.just(mockResponse))
-
-        categoryClient!!.searchCategories("tes", 10).subscribe(
-                { fail("SearchCategories returned element when it shouldn't have.") },
-                { s -> throw s })
-        categoryClient!!.searchCategories("tes", 10, 10).subscribe(
-                { fail("SearchCategories returned element when it shouldn't have.") },
-                { s -> throw s })
+        val mockResponse = withNullPages()
+        whenever(categoryInterface.searchCategories(anyString(), anyInt(), anyInt()))
+            .thenReturn(Observable.just(mockResponse))
+        categoryClient.searchCategories("tes", 10)
+            .test()
+            .assertValues(emptyList())
+        categoryClient.searchCategories("tes", 10, 10)
+            .test()
+            .assertValues(emptyList())
     }
 
     @Test
     fun searchCategoriesForPrefixFound() {
-        val mwQueryPage = Mockito.mock(MwQueryPage::class.java)
-        Mockito.`when`(mwQueryPage.title()).thenReturn("Category:Test")
-        val mwQueryResult = Mockito.mock(MwQueryResult::class.java)
-        Mockito.`when`(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
-        val mockResponse = Mockito.mock(MwQueryResponse::class.java)
-        Mockito.`when`(mockResponse.query()).thenReturn(mwQueryResult)
-
-        Mockito.`when`(categoryInterface!!.searchCategoriesForPrefix(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt()))
-                .thenReturn(Observable.just(mockResponse))
-
-        val actualCategoryName = categoryClient!!.searchCategoriesForPrefix("tes", 10).blockingFirst()
-        assertEquals("Test", actualCategoryName)
-        val actualCategoryName2 = categoryClient!!.searchCategoriesForPrefix("tes", 10, 10).blockingFirst()
-        assertEquals("Test", actualCategoryName2)
+        val mockResponse = withMockResponse("Category:Test")
+        whenever(categoryInterface.searchCategoriesForPrefix(anyString(), anyInt(), anyInt()))
+            .thenReturn(Observable.just(mockResponse))
+        categoryClient.searchCategoriesForPrefix("tes", 10)
+            .test()
+            .assertValues(listOf("Test"))
+        categoryClient.searchCategoriesForPrefix("tes", 10, 10)
+            .test()
+            .assertValues(listOf("Test"))
     }
 
     @Test
     fun searchCategoriesForPrefixNull() {
-        val mwQueryResult = Mockito.mock(MwQueryResult::class.java)
-        Mockito.`when`(mwQueryResult.pages()).thenReturn(null)
-        val mockResponse = Mockito.mock(MwQueryResponse::class.java)
-        Mockito.`when`(mockResponse.query()).thenReturn(mwQueryResult)
-
-        Mockito.`when`(categoryInterface!!.searchCategoriesForPrefix(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt()))
-                .thenReturn(Observable.just(mockResponse))
-        categoryClient!!.searchCategoriesForPrefix("tes", 10).subscribe(
-                { fail("SearchCategories returned element when it shouldn't have.") },
-                { s -> throw s })
-        categoryClient!!.searchCategoriesForPrefix("tes", 10, 10).subscribe(
-                { fail("SearchCategories returned element when it shouldn't have.") },
-                { s -> throw s })
+        val mockResponse = withNullPages()
+        whenever(categoryInterface.searchCategoriesForPrefix(anyString(), anyInt(), anyInt()))
+            .thenReturn(Observable.just(mockResponse))
+        categoryClient.searchCategoriesForPrefix("tes", 10)
+            .test()
+            .assertValues(emptyList())
+        categoryClient.searchCategoriesForPrefix("tes", 10, 10)
+            .test()
+            .assertValues(emptyList())
     }
 
     @Test
     fun getParentCategoryListFound() {
-        val mwQueryPage = Mockito.mock(MwQueryPage::class.java)
-        Mockito.`when`(mwQueryPage.title()).thenReturn("Category:Test")
-        val mwQueryResult = Mockito.mock(MwQueryResult::class.java)
-        Mockito.`when`(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
-        val mockResponse = Mockito.mock(MwQueryResponse::class.java)
-        Mockito.`when`(mockResponse.query()).thenReturn(mwQueryResult)
-
-        Mockito.`when`(categoryInterface!!.getParentCategoryList(ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(mockResponse))
-
-        val actualCategoryName = categoryClient!!.getParentCategoryList("tes").blockingFirst()
-        assertEquals("Test", actualCategoryName)
+        val mockResponse = withMockResponse("Category:Test")
+        whenever(categoryInterface.getParentCategoryList(anyString()))
+            .thenReturn(Observable.just(mockResponse))
+        categoryClient.getParentCategoryList("tes")
+            .test()
+            .assertValues(listOf("Test"))
     }
 
     @Test
     fun getParentCategoryListNull() {
-        val mwQueryResult = Mockito.mock(MwQueryResult::class.java)
-        Mockito.`when`(mwQueryResult.pages()).thenReturn(null)
-        val mockResponse = Mockito.mock(MwQueryResponse::class.java)
-        Mockito.`when`(mockResponse.query()).thenReturn(mwQueryResult)
-
-        Mockito.`when`(categoryInterface!!.getParentCategoryList(ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(mockResponse))
-        categoryClient!!.getParentCategoryList("tes").subscribe(
-                { fail("SearchCategories returned element when it shouldn't have.") },
-                { s -> throw s })
+        val mockResponse = withNullPages()
+        whenever(categoryInterface.getParentCategoryList(anyString()))
+            .thenReturn(Observable.just(mockResponse))
+        categoryClient.getParentCategoryList("tes")
+            .test()
+            .assertValues(emptyList())
     }
+
     @Test
     fun getSubCategoryListFound() {
-        val mwQueryPage = Mockito.mock(MwQueryPage::class.java)
-        Mockito.`when`(mwQueryPage.title()).thenReturn("Category:Test")
-        val mwQueryResult = Mockito.mock(MwQueryResult::class.java)
-        Mockito.`when`(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
-        val mockResponse = Mockito.mock(MwQueryResponse::class.java)
-        Mockito.`when`(mockResponse.query()).thenReturn(mwQueryResult)
-
-        Mockito.`when`(categoryInterface!!.getSubCategoryList(ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(mockResponse))
-
-        val actualCategoryName = categoryClient!!.getSubCategoryList("tes").blockingFirst()
-        assertEquals("Test", actualCategoryName)
+        val mockResponse = withMockResponse("Category:Test")
+        whenever(categoryInterface.getSubCategoryList("tes"))
+            .thenReturn(Observable.just(mockResponse))
+        categoryClient.getSubCategoryList("tes")
+            .test()
+            .assertValues(listOf("Test"))
     }
 
     @Test
     fun getSubCategoryListNull() {
-        val mwQueryResult = Mockito.mock(MwQueryResult::class.java)
-        Mockito.`when`(mwQueryResult.pages()).thenReturn(null)
-        val mockResponse = Mockito.mock(MwQueryResponse::class.java)
-        Mockito.`when`(mockResponse.query()).thenReturn(mwQueryResult)
+        val mockResponse = withNullPages()
+        whenever(categoryInterface.getSubCategoryList(anyString()))
+            .thenReturn(Observable.just(mockResponse))
+        categoryClient.getSubCategoryList("tes")
+            .test()
+            .assertValues(emptyList())
+    }
 
-        Mockito.`when`(categoryInterface!!.getSubCategoryList(ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(mockResponse))
-        categoryClient!!.getSubCategoryList("tes").subscribe(
-                { fail("SearchCategories returned element when it shouldn't have.") },
-                { s -> throw s })
+    private fun withMockResponse(title: String): MwQueryResponse? {
+        val mwQueryPage: MwQueryPage = mock()
+        whenever(mwQueryPage.title()).thenReturn(title)
+        val mwQueryResult: MwQueryResult = mock()
+        whenever(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
+        val mockResponse = mock(MwQueryResponse::class.java)
+        whenever(mockResponse.query()).thenReturn(mwQueryResult)
+        return mockResponse
+    }
+
+    private fun withNullPages(): MwQueryResponse? {
+        val mwQueryResult = mock(MwQueryResult::class.java)
+        whenever(mwQueryResult.pages()).thenReturn(null)
+        val mockResponse = mock(MwQueryResponse::class.java)
+        whenever(mockResponse.query()).thenReturn(mwQueryResult)
+        return mockResponse
     }
 }

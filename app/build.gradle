@@ -123,6 +123,8 @@ dependencies {
     implementation "androidx.preference:preference:$PREFERENCE_VERSION"
     // Kotlin
     implementation "androidx.preference:preference-ktx:$PREFERENCE_VERSION"
+
+    implementation "androidx.multidex:multidex:$MULTIDEX_VERSION"
 }
 
 android {
@@ -139,6 +141,8 @@ android {
         targetSdkVersion 28
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
+
+        multiDexEnabled true
 
         testOptions {
             execution 'ANDROIDX_TEST_ORCHESTRATOR'

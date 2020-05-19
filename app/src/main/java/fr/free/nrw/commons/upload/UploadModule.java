@@ -22,8 +22,8 @@ public abstract class UploadModule {
                                                                                 presenter);
 
     @Binds
-    public abstract CategoriesContract.UserActionListener bindsCategoriesPresenter(CategoriesPresenter
-                                                                                           presenter);
+    public abstract CategoriesContract.UserActionListener bindsCategoriesPresenter(
+        CategoriesPresenter presenter);
 
     @Binds
     public abstract MediaLicenseContract.UserActionListener bindsMediaLicensePresenter(

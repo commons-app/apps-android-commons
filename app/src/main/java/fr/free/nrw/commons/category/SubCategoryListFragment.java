@@ -89,14 +89,12 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
                 CategoryClient.CATEGORY_PREFIX +categoryName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .collect(ArrayList<String>::new, ArrayList::add)
                     .subscribe(this::handleSuccess, this::handleError));
         } else {
             compositeDisposable.add(categoryClient.getSubCategoryList(
                 CategoryClient.CATEGORY_PREFIX +categoryName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .collect(ArrayList<String>::new, ArrayList::add)
                     .subscribe(this::handleSuccess, this::handleError));
         }
     }
