@@ -122,6 +122,4 @@ class CategoriesPresenterTest {
         categoriesPresenter.onCategoryItemClicked(categoryItem)
         verify(repository).onCategoryClicked(categoryItem)
     }
-
-
 }

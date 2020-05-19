@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.category
 
 import android.text.TextUtils
-import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.upload.GpsCategoryModel
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.utils.StringSortingUtils
@@ -17,8 +16,7 @@ import javax.inject.Inject
 class CategoriesModel @Inject constructor(
     private val categoryClient: CategoryClient,
     private val categoryDao: CategoryDao,
-    private val gpsCategoryModel: GpsCategoryModel,
-    private val depictsClient: DepictsClient
+    private val gpsCategoryModel: GpsCategoryModel
 ) {
     private val selectedCategories: MutableList<CategoryItem> = mutableListOf()
 

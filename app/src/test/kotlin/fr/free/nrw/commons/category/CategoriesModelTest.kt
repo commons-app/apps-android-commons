@@ -31,7 +31,7 @@ class CategoriesModelTest {
     // Test Case for verifying that Categories search (MW api calls) are case-insensitive
     @Test
     fun searchAllFoundCaseTest() {
-        val categoriesModel = CategoriesModel(categoryClient, mock(), mock(), mock())
+        val categoriesModel = CategoriesModel(categoryClient, mock(), mock())
 
         val expectedList = listOf("Test")
         whenever(categoryClient.searchCategoriesForPrefix("tes", 25))
@@ -51,7 +51,6 @@ class CategoriesModelTest {
     @Test
     fun `searchAll with empty search terms creates results from gps, title search & recents`() {
         val gpsCategoryModel: GpsCategoryModel = mock()
-        val depictsClient: DepictsClient = mock()
         val depictedItem = depictedItem(commonsCategories = listOf("depictionCategory"))
 
         whenever(gpsCategoryModel.categoriesFromLocation)
@@ -59,7 +58,7 @@ class CategoriesModelTest {
         whenever(categoryClient.searchCategories("tes", 25))
             .thenReturn(Observable.just(listOf("titleSearch")))
         whenever(categoryDao.recentCategories(25)).thenReturn(listOf("recentCategories"))
-        CategoriesModel(categoryClient, categoryDao, gpsCategoryModel, depictsClient)
+        CategoriesModel(categoryClient, categoryDao, gpsCategoryModel)
             .searchAll("", listOf("tes"), listOf(depictedItem))
             .test()
             .assertValue(
