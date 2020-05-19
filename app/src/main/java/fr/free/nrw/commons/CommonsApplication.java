@@ -18,6 +18,7 @@ import android.os.Build;
 import android.os.Process;
 import android.util.Log;
 import androidx.annotation.NonNull;
+import androidx.multidex.MultiDexApplication;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
@@ -77,7 +78,7 @@ import timber.log.Timber;
         resCommentPrompt = R.string.crash_dialog_comment_prompt
 )
 
-public class CommonsApplication extends Application {
+public class CommonsApplication extends MultiDexApplication {
     @Inject SessionManager sessionManager;
     @Inject DBOpenHelper dbOpenHelper;
 
