@@ -20,7 +20,6 @@ import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity;
-import fr.free.nrw.commons.explore.depictions.DepictionAdapter;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -47,7 +46,7 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
      * Keeps a record of whether current instance of the fragment if of SubClass or ParentClass
      */
     private boolean isParentClass = false;
-    private DepictionAdapter depictionsAdapter;
+    private SubDepictionAdapter depictionsAdapter;
     RecyclerView.LayoutManager layoutManager;
     /**
      * Stores entityId for the depiction
@@ -100,7 +99,7 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
         }
         initViews();
         depictionsRecyclerView.setLayoutManager(layoutManager);
-        depictionsAdapter = new DepictionAdapter(depictedItem -> {
+        depictionsAdapter = new SubDepictionAdapter(depictedItem -> {
             // Open SubDepiction Details page
             getActivity().finish();
             WikidataItemDetailsActivity.startYourself(getContext(), depictedItem);

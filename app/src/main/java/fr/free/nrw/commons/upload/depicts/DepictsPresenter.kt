@@ -110,5 +110,11 @@ class DepictsPresenter @Inject constructor(
 
 }
 
+/**
+ * This creates a dynamic proxy instance of the class,
+ * proxy is to control access to the target object
+ * here our target object is the view.
+ * Thus we when onDettach method of fragment is called we replace the binding of view to our object with the proxy instance
+ */
 inline fun <reified T> proxy() = Proxy
     .newProxyInstance(T::class.java.classLoader, arrayOf(T::class.java)) { _, _, _ -> null } as T

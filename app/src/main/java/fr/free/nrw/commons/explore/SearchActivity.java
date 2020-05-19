@@ -117,7 +117,7 @@ public class SearchActivity extends NavigationBaseActivity
                             searchHistoryContainer.setVisibility(View.GONE);
 
                             if (FragmentUtils.isFragmentUIActive(searchDepictionsFragment)) {
-                                searchDepictionsFragment.updateDepictionList(query.toString());
+                                searchDepictionsFragment.onQueryUpdated(query.toString());
                             }
 
                             if (FragmentUtils.isFragmentUIActive(searchImageFragment)) {
