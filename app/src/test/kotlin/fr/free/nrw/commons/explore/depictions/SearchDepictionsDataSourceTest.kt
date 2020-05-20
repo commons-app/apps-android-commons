@@ -8,6 +8,7 @@ import io.reactivex.Single
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.schedulers.Schedulers
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -28,6 +29,11 @@ class SearchDepictionsDataSourceTest {
         loadingStates = PublishProcessor.create()
         searchDepictionsDataSource =
             SearchDepictionsDataSource(depictsClient, loadingStates, "test")
+    }
+
+    @After
+    fun tearDown() {
+        RxJavaPlugins.reset()
     }
 
     @Test
