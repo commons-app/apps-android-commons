@@ -3,14 +3,29 @@
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:gravity="bottom"
     app:behavior_hideable="true"
     android:visibility="visible"
     app:layout_behavior="@string/bottom_sheet_behavior"
-    android:background="@android:color/white">
+    android:background="@android:color/transparent">
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@android:color/white">
+
+    <TextView
+      android:id="@+id/no_results_message"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="50dp"
+      android:layout_centerInParent="true"
+      android:visibility="gone"
+      android:text="@string/nearby_no_results"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_nearby_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"/>
+    </RelativeLayout>
 </RelativeLayout>

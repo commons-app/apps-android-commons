@@ -144,15 +144,6 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         }
     }
 
-    @Override
-    public void onUrlFetched(@NotNull DepictedItem depictedItem, @NotNull String url) {
-        final Pair<DepictedItem, Integer> itemAndPosition = returnItemAndPosition(depictedItem);
-        if (itemAndPosition != null) {
-            itemAndPosition.first.setImageUrl(url);
-            adapter.notifyItemChanged(itemAndPosition.second);
-        }
-    }
-
     @Nullable
     private Pair<DepictedItem,Integer> returnItemAndPosition(@NotNull DepictedItem depictedItem) {
         for (int i = 0; i < adapter.getItemCount(); i++) {
@@ -177,14 +168,6 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     @Override
     public void depictsClicked(DepictedItem item) {
         presenter.onDepictItemClicked(item);
-    }
-
-    /**
-     * Fetch thumbnail for the given entityId at the given position
-     */
-    @Override
-    public void fetchThumbnailUrlForEntity(DepictedItem depictedItem) {
-        presenter.fetchThumbnailForEntityId(depictedItem);
     }
 
     /**

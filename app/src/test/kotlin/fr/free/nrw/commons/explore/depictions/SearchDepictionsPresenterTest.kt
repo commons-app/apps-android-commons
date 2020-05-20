@@ -1,68 +1,57 @@
 package fr.free.nrw.commons.explore.depictions
 
-import org.mockito.Mockito.verify
+import com.nhaarman.mockitokotlin2.whenever
+import depictedItem
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
-import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers
 import org.mockito.Mock
-import org.mockito.Mockito
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
 class SearchDepictionsPresenterTest {
 
     @Mock
-    internal var view: SearchDepictionsFragmentContract.View? = null
+    internal lateinit var view: SearchDepictionsFragmentContract.View
 
-    var searchDepictionsFragmentPresenter: SearchDepictionsFragmentPresenter? = null
+    private lateinit var searchDepictionsFragmentPresenter: SearchDepictionsFragmentPresenter
 
-    var testScheduler: TestScheduler? = null
-
-    var jsonKvStore: JsonKvStore? = null
-
-    //var mediaWikiApi: MediaWikiApi? = null
+    private lateinit var testScheduler: TestScheduler
 
     @Mock
-    var recentSearchesDao: RecentSearchesDao? = null
+    private lateinit var jsonKvStore: JsonKvStore
 
     @Mock
-    var depictsClient: DepictsClient? = null
+    lateinit var recentSearchesDao: RecentSearchesDao
 
-    var testObservable: Observable<DepictedItem>? = null
-
-    var mediaList: ArrayList<DepictedItem> = ArrayList()
+    @Mock
+    lateinit var depictsClient: DepictsClient
 
     @Before
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         testScheduler = TestScheduler()
-        val depictedItem: DepictedItem = DepictedItem("label", "description", "url", false, "Q9394")
-        mediaList.add(depictedItem)
-        testObservable = Observable.just(depictedItem)
-        searchDepictionsFragmentPresenter = SearchDepictionsFragmentPresenter(jsonKvStore, recentSearchesDao, depictsClient, testScheduler, testScheduler)
-        searchDepictionsFragmentPresenter?.onAttachView(view)
+        searchDepictionsFragmentPresenter = SearchDepictionsFragmentPresenter(
+            jsonKvStore,
+            recentSearchesDao,
+            depictsClient,
+            testScheduler,
+            testScheduler
+        )
+        searchDepictionsFragmentPresenter.onAttachView(view)
     }
 
     @Test
     fun updateDepictionList() {
-        Mockito.`when`(depictsClient?.searchForDepictions(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())).thenReturn(testObservable)
-        searchDepictionsFragmentPresenter?.updateDepictionList("rabbit", 25, false)
-        testScheduler?.triggerActions()
-        verify(view)?.onSuccess(mediaList)
-    }
-
-    @Test
-    fun fetchThumbnailForEntityId() {
-        val singleString: Single<String> = Single.just(String())
-        Mockito.`when`(depictsClient?.getP18ForItem(ArgumentMatchers.anyString())).thenReturn(singleString)
-        searchDepictionsFragmentPresenter?.fetchThumbnailForEntityId("Q9394", 0)
-        testScheduler?.triggerActions()
-        verify(view)?.onImageUrlFetched("", 0)
+        val expectedList = listOf(depictedItem())
+        whenever(depictsClient.searchForDepictions("rabbit", 25, 0))
+            .thenReturn(Single.just(expectedList))
+        searchDepictionsFragmentPresenter.updateDepictionList("rabbit", 25, false)
+        testScheduler.triggerActions()
+        verify(view)?.onSuccess(expectedList)
     }
 }

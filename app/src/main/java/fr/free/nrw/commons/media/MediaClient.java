@@ -171,7 +171,7 @@ public class MediaClient {
      * @return  caption for image using wikibaseIdentifier
      */
     public Single<String> getCaptionByWikibaseIdentifier(String wikibaseIdentifier) {
-        return mediaDetailInterface.getCaptionForImage(Locale.getDefault().getLanguage(), wikibaseIdentifier)
+        return mediaDetailInterface.getEntityForImage(Locale.getDefault().getLanguage(), wikibaseIdentifier)
                 .map(mediaDetailResponse -> {
                     if (isSuccess(mediaDetailResponse)) {
                         for (Entity wikibaseItem : mediaDetailResponse.entities().values()) {

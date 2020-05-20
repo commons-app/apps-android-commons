@@ -53,15 +53,6 @@ class SubDepictionListPresenterTest {
     }
 
     @Test
-    fun fetchThumbnailForEntityId() {
-        val singleString: Single<String> = Single.just(String())
-        Mockito.`when`(depictsClient?.getP18ForItem(ArgumentMatchers.anyString())).thenReturn(singleString)
-        subDepictionListPresenter?.fetchThumbnailForEntityId("Q9394", 0)
-        testScheduler?.triggerActions()
-        view?.onImageUrlFetched("url", 0)
-    }
-
-    @Test
     fun initSubDepictionListForParentClass() {
         Mockito.`when`(okHttpJsonApiClient?.getParentQIDs(ArgumentMatchers.anyString())).thenReturn(testObservable)
         subDepictionListPresenter?.initSubDepictionList("Q9394", true)

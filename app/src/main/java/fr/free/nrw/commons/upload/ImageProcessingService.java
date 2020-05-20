@@ -45,7 +45,7 @@ public class ImageProcessingService {
    * Check image quality before upload - checks duplicate image - checks dark image - checks
    * geolocation for image - check for valid title
    */
-  Single<Integer> validateImage(UploadModel.UploadItem uploadItem) {
+  Single<Integer> validateImage(UploadItem uploadItem) {
     int currentImageQuality = uploadItem.getImageQuality();
     Timber.d("Current image quality is %d", currentImageQuality);
     if (currentImageQuality == ImageUtils.IMAGE_KEEP) {
@@ -97,7 +97,7 @@ public class ImageProcessingService {
      * @param uploadItem
      * @return
      */
-    private Single<Integer> validateItemTitle(UploadModel.UploadItem uploadItem) {
+    private Single<Integer> validateItemTitle(UploadItem uploadItem) {
         Timber.d("Checking for image title %s", uploadItem.getUploadMediaDetails());
         List<UploadMediaDetail> captions = uploadItem.getUploadMediaDetails();
         if (captions.isEmpty()) {

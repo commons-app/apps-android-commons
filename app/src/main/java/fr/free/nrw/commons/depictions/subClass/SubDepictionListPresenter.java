@@ -4,7 +4,6 @@ import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
-import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
@@ -13,9 +12,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import java.io.IOException;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
@@ -47,13 +44,8 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
     public String query;
     protected CompositeDisposable compositeDisposable = new CompositeDisposable();
     DepictsClient depictsClient;
-    private static int TIMEOUT_SECONDS = 15;
     private List<DepictedItem> queryList = new ArrayList<>();
     OkHttpJsonApiClient okHttpJsonApiClient;
-    /**
-     * variable used to record the number of API calls already made for fetching Thumbnails
-     */
-    private int size = 0;
 
     @Inject
     public SubDepictionListPresenter(RecentSearchesDao recentSearchesDao, DepictsClient depictsClient, OkHttpJsonApiClient okHttpJsonApiClient,  @Named(IO_THREAD) Scheduler ioScheduler,
@@ -74,39 +66,8 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
         this.view = DUMMY;
     }
 
-    /**
-     * Store the current query in Recent searches
-     */
-    @Override
-    public void saveQuery() {
-        RecentSearch recentSearch = recentSearchesDao.find(query);
-
-        // Newly searched query...
-        if (recentSearch == null) {
-            recentSearch = new RecentSearch(null, query, new Date());
-        } else {
-            recentSearch.setLastSearched(new Date());
-        }
-        recentSearchesDao.save(recentSearch);
-    }
-
-    /**
-     * Calls Wikibase APIs to fetch Thumbnail image for a given wikidata item
-     */
-    @Override
-    public void fetchThumbnailForEntityId(String entityId, int position) {
-        compositeDisposable.add(depictsClient.getP18ForItem(entityId)
-                .subscribeOn(ioScheduler)
-                .observeOn(mainThreadScheduler)
-                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .subscribe(response -> {
-                    view.onImageUrlFetched(response,position);
-                }));
-    }
-
     @Override
     public void initSubDepictionList(String qid, Boolean isParentClass) throws IOException {
-        size = 0;
         if (isParentClass) {
             compositeDisposable.add(okHttpJsonApiClient.getParentQIDs(qid)
                     .subscribeOn(ioScheduler)
@@ -140,9 +101,6 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
         } else {
             this.queryList.addAll(mediaList);
             view.onSuccess(mediaList);
-            for (DepictedItem m : mediaList) {
-                fetchThumbnailForEntityId(m.getId(), size++);
-            }
         }
     }
 

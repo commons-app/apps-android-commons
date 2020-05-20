@@ -2,10 +2,12 @@ package org.wikipedia.wikidata;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 import org.wikipedia.dataclient.mwapi.MwResponse;
 import org.wikipedia.json.PostProcessingTypeAdapter;
 
@@ -14,8 +16,9 @@ public class Entities extends MwResponse implements PostProcessingTypeAdapter.Po
     @Nullable private Map<String, Entity> entities;
     private int success;
 
-    @Nullable public Map<String, Entity> entities() {
-        return entities;
+    @NotNull
+    public Map<String, Entity> entities() {
+        return entities != null ? entities : Collections.emptyMap();
     }
 
     public int getSuccess() {
@@ -42,7 +45,7 @@ public class Entities extends MwResponse implements PostProcessingTypeAdapter.Po
         @Nullable private Map<String, Label> labels;
         @Nullable private Map<String, Label> descriptions;
         @Nullable private Map<String, SiteLink> sitelinks;
-        @Nullable private Map<String, List<Statement_partial>> statements;
+        @Nullable @SerializedName(value = "statements", alternate = "claims") private Map<String, List<Statement_partial>> statements;
         @Nullable private String missing;
 
         @NonNull public String id() {

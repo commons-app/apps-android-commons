@@ -30,7 +30,8 @@ public class Place implements Parcelable {
     public final Sitelinks siteLinks;
 
 
-    public Place(String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, String destroyed) {        this.name = name;
+    public Place(String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, String destroyed) {
+        this.name = name;
         this.label = label;
         this.longDescription = longDescription;
         this.location = location;

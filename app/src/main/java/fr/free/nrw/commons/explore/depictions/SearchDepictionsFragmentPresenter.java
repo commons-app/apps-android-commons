@@ -14,7 +14,6 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
@@ -35,7 +34,6 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
                     SearchDepictionsFragmentContract.View.class.getClassLoader(),
                     new Class[]{SearchDepictionsFragmentContract.View.class},
                     (proxy, method, methodArgs) -> null);
-    private static int TIMEOUT_SECONDS = 15;
     protected CompositeDisposable compositeDisposable = new CompositeDisposable();
     private final Scheduler ioScheduler;
     private final Scheduler mainThreadScheduler;
@@ -91,9 +89,7 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
       compositeDisposable.add(depictsClient.searchForDepictions(query, 25, offset)
             .subscribeOn(ioScheduler)
             .observeOn(mainThreadScheduler)
-            .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .doOnSubscribe(disposable -> saveQuery())
-            .collect(ArrayList<DepictedItem>::new, ArrayList::add)
             .subscribe(this::handleSuccess, this::handleError));
     }
 
@@ -157,24 +153,6 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
             this.queryList.addAll(mediaList);
             view.onSuccess(mediaList);
             offset=queryList.size();
-            for (DepictedItem m : mediaList) {
-                fetchThumbnailForEntityId(m.getId(), size++);
-            }
         }
     }
-
-    /**
-     * After all the depicted items are loaded fetch thumbnail image for all the depicted items (if available)
-     */
-    @Override
-    public void fetchThumbnailForEntityId(String entityId,int position) {
-         compositeDisposable.add(depictsClient.getP18ForItem(entityId)
-                .subscribeOn(ioScheduler)
-                .observeOn(mainThreadScheduler)
-                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .subscribe(response -> {
-                    view.onImageUrlFetched(response,position);
-                }));
-    }
-
 }

@@ -13,8 +13,6 @@ public interface SubDepictionListContract {
 
     interface View {
 
-        void onImageUrlFetched(String response, int position);
-
         void onSuccess(List<DepictedItem> mediaList);
 
         void initErrorView();
@@ -23,14 +21,9 @@ public interface SubDepictionListContract {
 
         void setIsLastPage(boolean b);
 
-        boolean isParentClass();
     }
 
     interface UserActionListener extends BasePresenter<View> {
-
-        void saveQuery();
-
-        void fetchThumbnailForEntityId(String entityId, int position);
 
         void initSubDepictionList(String qid, Boolean isParentClass) throws IOException;
 
