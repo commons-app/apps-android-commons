@@ -155,5 +155,4 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
             offset=queryList.size();
         }
     }
-
 }

@@ -5,6 +5,7 @@ import fr.free.nrw.commons.explore.depictions.THUMB_IMAGE_SIZE
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.upload.WikidataItem
 import fr.free.nrw.commons.wikidata.WikidataProperties
+import fr.free.nrw.commons.wikidata.WikidataProperties.*
 import org.wikipedia.wikidata.DataValue
 import org.wikipedia.wikidata.Entities
 import org.wikipedia.wikidata.Statement_partial
@@ -17,6 +18,7 @@ data class DepictedItem constructor(
     val description: String?,
     val imageUrl: String?,
     val instanceOfs: List<String>,
+    val commonsCategories: List<String>,
     var isSelected: Boolean,
     override val id: String
 ) : WikidataItem {
@@ -36,10 +38,12 @@ data class DepictedItem constructor(
     constructor(entity: Entities.Entity, name: String, description: String) : this(
         name,
         description,
-        entity[WikidataProperties.IMAGE].primaryImageValue?.let {
+        entity[IMAGE].primaryImageValue?.let {
             getImageUrl(it.value, THUMB_IMAGE_SIZE)
         },
-        entity[WikidataProperties.INSTANCE_OF].toIds(),
+        entity[INSTANCE_OF].toIds(),
+        entity[COMMONS_CATEGORY]?.map { (it.mainSnak.dataValue as DataValue.ValueString).value }
+            ?: emptyList(),
         false,
         entity.id()
     )
@@ -57,7 +61,7 @@ data class DepictedItem constructor(
 }
 
 private fun List<Statement_partial>?.toIds(): List<String> {
-   return this?.map { it.mainSnak.dataValue }
+    return this?.map { it.mainSnak.dataValue }
         ?.filterIsInstance<DataValue.EntityId>()
         ?.map { it.value.id }
         ?: emptyList()
