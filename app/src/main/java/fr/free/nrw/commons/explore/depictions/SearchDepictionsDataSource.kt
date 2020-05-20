@@ -8,13 +8,13 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
 
-class SearchDepictionsDataSource constructor(
+data class SearchDepictionsDataSource constructor(
     private val depictsClient: DepictsClient,
     private val loadingStates: PublishProcessor<LoadingState>,
-    val query: String
+    private val query: String
 ) : PositionalDataSource<DepictedItem>() {
 
-    var lastExecutedRequest: (() -> Boolean)? = null
+    private var lastExecutedRequest: (() -> Boolean)? = null
 
     override fun loadInitial(
         params: LoadInitialParams,

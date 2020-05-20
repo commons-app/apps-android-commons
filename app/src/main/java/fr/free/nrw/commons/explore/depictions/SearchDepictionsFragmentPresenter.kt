@@ -29,7 +29,7 @@ class SearchDepictionsFragmentPresenter @Inject constructor(
                 .observeOn(mainThreadScheduler)
                 .subscribe(::onLoadingState, Timber::e),
             searchableDataSourceFactory.noItemsLoadedEvent.subscribe {
-                currentQuery?.let(view::setEmptyViewText)
+                setEmptyViewText()
             }
         )
     }
@@ -42,11 +42,15 @@ class SearchDepictionsFragmentPresenter @Inject constructor(
         }
         LoadingState.InitialLoad -> view.showInitialLoadInProgress()
         LoadingState.Error -> {
-            currentQuery?.let(view::setEmptyViewText)
+            setEmptyViewText()
             view.showSnackbar()
             view.hideInitialLoadProgress()
             listFooterData.postValue(listOf(FooterItem.RefreshItem))
         }
+    }
+
+    private fun setEmptyViewText() {
+        currentQuery?.let(view::setEmptyViewText)
     }
 
     override fun retryFailedRequest() {
