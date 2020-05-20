@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.contributions;
+    package fr.free.nrw.commons.contributions;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

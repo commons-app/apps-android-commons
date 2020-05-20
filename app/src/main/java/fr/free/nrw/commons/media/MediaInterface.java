@@ -58,7 +58,7 @@ public interface MediaInterface {
     @GET("w/api.php?action=query&format=json&formatversion=2" + //Basic parameters
         "&generator=allimages&gaisort=timestamp&gaidir=older" + MEDIA_PARAMS)
     Observable<MwQueryResponse> getMediaListForUser(@Query("gaiuser") String username,
-        @Query("gailimit") int itemLimit, @QueryMap Map<String, String> continuation);
+        @Query("gailimit") int itemLimit, @QueryMap(encoded = true) Map<String, String> continuation);
 
     /**
      * This method retrieves a list of Media objects filtered using image generator query

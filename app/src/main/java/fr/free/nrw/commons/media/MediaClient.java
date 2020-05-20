@@ -32,6 +32,7 @@ public class MediaClient {
 
     //OkHttpJsonApiClient used JsonKvStore for this. I don't know why.
     private Map<String, Map<String, String>> continuationStore;
+    private Map<String, Boolean> continuationExists;
     public static final String NO_CAPTION = "No caption";
     private static final String NO_DEPICTION = "No depiction";
 
@@ -96,8 +97,24 @@ public class MediaClient {
             continuationStore.containsKey("user_" + userName)
                 ? continuationStore.get("user_" + userName)
                 : Collections.emptyMap();
+        if (continuation != null) {
+            Timber.d("continuation map %s", continuation.toString());
+        }
         return responseToMediaList(mediaInterface
             .getMediaListForUser(userName, 10, continuation), "user_" + userName);
+    }
+
+    /**
+     * Check if media for user has reached the end of the list.
+     * @param userName
+     * @return
+     */
+    public boolean doesMediaListForUserHaveMorePages(String userName) {
+        final String key = "user_" + userName;
+        if(continuationExists.containsKey(key)) {
+            return continuationExists.get(key);
+        }
+        return true;
     }
 
     /**
@@ -123,7 +140,12 @@ public class MediaClient {
                     || null == mwQueryResponse.query().pages()) {
                 return Observable.empty();
             }
-            continuationStore.put(key, mwQueryResponse.continuation());
+            if(mwQueryResponse.continuation() != null) {
+                continuationStore.put(key, mwQueryResponse.continuation());
+                continuationExists.put(key, true);
+            } else {
+                continuationExists.put(key, false);
+            }
             return Observable.fromIterable(mwQueryResponse.query().pages());
         })
                 .map(Media::from)

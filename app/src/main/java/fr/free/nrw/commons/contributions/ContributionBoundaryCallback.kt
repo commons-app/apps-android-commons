@@ -33,14 +33,15 @@ class ContributionBoundaryCallback @Inject constructor(
     }
 
     /**
-     * It is triggered when the user scrolls to the top of the list No action is taken at this point
-     */
+     * It is triggered when the user scrolls to the top of the list User's Contributions are then
+     * fetched from the network
+     * */
     override fun onItemAtFrontLoaded(itemAtFront: Contribution) {
         fetchContributions()
     }
 
     /**
-     * It is triggered when the user scrolls to the end of the list User's Contributions are then
+     * It is triggered when the user scrolls to the end of the list. User's Contributions are then
      * fetched from the network
      */
     override fun onItemAtEndLoaded(itemAtEnd: Contribution) {
@@ -51,6 +52,9 @@ class ContributionBoundaryCallback @Inject constructor(
      * Fetches contributions using the MediaWiki API
      */
     fun fetchContributions() {
+        if (mediaClient.doesMediaListForUserHaveMorePages(sessionManager.userName).not()) {
+            return
+        }
         compositeDisposable.add(
             mediaClient.getMediaListForUser(sessionManager.userName)
                 .map { mediaList: List<Media?> ->
