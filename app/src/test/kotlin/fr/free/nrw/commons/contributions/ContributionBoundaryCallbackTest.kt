@@ -83,9 +83,13 @@ class ContributionBoundaryCallbackTest {
 
     @Test
     fun testOnFrontItemLoaded() {
+        whenever(sessionManager.userName).thenReturn("Test")
+        whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(
+            Single.just(listOf(mock(Media::class.java)))
+        )
         contributionBoundaryCallback.onItemAtFrontLoaded(mock(Contribution::class.java))
-        verifyZeroInteractions(repository)
-        verifyZeroInteractions(mediaClient)
+        verify(repository).save(anyList());
+        verify(mediaClient).getMediaListForUser(anyString());
     }
 
     @Test
