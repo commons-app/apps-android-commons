@@ -8,6 +8,7 @@ import fr.free.nrw.commons.wikidata.WikidataProperties
 import org.wikipedia.wikidata.DataValue
 import org.wikipedia.wikidata.Entities
 import org.wikipedia.wikidata.Statement_partial
+import java.util.*
 
 /**
  * Model class for Depicted Item in Upload and Explore
@@ -23,8 +24,8 @@ data class DepictedItem constructor(
 
     constructor(entity: Entities.Entity) : this(
         entity,
-        entity.labels().values.firstOrNull()?.value() ?: "",
-        entity.descriptions().values.firstOrNull()?.value() ?: ""
+        entity.labels().byLanguageOrFirstOrEmpty(),
+        entity.descriptions().byLanguageOrFirstOrEmpty()
     )
 
     constructor(entity: Entities.Entity, place: Place) : this(
@@ -57,7 +58,7 @@ data class DepictedItem constructor(
 }
 
 private fun List<Statement_partial>?.toIds(): List<String> {
-   return this?.map { it.mainSnak.dataValue }
+    return this?.map { it.mainSnak.dataValue }
         ?.filterIsInstance<DataValue.EntityId>()
         ?.map { it.value.id }
         ?: emptyList()
@@ -69,3 +70,5 @@ private val List<Statement_partial>?.primaryImageValue: DataValue.ValueString?
 operator fun Entities.Entity.get(property: WikidataProperties) =
     statements?.get(property.propertyName)
 
+private fun Map<String, Entities.Label>.byLanguageOrFirstOrEmpty() =
+    let { it[Locale.getDefault().language] ?: it.values.firstOrNull() }?.value() ?: ""

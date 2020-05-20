@@ -24,5 +24,5 @@ public interface DepictsInterface {
     Single<DepictSearchResponse> searchForDepicts(@Query("search") String query, @Query("limit") String limit, @Query("language") String language, @Query("uselang") String uselang, @Query("continue") String offset);
 
     @GET("/w/api.php?format=json&action=wbgetentities")
-    Single<Entities> getEntities(@Query("ids")String ids, @Query("languages")String language);
+    Single<Entities> getEntities(@Query("ids") String ids);
 }
