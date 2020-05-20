@@ -18,7 +18,6 @@ import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
@@ -111,18 +110,8 @@ public class UploadRepository {
      * @param imageTitleList
      * @return
      */
-    public Observable<CategoryItem> searchAll(String query, List<String> imageTitleList) {
+    public Observable<List<CategoryItem>> searchAll(String query, List<String> imageTitleList) {
         return categoriesModel.searchAll(query, imageTitleList);
-    }
-
-    /**
-     * returns the string list of categories
-     *
-     * @return
-     */
-
-    public List<String> getCategoryStringList() {
-        return categoriesModel.getCategoryStringList();
     }
 
     /**
@@ -141,16 +130,6 @@ public class UploadRepository {
      */
     public void onCategoryClicked(CategoryItem categoryItem) {
         categoriesModel.onCategoryItemClicked(categoryItem);
-    }
-
-    /**
-     * returns category sorted based on similarity with query
-     *
-     * @param query
-     * @return
-     */
-    public Comparator<? super CategoryItem> sortBySimilarity(String query) {
-        return categoriesModel.sortBySimilarity(query);
     }
 
     /**
