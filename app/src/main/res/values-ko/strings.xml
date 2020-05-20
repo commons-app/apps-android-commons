@@ -12,6 +12,7 @@
 * Nuevo Paso
 * Revi
 * Ykhwong
+* 그냥기여자
 * 아라
 -->
 <resources>
@@ -62,6 +63,7 @@
   <string name="menu_share">공유</string>
   <string name="menu_open_in_browser">브라우저로 보기</string>
   <string name="share_title_hint">캡션 (필수)</string>
+  <string name="add_caption_toast">이 파일의 설명을 작성해 주십시오</string>
   <string name="share_description_hint">설명</string>
   <string name="share_caption_hint">캡션 (255자 제한)</string>
   <string name="login_failed_network">로그인할 수 없습니다 - 네트워크 오류입니다</string>
@@ -95,6 +97,7 @@
     <item quantity="one">%1$d개 업로드</item>
   </plurals>
   <string name="categories_not_found">%1$s와(과) 일치하는 분류를 찾을 수 없습니다</string>
+  <string name="depictions_not_found">%1$s에 대한 위키데이터 검색 결과가 없습니다</string>
   <string name="categories_skip_explanation">위키미디어 공용에서 그림을 더 찾기 쉽게 만들기 위해 분류를 추가합니다.\n분류를 추가하려면 입력을 시작하세요.</string>
   <string name="categories_activity_title">분류</string>
   <string name="title_activity_settings">설정</string>
@@ -169,6 +172,7 @@
   <string name="detail_panel_cats_label">분류</string>
   <string name="detail_panel_cats_loading">불러오는 중…</string>
   <string name="detail_panel_cats_none">선택하지 않음</string>
+  <string name="detail_caption_empty">설명 없음</string>
   <string name="detail_description_empty">설명 없음</string>
   <string name="detail_discussion_empty">토론 없음</string>
   <string name="detail_license_empty">알 수 없는 라이선스</string>
@@ -187,6 +191,7 @@
   <string name="upload">업로드</string>
   <string name="yes">예</string>
   <string name="no">아니오</string>
+  <string name="media_detail_caption">설명</string>
   <string name="media_detail_title">제목</string>
   <string name="media_detail_description">설명</string>
   <string name="media_detail_discussion">토론</string>
@@ -310,6 +315,7 @@
   <string name="no_images_found">그림이 없습니다!</string>
   <string name="error_loading_images">그림을 불러오는 동안 오류가 발생했습니다.</string>
   <string name="image_uploaded_by">올린이: %1$s</string>
+  <string name="block_notification_title">차단됨</string>
   <string name="block_notification">공용 편집이 차단되어 있습니다</string>
   <string name="appwidget_img">오늘의 이미지</string>
   <string name="app_widget_heading">오늘의 이미지</string>
@@ -361,6 +367,7 @@
   <string name="delete">삭제</string>
   <string name="Achievements">성과</string>
   <string name="statistics">통계</string>
+  <string name="statistics_thanks">받은 감사</string>
   <string name="statistics_featured">알찬 그림</string>
   <string name="statistics_wikidata_edits">\"주변 장소\" 경유 이미지</string>
   <string name="level">레벨</string>
@@ -426,6 +433,8 @@
   <string name="unable_to_display_nearest_place">위치 권한 없이 사진이 필요한 주변 장소를 표시할 수 없습니다</string>
   <string name="never_ask_again">다시는 묻지 않음</string>
   <string name="display_location_permission_title">위치 권한 표시</string>
+  <string name="display_campaigns">캠페인 표시</string>
+  <string name="display_campaigns_explanation">진행되고 있는 캠페인 보기</string>
   <string name="this_function_needs_network_connection">이 기능에는 네트워크 연결이 필요합니다. 연결 설정을 확인해 주십시오.</string>
   <string name="bad_token_error_proposed_solution">편집 토큰에 문제가 있어서 업로드를 실패했습니다. 로그아웃한 다음 다시 로그인해 보십시오.</string>
   <string name="error_processing_image">이미지를 처리하는 동안 오류가 발생했습니다. 다시 시도해 주십시오!</string>
@@ -473,10 +482,12 @@
   <string name="delete_helper_show_deletion_title_success">성공</string>
   <string name="delete_helper_show_deletion_title_failed">실패</string>
   <string name="delete_helper_ask_spam_selfie">셀카</string>
+  <string name="delete_helper_ask_spam_blurry">흐림</string>
   <string name="delete_helper_ask_spam_other">기타</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">인터넷의 임의 사진</string>
   <string name="delete_helper_ask_reason_copyright_logo">로고</string>
   <string name="delete_helper_ask_reason_copyright_other">기타</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">왜냐하면</string>
   <string name="share_image_via">다음을 통해 이미지 공유</string>
   <string name="no_achievements_yet">아직 기여가 없습니다</string>
   <string name="account_created">계정을 만들었습니다!</string>
@@ -490,10 +501,14 @@
   <string name="nearby_search_hint">다리, 박물관, 호텔 등.</string>
   <string name="title_for_media">미디어</string>
   <string name="title_app_shortcut_explore">찾아보기</string>
+  <string name="title_app_shortcut_bookmark">북마크</string>
   <string name="title_app_shortcut_setting">설정</string>
+  <string name="remove_bookmark">북마크에서 제거됨</string>
+  <string name="add_bookmark">북마크에 추가됨</string>
   <string name="wallpaper_set_unsuccessfully">무언가 잘못되었습니다. 배경화면을 설정하지 못했습니다</string>
   <string name="setting_wallpaper_dialog_title">배경화면으로 설정</string>
   <string name="setting_wallpaper_dialog_message">배경화면을 설정 중입니다. 기다려 주십시오...</string>
   <string name="theme_dark_name">어두움</string>
   <string name="theme_light_name">밝음</string>
+  <string name="ask_to_turn_location_on">위치를 켭니까?</string>
 </resources>
