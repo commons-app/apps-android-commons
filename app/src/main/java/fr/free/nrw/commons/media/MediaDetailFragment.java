@@ -2,6 +2,7 @@ package fr.free.nrw.commons.media;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_PREFIX;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -620,7 +621,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (categoriesLoaded && categoriesPresent) {
             textView.setOnClickListener(view -> {
                 // Open Category Details page
-                String selectedCategoryTitle = CategoryClient.CATEGORY_PREFIX + catName;
+                String selectedCategoryTitle = CATEGORY_PREFIX + catName;
                 Intent intent = new Intent(getContext(), CategoryDetailsActivity.class);
                 intent.putExtra("categoryName", selectedCategoryTitle);
                 getContext().startActivity(intent);

@@ -3,6 +3,7 @@ package fr.free.nrw.commons.category;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_PREFIX;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -24,7 +25,6 @@ import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import kotlin.Unit;
@@ -86,13 +86,13 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
         progressBar.setVisibility(View.VISIBLE);
         if (isParentCategory) {
             compositeDisposable.add(categoryClient.getParentCategoryList(
-                CategoryClient.CATEGORY_PREFIX +categoryName)
+                CATEGORY_PREFIX +categoryName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::handleSuccess, this::handleError));
         } else {
             compositeDisposable.add(categoryClient.getSubCategoryList(
-                CategoryClient.CATEGORY_PREFIX +categoryName)
+                CATEGORY_PREFIX +categoryName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::handleSuccess, this::handleError));

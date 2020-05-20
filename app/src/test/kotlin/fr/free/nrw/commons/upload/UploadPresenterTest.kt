@@ -12,7 +12,7 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
-import java.util.ArrayList
+import java.util.*
 
 
 /**
@@ -21,11 +21,11 @@ import java.util.ArrayList
 class UploadPresenterTest {
 
     @Mock
-    internal var repository: UploadRepository? = null
+    internal lateinit var repository: UploadRepository
     @Mock
-    internal var view: UploadContract.View? = null
+    internal lateinit var view: UploadContract.View
     @Mock
-    var contribution: Contribution? = null
+    lateinit var contribution: Contribution
 
     @Mock
     private lateinit var uploadableFile: UploadableFile
@@ -34,7 +34,7 @@ class UploadPresenterTest {
     private lateinit var anotherUploadableFile: UploadableFile
 
     @InjectMocks
-    var uploadPresenter: UploadPresenter? = null
+    lateinit var uploadPresenter: UploadPresenter
 
     private var uploadableFiles: ArrayList<UploadableFile> = ArrayList()
 
@@ -45,11 +45,11 @@ class UploadPresenterTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        uploadPresenter?.onAttachView(view)
-        `when`(repository?.buildContributions()).thenReturn(Observable.just(contribution))
+        uploadPresenter.onAttachView(view)
+        `when`(repository.buildContributions()).thenReturn(Observable.just(contribution))
         uploadableFiles.add(uploadableFile)
-        `when`(view?.uploadableFiles).thenReturn(uploadableFiles)
-        `when`(uploadableFile?.filePath).thenReturn("data://test")
+        `when`(view.uploadableFiles).thenReturn(uploadableFiles)
+        `when`(uploadableFile.filePath).thenReturn("data://test")
     }
 
     /**
@@ -57,12 +57,12 @@ class UploadPresenterTest {
      */
     @Test
     fun handleSubmitTestUserLoggedIn() {
-        `when`(view?.isLoggedIn).thenReturn(true)
-        uploadPresenter?.handleSubmit()
-        verify(view)?.isLoggedIn
-        verify(view)?.showProgress(true)
-        verify(repository)?.buildContributions()
-        verify(repository)?.buildContributions()
+        `when`(view.isLoggedIn).thenReturn(true)
+        uploadPresenter.handleSubmit()
+        verify(view).isLoggedIn
+        verify(view).showProgress(true)
+        verify(repository).buildContributions()
+        verify(repository).buildContributions()
     }
 
     /**
@@ -70,10 +70,10 @@ class UploadPresenterTest {
      */
     @Test
     fun handleSubmitTestUserNotLoggedIn() {
-        `when`(view?.isLoggedIn).thenReturn(false)
-        uploadPresenter?.handleSubmit()
-        verify(view)?.isLoggedIn
-        verify(view)?.askUserToLogIn()
+        `when`(view.isLoggedIn).thenReturn(false)
+        uploadPresenter.handleSubmit()
+        verify(view).isLoggedIn
+        verify(view).askUserToLogIn()
 
     }
 
@@ -88,9 +88,9 @@ class UploadPresenterTest {
     fun hideTopCardWhenReachedTheLastFile(){
         deletePictureBaseTest()
         uploadableFiles.add(uploadableFile)
-        uploadPresenter?.deletePictureAtIndex(0)
-        verify(view)?.showHideTopCard(false)
-        verify(repository)?.deletePicture(ArgumentMatchers.anyString())
+        uploadPresenter.deletePictureAtIndex(0)
+        verify(view).showHideTopCard(false)
+        verify(repository).deletePicture(ArgumentMatchers.anyString())
     }
 
     /**
@@ -100,11 +100,11 @@ class UploadPresenterTest {
     fun testDeleteWhenSingleUpload(){
         deletePictureBaseTest()
         uploadableFiles.add(uploadableFile)
-        uploadPresenter?.deletePictureAtIndex(0)
-        verify(view)?.showHideTopCard(false)
-        verify(repository)?.deletePicture(ArgumentMatchers.anyString())
-        verify(view)?.showMessage(ArgumentMatchers.anyInt())//As there is only one while which we are asking for deletion, upload should be cancelled and this flow should be triggered
-        verify(view)?.finish()
+        uploadPresenter.deletePictureAtIndex(0)
+        verify(view).showHideTopCard(false)
+        verify(repository).deletePicture(ArgumentMatchers.anyString())
+        verify(view).showMessage(ArgumentMatchers.anyInt())//As there is only one while which we are asking for deletion, upload should be cancelled and this flow should be triggered
+        verify(view).finish()
     }
 
     /**
@@ -115,8 +115,8 @@ class UploadPresenterTest {
         deletePictureBaseTest()
         uploadableFiles.add(uploadableFile)
         uploadableFiles.add(anotherUploadableFile)
-        uploadPresenter?.deletePictureAtIndex(0)
-        verify(view)?.onUploadMediaDeleted(0)
-        verify(view)?.updateTopCardTitle()
+        uploadPresenter.deletePictureAtIndex(0)
+        verify(view).onUploadMediaDeleted(0)
+        verify(view).updateTopCardTitle()
     }
 }
