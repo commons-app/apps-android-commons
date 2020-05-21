@@ -35,7 +35,8 @@ class BookMarkLocationDaoTest {
             COLUMN_WIKIDATA_LINK,
             COLUMN_COMMONS_LINK,
             COLUMN_LAT,
-            COLUMN_LONG)
+            COLUMN_LONG,
+            COLUMN_PIC)
     private val client: ContentProviderClient = mock()
     private val database: SQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
@@ -93,6 +94,7 @@ class BookMarkLocationDaoTest {
                 assertEquals(builder.build().wikipediaLink, it.siteLinks.wikipediaLink)
                 assertEquals(builder.build().wikidataLink, it.siteLinks.wikidataLink)
                 assertEquals(builder.build().commonsLink, it.siteLinks.commonsLink)
+                assertEquals("picName",it.pic)
             }
         }
     }
@@ -256,7 +258,7 @@ class BookMarkLocationDaoTest {
         for (i in 0 until rowCount) {
             addRow(listOf("placeName", "placeDescription","placeCategory", exampleLabel.text, exampleLabel.icon,
                     exampleUri, builder.build().wikipediaLink, builder.build().wikidataLink, builder.build().commonsLink,
-                    exampleLocation.latitude, exampleLocation.longitude))
+                    exampleLocation.latitude, exampleLocation.longitude, "picName"))
         }
     }
 }

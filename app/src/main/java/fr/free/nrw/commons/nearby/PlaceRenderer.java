@@ -54,9 +54,7 @@ public class PlaceRenderer extends Renderer<Place> {
     @BindView(R.id.iconOverflow) LinearLayout iconOverflow;
     @BindView(R.id.cameraButtonText) TextView cameraButtonText;
     @BindView(R.id.galleryButtonText) TextView galleryButtonText;
-    @BindView(R.id.bookmarkRowButton) LinearLayout bookmarkButton;
-    @BindView(R.id.bookmarkButtonText) TextView bookmarkButtonText;
-    @BindView(R.id.bookmarkRowButtonImage) ImageView bookmarkButtonImage;
+    @BindView(R.id.bookmarkButtonImage) ImageView bookmarkButtonImage;
 
     @BindView(R.id.directionsButtonText) TextView directionsButtonText;
     @BindView(R.id.iconOverflowText) TextView iconOverflowText;
@@ -172,7 +170,7 @@ public class PlaceRenderer extends Renderer<Place> {
             }
         });
 
-        bookmarkButton.setOnClickListener(view4 -> {
+        bookmarkButtonImage.setOnClickListener(view4 -> {
             if (applicationKvStore.getBoolean("login_skipped", false)) {
                 // prompt the user to login
                 new AlertDialog.Builder(getContext())
@@ -192,8 +190,7 @@ public class PlaceRenderer extends Renderer<Place> {
                     onBookmarkClick.onClick();
                 }
                 else {
-                    ((NearbyParentFragment) (fragment.getParentFragment())).
-                            updateMarker(isBookmarked, place, null);
+                    ((NearbyParentFragment) (fragment)).updateMarker(isBookmarked, place, null);
                 }
             }
         });
