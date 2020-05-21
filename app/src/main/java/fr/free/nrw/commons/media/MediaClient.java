@@ -41,6 +41,7 @@ public class MediaClient {
         this.mediaInterface = mediaInterface;
         this.mediaDetailInterface = mediaDetailInterface;
         this.continuationStore = new HashMap<>();
+        this.continuationExists = new HashMap<>();
     }
 
     /**
