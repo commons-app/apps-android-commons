@@ -20,12 +20,11 @@ public interface MediaDetailInterface {
 
     /**
      * Gets labels for Depictions using Entity Id from MediaWikiAPI
+     *  @param entityId  EntityId (Ex: Q81566) of the depict entity
      *
-     * @param entityId  EntityId (Ex: Q81566) of the depict entity
-     * @param language user's locale
      */
     @GET("/w/api.php?format=json&action=wbgetentities&props=labels&languagefallback=1")
-    Observable<Entities> getEntity(@Query("ids") String entityId, @Query("languages") String language);
+    Observable<Entities> getEntity(@Query("ids") String entityId);
 
     /**
      * Fetches caption using wikibaseIdentifier
@@ -33,5 +32,5 @@ public interface MediaDetailInterface {
      * @param wikibaseIdentifier pageId for the media
      */
     @GET("/w/api.php?action=wbgetentities&props=labels&format=json&languagefallback=1&sites=commonswiki")
-    Observable<Entities> getCaptionForImage(@Query("languages") String language, @Query("ids") String wikibaseIdentifier);
+    Observable<Entities> getEntityForImage(@Query("languages") String language, @Query("ids") String wikibaseIdentifier);
 }

@@ -4,11 +4,11 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.jraska.livedata.test
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import depictedItem
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.DepictsContract
 import fr.free.nrw.commons.upload.depicts.DepictsPresenter
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.WikidataDisambiguationItems
 import io.reactivex.Flowable
 import io.reactivex.schedulers.TestScheduler
@@ -62,8 +62,8 @@ class DepictsPresenterTest {
             depictedItem(id="nonUnique"),
             depictedItem(id="nonUnique"),
             depictedItem(
-                id = "unique",
-                instanceOfs = listOf(WikidataDisambiguationItems.CATEGORY.id)
+                instanceOfs = listOf(WikidataDisambiguationItems.CATEGORY.id),
+                id = "unique"
             )
         )
         whenever(repository.searchAllEntities("")).thenReturn(Flowable.just(searchResults))
@@ -77,6 +77,7 @@ class DepictsPresenterTest {
             .test()
             .assertValue(listOf(selectedItem, depictedItem(id="nonUnique")))
     }
+
 
     @Test
     fun `empty search results with empty term do not show error`() {
@@ -137,15 +138,4 @@ class DepictsPresenterTest {
         depictsPresenter.verifyDepictions()
         verify(view).noDepictionSelected()
     }
-
-
 }
-
-fun depictedItem(
-    name: String = "label",
-    description: String = "desc",
-    imageUrl: String = "",
-    instanceOfs: List<String> = listOf(),
-    isSelected: Boolean = false,
-    id: String = "entityId"
-) = DepictedItem(name, description, imageUrl, instanceOfs, isSelected, id)

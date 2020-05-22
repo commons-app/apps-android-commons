@@ -1,7 +1,10 @@
 package fr.free.nrw.commons.category
 
+import categoryItem
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
+import depictedItem
+import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.upload.GpsCategoryModel
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
@@ -36,11 +39,11 @@ class CategoriesModelTest {
 
         // Checking if both return "Test"
         val expectedItems = expectedList.map { CategoryItem(it, false) }
-        categoriesModel.searchAll("tes", emptyList())
+        categoriesModel.searchAll("tes", emptyList(), emptyList())
             .test()
             .assertValues(expectedItems)
 
-        categoriesModel.searchAll("Tes", emptyList())
+        categoriesModel.searchAll("Tes", emptyList(), emptyList())
             .test()
             .assertValues(expectedItems)
     }
@@ -48,6 +51,7 @@ class CategoriesModelTest {
     @Test
     fun `searchAll with empty search terms creates results from gps, title search & recents`() {
         val gpsCategoryModel: GpsCategoryModel = mock()
+        val depictedItem = depictedItem(commonsCategories = listOf("depictionCategory"))
 
         whenever(gpsCategoryModel.categoriesFromLocation)
             .thenReturn(BehaviorSubject.createDefault(listOf("gpsCategory")))
@@ -55,13 +59,14 @@ class CategoriesModelTest {
             .thenReturn(Observable.just(listOf("titleSearch")))
         whenever(categoryDao.recentCategories(25)).thenReturn(listOf("recentCategories"))
         CategoriesModel(categoryClient, categoryDao, gpsCategoryModel)
-            .searchAll("", listOf("tes"))
+            .searchAll("", listOf("tes"), listOf(depictedItem))
             .test()
             .assertValue(
                 listOf(
-                    CategoryItem("gpsCategory", false),
-                    CategoryItem("titleSearch", false),
-                    CategoryItem("recentCategories", false)
+                    categoryItem("depictionCategory"),
+                    categoryItem("gpsCategory"),
+                    categoryItem("titleSearch"),
+                    categoryItem("recentCategories")
                 )
             )
     }
