@@ -72,9 +72,7 @@ public class ContributionsPresenter implements UserActionListener {
      */
     @Override
     public void deleteUpload(Contribution contribution) {
-        compositeDisposable.add(repository.deleteContributionFromDB(contribution)
-        .subscribeOn(ioThreadScheduler)
-        .subscribe());
+        ioThreadScheduler.scheduleDirect(() -> repository.deleteContributionFromDB(contribution));
     }
 
     @Override

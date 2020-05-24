@@ -57,8 +57,8 @@ class ContributionsLocalDataSource {
      * @param contribution
      * @return
      */
-    public Single<Integer> deleteContribution(Contribution contribution) {
-        return contributionDao.delete(contribution);
+    public void deleteContribution(Contribution contribution) {
+        contributionDao.delete(contribution);
     }
 
     public Factory<Integer, Contribution> getContributions() {

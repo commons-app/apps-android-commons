@@ -53,9 +53,6 @@ class ContributionsListPresenterTest {
 
     @Test
     fun testDeleteUpload() {
-        whenever(repository.deleteContributionFromDB(any(Contribution::class.java)))
-            .thenReturn(Single.just(1));
-
         contributionsListPresenter.deleteUpload(mock(Contribution::class.java))
         verify(repository, times(1))
             .deleteContributionFromDB(ArgumentMatchers.any(Contribution::class.java));

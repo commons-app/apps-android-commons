@@ -31,8 +31,8 @@ public class ContributionsRepository {
      * @param contribution
      * @return
      */
-    public Single<Integer> deleteContributionFromDB(Contribution contribution) {
-        return localDataSource.deleteContribution(contribution);
+    public void deleteContributionFromDB(Contribution contribution) {
+        localDataSource.deleteContribution(contribution);
     }
 
     /**

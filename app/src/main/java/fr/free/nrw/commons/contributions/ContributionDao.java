@@ -16,27 +16,34 @@ import java.util.List;
 @Dao
 public abstract class ContributionDao {
 
-    @Query("SELECT * FROM contribution order by dateUploaded DESC")
-    abstract DataSource.Factory<Integer, Contribution> fetchContributions();
+  @Query("SELECT * FROM contribution order by dateUploaded DESC")
+  abstract DataSource.Factory<Integer, Contribution> fetchContributions();
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public abstract Single<Long> save(Contribution contribution);
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  public abstract void save(Contribution contribution);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public abstract Single<List<Long>> save(List<Contribution> contribution);
+  @Transaction
+  public void deleteAndSaveContribution(Contribution oldContribution,
+      Contribution newContribution) {
+    delete(oldContribution);
+    save(newContribution);
+  }
 
-    @Delete
-    public abstract Single<Integer> delete(Contribution contribution);
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  public abstract Single<List<Long>> save(List<Contribution> contribution);
 
-    @Query("SELECT * from contribution WHERE filename=:fileName")
-    public abstract List<Contribution> getContributionWithTitle(String fileName);
+  @Delete
+  public abstract void delete(Contribution contribution);
 
-    @Query("UPDATE contribution SET state=:state WHERE state in (:toUpdateStates)")
-    public abstract Single<Integer> updateStates(int state, int[] toUpdateStates);
+  @Query("SELECT * from contribution WHERE filename=:fileName")
+  public abstract List<Contribution> getContributionWithTitle(String fileName);
 
-    @Query("Delete FROM contribution")
-    public abstract void deleteAll();
+  @Query("UPDATE contribution SET state=:state WHERE state in (:toUpdateStates)")
+  public abstract Single<Integer> updateStates(int state, int[] toUpdateStates);
 
-    @Update
-    public abstract Single<Integer> update(Contribution contribution);
+  @Query("Delete FROM contribution")
+  public abstract void deleteAll();
+
+  @Update
+  public abstract Single<Integer> update(Contribution contribution);
 }
