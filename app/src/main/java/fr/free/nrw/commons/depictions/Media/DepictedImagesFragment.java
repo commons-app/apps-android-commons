@@ -136,7 +136,7 @@ public class DepictedImagesFragment extends DaggerFragment implements DepictedIm
                     if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
                         handleNoInternet();
                     } else {
-                        presenter.fetchMoreImages();
+                        presenter.fetchMoreImages(entityId);
                     }
                 }
                 if (isLastPage) {

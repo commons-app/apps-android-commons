@@ -75,7 +75,7 @@ class DepictsClient @Inject constructor(
     }
 
     fun getEntities(ids: String): Single<Entities> {
-        return depictsInterface.getEntities(ids, Locale.getDefault().language)
+        return depictsInterface.getEntities(ids)
     }
 
     fun toDepictions(sparqlResponse: Observable<SparqlResponse>): Observable<List<DepictedItem>> {

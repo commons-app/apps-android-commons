@@ -107,7 +107,6 @@ class DepictsPresenter @Inject constructor(
             view.noDepictionSelected()
         }
     }
-
 }
 
 /**

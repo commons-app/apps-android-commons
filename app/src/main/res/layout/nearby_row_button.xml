@@ -1,42 +1,14 @@
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/buttonLayout"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
-    android:visibility="gone"
-    android:layout_marginTop="@dimen/standard_gap"
-    android:layout_below="@+id/icon"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
-
-    <LinearLayout
-        android:id="@+id/bookmarkRowButton"
-        android:layout_width="@dimen/dimen_0"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="@dimen/standard_gap"
-        android:clickable="true"
-        android:orientation="vertical"
-        android:background="@drawable/button_background_selector"
-        >
-        <ImageView
-            android:id="@+id/bookmarkRowButtonImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/ic_round_star_border_24px"
-            android:tint="?attr/bookmarkButtonColor"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/bookmarkButtonText"
-            android:paddingTop="@dimen/activity_margin_horizontal"
-            android:layout_gravity="center_horizontal"
-            android:text="CAMERA"
-            android:visibility="gone"
-            />
-    </LinearLayout>
+<LinearLayout android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/buttonLayout"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:orientation="horizontal"
+  android:visibility="gone"
+  tools:visibility="visible"
+  android:layout_marginTop="@dimen/standard_gap"
+  android:layout_below="@+id/icon"
+  xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:id="@+id/cameraButton"

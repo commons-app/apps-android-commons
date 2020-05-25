@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.upload
 
+import categoryItem
 import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.categories.CategoriesContract
 import fr.free.nrw.commons.upload.categories.CategoriesPresenter
@@ -27,11 +27,6 @@ class CategoriesPresenterTest {
 
     private lateinit var testScheduler: TestScheduler
 
-    private val categoryItems: ArrayList<CategoryItem> = ArrayList()
-
-    @Mock
-    lateinit var categoryItem: CategoryItem
-
     /**
      * initial setup
      */
@@ -40,7 +35,6 @@ class CategoriesPresenterTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         testScheduler = TestScheduler()
-        categoryItems.add(categoryItem)
         categoriesPresenter = CategoriesPresenter(repository, testScheduler, testScheduler)
         categoriesPresenter.onAttachView(view)
     }
@@ -62,7 +56,7 @@ class CategoriesPresenterTest {
                 emptyCaptionUploadItem
             )
         )
-        whenever(repository.searchAll("test", listOf("nonEmpty")))
+        whenever(repository.searchAll("test", listOf("nonEmpty"), repository.selectedDepictions))
             .thenReturn(
                 Observable.just(
                     listOf(
@@ -87,7 +81,7 @@ class CategoriesPresenterTest {
     @Test
     fun `searchForCategoriesTest sets Error when list is empty`() {
         whenever(repository.uploads).thenReturn(listOf())
-        whenever(repository.searchAll(any(), any())).thenReturn(Observable.just(listOf()))
+        whenever(repository.searchAll(any(), any(), any())).thenReturn(Observable.just(listOf()))
         whenever(repository.selectedCategories).thenReturn(listOf())
         categoriesPresenter.searchForCategories("test")
         testScheduler.triggerActions()
@@ -124,10 +118,8 @@ class CategoriesPresenterTest {
      */
     @Test
     fun onCategoryItemClickedTest() {
+        val categoryItem = categoryItem()
         categoriesPresenter.onCategoryItemClicked(categoryItem)
         verify(repository).onCategoryClicked(categoryItem)
     }
-
-    private fun categoryItem(name: String = "name", selected: Boolean = false) =
-        CategoryItem(name, selected)
 }
