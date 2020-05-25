@@ -4,10 +4,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.explore.BaseViewHolder
+import fr.free.nrw.commons.explore.inflate
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
-import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_depictions.*
 
 
@@ -19,22 +19,21 @@ class DepictionAdapter(val onDepictionClicked: (DepictedItem) -> Unit) :
 
             override fun areContentsTheSame(oldItem: DepictedItem, newItem: DepictedItem) =
                 oldItem == newItem
-
         }
-
     ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DepictedItemViewHolder {
-        return DepictedItemViewHolder(parent.inflate(R.layout.item_depictions))
+        return DepictedItemViewHolder(parent.inflate(R.layout.item_depictions), onDepictionClicked)
     }
 
     override fun onBindViewHolder(holder: DepictedItemViewHolder, position: Int) {
-        holder.bind(getItem(position)!!, onDepictionClicked)
+        holder.bind(getItem(position)!!)
     }
 }
 
-class DepictedItemViewHolder(override val containerView: View) :
-    RecyclerView.ViewHolder(containerView), LayoutContainer {
-    fun bind(item: DepictedItem, onDepictionClicked: (DepictedItem) -> Unit) {
+class DepictedItemViewHolder(containerView: View, val onDepictionClicked: (DepictedItem) -> Unit) :
+    BaseViewHolder<DepictedItem>(containerView) {
+
+    override fun bind(item: DepictedItem) {
         containerView.setOnClickListener { onDepictionClicked(item) }
         depicts_label.text = item.name
         description.text = item.description

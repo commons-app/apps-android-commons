@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.explore.depictions
+package fr.free.nrw.commons.explore
 
 import android.view.LayoutInflater
 import android.view.View

@@ -1,10 +1,8 @@
-package fr.free.nrw.commons.explore.depictions
+package fr.free.nrw.commons.explore
 
 import androidx.paging.PositionalDataSource
 import com.nhaarman.mockitokotlin2.*
-import fr.free.nrw.commons.explore.depictions.LoadingState.*
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
-import io.reactivex.Single
+import fr.free.nrw.commons.explore.depictions.LoadingStates
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.schedulers.Schedulers
@@ -14,13 +12,13 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-class SearchDepictionsDataSourceTest {
-
-    @Mock
-    private lateinit var depictsClient: DepictsClient
+class SearchDataSourceTest {
 
     private lateinit var loadingStates: PublishProcessor<LoadingState>
-    private lateinit var searchDepictionsDataSource: SearchDepictionsDataSource
+    private lateinit var searchDepictionsDataSource: TestSearchDataSource
+
+    @Mock
+    private lateinit var mockGetItems: MockGetItems
 
     @Before
     fun setUp() {
@@ -28,7 +26,10 @@ class SearchDepictionsDataSourceTest {
         MockitoAnnotations.initMocks(this)
         loadingStates = PublishProcessor.create()
         searchDepictionsDataSource =
-            SearchDepictionsDataSource(depictsClient, loadingStates, "test")
+            TestSearchDataSource(
+                loadingStates,
+                mockGetItems
+            )
     }
 
     @After
@@ -39,68 +40,81 @@ class SearchDepictionsDataSourceTest {
     @Test
     fun `loadInitial returns results and emits InitialLoad & Complete`() {
         val params = PositionalDataSource.LoadInitialParams(0, 1, 2, false)
-        val callback = mock<PositionalDataSource.LoadInitialCallback<DepictedItem>>()
-        whenever(depictsClient.searchForDepictions("test", 1, 0))
-            .thenReturn(Single.just(emptyList()))
+        val callback = mock<PositionalDataSource.LoadInitialCallback<String>>()
+        whenever(mockGetItems.getItems(1, 0)).thenReturn(emptyList())
         val testSubscriber = loadingStates.test()
         searchDepictionsDataSource.loadInitial(params, callback)
         verify(callback).onResult(emptyList(), 0)
-        testSubscriber.assertValues(InitialLoad, Complete)
+        testSubscriber.assertValues(LoadingState.InitialLoad, LoadingState.Complete)
     }
 
     @Test
     fun `loadInitial onError does not return results and emits InitialLoad & Error`() {
         val params = PositionalDataSource.LoadInitialParams(0, 1, 2, false)
-        val callback = mock<PositionalDataSource.LoadInitialCallback<DepictedItem>>()
-        whenever(depictsClient.searchForDepictions("test", 1, 0))
-            .thenThrow(RuntimeException())
+        val callback = mock<PositionalDataSource.LoadInitialCallback<String>>()
+        whenever(mockGetItems.getItems(1, 0)).thenThrow(RuntimeException())
         val testSubscriber = loadingStates.test()
         searchDepictionsDataSource.loadInitial(params, callback)
         verify(callback, never()).onResult(any(), any())
-        testSubscriber.assertValues(InitialLoad, Error)
+        testSubscriber.assertValues(LoadingState.InitialLoad, LoadingState.Error)
     }
 
     @Test
     fun `loadRange returns results and emits Loading & Complete`() {
-        val callback: PositionalDataSource.LoadRangeCallback<DepictedItem> = mock()
+        val callback: PositionalDataSource.LoadRangeCallback<String> = mock()
         val params = PositionalDataSource.LoadRangeParams(0, 1)
-        whenever(depictsClient.searchForDepictions("test", params.loadSize, params.startPosition))
-            .thenReturn(Single.just(emptyList()))
+        whenever(mockGetItems.getItems(params.loadSize, params.startPosition))
+            .thenReturn(emptyList())
         val testSubscriber = loadingStates.test()
         searchDepictionsDataSource.loadRange(params, callback)
         verify(callback).onResult(emptyList())
-        testSubscriber.assertValues(Loading, Complete)
+        testSubscriber.assertValues(LoadingState.Loading, LoadingState.Complete)
     }
 
     @Test
     fun `loadRange onError does not return results and emits Loading & Error`() {
-        val callback: PositionalDataSource.LoadRangeCallback<DepictedItem> = mock()
+        val callback: PositionalDataSource.LoadRangeCallback<String> = mock()
         val params = PositionalDataSource.LoadRangeParams(0, 1)
-        whenever(depictsClient.searchForDepictions("test", params.loadSize, params.startPosition))
+        whenever(mockGetItems.getItems(params.loadSize, params.startPosition))
             .thenThrow(RuntimeException())
         val testSubscriber = loadingStates.test()
         searchDepictionsDataSource.loadRange(params, callback)
         verify(callback, never()).onResult(any())
-        testSubscriber.assertValues(Loading, Error)
+        testSubscriber.assertValues(LoadingState.Loading, LoadingState.Error)
     }
 
     @Test
     fun `retryFailedRequest does nothing when null`() {
         searchDepictionsDataSource.retryFailedRequest()
-        verifyNoMoreInteractions(depictsClient)
+        verifyNoMoreInteractions(mockGetItems)
     }
 
     @Test
     fun `retryFailedRequest retries last request`() {
-        val callback: PositionalDataSource.LoadRangeCallback<DepictedItem> = mock()
+        val callback: PositionalDataSource.LoadRangeCallback<String> = mock()
         val params = PositionalDataSource.LoadRangeParams(0, 1)
-        whenever(depictsClient.searchForDepictions("test", params.loadSize, params.startPosition))
-            .thenThrow(RuntimeException()).thenReturn(Single.just(emptyList()))
+        whenever(mockGetItems.getItems(params.loadSize, params.startPosition))
+            .thenThrow(RuntimeException()).thenReturn(emptyList())
         val testSubscriber = loadingStates.test()
         searchDepictionsDataSource.loadRange(params, callback)
         verify(callback, never()).onResult(any())
         searchDepictionsDataSource.retryFailedRequest()
         verify(callback).onResult(emptyList())
-        testSubscriber.assertValues(Loading, Error, Loading, Complete)
+        testSubscriber.assertValues(
+            LoadingState.Loading,
+            LoadingState.Error,
+            LoadingState.Loading,
+            LoadingState.Complete
+        )
     }
+}
+
+class TestSearchDataSource(loadingStates: LoadingStates, val mockGetItems: MockGetItems) :
+    SearchDataSource<String>(loadingStates) {
+    override fun getItems(loadSize: Int, startPosition: Int): List<String> =
+        mockGetItems.getItems(loadSize, startPosition)
+}
+
+interface MockGetItems {
+    fun getItems(loadSize: Int, startPosition: Int): List<String>
 }
