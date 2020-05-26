@@ -29,6 +29,7 @@ import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.processors.PublishProcessor;
 import io.reactivex.schedulers.Schedulers;
@@ -112,9 +113,9 @@ public class UploadService extends CommonsDaggerService {
 
             contribution.setTransferred(transferred);
 
-            ioThreadScheduler.scheduleDirect(() -> {
-                contributionDao.update(contribution);
-            });
+            compositeDisposable.add(contributionDao.update(contribution)
+                .subscribeOn(ioThreadScheduler)
+                .subscribe());
         }
 
     }
@@ -162,10 +163,10 @@ public class UploadService extends CommonsDaggerService {
             notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
         }
 
-        ioThreadScheduler.scheduleDirect(() -> {
-            contributionDao.save(contribution);
-            uploadContribution(contribution);
-        });
+        compositeDisposable.add(contributionDao
+            .save(contribution)
+            .subscribeOn(ioThreadScheduler)
+            .subscribe(() -> uploadContribution(contribution)));
     }
 
     private boolean freshStart = true;
@@ -297,7 +298,7 @@ public class UploadService extends CommonsDaggerService {
     private void saveCompletedContribution(Contribution contribution, UploadResult uploadResult) {
         compositeDisposable.add(mediaClient.getMedia("File:" + uploadResult.getFilename())
         .map(media -> new Contribution(media, Contribution.STATE_COMPLETED))
-        .subscribe(newContribution -> contributionDao.deleteAndSaveContribution(contribution, newContribution)));
+        .subscribe(newContribution -> contributionDao.saveAndDelete(contribution, newContribution)));
     }
 
     @SuppressLint("StringFormatInvalid")
@@ -312,9 +313,10 @@ public class UploadService extends CommonsDaggerService {
 
         contribution.setState(Contribution.STATE_FAILED);
 
-        ioThreadScheduler.scheduleDirect(() -> {
-            contributionDao.update(contribution);
-        });
+        compositeDisposable.add(contributionDao
+            .update(contribution)
+            .subscribeOn(ioThreadScheduler)
+            .subscribe());
     }
 
     private String findUniqueFilename(String fileName) throws IOException {

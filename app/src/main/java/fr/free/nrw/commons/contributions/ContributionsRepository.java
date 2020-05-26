@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.contributions;
 
 import androidx.paging.DataSource.Factory;
+import io.reactivex.Completable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -31,8 +32,8 @@ public class ContributionsRepository {
      * @param contribution
      * @return
      */
-    public void deleteContributionFromDB(Contribution contribution) {
-        localDataSource.deleteContribution(contribution);
+    public Completable deleteContributionFromDB(Contribution contribution) {
+        return localDataSource.deleteContribution(contribution);
     }
 
     /**
@@ -56,7 +57,7 @@ public class ContributionsRepository {
         localDataSource.set(key,value);
     }
 
-    public void updateContribution(Contribution contribution) {
-        localDataSource.updateContribution(contribution);
+    public Completable updateContribution(Contribution contribution) {
+        return localDataSource.updateContribution(contribution);
     }
 }

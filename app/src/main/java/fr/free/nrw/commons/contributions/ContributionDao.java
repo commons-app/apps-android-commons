@@ -11,7 +11,9 @@ import androidx.room.Transaction;
 import androidx.room.Update;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.functions.Action;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 @Dao
 public abstract class ContributionDao {
@@ -20,20 +22,36 @@ public abstract class ContributionDao {
   abstract DataSource.Factory<Integer, Contribution> fetchContributions();
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  public abstract void save(Contribution contribution);
+  public abstract void saveSyncronous(Contribution contribution);
+
+  public Completable save(final Contribution contribution) {
+    return Completable
+        .fromAction(() -> saveSyncronous(contribution));
+  }
 
   @Transaction
   public void deleteAndSaveContribution(final Contribution oldContribution,
       final Contribution newContribution) {
-    delete(oldContribution);
-    save(newContribution);
+    deleteSyncronous(oldContribution);
+    saveSyncronous(newContribution);
+  }
+
+  public Completable saveAndDelete(final Contribution oldContribution,
+      final Contribution newContribution) {
+    return Completable
+        .fromAction(() -> deleteAndSaveContribution(oldContribution, newContribution));
   }
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   public abstract Single<List<Long>> save(List<Contribution> contribution);
 
   @Delete
-  public abstract void delete(Contribution contribution);
+  public abstract void deleteSyncronous(Contribution contribution);
+
+  public Completable delete(final Contribution contribution) {
+    return Completable
+        .fromAction(() -> deleteSyncronous(contribution));
+  }
 
   @Query("SELECT * from contribution WHERE filename=:fileName")
   public abstract List<Contribution> getContributionWithTitle(String fileName);
@@ -45,5 +63,10 @@ public abstract class ContributionDao {
   public abstract void deleteAll();
 
   @Update
-  public abstract void update(Contribution contribution);
+  public abstract void updateSyncronous(Contribution contribution);
+
+  public Completable update(final Contribution contribution) {
+    return Completable
+        .fromAction(() -> updateSyncronous(contribution));
+  }
 }

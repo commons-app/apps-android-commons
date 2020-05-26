@@ -39,9 +39,9 @@ public class ContributionsListPresenter implements UserActionListener {
   }
 
   /**
-   * Setup the paged list.
-   * This method sets the configuration for paged list and ties it up with the live data object.
-   * This method can be tweaked to update the lazy loading behavior of the contributions list
+   * Setup the paged list. This method sets the configuration for paged list and ties it up with the
+   * live data object. This method can be tweaked to update the lazy loading behavior of the
+   * contributions list
    */
   void setup() {
     final PagedList.Config pagedListConfig =
@@ -62,7 +62,10 @@ public class ContributionsListPresenter implements UserActionListener {
    */
   @Override
   public void deleteUpload(final Contribution contribution) {
-    ioThreadScheduler.scheduleDirect(() -> repository.deleteContributionFromDB(contribution));
+    compositeDisposable.add(repository
+        .deleteContributionFromDB(contribution)
+        .subscribeOn(ioThreadScheduler)
+        .subscribe());
   }
 
 }

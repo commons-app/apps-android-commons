@@ -8,6 +8,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.media.MediaClient
+import io.reactivex.Completable
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -53,6 +54,8 @@ class ContributionsListPresenterTest {
 
     @Test
     fun testDeleteUpload() {
+        whenever(repository.deleteContributionFromDB(any<Contribution>()))
+            .thenReturn(Completable.complete())
         contributionsListPresenter.deleteUpload(mock(Contribution::class.java))
         verify(repository, times(1))
             .deleteContributionFromDB(ArgumentMatchers.any(Contribution::class.java));
