@@ -13,7 +13,7 @@ import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 public class DBOpenHelper  extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "commons.db";
-    private static final int DATABASE_VERSION = 12;
+    private static final int DATABASE_VERSION = 13;
     public static final String CONTRIBUTIONS_TABLE = "contributions";
     private final String DROP_TABLE_STATEMENT="DROP TABLE IF EXISTS %s";
 
