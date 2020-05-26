@@ -20,6 +20,7 @@ import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
+import java.util.concurrent.TimeUnit
 
 /**
  * The unit test class for ContributionsPresenter
@@ -42,7 +43,7 @@ class ContributionsPresenterTest {
 
     @Rule @JvmField var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    lateinit var scheduler : Scheduler
+    lateinit var scheduler : TestScheduler
 
     /**
      * initial setup
@@ -66,6 +67,7 @@ class ContributionsPresenterTest {
     @Test
     fun testDeleteContribution() {
         contributionsPresenter.deleteUpload(contribution)
+        scheduler.advanceTimeBy(1000, TimeUnit.MILLISECONDS)
         verify(repository).deleteContributionFromDB(contribution)
     }
 
