@@ -248,46 +248,24 @@ public class BookmarkLocationsDao {
 
         public static void onUpdate(SQLiteDatabase db, int from, int to) {
             Timber.d("bookmarksLocations db is updated from:"+from+", to:"+to);
-            if (from == to) {
-                return;
-            }
-            if (from < 7) {
-                // doesn't exist yet
-                from++;
-                onUpdate(db, from, to);
-                return;
-            }
-            if (from == 7) {
-                // table added in version 8
-                onCreate(db);
-                from++;
-                onUpdate(db, from, to);
-                return;
-            }
-            if (from == 8) {
-                from++;
-                onUpdate(db, from, to);
-                return;
-            }
-            if (from == 10 && to == 11) {
-                from++;
-                //This is safe, and can be called clean, as we/I do not remember the appropriate version for this
-                //We are anyways switching to room, these things won't be nescessary then
-                try {
-                    db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_pic STRING;");
-                }catch (SQLiteException exception){
-                    Timber.e(exception);//
-                }
-                return;
-            }
-            if (from == 12 && to == 13) {
-                from++;
-                try {
-                    db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_destroyed STRING;");
-                }catch (SQLiteException exception){
-                    Timber.e(exception);//
-                }
-                return;
+            switch (from) {
+                case 7: onCreate(db);
+                case 8: // No change
+                case 9: // No change
+                case 10:
+                    try {
+                        db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_pic STRING;");
+                    } catch (SQLiteException exception){
+                        Timber.e(exception);
+                    }
+                case 11: // No change
+                case 12:
+                    try {
+                        db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_destroyed STRING;");
+                    }catch (SQLiteException exception){
+                        Timber.e(exception);
+                    }
+                    break;
             }
         }
     }
