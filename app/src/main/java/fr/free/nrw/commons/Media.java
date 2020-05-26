@@ -286,7 +286,7 @@ public class Media implements Parcelable {
     @Nullable
     private static Date safeParseDate(final String dateStr) {
         try {
-            return CommonsDateUtil.getIso8601DateFormatShort().parse(dateStr);
+            return CommonsDateUtil.getMediaSimpleDateFormat().parse(dateStr);
         } catch (final ParseException e) {
             return null;
         }

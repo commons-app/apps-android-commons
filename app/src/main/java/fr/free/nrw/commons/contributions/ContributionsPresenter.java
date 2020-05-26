@@ -77,10 +77,7 @@ public class ContributionsPresenter implements UserActionListener {
 
     @Override
     public void updateContribution(Contribution contribution) {
-        compositeDisposable.add(repository
-            .updateContribution(contribution)
-            .subscribeOn(ioThreadScheduler)
-            .subscribe());
+        ioThreadScheduler.scheduleDirect(() -> repository.updateContribution(contribution));
     }
 
     @Override

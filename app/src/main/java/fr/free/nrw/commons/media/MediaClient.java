@@ -98,9 +98,6 @@ public class MediaClient {
             continuationStore.containsKey("user_" + userName)
                 ? continuationStore.get("user_" + userName)
                 : Collections.emptyMap();
-        if (continuation != null) {
-            Timber.d("continuation map %s", continuation.toString());
-        }
         return responseToMediaList(mediaInterface
             .getMediaListForUser(userName, 10, continuation), "user_" + userName);
     }

@@ -271,7 +271,7 @@ public class UploadService extends CommonsDaggerService {
     }
 
     private void onUpload(Contribution contribution, String notificationTag,
-        UploadResult uploadResult) throws ParseException {
+        UploadResult uploadResult) {
         Timber.d("Stash upload response 2 is %s", uploadResult.toString());
 
         notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
@@ -284,8 +284,7 @@ public class UploadService extends CommonsDaggerService {
         }
     }
 
-    private void onSuccessfulUpload(Contribution contribution, UploadResult uploadResult)
-        throws ParseException {
+    private void onSuccessfulUpload(Contribution contribution, UploadResult uploadResult) {
         compositeDisposable
             .add(wikidataEditService.addDepictionsAndCaptions(uploadResult, contribution));
         WikidataPlace wikidataPlace = contribution.getWikidataPlace();
@@ -295,13 +294,7 @@ public class UploadService extends CommonsDaggerService {
         saveCompletedContribution(contribution, uploadResult);
     }
 
-    private void saveCompletedContribution(Contribution contribution, UploadResult uploadResult) throws ParseException {
-        contribution.setFilename(uploadResult.createCanonicalFileName());
-        contribution.setImageUrl(uploadResult.getImageinfo().getOriginalUrl());
-        contribution.setState(Contribution.STATE_COMPLETED);
-        contribution.setDateUploaded(CommonsDateUtil.getIso8601DateFormatTimestamp()
-            .parse(uploadResult.getImageinfo().getTimestamp()));
-
+    private void saveCompletedContribution(Contribution contribution, UploadResult uploadResult) {
         compositeDisposable.add(mediaClient.getMedia("File:" + uploadResult.getFilename())
         .map(media -> new Contribution(media, Contribution.STATE_COMPLETED))
         .subscribe(newContribution -> contributionDao.deleteAndSaveContribution(contribution, newContribution)));

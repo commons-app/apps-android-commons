@@ -56,7 +56,7 @@ public class ContributionsRepository {
         localDataSource.set(key,value);
     }
 
-    public Single<Integer> updateContribution(Contribution contribution) {
-        return localDataSource.updateContribution(contribution);
+    public void updateContribution(Contribution contribution) {
+        localDataSource.updateContribution(contribution);
     }
 }

@@ -23,8 +23,8 @@ public abstract class ContributionDao {
   public abstract void save(Contribution contribution);
 
   @Transaction
-  public void deleteAndSaveContribution(Contribution oldContribution,
-      Contribution newContribution) {
+  public void deleteAndSaveContribution(final Contribution oldContribution,
+      final Contribution newContribution) {
     delete(oldContribution);
     save(newContribution);
   }
@@ -45,5 +45,5 @@ public abstract class ContributionDao {
   public abstract void deleteAll();
 
   @Update
-  public abstract Single<Integer> update(Contribution contribution);
+  public abstract void update(Contribution contribution);
 }
