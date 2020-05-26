@@ -119,7 +119,7 @@ public class Media implements Parcelable {
      * @param page response from the API
      * @return Media object
      */
-    @Nullable
+    @NonNull
     public static Media from(MwQueryPage page) {
         ImageInfo imageInfo = page.imageInfo();
         if (imageInfo == null) {

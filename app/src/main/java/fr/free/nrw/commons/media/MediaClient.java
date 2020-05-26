@@ -88,14 +88,12 @@ public class MediaClient {
      * It uses the generator query API to get the images searched using a query, 10 at a time.
      *
      * @param keyword the search keyword
+     * @param limit
+     * @param offset
      * @return
      */
-    public Single<List<Media>> getMediaListFromSearch(String keyword) {
-        return responseToMediaList(
-                continuationStore.containsKey("search_" + keyword) && (continuationStore.get("search_" + keyword)  != null) ?
-                        mediaInterface.getMediaListFromSearch(keyword, 10, continuationStore.get("search_" + keyword)) : //if true
-                        mediaInterface.getMediaListFromSearch(keyword, 10, Collections.emptyMap()), //if false
-                "search_" + keyword);
+    public Single<MwQueryResponse> getMediaListFromSearch(String keyword, int limit, int offset) {
+        return mediaInterface.getMediaListFromSearch(keyword, limit, offset);
 
     }
 
@@ -207,8 +205,8 @@ public class MediaClient {
      * @param entityId  EntityId (Ex: Q81566) of the depict entity
      * @return label
      */
-    public Single<String> getLabelForDepiction(String entityId, String language) {
-        return mediaDetailInterface.getEntity(entityId, language)
+    public Single<String> getLabelForDepiction(String entityId) {
+        return getEntities(entityId)
                 .map(entities -> {
                     if (isSuccess(entities)) {
                         for (Entity entity : entities.entities().values()) {
@@ -218,9 +216,10 @@ public class MediaClient {
                         }
                     }
                     throw new RuntimeException("failed getEntities");
-                })
-                .singleOrError();
+                });
     }
 
+    public Single<Entities> getEntities(String entityId) {
+        return mediaDetailInterface.getEntity(entityId, Locale.getDefault().getLanguage());
     }
-
+}

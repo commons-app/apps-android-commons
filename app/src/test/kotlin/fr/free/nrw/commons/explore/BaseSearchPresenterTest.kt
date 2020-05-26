@@ -4,7 +4,9 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 import com.jraska.livedata.test
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
@@ -34,7 +36,7 @@ class BaseSearchPresenterTest {
     private var searchResults: PublishProcessor<LiveData<PagedList<String>>> =
         PublishProcessor.create()
 
-    private var noItemLoadedEvent: PublishProcessor<Unit> = PublishProcessor.create()
+    private var noItemLoadedQueries: PublishProcessor<String> = PublishProcessor.create()
 
     @Before
     @Throws(Exception::class)
@@ -42,8 +44,8 @@ class BaseSearchPresenterTest {
         MockitoAnnotations.initMocks(this)
         whenever(pageableDataSource.searchResults).thenReturn(searchResults)
         whenever(pageableDataSource.loadingStates).thenReturn(loadingStates)
-        whenever(pageableDataSource.noItemsLoadedEvent)
-            .thenReturn(noItemLoadedEvent)
+        whenever(pageableDataSource.noItemsLoadedQueries)
+            .thenReturn(noItemLoadedQueries)
         testScheduler = TestScheduler()
         baseSearchPresenter =
             object : BaseSearchPresenter<String>(testScheduler, pageableDataSource) {}
@@ -60,6 +62,7 @@ class BaseSearchPresenterTest {
     @Test
     fun `Loading offers a loading list item`() {
         onLoadingState(LoadingState.Loading)
+        verify(view).hideEmptyText()
         baseSearchPresenter.listFooterData.test().assertValue(listOf(FooterItem.LoadingItem))
     }
 
@@ -74,6 +77,7 @@ class BaseSearchPresenterTest {
     @Test
     fun `InitialLoad shows initial loader`() {
         onLoadingState(LoadingState.InitialLoad)
+        verify(view).hideEmptyText()
         verify(view).showInitialLoadInProgress()
     }
 
@@ -81,16 +85,6 @@ class BaseSearchPresenterTest {
     fun `Error offers a refresh list item, hides initial loader and shows error with a set text`() {
         baseSearchPresenter.onQueryUpdated("test")
         onLoadingState(LoadingState.Error)
-        verify(view).setEmptyViewText("test")
-        verify(view).showSnackbar()
-        verify(view).hideInitialLoadProgress()
-        baseSearchPresenter.listFooterData.test().assertValue(listOf(FooterItem.RefreshItem))
-    }
-
-    @Test
-    fun `Error offers a refresh list item, hides initial loader and shows error with a unset text`() {
-        onLoadingState(LoadingState.Error)
-        verify(view, never()).setEmptyViewText(any())
         verify(view).showSnackbar()
         verify(view).hideInitialLoadProgress()
         baseSearchPresenter.listFooterData.test().assertValue(listOf(FooterItem.RefreshItem))
@@ -98,9 +92,8 @@ class BaseSearchPresenterTest {
 
     @Test
     fun `no Items event sets empty view text`() {
-        baseSearchPresenter.onQueryUpdated("test")
-        noItemLoadedEvent.offer(Unit)
-        verify(view).setEmptyViewText("test")
+        noItemLoadedQueries.offer("test")
+        verify(view).showEmptyText("test")
     }
 
     @Test

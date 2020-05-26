@@ -3,7 +3,6 @@ package fr.free.nrw.commons.explore.depictions
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity
 import fr.free.nrw.commons.explore.BaseSearchFragment
-import fr.free.nrw.commons.explore.SearchFragmentContract
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import javax.inject.Inject
 
@@ -17,7 +16,9 @@ class SearchDepictionsFragment : BaseSearchFragment<DepictedItem>(),
 
     override val emptyTemplateTextId: Int = R.string.depictions_not_found
 
-    override val injectedPresenter: SearchFragmentContract.Presenter<DepictedItem>
+    override val errorTextId: Int = R.string.error_loading_depictions
+
+    override val injectedPresenter: SearchDepictionsFragmentContract.Presenter
         get() = presenter
 
     override val pagedListAdapter by lazy {
