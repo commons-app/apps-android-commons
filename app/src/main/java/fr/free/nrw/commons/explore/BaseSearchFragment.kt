@@ -51,7 +51,8 @@ abstract class BaseSearchFragment<T> : CommonsDaggerSupportFragment(),
     override fun observeSearchResults(searchResults: LiveData<PagedList<T>>) {
         this.searchResults?.removeObservers(viewLifecycleOwner)
         this.searchResults = searchResults
-        searchResults.observe(viewLifecycleOwner, Observer(pagedListAdapter::submitList))
+        searchResults.observe(viewLifecycleOwner, Observer {
+            pagedListAdapter.submitList(it) })
     }
 
     override fun onAttach(context: Context) {
