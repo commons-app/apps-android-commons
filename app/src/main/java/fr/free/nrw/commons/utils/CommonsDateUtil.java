@@ -22,7 +22,7 @@ public class CommonsDateUtil {
     }
 
     /**
-     * Gets SimpleDateFormat for short date pattern
+     * Gets SimpleDateFormat for date pattern returned by Media object
      * @return simpledateformat
      */
     public static SimpleDateFormat getMediaSimpleDateFormat() {
