@@ -606,4 +606,5 @@
   <string name="ask_to_turn_location_on">Ativar a localização?</string>
   <string name="nearby_needs_location">Proximidade precisa de localização ativado para funcionar corretamente</string>
   <string name="use_location_from_similar_image">Você tirou essas duas fotos no mesmo lugar? Deseja usar a latitude/longitude da imagem à direita?</string>
+  <string name="nearby_no_results">Nenhum local encontrado, tente alterar seus critérios de pesquisa.</string>
 </resources>
