@@ -1,10 +1,9 @@
 package fr.free.nrw.commons.explore.depictions
 
 import com.nhaarman.mockitokotlin2.whenever
+import depictedItem
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.upload.depictedItem
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
@@ -36,7 +35,6 @@ class SearchDepictionsPresenterTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         testScheduler = TestScheduler()
-        val depictedItem: DepictedItem = depictedItem(instanceOfs = listOf())
         searchDepictionsFragmentPresenter = SearchDepictionsFragmentPresenter(
             jsonKvStore,
             recentSearchesDao,
@@ -56,5 +54,4 @@ class SearchDepictionsPresenterTest {
         testScheduler.triggerActions()
         verify(view)?.onSuccess(expectedList)
     }
-
 }

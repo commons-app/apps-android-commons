@@ -208,7 +208,7 @@ public class MediaClient {
      * @return  caption for image using wikibaseIdentifier
      */
     public Single<String> getCaptionByWikibaseIdentifier(String wikibaseIdentifier) {
-        return mediaDetailInterface.getCaptionForImage(Locale.getDefault().getLanguage(), wikibaseIdentifier)
+        return mediaDetailInterface.getEntityForImage(Locale.getDefault().getLanguage(), wikibaseIdentifier)
                 .map(mediaDetailResponse -> {
                     if (isSuccess(mediaDetailResponse)) {
                         for (Entity wikibaseItem : mediaDetailResponse.entities().values()) {
@@ -245,11 +245,15 @@ public class MediaClient {
      * @return label
      */
     public Single<String> getLabelForDepiction(String entityId, String language) {
-        return mediaDetailInterface.getEntity(entityId, language)
+        return mediaDetailInterface.getEntity(entityId)
                 .map(entities -> {
                     if (isSuccess(entities)) {
                         for (Entity entity : entities.entities().values()) {
-                            for (Label label : entity.labels().values()) {
+                            final Map<String, Label> languageToLabelMap = entity.labels();
+                            if (languageToLabelMap.containsKey(language)) {
+                                return languageToLabelMap.get(language).value();
+                            }
+                            for (Label label : languageToLabelMap.values()) {
                                 return label.value();
                             }
                         }

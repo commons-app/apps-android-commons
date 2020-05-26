@@ -1,5 +1,13 @@
 package fr.free.nrw.commons.nearby.fragments;
 
+import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
+import static fr.free.nrw.commons.nearby.Label.TEXT_TO_DESCRIPTION;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
+
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -9,6 +17,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -27,13 +36,15 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -58,17 +69,6 @@ import com.mapbox.mapboxsdk.maps.UiSettings;
 import com.mapbox.pluginscalebar.ScaleBarOptions;
 import com.mapbox.pluginscalebar.ScaleBarPlugin;
 import com.pedrogomez.renderers.RVRendererAdapter;
-
-import fr.free.nrw.commons.utils.DialogUtil;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -92,6 +92,7 @@ import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ExecutorUtils;
 import fr.free.nrw.commons.utils.LayoutUtils;
 import fr.free.nrw.commons.utils.LocationUtils;
@@ -105,15 +106,12 @@ import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
-import static fr.free.nrw.commons.nearby.Label.TEXT_TO_DESCRIPTION;
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 
 public class NearbyParentFragment extends CommonsDaggerSupportFragment
@@ -420,7 +418,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        nearbyFilterSearchRecyclerViewAdapter = new NearbyFilterSearchRecyclerViewAdapter(getContext(),new ArrayList<>(TEXT_TO_DESCRIPTION.values()), recyclerView);
+        nearbyFilterSearchRecyclerViewAdapter = new NearbyFilterSearchRecyclerViewAdapter(getContext(), new ArrayList<>(Label.valuesAsList()), recyclerView);
         nearbyFilterSearchRecyclerViewAdapter.setCallback(new NearbyFilterSearchRecyclerViewAdapter.Callback() {
             @Override
             public void setCheckboxUnknown() {
@@ -1136,7 +1134,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             // When label filter is engaged
             // then compare it against place's label
             if (selectedLabels != null && (selectedLabels.size() != 0 || !filterForPlaceState)
-                && !selectedLabels.contains(place.getLabel())) {
+                && (!selectedLabels.contains(place.getLabel())
+                    && !(selectedLabels.contains(Label.BOOKMARKS) && markerPlaceGroup.getIsBookmarked()))) {
                 continue;
             }
 
@@ -1177,24 +1176,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void updateMarker(boolean isBookmarked, Place place, @Nullable fr.free.nrw.commons.location.LatLng curLatLng) {
         addPlaceToNearbyList(place);
 
-        VectorDrawableCompat vectorDrawable;
-        if (isBookmarked) {
-            vectorDrawable = VectorDrawableCompat.create(
-                    getContext().getResources(), R.drawable.ic_custom_bookmark_marker, getContext().getTheme()
-            );
-        } else if (!place.pic.trim().isEmpty()) {
-            vectorDrawable = VectorDrawableCompat.create( // Means place has picture
-                    getContext().getResources(), R.drawable.ic_custom_map_marker_green, getContext().getTheme()
-            );
-        } else if (!place.destroyed.trim().isEmpty()) { // Means place is destroyed
-            vectorDrawable = VectorDrawableCompat.create( // Means place has picture
-                    getContext().getResources(), R.drawable.ic_custom_map_marker_grey, getContext().getTheme()
-            );
-        } else {
-            vectorDrawable = VectorDrawableCompat.create(
-                    getContext().getResources(), R.drawable.ic_custom_map_marker, getContext().getTheme()
-            );
-        }
+        VectorDrawableCompat vectorDrawable = VectorDrawableCompat.create(
+            getContext().getResources(), getIconFor(place, isBookmarked), getContext().getTheme());
+
         for (Marker marker : mapBox.getMarkers()) {
             if (marker.getTitle() != null && marker.getTitle().equals(place.getName())) {
 
@@ -1215,6 +1199,22 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         .fromBitmap(icon));
                 marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
             }
+        }
+    }
+
+    private @DrawableRes int getIconFor(Place place, Boolean isBookmarked) {
+        if (!place.pic.trim().isEmpty()) {
+            return (isBookmarked ?
+                R.drawable.ic_custom_map_marker_green_bookmarked :
+                R.drawable.ic_custom_map_marker_green);
+        } else if (!place.destroyed.trim().isEmpty()) { // Means place is destroyed
+            return (isBookmarked ?
+                R.drawable.ic_custom_map_marker_grey_bookmarked :
+                R.drawable.ic_custom_map_marker_grey);
+        } else {
+            return (isBookmarked ?
+                R.drawable.ic_custom_map_marker_blue_bookmarked :
+                R.drawable.ic_custom_map_marker);
         }
     }
 

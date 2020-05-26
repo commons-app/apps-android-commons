@@ -9,6 +9,7 @@ import android.os.RemoteException;
 
 import androidx.annotation.NonNull;
 
+import fr.free.nrw.commons.nearby.NearbyController;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,8 +75,10 @@ public class BookmarkLocationsDao {
         boolean bookmarkExists = findBookmarkLocation(bookmarkLocation);
         if (bookmarkExists) {
             deleteBookmarkLocation(bookmarkLocation);
+            NearbyController.updateMarkerLabelListBookmark(bookmarkLocation, false);
         } else {
             addBookmarkLocation(bookmarkLocation);
+            NearbyController.updateMarkerLabelListBookmark(bookmarkLocation, true);
         }
         return !bookmarkExists;
     }
@@ -160,10 +163,9 @@ public class BookmarkLocationsDao {
                 location,
                 cursor.getString(cursor.getColumnIndex(Table.COLUMN_CATEGORY)),
                 builder.build(),
-                null,
+                cursor.getString(cursor.getColumnIndex(Table.COLUMN_PIC)),
                 null
         );
-        // TODO: add pic and destroyed to bookmark location dao
     }
 
     private ContentValues toContentValues(Place bookmarkLocation) {
