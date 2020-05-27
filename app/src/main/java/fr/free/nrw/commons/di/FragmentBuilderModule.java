@@ -72,13 +72,13 @@ public abstract class FragmentBuilderModule {
     @ContributesAndroidInjector
     abstract ContributionsFragment bindContributionsFragment();
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = NearbyParentFragmentModule.class)
     abstract NearbyParentFragment bindNearbyParentFragment();
 
     @ContributesAndroidInjector
     abstract BookmarkPicturesFragment bindBookmarkPictureListFragment();
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = BookmarkLocationsFragmentModule.class)
     abstract BookmarkLocationsFragment bindBookmarkLocationListFragment();
 
     @ContributesAndroidInjector

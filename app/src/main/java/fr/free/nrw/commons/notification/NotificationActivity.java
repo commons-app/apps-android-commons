@@ -13,23 +13,13 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.snackbar.Snackbar;
-import com.pedrogomez.renderers.RVRendererAdapter;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Callable;
-
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.google.android.material.snackbar.Snackbar;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
@@ -40,6 +30,11 @@ import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Callable;
+import javax.inject.Inject;
+import kotlin.Unit;
 import timber.log.Timber;
 
 /**
@@ -47,7 +42,6 @@ import timber.log.Timber;
  */
 
 public class NotificationActivity extends NavigationBaseActivity {
-    NotificationAdapterFactory notificationAdapterFactory;
     @BindView(R.id.listView)
     RecyclerView recyclerView;
     @BindView(R.id.progressBar)
@@ -64,7 +58,7 @@ public class NotificationActivity extends NavigationBaseActivity {
 
     private static final String TAG_NOTIFICATION_WORKER_FRAGMENT = "NotificationWorkerFragment";
     private NotificationWorkerFragment mNotificationWorkerFragment;
-    private RVRendererAdapter<Notification> adapter;
+    private NotificatinAdapter adapter;
     private List<Notification> notificationList;
     MenuItem notificationMenuItem;
 
@@ -89,7 +83,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                 .subscribe(result -> {
                     if (result) {
                         notificationList.remove(notification);
-                        setAdapter(notificationList);
+                        setItems(notificationList);
                         adapter.notifyDataSetChanged();
                         Snackbar snackbar = Snackbar
                                 .make(relativeLayout, getString(R.string.notification_mark_read), Snackbar.LENGTH_LONG);
@@ -102,7 +96,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                         }
                     } else {
                         adapter.notifyDataSetChanged();
-                        setAdapter(notificationList);
+                        setItems(notificationList);
                         Toast.makeText(NotificationActivity.this, getString(R.string.some_error), Toast.LENGTH_SHORT).show();
                     }
                 }, throwable -> {
@@ -126,6 +120,13 @@ public class NotificationActivity extends NavigationBaseActivity {
         } else {
             refresh(false);
         }
+        adapter = new NotificatinAdapter(item -> {
+            Timber.d("Notification clicked %s", item.getLink());
+            handleUrl(item.getLink());
+            removeNotification(item);
+            return Unit.INSTANCE;
+        });
+        recyclerView.setAdapter(this.adapter);
     }
 
     private void refresh(boolean archived) {
@@ -158,7 +159,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                             relativeLayout.setVisibility(View.GONE);
                             no_notification.setVisibility(View.VISIBLE);
                         } else {
-                            setAdapter(notificationList);
+                            setItems(notificationList);
                         }
                         progressBar.setVisibility(View.GONE);
                     }, throwable -> {
@@ -168,7 +169,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                     }));
         } else {
             notificationList = mNotificationWorkerFragment.getNotificationList();
-            setAdapter(notificationList);
+            setItems(notificationList);
         }
     }
 
@@ -204,7 +205,7 @@ public class NotificationActivity extends NavigationBaseActivity {
         Utils.handleWebUrl(this, Uri.parse(url));
     }
 
-    private void setAdapter(List<Notification> notificationList) {
+    private void setItems(List<Notification> notificationList) {
         if (notificationList == null || notificationList.isEmpty()) {
             ViewUtil.showShortSnackbar(relativeLayout, R.string.no_notifications);
             /*progressBar.setVisibility(View.GONE);
@@ -214,32 +215,9 @@ public class NotificationActivity extends NavigationBaseActivity {
             no_notification.setVisibility(View.VISIBLE);
             return;
         }
-
-        boolean isarchivedvisible;
-        if (getIntent().getStringExtra("title").equals("read")) {
-            isarchivedvisible = true;
-        } else {
-            isarchivedvisible = false;
-        }
-
-        notificationAdapterFactory = new NotificationAdapterFactory(new NotificationRenderer.NotificationClicked() {
-            @Override
-            public void notificationClicked(Notification notification) {
-                Timber.d("Notification clicked %s", notification.getLink());
-                handleUrl(notification.getLink());
-                removeNotification(notification);
-            }
-
-            @Override
-            public void markNotificationAsRead(Notification notification) {
-                Timber.d("Notification to mark as read %s", notification.getNotificationId());
-                removeNotification(notification);
-            }
-        }, isarchivedvisible);
-        adapter = notificationAdapterFactory.create(notificationList);
         relativeLayout.setVisibility(View.VISIBLE);
         no_notification.setVisibility(View.GONE);
-        recyclerView.setAdapter(adapter);
+        adapter.setItems(notificationList);
     }
 
     public static void startYourself(Context context, String title) {
