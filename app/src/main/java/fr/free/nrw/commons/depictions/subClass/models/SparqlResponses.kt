@@ -9,7 +9,8 @@ data class Binding(
     val itemLabel: SparqInfo,
     val itemDescription: SparqInfo? = null
 ) {
-    val id: String by lazy { item.value.substringAfterLast("/") }
+    val id: String
+        get() = item.value.substringAfterLast("/")
 }
 
 data class SparqInfo(val type: String, val value: String)

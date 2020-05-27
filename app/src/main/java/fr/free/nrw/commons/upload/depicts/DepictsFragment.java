@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload.depicts;
 
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,27 +17,23 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
-import com.pedrogomez.renderers.RVRendererAdapter;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
-import fr.free.nrw.commons.upload.UploadDepictsAdapterFactory;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
-import fr.free.nrw.commons.upload.structure.depictions.UploadDepictsCallback;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
-import org.jetbrains.annotations.NotNull;
+import kotlin.Unit;
 import timber.log.Timber;
 
 
 /**
  * Fragment for showing depicted items list in Upload activity after media details
  */
-public class DepictsFragment extends UploadBaseFragment implements DepictsContract.View, UploadDepictsCallback {
+public class DepictsFragment extends UploadBaseFragment implements DepictsContract.View {
 
     @BindView(R.id.depicts_title)
     TextView depictsTitle;
@@ -53,7 +48,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     @Inject
     DepictsContract.UserActionListener presenter;
-    private RVRendererAdapter<DepictedItem> adapter;
+    private UploadDepictsAdapter adapter;
     private Disposable subscribe;
 
     @Nullable
@@ -86,8 +81,10 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      * Initialise recyclerView and set adapter
      */
     private void initRecyclerView() {
-        adapter = new UploadDepictsAdapterFactory(this)
-                .create(new ArrayList<>());
+        adapter = new UploadDepictsAdapter(item -> {
+            presenter.onDepictItemClicked(item);
+            return Unit.INSTANCE;
+        });
         depictsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         depictsRecyclerView.setAdapter(adapter);
     }
@@ -137,22 +134,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     @Override
     public void setDepictsList(List<DepictedItem> depictedItemList) {
-        adapter.clear();
-        if (depictedItemList != null) {
-            adapter.addAll(depictedItemList);
-            adapter.notifyDataSetChanged();
-        }
-    }
-
-    @Nullable
-    private Pair<DepictedItem,Integer> returnItemAndPosition(@NotNull DepictedItem depictedItem) {
-        for (int i = 0; i < adapter.getItemCount(); i++) {
-            final DepictedItem item = adapter.getItem(i);
-            if(item.getId().equals(depictedItem.getId())){
-                return new Pair<>(item, i);
-            }
-        }
-        return null;
+        adapter.setItems(depictedItemList);
     }
 
     @OnClick(R.id.depicts_next)
@@ -163,11 +145,6 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     @OnClick(R.id.depicts_previous)
     public void onPreviousButtonClicked() {
         callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
-    }
-
-    @Override
-    public void depictsClicked(DepictedItem item) {
-        presenter.onDepictItemClicked(item);
     }
 
     /**

@@ -5,6 +5,7 @@ import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import javax.inject.Inject
 import javax.inject.Singleton
 
+const val CATEGORY_PREFIX = "Category:"
 /**
  * Category Client to handle custom calls to Commons MediaWiki APIs
  */
@@ -72,7 +73,7 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
         return responseObservable
             .map { it.query()?.pages() ?: emptyList() }
             .map {
-                it.map { page -> page.title().replace("Category:", "") }
+                it.map { page -> page.title().replace(CATEGORY_PREFIX, "") }
             }
     }
 

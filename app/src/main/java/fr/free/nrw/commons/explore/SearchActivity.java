@@ -5,23 +5,16 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.SearchView;
-
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
@@ -34,6 +27,10 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.FragmentUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import timber.log.Timber;
 
 /**
  * Represents search screen of this app
@@ -111,35 +108,35 @@ public class SearchActivity extends NavigationBaseActivity
                 .takeUntil(RxView.detaches(searchView))
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( query -> {
-                    this.query = query.toString();
-                            //update image list
-                            if (!TextUtils.isEmpty(query)) {
-                                viewPager.setVisibility(View.VISIBLE);
-                                tabLayout.setVisibility(View.VISIBLE);
-                                searchHistoryContainer.setVisibility(View.GONE);
+                .subscribe(query -> {
+                        this.query = query.toString();
+                        //update image list
+                        if (!TextUtils.isEmpty(query)) {
+                            viewPager.setVisibility(View.VISIBLE);
+                            tabLayout.setVisibility(View.VISIBLE);
+                            searchHistoryContainer.setVisibility(View.GONE);
 
-                                if (FragmentUtils.isFragmentUIActive(searchDepictionsFragment)) {
-                                    searchDepictionsFragment.updateDepictionList(query.toString());
-                                }
-
-                                if (FragmentUtils.isFragmentUIActive(searchImageFragment)) {
-                                    searchImageFragment.updateImageList(query.toString());
-                                }
-
-                                if (FragmentUtils.isFragmentUIActive(searchCategoryFragment)) {
-                                    searchCategoryFragment.updateCategoryList(query.toString());
-                                }
-
-                            }else {
-                                //Open RecentSearchesFragment
-                                recentSearchesFragment.updateRecentSearches();
-                                viewPager.setVisibility(View.GONE);
-                                tabLayout.setVisibility(View.GONE);
-                                setSearchHistoryFragment();
-                                searchHistoryContainer.setVisibility(View.VISIBLE);
+                            if (FragmentUtils.isFragmentUIActive(searchDepictionsFragment)) {
+                                searchDepictionsFragment.updateDepictionList(query.toString());
                             }
+
+                            if (FragmentUtils.isFragmentUIActive(searchImageFragment)) {
+                                searchImageFragment.updateImageList(query.toString());
+                            }
+
+                            if (FragmentUtils.isFragmentUIActive(searchCategoryFragment)) {
+                                searchCategoryFragment.updateCategoryList(query.toString());
+                            }
+
+                        } else {
+                            //Open RecentSearchesFragment
+                            recentSearchesFragment.updateRecentSearches();
+                            viewPager.setVisibility(View.GONE);
+                            tabLayout.setVisibility(View.GONE);
+                            setSearchHistoryFragment();
+                            searchHistoryContainer.setVisibility(View.VISIBLE);
                         }
+                    }, Timber::e
                 ));
     }
 

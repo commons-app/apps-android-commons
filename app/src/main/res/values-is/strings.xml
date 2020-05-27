@@ -12,7 +12,7 @@
   <string name="preference_category_privacy">Persónuvernd</string>
   <string name="preference_category_location">Staðsetning</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•  \</string>
+  <string name="bullet">•  \\</string>
   <string name="menu_settings">Stillingar</string>
   <string name="intent_share_upload_label">Senda inn á Commons</string>
   <string name="username">Notandanafn</string>
@@ -92,7 +92,7 @@
   <string name="title_activity_category_details">Flokkur</string>
   <string name="title_activity_review">Yfirlestur jafningja</string>
   <string name="menu_about">Um</string>
-  <string name="about_license">Wikimedia Commons forritið er opinn og frjáls hugbúnaður sem gerður er og viðhaldið af stuðningsaðilum og sjálfboðaliðum Wikimedia samfélagsins. Wikimedia Foundation sjálfseignarstofnunin kemur ekki að gerð, forritun eða viðhaldi forritsins. \</string>
+  <string name="about_license">Wikimedia Commons forritið er opinn og frjáls hugbúnaður sem gerður er og viðhaldið af stuðningsaðilum og sjálfboðaliðum Wikimedia samfélagsins. Wikimedia Foundation sjálfseignarstofnunin kemur ekki að gerð, forritun eða viðhaldi forritsins. \\</string>
   <string name="about_improve">Útbúðu nýjar &lt;a href=\"%1$s\"&gt;GitHub tilkynningar (issue)&lt;/a&gt; til að koma villum og uppástungum á framfæri.</string>
   <string name="about_privacy_policy">Meðferð persónuupplýsinga</string>
   <string name="about_credits">Framlög</string>
@@ -322,7 +322,7 @@
   <string name="wallpaper_set_successfully">Tókst að stilla bakgrunnsmynd!</string>
   <string name="quiz">Spurningaleikur</string>
   <string name="quiz_question_string">Er í lagi að senda inn þessa mynd?</string>
-  <string name="question">Spurning \</string>
+  <string name="question">Spurning \\</string>
   <string name="result">Niðurstaða</string>
   <string name="quiz_back_button">Ef þú heldur áfram að senda inn myndir sem krefjast að þeim sé eytt, er líklegt að aðgangurinn þinn verði bannaður. Ertu viss um að þú viljir hætta í spurningaleiknum?</string>
   <string name="quiz_alert_message">Meira en %1$s myndanna sem þú hefur sent inn hefur verið eytt. Ef þú heldur áfram að senda inn myndir sem krefjast að þeim sé eytt, er líklegt að aðgangurinn þinn verði bannaður.\n\nMyndir þú vilja skða kennsluefnið aftur og taka síðan einn léttan spurningaleik til að hjálpa þér til að læra hvernig myndir þú ættir að senda inn og hverjar ekki?</string>
@@ -361,7 +361,7 @@
   <string name="images_used_by_wiki">Myndir notaðar</string>
   <string name="achievements_share_message">Deildu frammistöðu þinni með vinum þínum!</string>
   <string name="achievements_info_message">Stig þitt eykst eftir því sem þú uppfyllir betur þessar kröfur. Atriði í \"tölfræði\"-hlutanum teljast ekki með í stigaútreikningi þínum.</string>
-  <string name="achievements_revert_limit_message">lágmarksfjöldi sem er krafist: \</string>
+  <string name="achievements_revert_limit_message">lágmarksfjöldi sem er krafist: \\</string>
   <string name="images_uploaded_explanation">Heildarfjöldi mynda sem þú hefur sent inn á Commons, með hverskyns innsendingarhugbúnaði</string>
   <string name="images_reverted_explanation">Prósentuhlutfall mynda sem þú hefur sent inn á Commons sem ekki hefur verið eytt</string>
   <string name="images_used_explanation">Heildarfjöldi mynda sem þú hefur sent inn á Commons sem hafa verið notaðar með Wikimedia-greinum</string>

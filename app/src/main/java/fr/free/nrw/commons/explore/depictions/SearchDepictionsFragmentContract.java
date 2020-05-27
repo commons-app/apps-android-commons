@@ -1,11 +1,8 @@
 package fr.free.nrw.commons.explore.depictions;
 
-import com.pedrogomez.renderers.RVRendererAdapter;
-
-import java.util.List;
-
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
+import java.util.List;
 
 /**
  * The contract with with SearchDepictionsFragment and its presenter would talk to each other
@@ -43,11 +40,6 @@ public interface SearchDepictionsFragmentContract {
          * show snackbar
          */
         void showSnackbar();
-
-        /**
-         * @return adapter
-         */
-        RVRendererAdapter<DepictedItem> getAdapter();
 
         /**
          * Inform the view that there are no more items to be loaded for this search query

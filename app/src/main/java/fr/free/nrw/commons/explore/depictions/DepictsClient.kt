@@ -3,7 +3,6 @@ package fr.free.nrw.commons.explore.depictions
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.depictions.models.DepictionResponse
-import fr.free.nrw.commons.depictions.subClass.models.Binding
 import fr.free.nrw.commons.depictions.subClass.models.SparqlResponse
 import fr.free.nrw.commons.media.MediaInterface
 import fr.free.nrw.commons.upload.depicts.DepictsInterface
@@ -20,8 +19,9 @@ import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
-const val LARGE_IMAGE_SIZE="640px"
-const val THUMB_IMAGE_SIZE="70px"
+const val LARGE_IMAGE_SIZE = "640px"
+const val THUMB_IMAGE_SIZE = "70px"
+
 /**
  * Depicts Client to handle custom calls to Commons Wikibase APIs
  */
@@ -79,7 +79,11 @@ class DepictsClient @Inject constructor(
     }
 
     fun toDepictions(sparqlResponse: Observable<SparqlResponse>): Observable<List<DepictedItem>> {
-        return sparqlResponse.map { it.results.bindings.joinToString("|", transform = Binding::id) }
+        return sparqlResponse.map {
+            it.results.bindings.joinToString("|") { binding ->
+                binding.id
+            }
+        }
             .flatMap { getEntities(it).toObservable() }
             .map { it.entities().values.map(::DepictedItem) }
     }

@@ -11,16 +11,6 @@ data class Notification(var notificationType: NotificationType,
                    var link: String,
                    var iconUrl: String,
                    var notificationId: String) {
-    override fun toString(): String {
-        return "Notification" +
-                "notificationType='" + notificationType + '\'' +
-                ", notificationText='" + notificationText + '\'' +
-                ", date='" + date + '\'' +
-                ", link='" + link + '\'' +
-                ", iconUrl='" + iconUrl + '\'' +
-                ", notificationId='" + notificationId + '\'' +
-                '}'
-    }
 
     companion object {
         @JvmStatic
