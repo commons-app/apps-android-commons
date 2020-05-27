@@ -36,7 +36,8 @@ class BookMarkLocationDaoTest {
             COLUMN_COMMONS_LINK,
             COLUMN_LAT,
             COLUMN_LONG,
-            COLUMN_PIC)
+            COLUMN_PIC,
+            COLUMN_DESTROYED)
     private val client: ContentProviderClient = mock()
     private val database: SQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
@@ -95,6 +96,7 @@ class BookMarkLocationDaoTest {
                 assertEquals(builder.build().wikidataLink, it.siteLinks.wikidataLink)
                 assertEquals(builder.build().commonsLink, it.siteLinks.commonsLink)
                 assertEquals("picName",it.pic)
+                assertEquals("placeDestroyed", it.destroyed)
             }
         }
     }
@@ -147,7 +149,7 @@ class BookMarkLocationDaoTest {
         assertTrue(testObject.updateBookmarkLocation(examplePlaceBookmark))
         verify(client).insert(eq(BASE_URI), captor.capture())
         captor.firstValue.let { cv ->
-            assertEquals(11, cv.size())
+            assertEquals(12, cv.size())
             assertEquals(examplePlaceBookmark.name, cv.getAsString(COLUMN_NAME))
             assertEquals(examplePlaceBookmark.longDescription, cv.getAsString(COLUMN_DESCRIPTION))
             assertEquals(examplePlaceBookmark.label.text, cv.getAsString(COLUMN_LABEL_TEXT))
@@ -158,6 +160,7 @@ class BookMarkLocationDaoTest {
             assertEquals(examplePlaceBookmark.siteLinks.wikidataLink.toString(), cv.getAsString(COLUMN_WIKIDATA_LINK))
             assertEquals(examplePlaceBookmark.siteLinks.commonsLink.toString(), cv.getAsString(COLUMN_COMMONS_LINK))
             assertEquals(examplePlaceBookmark.pic.toString(), cv.getAsString(COLUMN_PIC))
+            assertEquals(examplePlaceBookmark.destroyed.toString(), cv.getAsString(COLUMN_DESTROYED))
         }
     }
 
@@ -253,12 +256,18 @@ class BookMarkLocationDaoTest {
         verify(database).execSQL(CREATE_TABLE_STATEMENT)
     }
 
+    @Test
+    fun migrateTableVersionFrom_v12_to_v13() {
+        onUpdate(database, 12, 13)
+        verify(database).execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_destroyed STRING;")
+    }
+
     private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
 
         for (i in 0 until rowCount) {
             addRow(listOf("placeName", "placeDescription","placeCategory", exampleLabel.text, exampleLabel.icon,
                     exampleUri, builder.build().wikipediaLink, builder.build().wikidataLink, builder.build().commonsLink,
-                    exampleLocation.latitude, exampleLocation.longitude, "picName"))
+                    exampleLocation.latitude, exampleLocation.longitude, "picName", "placeDestroyed"))
         }
     }
 }
