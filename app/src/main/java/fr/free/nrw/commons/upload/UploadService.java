@@ -298,7 +298,8 @@ public class UploadService extends CommonsDaggerService {
     private void saveCompletedContribution(Contribution contribution, UploadResult uploadResult) {
         compositeDisposable.add(mediaClient.getMedia("File:" + uploadResult.getFilename())
         .map(media -> new Contribution(media, Contribution.STATE_COMPLETED))
-        .subscribe(newContribution -> contributionDao.saveAndDelete(contribution, newContribution)));
+        .flatMapCompletable(newContribution -> contributionDao.saveAndDelete(contribution, newContribution))
+        .subscribe());
     }
 
     @SuppressLint("StringFormatInvalid")
