@@ -45,7 +45,3 @@ class DepictedItemViewHolder(override val containerView: View) :
         }
     }
 }
-
-
-
-

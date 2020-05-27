@@ -106,6 +106,9 @@
   </plurals>
   <string name="categories_not_found">Категорій, відповідних %1$s, не знайдено</string>
   <string name="depictions_not_found">Не знайдено елементів вікіданих, що відповідають %1$s</string>
+  <string name="no_child_classes">%1$s не має дочірніх класів</string>
+  <string name="no_parent_classes">%1$s не має батьківських класів</string>
+  <string name="depictions_image_not_found">Немає зображення для описування</string>
   <string name="categories_skip_explanation">Додайте категорії, щоб Ваші зображення було легше знайти у Вікісховищі. \n\nПочніть вводити текст, щоб додати категорії.</string>
   <string name="categories_activity_title">Категорії</string>
   <string name="title_activity_settings">Налаштування</string>
@@ -206,6 +209,7 @@
   <string name="no">Ні</string>
   <string name="media_detail_caption">Підпис</string>
   <string name="media_detail_title">Назва</string>
+  <string name="media_detail_depiction">Описи зображеного</string>
   <string name="media_detail_description">Опис</string>
   <string name="media_detail_discussion">Обговорення</string>
   <string name="media_detail_author">Автор</string>
@@ -347,9 +351,11 @@
   <string name="search_recent_header">Недавні пошуки:</string>
   <string name="provider_searches">Недавні пошукові запити</string>
   <string name="error_loading_categories">Сталася помилка під час завантаження категорій.</string>
+  <string name="error_loading_depictions">Сталася помилка при завантаженні описів зображеного.</string>
   <string name="error_loading_subcategories">Сталася помилка під час завантаження підкатегорій.</string>
   <string name="search_tab_title_media">Медіафайли</string>
   <string name="search_tab_title_categories">Категорії</string>
+  <string name="search_tab_title_depictions">Елементи</string>
   <string name="explore_tab_title_featured">Обране</string>
   <string name="explore_tab_title_mobile">Завантаження з мобільного</string>
   <string name="successful_wikidata_edit">Зображення додано до сторінки %1$s у Вікіданих!</string>
@@ -455,6 +461,7 @@
   <string name="desc_language_Pacific">Океанія</string>
   <string name="no_categories_selected">Жодної категорії не вибрано</string>
   <string name="no_categories_selected_warning_desc">Зображення без категорій рідко використовуються. Ви впевнені, що хочете продовжити без вказаних категорій?</string>
+  <string name="no_depictions_selected">Описів зображеного не вибрано</string>
   <string name="no_depictions_selected_warning_desc">Медіа, у яких вказані зображувані об\'єкти, можуть бути легше знайдені та використані надалі. Ви впевнені, що хочете продовжити не вказавши що саме тут зображено?</string>
   <string name="upload_flow_all_images_in_set">(Для всіх зображень у наборі)</string>
   <string name="search_this_area">Шукати в цій зоні</string>
@@ -555,6 +562,7 @@
   <string name="share_via">Поділитися програмкою через…</string>
   <string name="image_info">Інформація про зображення</string>
   <string name="no_categories_found">Категорії не знайдені</string>
+  <string name="no_depiction_found">Описів зображеного не знайдено</string>
   <string name="upload_cancelled">Завантаження скасовано</string>
   <string name="previous_image_title_description_not_found">Відсутній заголовок або опис попереднього зображення</string>
   <string name="dialog_box_text_nomination">Чому %1$s має бути видалено?</string>
@@ -587,6 +595,9 @@
   <string name="place_type">Тип місця:</string>
   <string name="nearby_search_hint">Міст, музей, готель тощо</string>
   <string name="you_must_reset_your_passsword">Щось пішло не так із процесом входу, ви маєте скинути пароль !</string>
+  <string name="title_for_media">МЕДІА</string>
+  <string name="title_for_child_classes">ДОЧІРНІ КЛАСИ</string>
+  <string name="title_for_parent_classes">БАТЬКІВСЬКІ КЛАСИ</string>
   <string name="upload_nearby_place_found_title">Знайдено місце поблизу</string>
   <string name="upload_nearby_place_found_description">Чи це — фото місця %1$s?</string>
   <string name="title_app_shortcut_explore">Дослідити</string>
@@ -605,4 +616,5 @@
   <string name="ask_to_turn_location_on">Увімкнути визначення місця розташування?</string>
   <string name="nearby_needs_location">«Поблизу» потребує увімкненого визначення місця розташування, щоб працювати належним чином</string>
   <string name="use_location_from_similar_image">Ви зробили ці два знімки в одному й тому ж місці? Хочете використати широту/довготу зображення справа?</string>
+  <string name="nearby_no_results">Місць не знайдено, спробуйте змінити критерії пошуку.</string>
 </resources>
