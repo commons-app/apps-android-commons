@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
-import androidx.lifecycle.LiveData;
+import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -15,40 +15,55 @@ import java.util.List;
 @Dao
 public abstract class ContributionDao {
 
-    @Query("SELECT * FROM contribution order by dateUploaded DESC")
-    abstract LiveData<List<Contribution>> fetchContributions();
+  @Query("SELECT * FROM contribution order by dateUploaded DESC")
+  abstract DataSource.Factory<Integer, Contribution> fetchContributions();
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public abstract Single<Long> save(Contribution contribution);
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  public abstract void saveSynchronous(Contribution contribution);
 
-    public Completable deleteAllAndSave(List<Contribution> contributions){
-        return Completable.fromAction(() -> deleteAllAndSaveTransaction(contributions));
-    }
+  public Completable save(final Contribution contribution) {
+    return Completable
+        .fromAction(() -> saveSynchronous(contribution));
+  }
 
-    @Transaction
-    public void deleteAllAndSaveTransaction(List<Contribution> contributions){
-        deleteAll(Contribution.STATE_COMPLETED);
-        save(contributions);
-    }
+  @Transaction
+  public void deleteAndSaveContribution(final Contribution oldContribution,
+      final Contribution newContribution) {
+    deleteSynchronous(oldContribution);
+    saveSynchronous(newContribution);
+  }
 
-    @Insert
-    public abstract void save(List<Contribution> contribution);
+  public Completable saveAndDelete(final Contribution oldContribution,
+      final Contribution newContribution) {
+    return Completable
+        .fromAction(() -> deleteAndSaveContribution(oldContribution, newContribution));
+  }
 
-    @Delete
-    public abstract Single<Integer> delete(Contribution contribution);
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  public abstract Single<List<Long>> save(List<Contribution> contribution);
 
-    @Query("SELECT * from contribution WHERE filename=:fileName")
-    public abstract List<Contribution> getContributionWithTitle(String fileName);
+  @Delete
+  public abstract void deleteSynchronous(Contribution contribution);
 
-    @Query("UPDATE contribution SET state=:state WHERE state in (:toUpdateStates)")
-    public abstract Single<Integer> updateStates(int state, int[] toUpdateStates);
+  public Completable delete(final Contribution contribution) {
+    return Completable
+        .fromAction(() -> deleteSynchronous(contribution));
+  }
 
-    @Query("Delete FROM contribution")
-    public abstract void deleteAll();
+  @Query("SELECT * from contribution WHERE filename=:fileName")
+  public abstract List<Contribution> getContributionWithTitle(String fileName);
 
-    @Query("Delete FROM contribution WHERE state = :state")
-    public abstract void deleteAll(int state);
+  @Query("UPDATE contribution SET state=:state WHERE state in (:toUpdateStates)")
+  public abstract Single<Integer> updateStates(int state, int[] toUpdateStates);
 
-    @Update
-    public abstract Single<Integer> update(Contribution contribution);
+  @Query("Delete FROM contribution")
+  public abstract void deleteAll();
+
+  @Update
+  public abstract void updateSynchronous(Contribution contribution);
+
+  public Completable update(final Contribution contribution) {
+    return Completable
+        .fromAction(() -> updateSynchronous(contribution));
+  }
 }

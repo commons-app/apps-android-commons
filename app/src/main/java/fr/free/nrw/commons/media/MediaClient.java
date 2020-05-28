@@ -32,6 +32,7 @@ public class MediaClient {
 
     //OkHttpJsonApiClient used JsonKvStore for this. I don't know why.
     private Map<String, Map<String, String>> continuationStore;
+    private Map<String, Boolean> continuationExists;
     public static final String NO_CAPTION = "No caption";
     private static final String NO_DEPICTION = "No depiction";
 
@@ -40,6 +41,7 @@ public class MediaClient {
         this.mediaInterface = mediaInterface;
         this.mediaDetailInterface = mediaDetailInterface;
         this.continuationStore = new HashMap<>();
+        this.continuationExists = new HashMap<>();
     }
 
     /**
@@ -84,6 +86,36 @@ public class MediaClient {
     }
 
     /**
+     * This method takes the userName as input and returns a list of  Media objects filtered using
+     * allimages query It uses the allimages query API to get the images contributed by the userName,
+     * 10 at a time.
+     *
+     * @param userName the username
+     * @return
+     */
+    public Single<List<Media>> getMediaListForUser(String userName) {
+        Map<String, String> continuation =
+            continuationStore.containsKey("user_" + userName)
+                ? continuationStore.get("user_" + userName)
+                : Collections.emptyMap();
+        return responseToMediaList(mediaInterface
+            .getMediaListForUser(userName, 10, continuation), "user_" + userName);
+    }
+
+    /**
+     * Check if media for user has reached the end of the list.
+     * @param userName
+     * @return
+     */
+    public boolean doesMediaListForUserHaveMorePages(String userName) {
+        final String key = "user_" + userName;
+        if(continuationExists.containsKey(key)) {
+            return continuationExists.get(key);
+        }
+        return true;
+    }
+
+    /**
      * This method takes a keyword as input and returns a list of  Media objects filtered using image generator query
      * It uses the generator query API to get the images searched using a query, 10 at a time.
      *
@@ -104,7 +136,12 @@ public class MediaClient {
                     || null == mwQueryResponse.query().pages()) {
                 return Observable.empty();
             }
-            continuationStore.put(key, mwQueryResponse.continuation());
+            if(mwQueryResponse.continuation() != null) {
+                continuationStore.put(key, mwQueryResponse.continuation());
+                continuationExists.put(key, true);
+            } else {
+                continuationExists.put(key, false);
+            }
             return Observable.fromIterable(mwQueryResponse.query().pages());
         })
                 .map(Media::from)
@@ -169,7 +206,7 @@ public class MediaClient {
      * @return  caption for image using wikibaseIdentifier
      */
     public Single<String> getCaptionByWikibaseIdentifier(String wikibaseIdentifier) {
-        return mediaDetailInterface.getCaptionForImage(Locale.getDefault().getLanguage(), wikibaseIdentifier)
+        return mediaDetailInterface.getEntityForImage(Locale.getDefault().getLanguage(), wikibaseIdentifier)
                 .map(mediaDetailResponse -> {
                     if (isSuccess(mediaDetailResponse)) {
                         for (Entity wikibaseItem : mediaDetailResponse.entities().values()) {
@@ -205,12 +242,16 @@ public class MediaClient {
      * @param entityId  EntityId (Ex: Q81566) of the depict entity
      * @return label
      */
-    public Single<String> getLabelForDepiction(String entityId) {
-        return getEntities(entityId)
+    public Single<String> getLabelForDepiction(String entityId, String language) {
+        return mediaDetailInterface.getEntity(entityId)
                 .map(entities -> {
                     if (isSuccess(entities)) {
                         for (Entity entity : entities.entities().values()) {
-                            for (Label label : entity.labels().values()) {
+                            final Map<String, Label> languageToLabelMap = entity.labels();
+                            if (languageToLabelMap.containsKey(language)) {
+                                return languageToLabelMap.get(language).value();
+                            }
+                            for (Label label : languageToLabelMap.values()) {
                                 return label.value();
                             }
                         }
@@ -220,6 +261,6 @@ public class MediaClient {
     }
 
     public Single<Entities> getEntities(String entityId) {
-        return mediaDetailInterface.getEntity(entityId, Locale.getDefault().getLanguage());
+        return mediaDetailInterface.getEntity(entityId);
     }
 }

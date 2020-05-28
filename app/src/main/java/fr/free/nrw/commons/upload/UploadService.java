@@ -23,9 +23,14 @@ import fr.free.nrw.commons.di.CommonsDaggerService;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
+import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import io.reactivex.processors.PublishProcessor;
 import io.reactivex.schedulers.Schedulers;
 import java.io.File;
@@ -33,6 +38,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.inject.Inject;
@@ -106,10 +112,10 @@ public class UploadService extends CommonsDaggerService {
             notificationManager.notify(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
 
             contribution.setTransferred(transferred);
-            compositeDisposable.add(contributionDao.
-                    save(contribution).subscribeOn(ioThreadScheduler)
-                    .observeOn(mainThreadScheduler)
-                    .subscribe());
+
+            compositeDisposable.add(contributionDao.update(contribution)
+                .subscribeOn(ioThreadScheduler)
+                .subscribe());
         }
 
     }
@@ -156,14 +162,11 @@ public class UploadService extends CommonsDaggerService {
             Timber.d("%d uploads left", toUpload);
             notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
         }
+
         compositeDisposable.add(contributionDao
             .save(contribution)
             .subscribeOn(ioThreadScheduler)
-            .observeOn(mainThreadScheduler)
-            .subscribe(aLong->{
-                contribution.set_id(aLong);
-                uploadContribution(contribution);
-            }, Throwable::printStackTrace));
+            .subscribe(() -> uploadContribution(contribution)));
     }
 
     private boolean freshStart = true;
@@ -269,7 +272,7 @@ public class UploadService extends CommonsDaggerService {
     }
 
     private void onUpload(Contribution contribution, String notificationTag,
-        UploadResult uploadResult) throws ParseException {
+        UploadResult uploadResult) {
         Timber.d("Stash upload response 2 is %s", uploadResult.toString());
 
         notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
@@ -282,8 +285,7 @@ public class UploadService extends CommonsDaggerService {
         }
     }
 
-    private void onSuccessfulUpload(Contribution contribution, UploadResult uploadResult)
-        throws ParseException {
+    private void onSuccessfulUpload(Contribution contribution, UploadResult uploadResult) {
         compositeDisposable
             .add(wikidataEditService.addDepictionsAndCaptions(uploadResult, contribution));
         WikidataPlace wikidataPlace = contribution.getWikidataPlace();
@@ -293,17 +295,11 @@ public class UploadService extends CommonsDaggerService {
         saveCompletedContribution(contribution, uploadResult);
     }
 
-    private void saveCompletedContribution(Contribution contribution, UploadResult uploadResult) throws ParseException {
-        contribution.setFilename(uploadResult.createCanonicalFileName());
-        contribution.setImageUrl(uploadResult.getImageinfo().getOriginalUrl());
-        contribution.setState(Contribution.STATE_COMPLETED);
-        contribution.setDateUploaded(CommonsDateUtil.getIso8601DateFormatTimestamp()
-            .parse(uploadResult.getImageinfo().getTimestamp()));
-        compositeDisposable.add(contributionDao
-            .save(contribution)
-            .subscribeOn(ioThreadScheduler)
-            .observeOn(mainThreadScheduler)
-            .subscribe());
+    private void saveCompletedContribution(Contribution contribution, UploadResult uploadResult) {
+        compositeDisposable.add(mediaClient.getMedia("File:" + uploadResult.getFilename())
+        .map(media -> new Contribution(media, Contribution.STATE_COMPLETED))
+        .flatMapCompletable(newContribution -> contributionDao.saveAndDelete(contribution, newContribution))
+        .subscribe());
     }
 
     @SuppressLint("StringFormatInvalid")
@@ -317,10 +313,11 @@ public class UploadService extends CommonsDaggerService {
         notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_FAILED, curNotification.build());
 
         contribution.setState(Contribution.STATE_FAILED);
-        compositeDisposable.add(contributionDao.save(contribution)
-                .subscribeOn(ioThreadScheduler)
-                .observeOn(mainThreadScheduler)
-                .subscribe());
+
+        compositeDisposable.add(contributionDao
+            .update(contribution)
+            .subscribeOn(ioThreadScheduler)
+            .subscribe());
     }
 
     private String findUniqueFilename(String fileName) throws IOException {

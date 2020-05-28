@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.media.Depictions;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
+import java.util.UUID;
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.gallery.ExtMetadata;
@@ -50,6 +53,8 @@ public class Media implements Parcelable {
     /**
      * Wikibase Identifier associated with media files
      */
+    @PrimaryKey
+    @NonNull
     private String pageId;
     private List<String> categories; // as loaded at runtime?
     /**
@@ -64,14 +69,28 @@ public class Media implements Parcelable {
      * Provides local constructor
      */
     public Media() {
+        pageId = UUID.randomUUID().toString();
     }
+
+    public static final Creator<Media> CREATOR = new Creator<Media>() {
+        @Override
+        public Media createFromParcel(final Parcel source) {
+            return new Media(source);
+        }
+
+        @Override
+        public Media[] newArray(final int size) {
+            return new Media[size];
+        }
+    };
 
     /**
      * Provides a minimal constructor
      *
      * @param filename Media filename
      */
-    public Media(String filename) {
+    public Media(final String filename) {
+        this();
         this.filename = filename;
     }
 
@@ -86,11 +105,13 @@ public class Media implements Parcelable {
      * @param dateUploaded Media date uploaded
      * @param creator Media creator
      */
-    public Media(Uri localUri, String imageUrl, String filename,
-        String description,
-        long dataLength, Date dateCreated, Date dateUploaded, String creator) {
+    public Media(final Uri localUri, final String imageUrl, final String filename,
+        final String description,
+        final long dataLength, final Date dateCreated, final Date dateUploaded,
+        final String creator) {
+        this();
         this.localUri = localUri;
-        this.thumbUrl = imageUrl;
+        thumbUrl = imageUrl;
         this.imageUrl = imageUrl;
         this.filename = filename;
         this.description = description;
@@ -100,15 +121,78 @@ public class Media implements Parcelable {
         this.creator = creator;
     }
 
-    public Media(Uri localUri, String filename,
-        String description, String creator, List<String> categories) {
+    /**
+     * Constructor with all parameters
+     */
+    public Media(final String pageId,
+        final Uri localUri,
+        final String thumbUrl,
+        final String imageUrl,
+        final String filename,
+        final String description,
+        final String discussion,
+        final long dataLength,
+        final Date dateCreated,
+        final Date dateUploaded,
+        final String license,
+        final String licenseUrl,
+        final String creator,
+        final List<String> categories,
+        final boolean requestedDeletion,
+        final LatLng coordinates) {
+        this.pageId = pageId;
+        this.localUri = localUri;
+        this.thumbUrl = thumbUrl;
+        this.imageUrl = imageUrl;
+        this.filename = filename;
+        this.description = description;
+        this.discussion = discussion;
+        this.dataLength = dataLength;
+        this.dateCreated = dateCreated;
+        this.dateUploaded = dateUploaded;
+        this.license = license;
+        this.licenseUrl = licenseUrl;
+        this.creator = creator;
+        this.categories = categories;
+        this.requestedDeletion = requestedDeletion;
+        this.coordinates = coordinates;
+    }
+
+    public Media(final Uri localUri, final String filename,
+        final String description, final String creator, final List<String> categories) {
         this(localUri,null, filename,
             description, -1, null, new Date(), creator);
         this.categories = categories;
     }
 
-    public Media(String title, Date date, String user) {
+    public Media(final String title, final Date date, final String user) {
         this(null, null, title, "", -1, date, date, user);
+    }
+
+    protected Media(final Parcel in) {
+        localUri = in.readParcelable(Uri.class.getClassLoader());
+        thumbUrl = in.readString();
+        imageUrl = in.readString();
+        filename = in.readString();
+        thumbnailTitle = in.readString();
+        caption = in.readString();
+        description = in.readString();
+        discussion = in.readString();
+        dataLength = in.readLong();
+        final long tmpDateCreated = in.readLong();
+        dateCreated = tmpDateCreated == -1 ? null : new Date(tmpDateCreated);
+        final long tmpDateUploaded = in.readLong();
+        dateUploaded = tmpDateUploaded == -1 ? null : new Date(tmpDateUploaded);
+        license = in.readString();
+        licenseUrl = in.readString();
+        creator = in.readString();
+        pageId = in.readString();
+        final ArrayList<String> list = new ArrayList<>();
+        in.readStringList(list);
+        categories = list;
+        in.readParcelable(Depictions.class.getClassLoader());
+        requestedDeletion = in.readByte() != 0;
+        coordinates = in.readParcelable(LatLng.class.getClassLoader());
     }
 
     /**
@@ -120,14 +204,14 @@ public class Media implements Parcelable {
      * @return Media object
      */
     @NonNull
-    public static Media from(MwQueryPage page) {
-        ImageInfo imageInfo = page.imageInfo();
+    public static Media from(final MwQueryPage page) {
+        final ImageInfo imageInfo = page.imageInfo();
         if (imageInfo == null) {
             return new Media(); // null is not allowed
         }
-        ExtMetadata metadata = imageInfo.getMetadata();
+        final ExtMetadata metadata = imageInfo.getMetadata();
         if (metadata == null) {
-            Media media = new Media(null, imageInfo.getOriginalUrl(),
+            final Media media = new Media(null, imageInfo.getOriginalUrl(),
                     page.title(), "", 0, null, null, null);
             if (!StringUtils.isBlank(imageInfo.getThumbUrl())) {
                 media.setThumbUrl(imageInfo.getThumbUrl());
@@ -135,7 +219,7 @@ public class Media implements Parcelable {
             return media;
         }
 
-        Media media = new Media(null,
+        final Media media = new Media(null,
                 imageInfo.getOriginalUrl(),
                 page.title(),
             "",
@@ -158,11 +242,12 @@ public class Media implements Parcelable {
 
         media.setDescription(metadata.imageDescription());
         media.setCategories(MediaDataExtractorUtil.extractCategoriesFromList(metadata.getCategories()));
-        String latitude = metadata.getGpsLatitude();
-        String longitude = metadata.getGpsLongitude();
+        final String latitude = metadata.getGpsLatitude();
+        final String longitude = metadata.getGpsLongitude();
 
         if (!StringUtils.isBlank(latitude) && !StringUtils.isBlank(longitude)) {
-            LatLng latLng = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude), 0);
+            final LatLng latLng = new LatLng(Double.parseDouble(latitude),
+                Double.parseDouble(longitude), 0);
             media.setCoordinates(latLng);
         }
 
@@ -175,29 +260,17 @@ public class Media implements Parcelable {
      * @param metadata
      * @return
      */
-    private static String getArtist(ExtMetadata metadata) {
+    private static String getArtist(final ExtMetadata metadata) {
         try {
-            String artistHtml = metadata.artist();
+            final String artistHtml = metadata.artist();
             return artistHtml.substring(artistHtml.indexOf("title=\""), artistHtml.indexOf("\">"))
                     .replace("title=\"User:", "");
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             return "";
         }
     }
 
-    /**
-     * @return pageId for the current media object*/
-    public String getPageId() {
-        return pageId;
-    }
-
-    /**
-     *sets pageId for the current media object
-     */
-    public void setPageId(String pageId) {
-        this.pageId = pageId;
-    }
-
+    @Nullable
     public String getThumbUrl() {
         return thumbUrl;
     }
@@ -210,11 +283,13 @@ public class Media implements Parcelable {
         return filename != null ? getPageTitle().getDisplayTextWithoutNamespace().replaceFirst("[.][^.]+$", "") : "";
     }
 
-    /**
-     * Set Caption(if available) as the thumbnail title of the image
-     */
-    public void setThumbnailTitle(String title) {
-        this.thumbnailTitle = title;
+    @Nullable
+    private static Date safeParseDate(final String dateStr) {
+        try {
+            return CommonsDateUtil.getMediaSimpleDateFormat().parse(dateStr);
+        } catch (final ParseException e) {
+            return null;
+        }
     }
 
     /**
@@ -260,19 +335,17 @@ public class Media implements Parcelable {
     }
 
     /**
-     * Sets the name of the file.
-     * @param filename the new name of the file
-     */
-    public void setFilename(String filename) {
-        this.filename = filename;
+     * @return pageId for the current media object*/
+    @NonNull
+    public String getPageId() {
+        return pageId;
     }
 
     /**
-     * Sets the discussion of the file.
-     * @param discussion
+     *sets pageId for the current media object
      */
-    public void setDiscussion(String discussion) {
-        this.discussion = discussion;
+    public void setPageId(final String pageId) {
+        this.pageId = pageId;
     }
 
     /**
@@ -310,11 +383,11 @@ public class Media implements Parcelable {
     }
 
     /**
-     * Sets the file description.
-     * @param description the new description of the file
+     * Sets the name of the file.
+     * @param filename the new name of the file
      */
-    public void setDescription(String description) {
-        this.description = description;
+    public void setFilename(final String filename) {
+        this.filename = filename;
     }
 
     /**
@@ -326,11 +399,11 @@ public class Media implements Parcelable {
     }
 
     /**
-     * Sets the dataLength of the file.
-     * @param dataLength as a long
+     * Sets the discussion of the file.
+     * @param discussion
      */
-    public void setDataLength(long dataLength) {
-        this.dataLength = dataLength;
+    public void setDiscussion(final String discussion) {
+        this.discussion = discussion;
     }
 
     /**
@@ -342,11 +415,11 @@ public class Media implements Parcelable {
     }
 
     /**
-     * Sets the creation date of the file.
-     * @param date creation date as a Date
+     * Sets the file description.
+     * @param description the new description of the file
      */
-    public void setDateCreated(Date date) {
-        this.dateCreated = date;
+    public void setDescription(final String description) {
+        this.description = description;
     }
 
     /**
@@ -368,11 +441,11 @@ public class Media implements Parcelable {
     }
 
     /**
-     * Sets the creator name of the file.
-     * @param creator creator name as a string
+     * Sets the dataLength of the file.
+     * @param dataLength as a long
      */
-    public void setCreator(String creator) {
-        this.creator = creator;
+    public void setDataLength(final long dataLength) {
+        this.dataLength = dataLength;
     }
 
     /**
@@ -383,8 +456,11 @@ public class Media implements Parcelable {
         return license;
     }
 
-    public void setThumbUrl(String thumbUrl) {
-        this.thumbUrl = thumbUrl;
+    /**
+     * Set Caption(if available) as the thumbnail title of the image
+     */
+    public void setThumbnailTitle(final String title) {
+        thumbnailTitle = title;
     }
 
     public String getLicenseUrl() {
@@ -392,16 +468,11 @@ public class Media implements Parcelable {
     }
 
     /**
-     * Sets the license name of the file.
-     * @param license license name as a String
+     * Sets the creator name of the file.
+     * @param creator creator name as a string
      */
-    public void setLicenseInformation(String license, String licenseUrl) {
-        this.license = license;
-
-        if (!licenseUrl.startsWith("http://") && !licenseUrl.startsWith("https://")) {
-            licenseUrl = "https://" + licenseUrl;
-        }
-        this.licenseUrl = licenseUrl;
+    public void setCreator(final String creator) {
+        this.creator = creator;
     }
 
     /**
@@ -413,12 +484,8 @@ public class Media implements Parcelable {
         return coordinates;
     }
 
-    /**
-     * Sets the coordinates of where the file was created.
-     * @param coordinates file coordinates as a LatLng
-     */
-    public void setCoordinates(@Nullable LatLng coordinates) {
-        this.coordinates = coordinates;
+    public void setThumbUrl(final String thumbUrl) {
+        this.thumbUrl = thumbUrl;
     }
 
     /**
@@ -431,30 +498,35 @@ public class Media implements Parcelable {
     }
 
     /**
+     * Sets the license name of the file.
+     * @param license license name as a String
+     */
+    public void setLicenseInformation(final String license, String licenseUrl) {
+        this.license = license;
+
+        if (!licenseUrl.startsWith("http://") && !licenseUrl.startsWith("https://")) {
+            licenseUrl = "https://" + licenseUrl;
+        }
+        this.licenseUrl = licenseUrl;
+    }
+
+    /**
+     * Sets the coordinates of where the file was created.
+     * @param coordinates file coordinates as a LatLng
+     */
+    public void setCoordinates(@Nullable final LatLng coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    /**
      * Sets the categories the file falls under.
      * </p>
      * Does not append: i.e. will clear the current categories
      * and then add the specified ones.
      * @param categories file categories as a list of Strings
      */
-    public void setCategories(List<String> categories) {
+    public void setCategories(final List<String> categories) {
         this.categories = categories;
-    }
-
-    @Nullable private static Date safeParseDate(String dateStr) {
-        try {
-            return CommonsDateUtil.getIso8601DateFormatShort().parse(dateStr);
-        } catch (ParseException e) {
-            return null;
-        }
-    }
-
-    /**
-     * Set requested deletion to true
-     * @param requestedDeletion
-     */
-    public void setRequestedDeletion(boolean requestedDeletion){
-        this.requestedDeletion = requestedDeletion;
     }
 
     /**
@@ -466,11 +538,19 @@ public class Media implements Parcelable {
     }
 
     /**
+     * Set requested deletion to true
+     * @param requestedDeletion
+     */
+    public void setRequestedDeletion(final boolean requestedDeletion) {
+        this.requestedDeletion = requestedDeletion;
+    }
+
+    /**
      * Sets the license name of the file.
      *
      * @param license license name as a String
      */
-    public void setLicense(String license) {
+    public void setLicense(final String license) {
         this.license = license;
     }
 
@@ -482,13 +562,8 @@ public class Media implements Parcelable {
      * This function sets captions
      * @param caption
      */
-    public void setCaption(String caption) {
+    public void setCaption(final String caption) {
         this.caption = caption;
-    }
-
-    /* Sets depictions for the current media obtained fro  Wikibase API*/
-    public void setDepictions(Depictions depictions) {
-        this.depictions = depictions;
     }
 
     public void setLocalUri(@Nullable final Uri localUri) {
@@ -516,6 +591,19 @@ public class Media implements Parcelable {
         return 0;
     }
 
+    /* Sets depictions for the current media obtained fro  Wikibase API*/
+    public void setDepictions(final Depictions depictions) {
+        this.depictions = depictions;
+    }
+
+    /**
+     * Sets the creation date of the file.
+     * @param date creation date as a Date
+     */
+    public void setDateCreated(final Date date) {
+        dateCreated = date;
+    }
+
     /**
      * Creates a way to transfer information between two or more
      * activities.
@@ -523,63 +611,70 @@ public class Media implements Parcelable {
      * @param flags Parcel flag
      */
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(this.localUri, flags);
-        dest.writeString(this.thumbUrl);
-        dest.writeString(this.imageUrl);
-        dest.writeString(this.filename);
-        dest.writeString(this.thumbnailTitle);
-        dest.writeString(this.caption);
-        dest.writeString(this.description);
-        dest.writeString(this.discussion);
-        dest.writeLong(this.dataLength);
-        dest.writeLong(this.dateCreated != null ? this.dateCreated.getTime() : -1);
-        dest.writeLong(this.dateUploaded != null ? this.dateUploaded.getTime() : -1);
-        dest.writeString(this.license);
-        dest.writeString(this.licenseUrl);
-        dest.writeString(this.creator);
-        dest.writeString(this.pageId);
-        dest.writeStringList(this.categories);
-        dest.writeParcelable(this.depictions, flags);
-        dest.writeByte(this.requestedDeletion ? (byte) 1 : (byte) 0);
-        dest.writeParcelable(this.coordinates, flags);
+    public void writeToParcel(final Parcel dest, final int flags) {
+        dest.writeParcelable(localUri, flags);
+        dest.writeString(thumbUrl);
+        dest.writeString(imageUrl);
+        dest.writeString(filename);
+        dest.writeString(thumbnailTitle);
+        dest.writeString(caption);
+        dest.writeString(description);
+        dest.writeString(discussion);
+        dest.writeLong(dataLength);
+        dest.writeLong(dateCreated != null ? dateCreated.getTime() : -1);
+        dest.writeLong(dateUploaded != null ? dateUploaded.getTime() : -1);
+        dest.writeString(license);
+        dest.writeString(licenseUrl);
+        dest.writeString(creator);
+        dest.writeString(pageId);
+        dest.writeStringList(categories);
+        dest.writeParcelable(depictions, flags);
+        dest.writeByte(requestedDeletion ? (byte) 1 : (byte) 0);
+        dest.writeParcelable(coordinates, flags);
     }
 
-    protected Media(Parcel in) {
-        this.localUri = in.readParcelable(Uri.class.getClassLoader());
-        this.thumbUrl = in.readString();
-        this.imageUrl = in.readString();
-        this.filename = in.readString();
-        this.thumbnailTitle = in.readString();
-        this.caption = in.readString();
-        this.description = in.readString();
-        this.discussion = in.readString();
-        this.dataLength = in.readLong();
-        long tmpDateCreated = in.readLong();
-        this.dateCreated = tmpDateCreated == -1 ? null : new Date(tmpDateCreated);
-        long tmpDateUploaded = in.readLong();
-        this.dateUploaded = tmpDateUploaded == -1 ? null : new Date(tmpDateUploaded);
-        this.license = in.readString();
-        this.licenseUrl = in.readString();
-        this.creator = in.readString();
-        this.pageId = in.readString();
-        final ArrayList<String> list = new ArrayList<>();
-        in.readStringList(list);
-        this.categories=list;
-        in.readParcelable(Depictions.class.getClassLoader());
-        this.requestedDeletion = in.readByte() != 0;
-        this.coordinates = in.readParcelable(LatLng.class.getClassLoader());
+    /**
+     * Equals implementation that matches all parameters for equality check
+     */
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Media)) {
+            return false;
+        }
+        final Media media = (Media) o;
+        return getDataLength() == media.getDataLength() &&
+            isRequestedDeletion() == media.isRequestedDeletion() &&
+            Objects.equals(getLocalUri(), media.getLocalUri()) &&
+            Objects.equals(getThumbUrl(), media.getThumbUrl()) &&
+            Objects.equals(getImageUrl(), media.getImageUrl()) &&
+            Objects.equals(getFilename(), media.getFilename()) &&
+            Objects.equals(getThumbnailTitle(), media.getThumbnailTitle()) &&
+            Objects.equals(getCaption(), media.getCaption()) &&
+            Objects.equals(getDescription(), media.getDescription()) &&
+            Objects.equals(getDiscussion(), media.getDiscussion()) &&
+            Objects.equals(getDateCreated(), media.getDateCreated()) &&
+            Objects.equals(getDateUploaded(), media.getDateUploaded()) &&
+            Objects.equals(getLicense(), media.getLicense()) &&
+            Objects.equals(getLicenseUrl(), media.getLicenseUrl()) &&
+            Objects.equals(getCreator(), media.getCreator()) &&
+            getPageId().equals(media.getPageId()) &&
+            Objects.equals(getCategories(), media.getCategories()) &&
+            Objects.equals(getDepictions(), media.getDepictions()) &&
+            Objects.equals(getCoordinates(), media.getCoordinates());
     }
 
-    public static final Creator<Media> CREATOR = new Creator<Media>() {
-        @Override
-        public Media createFromParcel(Parcel source) {
-            return new Media(source);
-        }
-
-        @Override
-        public Media[] newArray(int size) {
-            return new Media[size];
-        }
-    };
+    /**
+     * Hashcode implementation that uses all parameters for calculating hash
+     */
+    @Override
+    public int hashCode() {
+        return Objects
+            .hash(getLocalUri(), getThumbUrl(), getImageUrl(), getFilename(), getThumbnailTitle(),
+                getCaption(), getDescription(), getDiscussion(), getDataLength(), getDateCreated(),
+                getDateUploaded(), getLicense(), getLicenseUrl(), getCreator(), getPageId(),
+                getCategories(), getDepictions(), isRequestedDeletion(), getCoordinates());
+    }
 }

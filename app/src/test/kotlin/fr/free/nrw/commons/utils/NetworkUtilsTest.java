@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 
+import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,34 +29,30 @@ public class NetworkUtilsTest {
 
     @Test
     public void testInternetConnectionEstablished() {
-        Context mockContext = mock(Context.class);
-        Application mockApplication = mock(Application.class);
-        ConnectivityManager mockConnectivityManager = mock(ConnectivityManager.class);
-        NetworkInfo mockNetworkInfo = mock(NetworkInfo.class);
-        when(mockNetworkInfo.isConnectedOrConnecting())
-                .thenReturn(true);
-        when(mockConnectivityManager.getActiveNetworkInfo())
-                .thenReturn(mockNetworkInfo);
-        when(mockApplication.getSystemService(Context.CONNECTIVITY_SERVICE))
-                .thenReturn(mockConnectivityManager);
-        when(mockContext.getApplicationContext()).thenReturn(mockApplication);
+        Context mockContext = getContext(true);
         boolean internetConnectionEstablished = NetworkUtils.isInternetConnectionEstablished(mockContext);
         assertTrue(internetConnectionEstablished);
     }
 
-    @Test
-    public void testInternetConnectionNotEstablished() {
+    @NotNull
+    public static Context getContext(boolean connectionEstablished) {
         Context mockContext = mock(Context.class);
         Application mockApplication = mock(Application.class);
         ConnectivityManager mockConnectivityManager = mock(ConnectivityManager.class);
         NetworkInfo mockNetworkInfo = mock(NetworkInfo.class);
         when(mockNetworkInfo.isConnectedOrConnecting())
-                .thenReturn(false);
+            .thenReturn(connectionEstablished);
         when(mockConnectivityManager.getActiveNetworkInfo())
-                .thenReturn(mockNetworkInfo);
+            .thenReturn(mockNetworkInfo);
         when(mockApplication.getSystemService(Context.CONNECTIVITY_SERVICE))
-                .thenReturn(mockConnectivityManager);
+            .thenReturn(mockConnectivityManager);
         when(mockContext.getApplicationContext()).thenReturn(mockApplication);
+        return mockContext;
+    }
+
+    @Test
+    public void testInternetConnectionNotEstablished() {
+        Context mockContext = getContext(false);
         boolean internetConnectionEstablished = NetworkUtils.isInternetConnectionEstablished(mockContext);
         assertFalse(internetConnectionEstablished);
     }

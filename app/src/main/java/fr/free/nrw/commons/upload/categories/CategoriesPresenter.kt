@@ -60,7 +60,7 @@ class CategoriesPresenter @Inject constructor(
     }
 
     private fun searchResults(term: String) =
-        repository.searchAll(term, getImageTitleList())
+        repository.searchAll(term, getImageTitleList(), repository.selectedDepictions)
             .subscribeOn(ioScheduler)
             .map { it.filterNot { categoryItem -> repository.containsYear(categoryItem.name) } }
 

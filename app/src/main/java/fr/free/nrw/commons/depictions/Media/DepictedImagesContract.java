@@ -90,8 +90,9 @@ public interface DepictedImagesContract {
 
         /**
          * Fetches more images for the item and adds it to the grid view adapter
+         * @param entityId
          */
-        void fetchMoreImages();
+        void fetchMoreImages(String entityId);
 
         /**
          * fetch captions for the image using filename and replace title of on the image thumbnail(if captions are available)

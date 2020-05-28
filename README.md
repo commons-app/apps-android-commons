@@ -13,7 +13,7 @@ Initially started by the Wikimedia Foundation, this app is now maintained by gra
 
 ## Documentation
 
-We try to have an extensive documentation at [our wiki here at Github][4]:
+We try to have an extensive documentation at our [documentation repository][4]:
 
 * [User Documentation][5]
 * [Contributor Documentation][6]
@@ -45,11 +45,11 @@ This software is open source, licensed under the [Apache License 2.0][10].
 [2]: https://commons-app.github.io/
 [3]: https://github.com/commons-app/apps-android-commons/issues
 
-[4]: https://github.com/commons-app/apps-android-commons/wiki
-[5]: https://github.com/commons-app/apps-android-commons/wiki#user-documentation
-[6]: https://github.com/commons-app/apps-android-commons/wiki#contributor-documentation
-[7]: https://github.com/commons-app/apps-android-commons/wiki/Volunteers-welcome%21
-[8]: https://github.com/commons-app/apps-android-commons/wiki#developer-documentation
-[9]: https://github.com/commons-app/apps-android-commons/wiki/Libraries-used
+[4]: https://github.com/commons-app/commons-app-documentation/blob/master/android/README.md#-android-documentation
+[5]: https://github.com/commons-app/commons-app-documentation/blob/master/android/README.md#-user-documentation
+[6]: https://github.com/commons-app/commons-app-documentation/blob/master/android/README.md#️-contributor-documentation
+[7]: https://github.com/commons-app/commons-app-documentation/blob/master/android/Volunteers-welcome!.md#volunteers-welcome
+[8]: https://github.com/commons-app/commons-app-documentation/blob/master/android/README.md#-developer-documentation
+[9]: https://github.com/commons-app/commons-app-documentation/blob/master/android/Libraries-used.md#libraries-used
 
 [10]: https://www.apache.org/licenses/LICENSE-2.0

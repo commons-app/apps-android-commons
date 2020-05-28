@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
+import java.util.Collections;
 
 public class NearbyFilterSearchRecyclerViewAdapter
         extends RecyclerView.Adapter<NearbyFilterSearchRecyclerViewAdapter.RecyclerViewHolder>

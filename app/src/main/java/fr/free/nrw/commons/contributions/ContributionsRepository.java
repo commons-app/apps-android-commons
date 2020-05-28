@@ -1,12 +1,11 @@
 package fr.free.nrw.commons.contributions;
 
-import androidx.lifecycle.LiveData;
-
+import androidx.paging.DataSource.Factory;
+import io.reactivex.Completable;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Completable;
 import io.reactivex.Single;
 
 /**
@@ -33,7 +32,7 @@ public class ContributionsRepository {
      * @param contribution
      * @return
      */
-    public Single<Integer> deleteContributionFromDB(Contribution contribution) {
+    public Completable deleteContributionFromDB(Contribution contribution) {
         return localDataSource.deleteContribution(contribution);
     }
 
@@ -46,11 +45,11 @@ public class ContributionsRepository {
         return localDataSource.getContributionWithFileName(fileName);
     }
 
-    public LiveData<List<Contribution>> fetchContributions() {
+    public Factory<Integer, Contribution> fetchContributions() {
         return localDataSource.getContributions();
     }
 
-    public Completable save(List<Contribution> contributions) {
+    public Single<List<Long>> save(List<Contribution> contributions) {
         return localDataSource.saveContributions(contributions);
     }
 
@@ -58,11 +57,7 @@ public class ContributionsRepository {
         localDataSource.set(key,value);
     }
 
-    public long getLong(String key) {
-        return localDataSource.getLong(key);
-    }
-
-    public Single<Integer> updateContribution(Contribution contribution) {
+    public Completable updateContribution(Contribution contribution) {
         return localDataSource.updateContribution(contribution);
     }
 }
