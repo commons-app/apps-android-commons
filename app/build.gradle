@@ -45,6 +45,10 @@ dependencies {
     kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
     implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:$ADAPTER_DELEGATES_VERSION"
     implementation "com.hannesdorfmann:adapterdelegates4-pagination:$ADAPTER_DELEGATES_VERSION"
+    implementation "androidx.paging:paging-runtime-ktx:$PAGING_VERSION"
+    testImplementation "androidx.paging:paging-common-ktx:$PAGING_VERSION"
+    implementation "androidx.paging:paging-rxjava2-ktx:$PAGING_VERSION"
+    implementation "androidx.recyclerview:recyclerview:1.2.0-alpha02"
 
     // Logging
     implementation 'ch.acra:acra-dialog:5.3.0'
