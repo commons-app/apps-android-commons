@@ -7,9 +7,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import io.reactivex.Completable
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
@@ -17,9 +19,11 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentMatchers
+import org.mockito.ArgumentMatchers.*
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
+import java.util.concurrent.TimeUnit
 
 /**
  * The unit test class for ContributionsPresenter
@@ -42,7 +46,7 @@ class ContributionsPresenterTest {
 
     @Rule @JvmField var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    lateinit var scheduler : Scheduler
+    lateinit var scheduler : TestScheduler
 
     /**
      * initial setup
@@ -61,22 +65,12 @@ class ContributionsPresenterTest {
     }
 
     /**
-     * Test fetch contributions
-     */
-    @Test
-    fun testFetchContributions(){
-        whenever(repository.getString(ArgumentMatchers.anyString())).thenReturn("10")
-        whenever(repository.fetchContributions()).thenReturn(liveData)
-        contributionsPresenter.fetchContributions()
-        verify(repository).fetchContributions()
-    }
-
-    /**
      * Test presenter actions onDeleteContribution
      */
     @Test
     fun testDeleteContribution() {
-        whenever(repository.deleteContributionFromDB(ArgumentMatchers.any(Contribution::class.java))).thenReturn(Single.just(1))
+        whenever(repository.deleteContributionFromDB(ArgumentMatchers.any<Contribution>()))
+            .thenReturn(Completable.complete())
         contributionsPresenter.deleteUpload(contribution)
         verify(repository).deleteContributionFromDB(contribution)
     }

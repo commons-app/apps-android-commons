@@ -1,11 +1,9 @@
 package fr.free.nrw.commons.media;
 
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-
-import java.util.Map;
-
 import fr.free.nrw.commons.depictions.models.DepictionResponse;
 import io.reactivex.Observable;
+import java.util.Map;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -17,6 +15,7 @@ public interface MediaInterface {
     String MEDIA_PARAMS="&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640" +
             "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal" +
             "|Artist|LicenseShortName|LicenseUrl";
+
     /**
      * Checks if a page exists or not.
      *
@@ -47,6 +46,19 @@ public interface MediaInterface {
             "&generator=categorymembers&gcmtype=file&gcmsort=timestamp&gcmdir=desc" + //Category parameters
             MEDIA_PARAMS)
     Observable<MwQueryResponse> getMediaListFromCategory(@Query("gcmtitle") String category, @Query("gcmlimit") int itemLimit, @QueryMap Map<String, String> continuation);
+
+    /**
+     * This method retrieves a list of Media objects for a given user name
+     *
+     * @param username     user's Wikimedia Commons username.
+     * @param itemLimit    how many images are returned
+     * @param continuation the continuation string from the previous query or empty map
+     * @return
+     */
+    @GET("w/api.php?action=query&format=json&formatversion=2" + //Basic parameters
+        "&generator=allimages&gaisort=timestamp&gaidir=older" + MEDIA_PARAMS)
+    Observable<MwQueryResponse> getMediaListForUser(@Query("gaiuser") String username,
+        @Query("gailimit") int itemLimit, @QueryMap(encoded = true) Map<String, String> continuation);
 
     /**
      * This method retrieves a list of Media objects filtered using image generator query
@@ -86,21 +98,15 @@ public interface MediaInterface {
     Observable<MwParseResponse> getPageHtml(@Query("page") String title);
 
     /**
-     * Fetches caption using file name
-     *
-     * @param filename name of the file to be used for fetching captions
-     * */
-    @GET("w/api.php?action=wbgetentities&props=labels&format=json&languagefallback=1")
-    Observable<MwQueryResponse> fetchCaptionByFilename(@Query("language") String language, @Query("titles") String filename);
+   * Fetches list of images from a depiction entity
+   *
+   * @param query    depictionEntityId
+   * @param sroffset number od depictions already fetched, this is useful in implementing
+   *                 pagination
+   */
 
-    /**
-     * Fetches list of images from a depiction entity
-     *
-     * @param query depictionEntityId
-     * @param sroffset number od depictions already fetched, this is useful in implementing pagination
-     */
-
-    @GET("w/api.php?action=query&list=search&format=json&srnamespace=6")
-    Observable<DepictionResponse> fetchImagesForDepictedItem(@Query("srsearch") String query, @Query("sroffset") String sroffset);
+  @GET("w/api.php?action=query&list=search&format=json&srnamespace=6")
+  Observable<DepictionResponse> fetchImagesForDepictedItem(@Query("srsearch") String query,
+      @Query("sroffset") String sroffset);
 
 }

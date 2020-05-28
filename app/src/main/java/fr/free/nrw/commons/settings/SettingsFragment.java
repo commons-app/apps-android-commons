@@ -65,43 +65,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             });
         }
 
-        final EditTextPreference uploadLimit = findPreference("uploads");
-        int currentUploadLimit = defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 100);
-        uploadLimit.setText(String.valueOf(currentUploadLimit));
-
-        uploadLimit.setOnPreferenceChangeListener((preference, newValue) -> {
-
-            if (newValue.toString().length() == 0) {
-                return false;
-            }
-
-            int value = Integer.parseInt(newValue.toString());
-            if (value > 500) {
-                Snackbar error = Snackbar.make(getView(), R.string.maximum_limit_alert, Snackbar.LENGTH_LONG);
-                error.show();
-                return false;
-            } else if (value == 0) {
-                Snackbar error = Snackbar.make(getView(), R.string.cannot_be_zero, Snackbar.LENGTH_LONG);
-                error.show();
-                return false;
-            }
-            return true;
-        });
-
-        uploadLimit.setOnBindEditTextListener(editText -> {
-
-            editText.setInputType(InputType.TYPE_CLASS_NUMBER);
-            editText.selectAll();
-            int maxLength = 3; // set maxLength to 3
-            editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
-
-            int value = Integer.parseInt(editText.getText().toString());
-
-            defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, value);
-            defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
-            uploadLimit.setText(Integer.toString(value));
-        });
-
         langListPreference = findPreference("descriptionDefaultLanguagePref");
         prepareLanguages();
         Preference betaTesterPreference = findPreference("becomeBetaTester");
@@ -121,7 +84,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             findPreference("displayNearbyCardView").setEnabled(false);
             findPreference("displayLocationPermissionForCardView").setEnabled(false);
             findPreference("displayCampaignsCardView").setEnabled(false);
-            uploadLimit.setEnabled(false);
         }
     }
 
