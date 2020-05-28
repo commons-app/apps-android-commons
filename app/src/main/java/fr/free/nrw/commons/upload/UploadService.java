@@ -297,7 +297,13 @@ public class UploadService extends CommonsDaggerService {
 
     private void saveCompletedContribution(Contribution contribution, UploadResult uploadResult) {
         compositeDisposable.add(mediaClient.getMedia("File:" + uploadResult.getFilename())
-        .map(media -> new Contribution(media, Contribution.STATE_COMPLETED))
+        .map(media -> {
+            Contribution newContribution = new Contribution(media, Contribution.STATE_COMPLETED);
+            if(contribution.getWikidataPlace()!=null) {
+                newContribution.setWikidataPlace(contribution.getWikidataPlace());
+            }
+            return newContribution;
+        })
         .flatMapCompletable(newContribution -> contributionDao.saveAndDelete(contribution, newContribution))
         .subscribe());
     }

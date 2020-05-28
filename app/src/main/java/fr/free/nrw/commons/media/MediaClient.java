@@ -28,6 +28,7 @@ import timber.log.Timber;
 public class MediaClient {
 
     private final MediaInterface mediaInterface;
+    private final PageMediaInterface pageMediaInterface;
     private final MediaDetailInterface mediaDetailInterface;
 
     //OkHttpJsonApiClient used JsonKvStore for this. I don't know why.
@@ -37,8 +38,11 @@ public class MediaClient {
     private static final String NO_DEPICTION = "No depiction";
 
     @Inject
-    public MediaClient(MediaInterface mediaInterface, MediaDetailInterface mediaDetailInterface) {
+    public MediaClient(MediaInterface mediaInterface,
+        PageMediaInterface pageMediaInterface,
+        MediaDetailInterface mediaDetailInterface) {
         this.mediaInterface = mediaInterface;
+        this.pageMediaInterface = pageMediaInterface;
         this.mediaDetailInterface = mediaDetailInterface;
         this.continuationStore = new HashMap<>();
         this.continuationExists = new HashMap<>();
@@ -220,6 +224,13 @@ public class MediaClient {
                     return NO_CAPTION;
                 })
                 .singleOrError();
+    }
+
+    public Single<Boolean> doesPageContainMedia(String title) {
+        return pageMediaInterface.getMediaList(title)
+            .map(pageMediaListResponse -> {
+                return pageMediaListResponse.getItems().size() > 0;
+            }).singleOrError();
     }
 
     private boolean isSuccess(Entities response) {
