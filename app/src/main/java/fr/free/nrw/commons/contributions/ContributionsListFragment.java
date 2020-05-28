@@ -188,6 +188,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         this.contributions.clear();
         this.contributions.addAll(contributionList);
         adapter.setContributions(contributions);
+        callback.onContributionsUpdated();
     }
 
     public interface SourceRefresher {
