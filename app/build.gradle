@@ -42,6 +42,11 @@ dependencies {
     implementation 'com.dinuscxj:circleprogressbar:1.1.1'
     implementation 'com.karumi:dexter:5.0.0'
     implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+
+    //paging
+    implementation "androidx.paging:paging-runtime-ktx:2.1.2"
+    implementation "androidx.paging:paging-rxjava2-ktx:2.1.2"
+
     kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
     implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:$ADAPTER_DELEGATES_VERSION"
     implementation "com.hannesdorfmann:adapterdelegates4-pagination:$ADAPTER_DELEGATES_VERSION"

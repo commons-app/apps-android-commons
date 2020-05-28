@@ -224,7 +224,9 @@ public class CommonsApplicationModule {
     @Provides
     @Singleton
     public AppDatabase provideAppDataBase() {
-        return Room.databaseBuilder(applicationContext, AppDatabase.class, "commons_room.db").build();
+        return Room.databaseBuilder(applicationContext, AppDatabase.class, "commons_room.db")
+            .fallbackToDestructiveMigration()
+            .build();
     }
 
     @Provides
