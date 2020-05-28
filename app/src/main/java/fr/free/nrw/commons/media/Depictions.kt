@@ -6,6 +6,7 @@ import fr.free.nrw.commons.wikidata.WikidataProperties.DEPICTS
 import kotlinx.android.parcel.Parcelize
 import org.wikipedia.wikidata.DataValue.EntityId
 import org.wikipedia.wikidata.Entities
+import java.util.*
 
 @Parcelize
 data class Depictions(val depictions: List<IdAndLabel>) : Parcelable {
@@ -24,6 +25,6 @@ data class Depictions(val depictions: List<IdAndLabel>) : Parcelable {
             )
 
         private fun fetchLabel(mediaClient: MediaClient, id: String) =
-            mediaClient.getLabelForDepiction(id).blockingGet()
+            mediaClient.getLabelForDepiction(id, Locale.getDefault().language).blockingGet()
     }
 }
