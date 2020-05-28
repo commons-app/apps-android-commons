@@ -37,9 +37,9 @@ fun placeAdapterDelegate(
         }
         cameraButton.setOnClickListener { onCameraClicked(item) }
         galleryButton.setOnClickListener { onGalleryClicked(item) }
-        bookmarkRowButton.setOnClickListener {
+        bookmarkButtonImage.setOnClickListener {
             val isBookmarked = bookmarkLocationDao.updateBookmarkLocation(item)
-            bookmarkRowButtonImage.setImageResource(if (isBookmarked) R.drawable.ic_round_star_filled_24px else R.drawable.ic_round_star_border_24px)
+            bookmarkButtonImage.setImageResource(if (isBookmarked) R.drawable.ic_round_star_filled_24px else R.drawable.ic_round_star_border_24px)
             onBookmarkClicked(item, isBookmarked)
         }
         iconOverflow.setOnClickListener { onOverflowIconClicked(item, it) }
@@ -59,7 +59,7 @@ fun placeAdapterDelegate(
                 if (item.hasCommonsLink() || item.hasWikidataLink()) VISIBLE
                 else GONE
 
-            bookmarkRowButtonImage.setImageResource(
+            bookmarkButtonImage.setImageResource(
                 if (bookmarkLocationDao.findBookmarkLocation(item))
                     R.drawable.ic_round_star_filled_24px
                 else

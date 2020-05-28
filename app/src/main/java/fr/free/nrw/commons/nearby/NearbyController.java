@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 
+import androidx.annotation.MainThread;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
 
@@ -166,36 +168,6 @@ public class NearbyController {
         VectorDrawableCompat vectorDrawable = null;
         VectorDrawableCompat vectorDrawableGreen = null;
         VectorDrawableCompat vectorDrawableGrey = null;
-        try {
-            vectorDrawable = VectorDrawableCompat.create(
-                    context.getResources(), R.drawable.ic_custom_bookmark_marker, context.getTheme()
-            );
-        } catch (Resources.NotFoundException e) {
-            // ignore when running tests.
-        }
-        if (vectorDrawable != null) {
-            Bitmap icon = UiUtils.getBitmap(vectorDrawable);
-
-            for (Place place : bookmarkplacelist) {
-
-                String distance = formatDistanceBetween(curLatLng, place.location);
-                place.setDistance(distance);
-
-                NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
-                nearbyBaseMarker.title(place.name);
-                nearbyBaseMarker.position(
-                        new com.mapbox.mapboxsdk.geometry.LatLng(
-                                place.location.getLatitude(),
-                                place.location.getLongitude()));
-                nearbyBaseMarker.place(place);
-                nearbyBaseMarker.icon(IconFactory.getInstance(context)
-                        .fromBitmap(icon));
-                placeList.remove(place);
-
-                baseMarkerOptions.add(nearbyBaseMarker);
-            }
-        }
-
         vectorDrawable = null;
         try {
             vectorDrawable = VectorDrawableCompat.create(
@@ -254,5 +226,20 @@ public class NearbyController {
         public LatLng[] boundaryCoordinates; // Corners of nearby area
         public LatLng curLatLng; // Current location when this places are populated
         public LatLng searchLatLng; // Search location for finding this places
+    }
+
+    /**
+     * Updates makerLabelList item isBookmarked value
+     * @param place place which is bookmarked
+     * @param isBookmarked true is bookmarked, false if bookmark removed
+     */
+    @MainThread
+    public static void updateMarkerLabelListBookmark(Place place, boolean isBookmarked) {
+        for (ListIterator<MarkerPlaceGroup> iter = markerLabelList.listIterator(); iter.hasNext();) {
+            MarkerPlaceGroup markerPlaceGroup = iter.next();
+            if (markerPlaceGroup.getPlace().getWikiDataEntityId().equals(place.getWikiDataEntityId())) {
+                iter.set(new MarkerPlaceGroup(markerPlaceGroup.getMarker(), isBookmarked, place));
+            }
+        }
     }
 }

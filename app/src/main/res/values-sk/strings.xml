@@ -53,8 +53,10 @@
   <string name="provider_contributions">Moje obrázky</string>
   <string name="menu_share">Zdieľať</string>
   <string name="menu_open_in_browser">Otvoriť v prehliadači</string>
-  <string name="share_title_hint" fuzzy="true">Názov (povinné)</string>
+  <string name="share_title_hint">Popisok (povinné)</string>
+  <string name="add_caption_toast">Prosím, pridajte popisok pre tento súbor</string>
   <string name="share_description_hint">Opis</string>
+  <string name="share_caption_hint">Popisok (max. 255 znakov)</string>
   <string name="login_failed_network">prihlásenie zlyhalo - zlyhanie siete</string>
   <string name="login_failed_wrong_credentials">Nie je možné sa prihlásiť – skontrolujte, prosím, svoje používateľské meno a heslo</string>
   <string name="login_failed_throttled">Príliš veľa neúspešných pokusov. Skúste to znova o niekoľko minút.</string>
@@ -67,6 +69,7 @@
   <string name="provider_modifications">Úpravy</string>
   <string name="menu_upload_single">Nahrať</string>
   <string name="categories_search_text_hint">Vyhľadávanie kategórií</string>
+  <string name="depicts_search_text_hint">Hľadať položky, ktoré váš multimediálny súbor zobrazuje (vrch, Tádž Mahal atď.)</string>
   <string name="menu_save_categories">Uložiť</string>
   <string name="refresh_button">Obnoviť</string>
   <string name="display_list_button">Zoznam</string>
@@ -87,6 +90,7 @@
     <item quantity="other">%1$d nahrania</item>
   </plurals>
   <string name="categories_not_found">Žiadne kategórie nezodpovedajú „%1$s“</string>
+  <string name="depictions_not_found">Neboli nájdené žiadne položky Wikiúdajov zhodujúce sa s %1$s</string>
   <string name="categories_skip_explanation">Pridajte kategórie, aby bolo vaše obrázky možné na Wikimedia Commons nájsť.\nPre pridanie kategórií začnite písať.</string>
   <string name="categories_activity_title">Kategórie</string>
   <string name="title_activity_settings">Nastavenia</string>
@@ -162,6 +166,7 @@
   <string name="detail_panel_cats_label">Kategórie</string>
   <string name="detail_panel_cats_loading">Načítava sa…</string>
   <string name="detail_panel_cats_none">Nič nebolo vybrané</string>
+  <string name="detail_caption_empty">Žiadny titulok</string>
   <string name="detail_description_empty">Bez popisu</string>
   <string name="detail_discussion_empty">Žiadna diskusia</string>
   <string name="detail_license_empty">Neznáma licencia</string>
@@ -175,6 +180,7 @@
   <string name="title_activity_nearby">Miesta v okolí</string>
   <string name="no_nearby">V okolí sa nenašli žiadne miesta</string>
   <string name="warning">Upozornenie</string>
+  <string name="duplicate_image_found">Nájdený duplicitný obrázok</string>
   <string name="upload_image_duplicate">Tento súbor už na Commons existuje. Ste si istí, že chcete pokračovať?</string>
   <string name="upload">Nahrať</string>
   <string name="yes">Áno</string>
@@ -566,4 +572,5 @@
   <string name="theme_default_name" fuzzy="true">Predvolený</string>
   <string name="theme_dark_name">Tmavý</string>
   <string name="theme_light_name">Svetlý</string>
+  <string name="ask_to_turn_location_on">Zapnúť lokáciu?</string>
 </resources>

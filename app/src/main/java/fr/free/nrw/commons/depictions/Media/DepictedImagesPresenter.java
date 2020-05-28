@@ -80,10 +80,11 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
 
     /**
      * Fetches more images for the item and adds it to the grid view adapter
+     * @param entityId
      */
     @SuppressLint("CheckResult")
     @Override
-    public void fetchMoreImages() {
+    public void fetchMoreImages(String entityId) {
         view.progressBarVisible(true);
         compositeDisposable.add(depictsClient.fetchImagesForDepictedItem(entityId, queryList.size())
                 .subscribeOn(ioScheduler)
