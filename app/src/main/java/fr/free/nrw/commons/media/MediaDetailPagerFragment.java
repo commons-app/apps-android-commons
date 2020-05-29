@@ -320,7 +320,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
      * The method notify the viewpager that number of items have changed.
      */
     public void notifyDataSetChanged(){
-        adapter.notifyDataSetChanged();
+        if (null != adapter) {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
