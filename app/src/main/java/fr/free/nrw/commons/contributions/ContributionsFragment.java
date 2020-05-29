@@ -223,7 +223,7 @@ public class ContributionsFragment
 
     private void initFragments() {
         if (null == contributionsListFragment) {
-            contributionsListFragment = new ContributionsListFragment(this);
+            contributionsListFragment = new ContributionsListFragment();
         }
 
         if (shouldShowMediaDetailsFragment) {
