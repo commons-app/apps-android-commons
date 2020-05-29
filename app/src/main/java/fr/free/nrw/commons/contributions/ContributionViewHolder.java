@@ -5,6 +5,7 @@ import static fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_I
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -33,7 +34,8 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.contributionState) TextView stateView;
     @BindView(R.id.contributionSequenceNumber) TextView seqNumView;
     @BindView(R.id.contributionProgress) ProgressBar progressView;
-    @BindView(R.id.failed_image_options) LinearLayout failedImageOptions;
+    @BindView(R.id.image_options) LinearLayout imageOptions;
+    @BindView(R.id.wikipediaButton) ImageButton addToWikipediaButton;
 
 
     private int position;
@@ -69,19 +71,19 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
             case Contribution.STATE_COMPLETED:
                 stateView.setVisibility(View.GONE);
                 progressView.setVisibility(View.GONE);
-                failedImageOptions.setVisibility(View.GONE);
+                imageOptions.setVisibility(View.GONE);
                 stateView.setText("");
                 break;
             case Contribution.STATE_QUEUED:
                 stateView.setVisibility(View.VISIBLE);
                 progressView.setVisibility(View.GONE);
                 stateView.setText(R.string.contribution_state_queued);
-                failedImageOptions.setVisibility(View.GONE);
+                imageOptions.setVisibility(View.GONE);
                 break;
             case Contribution.STATE_IN_PROGRESS:
                 stateView.setVisibility(View.GONE);
                 progressView.setVisibility(View.VISIBLE);
-                failedImageOptions.setVisibility(View.GONE);
+                imageOptions.setVisibility(View.GONE);
                 final long total = contribution.getDataLength();
                 final long transferred = contribution.getTransferred();
                 if (transferred == 0 || transferred >= total) {
@@ -94,9 +96,11 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
                 stateView.setVisibility(View.VISIBLE);
                 stateView.setText(R.string.contribution_state_failed);
                 progressView.setVisibility(View.GONE);
-                failedImageOptions.setVisibility(View.VISIBLE);
+                imageOptions.setVisibility(View.VISIBLE);
                 break;
         }
+
+        checkIfMediaExistsOnWikipediaPage(contribution);
     }
 
     /**
@@ -128,6 +132,16 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
                 titleView.setText(contribution.getDisplayTitle());
             }
         }
+    }
+
+    private void checkIfMediaExistsOnWikipediaPage(final Contribution contribution) {
+        final String wikipediaArticle = contribution.getWikidataPlace().getWikipediaArticle();
+        compositeDisposable.add(mediaClient.doesPageContainMedia(wikipediaArticle)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(mediaExists -> {
+                addToWikipediaButton.setVisibility(mediaExists? View.GONE: View.VISIBLE);
+            }));
     }
 
     /**
@@ -163,6 +177,11 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
     @OnClick(R.id.contributionImage)
     public void imageClicked(){
+        callback.openMediaDetail(position);
+    }
+
+    @OnClick(R.id.wikipediaButton)
+    public void wikipediaButtonClicked(){
         callback.openMediaDetail(position);
     }
 }

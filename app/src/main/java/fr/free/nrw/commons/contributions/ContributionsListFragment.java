@@ -25,10 +25,14 @@ import butterknife.ButterKnife;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.utils.DialogUtil;
+import java.util.Locale;
 import javax.inject.Inject;
+import org.wikipedia.dataclient.WikiSite;
 
 /**
  * Created by root on 01.06.2018.
@@ -230,6 +234,39 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     if (null != callback) {//Just being safe, ideally they won't be called when detached
       callback.showDetail(position);
     }
+  }
+
+  @Override
+  public void addImageToWikipedia(Contribution contribution) {
+    DialogUtil.showAlertDialog(getActivity(),
+        getString(R.string.add_picture_to_wikipedia_article_title),
+        String.format(getString(R.string.add_picture_to_wikipedia_article_desc),
+            Locale.getDefault().getDisplayLanguage()),
+        () -> {
+          showAddImageToWikipediaInstructions(contribution);
+        }, () -> {
+          // do nothing
+        });
+  }
+
+  private void showAddImageToWikipediaInstructions(Contribution contribution) {
+    DialogUtil.showAlertDialog(getActivity(),
+        getString(R.string.add_picture_to_wikipedia_instructions_title),
+        getString(R.string.add_picture_to_wikipedia_instructions_desc),
+        getString(R.string.confirm),
+        getString(R.string.cancel),
+        () -> {
+          openWikipediaWebEditor(contribution);
+        }, () -> {
+          // do nothing
+        });
+  }
+
+  private void openWikipediaWebEditor(Contribution contribution) {
+    String wikicode = contribution.getWikiCode();
+    Utils.copy("wikicode", wikicode, getContext());
+    WikiSite wikiSite = WikiSite.forLanguageCode(Locale.getDefault().getLanguage());
+    Utils.handleWebUrl(getContext(), wikiSite.uri());
   }
 
   public Media getMediaAtPosition(final int i) {
