@@ -1,9 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
-import java.util.List;
-
 import fr.free.nrw.commons.BasePresenter;
-import fr.free.nrw.commons.Media;
 
 /**
  * The contract for Contributions View & Presenter
@@ -21,8 +18,5 @@ public class ContributionsContract {
 
         void deleteUpload(Contribution contribution);
 
-        void updateContribution(Contribution contribution);
-
-        void fetchMediaDetails(Contribution contribution);
     }
 }

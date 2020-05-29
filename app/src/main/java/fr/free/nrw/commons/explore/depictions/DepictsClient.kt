@@ -46,7 +46,7 @@ class DepictsClient @Inject constructor(
     /**
      * @return list of images for a particular depict entity
      */
-    fun fetchImagesForDepictedItem(query: String, sroffset: Int): Observable<List<Media>> {
+    fun fetchImagesForDepictedItem(query: String, sroffset: Int): Single<List<Media>> {
         return mediaInterface.fetchImagesForDepictedItem(
             "haswbstatement:" + BuildConfig.DEPICTS_PROPERTY + "=" + query,
             sroffset.toString()
@@ -56,12 +56,9 @@ class DepictsClient @Inject constructor(
                     .search
                     .map {
                         Media(
-                            null,
                             getUrl(it.title),
                             it.title,
                             "",
-                            0,
-                            safeParseDate(it.timestamp),
                             safeParseDate(it.timestamp),
                             ""
                         )

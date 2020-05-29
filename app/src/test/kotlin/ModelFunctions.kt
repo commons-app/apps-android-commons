@@ -1,5 +1,8 @@
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.category.CategoryItem
+import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import java.util.*
 
 fun depictedItem(
     name: String = "label",
@@ -21,3 +24,35 @@ fun depictedItem(
 
 fun categoryItem(name: String = "name", selected: Boolean = false) =
     CategoryItem(name, selected)
+
+fun media(
+    thumbUrl: String? = "thumbUrl",
+    imageUrl: String? = "imageUrl",
+    filename: String? = "filename",
+    fallbackDescription: String? = "fallbackDescription",
+    dateUploaded: Date? = Date(),
+    license: String? = "license",
+    licenseUrl: String? = "licenseUrl",
+    creator: String? = "creator",
+    pageId: String = "pageId",
+    categories: List<String>? = listOf("categories"),
+    coordinates: LatLng? = LatLng(0.0, 0.0, 0.0f),
+    captions: Map<String?, String?> = mapOf("en" to "caption"),
+    descriptions: Map<String?, String?> = mapOf("en" to "description"),
+    depictionIds: List<String> = listOf("depictionId")
+) = Media(
+    thumbUrl,
+    imageUrl,
+    filename,
+    fallbackDescription,
+    dateUploaded,
+    license,
+    licenseUrl,
+    creator,
+    pageId,
+    categories,
+    coordinates,
+    captions,
+    descriptions,
+    depictionIds
+)

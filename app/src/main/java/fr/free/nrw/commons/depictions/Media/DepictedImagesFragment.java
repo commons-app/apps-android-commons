@@ -50,7 +50,6 @@ public class DepictedImagesFragment extends DaggerFragment implements DepictedIm
     private String entityId = null;
     private boolean isLastPage;
     private boolean isLoading = true;
-    private int mediaSize = 0;
 
     @Nullable
     @Override
@@ -144,17 +143,6 @@ public class DepictedImagesFragment extends DaggerFragment implements DepictedIm
                 }
             }
         });
-    }
-
-    /**
-     * Seat caption to the image at the given position
-     */
-    @Override
-    public void handleLabelforImage(String caption, int position) {
-        if (!caption.trim().equals(getString(R.string.detail_caption_empty))) {
-            gridAdapter.getItem(position).setThumbnailTitle(caption);
-            gridAdapter.notifyDataSetChanged();
-        }
     }
 
     /**
@@ -257,11 +245,5 @@ public class DepictedImagesFragment extends DaggerFragment implements DepictedIm
         progressBar.setVisibility(GONE);
         isLoading = false;
         statusTextView.setVisibility(GONE);
-        for (Media media : collection) {
-            final String pageId = media.getPageId();
-            if (pageId != null) {
-                presenter.replaceTitlesWithCaptions(PAGE_ID_PREFIX + pageId, mediaSize++);
-            }
-        }
     }
 }

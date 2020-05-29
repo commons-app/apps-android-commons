@@ -14,18 +14,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.material.navigation.NavigationView;
 import com.viewpagerindicator.CirclePageIndicator;
-
-import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.delete.DeleteHelper;
@@ -35,6 +30,7 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import javax.inject.Inject;
 
 public class ReviewActivity extends NavigationBaseActivity {
 
@@ -144,10 +140,8 @@ public class ReviewActivity extends NavigationBaseActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(media -> {
-                    if (media != null) {
-                        reviewPagerAdapter.disableButtons();
-                        updateImage(media);
-                    }
+                    reviewPagerAdapter.disableButtons();
+                    updateImage(media);
                 }));
         return true;
     }

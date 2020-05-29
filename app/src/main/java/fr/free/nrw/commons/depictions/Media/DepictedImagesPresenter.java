@@ -136,20 +136,6 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
         }
     }
 
-    /**
-     * fetch captions for the image using filename and replace title of on the image thumbnail(if captions are available)
-     * else show filename
-     */
-    @Override
-    public void replaceTitlesWithCaptions(String wikibaseIdentifier, int position) {
-        compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseIdentifier)
-                .subscribeOn(ioScheduler)
-                .observeOn(mainThreadScheduler)
-                .subscribe(caption -> {
-                    view.handleLabelforImage(caption, position);
-                }));
-
-    }
 
     /**
      * add items to query list

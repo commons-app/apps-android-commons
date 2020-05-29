@@ -31,10 +31,6 @@ public interface DepictedImagesContract {
          */
         void setAdapter(List<Media> mediaList);
 
-        /**
-         * Seat caption to the image at the given position
-         */
-        void handleLabelforImage(String caption, int position);
 
         /**
          * Display snackbar
@@ -93,12 +89,6 @@ public interface DepictedImagesContract {
          * @param entityId
          */
         void fetchMoreImages(String entityId);
-
-        /**
-         * fetch captions for the image using filename and replace title of on the image thumbnail(if captions are available)
-         * else show filename
-         */
-        void replaceTitlesWithCaptions(String title, int position);
 
         /**
          * add items to query list
