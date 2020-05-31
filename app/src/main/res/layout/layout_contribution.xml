@@ -88,7 +88,7 @@
               android:id="@+id/wikipediaButton"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:src="@drawable/ic_add_white_24dp"
+              android:src="@drawable/ic_wikipedia"
               android:text="@string/menu_cancel_upload"
               android:background="@android:color/transparent"
               android:padding="@dimen/activity_margin_horizontal"
