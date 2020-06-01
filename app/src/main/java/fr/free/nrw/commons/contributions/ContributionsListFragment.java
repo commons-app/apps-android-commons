@@ -5,6 +5,7 @@ import static android.view.View.VISIBLE;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
@@ -204,7 +205,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   @Override
   public void onSaveInstanceState(@NonNull Bundle outState) {
     super.onSaveInstanceState(outState);
-    final GridLayoutManager layoutManager = (GridLayoutManager) rvContributionsList.getLayoutManager();
+    final GridLayoutManager layoutManager = (GridLayoutManager) rvContributionsList
+        .getLayoutManager();
     outState.putParcelable(RV_STATE, layoutManager.onSaveInstanceState());
   }
 
@@ -236,6 +238,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     }
   }
 
+  /**
+   * Handle callback for wikipedia icon clicked
+   *
+   * @param contribution
+   */
   @Override
   public void addImageToWikipedia(Contribution contribution) {
     DialogUtil.showAlertDialog(getActivity(),
@@ -249,6 +256,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         });
   }
 
+  /**
+   * Display confirmation dialog with instructions when the user tries to add image to wikipedia
+   *
+   * @param contribution
+   */
   private void showAddImageToWikipediaInstructions(Contribution contribution) {
     DialogUtil.showAlertDialog(getActivity(),
         getString(R.string.add_picture_to_wikipedia_instructions_title),
@@ -262,11 +274,17 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         });
   }
 
+  /**
+   * Copies the Media file's wikicode to the clipboard and then open the editor for the language
+   * Wikipedia
+   *
+   * @param contribution
+   */
   private void openWikipediaWebEditor(Contribution contribution) {
     String wikicode = contribution.getWikiCode();
     Utils.copy("wikicode", wikicode, getContext());
-    WikiSite wikiSite = WikiSite.forLanguageCode(Locale.getDefault().getLanguage());
-    Utils.handleWebUrl(getContext(), wikiSite.uri());
+    Utils.handleWebUrl(getContext(),
+        Uri.parse(contribution.getWikidataPlace().getWikipediaArticle() + "#/editor/0"));
   }
 
   public Media getMediaAtPosition(final int i) {

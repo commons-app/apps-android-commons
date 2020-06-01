@@ -518,6 +518,10 @@ public class Media implements Parcelable {
         this.coordinates = coordinates;
     }
 
+    /**
+     * Returns wikicode to use the media file on a MediaWiki site
+     * @return
+     */
     public String getWikiCode() {
         return String.format("[[File:%s|%s]]", filename, filename);
     }

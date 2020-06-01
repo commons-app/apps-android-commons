@@ -134,6 +134,11 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
+    /**
+     * Checks if a media exists on the corresponding Wikipedia article
+     * Currently the check is made for the device's current language Wikipedia
+     * @param contribution
+     */
     private void checkIfMediaExistsOnWikipediaPage(final Contribution contribution) {
         final String wikipediaArticle = contribution.getWikidataPlace().getWikipediaArticle();
         compositeDisposable.add(mediaClient.doesPageContainMedia(wikipediaArticle)

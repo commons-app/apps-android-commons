@@ -238,6 +238,10 @@ public class NetworkingModule {
         return ServiceFactory.get(wikiDataWikiSite, BuildConfig.WIKIDATA_URL, WikidataInterface.class);
     }
 
+    /**
+     * Add provider for PageMediaInterface
+     * It creates a retrofit service for the wiki site using device's current language
+     */
     @Provides
     @Singleton
     public PageMediaInterface providePageMediaInterface() {
