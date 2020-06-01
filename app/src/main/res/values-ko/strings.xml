@@ -496,7 +496,7 @@
   <string name="delete_helper_ask_spam_selfie">셀카</string>
   <string name="delete_helper_ask_spam_blurry">흐림</string>
   <string name="delete_helper_ask_spam_other">기타</string>
-  <string name="delete_helper_ask_reason_copyright_internet_photo">인터넷의 임의 사진</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">인터넷상의 무작위 이미지</string>
   <string name="delete_helper_ask_reason_copyright_logo">로고</string>
   <string name="delete_helper_ask_reason_copyright_other">기타</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">왜냐하면</string>
@@ -525,5 +525,6 @@
   <string name="theme_dark_name">어두움</string>
   <string name="theme_light_name">밝음</string>
   <string name="ask_to_turn_location_on">위치를 켭니까?</string>
+  <string name="load_more">더 불러오기</string>
   <string name="nearby_no_results">발견된 장소가 없습니다. 검색 기준을 바꾸어 보십시오.</string>
 </resources>

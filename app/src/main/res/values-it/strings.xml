@@ -530,4 +530,5 @@
   <string name="theme_default_name">Segui sistema</string>
   <string name="theme_dark_name">Scuro</string>
   <string name="theme_light_name">Chiaro</string>
+  <string name="load_more">Caricane ancora</string>
 </resources>

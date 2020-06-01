@@ -610,5 +610,6 @@
   <string name="ask_to_turn_location_on">Konum açılsın mı?</string>
   <string name="nearby_needs_location">Yakınımdakilerin düzgün çalışması için konumun açık olması gerekiyor</string>
   <string name="use_location_from_similar_image">Bu iki fotoğrafı aynı yerde mi çektiniz? Sağdaki resmin enlem/boylamını kullanmak ister misiniz?</string>
+  <string name="load_more">Daha Fazla Yükle</string>
   <string name="nearby_no_results">Yer bulunamadı, arama kriterlerinizi değiştirmeyi deneyin.</string>
 </resources>

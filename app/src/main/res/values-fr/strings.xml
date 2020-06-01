@@ -618,5 +618,6 @@
   <string name="ask_to_turn_location_on">Activer la localisation ?</string>
   <string name="nearby_needs_location">À proximité nécessite que la localisation soit activée pour bien fonctionner</string>
   <string name="use_location_from_similar_image">Avez-vous pris ces deux photos du même endroit ? Voulez-vous utiliser les latitude/longitude de l’image sur la droite ?</string>
+  <string name="load_more">Charger davantage</string>
   <string name="nearby_no_results">Pas d’endroit trouvé, essayez de modifier vos critères de recherche.</string>
 </resources>

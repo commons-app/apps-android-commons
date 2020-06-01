@@ -24,7 +24,7 @@
   <string name="forgot_password">Lali Tembung Sandi?</string>
   <string name="signup">Dhaftar</string>
   <string name="logging_in_title">Lagi mlebu log</string>
-  <string name="logging_in_message">Entènana sadhela…</string>
+  <string name="logging_in_message">Entènana sadhéla…</string>
   <string name="login_success">Kasil mlebu log!</string>
   <string name="login_failed">Wurung mlebu log!</string>
   <string name="upload_failed">Berkas ora tinemu. Jajal berkas liyané.</string>
@@ -195,7 +195,7 @@
   <string name="navigation_item_featured_images">Pinilih</string>
   <string name="no_description_found">dhèksripsi ora tinemu</string>
   <string name="nearby_info_menu_commons_article">Kaca barkas Commons</string>
-  <string name="nearby_info_menu_wikidata_article">Wiji Wikidata</string>
+  <string name="nearby_info_menu_wikidata_article">Wiji Wikidhata</string>
   <string name="nearby_info_menu_wikipedia_article">Artikel Wikipédia</string>
   <string name="give_permission">Awèh idin</string>
   <string name="use_external_storage">Anggo panyimpenan njaba</string>
