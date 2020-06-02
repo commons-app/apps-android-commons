@@ -140,6 +140,9 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
      * @param contribution
      */
     private void checkIfMediaExistsOnWikipediaPage(final Contribution contribution) {
+        if(contribution.getWikidataPlace() == null || contribution.getWikidataPlace().getWikipediaArticle()== null) {
+            return;
+        }
         final String wikipediaArticle = contribution.getWikidataPlace().getWikipediaArticle();
         compositeDisposable.add(mediaClient.doesPageContainMedia(wikipediaArticle)
             .subscribeOn(Schedulers.io())
