@@ -77,5 +77,7 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
         Contribution getContributionForPosition(int position);
 
         void fetchMediaUriFor(Contribution contribution);
+
+        void onContributionsUpdated();
     }
 }

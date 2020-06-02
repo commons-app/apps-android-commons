@@ -224,6 +224,14 @@ public class ContributionsFragment
                 Timber.d("Fetching thumbnail for %s", contribution.filename);
                 contributionsPresenter.fetchMediaDetails(contribution);
             }
+
+            @Override
+            public void onContributionsUpdated() {
+                //If the contributions are updated, let the pager fragment know
+                if (null != mediaDetailPagerFragment) {
+                    mediaDetailPagerFragment.notifyDataSetChanged();
+                }
+            }
         });
 
         if(null==mediaDetailPagerFragment){
