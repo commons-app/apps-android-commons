@@ -263,10 +263,9 @@ public class BookmarkLocationsDao {
                 onUpdate(db, from, to);
                 return;
             }
-            if (from == 10 && to == 11) {
-                from++;
+            if (from == 10) {
                 //This is safe, and can be called clean, as we/I do not remember the appropriate version for this
-                //We are anyways switching to room, these things won't be nescessary then
+                //We are anyways switching to room, these things won't be necessary then
                 try {
                     db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_pic STRING;");
                 }catch (SQLiteException exception){
