@@ -21,7 +21,9 @@ dependencies {
     implementation 'com.github.nicolas-raoul:Quadtree:ac16ea8035bf07'
     implementation 'in.yuvi:http.fluent:1.3'
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.squareup.okhttp3:okhttp:4.2.0'
+    implementation ("com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"){
+        force = true //API 19 support
+    }
     implementation 'com.squareup.okio:okio:2.2.2'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.3'
@@ -53,7 +55,7 @@ dependencies {
     api('com.github.tony19:logback-android-classic:1.1.1-6') {
         exclude group: 'com.google.android', module: 'android'
     }
-    implementation "com.squareup.okhttp3:logging-interceptor:4.2.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
 
     // Dependency injector
     implementation "com.google.dagger:dagger-android-support:$DAGGER_VERSION"
