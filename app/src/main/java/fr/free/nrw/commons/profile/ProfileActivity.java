@@ -37,7 +37,7 @@ public class ProfileActivity extends NavigationBaseActivity {
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
         initDrawer();
-        setTitle("Profile");
+        setTitle(R.string.Profile);
 
         supportFragmentManager = getSupportFragmentManager();
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
