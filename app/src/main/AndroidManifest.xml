@@ -137,8 +137,8 @@
             />
 
         <activity
-            android:name=".achievements.AchievementsActivity"
-            android:label="@string/Achievements" />
+            android:name=".profile.ProfileActivity"
+            android:label="@string/Profile" />
 
         <activity
             android:name=".bookmarks.BookmarksActivity"

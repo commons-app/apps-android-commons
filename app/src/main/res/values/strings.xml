@@ -386,6 +386,7 @@
   <string name="delete">Delete</string>
 
   <string name="Achievements">Achievements</string>
+  <string name="Profile">Profile</string>
   <string name="statistics">Statistics</string>
   <string name="statistics_thanks">Thanks Received</string>
   <string name="statistics_featured">Featured Images</string>
@@ -630,4 +631,6 @@ Upload your first media by tapping on the add button.</string>
   <string name="use_location_from_similar_image">Did you shoot these two pictures at the same place? Do you want to use the latitude/longitude of the picture on the right?</string>
   <string name="load_more">Load More</string>
   <string name="nearby_no_results">No places found, try changing your search criteria.</string>
+  <string name="achievements_tab_title">Achievements</string>
+  <string name="leaderboard_tab_title">Leaderboard</string>
 </resources>

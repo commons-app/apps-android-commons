@@ -3,9 +3,9 @@ package fr.free.nrw.commons.delete
 import android.content.Context
 import android.content.res.Resources
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.achievements.FeedbackResponse
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.profile.achievements.FeedbackResponse
 import fr.free.nrw.commons.utils.ViewUtilWrapper
 import io.reactivex.Single
 import org.junit.Before
@@ -13,7 +13,6 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import java.util.*
