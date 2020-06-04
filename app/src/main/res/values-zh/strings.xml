@@ -14,6 +14,7 @@
 * Looong
 * Qiyue2001
 * Shizhao
+* SomeyaMako
 * VulpesVulpes825
 * Wxyveronica
 * Yfdyh000
@@ -577,4 +578,5 @@
   <string name="wallpaper_set_unsuccessfully">出错了。无法设置壁纸</string>
   <string name="setting_wallpaper_dialog_title">设为壁纸</string>
   <string name="setting_wallpaper_dialog_message">正在设置壁纸。请稍等…</string>
+  <string name="load_more">加载更多</string>
 </resources>
