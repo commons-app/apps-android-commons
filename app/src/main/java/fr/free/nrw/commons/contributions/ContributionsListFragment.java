@@ -2,6 +2,7 @@ package fr.free.nrw.commons.contributions;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static fr.free.nrw.commons.di.NetworkingModule.NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -33,6 +34,7 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.utils.DialogUtil;
 import java.util.Locale;
 import javax.inject.Inject;
+import javax.inject.Named;
 import org.wikipedia.dataclient.WikiSite;
 
 /**
@@ -63,6 +65,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   ContributionController controller;
   @Inject
   MediaClient mediaClient;
+
+  @Named(NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE)
+  @Inject
+  WikiSite languageWikipediaSite;
 
   @Inject
   ContributionsListPresenter contributionsListPresenter;
@@ -283,8 +289,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   private void openWikipediaWebEditor(Contribution contribution) {
     String wikicode = contribution.getWikiCode();
     Utils.copy("wikicode", wikicode, getContext());
-    Utils.handleWebUrl(getContext(),
-        Uri.parse(contribution.getWikidataPlace().getWikipediaArticle() + "#/editor/0"));
+
+    String url = languageWikipediaSite.mobileUrl() + "/wiki/" + contribution.getWikidataPlace()
+        .getWikipediaPageTitle() + "#/editor/0";
+    Utils.handleWebUrl(getContext(), Uri.parse(url));
   }
 
   public Media getMediaAtPosition(final int i) {

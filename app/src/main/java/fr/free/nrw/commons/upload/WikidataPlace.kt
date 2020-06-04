@@ -16,7 +16,7 @@ internal data class WikidataPlace(
         place.wikiDataEntityId!!,
         place.name,
         place.pic.takeIf { it.isNotBlank() },
-        if (place.siteLinks.wikipediaLink == null) place.siteLinks.wikipediaLink.toString() else ""
+        if (place.siteLinks.wikipediaLink == null) "" else place.siteLinks.wikipediaLink.toString()
     )
 
     companion object {
@@ -24,5 +24,13 @@ internal data class WikidataPlace(
         fun from(place: Place?): WikidataPlace? {
             return place?.let { WikidataPlace(it) }
         }
+    }
+
+    fun getWikipediaPageTitle(): String? {
+        if (wikipediaArticle == null) {
+            return null
+        }
+        val split: Array<String> = wikipediaArticle.split("/".toRegex()).toTypedArray()
+        return split[split.size - 1]
     }
 }

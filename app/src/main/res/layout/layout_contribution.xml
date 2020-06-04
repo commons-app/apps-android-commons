@@ -74,26 +74,17 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/image_options"
             android:layout_width="@dimen/dimen_0"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_weight="2.2"
+            android:layout_weight="2.6"
             android:visibility="visible"
-            android:padding="@dimen/small_gap"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:padding="@dimen/tiny_gap"
             >
-
-            <ImageButton
-              android:id="@+id/wikipediaButton"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:src="@drawable/ic_wikipedia"
-              android:text="@string/menu_cancel_upload"
-              android:background="@android:color/transparent"
-              android:padding="@dimen/activity_margin_horizontal"
-              android:layout_marginRight="@dimen/tiny_padding"
-              />
 
             <ImageButton
                 android:id="@+id/cancelButton"
@@ -103,7 +94,8 @@
                 android:text="@string/menu_cancel_upload"
                 android:background="@android:color/transparent"
                 android:padding="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/tiny_padding"
+                android:layout_toStartOf="@id/retryButton"
+                android:layout_marginEnd="@dimen/tiny_padding"
                 />
 
             <ImageButton
@@ -114,9 +106,24 @@
                 android:text="@string/menu_retry_upload"
                 android:background="@android:color/transparent"
                 android:padding="@dimen/activity_margin_horizontal"
+                android:layout_toStartOf="@id/wikipediaButton"
+                android:layout_marginEnd="@dimen/tiny_padding"
                 />
 
-        </LinearLayout>
+            <ImageButton
+              android:id="@+id/wikipediaButton"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:src="@drawable/ic_wikipedia"
+              android:text="@string/menu_cancel_upload"
+              android:background="@android:color/transparent"
+              android:visibility="visible"
+              android:layout_alignParentEnd="true"
+              android:padding="@dimen/activity_margin_horizontal"
+              android:layout_marginEnd="@dimen/tiny_padding"
+              />
+
+        </RelativeLayout>
 
     </LinearLayout>
 

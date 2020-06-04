@@ -53,6 +53,8 @@ public class NetworkingModule {
     private static final String NAMED_WIKI_DATA_WIKI_SITE = "wikidata-wikisite";
     private static final String NAMED_WIKI_PEDIA_WIKI_SITE = "wikipedia-wikisite";
 
+    public static final String NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE = "language-wikipedia-wikisite";
+
     public static final String NAMED_COMMONS_CSRF = "commons-csrf";
 
     @Provides
@@ -244,8 +246,14 @@ public class NetworkingModule {
      */
     @Provides
     @Singleton
-    public PageMediaInterface providePageMediaInterface() {
-        WikiSite wikiSite = WikiSite.forLanguageCode(Locale.getDefault().getLanguage());
-        return ServiceFactory.get(wikiSite, Service.WIKIPEDIA_URL, PageMediaInterface.class);
+    public PageMediaInterface providePageMediaInterface(@Named(NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE) WikiSite wikiSite) {
+        return ServiceFactory.get(wikiSite, wikiSite.url(), PageMediaInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    @Named(NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE)
+    public WikiSite provideLanguageWikipediaSite() {
+        return WikiSite.forLanguageCode(Locale.getDefault().getLanguage());
     }
 }
