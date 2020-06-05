@@ -3,6 +3,7 @@ package fr.free.nrw.commons.contributions;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -71,14 +72,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
   private ContributionsListAdapter adapter;
 
-  private final Callback callback;
+  private Callback callback;
 
   private final int SPAN_COUNT_LANDSCAPE = 3;
   private final int SPAN_COUNT_PORTRAIT = 1;
 
-  ContributionsListFragment(final Callback callback) {
-    this.callback = callback;
-  }
 
   public View onCreateView(
       final LayoutInflater inflater, @Nullable final ViewGroup container,
@@ -88,6 +86,20 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     contributionsListPresenter.onAttachView(this);
     initAdapter();
     return view;
+  }
+
+  @Override
+  public void onAttach(Context context) {
+    super.onAttach(context);
+    if (getParentFragment() != null && getParentFragment() instanceof ContributionsFragment) {
+      callback = ((ContributionsFragment) getParentFragment());
+    }
+  }
+
+  @Override
+  public void onDetach() {
+    super.onDetach();
+    callback = null;//To avoid possible memory leak
   }
 
   private void initAdapter() {
@@ -203,7 +215,9 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
   @Override
   public void retryUpload(final Contribution contribution) {
-    callback.retryUpload(contribution);
+    if (null != callback) {//Just being safe, ideally they won't be called when detached
+      callback.retryUpload(contribution);
+    }
   }
 
   @Override
@@ -213,7 +227,9 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
   @Override
   public void openMediaDetail(final int position) {
-    callback.showDetail(position);
+    if (null != callback) {//Just being safe, ideally they won't be called when detached
+      callback.showDetail(position);
+    }
   }
 
   public Media getMediaAtPosition(final int i) {
