@@ -630,4 +630,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="use_location_from_similar_image">Did you shoot these two pictures at the same place? Do you want to use the latitude/longitude of the picture on the right?</string>
   <string name="load_more">Load More</string>
   <string name="nearby_no_results">No places found, try changing your search criteria.</string>
+
+  <string name="todo_improve">You can improve free knowledge as following</string>
+  <string name="missing_category">- Images that they uploaded with no categories/descriptions, so that they can add them.</string>
+  <string name="missing_article">- Image that can be added to associated Wikipedia articles that have no pictures.</string>
 </resources>

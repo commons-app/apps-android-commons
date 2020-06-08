@@ -52,9 +52,9 @@ public class MediaClient {
      */
     public Single<Boolean> checkPageExistsUsingTitle(String title) {
         return mediaInterface.checkPageExistsUsingTitle(title)
-                .map(mwQueryResponse -> mwQueryResponse
-                        .query().firstPage().pageId() > 0)
-                .singleOrError();
+            .map(mwQueryResponse -> mwQueryResponse
+                .query().firstPage().pageId() > 0)
+            .singleOrError();
     }
 
     /**
@@ -64,9 +64,9 @@ public class MediaClient {
      */
     public Single<Boolean> checkFileExistsUsingSha(String fileSha) {
         return mediaInterface.checkFileExistsUsingSha(fileSha)
-                .map(mwQueryResponse -> mwQueryResponse
-                        .query().allImages().size() > 0)
-                .singleOrError();
+            .map(mwQueryResponse -> mwQueryResponse
+                .query().allImages().size() > 0)
+            .singleOrError();
     }
 
     /**
@@ -78,10 +78,10 @@ public class MediaClient {
      */
     public Single<List<Media>> getMediaListFromCategory(String category) {
         return responseToMediaList(
-                continuationStore.containsKey("category_" + category) ?
-                        mediaInterface.getMediaListFromCategory(category, 10, continuationStore.get("category_" + category)) : //if true
-                        mediaInterface.getMediaListFromCategory(category, 10, Collections.emptyMap()),
-                "category_" + category); //if false
+            continuationStore.containsKey("category_" + category) ?
+                mediaInterface.getMediaListFromCategory(category, 10, continuationStore.get("category_" + category)) : //if true
+                mediaInterface.getMediaListFromCategory(category, 10, Collections.emptyMap()),
+            "category_" + category); //if false
 
     }
 
@@ -124,18 +124,18 @@ public class MediaClient {
      */
     public Single<List<Media>> getMediaListFromSearch(String keyword) {
         return responseToMediaList(
-                continuationStore.containsKey("search_" + keyword) && (continuationStore.get("search_" + keyword)  != null) ?
-                        mediaInterface.getMediaListFromSearch(keyword, 10, continuationStore.get("search_" + keyword)) : //if true
-                        mediaInterface.getMediaListFromSearch(keyword, 10, Collections.emptyMap()), //if false
-                "search_" + keyword);
+            continuationStore.containsKey("search_" + keyword) && (continuationStore.get("search_" + keyword)  != null) ?
+                mediaInterface.getMediaListFromSearch(keyword, 10, continuationStore.get("search_" + keyword)) : //if true
+                mediaInterface.getMediaListFromSearch(keyword, 10, Collections.emptyMap()), //if false
+            "search_" + keyword);
 
     }
 
     private Single<List<Media>> responseToMediaList(Observable<MwQueryResponse> response, String key) {
         return response.flatMap(mwQueryResponse -> {
             if (null == mwQueryResponse
-                    || null == mwQueryResponse.query()
-                    || null == mwQueryResponse.query().pages()) {
+                || null == mwQueryResponse.query()
+                || null == mwQueryResponse.query().pages()) {
                 return Observable.empty();
             }
             if(mwQueryResponse.continuation() != null) {
@@ -146,11 +146,11 @@ public class MediaClient {
             }
             return Observable.fromIterable(mwQueryResponse.query().pages());
         })
-                .map(Media::from)
-                .collect(ArrayList<Media>::new, List::add);
+            .map(Media::from)
+            .collect(ArrayList<Media>::new, List::add);
     }
 
-     /**
+    /**
      * Fetches Media object from the imageInfo API
      *
      * @param titles the tiles to be searched for. Can be filename or template name
@@ -158,16 +158,16 @@ public class MediaClient {
      */
     public Single<Media> getMedia(String titles) {
         return mediaInterface.getMedia(titles)
-                .flatMap(mwQueryResponse -> {
-                    if (null == mwQueryResponse
-                            || null == mwQueryResponse.query()
-                            || null == mwQueryResponse.query().firstPage()) {
-                        return Observable.empty();
-                    }
-                    return Observable.just(mwQueryResponse.query().firstPage());
-                })
-                .map(Media::from)
-                .single(Media.EMPTY);
+            .flatMap(mwQueryResponse -> {
+                if (null == mwQueryResponse
+                    || null == mwQueryResponse.query()
+                    || null == mwQueryResponse.query().firstPage()) {
+                    return Observable.empty();
+                }
+                return Observable.just(mwQueryResponse.query().firstPage());
+            })
+            .map(Media::from)
+            .single(Media.EMPTY);
     }
 
     /**
@@ -181,26 +181,26 @@ public class MediaClient {
         Timber.d("Current date is %s", date);
         String template = "Template:Potd/" + date;
         return mediaInterface.getMediaWithGenerator(template)
-                .flatMap(mwQueryResponse -> {
-                    if (null == mwQueryResponse
-                            || null == mwQueryResponse.query()
-                            || null == mwQueryResponse.query().firstPage()) {
-                        return Observable.empty();
-                    }
-                    return Observable.just(mwQueryResponse.query().firstPage());
-                })
-                .map(Media::from)
-                .single(Media.EMPTY);
+            .flatMap(mwQueryResponse -> {
+                if (null == mwQueryResponse
+                    || null == mwQueryResponse.query()
+                    || null == mwQueryResponse.query().firstPage()) {
+                    return Observable.empty();
+                }
+                return Observable.just(mwQueryResponse.query().firstPage());
+            })
+            .map(Media::from)
+            .single(Media.EMPTY);
     }
 
 
     @NonNull
     public Single<String> getPageHtml(String title){
         return mediaInterface.getPageHtml(title)
-                .filter(MwParseResponse::success)
-                .map(MwParseResponse::parse)
-                .map(MwParseResult::text)
-                .first("");
+            .filter(MwParseResponse::success)
+            .map(MwParseResponse::parse)
+            .map(MwParseResult::text)
+            .first("");
     }
 
 
@@ -209,17 +209,17 @@ public class MediaClient {
      */
     public Single<String> getCaptionByWikibaseIdentifier(String wikibaseIdentifier) {
         return mediaDetailInterface.getEntityForImage(Locale.getDefault().getLanguage(), wikibaseIdentifier)
-                .map(mediaDetailResponse -> {
-                    if (isSuccess(mediaDetailResponse)) {
-                        for (Entity wikibaseItem : mediaDetailResponse.entities().values()) {
-                            for (Label label : wikibaseItem.labels().values()) {
-                                return label.value();
-                            }
+            .map(mediaDetailResponse -> {
+                if (isSuccess(mediaDetailResponse)) {
+                    for (Entity wikibaseItem : mediaDetailResponse.entities().values()) {
+                        for (Label label : wikibaseItem.labels().values()) {
+                            return label.value();
                         }
                     }
-                    return NO_CAPTION;
-                })
-                .singleOrError();
+                }
+                return NO_CAPTION;
+            })
+            .singleOrError();
     }
 
     private boolean isSuccess(Entities response) {
@@ -234,8 +234,8 @@ public class MediaClient {
      */
     public Single<Depictions> getDepictions(String filename)  {
         return mediaDetailInterface.fetchEntitiesByFileName(Locale.getDefault().getLanguage(), filename)
-                .map(entities -> Depictions.from(entities, this))
-                .singleOrError();
+            .map(entities -> Depictions.from(entities, this))
+            .singleOrError();
     }
 
     /**
@@ -246,22 +246,22 @@ public class MediaClient {
      */
     public Single<String> getLabelForDepiction(String entityId, String language) {
         return mediaDetailInterface.getEntity(entityId)
-                .map(entities -> {
-                    if (isSuccess(entities)) {
-                        for (Entity entity : entities.entities().values()) {
-                            final Map<String, Label> languageToLabelMap = entity.labels();
-                            if (languageToLabelMap.containsKey(language)) {
-                                return languageToLabelMap.get(language).value();
-                            }
-                            for (Label label : languageToLabelMap.values()) {
-                                return label.value();
-                            }
+            .map(entities -> {
+                if (isSuccess(entities)) {
+                    for (Entity entity : entities.entities().values()) {
+                        final Map<String, Label> languageToLabelMap = entity.labels();
+                        if (languageToLabelMap.containsKey(language)) {
+                            return languageToLabelMap.get(language).value();
+                        }
+                        for (Label label : languageToLabelMap.values()) {
+                            return label.value();
                         }
                     }
-                    throw new RuntimeException("failed getEntities");
-                })
-                .singleOrError();
+                }
+                throw new RuntimeException("failed getEntities");
+            })
+            .singleOrError();
     }
 
-    }
+}
 

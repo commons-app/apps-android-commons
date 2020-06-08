@@ -139,6 +139,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     Button delete;
     @BindView(R.id.mediaDetailScrollView)
     ScrollView scrollView;
+    @BindView(R.id.toDoLayout)
+    LinearLayout toDoLayout;
+    @BindView(R.id.toDoReason)
+    TextView toDoReason;
 
     private ArrayList<String> categoryNames;
     /**
@@ -301,6 +305,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::setTextFields);
         compositeDisposable.add(disposable);
+        setupToDo();
     }
 
     /**
@@ -355,6 +360,32 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             .build();
         image.setController(controller);
         imageLandscape.setController(controllerLandscape);
+    }
+
+    /**
+     * Displays layout about missing actions to inform user
+     * - Images that they uploaded with no categories/descriptions, so that they can add them
+     * - Images that can be added to associated Wikipedia articles that have no pictures
+     */
+    private void setupToDo() {
+        String toDoMessage = "";
+        boolean toDoNeeded;
+        if (categoriesPresent) {
+            toDoNeeded = true;
+            toDoMessage += getString(R.string.missing_category);
+        }
+         // TODO: mediaclient after viveks changes are merged
+        if (true) {
+            toDoNeeded = true;
+            toDoMessage += (toDoMessage.isEmpty()) ? "" : "\n" + getString(R.string.missing_article);
+        }
+
+        if (toDoNeeded) {
+            toDoLayout.setVisibility(VISIBLE);
+            toDoReason.setText(toDoMessage);
+        } else {
+            toDoLayout.setVisibility(GONE);
+        }
     }
 
     @Override
