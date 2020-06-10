@@ -270,7 +270,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
         if (StringUtils.isBlank(userName)) {
             return;
         }
-        wikidataEditsText.setText(String.valueOf(0));
+        wikidataEditsText.setText("0");
         compositeDisposable.add(okHttpJsonApiClient
                 .getWikidataEdits(userName)
                 .subscribeOn(Schedulers.io())
