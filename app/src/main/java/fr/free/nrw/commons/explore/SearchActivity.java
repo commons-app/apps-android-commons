@@ -125,7 +125,7 @@ public class SearchActivity extends NavigationBaseActivity
                             }
 
                             if (FragmentUtils.isFragmentUIActive(searchCategoryFragment)) {
-                                searchCategoryFragment.updateCategoryList(query.toString());
+                                searchCategoryFragment.onQueryUpdated(query.toString());
                             }
 
                         } else {
