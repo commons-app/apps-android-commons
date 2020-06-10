@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -467,38 +468,50 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     @OnClick(R.id.images_upload_info)
     public void showUploadInfo(){
-        launchAlert(getResources().getString(R.string.images_uploaded)
-                ,getResources().getString(R.string.images_uploaded_explanation));
+        launchAlertWithLink(getResources().getString(R.string.images_uploaded)
+                ,getResources().getString(R.string.images_uploaded_explanation)
+                , "https://commons.wikimedia.org/wiki/Commons:Project_scope"
+                , getResources().getString(R.string.read_more));
     }
 
     @OnClick(R.id.images_reverted_info)
     public void showRevertedInfo(){
-        launchAlert(getResources().getString(R.string.image_reverts)
-                ,getResources().getString(R.string.images_reverted_explanation));
+        launchAlertWithLink(getResources().getString(R.string.image_reverts)
+                ,getResources().getString(R.string.images_reverted_explanation)
+                , "https://commons.wikimedia.org/wiki/Commons:Deletion_policy#Reasons_for_deletion"
+                , getResources().getString(R.string.read_more));
     }
 
     @OnClick(R.id.images_used_by_wiki_info)
     public void showUsedByWikiInfo(){
-        launchAlert(getResources().getString(R.string.images_used_by_wiki)
-                ,getResources().getString(R.string.images_used_explanation));
+        launchAlertWithLink(getResources().getString(R.string.images_used_by_wiki)
+                ,getResources().getString(R.string.images_used_explanation)
+                , "https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images"
+                , getResources().getString(R.string.read_more));
     }
 
     @OnClick(R.id.images_nearby_info)
     public void showImagesViaNearbyInfo(){
-        launchAlert(getResources().getString(R.string.statistics_wikidata_edits)
-                ,getResources().getString(R.string.images_via_nearby_explanation));
+        launchAlertWithLink(getResources().getString(R.string.statistics_wikidata_edits)
+                ,getResources().getString(R.string.images_via_nearby_explanation)
+                , "https://www.wikidata.org/wiki/Property:P18"
+                , getResources().getString(R.string.read_more));
     }
 
     @OnClick(R.id.images_featured_info)
     public void showFeaturedImagesInfo(){
-        launchAlert(getResources().getString(R.string.statistics_featured)
-                ,getResources().getString(R.string.images_featured_explanation));
+        launchAlertWithLink(getResources().getString(R.string.statistics_featured)
+                ,getResources().getString(R.string.images_featured_explanation)
+                , "https://commons.wikimedia.org/wiki/Commons:Featured_pictures"
+                , getResources().getString(R.string.read_more));
     }
 
     @OnClick(R.id.thanks_received_info)
     public void showThanksReceivedInfo(){
-        launchAlert(getResources().getString(R.string.statistics_thanks)
-                ,getResources().getString(R.string.thanks_received_explanation));
+        launchAlertWithLink(getResources().getString(R.string.statistics_thanks)
+                ,getResources().getString(R.string.thanks_received_explanation)
+                , "https://www.mediawiki.org/wiki/Extension:Thanks"
+                , getResources().getString(R.string.read_more));
     }
 
     /**
@@ -508,12 +521,33 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private void launchAlert(String title, String message){
         new AlertDialog.Builder(AchievementsActivity.this)
-                .setTitle(title)
-                .setMessage(message)
-                .setCancelable(true)
-                .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                .create()
-                .show();
+            .setTitle(title)
+            .setMessage(message)
+            .setCancelable(true)
+            .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+            .create()
+            .show();
+    }
+
+    /**
+     * takes title, message, url and alertButtonText as input to display alerts with links
+     * @param title
+     * @param message
+     * @param url
+     * @param alertButtonText
+     */
+    private void launchAlertWithLink(String title, String message, String url, String alertButtonText){
+        new AlertDialog.Builder(AchievementsActivity.this)
+            .setTitle(title)
+            .setMessage(message)
+            .setCancelable(true)
+            .setPositiveButton(alertButtonText, (dialog, id) -> {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            })
+            .create()
+            .show();
     }
 
     /**
