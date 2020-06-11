@@ -79,6 +79,7 @@
   <string name="share_title_hint">Подпись (Обязательна)</string>
   <string name="add_caption_toast">Пожалуйста, укажите название этого файла</string>
   <string name="share_description_hint">Описание</string>
+  <string name="share_caption_hint">Подпись (не более 255 символов)</string>
   <string name="login_failed_network">Не удаётся войти — сбой сети</string>
   <string name="login_failed_wrong_credentials">Не удаётся войти — проверьте ваше имя пользователя и пароль</string>
   <string name="login_failed_throttled">Слишком много неудачных попыток. Пожалуйста, попробуйте ещё раз через несколько минут.</string>
@@ -210,6 +211,7 @@
   <string name="upload">Загрузить</string>
   <string name="yes">Да</string>
   <string name="no">Нет</string>
+  <string name="media_detail_caption">Подпись</string>
   <string name="media_detail_title">Название</string>
   <string name="media_detail_description">Описание</string>
   <string name="media_detail_discussion">Обсуждение</string>
@@ -272,6 +274,7 @@
   <string name="error_while_cache">Ошибка при кэшировании картинок</string>
   <string name="title_info">Уникальное описание, которое будет сохранено как имя файла. Вы можете использовать естественный язык, разделяя слова пробелами. Пожалуйста, не указывайте расширение файла.</string>
   <string name="description_info">Пожалуйста, подробно опишите загружаемый файл: где он был снят? что на нём изображено? каков его контекст? Пожалуйста опишите изображённых персон или объекты. Добавьте информацию, о которой нельзя легко догадаться, например, время суток, когда снимался файл. Если снято что-то необычное, постарайтесь пояснить, что именно в этом необычного.</string>
+  <string name="caption_info">Пожалуйста, напишите краткое описание изображения (не более 255 символов).</string>
   <string name="upload_image_too_dark">Это изображение слишком тёмное. Вы уверены, что хотите его загрузить? Викисклад подходит только для изображений, имеющих энциклопедическую ценность.</string>
   <string name="upload_image_blurry">Это изображение размыто. Вы уверены, что хотите его загрузить? Викисклад подходит только для изображений, имеющих энциклопедическую ценность.</string>
   <string name="upload_problem_exist">Потенциальные проблемы с этим изображением:</string>
@@ -281,6 +284,7 @@
   <string name="upload_problem_different_geolocation">Это изображение было сделано в другом месте.</string>
   <string name="upload_problem_fbmd">Пожалуйста, загружайте только те изображения, которые были сделаны вами. Не загружайте изображений, которые вы нашли в Фейсбуке.</string>
   <string name="upload_problem_do_you_continue">Всё равно желаете загрузить это изображение?</string>
+  <string name="upload_problem_image">Проблемы, найденные в изображении</string>
   <string name="internet_downloaded">Пожалуйста, загружайте только те изображения, которые были сделаны вами. Не загружайте изображений, которые вы скачали из Интернета.</string>
   <string name="give_permission">Разрешить</string>
   <string name="use_external_storage">Использовать внешний носитель</string>
@@ -610,5 +614,7 @@
   <string name="recommend_high_accuracy_mode">Для достижения наилучших результатов выберите режим высокой точности.</string>
   <string name="ask_to_turn_location_on">Включить местоположение?</string>
   <string name="nearby_needs_location">Рядом необходимо, чтобы местоположение было включено для правильной работы.</string>
+  <string name="use_location_from_similar_image">Вы снимали эти две фотографии в одном месте? Хотите использовать широту/долготу изображения справа?</string>
+  <string name="load_more">Загрузить ещё</string>
   <string name="nearby_no_results">Мест не найдено, попытайтесь изменить критерии поиска.</string>
 </resources>
