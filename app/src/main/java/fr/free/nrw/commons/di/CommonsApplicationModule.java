@@ -104,16 +104,6 @@ public class CommonsApplicationModule {
     }
 
     /**
-     * Provides an instance of DepictionContentProviderClient i.e. the depictions
-     * that are there in local storage
-     */
-    @Provides
-    @Named("depiction")
-    public ContentProviderClient provideDepictionContentProviderClient(Context context) {
-        return context.getContentResolver().acquireContentProviderClient(BuildConfig.DEPICTION_AUTHORITY);
-    }
-
-    /**
      * This method is used to provide instance of DepictsContentProviderClient
      * @param context context
      * @return DepictsContentProviderClient*/

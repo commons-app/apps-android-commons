@@ -4,5 +4,4 @@
     <string name="contribution_authority">fr.free.nrw.commons.beta.contributions.contentprovider</string>
     <string name="modification_authority">fr.free.nrw.commons.beta.modifications.contentprovider</string>
     <string name="category_authority">fr.free.nrw.commons.beta.categories.contentprovider</string>
-    <string name="depiction_authority">fr.free.nrw.commons.beta.depictions.contentprovider</string>
 </resources>

@@ -184,13 +184,6 @@
           android:syncable="false" />
 
         <provider
-          android:name=".depictions.DepictionContentProvider"
-          android:authorities="${applicationId}.depictions.contentprovider"
-          android:exported="false"
-          android:label="@string/provider_depictions"
-          android:syncable="false" />
-
-        <provider
             android:name=".explore.recentsearches.RecentSearchesContentProvider"
             android:authorities="${applicationId}.explore.recentsearches.contentprovider"
             android:exported="false"
