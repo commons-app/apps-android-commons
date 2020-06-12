@@ -14,12 +14,14 @@
 * Looong
 * Qiyue2001
 * Shizhao
+* SomeyaMako
 * VulpesVulpes825
 * Wxyveronica
 * Yfdyh000
 * ZhaoGang
 * 予弦
 * 佛壁灯
+* 列维劳德
 * 夢蝶葬花
 * 沈澄心
 * 神樂坂秀吉
@@ -74,6 +76,7 @@
   <string name="menu_share">分享</string>
   <string name="menu_open_in_browser">在浏览器中查看</string>
   <string name="share_title_hint" fuzzy="true">标题 （要求）</string>
+  <string name="add_caption_toast">请提供此文件的描述</string>
   <string name="share_description_hint">描述</string>
   <string name="login_failed_network">无法登录 - 网络故障</string>
   <string name="login_failed_wrong_credentials">无法登录——请检查您的用户名和密码</string>
@@ -575,4 +578,5 @@
   <string name="wallpaper_set_unsuccessfully">出错了。无法设置壁纸</string>
   <string name="setting_wallpaper_dialog_title">设为壁纸</string>
   <string name="setting_wallpaper_dialog_message">正在设置壁纸。请稍等…</string>
+  <string name="load_more">加载更多</string>
 </resources>

@@ -12,11 +12,13 @@ import fr.free.nrw.commons.depictions.RecentDepictionsDao
  * The database for accessing the respective DAOs
  *
  */
+
 @Database(entities = arrayOf(
           Contribution::class,
           RecentDepictions::class),
           version = 1,
           exportSchema = false)
+
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
   abstract fun contributionDao(): ContributionDao

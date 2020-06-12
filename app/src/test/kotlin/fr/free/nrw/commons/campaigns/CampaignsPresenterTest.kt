@@ -15,19 +15,19 @@ import kotlin.collections.ArrayList
 
 class CampaignsPresenterTest {
     @Mock
-    var okHttpJsonApiClient: OkHttpJsonApiClient? = null
+    lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
 
     lateinit var campaignsPresenter: CampaignsPresenter
 
     @Mock
-    internal var view: ICampaignsView? = null
+    internal lateinit var view: ICampaignsView
 
     @Mock
-    internal var campaignResponseDTO: CampaignResponseDTO? = null
+    internal lateinit var campaignResponseDTO: CampaignResponseDTO
     lateinit var campaignsSingle: Single<CampaignResponseDTO>
 
     @Mock
-    var campaign: Campaign? = null
+    lateinit var campaign: Campaign
 
     lateinit var testScheduler: TestScheduler
 
@@ -41,37 +41,37 @@ class CampaignsPresenterTest {
         testScheduler=TestScheduler()
         campaignsSingle= Single.just(campaignResponseDTO)
         campaignsPresenter= CampaignsPresenter(okHttpJsonApiClient,testScheduler,testScheduler)
-        campaignsPresenter?.onAttachView(view)
-        Mockito.`when`(okHttpJsonApiClient?.campaigns).thenReturn(campaignsSingle)
+        campaignsPresenter.onAttachView(view)
+        Mockito.`when`(okHttpJsonApiClient.campaigns).thenReturn(campaignsSingle)
     }
 
     @Test
     fun getCampaignsTestNoCampaigns() {
         campaignsPresenter.getCampaigns()
-        verify(okHttpJsonApiClient)?.campaigns
+        verify(okHttpJsonApiClient).campaigns
         testScheduler.triggerActions()
-        verify(view)?.showCampaigns(null)
+        verify(view).showCampaigns(null)
     }
 
     @Test
     fun getCampaignsTestNonEmptyCampaigns() {
         campaignsPresenter.getCampaigns()
         var campaigns= ArrayList<Campaign>()
-        campaigns.add(campaign!!)
+        campaigns.add(campaign)
         val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ROOT)
         simpleDateFormat.timeZone = TimeZone.getTimeZone("UTC")
-        Mockito.`when`(campaignResponseDTO?.campaigns).thenReturn(campaigns)
+        Mockito.`when`(campaignResponseDTO.campaigns).thenReturn(campaigns)
         var calendar = Calendar.getInstance()
         calendar.add(Calendar.DATE,-1)
         val startDateString = simpleDateFormat.format(calendar.time).toString()
         calendar= Calendar.getInstance()
         calendar.add(Calendar.DATE,3)
         val endDateString= simpleDateFormat.format(calendar.time).toString()
-        Mockito.`when`(campaign?.endDate).thenReturn(endDateString)
-        Mockito.`when`(campaign?.startDate).thenReturn(startDateString)
-        Mockito.`when`(campaignResponseDTO?.campaigns).thenReturn(campaigns)
-        verify(okHttpJsonApiClient)?.campaigns
+        Mockito.`when`(campaign.endDate).thenReturn(endDateString)
+        Mockito.`when`(campaign.startDate).thenReturn(startDateString)
+        Mockito.`when`(campaignResponseDTO.campaigns).thenReturn(campaigns)
+        verify(okHttpJsonApiClient).campaigns
         testScheduler.triggerActions()
-        verify(view)?.showCampaigns(campaign)
+        verify(view).showCampaigns(campaign)
     }
 }

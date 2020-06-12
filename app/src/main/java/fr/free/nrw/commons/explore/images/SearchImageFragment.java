@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.pedrogomez.renderers.RVRendererAdapter;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
@@ -33,9 +32,9 @@ import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
+import kotlin.Unit;
 import timber.log.Timber;
 
 /**
@@ -66,15 +65,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      */
     private int mediaSize = 0;
 
-    private RVRendererAdapter<Media> imagesAdapter;
+    private SearchImagesAdapter imagesAdapter;
     private List<Media> queryList = new ArrayList<>();
-
-    private final SearchImagesAdapterFactory adapterFactory = new SearchImagesAdapterFactory(item -> {
-        // Called on Click of a individual media Item
-        int index = queryList.indexOf(item);
-        ((SearchActivity)getContext()).onSearchImageClicked(index);
-        saveQuery(query);
-    });
 
     /**
      * This method saves Search Query in the Recent Searches Database.
@@ -106,8 +98,11 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         else{
             imagesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         }
-        ArrayList<Media> items = new ArrayList<>();
-        imagesAdapter = adapterFactory.create(items);
+        imagesAdapter =new SearchImagesAdapter(media -> {
+            ((SearchActivity)getContext()).onSearchImageClicked(imagesAdapter.getItems().indexOf(media));
+            saveQuery(query);
+            return Unit.INSTANCE;
+        });
         imagesRecyclerView.setAdapter(imagesAdapter);
         imagesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -173,7 +168,6 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         if (mediaList.size() != 0 && !queryList.get(queryList.size() - 1).getFilename().equals(mediaList.get(mediaList.size() - 1).getFilename())) {
             queryList.addAll(mediaList);
             imagesAdapter.addAll(mediaList);
-            imagesAdapter.notifyDataSetChanged();
             ((SearchActivity) getContext()).viewPagerNotifyDataSetChanged();
         }
     }
@@ -222,8 +216,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
 
         private void handleLabelforImage(String s, int position) {
             if (!s.trim().equals(getString(R.string.detail_caption_empty))) {
-                imagesAdapter.getItem(position).setThumbnailTitle(s);
-                imagesAdapter.notifyDataSetChanged();
+                imagesAdapter.updateThumbnail(position, s);
             }
         }
 
@@ -281,13 +274,11 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      * @param i position of Media in the recyclerview adapter.
      */
     public Media getImageAtPosition(int i) {
-        if (imagesAdapter.getItem(i).getFilename() == null) {
+        if (imagesAdapter.getItemAt(i).getFilename() == null) {
             // not yet ready to return data
             return null;
         }
-        else {
-            return imagesAdapter.getItem(i);
-        }
+        return imagesAdapter.getItemAt(i);
     }
 
     @Override public void onDestroyView() {

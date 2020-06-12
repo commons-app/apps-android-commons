@@ -1,10 +1,9 @@
 package fr.free.nrw.commons.depictions.subClass;
 
-import java.io.IOException;
-import java.util.List;
-
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * The contract with which SubDepictionListFragment and its presenter would talk to each other
@@ -28,5 +27,6 @@ public interface SubDepictionListContract {
         void initSubDepictionList(String qid, Boolean isParentClass) throws IOException;
 
         String getQuery();
+
     }
 }

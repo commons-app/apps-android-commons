@@ -22,7 +22,6 @@ import fr.free.nrw.commons.media.MediaClient;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import java.util.Random;
 import timber.log.Timber;
 
 public class ContributionViewHolder extends RecyclerView.ViewHolder {
@@ -39,23 +38,22 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
     private int position;
     private Contribution contribution;
-    private Random random = new Random();
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private final MediaClient mediaClient;
 
-    ContributionViewHolder(View parent, Callback callback,
-        MediaClient mediaClient) {
+    ContributionViewHolder(final View parent, final Callback callback,
+        final MediaClient mediaClient) {
         super(parent);
         this.mediaClient = mediaClient;
         ButterKnife.bind(this, parent);
         this.callback=callback;
     }
 
-    public void init(int position, Contribution contribution) {
+    public void init(final int position, final Contribution contribution) {
         this.contribution = contribution;
         fetchAndDisplayCaption(contribution);
         this.position = position;
-        String imageSource = chooseImageSource(contribution.getThumbUrl(), contribution.getLocalUri());
+        final String imageSource = chooseImageSource(contribution.getThumbUrl(), contribution.getLocalUri());
         if (!TextUtils.isEmpty(imageSource)) {
             final ImageRequest imageRequest =
                 ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageSource))
@@ -84,8 +82,8 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
                 stateView.setVisibility(View.GONE);
                 progressView.setVisibility(View.VISIBLE);
                 failedImageOptions.setVisibility(View.GONE);
-                long total = contribution.getDataLength();
-                long transferred = contribution.getTransferred();
+                final long total = contribution.getDataLength();
+                final long transferred = contribution.getTransferred();
                 if (transferred == 0 || transferred >= total) {
                     progressView.setIndeterminate(true);
                 } else {
@@ -107,14 +105,14 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
      *
      * @param contribution
      */
-    private void fetchAndDisplayCaption(Contribution contribution) {
+    private void fetchAndDisplayCaption(final Contribution contribution) {
         if ((contribution.getState() != Contribution.STATE_COMPLETED)) {
             titleView.setText(contribution.getDisplayTitle());
         } else {
             final String pageId = contribution.getPageId();
             if (pageId != null) {
                 Timber.d("Fetching caption for %s", contribution.getFilename());
-                String wikibaseMediaId = PAGE_ID_PREFIX
+                final String wikibaseMediaId = PAGE_ID_PREFIX
                     + pageId; // Create Wikibase media id from the page id. Example media id: M80618155 for https://commons.wikimedia.org/wiki/File:Tantanmen.jpeg with has the pageid 80618155
                 compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseMediaId)
                     .subscribeOn(Schedulers.io())
@@ -141,7 +139,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
      * @return
      */
     @Nullable
-    private String chooseImageSource(String thumbUrl, Uri localUri) {
+    private String chooseImageSource(final String thumbUrl, final Uri localUri) {
         return !TextUtils.isEmpty(thumbUrl) ? thumbUrl :
             localUri != null ? localUri.toString() :
                 null;

@@ -26,13 +26,6 @@
           android:summary="@string/use_external_storage_summary"
           android:title="@string/use_external_storage" />
 
-        <EditTextPreference
-          android:defaultValue="100"
-          android:key="uploads"
-          app:useSimpleSummaryProvider="true"
-          app:singleLineTitle="false"
-          android:title="@string/set_limit" />
-
         <ListPreference
           android:key="descriptionDefaultLanguagePref"
           app:useSimpleSummaryProvider="true"

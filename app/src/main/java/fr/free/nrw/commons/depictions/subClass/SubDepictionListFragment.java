@@ -17,12 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.pedrogomez.renderers.RVRendererAdapter;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity;
-import fr.free.nrw.commons.explore.depictions.SearchDepictionsAdapterFactory;
-import fr.free.nrw.commons.explore.depictions.SearchDepictionsRenderer;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -30,6 +27,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
+import kotlin.Unit;
 
 /**
  * Fragment for parent classes and child classes of Depicted items in Explore
@@ -48,7 +46,7 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
      * Keeps a record of whether current instance of the fragment if of SubClass or ParentClass
      */
     private boolean isParentClass = false;
-    private RVRendererAdapter<DepictedItem> depictionsAdapter;
+    private SubDepictionAdapter depictionsAdapter;
     RecyclerView.LayoutManager layoutManager;
     /**
      * Stores entityId for the depiction
@@ -60,20 +58,6 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
     private String depictsName;
 
     @Inject SubDepictionListPresenter presenter;
-
-    private final SearchDepictionsAdapterFactory adapterFactory = new SearchDepictionsAdapterFactory(new SearchDepictionsRenderer.DepictCallback() {
-        @Override
-        public void depictsClicked(DepictedItem item) {
-            // Open SubDepiction Details page
-            getActivity().finish();
-            WikidataItemDetailsActivity.startYourself(getContext(), item);
-        }
-    });
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
 
     private void initViews() {
         if (getArguments() != null) {
@@ -115,7 +99,12 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
         }
         initViews();
         depictionsRecyclerView.setLayoutManager(layoutManager);
-        depictionsAdapter = adapterFactory.create();
+        depictionsAdapter = new SubDepictionAdapter(depictedItem -> {
+            // Open SubDepiction Details page
+            getActivity().finish();
+            WikidataItemDetailsActivity.startYourself(getContext(), depictedItem);
+            return Unit.INSTANCE;
+        });
         depictionsRecyclerView.setAdapter(depictionsAdapter);
         return v;
     }
@@ -130,14 +119,7 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
         progressBar.setVisibility(View.GONE);
         depictionNotFound.setVisibility(GONE);
         bottomProgressBar.setVisibility(GONE);
-        int itemCount=layoutManager.getItemCount();
         depictionsAdapter.addAll(mediaList);
-        depictionsRecyclerView.getRecycledViewPool().clear();
-        if(itemCount!=0) {
-            depictionsAdapter.notifyItemRangeInserted(itemCount, mediaList.size()-1);
-        }else{
-            depictionsAdapter.notifyDataSetChanged();
-        }
     }
 
     @Override

@@ -603,4 +603,6 @@
   <string name="ask_to_turn_location_on">打開位置？</string>
   <string name="nearby_needs_location">附近功能需要啟用位置才能運作正常</string>
   <string name="use_location_from_similar_image">您是否在同一地點拍攝了這兩張圖片？您要使用圖片右側的緯度/經度嗎？</string>
+  <string name="load_more">載入更多</string>
+  <string name="nearby_no_results">查無地點，請嘗試更改您的搜尋條件。</string>
 </resources>

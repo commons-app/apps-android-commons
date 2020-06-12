@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Abijeet Patro
+* Diki Ananta
+* N219
 * NoiX180
 * Notanotheramy
+* Sumbukompor
 -->
 <resources>
   <string name="title_activity_explore">Dlajah</string>
@@ -15,14 +18,14 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Setèlan</string>
   <string name="intent_share_upload_label">Unggah menyang Commons</string>
-  <string name="username">Jeneng panganggo</string>
-  <string name="password">Tembung wadi</string>
+  <string name="username">Jeneng naraguna</string>
+  <string name="password">Tembung sandi</string>
   <string name="login_credential">Mlebu log akun Commons Beta panjenengan</string>
   <string name="login">Mlebu log</string>
-  <string name="forgot_password">Lali Tembung Wadi?</string>
+  <string name="forgot_password">Lali Tembung Sandi?</string>
   <string name="signup">Dhaftar</string>
   <string name="logging_in_title">Lagi mlebu log</string>
-  <string name="logging_in_message">Entènana sadhela…</string>
+  <string name="logging_in_message">Entènana sadhéla…</string>
   <string name="login_success">Kasil mlebu log!</string>
   <string name="login_failed">Wurung mlebu log!</string>
   <string name="upload_failed">Berkas ora tinemu. Jajal berkas liyané.</string>
@@ -53,9 +56,9 @@
   <string name="share_title_hint">Sesirah (Kudu)</string>
   <string name="share_description_hint">Wedharan</string>
   <string name="login_failed_network">Ora bisa mlebu log - jaringané gagal</string>
-  <string name="login_failed_wrong_credentials">Ora bisa mlebu log - priksa jeneng panganggo lan tembung wadi panjenengan</string>
+  <string name="login_failed_wrong_credentials">Ora bisa mlebu log - priksa jeneng naraguna lan tembung sandi panjenengan</string>
   <string name="login_failed_throttled">Kakèhan upaya sing gagal. Jajalana manèh mengko.</string>
-  <string name="login_failed_blocked">Ngapunten, panganggo iki wis diblokir ing Commons</string>
+  <string name="login_failed_blocked">Ngapunten, naraguna iki wis diblokir ing Commons</string>
   <string name="login_failed_2fa_needed">Panjenengan kudu ngisi kodhe otèntifikasi rong faktoré panjenengan</string>
   <string name="login_failed_generic">Wurung mlebu log</string>
   <string name="share_upload_button">Unggah</string>
@@ -193,7 +196,7 @@
   <string name="navigation_item_featured_images">Pinilih</string>
   <string name="no_description_found">dhèksripsi ora tinemu</string>
   <string name="nearby_info_menu_commons_article">Kaca barkas Commons</string>
-  <string name="nearby_info_menu_wikidata_article">Wiji Wikidata</string>
+  <string name="nearby_info_menu_wikidata_article">Wiji Wikidhata</string>
   <string name="nearby_info_menu_wikipedia_article">Artikel Wikipédia</string>
   <string name="give_permission">Awèh idin</string>
   <string name="use_external_storage">Anggo panyimpenan njaba</string>

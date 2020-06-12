@@ -2,7 +2,6 @@ package fr.free.nrw.commons.contributions;
 
 import android.os.Parcel;
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.wikipedia.dataclient.mwapi.MwQueryLogEvent;
+import java.util.Objects;
 
 @Entity(tableName = "contribution")
 public class Contribution extends Media {
@@ -24,24 +23,21 @@ public class Contribution extends Media {
     public static final int STATE_QUEUED = 2;
     public static final int STATE_IN_PROGRESS = 3;
 
-    @PrimaryKey (autoGenerate = true)
-    private long _id;
     private int state;
     private long transferred;
     private String decimalCoords;
     private String dateCreatedSource;
     private WikidataPlace wikidataPlace;
     /**
-     * Each depiction loaded in depictions activity is associated with a wikidata entity id,
-     * this Id is in turn used to upload depictions to wikibase
+     * Each depiction loaded in depictions activity is associated with a wikidata entity id, this Id
+     * is in turn used to upload depictions to wikibase
      */
     private List<DepictedItem> depictedItems = new ArrayList<>();
     private String mimeType;
     /**
-     * This hasmap stores the list of multilingual captions, where
-     * key of the HashMap is the language and value is the caption in the corresponding language
-     * Ex: key = "en", value: "<caption in short in English>"
-     *     key = "de" , value: "<caption in german>"
+     * This hasmap stores the list of multilingual captions, where key of the HashMap is the language
+     * and value is the caption in the corresponding language Ex: key = "en", value: "<caption in
+     * short in English>" key = "de" , value: "<caption in german>"
      */
     private Map<String, String> captions = new HashMap<>();
 
@@ -55,18 +51,11 @@ public class Contribution extends Media {
             UploadMediaDetail.formatList(item.getUploadMediaDetails()),
             sessionManager.getAuthorName(),
             categories);
-        captions =  UploadMediaDetail.formatCaptions(item.getUploadMediaDetails());
+        captions = UploadMediaDetail.formatCaptions(item.getUploadMediaDetails());
         decimalCoords = item.getGpsCoords().getDecimalCoords();
         dateCreatedSource = "";
         this.depictedItems = depictedItems;
         wikidataPlace = WikidataPlace.from(item.getPlace());
-    }
-
-    public Contribution(final MwQueryLogEvent queryLogEvent, final String user) {
-        super(queryLogEvent.title(),queryLogEvent.date(), user);
-        decimalCoords = "";
-        dateCreatedSource = "";
-        state = STATE_COMPLETED;
     }
 
     public void setDateCreatedSource(final String dateCreatedSource) {
@@ -108,14 +97,6 @@ public class Contribution extends Media {
         return wikidataPlace;
     }
 
-    public long get_id() {
-        return _id;
-    }
-
-    public void set_id(final long _id) {
-        this._id = _id;
-    }
-
     public String getDecimalCoords() {
         return decimalCoords;
     }
@@ -128,29 +109,30 @@ public class Contribution extends Media {
         this.depictedItems = depictedItems;
     }
 
-    public void setMimeType(String mimeType) {
-      this.mimeType = mimeType;
+    public String getMimeType() {
+        return mimeType;
     }
 
-    public String getMimeType() {
-      return mimeType;
+    public void setMimeType(final String mimeType) {
+        this.mimeType = mimeType;
     }
 
     /**
-     * Captions are a feature part of Structured data. They are meant to store short, multilingual descriptions about files
-     * This is a replacement of the previously used titles for images (titles were not multilingual)
-     * Also now captions replace the previous convention of using title for filename
-     *
+     * Captions are a feature part of Structured data. They are meant to store short, multilingual
+     * descriptions about files This is a replacement of the previously used titles for images (titles
+     * were not multilingual) Also now captions replace the previous convention of using title for
+     * filename
+     * <p>
      * key of the HashMap is the language and value is the caption in the corresponding language
-     *
+     * <p>
      * returns list of captions stored in hashmap
      */
     public Map<String, String> getCaptions() {
-      return captions;
+        return captions;
     }
 
     public void setCaptions(Map<String, String> captions) {
-      this.captions = captions;
+        this.captions = captions;
     }
 
     @Override
@@ -161,7 +143,6 @@ public class Contribution extends Media {
     @Override
     public void writeToParcel(final Parcel dest, final int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeLong(_id);
         dest.writeInt(state);
         dest.writeLong(transferred);
         dest.writeString(decimalCoords);
@@ -169,9 +150,24 @@ public class Contribution extends Media {
         dest.writeSerializable((HashMap) captions);
     }
 
+    /**
+     * Constructor that takes Media object and state as parameters and builds a new Contribution object
+     * @param media
+     * @param state
+     */
+    public Contribution(Media media, int state) {
+        super(media.getPageId(),
+            media.getLocalUri(), media.getThumbUrl(), media.getImageUrl(), media.getFilename(),
+            media.getDescription(),
+            media.getDiscussion(),
+            media.getDataLength(), media.getDateCreated(), media.getDateUploaded(),
+            media.getLicense(), media.getLicenseUrl(), media.getCreator(), media.getCategories(),
+            media.isRequestedDeletion(), media.getCoordinates());
+        this.state = state;
+    }
+
     protected Contribution(final Parcel in) {
         super(in);
-        _id = in.readLong();
         state = in.readInt();
         transferred = in.readLong();
         decimalCoords = in.readString();
@@ -190,4 +186,35 @@ public class Contribution extends Media {
             return new Contribution[size];
         }
     };
+
+    /**
+     * Equals implementation of Contributions that compares all parameters for checking equality
+     */
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Contribution)) {
+            return false;
+        }
+        final Contribution that = (Contribution) o;
+        return getState() == that.getState() && getTransferred() == that.getTransferred() && Objects
+            .equals(getDecimalCoords(), that.getDecimalCoords()) && Objects
+            .equals(getDateCreatedSource(), that.getDateCreatedSource()) && Objects
+            .equals(getWikidataPlace(), that.getWikidataPlace()) && Objects
+            .equals(getDepictedItems(), that.getDepictedItems()) && Objects
+            .equals(getMimeType(), that.getMimeType()) && Objects
+            .equals(getCaptions(), that.getCaptions());
+    }
+
+    /**
+     * Hash code implementation of contributions that considers all parameters for calculating hash.
+     */
+    @Override
+    public int hashCode() {
+        return Objects
+            .hash(getState(), getTransferred(), getDecimalCoords(), getDateCreatedSource(),
+                getWikidataPlace(), getDepictedItems(), getMimeType(), getCaptions());
+    }
 }

@@ -2,6 +2,7 @@
 <!-- Authors:
 * Abijeet Patro
 * CYAN
+* Codenstory
 * Dlsrks1021
 * Doyoon1995
 * Freebiekr
@@ -12,6 +13,7 @@
 * Nuevo Paso
 * Revi
 * Ykhwong
+* YuzaTea
 * 그냥기여자
 * 아라
 -->
@@ -78,6 +80,7 @@
   <string name="provider_modifications">바뀜</string>
   <string name="menu_upload_single">올리기</string>
   <string name="categories_search_text_hint">분류 검색</string>
+  <string name="depicts_search_text_hint">미디어가 서술한 항목을 검색하세요. (산, 타지마할 등)</string>
   <string name="menu_save_categories">저장</string>
   <string name="refresh_button">새로 고침</string>
   <string name="display_list_button">목록</string>
@@ -98,6 +101,9 @@
   </plurals>
   <string name="categories_not_found">%1$s와(과) 일치하는 분류를 찾을 수 없습니다</string>
   <string name="depictions_not_found">%1$s에 대한 위키데이터 검색 결과가 없습니다</string>
+  <string name="no_child_classes">%1$s에 자식 클래스가 없습니다</string>
+  <string name="no_parent_classes">%1$s에 부모 클래스가 없습니다</string>
+  <string name="depictions_image_not_found">서술을 위한 이미지가 없습니다</string>
   <string name="categories_skip_explanation">위키미디어 공용에서 그림을 더 찾기 쉽게 만들기 위해 분류를 추가합니다.\n분류를 추가하려면 입력을 시작하세요.</string>
   <string name="categories_activity_title">분류</string>
   <string name="title_activity_settings">설정</string>
@@ -113,6 +119,7 @@
   <string name="menu_feedback">(이메일로) 피드백 보내기</string>
   <string name="no_email_client">설치된 이메일 클라이언트가 없습니다</string>
   <string name="provider_categories">최근에 사용한 분류</string>
+  <string name="provider_depictions">최근에 사용한 서술</string>
   <string name="waiting_first_sync">첫 동기화를 기다리는 중…</string>
   <string name="no_uploads_yet">아직 사진을 올리지 않았습니다.</string>
   <string name="menu_retry_upload">다시 시도</string>
@@ -173,13 +180,14 @@
   <string name="detail_panel_cats_loading">불러오는 중…</string>
   <string name="detail_panel_cats_none">선택하지 않음</string>
   <string name="detail_caption_empty">설명 없음</string>
+  <string name="detail_depiction_empty">서술 없음</string>
   <string name="detail_description_empty">설명 없음</string>
   <string name="detail_discussion_empty">토론 없음</string>
   <string name="detail_license_empty">알 수 없는 라이선스</string>
   <string name="menu_refresh">새로 고침</string>
   <string name="storage_permission_title">기억 장치 권한 요청 중</string>
   <string name="read_storage_permission_rationale">권한 필요: 외부 저장소 읽기. 이것이 없으면 앱은 갤러리에 접근할 수 없습니다.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">권한 필요: 외부 저장소 쓰기. 이것이 없으면 앱은 카메라에 접근할 수 없습니다.</string>
+  <string name="write_storage_permission_rationale">권한 필요: 외부 저장소 쓰기. 이것이 없으면 앱은 카메라/갤러리에 접근할 수 없습니다.</string>
   <string name="location_permission_title">위치 권한 요청 중</string>
   <string name="location_permission_rationale">선택적 권한: 분류 추천을 위해 현재 위치 정보를 가져옵니다.</string>
   <string name="ok">확인</string>
@@ -193,6 +201,7 @@
   <string name="no">아니오</string>
   <string name="media_detail_caption">설명</string>
   <string name="media_detail_title">제목</string>
+  <string name="media_detail_depiction">서술</string>
   <string name="media_detail_description">설명</string>
   <string name="media_detail_discussion">토론</string>
   <string name="media_detail_author">저자</string>
@@ -245,6 +254,7 @@
   <string name="navigation_item_info">강좌</string>
   <string name="navigation_item_notification">알림</string>
   <string name="navigation_item_featured_images">알참</string>
+  <string name="navigation_item_review">검토</string>
   <string name="nearby_needs_permissions">위치 권한이 없으면 주변 장소를 표시할 수 없습니다</string>
   <string name="no_description_found">설명이 없습니다</string>
   <string name="nearby_info_menu_commons_article">공용 파일 문서</string>
@@ -253,6 +263,7 @@
   <string name="error_while_cache">그림 캐시 처리 오류</string>
   <string name="title_info">이 파일을 설명할 수 있는 제목으로, 파일 이름으로 사용됩니다. 띄어쓰기를 포함한 일반적인 단어를 사용할 수 있습니다. 파일 확장자는 포함하지 마세요</string>
   <string name="description_info">미디어에 대해 가능한 많이 설명하십시오: 어디서 촬영한 것인가? 무엇을 보여주는가? 무슨 문맥을 가지는가? 물건이나 사람에 대해 설명하십시오. 풍경에서 시간을 알려주는 것처럼 쉽게 추측할 수 없는 정보를 제공합니다. 미디어가 평범하지 않다면 무엇이 이를 평범하지 않게 만들었는지 설명하십시오.</string>
+  <string name="caption_info">그림 설명을 작성해 주세요. (255자 제한)</string>
   <string name="upload_image_too_dark">이 사진은 너무 어둡습니다. 정말 업로드하시겠습니까? 위키미디어 공용은 백과사전적인 가치가 있는 사진을 위한 공간입니다.</string>
   <string name="upload_image_blurry">이 사진은 흐릿합니다. 정말 업로드하시겠습니까? 위키미디어 공용은 백과사전적인 가치가 있는 사진을 위한 공간입니다.</string>
   <string name="upload_problem_exist">이 그림에 잠재적인 문제가 있습니다:</string>
@@ -260,8 +271,10 @@
   <string name="upload_problem_image_blurry">이미지가 흐릿합니다.</string>
   <string name="upload_problem_image_duplicate">이미지가 이미 공용에 있습니다.</string>
   <string name="upload_problem_different_geolocation">이 사진은 다른 위치에서 찍었습니다.</string>
+  <string name="upload_problem_fbmd">당신이 직접 찍은 사진만 업로드하세요. 다른 사람의 페이스북 계정에서 찾은 사진을 업로드하지마세요.</string>
   <string name="upload_problem_do_you_continue">그래도 이 사진을 업로드하시겠습니까?</string>
   <string name="upload_problem_image">이미지에 문제가 있습니다</string>
+  <string name="internet_downloaded">직접 찍은 사진만 업로드하세요. 인터넷에서 다운로드한 사진을 업로드하지 마세요.</string>
   <string name="give_permission">권한 부여</string>
   <string name="use_external_storage">외부 저장소 사용하기</string>
   <string name="use_external_storage_summary">장치의 인앱 카메라로 찍은 사진 저장하기</string>
@@ -301,6 +314,8 @@
   <string name="no_internet">인터넷 사용 불가</string>
   <string name="internet_established">인터넷 사용 가능</string>
   <string name="error_notifications">알림 가져오기 오류</string>
+  <string name="error_review">검토할 이미지를 가져오는 중 오류 발생. 새로 고침을 눌러 다시 시도하세요.</string>
+  <string name="error_review_categories">검토할 이미지의 범주를 가져오는 중 오류 발생. 새로 고침을 눌러 다시 시도하세요.</string>
   <string name="no_notifications">알림이 없습니다</string>
   <string name="about_translate">번역</string>
   <string name="about_translate_title">언어</string>
@@ -326,10 +341,12 @@
   <string name="search_recent_header">최근 검색:</string>
   <string name="provider_searches">최근 검색된 쿼리</string>
   <string name="error_loading_categories">분류를 불러오는 동안 오류가 발생했습니다.</string>
+  <string name="error_loading_depictions">서술을 불러오는 동안 오류가 발생했습니다.</string>
   <string name="error_loading_subcategories">하위 분류를 불러오는 동안 오류가 발생했습니다.</string>
   <string name="search_tab_title_media">미디어</string>
   <string name="search_tab_title_categories">분류</string>
   <string name="search_tab_title_depictions">항목</string>
+  <string name="explore_tab_title_featured">추천됨</string>
   <string name="explore_tab_title_mobile">모바일을 통해 업로드됨</string>
   <string name="successful_wikidata_edit">위키데이터의 %1$s에 그림을 추가했습니다!</string>
   <string name="wikidata_edit_failure">일치하는 위키데이터 엔티티의 업데이트를 실패했습니다!</string>
@@ -372,6 +389,7 @@
   <string name="statistics_wikidata_edits">\"주변 장소\" 경유 이미지</string>
   <string name="level">레벨</string>
   <string name="images_uploaded">사진 업로드됨</string>
+  <string name="images_used_by_wiki">사용된 이미지</string>
   <string name="achievements_share_message">친구와 성과를 공유하세요!</string>
   <string name="achievements_revert_limit_message">최소 요구사항:</string>
   <string name="images_uploaded_explanation">업로드 소프트웨어를 통해 공용에 업로드한 그림 수</string>
@@ -426,7 +444,8 @@
   <string name="desc_language_Asia">아시아</string>
   <string name="desc_language_Pacific">태평양</string>
   <string name="no_categories_selected">선택된 분류 없음</string>
-  <string name="no_categories_selected_warning_desc" fuzzy="true">분류가 없는 그림은 거의 유용하지 않습니다. 분류를 선택하지 않고 제출하시겠습니까?</string>
+  <string name="no_categories_selected_warning_desc">분류가 없는 그림은 거의 유용하지 않습니다. 분류를 선택하지 않고 제출하시겠습니까?</string>
+  <string name="no_depictions_selected">선택된 서술 없음</string>
   <string name="search_this_area">여기를 검색</string>
   <string name="nearby_card_permission_title">권한 요청</string>
   <string name="nearby_card_permission_explanation">사진이 필요한 주변 장소를 표시하기 위해 현재 위치를 사용하시겠습니까?</string>
@@ -477,6 +496,7 @@
   <string name="share_via">앱 공유...</string>
   <string name="image_info">이미지 정보</string>
   <string name="no_categories_found">분류가 없습니다</string>
+  <string name="no_depiction_found">서술이 발견되지 않았습니다</string>
   <string name="upload_cancelled">업로드 취소됨</string>
   <string name="default_description_language">기본 설명 언어</string>
   <string name="delete_helper_show_deletion_title_success">성공</string>
@@ -484,7 +504,7 @@
   <string name="delete_helper_ask_spam_selfie">셀카</string>
   <string name="delete_helper_ask_spam_blurry">흐림</string>
   <string name="delete_helper_ask_spam_other">기타</string>
-  <string name="delete_helper_ask_reason_copyright_internet_photo">인터넷의 임의 사진</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">인터넷상의 무작위 이미지</string>
   <string name="delete_helper_ask_reason_copyright_logo">로고</string>
   <string name="delete_helper_ask_reason_copyright_other">기타</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">왜냐하면</string>
@@ -500,6 +520,8 @@
   <string name="place_type">장소 유형:</string>
   <string name="nearby_search_hint">다리, 박물관, 호텔 등.</string>
   <string name="title_for_media">미디어</string>
+  <string name="title_for_child_classes">자식 클래스</string>
+  <string name="title_for_parent_classes">부모 클래스</string>
   <string name="title_app_shortcut_explore">찾아보기</string>
   <string name="title_app_shortcut_bookmark">북마크</string>
   <string name="title_app_shortcut_setting">설정</string>
@@ -511,4 +533,6 @@
   <string name="theme_dark_name">어두움</string>
   <string name="theme_light_name">밝음</string>
   <string name="ask_to_turn_location_on">위치를 켭니까?</string>
+  <string name="load_more">더 불러오기</string>
+  <string name="nearby_no_results">발견된 장소가 없습니다. 검색 기준을 바꾸어 보십시오.</string>
 </resources>

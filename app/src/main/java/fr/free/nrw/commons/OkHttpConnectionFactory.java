@@ -21,7 +21,8 @@ public final class OkHttpConnectionFactory {
     @NonNull private static final Cache NET_CACHE = new Cache(new File(CommonsApplication.getInstance().getCacheDir(),
             CACHE_DIR_NAME), NET_CACHE_SIZE);
 
-    @NonNull private static final OkHttpClient CLIENT = createClient();
+    @NonNull
+    private static final OkHttpClient CLIENT = createClient();
 
     @NonNull public static OkHttpClient getClient() {
         return CLIENT;
@@ -40,7 +41,7 @@ public final class OkHttpConnectionFactory {
 
     private static HttpLoggingInterceptor getLoggingInterceptor() {
         final HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor()
-                .setLevel(Level.BASIC);
+            .setLevel(Level.BASIC);
 
         httpLoggingInterceptor.redactHeader("Authorization");
         httpLoggingInterceptor.redactHeader("Cookie");
@@ -49,7 +50,10 @@ public final class OkHttpConnectionFactory {
     }
 
     private static class CommonHeaderRequestInterceptor implements Interceptor {
-        @Override @NonNull public Response intercept(@NonNull final Chain chain) throws IOException {
+
+        @Override
+        @NonNull
+        public Response intercept(@NonNull final Chain chain) throws IOException {
             final Request request = chain.request().newBuilder()
                     .header("User-Agent", CommonsApplication.getInstance().getUserAgent())
                     .build();
@@ -61,16 +65,18 @@ public final class OkHttpConnectionFactory {
 
         private static final String ERRORS_PREFIX = "{\"error";
 
-        @Override @NonNull public Response intercept(@NonNull final Chain chain) throws IOException {
+        @Override
+        @NonNull
+        public Response intercept(@NonNull final Chain chain) throws IOException {
             final Response rsp = chain.proceed(chain.request());
             if (rsp.isSuccessful()) {
                 try (final ResponseBody responseBody = rsp.peekBody(ERRORS_PREFIX.length())) {
-                    if (ERRORS_PREFIX.equals(responseBody.string())){
+                    if (ERRORS_PREFIX.equals(responseBody.string())) {
                         try (final ResponseBody body = rsp.body()) {
                             throw new IOException(body.string());
                         }
                     }
-                }catch (final IOException e){
+                } catch (final IOException e) {
                     Timber.e(e);
                 }
                 return rsp;

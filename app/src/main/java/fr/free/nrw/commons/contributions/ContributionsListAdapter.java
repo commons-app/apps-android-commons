@@ -1,68 +1,71 @@
-package fr.free.nrw.commons.contributions;
+    package fr.free.nrw.commons.contributions;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.paging.PagedListAdapter;
+import androidx.recyclerview.widget.DiffUtil;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.media.MediaClient;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Represents The View Adapter for the List of Contributions  
+ * Represents The View Adapter for the List of Contributions
  */
-public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionViewHolder> {
+public class ContributionsListAdapter extends
+    PagedListAdapter<Contribution, ContributionViewHolder> {
 
-    private Callback callback;
+    private final Callback callback;
     private final MediaClient mediaClient;
-    private List<Contribution> contributions;
 
-    public ContributionsListAdapter(Callback callback,
-        MediaClient mediaClient) {
+    ContributionsListAdapter(final Callback callback,
+        final MediaClient mediaClient) {
+        super(DIFF_CALLBACK);
         this.callback = callback;
         this.mediaClient = mediaClient;
-        contributions = new ArrayList<>();
     }
 
     /**
-     * Creates the new View Holder which will be used to display items(contributions)
-     * using the onBindViewHolder(viewHolder,position) 
+     * Uses DiffUtil to calculate the changes in the list
+     * It has methods that check ID and the content of the items to determine if its a new item
      */
-    @NonNull
-    @Override
-    public ContributionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ContributionViewHolder viewHolder = new ContributionViewHolder(
-                LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.layout_contribution, parent, false), callback, mediaClient);
-        return viewHolder;
-    }
+    private static final DiffUtil.ItemCallback<Contribution> DIFF_CALLBACK =
+        new DiffUtil.ItemCallback<Contribution>() {
+            @Override
+            public boolean areItemsTheSame(final Contribution oldContribution, final Contribution newContribution) {
+                return oldContribution.getPageId().equals(newContribution.getPageId());
+            }
 
-    @Override
-    public void onBindViewHolder(@NonNull ContributionViewHolder holder, int position) {
-        final Contribution contribution = contributions.get(position);
-        if (TextUtils.isEmpty(contribution.getThumbUrl())
-            && contribution.getState() == Contribution.STATE_COMPLETED) {
-            callback.fetchMediaUriFor(contribution);
-        }
+            @Override
+            public boolean areContentsTheSame(final Contribution oldContribution, final Contribution newContribution) {
+                return oldContribution.equals(newContribution);
+            }
+        };
 
+    /**
+     * Initializes the view holder with contribution data
+     */
+    @Override
+    public void onBindViewHolder(@NonNull final ContributionViewHolder holder, final int position) {
+        final Contribution contribution = getItem(position);
         holder.init(position, contribution);
     }
 
-    @Override
-    public int getItemCount() {
-        return contributions.size();
+    Contribution getContributionForPosition(final int position) {
+        return getItem(position);
     }
 
-    public void setContributions(@NonNull List<Contribution> contributionList) {
-        contributions = contributionList;
-        notifyDataSetChanged();
-    }
-
+    /**
+     * Creates the new View Holder which will be used to display items(contributions) using the
+     * onBindViewHolder(viewHolder,position)
+     */
+    @NonNull
     @Override
-    public long getItemId(int position) {
-        return contributions.get(position).get_id();
+    public ContributionViewHolder onCreateViewHolder(@NonNull final ViewGroup parent,
+        final int viewType) {
+        final ContributionViewHolder viewHolder = new ContributionViewHolder(
+            LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.layout_contribution, parent, false), callback, mediaClient);
+        return viewHolder;
     }
 
     public interface Callback {
@@ -72,9 +75,5 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
         void deleteUpload(Contribution contribution);
 
         void openMediaDetail(int contribution);
-
-        Contribution getContributionForPosition(int position);
-
-        void fetchMediaUriFor(Contribution contribution);
     }
 }

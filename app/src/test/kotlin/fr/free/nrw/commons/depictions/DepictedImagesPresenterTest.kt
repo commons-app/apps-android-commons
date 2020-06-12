@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.depictions
 
-import org.mockito.Mockito.verify
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.depictions.Media.DepictedImagesFragment
 import fr.free.nrw.commons.depictions.Media.DepictedImagesPresenter
@@ -15,24 +14,26 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
 class DepictedImagesPresenterTest {
 
     @Mock
-    internal var view: DepictedImagesFragment? = null
+    internal lateinit var view: DepictedImagesFragment
 
-    var depictedImagesPresenter: DepictedImagesPresenter? = null
-
-    var jsonKvStore: JsonKvStore? = null
+    lateinit var depictedImagesPresenter: DepictedImagesPresenter
 
     @Mock
-    var depictsClient: DepictsClient? = null
+    lateinit var jsonKvStore: JsonKvStore
 
     @Mock
-    var mediaClient: MediaClient? = null
+    lateinit var depictsClient: DepictsClient
 
-    var testScheduler: TestScheduler? = null
+    @Mock
+    lateinit var mediaClient: MediaClient
+
+    lateinit var testScheduler: TestScheduler
 
     val mediaList: ArrayList<Media> = ArrayList()
 
@@ -50,24 +51,26 @@ class DepictedImagesPresenterTest {
         mediaList.add(mediaItem)
         testObservable = Observable.just(mediaList)
         depictedImagesPresenter = DepictedImagesPresenter(jsonKvStore, depictsClient, mediaClient, testScheduler, testScheduler)
-        depictedImagesPresenter?.onAttachView(view)
+        depictedImagesPresenter.onAttachView(view)
     }
 
     @Test
     fun initList() {
-        Mockito.`when`(depictsClient?.fetchImagesForDepictedItem(ArgumentMatchers.anyString(),
-            ArgumentMatchers.anyInt())).thenReturn(testObservable)
-        depictedImagesPresenter?.initList("rabbit")
-        depictedImagesPresenter?.handleSuccess(mediaList)
+        Mockito.`when`(
+            depictsClient.fetchImagesForDepictedItem(ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyInt())
+        ).thenReturn(testObservable)
+        depictedImagesPresenter.initList("rabbit")
+        depictedImagesPresenter.handleSuccess(mediaList)
         verify(view)?.handleSuccess(mediaList)
     }
 
     @Test
     fun replaceTitlesWithCaptions() {
         var stringObservable: Single<String>? = Single.just(String())
-        Mockito.`when`(mediaClient?.getCaptionByWikibaseIdentifier(ArgumentMatchers.anyString()))?.thenReturn(stringObservable)
-        depictedImagesPresenter?.replaceTitlesWithCaptions("File:rabbit.jpg", 0)
-        testScheduler?.triggerActions()
+        Mockito.`when`(mediaClient.getCaptionByWikibaseIdentifier(ArgumentMatchers.anyString()))?.thenReturn(stringObservable)
+        depictedImagesPresenter.replaceTitlesWithCaptions("File:rabbit.jpg", 0)
+        testScheduler.triggerActions()
         verify(view)?.handleLabelforImage("", 0)
     }
 }
