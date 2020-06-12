@@ -60,6 +60,13 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private static final double BADGE_IMAGE_WIDTH_RATIO = 0.4;
     private static final double BADGE_IMAGE_HEIGHT_RATIO = 0.3;
 
+    private static final String IMAGES_UPLOADED_URL = "https://commons.wikimedia.org/wiki/Commons:Project_scope";
+    private static final String IMAGE_REVERTS_URL = "https://commons.wikimedia.org/wiki/Commons:Deletion_policy#Reasons_for_deletion";
+    private static final String IMAGES_USED_BY_WIKI_URL = "https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images";
+    private static final String STATISTICS_WIKIDATA_EDITS_URL = "https://www.wikidata.org/wiki/Property:P18";
+    private static final String STATISTICS_FEATURED_URL = "https://commons.wikimedia.org/wiki/Commons:Featured_pictures";
+    private static final String STATISTICS_THANKS_URL = "https://www.mediawiki.org/wiki/Extension:Thanks";
+
     private LevelController.LevelInfo levelInfo;
 
     @BindView(R.id.achievement_badge_image)
@@ -469,7 +476,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     public void showUploadInfo(){
         launchAlertWithLink(getResources().getString(R.string.images_uploaded)
                 ,getResources().getString(R.string.images_uploaded_explanation)
-                , "https://commons.wikimedia.org/wiki/Commons:Project_scope"
+                , IMAGES_UPLOADED_URL
                 , getResources().getString(R.string.read_more));
     }
 
@@ -477,7 +484,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     public void showRevertedInfo(){
         launchAlertWithLink(getResources().getString(R.string.image_reverts)
                 ,getResources().getString(R.string.images_reverted_explanation)
-                , "https://commons.wikimedia.org/wiki/Commons:Deletion_policy#Reasons_for_deletion"
+                , IMAGE_REVERTS_URL
                 , getResources().getString(R.string.read_more));
     }
 
@@ -485,7 +492,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     public void showUsedByWikiInfo(){
         launchAlertWithLink(getResources().getString(R.string.images_used_by_wiki)
                 ,getResources().getString(R.string.images_used_explanation)
-                , "https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images"
+                , IMAGES_USED_BY_WIKI_URL
                 , getResources().getString(R.string.read_more));
     }
 
@@ -493,7 +500,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     public void showImagesViaNearbyInfo(){
         launchAlertWithLink(getResources().getString(R.string.statistics_wikidata_edits)
                 ,getResources().getString(R.string.images_via_nearby_explanation)
-                , "https://www.wikidata.org/wiki/Property:P18"
+                , STATISTICS_WIKIDATA_EDITS_URL
                 , getResources().getString(R.string.read_more));
     }
 
@@ -501,7 +508,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     public void showFeaturedImagesInfo(){
         launchAlertWithLink(getResources().getString(R.string.statistics_featured)
                 ,getResources().getString(R.string.images_featured_explanation)
-                , "https://commons.wikimedia.org/wiki/Commons:Featured_pictures"
+                , STATISTICS_FEATURED_URL
                 , getResources().getString(R.string.read_more));
     }
 
@@ -509,7 +516,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     public void showThanksReceivedInfo(){
         launchAlertWithLink(getResources().getString(R.string.statistics_thanks)
                 ,getResources().getString(R.string.thanks_received_explanation)
-                , "https://www.mediawiki.org/wiki/Extension:Thanks"
+                , STATISTICS_THANKS_URL
                 , getResources().getString(R.string.read_more));
     }
 
