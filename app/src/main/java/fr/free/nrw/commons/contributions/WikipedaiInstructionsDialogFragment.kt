@@ -14,6 +14,9 @@ import kotlinx.android.synthetic.main.dialog_add_to_wikipedia_instructions.*
 import org.wikipedia.dataclient.WikiSite
 import javax.inject.Inject
 
+/**
+ * Dialog fragment for displaying instructions for editing wikipedia
+ */
 class WikipedaiInstructionsDialogFragment : DialogFragment() {
 
     var contribution: Contribution? = null
@@ -46,6 +49,9 @@ class WikipedaiInstructionsDialogFragment : DialogFragment() {
         )
     }
 
+    /**
+     * Callback for handling confirm button clicked
+     */
     interface Callback {
         fun onConfirmClicked(contribution: Contribution?, copyWikicode: Boolean)
     }
