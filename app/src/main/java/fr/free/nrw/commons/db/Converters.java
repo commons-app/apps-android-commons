@@ -11,6 +11,7 @@ import fr.free.nrw.commons.media.Depictions;
 import fr.free.nrw.commons.upload.WikidataPlace;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,13 +55,13 @@ public class Converters {
     }
 
     @TypeConverter
-    public static String mapObjectToString(Map<String,String> objectList) {
+    public static String mapObjectToString(HashMap<String,String> objectList) {
         return writeObjectToString(objectList);
     }
 
     @TypeConverter
-    public static Map<String,String> stringToMap(String objectList) {
-        return readObjectWithTypeToken(objectList, new TypeToken<Map<String,String>>(){});
+    public static HashMap<String,String> stringToMap(String objectList) {
+        return readObjectWithTypeToken(objectList, new TypeToken<HashMap<String,String>>(){});
     }
 
     @TypeConverter

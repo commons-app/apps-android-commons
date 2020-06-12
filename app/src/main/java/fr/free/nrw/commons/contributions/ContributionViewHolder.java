@@ -80,6 +80,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     seqNumView.setText(String.valueOf(position + 1));
     seqNumView.setVisibility(View.VISIBLE);
 
+    addToWikipediaButton.setVisibility(View.GONE);
     switch (contribution.getState()) {
       case Contribution.STATE_COMPLETED:
         stateView.setVisibility(View.GONE);
