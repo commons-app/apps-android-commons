@@ -634,4 +634,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="todo_improve">You can improve free knowledge as following</string>
   <string name="missing_category">- Images that they uploaded with no categories/descriptions, so that they can add them.</string>
   <string name="missing_article">- Image that can be added to associated Wikipedia articles that have no pictures.</string>
+  <string name="edit_category">Edit categories</string>
 </resources>

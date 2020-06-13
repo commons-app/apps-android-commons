@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,9 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AccountUtil;
+import fr.free.nrw.commons.category.Category;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
+import fr.free.nrw.commons.category.CategoryEditHelper;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
@@ -57,6 +60,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
@@ -95,6 +99,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @Inject
     DeleteHelper deleteHelper;
     @Inject
+    CategoryEditHelper categoryEditHelper;
+    @Inject
     ViewUtilWrapper viewUtil;
 
     private int initialListTop = 0;
@@ -131,6 +137,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     LinearLayout nominatedForDeletion;
     @BindView(R.id.mediaDetailCategoryContainer)
     LinearLayout categoryContainer;
+    @BindView(R.id.categoryEditButton)
+    Button categoryEditButton;
     @BindView(R.id.media_detail_depiction_container)
     LinearLayout depictionContainer;
     @BindView(R.id.authorLinearLayout)
@@ -374,7 +382,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             toDoNeeded = true;
             toDoMessage += getString(R.string.missing_category);
         }
-         // TODO: mediaclient after viveks changes are merged
+         // TODO: from mediaclient after viveks changes are merged
         if (true) {
             toDoNeeded = true;
             toDoMessage += (toDoMessage.isEmpty()) ? "" : "\n" + getString(R.string.missing_article);
@@ -483,6 +491,25 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         Toast.makeText(getContext(), getString(R.string.wikicode_copied), Toast.LENGTH_SHORT).show();
     }
 
+    @OnClick(R.id.categoryEditButton)
+    public void onCategoryEditButtonClicked(){
+        // TODO: display categories
+        List<Category> selectedCategories = new ArrayList<>();
+        selectedCategories.add(new Category(null, "Animals", null, 1));
+        selectedCategories.add(new Category(null, "Birds", null, 1));
+        Single<Boolean> resultSingle = categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories)
+            .flatMap(result -> categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories));
+        compositeDisposable.add(resultSingle
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(s -> {
+                if (getActivity() != null) {
+                    Log.d("deneme","oldu");
+                    // TODO: var olan kategoriler listede görünmedi bir sebepten. Ve kategori listesinden seçtirmelisin
+                }
+            }));
+    }
+
     @OnClick(R.id.nominateDeletion)
     public void onDeleteButtonClicked(){
             if (AccountUtil.getUserName(getContext()) != null && AccountUtil.getUserName(getContext()).equals(media.getCreator())) {
@@ -552,7 +579,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
             }
         }
-
 
     @SuppressLint("CheckResult")
     private void onDeleteClicked(Spinner spinner) {

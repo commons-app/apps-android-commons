@@ -8,6 +8,14 @@
     android:background="?attr/mainBackground"
     >
 
+    <LinearLayout
+      android:id="@+id/cetagoryEditContainer"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/mediaDetailImageFailed"
         android:layout_height="wrap_content"
@@ -287,7 +295,17 @@
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
                         android:layout_weight="70"
-                        android:orientation="vertical" />
+                        android:orientation="vertical">
+                    </LinearLayout>
+
+                    <Button
+                      android:id="@+id/categoryEditButton"
+                      android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="5"
+                      android:layout_margin="@dimen/standard_gap"
+                      android:background="@drawable/ic_edit_black_24dp" />
+
                 </LinearLayout>
 
                 <LinearLayout
