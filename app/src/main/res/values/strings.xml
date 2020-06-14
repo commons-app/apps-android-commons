@@ -638,7 +638,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="add_picture_to_wikipedia_instructions_desc">Take care to follow editing guidelines!</string>
   <string name="confirm">Confirm</string>
   <string name="instructions_title">Instructions</string>
-  <string name="wikipedia_instructions_step_1">1. Copy the following wikitext:</string>
+  <string name="wikipedia_instructions_step_1">1. Use the following wikitext:</string>
   <string name="wikipedia_instructions_step_2">2. Clicking on Confirm will open the Wikipedia article</string>
   <string name="wikipedia_instructions_step_3">3. Find an appropriate section in the article for your image</string>
   <string name="wikipedia_instructions_step_4">4. Click on the Edit icon (the one like a pencil) for that section.</string>

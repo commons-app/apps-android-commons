@@ -299,7 +299,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     }
 
     final String url = languageWikipediaSite.mobileUrl() + "/wiki/" + contribution.getWikidataPlace()
-        .getWikipediaPageTitle() + "#/editor/0";
+        .getWikipediaPageTitle();
     Utils.handleWebUrl(getContext(), Uri.parse(url));
   }
 

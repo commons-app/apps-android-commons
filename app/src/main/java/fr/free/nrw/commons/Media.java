@@ -523,7 +523,7 @@ public class Media implements Parcelable {
      * @return
      */
     public String getWikiCode() {
-        return String.format("[[File:%s|thumb|%s]]", filename, thumbnailTitle);
+        return String.format("[[%s|thumb|%s]]", filename, thumbnailTitle);
     }
 
     /**
