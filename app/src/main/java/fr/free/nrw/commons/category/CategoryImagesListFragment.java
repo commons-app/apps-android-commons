@@ -2,6 +2,7 @@ package fr.free.nrw.commons.category;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_PREFIX;
 import static fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_ID_PREFIX;
 
 import android.annotation.SuppressLint;
@@ -88,6 +89,9 @@ public class CategoryImagesListFragment extends DaggerFragment {
     private void initViews() {
         String categoryName = getArguments().getString("categoryName");
         if (getArguments() != null && categoryName != null) {
+            if (!categoryName.startsWith(CATEGORY_PREFIX)) {
+                categoryName = CATEGORY_PREFIX + categoryName;
+            }
             this.categoryName = categoryName;
             resetQueryContinueValues(categoryName);
             initList();
