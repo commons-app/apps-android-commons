@@ -1,15 +1,16 @@
 package fr.free.nrw.commons.nearby.presenter;
 
-import android.util.Log;
-import android.view.View;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.SEARCH_CUSTOM_AREA;
+import static fr.free.nrw.commons.nearby.CheckBoxTriStates.CHECKED;
+import static fr.free.nrw.commons.nearby.CheckBoxTriStates.UNCHECKED;
+import static fr.free.nrw.commons.nearby.CheckBoxTriStates.UNKNOWN;
 
+import android.view.View;
 import androidx.annotation.MainThread;
 import com.mapbox.mapboxsdk.annotations.Marker;
-
-import java.lang.reflect.Proxy;
-import java.util.HashMap;
-import java.util.List;
-
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
@@ -24,15 +25,10 @@ import fr.free.nrw.commons.nearby.NearbyFilterState;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
+import java.lang.reflect.Proxy;
+import java.util.HashMap;
+import java.util.List;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.SEARCH_CUSTOM_AREA;
-import static fr.free.nrw.commons.nearby.CheckBoxTriStates.CHECKED;
-import static fr.free.nrw.commons.nearby.CheckBoxTriStates.UNCHECKED;
-import static fr.free.nrw.commons.nearby.CheckBoxTriStates.UNKNOWN;
 
 public class NearbyParentFragmentPresenter
         implements NearbyParentFragmentContract.UserActions,
@@ -314,7 +310,7 @@ public class NearbyParentFragmentPresenter
                     new MarkerPlaceGroup(nearbyBaseMarker.getMarker(), bookmarkLocationDao.findBookmarkLocation(nearbyBaseMarker.getPlace()), nearbyBaseMarker.getPlace()));
             //TODO: fix bookmark location
             NearbyController.markerExistsMap.put((nearbyBaseMarkers.get(i).getPlace().hasWikidataLink()), nearbyBaseMarkers.get(i).getMarker());
-            NearbyController.markerNeedPicMap.put(((nearbyBaseMarkers.get(i).getPlace().pic == null) ? true : false), nearbyBaseMarkers.get(i).getMarker());
+            NearbyController.markerNeedPicMap.put(((nearbyBaseMarkers.get(i).getPlace().getPic() == null) ? true : false), nearbyBaseMarkers.get(i).getMarker());
         }
     }
 

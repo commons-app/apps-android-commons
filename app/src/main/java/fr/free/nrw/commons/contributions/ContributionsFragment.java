@@ -41,7 +41,6 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -365,7 +364,7 @@ public class ContributionsFragment
     private void updateNearbyNotification(@Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
         if (nearbyPlacesInfo != null && nearbyPlacesInfo.placeList != null && nearbyPlacesInfo.placeList.size() > 0) {
             Place closestNearbyPlace = nearbyPlacesInfo.placeList.get(0);
-            String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
+            String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.getLocation());
             closestNearbyPlace.setDistance(distance);
             nearbyNotificationCardView.updateContent(closestNearbyPlace);
         } else {

@@ -1,29 +1,25 @@
 package fr.free.nrw.commons.bookmarks.locations;
 
+import static fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsContentProvider.BASE_URI;
+
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.RemoteException;
-
 import androidx.annotation.NonNull;
-
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.NearbyController;
+import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.nearby.Sitelinks;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
-
-import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.nearby.Label;
-import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.nearby.Sitelinks;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsContentProvider.BASE_URI;
 
 public class BookmarkLocationsDao {
 
@@ -107,7 +103,7 @@ public class BookmarkLocationsDao {
     private void deleteBookmarkLocation(Place bookmarkLocation) {
         ContentProviderClient db = clientProvider.get();
         try {
-            db.delete(BookmarkLocationsContentProvider.uriForName(bookmarkLocation.name), null, null);
+            db.delete(BookmarkLocationsContentProvider.uriForName(bookmarkLocation.getName()), null, null);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         } finally {
@@ -129,7 +125,7 @@ public class BookmarkLocationsDao {
                     BookmarkLocationsContentProvider.BASE_URI,
                     Table.ALL_FIELDS,
                     Table.COLUMN_NAME + "=?",
-                    new String[]{bookmarkLocation.name},
+                    new String[]{bookmarkLocation.getName()},
                     null);
             if (cursor != null && cursor.moveToFirst()) {
                 return true;
@@ -175,13 +171,13 @@ public class BookmarkLocationsDao {
         cv.put(BookmarkLocationsDao.Table.COLUMN_CATEGORY, bookmarkLocation.getCategory());
         cv.put(BookmarkLocationsDao.Table.COLUMN_LABEL_TEXT, bookmarkLocation.getLabel().getText());
         cv.put(BookmarkLocationsDao.Table.COLUMN_LABEL_ICON, bookmarkLocation.getLabel().getIcon());
-        cv.put(BookmarkLocationsDao.Table.COLUMN_WIKIPEDIA_LINK, bookmarkLocation.siteLinks.getWikipediaLink().toString());
-        cv.put(BookmarkLocationsDao.Table.COLUMN_WIKIDATA_LINK, bookmarkLocation.siteLinks.getWikidataLink().toString());
-        cv.put(BookmarkLocationsDao.Table.COLUMN_COMMONS_LINK, bookmarkLocation.siteLinks.getCommonsLink().toString());
-        cv.put(BookmarkLocationsDao.Table.COLUMN_LAT, bookmarkLocation.location.getLatitude());
-        cv.put(BookmarkLocationsDao.Table.COLUMN_LONG, bookmarkLocation.location.getLongitude());
-        cv.put(BookmarkLocationsDao.Table.COLUMN_PIC, bookmarkLocation.pic);
-        cv.put(BookmarkLocationsDao.Table.COLUMN_DESTROYED, bookmarkLocation.destroyed);
+        cv.put(BookmarkLocationsDao.Table.COLUMN_WIKIPEDIA_LINK, bookmarkLocation.getSiteLinks().getWikipediaLink().toString());
+        cv.put(BookmarkLocationsDao.Table.COLUMN_WIKIDATA_LINK, bookmarkLocation.getSiteLinks().getWikidataLink().toString());
+        cv.put(BookmarkLocationsDao.Table.COLUMN_COMMONS_LINK, bookmarkLocation.getSiteLinks().getCommonsLink().toString());
+        cv.put(BookmarkLocationsDao.Table.COLUMN_LAT, bookmarkLocation.getLocation().getLatitude());
+        cv.put(BookmarkLocationsDao.Table.COLUMN_LONG, bookmarkLocation.getLocation().getLongitude());
+        cv.put(BookmarkLocationsDao.Table.COLUMN_PIC, bookmarkLocation.getPic());
+        cv.put(BookmarkLocationsDao.Table.COLUMN_DESTROYED, bookmarkLocation.getDestroyed());
         return cv;
     }
 

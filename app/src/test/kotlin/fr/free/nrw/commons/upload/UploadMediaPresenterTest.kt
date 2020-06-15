@@ -21,6 +21,7 @@ import org.mockito.Mockito
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 /**
@@ -65,8 +66,10 @@ class UploadMediaPresenterTest {
         testObservableUploadItem = Observable.just(uploadItem)
         testSingleImageResult = Single.just(1)
         testScheduler = TestScheduler()
-        uploadMediaPresenter = UploadMediaPresenter(repository,
-            jsonKvStore,testScheduler, testScheduler)
+        uploadMediaPresenter = UploadMediaPresenter(
+            repository,
+            jsonKvStore, testScheduler, testScheduler
+        )
         uploadMediaPresenter.onAttachView(view)
     }
 
@@ -226,4 +229,18 @@ class UploadMediaPresenterTest {
         verify(view).showSimilarImageFragment("original", "possible", similar)
     }
 
+    @Test
+    fun `when user confirms place update details and upload item`() {
+        val item = mock<UploadItem>()
+        whenever(repository.uploads).thenReturn(listOf(item))
+        val place = mock<Place>()
+        whenever(place.longDescription).thenReturn("desc")
+        whenever(place.name).thenReturn("capt")
+        val mediaDetails = mock<ArrayList<UploadMediaDetail>>()
+        whenever(item.uploadMediaDetails).thenReturn(mediaDetails)
+        uploadMediaPresenter.onUserConfirmedUploadIsOfPlace(place, 0)
+        verify(item).place = place
+        verify(mediaDetails)[0] = UploadMediaDetail("en", "desc", "capt")
+        verify(view).updateMediaDetails(mediaDetails)
+    }
 }

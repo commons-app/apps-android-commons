@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.nearby;
 
+import static fr.free.nrw.commons.contributions.MainActivity.NEARBY_TAB_POSITION;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -8,18 +10,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.utils.SwipableCardView;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.contributions.MainActivity.NEARBY_TAB_POSITION;
 
 /**
  * Custom card view for nearby notification card view on main screen, above contributions list
@@ -136,8 +134,8 @@ public class NearbyNotificationCardView extends SwipableCardView {
         notificationTitle.setVisibility(VISIBLE);
         notificationDistance.setVisibility(VISIBLE);
         notificationIcon.setVisibility(VISIBLE);
-        notificationTitle.setText(place.name);
-        notificationDistance.setText(place.distance);
+        notificationTitle.setText(place.getName());
+        notificationDistance.setText(place.getDistance());
 
     }
 

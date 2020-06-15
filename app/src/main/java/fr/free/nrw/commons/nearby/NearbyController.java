@@ -1,15 +1,18 @@
 package fr.free.nrw.commons.nearby;
 
+import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-
 import androidx.annotation.MainThread;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
-
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
-
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.utils.UiUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,16 +21,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
-
 import javax.inject.Inject;
-
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.utils.UiUtils;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 public class NearbyController {
     private static final int MAX_RESULTS = 1000;
@@ -68,29 +63,29 @@ public class NearbyController {
         List<Place> places = nearbyPlaces.radiusExpander(searchLatLng, Locale.getDefault().getLanguage(), returnClosestResult);
 
         if (null != places && places.size() > 0) {
-            LatLng[] boundaryCoordinates = {places.get(0).location,   // south
-                    places.get(0).location, // north
-                    places.get(0).location, // west
-                    places.get(0).location};// east, init with a random location
+            LatLng[] boundaryCoordinates = {places.get(0).getLocation(),   // south
+                    places.get(0).getLocation(), // north
+                    places.get(0).getLocation(), // west
+                    places.get(0).getLocation()};// east, init with a random location
 
 
             if (curLatLng != null) {
                 Timber.d("Sorting places by distance...");
                 final Map<Place, Double> distances = new HashMap<>();
                 for (Place place : places) {
-                    distances.put(place, computeDistanceBetween(place.location, curLatLng));
+                    distances.put(place, computeDistanceBetween(place.getLocation(), curLatLng));
                     // Find boundaries with basic find max approach
-                    if (place.location.getLatitude() < boundaryCoordinates[0].getLatitude()) {
-                        boundaryCoordinates[0] = place.location;
+                    if (place.getLocation().getLatitude() < boundaryCoordinates[0].getLatitude()) {
+                        boundaryCoordinates[0] = place.getLocation();
                     }
-                    if (place.location.getLatitude() > boundaryCoordinates[1].getLatitude()) {
-                        boundaryCoordinates[1] = place.location;
+                    if (place.getLocation().getLatitude() > boundaryCoordinates[1].getLatitude()) {
+                        boundaryCoordinates[1] = place.getLocation();
                     }
-                    if (place.location.getLongitude() < boundaryCoordinates[2].getLongitude()) {
-                        boundaryCoordinates[2] = place.location;
+                    if (place.getLocation().getLongitude() < boundaryCoordinates[2].getLongitude()) {
+                        boundaryCoordinates[2] = place.getLocation();
                     }
-                    if (place.location.getLongitude() > boundaryCoordinates[3].getLongitude()) {
-                        boundaryCoordinates[3] = place.location;
+                    if (place.getLocation().getLongitude() > boundaryCoordinates[3].getLongitude()) {
+                        boundaryCoordinates[3] = place.getLocation();
                     }
                 }
                 Collections.sort(places,
@@ -139,7 +134,7 @@ public class NearbyController {
             List<Place> placeList) {
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
         for (Place place : placeList) {
-            String distance = formatDistanceBetween(curLatLng, place.location);
+            String distance = formatDistanceBetween(curLatLng, place.getLocation());
             place.setDistance(distance);
         }
         return placeList;
@@ -185,23 +180,23 @@ public class NearbyController {
             Bitmap iconGrey = UiUtils.getBitmap(vectorDrawableGrey);
 
             for (Place place : placeList) {
-                String distance = formatDistanceBetween(curLatLng, place.location);
+                String distance = formatDistanceBetween(curLatLng, place.getLocation());
                 place.setDistance(distance);
 
                 NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
-                nearbyBaseMarker.title(place.name);
+                nearbyBaseMarker.title(place.getName());
                 nearbyBaseMarker.position(
                         new com.mapbox.mapboxsdk.geometry.LatLng(
-                                place.location.getLatitude(),
-                                place.location.getLongitude()));
+                                place.getLocation().getLatitude(),
+                                place.getLocation().getLongitude()));
                 nearbyBaseMarker.place(place);
                 // Check if string is only spaces or empty, if so place doesn't have any picture
-                if (!place.pic.trim().isEmpty()) {
+                if (!place.getPic().trim().isEmpty()) {
                     if (iconGreen != null) {
                         nearbyBaseMarker.icon(IconFactory.getInstance(context)
                                 .fromBitmap(iconGreen));
                     }
-                } else if (!place.destroyed.trim().isEmpty()) { // Means place is destroyed
+                } else if (!place.getDestroyed().trim().isEmpty()) { // Means place is destroyed
                     if (iconGrey != null) {
                         nearbyBaseMarker.icon(IconFactory.getInstance(context)
                                 .fromBitmap(iconGrey));

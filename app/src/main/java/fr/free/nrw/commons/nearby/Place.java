@@ -18,16 +18,16 @@ import timber.log.Timber;
  */
 public class Place implements Parcelable {
 
-    public final String name;
+    private final String name;
     private final Label label;
     private final String longDescription;
-    public final LatLng location;
+    private final LatLng location;
     private final String category;
-    public final String pic;
-    public final String destroyed;
+    private final String pic;
+    private final String destroyed;
 
-    public String distance;
-    public final Sitelinks siteLinks;
+    private String distance;
+    private final Sitelinks siteLinks;
 
 
     public Place(String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, String destroyed) {
@@ -151,6 +151,22 @@ public class Place implements Parcelable {
      */
     public boolean hasCommonsLink() {
         return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getCommonsLink()));
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public String getDestroyed() {
+        return destroyed;
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public Sitelinks getSiteLinks() {
+        return siteLinks;
     }
 
     /**

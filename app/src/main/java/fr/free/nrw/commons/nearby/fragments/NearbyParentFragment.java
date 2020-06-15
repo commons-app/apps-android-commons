@@ -4,7 +4,6 @@ import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_P
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
-import static fr.free.nrw.commons.nearby.Label.TEXT_TO_DESCRIPTION;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
@@ -16,7 +15,6 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -38,7 +36,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -75,7 +72,6 @@ import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.MainActivity;
-import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -104,7 +100,6 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.List;
@@ -624,7 +619,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
             final CameraPosition position = new CameraPosition.Builder()
                     .target(LocationUtils.commonsLatLngToMapBoxLatLng(
-                            new fr.free.nrw.commons.location.LatLng(lastPlaceToCenter.location.getLatitude() - cameraShift,
+                            new fr.free.nrw.commons.location.LatLng(lastPlaceToCenter.getLocation().getLatitude() - cameraShift,
                                     lastPlaceToCenter.getLocation().getLongitude(),
                                     0))) // Sets the new camera position
                     .zoom(ZOOM_LEVEL) // Same zoom level
@@ -1137,17 +1132,17 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
             if (displayExists && displayNeedsPhoto) {
                 // Exists and needs photo
-                if (place.destroyed.trim().isEmpty() && place.pic.trim().isEmpty()) {
+                if (place.getDestroyed().trim().isEmpty() && place.getPic().trim().isEmpty()) {
                     updateMarker(markerPlaceGroup.getIsBookmarked(), place, NearbyController.currentLocation);
                 }
             } else if (displayExists && !displayNeedsPhoto) {
                 // Exists and all included needs and doesn't needs photo
-                if (place.destroyed.trim().isEmpty()) {
+                if (place.getDestroyed().trim().isEmpty()) {
                     updateMarker(markerPlaceGroup.getIsBookmarked(), place, NearbyController.currentLocation);
                 }
             } else if (!displayExists && displayNeedsPhoto) {
                 // All and only needs photo
-                if (place.pic.trim().isEmpty()) {
+                if (place.getPic().trim().isEmpty()) {
                     updateMarker(markerPlaceGroup.getIsBookmarked(), place, NearbyController.currentLocation);
                 }
             } else if (!displayExists && !displayNeedsPhoto) {
@@ -1179,16 +1174,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
                 final Bitmap icon = UiUtils.getBitmap(vectorDrawable);
                 if (curLatLng != null) {
-                    final String distance = formatDistanceBetween(curLatLng, place.location);
+                    final String distance = formatDistanceBetween(curLatLng, place.getLocation());
                     place.setDistance(distance);
                 }
 
                 final NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
-                nearbyBaseMarker.title(place.name);
+                nearbyBaseMarker.title(place.getName());
                 nearbyBaseMarker.position(
                         new com.mapbox.mapboxsdk.geometry.LatLng(
-                                place.location.getLatitude(),
-                                place.location.getLongitude()));
+                                place.getLocation().getLatitude(),
+                                place.getLocation().getLongitude()));
                 nearbyBaseMarker.place(place);
                 nearbyBaseMarker.icon(IconFactory.getInstance(getContext())
                         .fromBitmap(icon));
@@ -1198,11 +1193,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private @DrawableRes int getIconFor(Place place, Boolean isBookmarked) {
-        if (!place.pic.trim().isEmpty()) {
+        if (!place.getPic().trim().isEmpty()) {
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_green_bookmarked :
                 R.drawable.ic_custom_map_marker_green);
-        } else if (!place.destroyed.trim().isEmpty()) { // Means place is destroyed
+        } else if (!place.getDestroyed().trim().isEmpty()) { // Means place is destroyed
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_grey_bookmarked :
                 R.drawable.ic_custom_map_marker_grey);
@@ -1390,21 +1385,21 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         });
 
         wikipediaButton.setVisibility(place.hasWikipediaLink()?View.VISIBLE:View.GONE);
-        wikipediaButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getWikipediaLink()));
+        wikipediaButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), selectedPlace.getSiteLinks().getWikipediaLink()));
 
         wikidataButton.setVisibility(place.hasWikidataLink()?View.VISIBLE:View.GONE);
-        wikidataButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getWikidataLink()));
+        wikidataButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), selectedPlace.getSiteLinks().getWikidataLink()));
 
         directionsButton.setOnClickListener(view -> Utils.handleGeoCoordinates(getActivity(),
             selectedPlace.getLocation()));
 
         commonsButton.setVisibility(selectedPlace.hasCommonsLink()?View.VISIBLE:View.GONE);
-        commonsButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getCommonsLink()));
+        commonsButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), selectedPlace.getSiteLinks().getCommonsLink()));
 
         icon.setImageResource(selectedPlace.getLabel().getIcon());
 
-        title.setText(selectedPlace.name);
-        distance.setText(selectedPlace.distance);
+        title.setText(selectedPlace.getName());
+        distance.setText(selectedPlace.getDistance());
         description.setText(selectedPlace.getLongDescription());
 
         fabCamera.setOnClickListener(view -> {
