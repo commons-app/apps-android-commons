@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.category
 
 import android.text.TextUtils
+import fr.free.nrw.commons.explore.depictions.combineLatest
 import fr.free.nrw.commons.upload.GpsCategoryModel
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.utils.StringSortingUtils
@@ -112,12 +113,7 @@ class CategoriesModel @Inject constructor(
      * @return
      */
     private fun titleCategories(titleList: List<String>) =
-        if (titleList.isNotEmpty())
-            Observable.combineLatest(titleList.map { getTitleCategories(it) }) { searchResults ->
-                searchResults.map { it as List<String> }.flatten()
-            }
-        else
-            Observable.just(emptyList())
+        titleList.map { getTitleCategories(it) }.combineLatest().map { it.flatten() }
 
     /**
      * Return category for single title
