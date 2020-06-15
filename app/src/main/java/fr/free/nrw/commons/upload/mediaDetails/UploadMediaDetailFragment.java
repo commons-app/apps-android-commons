@@ -35,8 +35,6 @@ import fr.free.nrw.commons.upload.UploadItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
@@ -214,7 +212,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void onImageProcessed(UploadItem uploadItem, Place place) {
+    public void onImageProcessed(UploadItem uploadItem) {
         photoViewBackgroundImage.setImageURI(uploadItem.getMediaUri());
     }
 

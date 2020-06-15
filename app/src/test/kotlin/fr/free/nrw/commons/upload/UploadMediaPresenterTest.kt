@@ -86,8 +86,7 @@ class UploadMediaPresenterTest {
         verify(view).showProgress(true)
         testScheduler.triggerActions()
         verify(view).onImageProcessed(
-            ArgumentMatchers.any(UploadItem::class.java),
-            ArgumentMatchers.any(Place::class.java)
+            ArgumentMatchers.any(UploadItem::class.java)
         )
         verify(view).showProgress(false)
     }

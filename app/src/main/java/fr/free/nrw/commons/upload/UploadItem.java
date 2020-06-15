@@ -18,7 +18,7 @@ public class UploadItem {
   private final String mimeType;
   private ImageCoordinates gpsCoords;
   private List<UploadMediaDetail> uploadMediaDetails;
-  private final Place place;
+  private Place place;
   private final long createdTimestamp;
   private final String createdTimestampSource;
   private final BehaviorSubject<Integer> imageQuality;
@@ -103,4 +103,7 @@ public class UploadItem {
     this.gpsCoords = gpsCoords;
   }
 
+  public void setPlace(Place place) {
+    this.place = place;
+  }
 }

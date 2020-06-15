@@ -16,7 +16,7 @@ public interface UploadMediaDetailsContract {
 
     interface View extends SimilarImageInterface {
 
-        void onImageProcessed(UploadItem uploadItem, Place place);
+        void onImageProcessed(UploadItem uploadItem);
 
         void onNearbyPlaceFound(UploadItem uploadItem, Place place);
 

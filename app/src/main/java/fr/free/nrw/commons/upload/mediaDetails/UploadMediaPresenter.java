@@ -85,14 +85,14 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                 .observeOn(mainThreadScheduler)
                 .subscribe(uploadItem ->
                     {
-                        view.onImageProcessed(uploadItem, place);
+                        view.onImageProcessed(uploadItem);
                         view.updateMediaDetails(uploadItem.getUploadMediaDetails());
                         ImageCoordinates gpsCoords = uploadItem.getGpsCoords();
                         final boolean hasImageCoordinates =
                           gpsCoords != null && gpsCoords.getImageCoordsExists();
                         view.showMapWithImageCoordinates(hasImageCoordinates);
                         view.showProgress(false);
-                        if (hasImageCoordinates) {
+                        if (hasImageCoordinates && uploadItem.getPlace() == null) {
                             checkNearbyPlaces(uploadItem);
                         }
                     },
@@ -184,9 +184,11 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
 
   @Override
   public void onUserConfirmedUploadIsOfPlace(Place place, int uploadItemPosition) {
-    final List<UploadMediaDetail> uploadMediaDetails = repository.getUploads()
-        .get(uploadItemPosition)
+    final UploadItem uploadItem = repository.getUploads()
+        .get(uploadItemPosition);
+    final List<UploadMediaDetail> uploadMediaDetails = uploadItem
         .getUploadMediaDetails();
+    uploadItem.setPlace(place);
     uploadMediaDetails.set(0, new UploadMediaDetail(place));
     view.updateMediaDetails(uploadMediaDetails);
   }
