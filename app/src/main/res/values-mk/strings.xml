@@ -594,5 +594,6 @@
   <string name="ask_to_turn_location_on">Да ја вклучам местоположбата?</string>
   <string name="nearby_needs_location">„Во близина“ бара местоположба за да работи</string>
   <string name="use_location_from_similar_image">Дали ги направивте ови две слики на истото место? Дали сакате да ја искористите географската ширина/должина од десната слика?</string>
+  <string name="load_more">Вчитај уште</string>
   <string name="nearby_no_results">Не пронајдов места. Изменете ги критериумите во барањето.</string>
 </resources>

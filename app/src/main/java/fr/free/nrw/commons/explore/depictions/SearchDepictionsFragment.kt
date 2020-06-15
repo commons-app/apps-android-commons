@@ -3,6 +3,7 @@ package fr.free.nrw.commons.explore.depictions
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity
 import fr.free.nrw.commons.explore.BaseSearchFragment
+import fr.free.nrw.commons.explore.SearchFragmentContract
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import javax.inject.Inject
 

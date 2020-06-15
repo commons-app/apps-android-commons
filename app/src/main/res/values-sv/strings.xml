@@ -598,5 +598,6 @@
   <string name="ask_to_turn_location_on">Aktivera plats?</string>
   <string name="nearby_needs_location">I närheten behöver ha plats aktiverat för att fungera ordentligt</string>
   <string name="use_location_from_similar_image">Tog du dessa två bilder på samma plats? Vill du använda den högra bildens latitud/longitud?</string>
+  <string name="load_more">Läs in fler</string>
   <string name="nearby_no_results">Inga platser hittades, försök ändra dina sökkriterier.</string>
 </resources>
