@@ -22,7 +22,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,7 +30,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.utils.DialogUtil;
 import java.util.Locale;
 import javax.inject.Inject;
@@ -43,7 +41,7 @@ import org.wikipedia.dataclient.WikiSite;
  */
 
 public class ContributionsListFragment extends CommonsDaggerSupportFragment implements
-    ContributionsListContract.View, ContributionsListAdapter.Callback, WikipedaiInstructionsDialogFragment.Callback {
+    ContributionsListContract.View, ContributionsListAdapter.Callback, WikipediaInstructionsDialogFragment.Callback {
 
   private static final String RV_STATE = "rv_scroll_state";
 
@@ -270,7 +268,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
    */
   private void showAddImageToWikipediaInstructions(Contribution contribution) {
     FragmentManager fragmentManager = getFragmentManager();
-    WikipedaiInstructionsDialogFragment fragment = WikipedaiInstructionsDialogFragment
+    WikipediaInstructionsDialogFragment fragment = WikipediaInstructionsDialogFragment
         .newInstance(contribution);
     fragment.setCallback(this::onConfirmClicked);
     fragment.show(fragmentManager, "WikimediaFragment");

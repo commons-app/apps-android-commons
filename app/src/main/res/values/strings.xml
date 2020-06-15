@@ -643,7 +643,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="wikipedia_instructions_step_3">3. Find an appropriate section in the article for your image</string>
   <string name="wikipedia_instructions_step_4">4. Click on the Edit icon (the one like a pencil) for that section.</string>
   <string name="wikipedia_instructions_step_5">5. Paste the wikitext in the appropriate place.</string>
-  <string name="wikipedia_instructions_step_6">6. Edit the wikitext for appropriate positioning, if necessary. For more information, see <a href="https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image">here</a>.</string>
+  <string name="wikipedia_instructions_step_6">6. Edit the wikitext for appropriate positioning, if necessary. For more information, see &lt;a href="https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image"&gt;here&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Publish the article</string>
   <string name="copy_wikicode_to_clipboard">Copy wikicode to clipboard</string>
 </resources>

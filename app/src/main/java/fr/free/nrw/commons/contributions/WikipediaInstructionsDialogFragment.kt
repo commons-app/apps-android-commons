@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.contributions
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,16 +7,12 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
-import fr.free.nrw.commons.upload.SimilarImageDialogFragment
 import kotlinx.android.synthetic.main.dialog_add_to_wikipedia_instructions.*
-import org.wikipedia.dataclient.WikiSite
-import javax.inject.Inject
 
 /**
  * Dialog fragment for displaying instructions for editing wikipedia
  */
-class WikipedaiInstructionsDialogFragment : DialogFragment() {
+class WikipediaInstructionsDialogFragment : DialogFragment() {
 
     var contribution: Contribution? = null
     var callback: Callback? = null
@@ -61,8 +56,8 @@ class WikipedaiInstructionsDialogFragment : DialogFragment() {
         val ARG_CONTRIBUTION = "contribution"
 
         @JvmStatic
-        fun newInstance(contribution: Contribution): WikipedaiInstructionsDialogFragment {
-            val frag = WikipedaiInstructionsDialogFragment()
+        fun newInstance(contribution: Contribution): WikipediaInstructionsDialogFragment {
+            val frag = WikipediaInstructionsDialogFragment()
             val args = Bundle()
             args.putParcelable(ARG_CONTRIBUTION, contribution)
             frag.arguments = args
