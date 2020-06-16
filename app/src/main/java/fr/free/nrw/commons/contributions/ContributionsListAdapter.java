@@ -1,4 +1,4 @@
-    package fr.free.nrw.commons.contributions;
+package fr.free.nrw.commons.contributions;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -14,66 +14,68 @@ import fr.free.nrw.commons.media.MediaClient;
 public class ContributionsListAdapter extends
     PagedListAdapter<Contribution, ContributionViewHolder> {
 
-    private final Callback callback;
-    private final MediaClient mediaClient;
+  private final Callback callback;
+  private final MediaClient mediaClient;
 
-    ContributionsListAdapter(final Callback callback,
-        final MediaClient mediaClient) {
-        super(DIFF_CALLBACK);
-        this.callback = callback;
-        this.mediaClient = mediaClient;
-    }
+  ContributionsListAdapter(final Callback callback,
+      final MediaClient mediaClient) {
+    super(DIFF_CALLBACK);
+    this.callback = callback;
+    this.mediaClient = mediaClient;
+  }
 
-    /**
-     * Uses DiffUtil to calculate the changes in the list
-     * It has methods that check ID and the content of the items to determine if its a new item
-     */
-    private static final DiffUtil.ItemCallback<Contribution> DIFF_CALLBACK =
-        new DiffUtil.ItemCallback<Contribution>() {
-            @Override
-            public boolean areItemsTheSame(final Contribution oldContribution, final Contribution newContribution) {
-                return oldContribution.getPageId().equals(newContribution.getPageId());
-            }
+  /**
+   * Uses DiffUtil to calculate the changes in the list It has methods that check ID and the content
+   * of the items to determine if its a new item
+   */
+  private static final DiffUtil.ItemCallback<Contribution> DIFF_CALLBACK =
+      new DiffUtil.ItemCallback<Contribution>() {
+        @Override
+        public boolean areItemsTheSame(final Contribution oldContribution,
+            final Contribution newContribution) {
+          return oldContribution.getPageId().equals(newContribution.getPageId());
+        }
 
-            @Override
-            public boolean areContentsTheSame(final Contribution oldContribution, final Contribution newContribution) {
-                return oldContribution.equals(newContribution);
-            }
-        };
+        @Override
+        public boolean areContentsTheSame(final Contribution oldContribution,
+            final Contribution newContribution) {
+          return oldContribution.equals(newContribution);
+        }
+      };
 
-    /**
-     * Initializes the view holder with contribution data
-     */
-    @Override
-    public void onBindViewHolder(@NonNull final ContributionViewHolder holder, final int position) {
-        final Contribution contribution = getItem(position);
-        holder.init(position, contribution);
-    }
+  /**
+   * Initializes the view holder with contribution data
+   */
+  @Override
+  public void onBindViewHolder(@NonNull final ContributionViewHolder holder, final int position) {
+    final Contribution contribution = getItem(position);
+    holder.init(position, contribution);
+  }
 
-    Contribution getContributionForPosition(final int position) {
-        return getItem(position);
-    }
+  Contribution getContributionForPosition(final int position) {
+    return getItem(position);
+  }
 
-    /**
-     * Creates the new View Holder which will be used to display items(contributions) using the
-     * onBindViewHolder(viewHolder,position)
-     */
-    @NonNull
-    @Override
-    public ContributionViewHolder onCreateViewHolder(@NonNull final ViewGroup parent,
-        final int viewType) {
-        final ContributionViewHolder viewHolder = new ContributionViewHolder(
-            LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_contribution, parent, false), callback, mediaClient);
-        return viewHolder;
-    }
+  /**
+   * Creates the new View Holder which will be used to display items(contributions) using the
+   * onBindViewHolder(viewHolder,position)
+   */
+  @NonNull
+  @Override
+  public ContributionViewHolder onCreateViewHolder(@NonNull final ViewGroup parent,
+      final int viewType) {
+    final ContributionViewHolder viewHolder = new ContributionViewHolder(
+        LayoutInflater.from(parent.getContext())
+            .inflate(R.layout.layout_contribution, parent, false), callback, mediaClient);
+    return viewHolder;
+  }
 
-    public interface Callback {
+  public interface Callback {
 
-        void retryUpload(Contribution contribution);
+    void retryUpload(Contribution contribution);
 
-        void deleteUpload(Contribution contribution);
+    void deleteUpload(Contribution contribution);
 
-        void openMediaDetail(int contribution);
-    }
+    void openMediaDetail(int contribution);
+  }
 }

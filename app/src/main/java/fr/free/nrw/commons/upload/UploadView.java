@@ -1,88 +1,88 @@
 package fr.free.nrw.commons.upload;
 
+import static java.lang.annotation.RetentionPolicy.SOURCE;
+
 import android.net.Uri;
-
 import androidx.annotation.IntDef;
-
+import fr.free.nrw.commons.location.LatLng;
 import java.lang.annotation.Retention;
 import java.util.List;
 
-import fr.free.nrw.commons.location.LatLng;
-
-import static java.lang.annotation.RetentionPolicy.SOURCE;
-
 public interface UploadView {
-    // Dummy implementation of the view interface to allow us to have a 'null object pattern'
-    // in the presenter and avoid constant NULL checking.
+  // Dummy implementation of the view interface to allow us to have a 'null object pattern'
+  // in the presenter and avoid constant NULL checking.
 //    UploadView DUMMY = (UploadView) Proxy.newProxyInstance(UploadView.class.getClassLoader(),
 //    new Class[]{UploadView.class}, (proxy, method, methodArgs) -> null);
 
 
-    @Retention(SOURCE)
-    @IntDef({PLEASE_WAIT, TITLE_CARD, CATEGORIES, LICENSE})
-    @interface UploadPage {}
+  @Retention(SOURCE)
+  @IntDef({PLEASE_WAIT, TITLE_CARD, CATEGORIES, LICENSE})
+  @interface UploadPage {
 
-    int PLEASE_WAIT = 0;
+  }
 
-    int TITLE_CARD = 1;
-    int CATEGORIES = 2;
-    int LICENSE = 3;
+  int PLEASE_WAIT = 0;
 
-    boolean checkIfLoggedIn();
+  int TITLE_CARD = 1;
+  int CATEGORIES = 2;
+  int LICENSE = 3;
 
-    void updateThumbnails(List<UploadItem> uploads);
+  boolean checkIfLoggedIn();
 
-    void setNextEnabled(boolean available);
+  void updateThumbnails(List<UploadItem> uploads);
 
-    void setSubmitEnabled(boolean available);
+  void setNextEnabled(boolean available);
 
-    void setPreviousEnabled(boolean available);
+  void setSubmitEnabled(boolean available);
 
-    void setTopCardState(boolean state);
+  void setPreviousEnabled(boolean available);
 
-    void setRightCardVisibility(boolean visible);
+  void setTopCardState(boolean state);
 
-    void setBottomCardState(boolean state);
+  void setRightCardVisibility(boolean visible);
 
-    void setBackground(Uri mediaUri);
+  void setBottomCardState(boolean state);
 
-    void setTopCardVisibility(boolean visible);
+  void setBackground(Uri mediaUri);
 
-    void setBottomCardVisibility(boolean visible);
+  void setTopCardVisibility(boolean visible);
 
-    void setBottomCardVisibility(@UploadPage int page, int uploadCount);
+  void setBottomCardVisibility(boolean visible);
 
-    void updateRightCardContent(boolean gpsPresent);
+  void setBottomCardVisibility(@UploadPage int page, int uploadCount);
 
-    void updateBottomCardContent(int currentStep, int stepCount, UploadItem uploadItem, boolean isShowingItem);
+  void updateRightCardContent(boolean gpsPresent);
 
-    void updateLicenses(List<String> licenses, String selectedLicense);
+  void updateBottomCardContent(int currentStep, int stepCount, UploadItem uploadItem,
+      boolean isShowingItem);
 
-    void updateLicenseSummary(String selectedLicense, int imageCount);
+  void updateLicenses(List<String> licenses, String selectedLicense);
 
-    void updateTopCardContent();
+  void updateLicenseSummary(String selectedLicense, int imageCount);
 
-    void updateSubtitleVisibility(int imageCount);
+  void updateTopCardContent();
 
-    void dismissKeyboard();
+  void updateSubtitleVisibility(int imageCount);
 
-    void showBadPicturePopup(String errorMessage);
+  void dismissKeyboard();
 
-    void showDuplicatePicturePopup();
+  void showBadPicturePopup(String errorMessage);
 
-    void finish();
+  void showDuplicatePicturePopup();
 
-    void launchMapActivity(LatLng decCoords);
+  void finish();
 
-    void showErrorMessage(int resourceId);
+  void launchMapActivity(LatLng decCoords);
 
-    void initDefaultCategories();
+  void showErrorMessage(int resourceId);
 
-    void showNoCategorySelectedWarning();
+  void initDefaultCategories();
 
-    void showProgressDialog();
+  void showNoCategorySelectedWarning();
 
-    void hideProgressDialog();
+  void showProgressDialog();
 
-    void askUserToLogIn();
+  void hideProgressDialog();
+
+  void askUserToLogIn();
 }

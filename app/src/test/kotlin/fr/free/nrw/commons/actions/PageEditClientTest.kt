@@ -13,8 +13,10 @@ import org.wikipedia.dataclient.Service
 class PageEditClientTest {
     @Mock
     private lateinit var csrfTokenClient: CsrfTokenClient
+
     @Mock
     private lateinit var pageEditInterface: PageEditInterface
+
     @Mock
     private lateinit var service: Service
 

@@ -6,7 +6,7 @@ import dagger.Provides
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment
 
 @Module
-class NearbyParentFragmentModule{
+class NearbyParentFragmentModule {
 
     @Provides
     fun NearbyParentFragment.providesActivity(): Activity = activity!!

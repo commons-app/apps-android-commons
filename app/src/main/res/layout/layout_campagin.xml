@@ -1,79 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_centerVertical="true"
+  android:minHeight="@dimen/large_height">
+
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_centerVertical="true"
-    android:minHeight="@dimen/large_height"
-    >
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_centerInParent="true">
+    android:layout_centerInParent="true">
 
-  <ImageView
+    <ImageView
       android:id="@+id/iv_campaign"
       android:layout_width="@dimen/dimen_40"
       android:layout_height="@dimen/dimen_40"
-      android:layout_marginLeft="@dimen/standard_gap"
       android:layout_marginStart="@dimen/standard_gap"
+      android:layout_marginLeft="@dimen/standard_gap"
       android:scaleType="centerCrop"
-      app:srcCompat="@drawable/ic_campaign"
-      />
-  <LinearLayout
+      app:srcCompat="@drawable/ic_campaign" />
+
+    <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_centerInParent="true"
-      android:orientation="horizontal"
       android:layout_gravity="center_vertical"
       android:gravity="center_vertical"
+      android:orientation="horizontal"
       android:weightSum="4">
 
-  <androidx.constraintlayout.widget.ConstraintLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="@dimen/standard_gap"
-      android:layout_marginRight="@dimen/tiny_margin"
-      android:layout_centerInParent="true"
-      >
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_marginLeft="@dimen/standard_gap"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        tools:text="Campaign Title"
-        tools:ignore="MissingConstraints" />
+        android:layout_marginRight="@dimen/tiny_margin">
 
-    <TextView
-        android:id="@+id/tv_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/standard_gap"
-        android:gravity="start"
-        android:paddingTop="@dimen/miniscule_margin"
-        android:textAlignment="textStart"
-        android:textColor="@android:color/white"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
-        tools:text="Campaign Description"
-        tools:ignore="MissingConstraints" />
+        <TextView
+          android:id="@+id/tv_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/standard_gap"
+          android:textColor="@android:color/white"
+          android:textStyle="bold"
+          tools:ignore="MissingConstraints"
+          tools:text="Campaign Title" />
 
-    <TextView
-        android:id="@+id/tv_dates"
-        android:layout_width="@dimen/dimen_0"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/standard_gap"
-        android:layout_weight="1"
-        android:paddingTop="@dimen/miniscule_margin"
-        android:text="@string/ends_on"
-        android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/tv_description"
-        tools:ignore="MissingConstraints" />
-  </androidx.constraintlayout.widget.ConstraintLayout>
-  </LinearLayout>
+        <TextView
+          android:id="@+id/tv_description"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/standard_gap"
+          android:gravity="start"
+          android:paddingTop="@dimen/miniscule_margin"
+          android:textAlignment="textStart"
+          android:textColor="@android:color/white"
+          android:visibility="gone"
+          app:layout_constraintTop_toBottomOf="@id/tv_title"
+          tools:ignore="MissingConstraints"
+          tools:text="Campaign Description" />
+
+        <TextView
+          android:id="@+id/tv_dates"
+          android:layout_width="@dimen/dimen_0"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/standard_gap"
+          android:layout_weight="1"
+          android:paddingTop="@dimen/miniscule_margin"
+          android:text="@string/ends_on"
+          android:textColor="@android:color/white"
+          app:layout_constraintTop_toBottomOf="@id/tv_description"
+          tools:ignore="MissingConstraints" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
   </LinearLayout>
 </RelativeLayout>

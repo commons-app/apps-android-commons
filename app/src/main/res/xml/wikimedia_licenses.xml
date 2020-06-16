@@ -1,18 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <licenses xmlns="https://www.mediawiki.org/wiki/Extension:UploadWizard/xmlns/licenses">
-  <license id="cc-by-4.0" template="cc-by-4.0" url="https://creativecommons.org/licenses/by/4.0/deed.$lang"/>
-  <license id="cc-by-sa-4.0" template="cc-by-sa-4.0" url="https://creativecommons.org/licenses/by-sa/4.0/deed.$lang"/>
-  <license id="cc-by-sa-3.0" template="cc-by-sa-3.0" url="https://creativecommons.org/licenses/by-sa/3.0/deed.$lang"/>
-  <license id="cc-by-sa-3.0-at" template="cc-by-sa-3.0-at" url="https://creativecommons.org/licenses/by-sa/3.0/at/deed.$lang"/>
-  <license id="cc-by-sa-3.0-de" template="cc-by-sa-3.0-de" url="https://creativecommons.org/licenses/by-sa/3.0/de/deed.$lang"/>
-  <license id="cc-by-sa-3.0-ee" template="cc-by-sa-3.0-ee" url="https://creativecommons.org/licenses/by-sa/3.0/ee/deed.$lang"/>
-  <license id="cc-by-sa-3.0-es" template="cc-by-sa-3.0-es" url="https://creativecommons.org/licenses/by-sa/3.0/es/deed.$lang"/>
-  <license id="cc-by-sa-3.0-hr" template="cc-by-sa-3.0-hr" url="https://creativecommons.org/licenses/by-sa/3.0/hr/deed.$lang"/>
-  <license id="cc-by-sa-3.0-lu" template="cc-by-sa-3.0-lu" url="https://creativecommons.org/licenses/by-sa/3.0/lu/deed.$lang"/>
-  <license id="cc-by-sa-3.0-nl" template="cc-by-sa-3.0-nl" url="https://creativecommons.org/licenses/by-sa/3.0/nl/deed.$lang"/>
-  <license id="cc-by-sa-3.0-no" template="cc-by-sa-3.0-no" url="https://creativecommons.org/licenses/by-sa/3.0/no/deed.$lang"/>
-  <license id="cc-by-sa-3.0-pl" template="cc-by-sa-3.0-pl" url="https://creativecommons.org/licenses/by-sa/3.0/pl/deed.$lang"/>
-  <license id="cc-by-sa-3.0-ro" template="cc-by-sa-3.0-ro" url="https://creativecommons.org/licenses/by-sa/3.0/ro/deed.$lang"/>
-  <license id="cc-by-3.0" template="cc-by-3.0" url="https://creativecommons.org/licenses/by/3.0/deed.$lang"/>
-  <license id="cc-zero" template="cc-zero" url="https://creativecommons.org/publicdomain/zero/1.0/deed.$lang"/>
+  <license
+    id="cc-by-4.0"
+    template="cc-by-4.0"
+    url="https://creativecommons.org/licenses/by/4.0/deed.$lang" />
+  <license
+    id="cc-by-sa-4.0"
+    template="cc-by-sa-4.0"
+    url="https://creativecommons.org/licenses/by-sa/4.0/deed.$lang" />
+  <license
+    id="cc-by-sa-3.0"
+    template="cc-by-sa-3.0"
+    url="https://creativecommons.org/licenses/by-sa/3.0/deed.$lang" />
+  <license
+    id="cc-by-sa-3.0-at"
+    template="cc-by-sa-3.0-at"
+    url="https://creativecommons.org/licenses/by-sa/3.0/at/deed.$lang" />
+  <license
+    id="cc-by-sa-3.0-de"
+    template="cc-by-sa-3.0-de"
+    url="https://creativecommons.org/licenses/by-sa/3.0/de/deed.$lang" />
+  <license
+    id="cc-by-sa-3.0-ee"
+    template="cc-by-sa-3.0-ee"
+    url="https://creativecommons.org/licenses/by-sa/3.0/ee/deed.$lang" />
+  <license
+    id="cc-by-sa-3.0-es"
+    template="cc-by-sa-3.0-es"
+    url="https://creativecommons.org/licenses/by-sa/3.0/es/deed.$lang" />
+  <license
+    id="cc-by-sa-3.0-hr"
+    template="cc-by-sa-3.0-hr"
+    url="https://creativecommons.org/licenses/by-sa/3.0/hr/deed.$lang" />
+  <license
+    id="cc-by-sa-3.0-lu"
+    template="cc-by-sa-3.0-lu"
+    url="https://creativecommons.org/licenses/by-sa/3.0/lu/deed.$lang" />
+  <license
+    id="cc-by-sa-3.0-nl"
+    template="cc-by-sa-3.0-nl"
+    url="https://creativecommons.org/licenses/by-sa/3.0/nl/deed.$lang" />
+  <license
+    id="cc-by-sa-3.0-no"
+    template="cc-by-sa-3.0-no"
+    url="https://creativecommons.org/licenses/by-sa/3.0/no/deed.$lang" />
+  <license
+    id="cc-by-sa-3.0-pl"
+    template="cc-by-sa-3.0-pl"
+    url="https://creativecommons.org/licenses/by-sa/3.0/pl/deed.$lang" />
+  <license
+    id="cc-by-sa-3.0-ro"
+    template="cc-by-sa-3.0-ro"
+    url="https://creativecommons.org/licenses/by-sa/3.0/ro/deed.$lang" />
+  <license
+    id="cc-by-3.0"
+    template="cc-by-3.0"
+    url="https://creativecommons.org/licenses/by/3.0/deed.$lang" />
+  <license
+    id="cc-zero"
+    template="cc-zero"
+    url="https://creativecommons.org/publicdomain/zero/1.0/deed.$lang" />
 </licenses>

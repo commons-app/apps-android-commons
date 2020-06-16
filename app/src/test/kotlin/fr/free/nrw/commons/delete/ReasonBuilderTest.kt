@@ -13,7 +13,6 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import java.util.*
@@ -23,10 +22,13 @@ class ReasonBuilderTest {
 
     @Mock
     internal var sessionManager: SessionManager? = null
+
     @Mock
     internal var okHttpJsonApiClient: OkHttpJsonApiClient? = null
+
     @Mock
     internal var context: Context? = null
+
     @Mock
     internal var viewUtilWrapper: ViewUtilWrapper? = null
 
@@ -53,10 +55,10 @@ class ReasonBuilderTest {
         `when`(sessionManager?.userName).thenReturn("Testuser")
         `when`(sessionManager?.doesAccountExist()).thenReturn(true)
         `when`(okHttpJsonApiClient!!.getAchievements(anyString()))
-                .thenReturn(Single.just(mock(FeedbackResponse::class.java)))
+            .thenReturn(Single.just(mock(FeedbackResponse::class.java)))
 
         val media = Media("test_file")
-        media.dateUploaded=Date()
+        media.dateUploaded = Date()
 
         reasonBuilder!!.getReason(media, "test")
         verify(sessionManager, times(0))!!.forceLogin(any(Context::class.java))

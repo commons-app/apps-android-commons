@@ -1,126 +1,127 @@
-<LinearLayout android:layout_width="match_parent"
-  android:layout_height="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/buttonLayout"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_below="@+id/icon"
+  android:layout_marginTop="@dimen/standard_gap"
   android:orientation="horizontal"
   android:visibility="gone"
-  tools:visibility="visible"
-  android:layout_marginTop="@dimen/standard_gap"
-  android:layout_below="@+id/icon"
-  xmlns:android="http://schemas.android.com/apk/res/android">
+  tools:visibility="visible">
 
-    <LinearLayout
-        android:id="@+id/cameraButton"
-        android:layout_width="@dimen/dimen_0"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="@dimen/standard_gap"
-        android:clickable="true"
-        android:orientation="vertical"
-        android:background="@drawable/button_background_selector"
-        >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/ic_photo_camera_white_24dp"
-            android:tint="?attr/bookmarkButtonColor"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/cameraButtonText"
-            android:paddingTop="@dimen/activity_margin_horizontal"
-            android:layout_gravity="center_horizontal"
-            android:text="CAMERA"
-            android:visibility="gone"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/galleryButton"
-        android:layout_width="@dimen/dimen_0"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="@dimen/standard_gap"
-        android:clickable="true"
-        android:orientation="vertical"
-        android:background="@drawable/button_background_selector"
-        >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/ic_photo_white_24dp"
-            android:tint="?attr/bookmarkButtonColor"
-            android:duplicateParentState="true"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/galleryButtonText"
-            android:paddingTop="@dimen/activity_margin_horizontal"
-            android:layout_gravity="center_horizontal"
-            android:text="GALLERY"
-            android:duplicateParentState="true"
-            android:visibility="gone"
-            />
-    </LinearLayout>
+  <LinearLayout
+    android:id="@+id/cameraButton"
+    android:layout_width="@dimen/dimen_0"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:background="@drawable/button_background_selector"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:padding="@dimen/standard_gap">
 
-    <LinearLayout
-        android:id="@+id/directionsButton"
-        android:layout_width="@dimen/dimen_0"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="@dimen/standard_gap"
-        android:clickable="true"
-        android:orientation="vertical"
-        android:background="@drawable/button_background_selector"
-        >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/ic_directions_black_24dp"
-            android:tint="?attr/bookmarkButtonColor"
-            android:duplicateParentState="true"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/directionsButtonText"
-            android:paddingTop="@dimen/activity_margin_horizontal"
-            android:layout_gravity="center_horizontal"
-            android:text="DIRECTIONS"
-            android:duplicateParentState="true"
-            android:visibility="gone"
-            />
-    </LinearLayout>
+    <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:tint="?attr/bookmarkButtonColor"
+      app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
 
-    <LinearLayout
-        android:id="@+id/iconOverflow"
-        android:layout_width="@dimen/dimen_0"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="@dimen/standard_gap"
-        android:clickable="true"
-        android:orientation="vertical"
-        >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/ic_overflow"
-            android:tint="?attr/bookmarkButtonColor"
-            android:duplicateParentState="true"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/iconOverflowText"
-            android:paddingTop="@dimen/activity_margin_horizontal"
-            android:layout_gravity="center_horizontal"
-            android:text="MORE"
-            android:duplicateParentState="true"
-            android:visibility="gone"
-            />
+    <TextView
+      android:id="@+id/cameraButtonText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:paddingTop="@dimen/activity_margin_horizontal"
+      android:text="CAMERA"
+      android:visibility="gone" />
+  </LinearLayout>
 
-    </LinearLayout>
+  <LinearLayout
+    android:id="@+id/galleryButton"
+    android:layout_width="@dimen/dimen_0"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:background="@drawable/button_background_selector"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:padding="@dimen/standard_gap">
+
+    <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:duplicateParentState="true"
+      android:tint="?attr/bookmarkButtonColor"
+      app:srcCompat="@drawable/ic_photo_white_24dp" />
+
+    <TextView
+      android:id="@+id/galleryButtonText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:duplicateParentState="true"
+      android:paddingTop="@dimen/activity_margin_horizontal"
+      android:text="GALLERY"
+      android:visibility="gone" />
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/directionsButton"
+    android:layout_width="@dimen/dimen_0"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:background="@drawable/button_background_selector"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:padding="@dimen/standard_gap">
+
+    <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:duplicateParentState="true"
+      android:tint="?attr/bookmarkButtonColor"
+      app:srcCompat="@drawable/ic_directions_black_24dp" />
+
+    <TextView
+      android:id="@+id/directionsButtonText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:duplicateParentState="true"
+      android:paddingTop="@dimen/activity_margin_horizontal"
+      android:text="DIRECTIONS"
+      android:visibility="gone" />
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/iconOverflow"
+    android:layout_width="@dimen/dimen_0"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:padding="@dimen/standard_gap">
+
+    <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:duplicateParentState="true"
+      android:tint="?attr/bookmarkButtonColor"
+      app:srcCompat="@drawable/ic_overflow" />
+
+    <TextView
+      android:id="@+id/iconOverflowText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:duplicateParentState="true"
+      android:paddingTop="@dimen/activity_margin_horizontal"
+      android:text="MORE"
+      android:visibility="gone" />
+
+  </LinearLayout>
 
 </LinearLayout>

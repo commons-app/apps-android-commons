@@ -13,6 +13,7 @@ class NotificationControllerTest {
 
     @Mock
     private lateinit var notificationClient: NotificationClient
+
     @Mock
     private lateinit var notification: Notification
     private lateinit var notificationController: NotificationController

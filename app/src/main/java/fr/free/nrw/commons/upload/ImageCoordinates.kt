@@ -14,6 +14,7 @@ class ImageCoordinates internal constructor(exif: ExifInterface?) {
     var decLatitude = 0.0
     var decLongitude = 0.0
     var imageCoordsExists = false
+
     /**
      * @return string of `"[decLatitude]|[decLongitude]"` or null if coordinates do not exist
      */
@@ -23,6 +24,7 @@ class ImageCoordinates internal constructor(exif: ExifInterface?) {
      * Construct from a stream.
      */
     internal constructor(stream: InputStream) : this(ExifInterface(stream))
+
     /**
      * Construct from the file path of the image.
      * @param path file path of the image

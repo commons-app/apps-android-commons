@@ -6,4 +6,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * Wikidata create claim response model class
  */
-class WbCreateClaimResponse(@field:Expose @field:SerializedName("pageinfo") val pageinfo: PageInfo, @field:Expose @field:SerializedName("success") val success: Int)
+class WbCreateClaimResponse(
+    @field:Expose @field:SerializedName("pageinfo") val pageinfo: PageInfo,
+    @field:Expose @field:SerializedName("success") val success: Int
+)

@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  android:padding="2dp"
+  android:paddingBottom="0dp">
+
+  <TextView
+    android:id="@+id/depict_images_sequence_number"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end|bottom"
+    android:textColor="#33FFFFFF"
+    android:textSize="98sp"
+    android:typeface="serif" />
+
+  <com.facebook.drawee.view.SimpleDraweeView
+    android:id="@+id/depict_image_view"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    app:actualImageScaleType="centerCrop" />
+
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_gravity="center|bottom"
+    android:background="#AA000000"
     android:orientation="vertical"
-    android:padding="2dp"
-    android:paddingBottom="0dp">
+    android:padding="@dimen/small_gap">
+
+    <ProgressBar
+      android:id="@+id/depict_progress"
+      style="@style/ProgressBar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:indeterminateOnly="false"
+      android:max="100"
+      android:visibility="gone" />
 
     <TextView
-        android:id="@+id/depict_images_sequence_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:textColor="#33FFFFFF"
-        android:textSize="98sp"
-        android:typeface="serif" />
+      android:id="@+id/depict_image_title"
+      style="?android:textAppearanceLarge"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:textColor="#FFFFFFFF" />
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/depict_image_view"
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
-        app:actualImageScaleType="centerCrop" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|bottom"
-        android:background="#AA000000"
-        android:orientation="vertical"
-        android:padding="@dimen/small_gap">
-
-        <ProgressBar
-            android:id="@+id/depict_progress"
-            style="@style/ProgressBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:indeterminateOnly="false"
-            android:max="100"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/depict_image_title"
-            style="?android:textAppearanceLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textColor="#FFFFFFFF" />
-
-        <TextView
-            android:id="@+id/depict_image_author"
-            style="?android:textAppearanceMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textColor="#FFFFFFFF" />
-    </LinearLayout>
+    <TextView
+      android:id="@+id/depict_image_author"
+      style="?android:textAppearanceMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:textColor="#FFFFFFFF" />
+  </LinearLayout>
 
 </FrameLayout>

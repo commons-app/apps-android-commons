@@ -1,16 +1,13 @@
 package fr.free.nrw.commons.auth;
 
 
-import org.wikipedia.dataclient.Service;
-import org.wikipedia.dataclient.mwapi.MwPostResponse;
-
+import io.reactivex.Observable;
 import java.util.Objects;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-
-import io.reactivex.Observable;
+import org.wikipedia.dataclient.Service;
+import org.wikipedia.dataclient.mwapi.MwPostResponse;
 
 /**
  * Handler for logout
@@ -18,19 +15,20 @@ import io.reactivex.Observable;
 @Singleton
 public class LogoutClient {
 
-    private final Service service;
+  private final Service service;
 
-    @Inject
-    public LogoutClient(@Named("commons-service") Service service) {
-        this.service = service;
-    }
+  @Inject
+  public LogoutClient(@Named("commons-service") Service service) {
+    this.service = service;
+  }
 
-    /**
-     * Fetches the  CSRF token and uses that to post the logout api call
-     * @return
-     */
-    public Observable<MwPostResponse> postLogout() {
-        return service.getCsrfToken().concatMap(tokenResponse -> service.postLogout(
-                Objects.requireNonNull(Objects.requireNonNull(tokenResponse.query()).csrfToken())));
-    }
+  /**
+   * Fetches the  CSRF token and uses that to post the logout api call
+   *
+   * @return
+   */
+  public Observable<MwPostResponse> postLogout() {
+    return service.getCsrfToken().concatMap(tokenResponse -> service.postLogout(
+        Objects.requireNonNull(Objects.requireNonNull(tokenResponse.query()).csrfToken())));
+  }
 }

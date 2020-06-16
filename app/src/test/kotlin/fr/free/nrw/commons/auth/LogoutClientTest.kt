@@ -18,7 +18,8 @@ import javax.inject.Named
 
 class LogoutClientTest {
 
-    @Mock @field:[Inject Named("commons-service")]
+    @Mock
+    @field:[Inject Named("commons-service")]
     internal var service: Service? = null
 
     @InjectMocks
@@ -33,7 +34,7 @@ class LogoutClientTest {
         `when`(mwQueryResult!!.csrfToken()).thenReturn("test_token")
         `when`(mwQueryResponse.query()).thenReturn(mwQueryResult)
         `when`(service!!.csrfToken)
-                .thenReturn(Observable.just(mwQueryResponse))
+            .thenReturn(Observable.just(mwQueryResponse))
     }
 
     @Test

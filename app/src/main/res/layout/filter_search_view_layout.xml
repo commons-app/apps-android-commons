@@ -1,25 +1,25 @@
-<LinearLayout android:layout_width="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/search_view_layout"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:paddingVertical="@dimen/filter_padding">
+
+  <TextView
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/search_view_layout"
-    android:paddingVertical="@dimen/filter_padding"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_gravity="center_vertical"
+    android:paddingStart="@dimen/filter_padding"
+    android:text="@string/place_type"
+    android:textColor="@color/white" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:paddingStart="@dimen/filter_padding"
-        android:text="@string/place_type"
-        android:textColor="@color/white"/>
-
-    <SearchView
-        android:id="@+id/search_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:tint="@color/white"
-        android:queryHint="@string/nearby_search_hint"
-        android:searchIcon="@drawable/ic_search_white_24dp"
-        app:theme="@style/WhiteSearchBarTheme"/>
+  <SearchView
+    android:id="@+id/search_view"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:queryHint="@string/nearby_search_hint"
+    android:searchIcon="@drawable/ic_search_white_24dp"
+    android:tint="@color/white"
+    app:theme="@style/WhiteSearchBarTheme" />
 
 </LinearLayout>

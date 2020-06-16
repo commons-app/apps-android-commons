@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:gravity="center_horizontal"
+  android:orientation="vertical">
+
+  <com.facebook.drawee.view.SimpleDraweeView
+    android:id="@+id/question_image"
+    android:layout_width="@dimen/question_width"
+    android:layout_height="@dimen/question_height"
+    android:layout_marginHorizontal="@dimen/activity_margin_horizontal"
+    android:layout_marginVertical="@dimen/activity_margin_vertical"
+    android:scaleType="fitXY" />
+
+  <TextView
+    android:id="@+id/question_text"
+    style="?android:textAppearanceMedium"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="center_horizontal">
-
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:layout_width="@dimen/question_width"
-        android:layout_height="@dimen/question_height"
-        android:scaleType="fitXY"
-        android:id="@+id/question_image"
-        android:layout_marginHorizontal="@dimen/activity_margin_horizontal"
-        android:layout_marginVertical="@dimen/activity_margin_vertical" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="?android:textAppearanceMedium"
-        android:id="@+id/question_text"
-        android:layout_marginLeft="@dimen/activity_margin_horizontal"
-        android:layout_marginRight="@dimen/activity_margin_horizontal"
-        android:textColor="@color/secondaryTextColor"
-        android:text="Is Photograph of an Artwork allowed ?" />
+    android:layout_marginLeft="@dimen/activity_margin_horizontal"
+    android:layout_marginRight="@dimen/activity_margin_horizontal"
+    android:text="Is Photograph of an Artwork allowed ?"
+    android:textColor="@color/secondaryTextColor" />
 
 </LinearLayout>
 

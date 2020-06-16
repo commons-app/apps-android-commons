@@ -7,7 +7,6 @@ import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.RemoteException
 import com.nhaarman.mockitokotlin2.*
-import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.category.CategoryContentProvider.BASE_URI
 import fr.free.nrw.commons.category.CategoryContentProvider.uriForId
@@ -190,24 +189,40 @@ class CategoryDaoTest {
         assertEquals(2, category?.timesUsed)
 
         verify(client).query(
-                eq(BASE_URI),
-                eq(ALL_FIELDS),
-                eq("$COLUMN_NAME=?"),
-                queryCaptor.capture(),
-                isNull()
+            eq(BASE_URI),
+            eq(ALL_FIELDS),
+            eq("$COLUMN_NAME=?"),
+            queryCaptor.capture(),
+            isNull()
         )
         assertEquals("showImageWithItem", queryCaptor.firstValue[0])
     }
 
     @Test(expected = RuntimeException::class)
     fun findCategoryTranslatesExceptions() {
-        whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenThrow(RemoteException(""))
+        whenever(
+            client.query(
+                any(),
+                any(),
+                any(),
+                any(),
+                anyOrNull()
+            )
+        ).thenThrow(RemoteException(""))
         testObject.find("showImageWithItem")
     }
 
     @Test(expected = RuntimeException::class)
     fun recentCategoriesTranslatesExceptions() {
-        whenever(client.query(any(), any(), anyOrNull(), any(), any())).thenThrow(RemoteException(""))
+        whenever(
+            client.query(
+                any(),
+                any(),
+                anyOrNull(),
+                any(),
+                any()
+            )
+        ).thenThrow(RemoteException(""))
         testObject.recentCategories(1)
     }
 
@@ -244,11 +259,11 @@ class CategoryDaoTest {
         assertEquals("showImageWithItem", result[0])
 
         verify(client).query(
-                eq(BASE_URI),
-                eq(ALL_FIELDS),
-                isNull(),
-                queryCaptor.capture(),
-                eq("$COLUMN_LAST_USED DESC")
+            eq(BASE_URI),
+            eq(ALL_FIELDS),
+            isNull(),
+            queryCaptor.capture(),
+            eq("$COLUMN_LAST_USED DESC")
         )
         assertEquals(0, queryCaptor.firstValue.size)
     }

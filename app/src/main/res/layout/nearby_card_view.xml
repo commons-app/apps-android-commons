@@ -1,94 +1,88 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_centerVertical="true"
+  android:background="?attr/mainCardBackground"
+  android:minHeight="@dimen/large_height">
+
+  <Button
+    android:id="@+id/permission_request_button"
+    style="@style/Widget.AppCompat.Button.Borderless"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:layout_marginLeft="@dimen/activity_margin_horizontal"
+    android:layout_marginTop="@dimen/activity_margin_horizontal"
+    android:layout_marginRight="@dimen/activity_margin_horizontal"
+    android:minWidth="@dimen/fragment_height"
+    android:singleLine="true"
+    android:text="@string/display_nearby_notification_summary"
+    android:textColor="@android:color/white"
+    android:theme="?attr/mainScreenNearbyPermissionbutton" />
+
+
+  <LinearLayout
+    android:id="@+id/content_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="?attr/mainCardBackground"
-    android:layout_centerVertical="true"
-    android:minHeight="@dimen/large_height">
+    android:layout_centerInParent="true">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/permission_request_button"
-        android:text="@string/display_nearby_notification_summary"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="@dimen/activity_margin_horizontal"
-        android:layout_marginRight="@dimen/activity_margin_horizontal"
-        android:layout_marginTop="@dimen/activity_margin_horizontal"
-        android:minWidth="@dimen/fragment_height"
-        android:textColor="@android:color/white"
-        android:singleLine="true"
-        android:theme="?attr/mainScreenNearbyPermissionbutton"
-        style="@style/Widget.AppCompat.Button.Borderless"/>
+    <ProgressBar
+      android:id="@+id/progressBar"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true" />
+
+    <ImageView
+      android:id="@+id/nearby_icon"
+      android:layout_width="@dimen/dimen_40"
+      android:layout_height="@dimen/dimen_40"
+      android:layout_marginStart="@dimen/standard_gap"
+      android:layout_marginLeft="@dimen/standard_gap"
+      android:scaleType="centerCrop"
+      app:srcCompat="@drawable/ic_location_white_24dp" />
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:layout_gravity="center_vertical"
+      android:gravity="center_vertical"
+      android:orientation="horizontal"
+      android:weightSum="4">
+
+      <TextView
+        android:id="@+id/nearby_title"
+        android:layout_width="@dimen/dimen_0"
         android:layout_height="wrap_content"
-        android:id="@+id/content_layout"
         android:layout_centerInParent="true"
-        >
+        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_weight="3"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
+        tools:text="test distance"></TextView>
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBar"
-            android:layout_centerInParent="true"
-            />
+      <TextView
+        android:id="@+id/nearby_distance"
+        android:layout_width="@dimen/dimen_0"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_weight="1"
+        android:minWidth="@dimen/fragment_height"
+        android:singleLine="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textColor="@android:color/white"
+        tools:text="test distance">
 
-        <ImageView
-            android:id="@+id/nearby_icon"
-            android:layout_width="@dimen/dimen_40"
-            android:layout_height="@dimen/dimen_40"
-            android:layout_marginLeft="@dimen/standard_gap"
-            android:layout_marginStart="@dimen/standard_gap"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/ic_location_white_24dp"/>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="horizontal"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
-            android:weightSum="4"
-            >
-
-            <TextView
-                android:id="@+id/nearby_title"
-                android:layout_width="@dimen/dimen_0"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="@dimen/standard_gap"
-                android:layout_marginRight="@dimen/standard_gap"
-                tools:text="test distance"
-                android:textColor="@android:color/white"
-                android:singleLine="true"
-                >
-            </TextView>
-
-            <TextView
-                android:id="@+id/nearby_distance"
-                android:layout_width="@dimen/dimen_0"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="@dimen/standard_gap"
-                android:layout_marginRight="@dimen/standard_gap"
-                android:minWidth="@dimen/fragment_height"
-                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                tools:text="test distance"
-                android:textColor="@android:color/white"
-                android:singleLine="true"
-                >
-
-            </TextView>
-
-        </LinearLayout>
+      </TextView>
 
     </LinearLayout>
+
+  </LinearLayout>
 
 </RelativeLayout>

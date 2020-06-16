@@ -17,8 +17,10 @@ class UploadControllerTest {
 
     @Mock
     internal var sessionManager: SessionManager? = null
+
     @Mock
     internal var context: Context? = null
+
     @Mock
     internal var prefs: JsonKvStore? = null
 
@@ -31,7 +33,10 @@ class UploadControllerTest {
         val uploadService = mock(UploadService::class.java)
         val binder = mock(UploadService.UploadServiceLocalBinder::class.java)
         `when`(binder.service).thenReturn(uploadService)
-        uploadController!!.uploadServiceConnection.onServiceConnected(mock(ComponentName::class.java), binder)
+        uploadController!!.uploadServiceConnection.onServiceConnected(
+            mock(ComponentName::class.java),
+            binder
+        )
     }
 
     @Test

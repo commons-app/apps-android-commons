@@ -53,431 +53,436 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
 
-public class UploadActivity extends BaseActivity implements UploadContract.View, UploadBaseFragment.Callback {
-    @Inject
-    ContributionController contributionController;
-    @Inject
-    @Named("default_preferences")
-    JsonKvStore directKvStore;
-    @Inject
-    UploadContract.UserActionListener presenter;
-    @Inject
-    SessionManager sessionManager;
-    @Inject
-    UserClient userClient;
+public class UploadActivity extends BaseActivity implements UploadContract.View,
+    UploadBaseFragment.Callback {
+
+  @Inject
+  ContributionController contributionController;
+  @Inject
+  @Named("default_preferences")
+  JsonKvStore directKvStore;
+  @Inject
+  UploadContract.UserActionListener presenter;
+  @Inject
+  SessionManager sessionManager;
+  @Inject
+  UserClient userClient;
 
 
-    @BindView(R.id.cv_container_top_card)
-    CardView cvContainerTopCard;
+  @BindView(R.id.cv_container_top_card)
+  CardView cvContainerTopCard;
 
-    @BindView(R.id.ll_container_top_card)
-    LinearLayout llContainerTopCard;
+  @BindView(R.id.ll_container_top_card)
+  LinearLayout llContainerTopCard;
 
-    @BindView(R.id.rl_container_title)
-    RelativeLayout rlContainerTitle;
+  @BindView(R.id.rl_container_title)
+  RelativeLayout rlContainerTitle;
 
-    @BindView(R.id.tv_top_card_title)
-    TextView tvTopCardTitle;
+  @BindView(R.id.tv_top_card_title)
+  TextView tvTopCardTitle;
 
-    @BindView(R.id.ib_toggle_top_card)
-    ImageButton ibToggleTopCard;
+  @BindView(R.id.ib_toggle_top_card)
+  ImageButton ibToggleTopCard;
 
-    @BindView(R.id.rv_thumbnails)
-    RecyclerView rvThumbnails;
+  @BindView(R.id.rv_thumbnails)
+  RecyclerView rvThumbnails;
 
-    @BindView(R.id.vp_upload)
-    ViewPager vpUpload;
+  @BindView(R.id.vp_upload)
+  ViewPager vpUpload;
 
-    private boolean isTitleExpanded = true;
+  private boolean isTitleExpanded = true;
 
-    private CompositeDisposable compositeDisposable;
-    private ProgressDialog progressDialog;
-    private UploadImageAdapter uploadImagesAdapter;
-    private List<UploadBaseFragment> fragments;
-    private UploadCategoriesFragment uploadCategoriesFragment;
-    private DepictsFragment depictsFragment;
-    private MediaLicenseFragment mediaLicenseFragment;
-    private ThumbnailsAdapter thumbnailsAdapter;
+  private CompositeDisposable compositeDisposable;
+  private ProgressDialog progressDialog;
+  private UploadImageAdapter uploadImagesAdapter;
+  private List<UploadBaseFragment> fragments;
+  private UploadCategoriesFragment uploadCategoriesFragment;
+  private DepictsFragment depictsFragment;
+  private MediaLicenseFragment mediaLicenseFragment;
+  private ThumbnailsAdapter thumbnailsAdapter;
 
-    private Place place;
-    private List<UploadableFile> uploadableFiles = Collections.emptyList();
-    private int currentSelectedPosition = 0;
+  private Place place;
+  private List<UploadableFile> uploadableFiles = Collections.emptyList();
+  private int currentSelectedPosition = 0;
 
-    @SuppressLint("CheckResult")
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+  @SuppressLint("CheckResult")
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_upload);
+    setContentView(R.layout.activity_upload);
 
-        ButterKnife.bind(this);
-        compositeDisposable = new CompositeDisposable();
-        init();
+    ButterKnife.bind(this);
+    compositeDisposable = new CompositeDisposable();
+    init();
 
-        PermissionUtils.checkPermissionsAndPerformAction(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                this::receiveSharedItems,
-                R.string.storage_permission_title,
-                R.string.write_storage_permission_rationale_for_image_share);
-    }
+    PermissionUtils.checkPermissionsAndPerformAction(this,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        this::receiveSharedItems,
+        R.string.storage_permission_title,
+        R.string.write_storage_permission_rationale_for_image_share);
+  }
 
-    private void init() {
-        initProgressDialog();
-        initViewPager();
-        initThumbnailsRecyclerView();
-        //And init other things you need to
-    }
+  private void init() {
+    initProgressDialog();
+    initViewPager();
+    initThumbnailsRecyclerView();
+    //And init other things you need to
+  }
 
-    private void initProgressDialog() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage(getString(R.string.please_wait));
-    }
+  private void initProgressDialog() {
+    progressDialog = new ProgressDialog(this);
+    progressDialog.setMessage(getString(R.string.please_wait));
+  }
 
-    private void initThumbnailsRecyclerView() {
-        rvThumbnails.setLayoutManager(new LinearLayoutManager(this,
-                LinearLayoutManager.HORIZONTAL, false));
-        thumbnailsAdapter = new ThumbnailsAdapter(() -> currentSelectedPosition);
-        rvThumbnails.setAdapter(thumbnailsAdapter);
+  private void initThumbnailsRecyclerView() {
+    rvThumbnails.setLayoutManager(new LinearLayoutManager(this,
+        LinearLayoutManager.HORIZONTAL, false));
+    thumbnailsAdapter = new ThumbnailsAdapter(() -> currentSelectedPosition);
+    rvThumbnails.setAdapter(thumbnailsAdapter);
 
-    }
+  }
 
-    private void initViewPager() {
-        uploadImagesAdapter = new UploadImageAdapter(getSupportFragmentManager());
-        vpUpload.setAdapter(uploadImagesAdapter);
-        vpUpload.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset,
-                                       int positionOffsetPixels) {
+  private void initViewPager() {
+    uploadImagesAdapter = new UploadImageAdapter(getSupportFragmentManager());
+    vpUpload.setAdapter(uploadImagesAdapter);
+    vpUpload.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+      @Override
+      public void onPageScrolled(int position, float positionOffset,
+          int positionOffsetPixels) {
 
-            }
+      }
 
-            @Override
-            public void onPageSelected(int position) {
-                currentSelectedPosition = position;
-                if (position >= uploadableFiles.size()) {
-                    cvContainerTopCard.setVisibility(View.GONE);
-                } else {
-                    thumbnailsAdapter.notifyDataSetChanged();
-                    cvContainerTopCard.setVisibility(View.VISIBLE);
-                }
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-    }
-
-    @Override
-    public boolean isLoggedIn() {
-        return sessionManager.isUserLoggedIn();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.onAttachView(this);
-        if (!isLoggedIn()) {
-            askUserToLogIn();
-        }
-        checkBlockStatus();
-        checkStoragePermissions();
-    }
-
-    /**
-     * Makes API call to check if user is blocked from Commons. If the user is blocked, a snackbar
-     * is created to notify the user
-     */
-    protected void checkBlockStatus() {
-        compositeDisposable.add(userClient.isUserBlockedFromCommons()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .filter(result -> result)
-                .subscribe(result -> showInfoAlert(R.string.block_notification_title,
-                        R.string.block_notification, UploadActivity.this::finish)
-                ));
-    }
-
-    private void checkStoragePermissions() {
-        PermissionUtils.checkPermissionsAndPerformAction(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                () -> {
-                    //TODO handle this
-                },
-                R.string.storage_permission_title,
-                R.string.write_storage_permission_rationale_for_image_share);
-    }
-
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    /**
-     * Show/Hide the progress dialog
-     */
-    @Override
-    public void showProgress(boolean shouldShow) {
-        if (shouldShow) {
-            if (!progressDialog.isShowing()) {
-                progressDialog.show();
-            }
+      @Override
+      public void onPageSelected(int position) {
+        currentSelectedPosition = position;
+        if (position >= uploadableFiles.size()) {
+          cvContainerTopCard.setVisibility(View.GONE);
         } else {
-            if (progressDialog != null && !isFinishing()) {
-                progressDialog.dismiss();
-            }
-        }
-    }
-
-    @Override
-    public int getIndexInViewFlipper(UploadBaseFragment fragment) {
-        return fragments.indexOf(fragment);
-    }
-
-    @Override
-    public int getTotalNumberOfSteps() {
-        return fragments.size();
-    }
-
-    @Override
-    public void showMessage(int messageResourceId) {
-        ViewUtil.showLongToast(this, messageResourceId);
-    }
-
-    @Override
-    public List<UploadableFile> getUploadableFiles() {
-        return uploadableFiles;
-    }
-
-    @Override
-    public void showHideTopCard(boolean shouldShow) {
-        llContainerTopCard.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void onUploadMediaDeleted(int index) {
-        fragments.remove(index);//Remove the corresponding fragment
-        uploadableFiles.remove(index);//Remove the files from the list
-        thumbnailsAdapter.notifyItemRemoved(index); //Notify the thumbnails adapter
-        uploadImagesAdapter.notifyDataSetChanged(); //Notify the ViewPager
-    }
-
-    @Override
-    public void updateTopCardTitle() {
-        tvTopCardTitle.setText(getResources()
-                .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
-    }
-
-    @Override
-    public void askUserToLogIn() {
-        Timber.d("current session is null, asking user to login");
-        ViewUtil.showLongToast(this, getString(R.string.user_not_logged_in));
-        Intent loginIntent = new Intent(UploadActivity.this, LoginActivity.class);
-        startActivity(loginIntent);
-    }
-
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS) {
-            //TODO: Confirm if handling manual permission enabled is required
-        }
-    }
-
-    private void receiveSharedItems() {
-        Intent intent = getIntent();
-        String action = intent.getAction();
-        if (Intent.ACTION_SEND.equals(action) || Intent.ACTION_SEND_MULTIPLE.equals(action)) {
-            receiveExternalSharedItems();
-        } else if (ACTION_INTERNAL_UPLOADS.equals(action)) {
-            receiveInternalSharedItems();
+          thumbnailsAdapter.notifyDataSetChanged();
+          cvContainerTopCard.setVisibility(View.VISIBLE);
         }
 
-        if (uploadableFiles == null || uploadableFiles.isEmpty()) {
-            handleNullMedia();
-        } else {
-            //Show thumbnails
-            if (uploadableFiles.size()
-                    > 1) {//If there is only file, no need to show the image thumbnails
-                thumbnailsAdapter.setUploadableFiles(uploadableFiles);
-            } else {
-                llContainerTopCard.setVisibility(View.GONE);
-            }
-            tvTopCardTitle.setText(getResources()
-                    .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
+      }
 
-            fragments = new ArrayList<>();
-            for (UploadableFile uploadableFile : uploadableFiles) {
-                UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
-                uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, place);
-                uploadMediaDetailFragment.setCallback(new UploadMediaDetailFragmentCallback() {
-                    @Override
-                    public void deletePictureAtIndex(int index) {
-                        presenter.deletePictureAtIndex(index);
-                    }
+      @Override
+      public void onPageScrollStateChanged(int state) {
 
-                    @Override
-                    public void onNextButtonClicked(int index) {
-                        UploadActivity.this.onNextButtonClicked(index);
-                    }
+      }
+    });
+  }
 
-                    @Override
-                    public void onPreviousButtonClicked(int index) {
-                        UploadActivity.this.onPreviousButtonClicked(index);
-                    }
+  @Override
+  public boolean isLoggedIn() {
+    return sessionManager.isUserLoggedIn();
+  }
 
-                    @Override
-                    public void showProgress(boolean shouldShow) {
-                        UploadActivity.this.showProgress(shouldShow);
-                    }
+  @Override
+  protected void onResume() {
+    super.onResume();
+    presenter.onAttachView(this);
+    if (!isLoggedIn()) {
+      askUserToLogIn();
+    }
+    checkBlockStatus();
+    checkStoragePermissions();
+  }
 
-                    @Override
-                    public int getIndexInViewFlipper(UploadBaseFragment fragment) {
-                        return fragments.indexOf(fragment);
-                    }
+  /**
+   * Makes API call to check if user is blocked from Commons. If the user is blocked, a snackbar is
+   * created to notify the user
+   */
+  protected void checkBlockStatus() {
+    compositeDisposable.add(userClient.isUserBlockedFromCommons()
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .filter(result -> result)
+        .subscribe(result -> showInfoAlert(R.string.block_notification_title,
+            R.string.block_notification, UploadActivity.this::finish)
+        ));
+  }
 
-                    @Override
-                    public int getTotalNumberOfSteps() {
-                        return fragments.size();
-                    }
-                });
-                fragments.add(uploadMediaDetailFragment);
-            }
+  private void checkStoragePermissions() {
+    PermissionUtils.checkPermissionsAndPerformAction(this,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        () -> {
+          //TODO handle this
+        },
+        R.string.storage_permission_title,
+        R.string.write_storage_permission_rationale_for_image_share);
+  }
 
-            uploadCategoriesFragment = new UploadCategoriesFragment();
-            uploadCategoriesFragment.setCallback(this);
 
-            depictsFragment = new DepictsFragment();
-            depictsFragment.setCallback(this);
+  @Override
+  protected void onStop() {
+    super.onStop();
+  }
 
-            mediaLicenseFragment = new MediaLicenseFragment();
-            mediaLicenseFragment.setCallback(this);
+  /**
+   * Show/Hide the progress dialog
+   */
+  @Override
+  public void showProgress(boolean shouldShow) {
+    if (shouldShow) {
+      if (!progressDialog.isShowing()) {
+        progressDialog.show();
+      }
+    } else {
+      if (progressDialog != null && !isFinishing()) {
+        progressDialog.dismiss();
+      }
+    }
+  }
 
-            fragments.add(depictsFragment);
-            fragments.add(uploadCategoriesFragment);
-            fragments.add(mediaLicenseFragment);
+  @Override
+  public int getIndexInViewFlipper(UploadBaseFragment fragment) {
+    return fragments.indexOf(fragment);
+  }
 
-            uploadImagesAdapter.setFragments(fragments);
-            vpUpload.setOffscreenPageLimit(fragments.size());
-        }
+  @Override
+  public int getTotalNumberOfSteps() {
+    return fragments.size();
+  }
+
+  @Override
+  public void showMessage(int messageResourceId) {
+    ViewUtil.showLongToast(this, messageResourceId);
+  }
+
+  @Override
+  public List<UploadableFile> getUploadableFiles() {
+    return uploadableFiles;
+  }
+
+  @Override
+  public void showHideTopCard(boolean shouldShow) {
+    llContainerTopCard.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
+  }
+
+  @Override
+  public void onUploadMediaDeleted(int index) {
+    fragments.remove(index);//Remove the corresponding fragment
+    uploadableFiles.remove(index);//Remove the files from the list
+    thumbnailsAdapter.notifyItemRemoved(index); //Notify the thumbnails adapter
+    uploadImagesAdapter.notifyDataSetChanged(); //Notify the ViewPager
+  }
+
+  @Override
+  public void updateTopCardTitle() {
+    tvTopCardTitle.setText(getResources()
+        .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(),
+            uploadableFiles.size()));
+  }
+
+  @Override
+  public void askUserToLogIn() {
+    Timber.d("current session is null, asking user to login");
+    ViewUtil.showLongToast(this, getString(R.string.user_not_logged_in));
+    Intent loginIntent = new Intent(UploadActivity.this, LoginActivity.class);
+    startActivity(loginIntent);
+  }
+
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (requestCode == CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS) {
+      //TODO: Confirm if handling manual permission enabled is required
+    }
+  }
+
+  private void receiveSharedItems() {
+    Intent intent = getIntent();
+    String action = intent.getAction();
+    if (Intent.ACTION_SEND.equals(action) || Intent.ACTION_SEND_MULTIPLE.equals(action)) {
+      receiveExternalSharedItems();
+    } else if (ACTION_INTERNAL_UPLOADS.equals(action)) {
+      receiveInternalSharedItems();
     }
 
-    private void receiveExternalSharedItems() {
-        uploadableFiles = contributionController.handleExternalImagesPicked(this, getIntent());
-    }
+    if (uploadableFiles == null || uploadableFiles.isEmpty()) {
+      handleNullMedia();
+    } else {
+      //Show thumbnails
+      if (uploadableFiles.size()
+          > 1) {//If there is only file, no need to show the image thumbnails
+        thumbnailsAdapter.setUploadableFiles(uploadableFiles);
+      } else {
+        llContainerTopCard.setVisibility(View.GONE);
+      }
+      tvTopCardTitle.setText(getResources()
+          .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(),
+              uploadableFiles.size()));
 
-    private void receiveInternalSharedItems() {
-        Intent intent = getIntent();
+      fragments = new ArrayList<>();
+      for (UploadableFile uploadableFile : uploadableFiles) {
+        UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
+        uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, place);
+        uploadMediaDetailFragment.setCallback(new UploadMediaDetailFragmentCallback() {
+          @Override
+          public void deletePictureAtIndex(int index) {
+            presenter.deletePictureAtIndex(index);
+          }
 
-        Timber.d("Received intent %s with action %s", intent.toString(), intent.getAction());
+          @Override
+          public void onNextButtonClicked(int index) {
+            UploadActivity.this.onNextButtonClicked(index);
+          }
 
-        uploadableFiles = intent.getParcelableArrayListExtra(EXTRA_FILES);
-        Timber.i("Received multiple upload %s", uploadableFiles.size());
+          @Override
+          public void onPreviousButtonClicked(int index) {
+            UploadActivity.this.onPreviousButtonClicked(index);
+          }
 
-        place = intent.getParcelableExtra(PLACE_OBJECT);
-        resetDirectPrefs();
-    }
+          @Override
+          public void showProgress(boolean shouldShow) {
+            UploadActivity.this.showProgress(shouldShow);
+          }
 
-    public void resetDirectPrefs() {
-        directKvStore.remove(PLACE_OBJECT);
-    }
+          @Override
+          public int getIndexInViewFlipper(UploadBaseFragment fragment) {
+            return fragments.indexOf(fragment);
+          }
 
-    /**
-     * Handle null URI from the received intent.
-     * Current implementation will simply show a toast and finish the upload activity.
-     */
-    private void handleNullMedia() {
-        ViewUtil.showLongToast(this, R.string.error_processing_image);
-        finish();
-    }
-
-    private void showInfoAlert(int titleStringID, int messageStringId, Runnable positive, String... formatArgs) {
-        new AlertDialog.Builder(this)
-                .setTitle(titleStringID)
-                .setMessage(getString(messageStringId, (Object[]) formatArgs))
-                .setCancelable(true)
-                .setPositiveButton(android.R.string.ok, (dialog, id) -> {
-                    positive.run();
-                    dialog.cancel();
-                })
-                .create()
-                .show();
-    }
-
-    @Override
-    public void onNextButtonClicked(int index) {
-        if (index < fragments.size() - 1) {
-            vpUpload.setCurrentItem(index + 1, false);
-            fragments.get(index + 1).onBecameVisible();
-        } else {
-            presenter.handleSubmit();
-        }
-    }
-
-    @Override
-    public void onPreviousButtonClicked(int index) {
-        if (index != 0) {
-            vpUpload.setCurrentItem(index - 1, true);
-            fragments.get(index - 1).onBecameVisible();
-        }
-    }
-
-    /**
-     * The adapter used to show image upload intermediate fragments
-     */
-
-    private class UploadImageAdapter extends FragmentStatePagerAdapter {
-        List<UploadBaseFragment> fragments;
-
-        public UploadImageAdapter(FragmentManager fragmentManager) {
-            super(fragmentManager);
-            this.fragments = new ArrayList<>();
-        }
-
-        public void setFragments(List<UploadBaseFragment> fragments) {
-            this.fragments = fragments;
-            notifyDataSetChanged();
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return fragments.get(position);
-        }
-
-        @Override
-        public int getCount() {
+          @Override
+          public int getTotalNumberOfSteps() {
             return fragments.size();
-        }
+          }
+        });
+        fragments.add(uploadMediaDetailFragment);
+      }
 
-        @Override
-        public int getItemPosition(Object object) {
-            return PagerAdapter.POSITION_NONE;
-        }
+      uploadCategoriesFragment = new UploadCategoriesFragment();
+      uploadCategoriesFragment.setCallback(this);
+
+      depictsFragment = new DepictsFragment();
+      depictsFragment.setCallback(this);
+
+      mediaLicenseFragment = new MediaLicenseFragment();
+      mediaLicenseFragment.setCallback(this);
+
+      fragments.add(depictsFragment);
+      fragments.add(uploadCategoriesFragment);
+      fragments.add(mediaLicenseFragment);
+
+      uploadImagesAdapter.setFragments(fragments);
+      vpUpload.setOffscreenPageLimit(fragments.size());
+    }
+  }
+
+  private void receiveExternalSharedItems() {
+    uploadableFiles = contributionController.handleExternalImagesPicked(this, getIntent());
+  }
+
+  private void receiveInternalSharedItems() {
+    Intent intent = getIntent();
+
+    Timber.d("Received intent %s with action %s", intent.toString(), intent.getAction());
+
+    uploadableFiles = intent.getParcelableArrayListExtra(EXTRA_FILES);
+    Timber.i("Received multiple upload %s", uploadableFiles.size());
+
+    place = intent.getParcelableExtra(PLACE_OBJECT);
+    resetDirectPrefs();
+  }
+
+  public void resetDirectPrefs() {
+    directKvStore.remove(PLACE_OBJECT);
+  }
+
+  /**
+   * Handle null URI from the received intent. Current implementation will simply show a toast and
+   * finish the upload activity.
+   */
+  private void handleNullMedia() {
+    ViewUtil.showLongToast(this, R.string.error_processing_image);
+    finish();
+  }
+
+  private void showInfoAlert(int titleStringID, int messageStringId, Runnable positive,
+      String... formatArgs) {
+    new AlertDialog.Builder(this)
+        .setTitle(titleStringID)
+        .setMessage(getString(messageStringId, (Object[]) formatArgs))
+        .setCancelable(true)
+        .setPositiveButton(android.R.string.ok, (dialog, id) -> {
+          positive.run();
+          dialog.cancel();
+        })
+        .create()
+        .show();
+  }
+
+  @Override
+  public void onNextButtonClicked(int index) {
+    if (index < fragments.size() - 1) {
+      vpUpload.setCurrentItem(index + 1, false);
+      fragments.get(index + 1).onBecameVisible();
+    } else {
+      presenter.handleSubmit();
+    }
+  }
+
+  @Override
+  public void onPreviousButtonClicked(int index) {
+    if (index != 0) {
+      vpUpload.setCurrentItem(index - 1, true);
+      fragments.get(index - 1).onBecameVisible();
+    }
+  }
+
+  /**
+   * The adapter used to show image upload intermediate fragments
+   */
+
+  private class UploadImageAdapter extends FragmentStatePagerAdapter {
+
+    List<UploadBaseFragment> fragments;
+
+    public UploadImageAdapter(FragmentManager fragmentManager) {
+      super(fragmentManager);
+      this.fragments = new ArrayList<>();
     }
 
-
-    @OnClick(R.id.rl_container_title)
-    public void onRlContainerTitleClicked() {
-        rvThumbnails.setVisibility(isTitleExpanded ? View.GONE : View.VISIBLE);
-        isTitleExpanded = !isTitleExpanded;
-        ibToggleTopCard.setRotation(ibToggleTopCard.getRotation() + 180);
+    public void setFragments(List<UploadBaseFragment> fragments) {
+      this.fragments = fragments;
+      notifyDataSetChanged();
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        presenter.onDetachView();
-        compositeDisposable.clear();
-        if (mediaLicenseFragment != null) {
-            mediaLicenseFragment.setCallback(null);
-        }
-        if (uploadCategoriesFragment != null) {
-            uploadCategoriesFragment.setCallback(null);
-        }
+    public Fragment getItem(int position) {
+      return fragments.get(position);
     }
+
+    @Override
+    public int getCount() {
+      return fragments.size();
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+      return PagerAdapter.POSITION_NONE;
+    }
+  }
+
+
+  @OnClick(R.id.rl_container_title)
+  public void onRlContainerTitleClicked() {
+    rvThumbnails.setVisibility(isTitleExpanded ? View.GONE : View.VISIBLE);
+    isTitleExpanded = !isTitleExpanded;
+    ibToggleTopCard.setRotation(ibToggleTopCard.getRotation() + 180);
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    presenter.onDetachView();
+    compositeDisposable.clear();
+    if (mediaLicenseFragment != null) {
+      mediaLicenseFragment.setCallback(null);
+    }
+    if (uploadCategoriesFragment != null) {
+      uploadCategoriesFragment.setCallback(null);
+    }
+  }
 }

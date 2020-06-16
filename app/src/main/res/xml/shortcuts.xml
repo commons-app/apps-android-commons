@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-    <shortcut
-        android:enabled="true"
-        android:icon="@mipmap/ic_explore"
-        android:shortcutId="Explore"
-        android:shortcutLongLabel="@string/title_app_shortcut_explore"
-        android:shortcutShortLabel="@string/title_app_shortcut_explore"
-        tools:targetApi="n_mr1">
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetClass="fr.free.nrw.commons.explore.categories.ExploreActivity"
-            android:targetPackage="fr.free.nrw.commons.beta" />
-    </shortcut>
+  xmlns:tools="http://schemas.android.com/tools">
+  <shortcut
+    android:enabled="true"
+    android:icon="@mipmap/ic_explore"
+    android:shortcutId="Explore"
+    android:shortcutLongLabel="@string/title_app_shortcut_explore"
+    android:shortcutShortLabel="@string/title_app_shortcut_explore"
+    tools:targetApi="n_mr1">
+    <intent
+      android:action="android.intent.action.VIEW"
+      android:targetClass="fr.free.nrw.commons.explore.categories.ExploreActivity"
+      android:targetPackage="fr.free.nrw.commons.beta" />
+  </shortcut>
 
-    <shortcut
-        android:enabled="true"
-        android:icon="@mipmap/ic_filled_star"
-        android:shortcutId="Bookmark"
-        android:shortcutLongLabel="@string/title_app_shortcut_bookmark"
-        android:shortcutShortLabel="@string/title_app_shortcut_bookmark"
-        tools:targetApi="n_mr1">
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetClass="fr.free.nrw.commons.bookmarks.BookmarksActivity"
-            android:targetPackage="fr.free.nrw.commons.beta" />
-    </shortcut>
+  <shortcut
+    android:enabled="true"
+    android:icon="@mipmap/ic_filled_star"
+    android:shortcutId="Bookmark"
+    android:shortcutLongLabel="@string/title_app_shortcut_bookmark"
+    android:shortcutShortLabel="@string/title_app_shortcut_bookmark"
+    tools:targetApi="n_mr1">
+    <intent
+      android:action="android.intent.action.VIEW"
+      android:targetClass="fr.free.nrw.commons.bookmarks.BookmarksActivity"
+      android:targetPackage="fr.free.nrw.commons.beta" />
+  </shortcut>
 
-    <shortcut
-        android:enabled="true"
-        android:icon="@mipmap/ic_settings_black"
-        android:shortcutId="Setting"
-        android:shortcutLongLabel="@string/title_app_shortcut_setting"
-        android:shortcutShortLabel="@string/title_app_shortcut_setting"
-        tools:targetApi="n_mr1">
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetClass="fr.free.nrw.commons.settings.SettingsActivity"
-            android:targetPackage="fr.free.nrw.commons.beta" />
-    </shortcut>
+  <shortcut
+    android:enabled="true"
+    android:icon="@mipmap/ic_settings_black"
+    android:shortcutId="Setting"
+    android:shortcutLongLabel="@string/title_app_shortcut_setting"
+    android:shortcutShortLabel="@string/title_app_shortcut_setting"
+    tools:targetApi="n_mr1">
+    <intent
+      android:action="android.intent.action.VIEW"
+      android:targetClass="fr.free.nrw.commons.settings.SettingsActivity"
+      android:targetPackage="fr.free.nrw.commons.beta" />
+  </shortcut>
 
 
 </shortcuts>

@@ -31,19 +31,21 @@ class UploadActivityTest {
         val imageUri = Uri.parse("file://mnt/sdcard/image.jpg")
 
         Espresso.onView(ViewMatchers.withId(R.id.caption_item_edit_text))
-                .perform(ViewActions.typeText("caption in english"))
+            .perform(ViewActions.typeText("caption in english"))
         Espresso.onView(ViewMatchers.withId(R.id.description_item_edit_text))
-                .perform(ViewActions.typeText("description in english"))
+            .perform(ViewActions.typeText("description in english"))
         Espresso.onView(ViewMatchers.withId(R.id.spinner_description_languages))
-                .perform(ViewActions.click())
-        Espresso.onView(ViewMatchers.withId(R.id.spinner_description_languages)).perform(ViewActions.click());
-        Espresso.onData(AllOf.allOf(Matchers.anything("spinner text"))).atPosition(1).perform(ViewActions.click());
+            .perform(ViewActions.click())
+        Espresso.onView(ViewMatchers.withId(R.id.spinner_description_languages))
+            .perform(ViewActions.click());
+        Espresso.onData(AllOf.allOf(Matchers.anything("spinner text"))).atPosition(1)
+            .perform(ViewActions.click());
         Espresso.onView(ViewMatchers.withId(R.id.caption_item_edit_text))
-                .perform(ViewActions.typeText("caption in some other language"))
+            .perform(ViewActions.typeText("caption in some other language"))
         Espresso.onView(ViewMatchers.withId(R.id.description_item_edit_text))
-                .perform(ViewActions.typeText("description in some other language"))
+            .perform(ViewActions.typeText("description in some other language"))
         Espresso.onView(ViewMatchers.withId(R.id.btn_next))
-                .perform(ViewActions.click())
+            .perform(ViewActions.click())
         Intents.intended(IntentMatchers.hasComponent(DepictsFragment::class.java.name))
     }
 }

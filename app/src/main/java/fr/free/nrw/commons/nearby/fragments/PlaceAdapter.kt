@@ -21,5 +21,5 @@ class PlaceAdapter(
             commonPlaceClickActions.onOverflowClicked(),
             commonPlaceClickActions.onDirectionsClicked()
         ),
-        areItemsTheSame = {oldItem, newItem -> oldItem.wikiDataEntityId == newItem.wikiDataEntityId }
+        areItemsTheSame = { oldItem, newItem -> oldItem.wikiDataEntityId == newItem.wikiDataEntityId }
     )

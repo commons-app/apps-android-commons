@@ -26,75 +26,84 @@ import kotlin.Unit;
 
 public class BookmarkLocationsFragment extends DaggerFragment {
 
-    @BindView(R.id.statusMessage) TextView statusTextView;
-    @BindView(R.id.loadingImagesProgressBar) ProgressBar progressBar;
-    @BindView(R.id.listView) RecyclerView recyclerView;
-    @BindView(R.id.parentLayout) RelativeLayout parentLayout;
+  @BindView(R.id.statusMessage)
+  TextView statusTextView;
+  @BindView(R.id.loadingImagesProgressBar)
+  ProgressBar progressBar;
+  @BindView(R.id.listView)
+  RecyclerView recyclerView;
+  @BindView(R.id.parentLayout)
+  RelativeLayout parentLayout;
 
-    @Inject BookmarkLocationsController controller;
-    @Inject ContributionController contributionController;
-    @Inject BookmarkLocationsDao bookmarkLocationDao;
-    @Inject CommonPlaceClickActions commonPlaceClickActions;
-    private PlaceAdapter adapter;
+  @Inject
+  BookmarkLocationsController controller;
+  @Inject
+  ContributionController contributionController;
+  @Inject
+  BookmarkLocationsDao bookmarkLocationDao;
+  @Inject
+  CommonPlaceClickActions commonPlaceClickActions;
+  private PlaceAdapter adapter;
 
-    /**
-     * Create an instance of the fragment with the right bundle parameters
-     * @return an instance of the fragment
-     */
-    public static BookmarkLocationsFragment newInstance() {
-        return new BookmarkLocationsFragment();
+  /**
+   * Create an instance of the fragment with the right bundle parameters
+   *
+   * @return an instance of the fragment
+   */
+  public static BookmarkLocationsFragment newInstance() {
+    return new BookmarkLocationsFragment();
+  }
+
+  @Override
+  public View onCreateView(
+      @NonNull LayoutInflater inflater,
+      ViewGroup container,
+      Bundle savedInstanceState
+  ) {
+    View v = inflater.inflate(R.layout.fragment_bookmarks_locations, container, false);
+    ButterKnife.bind(this, v);
+    return v;
+  }
+
+  @Override
+  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    progressBar.setVisibility(View.VISIBLE);
+    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    adapter = new PlaceAdapter(bookmarkLocationDao,
+        place -> Unit.INSTANCE,
+        (place, isBookmarked) -> {
+          adapter.remove(place);
+          return Unit.INSTANCE;
+        },
+        commonPlaceClickActions
+    );
+    recyclerView.setAdapter(adapter);
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    initList();
+  }
+
+  /**
+   * Initialize the recycler view with bookmarked locations
+   */
+  private void initList() {
+    List<Place> places = controller.loadFavoritesLocations();
+    adapter.setItems(places);
+    progressBar.setVisibility(View.GONE);
+    if (places.size() <= 0) {
+      statusTextView.setText(R.string.bookmark_empty);
+      statusTextView.setVisibility(View.VISIBLE);
+    } else {
+      statusTextView.setVisibility(View.GONE);
     }
+  }
 
-    @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-        View v = inflater.inflate(R.layout.fragment_bookmarks_locations, container, false);
-        ButterKnife.bind(this, v);
-        return v;
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        progressBar.setVisibility(View.VISIBLE);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new PlaceAdapter(bookmarkLocationDao,
-            place -> Unit.INSTANCE,
-            (place, isBookmarked) -> {
-                adapter.remove(place);
-                return Unit.INSTANCE;
-            },
-            commonPlaceClickActions
-        );
-        recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        initList();
-    }
-
-    /**
-     * Initialize the recycler view with bookmarked locations
-     */
-    private void initList() {
-        List<Place> places = controller.loadFavoritesLocations();
-        adapter.setItems(places);
-        progressBar.setVisibility(View.GONE);
-        if (places.size() <= 0) {
-            statusTextView.setText(R.string.bookmark_empty);
-            statusTextView.setVisibility(View.VISIBLE);
-        } else {
-            statusTextView.setVisibility(View.GONE);
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        contributionController.handleActivityResult(getActivity(), requestCode, resultCode, data);
-    }
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    contributionController.handleActivityResult(getActivity(), requestCode, resultCode, data);
+  }
 }

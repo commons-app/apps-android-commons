@@ -1,77 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Main application background color -->
-    <color name="main_background_dark">#303030</color>
-    <color name="main_background_light">#fafafa</color>
-    <color name="achievement_background_dark">#494949</color>
-    <color name="achievement_background_light">#D6DCE0</color>
-    <color name="achievement_badge_text">#ffffff</color>
-    <color name="drawerHeader_background_dark">#494949</color>
-    <color name="drawerHeader_background_light">#aaaaaa</color>
-    <color name="tutorial_background_dark">#303030</color>
-    <color name="tutorial_background_light">#0c609c</color>
-    <color name="divider_grey">#eaeaea</color>
-    <color name="contributionListDarkBackground">#1a1a1a</color>
+  <!-- Main application background color -->
+  <color name="main_background_dark">#303030</color>
+  <color name="main_background_light">#fafafa</color>
+  <color name="achievement_background_dark">#494949</color>
+  <color name="achievement_background_light">#D6DCE0</color>
+  <color name="achievement_badge_text">#ffffff</color>
+  <color name="drawerHeader_background_dark">#494949</color>
+  <color name="drawerHeader_background_light">#aaaaaa</color>
+  <color name="tutorial_background_dark">#303030</color>
+  <color name="tutorial_background_light">#0c609c</color>
+  <color name="divider_grey">#eaeaea</color>
+  <color name="contributionListDarkBackground">#1a1a1a</color>
 
-    <!-- Colors used by newer Android + Support library for material design theme -->
-    <color name="primaryColor">#0c609c</color>
-    <color name="primaryDarkColor">#00376d</color>
-    <color name="primaryLightColor">#528dcd</color>
-    <color name="primarySuperLightColor">#d7e8fb</color>
-    <color name="secondaryColor">#f38b04</color>
-    <color name="secondaryDarkColor">#ba5d00</color>
-    <color name="secondaryLightColor">#ffbc46</color>
-    <color name="primaryTextColor">#ffffff</color>
-    <color name="secondaryTextColor">#000000</color>
+  <!-- Colors used by newer Android + Support library for material design theme -->
+  <color name="primaryColor">#0c609c</color>
+  <color name="primaryDarkColor">#00376d</color>
+  <color name="primaryLightColor">#528dcd</color>
+  <color name="primarySuperLightColor">#d7e8fb</color>
+  <color name="secondaryColor">#f38b04</color>
+  <color name="secondaryDarkColor">#ba5d00</color>
+  <color name="secondaryLightColor">#ffbc46</color>
+  <color name="primaryTextColor">#ffffff</color>
+  <color name="secondaryTextColor">#000000</color>
 
-    <color name="deleteRed">#D32F2F</color>
-    <color name="deleteRedDark">#90960a0a</color>
-    <color name="deleteButton">#44000000</color>
-    <color name="deleteButtonDark">#88000000</color>
-    <color name="deleteButtonLight">#44ffffff</color>
+  <color name="deleteRed">#D32F2F</color>
+  <color name="deleteRedDark">#90960a0a</color>
+  <color name="deleteButton">#44000000</color>
+  <color name="deleteButtonDark">#88000000</color>
+  <color name="deleteButtonLight">#44ffffff</color>
 
-    <!-- Some colours are same for dark/light themes. They are written two times in case
-    we want to change light ones later.
-      -->
-    <color name="item_white_background">#ffffffff</color>
-    <color name="commons_app_blue_dark">#33FFFFFF</color>
-    <color name="commons_app_blue_light">#33FFFFFF</color>
-    <color name="status_bar_blue">#08436d</color>
-    <color name="sub_background_dark">#20ffffff</color>
-    <color name="sub_background_light">#20ffffff</color>
-    <color name="fragment_categorisation_background_dark">#AA000000</color>
-    <color name="fragment_categorisation_background_light">#AA000000</color>
-    <color name="button_background_dark">#90000000</color>
-    <color name="button_background_light">#B0000000</color>
-    <color name="upload_overlay_background_dark">#77000000</color>
-    <color name="upload_overlay_background_light">#44000000</color>
+  <!-- Some colours are same for dark/light themes. They are written two times in case
+  we want to change light ones later.
+    -->
+  <color name="item_white_background">#ffffffff</color>
+  <color name="commons_app_blue_dark">#33FFFFFF</color>
+  <color name="commons_app_blue_light">#33FFFFFF</color>
+  <color name="status_bar_blue">#08436d</color>
+  <color name="sub_background_dark">#20ffffff</color>
+  <color name="sub_background_light">#20ffffff</color>
+  <color name="fragment_categorisation_background_dark">#AA000000</color>
+  <color name="fragment_categorisation_background_light">#AA000000</color>
+  <color name="button_background_dark">#90000000</color>
+  <color name="button_background_light">#B0000000</color>
+  <color name="upload_overlay_background_dark">#77000000</color>
+  <color name="upload_overlay_background_light">#44000000</color>
 
-    <color name="pressed_button_light">#64999999</color>
-    <color name="focused_button_light">#32999999</color>
-    <color name="disabled_button_text_color_light">#48000000</color>
-    <color name="enabled_button_text_color_light">#B0000000</color>
+  <color name="pressed_button_light">#64999999</color>
+  <color name="focused_button_light">#32999999</color>
+  <color name="disabled_button_text_color_light">#48000000</color>
+  <color name="enabled_button_text_color_light">#B0000000</color>
 
-    <color name="pressed_button_dark">#40CCCCCC</color>
-    <color name="focused_button_dark">#26CCCCCC</color>
-    <color name="disabled_button_text_color_dark">#717171</color>
-    <color name="enabled_button_text_color_dark">#FFFFFF</color>
+  <color name="pressed_button_dark">#40CCCCCC</color>
+  <color name="focused_button_dark">#26CCCCCC</color>
+  <color name="disabled_button_text_color_dark">#717171</color>
+  <color name="enabled_button_text_color_dark">#FFFFFF</color>
 
-    <color name="button_blue">#0c609c</color>
-    <color name="button_blue_dark">#116aaa</color>
+  <color name="button_blue">#0c609c</color>
+  <color name="button_blue_dark">#116aaa</color>
 
-    <color name="bottom_bar_light">#E0E0E0</color>
-    <color name="bottom_bar_dark">#424242</color>
-    <color name="layout_light_grey">#D6DCE0</color>
+  <color name="bottom_bar_light">#E0E0E0</color>
+  <color name="bottom_bar_dark">#424242</color>
+  <color name="layout_light_grey">#D6DCE0</color>
 
-    <color name="opak_middle_grey">#757575</color>
-    <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
+  <color name="opak_middle_grey">#757575</color>
+  <color name="white">#FFFFFF</color>
+  <color name="black">#000000</color>
 
-    <color name="swipe_red" tools:ignore="MissingDefaultResource">#FF0000</color>
-    <color name="color_error">#FF0000</color>
-    <color name="yes_button_color">#B22222</color>
-    <color name="no_button_color">#006400</color>
+  <color name="swipe_red" tools:ignore="MissingDefaultResource">#FF0000</color>
+  <color name="color_error">#FF0000</color>
+  <color name="yes_button_color">#B22222</color>
+  <color name="no_button_color">#006400</color>
 
-    <color name="current_marker_stroke">#55000000</color>
-    <color name="current_marker_fill">#11000000</color>
+  <color name="current_marker_stroke">#55000000</color>
+  <color name="current_marker_fill">#11000000</color>
 </resources>

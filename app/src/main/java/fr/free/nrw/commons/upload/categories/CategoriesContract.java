@@ -1,39 +1,38 @@
 package fr.free.nrw.commons.upload.categories;
 
-import java.util.List;
-
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.category.CategoryItem;
+import java.util.List;
 
 /**
  * The contract with with UploadCategoriesFragment and its presenter would talk to each other
  */
 public interface CategoriesContract {
 
-    interface View {
+  interface View {
 
-        void showProgress(boolean shouldShow);
+    void showProgress(boolean shouldShow);
 
-        void showError(String error);
+    void showError(String error);
 
-        void showError(int stringResourceId);
+    void showError(int stringResourceId);
 
-        void setCategories(List<CategoryItem> categories);
+    void setCategories(List<CategoryItem> categories);
 
-        void goToNextScreen();
+    void goToNextScreen();
 
-        void showNoCategorySelected();
+    void showNoCategorySelected();
 
-    }
+  }
 
-    interface UserActionListener extends BasePresenter<View> {
+  interface UserActionListener extends BasePresenter<View> {
 
-        void searchForCategories(String query);
+    void searchForCategories(String query);
 
-        void verifyCategories();
+    void verifyCategories();
 
-        void onCategoryItemClicked(CategoryItem categoryItem);
-    }
+    void onCategoryItemClicked(CategoryItem categoryItem);
+  }
 
 
 }

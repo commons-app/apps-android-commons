@@ -4,7 +4,6 @@ import categoryItem
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import depictedItem
-import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.upload.GpsCategoryModel
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject

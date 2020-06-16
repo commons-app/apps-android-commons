@@ -1,81 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="fr.free.nrw.commons.quiz.QuizActivity">
+
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="fr.free.nrw.commons.quiz.QuizActivity">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <include layout="@layout/toolbar" />
+
+    <androidx.cardview.widget.CardView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginLeft="@dimen/activity_margin_horizontal"
+      android:layout_marginTop="@dimen/activity_margin_horizontal"
+      android:layout_marginRight="@dimen/activity_margin_horizontal"
+      android:layout_marginBottom="@dimen/activity_margin_horizontal"
+      app:cardCornerRadius="@dimen/activity_margin_horizontal"
+      app:cardUseCompatPadding="true">
+
+      <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:isScrollContainer="true"
+          android:orientation="vertical">
+
+          <TextView
+            android:id="@+id/question_title"
+            style="?android:textAppearanceLarge"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_margin_vertical"
+            android:layout_marginBottom="@dimen/activity_margin_vertical"
+            android:gravity="center_horizontal"
+            android:text="@string/question" />
 
-            <include layout="@layout/toolbar"/>
+          <include
+            android:id="@+id/question"
+            layout="@layout/question_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_margin_vertical"
+            android:layout_marginBottom="@dimen/activity_margin_vertical" />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:cardCornerRadius="@dimen/activity_margin_horizontal"
-                android:layout_marginBottom="@dimen/activity_margin_horizontal"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                android:layout_marginTop="@dimen/activity_margin_horizontal"
-                app:cardUseCompatPadding="true">
-
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:isScrollContainer="true">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/question_title"
-                            android:text="@string/question"
-                            style="?android:textAppearanceLarge"
-                            android:gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/activity_margin_vertical"
-                            android:layout_marginBottom="@dimen/activity_margin_vertical" />
-
-                        <include
-                            android:id="@+id/question"
-                            layout="@layout/question_layout"
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:layout_marginTop="@dimen/activity_margin_vertical"
-                            android:layout_marginBottom="@dimen/activity_margin_vertical" />
-
-                        <include
-                            android:id="@+id/answer"
-                            layout="@layout/answer_layout"
-                            android:layout_marginTop="@dimen/activity_margin_vertical"
-                            android:layout_marginBottom="@dimen/activity_margin_vertical"
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content" />
+          <include
+            android:id="@+id/answer"
+            layout="@layout/answer_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_margin_vertical"
+            android:layout_marginBottom="@dimen/activity_margin_vertical" />
 
 
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/next_button"
-                        android:layout_gravity="right"
-                        style="?android:textAppearanceMedium"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                        android:layout_marginRight="@dimen/activity_margin_horizontal"
-                        android:text="NEXT"
-                        android:backgroundTint="#D6DCE0"
-                        android:layout_marginBottom="@dimen/activity_margin_vertical" />
+          <Button
+            android:id="@+id/next_button"
+            style="?android:textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="right"
+            android:layout_marginLeft="@dimen/activity_margin_horizontal"
+            android:layout_marginRight="@dimen/activity_margin_horizontal"
+            android:layout_marginBottom="@dimen/activity_margin_vertical"
+            android:backgroundTint="#D6DCE0"
+            android:text="NEXT" />
 
-                    </LinearLayout>
-                </ScrollView>
-            </androidx.cardview.widget.CardView>
         </LinearLayout>
+      </ScrollView>
+    </androidx.cardview.widget.CardView>
+  </LinearLayout>
 </RelativeLayout>

@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/ll_container_description_language"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:orientation="vertical">
+
   <TextView
     android:id="@+id/tv_language"
     style="@style/Base.TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/dimen_10"
-    android:paddingBottom="@dimen/dimen_10"
-    android:paddingLeft="@dimen/tiny_margin"
-    android:paddingRight="@dimen/tiny_margin"
     android:imeOptions="flagNoExtractUi"
     android:maxLines="1"
+    android:paddingLeft="@dimen/tiny_margin"
+    android:paddingTop="@dimen/dimen_10"
+    android:paddingRight="@dimen/tiny_margin"
+    android:paddingBottom="@dimen/dimen_10"
     android:singleLine="true"
     android:textAlignment="center"
-    tools:text="en"
-    />
+    tools:text="en" />
 
 </LinearLayout>

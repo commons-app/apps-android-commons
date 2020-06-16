@@ -65,8 +65,10 @@ class UploadMediaPresenterTest {
         testObservableUploadItem = Observable.just(uploadItem)
         testSingleImageResult = Single.just(1)
         testScheduler = TestScheduler()
-        uploadMediaPresenter = UploadMediaPresenter(repository,
-            jsonKvStore,testScheduler, testScheduler)
+        uploadMediaPresenter = UploadMediaPresenter(
+            repository,
+            jsonKvStore, testScheduler, testScheduler
+        )
         uploadMediaPresenter.onAttachView(view)
     }
 

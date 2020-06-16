@@ -1,90 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawer_layout"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/drawer_layout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/toolbar_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <!-- Toolbar for viewing media -->
+      <include
+        layout="@layout/toolbar"
+        android:visibility="gone" />
+
+      <!--Toolbar containing search bar -->
+      <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_search"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimaryDark"
+        app:navigationIcon="@drawable/ic_arrow_back_white"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            <!-- Toolbar for viewing media -->
-            <include layout="@layout/toolbar"
-                android:visibility="gone" />
+        <SearchView
+          android:id="@+id/searchBox"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:focusable="true"
+          android:iconifiedByDefault="false"
+          android:imeOptions="actionDone"
+          android:paddingStart="-16dp"
+          android:paddingLeft="-16dp"
+          android:queryBackground="@android:color/transparent"
+          android:searchIcon="@null"
+          android:singleLine="true"
+          android:textSize="@dimen/normal_text"
+          android:voiceSearchMode="showVoiceSearchButton|launchRecognizer"
+          app:queryBackground="@android:color/transparent"
+          app:searchIcon="@null"
+          app:theme="@style/WhiteSearchBarTheme" />
+      </androidx.appcompat.widget.Toolbar>
 
-        <!--Toolbar containing search bar -->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimaryDark"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:navigationIcon="@drawable/ic_arrow_back_white">
-            <SearchView
-                android:id="@+id/searchBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="true"
-                app:theme="@style/WhiteSearchBarTheme"
-                android:queryBackground="@android:color/transparent"
-                android:searchIcon="@null"
-                android:paddingLeft="-16dp"
-                android:paddingStart="-16dp"
-                app:queryBackground="@android:color/transparent"
-                app:searchIcon="@null"
-                android:imeOptions="actionDone"
-                android:singleLine="true"
-                android:iconifiedByDefault="false"
-                android:textSize="@dimen/normal_text"
-                android:voiceSearchMode="showVoiceSearchButton|launchRecognizer"
-                />
-        </androidx.appcompat.widget.Toolbar>
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/tabBackground"
-            app:tabIndicatorColor="?attr/tabIndicatorColor"
-            app:tabSelectedTextColor="?attr/tabSelectedTextColor"
-            app:tabTextColor="?attr/tabTextColor"
-            app:tabMode="scrollable"
-            android:layout_below="@id/toolbar_search"
-            android:visibility="gone"
-            />
-        </com.google.android.material.appbar.AppBarLayout>
-        <FrameLayout
-            android:visibility="gone"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/mediaContainer"
-            android:orientation="horizontal"
-            android:layout_below="@id/toolbar_layout"
-            />
+      <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_search"
+        android:background="?attr/tabBackground"
+        android:visibility="gone"
+        app:tabIndicatorColor="?attr/tabIndicatorColor"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="?attr/tabSelectedTextColor"
+        app:tabTextColor="?attr/tabTextColor" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/toolbar_layout"
-            />
-        <FrameLayout
-            android:visibility="gone"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/searchHistoryContainer"
-            android:orientation="horizontal"
-            android:layout_below="@id/toolbar_layout"
-            />
-    </RelativeLayout>
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:id="@+id/mediaContainer"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@id/toolbar_layout"
+      android:orientation="horizontal"
+      android:visibility="gone" />
 
-    <include layout="@layout/drawer_view" />
+    <androidx.viewpager.widget.ViewPager
+      android:id="@+id/viewPager"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@id/toolbar_layout" />
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:id="@+id/searchHistoryContainer"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@id/toolbar_layout"
+      android:orientation="horizontal"
+      android:visibility="gone" />
+  </RelativeLayout>
+
+  <include layout="@layout/drawer_view" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

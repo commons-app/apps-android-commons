@@ -17,27 +17,27 @@ import fr.free.nrw.commons.upload.mediaDetails.UploadMediaPresenter;
 @Module
 public abstract class UploadModule {
 
-    @Binds
-    public abstract UploadContract.UserActionListener bindHomePresenter(UploadPresenter
-                                                                                presenter);
+  @Binds
+  public abstract UploadContract.UserActionListener bindHomePresenter(UploadPresenter
+      presenter);
 
-    @Binds
-    public abstract CategoriesContract.UserActionListener bindsCategoriesPresenter(
-        CategoriesPresenter presenter);
+  @Binds
+  public abstract CategoriesContract.UserActionListener bindsCategoriesPresenter(
+      CategoriesPresenter presenter);
 
-    @Binds
-    public abstract MediaLicenseContract.UserActionListener bindsMediaLicensePresenter(
-            MediaLicensePresenter
-                    presenter);
+  @Binds
+  public abstract MediaLicenseContract.UserActionListener bindsMediaLicensePresenter(
+      MediaLicensePresenter
+          presenter);
 
-    @Binds
-    public abstract UploadMediaDetailsContract.UserActionListener bindsUploadMediaPresenter(
-            UploadMediaPresenter
-                    presenter);
+  @Binds
+  public abstract UploadMediaDetailsContract.UserActionListener bindsUploadMediaPresenter(
+      UploadMediaPresenter
+          presenter);
 
-    @Binds
-    public abstract DepictsContract.UserActionListener bindsDepictsPresenter(
-            DepictsPresenter
-            presenter
-    );
+  @Binds
+  public abstract DepictsContract.UserActionListener bindsDepictsPresenter(
+      DepictsPresenter
+          presenter
+  );
 }

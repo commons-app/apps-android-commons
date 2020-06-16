@@ -10,112 +10,118 @@ import android.view.MotionEvent;
  */
 public interface ZoomableController {
 
-    /** Listener interface. */
-    interface Listener {
-
-        /**
-         * Notifies the view that the transform began.
-         *
-         * @param transform the current transform matrix
-         */
-        void onTransformBegin(Matrix transform);
-
-        /**
-         * Notifies the view that the transform changed.
-         *
-         * @param transform the new matrix
-         */
-        void onTransformChanged(Matrix transform);
-
-        /**
-         * Notifies the view that the transform ended.
-         *
-         * @param transform the current transform matrix
-         */
-        void onTransformEnd(Matrix transform);
-    }
+  /**
+   * Listener interface.
+   */
+  interface Listener {
 
     /**
-     * Enables the controller. The controller is enabled when the image has been loaded.
+     * Notifies the view that the transform began.
      *
-     * @param enabled whether to enable the controller
+     * @param transform the current transform matrix
      */
-    void setEnabled(boolean enabled);
+    void onTransformBegin(Matrix transform);
 
     /**
-     * Gets whether the controller is enabled. This should return the last value passed to {@link
-     * #setEnabled}.
+     * Notifies the view that the transform changed.
      *
-     * @return whether the controller is enabled.
+     * @param transform the new matrix
      */
-    boolean isEnabled();
+    void onTransformChanged(Matrix transform);
 
     /**
-     * Sets the listener for the controller to call back when the matrix changes.
+     * Notifies the view that the transform ended.
      *
-     * @param listener the listener
+     * @param transform the current transform matrix
      */
-    void setListener(Listener listener);
+    void onTransformEnd(Matrix transform);
+  }
 
-    /**
-     * Gets the current scale factor. A convenience method for calculating the scale from the
-     * transform.
-     *
-     * @return the current scale factor
-     */
-    float getScaleFactor();
+  /**
+   * Enables the controller. The controller is enabled when the image has been loaded.
+   *
+   * @param enabled whether to enable the controller
+   */
+  void setEnabled(boolean enabled);
 
-    /** Returns true if the zoomable transform is identity matrix, and the controller is idle. */
-    boolean isIdentity();
+  /**
+   * Gets whether the controller is enabled. This should return the last value passed to {@link
+   * #setEnabled}.
+   *
+   * @return whether the controller is enabled.
+   */
+  boolean isEnabled();
 
-    /**
-     * Returns true if the transform was corrected during the last update.
-     *
-     * <p>This mainly happens when a gesture would cause the image to get out of limits and the
-     * transform gets corrected in order to prevent that.
-     */
-    boolean wasTransformCorrected();
+  /**
+   * Sets the listener for the controller to call back when the matrix changes.
+   *
+   * @param listener the listener
+   */
+  void setListener(Listener listener);
 
-    /** See {@link androidx.core.view.ScrollingView}. */
-    int computeHorizontalScrollRange();
+  /**
+   * Gets the current scale factor. A convenience method for calculating the scale from the
+   * transform.
+   *
+   * @return the current scale factor
+   */
+  float getScaleFactor();
 
-    int computeHorizontalScrollOffset();
+  /**
+   * Returns true if the zoomable transform is identity matrix, and the controller is idle.
+   */
+  boolean isIdentity();
 
-    int computeHorizontalScrollExtent();
+  /**
+   * Returns true if the transform was corrected during the last update.
+   *
+   * <p>This mainly happens when a gesture would cause the image to get out of limits and the
+   * transform gets corrected in order to prevent that.
+   */
+  boolean wasTransformCorrected();
 
-    int computeVerticalScrollRange();
+  /**
+   * See {@link androidx.core.view.ScrollingView}.
+   */
+  int computeHorizontalScrollRange();
 
-    int computeVerticalScrollOffset();
+  int computeHorizontalScrollOffset();
 
-    int computeVerticalScrollExtent();
+  int computeHorizontalScrollExtent();
 
-    /**
-     * Gets the current transform.
-     *
-     * @return the transform
-     */
-    Matrix getTransform();
+  int computeVerticalScrollRange();
 
-    /**
-     * Sets the bounds of the image post transform prior to application of the zoomable
-     * transformation.
-     *
-     * @param imageBounds the bounds of the image
-     */
-    void setImageBounds(RectF imageBounds);
+  int computeVerticalScrollOffset();
 
-    /**
-     * Sets the bounds of the view.
-     *
-     * @param viewBounds the bounds of the view
-     */
-    void setViewBounds(RectF viewBounds);
+  int computeVerticalScrollExtent();
 
-    /**
-     * Allows the controller to handle a touch event.
-     *
-     * @param event the touch event
-     * @return whether the controller handled the event
-     */
-    boolean onTouchEvent(MotionEvent event);
+  /**
+   * Gets the current transform.
+   *
+   * @return the transform
+   */
+  Matrix getTransform();
+
+  /**
+   * Sets the bounds of the image post transform prior to application of the zoomable
+   * transformation.
+   *
+   * @param imageBounds the bounds of the image
+   */
+  void setImageBounds(RectF imageBounds);
+
+  /**
+   * Sets the bounds of the view.
+   *
+   * @param viewBounds the bounds of the view
+   */
+  void setViewBounds(RectF viewBounds);
+
+  /**
+   * Allows the controller to handle a touch event.
+   *
+   * @param event the touch event
+   * @return whether the controller handled the event
+   */
+  boolean onTouchEvent(MotionEvent event);
 }

@@ -44,7 +44,8 @@ public class WikiBaseClient {
       String languageCode, String captionValue) {
     return csrfToken()
         .switchMap(editToken -> wikiBaseInterface
-            .addLabelstoWikidata(PAGE_ID_PREFIX + fileEntityId, editToken, languageCode, captionValue));
+            .addLabelstoWikidata(PAGE_ID_PREFIX + fileEntityId, editToken, languageCode,
+                captionValue));
 
   }
 

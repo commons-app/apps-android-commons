@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Authors:
+<?xml version="1.0" encoding="utf-8"?><!-- Authors:
 * Eitvys200
 * Mantak111
 * Manvydasz
@@ -72,7 +71,7 @@
   <string name="enable_gps">Išjungti GPS</string>
   <string name="contributions_subtitle_zero">Nėra įkėlimų kol kas</string>
   <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="other"/>
+    <item quantity="other" />
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">1 įkėlimas</item>
   </plurals>

@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="mainBackground" format="reference"/>
-    <attr name="semitransparentText" format="reference"/>
-    <attr name="subBackground" format="reference"/>
-    <attr name="fragmentCategorisationBackground" format="reference"/>
-    <attr name="buttonBackground" format="reference"/>
-    <attr name="uploadOverlayBackground" format="reference"/>
-    <attr name="spinnerTheme" format="reference"/>
-    <attr name="iconsTheme" format="reference"/>
-    <attr name="bottomBar" format="reference"/>
-    <attr name="buttonBackgroundFocused" format="reference"/>
-    <attr name="buttonBackgroundPressed" format="reference"/>
-    <attr name="buttonFocused" format="reference"/>
-    <attr name="buttonPressed" format="reference"/>
-    <attr name="textDisabled" format="reference"/>
-    <attr name="textEnabled" format="reference"/>
-    <attr name="bookmarkButtonColor" format="reference"/>
-    <attr name="rowButtonColor" format="reference"/>
-    <attr name="reviewHeading" format="reference"/>
+  <attr name="mainBackground" format="reference" />
+  <attr name="semitransparentText" format="reference" />
+  <attr name="subBackground" format="reference" />
+  <attr name="fragmentCategorisationBackground" format="reference" />
+  <attr name="buttonBackground" format="reference" />
+  <attr name="uploadOverlayBackground" format="reference" />
+  <attr name="spinnerTheme" format="reference" />
+  <attr name="iconsTheme" format="reference" />
+  <attr name="bottomBar" format="reference" />
+  <attr name="buttonBackgroundFocused" format="reference" />
+  <attr name="buttonBackgroundPressed" format="reference" />
+  <attr name="buttonFocused" format="reference" />
+  <attr name="buttonPressed" format="reference" />
+  <attr name="textDisabled" format="reference" />
+  <attr name="textEnabled" format="reference" />
+  <attr name="bookmarkButtonColor" format="reference" />
+  <attr name="rowButtonColor" format="reference" />
+  <attr name="reviewHeading" format="reference" />
 
-    <attr name="contributionsListBackground" format="reference"/>
-    <attr name="achievementBackground" format="reference"/>
-    <attr name="drawerHeaderBackground" format="reference"/>
-    <attr name="tutorialBackground" format="reference"/>
-    <attr name="mainTabBackground" format="reference"/>
-    <attr name="mainCardBackground" format="reference"/>
-    <attr name="mainScreenNearbyPermissionbutton" format="reference"/>
-    <attr name="iconInfo24" format="reference" />
-    <attr name="iconMap24" format="reference" />
-    <attr name="mediaDetailsText" format="reference" />
-    <attr name="mediaDetailsHeadingText" format="reference" />
-    <attr name="mediaDetailNominationBackground" format="reference" />
-    <attr name="mediaDetailSpacerColor" format="reference" />
-    <attr name="icon" format="reference"/>
-    <attr name="aboutIconsColor" format="reference"/>
-    
-    <declare-styleable name="Badge">
-        <attr name="boundary" format="color"/>
-        <attr name="camera" format="color"/>
-        <attr name="centerRegion" format="color"/>
-    </declare-styleable>
+  <attr name="contributionsListBackground" format="reference" />
+  <attr name="achievementBackground" format="reference" />
+  <attr name="drawerHeaderBackground" format="reference" />
+  <attr name="tutorialBackground" format="reference" />
+  <attr name="mainTabBackground" format="reference" />
+  <attr name="mainCardBackground" format="reference" />
+  <attr name="mainScreenNearbyPermissionbutton" format="reference" />
+  <attr name="iconInfo24" format="reference" />
+  <attr name="iconMap24" format="reference" />
+  <attr name="mediaDetailsText" format="reference" />
+  <attr name="mediaDetailsHeadingText" format="reference" />
+  <attr name="mediaDetailNominationBackground" format="reference" />
+  <attr name="mediaDetailSpacerColor" format="reference" />
+  <attr name="icon" format="reference" />
+  <attr name="aboutIconsColor" format="reference" />
+
+  <declare-styleable name="Badge">
+    <attr name="boundary" format="color" />
+    <attr name="camera" format="color" />
+    <attr name="centerRegion" format="color" />
+  </declare-styleable>
 </resources>

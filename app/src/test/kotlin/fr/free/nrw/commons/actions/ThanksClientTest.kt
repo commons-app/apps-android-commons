@@ -21,6 +21,7 @@ import org.wikipedia.dataclient.Service
 class ThanksClientTest {
     @Mock
     private lateinit var csrfTokenClient: CsrfTokenClient
+
     @Mock
     private lateinit var service: Service
 
@@ -49,6 +50,11 @@ class ThanksClientTest {
         Mockito.`when`(csrfTokenClient.tokenBlocking).thenReturn("test")
         Mockito.`when`(commonsApplication.userAgent).thenReturn("test")
         thanksClient.thank(1L)
-        verify(service).thank(ArgumentMatchers.anyString(), ArgumentMatchers.any(), eq("test"), eq("test"))
+        verify(service).thank(
+            ArgumentMatchers.anyString(),
+            ArgumentMatchers.any(),
+            eq("test"),
+            eq("test")
+        )
     }
 }

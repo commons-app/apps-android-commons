@@ -1,147 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
 
-    <com.github.chrisbanes.photoview.PhotoView
-        android:id="@+id/backgroundImage"
+  <com.github.chrisbanes.photoview.PhotoView
+    android:id="@+id/backgroundImage"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:actualImageScaleType="fitXY" />
+
+  <androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_margin="@dimen/dimen_10"
+    android:elevation="@dimen/cardview_default_elevation">
+
+    <androidx.core.widget.NestedScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fillViewport="true">
+
+      <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:actualImageScaleType="fitXY" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/dimen_10"
-        android:elevation="@dimen/cardview_default_elevation">
+        android:orientation="vertical">
 
-        <androidx.core.widget.NestedScrollView
+        <RelativeLayout
+          android:id="@+id/rl_container_title"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+          <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/half_standard_height"
+            android:layout_marginEnd="@dimen/standard_gap"
+            android:layout_marginRight="@dimen/standard_gap"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/normal_text"
+            android:textStyle="bold"
+            tools:text="Step 1 of 15" />
+
+          <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/ib_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/standard_gap"
+            android:layout_marginRight="@dimen/standard_gap"
+            android:layout_toLeftOf="@id/ib_expand_collapse"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_map_white_24dp"
+            tools:visibility="visible" />
+
+          <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/ib_expand_collapse"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="@dimen/half_standard_height"
+            android:layout_height="@dimen/half_standard_height"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="@dimen/small_gap"
+            android:layout_marginEnd="@dimen/small_gap"
+            android:layout_marginBottom="@dimen/small_gap"
+            android:clickable="false"
+            android:focusable="false"
+            android:padding="@dimen/medium_height"
+            app:srcCompat="@drawable/ic_expand_less_black_24dp" />
+        </RelativeLayout>
+
+        <LinearLayout
+          android:id="@+id/ll_container_media_detail"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/standard_gap"
+          android:orientation="vertical">
+
+          <fr.free.nrw.commons.widget.HeightLimitedRecyclerView
+            android:id="@+id/rv_descriptions"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/dimen_10"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:id="@+id/rl_container_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/tv_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/half_standard_height"
-                        android:layout_marginEnd="@dimen/standard_gap"
-                        android:layout_marginRight="@dimen/standard_gap"
-                        android:gravity="center_vertical"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold"
-                        tools:text="Step 1 of 15" />
-
-                    <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/ib_map"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="@dimen/standard_gap"
-                        android:layout_marginRight="@dimen/standard_gap"
-                        android:layout_toLeftOf="@id/ib_expand_collapse"
-                        android:visibility="gone"
-                        app:srcCompat="@drawable/ic_map_white_24dp"
-                        tools:visibility="visible" />
-
-                    <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/ib_expand_collapse"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:layout_width="@dimen/half_standard_height"
-                        android:layout_height="@dimen/half_standard_height"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginStart="@dimen/small_gap"
-                        android:layout_marginEnd="@dimen/small_gap"
-                        android:layout_marginBottom="@dimen/small_gap"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:padding="@dimen/medium_height"
-                        app:srcCompat="@drawable/ic_expand_less_black_24dp" />
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_container_media_detail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_gap"
-                    android:orientation="vertical">
-
-                    <fr.free.nrw.commons.widget.HeightLimitedRecyclerView
-                        android:id="@+id/rv_descriptions"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/activity_margin_horizontal"
-                        android:layout_marginBottom="@dimen/activity_margin_horizontal"
-                        tools:visibility="visible" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_margin_horizontal"
+            android:layout_marginBottom="@dimen/activity_margin_horizontal"
+            tools:visibility="visible" />
 
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_copy_prev_title_desc"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/previous_image_caption_description"
-                        android:padding="@dimen/miniscule_margin"
-                        android:textAlignment="textEnd"
-                        android:textColor="@color/button_blue"
-                        android:visibility="gone"
-                        tools:visibility="visible" />
+          <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_copy_prev_title_desc"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/miniscule_margin"
+            android:text="@string/previous_image_caption_description"
+            android:textAlignment="textEnd"
+            android:textColor="@color/button_blue"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+          <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btn_add_description"
-                            style="@style/Widget.AppCompat.Button.Borderless"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:minWidth="@dimen/fragment_height"
-                            android:text="+" />
+            <androidx.appcompat.widget.AppCompatButton
+              android:id="@+id/btn_add_description"
+              style="@style/Widget.AppCompat.Button.Borderless"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:minWidth="@dimen/fragment_height"
+              android:text="+" />
 
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btn_next"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:enabled="false"
-                            android:alpha=".5"
-                            android:text="@string/next"
-                            android:textColor="@android:color/white" />
+            <androidx.appcompat.widget.AppCompatButton
+              android:id="@+id/btn_next"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentRight="true"
+              android:alpha=".5"
+              android:enabled="false"
+              android:text="@string/next"
+              android:textColor="@android:color/white" />
 
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btn_previous"
-                            style="@style/Widget.AppCompat.Button.Borderless"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/standard_gap"
-                            android:layout_marginRight="@dimen/standard_gap"
-                            android:layout_toLeftOf="@+id/btn_next"
-                            android:text="@string/previous" />
+            <androidx.appcompat.widget.AppCompatButton
+              android:id="@+id/btn_previous"
+              style="@style/Widget.AppCompat.Button.Borderless"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="@dimen/standard_gap"
+              android:layout_marginRight="@dimen/standard_gap"
+              android:layout_toLeftOf="@+id/btn_next"
+              android:text="@string/previous" />
 
-                    </RelativeLayout>
+          </RelativeLayout>
 
-                </LinearLayout>
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+      </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 
-    </androidx.cardview.widget.CardView>
+  </androidx.cardview.widget.CardView>
 </RelativeLayout>
 

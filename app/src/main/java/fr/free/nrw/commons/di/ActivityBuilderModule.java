@@ -20,59 +20,58 @@ import fr.free.nrw.commons.settings.SettingsActivity;
 import fr.free.nrw.commons.upload.UploadActivity;
 
 /**
- * This Class handles the dependency injection (using dagger)
- * so, if a developer needs to add a new activity to the commons app
- * then that must be mentioned here to inject the dependencies
+ * This Class handles the dependency injection (using dagger) so, if a developer needs to add a new
+ * activity to the commons app then that must be mentioned here to inject the dependencies
  */
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class ActivityBuilderModule {
 
-    @ContributesAndroidInjector
-    abstract LoginActivity bindLoginActivity();
+  @ContributesAndroidInjector
+  abstract LoginActivity bindLoginActivity();
 
-    @ContributesAndroidInjector
-    abstract WelcomeActivity bindWelcomeActivity();
+  @ContributesAndroidInjector
+  abstract WelcomeActivity bindWelcomeActivity();
 
-    @ContributesAndroidInjector
-    abstract MainActivity bindContributionsActivity();
+  @ContributesAndroidInjector
+  abstract MainActivity bindContributionsActivity();
 
-    @ContributesAndroidInjector
-    abstract SettingsActivity bindSettingsActivity();
+  @ContributesAndroidInjector
+  abstract SettingsActivity bindSettingsActivity();
 
-    @ContributesAndroidInjector
-    abstract AboutActivity bindAboutActivity();
+  @ContributesAndroidInjector
+  abstract AboutActivity bindAboutActivity();
 
-    @ContributesAndroidInjector
-    abstract SignupActivity bindSignupActivity();
+  @ContributesAndroidInjector
+  abstract SignupActivity bindSignupActivity();
 
-    @ContributesAndroidInjector
-    abstract NotificationActivity bindNotificationActivity();
+  @ContributesAndroidInjector
+  abstract NotificationActivity bindNotificationActivity();
 
-    @ContributesAndroidInjector
-    abstract CategoryImagesActivity bindFeaturedImagesActivity();
+  @ContributesAndroidInjector
+  abstract CategoryImagesActivity bindFeaturedImagesActivity();
 
-    @ContributesAndroidInjector
-    abstract UploadActivity bindUploadActivity();
+  @ContributesAndroidInjector
+  abstract UploadActivity bindUploadActivity();
 
-    @ContributesAndroidInjector
-    abstract SearchActivity bindSearchActivity();
+  @ContributesAndroidInjector
+  abstract SearchActivity bindSearchActivity();
 
-    @ContributesAndroidInjector
-    abstract CategoryDetailsActivity bindCategoryDetailsActivity();
+  @ContributesAndroidInjector
+  abstract CategoryDetailsActivity bindCategoryDetailsActivity();
 
-    @ContributesAndroidInjector
-    abstract WikidataItemDetailsActivity bindDepictionDetailsActivity();
+  @ContributesAndroidInjector
+  abstract WikidataItemDetailsActivity bindDepictionDetailsActivity();
 
-    @ContributesAndroidInjector
-    abstract ExploreActivity bindExploreActivity();
+  @ContributesAndroidInjector
+  abstract ExploreActivity bindExploreActivity();
 
-    @ContributesAndroidInjector
-    abstract AchievementsActivity bindAchievementsActivity();
+  @ContributesAndroidInjector
+  abstract AchievementsActivity bindAchievementsActivity();
 
-    @ContributesAndroidInjector
-    abstract BookmarksActivity bindBookmarksActivity();
+  @ContributesAndroidInjector
+  abstract BookmarksActivity bindBookmarksActivity();
 
-    @ContributesAndroidInjector
-    abstract ReviewActivity bindReviewActivity();
+  @ContributesAndroidInjector
+  abstract ReviewActivity bindReviewActivity();
 }

@@ -1,86 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="?attr/contributionsListBackground"
+  android:orientation="vertical">
+
+  <TextView
+    android:id="@+id/noContributionsYet"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/contributionsListBackground"
-    >
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:layout_marginEnd="@dimen/tiny_gap"
+    android:layout_marginRight="@dimen/tiny_gap"
+    android:gravity="center"
+    android:text="@string/no_uploads"
+    android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/noContributionsYet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/no_uploads"
-        android:gravity="center"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        android:layout_marginRight="@dimen/tiny_gap"
-        android:layout_marginEnd="@dimen/tiny_gap"
-        />
+  <ProgressBar
+    android:id="@+id/loadingContributionsProgressBar"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:visibility="gone" />
 
-    <ProgressBar
-      android:id="@+id/loadingContributionsProgressBar"
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/contributionsList"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+
+  <LinearLayout
+    android:id="@+id/fab_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentBottom="true"
+    android:layout_marginRight="@dimen/medium_height"
+    android:layout_marginBottom="@dimen/activity_margin_horizontal"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/fab_camera"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_centerInParent="true"
+      android:tint="@color/button_blue"
       android:visibility="gone"
-      />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/contributionsList"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        />
+      app:backgroundTint="@color/main_background_light"
+      app:elevation="@dimen/tiny_margin"
+      app:fabSize="mini"
+      app:srcCompat="@drawable/ic_photo_camera_white_24dp"
+      app:useCompatPadding="true" />
 
-    <LinearLayout
-        android:id="@+id/fab_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/medium_height"
-        android:layout_marginBottom="@dimen/activity_margin_horizontal"
-        android:orientation="vertical"
-        android:gravity="center"
-        >
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/fab_gallery"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:tint="@color/button_blue"
+      android:visibility="gone"
+      app:backgroundTint="@color/main_background_light"
+      app:elevation="@dimen/tiny_margin"
+      app:fabSize="mini"
+      app:srcCompat="@drawable/ic_photo_white_24dp"
+      app:useCompatPadding="true" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_camera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tint="@color/button_blue"
-            android:visibility="gone"
-            app:backgroundTint="@color/main_background_light"
-            app:useCompatPadding="true"
-            app:elevation="@dimen/tiny_margin"
-            app:fabSize="mini"
-            app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/fab_plus"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="center_vertical"
+      android:visibility="visible"
+      app:backgroundTint="@color/status_bar_blue"
+      app:elevation="@dimen/tiny_margin"
+      app:srcCompat="@drawable/ic_add_white_24dp"
+      app:useCompatPadding="true" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_gallery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tint="@color/button_blue"
-            android:visibility="gone"
-            app:backgroundTint="@color/main_background_light"
-            app:useCompatPadding="true"
-            app:elevation="@dimen/tiny_margin"
-            app:fabSize="mini"
-            app:srcCompat="@drawable/ic_photo_white_24dp" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_plus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:visibility="visible"
-            app:backgroundTint="@color/status_bar_blue"
-            app:useCompatPadding="true"
-            app:elevation="@dimen/tiny_margin"
-            app:srcCompat="@drawable/ic_add_white_24dp" />
-
-    </LinearLayout>
+  </LinearLayout>
 
 </RelativeLayout>
 

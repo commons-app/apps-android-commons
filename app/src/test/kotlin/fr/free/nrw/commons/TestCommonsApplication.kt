@@ -6,7 +6,6 @@ import android.content.Context
 import androidx.collection.LruCache
 import com.google.gson.Gson
 import com.nhaarman.mockitokotlin2.mock
-import com.squareup.leakcanary.RefWatcher
 import fr.free.nrw.commons.auth.AccountUtil
 import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.CommonsApplicationComponent
@@ -21,15 +20,15 @@ class TestCommonsApplication : Application() {
     override fun onCreate() {
         if (mockApplicationComponent == null) {
             mockApplicationComponent = DaggerCommonsApplicationComponent.builder()
-                    .appModule(MockCommonsApplicationModule(this))
-                    .build()
+                .appModule(MockCommonsApplicationModule(this))
+                .build()
         }
         super.onCreate()
-        context=applicationContext
+        context = applicationContext
     }
 
-    companion object{
-        private var context: Context?=null
+    companion object {
+        private var context: Context? = null
         fun getContext(): Context? {
             return context
         }
@@ -49,17 +48,22 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
     val modificationClient: ContentProviderClient = mock()
     val uploadPrefs: JsonKvStore = mock()
 
-    override fun provideCategoryContentProviderClient(context: Context?): ContentProviderClient = categoryClient
+    override fun provideCategoryContentProviderClient(context: Context?): ContentProviderClient =
+        categoryClient
 
-    override fun provideContributionContentProviderClient(context: Context?): ContentProviderClient = contributionClient
+    override fun provideContributionContentProviderClient(context: Context?): ContentProviderClient =
+        contributionClient
 
-    override fun provideModificationContentProviderClient(context: Context?): ContentProviderClient = modificationClient
+    override fun provideModificationContentProviderClient(context: Context?): ContentProviderClient =
+        modificationClient
 
     override fun providesAccountUtil(context: Context): AccountUtil = accountUtil
 
-    override fun providesDefaultKvStore(context: Context, gson: Gson): JsonKvStore = defaultSharedPreferences
+    override fun providesDefaultKvStore(context: Context, gson: Gson): JsonKvStore =
+        defaultSharedPreferences
 
-    override fun provideLocationServiceManager(context: Context): LocationServiceManager = locationServiceManager
+    override fun provideLocationServiceManager(context: Context): LocationServiceManager =
+        locationServiceManager
 
     override fun provideDBOpenHelper(context: Context): DBOpenHelper = mockDbOpenHelper
 

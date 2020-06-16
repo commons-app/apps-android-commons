@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Authors:
+<?xml version="1.0" encoding="utf-8"?><!-- Authors:
 * Abijeet Patro
 * Astralnet
 * Domdomegg
@@ -167,7 +166,7 @@
   <string name="welcome_copyright_subtext">Αποφύγετε προστατευμένο υλικό  που βρήκατε από το Internet, καθώς και εικόνες, αφίσες, εξώφυλλα βιβλίων, κλπ.</string>
   <string name="welcome_final_text">Τι λες, μπορείς;</string>
   <string name="welcome_final_button_text">Ναι!</string>
-  <string name="welcome_help_button_text" fuzzy="true"/>
+  <string name="welcome_help_button_text" fuzzy="true" />
   <string name="detail_panel_cats_label">Κατηγορίες</string>
   <string name="detail_panel_cats_loading">Φόρτωση…</string>
   <string name="detail_panel_cats_none">Καμία επιλεγμένη</string>
@@ -260,7 +259,7 @@
   <string name="null_url">Σφάλμα! Η διεύθυνση URL δεν βρέθηκε</string>
   <string name="nominate_deletion">Προτείνετε για διαγραφή</string>
   <string name="nominated_for_deletion">Αυτή εικόνα έχει προταθεί για διαγραφή.</string>
-  <string name="nominated_see_more" fuzzy="true"/>
+  <string name="nominated_see_more" fuzzy="true" />
   <string name="view_browser">Προβολή στον περιηγητή</string>
   <string name="skip_login">Παράβλεψη</string>
   <string name="navigation_item_login">Είσοδος</string>

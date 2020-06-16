@@ -1,96 +1,96 @@
 package fr.free.nrw.commons.category;
 
 import android.net.Uri;
-
 import java.util.Date;
 
 /**
  * Represents a category
  */
 public class Category {
-    private Uri contentUri;
-    private String name;
-    private Date lastUsed;
-    private int timesUsed;
 
-    public Category() {
-    }
+  private Uri contentUri;
+  private String name;
+  private Date lastUsed;
+  private int timesUsed;
 
-    public Category(Uri contentUri, String name, Date lastUsed, int timesUsed) {
-        this.contentUri = contentUri;
-        this.name = name;
-        this.lastUsed = lastUsed;
-        this.timesUsed = timesUsed;
-    }
+  public Category() {
+  }
 
-    /**
-     * Gets name
-     *
-     * @return name
-     */
-    public String getName() {
-        return name;
-    }
+  public Category(Uri contentUri, String name, Date lastUsed, int timesUsed) {
+    this.contentUri = contentUri;
+    this.name = name;
+    this.lastUsed = lastUsed;
+    this.timesUsed = timesUsed;
+  }
 
-    /**
-     * Modifies name
-     *
-     * @param name Category name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+  /**
+   * Gets name
+   *
+   * @return name
+   */
+  public String getName() {
+    return name;
+  }
 
-    /**
-     * Gets last used date
-     *
-     * @return Last used date
-     */
-    public Date getLastUsed() {
-        // warning: Date objects are mutable.
-        return (Date)lastUsed.clone();
-    }
+  /**
+   * Modifies name
+   *
+   * @param name Category name
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    /**
-     * Generates new last used date
-     */
-    private void touch() {
-        lastUsed = new Date();
-    }
+  /**
+   * Gets last used date
+   *
+   * @return Last used date
+   */
+  public Date getLastUsed() {
+    // warning: Date objects are mutable.
+    return (Date) lastUsed.clone();
+  }
 
-    /**
-     * Gets no. of times the category is used
-     *
-     * @return no. of times used
-     */
-    public int getTimesUsed() {
-        return timesUsed;
-    }
+  /**
+   * Generates new last used date
+   */
+  private void touch() {
+    lastUsed = new Date();
+  }
 
-    /**
-     * Increments timesUsed by 1 and sets last used date as now.
-     */
-    public void incTimesUsed() {
-        timesUsed++;
-        touch();
-    }
+  /**
+   * Gets no. of times the category is used
+   *
+   * @return no. of times used
+   */
+  public int getTimesUsed() {
+    return timesUsed;
+  }
 
-    /**
-     * Gets the content URI for this category
-     *
-     * @return content URI
-     */
-    public Uri getContentUri() {
-        return contentUri;
-    }
+  /**
+   * Increments timesUsed by 1 and sets last used date as now.
+   */
+  public void incTimesUsed() {
+    timesUsed++;
+    touch();
+  }
 
-    /**
-     * Modifies the content URI - marking this category as already saved in the database
-     *
-     * @param contentUri the content URI
-     */
-    public void setContentUri(Uri contentUri) {
-        this.contentUri = contentUri;
-    }
+  /**
+   * Gets the content URI for this category
+   *
+   * @return content URI
+   */
+  public Uri getContentUri() {
+    return contentUri;
+  }
+
+  /**
+   * Modifies the content URI - marking this category as already saved in the database
+   *
+   * @param contentUri the content URI
+   */
+  public void setContentUri(Uri contentUri) {
+    this.contentUri = contentUri;
+  }
 
 }

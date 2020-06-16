@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.explore
 
 import fr.free.nrw.commons.di.CommonsApplicationModule
-import fr.free.nrw.commons.explore.categories.SearchCategoriesFragmentContract
 import fr.free.nrw.commons.explore.categories.PageableCategoriesDataSource
+import fr.free.nrw.commons.explore.categories.SearchCategoriesFragmentContract
 import io.reactivex.Scheduler
 import javax.inject.Inject
 import javax.inject.Named

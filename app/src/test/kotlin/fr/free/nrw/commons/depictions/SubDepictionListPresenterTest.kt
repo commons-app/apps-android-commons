@@ -48,13 +48,20 @@ class SubDepictionListPresenterTest {
         testScheduler = TestScheduler()
         depictedItems.add(depictedItem)
         testObservable = Observable.just(depictedItems)
-        subDepictionListPresenter = SubDepictionListPresenter(recentSearchesDao, depictsClient, okHttpJsonApiClient, testScheduler, testScheduler)
+        subDepictionListPresenter = SubDepictionListPresenter(
+            recentSearchesDao,
+            depictsClient,
+            okHttpJsonApiClient,
+            testScheduler,
+            testScheduler
+        )
         subDepictionListPresenter.onAttachView(view)
     }
 
     @Test
     fun initSubDepictionListForParentClass() {
-        Mockito.`when`(okHttpJsonApiClient.getParentQIDs(ArgumentMatchers.anyString())).thenReturn(testObservable)
+        Mockito.`when`(okHttpJsonApiClient.getParentQIDs(ArgumentMatchers.anyString()))
+            .thenReturn(testObservable)
         subDepictionListPresenter.initSubDepictionList("Q9394", true)
         testScheduler.triggerActions()
         verify(view)?.onSuccess(depictedItems)
@@ -62,7 +69,8 @@ class SubDepictionListPresenterTest {
 
     @Test
     fun initSubDepictionListForChildClass() {
-        Mockito.`when`(okHttpJsonApiClient.getChildQIDs(ArgumentMatchers.anyString())).thenReturn(testObservable)
+        Mockito.`when`(okHttpJsonApiClient.getChildQIDs(ArgumentMatchers.anyString()))
+            .thenReturn(testObservable)
         subDepictionListPresenter.initSubDepictionList("Q9394", false)
         testScheduler.triggerActions()
         verify(view)?.onSuccess(depictedItems)

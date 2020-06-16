@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="horizontal"
+  android:weightSum="8">
+
+  <androidx.appcompat.widget.AppCompatSpinner
+    android:id="@+id/spinner_description_languages"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="0"
+    android:minWidth="@dimen/tiny_height"
+    android:padding="@dimen/dimen_0"
+    android:spinnerMode="dialog" />
+
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:weightSum="8">
+    android:layout_weight="8"
+    android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner_description_languages"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:minWidth="@dimen/tiny_height"
-        android:padding="@dimen/dimen_0"
-        android:spinnerMode="dialog" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="8">
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/caption_item_edit_text_input_layout"
+      android:id="@+id/caption_item_edit_text_input_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/caption_item_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/caption_item_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/share_caption_hint"
-            android:imeOptions="actionNext|flagNoExtractUi"
-            android:inputType="textMultiLine" />
+        android:hint="@string/share_caption_hint"
+        android:imeOptions="actionNext|flagNoExtractUi"
+        android:inputType="textMultiLine" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/description_item_edit_text_input_layout"
+      android:id="@+id/description_item_edit_text_input_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/description_item_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/description_item_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/share_description_hint"
-            android:imeOptions="actionNext|flagNoExtractUi"
-            android:inputType="textMultiLine" />
+        android:hint="@string/share_description_hint"
+        android:imeOptions="actionNext|flagNoExtractUi"
+        android:inputType="textMultiLine" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
+  </LinearLayout>
 </LinearLayout>

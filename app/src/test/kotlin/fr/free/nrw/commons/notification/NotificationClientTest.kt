@@ -19,15 +19,19 @@ class NotificationClientTest {
 
     @Mock
     private lateinit var service: Service
+
     @Mock
     private lateinit var csrfTokenClient: CsrfTokenClient
 
     @Mock
     private lateinit var mQueryResponse: MwQueryResponse
+
     @Mock
     private lateinit var mQueryResult: MwQueryResult
+
     @Mock
     private lateinit var mQueryResultNotificationsList: MwQueryResult.NotificationList
+
     @Mock
     private lateinit var notificationsList: List<Notification>
 
@@ -49,12 +53,22 @@ class NotificationClientTest {
 
     @Test
     fun getNotificationTest() {
-        Mockito.`when`(service.getAllNotifications(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.any())).thenReturn(Observable.just(mQueryResponse))
+        Mockito.`when`(
+            service.getAllNotifications(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.any()
+            )
+        ).thenReturn(Observable.just(mQueryResponse))
         Mockito.`when`(mQueryResponse.query()).thenReturn(mQueryResult)
         Mockito.`when`(mQueryResult.notifications()).thenReturn(mQueryResultNotificationsList)
         Mockito.`when`(mQueryResultNotificationsList.list()).thenReturn(notificationsList)
         notificationClient.getNotifications(true)
-        verify(service).getAllNotifications(eq("wikidatawiki|commonswiki|enwiki"), eq("read"), eq(null))
+        verify(service).getAllNotifications(
+            eq("wikidatawiki|commonswiki|enwiki"),
+            eq("read"),
+            eq(null)
+        )
     }
 
     /**
@@ -63,10 +77,20 @@ class NotificationClientTest {
     @Test
     fun markNotificationAsReadTest() {
         Mockito.`when`(csrfTokenClient.tokenBlocking).thenReturn("test")
-        Mockito.`when`(service.markRead(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString())).thenReturn(Observable.just(mQueryResponse))
+        Mockito.`when`(
+            service.markRead(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString()
+            )
+        ).thenReturn(Observable.just(mQueryResponse))
         Mockito.`when`(mQueryResponse.success()).thenReturn(true)
         notificationClient.markNotificationAsRead("test")
-        verify(service).markRead(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString())
+        verify(service).markRead(
+            ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString()
+        )
     }
 
 }

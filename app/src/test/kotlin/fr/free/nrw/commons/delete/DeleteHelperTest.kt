@@ -22,13 +22,13 @@ import org.mockito.MockitoAnnotations
 class DeleteHelperTest {
 
     @Mock
-    internal  lateinit var pageEditClient: PageEditClient
+    internal lateinit var pageEditClient: PageEditClient
 
     @Mock
-    internal  lateinit var context: Context
+    internal lateinit var context: Context
 
     @Mock
-    internal  lateinit var media: Media
+    internal lateinit var media: Media
 
     lateinit var deleteHelper: DeleteHelper
 
@@ -46,12 +46,30 @@ class DeleteHelperTest {
      */
     @Test
     fun makeDeletion() {
-        whenever(pageEditClient.prependEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(true))
-        whenever(pageEditClient.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(true))
-        whenever(pageEditClient.edit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(true))
+        whenever(
+            pageEditClient.prependEdit(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString()
+            )
+        )
+            .thenReturn(Observable.just(true))
+        whenever(
+            pageEditClient.appendEdit(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString()
+            )
+        )
+            .thenReturn(Observable.just(true))
+        whenever(
+            pageEditClient.edit(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString()
+            )
+        )
+            .thenReturn(Observable.just(true))
 
         whenever(media.displayTitle).thenReturn("Test file")
 
@@ -62,7 +80,11 @@ class DeleteHelperTest {
         val makeDeletion = deleteHelper.makeDeletion(context, media, "Test reason")?.blockingGet()
         assertNotNull(makeDeletion)
         assertTrue(makeDeletion!!)
-        verify(pageEditClient).appendEdit(eq("User_Talk:$creatorName"), ArgumentMatchers.anyString(), ArgumentMatchers.anyString())
+        verify(pageEditClient).appendEdit(
+            eq("User_Talk:$creatorName"),
+            ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString()
+        )
     }
 
     /**
@@ -70,12 +92,30 @@ class DeleteHelperTest {
      */
     @Test(expected = RuntimeException::class)
     fun makeDeletionForPrependEditFailure() {
-        whenever(pageEditClient.prependEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(false))
-        whenever(pageEditClient.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(true))
-        whenever(pageEditClient.edit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(true))
+        whenever(
+            pageEditClient.prependEdit(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString()
+            )
+        )
+            .thenReturn(Observable.just(false))
+        whenever(
+            pageEditClient.appendEdit(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString()
+            )
+        )
+            .thenReturn(Observable.just(true))
+        whenever(
+            pageEditClient.edit(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString()
+            )
+        )
+            .thenReturn(Observable.just(true))
         whenever(media.displayTitle).thenReturn("Test file")
         whenever(media.filename).thenReturn("Test file.jpg")
         whenever(media.creator).thenReturn("Creator (page does not exist)")
@@ -85,12 +125,30 @@ class DeleteHelperTest {
 
     @Test(expected = RuntimeException::class)
     fun makeDeletionForEditFailure() {
-        whenever(pageEditClient.prependEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(true))
-        whenever(pageEditClient.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(true))
-        whenever(pageEditClient.edit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(false))
+        whenever(
+            pageEditClient.prependEdit(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString()
+            )
+        )
+            .thenReturn(Observable.just(true))
+        whenever(
+            pageEditClient.appendEdit(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString()
+            )
+        )
+            .thenReturn(Observable.just(true))
+        whenever(
+            pageEditClient.edit(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString()
+            )
+        )
+            .thenReturn(Observable.just(false))
         whenever(media.displayTitle).thenReturn("Test file")
         whenever(media.filename).thenReturn("Test file.jpg")
         whenever(media.creator).thenReturn("Creator (page does not exist)")
@@ -100,12 +158,30 @@ class DeleteHelperTest {
 
     @Test(expected = RuntimeException::class)
     fun makeDeletionForAppendEditFailure() {
-        whenever(pageEditClient.prependEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(true))
-        whenever(pageEditClient.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(false))
-        whenever(pageEditClient.edit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(true))
+        whenever(
+            pageEditClient.prependEdit(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString()
+            )
+        )
+            .thenReturn(Observable.just(true))
+        whenever(
+            pageEditClient.appendEdit(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString()
+            )
+        )
+            .thenReturn(Observable.just(false))
+        whenever(
+            pageEditClient.edit(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString()
+            )
+        )
+            .thenReturn(Observable.just(true))
         whenever(media.displayTitle).thenReturn("Test file")
         whenever(media.filename).thenReturn("Test file.jpg")
         whenever(media.creator).thenReturn("Creator (page does not exist)")
@@ -115,15 +191,33 @@ class DeleteHelperTest {
 
     @Test(expected = RuntimeException::class)
     fun makeDeletionForEmptyCreatorName() {
-        whenever(pageEditClient.prependEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        whenever(
+            pageEditClient.prependEdit(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString()
+            )
+        )
             .thenReturn(Observable.just(true))
-        whenever(pageEditClient.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        whenever(
+            pageEditClient.appendEdit(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString()
+            )
+        )
             .thenReturn(Observable.just(true))
-        whenever(pageEditClient.edit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        whenever(
+            pageEditClient.edit(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString()
+            )
+        )
             .thenReturn(Observable.just(true))
 
         whenever(media.displayTitle).thenReturn("Test file")
-        media.filename ="Test file.jpg"
+        media.filename = "Test file.jpg"
 
         whenever(media.creator).thenReturn(null)
 

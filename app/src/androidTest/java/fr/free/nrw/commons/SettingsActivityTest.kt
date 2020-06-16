@@ -41,84 +41,84 @@ class SettingsActivityTest {
     fun setRecentUploadLimitTo123() {
         // Open "Use external storage" preference
         Espresso.onData(PreferenceMatchers.withKey("uploads"))
-                .inAdapterView(withId(android.R.id.list))
-                .perform(click())
+            .inAdapterView(withId(android.R.id.list))
+            .perform(click())
 
         // Try setting it to 123
         Espresso.onView(withId(android.R.id.edit))
-                .perform(replaceText("123"))
+            .perform(replaceText("123"))
 
         // Click "OK"
         Espresso.onView(allOf(withId(android.R.id.button1), withText("OK")))
-                .perform(click())
+            .perform(click())
 
         // Check setting set to 123 in SharedPreferences
         assertEquals(
-                123,
-                defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 0).toLong()
+            123,
+            defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 0).toLong()
         )
 
         // Check displaying 123 in summary text
         Espresso.onData(PreferenceMatchers.withKey("uploads"))
-                .inAdapterView(withId(android.R.id.list))
-                .onChildView(withId(android.R.id.summary))
-                .check(matches(withText("123")))
+            .inAdapterView(withId(android.R.id.list))
+            .onChildView(withId(android.R.id.summary))
+            .check(matches(withText("123")))
     }
 
     @Test
     fun setRecentUploadLimitTo0() {
         // Open "Use external storage" preference
         Espresso.onData(PreferenceMatchers.withKey("uploads"))
-                .inAdapterView(withId(android.R.id.list))
-                .perform(click())
+            .inAdapterView(withId(android.R.id.list))
+            .perform(click())
 
         // Try setting it to 0
         Espresso.onView(withId(android.R.id.edit))
-                .perform(replaceText("0"))
+            .perform(replaceText("0"))
 
         // Click "OK"
         Espresso.onView(allOf(withId(android.R.id.button1), withText("OK")))
-                .perform(click())
+            .perform(click())
 
         // Check setting set to 100 in SharedPreferences
         assertEquals(
-                100,
-                defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 0).toLong()
+            100,
+            defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 0).toLong()
         )
 
         // Check displaying 100 in summary text
         Espresso.onData(PreferenceMatchers.withKey("uploads"))
-                .inAdapterView(withId(android.R.id.list))
-                .onChildView(withId(android.R.id.summary))
-                .check(matches(withText("100")))
+            .inAdapterView(withId(android.R.id.list))
+            .onChildView(withId(android.R.id.summary))
+            .check(matches(withText("100")))
     }
 
     @Test
     fun setRecentUploadLimitTo700() {
         // Open "Use external storage" preference
         Espresso.onData(PreferenceMatchers.withKey("uploads"))
-                .inAdapterView(withId(android.R.id.list))
-                .perform(click())
+            .inAdapterView(withId(android.R.id.list))
+            .perform(click())
 
         // Try setting it to 700
         Espresso.onView(withId(android.R.id.edit))
-                .perform(replaceText("700"))
+            .perform(replaceText("700"))
 
         // Click "OK"
         Espresso.onView(allOf(withId(android.R.id.button1), withText("OK")))
-                .perform(click())
+            .perform(click())
 
         // Check setting set to 500 in SharedPreferences
         assertEquals(
-                500,
-                defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 0).toLong()
+            500,
+            defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 0).toLong()
         )
 
         // Check displaying 100 in summary text
         Espresso.onData(PreferenceMatchers.withKey("uploads"))
-                .inAdapterView(withId(android.R.id.list))
-                .onChildView(withId(android.R.id.summary))
-                .check(matches(withText("500")))
+            .inAdapterView(withId(android.R.id.list))
+            .onChildView(withId(android.R.id.summary))
+            .check(matches(withText("500")))
     }
 
     @Test
@@ -126,14 +126,14 @@ class SettingsActivityTest {
         // Turn on "Use author name" preference if currently off
         if (!defaultKvStore.getBoolean("useAuthorName", false)) {
             Espresso.onData(PreferenceMatchers.withKey("useAuthorName"))
-                    .inAdapterView(withId(android.R.id.list))
-                    .perform(click())
+                .inAdapterView(withId(android.R.id.list))
+                .perform(click())
         }
 
         // Check authorName preference is enabled
         Espresso.onData(PreferenceMatchers.withKey("authorName"))
-                .inAdapterView(withId(android.R.id.list))
-                .check(matches(isEnabled()))
+            .inAdapterView(withId(android.R.id.list))
+            .check(matches(isEnabled()))
     }
 
     @Test
@@ -141,14 +141,14 @@ class SettingsActivityTest {
         // Turn off "Use external storage" preference if currently on
         if (defaultKvStore.getBoolean("useAuthorName", false)) {
             Espresso.onData(PreferenceMatchers.withKey("useAuthorName"))
-                    .inAdapterView(withId(android.R.id.list))
-                    .perform(click())
+                .inAdapterView(withId(android.R.id.list))
+                .perform(click())
         }
 
         // Check authorName preference is enabled
         Espresso.onData(PreferenceMatchers.withKey("authorName"))
-                .inAdapterView(withId(android.R.id.list))
-                .check(matches(not(isEnabled())))
+            .inAdapterView(withId(android.R.id.list))
+            .check(matches(not(isEnabled())))
     }
 
     @Test

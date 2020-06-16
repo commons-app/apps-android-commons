@@ -50,15 +50,23 @@ class DepictedImagesPresenterTest {
         testScheduler = TestScheduler()
         mediaList.add(mediaItem)
         testObservable = Observable.just(mediaList)
-        depictedImagesPresenter = DepictedImagesPresenter(jsonKvStore, depictsClient, mediaClient, testScheduler, testScheduler)
+        depictedImagesPresenter = DepictedImagesPresenter(
+            jsonKvStore,
+            depictsClient,
+            mediaClient,
+            testScheduler,
+            testScheduler
+        )
         depictedImagesPresenter.onAttachView(view)
     }
 
     @Test
     fun initList() {
         Mockito.`when`(
-            depictsClient.fetchImagesForDepictedItem(ArgumentMatchers.anyString(),
-                ArgumentMatchers.anyInt())
+            depictsClient.fetchImagesForDepictedItem(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyInt()
+            )
         ).thenReturn(testObservable)
         depictedImagesPresenter.initList("rabbit")
         depictedImagesPresenter.handleSuccess(mediaList)
@@ -68,7 +76,8 @@ class DepictedImagesPresenterTest {
     @Test
     fun replaceTitlesWithCaptions() {
         var stringObservable: Single<String>? = Single.just(String())
-        Mockito.`when`(mediaClient.getCaptionByWikibaseIdentifier(ArgumentMatchers.anyString()))?.thenReturn(stringObservable)
+        Mockito.`when`(mediaClient.getCaptionByWikibaseIdentifier(ArgumentMatchers.anyString()))
+            ?.thenReturn(stringObservable)
         depictedImagesPresenter.replaceTitlesWithCaptions("File:rabbit.jpg", 0)
         testScheduler.triggerActions()
         verify(view)?.handleLabelforImage("", 0)

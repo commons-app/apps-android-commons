@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="pref_defaultLicense_entries">
-        <item>@string/license_name_cc0</item>
-        <item>@string/license_name_cc_by</item>
-        <item>@string/license_name_cc_by_four</item>
-        <item>@string/license_name_cc_by_sa</item>
-        <item>@string/license_name_cc_by_sa_four</item>
-    </array>
-    <array name="pref_defaultLicense_values">
-        <item>@string/license_pref_cc0</item>
-        <item>@string/license_pref_cc_by_3_0</item>
-        <item>@string/license_pref_cc_by_4_0</item>
-        <item>@string/license_pref_cc_by_sa_3_0</item>
-        <item>@string/license_pref_cc_by_sa_4_0</item>
-    </array>
+  <array name="pref_defaultLicense_entries">
+    <item>@string/license_name_cc0</item>
+    <item>@string/license_name_cc_by</item>
+    <item>@string/license_name_cc_by_four</item>
+    <item>@string/license_name_cc_by_sa</item>
+    <item>@string/license_name_cc_by_sa_four</item>
+  </array>
+  <array name="pref_defaultLicense_values">
+    <item>@string/license_pref_cc0</item>
+    <item>@string/license_pref_cc_by_3_0</item>
+    <item>@string/license_pref_cc_by_4_0</item>
+    <item>@string/license_pref_cc_by_sa_3_0</item>
+    <item>@string/license_pref_cc_by_sa_4_0</item>
+  </array>
 
-    <!--TODO add more EXIF tags-->
-    <array name="pref_exifTag_entries">
-        <item>@string/exif_tag_name_author</item>
-        <item>@string/exif_tag_name_copyright</item>
-        <item>@string/exif_tag_name_location</item>
-        <item>@string/exif_tag_name_cameraModel</item>
-        <item>@string/exif_tag_name_lensModel</item>
-        <item>@string/exif_tag_name_serialNumbers</item>
-        <item>@string/exif_tag_name_software</item>
-    </array>
-    <array name="pref_exifTag_values">
-        <item>@string/exif_tag_author</item>
-        <item>@string/exif_tag_copyright</item>
-        <item>@string/exif_tag_location</item>
-        <item>@string/exif_tag_cameraModel</item>
-        <item>@string/exif_tag_lensModel</item>
-        <item>@string/exif_tag_serialNumbers</item>
-        <item>@string/exif_tag_software</item>
-    </array>
+  <!--TODO add more EXIF tags-->
+  <array name="pref_exifTag_entries">
+    <item>@string/exif_tag_name_author</item>
+    <item>@string/exif_tag_name_copyright</item>
+    <item>@string/exif_tag_name_location</item>
+    <item>@string/exif_tag_name_cameraModel</item>
+    <item>@string/exif_tag_name_lensModel</item>
+    <item>@string/exif_tag_name_serialNumbers</item>
+    <item>@string/exif_tag_name_software</item>
+  </array>
+  <array name="pref_exifTag_values">
+    <item>@string/exif_tag_author</item>
+    <item>@string/exif_tag_copyright</item>
+    <item>@string/exif_tag_location</item>
+    <item>@string/exif_tag_cameraModel</item>
+    <item>@string/exif_tag_lensModel</item>
+    <item>@string/exif_tag_serialNumbers</item>
+    <item>@string/exif_tag_software</item>
+  </array>
 
-    <array name="pref_theme_entries">
-        <item>@string/theme_light_name</item>
-        <item>@string/theme_dark_name</item>
-        <item>@string/theme_default_name</item>
-    </array>
+  <array name="pref_theme_entries">
+    <item>@string/theme_light_name</item>
+    <item>@string/theme_dark_name</item>
+    <item>@string/theme_default_name</item>
+  </array>
 
-    <string-array name="pref_theme_entries_values">
-        <item>2</item>
-        <item>1</item>
-        <item>0</item>
-    </string-array>
+  <string-array name="pref_theme_entries_values">
+    <item>2</item>
+    <item>1</item>
+    <item>0</item>
+  </string-array>
 </resources>

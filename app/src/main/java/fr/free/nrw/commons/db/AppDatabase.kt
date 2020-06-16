@@ -13,5 +13,5 @@ import fr.free.nrw.commons.contributions.ContributionDao
 @Database(entities = [Contribution::class], version = 2, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
-  abstract fun contributionDao(): ContributionDao
+    abstract fun contributionDao(): ContributionDao
 }

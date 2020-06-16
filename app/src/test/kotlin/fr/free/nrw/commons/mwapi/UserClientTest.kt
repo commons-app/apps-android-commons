@@ -5,15 +5,17 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.mockito.*
-import org.wikipedia.dataclient.mwapi.MwQueryPage
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.MockitoAnnotations
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import org.wikipedia.dataclient.mwapi.MwQueryResult
 import org.wikipedia.dataclient.mwapi.UserInfo
 import org.wikipedia.util.DateUtil
 import java.util.*
 
-class UserClientTest{
+class UserClientTest {
     @Mock
     internal var userInterface: UserInterface? = null
 
@@ -35,7 +37,7 @@ class UserClientTest{
         val mockResponse = Mockito.mock(MwQueryResponse::class.java)
         Mockito.`when`(mockResponse.query()).thenReturn(mwQueryResult)
         Mockito.`when`(userInterface!!.userBlockInfo)
-                .thenReturn(Observable.just(mockResponse))
+            .thenReturn(Observable.just(mockResponse))
 
         val isBanned = userClient!!.isUserBlockedFromCommons.blockingGet()
         assertTrue(isBanned)
@@ -53,7 +55,7 @@ class UserClientTest{
         val mockResponse = Mockito.mock(MwQueryResponse::class.java)
         Mockito.`when`(mockResponse.query()).thenReturn(mwQueryResult)
         Mockito.`when`(userInterface!!.userBlockInfo)
-                .thenReturn(Observable.just(mockResponse))
+            .thenReturn(Observable.just(mockResponse))
 
         val isBanned = userClient!!.isUserBlockedFromCommons.blockingGet()
         assertTrue(isBanned)
@@ -68,7 +70,7 @@ class UserClientTest{
         val mockResponse = Mockito.mock(MwQueryResponse::class.java)
         Mockito.`when`(mockResponse.query()).thenReturn(mwQueryResult)
         Mockito.`when`(userInterface!!.userBlockInfo)
-                .thenReturn(Observable.just(mockResponse))
+            .thenReturn(Observable.just(mockResponse))
 
         val isBanned = userClient!!.isUserBlockedFromCommons.blockingGet()
         assertFalse(isBanned)

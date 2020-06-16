@@ -1,70 +1,70 @@
 <resources>
-    <dimen name="bottom_peak_height">240dp</dimen>
+  <dimen name="bottom_peak_height">240dp</dimen>
 
-    <!-- Standard margin / padding for the containing activity -->
-    <dimen name="activity_margin_horizontal">8dp</dimen>
-    <dimen name="activity_margin_vertical">8dp</dimen>
-    <dimen name="achievements_activity_margin_vertical">8dp</dimen>
-    <dimen name="medium_height">12dp</dimen>
-    <dimen name="medium_width">12dp</dimen>
+  <!-- Standard margin / padding for the containing activity -->
+  <dimen name="activity_margin_horizontal">8dp</dimen>
+  <dimen name="activity_margin_vertical">8dp</dimen>
+  <dimen name="achievements_activity_margin_vertical">8dp</dimen>
+  <dimen name="medium_height">12dp</dimen>
+  <dimen name="medium_width">12dp</dimen>
 
-    <!-- Standard margins / padding -->
-    <dimen name="login_padding">30dp</dimen>
-    <dimen name="tiny_height">1dp</dimen>
-    <dimen name="miniscule_margin">2dp</dimen>
-    <dimen name="tiny_margin">4dp</dimen>
-    <dimen name="tiny_padding">5dp</dimen>
-    <dimen name="normal_height">18dp</dimen>
-    <dimen name="huge_gap">48dp</dimen>
-    <dimen name="large_gap">32dp</dimen>
-    <dimen name="gigantic_gap">64dp</dimen>
-    <dimen name="standard_gap">16dp</dimen>
-    <dimen name="small_gap">8dp</dimen>
-    <dimen name="small_height">7dp</dimen>
-    <dimen name="tiny_gap">4dp</dimen>
-    <dimen name="landscape_width">400sp</dimen>
-    <dimen name="large_height">72dp</dimen>
-    <dimen name="question_height">252dp</dimen>
-    <dimen name="question_width">320dp</dimen>
-    <dimen name="big_height">90dp</dimen>
-    <dimen name="giant_height">160dp</dimen>
-    <dimen name="very_large_height">240dp</dimen>
-    <dimen name="fragment_height">48dp</dimen>
-    <dimen name="filter_padding">15dp</dimen>
+  <!-- Standard margins / padding -->
+  <dimen name="login_padding">30dp</dimen>
+  <dimen name="tiny_height">1dp</dimen>
+  <dimen name="miniscule_margin">2dp</dimen>
+  <dimen name="tiny_margin">4dp</dimen>
+  <dimen name="tiny_padding">5dp</dimen>
+  <dimen name="normal_height">18dp</dimen>
+  <dimen name="huge_gap">48dp</dimen>
+  <dimen name="large_gap">32dp</dimen>
+  <dimen name="gigantic_gap">64dp</dimen>
+  <dimen name="standard_gap">16dp</dimen>
+  <dimen name="small_gap">8dp</dimen>
+  <dimen name="small_height">7dp</dimen>
+  <dimen name="tiny_gap">4dp</dimen>
+  <dimen name="landscape_width">400sp</dimen>
+  <dimen name="large_height">72dp</dimen>
+  <dimen name="question_height">252dp</dimen>
+  <dimen name="question_width">320dp</dimen>
+  <dimen name="big_height">90dp</dimen>
+  <dimen name="giant_height">160dp</dimen>
+  <dimen name="very_large_height">240dp</dimen>
+  <dimen name="fragment_height">48dp</dimen>
+  <dimen name="filter_padding">15dp</dimen>
 
-    <!-- Component sizes -->
-    <dimen name="overflow_icon_dimen">56dp</dimen>
-    <dimen name="overflow_button_dimen">48dp</dimen>
-    <dimen name="half_standard_height">24dp</dimen>
-    <dimen name="quarter_standard_height">12dp</dimen>
-    <dimen name="progressbar_stroke">3dp</dimen>
-    <dimen name="notification_width">110dp</dimen>
-    <dimen name="notification_height">160dp</dimen>
+  <!-- Component sizes -->
+  <dimen name="overflow_icon_dimen">56dp</dimen>
+  <dimen name="overflow_button_dimen">48dp</dimen>
+  <dimen name="half_standard_height">24dp</dimen>
+  <dimen name="quarter_standard_height">12dp</dimen>
+  <dimen name="progressbar_stroke">3dp</dimen>
+  <dimen name="notification_width">110dp</dimen>
+  <dimen name="notification_height">160dp</dimen>
 
-    <!-- Text sizes -->
-    <dimen name="heading_text_size">24sp</dimen>
-    <dimen name="subheading_text_size">20sp</dimen>
-    <dimen name="small_text">10sp</dimen>
-    <dimen name="normal_text">16sp</dimen>
-    <dimen name="description_text_size">14sp</dimen>
-    <dimen name="first_fab">15dp</dimen>
-    <dimen name="second_fab">25dp</dimen>
-    <dimen name="subtitle_text">12sp</dimen>
-    <dimen name="progressbar_text">9dp</dimen>
+  <!-- Text sizes -->
+  <dimen name="heading_text_size">24sp</dimen>
+  <dimen name="subheading_text_size">20sp</dimen>
+  <dimen name="small_text">10sp</dimen>
+  <dimen name="normal_text">16sp</dimen>
+  <dimen name="description_text_size">14sp</dimen>
+  <dimen name="first_fab">15dp</dimen>
+  <dimen name="second_fab">25dp</dimen>
+  <dimen name="subtitle_text">12sp</dimen>
+  <dimen name="progressbar_text">9dp</dimen>
 
-    <!-- App widget margin -->
-    <dimen name="widget_margin">0dp</dimen>
+  <!-- App widget margin -->
+  <dimen name="widget_margin">0dp</dimen>
 
-    <!-- Commonly used dimensions -->
-    <dimen name="dimen_0">0dp</dimen>
-    <dimen name="dimen_6">6dp</dimen>
-    <dimen name="dimen_10">10dp</dimen>
-    <dimen name="dimen_20">20dp</dimen>
-    <dimen name="dimen_40">40dp</dimen>
-    <dimen name="dimen_42">42dp</dimen>
-    <dimen name="dimen_250">250dp</dimen>
-    <dimen name="dimen_150">150dp</dimen>
-    <dimen name="dimen_72">72dp</dimen>
-    <dimen name="dimen_140">140dp</dimen>
-    <dimen name="dimen_200">200dp</dimen>
+  <!-- Commonly used dimensions -->
+  <dimen name="dimen_0">0dp</dimen>
+  <dimen name="dimen_6">6dp</dimen>
+  <dimen name="dimen_10">10dp</dimen>
+  <dimen name="dimen_20">20dp</dimen>
+  <dimen name="dimen_40">40dp</dimen>
+  <dimen name="dimen_42">42dp</dimen>
+  <dimen name="dimen_250">250dp</dimen>
+  <dimen name="dimen_150">150dp</dimen>
+  <dimen name="dimen_72">72dp</dimen>
+  <dimen name="dimen_140">140dp</dimen>
+  <dimen name="dimen_200">200dp</dimen>
 </resources>

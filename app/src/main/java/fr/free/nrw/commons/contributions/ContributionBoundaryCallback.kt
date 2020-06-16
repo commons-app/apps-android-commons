@@ -8,7 +8,6 @@ import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
-import java.util.*
 import javax.inject.Inject
 import javax.inject.Named
 

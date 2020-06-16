@@ -1,11 +1,11 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
   <stroke
-    android:color="@color/primaryDarkColor"
-    android:width="@dimen/miniscule_margin"/>
-  <solid android:color="#F8F7F5"/>
+    android:width="@dimen/miniscule_margin"
+    android:color="@color/primaryDarkColor" />
+  <solid android:color="#F8F7F5" />
   <padding
     android:bottom="@dimen/miniscule_margin"
     android:left="@dimen/miniscule_margin"
     android:right="@dimen/miniscule_margin"
-    android:top="@dimen/miniscule_margin"/>
+    android:top="@dimen/miniscule_margin" />
 </shape>

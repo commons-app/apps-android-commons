@@ -5,8 +5,8 @@ import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
-import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.UploadItem;
+import fr.free.nrw.commons.upload.UploadMediaDetail;
 import java.util.List;
 
 /**
@@ -14,44 +14,44 @@ import java.util.List;
  */
 public interface UploadMediaDetailsContract {
 
-    interface View extends SimilarImageInterface {
+  interface View extends SimilarImageInterface {
 
-        void onImageProcessed(UploadItem uploadItem, Place place);
+    void onImageProcessed(UploadItem uploadItem, Place place);
 
-        void onNearbyPlaceFound(UploadItem uploadItem, Place place);
+    void onNearbyPlaceFound(UploadItem uploadItem, Place place);
 
-        void showProgress(boolean shouldShow);
+    void showProgress(boolean shouldShow);
 
-        void onImageValidationSuccess();
+    void onImageValidationSuccess();
 
-        void showMessage(int stringResourceId, int colorResourceId);
+    void showMessage(int stringResourceId, int colorResourceId);
 
-        void showMessage(String message, int colorResourceId);
+    void showMessage(String message, int colorResourceId);
 
-        void showDuplicatePicturePopup(UploadItem uploadItem);
+    void showDuplicatePicturePopup(UploadItem uploadItem);
 
-        void showBadImagePopup(Integer errorCode, UploadItem uploadItem);
+    void showBadImagePopup(Integer errorCode, UploadItem uploadItem);
 
-        void showMapWithImageCoordinates(boolean shouldShow);
+    void showMapWithImageCoordinates(boolean shouldShow);
 
-        void showExternalMap(UploadItem uploadItem);
+    void showExternalMap(UploadItem uploadItem);
 
-        void updateMediaDetails(List<UploadMediaDetail> uploadMediaDetails);
-    }
+    void updateMediaDetails(List<UploadMediaDetail> uploadMediaDetails);
+  }
 
-    interface UserActionListener extends BasePresenter<View> {
+  interface UserActionListener extends BasePresenter<View> {
 
-        void receiveImage(UploadableFile uploadableFile, Place place);
+    void receiveImage(UploadableFile uploadableFile, Place place);
 
-        void verifyImageQuality(int uploadItemIndex);
+    void verifyImageQuality(int uploadItemIndex);
 
-        void fetchPreviousTitleAndDescription(int indexInViewFlipper);
+    void fetchPreviousTitleAndDescription(int indexInViewFlipper);
 
-        void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex);
+    void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex);
 
-        void onMapIconClicked(int indexInViewFlipper);
+    void onMapIconClicked(int indexInViewFlipper);
 
-        void onUserConfirmedUploadIsOfPlace(Place place, int uploadItemPosition);
-    }
+    void onUserConfirmedUploadIsOfPlace(Place place, int uploadItemPosition);
+  }
 
 }

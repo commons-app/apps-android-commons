@@ -296,7 +296,7 @@
   <string name="get_directions">Get directions</string>
   <string name="read_article">Read article</string>
 
-  <string formatted="false" name="notifications_welcome">Welcome to Wikimedia Commons, %1$s! We\'re glad you\'re here.</string>
+  <string name="notifications_welcome" formatted="false">Welcome to Wikimedia Commons, %1$s! We\'re glad you\'re here.</string>
   <string name="notifications_talk_page_message">%1$s left a message on your talk page</string>
   <string name="notifications_thank_you_edit">Thank you for making an edit</string>
   <string name="notifications_mention">%1$s mentioned you on %2$s.</string>
@@ -428,9 +428,9 @@
   <string name="upload_title_duplicate" formatted="true">A file with the file name %1$s exists. Are you sure you want to proceed?</string>
   <string name="map_application_missing">No compatible map application could be found on your device. Please install a map application to use this feature.</string>
   <plurals name="upload_count_title">
-        <item quantity="one">%1$d Upload</item>
-        <item quantity="other">%1$d Uploads</item>
-    </plurals>
+    <item quantity="one">%1$d Upload</item>
+    <item quantity="other">%1$d Uploads</item>
+  </plurals>
   <string name="navigation_item_bookmarks">Bookmarks</string>
   <string name="title_activity_bookmarks">Bookmarks</string>
   <string name="title_page_bookmarks_pictures">Pictures</string>
@@ -482,11 +482,11 @@ Upload your first media by tapping on the add button.</string>
 
   <string name="this_function_needs_network_connection">This function requires network connection, please check your connection settings.</string>
   <string name="bad_token_error_proposed_solution">Upload failed due to issues with edit token. Please try logging out and in again. </string>
-    <string name="error_processing_image">Error occurred while processing the image. Please try again!</string>
+  <string name="error_processing_image">Error occurred while processing the image. Please try again!</string>
   <string name="getting_edit_token">Getting token for editing</string>
   <string name="check_category_adding_template">Adding template for category check</string>
   <string name="check_category_notification_title">Requesting category check for %1$s</string>
-    <string name="check_category_edit_summary">Requesting category check</string>
+  <string name="check_category_edit_summary">Requesting category check</string>
   <string name="check_category_success_title">Category check requested</string>
   <string name="check_category_failure_title">Category check request didn\'t work</string>
   <string name="check_category_success_message">Requested category check for %1$s</string>
@@ -498,7 +498,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="nominate_for_deletion_edit_deletion_request_log">Adding file to Delete requests log</string>
   <string name="nominate_for_deletion_create_deletion_request">Creating Delete requests subpage</string>
   <string name="notsure">Not sure</string>
-    <string name="send_thank_success_title">Sending Thanks: Success</string>
+  <string name="send_thank_success_title">Sending Thanks: Success</string>
   <string name="send_thank_success_message">Successfully sent thanks to %1$s</string>
   <string name="send_thank_failure_message">Failed to send thanks %1$s</string>
   <string name="send_thank_failure_title">Sending Thanks: Failure</string>
@@ -517,16 +517,16 @@ Upload your first media by tapping on the add button.</string>
   <string name="review_category_explanation">This image is under %1$s categories.</string>
   <string name="review_spam_report_question">It is out of scope because it is</string>
   <string name="review_c_violation_report_question">It is copyright violation because it is </string>
-    <string name="review_category_yes_button_text">No, mis-categorized</string>
-    <string name="review_category_no_button_text">Seems fine</string>
-    <string name="review_spam_yes_button_text">No, out of scope</string>
-    <string name="review_spam_no_button_text">Seems fine</string>
-    <string name="review_copyright_yes_button_text">No, copyright violation</string>
-    <string name="review_copyright_no_button_text">Seems fine</string>
-    <string name="review_thanks_yes_button_text">Yes, why not</string>
-    <string name="review_thanks_no_button_text">Next image</string>
-    <string name="skip_image_explanation">Clicking this button will give you another recently uploaded image from Wikimedia Commons</string>
-    <string name="review_image_explanation">You can review images and improve the quality of Wikimedia Commons.\n The four parameters of review are: \n - Is this image in-scope? \n - Does this image follow the rules of copyright? \n - Is this image correctly categorized? \n - If all goes well you can also thank the contributor.</string>
+  <string name="review_category_yes_button_text">No, mis-categorized</string>
+  <string name="review_category_no_button_text">Seems fine</string>
+  <string name="review_spam_yes_button_text">No, out of scope</string>
+  <string name="review_spam_no_button_text">Seems fine</string>
+  <string name="review_copyright_yes_button_text">No, copyright violation</string>
+  <string name="review_copyright_no_button_text">Seems fine</string>
+  <string name="review_thanks_yes_button_text">Yes, why not</string>
+  <string name="review_thanks_no_button_text">Next image</string>
+  <string name="skip_image_explanation">Clicking this button will give you another recently uploaded image from Wikimedia Commons</string>
+  <string name="review_image_explanation">You can review images and improve the quality of Wikimedia Commons.\n The four parameters of review are: \n - Is this image in-scope? \n - Does this image follow the rules of copyright? \n - Is this image correctly categorized? \n - If all goes well you can also thank the contributor.</string>
 
   <plurals name="receiving_shared_content">
     <item quantity="one">Receiving shared content. Processing the image might take some time depending on the size of the image and your device</item>
@@ -549,7 +549,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="please_wait">Please wait…</string>
   <string name="images_featured_explanation">Featured pictures are images from highly skilled photographers and illustrators that the Wikimedia Commons community has chosen as some of the highest quality on the site.</string>
   <string name="images_via_nearby_explanation">Images Uploaded via Nearby places are the images which are uploaded by discovering places on the map.</string>
-  <string name="thanks_received_explanation" >This feature allows editors to send a Thank you notification to users who make useful edits – by using a small thank link on the history page or diff page.</string>
+  <string name="thanks_received_explanation">This feature allows editors to send a Thank you notification to users who make useful edits – by using a small thank link on the history page or diff page.</string>
   <string name="previous_image_caption_description">Copy previous captions &amp; description</string>
   <string name="previous_button_tooltip_message">Click to reuse the title and description you entered in your previous picture and modify it to fit your current one</string>
   <string name="welcome_do_upload_content_description">Examples of good images to upload to Commons</string>

@@ -8,12 +8,12 @@
 
   <TextView
     android:id="@+id/depicts_label"
-    android:textStyle="bold"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:paddingTop="@dimen/tiny_gap"
     android:text="Label"
     android:textAppearance="?android:attr/textAppearanceMedium"
+    android:textStyle="bold"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toEndOf="@+id/depicts_image"
     app:layout_constraintTop_toTopOf="parent"
@@ -25,19 +25,19 @@
     android:layout_height="wrap_content"
     android:paddingTop="@dimen/tiny_gap"
     android:text="Description"
-    tools:text="Really really really really long long long description description description"
-    app:layout_constraintStart_toEndOf="@+id/depicts_image"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/depicts_label" />
+    app:layout_constraintStart_toEndOf="@+id/depicts_image"
+    app:layout_constraintTop_toBottomOf="@+id/depicts_label"
+    tools:text="Really really really really long long long description description description" />
 
   <com.facebook.drawee.view.SimpleDraweeView
     android:id="@+id/depicts_image"
     android:layout_width="70dp"
     android:layout_height="70dp"
     android:paddingRight="@dimen/tiny_gap"
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
     app:placeholderImage="@drawable/ic_wikidata_logo_24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -169,13 +169,14 @@ public class OkHttpJsonApiClient {
     });
   }
 
-    public Observable<List<Place>> getNearbyPlaces(LatLng cur, String language, double radius) throws IOException {
-        String wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
-        String query = wikidataQuery
-                .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
-                .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.getLatitude()))
-                .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.getLongitude()))
-                .replace("${LANG}", language);
+  public Observable<List<Place>> getNearbyPlaces(LatLng cur, String language, double radius)
+      throws IOException {
+    String wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
+    String query = wikidataQuery
+        .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
+        .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.getLatitude()))
+        .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.getLongitude()))
+        .replace("${LANG}", language);
 
     HttpUrl.Builder urlBuilder = HttpUrl
         .parse(sparqlQueryUrl)

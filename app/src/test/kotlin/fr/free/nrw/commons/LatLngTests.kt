@@ -60,5 +60,5 @@ class LatLngTests {
     }
 
     private fun assertPrettyCoordinateString(expected: String, place: LatLng) =
-            assertEquals(expected, place.prettyCoordinateString)
+        assertEquals(expected, place.prettyCoordinateString)
 }

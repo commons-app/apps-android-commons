@@ -4,23 +4,24 @@
   android:id="@+id/rl_container_categories"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:padding="@dimen/standard_gap"
-  >
+  android:padding="@dimen/standard_gap">
+
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_above="@+id/button_divider"
     android:orientation="vertical">
+
     <TextView
       android:id="@+id/tv_title"
-      android:textStyle="bold"
       android:layout_width="wrap_content"
       android:layout_height="@dimen/half_standard_height"
       android:layout_marginEnd="@dimen/standard_gap"
       android:layout_marginRight="@dimen/standard_gap"
       android:gravity="center_vertical"
       android:textSize="@dimen/normal_text"
-      tools:text="Step 1 of 15"/>
+      android:textStyle="bold"
+      tools:text="Step 1 of 15" />
 
     <TextView
       android:id="@+id/tv_subtitle"
@@ -31,14 +32,14 @@
       android:text="@string/upload_flow_all_images_in_set"
       android:textSize="@dimen/subtitle_text"
       android:visibility="visible"
-      tools:visibility="visible"/>
+      tools:visibility="visible" />
 
     <FrameLayout
       android:id="@+id/category_search_layout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/standard_gap"
-      >
+      android:layout_marginTop="@dimen/standard_gap">
+
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_container_search"
         android:layout_width="match_parent"
@@ -51,7 +52,7 @@
           android:hint="@string/categories_search_text_hint"
           android:imeOptions="actionSearch"
           android:inputType="text"
-          android:maxLines="1"/>
+          android:maxLines="1" />
       </com.google.android.material.textfield.TextInputLayout>
 
       <ProgressBar
@@ -59,13 +60,13 @@
         style="?android:progressBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|end"
         android:layout_marginEnd="@dimen/tiny_gap"
         android:layout_marginRight="@dimen/tiny_gap"
-        android:layout_gravity="center_vertical|end"
         android:indeterminate="true"
         android:indeterminateOnly="true"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -73,7 +74,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_above="@+id/button_divider"
-      android:layout_below="@id/category_search_layout"/>
+      android:layout_below="@id/category_search_layout" />
 
   </LinearLayout>
 
@@ -82,23 +83,23 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/tiny_height"
     android:layout_above="@+id/ll_container_buttons"
-    android:background="@color/divider_grey"/>
+    android:background="@color/divider_grey" />
 
   <LinearLayout
     android:id="@+id/ll_container_buttons"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:padding="@dimen/standard_gap"
     android:orientation="horizontal"
-    >
+    android:padding="@dimen/standard_gap">
+
     <androidx.appcompat.widget.AppCompatButton
       android:id="@+id/btn_previous"
       style="@style/Widget.AppCompat.Button.Borderless"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_weight="1"
-      android:text="@string/previous"/>
+      android:text="@string/previous" />
 
     <androidx.appcompat.widget.AppCompatButton
       android:id="@+id/btn_next"
@@ -106,7 +107,7 @@
       android:layout_height="wrap_content"
       android:layout_weight="1"
       android:text="@string/next"
-      android:textColor="@android:color/white"/>
+      android:textColor="@android:color/white" />
 
   </LinearLayout>
 

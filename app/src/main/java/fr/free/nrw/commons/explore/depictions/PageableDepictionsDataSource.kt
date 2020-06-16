@@ -15,7 +15,7 @@ class PageableDepictionsDataSource @Inject constructor(
     val depictsClient: DepictsClient
 ) : PageableDataSource<DepictedItem>(liveDataConverter) {
 
-    override val loadFunction =  { loadSize: Int, startPosition: Int ->
+    override val loadFunction = { loadSize: Int, startPosition: Int ->
         depictsClient.searchForDepictions(query, loadSize, startPosition).blockingGet()
     }
 }

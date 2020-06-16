@@ -27,9 +27,11 @@ class FileMetadataUtilsTest {
     @Test
     fun getTagsFromPrefLocation() {
         val author = FileMetadataUtils.getTagsFromPref("Location")
-        val authorRef = arrayOf(TAG_GPS_LATITUDE, TAG_GPS_LATITUDE_REF,
-                TAG_GPS_LONGITUDE, TAG_GPS_LONGITUDE_REF,
-                TAG_GPS_ALTITUDE, TAG_GPS_ALTITUDE_REF)
+        val authorRef = arrayOf(
+            TAG_GPS_LATITUDE, TAG_GPS_LATITUDE_REF,
+            TAG_GPS_LONGITUDE, TAG_GPS_LONGITUDE_REF,
+            TAG_GPS_ALTITUDE, TAG_GPS_ALTITUDE_REF
+        )
 
         assertTrue(Arrays.deepEquals(author, authorRef))
     }

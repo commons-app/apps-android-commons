@@ -1,86 +1,82 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:focusableInTouchMode="true"
+  android:minHeight="@dimen/large_height">
+
+  <ImageView
+    android:id="@+id/bookmarkButtonImage"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/standard_gap"
+    android:tint="?attr/rowButtonColor"
+    app:srcCompat="@drawable/ic_round_star_border_24px" />
+
+  <com.facebook.drawee.view.SimpleDraweeView
+    android:id="@+id/icon"
+    android:layout_width="@dimen/dimen_40"
+    android:layout_height="@dimen/dimen_40"
+    android:layout_alignStart="@id/bookmarkButtonImage"
+    android:layout_marginStart="@dimen/standard_gap"
+    android:layout_marginTop="@dimen/standard_gap"
+    android:scaleType="centerCrop"
+    tools:src="@drawable/empty_photo" />
+
+  <TextView
+    android:id="@+id/distance"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentRight="true"
+    android:layout_marginLeft="@dimen/standard_gap"
+    android:layout_marginTop="@dimen/standard_gap"
+    android:layout_marginRight="@dimen/standard_gap"
+    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+    tools:text="900m" />
+
+  <ImageView
+    android:id="@+id/toggleArrow"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentRight="true"
+    android:layout_marginTop="@dimen/large_gap"
+    android:layout_marginRight="@dimen/standard_gap"
+
+    />
+
+  <TextView
+    android:id="@+id/tvName"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:focusableInTouchMode="true"
-    android:minHeight="@dimen/large_height">
+    android:layout_alignTop="@id/distance"
+    android:layout_marginStart="@dimen/standard_gap"
+    android:layout_marginLeft="@dimen/standard_gap"
+    android:layout_toStartOf="@id/distance"
+    android:layout_toLeftOf="@id/distance"
+    android:layout_toEndOf="@id/icon"
+    android:layout_toRightOf="@id/icon"
+    android:ellipsize="end"
+    android:maxLines="2"
+    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+    tools:text="St. Paul's School" />
 
-    <ImageView
-      android:id="@+id/bookmarkButtonImage"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/standard_gap"
-      android:tint="?attr/rowButtonColor"
-      app:srcCompat="@drawable/ic_round_star_border_24px" />
+  <TextView
+    android:id="@+id/tvDesc"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/tvName"
+    android:layout_alignStart="@id/tvName"
+    android:layout_alignLeft="@id/tvName"
+    android:layout_alignEnd="@id/distance"
+    android:layout_alignRight="@id/distance"
+    android:layout_marginBottom="@dimen/standard_gap"
+    android:ellipsize="end"
+    android:maxLines="4"
+    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+    tools:text="school" />
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/icon"
-        android:layout_width="@dimen/dimen_40"
-        android:layout_height="@dimen/dimen_40"
-        android:layout_marginStart="@dimen/standard_gap"
-        android:layout_marginTop="@dimen/standard_gap"
-        android:layout_alignStart="@id/bookmarkButtonImage"
-        android:scaleType="centerCrop"
-        tools:src="@drawable/empty_photo"
-        />
-
-    <TextView
-        android:id="@+id/distance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="@dimen/standard_gap"
-        android:layout_marginRight="@dimen/standard_gap"
-        android:layout_marginTop="@dimen/standard_gap"
-        tools:text="900m"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        />
-
-    <ImageView
-        android:id="@+id/toggleArrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/standard_gap"
-        android:layout_marginTop="@dimen/large_gap"
-
-        />
-
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/distance"
-        android:layout_marginLeft="@dimen/standard_gap"
-        android:layout_marginStart="@dimen/standard_gap"
-        android:layout_toEndOf="@id/icon"
-        android:layout_toLeftOf="@id/distance"
-        android:layout_toRightOf="@id/icon"
-        android:layout_toStartOf="@id/distance"
-        android:ellipsize="end"
-        android:maxLines="2"
-        tools:text="St. Paul's School"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        />
-
-    <TextView
-        android:id="@+id/tvDesc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@id/distance"
-        android:layout_alignLeft="@id/tvName"
-        android:layout_alignRight="@id/distance"
-        android:layout_alignStart="@id/tvName"
-        android:layout_below="@id/tvName"
-        android:layout_marginBottom="@dimen/standard_gap"
-        android:ellipsize="end"
-        android:maxLines="4"
-        tools:text="school"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        />
-
-    <include layout="@layout/nearby_row_button" />
+  <include layout="@layout/nearby_row_button" />
 </RelativeLayout>

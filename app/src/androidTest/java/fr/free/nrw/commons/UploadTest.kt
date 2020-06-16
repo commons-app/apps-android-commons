@@ -8,7 +8,6 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Environment
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.action.ViewActions.click
@@ -46,8 +45,10 @@ import java.util.*
 @RunWith(AndroidJUnit4::class)
 class UploadTest {
     @get:Rule
-    var permissionRule = GrantPermissionRule.grant(Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.ACCESS_FINE_LOCATION)!!
+    var permissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.ACCESS_FINE_LOCATION
+    )!!
 
     @get:Rule
     var activityRule = ActivityTestRule(LoginActivity::class.java)
@@ -97,14 +98,14 @@ class UploadTest {
         dismissWarning("Yes")
 
         onView(allOf<View>(isDisplayed(), withId(R.id.et_title)))
-                .perform(replaceText(commonsFileName))
+            .perform(replaceText(commonsFileName))
 
         onView(allOf<View>(isDisplayed(), withId(R.id.description_item_edit_text)))
-                .perform(replaceText(commonsFileName))
+            .perform(replaceText(commonsFileName))
 
 
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
-                .perform(click())
+            .perform(click())
 
         UITestHelper.sleep(5000)
         dismissWarning("Yes")
@@ -112,25 +113,25 @@ class UploadTest {
         UITestHelper.sleep(3000)
 
         onView(allOf(isDisplayed(), withId(R.id.et_search)))
-                .perform(replaceText("Uploaded with Mobile/Android Tests"))
+            .perform(replaceText("Uploaded with Mobile/Android Tests"))
 
         UITestHelper.sleep(3000)
 
         try {
             onView(allOf(isDisplayed(), UITestHelper.first(withParent(withId(R.id.rv_categories)))))
-                    .perform(click())
+                .perform(click())
         } catch (ignored: NoMatchingViewException) {
         }
 
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
-                .perform(click())
+            .perform(click())
 
         dismissWarning("Yes, Submit")
 
         UITestHelper.sleep(500)
 
         onView(allOf(isDisplayed(), withId(R.id.btn_submit)))
-                .perform(click())
+            .perform(click())
 
         UITestHelper.sleep(10000)
 
@@ -142,8 +143,8 @@ class UploadTest {
     private fun dismissWarning(warningText: String) {
         try {
             onView(withText(warningText))
-                    .check(matches(isDisplayed()))
-                    .perform(click())
+                .check(matches(isDisplayed()))
+                .perform(click())
         } catch (ignored: NoMatchingViewException) {
         }
     }
@@ -169,10 +170,10 @@ class UploadTest {
         dismissWarning("Yes")
 
         onView(allOf<View>(isDisplayed(), withId(R.id.et_title)))
-                .perform(replaceText(commonsFileName))
+            .perform(replaceText(commonsFileName))
 
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
-                .perform(click())
+            .perform(click())
 
         UITestHelper.sleep(10000)
         dismissWarning("Yes")
@@ -180,25 +181,25 @@ class UploadTest {
         UITestHelper.sleep(3000)
 
         onView(allOf(isDisplayed(), withId(R.id.et_search)))
-                .perform(replaceText("Test"))
+            .perform(replaceText("Test"))
 
         UITestHelper.sleep(3000)
 
         try {
             onView(allOf(isDisplayed(), UITestHelper.first(withParent(withId(R.id.rv_categories)))))
-                    .perform(click())
+                .perform(click())
         } catch (ignored: NoMatchingViewException) {
         }
 
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
-                .perform(click())
+            .perform(click())
 
         dismissWarning("Yes, Submit")
 
         UITestHelper.sleep(500)
 
         onView(allOf(isDisplayed(), withId(R.id.btn_submit)))
-                .perform(click())
+            .perform(click())
 
         UITestHelper.sleep(10000)
 
@@ -228,28 +229,46 @@ class UploadTest {
         dismissWarningDialog()
 
         onView(allOf<View>(isDisplayed(), withId(R.id.et_title)))
-                .perform(replaceText(commonsFileName))
+            .perform(replaceText(commonsFileName))
 
         onView(withId(R.id.rv_descriptions)).perform(
-                RecyclerViewActions
-                        .actionOnItemAtPosition<DescriptionsAdapter.ViewHolder>(0,
-                                MyViewAction.typeTextInChildViewWithId(R.id.description_item_edit_text, "Test description")))
+            RecyclerViewActions
+                .actionOnItemAtPosition<DescriptionsAdapter.ViewHolder>(
+                    0,
+                    MyViewAction.typeTextInChildViewWithId(
+                        R.id.description_item_edit_text,
+                        "Test description"
+                    )
+                )
+        )
 
         onView(withId(R.id.btn_add_description))
-                .perform(click())
+            .perform(click())
 
         onView(withId(R.id.rv_descriptions)).perform(
-                RecyclerViewActions
-                        .actionOnItemAtPosition<DescriptionsAdapter.ViewHolder>(1,
-                                MyViewAction.selectSpinnerItemInChildViewWithId(R.id.spinner_description_languages, 2)))
+            RecyclerViewActions
+                .actionOnItemAtPosition<DescriptionsAdapter.ViewHolder>(
+                    1,
+                    MyViewAction.selectSpinnerItemInChildViewWithId(
+                        R.id.spinner_description_languages,
+                        2
+                    )
+                )
+        )
 
         onView(withId(R.id.rv_descriptions)).perform(
-                RecyclerViewActions
-                        .actionOnItemAtPosition<DescriptionsAdapter.ViewHolder>(1,
-                                MyViewAction.typeTextInChildViewWithId(R.id.description_item_edit_text, "Description")))
+            RecyclerViewActions
+                .actionOnItemAtPosition<DescriptionsAdapter.ViewHolder>(
+                    1,
+                    MyViewAction.typeTextInChildViewWithId(
+                        R.id.description_item_edit_text,
+                        "Description"
+                    )
+                )
+        )
 
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
-                .perform(click())
+            .perform(click())
 
         UITestHelper.sleep(5000)
         dismissWarning("Yes")
@@ -257,25 +276,25 @@ class UploadTest {
         UITestHelper.sleep(3000)
 
         onView(allOf(isDisplayed(), withId(R.id.et_search)))
-                .perform(replaceText("Test"))
+            .perform(replaceText("Test"))
 
         UITestHelper.sleep(3000)
 
         try {
             onView(allOf(isDisplayed(), UITestHelper.first(withParent(withId(R.id.rv_categories)))))
-                    .perform(click())
+                .perform(click())
         } catch (ignored: NoMatchingViewException) {
         }
 
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
-                .perform(click())
+            .perform(click())
 
         dismissWarning("Yes, Submit")
 
         UITestHelper.sleep(500)
 
         onView(allOf(isDisplayed(), withId(R.id.btn_submit)))
-                .perform(click())
+            .perform(click())
 
         UITestHelper.sleep(10000)
 
@@ -328,14 +347,16 @@ class UploadTest {
 
         // Stub out the File picker. When an intent is sent to the File picker, this tells
         // Espresso to respond with the ActivityResult we just created
-        intending(allOf(hasAction(Intent.ACTION_GET_CONTENT), hasType("image/*"))).respondWith(result)
+        intending(allOf(hasAction(Intent.ACTION_GET_CONTENT), hasType("image/*"))).respondWith(
+            result
+        )
     }
 
     private fun dismissWarningDialog() {
         try {
             onView(withText("Yes"))
-                    .check(matches(isDisplayed()))
-                    .perform(click())
+                .check(matches(isDisplayed()))
+                .perform(click())
         } catch (ignored: NoMatchingViewException) {
         }
     }
@@ -343,10 +364,10 @@ class UploadTest {
     private fun openGallery() {
         // Open FAB
         onView(allOf<View>(withId(R.id.fab_plus), isDisplayed()))
-                .perform(click())
+            .perform(click())
 
         // Click gallery
         onView(allOf<View>(withId(R.id.fab_gallery), isDisplayed()))
-                .perform(click())
+            .perform(click())
     }
 }

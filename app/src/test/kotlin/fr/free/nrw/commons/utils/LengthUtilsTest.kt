@@ -109,12 +109,12 @@ class LengthUtilsTest {
     // Test assertion helper functions
 
     private fun assertFormattedDistanceBetween(expected: String, pointA: LatLng, pointB: LatLng) =
-            assertEquals(expected, LengthUtils.formatDistanceBetween(pointA, pointB))
+        assertEquals(expected, LengthUtils.formatDistanceBetween(pointA, pointB))
 
     private fun assertFormattedDistance(expected: String, distance: Int) =
-            assertEquals(expected, LengthUtils.formatDistance(distance))
+        assertEquals(expected, LengthUtils.formatDistance(distance))
 
     private fun assertDistanceBetween(expected: Double, pointA: LatLng, pointB: LatLng) =
-    // Acceptable error: 1cm
-            assertEquals(expected, LengthUtils.computeDistanceBetween(pointA, pointB), 0.01)
+        // Acceptable error: 1cm
+        assertEquals(expected, LengthUtils.computeDistanceBetween(pointA, pointB), 0.01)
 }

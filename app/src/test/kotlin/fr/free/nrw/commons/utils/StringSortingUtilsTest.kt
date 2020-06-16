@@ -20,22 +20,22 @@ class StringSortingUtilsTest {
     @Test
     fun testSortingTextBySimilarity() {
         val actualList = listOf(
-                "The quick brown fox",
-                "quick brown fox",
-                "The",
-                "The quick ",
-                "The fox",
-                "brown fox",
-                "fox"
+            "The quick brown fox",
+            "quick brown fox",
+            "The",
+            "The quick ",
+            "The fox",
+            "brown fox",
+            "fox"
         )
         val expectedList = listOf(
-                "The",
-                "The fox",
-                "The quick ",
-                "The quick brown fox",
-                "quick brown fox",
-                "brown fox",
-                "fox"
+            "The",
+            "The fox",
+            "The quick ",
+            "The quick brown fox",
+            "quick brown fox",
+            "brown fox",
+            "fox"
         )
 
         sort(actualList, sortBySimilarity("The"))
@@ -46,18 +46,18 @@ class StringSortingUtilsTest {
     @Test
     fun testSortingSymbolsBySimilarity() {
         val actualList = listOf(
-                "$$$$$",
-                "****",
-                "**$*",
-                "*$*$",
-                ".*$"
+            "$$$$$",
+            "****",
+            "**$*",
+            "*$*$",
+            ".*$"
         )
         val expectedList = listOf(
-                "**$*",
-                "*$*$",
-                ".*$",
-                "****",
-                "$$$$$"
+            "**$*",
+            "*$*$",
+            ".*$",
+            "****",
+            "$$$$$"
         )
 
         sort(actualList, sortBySimilarity("**$"))
@@ -69,25 +69,25 @@ class StringSortingUtilsTest {
     fun testSortingMixedStringsBySimilarity() {
         // Sample from Category:2018 Android phones
         val actualList = listOf(
-                "ASUS ZenFone 5 (2018)",
-                "Google Pixel 3",
-                "HTC U12",
-                "Huawei P20",
-                "LG G7 ThinQ",
-                "Samsung Galaxy A8 (2018)",
-                "Samsung Galaxy S9",
-                // One with more complicated symbols
-                "MadeUpPhone 2018.$£#你好"
+            "ASUS ZenFone 5 (2018)",
+            "Google Pixel 3",
+            "HTC U12",
+            "Huawei P20",
+            "LG G7 ThinQ",
+            "Samsung Galaxy A8 (2018)",
+            "Samsung Galaxy S9",
+            // One with more complicated symbols
+            "MadeUpPhone 2018.$£#你好"
         )
         val expectedList = listOf(
-                "Samsung Galaxy S9",
-                "ASUS ZenFone 5 (2018)",
-                "Samsung Galaxy A8 (2018)",
-                "Google Pixel 3",
-                "HTC U12",
-                "Huawei P20",
-                "LG G7 ThinQ",
-                "MadeUpPhone 2018.$£#你好"
+            "Samsung Galaxy S9",
+            "ASUS ZenFone 5 (2018)",
+            "Samsung Galaxy A8 (2018)",
+            "Google Pixel 3",
+            "HTC U12",
+            "Huawei P20",
+            "LG G7 ThinQ",
+            "MadeUpPhone 2018.$£#你好"
         )
 
         sort(actualList, sortBySimilarity("S9"))
@@ -98,26 +98,26 @@ class StringSortingUtilsTest {
     @Test
     fun testSortingWithEmptyStrings() {
         val actualList = listOf(
-                "brown fox",
-                "",
-                "quick brown fox",
-                "the",
-                "",
-                "the fox",
-                "fox",
-                "",
-                ""
+            "brown fox",
+            "",
+            "quick brown fox",
+            "the",
+            "",
+            "the fox",
+            "fox",
+            "",
+            ""
         )
         val expectedList = listOf(
-                "the fox",
-                "brown fox",
-                "the",
-                "fox",
-                "quick brown fox",
-                "",
-                "",
-                "",
-                ""
+            "the fox",
+            "brown fox",
+            "the",
+            "fox",
+            "quick brown fox",
+            "",
+            "",
+            "",
+            ""
         )
 
         sort(actualList, sortBySimilarity("the fox"))

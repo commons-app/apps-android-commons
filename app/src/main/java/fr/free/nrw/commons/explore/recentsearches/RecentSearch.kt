@@ -14,16 +14,17 @@ class RecentSearch
  * @param query query name
  * @param lastSearched last searched date
  */(
-        /**
-         * Modifies the content URI - marking this query as already saved in the database
-         *
-         * @param contentUri the content URI
-         */
-        var contentUri: Uri?,
-        /**
-         * Gets query name
-         * @return query name
-         */
-        val query: String, var lastSearched: Date) {
+    /**
+     * Modifies the content URI - marking this query as already saved in the database
+     *
+     * @param contentUri the content URI
+     */
+    var contentUri: Uri?,
+    /**
+     * Gets query name
+     * @return query name
+     */
+    val query: String, var lastSearched: Date
+) {
 
 }

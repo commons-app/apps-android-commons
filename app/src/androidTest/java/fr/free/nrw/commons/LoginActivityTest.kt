@@ -48,8 +48,13 @@ class LoginActivityTest {
     fun testForgotPassword() {
         UITestHelper.sleep(3000)
         Espresso.onView(ViewMatchers.withId(R.id.forgot_password))
-                .perform(ViewActions.click())
-        Intents.intended(CoreMatchers.allOf(IntentMatchers.hasAction(Intent.ACTION_VIEW), IntentMatchers.hasData(BuildConfig.FORGOT_PASSWORD_URL)));
+            .perform(ViewActions.click())
+        Intents.intended(
+            CoreMatchers.allOf(
+                IntentMatchers.hasAction(Intent.ACTION_VIEW),
+                IntentMatchers.hasData(BuildConfig.FORGOT_PASSWORD_URL)
+            )
+        );
     }
 
     @Test

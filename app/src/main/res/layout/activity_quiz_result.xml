@@ -1,91 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <include layout="@layout/toolbar" />
+
+  <androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent">
+    android:layout_marginLeft="@dimen/activity_margin_horizontal"
+    android:layout_marginTop="@dimen/activity_margin_vertical"
+    android:layout_marginRight="@dimen/activity_margin_horizontal"
+    android:layout_marginBottom="@dimen/activity_margin_vertical"
+    app:cardCornerRadius="@dimen/activity_margin_horizontal">
 
-    <include layout="@layout/toolbar"/>
+    <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
-        android:layout_height="match_parent"
+      <RelativeLayout
         android:layout_width="match_parent"
-        app:cardCornerRadius="@dimen/activity_margin_horizontal"
-        android:layout_marginBottom="@dimen/activity_margin_vertical"
-        android:layout_marginLeft="@dimen/activity_margin_horizontal"
-        android:layout_marginRight="@dimen/activity_margin_horizontal"
-        android:layout_marginTop="@dimen/activity_margin_vertical">
+        android:layout_height="match_parent">
 
-        <ScrollView
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:app="http://schemas.android.com/apk/res-auto"
+          xmlns:tools="http://schemas.android.com/tools"
+          android:id="@+id/quiz_result"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          tools:context="fr.free.nrw.commons.quiz.QuizResultActivity">
+
+
+          <TextView
+            style="?android:textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/activity_margin_vertical"
+            android:text="@string/result"
+            android:textSize="32sp" />
+
+          <com.dinuscxj.progressbar.CircleProgressBar
+            android:id="@+id/result_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_250"
+            android:layout_marginLeft="@dimen/activity_margin_horizontal"
+            android:layout_marginTop="@dimen/activity_margin_vertical"
+            android:layout_marginRight="@dimen/activity_margin_horizontal"
+            android:progress="50"
+            app:progress_end_color="#8C8B98"
+            app:progress_start_color="#3A3381"
+            app:progress_stroke_width="@dimen/first_fab"
+            app:progress_text_format_pattern="4/5"
+            app:progress_text_size="@dimen/large_gap"
+            app:style="solid_line" />
+
+          <TextView
+            android:id="@+id/congratulatory_message"
+            style="?android:textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            android:layout_marginLeft="@dimen/activity_margin_horizontal"
+            android:layout_marginTop="@dimen/activity_margin_vertical"
+            android:layout_marginRight="@dimen/activity_margin_horizontal"
+            android:layout_marginBottom="@dimen/activity_margin_vertical"
+            android:gravity="center_horizontal"
+            android:text="@string/congratulatory_message_quiz" />
 
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:orientation="vertical"
-                    tools:context="fr.free.nrw.commons.quiz.QuizResultActivity"
-                    android:id="@+id/quiz_result">
+        </LinearLayout>
 
+        <Button
+          android:id="@+id/quiz_result_next"
+          android:layout_width="@dimen/dimen_150"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/quiz_result"
+          android:layout_alignParentRight="true"
+          android:layout_alignParentBottom="true"
+          android:layout_marginRight="@dimen/activity_margin_horizontal"
+          android:layout_marginBottom="@dimen/activity_margin_vertical"
+          android:backgroundTint="#D6DCE0"
+          android:paddingHorizontal="@dimen/activity_margin_horizontal"
+          android:text="Continue" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="@string/result"
-                        style="?android:textAppearanceLarge"
-                        android:textSize="32sp"
-                        android:layout_marginTop="@dimen/activity_margin_vertical" />
-
-                    <com.dinuscxj.progressbar.CircleProgressBar
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dimen_250"
-                        android:layout_marginRight="@dimen/activity_margin_horizontal"
-                        android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                        android:layout_marginTop="@dimen/activity_margin_vertical"
-                        android:progress="50"
-                        app:progress_end_color="#8C8B98"
-                        app:progress_start_color="#3A3381"
-                        app:progress_stroke_width="@dimen/first_fab"
-                        app:progress_text_size="@dimen/large_gap"
-                        app:progress_text_format_pattern="4/5"
-                        app:style="solid_line"
-                        android:id="@+id/result_progress_bar"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/activity_margin_horizontal"
-                        android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                        android:layout_marginTop="@dimen/activity_margin_vertical"
-                        android:layout_marginBottom="@dimen/activity_margin_vertical"
-                        style="?android:textAppearanceMedium"
-                        android:gravity="center_horizontal"
-                        android:id="@+id/congratulatory_message"
-                        android:text="@string/congratulatory_message_quiz" />
-
-                </LinearLayout>
-
-                <Button
-                    android:layout_width="@dimen/dimen_150"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/activity_margin_horizontal"
-                    android:layout_below="@+id/quiz_result"
-                    android:id="@+id/quiz_result_next"
-                    android:layout_marginBottom="@dimen/activity_margin_vertical"
-                    android:paddingHorizontal="@dimen/activity_margin_horizontal"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#D6DCE0"
-                    android:text="Continue" />
-
-            </RelativeLayout>
-        </ScrollView>
-    </androidx.cardview.widget.CardView>
+      </RelativeLayout>
+    </ScrollView>
+  </androidx.cardview.widget.CardView>
 </LinearLayout>

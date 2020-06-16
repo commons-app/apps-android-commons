@@ -59,248 +59,261 @@ import org.wikipedia.language.AppLanguageLookUpTable;
 import timber.log.Timber;
 
 @AcraCore(
-        buildConfigClass = BuildConfig.class,
-        resReportSendSuccessToast = R.string.crash_dialog_ok_toast,
-        reportFormat = StringFormat.KEY_VALUE_LIST,
-        reportContent = {USER_COMMENT, APP_VERSION_CODE, APP_VERSION_NAME, ANDROID_VERSION, PHONE_MODEL, STACK_TRACE}
+    buildConfigClass = BuildConfig.class,
+    resReportSendSuccessToast = R.string.crash_dialog_ok_toast,
+    reportFormat = StringFormat.KEY_VALUE_LIST,
+    reportContent = {USER_COMMENT, APP_VERSION_CODE, APP_VERSION_NAME, ANDROID_VERSION, PHONE_MODEL,
+        STACK_TRACE}
 )
 
 @AcraMailSender(
-        mailTo = "commons-app-android-private@googlegroups.com"
+    mailTo = "commons-app-android-private@googlegroups.com"
 )
 
 @AcraDialog(
-        resTheme = R.style.Theme_AppCompat_Dialog,
-        resText = R.string.crash_dialog_text,
-        resTitle = R.string.crash_dialog_title,
-        resCommentPrompt = R.string.crash_dialog_comment_prompt
+    resTheme = R.style.Theme_AppCompat_Dialog,
+    resText = R.string.crash_dialog_text,
+    resTitle = R.string.crash_dialog_title,
+    resCommentPrompt = R.string.crash_dialog_comment_prompt
 )
 
 public class CommonsApplication extends MultiDexApplication {
-    @Inject SessionManager sessionManager;
-    @Inject DBOpenHelper dbOpenHelper;
 
-    @Inject @Named("default_preferences") JsonKvStore defaultPrefs;
+  @Inject
+  SessionManager sessionManager;
+  @Inject
+  DBOpenHelper dbOpenHelper;
 
-    /**
-     * Constants begin
-     */
-    public static final int OPEN_APPLICATION_DETAIL_SETTINGS = 1001;
-
-    public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using [[COM:MOA|Commons Mobile App]]";
-
-    public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
-
-    public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App Feedback";
-
-    public static final String NOTIFICATION_CHANNEL_ID_ALL = "CommonsNotificationAll";
-
-    public static final String FEEDBACK_EMAIL_TEMPLATE_HEADER = "-- Technical information --";
-
-    /**
-     * Constants End
-     */
-
-    private RefWatcher refWatcher;
-
-    private static CommonsApplication INSTANCE;
-    public static CommonsApplication getInstance() {
-        return INSTANCE;
-    }
-
-    private AppLanguageLookUpTable languageLookUpTable;
-    public AppLanguageLookUpTable getLanguageLookUpTable() {
-        return languageLookUpTable;
-    }
-
-    @Inject ContributionDao contributionDao;
-
-    /**
-     * Used to declare and initialize various components and dependencies
-     */
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-        INSTANCE = this;
-        ACRA.init(this);
-        Mapbox.getInstance(this, getString(R.string.mapbox_commons_app_token));
-
-        ApplicationlessInjection
-                .getInstance(this)
-                .getCommonsApplicationComponent()
-                .inject(this);
-
-        AppAdapter.set(new CommonsAppAdapter(sessionManager, defaultPrefs));
-
-        initTimber();
-
-
-        if (!defaultPrefs.getBoolean("has_user_manually_removed_location")) {
-            Set<String> defaultExifTagsSet = defaultPrefs.getStringSet(Prefs.MANAGED_EXIF_TAGS);
-            if (null == defaultExifTagsSet) {
-                defaultExifTagsSet = new HashSet<>();
-            }
-            defaultExifTagsSet.add(getString(R.string.exif_tag_location));
-            defaultPrefs.putStringSet(Prefs.MANAGED_EXIF_TAGS, defaultExifTagsSet);
-        }
-
-//        Set DownsampleEnabled to True to downsample the image in case it's heavy
-        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
-                .setDownsampleEnabled(true)
-                .build();
-        try {
-            Fresco.initialize(this, config);
-        } catch (Exception e) {
-            Timber.e(e);
-            // TODO: Remove when we're able to initialize Fresco in test builds.
-        }
-
-        createNotificationChannel(this);
-
-        languageLookUpTable = new AppLanguageLookUpTable(this);
-
-        // This handler will catch exceptions thrown from Observables after they are disposed,
-        // or from Observables that are (deliberately or not) missing an onError handler.
-        RxJavaPlugins.setErrorHandler(Functions.emptyConsumer());
-
-        if (setupLeakCanary() == RefWatcher.DISABLED) {
-            return;
-        }
-        // Fire progress callbacks for every 3% of uploaded content
-        System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
-    }
-
-    /**
-     * Plants debug and file logging tree.
-     * Timber lets you plant your own logging trees.
-     *
-     */
-    private void initTimber() {
-        boolean isBeta = ConfigUtils.isBetaFlavour();
-        String logFileName = isBeta ? "CommonsBetaAppLogs" : "CommonsAppLogs";
-        String logDirectory = LogUtils.getLogDirectory();
-        FileLoggingTree tree = new FileLoggingTree(
-                Log.VERBOSE,
-                logFileName,
-                logDirectory,
-                1000,
-                getFileLoggingThreadPool());
-
-        Timber.plant(tree);
-        Timber.plant(new Timber.DebugTree());
-    }
-
-    public static boolean isRoboUnitTest() {
-        return "robolectric".equals(Build.FINGERPRINT);
-    }
-
-    private ThreadPoolService getFileLoggingThreadPool() {
-        return new ThreadPoolService.Builder("file-logging-thread")
-                .setPriority(Process.THREAD_PRIORITY_LOWEST)
-                .setPoolSize(1)
-                .setExceptionHandler(new BackgroundPoolExceptionHandler())
-                .build();
-    }
-
-    public static void createNotificationChannel(@NonNull Context context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            NotificationChannel channel = manager.getNotificationChannel(NOTIFICATION_CHANNEL_ID_ALL);
-            if (channel == null) {
-                channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID_ALL,
-                        context.getString(R.string.notifications_channel_name_all), NotificationManager.IMPORTANCE_DEFAULT);
-                manager.createNotificationChannel(channel);
-            }
-        }
-    }
-
-    public String getUserAgent() {
-        return "Commons/" + ConfigUtils.getVersionNameWithSha(this) + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE;
-    }
-
-    /**
-     * Helps in setting up LeakCanary library
-     * @return instance of LeakCanary
-     */
-    protected RefWatcher setupLeakCanary() {
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return RefWatcher.DISABLED;
-        }
-        return LeakCanary.install(this);
-    }
+  @Inject
+  @Named("default_preferences")
+  JsonKvStore defaultPrefs;
 
   /**
-     * Provides a way to get member refWatcher
-     *
-     * @param context Application context
-     * @return application member refWatcher
-     */
-    public static RefWatcher getRefWatcher(Context context) {
-        CommonsApplication application = (CommonsApplication) context.getApplicationContext();
-        return application.refWatcher;
+   * Constants begin
+   */
+  public static final int OPEN_APPLICATION_DETAIL_SETTINGS = 1001;
+
+  public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using [[COM:MOA|Commons Mobile App]]";
+
+  public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
+
+  public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App Feedback";
+
+  public static final String NOTIFICATION_CHANNEL_ID_ALL = "CommonsNotificationAll";
+
+  public static final String FEEDBACK_EMAIL_TEMPLATE_HEADER = "-- Technical information --";
+
+  /**
+   * Constants End
+   */
+
+  private RefWatcher refWatcher;
+
+  private static CommonsApplication INSTANCE;
+
+  public static CommonsApplication getInstance() {
+    return INSTANCE;
+  }
+
+  private AppLanguageLookUpTable languageLookUpTable;
+
+  public AppLanguageLookUpTable getLanguageLookUpTable() {
+    return languageLookUpTable;
+  }
+
+  @Inject
+  ContributionDao contributionDao;
+
+  /**
+   * Used to declare and initialize various components and dependencies
+   */
+  @Override
+  public void onCreate() {
+    super.onCreate();
+
+    INSTANCE = this;
+    ACRA.init(this);
+    Mapbox.getInstance(this, getString(R.string.mapbox_commons_app_token));
+
+    ApplicationlessInjection
+        .getInstance(this)
+        .getCommonsApplicationComponent()
+        .inject(this);
+
+    AppAdapter.set(new CommonsAppAdapter(sessionManager, defaultPrefs));
+
+    initTimber();
+
+    if (!defaultPrefs.getBoolean("has_user_manually_removed_location")) {
+      Set<String> defaultExifTagsSet = defaultPrefs.getStringSet(Prefs.MANAGED_EXIF_TAGS);
+      if (null == defaultExifTagsSet) {
+        defaultExifTagsSet = new HashSet<>();
+      }
+      defaultExifTagsSet.add(getString(R.string.exif_tag_location));
+      defaultPrefs.putStringSet(Prefs.MANAGED_EXIF_TAGS, defaultExifTagsSet);
     }
 
-    /**
-     * clears data of current application
-     * @param context Application context
-     * @param logoutListener Implementation of interface LogoutListener
-     */
-    @SuppressLint("CheckResult")
-    public void clearApplicationData(Context context, LogoutListener logoutListener) {
-        File cacheDirectory = context.getCacheDir();
-        File applicationDirectory = new File(cacheDirectory.getParent());
-        if (applicationDirectory.exists()) {
-            String[] fileNames = applicationDirectory.list();
-            for (String fileName : fileNames) {
-                if (!fileName.equals("lib")) {
-                    FileUtils.deleteFile(new File(applicationDirectory, fileName));
-                }
-            }
+//        Set DownsampleEnabled to True to downsample the image in case it's heavy
+    ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
+        .setDownsampleEnabled(true)
+        .build();
+    try {
+      Fresco.initialize(this, config);
+    } catch (Exception e) {
+      Timber.e(e);
+      // TODO: Remove when we're able to initialize Fresco in test builds.
+    }
+
+    createNotificationChannel(this);
+
+    languageLookUpTable = new AppLanguageLookUpTable(this);
+
+    // This handler will catch exceptions thrown from Observables after they are disposed,
+    // or from Observables that are (deliberately or not) missing an onError handler.
+    RxJavaPlugins.setErrorHandler(Functions.emptyConsumer());
+
+    if (setupLeakCanary() == RefWatcher.DISABLED) {
+      return;
+    }
+    // Fire progress callbacks for every 3% of uploaded content
+    System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
+  }
+
+  /**
+   * Plants debug and file logging tree. Timber lets you plant your own logging trees.
+   */
+  private void initTimber() {
+    boolean isBeta = ConfigUtils.isBetaFlavour();
+    String logFileName = isBeta ? "CommonsBetaAppLogs" : "CommonsAppLogs";
+    String logDirectory = LogUtils.getLogDirectory();
+    FileLoggingTree tree = new FileLoggingTree(
+        Log.VERBOSE,
+        logFileName,
+        logDirectory,
+        1000,
+        getFileLoggingThreadPool());
+
+    Timber.plant(tree);
+    Timber.plant(new Timber.DebugTree());
+  }
+
+  public static boolean isRoboUnitTest() {
+    return "robolectric".equals(Build.FINGERPRINT);
+  }
+
+  private ThreadPoolService getFileLoggingThreadPool() {
+    return new ThreadPoolService.Builder("file-logging-thread")
+        .setPriority(Process.THREAD_PRIORITY_LOWEST)
+        .setPoolSize(1)
+        .setExceptionHandler(new BackgroundPoolExceptionHandler())
+        .build();
+  }
+
+  public static void createNotificationChannel(@NonNull Context context) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      NotificationManager manager = (NotificationManager) context
+          .getSystemService(Context.NOTIFICATION_SERVICE);
+      NotificationChannel channel = manager.getNotificationChannel(NOTIFICATION_CHANNEL_ID_ALL);
+      if (channel == null) {
+        channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID_ALL,
+            context.getString(R.string.notifications_channel_name_all),
+            NotificationManager.IMPORTANCE_DEFAULT);
+        manager.createNotificationChannel(channel);
+      }
+    }
+  }
+
+  public String getUserAgent() {
+    return "Commons/" + ConfigUtils.getVersionNameWithSha(this)
+        + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE;
+  }
+
+  /**
+   * Helps in setting up LeakCanary library
+   *
+   * @return instance of LeakCanary
+   */
+  protected RefWatcher setupLeakCanary() {
+    if (LeakCanary.isInAnalyzerProcess(this)) {
+      return RefWatcher.DISABLED;
+    }
+    return LeakCanary.install(this);
+  }
+
+  /**
+   * Provides a way to get member refWatcher
+   *
+   * @param context Application context
+   * @return application member refWatcher
+   */
+  public static RefWatcher getRefWatcher(Context context) {
+    CommonsApplication application = (CommonsApplication) context.getApplicationContext();
+    return application.refWatcher;
+  }
+
+  /**
+   * clears data of current application
+   *
+   * @param context        Application context
+   * @param logoutListener Implementation of interface LogoutListener
+   */
+  @SuppressLint("CheckResult")
+  public void clearApplicationData(Context context, LogoutListener logoutListener) {
+    File cacheDirectory = context.getCacheDir();
+    File applicationDirectory = new File(cacheDirectory.getParent());
+    if (applicationDirectory.exists()) {
+      String[] fileNames = applicationDirectory.list();
+      for (String fileName : fileNames) {
+        if (!fileName.equals("lib")) {
+          FileUtils.deleteFile(new File(applicationDirectory, fileName));
         }
-
-        sessionManager.logout()
-            .andThen(Completable.fromAction(() ->{
-                Timber.d("All accounts have been removed");
-                clearImageCache();
-                //TODO: fix preference manager
-                defaultPrefs.clearAll();
-                defaultPrefs.putBoolean("firstrun", false);
-                updateAllDatabases();
-                }
-            ))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(logoutListener::onLogoutComplete, Timber::e);
+      }
     }
 
-    /**
-     * Clear all images cache held by Fresco
-     */
-    private void clearImageCache() {
-        ImagePipeline imagePipeline = Fresco.getImagePipeline();
-        imagePipeline.clearCaches();
-    }
+    sessionManager.logout()
+        .andThen(Completable.fromAction(() -> {
+              Timber.d("All accounts have been removed");
+              clearImageCache();
+              //TODO: fix preference manager
+              defaultPrefs.clearAll();
+              defaultPrefs.putBoolean("firstrun", false);
+              updateAllDatabases();
+            }
+        ))
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(logoutListener::onLogoutComplete, Timber::e);
+  }
 
-    /**
-     * Deletes all tables and re-creates them.
-     */
-    private void updateAllDatabases() {
-        dbOpenHelper.getReadableDatabase().close();
-        SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
+  /**
+   * Clear all images cache held by Fresco
+   */
+  private void clearImageCache() {
+    ImagePipeline imagePipeline = Fresco.getImagePipeline();
+    imagePipeline.clearCaches();
+  }
 
-        CategoryDao.Table.onDelete(db);
-        dbOpenHelper.deleteTable(db,CONTRIBUTIONS_TABLE);//Delete the contributions table in the existing db on older versions
-        contributionDao.deleteAll();
-        BookmarkPicturesDao.Table.onDelete(db);
-        BookmarkLocationsDao.Table.onDelete(db);
-    }
+  /**
+   * Deletes all tables and re-creates them.
+   */
+  private void updateAllDatabases() {
+    dbOpenHelper.getReadableDatabase().close();
+    SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
+
+    CategoryDao.Table.onDelete(db);
+    dbOpenHelper.deleteTable(db,
+        CONTRIBUTIONS_TABLE);//Delete the contributions table in the existing db on older versions
+    contributionDao.deleteAll();
+    BookmarkPicturesDao.Table.onDelete(db);
+    BookmarkLocationsDao.Table.onDelete(db);
+  }
 
 
-    /**
-     * Interface used to get log-out events
-     */
-    public interface LogoutListener {
-        void onLogoutComplete();
-    }
+  /**
+   * Interface used to get log-out events
+   */
+  public interface LogoutListener {
+
+    void onLogoutComplete();
+  }
 }

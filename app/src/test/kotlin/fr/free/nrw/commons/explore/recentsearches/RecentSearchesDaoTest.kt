@@ -7,7 +7,6 @@ import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.RemoteException
 import com.nhaarman.mockitokotlin2.*
-import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.BASE_URI
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.uriForId
@@ -186,7 +185,15 @@ class RecentSearchesDaoTest {
      */
     @Test(expected = RuntimeException::class)
     fun findRecentSearchTranslatesExceptions() {
-        whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenThrow(RemoteException(""))
+        whenever(
+            client.query(
+                any(),
+                any(),
+                any(),
+                any(),
+                anyOrNull()
+            )
+        ).thenThrow(RemoteException(""))
         testObject.find("butterfly")
     }
 
@@ -237,11 +244,11 @@ class RecentSearchesDaoTest {
         assertEquals(123L, recentSearch?.lastSearched?.time)
 
         verify(client).query(
-                eq(BASE_URI),
-                eq(ALL_FIELDS),
-                eq("$COLUMN_NAME=?"),
-                queryCaptor.capture(),
-                isNull()
+            eq(BASE_URI),
+            eq(ALL_FIELDS),
+            eq("$COLUMN_NAME=?"),
+            queryCaptor.capture(),
+            isNull()
         )
         assertEquals("butterfly", queryCaptor.firstValue[0])
     }
@@ -273,11 +280,11 @@ class RecentSearchesDaoTest {
         assertEquals("butterfly", result[0])
 
         verify(client).query(
-                eq(BASE_URI),
-                eq(ALL_FIELDS),
-                isNull(),
-                queryCaptor.capture(),
-                eq("$COLUMN_LAST_USED DESC")
+            eq(BASE_URI),
+            eq(ALL_FIELDS),
+            isNull(),
+            queryCaptor.capture(),
+            eq("$COLUMN_LAST_USED DESC")
         )
         assertEquals(0, queryCaptor.firstValue.size)
     }

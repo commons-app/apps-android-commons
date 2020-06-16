@@ -1,8 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/menu_upload_single"
-        android:title="@string/menu_upload_single"
-        android:icon="@drawable/ic_send_white_24dp"
-        android:enabled="true"
-        app:showAsAction="always" />
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+    android:id="@+id/menu_upload_single"
+    android:enabled="true"
+    android:icon="@drawable/ic_send_white_24dp"
+    android:title="@string/menu_upload_single"
+    app:showAsAction="always" />
 </menu>

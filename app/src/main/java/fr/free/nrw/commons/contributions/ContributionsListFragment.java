@@ -19,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,7 +26,6 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import javax.inject.Inject;
 
 /**
@@ -200,7 +198,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   @Override
   public void onSaveInstanceState(@NonNull Bundle outState) {
     super.onSaveInstanceState(outState);
-    final GridLayoutManager layoutManager = (GridLayoutManager) rvContributionsList.getLayoutManager();
+    final GridLayoutManager layoutManager = (GridLayoutManager) rvContributionsList
+        .getLayoutManager();
     outState.putParcelable(RV_STATE, layoutManager.onSaveInstanceState());
   }
 

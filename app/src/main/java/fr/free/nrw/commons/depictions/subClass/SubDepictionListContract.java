@@ -10,23 +10,23 @@ import java.util.List;
  */
 public interface SubDepictionListContract {
 
-    interface View {
+  interface View {
 
-        void onSuccess(List<DepictedItem> mediaList);
+    void onSuccess(List<DepictedItem> mediaList);
 
-        void initErrorView();
+    void initErrorView();
 
-        void showSnackbar();
+    void showSnackbar();
 
-        void setIsLastPage(boolean b);
+    void setIsLastPage(boolean b);
 
-    }
+  }
 
-    interface UserActionListener extends BasePresenter<View> {
+  interface UserActionListener extends BasePresenter<View> {
 
-        void initSubDepictionList(String qid, Boolean isParentClass) throws IOException;
+    void initSubDepictionList(String qid, Boolean isParentClass) throws IOException;
 
-        String getQuery();
+    String getQuery();
 
-    }
+  }
 }

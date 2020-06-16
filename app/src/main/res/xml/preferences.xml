@@ -1,102 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory
-      android:title="@string/preference_category_appearance">
+  <PreferenceCategory android:title="@string/preference_category_appearance">
 
-        <ListPreference
-            android:key="appThemePref"
-            android:title= "@string/preference_theme"
-            app:singleLineTitle="false"
-            android:entries="@array/pref_theme_entries"
-            android:entryValues="@array/pref_theme_entries_values"
-            app:useSimpleSummaryProvider="true"
-            android:defaultValue="0" />
+    <ListPreference
+      android:defaultValue="0"
+      android:entries="@array/pref_theme_entries"
+      android:entryValues="@array/pref_theme_entries_values"
+      android:key="appThemePref"
+      android:title="@string/preference_theme"
+      app:singleLineTitle="false"
+      app:useSimpleSummaryProvider="true" />
 
-    </PreferenceCategory>
+  </PreferenceCategory>
 
-    <PreferenceCategory
-      android:title="@string/preference_category_general">
+  <PreferenceCategory android:title="@string/preference_category_general">
 
-        <SwitchPreference
-          android:defaultValue="true"
-          android:key="useExternalStorage"
-          app:singleLineTitle="false"
-          android:summary="@string/use_external_storage_summary"
-          android:title="@string/use_external_storage" />
+    <SwitchPreference
+      android:defaultValue="true"
+      android:key="useExternalStorage"
+      android:summary="@string/use_external_storage_summary"
+      android:title="@string/use_external_storage"
+      app:singleLineTitle="false" />
 
-        <ListPreference
-          android:key="descriptionDefaultLanguagePref"
-          app:useSimpleSummaryProvider="true"
-          app:singleLineTitle="false"
-          android:title="@string/default_description_language" />
+    <ListPreference
+      android:key="descriptionDefaultLanguagePref"
+      android:title="@string/default_description_language"
+      app:singleLineTitle="false"
+      app:useSimpleSummaryProvider="true" />
 
-        <SwitchPreference
-          android:key="useAuthorName"
-          app:singleLineTitle="false"
-          android:summary="@string/preference_author_name_toggle_summary"
-          android:title="@string/preference_author_name_toggle" />
+    <SwitchPreference
+      android:key="useAuthorName"
+      android:summary="@string/preference_author_name_toggle_summary"
+      android:title="@string/preference_author_name_toggle"
+      app:singleLineTitle="false" />
 
-        <EditTextPreference
-          android:key="authorName"
-          app:singleLineTitle="false"
-          app:dependency="useAuthorName"
-          app:useSimpleSummaryProvider="true"
-          android:title="@string/preference_author_name" />
+    <EditTextPreference
+      android:key="authorName"
+      android:title="@string/preference_author_name"
+      app:dependency="useAuthorName"
+      app:singleLineTitle="false"
+      app:useSimpleSummaryProvider="true" />
 
-        <SwitchPreference
-          android:defaultValue="true"
-          android:key="displayNearbyCardView"
-          app:singleLineTitle="false"
-          android:summary="@string/display_nearby_notification_summary"
-          android:title="@string/display_nearby_notification" />
+    <SwitchPreference
+      android:defaultValue="true"
+      android:key="displayNearbyCardView"
+      android:summary="@string/display_nearby_notification_summary"
+      android:title="@string/display_nearby_notification"
+      app:singleLineTitle="false" />
 
-        <SwitchPreference
-          android:defaultValue="true"
-          android:key="displayLocationPermissionForCardView"
-          app:singleLineTitle="false"
-          android:summary="@string/display_location_permission_explanation"
-          android:title="@string/display_location_permission_title" />
-        <SwitchPreference
-          android:defaultValue="true"
-          android:key="displayCampaignsCardView"
-          app:singleLineTitle="false"
-          android:summary="@string/display_campaigns_explanation"
-          android:title="@string/display_campaigns" />
+    <SwitchPreference
+      android:defaultValue="true"
+      android:key="displayLocationPermissionForCardView"
+      android:summary="@string/display_location_permission_explanation"
+      android:title="@string/display_location_permission_title"
+      app:singleLineTitle="false" />
+    <SwitchPreference
+      android:defaultValue="true"
+      android:key="displayCampaignsCardView"
+      android:summary="@string/display_campaigns_explanation"
+      android:title="@string/display_campaigns"
+      app:singleLineTitle="false" />
 
-    </PreferenceCategory>
+  </PreferenceCategory>
 
-    <PreferenceCategory
-      android:title="@string/preference_category_privacy">
+  <PreferenceCategory android:title="@string/preference_category_privacy">
 
-        <MultiSelectListPreference
-          android:entries="@array/pref_exifTag_entries"
-          android:entryValues="@array/pref_exifTag_values"
-          android:key="managed_exif_tags"
-          app:singleLineTitle="false"
-          android:summary="@string/manage_exif_tags_summary"
-          android:title="@string/manage_exif_tags" />
+    <MultiSelectListPreference
+      android:entries="@array/pref_exifTag_entries"
+      android:entryValues="@array/pref_exifTag_values"
+      android:key="managed_exif_tags"
+      android:summary="@string/manage_exif_tags_summary"
+      android:title="@string/manage_exif_tags"
+      app:singleLineTitle="false" />
 
-    </PreferenceCategory>
+  </PreferenceCategory>
 
-    <!-- The key 'allowGps' was used before and has since been removed based on the discussion at #1599.
-          Do not reuse this key unless you revive the same feature with the changes mentioned at #1599.-->
+  <!-- The key 'allowGps' was used before and has since been removed based on the discussion at #1599.
+        Do not reuse this key unless you revive the same feature with the changes mentioned at #1599.-->
 
-    <PreferenceCategory
-      android:title="@string/preference_category_feedback">
+  <PreferenceCategory android:title="@string/preference_category_feedback">
 
-        <Preference
-          android:key="becomeBetaTester"
-          android:summary="@string/become_a_tester_description"
-          app:singleLineTitle="false"
-          android:title="@string/become_a_tester_title"/>
+    <Preference
+      android:key="becomeBetaTester"
+      android:summary="@string/become_a_tester_description"
+      android:title="@string/become_a_tester_title"
+      app:singleLineTitle="false" />
 
-        <Preference
-          android:key="sendLogFile"
-          android:summary="@string/send_log_file_description"
-          app:singleLineTitle="false"
-          android:title="@string/send_log_file" />
+    <Preference
+      android:key="sendLogFile"
+      android:summary="@string/send_log_file_description"
+      android:title="@string/send_log_file"
+      app:singleLineTitle="false" />
 
-    </PreferenceCategory>
+  </PreferenceCategory>
 </PreferenceScreen>

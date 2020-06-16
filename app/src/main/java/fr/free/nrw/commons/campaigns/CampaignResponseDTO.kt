@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName
 class CampaignResponseDTO {
     @SerializedName("config")
     val campaignConfig: CampaignConfig? = null
+
     @SerializedName("campaigns")
     val campaigns: List<Campaign>? = null
 

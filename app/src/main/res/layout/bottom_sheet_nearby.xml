@@ -1,31 +1,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/bottom_sheet"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="bottom"
-    app:behavior_hideable="true"
-    android:visibility="visible"
-    app:layout_behavior="@string/bottom_sheet_behavior"
-    android:background="@android:color/transparent">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/bottom_sheet"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@android:color/transparent"
+  android:gravity="bottom"
+  android:visibility="visible"
+  app:behavior_hideable="true"
+  app:layout_behavior="@string/bottom_sheet_behavior">
 
-    <RelativeLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:background="@android:color/white">
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
 
     <TextView
       android:id="@+id/no_results_message"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:padding="50dp"
       android:layout_centerInParent="true"
-      android:visibility="gone"
-      android:text="@string/nearby_no_results"/>
+      android:padding="50dp"
+      android:text="@string/nearby_no_results"
+      android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_nearby_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    </RelativeLayout>
+      android:id="@+id/rv_nearby_list"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+  </RelativeLayout>
 </RelativeLayout>

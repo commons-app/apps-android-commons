@@ -3,9 +3,9 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:fresco="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/rl_container"
   android:layout_width="@dimen/big_height"
   android:layout_height="@dimen/big_height"
-  android:id="@+id/rl_container"
   android:background="@drawable/thumbnail_not_selected"
   android:orientation="horizontal">
 
@@ -13,16 +13,16 @@
     android:id="@+id/iv_thumbnail"
     android:layout_width="@dimen/big_height"
     android:layout_height="@dimen/big_height"
-    fresco:actualImageScaleType="fitCenter"/>
+    fresco:actualImageScaleType="fitCenter" />
 
   <ImageView
     android:id="@+id/iv_error"
     android:layout_width="@dimen/half_standard_height"
     android:layout_height="@dimen/half_standard_height"
-    android:layout_alignParentBottom="true"
     android:layout_alignParentRight="true"
+    android:layout_alignParentBottom="true"
     android:layout_gravity="end"
     android:visibility="gone"
     app:srcCompat="@drawable/ic_error_red_24dp"
-    tools:visibility="visible"/>
+    tools:visibility="visible" />
 </RelativeLayout>

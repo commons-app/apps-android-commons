@@ -1,65 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_marginTop="@dimen/activity_margin_vertical"
+  android:layout_marginBottom="@dimen/activity_margin_vertical"
+  android:orientation="vertical">
+
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:orientation="horizontal">
+
+    <RadioButton
+      android:id="@+id/quiz_positive_answer"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_marginLeft="@dimen/activity_margin_horizontal"
+      android:layout_marginRight="@dimen/activity_margin_horizontal"
+      android:textIsSelectable="false" />
+
+    <TextView
+      style="?android:textAppearanceMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="YES"
+      android:textColor="@color/secondaryTextColor" />
+
+    <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="@dimen/activity_margin_horizontal"
+      app:srcCompat="@drawable/ic_done_black_24dp" />
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/activity_margin_vertical"
-    android:layout_marginBottom="@dimen/activity_margin_vertical">
+    android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    <RadioButton
+      android:id="@+id/quiz_negative_answer"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_marginLeft="@dimen/activity_margin_horizontal"
+      android:layout_marginRight="@dimen/activity_margin_horizontal"
+      android:textIsSelectable="false" />
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/quiz_positive_answer"
-            android:textIsSelectable="false"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"/>
+    <TextView
+      style="?android:textAppearanceMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="NO"
+      android:textColor="@color/secondaryTextColor" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="YES"
-            style="?android:textAppearanceMedium"
-            android:textColor="@color/secondaryTextColor" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_done_black_24dp"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_margin_vertical"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textIsSelectable="false"
-            android:id="@+id/quiz_negative_answer"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="NO"
-            style="?android:textAppearanceMedium"
-            android:textColor="@color/secondaryTextColor" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_clear_black_24dp"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal" />
-    </LinearLayout>
+    <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="@dimen/activity_margin_horizontal"
+      app:srcCompat="@drawable/ic_clear_black_24dp" />
+  </LinearLayout>
 </LinearLayout>

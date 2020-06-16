@@ -1,72 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/tutorialBackground"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/huge_gap"
-    android:paddingRight="@dimen/huge_gap">
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="?attr/tutorialBackground"
+  android:gravity="center"
+  android:orientation="vertical"
+  android:paddingLeft="@dimen/huge_gap"
+  android:paddingRight="@dimen/huge_gap">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/welcome_do_upload_content_description"
-        android:src="@drawable/welcome_do_upload" />
+  <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:adjustViewBounds="true"
+    android:contentDescription="@string/welcome_do_upload_content_description"
+    android:src="@drawable/welcome_do_upload" />
+
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/standard_gap"
+    android:layout_marginBottom="@dimen/standard_gap"
+    android:text="@string/tutorial_2_text"
+    android:textAlignment="center"
+    android:textColor="@android:color/white"
+    android:textSize="@dimen/normal_text"
+    android:textStyle="bold" />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <include layout="@layout/welcome_bullet" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/standard_gap"
-        android:layout_marginBottom="@dimen/standard_gap"
-        android:text="@string/tutorial_2_text"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/normal_text"
-        android:textStyle="bold" />
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/tutorial_2_subtext_1"
+      android:textColor="@android:color/white" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+  </LinearLayout>
 
-        <include layout="@layout/welcome_bullet" />
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/tutorial_2_subtext_1"
-            android:textColor="@android:color/white" />
+    <include layout="@layout/welcome_bullet" />
 
-    </LinearLayout>
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/tutorial_2_subtext_2"
+      android:textColor="@android:color/white" />
+  </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
-        <include layout="@layout/welcome_bullet" />
+    <include layout="@layout/welcome_bullet" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/tutorial_2_subtext_2"
-            android:textColor="@android:color/white" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <include layout="@layout/welcome_bullet" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/tutorial_2_subtext_3"
-            android:textColor="@android:color/white" />
-    </LinearLayout>
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/tutorial_2_subtext_3"
+      android:textColor="@android:color/white" />
+  </LinearLayout>
 
 </LinearLayout>

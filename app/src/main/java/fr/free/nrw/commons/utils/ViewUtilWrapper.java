@@ -1,23 +1,22 @@
 package fr.free.nrw.commons.utils;
 
 import android.content.Context;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
 public class ViewUtilWrapper {
 
-    @Inject
-    public ViewUtilWrapper() {
+  @Inject
+  public ViewUtilWrapper() {
 
-    }
+  }
 
-    public void showShortToast(Context context, String text) {
-        ViewUtil.showShortToast(context, text);
-    }
+  public void showShortToast(Context context, String text) {
+    ViewUtil.showShortToast(context, text);
+  }
 
-    public void showLongToast(Context context, String text) {
-        ViewUtil.showLongToast(context, text);
-    }
+  public void showLongToast(Context context, String text) {
+    ViewUtil.showLongToast(context, text);
+  }
 }

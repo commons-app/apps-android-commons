@@ -2,7 +2,6 @@ package fr.free.nrw.commons
 
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Single
-import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
@@ -19,6 +18,7 @@ class MediaDataExtractorTest {
 
     @Mock
     internal var mediaClient: MediaClient? = null
+
     @InjectMocks
     var mediaDataExtractor: MediaDataExtractor? = null
 
@@ -37,13 +37,13 @@ class MediaDataExtractorTest {
     @Test
     fun fetchMediaDetails() {
         `when`(mediaClient?.getMedia(ArgumentMatchers.anyString()))
-                .thenReturn(Single.just(mock(Media::class.java)))
+            .thenReturn(Single.just(mock(Media::class.java)))
 
         `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
-                .thenReturn(Single.just(true))
+            .thenReturn(Single.just(true))
 
         `when`(mediaClient?.getPageHtml(ArgumentMatchers.anyString()))
-                .thenReturn(Single.just("Test"))
+            .thenReturn(Single.just("Test"))
 
         //val fetchMediaDetails = mediaDataExtractor?.fetchMediaDetails("File:Test.jpg", null)
 

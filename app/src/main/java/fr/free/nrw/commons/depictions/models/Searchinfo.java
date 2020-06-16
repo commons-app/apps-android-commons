@@ -1,4 +1,5 @@
 package fr.free.nrw.commons.depictions.models;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,35 +9,33 @@ import com.google.gson.annotations.SerializedName;
 
 public class Searchinfo {
 
-    @SerializedName("totalhits")
-    @Expose
-    private Integer totalhits;
+  @SerializedName("totalhits")
+  @Expose
+  private Integer totalhits;
 
-    /**
-     * No args constructor for use in serialization
-     *
-     */
-    public Searchinfo() {
-    }
+  /**
+   * No args constructor for use in serialization
+   */
+  public Searchinfo() {
+  }
 
-    /**
-     *
-     * @param totalhits
-     */
-    public Searchinfo(Integer totalhits) {
-        super();
-        this.totalhits = totalhits;
-    }
+  /**
+   * @param totalhits
+   */
+  public Searchinfo(Integer totalhits) {
+    super();
+    this.totalhits = totalhits;
+  }
 
-    /**
-     * returns "totalhint" integer in SearchInfo object
-     */
-    public Integer getTotalhits() {
-        return totalhits;
-    }
+  /**
+   * returns "totalhint" integer in SearchInfo object
+   */
+  public Integer getTotalhits() {
+    return totalhits;
+  }
 
-    public void setTotalhits(Integer totalhits) {
-        this.totalhits = totalhits;
-    }
+  public void setTotalhits(Integer totalhits) {
+    this.totalhits = totalhits;
+  }
 
 }

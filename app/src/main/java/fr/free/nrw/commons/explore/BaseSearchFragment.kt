@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_search_paginated.*
 abstract class BaseSearchFragment<T> : CommonsDaggerSupportFragment(),
     SearchFragmentContract.View<T> {
 
-    abstract val pagedListAdapter: PagedListAdapter<T,*>
+    abstract val pagedListAdapter: PagedListAdapter<T, *>
     abstract val injectedPresenter: SearchFragmentContract.Presenter<T>
     abstract val emptyTemplateTextId: Int
     private val loadingAdapter by lazy { FooterAdapter { injectedPresenter.retryFailedRequest() } }

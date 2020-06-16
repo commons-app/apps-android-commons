@@ -1,50 +1,46 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/notification_view"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:foreground="?selectableItemBackground"
+  android:minHeight="@dimen/large_height">
+
+  <androidx.appcompat.widget.AppCompatImageView
+    android:id="@+id/icon"
+    android:layout_width="@dimen/dimen_40"
+    android:layout_height="@dimen/dimen_40"
+    android:layout_marginStart="@dimen/standard_gap"
+    android:layout_marginLeft="@dimen/standard_gap"
+    android:layout_marginTop="@dimen/standard_gap"
+    android:scaleType="centerCrop"
+    app:srcCompat="@drawable/ic_message_black_24dp"
+    app:tint="@color/primaryDarkColor" />
+
+  <TextView
+    android:id="@+id/time"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentRight="true"
+    android:layout_marginLeft="@dimen/standard_gap"
+    android:layout_marginTop="@dimen/standard_gap"
+    android:layout_marginRight="@dimen/standard_gap"
+    android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+  <TextView
+    android:id="@+id/title"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/notification_view"
-    android:foreground="?selectableItemBackground"
-    android:minHeight="@dimen/large_height">
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/icon"
-        android:layout_width="@dimen/dimen_40"
-        android:layout_height="@dimen/dimen_40"
-        android:layout_marginLeft="@dimen/standard_gap"
-        android:layout_marginStart="@dimen/standard_gap"
-        android:layout_marginTop="@dimen/standard_gap"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/ic_message_black_24dp"
-        app:tint="@color/primaryDarkColor"
-        />
-
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="@dimen/standard_gap"
-        android:layout_marginRight="@dimen/standard_gap"
-        android:layout_marginTop="@dimen/standard_gap"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        />
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/time"
-        android:layout_marginLeft="@dimen/standard_gap"
-        android:layout_marginStart="@dimen/standard_gap"
-        android:layout_toEndOf="@id/icon"
-        android:layout_toLeftOf="@id/time"
-        android:layout_toRightOf="@id/icon"
-        android:layout_toStartOf="@id/time"
-        android:ellipsize="end"
-        android:layout_alignParentTop="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:padding="@dimen/medium_height"
-        />
+    android:layout_alignTop="@id/time"
+    android:layout_alignParentTop="true"
+    android:layout_marginStart="@dimen/standard_gap"
+    android:layout_marginLeft="@dimen/standard_gap"
+    android:layout_toStartOf="@id/time"
+    android:layout_toLeftOf="@id/time"
+    android:layout_toEndOf="@id/icon"
+    android:layout_toRightOf="@id/icon"
+    android:ellipsize="end"
+    android:padding="@dimen/medium_height"
+    android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 </RelativeLayout>

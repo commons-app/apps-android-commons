@@ -1,57 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:orientation="vertical">
+
+  <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/orginalImage"
-            android:layout_width="@dimen/giant_height"
-            android:layout_height="@dimen/very_large_height"
-            android:layout_margin="@dimen/progressbar_stroke"
-            app:actualImageScaleType="fitCenter" />
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/possibleImage"
-            android:layout_width="@dimen/giant_height"
-            android:layout_height="@dimen/very_large_height"
-            android:layout_margin="@dimen/progressbar_stroke"
-            app:actualImageScaleType="fitCenter" />
-    </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimen_6"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:text="@string/use_location_from_similar_image"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="match_parent">
-        <View
-            android:layout_width="@dimen/dimen_0"
-            android:layout_height="@dimen/dimen_0"
-            android:layout_weight="1"/>
-        <Button
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_gravity="right"
-            android:id="@+id/negative_button"
-            android:layout_marginRight="@dimen/progressbar_stroke"
-            android:layout_height="wrap_content"
-            android:text="No" />
+    android:orientation="horizontal">
 
-        <Button
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/postive_button"
-            android:layout_gravity="right"
-            android:layout_marginLeft="@dimen/progressbar_stroke"
-            android:text="Yes" />
-    </LinearLayout>
+    <com.facebook.drawee.view.SimpleDraweeView
+      android:id="@+id/orginalImage"
+      android:layout_width="@dimen/giant_height"
+      android:layout_height="@dimen/very_large_height"
+      android:layout_margin="@dimen/progressbar_stroke"
+      app:actualImageScaleType="fitCenter" />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+      android:id="@+id/possibleImage"
+      android:layout_width="@dimen/giant_height"
+      android:layout_height="@dimen/very_large_height"
+      android:layout_margin="@dimen/progressbar_stroke"
+      app:actualImageScaleType="fitCenter" />
+  </LinearLayout>
+
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/dimen_6"
+    android:text="@string/use_location_from_similar_image"
+    android:textAlignment="center" />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <View
+      android:layout_width="@dimen/dimen_0"
+      android:layout_height="@dimen/dimen_0"
+      android:layout_weight="1" />
+
+    <Button
+      android:id="@+id/negative_button"
+      style="@style/Widget.AppCompat.Button.Borderless"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="right"
+      android:layout_marginRight="@dimen/progressbar_stroke"
+      android:text="No" />
+
+    <Button
+      android:id="@+id/postive_button"
+      style="@style/Widget.AppCompat.Button.Borderless"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="right"
+      android:layout_marginLeft="@dimen/progressbar_stroke"
+      android:text="Yes" />
+  </LinearLayout>
 </LinearLayout>

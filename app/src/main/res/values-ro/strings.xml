@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Authors:
+<?xml version="1.0" encoding="utf-8"?><!-- Authors:
 * Abijeet Patro
 * C1pr1an
 * GabiBil
@@ -123,7 +122,7 @@
   <plurals name="share_license_summary">
     <item quantity="one">Această imagine va fi licențiată sub %1$s</item>
     <item quantity="few">Aceste imagini vor fi licenţiate sub %1$s</item>
-    <item quantity="other"/>
+    <item quantity="other" />
   </plurals>
   <string name="media_upload_policy">Prin prezentarea acestei imagini, declar că aceasta este lucrarea mea proprie, că nu conține materiale protejate prin drepturi de autor sau selfiuri și că aderă la &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Descarcă</string>
@@ -422,7 +421,7 @@
   <plurals name="upload_count_title">
     <item quantity="one">%1$d Încarcă</item>
     <item quantity="few">%1$d Încărcări</item>
-    <item quantity="other"/>
+    <item quantity="other" />
   </plurals>
   <string name="navigation_item_bookmarks">Semne de carte</string>
   <string name="title_activity_bookmarks">Semne de carte</string>
@@ -514,7 +513,7 @@
   <plurals name="receiving_shared_content">
     <item quantity="one">Primirea de conținut partajat. Prelucrarea imaginii poate dura ceva timp, în funcție de dimensiunea imaginii și de dispozitivul dvs.</item>
     <item quantity="few">Primirea de conținut partajat. Prelucrarea imaginilor poate dura ceva timp, în funcție de dimensiunea imaginilor și de dispozitivul dvs.</item>
-    <item quantity="other"/>
+    <item quantity="other" />
   </plurals>
   <string name="no_image">Nu s-au folosit imagini</string>
   <string name="no_image_reverted">Nici o imagine nu a fost anulată</string>

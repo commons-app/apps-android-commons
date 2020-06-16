@@ -10,62 +10,63 @@ import java.util.List;
  */
 public interface DepictsContract {
 
-    interface View {
-        /**
-         * Go to category screen
-         */
-        void goToNextScreen();
+  interface View {
 
-        /**
-         * Go to media detail screen
-         */
-        void goToPreviousScreen();
+    /**
+     * Go to category screen
+     */
+    void goToNextScreen();
 
-        /**
-         * show error in case of no depiction selected
-         */
-        void noDepictionSelected();
+    /**
+     * Go to media detail screen
+     */
+    void goToPreviousScreen();
 
-        /**
-         * Show progress/Hide progress depending on the boolean value
-         */
-        void showProgress(boolean shouldShow);
+    /**
+     * show error in case of no depiction selected
+     */
+    void noDepictionSelected();
 
-        /**
-         * decides whether to show error values or not depending on the boolean value
-         */
-        void showError(Boolean value);
+    /**
+     * Show progress/Hide progress depending on the boolean value
+     */
+    void showProgress(boolean shouldShow);
 
-        /**
-         * add depictions to list
-         */
-        void setDepictsList(List<DepictedItem> depictedItemList);
-    }
+    /**
+     * decides whether to show error values or not depending on the boolean value
+     */
+    void showError(Boolean value);
 
-    interface UserActionListener extends BasePresenter<View> {
+    /**
+     * add depictions to list
+     */
+    void setDepictsList(List<DepictedItem> depictedItemList);
+  }
 
-        /**
-         * Takes to previous screen
-         */
-        void onPreviousButtonClicked();
+  interface UserActionListener extends BasePresenter<View> {
 
-        /**
-         * Listener for the depicted items selected from the list
-         */
-        void onDepictItemClicked(DepictedItem depictedItem);
+    /**
+     * Takes to previous screen
+     */
+    void onPreviousButtonClicked();
 
-        /**
-         * asks the repository to fetch depictions for the query
-         *  @param query
-         */
-        void searchForDepictions(String query);
+    /**
+     * Listener for the depicted items selected from the list
+     */
+    void onDepictItemClicked(DepictedItem depictedItem);
 
-        /**
-         * Check if depictions were selected
-         * from the depiction list
-         */
-        void verifyDepictions();
+    /**
+     * asks the repository to fetch depictions for the query
+     *
+     * @param query
+     */
+    void searchForDepictions(String query);
 
-        LiveData<List<DepictedItem>> getDepictedItems();
-    }
+    /**
+     * Check if depictions were selected from the depiction list
+     */
+    void verifyDepictions();
+
+    LiveData<List<DepictedItem>> getDepictedItems();
+  }
 }

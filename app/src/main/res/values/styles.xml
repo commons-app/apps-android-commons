@@ -1,175 +1,177 @@
 <resources>
 
-    <style name="DarkAppTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="contributionsListBackground">@color/contributionListDarkBackground</item>
-        <item name="tabBackground">@color/contributionListDarkBackground</item>
-        <item name="tabIndicatorColor">@color/white</item>
-        <item name="tabSelectedTextColor">@color/white</item>
-        <item name="tabTextColor">@color/white</item>
-        <item name="mainBackground">@color/main_background_dark</item>
-        <item name="achievementBackground">@color/achievement_background_dark</item>
-        <item name="drawerHeaderBackground">@color/drawerHeader_background_dark</item>
-        <item name="tutorialBackground">@color/tutorial_background_dark</item>
-        <item name="icon">@color/primaryTextColor</item>
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorAccent">@color/primaryColor</item>
-        <item name="colorButtonNormal">@color/primaryColor</item>
-        <item name="bookmarkButtonColor">@color/button_blue_dark</item>
-        <item name="rowButtonColor">@color/button_blue_dark</item>
-        <item name="reviewHeading">@color/white</item>
-        <item name="aboutIconsColor">@color/white</item>
+  <style name="DarkAppTheme" parent="Theme.AppCompat.NoActionBar">
+    <item name="contributionsListBackground">@color/contributionListDarkBackground</item>
+    <item name="tabBackground">@color/contributionListDarkBackground</item>
+    <item name="tabIndicatorColor">@color/white</item>
+    <item name="tabSelectedTextColor">@color/white</item>
+    <item name="tabTextColor">@color/white</item>
+    <item name="mainBackground">@color/main_background_dark</item>
+    <item name="achievementBackground">@color/achievement_background_dark</item>
+    <item name="drawerHeaderBackground">@color/drawerHeader_background_dark</item>
+    <item name="tutorialBackground">@color/tutorial_background_dark</item>
+    <item name="icon">@color/primaryTextColor</item>
+    <item name="colorPrimary">@color/primaryColor</item>
+    <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+    <item name="colorAccent">@color/primaryColor</item>
+    <item name="colorButtonNormal">@color/primaryColor</item>
+    <item name="bookmarkButtonColor">@color/button_blue_dark</item>
+    <item name="rowButtonColor">@color/button_blue_dark</item>
+    <item name="reviewHeading">@color/white</item>
+    <item name="aboutIconsColor">@color/white</item>
 
-        <item name="semitransparentText">@color/commons_app_blue_dark</item>
-        <item name="subBackground">@color/sub_background_dark</item>
-        <item name="fragmentCategorisationBackground">@color/fragment_categorisation_background_dark</item>
-        <item name="buttonBackground">@color/button_background_dark</item>
-        <item name="uploadOverlayBackground">@color/upload_overlay_background_dark</item>
-        <item name="spinnerTheme">@style/DarkSpinnerTheme</item>
-        <item name="iconsTheme">@color/main_background_light</item>
-        <item name="bottomBar">@color/bottom_bar_dark</item>
-        <item name="buttonBackgroundFocused">@color/focused_button_dark</item>
-        <item name="buttonBackgroundPressed">@color/pressed_button_dark</item>
-        <item name="textDisabled">@color/disabled_button_text_color_dark</item>
-        <item name="textEnabled">@color/enabled_button_text_color_dark</item>
-        <item name="mainCardBackground">@color/main_background_dark</item>
-        <item name="mainScreenNearbyPermissionbutton">@style/DarkFlatNearbyPermissionButton</item>
-        <item name="iconInfo24">@drawable/ic_info_outline_24dp</item>
-        <item name="iconMap24" >@drawable/ic_map_white_24dp</item>
-        <item name="mediaDetailsText" >@color/white</item>
-        <item name="mediaDetailsHeadingText">@color/layout_light_grey</item>
-        <item name="mediaDetailNominationBackground">@color/deleteRedDark</item>
-        <item name="mediaDetailSpacerColor">@color/browser_actions_divider_color</item>
-    </style>
+    <item name="semitransparentText">@color/commons_app_blue_dark</item>
+    <item name="subBackground">@color/sub_background_dark</item>
+    <item name="fragmentCategorisationBackground">@color/fragment_categorisation_background_dark
+    </item>
+    <item name="buttonBackground">@color/button_background_dark</item>
+    <item name="uploadOverlayBackground">@color/upload_overlay_background_dark</item>
+    <item name="spinnerTheme">@style/DarkSpinnerTheme</item>
+    <item name="iconsTheme">@color/main_background_light</item>
+    <item name="bottomBar">@color/bottom_bar_dark</item>
+    <item name="buttonBackgroundFocused">@color/focused_button_dark</item>
+    <item name="buttonBackgroundPressed">@color/pressed_button_dark</item>
+    <item name="textDisabled">@color/disabled_button_text_color_dark</item>
+    <item name="textEnabled">@color/enabled_button_text_color_dark</item>
+    <item name="mainCardBackground">@color/main_background_dark</item>
+    <item name="mainScreenNearbyPermissionbutton">@style/DarkFlatNearbyPermissionButton</item>
+    <item name="iconInfo24">@drawable/ic_info_outline_24dp</item>
+    <item name="iconMap24">@drawable/ic_map_white_24dp</item>
+    <item name="mediaDetailsText">@color/white</item>
+    <item name="mediaDetailsHeadingText">@color/layout_light_grey</item>
+    <item name="mediaDetailNominationBackground">@color/deleteRedDark</item>
+    <item name="mediaDetailSpacerColor">@color/browser_actions_divider_color</item>
+  </style>
 
-    <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="contributionsListBackground">@color/white</item>
-        <item name="tabBackground">@color/primaryColor</item>
-        <item name="tabIndicatorColor">@color/white</item>
-        <item name="tabSelectedTextColor">@color/white</item>
-        <item name="tabTextColor">@color/white</item>
-        <item name="mainBackground">@color/main_background_light</item>
-        <item name="achievementBackground">@color/achievement_background_light</item>
-        <item name="drawerHeaderBackground">@color/drawerHeader_background_light</item>
-        <item name="tutorialBackground">@color/tutorial_background_light</item>
-        <item name="icon">@color/secondaryTextColor</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorAccent">@color/primaryColor</item>
-        <item name="colorButtonNormal">@color/primaryColor</item>
-        <item name="bookmarkButtonColor">@color/button_blue</item>
-        <item name="rowButtonColor">@color/button_blue</item>
-        <item name="reviewHeading">@color/black</item>
-        <item name="aboutIconsColor">@color/black</item>
+  <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="contributionsListBackground">@color/white</item>
+    <item name="tabBackground">@color/primaryColor</item>
+    <item name="tabIndicatorColor">@color/white</item>
+    <item name="tabSelectedTextColor">@color/white</item>
+    <item name="tabTextColor">@color/white</item>
+    <item name="mainBackground">@color/main_background_light</item>
+    <item name="achievementBackground">@color/achievement_background_light</item>
+    <item name="drawerHeaderBackground">@color/drawerHeader_background_light</item>
+    <item name="tutorialBackground">@color/tutorial_background_light</item>
+    <item name="icon">@color/secondaryTextColor</item>
+    <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+    <item name="colorAccent">@color/primaryColor</item>
+    <item name="colorButtonNormal">@color/primaryColor</item>
+    <item name="bookmarkButtonColor">@color/button_blue</item>
+    <item name="rowButtonColor">@color/button_blue</item>
+    <item name="reviewHeading">@color/black</item>
+    <item name="aboutIconsColor">@color/black</item>
 
-        <item name="semitransparentText">@color/commons_app_blue_light</item>
-        <item name="subBackground">@color/sub_background_light</item>
-        <item name="fragmentCategorisationBackground">@color/fragment_categorisation_background_light</item>
-        <item name="buttonBackground">@color/button_background_light</item>
-        <item name="uploadOverlayBackground">@color/upload_overlay_background_light</item>
-        <item name="spinnerTheme">@style/LightSpinnerTheme</item>
-        <item name="iconsTheme">@color/main_background_dark</item>
-        <item name="bottomBar">@color/bottom_bar_light</item>
-        <item name="buttonBackgroundFocused">@color/focused_button_light</item>
-        <item name="buttonBackgroundPressed">@color/pressed_button_light</item>
-        <item name="textDisabled">@color/disabled_button_text_color_light</item>
-        <item name="textEnabled">@color/enabled_button_text_color_light</item>
-        <item name="mainCardBackground">@color/primaryDarkColor</item>
-        <item name="mainScreenNearbyPermissionbutton">@style/LightFlatNearbyPermissionButton</item>
-        <item name="iconInfo24">@drawable/ic_info_outline_dark_24dp</item>
-        <item name="iconMap24">@drawable/ic_map_dark_24dp</item>
-        <item name="mediaDetailsText">@color/enabled_button_text_color_light</item>
-        <item name="mediaDetailsHeadingText">@color/primaryDarkColor</item>
-        <item name="mediaDetailNominationBackground">@color/deleteRed</item>
-        <item name="mediaDetailSpacerColor">@color/divider_grey</item>
-    </style>
+    <item name="semitransparentText">@color/commons_app_blue_light</item>
+    <item name="subBackground">@color/sub_background_light</item>
+    <item name="fragmentCategorisationBackground">@color/fragment_categorisation_background_light
+    </item>
+    <item name="buttonBackground">@color/button_background_light</item>
+    <item name="uploadOverlayBackground">@color/upload_overlay_background_light</item>
+    <item name="spinnerTheme">@style/LightSpinnerTheme</item>
+    <item name="iconsTheme">@color/main_background_dark</item>
+    <item name="bottomBar">@color/bottom_bar_light</item>
+    <item name="buttonBackgroundFocused">@color/focused_button_light</item>
+    <item name="buttonBackgroundPressed">@color/pressed_button_light</item>
+    <item name="textDisabled">@color/disabled_button_text_color_light</item>
+    <item name="textEnabled">@color/enabled_button_text_color_light</item>
+    <item name="mainCardBackground">@color/primaryDarkColor</item>
+    <item name="mainScreenNearbyPermissionbutton">@style/LightFlatNearbyPermissionButton</item>
+    <item name="iconInfo24">@drawable/ic_info_outline_dark_24dp</item>
+    <item name="iconMap24">@drawable/ic_map_dark_24dp</item>
+    <item name="mediaDetailsText">@color/enabled_button_text_color_light</item>
+    <item name="mediaDetailsHeadingText">@color/primaryDarkColor</item>
+    <item name="mediaDetailNominationBackground">@color/deleteRed</item>
+    <item name="mediaDetailSpacerColor">@color/divider_grey</item>
+  </style>
 
-    <style name="WhiteSearchBarTheme" parent="DarkAppTheme">
-        <item name="colorControlActivated">@android:color/white</item>
-    </style>
+  <style name="WhiteSearchBarTheme" parent="DarkAppTheme">
+    <item name="colorControlActivated">@android:color/white</item>
+  </style>
 
-    <style name="DarkSpinnerTheme" parent="DarkAppTheme">
-        <item name="colorControlNormal">#ffffff</item>
-    </style>
+  <style name="DarkSpinnerTheme" parent="DarkAppTheme">
+    <item name="colorControlNormal">#ffffff</item>
+  </style>
 
-    <style name="LightSpinnerTheme" parent="LightAppTheme">
-        <item name="colorControlNormal">#ffffff</item>
-    </style>
+  <style name="LightSpinnerTheme" parent="LightAppTheme">
+    <item name="colorControlNormal">#ffffff</item>
+  </style>
 
-    <style name="DarkFlatNearbyPermissionButton" parent="DarkAppTheme">
-        <item name="colorControlHighlight">@color/contributionListDarkBackground</item>
-    </style>
+  <style name="DarkFlatNearbyPermissionButton" parent="DarkAppTheme">
+    <item name="colorControlHighlight">@color/contributionListDarkBackground</item>
+  </style>
 
-    <style name="LightFlatNearbyPermissionButton" parent="LightAppTheme">
-        <item name="colorControlHighlight">@color/primaryColor</item>
-    </style>
+  <style name="LightFlatNearbyPermissionButton" parent="LightAppTheme">
+    <item name="colorControlHighlight">@color/primaryColor</item>
+  </style>
 
-    <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal" />
+  <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal" />
 
-    <style name="borderless_dialog">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:background">@android:color/transparent</item>
-    </style>
+  <style name="borderless_dialog">
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowIsFloating">true</item>
+    <item name="android:background">@android:color/transparent</item>
+  </style>
 
-    <style name="LevelOne">
-        <item name="boundary">#ddb4aa</item>
-        <item name="camera">#ae403a</item>
-        <item name="centerRegion">#bc6853</item>
-    </style>
+  <style name="LevelOne">
+    <item name="boundary">#ddb4aa</item>
+    <item name="camera">#ae403a</item>
+    <item name="centerRegion">#bc6853</item>
+  </style>
 
-    <style name="LevelTwo">
-        <item name="boundary">#a8a8c0</item>
-        <item name="camera">#604890</item>
-        <item name="centerRegion">#6060a8</item>
-    </style>
+  <style name="LevelTwo">
+    <item name="boundary">#a8a8c0</item>
+    <item name="camera">#604890</item>
+    <item name="centerRegion">#6060a8</item>
+  </style>
 
-    <style name="LevelThree">
-        <item name="boundary">#90c0a8</item>
-        <item name="camera">#487878</item>
-        <item name="centerRegion">#48a8a8</item>
-    </style>
+  <style name="LevelThree">
+    <item name="boundary">#90c0a8</item>
+    <item name="camera">#487878</item>
+    <item name="centerRegion">#48a8a8</item>
+  </style>
 
-    <style name="LevelFour">
-        <item name="boundary">#ffc078</item>
-        <item name="camera">#d87818</item>
-        <item name="centerRegion">#f09018</item>
-    </style>
+  <style name="LevelFour">
+    <item name="boundary">#ffc078</item>
+    <item name="camera">#d87818</item>
+    <item name="centerRegion">#f09018</item>
+  </style>
 
-    <style name="LevelFive">
-        <item name="boundary">#c0a8c0</item>
-        <item name="camera">#784878</item>
-        <item name="centerRegion">#906078</item>
-    </style>
+  <style name="LevelFive">
+    <item name="boundary">#c0a8c0</item>
+    <item name="camera">#784878</item>
+    <item name="centerRegion">#906078</item>
+  </style>
 
-    <style name="MediaDetailContainer">
-        <item name="android:paddingLeft">@dimen/quarter_standard_height</item>
-        <item name="android:paddingRight">@dimen/quarter_standard_height</item>
-        <item name="android:paddingTop">@dimen/tiny_gap</item>
-        <item name="android:paddingBottom">@dimen/tiny_gap</item>
-    </style>
+  <style name="MediaDetailContainer">
+    <item name="android:paddingLeft">@dimen/quarter_standard_height</item>
+    <item name="android:paddingRight">@dimen/quarter_standard_height</item>
+    <item name="android:paddingTop">@dimen/tiny_gap</item>
+    <item name="android:paddingBottom">@dimen/tiny_gap</item>
+  </style>
 
-    <style name="MediaDetailTextLabel">
-        <item name="android:layout_weight">30</item>
-        <item name="android:paddingTop">@dimen/dimen_6</item>
-        <item name="android:paddingLeft">@dimen/tiny_gap</item>
-        <item name="android:textSize">@dimen/normal_text</item>
-        <item name="android:textStyle">bold</item>
-    </style>
+  <style name="MediaDetailTextLabel">
+    <item name="android:layout_weight">30</item>
+    <item name="android:paddingTop">@dimen/dimen_6</item>
+    <item name="android:paddingLeft">@dimen/tiny_gap</item>
+    <item name="android:textSize">@dimen/normal_text</item>
+    <item name="android:textStyle">bold</item>
+  </style>
 
-    <style name="MediaDetailTextLabelTitle" parent="@style/MediaDetailTextLabel">
-        <item name="android:textColor">@android:color/white</item>
-    </style>
+  <style name="MediaDetailTextLabelTitle" parent="@style/MediaDetailTextLabel">
+    <item name="android:textColor">@android:color/white</item>
+  </style>
 
-    <style name="MediaDetailTextLabelGeneric" parent="@style/MediaDetailTextLabel">
-        <item name="android:textColor">?attr/mediaDetailsHeadingText</item>
-    </style>
+  <style name="MediaDetailTextLabelGeneric" parent="@style/MediaDetailTextLabel">
+    <item name="android:textColor">?attr/mediaDetailsHeadingText</item>
+  </style>
 
-    <style name="MediaDetailTextBody">
-        <item name="android:layout_weight">70</item>
-        <item name="android:layout_gravity">start</item>
-        <item name="android:padding">@dimen/small_gap</item>
-        <item name="android:textColor">?attr/mediaDetailsText</item>
-        <item name="android:textSize">@dimen/description_text_size</item>
-    </style>
+  <style name="MediaDetailTextBody">
+    <item name="android:layout_weight">70</item>
+    <item name="android:layout_gravity">start</item>
+    <item name="android:padding">@dimen/small_gap</item>
+    <item name="android:textColor">?attr/mediaDetailsText</item>
+    <item name="android:textSize">@dimen/description_text_size</item>
+  </style>
 
 </resources>

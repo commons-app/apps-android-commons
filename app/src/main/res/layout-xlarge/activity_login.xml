@@ -1,247 +1,248 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
 
-    <LinearLayout
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+      android:layout_width="@dimen/landscape_width"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_marginTop="@dimen/small_gap">
+
+      <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginStart="@dimen/standard_gap"
+        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginTop="@dimen/large_gap"
+        android:layout_marginEnd="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_marginBottom="@dimen/standard_gap"
+        app:cardCornerRadius="@dimen/tiny_margin"
+        app:cardElevation="@dimen/tiny_margin">
 
-        <FrameLayout
-            android:layout_width="@dimen/landscape_width"
+        <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:orientation="vertical">
+
+          <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/small_gap">
+            android:background="@color/primaryColor"
+            android:gravity="center"
+            android:paddingTop="@dimen/large_gap"
+            android:paddingBottom="@dimen/large_gap"
+            android:text="@string/login_to_your_account"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/heading_text_size" />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/standard_gap"
-                android:layout_marginEnd="@dimen/standard_gap"
-                android:layout_marginLeft="@dimen/standard_gap"
-                android:layout_marginRight="@dimen/standard_gap"
-                android:layout_marginStart="@dimen/standard_gap"
-                android:layout_marginTop="@dimen/large_gap"
-                app:cardCornerRadius="@dimen/tiny_margin"
-                app:cardElevation="@dimen/tiny_margin">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/primaryColor"
-                        android:gravity="center"
-                        android:paddingBottom="@dimen/large_gap"
-                        android:paddingTop="@dimen/large_gap"
-                        android:text="@string/login_to_your_account"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/heading_text_size" />
-
-                    <TextView
-                        android:id="@+id/login_credentials"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/title"
-                        android:layout_marginEnd="@dimen/standard_gap"
-                        android:layout_marginLeft="@dimen/standard_gap"
-                        android:layout_marginRight="@dimen/standard_gap"
-                        android:layout_marginStart="@dimen/standard_gap"
-                        android:paddingBottom="@dimen/standard_gap"
-                        android:paddingTop="@dimen/small_gap"
-                        android:textAlignment="center"
-                        android:textColor="@color/secondaryDarkColor"
-                        tools:text="@string/login_credential" />
-
-                    <FrameLayout
-                        android:id="@+id/error_message_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/login_credentials"
-                        android:visibility="gone"
-                        tools:visibility="visible">
-
-                        <TextView
-                            android:id="@+id/error_message"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/standard_gap"
-                            android:layout_marginLeft="@dimen/standard_gap"
-                            android:layout_marginRight="@dimen/standard_gap"
-                            android:layout_marginStart="@dimen/standard_gap"
-                            android:gravity="center"
-                            android:paddingBottom="@dimen/small_gap"
-                            android:paddingTop="@dimen/small_gap"
-                            android:textColor="@color/secondaryDarkColor"
-                            tools:text="Check your password, something doesnt look right" />
-                    </FrameLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/username_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/error_message_container"
-                        android:layout_marginBottom="@dimen/standard_gap"
-                        android:layout_marginEnd="@dimen/standard_gap"
-                        android:layout_marginLeft="@dimen/standard_gap"
-                        android:layout_marginRight="@dimen/standard_gap"
-                        android:layout_marginStart="@dimen/standard_gap"
-                        android:layout_marginTop="@dimen/standard_gap">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/login_username"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/username"
-                            android:imeOptions="flagNoExtractUi"
-                            android:inputType="textNoSuggestions">
-
-                            <requestFocus />
-
-                        </com.google.android.material.textfield.TextInputEditText>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/password_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/username_container"
-                        android:layout_marginBottom="@dimen/standard_gap"
-                        android:layout_marginEnd="@dimen/standard_gap"
-                        android:layout_marginLeft="@dimen/standard_gap"
-                        android:layout_marginRight="@dimen/standard_gap"
-                        android:layout_marginStart="@dimen/standard_gap"
-                        app:passwordToggleEnabled="true">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/login_password"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/password"
-                            android:imeOptions="flagNoExtractUi"
-                            android:inputType="textPassword" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/two_factor_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/password_container"
-                        android:layout_marginBottom="@dimen/standard_gap"
-                        android:layout_marginEnd="@dimen/standard_gap"
-                        android:layout_marginLeft="@dimen/standard_gap"
-                        android:layout_marginRight="@dimen/standard_gap"
-                        android:layout_marginStart="@dimen/standard_gap"
-                        android:visibility="gone"
-                        app:passwordToggleEnabled="false"
-                        tools:visibility="visible">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/login_two_factor"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/_2fa_code"
-                            android:imeOptions="flagNoExtractUi"
-                            android:inputType="number"
-                            android:visibility="gone"
-                            tools:visibility="visible" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <LinearLayout
-                        android:id="@+id/buttonFrame"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/two_factor_container"
-                        android:layout_marginBottom="@dimen/standard_gap"
-                        android:layout_marginEnd="@dimen/standard_gap"
-                        android:layout_marginLeft="@dimen/standard_gap"
-                        android:layout_marginRight="@dimen/standard_gap"
-                        android:layout_marginStart="@dimen/standard_gap">
-
-                        <Button
-                            android:id="@+id/sign_up_button"
-                            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                            android:layout_width="@dimen/dimen_0"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginEnd="@dimen/small_gap"
-                            android:layout_marginRight="@dimen/small_gap"
-                            android:layout_weight="1"
-                            android:text="@string/signup" />
-
-                        <Button
-                            android:id="@+id/login_button"
-                            style="@style/Widget.AppCompat.Button.Colored"
-                            android:layout_width="@dimen/dimen_0"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/small_gap"
-                            android:layout_marginStart="@dimen/small_gap"
-                            android:layout_weight="1"
-                            android:enabled="false"
-                            android:text="@string/login" />
-
-                    </LinearLayout>
-
-                    <fr.free.nrw.commons.ui.widget.HtmlTextView
-                        android:visibility="visible"
-                        android:id="@+id/forgot_password"
-                        android:layout_width="match_parent"
-                        android:gravity="center_horizontal"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/buttonFrame"
-                        android:layout_marginBottom="@dimen/standard_gap"
-                        android:text="@string/forgot_password"
-                        android:textColor="@color/status_bar_blue"/>
-
-                    <fr.free.nrw.commons.ui.widget.HtmlTextView
-                        android:id="@+id/skip_login"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/standard_gap"
-                        android:layout_below="@id/forgot_password"
-                        android:gravity="center_horizontal"
-                        android:text="@string/skip_login"
-                        android:visibility="visible"/>
-
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/gigantic_gap"
-                android:layout_height="@dimen/gigantic_gap"
-                android:layout_gravity="center_horizontal"
-                android:elevation="@dimen/activity_margin_horizontal"
-                app:srcCompat="@drawable/blue_rinse_circle"
-                tools:ignore="UnusedAttribute" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/dimen_42"
-                android:layout_height="@dimen/dimen_42"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:elevation="@dimen/activity_margin_horizontal"
-                app:srcCompat="@drawable/commons_logo"
-                tools:ignore="UnusedAttribute" />
-
-        </FrameLayout>
-        <fr.free.nrw.commons.ui.widget.HtmlTextView
-            android:id="@+id/about_privacy_policy"
-            style="?android:textAppearanceSmall"
-            android:layout_width="wrap_content"
+          <TextView
+            android:id="@+id/login_credentials"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_marginStart="@dimen/standard_gap"
+            android:layout_marginLeft="@dimen/standard_gap"
+            android:layout_marginEnd="@dimen/standard_gap"
+            android:layout_marginRight="@dimen/standard_gap"
+            android:paddingTop="@dimen/small_gap"
+            android:paddingBottom="@dimen/standard_gap"
+            android:textAlignment="center"
+            android:textColor="@color/secondaryDarkColor"
+            tools:text="@string/login_credential" />
+
+          <FrameLayout
+            android:id="@+id/error_message_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_credentials"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+              android:id="@+id/error_message"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="@dimen/standard_gap"
+              android:layout_marginLeft="@dimen/standard_gap"
+              android:layout_marginEnd="@dimen/standard_gap"
+              android:layout_marginRight="@dimen/standard_gap"
+              android:gravity="center"
+              android:paddingTop="@dimen/small_gap"
+              android:paddingBottom="@dimen/small_gap"
+              android:textColor="@color/secondaryDarkColor"
+              tools:text="Check your password, something doesnt look right" />
+          </FrameLayout>
+
+          <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/username_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/error_message_container"
+            android:layout_marginStart="@dimen/standard_gap"
+            android:layout_marginLeft="@dimen/standard_gap"
+            android:layout_marginTop="@dimen/standard_gap"
+            android:layout_marginEnd="@dimen/standard_gap"
+            android:layout_marginRight="@dimen/standard_gap"
+            android:layout_marginBottom="@dimen/standard_gap">
+
+            <com.google.android.material.textfield.TextInputEditText
+              android:id="@+id/login_username"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:hint="@string/username"
+              android:imeOptions="flagNoExtractUi"
+              android:inputType="textNoSuggestions">
+
+              <requestFocus />
+
+            </com.google.android.material.textfield.TextInputEditText>
+
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/username_container"
+            android:layout_marginStart="@dimen/standard_gap"
+            android:layout_marginLeft="@dimen/standard_gap"
+            android:layout_marginEnd="@dimen/standard_gap"
+            android:layout_marginRight="@dimen/standard_gap"
             android:layout_marginBottom="@dimen/standard_gap"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/about_privacy_policy"/>
-    </LinearLayout>
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+              android:id="@+id/login_password"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:hint="@string/password"
+              android:imeOptions="flagNoExtractUi"
+              android:inputType="textPassword" />
+
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/two_factor_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/password_container"
+            android:layout_marginStart="@dimen/standard_gap"
+            android:layout_marginLeft="@dimen/standard_gap"
+            android:layout_marginEnd="@dimen/standard_gap"
+            android:layout_marginRight="@dimen/standard_gap"
+            android:layout_marginBottom="@dimen/standard_gap"
+            android:visibility="gone"
+            app:passwordToggleEnabled="false"
+            tools:visibility="visible">
+
+            <com.google.android.material.textfield.TextInputEditText
+              android:id="@+id/login_two_factor"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:hint="@string/_2fa_code"
+              android:imeOptions="flagNoExtractUi"
+              android:inputType="number"
+              android:visibility="gone"
+              tools:visibility="visible" />
+
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <LinearLayout
+            android:id="@+id/buttonFrame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/two_factor_container"
+            android:layout_marginStart="@dimen/standard_gap"
+            android:layout_marginLeft="@dimen/standard_gap"
+            android:layout_marginEnd="@dimen/standard_gap"
+            android:layout_marginRight="@dimen/standard_gap"
+            android:layout_marginBottom="@dimen/standard_gap">
+
+            <Button
+              android:id="@+id/sign_up_button"
+              style="@style/Widget.AppCompat.Button.Borderless.Colored"
+              android:layout_width="@dimen/dimen_0"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center_horizontal"
+              android:layout_marginEnd="@dimen/small_gap"
+              android:layout_marginRight="@dimen/small_gap"
+              android:layout_weight="1"
+              android:text="@string/signup" />
+
+            <Button
+              android:id="@+id/login_button"
+              style="@style/Widget.AppCompat.Button.Colored"
+              android:layout_width="@dimen/dimen_0"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="@dimen/small_gap"
+              android:layout_marginLeft="@dimen/small_gap"
+              android:layout_weight="1"
+              android:enabled="false"
+              android:text="@string/login" />
+
+          </LinearLayout>
+
+          <fr.free.nrw.commons.ui.widget.HtmlTextView
+            android:id="@+id/forgot_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buttonFrame"
+            android:layout_marginBottom="@dimen/standard_gap"
+            android:gravity="center_horizontal"
+            android:text="@string/forgot_password"
+            android:textColor="@color/status_bar_blue"
+            android:visibility="visible" />
+
+          <fr.free.nrw.commons.ui.widget.HtmlTextView
+            android:id="@+id/skip_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/forgot_password"
+            android:layout_marginBottom="@dimen/standard_gap"
+            android:gravity="center_horizontal"
+            android:text="@string/skip_login"
+            android:visibility="visible" />
+
+        </RelativeLayout>
+      </androidx.cardview.widget.CardView>
+
+      <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="@dimen/gigantic_gap"
+        android:layout_height="@dimen/gigantic_gap"
+        android:layout_gravity="center_horizontal"
+        android:elevation="@dimen/activity_margin_horizontal"
+        app:srcCompat="@drawable/blue_rinse_circle"
+        tools:ignore="UnusedAttribute" />
+
+      <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="@dimen/dimen_42"
+        android:layout_height="@dimen/dimen_42"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/activity_margin_horizontal"
+        android:elevation="@dimen/activity_margin_horizontal"
+        app:srcCompat="@drawable/commons_logo"
+        tools:ignore="UnusedAttribute" />
+
+    </FrameLayout>
+
+    <fr.free.nrw.commons.ui.widget.HtmlTextView
+      android:id="@+id/about_privacy_policy"
+      style="?android:textAppearanceSmall"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginBottom="@dimen/standard_gap"
+      android:text="@string/about_privacy_policy" />
+  </LinearLayout>
 
 </ScrollView>

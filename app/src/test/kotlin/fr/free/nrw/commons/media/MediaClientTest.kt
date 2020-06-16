@@ -8,16 +8,13 @@ import junit.framework.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.mockito.*
+import org.mockito.Mockito.*
 import org.wikipedia.dataclient.mwapi.ImageDetails
 import org.wikipedia.dataclient.mwapi.MwQueryPage
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import org.wikipedia.dataclient.mwapi.MwQueryResult
 import org.wikipedia.gallery.ImageInfo
-import org.mockito.ArgumentCaptor
-import org.mockito.ArgumentMatchers.*
 import java.util.*
-import org.mockito.Captor
-import org.mockito.Mockito.*
 
 
 class MediaClientTest {

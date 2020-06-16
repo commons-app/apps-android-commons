@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/nearby_info_menu_commons_article"
-        android:title="@string/nearby_info_menu_commons_article"
-        />
-    <item android:id="@+id/nearby_info_menu_wikidata_article"
-        android:title="@string/nearby_info_menu_wikidata_article"
-        />
-    <item android:id="@+id/nearby_info_menu_wikipedia_article"
-        android:title="@string/nearby_info_menu_wikipedia_article"
-        />
+  <item
+    android:id="@+id/nearby_info_menu_commons_article"
+    android:title="@string/nearby_info_menu_commons_article" />
+  <item
+    android:id="@+id/nearby_info_menu_wikidata_article"
+    android:title="@string/nearby_info_menu_wikidata_article" />
+  <item
+    android:id="@+id/nearby_info_menu_wikipedia_article"
+    android:title="@string/nearby_info_menu_wikipedia_article" />
 </menu>

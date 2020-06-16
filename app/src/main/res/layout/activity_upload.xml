@@ -1,78 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/upload_root_layout"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/upload_root_layout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <fr.free.nrw.commons.contributions.UnswipableViewPager
+    android:id="@+id/vp_upload"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-  <fr.free.nrw.commons.contributions.UnswipableViewPager
-      android:id="@+id/vp_upload"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="@color/commons_app_blue_dark"
-      />
+    android:background="@color/commons_app_blue_dark" />
+
   <androidx.cardview.widget.CardView
-      android:id="@+id/cv_container_top_card"
+    android:id="@+id/cv_container_top_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/activity_margin_horizontal"
+    android:layout_marginLeft="@dimen/activity_margin_horizontal"
+    android:layout_marginTop="@dimen/standard_gap"
+    android:layout_marginEnd="@dimen/activity_margin_horizontal"
+    android:layout_marginRight="@dimen/activity_margin_horizontal"
+    android:layout_marginBottom="@dimen/activity_margin_horizontal"
+    android:elevation="@dimen/cardview_default_elevation">
+
+    <LinearLayout
+      android:id="@+id/ll_container_top_card"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/activity_margin_horizontal"
-      android:layout_marginEnd="@dimen/activity_margin_horizontal"
-      android:layout_marginLeft="@dimen/activity_margin_horizontal"
-      android:layout_marginRight="@dimen/activity_margin_horizontal"
-      android:layout_marginStart="@dimen/activity_margin_horizontal"
-      android:layout_marginTop="@dimen/standard_gap"
-      android:elevation="@dimen/cardview_default_elevation"
-      >
-    <LinearLayout
-        android:id="@+id/ll_container_top_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/standard_gap"
-        >
+      android:orientation="vertical"
+      android:padding="@dimen/standard_gap">
 
       <RelativeLayout
-          android:id="@+id/rl_container_title"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          >
+        android:id="@+id/rl_container_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
         <TextView
-            android:id="@+id/tv_top_card_title"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/half_standard_height"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="@dimen/small_gap"
-            android:textSize="@dimen/normal_text"
-            android:textStyle="bold"
-            tools:text="4 Uploads"
-            />
+          android:id="@+id/tv_top_card_title"
+          android:layout_width="wrap_content"
+          android:layout_height="@dimen/half_standard_height"
+          android:layout_alignParentStart="true"
+          android:layout_alignParentLeft="true"
+          android:layout_centerVertical="true"
+          android:layout_marginTop="@dimen/small_gap"
+          android:textSize="@dimen/normal_text"
+          android:textStyle="bold"
+          tools:text="4 Uploads" />
+
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/ib_toggle_top_card"
-            android:layout_width="@dimen/half_standard_height"
-            android:layout_height="@dimen/half_standard_height"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="@dimen/small_gap"
-            android:layout_marginEnd="@dimen/small_gap"
-            android:layout_marginStart="@dimen/small_gap"
-            android:clickable="false"
-            android:focusable="false"
-            app:srcCompat="@drawable/ic_expand_less_black_24dp"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            />
+          android:id="@+id/ib_toggle_top_card"
+          style="@style/Widget.AppCompat.Button.Borderless"
+          android:layout_width="@dimen/half_standard_height"
+          android:layout_height="@dimen/half_standard_height"
+          android:layout_alignParentEnd="true"
+          android:layout_alignParentRight="true"
+          android:layout_centerVertical="true"
+          android:layout_marginStart="@dimen/small_gap"
+          android:layout_marginEnd="@dimen/small_gap"
+          android:layout_marginBottom="@dimen/small_gap"
+          android:clickable="false"
+          android:focusable="false"
+          app:srcCompat="@drawable/ic_expand_less_black_24dp" />
 
       </RelativeLayout>
 
       <androidx.recyclerview.widget.RecyclerView
-          android:id="@+id/rv_thumbnails"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="@dimen/small_gap"
-          />
+        android:id="@+id/rv_thumbnails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_gap" />
 
     </LinearLayout>
   </androidx.cardview.widget.CardView>

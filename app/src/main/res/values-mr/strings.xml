@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Authors:
+<?xml version="1.0" encoding="utf-8"?><!-- Authors:
 * Abijeet Patro
 * Liuxinyu970226
 * Sureshkhole
@@ -231,7 +230,7 @@
   <string name="notifications_thank_you_edit">तुमच्या संपादनासाठी तुमचे आभार !</string>
   <string name="notifications_mention">%1$s यांनी तुमचा उल्लेख %2$s येथे केला.</string>
   <string name="toggle_view_button">टॉगल दृश्य</string>
-  <string name="about_rate_us" fuzzy="true"/>
+  <string name="about_rate_us" fuzzy="true" />
   <string name="about_faq" fuzzy="true">सतत विचारले जाणारे प्रश्न</string>
   <string name="welcome_skip_button">ट्यूटोरियल वगळा</string>
 </resources>

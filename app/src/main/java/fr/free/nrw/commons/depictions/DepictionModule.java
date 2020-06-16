@@ -8,20 +8,21 @@ import fr.free.nrw.commons.depictions.subClass.SubDepictionListContract;
 import fr.free.nrw.commons.depictions.subClass.SubDepictionListPresenter;
 
 /**
- * The Dagger Module for explore:depictions related presenters and (some other objects maybe in future)
+ * The Dagger Module for explore:depictions related presenters and (some other objects maybe in
+ * future)
  */
 @Module
 public abstract class DepictionModule {
 
-    @Binds
-    public abstract DepictedImagesContract.UserActionListener bindsDepictedImagesPresenter(
-            DepictedImagesPresenter
-                    presenter
-    );
+  @Binds
+  public abstract DepictedImagesContract.UserActionListener bindsDepictedImagesPresenter(
+      DepictedImagesPresenter
+          presenter
+  );
 
-    @Binds
-    public abstract SubDepictionListContract.UserActionListener bindsSubDepictionListPresenter(
-            SubDepictionListPresenter
-            presenter
-    );
+  @Binds
+  public abstract SubDepictionListContract.UserActionListener bindsSubDepictionListPresenter(
+      SubDepictionListPresenter
+          presenter
+  );
 }

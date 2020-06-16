@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
-    <cache-path name="images" path="images/" />
-    <external-path name="Download" path="./"/>
-    <root-path name="root" path="." />
-    <external-cache-path name="external_cache_path" path="."/>
+  <cache-path
+    name="images"
+    path="images/" />
+  <external-path
+    name="Download"
+    path="./" />
+  <root-path
+    name="root"
+    path="." />
+  <external-cache-path
+    name="external_cache_path"
+    path="." />
 </paths>

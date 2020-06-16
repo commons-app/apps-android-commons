@@ -2,16 +2,19 @@ package fr.free.nrw.commons.nearby.model
 
 import com.google.gson.annotations.SerializedName
 
-class NearbyResultItem(private val item: ResultTuple?,
-                       private val wikipediaArticle: ResultTuple?,
-                       private val commonsArticle: ResultTuple?,
-                       private val location: ResultTuple?,
-                       private val label: ResultTuple?,
-                       private val icon: ResultTuple?, @field:SerializedName("class") private val className: ResultTuple?,
-                       @field:SerializedName("classLabel") private val classLabel: ResultTuple?,
-                       @field:SerializedName("commonsCategory") private val commonsCategory: ResultTuple?,
-                       @field:SerializedName("pic") private val pic: ResultTuple?,
-                       @field:SerializedName("destroyed") private val destroyed: ResultTuple?) {
+class NearbyResultItem(
+    private val item: ResultTuple?,
+    private val wikipediaArticle: ResultTuple?,
+    private val commonsArticle: ResultTuple?,
+    private val location: ResultTuple?,
+    private val label: ResultTuple?,
+    private val icon: ResultTuple?,
+    @field:SerializedName("class") private val className: ResultTuple?,
+    @field:SerializedName("classLabel") private val classLabel: ResultTuple?,
+    @field:SerializedName("commonsCategory") private val commonsCategory: ResultTuple?,
+    @field:SerializedName("pic") private val pic: ResultTuple?,
+    @field:SerializedName("destroyed") private val destroyed: ResultTuple?
+) {
 
     fun getItem(): ResultTuple {
         return item ?: ResultTuple()

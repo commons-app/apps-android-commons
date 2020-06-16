@@ -4,6 +4,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:padding="@dimen/small_gap">
+
   <Button
     android:id="@+id/listItemLoadMoreButton"
     android:layout_width="wrap_content"

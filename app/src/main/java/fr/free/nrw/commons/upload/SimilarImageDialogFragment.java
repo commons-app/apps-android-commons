@@ -26,87 +26,92 @@ import java.io.File;
 
 public class SimilarImageDialogFragment extends DialogFragment {
 
-    @BindView(R.id.orginalImage)
-    SimpleDraweeView originalImage;
-    @BindView(R.id.possibleImage)
-    SimpleDraweeView possibleImage;
-    @BindView(R.id.postive_button)
-    Button positiveButton;
-    @BindView(R.id.negative_button)
-    Button negativeButton;
-    Callback callback;//Implemented interface from shareActivity
-    Boolean gotResponse = false;
+  @BindView(R.id.orginalImage)
+  SimpleDraweeView originalImage;
+  @BindView(R.id.possibleImage)
+  SimpleDraweeView possibleImage;
+  @BindView(R.id.postive_button)
+  Button positiveButton;
+  @BindView(R.id.negative_button)
+  Button negativeButton;
+  Callback callback;//Implemented interface from shareActivity
+  Boolean gotResponse = false;
 
-    public SimilarImageDialogFragment() {
-    }
-    public interface Callback {
-        void onPositiveResponse();
+  public SimilarImageDialogFragment() {
+  }
 
-        void onNegativeResponse();
-    }
+  public interface Callback {
 
-    public void setCallback(Callback callback) {
-        this.callback = callback;
-    }
+    void onPositiveResponse();
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_similar_image_dialog, container, false);
-        ButterKnife.bind(this,view);
+    void onNegativeResponse();
+  }
 
-        originalImage.setHierarchy(GenericDraweeHierarchyBuilder
-                .newInstance(getResources())
-                .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
-                        R.drawable.ic_image_black_24dp,getContext().getTheme()))
-                .setFailureImage(VectorDrawableCompat.create(getResources(),
-                        R.drawable.ic_error_outline_black_24dp, getContext().getTheme()))
-                .build());
-        possibleImage.setHierarchy(GenericDraweeHierarchyBuilder
-                .newInstance(getResources())
-                .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
-                        R.drawable.ic_image_black_24dp,getContext().getTheme()))
-                .setFailureImage(VectorDrawableCompat.create(getResources(),
-                        R.drawable.ic_error_outline_black_24dp, getContext().getTheme()))
-                .build());
+  public void setCallback(Callback callback) {
+    this.callback = callback;
+  }
 
-        originalImage.setImageURI(Uri.fromFile(new File(getArguments().getString("originalImagePath"))));
-        possibleImage.setImageURI(Uri.fromFile(new File(getArguments().getString("possibleImagePath"))));
+  @Override
+  public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+      @Nullable Bundle savedInstanceState) {
+    View view = inflater.inflate(R.layout.fragment_similar_image_dialog, container, false);
+    ButterKnife.bind(this, view);
 
-        return view;
-    }
+    originalImage.setHierarchy(GenericDraweeHierarchyBuilder
+        .newInstance(getResources())
+        .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
+            R.drawable.ic_image_black_24dp, getContext().getTheme()))
+        .setFailureImage(VectorDrawableCompat.create(getResources(),
+            R.drawable.ic_error_outline_black_24dp, getContext().getTheme()))
+        .build());
+    possibleImage.setHierarchy(GenericDraweeHierarchyBuilder
+        .newInstance(getResources())
+        .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
+            R.drawable.ic_image_black_24dp, getContext().getTheme()))
+        .setFailureImage(VectorDrawableCompat.create(getResources(),
+            R.drawable.ic_error_outline_black_24dp, getContext().getTheme()))
+        .build());
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    originalImage
+        .setImageURI(Uri.fromFile(new File(getArguments().getString("originalImagePath"))));
+    possibleImage
+        .setImageURI(Uri.fromFile(new File(getArguments().getString("possibleImagePath"))));
 
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = super.onCreateDialog(savedInstanceState);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        return dialog;
-    }
+    return view;
+  }
 
-    @Override
-    public void onDismiss(DialogInterface dialog) {
+  @Override
+  public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+  }
+
+  @Override
+  public Dialog onCreateDialog(Bundle savedInstanceState) {
+    Dialog dialog = super.onCreateDialog(savedInstanceState);
+    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+    return dialog;
+  }
+
+  @Override
+  public void onDismiss(DialogInterface dialog) {
 //        I user dismisses dialog by pressing outside the dialog.
-        if (!gotResponse) {
-            callback.onNegativeResponse();
-        }
-        super.onDismiss(dialog);
+    if (!gotResponse) {
+      callback.onNegativeResponse();
     }
+    super.onDismiss(dialog);
+  }
 
-    @OnClick(R.id.negative_button)
-    public void onNegativeButtonClicked() {
-        callback.onNegativeResponse();
-        gotResponse = true;
-        dismiss();
-    }
+  @OnClick(R.id.negative_button)
+  public void onNegativeButtonClicked() {
+    callback.onNegativeResponse();
+    gotResponse = true;
+    dismiss();
+  }
 
-    @OnClick(R.id.postive_button)
-    public void onPositiveButtonClicked() {
-        callback.onPositiveResponse();
-        gotResponse = true;
-        dismiss();
-    }
+  @OnClick(R.id.postive_button)
+  public void onPositiveButtonClicked() {
+    callback.onPositiveResponse();
+    gotResponse = true;
+    dismiss();
+  }
 }

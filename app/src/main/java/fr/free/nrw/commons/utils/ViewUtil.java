@@ -6,103 +6,109 @@ import android.view.Display;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
-
 import androidx.annotation.StringRes;
-
 import com.google.android.material.snackbar.Snackbar;
-
 import timber.log.Timber;
 
 public class ViewUtil {
-    /**
-     * Utility function to show short snack bar
-     * @param view
-     * @param messageResourceId
-     */
-    public static void showShortSnackbar(View view, int messageResourceId) {
-        if (view.getContext() == null) {
-            return;
-        }
 
-        ExecutorUtils.uiExecutor().execute(() -> {
-            try {
-                Snackbar.make(view, messageResourceId, Snackbar.LENGTH_SHORT).show();
-            }catch (IllegalStateException e){
-                Timber.e(e.getMessage());
-            }
-        });
+  /**
+   * Utility function to show short snack bar
+   *
+   * @param view
+   * @param messageResourceId
+   */
+  public static void showShortSnackbar(View view, int messageResourceId) {
+    if (view.getContext() == null) {
+      return;
     }
 
-    public static void showLongToast(Context context, String text) {
-        if (context == null) {
-            return;
-        }
+    ExecutorUtils.uiExecutor().execute(() -> {
+      try {
+        Snackbar.make(view, messageResourceId, Snackbar.LENGTH_SHORT).show();
+      } catch (IllegalStateException e) {
+        Timber.e(e.getMessage());
+      }
+    });
+  }
 
-        ExecutorUtils.uiExecutor().execute(() -> Toast.makeText(context, text, Toast.LENGTH_LONG).show());
+  public static void showLongToast(Context context, String text) {
+    if (context == null) {
+      return;
     }
 
-    public static void showLongToast(Context context, @StringRes int stringResourceId) {
-        if (context == null) {
-            return;
-        }
+    ExecutorUtils.uiExecutor()
+        .execute(() -> Toast.makeText(context, text, Toast.LENGTH_LONG).show());
+  }
 
-        ExecutorUtils.uiExecutor().execute(() -> Toast.makeText(context, context.getString(stringResourceId), Toast.LENGTH_LONG).show());
+  public static void showLongToast(Context context, @StringRes int stringResourceId) {
+    if (context == null) {
+      return;
     }
 
-    public static void showShortToast(Context context, String text) {
-        if (context == null) {
-            return;
-        }
+    ExecutorUtils.uiExecutor().execute(
+        () -> Toast.makeText(context, context.getString(stringResourceId), Toast.LENGTH_LONG)
+            .show());
+  }
 
-        ExecutorUtils.uiExecutor().execute(() -> Toast.makeText(context, text, Toast.LENGTH_SHORT).show());
+  public static void showShortToast(Context context, String text) {
+    if (context == null) {
+      return;
     }
 
-    public static void showShortToast(Context context, @StringRes int stringResourceId) {
-        if (context == null) {
-            return;
-        }
+    ExecutorUtils.uiExecutor()
+        .execute(() -> Toast.makeText(context, text, Toast.LENGTH_SHORT).show());
+  }
 
-        ExecutorUtils.uiExecutor().execute(() -> Toast.makeText(context, context.getString(stringResourceId), Toast.LENGTH_SHORT).show());
+  public static void showShortToast(Context context, @StringRes int stringResourceId) {
+    if (context == null) {
+      return;
     }
 
-    public static boolean isPortrait(Context context) {
-        Display orientation = ((Activity)context).getWindowManager().getDefaultDisplay();
-        if (orientation.getWidth() < orientation.getHeight()){
-            return true;
-        } else {
-            return false;
-        }
-    }
+    ExecutorUtils.uiExecutor().execute(
+        () -> Toast.makeText(context, context.getString(stringResourceId), Toast.LENGTH_SHORT)
+            .show());
+  }
 
-    public static void hideKeyboard(View view){
-        if (view != null) {
-            InputMethodManager manager = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            view.clearFocus();
-            if (manager != null) {
-                manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            }
-        }
+  public static boolean isPortrait(Context context) {
+    Display orientation = ((Activity) context).getWindowManager().getDefaultDisplay();
+    if (orientation.getWidth() < orientation.getHeight()) {
+      return true;
+    } else {
+      return false;
     }
+  }
 
-    /**
-     * A snack bar which has an action button which on click dismisses the snackbar and invokes the
-     * listener passed
-     */
-    public static void showDismissibleSnackBar(View view,
-                                               int messageResourceId,
-                                               int actionButtonResourceId,
-                                               View.OnClickListener onClickListener) {
-        if (view.getContext() == null) {
-            return;
-        }
-        ExecutorUtils.uiExecutor().execute(() -> {
-            Snackbar snackbar = Snackbar.make(view, view.getContext().getString(messageResourceId),
-                    Snackbar.LENGTH_INDEFINITE);
-            snackbar.setAction(view.getContext().getString(actionButtonResourceId), v -> {
-                snackbar.dismiss();
-                onClickListener.onClick(v);
-            });
-            snackbar.show();
-        });
+  public static void hideKeyboard(View view) {
+    if (view != null) {
+      InputMethodManager manager = (InputMethodManager) view.getContext()
+          .getSystemService(Context.INPUT_METHOD_SERVICE);
+      view.clearFocus();
+      if (manager != null) {
+        manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+      }
     }
+  }
+
+  /**
+   * A snack bar which has an action button which on click dismisses the snackbar and invokes the
+   * listener passed
+   */
+  public static void showDismissibleSnackBar(View view,
+      int messageResourceId,
+      int actionButtonResourceId,
+      View.OnClickListener onClickListener) {
+    if (view.getContext() == null) {
+      return;
+    }
+    ExecutorUtils.uiExecutor().execute(() -> {
+      Snackbar snackbar = Snackbar.make(view, view.getContext().getString(messageResourceId),
+          Snackbar.LENGTH_INDEFINITE);
+      snackbar.setAction(view.getContext().getString(actionButtonResourceId), v -> {
+        snackbar.dismiss();
+        onClickListener.onClick(v);
+      });
+      snackbar.show();
+    });
+  }
 }

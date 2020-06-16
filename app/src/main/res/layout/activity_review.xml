@@ -7,118 +7,115 @@
   android:layout_height="match_parent">
 
 
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-        <LinearLayout
+    <include layout="@layout/toolbar" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+      android:id="@+id/skip_image"
+      style="@style/Widget.AppCompat.Button.Borderless"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:drawableEnd="@drawable/ic_info_outline_24dp"
+      android:drawablePadding="@dimen/medium_height"
+      android:drawableTint="@color/button_blue_dark"
+      android:paddingLeft="@dimen/medium_height"
+      android:paddingRight="@dimen/medium_height"
+      android:text="@string/skip_image"
+      android:textAllCaps="true"
+      android:textColor="@color/button_blue_dark"
+      android:textStyle="bold" />
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/dimen_0"
+          android:layout_marginTop="@dimen/tiny_padding"
+          android:layout_weight="1">
+
+          <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/review_image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/dimen_0"
+            app:srcCompat="@drawable/commons_logo" />
 
-            <include layout="@layout/toolbar" />
+          <RelativeLayout
+            android:id="@+id/rl_container_upload_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center|bottom"
+            android:background="#77000000"
+            android:gravity="center"
+            android:padding="@dimen/tiny_gap">
 
-
-            <androidx.appcompat.widget.AppCompatButton
-              android:id="@+id/skip_image"
-              style="@style/Widget.AppCompat.Button.Borderless"
-              android:textStyle="bold"
+            <TextView
+              android:id="@+id/tv_image_caption"
+              style="?android:textAppearanceMedium"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_gravity="center_horizontal"
-              android:paddingLeft="@dimen/medium_height"
-              android:paddingRight="@dimen/medium_height"
-              android:drawableEnd="@drawable/ic_info_outline_24dp"
-              android:drawablePadding="@dimen/medium_height"
-              android:drawableTint="@color/button_blue_dark"
-              android:text="@string/skip_image"
-              android:textColor="@color/button_blue_dark"
-              android:textAllCaps="true"/>
+              android:textColor="#FFFFFFFF" />
 
-            <RelativeLayout
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+          </RelativeLayout>
 
-                <LinearLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="vertical"
-                  android:weightSum="2"
-                  >
+          <ProgressBar
+            android:id="@+id/pb_review_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
-                    <RelativeLayout
-                      android:layout_width="match_parent"
-                      android:layout_height="@dimen/dimen_0"
-                      android:layout_weight="1"
-                      android:layout_marginTop="@dimen/tiny_padding"
-                      >
+        </RelativeLayout>
 
-                    <com.facebook.drawee.view.SimpleDraweeView
-                        android:id="@+id/review_image_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginTop="@dimen/dimen_0"
-                        app:srcCompat="@drawable/commons_logo" />
+        <fr.free.nrw.commons.review.ReviewViewPager
+          android:id="@+id/view_pager_review"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/dimen_0"
+          android:layout_weight="1"
+          android:fadingEdge="none" />
 
-                    <RelativeLayout
-                        android:id="@+id/rl_container_upload_overlay"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_gravity="center|bottom"
-                        android:background="#77000000"
-                        android:gravity="center"
-                        android:padding="@dimen/tiny_gap">
+      </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/tv_image_caption"
-                            style="?android:textAppearanceMedium"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="#FFFFFFFF" />
+      <RelativeLayout
+        android:id="@+id/rl_container_bottom_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="?attr/colorPrimaryDark"
+        android:elevation="@dimen/miniscule_margin"
+        android:padding="@dimen/medium_height">
 
-                    </RelativeLayout>
+        <com.viewpagerindicator.CirclePageIndicator
+          android:id="@+id/pager_indicator_review"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:background="?attr/colorPrimaryDark"
+          android:foregroundGravity="center_vertical" />
+      </RelativeLayout>
 
-                    <ProgressBar
-                        android:id="@+id/pb_review_image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:visibility="gone"
-                        tools:visibility="visible"/>
-
-                </RelativeLayout>
-
-                    <fr.free.nrw.commons.review.ReviewViewPager
-                      android:id="@+id/view_pager_review"
-                      android:layout_width="match_parent"
-                      android:layout_height="@dimen/dimen_0"
-                      android:layout_weight="1"
-                      android:fadingEdge="none"/>
-
-            </LinearLayout>
-
-                <RelativeLayout
-                  android:id="@+id/rl_container_bottom_view"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:padding="@dimen/medium_height"
-                  android:layout_alignParentBottom="true"
-                  android:background="?attr/colorPrimaryDark"
-                  android:elevation="@dimen/miniscule_margin">
-                    <com.viewpagerindicator.CirclePageIndicator
-                      android:id="@+id/pager_indicator_review"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:layout_gravity="center"
-                      android:background="?attr/colorPrimaryDark"
-                      android:foregroundGravity="center_vertical"
-                      />
-                </RelativeLayout>
-
-            </RelativeLayout>
+    </RelativeLayout>
 
 
-        </LinearLayout>
+  </LinearLayout>
 
-    <include layout="@layout/drawer_view" />
+  <include layout="@layout/drawer_view" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

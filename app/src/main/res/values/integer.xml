@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="drawer_width">70</integer>
+  <integer name="drawer_width">70</integer>
 </resources>

@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
 import fr.free.nrw.commons.BasePresenter;
-import java.util.List;
 
 /**
  * The contract for Contributions list View & Presenter

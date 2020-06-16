@@ -1,14 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/notifications"
-        android:title="@string/notifications"
-        app:showAsAction="ifRoom|withText"
-        android:menuCategory="secondary"
-        app:actionLayout="@layout/notification_icon"
-        />
-    <item android:id="@+id/list_sheet"
-        android:title="@string/list_sheet"
-        app:showAsAction="ifRoom|withText"
-        android:icon="@drawable/ic_list_white_24dp"
-        />
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+    android:id="@+id/notifications"
+    android:menuCategory="secondary"
+    android:title="@string/notifications"
+    app:actionLayout="@layout/notification_icon"
+    app:showAsAction="ifRoom|withText" />
+  <item
+    android:id="@+id/list_sheet"
+    android:icon="@drawable/ic_list_white_24dp"
+    android:title="@string/list_sheet"
+    app:showAsAction="ifRoom|withText" />
 </menu>

@@ -57,7 +57,7 @@ class WikidataEditServiceTest {
         whenever(wikidataClient.addEditTag(anyLong(), anyString(), anyString()))
             .thenReturn(Observable.just(mock(AddEditTagResponse::class.java)))
         whenever(wikibaseClient.getFileEntityId(any())).thenReturn(Observable.just(1L))
-        val wikidataPlace:WikidataPlace = mock()
+        val wikidataPlace: WikidataPlace = mock()
         val uploadResult = mock<UploadResult>()
         whenever(uploadResult.filename).thenReturn("file")
         wikidataEditService.createImageClaim(wikidataPlace, uploadResult)

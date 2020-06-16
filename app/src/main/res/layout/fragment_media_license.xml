@@ -4,8 +4,8 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:layout_marginBottom="@dimen/activity_margin_horizontal"
-  android:padding="@dimen/standard_gap"
-  >
+  android:padding="@dimen/standard_gap">
+
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,14 +14,14 @@
 
     <TextView
       android:id="@+id/tv_title"
-      android:textStyle="bold"
       android:layout_width="wrap_content"
       android:layout_height="@dimen/half_standard_height"
       android:layout_marginEnd="@dimen/standard_gap"
       android:layout_marginRight="@dimen/standard_gap"
       android:gravity="center_vertical"
       android:textSize="@dimen/normal_text"
-      tools:text="Step 1 of 15"/>
+      android:textStyle="bold"
+      tools:text="Step 1 of 15" />
 
     <TextView
       android:id="@+id/tv_subtitle"
@@ -32,21 +32,22 @@
       android:text="@string/upload_flow_all_images_in_set"
       android:textSize="@dimen/subtitle_text"
       android:visibility="visible"
-      tools:visibility="visible"/>
+      tools:visibility="visible" />
+
     <Spinner
       android:id="@+id/spinner_license_list"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/standard_gap"
       android:padding="@dimen/dimen_0"
-      tools:visibility="visible"/>
+      tools:visibility="visible" />
 
     <TextView
       android:id="@+id/tv_share_license_summary"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/standard_gap"
-      android:text="@plurals/share_license_summary"/>
+      android:text="@plurals/share_license_summary" />
 
   </LinearLayout>
 
@@ -63,28 +64,28 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/standard_gap"
       android:gravity="start"
-      android:text="@string/media_upload_policy"/>
+      android:text="@string/media_upload_policy" />
 
     <View
       android:id="@+id/button_divider"
       android:layout_width="match_parent"
       android:layout_height="@dimen/tiny_height"
       android:layout_marginTop="@dimen/standard_gap"
-      android:background="@color/divider_grey"/>
+      android:background="@color/divider_grey" />
 
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:padding="@dimen/standard_gap"
       android:orientation="horizontal"
-      >
+      android:padding="@dimen/standard_gap">
+
       <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_previous"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/previous"/>
+        android:text="@string/previous" />
 
       <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_submit"
@@ -92,7 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/submit"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white" />
 
     </LinearLayout>
 

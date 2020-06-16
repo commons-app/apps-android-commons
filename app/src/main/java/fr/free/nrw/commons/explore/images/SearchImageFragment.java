@@ -43,246 +43,250 @@ import timber.log.Timber;
 
 public class SearchImageFragment extends CommonsDaggerSupportFragment {
 
-    @BindView(R.id.imagesListBox)
-    RecyclerView imagesRecyclerView;
-    @BindView(R.id.imageSearchInProgress)
-    ProgressBar progressBar;
-    @BindView(R.id.imagesNotFound)
-    TextView imagesNotFoundView;
-    String query;
-    @BindView(R.id.bottomProgressBar)
-    ProgressBar bottomProgressBar;
+  @BindView(R.id.imagesListBox)
+  RecyclerView imagesRecyclerView;
+  @BindView(R.id.imageSearchInProgress)
+  ProgressBar progressBar;
+  @BindView(R.id.imagesNotFound)
+  TextView imagesNotFoundView;
+  String query;
+  @BindView(R.id.bottomProgressBar)
+  ProgressBar bottomProgressBar;
 
-    @Inject RecentSearchesDao recentSearchesDao;
-    @Inject
-    MediaClient mediaClient;
-    @Inject
-    @Named("default_preferences")
-    JsonKvStore defaultKvStore;
+  @Inject
+  RecentSearchesDao recentSearchesDao;
+  @Inject
+  MediaClient mediaClient;
+  @Inject
+  @Named("default_preferences")
+  JsonKvStore defaultKvStore;
 
-    /**
-     * A variable to store number of list items for whom API has been called to fetch captions
-     */
-    private int mediaSize = 0;
+  /**
+   * A variable to store number of list items for whom API has been called to fetch captions
+   */
+  private int mediaSize = 0;
 
-    private SearchImagesAdapter imagesAdapter;
-    private List<Media> queryList = new ArrayList<>();
+  private SearchImagesAdapter imagesAdapter;
+  private List<Media> queryList = new ArrayList<>();
 
-    /**
-     * This method saves Search Query in the Recent Searches Database.
-     * @param query
-     */
-    private void saveQuery(String query) {
-        RecentSearch recentSearch = recentSearchesDao.find(query);
+  /**
+   * This method saves Search Query in the Recent Searches Database.
+   *
+   * @param query
+   */
+  private void saveQuery(String query) {
+    RecentSearch recentSearch = recentSearchesDao.find(query);
 
-        // Newly searched query...
-        if (recentSearch == null) {
-            recentSearch = new RecentSearch(null, query, new Date());
-        }
-        else {
-            recentSearch.setLastSearched(new Date());
-        }
-
-        recentSearchesDao.save(recentSearch);
-
+    // Newly searched query...
+    if (recentSearch == null) {
+      recentSearch = new RecentSearch(null, query, new Date());
+    } else {
+      recentSearch.setLastSearched(new Date());
     }
 
+    recentSearchesDao.save(recentSearch);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_browse_image, container, false);
-        ButterKnife.bind(this, rootView);
-        if (getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            imagesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        }
-        else{
-            imagesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        }
-        imagesAdapter =new SearchImagesAdapter(media -> {
-            ((SearchActivity)getContext()).onSearchImageClicked(imagesAdapter.getItems().indexOf(media));
-            saveQuery(query);
-            return Unit.INSTANCE;
-        });
-        imagesRecyclerView.setAdapter(imagesAdapter);
-        imagesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                // check if end of recycler view is reached, if yes then add more results to existing results
-                if (!recyclerView.canScrollVertically(1)) {
-                    addImagesToList(query);
-                }
-            }
-        });
-        return rootView;
+  }
+
+
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+      Bundle savedInstanceState) {
+    View rootView = inflater.inflate(R.layout.fragment_browse_image, container, false);
+    ButterKnife.bind(this, rootView);
+    if (getContext().getResources().getConfiguration().orientation
+        == Configuration.ORIENTATION_PORTRAIT) {
+      imagesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    } else {
+      imagesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
     }
+    imagesAdapter = new SearchImagesAdapter(media -> {
+      ((SearchActivity) getContext()).onSearchImageClicked(imagesAdapter.getItems().indexOf(media));
+      saveQuery(query);
+      return Unit.INSTANCE;
+    });
+    imagesRecyclerView.setAdapter(imagesAdapter);
+    imagesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+      @Override
+      public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+        super.onScrollStateChanged(recyclerView, newState);
+        // check if end of recycler view is reached, if yes then add more results to existing results
+        if (!recyclerView.canScrollVertically(1)) {
+          addImagesToList(query);
+        }
+      }
+    });
+    return rootView;
+  }
 
-    /**
-     * Checks for internet connection and then initializes the recycler view with 25 images of the searched query
-     * Clearing imageAdapter every time new keyword is searched so that user can see only new results
-     */
-    @SuppressLint("CheckResult")
-    public void updateImageList(String query) {
-        this.query = query;
-        if (imagesNotFoundView != null) {
-            imagesNotFoundView.setVisibility(GONE);
-        }
-        if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
-            handleNoInternet();
-            return;
-        }
-        progressBar.setVisibility(View.VISIBLE);
-        bottomProgressBar.setVisibility(GONE);
-        queryList.clear();
-        imagesAdapter.clear();
-        compositeDisposable.add(mediaClient.getMediaListFromSearch(query)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(disposable -> saveQuery(query))
-                .subscribe(this::handleSuccess, this::handleError));
+  /**
+   * Checks for internet connection and then initializes the recycler view with 25 images of the
+   * searched query Clearing imageAdapter every time new keyword is searched so that user can see
+   * only new results
+   */
+  @SuppressLint("CheckResult")
+  public void updateImageList(String query) {
+    this.query = query;
+    if (imagesNotFoundView != null) {
+      imagesNotFoundView.setVisibility(GONE);
     }
+    if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
+      handleNoInternet();
+      return;
+    }
+    progressBar.setVisibility(View.VISIBLE);
+    bottomProgressBar.setVisibility(GONE);
+    queryList.clear();
+    imagesAdapter.clear();
+    compositeDisposable.add(mediaClient.getMediaListFromSearch(query)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .doOnSubscribe(disposable -> saveQuery(query))
+        .subscribe(this::handleSuccess, this::handleError));
+  }
 
 
-    /**
-     * Adds more results to existing search results
-     */
-    @SuppressLint("CheckResult")
-    public void addImagesToList(String query) {
-        this.query = query;
-        bottomProgressBar.setVisibility(View.VISIBLE);
+  /**
+   * Adds more results to existing search results
+   */
+  @SuppressLint("CheckResult")
+  public void addImagesToList(String query) {
+    this.query = query;
+    bottomProgressBar.setVisibility(View.VISIBLE);
+    progressBar.setVisibility(GONE);
+    compositeDisposable.add(mediaClient.getMediaListFromSearch(query)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(this::handlePaginationSuccess, this::handleError));
+  }
+
+  /**
+   * Handles the success scenario it initializes the recycler view by adding items to the adapter
+   *
+   * @param mediaList List of media to be added
+   */
+  private void handlePaginationSuccess(List<Media> mediaList) {
+    progressBar.setVisibility(View.GONE);
+    bottomProgressBar.setVisibility(GONE);
+    if (mediaList.size() != 0 && !queryList.get(queryList.size() - 1).getFilename()
+        .equals(mediaList.get(mediaList.size() - 1).getFilename())) {
+      queryList.addAll(mediaList);
+      imagesAdapter.addAll(mediaList);
+      ((SearchActivity) getContext()).viewPagerNotifyDataSetChanged();
+    }
+  }
+
+
+  /**
+   * Handles the success scenario it initializes the recycler view by adding items to the adapter
+   *
+   * @param mediaList List of media to be shown
+   */
+  private void handleSuccess(List<Media> mediaList) {
+    queryList = mediaList;
+    if (mediaList == null || mediaList.isEmpty()) {
+      initErrorView();
+    } else {
+      bottomProgressBar.setVisibility(View.GONE);
+      progressBar.setVisibility(GONE);
+      imagesAdapter.addAll(mediaList);
+      imagesAdapter.notifyDataSetChanged();
+      ((SearchActivity) getContext()).viewPagerNotifyDataSetChanged();
+      for (Media m : mediaList) {
+        final String pageId = m.getPageId();
+        if (pageId != null) {
+          replaceTitlesWithCaptions(PAGE_ID_PREFIX + pageId, mediaSize++);
+        }
+      }
+    }
+  }
+
+  /**
+   * In explore we first show title and simultaneously call the API to retrieve captions When
+   * captions are retrieved they replace title
+   */
+
+  public void replaceTitlesWithCaptions(String wikibaseIdentifier, int position) {
+    compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseIdentifier)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(subscriber -> {
+          handleLabelforImage(subscriber, position);
+        }));
+
+  }
+
+  private void handleLabelforImage(String s, int position) {
+    if (!s.trim().equals(getString(R.string.detail_caption_empty))) {
+      imagesAdapter.updateThumbnail(position, s);
+    }
+  }
+
+  /**
+   * Logs and handles API error scenario
+   *
+   * @param throwable
+   */
+  private void handleError(Throwable throwable) {
+    Timber.e(throwable, "Error occurred while loading queried images");
+    try {
+      ViewUtil.showShortSnackbar(imagesRecyclerView, R.string.error_loading_images);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  /**
+   * Handles the UI updates for a error scenario
+   */
+  private void initErrorView() {
+    progressBar.setVisibility(GONE);
+    imagesNotFoundView.setVisibility(VISIBLE);
+    imagesNotFoundView.setText(getString(R.string.images_not_found, query));
+  }
+
+  /**
+   * Handles the UI updates for no internet scenario
+   */
+  private void handleNoInternet() {
+    if (null
+        != getView()) {//We have exposed public methods to update our ui, we will have to add null checks until we make this lifecycle aware
+      if (null != progressBar) {
         progressBar.setVisibility(GONE);
-        compositeDisposable.add(mediaClient.getMediaListFromSearch(query)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::handlePaginationSuccess, this::handleError));
+      }
+      ViewUtil.showShortSnackbar(imagesRecyclerView, R.string.no_internet);
+    } else {
+      Timber.d("Attempt to update fragment ui after its view was destroyed");
     }
+  }
 
-    /**
-     * Handles the success scenario
-     * it initializes the recycler view by adding items to the adapter
-     * @param mediaList List of media to be added
-     */
-    private void handlePaginationSuccess(List<Media> mediaList) {
-        progressBar.setVisibility(View.GONE);
-        bottomProgressBar.setVisibility(GONE);
-        if (mediaList.size() != 0 && !queryList.get(queryList.size() - 1).getFilename().equals(mediaList.get(mediaList.size() - 1).getFilename())) {
-            queryList.addAll(mediaList);
-            imagesAdapter.addAll(mediaList);
-            ((SearchActivity) getContext()).viewPagerNotifyDataSetChanged();
-        }
+  /**
+   * returns total number of images present in the recyclerview adapter.
+   */
+  public int getTotalImagesCount() {
+    if (imagesAdapter == null) {
+      return 0;
+    } else {
+      return imagesAdapter.getItemCount();
     }
+  }
 
-
-
-    /**
-     * Handles the success scenario
-     * it initializes the recycler view by adding items to the adapter
-     * @param mediaList List of media to be shown
-     */
-    private void handleSuccess(List<Media> mediaList) {
-        queryList = mediaList;
-        if (mediaList == null || mediaList.isEmpty()) {
-            initErrorView();
-        }
-        else {
-            bottomProgressBar.setVisibility(View.GONE);
-            progressBar.setVisibility(GONE);
-            imagesAdapter.addAll(mediaList);
-            imagesAdapter.notifyDataSetChanged();
-            ((SearchActivity)getContext()).viewPagerNotifyDataSetChanged();
-            for (Media m : mediaList) {
-                final String pageId = m.getPageId();
-                if (pageId != null) {
-                    replaceTitlesWithCaptions(PAGE_ID_PREFIX + pageId, mediaSize++);
-                }
-            }
-        }
+  /**
+   * returns Media Object at position
+   *
+   * @param i position of Media in the recyclerview adapter.
+   */
+  public Media getImageAtPosition(int i) {
+    if (imagesAdapter.getItemAt(i).getFilename() == null) {
+      // not yet ready to return data
+      return null;
     }
+    return imagesAdapter.getItemAt(i);
+  }
 
-    /**
-     * In explore we first show title and simultaneously call the API to retrieve captions
-     * When captions are retrieved they replace title
-     */
-
-        public void replaceTitlesWithCaptions(String wikibaseIdentifier, int position) {
-            compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseIdentifier)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(subscriber -> {
-                        handleLabelforImage(subscriber, position);
-                    }));
-
-        }
-
-        private void handleLabelforImage(String s, int position) {
-            if (!s.trim().equals(getString(R.string.detail_caption_empty))) {
-                imagesAdapter.updateThumbnail(position, s);
-            }
-        }
-
-    /**
-     * Logs and handles API error scenario
-     * @param throwable
-     */
-    private void handleError(Throwable throwable) {
-        Timber.e(throwable, "Error occurred while loading queried images");
-        try {
-            ViewUtil.showShortSnackbar(imagesRecyclerView, R.string.error_loading_images);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Handles the UI updates for a error scenario
-     */
-    private void initErrorView() {
-        progressBar.setVisibility(GONE);
-        imagesNotFoundView.setVisibility(VISIBLE);
-        imagesNotFoundView.setText(getString(R.string.images_not_found,query));
-    }
-
-    /**
-     * Handles the UI updates for no internet scenario
-     */
-    private void handleNoInternet() {
-        if (null
-            != getView()) {//We have exposed public methods to update our ui, we will have to add null checks until we make this lifecycle aware
-            if (null != progressBar) {
-                progressBar.setVisibility(GONE);
-            }
-            ViewUtil.showShortSnackbar(imagesRecyclerView, R.string.no_internet);
-        } else {
-            Timber.d("Attempt to update fragment ui after its view was destroyed");
-        }
-    }
-
-    /**
-    * returns total number of images present in the recyclerview adapter.
-    */
-    public int getTotalImagesCount(){
-        if (imagesAdapter == null) {
-            return 0;
-        }
-        else {
-            return imagesAdapter.getItemCount();
-        }
-    }
-
-    /**
-     * returns Media Object at position
-     * @param i position of Media in the recyclerview adapter.
-     */
-    public Media getImageAtPosition(int i) {
-        if (imagesAdapter.getItemAt(i).getFilename() == null) {
-            // not yet ready to return data
-            return null;
-        }
-        return imagesAdapter.getItemAt(i);
-    }
-
-    @Override public void onDestroyView() {
-        super.onDestroyView();
-        compositeDisposable.clear();
-    }
+  @Override
+  public void onDestroyView() {
+    super.onDestroyView();
+    compositeDisposable.clear();
+  }
 }

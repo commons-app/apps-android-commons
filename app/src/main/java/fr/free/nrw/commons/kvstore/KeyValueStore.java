@@ -1,35 +1,36 @@
 package fr.free.nrw.commons.kvstore;
 
 public interface KeyValueStore {
-    String getString(String key);
 
-    boolean getBoolean(String key);
+  String getString(String key);
 
-    long getLong(String key);
+  boolean getBoolean(String key);
 
-    int getInt(String key);
+  long getLong(String key);
 
-    String getString(String key, String defaultValue);
+  int getInt(String key);
 
-    boolean getBoolean(String key, boolean defaultValue);
+  String getString(String key, String defaultValue);
 
-    long getLong(String key, long defaultValue);
+  boolean getBoolean(String key, boolean defaultValue);
 
-    int getInt(String key, int defaultValue);
+  long getLong(String key, long defaultValue);
 
-    void putString(String key, String value);
+  int getInt(String key, int defaultValue);
 
-    void putBoolean(String key, boolean value);
+  void putString(String key, String value);
 
-    void putLong(String key, long value);
+  void putBoolean(String key, boolean value);
 
-    void putInt(String key, int value);
+  void putLong(String key, long value);
 
-    boolean contains(String key);
+  void putInt(String key, int value);
 
-    void remove(String key);
+  boolean contains(String key);
 
-    void clearAll();
+  void remove(String key);
 
-    void clearAllWithVersion();
+  void clearAll();
+
+  void clearAllWithVersion();
 }

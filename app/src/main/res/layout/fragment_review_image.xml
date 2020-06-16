@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:paddingBottom="@dimen/dimen_10"
   android:orientation="vertical"
-  >
+  android:paddingBottom="@dimen/dimen_10">
 
   <ScrollView
     android:layout_width="match_parent"
@@ -15,18 +14,18 @@
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:paddingTop="@dimen/dimen_6"
-      android:orientation="vertical">
+      android:orientation="vertical"
+      android:paddingTop="@dimen/dimen_6">
 
       <TextView
         android:id="@+id/tv_review_question"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:gravity="center_vertical"
-        tools:text="testing1"
         android:textAlignment="center"
         android:textColor="?attr/reviewHeading"
-        android:textSize="32sp"/>
+        android:textSize="32sp"
+        tools:text="testing1" />
 
       <TextView
         android:id="@+id/tv_review_question_context"
@@ -34,9 +33,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/filter_padding"
         android:gravity="center_vertical"
-        tools:text="testing2"
         android:textAlignment="center"
-        android:textSize="22sp"/>
+        android:textSize="22sp"
+        tools:text="testing2" />
 
     </LinearLayout>
   </ScrollView>
@@ -54,30 +53,29 @@
       android:id="@+id/button_yes"
       android:layout_width="@dimen/dimen_0"
       android:layout_height="@dimen/fragment_height"
-      android:layout_weight="1"
       android:layout_margin="@dimen/activity_margin_horizontal"
-      android:background="@android:color/transparent"
-      android:text="@string/yes"
-      android:enabled="false"
+      android:layout_weight="1"
       android:alpha="0.5"
-      android:textAllCaps="true"
+      android:background="@android:color/transparent"
+      android:enabled="false"
+      android:text="@string/yes"
       android:textAlignment="center"
-      android:textColor="@color/yes_button_color"/>
+      android:textAllCaps="true"
+      android:textColor="@color/yes_button_color" />
 
     <Button
-      android:textAllCaps="true"
       android:id="@+id/button_no"
       android:layout_width="@dimen/dimen_0"
       android:layout_height="@dimen/fragment_height"
-      android:layout_weight="1"
-      android:enabled="false"
-      android:alpha="0.5"
       android:layout_margin="@dimen/activity_margin_horizontal"
+      android:layout_weight="1"
+      android:alpha="0.5"
       android:background="@android:color/transparent"
+      android:enabled="false"
       android:text="@string/no"
       android:textAlignment="center"
-      android:textColor="@color/no_button_color"
-      />
+      android:textAllCaps="true"
+      android:textColor="@color/no_button_color" />
 
   </LinearLayout>
 

@@ -1,13 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"      tools:context=".MainActivity">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:context=".MainActivity">
 
-    <item
-        android:id="@+id/action_display_list"
-        android:title="@string/display_list_button"
-        android:icon="@drawable/ic_list_white_24dp"
-        android:orderInCategory="1"
-        app:showAsAction="ifRoom"
-        />
+  <item
+    android:id="@+id/action_display_list"
+    android:icon="@drawable/ic_list_white_24dp"
+    android:orderInCategory="1"
+    android:title="@string/display_list_button"
+    app:showAsAction="ifRoom" />
 
 </menu>

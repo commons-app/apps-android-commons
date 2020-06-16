@@ -8,17 +8,16 @@ import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.RemoteException
 import com.nhaarman.mockitokotlin2.*
-import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.Bookmark
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider.BASE_URI
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.*
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -66,23 +65,29 @@ class BookmarkPictureDaoTest {
 
     @Test
     fun getAllBookmarks() {
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(createCursor(14))
+        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(
+            createCursor(14)
+        )
 
         var result = testObject.allBookmarks
 
-        assertEquals(14,(result.size))
+        assertEquals(14, (result.size))
 
     }
 
     @Test(expected = RuntimeException::class)
     fun getAllBookmarksTranslatesExceptions() {
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(RemoteException(""))
+        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(
+            RemoteException("")
+        )
         testObject.allBookmarks
     }
 
     @Test
     fun getAllBookmarksReturnsEmptyList_emptyCursor() {
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(createCursor(0))
+        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(
+            createCursor(0)
+        )
         assertTrue(testObject.allBookmarks.isEmpty())
     }
 
@@ -135,7 +140,9 @@ class BookmarkPictureDaoTest {
 
     @Test(expected = RuntimeException::class)
     fun findBookmarkTranslatesExceptions() {
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(RemoteException(""))
+        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(
+            RemoteException("")
+        )
         testObject.findBookmark(exampleBookmark)
     }
 

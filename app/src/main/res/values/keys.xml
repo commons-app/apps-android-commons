@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="license_pref_cc0" translatable="false">CC0</string>
-    <string name="license_pref_cc_by_3_0" translatable="false">CC BY 3.0</string>
-    <string name="license_pref_cc_by_sa_3_0" translatable="false">CC BY-SA 3.0</string>
-    <string name="license_pref_cc_by_4_0" translatable="false">CC BY 4.0</string>
-    <string name="license_pref_cc_by_sa_4_0" translatable="false">CC BY-SA 4.0</string>
+  <string name="license_pref_cc0" translatable="false">CC0</string>
+  <string name="license_pref_cc_by_3_0" translatable="false">CC BY 3.0</string>
+  <string name="license_pref_cc_by_sa_3_0" translatable="false">CC BY-SA 3.0</string>
+  <string name="license_pref_cc_by_4_0" translatable="false">CC BY 4.0</string>
+  <string name="license_pref_cc_by_sa_4_0" translatable="false">CC BY-SA 4.0</string>
 
-    <string name="exif_tag_author" translatable="false">Author</string>
-    <string name="exif_tag_copyright" translatable="false">Copyright</string>
-    <string name="exif_tag_location" translatable="false">Location</string>
-    <string name="exif_tag_cameraModel" translatable="false">Camera Model</string>
-    <string name="exif_tag_lensModel" translatable="false">Lens Model</string>
-    <string name="exif_tag_serialNumbers" translatable="false">Serial Numbers</string>
-    <string name="exif_tag_software" translatable="false">Software</string>
+  <string name="exif_tag_author" translatable="false">Author</string>
+  <string name="exif_tag_copyright" translatable="false">Copyright</string>
+  <string name="exif_tag_location" translatable="false">Location</string>
+  <string name="exif_tag_cameraModel" translatable="false">Camera Model</string>
+  <string name="exif_tag_lensModel" translatable="false">Lens Model</string>
+  <string name="exif_tag_serialNumbers" translatable="false">Serial Numbers</string>
+  <string name="exif_tag_software" translatable="false">Software</string>
 
 </resources>

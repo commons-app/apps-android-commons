@@ -1,229 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:background="?attr/mainBackground"
+  android:orientation="vertical"
+  android:visibility="visible"
+  app:behavior_hideable="true"
+  app:behavior_peekHeight="@dimen/large_height"
+  app:layout_behavior="@string/bottom_sheet_behavior"
+
+  >
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/large_height"
+    android:layout_marginVertical="@dimen/activity_margin_horizontal"
+    android:gravity="center_vertical">
+
+    <ImageView
+      android:id="@+id/icon"
+      android:layout_width="@dimen/dimen_40"
+      android:layout_height="@dimen/dimen_40"
+      android:layout_marginLeft="@dimen/standard_gap"></ImageView>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="@dimen/standard_gap"
+      android:layout_marginRight="@dimen/standard_gap"
+      android:orientation="vertical">
+
+      <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="50dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textSize="16sp" />
+
+      <TextView
+        android:id="@+id/category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp" />
+    </LinearLayout>
+  </LinearLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/tiny_height"
+    android:layout_marginTop="@dimen/small_height"
+    android:layout_marginBottom="@dimen/activity_margin_horizontal"
+    android:background="@android:color/darker_gray" />
+
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="?attr/mainBackground"
-    app:layout_behavior="@string/bottom_sheet_behavior"
-    app:behavior_peekHeight="@dimen/large_height"
-    app:behavior_hideable="true"
-    android:visibility="visible"
-
-    >
+    android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/large_height"
-        android:layout_marginVertical="@dimen/activity_margin_horizontal"
-        android:gravity="center_vertical"
-        >
+      android:id="@+id/bookmarkButton"
+      android:layout_width="@dimen/dimen_0"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:background="@drawable/button_background_selector"
+      android:clickable="true"
+      android:orientation="vertical"
+      android:padding="@dimen/standard_gap">
 
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_width="@dimen/dimen_40"
-            android:layout_height="@dimen/dimen_40"
-            android:layout_marginLeft="@dimen/standard_gap">
-        </ImageView>
+      <ImageView
+        android:id="@+id/bookmarkButtonImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:tint="?attr/rowButtonColor"
+        app:srcCompat="@drawable/ic_round_star_border_24px" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="@dimen/standard_gap"
-            android:layout_marginRight="@dimen/standard_gap">
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:layout_marginRight="50dp"
-                android:maxLines="2"
-                android:ellipsize="end"
-                />
-            <TextView
-                android:id="@+id/category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp" />
-        </LinearLayout>
+      <TextView
+        android:id="@+id/bookmarkButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="@dimen/activity_margin_horizontal"
+        android:text="CAMERA"
+        android:visibility="gone" />
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/tiny_height"
-        android:layout_marginTop="@dimen/small_height"
-        android:layout_marginBottom="@dimen/activity_margin_horizontal"
-        android:background="@android:color/darker_gray"/>
+
     <LinearLayout
-        android:layout_width="match_parent"
+      android:id="@+id/directionsButton"
+      android:layout_width="@dimen/dimen_0"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:background="@drawable/button_background_selector"
+      android:clickable="true"
+      android:orientation="vertical"
+      android:padding="@dimen/standard_gap">
+
+      <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:layout_gravity="center_horizontal"
+        android:duplicateParentState="true"
+        android:tint="?attr/rowButtonColor"
+        app:srcCompat="@drawable/ic_directions_black_24dp" />
 
-        <LinearLayout
-            android:id="@+id/bookmarkButton"
-            android:layout_width="@dimen/dimen_0"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="@dimen/standard_gap"
-            android:clickable="true"
-            android:orientation="vertical"
-            android:background="@drawable/button_background_selector"
-            >
-            <ImageView
-                android:id="@+id/bookmarkButtonImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                app:srcCompat="@drawable/ic_round_star_border_24px"
-                android:tint="?attr/rowButtonColor"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/bookmarkButtonText"
-                android:paddingTop="@dimen/activity_margin_horizontal"
-                android:layout_gravity="center_horizontal"
-                android:text="CAMERA"
-                android:visibility="gone"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/directionsButton"
-            android:layout_width="@dimen/dimen_0"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="@dimen/standard_gap"
-            android:clickable="true"
-            android:background="@drawable/button_background_selector"
-            android:orientation="vertical"
-            >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:duplicateParentState="true"
-                app:srcCompat="@drawable/ic_directions_black_24dp"
-                android:tint="?attr/rowButtonColor"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/directionsButtonText"
-                android:paddingTop="@dimen/activity_margin_horizontal"
-                android:duplicateParentState="true"
-                android:textColor="@color/text_color_selector"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/nearby_directions"
-                android:textAllCaps="true"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/wikidataButton"
-            android:layout_width="@dimen/dimen_0"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="@dimen/standard_gap"
-            android:clickable="true"
-            android:background="@drawable/button_background_selector"
-            android:orientation="vertical"
-            >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:duplicateParentState="true"
-                app:srcCompat="@drawable/ic_wikidata_logo_24dp"
-                android:tint="?attr/rowButtonColor"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/wikidataButtonText"
-                android:paddingTop="@dimen/activity_margin_horizontal"
-                android:duplicateParentState="true"
-                android:textColor="@color/text_color_selector"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/nearby_wikidata"
-                android:textAllCaps="true"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/wikipediaButton"
-            android:layout_width="@dimen/dimen_0"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="@dimen/standard_gap"
-            android:clickable="true"
-            android:background="@drawable/button_background_selector"
-            android:orientation="vertical"
-            >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:duplicateParentState="true"
-                app:srcCompat="@drawable/ic_wikipedia_logo_24dp"
-                android:tint="?attr/rowButtonColor"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/wikipediaButtonText"
-                android:paddingTop="@dimen/activity_margin_horizontal"
-                android:duplicateParentState="true"
-                android:textColor="@color/text_color_selector"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/nearby_wikipedia"
-                android:textAllCaps="true"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/commonsButton"
-            android:layout_width="@dimen/dimen_0"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="@dimen/standard_gap"
-            android:clickable="true"
-            android:background="@drawable/button_background_selector"
-            android:orientation="vertical"
-            >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:duplicateParentState="true"
-                app:srcCompat="@drawable/ic_commons_icon_vector"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/commonsButtonText"
-                android:paddingTop="@dimen/activity_margin_horizontal"
-                android:duplicateParentState="true"
-                android:textColor="@color/text_color_selector"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/nearby_commons"
-                android:textAllCaps="true"
-                />
-        </LinearLayout>
+      <TextView
+        android:id="@+id/directionsButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:duplicateParentState="true"
+        android:paddingTop="@dimen/activity_margin_horizontal"
+        android:text="@string/nearby_directions"
+        android:textAllCaps="true"
+        android:textColor="@color/text_color_selector" />
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/tiny_height"
-        android:layout_marginTop="@dimen/small_height"
-        android:layout_marginBottom="@dimen/activity_margin_horizontal"
-        android:background="@android:color/darker_gray"/>
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="match_parent"
+
+    <LinearLayout
+      android:id="@+id/wikidataButton"
+      android:layout_width="@dimen/dimen_0"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:background="@drawable/button_background_selector"
+      android:clickable="true"
+      android:orientation="vertical"
+      android:padding="@dimen/standard_gap">
+
+      <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/large_height"
-        android:layout_marginRight="@dimen/standard_gap"
-        android:layout_marginBottom="@dimen/standard_gap"
-        android:textSize="16sp" />
+        android:layout_gravity="center_horizontal"
+        android:duplicateParentState="true"
+        android:tint="?attr/rowButtonColor"
+        app:srcCompat="@drawable/ic_wikidata_logo_24dp" />
+
+      <TextView
+        android:id="@+id/wikidataButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:duplicateParentState="true"
+        android:paddingTop="@dimen/activity_margin_horizontal"
+        android:text="@string/nearby_wikidata"
+        android:textAllCaps="true"
+        android:textColor="@color/text_color_selector" />
+    </LinearLayout>
+
+    <LinearLayout
+      android:id="@+id/wikipediaButton"
+      android:layout_width="@dimen/dimen_0"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:background="@drawable/button_background_selector"
+      android:clickable="true"
+      android:orientation="vertical"
+      android:padding="@dimen/standard_gap">
+
+      <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:duplicateParentState="true"
+        android:tint="?attr/rowButtonColor"
+        app:srcCompat="@drawable/ic_wikipedia_logo_24dp" />
+
+      <TextView
+        android:id="@+id/wikipediaButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:duplicateParentState="true"
+        android:paddingTop="@dimen/activity_margin_horizontal"
+        android:text="@string/nearby_wikipedia"
+        android:textAllCaps="true"
+        android:textColor="@color/text_color_selector" />
+    </LinearLayout>
+
+    <LinearLayout
+      android:id="@+id/commonsButton"
+      android:layout_width="@dimen/dimen_0"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:background="@drawable/button_background_selector"
+      android:clickable="true"
+      android:orientation="vertical"
+      android:padding="@dimen/standard_gap">
+
+      <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:duplicateParentState="true"
+        app:srcCompat="@drawable/ic_commons_icon_vector" />
+
+      <TextView
+        android:id="@+id/commonsButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:duplicateParentState="true"
+        android:paddingTop="@dimen/activity_margin_horizontal"
+        android:text="@string/nearby_commons"
+        android:textAllCaps="true"
+        android:textColor="@color/text_color_selector" />
+    </LinearLayout>
+  </LinearLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/tiny_height"
+    android:layout_marginTop="@dimen/small_height"
+    android:layout_marginBottom="@dimen/activity_margin_horizontal"
+    android:background="@android:color/darker_gray" />
+
+  <TextView
+    android:id="@+id/description"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/large_height"
+    android:layout_marginRight="@dimen/standard_gap"
+    android:layout_marginBottom="@dimen/standard_gap"
+    android:textSize="16sp" />
 
 
 </LinearLayout>

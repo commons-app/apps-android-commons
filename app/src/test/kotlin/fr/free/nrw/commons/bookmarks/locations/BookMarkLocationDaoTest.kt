@@ -25,19 +25,21 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class BookMarkLocationDaoTest {
-    private val columns = arrayOf(COLUMN_NAME,
-            COLUMN_DESCRIPTION,
-            COLUMN_CATEGORY,
-            COLUMN_LABEL_TEXT,
-            COLUMN_LABEL_ICON,
-            COLUMN_IMAGE_URL,
-            COLUMN_WIKIPEDIA_LINK,
-            COLUMN_WIKIDATA_LINK,
-            COLUMN_COMMONS_LINK,
-            COLUMN_LAT,
-            COLUMN_LONG,
-            COLUMN_PIC,
-            COLUMN_DESTROYED)
+    private val columns = arrayOf(
+        COLUMN_NAME,
+        COLUMN_DESCRIPTION,
+        COLUMN_CATEGORY,
+        COLUMN_LABEL_TEXT,
+        COLUMN_LABEL_ICON,
+        COLUMN_IMAGE_URL,
+        COLUMN_WIKIPEDIA_LINK,
+        COLUMN_WIKIDATA_LINK,
+        COLUMN_COMMONS_LINK,
+        COLUMN_LAT,
+        COLUMN_LONG,
+        COLUMN_PIC,
+        COLUMN_DESTROYED
+    )
     private val client: ContentProviderClient = mock()
     private val database: SQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
@@ -53,7 +55,7 @@ class BookMarkLocationDaoTest {
     fun setUp() {
         exampleLabel = Label.FOREST
         exampleUri = Uri.parse("wikimedia/uri")
-        exampleLocation = LatLng(40.0,51.4, 1f)
+        exampleLocation = LatLng(40.0, 51.4, 1f)
 
         builder = Sitelinks.Builder()
         builder.setWikipediaLink("wikipediaLink")
@@ -61,8 +63,10 @@ class BookMarkLocationDaoTest {
         builder.setCommonsLink("commonsLink")
 
 
-        examplePlaceBookmark = Place("placeName", exampleLabel, "placeDescription"
-                , exampleLocation, "placeCategory", builder.build(),"picName","placeDestroyed")
+        examplePlaceBookmark = Place(
+            "placeName", exampleLabel, "placeDescription"
+            , exampleLocation, "placeCategory", builder.build(), "picName", "placeDestroyed"
+        )
         testObject = BookmarkLocationsDao { client }
     }
 
@@ -95,7 +99,7 @@ class BookMarkLocationDaoTest {
                 assertEquals(builder.build().wikipediaLink, it.siteLinks.wikipediaLink)
                 assertEquals(builder.build().wikidataLink, it.siteLinks.wikidataLink)
                 assertEquals(builder.build().commonsLink, it.siteLinks.commonsLink)
-                assertEquals("picName",it.pic)
+                assertEquals("picName", it.pic)
                 assertEquals("placeDestroyed", it.destroyed)
             }
         }
@@ -103,23 +107,29 @@ class BookMarkLocationDaoTest {
 
     @Test
     fun getAllLocationBookmarks() {
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(createCursor(14))
+        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(
+            createCursor(14)
+        )
 
         var result = testObject.allBookmarksLocations
 
-        assertEquals(14,(result.size))
+        assertEquals(14, (result.size))
 
     }
 
     @Test(expected = RuntimeException::class)
     fun getAllLocationBookmarksTranslatesExceptions() {
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(RemoteException(""))
+        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(
+            RemoteException("")
+        )
         testObject.allBookmarksLocations
     }
 
     @Test
     fun getAllLocationBookmarksReturnsEmptyList_emptyCursor() {
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(createCursor(0))
+        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(
+            createCursor(0)
+        )
         assertTrue(testObject.allBookmarksLocations.isEmpty())
     }
 
@@ -156,11 +166,23 @@ class BookMarkLocationDaoTest {
             assertEquals(examplePlaceBookmark.category, cv.getAsString(COLUMN_CATEGORY))
             assertEquals(examplePlaceBookmark.location.latitude, cv.getAsDouble(COLUMN_LAT))
             assertEquals(examplePlaceBookmark.location.longitude, cv.getAsDouble(COLUMN_LONG))
-            assertEquals(examplePlaceBookmark.siteLinks.wikipediaLink.toString(), cv.getAsString(COLUMN_WIKIPEDIA_LINK))
-            assertEquals(examplePlaceBookmark.siteLinks.wikidataLink.toString(), cv.getAsString(COLUMN_WIKIDATA_LINK))
-            assertEquals(examplePlaceBookmark.siteLinks.commonsLink.toString(), cv.getAsString(COLUMN_COMMONS_LINK))
+            assertEquals(
+                examplePlaceBookmark.siteLinks.wikipediaLink.toString(),
+                cv.getAsString(COLUMN_WIKIPEDIA_LINK)
+            )
+            assertEquals(
+                examplePlaceBookmark.siteLinks.wikidataLink.toString(),
+                cv.getAsString(COLUMN_WIKIDATA_LINK)
+            )
+            assertEquals(
+                examplePlaceBookmark.siteLinks.commonsLink.toString(),
+                cv.getAsString(COLUMN_COMMONS_LINK)
+            )
             assertEquals(examplePlaceBookmark.pic.toString(), cv.getAsString(COLUMN_PIC))
-            assertEquals(examplePlaceBookmark.destroyed.toString(), cv.getAsString(COLUMN_DESTROYED))
+            assertEquals(
+                examplePlaceBookmark.destroyed.toString(),
+                cv.getAsString(COLUMN_DESTROYED)
+            )
         }
     }
 
@@ -170,7 +192,11 @@ class BookMarkLocationDaoTest {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(1))
 
         assertFalse(testObject.updateBookmarkLocation(examplePlaceBookmark))
-        verify(client).delete(eq(BookmarkLocationsContentProvider.uriForName(examplePlaceBookmark.name)), isNull(), isNull())
+        verify(client).delete(
+            eq(BookmarkLocationsContentProvider.uriForName(examplePlaceBookmark.name)),
+            isNull(),
+            isNull()
+        )
     }
 
     @Test
@@ -181,7 +207,9 @@ class BookMarkLocationDaoTest {
 
     @Test(expected = RuntimeException::class)
     fun findLocationBookmarkTranslatesExceptions() {
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(RemoteException(""))
+        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(
+            RemoteException("")
+        )
         testObject.findBookmarkLocation(examplePlaceBookmark)
     }
 
@@ -265,9 +293,23 @@ class BookMarkLocationDaoTest {
     private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
 
         for (i in 0 until rowCount) {
-            addRow(listOf("placeName", "placeDescription","placeCategory", exampleLabel.text, exampleLabel.icon,
-                    exampleUri, builder.build().wikipediaLink, builder.build().wikidataLink, builder.build().commonsLink,
-                    exampleLocation.latitude, exampleLocation.longitude, "picName", "placeDestroyed"))
+            addRow(
+                listOf(
+                    "placeName",
+                    "placeDescription",
+                    "placeCategory",
+                    exampleLabel.text,
+                    exampleLabel.icon,
+                    exampleUri,
+                    builder.build().wikipediaLink,
+                    builder.build().wikidataLink,
+                    builder.build().commonsLink,
+                    exampleLocation.latitude,
+                    exampleLocation.longitude,
+                    "picName",
+                    "placeDestroyed"
+                )
+            )
         }
     }
 }

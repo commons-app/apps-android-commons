@@ -59,8 +59,8 @@ class DepictsPresenterTest {
     @Test
     fun `search results emission returns distinct results + selected items without disambiguations`() {
         val searchResults = listOf(
-            depictedItem(id="nonUnique"),
-            depictedItem(id="nonUnique"),
+            depictedItem(id = "nonUnique"),
+            depictedItem(id = "nonUnique"),
             depictedItem(
                 instanceOfs = listOf(WikidataDisambiguationItems.CATEGORY.id),
                 id = "unique"
@@ -75,7 +75,7 @@ class DepictsPresenterTest {
         verify(view).showError(false)
         depictsPresenter.depictedItems
             .test()
-            .assertValue(listOf(selectedItem, depictedItem(id="nonUnique")))
+            .assertValue(listOf(selectedItem, depictedItem(id = "nonUnique")))
     }
 
 

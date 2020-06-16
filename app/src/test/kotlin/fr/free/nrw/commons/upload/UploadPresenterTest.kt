@@ -22,8 +22,10 @@ class UploadPresenterTest {
 
     @Mock
     internal lateinit var repository: UploadRepository
+
     @Mock
     internal lateinit var view: UploadContract.View
+
     @Mock
     lateinit var contribution: Contribution
 
@@ -77,7 +79,7 @@ class UploadPresenterTest {
 
     }
 
-    private fun deletePictureBaseTest(){
+    private fun deletePictureBaseTest() {
         uploadableFiles.clear()
     }
 
@@ -85,7 +87,7 @@ class UploadPresenterTest {
      * Test which asserts If the next fragment to be shown is not one of the MediaDetailsFragment, lets hide the top card
      */
     @Test
-    fun hideTopCardWhenReachedTheLastFile(){
+    fun hideTopCardWhenReachedTheLastFile() {
         deletePictureBaseTest()
         uploadableFiles.add(uploadableFile)
         uploadPresenter.deletePictureAtIndex(0)
@@ -97,7 +99,7 @@ class UploadPresenterTest {
      * Test media deletion during single upload
      */
     @Test
-    fun testDeleteWhenSingleUpload(){
+    fun testDeleteWhenSingleUpload() {
         deletePictureBaseTest()
         uploadableFiles.add(uploadableFile)
         uploadPresenter.deletePictureAtIndex(0)
@@ -111,7 +113,7 @@ class UploadPresenterTest {
      * Test media deletion during multiple upload
      */
     @Test
-    fun testDeleteWhenMultipleFilesUpload(){
+    fun testDeleteWhenMultipleFilesUpload() {
         deletePictureBaseTest()
         uploadableFiles.add(uploadableFile)
         uploadableFiles.add(anotherUploadableFile)

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:gravity="center"
+  android:orientation="vertical">
+
+  <ImageView
+    android:id="@+id/alert_image"
+    android:layout_width="@dimen/dimen_140"
+    android:layout_height="@dimen/dimen_200"
+    android:layout_margin="@dimen/activity_margin_horizontal" />
+
+  <TextView
+    android:id="@+id/alert_text"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:gravity="center">
-
-    <ImageView
-        android:layout_margin="@dimen/activity_margin_horizontal"
-        android:layout_width="@dimen/dimen_140"
-        android:layout_height="@dimen/dimen_200"
-        android:id="@+id/alert_image" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/alert_text"
-        android:layout_marginRight="@dimen/activity_margin_horizontal"
-        android:layout_marginLeft="@dimen/activity_margin_horizontal" />
+    android:layout_marginLeft="@dimen/activity_margin_horizontal"
+    android:layout_marginRight="@dimen/activity_margin_horizontal" />
 
 </LinearLayout>

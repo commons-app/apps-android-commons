@@ -12,10 +12,19 @@ class PageableDepictionsDataSourceTest {
     @Test
     fun `loadFunction loads depictions`() {
         val depictsClient: DepictsClient = mock()
-        whenever(depictsClient.searchForDepictions("test", 0, 1)).thenReturn(Single.just(emptyList()))
+        whenever(
+            depictsClient.searchForDepictions(
+                "test",
+                0,
+                1
+            )
+        ).thenReturn(Single.just(emptyList()))
         val pageableDepictionsDataSource = PageableDepictionsDataSource(mock(), depictsClient)
         pageableDepictionsDataSource.onQueryUpdated("test")
-        assertThat(pageableDepictionsDataSource.loadFunction.invoke(0, 1), Matchers.`is`(emptyList()))
+        assertThat(
+            pageableDepictionsDataSource.loadFunction.invoke(0, 1),
+            Matchers.`is`(emptyList())
+        )
     }
 }
 

@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.textfield.TextInputLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/image_title_container"
+<com.google.android.material.textfield.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/image_title_container"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  tools:showIn="@layout/activity_upload">
+
+  <androidx.appcompat.widget.AppCompatEditText
+    android:id="@+id/description_item_edit_text"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:showIn="@layout/activity_upload">
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/description_item_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/share_title_hint"
-        android:imeOptions="actionNext|flagNoExtractUi"
-        android:inputType="text"
-        android:nextFocusForward="@+id/image_description" />
+    android:hint="@string/share_title_hint"
+    android:imeOptions="actionNext|flagNoExtractUi"
+    android:inputType="text"
+    android:nextFocusForward="@+id/image_description" />
 </com.google.android.material.textfield.TextInputLayout>

@@ -6,6 +6,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 const val CATEGORY_PREFIX = "Category:"
+
 /**
  * Category Client to handle custom calls to Commons MediaWiki APIs
  */

@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:background="@android:color/transparent"
+  android:clickable="true"
+  android:focusable="true"
+  android:gravity="center"
+  tools:background="@color/black">
+
+  <ImageView
+    android:id="@+id/cart_icon_image_view"
     android:layout_width="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
-    android:background="@android:color/transparent"
-    android:clickable="true"
-    android:focusable="true"
+    android:layout_marginEnd="@dimen/activity_margin_horizontal"
+    android:layout_marginRight="@dimen/activity_margin_horizontal"
     android:gravity="center"
-    tools:background="@color/black">
+    app:srcCompat="@drawable/ic_notifications_white_24dp" />
 
-    <ImageView
-        android:id="@+id/cart_icon_image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/activity_margin_horizontal"
-        android:gravity="center"
-        android:layout_marginRight="@dimen/activity_margin_horizontal"
-        app:srcCompat="@drawable/ic_notifications_white_24dp" />
-
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/notification_count_badge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/cart_icon_image_view"
-        android:layout_alignEnd="@id/cart_icon_image_view"
-        android:layout_alignRight="@id/cart_icon_image_view"
-        android:background="@drawable/notification_badge"
-        android:gravity="center"
-        android:padding="@dimen/miniscule_margin"
-        android:textColor="#ffffffff"
-        android:textSize="7sp"
-        android:textStyle="bold"
-        android:visibility="gone"
-        tools:text="9+"
-        tools:visibility="visible" />
+  <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/notification_count_badge"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignTop="@id/cart_icon_image_view"
+    android:layout_alignEnd="@id/cart_icon_image_view"
+    android:layout_alignRight="@id/cart_icon_image_view"
+    android:background="@drawable/notification_badge"
+    android:gravity="center"
+    android:padding="@dimen/miniscule_margin"
+    android:textColor="#ffffffff"
+    android:textSize="7sp"
+    android:textStyle="bold"
+    android:visibility="gone"
+    tools:text="9+"
+    tools:visibility="visible" />
 </RelativeLayout>

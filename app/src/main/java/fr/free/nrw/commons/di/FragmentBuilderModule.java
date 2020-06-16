@@ -25,74 +25,74 @@ import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 
 /**
- * This Class Represents the Module for dependency injection (using dagger)
- * so, if a developer needs to add a new Fragment to the commons app
- * then that must be mentioned here to inject the dependencies 
+ * This Class Represents the Module for dependency injection (using dagger) so, if a developer needs
+ * to add a new Fragment to the commons app then that must be mentioned here to inject the
+ * dependencies
  */
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class FragmentBuilderModule {
 
-    @ContributesAndroidInjector
-    abstract ContributionsListFragment bindContributionsListFragment();
+  @ContributesAndroidInjector
+  abstract ContributionsListFragment bindContributionsListFragment();
 
-    @ContributesAndroidInjector
-    abstract MediaDetailFragment bindMediaDetailFragment();
+  @ContributesAndroidInjector
+  abstract MediaDetailFragment bindMediaDetailFragment();
 
-    @ContributesAndroidInjector
-    abstract MediaDetailPagerFragment bindMediaDetailPagerFragment();
+  @ContributesAndroidInjector
+  abstract MediaDetailPagerFragment bindMediaDetailPagerFragment();
 
-    @ContributesAndroidInjector
-    abstract SettingsFragment bindSettingsFragment();
+  @ContributesAndroidInjector
+  abstract SettingsFragment bindSettingsFragment();
 
-    @ContributesAndroidInjector
-    abstract CategoryImagesListFragment bindFeaturedImagesListFragment();
+  @ContributesAndroidInjector
+  abstract CategoryImagesListFragment bindFeaturedImagesListFragment();
 
-    @ContributesAndroidInjector
-    abstract DepictedImagesFragment bindDepictedImagesFragment();
+  @ContributesAndroidInjector
+  abstract DepictedImagesFragment bindDepictedImagesFragment();
 
-    @ContributesAndroidInjector
-    abstract SubDepictionListFragment bindSubDepictionListFragment();
+  @ContributesAndroidInjector
+  abstract SubDepictionListFragment bindSubDepictionListFragment();
 
-    @ContributesAndroidInjector
-    abstract SubCategoryListFragment bindSubCategoryListFragment();
+  @ContributesAndroidInjector
+  abstract SubCategoryListFragment bindSubCategoryListFragment();
 
-    @ContributesAndroidInjector
-    abstract SearchImageFragment bindBrowseImagesListFragment();
+  @ContributesAndroidInjector
+  abstract SearchImageFragment bindBrowseImagesListFragment();
 
-    @ContributesAndroidInjector
-    abstract SearchCategoryFragment bindSearchCategoryListFragment();
+  @ContributesAndroidInjector
+  abstract SearchCategoryFragment bindSearchCategoryListFragment();
 
-    @ContributesAndroidInjector
-    abstract SearchDepictionsFragment bindSearchDepictionListFragment();
+  @ContributesAndroidInjector
+  abstract SearchDepictionsFragment bindSearchDepictionListFragment();
 
-    @ContributesAndroidInjector
-    abstract RecentSearchesFragment bindRecentSearchesFragment();
+  @ContributesAndroidInjector
+  abstract RecentSearchesFragment bindRecentSearchesFragment();
 
-    @ContributesAndroidInjector
-    abstract ContributionsFragment bindContributionsFragment();
+  @ContributesAndroidInjector
+  abstract ContributionsFragment bindContributionsFragment();
 
-    @ContributesAndroidInjector(modules = NearbyParentFragmentModule.class)
-    abstract NearbyParentFragment bindNearbyParentFragment();
+  @ContributesAndroidInjector(modules = NearbyParentFragmentModule.class)
+  abstract NearbyParentFragment bindNearbyParentFragment();
 
-    @ContributesAndroidInjector
-    abstract BookmarkPicturesFragment bindBookmarkPictureListFragment();
+  @ContributesAndroidInjector
+  abstract BookmarkPicturesFragment bindBookmarkPictureListFragment();
 
-    @ContributesAndroidInjector(modules = BookmarkLocationsFragmentModule.class)
-    abstract BookmarkLocationsFragment bindBookmarkLocationListFragment();
+  @ContributesAndroidInjector(modules = BookmarkLocationsFragmentModule.class)
+  abstract BookmarkLocationsFragment bindBookmarkLocationListFragment();
 
-    @ContributesAndroidInjector
-    abstract ReviewImageFragment bindReviewOutOfContextFragment();
+  @ContributesAndroidInjector
+  abstract ReviewImageFragment bindReviewOutOfContextFragment();
 
-    @ContributesAndroidInjector
-    abstract UploadMediaDetailFragment bindUploadMediaDetailFragment();
+  @ContributesAndroidInjector
+  abstract UploadMediaDetailFragment bindUploadMediaDetailFragment();
 
-    @ContributesAndroidInjector
-    abstract UploadCategoriesFragment bindUploadCategoriesFragment();
+  @ContributesAndroidInjector
+  abstract UploadCategoriesFragment bindUploadCategoriesFragment();
 
-    @ContributesAndroidInjector
-    abstract DepictsFragment bindDepictsFragment();
+  @ContributesAndroidInjector
+  abstract DepictsFragment bindDepictsFragment();
 
-    @ContributesAndroidInjector
-    abstract MediaLicenseFragment bindMediaLicenseFragment();
+  @ContributesAndroidInjector
+  abstract MediaLicenseFragment bindMediaLicenseFragment();
 }

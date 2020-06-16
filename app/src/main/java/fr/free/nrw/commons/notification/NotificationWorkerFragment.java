@@ -2,9 +2,7 @@ package fr.free.nrw.commons.notification;
 
 import android.app.Fragment;
 import android.os.Bundle;
-
 import androidx.annotation.Nullable;
-
 import java.util.List;
 
 /**
@@ -12,19 +10,20 @@ import java.util.List;
  */
 
 public class NotificationWorkerFragment extends Fragment {
-    private List<Notification> notificationList;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-    }
+  private List<Notification> notificationList;
 
-    public void setNotificationList(List<Notification> notificationList){
-        this.notificationList = notificationList;
-    }
+  @Override
+  public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setRetainInstance(true);
+  }
 
-    public List<Notification> getNotificationList(){
-        return notificationList;
-    }
+  public void setNotificationList(List<Notification> notificationList) {
+    this.notificationList = notificationList;
+  }
+
+  public List<Notification> getNotificationList() {
+    return notificationList;
+  }
 }

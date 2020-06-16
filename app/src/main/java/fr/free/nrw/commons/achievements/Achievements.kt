@@ -44,6 +44,7 @@ class Achievements {
     private var revertCount = 0
 
     constructor() {}
+
     /**
      * constructor for achievements class to set its data members
      * @param uniqueUsedImages
@@ -53,12 +54,14 @@ class Achievements {
      * @param imagesUploaded
      * @param revertCount
      */
-    constructor(uniqueUsedImages: Int,
-                articlesUsingImages: Int,
-                thanksReceived: Int,
-                featuredImages: Int,
-                imagesUploaded: Int,
-                revertCount: Int) {
+    constructor(
+        uniqueUsedImages: Int,
+        articlesUsingImages: Int,
+        thanksReceived: Int,
+        featuredImages: Int,
+        imagesUploaded: Int,
+        revertCount: Int
+    ) {
         this.uniqueUsedImages = uniqueUsedImages
         this.articlesUsingImages = articlesUsingImages
         this.thanksReceived = thanksReceived
@@ -87,12 +90,14 @@ class Achievements {
          */
         @JvmStatic
         fun from(response: FeedbackResponse): Achievements {
-            return Achievements(response.uniqueUsedImages,
-                    response.articlesUsingImages,
-                    response.thanksReceived,
-                    response.featuredImages.qualityImages
-                            + response.featuredImages.featuredPicturesOnWikimediaCommons, 0,
-                    response.deletedUploads)
+            return Achievements(
+                response.uniqueUsedImages,
+                response.articlesUsingImages,
+                response.thanksReceived,
+                response.featuredImages.qualityImages
+                        + response.featuredImages.featuredPicturesOnWikimediaCommons, 0,
+                response.deletedUploads
+            )
         }
     }
 }

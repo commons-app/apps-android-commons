@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing">העלאת %1$s מסתיימת</string>
   <string name="upload_failed_notification_title">העלאת %1$s נכשלה</string>
   <string name="upload_failed_notification_subtitle">נא ללחוץ כדי להציג</string>
-    <string name="title_activity_contributions">ההעלאות שלי</string>
+  <string name="title_activity_contributions">ההעלאות שלי</string>
   <string name="contribution_state_queued">בתור</string>
   <string name="contribution_state_failed">נכשלה</string>
   <string name="contribution_state_in_progress">%1$d%% הושלמו</string>
@@ -54,7 +54,7 @@
   <string name="menu_about">אודות</string>
   <string name="about_license">תוכנת קוד-פתוח המשוחררת תחת רישיון &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;אפאצ\'י גרסה 2&lt;/a&gt;</string>
   <string name="about_improve">קוד מקור ב־&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. דיווחי באגים ב&lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;באגזילה&lt;/a&gt;.</string>
-  <string name="about_privacy_policy"/>
+  <string name="about_privacy_policy" />
   <string name="title_activity_about">אודות</string>
   <string name="menu_feedback">שליחת משוב (בדוא\"ל)</string>
   <string name="provider_categories">קטגוריות בשימוש לאחרונה</string>
