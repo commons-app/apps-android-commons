@@ -1,8 +1,10 @@
 package fr.free.nrw.commons.contributions;
 
+import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -164,24 +167,42 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
 
             @Override
             public void onPageSelected(int position) {
-                switch (position) {
+                switch (position){
                     case CONTRIBUTIONS_TAB_POSITION:
                         Timber.d("Contributions tab selected");
-                        tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
-                        isContributionsFragmentVisible = true;
-                        ViewUtil.hideKeyboard(tabLayout.getRootView());
-                        updateMenuItem();
+                        selectScreen(true, "Contributions");
                         break;
                     case NEARBY_TAB_POSITION:
-                        Timber.d("Nearby tab selected");
-                        tabLayout.getTabAt(NEARBY_TAB_POSITION).select();
-                        isContributionsFragmentVisible = false;
-                        updateMenuItem();
+                        if (ContextCompat.checkSelfPermission(
+                            MainActivity.this, permission.ACCESS_FINE_LOCATION) ==
+                            PackageManager.PERMISSION_GRANTED) {
+                            tabLayout.getTabAt(NEARBY_TAB_POSITION).select();
+                            Timber.d("Nearby tab selected");
+                            selectScreen(false, "Nearby location granted");
+                        } else {
+                            tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
+                            Timber.d("Contributions tab redirected");
+                            selectScreen(true, "Nearby location not granted");
+                        }
                         break;
                     default:
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
                         break;
                 }
+            }
+
+            /*
+             * This method allow us to display the correct fragment according to
+             * the Permission request
+             * @param contributionsFragmentFlag
+             * @param message
+             */
+
+            public void selectScreen(boolean contributionsFragmentFlag, String message){
+                isContributionsFragmentVisible = contributionsFragmentFlag;
+                ViewUtil.hideKeyboard(tabLayout.getRootView());
+                ViewUtil.showShortToast(MainActivity.this, message);
+                updateMenuItem();
             }
 
             @Override
@@ -312,6 +333,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
                 menu.findItem(R.id.notifications).setVisible(true);
                 menu.findItem(R.id.list_sheet).setVisible(false);
                 Timber.d("Contributions fragment notifications menu item is visible");
+
             } else {
                 // Display bottom list menu item
                 menu.findItem(R.id.notifications).setVisible(false);
