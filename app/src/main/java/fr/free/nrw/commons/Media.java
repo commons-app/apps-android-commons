@@ -53,27 +53,6 @@ public class Media implements Parcelable {
     }
 
     /**
-     * Provide Media constructor
-     * @param imageUrl Media image URL
-     * @param filename Media filename
-     * @param fallbackDescription Media description
-     * @param dateUploaded Media date uploaded
-     * @param creator Media creator
-     */
-    public Media(final String imageUrl, final String filename,
-        final String fallbackDescription,
-        final Date dateUploaded,
-        final String creator) {
-        this();
-        thumbUrl = imageUrl;
-        this.imageUrl = imageUrl;
-        this.filename = filename;
-        this.fallbackDescription = fallbackDescription;
-        this.dateUploaded = dateUploaded;
-        this.creator = creator;
-    }
-
-    /**
      * Constructor with all parameters
      */
     public Media(final String thumbUrl,
@@ -110,13 +89,20 @@ public class Media implements Parcelable {
         this(media.getThumbUrl(), media.getImageUrl(), media.getFilename(),
             media.getFallbackDescription(), media.getDateUploaded(), media.getLicense(),
             media.getLicenseUrl(), media.getCreator(), media.getPageId(), media.getCategories(),
-            media.getCoordinates(), media.getCaptions(),media.getDescriptions(),media.getDepictionIds());
+            media.getCoordinates(), media.getCaptions(), media.getDescriptions(),
+            media.getDepictionIds());
     }
 
     public Media(final String filename,
         Map<String, String> captions, final String fallbackDescription,
         final String creator, final List<String> categories) {
-        this(null, filename, fallbackDescription, new Date(), creator);
+        this();
+        thumbUrl = null;
+        this.imageUrl = null;
+        this.filename = filename;
+        this.fallbackDescription = fallbackDescription;
+        this.dateUploaded = new Date();
+        this.creator = creator;
         this.categories = categories;
         this.captions=captions;
     }
@@ -132,7 +118,7 @@ public class Media implements Parcelable {
     }
 
     private static List<String> readList(Parcel in) {
-        final ArrayList<String> list = new ArrayList<>();
+        final List<String> list = new ArrayList<>();
         in.readStringList(list);
         return list;
     }

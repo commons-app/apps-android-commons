@@ -1,8 +1,5 @@
 package fr.free.nrw.commons.explore.depictions
 
-import fr.free.nrw.commons.BuildConfig
-import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.depictions.models.DepictionResponse
 import fr.free.nrw.commons.depictions.subClass.models.SparqlResponse
 import fr.free.nrw.commons.media.MediaInterface
 import fr.free.nrw.commons.upload.depicts.DepictsInterface
@@ -42,30 +39,6 @@ class DepictsClient @Inject constructor(
             .flatMap(::getEntities)
             .map { it.entities().values.map(::DepictedItem) }
     }
-
-    /**
-     * @return list of images for a particular depict entity
-     */
-    fun fetchImagesForDepictedItem(query: String, sroffset: Int): Single<List<Media>> {
-        return mediaInterface.fetchImagesForDepictedItem(
-            "haswbstatement:" + BuildConfig.DEPICTS_PROPERTY + "=" + query,
-            sroffset.toString()
-        )
-            .map { mwQueryResponse: DepictionResponse ->
-                mwQueryResponse.query
-                    .search
-                    .map {
-                        Media(
-                            getUrl(it.title),
-                            it.title,
-                            "",
-                            safeParseDate(it.timestamp),
-                            ""
-                        )
-                    }
-            }
-    }
-
 
     private fun getUrl(title: String): String {
         return getImageUrl(title, LARGE_IMAGE_SIZE)

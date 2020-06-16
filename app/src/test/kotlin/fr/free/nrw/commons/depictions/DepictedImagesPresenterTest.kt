@@ -3,7 +3,6 @@ package fr.free.nrw.commons.depictions
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.depictions.Media.DepictedImagesFragment
 import fr.free.nrw.commons.depictions.Media.DepictedImagesPresenter
-import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Single
@@ -27,9 +26,6 @@ class DepictedImagesPresenterTest {
     lateinit var jsonKvStore: JsonKvStore
 
     @Mock
-    lateinit var depictsClient: DepictsClient
-
-    @Mock
     lateinit var mediaClient: MediaClient
 
     lateinit var testScheduler: TestScheduler
@@ -49,14 +45,15 @@ class DepictedImagesPresenterTest {
         testScheduler = TestScheduler()
         mediaList.add(mediaItem)
         testSingle = Single.just(mediaList)
-        depictedImagesPresenter = DepictedImagesPresenter(jsonKvStore, depictsClient, mediaClient, testScheduler, testScheduler)
+        depictedImagesPresenter = DepictedImagesPresenter(jsonKvStore,
+            mediaClient, testScheduler, testScheduler)
         depictedImagesPresenter.onAttachView(view)
     }
 
     @Test
     fun initList() {
         Mockito.`when`(
-            depictsClient.fetchImagesForDepictedItem(ArgumentMatchers.anyString(),
+            mediaClient.fetchImagesForDepictedItem(ArgumentMatchers.anyString(),
                 ArgumentMatchers.anyInt())
         ).thenReturn(testSingle)
         depictedImagesPresenter.initList("rabbit")

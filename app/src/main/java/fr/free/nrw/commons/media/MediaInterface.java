@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.media;
 
-import fr.free.nrw.commons.depictions.models.DepictionResponse;
 import io.reactivex.Single;
 import java.util.Map;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
@@ -123,7 +122,9 @@ public interface MediaInterface {
      * @param sroffset number od depictions already fetched, this is useful in implementing pagination
      */
 
-    @GET("w/api.php?action=query&list=search&format=json&srnamespace=6")
-    Single<DepictionResponse> fetchImagesForDepictedItem(@Query("srsearch") String query, @Query("sroffset") String sroffset);
+    @GET("w/api.php?action=query&format=json&formatversion=2" + //Basic parameters
+        "&generator=search&gsrnamespace=6" + //Search parameters
+        MEDIA_PARAMS)
+    Single<MwQueryResponse> fetchImagesForDepictedItem(@Query("gsrsearch") String query, @Query("gsroffset") String sroffset);
 
 }

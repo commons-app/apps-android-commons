@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.media
 
+import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_ID_PREFIX
 import fr.free.nrw.commons.explore.media.MediaConverter
@@ -99,6 +100,17 @@ class MediaClient @Inject constructor(
      */
     fun getMediaListFromSearch(keyword: String?, limit: Int, offset: Int) =
         responseToMediaList(mediaInterface.getMediaListFromSearch(keyword, limit, offset))
+
+    /**
+     * @return list of images for a particular depict entity
+     */
+    fun fetchImagesForDepictedItem(query: String, sroffset: Int): Single<List<Media>> {
+        return responseToMediaList(mediaInterface.fetchImagesForDepictedItem(
+            "haswbstatement:" + BuildConfig.DEPICTS_PROPERTY + "=" + query,
+            sroffset.toString()
+        ))
+    }
+
 
     private fun responseToMediaList(
         response: Single<MwQueryResponse>,
