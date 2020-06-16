@@ -519,6 +519,14 @@ public class Media implements Parcelable {
     }
 
     /**
+     * Returns wikicode to use the media file on a MediaWiki site
+     * @return
+     */
+    public String getWikiCode() {
+        return String.format("[[%s|thumb|%s]]", filename, thumbnailTitle);
+    }
+
+    /**
      * Sets the categories the file falls under.
      * </p>
      * Does not append: i.e. will clear the current categories

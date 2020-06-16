@@ -6,11 +6,9 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.utils.createMockDataSourceFactory
 import io.reactivex.Scheduler
 import io.reactivex.Single
-import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.*
-import org.mockito.Mockito.any
 import org.mockito.Mockito.mock
 
 /**
