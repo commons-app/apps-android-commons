@@ -17,7 +17,9 @@ class SearchDepictionsFragment : BaseSearchFragment<DepictedItem>(),
 
     override val emptyTemplateTextId: Int = R.string.depictions_not_found
 
-    override val injectedPresenter: SearchFragmentContract.Presenter<DepictedItem>
+    override val errorTextId: Int = R.string.error_loading_depictions
+
+    override val injectedPresenter: SearchDepictionsFragmentContract.Presenter
         get() = presenter
 
     override val pagedListAdapter by lazy {

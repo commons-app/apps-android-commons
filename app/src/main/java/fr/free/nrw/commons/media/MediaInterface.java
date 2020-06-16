@@ -2,6 +2,7 @@ package fr.free.nrw.commons.media;
 
 import fr.free.nrw.commons.depictions.models.DepictionResponse;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.util.Map;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import retrofit2.http.GET;
@@ -65,13 +66,13 @@ public interface MediaInterface {
      *
      * @param keyword      the searched keyword
      * @param itemLimit    how many images are returned
-     * @param continuation the continuation string from the previous query
+     * @param offset       the offset in the result set
      * @return
      */
     @GET("w/api.php?action=query&format=json&formatversion=2" + //Basic parameters
             "&generator=search&gsrwhat=text&gsrnamespace=6" + //Search parameters
             MEDIA_PARAMS)
-    Observable<MwQueryResponse> getMediaListFromSearch(@Query("gsrsearch") String keyword, @Query("gsrlimit") int itemLimit, @QueryMap Map<String, String> continuation);
+    Single<MwQueryResponse> getMediaListFromSearch(@Query("gsrsearch") String keyword, @Query("gsrlimit") int itemLimit, @Query("gsroffset") int offset);
 
     /**
      * Fetches Media object from the imageInfo API

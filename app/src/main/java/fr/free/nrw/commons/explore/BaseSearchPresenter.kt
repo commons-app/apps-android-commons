@@ -14,8 +14,6 @@ abstract class BaseSearchPresenter<T>(
 
     private val DUMMY: SearchFragmentContract.View<T> = proxy()
     private var view: SearchFragmentContract.View<T> = DUMMY
-    private var currentQuery: String? = null
-
 
     private val compositeDisposable = CompositeDisposable()
     override val listFooterData = MutableLiveData<List<FooterItem>>().apply { value = emptyList() }
@@ -27,29 +25,28 @@ abstract class BaseSearchPresenter<T>(
             pageableDataSource.loadingStates
                 .observeOn(mainThreadScheduler)
                 .subscribe(::onLoadingState, Timber::e),
-            pageableDataSource.noItemsLoadedEvent.subscribe {
-                setEmptyViewText()
-            }
+            pageableDataSource.noItemsLoadedQueries.subscribe(view::showEmptyText)
         )
     }
 
     private fun onLoadingState(it: LoadingState) = when (it) {
-        LoadingState.Loading -> listFooterData.postValue(listOf(FooterItem.LoadingItem))
+        LoadingState.Loading -> {
+            view.hideEmptyText()
+            listFooterData.postValue(listOf(FooterItem.LoadingItem))
+        }
         LoadingState.Complete -> {
             listFooterData.postValue(emptyList())
             view.hideInitialLoadProgress()
         }
-        LoadingState.InitialLoad -> view.showInitialLoadInProgress()
+        LoadingState.InitialLoad -> {
+            view.hideEmptyText()
+            view.showInitialLoadInProgress()
+        }
         LoadingState.Error -> {
-            setEmptyViewText()
             view.showSnackbar()
             view.hideInitialLoadProgress()
             listFooterData.postValue(listOf(FooterItem.RefreshItem))
         }
-    }
-
-    private fun setEmptyViewText() {
-        currentQuery?.let(view::setEmptyViewText)
     }
 
     override fun retryFailedRequest() {
@@ -62,7 +59,6 @@ abstract class BaseSearchPresenter<T>(
     }
 
     override fun onQueryUpdated(query: String) {
-        currentQuery = query
         pageableDataSource.onQueryUpdated(query)
     }
 

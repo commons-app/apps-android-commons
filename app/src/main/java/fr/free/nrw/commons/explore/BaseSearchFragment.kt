@@ -5,8 +5,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -24,9 +23,10 @@ import kotlinx.android.synthetic.main.fragment_search_paginated.*
 abstract class BaseSearchFragment<T> : CommonsDaggerSupportFragment(),
     SearchFragmentContract.View<T> {
 
-    abstract val pagedListAdapter: PagedListAdapter<T,*>
+    abstract val pagedListAdapter: PagedListAdapter<T, *>
     abstract val injectedPresenter: SearchFragmentContract.Presenter<T>
     abstract val emptyTemplateTextId: Int
+    abstract val errorTextId: Int
     private val loadingAdapter by lazy { FooterAdapter { injectedPresenter.retryFailedRequest() } }
     private val mergeAdapter by lazy { MergeAdapter(pagedListAdapter, loadingAdapter) }
     private var searchResults: LiveData<PagedList<T>>? = null
@@ -53,9 +53,7 @@ abstract class BaseSearchFragment<T> : CommonsDaggerSupportFragment(),
         this.searchResults?.removeObservers(viewLifecycleOwner)
         this.searchResults = searchResults
         searchResults.observe(viewLifecycleOwner, Observer {
-            pagedListAdapter.submitList(it)
-            contentNotFound.visibility = if (it.loadedCount == 0) VISIBLE else GONE
-        })
+            pagedListAdapter.submitList(it) })
     }
 
     override fun onAttach(context: Context) {
@@ -69,24 +67,29 @@ abstract class BaseSearchFragment<T> : CommonsDaggerSupportFragment(),
         injectedPresenter.onDetachView()
     }
 
-    override fun setEmptyViewText(query: String) {
-        contentNotFound.text = getString(emptyTemplateTextId, query)
-    }
-
     override fun hideInitialLoadProgress() {
-        paginatedSearchInitialLoadProgress.visibility = View.GONE
+        paginatedSearchInitialLoadProgress.visibility = GONE
     }
 
     override fun showInitialLoadInProgress() {
-        paginatedSearchInitialLoadProgress.visibility = View.VISIBLE
+        paginatedSearchInitialLoadProgress.visibility = VISIBLE
     }
 
     override fun showSnackbar() {
-        ViewUtil.showShortSnackbar(paginatedSearchResultsList, R.string.error_loading_depictions)
+        ViewUtil.showShortSnackbar(paginatedSearchResultsList, errorTextId)
     }
 
     fun onQueryUpdated(query: String) {
         injectedPresenter.onQueryUpdated(query)
+    }
+
+    override fun showEmptyText(query: String) {
+        contentNotFound.text = getString(emptyTemplateTextId, query)
+        contentNotFound.visibility = VISIBLE
+    }
+
+    override fun hideEmptyText() {
+        contentNotFound.visibility = GONE
     }
 }
 

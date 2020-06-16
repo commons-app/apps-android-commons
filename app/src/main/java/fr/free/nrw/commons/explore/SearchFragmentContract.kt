@@ -8,9 +8,10 @@ interface SearchFragmentContract {
     interface View<T> {
         fun showSnackbar()
         fun observeSearchResults(searchResults: LiveData<PagedList<T>>)
-        fun setEmptyViewText(query: String)
         fun showInitialLoadInProgress()
         fun hideInitialLoadProgress()
+        fun showEmptyText(query: String)
+        fun hideEmptyText()
     }
 
     interface Presenter<T> : BasePresenter<View<T>> {

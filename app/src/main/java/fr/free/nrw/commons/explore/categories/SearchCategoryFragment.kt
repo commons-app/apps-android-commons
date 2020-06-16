@@ -15,6 +15,8 @@ class SearchCategoryFragment : BaseSearchFragment<String>() {
 
     override val emptyTemplateTextId: Int = R.string.categories_not_found
 
+    override val errorTextId: Int = R.string.error_loading_categories
+
     override val injectedPresenter: SearchFragmentContract.Presenter<String>
         get() = presenter
 

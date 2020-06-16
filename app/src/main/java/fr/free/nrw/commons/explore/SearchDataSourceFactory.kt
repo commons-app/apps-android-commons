@@ -24,8 +24,8 @@ abstract class PageableDataSource<T>(private val liveDataConverter: LiveDataConv
     val loadingStates: Flowable<LoadingState> = _loadingStates
     private val _searchResults = PublishProcessor.create<LiveData<PagedList<T>>>()
     val searchResults: Flowable<LiveData<PagedList<T>>> = _searchResults
-    private val _noItemsLoadedEvent = PublishProcessor.create<Unit>()
-    val noItemsLoadedEvent: Flowable<Unit> = _noItemsLoadedEvent
+    private val _noItemsLoadedEvent = PublishProcessor.create<String>()
+    val noItemsLoadedQueries: Flowable<String> = _noItemsLoadedEvent
     private var currentFactory: SearchDataSourceFactory<T>? = null
 
     abstract val loadFunction: LoadFunction<T>
@@ -34,7 +34,7 @@ abstract class PageableDataSource<T>(private val liveDataConverter: LiveDataConv
         this.query = query
         _searchResults.offer(
             liveDataConverter.convert(dataSourceFactoryFactory().also { currentFactory = it }) {
-                _noItemsLoadedEvent.offer(Unit)
+                _noItemsLoadedEvent.offer(query)
             }
         )
     }
