@@ -133,7 +133,7 @@ class MediaClientTest {
 
         `when`(mediaInterface!!.getMedia(ArgumentMatchers.anyString()))
             .thenReturn(Single.just(mockResponse))
-        mediaClient!!.getMedia("abcde").test().assertErrorMessage("empty list passed for ids")
+        mediaClient!!.getMedia("abcde").test().assertErrorMessage("List is empty.")
     }
 
     @Test
