@@ -9,11 +9,17 @@
     >
 
     <LinearLayout
-      android:id="@+id/cetagoryEditContainer"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:orientation="vertical">
+      android:id="@+id/dummy_category_edit_container"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:elevation="20dp"
+      android:layout_gravity="bottom"
+      android:visibility="gone"
+      android:orientation="vertical"
+      android:weightSum="10">
 
+        <include
+          layout="@layout/layout_edit_categories" />
     </LinearLayout>
 
     <ImageView
@@ -66,35 +72,6 @@
                     android:id="@+id/mediaDetailImageViewSpacer"
                   >
 
-                    <LinearLayout
-                      android:id="@+id/toDoLayout"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:orientation="vertical"
-                      android:background="@color/layout_light_grey"
-                      >
-
-                        <TextView
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          style="@style/MediaDetailTextLabel"
-                          android:text="@string/warning" />
-
-                        <TextView
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          style="@style/MediaDetailTextBody"
-                          android:text="@string/todo_improve" />
-
-                        <TextView
-                          android:id="@+id/toDoReason"
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:layout_marginStart="@dimen/activity_margin_vertical"
-                          style="@style/MediaDetailTextBody" />
-
-                    </LinearLayout>
-
                 </LinearLayout>
 
             </FrameLayout>
@@ -126,6 +103,35 @@
                         android:textColor="@android:color/white"
                         android:layout_height="match_parent"
                         tools:text="Title of the media" />
+                </LinearLayout>
+
+                <LinearLayout
+                  android:id="@+id/toDoLayout"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:background="@color/layout_light_grey"
+                  >
+
+                    <TextView
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      style="@style/MediaDetailTextLabel"
+                      android:text="@string/warning" />
+
+                    <TextView
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      style="@style/MediaDetailTextBody"
+                      android:text="@string/todo_improve" />
+
+                    <TextView
+                      android:id="@+id/toDoReason"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginStart="@dimen/activity_margin_vertical"
+                      style="@style/MediaDetailTextBody" />
+
                 </LinearLayout>
 
                 <LinearLayout
