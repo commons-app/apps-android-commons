@@ -7,25 +7,25 @@ import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
 
 
-abstract class BaseSearchPresenter<T>(
+abstract class BasePagingPresenter<T>(
     val mainThreadScheduler: Scheduler,
-    val pageableDataSource: PageableDataSource<T>
-) : SearchFragmentContract.Presenter<T> {
+    val pageableBaseDataSource: PageableBaseDataSource<T>
+) : PagingContract.Presenter<T> {
 
-    private val DUMMY: SearchFragmentContract.View<T> = proxy()
-    private var view: SearchFragmentContract.View<T> = DUMMY
+    private val DUMMY: PagingContract.View<T> = proxy()
+    private var view: PagingContract.View<T> = DUMMY
 
     private val compositeDisposable = CompositeDisposable()
     override val listFooterData = MutableLiveData<List<FooterItem>>().apply { value = emptyList() }
 
-    override fun onAttachView(view: SearchFragmentContract.View<T>) {
+    override fun onAttachView(view: PagingContract.View<T>) {
         this.view = view
         compositeDisposable.addAll(
-            pageableDataSource.searchResults.subscribe(view::observeSearchResults),
-            pageableDataSource.loadingStates
+            pageableBaseDataSource.pagingResults.subscribe(view::observePagingResults),
+            pageableBaseDataSource.loadingStates
                 .observeOn(mainThreadScheduler)
                 .subscribe(::onLoadingState, Timber::e),
-            pageableDataSource.noItemsLoadedQueries.subscribe(view::showEmptyText)
+            pageableBaseDataSource.noItemsLoadedQueries.subscribe(view::showEmptyText)
         )
     }
 
@@ -50,7 +50,7 @@ abstract class BaseSearchPresenter<T>(
     }
 
     override fun retryFailedRequest() {
-        pageableDataSource.retryFailedRequest()
+        pageableBaseDataSource.retryFailedRequest()
     }
 
     override fun onDetachView() {
@@ -59,7 +59,7 @@ abstract class BaseSearchPresenter<T>(
     }
 
     override fun onQueryUpdated(query: String) {
-        pageableDataSource.onQueryUpdated(query)
+        pageableBaseDataSource.onQueryUpdated(query)
     }
 
 }

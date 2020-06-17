@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.View
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.explore.BaseSearchFragment
+import fr.free.nrw.commons.explore.BasePagingFragment
 import kotlinx.android.synthetic.main.fragment_search_paginated.*
 
 
-abstract class PageableMediaFragment : BaseSearchFragment<Media>() {
+abstract class PageableMediaFragment : BasePagingFragment<Media>() {
     override val pagedListAdapter by lazy { PagedMediaAdapter(::onItemClicked) }
 
     override val errorTextId: Int = R.string.error_loading_images

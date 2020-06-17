@@ -10,12 +10,12 @@ class DepictedImagesFragment : PageableMediaFragment(), DepictedImagesContract.V
     @Inject
     lateinit var presenter: DepictedImagesContract.Presenter
 
-    override val injectedPresenter: DepictedImagesContract.Presenter
+    override val injectedPresenter
         get() = presenter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        injectedPresenter.onQueryUpdated(arguments!!.getString("entityId")!!)
+        onQueryUpdated(arguments!!.getString("entityId")!!)
     }
 
     override fun onItemClicked(position: Int) {

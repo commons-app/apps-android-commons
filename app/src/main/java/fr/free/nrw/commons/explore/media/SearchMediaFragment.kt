@@ -11,7 +11,7 @@ class SearchMediaFragment : PageableMediaFragment(), SearchMediaFragmentContract
     @Inject
     lateinit var presenter: SearchMediaFragmentContract.Presenter
 
-    override val injectedPresenter: SearchMediaFragmentContract.Presenter
+    override val injectedPresenter
         get() = presenter
 
     override fun onItemClicked(position: Int) {

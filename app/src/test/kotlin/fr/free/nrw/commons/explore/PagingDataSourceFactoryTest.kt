@@ -14,21 +14,21 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
-class SearchDataSourceFactoryTest {
+class PagingDataSourceFactoryTest {
 
     @Mock
     private lateinit var depictsClient: DepictsClient
 
     @Mock
     private lateinit var loadingStates: PublishProcessor<LoadingState>
-    private lateinit var factory: SearchDataSourceFactory<String>
+    private lateinit var factory: PagingDataSourceFactory<String>
 
     private var function: (Int, Int) -> List<String> = mock()
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        factory = object : SearchDataSourceFactory<String>(loadingStates) {
+        factory = object : PagingDataSourceFactory<String>(loadingStates) {
             override val loadFunction get() = function
         }
     }

@@ -14,25 +14,25 @@ import javax.inject.Inject
 private const val PAGE_SIZE = 50
 private const val INITIAL_LOAD_SIZE = 50
 
-abstract class PageableDataSource<T>(private val liveDataConverter: LiveDataConverter) {
+abstract class PageableBaseDataSource<T>(private val liveDataConverter: LiveDataConverter) {
 
     lateinit var query: String
-    private val dataSourceFactoryFactory: () -> SearchDataSourceFactory<T> = {
+    private val dataSourceFactoryFactory: () -> PagingDataSourceFactory<T> = {
         dataSourceFactory(_loadingStates, loadFunction)
     }
     private val _loadingStates = PublishProcessor.create<LoadingState>()
     val loadingStates: Flowable<LoadingState> = _loadingStates
-    private val _searchResults = PublishProcessor.create<LiveData<PagedList<T>>>()
-    val searchResults: Flowable<LiveData<PagedList<T>>> = _searchResults
+    private val _pagingResults = PublishProcessor.create<LiveData<PagedList<T>>>()
+    val pagingResults: Flowable<LiveData<PagedList<T>>> = _pagingResults
     private val _noItemsLoadedEvent = PublishProcessor.create<String>()
     val noItemsLoadedQueries: Flowable<String> = _noItemsLoadedEvent
-    private var currentFactory: SearchDataSourceFactory<T>? = null
+    private var currentFactory: PagingDataSourceFactory<T>? = null
 
     abstract val loadFunction: LoadFunction<T>
 
     fun onQueryUpdated(query: String) {
         this.query = query
-        _searchResults.offer(
+        _pagingResults.offer(
             liveDataConverter.convert(dataSourceFactoryFactory().also { currentFactory = it }) {
                 _noItemsLoadedEvent.offer(query)
             }
@@ -46,7 +46,7 @@ abstract class PageableDataSource<T>(private val liveDataConverter: LiveDataConv
 
 class LiveDataConverter @Inject constructor() {
     fun <T> convert(
-        dataSourceFactory: SearchDataSourceFactory<T>,
+        dataSourceFactory: PagingDataSourceFactory<T>,
         zeroItemsLoadedFunction: () -> Unit
     ): LiveData<PagedList<T>> {
         return dataSourceFactory.toLiveData(
@@ -65,7 +65,7 @@ class LiveDataConverter @Inject constructor() {
 
 }
 
-abstract class SearchDataSourceFactory<T>(val loadingStates: LoadingStates) :
+abstract class PagingDataSourceFactory<T>(val loadingStates: LoadingStates) :
     DataSource.Factory<Int, T>() {
     private var currentDataSource: SearchDataSource<T>? = null
     abstract val loadFunction: LoadFunction<T>
@@ -80,7 +80,7 @@ abstract class SearchDataSourceFactory<T>(val loadingStates: LoadingStates) :
 }
 
 fun <T> dataSourceFactory(loadingStates: LoadingStates, loadFunction: LoadFunction<T>) =
-    object : SearchDataSourceFactory<T>(loadingStates) {
+    object : PagingDataSourceFactory<T>(loadingStates) {
         override val loadFunction: LoadFunction<T> = loadFunction
     }
 

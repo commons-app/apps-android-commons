@@ -2,21 +2,21 @@ package fr.free.nrw.commons.explore.depictions
 
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity
-import fr.free.nrw.commons.explore.BaseSearchFragment
+import fr.free.nrw.commons.explore.BasePagingFragment
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import javax.inject.Inject
 
 /**
  * Display depictions in search fragment
  */
-class SearchDepictionsFragment : BaseSearchFragment<DepictedItem>(),
+class SearchDepictionsFragment : BasePagingFragment<DepictedItem>(),
     SearchDepictionsFragmentContract.View {
     @Inject
     lateinit var presenter: SearchDepictionsFragmentContract.Presenter
 
     override val errorTextId: Int = R.string.error_loading_depictions
 
-    override val injectedPresenter: SearchDepictionsFragmentContract.Presenter
+    override val injectedPresenter
         get() = presenter
 
     override val pagedListAdapter by lazy {

@@ -10,5 +10,5 @@ import javax.inject.Named
 class SearchCategoriesFragmentPresenter @Inject constructor(
     @Named(CommonsApplicationModule.MAIN_THREAD) mainThreadScheduler: Scheduler,
     dataSourceFactory: PageableCategoriesDataSource
-) : BaseSearchPresenter<String>(mainThreadScheduler, dataSourceFactory),
+) : BasePagingPresenter<String>(mainThreadScheduler, dataSourceFactory),
     SearchCategoriesFragmentContract.Presenter
