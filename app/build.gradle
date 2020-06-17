@@ -151,7 +151,6 @@ android {
         testOptions {
             execution 'ANDROIDX_TEST_ORCHESTRATOR'
         }
-        multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
     }
 
