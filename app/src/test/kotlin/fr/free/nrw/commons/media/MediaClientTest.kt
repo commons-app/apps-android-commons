@@ -6,20 +6,18 @@ import fr.free.nrw.commons.media.model.PageMediaListItem
 import fr.free.nrw.commons.media.model.PageMediaListResponse
 import fr.free.nrw.commons.utils.CommonsDateUtil
 import io.reactivex.Observable
+import io.reactivex.Single
 import junit.framework.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.mockito.*
+import org.mockito.Mockito.*
 import org.wikipedia.dataclient.mwapi.ImageDetails
 import org.wikipedia.dataclient.mwapi.MwQueryPage
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import org.wikipedia.dataclient.mwapi.MwQueryResult
 import org.wikipedia.gallery.ImageInfo
-import org.mockito.ArgumentCaptor
-import org.mockito.ArgumentMatchers.*
 import java.util.*
-import org.mockito.Captor
-import org.mockito.Mockito.*
 
 
 class MediaClientTest {
@@ -29,6 +27,9 @@ class MediaClientTest {
 
     @Mock
     internal var pageMediaInterface: PageMediaInterface? = null
+
+    @Mock
+    internal var mediaDetailInterface: MediaDetailInterface? = null
 
     @InjectMocks
     var mediaClient: MediaClient? = null
@@ -168,7 +169,7 @@ class MediaClientTest {
         `when`(mediaInterface!!.getMediaWithGenerator(filenameCaptor!!.capture()))
             .thenReturn(Observable.just(mockResponse))
 
-        assertEquals("Test", mediaClient!!.getPictureOfTheDay().blockingGet().filename)
+        assertEquals("Test", mediaClient!!.pictureOfTheDay.blockingGet().filename)
         assertEquals(template, filenameCaptor.value);
     }
 
@@ -260,7 +261,7 @@ class MediaClientTest {
         val mock = mock(PageMediaListResponse::class.java)
         whenever(mock.items).thenReturn(listOf<PageMediaListItem>(mock(PageMediaListItem::class.java)))
         `when`(pageMediaInterface!!.getMediaList(ArgumentMatchers.anyString()))
-            .thenReturn(Observable.just(mock))
+            .thenReturn(Single.just(mock))
 
         mediaClient!!.doesPageContainMedia("Test").test().assertValue(true)
     }
@@ -270,7 +271,7 @@ class MediaClientTest {
         val mock = mock(PageMediaListResponse::class.java)
         whenever(mock.items).thenReturn(listOf<PageMediaListItem>())
         `when`(pageMediaInterface!!.getMediaList(ArgumentMatchers.anyString()))
-            .thenReturn(Observable.just(mock))
+            .thenReturn(Single.just(mock))
 
         mediaClient!!.doesPageContainMedia("Test").test().assertValue(false)
     }

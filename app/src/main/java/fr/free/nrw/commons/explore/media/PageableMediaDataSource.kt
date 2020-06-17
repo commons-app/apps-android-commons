@@ -6,7 +6,7 @@ import fr.free.nrw.commons.explore.LiveDataConverter
 import fr.free.nrw.commons.explore.PageableDataSource
 import fr.free.nrw.commons.explore.depictions.LoadFunction
 import fr.free.nrw.commons.media.MediaClient
-import fr.free.nrw.commons.media.MediaClient.NO_CAPTION
+import fr.free.nrw.commons.media.MediaClient.Companion.NO_CAPTION
 import javax.inject.Inject
 
 class PageableMediaDataSource @Inject constructor(

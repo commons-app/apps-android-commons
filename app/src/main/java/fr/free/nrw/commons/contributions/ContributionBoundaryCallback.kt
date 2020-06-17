@@ -8,7 +8,6 @@ import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
-import java.util.*
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -52,11 +51,11 @@ class ContributionBoundaryCallback @Inject constructor(
      * Fetches contributions using the MediaWiki API
      */
     fun fetchContributions() {
-        if (mediaClient.doesMediaListForUserHaveMorePages(sessionManager.userName).not()) {
+        if (mediaClient.doesMediaListForUserHaveMorePages(sessionManager.userName!!).not()) {
             return
         }
         compositeDisposable.add(
-            mediaClient.getMediaListForUser(sessionManager.userName)
+            mediaClient.getMediaListForUser(sessionManager.userName!!)
                 .map { mediaList: List<Media?> ->
                     mediaList.map {
                         Contribution(it, Contribution.STATE_COMPLETED)
