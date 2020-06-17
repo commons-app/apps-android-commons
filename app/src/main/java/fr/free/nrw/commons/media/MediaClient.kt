@@ -138,11 +138,14 @@ class MediaClient @Inject constructor(
     }
 
     private fun mediaFromPageAndEntity(pages: List<MwQueryPage>): Single<List<Media>> {
-        return getEntities(pages.map { "$PAGE_ID_PREFIX${it.pageId()}" })
-            .map {
-                pages.zip(it.entities().values)
-                    .map { (page, entity) -> mediaConverter.convert(page, entity) }
-            }
+        return if (pages.isEmpty())
+            Single.just(emptyList())
+        else
+            getEntities(pages.map { "$PAGE_ID_PREFIX${it.pageId()}" })
+                .map {
+                    pages.zip(it.entities().values)
+                        .map { (page, entity) -> mediaConverter.convert(page, entity) }
+                }
     }
 
     /**
