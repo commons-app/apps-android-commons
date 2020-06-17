@@ -2,7 +2,6 @@ package fr.free.nrw.commons.media
 
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_ID_PREFIX
 import fr.free.nrw.commons.explore.media.MediaConverter
 import fr.free.nrw.commons.utils.CommonsDateUtil
 import io.reactivex.Single
@@ -12,6 +11,8 @@ import org.wikipedia.wikidata.Entities
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
+
+const val PAGE_ID_PREFIX = "M"
 
 /**
  * Media Client to handle custom calls to Commons MediaWiki APIs
@@ -104,11 +105,18 @@ class MediaClient @Inject constructor(
     /**
      * @return list of images for a particular depict entity
      */
-    fun fetchImagesForDepictedItem(query: String, sroffset: Int): Single<List<Media>> {
-        return responseToMediaList(mediaInterface.fetchImagesForDepictedItem(
-            "haswbstatement:" + BuildConfig.DEPICTS_PROPERTY + "=" + query,
-            sroffset.toString()
-        ))
+    fun fetchImagesForDepictedItem(
+        query: String,
+        srlimit: Int,
+        sroffset: Int
+    ): Single<List<Media>> {
+        return responseToMediaList(
+            mediaInterface.fetchImagesForDepictedItem(
+                "haswbstatement:" + BuildConfig.DEPICTS_PROPERTY + "=" + query,
+                srlimit.toString(),
+                sroffset.toString()
+            )
+        )
     }
 
 

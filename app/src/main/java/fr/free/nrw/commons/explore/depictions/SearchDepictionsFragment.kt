@@ -14,8 +14,6 @@ class SearchDepictionsFragment : BaseSearchFragment<DepictedItem>(),
     @Inject
     lateinit var presenter: SearchDepictionsFragmentContract.Presenter
 
-    override val emptyTemplateTextId: Int = R.string.depictions_not_found
-
     override val errorTextId: Int = R.string.error_loading_depictions
 
     override val injectedPresenter: SearchDepictionsFragmentContract.Presenter
@@ -24,4 +22,6 @@ class SearchDepictionsFragment : BaseSearchFragment<DepictedItem>(),
     override val pagedListAdapter by lazy {
         DepictionAdapter { WikidataItemDetailsActivity.startYourself(context, it) }
     }
+
+    override fun getEmptyText(query: String) = getString(R.string.depictions_not_found, query)
 }

@@ -13,8 +13,6 @@ class SearchCategoryFragment : BaseSearchFragment<String>() {
     @Inject
     lateinit var presenter: SearchCategoriesFragmentContract.Presenter
 
-    override val emptyTemplateTextId: Int = R.string.categories_not_found
-
     override val errorTextId: Int = R.string.error_loading_categories
 
     override val injectedPresenter: SearchFragmentContract.Presenter<String>
@@ -23,4 +21,6 @@ class SearchCategoryFragment : BaseSearchFragment<String>() {
     override val pagedListAdapter by lazy {
         PagedSearchCategoriesAdapter { CategoryDetailsActivity.startYourself(context, it) }
     }
+
+    override fun getEmptyText(query: String) = getString(R.string.categories_not_found, query)
 }

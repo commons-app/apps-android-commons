@@ -24,7 +24,6 @@ abstract class BaseSearchFragment<T> : CommonsDaggerSupportFragment(),
 
     abstract val pagedListAdapter: PagedListAdapter<T, *>
     abstract val injectedPresenter: SearchFragmentContract.Presenter<T>
-    abstract val emptyTemplateTextId: Int
     abstract val errorTextId: Int
     private val loadingAdapter by lazy { FooterAdapter { injectedPresenter.retryFailedRequest() } }
     private val mergeAdapter by lazy { MergeAdapter(pagedListAdapter, loadingAdapter) }
@@ -60,7 +59,6 @@ abstract class BaseSearchFragment<T> : CommonsDaggerSupportFragment(),
         injectedPresenter.onAttachView(this)
     }
 
-
     override fun onDetach() {
         super.onDetach()
         injectedPresenter.onDetachView()
@@ -83,9 +81,11 @@ abstract class BaseSearchFragment<T> : CommonsDaggerSupportFragment(),
     }
 
     override fun showEmptyText(query: String) {
-        contentNotFound.text = getString(emptyTemplateTextId, query)
+        contentNotFound.text = getEmptyText(query)
         contentNotFound.visibility = View.VISIBLE
     }
+
+    abstract fun getEmptyText(query: String):String
 
     override fun hideEmptyText() {
         contentNotFound.visibility = View.GONE

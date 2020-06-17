@@ -10,7 +10,7 @@ import fr.free.nrw.commons.explore.BaseViewHolder
 import fr.free.nrw.commons.explore.inflate
 import kotlinx.android.synthetic.main.layout_category_images.*
 
-class SearchImagesAdapter(private val onImageClicked: (Int) -> Unit) :
+class PagedMediaAdapter(private val onImageClicked: (Int) -> Unit) :
     PagedListAdapter<Media, SearchImagesViewHolder>(object : DiffUtil.ItemCallback<Media>() {
         override fun areItemsTheSame(oldItem: Media, newItem: Media) =
             oldItem.pageId == newItem.pageId
