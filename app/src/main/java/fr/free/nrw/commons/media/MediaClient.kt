@@ -64,7 +64,7 @@ class MediaClient @Inject constructor(
      * @param category the search category. Must start with "Category:"
      * @return
      */
-    fun getMediaListFromCategory(category: String): Single<MutableList<Media>> {
+    fun getMediaListFromCategory(category: String): Single<List<Media>> {
         return responseToMediaList(
             if (continuationStore.containsKey("category_$category")) mediaInterface.getMediaListFromCategory(
                 category,
@@ -88,7 +88,7 @@ class MediaClient @Inject constructor(
      * @param userName the username
      * @return
      */
-    fun getMediaListForUser(userName: String): Single<MutableList<Media>> {
+    fun getMediaListForUser(userName: String): Single<List<Media>> {
         val continuation =
             if (continuationStore.containsKey("user_$userName")) continuationStore["user_$userName"] else emptyMap()
         return responseToMediaList(
@@ -129,7 +129,7 @@ class MediaClient @Inject constructor(
     private fun responseToMediaList(
         response: Observable<MwQueryResponse>,
         key: String
-    ): Single<MutableList<Media>> {
+    ): Single<List<Media>> {
         return response.flatMap { mwQueryResponse: MwQueryResponse? ->
             if (null == mwQueryResponse || null == mwQueryResponse.query() || null == mwQueryResponse.query()!!
                     .pages()
@@ -151,7 +151,7 @@ class MediaClient @Inject constructor(
                 obj.add(
                     e
                 )
-            }
+            }.map { it.toList() }
     }
 
     /**
