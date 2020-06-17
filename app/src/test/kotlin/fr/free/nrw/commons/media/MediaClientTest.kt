@@ -28,6 +28,9 @@ class MediaClientTest {
     @Mock
     internal var pageMediaInterface: PageMediaInterface? = null
 
+    @Mock
+    internal var mediaDetailInterface: MediaDetailInterface? = null
+
     @InjectMocks
     var mediaClient: MediaClient? = null
 
