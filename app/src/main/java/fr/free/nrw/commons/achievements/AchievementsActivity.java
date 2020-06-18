@@ -80,6 +80,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
     CircleProgressBar imageRevertsProgressbar;
     @BindView(R.id.image_featured)
     TextView imagesFeatured;
+    @BindView(R.id.quality_images)
+    TextView qualityImages;
     @BindView(R.id.images_revert_limit_text)
     TextView imagesRevertLimitText;
     @BindView(R.id.progressBar)
@@ -395,6 +397,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
         imagesUsedByWikiProgressBar.setProgressTextFormatPattern
                 (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
         imagesFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
+        qualityImages.setText(String.valueOf(achievements.getQualityImages()));
         String levelUpInfoString = getString(R.string.level).toUpperCase();
         levelUpInfoString += " " + levelInfo.getLevelNumber();
         levelNumber.setText(levelUpInfoString);
@@ -493,6 +496,12 @@ public class AchievementsActivity extends NavigationBaseActivity {
     public void showFeaturedImagesInfo(){
         launchAlert(getResources().getString(R.string.statistics_featured)
                 ,getResources().getString(R.string.images_featured_explanation));
+    }
+
+    @OnClick(R.id.quality_images_info)
+    public void showQualityImagesInfo(){
+        launchAlert(getResources().getString(R.string.statistics_quality)
+            ,getResources().getString(R.string.quality_images_explanation));
     }
 
     @OnClick(R.id.thanks_received_info)
