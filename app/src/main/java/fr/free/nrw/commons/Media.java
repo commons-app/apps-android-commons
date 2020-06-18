@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
@@ -290,7 +291,18 @@ public class Media implements Parcelable {
      * @return
      */
     public String getWikiCode() {
-        return String.format("[[%s|thumb|%s]]", filename, getDisplayTitle());
+        return String.format("[[%s|thumb|%s]]", filename, getMostRelevantCaption());
+    }
+
+    private String getMostRelevantCaption() {
+        final String languageAppropriateCaption = captions.get(Locale.getDefault().getLanguage());
+        if(languageAppropriateCaption!=null){
+            return languageAppropriateCaption;
+        }
+        for (String firstCaption : captions.values()) {
+            return firstCaption;
+        }
+        return getDisplayTitle();
     }
 
     /**
