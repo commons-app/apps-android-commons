@@ -39,7 +39,7 @@ public class Contribution extends Media {
      * and value is the caption in the corresponding language Ex: key = "en", value: "<caption in
      * short in English>" key = "de" , value: "<caption in german>"
      */
-    private Map<String, String> captions = new HashMap<>();
+    private HashMap<String, String> captions = new HashMap<>();
 
     public Contribution() {
     }
@@ -51,7 +51,7 @@ public class Contribution extends Media {
             UploadMediaDetail.formatList(item.getUploadMediaDetails()),
             sessionManager.getAuthorName(),
             categories);
-        captions = UploadMediaDetail.formatCaptions(item.getUploadMediaDetails());
+        captions = new HashMap<>(UploadMediaDetail.formatCaptions(item.getUploadMediaDetails()));
         decimalCoords = item.getGpsCoords().getDecimalCoords();
         dateCreatedSource = "";
         this.depictedItems = depictedItems;
@@ -127,11 +127,11 @@ public class Contribution extends Media {
      * <p>
      * returns list of captions stored in hashmap
      */
-    public Map<String, String> getCaptions() {
+    public HashMap<String, String> getCaptions() {
         return captions;
     }
 
-    public void setCaptions(Map<String, String> captions) {
+    public void setCaptions(HashMap<String, String> captions) {
         this.captions = captions;
     }
 
@@ -147,7 +147,7 @@ public class Contribution extends Media {
         dest.writeLong(transferred);
         dest.writeString(decimalCoords);
         dest.writeString(dateCreatedSource);
-        dest.writeSerializable((HashMap) captions);
+        dest.writeSerializable(captions);
     }
 
     /**

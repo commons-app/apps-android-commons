@@ -203,7 +203,7 @@ public class Media implements Parcelable {
      * @param page response from the API
      * @return Media object
      */
-    @Nullable
+    @NonNull
     public static Media from(final MwQueryPage page) {
         final ImageInfo imageInfo = page.imageInfo();
         if (imageInfo == null) {
@@ -516,6 +516,14 @@ public class Media implements Parcelable {
      */
     public void setCoordinates(@Nullable final LatLng coordinates) {
         this.coordinates = coordinates;
+    }
+
+    /**
+     * Returns wikicode to use the media file on a MediaWiki site
+     * @return
+     */
+    public String getWikiCode() {
+        return String.format("[[%s|thumb|%s]]", filename, thumbnailTitle);
     }
 
     /**

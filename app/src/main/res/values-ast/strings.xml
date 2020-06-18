@@ -51,8 +51,10 @@
   <string name="provider_contributions">Les mios xubes</string>
   <string name="menu_share">Compartir</string>
   <string name="menu_open_in_browser">Ver nel navegador</string>
-  <string name="share_title_hint" fuzzy="true">Títulu (Riquíu)</string>
+  <string name="share_title_hint">Pie (Riquíu)</string>
+  <string name="add_caption_toast">Apurre un pie pa esti ficheru</string>
   <string name="share_description_hint">Descripción</string>
+  <string name="share_caption_hint">Pie (llende 255 caráuteres)</string>
   <string name="login_failed_network">Nun se pudo aniciar sesión – error de rede</string>
   <string name="login_failed_wrong_credentials">Nun pudo aniciase sesión. Revisa\'l nome d\'usuariu y la contraseña</string>
   <string name="login_failed_throttled">Demasiaos intentos incorreutos. Téntalo otra vuelta n\'unos minutos.</string>
@@ -65,6 +67,7 @@
   <string name="provider_modifications">Cambeos</string>
   <string name="menu_upload_single">Xubir</string>
   <string name="categories_search_text_hint">Guetar categoríes</string>
+  <string name="depicts_search_text_hint">Buscar elementos retrataos nel mediu (monte, Taj Mahal, etc.)</string>
   <string name="menu_save_categories">Guardar</string>
   <string name="refresh_button">Refrescar</string>
   <string name="display_list_button">Llista</string>
@@ -84,6 +87,10 @@
     <item quantity="other">%1$d cargues</item>
   </plurals>
   <string name="categories_not_found">Nun s\'alcontró denguna categoría que case con %1$s</string>
+  <string name="depictions_not_found">Nun s\'alcontraron elementos de Wikidata que casen con %1$s</string>
+  <string name="no_child_classes">%1$s nun tien clases fíes</string>
+  <string name="no_parent_classes">%1$s nun tien clases madres</string>
+  <string name="depictions_image_not_found">Nun hai Imaxe pal Retratu</string>
   <string name="categories_skip_explanation">Amiesta categoríes pa facer les imaxes más fáciles d\'alcontrar en Wikimedia Commons.\nPrincipia a escribir p\'amestar categoríes.</string>
   <string name="categories_activity_title">Categoríes</string>
   <string name="title_activity_settings">Configuración</string>
@@ -100,6 +107,7 @@
   <string name="menu_feedback">Unviar comentarios (per corréu)</string>
   <string name="no_email_client">Nun s\'instaló nengún veceru de corréu</string>
   <string name="provider_categories">Categoríes usaes de recién</string>
+  <string name="provider_depictions">Retratos usaos de recién</string>
   <string name="waiting_first_sync">Esperando pola primera sincronización…</string>
   <string name="no_uploads_yet">Inda nun xubió denguna foto.</string>
   <string name="menu_retry_upload">Reintentar</string>
@@ -159,6 +167,8 @@
   <string name="detail_panel_cats_label">Categoríes</string>
   <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">Nenguna seleicionada</string>
+  <string name="detail_caption_empty">Nun tien pie</string>
+  <string name="detail_depiction_empty">Nun tien retratu</string>
   <string name="detail_description_empty">Ensin descripción</string>
   <string name="detail_discussion_empty">Nun hai alderique</string>
   <string name="detail_license_empty">Llicencia desconocida</string>
@@ -177,7 +187,9 @@
   <string name="upload">Xubir</string>
   <string name="yes">Sí</string>
   <string name="no">Non</string>
+  <string name="media_detail_caption">Pie</string>
   <string name="media_detail_title">Títulu</string>
+  <string name="media_detail_depiction">Retratos</string>
   <string name="media_detail_description">Descripción</string>
   <string name="media_detail_discussion">Alderique</string>
   <string name="media_detail_author">Autor</string>
@@ -239,6 +251,7 @@
   <string name="error_while_cache">Error al poner les fotos na caché</string>
   <string name="title_info">Un títulu descriptivu únicu pal ficheru, que sirvirá para da-y nome al mesmu. Puede usase llinguaxe normal con espacios. Nun incluyas la estensión del ficheru</string>
   <string name="description_info">Por favor, describi l\'elementu multimedia tantu como sía posible: ¿ónde se tomó?, ¿qué amuesa?, ¿cuál ye\'l contestu? Por favor, describi los oxetos o persones. Revela la información que nun pueda aldovinase de mou cenciellu, por casu el momentu del día si ye un paisaxe. Si\'l mediu amuesa daqué desacostumao, esplica qué lo fai raro.</string>
+  <string name="caption_info">Escribi una descripción curtia de la imaxe. (Llende de 255 caráuteres)</string>
   <string name="upload_image_too_dark">Esta imaxe ye escura enforma, ¿tas seguru de que quies xubila? Wikimedia Commons ye sólo pa imaxes con valor enciclopédicu.</string>
   <string name="upload_image_blurry">Esta imaxe ta borrosa, ¿tas seguru de que quies xubila? Wikimedia Commons ye sólo pa imaxes con valor enciclopédicu.</string>
   <string name="upload_problem_exist">Problemes potenciales con esta imaxe:</string>
@@ -318,9 +331,11 @@
   <string name="search_recent_header">Guetao de recién:</string>
   <string name="provider_searches">Consultes buscaes apocayá</string>
   <string name="error_loading_categories">Asocedió un error al cargar les categoríes.</string>
+  <string name="error_loading_depictions">Asocedió un error al cargar les imáxenes.</string>
   <string name="error_loading_subcategories">Asocedió un error al cargar les subcategoríes.</string>
   <string name="search_tab_title_media">Multimedia</string>
   <string name="search_tab_title_categories">Categoríes</string>
+  <string name="search_tab_title_depictions">Elementos</string>
   <string name="explore_tab_title_featured">Destacada</string>
   <string name="explore_tab_title_mobile">Xubío dende\'l móvil</string>
   <string name="successful_wikidata_edit">Añadióse la imaxe a %1$s en Wikidata.</string>
@@ -423,7 +438,9 @@
   <string name="desc_language_Asia">Asia</string>
   <string name="desc_language_Pacific">Pacíficu</string>
   <string name="no_categories_selected">Nun hai categoríes seleicionaes</string>
-  <string name="no_categories_selected_warning_desc" fuzzy="true">Les imaxes ensin categoríes raramente puen usase. ¿Seguro que quies unviar ensin escoyer categoría dala?</string>
+  <string name="no_categories_selected_warning_desc">Les imáxenes ensin categoríes raramente puen usase. ¿Seguro que quies siguir ensin escoyer categoría dala?</string>
+  <string name="no_depictions_selected">Nun tien retratos seleicionaos</string>
+  <string name="no_depictions_selected_warning_desc">Les imáxenes con retratos alcuéntrense más fácilmente y ye más fácil que s\'usen. ¿Seguro que quies siguir ensin retratos?</string>
   <string name="upload_flow_all_images_in_set">(Pa toles imaxes del conxuntu)</string>
   <string name="search_this_area">Buscar nesta área</string>
   <string name="nearby_card_permission_title">Solicitú de permisu</string>
@@ -502,6 +519,7 @@
   <string name="images_featured_explanation">Les imaxes destacaes son creaciones de talentosos fotógrafos y ilustradores que la comunidá de Wikimedia Commons reconoció como les de mayor calidá del sitiu.</string>
   <string name="images_via_nearby_explanation">Les imaxes xubíes via Llugares Cercanos son les imaxes que se cargaron descubriendo llugares nel mapa.</string>
   <string name="thanks_received_explanation">Esta función permite que los editores unvien una nota Gracies a los usuarios que realicen ediciones útiles usando un pequeñu enllaz d\'agradecimientu na páxina d\'historial o na de diferencies.</string>
+  <string name="previous_image_caption_description">Copiar los retratos y descripción anteriores</string>
   <string name="previous_button_tooltip_message">Fai clic para reutilizar el títulu y descripción qu\'escribisti na imaxe anterior y cambialu p\'adautalu a la imaxe actual</string>
   <string name="welcome_do_upload_content_description">Exemplos d\'imaxes bones pa xubir a Commons</string>
   <string name="welcome_dont_upload_content_description">Exemplos d\'imaxes que nun tienen de xubise</string>
@@ -520,6 +538,7 @@
   <string name="share_via">Compartir l\'aplicación per...</string>
   <string name="image_info">Información de la imaxe</string>
   <string name="no_categories_found">Nun s\'alcontró nenguna categoría</string>
+  <string name="no_depiction_found">Nun s\'alcontraron retratos</string>
   <string name="upload_cancelled">Carga encaboxada</string>
   <string name="previous_image_title_description_not_found">Nun hai datos sobro\'l títulu o la descripción de la imaxe anterior</string>
   <string name="dialog_box_text_nomination">¿Por qué tien de desaniciase %1$s?</string>
@@ -552,6 +571,9 @@
   <string name="place_type">Tipu de llugar:</string>
   <string name="nearby_search_hint">Ponte, muséu, hotel etc.</string>
   <string name="you_must_reset_your_passsword">¡¡Falló daqué al aniciar sesión, tienes de reaniciar la contraseña!!</string>
+  <string name="title_for_media">MEDIOS</string>
+  <string name="title_for_child_classes">CLASES FÍES</string>
+  <string name="title_for_parent_classes">CLASES PADRES</string>
   <string name="upload_nearby_place_found_title">Llugar cercanu alcontráu</string>
   <string name="upload_nearby_place_found_description">¿Ye esta una foto del Llugar %1$s?</string>
   <string name="title_app_shortcut_explore">Esplorar</string>
@@ -570,4 +592,6 @@
   <string name="ask_to_turn_location_on">¿Activar l\'allugamientu?</string>
   <string name="nearby_needs_location">«Cercano» precisa activar l\'allugamientu pa funcionar correutamente</string>
   <string name="use_location_from_similar_image">¿Sacasti estes dos semeyes nel mesmu llugar? ¿Quies usar la llatitú/llonxitú da la semeya de la derecha?</string>
+  <string name="load_more">Cargar más</string>
+  <string name="nearby_no_results">Nun s\'alcontraron llugares, tenta cambiar los criterios de gueta.</string>
 </resources>

@@ -43,10 +43,6 @@ dependencies {
     implementation 'com.karumi:dexter:5.0.0'
     implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
 
-    //paging
-    implementation "androidx.paging:paging-runtime-ktx:2.1.2"
-    implementation "androidx.paging:paging-rxjava2-ktx:2.1.2"
-
     kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
     implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:$ADAPTER_DELEGATES_VERSION"
     implementation "com.hannesdorfmann:adapterdelegates4-pagination:$ADAPTER_DELEGATES_VERSION"
@@ -138,7 +134,6 @@ dependencies {
 
 android {
     compileSdkVersion 28
-    buildToolsVersion "28.0.3"
 
     defaultConfig {
         //applicationId 'fr.free.nrw.commons'
@@ -156,7 +151,6 @@ android {
         testOptions {
             execution 'ANDROIDX_TEST_ORCHESTRATOR'
         }
-        multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
     }
 

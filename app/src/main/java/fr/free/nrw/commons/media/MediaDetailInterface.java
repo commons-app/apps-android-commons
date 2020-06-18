@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.media;
 
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import org.wikipedia.wikidata.Entities;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -24,7 +25,7 @@ public interface MediaDetailInterface {
      *
      */
     @GET("/w/api.php?format=json&action=wbgetentities&props=labels&languagefallback=1")
-    Observable<Entities> getEntity(@Query("ids") String entityId);
+    Single<Entities> getEntity(@Query("ids") String entityId);
 
     /**
      * Fetches caption using wikibaseIdentifier

@@ -34,7 +34,6 @@ import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -1420,14 +1419,17 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (fabGallery.isShown()) {
                 Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString());
                 storeSharedPrefs(selectedPlace);
+
                 controller.initiateGalleryPick(getActivity(), false);
             }
         });
     }
 
     private void storeSharedPrefs(final Place selectedPlace) {
-        Timber.d("Store place object %s", selectedPlace.toString());
         applicationKvStore.putJson(PLACE_OBJECT, selectedPlace);
+        Place place = applicationKvStore.getJson(PLACE_OBJECT, Place.class);
+
+        Timber.d("Stored place object %s", place.toString());
     }
 
     private void updateBookmarkButtonImage(final Place place) {

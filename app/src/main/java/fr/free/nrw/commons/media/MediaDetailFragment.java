@@ -43,6 +43,7 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AccountUtil;
+import fr.free.nrw.commons.category.CategoryClient;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteHelper;

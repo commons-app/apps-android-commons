@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content">
+  <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dimen_10"
+    android:padding="@dimen/dimen_10"
+    android:orientation="vertical">
+
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/instructions_title"
+      android:layout_marginBottom="@dimen/dimen_20"
+      android:textSize="@dimen/heading_text_size" />
+
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/dimen_10"
+      android:text="@string/wikipedia_instructions_step_1" />
+
+    <EditText
+      android:id="@+id/tv_wikicode"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="#00000000"
+      android:textSize="@dimen/description_text_size"
+      android:layout_marginBottom="@dimen/dimen_10"
+      tools:text="[File:Hello.jpg|Hello]"
+      android:inputType="text" />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/dimen_6"
+      android:text="@string/wikipedia_instructions_step_2" />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/dimen_6"
+      android:text="@string/wikipedia_instructions_step_3" />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/dimen_6"
+      android:text="@string/wikipedia_instructions_step_4" />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/dimen_6"
+      android:text="@string/wikipedia_instructions_step_5" />
+
+    <fr.free.nrw.commons.ui.widget.HtmlTextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/dimen_6"
+      android:text="@string/wikipedia_instructions_step_6" />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/dimen_6"
+      android:text="@string/wikipedia_instructions_step_7" />
+
+    <CheckBox
+      android:id="@+id/checkbox_copy_wikicode"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/dimen_6"
+      android:layout_marginBottom="@dimen/dimen_6"
+      android:checked="true"
+      android:text="@string/copy_wikicode_to_clipboard"/>
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:orientation="horizontal"
+      android:weightSum="2"
+      android:layout_height="wrap_content">
+      <Button
+        android:id="@+id/instructions_cancel"
+        android:layout_width="wrap_content"
+        android:text="@string/cancel"
+        android:textColor="@color/button_blue"
+        android:padding="@dimen/dimen_10"
+        android:backgroundTint="@color/white"
+        android:layout_weight="1"
+        android:layout_margin="@dimen/dimen_6"
+        android:layout_height="wrap_content"/>
+
+      <Button
+        android:id="@+id/instructions_confirm"
+        android:layout_width="wrap_content"
+        android:text="@string/confirm"
+        android:textColor="@color/white"
+        android:padding="@dimen/dimen_10"
+        android:layout_weight="1"
+        android:layout_margin="@dimen/dimen_6"
+        android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+  </LinearLayout>
+</ScrollView>
