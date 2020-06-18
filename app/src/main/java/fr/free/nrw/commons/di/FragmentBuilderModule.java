@@ -4,14 +4,14 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
-import fr.free.nrw.commons.category.CategoryImagesListFragment;
 import fr.free.nrw.commons.category.SubCategoryListFragment;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.contributions.ContributionsListFragment;
+import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.explore.depictions.child.ChildDepictionsFragment;
 import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment;
 import fr.free.nrw.commons.explore.depictions.parent.ParentDepictionsFragment;
-import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
+import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment;
 import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment;
 import fr.free.nrw.commons.explore.media.SearchMediaFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
@@ -45,9 +45,6 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract SettingsFragment bindSettingsFragment();
-
-    @ContributesAndroidInjector
-    abstract CategoryImagesListFragment bindFeaturedImagesListFragment();
 
     @ContributesAndroidInjector
     abstract DepictedImagesFragment bindDepictedImagesFragment();
@@ -99,4 +96,7 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract ChildDepictionsFragment bindChildDepictionsFragment();
+
+    @ContributesAndroidInjector
+    abstract CategoriesMediaFragment bindCategoriesMediaFragment();
 }

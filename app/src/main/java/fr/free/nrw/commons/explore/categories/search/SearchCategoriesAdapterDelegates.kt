@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.explore.categories
+package fr.free.nrw.commons.explore.categories.search
 
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
 import fr.free.nrw.commons.R

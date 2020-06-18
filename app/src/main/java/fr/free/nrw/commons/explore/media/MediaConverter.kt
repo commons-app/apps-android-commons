@@ -9,6 +9,7 @@ import fr.free.nrw.commons.wikidata.WikidataProperties
 import org.apache.commons.lang3.StringUtils
 import org.wikipedia.dataclient.mwapi.MwQueryPage
 import org.wikipedia.gallery.ExtMetadata
+import org.wikipedia.gallery.ImageInfo
 import org.wikipedia.wikidata.DataValue
 import org.wikipedia.wikidata.Entities
 import java.text.ParseException
@@ -16,9 +17,11 @@ import java.util.*
 import javax.inject.Inject
 
 class MediaConverter @Inject constructor() {
-    fun convert(page: MwQueryPage, entity: Entities.Entity): Media {
-        val imageInfo = page.imageInfo()
-        requireNotNull(imageInfo) { "No image info" }
+    fun convert(
+        page: MwQueryPage,
+        entity: Entities.Entity,
+        imageInfo: ImageInfo
+    ): Media {
         val metadata = imageInfo.metadata
         requireNotNull(metadata) { "No metadata" }
         return Media(

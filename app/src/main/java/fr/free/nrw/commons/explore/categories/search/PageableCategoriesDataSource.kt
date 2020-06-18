@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.explore.categories
+package fr.free.nrw.commons.explore.categories.search
 
 import fr.free.nrw.commons.category.CategoryClient
 import fr.free.nrw.commons.explore.paging.LiveDataConverter

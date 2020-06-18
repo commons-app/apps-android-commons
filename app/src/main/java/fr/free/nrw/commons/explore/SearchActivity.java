@@ -19,7 +19,7 @@ import com.jakewharton.rxbinding2.widget.RxSearchView;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
-import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
+import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment;
 import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment;
 import fr.free.nrw.commons.explore.media.SearchMediaFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
@@ -165,7 +165,7 @@ public class SearchActivity extends NavigationBaseActivity
      */
     @Override
     public Media getMediaAtPosition(int i) {
-        return searchMediaFragment.getImageAtPosition(i);
+        return searchMediaFragment.getMediaAtPosition(i);
     }
 
     /**
@@ -173,7 +173,7 @@ public class SearchActivity extends NavigationBaseActivity
      */
     @Override
     public int getTotalMediaCount() {
-       return searchMediaFragment.getTotalImagesCount();
+       return searchMediaFragment.getTotalMediaCount();
     }
 
     /**

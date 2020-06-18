@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.explore.categories
+package fr.free.nrw.commons.explore.categories.search
 
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryDetailsActivity
@@ -18,7 +18,9 @@ class SearchCategoryFragment : BasePagingFragment<String>() {
         get() = presenter
 
     override val pagedListAdapter by lazy {
-        PagedSearchCategoriesAdapter { CategoryDetailsActivity.startYourself(context, it) }
+        PagedSearchCategoriesAdapter {
+            CategoryDetailsActivity.startYourself(context, it)
+        }
     }
 
     override fun getEmptyText(query: String) = getString(R.string.categories_not_found, query)
