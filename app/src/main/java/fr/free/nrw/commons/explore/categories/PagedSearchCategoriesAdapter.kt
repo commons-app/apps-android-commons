@@ -6,8 +6,8 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CATEGORY_PREFIX
-import fr.free.nrw.commons.explore.BaseViewHolder
-import fr.free.nrw.commons.explore.inflate
+import fr.free.nrw.commons.explore.paging.BaseViewHolder
+import fr.free.nrw.commons.explore.paging.inflate
 import kotlinx.android.synthetic.main.item_recent_searches.*
 
 

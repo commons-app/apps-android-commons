@@ -6,8 +6,8 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.explore.BaseViewHolder
-import fr.free.nrw.commons.explore.inflate
+import fr.free.nrw.commons.explore.paging.BaseViewHolder
+import fr.free.nrw.commons.explore.paging.inflate
 import kotlinx.android.synthetic.main.layout_category_images.*
 
 class PagedMediaAdapter(private val onImageClicked: (Int) -> Unit) :

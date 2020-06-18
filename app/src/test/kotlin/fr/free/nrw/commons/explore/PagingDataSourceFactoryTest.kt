@@ -4,6 +4,9 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.explore.depictions.DepictsClient
+import fr.free.nrw.commons.explore.paging.LoadingState
+import fr.free.nrw.commons.explore.paging.PagingDataSource
+import fr.free.nrw.commons.explore.paging.PagingDataSourceFactory
 import io.reactivex.processors.PublishProcessor
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.instanceOf
@@ -37,7 +40,7 @@ class PagingDataSourceFactoryTest {
     fun `create returns a dataSource`() {
         assertThat(
             factory.create(),
-            instanceOf(SearchDataSource::class.java)
+            instanceOf(PagingDataSource::class.java)
         )
     }
 
@@ -45,7 +48,7 @@ class PagingDataSourceFactoryTest {
     @Ignore("Rewrite with Mockk constructor mocks")
     fun `retryFailedRequest invokes method if not null`() {
         val spyFactory = spy(factory)
-        val dataSource = mock<SearchDataSource<String>>()
+        val dataSource = mock<PagingDataSource<String>>()
         Mockito.doReturn(dataSource).`when`(spyFactory).create()
         factory.retryFailedRequest()
         verify(dataSource).retryFailedRequest()

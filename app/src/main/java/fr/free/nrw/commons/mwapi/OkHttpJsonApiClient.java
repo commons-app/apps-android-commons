@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
-import fr.free.nrw.commons.depictions.subClass.models.SparqlResponse;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
@@ -210,7 +209,7 @@ public class OkHttpJsonApiClient {
    * Get the QIDs of all Wikidata items that are subclasses of the given Wikidata item. Example:
    * bridge -> suspended bridge, aqueduct, etc
    */
-  public Observable<List<DepictedItem>> getChildQIDs(String qid) throws IOException {
+  public Observable<List<DepictedItem>> getChildDepictions(String qid) throws IOException {
     return depictedItemsFrom(sparqlQuery(qid, "/queries/subclasses_query.rq"));
   }
 
@@ -218,7 +217,7 @@ public class OkHttpJsonApiClient {
    * Get the QIDs of all Wikidata items that are subclasses of the given Wikidata item. Example:
    * bridge -> suspended bridge, aqueduct, etc
    */
-  public Observable<List<DepictedItem>> getParentQIDs(String qid) throws IOException {
+  public Observable<List<DepictedItem>> getParentDepictions(String qid) throws IOException {
     return depictedItemsFrom(sparqlQuery(qid, "/queries/parentclasses_query.rq"));
   }
 

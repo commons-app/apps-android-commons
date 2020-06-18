@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.upload.structure.depictions
 
-import fr.free.nrw.commons.explore.depictions.DepictsClient.Companion.getImageUrl
-import fr.free.nrw.commons.explore.depictions.THUMB_IMAGE_SIZE
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.upload.WikidataItem
 import fr.free.nrw.commons.wikidata.WikidataProperties
@@ -9,7 +7,12 @@ import fr.free.nrw.commons.wikidata.WikidataProperties.*
 import org.wikipedia.wikidata.DataValue
 import org.wikipedia.wikidata.Entities
 import org.wikipedia.wikidata.Statement_partial
+import java.math.BigInteger
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 import java.util.*
+
+const val THUMB_IMAGE_SIZE = "70px"
 
 /**
  * Model class for Depicted Item in Upload and Explore
@@ -76,3 +79,40 @@ operator fun Entities.Entity.get(property: WikidataProperties) =
 
 private fun Map<String, Entities.Label>.byLanguageOrFirstOrEmpty() =
     let { it[Locale.getDefault().language] ?: it.values.firstOrNull() }?.value() ?: ""
+
+private fun getImageUrl(title: String, size: String): String {
+    return title.substringAfter(":")
+        .replace(" ", "_")
+        .let {
+            val MD5Hash = getMd5(it)
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/${MD5Hash[0]}/${MD5Hash[0]}${MD5Hash[1]}/$it/$size-$it"
+        }
+}
+
+/**
+ * Generates MD5 hash for the filename
+ */
+private fun getMd5(input: String): String {
+    return try {
+
+        // Static getInstance method is called with hashing MD5
+        val md = MessageDigest.getInstance("MD5")
+
+        // digest() method is called to calculate message digest
+        //  of an input digest() return array of byte
+        val messageDigest = md.digest(input.toByteArray())
+
+        // Convert byte array into signum representation
+        val no = BigInteger(1, messageDigest)
+
+        // Convert message digest into hex value
+        var hashtext = no.toString(16)
+        while (hashtext.length < 32) {
+            hashtext = "0$hashtext"
+        }
+        hashtext
+    } // For specifying wrong message digest algorithms
+    catch (e: NoSuchAlgorithmException) {
+        throw RuntimeException(e)
+    }
+}

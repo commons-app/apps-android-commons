@@ -2,8 +2,7 @@ package fr.free.nrw.commons.explore.categories
 
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryDetailsActivity
-import fr.free.nrw.commons.explore.BasePagingFragment
-import fr.free.nrw.commons.explore.PagingContract
+import fr.free.nrw.commons.explore.paging.BasePagingFragment
 import javax.inject.Inject
 
 /**
@@ -11,7 +10,7 @@ import javax.inject.Inject
  */
 class SearchCategoryFragment : BasePagingFragment<String>() {
     @Inject
-    lateinit var presenter: SearchCategoriesFragmentContract.Presenter
+    lateinit var presenter: SearchCategoriesFragmentPresenter
 
     override val errorTextId: Int = R.string.error_loading_categories
 

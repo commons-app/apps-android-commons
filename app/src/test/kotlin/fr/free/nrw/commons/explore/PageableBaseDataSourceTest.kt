@@ -3,7 +3,10 @@ package fr.free.nrw.commons.explore
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 import com.nhaarman.mockitokotlin2.*
-import fr.free.nrw.commons.explore.depictions.LoadFunction
+import fr.free.nrw.commons.explore.depictions.search.LoadFunction
+import fr.free.nrw.commons.explore.paging.LiveDataConverter
+import fr.free.nrw.commons.explore.paging.PageableBaseDataSource
+import fr.free.nrw.commons.explore.paging.PagingDataSourceFactory
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test

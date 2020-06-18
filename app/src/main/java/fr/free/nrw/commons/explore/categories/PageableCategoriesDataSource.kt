@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.explore.categories
 
 import fr.free.nrw.commons.category.CategoryClient
-import fr.free.nrw.commons.explore.LiveDataConverter
-import fr.free.nrw.commons.explore.PageableBaseDataSource
+import fr.free.nrw.commons.explore.paging.LiveDataConverter
+import fr.free.nrw.commons.explore.paging.PageableBaseDataSource
 import javax.inject.Inject
 
 class PageableCategoriesDataSource @Inject constructor(

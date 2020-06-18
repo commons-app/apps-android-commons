@@ -11,7 +11,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionsModule;
-import fr.free.nrw.commons.depictions.DepictionModule;
+import fr.free.nrw.commons.explore.depictions.DepictionModule;
 import fr.free.nrw.commons.explore.SearchModule;
 import fr.free.nrw.commons.review.ReviewController;
 import fr.free.nrw.commons.settings.SettingsFragment;
