@@ -8,6 +8,7 @@ import fr.free.nrw.commons.category.SubCategoryListFragment;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.contributions.ContributionsListFragment;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
+import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment;
 import fr.free.nrw.commons.explore.depictions.child.ChildDepictionsFragment;
 import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment;
 import fr.free.nrw.commons.explore.depictions.parent.ParentDepictionsFragment;
@@ -99,4 +100,7 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract CategoriesMediaFragment bindCategoriesMediaFragment();
+
+    @ContributesAndroidInjector
+    abstract SubCategoriesFragment bindSubCategoriesFragment();
 }

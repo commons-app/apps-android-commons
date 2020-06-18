@@ -1,16 +1,19 @@
-package fr.free.nrw.commons.explore.categories.search
+package fr.free.nrw.commons.explore.categories.sub
 
 import fr.free.nrw.commons.category.CategoryClient
 import fr.free.nrw.commons.explore.paging.LiveDataConverter
 import fr.free.nrw.commons.explore.paging.PageableBaseDataSource
 import javax.inject.Inject
 
-class PageableCategoriesDataSource @Inject constructor(
+class PageableSubCategoriesDataSource @Inject constructor(
     liveDataConverter: LiveDataConverter,
     val categoryClient: CategoryClient
 ) : PageableBaseDataSource<String>(liveDataConverter) {
 
     override val loadFunction = { loadSize: Int, startPosition: Int ->
-        categoryClient.searchCategories(query, loadSize, startPosition).blockingGet()
+        if (startPosition == 0) {
+            categoryClient.resetSubCategoryContinuation(query)
+        }
+        categoryClient.getSubCategoryList(query).blockingGet()
     }
 }

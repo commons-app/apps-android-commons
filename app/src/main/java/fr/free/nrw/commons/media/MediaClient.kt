@@ -211,5 +211,6 @@ class MediaClient @Inject constructor(
 
     fun resetCategoryContinuation(category: String) {
         continuationExists.remove("$CATEGORY_CONTINUATION_PREFIX$category")
+        continuationStore.remove("$CATEGORY_CONTINUATION_PREFIX$category")
     }
 }

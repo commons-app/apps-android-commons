@@ -1,16 +1,22 @@
 package fr.free.nrw.commons.category
 
-import io.reactivex.Observable
+import io.reactivex.Single
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import javax.inject.Inject
 import javax.inject.Singleton
 
 const val CATEGORY_PREFIX = "Category:"
+const val SUB_CATEGORY_CONTINUATION_PREFIX = "sub_category_"
+
 /**
  * Category Client to handle custom calls to Commons MediaWiki APIs
  */
 @Singleton
 class CategoryClient @Inject constructor(private val categoryInterface: CategoryInterface) {
+
+    private val continuationStore: MutableMap<String, Map<String, String>?> = mutableMapOf()
+    private val continuationExists: MutableMap<String, Boolean> = mutableMapOf()
+
     /**
      * Searches for categories containing the specified string.
      *
@@ -21,8 +27,10 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
      */
     @JvmOverloads
     fun searchCategories(filter: String?, itemLimit: Int, offset: Int = 0):
-            Observable<List<String>> {
-        return responseToCategoryName(categoryInterface.searchCategories(filter, itemLimit, offset))
+            Single<List<String>> {
+        return responseToCategoryName(
+            categoryInterface.searchCategories(filter, itemLimit, offset)
+        )
     }
 
     /**
@@ -35,7 +43,7 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
      */
     @JvmOverloads
     fun searchCategoriesForPrefix(prefix: String?, itemLimit: Int, offset: Int = 0):
-            Observable<List<String>> {
+            Single<List<String>> {
         return responseToCategoryName(
             categoryInterface.searchCategoriesForPrefix(prefix, itemLimit, offset)
         )
@@ -48,8 +56,19 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
      * @param categoryName Category name as defined on commons
      * @return Observable emitting the categories returned. If our search yielded "Category:Test", "Test" is emitted.
      */
-    fun getSubCategoryList(categoryName: String?): Observable<List<String>> {
-        return responseToCategoryName(categoryInterface.getSubCategoryList(categoryName))
+    fun getSubCategoryList(categoryName: String?): Single<List<String>> {
+        val key = "$SUB_CATEGORY_CONTINUATION_PREFIX$categoryName"
+        return if (hasMorePagesFor(key)) {
+            responseToCategoryName(
+                categoryInterface.getSubCategoryList(
+                    categoryName,
+                    continuationStore[key] ?: emptyMap()
+                ),
+                key
+            )
+        } else {
+            Single.just(emptyList())
+        }
     }
 
     /**
@@ -59,7 +78,7 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
      * @param categoryName Category name as defined on commons
      * @return
      */
-    fun getParentCategoryList(categoryName: String?): Observable<List<String>> {
+    fun getParentCategoryList(categoryName: String?): Single<List<String>> {
         return responseToCategoryName(categoryInterface.getParentCategoryList(categoryName))
     }
 
@@ -69,12 +88,30 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
      * @param responseObservable The query response observable
      * @return Observable emitting the categories returned. If our search yielded "Category:Test", "Test" is emitted.
      */
-    private fun responseToCategoryName(responseObservable: Observable<MwQueryResponse>): Observable<List<String>> {
+    private fun responseToCategoryName(
+        responseObservable: Single<MwQueryResponse>,
+        key: String? = null
+    ): Single<List<String>> {
         return responseObservable
-            .map { it.query()?.pages() ?: emptyList() }
+            .map {
+                if (key != null) {
+                    continuationExists[key] =
+                        it.continuation()?.let { continuation ->
+                            continuationStore[key] = continuation
+                            true
+                        } ?: false
+                }
+                it.query()?.pages() ?: emptyList()
+            }
             .map {
                 it.map { page -> page.title().replace(CATEGORY_PREFIX, "") }
             }
     }
 
+    private fun hasMorePagesFor(key: String) = continuationExists[key] ?: true
+
+    fun resetSubCategoryContinuation(category: String) {
+        continuationExists.remove("$SUB_CATEGORY_CONTINUATION_PREFIX$category")
+        continuationStore.remove("$SUB_CATEGORY_CONTINUATION_PREFIX$category")
+    }
 }

@@ -20,6 +20,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.explore.ViewPagerAdapter;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
+import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import java.util.ArrayList;
@@ -69,13 +70,12 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         List<Fragment> fragmentList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
         categoriesMediaFragment = new CategoriesMediaFragment();
-        SubCategoryListFragment subCategoryListFragment = new SubCategoryListFragment();
+        SubCategoriesFragment subCategoryListFragment = new SubCategoriesFragment();
         SubCategoryListFragment parentCategoryListFragment = new SubCategoryListFragment();
         categoryName = getIntent().getStringExtra("categoryName");
         if (getIntent() != null && categoryName != null) {
             Bundle arguments = new Bundle();
             arguments.putString("categoryName", categoryName);
-            arguments.putBoolean("isParentCategory", false);
             categoriesMediaFragment.setArguments(arguments);
             subCategoryListFragment.setArguments(arguments);
             Bundle parentCategoryArguments = new Bundle();

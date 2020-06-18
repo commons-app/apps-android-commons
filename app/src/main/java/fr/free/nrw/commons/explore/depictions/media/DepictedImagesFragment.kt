@@ -2,7 +2,6 @@ package fr.free.nrw.commons.explore.depictions.media
 
 import android.os.Bundle
 import android.view.View
-import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity
 import fr.free.nrw.commons.explore.media.PageableMediaFragment
 import javax.inject.Inject
 
@@ -18,11 +17,4 @@ class DepictedImagesFragment : PageableMediaFragment() {
         onQueryUpdated(arguments!!.getString("entityId")!!)
     }
 
-    override fun onItemClicked(position: Int) {
-        (activity as WikidataItemDetailsActivity).onMediaClicked(position)
-    }
-
-    override fun notifyViewPager() {
-        (activity as WikidataItemDetailsActivity).viewPagerNotifyDataSetChanged()
-    }
 }

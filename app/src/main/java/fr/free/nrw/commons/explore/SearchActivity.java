@@ -191,7 +191,8 @@ public class SearchActivity extends NavigationBaseActivity
      * Open media detail pager fragment on click of image in search results
      * @param index item index that should be opened
      */
-    public void onSearchImageClicked(int index) {
+    @Override
+    public void onMediaClicked(int index) {
         ViewUtil.hideKeyboard(this.findViewById(R.id.searchBox));
         toolbar.setVisibility(View.GONE);
         tabLayout.setVisibility(View.GONE);

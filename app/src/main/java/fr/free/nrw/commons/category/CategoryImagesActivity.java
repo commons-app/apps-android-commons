@@ -195,4 +195,9 @@ public class CategoryImagesActivity
     public void requestMoreImages() {
         //unneeded
     }
+
+    @Override
+    public void onMediaClicked(int position) {
+        // this class is unused and will be deleted
+    }
 }

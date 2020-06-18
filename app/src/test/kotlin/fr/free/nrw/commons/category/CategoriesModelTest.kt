@@ -4,9 +4,8 @@ import categoryItem
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import depictedItem
-import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.upload.GpsCategoryModel
-import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
 import org.junit.Before
 import org.junit.Test
@@ -35,7 +34,7 @@ class CategoriesModelTest {
 
         val expectedList = listOf("Test")
         whenever(categoryClient.searchCategoriesForPrefix("tes", 25))
-            .thenReturn(Observable.just(expectedList))
+            .thenReturn(Single.just(expectedList))
 
         // Checking if both return "Test"
         val expectedItems = expectedList.map { CategoryItem(it, false) }
@@ -56,7 +55,7 @@ class CategoriesModelTest {
         whenever(gpsCategoryModel.categoriesFromLocation)
             .thenReturn(BehaviorSubject.createDefault(listOf("gpsCategory")))
         whenever(categoryClient.searchCategories("tes", 25))
-            .thenReturn(Observable.just(listOf("titleSearch")))
+            .thenReturn(Single.just(listOf("titleSearch")))
         whenever(categoryDao.recentCategories(25)).thenReturn(listOf("recentCategories"))
         CategoriesModel(categoryClient, categoryDao, gpsCategoryModel)
             .searchAll("", listOf("tes"), listOf(depictedItem))
