@@ -312,6 +312,7 @@
   <string name="quiz_back_button">Ako nastavite postavljati slike koje je potrebno izbrisati, Vaš će račun vjerojatno biti blokiran. Jeste li sigurni da želite završiti kviz?</string>
   <string name="construction_event_answer">Slike koje prikazuju tehnologiju ili kulturu dobrodošle su na Zajedničkom poslužitelju.</string>
   <string name="warning_for_no_answer">Izaberite jednu opciju od dvije da biste odgovorili na pitanje</string>
+  <string name="user_not_logged_in">Sesija prijavljivanja istekla je, molimo Vas, prijavite se ponovo.</string>
   <string name="quiz_result_share_message">Podijelite kviz s prijateljima!</string>
   <string name="correct">Točan odgovor</string>
   <string name="wrong">Pogrešan odgovor</string>
@@ -347,4 +348,5 @@
   <string name="theme_default_name" fuzzy="true">Zadano</string>
   <string name="theme_dark_name">Tamno</string>
   <string name="theme_light_name">Svijetlo</string>
+  <string name="load_more">Učitaj više</string>
 </resources>

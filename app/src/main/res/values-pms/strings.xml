@@ -592,5 +592,6 @@
   <string name="ask_to_turn_location_on">Anvisché la localisassion?</string>
   <string name="nearby_needs_location">Nearby a l\'ha damanca dla localisassion abilità për marcé \'me ch\'as dev</string>
   <string name="use_location_from_similar_image">A la fàit se doe fòto ant l\'istess pòst? A veul dovré la latitùdin e la longitùdin ëd la fòto an sla drita?</string>
+  <string name="load_more">Carié \'d pi</string>
   <string name="nearby_no_results">Gnun pòst trovà, ch\'a preuva a modifiché ij sò criteri d\'arserca.</string>
 </resources>

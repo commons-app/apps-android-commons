@@ -635,4 +635,6 @@
   <string name="ask_to_turn_location_on">تشغيل الموقع؟</string>
   <string name="nearby_needs_location">خدمة قريب من هنا تحتاج إلى تفعيل خدمة الموقع للعمل بشكل صحيح</string>
   <string name="use_location_from_similar_image">هل قمت بتصوير هاتين الصورتين في نفس المكان؟ هل تريد استخدام دائرة العرض / خط الطول للصورة على اليمين؟</string>
+  <string name="load_more">تحميل المزيد</string>
+  <string name="nearby_no_results">لم يتم العثور على أي أماكن، جرب تغيير محددات بحثك.</string>
 </resources>

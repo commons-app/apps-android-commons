@@ -19,6 +19,7 @@ import javax.inject.Singleton
 @Singleton
 class MediaClient @Inject constructor(
     private val mediaInterface: MediaInterface,
+    private val pageMediaInterface: PageMediaInterface,
     private val mediaDetailInterface: MediaDetailInterface,
     private val mediaConverter: MediaConverter
 ) {
@@ -105,10 +106,12 @@ class MediaClient @Inject constructor(
      * @return list of images for a particular depict entity
      */
     fun fetchImagesForDepictedItem(query: String, sroffset: Int): Single<List<Media>> {
-        return responseToMediaList(mediaInterface.fetchImagesForDepictedItem(
-            "haswbstatement:" + BuildConfig.DEPICTS_PROPERTY + "=" + query,
-            sroffset.toString()
-        ))
+        return responseToMediaList(
+            mediaInterface.fetchImagesForDepictedItem(
+                "haswbstatement:" + BuildConfig.DEPICTS_PROPERTY + "=" + query,
+                sroffset.toString()
+            )
+        )
     }
 
 
@@ -180,5 +183,10 @@ class MediaClient @Inject constructor(
     fun doesMediaListForUserHaveMorePages(userName: String): Boolean {
         val key = "user_$userName"
         return if (continuationExists.containsKey(key)) continuationExists[key]!! else true
+    }
+
+    fun doesPageContainMedia(title: String?): Single<Boolean> {
+        return pageMediaInterface.getMediaList(title)
+            .map { it.items.isNotEmpty() }
     }
 }
