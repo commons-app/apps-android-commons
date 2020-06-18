@@ -294,9 +294,9 @@ public class Media implements Parcelable {
         return String.format("[[%s|thumb|%s]]", filename, getMostRelevantCaption());
     }
 
-    private String getMostRelevantCaption() {
+    public String getMostRelevantCaption() {
         final String languageAppropriateCaption = captions.get(Locale.getDefault().getLanguage());
-        if(languageAppropriateCaption!=null){
+        if (languageAppropriateCaption != null) {
             return languageAppropriateCaption;
         }
         for (String firstCaption : captions.values()) {

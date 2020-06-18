@@ -35,7 +35,7 @@ class SearchImagesViewHolder(containerView: View, val onImageClicked: (Int) -> U
     override fun bind(item: Pair<Media, Int>) {
         val media = item.first
         categoryImageView.setOnClickListener { onImageClicked(item.second) }
-        categoryImageTitle.text = media.displayTitle
+        categoryImageTitle.text = media.mostRelevantCaption
         categoryImageView.setImageURI(media.thumbUrl)
         if (media.creator?.isNotEmpty() == true) {
             categoryImageAuthor.visibility = View.VISIBLE

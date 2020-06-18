@@ -61,7 +61,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
   public void init(final int position, final Contribution contribution) {
     this.contribution = contribution;
     this.position = position;
-    titleView.setText(getTitle(contribution));
+    titleView.setText(contribution.getMostRelevantCaption());
     final String imageSource = chooseImageSource(contribution.getThumbUrl(),
         contribution.getLocalUri());
     if (!TextUtils.isEmpty(imageSource)) {
@@ -110,14 +110,6 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         break;
     }
   }
-
-  private String getTitle(Contribution contribution) {
-    for (String value : contribution.getCaptions().values()) {
-      return value;
-    }
-    return contribution.getDisplayTitle();
-  }
-
 
   /**
    * Checks if a media exists on the corresponding Wikipedia article Currently the check is made for
