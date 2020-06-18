@@ -4,6 +4,8 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.explore.media.MediaConverter
+import fr.free.nrw.commons.media.model.PageMediaListItem
+import fr.free.nrw.commons.media.model.PageMediaListResponse
 import fr.free.nrw.commons.utils.CommonsDateUtil
 import io.reactivex.Single
 import junit.framework.Assert.*
@@ -28,6 +30,10 @@ class MediaClientTest {
     internal var mediaConverter: MediaConverter? = null
     @Mock
     internal var mediaDetailInterface: MediaDetailInterface? = null
+
+    @Mock
+    internal var pageMediaInterface: PageMediaInterface? = null
+
 
     @InjectMocks
     var mediaClient: MediaClient? = null
@@ -226,6 +232,26 @@ class MediaClientTest {
             .thenReturn(Single.just(mockResponse))
 
         assertEquals("Test", mediaClient!!.getPageHtml("abcde").blockingGet())
+    }
+
+    @Test
+    fun doesPageContainMedia() {
+        val mock = mock(PageMediaListResponse::class.java)
+        whenever(mock.items).thenReturn(listOf<PageMediaListItem>(mock(PageMediaListItem::class.java)))
+        `when`(pageMediaInterface!!.getMediaList(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(mock))
+
+        mediaClient!!.doesPageContainMedia("Test").test().assertValue(true)
+    }
+
+    @Test
+    fun doesPageContainMediaWithNoMedia() {
+        val mock = mock(PageMediaListResponse::class.java)
+        whenever(mock.items).thenReturn(listOf<PageMediaListItem>())
+        `when`(pageMediaInterface!!.getMediaList(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(mock))
+
+        mediaClient!!.doesPageContainMedia("Test").test().assertValue(false)
     }
 
     @Test

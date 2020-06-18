@@ -13,6 +13,7 @@
 * Nuevo Paso
 * Revi
 * Ykhwong
+* YuzaTea
 * 그냥기여자
 * 아라
 -->
@@ -186,7 +187,7 @@
   <string name="menu_refresh">새로 고침</string>
   <string name="storage_permission_title">기억 장치 권한 요청 중</string>
   <string name="read_storage_permission_rationale">권한 필요: 외부 저장소 읽기. 이것이 없으면 앱은 갤러리에 접근할 수 없습니다.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">권한 필요: 외부 저장소 쓰기. 이것이 없으면 앱은 카메라에 접근할 수 없습니다.</string>
+  <string name="write_storage_permission_rationale">권한 필요: 외부 저장소 쓰기. 이것이 없으면 앱은 카메라/갤러리에 접근할 수 없습니다.</string>
   <string name="location_permission_title">위치 권한 요청 중</string>
   <string name="location_permission_rationale">선택적 권한: 분류 추천을 위해 현재 위치 정보를 가져옵니다.</string>
   <string name="ok">확인</string>
@@ -253,6 +254,7 @@
   <string name="navigation_item_info">강좌</string>
   <string name="navigation_item_notification">알림</string>
   <string name="navigation_item_featured_images">알참</string>
+  <string name="navigation_item_review">검토</string>
   <string name="nearby_needs_permissions">위치 권한이 없으면 주변 장소를 표시할 수 없습니다</string>
   <string name="no_description_found">설명이 없습니다</string>
   <string name="nearby_info_menu_commons_article">공용 파일 문서</string>
@@ -269,8 +271,10 @@
   <string name="upload_problem_image_blurry">이미지가 흐릿합니다.</string>
   <string name="upload_problem_image_duplicate">이미지가 이미 공용에 있습니다.</string>
   <string name="upload_problem_different_geolocation">이 사진은 다른 위치에서 찍었습니다.</string>
+  <string name="upload_problem_fbmd">당신이 직접 찍은 사진만 업로드하세요. 다른 사람의 페이스북 계정에서 찾은 사진을 업로드하지마세요.</string>
   <string name="upload_problem_do_you_continue">그래도 이 사진을 업로드하시겠습니까?</string>
   <string name="upload_problem_image">이미지에 문제가 있습니다</string>
+  <string name="internet_downloaded">직접 찍은 사진만 업로드하세요. 인터넷에서 다운로드한 사진을 업로드하지 마세요.</string>
   <string name="give_permission">권한 부여</string>
   <string name="use_external_storage">외부 저장소 사용하기</string>
   <string name="use_external_storage_summary">장치의 인앱 카메라로 찍은 사진 저장하기</string>
@@ -310,6 +314,8 @@
   <string name="no_internet">인터넷 사용 불가</string>
   <string name="internet_established">인터넷 사용 가능</string>
   <string name="error_notifications">알림 가져오기 오류</string>
+  <string name="error_review">검토할 이미지를 가져오는 중 오류 발생. 새로 고침을 눌러 다시 시도하세요.</string>
+  <string name="error_review_categories">검토할 이미지의 범주를 가져오는 중 오류 발생. 새로 고침을 눌러 다시 시도하세요.</string>
   <string name="no_notifications">알림이 없습니다</string>
   <string name="about_translate">번역</string>
   <string name="about_translate_title">언어</string>
@@ -340,6 +346,7 @@
   <string name="search_tab_title_media">미디어</string>
   <string name="search_tab_title_categories">분류</string>
   <string name="search_tab_title_depictions">항목</string>
+  <string name="explore_tab_title_featured">추천됨</string>
   <string name="explore_tab_title_mobile">모바일을 통해 업로드됨</string>
   <string name="successful_wikidata_edit">위키데이터의 %1$s에 그림을 추가했습니다!</string>
   <string name="wikidata_edit_failure">일치하는 위키데이터 엔티티의 업데이트를 실패했습니다!</string>
@@ -382,6 +389,7 @@
   <string name="statistics_wikidata_edits">\"주변 장소\" 경유 이미지</string>
   <string name="level">레벨</string>
   <string name="images_uploaded">사진 업로드됨</string>
+  <string name="images_used_by_wiki">사용된 이미지</string>
   <string name="achievements_share_message">친구와 성과를 공유하세요!</string>
   <string name="achievements_revert_limit_message">최소 요구사항:</string>
   <string name="images_uploaded_explanation">업로드 소프트웨어를 통해 공용에 업로드한 그림 수</string>
@@ -496,7 +504,7 @@
   <string name="delete_helper_ask_spam_selfie">셀카</string>
   <string name="delete_helper_ask_spam_blurry">흐림</string>
   <string name="delete_helper_ask_spam_other">기타</string>
-  <string name="delete_helper_ask_reason_copyright_internet_photo">인터넷의 임의 사진</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">인터넷상의 무작위 이미지</string>
   <string name="delete_helper_ask_reason_copyright_logo">로고</string>
   <string name="delete_helper_ask_reason_copyright_other">기타</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">왜냐하면</string>
@@ -525,5 +533,6 @@
   <string name="theme_dark_name">어두움</string>
   <string name="theme_light_name">밝음</string>
   <string name="ask_to_turn_location_on">위치를 켭니까?</string>
+  <string name="load_more">더 불러오기</string>
   <string name="nearby_no_results">발견된 장소가 없습니다. 검색 기준을 바꾸어 보십시오.</string>
 </resources>

@@ -88,17 +88,10 @@ public class GridViewAdapter extends ArrayAdapter {
         SimpleDraweeView imageView = convertView.findViewById(R.id.categoryImageView);
         TextView fileName = convertView.findViewById(R.id.categoryImageTitle);
         TextView author = convertView.findViewById(R.id.categoryImageAuthor);
-        fileName.setText(getTitle(item));
+        fileName.setText(item.getMostRelevantCaption());
         setAuthorView(item, author);
         imageView.setImageURI(item.getThumbUrl());
         return convertView;
-    }
-
-    private String getTitle(Media item) {
-        for (String caption : item.getCaptions().values()) {
-            return caption;
-        }
-        return item.getDisplayTitle();
     }
 
     /**

@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.*
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -66,11 +67,11 @@ abstract class BasePagingFragment<T> : CommonsDaggerSupportFragment(),
     }
 
     override fun hideInitialLoadProgress() {
-        paginatedSearchInitialLoadProgress.visibility = View.GONE
+        paginatedSearchInitialLoadProgress.visibility = GONE
     }
 
     override fun showInitialLoadInProgress() {
-        paginatedSearchInitialLoadProgress.visibility = View.VISIBLE
+        paginatedSearchInitialLoadProgress.visibility = VISIBLE
     }
 
     override fun showSnackbar() {
@@ -83,13 +84,13 @@ abstract class BasePagingFragment<T> : CommonsDaggerSupportFragment(),
 
     override fun showEmptyText(query: String) {
         contentNotFound.text = getEmptyText(query)
-        contentNotFound.visibility = View.VISIBLE
+        contentNotFound.visibility = VISIBLE
     }
 
     abstract fun getEmptyText(query: String): String
 
     override fun hideEmptyText() {
-        contentNotFound.visibility = View.GONE
+        contentNotFound.visibility = GONE
     }
 }
 

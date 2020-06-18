@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Candalua
 * Fierodelveneto
 -->
 <resources>
@@ -48,8 +49,10 @@
   <string name="provider_contributions">I me cargamenti</string>
   <string name="menu_share">Spartisi in jiro</string>
   <string name="menu_open_in_browser">Varda sol navegadore web</string>
-  <string name="share_title_hint" fuzzy="true">Titoło (obligatorio)</string>
+  <string name="share_title_hint">Didascalia (obligatorio)</string>
+  <string name="add_caption_toast">Par piaser, daghe na didascalia a sto file</string>
   <string name="share_description_hint">Descrision</string>
+  <string name="share_caption_hint">Didascalia (màsimo 255 caràteri)</string>
   <string name="login_failed_network">No xé posibiłe ndarghe drento - erore de rete</string>
   <string name="login_failed_wrong_credentials">Entrada no riusia - Daghe na ociada al nome utente e ciave</string>
   <string name="login_failed_throttled">Masa volte te ghè provà. Riprova tra on fià de minudi.</string>
@@ -62,6 +65,7 @@
   <string name="provider_modifications">Modifeghe</string>
   <string name="menu_upload_single">Carga</string>
   <string name="categories_search_text_hint">Serca łe categorie</string>
+  <string name="depicts_search_text_hint">Serca le robe che se vede nel to file (le montagne, el Taj Mahal, ec.)</string>
   <string name="menu_save_categories">Salva</string>
   <string name="refresh_button">Ajorna</string>
   <string name="display_list_button">Lista</string>
@@ -82,6 +86,7 @@
     <item quantity="other">%1$d cargamenti</item>
   </plurals>
   <string name="categories_not_found">No ła xé sta catada na categoria che ła contegna %1$s</string>
+  <string name="depictions_not_found">No gò catà nisun elemento Wikidata che corisponda a %1$s</string>
   <string name="categories_skip_explanation">Xonta categorie par far sì che łe to someje e imajini łe sia pì façilmente riçercae so Wikimedia Commons.\nScumisia a dijitare par xontare categorie.</string>
   <string name="categories_activity_title">Categorie</string>
   <string name="title_activity_settings">Inpostasion</string>
@@ -562,4 +567,6 @@
   <string name="ask_to_turn_location_on">Ativar ła poxision?</string>
   <string name="nearby_needs_location">La locałixasion n\'te łe viçinanse ła ga da esare inpisada parché ła funsionee in modo justo.</string>
   <string name="use_location_from_similar_image">Ste do foto łe gheto fate in tel steso posto? Vuto doparar ła stesa latitudine/lonxitudine de l\'imajine a drita?</string>
+  <string name="load_more">Carga \'ncora</string>
+  <string name="nearby_no_results">No go catà nisun posto, pròa a canbiar la to riserca.</string>
 </resources>

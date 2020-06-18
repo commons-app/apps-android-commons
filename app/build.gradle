@@ -134,7 +134,6 @@ dependencies {
 
 android {
     compileSdkVersion 28
-    buildToolsVersion "28.0.3"
 
     defaultConfig {
         //applicationId 'fr.free.nrw.commons'
@@ -152,7 +151,6 @@ android {
         testOptions {
             execution 'ANDROIDX_TEST_ORCHESTRATOR'
         }
-        multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
     }
 

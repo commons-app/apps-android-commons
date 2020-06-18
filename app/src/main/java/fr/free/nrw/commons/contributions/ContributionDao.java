@@ -53,6 +53,9 @@ public abstract class ContributionDao {
   @Query("SELECT * from contribution WHERE filename=:fileName")
   public abstract List<Contribution> getContributionWithTitle(String fileName);
 
+  @Query("SELECT * from contribution WHERE pageId=:pageId")
+  public abstract Contribution getContribution(String pageId);
+
   @Query("UPDATE contribution SET state=:state WHERE state in (:toUpdateStates)")
   public abstract Single<Integer> updateStates(int state, int[] toUpdateStates);
 

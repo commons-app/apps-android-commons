@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
@@ -283,6 +284,25 @@ public class Media implements Parcelable {
      */
     public void setCoordinates(@Nullable final LatLng coordinates) {
         this.coordinates = coordinates;
+    }
+
+    /**
+     * Returns wikicode to use the media file on a MediaWiki site
+     * @return
+     */
+    public String getWikiCode() {
+        return String.format("[[%s|thumb|%s]]", filename, getMostRelevantCaption());
+    }
+
+    public String getMostRelevantCaption() {
+        final String languageAppropriateCaption = captions.get(Locale.getDefault().getLanguage());
+        if (languageAppropriateCaption != null) {
+            return languageAppropriateCaption;
+        }
+        for (String firstCaption : captions.values()) {
+            return firstCaption;
+        }
+        return getDisplayTitle();
     }
 
     /**

@@ -20,6 +20,7 @@ const val PAGE_ID_PREFIX = "M"
 @Singleton
 class MediaClient @Inject constructor(
     private val mediaInterface: MediaInterface,
+    private val pageMediaInterface: PageMediaInterface,
     private val mediaDetailInterface: MediaDetailInterface,
     private val mediaConverter: MediaConverter
 ) {
@@ -119,7 +120,6 @@ class MediaClient @Inject constructor(
         )
     }
 
-
     private fun responseToMediaList(
         response: Single<MwQueryResponse>,
         key: String? = null
@@ -191,5 +191,10 @@ class MediaClient @Inject constructor(
     fun doesMediaListForUserHaveMorePages(userName: String): Boolean {
         val key = "user_$userName"
         return if (continuationExists.containsKey(key)) continuationExists[key]!! else true
+    }
+
+    fun doesPageContainMedia(title: String?): Single<Boolean> {
+        return pageMediaInterface.getMediaList(title)
+            .map { it.items.isNotEmpty() }
     }
 }
