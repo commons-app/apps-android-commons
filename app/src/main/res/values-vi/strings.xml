@@ -15,6 +15,24 @@
 * Yuki Wulf
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d tập tin đang được tải lên</item>
+    <item quantity="other">%1$d tập tin đang được tải lên</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d tập tin đã tải lên</item>
+    <item quantity="other">%1$d tập tin đã tải lên</item>
+  </plurals>
+  <string name="starting_multiple_uploads">Đang bắt đầu tải lên %1$d tập tin</string>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d tập tin đã tải lên</item>
+    <item quantity="other">%1$d tập tin đã tải lên</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Hình này sẽ được phát hành theo giấy phép %1$s</item>
+    <item quantity="other">Những hình này sẽ được phát hành theo giấy phép %1$s</item>
+  </plurals>
   <string name="title_activity_explore">Khám phá</string>
   <string name="navigation_item_explore">Khám phá</string>
   <string name="preference_category_appearance">Giao diện</string>
@@ -46,10 +64,6 @@
   <string name="upload_progress_notification_title_finishing">Đang hoàn thành việc tải lên tập tin %1$s</string>
   <string name="upload_failed_notification_title">Tải lên tập tin %1$s thất bại</string>
   <string name="upload_failed_notification_subtitle">Chạm để xem</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d tập tin đang được tải lên</item>
-    <item quantity="other">%1$d tập tin đang được tải lên</item>
-  </plurals>
   <string name="title_activity_contributions">Tập tin Tôi đã Tải lên Gần đây</string>
   <string name="contribution_state_queued">Đang chờ</string>
   <string name="contribution_state_failed">Thất bại</string>
@@ -81,16 +95,6 @@
   <string name="gps_disabled">Chức năng GPS đang tắt trên thiết bị của bạn. Bạn có muốn bật nó lên?</string>
   <string name="enable_gps">Bật GPS</string>
   <string name="contributions_subtitle_zero">Chưa có tập tin tải lên</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d tập tin đã tải lên</item>
-    <item quantity="other">%1$d tập tin đã tải lên</item>
-  </plurals>
-  <string name="starting_multiple_uploads">Đang bắt đầu tải lên %1$d tập tin</string>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d tập tin đã tải lên</item>
-    <item quantity="other">%1$d tập tin đã tải lên</item>
-  </plurals>
   <string name="categories_not_found">Không tìm thấy thể loại khớp với %1$s</string>
   <string name="categories_skip_explanation">Xếp các hình ảnh vào thể loại để giúp chúng dễ tìm kiếm hơn trên Wikimedia Commons.\nHãy bắt đầu nhập để thêm thể loại.</string>
   <string name="categories_activity_title">Thể loại</string>
@@ -111,10 +115,6 @@
   <string name="no_uploads_yet">Bạn chưa tải lên hình nào.</string>
   <string name="menu_retry_upload">Thử lại</string>
   <string name="menu_cancel_upload">Hủy bỏ</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Hình này sẽ được phát hành theo giấy phép %1$s</item>
-    <item quantity="other">Những hình này sẽ được phát hành theo giấy phép %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Với việc đăng hình này, tôi tuyên bố rằng nó là tác phẩm của chính mình, rằng nó không chứa nội dung có bản quyền hoặc ảnh tự chụp, và về mặt khác thì hoàn toàn tuân theo &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines?uselang=vi\"&gt;các quy định Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Tải về</string>
   <string name="preference_license">Giấy phép mặc định</string>

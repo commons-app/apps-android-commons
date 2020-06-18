@@ -29,6 +29,34 @@
 * 阿pp
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d个文件正在上传</item>
+    <item quantity="other">%1$d个文件正在上传</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d次上传</item>
+    <item quantity="other">%1$d次上传</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">开始%1$d次上传</item>
+    <item quantity="other">开始%1$d次上传</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d次上传</item>
+    <item quantity="other">%1$d次上传</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">该图像的授权协议是 %1$s</item>
+    <item quantity="other">这些图像的授权协议是 %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d次上传</item>
+    <item quantity="other">%1$d次上传</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="other">正在处理数据。处理时间取决于图片的尺寸和您的设备</item>
+  </plurals>
   <string name="title_activity_explore">探索</string>
   <string name="navigation_item_explore">探索</string>
   <string name="preference_category_appearance">外观</string>
@@ -60,10 +88,6 @@
   <string name="upload_progress_notification_title_finishing">正在完成上传%1$s</string>
   <string name="upload_failed_notification_title">上传%1$s失败</string>
   <string name="upload_failed_notification_subtitle">点击查看</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d个文件正在上传</item>
-    <item quantity="other">%1$d个文件正在上传</item>
-  </plurals>
   <string name="title_activity_contributions">我的最近上传</string>
   <string name="contribution_state_queued">已入队列</string>
   <string name="contribution_state_failed">失败</string>
@@ -96,19 +120,6 @@
   <string name="gps_disabled">您的设备禁用了GPS。您是否要启用它？</string>
   <string name="enable_gps">启用GPS</string>
   <string name="contributions_subtitle_zero">尚无上传</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d次上传</item>
-    <item quantity="other">%1$d次上传</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">开始%1$d次上传</item>
-    <item quantity="other">开始%1$d次上传</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d次上传</item>
-    <item quantity="other">%1$d次上传</item>
-  </plurals>
   <string name="categories_not_found">没有找到匹配%1$s的分类</string>
   <string name="categories_skip_explanation">添加分类使您的图像更容易在维基共享资源被找到。开始输入以添加分类。</string>
   <string name="categories_activity_title">分类</string>
@@ -130,10 +141,6 @@
   <string name="no_uploads_yet">您还没有上传任何照片。</string>
   <string name="menu_retry_upload">重试</string>
   <string name="menu_cancel_upload">取消</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">该图像的授权协议是 %1$s</item>
-    <item quantity="other">这些图像的授权协议是 %1$s</item>
-  </plurals>
   <string name="media_upload_policy">通过提交该图片，我声明这是我自己的作品，其不包含受版权保护的材料或自拍像，并遵循&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;维基共享资源&lt;/a&gt;方针。</string>
   <string name="menu_download">下载</string>
   <string name="preference_license">默认许可协议</string>
@@ -418,10 +425,6 @@
   <string name="submit">发布</string>
   <string name="upload_title_duplicate">名为%1$s的文件已经存在。您确定要继续吗？</string>
   <string name="map_application_missing">您的设备上无法找到兼容的地图应用程序。请安装地图应用程序来使用此功能。</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d次上传</item>
-    <item quantity="other">%1$d次上传</item>
-  </plurals>
   <string name="navigation_item_bookmarks">书签</string>
   <string name="title_activity_bookmarks">书签</string>
   <string name="title_page_bookmarks_pictures">图片</string>
@@ -507,9 +510,6 @@
   <string name="review_thanks_no_button_text">下一张图片</string>
   <string name="skip_image_explanation">点击这个按钮会给你另外一个来自于Wikimedia Common上传的图片</string>
   <string name="review_image_explanation">你可以审查图片并提高Wikimedia Commoms的质量。\n审查的四个参数是：\n-图片尺寸是否在规定的范围\n-图片是否遵循版权规则\n-图片是否正确分类\n-如果一切正常你是否也可以感谢贡献者</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="other">正在处理数据。处理时间取决于图片的尺寸和您的设备</item>
-  </plurals>
   <string name="no_image">没有被使用的图片</string>
   <string name="no_image_reverted">没有被撤回的图片</string>
   <string name="no_image_uploaded">还没有上传图片</string>

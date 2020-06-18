@@ -19,6 +19,24 @@
 * Xbaked potatox
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d bestand aan het uploaden</item>
+    <item quantity="other">%1$d bestanden aan het uploaden</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d upload</item>
+    <item quantity="other">%1$d uploads</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">Bezig met 1 upload</item>
+    <item quantity="other">Bezig met %1$d uploads</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d upload</item>
+    <item quantity="other">%1$d uploads</item>
+  </plurals>
+  <string name="share_license_summary" fuzzy="true">Deze afbeelding wordt gelicenseerd onder %1$s</string>
   <string name="title_activity_explore">Verkennen</string>
   <string name="navigation_item_explore">Verkennen</string>
   <string name="preference_category_appearance">Uiterlijk</string>
@@ -50,10 +68,6 @@
   <string name="upload_progress_notification_title_finishing">Het uploaden van %1$s is afgerond</string>
   <string name="upload_failed_notification_title">Het uploaden van %1$s is mislukt</string>
   <string name="upload_failed_notification_subtitle">Wijs aan om te bekijken</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d bestand aan het uploaden</item>
-    <item quantity="other">%1$d bestanden aan het uploaden</item>
-  </plurals>
   <string name="title_activity_contributions">Mijn recente uploads</string>
   <string name="contribution_state_queued">In wachtrij</string>
   <string name="contribution_state_failed">Mislukt</string>
@@ -82,19 +96,6 @@
   <string name="gps_disabled">GPS is uitgezet in uw apparaat. Wilt u het aanzetten?</string>
   <string name="enable_gps">GPS aanzetten</string>
   <string name="contributions_subtitle_zero">Nog geen uploads</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d upload</item>
-    <item quantity="other">%1$d uploads</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Bezig met 1 upload</item>
-    <item quantity="other">Bezig met %1$d uploads</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d upload</item>
-    <item quantity="other">%1$d uploads</item>
-  </plurals>
   <string name="categories_not_found">Er zijn geen categorieën met \"%1$s\" gevonden</string>
   <string name="categories_skip_explanation" fuzzy="true">Voeg categorieën toe om uw afbeeldingen makkelijker te vinden te maken op Wikimedia Commons.\n\nBegin met het toevoegen van categorieën.\n\nKlik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="categories_activity_title">Categorieën</string>
@@ -114,7 +115,6 @@
   <string name="no_uploads_yet">U hebt nog geen afbeeldingen geüpload.</string>
   <string name="menu_retry_upload">Opnieuw proberen</string>
   <string name="menu_cancel_upload">Annuleren</string>
-  <string name="share_license_summary" fuzzy="true">Deze afbeelding wordt gelicenseerd onder %1$s</string>
   <string name="menu_download">Downloaden</string>
   <string name="preference_license">Standaard licentie</string>
   <string name="use_previous" fuzzy="true">Vorige naam/beschrijving gebruiken</string>

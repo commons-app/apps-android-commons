@@ -10,6 +10,31 @@
 * XVEC
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">s\'està carregant %1$d fitxer</item>
+    <item quantity="other">s\'estan carregant %1$d fitxers</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">S\'està iniciant %1$d càrrega</item>
+    <item quantity="other">S\'estan iniciant %1$d càrregues</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d càrrega</item>
+    <item quantity="other">%1$d càrregues</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Aquesta imatge quedarà sota llicència %1$s</item>
+    <item quantity="other">Aquestes imatges quedaran sota llicència %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d pujada</item>
+    <item quantity="other">%1$d pujades</item>
+  </plurals>
   <string name="title_activity_explore">Explora</string>
   <string name="navigation_item_explore">Explora</string>
   <string name="preference_category_appearance">Aparença</string>
@@ -40,10 +65,6 @@
   <string name="upload_progress_notification_title_finishing">Acabant la càrrega al servidor de %1$s</string>
   <string name="upload_failed_notification_title">Error al carregar %1$s</string>
   <string name="upload_failed_notification_subtitle">Prem per veure-ho</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">s\'està carregant %1$d fitxer</item>
-    <item quantity="other">s\'estan carregant %1$d fitxers</item>
-  </plurals>
   <string name="title_activity_contributions">Les meves càrregues recents</string>
   <string name="contribution_state_queued">En cua</string>
   <string name="contribution_state_failed">Ha fallat</string>
@@ -75,19 +96,6 @@
   <string name="gps_disabled">El vostre dispositiu no té el GPS habilitat. El voleu habilitar?</string>
   <string name="enable_gps">Habilita el GPS</string>
   <string name="contributions_subtitle_zero">Encara no hi ha cap càrrega</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">S\'està iniciant %1$d càrrega</item>
-    <item quantity="other">S\'estan iniciant %1$d càrregues</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d càrrega</item>
-    <item quantity="other">%1$d càrregues</item>
-  </plurals>
   <string name="categories_not_found">No s\'ha trobat cap categoria que coincideixi amb %1$s</string>
   <string name="categories_skip_explanation">Afegiu categories per fer que les vostres imatges siguin més fàcils de trobar a Wikimedia Commons.</string>
   <string name="categories_activity_title">Categories</string>
@@ -109,10 +117,6 @@
   <string name="no_uploads_yet">Encara no heu carregat cap foto.</string>
   <string name="menu_retry_upload">Reintenta</string>
   <string name="menu_cancel_upload">Cancel·la</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Aquesta imatge quedarà sota llicència %1$s</item>
-    <item quantity="other">Aquestes imatges quedaran sota llicència %1$s</item>
-  </plurals>
   <string name="media_upload_policy">En trametre aquesta imatge declaro que és fruit del meu treball, que no conté material amb drets d\'autor o amb autofotos, i que s\'adhereix a les &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;polítiques de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Baixa</string>
   <string name="preference_license">Llicència per defecte</string>
@@ -368,10 +372,6 @@
   <string name="previous">Anterior</string>
   <string name="submit">Envia</string>
   <string name="upload_title_duplicate">Ja existeix un fitxer amb el nom %1$s. Segur que voleu procedir?</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d pujada</item>
-    <item quantity="other">%1$d pujades</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Adreces d\'interès</string>
   <string name="title_activity_bookmarks">Adreces d\'interès</string>
   <string name="title_page_bookmarks_pictures">Imatges</string>

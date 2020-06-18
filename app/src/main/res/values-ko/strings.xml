@@ -18,6 +18,30 @@
 * 아라
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d개의 파일을 올리는 중</item>
+    <item quantity="other">%1$d개의 파일을 올리는 중</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%1$d장의 업로드를 시작합니다</item>
+    <item quantity="other">%1$d장의 업로드를 시작합니다</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d개 업로드</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">이 그림은 %1$s에 따라 사용이 허가됩니다</item>
+    <item quantity="other">이 그림은 %1$s에 따라 사용이 허가됩니다</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d개 업로드</item>
+    <item quantity="other">%1$d개 업로드</item>
+  </plurals>
   <string name="title_activity_explore">찾아보기</string>
   <string name="navigation_item_explore">찾아보기</string>
   <string name="preference_category_appearance">보이기</string>
@@ -49,10 +73,6 @@
   <string name="upload_progress_notification_title_finishing">%1$s 파일 올리기를 끝내는 중</string>
   <string name="upload_failed_notification_title">%1$s 파일 올리기 실패</string>
   <string name="upload_failed_notification_subtitle">보려면 탭하세요</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d개의 파일을 올리는 중</item>
-    <item quantity="other">%1$d개의 파일을 올리는 중</item>
-  </plurals>
   <string name="title_activity_contributions">내 최근 업로드</string>
   <string name="contribution_state_queued">대기 중</string>
   <string name="contribution_state_failed">실패</string>
@@ -87,18 +107,6 @@
   <string name="gps_disabled">장치에서 GPS가 꺼져 있습니다. 켜시겠습니까?</string>
   <string name="enable_gps">GPS 사용</string>
   <string name="contributions_subtitle_zero">아직 올린 항목이 없습니다</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">%1$d장의 업로드를 시작합니다</item>
-    <item quantity="other">%1$d장의 업로드를 시작합니다</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d개 업로드</item>
-  </plurals>
   <string name="categories_not_found">%1$s와(과) 일치하는 분류를 찾을 수 없습니다</string>
   <string name="depictions_not_found">%1$s에 대한 위키데이터 검색 결과가 없습니다</string>
   <string name="no_child_classes">%1$s에 자식 클래스가 없습니다</string>
@@ -124,10 +132,6 @@
   <string name="no_uploads_yet">아직 사진을 올리지 않았습니다.</string>
   <string name="menu_retry_upload">다시 시도</string>
   <string name="menu_cancel_upload">취소</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">이 그림은 %1$s에 따라 사용이 허가됩니다</item>
-    <item quantity="other">이 그림은 %1$s에 따라 사용이 허가됩니다</item>
-  </plurals>
   <string name="media_upload_policy">이 이미지에 대해서, 이것이 본인이 창작한 저작물이며, 저작권에 위배되는 것이 포함되지 않았으며, &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;위키미디어 공용 정책&lt;/a&gt;에 위배되지 않는다는 것에 동의합니다.</string>
   <string name="menu_download">다운로드</string>
   <string name="preference_license">기본 라이선스</string>
@@ -417,10 +421,6 @@
   <string name="submit">제출</string>
   <string name="upload_title_duplicate">%1$s 이름의 파일이 존재합니다. 계속하시겠습니까?</string>
   <string name="map_application_missing">장치에서 호환되는 지도 애플리케이션을 찾지 못했습니다. 이 기능을 사용하려면 지도 애플리케이션을 설치해 주십시오.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d개 업로드</item>
-    <item quantity="other">%1$d개 업로드</item>
-  </plurals>
   <string name="navigation_item_bookmarks">북마크</string>
   <string name="title_activity_bookmarks">북마크</string>
   <string name="title_page_bookmarks_pictures">사진</string>

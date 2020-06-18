@@ -7,6 +7,35 @@
 * Sudo77(new)
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+    <item quantity="one">nahráva sa %1$d súbor</item>
+    <item quantity="other">nahrávajú sa %1$d súbory</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">Spúšťam nahrávanie %1$d súboru</item>
+    <item quantity="other">Spúšťam nahrávanie %1$d súborov</item>
+  </plurals>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d nahranie</item>
+    <item quantity="other">%1$d nahrania</item>
+  </plurals>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">Tento obrázok bude licenciovaný pod licenciou %1$s</item>
+    <item quantity="other">Tieto obrázky budú licenciované pod licenciou %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title" fuzzy="true">
+    <item quantity="one">%1$d nahranie</item>
+    <item quantity="other">%1$d nahrania</item>
+  </plurals>
+  <plurals name="receiving_shared_content" fuzzy="true">
+    <item quantity="one">Prebieha príjem zdieľaného obsahu. Spracovanie obrázku môže chvíľu trvať v závislosti od veľkosti obrázku a vášho zariadenia</item>
+    <item quantity="other">Prebieha príjem zdieľaného obsahu. Spracovanie obrázkov môže chvíľu trvať v závislosti od veľkosti obrázkov a vášho zariadenia</item>
+  </plurals>
   <string name="title_activity_explore">Objaviť</string>
   <string name="navigation_item_explore">Objaviť</string>
   <string name="preference_category_appearance">Vzhľad</string>
@@ -38,10 +67,6 @@
   <string name="upload_progress_notification_title_finishing">Dokončenie nahrávania %1$s</string>
   <string name="upload_failed_notification_title">Nahrávanie %1$s zlyhalo</string>
   <string name="upload_failed_notification_subtitle">Kliknutím zobrazíte</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">nahráva sa %1$d súbor</item>
-    <item quantity="other">nahrávajú sa %1$d súbory</item>
-  </plurals>
   <string name="title_activity_contributions">Moje nedávno nahrané</string>
   <string name="contribution_state_queued">Nahrávanie je v poradí</string>
   <string name="contribution_state_failed">Nahrávanie zlyhalo</string>
@@ -76,19 +101,6 @@
   <string name="gps_disabled">GPS nie je povolené vo vašom zariadení. Chceli by ste ho povoliť?</string>
   <string name="enable_gps">Povoliť GPS</string>
   <string name="contributions_subtitle_zero">Žiadne nahrané súbory</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Spúšťam nahrávanie %1$d súboru</item>
-    <item quantity="other">Spúšťam nahrávanie %1$d súborov</item>
-  </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d nahranie</item>
-    <item quantity="other">%1$d nahrania</item>
-  </plurals>
   <string name="categories_not_found">Žiadne kategórie nezodpovedajú „%1$s“</string>
   <string name="depictions_not_found">Neboli nájdené žiadne položky Wikiúdajov zhodujúce sa s %1$s</string>
   <string name="categories_skip_explanation">Pridajte kategórie, aby bolo vaše obrázky možné na Wikimedia Commons nájsť.\nPre pridanie kategórií začnite písať.</string>
@@ -111,10 +123,6 @@
   <string name="no_uploads_yet">Ešte ste nenahrali žiadne fotografie.</string>
   <string name="menu_retry_upload">Znova</string>
   <string name="menu_cancel_upload">Zrušiť</string>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">Tento obrázok bude licenciovaný pod licenciou %1$s</item>
-    <item quantity="other">Tieto obrázky budú licenciované pod licenciou %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Odoslaním tohto súboru potvrdzujem, že je mojím vlastným dielom, neobsahuje autorskoprávne chránený materiál a nejedná sa o selfie a ani inak neporušuje &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Pravidlá a odporúčania Wikimedie Commons&lt;/a&gt;.</string>
   <string name="menu_download">Stiahnuť</string>
   <string name="preference_license">Predvolená licencia</string>
@@ -402,10 +410,6 @@
   <string name="submit">Odoslať</string>
   <string name="upload_title_duplicate">Súbor s názvom %1$s už existuje. Naozaj chcete pokračovať?</string>
   <string name="map_application_missing">Nebola nájdená žiadna kompatibilná aplikácia s mapami. Pre použitie tejto fukncie si, prosím, nainštalujte aplikáciu poskytujúcu mapy.</string>
-  <plurals name="upload_count_title" fuzzy="true">
-    <item quantity="one">%1$d nahranie</item>
-    <item quantity="other">%1$d nahrania</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Záložky</string>
   <string name="title_activity_bookmarks">Záložky</string>
   <string name="title_page_bookmarks_pictures">Obrázky</string>
@@ -491,10 +495,6 @@
   <string name="review_thanks_no_button_text">Ďalší súbor</string>
   <string name="skip_image_explanation">Kliknutím na toto tlačidlo sa zobrazí ďalší nedávno nahraný obrázok z Wikimedia Commons</string>
   <string name="review_image_explanation">Môžete kontrolovať obrázky a zlepšiť kvalitu Wikimedia Commons.\n\nTri aspekty, ktoré sa posudzujú, sú:\n  - Je tento obrázok v poriadku?\n  - Dodržiava tento obrázok pravidlá autorských práv?\n  - Je tento obrázok správne kategorizovaný?\n\nAk je všetko v poriadku, autorovi môžete taktiež poďakovať.</string>
-  <plurals name="receiving_shared_content" fuzzy="true">
-    <item quantity="one">Prebieha príjem zdieľaného obsahu. Spracovanie obrázku môže chvíľu trvať v závislosti od veľkosti obrázku a vášho zariadenia</item>
-    <item quantity="other">Prebieha príjem zdieľaného obsahu. Spracovanie obrázkov môže chvíľu trvať v závislosti od veľkosti obrázkov a vášho zariadenia</item>
-  </plurals>
   <string name="no_image">Nie sú použité žiadne obrázky</string>
   <string name="no_image_reverted">Žiadne revertované obrázky</string>
   <string name="no_image_uploaded">Žiadne nahrané obrázky</string>

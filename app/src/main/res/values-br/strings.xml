@@ -9,6 +9,27 @@
 * Y-M D
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+    <item quantity="one">%1$d restr o vezañ karget</item>
+    <item quantity="other">%1$d restr o vezañ karget</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">%1$d bellgargadenn loc\'het</item>
+    <item quantity="other">%1$d pellgargadennoù loc\'het</item>
+  </plurals>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d bellgargadenn</item>
+    <item quantity="other">%1$d pellgargadennoù</item>
+  </plurals>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">gant an aotre-implijout %1$s e vo ar skeudenn-mañ</item>
+    <item quantity="other">gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
+  </plurals>
   <string name="title_activity_explore">Ergerzhout</string>
   <string name="navigation_item_explore">Ergerzhout</string>
   <string name="preference_category_appearance">Neuz</string>
@@ -38,10 +59,6 @@
   <string name="upload_progress_notification_title_finishing">Oc\'h echuiñ enporzhiadenn %1$s</string>
   <string name="upload_failed_notification_title">C\'hwitet en deus enporzhiañ %1$s</string>
   <string name="upload_failed_notification_subtitle">Pouezit evit diskwel</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">%1$d restr o vezañ karget</item>
-    <item quantity="other">%1$d restr o vezañ karget</item>
-  </plurals>
   <string name="title_activity_contributions">Ma enporzhiadennoù nevez</string>
   <string name="contribution_state_queued">Lakaet el lostenn</string>
   <string name="contribution_state_failed">C\'hwitet</string>
@@ -74,19 +91,6 @@
   <string name="gps_disabled">Diwerededkaet eo ar GPS war hoc\'h ardivink.\nHa c\'hoant ho peus da weredekaat anezhañ ?</string>
   <string name="enable_gps">Gweredekaat ar GPS</string>
   <string name="contributions_subtitle_zero">Enporzhiadenn ebet c\'hoazh !</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">%1$d bellgargadenn loc\'het</item>
-    <item quantity="other">%1$d pellgargadennoù loc\'het</item>
-  </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d bellgargadenn</item>
-    <item quantity="other">%1$d pellgargadennoù</item>
-  </plurals>
   <string name="categories_not_found">N\'eus bet kavet rummad ebet o klotañ gant %1$s</string>
   <string name="depictions_not_found">N\'eus bet kavet elfenn Wikidata ebet o klotañ gant %1$s</string>
   <string name="no_child_classes">N\'eus ket a glasoù bugale e %1$s</string>
@@ -112,10 +116,6 @@
   <string name="no_uploads_yet">N\'ho peus ket enporzhiet skeudennoù c\'hoazh.</string>
   <string name="menu_retry_upload">Klask en-dro</string>
   <string name="menu_cancel_upload">Nullañ</string>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">gant an aotre-implijout %1$s e vo ar skeudenn-mañ</item>
-    <item quantity="other">gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
-  </plurals>
   <string name="media_upload_policy">Dre gas ar skeudenn-mañ e tisklêrian eo bet graet ganin, n\'eus elfenn ebet gwarezet gant ar gwirioù oberour nag emboltredoù enni, hag emañ diouzh &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/fr\"&gt;reolennoù Wikimedia Commons&lt;/a&gt; a-hend-all.</string>
   <string name="menu_download">Pellgargañ</string>
   <string name="preference_license">Aotre-implijout dre ziouer</string>

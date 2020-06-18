@@ -18,6 +18,35 @@
 * Tuliouel
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">carregando arquivo</item>
+    <item quantity="other">carregando %1$d arquivos</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Iniciando %1$d carregamento</item>
+    <item quantity="other">Iniciando %1$d carregamentos</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d carregamento</item>
+    <item quantity="other">%1$d carregamentos</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Esta imagem será licenciada sob %1$s</item>
+    <item quantity="other">Estas imagens serão licenciadas sob %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d carregamento</item>
+    <item quantity="other">%1$d carregamentos</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Recebendo conteúdo compartilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da imagem e do seu dispositivo</item>
+    <item quantity="other">Recebendo conteúdo compartilhado. O processamento das imagens pode levar algum tempo, dependendo do tamanho das imagens e do dispositivo</item>
+  </plurals>
   <string name="title_activity_explore">Explorar</string>
   <string name="navigation_item_explore">Explorar</string>
   <string name="preference_category_appearance">Aparência</string>
@@ -49,10 +78,6 @@
   <string name="upload_progress_notification_title_finishing">Terminando o envio de %1$s</string>
   <string name="upload_failed_notification_title">Envio de %1$s falhou</string>
   <string name="upload_failed_notification_subtitle">Toque para ver</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">carregando arquivo</item>
-    <item quantity="other">carregando %1$d arquivos</item>
-  </plurals>
   <string name="title_activity_contributions">Meus envios recentes</string>
   <string name="contribution_state_queued">Na fila</string>
   <string name="contribution_state_failed">Falhou</string>
@@ -87,19 +112,6 @@
   <string name="gps_disabled">O GPS está desligado no seu aparelho. Gostarias de ligá-lo ?</string>
   <string name="enable_gps">GPS inapto.</string>
   <string name="contributions_subtitle_zero">Ainda não carregado</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Iniciando %1$d carregamento</item>
-    <item quantity="other">Iniciando %1$d carregamentos</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d carregamento</item>
-    <item quantity="other">%1$d carregamentos</item>
-  </plurals>
   <string name="categories_not_found">Nenhuma categoria correspondente %1$s encontrada</string>
   <string name="depictions_not_found">Nenhum item do Wikidata correspondente a %1$s encontrado</string>
   <string name="no_child_classes">%1$s não tem classes filho</string>
@@ -126,10 +138,6 @@
   <string name="no_uploads_yet">Você ainda não carregou nenhuma foto.</string>
   <string name="menu_retry_upload">Repetir</string>
   <string name="menu_cancel_upload">Cancelar</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Esta imagem será licenciada sob %1$s</item>
-    <item quantity="other">Estas imagens serão licenciadas sob %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Ao enviar esta imagem, declaro que este é o meu próprio trabalho, que não contém material protegido ou selfies, e, de outra forma, adere a &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Políticas do Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Licença padrão</string>
@@ -424,10 +432,6 @@
   <string name="submit">Enviar</string>
   <string name="upload_title_duplicate">Um arquivo com o nome do arquivo% 1 $ s existe. Tem certeza de que deseja continuar?</string>
   <string name="map_application_missing">Nenhum aplicativo de mapa compatível pode ser encontrado no seu dispositivo. Por favor, instale um aplicativo de mapa para usar este recurso.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d carregamento</item>
-    <item quantity="other">%1$d carregamentos</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Favoritos</string>
   <string name="title_activity_bookmarks">Favoritos</string>
   <string name="title_page_bookmarks_pictures">Fotografias</string>
@@ -515,10 +519,6 @@
   <string name="review_thanks_no_button_text">Próxima imagem</string>
   <string name="skip_image_explanation">Clicando neste botão você terá uma outra imagem carregada recentemente do Wikimedia Commons</string>
   <string name="review_image_explanation">Você pode rever imagens e melhorar a qualidade dos Wikimedia Commons.\n Os quatro parâmetros de revisão são:\n- Esta imagem está no escopo?\n- Esta imagem segue as regras de direitos autorais?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, você também pode agradecer ao colaborador.</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">Recebendo conteúdo compartilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da imagem e do seu dispositivo</item>
-    <item quantity="other">Recebendo conteúdo compartilhado. O processamento das imagens pode levar algum tempo, dependendo do tamanho das imagens e do dispositivo</item>
-  </plurals>
   <string name="no_image">Nenhuma imagem usada</string>
   <string name="no_image_reverted">Nenhuma imagem revertida</string>
   <string name="no_image_uploaded">Nenhuma imagem enviada</string>
@@ -608,4 +608,17 @@
   <string name="use_location_from_similar_image">Você tirou essas duas fotos no mesmo lugar? Deseja usar a latitude/longitude da imagem à direita?</string>
   <string name="load_more">Carregar mais</string>
   <string name="nearby_no_results">Nenhum local encontrado, tente alterar seus critérios de pesquisa.</string>
+  <string name="add_picture_to_wikipedia_article_title">Adicionar imagem à Wikipédia</string>
+  <string name="add_picture_to_wikipedia_article_desc">Deseja adicionar esta imagem ao artigo da Wikipedia em %1$s?</string>
+  <string name="add_picture_to_wikipedia_instructions_title">Instruções</string>
+  <string name="add_picture_to_wikipedia_instructions_desc">Tome cuidado para seguir as diretrizes de edição!</string>
+  <string name="confirm">Confirmar</string>
+  <string name="instructions_title">Instruções</string>
+  <string name="wikipedia_instructions_step_1">1. Use o seguinte wikitexto:</string>
+  <string name="wikipedia_instructions_step_2">2. Clicar em confirmar abrirá o artigo da Wikipédia</string>
+  <string name="wikipedia_instructions_step_3">3. Encontre uma seção apropriada no artigo para sua imagem</string>
+  <string name="wikipedia_instructions_step_4">4. Clique no ícone editar (aquele como um lápis) para essa seção.</string>
+  <string name="wikipedia_instructions_step_5">5. Cole o wikitexto no local apropriado.</string>
+  <string name="wikipedia_instructions_step_7">7. Publique o artigo</string>
+  <string name="copy_wikicode_to_clipboard">Copiar wikicode para a área de transferência</string>
 </resources>
