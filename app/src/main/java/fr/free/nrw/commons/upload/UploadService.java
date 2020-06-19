@@ -314,7 +314,7 @@ public class UploadService extends CommonsDaggerService {
     WikidataPlace wikidataPlace = contribution.getWikidataPlace();
     Timber.d("Wikidata place %s", wikidataPlace.toString());
     if (wikidataPlace != null && wikidataPlace.getImageValue() == null) {
-      wikidataEditService.createImageClaim(wikidataPlace, uploadResult);
+      wikidataEditService.createImageClaim(wikidataPlace, uploadResult.getFilename());
     }
     saveCompletedContribution(contribution, uploadResult);
   }

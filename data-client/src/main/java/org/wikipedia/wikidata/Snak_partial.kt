@@ -18,5 +18,6 @@ import com.google.gson.annotations.SerializedName
 data class Snak_partial(
     @SerializedName("snaktype") val snakType: String,
     val property: String,
-    @SerializedName("datavalue") val dataValue: DataValue
+    @SerializedName("datavalue") val dataValue: DataValue,
+    @SerializedName("datatype") val dataType: String
 )

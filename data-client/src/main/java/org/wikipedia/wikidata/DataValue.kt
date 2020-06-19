@@ -87,7 +87,7 @@ sealed class DataValue(val type: String) {
     //        "language": "ko"
     //    }
     //    }
-    class MonoLingualText_partial() : DataValue(TYPE) {
+    class MonoLingualText_partial(val value: WikiBaseMonolingualTextValue) : DataValue(TYPE) {
         companion object {
             const val TYPE = "monolingualtext"
         }

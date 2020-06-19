@@ -2,6 +2,8 @@ package fr.free.nrw.commons.wikidata;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.JsonObject;
+import fr.free.nrw.commons.wikidata.model.WikidataSetClaim;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 
 import fr.free.nrw.commons.wikidata.model.AddEditTagResponse;
@@ -51,4 +53,14 @@ public interface WikidataInterface {
     @GET(MW_API_PREFIX + "action=query&meta=tokens&type=csrf")
     @NonNull
     Observable<MwQueryResponse> getCsrfToken();
+
+    /**
+     * Wikidata create claim API. Posts a new claim for the given entity ID
+     */
+    @Headers("Cache-Control: no-cache")
+    @POST("w/api.php?format=json&errorformat=plaintext&action=wbsetclaim&errorlang=uselang")
+    @FormUrlEncoded
+    Observable<WbCreateClaimResponse> postSetClaim(@NonNull @Field("claim") WikidataSetClaim request,
+        @NonNull @Field("tags") String tags,
+        @NonNull @Field("token") String token);
 }

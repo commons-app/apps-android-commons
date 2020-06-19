@@ -1,6 +1,13 @@
 package fr.free.nrw.commons.wikidata;
 
+import static fr.free.nrw.commons.wikidata.WikidataEditService.COMMONS_APP_TAG;
+
+import com.google.gson.Gson;
 import fr.free.nrw.commons.upload.WikidataItem;
+import fr.free.nrw.commons.wikidata.model.WikidataSetClaim;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
@@ -17,10 +24,12 @@ public class WikidataClient {
 
 
     private final WikidataInterface wikidataInterface;
+    private final Gson gson;
 
     @Inject
-    public WikidataClient(WikidataInterface wikidataInterface) {
+    public WikidataClient(WikidataInterface wikidataInterface, final Gson gson) {
         this.wikidataInterface = wikidataInterface;
+        this.gson = gson;
     }
 
     /**
@@ -39,6 +48,16 @@ public class WikidataClient {
                         toRequestBody("en"),
                         toRequestBody(csrfToken)))
                 .map(mwPostResponse -> mwPostResponse.getPageinfo().getLastrevid());
+    }
+
+    /**
+     * Create wikidata claim to add P18 value
+     * @return revisionID of the edit
+     */
+    Observable<Long> setClaim(WikidataSetClaim claim, String tags) {
+        return getCsrfToken()
+            .flatMap(csrfToken -> wikidataInterface.postSetClaim(claim, tags, csrfToken))
+            .map(mwPostResponse -> mwPostResponse.getPageinfo().getLastrevid());
     }
 
     /**
