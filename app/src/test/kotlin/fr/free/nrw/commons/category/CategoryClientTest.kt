@@ -82,7 +82,7 @@ class CategoryClientTest {
     @Test
     fun getParentCategoryListFound() {
         val mockResponse = withMockResponse("Category:Test")
-        whenever(categoryInterface.getParentCategoryList(anyString()))
+        whenever(categoryInterface.getParentCategoryList(anyString(), anyMap()))
             .thenReturn(Single.just(mockResponse))
         categoryClient.getParentCategoryList("tes")
             .test()
@@ -92,7 +92,7 @@ class CategoryClientTest {
     @Test
     fun getParentCategoryListNull() {
         val mockResponse = withNullPages()
-        whenever(categoryInterface.getParentCategoryList(anyString()))
+        whenever(categoryInterface.getParentCategoryList(anyString(), anyMap()))
             .thenReturn(Single.just(mockResponse))
         categoryClient.getParentCategoryList("tes")
             .test()
