@@ -1,7 +1,9 @@
 package fr.free.nrw.commons.contributions
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyZeroInteractions
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.media.MediaClient
@@ -100,14 +102,6 @@ class ContributionBoundaryCallbackTest {
         contributionBoundaryCallback.fetchContributions()
         verify(repository).save(anyList());
         verify(mediaClient).getMediaListForUser(anyString());
-    }
-
-    @Test
-    fun testFetchContributionsForEndOfList() {
-        whenever(sessionManager.userName).thenReturn("Test")
-        contributionBoundaryCallback.fetchContributions()
-        verify(mediaClient, times(0)).getMediaListForUser(anyString())
-        verifyNoMoreInteractions(repository)
     }
 
     @Test
