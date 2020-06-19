@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.explore.categories.search
+package fr.free.nrw.commons.explore.categories
 
 import android.view.View
 import android.view.ViewGroup

@@ -43,7 +43,8 @@ public interface CategoryInterface {
         @QueryMap(encoded = true) Map<String, String> continuation);
 
     @GET("w/api.php?action=query&format=json&formatversion=2"
-            + "&generator=categories&prop=info&gcllimit=500")
-    Single<MwQueryResponse> getParentCategoryList(@Query("titles") String categoryName);
+            + "&generator=categories&prop=info&gcllimit=50")
+    Single<MwQueryResponse> getParentCategoryList(@Query("titles") String categoryName,
+        @QueryMap(encoded = true) Map<String, String> continuation);
 
 }

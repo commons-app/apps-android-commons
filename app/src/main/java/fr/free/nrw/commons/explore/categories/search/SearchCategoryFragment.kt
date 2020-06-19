@@ -1,8 +1,7 @@
 package fr.free.nrw.commons.explore.categories.search
 
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.category.CategoryDetailsActivity
-import fr.free.nrw.commons.explore.paging.BasePagingFragment
+import fr.free.nrw.commons.explore.categories.PageableCategoryFragment
 import javax.inject.Inject
 
 /**

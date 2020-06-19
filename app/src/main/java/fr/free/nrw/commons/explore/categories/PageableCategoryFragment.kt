@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.explore.categories.search
+package fr.free.nrw.commons.explore.categories
 
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryDetailsActivity

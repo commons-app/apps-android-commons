@@ -7,15 +7,14 @@ import javax.inject.Singleton
 
 const val CATEGORY_PREFIX = "Category:"
 const val SUB_CATEGORY_CONTINUATION_PREFIX = "sub_category_"
+const val PARENT_CATEGORY_CONTINUATION_PREFIX = "parent_category_"
 
 /**
  * Category Client to handle custom calls to Commons MediaWiki APIs
  */
 @Singleton
-class CategoryClient @Inject constructor(private val categoryInterface: CategoryInterface) {
-
-    private val continuationStore: MutableMap<String, Map<String, String>?> = mutableMapOf()
-    private val continuationExists: MutableMap<String, Boolean> = mutableMapOf()
+class CategoryClient @Inject constructor(private val categoryInterface: CategoryInterface) :
+    ContinuationClient<MwQueryResponse, String>() {
 
     /**
      * Searches for categories containing the specified string.
@@ -28,9 +27,7 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
     @JvmOverloads
     fun searchCategories(filter: String?, itemLimit: Int, offset: Int = 0):
             Single<List<String>> {
-        return responseToCategoryName(
-            categoryInterface.searchCategories(filter, itemLimit, offset)
-        )
+        return responseMapper(categoryInterface.searchCategories(filter, itemLimit, offset))
     }
 
     /**
@@ -44,7 +41,7 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
     @JvmOverloads
     fun searchCategoriesForPrefix(prefix: String?, itemLimit: Int, offset: Int = 0):
             Single<List<String>> {
-        return responseToCategoryName(
+        return responseMapper(
             categoryInterface.searchCategoriesForPrefix(prefix, itemLimit, offset)
         )
     }
@@ -56,18 +53,11 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
      * @param categoryName Category name as defined on commons
      * @return Observable emitting the categories returned. If our search yielded "Category:Test", "Test" is emitted.
      */
-    fun getSubCategoryList(categoryName: String?): Single<List<String>> {
-        val key = "$SUB_CATEGORY_CONTINUATION_PREFIX$categoryName"
-        return if (hasMorePagesFor(key)) {
-            responseToCategoryName(
-                categoryInterface.getSubCategoryList(
-                    categoryName,
-                    continuationStore[key] ?: emptyMap()
-                ),
-                key
+    fun getSubCategoryList(categoryName: String): Single<List<String>> {
+        return continuationRequest(SUB_CATEGORY_CONTINUATION_PREFIX, categoryName) {
+            categoryInterface.getSubCategoryList(
+                categoryName, it
             )
-        } else {
-            Single.just(emptyList())
         }
     }
 
@@ -78,29 +68,27 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
      * @param categoryName Category name as defined on commons
      * @return
      */
-    fun getParentCategoryList(categoryName: String?): Single<List<String>> {
-        return responseToCategoryName(categoryInterface.getParentCategoryList(categoryName))
+    fun getParentCategoryList(categoryName: String): Single<List<String>> {
+        return continuationRequest(PARENT_CATEGORY_CONTINUATION_PREFIX, categoryName) {
+            categoryInterface.getParentCategoryList(categoryName, it)
+        }
     }
 
-    /**
-     * Internal function to reduce code reuse. Extracts the categories returned from MwQueryResponse.
-     *
-     * @param responseObservable The query response observable
-     * @return Observable emitting the categories returned. If our search yielded "Category:Test", "Test" is emitted.
-     */
-    private fun responseToCategoryName(
-        responseObservable: Single<MwQueryResponse>,
-        key: String? = null
+    fun resetSubCategoryContinuation(category: String) {
+        resetContinuation(SUB_CATEGORY_CONTINUATION_PREFIX, category)
+    }
+
+    fun resetParentCategoryContinuation(category: String) {
+        resetContinuation(PARENT_CATEGORY_CONTINUATION_PREFIX, category)
+    }
+
+    override fun responseMapper(
+        networkResult: Single<MwQueryResponse>,
+        key: String?
     ): Single<List<String>> {
-        return responseObservable
+        return networkResult
             .map {
-                if (key != null) {
-                    continuationExists[key] =
-                        it.continuation()?.let { continuation ->
-                            continuationStore[key] = continuation
-                            true
-                        } ?: false
-                }
+                handleContinuationResponse(it.continuation(), key)
                 it.query()?.pages() ?: emptyList()
             }
             .map {
@@ -108,10 +96,4 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
             }
     }
 
-    private fun hasMorePagesFor(key: String) = continuationExists[key] ?: true
-
-    fun resetSubCategoryContinuation(category: String) {
-        continuationExists.remove("$SUB_CATEGORY_CONTINUATION_PREFIX$category")
-        continuationStore.remove("$SUB_CATEGORY_CONTINUATION_PREFIX$category")
-    }
 }

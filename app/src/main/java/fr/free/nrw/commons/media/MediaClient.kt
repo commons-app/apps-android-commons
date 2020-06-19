@@ -2,6 +2,7 @@ package fr.free.nrw.commons.media
 
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.category.ContinuationClient
 import fr.free.nrw.commons.explore.media.MediaConverter
 import fr.free.nrw.commons.utils.CommonsDateUtil
 import io.reactivex.Single
@@ -24,14 +25,10 @@ class MediaClient @Inject constructor(
     private val pageMediaInterface: PageMediaInterface,
     private val mediaDetailInterface: MediaDetailInterface,
     private val mediaConverter: MediaConverter
-) {
+) : ContinuationClient<MwQueryResponse, Media>() {
 
     fun getMediaById(id: String) =
-        responseToMediaList(mediaInterface.getMediaById(id)).map { it.first() }
-
-    //OkHttpJsonApiClient used JsonKvStore for this. I don't know why.
-    private val continuationStore: MutableMap<String, Map<String, String>?> = mutableMapOf()
-    private val continuationExists: MutableMap<String, Boolean> = mutableMapOf()
+        responseMapper(mediaInterface.getMediaById(id)).map { it.first() }
 
     /**
      * Checks if a page exists on Commons
@@ -62,18 +59,8 @@ class MediaClient @Inject constructor(
      * @return
      */
     fun getMediaListFromCategory(category: String): Single<List<Media>> {
-        val key = "$CATEGORY_CONTINUATION_PREFIX$category"
-        return if (hasMorePagesFor(key)) {
-            responseToMediaList(
-                mediaInterface.getMediaListFromCategory(
-                    category,
-                    10,
-                    continuationStore[key] ?: emptyMap()
-                ),
-                key
-            )
-        } else {
-            Single.just(emptyList())
+        return continuationRequest(CATEGORY_CONTINUATION_PREFIX, category) {
+            mediaInterface.getMediaListFromCategory(category, 10, it)
         }
     }
 
@@ -86,16 +73,10 @@ class MediaClient @Inject constructor(
      * @return
      */
     fun getMediaListForUser(userName: String): Single<List<Media>> {
-        return responseToMediaList(
-            mediaInterface.getMediaListForUser(
-                userName,
-                10,
-                continuationStore["user_$userName"] ?: Collections.emptyMap()
-            ),
-            "user_$userName"
-        )
+        return continuationRequest("user_", userName) {
+            mediaInterface.getMediaListForUser(userName, 10, it)
+        }
     }
-
 
     /**
      * This method takes a keyword as input and returns a list of  Media objects filtered using image generator query
@@ -107,7 +88,7 @@ class MediaClient @Inject constructor(
      * @return
      */
     fun getMediaListFromSearch(keyword: String?, limit: Int, offset: Int) =
-        responseToMediaList(mediaInterface.getMediaListFromSearch(keyword, limit, offset))
+        responseMapper(mediaInterface.getMediaListFromSearch(keyword, limit, offset))
 
     /**
      * @return list of images for a particular depict entity
@@ -117,30 +98,13 @@ class MediaClient @Inject constructor(
         srlimit: Int,
         sroffset: Int
     ): Single<List<Media>> {
-        return responseToMediaList(
+        return responseMapper(
             mediaInterface.fetchImagesForDepictedItem(
                 "haswbstatement:" + BuildConfig.DEPICTS_PROPERTY + "=" + query,
                 srlimit.toString(),
                 sroffset.toString()
             )
         )
-    }
-
-    private fun responseToMediaList(
-        response: Single<MwQueryResponse>,
-        key: String? = null
-    ): Single<List<Media>> {
-        return response.map {
-            if (key != null) {
-                continuationExists[key] =
-                    it.continuation()?.let { continuation ->
-                        continuationStore[key] = continuation
-                        true
-                    } ?: false
-            }
-            it.query()?.pages() ?: emptyList()
-        }.flatMap(::mediaFromPageAndEntity)
-
     }
 
     private fun mediaFromPageAndEntity(pages: List<MwQueryPage>): Single<List<Media>> {
@@ -165,7 +129,7 @@ class MediaClient @Inject constructor(
      * @return
      */
     fun getMedia(titles: String?): Single<Media> {
-        return responseToMediaList(mediaInterface.getMedia(titles))
+        return responseMapper(mediaInterface.getMedia(titles))
             .map { it.first() }
     }
 
@@ -176,7 +140,7 @@ class MediaClient @Inject constructor(
      */
     fun getPictureOfTheDay(): Single<Media> {
         val date = CommonsDateUtil.getIso8601DateFormatShort().format(Date())
-        return responseToMediaList(mediaInterface.getMediaWithGenerator("Template:Potd/$date")).map { it.first() }
+        return responseMapper(mediaInterface.getMediaWithGenerator("Template:Potd/$date")).map { it.first() }
 
     }
 
@@ -193,24 +157,22 @@ class MediaClient @Inject constructor(
     }
 
 
-    /**
-     * Check if media for user has reached the end of the list.
-     * @param userName
-     * @return
-     */
-    fun doesMediaListForUserHaveMorePages(userName: String): Boolean {
-        return hasMorePagesFor("user_$userName")
-    }
-
-    private fun hasMorePagesFor(key: String) = continuationExists[key] ?: true
-
     fun doesPageContainMedia(title: String?): Single<Boolean> {
         return pageMediaInterface.getMediaList(title)
             .map { it.items.isNotEmpty() }
     }
 
     fun resetCategoryContinuation(category: String) {
-        continuationExists.remove("$CATEGORY_CONTINUATION_PREFIX$category")
-        continuationStore.remove("$CATEGORY_CONTINUATION_PREFIX$category")
+        resetContinuation(CATEGORY_CONTINUATION_PREFIX, category)
+    }
+
+    override fun responseMapper(
+        networkResult: Single<MwQueryResponse>,
+        key: String?
+    ): Single<List<Media>> {
+        return networkResult.map {
+            handleContinuationResponse(it.continuation(), key)
+            it.query()?.pages() ?: emptyList()
+        }.flatMap(::mediaFromPageAndEntity)
     }
 }

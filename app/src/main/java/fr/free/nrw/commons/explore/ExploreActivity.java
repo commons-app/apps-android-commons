@@ -161,16 +161,6 @@ public class ExploreActivity
         super.onBackPressed();
     }
 
-
-    /**
-     * This method is called when viewPager has reached its end.
-     * Fetches more images and adds them to the recycler view and viewpager adapter
-     */
-    @Override
-    public void requestMoreImages() {
-        //unneeded
-    }
-
     /**
      * This method is called onClick of media inside category featured images or mobile uploads.
      */

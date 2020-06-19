@@ -187,15 +187,6 @@ public class CategoryImagesActivity
         }
     }
 
-    /**
-     * This method is called when viewPager has reached its end.
-     * Fetches more images using search query and adds it to the gridView and viewpager adapter
-     */
-    @Override
-    public void requestMoreImages() {
-        //unneeded
-    }
-
     @Override
     public void onMediaClicked(int position) {
         // this class is unused and will be deleted

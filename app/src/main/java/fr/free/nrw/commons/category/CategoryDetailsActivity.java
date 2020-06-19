@@ -20,6 +20,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.explore.ViewPagerAdapter;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
+import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment;
 import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
@@ -71,23 +72,20 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         List<String> titleList = new ArrayList<>();
         categoriesMediaFragment = new CategoriesMediaFragment();
         SubCategoriesFragment subCategoryListFragment = new SubCategoriesFragment();
-        SubCategoryListFragment parentCategoryListFragment = new SubCategoryListFragment();
+        ParentCategoriesFragment parentCategoriesFragment = new ParentCategoriesFragment();
         categoryName = getIntent().getStringExtra("categoryName");
         if (getIntent() != null && categoryName != null) {
             Bundle arguments = new Bundle();
             arguments.putString("categoryName", categoryName);
             categoriesMediaFragment.setArguments(arguments);
             subCategoryListFragment.setArguments(arguments);
-            Bundle parentCategoryArguments = new Bundle();
-            parentCategoryArguments.putString("categoryName", categoryName);
-            parentCategoryArguments.putBoolean("isParentCategory", true);
-            parentCategoryListFragment.setArguments(parentCategoryArguments);
+            parentCategoriesFragment.setArguments(arguments);
         }
         fragmentList.add(categoriesMediaFragment);
         titleList.add("MEDIA");
         fragmentList.add(subCategoryListFragment);
         titleList.add("SUBCATEGORIES");
-        fragmentList.add(parentCategoryListFragment);
+        fragmentList.add(parentCategoriesFragment);
         titleList.add("PARENT CATEGORIES");
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
@@ -133,7 +131,6 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
      */
     public static void startYourself(Context context, String categoryName) {
         Intent intent = new Intent(context, CategoryDetailsActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra("categoryName", categoryName);
         context.startActivity(intent);
     }
@@ -212,12 +209,4 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         }
     }
 
-    /**
-     * This method is called when viewPager has reached its end.
-     * Fetches more images using search query and adds it to the grid view and viewpager adapter
-     */
-    @Override
-    public void requestMoreImages() {
-        //unneeded
-    }
 }

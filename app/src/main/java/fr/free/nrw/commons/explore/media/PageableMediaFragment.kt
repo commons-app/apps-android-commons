@@ -14,9 +14,7 @@ import kotlinx.android.synthetic.main.fragment_search_paginated.*
 abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailProvider {
 
     override val pagedListAdapter by lazy {
-        PagedMediaAdapter {
-            categoryImagesCallback.onMediaClicked(it)
-        }
+        PagedMediaAdapter(categoryImagesCallback::onMediaClicked)
     }
 
     override val errorTextId: Int = R.string.error_loading_images
@@ -30,9 +28,8 @@ abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailP
         categoryImagesCallback = (context as CategoryImagesCallback)
     }
 
-    private val simpleDataObserver = SimpleDataObserver {
-        categoryImagesCallback.viewPagerNotifyDataSetChanged()
-    }
+    private val simpleDataObserver =
+        SimpleDataObserver { categoryImagesCallback.viewPagerNotifyDataSetChanged() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

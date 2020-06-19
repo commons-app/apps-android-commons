@@ -4,15 +4,15 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
-import fr.free.nrw.commons.category.SubCategoryListFragment;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.contributions.ContributionsListFragment;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
+import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment;
+import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment;
 import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment;
 import fr.free.nrw.commons.explore.depictions.child.ChildDepictionsFragment;
 import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment;
 import fr.free.nrw.commons.explore.depictions.parent.ParentDepictionsFragment;
-import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment;
 import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment;
 import fr.free.nrw.commons.explore.media.SearchMediaFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
@@ -29,7 +29,7 @@ import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 /**
  * This Class Represents the Module for dependency injection (using dagger)
  * so, if a developer needs to add a new Fragment to the commons app
- * then that must be mentioned here to inject the dependencies 
+ * then that must be mentioned here to inject the dependencies
  */
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -49,9 +49,6 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract DepictedImagesFragment bindDepictedImagesFragment();
-
-    @ContributesAndroidInjector
-    abstract SubCategoryListFragment bindSubCategoryListFragment();
 
     @ContributesAndroidInjector
     abstract SearchMediaFragment bindBrowseImagesListFragment();
@@ -103,4 +100,7 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract SubCategoriesFragment bindSubCategoriesFragment();
+
+    @ContributesAndroidInjector
+    abstract ParentCategoriesFragment bindParentCategoriesFragment();
 }

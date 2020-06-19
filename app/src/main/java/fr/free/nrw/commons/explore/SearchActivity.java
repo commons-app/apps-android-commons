@@ -264,14 +264,6 @@ public class SearchActivity extends NavigationBaseActivity
         viewPager.requestFocus();
     }
 
-    /**
-     * This method is called when viewPager has reached its end.
-     * Fetches more images using search query and adds it to the recycler view and viewpager adapter
-     */
-    @Override
-    public void requestMoreImages() {
-        //unneeded
-    }
 
     @Override protected void onDestroy() {
         super.onDestroy();
