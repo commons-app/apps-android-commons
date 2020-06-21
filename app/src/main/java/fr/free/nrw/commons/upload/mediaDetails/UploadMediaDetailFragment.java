@@ -176,11 +176,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         etTitle.setOnTouchListener((v, event) -> {
             //2 is for drawable right
             float twelveDpInPixels = convertDpToPixel(12, getContext());
-            if (event.getAction() == MotionEvent.ACTION_UP && etTitle.getCompoundDrawables() != null
-                    && etTitle.getCompoundDrawables().length > 2 && etTitle
-                    .getCompoundDrawables()[2].getBounds()
-                    .contains((int) (etTitle.getWidth() - (event.getX() + twelveDpInPixels)),
-                            (int) (event.getY() - twelveDpInPixels))) {
+            if ((event.getAction() == MotionEvent.ACTION_UP)
+                && (etTitle.getCompoundDrawables() != null)
+                && (etTitle.getCompoundDrawables().length > 2)
+                && (etTitle.getCompoundDrawables()[2] != null)
+                && etTitle.getCompoundDrawables()[2].getBounds()
+                .contains((int) (etTitle.getWidth() - (event.getX() + twelveDpInPixels)),
+                    (int) (event.getY() - twelveDpInPixels))) {
                 showInfoAlert(R.string.media_detail_title, R.string.title_info);
                 return true;
             }
