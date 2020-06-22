@@ -312,7 +312,6 @@ public class UploadService extends CommonsDaggerService {
     compositeDisposable
         .add(wikidataEditService.addDepictionsAndCaptions(uploadResult, contribution));
     WikidataPlace wikidataPlace = contribution.getWikidataPlace();
-    Timber.d("Wikidata place %s", wikidataPlace.toString());
     if (wikidataPlace != null && wikidataPlace.getImageValue() == null) {
       wikidataEditService.createImageClaim(wikidataPlace, uploadResult);
     }
