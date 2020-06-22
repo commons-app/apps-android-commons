@@ -54,10 +54,4 @@ public class BookmarkPicturesController {
         return bookmarks.size() != currentBookmarks.size();
     }
 
-    /**
-     * Cancels the requests to the API and the DB
-     */
-    void stop() {
-        //noop
-    }
 }

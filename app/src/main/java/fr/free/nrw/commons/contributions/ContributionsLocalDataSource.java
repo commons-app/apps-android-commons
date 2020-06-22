@@ -2,14 +2,10 @@ package fr.free.nrw.commons.contributions;
 
 import androidx.paging.DataSource.Factory;
 import io.reactivex.Completable;
+import io.reactivex.Single;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
-import javax.inject.Named;
-
-import fr.free.nrw.commons.kvstore.JsonKvStore;
-import io.reactivex.Single;
 
 /**
  * The LocalDataSource class for Contributions
@@ -17,28 +13,10 @@ import io.reactivex.Single;
 class ContributionsLocalDataSource {
 
     private final ContributionDao contributionDao;
-    private final JsonKvStore defaultKVStore;
 
     @Inject
-    public ContributionsLocalDataSource(
-            @Named("default_preferences") JsonKvStore defaultKVStore,
-            ContributionDao contributionDao) {
-        this.defaultKVStore = defaultKVStore;
+    public ContributionsLocalDataSource(ContributionDao contributionDao) {
         this.contributionDao = contributionDao;
-    }
-
-    /**
-     * Fetch default number of contributions to be show, based on user preferences
-     */
-    public String getString(String key) {
-        return defaultKVStore.getString(key);
-    }
-
-    /**
-     * Fetch default number of contributions to be show, based on user preferences
-     */
-    public long getLong(String key) {
-       return defaultKVStore.getLong(key);
     }
 
     /**
@@ -79,11 +57,5 @@ class ContributionsLocalDataSource {
         return contributionDao.save(contributionList);
     }
 
-    public void set(String key, long value) {
-        defaultKVStore.putLong(key,value);
-    }
 
-    public Completable updateContribution(Contribution contribution) {
-        return contributionDao.update(contribution);
-    }
 }

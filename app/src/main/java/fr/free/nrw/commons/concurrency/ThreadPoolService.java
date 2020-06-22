@@ -1,13 +1,9 @@
 package fr.free.nrw.commons.concurrency;
 
 import androidx.annotation.NonNull;
-
-import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.TimeUnit;
 
 /**
  * This class is a thread pool which provides some additional features:
@@ -34,31 +30,6 @@ public class ThreadPoolService implements Executor {
                         return t;
                     }
                 }, b.exceptionHandler);
-    }
-
-    public <V> ScheduledFuture<V> schedule(Callable<V> callable, long time, TimeUnit timeUnit) {
-        return backgroundPool.schedule(callable, time, timeUnit);
-    }
-
-    public ScheduledFuture<?> schedule(Runnable runnable) {
-        return schedule(runnable, 0, TimeUnit.SECONDS);
-    }
-
-    public ScheduledFuture<?> schedule(Runnable runnable, long time, TimeUnit timeUnit) {
-        return backgroundPool.schedule(runnable, time, timeUnit);
-    }
-
-    public ScheduledFuture<?> scheduleAtFixedRate(final Runnable task, long initialDelay,
-                                                  long period, final TimeUnit timeUnit) {
-        return backgroundPool.scheduleAtFixedRate(task, initialDelay, period, timeUnit);
-    }
-
-    public ScheduledThreadPoolExecutor executor() {
-        return backgroundPool;
-    }
-
-    public void shutdown(){
-        backgroundPool.shutdown();
     }
 
     @Override

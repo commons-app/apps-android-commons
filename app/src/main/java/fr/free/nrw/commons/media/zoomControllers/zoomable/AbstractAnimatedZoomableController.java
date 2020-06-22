@@ -49,7 +49,6 @@ public abstract class AbstractAnimatedZoomableController extends DefaultZoomable
      * @param imagePoint 2D point in image's relative coordinate system (i.e. 0 <= x, y <= 1)
      * @param viewPoint 2D point in view's absolute coordinate system
      */
-    @Override
     public void zoomToPoint(float scale, PointF imagePoint, PointF viewPoint) {
         zoomToPoint(scale, imagePoint, viewPoint, LIMIT_ALL, 0, null);
     }

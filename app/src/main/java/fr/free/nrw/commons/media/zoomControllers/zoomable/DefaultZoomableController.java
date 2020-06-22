@@ -15,11 +15,6 @@ import java.lang.annotation.RetentionPolicy;
 public class DefaultZoomableController
         implements ZoomableController, TransformGestureDetector.Listener {
 
-    /** Interface for handling call backs when the image bounds are set. */
-    public interface ImageBoundsListener {
-        void onImageBoundsSet(RectF imageBounds);
-    }
-
     @IntDef(
             flag = true,
             value = {LIMIT_NONE, LIMIT_TRANSLATION_X, LIMIT_TRANSLATION_Y, LIMIT_SCALE, LIMIT_ALL})
@@ -32,15 +27,9 @@ public class DefaultZoomableController
     public static final int LIMIT_SCALE = 4;
     public static final int LIMIT_ALL = LIMIT_TRANSLATION_X | LIMIT_TRANSLATION_Y | LIMIT_SCALE;
 
-    private static final float EPS = 1e-3f;
-
     private static final Class<?> TAG = DefaultZoomableController.class;
 
-    private static final RectF IDENTITY_RECT = new RectF(0, 0, 1, 1);
-
     private TransformGestureDetector mGestureDetector;
-
-    private @Nullable ImageBoundsListener mImageBoundsListener;
 
     private @Nullable Listener mListener = null;
 
@@ -65,11 +54,6 @@ public class DefaultZoomableController
     private final Matrix mActiveTransformInverse = new Matrix();
     private final float[] mTempValues = new float[9];
     private final RectF mTempRect = new RectF();
-    private boolean mWasTransformCorrected;
-
-    public static DefaultZoomableController newInstance() {
-        return new DefaultZoomableController(TransformGestureDetector.newInstance());
-    }
 
     public DefaultZoomableController(TransformGestureDetector gestureDetector) {
         mGestureDetector = gestureDetector;
@@ -106,72 +90,14 @@ public class DefaultZoomableController
         return mIsEnabled;
     }
 
-    /** Sets whether the rotation gesture is enabled or not. */
-    public void setRotationEnabled(boolean enabled) {
-        mIsRotationEnabled = enabled;
-    }
-
-    /** Gets whether the rotation gesture is enabled or not. */
-    public boolean isRotationEnabled() {
-        return mIsRotationEnabled;
-    }
-
-    /** Sets whether the scale gesture is enabled or not. */
-    public void setScaleEnabled(boolean enabled) {
-        mIsScaleEnabled = enabled;
-    }
-
-    /** Gets whether the scale gesture is enabled or not. */
-    public boolean isScaleEnabled() {
-        return mIsScaleEnabled;
-    }
-
-    /** Sets whether the translation gesture is enabled or not. */
-    public void setTranslationEnabled(boolean enabled) {
-        mIsTranslationEnabled = enabled;
-    }
-
-    /** Gets whether the translations gesture is enabled or not. */
-    public boolean isTranslationEnabled() {
-        return mIsTranslationEnabled;
-    }
-
-    /**
-     * Sets the minimum scale factor allowed.
-     *
-     * <p>Hierarchy's scaling (if any) is not taken into account.
-     */
-    public void setMinScaleFactor(float minScaleFactor) {
-        mMinScaleFactor = minScaleFactor;
-    }
-
     /** Gets the minimum scale factor allowed. */
     public float getMinScaleFactor() {
         return mMinScaleFactor;
     }
 
-    /**
-     * Sets the maximum scale factor allowed.
-     *
-     * <p>Hierarchy's scaling (if any) is not taken into account.
-     */
-    public void setMaxScaleFactor(float maxScaleFactor) {
-        mMaxScaleFactor = maxScaleFactor;
-    }
-
     /** Gets the maximum scale factor allowed. */
     public float getMaxScaleFactor() {
         return mMaxScaleFactor;
-    }
-
-    /** Sets whether gesture zooms are enabled or not. */
-    public void setGestureZoomEnabled(boolean isGestureZoomEnabled) {
-        mIsGestureZoomEnabled = isGestureZoomEnabled;
-    }
-
-    /** Gets whether gesture zooms are enabled or not. */
-    public boolean isGestureZoomEnabled() {
-        return mIsGestureZoomEnabled;
     }
 
     /** Gets the current scale factor. */
@@ -186,20 +112,7 @@ public class DefaultZoomableController
         if (!imageBounds.equals(mImageBounds)) {
             mImageBounds.set(imageBounds);
             onTransformChanged();
-            if (mImageBoundsListener != null) {
-                mImageBoundsListener.onImageBoundsSet(mImageBounds);
-            }
         }
-    }
-
-    /** Gets the non-transformed image bounds, in view-absolute coordinates. */
-    public RectF getImageBounds() {
-        return mImageBounds;
-    }
-
-    /** Gets the transformed image bounds, in view-absolute coordinates */
-    private RectF getTransformedImageBounds() {
-        return mTransformedImageBounds;
     }
 
     /** Sets the view bounds. */
@@ -208,36 +121,10 @@ public class DefaultZoomableController
         mViewBounds.set(viewBounds);
     }
 
-    /** Gets the view bounds. */
-    public RectF getViewBounds() {
-        return mViewBounds;
-    }
-
-    /** Sets the image bounds listener. */
-    public void setImageBoundsListener(@Nullable ImageBoundsListener imageBoundsListener) {
-        mImageBoundsListener = imageBoundsListener;
-    }
-
-    /** Gets the image bounds listener. */
-    public @Nullable ImageBoundsListener getImageBoundsListener() {
-        return mImageBoundsListener;
-    }
-
     /** Returns true if the zoomable transform is identity matrix. */
     @Override
     public boolean isIdentity() {
         return isMatrixIdentity(mActiveTransform, 1e-3f);
-    }
-
-    /**
-     * Returns true if the transform was corrected during the last update.
-     *
-     * <p>We should rename this method to `wasTransformedWithoutCorrection` and just return the
-     * internal flag directly. However, this requires interface change and negation of meaning.
-     */
-    @Override
-    public boolean wasTransformCorrected() {
-        return mWasTransformCorrected;
     }
 
     /**
@@ -252,14 +139,6 @@ public class DefaultZoomableController
     }
 
     /**
-     * Gets the matrix that transforms image-relative coordinates to view-absolute coordinates. The
-     * zoomable transformation is taken into account.
-     */
-    public void getImageRelativeToViewAbsoluteTransform(Matrix outMatrix) {
-        outMatrix.setRectToRect(IDENTITY_RECT, mTransformedImageBounds, Matrix.ScaleToFit.FILL);
-    }
-
-    /**
      * Maps point from view-absolute to image-relative coordinates. This takes into account the
      * zoomable transformation.
      */
@@ -270,19 +149,6 @@ public class DefaultZoomableController
         mActiveTransform.invert(mActiveTransformInverse);
         mActiveTransformInverse.mapPoints(points, 0, points, 0, 1);
         mapAbsoluteToRelative(points, points, 1);
-        return new PointF(points[0], points[1]);
-    }
-
-    /**
-     * Maps point from image-relative to view-absolute coordinates. This takes into account the
-     * zoomable transformation.
-     */
-    public PointF mapImageToView(PointF imagePoint) {
-        float[] points = mTempValues;
-        points[0] = imagePoint.x;
-        points[1] = imagePoint.y;
-        mapRelativeToAbsolute(points, points, 1);
-        mActiveTransform.mapPoints(points, 0, points, 0, 1);
         return new PointF(points[0], points[1]);
     }
 
@@ -316,20 +182,6 @@ public class DefaultZoomableController
             destPoints[i * 2 + 0] = srcPoints[i * 2 + 0] * mImageBounds.width() + mImageBounds.left;
             destPoints[i * 2 + 1] = srcPoints[i * 2 + 1] * mImageBounds.height() + mImageBounds.top;
         }
-    }
-
-    /**
-     * Zooms to the desired scale and positions the image so that the given image point corresponds to
-     * the given view point.
-     *
-     * @param scale desired scale, will be limited to {min, max} scale factor
-     * @param imagePoint 2D point in image's relative coordinate system (i.e. 0 <= x, y <= 1)
-     * @param viewPoint 2D point in view's absolute coordinate system
-     */
-    public void zoomToPoint(float scale, PointF imagePoint, PointF viewPoint) {
-        FLog.v(TAG, "zoomToPoint");
-        calculateZoomToPointTransform(mActiveTransform, scale, imagePoint, viewPoint, LIMIT_ALL);
-        onTransformChanged();
     }
 
     /**
@@ -391,12 +243,6 @@ public class DefaultZoomableController
     public void onGestureBegin(TransformGestureDetector detector) {
         FLog.v(TAG, "onGestureBegin");
         mPreviousTransform.set(mActiveTransform);
-        onTransformBegin();
-        // We only received a touch down event so far, and so we don't know yet in which direction a
-        // future move event will follow. Therefore, if we can't scroll in all directions, we have to
-        // assume the worst case where the user tries to scroll out of edge, which would cause
-        // transformation to be corrected.
-        mWasTransformCorrected = !canScrollInAllDirection();
     }
 
     @Override
@@ -408,11 +254,10 @@ public class DefaultZoomableController
             mGestureDetector.restartGesture();
         }
         // A transformation happened, but was it without correction?
-        mWasTransformCorrected = transformCorrected;
     }
 
     @Override
-    public void onGestureEnd(TransformGestureDetector detector) {
+    public void onGestureEnd() {
         FLog.v(TAG, "onGestureEnd");
         onTransformEnd();
     }
@@ -445,22 +290,10 @@ public class DefaultZoomableController
         return transformCorrected;
     }
 
-    private void onTransformBegin() {
-        if (mListener != null && isEnabled()) {
-            mListener.onTransformBegin(mActiveTransform);
-        }
-    }
-
     private void onTransformChanged() {
         mActiveTransform.mapRect(mTransformedImageBounds, mImageBounds);
         if (mListener != null && isEnabled()) {
             mListener.onTransformChanged(mActiveTransform);
-        }
-    }
-
-    private void onTransformEnd() {
-        if (mListener != null && isEnabled()) {
-            mListener.onTransformEnd(mActiveTransform);
         }
     }
 
@@ -602,14 +435,6 @@ public class DefaultZoomableController
         return true;
     }
 
-    /** Returns whether the scroll can happen in all directions. I.e. the image is not on any edge. */
-    private boolean canScrollInAllDirection() {
-        return mTransformedImageBounds.left < mViewBounds.left - EPS
-                && mTransformedImageBounds.top < mViewBounds.top - EPS
-                && mTransformedImageBounds.right > mViewBounds.right + EPS
-                && mTransformedImageBounds.bottom > mViewBounds.bottom + EPS;
-    }
-
     @Override
     public int computeHorizontalScrollRange() {
         return (int) mTransformedImageBounds.width();
@@ -640,7 +465,4 @@ public class DefaultZoomableController
         return (int) mViewBounds.height();
     }
 
-    public Listener getListener() {
-        return mListener;
-    }
 }

@@ -20,7 +20,7 @@ public class TransformGestureDetector implements MultiPointerGestureDetector.Lis
         public void onGestureUpdate(TransformGestureDetector detector);
 
         /** A callback called right after the gesture has finished. */
-        public void onGestureEnd(TransformGestureDetector detector);
+        public void onGestureEnd();
     }
 
     private final MultiPointerGestureDetector mDetector;
@@ -62,23 +62,23 @@ public class TransformGestureDetector implements MultiPointerGestureDetector.Lis
     }
 
     @Override
-    public void onGestureBegin(MultiPointerGestureDetector detector) {
+    public void onGestureBegin() {
         if (mListener != null) {
             mListener.onGestureBegin(this);
         }
     }
 
     @Override
-    public void onGestureUpdate(MultiPointerGestureDetector detector) {
+    public void onGestureUpdate() {
         if (mListener != null) {
             mListener.onGestureUpdate(this);
         }
     }
 
     @Override
-    public void onGestureEnd(MultiPointerGestureDetector detector) {
+    public void onGestureEnd() {
         if (mListener != null) {
-            mListener.onGestureEnd(this);
+            mListener.onGestureEnd();
         }
     }
 
@@ -93,21 +93,6 @@ public class TransformGestureDetector implements MultiPointerGestureDetector.Lis
     /** Restarts the current gesture (if any). */
     public void restartGesture() {
         mDetector.restartGesture();
-    }
-
-    /** Gets whether there is a gesture in progress */
-    public boolean isGestureInProgress() {
-        return mDetector.isGestureInProgress();
-    }
-
-    /** Gets the number of pointers after the current gesture */
-    public int getNewPointerCount() {
-        return mDetector.getNewPointerCount();
-    }
-
-    /** Gets the number of pointers in the current gesture */
-    public int getPointerCount() {
-        return mDetector.getPointerCount();
     }
 
     /** Gets the X coordinate of the pivot point */

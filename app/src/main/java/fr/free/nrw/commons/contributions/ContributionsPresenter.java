@@ -14,30 +14,26 @@ import javax.inject.Named;
 public class ContributionsPresenter implements UserActionListener {
 
     private final ContributionsRepository repository;
-    private final Scheduler mainThreadScheduler;
     private final Scheduler ioThreadScheduler;
     private CompositeDisposable compositeDisposable;
-    private ContributionsContract.View view;
 
     @Inject
     MediaDataExtractor mediaDataExtractor;
 
     @Inject
-    ContributionsPresenter(ContributionsRepository repository, @Named(CommonsApplicationModule.MAIN_THREAD) Scheduler mainThreadScheduler,@Named(CommonsApplicationModule.IO_THREAD) Scheduler ioThreadScheduler) {
+    ContributionsPresenter(ContributionsRepository repository,
+        @Named(CommonsApplicationModule.IO_THREAD) Scheduler ioThreadScheduler) {
         this.repository = repository;
-        this.mainThreadScheduler=mainThreadScheduler;
         this.ioThreadScheduler=ioThreadScheduler;
     }
 
     @Override
     public void onAttachView(ContributionsContract.View view) {
-        this.view = view;
         compositeDisposable=new CompositeDisposable();
     }
 
     @Override
     public void onDetachView() {
-        this.view = null;
         compositeDisposable.clear();
     }
 

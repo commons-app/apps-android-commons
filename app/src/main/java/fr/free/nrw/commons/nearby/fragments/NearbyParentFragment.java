@@ -4,7 +4,6 @@ import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_P
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
-import static fr.free.nrw.commons.nearby.Label.TEXT_TO_DESCRIPTION;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
@@ -16,7 +15,6 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -38,7 +36,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,7 +44,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -75,7 +71,6 @@ import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.MainActivity;
-import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -104,7 +99,6 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.List;
@@ -144,7 +138,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.map_progress_bar) ProgressBar progressBar;
     @BindView(R.id.choice_chip_exists) Chip chipExists;
     @BindView(R.id.choice_chip_needs_photo) Chip chipNeedsPhoto;
-    @BindView(R.id.choice_chip_group) ChipGroup choiceChipGroup;
     @BindView(R.id.search_view) SearchView searchView;
     @BindView(R.id.search_list_view) RecyclerView recyclerView;
     @BindView(R.id.nearby_filter_list) View nearbyFilterList;
@@ -429,7 +422,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        nearbyFilterSearchRecyclerViewAdapter = new NearbyFilterSearchRecyclerViewAdapter(getContext(), new ArrayList<>(Label.valuesAsList()), recyclerView);
+        nearbyFilterSearchRecyclerViewAdapter = new NearbyFilterSearchRecyclerViewAdapter(getContext(), new ArrayList<>(Label.valuesAsList()));
         nearbyFilterSearchRecyclerViewAdapter.setCallback(new NearbyFilterSearchRecyclerViewAdapter.Callback() {
             @Override
             public void setCheckboxUnknown() {
@@ -815,11 +808,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public boolean isSearchThisAreaButtonVisible() {
-        return searchThisAreaButton.getVisibility() == View.VISIBLE;
-    }
-
-    @Override
     public void setRecyclerViewAdapterAllSelected() {
         if (nearbyFilterSearchRecyclerViewAdapter != null && NearbyController.currentLocation != null) {
             nearbyFilterSearchRecyclerViewAdapter.setRecyclerViewAdapterAllSelected();
@@ -1097,29 +1085,17 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Displays all markers
-     */
-    @Override
-    public void displayAllMarkers() {
-        for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
-            updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
-        }
-    }
-
-    /**
      * Filters markers based on selectedLabels and chips
      * @param selectedLabels label list that user clicked
      * @param displayExists chip for displaying only existing places
      * @param displayNeedsPhoto chip for displaying only places need photos
      * @param filterForPlaceState true if we filter places for place state
-     * @param filterForAllNoneType true if we filter places with all none button
      */
     @Override
     public void filterMarkersByLabels(final List<Label> selectedLabels,
         final boolean displayExists,
         final boolean displayNeedsPhoto,
-        final boolean filterForPlaceState,
-        final boolean filterForAllNoneType) {
+        final boolean filterForPlaceState) {
 
         // Remove the previous markers before updating them
         hideAllMarkers();

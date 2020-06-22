@@ -45,11 +45,6 @@ public interface DepictsContract {
     interface UserActionListener extends BasePresenter<View> {
 
         /**
-         * Takes to previous screen
-         */
-        void onPreviousButtonClicked();
-
-        /**
          * Listener for the depicted items selected from the list
          */
         void onDepictItemClicked(DepictedItem depictedItem);

@@ -1,17 +1,5 @@
 package fr.free.nrw.commons.utils;
 
-import android.app.Application;
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.telephony.TelephonyManager;
-
-import org.jetbrains.annotations.NotNull;
-import org.junit.Before;
-import org.junit.Test;
-
-import fr.free.nrw.commons.utils.model.NetworkConnectionType;
-
 import static android.telephony.TelephonyManager.NETWORK_TYPE_EDGE;
 import static android.telephony.TelephonyManager.NETWORK_TYPE_HSPA;
 import static android.telephony.TelephonyManager.NETWORK_TYPE_LTE;
@@ -21,11 +9,16 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class NetworkUtilsTest {
+import android.app.Application;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.telephony.TelephonyManager;
+import fr.free.nrw.commons.utils.model.NetworkConnectionType;
+import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 
-    @Before
-    public void setUp() throws Exception {
-    }
+public class NetworkUtilsTest {
 
     @Test
     public void testInternetConnectionEstablished() {

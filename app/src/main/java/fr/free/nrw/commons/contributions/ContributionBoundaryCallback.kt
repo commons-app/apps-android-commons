@@ -76,7 +76,6 @@ class ContributionBoundaryCallback @Inject constructor(
             repository.save(contributions)
                 .subscribeOn(ioThreadScheduler)
                 .subscribe { longs: List<Long?>? ->
-                    repository["last_fetch_timestamp"] = System.currentTimeMillis()
                 }
         )
     }

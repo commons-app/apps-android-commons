@@ -85,7 +85,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                 .observeOn(mainThreadScheduler)
                 .subscribe(uploadItem ->
                     {
-                        view.onImageProcessed(uploadItem, place);
+                        view.onImageProcessed(uploadItem);
                         view.updateMediaDetails(uploadItem.getUploadMediaDetails());
                         ImageCoordinates gpsCoords = uploadItem.getGpsCoords();
                         final boolean hasImageCoordinates =
@@ -111,7 +111,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                 .observeOn(mainThreadScheduler)
                 .subscribe(place -> {
                         if (place != null) {
-                            view.onNearbyPlaceFound(uploadItem, place);
+                            view.onNearbyPlaceFound(place);
                         }
                     },
                     throwable -> Timber.e(throwable, "Error occurred in processing images"));
@@ -138,8 +138,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                         },
                         throwable -> {
                             view.showProgress(false);
-                            view.showMessage("" + throwable.getLocalizedMessage(),
-                                    R.color.color_error);
+                            view.showMessage("" + throwable.getLocalizedMessage()
+                            );
                             Timber.e(throwable, "Error occurred while handling image");
                         })
         );
@@ -159,7 +159,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
             currentUploadItem.setMediaDetails(deepCopy(previousUploadItem.getUploadMediaDetails()));
             view.updateMediaDetails(currentUploadItem.getUploadMediaDetails());
         } else {
-            view.showMessage(R.string.previous_image_title_description_not_found, R.color.color_error);
+            view.showMessage(R.string.previous_image_title_description_not_found);
         }
     }
 
@@ -222,7 +222,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
         switch (errorCode) {
             case EMPTY_CAPTION:
                 Timber.d("Captions are empty. Showing toast");
-                view.showMessage(R.string.add_caption_toast, R.color.color_error);
+                view.showMessage(R.string.add_caption_toast);
                 break;
             case FILE_NAME_EXISTS:
                 Timber.d("Trying to show duplicate picture popup");

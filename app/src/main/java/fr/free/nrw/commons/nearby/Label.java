@@ -1,15 +1,11 @@
 package fr.free.nrw.commons.nearby;
 
-import android.os.Parcel;
-
 import androidx.annotation.DrawableRes;
-
+import fr.free.nrw.commons.R;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import fr.free.nrw.commons.R;
 
 /**
  * See https://github.com/commons-app/apps-android-commons/issues/250
@@ -63,11 +59,6 @@ public enum Label {
     Label(String text, @DrawableRes int icon) {
         this.text = text;
         this.icon = icon;
-    }
-
-    Label(Parcel in) {
-        this.text = in.readString();
-        this.icon = in.readInt();
     }
 
     /**

@@ -38,8 +38,6 @@ public class ReviewActivity extends NavigationBaseActivity {
     public CirclePageIndicator pagerIndicator;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.navigation_view)
-    NavigationView navigationView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
     @BindView(R.id.view_pager_review)
@@ -72,11 +70,10 @@ public class ReviewActivity extends NavigationBaseActivity {
 
     /**
      * Consumers should be simply using this method to use this activity.
+     *  @param context
      *
-     * @param context
-     * @param title   Page title
      */
-    public static void startYourself(Context context, String title) {
+    public static void startYourself(Context context) {
         Intent reviewActivity = new Intent(context, ReviewActivity.class);
         reviewActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         reviewActivity.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

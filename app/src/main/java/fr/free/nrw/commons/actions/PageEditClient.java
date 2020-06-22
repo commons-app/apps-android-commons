@@ -1,9 +1,7 @@
 package fr.free.nrw.commons.actions;
 
-import org.wikipedia.csrf.CsrfTokenClient;
-import org.wikipedia.dataclient.Service;
-
 import io.reactivex.Observable;
+import org.wikipedia.csrf.CsrfTokenClient;
 
 /**
  * This class acts as a Client to facilitate wiki page editing
@@ -16,14 +14,11 @@ public class PageEditClient {
 
     private final CsrfTokenClient csrfTokenClient;
     private final PageEditInterface pageEditInterface;
-    private final Service service;
 
     public PageEditClient(CsrfTokenClient csrfTokenClient,
-                          PageEditInterface pageEditInterface,
-                          Service service) {
+        PageEditInterface pageEditInterface) {
         this.csrfTokenClient = csrfTokenClient;
         this.pageEditInterface = pageEditInterface;
-        this.service = service;
     }
 
     /**

@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
@@ -72,9 +71,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     @BindView(R.id.ll_container_top_card)
     LinearLayout llContainerTopCard;
-
-    @BindView(R.id.rl_container_title)
-    RelativeLayout rlContainerTitle;
 
     @BindView(R.id.tv_top_card_title)
     TextView tvTopCardTitle;
@@ -211,12 +207,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    /**
+  /**
      * Show/Hide the progress dialog
      */
     @Override

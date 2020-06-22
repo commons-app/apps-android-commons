@@ -37,17 +37,14 @@ public class DeleteHelper {
     private final NotificationHelper notificationHelper;
     private final PageEditClient pageEditClient;
     private final ViewUtilWrapper viewUtil;
-    private final String username;
 
     @Inject
     public DeleteHelper(NotificationHelper notificationHelper,
-                        @Named("commons-page-edit") PageEditClient pageEditClient,
-                        ViewUtilWrapper viewUtil,
-                        @Named("username") String username) {
+        @Named("commons-page-edit") PageEditClient pageEditClient,
+        ViewUtilWrapper viewUtil) {
         this.notificationHelper = notificationHelper;
         this.pageEditClient = pageEditClient;
         this.viewUtil = viewUtil;
-        this.username = username;
     }
 
     /**
@@ -198,13 +195,11 @@ public class DeleteHelper {
                     .subscribe(aBoolean -> {
                         if (aBoolean) {
                             reviewCallback.onSuccess();
-                        } else {
-                            reviewCallback.onFailure();
                         }
                     });
 
         });
-        alert.setNegativeButton(context.getString(R.string.cancel), (dialog, which) -> reviewCallback.onFailure());
+        alert.setNegativeButton(context.getString(R.string.cancel), (dialog, which) -> {});
         AlertDialog d = alert.create();
         d.show();
     }

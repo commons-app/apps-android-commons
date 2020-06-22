@@ -63,7 +63,6 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
     public static final int NEARBY_TAB_POSITION = 1;
 
     public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
-    public boolean onOrientationChanged;
     private Menu menu;
 
     private MenuItem notificationsMenuItem;
@@ -80,14 +79,10 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
 
         initMain();
 
-        if (savedInstanceState != null ) {
-            onOrientationChanged = true; // Will be used in nearby fragment to determine significant update of map
-
-            //If nearby map was visible, call on Tab Selected to call all nearby operations
-            /*if (savedInstanceState.getInt("viewPagerCurrentItem") == 1) {
+        //If nearby map was visible, call on Tab Selected to call all nearby operations
+        /*if (savedInstanceState.getInt("viewPagerCurrentItem") == 1) {
                 ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
             }*/
-        }
     }
 
     @Override

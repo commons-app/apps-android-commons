@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -41,7 +40,6 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -109,7 +107,6 @@ public class ContributionsFragment
         }
     };
     private boolean shouldShowMediaDetailsFragment;
-    private boolean isAuthCookieAcquired;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -197,12 +194,6 @@ public class ContributionsFragment
 
     }
 
-    private void setupViewForMediaDetails() {
-        campaignView.setVisibility(View.GONE);
-        nearbyNotificationCardView.setVisibility(View.GONE);
-        ((MainActivity)getActivity()).hideTabs();
-    }
-
     @Override
     public void onBackStackChanged() {
         ((MainActivity)getActivity()).initBackButton();
@@ -213,7 +204,6 @@ public class ContributionsFragment
      */
     void onAuthCookieAcquired() {
         // Since we call onAuthCookieAcquired method from onAttach, isAdded is still false. So don't use it
-        isAuthCookieAcquired=true;
         if (getActivity() != null) { // If fragment is attached to parent activity
             getActivity().bindService(getUploadServiceIntent(), uploadServiceConnection, Context.BIND_AUTO_CREATE);
             isUploadServiceConnected = true;
@@ -315,7 +305,6 @@ public class ContributionsFragment
         } else if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
                 && store.getBoolean("displayLocationPermissionForCardView", true)
                 && (((MainActivity) getActivity()).viewPager.getCurrentItem() == CONTRIBUTIONS_TAB_POSITION)) {
-            nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
             showNearbyCardPermissionRationale();
         }
     }
@@ -330,7 +319,6 @@ public class ContributionsFragment
     }
 
     private void onLocationPermissionGranted() {
-        nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.NO_PERMISSION_NEEDED;
         locationManager.registerLocationManager();
     }
 
@@ -430,10 +418,6 @@ public class ContributionsFragment
         if (store.getBoolean("displayCampaignsCardView", true)) {
             presenter.getCampaigns();
         }
-    }
-
-    @Override public void showMessage(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override public void showCampaigns(Campaign campaign) {

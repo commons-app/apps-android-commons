@@ -4,20 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
-
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
-
-import java.util.ArrayList;
-import java.util.concurrent.Callable;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -30,13 +19,17 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import java.util.concurrent.Callable;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import timber.log.Timber;
 
 @Singleton
 public class ReviewController {
     private static final int NOTIFICATION_SEND_THANK = 0x102;
     private static final int NOTIFICATION_CHECK_CATEGORY = 0x101;
-    protected static ArrayList<String> categories;
     @Inject
     ThanksClient thanksClient;
     private final DeleteHelper deleteHelper;
@@ -58,10 +51,6 @@ public class ReviewController {
 
     void onImageRefreshed(Media media) {
         this.media = media;
-    }
-
-    public Media getMedia() {
-        return media;
     }
 
     public enum DeleteReason {
@@ -115,7 +104,6 @@ public class ReviewController {
                     } else {
                         title = context.getString(R.string.check_category_failure_title);
                         message = context.getString(R.string.check_category_failure_message, media.getDisplayTitle());
-                        reviewCallback.onFailure();
                     }
 
                     showNotification(title, message);
@@ -186,6 +174,5 @@ public class ReviewController {
     public interface ReviewCallback {
         void onSuccess();
 
-        void onFailure();
     }
 }

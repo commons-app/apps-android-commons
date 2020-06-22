@@ -21,13 +21,6 @@ public class ContributionsRepository {
     }
 
     /**
-     * Fetch default number of contributions to be show, based on user preferences
-     */
-    public String getString(String key) {
-        return localDataSource.getString(key);
-    }
-
-    /**
      * Deletes a failed upload from DB
      * @param contribution
      * @return
@@ -53,11 +46,4 @@ public class ContributionsRepository {
         return localDataSource.saveContributions(contributions);
     }
 
-    public void set(String key, long value) {
-        localDataSource.set(key,value);
-    }
-
-    public Completable updateContribution(Contribution contribution) {
-        return localDataSource.updateContribution(contribution);
-    }
 }

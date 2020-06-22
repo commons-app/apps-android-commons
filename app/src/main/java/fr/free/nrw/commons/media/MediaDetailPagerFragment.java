@@ -279,12 +279,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     public void onPageScrollStateChanged(int i) {
     }
 
-    public void onDataSetChanged() {
-        if (null != adapter) {
-            adapter.notifyDataSetChanged();
-        }
-    }
-
     public interface MediaDetailProvider {
         Media getMediaAtPosition(int i);
 

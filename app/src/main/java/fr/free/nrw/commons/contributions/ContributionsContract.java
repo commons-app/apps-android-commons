@@ -8,8 +8,6 @@ import fr.free.nrw.commons.BasePresenter;
 public class ContributionsContract {
 
     public interface View {
-
-        void showMessage(String localizedMessage);
     }
 
     public interface UserActionListener extends BasePresenter<ContributionsContract.View> {

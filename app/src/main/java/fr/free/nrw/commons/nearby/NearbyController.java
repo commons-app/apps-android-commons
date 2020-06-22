@@ -1,15 +1,18 @@
 package fr.free.nrw.commons.nearby;
 
+import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-
 import androidx.annotation.MainThread;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
-
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
-
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.utils.UiUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,16 +21,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
-
 import javax.inject.Inject;
-
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.utils.UiUtils;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 public class NearbyController {
     private static final int MAX_RESULTS = 1000;
@@ -102,9 +97,7 @@ public class NearbyController {
                 );
             }
             nearbyPlacesInfo.curLatLng = curLatLng;
-            nearbyPlacesInfo.searchLatLng = searchLatLng;
             nearbyPlacesInfo.placeList = places;
-            nearbyPlacesInfo.boundaryCoordinates = boundaryCoordinates;
 
             // Returning closes result means we use the controller for nearby card. So no need to set search this area flags
             if (!returnClosestResult) {
@@ -128,24 +121,6 @@ public class NearbyController {
     }
 
     /**
-     * Loads attractions from location for list view, we need to return Place data type.
-     *
-     * @param curLatLng users current location
-     * @param placeList list of nearby places in Place data type
-     * @return Place list that holds nearby places
-     */
-    public static List<Place> loadAttractionsFromLocationToPlaces(
-            LatLng curLatLng,
-            List<Place> placeList) {
-        placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
-        for (Place place : placeList) {
-            String distance = formatDistanceBetween(curLatLng, place.location);
-            place.setDistance(distance);
-        }
-        return placeList;
-    }
-
-    /**
      * Loads attractions from location for map view, we need to return BaseMarkerOption data type.
      *
      * @param curLatLng users current location
@@ -153,10 +128,9 @@ public class NearbyController {
      * @return BaseMarkerOptions list that holds nearby places
      */
     public static List<NearbyBaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
-            LatLng curLatLng,
-            List<Place> placeList,
-            Context context,
-            List<Place> bookmarkplacelist) {
+        LatLng curLatLng,
+        List<Place> placeList,
+        Context context) {
         List<NearbyBaseMarker> baseMarkerOptions = new ArrayList<>();
 
         if (placeList == null) {
@@ -168,7 +142,6 @@ public class NearbyController {
         VectorDrawableCompat vectorDrawable = null;
         VectorDrawableCompat vectorDrawableGreen = null;
         VectorDrawableCompat vectorDrawableGrey = null;
-        vectorDrawable = null;
         try {
             vectorDrawable = VectorDrawableCompat.create(
                     context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme());
@@ -223,9 +196,7 @@ public class NearbyController {
      */
     public class NearbyPlacesInfo {
         public List<Place> placeList; // List of nearby places
-        public LatLng[] boundaryCoordinates; // Corners of nearby area
         public LatLng curLatLng; // Current location when this places are populated
-        public LatLng searchLatLng; // Search location for finding this places
     }
 
     /**

@@ -49,7 +49,7 @@ public class NearbyBaseMarker extends BaseMarkerOptions<NearbyMarker, NearbyBase
 
     @Override
     public NearbyMarker getMarker() {
-        return new NearbyMarker(this, place);
+        return new NearbyMarker(this);
     }
 
     public Place getPlace() {

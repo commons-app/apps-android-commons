@@ -3,7 +3,6 @@ package fr.free.nrw.commons.quiz;
 import android.app.Activity;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.RadioButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,17 +14,6 @@ import java.util.List;
 public class RadioGroupHelper {
 
     public List<CompoundButton> radioButtons = new ArrayList<>();
-
-    /**
-     * Constructor to group radio buttons
-     * @param radios
-     */
-    public RadioGroupHelper(RadioButton... radios) {
-        super();
-        for (RadioButton rb : radios) {
-            add(rb);
-        }
-    }
 
     /**
      * Constructor to group radio buttons

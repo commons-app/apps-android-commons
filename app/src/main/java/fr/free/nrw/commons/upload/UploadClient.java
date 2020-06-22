@@ -55,10 +55,9 @@ public class UploadClient {
         }
     }
 
-    Observable<UploadResult> uploadFileFromStash(Context context,
-                                                 Contribution contribution,
-                                                 String uniqueFileName,
-                                                 String fileKey) {
+    Observable<UploadResult> uploadFileFromStash(Contribution contribution,
+        String uniqueFileName,
+        String fileKey) {
         try {
             return uploadInterface
                     .uploadFileFromStash(csrfTokenClient.getTokenBlocking(),

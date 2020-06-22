@@ -16,22 +16,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
-import com.google.android.material.navigation.NavigationView;
-
-import org.wikipedia.dataclient.Service;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import butterknife.BindView;
+import com.google.android.material.navigation.NavigationView;
 import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
@@ -50,6 +42,8 @@ import fr.free.nrw.commons.settings.SettingsActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
 
 public abstract class NavigationBaseActivity extends BaseActivity
@@ -76,7 +70,6 @@ public abstract class NavigationBaseActivity extends BaseActivity
 
 
     private CompositeDisposable disposable = new CompositeDisposable();
-    private Service service;
 
     private ProgressDialog progressDialog;
 
@@ -159,12 +152,6 @@ public abstract class NavigationBaseActivity extends BaseActivity
         toggle.setToolbarNavigationClickListener(v -> onBackPressed());
     }
 
-    public void initBack() {
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-    }
-
     @Override
     public boolean onNavigationItemSelected(@NonNull final MenuItem item) {
         final int itemId = item.getItemId();
@@ -238,7 +225,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
 
             case R.id.action_review:
                 drawerLayout.closeDrawer(navigationView);
-                ReviewActivity.startYourself(this, getString(R.string.title_activity_review));
+                ReviewActivity.startYourself(this);
                 return true;
             default:
                 Timber.e("Unknown option [%s] selected from the navigation menu", itemId);

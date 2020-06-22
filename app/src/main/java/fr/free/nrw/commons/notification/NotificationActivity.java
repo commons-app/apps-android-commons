@@ -56,8 +56,6 @@ public class NotificationActivity extends NavigationBaseActivity {
     @Inject
     NotificationController controller;
 
-    private static final String TAG_NOTIFICATION_WORKER_FRAGMENT = "NotificationWorkerFragment";
-    private NotificationWorkerFragment mNotificationWorkerFragment;
     private NotificatinAdapter adapter;
     private List<Notification> notificationList;
     MenuItem notificationMenuItem;
@@ -67,8 +65,6 @@ public class NotificationActivity extends NavigationBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
         ButterKnife.bind(this);
-        mNotificationWorkerFragment = (NotificationWorkerFragment) getFragmentManager()
-                .findFragmentByTag(TAG_NOTIFICATION_WORKER_FRAGMENT);
         initListView();
         initDrawer();
         setPageTitle();
@@ -145,7 +141,6 @@ public class NotificationActivity extends NavigationBaseActivity {
     @SuppressLint("CheckResult")
     private void addNotifications(boolean archived) {
         Timber.d("Add notifications");
-        if (mNotificationWorkerFragment == null) {
             progressBar.setVisibility(View.VISIBLE);
             compositeDisposable.add(controller.getNotifications(archived)
                     .subscribeOn(Schedulers.io())
@@ -167,10 +162,6 @@ public class NotificationActivity extends NavigationBaseActivity {
                         ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
                         progressBar.setVisibility(View.GONE);
                     }));
-        } else {
-            notificationList = mNotificationWorkerFragment.getNotificationList();
-            setItems(notificationList);
-        }
     }
 
     @Override

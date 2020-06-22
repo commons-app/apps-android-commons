@@ -96,12 +96,12 @@ public class ContributionController {
     public void handleActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
         FilePicker.handleActivityResult(requestCode, resultCode, data, activity, new DefaultCallback() {
             @Override
-            public void onImagePickerError(Exception e, FilePicker.ImageSource source, int type) {
+            public void onImagePickerError() {
                 ViewUtil.showShortToast(activity, R.string.error_occurred_in_picking_images);
             }
 
             @Override
-            public void onImagesPicked(@NonNull List<UploadableFile> imagesFiles, FilePicker.ImageSource source, int type) {
+            public void onImagesPicked(@NonNull List<UploadableFile> imagesFiles) {
                 Intent intent = handleImagesPicked(activity, imagesFiles);
                 activity.startActivity(intent);
             }

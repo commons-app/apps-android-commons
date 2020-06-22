@@ -2,28 +2,21 @@ package fr.free.nrw.commons.contributions
 
 import android.database.Cursor
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Completable
-import io.reactivex.Scheduler
-import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentMatchers
-import org.mockito.ArgumentMatchers.*
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
-import java.util.concurrent.TimeUnit
 
 /**
  * The unit test class for ContributionsPresenter
@@ -58,7 +51,7 @@ class ContributionsPresenterTest {
         scheduler=TestScheduler()
         cursor = Mockito.mock(Cursor::class.java)
         contribution = Mockito.mock(Contribution::class.java)
-        contributionsPresenter = ContributionsPresenter(repository,scheduler,scheduler)
+        contributionsPresenter = ContributionsPresenter(repository, scheduler)
         loader = Mockito.mock(CursorLoader::class.java)
         contributionsPresenter.onAttachView(view)
         liveData=MutableLiveData()

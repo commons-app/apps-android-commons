@@ -4,7 +4,6 @@ import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION;
 import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
-import android.content.Context;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.ImageUtils;
@@ -30,9 +29,9 @@ public class ImageProcessingService {
 
     @Inject
     public ImageProcessingService(FileUtilsWrapper fileUtilsWrapper,
-                                  ImageUtilsWrapper imageUtilsWrapper,
-                                  ReadFBMD readFBMD, EXIFReader EXIFReader,
-                                  MediaClient mediaClient, Context context) {
+        ImageUtilsWrapper imageUtilsWrapper,
+        ReadFBMD readFBMD, EXIFReader EXIFReader,
+        MediaClient mediaClient) {
         this.fileUtilsWrapper = fileUtilsWrapper;
         this.imageUtilsWrapper = imageUtilsWrapper;
         this.readFBMD = readFBMD;

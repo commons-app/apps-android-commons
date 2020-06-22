@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.contributions;
 
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 import static fr.free.nrw.commons.di.NetworkingModule.NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE;
 
 import android.content.Context;
@@ -15,8 +13,6 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
@@ -47,16 +43,12 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
   @BindView(R.id.contributionsList)
   RecyclerView rvContributionsList;
-  @BindView(R.id.loadingContributionsProgressBar)
-  ProgressBar progressBar;
   @BindView(R.id.fab_plus)
   FloatingActionButton fabPlus;
   @BindView(R.id.fab_camera)
   FloatingActionButton fabCamera;
   @BindView(R.id.fab_gallery)
   FloatingActionButton fabGallery;
-  @BindView(R.id.noContributionsYet)
-  TextView noContributionsYet;
   @BindView(R.id.fab_layout)
   LinearLayout fab_layout;
 
@@ -185,26 +177,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
       }
       this.isFabOpen = !isFabOpen;
     }
-  }
-
-  /**
-   * Shows welcome message if user has no contributions yet i.e. new user.
-   */
-  public void showWelcomeTip(final boolean shouldShow) {
-    noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
-  }
-
-  /**
-   * Responsible to set progress bar invisible and visible
-   *
-   * @param shouldShow True when contributions list should be hidden.
-   */
-  public void showProgress(final boolean shouldShow) {
-    progressBar.setVisibility(shouldShow ? VISIBLE : GONE);
-  }
-
-  public void showNoContributionsUI(final boolean shouldShow) {
-    noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
   }
 
   @Override

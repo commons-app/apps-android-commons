@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.nearby;
 
+import static fr.free.nrw.commons.contributions.MainActivity.NEARBY_TAB_POSITION;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -8,18 +10,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.utils.SwipableCardView;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.contributions.MainActivity.NEARBY_TAB_POSITION;
 
 /**
  * Custom card view for nearby notification card view on main screen, above contributions list
@@ -33,8 +31,6 @@ public class NearbyNotificationCardView extends SwipableCardView {
     private ProgressBar progressBar;
 
     public CardViewVisibilityState cardViewVisibilityState;
-
-    public PermissionType permissionType;
 
     public NearbyNotificationCardView(@NonNull Context context) {
         super(context);
@@ -103,20 +99,6 @@ public class NearbyNotificationCardView extends SwipableCardView {
         ViewUtil.showLongToast(getContext(),
             getResources().getString(R.string.nearby_notification_dismiss_message));
         return true;
-    }
-
-    /**
-     * Time is up, data for card view is not ready, so do not display it
-     */
-    private void errorOccurred() {
-        this.setVisibility(GONE);
-    }
-
-    /**
-     * Data for card view is ready, display card view
-     */
-    private void succeeded() {
-        this.setVisibility(VISIBLE);
     }
 
     /**
@@ -189,16 +171,6 @@ public class NearbyNotificationCardView extends SwipableCardView {
         READY,
         INVISIBLE,
         ASK_PERMISSION,
-        ERROR_OCCURRED
     }
 
-    /**
-     * We need to know which kind of permission we need to request, then update permission request
-     * button action accordingly
-     */
-    public enum PermissionType {
-        ENABLE_GPS,
-        ENABLE_LOCATION_PERMISSION, // For only after Marshmallow
-        NO_PERMISSION_NEEDED
-    }
 }

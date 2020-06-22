@@ -76,7 +76,7 @@ class DepictsPresenter @Inject constructor(
         compositeDisposable.clear()
     }
 
-    override fun onPreviousButtonClicked() {
+    fun onPreviousButtonClicked() {
         view.goToPreviousScreen()
     }
 

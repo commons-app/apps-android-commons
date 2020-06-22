@@ -16,17 +16,17 @@ public interface UploadMediaDetailsContract {
 
     interface View extends SimilarImageInterface {
 
-        void onImageProcessed(UploadItem uploadItem, Place place);
+        void onImageProcessed(UploadItem uploadItem);
 
-        void onNearbyPlaceFound(UploadItem uploadItem, Place place);
+        void onNearbyPlaceFound(Place place);
 
         void showProgress(boolean shouldShow);
 
         void onImageValidationSuccess();
 
-        void showMessage(int stringResourceId, int colorResourceId);
+        void showMessage(int stringResourceId);
 
-        void showMessage(String message, int colorResourceId);
+        void showMessage(String message);
 
         void showDuplicatePicturePopup(UploadItem uploadItem);
 

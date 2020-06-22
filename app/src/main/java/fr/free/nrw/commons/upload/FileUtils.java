@@ -143,17 +143,6 @@ public class FileUtils {
         return mimeType;
     }
 
-    static String getFileExt(String fileName) {
-        //Default filePath extension
-        String extension = ".jpg";
-
-        int i = fileName.lastIndexOf('.');
-        if (i > 0) {
-            extension = fileName.substring(i + 1);
-        }
-        return extension;
-    }
-
     static FileInputStream getFileInputStream(String filePath) throws FileNotFoundException {
         return new FileInputStream(filePath);
     }
@@ -166,16 +155,4 @@ public class FileUtils {
         return true;
     }
 
-    /**
-     * Check if file exists in local dirs
-     */
-    public static boolean fileExists(Uri localUri) {
-        try {
-            File file = new File(localUri.getPath());
-            return file.exists();
-        } catch (Exception e) {
-            Timber.d(e);
-            return false;
-        }
-    }
 }

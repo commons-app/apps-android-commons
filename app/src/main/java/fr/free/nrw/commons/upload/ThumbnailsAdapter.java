@@ -6,22 +6,17 @@ import android.os.Build.VERSION_CODES;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.facebook.drawee.view.SimpleDraweeView;
-
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.filepicker.UploadableFile;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.filepicker.UploadableFile;
 
 /**
  * The adapter class for image thumbnails to be shown while uploading.
@@ -69,8 +64,6 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
         RelativeLayout rlContainer;
         @BindView(R.id.iv_thumbnail)
         SimpleDraweeView background;
-        @BindView(R.id.iv_error)
-        ImageView ivError;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

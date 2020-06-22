@@ -1,16 +1,12 @@
 package fr.free.nrw.commons.location;
 
-import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
-
 import timber.log.Timber;
 
 public class LocationServiceManager implements LocationListener {
@@ -24,7 +20,6 @@ public class LocationServiceManager implements LocationListener {
     //private Location lastLocationDuplicate; // Will be used for nearby card view on contributions activity
     private final List<LocationUpdateListener> locationListeners = new CopyOnWriteArrayList<>();
     private boolean isLocationManagerRegistered = false;
-    private Set<Activity> locationExplanationDisplayed = new HashSet<>();
 
     /**
      * Constructs a new instance of LocationServiceManager.
@@ -143,7 +138,6 @@ public class LocationServiceManager implements LocationListener {
      */
     public void unregisterLocationManager() {
         isLocationManagerRegistered = false;
-        locationExplanationDisplayed.clear();
         try {
             locationManager.removeUpdates(this);
         } catch (SecurityException e) {
@@ -224,9 +218,7 @@ public class LocationServiceManager implements LocationListener {
     public enum LocationChangeType{
         LOCATION_SIGNIFICANTLY_CHANGED, //Went out of borders of nearby markers
         LOCATION_SLIGHTLY_CHANGED,      //User might be walking or driving
-        LOCATION_MEDIUM_CHANGED,      //Between slight and significant changes, will be used for nearby card view updates.
         LOCATION_NOT_CHANGED,
-        PERMISSION_JUST_GRANTED,
         MAP_UPDATED,
         SEARCH_CUSTOM_AREA
     }

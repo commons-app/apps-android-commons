@@ -35,8 +35,6 @@ import fr.free.nrw.commons.upload.UploadItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
@@ -214,18 +212,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void onImageProcessed(UploadItem uploadItem, Place place) {
+    public void onImageProcessed(UploadItem uploadItem) {
         photoViewBackgroundImage.setImageURI(uploadItem.getMediaUri());
     }
 
     /**
      * Shows popup if any nearby location needing pictures matches uploadable picture's GPS location
-     * @param uploadItem
      * @param place
      */
     @SuppressLint("StringFormatInvalid")
     @Override
-    public void onNearbyPlaceFound(UploadItem uploadItem, Place place) {
+    public void onNearbyPlaceFound(Place place) {
         DialogUtil.showAlertDialog(getActivity(),
                 getString(R.string.upload_nearby_place_found_title),
                 String.format(Locale.getDefault(),
@@ -250,12 +247,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void showMessage(int stringResourceId, int colorResourceId) {
+    public void showMessage(int stringResourceId) {
         ViewUtil.showLongToast(getContext(), stringResourceId);
     }
 
     @Override
-    public void showMessage(String message, int colorResourceId) {
+    public void showMessage(String message) {
         ViewUtil.showLongToast(getContext(), message);
     }
 

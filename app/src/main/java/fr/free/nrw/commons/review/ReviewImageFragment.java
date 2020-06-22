@@ -29,8 +29,6 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
     private int position;
 
-    public ProgressBar progressBar;
-
     @BindView(R.id.tv_review_question)
     TextView textViewQuestion;
     @BindView(R.id.tv_review_question_context)
@@ -173,10 +171,6 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 getReviewActivity().runRandomizer();
             }
 
-            @Override
-            public void onFailure() {
-                //do nothing
-            }
         };
     }
 

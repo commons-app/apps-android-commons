@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
@@ -30,10 +29,6 @@ public class SimilarImageDialogFragment extends DialogFragment {
     SimpleDraweeView originalImage;
     @BindView(R.id.possibleImage)
     SimpleDraweeView possibleImage;
-    @BindView(R.id.postive_button)
-    Button positiveButton;
-    @BindView(R.id.negative_button)
-    Button negativeButton;
     Callback callback;//Implemented interface from shareActivity
     Boolean gotResponse = false;
 

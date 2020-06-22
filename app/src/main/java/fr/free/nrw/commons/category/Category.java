@@ -13,9 +13,6 @@ public class Category {
     private Date lastUsed;
     private int timesUsed;
 
-    public Category() {
-    }
-
     public Category(Uri contentUri, String name, Date lastUsed, int timesUsed) {
         this.contentUri = contentUri;
         this.name = name;
@@ -30,15 +27,6 @@ public class Category {
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * Modifies name
-     *
-     * @param name Category name
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 
     /**

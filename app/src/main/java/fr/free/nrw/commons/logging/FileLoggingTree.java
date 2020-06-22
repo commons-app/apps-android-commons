@@ -21,7 +21,7 @@ import timber.log.Timber;
 /**
  * Extends Timber's debug tree to write logs to a file
  */
-public class FileLoggingTree extends Timber.DebugTree implements LogLevelSettableTree {
+public class FileLoggingTree extends Timber.DebugTree {
     private final Logger logger = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
     private int logLevel;
     private final String logFileName;
@@ -39,15 +39,6 @@ public class FileLoggingTree extends Timber.DebugTree implements LogLevelSettabl
         this.fileSize = fileSizeInKb;
         configureLogger(logDirectory);
         this.executor = executor;
-    }
-
-    /**
-     * Can be overridden to change file's log level
-     * @param logLevel
-     */
-    @Override
-    public void setLogLevel(int logLevel) {
-        this.logLevel = logLevel;
     }
 
     /**

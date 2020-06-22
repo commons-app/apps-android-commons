@@ -1,5 +1,10 @@
 package fr.free.nrw.commons.auth;
 
+import static android.view.KeyEvent.KEYCODE_ENTER;
+import static android.view.View.VISIBLE;
+import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
+import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_WIKI_SITE;
+
 import android.accounts.AccountAuthenticatorActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -17,7 +22,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,25 +30,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.NavUtils;
 import androidx.core.content.ContextCompat;
-
-import com.google.android.material.textfield.TextInputLayout;
-
-import org.wikipedia.AppAdapter;
-import org.wikipedia.dataclient.ServiceFactory;
-import org.wikipedia.dataclient.WikiSite;
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-import org.wikipedia.login.LoginClient;
-import org.wikipedia.login.LoginClient.LoginCallback;
-import org.wikipedia.login.LoginResult;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnEditorAction;
 import butterknife.OnFocusChange;
+import com.google.android.material.textfield.TextInputLayout;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -58,15 +49,19 @@ import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.disposables.CompositeDisposable;
+import javax.inject.Inject;
+import javax.inject.Named;
+import org.wikipedia.AppAdapter;
+import org.wikipedia.dataclient.ServiceFactory;
+import org.wikipedia.dataclient.WikiSite;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
+import org.wikipedia.login.LoginClient;
+import org.wikipedia.login.LoginClient.LoginCallback;
+import org.wikipedia.login.LoginResult;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import timber.log.Timber;
-
-import static android.view.KeyEvent.KEYCODE_ENTER;
-import static android.view.View.VISIBLE;
-import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
-import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_WIKI_SITE;
 
 public class LoginActivity extends AccountAuthenticatorActivity {
 
@@ -246,7 +241,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     public void performLogin() {
         Timber.d("Login to start!");
         final String username = usernameEdit.getText().toString();
-        final String rawUsername = usernameEdit.getText().toString().trim();
         final String password = passwordEdit.getText().toString();
         String twoFactorCode = twoFactorEdit.getText().toString();
 

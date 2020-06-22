@@ -67,15 +67,6 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         return uploadMediaDetails.size();
     }
 
-    /**
-     * Gets descriptions
-     *
-     * @return List of descriptions
-     */
-    public List<UploadMediaDetail> getUploadMediaDetails() {
-        return uploadMediaDetails;
-    }
-
     public void addDescription(UploadMediaDetail uploadMediaDetail) {
         this.uploadMediaDetails.add(uploadMediaDetail);
         notifyItemInserted(uploadMediaDetails.size());

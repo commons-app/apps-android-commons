@@ -86,8 +86,7 @@ class UploadMediaPresenterTest {
         verify(view).showProgress(true)
         testScheduler.triggerActions()
         verify(view).onImageProcessed(
-            ArgumentMatchers.any(UploadItem::class.java),
-            ArgumentMatchers.any(Place::class.java)
+            ArgumentMatchers.any(UploadItem::class.java)
         )
         verify(view).showProgress(false)
     }
@@ -122,7 +121,7 @@ class UploadMediaPresenterTest {
 
         //Empty Caption test
         uploadMediaPresenter.handleImageResult(EMPTY_CAPTION, uploadItem)
-        verify(view).showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
+        verify(view).showMessage(ArgumentMatchers.anyInt())
 
         //Bad Picture test
         //Empty Caption test
@@ -185,7 +184,7 @@ class UploadMediaPresenterTest {
         whenever(repository.getPreviousUploadItem(ArgumentMatchers.anyInt()))
             .thenReturn(null)
         uploadMediaPresenter.fetchPreviousTitleAndDescription(0)
-        verify(view).showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
+        verify(view).showMessage(ArgumentMatchers.anyInt())
     }
 
     /**
@@ -204,7 +203,7 @@ class UploadMediaPresenterTest {
     @Test
     fun handleBadImageBaseTestEmptyTitle() {
         uploadMediaPresenter.handleBadImage(-3, uploadItem)
-        verify(view).showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
+        verify(view).showMessage(ArgumentMatchers.anyInt())
     }
 
     /**

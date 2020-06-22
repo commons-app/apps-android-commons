@@ -1,19 +1,14 @@
 package fr.free.nrw.commons.nearby.contract;
 
 import android.content.Context;
-
 import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.maps.MapboxMap;
-
-import java.util.List;
-
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
+import java.util.List;
 
 public interface NearbyParentFragmentContract {
 
@@ -40,7 +35,7 @@ public interface NearbyParentFragmentContract {
         void setTabItemContributions();
         boolean isDetailsBottomSheetVisible();
         void setBottomSheetDetailsSmaller();
-        boolean isSearchThisAreaButtonVisible();
+
         void setRecyclerViewAdapterAllSelected();
         void setRecyclerViewAdapterItemsGreyedOut();
         void setCheckBoxAction();
@@ -58,9 +53,8 @@ public interface NearbyParentFragmentContract {
 
         void filterOutAllMarkers();
 
-        void displayAllMarkers();
-
-        void filterMarkersByLabels(List<Label> selectedLabels, boolean existsSelected, boolean needPhotoSelected, boolean filterForPlaceState, boolean filterForAllNoneType);
+        void filterMarkersByLabels(List<Label> selectedLabels, boolean existsSelected,
+            boolean needPhotoSelected, boolean filterForPlaceState);
 
         LatLng getCameraTarget();
 
@@ -74,10 +68,6 @@ public interface NearbyParentFragmentContract {
 
         boolean isCurrentLocationMarkerVisible();
         void setProjectorLatLngBounds();
-    }
-
-    interface NearbyListView {
-        void updateListFragment(List<Place> placeList);
     }
 
     interface UserActions {

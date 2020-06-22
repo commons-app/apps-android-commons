@@ -97,12 +97,6 @@ public class CommonsApplication extends MultiDexApplication {
 
     public static final String FEEDBACK_EMAIL_TEMPLATE_HEADER = "-- Technical information --";
 
-    /**
-     * Constants End
-     */
-
-    private RefWatcher refWatcher;
-
     private static CommonsApplication INSTANCE;
     public static CommonsApplication getInstance() {
         return INSTANCE;
@@ -191,10 +185,6 @@ public class CommonsApplication extends MultiDexApplication {
         Timber.plant(new Timber.DebugTree());
     }
 
-    public static boolean isRoboUnitTest() {
-        return "robolectric".equals(Build.FINGERPRINT);
-    }
-
     private ThreadPoolService getFileLoggingThreadPool() {
         return new ThreadPoolService.Builder("file-logging-thread")
                 .setPriority(Process.THREAD_PRIORITY_LOWEST)
@@ -228,17 +218,6 @@ public class CommonsApplication extends MultiDexApplication {
             return RefWatcher.DISABLED;
         }
         return LeakCanary.install(this);
-    }
-
-  /**
-     * Provides a way to get member refWatcher
-     *
-     * @param context Application context
-     * @return application member refWatcher
-     */
-    public static RefWatcher getRefWatcher(Context context) {
-        CommonsApplication application = (CommonsApplication) context.getApplicationContext();
-        return application.refWatcher;
     }
 
     /**

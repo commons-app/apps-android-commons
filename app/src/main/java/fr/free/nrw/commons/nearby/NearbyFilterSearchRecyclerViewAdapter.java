@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,48 +9,29 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
-
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
-import java.util.Collections;
+import java.util.ArrayList;
 
 public class NearbyFilterSearchRecyclerViewAdapter
         extends RecyclerView.Adapter<NearbyFilterSearchRecyclerViewAdapter.RecyclerViewHolder>
         implements Filterable {
 
     private final LayoutInflater inflater;
-    private Context context;
     private ArrayList<Label> labels;
     private ArrayList<Label> displayedLabels;
     public ArrayList<Label> selectedLabels = new ArrayList<>();
 
-    private int state;
-
     private Callback callback;
-
-    RecyclerView.SmoothScroller smoothScroller;
 
     public void setCallback(Callback callback) {
         this.callback = callback;
     }
 
-    public NearbyFilterSearchRecyclerViewAdapter(Context context, ArrayList<Label> labels, RecyclerView recyclerView) {
-        this.context = context;
+    public NearbyFilterSearchRecyclerViewAdapter(Context context, ArrayList<Label> labels) {
         this.labels = labels;
         this.displayedLabels = labels;
-        smoothScroller = new
-                LinearSmoothScroller(context) {
-                    @Override protected int getVerticalSnapPreference() {
-                        return LinearSmoothScroller.SNAP_TO_START;
-                    }
-                };
         inflater = LayoutInflater.from(context);
     }
 
@@ -150,7 +130,6 @@ public class NearbyFilterSearchRecyclerViewAdapter
     }
 
     public void setRecyclerViewAdapterItemsGreyedOut() {
-        state = CheckBoxTriStates.UNCHECKED;
         for (Label label : labels) {
             label.setSelected(false);
             selectedLabels.remove(label);
@@ -159,7 +138,6 @@ public class NearbyFilterSearchRecyclerViewAdapter
     }
 
     public void setRecyclerViewAdapterAllSelected() {
-        state = CheckBoxTriStates.CHECKED;
         for (Label label : labels) {
             label.setSelected(true);
             if (!selectedLabels.contains(label)) {

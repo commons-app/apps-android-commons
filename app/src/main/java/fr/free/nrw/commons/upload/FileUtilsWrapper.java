@@ -15,10 +15,6 @@ public class FileUtilsWrapper {
 
     }
 
-    public String getFileExt(String fileName) {
-        return FileUtils.getFileExt(fileName);
-    }
-
     public String getSHA1(InputStream is) {
         return FileUtils.getSHA1(is);
     }

@@ -71,11 +71,6 @@ public class BookmarkPicturesFragment extends DaggerFragment {
         initList();
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        controller.stop();
-    }
 
     @Override
     public void onDestroy() {

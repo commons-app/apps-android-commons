@@ -14,10 +14,6 @@ public class MwParseResponse extends MwResponse {
         return parse;
     }
 
-    public boolean success() {
-        return parse != null;
-    }
-
     @VisibleForTesting
     protected void setParse(@Nullable MwParseResult parse) {
         this.parse = parse;

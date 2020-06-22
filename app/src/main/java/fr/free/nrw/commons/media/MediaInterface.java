@@ -108,14 +108,6 @@ public interface MediaInterface {
     Single<MwParseResponse> getPageHtml(@Query("page") String title);
 
     /**
-     * Fetches caption using file name
-     *
-     * @param filename name of the file to be used for fetching captions
-     * */
-    @GET("w/api.php?action=wbgetentities&props=labels&format=json&languagefallback=1")
-    Single<MwQueryResponse> fetchCaptionByFilename(@Query("language") String language, @Query("titles") String filename);
-
-    /**
      * Fetches list of images from a depiction entity
      *  @param query depictionEntityId
      * @param srlimit the number of items to fetch
