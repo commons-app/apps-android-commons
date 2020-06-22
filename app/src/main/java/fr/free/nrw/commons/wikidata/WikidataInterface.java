@@ -60,7 +60,7 @@ public interface WikidataInterface {
     @Headers("Cache-Control: no-cache")
     @POST("w/api.php?format=json&errorformat=plaintext&action=wbsetclaim&errorlang=uselang")
     @FormUrlEncoded
-    Observable<WbCreateClaimResponse> postSetClaim(@NonNull @Field("claim") WikidataSetClaim request,
+    Observable<WbCreateClaimResponse> postSetClaim(@NonNull @Field("claim") String request,
         @NonNull @Field("tags") String tags,
         @NonNull @Field("token") String token);
 }

@@ -56,7 +56,7 @@ public class WikidataClient {
      */
     Observable<Long> setClaim(WikidataSetClaim claim, String tags) {
         return getCsrfToken()
-            .flatMap(csrfToken -> wikidataInterface.postSetClaim(claim, tags, csrfToken))
+            .flatMap(csrfToken -> wikidataInterface.postSetClaim(gson.toJson(claim), tags, csrfToken))
             .map(mwPostResponse -> mwPostResponse.getPageinfo().getLastrevid());
     }
 
