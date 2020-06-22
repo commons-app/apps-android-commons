@@ -4,7 +4,13 @@ import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
+import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -43,7 +49,17 @@ import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.Observable;
+import io.reactivex.Scheduler;
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -284,7 +300,15 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
 
         descriptions = uploadItem.getDescriptions();
-        photoViewBackgroundImage.setImageURI(uploadItem.getMediaUri());
+        compositeDisposable
+            .add(downSampleImage(uploadItem.getContentUri())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(bitmap -> {
+                    if (null != bitmap) {
+                        photoViewBackgroundImage.setImageBitmap(bitmap);
+                    }
+                }, Timber::d));
         setDescriptionsInAdapter(descriptions);
     }
 
@@ -432,6 +456,63 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             descriptionsAdapter.addDescription(new Description());
         } else {
             descriptionsAdapter.setItems(descriptions);
+        }
+    }
+
+    /**
+     * Downsample bitmap to handle OOM/Bitmap too large exception
+     *
+     * @param uri
+     * @return
+     */
+    private Single<Bitmap> downSampleImage(Uri uri) {
+        Bitmap existing = null;
+        try {
+            existing = MediaStore.Images.Media
+                .getBitmap(this.getContext().getContentResolver(), uri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (null == existing) {
+            return Single.error(new Throwable("could not downsample"));
+        }
+
+        final int requiredHeight = getResources().getDisplayMetrics().heightPixels;
+        final int requiredWidth = getResources().getDisplayMetrics().widthPixels;
+
+        // Raw height and width of image
+        final int height = existing.getHeight();
+        final int width = existing.getWidth();
+        int inSampleSize = 1;
+
+        if (height > requiredHeight || width > requiredWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) >= requiredHeight
+                && (halfWidth / inSampleSize) >= requiredWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        existing.compress(CompressFormat.PNG, 0, byteArrayOutputStream);
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
+            byteArrayOutputStream.toByteArray());
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        Rect rect = new Rect(0, 0, 0, 0);
+        options.inJustDecodeBounds = false;
+        options.inSampleSize = inSampleSize;
+        Bitmap modified = BitmapFactory.decodeStream(byteArrayInputStream, rect, options);
+        if (modified != null) {
+            return Single.just(modified);
+        } else {
+            return Single.error(new Throwable("could not downsample"));
         }
     }
 
