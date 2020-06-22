@@ -368,4 +368,9 @@
   <string name="theme_light_name">Hell</string>
   <string name="load_more">Méi lueden</string>
   <string name="nearby_no_results">Keng Plaze fonnt, probéiert Är Sich-Critèren z\'änneren.</string>
+  <string name="add_picture_to_wikipedia_article_title">Bild op Wikipedia derbäisetzen</string>
+  <string name="add_picture_to_wikipedia_instructions_title">Instruktiounen</string>
+  <string name="confirm">Confirméieren</string>
+  <string name="instructions_title">Instruktiounen</string>
+  <string name="wikipedia_instructions_step_7">7.Den Artikel publizéieren</string>
 </resources>

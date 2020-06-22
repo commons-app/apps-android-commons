@@ -579,4 +579,7 @@
   <string name="setting_wallpaper_dialog_title">设为壁纸</string>
   <string name="setting_wallpaper_dialog_message">正在设置壁纸。请稍等…</string>
   <string name="load_more">加载更多</string>
+  <string name="add_picture_to_wikipedia_instructions_title">说明</string>
+  <string name="confirm">确认</string>
+  <string name="instructions_title">说明</string>
 </resources>

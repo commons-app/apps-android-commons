@@ -322,4 +322,7 @@
   <string name="account_created">Profiel gemaakt!</string>
   <string name="remove_bookmark">Bladwijzer verwijderd</string>
   <string name="add_bookmark">Als bladwijzer toegevoegd</string>
+  <string name="add_picture_to_wikipedia_instructions_title">Instructies</string>
+  <string name="confirm">Bevestigen</string>
+  <string name="instructions_title">Instructies</string>
 </resources>

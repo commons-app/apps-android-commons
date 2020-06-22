@@ -128,6 +128,7 @@
   <string name="provider_modifications">Изменения</string>
   <string name="menu_upload_single">Загрузка</string>
   <string name="categories_search_text_hint">Выбор категорий</string>
+  <string name="depicts_search_text_hint">Искать элементы, которые изображены на вашем изображении (гора, Тадж-Махал и т. д.)</string>
   <string name="menu_save_categories">Сохранить</string>
   <string name="refresh_button">Обновить</string>
   <string name="display_list_button">Список</string>
@@ -617,4 +618,8 @@
   <string name="use_location_from_similar_image">Вы снимали эти две фотографии в одном месте? Хотите использовать широту/долготу изображения справа?</string>
   <string name="load_more">Загрузить ещё</string>
   <string name="nearby_no_results">Мест не найдено, попытайтесь изменить критерии поиска.</string>
+  <string name="add_picture_to_wikipedia_article_title">Добавить изображение в Википедию</string>
+  <string name="add_picture_to_wikipedia_instructions_title">Инструкции</string>
+  <string name="confirm">Подтвердить</string>
+  <string name="instructions_title">Инструкции</string>
 </resources>

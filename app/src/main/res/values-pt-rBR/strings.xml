@@ -619,6 +619,7 @@
   <string name="wikipedia_instructions_step_3">3. Encontre uma seção apropriada no artigo para sua imagem</string>
   <string name="wikipedia_instructions_step_4">4. Clique no ícone editar (aquele como um lápis) para essa seção.</string>
   <string name="wikipedia_instructions_step_5">5. Cole o wikitexto no local apropriado.</string>
+  <string name="wikipedia_instructions_step_6">6. Editar o wikitexto para o posicionamento apropriado, se necessário. Para mais informações, veja &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;aqui&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Publique o artigo</string>
   <string name="copy_wikicode_to_clipboard">Copiar wikicode para a área de transferência</string>
 </resources>

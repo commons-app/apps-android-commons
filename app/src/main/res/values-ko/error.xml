@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Revi
+* YuzaTea
 * 아라
 -->
 <resources>
   <string name="crash_dialog_title">공용 애플리케이션이 작동을 멈췄습니다</string>
   <string name="crash_dialog_text">이런. 무언가가 잘못됐습니다!</string>
-  <string name="crash_dialog_comment_prompt">무엇을 했는지 알리고 나서 이메일을 통해 공유하세요. 문제를 해결하는데 도움이 됩니다!</string>
+  <string name="crash_dialog_comment_prompt">당신이 무엇을 했는지 알리고 나서 이메일을 통해 공유하세요. 문제를 해결하는데 도움이 됩니다!</string>
   <string name="crash_dialog_ok_toast">감사합니다!</string>
 </resources>

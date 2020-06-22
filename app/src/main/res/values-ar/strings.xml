@@ -637,6 +637,7 @@
   <string name="use_location_from_similar_image">هل قمت بتصوير هاتين الصورتين في نفس المكان؟ هل تريد استخدام دائرة العرض / خط الطول للصورة على اليمين؟</string>
   <string name="load_more">تحميل المزيد</string>
   <string name="nearby_no_results">لم يتم العثور على أي أماكن، جرب تغيير محددات بحثك.</string>
+  <string name="add_picture_to_wikipedia_article_title">أضف صورة إلى ويكيبيديا</string>
   <string name="add_picture_to_wikipedia_instructions_title">التعليمات</string>
   <string name="confirm">تأكيد</string>
   <string name="instructions_title">التعليمات</string>
