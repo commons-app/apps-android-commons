@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.category
 
-import android.text.TextUtils
 import fr.free.nrw.commons.upload.GpsCategoryModel
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.utils.StringSortingUtils
@@ -82,7 +81,7 @@ class CategoriesModel @Inject constructor(
         imageTitleList: List<String>,
         selectedDepictions: List<DepictedItem>
     ): Observable<List<String>> {
-        return if (TextUtils.isEmpty(term))
+        return if (term.isBlank())
             Observable.combineLatest(
                 categoriesFromDepiction(selectedDepictions),
                 gpsCategoryModel.categoriesFromLocation,

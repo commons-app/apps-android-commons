@@ -7,7 +7,6 @@ import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.RemoteException
 import com.nhaarman.mockitokotlin2.*
-import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.category.CategoryContentProvider.BASE_URI
 import fr.free.nrw.commons.category.CategoryContentProvider.uriForId
@@ -151,8 +150,10 @@ class CategoryDaoTest {
     @Test(expected = RuntimeException::class)
     fun testSaveTranslatesRemoteExceptions() {
         whenever(client.insert(isA(), isA())).thenThrow(RemoteException(""))
-        testObject.save(Category())
+        testObject.save(category())
     }
+
+    private fun category() = Category(null,null,null,0)
 
     @Test
     fun whenTheresNoDataFindReturnsNull_nullCursor() {

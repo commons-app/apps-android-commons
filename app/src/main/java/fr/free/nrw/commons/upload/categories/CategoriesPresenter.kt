@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload.categories
 
-import android.text.TextUtils
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.di.CommonsApplicationModule
@@ -84,7 +83,7 @@ class CategoriesPresenter @Inject constructor(
     private fun getImageTitleList(): List<String> {
         return repository.uploads
             .map { it.uploadMediaDetails[0].captionText }
-            .filterNot { TextUtils.isEmpty(it) }
+            .filterNot { it.isBlank() }
     }
 
     /**
