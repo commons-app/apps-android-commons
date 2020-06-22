@@ -259,7 +259,6 @@ public class DefaultZoomableController
     @Override
     public void onGestureEnd() {
         FLog.v(TAG, "onGestureEnd");
-        onTransformEnd();
     }
 
     /**
