@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.explore.depictions.child
 
-import com.nhaarman.mockitokotlin2.verifyZeroInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import depictedItem
 import fr.free.nrw.commons.explore.paging.LiveDataConverter
@@ -29,16 +28,8 @@ class PageableChildDepictionsDataSourceTest {
         val dataSource =
             PageableChildDepictionsDataSource(liveDataConverter, okHttpJsonApiClient)
         dataSource.onQueryUpdated("test")
-        whenever(okHttpJsonApiClient.getChildDepictions("test"))
+        whenever(okHttpJsonApiClient.getChildDepictions("test", 0, 1))
             .thenReturn(Observable.just(listOf(depictedItem())))
-        assertThat(dataSource.loadFunction(-1, 0), `is`(listOf(depictedItem())))
-    }
-
-    @Test
-    fun `loadFunction loads nothing at any other position`() {
-        val dataSource =
-            PageableChildDepictionsDataSource(liveDataConverter, okHttpJsonApiClient)
-        assertThat(dataSource.loadFunction(-1, 1), `is`(emptyList()))
-        verifyZeroInteractions(okHttpJsonApiClient)
+        assertThat(dataSource.loadFunction(1, 0), `is`(listOf(depictedItem())))
     }
 }
