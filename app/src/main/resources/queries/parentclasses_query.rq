@@ -1,6 +1,5 @@
-SELECT ?item ?itemLabel ?itemDescription WHERE {
+SELECT ?item WHERE {
     wd:${QID} wdt:P279 ?item.
-    SERVICE wikibase:label { bd:serviceParam wikibase:language ${LANG}. }
 }
 LIMIT   ${LIMIT}
 OFFSET  ${OFFSET}
