@@ -34,27 +34,4 @@ class WikidataClientTest {
         `when`(wikidataInterface!!.getCsrfToken())
             .thenReturn(Observable.just(mwQueryResponse))
     }
-
-    @Test
-    fun createClaim() {
-        `when`(
-            wikidataInterface!!.postCreateClaim(
-                any(),
-                any(),
-                any(),
-                any(),
-                any(),
-                any()
-            )
-        )
-            .thenReturn(Observable.just(mock()))
-        wikidataClient!!.createImageClaim(mock(), "test.jpg")
-    }
-
-    @Test
-    fun addEditTag() {
-        `when`(wikidataInterface!!.addEditTag(anyString(), anyString(), anyString(), anyString()))
-            .thenReturn(Observable.just(mock(AddEditTagResponse::class.java)))
-        wikidataClient!!.addEditTag(1L, "test", "test")
-    }
 }

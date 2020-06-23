@@ -9,8 +9,5 @@ import com.google.gson.annotations.SerializedName
     "language": "en"
   }
 }*/
-data class WikiBaseMonolingualTextValue(
-    val value: Value
-)
 
-data class Value(val text: String, val language: String)
+data class WikiBaseMonolingualTextValue(val text: String, val language: String)

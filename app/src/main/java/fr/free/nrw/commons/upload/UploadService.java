@@ -21,24 +21,16 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.di.CommonsDaggerService;
 import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
-import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
-import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.processors.PublishProcessor;
 import io.reactivex.schedulers.Schedulers;
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.inject.Inject;
@@ -314,7 +306,7 @@ public class UploadService extends CommonsDaggerService {
     WikidataPlace wikidataPlace = contribution.getWikidataPlace();
     Timber.d("Wikidata place %s", wikidataPlace.toString());
     if (wikidataPlace != null && wikidataPlace.getImageValue() == null) {
-      wikidataEditService.createImageClaim(wikidataPlace, uploadResult.getFilename());
+      wikidataEditService.createClaim(wikidataPlace, uploadResult.getFilename(), contribution.getCaptions());
     }
     saveCompletedContribution(contribution, uploadResult);
   }

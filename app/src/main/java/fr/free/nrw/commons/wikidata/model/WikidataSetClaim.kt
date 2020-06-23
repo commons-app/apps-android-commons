@@ -1,34 +1,29 @@
 package fr.free.nrw.commons.wikidata.model
 
 import com.google.gson.annotations.SerializedName
-import org.wikipedia.wikidata.*
+import fr.free.nrw.commons.wikidata.WikidataProperties
+import org.wikipedia.wikidata.Snak_partial
 
 data class WikidataSetClaim(
     @SerializedName("mainsnak") val mainSnak: Snak_partial,
     val id: String,
-    val references: List<Reference>,
+    val qualifiers: Map<String, List<Snak_partial>> = mapOf(),
     val type: String = "statement",
-    val rank: String = "normal"
+    val rank: String = "normal",
+    @SerializedName("qualifiers-order") val qualifiersOrder: List<String>
 ) {
-    constructor(mainSnak: Snak_partial,
-                id: String,
-                references: List<Reference>): this(mainSnak, id, references, "statement", "normal")
-}
-
-data class Reference(
-    val snaks: Map<String, Snak_partial> = mapOf(),
-    @SerializedName("snaks-order") val snaksOrder: List<String>
-) {
-    companion object {
-        @JvmStatic
-        fun from(propertyName: String, snakPartial: Snak_partial) =
-            listOf(
-                Reference(
-                    mapOf(Pair(propertyName, snakPartial)),
-                    listOf(propertyName)
-                )
-            )
-    }
+    constructor(
+        mainSnak: Snak_partial,
+        id: String,
+        p2096: List<Snak_partial>
+    ) : this(
+        mainSnak,
+        id,
+        mapOf(WikidataProperties.MEDIA_LEGENDS.propertyName to p2096),
+        "statement",
+        "normal",
+        listOf(WikidataProperties.MEDIA_LEGENDS.propertyName)
+    )
 }
 
 

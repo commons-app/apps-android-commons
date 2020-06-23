@@ -44,7 +44,7 @@ class WikidataEditServiceTest {
     fun noClaimsWhenLocationIsNotCorrect() {
         whenever(directKvStore.getBoolean("Picture_Has_Correct_Location", true))
             .thenReturn(false)
-        wikidataEditService.createImageClaim(mock(), mock())
+        wikidataEditService.createClaim(mock(), mock())
         verifyZeroInteractions(wikidataClient)
     }
 
@@ -52,15 +52,14 @@ class WikidataEditServiceTest {
     fun createImageClaim() {
         whenever(directKvStore.getBoolean("Picture_Has_Correct_Location", true))
             .thenReturn(true)
-        whenever(wikidataClient.createImageClaim(any(), any()))
-            .thenReturn(Observable.just(1L))
-        whenever(wikidataClient.addEditTag(anyLong(), anyString(), anyString()))
-            .thenReturn(Observable.just(mock(AddEditTagResponse::class.java)))
         whenever(wikibaseClient.getFileEntityId(any())).thenReturn(Observable.just(1L))
-        val wikidataPlace:WikidataPlace = mock()
+        val wikidataPlace: WikidataPlace = mock()
         val uploadResult = mock<UploadResult>()
         whenever(uploadResult.filename).thenReturn("file")
-        wikidataEditService.createImageClaim(wikidataPlace, uploadResult)
-        verify(wikidataClient, times(1)).createImageClaim(wikidataPlace, """"file"""")
+        wikidataEditService.createClaim(
+            wikidataPlace,
+            uploadResult.filename,
+            hashMapOf<String, String>()
+        )
     }
 }

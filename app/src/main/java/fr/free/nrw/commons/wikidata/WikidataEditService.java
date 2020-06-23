@@ -14,13 +14,14 @@ import fr.free.nrw.commons.upload.WikidataItem;
 import fr.free.nrw.commons.upload.WikidataPlace;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import fr.free.nrw.commons.wikidata.model.Reference;
 import fr.free.nrw.commons.wikidata.model.WikidataSetClaim;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 import javax.inject.Inject;
@@ -31,7 +32,6 @@ import org.wikipedia.wikidata.DataValue;
 import org.wikipedia.wikidata.DataValue.ValueString;
 import org.wikipedia.wikidata.EditClaim;
 import org.wikipedia.wikidata.Snak_partial;
-import org.wikipedia.wikidata.Value;
 import org.wikipedia.wikidata.WikiBaseMonolingualTextValue;
 import timber.log.Timber;
 
@@ -43,7 +43,6 @@ import timber.log.Timber;
 public class WikidataEditService {
 
   public static final String COMMONS_APP_TAG = "wikimedia-commons-app";
-  private static final String COMMONS_APP_EDIT_REASON = "Add tag for edits made using Android Commons app";
 
   private final Context context;
   private final WikidataEditListener wikidataEditListener;
@@ -136,26 +135,30 @@ public class WikidataEditService {
     }
   }
 
-  public void createImageClaim(@Nullable final WikidataPlace wikidataPlace, final String fileName) {
+  public void createClaim(@Nullable final WikidataPlace wikidataPlace, final String fileName, final
+  HashMap<String, String> captions) {
     if (!(directKvStore.getBoolean("Picture_Has_Correct_Location", true))) {
       Timber
           .d("Image location and nearby place location mismatched, so Wikidata item won't be edited");
       return;
     }
-    editWikidataImageProperty(wikidataPlace, fileName);
+    addImageAndMediaLegends(wikidataPlace, fileName, captions);
   }
 
-  public void addImageAndMediaLegends(final WikidataItem wikidataItem, final String fileName) {
+  public void addImageAndMediaLegends(final WikidataItem wikidataItem, final String fileName,
+      HashMap<String, String> captions) {
     Snak_partial p18 = new Snak_partial("value", WikidataProperties.IMAGE.getPropertyName(),
-        new ValueString(fileName), "string");
+        new ValueString(fileName.replace("File:", "")));
 
-    Snak_partial p2096 = new Snak_partial("value",
-        WikidataProperties.MEDIA_LEGENDS.getPropertyName(), new DataValue.MonoLingualText_partial(
-        new WikiBaseMonolingualTextValue(new Value("Test", "en"))), "monolingualtext");
+    List<Snak_partial> snaks = new ArrayList<>();
+    for (String key : captions.keySet()) {
+      snaks.add(new Snak_partial("value",
+          WikidataProperties.MEDIA_LEGENDS.getPropertyName(), new DataValue.MonoLingualText_partial(
+          new WikiBaseMonolingualTextValue(captions.get(key), key))));
+    }
 
     String id = wikidataItem.getId() + "$" + UUID.randomUUID().toString();
-    WikidataSetClaim claim = new WikidataSetClaim(p18, id,
-        Reference.from(WikidataProperties.MEDIA_LEGENDS.getPropertyName(), p2096));
+    WikidataSetClaim claim = new WikidataSetClaim(p18, id, snaks);
 
     Timber.d("Claim object is %s", gson.toJson(claim));
     wikidataClient.setClaim(claim, COMMONS_APP_TAG).subscribeOn(Schedulers.io())
@@ -164,25 +167,8 @@ public class WikidataEditService {
             throwable -> {
               Timber.e(throwable, "Error occurred while making claim");
               ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
-            });;
-  }
-
-  @SuppressLint("CheckResult")
-  private void editWikidataImageProperty(final WikidataItem wikidataItem, final String fileName) {
-    wikidataClient.createImageClaim(wikidataItem, String.format("\"%s\"", fileName))
-        .flatMap(revisionId -> {
-          if (revisionId != -1) {
-            return wikidataClient.addEditTag(revisionId, COMMONS_APP_TAG, COMMONS_APP_EDIT_REASON);
-          }
-          throw new RuntimeException("Unable to edit wikidata item");
-        })
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(revisionId -> handleImageClaimResult(wikidataItem, String.valueOf(revisionId)),
-            throwable -> {
-              Timber.e(throwable, "Error occurred while making claim");
-              ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
             });
+    ;
   }
 
   private void handleImageClaimResult(final WikidataItem wikidataItem, final String revisionId) {

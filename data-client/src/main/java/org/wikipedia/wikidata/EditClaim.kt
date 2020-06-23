@@ -20,8 +20,7 @@ data class EditClaim(val claims: List<Statement_partial>) {
                                     entityId,
                                     entityId.removePrefix("Q").toLong()
                                 )
-                            ),
-                            "wikibase-entityid"
+                            )
                         ),
                         "statement",
                         "preferred"

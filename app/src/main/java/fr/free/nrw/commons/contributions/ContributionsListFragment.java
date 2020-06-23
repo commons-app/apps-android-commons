@@ -255,20 +255,15 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
    */
   @Override
   public void addImageToWikipedia(Contribution contribution) {
-    addMediaLegend(contribution);
-//    DialogUtil.showAlertDialog(getActivity(),
-//        getString(R.string.add_picture_to_wikipedia_article_title),
-//        String.format(getString(R.string.add_picture_to_wikipedia_article_desc),
-//            Locale.getDefault().getDisplayLanguage()),
-//        () -> {
-//          showAddImageToWikipediaInstructions(contribution);
-//        }, () -> {
-//          // do nothing
-//        });
-  }
-
-  public void addMediaLegend(Contribution contribution) {
-    wikidataEditService.addImageAndMediaLegends(contribution.getWikidataPlace(), "File:Test.jpg");
+    DialogUtil.showAlertDialog(getActivity(),
+        getString(R.string.add_picture_to_wikipedia_article_title),
+        String.format(getString(R.string.add_picture_to_wikipedia_article_desc),
+            Locale.getDefault().getDisplayLanguage()),
+        () -> {
+          showAddImageToWikipediaInstructions(contribution);
+        }, () -> {
+          // do nothing
+        });
   }
 
   /**
