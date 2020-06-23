@@ -67,9 +67,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   @Inject
   MediaClient mediaClient;
 
-  @Inject
-  WikidataEditService wikidataEditService;
-
   @Named(NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE)
   @Inject
   WikiSite languageWikipediaSite;

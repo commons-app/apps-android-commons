@@ -1,7 +1,10 @@
 package fr.free.nrw.commons.wikidata
 
-import com.nhaarman.mockitokotlin2.mock
-import fr.free.nrw.commons.wikidata.model.AddEditTagResponse
+import com.google.gson.Gson
+import com.nhaarman.mockitokotlin2.whenever
+import fr.free.nrw.commons.wikidata.model.PageInfo
+import fr.free.nrw.commons.wikidata.model.WbCreateClaimResponse
+import fr.free.nrw.commons.wikidata.model.WikidataSetClaim
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
@@ -20,6 +23,9 @@ class WikidataClientTest {
     @Mock
     internal var wikidataInterface: WikidataInterface? = null
 
+    @Mock
+    internal var gson: Gson? = null
+
     @InjectMocks
     var wikidataClient: WikidataClient? = null
 
@@ -33,5 +39,20 @@ class WikidataClientTest {
         `when`(mwQueryResponse.query()).thenReturn(mwQueryResult)
         `when`(wikidataInterface!!.getCsrfToken())
             .thenReturn(Observable.just(mwQueryResponse))
+    }
+
+    @Test
+    fun addEditTag() {
+        val response = mock(WbCreateClaimResponse::class.java)
+        val pageInfo = mock(PageInfo::class.java)
+        whenever(pageInfo.lastrevid).thenReturn(1)
+        whenever(response.pageinfo).thenReturn(pageInfo)
+        `when`(wikidataInterface!!.postSetClaim(anyString(), anyString(), anyString()))
+            .thenReturn(Observable.just(response))
+        whenever(gson!!.toJson(any(WikidataSetClaim::class.java))).thenReturn("claim")
+        val request = mock(WikidataSetClaim::class.java)
+
+        val claim = wikidataClient!!.setClaim(request, "test").test()
+            .assertValue(1L)
     }
 }
