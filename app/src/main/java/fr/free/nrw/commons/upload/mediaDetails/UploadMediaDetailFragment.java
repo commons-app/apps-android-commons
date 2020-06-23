@@ -4,15 +4,12 @@ import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
-import android.graphics.BitmapFactory;
-import android.graphics.Rect;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,6 +26,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.drawable.ProgressBarDrawable;
+import com.facebook.drawee.drawable.ScalingUtils;
+import com.facebook.drawee.drawable.ScalingUtils.ScaleType;
+import com.facebook.drawee.generic.GenericDraweeHierarchy;
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
+import com.facebook.drawee.interfaces.DraweeController;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.R;
@@ -36,6 +40,11 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.media.zoomControllers.zoomable.DoubleTapGestureListener;
+import fr.free.nrw.commons.media.zoomControllers.zoomable.GestureListenerWrapper;
+import fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableController;
+import fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableController.Listener;
+import fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableDraweeView;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.Description;
@@ -49,13 +58,8 @@ import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -81,7 +85,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @BindView(R.id.rv_descriptions)
     RecyclerView rvDescriptions;
     @BindView(R.id.backgroundImage)
-    PhotoView photoViewBackgroundImage;
+    ZoomableDraweeView photoViewBackgroundImage;
     @BindView(R.id.btn_next)
     AppCompatButton btnNext;
     @BindView(R.id.btn_previous)
@@ -181,6 +185,38 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         addEtTitleTouchListener();
     }
 
+    private void showImageWithLocalUri(Uri imageUri) {
+        if (imageUri != null) {
+            GenericDraweeHierarchy hierarchy = GenericDraweeHierarchyBuilder.newInstance(getResources())
+                .setActualImageScaleType(ScaleType.FIT_XY)
+                .build();
+            photoViewBackgroundImage.setHierarchy(hierarchy);
+            photoViewBackgroundImage
+                .setTapListener(new DoubleTapGestureListener(photoViewBackgroundImage));
+            DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setUri(Uri.fromFile(new File(imageUri.getPath())))
+                .build();
+            photoViewBackgroundImage.getZoomableController().setListener(new ZoomableController.Listener(){
+
+                @Override
+                public void onTransformBegin(Matrix transform) {
+                    //Ignore
+                }
+
+                @Override
+                public void onTransformChanged(Matrix transform) {
+                    //Ignore
+                }
+
+                @Override
+                public void onTransformEnd(Matrix transform) {
+                    expandCollapseLlMediaDetail(false);
+                }
+            });
+            photoViewBackgroundImage.setController(controller);
+        }
+    }
+
     /**
      * Handles the drawable click listener for Edit Text
      */
@@ -208,17 +244,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     private float convertDpToPixel(float dp, Context context) {
         return dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
-    }
-
-    /**
-     * Attaches the scale change listener to the image view
-     */
-    private void attachImageViewScaleChangeListener() {
-        photoViewBackgroundImage.setOnScaleChangeListener(
-                (scaleFactor, focusX, focusY) -> {
-                    //Whenever the uses plays with the image, lets collapse the media detail container
-                    expandCollapseLlMediaDetail(false);
-                });
     }
 
     /**
@@ -296,15 +321,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
 
         descriptions = uploadItem.getDescriptions();
-        compositeDisposable
-            .add(downSampleImage(uploadItem.getContentUri())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(bitmap -> {
-                    if (null != bitmap) {
-                        photoViewBackgroundImage.setImageBitmap(bitmap);
-                    }
-                }, Timber::d));
+        showImageWithLocalUri(uploadItem.getMediaUri());
         setDescriptionsInAdapter(descriptions);
     }
 
@@ -452,63 +469,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             descriptionsAdapter.addDescription(new Description());
         } else {
             descriptionsAdapter.setItems(descriptions);
-        }
-    }
-
-    /**
-     * Downsample bitmap to handle OOM/Bitmap too large exception
-     *
-     * @param uri
-     * @return
-     */
-    private Single<Bitmap> downSampleImage(Uri uri) {
-        Bitmap existing = null;
-        try {
-            existing = MediaStore.Images.Media
-                .getBitmap(this.getContext().getContentResolver(), uri);
-        } catch (IOException | NullPointerException e) {
-            Timber.e(e);
-        }
-
-        if (null == existing) {
-            return Single.error(new Throwable("could not downsample"));
-        }
-
-        final int requiredHeight = getResources().getDisplayMetrics().heightPixels;
-        final int requiredWidth = getResources().getDisplayMetrics().widthPixels;
-
-        // Raw height and width of image
-        final int height = existing.getHeight();
-        final int width = existing.getWidth();
-        int inSampleSize = 1;
-
-        if (height > requiredHeight || width > requiredWidth) {
-
-            final int halfHeight = height / 2;
-            final int halfWidth = width / 2;
-
-            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
-            // height and width larger than the requested height and width.
-            while ((halfHeight / inSampleSize) >= requiredHeight
-                && (halfWidth / inSampleSize) >= requiredWidth) {
-                inSampleSize *= 2;
-            }
-        }
-
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        existing.compress(CompressFormat.PNG, 0, byteArrayOutputStream);
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
-            byteArrayOutputStream.toByteArray());
-        // First decode with inJustDecodeBounds=true to check dimensions
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        Rect rect = new Rect(0, 0, 0, 0);
-        options.inJustDecodeBounds = false;
-        options.inSampleSize = inSampleSize;
-        Bitmap modified = BitmapFactory.decodeStream(byteArrayInputStream, rect, options);
-        if (modified != null) {
-            return Single.just(modified);
-        } else {
-            return Single.error(new Throwable("could not downsample"));
         }
     }
 
