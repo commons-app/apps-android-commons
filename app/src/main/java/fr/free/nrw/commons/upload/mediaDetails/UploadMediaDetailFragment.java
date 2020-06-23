@@ -180,8 +180,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             btnCopyPreviousTitleDesc.setVisibility(View.VISIBLE);
         }
 
-        attachImageViewScaleChangeListener();
-
         addEtTitleTouchListener();
     }
 
@@ -211,6 +209,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 @Override
                 public void onTransformEnd(Matrix transform) {
                     expandCollapseLlMediaDetail(false);
+                    photoViewBackgroundImage.invalidate();
                 }
             });
             photoViewBackgroundImage.setController(controller);
