@@ -14,15 +14,17 @@ import fr.free.nrw.commons.upload.WikidataItem;
 import fr.free.nrw.commons.upload.WikidataPlace;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import fr.free.nrw.commons.wikidata.model.WikidataSetClaim;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.UUID;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -32,6 +34,7 @@ import org.wikipedia.wikidata.DataValue;
 import org.wikipedia.wikidata.DataValue.ValueString;
 import org.wikipedia.wikidata.EditClaim;
 import org.wikipedia.wikidata.Snak_partial;
+import org.wikipedia.wikidata.Statement_partial;
 import org.wikipedia.wikidata.WikiBaseMonolingualTextValue;
 import timber.log.Timber;
 
@@ -146,21 +149,22 @@ public class WikidataEditService {
   }
 
   public void addImageAndMediaLegends(final WikidataItem wikidataItem, final String fileName,
-      HashMap<String, String> captions) {
-    Snak_partial p18 = new Snak_partial("value", WikidataProperties.IMAGE.getPropertyName(),
+      final HashMap<String, String> captions) {
+    final Snak_partial p18 = new Snak_partial("value", WikidataProperties.IMAGE.getPropertyName(),
         new ValueString(fileName.replace("File:", "")));
 
-    List<Snak_partial> snaks = new ArrayList<>();
-    for (String key : captions.keySet()) {
+    final List<Snak_partial> snaks = new ArrayList<>();
+    for (final Map.Entry<String, String> entry : captions.entrySet()) {
       snaks.add(new Snak_partial("value",
           WikidataProperties.MEDIA_LEGENDS.getPropertyName(), new DataValue.MonoLingualText_partial(
-          new WikiBaseMonolingualTextValue(captions.get(key), key))));
+          new WikiBaseMonolingualTextValue(entry.getValue(), entry.getKey()))));
     }
 
-    String id = wikidataItem.getId() + "$" + UUID.randomUUID().toString();
-    WikidataSetClaim claim = new WikidataSetClaim(p18, id, snaks);
+    final String id = wikidataItem.getId() + "$" + UUID.randomUUID().toString();
+    final Statement_partial claim = new Statement_partial(p18, "statement", "normal", id,
+        Collections.singletonMap(WikidataProperties.MEDIA_LEGENDS.getPropertyName(), snaks),
+        Arrays.asList(WikidataProperties.MEDIA_LEGENDS.getPropertyName()));
 
-    Timber.d("Claim object is %s", gson.toJson(claim));
     wikidataClient.setClaim(claim, COMMONS_APP_TAG).subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(revisionId -> handleImageClaimResult(wikidataItem, String.valueOf(revisionId)),

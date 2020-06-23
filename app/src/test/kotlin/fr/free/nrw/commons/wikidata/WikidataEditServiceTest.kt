@@ -8,8 +8,6 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.upload.WikidataPlace
-import fr.free.nrw.commons.wikidata.model.AddEditTagResponse
-import fr.free.nrw.commons.wikidata.model.WikidataSetClaim
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
@@ -17,7 +15,6 @@ import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 
 class WikidataEditServiceTest {

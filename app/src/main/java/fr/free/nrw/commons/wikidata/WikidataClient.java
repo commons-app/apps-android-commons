@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.wikidata;
 
 import com.google.gson.Gson;
-import fr.free.nrw.commons.wikidata.model.WikidataSetClaim;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
@@ -10,6 +9,7 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.wikidata.model.AddEditTagResponse;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
+import org.wikipedia.wikidata.Statement_partial;
 
 @Singleton
 public class WikidataClient {
@@ -29,7 +29,7 @@ public class WikidataClient {
    *
    * @return revisionID of the edit
    */
-  Observable<Long> setClaim(WikidataSetClaim claim, String tags) {
+  Observable<Long> setClaim(Statement_partial claim, String tags) {
     return getCsrfToken()
         .flatMap(csrfToken -> wikidataInterface.postSetClaim(gson.toJson(claim), tags, csrfToken))
         .map(mwPostResponse -> mwPostResponse.getPageinfo().getLastrevid());
