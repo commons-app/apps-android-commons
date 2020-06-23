@@ -47,6 +47,7 @@ public class ZoomableDraweeView extends DraweeView<GenericDraweeHierarchy>
 
     private boolean mIsDialtoneEnabled = false;
     private boolean mZoomingEnabled = true;
+    private TransformationListener transformationListener;
 
     private final ControllerListener mControllerListener =
             new BaseControllerListener<Object>() {
@@ -73,8 +74,17 @@ public class ZoomableDraweeView extends DraweeView<GenericDraweeHierarchy>
                 }
 
                 @Override
-                public void onTransformEnd(Matrix transform) {}
+                public void onTransformEnd(Matrix transform) {
+                    if (null != transformationListener) {
+                        transformationListener.onTransformationEnd();
+                    }
+                }
             };
+
+    public void setTransformationListener(
+        TransformationListener transformationListener) {
+        this.transformationListener = transformationListener;
+    }
 
     private final GestureListenerWrapper mTapListenerWrapper = new GestureListenerWrapper();
 
@@ -396,5 +406,12 @@ public class ZoomableDraweeView extends DraweeView<GenericDraweeHierarchy>
 
     protected ZoomableController createZoomableController() {
         return AnimatedZoomableController.newInstance();
+    }
+
+    /**
+     * Use this, If someone is willing to listen to scale change
+     */
+    public interface TransformationListener{
+        void onTransformationEnd();
     }
 }

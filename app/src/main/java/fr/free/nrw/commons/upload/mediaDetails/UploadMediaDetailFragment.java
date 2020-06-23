@@ -4,12 +4,10 @@ import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,13 +25,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.drawable.ProgressBarDrawable;
-import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.drawable.ScalingUtils.ScaleType;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.interfaces.DraweeController;
-import com.github.chrisbanes.photoview.PhotoView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -41,9 +36,6 @@ import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.media.zoomControllers.zoomable.DoubleTapGestureListener;
-import fr.free.nrw.commons.media.zoomControllers.zoomable.GestureListenerWrapper;
-import fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableController;
-import fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableController.Listener;
 import fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableDraweeView;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
@@ -194,24 +186,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setUri(Uri.fromFile(new File(imageUri.getPath())))
                 .build();
-            photoViewBackgroundImage.getZoomableController().setListener(new ZoomableController.Listener(){
-
-                @Override
-                public void onTransformBegin(Matrix transform) {
-                    //Ignore
-                }
-
-                @Override
-                public void onTransformChanged(Matrix transform) {
-                    //Ignore
-                }
-
-                @Override
-                public void onTransformEnd(Matrix transform) {
-                    expandCollapseLlMediaDetail(false);
-                    photoViewBackgroundImage.invalidate();
-                }
-            });
+            photoViewBackgroundImage.setTransformationListener(
+                () -> expandCollapseLlMediaDetail(false));
             photoViewBackgroundImage.setController(controller);
         }
     }
