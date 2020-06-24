@@ -4,6 +4,7 @@ import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -23,13 +24,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.github.chrisbanes.photoview.PhotoView;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.drawable.ScalingUtils.ScaleType;
+import com.facebook.drawee.generic.GenericDraweeHierarchy;
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
+import com.facebook.drawee.interfaces.DraweeController;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.media.zoomControllers.zoomable.DoubleTapGestureListener;
+import fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableDraweeView;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.Description;
@@ -44,6 +51,7 @@ import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.disposables.Disposable;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -69,7 +77,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @BindView(R.id.rv_descriptions)
     RecyclerView rvDescriptions;
     @BindView(R.id.backgroundImage)
-    PhotoView photoViewBackgroundImage;
+    ZoomableDraweeView photoViewBackgroundImage;
     @BindView(R.id.btn_next)
     AppCompatButton btnNext;
     @BindView(R.id.btn_previous)
@@ -164,9 +172,24 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             btnCopyPreviousTitleDesc.setVisibility(View.VISIBLE);
         }
 
-        attachImageViewScaleChangeListener();
-
         addEtTitleTouchListener();
+    }
+
+    private void showImageWithLocalUri(Uri imageUri) {
+        if (imageUri != null) {
+            GenericDraweeHierarchy hierarchy = GenericDraweeHierarchyBuilder.newInstance(getResources())
+                .setActualImageScaleType(ScaleType.FIT_XY)
+                .build();
+            photoViewBackgroundImage.setHierarchy(hierarchy);
+            photoViewBackgroundImage
+                .setTapListener(new DoubleTapGestureListener(photoViewBackgroundImage));
+            DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setUri(Uri.fromFile(new File(imageUri.getPath())))
+                .build();
+            photoViewBackgroundImage.setTransformationListener(
+                () -> expandCollapseMediaDetail(false));
+            photoViewBackgroundImage.setController(controller);
+        }
     }
 
     /**
@@ -198,17 +221,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     private float convertDpToPixel(float dp, Context context) {
         return dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
-    }
-
-    /**
-     * Attaches the scale change listener to the image view
-     */
-    private void attachImageViewScaleChangeListener() {
-        photoViewBackgroundImage.setOnScaleChangeListener(
-                (scaleFactor, focusX, focusY) -> {
-                    //Whenever the uses plays with the image, lets collapse the media detail container
-                    expandCollapseLlMediaDetail(false);
-                });
     }
 
     /**
@@ -286,7 +298,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
 
         descriptions = uploadItem.getDescriptions();
-        photoViewBackgroundImage.setImageURI(uploadItem.getMediaUri());
+        showImageWithLocalUri(uploadItem.getMediaUri());
         setDescriptionsInAdapter(descriptions);
     }
 
@@ -395,14 +407,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.rl_container_title)
     public void onRlContainerTitleClicked() {
-        expandCollapseLlMediaDetail(!isExpanded);
+        expandCollapseMediaDetail(!isExpanded);
     }
 
     /**
      * show hide media detail based on
      * @param shouldExpand
      */
-    private void expandCollapseLlMediaDetail(boolean shouldExpand){
+    private void expandCollapseMediaDetail(boolean shouldExpand){
+        if (isExpanded == shouldExpand) {
+            return;
+        }
         llContainerMediaDetail.setVisibility(shouldExpand ? View.VISIBLE : View.GONE);
         isExpanded = !isExpanded;
         ibExpandCollapse.setRotation(ibExpandCollapse.getRotation() + 180);

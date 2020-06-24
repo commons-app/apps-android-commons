@@ -6,11 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.github.chrisbanes.photoview.PhotoView
+    <fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableDraweeView
         android:id="@+id/backgroundImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:actualImageScaleType="fitXY" />
+        android:scaleType="fitXY"
+        />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
