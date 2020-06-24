@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Abijeet Patro
+* Diki Ananta
+* N219
 * NoiX180
 * Notanotheramy
+* Sumbukompor
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d barkas lagi kaunggah</item>
+    <item quantity="other">%1$d barkas lagi kaunggah</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Miwiti %1$d unggahan</item>
+    <item quantity="other">Miwiti %1$d unggahan</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d unggahan</item>
+    <item quantity="other">%1$d unggahan</item>
+  </plurals>
+  <string name="share_license_summary" fuzzy="true">Gambar iki bakal dilisènsèkaké nganggo %1$s</string>
   <string name="title_activity_explore">Dlajah</string>
   <string name="navigation_item_explore">Dlajah</string>
   <string name="preference_category_appearance">Cakrik</string>
@@ -15,14 +36,14 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Setèlan</string>
   <string name="intent_share_upload_label">Unggah menyang Commons</string>
-  <string name="username">Jeneng panganggo</string>
-  <string name="password">Tembung wadi</string>
+  <string name="username">Jeneng naraguna</string>
+  <string name="password">Tembung sandi</string>
   <string name="login_credential">Mlebu log akun Commons Beta panjenengan</string>
   <string name="login">Mlebu log</string>
-  <string name="forgot_password">Lali Tembung Wadi?</string>
+  <string name="forgot_password">Lali Tembung Sandi?</string>
   <string name="signup">Dhaftar</string>
   <string name="logging_in_title">Lagi mlebu log</string>
-  <string name="logging_in_message">Entènana sadhela…</string>
+  <string name="logging_in_message">Entènana sadhéla…</string>
   <string name="login_success">Kasil mlebu log!</string>
   <string name="login_failed">Wurung mlebu log!</string>
   <string name="upload_failed">Berkas ora tinemu. Jajal berkas liyané.</string>
@@ -35,10 +56,6 @@
   <string name="upload_progress_notification_title_finishing">Rampung ngunggah %1$s</string>
   <string name="upload_failed_notification_title">Wurung ngunggah %1$s</string>
   <string name="upload_failed_notification_subtitle">Tunyuk saperlu ndeleng</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d barkas lagi kaunggah</item>
-    <item quantity="other">%1$d barkas lagi kaunggah</item>
-  </plurals>
   <string name="title_activity_contributions">Unggahanku Sing Anyar</string>
   <string name="contribution_state_queued">Antrian</string>
   <string name="contribution_state_failed">Wurung</string>
@@ -51,12 +68,11 @@
   <string name="menu_share">Dum</string>
   <string name="menu_open_in_browser">Deleng ing Pangluru</string>
   <string name="share_title_hint">Sesirah (Kudu)</string>
-  <string name="add_title_toast">Wènèhi barkas iki sesirah</string>
   <string name="share_description_hint">Wedharan</string>
   <string name="login_failed_network">Ora bisa mlebu log - jaringané gagal</string>
-  <string name="login_failed_wrong_credentials">Ora bisa mlebu log - priksa jeneng panganggo lan tembung wadi panjenengan</string>
+  <string name="login_failed_wrong_credentials">Ora bisa mlebu log - priksa jeneng naraguna lan tembung sandi panjenengan</string>
   <string name="login_failed_throttled">Kakèhan upaya sing gagal. Jajalana manèh mengko.</string>
-  <string name="login_failed_blocked">Ngapunten, panganggo iki wis diblokir ing Commons</string>
+  <string name="login_failed_blocked">Ngapunten, naraguna iki wis diblokir ing Commons</string>
   <string name="login_failed_2fa_needed">Panjenengan kudu ngisi kodhe otèntifikasi rong faktoré panjenengan</string>
   <string name="login_failed_generic">Wurung mlebu log</string>
   <string name="share_upload_button">Unggah</string>
@@ -71,19 +87,6 @@
   <string name="gps_disabled">GPS dipatèni ing pirantiné panjenengan. Panjenengan arep ngurubaké?</string>
   <string name="enable_gps">Urubaké GPS</string>
   <string name="contributions_subtitle_zero">Durung ana unggahan</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Miwiti %1$d unggahan</item>
-    <item quantity="other">Miwiti %1$d unggahan</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d unggahan</item>
-    <item quantity="other">%1$d unggahan</item>
-  </plurals>
   <string name="categories_not_found">Ora ana kategori kang cocog karo %1$s</string>
   <string name="categories_skip_explanation">Wuwuh kategori supaya gambar-gambaré panjenengan gampang tinemu ing Wikimedia Commons.\nWiwit nulis saperlu muwuhi kategori.</string>
   <string name="categories_activity_title">Kategori</string>
@@ -103,7 +106,6 @@
   <string name="no_uploads_yet">Panjenengan durung tau ngunggah foto.</string>
   <string name="menu_retry_upload">Jajal manèh</string>
   <string name="menu_cancel_upload">Wurung</string>
-  <string name="share_license_summary" fuzzy="true">Gambar iki bakal dilisènsèkaké nganggo %1$s</string>
   <string name="menu_download">Undhuh</string>
   <string name="preference_license" fuzzy="true">Lisènsi</string>
   <string name="use_previous" fuzzy="true">Anggo sesirah/wedharan sadurungé</string>
@@ -194,7 +196,7 @@
   <string name="navigation_item_featured_images">Pinilih</string>
   <string name="no_description_found">dhèksripsi ora tinemu</string>
   <string name="nearby_info_menu_commons_article">Kaca barkas Commons</string>
-  <string name="nearby_info_menu_wikidata_article">Wiji Wikidata</string>
+  <string name="nearby_info_menu_wikidata_article">Wiji Wikidhata</string>
   <string name="nearby_info_menu_wikipedia_article">Artikel Wikipédia</string>
   <string name="give_permission">Awèh idin</string>
   <string name="use_external_storage">Anggo panyimpenan njaba</string>

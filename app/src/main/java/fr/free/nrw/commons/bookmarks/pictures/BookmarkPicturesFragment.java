@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.bookmarks.pictures;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,15 +14,8 @@ import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
@@ -32,14 +28,11 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.List;
+import javax.inject.Inject;
 import timber.log.Timber;
 
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-
 public class BookmarkPicturesFragment extends DaggerFragment {
-
-    private static final int TIMEOUT_SECONDS = 15;
 
     private GridViewAdapter gridAdapter;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -120,7 +113,6 @@ public class BookmarkPicturesFragment extends DaggerFragment {
         compositeDisposable.add(controller.loadBookmarkedPictures()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(this::handleSuccess, this::handleError));
     }
 

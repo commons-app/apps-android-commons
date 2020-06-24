@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Abijeet Patro
+* Bjarncraft
 * Envlh
 * FF11
 * Ferdinand0101
@@ -11,10 +12,41 @@
 * Pyscowicz
 * Sujan
 * Sushi
+* Tacsipacsi
 * Tobi 406
+* Ubahnverleih
 * WikiBayer
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Eine Datei wird hochgeladen</item>
+    <item quantity="other">%1$d Dateien werden hochgeladen</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">Eine hochgeladene Datei</item>
+    <item quantity="other">%1$d hochgeladene Dateien</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Starte einen Upload</item>
+    <item quantity="other">Starte %1$d Uploads</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">Eine hochgeladene Datei</item>
+    <item quantity="other">%1$d hochgeladene Dateien</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Dieses Bild wird unter %1$s lizenziert</item>
+    <item quantity="other">Diese Bilder werden unter %1$s lizenziert</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">Eine hochgeladene Datei</item>
+    <item quantity="other">%1$d hochgeladene Dateien</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Der geteilte Inhalt wird abgerufen. Die Verarbeitung des Bildes kann einige Zeit in Anspruch nehmen, abhängig von der Größe des Bildes und deines Gerätes.</item>
+    <item quantity="other">Der geteilte Inhalt wird abgerufen. Die Verarbeitung der Bilder kann einige Zeit in Anspruch nehmen, abhängig von der Größe der Bilder und deines Gerätes.</item>
+  </plurals>
   <string name="title_activity_explore">Entdecken</string>
   <string name="navigation_item_explore">Entdecken</string>
   <string name="preference_category_appearance">Erscheinung</string>
@@ -46,10 +78,6 @@
   <string name="upload_progress_notification_title_finishing">Hochladen von „%1$s“ abschließen</string>
   <string name="upload_failed_notification_title">Hochladen von „%1$s“ fehlgeschlagen</string>
   <string name="upload_failed_notification_subtitle">Tippen zum Betrachten</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Eine Datei wird hochgeladen</item>
-    <item quantity="other">%1$d Dateien werden hochgeladen</item>
-  </plurals>
   <string name="title_activity_contributions">Meine kürzlich hochgeladenen Dateien</string>
   <string name="contribution_state_queued">In der Warteschlange</string>
   <string name="contribution_state_failed">Fehlgeschlagen</string>
@@ -61,8 +89,7 @@
   <string name="provider_contributions">Meine hochgeladenen Dateien</string>
   <string name="menu_share">Teilen</string>
   <string name="menu_open_in_browser">Im Browser anzeigen</string>
-  <string name="share_title_hint">Titel (erforderlich)</string>
-  <string name="add_title_toast">Bitte gib einen Titel für diese Datei an</string>
+  <string name="share_title_hint">Untertitel (erforderlich)</string>
   <string name="share_description_hint">Beschreibung</string>
   <string name="login_failed_network">Anmeldung fehlgeschlagen – Netzwerkfehler</string>
   <string name="login_failed_wrong_credentials">Anmeldung fehlgeschlagen. Bitte Benutzernamen und Passwort überprüfen.</string>
@@ -82,20 +109,8 @@
   <string name="gps_disabled">GPS ist auf deinem Gerät deaktiviert. Möchtest du es aktivieren?</string>
   <string name="enable_gps">GPS aktivieren</string>
   <string name="contributions_subtitle_zero">Noch keine hochgeladenen Dateien</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">Eine hochgeladene Datei</item>
-    <item quantity="other">%1$d hochgeladene Dateien</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Starte einen Upload</item>
-    <item quantity="other">Starte %1$d Uploads</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">Eine hochgeladene Datei</item>
-    <item quantity="other">%1$d hochgeladene Dateien</item>
-  </plurals>
   <string name="categories_not_found">Die Kategorie „%1$s“ wurde nicht gefunden</string>
+  <string name="depictions_not_found">Keine Wikidata Gegenstände gefunden für %1$s</string>
   <string name="categories_skip_explanation">Füge Kategorien hinzu, um deine Bilder auf Wikimedia Commons auffindbarer zu machen.\nBeginne mit der Eingabe, um Kategorien hinzuzufügen.</string>
   <string name="categories_activity_title">Kategorien</string>
   <string name="title_activity_settings">Einstellungen</string>
@@ -116,10 +131,6 @@
   <string name="no_uploads_yet">Du hast noch keine Fotos hochgeladen.</string>
   <string name="menu_retry_upload">Erneut versuchen</string>
   <string name="menu_cancel_upload">Abbrechen</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Dieses Bild wird unter %1$s lizenziert</item>
-    <item quantity="other">Diese Bilder werden unter %1$s lizenziert</item>
-  </plurals>
   <string name="media_upload_policy">Durch das Hochladen dieses Bildes erkläre ich, dass dies mein eigenes Werk ist, das kein urheberrechtlich geschütztes Material oder Selfies enthält und das auch sonst die &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/de\"&gt;Wikimedia-Commons-Richtlinien&lt;/a&gt; einhält.</string>
   <string name="menu_download">Herunterladen</string>
   <string name="preference_license">Standardlizenz</string>
@@ -171,6 +182,7 @@
   <string name="detail_panel_cats_label">Kategorien</string>
   <string name="detail_panel_cats_loading">Lade …</string>
   <string name="detail_panel_cats_none">Keine ausgewählt</string>
+  <string name="detail_caption_empty">Keine Beschriftung</string>
   <string name="detail_description_empty">Keine Beschreibung</string>
   <string name="detail_discussion_empty">Keine Diskussion</string>
   <string name="detail_license_empty">Unbekannte Lizenz</string>
@@ -186,6 +198,7 @@
   <string name="upload_image_duplicate">Diese Datei ist bereits auf Commons vorhanden. Bist du sicher, dass du fortfahren möchtest?</string>
   <string name="yes">Ja</string>
   <string name="no">Nein</string>
+  <string name="media_detail_caption">Beschriftung</string>
   <string name="media_detail_title">Titel</string>
   <string name="media_detail_description">Beschreibung</string>
   <string name="media_detail_discussion">Diskussion</string>
@@ -403,10 +416,6 @@
   <string name="submit">Einreichen</string>
   <string name="upload_title_duplicate">Eine Datei mit dem Namen %1$s ist bereits vorhanden. Bist du sicher, dass du fortfahren möchtest?</string>
   <string name="map_application_missing">Auf deinem Gerät konnte keine kompatible Karten-App gefunden werden. Bitte installiere eine Karten-App, um diese Funktion nutzen zu können.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">Eine hochgeladene Datei</item>
-    <item quantity="other">%1$d hochgeladene Dateien</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Lesezeichen</string>
   <string name="title_activity_bookmarks">Lesezeichen</string>
   <string name="title_page_bookmarks_pictures">Bilder</string>
@@ -431,9 +440,7 @@
   <string name="desc_language_Asia">Asien</string>
   <string name="desc_language_Pacific">Pazifik</string>
   <string name="no_categories_selected">Keine Kategorien ausgewählt</string>
-  <string name="no_categories_selected_warning_desc">Bilder ohne Kategorien sind selten nutzbar. Bist du sicher, dass du ohne die Auswahl von Kategorien hochladen möchtest?</string>
-  <string name="yes_submit">Ja, einreichen</string>
-  <string name="no_go_back">Nein, zurück gehen</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">Bilder ohne Kategorien sind selten nutzbar. Bist du sicher, dass du ohne die Auswahl von Kategorien hochladen möchtest?</string>
   <string name="upload_flow_all_images_in_set">(für alle Bilder im Satz)</string>
   <string name="search_this_area">Diesen Bereich durchsuchen</string>
   <string name="nearby_card_permission_title">Berechtigungsanfrage</string>
@@ -493,10 +500,6 @@
   <string name="review_thanks_no_button_text">Nächstes Bild</string>
   <string name="skip_image_explanation">Das Anklicken dieser Schaltfläche gibt dir ein anderes kürzlich hochgeladenes Bild von Wikimedia Commons</string>
   <string name="review_image_explanation">Du kannst Bilder überprüfen und die Qualität von Wikimedia Commons verbessern.\nDie vier Parameter der Überprüfung sind: \n- Ist dieses Bild im Geltungsbereich? \n- Folgt dieses Bild den Regeln des Urheberrechts? \n- Ist dieses Bild korrekt kategorisiert? \n- Falls alles gut geht, kannst du auch dem Beitrager danken.</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">Der geteilte Inhalt wird abgerufen. Die Verarbeitung des Bildes kann einige Zeit in Anspruch nehmen, abhängig von der Größe des Bildes und deines Gerätes.</item>
-    <item quantity="other">Der geteilte Inhalt wird abgerufen. Die Verarbeitung der Bilder kann einige Zeit in Anspruch nehmen, abhängig von der Größe der Bilder und deines Gerätes.</item>
-  </plurals>
   <string name="no_image">Keine Bilder verwendet</string>
   <string name="no_image_reverted">Keine Bilder zurückgesetzt</string>
   <string name="no_image_uploaded">Keine Bilder hochgeladen</string>
@@ -511,15 +514,18 @@
   <string name="images_featured_explanation">Vorgestellte Bilder sind Bilder von professionellen Fotografen und Zeichnern, die die Gemeinschaft von Wikimedia Commons als diejenigen mit der höchsten Qualität auf der Website ausgewählt hat.</string>
   <string name="images_via_nearby_explanation">Über Orte in der Nähe hochgeladene Bilder sind die Bilder, die von entdeckten Orten auf der Karte hochgeladen wurden.</string>
   <string name="thanks_received_explanation">Diese Funktion erlaubt es Autoren, eine Dankeschön-Benachrichtigung an Benutzer zu senden, die nützliche Bearbeitungen durchgeführt haben – durch die Benutzung eines kleinen Dankeschön-Links in der Versionsgeschichte oder Unterschiedsseite.</string>
-  <string name="previous_image_title_description">Vorherigen Titel und vorherige Beschreibung kopieren</string>
   <string name="previous_button_tooltip_message">Klicke, um den Titel und die Beschreibung des vorherigen Bildes wieder zu verwenden und verändere sie, damit dein aktuelles Bild passt.</string>
   <string name="welcome_do_upload_content_description">Beispiele guter Bilder zum Hochladen auf Commons</string>
   <string name="welcome_dont_upload_content_description">Beispiele von Bildern, die nicht hochgeladen werden sollen.</string>
   <string name="skip_image">Dieses bild überspringen</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download fehlgeschlagen! Wir konnten die Datei nicht ohne externe Speicherberechtigung herunterladen!</string>
+  <string name="manage_exif_tags">EXIF-Tags verwalten</string>
+  <string name="manage_exif_tags_summary">Auswahl, welche EXIF-Tags beim Upload behalten werden sollen</string>
   <string name="exif_tag_name_author">Autor</string>
   <string name="exif_tag_name_copyright">Urheberrecht</string>
   <string name="exif_tag_name_location">Standort</string>
+  <string name="exif_tag_name_cameraModel">Kamera-Modell</string>
+  <string name="exif_tag_name_lensModel">Kameralinse</string>
   <string name="exif_tag_name_serialNumbers">Seriennummer</string>
   <string name="share_text">Lade Fotos direkt von deinem Telefon auf Wikimedia Commons hoch. Lade die Commons-App jetzt herunter: %1$s</string>
   <string name="share_via">App teilen über …</string>
@@ -528,8 +534,14 @@
   <string name="upload_cancelled">Hochladen abbrechen</string>
   <string name="delete_helper_show_deletion_title_success">Erfolgreich</string>
   <string name="delete_helper_show_deletion_title_failed">Fehlgeschlagen</string>
+  <string name="delete_helper_ask_spam_selfie">Ein Selfie</string>
+  <string name="delete_helper_ask_spam_blurry">Unscharf</string>
+  <string name="delete_helper_ask_spam_nonsense">Unsinn</string>
   <string name="delete_helper_ask_spam_other">Andere</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Pressefoto</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Bild aus dem Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Andere</string>
   <string name="account_created">Benutzerkonto erstellt!</string>
+  <string name="title_app_shortcut_setting">Einstellungen</string>
 </resources>

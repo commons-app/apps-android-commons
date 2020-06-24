@@ -9,6 +9,24 @@
 * अभय नातू
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">१ संचिका अपभारीत होत आहे</item>
+    <item quantity="other">%1$d संचिका अपभारीत होत आहे</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">अद्याप अपभारणे नाहीत</item>
+    <item quantity="one">एक अपभारण</item>
+    <item quantity="other">%1$d अपभारणे</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">१ अपभारण सुरू करीत आहे upload</item>
+    <item quantity="other">%1$d अपभारणे सुरू करीत आहे</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">१ अपभारण</item>
+    <item quantity="other">%1$d अपभारणे</item>
+  </plurals>
+  <string name="share_license_summary" fuzzy="true">ही संचिका %1$s या परवान्यांतर्गत राहील</string>
   <string name="preference_category_appearance">स्वरूप</string>
   <string name="preference_category_general">सामान्य</string>
   <string name="preference_category_feedback">अभिप्राय</string>
@@ -36,10 +54,6 @@
   <string name="upload_progress_notification_title_finishing">%1$s अपभारण पूर्ण करीत आहे</string>
   <string name="upload_failed_notification_title">%1$s अपभारण अयशस्वी</string>
   <string name="upload_failed_notification_subtitle">बघण्यास अलगद टपली मारा</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">१ संचिका अपभारीत होत आहे</item>
-    <item quantity="other">%1$d संचिका अपभारीत होत आहे</item>
-  </plurals>
   <string name="title_activity_contributions">माझी अपभारणे</string>
   <string name="contribution_state_queued">रांगेत आहे</string>
   <string name="contribution_state_failed">अपयशी</string>
@@ -52,7 +66,6 @@
   <string name="menu_share">सहभाग करा</string>
   <string name="menu_open_in_browser">न्याहाळकात उघडा</string>
   <string name="share_title_hint" fuzzy="true">शीर्षक</string>
-  <string name="add_title_toast">कृपया या फाईलसाठी शीर्षक प्रदान करा</string>
   <string name="share_description_hint">वर्णन</string>
   <string name="login_failed_network">सनोंद प्रवेश अशक्य - नेटवर्क नाही</string>
   <string name="login_failed_throttled">अनेक अयशस्वी प्रयत्न.काही मिनीटांनंतर पुन्हा प्रयत्न करा.</string>
@@ -69,19 +82,6 @@
   <string name="gps_disabled">आपल्या मोबाईलचे गिपीएस बंद आहे, तुम्हांला ते चालू करायचे आहे का?</string>
   <string name="enable_gps">जिपीएस चालू करा</string>
   <string name="contributions_subtitle_zero">अद्याप काहीही चढवलेले नाही</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">अद्याप अपभारणे नाहीत</item>
-    <item quantity="one">एक अपभारण</item>
-    <item quantity="other">%1$d अपभारणे</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">१ अपभारण सुरू करीत आहे upload</item>
-    <item quantity="other">%1$d अपभारणे सुरू करीत आहे</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">१ अपभारण</item>
-    <item quantity="other">%1$d अपभारणे</item>
-  </plurals>
   <string name="categories_not_found">%1$s शी जुळणारे कोणतेच वर्ग सापडले नाहीत</string>
   <string name="categories_skip_explanation">विकिमिडिया कॉमन्सवर आपल्या संचिकांना शोधणे सोपी जाण्यासाठी त्यांना वर्ग जोडा.\n\nवर्ग जोडण्यास टंकन सुरू करा.\nही पायरी चुकविण्यास या संदेशावर अलगद टिचका (किंवा बॅक कळ टिचका)</string>
   <string name="categories_activity_title">वर्ग</string>
@@ -100,7 +100,6 @@
   <string name="no_uploads_yet">आपण अद्याप काहीच चित्रे अपभारीत केली नाहीत.</string>
   <string name="menu_retry_upload">पुन्हा प्रयत्न करा</string>
   <string name="menu_cancel_upload">रद्द करा</string>
-  <string name="share_license_summary" fuzzy="true">ही संचिका %1$s या परवान्यांतर्गत राहील</string>
   <string name="media_upload_policy">हे चित्र इथे चढवत असताना, मी हे घोषीत करतो की हे माझेच काम आहे आणि ह्या कामावर इतर कुणाचाही प्रताधिकार नाही तसेच हे सेल्फ़ी नाहीये, म्हणून हे काम ह्या संकेतांचे पालन करेल &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">अधिभारण करा</string>
   <string name="preference_license">डिफॉल्ट परवाना</string>

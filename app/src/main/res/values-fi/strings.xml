@@ -16,6 +16,31 @@
 * Surjection
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">1 tiedosto tallentuu</item>
+    <item quantity="other">%1$d tiedostoa tallentuu</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Aloitetaan %1$d tallennus</item>
+    <item quantity="other">Aloitetaan %1$d tallennusta</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d tallennus</item>
+    <item quantity="other">%1$d tallennusta</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Tiedosto tallennetaan lisenssin %1$s ehtojen mukaisesti</item>
+    <item quantity="other">Tiedostot tallennetaan lisenssin %1$s ehtojen mukaisesti</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d tallennus</item>
+    <item quantity="other">%1$d tallennusta</item>
+  </plurals>
   <string name="title_activity_explore">Tutki</string>
   <string name="navigation_item_explore">Tutki</string>
   <string name="preference_category_appearance">Ulkoasu</string>
@@ -47,10 +72,6 @@
   <string name="upload_progress_notification_title_finishing">%1$s tallennettu</string>
   <string name="upload_failed_notification_title">Tiedoston %1$s tallentaminen epäonnistui</string>
   <string name="upload_failed_notification_subtitle">Napauta katsoaksesi</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">1 tiedosto tallentuu</item>
-    <item quantity="other">%1$d tiedostoa tallentuu</item>
-  </plurals>
   <string name="title_activity_contributions">Viimeaikaiset tallennukseni</string>
   <string name="contribution_state_queued">Jonossa</string>
   <string name="contribution_state_failed">Epäonnistui</string>
@@ -62,8 +83,7 @@
   <string name="provider_contributions">Omat tallennukset</string>
   <string name="menu_share">Jaa</string>
   <string name="menu_open_in_browser">Näytä selaimessa</string>
-  <string name="share_title_hint">Otsikko (Vaaditaan)</string>
-  <string name="add_title_toast">Anna tälle tiedostolle otsikko</string>
+  <string name="share_title_hint" fuzzy="true">Otsikko (Vaaditaan)</string>
   <string name="share_description_hint">Kuvaus</string>
   <string name="login_failed_network">Kirjautuminen epäonnistui - verkkovirhe</string>
   <string name="login_failed_wrong_credentials">Kirjautuminen epäonnistui - tarkista käyttäjänimesi ja salasanasi</string>
@@ -82,19 +102,6 @@
   <string name="gps_disabled">GPS ei ole käytössä. Haluatko ottaa sen käyttöön?</string>
   <string name="enable_gps">Ota GPS käyttöön</string>
   <string name="contributions_subtitle_zero">Ei tallennuksia vielä</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Aloitetaan %1$d tallennus</item>
-    <item quantity="other">Aloitetaan %1$d tallennusta</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d tallennus</item>
-    <item quantity="other">%1$d tallennusta</item>
-  </plurals>
   <string name="categories_not_found">Luokkaa %1$s ei löytynyt</string>
   <string name="categories_skip_explanation">Lisää luokkia tehdäksesi kuvistasi enemmän löydettäviä Wikimedia Commonssissa.\nAloita kirjoittaminen lisätäksesi luokkia.</string>
   <string name="categories_activity_title">Luokat</string>
@@ -116,10 +123,6 @@
   <string name="no_uploads_yet">Et ole vielä tallentanut kuvia.</string>
   <string name="menu_retry_upload">Yritä uudelleen</string>
   <string name="menu_cancel_upload">Peruuta</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Tiedosto tallennetaan lisenssin %1$s ehtojen mukaisesti</item>
-    <item quantity="other">Tiedostot tallennetaan lisenssin %1$s ehtojen mukaisesti</item>
-  </plurals>
   <string name="media_upload_policy">Lisäämällä kuvan, ilmoitan tämän olevan oma työ ja että se ei sisällä tekijänoikeuden alaista materiaalia tai selfietä ja muuten noudattaa &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Lataa</string>
   <string name="preference_license">Oletuslisenssi</string>
@@ -375,10 +378,6 @@
   <string name="submit">Lähetä</string>
   <string name="upload_title_duplicate">Tiedosto tiedostonimellä %1$s on jo olemassa. Oletko varma, että haluat jatkaa?</string>
   <string name="map_application_missing">Laitteestasi ei löydy yhteensopivaa karttasovellusta. Asenna karttasovellus käyttääksesi tätä toimintoa.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d tallennus</item>
-    <item quantity="other">%1$d tallennusta</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Kirjanmerkit</string>
   <string name="title_activity_bookmarks">Kirjanmerkit</string>
   <string name="title_page_bookmarks_pictures">Kuvat</string>
@@ -401,7 +400,6 @@
   <string name="desc_language_Asia">Aasia</string>
   <string name="desc_language_Pacific">Tyynenmeren alue</string>
   <string name="no_categories_selected">Luokkia ei valittu</string>
-  <string name="no_go_back">Ei, palaa takaisin</string>
   <string name="search_this_area">Hae tältä alueelta</string>
   <string name="nearby_card_permission_explanation">Haluaisitko, että käytämme nykyistä sijaintiasi näyttääksemme lähimmät paikat, jotka tarvitsevat kuvia?</string>
   <string name="never_ask_again">Älä kysy tätä uudelleen</string>

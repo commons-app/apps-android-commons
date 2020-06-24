@@ -5,6 +5,24 @@
 * Hociben
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d n ufaylu yezga yettali</item>
+    <item quantity="other">%1$d n ifuyla zgan ttalin</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d n usali</item>
+    <item quantity="other">%1$d n usali</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Beddu n %1$d n usali</item>
+    <item quantity="other">Beddu n %1$d n usali</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d n usali</item>
+    <item quantity="other">%1$d n usali</item>
+  </plurals>
+  <string name="share_license_summary" fuzzy="true">Tugna-agi ad tili daw n turagt %1$s</string>
   <string name="app_name">Ayen yettwasnen</string>
   <string name="menu_settings">Iɣewwaren</string>
   <string name="username">Isem n useqdac</string>
@@ -25,10 +43,6 @@
   <string name="upload_progress_notification_title_finishing">Tagara n usali n %1$s</string>
   <string name="upload_failed_notification_title">Asali n  %1$s ur yeddi ara</string>
   <string name="upload_failed_notification_subtitle">Senned akken ad sekneḍ</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d n ufaylu yezga yettali</item>
-    <item quantity="other">%1$d n ifuyla zgan ttalin</item>
-  </plurals>
   <string name="title_activity_contributions">Ifuyla yulin melmi kan</string>
   <string name="contribution_state_queued">Ttraǧun</string>
   <string name="contribution_state_failed">Yecceḍ</string>
@@ -57,19 +71,6 @@
   <string name="gps_disabled">GPS ur yermid ɣef yibenk-ik. Tebɣiḍ ad tremdeḍ-t?</string>
   <string name="enable_gps">Rmed GPS</string>
   <string name="contributions_subtitle_zero">Usla ayen yulin</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d n usali</item>
-    <item quantity="other">%1$d n usali</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Beddu n %1$d n usali</item>
-    <item quantity="other">Beddu n %1$d n usali</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d n usali</item>
-    <item quantity="other">%1$d n usali</item>
-  </plurals>
   <string name="categories_not_found">Ulac taggayin imenṭaḍen akked %1$s i yettwafen</string>
   <string name="categories_skip_explanation">Rnu taggayin akken ad terreḍ tugniwin-ik sehlent i tifin di Wikimedia Commons.\n\nBdu timerna n taggayin.</string>
   <string name="categories_activity_title">Taggayin</string>
@@ -88,7 +89,6 @@
   <string name="no_uploads_yet">Ur tsuliḍ ara yakan tiwlafin.</string>
   <string name="menu_retry_upload">Ɛref̣ tikelt-nniḍen</string>
   <string name="menu_cancel_upload">Sefsex</string>
-  <string name="share_license_summary" fuzzy="true">Tugna-agi ad tili daw n turagt %1$s</string>
   <string name="media_upload_policy">S tuzna n tygna-agi, ad d-wekkdeɣ d akken d ayla-w, ur tegbir ara aferdis yettwaḥerzen s izerfan n umeskar, udiɣ tqudeṛ &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Tisertiyin n Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Sider</string>
   <string name="preference_license" fuzzy="true">Turagt</string>

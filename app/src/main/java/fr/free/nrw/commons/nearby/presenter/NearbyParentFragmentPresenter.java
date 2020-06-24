@@ -1,14 +1,14 @@
 package fr.free.nrw.commons.nearby.presenter;
 
+import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.MainThread;
 import com.mapbox.mapboxsdk.annotations.Marker;
 
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -21,9 +21,7 @@ import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
-import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
-import fr.free.nrw.commons.upload.UploadContract;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import timber.log.Timber;
@@ -194,7 +192,7 @@ public class NearbyParentFragmentPresenter
             nearbyParentFragmentView.populatePlaces(nearbyParentFragmentView.getCameraTarget());
         } else { // Means location changed slightly, ie user is walking or driving.
             Timber.d("Means location changed slightly");
-            if (!nearbyParentFragmentView.isSearchThisAreaButtonVisible()) { // Do not track users position if the user is checking around
+            if (nearbyParentFragmentView.isCurrentLocationMarkerVisible()){ // Means user wants to see their live location
                 nearbyParentFragmentView.recenterMap(curLatLng);
             }
         }
@@ -259,6 +257,7 @@ public class NearbyParentFragmentPresenter
 
     @Override
     public void onCameraMove(com.mapbox.mapboxsdk.geometry.LatLng latLng) {
+        nearbyParentFragmentView.setProjectorLatLngBounds();
             // If our nearby markers are calculated at least once
             if (NearbyController.latestSearchLocation != null) {
                double distance =latLng.distanceTo
@@ -287,7 +286,11 @@ public class NearbyParentFragmentPresenter
                     nearbyParentFragmentView.setRecyclerViewAdapterItemsGreyedOut();
                     break;
                 case CHECKED:
-                    nearbyParentFragmentView.displayAllMarkers();
+                    // Despite showing all labels NearbyFilterState still should be applied
+                    nearbyParentFragmentView.filterMarkersByLabels(selectedLabels,
+                        NearbyFilterState.getInstance().isExistsSelected(),
+                        NearbyFilterState.getInstance().isNeedPhotoSelected(),
+                        filterForPlaceState, false);
                     nearbyParentFragmentView.setRecyclerViewAdapterAllSelected();
                     break;
             }
@@ -300,6 +303,7 @@ public class NearbyParentFragmentPresenter
     }
 
     @Override
+    @MainThread
     public void updateMapMarkersToController(List<NearbyBaseMarker> nearbyBaseMarkers) {
         NearbyController.markerExistsMap = new HashMap<>();
         NearbyController.markerNeedPicMap = new HashMap<>();
@@ -307,7 +311,7 @@ public class NearbyParentFragmentPresenter
         for (int i = 0; i < nearbyBaseMarkers.size(); i++) {
             NearbyBaseMarker nearbyBaseMarker = nearbyBaseMarkers.get(i);
             NearbyController.markerLabelList.add(
-                    new MarkerPlaceGroup(nearbyBaseMarkers.get(i).getMarker(), bookmarkLocationDao.findBookmarkLocation(nearbyBaseMarkers.get(i).getPlace()), nearbyBaseMarker.getPlace()));
+                    new MarkerPlaceGroup(nearbyBaseMarker.getMarker(), bookmarkLocationDao.findBookmarkLocation(nearbyBaseMarker.getPlace()), nearbyBaseMarker.getPlace()));
             //TODO: fix bookmark location
             NearbyController.markerExistsMap.put((nearbyBaseMarkers.get(i).getPlace().hasWikidataLink()), nearbyBaseMarkers.get(i).getMarker());
             NearbyController.markerNeedPicMap.put(((nearbyBaseMarkers.get(i).getPlace().pic == null) ? true : false), nearbyBaseMarkers.get(i).getMarker());

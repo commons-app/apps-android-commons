@@ -4,6 +4,31 @@
 * Sveinn í Felli
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d skrá að sendast inn</item>
+    <item quantity="other">%1$d skrár að sendast inn</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Byrja %1$d innsendingu</item>
+    <item quantity="other">Byrja %1$d innsendingar</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d innsending</item>
+    <item quantity="other">%1$d innsendingar</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Þessi mynd verður birt með %1$s notkunarleyfi</item>
+    <item quantity="other">Þessar myndir verða birtar með %1$s notkunarleyfi</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d innsending</item>
+    <item quantity="other">%1$d innsendingar</item>
+  </plurals>
   <string name="title_activity_explore">Uppgötva</string>
   <string name="navigation_item_explore">Uppgötva</string>
   <string name="preference_category_appearance">Útlit</string>
@@ -12,7 +37,7 @@
   <string name="preference_category_privacy">Persónuvernd</string>
   <string name="preference_category_location">Staðsetning</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•  \</string>
+  <string name="bullet">•  \\</string>
   <string name="menu_settings">Stillingar</string>
   <string name="intent_share_upload_label">Senda inn á Commons</string>
   <string name="username">Notandanafn</string>
@@ -35,10 +60,6 @@
   <string name="upload_progress_notification_title_finishing">Lýk innsendingu á %1$s</string>
   <string name="upload_failed_notification_title">Innsending á %1$s mistókst</string>
   <string name="upload_failed_notification_subtitle">Bankaðu til að skoða</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d skrá að sendast inn</item>
-    <item quantity="other">%1$d skrár að sendast inn</item>
-  </plurals>
   <string name="title_activity_contributions">Nýlega innsendar skrár</string>
   <string name="contribution_state_queued">Í biðröð</string>
   <string name="contribution_state_failed">Mistókst</string>
@@ -50,8 +71,7 @@
   <string name="provider_contributions">Innsendu skrárnar mínar</string>
   <string name="menu_share">Deila</string>
   <string name="menu_open_in_browser">Skoða í vafra</string>
-  <string name="share_title_hint">Titill (krafist)</string>
-  <string name="add_title_toast">Gefðu þessari skrá einhvern titil</string>
+  <string name="share_title_hint" fuzzy="true">Titill (krafist)</string>
   <string name="share_description_hint">Lýsing</string>
   <string name="login_failed_network">Innskráning mistókst - bilun í neti</string>
   <string name="login_failed_wrong_credentials">Innskráning mistókst - athugaðu notandanafn og lykilorðið þitt</string>
@@ -71,19 +91,6 @@
   <string name="gps_disabled">GPS er óvirkt í tækinu þínu. Viltu virkja það?</string>
   <string name="enable_gps">Virkja GPS</string>
   <string name="contributions_subtitle_zero">Engar innsendingar ennþá</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Byrja %1$d innsendingu</item>
-    <item quantity="other">Byrja %1$d innsendingar</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d innsending</item>
-    <item quantity="other">%1$d innsendingar</item>
-  </plurals>
   <string name="categories_not_found">Engir flokkar sem samsvara %1$s fundust</string>
   <string name="categories_skip_explanation">Bættu við flokkum til að gera myndirnar þínar aðgengilegri á Wikimedia Commons\nByrjaðu að skrifa til að bæta við flokkum.</string>
   <string name="categories_activity_title">Flokkar</string>
@@ -93,10 +100,10 @@
   <string name="title_activity_category_details">Flokkur</string>
   <string name="title_activity_review">Yfirlestur jafningja</string>
   <string name="menu_about">Um</string>
-  <string name="about_license">Wikimedia Commons forritið er opinn og frjáls hugbúnaður sem gerður er og viðhaldið af stuðningsaðilum og sjálfboðaliðum Wikimedia samfélagsins. Wikimedia Foundation sjálfseignarstofnunin kemur ekki að gerð, forritun eða viðhaldi forritsins. \</string>
+  <string name="about_license">Wikimedia Commons forritið er opinn og frjáls hugbúnaður sem gerður er og viðhaldið af stuðningsaðilum og sjálfboðaliðum Wikimedia samfélagsins. Wikimedia Foundation sjálfseignarstofnunin kemur ekki að gerð, forritun eða viðhaldi forritsins. \\</string>
   <string name="about_improve">Útbúðu nýjar &lt;a href=\"%1$s\"&gt;GitHub tilkynningar (issue)&lt;/a&gt; til að koma villum og uppástungum á framfæri.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Meðferð persónuupplýsinga&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;Framlög&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Meðferð persónuupplýsinga</string>
+  <string name="about_credits">Framlög</string>
   <string name="title_activity_about">Um</string>
   <string name="menu_feedback">Senda umsögn (með tölvupósti)</string>
   <string name="no_email_client">Ekkert tölvupóstforrit er uppsett</string>
@@ -105,17 +112,13 @@
   <string name="no_uploads_yet">Þú ert ekki ennþá búin(n) að senda inn neinar myndir.</string>
   <string name="menu_retry_upload">Reyna aftur</string>
   <string name="menu_cancel_upload">Hætta við</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Þessi mynd verður birt með %1$s notkunarleyfi</item>
-    <item quantity="other">Þessar myndir verða birtar með %1$s notkunarleyfi</item>
-  </plurals>
   <string name="media_upload_policy">Með því að senda inn þessa mynd, lýsi ég því hér með yfir að þetta er mitt eigið verk, það inniheldur ekkert höfundarréttarvarið efni eða sjálfsmyndir, og að það samræmist á allan hátt við &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;stefnu Wikimedia Commons varðandi notkun efnis&lt;/a&gt;.</string>
   <string name="menu_download">Sækja</string>
   <string name="preference_license">Sjálfgefið notkunarleyfi</string>
-  <string name="use_previous" fuzzy="true">Nota fyrri titil/lýsingu</string>
+  <string name="use_previous">Nota fyrri titil og lýsingu</string>
   <string name="allow_gps">Ná sjálfvirkt í núverandi staðsetningu</string>
   <string name="allow_gps_summary">Les núverandi staðsetningu til að geta stungið upp á flokkum ef myndin er ekki með hnattstaðsetningarhnitum. Aðvörun: þetta mun koma upp um staðsetninguna þína.</string>
-  <string name="preference_theme" fuzzy="true">Næturhamur</string>
+  <string name="preference_theme">Þema</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -156,7 +159,7 @@
   <string name="welcome_copyright_subtext">Forðastu höfundaréttarvarið efni sem finnst á netinu eins og myndir af veggspjöldum, bókarkápum, o.s.frv.</string>
   <string name="welcome_final_text">Heldurðu að þú hafir náð þessu?</string>
   <string name="welcome_final_button_text">Já!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Frekari upplýsingar&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Nánari upplýsingar</string>
   <string name="detail_panel_cats_label">Flokkar</string>
   <string name="detail_panel_cats_loading">Hleð…</string>
   <string name="detail_panel_cats_none">Ekkert valið</string>
@@ -174,6 +177,7 @@
   <string name="no_nearby">Engir staðir fundust í nágrenninu</string>
   <string name="warning">Aðvörun</string>
   <string name="upload_image_duplicate">Þessi skrá er þegar fyrirliggjandi á Commons. Ertu viss um að þú viljir halda áfram?</string>
+  <string name="upload">Senda inn</string>
   <string name="yes">Já</string>
   <string name="no">Nei</string>
   <string name="media_detail_title">Titill</string>
@@ -246,6 +250,7 @@
   <string name="upload_problem_image_duplicate">Myndin er þegar í Commons-almenningi.</string>
   <string name="upload_problem_different_geolocation">Myndin var tekin á öðrum stað.</string>
   <string name="upload_problem_do_you_continue">Viltu samt senda inn þessa mynd?</string>
+  <string name="upload_problem_image">Vandamál fannst í myndinni</string>
   <string name="give_permission">Gefa heimild</string>
   <string name="use_external_storage">Nota ytri gagnageymslu</string>
   <string name="use_external_storage_summary">Vistaðu myndir sem teknar hafa verið með innbyggðu myndavélinni í tækinu þínu</string>
@@ -256,7 +261,7 @@
   <string name="null_url">Villa: Slóð fannst ekki</string>
   <string name="nominate_deletion">Tilnefna til eyðingar</string>
   <string name="nominated_for_deletion">Þessi mynd hefur verið valin til eyðingar.</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Sjá nánar á vefsíðunni&lt;/u&gt;</string>
+  <string name="nominated_see_more">Sjá nánar á vefsíðunni</string>
   <string name="view_browser">Skoða í vafra</string>
   <string name="skip_login">Sleppa</string>
   <string name="navigation_item_login">Skrá inn</string>
@@ -279,14 +284,14 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Gefðu okkur einkunn&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;Algengar spurningar&lt;/u&gt;</string>
+  <string name="about_rate_us">Gefðu okkur einkunn</string>
+  <string name="about_faq">Algengar spurningar</string>
   <string name="welcome_skip_button">Sleppa kennslu</string>
   <string name="no_internet">Nettenging ekki tiltæk</string>
   <string name="internet_established">Nettenging í boði</string>
   <string name="error_notifications">Villa við að sækja tilkynningar</string>
   <string name="no_notifications">Engar tilkynningar fundust</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;Þýða&lt;/u&gt;</string>
+  <string name="about_translate">Þýða</string>
   <string name="about_translate_title">Tungumál</string>
   <string name="about_translate_message">Veldu tungumálið sem þú vill senda inn þýðingar fyrir</string>
   <string name="about_translate_proceed">Halda áfram</string>
@@ -313,7 +318,7 @@
   <string name="error_loading_subcategories">Villa kom upp við að hlaða inn undirflokkum.</string>
   <string name="search_tab_title_media">Margmiðlun</string>
   <string name="search_tab_title_categories">Flokkar</string>
-  <string name="explore_tab_title_featured" fuzzy="true">ÚRVAL</string>
+  <string name="explore_tab_title_featured">Efst á baugi</string>
   <string name="explore_tab_title_mobile">Sent inn úr snjalltæki</string>
   <string name="successful_wikidata_edit">Mynd bætt inn í %1$s á Wikidata!</string>
   <string name="wikidata_edit_failure">Mistókst að uppfæra samsvarandi Wikidata-einindi!</string>
@@ -321,7 +326,7 @@
   <string name="wallpaper_set_successfully">Tókst að stilla bakgrunnsmynd!</string>
   <string name="quiz">Spurningaleikur</string>
   <string name="quiz_question_string">Er í lagi að senda inn þessa mynd?</string>
-  <string name="question">Spurning \</string>
+  <string name="question">Spurning \\</string>
   <string name="result">Niðurstaða</string>
   <string name="quiz_back_button">Ef þú heldur áfram að senda inn myndir sem krefjast að þeim sé eytt, er líklegt að aðgangurinn þinn verði bannaður. Ertu viss um að þú viljir hætta í spurningaleiknum?</string>
   <string name="quiz_alert_message">Meira en %1$s myndanna sem þú hefur sent inn hefur verið eytt. Ef þú heldur áfram að senda inn myndir sem krefjast að þeim sé eytt, er líklegt að aðgangurinn þinn verði bannaður.\n\nMyndir þú vilja skða kennsluefnið aftur og taka síðan einn léttan spurningaleik til að hjálpa þér til að læra hvernig myndir þú ættir að senda inn og hverjar ekki?</string>
@@ -360,7 +365,7 @@
   <string name="images_used_by_wiki">Myndir notaðar</string>
   <string name="achievements_share_message">Deildu frammistöðu þinni með vinum þínum!</string>
   <string name="achievements_info_message">Stig þitt eykst eftir því sem þú uppfyllir betur þessar kröfur. Atriði í \"tölfræði\"-hlutanum teljast ekki með í stigaútreikningi þínum.</string>
-  <string name="achievements_revert_limit_message">lágmarksfjöldi sem er krafist: \</string>
+  <string name="achievements_revert_limit_message">lágmarksfjöldi sem er krafist: \\</string>
   <string name="images_uploaded_explanation">Heildarfjöldi mynda sem þú hefur sent inn á Commons, með hverskyns innsendingarhugbúnaði</string>
   <string name="images_reverted_explanation">Prósentuhlutfall mynda sem þú hefur sent inn á Commons sem ekki hefur verið eytt</string>
   <string name="images_used_explanation">Heildarfjöldi mynda sem þú hefur sent inn á Commons sem hafa verið notaðar með Wikimedia-greinum</string>
@@ -372,7 +377,7 @@
   <string name="contributions_fragment">Framlög</string>
   <string name="nearby_fragment">Nálægt</string>
   <string name="notifications">Tilkynningar</string>
-  <string name="read_notifications" fuzzy="true">Tilkynningar (í geymslu)</string>
+  <string name="read_notifications">Tilkynningar (lesnar)</string>
   <string name="display_nearby_notification">Birta tilkynningu um nágrenni</string>
   <string name="display_nearby_notification_summary">Ýttu hér til að sjá nálægasta staðinn sem þarfnast mynda</string>
   <string name="no_close_nearby">Engir staðir fundust í nágrenninu</string>
@@ -387,10 +392,6 @@
   <string name="submit">Senda inn</string>
   <string name="upload_title_duplicate">Skrá með heitinu %1$s er til staðar. Ertu viss um að þú viljir halda áfram?</string>
   <string name="map_application_missing">Ekkert samhæft landakortaforrit fannst á tækinu þínu. Settu kortaforrit til að nýta þennan möguleika.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d innsending</item>
-    <item quantity="other">%1$d innsendingar</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Bókamerki</string>
   <string name="title_activity_bookmarks">Bókamerki</string>
   <string name="title_page_bookmarks_pictures">Ljósmyndir</string>
@@ -415,9 +416,7 @@
   <string name="desc_language_Asia">Asía</string>
   <string name="desc_language_Pacific">Kyrrahaf</string>
   <string name="no_categories_selected">Engir flokkar valdir</string>
-  <string name="no_categories_selected_warning_desc">Myndir án flokka eru sjaldnast nýtilegar. Ertu viss um að þú viljir senda þetta inn án þess að velja flokka?</string>
-  <string name="yes_submit">Já, senda inn</string>
-  <string name="no_go_back">Nei, fara til baka</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">Myndir án flokka eru sjaldnast nýtilegar. Ertu viss um að þú viljir senda þetta inn án þess að velja flokka?</string>
   <string name="upload_flow_all_images_in_set">(fyrir allar myndir í setti)</string>
   <string name="search_this_area">Leita á þessu svæði</string>
   <string name="nearby_card_permission_title">Beiðni um heimild</string>
@@ -448,7 +447,8 @@
   <string name="no_image_reverted">Engar myndir endurstilltar</string>
   <string name="no_image_uploaded">Engar myndir sendar inn</string>
   <string name="no_notification">Þú ert ekki með neinar ólesnar tilkynningar</string>
-  <string name="menu_option_read" fuzzy="true">Skoða í geymslu</string>
+  <string name="no_read_notification">Þú ert ekki með neinar lesnar tilkynningar</string>
+  <string name="menu_option_read">Skoða lesnar</string>
   <string name="menu_option_unread">Skoða ólesið</string>
   <string name="error_occurred_in_picking_images">Villa kom upp við að velja myndir</string>
   <string name="image_chooser_title">Veldu myndir til að senda inn</string>
@@ -473,6 +473,10 @@
   <string name="delete_helper_ask_spam_nonsense">Vitleysa</string>
   <string name="delete_helper_ask_spam_other">Annað</string>
   <string name="delete_helper_ask_reason_copyright_logo">Táknmynd</string>
+  <string name="delete_helper_ask_reason_copyright_other">Annað</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Vegna þess að hún er</string>
   <string name="share_image_via">Deila mynd með</string>
+  <string name="account_created">Aðgangur búinn til!</string>
+  <string name="text_copy">Texti afritaður á klippispjaldið.</string>
+  <string name="some_error">Villa hefur komið upp!</string>
 </resources>

@@ -1,6 +1,6 @@
 **Description (required)**
 
-Fixes #{GitHub issue number} {Github issue title}
+Fixes #INSERT_ISSUE_NUMBER_HERE
 
 What changes did you make and why?
 

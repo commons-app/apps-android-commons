@@ -1,14 +1,14 @@
 package fr.free.nrw.commons.contributions;
 
-import androidx.lifecycle.LiveData;
-
+import androidx.paging.DataSource.Factory;
+import io.reactivex.Completable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import io.reactivex.Completable;
 import io.reactivex.Single;
 
 /**
@@ -59,23 +59,31 @@ class ContributionsLocalDataSource {
      * @param contribution
      * @return
      */
-    public Single<Integer> deleteContribution(Contribution contribution) {
+    public Completable deleteContribution(Contribution contribution) {
         return contributionDao.delete(contribution);
     }
 
-    public LiveData<List<Contribution>> getContributions() {
+    public Factory<Integer, Contribution> getContributions() {
         return contributionDao.fetchContributions();
     }
 
-    public Completable saveContributions(List<Contribution> contributions) {
-        return contributionDao.deleteAllAndSave(contributions);
+    public Single<List<Long>> saveContributions(List<Contribution> contributions) {
+        List<Contribution> contributionList = new ArrayList<>();
+        for(Contribution contribution: contributions) {
+            Contribution oldContribution = contributionDao.getContribution(contribution.getPageId());
+            if(oldContribution != null) {
+                contribution.setWikidataPlace(oldContribution.getWikidataPlace());
+            }
+            contributionList.add(contribution);
+        }
+        return contributionDao.save(contributionList);
     }
 
     public void set(String key, long value) {
         defaultKVStore.putLong(key,value);
     }
 
-    public Single<Integer> updateContribution(Contribution contribution) {
+    public Completable updateContribution(Contribution contribution) {
         return contributionDao.update(contribution);
     }
 }

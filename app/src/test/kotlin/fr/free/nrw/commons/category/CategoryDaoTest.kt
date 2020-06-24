@@ -106,7 +106,7 @@ class CategoryDaoTest {
             cursor.moveToFirst()
             testObject.fromCursor(cursor).let {
                 assertEquals(uriForId(1), it.contentUri)
-                assertEquals("foo", it.name)
+                assertEquals("showImageWithItem", it.name)
                 assertEquals(123, it.lastUsed.time)
                 assertEquals(2, it.timesUsed)
             }
@@ -134,7 +134,7 @@ class CategoryDaoTest {
     fun saveNewCategory() {
         val contentUri = CategoryContentProvider.uriForId(111)
         whenever(client.insert(isA(), isA())).thenReturn(contentUri)
-        val category = Category(null, "foo", Date(234L), 1)
+        val category = Category(null, "showImageWithItem", Date(234L), 1)
 
         testObject.save(category)
 
@@ -157,13 +157,13 @@ class CategoryDaoTest {
     @Test
     fun whenTheresNoDataFindReturnsNull_nullCursor() {
         whenever(client.query(any(), any(), any(), any(), any())).thenReturn(null)
-        assertNull(testObject.find("foo"))
+        assertNull(testObject.find("showImageWithItem"))
     }
 
     @Test
     fun whenTheresNoDataFindReturnsNull_emptyCursor() {
         whenever(client.query(any(), any(), any(), any(), any())).thenReturn(createCursor(0))
-        assertNull(testObject.find("foo"))
+        assertNull(testObject.find("showImageWithItem"))
     }
 
     @Test
@@ -172,7 +172,7 @@ class CategoryDaoTest {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(mockCursor)
         whenever(mockCursor.moveToFirst()).thenReturn(false)
 
-        testObject.find("foo")
+        testObject.find("showImageWithItem")
 
         verify(mockCursor).close()
     }
@@ -181,11 +181,11 @@ class CategoryDaoTest {
     fun findCategory() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(1))
 
-        val category = testObject.find("foo")
+        val category = testObject.find("showImageWithItem")
         assertNotNull(category)
 
         assertEquals(uriForId(1), category?.contentUri)
-        assertEquals("foo", category?.name)
+        assertEquals("showImageWithItem", category?.name)
         assertEquals(123L, category?.lastUsed?.time)
         assertEquals(2, category?.timesUsed)
 
@@ -196,13 +196,13 @@ class CategoryDaoTest {
                 queryCaptor.capture(),
                 isNull()
         )
-        assertEquals("foo", queryCaptor.firstValue[0])
+        assertEquals("showImageWithItem", queryCaptor.firstValue[0])
     }
 
     @Test(expected = RuntimeException::class)
     fun findCategoryTranslatesExceptions() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenThrow(RemoteException(""))
-        testObject.find("foo")
+        testObject.find("showImageWithItem")
     }
 
     @Test(expected = RuntimeException::class)
@@ -241,7 +241,7 @@ class CategoryDaoTest {
         val result = testObject.recentCategories(10)
 
         assertEquals(1, result.size)
-        assertEquals("foo", result[0])
+        assertEquals("showImageWithItem", result[0])
 
         verify(client).query(
                 eq(BASE_URI),
@@ -264,7 +264,7 @@ class CategoryDaoTest {
 
     private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
         for (i in 0 until rowCount) {
-            addRow(listOf("1", "foo", "123", "2"))
+            addRow(listOf("1", "showImageWithItem", "123", "2"))
         }
     }
 

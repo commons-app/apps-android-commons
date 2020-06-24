@@ -19,11 +19,10 @@
         />
 
     <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/mediaDetailImage"
+        android:id="@+id/mediaDetailImageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:actualImageScaleType="centerCrop"
-        />
+        android:layout_height="@dimen/dimen_250"
+        app:actualImageScaleType="none" />
 
     <ScrollView
         android:id="@+id/mediaDetailScrollView"
@@ -40,257 +39,254 @@
 
             <!-- Placeholder. Height gets set at runtime based on container size; the initial value is a hack to keep
                  the detail info offscreen until it's placed properly. May be a better way to do this. -->
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/mediaDetailImageView"
+
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_250"
-                app:actualImageScaleType="none" />
+                android:layout_height="wrap_content" >
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/mediaDetailImageViewLandscape"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_250"
+                    app:actualImageScaleType="none"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_250"
+                    android:orientation="vertical"
+                    android:id="@+id/mediaDetailImageViewSpacer" />
+
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/fragmentCategorisationBackground"
-                android:orientation="vertical"
-                android:padding="@dimen/standard_gap">
+                android:background="?attr/mainBackground"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:orientation="vertical"
-                    android:padding="@dimen/standard_gap">
+                    android:background="@color/primaryDarkColor"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/quarter_standard_height">
+
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/tiny_gap"
-                        android:text="@string/media_detail_title"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
+                        style="@style/MediaDetailTextLabelTitle"
+                        android:layout_width="@dimen/widget_margin"
+                        android:layout_height="match_parent"
+                        android:text="@string/media_detail_title" />
 
                     <TextView
+                        style="@style/MediaDetailTextBody"
                         android:id="@+id/mediaDetailTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:background="?attr/subBackground"
-                        android:padding="@dimen/small_gap"
+                        android:layout_width="@dimen/widget_margin"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/description_text_size"
+                        android:layout_height="match_parent"
                         tools:text="Title of the media" />
                 </LinearLayout>
 
-                <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/small_gap" />
-
                 <LinearLayout
+                    style="@style/MediaDetailContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/authorLinearLayout"
-                    android:background="?attr/subBackground"
-                    android:orientation="vertical"
-                    android:padding="@dimen/standard_gap">
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/tiny_gap"
-                        android:text="@string/media_detail_author"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
+                        style="@style/MediaDetailTextLabelGeneric"
+                        android:layout_width="@dimen/widget_margin"
+                        android:layout_height="match_parent"
+                        android:text="@string/media_detail_author" />
 
                     <TextView
+                        style="@style/MediaDetailTextBody"
                         android:id="@+id/mediaDetailAuthor"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:background="?attr/subBackground"
-                        android:padding="@dimen/small_gap"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/description_text_size"
+                        android:layout_width="@dimen/widget_margin"
+                        android:layout_height="match_parent"
                         tools:text="Media author user name goes here." />
                 </LinearLayout>
 
-                <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/small_gap" />
-
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:orientation="vertical"
-                    android:padding="@dimen/standard_gap">
+                  android:id="@+id/caption_layout"
+                  style="@style/MediaDetailContainer"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/tiny_gap"
-                        android:text="@string/media_detail_description"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
+                      style="@style/MediaDetailTextLabelGeneric"
+                      android:layout_width="@dimen/widget_margin"
+                      android:layout_height="match_parent"
+                      android:text="@string/media_detail_caption" />
+
+                    <TextView
+                      android:id="@+id/media_detail_caption"
+                      android:layout_width="@dimen/widget_margin"
+                      android:layout_height="match_parent"
+                      style="@style/MediaDetailTextBody"
+                      tools:text="Captions of the media" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/MediaDetailContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/MediaDetailTextLabelGeneric"
+                        android:layout_width="@dimen/widget_margin"
+                        android:layout_height="match_parent"
+                        android:text="@string/media_detail_description" />
 
                     <fr.free.nrw.commons.ui.widget.HtmlTextView
                         android:id="@+id/mediaDetailDesc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/widget_margin"
+                        android:layout_height="match_parent"
+                        android:layout_weight="70"
                         android:layout_gravity="start"
-                        android:background="?attr/subBackground"
                         android:padding="@dimen/small_gap"
-                        android:textColor="@android:color/white"
+                        android:textColor="?attr/mediaDetailsText"
                         android:textSize="@dimen/description_text_size"
                         tools:text="Description of the media goes here. This can potentially be fairly long, and will need to wrap across multiple lines. We hope it looks nice though." />
                 </LinearLayout>
 
-                <fr.free.nrw.commons.media.MediaDetailSpacer
+                <View
+                    android:background="?attr/mediaDetailSpacerColor"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/small_gap" />
+                    android:layout_height="@dimen/tiny_gap"/>
 
                 <LinearLayout
+                    style="@style/MediaDetailContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:orientation="vertical"
-                    android:padding="@dimen/standard_gap">
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/tiny_gap"
-                        android:text="@string/media_detail_license"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
+                        style="@style/MediaDetailTextLabelGeneric"
+                        android:layout_width="@dimen/widget_margin"
+                        android:layout_height="match_parent"
+                        android:text="@string/media_detail_license" />
 
-                    <fr.free.nrw.commons.ui.widget.CompatTextView
+                    <TextView
                         android:id="@+id/mediaDetailLicense"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/widget_margin"
+                        android:layout_height="match_parent"
+                        android:layout_weight="70"
                         android:layout_gravity="start"
-                        android:background="?attr/subBackground"
                         android:foreground="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
                         android:padding="@dimen/small_gap"
-                        android:textColor="@android:color/white"
+                        android:textColor="?attr/mediaDetailsText"
                         android:textSize="@dimen/description_text_size"
-                        app:drawablePadding="@dimen/tiny_gap"
-                        app:drawableStart="@drawable/ic_info_outline_24dp"
+                        android:drawablePadding="@dimen/tiny_gap"
+                        android:drawableStart="?attr/iconInfo24"
                         tools:text="License link" />
                 </LinearLayout>
 
-                <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/small_gap" />
-
                 <LinearLayout
+                    style="@style/MediaDetailContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:orientation="vertical"
-                    android:padding="@dimen/standard_gap">
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/tiny_gap"
-                        android:text="@string/media_detail_coordinates"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
+                        style="@style/MediaDetailTextLabelGeneric"
+                        android:layout_width="@dimen/widget_margin"
+                        android:layout_height="match_parent"
+                        android:text="@string/media_detail_coordinates" />
 
-                    <fr.free.nrw.commons.ui.widget.CompatTextView
+                    <TextView
                         android:id="@+id/mediaDetailCoordinates"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/widget_margin"
+                        android:layout_height="match_parent"
+                        android:layout_weight="70"
                         android:layout_gravity="start"
-                        android:background="?attr/subBackground"
                         android:foreground="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
                         android:padding="@dimen/small_gap"
-                        android:textColor="@android:color/white"
+                        android:textColor="?attr/mediaDetailsText"
                         android:textSize="@dimen/description_text_size"
-                        app:drawablePadding="@dimen/tiny_gap"
-                        app:drawableStart="@drawable/ic_map_white_24dp"
+                        android:drawablePadding="@dimen/tiny_gap"
+                        android:drawableStart="?attr/iconMap24"
                         tools:text="Coordinates link" />
                 </LinearLayout>
 
-                <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/small_gap" />
+                <LinearLayout
+                  android:id="@+id/depicts_layout"
+                  style="@style/MediaDetailContainer"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:textStyle="bold">
+
+                  <TextView
+                    style="@style/MediaDetailTextLabelGeneric"
+                    android:layout_width="@dimen/widget_margin"
+                    android:layout_height="match_parent"
+                    android:text="@string/media_detail_depiction" />
+
+                  <LinearLayout
+                    android:id="@+id/media_detail_depiction_container"
+                    android:layout_width="@dimen/widget_margin"
+                    android:layout_height="match_parent"
+                    android:layout_weight="70"
+                    android:orientation="vertical" />
+                </LinearLayout>
 
                 <LinearLayout
+                    style="@style/MediaDetailContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:orientation="vertical"
-                    android:padding="@dimen/standard_gap"
+                    android:orientation="horizontal"
                     android:textStyle="bold">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:paddingBottom="@dimen/tiny_gap"
-                        android:text="@string/detail_panel_cats_label"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
+                        style="@style/MediaDetailTextLabelGeneric"
+                        android:layout_width="@dimen/widget_margin"
+                        android:layout_height="match_parent"
+                        android:text="@string/detail_panel_cats_label" />
 
                     <LinearLayout
                         android:id="@+id/mediaDetailCategoryContainer"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/widget_margin"
+                        android:layout_height="match_parent"
+                        android:layout_weight="70"
                         android:orientation="vertical" />
                 </LinearLayout>
 
-                <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/small_gap" />
-
                 <LinearLayout
+                    style="@style/MediaDetailContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:orientation="vertical"
-                    android:padding="@dimen/standard_gap">
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/tiny_gap"
-                        android:text="@string/media_detail_uploaded_date"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
+                        style="@style/MediaDetailTextLabelGeneric"
+                        android:layout_width="@dimen/widget_margin"
+                        android:layout_height="match_parent"
+                        android:text="@string/media_detail_uploaded_date" />
 
                     <TextView
+                        style="@style/MediaDetailTextBody"
                         android:id="@+id/mediaDetailuploadeddate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:background="?attr/subBackground"
-                        android:padding="@dimen/small_gap"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/description_text_size"
+                        android:layout_width="@dimen/widget_margin"
+                        android:layout_height="match_parent"
                         tools:text="Uploaded date" />
                 </LinearLayout>
 
-                <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/small_gap" />
-
                 <LinearLayout
                     android:id="@+id/nominatedDeletionBanner"
-                    android:background="@color/deleteRed"
+                    android:background="?attr/mediaDetailNominationBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="@dimen/standard_gap"
+                    android:padding="@dimen/quarter_standard_height"
                     android:visibility="gone">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -299,6 +295,7 @@
                         android:textColor="@color/primaryTextColor"
                         android:textSize="@dimen/normal_text"
                         android:textStyle="bold"/>
+
                     <TextView
                         android:id="@+id/seeMore"
                         android:layout_width="match_parent"
@@ -310,35 +307,23 @@
                         android:textStyle="bold"/>
                 </LinearLayout>
 
-                <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/small_gap" />
-
                 <LinearLayout
+                    style="@style/MediaDetailContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:orientation="vertical"
-                    android:padding="@dimen/standard_gap">
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/tiny_gap"
-                        android:text="@string/media_detail_discussion"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
+                        style="@style/MediaDetailTextLabelGeneric"
+                        android:layout_width="@dimen/widget_margin"
+                        android:layout_height="match_parent"
+                        android:text="@string/media_detail_discussion" />
 
                     <TextView
+                        style="@style/MediaDetailTextBody"
                         android:id="@+id/mediaDetailDisc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:background="?attr/subBackground"
-                        android:padding="@dimen/small_gap"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/description_text_size" />
+                        android:layout_width="@dimen/widget_margin"
+                        android:layout_height="match_parent" />
                 </LinearLayout>
 
                 <Button
@@ -346,7 +331,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/standard_gap"
-                    android:background="@color/button_blue"
+                    android:background="@drawable/bg_copy_wikitext_button"
                     android:text="@string/copy_wikicode"
                     android:textColor="@color/primaryTextColor" />
 

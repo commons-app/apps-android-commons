@@ -6,6 +6,27 @@
 * Robin Owain
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+    <item quantity="one">%1$d ffeil yn uwchlwytho</item>
+    <item quantity="other">%1$d ffeil yn uwchlwytho</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">Cychwyn %1$d uwchlwythiad</item>
+    <item quantity="other">Cychwyn uwchlwytho %1$d ffeil</item>
+  </plurals>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d uwchlwythiad</item>
+    <item quantity="other">%1$d uwchlwythiad</item>
+  </plurals>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">Caiff y ddelwedd hon ei thrwyddedu yn ôl termau\'r drwydded %1$s</item>
+    <item quantity="other">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
+  </plurals>
   <string name="title_activity_explore">Archwilio</string>
   <string name="preference_category_appearance">Ymddangosiad</string>
   <string name="preference_category_general">Cyffredinol</string>
@@ -36,10 +57,6 @@
   <string name="upload_progress_notification_title_finishing">Yn gorffen uwchlwytho %1$s</string>
   <string name="upload_failed_notification_title">Methwyd uwchlwytho %1$s</string>
   <string name="upload_failed_notification_subtitle">Tapiwch i weld</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">%1$d ffeil yn uwchlwytho</item>
-    <item quantity="other">%1$d ffeil yn uwchlwytho</item>
-  </plurals>
   <string name="title_activity_contributions">Fy Uwchlwythiadau Diweddaraf</string>
   <string name="contribution_state_queued">Yn y ciw</string>
   <string name="contribution_state_failed">Methiant</string>
@@ -51,8 +68,7 @@
   <string name="provider_contributions">Fy uwchlwythiadau</string>
   <string name="menu_share">Rhannu</string>
   <string name="menu_open_in_browser">Agor yn y Porwr</string>
-  <string name="share_title_hint">Teitl (angenrheidiol)</string>
-  <string name="add_title_toast">Rhowch deitl i\'r ffeil</string>
+  <string name="share_title_hint" fuzzy="true">Teitl (angenrheidiol)</string>
   <string name="share_description_hint">Disgrifiad</string>
   <string name="login_failed_network">Yn methu mewngofnodi - methodd y rhwydwaith</string>
   <string name="login_failed_wrong_credentials">Methwyd mewngofnodi - gwirwch eich enw defnyddiwr a\'ch cyfrinair</string>
@@ -72,19 +88,6 @@
   <string name="gps_disabled">Ataliwyd GPS ar eich dyfais. Ydych chi am ei droi\'n weithredol?</string>
   <string name="enable_gps">Gweithredu\'r GPS</string>
   <string name="contributions_subtitle_zero">Heb uwchlwytho eto</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Cychwyn %1$d uwchlwythiad</item>
-    <item quantity="other">Cychwyn uwchlwytho %1$d ffeil</item>
-  </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d uwchlwythiad</item>
-    <item quantity="other">%1$d uwchlwythiad</item>
-  </plurals>
   <string name="categories_not_found">Dim categori\'n cyfateb i %1$s ar gael</string>
   <string name="categories_skip_explanation">Ychwanegwch gategori/au er mwyn i bobl fedru canfod eich ffeiliau ar Gomin Wicimedia.\n\nCychwynwch deipio i ychwanegu categori/au.</string>
   <string name="categories_activity_title">Categorïau</string>
@@ -106,10 +109,6 @@
   <string name="no_uploads_yet">Nid ydych wedi uwchlwytho ffotograffau eto.</string>
   <string name="menu_retry_upload">Ailgynnig</string>
   <string name="menu_cancel_upload">Diddymer</string>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">Caiff y ddelwedd hon ei thrwyddedu yn ôl termau\'r drwydded %1$s</item>
-    <item quantity="other">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Wrth gynnig y llun yma, rwy\'n datgan mai fy ngwaith i ydyw ac nad yw\'n cynnwys unrhyw beth dan hawlfrain, na hunlun, a\'i fod yn cadw at &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Bolisiau Comin Wicimedia&lt;/a&gt;.</string>
   <string name="menu_download">Lawrlwytho</string>
   <string name="preference_license">Trwydded Ddiofyn (\'default\')</string>

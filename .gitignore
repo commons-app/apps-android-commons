@@ -7,6 +7,7 @@ app/src/main/gen/*
 
 # IDEA/Android Studio Ignore exceptions
 !/.idea/codeStyles/
+!/.idea/inspectionProfiles/
 
 # Gradle
 .gradle

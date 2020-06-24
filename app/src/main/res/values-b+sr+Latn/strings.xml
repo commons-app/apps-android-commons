@@ -6,6 +6,24 @@
 * Zoranzoki21
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d datoteka se otprema</item>
+    <item quantity="other">%1$d datoteke se otpremaju</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d otpremanje</item>
+    <item quantity="other">%1$d otpremanja</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Počinje %1$d otpremanje</item>
+    <item quantity="other">Počinju %1$d otpremanja</item>
+  </plurals>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d otpremanje</item>
+    <item quantity="other">%1$d otpremanja</item>
+  </plurals>
+  <string name="share_license_summary" fuzzy="true">Slika će se voditi pod licencom %1$s</string>
   <string name="title_activity_explore">Istraga</string>
   <string name="navigation_item_explore">Istraga</string>
   <string name="preference_category_appearance">Izgled</string>
@@ -36,10 +54,6 @@
   <string name="upload_progress_notification_title_finishing">Završavanje otpremanja datoteke „%1$s”</string>
   <string name="upload_failed_notification_title">Otpremanje datoteke „%1$s” nije uspelo</string>
   <string name="upload_failed_notification_subtitle">Dodirnite da biste videli</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d datoteka se otprema</item>
-    <item quantity="other">%1$d datoteke se otpremaju</item>
-  </plurals>
   <string name="title_activity_contributions">Moja nedavna otpremanja</string>
   <string name="contribution_state_queued">Na čekanju</string>
   <string name="contribution_state_failed">Nije uspelo</string>
@@ -52,7 +66,6 @@
   <string name="menu_share">Deli</string>
   <string name="menu_open_in_browser">Prikaži u pregledaču</string>
   <string name="share_title_hint" fuzzy="true">Naslov</string>
-  <string name="add_title_toast">Pružite naslov za ovu datoteku</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Prijava nije moguća — greška na mreži</string>
   <string name="login_failed_wrong_credentials">Prijava nije moguća — proverite svoje korisničko ime i lozinku</string>
@@ -72,19 +85,6 @@
   <string name="gps_disabled">GPS je onemogućen na vašem uređaju. Želite li da ga omogućite?</string>
   <string name="enable_gps">Omogući GPS</string>
   <string name="contributions_subtitle_zero">Još uvek nema otpremanja</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d otpremanje</item>
-    <item quantity="other">%1$d otpremanja</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Počinje %1$d otpremanje</item>
-    <item quantity="other">Počinju %1$d otpremanja</item>
-  </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d otpremanje</item>
-    <item quantity="other">%1$d otpremanja</item>
-  </plurals>
   <string name="categories_not_found">Nema kategorija koje odgovaraju %1$s</string>
   <string name="categories_skip_explanation">Dodajte kategorije na slike da biste olakšali korisnicima njihovo pronalaženje na Ostavi.\n\nDa biste dodali kategoriju, počnite sa pisanjem njenog imena.</string>
   <string name="categories_activity_title">Kategorije</string>
@@ -105,7 +105,6 @@
   <string name="no_uploads_yet">Još uvek niste otpremili nijednu fotografiju.</string>
   <string name="menu_retry_upload">Pokušaj ponovo</string>
   <string name="menu_cancel_upload">Otkaži</string>
-  <string name="share_license_summary" fuzzy="true">Slika će se voditi pod licencom %1$s</string>
   <string name="media_upload_policy">Slanjem ove slike, ja tvrdim da je u pitanju moj rad, da ne sadrži materijal ili selfije zaštićene autorskim pravima, te da je na ostale načine u skladu sa &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;smernicama Vikimedijine ostave&lt;/a&gt;.</string>
   <string name="menu_download">Preuzmi</string>
   <string name="preference_license">Podrazumevana licenca</string>

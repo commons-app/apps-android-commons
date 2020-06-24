@@ -14,6 +14,49 @@
 * Ата
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Завантажується %1$d файл</item>
+    <item quantity="few">Завантажуються %1$d файли</item>
+    <item quantity="many">Завантажується %1$d файлів</item>
+    <item quantity="other">Завантажується %1$d файлів</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d завантаження</item>
+    <item quantity="few">%1$d завантаження</item>
+    <item quantity="many">%1$d завантажень</item>
+    <item quantity="other">%1$d завантажень</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Починається %1$d завантаження</item>
+    <item quantity="few">Починаються %1$d завантаження</item>
+    <item quantity="many">Починаються %1$d завантажень</item>
+    <item quantity="other">Починаються %1$d завантажень</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d завантаження</item>
+    <item quantity="few">%1$d завантаження</item>
+    <item quantity="many">%1$d завантажень</item>
+    <item quantity="other">%1$d завантажень</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Це зображення буде ліцензовано на умовах %1$s</item>
+    <item quantity="few">Ці зображення буде ліцензовано на умовах %1$s</item>
+    <item quantity="many">Ці зображення буде ліцензовано на умовах %1$s</item>
+    <item quantity="other">Ці зображення буде ліцензовано на умовах %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d завантаження</item>
+    <item quantity="few">%1$d завантаження</item>
+    <item quantity="many">%1$d завантажень</item>
+    <item quantity="other">%1$d завантажень</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Отримання спільного контенту. Обробка зображення може зайняти трохи часу, залежно від розміру зображення і від Вашого пристрою</item>
+    <item quantity="few">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
+    <item quantity="many">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
+    <item quantity="other">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
+  </plurals>
   <string name="title_activity_explore">Дослідити</string>
   <string name="navigation_item_explore">Дослідити</string>
   <string name="preference_category_appearance">Зовнішній вигляд</string>
@@ -45,12 +88,6 @@
   <string name="upload_progress_notification_title_finishing">Завершення завантаження %1$s</string>
   <string name="upload_failed_notification_title">Не вдалося завантажити %1$s</string>
   <string name="upload_failed_notification_subtitle">Торкніться, щоб переглянути</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Завантажується %1$d файл</item>
-    <item quantity="few">Завантажуються %1$d файли</item>
-    <item quantity="many">Завантажується %1$d файлів</item>
-    <item quantity="other">Завантажується %1$d файлів</item>
-  </plurals>
   <string name="title_activity_contributions">Мої останні завантаження</string>
   <string name="contribution_state_queued">У черзі</string>
   <string name="contribution_state_failed">Не вдалося</string>
@@ -62,9 +99,10 @@
   <string name="provider_contributions">Мої завантаження</string>
   <string name="menu_share">Поширити</string>
   <string name="menu_open_in_browser">Відкрити у браузері</string>
-  <string name="share_title_hint">Назва (обов\'язково)</string>
-  <string name="add_title_toast">Будь ласка, вкажіть назву цього файлу</string>
+  <string name="share_title_hint">Підпис (обов\'язково)</string>
+  <string name="add_caption_toast">Будь ласка, вкажіть підпис цьому файлу</string>
   <string name="share_description_hint">Опис</string>
+  <string name="share_caption_hint">Підпис (не більше 255 символів)</string>
   <string name="login_failed_network">Неможливо увійти — збій у мережі</string>
   <string name="login_failed_wrong_credentials">Неможливо увійти — будь ласка перевірте ім\'я користувача та пароль</string>
   <string name="login_failed_throttled">Надто багато невдалих спроб. Будь ласка, спробуйте знову через кілька хвилин.</string>
@@ -77,32 +115,18 @@
   <string name="provider_modifications">Модифікації</string>
   <string name="menu_upload_single">Завантажити</string>
   <string name="categories_search_text_hint">Пошук категорій</string>
+  <string name="depicts_search_text_hint">Пошук об\'єктів, що зображено у цьому медіа (напр. гори, Тадж-Махал, тощо)</string>
   <string name="menu_save_categories">Зберегти</string>
   <string name="refresh_button">Оновити</string>
   <string name="display_list_button">Список</string>
   <string name="gps_disabled">GPS вимкнено на Вашому пристрої. Бажаєте увімкнути його?</string>
   <string name="enable_gps">Увімкнути GPS</string>
   <string name="contributions_subtitle_zero">Ще нема завантажень</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d завантаження</item>
-    <item quantity="few">%1$d завантаження</item>
-    <item quantity="many">%1$d завантажень</item>
-    <item quantity="other">%1$d завантажень</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Починається %1$d завантаження</item>
-    <item quantity="few">Починаються %1$d завантаження</item>
-    <item quantity="many">Починаються %1$d завантажень</item>
-    <item quantity="other">Починаються %1$d завантажень</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d завантаження</item>
-    <item quantity="few">%1$d завантаження</item>
-    <item quantity="many">%1$d завантажень</item>
-    <item quantity="other">%1$d завантажень</item>
-  </plurals>
   <string name="categories_not_found">Категорій, відповідних %1$s, не знайдено</string>
+  <string name="depictions_not_found">Не знайдено елементів вікіданих, що відповідають %1$s</string>
+  <string name="no_child_classes">%1$s не має дочірніх класів</string>
+  <string name="no_parent_classes">%1$s не має батьківських класів</string>
+  <string name="depictions_image_not_found">Немає зображення для описування</string>
   <string name="categories_skip_explanation">Додайте категорії, щоб Ваші зображення було легше знайти у Вікісховищі. \n\nПочніть вводити текст, щоб додати категорії.</string>
   <string name="categories_activity_title">Категорії</string>
   <string name="title_activity_settings">Налаштування</string>
@@ -119,16 +143,11 @@
   <string name="menu_feedback">Надіслати відгук (електронною поштою)</string>
   <string name="no_email_client">Не встановлено програми електронної пошти</string>
   <string name="provider_categories">Недавно використані категорії</string>
+  <string name="provider_depictions">Останні об\'єкти, що зображено</string>
   <string name="waiting_first_sync">Очікується перша синхронізація…</string>
   <string name="no_uploads_yet">Ви ще не завантажили жодної світлини.</string>
   <string name="menu_retry_upload">Повторити</string>
   <string name="menu_cancel_upload">Скасувати</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Це зображення буде ліцензовано на умовах %1$s</item>
-    <item quantity="few">Ці зображення буде ліцензовано на умовах %1$s</item>
-    <item quantity="many">Ці зображення буде ліцензовано на умовах %1$s</item>
-    <item quantity="other">Ці зображення буде ліцензовано на умовах %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Подаючи це зображення, я підтверджую, що це моя власна робота, яка не містить захищених авторським правом матеріалів чи селфі, а також відповідає &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/uk\"&gt;правилам Вікісховища&lt;/a&gt;.</string>
   <string name="menu_download">Завантажити</string>
   <string name="preference_license">Усталена ліцензія</string>
@@ -180,6 +199,8 @@
   <string name="detail_panel_cats_label">Категорії</string>
   <string name="detail_panel_cats_loading">Завантаження…</string>
   <string name="detail_panel_cats_none">Нічого не обрано</string>
+  <string name="detail_caption_empty">Без підпису</string>
+  <string name="detail_depiction_empty">Немає об\'єктів, що зображено</string>
   <string name="detail_description_empty">Немає опису</string>
   <string name="detail_discussion_empty">Немає обговорень</string>
   <string name="detail_license_empty">Невідома ліцензія</string>
@@ -193,10 +214,14 @@
   <string name="title_activity_nearby">Місця поблизу</string>
   <string name="no_nearby">Не знайдено місць поблизу</string>
   <string name="warning">Попередження</string>
+  <string name="duplicate_image_found">Виявлено дублікат зображення</string>
   <string name="upload_image_duplicate">Цей файл вже існує на Вікісховищі. Ви впевнені, що хочете продовжити?</string>
+  <string name="upload">Вивантажити</string>
   <string name="yes">Так</string>
   <string name="no">Ні</string>
+  <string name="media_detail_caption">Підпис</string>
   <string name="media_detail_title">Назва</string>
+  <string name="media_detail_depiction">Описи зображеного</string>
   <string name="media_detail_description">Опис</string>
   <string name="media_detail_discussion">Обговорення</string>
   <string name="media_detail_author">Автор</string>
@@ -253,11 +278,12 @@
   <string name="nearby_needs_permissions">Місця поблизу неможливо показати без дозволу на визначення місця розташування.</string>
   <string name="no_description_found">опис не знайдено</string>
   <string name="nearby_info_menu_commons_article">Сторінка файлу у Вікісховищі</string>
-  <string name="nearby_info_menu_wikidata_article">Елемент Вікіданих</string>
+  <string name="nearby_info_menu_wikidata_article">Елемент вікіданих</string>
   <string name="nearby_info_menu_wikipedia_article">Стаття Вікіпедії</string>
   <string name="error_while_cache">Помилка кешування зображень</string>
   <string name="title_info">Унікальна описова назва файлу. Ви можете використовувати простий текст з пробілами. Не вказуйте розширення файлу</string>
   <string name="description_info">Будь ласка, докладно опишіть файл: де його було зроблено? що на ньому зображено? який контекст? Будь ласка, опишіть об\'єкти чи осіб. Додайте інформацію, яку не можна легко здогадатися, наприклад, пору доби для фотографії пейзажу. Якщо зображено щось незвичайне, спробуйте пояснити, що робить його незвичайним.</string>
+  <string name="caption_info">Будь ласка, створіть короткий опис цього зображення (не більше 255 символів).</string>
   <string name="upload_image_too_dark">Це зображення надто темне; Ви впевнені, що хочете його завантажити? Вікісховище призначене для зображень, що мають енциклопедичне значення.</string>
   <string name="upload_image_blurry">Це зображення розмите; Ви впевнені, що хочете його завантажити? Вікісховище призначене для зображень, що мають енциклопедичне значення.</string>
   <string name="upload_problem_exist">Потенційні проблеми з цим зображенням:</string>
@@ -267,6 +293,7 @@
   <string name="upload_problem_different_geolocation">Зображення виконано в іншому місці.</string>
   <string name="upload_problem_fbmd">Будь ласка, завантажуйте тільки ті зображення, які були зроблені вами. Не завантажуйте зображень, які ви знайшли у Фейсбуці.</string>
   <string name="upload_problem_do_you_continue">Ви все одно хочете завантажити це зображення?</string>
+  <string name="upload_problem_image">Виявлено проблеми із зображенням</string>
   <string name="internet_downloaded">Будь ласка, завантажуйте тільки ті зображення, які були зроблені вами. Не завантажуйте зображень, які ви знайшли в інтернеті.</string>
   <string name="give_permission">Надати дозвіл</string>
   <string name="use_external_storage">Використовувати зовнішнє сховище</string>
@@ -336,9 +363,11 @@
   <string name="search_recent_header">Недавні пошуки:</string>
   <string name="provider_searches">Недавні пошукові запити</string>
   <string name="error_loading_categories">Сталася помилка під час завантаження категорій.</string>
+  <string name="error_loading_depictions">Сталася помилка при завантаженні описів зображеного.</string>
   <string name="error_loading_subcategories">Сталася помилка під час завантаження підкатегорій.</string>
   <string name="search_tab_title_media">Медіафайли</string>
   <string name="search_tab_title_categories">Категорії</string>
+  <string name="search_tab_title_depictions">Елементи</string>
   <string name="explore_tab_title_featured">Обране</string>
   <string name="explore_tab_title_mobile">Завантаження з мобільного</string>
   <string name="successful_wikidata_edit">Зображення додано до сторінки %1$s у Вікіданих!</string>
@@ -413,12 +442,6 @@
   <string name="submit">Надіслати</string>
   <string name="upload_title_duplicate">Файл із назвою %1$s існує. Ви впевнені, що хочете продовжити?</string>
   <string name="map_application_missing">На Вашому пристрої не знайдено сумісного додатка з картами. Будь ласка, встановіть додаток з картами, якщо хочете скористатись цією функцією.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d завантаження</item>
-    <item quantity="few">%1$d завантаження</item>
-    <item quantity="many">%1$d завантажень</item>
-    <item quantity="other">%1$d завантажень</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Закладки</string>
   <string name="title_activity_bookmarks">Закладки</string>
   <string name="title_page_bookmarks_pictures">Зображення</string>
@@ -443,9 +466,9 @@
   <string name="desc_language_Asia">Азія</string>
   <string name="desc_language_Pacific">Океанія</string>
   <string name="no_categories_selected">Жодної категорії не вибрано</string>
-  <string name="no_categories_selected_warning_desc">Зображення без категорій рідко використовуються. Ви впевнені, що хочете надіслати без вибору категорій?</string>
-  <string name="yes_submit">Так, надіслати</string>
-  <string name="no_go_back">Ні, повернутись</string>
+  <string name="no_categories_selected_warning_desc">Зображення без категорій рідко використовуються. Ви впевнені, що хочете продовжити без вказаних категорій?</string>
+  <string name="no_depictions_selected">Описів зображеного не вибрано</string>
+  <string name="no_depictions_selected_warning_desc">Медіа, у яких вказані зображувані об\'єкти, можуть бути легше знайдені та використані надалі. Ви впевнені, що хочете продовжити не вказавши що саме тут зображено?</string>
   <string name="upload_flow_all_images_in_set">(Для всіх зображень у наборі)</string>
   <string name="search_this_area">Шукати в цій зоні</string>
   <string name="nearby_card_permission_title">Запит на дозвіл</string>
@@ -506,12 +529,6 @@
   <string name="review_thanks_no_button_text">Наступне зображення</string>
   <string name="skip_image_explanation">Натискання цієї кнопки дасть вам інше недавно завантажене зображення з Вікісховища</string>
   <string name="review_image_explanation">Ви можете перевіряти зображення і покращувати якість Вікісховища.\nЄ чотири параметри перевірки:\n— Чи зображення відповідає призначенню Вікісховища?\n— Чи зображення відповідає правилам авторського права?\n— Чи зображення коректно категоризоване?\n— Якщо все добре, то ви можете подякувати завантажувачу.</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">Отримання спільного контенту. Обробка зображення може зайняти трохи часу, залежно від розміру зображення і від Вашого пристрою</item>
-    <item quantity="few">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
-    <item quantity="many">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
-    <item quantity="other">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
-  </plurals>
   <string name="no_image">Використаних зображень немає</string>
   <string name="no_image_reverted">Відхилених зображень немає</string>
   <string name="no_image_uploaded">Завантажених зображень немає</string>
@@ -526,7 +543,7 @@
   <string name="images_featured_explanation">Вибрані зображення — це зображення від вправних фотографів та ілюстраторів, які спільнота Вікісховища визначила як такі, що мають найкращу якість на сайті.</string>
   <string name="images_via_nearby_explanation">Зображення, завантажені через «Поблизу», — це зображення, завантажені через дослідження місць на карті.</string>
   <string name="thanks_received_explanation">Ця функція дозволяє редакторам надіслати «дякую» користувачам, які роблять корисні редагування, — скориставшись невеличким посиланням на сторінці історії або порівняння версій.</string>
-  <string name="previous_image_title_description">Скопіювати попередні назву й опис</string>
+  <string name="previous_image_caption_description">Скопіювати попередні підпис та опис</string>
   <string name="previous_button_tooltip_message">Натисніть, щоб використати назву та опис, які ви вводили для свого попереднього зображення, і змінити їх під поточне</string>
   <string name="welcome_do_upload_content_description">Приклади добрих зображень для завантаження у Вікісховище</string>
   <string name="welcome_dont_upload_content_description">Приклади зображень, які не слід завантажувати</string>
@@ -545,6 +562,7 @@
   <string name="share_via">Поділитися програмкою через…</string>
   <string name="image_info">Інформація про зображення</string>
   <string name="no_categories_found">Категорії не знайдені</string>
+  <string name="no_depiction_found">Описів зображеного не знайдено</string>
   <string name="upload_cancelled">Завантаження скасовано</string>
   <string name="previous_image_title_description_not_found">Відсутній заголовок або опис попереднього зображення</string>
   <string name="dialog_box_text_nomination">Чому %1$s має бути видалено?</string>
@@ -577,6 +595,9 @@
   <string name="place_type">Тип місця:</string>
   <string name="nearby_search_hint">Міст, музей, готель тощо</string>
   <string name="you_must_reset_your_passsword">Щось пішло не так із процесом входу, ви маєте скинути пароль !</string>
+  <string name="title_for_media">МЕДІА</string>
+  <string name="title_for_child_classes">ДОЧІРНІ КЛАСИ</string>
+  <string name="title_for_parent_classes">БАТЬКІВСЬКІ КЛАСИ</string>
   <string name="upload_nearby_place_found_title">Знайдено місце поблизу</string>
   <string name="upload_nearby_place_found_description">Чи це — фото місця %1$s?</string>
   <string name="title_app_shortcut_explore">Дослідити</string>
@@ -594,5 +615,6 @@
   <string name="recommend_high_accuracy_mode">Щоб отримати кращі результати, виберіть режим високої точності.</string>
   <string name="ask_to_turn_location_on">Увімкнути визначення місця розташування?</string>
   <string name="nearby_needs_location">«Поблизу» потребує увімкненого визначення місця розташування, щоб працювати належним чином</string>
-  <string name="use_location_from_similar_image">Ви зробили ці два знімки в одному й тому ж місці? Хочете використати широту/довготу для зображення справа?</string>
+  <string name="use_location_from_similar_image">Ви зробили ці два знімки в одному й тому ж місці? Хочете використати широту/довготу зображення справа?</string>
+  <string name="nearby_no_results">Місць не знайдено, спробуйте змінити критерії пошуку.</string>
 </resources>

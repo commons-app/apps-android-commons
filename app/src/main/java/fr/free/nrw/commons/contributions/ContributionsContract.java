@@ -12,16 +12,6 @@ public class ContributionsContract {
 
     public interface View {
 
-        void showWelcomeTip(boolean numberOfUploads);
-
-        void showProgress(boolean shouldShow);
-
-        void showNoContributionsUI(boolean shouldShow);
-
-        void setUploadCount(int count);
-
-        void showContributions(List<Contribution> contributionList);
-
         void showMessage(String localizedMessage);
     }
 
@@ -30,8 +20,6 @@ public class ContributionsContract {
         Contribution getContributionsWithTitle(String uri);
 
         void deleteUpload(Contribution contribution);
-
-        Media getItemAtPosition(int i);
 
         void updateContribution(Contribution contribution);
 

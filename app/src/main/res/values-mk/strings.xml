@@ -6,6 +6,35 @@
 * Vlad5250
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Се подига %1$d податотека</item>
+    <item quantity="other">Се подигаат %1$d податотеки</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Започнувам %1$d подигање</item>
+    <item quantity="other">Започнувам %1$d подигања</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d подигање</item>
+    <item quantity="other">%1$d подигања</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Сликава ќе се води под лиценцата %1$s</item>
+    <item quantity="other">Сликиве ќе се водат под лиценците %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d подигање</item>
+    <item quantity="other">%1$d подигања</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Добивам споделена содржина. Обработката може да потрае, зависно од големината на сликата и вашиот уред</item>
+    <item quantity="other">Добивам споделена содржина. Обработката може да потрае, зависно од големината на сликите и вашиот уред</item>
+  </plurals>
   <string name="title_activity_explore">Истражи</string>
   <string name="navigation_item_explore">Истражи</string>
   <string name="preference_category_appearance">Изглед</string>
@@ -37,10 +66,6 @@
   <string name="upload_progress_notification_title_finishing">Завршувам со подигање на „%1$s“</string>
   <string name="upload_failed_notification_title">Подигањето на „%1$s“ не успеа</string>
   <string name="upload_failed_notification_subtitle">Допрете за да погледате</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Се подига %1$d податотека</item>
-    <item quantity="other">Се подигаат %1$d податотеки</item>
-  </plurals>
   <string name="title_activity_contributions">Мои скорешни подигања</string>
   <string name="contribution_state_queued">Чека ред</string>
   <string name="contribution_state_failed">Не успеа</string>
@@ -52,9 +77,10 @@
   <string name="provider_contributions">Мои подигања</string>
   <string name="menu_share">Сподели</string>
   <string name="menu_open_in_browser">Погледај во прелистувач</string>
-  <string name="share_title_hint">Наслов (задолж.)</string>
-  <string name="add_title_toast">Ставете ѝ наслов на податотеката</string>
+  <string name="share_title_hint">Опис (задолж.)</string>
+  <string name="add_caption_toast">Ставете ѝ опис на податотеката</string>
   <string name="share_description_hint">Опис</string>
+  <string name="share_caption_hint">Опис (највеќе 255 знаци)</string>
   <string name="login_failed_network">Не можам да Ве најавам — мрежата не работи</string>
   <string name="login_failed_wrong_credentials">Не можев да ве најавам. Проверете ги корисничкото име и лозинката.</string>
   <string name="login_failed_throttled">Направени се премногу неуспешни обиди. Обидете се пак за некоја минута.</string>
@@ -67,26 +93,18 @@
   <string name="provider_modifications">Преиначувања</string>
   <string name="menu_upload_single">Подигни</string>
   <string name="categories_search_text_hint">Пребарај категории</string>
+  <string name="depicts_search_text_hint">Пребарајте ги предметите прикажани на сликата или снимката (планина, Лесновски манастир и тн.)</string>
   <string name="menu_save_categories">Зачувај</string>
   <string name="refresh_button">Превчитај</string>
   <string name="display_list_button">Список</string>
   <string name="gps_disabled">GPS е исклучен на вашиот уред. Дали сакате да го вклучите?</string>
   <string name="enable_gps">Вклучи GPS</string>
   <string name="contributions_subtitle_zero">Сè уште нема подигања</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Започнувам %1$d подигање</item>
-    <item quantity="other">Започнувам %1$d подигања</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d подигање</item>
-    <item quantity="other">%1$d подигања</item>
-  </plurals>
   <string name="categories_not_found">Нема категории што одговараат на %1$s</string>
+  <string name="depictions_not_found">Не најдов предмети од Википодатоците што одговараат на %1$s</string>
+  <string name="no_child_classes">%1$s нема зависни класи</string>
+  <string name="no_parent_classes">%1$s нема матични класи</string>
+  <string name="depictions_image_not_found">Нема слика за приказ</string>
   <string name="categories_skip_explanation">Ставете им категории на сликите, за да можат корисниците полесно да ги најдат на Ризницата.\n\nЗа да ставите категорија, почнете со пишување на нејзиното име.</string>
   <string name="categories_activity_title">Категории</string>
   <string name="title_activity_settings">Нагодувања</string>
@@ -103,14 +121,11 @@
   <string name="menu_feedback">Испратете Ваше мислење (по е-пошта)</string>
   <string name="no_email_client">Немате воспоставено клиент за е-пошта</string>
   <string name="provider_categories">Неодамна искористени категории</string>
+  <string name="provider_depictions">Неодамна употребени прикажувања</string>
   <string name="waiting_first_sync">Го чекам првото усогласување…</string>
   <string name="no_uploads_yet">Сè уште немате подигнато ниедна слика.</string>
   <string name="menu_retry_upload">Пробај пак</string>
   <string name="menu_cancel_upload">Откажи</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Сликава ќе се води под лиценцата %1$s</item>
-    <item quantity="other">Сликиве ќе се водат под лиценците %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Поднесувајќи ја сликава, изјавувам дека истата е мое сопствено дело, дека не содржи никаков материјал заштитен со авторски права, не содржи самослици, и дека на секој друг начин е во склад со &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/mk?uselang=mk\"&gt;правилата на Ризницата&lt;/a&gt;.</string>
   <string name="menu_download">Преземи</string>
   <string name="preference_license">Стандардна лиценца</string>
@@ -162,6 +177,8 @@
   <string name="detail_panel_cats_label">Категории</string>
   <string name="detail_panel_cats_loading">Вчитувам…</string>
   <string name="detail_panel_cats_none">Ништо не е одбрано</string>
+  <string name="detail_caption_empty">Нема опис</string>
+  <string name="detail_depiction_empty">Нема прикажување</string>
   <string name="detail_description_empty">Нема опис</string>
   <string name="detail_discussion_empty">Нема разговор</string>
   <string name="detail_license_empty">Непозната лиценца</string>
@@ -175,10 +192,14 @@
   <string name="title_activity_nearby">Околни места</string>
   <string name="no_nearby">Не најдов околни места</string>
   <string name="warning">Предупредување</string>
+  <string name="duplicate_image_found">Пронајдена дуплирана слика</string>
   <string name="upload_image_duplicate">Податотекава веќе постои на Ризницата. Дали сигурно сакате да продолжите?</string>
+  <string name="upload">Подигни</string>
   <string name="yes">Да</string>
   <string name="no">Не</string>
+  <string name="media_detail_caption">Опис</string>
   <string name="media_detail_title">Наслов</string>
+  <string name="media_detail_depiction">Прикажувања</string>
   <string name="media_detail_description">Опис</string>
   <string name="media_detail_discussion">Разговор</string>
   <string name="media_detail_author">Автор</string>
@@ -240,6 +261,7 @@
   <string name="error_while_cache">Грешка при меѓускладирање на сликите</string>
   <string name="title_info">Краток и единствен наслов на податотеката, кој ќе служи како нејзин назив. Можете да користите прост јазик со меѓупростор, но не пишувајте ја податотечната наставка</string>
   <string name="description_info">Објаснете ја податотеката што подобро можете: Каде е направена? Што е прикажано на неа? Кој е контекстот? Опишете ги предметите, објектите и личностите. Дајте сознанија што не можат лесно да се погодат, како на пр. време од денот ако се работи за природен предел. Ако на неа е претставено нешто необично, објаснете зошто прикажаното е необично.</string>
+  <string name="caption_info">Ставете краток опис на сликата. (највеќе 255 знаци)</string>
   <string name="upload_image_too_dark">Сликата ви е претемна. Дали сигурно сакате да ја подигнете? Ризницата е посветена само на слики со енциклопедиска вредност.</string>
   <string name="upload_image_blurry">Сликата ви е матна. Дали сигурно сакате да ја подигнете? Ризницата е посветена само на слики со енциклопедиска вредност.</string>
   <string name="upload_problem_exist">Потенцијални проблеми со сликава:</string>
@@ -249,6 +271,7 @@
   <string name="upload_problem_different_geolocation">Оваа слика е направена на друго место.</string>
   <string name="upload_problem_fbmd">Подигајте само слики кои самите сте ги направиле. Не подигајте слики пронајдени на туѓи профили на Фејсбук.</string>
   <string name="upload_problem_do_you_continue">Дали сепак сакате да ја подигнете?</string>
+  <string name="upload_problem_image">Пронајдени проблеми во сликата</string>
   <string name="internet_downloaded">Подигајте само слики кои самите сте ги направиле. Не подигајте слики што сте ги нашле некаде на семрежјето.</string>
   <string name="give_permission">Дај дозвола</string>
   <string name="use_external_storage">Користи надворешен склад</string>
@@ -318,9 +341,11 @@
   <string name="search_recent_header">Скорешни пребарувања:</string>
   <string name="provider_searches">Скорешни пребарувања</string>
   <string name="error_loading_categories">Се јави грешка при вчитувањето на категориите.</string>
+  <string name="error_loading_depictions">Се јави грешка при вчитувањето на прикажувањата.</string>
   <string name="error_loading_subcategories">Се јави грешка при вчитувањето на поткатегориите.</string>
   <string name="search_tab_title_media">Слики/снимки</string>
   <string name="search_tab_title_categories">Категории</string>
+  <string name="search_tab_title_depictions">Предмети</string>
   <string name="explore_tab_title_featured">Избрани</string>
   <string name="explore_tab_title_mobile">Подигнато преку мобилен уред</string>
   <string name="successful_wikidata_edit">Сликата е додадена кон %1$s на Википодатоците!</string>
@@ -395,10 +420,6 @@
   <string name="submit">Поднеси</string>
   <string name="upload_title_duplicate">Веќе постои податотека со име %1$s. Дали сигурно сакате да продолжите?</string>
   <string name="map_application_missing">Не пронајдов складен картографски прилог на вашиот уред. Преземете еден таков за да можете да ја користите оваа можност.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d подигање</item>
-    <item quantity="other">%1$d подигања</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Обележани</string>
   <string name="title_activity_bookmarks">Обележани</string>
   <string name="title_page_bookmarks_pictures">Слики</string>
@@ -423,9 +444,9 @@
   <string name="desc_language_Asia">Азија</string>
   <string name="desc_language_Pacific">Океанија</string>
   <string name="no_categories_selected">Нема избрано категории</string>
-  <string name="no_categories_selected_warning_desc">Некатегоризираните слики се слабо употребливи. Дали сигурно сакате да поднесете без да ставите категории?</string>
-  <string name="yes_submit">Да, поднеси</string>
-  <string name="no_go_back">Не, врати се</string>
+  <string name="no_categories_selected_warning_desc">Некатегоризираните слики се слабо употребливи. Дали сигурно сакате да продолжите без да ставите категории?</string>
+  <string name="no_depictions_selected">Немате избрано прикажувања</string>
+  <string name="no_depictions_selected_warning_desc">Сликите со прикажувања се полезни за наоѓање, со што е поголема веројатноста дека ќе бидат искористени. Дали сигурно сакате да продолжите без да изберете прикажувања?</string>
   <string name="upload_flow_all_images_in_set">(За сите слики во збирот)</string>
   <string name="search_this_area">Пребарај на ова подрачје</string>
   <string name="nearby_card_permission_title">Барање за дозвола</string>
@@ -486,10 +507,6 @@
   <string name="review_thanks_no_button_text">Следна слика</string>
   <string name="skip_image_explanation">Копчево ќе ви даде друга неодамна подигната слика од Ризницата</string>
   <string name="review_image_explanation">Можете да оценувате слики и да го подобрувате квалитетот на Ризницата.\n Четирите мерила за оценка се следниве: \n - Дали сликата е во делокругот? \n - Дали сликата ги следи правилата за авторски права? \n - Дали сликата е исправно категоризирана? \n - Ако сè е во ред, можете и да му се заблагодарите на подигачот.</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">Добивам споделена содржина. Обработката може да потрае, зависно од големината на сликата и вашиот уред</item>
-    <item quantity="other">Добивам споделена содржина. Обработката може да потрае, зависно од големината на сликите и вашиот уред</item>
-  </plurals>
   <string name="no_image">Нема искористени слики</string>
   <string name="no_image_reverted">Нема вратени слики</string>
   <string name="no_image_uploaded">Нема подигнати слики</string>
@@ -504,7 +521,7 @@
   <string name="images_featured_explanation">Избраните слики се дела на високообучени фотографи и илустратори кои заедницата ги избрала за да бидат истакнати како едни од најдобрите слики на Ризницата.</string>
   <string name="images_via_nearby_explanation">Сликите подигнати преку „Околни места“ се оние подигнати при откривање на места на картата.</string>
   <string name="thanks_received_explanation">Ова им дава можност на уредниците да им испраќаат благодарници на корисниците што вршат полезни уредувања. Ова се прави стискајќи на малата врска за заблагодарување во страницата за историја или разлики.</string>
-  <string name="previous_image_title_description">Прекопирај претходен наслов и опис</string>
+  <string name="previous_image_caption_description">Прекопирај претходни описи и текст</string>
   <string name="previous_button_tooltip_message">Стиснете за да ги употребите насловот и описот што ги внесовте за претходната слика, па прилагодете ги за да одговараат на тековната.</string>
   <string name="welcome_do_upload_content_description">Примери — Добри слики за подигање</string>
   <string name="welcome_dont_upload_content_description">Примери — Слики што не се за подигање</string>
@@ -523,6 +540,7 @@
   <string name="share_via">Сподели преку...</string>
   <string name="image_info">Инфо за сликата</string>
   <string name="no_categories_found">Не пронајдов ниедна категорија</string>
+  <string name="no_depiction_found">Не пронајдов ниедно прикажување</string>
   <string name="upload_cancelled">Откажено подигање</string>
   <string name="previous_image_title_description_not_found">Нема податоци за наслов и описи од претх. слика</string>
   <string name="dialog_box_text_nomination">Зошто сметате дека %1$s треба да се избрише?</string>
@@ -555,6 +573,9 @@
   <string name="place_type">Вид на место:</string>
   <string name="nearby_search_hint">Мост, музеј, хотел и тн.</string>
   <string name="you_must_reset_your_passsword">Нешто не е во ред со најавата. Ќе мора да ставите нова лозинка !!</string>
+  <string name="title_for_media">СЛИКИ/СНИМКИ</string>
+  <string name="title_for_child_classes">ЗАВИСНИ КЛАСИ</string>
+  <string name="title_for_parent_classes">МАТИЧНИ КЛАСИ</string>
   <string name="upload_nearby_place_found_title">Пронајдено околно место</string>
   <string name="upload_nearby_place_found_description">Дали ова е слика од местото %1$s?</string>
   <string name="title_app_shortcut_explore">Истражете</string>
@@ -573,4 +594,20 @@
   <string name="ask_to_turn_location_on">Да ја вклучам местоположбата?</string>
   <string name="nearby_needs_location">„Во близина“ бара местоположба за да работи</string>
   <string name="use_location_from_similar_image">Дали ги направивте ови две слики на истото место? Дали сакате да ја искористите географската ширина/должина од десната слика?</string>
+  <string name="load_more">Вчитај уште</string>
+  <string name="nearby_no_results">Не пронајдов места. Изменете ги критериумите во барањето.</string>
+  <string name="add_picture_to_wikipedia_article_title">Додај ја сликата на Википедија</string>
+  <string name="add_picture_to_wikipedia_article_desc">Дали би сакале да ја додадете сликава во википедиската статија на %1$s?</string>
+  <string name="add_picture_to_wikipedia_instructions_title">Напатствија</string>
+  <string name="add_picture_to_wikipedia_instructions_desc">Внимателно следете ги напатствијата за уредување!</string>
+  <string name="confirm">Потврди</string>
+  <string name="instructions_title">Напатствија</string>
+  <string name="wikipedia_instructions_step_1">1. Употребете го следниов викитекст:</string>
+  <string name="wikipedia_instructions_step_2">2. Стискајќи на „Потврди“ ќе ја отворите википедиската статија</string>
+  <string name="wikipedia_instructions_step_3">3. Најдете го соодвениот поднаслов во статијата кајшто би ја ставиле сликата</string>
+  <string name="wikipedia_instructions_step_4">4. Стиснете на иконката за уредување (моливче) за тој поднаслов.</string>
+  <string name="wikipedia_instructions_step_5">5. Прекопирајте го викитекстот во соодветното место.</string>
+  <string name="wikipedia_instructions_step_6">6. По потреба, уредете го викитекстот за да ја ставите сликата во прикладна положба во одност на текстот. Повеќе информации за тоа ќе видите &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;тука&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_7">7. Објавете ја статијата</string>
+  <string name="copy_wikicode_to_clipboard">Прекопирајте го викикодот во меѓускладот</string>
 </resources>

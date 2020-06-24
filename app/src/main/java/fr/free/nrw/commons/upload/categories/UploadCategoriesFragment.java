@@ -1,44 +1,36 @@
 package fr.free.nrw.commons.upload.categories;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
-import com.pedrogomez.renderers.RVRendererAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.category.CategoryClickedListener;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
-import fr.free.nrw.commons.upload.UploadCategoriesAdapterFactory;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
+import kotlin.Unit;
 import timber.log.Timber;
 
-public class UploadCategoriesFragment extends UploadBaseFragment implements CategoriesContract.View,
-        CategoryClickedListener {
+public class UploadCategoriesFragment extends UploadBaseFragment implements CategoriesContract.View {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
@@ -53,20 +45,8 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     @Inject
     CategoriesContract.UserActionListener presenter;
-    private RVRendererAdapter<CategoryItem> adapter;
-    private List<String> mediaTitleList=new ArrayList<>();
+    private UploadCategoryAdapter adapter;
     private Disposable subscribe;
-    private List<CategoryItem> categories;
-    private boolean isVisible;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    public void setMediaTitleList(List<String> mediaTitleList) {
-        this.mediaTitleList = mediaTitleList;
-    }
 
     @Nullable
     @Override
@@ -88,15 +68,6 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         presenter.onAttachView(this);
         initRecyclerView();
         addTextChangeListenerToEtSearch();
-        //get default categories for empty query
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (presenter != null && isVisible && (categories == null || categories.isEmpty())) {
-            presenter.searchForCategories(null);
-        }
     }
 
     private void addTextChangeListenerToEtSearch() {
@@ -113,8 +84,10 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     }
 
     private void initRecyclerView() {
-        adapter = new UploadCategoriesAdapterFactory(this)
-                .create(new ArrayList<>());
+        adapter = new UploadCategoryAdapter(categoryItem -> {
+            presenter.onCategoryItemClicked(categoryItem);
+            return Unit.INSTANCE;
+        });
         rvCategories.setLayoutManager(new LinearLayoutManager(getContext()));
         rvCategories.setAdapter(adapter);
     }
@@ -143,18 +116,12 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     @Override
     public void setCategories(List<CategoryItem> categories) {
-        adapter.clear();
-        if (categories != null) {
-            this.categories = categories;
-            adapter.addAll(categories);
-            adapter.notifyDataSetChanged();
+        if(categories==null) {
+            adapter.clear();
         }
-    }
-
-    @Override
-    public void addCategory(CategoryItem category) {
-        adapter.add(category);
-        adapter.notifyItemInserted(adapter.getItemCount());
+        else{
+            adapter.setItems(categories);
+        }
     }
 
     @Override
@@ -167,15 +134,10 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         DialogUtil.showAlertDialog(getActivity(),
                 getString(R.string.no_categories_selected),
                 getString(R.string.no_categories_selected_warning_desc),
-                getString(R.string.yes_submit),
-                getString(R.string.no_go_back),
+                getString(R.string.continue_message),
+                getString(R.string.cancel),
                 () -> goToNextScreen(),
                 null);
-
-    }
-
-    @Override
-    public void setSelectedCategories(List<CategoryItem> selectedCategories) {
 
     }
 
@@ -190,17 +152,11 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     }
 
     @Override
-    public void categoryClicked(CategoryItem item) {
-        presenter.onCategoryItemClicked(item);
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        isVisible = isVisibleToUser;
-
-        if (presenter != null && isResumed() && (categories == null || categories.isEmpty())) {
-            presenter.searchForCategories(null);
+    protected void onBecameVisible() {
+        super.onBecameVisible();
+        final Editable text = etSearch.getText();
+        if (text != null) {
+            presenter.searchForCategories(text.toString());
         }
     }
 }

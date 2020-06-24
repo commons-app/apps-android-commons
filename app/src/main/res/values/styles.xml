@@ -18,6 +18,7 @@
         <item name="bookmarkButtonColor">@color/button_blue_dark</item>
         <item name="rowButtonColor">@color/button_blue_dark</item>
         <item name="reviewHeading">@color/white</item>
+        <item name="aboutIconsColor">@color/white</item>
 
         <item name="semitransparentText">@color/commons_app_blue_dark</item>
         <item name="subBackground">@color/sub_background_dark</item>
@@ -33,6 +34,12 @@
         <item name="textEnabled">@color/enabled_button_text_color_dark</item>
         <item name="mainCardBackground">@color/main_background_dark</item>
         <item name="mainScreenNearbyPermissionbutton">@style/DarkFlatNearbyPermissionButton</item>
+        <item name="iconInfo24">@drawable/ic_info_outline_24dp</item>
+        <item name="iconMap24" >@drawable/ic_map_white_24dp</item>
+        <item name="mediaDetailsText" >@color/white</item>
+        <item name="mediaDetailsHeadingText">@color/layout_light_grey</item>
+        <item name="mediaDetailNominationBackground">@color/deleteRedDark</item>
+        <item name="mediaDetailSpacerColor">@color/browser_actions_divider_color</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -52,6 +59,7 @@
         <item name="bookmarkButtonColor">@color/button_blue</item>
         <item name="rowButtonColor">@color/button_blue</item>
         <item name="reviewHeading">@color/black</item>
+        <item name="aboutIconsColor">@color/black</item>
 
         <item name="semitransparentText">@color/commons_app_blue_light</item>
         <item name="subBackground">@color/sub_background_light</item>
@@ -67,6 +75,12 @@
         <item name="textEnabled">@color/enabled_button_text_color_light</item>
         <item name="mainCardBackground">@color/primaryDarkColor</item>
         <item name="mainScreenNearbyPermissionbutton">@style/LightFlatNearbyPermissionButton</item>
+        <item name="iconInfo24">@drawable/ic_info_outline_dark_24dp</item>
+        <item name="iconMap24">@drawable/ic_map_dark_24dp</item>
+        <item name="mediaDetailsText">@color/enabled_button_text_color_light</item>
+        <item name="mediaDetailsHeadingText">@color/primaryDarkColor</item>
+        <item name="mediaDetailNominationBackground">@color/deleteRed</item>
+        <item name="mediaDetailSpacerColor">@color/divider_grey</item>
     </style>
 
     <style name="WhiteSearchBarTheme" parent="DarkAppTheme">
@@ -125,6 +139,37 @@
         <item name="boundary">#c0a8c0</item>
         <item name="camera">#784878</item>
         <item name="centerRegion">#906078</item>
+    </style>
+
+    <style name="MediaDetailContainer">
+        <item name="android:paddingLeft">@dimen/quarter_standard_height</item>
+        <item name="android:paddingRight">@dimen/quarter_standard_height</item>
+        <item name="android:paddingTop">@dimen/tiny_gap</item>
+        <item name="android:paddingBottom">@dimen/tiny_gap</item>
+    </style>
+
+    <style name="MediaDetailTextLabel">
+        <item name="android:layout_weight">30</item>
+        <item name="android:paddingTop">@dimen/dimen_6</item>
+        <item name="android:paddingLeft">@dimen/tiny_gap</item>
+        <item name="android:textSize">@dimen/normal_text</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MediaDetailTextLabelTitle" parent="@style/MediaDetailTextLabel">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="MediaDetailTextLabelGeneric" parent="@style/MediaDetailTextLabel">
+        <item name="android:textColor">?attr/mediaDetailsHeadingText</item>
+    </style>
+
+    <style name="MediaDetailTextBody">
+        <item name="android:layout_weight">70</item>
+        <item name="android:layout_gravity">start</item>
+        <item name="android:padding">@dimen/small_gap</item>
+        <item name="android:textColor">?attr/mediaDetailsText</item>
+        <item name="android:textSize">@dimen/description_text_size</item>
     </style>
 
 </resources>

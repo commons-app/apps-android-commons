@@ -6,6 +6,24 @@
 * Santhosh.thottingal
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">ഒരു പ്രമാണം അപ്‌ലോഡ് ചെയ്യുന്നു</item>
+    <item quantity="other">%1$d പ്രമാണങ്ങൾ അപ്‌ലോഡ് ചെയ്യുന്നു</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">ഒരു അപ്‌ലോഡും ചെയ്തില്ല</item>
+    <item quantity="one">ഒരു അപ്‌ലോഡ്</item>
+    <item quantity="other">%1$d അപ്‌ലോഡുകൾ</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">ഒരു അപ്‌ലോഡ് തുടങ്ങുന്നു</item>
+    <item quantity="other">%1$d അപ്‌ലോഡുകൾ തുടങ്ങുന്നു</item>
+  </plurals>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">ഒരു അപ്‌ലോഡ്</item>
+    <item quantity="other">%1$d അപ്‌ലോഡുകൾ</item>
+  </plurals>
+  <string name="share_license_summary" fuzzy="true">ചിത്രം %1$s പ്രകാരം അനുമതി നൽകപ്പെടുന്നതാണ്</string>
   <string name="preference_category_appearance">ദൃശ്യരൂപം</string>
   <string name="preference_category_general">സാർവത്രികം</string>
   <string name="preference_category_feedback">പ്രതികരണം</string>
@@ -32,10 +50,6 @@
   <string name="upload_progress_notification_title_finishing">%1$s അപ്‌ലോഡിങ് പൂർത്തിയാക്കുന്നു</string>
   <string name="upload_failed_notification_title">%1$s അപ്‌ലോഡിങ് പരാജയപ്പെട്ടു</string>
   <string name="upload_failed_notification_subtitle">കാണാനായി ടാപ് ചെയ്യുക</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">ഒരു പ്രമാണം അപ്‌ലോഡ് ചെയ്യുന്നു</item>
-    <item quantity="other">%1$d പ്രമാണങ്ങൾ അപ്‌ലോഡ് ചെയ്യുന്നു</item>
-  </plurals>
   <string name="title_activity_contributions">എന്റെ സമീപകാല അപ്‌ലോഡുകൾ</string>
   <string name="contribution_state_queued">നിരയായി വെച്ചു</string>
   <string name="contribution_state_failed">പരാജയപ്പെട്ടു</string>
@@ -48,7 +62,6 @@
   <string name="menu_share">പങ്ക് വെയ്ക്കുക</string>
   <string name="menu_open_in_browser">ബ്രൗസറിൽ കാണുക</string>
   <string name="share_title_hint" fuzzy="true">തലക്കെട്ട്</string>
-  <string name="add_title_toast">ഈ പ്രമാണത്തിന് ഒരു തലക്കെട്ട് നൽകുക.</string>
   <string name="share_description_hint">വിവരണം</string>
   <string name="login_failed_network">പ്രവേശിക്കാനായില്ല - നെറ്റ്‌വർക്ക് പരാജയപ്പെട്ടു</string>
   <string name="login_failed_throttled">നിരവധി വിജയകരമല്ലാത്ത ശ്രമങ്ങൾ നടന്നിരിക്കുന്നു. വീണ്ടും ശ്രമിക്കുന്നതിനു മുമ്പ് ഏതാനം മിനിറ്റുകൾ വിശ്രമിക്കുക.</string>
@@ -66,19 +79,6 @@
   <string name="gps_disabled">താങ്കളുടെ ഉപകരണത്തിൽ ജി.പി.എസ്. പ്രവർത്തനരഹിതമാണ്. അത് പ്രവർത്തനസജ്ജമാക്കണോ?</string>
   <string name="enable_gps">ജി.പി.എസ്. സജ്ജമാക്കുക</string>
   <string name="contributions_subtitle_zero">ഇതുവരെ അപ്‌ലോഡുകൾ ഒന്നുമില്ല</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">ഒരു അപ്‌ലോഡും ചെയ്തില്ല</item>
-    <item quantity="one">ഒരു അപ്‌ലോഡ്</item>
-    <item quantity="other">%1$d അപ്‌ലോഡുകൾ</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">ഒരു അപ്‌ലോഡ് തുടങ്ങുന്നു</item>
-    <item quantity="other">%1$d അപ്‌ലോഡുകൾ തുടങ്ങുന്നു</item>
-  </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">ഒരു അപ്‌ലോഡ്</item>
-    <item quantity="other">%1$d അപ്‌ലോഡുകൾ</item>
-  </plurals>
   <string name="categories_not_found">%1$s എന്നതുമായി പൊരുത്തമുള്ള ഒരു വർഗ്ഗവും കണ്ടെത്താനായില്ല</string>
   <string name="categories_skip_explanation" fuzzy="true">താങ്കളുടെ ചിത്രങ്ങൾ വിക്കിമീഡിയ കോമൺസിൽ കൂടുതൽ എളുപ്പത്തിൽ കണ്ടെത്തപ്പെടാനായി വർഗ്ഗങ്ങൾ ചേർക്കുക.\n\nവർഗ്ഗങ്ങൾ ചേർക്കാനായി ടൈപ്പ് ചെയ്ത് തുടങ്ങുക.\nഈ ഘട്ടം ഒഴിവാക്കാൻ ടാപ് ചെയ്യുക (അല്ലെങ്കിൽ പിന്നോട്ട് പോവുക).</string>
   <string name="categories_activity_title">വർഗ്ഗങ്ങൾ</string>
@@ -97,7 +97,6 @@
   <string name="no_uploads_yet">താങ്കളിതുവരെ ചിത്രങ്ങളൊന്നും അപ്‌ലോഡ് ചെയ്തിട്ടില്ല.</string>
   <string name="menu_retry_upload">വീണ്ടും ശ്രമിക്കുക</string>
   <string name="menu_cancel_upload">റദ്ദാക്കുക</string>
-  <string name="share_license_summary" fuzzy="true">ചിത്രം %1$s പ്രകാരം അനുമതി നൽകപ്പെടുന്നതാണ്</string>
   <string name="menu_download">ഡൗൺലോഡ്</string>
   <string name="preference_license">സ്വതേയുള്ള ഉപയോഗാനുമതി</string>
   <string name="license_name_cc_by_sa_four">ആട്രിബ്യൂഷൻ-ഷെയർ‌എലൈക് 4.0</string>

@@ -5,6 +5,24 @@
 * Mehman97
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d ფაილი იტვირთება</item>
+    <item quantity="other">%1$d ფაილი იტვირთება</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d ატვირთვა</item>
+    <item quantity="other">%1$d ატვირთვა</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">იწყება %1$d ატვირთვა</item>
+    <item quantity="other">იწყება %1$d ატვირთვა</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d ატვირთვა</item>
+    <item quantity="other">%1$d ატვირთვები</item>
+  </plurals>
+  <string name="share_license_summary">ეს სურათი გავრცელდება %1$s ლიცენზიით</string>
   <string name="title_activity_explore">აღმოაჩინე</string>
   <string name="navigation_item_explore">აღმოაჩინე</string>
   <string name="preference_category_appearance">იერსახე</string>
@@ -36,10 +54,6 @@
   <string name="upload_progress_notification_title_finishing">ატვირთვის დასრულება %1$</string>
   <string name="upload_failed_notification_title">%1$ ატვირთვა ვერ მოხერხდა</string>
   <string name="upload_failed_notification_subtitle">დააჭირეთ სანახავად</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d ფაილი იტვირთება</item>
-    <item quantity="other">%1$d ფაილი იტვირთება</item>
-  </plurals>
   <string name="title_activity_contributions">ჩემი ბოლო ატვირთვები</string>
   <string name="contribution_state_queued">რიგი</string>
   <string name="contribution_state_failed">ვერ მოხერხდა</string>
@@ -51,8 +65,7 @@
   <string name="provider_contributions">ჩემი ატვირთვები</string>
   <string name="menu_share">გაზიარება</string>
   <string name="menu_open_in_browser">ბრაუზერში გახსნა</string>
-  <string name="share_title_hint">სათაური (საჭიროა)</string>
-  <string name="add_title_toast">გთხოვთ, მიუთითოთ სათაური ამ ფაილისთვის</string>
+  <string name="share_title_hint" fuzzy="true">სათაური (საჭიროა)</string>
   <string name="share_description_hint">აღწერა</string>
   <string name="login_failed_network">შესვლა ვერ ხერხდება - ქსელის შეცდომა</string>
   <string name="login_failed_wrong_credentials">შესვლა შეუძლებელია - გთხოვთ შეამოწმოთ თქვენი მომხმარებლის სახელი და პაროლი</string>
@@ -72,19 +85,6 @@
   <string name="gps_disabled">თქვენ მოწყობილობაზე GPS გამორთულია. ნამდვილად გსურთ ჩართვა?</string>
   <string name="enable_gps">GPS-ის ჩართვა</string>
   <string name="contributions_subtitle_zero">ატვირთვები არ არის</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d ატვირთვა</item>
-    <item quantity="other">%1$d ატვირთვა</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">იწყება %1$d ატვირთვა</item>
-    <item quantity="other">იწყება %1$d ატვირთვა</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d ატვირთვა</item>
-    <item quantity="other">%1$d ატვირთვები</item>
-  </plurals>
   <string name="categories_not_found">შესატყვისი კატეგორიები „%1$s“ ვერ მოიძებნა</string>
   <string name="categories_skip_explanation">დაამატეთ კატეგორიები, რომ თქვენი სურათები უფრო აღმოსაჩენი იყოს ვიკისაწყობში.\nდაიწყეთ წერა კატეგორიების დასამატებლად.</string>
   <string name="categories_activity_title">კატეგორია</string>
@@ -95,8 +95,8 @@
   <string name="menu_about">პროგრამის შესახებ</string>
   <string name="about_license">ღია კოდის მქონე აპლიკაცია, ვრცელდება ლიცენზიით &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. ვიკისაწყობი და მისი ლოგო ფონდი ვიკიმედიის სავაჭრო ნიშნებია და ფონდი ვიკიმედიის ნებართვით გამოიყენება. ჩვენ არ ვართ დაკავშირებული ფონდ ვიკიმედიასთან.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;წყარო&lt;/a&gt; და &lt;a href=\"https://commons-app.github.io/\"&gt;საიტი&lt;/a&gt; GitHub-ზე. შეცდომის შესატყობინებლად ან წინადადებისათვის შექმენით ახალი &lt;a href=\"%1$s\"&gt;მოთხოვნა GitHub-ზე&lt;/a&gt;.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;კონფიდენციალურობის პოლიტიკა&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;მადლობები&lt;/a&gt;</string>
+  <string name="about_privacy_policy">კონფიდენციალურობის პოლიტიკა</string>
+  <string name="about_credits">შემქმნელები</string>
   <string name="title_activity_about">პროგრამის შესახებ</string>
   <string name="menu_feedback">გამოხმაურების გაგზავნა (ელ.ფოსტით)</string>
   <string name="no_email_client">ელ-ფოსტის კლიენტი არ არის დაყენებული</string>
@@ -105,14 +105,13 @@
   <string name="no_uploads_yet">თქვენ ჯერ არცერთი ფოტო არ აგიტვირთავთ.</string>
   <string name="menu_retry_upload">გამეორება</string>
   <string name="menu_cancel_upload">გაუქმება</string>
-  <string name="share_license_summary">ეს სურათი გავრცელდება %1$s ლიცენზიით</string>
   <string name="media_upload_policy">ამ სურათის ატვირთვით ვაცხადებ, რომ ეს ჩემი პირადი ნამუშევარია და არ შეიცავს საავტორო უფლებებით დაცულ მასალებს ან სელფის, სხვა შემთხვევაში ის პასუხობს &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;ვიკისაწყობის პოლიტიკას&lt;/a&gt;.</string>
   <string name="menu_download">ჩამოტვირთვა</string>
   <string name="preference_license">ნაგულისხმევი ლიცენზია</string>
-  <string name="use_previous" fuzzy="true">წინა სათაურის/აღწერის გამოყენება</string>
+  <string name="use_previous">წინა სათაურისა და აღწერის გამოყენება</string>
   <string name="allow_gps">ამჟამინდელი მდებარეობის ავტომატური მიღება</string>
   <string name="allow_gps_summary">შლის მიმდინარე ადგილმდებარეობას, თუ სურათი არ არის დატანილი რუკაზე. ყურადღება! ეს ცვლილება გაჩვენებთ თქვენს მიმდინარე ადგილმდებარეობას.</string>
-  <string name="preference_theme" fuzzy="true">ღამის რეჟიმი</string>
+  <string name="preference_theme">თემა</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -153,7 +152,7 @@
   <string name="welcome_copyright_subtext">თავიდან აიცილეთ საავტორო უფლებებით დაცული მასალების ატვირთვას, რომლებიც მოიძიეთ ინტერნეტში, ასევე პლაკატების, წიგნის ყდის და ა.შ.</string>
   <string name="welcome_final_text">თქვენ ფიქრობთ, რომ გაიგეთ ეს?</string>
   <string name="welcome_final_button_text">დიახ!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;მეტი ინფორმაცია&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">მეტი ინფორმაცია</string>
   <string name="detail_panel_cats_label">კატეგორიები</string>
   <string name="detail_panel_cats_loading">იტვირთება…</string>
   <string name="detail_panel_cats_none">არჩეული არაფერია</string>
@@ -170,7 +169,9 @@
   <string name="title_activity_nearby">ახლომდებარე ადგილები</string>
   <string name="no_nearby">ახლომდებარე ადგილები ვერ მოიძებნა</string>
   <string name="warning">გაფრთხილება</string>
+  <string name="duplicate_image_found">ნაპოვნია სურათის ასლი</string>
   <string name="upload_image_duplicate">ეს ფაილი ვიკისაწყობში უკვე არსებობს. ნამდვილად გსურთ გაგრძელება?</string>
+  <string name="upload">ატვირთვა</string>
   <string name="yes">დიახ</string>
   <string name="no">არა</string>
   <string name="media_detail_title">სათაური</string>
@@ -180,6 +181,7 @@
   <string name="media_detail_uploaded_date">ატვირთვის თარიღი</string>
   <string name="media_detail_license">ლიცენზია</string>
   <string name="media_detail_coordinates">კოორდინატები</string>
+  <string name="media_detail_coordinates_empty">არ არის გათვალისწინებული</string>
   <string name="become_a_tester_title">ბეტა ტესტირებაში მონაწილეობა</string>
   <string name="_2fa_code">2ფა კოდი</string>
   <string name="number_of_uploads">ჩემი ბოლო ატვირთვების ლიმიტი</string>
@@ -242,7 +244,7 @@
   <string name="null_url">შეცდომა! URL ვერ მოიძებნა</string>
   <string name="nominate_deletion">წაშლაზე ნომინირება</string>
   <string name="nominated_for_deletion">ეს სურათი წარდგენილია წაშლაზე</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;დეტალებისთვის ვებ-გვერდის ნახვა&lt;/u&gt;</string>
+  <string name="nominated_see_more">დეტალებისთვის ვებგვერდის ნახვა</string>
   <string name="view_browser">ბრაუზერში გახსნა</string>
   <string name="skip_login">გამოტოვება</string>
   <string name="navigation_item_login">შესვლა</string>
@@ -250,12 +252,12 @@
   <string name="nearby_wikidata">ვიკიმონაცემები</string>
   <string name="nearby_wikipedia">ვიკიპედია</string>
   <string name="nearby_commons">ვიკისაწყობი</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;შეგვაფასეთ&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;ხდშ&lt;/u&gt;</string>
+  <string name="about_rate_us">შეგვაფასეთ</string>
+  <string name="about_faq">ხდშ</string>
   <string name="welcome_skip_button">სახელმძღვანელოს გამოტოვება</string>
   <string name="no_internet">ინტერნეტი არ არის</string>
   <string name="internet_established">ინტერნეტი არის</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;თარგმნა&lt;/u&gt;</string>
+  <string name="about_translate">თარგმნა</string>
   <string name="about_translate_title">ენები</string>
   <string name="about_translate_proceed">გაგრძელება</string>
   <string name="about_translate_cancel">გაუქმება</string>
@@ -327,8 +329,6 @@
   <string name="desc_language_Asia">აზია</string>
   <string name="desc_language_Pacific">ოკეანეთი</string>
   <string name="no_categories_selected">კატეგორია არ არის არჩეული</string>
-  <string name="yes_submit">დიახ, გაგზავნა</string>
-  <string name="no_go_back">არა, უკან დაბრუნება</string>
   <string name="nearby_card_permission_title">ნებართვის თხოვნა</string>
   <string name="nominate_for_deletion_done">შესრულდა</string>
   <string name="notsure">არ ვიცი</string>

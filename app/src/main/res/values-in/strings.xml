@@ -6,11 +6,30 @@
 * Ilham151096
 * Iwan Novirion
 * Joseagush
+* Naufal06
 * Pebaryan
 * Rv77ax
 * William Surya Permana
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="other">mengunggah %1$d berkas</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="other">Memulai %1$d unggahan</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="other">%1$d unggahan</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="other">Gambar ini akan diberi lisensi %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="other">%1$d Unggahan</item>
+  </plurals>
   <string name="title_activity_explore">Jelajah</string>
   <string name="navigation_item_explore">Jelajah</string>
   <string name="preference_category_appearance">Tampilan</string>
@@ -41,9 +60,6 @@
   <string name="upload_progress_notification_title_finishing">Menyelesaikan pengunggahan %1$s</string>
   <string name="upload_failed_notification_title">Mengunggah %1$s gagal</string>
   <string name="upload_failed_notification_subtitle">Tekan untuk melihat</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="other">mengunggah %1$d berkas</item>
-  </plurals>
   <string name="title_activity_contributions">Unggahan Terkini Saya</string>
   <string name="contribution_state_queued">Antrean</string>
   <string name="contribution_state_failed">Gagal</string>
@@ -55,8 +71,7 @@
   <string name="provider_contributions">Unggahan saya</string>
   <string name="menu_share">Bagikan</string>
   <string name="menu_open_in_browser">Buka di Peramban</string>
-  <string name="share_title_hint">Judul (wajib)</string>
-  <string name="add_title_toast">Tolong berikan judul untuk berkas ini</string>
+  <string name="share_title_hint">Takarir (Wajib)</string>
   <string name="share_description_hint">Deskripsi</string>
   <string name="login_failed_network">Tidak dapat login - kesalahan pada jaringan</string>
   <string name="login_failed_wrong_credentials">Tak berhasil masuk - silakan periksa nama pengguna dan kata sandi</string>
@@ -76,15 +91,6 @@
   <string name="gps_disabled">GPS dimatikan di peranti Anda. Apakah Anda mau menghidupkannya?</string>
   <string name="enable_gps">Hidupkan GPS</string>
   <string name="contributions_subtitle_zero">Belum ada unggahan</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="other">Memulai %1$d unggahan</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="other">%1$d unggahan</item>
-  </plurals>
   <string name="categories_not_found">Tidak ada kategori yang cocok dengan %1$s</string>
   <string name="categories_skip_explanation">Tambahkan kategori agar foto Anda lebih mudah ditemukan di Wikimedia Commons.\n\nMulai mengetik untuk menambahkan kategori.</string>
   <string name="categories_activity_title">Kategori</string>
@@ -106,9 +112,6 @@
   <string name="no_uploads_yet">Anda belum mengunggah foto apapun.</string>
   <string name="menu_retry_upload">Coba lagi</string>
   <string name="menu_cancel_upload">Batal</string>
-  <plurals name="share_license_summary">
-    <item quantity="other">Gambar ini akan diberi lisensi %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Dengan mengirim foto ini, saya menyatakan bahwa ini adalah karya saya sendiri yang tidak mengandung bahan atau foto narsis berhak cipta, dan tidak menyalahi &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;kebijakan Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Unduh</string>
   <string name="preference_license">Lisensi standar</string>
@@ -392,9 +395,6 @@
   <string name="submit">Kirim</string>
   <string name="upload_title_duplicate">Berkas dengan nama %1$s sudah ada. Anda yakin ingin melanjutkan?</string>
   <string name="map_application_missing">Tidak ada aplikasi peta yang kompatibel dapat ditemukan di perangkat Anda. Silakan instal aplikasi peta untuk menggunakan fitur ini.</string>
-  <plurals name="upload_count_title">
-    <item quantity="other">%1$d Unggahan</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Markah</string>
   <string name="title_activity_bookmarks">Markah</string>
   <string name="title_page_bookmarks_pictures">Gambar</string>
@@ -419,9 +419,7 @@
   <string name="desc_language_Asia">Asia</string>
   <string name="desc_language_Pacific">Pasifik</string>
   <string name="no_categories_selected">Tidak ada Kategori yang Dipilih</string>
-  <string name="no_categories_selected_warning_desc">Gambar tanpa kategori jarang dapat digunakan. Yakin ingin mengirim tanpa memilih kategori?</string>
-  <string name="yes_submit">Ya, Kirim</string>
-  <string name="no_go_back">Tidak, Kembali</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">Gambar tanpa kategori jarang dapat digunakan. Yakin ingin mengirim tanpa memilih kategori?</string>
   <string name="upload_flow_all_images_in_set">(Untuk semua gambar dalam set)</string>
   <string name="search_this_area">Cari area ini</string>
   <string name="nearby_card_permission_title">Permintaan Izin</string>

@@ -14,12 +14,14 @@
 * Looong
 * Qiyue2001
 * Shizhao
+* SomeyaMako
 * VulpesVulpes825
 * Wxyveronica
 * Yfdyh000
 * ZhaoGang
 * 予弦
 * 佛壁灯
+* 列维劳德
 * 夢蝶葬花
 * 沈澄心
 * 神樂坂秀吉
@@ -27,6 +29,34 @@
 * 阿pp
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d个文件正在上传</item>
+    <item quantity="other">%1$d个文件正在上传</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d次上传</item>
+    <item quantity="other">%1$d次上传</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">开始%1$d次上传</item>
+    <item quantity="other">开始%1$d次上传</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d次上传</item>
+    <item quantity="other">%1$d次上传</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">该图像的授权协议是 %1$s</item>
+    <item quantity="other">这些图像的授权协议是 %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d次上传</item>
+    <item quantity="other">%1$d次上传</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="other">正在处理数据。处理时间取决于图片的尺寸和您的设备</item>
+  </plurals>
   <string name="title_activity_explore">探索</string>
   <string name="navigation_item_explore">探索</string>
   <string name="preference_category_appearance">外观</string>
@@ -58,10 +88,6 @@
   <string name="upload_progress_notification_title_finishing">正在完成上传%1$s</string>
   <string name="upload_failed_notification_title">上传%1$s失败</string>
   <string name="upload_failed_notification_subtitle">点击查看</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d个文件正在上传</item>
-    <item quantity="other">%1$d个文件正在上传</item>
-  </plurals>
   <string name="title_activity_contributions">我的最近上传</string>
   <string name="contribution_state_queued">已入队列</string>
   <string name="contribution_state_failed">失败</string>
@@ -73,8 +99,8 @@
   <string name="provider_contributions">我的上传</string>
   <string name="menu_share">分享</string>
   <string name="menu_open_in_browser">在浏览器中查看</string>
-  <string name="share_title_hint">标题 （要求）</string>
-  <string name="add_title_toast">请提供此文件的标题</string>
+  <string name="share_title_hint" fuzzy="true">标题 （要求）</string>
+  <string name="add_caption_toast">请提供此文件的描述</string>
   <string name="share_description_hint">描述</string>
   <string name="login_failed_network">无法登录 - 网络故障</string>
   <string name="login_failed_wrong_credentials">无法登录——请检查您的用户名和密码</string>
@@ -94,19 +120,6 @@
   <string name="gps_disabled">您的设备禁用了GPS。您是否要启用它？</string>
   <string name="enable_gps">启用GPS</string>
   <string name="contributions_subtitle_zero">尚无上传</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d次上传</item>
-    <item quantity="other">%1$d次上传</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">开始%1$d次上传</item>
-    <item quantity="other">开始%1$d次上传</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d次上传</item>
-    <item quantity="other">%1$d次上传</item>
-  </plurals>
   <string name="categories_not_found">没有找到匹配%1$s的分类</string>
   <string name="categories_skip_explanation">添加分类使您的图像更容易在维基共享资源被找到。开始输入以添加分类。</string>
   <string name="categories_activity_title">分类</string>
@@ -128,10 +141,6 @@
   <string name="no_uploads_yet">您还没有上传任何照片。</string>
   <string name="menu_retry_upload">重试</string>
   <string name="menu_cancel_upload">取消</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">该图像的授权协议是 %1$s</item>
-    <item quantity="other">这些图像的授权协议是 %1$s</item>
-  </plurals>
   <string name="media_upload_policy">通过提交该图片，我声明这是我自己的作品，其不包含受版权保护的材料或自拍像，并遵循&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;维基共享资源&lt;/a&gt;方针。</string>
   <string name="menu_download">下载</string>
   <string name="preference_license">默认许可协议</string>
@@ -416,10 +425,6 @@
   <string name="submit">发布</string>
   <string name="upload_title_duplicate">名为%1$s的文件已经存在。您确定要继续吗？</string>
   <string name="map_application_missing">您的设备上无法找到兼容的地图应用程序。请安装地图应用程序来使用此功能。</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d次上传</item>
-    <item quantity="other">%1$d次上传</item>
-  </plurals>
   <string name="navigation_item_bookmarks">书签</string>
   <string name="title_activity_bookmarks">书签</string>
   <string name="title_page_bookmarks_pictures">图片</string>
@@ -444,9 +449,7 @@
   <string name="desc_language_Asia">亚洲</string>
   <string name="desc_language_Pacific">太平洋</string>
   <string name="no_categories_selected">未提交分类</string>
-  <string name="no_categories_selected_warning_desc">没有类别的图像很少可用。确实要提交而不选择类别吗？</string>
-  <string name="yes_submit">确定，提交</string>
-  <string name="no_go_back">取消，返回</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">没有类别的图像很少可用。确实要提交而不选择类别吗？</string>
   <string name="upload_flow_all_images_in_set">（对于集合中的所有图像）</string>
   <string name="search_this_area">搜索这个区域</string>
   <string name="nearby_card_permission_title">需要许可</string>
@@ -507,9 +510,6 @@
   <string name="review_thanks_no_button_text">下一张图片</string>
   <string name="skip_image_explanation">点击这个按钮会给你另外一个来自于Wikimedia Common上传的图片</string>
   <string name="review_image_explanation">你可以审查图片并提高Wikimedia Commoms的质量。\n审查的四个参数是：\n-图片尺寸是否在规定的范围\n-图片是否遵循版权规则\n-图片是否正确分类\n-如果一切正常你是否也可以感谢贡献者</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="other">正在处理数据。处理时间取决于图片的尺寸和您的设备</item>
-  </plurals>
   <string name="no_image">没有被使用的图片</string>
   <string name="no_image_reverted">没有被撤回的图片</string>
   <string name="no_image_uploaded">还没有上传图片</string>
@@ -524,7 +524,7 @@
   <string name="images_featured_explanation">特征图片是Wikimedia Commons社区选出的网站上的最高质量的图片中的一部分，是来自于技术高超的摄影师和绘画师。</string>
   <string name="images_via_nearby_explanation">通过附近位置上传的图片是指那些使用地图上发现位置功能上传的图片</string>
   <string name="thanks_received_explanation">这些功能允许编辑人员给那些做出了有用编辑的用户发送感谢通知-感谢通知通过使用在历史页面或差分页面上的一个小的感谢链接实现的。</string>
-  <string name="previous_image_title_description">复制先前的标题及描述</string>
+  <string name="previous_image_caption_description">复制先前的标题及描述</string>
   <string name="previous_button_tooltip_message">点击复用您在先前图片中填写的标题及描述并稍加修改来匹配当前图像。</string>
   <string name="welcome_do_upload_content_description">上传好图片到Commons的例子</string>
   <string name="welcome_dont_upload_content_description">不能上传图片的例子</string>
@@ -578,4 +578,8 @@
   <string name="wallpaper_set_unsuccessfully">出错了。无法设置壁纸</string>
   <string name="setting_wallpaper_dialog_title">设为壁纸</string>
   <string name="setting_wallpaper_dialog_message">正在设置壁纸。请稍等…</string>
+  <string name="load_more">加载更多</string>
+  <string name="add_picture_to_wikipedia_instructions_title">说明</string>
+  <string name="confirm">确认</string>
+  <string name="instructions_title">说明</string>
 </resources>

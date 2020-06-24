@@ -4,6 +4,8 @@ import dagger.Binds;
 import dagger.Module;
 import fr.free.nrw.commons.upload.categories.CategoriesContract;
 import fr.free.nrw.commons.upload.categories.CategoriesPresenter;
+import fr.free.nrw.commons.upload.depicts.DepictsContract;
+import fr.free.nrw.commons.upload.depicts.DepictsPresenter;
 import fr.free.nrw.commons.upload.license.MediaLicenseContract;
 import fr.free.nrw.commons.upload.license.MediaLicensePresenter;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract;
@@ -20,8 +22,8 @@ public abstract class UploadModule {
                                                                                 presenter);
 
     @Binds
-    public abstract CategoriesContract.UserActionListener bindsCategoriesPresenter(CategoriesPresenter
-                                                                                           presenter);
+    public abstract CategoriesContract.UserActionListener bindsCategoriesPresenter(
+        CategoriesPresenter presenter);
 
     @Binds
     public abstract MediaLicenseContract.UserActionListener bindsMediaLicensePresenter(
@@ -33,4 +35,9 @@ public abstract class UploadModule {
             UploadMediaPresenter
                     presenter);
 
+    @Binds
+    public abstract DepictsContract.UserActionListener bindsDepictsPresenter(
+            DepictsPresenter
+            presenter
+    );
 }

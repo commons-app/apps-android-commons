@@ -4,6 +4,22 @@
 * Ninjastrikers
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">ဖိုင် %1$d ခု တင်နေသည်</item>
+    <item quantity="other">ဖိုင် %1$d ခု တင်နေသည်</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d ခု တင်ထားသည်</item>
+    <item quantity="other">%1$d ခု တင်ထားသည်</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">ဤရုပ်ပုံသည် %1$ အောက်တွင် လိုင်စင်သတ်မှတ်ထးပါမည်</item>
+    <item quantity="other">ဤရုပ်ပုံများသည် %1$ အောက်တွင် လိုင်စင်သတ်မှတ်ထးပါမည်</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d အက်ပလုပ်</item>
+    <item quantity="other">%1$d အက်ပလုပ်များ</item>
+  </plurals>
   <string name="title_activity_explore">ရှာဖွေစူးစမ်းပါ</string>
   <string name="navigation_item_explore">ရှာဖွေစူးစမ်းပါ</string>
   <string name="preference_category_appearance">ပုံပန်းသွင်ပြင်</string>
@@ -33,10 +49,6 @@
   <string name="upload_progress_notification_title_in_progress">%1$s ဖိုင်တင်နေသည်</string>
   <string name="upload_progress_notification_title_finishing">ဖိုင်တင်ခြင်း ပြီးဆုံးမှု %1$s</string>
   <string name="upload_failed_notification_title">ဖိုင်တင်ခြင်း %1$s မအောင်မြင်ပါ</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">ဖိုင် %1$d ခု တင်နေသည်</item>
-    <item quantity="other">ဖိုင် %1$d ခု တင်နေသည်</item>
-  </plurals>
   <string name="title_activity_contributions">မကြာသေးခင်က မိမိတင်ထားသည်များ</string>
   <string name="contribution_state_failed">မအောင်မြင်ပါ</string>
   <string name="contribution_state_in_progress">%1$d%% ပြီးဆုံး</string>
@@ -47,8 +59,7 @@
   <string name="provider_contributions">မိမိ တင်ထားသည်များ</string>
   <string name="menu_share">မျှဝေ</string>
   <string name="menu_open_in_browser">ဘရောက်ဆာတွင် ကြည့်ရန်</string>
-  <string name="share_title_hint">ခေါင်းစဉ် (လိုအပ်သည်)</string>
-  <string name="add_title_toast">ခေါင်းစဉ်</string>
+  <string name="share_title_hint" fuzzy="true">ခေါင်းစဉ် (လိုအပ်သည်)</string>
   <string name="share_description_hint">ဖော်ပြချက်</string>
   <string name="login_failed_network">လော့အင် မဝင်နိုင်ပါ - ကွန်ရက် အမှား</string>
   <string name="login_failed_wrong_credentials">လော့အင် မဝင်နိုင်ပါ - အသုံးပြုသူအမည်နှင့် စကားဝှက်ကို စစ်ဆေးပါ</string>
@@ -65,10 +76,6 @@
   <string name="gps_disabled">သင်၏စက်ပစ္စည်းတွင် ဂျီအက်စ်ကိုပိတ်ထားပါသည်။ ယင်းအား ဖွင့်လိုပါသလား။</string>
   <string name="enable_gps">ဂျီပီအက်စ် ဖွင့်ရန်</string>
   <string name="contributions_subtitle_zero">ဖိုင်မတင်ရသေးပါ</string>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d ခု တင်ထားသည်</item>
-    <item quantity="other">%1$d ခု တင်ထားသည်</item>
-  </plurals>
   <string name="categories_not_found">%1$ နှင့်ကိုက်ညီသော ကဏ္ဍများ မတွေ့ရှိပါ</string>
   <string name="categories_activity_title">ကဏ္ဍများ</string>
   <string name="title_activity_settings">အပြင်အဆင်များ</string>
@@ -83,10 +90,6 @@
   <string name="no_uploads_yet">သင် မည်သည့်ဓာတ်ပုံကိုမှ မတင်ရသေးပါ။</string>
   <string name="menu_retry_upload">ပြန်လုပ်</string>
   <string name="menu_cancel_upload">မလုပ်တော့</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">ဤရုပ်ပုံသည် %1$ အောက်တွင် လိုင်စင်သတ်မှတ်ထးပါမည်</item>
-    <item quantity="other">ဤရုပ်ပုံများသည် %1$ အောက်တွင် လိုင်စင်သတ်မှတ်ထးပါမည်</item>
-  </plurals>
   <string name="menu_download">ဒေါင်းလုပ်ယူရန်</string>
   <string name="preference_license">နဂို လိုင်စင်</string>
   <string name="use_previous" fuzzy="true">ယခင် ခေါင်းစဉ်/ဖော်ပြချက် သုံးမည်</string>
@@ -296,10 +299,6 @@
   <string name="next">ရှေ့</string>
   <string name="previous">နောက်</string>
   <string name="submit">ထည့်သွင်းရန်</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d အက်ပလုပ်</item>
-    <item quantity="other">%1$d အက်ပလုပ်များ</item>
-  </plurals>
   <string name="navigation_item_bookmarks">ဖတ်ရန်မှတ်ထားမှုများ</string>
   <string name="title_activity_bookmarks">ဖတ်ရန်မှတ်ထားမှုများ</string>
   <string name="title_page_bookmarks_pictures">ရုပ်ပုံများ</string>
@@ -319,8 +318,6 @@
   <string name="desc_language_Asia">အာရှ</string>
   <string name="desc_language_Pacific">ပစိဖိတ်</string>
   <string name="no_categories_selected">ကဏ္ဍများ မရွေးချယ်ထားပါ</string>
-  <string name="yes_submit">ဟုတ်ကဲ့ ထည့်သွင်းမည်</string>
-  <string name="no_go_back">ဟင်းအင်း၊ ပြန်သွားမည်</string>
   <string name="search_this_area">ဤဧရိယာကို ရှာဖွေပါ</string>
   <string name="nearby_card_permission_title">ခွင့်ပြုချက် တောင်းခံရန်</string>
   <string name="never_ask_again">နောက်တခါ ထပ်မမေးပါနှင့်</string>
@@ -350,7 +347,6 @@
   <string name="no_notification">မဖတ်ရသေးသော အသိပေးချက်များ မရှိပါ</string>
   <string name="no_read_notification" fuzzy="true">မော်ကွန်းတင်ပြီးသော အသိပေးချက်များ မရှိပါ</string>
   <string name="please_wait">ကျေးဇူးပြု၍ ခဏစောင့်ပါ...</string>
-  <string name="previous_image_title_description">ယခင် ခေါင်းစဉ်/ဖော်ပြချက် မိတ္တူကူးရန်</string>
   <string name="welcome_dont_upload_content_description">နမူနာရုပ်ပုံများ အက်ပလုပ်တင်ရန် မဟုတ်ပါ</string>
   <string name="skip_image">ဤရုပ်ပုံအား ကျော်သွားမည်</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">ဒေါင်းလုဒ် မအောင်မြင်ပါ။ ပြင်ပသိုလှောင်မှုခွင့်ပြုချက်မရှိဘဲ ဖိုင်ဒေါင်းလုဒ်မဆွဲနိုင်ပါ။</string>

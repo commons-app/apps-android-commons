@@ -1,15 +1,13 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
-import fr.free.nrw.commons.upload.ImageCoordinates;
-import java.util.List;
-
 import fr.free.nrw.commons.BasePresenter;
-import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.upload.Description;
+import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
-import fr.free.nrw.commons.upload.UploadModel.UploadItem;
+import fr.free.nrw.commons.upload.UploadMediaDetail;
+import fr.free.nrw.commons.upload.UploadItem;
+import java.util.List;
 
 /**
  * The contract with with UploadMediaDetails and its presenter would talk to each other
@@ -30,28 +28,30 @@ public interface UploadMediaDetailsContract {
 
         void showMessage(String message, int colorResourceId);
 
-        void showDuplicatePicturePopup();
+        void showDuplicatePicturePopup(UploadItem uploadItem);
 
-        void showBadImagePopup(Integer errorCode);
+        void showBadImagePopup(Integer errorCode, UploadItem uploadItem);
 
         void showMapWithImageCoordinates(boolean shouldShow);
 
-        void setTitleAndDescription(String title, List<Description> descriptions);
+        void showExternalMap(UploadItem uploadItem);
+
+        void updateMediaDetails(List<UploadMediaDetail> uploadMediaDetails);
     }
 
     interface UserActionListener extends BasePresenter<View> {
 
-        void receiveImage(UploadableFile uploadableFile, @Contribution.FileSource String source,
-                Place place);
+        void receiveImage(UploadableFile uploadableFile, Place place);
 
-        void verifyImageQuality(UploadItem uploadItem);
-
-        void setUploadItem(int index, UploadItem uploadItem);
+        void verifyImageQuality(int uploadItemIndex);
 
         void fetchPreviousTitleAndDescription(int indexInViewFlipper);
 
         void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex);
 
+        void onMapIconClicked(int indexInViewFlipper);
+
+        void onUserConfirmedUploadIsOfPlace(Place place, int uploadItemPosition);
     }
 
 }

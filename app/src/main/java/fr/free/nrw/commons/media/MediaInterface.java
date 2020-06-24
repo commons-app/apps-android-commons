@@ -1,10 +1,10 @@
 package fr.free.nrw.commons.media;
 
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-
-import java.util.Map;
-
+import fr.free.nrw.commons.depictions.models.DepictionResponse;
 import io.reactivex.Observable;
+import io.reactivex.Single;
+import java.util.Map;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -16,6 +16,7 @@ public interface MediaInterface {
     String MEDIA_PARAMS="&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640" +
             "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal" +
             "|Artist|LicenseShortName|LicenseUrl";
+
     /**
      * Checks if a page exists or not.
      *
@@ -48,17 +49,30 @@ public interface MediaInterface {
     Observable<MwQueryResponse> getMediaListFromCategory(@Query("gcmtitle") String category, @Query("gcmlimit") int itemLimit, @QueryMap Map<String, String> continuation);
 
     /**
+     * This method retrieves a list of Media objects for a given user name
+     *
+     * @param username     user's Wikimedia Commons username.
+     * @param itemLimit    how many images are returned
+     * @param continuation the continuation string from the previous query or empty map
+     * @return
+     */
+    @GET("w/api.php?action=query&format=json&formatversion=2" + //Basic parameters
+        "&generator=allimages&gaisort=timestamp&gaidir=older" + MEDIA_PARAMS)
+    Observable<MwQueryResponse> getMediaListForUser(@Query("gaiuser") String username,
+        @Query("gailimit") int itemLimit, @QueryMap(encoded = true) Map<String, String> continuation);
+
+    /**
      * This method retrieves a list of Media objects filtered using image generator query
      *
      * @param keyword      the searched keyword
      * @param itemLimit    how many images are returned
-     * @param continuation the continuation string from the previous query
+     * @param offset       the offset in the result set
      * @return
      */
     @GET("w/api.php?action=query&format=json&formatversion=2" + //Basic parameters
             "&generator=search&gsrwhat=text&gsrnamespace=6" + //Search parameters
             MEDIA_PARAMS)
-    Observable<MwQueryResponse> getMediaListFromSearch(@Query("gsrsearch") String keyword, @Query("gsrlimit") int itemLimit, @QueryMap Map<String, String> continuation);
+    Single<MwQueryResponse> getMediaListFromSearch(@Query("gsrsearch") String keyword, @Query("gsrlimit") int itemLimit, @Query("gsroffset") int offset);
 
     /**
      * Fetches Media object from the imageInfo API
@@ -83,4 +97,17 @@ public interface MediaInterface {
 
     @GET("w/api.php?format=json&action=parse&prop=text")
     Observable<MwParseResponse> getPageHtml(@Query("page") String title);
+
+    /**
+   * Fetches list of images from a depiction entity
+   *
+   * @param query    depictionEntityId
+   * @param sroffset number od depictions already fetched, this is useful in implementing
+   *                 pagination
+   */
+
+  @GET("w/api.php?action=query&list=search&format=json&srnamespace=6")
+  Observable<DepictionResponse> fetchImagesForDepictedItem(@Query("srsearch") String query,
+      @Query("sroffset") String sroffset);
+
 }

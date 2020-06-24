@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="8dp"
+    android:orientation="vertical"
+    tools:showIn="@layout/activity_upload">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/button_divider"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/depicts_title"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="@dimen/standard_gap"
+        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginTop="@dimen/standard_gap"
+        android:layout_marginEnd="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/normal_text"
+        android:textStyle="bold"
+        tools:text="Step 1 of 15" />
+
+    <TextView
+        android:id="@+id/depicts_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="@dimen/standard_gap"
+        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginTop="@dimen/tiny_gap"
+        android:layout_marginEnd="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_alignParentLeft="true"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/subtitle_text"
+        android:text="@string/upload_flow_all_images_in_set"
+        android:layout_below="@+id/depicts_title"
+        tools:text="(For all images in set)" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:id="@+id/depicts_search_layout"
+        android:layout_marginStart="@dimen/standard_gap"
+        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginEnd="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_below="@id/depicts_subtitle">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/depicts_search_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/depicts_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/depicts_search_text_hint"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ProgressBar
+            android:id="@+id/depictsSearchInProgress"
+            style="?android:progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/tiny_gap"
+            android:layout_marginRight="@dimen/tiny_gap"
+            android:layout_gravity="center_vertical|end"
+            android:indeterminate="true"
+            android:indeterminateOnly="true"
+            android:visibility="gone"
+            tools:visibility="visible" />
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/depicts_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/standard_gap"
+        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginEnd="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_above="@+id/button_divider"
+        android:layout_below="@id/depicts_search_layout" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/button_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/depicts_next"
+        android:background="@color/divider_grey" />
+
+    <Button
+      android:id="@+id/depicts_next"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="24dp"
+      android:layout_marginEnd="24dp"
+      android:layout_marginRight="24dp"
+      android:layout_alignParentBottom="true"
+      android:layout_alignParentEnd="true"
+      android:layout_alignParentRight="true"
+      android:textColor="@android:color/white"
+      android:text="@string/next" />
+
+    <Button
+      android:id="@+id/depicts_previous"
+      style="@style/Widget.AppCompat.Button.Borderless"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="24dp"
+      android:layout_marginEnd="@dimen/standard_gap"
+      android:layout_marginRight="@dimen/standard_gap"
+      android:layout_alignParentBottom="true"
+      android:layout_toLeftOf="@id/depicts_next"
+      android:layout_toStartOf="@id/depicts_next"
+      android:text="@string/previous" />
+
+</RelativeLayout>

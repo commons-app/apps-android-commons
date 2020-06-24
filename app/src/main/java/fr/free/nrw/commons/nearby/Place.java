@@ -30,7 +30,8 @@ public class Place implements Parcelable {
     public final Sitelinks siteLinks;
 
 
-    public Place(String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, String destroyed) {        this.name = name;
+    public Place(String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, String destroyed) {
+        this.name = name;
         this.label = label;
         this.longDescription = longDescription;
         this.location = location;
@@ -124,7 +125,6 @@ public class Place implements Parcelable {
         }
 
         String wikiDataLink = siteLinks.getWikidataLink().toString();
-        Timber.d("Wikidata entity is %s", wikiDataLink);
         return wikiDataLink.replace("http://www.wikidata.org/entity/", "");
     }
 

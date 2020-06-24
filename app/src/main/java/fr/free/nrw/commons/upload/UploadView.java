@@ -30,7 +30,7 @@ public interface UploadView {
 
     boolean checkIfLoggedIn();
 
-    void updateThumbnails(List<UploadModel.UploadItem> uploads);
+    void updateThumbnails(List<UploadItem> uploads);
 
     void setNextEnabled(boolean available);
 
@@ -54,7 +54,7 @@ public interface UploadView {
 
     void updateRightCardContent(boolean gpsPresent);
 
-    void updateBottomCardContent(int currentStep, int stepCount, UploadModel.UploadItem uploadItem, boolean isShowingItem);
+    void updateBottomCardContent(int currentStep, int stepCount, UploadItem uploadItem, boolean isShowingItem);
 
     void updateLicenses(List<String> licenses, String selectedLicense);
 

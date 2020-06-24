@@ -18,6 +18,31 @@
 * 神樂坂秀吉
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="other">%1$d 件のファイルをアップロード中</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d件のアップロード)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="other">%1$d 件のアップロードを開始中</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="other">%1$d 件のアップロード</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">この画像は%1$sライセンスのもとにアップロードされます</item>
+    <item quantity="other">これらの画像は%1$sライセンスのもとにアップロードされます</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="other">%1$d 件のアップロード</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">共有コンテンツを受信中です。 この画像の投稿の処理には、サイズやご使用の機器により時間がかかる事があります</item>
+    <item quantity="other">共有コンテンツの受信中です。投稿画像の処理には、サイズやご使用の機器により時間がかかる事があります</item>
+  </plurals>
   <string name="title_activity_explore">探してみよう</string>
   <string name="navigation_item_explore">探してみよう</string>
   <string name="preference_category_appearance">表示</string>
@@ -49,9 +74,6 @@
   <string name="upload_progress_notification_title_finishing">%1$s のアップロードを完了中</string>
   <string name="upload_failed_notification_title">%1$s のアップロードに失敗しました</string>
   <string name="upload_failed_notification_subtitle">閲覧するにはタップしてください</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="other">%1$d 件のファイルをアップロード中</item>
-  </plurals>
   <string name="title_activity_contributions">自分の最近のアップロードファイル</string>
   <string name="contribution_state_queued">順番待ち中</string>
   <string name="contribution_state_failed">失敗しました</string>
@@ -63,14 +85,15 @@
   <string name="provider_contributions">自分のアップロード</string>
   <string name="menu_share">共有</string>
   <string name="menu_open_in_browser">ブラウザーで表示</string>
-  <string name="share_title_hint">タイトル (必須)</string>
-  <string name="add_title_toast">ファイル名をつけてください</string>
+  <string name="share_title_hint">キャプション (必須)</string>
+  <string name="add_caption_toast">キャプションを記入してください</string>
   <string name="share_description_hint">説明</string>
+  <string name="share_caption_hint">キャプション（上限は半角255文字）</string>
   <string name="login_failed_network">ログインできません - ネットワークのエラーです</string>
   <string name="login_failed_wrong_credentials">ログインできません - 利用者名とパスワードを確認してください</string>
   <string name="login_failed_throttled">失敗した回数が多すぎます。数分待ってからもう一度お試しください。</string>
   <string name="login_failed_blocked">申し訳ありませんが、この利用者はコモンズでブロックされています。</string>
-  <string name="login_failed_2fa_needed">2段階認証コードを入力する必要があります。</string>
+  <string name="login_failed_2fa_needed">2段階認証コードを入力してください。</string>
   <string name="login_failed_generic">ログイン失敗</string>
   <string name="share_upload_button">アップロード</string>
   <string name="multiple_share_base_title">このセットに名前をつけてください</string>
@@ -78,24 +101,17 @@
   <string name="provider_modifications">変更</string>
   <string name="menu_upload_single">アップロード</string>
   <string name="categories_search_text_hint">カテゴリを検索</string>
+  <string name="depicts_search_text_hint">アップロードする素材の被写体を検索（山岳、タージマハールなど）</string>
   <string name="menu_save_categories">保存</string>
   <string name="refresh_button">更新</string>
   <string name="display_list_button">一覧</string>
   <string name="gps_disabled">お使いのデバイスではGPSが無効になっています。有効にしますか?</string>
   <string name="enable_gps">GPSを有効にする</string>
   <string name="contributions_subtitle_zero">まだ何もアップロードされていません。</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d件のアップロード)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="other">%1$d 件のアップロードを開始中</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="other">%1$d 件のアップロード</item>
-  </plurals>
   <string name="categories_not_found">%1$s に一致するカテゴリが見つかりません</string>
+  <string name="depictions_not_found">%1$s に一致する項目が見つかりません</string>
+  <string name="no_child_classes">%1$s に子のクラスはありません</string>
+  <string name="no_parent_classes">%1$s に親クラスはありません</string>
   <string name="categories_skip_explanation">あなたの画像をウィキメディア・コモンズで見つけやすくするためにカテゴリを追加してください。\nカテゴリ名の入力を開始してください。</string>
   <string name="categories_activity_title">カテゴリ</string>
   <string name="title_activity_settings">設定</string>
@@ -105,28 +121,24 @@
   <string name="title_activity_review">査読を受ける</string>
   <string name="menu_about">このアプリについて</string>
   <string name="about_license">ウィキメディア・コモンズ・アプリはウィキメディア・コミュニティの助成金受給者とボランティアが製作・管理しているオープンソースソフトウェアです。ウィキメディア財団はこのアプリの製作・開発・メンテナンスに関与していません。</string>
-  <string name="about_improve">バグとアイディアは &lt;a href=\"%1$s\"&gt;Github&lt;/a&gt; へ。</string>
+  <string name="about_improve">バグと提案は新規の &lt;a href=\"%1$s\"&gt;Github 案件&lt;/a&gt; を作成してください。</string>
   <string name="about_privacy_policy">プライバシー・ポリシー</string>
   <string name="about_credits">クレジット</string>
   <string name="title_activity_about">このアプリについて</string>
-  <string name="menu_feedback">フィードバックをメールで送信</string>
+  <string name="menu_feedback">フィードバックを送信（メール）</string>
   <string name="no_email_client">メールアプリケーションが見つかりません</string>
   <string name="provider_categories">最近使用したカテゴリ</string>
   <string name="waiting_first_sync">同期を待機中…</string>
   <string name="no_uploads_yet">まだ写真をアップロードしていません。</string>
   <string name="menu_retry_upload">再試行</string>
   <string name="menu_cancel_upload">キャンセル</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">この画像は%1$sライセンスのもとにアップロードされます</item>
-    <item quantity="other">これらの画像は%1$sライセンスのもとにアップロードされます</item>
-  </plurals>
   <string name="media_upload_policy">この画像の投稿に当たり、私はこれが自分自身の作品であり、著作権のあるコンテンツや自撮りは含まれていないと宣言します。</string>
   <string name="menu_download">ダウンロード</string>
   <string name="preference_license">既定のライセンス</string>
   <string name="use_previous">前回のタイトルと記述を使用</string>
   <string name="allow_gps">現在の位置を自動的に取得</string>
   <string name="allow_gps_summary">Retrieves current location if image is not geotagged, \n画像にジオタグが付いていない場合、現在の位置を取得して画像に添付。ご注意: 自分の現在地が明示されます。</string>
-  <string name="preference_theme" fuzzy="true">夜モード</string>
+  <string name="preference_theme">テーマ</string>
   <string name="license_name_cc_by_sa_four">表示-継承 4.0</string>
   <string name="license_name_cc_by_four">表示 4.0</string>
   <string name="license_name_cc_by_sa">表示-継承 3.0</string>
@@ -281,7 +293,7 @@
   <string name="copy_wikicode">ウィキテキストをクリップボードにコピーする</string>
   <string name="wikicode_copied">クリップボードにウィキテキストをコピー完了しました</string>
   <string name="nearby_location_has_not_changed">場所は変更されていません。</string>
-  <string name="nearby_location_not_available" fuzzy="true">位置が無効です。</string>
+  <string name="nearby_location_not_available">位置が無効のため、付近は正確に作動しないかもしれません。</string>
   <string name="location_permission_rationale_nearby">近くの場所を表示するには権限が必要です</string>
   <string name="get_directions">道順を調べる</string>
   <string name="read_article">記事を読む</string>
@@ -382,21 +394,21 @@
   <string name="images_reverted_explanation">コモンズへの投稿画像で削除されずに残った割合</string>
   <string name="images_used_explanation">コモンズへ投稿した中で、ウィキペディアの記事に使用された画像の数</string>
   <string name="error_occurred">エラーが発生しました</string>
-  <string name="notifications_channel_name_all">コモンズのお知らせ</string>
+  <string name="notifications_channel_name_all">コモンズの通知</string>
   <string name="preference_author_name_toggle">専用の投稿者名を使う</string>
   <string name="preference_author_name_toggle_summary">画像の投稿にはユーザー名ではなく専用の投稿者名を使う</string>
   <string name="preference_author_name">投稿専用の名前</string>
   <string name="contributions_fragment">投稿記録</string>
   <string name="nearby_fragment">付近</string>
-  <string name="notifications">お知らせ</string>
-  <string name="read_notifications" fuzzy="true">お知らせ（過去ログ）</string>
-  <string name="display_nearby_notification">近くの場所のお知らせを表示する</string>
+  <string name="notifications">通知</string>
+  <string name="read_notifications">通知（既読）</string>
+  <string name="display_nearby_notification">近くの場所の通知を表示する</string>
   <string name="display_nearby_notification_summary">ここをタップして、近くで画像を募集中の場所を表示</string>
   <string name="no_close_nearby">現在地の近くに該当する場所が見つかりません</string>
   <string name="list_sheet">一覧</string>
   <string name="storage_permission">ストレージの許可</string>
   <string name="write_storage_permission_rationale_for_image_share">画像の投稿には、外部ストレージへのアクセス権限を許可してください。</string>
-  <string name="nearby_notification_dismiss_message">今後、画像募集中の近くの場所は表示されません。ただしこのお知らせ機能は、いつでも「設定」画面から有効にできます。</string>
+  <string name="nearby_notification_dismiss_message">今後、画像募集中の近くの場所は表示されません。ただしこの通知機能は、いつでも「設定」画面から有効にできます。</string>
   <string name="step_count">全部で%2$d件のうち%1$d件目の手順</string>
   <string name="image_in_set_label">%1$d 点を組み写真にする</string>
   <string name="next">次へ</string>
@@ -404,9 +416,6 @@
   <string name="submit">送信</string>
   <string name="upload_title_duplicate">%1$s という題名のファイルはすでに保存されています。処理をほんとうに続けますか？</string>
   <string name="map_application_missing">お使いの機器に適したアプリが見つかりませんでした。この機能を使用できる地図アプリをインストールしてください。</string>
-  <plurals name="upload_count_title">
-    <item quantity="other">%1$d 件のアップロード</item>
-  </plurals>
   <string name="navigation_item_bookmarks">ブックマーク</string>
   <string name="title_activity_bookmarks">ブックマーク</string>
   <string name="title_page_bookmarks_pictures">画像</string>
@@ -431,9 +440,7 @@
   <string name="desc_language_Asia">アジア</string>
   <string name="desc_language_Pacific">太平洋地域</string>
   <string name="no_categories_selected">カテゴリが選択されていません</string>
-  <string name="no_categories_selected_warning_desc">カテゴリを指定しない画像は使用されることがほとんどありません。ほんとうにカテゴリを選択しないまま投稿しますか？</string>
-  <string name="yes_submit">はい、投稿します</string>
-  <string name="no_go_back">いいえ、前の画面に戻ります</string>
+  <string name="no_categories_selected_warning_desc">カテゴリを指定しない画像は使用されることがほとんどありません。ほんとうにカテゴリを選択しないまま作業を続けますか？</string>
   <string name="upload_flow_all_images_in_set">（画像全点を組み写真にする場合）</string>
   <string name="search_this_area">この地域を検索</string>
   <string name="nearby_card_permission_title">許可を申請</string>
@@ -446,7 +453,7 @@
   <string name="ends_on">終了日：</string>
   <string name="display_campaigns">キャンペーンを表示</string>
   <string name="display_campaigns_explanation">現在、実施中のキャンペーンを表示</string>
-  <string name="nearby_campaign_dismiss_message">きゃんへのお知らせは表示されなくなります。ただし「設定」ページでいつでもお知らせの表示を切り替えできます。</string>
+  <string name="nearby_campaign_dismiss_message">キャンペーンの通知は表示されなくなります。ただし「設定」ページでいつでも通知の表示を有効にできます。</string>
   <string name="this_function_needs_network_connection">この機能はネットワーク接続がないと無効なため、接続設定の確認をお願いします。</string>
   <string name="bad_token_error_proposed_solution">編集トークンに問題があり、アップロードできませんでした。一度ログアウトしてから再度ログインしてください。</string>
   <string name="error_processing_image">画像の処理中にエラーが発生しました。もう一度、お願いします。</string>
@@ -493,25 +500,20 @@
   <string name="review_thanks_no_button_text">次の画像</string>
   <string name="skip_image_explanation">このボタンをクリックすると、ウィキメディアコモンズに最近、投稿された別の写真をお見せします</string>
   <string name="review_image_explanation">ウィキメディアコモンズの質を高めるため、画像のレビューをお願いします。\nレビューの指針は4点あります。\n - これはコモンズの目的に合っていますか？\n - 著作権のルールをきちんと守っていますか？\n - カテゴリは正しいですか？\n - これらの条件をクリアしたら、投稿者に感謝を送信しませんか。</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">共有コンテンツを受信中です。 この画像の投稿の処理には、サイズやご使用の機器により時間がかかる事があります</item>
-    <item quantity="other">共有コンテンツの受信中です。投稿画像の処理には、サイズやご使用の機器により時間がかかる事があります</item>
-  </plurals>
   <string name="no_image">使用された画像はありません</string>
   <string name="no_image_reverted">却下された画像はありません</string>
   <string name="no_image_uploaded">投稿した画像はありません</string>
-  <string name="no_notification">未読のお知らせはありません</string>
-  <string name="no_read_notification" fuzzy="true">過去ログ化したお知らせはありません</string>
+  <string name="no_notification">未読の通知はありません</string>
+  <string name="no_read_notification">既読のお知らせはありません</string>
   <string name="share_logs_using">ログの共有に使うアプリ</string>
-  <string name="menu_option_read" fuzzy="true">アーカイブ済みを表示</string>
+  <string name="menu_option_read">既読を表示</string>
   <string name="menu_option_unread">未読を見る</string>
   <string name="error_occurred_in_picking_images">画像の選択中にエラーが発生しました</string>
   <string name="image_chooser_title">アップロードする画像を選ぶ</string>
   <string name="please_wait">お待ちください…</string>
   <string name="images_featured_explanation">秀逸な画像とは、技術力の高い写真家や作画家による作品で、ウィキメディアコモンズのコミュニティから最高の品質を誇るものとして選出されています。</string>
   <string name="images_via_nearby_explanation">「近くの場所でアップロードした画像」とは、地図上で検索した結果に基づいてアップロードした画像のことです。</string>
-  <string name="thanks_received_explanation">この機能を使うと有効な編集をしたユーザーに感謝を伝えることができます – 変更履歴もしくは差分のページに小さな感謝リンクが表示されます。</string>
-  <string name="previous_image_title_description">以前のファイル名と説明をコピーする</string>
+  <string name="thanks_received_explanation">この機能を使うと有効な編集をしたユーザーに感謝を伝えることができます – 変更履歴もしくは差分のページに表示される小さな感謝リンクを押します。</string>
   <string name="previous_button_tooltip_message">クリックして前の画像に使ったファイル名と説明文をコピーし、投稿画像に合わせて文字を編集</string>
   <string name="welcome_do_upload_content_description">コモンズへの投稿画像の良い例</string>
   <string name="welcome_dont_upload_content_description">投稿に適さない画像のサンプル</string>
@@ -567,4 +569,8 @@
   <string name="wallpaper_set_unsuccessfully">問題が発生しました。壁紙を設定できませんでした。</string>
   <string name="setting_wallpaper_dialog_title">壁紙として設定</string>
   <string name="setting_wallpaper_dialog_message">壁紙を設定中。お待ちください...</string>
+  <string name="recommend_high_accuracy_mode">高品質を確保するには、高精モードを選択してください。</string>
+  <string name="ask_to_turn_location_on">位置を有効にしますか？</string>
+  <string name="nearby_needs_location">付近が正確に機能するには、位置を有効にしてください</string>
+  <string name="use_location_from_similar_image">これら2点の撮影場所は同じですか？ 右側の画像に緯度経度情報を添付しますか？</string>
 </resources>

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * MaGa
+* Neptune, the Mystic
 -->
 <resources>
-  <string name="crash_dialog_title">Aplikacija Zajednički poslužitelj je prestala s radom</string>
-  <string name="crash_dialog_text">Nešto je krenulo po krivu!</string>
-  <string name="crash_dialog_comment_prompt">Napišite nam što radite i podijelite s nama putem elektroničke pošte. Pomoći će nam da to popravimo!</string>
+  <string name="crash_dialog_title">Aplikacija Zajednički poslužitelj prestala je s radom</string>
+  <string name="crash_dialog_text">Ups. Nešto je pošlo po zlu!</string>
+  <string name="crash_dialog_comment_prompt">Recite nam što ste radili i pošaljite nam odgovor putem elektroničke pošte. To će nam pomoći da riješimo problem!</string>
   <string name="crash_dialog_ok_toast">Hvala Vam!</string>
 </resources>

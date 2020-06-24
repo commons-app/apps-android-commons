@@ -20,6 +20,47 @@
 * חיים
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">מועלה קובץ אחד</item>
+    <item quantity="two">מועלים %1$d קבצים</item>
+    <item quantity="many">מועלים %1$d קבצים</item>
+    <item quantity="other">מועלים %1$d קבצים</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">התחלת העלאה</item>
+    <item quantity="two">התחלת 1$d% העלאות</item>
+    <item quantity="many">התחלת 1$d% העלאות</item>
+    <item quantity="other">התחלת 1$d% העלאות</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">העלאה אחת</item>
+    <item quantity="two">%1$d העלאות</item>
+    <item quantity="many">%1$d העלאות</item>
+    <item quantity="other">%1$d העלאות</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">התמונה הזאת תפורסם ברישיון %1$s</item>
+    <item quantity="two">התמונות האלה תפורסמנה ברישיון %1$s</item>
+    <item quantity="many">התמונות האלה תפורסמנה ברישיון %1$s</item>
+    <item quantity="other">התמונות האלה תפורסמנה ברישיון %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">העלאה אחת</item>
+    <item quantity="two">%1$d העלאות</item>
+    <item quantity="many">%1$d העלאות</item>
+    <item quantity="other">%1$d העלאות</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">מתקבל תוכן שיתופי. עיבוד התמונה עשוי לארוך זמן מה כתלות בגודל התמונה והמכשיר שלך</item>
+    <item quantity="two">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
+    <item quantity="many">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
+    <item quantity="other">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
+  </plurals>
   <string name="title_activity_explore">לחקור</string>
   <string name="navigation_item_explore">לחקור</string>
   <string name="preference_category_appearance">מראה</string>
@@ -51,10 +92,6 @@
   <string name="upload_progress_notification_title_finishing">העלאת %1$s מסתיימת</string>
   <string name="upload_failed_notification_title">העלאת %1$s נכשלה</string>
   <string name="upload_failed_notification_subtitle">לחץ כדי להציג</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">מועלה קובץ אחד</item>
-    <item quantity="other">מועלים %1$d קבצים</item>
-  </plurals>
   <string name="title_activity_contributions">ההעלאות האחרונות שלי</string>
   <string name="contribution_state_queued">בתור</string>
   <string name="contribution_state_failed">נכשלה</string>
@@ -66,9 +103,10 @@
   <string name="provider_contributions">ההעלאות שלי</string>
   <string name="menu_share">שיתוף</string>
   <string name="menu_open_in_browser">הצגה בדפדפן</string>
-  <string name="share_title_hint">כותרת (נדרש)</string>
-  <string name="add_title_toast">נא לתת כותרת לקובץ הזה</string>
+  <string name="share_title_hint">כיתוב (נדרש)</string>
+  <string name="add_caption_toast">נא לרשום כיתוב לקובץ הזה</string>
   <string name="share_description_hint">תיאור</string>
+  <string name="share_caption_hint">כיתוב (מוגבל ל־255 תווים)</string>
   <string name="login_failed_network">לא ניתן להיכנס – כשל בתקשורת</string>
   <string name="login_failed_wrong_credentials">לא ניתן להיכנס לחשבון – נא לבדוק את שם המשתמש ואת הסיסמה</string>
   <string name="login_failed_throttled">יותר מדי ניסיונות כניסה כושלים. נא לנסות שוב בעוד מספר דקות.</string>
@@ -81,26 +119,18 @@
   <string name="provider_modifications">שינויים</string>
   <string name="menu_upload_single">העלאה</string>
   <string name="categories_search_text_hint">חיפוש קטגוריות</string>
+  <string name="depicts_search_text_hint">חפשו פריטים שהמדיה שלך מציגה (הר, טאג\' מהאל, וכו\')</string>
   <string name="menu_save_categories">שמירה</string>
   <string name="refresh_button">רענון</string>
   <string name="display_list_button">רשימה</string>
   <string name="gps_disabled">ה־GPS במכשיר שלך אינו מופעל. האם להפעיל אותו?</string>
   <string name="enable_gps">הפעלת GPS</string>
   <string name="contributions_subtitle_zero">לא הועלה עדיין שום דבר</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">התחלת העלאה</item>
-    <item quantity="other">התחלת 1$d% העלאות</item>
-  </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">העלאה אחת</item>
-    <item quantity="other">%1$d העלאות</item>
-  </plurals>
   <string name="categories_not_found">לא נמצאו קטגוריות בשם %1$s</string>
+  <string name="depictions_not_found">לא נמצאו פריטי ויקינתונים שמתאימים לחיפוש %1$s</string>
+  <string name="no_child_classes">ל%1$s אין מחלקות יורשות</string>
+  <string name="no_parent_classes">ל%1$s אין מחלקות מורישות</string>
+  <string name="depictions_image_not_found">אין תמונה למאפיין מציג</string>
   <string name="categories_skip_explanation">יש להוסיף קטגוריות כדי שיהיה קל יותר למצוא את התמונות שלך בוויקישיתוף.\nכדי להוסיף קטגוריה יש להתחיל לכתוב.</string>
   <string name="categories_activity_title">קטגוריות</string>
   <string name="title_activity_settings">הגדרות</string>
@@ -117,14 +147,11 @@
   <string name="menu_feedback">שליחת משוב (בדוא\"ל)</string>
   <string name="no_email_client">לא מותקן לקוח דואר אלקטרוני</string>
   <string name="provider_categories">קטגוריות בשימוש לאחרונה</string>
+  <string name="provider_depictions">מוצגים ששימשו לאחרונה</string>
   <string name="waiting_first_sync">מחכה לסנכרון הראשון…</string>
   <string name="no_uploads_yet">עדיין לא העלית תמונות.</string>
   <string name="menu_retry_upload">לנסות שוב</string>
   <string name="menu_cancel_upload">ביטול</string>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">התמונה הזאת תפורסם ברישיון %1$s</item>
-    <item quantity="other">התמונות האלה תפורסמנה ברישיון %1$s</item>
-  </plurals>
   <string name="media_upload_policy">שליחת התמונה הזאת מהווה את הצהרתי על כך שזאת יצירה שלי, שהיא לא מכילה חומר מוגבל בזכויות יוצרים או תמונות עצמיות (סלפי) ומתאימה בכל אופן ל&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;מדיניות של אתר ויקישיתוף של ויקימדיה&lt;/a&gt;.</string>
   <string name="menu_download">הורדה</string>
   <string name="preference_license">רישיון ברירת מחדל</string>
@@ -176,6 +203,8 @@
   <string name="detail_panel_cats_label">קטגוריות</string>
   <string name="detail_panel_cats_loading">בטעינה...</string>
   <string name="detail_panel_cats_none">לא נבחר דבר</string>
+  <string name="detail_caption_empty">אין כיתוב</string>
+  <string name="detail_depiction_empty">אין מוצג</string>
   <string name="detail_description_empty">אין תיאור</string>
   <string name="detail_discussion_empty">אין דיון</string>
   <string name="detail_license_empty">רישיון לא ידוע</string>
@@ -189,10 +218,14 @@
   <string name="title_activity_nearby">מקומות בסביבה</string>
   <string name="no_nearby">לא נמצאו מקומות בסביבה</string>
   <string name="warning">אזהרה</string>
+  <string name="duplicate_image_found">נמצאה תמונה כפולה</string>
   <string name="upload_image_duplicate">הקובץ הזה כבר קיים בוויקישיתוף. האם להמשיך?</string>
+  <string name="upload">העלאה</string>
   <string name="yes">כן</string>
   <string name="no">לא</string>
+  <string name="media_detail_caption">כיתוב</string>
   <string name="media_detail_title">כותרת</string>
+  <string name="media_detail_depiction">מוצגים</string>
   <string name="media_detail_description">תיאור</string>
   <string name="media_detail_discussion">דיון</string>
   <string name="media_detail_author">יוצר</string>
@@ -254,6 +287,7 @@
   <string name="error_while_cache">שגיאה בעת שמירת תמונות במטמון</string>
   <string name="title_info">כותרת מתארת ייחודית לקובץ, שתשמש כשם הקובץ. ניתן להשתמש בשפה טבעית עם רווחים. אין לכלול את סיומת הקובץ</string>
   <string name="description_info">נא לתאר את המדיה כמה שיותר: איפה היא נוצרה? מה היא מראה? מה ההקשר? נא לתאר את העצמים או את האנשים. נא לחשוף מידע שאי־אפשר לנחש בקלות, למשל, הזמן ביום אם זאת תמונת נוף. אם המדיה מציגה משהו בלתי־רגיל, נא להסביר מה מיוחד בה.</string>
+  <string name="caption_info">נא לרשום תיאור קצר של התמונה. (מוגבל ל־255 תווים)</string>
   <string name="upload_image_too_dark">התמונה הזאת חשוכה מדי, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
   <string name="upload_image_blurry">התמונה הזאת מטושטשת, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
   <string name="upload_problem_exist">בעיות פוטנציאליות עם התמונה הזאת:</string>
@@ -263,6 +297,7 @@
   <string name="upload_problem_different_geolocation">התמונה צולמה במקום אחר.</string>
   <string name="upload_problem_fbmd">נא להעלות רק תמונות שהעלית בעצמך. לא להעלות תמונות שמצאת בחשבונות של כל מיני אנשים בפייסבוק.</string>
   <string name="upload_problem_do_you_continue">האם ברצונך עדיין להעלות את התמונה הזאת?</string>
+  <string name="upload_problem_image">נמצאו בעיות בתמונה</string>
   <string name="internet_downloaded">נא להעלות רק תמונות שצילמת בעצמך. לא להעלות תמונות שהורדת מהאינטרנט.</string>
   <string name="give_permission">לתת הרשאה</string>
   <string name="use_external_storage">להשתמש באחסון חיצוני</string>
@@ -332,9 +367,11 @@
   <string name="search_recent_header">חיפוש אחרונים:</string>
   <string name="provider_searches">דברים שחיפשת לאחרונה</string>
   <string name="error_loading_categories">אירעה שגיאה בעת טעינת קטגוריות.</string>
+  <string name="error_loading_depictions">אירעה שגיאה בטעינת מאפייני מוצגים.</string>
   <string name="error_loading_subcategories">אירעה שגיאה בעת טעינת תת־קטגוריות.</string>
   <string name="search_tab_title_media">מדיה</string>
   <string name="search_tab_title_categories">קטגוריות</string>
+  <string name="search_tab_title_depictions">פריטים</string>
   <string name="explore_tab_title_featured">מומלץ</string>
   <string name="explore_tab_title_mobile">העלאה דרך נייד</string>
   <string name="successful_wikidata_edit">התמונה נוספה לדף %1$s בוויקינתונים!</string>
@@ -409,10 +446,6 @@
   <string name="submit">שליחה</string>
   <string name="upload_title_duplicate">כבר קיים קובץ בשם %1$s. להמשיך?</string>
   <string name="map_application_missing">לא נמצא יישום מפה תואם במכשיר שלך. נא להתקין יישום מפה כדי להשתמש בתכונה זו.</string>
-  <plurals name="upload_count_title" fuzzy="true">
-    <item quantity="one">העלאה אחת</item>
-    <item quantity="other">%1$d העלאות</item>
-  </plurals>
   <string name="navigation_item_bookmarks">סימניות</string>
   <string name="title_activity_bookmarks">סימניות</string>
   <string name="title_page_bookmarks_pictures">תמונות</string>
@@ -437,9 +470,9 @@
   <string name="desc_language_Asia">אסיה</string>
   <string name="desc_language_Pacific">האוקיינוס השקט</string>
   <string name="no_categories_selected">לא נבחרו קטגוריות</string>
-  <string name="no_categories_selected_warning_desc">תמונות ללא קטגוריות בדרך כלל אינן שימושיות. לשלוח ללא בחירת קטגוריות?</string>
-  <string name="yes_submit">כן, לשלוח</string>
-  <string name="no_go_back">לא, חזור אחורה</string>
+  <string name="no_categories_selected_warning_desc">תמונות ללא קטגוריות בדרך כלל אינן שימושיות. להמשיך ללא בחירת קטגוריות?</string>
+  <string name="no_depictions_selected">לא נבחרו מוצגים</string>
+  <string name="no_depictions_selected_warning_desc">קל יותר למצוא תמונות עם מוצגים ויש סיכוי גבוה יותר שמישהו ישתמש בהן. האם ברצונך באמת להמשיך בלי לבחור מוצגים?</string>
   <string name="upload_flow_all_images_in_set">(לכל התמונות בסדרה)</string>
   <string name="search_this_area">חיפוש באזור הזה</string>
   <string name="nearby_card_permission_title">בקשת הרשאה</string>
@@ -500,10 +533,6 @@
   <string name="review_thanks_no_button_text">התמונה הבאה</string>
   <string name="skip_image_explanation">לחיצה על הכפתור הזה תציג בפניך תמונה נוספת שנוספה לאחרונה לוויקישיתוף</string>
   <string name="review_image_explanation">ניתן לסקור את התמונות ולשפר את האיכות של ויקישיתוף.\nארבע יסודות הסקירה הם:\n- האם התמונה קשורה לנושא?\n- האם התמונה תואמת לכללי זכויות היוצרים?\n- האם התמונה נמצאת בקטגוריה הנכונה?\n- אם הכול בסדר, ניתן גם להודות למי שתרם אותה.</string>
-  <plurals name="receiving_shared_content" fuzzy="true">
-    <item quantity="one">מתקבל תוכן שיתופי. עיבוד התמונה עשוי לארוך זמן מה כתלות בגודל התמונה והמכשיר שלך</item>
-    <item quantity="other">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
-  </plurals>
   <string name="no_image">לא נעשה שימוש בתמונות</string>
   <string name="no_image_reverted">לא שוחזרו תמונות</string>
   <string name="no_image_uploaded">לא הועלו תמונות</string>
@@ -518,7 +547,7 @@
   <string name="images_featured_explanation">תמונות מובילות הן תמונות של צלמים ומאיירים מיומנים אותם בחרה קהילת ויקישיתוף בזכות איכות התוצר שהם תורמים לאתר.</string>
   <string name="images_via_nearby_explanation">תמונות שהועלו דרך מקומות בסביבה הן התמונות שנשלחות על ידי גילוי מקומות במפה.</string>
   <string name="thanks_received_explanation">תכונה זו מאפשרת לעורכים לשלוח מסרי תודה למשתמשים שביצעו עריכות מועילות - על ידי שימוש בקישור תודה בעמוד ההיסטוריה או עמוד ההבדלים.</string>
-  <string name="previous_image_title_description">העתקת הכותרת והתיאור הקודמים</string>
+  <string name="previous_image_caption_description">העתקת כיתבוים ותיאורים קודמים</string>
   <string name="previous_button_tooltip_message">יש ללחוץ כדי להשתמש מחדש בכותרת ובתיאור שהקלדת בתמונה הקודמת ולשנות אותה כדי להתאים לנוכחית</string>
   <string name="welcome_do_upload_content_description">דוגמאות של תמונות טובות להעלאה לוויקישיתוף</string>
   <string name="welcome_dont_upload_content_description">דוגמאות של תמונות שאין להעלות</string>
@@ -537,6 +566,7 @@
   <string name="share_via">שיתוף היישום דרך...</string>
   <string name="image_info">פרטי תמונה</string>
   <string name="no_categories_found">לא נמצאו קטגוריות</string>
+  <string name="no_depiction_found">לא נמצאו מוצגים</string>
   <string name="upload_cancelled">ההעלאה בוטלה</string>
   <string name="previous_image_title_description_not_found">אין נתונים עבור הכותרת או התיאור התמונה הקודמת</string>
   <string name="dialog_box_text_nomination">למה %1$s צריך להימחק?</string>
@@ -569,6 +599,9 @@
   <string name="place_type">סוג המקום:</string>
   <string name="nearby_search_hint">גשר, מוזאון, מלון, וכו\'.</string>
   <string name="you_must_reset_your_passsword">משהו השתבש בכניסה למערכת, עליך לאפס את הססמה שלך!</string>
+  <string name="title_for_media">מדיה</string>
+  <string name="title_for_child_classes">מחלקות יורשות</string>
+  <string name="title_for_parent_classes">מחלקות מורישות</string>
   <string name="upload_nearby_place_found_title">נמצא בקרבת מקום</string>
   <string name="upload_nearby_place_found_description">האם זאת תמונה של המקום %1$s?</string>
   <string name="title_app_shortcut_explore">לחקור</string>
@@ -586,4 +619,7 @@
   <string name="recommend_high_accuracy_mode">לתוצאות המיטביות יש להשתמש במצב דיוק גבוה.</string>
   <string name="ask_to_turn_location_on">להפעיל מיקום?</string>
   <string name="nearby_needs_location">פעולת \"בסביבה\" זקוקה לשירותי מיקומי פועלים כדי לעבוד כמו שצריך</string>
+  <string name="use_location_from_similar_image">האם צילמת את שתי התמונות באותו המקום? האם ברצונך להשתמש בקו הרוחב וקו האורך של התמונה משמאל?</string>
+  <string name="load_more">לטעון עוד</string>
+  <string name="nearby_no_results">לא נמצאו מקומות, נא לנסות לשנות את החיפוש.</string>
 </resources>

@@ -18,6 +18,35 @@
 * Vitorvicentevalente
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">a carregar %1$d ficheiro</item>
+    <item quantity="other">a carregar %1$d ficheiros</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">A iniciar %1$d carregamento</item>
+    <item quantity="other">A iniciar %1$d carregamentos</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d carregamento</item>
+    <item quantity="other">%1$d carregamentos</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Esta imagem será licenciada com a %1$s</item>
+    <item quantity="other">Estas imagens serão licenciadas com a %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d carregamento</item>
+    <item quantity="other">%1$d carregamentos</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">A receber conteúdo partilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da mesma e do seu dispositivo</item>
+    <item quantity="other">A receber conteúdo partilhado. O processamento das imagens pode demorar algum tempo, dependendo do tamanho das mesmas e do seu dispositivo</item>
+  </plurals>
   <string name="title_activity_explore">Explorar</string>
   <string name="navigation_item_explore">Explorar</string>
   <string name="preference_category_appearance">Aparência</string>
@@ -49,10 +78,6 @@
   <string name="upload_progress_notification_title_finishing">A terminar o carregamento de %1$s</string>
   <string name="upload_failed_notification_title">O carregamento de %1$s falhou</string>
   <string name="upload_failed_notification_subtitle">Tocar para ver</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">a carregar %1$d ficheiro</item>
-    <item quantity="other">a carregar %1$d ficheiros</item>
-  </plurals>
   <string name="title_activity_contributions">Carregamentos recentes</string>
   <string name="contribution_state_queued">Em espera</string>
   <string name="contribution_state_failed">Falhado</string>
@@ -64,8 +89,7 @@
   <string name="provider_contributions">Carregamentos</string>
   <string name="menu_share">Partilhar</string>
   <string name="menu_open_in_browser">Ver no navegador</string>
-  <string name="share_title_hint">Título (obrigatório)</string>
-  <string name="add_title_toast">Forneça um título para este ficheiro, por favor</string>
+  <string name="share_title_hint">Legenda (obrigatória)</string>
   <string name="share_description_hint">Descrição</string>
   <string name="login_failed_network">Não é possível iniciar uma sessão - falha de rede</string>
   <string name="login_failed_wrong_credentials">Não é possível iniciar uma sessão - verifique o seu nome de utilizador e a palavra-passe, por favor</string>
@@ -85,19 +109,6 @@
   <string name="gps_disabled">O GPS está desativado no seu dispositivo. Gostaria de ativá-lo?</string>
   <string name="enable_gps">Ativar GPS</string>
   <string name="contributions_subtitle_zero">Ainda não foram enviados ficheiros</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">A iniciar %1$d carregamento</item>
-    <item quantity="other">A iniciar %1$d carregamentos</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d carregamento</item>
-    <item quantity="other">%1$d carregamentos</item>
-  </plurals>
   <string name="categories_not_found">Não foi encontrada nenhuma categoria que corresponda a %1$s</string>
   <string name="categories_skip_explanation">Adicione categorias para tornar as suas imagens mais fáceis de encontrar na wiki Wikimedia Commons.\nComece a escrever para adicionar categorias.</string>
   <string name="categories_activity_title">Categorias</string>
@@ -119,10 +130,6 @@
   <string name="no_uploads_yet">Não carregou ainda nenhuma foto.</string>
   <string name="menu_retry_upload">Tentar novamente</string>
   <string name="menu_cancel_upload">Cancelar</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Esta imagem será licenciada com a %1$s</item>
-    <item quantity="other">Estas imagens serão licenciadas com a %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Ao carregar esta imagem, declaro que esta é uma obra própria, que não contém material protegido nem selfies, e que adere às &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/pt\"&gt;normas da wiki Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descarregar</string>
   <string name="preference_license">Licença padrão</string>
@@ -174,6 +181,7 @@
   <string name="detail_panel_cats_label">Categorias</string>
   <string name="detail_panel_cats_loading">A carregar…</string>
   <string name="detail_panel_cats_none">Nenhuma selecionada</string>
+  <string name="detail_caption_empty">Sem legenda</string>
   <string name="detail_description_empty">Sem descrição</string>
   <string name="detail_discussion_empty">Não há nenhuma discussão</string>
   <string name="detail_license_empty">Licença desconhecida</string>
@@ -190,6 +198,7 @@
   <string name="upload_image_duplicate">Este ficheiro já existe na wiki Commons. Tem a certeza de que deseja continuar?</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
+  <string name="media_detail_caption">Legenda</string>
   <string name="media_detail_title">Título</string>
   <string name="media_detail_description">Descrição</string>
   <string name="media_detail_discussion">Discussão</string>
@@ -333,6 +342,7 @@
   <string name="error_loading_subcategories">Ocorreu um erro ao carregar subcategorias.</string>
   <string name="search_tab_title_media">Multimédia</string>
   <string name="search_tab_title_categories">Categorias</string>
+  <string name="search_tab_title_depictions">Elementos</string>
   <string name="explore_tab_title_featured">Destacadas</string>
   <string name="explore_tab_title_mobile">Carregada via telemóvel</string>
   <string name="successful_wikidata_edit">Imagem adicionada a %1$s na wiki Wikidata!</string>
@@ -407,10 +417,6 @@
   <string name="submit">Enviar</string>
   <string name="upload_title_duplicate">Já existe um ficheiro com o nome %1$s. Tem a certeza de que deseja continuar?</string>
   <string name="map_application_missing">Não foi encontrada no seu dispositivo nenhuma aplicação de mapas compatível. Para usar esta funcionalidade instale uma aplicação de mapas, por favor.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d carregamento</item>
-    <item quantity="other">%1$d carregamentos</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Marcadores</string>
   <string name="title_activity_bookmarks">Marcadores</string>
   <string name="title_page_bookmarks_pictures">Fotografias</string>
@@ -435,9 +441,7 @@
   <string name="desc_language_Asia">Ásia</string>
   <string name="desc_language_Pacific">Pacífico</string>
   <string name="no_categories_selected">Não foi selecionada nenhuma categoria</string>
-  <string name="no_categories_selected_warning_desc">As imagens não categorizadas só raramente são utilizáveis. Tem a certeza de que deseja enviar sem selecionar categorias?</string>
-  <string name="yes_submit">Sim, enviar</string>
-  <string name="no_go_back">Não, voltar</string>
+  <string name="no_categories_selected_warning_desc">As imagens sem categorias só raramente são utilizáveis. Tem a certeza de que deseja continuar sem selecionar categorias?</string>
   <string name="upload_flow_all_images_in_set">(Para todas as imagens do conjunto)</string>
   <string name="search_this_area">Pesquisar nesta área</string>
   <string name="nearby_card_permission_title">Pedido de permissões</string>
@@ -497,10 +501,6 @@
   <string name="review_thanks_no_button_text">Imagem seguinte</string>
   <string name="skip_image_explanation">Clicar este botão dá-lhe outra imagem carregada recentemente da wiki Wikimedia Commons</string>
   <string name="review_image_explanation">Pode rever imagens e melhorar a qualidade da wiki Wikimedia Commons.\n Os quatro parâmetros de revisão são:\n- Esta imagem está enquadrada no nosso âmbito?\n- Esta imagem respeita as regras dos direitos de autor?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, também poderá agradecer ao contribuidor.</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">A receber conteúdo partilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da mesma e do seu dispositivo</item>
-    <item quantity="other">A receber conteúdo partilhado. O processamento das imagens pode demorar algum tempo, dependendo do tamanho das mesmas e do seu dispositivo</item>
-  </plurals>
   <string name="no_image">Não foi usada nenhuma imagem</string>
   <string name="no_image_reverted">Não foi revertida nenhuma imagem</string>
   <string name="no_image_uploaded">Não foi carregada nenhuma imagem</string>
@@ -515,7 +515,6 @@
   <string name="images_featured_explanation">As fotografias destacadas são imagens de fotógrafos e ilustradores altamente qualificados, que a comunidade da wiki Wikimedia Commons escolheu como as de melhor qualidade do \'\'site\'\'.</string>
   <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo locais do mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidade permite que os editores enviem uma notificação de agradecimento aos utilizadores que fizerem edições úteis - usando uma pequena hiperligação de agradecimento na página do historial ou na de diferenças.</string>
-  <string name="previous_image_title_description">Copiar título e descrição anteriores</string>
   <string name="previous_button_tooltip_message">Clique para reutilizar o título e a descrição que inseriu na sua fotografia anterior e adequá-los à atual</string>
   <string name="welcome_do_upload_content_description">Exemplos de imagens que podem ser carregadas na wiki Commons</string>
   <string name="welcome_dont_upload_content_description">Exemplos de imagens que não devem ser carregadas</string>
@@ -566,6 +565,7 @@
   <string name="place_type">Tipo de local:</string>
   <string name="nearby_search_hint">Ponte, museu, hotel, etc.</string>
   <string name="you_must_reset_your_passsword">Ocorreu algo de errado com a sessão, tem de redefinir a sua palavra-passe!</string>
+  <string name="title_for_media">MULTIMÉDIA</string>
   <string name="upload_nearby_place_found_title">Foi encontrado um local próximo</string>
   <string name="upload_nearby_place_found_description">Isto é uma foto do local %1$s?</string>
   <string name="remove_bookmark">Removido dos marcadores</string>

@@ -1,7 +1,8 @@
 package fr.free.nrw.commons.upload
 
-import com.nhaarman.mockitokotlin2.verify
-import fr.free.nrw.commons.category.CategoryItem
+import categoryItem
+import com.nhaarman.mockitokotlin2.*
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.categories.CategoriesContract
 import fr.free.nrw.commons.upload.categories.CategoriesPresenter
@@ -9,9 +10,7 @@ import io.reactivex.Observable
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
 /**
@@ -19,22 +18,14 @@ import org.mockito.MockitoAnnotations
  */
 class CategoriesPresenterTest {
     @Mock
-    internal var repository: UploadRepository? = null
-    @Mock
-    internal var view: CategoriesContract.View? = null
-
-    var categoriesPresenter: CategoriesPresenter? = null
-
-    var testScheduler: TestScheduler? = null
-
-    val categoryItems: ArrayList<CategoryItem> = ArrayList()
+    internal lateinit var repository: UploadRepository
 
     @Mock
-    lateinit var categoryItem: CategoryItem
+    internal lateinit var view: CategoriesContract.View
 
-    var testObservable: Observable<CategoryItem>? = null
+    private lateinit var categoriesPresenter: CategoriesPresenter
 
-    private val imageTitleList = ArrayList<String>()
+    private lateinit var testScheduler: TestScheduler
 
     /**
      * initial setup
@@ -44,38 +35,82 @@ class CategoriesPresenterTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         testScheduler = TestScheduler()
-        categoryItems.add(categoryItem)
-        testObservable = Observable.just(categoryItem)
         categoriesPresenter = CategoriesPresenter(repository, testScheduler, testScheduler)
-        categoriesPresenter?.onAttachView(view)
+        categoriesPresenter.onAttachView(view)
     }
 
     /**
      * unit test case for method CategoriesPresenter.searchForCategories
      */
     @Test
-    fun searchForCategoriesTest() {
-        Mockito.`when`(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
-        Mockito.`when`(repository?.selectedCategories).thenReturn(categoryItems)
-        Mockito.`when`(repository?.searchAll(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
-        categoriesPresenter?.searchForCategories("test")
-        verify(view)?.showProgress(true)
-        verify(view)?.showError(null)
-        verify(view)?.setCategories(null)
-        testScheduler?.triggerActions()
-        verify(view)?.setCategories(categoryItems)
-        verify(view)?.showProgress(false)
+    fun `searchForCategories combines selection and search results without years distinctly`() {
+        val nonEmptyCaptionUploadItem = mock<UploadItem>()
+        whenever(nonEmptyCaptionUploadItem.uploadMediaDetails)
+            .thenReturn(listOf(UploadMediaDetail(captionText = "nonEmpty")))
+        val emptyCaptionUploadItem = mock<UploadItem>()
+        whenever(emptyCaptionUploadItem.uploadMediaDetails)
+            .thenReturn(listOf(UploadMediaDetail(captionText = "")))
+        whenever(repository.uploads).thenReturn(
+            listOf(
+                nonEmptyCaptionUploadItem,
+                emptyCaptionUploadItem
+            )
+        )
+        whenever(repository.searchAll("test", listOf("nonEmpty"), repository.selectedDepictions))
+            .thenReturn(
+                Observable.just(
+                    listOf(
+                        categoryItem("selected"),
+                        categoryItem("doesContainYear")
+                    )
+                )
+            )
+        whenever(repository.containsYear("selected")).thenReturn(false)
+        whenever(repository.containsYear("doesContainYear")).thenReturn(true)
+        whenever(repository.selectedCategories).thenReturn(listOf(categoryItem("selected", true)))
+        categoriesPresenter.searchForCategories("test")
+        testScheduler.triggerActions()
+        verify(view).showProgress(true)
+        verify(view).showError(null)
+        verify(view).setCategories(null)
+        verify(view).setCategories(listOf(categoryItem("selected", true)))
+        verify(view).showProgress(false)
+        verifyNoMoreInteractions(view)
+    }
+
+    @Test
+    fun `searchForCategoriesTest sets Error when list is empty`() {
+        whenever(repository.uploads).thenReturn(listOf())
+        whenever(repository.searchAll(any(), any(), any())).thenReturn(Observable.just(listOf()))
+        whenever(repository.selectedCategories).thenReturn(listOf())
+        categoriesPresenter.searchForCategories("test")
+        testScheduler.triggerActions()
+        verify(view).showProgress(true)
+        verify(view).showError(null)
+        verify(view).setCategories(null)
+        verify(view).setCategories(listOf())
+        verify(view).showProgress(false)
+        verify(view).showError(R.string.no_categories_found)
+        verifyNoMoreInteractions(view)
     }
 
     /**
      * unit test for method CategoriesPresenter.verifyCategories
      */
     @Test
-    fun verifyCategoriesTest() {
-        Mockito.`when`(repository?.selectedCategories).thenReturn(categoryItems)
-        categoriesPresenter?.verifyCategories()
-        verify(repository)?.setSelectedCategories(ArgumentMatchers.anyList())
-        verify(view)?.goToNextScreen()
+    fun `verifyCategories with non empty selection goes to next screen`() {
+        val item = categoryItem()
+        whenever(repository.selectedCategories).thenReturn(listOf(item))
+        categoriesPresenter.verifyCategories()
+        verify(repository).setSelectedCategories(listOf(item.name))
+        verify(view).goToNextScreen()
+    }
+
+    @Test
+    fun `verifyCategories with empty selection show no category selected`() {
+        whenever(repository.selectedCategories).thenReturn(listOf())
+        categoriesPresenter.verifyCategories()
+        verify(view).showNoCategorySelected()
     }
 
     /**
@@ -83,7 +118,8 @@ class CategoriesPresenterTest {
      */
     @Test
     fun onCategoryItemClickedTest() {
-        categoriesPresenter?.onCategoryItemClicked(categoryItem)
-        verify(repository)?.onCategoryClicked(categoryItem)
+        val categoryItem = categoryItem()
+        categoriesPresenter.onCategoryItemClicked(categoryItem)
+        verify(repository).onCategoryClicked(categoryItem)
     }
 }

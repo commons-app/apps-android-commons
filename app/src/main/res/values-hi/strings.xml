@@ -21,6 +21,27 @@
 * संजीव कुमार
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d फ़ाइल अपलोड हो रही</item>
+    <item quantity="other">%1$d फ़ाइलें अपलोड हो रहीं</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%1$d अपलोड शुरू</item>
+    <item quantity="other">%1$d अपलोड शुरू</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d अपलोड</item>
+    <item quantity="other">%1$d अपलोड</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">इस चित्र का प्रयोग %1$s लाइसेंस के अन्तर्गत होगा</item>
+    <item quantity="other">इन चित्रों का प्रयोग %1$s लाइसेंस के अन्तर्गत होगा</item>
+  </plurals>
   <string name="title_activity_explore">खोजें</string>
   <string name="navigation_item_explore">खोजें</string>
   <string name="preference_category_appearance">स्वरूप</string>
@@ -51,10 +72,6 @@
   <string name="upload_progress_notification_title_finishing">%1$s का अपलोड पूरा हुआ</string>
   <string name="upload_failed_notification_title">%1$s का अपलोड विफल हुआ</string>
   <string name="upload_failed_notification_subtitle">देखने हेतु टैप करें</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d फ़ाइल अपलोड हो रही</item>
-    <item quantity="other">%1$d फ़ाइलें अपलोड हो रहीं</item>
-  </plurals>
   <string name="title_activity_contributions">मेरे ताज़ा अपलोड</string>
   <string name="contribution_state_queued">प्रतीक्षा में</string>
   <string name="contribution_state_failed">विफल</string>
@@ -66,8 +83,7 @@
   <string name="provider_contributions">मेरे अपलोड</string>
   <string name="menu_share">साझा करें</string>
   <string name="menu_open_in_browser">ब्राउज़र में देखें</string>
-  <string name="share_title_hint">शीर्षक (आवश्यक)</string>
-  <string name="add_title_toast">कृपया उचित शीर्षक प्रदान करें</string>
+  <string name="share_title_hint" fuzzy="true">शीर्षक (आवश्यक)</string>
   <string name="share_description_hint">विवरण</string>
   <string name="login_failed_network">प्रवेश नहीं हो रहा - नेटवर्क विफल</string>
   <string name="login_failed_wrong_credentials">लॉगिन विफल - कृपया अपना यूज़रनेम व पासवर्ड की जाँच करें</string>
@@ -87,19 +103,6 @@
   <string name="gps_disabled">आपके डिवाइस में जीपीएस अक्षम है। क्या आप इसे सक्षम करना चाहेंगे?</string>
   <string name="enable_gps">जीपीएस सक्षम करें</string>
   <string name="contributions_subtitle_zero">अभी तक कोई अपलोड नहीं</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">%1$d अपलोड शुरू</item>
-    <item quantity="other">%1$d अपलोड शुरू</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d अपलोड</item>
-    <item quantity="other">%1$d अपलोड</item>
-  </plurals>
   <string name="categories_not_found">%1$s से कोई श्रेणी मेल नहीं खाती</string>
   <string name="categories_skip_explanation">विकिमीडिया कॉमन्स पर अपनी छवियों को अधिक खोजने योग्य बनाने के लिए श्रेणियां जोड़ें|\nश्रेणियां जोड़ने के लिए टाइप करना प्रारंभ करें|</string>
   <string name="categories_activity_title">श्रेणियाँ</string>
@@ -120,10 +123,6 @@
   <string name="no_uploads_yet">आपने अब तक कोई फोटो अपलोड नहीं किया है।</string>
   <string name="menu_retry_upload">फिर प्रयास करें</string>
   <string name="menu_cancel_upload">रद्द करें</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">इस चित्र का प्रयोग %1$s लाइसेंस के अन्तर्गत होगा</item>
-    <item quantity="other">इन चित्रों का प्रयोग %1$s लाइसेंस के अन्तर्गत होगा</item>
-  </plurals>
   <string name="media_upload_policy">इस तस्वीर को सबमिट करके, मैं घोषणा करता हूं कि यह मेरा अपना काम है, इसमें कॉपीराइट सामग्री या सेल्फी नहीं है, और अन्यथा &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;विकीमीडिया कॉमन्स नीतियां का पालन करता हूँ &lt;/a&gt;</string>
   <string name="menu_download">डाउनलोड</string>
   <string name="preference_license">डिफॉल्ट लाइसेन्स</string>
@@ -380,9 +379,7 @@
   <string name="desc_language_Asia">एशिया</string>
   <string name="desc_language_Pacific">प्रशांत</string>
   <string name="no_categories_selected">कोई श्रेणी नहीं चुनी</string>
-  <string name="no_categories_selected_warning_desc">बिना श्रेणियों के चित्र बहुत कम उपयोगी होते हैं। क्या आप सचमुच बिना श्रेणी चुने चित्र जमा करना चाहते हैं?</string>
-  <string name="yes_submit">हाँ, जमा करें</string>
-  <string name="no_go_back">नहीं, पीछे जाएँ</string>
+  <string name="no_categories_selected_warning_desc" fuzzy="true">बिना श्रेणियों के चित्र बहुत कम उपयोगी होते हैं। क्या आप सचमुच बिना श्रेणी चुने चित्र जमा करना चाहते हैं?</string>
   <string name="upload_flow_all_images_in_set">(सेट के सभी चित्रों के लिये)</string>
   <string name="search_this_area">इस क्षेत्र में ढूंढें</string>
   <string name="nearby_card_permission_title">स्वीकृति अनुरोध</string>
