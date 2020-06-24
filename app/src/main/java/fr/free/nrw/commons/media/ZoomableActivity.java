@@ -23,18 +23,11 @@ import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.interfaces.DraweeController;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
-import com.github.chrisbanes.photoview.PhotoView;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class ZoomableActivity extends AppCompatActivity {
     private Uri imageUri;
