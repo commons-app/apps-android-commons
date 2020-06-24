@@ -413,6 +413,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * @param shouldExpand
      */
     private void expandCollapseLlMediaDetail(boolean shouldExpand){
+        if(isExpanded==shouldExpand){
+            return;
+        }
         llContainerMediaDetail.setVisibility(shouldExpand ? View.VISIBLE : View.GONE);
         isExpanded = !isExpanded;
         ibExpandCollapse.setRotation(ibExpandCollapse.getRotation() + 180);
