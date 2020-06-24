@@ -187,7 +187,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 .setUri(Uri.fromFile(new File(imageUri.getPath())))
                 .build();
             photoViewBackgroundImage.setTransformationListener(
-                () -> expandCollapseLlMediaDetail(false));
+                () -> expandCollapseMediaDetail(false));
             photoViewBackgroundImage.setController(controller);
         }
     }
@@ -405,15 +405,15 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.rl_container_title)
     public void onRlContainerTitleClicked() {
-        expandCollapseLlMediaDetail(!isExpanded);
+        expandCollapseMediaDetail(!isExpanded);
     }
 
     /**
      * show hide media detail based on
      * @param shouldExpand
      */
-    private void expandCollapseLlMediaDetail(boolean shouldExpand){
-        if(isExpanded==shouldExpand){
+    private void expandCollapseMediaDetail(boolean shouldExpand){
+        if (isExpanded == shouldExpand) {
             return;
         }
         llContainerMediaDetail.setVisibility(shouldExpand ? View.VISIBLE : View.GONE);
