@@ -11,7 +11,7 @@ class PageableParentDepictionsDataSource @Inject constructor(
     private val okHttpJsonApiClient: OkHttpJsonApiClient
 ) : PageableBaseDataSource<DepictedItem>(liveDataConverter) {
     override val loadFunction = { _: Int, startPosition: Int ->
-        if (startPosition == 0) okHttpJsonApiClient.getParentDepictions(query).blockingFirst()
+        if (startPosition == 0) okHttpJsonApiClient.getParentDepictions(query).blockingGet()
         else emptyList()
     }
 }

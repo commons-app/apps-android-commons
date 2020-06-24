@@ -2,6 +2,7 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import fr.free.nrw.commons.wikidata.model.DepictSearchItem
 import java.util.*
 
 fun depictedItem(
@@ -56,3 +57,12 @@ fun media(
     descriptions,
     depictionIds
 )
+
+
+fun depictSearchItem(
+    id: String = "id",
+    pageId: String = "pageid",
+    url: String = "url",
+    label: String = "label",
+    description: String = "description"
+) = DepictSearchItem(id, pageId, url, label, description)

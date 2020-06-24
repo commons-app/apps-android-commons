@@ -6,7 +6,7 @@ import depictedItem
 import fr.free.nrw.commons.explore.depictions.child.PageableChildDepictionsDataSource
 import fr.free.nrw.commons.explore.paging.LiveDataConverter
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
-import io.reactivex.Observable
+import io.reactivex.Single
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
@@ -32,7 +32,7 @@ class PageableParentDepictionsDataSourceTest {
             PageableParentDepictionsDataSource(liveDataConverter, okHttpJsonApiClient)
         dataSource.onQueryUpdated("test")
         whenever(okHttpJsonApiClient.getParentDepictions("test"))
-            .thenReturn(Observable.just(listOf(depictedItem())))
+            .thenReturn(Single.just(listOf(depictedItem())))
         assertThat(dataSource.loadFunction(-1, 0), `is`(listOf(depictedItem())))
     }
 
