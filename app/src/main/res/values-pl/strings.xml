@@ -11,6 +11,7 @@
 * Mazab IZW
 * Rail
 * Railfail536
+* Rainbow P
 * Rezonansowy
 * Rzuwig
 * Sp5uhe
@@ -21,6 +22,42 @@
 * Woytecr
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Przesyłanie %1$d pliku</item>
+    <item quantity="few">Przesyłanie %1$d plików</item>
+    <item quantity="many">Przesyłanie %1$d plików</item>
+    <item quantity="other">Przesyłanie %1$d plików</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">\@string/contributions_subtitle_zero</item>
+    <item quantity="few">(%1$d)</item>
+    <item quantity="many">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Rozpoczęto %1$d przesyłanie</item>
+    <item quantity="few">Rozpoczęto %1$d przesyłania</item>
+    <item quantity="many">Rozpoczęto %1$d przesyłania</item>
+    <item quantity="other">Rozpoczęto %1$d przesyłania</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d przesłanie</item>
+    <item quantity="few">%1$d przesłania</item>
+    <item quantity="many">%1$d przesłania</item>
+    <item quantity="other">%1$d przesłania</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Ten obraz będzie udostępniany na licencji %1$s</item>
+    <item quantity="few">Te obrazy będą udostępniane na licencji %1$s</item>
+    <item quantity="many">Te obrazy będą udostępniane na licencji %1$s</item>
+    <item quantity="other">Te obrazy będą udostępniane na licencji %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d Przesłany</item>
+    <item quantity="few">%1$d Przesłane</item>
+    <item quantity="many">%1$d Przesłanych</item>
+    <item quantity="other">Przesłania</item>
+  </plurals>
   <string name="title_activity_explore">Odkrywaj</string>
   <string name="navigation_item_explore">Odkrywaj</string>
   <string name="preference_category_appearance">Wygląd</string>
@@ -52,10 +89,6 @@
   <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$s</string>
   <string name="upload_failed_notification_title">Wysyłanie %1$s nieudane</string>
   <string name="upload_failed_notification_subtitle">Dotknij, aby zobaczyć</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">Przesyłanie %1$d pliku</item>
-    <item quantity="other">Przesyłanie %1$d plików</item>
-  </plurals>
   <string name="title_activity_contributions">Niedawno przesłane</string>
   <string name="contribution_state_queued">W kolejce</string>
   <string name="contribution_state_failed">Porażka</string>
@@ -90,21 +123,10 @@
   <string name="gps_disabled">GPS w twoim urządzeniu jest wyłączony. Czy chcesz go włączyć?</string>
   <string name="enable_gps">Włącz GPS</string>
   <string name="contributions_subtitle_zero">Na razie brak przesłanych plików!</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Rozpoczęto %1$d przesyłanie</item>
-    <item quantity="other">Rozpoczęto %1$d przesyłania</item>
-  </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d przesłanie</item>
-    <item quantity="other">%1$d przesłania</item>
-  </plurals>
   <string name="categories_not_found">Nie znaleziono kategorii pasujących do %1$s</string>
   <string name="depictions_not_found">Nie znaleziono przedmiotów Wikidata pasujących do %1$s</string>
+  <string name="no_child_classes">%1$s nie ma klas podrzędnych</string>
+  <string name="no_parent_classes">%1$s nie ma klas nadrzędnych</string>
   <string name="depictions_image_not_found">Brak obrazu do przedstawienia</string>
   <string name="categories_skip_explanation">Dodaj kategorie, aby ułatwić odnalezienie plików w Wikimedia Commons.\nZacznij pisać, aby dodać kategorie.</string>
   <string name="categories_activity_title">Kategorie</string>
@@ -127,9 +149,6 @@
   <string name="no_uploads_yet">Nie przesłałeś jeszcze żadnych zdjęć.</string>
   <string name="menu_retry_upload">Ponów próbę</string>
   <string name="menu_cancel_upload">Anuluj</string>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="other">1=Ten obraz będzie udostępniany na licencji %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Przesyłając ten obraz deklaruję, że jest on moją własną pracą, nie zawiera elementów objętych prawem autorskim lub selfie i jest zgodny z &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/pl\"&gt;Zasadami i zaleceniami Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Pobieranie</string>
   <string name="preference_license">Domyślna licencja</string>
@@ -239,6 +258,7 @@
   <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
   <string name="welcome_image_tulip">Tulipan</string>
   <string name="welcome_image_no_selfies">Brak Selfie</string>
+  <string name="welcome_image_proprietary">Zastrzeżony obraz</string>
   <string name="welcome_image_welcome_wikipedia">Witaj na Wikipedii</string>
   <string name="welcome_image_welcome_copyright">Witamy Prawa Autorskie.</string>
   <string name="welcome_image_sydney_opera_house">Opera Sydnej</string>
@@ -593,4 +613,18 @@
   <string name="use_location_from_similar_image">Czy zrobiłeś te dwa zdjęcia w tym samym miejscu? Czy chcesz użyć szerokości/długości geograficznej obrazu po prawej stronie?</string>
   <string name="load_more">Załaduj więcej</string>
   <string name="nearby_no_results">Nie znaleziono miejsc, spróbuj zmienić kryteria wyszukiwania.</string>
+  <string name="add_picture_to_wikipedia_article_title">Dodaj obraz do Wikipedii</string>
+  <string name="add_picture_to_wikipedia_article_desc">Czy chcesz dodać to zdjęcie do artykułu w Wikipedii w języku %1$s?</string>
+  <string name="add_picture_to_wikipedia_instructions_title">Instrukcje</string>
+  <string name="add_picture_to_wikipedia_instructions_desc">Przestrzegaj wskazówek dotyczących edycji!</string>
+  <string name="confirm">Potwierdź</string>
+  <string name="instructions_title">Instrukcje</string>
+  <string name="wikipedia_instructions_step_1">1. Użyj następującego wikitextu:</string>
+  <string name="wikipedia_instructions_step_2">2. Kliknij Potwierdź spowoduje otwarcie artykułu w Wikipedii</string>
+  <string name="wikipedia_instructions_step_3">3. Znajdź odpowiednią sekcję w artykule dla swojego obrazu</string>
+  <string name="wikipedia_instructions_step_4">4. Kliknij ikonę Edytuj (ołówek) dla tej sekcji.</string>
+  <string name="wikipedia_instructions_step_5">5. Wklej wikitekst w odpowiednim miejscu.</string>
+  <string name="wikipedia_instructions_step_6">6. Edytuj wikitekst w celu odpowiedniego pozycjonowania, jeśli to konieczne. Aby uzyskać więcej informacji, zobacz &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;here&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_7">7. Opublikuj artykuł</string>
+  <string name="copy_wikicode_to_clipboard">Skopiuj wikicode do schowka</string>
 </resources>
