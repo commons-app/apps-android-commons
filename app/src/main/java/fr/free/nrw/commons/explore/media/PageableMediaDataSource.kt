@@ -1,9 +1,9 @@
 package fr.free.nrw.commons.explore.media
 
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.explore.LiveDataConverter
-import fr.free.nrw.commons.explore.PageableBaseDataSource
-import fr.free.nrw.commons.explore.depictions.LoadFunction
+import fr.free.nrw.commons.explore.paging.LiveDataConverter
+import fr.free.nrw.commons.explore.paging.PageableBaseDataSource
+import fr.free.nrw.commons.explore.depictions.search.LoadFunction
 import fr.free.nrw.commons.media.MediaClient
 import javax.inject.Inject
 

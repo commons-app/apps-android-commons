@@ -20,7 +20,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
-import fr.free.nrw.commons.explore.depictions.SearchDepictionsFragment;
+import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment;
 import fr.free.nrw.commons.explore.media.SearchMediaFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;

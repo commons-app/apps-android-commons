@@ -7,15 +7,15 @@ import javax.inject.Inject
 /**
  * Displays the image search screen.
  */
-class SearchMediaFragment : PageableMediaFragment(), SearchMediaFragmentContract.View {
+class SearchMediaFragment : PageableMediaFragment(){
     @Inject
-    lateinit var presenter: SearchMediaFragmentContract.Presenter
+    lateinit var presenter: SearchMediaFragmentPresenter
 
     override val injectedPresenter
         get() = presenter
 
     override fun onItemClicked(position: Int) {
-        (context as SearchActivity?)!!.onSearchImageClicked(position)
+        (context as SearchActivity).onSearchImageClicked(position)
     }
 
     override fun notifyViewPager() {

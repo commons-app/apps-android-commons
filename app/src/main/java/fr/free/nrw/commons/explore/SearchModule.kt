@@ -2,11 +2,12 @@ package fr.free.nrw.commons.explore
 
 import dagger.Binds
 import dagger.Module
-import fr.free.nrw.commons.explore.categories.SearchCategoriesFragmentContract
-import fr.free.nrw.commons.explore.depictions.SearchDepictionsFragmentContract
-import fr.free.nrw.commons.explore.depictions.SearchDepictionsFragmentPresenter
-import fr.free.nrw.commons.explore.media.SearchMediaFragmentContract
+import fr.free.nrw.commons.explore.categories.SearchCategoriesFragmentPresenter
+import fr.free.nrw.commons.explore.categories.SearchCategoriesFragmentPresenterImpl
+import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragmentPresenter
+import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragmentPresenterImpl
 import fr.free.nrw.commons.explore.media.SearchMediaFragmentPresenter
+import fr.free.nrw.commons.explore.media.SearchMediaFragmentPresenterImpl
 
 /**
  * The Dagger Module for explore:depictions related presenters and (some other objects maybe in future)
@@ -14,14 +15,14 @@ import fr.free.nrw.commons.explore.media.SearchMediaFragmentPresenter
 @Module
 abstract class SearchModule {
     @Binds
-    abstract fun SearchDepictionsFragmentPresenter.bindsSearchDepictionsFragmentPresenter()
-            : SearchDepictionsFragmentContract.Presenter
+    abstract fun SearchDepictionsFragmentPresenterImpl.bindsSearchDepictionsFragmentPresenter()
+            : SearchDepictionsFragmentPresenter
 
     @Binds
-    abstract fun SearchCategoriesFragmentPresenter.bindsSearchCategoriesFragmentPresenter()
-            : SearchCategoriesFragmentContract.Presenter
+    abstract fun SearchCategoriesFragmentPresenterImpl.bindsSearchCategoriesFragmentPresenter()
+            : SearchCategoriesFragmentPresenter
 
     @Binds
-    abstract fun SearchMediaFragmentPresenter.bindsSearchMediaFragmentPresenter()
-            : SearchMediaFragmentContract.Presenter
+    abstract fun SearchMediaFragmentPresenterImpl.bindsSearchMediaFragmentPresenter()
+            : SearchMediaFragmentPresenter
 }

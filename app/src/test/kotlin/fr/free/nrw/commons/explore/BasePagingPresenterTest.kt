@@ -7,6 +7,7 @@ import com.jraska.livedata.test
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import fr.free.nrw.commons.explore.paging.*
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before

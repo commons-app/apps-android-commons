@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.explore.BasePagingFragment
+import fr.free.nrw.commons.explore.paging.BasePagingFragment
 import kotlinx.android.synthetic.main.fragment_search_paginated.*
 
 

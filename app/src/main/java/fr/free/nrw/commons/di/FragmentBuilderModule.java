@@ -8,10 +8,11 @@ import fr.free.nrw.commons.category.CategoryImagesListFragment;
 import fr.free.nrw.commons.category.SubCategoryListFragment;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.contributions.ContributionsListFragment;
-import fr.free.nrw.commons.depictions.Media.DepictedImagesFragment;
-import fr.free.nrw.commons.depictions.subClass.SubDepictionListFragment;
+import fr.free.nrw.commons.explore.depictions.child.ChildDepictionsFragment;
+import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment;
+import fr.free.nrw.commons.explore.depictions.parent.ParentDepictionsFragment;
 import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
-import fr.free.nrw.commons.explore.depictions.SearchDepictionsFragment;
+import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment;
 import fr.free.nrw.commons.explore.media.SearchMediaFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailFragment;
@@ -50,9 +51,6 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract DepictedImagesFragment bindDepictedImagesFragment();
-
-    @ContributesAndroidInjector
-    abstract SubDepictionListFragment bindSubDepictionListFragment();
 
     @ContributesAndroidInjector
     abstract SubCategoryListFragment bindSubCategoryListFragment();
@@ -95,4 +93,10 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract MediaLicenseFragment bindMediaLicenseFragment();
+
+    @ContributesAndroidInjector
+    abstract ParentDepictionsFragment bindParentDepictionsFragment();
+
+    @ContributesAndroidInjector
+    abstract ChildDepictionsFragment bindChildDepictionsFragment();
 }
