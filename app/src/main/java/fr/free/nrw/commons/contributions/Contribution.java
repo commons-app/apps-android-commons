@@ -1,17 +1,18 @@
 package fr.free.nrw.commons.contributions;
 
+import android.net.Uri;
 import android.os.Parcel;
+import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.UploadItem;
+import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.WikidataPlace;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 @Entity(tableName = "contribution")
@@ -34,24 +35,23 @@ public class Contribution extends Media {
      */
     private List<DepictedItem> depictedItems = new ArrayList<>();
     private String mimeType;
-    /**
-     * This hasmap stores the list of multilingual captions, where key of the HashMap is the language
-     * and value is the caption in the corresponding language Ex: key = "en", value: "<caption in
-     * short in English>" key = "de" , value: "<caption in german>"
-     */
-    private HashMap<String, String> captions = new HashMap<>();
+    @Nullable
+    private Uri localUri;
+    private long dataLength;
+    private Date dateCreated;
 
     public Contribution() {
     }
 
     public Contribution(final UploadItem item, final SessionManager sessionManager,
         final List<DepictedItem> depictedItems, final List<String> categories) {
-        super(item.getMediaUri(),
+        super(
             item.getFileName(),
-            UploadMediaDetail.formatList(item.getUploadMediaDetails()),
+            UploadMediaDetail.formatCaptions(item.getUploadMediaDetails()),
+            UploadMediaDetail.formatDescriptions(item.getUploadMediaDetails()),
             sessionManager.getAuthorName(),
             categories);
-        captions = new HashMap<>(UploadMediaDetail.formatCaptions(item.getUploadMediaDetails()));
+        localUri = item.getMediaUri();
         decimalCoords = item.getGpsCoords().getDecimalCoords();
         dateCreatedSource = "";
         this.depictedItems = depictedItems;
@@ -117,24 +117,6 @@ public class Contribution extends Media {
         this.mimeType = mimeType;
     }
 
-    /**
-     * Captions are a feature part of Structured data. They are meant to store short, multilingual
-     * descriptions about files This is a replacement of the previously used titles for images (titles
-     * were not multilingual) Also now captions replace the previous convention of using title for
-     * filename
-     * <p>
-     * key of the HashMap is the language and value is the caption in the corresponding language
-     * <p>
-     * returns list of captions stored in hashmap
-     */
-    public HashMap<String, String> getCaptions() {
-        return captions;
-    }
-
-    public void setCaptions(HashMap<String, String> captions) {
-        this.captions = captions;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -147,7 +129,6 @@ public class Contribution extends Media {
         dest.writeLong(transferred);
         dest.writeString(decimalCoords);
         dest.writeString(dateCreatedSource);
-        dest.writeSerializable(captions);
     }
 
     /**
@@ -156,13 +137,7 @@ public class Contribution extends Media {
      * @param state
      */
     public Contribution(Media media, int state) {
-        super(media.getPageId(),
-            media.getLocalUri(), media.getThumbUrl(), media.getImageUrl(), media.getFilename(),
-            media.getDescription(),
-            media.getDiscussion(),
-            media.getDataLength(), media.getDateCreated(), media.getDateUploaded(),
-            media.getLicense(), media.getLicenseUrl(), media.getCreator(), media.getCategories(),
-            media.isRequestedDeletion(), media.getCoordinates());
+        super(media);
         this.state = state;
     }
 
@@ -172,7 +147,6 @@ public class Contribution extends Media {
         transferred = in.readLong();
         decimalCoords = in.readString();
         dateCreatedSource = in.readString();
-        captions = (HashMap<String, String>) in.readSerializable();
     }
 
     public static final Creator<Contribution> CREATOR = new Creator<Contribution>() {
@@ -187,34 +161,60 @@ public class Contribution extends Media {
         }
     };
 
-    /**
-     * Equals implementation of Contributions that compares all parameters for checking equality
-     */
+    @Nullable
+    public Uri getLocalUri() {
+        return localUri;
+    }
+
+    public void setLocalUri(@Nullable Uri localUri) {
+        this.localUri = localUri;
+    }
+
+    public long getDataLength() {
+        return dataLength;
+    }
+
+    public void setDataLength(long dataLength) {
+        this.dataLength = dataLength;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Contribution)) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
             return false;
         }
         final Contribution that = (Contribution) o;
-        return getState() == that.getState() && getTransferred() == that.getTransferred() && Objects
-            .equals(getDecimalCoords(), that.getDecimalCoords()) && Objects
-            .equals(getDateCreatedSource(), that.getDateCreatedSource()) && Objects
-            .equals(getWikidataPlace(), that.getWikidataPlace()) && Objects
-            .equals(getDepictedItems(), that.getDepictedItems()) && Objects
-            .equals(getMimeType(), that.getMimeType()) && Objects
-            .equals(getCaptions(), that.getCaptions());
+        return state == that.state &&
+            transferred == that.transferred &&
+            dataLength == that.dataLength &&
+            Objects.equals(decimalCoords, that.decimalCoords) &&
+            Objects.equals(dateCreatedSource, that.dateCreatedSource) &&
+            Objects.equals(wikidataPlace, that.wikidataPlace) &&
+            Objects.equals(depictedItems, that.depictedItems) &&
+            Objects.equals(mimeType, that.mimeType) &&
+            Objects.equals(localUri, that.localUri) &&
+            Objects.equals(dateCreated, that.dateCreated);
     }
 
-    /**
-     * Hash code implementation of contributions that considers all parameters for calculating hash.
-     */
     @Override
     public int hashCode() {
         return Objects
-            .hash(getState(), getTransferred(), getDecimalCoords(), getDateCreatedSource(),
-                getWikidataPlace(), getDepictedItems(), getMimeType(), getCaptions());
+            .hash(super.hashCode(), state, transferred, decimalCoords, dateCreatedSource,
+                wikidataPlace,
+                depictedItems, mimeType, localUri, dataLength, dateCreated);
     }
 }

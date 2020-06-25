@@ -62,9 +62,7 @@ class ContributionBoundaryCallback @Inject constructor(
                     }
                 }
                 .subscribeOn(ioThreadScheduler)
-                .subscribe(
-                    ::saveContributionsToDB
-                ) { error: Throwable ->
+                .subscribe(::saveContributionsToDB) { error: Throwable ->
                     Timber.e(
                         "Failed to fetch contributions: %s",
                         error.message

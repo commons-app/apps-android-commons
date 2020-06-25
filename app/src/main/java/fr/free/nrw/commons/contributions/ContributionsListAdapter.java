@@ -46,9 +46,8 @@ public class ContributionsListAdapter extends
      * Initializes the view holder with contribution data
      */
     @Override
-    public void onBindViewHolder(@NonNull final ContributionViewHolder holder, final int position) {
-        final Contribution contribution = getItem(position);
-        holder.init(position, contribution);
+    public void onBindViewHolder(@NonNull ContributionViewHolder holder, int position) {
+        holder.init(position, getItem(position));
     }
 
     Contribution getContributionForPosition(final int position) {

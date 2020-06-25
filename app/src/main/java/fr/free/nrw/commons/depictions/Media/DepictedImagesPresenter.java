@@ -5,7 +5,6 @@ import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 import android.annotation.SuppressLint;
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaClient;
 import io.reactivex.Scheduler;
@@ -27,7 +26,6 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
                     DepictedImagesContract.View.class.getClassLoader(),
                     new Class[]{DepictedImagesContract.View.class},
                     (proxy, method, methodArgs) -> null);
-    DepictsClient depictsClient;
     MediaClient mediaClient;
     @Named("default_preferences")
     JsonKvStore depictionKvStore;
@@ -40,13 +38,13 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
      * Ex: Q9394
      */
     private List<Media> queryList = new ArrayList<>();
-    private String entityId;
 
     @Inject
-    public DepictedImagesPresenter(@Named("default_preferences") JsonKvStore depictionKvStore, DepictsClient depictsClient, MediaClient mediaClient,  @Named(IO_THREAD) Scheduler ioScheduler,
-                                   @Named(MAIN_THREAD) Scheduler mainThreadScheduler) {
+    public DepictedImagesPresenter(@Named("default_preferences") JsonKvStore depictionKvStore,
+        MediaClient mediaClient,
+        @Named(IO_THREAD) Scheduler ioScheduler,
+        @Named(MAIN_THREAD) Scheduler mainThreadScheduler) {
         this.depictionKvStore = depictionKvStore;
-        this.depictsClient = depictsClient;
         this.ioScheduler = ioScheduler;
         this.mainThreadScheduler = mainThreadScheduler;
         this.mediaClient = mediaClient;
@@ -68,11 +66,10 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
     @SuppressLint("CheckResult")
     @Override
     public void initList(String entityId) {
-        this.entityId = entityId;
         view.setLoadingStatus(true);
         view.progressBarVisible(true);
         view.setIsLastPage(false);
-        compositeDisposable.add(depictsClient.fetchImagesForDepictedItem(entityId, 0)
+        compositeDisposable.add(mediaClient.fetchImagesForDepictedItem(entityId, 0)
                 .subscribeOn(ioScheduler)
                 .observeOn(mainThreadScheduler)
                 .subscribe(this::handleSuccess, this::handleError));
@@ -86,7 +83,7 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
     @Override
     public void fetchMoreImages(String entityId) {
         view.progressBarVisible(true);
-        compositeDisposable.add(depictsClient.fetchImagesForDepictedItem(entityId, queryList.size())
+        compositeDisposable.add(mediaClient.fetchImagesForDepictedItem(entityId, queryList.size())
                 .subscribeOn(ioScheduler)
                 .observeOn(mainThreadScheduler)
                 .subscribe(this::handlePaginationSuccess, this::handleError));
@@ -136,20 +133,6 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
         }
     }
 
-    /**
-     * fetch captions for the image using filename and replace title of on the image thumbnail(if captions are available)
-     * else show filename
-     */
-    @Override
-    public void replaceTitlesWithCaptions(String wikibaseIdentifier, int position) {
-        compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseIdentifier)
-                .subscribeOn(ioScheduler)
-                .observeOn(mainThreadScheduler)
-                .subscribe(caption -> {
-                    view.handleLabelforImage(caption, position);
-                }));
-
-    }
 
     /**
      * add items to query list

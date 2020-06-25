@@ -1,12 +1,9 @@
 package fr.free.nrw.commons.contributions;
 
-import static fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_ID_PREFIX;
-
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,8 +21,6 @@ import fr.free.nrw.commons.media.MediaClient;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import org.wikipedia.dataclient.WikiSite;
-import timber.log.Timber;
 
 public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
@@ -65,8 +60,8 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
   public void init(final int position, final Contribution contribution) {
     this.contribution = contribution;
-    fetchAndDisplayCaption(contribution);
     this.position = position;
+    titleView.setText(contribution.getMostRelevantCaption());
     final String imageSource = chooseImageSource(contribution.getThumbUrl(),
         contribution.getLocalUri());
     if (!TextUtils.isEmpty(imageSource)) {
@@ -113,37 +108,6 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         progressView.setVisibility(View.GONE);
         imageOptions.setVisibility(View.VISIBLE);
         break;
-    }
-  }
-
-  /**
-   * In contributions first we show the title for the image stored in cache, then we fetch captions
-   * associated with the image and replace title on the thumbnail with caption
-   *
-   * @param contribution
-   */
-  private void fetchAndDisplayCaption(final Contribution contribution) {
-    if ((contribution.getState() != Contribution.STATE_COMPLETED)) {
-      titleView.setText(contribution.getDisplayTitle());
-    } else {
-      final String pageId = contribution.getPageId();
-      if (pageId != null) {
-        Timber.d("Fetching caption for %s", contribution.getFilename());
-        final String wikibaseMediaId = PAGE_ID_PREFIX
-            + pageId; // Create Wikibase media id from the page id. Example media id: M80618155 for https://commons.wikimedia.org/wiki/File:Tantanmen.jpeg with has the pageid 80618155
-        compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseMediaId)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(subscriber -> {
-              if (!subscriber.trim().equals(MediaClient.NO_CAPTION)) {
-                titleView.setText(subscriber);
-              } else {
-                titleView.setText(contribution.getDisplayTitle());
-              }
-            }));
-      } else {
-        titleView.setText(contribution.getDisplayTitle());
-      }
     }
   }
 

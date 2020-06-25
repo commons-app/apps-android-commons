@@ -88,7 +88,7 @@ public class GridViewAdapter extends ArrayAdapter {
         SimpleDraweeView imageView = convertView.findViewById(R.id.categoryImageView);
         TextView fileName = convertView.findViewById(R.id.categoryImageTitle);
         TextView author = convertView.findViewById(R.id.categoryImageAuthor);
-        fileName.setText(item.getThumbnailTitle());
+        fileName.setText(item.getMostRelevantCaption());
         setAuthorView(item, author);
         imageView.setImageURI(item.getThumbUrl());
         return convertView;

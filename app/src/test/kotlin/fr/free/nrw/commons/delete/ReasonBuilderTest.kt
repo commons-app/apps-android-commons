@@ -8,12 +8,12 @@ import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.utils.ViewUtilWrapper
 import io.reactivex.Single
+import media
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import java.util.*
@@ -55,8 +55,7 @@ class ReasonBuilderTest {
         `when`(okHttpJsonApiClient!!.getAchievements(anyString()))
                 .thenReturn(Single.just(mock(FeedbackResponse::class.java)))
 
-        val media = Media("test_file")
-        media.dateUploaded=Date()
+        val media = media(filename="test_file", dateUploaded = Date())
 
         reasonBuilder!!.getReason(media, "test")
         verify(sessionManager, times(0))!!.forceLogin(any(Context::class.java))
