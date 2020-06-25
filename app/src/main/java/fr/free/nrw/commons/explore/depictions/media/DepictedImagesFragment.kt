@@ -16,5 +16,4 @@ class DepictedImagesFragment : PageableMediaFragment() {
         super.onViewCreated(view, savedInstanceState)
         onQueryUpdated(arguments!!.getString("entityId")!!)
     }
-
 }

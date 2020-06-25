@@ -6,6 +6,27 @@
 * Uchup19
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">ngunjal %1$d berkas</item>
+    <item quantity="other">ngunjal %1$d berkas</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Ngamimitian saunjalan</item>
+    <item quantity="other">Ngamimitian %1$d unjalan</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d unggahan</item>
+    <item quantity="other">%1$d unggahan</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Ieu gambar bakal dilisénsi %1$s</item>
+    <item quantity="other">Ieu gambar bakal dilisénsi %1$s</item>
+  </plurals>
   <string name="title_activity_explore">Langlang</string>
   <string name="navigation_item_explore">Langlang</string>
   <string name="preference_category_appearance">Pidangan</string>
@@ -37,10 +58,6 @@
   <string name="upload_progress_notification_title_finishing">Méréskeun unjalan %1$s</string>
   <string name="upload_failed_notification_title">Ngunjal %1$s gagal</string>
   <string name="upload_failed_notification_subtitle">Toél pikeun nempo</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">ngunjal %1$d berkas</item>
-    <item quantity="other">ngunjal %1$d berkas</item>
-  </plurals>
   <string name="title_activity_contributions">Unjalan kami panungtung</string>
   <string name="contribution_state_queued">Antrian</string>
   <string name="contribution_state_failed">Gagal</string>
@@ -72,19 +89,6 @@
   <string name="gps_disabled">GPS dipareuman na parangkat anjeun. Rék dihurungkeun waé atuh?</string>
   <string name="enable_gps">Hirupan GPS</string>
   <string name="contributions_subtitle_zero">Can aya nu diunjal</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Ngamimitian saunjalan</item>
-    <item quantity="other">Ngamimitian %1$d unjalan</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d unggahan</item>
-    <item quantity="other">%1$d unggahan</item>
-  </plurals>
   <string name="categories_not_found">Teu mendak kategori anu cocog jeung %1$s</string>
   <string name="categories_skip_explanation">Tambahkeun kategori hambéh gambar anjeun leuwih gampang katara di Wikimédia Commons.\n\nMimitian ngetik pikeun nambah kategori.</string>
   <string name="categories_activity_title">Kategori</string>
@@ -106,10 +110,6 @@
   <string name="no_uploads_yet">Anjeun can ngunjal foto hiji-hiji acan</string>
   <string name="menu_retry_upload">Cobaan deui</string>
   <string name="menu_cancel_upload">Bolay</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Ieu gambar bakal dilisénsi %1$s</item>
-    <item quantity="other">Ieu gambar bakal dilisénsi %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Ku ngirimkeun ieu gambar, kami ngedalkeun yén ieu mangrupa karya kami sorangan, yén ieu karya teu ngandung matéri atawa hak pribadi nu ditangtayungan ku hak cipta, sarta mun teu nurut kana &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Kawijakan Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Undeur</string>
   <string name="preference_license">Lisénsi buhun</string>

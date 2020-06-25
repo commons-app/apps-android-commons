@@ -7,6 +7,27 @@
 * Tweety
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d فائيل چاڙھيندي</item>
+    <item quantity="other">%1$d فائيلَ چاڙھيندي</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">چاڙھ %1$d شروع ڪندي</item>
+    <item quantity="other">چاڙھَ %d$1 شروع ڪندي</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d چاڙھ</item>
+    <item quantity="other">%1$d چاڙھَ</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">ھن عڪس کي %1$s ھيٺ اجازتنامو ڏنو ويندو</item>
+    <item quantity="other">ھنن عڪسن کي %1$s ھيٺ اجازتنامو ڏنو ويندو</item>
+  </plurals>
   <string name="title_activity_explore">تلاش ڪريو</string>
   <string name="navigation_item_explore">تلاش ڪريو</string>
   <string name="preference_category_appearance">حليو</string>
@@ -38,10 +59,6 @@
   <string name="upload_progress_notification_title_finishing">%1$s جو چاڙھ مڪمل ٿيندي</string>
   <string name="upload_failed_notification_title">%1$s جو چاڙھڻ ناڪام ويو</string>
   <string name="upload_failed_notification_subtitle">ڏسڻ لاءِ ٺونگيو</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d فائيل چاڙھيندي</item>
-    <item quantity="other">%1$d فائيلَ چاڙھيندي</item>
-  </plurals>
   <string name="title_activity_contributions">منھنجا تازا چاڙھ</string>
   <string name="contribution_state_queued">قطار ۾</string>
   <string name="contribution_state_failed">ناڪام</string>
@@ -73,19 +90,6 @@
   <string name="gps_disabled">اوهان جي ڊوائيس ۾ جي پي ايس بند آهي. ڇا اوهان ان کي کولڻ چاهيو ٿا؟</string>
   <string name="enable_gps">جي پي ايس چالو ڪيو (اين ايبل جي پي ايس)</string>
   <string name="contributions_subtitle_zero">اڃا تائين ڪوبہ چاڙھ ناھي</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">چاڙھ %1$d شروع ڪندي</item>
-    <item quantity="other">چاڙھَ %d$1 شروع ڪندي</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d چاڙھ</item>
-    <item quantity="other">%1$d چاڙھَ</item>
-  </plurals>
   <string name="categories_not_found">%1$s سان ملندڙ ڪوبہ زمرو نہ لڌو</string>
   <string name="categories_skip_explanation">پنھنجي عڪسن ۾ زمرا وجھو تہ جيئن وڪيميڊيا العام تي وڌيڪ ڳولا لائق ٿي سگھن.\n\nزمرا وجھڻ لاءِ لکڻ شروع ڪريو.</string>
   <string name="categories_activity_title">زمرا</string>
@@ -104,10 +108,6 @@
   <string name="no_uploads_yet">توھان اڃان تائين ڪي بہ فوٽو انہ چاڙھيا آھن.</string>
   <string name="menu_retry_upload">ٻيھر ڪوشش ڪريو</string>
   <string name="menu_cancel_upload">رد</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">ھن عڪس کي %1$s ھيٺ اجازتنامو ڏنو ويندو</item>
-    <item quantity="other">ھنن عڪسن کي %1$s ھيٺ اجازتنامو ڏنو ويندو</item>
-  </plurals>
   <string name="menu_download">لاھيو</string>
   <string name="preference_license">ڏنل اجازتنامو</string>
   <string name="use_previous" fuzzy="true">گذريل عنوان/تشريح استعمال ڪريو</string>
