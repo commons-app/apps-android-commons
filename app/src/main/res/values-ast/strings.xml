@@ -5,6 +5,34 @@
 * Xuacu
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Xubiendo un ficheru</item>
+    <item quantity="other">Xubiendo %1$d ficheros</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Principiando %1$d carga</item>
+    <item quantity="other">Principiando %1$d cargues</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d carga</item>
+    <item quantity="other">%1$d cargues</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Esta imaxe quedará baxo la llicencia %1$s</item>
+    <item quantity="other">Estes imaxes quedarán baxo la llicencia %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d carga</item>
+    <item quantity="other">%1$d cargues</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Recibiendo\'l conteníu compartíu. El procesamientu de la imaxe puede tardar ciertu tiempu, dependiendo del tamañu de la imaxe y del to preséu</item>
+    <item quantity="other">Recibiendo\'l conteníu compartíu. El procesamientu de les imaxes puede tardar ciertu tiempu, dependiendo del tamañu de les imaxes y del to preséu</item>
+  </plurals>
   <string name="title_activity_explore">Esplorar</string>
   <string name="navigation_item_explore">Esplorar</string>
   <string name="preference_category_appearance">Aspeutu</string>
@@ -36,10 +64,6 @@
   <string name="upload_progress_notification_title_finishing">Acabando de xubir %1$s</string>
   <string name="upload_failed_notification_title">Falló la xuba de %1$s</string>
   <string name="upload_failed_notification_subtitle">Toque pa velo</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Xubiendo un ficheru</item>
-    <item quantity="other">Xubiendo %1$d ficheros</item>
-  </plurals>
   <string name="title_activity_contributions">Les mios xubes recién</string>
   <string name="contribution_state_queued">En cola</string>
   <string name="contribution_state_failed">Falló</string>
@@ -74,18 +98,6 @@
   <string name="gps_disabled">El GPS ta desactiváu nel preséu. ¿Quiés activalu?</string>
   <string name="enable_gps">Activar GPS</string>
   <string name="contributions_subtitle_zero">Inda nun hai xubes</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Principiando %1$d carga</item>
-    <item quantity="other">Principiando %1$d cargues</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d carga</item>
-    <item quantity="other">%1$d cargues</item>
-  </plurals>
   <string name="categories_not_found">Nun s\'alcontró denguna categoría que case con %1$s</string>
   <string name="depictions_not_found">Nun s\'alcontraron elementos de Wikidata que casen con %1$s</string>
   <string name="no_child_classes">%1$s nun tien clases fíes</string>
@@ -112,10 +124,6 @@
   <string name="no_uploads_yet">Inda nun xubió denguna foto.</string>
   <string name="menu_retry_upload">Reintentar</string>
   <string name="menu_cancel_upload">Encaboxar</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Esta imaxe quedará baxo la llicencia %1$s</item>
-    <item quantity="other">Estes imaxes quedarán baxo la llicencia %1$s</item>
-  </plurals>
   <string name="media_upload_policy">El presentar esta imaxe, declaro que ye una obra propia, que nun contien material con derechu d\'autor o «selfies», y que s\'atien a les &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;polítiques de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Llicencia predeterminada</string>
@@ -410,10 +418,6 @@
   <string name="submit">Unviar</string>
   <string name="upload_title_duplicate">Yá esiste un ficheru col nome %1$. ¿Tas seguru de que quies siguir?</string>
   <string name="map_application_missing">Nun s\'atopó una aplicación de mapes compatible nel to preséu. Instala una pa usar esta carauterística.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d carga</item>
-    <item quantity="other">%1$d cargues</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Marcadores</string>
   <string name="title_activity_bookmarks">Marcadores</string>
   <string name="title_page_bookmarks_pictures">Imaxes</string>
@@ -501,10 +505,6 @@
   <string name="review_thanks_no_button_text">Imaxe siguiente</string>
   <string name="skip_image_explanation">Faciendo clic nesti botón recibirás otra imaxe de Wikimedia Commons xubida apocayá</string>
   <string name="review_image_explanation">Puedes revisar imaxes y ameyorar la calidá de Wikimedia Commons.\nLos cuatro parámetros de revisión son: \n - ¿Ésta imaxe tien rellación col contestu? \n - ¿La imaxe cumple les riegles de copyright? \n - ¿La imaxe ta correchamente categorizada? \n - Si too ta correuto, tamién pues dar les gracies al collaborador.</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">Recibiendo\'l conteníu compartíu. El procesamientu de la imaxe puede tardar ciertu tiempu, dependiendo del tamañu de la imaxe y del to preséu</item>
-    <item quantity="other">Recibiendo\'l conteníu compartíu. El procesamientu de les imaxes puede tardar ciertu tiempu, dependiendo del tamañu de les imaxes y del to preséu</item>
-  </plurals>
   <string name="no_image">Nun s\'usó nenguna imaxe</string>
   <string name="no_image_reverted">Nun se revertió nenguna imaxe</string>
   <string name="no_image_uploaded">Nun se xubió nenguna imaxe</string>

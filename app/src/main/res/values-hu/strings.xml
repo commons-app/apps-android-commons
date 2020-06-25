@@ -16,6 +16,35 @@
 * ViDam
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d fájl feltöltése folyamatban</item>
+    <item quantity="other">%1$d fájl feltöltése folyamatban</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d feltöltés</item>
+    <item quantity="other">%1$d feltöltés</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%1$d feltöltés kezdése</item>
+    <item quantity="other">%1$d feltöltés kezdése</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d feltöltés</item>
+    <item quantity="other">%1$d feltöltés</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Ez a kép %1$s licenc alatt lesz feltöltve</item>
+    <item quantity="other">Ezek a képek %1$s licenc alatt lesznek feltöltve</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d feltöltés</item>
+    <item quantity="other">%1$d feltöltés</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Megosztott tartalom letöltése. A kép feldolgozása eltarthat egy ideig a kép méretétől és az eszközödtől függően.</item>
+    <item quantity="other">Megosztott tartalom letöltése. A képek feldolgozása eltarthat egy ideig a képek méretétől és az eszközödtől függően.</item>
+  </plurals>
   <string name="title_activity_explore">Felfedezés</string>
   <string name="navigation_item_explore">Felfedezés</string>
   <string name="preference_category_appearance">Megjelenés</string>
@@ -47,10 +76,6 @@
   <string name="upload_progress_notification_title_finishing">%1$s feltöltése befejezve</string>
   <string name="upload_failed_notification_title">%1$s feltöltése sikertelen</string>
   <string name="upload_failed_notification_subtitle">Érintsd meg a megtekintéshez</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d fájl feltöltése folyamatban</item>
-    <item quantity="other">%1$d fájl feltöltése folyamatban</item>
-  </plurals>
   <string name="title_activity_contributions">Legutóbbi feltöltéseim</string>
   <string name="contribution_state_queued">Várólistán</string>
   <string name="contribution_state_failed">Sikertelen.</string>
@@ -82,19 +107,6 @@
   <string name="gps_disabled">A GPS le van tiltva az eszközén. Szeretné engedélyezni?</string>
   <string name="enable_gps">GPS engedélyezése</string>
   <string name="contributions_subtitle_zero">Még nincsenek feltöltések</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d feltöltés</item>
-    <item quantity="other">%1$d feltöltés</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">%1$d feltöltés kezdése</item>
-    <item quantity="other">%1$d feltöltés kezdése</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d feltöltés</item>
-    <item quantity="other">%1$d feltöltés</item>
-  </plurals>
   <string name="categories_not_found">Nincs a(z) „%1$s” keresési kifejezésnek megfelelő kategória</string>
   <string name="categories_skip_explanation">Adj kategóriákat a képekhez, hogy könnyebben meg lehessen találni őket a Commonson.\nKezdd el beírni a kategória nevét, hogy hozzáadd.\nBökj erre az üzenetre (vagy a vissza gombra) a lépés kihagyásához</string>
   <string name="categories_activity_title">Kategóriák</string>
@@ -115,10 +127,6 @@
   <string name="no_uploads_yet">Még nem töltöttél fel fotókat.</string>
   <string name="menu_retry_upload">Újra</string>
   <string name="menu_cancel_upload">Mégse</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Ez a kép %1$s licenc alatt lesz feltöltve</item>
-    <item quantity="other">Ezek a képek %1$s licenc alatt lesznek feltöltve</item>
-  </plurals>
   <string name="media_upload_policy">A kép feltöltésével kijelentem, hogy ez a saját munkám és nem tartalmaz jogvédett anyagot, nem szelfi és megfelel a&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons irányelveinek&lt;/a&gt;.</string>
   <string name="menu_download">Letöltés</string>
   <string name="preference_license">Alapértelmezett licenc</string>
@@ -398,10 +406,6 @@
   <string name="submit">Küldés</string>
   <string name="upload_title_duplicate">Már létezik \"%1$s\" nevű fájl. Biztosan folytatod?</string>
   <string name="map_application_missing">Nem található kompatibilis térképalkalmazás az eszközödön. Kérjük rakj fel ilyen appot a funkció használatához.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d feltöltés</item>
-    <item quantity="other">%1$d feltöltés</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Könyvjelzők</string>
   <string name="title_activity_bookmarks">Könyvjelzők</string>
   <string name="title_page_bookmarks_pictures">Képek</string>
@@ -483,10 +487,6 @@
   <string name="review_thanks_no_button_text">Következő kép</string>
   <string name="skip_image_explanation">Erre a gombra kattintva egy másik mostanában feltöltött képet kaphatsz a Wikimedia Commonsból.</string>
   <string name="review_image_explanation">Átnézheted a képeket, ezzel növelve a Wikimedia Commons minőségét.\nAz átnézés négy szempontja a következő:\n- Megfelelő a kép?\n- Megfelel a szerzői jogvédelmi szabályoknak?\n- Helyesen van kategorizálva?\n- Ha minden jól megy, meg is köszönheted a közreműködőnek.</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">Megosztott tartalom letöltése. A kép feldolgozása eltarthat egy ideig a kép méretétől és az eszközödtől függően.</item>
-    <item quantity="other">Megosztott tartalom letöltése. A képek feldolgozása eltarthat egy ideig a képek méretétől és az eszközödtől függően.</item>
-  </plurals>
   <string name="no_image">Nincs felhasznált kép</string>
   <string name="no_image_reverted">Nincs visszavont kép</string>
   <string name="no_image_uploaded">Nincs feltöltött kép</string>

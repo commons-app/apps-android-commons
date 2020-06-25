@@ -5,7 +5,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import depictedItem
 import fr.free.nrw.commons.explore.paging.LiveDataConverter
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
-import io.reactivex.Single
+import io.reactivex.Observable
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
@@ -29,16 +29,8 @@ class PageableChildDepictionsDataSourceTest {
         val dataSource =
             PageableChildDepictionsDataSource(liveDataConverter, okHttpJsonApiClient)
         dataSource.onQueryUpdated("test")
-        whenever(okHttpJsonApiClient.getChildDepictions("test"))
-            .thenReturn(Single.just(listOf(depictedItem())))
-        assertThat(dataSource.loadFunction(-1, 0), `is`(listOf(depictedItem())))
-    }
-
-    @Test
-    fun `loadFunction loads nothing at any other position`() {
-        val dataSource =
-            PageableChildDepictionsDataSource(liveDataConverter, okHttpJsonApiClient)
-        assertThat(dataSource.loadFunction(-1, 1), `is`(emptyList()))
-        verifyZeroInteractions(okHttpJsonApiClient)
+        whenever(okHttpJsonApiClient.getChildDepictions("test", 0, 1))
+            .thenReturn(Observable.just(listOf(depictedItem())))
+        assertThat(dataSource.loadFunction(1, 0), `is`(listOf(depictedItem())))
     }
 }

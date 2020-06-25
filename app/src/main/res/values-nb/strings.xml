@@ -13,6 +13,35 @@
 * SuperPotato
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d fil lastes opp</item>
+    <item quantity="other">%1$d filer lastes opp</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Starter %1$d opplasting</item>
+    <item quantity="other">Starter %1$d opplastinger</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d opplasting</item>
+    <item quantity="other">%1$d opplastinger</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Dette bildet vil bli lisensiert under %1$s</item>
+    <item quantity="other">Disse bildene vil bli lisensiert under %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d opplasting</item>
+    <item quantity="other">%1$d opplastinger</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Mottar delt innhold. Prosessering av bildet kan ta tid avhengig av størrelsen på bildet og enheten din.</item>
+    <item quantity="other">Mottar delt innhold. Prosessering av bildene kan ta tid avhengig av størrelsen på bildene og enheten din.</item>
+  </plurals>
   <string name="title_activity_explore">Utforsk</string>
   <string name="navigation_item_explore">Utforsk</string>
   <string name="preference_category_appearance">Utseende</string>
@@ -44,10 +73,6 @@
   <string name="upload_progress_notification_title_finishing">Avslutter opplasting av %1$s</string>
   <string name="upload_failed_notification_title">Opplastingen av %1$s feilet</string>
   <string name="upload_failed_notification_subtitle">Trykk for å vise</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d fil lastes opp</item>
-    <item quantity="other">%1$d filer lastes opp</item>
-  </plurals>
   <string name="title_activity_contributions">Mine nylige opplastinger</string>
   <string name="contribution_state_queued">I ventekø</string>
   <string name="contribution_state_failed">Feilet</string>
@@ -79,19 +104,6 @@
   <string name="gps_disabled">GPS er slått av på denne enheten. Ønsker du å slå den på?</string>
   <string name="enable_gps">Slå på GPS</string>
   <string name="contributions_subtitle_zero">Ingen opplastinger ennå</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Starter %1$d opplasting</item>
-    <item quantity="other">Starter %1$d opplastinger</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d opplasting</item>
-    <item quantity="other">%1$d opplastinger</item>
-  </plurals>
   <string name="categories_not_found">Ingen kategorier som stemte overens med %1$s funnet</string>
   <string name="categories_skip_explanation">Legg til kategorier for å gjøre bildene dine lettere å finne på Wikimedia Commons.\n\nBegynn å skrive navnet på kategoriene.</string>
   <string name="categories_activity_title">Kategorier</string>
@@ -113,10 +125,6 @@
   <string name="no_uploads_yet">Du har ikke lastet opp nøn bilder ennå.</string>
   <string name="menu_retry_upload">Prøv igjen</string>
   <string name="menu_cancel_upload">Avbryt</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Dette bildet vil bli lisensiert under %1$s</item>
-    <item quantity="other">Disse bildene vil bli lisensiert under %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Ved å laste opp dette bildet erklærer jeg at dette er mitt eget verk, og at det ikke inneholder opphavsrettsbeskyttet materiale eller selvportretter, og ellers er i samsvar med &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons\' retningslinjer&lt;/a&gt;.</string>
   <string name="menu_download">Last ned</string>
   <string name="preference_license">Standardlisens</string>
@@ -401,10 +409,6 @@
   <string name="submit">Send</string>
   <string name="upload_title_duplicate">En fil med navnet %1$s finnes fra før. Er du sikker på at du vil fortsette?</string>
   <string name="map_application_missing">Ingen kompatibel kartapplikasjon funnet på enheten din. Installer en kartapplikasjon for å bruke denne funksjonen.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d opplasting</item>
-    <item quantity="other">%1$d opplastinger</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Bokmerker</string>
   <string name="title_activity_bookmarks">Bokmerker</string>
   <string name="title_page_bookmarks_pictures">Bilder</string>
@@ -489,10 +493,6 @@
   <string name="review_thanks_no_button_text">Neste bilde</string>
   <string name="skip_image_explanation">Når du klikker på denne knappen vil du få et nytt nylig opplastet bilde fra Wikimedia Commons</string>
   <string name="review_image_explanation">Du kan gå gjennom bildene og forbedre kvaliteten på Wikimedia Commons.\nDe fire parameterne for gjennomgang er:\n• Er bildet relevant?\n• Følger bildet opphavsrettsreglene?\n• Er bildet riktig kategorisert?\n• Hvis alt ser greit ut kan du også takke bidragsyteren.</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">Mottar delt innhold. Prosessering av bildet kan ta tid avhengig av størrelsen på bildet og enheten din.</item>
-    <item quantity="other">Mottar delt innhold. Prosessering av bildene kan ta tid avhengig av størrelsen på bildene og enheten din.</item>
-  </plurals>
   <string name="no_image">Ingen bilder brukt</string>
   <string name="no_image_reverted">Ingen bilder tilbakestilt</string>
   <string name="no_image_uploaded">Ingen bilder lastet opp</string>

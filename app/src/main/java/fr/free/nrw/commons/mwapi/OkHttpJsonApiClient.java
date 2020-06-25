@@ -209,20 +209,23 @@ public class OkHttpJsonApiClient {
    * Get the QIDs of all Wikidata items that are subclasses of the given Wikidata item. Example:
    * bridge -> suspended bridge, aqueduct, etc
    */
-  public Single<List<DepictedItem>> getChildDepictions(String qid) throws IOException {
-    return depictedItemsFrom(sparqlQuery(qid, "/queries/subclasses_query.rq"));
+  public Observable<List<DepictedItem>> getChildDepictions(String qid, int startPosition,
+      int limit) throws IOException {
+    return depictedItemsFrom(sparqlQuery(qid, startPosition, limit,"/queries/subclasses_query.rq"));
   }
 
   /**
    * Get the QIDs of all Wikidata items that are subclasses of the given Wikidata item. Example:
    * bridge -> suspended bridge, aqueduct, etc
    */
-  public Single<List<DepictedItem>> getParentDepictions(String qid) throws IOException {
-    return depictedItemsFrom(sparqlQuery(qid, "/queries/parentclasses_query.rq"));
+  public Observable<List<DepictedItem>> getParentDepictions(String qid, int startPosition,
+      int limit) throws IOException {
+    return depictedItemsFrom(sparqlQuery(qid, startPosition, limit,
+        "/queries/parentclasses_query.rq"));
   }
 
-  private Single<List<DepictedItem>> depictedItemsFrom(Request request) {
-    return depictsClient.toDepictions(Single.fromCallable(() -> {
+  private Observable<List<DepictedItem>> depictedItemsFrom(Request request) {
+    return depictsClient.toDepictions(Observable.fromCallable(() -> {
       try (ResponseBody body = okHttpClient.newCall(request).execute().body()) {
         return gson.fromJson(body.string(), SparqlResponse.class);
       }
@@ -230,10 +233,12 @@ public class OkHttpJsonApiClient {
   }
 
   @NotNull
-  private Request sparqlQuery(String qid, String fileName) throws IOException {
-    String query = FileUtils.readFromResource(fileName).
-        replace("${QID}", qid)
-        .replace("${LANG}", "\"" + Locale.getDefault().getLanguage() + "\"");
+  private Request sparqlQuery(String qid, int startPosition, int limit, String fileName) throws IOException {
+    String query = FileUtils.readFromResource(fileName)
+        .replace("${QID}", qid)
+        .replace("${LANG}", "\"" + Locale.getDefault().getLanguage() + "\"")
+        .replace("${LIMIT}",""+ limit)
+        .replace("${OFFSET}",""+ startPosition);
     HttpUrl.Builder urlBuilder = HttpUrl
         .parse(sparqlQueryUrl)
         .newBuilder()
