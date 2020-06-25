@@ -139,7 +139,7 @@ public class WikidataEditService {
   }
 
   public void createClaim(@Nullable final WikidataPlace wikidataPlace, final String fileName, final
-  HashMap<String, String> captions) {
+  Map<String, String> captions) {
     if (!(directKvStore.getBoolean("Picture_Has_Correct_Location", true))) {
       Timber
           .d("Image location and nearby place location mismatched, so Wikidata item won't be edited");
@@ -149,7 +149,7 @@ public class WikidataEditService {
   }
 
   public void addImageAndMediaLegends(final WikidataItem wikidataItem, final String fileName,
-      final HashMap<String, String> captions) {
+      final Map<String, String> captions) {
     final Snak_partial p18 = new Snak_partial("value", WikidataProperties.IMAGE.getPropertyName(),
         new ValueString(fileName.replace("File:", "")));
 
