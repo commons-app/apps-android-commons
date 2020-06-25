@@ -107,21 +107,6 @@ class MediaClient @Inject constructor(
         )
     }
 
-    private fun mediaFromPageAndEntity(pages: List<MwQueryPage>): Single<List<Media>> {
-        return if (pages.isEmpty())
-            Single.just(emptyList())
-        else
-            getEntities(pages.map { "$PAGE_ID_PREFIX${it.pageId()}" })
-                .map {
-                    pages.zip(it.entities().values)
-                        .mapNotNull { (page, entity) ->
-                            page.imageInfo()?.let {
-                                mediaConverter.convert(page, entity, it)
-                            }
-                        }
-                }
-    }
-
     /**
      * Fetches Media object from the imageInfo API
      *
@@ -141,7 +126,6 @@ class MediaClient @Inject constructor(
     fun getPictureOfTheDay(): Single<Media> {
         val date = CommonsDateUtil.getIso8601DateFormatShort().format(Date())
         return responseMapper(mediaInterface.getMediaWithGenerator("Template:Potd/$date")).map { it.first() }
-
     }
 
     fun getPageHtml(title: String?): Single<String> {
@@ -155,7 +139,6 @@ class MediaClient @Inject constructor(
         else
             mediaDetailInterface.getEntity(entityIds.joinToString("|"))
     }
-
 
     fun doesPageContainMedia(title: String?): Single<Boolean> {
         return pageMediaInterface.getMediaList(title)
@@ -174,5 +157,20 @@ class MediaClient @Inject constructor(
             handleContinuationResponse(it.continuation(), key)
             it.query()?.pages() ?: emptyList()
         }.flatMap(::mediaFromPageAndEntity)
+    }
+
+    private fun mediaFromPageAndEntity(pages: List<MwQueryPage>): Single<List<Media>> {
+        return if (pages.isEmpty())
+            Single.just(emptyList())
+        else
+            getEntities(pages.map { "$PAGE_ID_PREFIX${it.pageId()}" })
+                .map {
+                    pages.zip(it.entities().values)
+                        .mapNotNull { (page, entity) ->
+                            page.imageInfo()?.let {
+                                mediaConverter.convert(page, entity, it)
+                            }
+                        }
+                }
     }
 }
