@@ -264,7 +264,6 @@ public class SearchActivity extends NavigationBaseActivity
         viewPager.requestFocus();
     }
 
-
     @Override protected void onDestroy() {
         super.onDestroy();
         //Dispose the disposables when the activity is destroyed

@@ -10,6 +10,24 @@
 * Saederup92
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d fil overføres</item>
+    <item quantity="other">%1$d filer overføres</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d overførsel</item>
+    <item quantity="other">%1$d overførsler</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Starter %1$d overførsel</item>
+    <item quantity="other">Starter %1$d overførsler</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d overførsel</item>
+    <item quantity="other">%1$d overførsler</item>
+  </plurals>
+  <string name="share_license_summary" fuzzy="true">Billedet vil blive licenseret under %1$s</string>
   <string name="title_activity_explore">Udforsk</string>
   <string name="navigation_item_explore">Udforsk</string>
   <string name="preference_category_appearance">Udseende</string>
@@ -41,10 +59,6 @@
   <string name="upload_progress_notification_title_finishing">Afslutter uploadning af %1$s</string>
   <string name="upload_failed_notification_title">Overførsel af %1$s mislykkedes</string>
   <string name="upload_failed_notification_subtitle">Klik for at se</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d fil overføres</item>
-    <item quantity="other">%1$d filer overføres</item>
-  </plurals>
   <string name="title_activity_contributions">Mine seneste overførsler</string>
   <string name="contribution_state_queued">I kø</string>
   <string name="contribution_state_failed">Mislykkedes</string>
@@ -76,19 +90,6 @@
   <string name="gps_disabled">GPS er deaktiveret i din enhed. Ønsker du at aktivere den?</string>
   <string name="enable_gps">Aktiver GPS</string>
   <string name="contributions_subtitle_zero">Ingen overførelser endnu</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d overførsel</item>
-    <item quantity="other">%1$d overførsler</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Starter %1$d overførsel</item>
-    <item quantity="other">Starter %1$d overførsler</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d overførsel</item>
-    <item quantity="other">%1$d overførsler</item>
-  </plurals>
   <string name="categories_not_found">Ingen kategorier matchende %1$s er fundet</string>
   <string name="categories_skip_explanation">Tilføj kategorier for at gøre billederne mere synlig på Wikimedia Commons. Tast for at tilføje kategorier.</string>
   <string name="categories_activity_title">Kategorier</string>
@@ -109,7 +110,6 @@
   <string name="no_uploads_yet">Du har endnu ikke uploadet nogen billeder.</string>
   <string name="menu_retry_upload">Forsøg igen</string>
   <string name="menu_cancel_upload">Annullér</string>
-  <string name="share_license_summary" fuzzy="true">Billedet vil blive licenseret under %1$s</string>
   <string name="media_upload_policy">Ved at indsende dette billeder erklærer jeg at det er mit eget arbejde, som ikke indeholder materialer med ophavsret eller selvportrætter og generelt overholder &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons-politikkerne&lt;/a&gt;.</string>
   <string name="menu_download">Hent</string>
   <string name="preference_license">Standardlicens</string>
@@ -388,4 +388,7 @@
   <string name="theme_dark_name">Mørkt</string>
   <string name="theme_light_name">Lyst</string>
   <string name="load_more">Indlæs mere</string>
+  <string name="add_picture_to_wikipedia_instructions_title">Instruktioner</string>
+  <string name="confirm">Bekræft</string>
+  <string name="instructions_title">Instruktioner</string>
 </resources>

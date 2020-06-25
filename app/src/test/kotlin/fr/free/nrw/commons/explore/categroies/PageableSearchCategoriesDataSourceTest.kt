@@ -15,7 +15,8 @@ class PageableSearchCategoriesDataSourceTest {
         val categoryClient: CategoryClient = mock()
         whenever(categoryClient.searchCategories("test", 0, 1))
             .thenReturn(Single.just(emptyList()))
-        val pageableCategoriesDataSource = PageableSearchCategoriesDataSource(mock(), categoryClient)
+        val pageableCategoriesDataSource =
+            PageableSearchCategoriesDataSource(mock(), categoryClient)
         pageableCategoriesDataSource.onQueryUpdated("test")
         assertThat(pageableCategoriesDataSource.loadFunction(0, 1), Matchers.`is`(emptyList()))
     }

@@ -41,5 +41,3 @@ class CategoryItemViewHolder(containerView: View, val onCategoryClicked: (String
         textView1.text = item.substringAfter(CATEGORY_PREFIX)
     }
 }
-
-

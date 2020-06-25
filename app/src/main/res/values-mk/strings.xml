@@ -6,6 +6,35 @@
 * Vlad5250
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Се подига %1$d податотека</item>
+    <item quantity="other">Се подигаат %1$d податотеки</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Започнувам %1$d подигање</item>
+    <item quantity="other">Започнувам %1$d подигања</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d подигање</item>
+    <item quantity="other">%1$d подигања</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Сликава ќе се води под лиценцата %1$s</item>
+    <item quantity="other">Сликиве ќе се водат под лиценците %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d подигање</item>
+    <item quantity="other">%1$d подигања</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Добивам споделена содржина. Обработката може да потрае, зависно од големината на сликата и вашиот уред</item>
+    <item quantity="other">Добивам споделена содржина. Обработката може да потрае, зависно од големината на сликите и вашиот уред</item>
+  </plurals>
   <string name="title_activity_explore">Истражи</string>
   <string name="navigation_item_explore">Истражи</string>
   <string name="preference_category_appearance">Изглед</string>
@@ -37,10 +66,6 @@
   <string name="upload_progress_notification_title_finishing">Завршувам со подигање на „%1$s“</string>
   <string name="upload_failed_notification_title">Подигањето на „%1$s“ не успеа</string>
   <string name="upload_failed_notification_subtitle">Допрете за да погледате</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Се подига %1$d податотека</item>
-    <item quantity="other">Се подигаат %1$d податотеки</item>
-  </plurals>
   <string name="title_activity_contributions">Мои скорешни подигања</string>
   <string name="contribution_state_queued">Чека ред</string>
   <string name="contribution_state_failed">Не успеа</string>
@@ -75,19 +100,6 @@
   <string name="gps_disabled">GPS е исклучен на вашиот уред. Дали сакате да го вклучите?</string>
   <string name="enable_gps">Вклучи GPS</string>
   <string name="contributions_subtitle_zero">Сè уште нема подигања</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Започнувам %1$d подигање</item>
-    <item quantity="other">Започнувам %1$d подигања</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d подигање</item>
-    <item quantity="other">%1$d подигања</item>
-  </plurals>
   <string name="categories_not_found">Нема категории што одговараат на %1$s</string>
   <string name="depictions_not_found">Не најдов предмети од Википодатоците што одговараат на %1$s</string>
   <string name="no_child_classes">%1$s нема зависни класи</string>
@@ -114,10 +126,6 @@
   <string name="no_uploads_yet">Сè уште немате подигнато ниедна слика.</string>
   <string name="menu_retry_upload">Пробај пак</string>
   <string name="menu_cancel_upload">Откажи</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Сликава ќе се води под лиценцата %1$s</item>
-    <item quantity="other">Сликиве ќе се водат под лиценците %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Поднесувајќи ја сликава, изјавувам дека истата е мое сопствено дело, дека не содржи никаков материјал заштитен со авторски права, не содржи самослици, и дека на секој друг начин е во склад со &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/mk?uselang=mk\"&gt;правилата на Ризницата&lt;/a&gt;.</string>
   <string name="menu_download">Преземи</string>
   <string name="preference_license">Стандардна лиценца</string>
@@ -412,10 +420,6 @@
   <string name="submit">Поднеси</string>
   <string name="upload_title_duplicate">Веќе постои податотека со име %1$s. Дали сигурно сакате да продолжите?</string>
   <string name="map_application_missing">Не пронајдов складен картографски прилог на вашиот уред. Преземете еден таков за да можете да ја користите оваа можност.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d подигање</item>
-    <item quantity="other">%1$d подигања</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Обележани</string>
   <string name="title_activity_bookmarks">Обележани</string>
   <string name="title_page_bookmarks_pictures">Слики</string>
@@ -503,10 +507,6 @@
   <string name="review_thanks_no_button_text">Следна слика</string>
   <string name="skip_image_explanation">Копчево ќе ви даде друга неодамна подигната слика од Ризницата</string>
   <string name="review_image_explanation">Можете да оценувате слики и да го подобрувате квалитетот на Ризницата.\n Четирите мерила за оценка се следниве: \n - Дали сликата е во делокругот? \n - Дали сликата ги следи правилата за авторски права? \n - Дали сликата е исправно категоризирана? \n - Ако сè е во ред, можете и да му се заблагодарите на подигачот.</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">Добивам споделена содржина. Обработката може да потрае, зависно од големината на сликата и вашиот уред</item>
-    <item quantity="other">Добивам споделена содржина. Обработката може да потрае, зависно од големината на сликите и вашиот уред</item>
-  </plurals>
   <string name="no_image">Нема искористени слики</string>
   <string name="no_image_reverted">Нема вратени слики</string>
   <string name="no_image_uploaded">Нема подигнати слики</string>
@@ -596,4 +596,18 @@
   <string name="use_location_from_similar_image">Дали ги направивте ови две слики на истото место? Дали сакате да ја искористите географската ширина/должина од десната слика?</string>
   <string name="load_more">Вчитај уште</string>
   <string name="nearby_no_results">Не пронајдов места. Изменете ги критериумите во барањето.</string>
+  <string name="add_picture_to_wikipedia_article_title">Додај ја сликата на Википедија</string>
+  <string name="add_picture_to_wikipedia_article_desc">Дали би сакале да ја додадете сликава во википедиската статија на %1$s?</string>
+  <string name="add_picture_to_wikipedia_instructions_title">Напатствија</string>
+  <string name="add_picture_to_wikipedia_instructions_desc">Внимателно следете ги напатствијата за уредување!</string>
+  <string name="confirm">Потврди</string>
+  <string name="instructions_title">Напатствија</string>
+  <string name="wikipedia_instructions_step_1">1. Употребете го следниов викитекст:</string>
+  <string name="wikipedia_instructions_step_2">2. Стискајќи на „Потврди“ ќе ја отворите википедиската статија</string>
+  <string name="wikipedia_instructions_step_3">3. Најдете го соодвениот поднаслов во статијата кајшто би ја ставиле сликата</string>
+  <string name="wikipedia_instructions_step_4">4. Стиснете на иконката за уредување (моливче) за тој поднаслов.</string>
+  <string name="wikipedia_instructions_step_5">5. Прекопирајте го викитекстот во соодветното место.</string>
+  <string name="wikipedia_instructions_step_6">6. По потреба, уредете го викитекстот за да ја ставите сликата во прикладна положба во одност на текстот. Повеќе информации за тоа ќе видите &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;тука&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_7">7. Објавете ја статијата</string>
+  <string name="copy_wikicode_to_clipboard">Прекопирајте го викикодот во меѓускладот</string>
 </resources>

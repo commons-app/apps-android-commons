@@ -17,6 +17,31 @@
 * Tgkarounos
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">1 αρχείο επιφορτώνεται</item>
+    <item quantity="other">%1$d αρχεία επιφορτώνονται</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">Δεν υπάρχουν φορτώσεις ακόμη</item>
+    <item quantity="one">%1$d φόρτωση</item>
+    <item quantity="other">%1$d φορτώσεις</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Έναρξη %1$d επιφόρτωσης</item>
+    <item quantity="other">Έναρξη %1$d επιφορτώσεων</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d επιφόρτωση</item>
+    <item quantity="other">%1$d επιφορτώσεις</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Αυτή η εικόνα θα αδειοδοτηθεί υπό την %1$s</item>
+    <item quantity="other">Αυτές οι εικόνες θα αδειοδοτηθούν υπό την %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d Ανέβασμα στον υπολογιστή</item>
+    <item quantity="other">%1$d Ανεβάσματα στον υπολογιστή</item>
+  </plurals>
   <string name="title_activity_explore">Εξερεύνηση</string>
   <string name="navigation_item_explore">Εξερεύνηση</string>
   <string name="preference_category_appearance">Εμφάνιση</string>
@@ -48,10 +73,6 @@
   <string name="upload_progress_notification_title_finishing">Ολοκλήρωση επιφόρτωσης %1$s</string>
   <string name="upload_failed_notification_title">Ανέβασμα του %1$s απέτυχε</string>
   <string name="upload_failed_notification_subtitle">Πατήστε για να δείτε</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">1 αρχείο επιφορτώνεται</item>
-    <item quantity="other">%1$d αρχεία επιφορτώνονται</item>
-  </plurals>
   <string name="title_activity_contributions">Οι Πρόσφατες Φορτώσεις Μου</string>
   <string name="contribution_state_queued">Στην ουρά</string>
   <string name="contribution_state_failed">Απέτυχε</string>
@@ -83,19 +104,6 @@
   <string name="gps_disabled">Το GPS στην συσκευή είναι απενεργοποιημένο. Θέλετε να το ενεργοποιήσετε;</string>
   <string name="enable_gps">  Ενεργοποιήσετε το GPS</string>
   <string name="contributions_subtitle_zero">Δεν έχουν ακόμη επιφορτωθεί αρχεία</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Δεν υπάρχουν φορτώσεις ακόμη</item>
-    <item quantity="one">%1$d φόρτωση</item>
-    <item quantity="other">%1$d φορτώσεις</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Έναρξη %1$d επιφόρτωσης</item>
-    <item quantity="other">Έναρξη %1$d επιφορτώσεων</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d επιφόρτωση</item>
-    <item quantity="other">%1$d επιφορτώσεις</item>
-  </plurals>
   <string name="categories_not_found">Δεν βρέθηκαν κατηγορίες που ταιριάζουν %1$s</string>
   <string name="categories_skip_explanation">Προσθέστε κατηγορίες για να κάνετε τις εικόνες σας πιο ανιχνεύσιμες στα Wikimedia Commons.\n\nΑρχίστε να γράφετε για να προσθέσετε κατηγορίες.\nΠατήστε αυτό το μήνυμα (ή πατήστε επιστροφή) για να παραλείψετε αυτό το βήμα.</string>
   <string name="categories_activity_title">Κατηγορίες</string>
@@ -116,10 +124,6 @@
   <string name="no_uploads_yet">Ακόμα δεν έχετε ανεβάσει φωτογραφίες.</string>
   <string name="menu_retry_upload">Ξαναπροσπαθήστε</string>
   <string name="menu_cancel_upload">Ακύρωση</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Αυτή η εικόνα θα αδειοδοτηθεί υπό την %1$s</item>
-    <item quantity="other">Αυτές οι εικόνες θα αδειοδοτηθούν υπό την %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Αποστέλλοντας αυτήν την εικόνα, δηλώνω πως αυτή η εργασία είναι δική μου, και δεν περιέχει υλικό άλλου συγγραφέα, και εκτός αυτού πρόσκειται στο , thathref=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Κοινές πολιτικές της Wikipedia&lt;/a&gt;.</string>
   <string name="menu_download">Λήψη</string>
   <string name="preference_license">Προεπιλεγμένη άδεια</string>
@@ -376,10 +380,6 @@
   <string name="submit">Υποβολή</string>
   <string name="upload_title_duplicate">Υπάρχει ήδη ένας φάκελλος με όνομα %1$s. Είστε σίγουρος πως θέλετε να προχωρήσετε ?</string>
   <string name="map_application_missing">Καμία εφαρμογή χάρτη δεν βρέθηκε στον υπολογιστή. Παρακαλώ εγκαταστήστε εφαρμογή χάρτη για να χρησιμοποιήσετε αυτήν την ιδιότητα.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d Ανέβασμα στον υπολογιστή</item>
-    <item quantity="other">%1$d Ανεβάσματα στον υπολογιστή</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Σελιδοδείκτες</string>
   <string name="title_activity_bookmarks">Σελιδοδείκτες</string>
   <string name="title_page_bookmarks_pictures">εικόνες</string>
