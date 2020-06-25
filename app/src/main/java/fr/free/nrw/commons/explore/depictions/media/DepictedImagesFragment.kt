@@ -17,12 +17,4 @@ class DepictedImagesFragment : PageableMediaFragment() {
         super.onViewCreated(view, savedInstanceState)
         onQueryUpdated(arguments!!.getString("entityId")!!)
     }
-
-    override fun onItemClicked(position: Int) {
-        (activity as WikidataItemDetailsActivity).onMediaClicked(position)
-    }
-
-    override fun notifyViewPager() {
-        (activity as WikidataItemDetailsActivity).viewPagerNotifyDataSetChanged()
-    }
 }

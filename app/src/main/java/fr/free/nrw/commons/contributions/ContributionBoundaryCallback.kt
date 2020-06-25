@@ -51,9 +51,6 @@ class ContributionBoundaryCallback @Inject constructor(
      * Fetches contributions using the MediaWiki API
      */
     fun fetchContributions() {
-        if (mediaClient.doesMediaListForUserHaveMorePages(sessionManager.userName!!).not()) {
-            return
-        }
         compositeDisposable.add(
             mediaClient.getMediaListForUser(sessionManager.userName!!)
                 .map { mediaList: List<Media?> ->

@@ -13,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -26,7 +25,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.bookmarks.Bookmark;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
-import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.utils.DownloadUtils;
@@ -269,8 +267,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             Timber.d("Returning as activity is destroyed!");
             return;
         }
-        if (i+1 >= adapter.getCount() && getContext() instanceof CategoryImagesCallback)
-            ((CategoryImagesCallback) getContext()).requestMoreImages();
 
         getActivity().invalidateOptionsMenu();
     }

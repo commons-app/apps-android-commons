@@ -191,7 +191,8 @@ public class SearchActivity extends NavigationBaseActivity
      * Open media detail pager fragment on click of image in search results
      * @param index item index that should be opened
      */
-    public void onSearchImageClicked(int index) {
+    @Override
+    public void onMediaClicked(int index) {
         ViewUtil.hideKeyboard(this.findViewById(R.id.searchBox));
         toolbar.setVisibility(View.GONE);
         tabLayout.setVisibility(View.GONE);
@@ -261,15 +262,6 @@ public class SearchActivity extends NavigationBaseActivity
         // Clear focus of searchView now. searchView.clearFocus(); does not seem to work Check the below link for more details.
         // https://stackoverflow.com/questions/6117967/how-to-remove-focus-without-setting-focus-to-another-control/15481511
         viewPager.requestFocus();
-    }
-
-    /**
-     * This method is called when viewPager has reached its end.
-     * Fetches more images using search query and adds it to the recycler view and viewpager adapter
-     */
-    @Override
-    public void requestMoreImages() {
-        //unneeded
     }
 
     @Override protected void onDestroy() {

@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.explore.categories.search
+package fr.free.nrw.commons.explore.categories
 
 import android.view.View
 import android.view.ViewGroup
@@ -41,5 +41,3 @@ class CategoryItemViewHolder(containerView: View, val onCategoryClicked: (String
         textView1.text = item.substringAfter(CATEGORY_PREFIX)
     }
 }
-
-

@@ -93,6 +93,7 @@ class CategoriesModel @Inject constructor(
         else
             categoryClient.searchCategoriesForPrefix(term.toLowerCase(), SEARCH_CATS_LIMIT)
                 .map { it.sortedWith(StringSortingUtils.sortBySimilarity(term)) }
+                .toObservable()
     }
 
     private fun categoriesFromDepiction(selectedDepictions: List<DepictedItem>) =
@@ -126,7 +127,7 @@ class CategoriesModel @Inject constructor(
      * @return
      */
     private fun getTitleCategories(title: String): Observable<List<String>> {
-        return categoryClient.searchCategories(title.toLowerCase(), SEARCH_CATS_LIMIT)
+        return categoryClient.searchCategories(title.toLowerCase(), SEARCH_CATS_LIMIT).toObservable()
     }
 
 

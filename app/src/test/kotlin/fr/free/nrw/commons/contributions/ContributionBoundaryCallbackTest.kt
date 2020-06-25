@@ -1,7 +1,9 @@
 package fr.free.nrw.commons.contributions
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyZeroInteractions
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.media.MediaClient
@@ -58,8 +60,6 @@ class ContributionBoundaryCallbackTest {
         whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(
             Single.just(listOf(mock(Media::class.java)))
         )
-        whenever(mediaClient.doesMediaListForUserHaveMorePages(anyString()))
-            .thenReturn(true)
         contributionBoundaryCallback.onZeroItemsLoaded()
         verify(repository).save(anyList<Contribution>());
         verify(mediaClient).getMediaListForUser(anyString());
@@ -73,8 +73,6 @@ class ContributionBoundaryCallbackTest {
         whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(
             Single.just(listOf(mock(Media::class.java)))
         )
-        whenever(mediaClient.doesMediaListForUserHaveMorePages(anyString()))
-            .thenReturn(true)
         contributionBoundaryCallback.onItemAtEndLoaded(mock(Contribution::class.java))
         verify(repository).save(anyList());
         verify(mediaClient).getMediaListForUser(anyString());
@@ -88,8 +86,6 @@ class ContributionBoundaryCallbackTest {
         whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(
             Single.just(listOf(mock(Media::class.java)))
         )
-        whenever(mediaClient.doesMediaListForUserHaveMorePages(anyString()))
-            .thenReturn(true)
         contributionBoundaryCallback.onItemAtFrontLoaded(mock(Contribution::class.java))
         verify(repository).save(anyList());
         verify(mediaClient).getMediaListForUser(anyString());
@@ -103,28 +99,14 @@ class ContributionBoundaryCallbackTest {
         whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(
             Single.just(listOf(mock(Media::class.java)))
         )
-        whenever(mediaClient.doesMediaListForUserHaveMorePages(anyString()))
-            .thenReturn(true)
         contributionBoundaryCallback.fetchContributions()
         verify(repository).save(anyList());
         verify(mediaClient).getMediaListForUser(anyString());
     }
 
     @Test
-    fun testFetchContributionsForEndOfList() {
-        whenever(sessionManager.userName).thenReturn("Test")
-        whenever(mediaClient.doesMediaListForUserHaveMorePages(anyString()))
-            .thenReturn(false)
-        contributionBoundaryCallback.fetchContributions()
-        verify(mediaClient, times(0)).getMediaListForUser(anyString())
-        verifyNoMoreInteractions(repository)
-    }
-
-    @Test
     fun testFetchContributionsFailed() {
         whenever(sessionManager.userName).thenReturn("Test")
-        whenever(mediaClient.doesMediaListForUserHaveMorePages(anyString()))
-            .thenReturn(true)
         whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(Single.error(Exception("Error")))
         contributionBoundaryCallback.fetchContributions()
         verifyZeroInteractions(repository);

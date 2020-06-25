@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -31,8 +30,7 @@ import java.util.List;
 
 public class ExploreActivity
         extends NavigationBaseActivity
-        implements MediaDetailPagerFragment.MediaDetailProvider,
-        AdapterView.OnItemClickListener, CategoryImagesCallback {
+        implements MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
 
     private static final String FEATURED_IMAGES_CATEGORY = "Featured_pictures_on_Wikimedia_Commons";
     private static final String MOBILE_UPLOADS_CATEGORY = "Uploaded_with_Mobile/Android";
@@ -163,21 +161,11 @@ public class ExploreActivity
         super.onBackPressed();
     }
 
-
-    /**
-     * This method is called when viewPager has reached its end.
-     * Fetches more images and adds them to the recycler view and viewpager adapter
-     */
-    @Override
-    public void requestMoreImages() {
-        //unneeded
-    }
-
     /**
      * This method is called onClick of media inside category featured images or mobile uploads.
      */
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onMediaClicked( int position) {
         tabLayout.setVisibility(View.GONE);
         viewPager.setVisibility(View.GONE);
         mediaContainer.setVisibility(View.VISIBLE);
@@ -195,7 +183,7 @@ public class ExploreActivity
             // coming back to the explore activity. See https://github.com/commons-app/apps-android-commons/issues/1631
             // https://stackoverflow.com/questions/11353075/how-can-i-maintain-fragment-state-when-added-to-the-back-stack/19022550#19022550            supportFragmentManager.executePendingTransactions();
         }
-        mediaDetails.showImage(i);
+        mediaDetails.showImage(position);
         forceInitBackButton();
     }
 

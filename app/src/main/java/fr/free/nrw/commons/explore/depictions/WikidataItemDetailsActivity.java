@@ -13,6 +13,7 @@ import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.depictions.child.ChildDepictionsFragment;
 import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment;
 import fr.free.nrw.commons.explore.depictions.parent.ParentDepictionsFragment;
@@ -26,7 +27,8 @@ import java.util.List;
 /**
  * Activity to show depiction media, parent classes and child classes of depicted items in Explore
  */
-public class WikidataItemDetailsActivity extends NavigationBaseActivity implements MediaDetailPagerFragment.MediaDetailProvider {
+public class WikidataItemDetailsActivity extends NavigationBaseActivity implements MediaDetailPagerFragment.MediaDetailProvider,
+    CategoryImagesCallback {
     private FragmentManager supportFragmentManager;
     private DepictedImagesFragment depictionImagesListFragment;
     private MediaDetailPagerFragment mediaDetailPagerFragment;
@@ -73,12 +75,12 @@ public class WikidataItemDetailsActivity extends NavigationBaseActivity implemen
      * This method is called on success of API call for featured Images.
      * The viewpager will notified that number of items have changed.
      */
+    @Override
     public void viewPagerNotifyDataSetChanged() {
         if (mediaDetailPagerFragment !=null){
             mediaDetailPagerFragment.notifyDataSetChanged();
         }
     }
-
 
     /**
      * This activity contains 3 tabs and a viewpager. This method is used to set the titles of tab,

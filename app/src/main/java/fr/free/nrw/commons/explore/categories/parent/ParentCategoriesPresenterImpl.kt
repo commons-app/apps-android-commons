@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.explore.categories.search
+package fr.free.nrw.commons.explore.categories.parent
 
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.explore.paging.BasePagingPresenter
@@ -7,10 +7,11 @@ import io.reactivex.Scheduler
 import javax.inject.Inject
 import javax.inject.Named
 
-interface SearchCategoriesFragmentPresenter : PagingContract.Presenter<String>
 
-class SearchCategoriesFragmentPresenterImpl @Inject constructor(
+interface ParentCategoriesPresenter : PagingContract.Presenter<String>
+
+class ParentCategoriesPresenterImpl @Inject constructor(
     @Named(CommonsApplicationModule.MAIN_THREAD) mainThreadScheduler: Scheduler,
-    dataSourceFactory: PageableSearchCategoriesDataSource
+    dataSourceFactory: PageableParentCategoriesDataSource
 ) : BasePagingPresenter<String>(mainThreadScheduler, dataSourceFactory),
-    SearchCategoriesFragmentPresenter
+    ParentCategoriesPresenter
