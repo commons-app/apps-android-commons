@@ -8,6 +8,7 @@ import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.actions.PageEditInterface;
+import fr.free.nrw.commons.category.CategoryEditInterface;
 import fr.free.nrw.commons.category.CategoryInterface;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -162,6 +163,12 @@ public class NetworkingModule {
     @Singleton
     public ReviewInterface provideReviewInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, ReviewInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public CategoryEditInterface provideCategoryEditInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, CategoryEditInterface.class);
     }
 
     @Provides

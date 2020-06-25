@@ -30,7 +30,7 @@ public class CategoryEditSearchRecyclerViewAdapter
     implements Filterable {
 
     private List<String> displayedCategories;
-    public List<String> selectedCategories;
+    private List<String> selectedCategories = new ArrayList<>();
     private final LayoutInflater inflater;
     private CategoryClient categoryClient;
     private Context context;
@@ -48,7 +48,7 @@ public class CategoryEditSearchRecyclerViewAdapter
     public void addToSelectedCategories(List<String> selectedCategories) {
         for(String category : selectedCategories) {
             if (!this.selectedCategories.contains(category)) {
-                selectedCategories.add(category);
+                this.selectedCategories.add(category);
             }
         }
     }
@@ -59,10 +59,14 @@ public class CategoryEditSearchRecyclerViewAdapter
         }
     }
 
-    public void removeFromSelectedCategories(String selectedCategory) {
-        if (!selectedCategories.contains(selectedCategory)) {
-            selectedCategories.add(selectedCategory);
+    public void removeFromSelectedCategories(String deselectedCategory) {
+        if (selectedCategories.contains(deselectedCategory)) {
+            selectedCategories.remove(deselectedCategory);
         }
+    }
+
+    public List<String> getSelectedCategories() {
+        return selectedCategories;
     }
 
     @Override
@@ -82,6 +86,11 @@ public class CategoryEditSearchRecyclerViewAdapter
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 displayedCategories = (List<String>)results.values;
                 notifyDataSetChanged();
+                if (displayedCategories.size()==0) {
+                    callback.noResultsFound();
+                } else {
+                    callback.someResultsFound();
+                }
             }
         };
     }
@@ -132,5 +141,7 @@ public class CategoryEditSearchRecyclerViewAdapter
 
     public interface  Callback {
         void updateSelectedCategoriesTextView(List<String> selectedCategories);
+        void noResultsFound();
+        void someResultsFound();
     }
 }

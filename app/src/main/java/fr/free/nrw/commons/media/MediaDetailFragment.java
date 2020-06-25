@@ -18,6 +18,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -176,12 +177,16 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     SearchView categorySearchView;
     @BindView(R.id.rv_categories)
     RecyclerView categoryRecyclerView;
+    @BindView(R.id.update_categories_button)
+    Button updateCategoriesButton;
     @BindView(R.id.dummy_category_edit_container)
     LinearLayout dummyCategoryEditContainer;
     @BindView(R.id.pb_categories)
     ProgressBar progressbarCategories;
     @BindView(R.id.existing_categories)
     TextView existingCategories;
+    @BindView(R.id.no_results_found)
+    TextView noResultsFound;
 
     private ArrayList<String> categoryNames;
     private String categorySearchQuery;
@@ -290,6 +295,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 Label.valuesAsList()), categoryRecyclerView, categoryClient, this);
         categoryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         categoryRecyclerView.setAdapter(categoryEditSearchRecyclerViewAdapter);
+
         media = detailProvider.getMediaAtPosition(index);
         scrollView.getViewTreeObserver().addOnGlobalLayoutListener(
             new OnGlobalLayoutListener() {
@@ -480,7 +486,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         categoryNames.clear();
         categoryNames.addAll(media.getCategories());
         categoryEditSearchRecyclerViewAdapter.addToSelectedCategories(media.getCategories());
-        updateSelectedCategoriesTextView(categoryEditSearchRecyclerViewAdapter.selectedCategories);
+        updateSelectedCategoriesTextView(categoryEditSearchRecyclerViewAdapter.getSelectedCategories());
 
         depictions=media.getDepiction();
 
@@ -510,8 +516,17 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     public void updateSelectedCategoriesTextView(List<String> selectedCategories) {
-        String allCategories = StringUtils.join(",", selectedCategories);
-        existingCategories.setText(allCategories);
+        if (selectedCategories != null) {
+            existingCategories.setText(StringUtils.join(selectedCategories,", "));
+        }
+    }
+
+    public void noResultsFound() {
+        noResultsFound.setVisibility(VISIBLE);
+    }
+
+    public void someResultsFound() {
+        noResultsFound.setVisibility(GONE);
     }
 
     /**
@@ -590,17 +605,25 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         } else {
             dummyCategoryEditContainer.setVisibility(GONE);
         }
+    }
 
+    @OnClick(R.id.update_categories_button)
+    public void onUpdateCategoriesClicked() {
+        updateCategories(categoryEditSearchRecyclerViewAdapter.getSelectedCategories());
+    }
 
-
-        /*UploadCategoriesFragment searchCategoryFragment = new UploadCategoriesFragment();
-        getFragmentManager()
-            .beginTransaction()
-            .replace(R.id.cetagoryEditContainer, searchCategoryFragment, "Category_Edit_Fragment")
-            .commit();
-*/
-
-
+    public void updateCategories(List<String> selectedCategories) {
+        Single<Boolean> resultSingle = categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories)
+            .flatMap(result -> categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories));
+        compositeDisposable.add(resultSingle
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(s -> {
+                if (getActivity() != null) {
+                    Log.d("deneme","oldu");
+                    // TODO: var olan kategoriler listede görünmedi bir sebepten. Ve kategori listesinden seçtirmelisin
+                }
+            }));
     }
 
     @OnClick(R.id.nominateDeletion)

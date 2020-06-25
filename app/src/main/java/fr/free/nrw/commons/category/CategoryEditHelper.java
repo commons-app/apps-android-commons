@@ -9,33 +9,43 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.actions.PageEditClient;
+import fr.free.nrw.commons.media.MwParseResponse;
+import fr.free.nrw.commons.media.MwParseResult;
 import fr.free.nrw.commons.notification.NotificationHelper;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import timber.log.Timber;
 
 public class CategoryEditHelper {
     private final NotificationHelper notificationHelper;
     private final PageEditClient pageEditClient;
     private final ViewUtilWrapper viewUtil;
+    private final CategoryEditInterface categoryEditInterface;
     private final String username;
 
     @Inject
     public CategoryEditHelper(NotificationHelper notificationHelper,
         @Named("commons-page-edit") PageEditClient pageEditClient,
         ViewUtilWrapper viewUtil,
-        @Named("username") String username) {
+        @Named("username") String username,
+        CategoryEditInterface categoryEditInterface) {
         this.notificationHelper = notificationHelper;
         this.pageEditClient = pageEditClient;
         this.viewUtil = viewUtil;
         this.username = username;
+        this.categoryEditInterface = categoryEditInterface;
     }
 
     /**
@@ -45,21 +55,75 @@ public class CategoryEditHelper {
      * @param categories
      * @return
      */
-    public Single<Boolean> makeCategoryEdit(Context context, Media media, List<Category> categories) {
+    public Single<Boolean> makeCategoryEdit(Context context, Media media, List<String> categories) {
         viewUtil.showShortToast(context, "Trying to add categories");
 
-        return addCategory(media, categories)
+        return updateCategories(media, categories)
             .flatMapSingle(result -> Single.just(showCategoryEditNotification(context, media, result)))
             .firstOrError();
     }
 
     /**
-     * Makes several API calls to nominate the file for deletion
+     * Updates categories
      * @param media
      * @param categories to be added
      * @return
      */
-    private Observable<Boolean> addCategory(Media media, List<Category> categories) {
+    private Observable<Boolean> updateCategories(Media media, List<String> categories) {
+        Timber.d("thread is category adding %s", Thread.currentThread().getName());
+        String summary = "Updating categories";
+
+        //MwQueryResponse currentContent =
+        try {
+        // TODO: network on main thread exception
+
+        return categoryEditInterface.getContentOfFile(media.getPageTitle().getText())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .map(mediaDetailResponse -> {
+                    // TODO get value from here
+
+                    Pattern pattern = Pattern.compile("(?=\\[\\[Category\\:)(.*?)\\]\\]");
+                    String content = mediaDetailResponse.query().firstPage().revisions().get(0)
+                        .content();
+                    Matcher matcher = pattern.matcher(content);
+
+                    StringBuilder builder = new StringBuilder();
+                    int i = 0;
+                    while (matcher.find()) {
+                        builder.append(content.substring(i, matcher.start()));
+                        i = matcher.end();
+                    }
+
+                    String pageContentCategoriesRemoved = builder.toString();
+                    // TODO burada kaldın
+
+                    StringBuilder buffer = new StringBuilder();
+
+                    if (categories != null && categories.size() != 0) {
+
+                        for (int k = 0; k < categories.size(); k++) {
+                            buffer.append("\n[[Category:").append(categories.get(i)).append("]]");
+                        }
+                    } else {
+                        buffer.append("{{subst:unc}}");
+                    }
+                    String appendText = buffer.toString();
+                    return pageEditClient
+                        .edit("File:Birds,_pidgeons_and_a_dove.jpg", appendText + "\n", summary);
+                }).blockingSingle();
+        }catch (Throwable throwable) {
+            return Observable.just(false);
+        }
+    }
+
+    /**
+     * Appends new categories
+     * @param media
+     * @param categories to be added
+     * @return
+     */
+    private Observable<Boolean> addCategory(Media media, List<String> categories) {
         Timber.d("thread is category adding %s", Thread.currentThread().getName());
         String summary = "Adding categories";
 
@@ -68,7 +132,7 @@ public class CategoryEditHelper {
         if (categories != null && categories.size() != 0) {
 
             for (int i = 0; i < categories.size(); i++) {
-                buffer.append("\n[[Category:").append(categories.get(i).getName()).append("]]");
+                buffer.append("\n[[Category:").append(categories.get(i)).append("]]");
             }
         } else {
             buffer.append("{{subst:unc}}");
