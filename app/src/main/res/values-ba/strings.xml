@@ -6,6 +6,26 @@
 * Рустам Нурыев
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d файл тейәлә</item>
+    <item quantity="other">%1$d файл тейәлә</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d тейәү</item>
+    <item quantity="other">%1$d тейәүҙәр</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%1$d тейәү башлана</item>
+    <item quantity="few">%1$d тейәү башлана</item>
+    <item quantity="other">%1$d тейәүҙәр башлана</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d тейәү</item>
+    <item quantity="few">%1$d тейәүҙәр</item>
+    <item quantity="other">%1$d тейәүҙәре</item>
+  </plurals>
+  <string name="share_license_summary" fuzzy="true">Был рәсем %1$s аҫтында лицензия аласаҡ</string>
   <string name="preference_category_appearance">Тышҡы күренеш</string>
   <string name="preference_category_general">Ғәҙәти</string>
   <string name="preference_category_feedback">Яуап алыу</string>
@@ -33,10 +53,6 @@
   <string name="upload_progress_notification_title_finishing">Тейәү %1$s тамамланды</string>
   <string name="upload_failed_notification_title">Тейәү %1$s килеп сыҡманы</string>
   <string name="upload_failed_notification_subtitle">Ошонда баҫ та ҡара</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d файл тейәлә</item>
-    <item quantity="other">%1$d файл тейәлә</item>
-  </plurals>
   <string name="title_activity_contributions">Һуңғы тейәүҙәрем</string>
   <string name="contribution_state_queued">Сират</string>
   <string name="contribution_state_failed">Булманы</string>
@@ -62,21 +78,6 @@
   <string name="gps_disabled">Ҡоролмағыҙҙа GPS һүнгән. Тоҡандырырғамы?</string>
   <string name="enable_gps">GPS-ты тоҡандырыу</string>
   <string name="contributions_subtitle_zero">Тейәүҙәр әлегә юҡ</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d тейәү</item>
-    <item quantity="other">%1$d тейәүҙәр</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">%1$d тейәү башлана</item>
-    <item quantity="few">%1$d тейәү башлана</item>
-    <item quantity="other">%1$d тейәүҙәр башлана</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d тейәү</item>
-    <item quantity="few">%1$d тейәүҙәр</item>
-    <item quantity="other">%1$d тейәүҙәре</item>
-  </plurals>
   <string name="categories_not_found">%1$s тап килгән категориялар табылманы</string>
   <string name="categories_skip_explanation">Викискладта һәрәтегеҙҙе тиҙерәк табыу өсөн категоиялар өҫтәгеҙ.\nКатегория өҫтәү өсөн атама яҙа башлағыҙ.</string>
   <string name="title_activity_settings">Көйләүҙәр</string>
@@ -94,7 +95,6 @@
   <string name="no_uploads_yet">Әлегә бер фото ла тейәмәгәнһең</string>
   <string name="menu_retry_upload">Йәнә бер тапҡыр</string>
   <string name="menu_cancel_upload">Кәрәкмәй</string>
-  <string name="share_license_summary" fuzzy="true">Был рәсем %1$s аҫтында лицензия аласаҡ</string>
   <string name="media_upload_policy">Был рәсемде ебәргәндә шуны раҫлайым: был минең шәхси эшем, автор хоҡуҡтарын һаҡлаған материал йәки селфи түгел, шулай уҡ Викискладтың &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/ru\"&gt;ҡағиҙәләренә тап килә&lt;/a&gt;.</string>
   <string name="menu_download">Тейәргә</string>
   <string name="preference_license">Нығытылған рөхсәтнамә</string>

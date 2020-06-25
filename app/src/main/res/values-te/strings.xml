@@ -5,6 +5,35 @@
 * Veeven
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d ఫైలు అప్‌లోడవుతోంది</item>
+    <item quantity="other">%1$d ఫైళ్ళు అప్‌లోడవుతున్నాయి</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%1$d ఎక్కింపును మొదలు పెడుతున్నాం</item>
+    <item quantity="other">%1$d ఎక్కింపులను మొదలు పెడుతున్నాం</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d ఎక్కింపు</item>
+    <item quantity="other">%1$d ఎక్కింపులు</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">ఈ బొమ్మ %1$s లైసెన్సు కింద విడుదల అవుతుంది</item>
+    <item quantity="other">ఈ బొమ్మలు %1$s లైసెన్సు కింద విడుదల అవుతాయి</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d ఎక్కింపు</item>
+    <item quantity="other">%1$d ఎక్కింపులు</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">పంచుకున్న కంటెంటును అందుకుంటున్నాం. బొమ్మ పరిమాణాన్ని బట్టి, మీ పరికరాన్ని బట్టీ ప్రాసెసింగు చేసేందుకు కొంత సమయం పట్టవచ్చు</item>
+    <item quantity="other">పంచుకున్న కంటెంటును అందుకుంటున్నాం. బొమ్మల పరిమాణాన్ని బట్టి, మీ పరికరాన్ని బట్టీ ప్రాసెసింగు చేసేందుకు కొంత సమయం పట్టవచ్చు</item>
+  </plurals>
   <string name="title_activity_explore">శోధించండి</string>
   <string name="navigation_item_explore">శోధించండి</string>
   <string name="preference_category_appearance">రూపురేఖలు</string>
@@ -36,10 +65,6 @@
   <string name="upload_progress_notification_title_finishing">%1$s ఎక్కింపు పూర్తికావస్తోంది</string>
   <string name="upload_failed_notification_title">%1$s ఎక్కింపు విఫలమైంది</string>
   <string name="upload_failed_notification_subtitle">చూసేందుకు నొక్కండి</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d ఫైలు అప్‌లోడవుతోంది</item>
-    <item quantity="other">%1$d ఫైళ్ళు అప్‌లోడవుతున్నాయి</item>
-  </plurals>
   <string name="title_activity_contributions">ఇటీవలి నా ఎక్కింపులు</string>
   <string name="contribution_state_queued">క్యూలో ఉంది</string>
   <string name="contribution_state_failed">విఫలమైంది</string>
@@ -51,8 +76,10 @@
   <string name="provider_contributions">నా ఎక్కింపులు</string>
   <string name="menu_share">పంచుకోండి</string>
   <string name="menu_open_in_browser">విహారిణిలో చూపు</string>
-  <string name="share_title_hint" fuzzy="true">శీర్షిక (తప్పనిసరి)</string>
+  <string name="share_title_hint">శీర్షిక (తప్పనిసరి)</string>
+  <string name="add_caption_toast">ఈ ఫైలుకు ఒక శీర్షిక ఇవ్వండి</string>
   <string name="share_description_hint">వివరణ</string>
+  <string name="share_caption_hint">శీర్షిక (పరిమితి 255 అక్షరాలు)</string>
   <string name="login_failed_network">లాగిన్ చెయ్యలేకపోయాం - నెట్‍వర్కు విఫలం</string>
   <string name="login_failed_wrong_credentials">లాగినవలేదు - మీ వాడుకరిపేరు, సంకేతపదం సరిచూసుకోండి</string>
   <string name="login_failed_throttled">మరీ ఎక్కువ విఫల యత్నాలు చేసారు. కొద్ది నిముషాలాగి ప్రయత్నించండి</string>
@@ -71,19 +98,6 @@
   <string name="gps_disabled">మీ పరికరంలో GPS అచేతనం చేసి ఉంది. దాన్ని చేతనం చేస్తారా?</string>
   <string name="enable_gps">GPS ను చేతనం చెయ్యి</string>
   <string name="contributions_subtitle_zero">ఇంకా ఎక్కింపులేమీ లేవు</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">%1$d ఎక్కింపును మొదలు పెడుతున్నాం</item>
-    <item quantity="other">%1$d ఎక్కింపులను మొదలు పెడుతున్నాం</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d ఎక్కింపు</item>
-    <item quantity="other">%1$d ఎక్కింపులు</item>
-  </plurals>
   <string name="categories_not_found">%1$s తో సరిపోలే వర్గాలేమీ లేవు</string>
   <string name="categories_skip_explanation">వికీమీడియా కామన్స్ లో వెతికేటపుడు మీ బొమ్మలు మరింత సులువుగా కనబడేందుకు వాటికి వర్గాలను చేర్చండి.</string>
   <string name="categories_activity_title">వర్గాలు</string>
@@ -95,27 +109,24 @@
   <string name="menu_about">గురించి</string>
   <string name="about_license">వికీమీడియా కామన్స్ యాప్ ఓపెన్_సోర్సు యాప్. దీన్ని వికీమీడియా సముదాయం లోని స్వచ్ఛంద సేవకులు తయారు చేసి, నిర్వహిస్తున్నారు. దీని తయారీ, అభివృద్ధి, నిర్వహణలో వికీమీడియా కామన్స్‌కు పాత్ర ఏమీ లేదు.</string>
   <string name="about_improve">ఏదైనా సమస్యను గానీ, సూచనను గానీ నివేదించేందుకు &lt;a href=\"%1$s\"&gt;GitHub లో ఒక కొత్త ఇష్యూను&lt;/a&gt; సృష్టించండి.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;గోప్యతా విధానం&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;శ్రేయస్సులు&lt;/u&gt;</string>
+  <string name="about_privacy_policy">గోప్యతా విధానం</string>
+  <string name="about_credits">శ్రేయస్సులు</string>
   <string name="title_activity_about">గురించి</string>
   <string name="menu_feedback">ఫీడుబ్యాకును పంపండి (ఈమెయిలు ద్వారా)</string>
   <string name="no_email_client">ఈమెయిలు క్లయంటేదీ లేదు</string>
   <string name="provider_categories">ఇటీవల వాడిన వర్గాలు</string>
+  <string name="provider_depictions">ఇటీవలి వాడుకలు</string>
   <string name="waiting_first_sync">మొట్టమొదటి సింక్ కోసం చూస్తున్నాం...</string>
   <string name="no_uploads_yet">ఇంకా మీరు ఫోటోలేమీ ఎక్కించలేదు.</string>
   <string name="menu_retry_upload">మళ్ళీ ప్రయత్నించు</string>
   <string name="menu_cancel_upload">రద్దుచేయి</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">ఈ బొమ్మ %1$s లైసెన్సు కింద విడుదల అవుతుంది</item>
-    <item quantity="other">ఈ బొమ్మలు %1$s లైసెన్సు కింద విడుదల అవుతాయి</item>
-  </plurals>
   <string name="media_upload_policy">ఈ బొమ్మను పంపించడంతో, ఇది నా స్వంత కృతేనని, ఇందులో కాపీహక్కులు గల వస్తువులు గాని, సెల్ఫీలు గానీ ఏమీ లేవనీ, ఇది &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;వికీమీడియా కామన్స్ విధానాలకు&lt;/a&gt; లోబడి ఉంటుందనీ ప్రకటిస్తున్నాను.</string>
   <string name="menu_download">దింపుకోండి</string>
   <string name="preference_license">అప్రమేయ లైసెన్సు</string>
-  <string name="use_previous" fuzzy="true">మునుపటి శీర్షిక/వివరణను వాడు</string>
+  <string name="use_previous">మునుపటి శీర్షిక, వివరణను వాడు</string>
   <string name="allow_gps">ప్రస్తుత స్థలాన్ని ఆటోమాటిగ్గా తెచ్చుకో</string>
   <string name="allow_gps_summary">బొమ్మలో జియోట్యాగు లేకపోతే, ప్రస్తుత స్థలాన్ని తీసుకుని దాన్నే జియోట్యాగుగా తగిలిస్తుంది.\nహెచ్చరిక: ఇది మీ ప్రస్తుత స్థలాన్ని బయట పెడుతుంది.</string>
-  <string name="preference_theme" fuzzy="true">చీకటి రీతి</string>
+  <string name="preference_theme">అలంకారం</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -154,10 +165,12 @@
   <string name="welcome_copyright_subtext">అంతర్జాలంలో దొరికే కాపీహక్కులు కలిగిన వస్తువులు, పోస్టర్లు, పుస్తకాల అట్టల బొమ్మలు మొదలైనవాటిని పెట్టకండి.</string>
   <string name="welcome_final_text">అర్థమైందనుకుంటున్నారా?</string>
   <string name="welcome_final_button_text">అయింది!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;మరింత సమాచారం&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">మరింత సమాచారం</string>
   <string name="detail_panel_cats_label">వర్గాలు</string>
   <string name="detail_panel_cats_loading">లోడవుతోంది…</string>
   <string name="detail_panel_cats_none">దేన్నీ ఎంచుకోలేదు</string>
+  <string name="detail_caption_empty">శీర్షిక లేదు</string>
+  <string name="detail_depiction_empty">వివరణ లేదు</string>
   <string name="detail_description_empty">వివరణ లేదు</string>
   <string name="detail_discussion_empty">చర్చ లేదు</string>
   <string name="detail_license_empty">తెలియని లైసెన్సు</string>
@@ -172,8 +185,10 @@
   <string name="no_nearby">చుట్టుపక్కల స్థలాలేమీ కనబడలేదు</string>
   <string name="warning">హెచ్చరిక</string>
   <string name="upload_image_duplicate">కామన్స్‌లో ఈ ఫైలును ఈసరికే నాశనం చేసారు. అయినా ముందుకెళ్ళాలనే అనుకుంటున్నారా?</string>
+  <string name="upload">ఎక్కించు</string>
   <string name="yes">అవును</string>
   <string name="no">వద్దు</string>
+  <string name="media_detail_caption">శీర్షిక</string>
   <string name="media_detail_title">శీర్షిక</string>
   <string name="media_detail_description">వివరణ</string>
   <string name="media_detail_discussion">చర్చ</string>
@@ -290,7 +305,7 @@
   <string name="error_review">బొమ్మ మునుజూపు తేవడంలో లోపం. మళ్ళీ ప్రయత్నించేందుకు రిఫ్రెష్ చెయ్యండి.</string>
   <string name="error_review_categories">సమీక్షించేందుకు గాను బొమ్మ వర్గాలను తేవడంలో లోపం. మళ్ళీ ప్రయత్నించేందుకు రిఫ్రెష్ చెయ్యండి.</string>
   <string name="no_notifications">గమనింపులేమీ కనబడలేదు</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;అనువదించండి&lt;/u&gt;</string>
+  <string name="about_translate">అనువదించండి</string>
   <string name="about_translate_title">భాషలు</string>
   <string name="about_translate_message">మీ అనువాదాలను సమర్పించేందుకు భాషను ఎంచుకోండి</string>
   <string name="about_translate_proceed">పద</string>
@@ -391,10 +406,6 @@
   <string name="submit">పంపించు</string>
   <string name="upload_title_duplicate">%1$s పేరుతో ఒక ఫైలు ఈసరికే ఉంది. ఈ పేరుతోటే ముందుకు పోతారా?</string>
   <string name="map_application_missing">దీనికి సరిపడే మ్యాపు అప్లికేషనేదీ మీ పరికరంలో కనబడలేదు. ఈ విశేషాన్ని వాడాలంటే, దీనికి సరిపడే మ్యాపు అప్లికేషన్ను స్థాపించుకోండి.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d ఎక్కింపు</item>
-    <item quantity="other">%1$d ఎక్కింపులు</item>
-  </plurals>
   <string name="navigation_item_bookmarks">పేజీకలు</string>
   <string name="title_activity_bookmarks">పేజీకలు</string>
   <string name="title_page_bookmarks_pictures">బొమ్మలు</string>
@@ -479,10 +490,6 @@
   <string name="review_thanks_no_button_text">తరువాతి బొమ్మ</string>
   <string name="skip_image_explanation">ఈ బొత్తాన్ని నొక్కితే వికీమీడియా కామన్స్ లోకి ఇటీవల ఎక్కించిన మరో బొమ్మ కనిపిస్తుంది</string>
   <string name="review_image_explanation">బొమ్మలను సమీక్షించి, వికీమీడియా కామన్స్ నాణ్యతను మెరుగు పరచవచ్చు.\n సమీక్ష కోసం నాలుగు పరామితులివి: \n - ఈ బొమ్మ స్కోపు లోనే ఉందా? \n - ఈ బొమ్మ కాపీహక్కు నియమాలకు లోబడే ఉందా? \n - ఈ బొమ్మను సరైన వర్గాల్లోనే చేర్చారా? \n - అంతా బానే ఉంటే, ఆ బొమ్మను చేర్చిన వారికి ధన్యవాదాలు చెప్పవచ్చు కూడా.</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">పంచుకున్న కంటెంటును అందుకుంటున్నాం. బొమ్మ పరిమాణాన్ని బట్టి, మీ పరికరాన్ని బట్టీ ప్రాసెసింగు చేసేందుకు కొంత సమయం పట్టవచ్చు</item>
-    <item quantity="other">పంచుకున్న కంటెంటును అందుకుంటున్నాం. బొమ్మల పరిమాణాన్ని బట్టి, మీ పరికరాన్ని బట్టీ ప్రాసెసింగు చేసేందుకు కొంత సమయం పట్టవచ్చు</item>
-  </plurals>
   <string name="no_image">బొమ్మలేమీ వాడలేదు</string>
   <string name="no_image_reverted">బొమ్మలు వేటినీ వెనక్కి తిరక్కొట్టలేదు</string>
   <string name="no_image_uploaded">బొమ్మలేమీ ఎక్కించలేదు</string>
@@ -547,4 +554,8 @@
   <string name="place_type">స్థలం రకం:</string>
   <string name="nearby_search_hint">వంతెన, మ్యూజియమ్, హోటలు వగైరా.</string>
   <string name="you_must_reset_your_passsword">లాగినవడంలో ఏదో లోపం జరిగింది, మీ సంకేతపదాన్ని మార్చుకోవాలి !!</string>
+  <string name="title_app_shortcut_bookmark">ఇష్టాంశాలు</string>
+  <string name="title_app_shortcut_setting">అమరికలు</string>
+  <string name="add_picture_to_wikipedia_instructions_title">సూచనలు</string>
+  <string name="instructions_title">సూచనలు</string>
 </resources>

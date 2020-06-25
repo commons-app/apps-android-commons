@@ -14,6 +14,49 @@
 * Ата
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Завантажується %1$d файл</item>
+    <item quantity="few">Завантажуються %1$d файли</item>
+    <item quantity="many">Завантажується %1$d файлів</item>
+    <item quantity="other">Завантажується %1$d файлів</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d завантаження</item>
+    <item quantity="few">%1$d завантаження</item>
+    <item quantity="many">%1$d завантажень</item>
+    <item quantity="other">%1$d завантажень</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Починається %1$d завантаження</item>
+    <item quantity="few">Починаються %1$d завантаження</item>
+    <item quantity="many">Починаються %1$d завантажень</item>
+    <item quantity="other">Починаються %1$d завантажень</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d завантаження</item>
+    <item quantity="few">%1$d завантаження</item>
+    <item quantity="many">%1$d завантажень</item>
+    <item quantity="other">%1$d завантажень</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Це зображення буде ліцензовано на умовах %1$s</item>
+    <item quantity="few">Ці зображення буде ліцензовано на умовах %1$s</item>
+    <item quantity="many">Ці зображення буде ліцензовано на умовах %1$s</item>
+    <item quantity="other">Ці зображення буде ліцензовано на умовах %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d завантаження</item>
+    <item quantity="few">%1$d завантаження</item>
+    <item quantity="many">%1$d завантажень</item>
+    <item quantity="other">%1$d завантажень</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Отримання спільного контенту. Обробка зображення може зайняти трохи часу, залежно від розміру зображення і від Вашого пристрою</item>
+    <item quantity="few">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
+    <item quantity="many">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
+    <item quantity="other">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
+  </plurals>
   <string name="title_activity_explore">Дослідити</string>
   <string name="navigation_item_explore">Дослідити</string>
   <string name="preference_category_appearance">Зовнішній вигляд</string>
@@ -45,12 +88,6 @@
   <string name="upload_progress_notification_title_finishing">Завершення завантаження %1$s</string>
   <string name="upload_failed_notification_title">Не вдалося завантажити %1$s</string>
   <string name="upload_failed_notification_subtitle">Торкніться, щоб переглянути</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Завантажується %1$d файл</item>
-    <item quantity="few">Завантажуються %1$d файли</item>
-    <item quantity="many">Завантажується %1$d файлів</item>
-    <item quantity="other">Завантажується %1$d файлів</item>
-  </plurals>
   <string name="title_activity_contributions">Мої останні завантаження</string>
   <string name="contribution_state_queued">У черзі</string>
   <string name="contribution_state_failed">Не вдалося</string>
@@ -85,25 +122,6 @@
   <string name="gps_disabled">GPS вимкнено на Вашому пристрої. Бажаєте увімкнути його?</string>
   <string name="enable_gps">Увімкнути GPS</string>
   <string name="contributions_subtitle_zero">Ще нема завантажень</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d завантаження</item>
-    <item quantity="few">%1$d завантаження</item>
-    <item quantity="many">%1$d завантажень</item>
-    <item quantity="other">%1$d завантажень</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Починається %1$d завантаження</item>
-    <item quantity="few">Починаються %1$d завантаження</item>
-    <item quantity="many">Починаються %1$d завантажень</item>
-    <item quantity="other">Починаються %1$d завантажень</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d завантаження</item>
-    <item quantity="few">%1$d завантаження</item>
-    <item quantity="many">%1$d завантажень</item>
-    <item quantity="other">%1$d завантажень</item>
-  </plurals>
   <string name="categories_not_found">Категорій, відповідних %1$s, не знайдено</string>
   <string name="depictions_not_found">Не знайдено елементів вікіданих, що відповідають %1$s</string>
   <string name="no_child_classes">%1$s не має дочірніх класів</string>
@@ -130,12 +148,6 @@
   <string name="no_uploads_yet">Ви ще не завантажили жодної світлини.</string>
   <string name="menu_retry_upload">Повторити</string>
   <string name="menu_cancel_upload">Скасувати</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Це зображення буде ліцензовано на умовах %1$s</item>
-    <item quantity="few">Ці зображення буде ліцензовано на умовах %1$s</item>
-    <item quantity="many">Ці зображення буде ліцензовано на умовах %1$s</item>
-    <item quantity="other">Ці зображення буде ліцензовано на умовах %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Подаючи це зображення, я підтверджую, що це моя власна робота, яка не містить захищених авторським правом матеріалів чи селфі, а також відповідає &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/uk\"&gt;правилам Вікісховища&lt;/a&gt;.</string>
   <string name="menu_download">Завантажити</string>
   <string name="preference_license">Усталена ліцензія</string>
@@ -430,12 +442,6 @@
   <string name="submit">Надіслати</string>
   <string name="upload_title_duplicate">Файл із назвою %1$s існує. Ви впевнені, що хочете продовжити?</string>
   <string name="map_application_missing">На Вашому пристрої не знайдено сумісного додатка з картами. Будь ласка, встановіть додаток з картами, якщо хочете скористатись цією функцією.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d завантаження</item>
-    <item quantity="few">%1$d завантаження</item>
-    <item quantity="many">%1$d завантажень</item>
-    <item quantity="other">%1$d завантажень</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Закладки</string>
   <string name="title_activity_bookmarks">Закладки</string>
   <string name="title_page_bookmarks_pictures">Зображення</string>
@@ -523,12 +529,6 @@
   <string name="review_thanks_no_button_text">Наступне зображення</string>
   <string name="skip_image_explanation">Натискання цієї кнопки дасть вам інше недавно завантажене зображення з Вікісховища</string>
   <string name="review_image_explanation">Ви можете перевіряти зображення і покращувати якість Вікісховища.\nЄ чотири параметри перевірки:\n— Чи зображення відповідає призначенню Вікісховища?\n— Чи зображення відповідає правилам авторського права?\n— Чи зображення коректно категоризоване?\n— Якщо все добре, то ви можете подякувати завантажувачу.</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">Отримання спільного контенту. Обробка зображення може зайняти трохи часу, залежно від розміру зображення і від Вашого пристрою</item>
-    <item quantity="few">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
-    <item quantity="many">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
-    <item quantity="other">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
-  </plurals>
   <string name="no_image">Використаних зображень немає</string>
   <string name="no_image_reverted">Відхилених зображень немає</string>
   <string name="no_image_uploaded">Завантажених зображень немає</string>

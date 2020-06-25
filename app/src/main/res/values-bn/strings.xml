@@ -15,6 +15,28 @@
 * আফতাবুজ্জামান
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$dটি ফাইল আপলোড হচ্ছে</item>
+    <item quantity="other">%1$dটি ফাইল আপলোড হচ্ছে</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%1$dটি আপলোড শুরু হয়েছে</item>
+    <item quantity="other">%1$dটি আপলোড শুরু হয়েছে</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$dটি আপলোড</item>
+    <item quantity="other">%1$dটি আপলোড</item>
+  </plurals>
+  <string name="share_license_summary" fuzzy="true">এই ছবিটি %1$s এর অধীনে লাইসেন্স করা হবে</string>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$dটি আপলোড</item>
+    <item quantity="other">%1$dটি আপলোড</item>
+  </plurals>
   <string name="title_activity_explore">অন্বেষণ করুন</string>
   <string name="navigation_item_explore">অন্বেষণ</string>
   <string name="preference_category_appearance">অবয়ব</string>
@@ -45,10 +67,6 @@
   <string name="upload_progress_notification_title_finishing">%1$s আপলোড শেষ হয়েছে</string>
   <string name="upload_failed_notification_title">%1$s আপলোড ব্যর্থ</string>
   <string name="upload_failed_notification_subtitle">দেখার জন্য টোকা দিন</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$dটি ফাইল আপলোড হচ্ছে</item>
-    <item quantity="other">%1$dটি ফাইল আপলোড হচ্ছে</item>
-  </plurals>
   <string name="title_activity_contributions">আমার সাম্প্রতিক আপলোড</string>
   <string name="contribution_state_queued">অপেক্ষারত</string>
   <string name="contribution_state_failed">ব্যর্থ</string>
@@ -80,19 +98,6 @@
   <string name="gps_disabled">GPS আপনার ডিভাইসে অক্ষম করা আছে। আপনি কি এটি সক্ষম করতে চান?</string>
   <string name="enable_gps">GPS সক্রিয় করুন</string>
   <string name="contributions_subtitle_zero">এখনো কোন আপলোড নেই</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">%1$dটি আপলোড শুরু হয়েছে</item>
-    <item quantity="other">%1$dটি আপলোড শুরু হয়েছে</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$dটি আপলোড</item>
-    <item quantity="other">%1$dটি আপলোড</item>
-  </plurals>
   <string name="categories_not_found">%1$s-এর সাথে মিলে এমন কোন বিষয়শ্রেণী পাওয়া যায়নি</string>
   <string name="categories_skip_explanation">উইকিমিডিয়া কমন্স থেকে আপনার মিডিয়া ফাইলটি সহজে খুঁজে পেতে বিষয়শ্রেণী যুক্ত করুন।\n\nবিষয়শ্রেণী যোগ করার জন্য টাইপিং শুরু করুন।</string>
   <string name="categories_activity_title">বিষয়শ্রেণীসমূহ</string>
@@ -113,7 +118,6 @@
   <string name="no_uploads_yet">আপনি এখনও কোনো ছবি আপলোড করেননি।</string>
   <string name="menu_retry_upload">পুনঃচেষ্টা করুন</string>
   <string name="menu_cancel_upload">বাতিল</string>
-  <string name="share_license_summary" fuzzy="true">এই ছবিটি %1$s এর অধীনে লাইসেন্স করা হবে</string>
   <string name="media_upload_policy">এই চিত্র জমা দেয়ার দ্বারা, আমি ঘোষণা দিচ্ছি যে এটি আমার নিজস্ব কাজ, এতে কপিরাইটযুক্ত উপাদান নেই বা এটই সেলফি নয়, এবং &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/bn\"&gt;উইকিমিডিয়া কমন্স নীতি&lt;/a&gt; অনুসরণ করে।</string>
   <string name="menu_download">ডাউনলোড</string>
   <string name="preference_license">পূর্বনির্ধারিত লাইসেন্স</string>
@@ -303,10 +307,6 @@
   <string name="next">পরবর্তী</string>
   <string name="previous">পূর্ববর্তী</string>
   <string name="submit">জমা দিন</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$dটি আপলোড</item>
-    <item quantity="other">%1$dটি আপলোড</item>
-  </plurals>
   <string name="navigation_item_bookmarks">বুকমার্ক</string>
   <string name="title_activity_bookmarks">বুকমার্ক</string>
   <string name="title_page_bookmarks_pictures">চিত্র</string>
@@ -325,4 +325,5 @@
   <string name="account_created">অ্যাকাউন্ট তৈরি করা হয়েছে!</string>
   <string name="remove_bookmark">বুকমার্ক থেকে সরানো হয়েছে</string>
   <string name="add_bookmark">বুকমার্কে যোগ করা হয়েছে</string>
+  <string name="confirm">নিশ্চিত করুন</string>
 </resources>

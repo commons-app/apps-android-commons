@@ -67,15 +67,6 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         return uploadMediaDetails.size();
     }
 
-    /**
-     * Gets descriptions
-     *
-     * @return List of descriptions
-     */
-    public List<UploadMediaDetail> getUploadMediaDetails() {
-        return uploadMediaDetails;
-    }
-
     public void addDescription(UploadMediaDetail uploadMediaDetail) {
         this.uploadMediaDetails.add(uploadMediaDetail);
         notifyItemInserted(uploadMediaDetails.size());
@@ -108,8 +99,6 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         public void bind(int position) {
             UploadMediaDetail uploadMediaDetail = uploadMediaDetails.get(position);
             Timber.d("UploadMediaDetail is " + uploadMediaDetail);
-            captionItemEditText.setText(uploadMediaDetail.getCaptionText());
-            descItemEditText.setText(uploadMediaDetail.getDescriptionText());
 
             captionItemEditText.addTextChangedListener(new AbstractTextWatcher(
                 value -> {
@@ -117,6 +106,8 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                         eventListener.onPrimaryCaptionTextChange(value.length() != 0);
                     }
                 }));
+            captionItemEditText.setText(uploadMediaDetail.getCaptionText());
+            descItemEditText.setText(uploadMediaDetail.getDescriptionText());
 
             if (position == 0) {
                 captionInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
