@@ -156,7 +156,7 @@ public class WikidataEditService {
     final List<Snak_partial> snaks = new ArrayList<>();
     for (final Map.Entry<String, String> entry : captions.entrySet()) {
       snaks.add(new Snak_partial("value",
-          WikidataProperties.MEDIA_LEGENDS.getPropertyName(), new DataValue.MonoLingualText_partial(
+          WikidataProperties.MEDIA_LEGENDS.getPropertyName(), new DataValue.MonoLingualText(
           new WikiBaseMonolingualTextValue(entry.getValue(), entry.getKey()))));
     }
 

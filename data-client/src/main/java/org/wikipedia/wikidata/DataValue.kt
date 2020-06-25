@@ -12,7 +12,7 @@ sealed class DataValue(val type: String) {
                 .registerSubtype(GlobeCoordinate_partial::class.java, GlobeCoordinate_partial.TYPE)
                 .registerSubtype(Time_partial::class.java, Time_partial.TYPE)
                 .registerSubtype(Quantity_partial::class.java, Quantity_partial.TYPE)
-                .registerSubtype(MonoLingualText_partial::class.java, MonoLingualText_partial.TYPE)
+                .registerSubtype(MonoLingualText::class.java, MonoLingualText.TYPE)
     }
 
     //    "value": {
@@ -87,7 +87,7 @@ sealed class DataValue(val type: String) {
     //        "language": "ko"
     //    }
     //    }
-    class MonoLingualText_partial(val value: WikiBaseMonolingualTextValue) : DataValue(TYPE) {
+    class MonoLingualText(val value: WikiBaseMonolingualTextValue) : DataValue(TYPE) {
         companion object {
             const val TYPE = "monolingualtext"
         }
