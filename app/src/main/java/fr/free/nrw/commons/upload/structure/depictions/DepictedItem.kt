@@ -36,7 +36,7 @@ data class DepictedItem constructor(
         place.longDescription
     )
 
-    constructor(entity: Entities.Entity, name: String, description: String) : this(
+    private constructor(entity: Entities.Entity, name: String, description: String) : this(
         name,
         description,
         entity[IMAGE].primaryImageValue?.let {
@@ -69,7 +69,7 @@ private fun List<Statement_partial>?.toIds(): List<String> {
 }
 
 private val List<Statement_partial>?.primaryImageValue: DataValue.ValueString?
-    get() = this?.first()?.mainSnak?.dataValue as? DataValue.ValueString
+    get() = this?.firstOrNull()?.mainSnak?.dataValue as? DataValue.ValueString
 
 operator fun Entities.Entity.get(property: WikidataProperties) =
     statements?.get(property.propertyName)
