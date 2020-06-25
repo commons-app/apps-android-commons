@@ -22,6 +22,35 @@
 * VikipediBilgini
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d dosya yükleniyor</item>
+    <item quantity="other">%1$d dosya yükleniyor</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%1$d yüklenmeye başlanıyor</item>
+    <item quantity="other">%1$d yüklenmeye başlanıyor</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d yükleme</item>
+    <item quantity="other">%1$d yükleme</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Bu görüntü, %1$s lisansı altında olacak</item>
+    <item quantity="other">Bu görüntüler, %1$s lisansı altında olacak</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d Yükleme</item>
+    <item quantity="other">%1$d Yükleme</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Paylaşılan içerik alınıyor. Resmin işlenmesi, resmin boyutuna ve cihazınıza bağlı olarak biraz zaman alabilir.</item>
+    <item quantity="other">Paylaşılan içerik alınıyor. Resmin işlenmesi, resmin boyutuna ve cihazınıza bağlı olarak biraz zaman alabilir.</item>
+  </plurals>
   <string name="title_activity_explore">Keşfet</string>
   <string name="navigation_item_explore">Keşfet</string>
   <string name="preference_category_appearance">Görünüm</string>
@@ -53,10 +82,6 @@
   <string name="upload_progress_notification_title_finishing">%1$s yüklemesi bitiriliyor</string>
   <string name="upload_failed_notification_title">%1$s dosyasının yüklemesi başarısız oldu</string>
   <string name="upload_failed_notification_subtitle">Görüntülemek için dokunun</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d dosya yükleniyor</item>
-    <item quantity="other">%1$d dosya yükleniyor</item>
-  </plurals>
   <string name="title_activity_contributions">Son Yüklemelerim</string>
   <string name="contribution_state_queued">Sırada</string>
   <string name="contribution_state_failed">Başarısız</string>
@@ -91,19 +116,6 @@
   <string name="gps_disabled">GPS, cihazınızda devre dışı bırakılmıştır. Etkinleştirmek ister misiniz?</string>
   <string name="enable_gps">GPS\'i etkinleştir</string>
   <string name="contributions_subtitle_zero">Henüz yüklenmedi</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">%1$d yüklenmeye başlanıyor</item>
-    <item quantity="other">%1$d yüklenmeye başlanıyor</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d yükleme</item>
-    <item quantity="other">%1$d yükleme</item>
-  </plurals>
   <string name="categories_not_found">%1$s ile eşleşen bir kategori bulunamadı</string>
   <string name="depictions_not_found">%1$s ile eşleşen Vikiveri ögesi bulunamadı</string>
   <string name="no_child_classes">%1$s alt sınıfı yok</string>
@@ -130,10 +142,6 @@
   <string name="no_uploads_yet">Henüz yüklenmiş hiç fotoğrafınız yok.</string>
   <string name="menu_retry_upload">Tekrar dene</string>
   <string name="menu_cancel_upload">İptal</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Bu görüntü, %1$s lisansı altında olacak</item>
-    <item quantity="other">Bu görüntüler, %1$s lisansı altında olacak</item>
-  </plurals>
   <string name="media_upload_policy">Bu resmi göndererek bunun kendi çalışmam olduğunu, telif hakkıyla korunan materyal veya özçekim (selfie) içermediğini ve başka türlü &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons politikalarına&lt;/a&gt; uyduğunu beyan ederim</string>
   <string name="menu_download">İndir</string>
   <string name="preference_license">Varsayılan Lisans</string>
@@ -428,10 +436,6 @@
   <string name="submit">Gönder</string>
   <string name="upload_title_duplicate">%1$s adında zaten bir dosya var. Devam etmek istediğine emin misin?</string>
   <string name="map_application_missing">Cihazınızda uyumlu bir harita uygulaması bulunamadı. Lütfen bu özelliği kullanmak için bir harita uygulaması yükleyin.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d Yükleme</item>
-    <item quantity="other">%1$d Yükleme</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Yer imleri</string>
   <string name="title_activity_bookmarks">Yer imleri</string>
   <string name="title_page_bookmarks_pictures">Resimler</string>
@@ -519,10 +523,6 @@
   <string name="review_thanks_no_button_text">Sonraki resim</string>
   <string name="skip_image_explanation">Bu butona tıkladığınızda Wikimedia Commons\'tan yeni yüklediğiniz başka bir resim elde edersiniz</string>
   <string name="review_image_explanation">Görüntüleri inceleyebilir ve Wikimedia Commons\'un kalitesini iyileştirebilirsiniz.\n  İncelemenin dört parametresi:\n  - Bu görüntü kapsam dahilinde mi?\n  - Bu resim telif hakkı kurallarına uyuyor mu?\n  - Bu resim doğru sınıflandırılmış mı?\n  - Her şey yolunda giderse katılımcıya da teşekkür edebilirsiniz.</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">Paylaşılan içerik alınıyor. Resmin işlenmesi, resmin boyutuna ve cihazınıza bağlı olarak biraz zaman alabilir.</item>
-    <item quantity="other">Paylaşılan içerik alınıyor. Resmin işlenmesi, resmin boyutuna ve cihazınıza bağlı olarak biraz zaman alabilir.</item>
-  </plurals>
   <string name="no_image">Hiç resim kullanılmadı</string>
   <string name="no_image_reverted">Geri getirilen resim yok</string>
   <string name="no_image_uploaded">Yüklenen resim yok</string>
@@ -612,4 +612,18 @@
   <string name="use_location_from_similar_image">Bu iki fotoğrafı aynı yerde mi çektiniz? Sağdaki resmin enlem/boylamını kullanmak ister misiniz?</string>
   <string name="load_more">Daha Fazla Yükle</string>
   <string name="nearby_no_results">Yer bulunamadı, arama kriterlerinizi değiştirmeyi deneyin.</string>
+  <string name="add_picture_to_wikipedia_article_title">Vikipedi\'ye resim ekle</string>
+  <string name="add_picture_to_wikipedia_article_desc">Bu resmi %1$s Vikipedi maddesine eklemek istiyor musunuz?</string>
+  <string name="add_picture_to_wikipedia_instructions_title">Talimatlar</string>
+  <string name="add_picture_to_wikipedia_instructions_desc">Düzenleme yönergelerine uymaya özen gösterin!</string>
+  <string name="confirm">Onayla</string>
+  <string name="instructions_title">Talimatlar</string>
+  <string name="wikipedia_instructions_step_1">1. Aşağıdaki vikimetini kullanın:</string>
+  <string name="wikipedia_instructions_step_2">2. Onayla\'yı tıkladığınızda Vikipedi maddesi açılır</string>
+  <string name="wikipedia_instructions_step_3">3. Maddenizde resminiz için uygun bir bölüm bulun</string>
+  <string name="wikipedia_instructions_step_4">4. Bu bölüm için Düzenle simgesine (kurşun kalem gibi) tıklayın.</string>
+  <string name="wikipedia_instructions_step_5">5. Vikimetin dosyasını uygun yere yapıştırın.</string>
+  <string name="wikipedia_instructions_step_6">6. Gerekirse vikimetini uygun konumlandırma için düzenleyin. Daha fazla bilgi için &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;buraya&lt;/a&gt; bakın.</string>
+  <string name="wikipedia_instructions_step_7">7. Maddeyi yayınlayın</string>
+  <string name="copy_wikicode_to_clipboard">Vikikodu panoya kopyala</string>
 </resources>

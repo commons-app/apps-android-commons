@@ -9,6 +9,24 @@
 * Patsagorn Y.
 -->
 <resources>
+  <string name="uploads_pending_notification_indicator">กำลังอัปโหลดไฟล์ %1$d ไฟล์</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">กำลังเริ่มอัปโหลด %1$d รายการ</item>
+    <item quantity="other">กำลังเริ่มอัปโหลด %1$d รายการ</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">การอัปโหลด %1$d รายการ</item>
+    <item quantity="other">การอัปโหลด %1$d รายการ</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">ภาพนี้จะอยู่ในสัญญาอนุญาต %1$s</item>
+    <item quantity="other">ภาะเหล่านี้จะอยู่อยู่ในสัญญาอนุญาติ %1$s</item>
+  </plurals>
   <string name="title_activity_explore">สำรวจ</string>
   <string name="navigation_item_explore">สำรวจ</string>
   <string name="preference_category_appearance">การแสดงผล</string>
@@ -40,7 +58,6 @@
   <string name="upload_progress_notification_title_finishing">กำลังเสร็จสิ้นการอัปโหลด %1$s</string>
   <string name="upload_failed_notification_title">การอัปโหลด %1$s ล้มเหลว</string>
   <string name="upload_failed_notification_subtitle">แตะเพื่อดู</string>
-  <string name="uploads_pending_notification_indicator">กำลังอัปโหลดไฟล์ %1$d ไฟล์</string>
   <string name="title_activity_contributions">การอัปโหลดล่าสุดของฉัน</string>
   <string name="contribution_state_queued">อยู่ในคิว</string>
   <string name="contribution_state_failed">ล้มเหลว</string>
@@ -72,19 +89,6 @@
   <string name="gps_disabled">GPS ถูกปิดใช้งานในอุปกรณ์ของคุณอยู่ คุณต้องการเปิดใช้งานหรือไม่?</string>
   <string name="enable_gps">เปิดใช้งาน GPS</string>
   <string name="contributions_subtitle_zero">ยังไม่มีการอัปโหลด</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">กำลังเริ่มอัปโหลด %1$d รายการ</item>
-    <item quantity="other">กำลังเริ่มอัปโหลด %1$d รายการ</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">การอัปโหลด %1$d รายการ</item>
-    <item quantity="other">การอัปโหลด %1$d รายการ</item>
-  </plurals>
   <string name="categories_not_found">ไม่พบหมวดหมู่ที่ตรงกับ %$1s</string>
   <string name="categories_skip_explanation">เพิ่มหมวดหมู่เพื่อทำให้รูปภาพของคุณค้นพบได้ง่ายขึ้นบนวิกิมีเดียคอมมอนส์\nเริ่มพิมพ์เพื่อเพิ่มหมวดหมู่</string>
   <string name="categories_activity_title">หมวดหมู่</string>
@@ -106,10 +110,6 @@
   <string name="no_uploads_yet">คุณยังไม่ได้อัปโหลดรูปภาพใดๆ</string>
   <string name="menu_retry_upload">ลองใหม่</string>
   <string name="menu_cancel_upload">ยกเลิก</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">ภาพนี้จะอยู่ในสัญญาอนุญาต %1$s</item>
-    <item quantity="other">ภาะเหล่านี้จะอยู่อยู่ในสัญญาอนุญาติ %1$s</item>
-  </plurals>
   <string name="media_upload_policy">โดยการส่งรูปภาพนี้ ฉันยืนยันว่านี่เป็นงานของฉันเอง ซึ่งไม่ประกอบด้วยเนื้อหาที่ละเมิดลิขสิทธิ์หรือภาพเซลฟี หรืออื่นๆ ตามที่ระบุใน&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;นโยบายของ Wikimedia Commons&lt;/a&gt;</string>
   <string name="menu_download">ดาวน์โหลด</string>
   <string name="preference_license">สัญญาอนุญาตปริยาย</string>

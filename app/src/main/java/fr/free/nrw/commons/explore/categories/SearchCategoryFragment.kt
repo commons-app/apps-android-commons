@@ -3,6 +3,7 @@ package fr.free.nrw.commons.explore.categories
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryDetailsActivity
 import fr.free.nrw.commons.explore.paging.BasePagingFragment
+
 import javax.inject.Inject
 
 /**

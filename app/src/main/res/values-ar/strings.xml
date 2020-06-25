@@ -20,6 +20,62 @@
 * مشعل الحربي
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="zero">%1$d ملف جاري رفعه</item>
+    <item quantity="one">%1$d ملف جاري رفعه</item>
+    <item quantity="two">%1$d ملف جاري رفعه</item>
+    <item quantity="few">%1$d ملف جاري رفعه</item>
+    <item quantity="many">%1$d ملف جاري رفعه</item>
+    <item quantity="other">%1$d ملفات جاري رفعها</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="two">(%1$d)</item>
+    <item quantity="few">(%1$d)</item>
+    <item quantity="many">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="zero">جارٍ بدء %1$d رفع</item>
+    <item quantity="one">جارٍ بدء %1$d رفع</item>
+    <item quantity="two">جارٍ بدء %1$d رفع</item>
+    <item quantity="few">جارٍ بدء %1$d رفع</item>
+    <item quantity="many">جارٍ بدء %1$d رفع</item>
+    <item quantity="other">جارٍ بدء %1$d مرفوعات</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="zero">%1$d رفع</item>
+    <item quantity="one">%1$d رفع</item>
+    <item quantity="two">%1$d رفع</item>
+    <item quantity="few">%1$d رفع</item>
+    <item quantity="many">%1$d رفع</item>
+    <item quantity="other">%1$d رفع</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="zero">سيتم ترخيص هذه الصور تحت %1$s</item>
+    <item quantity="one">سيتم ترخيص هذه الصورة تحت %1$s</item>
+    <item quantity="two">سيتم ترخيص هاتين الصورتين تحت ترخيص %1$s</item>
+    <item quantity="few">سيتم ترخيص هذه الصور تحت %1$s</item>
+    <item quantity="many">سيتم ترخيص هذه الصور تحت %1$s</item>
+    <item quantity="other">سيتم ترخيص هذه الصور تحت %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="zero">%1$d رفع</item>
+    <item quantity="one">%1$d رفع</item>
+    <item quantity="two">%1$d رفع</item>
+    <item quantity="few">%1$d رفع</item>
+    <item quantity="many">%1$d رفع</item>
+    <item quantity="other">%1$d مرفوعات</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="zero">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
+    <item quantity="one">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصورة بعض الوقت بناءً على حجم الصور وجهازك</item>
+    <item quantity="two">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
+    <item quantity="few">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
+    <item quantity="many">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
+    <item quantity="other">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
+  </plurals>
   <string name="title_activity_explore">استكشف</string>
   <string name="navigation_item_explore">استكشف</string>
   <string name="preference_category_appearance">المظهر</string>
@@ -51,14 +107,6 @@
   <string name="upload_progress_notification_title_finishing">اكتمال رفع %1$s</string>
   <string name="upload_failed_notification_title">فشل رفع %1$s</string>
   <string name="upload_failed_notification_subtitle">انقر لتشاهد</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="zero">%1$d ملف جاري رفعه</item>
-    <item quantity="one">%1$d ملف جاري رفعه</item>
-    <item quantity="two">%1$d ملف جاري رفعه</item>
-    <item quantity="few">%1$d ملف جاري رفعه</item>
-    <item quantity="many">%1$d ملف جاري رفعه</item>
-    <item quantity="other">%1$d ملفات جاري رفعها</item>
-  </plurals>
   <string name="title_activity_contributions">مرفوعاتي الأخيرة</string>
   <string name="contribution_state_queued">في قائمة الانتظار</string>
   <string name="contribution_state_failed">فشل</string>
@@ -93,30 +141,6 @@
   <string name="gps_disabled">عطل نظام الملاحة العالمي GPS بجهازك. أترغب في التنشيط؟</string>
   <string name="enable_gps">تفعيل GPS</string>
   <string name="contributions_subtitle_zero">لا مرفوعات بعد</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="two">(%1$d)</item>
-    <item quantity="few">(%1$d)</item>
-    <item quantity="many">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="zero">جارٍ بدء %1$d رفع</item>
-    <item quantity="one">جارٍ بدء %1$d رفع</item>
-    <item quantity="two">جارٍ بدء %1$d رفع</item>
-    <item quantity="few">جارٍ بدء %1$d رفع</item>
-    <item quantity="many">جارٍ بدء %1$d رفع</item>
-    <item quantity="other">جارٍ بدء %1$d مرفوعات</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="zero">%1$d رفع</item>
-    <item quantity="one">%1$d رفع</item>
-    <item quantity="two">%1$d رفع</item>
-    <item quantity="few">%1$d رفع</item>
-    <item quantity="many">%1$d رفع</item>
-    <item quantity="other">%1$d رفع</item>
-  </plurals>
   <string name="categories_not_found">لا توجد تصنيفات تطابق %1$s</string>
   <string name="depictions_not_found">لا توجد عناصر ويكيداتا مطابقة ل   s$%1</string>
   <string name="no_child_classes">%1$s لا يملك تصنيف الأطفال</string>
@@ -143,14 +167,6 @@
   <string name="no_uploads_yet">لم ترفع بعد أية صور.</string>
   <string name="menu_retry_upload">إعادة المحاولة</string>
   <string name="menu_cancel_upload">إلغاء</string>
-  <plurals name="share_license_summary">
-    <item quantity="zero">سيتم ترخيص هذه الصور تحت %1$s</item>
-    <item quantity="one">سيتم ترخيص هذه الصورة تحت %1$s</item>
-    <item quantity="two">سيتم ترخيص هاتين الصورتين تحت ترخيص %1$s</item>
-    <item quantity="few">سيتم ترخيص هذه الصور تحت %1$s</item>
-    <item quantity="many">سيتم ترخيص هذه الصور تحت %1$s</item>
-    <item quantity="other">سيتم ترخيص هذه الصور تحت %1$s</item>
-  </plurals>
   <string name="media_upload_policy">بتقديم هذه الصورة، أعلن أن هذا عملي الخاص، وأنه لا يحتوي على مواد محفوظة الحقوق أو صور شخصية، وغير ذلك يلتزم &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;بسياسات ويكيميديا ​​كومنز&lt;/a&gt;.</string>
   <string name="menu_download">نزّل</string>
   <string name="preference_license">الرخصة الافتراضية</string>
@@ -445,14 +461,6 @@
   <string name="submit">إرسال</string>
   <string name="upload_title_duplicate">يوجد ملف باسم الملف %1$s، هل أنت متأكد أنك تريد المتابعة؟</string>
   <string name="map_application_missing">لا يمكن العثور على تطبيق خرائط متوافق على جهازك; الرجاء تثبيت تطبيق خرائط لاستخدام هذه الميزة.</string>
-  <plurals name="upload_count_title">
-    <item quantity="zero">%1$d رفع</item>
-    <item quantity="one">%1$d رفع</item>
-    <item quantity="two">%1$d رفع</item>
-    <item quantity="few">%1$d رفع</item>
-    <item quantity="many">%1$d رفع</item>
-    <item quantity="other">%1$d مرفوعات</item>
-  </plurals>
   <string name="navigation_item_bookmarks">العلامات</string>
   <string name="title_activity_bookmarks">العلامات</string>
   <string name="title_page_bookmarks_pictures">الصور</string>
@@ -540,14 +548,6 @@
   <string name="review_thanks_no_button_text">الصورة التالية</string>
   <string name="skip_image_explanation">النقر فوق هذا الزر سيمنحك صورة أخرى مرفوعة مؤخرا من ويكيميديا ​​كومنز</string>
   <string name="review_image_explanation">يمكنك مراجعة الصور وتحسين جودة ويكيميديا ​​كومنز.\n وسائط اللمراجعة الأربعة هي:\n - هل هذه الصورة في النطاق؟\n - هل تتبع هذه الصورة قواعد حقوق النشر؟\n - هل هذه الصورة مصنفة بشكل صحيح؟\n - إذا سارت الأمور على ما يرام يمكنك أيضا شكر المساهم.</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="zero">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
-    <item quantity="one">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصورة بعض الوقت بناءً على حجم الصور وجهازك</item>
-    <item quantity="two">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
-    <item quantity="few">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
-    <item quantity="many">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
-    <item quantity="other">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
-  </plurals>
   <string name="no_image">لا صور مستخدمة</string>
   <string name="no_image_reverted">لم يتم إرجاع أية صور</string>
   <string name="no_image_uploaded">لا توجد صور مرفوعة</string>
@@ -637,4 +637,8 @@
   <string name="use_location_from_similar_image">هل قمت بتصوير هاتين الصورتين في نفس المكان؟ هل تريد استخدام دائرة العرض / خط الطول للصورة على اليمين؟</string>
   <string name="load_more">تحميل المزيد</string>
   <string name="nearby_no_results">لم يتم العثور على أي أماكن، جرب تغيير محددات بحثك.</string>
+  <string name="add_picture_to_wikipedia_article_title">أضف صورة إلى ويكيبيديا</string>
+  <string name="add_picture_to_wikipedia_instructions_title">التعليمات</string>
+  <string name="confirm">تأكيد</string>
+  <string name="instructions_title">التعليمات</string>
 </resources>
