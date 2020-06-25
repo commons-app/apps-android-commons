@@ -4,20 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.FrameLayout;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
-
-import com.google.android.material.tabs.TabLayout;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.depictions.Media.DepictedImagesFragment;
@@ -26,11 +19,13 @@ import fr.free.nrw.commons.explore.ViewPagerAdapter;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Activity to show depiction media, parent classes and child classes of depicted items in Explore
  */
-public class WikidataItemDetailsActivity extends NavigationBaseActivity implements MediaDetailPagerFragment.MediaDetailProvider, AdapterView.OnItemClickListener {
+public class WikidataItemDetailsActivity extends NavigationBaseActivity implements MediaDetailPagerFragment.MediaDetailProvider {
     private FragmentManager supportFragmentManager;
     private DepictedImagesFragment depictionImagesListFragment;
     private MediaDetailPagerFragment mediaDetailPagerFragment;
@@ -121,11 +116,11 @@ public class WikidataItemDetailsActivity extends NavigationBaseActivity implemen
 
     }
 
+
     /**
      * Shows media detail fragment when user clicks on any image in the list
      */
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onMediaClicked(int position) {
         tabLayout.setVisibility(View.GONE);
         viewPager.setVisibility(View.GONE);
         mediaContainer.setVisibility(View.VISIBLE);
@@ -152,12 +147,7 @@ public class WikidataItemDetailsActivity extends NavigationBaseActivity implemen
      */
     @Override
     public Media getMediaAtPosition(int i) {
-        if (depictionImagesListFragment.getAdapter() == null) {
-            // not yet ready to return data
-            return null;
-        } else {
-            return (Media) depictionImagesListFragment.getAdapter().getItem(i);
-        }
+        return depictionImagesListFragment.getImageAtPosition(i);
     }
 
     /**
@@ -182,10 +172,7 @@ public class WikidataItemDetailsActivity extends NavigationBaseActivity implemen
      */
     @Override
     public int getTotalMediaCount() {
-        if (depictionImagesListFragment.getAdapter() == null) {
-            return 0;
-        }
-        return depictionImagesListFragment.getAdapter().getCount();
+        return depictionImagesListFragment.getTotalImagesCount();
     }
 
     /**

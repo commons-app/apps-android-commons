@@ -10,17 +10,17 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-class PageableDataSourceTest {
+class PageableBaseDataSourceTest {
 
     @Mock
     private lateinit var liveDataConverter: LiveDataConverter
 
-    private lateinit var pageableDataSource: PageableDataSource<String>
+    private lateinit var pageableBaseDataSource: PageableBaseDataSource<String>
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        pageableDataSource = object: PageableDataSource<String>(liveDataConverter){
+        pageableBaseDataSource = object: PageableBaseDataSource<String>(liveDataConverter){
             override val loadFunction: LoadFunction<String>
                 get() = mock()
 
@@ -30,16 +30,16 @@ class PageableDataSourceTest {
     @Test
     fun `onQueryUpdated emits new liveData`() {
         val (_, liveData) = expectNewLiveData()
-        pageableDataSource.searchResults.test()
-            .also { pageableDataSource.onQueryUpdated("test") }
+        pageableBaseDataSource.pagingResults.test()
+            .also { pageableBaseDataSource.onQueryUpdated("test") }
             .assertValue(liveData)
     }
 
     @Test
     fun `onQueryUpdated invokes livedatconverter with no items emitter`() {
         val (zeroItemsFuncCaptor, _) = expectNewLiveData()
-        pageableDataSource.onQueryUpdated("test")
-        pageableDataSource.noItemsLoadedQueries.test()
+        pageableBaseDataSource.onQueryUpdated("test")
+        pageableBaseDataSource.noItemsLoadedQueries.test()
             .also { zeroItemsFuncCaptor.firstValue.invoke() }
             .assertValue("test")
     }
@@ -49,22 +49,22 @@ class PageableDataSourceTest {
     * */
     @Test
     fun `retryFailedRequest does nothing without a factory`() {
-        pageableDataSource.retryFailedRequest()
+        pageableBaseDataSource.retryFailedRequest()
     }
 
     @Test
     @Ignore("Rewrite with Mockk constructor mocks")
     fun `retryFailedRequest retries with a factory`() {
         val (_, _, dataSourceFactoryCaptor) = expectNewLiveData()
-        pageableDataSource.onQueryUpdated("test")
+        pageableBaseDataSource.onQueryUpdated("test")
         val dataSourceFactory = spy(dataSourceFactoryCaptor.firstValue)
-        pageableDataSource.retryFailedRequest()
+        pageableBaseDataSource.retryFailedRequest()
         verify(dataSourceFactory).retryFailedRequest()
     }
 
-    private fun expectNewLiveData(): Triple<KArgumentCaptor<() -> Unit>, LiveData<PagedList<String>>, KArgumentCaptor<SearchDataSourceFactory<String>>> {
+    private fun expectNewLiveData(): Triple<KArgumentCaptor<() -> Unit>, LiveData<PagedList<String>>, KArgumentCaptor<PagingDataSourceFactory<String>>> {
         val captor = argumentCaptor<() -> Unit>()
-        val dataSourceFactoryCaptor = argumentCaptor<SearchDataSourceFactory<String>>()
+        val dataSourceFactoryCaptor = argumentCaptor<PagingDataSourceFactory<String>>()
         val liveData: LiveData<PagedList<String>> = mock()
         whenever(liveDataConverter.convert(dataSourceFactoryCaptor.capture(), captor.capture()))
             .thenReturn(liveData)

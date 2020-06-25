@@ -269,9 +269,7 @@ public class SearchActivity extends NavigationBaseActivity
      */
     @Override
     public void requestMoreImages() {
-        if (searchMediaFragment!=null){
-            searchMediaFragment.requestMoreImages();
-        }
+        //unneeded
     }
 
     @Override protected void onDestroy() {

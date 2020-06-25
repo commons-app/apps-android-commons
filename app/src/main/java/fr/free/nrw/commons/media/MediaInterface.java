@@ -117,14 +117,14 @@ public interface MediaInterface {
 
     /**
      * Fetches list of images from a depiction entity
-     *
-     * @param query depictionEntityId
+     *  @param query depictionEntityId
+     * @param srlimit the number of items to fetch
      * @param sroffset number od depictions already fetched, this is useful in implementing pagination
      */
-
     @GET("w/api.php?action=query&format=json&formatversion=2" + //Basic parameters
         "&generator=search&gsrnamespace=6" + //Search parameters
         MEDIA_PARAMS)
-    Single<MwQueryResponse> fetchImagesForDepictedItem(@Query("gsrsearch") String query, @Query("gsroffset") String sroffset);
+    Single<MwQueryResponse> fetchImagesForDepictedItem(@Query("gsrsearch") String query,
+        @Query("gsrlimit")String srlimit, @Query("gsroffset") String sroffset);
 
 }

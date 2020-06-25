@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.explore.categories
 
-import fr.free.nrw.commons.explore.SearchFragmentContract
+import fr.free.nrw.commons.explore.PagingContract
 
 interface SearchCategoriesFragmentContract {
-    interface View : SearchFragmentContract.View<String>
-    interface Presenter : SearchFragmentContract.Presenter<String>
+    interface View : PagingContract.View<String>
+    interface Presenter : PagingContract.Presenter<String>
 }

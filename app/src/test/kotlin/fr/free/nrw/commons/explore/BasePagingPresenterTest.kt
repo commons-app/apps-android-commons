@@ -15,21 +15,21 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-class BaseSearchPresenterTest {
+class BasePagingPresenterTest {
 
     @Rule
     @JvmField
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Mock
-    internal lateinit var view: SearchFragmentContract.View<String>
+    internal lateinit var view: PagingContract.View<String>
 
-    private lateinit var baseSearchPresenter: BaseSearchPresenter<String>
+    private lateinit var basePagingPresenter: BasePagingPresenter<String>
 
     private lateinit var testScheduler: TestScheduler
 
     @Mock
-    private lateinit var pageableDataSource: PageableDataSource<String>
+    private lateinit var pageableBaseDataSource: PageableBaseDataSource<String>
 
     private var loadingStates: PublishProcessor<LoadingState> = PublishProcessor.create()
 
@@ -42,34 +42,34 @@ class BaseSearchPresenterTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        whenever(pageableDataSource.searchResults).thenReturn(searchResults)
-        whenever(pageableDataSource.loadingStates).thenReturn(loadingStates)
-        whenever(pageableDataSource.noItemsLoadedQueries)
+        whenever(pageableBaseDataSource.pagingResults).thenReturn(searchResults)
+        whenever(pageableBaseDataSource.loadingStates).thenReturn(loadingStates)
+        whenever(pageableBaseDataSource.noItemsLoadedQueries)
             .thenReturn(noItemLoadedQueries)
         testScheduler = TestScheduler()
-        baseSearchPresenter =
-            object : BaseSearchPresenter<String>(testScheduler, pageableDataSource) {}
-        baseSearchPresenter.onAttachView(view)
+        basePagingPresenter =
+            object : BasePagingPresenter<String>(testScheduler, pageableBaseDataSource) {}
+        basePagingPresenter.onAttachView(view)
     }
 
     @Test
     fun `searchResults emission updates the view`() {
         val pagedListLiveData = mock<LiveData<PagedList<String>>>()
         searchResults.offer(pagedListLiveData)
-        verify(view).observeSearchResults(pagedListLiveData)
+        verify(view).observePagingResults(pagedListLiveData)
     }
 
     @Test
     fun `Loading offers a loading list item`() {
         onLoadingState(LoadingState.Loading)
         verify(view).hideEmptyText()
-        baseSearchPresenter.listFooterData.test().assertValue(listOf(FooterItem.LoadingItem))
+        basePagingPresenter.listFooterData.test().assertValue(listOf(FooterItem.LoadingItem))
     }
 
     @Test
     fun `Complete offers an empty list item and hides initial loader`() {
         onLoadingState(LoadingState.Complete)
-        baseSearchPresenter.listFooterData.test()
+        basePagingPresenter.listFooterData.test()
             .assertValue(emptyList())
         verify(view).hideInitialLoadProgress()
     }
@@ -83,11 +83,11 @@ class BaseSearchPresenterTest {
 
     @Test
     fun `Error offers a refresh list item, hides initial loader and shows error with a set text`() {
-        baseSearchPresenter.onQueryUpdated("test")
+        basePagingPresenter.onQueryUpdated("test")
         onLoadingState(LoadingState.Error)
         verify(view).showSnackbar()
         verify(view).hideInitialLoadProgress()
-        baseSearchPresenter.listFooterData.test().assertValue(listOf(FooterItem.RefreshItem))
+        basePagingPresenter.listFooterData.test().assertValue(listOf(FooterItem.RefreshItem))
     }
 
     @Test
@@ -98,21 +98,21 @@ class BaseSearchPresenterTest {
 
     @Test
     fun `retryFailedRequest calls retry`() {
-        baseSearchPresenter.retryFailedRequest()
-        verify(pageableDataSource).retryFailedRequest()
+        basePagingPresenter.retryFailedRequest()
+        verify(pageableBaseDataSource).retryFailedRequest()
     }
 
     @Test
     fun `onDetachView stops subscriptions`() {
-        baseSearchPresenter.onDetachView()
+        basePagingPresenter.onDetachView()
         onLoadingState(LoadingState.Loading)
-        baseSearchPresenter.listFooterData.test().assertValue(emptyList())
+        basePagingPresenter.listFooterData.test().assertValue(emptyList())
     }
 
     @Test
     fun `onQueryUpdated updates dataSourceFactory`() {
-        baseSearchPresenter.onQueryUpdated("test")
-        verify(pageableDataSource).onQueryUpdated("test")
+        basePagingPresenter.onQueryUpdated("test")
+        verify(pageableBaseDataSource).onQueryUpdated("test")
     }
 
     private fun onLoadingState(loadingState: LoadingState) {

@@ -20,12 +20,11 @@ import fr.free.nrw.commons.utils.ViewUtil
 import kotlinx.android.synthetic.main.fragment_search_paginated.*
 
 
-abstract class BaseSearchFragment<T> : CommonsDaggerSupportFragment(),
-    SearchFragmentContract.View<T> {
+abstract class BasePagingFragment<T> : CommonsDaggerSupportFragment(),
+    PagingContract.View<T> {
 
     abstract val pagedListAdapter: PagedListAdapter<T, *>
-    abstract val injectedPresenter: SearchFragmentContract.Presenter<T>
-    abstract val emptyTemplateTextId: Int
+    abstract val injectedPresenter: PagingContract.Presenter<T>
     abstract val errorTextId: Int
     private val loadingAdapter by lazy { FooterAdapter { injectedPresenter.retryFailedRequest() } }
     private val mergeAdapter by lazy { MergeAdapter(pagedListAdapter, loadingAdapter) }
@@ -49,18 +48,18 @@ abstract class BaseSearchFragment<T> : CommonsDaggerSupportFragment(),
         )
     }
 
-    override fun observeSearchResults(searchResults: LiveData<PagedList<T>>) {
+    override fun observePagingResults(searchResults: LiveData<PagedList<T>>) {
         this.searchResults?.removeObservers(viewLifecycleOwner)
         this.searchResults = searchResults
         searchResults.observe(viewLifecycleOwner, Observer {
-            pagedListAdapter.submitList(it) })
+            pagedListAdapter.submitList(it)
+        })
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         injectedPresenter.onAttachView(this)
     }
-
 
     override fun onDetach() {
         super.onDetach()
@@ -84,9 +83,11 @@ abstract class BaseSearchFragment<T> : CommonsDaggerSupportFragment(),
     }
 
     override fun showEmptyText(query: String) {
-        contentNotFound.text = getString(emptyTemplateTextId, query)
+        contentNotFound.text = getEmptyText(query)
         contentNotFound.visibility = VISIBLE
     }
+
+    abstract fun getEmptyText(query: String): String
 
     override fun hideEmptyText() {
         contentNotFound.visibility = GONE
