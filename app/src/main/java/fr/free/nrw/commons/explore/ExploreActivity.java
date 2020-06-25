@@ -18,7 +18,7 @@ import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
-import fr.free.nrw.commons.category.CategoryImagesListFragment;
+import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import java.util.ArrayList;
@@ -34,8 +34,8 @@ public class ExploreActivity
         implements MediaDetailPagerFragment.MediaDetailProvider,
         AdapterView.OnItemClickListener, CategoryImagesCallback {
 
-    private static final String FEATURED_IMAGES_CATEGORY = "Category:Featured_pictures_on_Wikimedia_Commons";
-    private static final String MOBILE_UPLOADS_CATEGORY = "Category:Uploaded_with_Mobile/Android";
+    private static final String FEATURED_IMAGES_CATEGORY = "Featured_pictures_on_Wikimedia_Commons";
+    private static final String MOBILE_UPLOADS_CATEGORY = "Uploaded_with_Mobile/Android";
 
 
     @BindView(R.id.mediaContainer)
@@ -47,8 +47,8 @@ public class ExploreActivity
     ViewPagerAdapter viewPagerAdapter;
     private FragmentManager supportFragmentManager;
     private MediaDetailPagerFragment mediaDetails;
-    private CategoryImagesListFragment mobileImagesListFragment;
-    private CategoryImagesListFragment featuredImagesListFragment;
+    private CategoriesMediaFragment mobileImagesListFragment;
+    private CategoriesMediaFragment featuredImagesListFragment;
 
     /**
      * Consumers should be simply using this method to use this activity.
@@ -83,14 +83,14 @@ public class ExploreActivity
         List<Fragment> fragmentList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
 
-        featuredImagesListFragment = new CategoryImagesListFragment();
+        featuredImagesListFragment = new CategoriesMediaFragment();
         Bundle featuredArguments = new Bundle();
         featuredArguments.putString("categoryName", FEATURED_IMAGES_CATEGORY);
         featuredImagesListFragment.setArguments(featuredArguments);
         fragmentList.add(featuredImagesListFragment);
         titleList.add(getString(R.string.explore_tab_title_featured).toUpperCase());
 
-        mobileImagesListFragment = new CategoryImagesListFragment();
+        mobileImagesListFragment = new CategoriesMediaFragment();
         Bundle mobileArguments = new Bundle();
         mobileArguments.putString("categoryName", MOBILE_UPLOADS_CATEGORY);
         mobileImagesListFragment.setArguments(mobileArguments);
@@ -110,10 +110,10 @@ public class ExploreActivity
      */
     @Override
     public Media getMediaAtPosition(int i) {
-        if (mobileImagesListFragment.getAdapter() != null && tabLayout.getSelectedTabPosition() == 1) {
-            return (Media) mobileImagesListFragment.getAdapter().getItem(i);
-        } else if (featuredImagesListFragment.getAdapter() != null && tabLayout.getSelectedTabPosition() == 0) {
-            return (Media) featuredImagesListFragment.getAdapter().getItem(i);
+        if (tabLayout.getSelectedTabPosition() == 1) {
+            return mobileImagesListFragment.getMediaAtPosition(i);
+        } else if (tabLayout.getSelectedTabPosition() == 0) {
+            return featuredImagesListFragment.getMediaAtPosition(i);
         } else {
             return null;
         }
@@ -127,10 +127,10 @@ public class ExploreActivity
      */
     @Override
     public int getTotalMediaCount() {
-        if (mobileImagesListFragment.getAdapter() != null && tabLayout.getSelectedTabPosition() == 1) {
-            return mobileImagesListFragment.getAdapter().getCount();
-        } else if (featuredImagesListFragment.getAdapter() != null && tabLayout.getSelectedTabPosition() == 0) {
-            return featuredImagesListFragment.getAdapter().getCount();
+        if (tabLayout.getSelectedTabPosition() == 1) {
+            return mobileImagesListFragment.getTotalMediaCount();
+        } else if (tabLayout.getSelectedTabPosition() == 0) {
+            return featuredImagesListFragment.getTotalMediaCount();
         } else {
             return 0;
         }
@@ -170,11 +170,7 @@ public class ExploreActivity
      */
     @Override
     public void requestMoreImages() {
-        if (mobileImagesListFragment != null && tabLayout.getSelectedTabPosition() == 1) {
-            mobileImagesListFragment.fetchMoreImagesViewPager();
-        } else if (featuredImagesListFragment != null && tabLayout.getSelectedTabPosition() == 0) {
-            featuredImagesListFragment.fetchMoreImagesViewPager();
-        }
+        //unneeded
     }
 
     /**

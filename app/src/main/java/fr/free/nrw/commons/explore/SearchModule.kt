@@ -2,8 +2,8 @@ package fr.free.nrw.commons.explore
 
 import dagger.Binds
 import dagger.Module
-import fr.free.nrw.commons.explore.categories.SearchCategoriesFragmentPresenter
-import fr.free.nrw.commons.explore.categories.SearchCategoriesFragmentPresenterImpl
+import fr.free.nrw.commons.explore.categories.search.SearchCategoriesFragmentPresenter
+import fr.free.nrw.commons.explore.categories.search.SearchCategoriesFragmentPresenterImpl
 import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragmentPresenter
 import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragmentPresenterImpl
 import fr.free.nrw.commons.explore.media.SearchMediaFragmentPresenter

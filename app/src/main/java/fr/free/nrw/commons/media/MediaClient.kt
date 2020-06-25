@@ -13,6 +13,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 const val PAGE_ID_PREFIX = "M"
+const val CATEGORY_CONTINUATION_PREFIX = "category_"
 
 /**
  * Media Client to handle custom calls to Commons MediaWiki APIs
@@ -61,14 +62,19 @@ class MediaClient @Inject constructor(
      * @return
      */
     fun getMediaListFromCategory(category: String): Single<List<Media>> {
-        return responseToMediaList(
-            mediaInterface.getMediaListFromCategory(
-                category,
-                10,
-                continuationStore["category_$category"] ?: emptyMap()
-            ),
-            "category_$category"
-        )
+        val key = "$CATEGORY_CONTINUATION_PREFIX$category"
+        return if (hasMorePagesFor(key)) {
+            responseToMediaList(
+                mediaInterface.getMediaListFromCategory(
+                    category,
+                    10,
+                    continuationStore[key] ?: emptyMap()
+                ),
+                key
+            )
+        } else {
+            Single.just(emptyList())
+        }
     }
 
     /**
@@ -144,7 +150,11 @@ class MediaClient @Inject constructor(
             getEntities(pages.map { "$PAGE_ID_PREFIX${it.pageId()}" })
                 .map {
                     pages.zip(it.entities().values)
-                        .map { (page, entity) -> mediaConverter.convert(page, entity) }
+                        .mapNotNull { (page, entity) ->
+                            page.imageInfo()?.let {
+                                mediaConverter.convert(page, entity, it)
+                            }
+                        }
                 }
     }
 
@@ -189,12 +199,17 @@ class MediaClient @Inject constructor(
      * @return
      */
     fun doesMediaListForUserHaveMorePages(userName: String): Boolean {
-        val key = "user_$userName"
-        return if (continuationExists.containsKey(key)) continuationExists[key]!! else true
+        return hasMorePagesFor("user_$userName")
     }
+
+    private fun hasMorePagesFor(key: String) = continuationExists[key] ?: true
 
     fun doesPageContainMedia(title: String?): Single<Boolean> {
         return pageMediaInterface.getMediaList(title)
             .map { it.items.isNotEmpty() }
+    }
+
+    fun resetCategoryContinuation(category: String) {
+        continuationExists.remove("$CATEGORY_CONTINUATION_PREFIX$category")
     }
 }

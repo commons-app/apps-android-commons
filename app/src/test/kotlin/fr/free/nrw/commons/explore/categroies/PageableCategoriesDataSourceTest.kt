@@ -3,7 +3,7 @@ package fr.free.nrw.commons.explore.categroies
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.category.CategoryClient
-import fr.free.nrw.commons.explore.categories.PageableCategoriesDataSource
+import fr.free.nrw.commons.explore.categories.search.PageableCategoriesDataSource
 import io.reactivex.Observable
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers

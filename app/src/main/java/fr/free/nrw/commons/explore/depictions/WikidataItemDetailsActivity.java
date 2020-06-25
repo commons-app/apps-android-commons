@@ -143,7 +143,7 @@ public class WikidataItemDetailsActivity extends NavigationBaseActivity implemen
      */
     @Override
     public Media getMediaAtPosition(int i) {
-        return depictionImagesListFragment.getImageAtPosition(i);
+        return depictionImagesListFragment.getMediaAtPosition(i);
     }
 
     /**
@@ -168,7 +168,7 @@ public class WikidataItemDetailsActivity extends NavigationBaseActivity implemen
      */
     @Override
     public int getTotalMediaCount() {
-        return depictionImagesListFragment.getTotalImagesCount();
+        return depictionImagesListFragment.getTotalMediaCount();
     }
 
     /**

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.explore.depictions.child
 
+import com.nhaarman.mockitokotlin2.verifyZeroInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import depictedItem
 import fr.free.nrw.commons.explore.paging.LiveDataConverter

@@ -164,7 +164,9 @@ class MediaClientTest {
         val entity: Entities.Entity = mock()
         whenever(entities.entities()).thenReturn(mapOf("id" to entity))
         val media: Media = mock()
-        whenever(mediaConverter!!.convert(queryPage, entity)).thenReturn(media)
+        val imageInfo = mock<ImageInfo>()
+        whenever(queryPage.imageInfo()).thenReturn(imageInfo)
+        whenever(mediaConverter!!.convert(queryPage, entity, imageInfo)).thenReturn(media)
         return Pair(mockResponse, media)
     }
 

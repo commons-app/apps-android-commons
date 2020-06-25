@@ -31,12 +31,12 @@ abstract class PageableMediaFragment : BasePagingFragment<Media>() {
         pagedListAdapter.unregisterAdapterDataObserver(simpleDataObserver)
     }
 
-    fun getImageAtPosition(position: Int): Media? =
+    fun getMediaAtPosition(position: Int): Media? =
         pagedListAdapter.currentList?.get(position)?.takeIf { it.filename != null }
             .also {
                 pagedListAdapter.currentList?.loadAround(position)
                 paginatedSearchResultsList.scrollToPosition(position)
             }
 
-    fun getTotalImagesCount(): Int = pagedListAdapter.itemCount
+    fun getTotalMediaCount(): Int = pagedListAdapter.itemCount
 }
