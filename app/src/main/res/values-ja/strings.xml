@@ -18,6 +18,31 @@
 * 神樂坂秀吉
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="other">%1$d 件のファイルをアップロード中</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d件のアップロード)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="other">%1$d 件のアップロードを開始中</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="other">%1$d 件のアップロード</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">この画像は%1$sライセンスのもとにアップロードされます</item>
+    <item quantity="other">これらの画像は%1$sライセンスのもとにアップロードされます</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="other">%1$d 件のアップロード</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">共有コンテンツを受信中です。 この画像の投稿の処理には、サイズやご使用の機器により時間がかかる事があります</item>
+    <item quantity="other">共有コンテンツの受信中です。投稿画像の処理には、サイズやご使用の機器により時間がかかる事があります</item>
+  </plurals>
   <string name="title_activity_explore">探してみよう</string>
   <string name="navigation_item_explore">探してみよう</string>
   <string name="preference_category_appearance">表示</string>
@@ -49,9 +74,6 @@
   <string name="upload_progress_notification_title_finishing">%1$s のアップロードを完了中</string>
   <string name="upload_failed_notification_title">%1$s のアップロードに失敗しました</string>
   <string name="upload_failed_notification_subtitle">閲覧するにはタップしてください</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="other">%1$d 件のファイルをアップロード中</item>
-  </plurals>
   <string name="title_activity_contributions">自分の最近のアップロードファイル</string>
   <string name="contribution_state_queued">順番待ち中</string>
   <string name="contribution_state_failed">失敗しました</string>
@@ -86,17 +108,6 @@
   <string name="gps_disabled">お使いのデバイスではGPSが無効になっています。有効にしますか?</string>
   <string name="enable_gps">GPSを有効にする</string>
   <string name="contributions_subtitle_zero">まだ何もアップロードされていません。</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d件のアップロード)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="other">%1$d 件のアップロードを開始中</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="other">%1$d 件のアップロード</item>
-  </plurals>
   <string name="categories_not_found">%1$s に一致するカテゴリが見つかりません</string>
   <string name="depictions_not_found">%1$s に一致する項目が見つかりません</string>
   <string name="no_child_classes">%1$s に子のクラスはありません</string>
@@ -121,10 +132,6 @@
   <string name="no_uploads_yet">まだ写真をアップロードしていません。</string>
   <string name="menu_retry_upload">再試行</string>
   <string name="menu_cancel_upload">キャンセル</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">この画像は%1$sライセンスのもとにアップロードされます</item>
-    <item quantity="other">これらの画像は%1$sライセンスのもとにアップロードされます</item>
-  </plurals>
   <string name="media_upload_policy">この画像の投稿に当たり、私はこれが自分自身の作品であり、著作権のあるコンテンツや自撮りは含まれていないと宣言します。</string>
   <string name="menu_download">ダウンロード</string>
   <string name="preference_license">既定のライセンス</string>
@@ -409,9 +416,6 @@
   <string name="submit">送信</string>
   <string name="upload_title_duplicate">%1$s という題名のファイルはすでに保存されています。処理をほんとうに続けますか？</string>
   <string name="map_application_missing">お使いの機器に適したアプリが見つかりませんでした。この機能を使用できる地図アプリをインストールしてください。</string>
-  <plurals name="upload_count_title">
-    <item quantity="other">%1$d 件のアップロード</item>
-  </plurals>
   <string name="navigation_item_bookmarks">ブックマーク</string>
   <string name="title_activity_bookmarks">ブックマーク</string>
   <string name="title_page_bookmarks_pictures">画像</string>
@@ -496,10 +500,6 @@
   <string name="review_thanks_no_button_text">次の画像</string>
   <string name="skip_image_explanation">このボタンをクリックすると、ウィキメディアコモンズに最近、投稿された別の写真をお見せします</string>
   <string name="review_image_explanation">ウィキメディアコモンズの質を高めるため、画像のレビューをお願いします。\nレビューの指針は4点あります。\n - これはコモンズの目的に合っていますか？\n - 著作権のルールをきちんと守っていますか？\n - カテゴリは正しいですか？\n - これらの条件をクリアしたら、投稿者に感謝を送信しませんか。</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">共有コンテンツを受信中です。 この画像の投稿の処理には、サイズやご使用の機器により時間がかかる事があります</item>
-    <item quantity="other">共有コンテンツの受信中です。投稿画像の処理には、サイズやご使用の機器により時間がかかる事があります</item>
-  </plurals>
   <string name="no_image">使用された画像はありません</string>
   <string name="no_image_reverted">却下された画像はありません</string>
   <string name="no_image_uploaded">投稿した画像はありません</string>

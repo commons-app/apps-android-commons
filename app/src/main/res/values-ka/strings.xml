@@ -5,6 +5,24 @@
 * Mehman97
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d ფაილი იტვირთება</item>
+    <item quantity="other">%1$d ფაილი იტვირთება</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d ატვირთვა</item>
+    <item quantity="other">%1$d ატვირთვა</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">იწყება %1$d ატვირთვა</item>
+    <item quantity="other">იწყება %1$d ატვირთვა</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d ატვირთვა</item>
+    <item quantity="other">%1$d ატვირთვები</item>
+  </plurals>
+  <string name="share_license_summary">ეს სურათი გავრცელდება %1$s ლიცენზიით</string>
   <string name="title_activity_explore">აღმოაჩინე</string>
   <string name="navigation_item_explore">აღმოაჩინე</string>
   <string name="preference_category_appearance">იერსახე</string>
@@ -36,10 +54,6 @@
   <string name="upload_progress_notification_title_finishing">ატვირთვის დასრულება %1$</string>
   <string name="upload_failed_notification_title">%1$ ატვირთვა ვერ მოხერხდა</string>
   <string name="upload_failed_notification_subtitle">დააჭირეთ სანახავად</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d ფაილი იტვირთება</item>
-    <item quantity="other">%1$d ფაილი იტვირთება</item>
-  </plurals>
   <string name="title_activity_contributions">ჩემი ბოლო ატვირთვები</string>
   <string name="contribution_state_queued">რიგი</string>
   <string name="contribution_state_failed">ვერ მოხერხდა</string>
@@ -71,19 +85,6 @@
   <string name="gps_disabled">თქვენ მოწყობილობაზე GPS გამორთულია. ნამდვილად გსურთ ჩართვა?</string>
   <string name="enable_gps">GPS-ის ჩართვა</string>
   <string name="contributions_subtitle_zero">ატვირთვები არ არის</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d ატვირთვა</item>
-    <item quantity="other">%1$d ატვირთვა</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">იწყება %1$d ატვირთვა</item>
-    <item quantity="other">იწყება %1$d ატვირთვა</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d ატვირთვა</item>
-    <item quantity="other">%1$d ატვირთვები</item>
-  </plurals>
   <string name="categories_not_found">შესატყვისი კატეგორიები „%1$s“ ვერ მოიძებნა</string>
   <string name="categories_skip_explanation">დაამატეთ კატეგორიები, რომ თქვენი სურათები უფრო აღმოსაჩენი იყოს ვიკისაწყობში.\nდაიწყეთ წერა კატეგორიების დასამატებლად.</string>
   <string name="categories_activity_title">კატეგორია</string>
@@ -104,7 +105,6 @@
   <string name="no_uploads_yet">თქვენ ჯერ არცერთი ფოტო არ აგიტვირთავთ.</string>
   <string name="menu_retry_upload">გამეორება</string>
   <string name="menu_cancel_upload">გაუქმება</string>
-  <string name="share_license_summary">ეს სურათი გავრცელდება %1$s ლიცენზიით</string>
   <string name="media_upload_policy">ამ სურათის ატვირთვით ვაცხადებ, რომ ეს ჩემი პირადი ნამუშევარია და არ შეიცავს საავტორო უფლებებით დაცულ მასალებს ან სელფის, სხვა შემთხვევაში ის პასუხობს &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;ვიკისაწყობის პოლიტიკას&lt;/a&gt;.</string>
   <string name="menu_download">ჩამოტვირთვა</string>
   <string name="preference_license">ნაგულისხმევი ლიცენზია</string>

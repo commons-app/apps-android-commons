@@ -30,6 +30,35 @@
 * Wizardeck
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Cargando %1$d archivo</item>
+    <item quantity="other">Cargando %1$d archivos</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Iniciando %1$d carga</item>
+    <item quantity="other">Iniciando %1$d cargas</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d carga</item>
+    <item quantity="other">%1$d cargas</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Esta imagen se publicará bajo la licencia %1$s</item>
+    <item quantity="other">Estas imágenes se publicarán bajo la licencia %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d Subida</item>
+    <item quantity="other">%1$d Subidas</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Recepción de contenido compartido. El procesamiento de la imagen puede tardar cierto tiempo, dependiendo del tamaño de la imagen y de tu dispositivo</item>
+    <item quantity="other">Recepción de contenido compartido. El procesamiento de las imágenes puede tardar cierto tiempo, dependiendo del tamaño de las imágenes y de tu dispositivo</item>
+  </plurals>
   <string name="title_activity_explore">Explorar</string>
   <string name="navigation_item_explore">Explorar</string>
   <string name="preference_category_appearance">Apariencia</string>
@@ -61,10 +90,6 @@
   <string name="upload_progress_notification_title_finishing">Finalizando la subida de %1$s</string>
   <string name="upload_failed_notification_title">Falló la carga de %1$s</string>
   <string name="upload_failed_notification_subtitle">Toca para ver</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Cargando %1$d archivo</item>
-    <item quantity="other">Cargando %1$d archivos</item>
-  </plurals>
   <string name="title_activity_contributions">Mis subidas recientes</string>
   <string name="contribution_state_queued">En la cola</string>
   <string name="contribution_state_failed">Fallido</string>
@@ -96,19 +121,6 @@
   <string name="gps_disabled">El GPS está desactivado en tu dispositivo. ¿Quieres activarlo?</string>
   <string name="enable_gps">Activar GPS</string>
   <string name="contributions_subtitle_zero">No hay subidas aún</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Iniciando %1$d carga</item>
-    <item quantity="other">Iniciando %1$d cargas</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d carga</item>
-    <item quantity="other">%1$d cargas</item>
-  </plurals>
   <string name="categories_not_found">No se encontraron categorías que coincidieran con %1$s</string>
   <string name="categories_skip_explanation">Añade categorías para hacer que tus imágenes sean más fáciles de encontrar en Wikimedia Commons.\nComienza a escribir para añadir categorías.</string>
   <string name="categories_activity_title">Categorías</string>
@@ -130,10 +142,6 @@
   <string name="no_uploads_yet">Aún no has subido ninguna foto.</string>
   <string name="menu_retry_upload">Reintentar</string>
   <string name="menu_cancel_upload">Cancelar</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Esta imagen se publicará bajo la licencia %1$s</item>
-    <item quantity="other">Estas imágenes se publicarán bajo la licencia %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Al subir esta imagen, declaro que se trata de una obra propia, que no contiene material protegido por derechos de autor, o \'\'selfies\'\', y que además se adhiere a las &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;políticas de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Licencia predeterminada</string>
@@ -422,10 +430,6 @@
   <string name="submit">Enviar</string>
   <string name="upload_title_duplicate">Ya existe un archivo con el nombre %1$. ¿Seguro que deseas continuar?</string>
   <string name="map_application_missing">No se encontró una aplicación de mapas compatible en tu dispositivo. Instala una para usar esta característica.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d Subida</item>
-    <item quantity="other">%1$d Subidas</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Marcadores</string>
   <string name="title_activity_bookmarks">Marcadores</string>
   <string name="title_page_bookmarks_pictures">Imágenes</string>
@@ -510,10 +514,6 @@
   <string name="review_thanks_no_button_text">Imagen siguiente</string>
   <string name="skip_image_explanation">Haciendo clic a este botón obtendrá otra imagen de Wikimedia Commons subida recientemente</string>
   <string name="review_image_explanation">Es posible revisar las imágenes y mejorar la calidad de Wikimedia Commons.\nLos cuatro criterios de revisión son:\n- ¿La imagen recae dentro del alcance del proyecto?\n- ¿La imagen sigue las normas de derechos de autor?\n- ¿Las categorías son las correctas?\n- Si todo va bien, es posible enviar un agradecimiento al contribuidor.</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">Recepción de contenido compartido. El procesamiento de la imagen puede tardar cierto tiempo, dependiendo del tamaño de la imagen y de tu dispositivo</item>
-    <item quantity="other">Recepción de contenido compartido. El procesamiento de las imágenes puede tardar cierto tiempo, dependiendo del tamaño de las imágenes y de tu dispositivo</item>
-  </plurals>
   <string name="no_image">No se utilizó ninguna imagen</string>
   <string name="no_image_reverted">Ninguna imagen revertida</string>
   <string name="no_image_uploaded">Ninguna imagen subida</string>

@@ -8,6 +8,24 @@
 * Sumbukompor
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d barkas lagi kaunggah</item>
+    <item quantity="other">%1$d barkas lagi kaunggah</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Miwiti %1$d unggahan</item>
+    <item quantity="other">Miwiti %1$d unggahan</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d unggahan</item>
+    <item quantity="other">%1$d unggahan</item>
+  </plurals>
+  <string name="share_license_summary" fuzzy="true">Gambar iki bakal dilisènsèkaké nganggo %1$s</string>
   <string name="title_activity_explore">Dlajah</string>
   <string name="navigation_item_explore">Dlajah</string>
   <string name="preference_category_appearance">Cakrik</string>
@@ -38,10 +56,6 @@
   <string name="upload_progress_notification_title_finishing">Rampung ngunggah %1$s</string>
   <string name="upload_failed_notification_title">Wurung ngunggah %1$s</string>
   <string name="upload_failed_notification_subtitle">Tunyuk saperlu ndeleng</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d barkas lagi kaunggah</item>
-    <item quantity="other">%1$d barkas lagi kaunggah</item>
-  </plurals>
   <string name="title_activity_contributions">Unggahanku Sing Anyar</string>
   <string name="contribution_state_queued">Antrian</string>
   <string name="contribution_state_failed">Wurung</string>
@@ -73,19 +87,6 @@
   <string name="gps_disabled">GPS dipatèni ing pirantiné panjenengan. Panjenengan arep ngurubaké?</string>
   <string name="enable_gps">Urubaké GPS</string>
   <string name="contributions_subtitle_zero">Durung ana unggahan</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Miwiti %1$d unggahan</item>
-    <item quantity="other">Miwiti %1$d unggahan</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d unggahan</item>
-    <item quantity="other">%1$d unggahan</item>
-  </plurals>
   <string name="categories_not_found">Ora ana kategori kang cocog karo %1$s</string>
   <string name="categories_skip_explanation">Wuwuh kategori supaya gambar-gambaré panjenengan gampang tinemu ing Wikimedia Commons.\nWiwit nulis saperlu muwuhi kategori.</string>
   <string name="categories_activity_title">Kategori</string>
@@ -105,7 +106,6 @@
   <string name="no_uploads_yet">Panjenengan durung tau ngunggah foto.</string>
   <string name="menu_retry_upload">Jajal manèh</string>
   <string name="menu_cancel_upload">Wurung</string>
-  <string name="share_license_summary" fuzzy="true">Gambar iki bakal dilisènsèkaké nganggo %1$s</string>
   <string name="menu_download">Undhuh</string>
   <string name="preference_license" fuzzy="true">Lisènsi</string>
   <string name="use_previous" fuzzy="true">Anggo sesirah/wedharan sadurungé</string>
