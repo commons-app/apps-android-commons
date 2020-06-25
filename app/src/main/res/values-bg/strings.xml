@@ -10,6 +10,22 @@
 * АдмиралАнимЕ
 -->
 <resources>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Започвам %1$d качване</item>
+    <item quantity="other">Започвам %1$d качвания</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d качване</item>
+    <item quantity="other">%1$d качвания</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Изображението ще се изпълнява под лиценза %1$s</item>
+    <item quantity="other">Изображенията ще се изпълняват под лиценза %1$s</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Получавам споделено съдържание. Обработката може да потрае, в зависимостта от размера на картината и вашето устройство</item>
+    <item quantity="other">Получавам споделено съдържание. Обработката може да потрае, в зависимостта от размера на картините и вашето устройство</item>
+  </plurals>
   <string name="title_activity_explore">Изследвайте</string>
   <string name="navigation_item_explore">Изследвайте</string>
   <string name="preference_category_appearance">Изглед</string>
@@ -67,14 +83,6 @@
   <string name="gps_disabled">GPS е изключен на устройството Ви. Желаете ли да го включите?</string>
   <string name="enable_gps">Включи GPS</string>
   <string name="contributions_subtitle_zero">Все още няма качени файлове</string>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Започвам %1$d качване</item>
-    <item quantity="other">Започвам %1$d качвания</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d качване</item>
-    <item quantity="other">%1$d качвания</item>
-  </plurals>
   <string name="categories_not_found">Няма категории, отговарящи на %1$s</string>
   <string name="categories_skip_explanation">Поставете категории на изображения, за да могат потребителите по-лесно да ги намерят на Общомедия.\n\nЗа да поставите категория, почнете с писане на нейното име.</string>
   <string name="categories_activity_title">Категории</string>
@@ -90,10 +98,6 @@
   <string name="provider_categories">Последно използвани категории</string>
   <string name="menu_retry_upload">Повторен опит</string>
   <string name="menu_cancel_upload">Отказ</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Изображението ще се изпълнява под лиценза %1$s</item>
-    <item quantity="other">Изображенията ще се изпълняват под лиценза %1$s</item>
-  </plurals>
   <string name="menu_download">Изтегляне</string>
   <string name="preference_license">Лиценз по подразбиране</string>
   <string name="preference_theme">Облик</string>
@@ -235,10 +239,6 @@
   <string name="this_function_needs_network_connection">Тази опция изисква да сте свързани към мрежата. Проверете настройките за връзка.</string>
   <string name="bad_token_error_proposed_solution">Качването не е успешно поради проблеми с редакторския шифър. Моля, излезете и отново влезете в системата.</string>
   <string name="error_processing_image">Възникна грешка при обработката на картината. Моля, опитайте отново!</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">Получавам споделено съдържание. Обработката може да потрае, в зависимостта от размера на картината и вашето устройство</item>
-    <item quantity="other">Получавам споделено съдържание. Обработката може да потрае, в зависимостта от размера на картините и вашето устройство</item>
-  </plurals>
   <string name="no_image">Няма използвани изображения</string>
   <string name="no_image_reverted">Няма върнати изображения</string>
   <string name="no_image_uploaded">Няма качени изображения</string>

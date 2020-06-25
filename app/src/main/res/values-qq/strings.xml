@@ -16,6 +16,12 @@
 * Ата
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Status text about number of uploads left.\n* %1$d represents number of uploads left, including current one\n</item>
+    <item quantity="other">Status text about number of uploads left.\n* %1$d represents number of uploads left, including current one\n</item>
+  </plurals>
+  <string name="multiple_uploads_title">{{Identical|Upload}}</string>
+  <string name="share_license_summary">Text label telling user the license of the current upload in progress. %1$s refers to appropriate display text for the chosen CC license</string>
   <string name="navigation_item_explore">{{Identical|Explore}}</string>
   <string name="preference_category_general">{{Identical|General}}</string>
   <string name="app_name">The name of the application. A short form of \"Wikimedia Commons\". It is used in the app\'s launcher icon.\n{{Identical|Wikimedia Commons}}</string>
@@ -37,10 +43,6 @@
   <string name="upload_progress_notification_title_finishing">Title for notification about upload being completed. %1$s represents file name</string>
   <string name="upload_failed_notification_title">Title for notification about upload failing. %1$s represents file name</string>
   <string name="upload_failed_notification_subtitle">Text for notification about upload being completed.</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Status text about number of uploads left.\n* %1$d represents number of uploads left, including current one\n</item>
-    <item quantity="other">Status text about number of uploads left.\n* %1$d represents number of uploads left, including current one\n</item>
-  </plurals>
   <string name="title_activity_contributions">Title for screen showing my contributions.</string>
   <string name="contribution_state_queued">Show status of upload as currently queued.\n{{Identical|Queue}}</string>
   <string name="contribution_state_failed">Show status of upload as failed.\n{{Identical|Failed}}</string>
@@ -66,7 +68,6 @@
   <string name="menu_save_categories">Hint text on menu item to save selected categories.\n{{Identical|Save}}</string>
   <string name="refresh_button">{{Identical|Refresh}}</string>
   <string name="display_list_button">{{Identical|List}}</string>
-  <string name="multiple_uploads_title">{{Identical|Upload}}</string>
   <string name="categories_not_found">Message shown to the user when no category matching what they searched for was found. %1$s represents the category name</string>
   <string name="categories_skip_explanation">Text explaining to users why and how to add categories to images. Users can also tap this message to skip adding categories.</string>
   <string name="categories_activity_title">Title for the activity where Categories are being selected to add to the Image.\n{{Identical|Category}}</string>
@@ -85,7 +86,6 @@
   <string name="no_uploads_yet">Message shown on contribution list during non-first sync if no uploads present.</string>
   <string name="menu_retry_upload">Menu item text prompting user to retry a failed upload.\n{{Identical|Retry}}</string>
   <string name="menu_cancel_upload">Menu item text prompting user to cancel and delete a failed upload.\n{{Identical|Cancel}}</string>
-  <string name="share_license_summary">Text label telling user the license of the current upload in progress. %1$s refers to appropriate display text for the chosen CC license</string>
   <string name="menu_download">Menu item text prompting user to download a selected photo or media file locally.\n{{Identical|Download}}</string>
   <string name="preference_license">{{Identical|License}}</string>
   <string name="use_previous">This is a button text. Concise wording is preferred (e.g. \"&amp;\" instead of \"and\"), where possible. It should ideally be rendered in one line, even on small devices.</string>

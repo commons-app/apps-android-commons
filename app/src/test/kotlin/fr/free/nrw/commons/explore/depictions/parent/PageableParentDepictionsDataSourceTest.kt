@@ -1,9 +1,7 @@
 package fr.free.nrw.commons.explore.depictions.parent
 
-import com.nhaarman.mockitokotlin2.verifyZeroInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import depictedItem
-import fr.free.nrw.commons.explore.depictions.child.PageableChildDepictionsDataSource
 import fr.free.nrw.commons.explore.paging.LiveDataConverter
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import io.reactivex.Observable
@@ -27,21 +25,13 @@ class PageableParentDepictionsDataSourceTest {
     }
 
     @Test
-    fun `loadFunction loads from api at position 0`() {
+    fun `loadFunction loads from api`() {
         val dataSource =
             PageableParentDepictionsDataSource(liveDataConverter, okHttpJsonApiClient)
         dataSource.onQueryUpdated("test")
-        whenever(okHttpJsonApiClient.getParentDepictions("test"))
+        whenever(okHttpJsonApiClient.getParentDepictions("test", 0, 1))
             .thenReturn(Observable.just(listOf(depictedItem())))
-        assertThat(dataSource.loadFunction(-1, 0), `is`(listOf(depictedItem())))
-    }
-
-    @Test
-    fun `loadFunction loads nothing at any other position`() {
-        val dataSource =
-            PageableChildDepictionsDataSource(liveDataConverter, okHttpJsonApiClient)
-        assertThat(dataSource.loadFunction(-1, 1), `is`(emptyList()))
-        verifyZeroInteractions(okHttpJsonApiClient)
+        assertThat(dataSource.loadFunction(1, 0), `is`(listOf(depictedItem())))
     }
 }
 

@@ -20,6 +20,47 @@
 * חיים
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">מועלה קובץ אחד</item>
+    <item quantity="two">מועלים %1$d קבצים</item>
+    <item quantity="many">מועלים %1$d קבצים</item>
+    <item quantity="other">מועלים %1$d קבצים</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">התחלת העלאה</item>
+    <item quantity="two">התחלת 1$d% העלאות</item>
+    <item quantity="many">התחלת 1$d% העלאות</item>
+    <item quantity="other">התחלת 1$d% העלאות</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">העלאה אחת</item>
+    <item quantity="two">%1$d העלאות</item>
+    <item quantity="many">%1$d העלאות</item>
+    <item quantity="other">%1$d העלאות</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">התמונה הזאת תפורסם ברישיון %1$s</item>
+    <item quantity="two">התמונות האלה תפורסמנה ברישיון %1$s</item>
+    <item quantity="many">התמונות האלה תפורסמנה ברישיון %1$s</item>
+    <item quantity="other">התמונות האלה תפורסמנה ברישיון %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">העלאה אחת</item>
+    <item quantity="two">%1$d העלאות</item>
+    <item quantity="many">%1$d העלאות</item>
+    <item quantity="other">%1$d העלאות</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">מתקבל תוכן שיתופי. עיבוד התמונה עשוי לארוך זמן מה כתלות בגודל התמונה והמכשיר שלך</item>
+    <item quantity="two">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
+    <item quantity="many">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
+    <item quantity="other">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
+  </plurals>
   <string name="title_activity_explore">לחקור</string>
   <string name="navigation_item_explore">לחקור</string>
   <string name="preference_category_appearance">מראה</string>
@@ -51,12 +92,6 @@
   <string name="upload_progress_notification_title_finishing">העלאת %1$s מסתיימת</string>
   <string name="upload_failed_notification_title">העלאת %1$s נכשלה</string>
   <string name="upload_failed_notification_subtitle">לחץ כדי להציג</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">מועלה קובץ אחד</item>
-    <item quantity="two">מועלים %1$d קבצים</item>
-    <item quantity="many">מועלים %1$d קבצים</item>
-    <item quantity="other">מועלים %1$d קבצים</item>
-  </plurals>
   <string name="title_activity_contributions">ההעלאות האחרונות שלי</string>
   <string name="contribution_state_queued">בתור</string>
   <string name="contribution_state_failed">נכשלה</string>
@@ -91,23 +126,6 @@
   <string name="gps_disabled">ה־GPS במכשיר שלך אינו מופעל. האם להפעיל אותו?</string>
   <string name="enable_gps">הפעלת GPS</string>
   <string name="contributions_subtitle_zero">לא הועלה עדיין שום דבר</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">התחלת העלאה</item>
-    <item quantity="two">התחלת 1$d% העלאות</item>
-    <item quantity="many">התחלת 1$d% העלאות</item>
-    <item quantity="other">התחלת 1$d% העלאות</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">העלאה אחת</item>
-    <item quantity="two">%1$d העלאות</item>
-    <item quantity="many">%1$d העלאות</item>
-    <item quantity="other">%1$d העלאות</item>
-  </plurals>
   <string name="categories_not_found">לא נמצאו קטגוריות בשם %1$s</string>
   <string name="depictions_not_found">לא נמצאו פריטי ויקינתונים שמתאימים לחיפוש %1$s</string>
   <string name="no_child_classes">ל%1$s אין מחלקות יורשות</string>
@@ -134,12 +152,6 @@
   <string name="no_uploads_yet">עדיין לא העלית תמונות.</string>
   <string name="menu_retry_upload">לנסות שוב</string>
   <string name="menu_cancel_upload">ביטול</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">התמונה הזאת תפורסם ברישיון %1$s</item>
-    <item quantity="two">התמונות האלה תפורסמנה ברישיון %1$s</item>
-    <item quantity="many">התמונות האלה תפורסמנה ברישיון %1$s</item>
-    <item quantity="other">התמונות האלה תפורסמנה ברישיון %1$s</item>
-  </plurals>
   <string name="media_upload_policy">שליחת התמונה הזאת מהווה את הצהרתי על כך שזאת יצירה שלי, שהיא לא מכילה חומר מוגבל בזכויות יוצרים או תמונות עצמיות (סלפי) ומתאימה בכל אופן ל&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;מדיניות של אתר ויקישיתוף של ויקימדיה&lt;/a&gt;.</string>
   <string name="menu_download">הורדה</string>
   <string name="preference_license">רישיון ברירת מחדל</string>
@@ -434,12 +446,6 @@
   <string name="submit">שליחה</string>
   <string name="upload_title_duplicate">כבר קיים קובץ בשם %1$s. להמשיך?</string>
   <string name="map_application_missing">לא נמצא יישום מפה תואם במכשיר שלך. נא להתקין יישום מפה כדי להשתמש בתכונה זו.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">העלאה אחת</item>
-    <item quantity="two">%1$d העלאות</item>
-    <item quantity="many">%1$d העלאות</item>
-    <item quantity="other">%1$d העלאות</item>
-  </plurals>
   <string name="navigation_item_bookmarks">סימניות</string>
   <string name="title_activity_bookmarks">סימניות</string>
   <string name="title_page_bookmarks_pictures">תמונות</string>
@@ -527,12 +533,6 @@
   <string name="review_thanks_no_button_text">התמונה הבאה</string>
   <string name="skip_image_explanation">לחיצה על הכפתור הזה תציג בפניך תמונה נוספת שנוספה לאחרונה לוויקישיתוף</string>
   <string name="review_image_explanation">ניתן לסקור את התמונות ולשפר את האיכות של ויקישיתוף.\nארבע יסודות הסקירה הם:\n- האם התמונה קשורה לנושא?\n- האם התמונה תואמת לכללי זכויות היוצרים?\n- האם התמונה נמצאת בקטגוריה הנכונה?\n- אם הכול בסדר, ניתן גם להודות למי שתרם אותה.</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">מתקבל תוכן שיתופי. עיבוד התמונה עשוי לארוך זמן מה כתלות בגודל התמונה והמכשיר שלך</item>
-    <item quantity="two">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
-    <item quantity="many">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
-    <item quantity="other">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
-  </plurals>
   <string name="no_image">לא נעשה שימוש בתמונות</string>
   <string name="no_image_reverted">לא שוחזרו תמונות</string>
   <string name="no_image_uploaded">לא הועלו תמונות</string>
@@ -620,5 +620,6 @@
   <string name="ask_to_turn_location_on">להפעיל מיקום?</string>
   <string name="nearby_needs_location">פעולת \"בסביבה\" זקוקה לשירותי מיקומי פועלים כדי לעבוד כמו שצריך</string>
   <string name="use_location_from_similar_image">האם צילמת את שתי התמונות באותו המקום? האם ברצונך להשתמש בקו הרוחב וקו האורך של התמונה משמאל?</string>
+  <string name="load_more">לטעון עוד</string>
   <string name="nearby_no_results">לא נמצאו מקומות, נא לנסות לשנות את החיפוש.</string>
 </resources>
