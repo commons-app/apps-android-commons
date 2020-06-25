@@ -2,6 +2,7 @@ package fr.free.nrw.commons.media
 
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
+import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.explore.media.MediaConverter
 import fr.free.nrw.commons.media.model.PageMediaListResponse
@@ -128,7 +129,7 @@ class MediaClientTest {
     @Test
     fun `fetchImagesForDepictedItem returns mapped response`() {
         val (mwQueryResponse, media) = expectSuccessfulMapping()
-        whenever(mediaInterface.fetchImagesForDepictedItem("haswbstatement:P180=", "0", "1"))
+        whenever(mediaInterface.fetchImagesForDepictedItem("haswbstatement:${BuildConfig.DEPICTS_PROPERTY}=", "0", "1"))
             .thenReturn(Single.just(mwQueryResponse))
         mediaClient.fetchImagesForDepictedItem("", 0, 1)
             .test()
