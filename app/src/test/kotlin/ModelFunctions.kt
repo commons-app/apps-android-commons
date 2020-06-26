@@ -7,6 +7,7 @@ import fr.free.nrw.commons.nearby.Label
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.Sitelinks
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import fr.free.nrw.commons.wikidata.model.DepictSearchItem
 import org.wikipedia.wikidata.*
 import java.util.*
 
@@ -62,6 +63,14 @@ fun media(
     descriptions,
     depictionIds
 )
+
+fun depictSearchItem(
+    id: String = "id",
+    pageId: String = "pageid",
+    url: String = "url",
+    label: String = "label",
+    description: String = "description"
+) = DepictSearchItem(id, pageId, url, label, description)
 
 fun place(
     name: String = "name",

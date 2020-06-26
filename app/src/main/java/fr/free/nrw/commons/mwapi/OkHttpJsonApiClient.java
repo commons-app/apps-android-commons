@@ -209,7 +209,7 @@ public class OkHttpJsonApiClient {
    * Get the QIDs of all Wikidata items that are subclasses of the given Wikidata item. Example:
    * bridge -> suspended bridge, aqueduct, etc
    */
-  public Observable<List<DepictedItem>> getChildDepictions(String qid, int startPosition,
+  public Single<List<DepictedItem>> getChildDepictions(String qid, int startPosition,
       int limit) throws IOException {
     return depictedItemsFrom(sparqlQuery(qid, startPosition, limit,"/queries/subclasses_query.rq"));
   }
@@ -218,14 +218,14 @@ public class OkHttpJsonApiClient {
    * Get the QIDs of all Wikidata items that are subclasses of the given Wikidata item. Example:
    * bridge -> suspended bridge, aqueduct, etc
    */
-  public Observable<List<DepictedItem>> getParentDepictions(String qid, int startPosition,
+  public Single<List<DepictedItem>> getParentDepictions(String qid, int startPosition,
       int limit) throws IOException {
     return depictedItemsFrom(sparqlQuery(qid, startPosition, limit,
         "/queries/parentclasses_query.rq"));
   }
 
-  private Observable<List<DepictedItem>> depictedItemsFrom(Request request) {
-    return depictsClient.toDepictions(Observable.fromCallable(() -> {
+  private Single<List<DepictedItem>> depictedItemsFrom(Request request) {
+    return depictsClient.toDepictions(Single.fromCallable(() -> {
       try (ResponseBody body = okHttpClient.newCall(request).execute().body()) {
         return gson.fromJson(body.string(), SparqlResponse.class);
       }
