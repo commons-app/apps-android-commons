@@ -20,6 +20,7 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
 /**
+ *activity to be deleted
  * This activity displays pictures of a particular category
  * Its generic and simply takes the name of category name in its start intent to load all images in
  * a particular category. This activity is currently being used to display a list of featured images,
