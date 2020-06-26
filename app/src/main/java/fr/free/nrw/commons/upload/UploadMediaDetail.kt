@@ -41,24 +41,4 @@ data class UploadMediaDetail constructor(
      */
     var isManuallyAdded: Boolean = false
 
-    companion object {
-        /**
-         * Formatting captions to the Wikibase format for sending labels
-         * @param uploadMediaDetails list of media Details
-         */
-        @JvmStatic
-        fun formatCaptions(uploadMediaDetails: List<UploadMediaDetail>) =
-            uploadMediaDetails.associate { it.languageCode to it.captionText }.filter { it.value.isNotBlank() }
-
-        /**
-         * Formats the list of descriptions into the format Commons requires for uploads.
-         *
-         * @param descriptions the list of descriptions, description is ignored if text is null.
-         * @return a string with the pattern of {{en|1=descriptionText}}
-         */
-        @JvmStatic
-        fun formatDescriptions(descriptions: List<UploadMediaDetail>) =
-            descriptions.filter { it.descriptionText.isNotEmpty() }
-                .joinToString { "{{${it.languageCode}|1=${it.descriptionText}}}" }
-    }
 }

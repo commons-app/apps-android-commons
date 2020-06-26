@@ -32,7 +32,7 @@ class MediaDataExtractor @Inject constructor(private val mediaClient: MediaClien
         mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + media.filename)
 
     fun fetchDiscussion(media: Media) =
-        mediaClient.getPageHtml(media.filename.replace("File", "File talk"))
+        mediaClient.getPageHtml(media.filename!!.replace("File", "File talk"))
             .map { HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY).toString() }
             .onErrorReturn {
                 Timber.d("Error occurred while fetching discussion")

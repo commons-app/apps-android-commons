@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile.DateTimeWithSource;
 import fr.free.nrw.commons.settings.Prefs.Licenses;
@@ -30,13 +31,14 @@ class PageContentsCreator {
 
   public String createFrom(Contribution contribution) {
     StringBuilder buffer = new StringBuilder();
+    final Media media = contribution.getMedia();
     buffer
         .append("== {{int:filedesc}} ==\n")
         .append("{{Information\n")
-        .append("|description=").append(contribution.getFallbackDescription()).append("\n")
+        .append("|description=").append(media.getFallbackDescription()).append("\n")
         .append("|source=").append("{{own}}\n")
-        .append("|author=[[User:").append(contribution.getCreator()).append("|")
-        .append(contribution.getCreator()).append("]]\n");
+        .append("|author=[[User:").append(media.getCreator()).append("|")
+        .append(media.getCreator()).append("]]\n");
 
     String templatizedCreatedDate = getTemplatizedCreatedDate(
         contribution.getDateCreated(), contribution.getDateCreatedSource());
@@ -53,10 +55,10 @@ class PageContentsCreator {
     }
 
     buffer.append("== {{int:license-header}} ==\n")
-        .append(licenseTemplateFor(contribution.getLicense())).append("\n\n")
+        .append(licenseTemplateFor(media.getLicense())).append("\n\n")
         .append("{{Uploaded from Mobile|platform=Android|version=")
         .append(ConfigUtils.getVersionNameWithSha(context)).append("}}\n");
-    final List<String> categories = contribution.getCategories();
+    final List<String> categories = media.getCategories();
     if (categories != null && categories.size() != 0) {
       for (int i = 0; i < categories.size(); i++) {
         buffer.append("\n[[Category:").append(categories.get(i)).append("]]");

@@ -173,6 +173,11 @@ public class WikidataItemDetailsActivity extends NavigationBaseActivity implemen
         return depictionImagesListFragment.getTotalMediaCount();
     }
 
+    @Override
+    public Integer getContributionStateAt(int position) {
+        return null;
+    }
+
     /**
      * Consumers should be simply using this method to use this activity.
      *

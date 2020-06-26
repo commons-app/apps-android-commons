@@ -160,6 +160,11 @@ public class CategoryImagesActivity
         return categoriesMediaFragment.getTotalMediaCount();
     }
 
+    @Override
+    public Integer getContributionStateAt(int position) {
+        return null;
+    }
+
     /**
      * This method inflates the menu in the toolbar
      */

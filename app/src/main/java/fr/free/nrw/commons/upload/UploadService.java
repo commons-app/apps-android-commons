@@ -13,6 +13,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -224,25 +225,27 @@ public class UploadService extends CommonsDaggerService {
     File localFile = new File(localUri.getPath());
 
     Timber.d("Before execution!");
+    final Media media = contribution.getMedia();
+    final String displayTitle = media.getDisplayTitle();
     curNotification.setContentTitle(getString(R.string.upload_progress_notification_title_start,
-        contribution.getDisplayTitle()))
+        displayTitle))
         .setContentText(getResources()
             .getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload,
                 toUpload))
         .setTicker(getString(R.string.upload_progress_notification_title_in_progress,
-            contribution.getDisplayTitle()))
+            displayTitle))
         .setOngoing(true);
     notificationManager
         .notify(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
 
-    String filename = contribution.getFilename();
+    String filename = media.getFilename();
 
     NotificationUpdateProgressListener notificationUpdater = new NotificationUpdateProgressListener(
         notificationTag,
         getString(R.string.upload_progress_notification_title_in_progress,
-            contribution.getDisplayTitle()),
+            displayTitle),
         getString(R.string.upload_progress_notification_title_finishing,
-            contribution.getDisplayTitle()),
+            displayTitle),
         contribution
     );
 
@@ -320,13 +323,7 @@ public class UploadService extends CommonsDaggerService {
 
   private void saveCompletedContribution(Contribution contribution, UploadResult uploadResult) {
     compositeDisposable.add(mediaClient.getMedia("File:" + uploadResult.getFilename())
-        .map(media -> {
-          Contribution newContribution = new Contribution(media, Contribution.STATE_COMPLETED);
-          if (contribution.getWikidataPlace() != null) {
-            newContribution.setWikidataPlace(contribution.getWikidataPlace());
-          }
-          return newContribution;
-        })
+        .map(contribution::completeWith)
         .flatMapCompletable(
             newContribution -> contributionDao.saveAndDelete(contribution, newContribution))
         .subscribe());
@@ -335,10 +332,9 @@ public class UploadService extends CommonsDaggerService {
   @SuppressLint("StringFormatInvalid")
   @SuppressWarnings("deprecation")
   private void showFailedNotification(Contribution contribution) {
-    curNotification.setTicker(
-        getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
-        .setContentTitle(
-            getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
+    final String displayTitle = contribution.getMedia().getDisplayTitle();
+    curNotification.setTicker(getString(R.string.upload_failed_notification_title, displayTitle))
+        .setContentTitle(getString(R.string.upload_failed_notification_title, displayTitle))
         .setContentText(getString(R.string.upload_failed_notification_subtitle))
         .setProgress(0, 0, false)
         .setOngoing(false);
