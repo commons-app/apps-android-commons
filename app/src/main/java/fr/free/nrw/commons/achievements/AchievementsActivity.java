@@ -142,6 +142,9 @@ public class AchievementsActivity extends NavigationBaseActivity {
         setSupportActionBar(toolbar);
         progressBar.setVisibility(View.VISIBLE);
 
+        // Set the initial value of wikidata_edits to 0
+        wikidataEditsText.setText("0");
+
         hideLayouts();
         setWikidataEditCount();
         setAchievements();
@@ -270,7 +273,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
         if (StringUtils.isBlank(userName)) {
             return;
         }
-        wikidataEditsText.setText("0");
         compositeDisposable.add(okHttpJsonApiClient
                 .getWikidataEdits(userName)
                 .subscribeOn(Schedulers.io())
@@ -279,7 +281,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
                     numberOfEdits = edits;
                     wikidataEditsText.setText(String.valueOf(edits));
                 }, e -> {
-                    Timber.e("Error:" + e);
+                    Timber.e("Error: " + e);
                 }));
     }
 

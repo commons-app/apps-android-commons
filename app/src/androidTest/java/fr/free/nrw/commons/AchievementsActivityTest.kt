@@ -2,11 +2,13 @@ package fr.free.nrw.commons
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.DrawerActions
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.espresso.intent.rule.IntentsTestRule
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.filters.MediumTest
 import androidx.test.runner.AndroidJUnit4
 import fr.free.nrw.commons.achievements.AchievementsActivity
@@ -33,5 +35,15 @@ class AchievementsActivityTest {
         onView(withId(R.id.user_icon)).perform(click())
 
         Intents.intended(hasComponent(AchievementsActivity::class.java.name))
+    }
+
+    @Test
+    fun testInitialCounterState() {
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open())
+        onView(withId(R.id.user_icon)).perform(click())
+
+        Intents.intended(hasComponent(AchievementsActivity::class.java.name))
+
+        onView(withId(R.id.wikidata_edits)).check(matches(withText("0")))
     }
 }
