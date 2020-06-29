@@ -419,7 +419,7 @@
   <string name="preference_author_name_toggle_summary">Fotoğraf yüklerken kullanıcı adınız yerine özel bir yazar adı kullanın</string>
   <string name="preference_author_name">Özel yazar adı</string>
   <string name="contributions_fragment">Katkılar</string>
-  <string name="nearby_fragment">Yakınımdakiler</string>
+  <string name="nearby_fragment">Yakınındakiler</string>
   <string name="notifications">Bildirimler</string>
   <string name="read_notifications">Bildirimler (okunmuş)</string>
   <string name="display_nearby_notification">Yakınımdakiler bildirimi görüntüle</string>

@@ -4,6 +4,7 @@
 * Abijeet Patro
 * Amirsara
 * Arash.pt
+* BaRaN6161 TURK
 * Ebraminio
 * Eshagh79
 * FarsiNevis
@@ -28,7 +29,11 @@
     <item quantity="one">%1$d پرونده در حال بارگذاری</item>
     <item quantity="other">%1$d پرونده در حال بارگذاری</item>
   </plurals>
-  <string name="contributions_subtitle">{{%1$d|zero=@string/contributions_subtitle_zero|one=(%1$d)|(%1$d)}}</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">شروع %1$d بارگذاری پرونده</item>
     <item quantity="other">شروع بارگذاری %1$d پرونده</item>

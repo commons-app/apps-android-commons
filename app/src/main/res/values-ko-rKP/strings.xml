@@ -19,6 +19,7 @@
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d개 올리적재</item>
+    <item quantity="other">%1$d개 올리적재</item>
   </plurals>
   <string name="share_license_summary">이 그림은 %1$s에 따라 사용이 허가됩니다</string>
   <string name="title_activity_explore">찾아보기</string>

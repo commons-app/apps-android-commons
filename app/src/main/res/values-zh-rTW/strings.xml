@@ -28,9 +28,11 @@
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">開始 %1$d 次上傳</item>
+    <item quantity="other">開始 %1$d 次上傳</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d 次上傳</item>
+    <item quantity="other">%1$d 次上傳</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">此圖片會按 %1$s 協議授權上載</item>
