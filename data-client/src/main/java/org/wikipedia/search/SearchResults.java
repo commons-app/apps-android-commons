@@ -35,14 +35,16 @@ public class SearchResults {
      * @param suggestion a search suggestion to show to the user: "Did you mean ...?"
      */
     public SearchResults(@NonNull List<MwQueryPage> pages, @NonNull WikiSite wiki,
-                         @Nullable Map<String, String> continuation, @Nullable String suggestion) {
+        @Nullable Map<String, String> continuation, @Nullable String suggestion) {
         List<SearchResult> searchResults = new ArrayList<>();
 
         // Sort the array based on the "index" property
         Collections.sort(pages, (a, b) -> ((Integer) a.index()).compareTo(b.index()));
 
         for (MwQueryPage page : pages) {
-            searchResults.add(new SearchResult(page, wiki));
+            if(!page.categoryInfo().isHidden()){
+                searchResults.add(new SearchResult(page, wiki));
+            }
         }
         this.results = searchResults;
         this.continuation = continuation;
@@ -61,4 +63,3 @@ public class SearchResults {
         return continuation;
     }
 }
-

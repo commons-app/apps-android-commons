@@ -22,6 +22,7 @@ public class MwQueryPage extends BaseModel {
     @SuppressWarnings("unused") private int ns;
     @SuppressWarnings("unused") private int index;
     @SuppressWarnings("unused,NullableProblems") @NonNull private String title;
+    @SuppressWarnings("unused,NullableProblems") @NonNull private CategoryInfo categoryinfo;
     @SuppressWarnings("unused") @Nullable private List<LangLink> langlinks;
     @SuppressWarnings("unused") @Nullable private List<Revision> revisions;
     @SuppressWarnings("unused") @Nullable private List<Coordinates> coordinates;
@@ -40,6 +41,10 @@ public class MwQueryPage extends BaseModel {
 
     @NonNull public String title() {
         return title;
+    }
+
+    @NonNull public CategoryInfo categoryInfo() {
+        return categoryinfo;
     }
 
     public int index() {
@@ -185,6 +190,17 @@ public class MwQueryPage extends BaseModel {
         }
     }
 
+    public static class CategoryInfo {
+        @SuppressWarnings("unused") private boolean hidden;
+        @SuppressWarnings("unused") private int size;
+        @SuppressWarnings("unused") private int pages;
+        @SuppressWarnings("unused") private int files;
+        @SuppressWarnings("unused") private int subcats;
+        public boolean isHidden() {
+            return hidden;
+        }
+    }
+
     static class Thumbnail {
         @SuppressWarnings("unused") private String source;
         @SuppressWarnings("unused") private int width;
@@ -193,6 +209,9 @@ public class MwQueryPage extends BaseModel {
             return source;
         }
     }
+
+
+
 
     public static class PageProps {
         @SuppressWarnings("unused") @SerializedName("wikibase_item") @Nullable private String wikiBaseItem;

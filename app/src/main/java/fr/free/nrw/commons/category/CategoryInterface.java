@@ -32,8 +32,9 @@ public interface CategoryInterface {
      */
     @GET("w/api.php?action=query&format=json&formatversion=2"
             + "&generator=allcategories")
-    Observable<MwQueryResponse> searchCategoriesForPrefix(@Query("gacprefix") String prefix,
-                                                          @Query("gaclimit") int itemLimit, @Query("gacoffset") int offset);
+    Observable<MwQueryResponse> searchCategoriesForPrefix(@Query("gacfrom") String prefix,
+                                                          @Query("gaclimit") int itemLimit,
+                                                          @Query("gacoffset") int offset);
 
     @GET("w/api.php?action=query&format=json&formatversion=2"
             + "&generator=categorymembers&gcmtype=subcat"
