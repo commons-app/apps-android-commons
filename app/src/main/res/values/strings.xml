@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d file uploading</item>
+    <item quantity="other">%1$d files uploading</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <!--zero is not used in english. Category mentioned here for easy reference in future-->
+    <item quantity="zero">@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Starting %1$d upload</item>
+    <item quantity="other">Starting %1$d uploads</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d upload</item>
+    <item quantity="other">%1$d uploads</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">This image will be licensed under %1$s</item>
+    <item quantity="other">These images will be licensed under %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d Upload</item>
+    <item quantity="other">%1$d Uploads</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Receiving shared content. Processing the image might take some time depending on the size of the image and your device</item>
+    <item quantity="other">Receiving shared content. Processing the images might take some time depending on the size of the images and your device</item>
+  </plurals>
   <string name="title_activity_explore">Explore</string>
   <string name="navigation_item_explore">Explore</string>
   <string name="preference_category_appearance">Appearance</string>
@@ -31,10 +61,6 @@
   <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
   <string name="upload_failed_notification_title">Uploading %1$s failed</string>
   <string name="upload_failed_notification_subtitle">Tap to view</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d file uploading</item>
-    <item quantity="other">%1$d files uploading</item>
-  </plurals>
   <string name="title_activity_contributions">My Recent Uploads</string>
   <string name="contribution_state_queued">Queued</string>
   <string name="contribution_state_failed">Failed</string>
@@ -69,20 +95,6 @@
   <string name="gps_disabled">GPS is disabled in your device. Would you like to enable it?</string>
   <string name="enable_gps">Enable GPS</string>
   <string name="contributions_subtitle_zero">No uploads yet</string>
-  <plurals name="contributions_subtitle">
-    <!--zero is not used in english. Category mentioned here for easy reference in future-->
-    <item quantity="zero">@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Starting %1$d upload</item>
-    <item quantity="other">Starting %1$d uploads</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d upload</item>
-    <item quantity="other">%1$d uploads</item>
-  </plurals>
   <string name="categories_not_found">No categories matching %1$s found</string>
   <string name="depictions_not_found">No Wikidata items matching %1$s found</string>
   <string name="no_child_classes">%1$s has no child classes</string>
@@ -110,10 +122,6 @@
   <string name="no_uploads_yet">You have not yet uploaded any photos.</string>
   <string name="menu_retry_upload">Retry</string>
   <string name="menu_cancel_upload">Cancel</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">This image will be licensed under %1$s</item>
-    <item quantity="other">These images will be licensed under %1$s</item>
-  </plurals>
   <string name="media_upload_policy">By submitting this picture, I declare that this is my own work, that it does not contain copyrighted material or selfies, and otherwise adheres to &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Default License</string>
@@ -254,9 +262,9 @@
   <string name="title_info">A unique descriptive title for the file, which will serve as a filename. You may use plain language with spaces. Do not include the file extension</string>
   <string name="description_info">Please describe the media as much as possible: Where was it taken? What does it show? What is the context? Please describe the objects or persons. Reveal information that can not be easily guessed, for instance the time of day if it is a landscape. If the media shows something unusual, please explain what makes it unusual.</string>
   <string name="caption_info">Please write a brief description of the image. (Limit to 255 characters)</string>
+
   <string name="upload_image_too_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
   <string name="upload_image_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
-
   <string name="upload_problem_exist">Potential problems with this image:</string>
   <string name="upload_problem_image_dark">Image is too dark.</string>
   <string name="upload_problem_image_blurry">Image is blurry.</string>
@@ -264,10 +272,10 @@
   <string name="upload_problem_different_geolocation">This picture was taken at a different location.</string>
   <string name="upload_problem_fbmd">Please only upload pictures that you have taken by yourself. Don\'t upload pictures that you have found on other people\'s Facebook accounts.</string>
   <string name="upload_problem_do_you_continue">Do you still want to upload this picture?</string>
+
+
   <string name="upload_problem_image">Problems found in image</string>
   <string name="internet_downloaded">Please only upload pictures that you have taken by yourself. Don\'t upload pictures that you have downloaded from the Internet.</string>
-
-
   <string name="give_permission">Give permission</string>
   <string name="use_external_storage">Use external storage</string>
   <string name="use_external_storage_summary">Save pictures taken with the in-app camera on your device</string>
@@ -287,15 +295,15 @@
   <string name="skip_login_title">Do you really want to skip login?</string>
   <string name="skip_login_message">You would have to log in to upload pictures in the future.</string>
   <string name="login_alert_message">Please log in to use this feature</string>
+
   <string name="copy_wikicode">Copy the wikitext to the clipboard</string>
   <string name="wikicode_copied">The wikitext was copied to the clipboard</string>
-
   <string name="nearby_location_has_not_changed">Location has not changed.</string>
   <string name="nearby_location_not_available">Nearby might not work properly, Location not available.</string>
   <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
+
   <string name="get_directions">Get directions</string>
   <string name="read_article">Read article</string>
-
   <string formatted="false" name="notifications_welcome">Welcome to Wikimedia Commons, %1$s! We\'re glad you\'re here.</string>
   <string name="notifications_talk_page_message">%1$s left a message on your talk page</string>
   <string name="notifications_thank_you_edit">Thank you for making an edit</string>
@@ -318,18 +326,21 @@
   <string name="about_translate_title">Languages</string>
   <string name="about_translate_message">Select the language that you would like to submit translations for</string>
   <string name="about_translate_proceed">Proceed</string>
+
   <string name="about_translate_cancel">Cancel</string>
   <string name="retry">Retry</string>
-
   <string name="showcase_view_got_it_button">Got it!</string>
   <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles.\n\nClicking on \'SEARCH THIS AREA\' locks the map and launches a nearby search around that location.</string>
+  <string name="showcase_view_needs_photo">This place needs a photo.</string>
+  <string name="showcase_view_has_photo">This place already has a photo.</string>
+  <string name="showcase_view_no_longer_exists">This place no longer exists.</string>
+
   <string name="showcase_view_list_icon">Tapping this button brings up a list of these places</string>
   <string name="showcase_view_plus_fab">You can upload a picture for any place from your gallery or camera</string>
-
   <string name="no_images_found">No images found!</string>
+
   <string name="error_loading_images">Error occurred while loading images.</string>
   <string name="image_uploaded_by">Uploaded by: %1$s</string>
-
   <string name="block_notification_title">Blocked</string>
   <string name="block_notification">You are blocked from editing Commons</string>
   <string name="appwidget_img">Pic of the Day</string>
@@ -346,9 +357,9 @@
   <string name="search_tab_title_media">Media</string>
   <string name="search_tab_title_categories">Categories</string>
   <string name="search_tab_title_depictions">Items</string>
+
   <string name="explore_tab_title_featured">Featured</string>
   <string name="explore_tab_title_mobile">Uploaded via mobile</string>
-
   <string name="successful_wikidata_edit">Image added to %1$s on Wikidata!</string>
   <string name="wikidata_edit_failure">Failed to update corresponding Wikidata entity!</string>
   <string name="menu_set_wallpaper">Set as wallpaper</string>
@@ -375,16 +386,16 @@
   <string name="quiz_screenshot_question">Is this screenshot OK to upload?</string>
   <string name="share_app_title">Share App</string>
   <string name="share_coordinates_not_present">Coordinates were not specified during image selection</string>
+
   <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
   <string name="add_description">+ Add description</string>
-
   <string name="no_recent_searches">No recent searches</string>
   <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
   <string name="delete_search_dialog">Do you want to delete this search?</string>
   <string name="search_history_deleted">Search history deleted</string>
+
   <string name="nominate_delete">Nominate For Deletion</string>
   <string name="delete">Delete</string>
-
   <string name="Achievements">Achievements</string>
   <string name="statistics">Statistics</string>
   <string name="statistics_thanks">Thanks Received</string>
@@ -398,12 +409,12 @@
   <string name="achievements_info_message">Your level increases as you meet these requirements. Items in the "statistics" section do not count towards your level.</string>
   <string name="achievements_revert_limit_message">minimum required: </string>
   <string name="images_uploaded_explanation">The number of images you have uploaded to Commons, via any upload software</string>
+
   <string name="images_reverted_explanation">The percentage of images you have uploaded to Commons that were not deleted</string>
   <string name="images_used_explanation">The number of images you have uploaded to Commons that were used in Wikimedia articles</string>
 
   <string name="error_occurred">Error occurred!</string>
   <string name="notifications_channel_name_all">Commons Notification</string>
-
   <string name="preference_author_name_toggle">Use custom author name</string>
   <string name="preference_author_name_toggle_summary">Use a custom author name instead of your username while uploading photos</string>
   <string name="preference_author_name">Custom author name</string>
@@ -413,24 +424,20 @@
   <string name="read_notifications">Notifications (read)</string>
   <string name="display_nearby_notification">Display nearby notification</string>
   <string name="display_nearby_notification_summary">Tap here to see the nearest place that needs pictures</string>
+
   <string name="no_close_nearby">No nearby places found close to you</string>
   <string name="list_sheet">List</string>
-
   <string name="storage_permission">Storage Permission</string>
+
   <string name="write_storage_permission_rationale_for_image_share">We need your permission to access the external storage of your device in order to upload images.</string>
   <string name="nearby_notification_dismiss_message">You won\'t see the nearest place that needs pictures anymore. However, you can re-enable this notification in Settings if you wish.</string>
-
   <string name="step_count">Step %1$d of %2$d</string>
   <string name="image_in_set_label">Image %1$d in set</string>
   <string name="next">Next</string>
   <string name="previous">Previous</string>
   <string name="submit">Submit</string>
-  <string name="upload_title_duplicate" formatted="true">A file with the file name %1$s exists. Are you sure you want to proceed?</string>
+  <string formatted="true" name="upload_title_duplicate">A file with the file name %1$s exists. Are you sure you want to proceed?</string>
   <string name="map_application_missing">No compatible map application could be found on your device. Please install a map application to use this feature.</string>
-  <plurals name="upload_count_title">
-        <item quantity="one">%1$d Upload</item>
-        <item quantity="other">%1$d Uploads</item>
-    </plurals>
   <string name="navigation_item_bookmarks">Bookmarks</string>
   <string name="title_activity_bookmarks">Bookmarks</string>
   <string name="title_page_bookmarks_pictures">Pictures</string>
@@ -439,32 +446,32 @@
   <string name="provider_bookmarks">Bookmarks</string>
   <string name="bookmark_empty">You haven\'t added any bookmarks</string>
   <string name="provider_bookmarks_location">Bookmarks</string>
-  <string name="log_collection_started">Log collection started. Please RESTART the app, perform action that you wish to log, and then tap \'Send log file\' again</string>
 
+  <string name="log_collection_started">Log collection started. Please RESTART the app, perform action that you wish to log, and then tap \'Send log file\' again</string>
   <string name="deletion_reason_uploaded_by_mistake">I uploaded it by mistake</string>
   <string name="deletion_reason_publicly_visible">I did not know it would be publicly visible</string>
   <string name="deletion_reason_bad_for_my_privacy">I realized it is bad for my privacy</string>
   <string name="deletion_reason_no_longer_want_public">I changed my mind, I don\'t want it to be publicly visible anymore</string>
   <string name="deletion_reason_not_interesting">Sorry this picture is not interesting for an encyclopedia</string>
+
   <string name="uploaded_by_myself">Uploaded by myself on %1$s, used in %2$d article(s).</string>
 
   <string name="no_uploads">Welcome to Commons!\n
 Upload your first media by tapping on the add button.</string>
-
   <string name="desc_language_Worldwide">Worldwide</string>
   <string name="desc_language_America">America</string>
   <string name="desc_language_Europe">Europe</string>
   <string name="desc_language_Middle_East">Middle East</string>
   <string name="desc_language_Africa">Africa</string>
   <string name="desc_language_Asia">Asia</string>
+
   <string name="desc_language_Pacific">Pacific</string>
-
   <string name="no_categories_selected">No Categories Selected</string>
+
   <string name="no_categories_selected_warning_desc">Images without categories are rarely usable. Are you sure you want to continue without selecting categories?</string>
-
   <string name="no_depictions_selected">No Depictions Selected</string>
-  <string name="no_depictions_selected_warning_desc">Images with depictions are more easily found and more likely to be used. Are you sure you want to continue without selecting depictions?</string>
 
+  <string name="no_depictions_selected_warning_desc">Images with depictions are more easily found and more likely to be used. Are you sure you want to continue without selecting depictions?</string>
   <string name="upload_flow_all_images_in_set">(For all images in set)</string>
   <string name="search_this_area">Search this area</string>
   <string name="nearby_card_permission_title">Permission Request</string>
@@ -478,15 +485,15 @@ Upload your first media by tapping on the add button.</string>
   <string name="ends_on">Ends on:</string>
   <string name="display_campaigns">Display campaigns</string>
   <string name="display_campaigns_explanation">See the ongoing campaigns</string>
-  <string name="nearby_campaign_dismiss_message">You won\'t see the campaigns anymore. However, you can re-enable this notification in Settings if you wish.</string>
 
+  <string name="nearby_campaign_dismiss_message">You won\'t see the campaigns anymore. However, you can re-enable this notification in Settings if you wish.</string>
   <string name="this_function_needs_network_connection">This function requires network connection, please check your connection settings.</string>
   <string name="bad_token_error_proposed_solution">Upload failed due to issues with edit token. Please try logging out and in again. </string>
-    <string name="error_processing_image">Error occurred while processing the image. Please try again!</string>
+  <string name="error_processing_image">Error occurred while processing the image. Please try again!</string>
   <string name="getting_edit_token">Getting token for editing</string>
   <string name="check_category_adding_template">Adding template for category check</string>
   <string name="check_category_notification_title">Requesting category check for %1$s</string>
-    <string name="check_category_edit_summary">Requesting category check</string>
+  <string name="check_category_edit_summary">Requesting category check</string>
   <string name="check_category_success_title">Category check requested</string>
   <string name="check_category_failure_title">Category check request didn\'t work</string>
   <string name="check_category_success_message">Requested category check for %1$s</string>
@@ -498,14 +505,14 @@ Upload your first media by tapping on the add button.</string>
   <string name="nominate_for_deletion_edit_deletion_request_log">Adding file to Delete requests log</string>
   <string name="nominate_for_deletion_create_deletion_request">Creating Delete requests subpage</string>
   <string name="notsure">Not sure</string>
-    <string name="send_thank_success_title">Sending Thanks: Success</string>
+  <string name="send_thank_success_title">Sending Thanks: Success</string>
   <string name="send_thank_success_message">Successfully sent thanks to %1$s</string>
   <string name="send_thank_failure_message">Failed to send thanks %1$s</string>
   <string name="send_thank_failure_title">Sending Thanks: Failure</string>
   <string name="send_thank_send">Sending thanks</string>
   <string name="send_thank_notification_title">Sending thanks</string>
-  <string name="send_thank_toast">Sending Thanks for %1$s</string>
 
+  <string name="send_thank_toast">Sending Thanks for %1$s</string>
   <string name="review_copyright">Does this follow the rules of copyright?</string>
   <string name="review_category">Is this correctly categorized?</string>
   <string name="review_spam">Is this in-scope?</string>
@@ -517,21 +524,17 @@ Upload your first media by tapping on the add button.</string>
   <string name="review_category_explanation">This image is under %1$s categories.</string>
   <string name="review_spam_report_question">It is out of scope because it is</string>
   <string name="review_c_violation_report_question">It is copyright violation because it is </string>
-    <string name="review_category_yes_button_text">No, mis-categorized</string>
-    <string name="review_category_no_button_text">Seems fine</string>
-    <string name="review_spam_yes_button_text">No, out of scope</string>
-    <string name="review_spam_no_button_text">Seems fine</string>
-    <string name="review_copyright_yes_button_text">No, copyright violation</string>
-    <string name="review_copyright_no_button_text">Seems fine</string>
-    <string name="review_thanks_yes_button_text">Yes, why not</string>
-    <string name="review_thanks_no_button_text">Next image</string>
-    <string name="skip_image_explanation">Clicking this button will give you another recently uploaded image from Wikimedia Commons</string>
-    <string name="review_image_explanation">You can review images and improve the quality of Wikimedia Commons.\n The four parameters of review are: \n - Is this image in-scope? \n - Does this image follow the rules of copyright? \n - Is this image correctly categorized? \n - If all goes well you can also thank the contributor.</string>
+  <string name="review_category_yes_button_text">No, mis-categorized</string>
+  <string name="review_category_no_button_text">Seems fine</string>
+  <string name="review_spam_yes_button_text">No, out of scope</string>
+  <string name="review_spam_no_button_text">Seems fine</string>
+  <string name="review_copyright_yes_button_text">No, copyright violation</string>
+  <string name="review_copyright_no_button_text">Seems fine</string>
+  <string name="review_thanks_yes_button_text">Yes, why not</string>
+  <string name="review_thanks_no_button_text">Next image</string>
+  <string name="skip_image_explanation">Clicking this button will give you another recently uploaded image from Wikimedia Commons</string>
 
-  <plurals name="receiving_shared_content">
-    <item quantity="one">Receiving shared content. Processing the image might take some time depending on the size of the image and your device</item>
-    <item quantity="other">Receiving shared content. Processing the images might take some time depending on the size of the images and your device</item>
-  </plurals>
+  <string name="review_image_explanation">You can review images and improve the quality of Wikimedia Commons.\n The four parameters of review are: \n - Is this image in-scope? \n - Does this image follow the rules of copyright? \n - Is this image correctly categorized? \n - If all goes well you can also thank the contributor.</string>
 
   <string name="no_image">No images used</string>
   <string name="no_image_reverted">No images reverted</string>
@@ -549,7 +552,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="please_wait">Please wait…</string>
   <string name="images_featured_explanation">Featured pictures are images from highly skilled photographers and illustrators that the Wikimedia Commons community has chosen as some of the highest quality on the site.</string>
   <string name="images_via_nearby_explanation">Images Uploaded via Nearby places are the images which are uploaded by discovering places on the map.</string>
-  <string name="thanks_received_explanation" >This feature allows editors to send a Thank you notification to users who make useful edits – by using a small thank link on the history page or diff page.</string>
+  <string name="thanks_received_explanation">This feature allows editors to send a Thank you notification to users who make useful edits – by using a small thank link on the history page or diff page.</string>
   <string name="previous_image_caption_description">Copy previous captions &amp; description</string>
   <string name="previous_button_tooltip_message">Click to reuse the title and description you entered in your previous picture and modify it to fit your current one</string>
   <string name="welcome_do_upload_content_description">Examples of good images to upload to Commons</string>
@@ -630,4 +633,20 @@ Upload your first media by tapping on the add button.</string>
   <string name="use_location_from_similar_image">Did you shoot these two pictures at the same place? Do you want to use the latitude/longitude of the picture on the right?</string>
   <string name="load_more">Load More</string>
   <string name="nearby_no_results">No places found, try changing your search criteria.</string>
+
+  <string name="add_picture_to_wikipedia_article_title">Add image to Wikipedia</string>
+  <string name="add_picture_to_wikipedia_article_desc">Do you want to add this picture to the %1$s language Wikipedia article?</string>
+
+  <string name="add_picture_to_wikipedia_instructions_title">Instructions</string>
+  <string name="add_picture_to_wikipedia_instructions_desc">Take care to follow editing guidelines!</string>
+  <string name="confirm">Confirm</string>
+  <string name="instructions_title">Instructions</string>
+  <string name="wikipedia_instructions_step_1">1. Use the following wikitext:</string>
+  <string name="wikipedia_instructions_step_2">2. Clicking on Confirm will open the Wikipedia article</string>
+  <string name="wikipedia_instructions_step_3">3. Find an appropriate section in the article for your image</string>
+  <string name="wikipedia_instructions_step_4">4. Click on the Edit icon (the one like a pencil) for that section.</string>
+  <string name="wikipedia_instructions_step_5">5. Paste the wikitext in the appropriate place.</string>
+  <string name="wikipedia_instructions_step_6">6. Edit the wikitext for appropriate positioning, if necessary. For more information, see &lt;a href="https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image"&gt;here&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_7">7. Publish the article</string>
+  <string name="copy_wikicode_to_clipboard">Copy wikicode to clipboard</string>
 </resources>

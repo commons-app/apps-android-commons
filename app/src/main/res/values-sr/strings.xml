@@ -13,6 +13,31 @@
 * Милан Јелисавчић
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d датотека се отпрема</item>
+    <item quantity="other">%1$d датотеке се отпремају</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d отпремање</item>
+    <item quantity="other">%1$d отпремања</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Почиње %1$d отпремање</item>
+    <item quantity="other">Почињу %1$d отпремања</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d отпремање</item>
+    <item quantity="other">%1$d отпремања</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Слика ће се водити под лиценцом %1$s</item>
+    <item quantity="other">Слике ће се водити под лиценцом %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d отпремање</item>
+    <item quantity="other">%1$d отпремања</item>
+  </plurals>
   <string name="title_activity_explore">Истрага</string>
   <string name="navigation_item_explore">Истрага</string>
   <string name="preference_category_appearance">Изглед</string>
@@ -44,10 +69,6 @@
   <string name="upload_progress_notification_title_finishing">Завршавање отпремања датотеке „%1$s”</string>
   <string name="upload_failed_notification_title">Отпремање датотеке „%1$s” није успело</string>
   <string name="upload_failed_notification_subtitle">Додирните да бисте видели</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d датотека се отпрема</item>
-    <item quantity="other">%1$d датотеке се отпремају</item>
-  </plurals>
   <string name="title_activity_contributions">Ваша недавна отпремања</string>
   <string name="contribution_state_queued">На чекању</string>
   <string name="contribution_state_failed">Није успело</string>
@@ -79,19 +100,6 @@
   <string name="gps_disabled">GPS је онемогућен на вашем уређају. Желите ли да га омогућите?</string>
   <string name="enable_gps">Омогући GPS</string>
   <string name="contributions_subtitle_zero">Још увек нема отпремања</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d отпремање</item>
-    <item quantity="other">%1$d отпремања</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Почиње %1$d отпремање</item>
-    <item quantity="other">Почињу %1$d отпремања</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d отпремање</item>
-    <item quantity="other">%1$d отпремања</item>
-  </plurals>
   <string name="categories_not_found">Нема категорија које одговарају %1$s</string>
   <string name="categories_skip_explanation">Додајте категорије на слике да бисте олакшали корисницима њихово проналажење на Остави.\n\nДа бисте додали категорију, почните са писањем њеног имена.</string>
   <string name="categories_activity_title">Категорије</string>
@@ -112,10 +120,6 @@
   <string name="no_uploads_yet">Још увек нисте отпремили ниједну фотографију.</string>
   <string name="menu_retry_upload">Покушај поново</string>
   <string name="menu_cancel_upload">Откажи</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Слика ће се водити под лиценцом %1$s</item>
-    <item quantity="other">Слике ће се водити под лиценцом %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Слањем ове слике, ја тврдим да је у питању мој рад, да не садржи материјал или селфије заштићене ауторским правима, те да је на остале начине у складу са &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;смерницама Викимедијине оставе&lt;/a&gt;.</string>
   <string name="menu_download">Преузми</string>
   <string name="preference_license">Подразумевана лиценца</string>
@@ -393,10 +397,6 @@
   <string name="submit">Пошаљи</string>
   <string name="upload_title_duplicate">Већ постоји датотека са именом %1$s. Заиста желите да наставите?</string>
   <string name="map_application_missing">Није могуће пронаћи апликацију компатибилне мапе на вашем уређају. Инсталирајте апликацију мапе да бисте користили ову функцију.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d отпремање</item>
-    <item quantity="other">%1$d отпремања</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Обележивачи</string>
   <string name="title_activity_bookmarks">Обележивачи</string>
   <string name="title_page_bookmarks_pictures">Слике</string>

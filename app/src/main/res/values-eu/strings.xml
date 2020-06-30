@@ -13,6 +13,27 @@
 * Theklan
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Fitxategi %1$d kargatzen</item>
+    <item quantity="other">%1$d fitxategi kargatzen</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">igoera (%1$d)</item>
+    <item quantity="other">(%1$d) igoera</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Karga %1$d hasten</item>
+    <item quantity="other">%1$d karga hasten</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">karga %1$d</item>
+    <item quantity="other">%1$d karga</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Irudi hau %1$s lizentziapean egongo da</item>
+    <item quantity="other">Irudi hauek %1$s lizentziapean egongo dira</item>
+  </plurals>
   <string name="title_activity_explore">Esploratu</string>
   <string name="navigation_item_explore">Esploratu</string>
   <string name="preference_category_appearance">Itxura</string>
@@ -43,10 +64,6 @@
   <string name="upload_progress_notification_title_finishing">%1$s igotzen bukatzen</string>
   <string name="upload_failed_notification_title">%1$s igotzean akatsa</string>
   <string name="upload_failed_notification_subtitle">Ukitu ikusteko</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Fitxategi %1$d kargatzen</item>
-    <item quantity="other">%1$d fitxategi kargatzen</item>
-  </plurals>
   <string name="title_activity_contributions">Nire azken igoerak</string>
   <string name="contribution_state_queued">Itxoite-zerrendan</string>
   <string name="contribution_state_failed">Hutsegitea</string>
@@ -78,19 +95,6 @@
   <string name="gps_disabled">GPSa desgaituta dago gailu honetan. Gaitu nahi duzu?</string>
   <string name="enable_gps">GPSa gaitu</string>
   <string name="contributions_subtitle_zero">Oraindik ez da ezer igo</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">igoera (%1$d)</item>
-    <item quantity="other">(%1$d) igoera</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Karga %1$d hasten</item>
-    <item quantity="other">%1$d karga hasten</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">karga %1$d</item>
-    <item quantity="other">%1$d karga</item>
-  </plurals>
   <string name="categories_not_found">Ez da kategoriak aukritu %1$s izenarekin</string>
   <string name="categories_skip_explanation">Gehitu kategoriak zure argazkiak Wikimedia Commonsen aurkitzen errazagoak izan daitezen.\nHasi idazten kategoriak gehitzeko.</string>
   <string name="categories_activity_title">Kategoriak</string>
@@ -111,10 +115,6 @@
   <string name="no_uploads_yet">Oraindik ez duzu argazkirik igo.</string>
   <string name="menu_retry_upload">Berriz saiatu</string>
   <string name="menu_cancel_upload">Utzi</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Irudi hau %1$s lizentziapean egongo da</item>
-    <item quantity="other">Irudi hauek %1$s lizentziapean egongo dira</item>
-  </plurals>
   <string name="media_upload_policy">Irudi hau bidaltzen, nire lan propioa dela aitortzen dut, copyrighta duten materiala edo selfiak ez duela, eta beste motatakoak &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Ohikoaren arauak&lt;/a&gt;</string>
   <string name="menu_download">Jaitsi</string>
   <string name="preference_license">Berezko lizentzia</string>

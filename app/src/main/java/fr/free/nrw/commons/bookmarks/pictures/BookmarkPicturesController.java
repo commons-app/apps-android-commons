@@ -1,13 +1,5 @@
 package fr.free.nrw.commons.bookmarks.pictures;
 
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.bookmarks.Bookmark;
 import fr.free.nrw.commons.media.MediaClient;
@@ -15,6 +7,10 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
+import java.util.ArrayList;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 @Singleton
 public class BookmarkPicturesController {
@@ -40,16 +36,13 @@ public class BookmarkPicturesController {
         currentBookmarks = bookmarks;
         return Observable.fromIterable(bookmarks)
                 .flatMap((Function<Bookmark, ObservableSource<Media>>) this::getMediaFromBookmark)
-                .filter(media -> media != null && !StringUtils.isBlank(media.getFilename()))
                 .toList();
     }
 
     private Observable<Media> getMediaFromBookmark(Bookmark bookmark) {
-        Media dummyMedia = new Media("");
         return mediaClient.getMedia(bookmark.getMediaName())
-                .map(media -> media == null ? dummyMedia : media)
-                .onErrorReturn(throwable -> dummyMedia)
-                .toObservable();
+                .toObservable()
+            .onErrorResumeNext(Observable.empty());
     }
 
     /**

@@ -7,8 +7,9 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.media.MediaClient;
+import org.wikipedia.dataclient.WikiSite;
 
-/**
+    /**
  * Represents The View Adapter for the List of Contributions
  */
 public class ContributionsListAdapter extends
@@ -45,9 +46,8 @@ public class ContributionsListAdapter extends
      * Initializes the view holder with contribution data
      */
     @Override
-    public void onBindViewHolder(@NonNull final ContributionViewHolder holder, final int position) {
-        final Contribution contribution = getItem(position);
-        holder.init(position, contribution);
+    public void onBindViewHolder(@NonNull ContributionViewHolder holder, int position) {
+        holder.init(position, getItem(position));
     }
 
     Contribution getContributionForPosition(final int position) {
@@ -64,7 +64,8 @@ public class ContributionsListAdapter extends
         final int viewType) {
         final ContributionViewHolder viewHolder = new ContributionViewHolder(
             LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_contribution, parent, false), callback, mediaClient);
+                .inflate(R.layout.layout_contribution, parent, false),
+            callback, mediaClient);
         return viewHolder;
     }
 
@@ -75,5 +76,7 @@ public class ContributionsListAdapter extends
         void deleteUpload(Contribution contribution);
 
         void openMediaDetail(int contribution);
+
+        void addImageToWikipedia(Contribution contribution);
     }
 }

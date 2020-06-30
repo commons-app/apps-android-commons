@@ -8,14 +8,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.explore.SearchActivity;
+import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
@@ -34,7 +33,7 @@ public class CategoryImagesActivity
 
 
     private FragmentManager supportFragmentManager;
-    private CategoryImagesListFragment categoryImagesListFragment;
+    private CategoriesMediaFragment categoriesMediaFragment;
     private MediaDetailPagerFragment mediaDetails;
 
     /**
@@ -66,15 +65,15 @@ public class CategoryImagesActivity
      * Gets the categoryName from the intent and initializes the fragment for showing images of that category
      */
     private void setCategoryImagesFragment() {
-        categoryImagesListFragment = new CategoryImagesListFragment();
+        categoriesMediaFragment = new CategoriesMediaFragment();
         String categoryName = getIntent().getStringExtra("categoryName");
         if (getIntent() != null && categoryName != null) {
             Bundle arguments = new Bundle();
             arguments.putString("categoryName", categoryName);
-            categoryImagesListFragment.setArguments(arguments);
+            categoriesMediaFragment.setArguments(arguments);
             FragmentTransaction transaction = supportFragmentManager.beginTransaction();
             transaction
-                    .add(R.id.fragmentContainer, categoryImagesListFragment)
+                    .add(R.id.fragmentContainer, categoriesMediaFragment)
                     .commit();
         }
     }
@@ -137,12 +136,7 @@ public class CategoryImagesActivity
      */
     @Override
     public Media getMediaAtPosition(int i) {
-        if (categoryImagesListFragment.getAdapter() == null) {
-            // not yet ready to return data
-            return null;
-        } else {
-            return (Media) categoryImagesListFragment.getAdapter().getItem(i);
-        }
+        return categoriesMediaFragment.getMediaAtPosition(i);
     }
 
     /**
@@ -163,10 +157,7 @@ public class CategoryImagesActivity
      */
     @Override
     public int getTotalMediaCount() {
-        if (categoryImagesListFragment.getAdapter() == null) {
-            return 0;
-        }
-        return categoryImagesListFragment.getAdapter().getCount();
+        return categoriesMediaFragment.getTotalMediaCount();
     }
 
     /**
@@ -196,14 +187,8 @@ public class CategoryImagesActivity
         }
     }
 
-    /**
-     * This method is called when viewPager has reached its end.
-     * Fetches more images using search query and adds it to the gridView and viewpager adapter
-     */
     @Override
-    public void requestMoreImages() {
-        if (categoryImagesListFragment!=null){
-            categoryImagesListFragment.fetchMoreImagesViewPager();
-        }
+    public void onMediaClicked(int position) {
+        // this class is unused and will be deleted
     }
 }

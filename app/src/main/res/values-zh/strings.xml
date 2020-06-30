@@ -29,6 +29,34 @@
 * 阿pp
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d个文件正在上传</item>
+    <item quantity="other">%1$d个文件正在上传</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d次上传</item>
+    <item quantity="other">%1$d次上传</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">开始%1$d次上传</item>
+    <item quantity="other">开始%1$d次上传</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d次上传</item>
+    <item quantity="other">%1$d次上传</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">该图像的授权协议是 %1$s</item>
+    <item quantity="other">这些图像的授权协议是 %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d次上传</item>
+    <item quantity="other">%1$d次上传</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="other">正在处理数据。处理时间取决于图片的尺寸和您的设备</item>
+  </plurals>
   <string name="title_activity_explore">探索</string>
   <string name="navigation_item_explore">探索</string>
   <string name="preference_category_appearance">外观</string>
@@ -60,10 +88,6 @@
   <string name="upload_progress_notification_title_finishing">正在完成上传%1$s</string>
   <string name="upload_failed_notification_title">上传%1$s失败</string>
   <string name="upload_failed_notification_subtitle">点击查看</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d个文件正在上传</item>
-    <item quantity="other">%1$d个文件正在上传</item>
-  </plurals>
   <string name="title_activity_contributions">我的最近上传</string>
   <string name="contribution_state_queued">已入队列</string>
   <string name="contribution_state_failed">失败</string>
@@ -75,9 +99,10 @@
   <string name="provider_contributions">我的上传</string>
   <string name="menu_share">分享</string>
   <string name="menu_open_in_browser">在浏览器中查看</string>
-  <string name="share_title_hint" fuzzy="true">标题 （要求）</string>
+  <string name="share_title_hint">说明 （要求）</string>
   <string name="add_caption_toast">请提供此文件的描述</string>
   <string name="share_description_hint">描述</string>
+  <string name="share_caption_hint">说明（255个字符以内）</string>
   <string name="login_failed_network">无法登录 - 网络故障</string>
   <string name="login_failed_wrong_credentials">无法登录——请检查您的用户名和密码</string>
   <string name="login_failed_throttled">失败次数过多。请在几分钟后重试。</string>
@@ -96,19 +121,6 @@
   <string name="gps_disabled">您的设备禁用了GPS。您是否要启用它？</string>
   <string name="enable_gps">启用GPS</string>
   <string name="contributions_subtitle_zero">尚无上传</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d次上传</item>
-    <item quantity="other">%1$d次上传</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">开始%1$d次上传</item>
-    <item quantity="other">开始%1$d次上传</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d次上传</item>
-    <item quantity="other">%1$d次上传</item>
-  </plurals>
   <string name="categories_not_found">没有找到匹配%1$s的分类</string>
   <string name="categories_skip_explanation">添加分类使您的图像更容易在维基共享资源被找到。开始输入以添加分类。</string>
   <string name="categories_activity_title">分类</string>
@@ -130,10 +142,6 @@
   <string name="no_uploads_yet">您还没有上传任何照片。</string>
   <string name="menu_retry_upload">重试</string>
   <string name="menu_cancel_upload">取消</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">该图像的授权协议是 %1$s</item>
-    <item quantity="other">这些图像的授权协议是 %1$s</item>
-  </plurals>
   <string name="media_upload_policy">通过提交该图片，我声明这是我自己的作品，其不包含受版权保护的材料或自拍像，并遵循&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;维基共享资源&lt;/a&gt;方针。</string>
   <string name="menu_download">下载</string>
   <string name="preference_license">默认许可协议</string>
@@ -199,8 +207,10 @@
   <string name="no_nearby">找不到附近地点</string>
   <string name="warning">警告</string>
   <string name="upload_image_duplicate">此文件已在共享资源下存在。您确定要继续吗？</string>
+  <string name="upload">上传</string>
   <string name="yes">是</string>
   <string name="no">否</string>
+  <string name="media_detail_caption">说明</string>
   <string name="media_detail_title">标题</string>
   <string name="media_detail_description">描述</string>
   <string name="media_detail_discussion">讨论</string>
@@ -308,8 +318,8 @@
   <string name="nearby_wikidata">维基数据</string>
   <string name="nearby_wikipedia">维基百科</string>
   <string name="nearby_commons">共享资源</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;评价我们&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;常见问题&lt;/u&gt;</string>
+  <string name="about_rate_us">评价我们</string>
+  <string name="about_faq">常见问题</string>
   <string name="welcome_skip_button">跳过指导</string>
   <string name="no_internet">互联网不可用</string>
   <string name="internet_established">互联网可用</string>
@@ -317,7 +327,7 @@
   <string name="error_review">获取审查图片错误。按刷新键重试。</string>
   <string name="error_review_categories">获取审查图片类别错误。按刷新按键重试。</string>
   <string name="no_notifications">找不到通知</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;翻译&lt;/u&gt;</string>
+  <string name="about_translate">翻译</string>
   <string name="about_translate_title">语言</string>
   <string name="about_translate_message">选择您希望提交翻译的语言</string>
   <string name="about_translate_proceed">已处理</string>
@@ -344,6 +354,7 @@
   <string name="error_loading_subcategories">加载子分类时发生错误。</string>
   <string name="search_tab_title_media">媒体</string>
   <string name="search_tab_title_categories">分类</string>
+  <string name="search_tab_title_depictions">项目</string>
   <string name="explore_tab_title_featured">特色</string>
   <string name="explore_tab_title_mobile">通过移动端上传</string>
   <string name="successful_wikidata_edit">图片已添加到维基数据上的%1$s！</string>
@@ -418,10 +429,6 @@
   <string name="submit">发布</string>
   <string name="upload_title_duplicate">名为%1$s的文件已经存在。您确定要继续吗？</string>
   <string name="map_application_missing">您的设备上无法找到兼容的地图应用程序。请安装地图应用程序来使用此功能。</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d次上传</item>
-    <item quantity="other">%1$d次上传</item>
-  </plurals>
   <string name="navigation_item_bookmarks">书签</string>
   <string name="title_activity_bookmarks">书签</string>
   <string name="title_page_bookmarks_pictures">图片</string>
@@ -507,9 +514,6 @@
   <string name="review_thanks_no_button_text">下一张图片</string>
   <string name="skip_image_explanation">点击这个按钮会给你另外一个来自于Wikimedia Common上传的图片</string>
   <string name="review_image_explanation">你可以审查图片并提高Wikimedia Commoms的质量。\n审查的四个参数是：\n-图片尺寸是否在规定的范围\n-图片是否遵循版权规则\n-图片是否正确分类\n-如果一切正常你是否也可以感谢贡献者</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="other">正在处理数据。处理时间取决于图片的尺寸和您的设备</item>
-  </plurals>
   <string name="no_image">没有被使用的图片</string>
   <string name="no_image_reverted">没有被撤回的图片</string>
   <string name="no_image_uploaded">还没有上传图片</string>
@@ -575,8 +579,15 @@
   <string name="place_type">地点类型：</string>
   <string name="nearby_search_hint">桥梁、博物馆、旅馆等</string>
   <string name="you_must_reset_your_passsword">登录时出现一些问题，您必须重新设置您的密码！</string>
+  <string name="title_app_shortcut_explore">探索</string>
+  <string name="title_app_shortcut_bookmark">书签</string>
+  <string name="title_app_shortcut_setting">设置</string>
   <string name="wallpaper_set_unsuccessfully">出错了。无法设置壁纸</string>
   <string name="setting_wallpaper_dialog_title">设为壁纸</string>
   <string name="setting_wallpaper_dialog_message">正在设置壁纸。请稍等…</string>
   <string name="load_more">加载更多</string>
+  <string name="add_picture_to_wikipedia_instructions_title">说明</string>
+  <string name="confirm">确认</string>
+  <string name="instructions_title">说明</string>
+  <string name="copy_wikicode_to_clipboard">复制维基代码到剪贴板</string>
 </resources>

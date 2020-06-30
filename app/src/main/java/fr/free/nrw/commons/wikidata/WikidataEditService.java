@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.wikidata;
 
-import static fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_ID_PREFIX;
+
+import static fr.free.nrw.commons.media.MediaClientKt.PAGE_ID_PREFIX;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

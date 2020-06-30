@@ -10,7 +10,7 @@
         tools:targetApi="n_mr1">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="fr.free.nrw.commons.explore.categories.ExploreActivity"
+            android:targetClass="fr.free.nrw.commons.explore.ExploreActivity"
             android:targetPackage="fr.free.nrw.commons.beta" />
     </shortcut>
 

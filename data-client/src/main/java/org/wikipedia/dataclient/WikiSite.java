@@ -139,6 +139,15 @@ public class WikiSite implements Parcelable {
     }
 
     /**
+     * Get wiki's mobile URL
+     * Eg. https://en.m.wikipedia.org
+     * @return
+     */
+    public String mobileUrl() {
+        return String.format("%1$s://%2$s", scheme(), mobileAuthority());
+    }
+
+    /**
      * @return The canonical "desktop" form of the authority. For example, if the authority
      * is in a "mobile" form, e.g. en.m.wikipedia.org, this will become en.wikipedia.org.
      */

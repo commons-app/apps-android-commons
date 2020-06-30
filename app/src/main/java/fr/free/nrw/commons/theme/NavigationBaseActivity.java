@@ -42,7 +42,7 @@ import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.LogoutClient;
 import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
-import fr.free.nrw.commons.explore.categories.ExploreActivity;
+import fr.free.nrw.commons.explore.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.review.ReviewActivity;
