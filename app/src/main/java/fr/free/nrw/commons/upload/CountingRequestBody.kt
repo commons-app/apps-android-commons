@@ -12,7 +12,12 @@ import java.io.IOException
  *
  * @author Ashish Kumar
  */
-class CountingRequestBody(protected var delegate: RequestBody, protected var listener: Listener) : RequestBody() {
+class CountingRequestBody(
+    protected var delegate: RequestBody,
+    protected var listener: Listener,
+    var offset: Long,
+    var totalContentLength: Long
+) : RequestBody() {
     protected var countingSink: CountingSink? = null
     override fun contentType(): MediaType? {
         return delegate.contentType()
@@ -37,11 +42,12 @@ class CountingRequestBody(protected var delegate: RequestBody, protected var lis
 
     protected inner class CountingSink(delegate: Sink?) : ForwardingSink(delegate!!) {
         private var bytesWritten: Long = 0
+
         @Throws(IOException::class)
         override fun write(source: Buffer, byteCount: Long) {
             super.write(source, byteCount)
             bytesWritten += byteCount
-            listener.onRequestProgress(bytesWritten, contentLength())
+            listener.onRequestProgress(offset + bytesWritten, totalContentLength)
         }
     }
 
