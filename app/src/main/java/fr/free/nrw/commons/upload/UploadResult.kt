@@ -7,6 +7,7 @@ private const val RESULT_SUCCESS = "Success"
 data class UploadResult(
     val result: String,
     val filekey: String,
+    val offset: Int,
     val filename: String,
     val sessionkey: String,
     val imageinfo: ImageInfo
