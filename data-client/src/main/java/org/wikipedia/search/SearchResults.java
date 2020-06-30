@@ -1,6 +1,5 @@
 package org.wikipedia.search;
 
-import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -43,9 +42,7 @@ public class SearchResults {
         Collections.sort(pages, (a, b) -> ((Integer) a.index()).compareTo(b.index()));
 
         for (MwQueryPage page : pages) {
-            if(!page.categoryInfo().isHidden()){
-                searchResults.add(new SearchResult(page, wiki));
-            }
+            searchResults.add(new SearchResult(page, wiki));
         }
         this.results = searchResults;
         this.continuation = continuation;
