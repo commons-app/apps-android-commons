@@ -5,6 +5,7 @@ import androidx.room.TypeConverter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.contributions.ChunkInfo;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.upload.WikidataPlace;
@@ -80,6 +81,16 @@ public class Converters {
     @TypeConverter
     public static WikidataPlace stringToWikidataPlace(String wikidataPlace) {
         return readObjectFromString(wikidataPlace, WikidataPlace.class);
+    }
+
+    @TypeConverter
+    public static String chunkInfoToString(ChunkInfo chunkInfo) {
+        return writeObjectToString(chunkInfo);
+    }
+
+    @TypeConverter
+    public static ChunkInfo stringToChunkInfo(String chunkInfo) {
+        return readObjectFromString(chunkInfo, ChunkInfo.class);
     }
 
     @TypeConverter

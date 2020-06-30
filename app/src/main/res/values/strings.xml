@@ -649,4 +649,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="wikipedia_instructions_step_6">6. Edit the wikitext for appropriate positioning, if necessary. For more information, see &lt;a href="https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image"&gt;here&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Publish the article</string>
   <string name="copy_wikicode_to_clipboard">Copy wikicode to clipboard</string>
+  <string name="pause">pause</string>
+  <string name="resume">resume</string>
+  <string name="paused">Paused</string>
 </resources>

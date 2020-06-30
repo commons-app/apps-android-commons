@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload
 
+import fr.free.nrw.commons.contributions.ChunkInfo
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import okio.*

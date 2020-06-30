@@ -36,6 +36,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.wikipedia.dataclient.WikiSite;
+import timber.log.Timber;
 
 /**
  * Created by root on 01.06.2018.
@@ -201,10 +202,12 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
    *
    * @param shouldShow True when contributions list should be hidden.
    */
+  @Override
   public void showProgress(final boolean shouldShow) {
     progressBar.setVisibility(shouldShow ? VISIBLE : GONE);
   }
 
+  @Override
   public void showNoContributionsUI(final boolean shouldShow) {
     noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
   }
@@ -263,6 +266,18 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         });
   }
 
+  @Override
+  public void pauseUpload(Contribution contribution) {
+    Timber.d("Contribution pause clicked");
+    callback.pauseUpload(contribution);
+  }
+
+  @Override
+  public void resumeUpload(Contribution contribution) {
+    Timber.d("Contribution resume clicked");
+    callback.retryUpload(contribution);
+  }
+
   /**
    * Display confirmation dialog with instructions when the user tries to add image to wikipedia
    *
@@ -310,6 +325,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   public interface Callback {
 
     void retryUpload(Contribution contribution);
+
+    void pauseUpload(Contribution contribution);
 
     void showDetail(int position);
   }

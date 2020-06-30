@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.contributions;
 
 import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
+import static fr.free.nrw.commons.contributions.Contribution.STATE_PAUSED;
 import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
@@ -454,7 +455,7 @@ public class ContributionsFragment
     @Override
     public void retryUpload(Contribution contribution) {
         if (NetworkUtils.isInternetConnectionEstablished(getContext())) {
-            if (contribution.getState() == STATE_FAILED && null != uploadService) {
+            if (contribution.getState() == STATE_FAILED || contribution.getState() == STATE_PAUSED && null != uploadService) {
                 uploadService.queue(contribution);
                 Timber.d("Restarting for %s", contribution.toString());
             } else {
@@ -464,6 +465,11 @@ public class ContributionsFragment
             ViewUtil.showLongToast(getContext(), R.string.this_function_needs_network_connection);
         }
 
+    }
+
+    @Override
+    public void pauseUpload(Contribution contribution) {
+        uploadService.pauseUpload(contribution);
     }
 
     /**

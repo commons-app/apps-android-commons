@@ -5,7 +5,6 @@ import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -16,6 +15,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.contributions.ChunkInfo;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.MainActivity;
@@ -28,7 +28,6 @@ import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.processors.PublishProcessor;
 import io.reactivex.schedulers.Schedulers;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -119,6 +118,20 @@ public class UploadService extends CommonsDaggerService {
           .subscribe());
     }
 
+    public void onChunkUploaded(Contribution contribution, ChunkInfo chunkInfo) {
+      contribution.setChunkInfo(chunkInfo);
+      compositeDisposable.add(contributionDao.update(contribution)
+          .subscribeOn(ioThreadScheduler)
+          .subscribe());
+    }
+  }
+
+  public void pauseUpload(Contribution contribution) {
+    uploadClient.pauseUpload();
+    contribution.setState(Contribution.STATE_PAUSED);
+    compositeDisposable.add(contributionDao.update(contribution)
+        .subscribeOn(ioThreadScheduler)
+        .subscribe());
   }
 
   @Override
@@ -208,13 +221,11 @@ public class UploadService extends CommonsDaggerService {
 
   @SuppressLint("CheckResult")
   private void uploadContribution(Contribution contribution) {
-    Uri localUri = contribution.getLocalUri();
-    if (localUri == null || localUri.getPath() == null) {
+    if (contribution.getLocalUri() == null || contribution.getLocalUri().getPath() == null) {
       Timber.d("localUri/path is null");
       return;
     }
-    String notificationTag = localUri.toString();
-    File localFile = new File(localUri.getPath());
+    String notificationTag = contribution.getLocalUri().toString();
 
     Timber.d("Before execution!");
     final Media media = contribution.getMedia();
@@ -243,7 +254,7 @@ public class UploadService extends CommonsDaggerService {
 
     Observable.fromCallable(() -> "Temp_" + contribution.hashCode() + filename)
         .flatMap(stashFilename -> uploadClient
-            .uploadFileToStash(getApplicationContext(), stashFilename, localFile,
+            .uploadFileToStash(getApplicationContext(), stashFilename, contribution,
                 notificationUpdater))
         .subscribeOn(Schedulers.io())
         .observeOn(Schedulers.io())
@@ -308,7 +319,8 @@ public class UploadService extends CommonsDaggerService {
         .add(wikidataEditService.addDepictionsAndCaptions(uploadResult, contribution));
     WikidataPlace wikidataPlace = contribution.getWikidataPlace();
     if (wikidataPlace != null && wikidataPlace.getImageValue() == null) {
-      wikidataEditService.createClaim(wikidataPlace, uploadResult.getFilename(), contribution.getMedia().getCaptions());
+      wikidataEditService.createClaim(wikidataPlace, uploadResult.getFilename(),
+          contribution.getMedia().getCaptions());
     }
     saveCompletedContribution(contribution, uploadResult);
   }
