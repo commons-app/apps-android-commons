@@ -14,7 +14,7 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
-import fr.free.nrw.commons.utils.ConfigUtils
+import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import org.hamcrest.CoreMatchers
 import org.junit.Before
 import org.junit.Rule
@@ -36,7 +36,9 @@ class AboutActivityTest {
     @Test
     fun testBuildNumber() {
         Espresso.onView(ViewMatchers.withId(R.id.about_version))
-                .check(ViewAssertions.matches(withText(ConfigUtils.getVersionNameWithSha(getApplicationContext()))))
+                .check(ViewAssertions.matches(
+                    withText(getApplicationContext<CommonsApplication>().getVersionNameWithSha())
+                ))
     }
 
     @Test

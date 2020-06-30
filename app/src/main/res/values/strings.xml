@@ -331,6 +331,9 @@
   <string name="retry">Retry</string>
   <string name="showcase_view_got_it_button">Got it!</string>
   <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles.\n\nClicking on \'SEARCH THIS AREA\' locks the map and launches a nearby search around that location.</string>
+  <string name="showcase_view_needs_photo">This place needs a photo.</string>
+  <string name="showcase_view_has_photo">This place already has a photo.</string>
+  <string name="showcase_view_no_longer_exists">This place no longer exists.</string>
 
   <string name="showcase_view_list_icon">Tapping this button brings up a list of these places</string>
   <string name="showcase_view_plus_fab">You can upload a picture for any place from your gallery or camera</string>

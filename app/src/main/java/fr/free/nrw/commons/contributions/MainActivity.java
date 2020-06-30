@@ -127,7 +127,8 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         tabLayout.getTabAt(1).setCustomView(nearbyTabLinearLayout);
 
         nearbyInfo.setOnClickListener(view ->
-                new AlertDialog.Builder(MainActivity.this).setTitle(R.string.title_activity_nearby).setMessage(R.string.showcase_view_whole_nearby_activity)
+                new AlertDialog.Builder(MainActivity.this).setTitle(R.string.title_activity_nearby)
+                        .setView(getLayoutInflater().inflate(R.layout.dialog_nearby, null))
                         .setCancelable(true)
                         .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
                         .create()

@@ -31,6 +31,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.utils.DialogUtil;
+import fr.free.nrw.commons.wikidata.WikidataEditService;
 import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -41,7 +42,8 @@ import org.wikipedia.dataclient.WikiSite;
  */
 
 public class ContributionsListFragment extends CommonsDaggerSupportFragment implements
-    ContributionsListContract.View, ContributionsListAdapter.Callback, WikipediaInstructionsDialogFragment.Callback {
+    ContributionsListContract.View, ContributionsListAdapter.Callback,
+    WikipediaInstructionsDialogFragment.Callback {
 
   private static final String RV_STATE = "rv_scroll_state";
 
@@ -275,7 +277,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   }
 
 
-
   public Media getMediaAtPosition(final int i) {
     return adapter.getContributionForPosition(i).getMedia();
   }
@@ -291,13 +292,14 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
    */
   @Override
   public void onConfirmClicked(@Nullable Contribution contribution, boolean copyWikicode) {
-    if(copyWikicode) {
-      String wikicode = contribution.getMedia().getWikiCode();
+    if (copyWikicode) {
+      String wikicode = contribution.getWikiCode();
       Utils.copy("wikicode", wikicode, getContext());
     }
 
-    final String url = languageWikipediaSite.mobileUrl() + "/wiki/" + contribution.getWikidataPlace()
-        .getWikipediaPageTitle();
+    final String url =
+        languageWikipediaSite.mobileUrl() + "/wiki/" + contribution.getWikidataPlace()
+            .getWikipediaPageTitle();
     Utils.handleWebUrl(getContext(), Uri.parse(url));
   }
 

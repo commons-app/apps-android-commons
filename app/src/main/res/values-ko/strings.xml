@@ -33,6 +33,7 @@
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d개 업로드</item>
+    <item quantity="other">%1$d개 업로드</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">이 그림은 %1$s에 따라 사용이 허가됩니다</item>

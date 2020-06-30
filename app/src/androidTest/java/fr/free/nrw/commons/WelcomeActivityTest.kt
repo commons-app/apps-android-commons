@@ -23,7 +23,7 @@ class WelcomeActivityTest {
 
     @Test
     fun ifBetaShowsSkipButton() {
-        if (ConfigUtils.isBetaFlavour()) {
+        if (ConfigUtils.isBetaFlavour) {
             onView(withId(R.id.finishTutorialButton))
                     .check(matches(isDisplayed()))
         }
@@ -31,7 +31,7 @@ class WelcomeActivityTest {
 
     @Test
     fun ifProdHidesSkipButton() {
-        if (!ConfigUtils.isBetaFlavour()) {
+        if (!ConfigUtils.isBetaFlavour) {
             onView(withId(R.id.finishTutorialButton))
                     .check(matches(not(isDisplayed())))
         }
@@ -39,7 +39,7 @@ class WelcomeActivityTest {
 
     @Test
     fun testBetaSkipButton() {
-        if (ConfigUtils.isBetaFlavour()) {
+        if (ConfigUtils.isBetaFlavour) {
             onView(withId(R.id.finishTutorialButton))
                     .perform(ViewActions.click())
             assert(activityRule.activity.isDestroyed)

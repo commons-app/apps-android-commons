@@ -600,4 +600,18 @@
   <string name="use_location_from_similar_image">Tog du dessa två bilder på samma plats? Vill du använda den högra bildens latitud/longitud?</string>
   <string name="load_more">Läs in fler</string>
   <string name="nearby_no_results">Inga platser hittades, försök ändra dina sökkriterier.</string>
+  <string name="add_picture_to_wikipedia_article_title">Lägg till bild på Wikipedia</string>
+  <string name="add_picture_to_wikipedia_article_desc">Vill du lägga till denna bild i Wikipedia-artikeln på %1$s?</string>
+  <string name="add_picture_to_wikipedia_instructions_title">Instruktioner</string>
+  <string name="add_picture_to_wikipedia_instructions_desc">Se till att följa riktlinjerna för hur man redigerar!</string>
+  <string name="confirm">Bekräfta</string>
+  <string name="instructions_title">Instruktioner</string>
+  <string name="wikipedia_instructions_step_1">1. Använd följande wikitext:</string>
+  <string name="wikipedia_instructions_step_2">2. Klicka på \"Bekräfta\" för att öppna Wikipedia-artikeln</string>
+  <string name="wikipedia_instructions_step_3">3. Hitta ett lämplig avsnitt i artikeln för din bild</string>
+  <string name="wikipedia_instructions_step_4">4. Klicka på redigeringsikonen (ser ut som en penna) för detta avsnitt.</string>
+  <string name="wikipedia_instructions_step_5">5. Klistra in wikitexten på det lämpliga stället.</string>
+  <string name="wikipedia_instructions_step_6">6. Redigera wikitexten för att placera den mer lämpligt vid behov. För mer information, se &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;här&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_7">7. Publicera artikeln</string>
+  <string name="copy_wikicode_to_clipboard">Kopiera wikikod till urklipp</string>
 </resources>
