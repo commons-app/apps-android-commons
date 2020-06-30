@@ -176,6 +176,11 @@ public class SearchActivity extends NavigationBaseActivity
        return searchMediaFragment.getTotalMediaCount();
     }
 
+    @Override
+    public Integer getContributionStateAt(int position) {
+        return null;
+    }
+
     /**
      * This method is called on success of API call for image Search.
      * The viewpager will notified that number of items have changed.

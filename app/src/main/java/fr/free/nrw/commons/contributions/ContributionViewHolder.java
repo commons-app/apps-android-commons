@@ -61,8 +61,8 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
   public void init(final int position, final Contribution contribution) {
     this.contribution = contribution;
     this.position = position;
-    titleView.setText(contribution.getMostRelevantCaption());
-    final String imageSource = chooseImageSource(contribution.getThumbUrl(),
+    titleView.setText(contribution.getMedia().getMostRelevantCaption());
+    final String imageSource = chooseImageSource(contribution.getMedia().getThumbUrl(),
         contribution.getLocalUri());
     if (!TextUtils.isEmpty(imageSource)) {
       final ImageRequest imageRequest =

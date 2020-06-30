@@ -278,7 +278,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
 
   public Media getMediaAtPosition(final int i) {
-    return adapter.getContributionForPosition(i);
+    return adapter.getContributionForPosition(i).getMedia();
   }
 
   public int getTotalMediaCount() {
@@ -301,6 +301,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         languageWikipediaSite.mobileUrl() + "/wiki/" + contribution.getWikidataPlace()
             .getWikipediaPageTitle();
     Utils.handleWebUrl(getContext(), Uri.parse(url));
+  }
+
+  public Integer getContributionStateAt(int position) {
+    return adapter.getContributionForPosition(position).getState();
   }
 
   public interface Callback {

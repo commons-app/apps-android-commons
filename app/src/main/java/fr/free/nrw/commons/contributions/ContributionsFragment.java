@@ -41,7 +41,6 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -489,6 +488,11 @@ public class ContributionsFragment
     @Override
     public int getTotalMediaCount() {
         return contributionsListFragment.getTotalMediaCount();
+    }
+
+    @Override
+    public Integer getContributionStateAt(int position) {
+        return contributionsListFragment.getContributionStateAt(position);
     }
 }
 

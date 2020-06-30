@@ -214,7 +214,7 @@ public class WikidataEditService {
   }
 
   private Observable<Boolean> captionEdits(Contribution contribution, Long fileEntityId) {
-    return Observable.fromIterable(contribution.getCaptions().entrySet())
+    return Observable.fromIterable(contribution.getMedia().getCaptions().entrySet())
         .concatMap(entry -> addCaption(fileEntityId, entry.getKey(), entry.getValue()));
   }
 

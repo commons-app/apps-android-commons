@@ -17,14 +17,11 @@ import java.util.*
 import javax.inject.Inject
 
 class MediaConverter @Inject constructor() {
-    fun convert(
-        page: MwQueryPage,
-        entity: Entities.Entity,
-        imageInfo: ImageInfo
-    ): Media {
+    fun convert(page: MwQueryPage, entity: Entities.Entity, imageInfo: ImageInfo): Media {
         val metadata = imageInfo.metadata
         requireNotNull(metadata) { "No metadata" }
         return Media(
+            page.pageId().toString(),
             imageInfo.thumbUrl.takeIf { it.isNotBlank() } ?: imageInfo.originalUrl,
             imageInfo.originalUrl,
             page.title(),
@@ -33,14 +30,12 @@ class MediaConverter @Inject constructor() {
             metadata.licenseShortName(),
             metadata.prefixedLicenseUrl,
             getArtist(metadata),
-            page.pageId().toString(),
             MediaDataExtractorUtil.extractCategoriesFromList(metadata.categories),
             metadata.latLng,
             entity.labels().mapValues { it.value.value() },
             entity.descriptions().mapValues { it.value.value() },
             entity.depictionIds()
         )
-
     }
 
     /**
