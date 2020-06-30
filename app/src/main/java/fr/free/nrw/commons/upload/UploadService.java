@@ -308,7 +308,7 @@ public class UploadService extends CommonsDaggerService {
         .add(wikidataEditService.addDepictionsAndCaptions(uploadResult, contribution));
     WikidataPlace wikidataPlace = contribution.getWikidataPlace();
     if (wikidataPlace != null && wikidataPlace.getImageValue() == null) {
-      wikidataEditService.createClaim(wikidataPlace, uploadResult.getFilename(), contribution.getCaptions());
+      wikidataEditService.createClaim(wikidataPlace, uploadResult.getFilename(), contribution.getMedia().getCaptions());
     }
     saveCompletedContribution(contribution, uploadResult);
   }

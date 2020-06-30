@@ -293,7 +293,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   @Override
   public void onConfirmClicked(@Nullable Contribution contribution, boolean copyWikicode) {
     if (copyWikicode) {
-      String wikicode = contribution.getWikiCode();
+      String wikicode = contribution.getMedia().getWikiCode();
       Utils.copy("wikicode", wikicode, getContext());
     }
 
