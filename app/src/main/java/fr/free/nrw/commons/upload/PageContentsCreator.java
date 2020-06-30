@@ -33,7 +33,7 @@ class PageContentsCreator {
     buffer
         .append("== {{int:filedesc}} ==\n")
         .append("{{Information\n")
-        .append("|description=").append(contribution.getDescription()).append("\n")
+        .append("|description=").append(contribution.getFallbackDescription()).append("\n")
         .append("|source=").append("{{own}}\n")
         .append("|author=[[User:").append(contribution.getCreator()).append("|")
         .append(contribution.getCreator()).append("]]\n");

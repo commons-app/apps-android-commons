@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -110,8 +109,8 @@ public class UploadController {
             contribution.setCreator(sessionManager.getAuthorName());
         }
 
-        if (contribution.getDescription() == null) {
-            contribution.setDescription("");
+        if (contribution.getFallbackDescription() == null) {
+            contribution.setFallbackDescription("");
         }
 
         final String license = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
@@ -164,7 +163,7 @@ public class UploadController {
         return mimeType;
     }
 
-    private long resolveDataLength(final ContentResolver contentResolver, final Media contribution) {
+    private long resolveDataLength(final ContentResolver contentResolver, final Contribution contribution) {
         try {
             if (contribution.getDataLength() <= 0) {
                 Timber.d("UploadController/doInBackground, contribution.getLocalUri():%s", contribution.getLocalUri());
@@ -182,7 +181,7 @@ public class UploadController {
         return contribution.getDataLength();
     }
 
-    private Date resolveDateTakenOrNow(final ContentResolver contentResolver, final Media contribution) {
+    private Date resolveDateTakenOrNow(final ContentResolver contentResolver, final Contribution contribution) {
         Timber.d("local uri   %s", contribution.getLocalUri());
         try(final Cursor cursor = dateTakenCursor(contentResolver, contribution)) {
             if (cursor != null && cursor.getCount() != 0 && cursor.getColumnCount() != 0) {
@@ -196,7 +195,7 @@ public class UploadController {
         }
     }
 
-    private Cursor dateTakenCursor(final ContentResolver contentResolver, final Media contribution) {
+    private Cursor dateTakenCursor(final ContentResolver contentResolver, final Contribution contribution) {
         return contentResolver.query(contribution.getLocalUri(),
             new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
     }

@@ -1,16 +1,21 @@
 package fr.free.nrw.commons.category
 
-import io.reactivex.Observable
+import io.reactivex.Single
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import javax.inject.Inject
 import javax.inject.Singleton
 
 const val CATEGORY_PREFIX = "Category:"
+const val SUB_CATEGORY_CONTINUATION_PREFIX = "sub_category_"
+const val PARENT_CATEGORY_CONTINUATION_PREFIX = "parent_category_"
+
 /**
  * Category Client to handle custom calls to Commons MediaWiki APIs
  */
 @Singleton
-class CategoryClient @Inject constructor(private val categoryInterface: CategoryInterface) {
+class CategoryClient @Inject constructor(private val categoryInterface: CategoryInterface) :
+    ContinuationClient<MwQueryResponse, String>() {
+
     /**
      * Searches for categories containing the specified string.
      *
@@ -21,8 +26,8 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
      */
     @JvmOverloads
     fun searchCategories(filter: String?, itemLimit: Int, offset: Int = 0):
-            Observable<List<String>> {
-        return responseToCategoryName(categoryInterface.searchCategories(filter, itemLimit, offset))
+            Single<List<String>> {
+        return responseMapper(categoryInterface.searchCategories(filter, itemLimit, offset))
     }
 
     /**
@@ -35,8 +40,8 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
      */
     @JvmOverloads
     fun searchCategoriesForPrefix(prefix: String?, itemLimit: Int, offset: Int = 0):
-            Observable<List<String>> {
-        return responseToCategoryName(
+            Single<List<String>> {
+        return responseMapper(
             categoryInterface.searchCategoriesForPrefix(prefix, itemLimit, offset)
         )
     }
@@ -48,8 +53,12 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
      * @param categoryName Category name as defined on commons
      * @return Observable emitting the categories returned. If our search yielded "Category:Test", "Test" is emitted.
      */
-    fun getSubCategoryList(categoryName: String?): Observable<List<String>> {
-        return responseToCategoryName(categoryInterface.getSubCategoryList(categoryName))
+    fun getSubCategoryList(categoryName: String): Single<List<String>> {
+        return continuationRequest(SUB_CATEGORY_CONTINUATION_PREFIX, categoryName) {
+            categoryInterface.getSubCategoryList(
+                categoryName, it
+            )
+        }
     }
 
     /**
@@ -59,19 +68,29 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
      * @param categoryName Category name as defined on commons
      * @return
      */
-    fun getParentCategoryList(categoryName: String?): Observable<List<String>> {
-        return responseToCategoryName(categoryInterface.getParentCategoryList(categoryName))
+    fun getParentCategoryList(categoryName: String): Single<List<String>> {
+        return continuationRequest(PARENT_CATEGORY_CONTINUATION_PREFIX, categoryName) {
+            categoryInterface.getParentCategoryList(categoryName, it)
+        }
     }
 
-    /**
-     * Internal function to reduce code reuse. Extracts the categories returned from MwQueryResponse.
-     *
-     * @param responseObservable The query response observable
-     * @return Observable emitting the categories returned. If our search yielded "Category:Test", "Test" is emitted.
-     */
-    private fun responseToCategoryName(responseObservable: Observable<MwQueryResponse>): Observable<List<String>> {
-        return responseObservable
-            .map { it.query()?.pages() ?: emptyList() }
+    fun resetSubCategoryContinuation(category: String) {
+        resetContinuation(SUB_CATEGORY_CONTINUATION_PREFIX, category)
+    }
+
+    fun resetParentCategoryContinuation(category: String) {
+        resetContinuation(PARENT_CATEGORY_CONTINUATION_PREFIX, category)
+    }
+
+    override fun responseMapper(
+        networkResult: Single<MwQueryResponse>,
+        key: String?
+    ): Single<List<String>> {
+        return networkResult
+            .map {
+                handleContinuationResponse(it.continuation(), key)
+                it.query()?.pages() ?: emptyList()
+            }
             .map {
                 it.filter { page -> !page.categoryInfo().isHidden
                 }.map { page -> page.title().replace(CATEGORY_PREFIX, "") }

@@ -8,6 +8,24 @@
 * Neptune, the Mystic
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+    <item quantity="one">Postavlja se %1$d datoteka</item>
+    <item quantity="other">Postavljaju se %1$d datoteke</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d postavljena datoteka</item>
+    <item quantity="other">%1$d postavljene datoteke</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">Započeto %1$d postavljanje</item>
+    <item quantity="other">Započeta %1$d postavljanja</item>
+  </plurals>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d postavljanje</item>
+    <item quantity="other">%1$d postavljanja</item>
+  </plurals>
+  <string name="share_license_summary" fuzzy="true">Ova će slika biti licencirana pod %1$s</string>
   <string name="title_activity_explore">Istraži</string>
   <string name="navigation_item_explore">Istraži</string>
   <string name="preference_category_appearance">Izgled</string>
@@ -39,10 +57,6 @@
   <string name="upload_progress_notification_title_finishing">Završeno postavljanje %1$s</string>
   <string name="upload_failed_notification_title">Postavljanje %1$s neuspješno</string>
   <string name="upload_failed_notification_subtitle">Dodirnite da biste vidjeli</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">Postavlja se %1$d datoteka</item>
-    <item quantity="other">Postavljaju se %1$d datoteke</item>
-  </plurals>
   <string name="title_activity_contributions">Moja nedavja postavljanja</string>
   <string name="contribution_state_queued">U redu čekanja</string>
   <string name="contribution_state_failed">Neuspješno</string>
@@ -73,19 +87,6 @@
   <string name="gps_disabled">GPS je onemogućen na Vašem uređaju. Želite li ga omogućiti?</string>
   <string name="enable_gps">Omogući GPS</string>
   <string name="contributions_subtitle_zero">Nemate još postavljenih datoteka</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d postavljena datoteka</item>
-    <item quantity="other">%1$d postavljene datoteke</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Započeto %1$d postavljanje</item>
-    <item quantity="other">Započeta %1$d postavljanja</item>
-  </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d postavljanje</item>
-    <item quantity="other">%1$d postavljanja</item>
-  </plurals>
   <string name="categories_not_found">Nema kategorija koje odgovoraju upitu %1$s</string>
   <string name="categories_skip_explanation">Dodajte slikama kategorije kako bi se lakše pronašle. Da biste ih dodali, započnite s upisivanjem.</string>
   <string name="categories_activity_title">Kategorije</string>
@@ -107,7 +108,6 @@
   <string name="no_uploads_yet">Nemate još postavljenih slika.</string>
   <string name="menu_retry_upload">Pokušaj ponovo</string>
   <string name="menu_cancel_upload">Odustani</string>
-  <string name="share_license_summary" fuzzy="true">Ova će slika biti licencirana pod %1$s</string>
   <string name="media_upload_policy">Slanjem ove slike izjavljujem da je ona moje djelo i ne sadrži materijale zaštićene autorskim pravom ili selfije, te da je u skladu sa &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;smjernicama Zajedničkog poslužitelja&lt;/a&gt;.</string>
   <string name="menu_download">Preuzmi</string>
   <string name="preference_license">Podrazumijevana licencija</string>
@@ -312,6 +312,7 @@
   <string name="quiz_back_button">Ako nastavite postavljati slike koje je potrebno izbrisati, Vaš će račun vjerojatno biti blokiran. Jeste li sigurni da želite završiti kviz?</string>
   <string name="construction_event_answer">Slike koje prikazuju tehnologiju ili kulturu dobrodošle su na Zajedničkom poslužitelju.</string>
   <string name="warning_for_no_answer">Izaberite jednu opciju od dvije da biste odgovorili na pitanje</string>
+  <string name="user_not_logged_in">Sesija prijavljivanja istekla je, molimo Vas, prijavite se ponovo.</string>
   <string name="quiz_result_share_message">Podijelite kviz s prijateljima!</string>
   <string name="correct">Točan odgovor</string>
   <string name="wrong">Pogrešan odgovor</string>

@@ -43,21 +43,23 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AccountUtil;
+import fr.free.nrw.commons.category.CategoryClient;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
-import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity;
+import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import javax.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.util.DateUtil;
@@ -69,7 +71,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private boolean isCategoryImage;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
     private int index;
-    private Locale locale;
     private boolean isDeleted = false;
 
 
@@ -140,7 +141,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.mediaDetailScrollView)
     ScrollView scrollView;
 
-    private ArrayList<String> categoryNames;
     /**
      * Depicts is a feature part of Structured data. Multiple Depictions can be added for an image just like categories.
      * However unlike categories depictions is multi-lingual
@@ -149,10 +149,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private ImageInfo imageInfoCache;
     private int oldWidthOfImageView;
     private int newWidthOfImageView;
-    private Depictions depictions;
-    private boolean categoriesLoaded = false;
-    private boolean categoriesPresent = false;
-    private boolean depictionLoaded = false;
     private boolean heightVerifyingBoolean = true; // helps in maintaining aspect ratio
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
 
@@ -202,9 +198,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         reasonList.add(getString(R.string.deletion_reason_no_longer_want_public));
         reasonList.add(getString(R.string.deletion_reason_bad_for_my_privacy));
 
-        categoryNames = new ArrayList<>();
-        categoryNames.add(getString(R.string.detail_panel_cats_loading));
-
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
 
         ButterKnife.bind(this,view);
@@ -216,7 +209,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             authorLayout.setVisibility(GONE);
         }
 
-        locale = getResources().getConfiguration().locale;
         return view;
     }
 
@@ -290,19 +282,55 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
     private void displayMediaDetails() {
-        //Always load image from Internet to allow viewing the desc, license, and cats
-        setupImageView();
-        title.setText(media.getDisplayTitle());
-        desc.setHtmlText(media.getDescription());
-        license.setText(media.getLicense());
-
-        Disposable disposable = mediaDataExtractor.fetchMediaDetails(media.getFilename(), media.getPageId())
+        setTextFields(media);
+        compositeDisposable.addAll(
+            mediaDataExtractor.fetchDepictionIdsAndLabels(media)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::setTextFields);
-        compositeDisposable.add(disposable);
+                .subscribe(this::onDepictionsLoaded, Timber::e),
+            mediaDataExtractor.checkDeletionRequestExists(media)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onDeletionPageExists, Timber::e),
+            mediaDataExtractor.fetchDiscussion(media)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onDiscussionLoaded, Timber::e),
+            mediaDataExtractor.refresh(media)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onMediaRefreshed, Timber::e)
+        );
     }
 
+    private void onMediaRefreshed(Media media) {
+        setTextFields(media);
+        compositeDisposable.addAll(
+            mediaDataExtractor.fetchDepictionIdsAndLabels(media)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onDepictionsLoaded, Timber::e)
+        );
+    }
+
+    private void onDiscussionLoaded(String discussion) {
+        mediaDiscussion.setText(prettyDiscussion(discussion.trim()));
+    }
+
+    private void onDeletionPageExists(Boolean deletionPageExists) {
+        if (deletionPageExists){
+            delete.setVisibility(GONE);
+            nominatedForDeletion.setVisibility(VISIBLE);
+        } else if (!isCategoryImage) {
+            delete.setVisibility(VISIBLE);
+            nominatedForDeletion.setVisibility(GONE);
+        }
+    }
+
+    private void onDepictionsLoaded(List<IdAndCaptions> idAndCaptions){
+      depictsLayout.setVisibility(idAndCaptions.isEmpty() ? GONE : VISIBLE);
+      buildDepictionList(idAndCaptions);
+    }
     /**
      * The imageSpacer is Basically a transparent overlay for the SimpleDraweeView
      * which holds the image to be displayed( moreover this image is out of
@@ -369,58 +397,45 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
     private void setTextFields(Media media) {
-        this.media = media;
         setupImageView();
+        title.setText(media.getDisplayTitle());
         desc.setHtmlText(prettyDescription(media));
         license.setText(prettyLicense(media));
         coordinates.setText(prettyCoordinates(media));
         uploadedDate.setText(prettyUploadedDate(media));
-        mediaDiscussion.setText(prettyDiscussion(media));
         if (prettyCaption(media).equals(getContext().getString(R.string.detail_caption_empty))) {
             captionLayout.setVisibility(GONE);
-        } else mediaCaption.setText(prettyCaption(media));
+        } else {
+            mediaCaption.setText(prettyCaption(media));
+        }
 
-
-        categoryNames.clear();
-        categoryNames.addAll(media.getCategories());
-
-        depictions=media.getDepiction();
-
-        depictionLoaded = true;
-
-        categoriesLoaded = true;
-        categoriesPresent = (categoryNames.size() > 0);
-        if (!categoriesPresent) {
+        final List<String> categories = media.getCategories();
+        if (categories.isEmpty()) {
             // Stick in a filler element.
-            categoryNames.add(getString(R.string.detail_panel_cats_none));
+            categories.add(getString(R.string.detail_panel_cats_none));
         }
 
-        rebuildCatList();
+        rebuildCatList(categories);
 
-        if(depictions != null) {
-            rebuildDepictionList();
-        }
-        else depictsLayout.setVisibility(GONE);
+
 
         if (media.getCreator() == null || media.getCreator().equals("")) {
             authorLayout.setVisibility(GONE);
         } else {
             author.setText(media.getCreator());
         }
-
-        checkDeletion(media);
     }
 
     /**
      * Populates media details fragment with depiction list
+     * @param idAndCaptions
      */
-    private void rebuildDepictionList() {
+    private void buildDepictionList(List<IdAndCaptions> idAndCaptions) {
         depictionContainer.removeAllViews();
-        for (IdAndLabel depiction : depictions.getDepictions()) {
-            depictionContainer.addView(
-                buildDepictLabel(
-                    depiction.getEntityLabel(),
-                    depiction.getEntityId(),
+        for (IdAndCaptions idAndCaption : idAndCaptions) {
+                depictionContainer.addView(buildDepictLabel(
+                    idAndCaption.getCaptions().values().iterator().next(),
+                    idAndCaption.getId(),
                     depictionContainer
                 ));
         }
@@ -445,7 +460,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.copyWikicode)
     public void onCopyWikicodeClicked(){
-        String data = "[[" + media.getFilename() + "|thumb|" + media.getDescription() + "]]";
+        String data = "[[" + media.getFilename() + "|thumb|" + media.getFallbackDescription() + "]]";
         Utils.copy("wikiCode",data,getContext());
         Timber.d("Generated wikidata copy code: %s", data);
 
@@ -572,42 +587,37 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
     }
 
-    private void rebuildCatList() {
+    private void rebuildCatList(List<String> categories) {
         categoryContainer.removeAllViews();
-        // @fixme add the category items
-
-        //As per issue #1826(see https://github.com/commons-app/apps-android-commons/issues/1826), some categories come suffixed with strings prefixed with |. As per the discussion
-        //that was meant for alphabetical sorting of the categories and can be safely removed.
-        for (int i = 0; i < categoryNames.size(); i++) {
-            String categoryName = categoryNames.get(i);
-            //Removed everything after '|'
-            int indexOfPipe = categoryName.indexOf('|');
-            if (indexOfPipe != -1) {
-                categoryName = categoryName.substring(0, indexOfPipe);
-                //Set the updated category to the list as well
-                categoryNames.set(i, categoryName);
-            }
-            View catLabel = buildCatLabel(categoryName, categoryContainer);
-            categoryContainer.addView(catLabel);
+        for (String category : categories) {
+            categoryContainer.addView(buildCatLabel(sanitise(category), categoryContainer));
         }
+    }
+
+    //As per issue #1826(see https://github.com/commons-app/apps-android-commons/issues/1826), some categories come suffixed with strings prefixed with |. As per the discussion
+    //that was meant for alphabetical sorting of the categories and can be safely removed.
+    private String sanitise(String category) {
+        int indexOfPipe = category.indexOf('|');
+        if (indexOfPipe != -1) {
+            //Removed everything after '|'
+            return category.substring(0, indexOfPipe);
+        }
+        return category;
     }
 
     /**
      * Add view to depictions obtained also tapping on depictions should open the url
      */
     private View buildDepictLabel(String depictionName, String entityId, LinearLayout depictionContainer) {
-        final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, depictionContainer, false);
+        final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, depictionContainer,false);
         final TextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
-
         textView.setText(depictionName);
-        if (depictionLoaded) {
-            item.setOnClickListener(view -> {
-                Intent intent = new Intent(getContext(), WikidataItemDetailsActivity.class);
-                intent.putExtra("wikidataItemName", depictionName);
-                intent.putExtra("entityId", entityId);
-                getContext().startActivity(intent);
-            });
-        }
+        item.setOnClickListener(view -> {
+            Intent intent = new Intent(getContext(), WikidataItemDetailsActivity.class);
+            intent.putExtra("wikidataItemName", depictionName);
+            intent.putExtra("entityId", entityId);
+            getContext().startActivity(intent);
+        });
         return item;
     }
 
@@ -616,7 +626,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         final TextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(catName);
-        if (categoriesLoaded && categoriesPresent) {
+        if(!getString(R.string.detail_panel_cats_none).equals(catName)) {
             textView.setOnClickListener(view -> {
                 // Open Category Details page
                 String selectedCategoryTitle = CATEGORY_PREFIX + catName;
@@ -635,30 +645,36 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
      * @return caption as string
      */
     private String prettyCaption(Media media) {
-        String caption = media.getCaption().trim();
-        if (caption.equals("")) {
-            return getString(R.string.detail_caption_empty);
-        } else {
-            return caption;
+        for (String caption : media.getCaptions().values()) {
+            if (caption.equals("")) {
+                return getString(R.string.detail_caption_empty);
+            } else {
+                return caption;
+            }
         }
+        return getString(R.string.detail_caption_empty);
     }
 
     private String prettyDescription(Media media) {
-        // @todo use UI language when multilingual descs are available
-        String desc = media.getDescription();
-        if (desc.equals("")) {
-            return getString(R.string.detail_description_empty);
-        } else {
-            return desc;
-        }
+        final String description = chooseDescription(media);
+        return description.isEmpty() ? getString(R.string.detail_description_empty)
+            : description;
     }
-    private String prettyDiscussion(Media media) {
-        String disc = media.getDiscussion().trim();
-        if (disc.equals("")) {
-            return getString(R.string.detail_discussion_empty);
-        } else {
-            return disc;
+
+    private String chooseDescription(Media media) {
+        final Map<String, String> descriptions = media.getDescriptions();
+        final String multilingualDesc = descriptions.get(Locale.getDefault().getLanguage());
+        if (multilingualDesc != null) {
+            return multilingualDesc;
         }
+        for (String description : descriptions.values()) {
+            return description;
+        }
+        return media.getFallbackDescription();
+    }
+
+    private String prettyDiscussion(String discussion) {
+        return discussion.isEmpty() ? getString(R.string.detail_discussion_empty) : discussion;
     }
 
     private String prettyLicense(Media media) {
@@ -688,16 +704,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             return getString(R.string.media_detail_coordinates_empty);
         }
         return media.getCoordinates().getPrettyCoordinateString();
-    }
-
-    private void checkDeletion(Media media){
-        if (media.isRequestedDeletion()){
-            delete.setVisibility(GONE);
-            nominatedForDeletion.setVisibility(VISIBLE);
-        } else if (!isCategoryImage) {
-            delete.setVisibility(VISIBLE);
-            nominatedForDeletion.setVisibility(GONE);
-        }
     }
 
 }

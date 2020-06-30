@@ -118,12 +118,12 @@
             android:parentActivityName=".contributions.MainActivity" />
 
         <activity
-            android:name=".depictions.WikidataItemDetailsActivity"
+            android:name=".explore.depictions.WikidataItemDetailsActivity"
             android:label="@string/title_activity_featured_images"
             android:parentActivityName=".contributions.MainActivity" />
 
         <activity
-            android:name=".explore.categories.ExploreActivity"
+            android:name=".explore.ExploreActivity"
             android:label="@string/title_activity_explore"
             android:parentActivityName=".contributions.MainActivity"
             android:configChanges="orientation|screenSize|keyboard" />

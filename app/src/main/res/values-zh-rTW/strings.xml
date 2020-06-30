@@ -17,6 +17,35 @@
 * 烈羽
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">正在上載 %1$d 個檔案</item>
+    <item quantity="other">正在上載 %1$d 個檔案</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">開始 %1$d 次上傳</item>
+    <item quantity="other">開始 %1$d 次上傳</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d 次上傳</item>
+    <item quantity="other">%1$d 次上傳</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">此圖片會按 %1$s 協議授權上載</item>
+    <item quantity="other">這些圖片會按 %1$s 協議授權上載</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d 個上傳</item>
+    <item quantity="other">%1$d 個上傳</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">接收分享內容。處理圖片可能花費的時間依據圖片大小與您的裝置</item>
+    <item quantity="other">接收分享內容。處理圖片可能花費的時間依據圖片大小與您的裝置</item>
+  </plurals>
   <string name="title_activity_explore">探索</string>
   <string name="navigation_item_explore">探索</string>
   <string name="preference_category_appearance">外觀</string>
@@ -48,10 +77,6 @@
   <string name="upload_progress_notification_title_finishing">即將完成上傳%1$s</string>
   <string name="upload_failed_notification_title">上傳%1$s失敗</string>
   <string name="upload_failed_notification_subtitle">輕觸檢視</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">正在上載 %1$d 個檔案</item>
-    <item quantity="other">正在上載 %1$d 個檔案</item>
-  </plurals>
   <string name="title_activity_contributions">我最近的上傳</string>
   <string name="contribution_state_queued">已佇列</string>
   <string name="contribution_state_failed">失敗</string>
@@ -86,17 +111,6 @@
   <string name="gps_disabled">您的裝置停用了 GPS。想啟用嗎？</string>
   <string name="enable_gps">啟用 GPS</string>
   <string name="contributions_subtitle_zero">尚未上傳</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">開始 %1$d 次上傳</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d 次上傳</item>
-  </plurals>
   <string name="categories_not_found">沒有發現與 %1$s 相符的分類</string>
   <string name="depictions_not_found">找不到符合%1$s的維基數據項目</string>
   <string name="no_child_classes">%1$s沒有子類別</string>
@@ -123,10 +137,6 @@
   <string name="no_uploads_yet">您尚未上傳過任何照片。</string>
   <string name="menu_retry_upload">重試</string>
   <string name="menu_cancel_upload">取消</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">此圖片會按 %1$s 協議授權上載</item>
-    <item quantity="other">這些圖片會按 %1$s 協議授權上載</item>
-  </plurals>
   <string name="media_upload_policy">透過提交此圖片，我宣佈這是我個人創作的成品，且不包含受版權保護或自拍內容，並除此之外遵守&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;維基媒體共享資源方針&lt;/a&gt;。</string>
   <string name="menu_download">下載</string>
   <string name="preference_license">預設授權條款</string>
@@ -421,10 +431,6 @@
   <string name="submit">提交</string>
   <string name="upload_title_duplicate">檔案名稱為「%1$s」的檔案已存在，您確定要繼續嗎？</string>
   <string name="map_application_missing">在您的裝置上找不到相容的地圖應用程式，請安裝地圖應用程式來使用此功能。</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d 個上傳</item>
-    <item quantity="other">%1$d 個上傳</item>
-  </plurals>
   <string name="navigation_item_bookmarks">書籤</string>
   <string name="title_activity_bookmarks">書籤</string>
   <string name="title_page_bookmarks_pictures">圖片</string>
@@ -512,10 +518,6 @@
   <string name="review_thanks_no_button_text">下一張圖片</string>
   <string name="skip_image_explanation">點擊此按鈕會提供給您其它近期從維基共享資源上傳的圖片</string>
   <string name="review_image_explanation">您可以檢閱和改善維基共享資源的品質。\n檢閱的四個項目有：\n - 此圖片是否符合範圍？\n - 此圖片是否遵守版權規範？\n - 此圖片是否有分類正確？\n - 如果一切沒問題，您可以感謝貢獻者。</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">接收分享內容。處理圖片可能花費的時間依據圖片大小與您的裝置</item>
-    <item quantity="other">接收分享內容。處理圖片可能花費的時間依據圖片大小與您的裝置</item>
-  </plurals>
   <string name="no_image">沒有圖片被使用到</string>
   <string name="no_image_reverted">沒有圖片被還原回復</string>
   <string name="no_image_uploaded">沒有圖片被上傳</string>
@@ -605,4 +607,18 @@
   <string name="use_location_from_similar_image">您是否在同一地點拍攝了這兩張圖片？您要使用圖片右側的緯度/經度嗎？</string>
   <string name="load_more">載入更多</string>
   <string name="nearby_no_results">查無地點，請嘗試更改您的搜尋條件。</string>
+  <string name="add_picture_to_wikipedia_article_title">添加圖片到維基百科</string>
+  <string name="add_picture_to_wikipedia_article_desc">您想要添加此圖片到%1$s維基百科條目上嗎？</string>
+  <string name="add_picture_to_wikipedia_instructions_title">說明</string>
+  <string name="add_picture_to_wikipedia_instructions_desc">請留意遵循編輯準則！</string>
+  <string name="confirm">確認</string>
+  <string name="instructions_title">說明</string>
+  <string name="wikipedia_instructions_step_1">1. 使用以下維基語法：</string>
+  <string name="wikipedia_instructions_step_2">2. 點擊確認後會開啟維基百科條目。</string>
+  <string name="wikipedia_instructions_step_3">3. 尋找適合插入您的圖片的章節。</string>
+  <string name="wikipedia_instructions_step_4">4. 點擊章節裡的編輯按鈕（為筆狀模樣的圖案）。</string>
+  <string name="wikipedia_instructions_step_5">5. 將維基語法貼到適當的位置。</string>
+  <string name="wikipedia_instructions_step_6">6. 若有需要，可編輯維基語法來調整到適當的定位。更多相關資訊請查看&lt;a href=\"https://zh.wikipedia.org/wiki/Help:%E5%9B%BE%E5%83%8F\"&gt;此頁面&lt;/a&gt;。</string>
+  <string name="wikipedia_instructions_step_7">7. 發布條目</string>
+  <string name="copy_wikicode_to_clipboard">複製維基代碼到剪貼簿</string>
 </resources>

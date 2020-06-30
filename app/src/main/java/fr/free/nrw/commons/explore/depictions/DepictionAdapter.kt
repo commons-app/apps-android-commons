@@ -6,6 +6,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.explore.paging.inflate
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_depictions.*
@@ -19,9 +20,7 @@ class DepictionAdapter(val onDepictionClicked: (DepictedItem) -> Unit) :
 
             override fun areContentsTheSame(oldItem: DepictedItem, newItem: DepictedItem) =
                 oldItem == newItem
-
         }
-
     ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DepictedItemViewHolder {
         return DepictedItemViewHolder(parent.inflate(R.layout.item_depictions))

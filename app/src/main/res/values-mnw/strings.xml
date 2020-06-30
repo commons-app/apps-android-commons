@@ -4,6 +4,27 @@
 * Htawmonzel
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">ဝှာင် %1$d file uploadingဂှ် ပတိုန်ပၠုပ်ဒၟံင်</item>
+    <item quantity="other">ဝှာင် %1$d files uploadingဂှ် ပတိုန်ပၠုပ်ဒၟံင်</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">စဒၟံင် %1$d ပတိုန်ပၠုပ်</item>
+    <item quantity="other">စဒၟံင် %1$d ပတိုန်ပၠုပ်</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d ပတိုန်ပၠုပ်</item>
+    <item quantity="other">%1$d ပတိုန်ပၠုပ်</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">ဗီုရုပ်ဏအ်ဂှ် မကဵုလဝ် အခေါင်လာင်ဇြေန် နကဵုသၟဝ် %1$s</item>
+    <item quantity="other">ဗီုရုပ်တအ်ဝွံ မကဵုလဝ် အခေါင်လာင်ဇြေန် နကဵု သၟဝ် %1$s</item>
+  </plurals>
   <string name="title_activity_explore">စဳစောတ်</string>
   <string name="navigation_item_explore">စဳစောတ်</string>
   <string name="preference_category_appearance">မံက်ပြာကတ်</string>
@@ -35,10 +56,6 @@
   <string name="upload_progress_notification_title_finishing">ပတုဲဒၟံင် ပတိုန်ပၠုပ် %1$s</string>
   <string name="upload_failed_notification_title">ပတိုန်ပၠုပ် %1$s ဟွံအံင်ဇၞး</string>
   <string name="upload_failed_notification_subtitle">ဒၞာဲ သွက်ကလေင်ရံင်</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">ဝှာင် %1$d file uploadingဂှ် ပတိုန်ပၠုပ်ဒၟံင်</item>
-    <item quantity="other">ဝှာင် %1$d files uploadingဂှ် ပတိုန်ပၠုပ်ဒၟံင်</item>
-  </plurals>
   <string name="title_activity_contributions">အရာအဲ မပတိုန်ပၠုပ်လဝ် ခြာဟွံလအ်ဂမၠိုင်</string>
   <string name="contribution_state_queued">ရေင်မင်ဒၟံင်</string>
   <string name="contribution_state_failed">ဟွံအံင်ဇၞး</string>
@@ -73,19 +90,6 @@
   <string name="gps_disabled">ပ္ဍဲကဵု စက်မၞးဂှ် ဂျဳပဳအေသ် ကၟာတ်လဝ်။ မိက်ဂွံ ပံက်ဍေဟ်ဟာ?</string>
   <string name="enable_gps">ပံက် GPS</string>
   <string name="contributions_subtitle_zero">ဟွံဂွံ ပတိုန်ပၠုပ်ဏီ</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">စဒၟံင် %1$d ပတိုန်ပၠုပ်</item>
-    <item quantity="other">စဒၟံင် %1$d ပတိုန်ပၠုပ်</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d ပတိုန်ပၠုပ်</item>
-    <item quantity="other">%1$d ပတိုန်ပၠုပ်</item>
-  </plurals>
   <string name="categories_not_found">ကဏ္ဍ မကိတ်ညဳ ကု %1$s ဟွံဆဵု</string>
   <string name="depictions_not_found">တင်ဂၞင် ဝဳကဳဒေတာ မကိတ်ညဳ ကု%1$s ဟွံဆဵု</string>
   <string name="no_child_classes">%1$s ဂှ် ဟွံမဲ ကုတန်ဗတောန် ကောန်ၚာ်</string>
@@ -112,10 +116,6 @@
   <string name="no_uploads_yet">မၞးဟွံဂွံ ပတိုန်ပၠုပ်လဝ် ဗီုရုပ် မွဲမွဲ ဏီရ။</string>
   <string name="menu_retry_upload">ကလေင်ကၠောန်</string>
   <string name="menu_cancel_upload">တးပဲါ</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">ဗီုရုပ်ဏအ်ဂှ် မကဵုလဝ် အခေါင်လာင်ဇြေန် နကဵုသၟဝ် %1$s</item>
-    <item quantity="other">ဗီုရုပ်တအ်ဝွံ မကဵုလဝ် အခေါင်လာင်ဇြေန် နကဵု သၟဝ် %1$s</item>
-  </plurals>
   <string name="media_upload_policy">နကဵု ပတိုန်စုတ် ဗီုဏအ်ဂှ်၊ အဲဒုင်ဝန် ဒဒှ်ရ ဗီုဏအ်ဂှ် ဒှ်အရာ အလဵုဇကုအဲ မကၠောန်လဝ်တုဲ ဟွံမဲ ကုအခေါင်ပိုင်ပြဳတုဲ အဲဒ္ဂေတ်ဗက် အတိုင် သၞောဝ်&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt; ရ။</string>
   <string name="menu_download">တံင်လုပ်</string>
   <string name="preference_license">လာင်ဇြေန် နူတမ်</string>

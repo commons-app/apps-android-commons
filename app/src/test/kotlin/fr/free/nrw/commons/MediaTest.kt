@@ -1,5 +1,6 @@
 package fr.free.nrw.commons
 
+import media
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -11,13 +12,15 @@ import org.robolectric.annotation.Config
 class MediaTest {
     @Test
     fun displayTitleShouldStripExtension() {
-        val m = Media("File:Example.jpg")
+        val m = media(filename = "File:Example.jpg")
         assertEquals("Example", m.displayTitle)
     }
 
     @Test
     fun displayTitleShouldUseSpaceForUnderscore() {
-        val m = Media("File:Example 1_2.jpg")
+        val m = media(filename = "File:Example 1_2.jpg")
         assertEquals("Example 1 2", m.displayTitle)
     }
 }
+
+

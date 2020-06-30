@@ -2,6 +2,7 @@ package fr.free.nrw.commons.contributions;
 
 import androidx.paging.DataSource.Factory;
 import io.reactivex.Completable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -67,7 +68,15 @@ class ContributionsLocalDataSource {
     }
 
     public Single<List<Long>> saveContributions(List<Contribution> contributions) {
-        return contributionDao.save(contributions);
+        List<Contribution> contributionList = new ArrayList<>();
+        for(Contribution contribution: contributions) {
+            Contribution oldContribution = contributionDao.getContribution(contribution.getPageId());
+            if(oldContribution != null) {
+                contribution.setWikidataPlace(oldContribution.getWikidataPlace());
+            }
+            contributionList.add(contribution);
+        }
+        return contributionDao.save(contributionList);
     }
 
     public void set(String key, long value) {
