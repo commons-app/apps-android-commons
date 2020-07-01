@@ -131,7 +131,7 @@ public class CategoryEditHelper {
             buffer.append("{{subst:unc}}");
         }
         String appendText = buffer.toString();
-        return pageEditClient.appendEdit("File:Birds,_pidgeons_and_a_dove.jpg", appendText + "\n", summary);
+        return pageEditClient.appendEdit(media.getFilename(), appendText + "\n", summary);
     }
 
     private boolean showCategoryEditNotification(Context context, Media media, boolean result) {

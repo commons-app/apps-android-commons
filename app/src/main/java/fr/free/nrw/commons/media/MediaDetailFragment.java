@@ -18,7 +18,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -45,7 +44,6 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
-import com.google.android.material.textfield.TextInputEditText;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
 import fr.free.nrw.commons.Media;
@@ -53,7 +51,6 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AccountUtil;
-import fr.free.nrw.commons.category.Category;
 import fr.free.nrw.commons.category.CategoryClient;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.category.CategoryEditHelper;
@@ -64,12 +61,8 @@ import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
 import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
 import fr.free.nrw.commons.nearby.Label;
-import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
-import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
-import fr.free.nrw.commons.utils.FragmentUtils;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -485,8 +478,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         categoryNames.clear();
         categoryNames.addAll(media.getCategories());
-        categoryEditSearchRecyclerViewAdapter.addToSelectedCategories(media.getCategories());
-        updateSelectedCategoriesTextView(categoryEditSearchRecyclerViewAdapter.getSelectedCategories());
+        categoryEditSearchRecyclerViewAdapter.addToCategories(media.getCategories());
+        updateSelectedCategoriesTextView(categoryEditSearchRecyclerViewAdapter.getCategories());
 
         depictions=media.getDepiction();
 
@@ -609,7 +602,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @OnClick(R.id.update_categories_button)
     public void onUpdateCategoriesClicked() {
-       updateCategories(categoryEditSearchRecyclerViewAdapter.getSelectedCategories());
+       updateCategories(categoryEditSearchRecyclerViewAdapter.getNewCategories());
     }
 
     public void updateCategories(List<String> selectedCategories) {

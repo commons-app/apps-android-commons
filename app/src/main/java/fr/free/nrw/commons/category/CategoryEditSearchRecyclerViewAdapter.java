@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.category;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,27 +9,22 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter.RecyclerViewHolder;
-import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.nearby.Label;
-import io.reactivex.Scheduler;
-import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.List;
-import javax.inject.Inject;
 
 public class CategoryEditSearchRecyclerViewAdapter
     extends RecyclerView.Adapter<RecyclerViewHolder>
     implements Filterable {
 
     private List<String> displayedCategories;
-    private List<String> selectedCategories = new ArrayList<>();
+    private List<String> categories = new ArrayList<>();
+    private List<String> newCategories = new ArrayList<>();
     private final LayoutInflater inflater;
     private CategoryClient categoryClient;
     private Context context;
@@ -45,28 +39,52 @@ public class CategoryEditSearchRecyclerViewAdapter
         this.callback = callback;
     }
 
-    public void addToSelectedCategories(List<String> selectedCategories) {
-        for(String category : selectedCategories) {
-            if (!this.selectedCategories.contains(category)) {
-                this.selectedCategories.add(category);
+    public void addToCategories(List<String> categories) {
+        for(String category : categories) {
+            if (!this.categories.contains(category)) {
+                this.categories.add(category);
             }
         }
     }
 
-    public void addToSelectedCategories(String selectedCategory) {
-        if (!selectedCategories.contains(selectedCategory)) {
-            selectedCategories.add(selectedCategory);
+    public void addToCategories(String categoryToBeAdded) {
+        if (!categories.contains(categoryToBeAdded)) {
+            categories.add(categoryToBeAdded);
         }
     }
 
-    public void removeFromSelectedCategories(String deselectedCategory) {
-        if (selectedCategories.contains(deselectedCategory)) {
-            selectedCategories.remove(deselectedCategory);
+    public void removeFromCategories(String categoryToBeRemoved) {
+        if (categories.contains(categoryToBeRemoved)) {
+            categories.remove(categoryToBeRemoved);
         }
     }
 
-    public List<String> getSelectedCategories() {
-        return selectedCategories;
+    public void removeFromNewCategories(String categoryToBeRemoved) {
+        if (newCategories.contains(categoryToBeRemoved)) {
+            newCategories.remove(categoryToBeRemoved);
+        }
+    }
+
+    public void addToNewCategories(List<String> newCategories) {
+        for(String category : newCategories) {
+            if (!this.newCategories.contains(category)) {
+                this.newCategories.add(category);
+            }
+        }
+    }
+
+    public void addToNewCategories(String removedCategory) {
+        if (newCategories.contains(removedCategory)) {
+            newCategories.remove(removedCategory);
+        }
+    }
+
+    public List<String> getCategories() {
+        return categories;
+    }
+
+    public List<String> getNewCategories() {
+        return newCategories;
     }
 
     @Override
@@ -107,11 +125,11 @@ public class CategoryEditSearchRecyclerViewAdapter
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
-                        addToSelectedCategories(categoryTextView.getText().toString());
+                        addToNewCategories(categoryTextView.getText().toString());
                     } else {
-                        removeFromSelectedCategories(categoryTextView.getText().toString());
+                        removeFromNewCategories(categoryTextView.getText().toString());
                     }
-                    callback.updateSelectedCategoriesTextView(selectedCategories);
+                    callback.updateSelectedCategoriesTextView(categories);
                 }
             });
         }
