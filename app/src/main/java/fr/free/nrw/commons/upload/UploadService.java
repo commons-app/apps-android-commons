@@ -29,6 +29,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.processors.PublishProcessor;
 import io.reactivex.schedulers.Schedulers;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -75,6 +76,7 @@ public class UploadService extends CommonsDaggerService {
   // Seriously, Android?
   public static final int NOTIFICATION_UPLOAD_IN_PROGRESS = 1;
   public static final int NOTIFICATION_UPLOAD_FAILED = 3;
+  public static final int NOTIFICATION_UPLOAD_PAUSED = 4;
 
   protected class NotificationUpdateProgressListener {
 
@@ -276,7 +278,7 @@ public class UploadService extends CommonsDaggerService {
 
           Timber.d("Stash upload response 1 is %s", uploadStash.toString());
 
-          if (uploadStash.isSuccessful()) {
+          if (uploadStash.getState() == StashUploadState.SUCCESS) {
             Timber.d("making sure of uniqueness of name: %s", filename);
             String uniqueFilename = findUniqueFilename(filename);
             unfinishedUploads.add(uniqueFilename);
@@ -284,7 +286,11 @@ public class UploadService extends CommonsDaggerService {
                 getApplicationContext(),
                 contribution,
                 uniqueFilename,
-                uploadStash.getFilekey());
+                uploadStash.getFileKey());
+          } else if (uploadStash.getState() == StashUploadState.PAUSED) {
+            Timber.d("Contribution upload paused");
+            showPausedNotification(contribution);
+            return Observable.never();
           } else {
             Timber.d("Contribution upload failed. Wikidata entity won't be edited");
             showFailedNotification(contribution);
@@ -329,7 +335,10 @@ public class UploadService extends CommonsDaggerService {
     compositeDisposable.add(mediaClient.getMedia("File:" + uploadResult.getFilename())
         .map(contribution::completeWith)
         .flatMapCompletable(
-            newContribution -> contributionDao.saveAndDelete(contribution, newContribution))
+            newContribution -> {
+              newContribution.setDateModified(new Date());
+              return contributionDao.saveAndDelete(contribution, newContribution);
+            })
         .subscribe());
   }
 
@@ -346,6 +355,24 @@ public class UploadService extends CommonsDaggerService {
         curNotification.build());
 
     contribution.setState(Contribution.STATE_FAILED);
+
+    compositeDisposable.add(contributionDao
+        .update(contribution)
+        .subscribeOn(ioThreadScheduler)
+        .subscribe());
+  }
+
+  private void showPausedNotification(Contribution contribution) {
+    final String displayTitle = contribution.getMedia().getDisplayTitle();
+    curNotification.setTicker(getString(R.string.upload_paused_notification_title, displayTitle))
+        .setContentTitle(getString(R.string.upload_paused_notification_title, displayTitle))
+        .setContentText(getString(R.string.upload_paused_notification_subtitle))
+        .setProgress(0, 0, false)
+        .setOngoing(false);
+    notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_PAUSED,
+        curNotification.build());
+
+    contribution.setState(Contribution.STATE_PAUSED);
 
     compositeDisposable.add(contributionDao
         .update(contribution)

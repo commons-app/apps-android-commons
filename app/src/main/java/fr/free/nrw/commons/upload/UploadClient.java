@@ -39,6 +39,7 @@ public class UploadClient {
   private final CsrfTokenClient csrfTokenClient;
   private final PageContentsCreator pageContentsCreator;
   private final FileUtilsWrapper fileUtilsWrapper;
+  private boolean pauseUploads = false;
 
   private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -57,9 +58,10 @@ public class UploadClient {
    * Upload file to stash in chunks of specified size. Uploading files in chunks will make handling
    * of large files easier. Also, it will be useful in supporting pause/resume of uploads
    */
-  Observable<UploadResult> uploadFileToStash(
+  Observable<StashUploadResult> uploadFileToStash(
       final Context context, final String filename, final Contribution contribution,
       final NotificationUpdateProgressListener notificationUpdater) throws IOException {
+    pauseUploads = false;
     File file = new File(contribution.getLocalUri().getPath());
     final Observable<File> fileChunks = fileUtilsWrapper.getFileChunks(context, file, CHUNK_SIZE);
     final MediaType mediaType = MediaType
@@ -67,11 +69,13 @@ public class UploadClient {
 
     final AtomicInteger index = new AtomicInteger();
     final AtomicReference<ChunkInfo> chunkInfo = new AtomicReference<>();
-    if (contribution.getChunkInfo() != null && contribution.getDateCreated()
-        .after(new Date(System.currentTimeMillis() - MAX_CHUNK_AGE))) {
+    if (contribution.getChunkInfo() != null && isStashValid(contribution)) {
       chunkInfo.set(contribution.getChunkInfo());
     }
     compositeDisposable.add(fileChunks.forEach(chunkFile -> {
+      if (pauseUploads) {
+        return;
+      }
       if (chunkInfo.get() != null && index.get() < chunkInfo.get().getLastChunkIndex()) {
         index.getAndIncrement();
         return;
@@ -98,12 +102,19 @@ public class UploadClient {
         Timber.e(throwable, "Error occurred in uploading chunk");
       }));
     }));
-    if (chunkInfo.get() != null) {
-      return Observable.just(chunkInfo.get().getUploadResult());
+    if (pauseUploads) {
+      return Observable.just(new StashUploadResult(StashUploadState.PAUSED, null));
+    } else if (chunkInfo.get() != null) {
+      return Observable.just(new StashUploadResult(StashUploadState.SUCCESS,
+          chunkInfo.get().getUploadResult().getFilekey()));
     } else {
-      return Observable.error(new Error("Error occurred in uploading file to stash"));
+      return Observable.just(new StashUploadResult(StashUploadState.FAILED, null));
     }
+  }
 
+  private boolean isStashValid(Contribution contribution) {
+    return contribution.getDateCreated()
+        .after(new Date(System.currentTimeMillis() - MAX_CHUNK_AGE)) || true;
   }
 
   /**
@@ -138,6 +149,7 @@ public class UploadClient {
   }
 
   public void pauseUpload() {
+    pauseUploads = true;
     Timber.d("Disposing current upload");
     if (!compositeDisposable.isDisposed()) {
       compositeDisposable.dispose();

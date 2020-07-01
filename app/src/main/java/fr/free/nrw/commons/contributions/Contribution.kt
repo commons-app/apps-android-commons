@@ -37,7 +37,8 @@ data class Contribution constructor(
     var mimeType: String? = null,
     val localUri: Uri? = null,
     var dataLength: Long = 0,
-    var dateCreated: Date? = null
+    var dateCreated: Date? = null,
+    var dateModified: Date? = null
 ) : Parcelable {
 
     fun completeWith(media: Media): Contribution {
