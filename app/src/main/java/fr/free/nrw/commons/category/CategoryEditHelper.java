@@ -5,6 +5,7 @@ import static fr.free.nrw.commons.notification.NotificationHelper.NOTIFICATION_D
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -58,36 +59,26 @@ public class CategoryEditHelper {
     public Single<Boolean> makeCategoryEdit(Context context, Media media, List<String> categories) {
         viewUtil.showShortToast(context, "Trying to add categories");
 
-        return updateCategories(media, categories)
+        return addCategory(media, categories)
             .flatMapSingle(result -> Single.just(showCategoryEditNotification(context, media, result)))
             .firstOrError();
     }
-
-    /**
-     * Updates categories
-     * @param media
-     * @param categories to be added
-     * @return
-     */
+/*
     private Observable<Boolean> updateCategories(Media media, List<String> categories) {
         Timber.d("thread is category adding %s", Thread.currentThread().getName());
         String summary = "Updating categories";
-
-        //MwQueryResponse currentContent =
+        Log.d("deneme8","pagetitle:"+media.getFilename());
         try {
-        // TODO: network on main thread exception
-
-        return categoryEditInterface.getContentOfFile(media.getPageTitle().getText())
+        return categoryEditInterface.getContentOfFile(media.getFilename())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .map(mediaDetailResponse -> {
-                    // TODO get value from here
-
+                    Log.d("deneme8", "content:");
                     Pattern pattern = Pattern.compile("(?=\\[\\[Category\\:)(.*?)\\]\\]");
                     String content = mediaDetailResponse.query().firstPage().revisions().get(0)
                         .content();
                     Matcher matcher = pattern.matcher(content);
-
+                    Log.d("deneme8", "content:"+content);
                     StringBuilder builder = new StringBuilder();
                     int i = 0;
                     while (matcher.find()) {
@@ -96,6 +87,7 @@ public class CategoryEditHelper {
                     }
 
                     String pageContentCategoriesRemoved = builder.toString();
+                    Log.d("deneme8", "pageContentRemoved:"+pageContentCategoriesRemoved);
                     // TODO burada kaldın
 
                     StringBuilder buffer = new StringBuilder();
@@ -108,15 +100,16 @@ public class CategoryEditHelper {
                     } else {
                         buffer.append("{{subst:unc}}");
                     }
-                    String appendText = buffer.toString();
-                    return pageEditClient
-                        .edit("File:Birds,_pidgeons_and_a_dove.jpg", appendText + "\n", summary);
+                    String categoryWikitext = buffer.toString();
+                    Log.d("deneme8", "categoryWikitext:"+categoryWikitext);
+                    pageContentCategoriesRemoved += categoryWikitext;
+                    return pageEditClient.edit(media.getFilename(), pageContentCategoriesRemoved + "\n", summary);
                 }).blockingSingle();
         }catch (Throwable throwable) {
             return Observable.just(false);
         }
     }
-
+*/
     /**
      * Appends new categories
      * @param media
