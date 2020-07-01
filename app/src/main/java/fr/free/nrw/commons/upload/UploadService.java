@@ -128,6 +128,10 @@ public class UploadService extends CommonsDaggerService {
     }
   }
 
+  /**
+   * Sets contribution state to paused and disposes the active disposable
+   * @param contribution
+   */
   public void pauseUpload(Contribution contribution) {
     uploadClient.pauseUpload();
     contribution.setState(Contribution.STATE_PAUSED);

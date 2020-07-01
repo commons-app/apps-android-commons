@@ -112,6 +112,11 @@ public class UploadClient {
     }
   }
 
+  /**
+   * Stash is valid for 6 hours. This function checks the validity of stash
+   * @param contribution
+   * @return
+   */
   private boolean isStashValid(Contribution contribution) {
     return contribution.getDateModified()
         .after(new Date(System.currentTimeMillis() - MAX_CHUNK_AGE));
@@ -148,15 +153,20 @@ public class UploadClient {
     }
   }
 
+  /**
+   * Dispose the active disposable and sets the pause variable
+   */
   public void pauseUpload() {
     pauseUploads = true;
-    Timber.d("Disposing current upload");
     if (!compositeDisposable.isDisposed()) {
       compositeDisposable.dispose();
     }
     compositeDisposable.clear();
   }
 
+  /**
+   * Converts string value to request body
+   */
   @Nullable
   private RequestBody toRequestBody(@Nullable final String value) {
     return value == null ? null : RequestBody.create(okhttp3.MultipartBody.FORM, value);

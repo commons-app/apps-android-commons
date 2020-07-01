@@ -91,6 +91,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   private final int SPAN_COUNT_PORTRAIT = 1;
 
 
+  @Override
   public View onCreateView(
       final LayoutInflater inflater, @Nullable final ViewGroup container,
       @Nullable final Bundle savedInstanceState) {
@@ -193,6 +194,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   /**
    * Shows welcome message if user has no contributions yet i.e. new user.
    */
+  @Override
   public void showWelcomeTip(final boolean shouldShow) {
     noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
   }
@@ -266,15 +268,21 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         });
   }
 
+  /**
+   * Pauses the current upload
+   * @param contribution
+   */
   @Override
   public void pauseUpload(Contribution contribution) {
-    Timber.d("Contribution pause clicked");
     callback.pauseUpload(contribution);
   }
 
+  /**
+   * Resumes the current upload
+   * @param contribution
+   */
   @Override
   public void resumeUpload(Contribution contribution) {
-    Timber.d("Contribution resume clicked");
     callback.retryUpload(contribution);
   }
 

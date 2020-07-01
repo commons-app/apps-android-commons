@@ -467,6 +467,10 @@ public class ContributionsFragment
 
     }
 
+    /**
+     * Pauses the upload
+     * @param contribution
+     */
     @Override
     public void pauseUpload(Contribution contribution) {
         uploadService.pauseUpload(contribution);

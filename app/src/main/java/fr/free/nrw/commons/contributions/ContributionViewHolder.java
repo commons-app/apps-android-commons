@@ -207,6 +207,9 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     callback.addImageToWikipedia(contribution);
   }
 
+  /**
+   * Triggers a callback for pause/resume
+   */
   @OnClick(R.id.pauseResumeButton)
   public void onPauseResumeButtonClicked() {
     if (pauseResumeButton.getTag().toString().equals("pause")) {
@@ -218,11 +221,17 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     }
   }
 
+  /**
+   * Update pause/resume button to show pause state
+   */
   private void setPaused() {
     pauseResumeButton.setImageResource(R.drawable.pause_icon);
     pauseResumeButton.setTag(R.string.pause);
   }
 
+  /**
+   * Update pause/resume button to show resume state
+   */
   private void setResume() {
     pauseResumeButton.setImageResource(R.drawable.play_icon);
     pauseResumeButton.setTag(R.string.resume);
