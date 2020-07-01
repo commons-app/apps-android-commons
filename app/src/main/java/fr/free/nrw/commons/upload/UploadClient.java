@@ -139,7 +139,10 @@ public class UploadClient {
 
   public void pauseUpload() {
     Timber.d("Disposing current upload");
-    compositeDisposable.dispose();
+    if (!compositeDisposable.isDisposed()) {
+      compositeDisposable.dispose();
+    }
+    compositeDisposable.clear();
   }
 
   @Nullable
