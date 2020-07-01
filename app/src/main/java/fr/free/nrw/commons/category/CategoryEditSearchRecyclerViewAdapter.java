@@ -73,9 +73,9 @@ public class CategoryEditSearchRecyclerViewAdapter
         }
     }
 
-    public void addToNewCategories(String removedCategory) {
-        if (newCategories.contains(removedCategory)) {
-            newCategories.remove(removedCategory);
+    public void addToNewCategories(String addedCategory) {
+        if (!newCategories.contains(addedCategory)) {
+            newCategories.add(addedCategory);
         }
     }
 
@@ -102,7 +102,15 @@ public class CategoryEditSearchRecyclerViewAdapter
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                displayedCategories = (List<String>)results.values;
+                List<String> resultList = (List<String>)results.values;
+                // Do not re-add already added categories
+                for (String category : categories) {
+                    if (resultList.contains(category)) {
+                        resultList.remove(category);
+                    }
+                }
+
+                displayedCategories = resultList;
                 notifyDataSetChanged();
                 if (displayedCategories.size()==0) {
                     callback.noResultsFound();
@@ -129,7 +137,10 @@ public class CategoryEditSearchRecyclerViewAdapter
                     } else {
                         removeFromNewCategories(categoryTextView.getText().toString());
                     }
-                    callback.updateSelectedCategoriesTextView(categories);
+                    List<String> allCategories = new ArrayList<>();
+                    allCategories.addAll(categories);
+                    allCategories.addAll(newCategories);
+                    callback.updateSelectedCategoriesTextView(allCategories);
                 }
             });
         }
