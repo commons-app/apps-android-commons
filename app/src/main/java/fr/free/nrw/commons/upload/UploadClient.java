@@ -113,8 +113,8 @@ public class UploadClient {
   }
 
   private boolean isStashValid(Contribution contribution) {
-    return contribution.getDateCreated()
-        .after(new Date(System.currentTimeMillis() - MAX_CHUNK_AGE)) || true;
+    return contribution.getDateModified()
+        .after(new Date(System.currentTimeMillis() - MAX_CHUNK_AGE));
   }
 
   /**
