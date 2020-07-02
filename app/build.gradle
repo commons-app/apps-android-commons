@@ -79,7 +79,7 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     testImplementation 'org.robolectric:robolectric:4.3'
     testImplementation 'androidx.test:core:1.2.0'
-    testImplementation 'com.squareup.okhttp3:mockwebserver:3.12.1'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.5.0'
     testImplementation "org.powermock:powermock-module-junit4:2.0.0-beta.5"
     testImplementation "org.powermock:powermock-api-mockito2:2.0.0-beta.5"
     testImplementation 'org.mockito:mockito-core:2.23.0'
@@ -94,7 +94,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
     androidTestImplementation 'androidx.annotation:annotation:1.1.0'
-    androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.12.1'
+    androidTestImplementation 'com.squareup.okhttp3:mockwebserver:4.5.0'
     androidTestUtil 'androidx.test:orchestrator:1.2.0'
 
     // Debugging
