@@ -323,6 +323,9 @@
   <string name="retry">Prové torna</string>
   <string name="showcase_view_got_it_button">Fàit!</string>
   <string name="showcase_view_whole_nearby_activity">A-i é dij pòst davzin a chiel ch\'a l\'han da manca ëd plance për ilustré ij sò artìcoj su Wikipedia.\n\nSgnaché su \'SËRCHÉ AN COSTA ZÒNA\' a blòca la carta e a fa parte n\'arserca ëd prossimità davzin a cola posission.</string>
+  <string name="showcase_view_needs_photo">Ës pòst-sì a l\'ha damanca ëd na fòto.</string>
+  <string name="showcase_view_has_photo">Ës pòst-sì a l\'ha già na fòto.</string>
+  <string name="showcase_view_no_longer_exists">Ës pòst a esist pi.</string>
   <string name="showcase_view_list_icon">Sgnacand su \'s boton a comparirà na lista ëd si pòst</string>
   <string name="showcase_view_plus_fab">A peul carié na fòto da \'n pòst qualsëssìa ëd soa galarìa o màchina fòto</string>
   <string name="no_images_found">Gnun-e plance trovà!</string>

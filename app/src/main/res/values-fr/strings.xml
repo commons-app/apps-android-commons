@@ -349,6 +349,9 @@
   <string name="retry">Réessayer</string>
   <string name="showcase_view_got_it_button">C’est bon !</string>
   <string name="showcase_view_whole_nearby_activity">Ce sont les lieux autour de vous qui ont besoin d’images pour illustrer leurs articles sur Wikipédia.\n\nEn cliquant sur « CHERCHER DANS CETTE ZONE » vous verrouillez la carte et lancez une recherche à proximité de ce lieu.</string>
+  <string name="showcase_view_needs_photo">Cet endroit a besoin d’une photo.</string>
+  <string name="showcase_view_has_photo">Cet endroit a déjà une photo.</string>
+  <string name="showcase_view_no_longer_exists">Cet endroit n’existe plus.</string>
   <string name="showcase_view_list_icon">En cliquant sur ce bouton vous afficherez une liste de ces lieux</string>
   <string name="showcase_view_plus_fab">Vous pouvez téléverser une photo de n’importe quel lieu depuis votre galerie ou votre appareil photo</string>
   <string name="no_images_found">Aucune image trouvée !</string>

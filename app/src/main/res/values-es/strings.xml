@@ -336,6 +336,9 @@
   <string name="retry">Reintentar</string>
   <string name="showcase_view_got_it_button">Entendido</string>
   <string name="showcase_view_whole_nearby_activity">Estos son los sitios cercanos a ti necesitan imágenes para ilustrar sus artículos de Wikipedia.\n\n\nCliqueando en \'BUSCA EN ESTE ÁREA\' centrara el mapa e iniciara una búsqueda cercana alrededor de esa ubicación.</string>
+  <string name="showcase_view_needs_photo">Este sitio necesita una foto.</string>
+  <string name="showcase_view_has_photo">Este sitio ya tiene una foto.</string>
+  <string name="showcase_view_no_longer_exists">Este sitio ya no existe.</string>
   <string name="showcase_view_list_icon">Tocando este botón se desplegara una lista de estos lugares</string>
   <string name="showcase_view_plus_fab">Puedes cargar una imagen para cualquier sitio desde la galería o la cámara</string>
   <string name="no_images_found">No se encontró ninguna imagen.</string>
