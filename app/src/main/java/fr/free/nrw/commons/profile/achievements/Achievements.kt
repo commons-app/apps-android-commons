@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.achievements
+package fr.free.nrw.commons.profile.achievements
 
 /**
  * Represents Achievements class and stores all the parameters
@@ -87,12 +87,14 @@ class Achievements {
          */
         @JvmStatic
         fun from(response: FeedbackResponse): Achievements {
-            return Achievements(response.uniqueUsedImages,
-                    response.articlesUsingImages,
-                    response.thanksReceived,
-                    response.featuredImages.qualityImages
-                            + response.featuredImages.featuredPicturesOnWikimediaCommons, 0,
-                    response.deletedUploads)
+            return Achievements(
+                response.uniqueUsedImages,
+                response.articlesUsingImages,
+                response.thanksReceived,
+                response.featuredImages.qualityImages
+                        + response.featuredImages.featuredPicturesOnWikimediaCommons, 0,
+                response.deletedUploads
+            )
         }
     }
 }
