@@ -593,6 +593,17 @@ Upload your first media by tapping on the add button.</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Other</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Because it is</string>
+
+  <string name="category_edit_helper_make_deletion_toast">Trying to nominate %1$s for deletion</string>
+  <string name="category_edit_helper_show_deletion_title">Nominating for deletion</string>
+  <string name="category_edit_helper_show_deletion_title_success">Success</string>
+  <plurals name="category_edit_helper_show_deletion_message_if">
+    <item quantity="one">Category %1$s is added.</item>
+    <item quantity="other">Categories %1$s are added.</item>
+  </plurals>
+  <string name="category_edit_helper_show_deletion_title_failed">Failed</string>
+  <string name="category_edit_helper_deletion_message_else">Could not add categories.</string>
+
   <string name="share_image_via">Share image via</string>
   <string name="no_achievements_yet">You haven\'t made any contributions yet</string>
   <string name="account_created">Account created!</string>

@@ -136,18 +136,28 @@ public class CategoryEditHelper {
 
     private boolean showCategoryEditNotification(Context context, Media media, boolean result) {
         String message;
-        String title = context.getString(R.string.delete_helper_show_deletion_title);
+        String title = context.getString(R.string.category_edit_helper_show_deletion_title);
 
         if (result) {
-            title += ": " + context.getString(R.string.delete_helper_show_deletion_title_success);
-            message = context.getString((R.string.delete_helper_show_deletion_message_if),media.getDisplayTitle());
+            title += ": " + context.getString(R.string.category_edit_helper_show_deletion_title_success);
+            StringBuilder categoriesInMessage = new StringBuilder();
+            List<String> mediaCategoryList = media.getCategories();
+            for (String category : mediaCategoryList) {
+                categoriesInMessage.append(category);
+                if (category.equals(mediaCategoryList.get(mediaCategoryList.size()-1))) {
+                    continue;
+                }
+                categoriesInMessage.append(",");
+            }
+
+            message = context.getResources().getQuantityString(R.plurals.category_edit_helper_show_deletion_message_if, mediaCategoryList.size(), categoriesInMessage.toString());
         } else {
-            title += ": " + context.getString(R.string.delete_helper_show_deletion_title_failed);
+            title += ": " + context.getString(R.string.category_edit_helper_show_deletion_title);
             message = context.getString(R.string.delete_helper_show_deletion_message_else) ;
         }
 
-        String urlForDelete = BuildConfig.COMMONS_URL + "/wiki/Commons:Deletion_requests/" + media.getFilename();
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlForDelete));
+        String urlForFile = BuildConfig.COMMONS_URL + "/wiki/" + media.getFilename();
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlForFile));
         notificationHelper.showNotification(context, title, message, NOTIFICATION_DELETE, browserIntent);
         return result;
     }
