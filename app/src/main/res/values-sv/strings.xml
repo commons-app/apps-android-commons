@@ -10,6 +10,35 @@
 * WikiPhoenix
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d fil laddas upp</item>
+    <item quantity="other">%1$d filer laddas upp</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Startar %1$d uppladdning</item>
+    <item quantity="other">Startar %1$d uppladdningar</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d uppladdning</item>
+    <item quantity="other">%1$d uppladdningar</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Denna bild kommer att licensieras under %1$s</item>
+    <item quantity="other">Dessa bilder kommer att licensieras under %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d uppladdning</item>
+    <item quantity="other">%1$d uppladdningar</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Hämtar delat innehåll. Det kan ta en stund att behandla bilden beroende på bildens storlek och din enhet</item>
+    <item quantity="other">Hämtar delat innehåll. Det kan ta en stund att behandla bilderna beroende på bildens storlek och din enhet</item>
+  </plurals>
   <string name="title_activity_explore">Utforska</string>
   <string name="navigation_item_explore">Utforska</string>
   <string name="preference_category_appearance">Utseende</string>
@@ -41,10 +70,6 @@
   <string name="upload_progress_notification_title_finishing">Avslutar uppladdning av %1$s</string>
   <string name="upload_failed_notification_title">Uppladdning av %1$s misslyckades</string>
   <string name="upload_failed_notification_subtitle">Tryck för att visa</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d fil laddas upp</item>
-    <item quantity="other">%1$d filer laddas upp</item>
-  </plurals>
   <string name="title_activity_contributions">Mina senaste uppladdningar</string>
   <string name="contribution_state_queued">Köade</string>
   <string name="contribution_state_failed">Misslyckades</string>
@@ -79,19 +104,6 @@
   <string name="gps_disabled">GPS:en är inaktiverad på denna enhet. Vill du aktivera den?</string>
   <string name="enable_gps">Aktivera GPS</string>
   <string name="contributions_subtitle_zero">Inga uppladdningar ännu</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Startar %1$d uppladdning</item>
-    <item quantity="other">Startar %1$d uppladdningar</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d uppladdning</item>
-    <item quantity="other">%1$d uppladdningar</item>
-  </plurals>
   <string name="categories_not_found">Inga kategorier som stämmer överens med %1$s hittades</string>
   <string name="depictions_not_found">Inga Wikidata-objekt som matchar %1$s hittades</string>
   <string name="no_child_classes">%1$s har inga underordnade klasser</string>
@@ -118,10 +130,6 @@
   <string name="no_uploads_yet">Du har inte lagt upp några bilder ännu.</string>
   <string name="menu_retry_upload">Försök igen</string>
   <string name="menu_cancel_upload">Avbryt</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Denna bild kommer att licensieras under %1$s</item>
-    <item quantity="other">Dessa bilder kommer att licensieras under %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Genom att skicka in denna bild intygar jag att detta är mitt eget verk, som inte innehåller upphovsrättsskyddat material eller selfies samt följer &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons-policys&lt;/a&gt;.</string>
   <string name="menu_download">Ladda ned</string>
   <string name="preference_license">Standardlicens</string>
@@ -321,6 +329,9 @@
   <string name="retry">Försök igen</string>
   <string name="showcase_view_got_it_button">Uppfattat!</string>
   <string name="showcase_view_whole_nearby_activity">Detta är platserna nära dig som behöver bilder för att illustrera deras Wikipedia-artiklar.\n\nNär du klickar på \"SÖK I DETTA OMRÅDE\" kommer kartan låsas och en sökning startas i närheten runt detta plats.</string>
+  <string name="showcase_view_needs_photo">Den här platsen behöver ett foto.</string>
+  <string name="showcase_view_has_photo">Den här platsen har redan ett foto.</string>
+  <string name="showcase_view_no_longer_exists">Den här platsen finns inte längre.</string>
   <string name="showcase_view_list_icon">Klicka på den här knappen för att få upp en lista med dessa platser</string>
   <string name="showcase_view_plus_fab">Du kan ladda upp en bild från vilken plats som helst från ditt galleri eller kamera</string>
   <string name="no_images_found">Inga bilder hittades!</string>
@@ -416,10 +427,6 @@
   <string name="submit">Skicka</string>
   <string name="upload_title_duplicate">En fil med filnamnet %1$s finns. Är du säker på att du vill fortsätta?</string>
   <string name="map_application_missing">Ingen kompatibel kartapp hittades på din enhet. Installera en kartapp för att använda denna funktion.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d uppladdning</item>
-    <item quantity="other">%1$d uppladdningar</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Bokmärken</string>
   <string name="title_activity_bookmarks">Bokmärken</string>
   <string name="title_page_bookmarks_pictures">Bilder</string>
@@ -507,10 +514,6 @@
   <string name="review_thanks_no_button_text">Nästa bild</string>
   <string name="skip_image_explanation">När du klickar på knappen får du en annan bild som laddades upp nyligen från Wikimedia Commons</string>
   <string name="review_image_explanation">Du kan granska bilder och förbättra kvaliteten för Wikimedia Commons.\n De fyra granskningsparametrarna är: \n - Är denna bild relevant \n - Följer denna bild upphovsrättsreglerna? \n - Är denna bild riktigt kategoriserad? \n - Om allting får bra kan du också tacka bidragsgivaren.</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">Hämtar delat innehåll. Det kan ta en stund att behandla bilden beroende på bildens storlek och din enhet</item>
-    <item quantity="other">Hämtar delat innehåll. Det kan ta en stund att behandla bilderna beroende på bildens storlek och din enhet</item>
-  </plurals>
   <string name="no_image">Inga bilder används</string>
   <string name="no_image_reverted">Inga bilder återställdes</string>
   <string name="no_image_uploaded">Inga bilder laddades upp</string>
@@ -600,4 +603,18 @@
   <string name="use_location_from_similar_image">Tog du dessa två bilder på samma plats? Vill du använda den högra bildens latitud/longitud?</string>
   <string name="load_more">Läs in fler</string>
   <string name="nearby_no_results">Inga platser hittades, försök ändra dina sökkriterier.</string>
+  <string name="add_picture_to_wikipedia_article_title">Lägg till bild på Wikipedia</string>
+  <string name="add_picture_to_wikipedia_article_desc">Vill du lägga till denna bild i Wikipedia-artikeln på %1$s?</string>
+  <string name="add_picture_to_wikipedia_instructions_title">Instruktioner</string>
+  <string name="add_picture_to_wikipedia_instructions_desc">Se till att följa riktlinjerna för hur man redigerar!</string>
+  <string name="confirm">Bekräfta</string>
+  <string name="instructions_title">Instruktioner</string>
+  <string name="wikipedia_instructions_step_1">1. Använd följande wikitext:</string>
+  <string name="wikipedia_instructions_step_2">2. Klicka på \"Bekräfta\" för att öppna Wikipedia-artikeln</string>
+  <string name="wikipedia_instructions_step_3">3. Hitta ett lämplig avsnitt i artikeln för din bild</string>
+  <string name="wikipedia_instructions_step_4">4. Klicka på redigeringsikonen (ser ut som en penna) för detta avsnitt.</string>
+  <string name="wikipedia_instructions_step_5">5. Klistra in wikitexten på det lämpliga stället.</string>
+  <string name="wikipedia_instructions_step_6">6. Redigera wikitexten för att placera den mer lämpligt vid behov. För mer information, se &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;här&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_7">7. Publicera artikeln</string>
+  <string name="copy_wikicode_to_clipboard">Kopiera wikikod till urklipp</string>
 </resources>

@@ -13,6 +13,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -20,25 +21,16 @@ import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.di.CommonsDaggerService;
-import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
-import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
-import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.processors.PublishProcessor;
 import io.reactivex.schedulers.Schedulers;
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.inject.Inject;
@@ -47,300 +39,329 @@ import timber.log.Timber;
 
 public class UploadService extends CommonsDaggerService {
 
-    private static final String EXTRA_PREFIX = "fr.free.nrw.commons.upload";
+  private static final String EXTRA_PREFIX = "fr.free.nrw.commons.upload";
 
-    public static final String ACTION_START_SERVICE = EXTRA_PREFIX + ".upload";
-    public static final String EXTRA_FILES = EXTRA_PREFIX + ".files";
-    @Inject WikidataEditService wikidataEditService;
-    @Inject SessionManager sessionManager;
-    @Inject
-    ContributionDao contributionDao;
-    @Inject UploadClient uploadClient;
-    @Inject MediaClient mediaClient;
-    @Inject
-    @Named(CommonsApplicationModule.MAIN_THREAD)
-    Scheduler mainThreadScheduler;
-    @Inject
-    @Named(CommonsApplicationModule.IO_THREAD) Scheduler ioThreadScheduler;
+  public static final String ACTION_START_SERVICE = EXTRA_PREFIX + ".upload";
+  public static final String EXTRA_FILES = EXTRA_PREFIX + ".files";
+  @Inject
+  WikidataEditService wikidataEditService;
+  @Inject
+  SessionManager sessionManager;
+  @Inject
+  ContributionDao contributionDao;
+  @Inject
+  UploadClient uploadClient;
+  @Inject
+  MediaClient mediaClient;
+  @Inject
+  @Named(CommonsApplicationModule.MAIN_THREAD)
+  Scheduler mainThreadScheduler;
+  @Inject
+  @Named(CommonsApplicationModule.IO_THREAD)
+  Scheduler ioThreadScheduler;
 
-    private NotificationManagerCompat notificationManager;
-    private NotificationCompat.Builder curNotification;
-    private int toUpload;
-    private CompositeDisposable compositeDisposable;
+  private NotificationManagerCompat notificationManager;
+  private NotificationCompat.Builder curNotification;
+  private int toUpload;
+  private CompositeDisposable compositeDisposable;
 
-    /**
-     * The filePath names of unfinished uploads, used to prevent overwriting
-     */
-    private Set<String> unfinishedUploads = new HashSet<>();
+  /**
+   * The filePath names of unfinished uploads, used to prevent overwriting
+   */
+  private Set<String> unfinishedUploads = new HashSet<>();
 
-    // DO NOT HAVE NOTIFICATION ID OF 0 FOR ANYTHING
-    // See http://stackoverflow.com/questions/8725909/startforeground-does-not-show-my-notification
-    // Seriously, Android?
-    public static final int NOTIFICATION_UPLOAD_IN_PROGRESS = 1;
-    public static final int NOTIFICATION_UPLOAD_FAILED = 3;
+  // DO NOT HAVE NOTIFICATION ID OF 0 FOR ANYTHING
+  // See http://stackoverflow.com/questions/8725909/startforeground-does-not-show-my-notification
+  // Seriously, Android?
+  public static final int NOTIFICATION_UPLOAD_IN_PROGRESS = 1;
+  public static final int NOTIFICATION_UPLOAD_FAILED = 3;
 
-    protected class NotificationUpdateProgressListener{
+  protected class NotificationUpdateProgressListener {
 
-        String notificationTag;
-        boolean notificationTitleChanged;
-        Contribution contribution;
+    String notificationTag;
+    boolean notificationTitleChanged;
+    Contribution contribution;
 
-        String notificationProgressTitle;
-        String notificationFinishingTitle;
+    String notificationProgressTitle;
+    String notificationFinishingTitle;
 
-        NotificationUpdateProgressListener(String notificationTag, String notificationProgressTitle, String notificationFinishingTitle, Contribution contribution) {
-            this.notificationTag = notificationTag;
-            this.notificationProgressTitle = notificationProgressTitle;
-            this.notificationFinishingTitle = notificationFinishingTitle;
-            this.contribution = contribution;
-        }
-
-        public void onProgress(long transferred, long total) {
-            if (!notificationTitleChanged) {
-                curNotification.setContentTitle(notificationProgressTitle);
-                notificationTitleChanged = true;
-                contribution.setState(Contribution.STATE_IN_PROGRESS);
-            }
-            if (transferred == total) {
-                // Completed!
-                curNotification.setContentTitle(notificationFinishingTitle)
-                        .setTicker(notificationFinishingTitle)
-                        .setProgress(0, 100, true);
-            } else {
-                curNotification.setProgress(100, (int) (((double) transferred / (double) total) * 100), false);
-            }
-            notificationManager.notify(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
-
-            contribution.setTransferred(transferred);
-
-            compositeDisposable.add(contributionDao.update(contribution)
-                .subscribeOn(ioThreadScheduler)
-                .subscribe());
-        }
-
+    NotificationUpdateProgressListener(String notificationTag, String notificationProgressTitle,
+        String notificationFinishingTitle, Contribution contribution) {
+      this.notificationTag = notificationTag;
+      this.notificationProgressTitle = notificationProgressTitle;
+      this.notificationFinishingTitle = notificationFinishingTitle;
+      this.contribution = contribution;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        compositeDisposable.dispose();
-        Timber.d("UploadService.onDestroy; %s are yet to be uploaded", unfinishedUploads);
+    public void onProgress(long transferred, long total) {
+      if (!notificationTitleChanged) {
+        curNotification.setContentTitle(notificationProgressTitle);
+        notificationTitleChanged = true;
+        contribution.setState(Contribution.STATE_IN_PROGRESS);
+      }
+      if (transferred == total) {
+        // Completed!
+        curNotification.setContentTitle(notificationFinishingTitle)
+            .setTicker(notificationFinishingTitle)
+            .setProgress(0, 100, true);
+      } else {
+        curNotification
+            .setProgress(100, (int) (((double) transferred / (double) total) * 100), false);
+      }
+      notificationManager
+          .notify(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
+
+      contribution.setTransferred(transferred);
+
+      compositeDisposable.add(contributionDao.update(contribution)
+          .subscribeOn(ioThreadScheduler)
+          .subscribe());
     }
 
-    public class UploadServiceLocalBinder extends Binder {
-        public UploadService getService() {
-            return UploadService.this;
-        }
+  }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+    compositeDisposable.dispose();
+    Timber.d("UploadService.onDestroy; %s are yet to be uploaded", unfinishedUploads);
+  }
+
+  public class UploadServiceLocalBinder extends Binder {
+
+    public UploadService getService() {
+      return UploadService.this;
+    }
+  }
+
+  private final IBinder localBinder = new UploadServiceLocalBinder();
+
+  private PublishProcessor<Contribution> contributionsToUpload;
+
+  @Override
+  public IBinder onBind(Intent intent) {
+    return localBinder;
+  }
+
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    CommonsApplication.createNotificationChannel(getApplicationContext());
+    compositeDisposable = new CompositeDisposable();
+    notificationManager = NotificationManagerCompat.from(this);
+    curNotification = getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
+    contributionsToUpload = PublishProcessor.create();
+    compositeDisposable.add(contributionsToUpload.subscribe(this::handleUpload));
+  }
+
+  public void handleUpload(Contribution contribution) {
+    contribution.setState(Contribution.STATE_QUEUED);
+    contribution.setTransferred(0);
+    toUpload++;
+    if (curNotification != null && toUpload != 1) {
+      curNotification.setContentText(getResources()
+          .getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload));
+      Timber.d("%d uploads left", toUpload);
+      notificationManager
+          .notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_IN_PROGRESS,
+              curNotification.build());
     }
 
-    private final IBinder localBinder = new UploadServiceLocalBinder();
+    compositeDisposable.add(contributionDao
+        .save(contribution)
+        .subscribeOn(ioThreadScheduler)
+        .subscribe(() -> uploadContribution(contribution)));
+  }
 
-    private PublishProcessor<Contribution> contributionsToUpload;
+  private boolean freshStart = true;
 
-    @Override
-    public IBinder onBind(Intent intent) {
-        return localBinder;
+  public void queue(Contribution contribution) {
+    contributionsToUpload.offer(contribution);
+  }
+
+  @Override
+  public int onStartCommand(Intent intent, int flags, int startId) {
+    if (ACTION_START_SERVICE.equals(intent.getAction()) && freshStart) {
+      compositeDisposable.add(contributionDao.updateStates(Contribution.STATE_FAILED,
+          new int[]{Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS})
+          .observeOn(mainThreadScheduler)
+          .subscribeOn(ioThreadScheduler)
+          .subscribe());
+      freshStart = false;
     }
+    return START_REDELIVER_INTENT;
+  }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        CommonsApplication.createNotificationChannel(getApplicationContext());
-        compositeDisposable = new CompositeDisposable();
-        notificationManager = NotificationManagerCompat.from(this);
-        curNotification = getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
-        contributionsToUpload = PublishProcessor.create();
-        compositeDisposable.add(contributionsToUpload.subscribe(this::handleUpload));
+  @SuppressLint("StringFormatInvalid")
+  private NotificationCompat.Builder getNotificationBuilder(String channelId) {
+    return new NotificationCompat.Builder(this, channelId).setAutoCancel(true)
+        .setSmallIcon(R.drawable.ic_launcher)
+        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
+        .setAutoCancel(true)
+        .setOnlyAlertOnce(true)
+        .setProgress(100, 0, true)
+        .setOngoing(true)
+        .setContentIntent(
+            PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0));
+  }
+
+  @SuppressLint("CheckResult")
+  private void uploadContribution(Contribution contribution) {
+    Uri localUri = contribution.getLocalUri();
+    if (localUri == null || localUri.getPath() == null) {
+      Timber.d("localUri/path is null");
+      return;
     }
+    String notificationTag = localUri.toString();
+    File localFile = new File(localUri.getPath());
 
-    public void handleUpload(Contribution contribution) {
-        contribution.setState(Contribution.STATE_QUEUED);
-        contribution.setTransferred(0);
-        toUpload++;
-        if (curNotification != null && toUpload != 1) {
-            curNotification.setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload));
-            Timber.d("%d uploads left", toUpload);
-            notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
-        }
+    Timber.d("Before execution!");
+    final Media media = contribution.getMedia();
+    final String displayTitle = media.getDisplayTitle();
+    curNotification.setContentTitle(getString(R.string.upload_progress_notification_title_start,
+        displayTitle))
+        .setContentText(getResources()
+            .getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload,
+                toUpload))
+        .setTicker(getString(R.string.upload_progress_notification_title_in_progress,
+            displayTitle))
+        .setOngoing(true);
+    notificationManager
+        .notify(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
 
-        compositeDisposable.add(contributionDao
-            .save(contribution)
-            .subscribeOn(ioThreadScheduler)
-            .subscribe(() -> uploadContribution(contribution)));
-    }
+    String filename = media.getFilename();
 
-    private boolean freshStart = true;
+    NotificationUpdateProgressListener notificationUpdater = new NotificationUpdateProgressListener(
+        notificationTag,
+        getString(R.string.upload_progress_notification_title_in_progress,
+            displayTitle),
+        getString(R.string.upload_progress_notification_title_finishing,
+            displayTitle),
+        contribution
+    );
 
-    public void queue(Contribution contribution) {
-        contributionsToUpload.offer(contribution);
-    }
+    Observable.fromCallable(() -> "Temp_" + contribution.hashCode() + filename)
+        .flatMap(stashFilename -> uploadClient
+            .uploadFileToStash(getApplicationContext(), stashFilename, localFile,
+                notificationUpdater))
+        .subscribeOn(Schedulers.io())
+        .observeOn(Schedulers.io())
+        .doFinally(() -> {
+          if (filename != null) {
+            unfinishedUploads.remove(filename);
+          }
+          toUpload--;
+          if (toUpload == 0) {
+            // Sync modifications right after all uploads are processed
+            ContentResolver
+                .requestSync(sessionManager.getCurrentAccount(), BuildConfig.MODIFICATION_AUTHORITY,
+                    new Bundle());
+            stopForeground(true);
+          }
+        })
+        .flatMap(uploadStash -> {
+          notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        if (ACTION_START_SERVICE.equals(intent.getAction()) && freshStart) {
-            compositeDisposable.add(contributionDao.updateStates(Contribution.STATE_FAILED, new int[]{Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS})
-                    .observeOn(mainThreadScheduler)
-                    .subscribeOn(ioThreadScheduler)
-                    .subscribe());
-            freshStart = false;
-        }
-        return START_REDELIVER_INTENT;
-    }
+          Timber.d("Stash upload response 1 is %s", uploadStash.toString());
 
-    @SuppressLint("StringFormatInvalid")
-    private NotificationCompat.Builder getNotificationBuilder(String channelId) {
-        return new NotificationCompat.Builder(this, channelId).setAutoCancel(true)
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
-                .setAutoCancel(true)
-                .setOnlyAlertOnce(true)
-                .setProgress(100, 0, true)
-                .setOngoing(true)
-                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0));
-    }
-
-    @SuppressLint("CheckResult")
-    private void uploadContribution(Contribution contribution) {
-        Uri localUri = contribution.getLocalUri();
-        if (localUri == null || localUri.getPath() == null) {
-            Timber.d("localUri/path is null");
-            return;
-        }
-        String notificationTag = localUri.toString();
-        File localFile = new File(localUri.getPath());
-
-        Timber.d("Before execution!");
-        curNotification.setContentTitle(getString(R.string.upload_progress_notification_title_start, contribution.getDisplayTitle()))
-                .setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
-                .setTicker(getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()))
-                .setOngoing(true);
-        notificationManager
-                .notify(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
-
-        String filename = contribution.getFilename();
-
-        NotificationUpdateProgressListener notificationUpdater = new NotificationUpdateProgressListener(notificationTag,
-                getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()),
-                getString(R.string.upload_progress_notification_title_finishing, contribution.getDisplayTitle()),
-                contribution
-        );
-
-        Observable.fromCallable(() -> "Temp_" + contribution.hashCode() + filename)
-                .flatMap(stashFilename -> uploadClient
-                        .uploadFileToStash(getApplicationContext(), stashFilename, localFile,
-                                notificationUpdater))
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .doFinally(() -> {
-                    if (filename != null) {
-                        unfinishedUploads.remove(filename);
-                    }
-                    toUpload--;
-                    if (toUpload == 0) {
-                        // Sync modifications right after all uploads are processed
-                        ContentResolver.requestSync(sessionManager.getCurrentAccount(), BuildConfig.MODIFICATION_AUTHORITY, new Bundle());
-                        stopForeground(true);
-                    }
-                })
-                .flatMap(uploadStash -> {
-                    notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
-
-                    Timber.d("Stash upload response 1 is %s", uploadStash.toString());
-
-                    if (uploadStash.isSuccessful()) {
-                        Timber.d("making sure of uniqueness of name: %s", filename);
-                        String uniqueFilename = findUniqueFilename(filename);
-                        unfinishedUploads.add(uniqueFilename);
-                        return uploadClient.uploadFileFromStash(
-                            getApplicationContext(),
-                            contribution,
-                            uniqueFilename,
-                            uploadStash.getFilekey());
-                    } else {
-                        Timber.d("Contribution upload failed. Wikidata entity won't be edited");
-                        showFailedNotification(contribution);
-                        return Observable.never();
-                    }
-                })
-                .subscribe(
-                    uploadResult -> onUpload(contribution, notificationTag, uploadResult),
-                    throwable -> {
-                    Timber.w(throwable, "Exception during upload");
-                    notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
-                    showFailedNotification(contribution);
-                });
-    }
-
-    private void onUpload(Contribution contribution, String notificationTag,
-        UploadResult uploadResult) {
-        Timber.d("Stash upload response 2 is %s", uploadResult.toString());
-
-        notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
-
-        if (uploadResult.isSuccessful()) {
-            onSuccessfulUpload(contribution, uploadResult);
-        } else {
+          if (uploadStash.isSuccessful()) {
+            Timber.d("making sure of uniqueness of name: %s", filename);
+            String uniqueFilename = findUniqueFilename(filename);
+            unfinishedUploads.add(uniqueFilename);
+            return uploadClient.uploadFileFromStash(
+                getApplicationContext(),
+                contribution,
+                uniqueFilename,
+                uploadStash.getFilekey());
+          } else {
             Timber.d("Contribution upload failed. Wikidata entity won't be edited");
             showFailedNotification(contribution);
-        }
-    }
+            return Observable.never();
+          }
+        })
+        .subscribe(
+            uploadResult -> onUpload(contribution, notificationTag, uploadResult),
+            throwable -> {
+              Timber.w(throwable, "Exception during upload");
+              notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
+              showFailedNotification(contribution);
+            });
+  }
 
-    private void onSuccessfulUpload(Contribution contribution, UploadResult uploadResult) {
-        compositeDisposable
-            .add(wikidataEditService.addDepictionsAndCaptions(uploadResult, contribution));
-        WikidataPlace wikidataPlace = contribution.getWikidataPlace();
-        if (wikidataPlace != null && wikidataPlace.getImageValue() == null) {
-            wikidataEditService.createImageClaim(wikidataPlace, uploadResult);
-        }
-        saveCompletedContribution(contribution, uploadResult);
-    }
+  private void onUpload(Contribution contribution, String notificationTag,
+      UploadResult uploadResult) {
+    Timber.d("Stash upload response 2 is %s", uploadResult.toString());
 
-    private void saveCompletedContribution(Contribution contribution, UploadResult uploadResult) {
-        compositeDisposable.add(mediaClient.getMedia("File:" + uploadResult.getFilename())
-        .map(media -> new Contribution(media, Contribution.STATE_COMPLETED))
-        .flatMapCompletable(newContribution -> contributionDao.saveAndDelete(contribution, newContribution))
+    notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
+
+    if (uploadResult.isSuccessful()) {
+      onSuccessfulUpload(contribution, uploadResult);
+    } else {
+      Timber.d("Contribution upload failed. Wikidata entity won't be edited");
+      showFailedNotification(contribution);
+    }
+  }
+
+  private void onSuccessfulUpload(Contribution contribution, UploadResult uploadResult) {
+    compositeDisposable
+        .add(wikidataEditService.addDepictionsAndCaptions(uploadResult, contribution));
+    WikidataPlace wikidataPlace = contribution.getWikidataPlace();
+    if (wikidataPlace != null && wikidataPlace.getImageValue() == null) {
+      wikidataEditService.createClaim(wikidataPlace, uploadResult.getFilename(), contribution.getMedia().getCaptions());
+    }
+    saveCompletedContribution(contribution, uploadResult);
+  }
+
+  private void saveCompletedContribution(Contribution contribution, UploadResult uploadResult) {
+    compositeDisposable.add(mediaClient.getMedia("File:" + uploadResult.getFilename())
+        .map(contribution::completeWith)
+        .flatMapCompletable(
+            newContribution -> contributionDao.saveAndDelete(contribution, newContribution))
         .subscribe());
-    }
+  }
 
-    @SuppressLint("StringFormatInvalid")
-    @SuppressWarnings("deprecation")
-    private void showFailedNotification(Contribution contribution) {
-        curNotification.setTicker(getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
-                .setContentTitle(getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
-                .setContentText(getString(R.string.upload_failed_notification_subtitle))
-                .setProgress(0, 0, false)
-                .setOngoing(false);
-        notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_FAILED, curNotification.build());
+  @SuppressLint("StringFormatInvalid")
+  @SuppressWarnings("deprecation")
+  private void showFailedNotification(Contribution contribution) {
+    final String displayTitle = contribution.getMedia().getDisplayTitle();
+    curNotification.setTicker(getString(R.string.upload_failed_notification_title, displayTitle))
+        .setContentTitle(getString(R.string.upload_failed_notification_title, displayTitle))
+        .setContentText(getString(R.string.upload_failed_notification_subtitle))
+        .setProgress(0, 0, false)
+        .setOngoing(false);
+    notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_FAILED,
+        curNotification.build());
 
-        contribution.setState(Contribution.STATE_FAILED);
+    contribution.setState(Contribution.STATE_FAILED);
 
-        compositeDisposable.add(contributionDao
-            .update(contribution)
-            .subscribeOn(ioThreadScheduler)
-            .subscribe());
-    }
+    compositeDisposable.add(contributionDao
+        .update(contribution)
+        .subscribeOn(ioThreadScheduler)
+        .subscribe());
+  }
 
-    private String findUniqueFilename(String fileName) throws IOException {
-        String sequenceFileName;
-        for (int sequenceNumber = 1; true; sequenceNumber++) {
-            if (sequenceNumber == 1) {
-                sequenceFileName = fileName;
-            } else {
-                if (fileName.indexOf('.') == -1) {
-                    // We really should have appended a filePath type suffix already.
-                    // But... we might not.
-                    sequenceFileName = fileName + " " + sequenceNumber;
-                } else {
-                    Pattern regex = Pattern.compile("^(.*)(\\..+?)$");
-                    Matcher regexMatcher = regex.matcher(fileName);
-                    sequenceFileName = regexMatcher.replaceAll("$1 " + sequenceNumber + "$2");
-                }
-            }
-            if (!mediaClient.checkPageExistsUsingTitle(String.format("File:%s",sequenceFileName)).blockingGet()
-                    && !unfinishedUploads.contains(sequenceFileName)) {
-                break;
-            }
+  private String findUniqueFilename(String fileName) throws IOException {
+    String sequenceFileName;
+    for (int sequenceNumber = 1; true; sequenceNumber++) {
+      if (sequenceNumber == 1) {
+        sequenceFileName = fileName;
+      } else {
+        if (fileName.indexOf('.') == -1) {
+          // We really should have appended a filePath type suffix already.
+          // But... we might not.
+          sequenceFileName = fileName + " " + sequenceNumber;
+        } else {
+          Pattern regex = Pattern.compile("^(.*)(\\..+?)$");
+          Matcher regexMatcher = regex.matcher(fileName);
+          sequenceFileName = regexMatcher.replaceAll("$1 " + sequenceNumber + "$2");
         }
-        return sequenceFileName;
+      }
+      if (!mediaClient.checkPageExistsUsingTitle(String.format("File:%s", sequenceFileName))
+          .blockingGet()
+          && !unfinishedUploads.contains(sequenceFileName)) {
+        break;
+      }
     }
+    return sequenceFileName;
+  }
 }

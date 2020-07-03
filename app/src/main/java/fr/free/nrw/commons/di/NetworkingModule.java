@@ -14,6 +14,7 @@ import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaDetailInterface;
 import fr.free.nrw.commons.media.MediaInterface;
+import fr.free.nrw.commons.media.PageMediaInterface;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.mwapi.UserInterface;
 import fr.free.nrw.commons.review.ReviewInterface;
@@ -22,6 +23,7 @@ import fr.free.nrw.commons.upload.WikiBaseInterface;
 import fr.free.nrw.commons.upload.depicts.DepictsInterface;
 import fr.free.nrw.commons.wikidata.WikidataInterface;
 import java.io.File;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -50,6 +52,9 @@ public class NetworkingModule {
 
     public static final String NAMED_COMMONS_WIKI_SITE = "commons-wikisite";
     private static final String NAMED_WIKI_DATA_WIKI_SITE = "wikidata-wikisite";
+    private static final String NAMED_WIKI_PEDIA_WIKI_SITE = "wikipedia-wikisite";
+
+    public static final String NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE = "language-wikipedia-wikisite";
 
     public static final String NAMED_COMMONS_CSRF = "commons-csrf";
 
@@ -240,5 +245,22 @@ public class NetworkingModule {
     @Singleton
     public WikidataInterface provideWikidataInterface(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikiDataWikiSite) {
         return ServiceFactory.get(wikiDataWikiSite, BuildConfig.WIKIDATA_URL, WikidataInterface.class);
+    }
+
+    /**
+     * Add provider for PageMediaInterface
+     * It creates a retrofit service for the wiki site using device's current language
+     */
+    @Provides
+    @Singleton
+    public PageMediaInterface providePageMediaInterface(@Named(NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE) WikiSite wikiSite) {
+        return ServiceFactory.get(wikiSite, wikiSite.url(), PageMediaInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    @Named(NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE)
+    public WikiSite provideLanguageWikipediaSite() {
+        return WikiSite.forLanguageCode(Locale.getDefault().getLanguage());
     }
 }

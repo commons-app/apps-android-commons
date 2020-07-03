@@ -30,6 +30,35 @@
 * Y-M D
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d fichier en cours de téléversement</item>
+    <item quantity="other">%1$d fichiers en cours de téléversement</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%1$d téléversement démarré</item>
+    <item quantity="other">%1$d téléversements démarrés</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d téléversement</item>
+    <item quantity="other">%1$d téléversements</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Cette image sera sous licence %1$s</item>
+    <item quantity="other">Ces images seront sous licence %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d téléversement</item>
+    <item quantity="other">%1$d téléversements</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Réception de contenu partagé. Le traitement de l\'image peut prendre un certain temps en fonction de la taille de l\'image et de votre matériel</item>
+    <item quantity="other">Réception de contenu partagé. Le traitement des images peut prendre un certain temps en fonction de la taille des images et de votre matériel</item>
+  </plurals>
   <string name="title_activity_explore">Explorer</string>
   <string name="navigation_item_explore">Explorer</string>
   <string name="preference_category_appearance">Apparence</string>
@@ -61,10 +90,6 @@
   <string name="upload_progress_notification_title_finishing">Fin du téléversement de %1$s</string>
   <string name="upload_failed_notification_title">Le téléversement de %1$s a échoué</string>
   <string name="upload_failed_notification_subtitle">Appuyer pour afficher</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d fichier en cours de téléversement</item>
-    <item quantity="other">%1$d fichiers en cours de téléversement</item>
-  </plurals>
   <string name="title_activity_contributions">Mes téléversements récents</string>
   <string name="contribution_state_queued">Mis en file d’attente</string>
   <string name="contribution_state_failed">Échec</string>
@@ -99,19 +124,6 @@
   <string name="gps_disabled">Le GPS est désactivé sur votre appareil. Voulez-vous l’activer ?</string>
   <string name="enable_gps">Activer le GPS</string>
   <string name="contributions_subtitle_zero">Encore aucun téléversement</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">%1$d téléversement démarré</item>
-    <item quantity="other">%1$d téléversements démarrés</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d téléversement</item>
-    <item quantity="other">%1$d téléversements</item>
-  </plurals>
   <string name="categories_not_found">Aucune catégorie trouvée correspondant à %1$s</string>
   <string name="depictions_not_found">Aucun élément Wikidata trouvé correspondant à %1$s</string>
   <string name="no_child_classes">%1$s n’a pas de classes enfant</string>
@@ -138,10 +150,6 @@
   <string name="no_uploads_yet">Vous n’avez encore téléchargé aucune photo.</string>
   <string name="menu_retry_upload">Réessayer</string>
   <string name="menu_cancel_upload">Annuler</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Cette image sera sous licence %1$s</item>
-    <item quantity="other">Ces images seront sous licence %1$s</item>
-  </plurals>
   <string name="media_upload_policy">En soumettant cette image, je déclare qu’elle est l’oeuvre de mon propre travail, qu’elle ne contient pas d’élément protégé par les droits d’auteurs ni d’auto-portraits et qu’elle est par ailleurs conforme aux &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/fr\"&gt;règles de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Télécharger</string>
   <string name="preference_license">Licence par défaut</string>
@@ -341,6 +349,9 @@
   <string name="retry">Réessayer</string>
   <string name="showcase_view_got_it_button">C’est bon !</string>
   <string name="showcase_view_whole_nearby_activity">Ce sont les lieux autour de vous qui ont besoin d’images pour illustrer leurs articles sur Wikipédia.\n\nEn cliquant sur « CHERCHER DANS CETTE ZONE » vous verrouillez la carte et lancez une recherche à proximité de ce lieu.</string>
+  <string name="showcase_view_needs_photo">Cet endroit a besoin d’une photo.</string>
+  <string name="showcase_view_has_photo">Cet endroit a déjà une photo.</string>
+  <string name="showcase_view_no_longer_exists">Cet endroit n’existe plus.</string>
   <string name="showcase_view_list_icon">En cliquant sur ce bouton vous afficherez une liste de ces lieux</string>
   <string name="showcase_view_plus_fab">Vous pouvez téléverser une photo de n’importe quel lieu depuis votre galerie ou votre appareil photo</string>
   <string name="no_images_found">Aucune image trouvée !</string>
@@ -436,10 +447,6 @@
   <string name="submit">Soumettre</string>
   <string name="upload_title_duplicate">Un fichier avec le nom %1$s existe. Êtes-vous sûr de vouloir continuer ?</string>
   <string name="map_application_missing">Aucune application cartographique compatible n’a été trouvée sur votre appareil. Veuillez en installer une pour utiliser cette fonctionnalité.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d téléversement</item>
-    <item quantity="other">%1$d téléversements</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Signets</string>
   <string name="title_activity_bookmarks">Signets</string>
   <string name="title_page_bookmarks_pictures">Images</string>
@@ -527,10 +534,6 @@
   <string name="review_thanks_no_button_text">Image suivante</string>
   <string name="skip_image_explanation">Cliquer sur ce bouton vous fournira une autre image récemment téléversée de Wikimédia Commons.</string>
   <string name="review_image_explanation">Vous pouvez revoir les images et améliorer la qualité de Wikimédia Commons.\n Les quatre paramètres à revoir sont : \n - Cette image est-elle à propos ? \n - Cette image respecte-t-elle les règles de droit d’auteur ? \n - Cette image est-elle bien catégorisée ? \n - Si tout va bien, vous pouvez aussi remercier le contributeur.</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">Réception de contenu partagé. Le traitement de l\'image peut prendre un certain temps en fonction de la taille de l\'image et de votre matériel</item>
-    <item quantity="other">Réception de contenu partagé. Le traitement des images peut prendre un certain temps en fonction de la taille des images et de votre matériel</item>
-  </plurals>
   <string name="no_image">Aucune image utilisée</string>
   <string name="no_image_reverted">Aucune image retournée</string>
   <string name="no_image_uploaded">Aucune image téléversée</string>
@@ -620,4 +623,18 @@
   <string name="use_location_from_similar_image">Avez-vous pris ces deux photos du même endroit ? Voulez-vous utiliser les latitude/longitude de l’image sur la droite ?</string>
   <string name="load_more">Charger davantage</string>
   <string name="nearby_no_results">Pas d’endroit trouvé, essayez de modifier vos critères de recherche.</string>
+  <string name="add_picture_to_wikipedia_article_title">Ajouter une image à Wikipédia</string>
+  <string name="add_picture_to_wikipedia_article_desc">Voulez-vous ajouter cette image à l’article Wikipédia de langue %1$s ?</string>
+  <string name="add_picture_to_wikipedia_instructions_title">Instructions</string>
+  <string name="add_picture_to_wikipedia_instructions_desc">Faites attention de suivre les lignes directrices de modification !</string>
+  <string name="confirm">Confirmer</string>
+  <string name="instructions_title">Instructions</string>
+  <string name="wikipedia_instructions_step_1">1. Utiliser le wikicode suivant :</string>
+  <string name="wikipedia_instructions_step_2">2. Cliquer sur Confirmer ouvrira l’article Wikipédia</string>
+  <string name="wikipedia_instructions_step_3">3. Trouver une section appropriée pour votre image dans l’article</string>
+  <string name="wikipedia_instructions_step_4">4. Cliquer sur l’icône d’édition (celle ressemblant à un crayon) pour cette section.</string>
+  <string name="wikipedia_instructions_step_5">5. Coller le texte wiki à l’endroit approprié.</string>
+  <string name="wikipedia_instructions_step_6">6. Modifier le wikitexte pour un positionnement approprié, si besoin. Pour plus d’information, voir &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;ici&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_7">7. Publier l’article</string>
+  <string name="copy_wikicode_to_clipboard">Copier le wikicode dans le presse-papier</string>
 </resources>

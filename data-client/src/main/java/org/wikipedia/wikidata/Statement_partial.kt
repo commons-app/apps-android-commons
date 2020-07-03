@@ -21,5 +21,8 @@ import com.google.gson.annotations.SerializedName
 data class Statement_partial(
     @SerializedName("mainsnak") val mainSnak: Snak_partial,
     val type: String,
-    val rank: String
+    val rank: String,
+    val id: String? = null,
+    val qualifiers: Map<String, List<Snak_partial>> = mapOf(),
+    @SerializedName("qualifiers-order") val qualifiersOrder: List<String> = listOf()
 )

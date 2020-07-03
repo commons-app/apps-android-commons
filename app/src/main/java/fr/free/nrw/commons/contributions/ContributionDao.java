@@ -15,7 +15,7 @@ import java.util.List;
 @Dao
 public abstract class ContributionDao {
 
-  @Query("SELECT * FROM contribution order by dateUploaded DESC")
+  @Query("SELECT * FROM contribution order by media_dateUploaded DESC")
   abstract DataSource.Factory<Integer, Contribution> fetchContributions();
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -50,8 +50,11 @@ public abstract class ContributionDao {
         .fromAction(() -> deleteSynchronous(contribution));
   }
 
-  @Query("SELECT * from contribution WHERE filename=:fileName")
+  @Query("SELECT * from contribution WHERE media_filename=:fileName")
   public abstract List<Contribution> getContributionWithTitle(String fileName);
+
+  @Query("SELECT * from contribution WHERE pageId=:pageId")
+  public abstract Contribution getContribution(String pageId);
 
   @Query("UPDATE contribution SET state=:state WHERE state in (:toUpdateStates)")
   public abstract Single<Integer> updateStates(int state, int[] toUpdateStates);

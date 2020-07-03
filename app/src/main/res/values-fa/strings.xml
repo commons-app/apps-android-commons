@@ -4,6 +4,7 @@
 * Abijeet Patro
 * Amirsara
 * Arash.pt
+* BaRaN6161 TURK
 * Ebraminio
 * Eshagh79
 * FarsiNevis
@@ -24,6 +25,31 @@
 * درفش کاویانی
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d پرونده در حال بارگذاری</item>
+    <item quantity="other">%1$d پرونده در حال بارگذاری</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">شروع %1$d بارگذاری پرونده</item>
+    <item quantity="other">شروع بارگذاری %1$d پرونده</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d بارگذاری</item>
+    <item quantity="other">%1$d بارگذاری</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">این نگاره تحت مجوز %1$s است</item>
+    <item quantity="other">این نگاره تحت مجوز %1$s است</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d بارگذاری</item>
+    <item quantity="other">%1$d بارگذاری</item>
+  </plurals>
   <string name="title_activity_explore">کاوش</string>
   <string name="navigation_item_explore">کاوش</string>
   <string name="preference_category_appearance">نمایش صفحه</string>
@@ -55,10 +81,6 @@
   <string name="upload_progress_notification_title_finishing">اتمام بارگذاری %1$s</string>
   <string name="upload_failed_notification_title">%1$s بارگذاری نشد</string>
   <string name="upload_failed_notification_subtitle">برای دیدن انگشت بزنید</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d پرونده در حال بارگذاری</item>
-    <item quantity="other">%1$d پرونده در حال بارگذاری</item>
-  </plurals>
   <string name="title_activity_contributions">بارگذاری‌های اخیر من</string>
   <string name="contribution_state_queued">در صف</string>
   <string name="contribution_state_failed">ناموفق بود</string>
@@ -92,15 +114,6 @@
   <string name="gps_disabled">مکان‌یاب در دستگاه شما خاموش است. آیا دوست دارید فعال شود؟</string>
   <string name="enable_gps">فعال کردن مکان‌یاب</string>
   <string name="contributions_subtitle_zero">هنوز هیچ بارگذاری</string>
-  <string name="contributions_subtitle">{{%1$d|zero=@string/contributions_subtitle_zero|one=(%1$d)|(%1$d)}}</string>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">شروع %1$d بارگذاری پرونده</item>
-    <item quantity="other">شروع بارگذاری %1$d پرونده</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d بارگذاری</item>
-    <item quantity="other">%1$d بارگذاری</item>
-  </plurals>
   <string name="categories_not_found">رده‌ای منطبق با %1$s یافت نشد</string>
   <string name="categories_skip_explanation">برای دسترسی آسان‌تر در ویکی‌انبار به تصویرهایتان رده بیافزائید.\n\nشروع به افزودن رده.</string>
   <string name="categories_activity_title">رده‌ها</string>
@@ -122,10 +135,6 @@
   <string name="no_uploads_yet">شما هنوز نگاره‌ای بارگذاری نکرده‌اید.</string>
   <string name="menu_retry_upload">تلاش مجدد</string>
   <string name="menu_cancel_upload">لغو</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">این نگاره تحت مجوز %1$s است</item>
-    <item quantity="other">این نگاره تحت مجوز %1$s است</item>
-  </plurals>
   <string name="media_upload_policy">با بارگذاری این تصویر، تأیید می‌کنم که این اثر کار خودم است و از محتوای دارای حق تکثیر یا سلفی برای ایجاد آن استفاده نکرده‌ام و شرایط ذکر شده در By submitting this picture, I declare that this is my own work, that it does not contain copyrighted material or selfies, and otherwise adheres to &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;سیاست‌های ویکی‌انبار&lt;/a&gt; را رعایت می‌کند.</string>
   <string name="menu_download">دریافت</string>
   <string name="preference_license">مجوز پیش‌فرض</string>
@@ -395,10 +404,6 @@
   <string name="previous">قبلی</string>
   <string name="submit">ارسال</string>
   <string name="upload_title_duplicate">پرونده‌ای با نام %1$s وجود دارد. آیا اطمینان دارید که می‌خواهید ادامه دهید؟</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d بارگذاری</item>
-    <item quantity="other">%1$d بارگذاری</item>
-  </plurals>
   <string name="navigation_item_bookmarks">نشانک‌ها</string>
   <string name="title_activity_bookmarks">نشانک‌ها</string>
   <string name="title_page_bookmarks_pictures">تصویرها</string>

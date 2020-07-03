@@ -8,26 +8,24 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.FrameLayout;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
-
-import com.google.android.material.tabs.TabLayout;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.explore.ViewPagerAdapter;
+import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
+import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment;
+import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This activity displays details of a particular category
@@ -36,12 +34,11 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
  */
 
 public class CategoryDetailsActivity extends NavigationBaseActivity
-        implements MediaDetailPagerFragment.MediaDetailProvider,
-                    AdapterView.OnItemClickListener, CategoryImagesCallback {
+        implements MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
 
 
     private FragmentManager supportFragmentManager;
-    private CategoryImagesListFragment categoryImagesListFragment;
+    private CategoriesMediaFragment categoriesMediaFragment;
     private MediaDetailPagerFragment mediaDetails;
     private String categoryName;
     @BindView(R.id.mediaContainer) FrameLayout mediaContainer;
@@ -73,26 +70,22 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
     private void setTabs() {
         List<Fragment> fragmentList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
-        categoryImagesListFragment = new CategoryImagesListFragment();
-        SubCategoryListFragment subCategoryListFragment = new SubCategoryListFragment();
-        SubCategoryListFragment parentCategoryListFragment = new SubCategoryListFragment();
+        categoriesMediaFragment = new CategoriesMediaFragment();
+        SubCategoriesFragment subCategoryListFragment = new SubCategoriesFragment();
+        ParentCategoriesFragment parentCategoriesFragment = new ParentCategoriesFragment();
         categoryName = getIntent().getStringExtra("categoryName");
         if (getIntent() != null && categoryName != null) {
             Bundle arguments = new Bundle();
             arguments.putString("categoryName", categoryName);
-            arguments.putBoolean("isParentCategory", false);
-            categoryImagesListFragment.setArguments(arguments);
+            categoriesMediaFragment.setArguments(arguments);
             subCategoryListFragment.setArguments(arguments);
-            Bundle parentCategoryArguments = new Bundle();
-            parentCategoryArguments.putString("categoryName", categoryName);
-            parentCategoryArguments.putBoolean("isParentCategory", true);
-            parentCategoryListFragment.setArguments(parentCategoryArguments);
+            parentCategoriesFragment.setArguments(arguments);
         }
-        fragmentList.add(categoryImagesListFragment);
+        fragmentList.add(categoriesMediaFragment);
         titleList.add("MEDIA");
         fragmentList.add(subCategoryListFragment);
         titleList.add("SUBCATEGORIES");
-        fragmentList.add(parentCategoryListFragment);
+        fragmentList.add(parentCategoriesFragment);
         titleList.add("PARENT CATEGORIES");
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
@@ -111,8 +104,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
     /**
      * This method is called onClick of media inside category details (CategoryImageListFragment).
      */
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onMediaClicked(int position) {
         tabLayout.setVisibility(View.GONE);
         viewPager.setVisibility(View.GONE);
         mediaContainer.setVisibility(View.VISIBLE);
@@ -127,7 +119,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
                     .commit();
             supportFragmentManager.executePendingTransactions();
         }
-        mediaDetails.showImage(i);
+        mediaDetails.showImage(position);
         forceInitBackButton();
     }
 
@@ -139,7 +131,6 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
      */
     public static void startYourself(Context context, String categoryName) {
         Intent intent = new Intent(context, CategoryDetailsActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra("categoryName", categoryName);
         context.startActivity(intent);
     }
@@ -152,12 +143,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
      */
     @Override
     public Media getMediaAtPosition(int i) {
-        if (categoryImagesListFragment.getAdapter() == null) {
-            // not yet ready to return data
-            return null;
-        } else {
-            return (Media) categoryImagesListFragment.getAdapter().getItem(i);
-        }
+        return categoriesMediaFragment.getMediaAtPosition(i);
     }
 
     /**
@@ -167,10 +153,12 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
      */
     @Override
     public int getTotalMediaCount() {
-        if (categoryImagesListFragment.getAdapter() == null) {
-            return 0;
-        }
-        return categoryImagesListFragment.getAdapter().getCount();
+        return categoriesMediaFragment.getTotalMediaCount();
+    }
+
+    @Override
+    public Integer getContributionStateAt(int position) {
+        return null;
     }
 
     /**
@@ -226,14 +214,4 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         }
     }
 
-    /**
-     * This method is called when viewPager has reached its end.
-     * Fetches more images using search query and adds it to the grid view and viewpager adapter
-     */
-    @Override
-    public void requestMoreImages() {
-        if (categoryImagesListFragment!=null){
-            categoryImagesListFragment.fetchMoreImagesViewPager();
-        }
-    }
 }

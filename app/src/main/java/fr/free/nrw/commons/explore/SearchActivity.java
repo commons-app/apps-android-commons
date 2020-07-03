@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.SearchView;
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -18,9 +19,11 @@ import com.jakewharton.rxbinding2.widget.RxSearchView;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
-import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
-import fr.free.nrw.commons.explore.depictions.SearchDepictionsFragment;
-import fr.free.nrw.commons.explore.images.SearchImageFragment;
+import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment;
+import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment;
+import fr.free.nrw.commons.explore.media.SearchMediaFragment;
+import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
@@ -28,8 +31,10 @@ import fr.free.nrw.commons.utils.FragmentUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
 import timber.log.Timber;
 
 /**
@@ -46,14 +51,16 @@ public class SearchActivity extends NavigationBaseActivity
     @BindView(R.id.tab_layout) TabLayout tabLayout;
     @BindView(R.id.viewPager) ViewPager viewPager;
 
-    private SearchImageFragment searchImageFragment;
+    @Inject
+    RecentSearchesDao recentSearchesDao;
+
+    private SearchMediaFragment searchMediaFragment;
     private SearchCategoryFragment searchCategoryFragment;
     private SearchDepictionsFragment searchDepictionsFragment;
     private RecentSearchesFragment recentSearchesFragment;
     private FragmentManager supportFragmentManager;
     private MediaDetailPagerFragment mediaDetails;
     ViewPagerAdapter viewPagerAdapter;
-    private String query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,10 +99,10 @@ public class SearchActivity extends NavigationBaseActivity
     public void setTabs() {
         List<Fragment> fragmentList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
-        searchImageFragment = new SearchImageFragment();
+        searchMediaFragment = new SearchMediaFragment();
         searchDepictionsFragment = new SearchDepictionsFragment();
         searchCategoryFragment= new SearchCategoryFragment();
-        fragmentList.add(searchImageFragment);
+        fragmentList.add(searchMediaFragment);
         titleList.add(getResources().getString(R.string.search_tab_title_media).toUpperCase());
         fragmentList.add(searchCategoryFragment);
         titleList.add(getResources().getString(R.string.search_tab_title_categories).toUpperCase());
@@ -109,9 +116,9 @@ public class SearchActivity extends NavigationBaseActivity
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(query -> {
-                        this.query = query.toString();
-                        //update image list
+                    //update image list
                         if (!TextUtils.isEmpty(query)) {
+                            saveRecentSearch(query.toString());
                             viewPager.setVisibility(View.VISIBLE);
                             tabLayout.setVisibility(View.VISIBLE);
                             searchHistoryContainer.setVisibility(View.GONE);
@@ -120,12 +127,12 @@ public class SearchActivity extends NavigationBaseActivity
                                 searchDepictionsFragment.onQueryUpdated(query.toString());
                             }
 
-                            if (FragmentUtils.isFragmentUIActive(searchImageFragment)) {
-                                searchImageFragment.updateImageList(query.toString());
+                            if (FragmentUtils.isFragmentUIActive(searchMediaFragment)) {
+                                searchMediaFragment.onQueryUpdated(query.toString());
                             }
 
                             if (FragmentUtils.isFragmentUIActive(searchCategoryFragment)) {
-                                searchCategoryFragment.updateCategoryList(query.toString());
+                                searchCategoryFragment.onQueryUpdated(query.toString());
                             }
 
                         } else {
@@ -140,13 +147,25 @@ public class SearchActivity extends NavigationBaseActivity
                 ));
     }
 
+    private void saveRecentSearch(@NonNull final String query) {
+        final RecentSearch recentSearch = recentSearchesDao.find(query);
+        // Newly searched query...
+        if (recentSearch == null) {
+            recentSearchesDao.save(new RecentSearch(null, query, new Date()));
+        }
+        else {
+            recentSearch.setLastSearched(new Date());
+            recentSearchesDao.save(recentSearch);
+        }
+    }
+
     /**
      * returns Media Object at position
      * @param i position of Media in the imagesRecyclerView adapter.
      */
     @Override
     public Media getMediaAtPosition(int i) {
-        return searchImageFragment.getImageAtPosition(i);
+        return searchMediaFragment.getMediaAtPosition(i);
     }
 
     /**
@@ -154,7 +173,12 @@ public class SearchActivity extends NavigationBaseActivity
      */
     @Override
     public int getTotalMediaCount() {
-       return searchImageFragment.getTotalImagesCount();
+       return searchMediaFragment.getTotalMediaCount();
+    }
+
+    @Override
+    public Integer getContributionStateAt(int position) {
+        return null;
     }
 
     /**
@@ -172,7 +196,8 @@ public class SearchActivity extends NavigationBaseActivity
      * Open media detail pager fragment on click of image in search results
      * @param index item index that should be opened
      */
-    public void onSearchImageClicked(int index) {
+    @Override
+    public void onMediaClicked(int index) {
         ViewUtil.hideKeyboard(this.findViewById(R.id.searchBox));
         toolbar.setVisibility(View.GONE);
         tabLayout.setVisibility(View.GONE);
@@ -207,7 +232,7 @@ public class SearchActivity extends NavigationBaseActivity
             //FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.
             //FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894
             // This is called on screen rotation when user is inside media details. Ideally it should show Media Details but since we are not saving the state now. We are throwing the user to search screen otherwise the app was crashing.
-            // 
+            //
             onBackPressed();
         }
         super.onResume();
@@ -242,17 +267,6 @@ public class SearchActivity extends NavigationBaseActivity
         // Clear focus of searchView now. searchView.clearFocus(); does not seem to work Check the below link for more details.
         // https://stackoverflow.com/questions/6117967/how-to-remove-focus-without-setting-focus-to-another-control/15481511
         viewPager.requestFocus();
-    }
-
-    /**
-     * This method is called when viewPager has reached its end.
-     * Fetches more images using search query and adds it to the recycler view and viewpager adapter
-     */
-    @Override
-    public void requestMoreImages() {
-        if (searchImageFragment!=null){
-            searchImageFragment.addImagesToList(query);
-        }
     }
 
     @Override protected void onDestroy() {

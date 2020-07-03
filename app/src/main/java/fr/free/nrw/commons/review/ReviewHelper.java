@@ -1,22 +1,18 @@
 package fr.free.nrw.commons.review;
 
 
+import fr.free.nrw.commons.Media;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import java.util.Collections;
+import java.util.Date;
+import java.util.Random;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.dataclient.mwapi.RecentChange;
 import org.wikipedia.util.DateUtil;
-
-import java.util.Collections;
-import java.util.Date;
-import java.util.Random;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.media.MediaClient;
-import io.reactivex.Observable;
-import io.reactivex.Single;
 
 @Singleton
 public class ReviewHelper {
@@ -69,7 +65,6 @@ public class ReviewHelper {
     public Single<Media> getRandomMedia() {
         return getRecentChanges()
                 .flatMapSingle(change -> getRandomMediaFromRecentChange(change))
-                .onExceptionResumeNext(Observable.just(new Media("")))
                 .filter(media -> !StringUtils.isBlank(media.getFilename()))
                 .firstOrError();
     }
@@ -86,7 +81,7 @@ public class ReviewHelper {
                 .flatMap(change -> mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + change.getTitle()))
                 .flatMap(isDeleted -> {
                     if (isDeleted) {
-                        return Single.just(new Media(""));
+                        return Single.error(new Exception(recentChange.getTitle() + " is deleted"));
                     }
                     return mediaClient.getMedia(recentChange.getTitle());
                 });

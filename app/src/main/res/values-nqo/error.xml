@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Lancine.kounfantoh.fofana
+-->
+<resources>
+  <string name="crash_dialog_title">ߞߐߡߐ߲ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
+  <string name="crash_dialog_text">ߋߜߋ߫. ߞߏ ߘߏ߫ ߓߍ߲߬ߣߍ߲߫ ߕߎ߲߬ ߕߍ߫߹</string>
+  <string name="crash_dialog_comment_prompt">ߊ߲ ߠߎ߬ ߘߍ߬ߡߍ߲߬ ߊ߬ ߘߐߓߍ߲߬ߠߌ߲ ߡߊ߬߹</string>
+  <string name="crash_dialog_ok_toast">ߌ ߣߌ߫ ߗߋ߫߹</string>
+</resources>

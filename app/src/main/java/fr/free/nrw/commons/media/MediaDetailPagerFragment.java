@@ -13,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -26,7 +25,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.bookmarks.Bookmark;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
-import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.utils.DownloadUtils;
@@ -190,7 +188,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     return;
                 }
 
-                Media m = provider.getMediaAtPosition(pager.getCurrentItem());
+                final int position = pager.getCurrentItem();
+                Media m = provider.getMediaAtPosition(position);
                 if (m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
                     menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true);
@@ -206,10 +205,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                             BookmarkPicturesContentProvider.uriForName(m.getFilename())
                     );
                     updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
-
-                    if (m instanceof Contribution) {
-                        Contribution c = (Contribution) m;
-                        switch (c.getState()) {
+                    final Integer contributionState = provider.getContributionStateAt(position);
+                    if (contributionState != null) {
+                        switch (contributionState) {
                             case Contribution.STATE_FAILED:
                             case Contribution.STATE_IN_PROGRESS:
                             case Contribution.STATE_QUEUED:
@@ -269,8 +267,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             Timber.d("Returning as activity is destroyed!");
             return;
         }
-        if (i+1 >= adapter.getCount() && getContext() instanceof CategoryImagesCallback)
-            ((CategoryImagesCallback) getContext()).requestMoreImages();
 
         getActivity().invalidateOptionsMenu();
     }
@@ -293,6 +289,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         Media getMediaAtPosition(int i);
 
         int getTotalMediaCount();
+
+        Integer getContributionStateAt(int position);
     }
 
     //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)

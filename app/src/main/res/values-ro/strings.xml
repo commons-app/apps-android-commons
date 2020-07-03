@@ -9,6 +9,41 @@
 * Strainu
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">1 fișier se încarcă</item>
+    <item quantity="few">%1$d fișiere se încarcă</item>
+    <item quantity="other">%1$d de fișiere se încarcă</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Se pornește 1 încărcare</item>
+    <item quantity="few">Se pornesc %1$d încărcări</item>
+    <item quantity="other">Se pornesc %1$d de încărcări</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 încărcare</item>
+    <item quantity="few">%1$d încărcări</item>
+    <item quantity="other">%1$d de încărcări</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Această imagine va fi licențiată sub %1$s</item>
+    <item quantity="few">Aceste imagini vor fi licenţiate sub %1$s</item>
+    <item quantity="other"/>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d Încarcă</item>
+    <item quantity="few">%1$d Încărcări</item>
+    <item quantity="other"/>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Primirea de conținut partajat. Prelucrarea imaginii poate dura ceva timp, în funcție de dimensiunea imaginii și de dispozitivul dvs.</item>
+    <item quantity="few">Primirea de conținut partajat. Prelucrarea imaginilor poate dura ceva timp, în funcție de dimensiunea imaginilor și de dispozitivul dvs.</item>
+    <item quantity="other"/>
+  </plurals>
   <string name="title_activity_explore">Explorare</string>
   <string name="navigation_item_explore">Explorare</string>
   <string name="preference_category_appearance">Aspect</string>
@@ -40,11 +75,6 @@
   <string name="upload_progress_notification_title_finishing">Se finalizează încărcarea fișierului %1$s</string>
   <string name="upload_failed_notification_title">Încărcarea fișierului %1$s nu a reușit</string>
   <string name="upload_failed_notification_subtitle">Atingeți pentru a vizualiza</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">1 fișier se încarcă</item>
-    <item quantity="few">%1$d fișiere se încarcă</item>
-    <item quantity="other">%1$d de fișiere se încarcă</item>
-  </plurals>
   <string name="title_activity_contributions">Încărcările mele recente</string>
   <string name="contribution_state_queued">În așteptare</string>
   <string name="contribution_state_failed">Nu a reușit</string>
@@ -56,8 +86,10 @@
   <string name="provider_contributions">Încărcările mele</string>
   <string name="menu_share">Partajare</string>
   <string name="menu_open_in_browser">Afișează în navigator</string>
-  <string name="share_title_hint" fuzzy="true">Titlu</string>
+  <string name="share_title_hint">Descriere (Necesară)</string>
+  <string name="add_caption_toast">Vă rugăm să oferiți o descriere pentru acest fișier</string>
   <string name="share_description_hint">Descriere</string>
+  <string name="share_caption_hint">Descriere (limită 255 caractere)</string>
   <string name="login_failed_network">Autentificare nereușită – defecțiune de rețea</string>
   <string name="login_failed_wrong_credentials">Nu poți să te autentifici - verifică-ți numele de utilizator și parola</string>
   <string name="login_failed_throttled">Prea multe încercări nereușite. Încercați din nou peste câteva minute.</string>
@@ -70,58 +102,46 @@
   <string name="provider_modifications">Modificări</string>
   <string name="menu_upload_single">Încărcare</string>
   <string name="categories_search_text_hint">Căutare categorii</string>
+  <string name="depicts_search_text_hint">Căutați articole pe care media dvs. le înfățișează (munte, Taj Mahal etc.)</string>
   <string name="menu_save_categories">Salvare</string>
   <string name="refresh_button">Reîncarcă</string>
   <string name="display_list_button">Listă</string>
   <string name="gps_disabled">GPS-ul este dezactivat pe device-ul dumneavoastră. Doriți să-l activați?</string>
   <string name="enable_gps">Activează GPS</string>
   <string name="contributions_subtitle_zero">Niciun fișier încă!</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Se pornește 1 încărcare</item>
-    <item quantity="few">Se pornesc %1$d încărcări</item>
-    <item quantity="other">Se pornesc %1$d de încărcări</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">1 încărcare</item>
-    <item quantity="few">%1$d încărcări</item>
-    <item quantity="other">%1$d de încărcări</item>
-  </plurals>
   <string name="categories_not_found">Nu s-a găsit nicio categorie corespunzătoare cu %1$s</string>
+  <string name="depictions_not_found">Nu s-au găsit articole Wikidata care corespund %1$s</string>
+  <string name="no_child_classes">%1$s nu are clase copil</string>
+  <string name="no_parent_classes">%1$s nu are clase părinte</string>
+  <string name="depictions_image_not_found">Nicio imagine pentru reprezentare</string>
   <string name="categories_skip_explanation">Adăugați categorii pentru a facilita găsirea imaginilor dumneavoastră la Wikimedia Commons.\n\nÎncepeți să tastați pentru a adăuga categorii.</string>
   <string name="categories_activity_title">Categorii</string>
   <string name="title_activity_settings">Setări</string>
   <string name="title_activity_signup">Înregistrare</string>
   <string name="title_activity_featured_images">Imagini recomandate</string>
   <string name="title_activity_category_details">Categorie</string>
+  <string name="title_activity_review">Evaluare colegială</string>
   <string name="menu_about">Despre</string>
   <string name="about_license">Aplicația Wikimedia Commons este un software cu sursă deschisă creat și menținut de bursieri și voluntari ai comunității Wikimedia. Fundația Wikimedia nu este implicată în crearea, dezvoltarea sau mentenanța aplicației.</string>
   <string name="about_improve">Creați un nou &lt;a href=\"%1$s\"&gt;tichet pe GitHub&lt;/a&gt; pentru a raporta buguri sau sugestii.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Politica de confidențialitate&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;Autori&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Politica de confidențialitate</string>
+  <string name="about_credits">&lt;u&gt;Mulţumiri&lt;/u&gt;</string>
   <string name="title_activity_about">Despre</string>
   <string name="menu_feedback">Trimitere reacții (prin e-mail)</string>
   <string name="no_email_client">Niciun client de email instalat</string>
   <string name="provider_categories">Categorii utilizate recent</string>
+  <string name="provider_depictions">Reprezentări folosite recent</string>
   <string name="waiting_first_sync">Se așteaptă prima sincronizare…</string>
   <string name="no_uploads_yet">Încă nu ați încărcat nicio fotografie.</string>
   <string name="menu_retry_upload">Reîncercare</string>
   <string name="menu_cancel_upload">Revocare</string>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">Această imagine va fi licențiată sub %1$s</item>
-    <item quantity="other">Această imagine va fi licențiată sub %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Prin prezentarea acestei imagini, declar că aceasta este lucrarea mea proprie, că nu conține materiale protejate prin drepturi de autor sau selfiuri și că aderă la &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Descarcă</string>
   <string name="preference_license">Licență implicită</string>
-  <string name="use_previous" fuzzy="true">Folosiți titlul/descrierea anterioară</string>
+  <string name="use_previous">Utilizați titlul și descrierea anterioară</string>
   <string name="allow_gps">Obține în mod automat locația curentă</string>
   <string name="allow_gps_summary">Preia locația curentă dacă imaginea nu are salvată locația și salvează imaginea cu ea. Avertisment: Aceasta va dezvălui locația dvs. curentă.</string>
-  <string name="preference_theme" fuzzy="true">Mod de noapte</string>
+  <string name="preference_theme">Tema</string>
   <string name="license_name_cc_by_sa_four">Atribuire și distribuire în condiții identice 4.0</string>
   <string name="license_name_cc_by_four">Atribuire 4.0</string>
   <string name="license_name_cc_by_sa">Atribuire și distribuire în condiții identice 3.0</string>
@@ -162,26 +182,33 @@
   <string name="welcome_copyright_subtext">Evitați materialele cu drepturi de autor găsite pe Internet, precum și imagini ale posterelor, coperților de cărți etc.</string>
   <string name="welcome_final_text">Credeți că ați înțeles?</string>
   <string name="welcome_final_button_text">Da!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Mai multe informații&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Mai multe informații</string>
   <string name="detail_panel_cats_label">Categorii</string>
   <string name="detail_panel_cats_loading">Se încarcă…</string>
   <string name="detail_panel_cats_none">Niciuna selectată</string>
+  <string name="detail_caption_empty">Fără descriere</string>
+  <string name="detail_depiction_empty">Fără ilustrare</string>
   <string name="detail_description_empty">Fără descriere</string>
   <string name="detail_discussion_empty">Nu există discuții</string>
   <string name="detail_license_empty">Licență necunoscută</string>
   <string name="menu_refresh">Reîncarcă</string>
   <string name="storage_permission_title">Solicitarea Permisiunilor de Stocare</string>
   <string name="read_storage_permission_rationale">Necesită permisiune: Citiți spațiul de stocare extern. Aplicația nu poate accesa galeria dvs. fără aceasta.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Necesită permisiune: Scrieți un spațiu de stocare extern. Aplicația nu poate accesa camera fără acest lucru.</string>
+  <string name="write_storage_permission_rationale">Permisiune necesară: Scrieți stocare externă. Aplicația nu vă poate accesa camera/galeria fără acest lucru.</string>
+  <string name="location_permission_title">Solicitarea Permisiunii de Locație</string>
   <string name="location_permission_rationale">Permisiune opțională: Obțineți locația curentă pentru sugestiile de categorii</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Locurile din Apropiere</string>
   <string name="no_nearby">Nu au fost găsite locații din apropiere</string>
   <string name="warning">Avertisment</string>
+  <string name="duplicate_image_found">Imagine Duplicată Găsită</string>
   <string name="upload_image_duplicate">Acest fișier există deja pe Commons. Sunteți sigur că doriți să continuați?</string>
+  <string name="upload">Încarcă</string>
   <string name="yes">Da</string>
   <string name="no">Nu</string>
+  <string name="media_detail_caption">Descriere</string>
   <string name="media_detail_title">Titlu</string>
+  <string name="media_detail_depiction">Înfățisează</string>
   <string name="media_detail_description">Descriere</string>
   <string name="media_detail_discussion">Discuție</string>
   <string name="media_detail_author">Autor</string>
@@ -195,6 +222,7 @@
   <string name="number_of_uploads">Limita mea de încărcare recentă</string>
   <string name="maximum_limit">Limită maximă</string>
   <string name="invalid_zero">Zero nu este valid</string>
+  <string name="invalid_input">Input nevalid</string>
   <string name="maximum_limit_alert">Nu pot afișa mai mult de 500</string>
   <string name="enter_valid">Introduceți un număr valid</string>
   <string name="cannot_be_zero">Limita de încărcări nu poate fi 0</string>
@@ -242,6 +270,7 @@
   <string name="error_while_cache">Eroare la cache imaginilor</string>
   <string name="title_info">Un titlu descriptiv unic pentru fișier, care va servi ca nume de fișier. Puteți utiliza un limbaj simplu cu spații. Nu includeți extensia de fișier</string>
   <string name="description_info">Vă rugăm să descrieți media cât mai mult posibil: Unde a fost făcut? Ce arată? Care este contextul? Descrieți obiectele sau persoanele. Dezvăluiți informații care nu pot fi ușor ghicite, cum ar fi timpul zilei dacă este un peisaj. În cazul în care materialul transmis arată ceva neobișnuit, vă rugăm să explicați ceea ce o face neobișnuită.</string>
+  <string name="caption_info">Vă rugăm să scrieți o scurtă descriere a imaginii. (Limită la 255 de caractere)</string>
   <string name="upload_image_too_dark">Această imagine este prea întunecată, sunteți sigur că doriți să o încărcați? Wikimedia Commons este numai pentru imagini cu valoare enciclopedică.</string>
   <string name="upload_image_blurry">Această imagine este neclară, sunteți sigur că doriți să o încărcați? Wikimedia Commons este numai pentru imagini cu valoare enciclopedică.</string>
   <string name="upload_problem_exist">Probleme potențiale cu această imagine:</string>
@@ -251,6 +280,8 @@
   <string name="upload_problem_different_geolocation">Această fotografie a fost făcută într-o altă locație.</string>
   <string name="upload_problem_fbmd">Vă rugăm să nu încărcați decât imagini pe care le-ați făcut personal. Nu încărcați imagini găsite pe conturile de Facebook ale altor persoane.</string>
   <string name="upload_problem_do_you_continue">Încă doriți să încărcați această imagine?</string>
+  <string name="upload_problem_image">Probleme găsite în imagine</string>
+  <string name="internet_downloaded">Vă rugăm să încărcați doar fotografiile realizate de dvs. Nu încărcați imaginile pe care le-ați descărcat de pe Internet.</string>
   <string name="give_permission">Obțineți permisiunea</string>
   <string name="use_external_storage">Utilizați spațiul de stocare extern</string>
   <string name="use_external_storage_summary">Salvați fotografiile realizate cu aparatul foto în aplicație de pe dispozitiv</string>
@@ -261,7 +292,7 @@
   <string name="null_url">Eroare! Adresa URL nu a fost găsită</string>
   <string name="nominate_deletion">Nominalizați pentru ștergere</string>
   <string name="nominated_for_deletion">Această imagine a fost nominalizată pentru ștergere.</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Vedeți pagina web pentru detalii&lt;/u&gt;</string>
+  <string name="nominated_see_more">Consultați pagina web pentru detalii</string>
   <string name="nominating_file_for_deletion">Propun %1$s pentru ștergere.</string>
   <string name="nominating_for_deletion_status">Propun fișierul pentru ștergere: %1$s</string>
   <string name="view_browser">Vizualizează cu navigatorul</string>
@@ -273,7 +304,7 @@
   <string name="copy_wikicode">Copiați wikitext-ul în clipboard</string>
   <string name="wikicode_copied">Wikitext-ul a fost copiat în clipboard</string>
   <string name="nearby_location_has_not_changed">Locația nu s-a schimbat.</string>
-  <string name="nearby_location_not_available" fuzzy="true">Locația nu este disponibilă.</string>
+  <string name="nearby_location_not_available">Este posibil să nu funcționeze Apropiere, Locația nu este disponibilă.</string>
   <string name="location_permission_rationale_nearby">Permisiunea necesară pentru a afișa o listă de locații din apropiere</string>
   <string name="get_directions">Obțineți indicații de orientare</string>
   <string name="read_article">Citiți articolul</string>
@@ -286,26 +317,29 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Dă-ne o notă&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_rate_us">Recenzie</string>
+  <string name="about_faq">Întrebări frecvente</string>
   <string name="welcome_skip_button">Sari peste tutorial</string>
   <string name="no_internet">Nu aveți internet</string>
   <string name="internet_established">Aveți internet</string>
   <string name="error_notifications">Eroare la preluarea notificărilor</string>
+  <string name="error_review">Eroare la preluarea imaginii pentru revizuire. Apăsați actualizare pentru a încerca din nou.</string>
+  <string name="error_review_categories">Eroare la preluarea categoriilor de imagini pentru revizuire. Apăsați actualizare pentru a încerca din nou.</string>
   <string name="no_notifications">Nu au fost găsite notificări</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;Traduceți&lt;/u&gt;</string>
+  <string name="about_translate">Traduceți</string>
   <string name="about_translate_title">Limbi</string>
   <string name="about_translate_message">Selectați limba în care doriți să trimiteți traduceri pentru</string>
   <string name="about_translate_proceed">Continuă</string>
   <string name="about_translate_cancel">Anulare</string>
   <string name="retry">Reîncercare</string>
   <string name="showcase_view_got_it_button">Am înțeles!</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Acestea sunt locurile din apropierea ta care au nevoie de imagini pentru a ilustra articolele lor Wikipedia</string>
+  <string name="showcase_view_whole_nearby_activity">Acestea sunt locurile din apropierea dvs. care au nevoie de imagini pentru a ilustra articolele lor Wikipedia.\n\nFăcând click pe „CAUTĂ ACEASTĂ ZONĂ”, se blochează harta și se lansează o căutare în apropiere în jurul locației respective.</string>
   <string name="showcase_view_list_icon">Atingând acest buton, se afișează o listă a acestor locuri</string>
   <string name="showcase_view_plus_fab">Puteți încărca o imagine pentru orice loc din galerie sau camera foto</string>
   <string name="no_images_found">Nu s-au gasit imagini!</string>
   <string name="error_loading_images">A apărut o eroare la încărcarea imaginilor.</string>
   <string name="image_uploaded_by">Încărcată de: %1$s</string>
+  <string name="block_notification_title">Blocat</string>
   <string name="block_notification">Sunteți blocat de la editarea Commons</string>
   <string name="appwidget_img">Imaginea zilei</string>
   <string name="app_widget_heading">Imaginea zilei</string>
@@ -316,12 +350,14 @@
   <string name="search_recent_header">Căutări recente:</string>
   <string name="provider_searches">Interogări căutate recent</string>
   <string name="error_loading_categories">A apărut o eroare la încărcarea categoriilor.</string>
+  <string name="error_loading_depictions">A apărut o eroare la încărcarea reprezentărilor.</string>
   <string name="error_loading_subcategories">A apărut o eroare la încărcarea subcategoriilor.</string>
   <string name="search_tab_title_media">Media</string>
   <string name="search_tab_title_categories">Categorii</string>
+  <string name="search_tab_title_depictions">Elemente</string>
   <string name="explore_tab_title_featured">Recomandate</string>
   <string name="explore_tab_title_mobile">Încărcat de pe telefon</string>
-  <string name="successful_wikidata_edit" fuzzy="true">Imaginea a fost adăugată cu succes la %1$s pe Wikidata!</string>
+  <string name="successful_wikidata_edit">Imaginea adăugată la %1$s pe Wikidata!</string>
   <string name="wikidata_edit_failure">Nu s-a actualizat entitatea corespunzătoare Wikidata!</string>
   <string name="menu_set_wallpaper">Setează ca Imagine de fundal</string>
   <string name="wallpaper_set_successfully">Wallpaper setat cu succes!</string>
@@ -359,6 +395,7 @@
   <string name="statistics">Statistici</string>
   <string name="statistics_thanks">Mulțumiri primite</string>
   <string name="statistics_featured">Imagini recomandate</string>
+  <string name="statistics_wikidata_edits">Imagini prin „Locații în apropiere”</string>
   <string name="level">Nivel</string>
   <string name="images_uploaded">Imaginile au fost încărcate</string>
   <string name="image_reverts">Imaginile nu au fost reluate</string>
@@ -377,7 +414,7 @@
   <string name="contributions_fragment">Contribuții</string>
   <string name="nearby_fragment">În apropiere</string>
   <string name="notifications">Notificări</string>
-  <string name="read_notifications" fuzzy="true">Notificări (arhivate)</string>
+  <string name="read_notifications">Notificări (citite)</string>
   <string name="display_nearby_notification">Afișați notificarea din apropiere</string>
   <string name="display_nearby_notification_summary">Apăsați aici pentru a vedea cel mai apropiat loc care are nevoie de imagini</string>
   <string name="no_close_nearby">Nu există locuri apropiate găsite în apropierea dvs.</string>
@@ -392,10 +429,6 @@
   <string name="submit">Trimite</string>
   <string name="upload_title_duplicate">Există un fișier cu numele de fișier %1$s. Sunteți sigur că doriți să continuați?</string>
   <string name="map_application_missing">Nu s-a găsit nicio aplicație de hartă compatibilă pe dispozitiv. Instalați o aplicație de hartă pentru a utiliza această caracteristică.</string>
-  <plurals name="upload_count_title" fuzzy="true">
-    <item quantity="one">%1$d Încărcați</item>
-    <item quantity="other">%1$d Încărcări</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Semne de carte</string>
   <string name="title_activity_bookmarks">Semne de carte</string>
   <string name="title_page_bookmarks_pictures">Imagini</string>
@@ -410,8 +443,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Mi-am dat seama că este rău pentru intimitatea mea</string>
   <string name="deletion_reason_no_longer_want_public">M-am răzgândit, nu mai vreau să fie publică</string>
   <string name="deletion_reason_not_interesting">Ne pare rău că această imagine nu este interesantă pentru o enciclopedie</string>
-  <string name="uploaded_by_myself" fuzzy="true">Încărcat de mine însumi</string>
-  <string name="no_uploads" fuzzy="true">Bun venit la Commons!\n\nÎncărcați primul dvs. suport media atingând pictograma camerei sau galeria de mai sus.</string>
+  <string name="uploaded_by_myself">Încărcat de mine pe %1$s, folosit în %2$d articol(e).</string>
+  <string name="no_uploads">Bine ați venit la Commons!\n\nÎncărcați primul dvs. media apăsând pe butonul de adăugare.</string>
   <string name="desc_language_Worldwide">La nivel mondial</string>
   <string name="desc_language_America">America</string>
   <string name="desc_language_Europe">Europa</string>
@@ -420,7 +453,9 @@
   <string name="desc_language_Asia">Asia</string>
   <string name="desc_language_Pacific">Pacific</string>
   <string name="no_categories_selected">Nici o categorie selectată</string>
-  <string name="no_categories_selected_warning_desc" fuzzy="true">Imaginile fără categorii sunt rareori utilizabile. Sigur doriți să trimiteți fără a selecta categorii?</string>
+  <string name="no_categories_selected_warning_desc">Imaginile fără categorii sunt rareori utilizabile. Sigur doriți să continuați fără a selecta categorii?</string>
+  <string name="no_depictions_selected">Nu Sunt Selectate Reprezentări</string>
+  <string name="no_depictions_selected_warning_desc">Imaginile cu ilustrații sunt mai ușor de găsit și mai probabil să fie utilizate. Sunteți sigur că doriți să continuați fără a selecta reprezentări?</string>
   <string name="upload_flow_all_images_in_set">(Pentru toate imaginile din set)</string>
   <string name="search_this_area">Căutați în acest domeniu</string>
   <string name="nearby_card_permission_title">Cerere de permisiune</string>
@@ -430,31 +465,144 @@
   <string name="display_location_permission_title">Afișați permisiunea de locație</string>
   <string name="display_location_permission_explanation">Solicitați permisiunea de localizare atunci când este necesar pentru a utiliza funcția notificărilor de localizare.</string>
   <string name="achievements_fetch_failed">Ceva a mers prost, nu am reușit să ne aducem realizările</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">Ai făcut atâtea contribuții sistemul nostru de calcul al realizărilor nu poate face față. Aceasta este realizarea finală.</string>
   <string name="ends_on">Se încheie la:</string>
   <string name="display_campaigns">Campaniile de afișare</string>
-  <string name="display_campaigns_explanation" fuzzy="true">Atingeți aici pentru a vedea campaniile în desfășurare</string>
+  <string name="display_campaigns_explanation">Vedeți campaniile în curs</string>
   <string name="nearby_campaign_dismiss_message">Nu veți mai vedea campaniile. Cu toate acestea, puteți reactiva această notificare în Setări, dacă doriți.</string>
   <string name="this_function_needs_network_connection">Această funcție necesită conectare la rețea, verificați setările de conectare.</string>
   <string name="bad_token_error_proposed_solution">Încărcarea a eșuat din cauza problemelor cu Edit token. Încearcă să te deconectezi și să intri din nou.</string>
   <string name="error_processing_image">A apărut o eroare la procesarea imaginii. Vă rugăm să încercați din nou!</string>
+  <string name="getting_edit_token">Obținerea de jeton pentru editare</string>
+  <string name="check_category_adding_template">Adăugarea formatului pentru verificarea categoriei</string>
+  <string name="check_category_notification_title">Solicitați verificarea categoriei pentru %1$s</string>
+  <string name="check_category_edit_summary">Solicitarea verificării categoriei</string>
+  <string name="check_category_success_title">Verificare de categorie solicitată</string>
+  <string name="check_category_failure_title">Cererea de verificare a categoriei nu a funcționat</string>
+  <string name="check_category_success_message">Solicitare de verificare a categoriei pentru %1$s</string>
+  <string name="check_category_failure_message">Nu s-a putut solicita verificarea categoriei pentru %1$s</string>
+  <string name="check_category_toast">Solicitați verificarea categoriei pentru %1$s</string>
+  <string name="nominate_for_deletion_edit_file_page">Adăugarea mesajului de ștergere în fișier</string>
   <string name="nominate_for_deletion_done">Realizat</string>
+  <string name="nominate_for_deletion_notify_user">Notificarea utilizatorului pe pagina de discuţie</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">Adăugarea fișierului la Ștergerea jurnalului de solicitări</string>
+  <string name="nominate_for_deletion_create_deletion_request">Crearea subpaginii Ștergere solicitări</string>
   <string name="notsure">Nu sunt sigur</string>
+  <string name="send_thank_success_title">Se Trimit Mulțumiri: Succes</string>
+  <string name="send_thank_success_message">Trimis mulţumiri cu succes datorită %1$s</string>
+  <string name="send_thank_failure_message">Nu a reușit să trimită mulțumiri %1$s</string>
+  <string name="send_thank_failure_title">Se trimite mulțumiri: Eșec</string>
   <string name="send_thank_send">Trimitere mulțumiri</string>
   <string name="send_thank_notification_title">Trimitere mulțumiri</string>
+  <string name="send_thank_toast">Se trimite Mulțumiri pentru %1$s</string>
+  <string name="review_copyright">Respectă acest lucru regulile dreptului de autor?</string>
+  <string name="review_category">Este corect catalogat acest lucru?</string>
+  <string name="review_spam">Este acesta obiectiv?</string>
+  <string name="review_thanks">Ați dori să mulțumiți contribuitorului?</string>
+  <string name="review_spam_explanation">Faceți click pe NU pentru a nominaliza această imagine pentru ștergere, dacă nu este deloc utilă.</string>
+  <string name="review_copyright_explanation">Logo-uri, capturi de ecran, afișe de filme sunt adesea încălcări ale drepturilor de autor.\nFaceți clic pe NU pentru a nominaliza această imagine pentru ștergere</string>
+  <string name="review_thanks_explanation">%1$s va fi încurajat de apreciere ta</string>
+  <string name="review_no_category">Oh, asta nici măcar nu este categorizat!</string>
+  <string name="review_category_explanation">Această imagine este sub %1$s categorii.</string>
+  <string name="review_spam_report_question">Este în afara scopului, deoarece este</string>
+  <string name="review_c_violation_report_question">Este încălcare a dreptului de autor, deoarece este</string>
+  <string name="review_category_yes_button_text">Nu, categorizat greșit</string>
+  <string name="review_category_no_button_text">Pare bine</string>
+  <string name="review_spam_yes_button_text">Nu, în afara scopului</string>
+  <string name="review_spam_no_button_text">Pare bine</string>
+  <string name="review_copyright_yes_button_text">Nu, încălcarea dreptului de autor</string>
+  <string name="review_copyright_no_button_text">Pare bine</string>
   <string name="review_thanks_yes_button_text">Da, de ce nu</string>
   <string name="review_thanks_no_button_text">Următoarea imagine</string>
-  <plurals name="receiving_shared_content" fuzzy="true">
-    <item quantity="one">Primirea conținutului partajat. Procesarea imaginii poate dura ceva timp, în funcție de dimensiunea imaginii și a dispozitivului dvs. </item>
-    <item quantity="other"> Primirea conținutului partajat. Procesarea imaginilor poate dura ceva timp, în funcție de mărimea imaginilor și a dispozitivului</item>
-  </plurals>
+  <string name="skip_image_explanation">Dacă faceți click pe acest buton vă va oferi o altă imagine încărcată recent de pe Wikimedia Commons</string>
+  <string name="review_image_explanation">Puteți revizui imaginile și îmbunătăți calitatea Wikimedia Commons.\n  Cei patru parametri ai revizuirii sunt:\n  - Această imagine este în scopul de aplicare?\n  - Această imagine respectă regulile dreptului de autor?\n  - Această imagine este corect clasificată?\n  - Dacă totul merge bine, puteți, de asemenea, să îi mulțumiți contribuitorului.</string>
   <string name="no_image">Nu s-au folosit imagini</string>
   <string name="no_image_reverted">Nici o imagine nu a fost anulată</string>
   <string name="no_image_uploaded">Nu au fost încărcate imagini</string>
+  <string name="no_notification">Nu aveți notificări necitite</string>
+  <string name="no_read_notification">Nu aveți notificări de citit</string>
   <string name="share_logs_using">Distribuiți jurnalele folosind</string>
+  <string name="menu_option_read">Vezi citit</string>
+  <string name="menu_option_unread">Vezi necitit</string>
+  <string name="error_occurred_in_picking_images">A apărut o eroare la alegerea imaginilor</string>
+  <string name="image_chooser_title">Alegeți Imagini de încărcat</string>
   <string name="please_wait">Vă rugăm să așteptați ...</string>
+  <string name="images_featured_explanation">Imaginile de Calitate sunt imagini ale unor fotografi și ilustratori de înaltă calificare, pe care comunitatea Wikimedia Commons a ales-o ca fiind de cea mai înaltă calitate pe site.</string>
+  <string name="images_via_nearby_explanation">Imaginile Încărcate prin Locurile din Apropiere sunt imaginile care sunt încărcate prin descoperirea locurilor de pe hartă.</string>
+  <string name="thanks_received_explanation">Această caracteristică permite editorilor să trimită o notificare de Mulțumire utilizatorilor care fac modificări utile - folosind un mic link de mulțumire pe pagina istoric sau pe pagina dif.</string>
+  <string name="previous_image_caption_description">Copiați legendele și descrierea anterioară</string>
+  <string name="previous_button_tooltip_message">Faceți click pentru a reutiliza titlul și descrierea introdusă în imaginea anterioară și modificați-l pentru a se potrivi cu cel actual</string>
+  <string name="welcome_do_upload_content_description">Exemple de imagini bune de încărcat pe Commons</string>
+  <string name="welcome_dont_upload_content_description">Exemple de imagini care nu trebuie încărcate</string>
+  <string name="skip_image">Săriți această imagine</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Descarcare Eşuată!!. Nu putem descărca fișierul fără permisiunea de stocare externă.</string>
+  <string name="manage_exif_tags">Gestionați etichetele EXIF</string>
+  <string name="manage_exif_tags_summary">Selectați ce etichete EXIF de păstrat în încărcări</string>
   <string name="exif_tag_name_author">Autor</string>
   <string name="exif_tag_name_copyright">Drepturi de autor</string>
+  <string name="exif_tag_name_location">Locația</string>
+  <string name="exif_tag_name_cameraModel">Model Cameră</string>
+  <string name="exif_tag_name_lensModel">Model Lentilă</string>
+  <string name="exif_tag_name_serialNumbers">Numere Serie</string>
+  <string name="exif_tag_name_software">Software</string>
+  <string name="share_text">Încărcați fotografii pe Wikimedia Commons direct de pe telefon. Descărcați aplicația Commons acum: %1$s</string>
+  <string name="share_via">Partajează aplicația prin ...</string>
+  <string name="image_info">Informații despre imagine</string>
+  <string name="no_categories_found">Nu s-au găsit categorii</string>
+  <string name="no_depiction_found">Nu s-au Găsit Reprezentări</string>
+  <string name="upload_cancelled">Încărcare anulată</string>
+  <string name="previous_image_title_description_not_found">Nu există date pentru titlul sau descrierea imaginii anterioare</string>
+  <string name="dialog_box_text_nomination">De ce trebuie șterse %1$s?</string>
+  <string name="review_is_uploaded_by">%1$s este încărcat de: %2$s</string>
+  <string name="default_description_language">Limbă de descriere implicită</string>
+  <string name="delete_helper_make_deletion_toast">Încercați să nominalizați %1$s pentru ștergere</string>
+  <string name="delete_helper_show_deletion_title">Nominalizare pentru ștergere</string>
+  <string name="delete_helper_show_deletion_title_success">Succes</string>
+  <string name="delete_helper_show_deletion_message_if">Nominalizat %1$s pentru ștergere.</string>
+  <string name="delete_helper_show_deletion_title_failed">Eșuat</string>
+  <string name="delete_helper_show_deletion_message_else">Nu s-a putut solicita ștergerea.</string>
+  <string name="delete_helper_ask_spam_selfie">Un selfie</string>
+  <string name="delete_helper_ask_spam_blurry">În ceață</string>
+  <string name="delete_helper_ask_spam_nonsense">Prostii</string>
+  <string name="delete_helper_ask_spam_other">Altele</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Foto din presă</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Fotografie aleatorie de pe internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Altul</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">Pentru că este</string>
+  <string name="share_image_via">Partajează imaginea prin</string>
+  <string name="no_achievements_yet">Încă nu ați făcut contribuții</string>
   <string name="account_created">Cont creat!</string>
+  <string name="text_copy">Text copiat în clipboard</string>
+  <string name="notification_mark_read">Notificare marcată ca citită</string>
+  <string name="some_error">A fost o eroare!</string>
+  <string name="place_state">Starea locului:</string>
+  <string name="place_state_exists">Există</string>
+  <string name="place_state_needs_photo">Are nevoie de foto</string>
+  <string name="place_type">Tipul locului:</string>
+  <string name="nearby_search_hint">Pod, muzeu, hotel etc.</string>
+  <string name="you_must_reset_your_passsword">Ceva nu a mers corect la autentificare, trebuie să vă resetați parola !!</string>
+  <string name="title_for_media">MEDIA</string>
+  <string name="title_for_child_classes">CLASE COPIl</string>
+  <string name="title_for_parent_classes">CLASE PĂRINTE</string>
+  <string name="upload_nearby_place_found_title">Locație Găsită în Apropiere</string>
+  <string name="upload_nearby_place_found_description">Este o fotografie a Locului %1$s?</string>
+  <string name="title_app_shortcut_explore">Explorează</string>
+  <string name="title_app_shortcut_bookmark">Semne de carte</string>
+  <string name="title_app_shortcut_setting">Setări</string>
+  <string name="remove_bookmark">Eliminat din semne de carte</string>
+  <string name="add_bookmark">Adăugat la semne de carte</string>
+  <string name="wallpaper_set_unsuccessfully">Ceva n-a mers bine. Imposibil de setat imaginea de fundal</string>
+  <string name="setting_wallpaper_dialog_title">Setează ca Imagine de fundal</string>
+  <string name="setting_wallpaper_dialog_message">Setează Imaginea de fundal. Te rog aşteaptă…</string>
+  <string name="theme_default_name">Urmăriți sistemul</string>
+  <string name="theme_dark_name">Întunecat</string>
+  <string name="theme_light_name">Deschis</string>
+  <string name="cannot_open_location_settings">Eroare la deschiderea setărilor locației. Vă rugăm să activați locația manual</string>
+  <string name="recommend_high_accuracy_mode">Pentru cele mai bune rezultate, alegeți modul de Înaltă precizie.</string>
+  <string name="ask_to_turn_location_on">Activați locația?</string>
+  <string name="nearby_needs_location">În apropiere este nevoie de locația activată pentru a funcționa corect</string>
+  <string name="use_location_from_similar_image">Ai fotografiat aceste două poze în același loc? Doriți să folosiți latitudinea/longitudinea imaginii din dreapta?</string>
+  <string name="load_more">Încarcă mai mult</string>
+  <string name="nearby_no_results">Nu s-au găsit locuri, încercați să schimbați criteriile de căutare.</string>
 </resources>

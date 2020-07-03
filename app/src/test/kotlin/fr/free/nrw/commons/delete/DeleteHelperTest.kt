@@ -123,7 +123,7 @@ class DeleteHelperTest {
             .thenReturn(Observable.just(true))
 
         whenever(media.displayTitle).thenReturn("Test file")
-        media.filename ="Test file.jpg"
+        whenever(media.filename).thenReturn("Test file.jpg")
 
         whenever(media.creator).thenReturn(null)
 

@@ -2,6 +2,7 @@ package fr.free.nrw.commons.di;
 
 import com.google.gson.Gson;
 
+import fr.free.nrw.commons.explore.categories.CategoriesModule;
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -11,7 +12,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionsModule;
-import fr.free.nrw.commons.depictions.DepictionModule;
+import fr.free.nrw.commons.explore.depictions.DepictionModule;
 import fr.free.nrw.commons.explore.SearchModule;
 import fr.free.nrw.commons.review.ReviewController;
 import fr.free.nrw.commons.settings.SettingsFragment;
@@ -33,7 +34,12 @@ import fr.free.nrw.commons.widget.PicOfDayAppWidget;
         ActivityBuilderModule.class,
         FragmentBuilderModule.class,
         ServiceBuilderModule.class,
-        ContentProviderBuilderModule.class, UploadModule.class, ContributionsModule.class, SearchModule.class, DepictionModule.class
+        ContentProviderBuilderModule.class,
+        UploadModule.class,
+        ContributionsModule.class,
+        SearchModule.class,
+        DepictionModule.class,
+        CategoriesModule.class
 })
 public interface CommonsApplicationComponent extends AndroidInjector<ApplicationlessInjection> {
     void inject(CommonsApplication application);

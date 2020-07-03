@@ -5,8 +5,40 @@
 * Luky001
 * Patriccck
 * Sudo77(new)
+* TomášPolonec
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">nahráva sa %1$d súbor</item>
+    <item quantity="few">nahrávajú sa %1$d súbory</item>
+    <item quantity="many">nahráva sa %1$d súborov</item>
+    <item quantity="other">nahráva sa %1$d súborov</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">Spúšťam nahrávanie %1$d súboru</item>
+    <item quantity="other">Spúšťam nahrávanie %1$d súborov</item>
+  </plurals>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d nahranie</item>
+    <item quantity="other">%1$d nahrania</item>
+  </plurals>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">Tento obrázok bude licenciovaný pod licenciou %1$s</item>
+    <item quantity="other">Tieto obrázky budú licenciované pod licenciou %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title" fuzzy="true">
+    <item quantity="one">%1$d nahranie</item>
+    <item quantity="other">%1$d nahrania</item>
+  </plurals>
+  <plurals name="receiving_shared_content" fuzzy="true">
+    <item quantity="one">Prebieha príjem zdieľaného obsahu. Spracovanie obrázku môže chvíľu trvať v závislosti od veľkosti obrázku a vášho zariadenia</item>
+    <item quantity="other">Prebieha príjem zdieľaného obsahu. Spracovanie obrázkov môže chvíľu trvať v závislosti od veľkosti obrázkov a vášho zariadenia</item>
+  </plurals>
   <string name="title_activity_explore">Objaviť</string>
   <string name="navigation_item_explore">Objaviť</string>
   <string name="preference_category_appearance">Vzhľad</string>
@@ -38,10 +70,6 @@
   <string name="upload_progress_notification_title_finishing">Dokončenie nahrávania %1$s</string>
   <string name="upload_failed_notification_title">Nahrávanie %1$s zlyhalo</string>
   <string name="upload_failed_notification_subtitle">Kliknutím zobrazíte</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">nahráva sa %1$d súbor</item>
-    <item quantity="other">nahrávajú sa %1$d súbory</item>
-  </plurals>
   <string name="title_activity_contributions">Moje nedávno nahrané</string>
   <string name="contribution_state_queued">Nahrávanie je v poradí</string>
   <string name="contribution_state_failed">Nahrávanie zlyhalo</string>
@@ -76,21 +104,11 @@
   <string name="gps_disabled">GPS nie je povolené vo vašom zariadení. Chceli by ste ho povoliť?</string>
   <string name="enable_gps">Povoliť GPS</string>
   <string name="contributions_subtitle_zero">Žiadne nahrané súbory</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Spúšťam nahrávanie %1$d súboru</item>
-    <item quantity="other">Spúšťam nahrávanie %1$d súborov</item>
-  </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d nahranie</item>
-    <item quantity="other">%1$d nahrania</item>
-  </plurals>
   <string name="categories_not_found">Žiadne kategórie nezodpovedajú „%1$s“</string>
   <string name="depictions_not_found">Neboli nájdené žiadne položky Wikiúdajov zhodujúce sa s %1$s</string>
+  <string name="no_child_classes">%1$s nemá žiadne dcérske triedy</string>
+  <string name="no_parent_classes">%1$s nemá žiadne rodičovské triedy</string>
+  <string name="depictions_image_not_found">Žiaden obrázok na zobrazenie</string>
   <string name="categories_skip_explanation">Pridajte kategórie, aby bolo vaše obrázky možné na Wikimedia Commons nájsť.\nPre pridanie kategórií začnite písať.</string>
   <string name="categories_activity_title">Kategórie</string>
   <string name="title_activity_settings">Nastavenia</string>
@@ -107,14 +125,11 @@
   <string name="menu_feedback">Odoslať spätnú väzbu (emailom)</string>
   <string name="no_email_client">Nemáte nainštalovaného žiadneho e-mailového klienta</string>
   <string name="provider_categories">Nedávno použité kategórie</string>
+  <string name="provider_depictions">Nedávno použité zobrazenia</string>
   <string name="waiting_first_sync">Čaká sa na prvú synchronizáciu…</string>
   <string name="no_uploads_yet">Ešte ste nenahrali žiadne fotografie.</string>
   <string name="menu_retry_upload">Znova</string>
   <string name="menu_cancel_upload">Zrušiť</string>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">Tento obrázok bude licenciovaný pod licenciou %1$s</item>
-    <item quantity="other">Tieto obrázky budú licenciované pod licenciou %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Odoslaním tohto súboru potvrdzujem, že je mojím vlastným dielom, neobsahuje autorskoprávne chránený materiál a nejedná sa o selfie a ani inak neporušuje &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Pravidlá a odporúčania Wikimedie Commons&lt;/a&gt;.</string>
   <string name="menu_download">Stiahnuť</string>
   <string name="preference_license">Predvolená licencia</string>
@@ -167,6 +182,7 @@
   <string name="detail_panel_cats_loading">Načítava sa…</string>
   <string name="detail_panel_cats_none">Nič nebolo vybrané</string>
   <string name="detail_caption_empty">Žiadny titulok</string>
+  <string name="detail_depiction_empty">Žiadne zobrazenie</string>
   <string name="detail_description_empty">Bez popisu</string>
   <string name="detail_discussion_empty">Žiadna diskusia</string>
   <string name="detail_license_empty">Neznáma licencia</string>
@@ -185,7 +201,9 @@
   <string name="upload">Nahrať</string>
   <string name="yes">Áno</string>
   <string name="no">Nie</string>
+  <string name="media_detail_caption">Titulok</string>
   <string name="media_detail_title">Názov</string>
+  <string name="media_detail_depiction">Zobrazenia</string>
   <string name="media_detail_description">Popis</string>
   <string name="media_detail_discussion">Diskusia</string>
   <string name="media_detail_author">Autor</string>
@@ -247,6 +265,7 @@
   <string name="error_while_cache">Chyba pri ukladaní obrázkov</string>
   <string name="title_info">Jedinečný popis súboru, ktorý bude slúžiť ako názov súboru. Môžete použiť bežný jazyk s medzerami. Nezadávajte príponu súboru.</string>
   <string name="description_info">Opíšte obrázok čo najviac, ako je to len možné: Kde bol zhotovený? Čo znázorňuje? Aký je kontext obrázku? Popíšte, prosím, predmety alebo osoby na obrázku a nezabudnite na informácie, ktoré nie je možné ľahko odhadnúť zo samotného obrázku, ako je napríklad denná doba, pokiaľ ide o krajinu. Ak je na obrázku niečo neobvyklé, popíšte, čo ho robí neobvyklým.</string>
+  <string name="caption_info">Prosím napíšte krátky popis obrázku (maximálne 255 znakov).</string>
   <string name="upload_image_too_dark">Tento obrázok je príliš tmavý. Ste si istí, že ho chcete nahrať? Wikimedia Commons slúži len na obrázky s encyklopedickou hodnotou.</string>
   <string name="upload_image_blurry">Tento obrázok je rozmazaný. Ste si istí, že ho chcete nahrať? Wikimedia Commons slúži len na obrázky s encyklopedickou hodnotou.</string>
   <string name="upload_problem_exist">Potenciálne problémy s týmto obrázkom:</string>
@@ -309,6 +328,9 @@
   <string name="retry">Obnoviť</string>
   <string name="showcase_view_got_it_button">Rozumiem</string>
   <string name="showcase_view_whole_nearby_activity">Toto sú miesta v blízkosti vašej súčasnej polohy, ktoré potrebujú fotografie na ilustráciu príslušných článkov na Wikipédii.\n\nKliknutím na PREHĽADAŤ TÚTO OBLASŤ sa zamkne mapa a spustí sa prehľadávanie okolia daného miesta.</string>
+  <string name="showcase_view_needs_photo">Toto miesto potrebuje obrázok.</string>
+  <string name="showcase_view_has_photo">Toto miesto už má obrázok.</string>
+  <string name="showcase_view_no_longer_exists">Toto miesto už nejestvuje.</string>
   <string name="showcase_view_list_icon">Ťuknutím na toto tlačidlo otvoríte zoznam týchto miest</string>
   <string name="showcase_view_plus_fab">Môžete nahrať obrázok akéhokoľvek z týchto miest z vašej galérie alebo priamo z fotoaparátu.</string>
   <string name="no_images_found">Neboli nájdené žiadne obrázky!</string>
@@ -325,9 +347,11 @@
   <string name="search_recent_header">Nedávne hľadania:</string>
   <string name="provider_searches">Nedávno hľadané dopyty</string>
   <string name="error_loading_categories">Chyba pri načítaní kategórií.</string>
+  <string name="error_loading_depictions">Chyba pri načítaní zobrazení.</string>
   <string name="error_loading_subcategories">Chyba pri načítaní podkategórií.</string>
   <string name="search_tab_title_media">Multimediálne súbory</string>
   <string name="search_tab_title_categories">Kategórie</string>
+  <string name="search_tab_title_depictions">Položky</string>
   <string name="explore_tab_title_featured">Najlepšie</string>
   <string name="explore_tab_title_mobile">Nahrané mobilom</string>
   <string name="successful_wikidata_edit">Obrázok bol pridaný do položky %1$s na Wikiúdajoch!</string>
@@ -387,7 +411,7 @@
   <string name="contributions_fragment">Príspevky</string>
   <string name="nearby_fragment">V okolí</string>
   <string name="notifications">Upozornenia</string>
-  <string name="read_notifications" fuzzy="true">Upozornenia (prečítané)</string>
+  <string name="read_notifications">Upozornenia (prečítané)</string>
   <string name="display_nearby_notification">Zobraziť notifikáciu o miestach v okolí</string>
   <string name="display_nearby_notification_summary">Kliknutím sem sa zobrazí najbližšie miesto, ktoré potrebuje obrázky</string>
   <string name="no_close_nearby">Vo vašej blízkosti neboli nájdené žiadne miesta</string>
@@ -402,10 +426,6 @@
   <string name="submit">Odoslať</string>
   <string name="upload_title_duplicate">Súbor s názvom %1$s už existuje. Naozaj chcete pokračovať?</string>
   <string name="map_application_missing">Nebola nájdená žiadna kompatibilná aplikácia s mapami. Pre použitie tejto fukncie si, prosím, nainštalujte aplikáciu poskytujúcu mapy.</string>
-  <plurals name="upload_count_title" fuzzy="true">
-    <item quantity="one">%1$d nahranie</item>
-    <item quantity="other">%1$d nahrania</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Záložky</string>
   <string name="title_activity_bookmarks">Záložky</string>
   <string name="title_page_bookmarks_pictures">Obrázky</string>
@@ -430,7 +450,8 @@
   <string name="desc_language_Asia">Ázia</string>
   <string name="desc_language_Pacific">Tichomorie</string>
   <string name="no_categories_selected">Neboli vybrané žiadne kategórie</string>
-  <string name="no_categories_selected_warning_desc" fuzzy="true">Obrázky bez kategórií sú používané len zriedka. Naozaj chcete nahrať obrázok bez výberu kategórií?</string>
+  <string name="no_categories_selected_warning_desc">Obrázky bez kategórií sú zriedka použiteľné. Naozaj chcete nahrať obrázok bez výberu kategórií?</string>
+  <string name="no_depictions_selected">Neboli zvolené žiadne zobrazenia</string>
   <string name="upload_flow_all_images_in_set">(Pre všetky obrázky v sade)</string>
   <string name="search_this_area">Prehľadať túto oblasť</string>
   <string name="nearby_card_permission_title">Je požadované oprávnenie</string>
@@ -491,17 +512,13 @@
   <string name="review_thanks_no_button_text">Ďalší súbor</string>
   <string name="skip_image_explanation">Kliknutím na toto tlačidlo sa zobrazí ďalší nedávno nahraný obrázok z Wikimedia Commons</string>
   <string name="review_image_explanation">Môžete kontrolovať obrázky a zlepšiť kvalitu Wikimedia Commons.\n\nTri aspekty, ktoré sa posudzujú, sú:\n  - Je tento obrázok v poriadku?\n  - Dodržiava tento obrázok pravidlá autorských práv?\n  - Je tento obrázok správne kategorizovaný?\n\nAk je všetko v poriadku, autorovi môžete taktiež poďakovať.</string>
-  <plurals name="receiving_shared_content" fuzzy="true">
-    <item quantity="one">Prebieha príjem zdieľaného obsahu. Spracovanie obrázku môže chvíľu trvať v závislosti od veľkosti obrázku a vášho zariadenia</item>
-    <item quantity="other">Prebieha príjem zdieľaného obsahu. Spracovanie obrázkov môže chvíľu trvať v závislosti od veľkosti obrázkov a vášho zariadenia</item>
-  </plurals>
   <string name="no_image">Nie sú použité žiadne obrázky</string>
   <string name="no_image_reverted">Žiadne revertované obrázky</string>
   <string name="no_image_uploaded">Žiadne nahrané obrázky</string>
   <string name="no_notification">Nemáte žiadne neprečítané upozornenia</string>
-  <string name="no_read_notification" fuzzy="true">Nemáte žiadne prečítané upozornenia</string>
+  <string name="no_read_notification">Nemáte žiadne prečítané upozornenia</string>
   <string name="share_logs_using">Zdieľať log pomocou</string>
-  <string name="menu_option_read" fuzzy="true">Zobraziť prečítané</string>
+  <string name="menu_option_read">Zobraziť prečítané</string>
   <string name="menu_option_unread">Zobraziť neprečítané</string>
   <string name="error_occurred_in_picking_images">Nastala chyba pri vyberaní obrázkov</string>
   <string name="image_chooser_title">Vyberte obrázky, ktoré chcete nahrať</string>
@@ -509,6 +526,7 @@
   <string name="images_featured_explanation">Najlepšie obrázky sú fotografie od vysoko skúsených fotografov a ilustrátorov, ktoré vybrala komunita Wikimedie Commons ako jedny z najkvalitnejších na stránke.</string>
   <string name="images_via_nearby_explanation">Obrázky nahrané cez Miesta v okolí sú obrázky, ktoré sú nahrané vďaka objavovaniu miest na mape.</string>
   <string name="thanks_received_explanation">Táto funkcia umožňuje poslať poďakovanie za užitočné úpravy používateľom – použitím malého odkazu poďakovať v histórií stránky alebo na stránke rozdielu medzi revíziami.</string>
+  <string name="previous_image_caption_description">Kopírovať predchádzajúce titulky a popis</string>
   <string name="previous_button_tooltip_message">Kliknutím znovu použijete názov a popis, ktorý ste zadali pri predchádzajúcom obrázku, a upravíte ho tak, aby vyhovoval vášmu aktuálnemu obrázku</string>
   <string name="welcome_do_upload_content_description">Príklady dobrých obrázkov na nahranie na Commons</string>
   <string name="welcome_dont_upload_content_description">Príklady obrázkov, ktoré by ste nemali nahrávať</string>
@@ -572,5 +590,22 @@
   <string name="theme_default_name" fuzzy="true">Predvolený</string>
   <string name="theme_dark_name">Tmavý</string>
   <string name="theme_light_name">Svetlý</string>
+  <string name="recommend_high_accuracy_mode">Pre najpresnejšie výsledky zvoľte režim vysokej presnosti.</string>
   <string name="ask_to_turn_location_on">Zapnúť lokáciu?</string>
+  <string name="load_more">Načítať ďalšie</string>
+  <string name="nearby_no_results">Neboli nájdené žiadne miesta, skúste zmeniť vyhľadávacie kritériá.</string>
+  <string name="add_picture_to_wikipedia_article_title">Pridať obrázok na Wikipédiu</string>
+  <string name="add_picture_to_wikipedia_article_desc">Chcete pridať tento obrázok do článku na %1$s Wikipédii?</string>
+  <string name="add_picture_to_wikipedia_instructions_title">Pokyny</string>
+  <string name="add_picture_to_wikipedia_instructions_desc">Dbajte na to, aby ste sa držali návodov na editovanie!</string>
+  <string name="confirm">Potvrdiť</string>
+  <string name="instructions_title">Inštrukcie</string>
+  <string name="wikipedia_instructions_step_1">1. Použiť nasledovný wikitext:</string>
+  <string name="wikipedia_instructions_step_2">2. Po kliknutí na „Potvrdiť“ sa otvorí článok na Wikipédii</string>
+  <string name="wikipedia_instructions_step_3">3. Nájdite vhodný odsek v článku pre Váš obrázok</string>
+  <string name="wikipedia_instructions_step_4">4. Kliknite na ikonku „Upraviť“ (tú s ceruzkou) pre daný odsek.</string>
+  <string name="wikipedia_instructions_step_5">5. Vložte wikitext na vhodné miesto.</string>
+  <string name="wikipedia_instructions_step_6">6. Ak načim, upravte wikitext pre vhodné umiestnenie. Pre viac informácií, pozrite &lt;a href=\"https://sk.wikipedia.org/wiki/Pomoc:Obr%C3%A1zok#Vlo%C5%BEenie_obr%C3%A1zku_do_%C4%8Dl%C3%A1nku\"&gt;sem&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_7">7. Uložte článok</string>
+  <string name="copy_wikicode_to_clipboard">Skopírujte wikikód</string>
 </resources>

@@ -26,7 +26,7 @@ import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import androidx.test.runner.AndroidJUnit4
 import fr.free.nrw.commons.auth.LoginActivity
-import fr.free.nrw.commons.upload.DescriptionsAdapter
+import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
 import fr.free.nrw.commons.util.MyViewAction
 import fr.free.nrw.commons.utils.ConfigUtils
 import org.hamcrest.core.AllOf.allOf
@@ -78,7 +78,7 @@ class UploadTest {
 
     @Test
     fun testUploadWithDescription() {
-        if (!ConfigUtils.isBetaFlavour()) {
+        if (!ConfigUtils.isBetaFlavour) {
             throw Error("This test should only be run in Beta!")
         }
 
@@ -96,7 +96,7 @@ class UploadTest {
         // Try to dismiss the error, if there is one (probably about duplicate files on Commons)
         dismissWarning("Yes")
 
-        onView(allOf<View>(isDisplayed(), withId(R.id.et_title)))
+        onView(allOf<View>(isDisplayed(), withId(R.id.tv_title)))
                 .perform(replaceText(commonsFileName))
 
         onView(allOf<View>(isDisplayed(), withId(R.id.description_item_edit_text)))
@@ -150,7 +150,7 @@ class UploadTest {
 
     @Test
     fun testUploadWithoutDescription() {
-        if (!ConfigUtils.isBetaFlavour()) {
+        if (!ConfigUtils.isBetaFlavour) {
             throw Error("This test should only be run in Beta!")
         }
 
@@ -168,7 +168,7 @@ class UploadTest {
         // Try to dismiss the error, if there is one (probably about duplicate files on Commons)
         dismissWarning("Yes")
 
-        onView(allOf<View>(isDisplayed(), withId(R.id.et_title)))
+        onView(allOf<View>(isDisplayed(), withId(R.id.tv_title)))
                 .perform(replaceText(commonsFileName))
 
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
@@ -209,7 +209,7 @@ class UploadTest {
 
     @Test
     fun testUploadWithMultilingualDescription() {
-        if (!ConfigUtils.isBetaFlavour()) {
+        if (!ConfigUtils.isBetaFlavour) {
             throw Error("This test should only be run in Beta!")
         }
 
@@ -227,12 +227,12 @@ class UploadTest {
         // Try to dismiss the error, if there is one (probably about duplicate files on Commons)
         dismissWarningDialog()
 
-        onView(allOf<View>(isDisplayed(), withId(R.id.et_title)))
+        onView(allOf<View>(isDisplayed(), withId(R.id.tv_title)))
                 .perform(replaceText(commonsFileName))
 
         onView(withId(R.id.rv_descriptions)).perform(
                 RecyclerViewActions
-                        .actionOnItemAtPosition<DescriptionsAdapter.ViewHolder>(0,
+                        .actionOnItemAtPosition<UploadMediaDetailAdapter.ViewHolder>(0,
                                 MyViewAction.typeTextInChildViewWithId(R.id.description_item_edit_text, "Test description")))
 
         onView(withId(R.id.btn_add_description))
@@ -240,12 +240,12 @@ class UploadTest {
 
         onView(withId(R.id.rv_descriptions)).perform(
                 RecyclerViewActions
-                        .actionOnItemAtPosition<DescriptionsAdapter.ViewHolder>(1,
+                        .actionOnItemAtPosition<UploadMediaDetailAdapter.ViewHolder>(1,
                                 MyViewAction.selectSpinnerItemInChildViewWithId(R.id.spinner_description_languages, 2)))
 
         onView(withId(R.id.rv_descriptions)).perform(
                 RecyclerViewActions
-                        .actionOnItemAtPosition<DescriptionsAdapter.ViewHolder>(1,
+                        .actionOnItemAtPosition<UploadMediaDetailAdapter.ViewHolder>(1,
                                 MyViewAction.typeTextInChildViewWithId(R.id.description_item_edit_text, "Description")))
 
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))

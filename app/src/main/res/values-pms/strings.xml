@@ -4,6 +4,35 @@
 * Borichèt
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d archivi an camin ch\'as caria</item>
+    <item quantity="other">%1$d archivi an camin ch\'as cario</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%1$d cariament ancaminà</item>
+    <item quantity="other">%1$d cariament ancaminà</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d cariament</item>
+    <item quantity="other">%1$d cariament</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Costa plancia a sarà sota la licensa %1$s</item>
+    <item quantity="other">Coste plance a saran sota la licensa %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d cariament</item>
+    <item quantity="other">%1$d cariament</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Arseiviment ëd contnù partagià. Ël tratament ëd la plancia a peul pijé un pò \'d temp an fonsion ëd la taja dla plancia e ëd sò material</item>
+    <item quantity="other">Arseiviment ëd contnù partagià. Ël tratament ëd le plance a peul pijé un pò \'d temp an fonsion ëd la taja dla plancia e ëd sò material</item>
+  </plurals>
   <string name="title_activity_explore">Esploré</string>
   <string name="navigation_item_explore">Esploré</string>
   <string name="preference_category_appearance">Aparensa</string>
@@ -35,10 +64,6 @@
   <string name="upload_progress_notification_title_finishing">Fin dël cariament %1$s</string>
   <string name="upload_failed_notification_title">Cariament falì a %1$s</string>
   <string name="upload_failed_notification_subtitle">Sgnaché për ësmon-e</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d archivi an camin ch\'as caria</item>
-    <item quantity="other">%1$d archivi an camin ch\'as cario</item>
-  </plurals>
   <string name="title_activity_contributions">Ij mè cariament recent</string>
   <string name="contribution_state_queued">An coa</string>
   <string name="contribution_state_failed">Falì</string>
@@ -73,19 +98,6 @@
   <string name="gps_disabled">Ël GPS a l\'é disabilità su sò angign. Veul-lo ativelo?</string>
   <string name="enable_gps">Ativé ël GPS</string>
   <string name="contributions_subtitle_zero">Ancor gnun cariament</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">%1$d cariament ancaminà</item>
-    <item quantity="other">%1$d cariament ancaminà</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d cariament</item>
-    <item quantity="other">%1$d cariament</item>
-  </plurals>
   <string name="categories_not_found">Gnun-e categorìe rëspondente a %1$s trovà</string>
   <string name="depictions_not_found">Gnun element Wikidata trovà ch\'a corësponda a %1$s</string>
   <string name="no_child_classes">%1$s a l\'ha gnun-e classe masnà</string>
@@ -112,10 +124,6 @@
   <string name="no_uploads_yet">A l\'ha ancor nen carià ëd fòto.</string>
   <string name="menu_retry_upload">Prové torna</string>
   <string name="menu_cancel_upload">Anulé</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Costa plancia a sarà sota la licensa %1$s</item>
-    <item quantity="other">Coste plance a saran sota la licensa %1$s</item>
-  </plurals>
   <string name="media_upload_policy">An mandand costa plancia, i diciaro ch\'a l\'é euvra ëd mè travaj, ch\'a conten nen d\'element sota drit d\'autor o d\'àutoscat, e che comsëssìa a l\'é conforma a &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;le régole ëd Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Dëscarié</string>
   <string name="preference_license">Licensa dë stàndard</string>
@@ -315,6 +323,9 @@
   <string name="retry">Prové torna</string>
   <string name="showcase_view_got_it_button">Fàit!</string>
   <string name="showcase_view_whole_nearby_activity">A-i é dij pòst davzin a chiel ch\'a l\'han da manca ëd plance për ilustré ij sò artìcoj su Wikipedia.\n\nSgnaché su \'SËRCHÉ AN COSTA ZÒNA\' a blòca la carta e a fa parte n\'arserca ëd prossimità davzin a cola posission.</string>
+  <string name="showcase_view_needs_photo">Ës pòst-sì a l\'ha damanca ëd na fòto.</string>
+  <string name="showcase_view_has_photo">Ës pòst-sì a l\'ha già na fòto.</string>
+  <string name="showcase_view_no_longer_exists">Ës pòst a esist pi.</string>
   <string name="showcase_view_list_icon">Sgnacand su \'s boton a comparirà na lista ëd si pòst</string>
   <string name="showcase_view_plus_fab">A peul carié na fòto da \'n pòst qualsëssìa ëd soa galarìa o màchina fòto</string>
   <string name="no_images_found">Gnun-e plance trovà!</string>
@@ -410,10 +421,6 @@
   <string name="submit">Mandé</string>
   <string name="upload_title_duplicate">N\'archivi con ël nòm %1$s a esist. É-lo sigur ëd vorèj andé anans?</string>
   <string name="map_application_missing">Gnun-a aplicassion cartogràfica compatìbil a l\'é trovasse an sò angign. Për piasì, ch\'a na anstala un-a për dovré costa fonsionalità.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d cariament</item>
-    <item quantity="other">%1$d cariament</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Marcapàgine</string>
   <string name="title_activity_bookmarks">Marcapàgine</string>
   <string name="title_page_bookmarks_pictures">Plance</string>
@@ -501,10 +508,6 @@
   <string name="review_thanks_no_button_text">Plancia apress</string>
   <string name="skip_image_explanation">Sgnaché ansima a \'s boton a-j darà n\'àutra plancia carià ëd recent ëd Wikimedia Comun</string>
   <string name="review_image_explanation">A peul revisioné le plance e amelioré la qualità ëd Wikimedia Comun.\nIj quatr paràmeter dla revision a son:\n- Costa plancia a l\'é an argoment?\n- Costa plancia a rëspeta le régole ëd drit d\'autor?\n- Costa plancia a l\'é categorisà për da bin?\n- Si tut a va bin, a peul ëdcò aringrassié ël contributor.</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">Arseiviment ëd contnù partagià. Ël tratament ëd la plancia a peul pijé un pò \'d temp an fonsion ëd la taja dla plancia e ëd sò material</item>
-    <item quantity="other">Arseiviment ëd contnù partagià. Ël tratament ëd le plance a peul pijé un pò \'d temp an fonsion ëd la taja dla plancia e ëd sò material</item>
-  </plurals>
   <string name="no_image">Gnun-e plance dovrà</string>
   <string name="no_image_reverted">Gnun-e plance anvertìe</string>
   <string name="no_image_uploaded">Gnun-e plance carià</string>
@@ -594,4 +597,18 @@
   <string name="use_location_from_similar_image">A la fàit se doe fòto ant l\'istess pòst? A veul dovré la latitùdin e la longitùdin ëd la fòto an sla drita?</string>
   <string name="load_more">Carié \'d pi</string>
   <string name="nearby_no_results">Gnun pòst trovà, ch\'a preuva a modifiché ij sò criteri d\'arserca.</string>
+  <string name="add_picture_to_wikipedia_article_title">Gionté na plancia a Wikipedia</string>
+  <string name="add_picture_to_wikipedia_article_desc">Veul-lo gionté costa fòto a l\'artìcol ëd Wikipedia an lenga %1$s?</string>
+  <string name="add_picture_to_wikipedia_instructions_title">anstrussion</string>
+  <string name="add_picture_to_wikipedia_instructions_desc">Ch\'a ten-a da ment le régole sì-dapress!</string>
+  <string name="confirm">Confirmé</string>
+  <string name="instructions_title">anstrussion</string>
+  <string name="wikipedia_instructions_step_1">1. Dovré ës wikitest-sì:</string>
+  <string name="wikipedia_instructions_step_2">2. Sgnacand su Confirmé l\'artìcol ëd Wikipedia as duvertërà</string>
+  <string name="wikipedia_instructions_step_3">3. Trové na session apropià ant l\'artìcol për la soa plancia</string>
+  <string name="wikipedia_instructions_step_4">4. Sgnaché an sla plancia Modifiché (cola con un crajon) për cola session.</string>
+  <string name="wikipedia_instructions_step_5">5. Ancolé ël wikitest ant ël pòst apropià.</string>
+  <string name="wikipedia_instructions_step_6">6. Modifiché ël wikitest për posissionelo bin, si necessari. Për pi d\'anformassion, vëdde &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;here&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_7">7. Publiché l\'artìcol</string>
+  <string name="copy_wikicode_to_clipboard">Copié ël còdes wiki an sla taulëtta</string>
 </resources>

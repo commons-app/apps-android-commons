@@ -2,9 +2,11 @@ package fr.free.nrw.commons.contributions;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static fr.free.nrw.commons.di.NetworkingModule.NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
@@ -17,25 +19,29 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.utils.DialogUtil;
+import java.util.Locale;
 import javax.inject.Inject;
+import javax.inject.Named;
+import org.wikipedia.dataclient.WikiSite;
 
 /**
  * Created by root on 01.06.2018.
  */
 
 public class ContributionsListFragment extends CommonsDaggerSupportFragment implements
-    ContributionsListContract.View, ContributionsListAdapter.Callback {
+    ContributionsListContract.View, ContributionsListAdapter.Callback,
+    WikipediaInstructionsDialogFragment.Callback {
 
   private static final String RV_STATE = "rv_scroll_state";
 
@@ -58,6 +64,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   ContributionController controller;
   @Inject
   MediaClient mediaClient;
+
+  @Named(NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE)
+  @Inject
+  WikiSite languageWikipediaSite;
 
   @Inject
   ContributionsListPresenter contributionsListPresenter;
@@ -200,7 +210,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   @Override
   public void onSaveInstanceState(@NonNull Bundle outState) {
     super.onSaveInstanceState(outState);
-    final GridLayoutManager layoutManager = (GridLayoutManager) rvContributionsList.getLayoutManager();
+    final GridLayoutManager layoutManager = (GridLayoutManager) rvContributionsList
+        .getLayoutManager();
     outState.putParcelable(RV_STATE, layoutManager.onSaveInstanceState());
   }
 
@@ -232,12 +243,66 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     }
   }
 
+  /**
+   * Handle callback for wikipedia icon clicked
+   *
+   * @param contribution
+   */
+  @Override
+  public void addImageToWikipedia(Contribution contribution) {
+    DialogUtil.showAlertDialog(getActivity(),
+        getString(R.string.add_picture_to_wikipedia_article_title),
+        String.format(getString(R.string.add_picture_to_wikipedia_article_desc),
+            Locale.getDefault().getDisplayLanguage()),
+        () -> {
+          showAddImageToWikipediaInstructions(contribution);
+        }, () -> {
+          // do nothing
+        });
+  }
+
+  /**
+   * Display confirmation dialog with instructions when the user tries to add image to wikipedia
+   *
+   * @param contribution
+   */
+  private void showAddImageToWikipediaInstructions(Contribution contribution) {
+    FragmentManager fragmentManager = getFragmentManager();
+    WikipediaInstructionsDialogFragment fragment = WikipediaInstructionsDialogFragment
+        .newInstance(contribution);
+    fragment.setCallback(this::onConfirmClicked);
+    fragment.show(fragmentManager, "WikimediaFragment");
+  }
+
+
   public Media getMediaAtPosition(final int i) {
-    return adapter.getContributionForPosition(i);
+    return adapter.getContributionForPosition(i).getMedia();
   }
 
   public int getTotalMediaCount() {
     return adapter.getItemCount();
+  }
+
+  /**
+   * Open the editor for the language Wikipedia
+   *
+   * @param contribution
+   */
+  @Override
+  public void onConfirmClicked(@Nullable Contribution contribution, boolean copyWikicode) {
+    if (copyWikicode) {
+      String wikicode = contribution.getMedia().getWikiCode();
+      Utils.copy("wikicode", wikicode, getContext());
+    }
+
+    final String url =
+        languageWikipediaSite.mobileUrl() + "/wiki/" + contribution.getWikidataPlace()
+            .getWikipediaPageTitle();
+    Utils.handleWebUrl(getContext(), Uri.parse(url));
+  }
+
+  public Integer getContributionStateAt(int position) {
+    return adapter.getContributionForPosition(position).getState();
   }
 
   public interface Callback {

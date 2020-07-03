@@ -1,8 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Candalua
 * Fierodelveneto
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d file en cargamento</item>
+    <item quantity="other">%1$d file en cargamento</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Scumisià %1$d cargamento</item>
+    <item quantity="other">Scumisiai %1$d cargamenti</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d cargamento</item>
+    <item quantity="other">%1$d cargamenti</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Sta imajine ła vegnarà ridasada in baxe a ła liçensa %1$s</item>
+    <item quantity="other">Ste imajini łe vegnarà ridasae in baxe a ła liçensa %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d cargamento</item>
+    <item quantity="other">%1$d cargamenti</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Riçevimento de contegnui spartii. La laorasion de l\'imajine la podaria domandar del tenpo dipendendo da ła grandesa de l\'imajine e del dispoxidivo</item>
+    <item quantity="other">Riçevimento de contegnui spartii. La łaorasion de łe imajini ła podaria domandar del tenpo dipendendo da ła grandesa de łe imajini e del dispoxidivo</item>
+  </plurals>
   <string name="title_activity_explore">Esplora</string>
   <string name="navigation_item_explore">Esplora</string>
   <string name="preference_category_appearance">Siera de ła gràfega</string>
@@ -33,10 +63,6 @@
   <string name="upload_progress_notification_title_finishing">Finio el cargamento de %1$s</string>
   <string name="upload_failed_notification_title">Cargamento de %1$s no riusio</string>
   <string name="upload_failed_notification_subtitle">Schicia par vixuałixare</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d file en cargamento</item>
-    <item quantity="other">%1$d file en cargamento</item>
-  </plurals>
   <string name="title_activity_contributions">I me ultimi cargamenti</string>
   <string name="contribution_state_queued">In coa...</string>
   <string name="contribution_state_failed">Fałimento</string>
@@ -48,8 +74,10 @@
   <string name="provider_contributions">I me cargamenti</string>
   <string name="menu_share">Spartisi in jiro</string>
   <string name="menu_open_in_browser">Varda sol navegadore web</string>
-  <string name="share_title_hint" fuzzy="true">Titoło (obligatorio)</string>
+  <string name="share_title_hint">Didascalia (obligatorio)</string>
+  <string name="add_caption_toast">Par piaser, daghe na didascalia a sto file</string>
   <string name="share_description_hint">Descrision</string>
+  <string name="share_caption_hint">Didascalia (màsimo 255 caràteri)</string>
   <string name="login_failed_network">No xé posibiłe ndarghe drento - erore de rete</string>
   <string name="login_failed_wrong_credentials">Entrada no riusia - Daghe na ociada al nome utente e ciave</string>
   <string name="login_failed_throttled">Masa volte te ghè provà. Riprova tra on fià de minudi.</string>
@@ -62,26 +90,15 @@
   <string name="provider_modifications">Modifeghe</string>
   <string name="menu_upload_single">Carga</string>
   <string name="categories_search_text_hint">Serca łe categorie</string>
+  <string name="depicts_search_text_hint">Serca le robe che se vede nel to file (le montagne, el Taj Mahal, ec.)</string>
   <string name="menu_save_categories">Salva</string>
   <string name="refresh_button">Ajorna</string>
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">El GPS el xé inabiłità sol dispoxidivo. Vuto tacarlo?</string>
   <string name="enable_gps">Taca el GPS</string>
   <string name="contributions_subtitle_zero">No xé njiancora sta cargà calcosa</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Scumisià %1$d cargamento</item>
-    <item quantity="other">Scumisiai %1$d cargamenti</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d cargamento</item>
-    <item quantity="other">%1$d cargamenti</item>
-  </plurals>
   <string name="categories_not_found">No ła xé sta catada na categoria che ła contegna %1$s</string>
+  <string name="depictions_not_found">No gò catà nisun elemento Wikidata che corisponda a %1$s</string>
   <string name="categories_skip_explanation">Xonta categorie par far sì che łe to someje e imajini łe sia pì façilmente riçercae so Wikimedia Commons.\nScumisia a dijitare par xontare categorie.</string>
   <string name="categories_activity_title">Categorie</string>
   <string name="title_activity_settings">Inpostasion</string>
@@ -102,10 +119,6 @@
   <string name="no_uploads_yet">No te ghe njiancora cargà na foto</string>
   <string name="menu_retry_upload">Riproa</string>
   <string name="menu_cancel_upload">Descançełare</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">Sta imajine ła vegnarà ridasada in baxe a ła liçensa %1$s</item>
-    <item quantity="other">Ste imajini łe vegnarà ridasae in baxe a ła liçensa %1$s</item>
-  </plurals>
   <string name="media_upload_policy">Cargando sta imajine, digo ciaramente che sta cuà ła xé na me opara, che no ła ga drento materiałe protexuo da copyright o ritrati, e che comuncue ła xé in linea a łe &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Policy de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descarga</string>
   <string name="preference_license">Liçensa predefinìa</string>
@@ -387,10 +400,6 @@
   <string name="submit">Envia</string>
   <string name="upload_title_duplicate">Xà ghe xé on file col nome %1$s. Sito seguro de vołer ndar vanti?</string>
   <string name="map_application_missing">Nisuna aplicasion de mape conpatibiłe ła xé sta catada sol to dispoxidivo. Instała on aplicasion par łe mape par poder doparare sta funsion.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d cargamento</item>
-    <item quantity="other">%1$d cargamenti</item>
-  </plurals>
   <string name="navigation_item_bookmarks">Segnałibri</string>
   <string name="title_activity_bookmarks">Segnałibri</string>
   <string name="title_page_bookmarks_pictures">Imajini</string>
@@ -476,10 +485,6 @@
   <string name="review_thanks_no_button_text">Imajine dopo</string>
   <string name="skip_image_explanation">Schiciando sto boton te vegnarà fora na imajine cargda ultimamente da Wikimedia Commons</string>
   <string name="review_image_explanation">Te połi rivardare łe imajini par mejorar ła cuałità de Wikimedia Commons.\n I cuatro parametri par rivardare i xé:\n- L\'imajine xeła a tema?\n- Sta imajine segueła łe regołamentasion del copyright?\n- Sta imajine xeła sta categorixada ben?\n- Se tuto ndase ben, te podarisi anca ringrasiar el contributor.</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">Riçevimento de contegnui spartii. La laorasion de l\'imajine la podaria domandar del tenpo dipendendo da ła grandesa de l\'imajine e del dispoxidivo</item>
-    <item quantity="other">Riçevimento de contegnui spartii. La łaorasion de łe imajini ła podaria domandar del tenpo dipendendo da ła grandesa de łe imajini e del dispoxidivo</item>
-  </plurals>
   <string name="no_image">Nisuna imajine doparada</string>
   <string name="no_image_reverted">Nisuna imajine trata fora</string>
   <string name="no_image_uploaded">Nisuna imajine cargada</string>
@@ -562,4 +567,6 @@
   <string name="ask_to_turn_location_on">Ativar ła poxision?</string>
   <string name="nearby_needs_location">La locałixasion n\'te łe viçinanse ła ga da esare inpisada parché ła funsionee in modo justo.</string>
   <string name="use_location_from_similar_image">Ste do foto łe gheto fate in tel steso posto? Vuto doparar ła stesa latitudine/lonxitudine de l\'imajine a drita?</string>
+  <string name="load_more">Carga \'ncora</string>
+  <string name="nearby_no_results">No go catà nisun posto, pròa a canbiar la to riserca.</string>
 </resources>

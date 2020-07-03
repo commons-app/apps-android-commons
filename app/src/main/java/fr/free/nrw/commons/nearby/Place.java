@@ -125,7 +125,6 @@ public class Place implements Parcelable {
         }
 
         String wikiDataLink = siteLinks.getWikidataLink().toString();
-        Timber.d("Wikidata entity is %s", wikiDataLink);
         return wikiDataLink.replace("http://www.wikidata.org/entity/", "");
     }
 
