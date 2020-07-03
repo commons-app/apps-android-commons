@@ -69,9 +69,6 @@ public class CustomImageDecoder implements ImageDecoder {
   /** SVG drawable factory that creates {@link PictureDrawable}s for SVG images. */
   public static class SvgDrawableFactory implements DrawableFactory {
 
-    static int width;
-    static int height;
-
     @Override
     public boolean supportsImageType(CloseableImage image) {
       return image instanceof CloseableSvgImage;
@@ -87,8 +84,8 @@ public class CustomImageDecoder implements ImageDecoder {
   public static class SvgPictureDrawable extends PictureDrawable {
 
     private final SVG mSvg;
-    public static int imagewidth;
-    public static int imageheight;
+    public static int width;
+    public static int height;
 
     public SvgPictureDrawable(SVG svg) {
       super(null);
@@ -98,8 +95,8 @@ public class CustomImageDecoder implements ImageDecoder {
     @Override
     protected void onBoundsChange(Rect bounds) {
       super.onBoundsChange(bounds);
-      imageheight = bounds.height();
-      imagewidth = bounds.width();
+      height = bounds.height();
+      width = bounds.width();
       setPicture(mSvg.renderToPicture(bounds.width(), bounds.height()));
     }
   }
@@ -135,12 +132,12 @@ public class CustomImageDecoder implements ImageDecoder {
 
     @Override
     public int getWidth() {
-      return SvgPictureDrawable.imagewidth;
+      return SvgPictureDrawable.width;
     }
 
     @Override
     public int getHeight() {
-      return SvgPictureDrawable.imageheight;
+      return SvgPictureDrawable.height;
     }
   }
 }
