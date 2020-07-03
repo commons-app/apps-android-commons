@@ -96,5 +96,4 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
                 }.map { page -> page.title().replace(CATEGORY_PREFIX, "") }
             }
     }
-
 }

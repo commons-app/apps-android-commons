@@ -32,12 +32,11 @@ public interface CategoryInterface {
      * @return
      */
     @GET("w/api.php?action=query&format=json&formatversion=2"
-            + "&generator=allcategories")
+            + "&generator=allcategories&prop=categoryinfo")
 
     Single<MwQueryResponse> searchCategoriesForPrefix(@Query("gacprefix") String prefix,
                                                           @Query("gaclimit") int itemLimit, @Query("gacoffset") int offset);
-
-
+    
     @GET("w/api.php?action=query&format=json&formatversion=2"
             + "&generator=categorymembers&gcmtype=subcat"
             + "&prop=info&gcmlimit=50")
