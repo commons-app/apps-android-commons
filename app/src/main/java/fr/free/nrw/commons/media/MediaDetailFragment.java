@@ -45,13 +45,13 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AccountUtil;
-import fr.free.nrw.commons.category.CategoryClient;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.media.CustomImageDecoder.SvgDrawableFactory;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
@@ -381,6 +381,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                         .build())
                     .build()
                 )
+                .setCustomDrawableFactory(new SvgDrawableFactory())
                 .setControllerListener(aspectRatioListener)
                 .setOldController(image.getController())
                 .build();
@@ -394,6 +395,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                         .build())
                 .build()
             )
+            .setCustomDrawableFactory(new SvgDrawableFactory())
             .setControllerListener(aspectRatioListener)
             .setOldController(imageLandscape.getController())
             .build();
