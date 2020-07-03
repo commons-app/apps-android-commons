@@ -18,9 +18,11 @@ import android.os.Process;
 import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.multidex.MultiDexApplication;
+import com.facebook.drawee.backends.pipeline.DraweeConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.facebook.imagepipeline.decoder.ImageDecoderConfig;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
@@ -36,6 +38,7 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.FileLoggingTree;
 import fr.free.nrw.commons.logging.LogUtils;
+import fr.free.nrw.commons.media.CustomImageDecoder;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.ConfigUtils;
@@ -135,7 +138,6 @@ public class CommonsApplication extends MultiDexApplication {
 
         initTimber();
 
-
         if (!defaultPrefs.getBoolean("has_user_manually_removed_location")) {
             Set<String> defaultExifTagsSet = defaultPrefs.getStringSet(Prefs.MANAGED_EXIF_TAGS);
             if (null == defaultExifTagsSet) {
@@ -145,12 +147,25 @@ public class CommonsApplication extends MultiDexApplication {
             defaultPrefs.putStringSet(Prefs.MANAGED_EXIF_TAGS, defaultExifTagsSet);
         }
 
+        ImageDecoderConfig imageDecoderConfig = new ImageDecoderConfig.Builder()
+            .addDecodingCapability(
+                CustomImageDecoder.SVG_FORMAT,
+                new CustomImageDecoder.SvgFormatChecker(),
+                new  CustomImageDecoder()
+            ).build();
+
 //        Set DownsampleEnabled to True to downsample the image in case it's heavy
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
+                .setImageDecoderConfig(imageDecoderConfig)
                 .setDownsampleEnabled(true)
                 .build();
+
+        DraweeConfig draweeConfig = DraweeConfig.newBuilder()
+            .addCustomDrawableFactory(new CustomImageDecoder.SvgDrawableFactory())
+            .build();
+
         try {
-            Fresco.initialize(this, config);
+            Fresco.initialize(this, config, draweeConfig);
         } catch (Exception e) {
             Timber.e(e);
             // TODO: Remove when we're able to initialize Fresco in test builds.

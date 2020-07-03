@@ -114,6 +114,9 @@ dependencies {
     //swipe_layout
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
 
+    // SVG rendering library
+    implementation 'com.caverock:androidsvg-aar:1.4'
+
     //Room
     implementation "androidx.room:room-runtime:$ROOM_VERSION"
     implementation "androidx.room:room-ktx:$ROOM_VERSION"

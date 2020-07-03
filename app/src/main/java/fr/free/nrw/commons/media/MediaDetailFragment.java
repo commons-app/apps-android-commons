@@ -36,8 +36,10 @@ import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.common.ImageDecodeOptions;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
@@ -371,13 +373,27 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private void setupImageView() {
         DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setLowResImageRequest(ImageRequest.fromUri(media.getThumbUrl()))
-                .setImageRequest(ImageRequest.fromUri(media.getImageUrl()))
+                .setImageRequest(ImageRequestBuilder.newBuilderWithSource(
+                    Uri.parse(media.getImageUrl()))
+                    .setImageDecodeOptions(
+                        ImageDecodeOptions.newBuilder()
+                        .setCustomImageDecoder(new CustomImageDecoder())
+                        .build())
+                    .build()
+                )
                 .setControllerListener(aspectRatioListener)
                 .setOldController(image.getController())
                 .build();
         DraweeController controllerLandscape = Fresco.newDraweeControllerBuilder()
             .setLowResImageRequest(ImageRequest.fromUri(media.getThumbUrl()))
-            .setImageRequest(ImageRequest.fromUri(media.getImageUrl()))
+            .setImageRequest(ImageRequestBuilder.newBuilderWithSource(
+                Uri.parse(media.getImageUrl()))
+                .setImageDecodeOptions(
+                    ImageDecodeOptions.newBuilder()
+                        .setCustomImageDecoder(new CustomImageDecoder())
+                        .build())
+                .build()
+            )
             .setControllerListener(aspectRatioListener)
             .setOldController(imageLandscape.getController())
             .build();
