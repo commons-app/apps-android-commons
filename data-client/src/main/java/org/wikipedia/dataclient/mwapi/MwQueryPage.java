@@ -209,10 +209,7 @@ public class MwQueryPage extends BaseModel {
             return source;
         }
     }
-
-
-
-
+    
     public static class PageProps {
         @SuppressWarnings("unused") @SerializedName("wikibase_item") @Nullable private String wikiBaseItem;
         @SuppressWarnings("unused") @Nullable private String displaytitle;
