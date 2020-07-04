@@ -35,7 +35,7 @@ public class SearchResults {
      * @param suggestion a search suggestion to show to the user: "Did you mean ...?"
      */
     public SearchResults(@NonNull List<MwQueryPage> pages, @NonNull WikiSite wiki,
-        @Nullable Map<String, String> continuation, @Nullable String suggestion) {
+                         @Nullable Map<String, String> continuation, @Nullable String suggestion) {
         List<SearchResult> searchResults = new ArrayList<>();
 
         // Sort the array based on the "index" property
@@ -61,3 +61,4 @@ public class SearchResults {
         return continuation;
     }
 }
+

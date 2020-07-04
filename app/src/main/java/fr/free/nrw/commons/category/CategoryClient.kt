@@ -92,7 +92,8 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
                 it.query()?.pages() ?: emptyList()
             }
             .map {
-                it.filter { page -> !page.categoryInfo().isHidden
+                it.filter {
+                    page -> page.categoryInfo() == null || !page.categoryInfo().isHidden
                 }.map { page -> page.title().replace(CATEGORY_PREFIX, "") }
             }
     }
