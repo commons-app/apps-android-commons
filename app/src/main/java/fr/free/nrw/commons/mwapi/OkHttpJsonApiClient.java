@@ -11,6 +11,7 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
+import fr.free.nrw.commons.profile.leaderboard.LeaderboardResponse;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.ConfigUtils;
@@ -40,6 +41,7 @@ public class OkHttpJsonApiClient {
   private final OkHttpClient okHttpClient;
   private final DepictsClient depictsClient;
   private final HttpUrl wikiMediaToolforgeUrl;
+  private final HttpUrl wikiMediaTestToolforgeUrl;
   private final String sparqlQueryUrl;
   private final String campaignsUrl;
   private final Gson gson;
@@ -49,15 +51,56 @@ public class OkHttpJsonApiClient {
   public OkHttpJsonApiClient(OkHttpClient okHttpClient,
       DepictsClient depictsClient,
       HttpUrl wikiMediaToolforgeUrl,
+      HttpUrl wikiMediaTestToolforgeUrl,
       String sparqlQueryUrl,
       String campaignsUrl,
       Gson gson) {
     this.okHttpClient = okHttpClient;
     this.depictsClient = depictsClient;
     this.wikiMediaToolforgeUrl = wikiMediaToolforgeUrl;
+    this.wikiMediaTestToolforgeUrl = wikiMediaTestToolforgeUrl;
     this.sparqlQueryUrl = sparqlQueryUrl;
     this.campaignsUrl = campaignsUrl;
     this.gson = gson;
+  }
+
+  @NonNull
+  public Single<LeaderboardResponse> getLeaderboard(String userName, String duration, String category, String limit, String offset) {
+    final String fetchLeaderboardUrlTemplate = wikiMediaTestToolforgeUrl
+        + "/leaderboard.py";
+    return Single.fromCallable(() -> {
+      String url = String.format(Locale.ENGLISH,
+          fetchLeaderboardUrlTemplate,
+          userName,
+          duration,
+          category,
+          limit,
+          offset);
+      HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+      urlBuilder.addQueryParameter("user", userName);
+      urlBuilder.addQueryParameter("duration", duration);
+      urlBuilder.addQueryParameter("category", category);
+      urlBuilder.addQueryParameter("limit", limit);
+      urlBuilder.addQueryParameter("offset", offset);
+      Timber.i("Url %s", urlBuilder.toString());
+      Request request = new Request.Builder()
+          .url(urlBuilder.toString())
+          .build();
+      Response response = okHttpClient.newCall(request).execute();
+      if (response != null && response.body() != null && response.isSuccessful()) {
+        String json = response.body().string();
+        if (json == null) {
+          return null;
+        }
+        Timber.d("Response for leaderboard is %s", json);
+        try {
+          return gson.fromJson(json, LeaderboardResponse.class);
+        } catch (Exception e) {
+          return new LeaderboardResponse();
+        }
+      }
+      return null;
+    });
   }
 
   @NonNull
