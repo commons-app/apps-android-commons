@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.actions;
 
-import android.util.Log;
 import org.wikipedia.csrf.CsrfTokenClient;
 import org.wikipedia.dataclient.Service;
 

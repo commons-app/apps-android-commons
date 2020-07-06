@@ -594,24 +594,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @OnClick(R.id.categoryEditButton)
     public void onCategoryEditButtonClicked(){
-        Log.d("deneme3","onCategoryEditButtonClicked");
-        // TODO: display categories
-        //List<Category> selectedCategories = new ArrayList<>();
-        //selectedCategories.add(new Category(null, "Animals", null, 1));
-        //selectedCategories.add(new Category(null, "Birds", null, 1));
         displayHideCategorySearch();
-
-        /*Single<Boolean> resultSingle = categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories)
-            .flatMap(result -> categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories));
-        compositeDisposable.add(resultSingle
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(s -> {
-                if (getActivity() != null) {
-                    Log.d("deneme","oldu");
-                    // TODO: var olan kategoriler listede görünmedi bir sebepten. Ve kategori listesinden seçtirmelisin
-                }
-            }));*/
     }
 
     public void displayHideCategorySearch() {
@@ -879,5 +862,4 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         }
         return media.getCoordinates().getPrettyCoordinateString();
     }
-
 }
