@@ -282,6 +282,9 @@
   <string name="about_translate_cancel">Annullér</string>
   <string name="retry">Prøv igen</string>
   <string name="showcase_view_got_it_button">Forstået!</string>
+  <string name="showcase_view_needs_photo">Dette sted mangler et billede.</string>
+  <string name="showcase_view_has_photo">Dette sted har allerede et billede.</string>
+  <string name="showcase_view_no_longer_exists">Dette sted findes ikke længere.</string>
   <string name="no_images_found">Ingen billeder fundet!</string>
   <string name="error_loading_images">Der opstod en fejl under indlæsningen af billeder.</string>
   <string name="image_uploaded_by">Lagt op af: %1$s</string>

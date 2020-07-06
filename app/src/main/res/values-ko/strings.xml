@@ -5,6 +5,7 @@
 * Codenstory
 * Dlsrks1021
 * Doyoon1995
+* Ellif
 * Freebiekr
 * Garam
 * Jerrykim306
@@ -331,6 +332,9 @@
   <string name="retry">다시 시도</string>
   <string name="showcase_view_got_it_button">알겠습니다!</string>
   <string name="showcase_view_whole_nearby_activity" fuzzy="true">이들은 위키백과 글에 사진을 넣을 필요가 있는 당신 주위의 장소들입니다</string>
+  <string name="showcase_view_needs_photo">이 장소에는 사진이 필요합니다.</string>
+  <string name="showcase_view_has_photo">이 장소의 사진이 이미 있습니다.</string>
+  <string name="showcase_view_no_longer_exists">이 장소는 더 이상 있지 않습니다.</string>
   <string name="showcase_view_list_icon">이 버튼을 탭하면 이 장소들의 목록을 가져옵니다</string>
   <string name="showcase_view_plus_fab">갤러리나 카메라 어느 곳이든 사진을 올릴 수 있습니다</string>
   <string name="no_images_found">그림이 없습니다!</string>

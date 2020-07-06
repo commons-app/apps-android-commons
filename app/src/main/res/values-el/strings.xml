@@ -12,6 +12,7 @@
 * ManosHacker
 * Nikosgranturismogt
 * Nikosguard
+* Norhorn
 * Panos78
 * Protnet
 * Tgkarounos
@@ -300,6 +301,9 @@
   <string name="retry">Ξαναπροσπαθήστε</string>
   <string name="showcase_view_got_it_button">Κατάλαβα!</string>
   <string name="showcase_view_whole_nearby_activity" fuzzy="true">Αυτά είναι τα μέρη κοντά σας που χρειάζονται φωτογραφίες για να εικονογραφηθούν τα λήμματά τους στη Βικιπαίδεια</string>
+  <string name="showcase_view_needs_photo">Αυτή η τοποθεσία χρειάζεται φωτογραφία.</string>
+  <string name="showcase_view_has_photo">Αυτή η τοποθεσία έχει ήδη φωτογραφία.</string>
+  <string name="showcase_view_no_longer_exists">Η τοποθεσία δεν υπάρχει πλέον.</string>
   <string name="showcase_view_list_icon">Πατώντας αυτό το κουμπί φέρνει μια λίστα αυτών των μερών</string>
   <string name="showcase_view_plus_fab">Μπορείτε να ανεβάσετε μια εικόνα για οποιοδήποτε μέρος από την γκαλερί ή την κάμερά σας</string>
   <string name="no_images_found">Δεν βρέθηκαν εικόνες!</string>

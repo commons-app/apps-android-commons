@@ -320,6 +320,9 @@
   <string name="retry">Riprova</string>
   <string name="showcase_view_got_it_button">Capito!</string>
   <string name="showcase_view_whole_nearby_activity">Questi sono i luoghi vicino a te che necessitano di immagini per illustrare le loro voci di Wikipedia.\n\nCliccando su \"CERCA QUESTA AREA\" si blocca la mappa e si avvia una ricerca nelle vicinanze intorno a quella posizione.</string>
+  <string name="showcase_view_needs_photo">Questo luogo ha molto bisogno di una foto.</string>
+  <string name="showcase_view_has_photo">Questo luogo già ha una foto.</string>
+  <string name="showcase_view_no_longer_exists">Questo luogo non esiste più.</string>
   <string name="showcase_view_list_icon">Toccando questo pulsante viene visualizzato un elenco di questi luoghi</string>
   <string name="showcase_view_plus_fab">Puoi caricare un\'immagine per ogni luogo dalla tua galleria o fotocamera</string>
   <string name="no_images_found">Nessuna immagine trovata!</string>
