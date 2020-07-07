@@ -25,6 +25,7 @@ data class Contribution constructor(
     val decimalCoords: String? = null,
     var dateCreatedSource: String? = null,
     var wikidataPlace: WikidataPlace? = null,
+    var chunkInfo: ChunkInfo? = null,
     /**
      * @return array list of entityids for the depictions
      */
@@ -36,7 +37,8 @@ data class Contribution constructor(
     var mimeType: String? = null,
     val localUri: Uri? = null,
     var dataLength: Long = 0,
-    var dateCreated: Date? = null
+    var dateCreated: Date? = null,
+    var dateModified: Date? = null
 ) : Parcelable {
 
     fun completeWith(media: Media): Contribution {
@@ -68,6 +70,7 @@ data class Contribution constructor(
         const val STATE_FAILED = 1
         const val STATE_QUEUED = 2
         const val STATE_IN_PROGRESS = 3
+        const val STATE_PAUSED = 4
 
         /**
          * Formatting captions to the Wikibase format for sending labels

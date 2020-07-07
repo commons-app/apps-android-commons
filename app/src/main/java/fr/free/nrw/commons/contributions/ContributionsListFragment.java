@@ -35,6 +35,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.wikipedia.dataclient.WikiSite;
+import timber.log.Timber;
 
 /**
  * Created by root on 01.06.2018.
@@ -89,6 +90,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   private final int SPAN_COUNT_PORTRAIT = 1;
 
 
+  @Override
   public View onCreateView(
       final LayoutInflater inflater, @Nullable final ViewGroup container,
       @Nullable final Bundle savedInstanceState) {
@@ -191,6 +193,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   /**
    * Shows welcome message if user has no contributions yet i.e. new user.
    */
+  @Override
   public void showWelcomeTip(final boolean shouldShow) {
     noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
   }
@@ -200,10 +203,12 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
    *
    * @param shouldShow True when contributions list should be hidden.
    */
+  @Override
   public void showProgress(final boolean shouldShow) {
     progressBar.setVisibility(shouldShow ? VISIBLE : GONE);
   }
 
+  @Override
   public void showNoContributionsUI(final boolean shouldShow) {
     noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
   }
@@ -263,6 +268,24 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   }
 
   /**
+   * Pauses the current upload
+   * @param contribution
+   */
+  @Override
+  public void pauseUpload(Contribution contribution) {
+    callback.pauseUpload(contribution);
+  }
+
+  /**
+   * Resumes the current upload
+   * @param contribution
+   */
+  @Override
+  public void resumeUpload(Contribution contribution) {
+    callback.retryUpload(contribution);
+  }
+
+  /**
    * Display confirmation dialog with instructions when the user tries to add image to wikipedia
    *
    * @param contribution
@@ -311,5 +334,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     void retryUpload(Contribution contribution);
 
     void showDetail(int position, boolean isWikipediaButtonDisplayed);
+
+    void pauseUpload(Contribution contribution);
   }
 }

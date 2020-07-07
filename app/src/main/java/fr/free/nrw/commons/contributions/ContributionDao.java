@@ -10,6 +10,8 @@ import androidx.room.Transaction;
 import androidx.room.Update;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Dao
@@ -23,7 +25,10 @@ public abstract class ContributionDao {
 
   public Completable save(final Contribution contribution) {
     return Completable
-        .fromAction(() -> saveSynchronous(contribution));
+        .fromAction(() -> {
+          contribution.setDateModified(Calendar.getInstance().getTime());
+          saveSynchronous(contribution);
+        });
   }
 
   @Transaction
@@ -67,6 +72,9 @@ public abstract class ContributionDao {
 
   public Completable update(final Contribution contribution) {
     return Completable
-        .fromAction(() -> updateSynchronous(contribution));
+        .fromAction(() -> {
+          contribution.setDateModified(Calendar.getInstance().getTime());
+          updateSynchronous(contribution);
+        });
   }
 }

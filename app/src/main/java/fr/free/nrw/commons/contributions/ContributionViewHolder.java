@@ -43,6 +43,8 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
   ImageButton retryButton;
   @BindView(R.id.cancelButton)
   ImageButton cancelButton;
+  @BindView(R.id.pauseResumeButton)
+  ImageButton pauseResumeButton;
 
 
   private int position;
@@ -94,7 +96,11 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
       case Contribution.STATE_IN_PROGRESS:
         stateView.setVisibility(View.GONE);
         progressView.setVisibility(View.VISIBLE);
-        imageOptions.setVisibility(View.GONE);
+        addToWikipediaButton.setVisibility(View.GONE);
+        pauseResumeButton.setVisibility(View.VISIBLE);
+        cancelButton.setVisibility(View.GONE);
+        retryButton.setVisibility(View.GONE);
+        imageOptions.setVisibility(View.VISIBLE);
         final long total = contribution.getDataLength();
         final long transferred = contribution.getTransferred();
         if (transferred == 0 || transferred >= total) {
@@ -103,10 +109,23 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
           progressView.setProgress((int) (((double) transferred / (double) total) * 100));
         }
         break;
+      case Contribution.STATE_PAUSED:
+        stateView.setVisibility(View.VISIBLE);
+        stateView.setText(R.string.paused);
+        setResume();
+        progressView.setVisibility(View.GONE);
+        cancelButton.setVisibility(View.GONE);
+        retryButton.setVisibility(View.GONE);
+        pauseResumeButton.setVisibility(View.VISIBLE);
+        imageOptions.setVisibility(View.VISIBLE);
+        break;
       case Contribution.STATE_FAILED:
         stateView.setVisibility(View.VISIBLE);
         stateView.setText(R.string.contribution_state_failed);
         progressView.setVisibility(View.GONE);
+        cancelButton.setVisibility(View.VISIBLE);
+        retryButton.setVisibility(View.VISIBLE);
+        pauseResumeButton.setVisibility(View.GONE);
         imageOptions.setVisibility(View.VISIBLE);
         break;
     }
@@ -188,5 +207,35 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
   @OnClick(R.id.wikipediaButton)
   public void wikipediaButtonClicked() {
     callback.addImageToWikipedia(contribution);
+  }
+
+  /**
+   * Triggers a callback for pause/resume
+   */
+  @OnClick(R.id.pauseResumeButton)
+  public void onPauseResumeButtonClicked() {
+    if (pauseResumeButton.getTag().toString().equals("pause")) {
+      callback.pauseUpload(contribution);
+      setResume();
+    } else {
+      callback.resumeUpload(contribution);
+      setPaused();
+    }
+  }
+
+  /**
+   * Update pause/resume button to show pause state
+   */
+  private void setPaused() {
+    pauseResumeButton.setImageResource(R.drawable.pause_icon);
+    pauseResumeButton.setTag(R.string.pause);
+  }
+
+  /**
+   * Update pause/resume button to show resume state
+   */
+  private void setResume() {
+    pauseResumeButton.setImageResource(R.drawable.play_icon);
+    pauseResumeButton.setTag(R.string.resume);
   }
 }
