@@ -4,6 +4,7 @@
 * Aefgh39622
 * B20180
 * Horus
+* Korrawit
 * Nitisart Jungtrakungrat
 * Octahedron80
 * Patsagorn Y.
@@ -41,7 +42,7 @@
   <string name="username">ชื่อผู้ใช้</string>
   <string name="password">รหัสผ่าน</string>
   <string name="login_credential">ลงชื่อเข้าระบบบัญชีคอมมอนส์บีตาของคุณ</string>
-  <string name="login">ลงชื่อเข้า</string>
+  <string name="login">เข้าสู่ระบบ</string>
   <string name="forgot_password">ลืมรหัสผ่านหรือ?</string>
   <string name="signup">สมัครสมาชิก</string>
   <string name="logging_in_title">กำลังเข้าสู่ระบบ</string>
