@@ -511,6 +511,16 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         categoryEditSearchRecyclerViewAdapter.addToCategories(media.getCategories());
         updateSelectedCategoriesTextView(categoryEditSearchRecyclerViewAdapter.getCategories());
 
+        updateCategoryList();
+
+        if (media.getCreator() == null || media.getCreator().equals("")) {
+            authorLayout.setVisibility(GONE);
+        } else {
+            author.setText(media.getCreator());
+        }
+    }
+
+    private void updateCategoryList() {
         final List<String> categories = media.getCategories();
         if (categories.isEmpty()) {
             // Stick in a filler element.
@@ -518,12 +528,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         }
 
         rebuildCatList(categories);
-
-        if (media.getCreator() == null || media.getCreator().equals("")) {
-            authorLayout.setVisibility(GONE);
-        } else {
-            author.setText(media.getCreator());
-        }
     }
 
     @Override
@@ -617,8 +621,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(s -> {
                 if (getActivity() != null) {
-                    Log.d("deneme","oldu");
-                    // TODO: var olan kategoriler listede görünmedi bir sebepten. Ve kategori listesinden seçtirmelisin
+                    Timber.d("Categories are added.");
+                    onOutsideOfCategoryEditClicked();
+                    updateCategoryList();
                 }
             }));
     }

@@ -57,59 +57,13 @@ public class CategoryEditHelper {
      * @return
      */
     public Single<Boolean> makeCategoryEdit(Context context, Media media, List<String> categories) {
-        viewUtil.showShortToast(context, "Trying to add categories");
+        viewUtil.showShortToast(context, context.getString(R.string.category_edit_helper_make_edit_toast));
 
         return addCategory(media, categories)
             .flatMapSingle(result -> Single.just(showCategoryEditNotification(context, media, result)))
             .firstOrError();
     }
-/*
-    private Observable<Boolean> updateCategories(Media media, List<String> categories) {
-        Timber.d("thread is category adding %s", Thread.currentThread().getName());
-        String summary = "Updating categories";
-        Log.d("deneme8","pagetitle:"+media.getFilename());
-        try {
-        return categoryEditInterface.getContentOfFile(media.getFilename())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .map(mediaDetailResponse -> {
-                    Log.d("deneme8", "content:");
-                    Pattern pattern = Pattern.compile("(?=\\[\\[Category\\:)(.*?)\\]\\]");
-                    String content = mediaDetailResponse.query().firstPage().revisions().get(0)
-                        .content();
-                    Matcher matcher = pattern.matcher(content);
-                    Log.d("deneme8", "content:"+content);
-                    StringBuilder builder = new StringBuilder();
-                    int i = 0;
-                    while (matcher.find()) {
-                        builder.append(content.substring(i, matcher.start()));
-                        i = matcher.end();
-                    }
 
-                    String pageContentCategoriesRemoved = builder.toString();
-                    Log.d("deneme8", "pageContentRemoved:"+pageContentCategoriesRemoved);
-                    // TODO burada kaldın
-
-                    StringBuilder buffer = new StringBuilder();
-
-                    if (categories != null && categories.size() != 0) {
-
-                        for (int k = 0; k < categories.size(); k++) {
-                            buffer.append("\n[[Category:").append(categories.get(i)).append("]]");
-                        }
-                    } else {
-                        buffer.append("{{subst:unc}}");
-                    }
-                    String categoryWikitext = buffer.toString();
-                    Log.d("deneme8", "categoryWikitext:"+categoryWikitext);
-                    pageContentCategoriesRemoved += categoryWikitext;
-                    return pageEditClient.edit(media.getFilename(), pageContentCategoriesRemoved + "\n", summary);
-                }).blockingSingle();
-        }catch (Throwable throwable) {
-            return Observable.just(false);
-        }
-    }
-*/
     /**
      * Appends new categories
      * @param media
@@ -136,10 +90,10 @@ public class CategoryEditHelper {
 
     private boolean showCategoryEditNotification(Context context, Media media, boolean result) {
         String message;
-        String title = context.getString(R.string.category_edit_helper_show_deletion_title);
+        String title = context.getString(R.string.category_edit_helper_show_edit_title);
 
         if (result) {
-            title += ": " + context.getString(R.string.category_edit_helper_show_deletion_title_success);
+            title += ": " + context.getString(R.string.category_edit_helper_show_edit_title_success);
             StringBuilder categoriesInMessage = new StringBuilder();
             List<String> mediaCategoryList = media.getCategories();
             for (String category : mediaCategoryList) {
@@ -150,15 +104,15 @@ public class CategoryEditHelper {
                 categoriesInMessage.append(",");
             }
 
-            message = context.getResources().getQuantityString(R.plurals.category_edit_helper_show_deletion_message_if, mediaCategoryList.size(), categoriesInMessage.toString());
+            message = context.getResources().getQuantityString(R.plurals.category_edit_helper_show_edit_message_if, mediaCategoryList.size(), categoriesInMessage.toString());
         } else {
-            title += ": " + context.getString(R.string.category_edit_helper_show_deletion_title);
-            message = context.getString(R.string.delete_helper_show_deletion_message_else) ;
+            title += ": " + context.getString(R.string.category_edit_helper_show_edit_title);
+            message = context.getString(R.string.category_edit_helper_edit_message_else) ;
         }
 
         String urlForFile = BuildConfig.COMMONS_URL + "/wiki/" + media.getFilename();
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlForFile));
-        notificationHelper.showNotification(context, title, message, NOTIFICATION_DELETE, browserIntent);
+        notificationHelper.showNotification(context, title, message, 2, browserIntent);
         return result;
     }
 }
