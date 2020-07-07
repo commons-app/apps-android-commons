@@ -180,7 +180,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @BindView(R.id.no_results_found)
     TextView noResultsFound;
 
-    private ArrayList<String> categoryNames;
+    private ArrayList<String> categoryNames = new ArrayList<>();
     private String categorySearchQuery;
 
     /**
@@ -505,6 +505,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         } else {
             mediaCaption.setText(prettyCaption(media));
         }
+
         categoryNames.clear();
         categoryNames.addAll(media.getCategories());
         categoryEditSearchRecyclerViewAdapter.addToCategories(media.getCategories());
@@ -517,8 +518,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         }
 
         rebuildCatList(categories);
-
-
 
         if (media.getCreator() == null || media.getCreator().equals("")) {
             authorLayout.setVisibility(GONE);

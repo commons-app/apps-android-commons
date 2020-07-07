@@ -304,15 +304,15 @@
                         android:orientation="vertical">
                     </LinearLayout>
 
-                    <Button
-                      android:id="@+id/categoryEditButton"
-                      android:layout_width="0dp"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="5"
-                      android:layout_margin="@dimen/standard_gap"
-                      android:background="@drawable/ic_edit_black_24dp" />
-
                 </LinearLayout>
+
+                <Button
+                  android:id="@+id/categoryEditButton"
+                  android:layout_width="24dp"
+                  android:layout_height="24dp"
+                  android:layout_margin="@dimen/standard_gap"
+                  android:layout_gravity="end"
+                  android:background="@drawable/ic_baseline_edit_24" />
 
                 <LinearLayout
                     style="@style/MediaDetailContainer"
