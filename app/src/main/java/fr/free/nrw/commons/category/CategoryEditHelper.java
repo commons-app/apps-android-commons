@@ -22,20 +22,17 @@ public class CategoryEditHelper {
     private final NotificationHelper notificationHelper;
     private final PageEditClient pageEditClient;
     private final ViewUtilWrapper viewUtil;
-    private final CategoryEditInterface categoryEditInterface;
     private final String username;
 
     @Inject
     public CategoryEditHelper(NotificationHelper notificationHelper,
         @Named("commons-page-edit") PageEditClient pageEditClient,
         ViewUtilWrapper viewUtil,
-        @Named("username") String username,
-        CategoryEditInterface categoryEditInterface) {
+        @Named("username") String username) {
         this.notificationHelper = notificationHelper;
         this.pageEditClient = pageEditClient;
         this.viewUtil = viewUtil;
         this.username = username;
-        this.categoryEditInterface = categoryEditInterface;
     }
 
     /**
