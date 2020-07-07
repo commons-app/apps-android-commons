@@ -85,9 +85,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
     private int index;
     private boolean isDeleted = false;
+    private boolean isWikipediaButtonDisplayed;
 
 
-    public static MediaDetailFragment forMedia(int index, boolean editable, boolean isCategoryImage) {
+    public static MediaDetailFragment forMedia(int index, boolean editable, boolean isCategoryImage, boolean isWikipediaButtonDisplayed) {
         MediaDetailFragment mf = new MediaDetailFragment();
 
         Bundle state = new Bundle();
@@ -96,6 +97,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         state.putInt("index", index);
         state.putInt("listIndex", 0);
         state.putInt("listTop", 0);
+        state.putBoolean("isWikipediaButtonDisplayed", isWikipediaButtonDisplayed);
 
         mf.setArguments(state);
 
@@ -206,6 +208,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         outState.putInt("index", index);
         outState.putBoolean("editable", editable);
         outState.putBoolean("isCategoryImage", isCategoryImage);
+        outState.putBoolean("isWikipediaButtonDisplayed", isWikipediaButtonDisplayed);
 
         getScrollPosition();
         outState.putInt("listTop", initialListTop);
@@ -225,11 +228,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
             isCategoryImage = savedInstanceState.getBoolean("isCategoryImage");
+            isWikipediaButtonDisplayed = savedInstanceState.getBoolean("isWikipediaButtonDisplayed");
             index = savedInstanceState.getInt("index");
             initialListTop = savedInstanceState.getInt("listTop");
         } else {
             editable = getArguments().getBoolean("editable");
             isCategoryImage = getArguments().getBoolean("isCategoryImage");
+            isWikipediaButtonDisplayed = getArguments().getBoolean("isWikipediaButtonDisplayed");
             index = getArguments().getInt("index");
             initialListTop = 0;
         }
@@ -462,19 +467,19 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     private void updateToDoWarning() {
         String toDoMessage = "";
-        boolean toDoNeeded;
+        boolean toDoNeeded = false;
         boolean categoriesPresent = media.getCategories() == null ? false : true;
-        if (categoriesPresent) {
+        if (!categoriesPresent) {
             toDoNeeded = true;
             toDoMessage += getString(R.string.missing_category);
         }
-        // TODO: from mediaclient after viveks changes are merged
-        if (true) {
+        if (isWikipediaButtonDisplayed) {
             toDoNeeded = true;
             toDoMessage += (toDoMessage.isEmpty()) ? "" : "\n" + getString(R.string.missing_article);
         }
 
         if (toDoNeeded) {
+            toDoMessage = getString(R.string.todo_improve) + "\n" + toDoMessage;
             toDoLayout.setVisibility(VISIBLE);
             toDoReason.setText(toDoMessage);
         } else {

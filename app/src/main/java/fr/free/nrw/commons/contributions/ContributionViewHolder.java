@@ -49,6 +49,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
   private Contribution contribution;
   private final CompositeDisposable compositeDisposable = new CompositeDisposable();
   private final MediaClient mediaClient;
+  private boolean isWikipediaButtonDisplayed;
 
   ContributionViewHolder(final View parent, final Callback callback,
       final MediaClient mediaClient) {
@@ -141,6 +142,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
   private void displayWikipediaButton(Boolean mediaExists) {
     if (!mediaExists) {
       addToWikipediaButton.setVisibility(View.VISIBLE);
+      isWikipediaButtonDisplayed = true;
       cancelButton.setVisibility(View.GONE);
       retryButton.setVisibility(View.GONE);
       imageOptions.setVisibility(View.VISIBLE);
@@ -180,7 +182,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
   @OnClick(R.id.contributionImage)
   public void imageClicked() {
-    callback.openMediaDetail(position);
+    callback.openMediaDetail(position, isWikipediaButtonDisplayed);
   }
 
   @OnClick(R.id.wikipediaButton)

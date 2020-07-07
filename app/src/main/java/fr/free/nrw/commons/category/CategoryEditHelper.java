@@ -1,32 +1,21 @@
 package fr.free.nrw.commons.category;
 
-import static fr.free.nrw.commons.notification.NotificationHelper.NOTIFICATION_DELETE;
+import static fr.free.nrw.commons.notification.NotificationHelper.NOTIFICATION_EDIT_CATEGORY;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.actions.PageEditClient;
-import fr.free.nrw.commons.media.MwParseResponse;
-import fr.free.nrw.commons.media.MwParseResult;
 import fr.free.nrw.commons.notification.NotificationHelper;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import timber.log.Timber;
 
 public class CategoryEditHelper {
@@ -112,7 +101,7 @@ public class CategoryEditHelper {
 
         String urlForFile = BuildConfig.COMMONS_URL + "/wiki/" + media.getFilename();
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlForFile));
-        notificationHelper.showNotification(context, title, message, 2, browserIntent);
+        notificationHelper.showNotification(context, title, message, NOTIFICATION_EDIT_CATEGORY, browserIntent);
         return result;
     }
 }

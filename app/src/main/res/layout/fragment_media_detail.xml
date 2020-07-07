@@ -110,6 +110,7 @@
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="vertical"
+                  android:visibility="gone"
                   android:background="@color/layout_light_grey"
                   >
 
@@ -118,12 +119,6 @@
                       android:layout_height="wrap_content"
                       style="@style/MediaDetailTextLabel"
                       android:text="@string/warning" />
-
-                    <TextView
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      style="@style/MediaDetailTextBody"
-                      android:text="@string/todo_improve" />
 
                     <TextView
                       android:id="@+id/toDoReason"
