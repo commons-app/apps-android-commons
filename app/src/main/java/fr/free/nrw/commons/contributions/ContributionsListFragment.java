@@ -30,6 +30,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.utils.DialogUtil;
+import fr.free.nrw.commons.media.MediaClient;
 import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Named;

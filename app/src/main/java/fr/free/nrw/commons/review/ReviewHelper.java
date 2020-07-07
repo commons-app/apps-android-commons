@@ -2,6 +2,7 @@ package fr.free.nrw.commons.review;
 
 
 import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.media.MediaClient;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.util.Collections;

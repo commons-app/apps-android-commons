@@ -2,6 +2,7 @@ package fr.free.nrw.commons.bookmarks.pictures;
 
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.bookmarks.Bookmark;
+import fr.free.nrw.commons.media.MediaClient;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Single;

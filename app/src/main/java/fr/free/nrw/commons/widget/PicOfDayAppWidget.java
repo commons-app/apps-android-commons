@@ -23,6 +23,7 @@ import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
+import fr.free.nrw.commons.media.MediaClient;
 import javax.inject.Inject;
 
 import fr.free.nrw.commons.R;
@@ -42,7 +43,8 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    @Inject MediaClient mediaClient;
+    @Inject
+    MediaClient mediaClient;
 
     void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.pic_of_day_app_widget);
