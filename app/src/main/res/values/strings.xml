@@ -646,8 +646,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="nearby_no_results">No places found, try changing your search criteria.</string>
 
   <string name="todo_improve">You can improve free knowledge as following</string>
-  <string name="missing_category">- Images that they uploaded with no categories/descriptions, so that they can add them.</string>
-  <string name="missing_article">- Image that can be added to associated Wikipedia articles that have no pictures.</string>
+  <string name="missing_category">- Images that they uploaded with no categories, you can add them.</string>
+  <string name="missing_article">- Image that can be added to associated Wikipedia articles that have no pictures. You can associate it.</string>
   <string name="edit_category">Edit categories</string>
   <string name="add_picture_to_wikipedia_article_title">Add image to Wikipedia</string>
   <string name="add_picture_to_wikipedia_article_desc">Do you want to add this picture to the %1$s language Wikipedia article?</string>
