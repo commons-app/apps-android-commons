@@ -300,6 +300,7 @@ public class  Contribution extends Media {
         dest.writeString(this.p18Value);
         dest.writeParcelable(this.contentProviderUri, flags);
         dest.writeString(this.dateCreatedSource);
+        dest.writeInt(this.hasInvalidLocation);
     }
 
     protected Contribution(Parcel in) {
@@ -317,6 +318,7 @@ public class  Contribution extends Media {
         this.p18Value = in.readString();
         this.contentProviderUri = in.readParcelable(Uri.class.getClassLoader());
         this.dateCreatedSource = in.readString();
+        this.hasInvalidLocation=in.readInt();
     }
 
     public static final Creator<Contribution> CREATOR = new Creator<Contribution>() {
