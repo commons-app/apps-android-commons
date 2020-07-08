@@ -159,7 +159,7 @@ class UploadMediaPresenterTest {
     @Test
     fun handleBadImageBaseTestInvalidLocation() {
         uploadMediaPresenter.handleBadImage(8, uploadItem)
-        verify(repository).saveValue(ArgumentMatchers.anyString(), eq(false))
+        verify(uploadItem).setHasInvalidLocation(true)
         verify(view).showBadImagePopup(8)
     }
 
