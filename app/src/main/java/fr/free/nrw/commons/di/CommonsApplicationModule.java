@@ -7,6 +7,8 @@ import android.content.Context;
 import android.view.inputmethod.InputMethodManager;
 import androidx.collection.LruCache;
 import androidx.room.Room;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.github.varunpant.quadtree.QuadTree;
 import com.google.gson.Gson;
 import dagger.Module;
@@ -51,6 +53,14 @@ public class CommonsApplicationModule {
     public static final String IO_THREAD="io_thread";
     public static final String MAIN_THREAD="main_thread";
     private AppDatabase appDatabase;
+
+    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE contribution "
+                + " ADD COLUMN hasInvalidLocation INTEGER");
+        }
+    };
 
     public CommonsApplicationModule(Context applicationContext) {
         this.applicationContext = applicationContext;
@@ -231,7 +241,9 @@ public class CommonsApplicationModule {
     @Provides
     @Singleton
     public AppDatabase provideAppDataBase() {
-        appDatabase=Room.databaseBuilder(applicationContext, AppDatabase.class, "commons_room.db").build();
+        appDatabase=Room.databaseBuilder(applicationContext, AppDatabase.class, "commons_room.db")
+            .addMigrations(MIGRATION_1_2)
+            .build();
         return appDatabase;
     }
 

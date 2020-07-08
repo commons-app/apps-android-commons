@@ -60,6 +60,15 @@ public class  Contribution extends Media {
     private String p18Value;
     public Uri contentProviderUri;
     public String dateCreatedSource;
+    public int hasInvalidLocation;
+
+    public void setHasInvalidLocation(boolean hasInvalidLocation) {
+        this.hasInvalidLocation = hasInvalidLocation?1:0;
+    }
+
+    public boolean isHasInvalidLocation() {
+        return hasInvalidLocation==1;
+    }
 
     public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,
                         int state, long dataLength, Date dateUploaded, long transferred,
@@ -268,6 +277,7 @@ public class  Contribution extends Media {
     public void setContentProviderUri(Uri contentProviderUri) {
         this.contentProviderUri = contentProviderUri;
     }
+
 
     @Override
     public int describeContents() {

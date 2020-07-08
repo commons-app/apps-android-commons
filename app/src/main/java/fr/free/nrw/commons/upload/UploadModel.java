@@ -172,6 +172,7 @@ public class UploadModel {
             contribution.setSource(item.source);
             contribution.setContentProviderUri(item.mediaUri);
             contribution.setDateUploaded(new Date());
+            contribution.setHasInvalidLocation(item.hasInvalidLocation);
 
             Timber.d("Created timestamp while building contribution is %s, %s",
                     item.getCreatedTimestamp(),
@@ -221,6 +222,7 @@ public class UploadModel {
         private final String mimeType;
         private final String source;
         private ImageCoordinates gpsCoords;
+        private boolean hasInvalidLocation;
 
         public void setGpsCoords(ImageCoordinates gpsCoords) {
             this.gpsCoords = gpsCoords;
@@ -325,6 +327,10 @@ public class UploadModel {
         @Override
         public int hashCode() {
             return mediaUri.hashCode();
+        }
+
+        public void setHasInvalidLocation(boolean hasInvalidLocation) {
+            this.hasInvalidLocation=hasInvalidLocation;
         }
     }
 

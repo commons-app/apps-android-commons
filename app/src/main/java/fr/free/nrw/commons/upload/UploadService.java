@@ -282,7 +282,15 @@ public class UploadService extends HandlerService<Contribution> {
                         Timber.d("Contribution upload success. Initiating Wikidata edit for"
                                 + " entity id %s if necessary (if P18 is null). P18 value is %s",
                                 contribution.getWikiDataEntityId(), contribution.getP18Value());
-                        wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(), contribution.getWikiItemName(), canonicalFilename, contribution.getP18Value());
+                        if (!contribution.isHasInvalidLocation()) {
+                            wikidataEditService
+                                .createClaimWithLogging(contribution.getWikiDataEntityId(),
+                                    contribution.getWikiItemName(), canonicalFilename,
+                                    contribution.getP18Value());
+                        } else {
+                            Timber
+                                .d("Image location and nearby place location mismatched, so Wikidata item won't be edited");
+                        }
                         contribution.setFilename(canonicalFilename);
                         contribution.setImageUrl(uploadResult.getImageinfo().getOriginalUrl());
                         contribution.setState(Contribution.STATE_COMPLETED);

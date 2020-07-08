@@ -120,7 +120,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                 .observeOn(mainThreadScheduler)
                 .subscribe(imageResult -> {
                             view.showProgress(false);
-                            handleImageResult(imageResult);
+                            handleImageResult(imageResult,uploadItem);
                         },
                         throwable -> {
                             view.showProgress(false);
@@ -165,13 +165,16 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
   /**
      * handles image quality verifications
      *
-     * @param imageResult
-     */
-    public void handleImageResult(Integer imageResult) {
+   * @param imageResult
+   * @param uploadItem
+   */
+    public void handleImageResult(Integer imageResult,
+        UploadItem uploadItem) {
         if (imageResult == IMAGE_KEEP || imageResult == IMAGE_OK) {
             view.onImageValidationSuccess();
+            uploadItem.setHasInvalidLocation(false);
         } else {
-            handleBadImage(imageResult);
+            handleBadImage(imageResult,uploadItem);
         }
     }
 
@@ -179,12 +182,14 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * Handle  images, say empty title, duplicate file name, bad picture(in all other cases)
      *
      * @param errorCode
+     * @param uploadItem
      */
-    public void handleBadImage(Integer errorCode) {
+    public void handleBadImage(Integer errorCode,
+        UploadItem uploadItem) {
         Timber.d("Handle bad picture with error code %d", errorCode);
         if (errorCode
                 >= 8) { // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
-            repository.saveValue("Picture_Has_Correct_Location", false);
+            uploadItem.setHasInvalidLocation(true);
         }
 
         switch (errorCode) {

@@ -242,13 +242,14 @@ class BookMarkLocationDaoTest {
     fun migrateTableVersionFrom_v6_to_v7() {
         onUpdate(database, 6, 7)
         // Table didnt change in version 7
-        verifyZeroInteractions(database)
+        verify(database).execSQL(CREATE_TABLE_STATEMENT)
     }
 
     @Test
     fun migrateTableVersionFrom_v7_to_v8() {
         onUpdate(database, 7, 8)
-        verify(database).execSQL(CREATE_TABLE_STATEMENT)
+        // Table didnt change in version 8
+        verifyZeroInteractions(database)
     }
 
     private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
