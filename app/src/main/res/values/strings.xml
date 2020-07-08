@@ -651,4 +651,9 @@ Upload your first media by tapping on the add button.</string>
   <string name="copy_wikicode_to_clipboard">Copy wikicode to clipboard</string>
   <string name="achievements_tab_title">Achievements</string>
   <string name="leaderboard_tab_title">Leaderboard</string>
+  <string name="rank_prefix">Rank:</string>
+  <string name="count_prefix">Count:</string>
+  <string name="leaderboard_column_rank">Rank</string>
+  <string name="leaderboard_column_user">User</string>
+  <string name="leaderboard_column_count">Count</string>
 </resources>
