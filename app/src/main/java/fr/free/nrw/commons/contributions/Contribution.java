@@ -62,12 +62,16 @@ public class  Contribution extends Media {
     public String dateCreatedSource;
     public int hasInvalidLocation;
 
+    /**
+     * Set this true when ImageProcessor has said that the location is invalid
+     * @param hasInvalidLocation
+     */
     public void setHasInvalidLocation(boolean hasInvalidLocation) {
-        this.hasInvalidLocation = hasInvalidLocation?1:0;
+        this.hasInvalidLocation = hasInvalidLocation ? 1 : 0;
     }
 
     public boolean isHasInvalidLocation() {
-        return hasInvalidLocation==1;
+        return hasInvalidLocation == 1;
     }
 
     public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,
@@ -318,7 +322,7 @@ public class  Contribution extends Media {
         this.p18Value = in.readString();
         this.contentProviderUri = in.readParcelable(Uri.class.getClassLoader());
         this.dateCreatedSource = in.readString();
-        this.hasInvalidLocation=in.readInt();
+        this.hasInvalidLocation = in.readInt();
     }
 
     public static final Creator<Contribution> CREATOR = new Creator<Contribution>() {
