@@ -554,4 +554,15 @@ public class Media implements Parcelable {
         this.coordinates = in.readParcelable(LatLng.class.getClassLoader());
     }
 
+    public static final Creator<Media> CREATOR = new Creator<Media>() {
+        @Override
+        public Media createFromParcel(Parcel source) {
+            return new Media(source);
+        }
+
+        @Override
+        public Media[] newArray(int size) {
+            return new Media[size];
+        }
+    };
 }
