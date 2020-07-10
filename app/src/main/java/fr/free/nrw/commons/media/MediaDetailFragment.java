@@ -2,7 +2,9 @@ package fr.free.nrw.commons.media;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_NEEDING_CATEGORIES;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_PREFIX;
+import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_UNCATEGORISED;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -469,6 +471,16 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         String toDoMessage = "";
         boolean toDoNeeded = false;
         boolean categoriesPresent = media.getCategories() == null ? false : true;
+        // Check if the presented category is about need of category
+        if (categoriesPresent) {
+            for (String category : media.getCategories()) {
+                if (category.toLowerCase().contains(CATEGORY_NEEDING_CATEGORIES) ||
+                    category.toLowerCase().contains(CATEGORY_UNCATEGORISED)) {
+                    categoriesPresent = false;
+                }
+                break;
+            }
+        }
         if (!categoriesPresent) {
             toDoNeeded = true;
             toDoMessage += getString(R.string.missing_category);
