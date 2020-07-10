@@ -95,7 +95,9 @@
   <string name="upload_progress_notification_title_in_progress">Wysyłanie %1$s</string>
   <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$s</string>
   <string name="upload_failed_notification_title">Wysyłanie %1$s nieudane</string>
+  <string name="upload_paused_notification_title">Zatrzymano przesyłanie %1$ plików</string>
   <string name="upload_failed_notification_subtitle">Dotknij, aby zobaczyć</string>
+  <string name="upload_paused_notification_subtitle">Dotknij, aby zobaczyć</string>
   <string name="title_activity_contributions">Niedawno przesłane</string>
   <string name="contribution_state_queued">W kolejce</string>
   <string name="contribution_state_failed">Porażka</string>
@@ -643,4 +645,7 @@
   <string name="wikipedia_instructions_step_6">6. Edytuj wikitekst w celu odpowiedniego pozycjonowania, jeśli to konieczne. Aby uzyskać więcej informacji, zobacz &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;here&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Opublikuj artykuł</string>
   <string name="copy_wikicode_to_clipboard">Skopiuj wikicode do schowka</string>
+  <string name="pause">zatrzymaj</string>
+  <string name="resume">wznów</string>
+  <string name="paused">Zatrzymano</string>
 </resources>

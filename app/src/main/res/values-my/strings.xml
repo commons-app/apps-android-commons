@@ -2,6 +2,7 @@
 <!-- Authors:
 * Dr Lotus Black
 * Ninjastrikers
+* Teitei Para
 -->
 <resources>
   <plurals name="uploads_pending_notification_indicator">
@@ -49,6 +50,8 @@
   <string name="upload_progress_notification_title_in_progress">%1$s ဖိုင်တင်နေသည်</string>
   <string name="upload_progress_notification_title_finishing">ဖိုင်တင်ခြင်း ပြီးဆုံးမှု %1$s</string>
   <string name="upload_failed_notification_title">ဖိုင်တင်ခြင်း %1$s မအောင်မြင်ပါ</string>
+  <string name="upload_paused_notification_title">ဖိုင်တင်ခြင်း %1$s မအောင်မြင်ပါ</string>
+  <string name="upload_paused_notification_subtitle">ကြည့်ရန်နှိပ်ပါ</string>
   <string name="title_activity_contributions">မကြာသေးခင်က မိမိတင်ထားသည်များ</string>
   <string name="contribution_state_failed">မအောင်မြင်ပါ</string>
   <string name="contribution_state_in_progress">%1$d%% ပြီးဆုံး</string>
@@ -374,4 +377,7 @@
   <string name="notification_mark_read">အသိပေးချက်ကို ဖတ်ပြီးကြောင်းမှတ်သားပြီးပြီ</string>
   <string name="some_error">အမှားအယွင်းအချို့ရှိခဲ့သည်</string>
   <string name="upload_nearby_place_found_title">အနီးအနားနေရာ တွေ့ရှိသည်</string>
+  <string name="pause">ခေတ္တရပ်</string>
+  <string name="resume">ခေတ္တရပ်နားရာမှ ပြန်လုပ်ရန်</string>
+  <string name="paused">ခေတ္တရပ်ပြီး</string>
 </resources>

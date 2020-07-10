@@ -14,6 +14,7 @@
 * Looong
 * Qiyue2001
 * Shizhao
+* Shuiwater
 * SomeyaMako
 * VulpesVulpes825
 * Wxyveronica
@@ -87,7 +88,9 @@
   <string name="upload_progress_notification_title_in_progress">%1$s正在上传</string>
   <string name="upload_progress_notification_title_finishing">正在完成上传%1$s</string>
   <string name="upload_failed_notification_title">上传%1$s失败</string>
+  <string name="upload_paused_notification_title">上传%1$s已暂停</string>
   <string name="upload_failed_notification_subtitle">点击查看</string>
+  <string name="upload_paused_notification_subtitle">点击查看</string>
   <string name="title_activity_contributions">我的最近上传</string>
   <string name="contribution_state_queued">已入队列</string>
   <string name="contribution_state_failed">失败</string>
@@ -590,4 +593,7 @@
   <string name="confirm">确认</string>
   <string name="instructions_title">说明</string>
   <string name="copy_wikicode_to_clipboard">复制维基代码到剪贴板</string>
+  <string name="pause">暂停</string>
+  <string name="resume">继续</string>
+  <string name="paused">已暂停</string>
 </resources>

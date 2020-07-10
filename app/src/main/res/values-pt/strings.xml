@@ -77,7 +77,9 @@
   <string name="upload_progress_notification_title_in_progress">A carregar %1$s</string>
   <string name="upload_progress_notification_title_finishing">A terminar o carregamento de %1$s</string>
   <string name="upload_failed_notification_title">O carregamento de %1$s falhou</string>
+  <string name="upload_paused_notification_title">Carregamento de %1$s em pausa</string>
   <string name="upload_failed_notification_subtitle">Tocar para ver</string>
+  <string name="upload_paused_notification_subtitle">Tocar para ver</string>
   <string name="title_activity_contributions">Carregamentos recentes</string>
   <string name="contribution_state_queued">Em espera</string>
   <string name="contribution_state_failed">Falhado</string>
@@ -90,7 +92,9 @@
   <string name="menu_share">Partilhar</string>
   <string name="menu_open_in_browser">Ver no navegador</string>
   <string name="share_title_hint">Legenda (obrigatória)</string>
+  <string name="add_caption_toast">Forneça uma legenda para este ficheiro, por favor</string>
   <string name="share_description_hint">Descrição</string>
+  <string name="share_caption_hint">Legenda (limite de 255 caracteres)</string>
   <string name="login_failed_network">Não é possível iniciar uma sessão - falha de rede</string>
   <string name="login_failed_wrong_credentials">Não é possível iniciar uma sessão - verifique o seu nome de utilizador e a palavra-passe, por favor</string>
   <string name="login_failed_throttled">Demasiadas tentativas mal sucedidas. Por favor, tente novamente dentro de minutos.</string>
@@ -103,6 +107,7 @@
   <string name="provider_modifications">Modificações</string>
   <string name="menu_upload_single">Carregar</string>
   <string name="categories_search_text_hint">Pesquisar categorias</string>
+  <string name="depicts_search_text_hint">Procurar elementos que o seu conteúdo multimédia retrata (montanha, o Taj Mahal, etc.)</string>
   <string name="menu_save_categories">Gravar</string>
   <string name="refresh_button">Atualizar</string>
   <string name="display_list_button">Lista</string>
@@ -110,6 +115,10 @@
   <string name="enable_gps">Ativar GPS</string>
   <string name="contributions_subtitle_zero">Ainda não foram enviados ficheiros</string>
   <string name="categories_not_found">Não foi encontrada nenhuma categoria que corresponda a %1$s</string>
+  <string name="depictions_not_found">Não foi encontrado nenhum elemento Wikidata que corresponda a %1$s</string>
+  <string name="no_child_classes">%1$s não tem nenhuma classe descendente</string>
+  <string name="no_parent_classes">%1$s não tem nenhuma classe progenitora</string>
+  <string name="depictions_image_not_found">Não há nenhuma imagem para a representação</string>
   <string name="categories_skip_explanation">Adicione categorias para tornar as suas imagens mais fáceis de encontrar na wiki Wikimedia Commons.\nComece a escrever para adicionar categorias.</string>
   <string name="categories_activity_title">Categorias</string>
   <string name="title_activity_settings">Configurações</string>
@@ -126,6 +135,7 @@
   <string name="menu_feedback">Enviar comentários (por correio eletrónico)</string>
   <string name="no_email_client">Não foi instalado nenhum cliente de correio eletrónico</string>
   <string name="provider_categories">Categorias usadas recentemente</string>
+  <string name="provider_depictions">Representações usadas recentemente</string>
   <string name="waiting_first_sync">A aguardar pela primeira sincronização…</string>
   <string name="no_uploads_yet">Não carregou ainda nenhuma foto.</string>
   <string name="menu_retry_upload">Tentar novamente</string>
@@ -136,7 +146,7 @@
   <string name="use_previous">Usar título e descrição anteriores</string>
   <string name="allow_gps">Obter automaticamente a localização atual</string>
   <string name="allow_gps_summary">Se a imagem não estiver georreferenciada, obtém a localização atual e georreferencia a imagem com ela. Aviso: isto revela a sua localização corrente.</string>
-  <string name="preference_theme" fuzzy="true">Modo noturno</string>
+  <string name="preference_theme">Tema</string>
   <string name="license_name_cc_by_sa_four">Atribuição-CompartilhaIgual 4.0</string>
   <string name="license_name_cc_by_four">Atribuição 4.0</string>
   <string name="license_name_cc_by_sa"> Atribuição–CompartilhaIgual 3.0</string>
@@ -182,7 +192,8 @@
   <string name="detail_panel_cats_loading">A carregar…</string>
   <string name="detail_panel_cats_none">Nenhuma selecionada</string>
   <string name="detail_caption_empty">Sem legenda</string>
-  <string name="detail_description_empty">Sem descrição</string>
+  <string name="detail_depiction_empty">Não há nenhuma representação</string>
+  <string name="detail_description_empty">Não há nenhuma descrição</string>
   <string name="detail_discussion_empty">Não há nenhuma discussão</string>
   <string name="detail_license_empty">Licença desconhecida</string>
   <string name="menu_refresh">Atualizar</string>
@@ -195,11 +206,14 @@
   <string name="title_activity_nearby">Locais Próximos</string>
   <string name="no_nearby">Não foi encontrado nenhum local próximo</string>
   <string name="warning">Aviso</string>
-  <string name="upload_image_duplicate">Este ficheiro já existe na wiki Commons. Tem a certeza de que deseja continuar?</string>
+  <string name="duplicate_image_found">Foi encontrada uma imagem duplicada</string>
+  <string name="upload_image_duplicate">Este ficheiro já foi destruído na wiki Commons. Tem a certeza de que deseja continuar?</string>
+  <string name="upload">Carregar</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
   <string name="media_detail_caption">Legenda</string>
   <string name="media_detail_title">Título</string>
+  <string name="media_detail_depiction">Representações</string>
   <string name="media_detail_description">Descrição</string>
   <string name="media_detail_discussion">Discussão</string>
   <string name="media_detail_author">Autor</string>
@@ -573,4 +587,8 @@
   <string name="wallpaper_set_unsuccessfully">Ocorreu um problema. Não foi possível definir a imagem de fundo</string>
   <string name="setting_wallpaper_dialog_title">Definir como imagem de fundo</string>
   <string name="setting_wallpaper_dialog_message">A definir a imagem de fundo. Aguarde, por favor...</string>
+  <string name="copy_wikicode_to_clipboard">Copiar código wiki para a área de transferência</string>
+  <string name="pause">pausar</string>
+  <string name="resume">continuar</string>
+  <string name="paused">Em pausa</string>
 </resources>

@@ -75,7 +75,9 @@
   <string name="upload_progress_notification_title_in_progress">Sto caricando %1$s</string>
   <string name="upload_progress_notification_title_finishing">Terminato il caricamento di %1$s</string>
   <string name="upload_failed_notification_title">Caricamento di %1$s non riuscito</string>
+  <string name="upload_paused_notification_title">Caricamento di %1$s in pausa</string>
   <string name="upload_failed_notification_subtitle">Premi per visualizzare</string>
+  <string name="upload_paused_notification_subtitle">Premi per visualizzare</string>
   <string name="title_activity_contributions">I miei ultimi caricamenti</string>
   <string name="contribution_state_queued">In coda</string>
   <string name="contribution_state_failed">Non riuscito</string>
@@ -548,4 +550,7 @@
   <string name="wikipedia_instructions_step_6">6. Modifica il wikitesto per il posizionamento appropriato, se necessario. Per ulteriori informazioni vedi &lt;a href=\"https://it.wikipedia.org/wiki/Aiuto:Markup_immagini\"&gt;questa pagina&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Pubblica la voce</string>
   <string name="copy_wikicode_to_clipboard">Copia il wikicodice negli appunti</string>
+  <string name="pause">pausa</string>
+  <string name="resume">riprendi</string>
+  <string name="paused">In pausa</string>
 </resources>

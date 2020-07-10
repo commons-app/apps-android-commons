@@ -81,7 +81,9 @@
   <string name="upload_progress_notification_title_in_progress">%1$s yükleniyor</string>
   <string name="upload_progress_notification_title_finishing">%1$s yüklemesi bitiriliyor</string>
   <string name="upload_failed_notification_title">%1$s dosyasının yüklemesi başarısız oldu</string>
-  <string name="upload_failed_notification_subtitle">Görüntülemek için dokunun</string>
+  <string name="upload_paused_notification_title">%1$s yükleme duraklatıldı</string>
+  <string name="upload_failed_notification_subtitle">Görüntülemek için tıklayın</string>
+  <string name="upload_paused_notification_subtitle">Görüntülemek için tıklayın</string>
   <string name="title_activity_contributions">Son Yüklemelerim</string>
   <string name="contribution_state_queued">Sırada</string>
   <string name="contribution_state_failed">Başarısız</string>
@@ -629,4 +631,7 @@
   <string name="wikipedia_instructions_step_6">6. Gerekirse vikimetini uygun konumlandırma için düzenleyin. Daha fazla bilgi için &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;buraya&lt;/a&gt; bakın.</string>
   <string name="wikipedia_instructions_step_7">7. Maddeyi yayınlayın</string>
   <string name="copy_wikicode_to_clipboard">Vikikodu panoya kopyala</string>
+  <string name="pause">duraklat</string>
+  <string name="resume">devam et</string>
+  <string name="paused">Durduruldu</string>
 </resources>

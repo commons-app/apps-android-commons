@@ -65,7 +65,9 @@
   <string name="upload_progress_notification_title_in_progress">Подигање на „%1$s“</string>
   <string name="upload_progress_notification_title_finishing">Завршувам со подигање на „%1$s“</string>
   <string name="upload_failed_notification_title">Подигањето на „%1$s“ не успеа</string>
+  <string name="upload_paused_notification_title">Подигањето на %1$s е запрено</string>
   <string name="upload_failed_notification_subtitle">Допрете за да погледате</string>
+  <string name="upload_paused_notification_subtitle">Допрете за да погледате</string>
   <string name="title_activity_contributions">Мои скорешни подигања</string>
   <string name="contribution_state_queued">Чека ред</string>
   <string name="contribution_state_failed">Не успеа</string>
@@ -613,4 +615,7 @@
   <string name="wikipedia_instructions_step_6">6. По потреба, уредете го викитекстот за да ја ставите сликата во прикладна положба во одност на текстот. Повеќе информации за тоа ќе видите &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;тука&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Објавете ја статијата</string>
   <string name="copy_wikicode_to_clipboard">Прекопирајте го викикодот во меѓускладот</string>
+  <string name="pause">запри</string>
+  <string name="resume">продолжи</string>
+  <string name="paused">Запрено</string>
 </resources>

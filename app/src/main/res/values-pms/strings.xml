@@ -63,7 +63,9 @@
   <string name="upload_progress_notification_title_in_progress">%1$s carià</string>
   <string name="upload_progress_notification_title_finishing">Fin dël cariament %1$s</string>
   <string name="upload_failed_notification_title">Cariament falì a %1$s</string>
+  <string name="upload_paused_notification_title">Cariament %1$s an pàusa</string>
   <string name="upload_failed_notification_subtitle">Sgnaché për ësmon-e</string>
+  <string name="upload_paused_notification_subtitle">Sgnaché për vëdde</string>
   <string name="title_activity_contributions">Ij mè cariament recent</string>
   <string name="contribution_state_queued">An coa</string>
   <string name="contribution_state_failed">Falì</string>
@@ -611,4 +613,7 @@
   <string name="wikipedia_instructions_step_6">6. Modifiché ël wikitest për posissionelo bin, si necessari. Për pi d\'anformassion, vëdde &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;here&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Publiché l\'artìcol</string>
   <string name="copy_wikicode_to_clipboard">Copié ël còdes wiki an sla taulëtta</string>
+  <string name="pause">pàusa</string>
+  <string name="resume">ancaminé torna</string>
+  <string name="paused">An pàura</string>
 </resources>

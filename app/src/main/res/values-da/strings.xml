@@ -394,4 +394,7 @@
   <string name="add_picture_to_wikipedia_instructions_title">Instruktioner</string>
   <string name="confirm">Bekræft</string>
   <string name="instructions_title">Instruktioner</string>
+  <string name="pause">sæt på pause</string>
+  <string name="resume">genoptag</string>
+  <string name="paused">Sat på pause</string>
 </resources>

@@ -75,6 +75,7 @@
   <string name="upload_progress_notification_title_finishing">%1$s 파일 올리기를 끝내는 중</string>
   <string name="upload_failed_notification_title">%1$s 파일 올리기 실패</string>
   <string name="upload_failed_notification_subtitle">보려면 탭하세요</string>
+  <string name="upload_paused_notification_subtitle">보려면 탭하세요</string>
   <string name="title_activity_contributions">내 최근 업로드</string>
   <string name="contribution_state_queued">대기 중</string>
   <string name="contribution_state_failed">실패</string>
@@ -458,7 +459,7 @@
   <string name="unable_to_display_nearest_place">위치 권한 없이 사진이 필요한 주변 장소를 표시할 수 없습니다</string>
   <string name="never_ask_again">다시는 묻지 않음</string>
   <string name="display_location_permission_title">위치 권한 표시</string>
-  <string name="achievements_fetch_failed">무언가가 잘못되어, 저희는 당신의 업적을 가져올 수 없었습니다.</string>
+  <string name="achievements_fetch_failed">무언가가 잘못되어, 저희는 당신의 업적을 가져올 수 없었습니다</string>
   <string name="display_campaigns">캠페인 표시</string>
   <string name="display_campaigns_explanation">진행되고 있는 캠페인 보기</string>
   <string name="this_function_needs_network_connection">이 기능에는 네트워크 연결이 필요합니다. 연결 설정을 확인해 주십시오.</string>
@@ -514,7 +515,7 @@
   <string name="default_description_language">기본 설명 언어</string>
   <string name="delete_helper_show_deletion_title_success">성공</string>
   <string name="delete_helper_show_deletion_title_failed">실패</string>
-  <string name="delete_helper_show_deletion_message_else">삭제를 요청할 수 없음.</string>
+  <string name="delete_helper_show_deletion_message_else">삭제를 요청하지 못했습니다.</string>
   <string name="delete_helper_ask_spam_selfie">셀카</string>
   <string name="delete_helper_ask_spam_blurry">흐림</string>
   <string name="delete_helper_ask_spam_other">기타</string>
@@ -534,11 +535,11 @@
   <string name="place_state_needs_photo">사진 필요</string>
   <string name="place_type">장소 유형:</string>
   <string name="nearby_search_hint">다리, 박물관, 호텔 등.</string>
-  <string name="you_must_reset_your_passsword">로그인에 문제가 생겼습니다, 비밀번호를 재설정 해야합니다!!</string>
+  <string name="you_must_reset_your_passsword">로그인에 문제가 생겼습니다, 비밀번호를 재설정해야 합니다!!</string>
   <string name="title_for_media">미디어</string>
   <string name="title_for_child_classes">자식 클래스</string>
   <string name="title_for_parent_classes">부모 클래스</string>
-  <string name="upload_nearby_place_found_title">가까운 장소 발견</string>
+  <string name="upload_nearby_place_found_title">주변 장소 발견</string>
   <string name="title_app_shortcut_explore">찾아보기</string>
   <string name="title_app_shortcut_bookmark">북마크</string>
   <string name="title_app_shortcut_setting">설정</string>
@@ -549,7 +550,7 @@
   <string name="setting_wallpaper_dialog_message">배경화면을 설정 중입니다. 기다려 주십시오...</string>
   <string name="theme_dark_name">어두움</string>
   <string name="theme_light_name">밝음</string>
-  <string name="cannot_open_location_settings">위치 설정을 열지 못함. 위치를 수동으로 켜세요</string>
+  <string name="cannot_open_location_settings">위치 설정을 열지 못했습니다. 위치를 수동으로 켜주세요</string>
   <string name="ask_to_turn_location_on">위치를 켭니까?</string>
   <string name="load_more">더 불러오기</string>
   <string name="nearby_no_results">발견된 장소가 없습니다. 검색 기준을 바꾸어 보십시오.</string>
@@ -558,9 +559,12 @@
   <string name="add_picture_to_wikipedia_instructions_title">지침</string>
   <string name="confirm">확인</string>
   <string name="instructions_title">지침</string>
-  <string name="wikipedia_instructions_step_1">1.다음 위키텍스트를 사용하세요:</string>
+  <string name="wikipedia_instructions_step_1">1. 다음 위키텍스트를 사용하세요:</string>
   <string name="wikipedia_instructions_step_2">2. 확인을 클릭하면 위키백과 문서가 열립니다</string>
   <string name="wikipedia_instructions_step_5">5. 위키텍스트를 적절한 위치에 붙여 넣으세요.</string>
   <string name="wikipedia_instructions_step_7">7. 문서 게시</string>
   <string name="copy_wikicode_to_clipboard">클립보드에 위키코드 복사</string>
+  <string name="pause">일시 정지</string>
+  <string name="resume">계속하기</string>
+  <string name="paused">일시 중단됨</string>
 </resources>

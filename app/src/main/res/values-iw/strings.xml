@@ -351,6 +351,9 @@
   <string name="retry">לנסות שוב</string>
   <string name="showcase_view_got_it_button">הבנתי!</string>
   <string name="showcase_view_whole_nearby_activity">אלה המקומות בסביבתך שזקוקים לתמונות כדי להמחיש את הערכים שלהם בוויקיפדיה.\n\nלחיצה על חיפוש באזור הזה נועלת את המפה ומתחילה חיפוש סביב המיקום הזה.</string>
+  <string name="showcase_view_needs_photo">מקום זה צריך תמונה.</string>
+  <string name="showcase_view_has_photo">למקום הזה יש כבר תמונה.</string>
+  <string name="showcase_view_no_longer_exists">מקום זה לא קיים יותר.</string>
   <string name="showcase_view_list_icon">ניתן ללחוץ על כפתור זה כדי להציג רשימה של המקומות האלה</string>
   <string name="showcase_view_plus_fab">באפשרותך להעלות תמונה של כל מקום מהגלריה או מהמצלמה שלך</string>
   <string name="no_images_found">לא נמצאו תמונות!</string>
@@ -622,4 +625,10 @@
   <string name="use_location_from_similar_image">האם צילמת את שתי התמונות באותו המקום? האם ברצונך להשתמש בקו הרוחב וקו האורך של התמונה משמאל?</string>
   <string name="load_more">לטעון עוד</string>
   <string name="nearby_no_results">לא נמצאו מקומות, נא לנסות לשנות את החיפוש.</string>
+  <string name="add_picture_to_wikipedia_article_title">הוספת תמונה לוויקיפדיה</string>
+  <string name="add_picture_to_wikipedia_instructions_title">הוראות</string>
+  <string name="confirm">אישור</string>
+  <string name="instructions_title">הוראות</string>
+  <string name="copy_wikicode_to_clipboard">העתקת קוד־ויקי ללוח</string>
+  <string name="pause">השהיה</string>
 </resources>

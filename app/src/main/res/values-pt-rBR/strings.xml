@@ -77,7 +77,9 @@
   <string name="upload_progress_notification_title_in_progress">%1$s enviando!</string>
   <string name="upload_progress_notification_title_finishing">Terminando o envio de %1$s</string>
   <string name="upload_failed_notification_title">Envio de %1$s falhou</string>
+  <string name="upload_paused_notification_title">Envio de %1$s em pausa</string>
   <string name="upload_failed_notification_subtitle">Toque para ver</string>
+  <string name="upload_paused_notification_subtitle">Toque para ver</string>
   <string name="title_activity_contributions">Meus envios recentes</string>
   <string name="contribution_state_queued">Na fila</string>
   <string name="contribution_state_failed">Falhou</string>
@@ -625,4 +627,7 @@
   <string name="wikipedia_instructions_step_6">6. Editar o wikitexto para o posicionamento apropriado, se necessário. Para mais informações, veja &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;aqui&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Publique o artigo</string>
   <string name="copy_wikicode_to_clipboard">Copiar wikicode para a área de transferência</string>
+  <string name="pause">pausar</string>
+  <string name="resume">continuar</string>
+  <string name="paused">Pausado</string>
 </resources>

@@ -76,7 +76,9 @@
   <string name="upload_progress_notification_title_in_progress">正在上傳%1$s</string>
   <string name="upload_progress_notification_title_finishing">即將完成上傳%1$s</string>
   <string name="upload_failed_notification_title">上傳%1$s失敗</string>
+  <string name="upload_paused_notification_title">已暫停上傳%1$s</string>
   <string name="upload_failed_notification_subtitle">輕觸檢視</string>
+  <string name="upload_paused_notification_subtitle">輕觸檢視</string>
   <string name="title_activity_contributions">我最近的上傳</string>
   <string name="contribution_state_queued">已佇列</string>
   <string name="contribution_state_failed">失敗</string>
@@ -624,4 +626,7 @@
   <string name="wikipedia_instructions_step_6">6. 若有需要，可編輯維基語法來調整到適當的定位。更多相關資訊請查看&lt;a href=\"https://zh.wikipedia.org/wiki/Help:%E5%9B%BE%E5%83%8F\"&gt;此頁面&lt;/a&gt;。</string>
   <string name="wikipedia_instructions_step_7">7. 發布條目</string>
   <string name="copy_wikicode_to_clipboard">複製維基代碼到剪貼簿</string>
+  <string name="pause">暫停</string>
+  <string name="resume">繼續</string>
+  <string name="paused">已暫停</string>
 </resources>
