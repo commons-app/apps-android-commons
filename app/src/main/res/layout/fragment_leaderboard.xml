@@ -8,7 +8,7 @@
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <com.facebook.drawee.view.SimpleDraweeView
       android:id="@+id/avatar"
@@ -87,13 +87,19 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/leaderboard_list"
+    <androidx.core.widget.NestedScrollView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/column_names" />
+      app:layout_constraintTop_toBottomOf="@+id/column_names">
+
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/leaderboard_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    </androidx.core.widget.NestedScrollView>
 
     <ProgressBar
       android:id="@+id/progressBar"
