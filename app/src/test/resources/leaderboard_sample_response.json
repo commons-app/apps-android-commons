@@ -1,0 +1,19 @@
+{
+  "status": 200,
+  "username": "user",
+  "category_count": 0,
+  "limit": null,
+  "avatar": "avatar",
+  "offset": null,
+  "duration": "all_time",
+  "leaderboard_list": [
+    {
+      "username": "user",
+      "category_count": 0,
+      "avatar": "avatar",
+      "rank": 1
+    }
+  ],
+  "category": "used",
+  "rank": 1
+}
