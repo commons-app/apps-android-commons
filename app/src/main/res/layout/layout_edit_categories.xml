@@ -80,18 +80,18 @@ xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width=
     android:layout_above="@+id/button_divider"
     android:layout_below="@id/category_search_layout"/>
 
-  <RelativeLayout
+  <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:gravity="end">
     <Button
       android:id="@+id/update_categories_button"
       android:layout_width="wrap_content"
       android:layout_margin="@dimen/quarter_standard_height"
       android:layout_height="wrap_content"
-      android:text="Update Categories"
+      android:text="@string/category_edit_button_text"
       android:textColor="@color/white"
-      android:layout_alignParentEnd="true"
       />
-  </RelativeLayout>
+  </LinearLayout>
 
 </LinearLayout>

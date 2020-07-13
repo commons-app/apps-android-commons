@@ -608,6 +608,7 @@ Upload your first media by tapping on the add button.</string>
   </plurals>
   <string name="category_edit_helper_show_edit_title_failed">Failed</string>
   <string name="category_edit_helper_edit_message_else">Could not add categories.</string>
+  <string name="category_edit_button_text">Update categories</string>
 
   <string name="share_image_via">Share image via</string>
   <string name="no_achievements_yet">You haven\'t made any contributions yet</string>
