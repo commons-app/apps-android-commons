@@ -470,7 +470,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     private void updateToDoWarning() {
         String toDoMessage = "";
         boolean toDoNeeded = false;
-        boolean categoriesPresent = media.getCategories() == null ? false : true;
+        boolean categoriesPresent = media.getCategories() == null ? false : (media.getCategories().size() == 0 ? false : true);
+
         // Check if the presented category is about need of category
         if (categoriesPresent) {
             for (String category : media.getCategories()) {
