@@ -82,22 +82,31 @@ xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width=
       android:layout_width="match_parent"
       android:layout_height="0dp"
       android:layout_weight="4"
-      android:background="@color/white"
-      android:layout_above="@+id/button_divider"
-      android:layout_below="@id/category_search_layout"/>
+      android:background="@color/white"/>
 
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="0dp"
-      android:layout_weight="2"
-      android:gravity="end">
+      android:layout_weight="2">
+      <Button
+        android:id="@+id/cancel_categories_button"
+        android:layout_width="wrap_content"
+        android:layout_margin="@dimen/quarter_standard_height"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:padding="@dimen/small_gap"
+        android:textColor="@color/white"
+        android:background="@color/opak_middle_grey"
+        />
       <Button
         android:id="@+id/update_categories_button"
         android:layout_width="wrap_content"
         android:layout_margin="@dimen/quarter_standard_height"
         android:layout_height="wrap_content"
         android:text="@string/category_edit_button_text"
+        android:padding="@dimen/small_gap"
         android:textColor="@color/white"
+        android:background="@color/button_blue"
         />
     </LinearLayout>
   </LinearLayout>

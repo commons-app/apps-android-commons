@@ -633,6 +633,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @OnClick(R.id.update_categories_button)
     public void onUpdateCategoriesClicked() {
        updateCategories(categoryEditSearchRecyclerViewAdapter.getNewCategories());
+        displayHideCategorySearch();
+    }
+
+    @OnClick(R.id.cancel_categories_button)
+    public void onCancelCategoriesClicked() {
+        displayHideCategorySearch();
     }
 
     public void updateCategories(List<String> selectedCategories) {
@@ -642,11 +648,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(s -> {
-                if (getActivity() != null) {
+                //if (getActivity() != null) {
                     Timber.d("Categories are added.");
                     onOutsideOfCategoryEditClicked();
                     updateCategoryList();
-                }
+                //}
             }));
     }
 

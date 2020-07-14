@@ -20,7 +20,7 @@ import timber.log.Timber;
 
 public class CategoryEditHelper {
     private final NotificationHelper notificationHelper;
-    private final PageEditClient pageEditClient;
+    public final PageEditClient pageEditClient;
     private final ViewUtilWrapper viewUtil;
     private final String username;
 
