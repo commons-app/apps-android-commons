@@ -109,20 +109,20 @@ class UploadMediaPresenterTest {
     @Test
     fun handleImageResult() {
         //Positive case test
-        uploadMediaPresenter.handleImageResult(IMAGE_KEEP)
+        uploadMediaPresenter.handleImageResult(IMAGE_KEEP, uploadItem)
         verify(view).onImageValidationSuccess()
 
         //Duplicate file name
-        uploadMediaPresenter.handleImageResult(FILE_NAME_EXISTS)
+        uploadMediaPresenter.handleImageResult(FILE_NAME_EXISTS, uploadItem)
         verify(view).showDuplicatePicturePopup()
 
         //Empty Title test
-        uploadMediaPresenter.handleImageResult(EMPTY_TITLE)
+        uploadMediaPresenter.handleImageResult(EMPTY_TITLE, uploadItem)
         verify(view).showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
 
         //Bad Picture test
         //Empty Title test
-        uploadMediaPresenter.handleImageResult(-7)
+        uploadMediaPresenter.handleImageResult(-7, uploadItem)
         verify(view).showBadImagePopup(ArgumentMatchers.anyInt())
 
     }
@@ -158,8 +158,8 @@ class UploadMediaPresenterTest {
      */
     @Test
     fun handleBadImageBaseTestInvalidLocation() {
-        uploadMediaPresenter.handleBadImage(8)
-        verify(repository).saveValue(ArgumentMatchers.anyString(), eq(false))
+        uploadMediaPresenter.handleBadImage(8, uploadItem)
+        verify(uploadItem).setHasInvalidLocation(true)
         verify(view).showBadImagePopup(8)
     }
 
@@ -168,7 +168,7 @@ class UploadMediaPresenterTest {
      */
     @Test
     fun handleBadImageBaseTestEmptyTitle() {
-        uploadMediaPresenter.handleBadImage(-3)
+        uploadMediaPresenter.handleBadImage(-3, uploadItem)
         verify(view).showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
     }
 
@@ -177,7 +177,7 @@ class UploadMediaPresenterTest {
      */
     @Test
     fun handleBadImageBaseTestFileNameExists() {
-        uploadMediaPresenter.handleBadImage(-4)
+        uploadMediaPresenter.handleBadImage(-4, uploadItem)
         verify(view).showDuplicatePicturePopup()
     }
 
