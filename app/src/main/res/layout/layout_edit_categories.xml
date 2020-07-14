@@ -3,11 +3,10 @@
 xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
   android:id="@+id/category_edit_layout"
   android:layout_height="wrap_content"
-  android:layout_margin="30dp"
+  android:layout_margin="15dp"
   android:orientation="vertical"
   android:background="@color/white"
-  android:elevation="30dp"
-  android:layout_alignParentBottom="true">
+  android:elevation="30dp">
 
   <TextView
     android:id="@+id/tv_subtitle"
@@ -71,27 +70,36 @@ xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width=
     android:text="No results found"
     android:textSize="@dimen/description_text_size"
     android:visibility="gone" />
-
-  <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/rv_categories"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:layout_above="@+id/button_divider"
-    android:layout_below="@id/category_search_layout"/>
-
   <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="end">
-    <Button
-      android:id="@+id/update_categories_button"
-      android:layout_width="wrap_content"
-      android:layout_margin="@dimen/quarter_standard_height"
-      android:layout_height="wrap_content"
-      android:text="@string/category_edit_button_text"
-      android:textColor="@color/white"
-      />
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="6"
+    >
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rv_categories"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="4"
+      android:background="@color/white"
+      android:layout_above="@+id/button_divider"
+      android:layout_below="@id/category_search_layout"/>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="2"
+      android:gravity="end">
+      <Button
+        android:id="@+id/update_categories_button"
+        android:layout_width="wrap_content"
+        android:layout_margin="@dimen/quarter_standard_height"
+        android:layout_height="wrap_content"
+        android:text="@string/category_edit_button_text"
+        android:textColor="@color/white"
+        />
+    </LinearLayout>
   </LinearLayout>
 
 </LinearLayout>
