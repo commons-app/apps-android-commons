@@ -550,8 +550,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @Override
     public void updateSelectedCategoriesTextView(List<String> selectedCategories) {
+        if (selectedCategories == null || selectedCategories.size() == 0) {
+            updateCategoriesButton.setClickable(false);
+        }
         if (selectedCategories != null) {
             existingCategories.setText(StringUtils.join(selectedCategories,", "));
+            updateCategoriesButton.setClickable(true);
         }
     }
 
