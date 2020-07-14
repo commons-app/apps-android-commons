@@ -18,6 +18,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * This class tests the Leaderboard API calls
+ */
 public class LeaderboardApiTest {
 
     MockWebServer server;
@@ -68,7 +71,9 @@ public class LeaderboardApiTest {
     }
 
     /**
-     * This method will call the Mock Server and Test it with sample values
+     * This method will call the Mock Server and Test it with sample values.
+     * It will test the Leaderboard API call functionality and check if the object is
+     * being created with the correct values
      * @throws IOException
      */
     @Test
