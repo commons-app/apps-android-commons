@@ -29,11 +29,18 @@ public class LeaderboardApiTest {
     private static final String FILE_NAME = "leaderboard_sample_response.json";
     private static final String ENDPOINT = "/leaderboard.py";
 
+    /**
+     * This method initialises a Mock Server
+     */
     @Before
     public void initTest() {
         server = new MockWebServer();
     }
 
+    /**
+     * This method will setup a Mock Server and load Test JSON Response File
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
 
@@ -43,6 +50,12 @@ public class LeaderboardApiTest {
         server.start();
     }
 
+    /**
+     * This method converts a Input Stream to String
+     * @param is takes Input Stream of JSON File as Parameter
+     * @return a String with JSON data
+     * @throws Exception
+     */
     private static String convertStreamToString(InputStream is) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
@@ -54,6 +67,10 @@ public class LeaderboardApiTest {
         return sb.toString();
     }
 
+    /**
+     * This method will call the Mock Server and Test it with sample values
+     * @throws IOException
+     */
     @Test
     public void apiTest() throws IOException {
         HttpUrl httpUrl = server.url(ENDPOINT);
@@ -65,6 +82,13 @@ public class LeaderboardApiTest {
         Assert.assertEquals(Integer.valueOf(TEST_USER_COUNT), response.getCategoryCount());
     }
 
+    /**
+     * This method will call the Mock API and returns the Leaderboard Response Object
+     * @param okHttpClient
+     * @param httpUrl
+     * @return Leaderboard Response Object
+     * @throws IOException
+     */
     private LeaderboardResponse sendRequest(OkHttpClient okHttpClient, HttpUrl httpUrl)
         throws IOException {
         Request request = new Builder().url(httpUrl).build();
@@ -76,6 +100,10 @@ public class LeaderboardApiTest {
         return null;
     }
 
+    /**
+     * This method shuts down the Mock Server
+     * @throws IOException
+     */
     @After
     public void shutdown() throws IOException {
         server.shutdown();

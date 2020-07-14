@@ -97,6 +97,10 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
         }
     }
 
+    /**
+     * Set the views
+     * @param response Leaderboard Response Object
+     */
     private void setLeaderboardUser(LeaderboardResponse response) {
         hideProgressBar();
         avatar.setImageURI(
