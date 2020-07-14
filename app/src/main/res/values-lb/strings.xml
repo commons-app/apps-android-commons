@@ -376,5 +376,7 @@
   <string name="confirm">Confirméieren</string>
   <string name="instructions_title">Instruktiounen</string>
   <string name="wikipedia_instructions_step_7">7.Den Artikel publizéieren</string>
+  <string name="pause">ënnerbriechen</string>
   <string name="resume">virufueren</string>
+  <string name="paused">Ënnerbrach</string>
 </resources>

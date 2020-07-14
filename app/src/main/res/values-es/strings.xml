@@ -90,6 +90,7 @@
   <string name="upload_progress_notification_title_finishing">Finalizando la subida de %1$s</string>
   <string name="upload_failed_notification_title">Falló la carga de %1$s</string>
   <string name="upload_failed_notification_subtitle">Toca para ver</string>
+  <string name="upload_paused_notification_subtitle">Tocar para ver</string>
   <string name="title_activity_contributions">Mis subidas recientes</string>
   <string name="contribution_state_queued">En la cola</string>
   <string name="contribution_state_failed">Fallido</string>
@@ -588,4 +589,7 @@
   <string name="theme_default_name">Seguir sistema</string>
   <string name="theme_dark_name">Oscuro</string>
   <string name="theme_light_name">Claro</string>
+  <string name="pause">pausar</string>
+  <string name="resume">reanudar</string>
+  <string name="paused">En pausa</string>
 </resources>
