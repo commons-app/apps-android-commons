@@ -32,6 +32,10 @@ public class LeaderboardListAdapter extends RecyclerView.Adapter<LeaderboardList
             this.count = itemView.findViewById(R.id.user_count);
         }
 
+        /**
+         * This method will return the Context
+         * @return Context
+         */
         public Context getContext() {
             return itemView.getContext();
         }
@@ -41,6 +45,12 @@ public class LeaderboardListAdapter extends RecyclerView.Adapter<LeaderboardList
         this.leaderboardList = leaderboardList;
     }
 
+    /**
+     * Overrides the onCreateViewHolder and inflates the recyclerview list item layout
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @Override
     public LeaderboardListAdapter.ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,6 +60,11 @@ public class LeaderboardListAdapter extends RecyclerView.Adapter<LeaderboardList
         return new ListViewHolder(view);
     }
 
+    /**
+     * Overrides the onBindViewHolder Set the view at the specific position with the specific value
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull LeaderboardListAdapter.ListViewHolder holder, int position) {
         TextView rank = holder.rank;
@@ -66,6 +81,10 @@ public class LeaderboardListAdapter extends RecyclerView.Adapter<LeaderboardList
         count.setText(leaderboardList.get(position).getCategoryCount().toString());
     }
 
+    /**
+     * Override the getItemCount method
+     * @return the size of the recycler view list
+     */
     @Override
     public int getItemCount() {
         return leaderboardList.size();
