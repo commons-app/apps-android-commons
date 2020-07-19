@@ -89,7 +89,9 @@
   <string name="upload_progress_notification_title_in_progress">%1$s téléversé</string>
   <string name="upload_progress_notification_title_finishing">Fin du téléversement de %1$s</string>
   <string name="upload_failed_notification_title">Le téléversement de %1$s a échoué</string>
+  <string name="upload_paused_notification_title">Téléversement %1$s en pause</string>
   <string name="upload_failed_notification_subtitle">Appuyer pour afficher</string>
+  <string name="upload_paused_notification_subtitle">Taper pour afficher</string>
   <string name="title_activity_contributions">Mes téléversements récents</string>
   <string name="contribution_state_queued">Mis en file d’attente</string>
   <string name="contribution_state_failed">Échec</string>
@@ -349,6 +351,9 @@
   <string name="retry">Réessayer</string>
   <string name="showcase_view_got_it_button">C’est bon !</string>
   <string name="showcase_view_whole_nearby_activity">Ce sont les lieux autour de vous qui ont besoin d’images pour illustrer leurs articles sur Wikipédia.\n\nEn cliquant sur « CHERCHER DANS CETTE ZONE » vous verrouillez la carte et lancez une recherche à proximité de ce lieu.</string>
+  <string name="showcase_view_needs_photo">Cet endroit a besoin d’une photo.</string>
+  <string name="showcase_view_has_photo">Cet endroit a déjà une photo.</string>
+  <string name="showcase_view_no_longer_exists">Cet endroit n’existe plus.</string>
   <string name="showcase_view_list_icon">En cliquant sur ce bouton vous afficherez une liste de ces lieux</string>
   <string name="showcase_view_plus_fab">Vous pouvez téléverser une photo de n’importe quel lieu depuis votre galerie ou votre appareil photo</string>
   <string name="no_images_found">Aucune image trouvée !</string>
@@ -634,4 +639,7 @@
   <string name="wikipedia_instructions_step_6">6. Modifier le wikitexte pour un positionnement approprié, si besoin. Pour plus d’information, voir &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;ici&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Publier l’article</string>
   <string name="copy_wikicode_to_clipboard">Copier le wikicode dans le presse-papier</string>
+  <string name="pause">pause</string>
+  <string name="resume">reprise</string>
+  <string name="paused">En pause</string>
 </resources>

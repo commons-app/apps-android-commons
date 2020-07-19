@@ -60,7 +60,9 @@
   <string name="upload_progress_notification_title_in_progress">%1$s uploading</string>
   <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
   <string name="upload_failed_notification_title">Uploading %1$s failed</string>
+  <string name="upload_paused_notification_title">Uploading %1$s paused</string>
   <string name="upload_failed_notification_subtitle">Tap to view</string>
+  <string name="upload_paused_notification_subtitle">Tap to view</string>
   <string name="title_activity_contributions">My Recent Uploads</string>
   <string name="contribution_state_queued">Queued</string>
   <string name="contribution_state_failed">Failed</string>
@@ -649,4 +651,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="wikipedia_instructions_step_6">6. Edit the wikitext for appropriate positioning, if necessary. For more information, see &lt;a href="https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image"&gt;here&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Publish the article</string>
   <string name="copy_wikicode_to_clipboard">Copy wikicode to clipboard</string>
+  <string name="pause">pause</string>
+  <string name="resume">resume</string>
+  <string name="paused">Paused</string>
 </resources>

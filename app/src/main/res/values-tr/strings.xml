@@ -81,7 +81,9 @@
   <string name="upload_progress_notification_title_in_progress">%1$s yükleniyor</string>
   <string name="upload_progress_notification_title_finishing">%1$s yüklemesi bitiriliyor</string>
   <string name="upload_failed_notification_title">%1$s dosyasının yüklemesi başarısız oldu</string>
-  <string name="upload_failed_notification_subtitle">Görüntülemek için dokunun</string>
+  <string name="upload_paused_notification_title">%1$s yükleme duraklatıldı</string>
+  <string name="upload_failed_notification_subtitle">Görüntülemek için tıklayın</string>
+  <string name="upload_paused_notification_subtitle">Görüntülemek için tıklayın</string>
   <string name="title_activity_contributions">Son Yüklemelerim</string>
   <string name="contribution_state_queued">Sırada</string>
   <string name="contribution_state_failed">Başarısız</string>
@@ -142,17 +144,17 @@
   <string name="no_uploads_yet">Henüz yüklenmiş hiç fotoğrafınız yok.</string>
   <string name="menu_retry_upload">Tekrar dene</string>
   <string name="menu_cancel_upload">İptal</string>
-  <string name="media_upload_policy">Bu resmi göndererek bunun kendi çalışmam olduğunu, telif hakkıyla korunan materyal veya özçekim (selfie) içermediğini ve başka türlü &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons politikalarına&lt;/a&gt; uyduğunu beyan ederim</string>
+  <string name="media_upload_policy">Bu resmi göndererek bunun kendi çalışmam olduğunu, telif hakkıyla korunan materyal veya özçekim (selfie) içermediğini ve diğer &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons politikalarına&lt;/a&gt; uyduğunu beyan ederim.</string>
   <string name="menu_download">İndir</string>
   <string name="preference_license">Varsayılan Lisans</string>
   <string name="use_previous">Önceki başlığı ve açıklamayı kullan</string>
   <string name="allow_gps">Otomatik olarak mevcut konumu al</string>
   <string name="allow_gps_summary">Görüntü coğrafi olarak etiketlenmemişse geçerli konumu alır ve görüntüye coğrafi etiket ekler. Uyarı: Bu, geçerli konumunuzu gösterir.</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four"> Atıf-BenzerPaylaşım 4.0</string>
+  <string name="license_name_cc_by_four"> Atıf 4.0</string>
+  <string name="license_name_cc_by_sa">Atıf-BenzerPaylaşım 3.0</string>
+  <string name="license_name_cc_by"> Atıf 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Avusturya)</string>
@@ -341,6 +343,9 @@
   <string name="retry">Tekrar dene</string>
   <string name="showcase_view_got_it_button">Anladım!</string>
   <string name="showcase_view_whole_nearby_activity">Bunlar, Vikipedi maddeleri görselleştirmek için resimlere ihtiyaç duyan size yakın yerler.\n\n\'BU ALANI ARA\'yı tıklamak haritayı açar ve o konumun yakınında bir arama başlatır.</string>
+  <string name="showcase_view_needs_photo">Burada bir fotoğrafa ihtiyacı var.</string>
+  <string name="showcase_view_has_photo">Burada zaten bir fotoğrafı var.</string>
+  <string name="showcase_view_no_longer_exists">Burası artık mevcut değil.</string>
   <string name="showcase_view_list_icon">Bu butona dokunduğunuzda bu yerlerin bir listesi görüntülenir</string>
   <string name="showcase_view_plus_fab">Galerinizden veya kameranızdan herhangi bir yer için resim yükleyebilirsiniz</string>
   <string name="no_images_found">Resim bulunamadı!</string>
@@ -626,4 +631,7 @@
   <string name="wikipedia_instructions_step_6">6. Gerekirse vikimetini uygun konumlandırma için düzenleyin. Daha fazla bilgi için &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;buraya&lt;/a&gt; bakın.</string>
   <string name="wikipedia_instructions_step_7">7. Maddeyi yayınlayın</string>
   <string name="copy_wikicode_to_clipboard">Vikikodu panoya kopyala</string>
+  <string name="pause">duraklat</string>
+  <string name="resume">devam et</string>
+  <string name="paused">Durduruldu</string>
 </resources>

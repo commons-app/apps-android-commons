@@ -76,7 +76,9 @@
   <string name="upload_progress_notification_title_in_progress">正在上傳%1$s</string>
   <string name="upload_progress_notification_title_finishing">即將完成上傳%1$s</string>
   <string name="upload_failed_notification_title">上傳%1$s失敗</string>
+  <string name="upload_paused_notification_title">已暫停上傳%1$s</string>
   <string name="upload_failed_notification_subtitle">輕觸檢視</string>
+  <string name="upload_paused_notification_subtitle">輕觸檢視</string>
   <string name="title_activity_contributions">我最近的上傳</string>
   <string name="contribution_state_queued">已佇列</string>
   <string name="contribution_state_failed">失敗</string>
@@ -336,6 +338,9 @@
   <string name="retry">重試</string>
   <string name="showcase_view_got_it_button">了解！</string>
   <string name="showcase_view_whole_nearby_activity">這些是在您的周遭，並且需要圖片來圖解、描述它們本身的維基百科條目之地點。\n\n請點擊「搜尋此區域」來查看地圖，然後在位置啟動周遭搜尋。</string>
+  <string name="showcase_view_needs_photo">此地點需要照片。</string>
+  <string name="showcase_view_has_photo">此地點已有照片。</string>
+  <string name="showcase_view_no_longer_exists">此地點已不存在。</string>
   <string name="showcase_view_list_icon">輕觸此按鈕來帶出這些地點的清單</string>
   <string name="showcase_view_plus_fab">您可從您的圖庫或相機，來上傳任何地點的圖片</string>
   <string name="no_images_found">找不到圖片！</string>
@@ -543,8 +548,8 @@
   <string name="exif_tag_name_author">作者</string>
   <string name="exif_tag_name_copyright">版權</string>
   <string name="exif_tag_name_location">位置</string>
-  <string name="exif_tag_name_cameraModel">相機模型</string>
-  <string name="exif_tag_name_lensModel">透鏡模型</string>
+  <string name="exif_tag_name_cameraModel">相機型號</string>
+  <string name="exif_tag_name_lensModel">透鏡型號</string>
   <string name="exif_tag_name_serialNumbers">序號</string>
   <string name="exif_tag_name_software">軟體</string>
   <string name="share_text">從您的手機上直接更新照片到維基共享資源，請現在下載共享資源應用程式：%1$s</string>
@@ -621,4 +626,7 @@
   <string name="wikipedia_instructions_step_6">6. 若有需要，可編輯維基語法來調整到適當的定位。更多相關資訊請查看&lt;a href=\"https://zh.wikipedia.org/wiki/Help:%E5%9B%BE%E5%83%8F\"&gt;此頁面&lt;/a&gt;。</string>
   <string name="wikipedia_instructions_step_7">7. 發布條目</string>
   <string name="copy_wikicode_to_clipboard">複製維基代碼到剪貼簿</string>
+  <string name="pause">暫停</string>
+  <string name="resume">繼續</string>
+  <string name="paused">已暫停</string>
 </resources>

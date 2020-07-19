@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.contributions
 
 import androidx.paging.PagedList.BoundaryCallback
-import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.media.MediaClient
@@ -53,9 +52,9 @@ class ContributionBoundaryCallback @Inject constructor(
     fun fetchContributions() {
         compositeDisposable.add(
             mediaClient.getMediaListForUser(sessionManager.userName!!)
-                .map { mediaList: List<Media?> ->
+                .map { mediaList ->
                     mediaList.map {
-                        Contribution(it, Contribution.STATE_COMPLETED)
+                        Contribution(media=it, state=Contribution.STATE_COMPLETED)
                     }
                 }
                 .subscribeOn(ioThreadScheduler)

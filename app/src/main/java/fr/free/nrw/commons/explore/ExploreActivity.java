@@ -134,6 +134,11 @@ public class ExploreActivity
         }
     }
 
+    @Override
+    public Integer getContributionStateAt(int position) {
+        return null;
+    }
+
     /**
      * This method is called on success of API call for featured images or mobile uploads.
      * The viewpager will notified that number of items have changed.

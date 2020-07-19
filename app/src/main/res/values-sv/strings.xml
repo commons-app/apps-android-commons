@@ -69,7 +69,9 @@
   <string name="upload_progress_notification_title_in_progress">%1$s laddas upp</string>
   <string name="upload_progress_notification_title_finishing">Avslutar uppladdning av %1$s</string>
   <string name="upload_failed_notification_title">Uppladdning av %1$s misslyckades</string>
+  <string name="upload_paused_notification_title">Uppladdning av %1$s pausades</string>
   <string name="upload_failed_notification_subtitle">Tryck för att visa</string>
+  <string name="upload_paused_notification_subtitle">Tryck för att visa</string>
   <string name="title_activity_contributions">Mina senaste uppladdningar</string>
   <string name="contribution_state_queued">Köade</string>
   <string name="contribution_state_failed">Misslyckades</string>
@@ -329,6 +331,9 @@
   <string name="retry">Försök igen</string>
   <string name="showcase_view_got_it_button">Uppfattat!</string>
   <string name="showcase_view_whole_nearby_activity">Detta är platserna nära dig som behöver bilder för att illustrera deras Wikipedia-artiklar.\n\nNär du klickar på \"SÖK I DETTA OMRÅDE\" kommer kartan låsas och en sökning startas i närheten runt detta plats.</string>
+  <string name="showcase_view_needs_photo">Den här platsen behöver ett foto.</string>
+  <string name="showcase_view_has_photo">Den här platsen har redan ett foto.</string>
+  <string name="showcase_view_no_longer_exists">Den här platsen finns inte längre.</string>
   <string name="showcase_view_list_icon">Klicka på den här knappen för att få upp en lista med dessa platser</string>
   <string name="showcase_view_plus_fab">Du kan ladda upp en bild från vilken plats som helst från ditt galleri eller kamera</string>
   <string name="no_images_found">Inga bilder hittades!</string>
@@ -614,4 +619,7 @@
   <string name="wikipedia_instructions_step_6">6. Redigera wikitexten för att placera den mer lämpligt vid behov. För mer information, se &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;här&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Publicera artikeln</string>
   <string name="copy_wikicode_to_clipboard">Kopiera wikikod till urklipp</string>
+  <string name="pause">pausa</string>
+  <string name="resume">återuppta</string>
+  <string name="paused">Pausad</string>
 </resources>

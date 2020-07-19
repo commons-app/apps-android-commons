@@ -1,9 +1,11 @@
 package fr.free.nrw.commons.upload.structure.depictions
 
+import android.os.Parcelable
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.upload.WikidataItem
 import fr.free.nrw.commons.wikidata.WikidataProperties
 import fr.free.nrw.commons.wikidata.WikidataProperties.*
+import kotlinx.android.parcel.Parcelize
 import org.wikipedia.wikidata.DataValue
 import org.wikipedia.wikidata.Entities
 import org.wikipedia.wikidata.Statement_partial
@@ -17,6 +19,7 @@ const val THUMB_IMAGE_SIZE = "70px"
 /**
  * Model class for Depicted Item in Upload and Explore
  */
+@Parcelize
 data class DepictedItem constructor(
     override val name: String,
     val description: String?,
@@ -25,7 +28,7 @@ data class DepictedItem constructor(
     val commonsCategories: List<String>,
     var isSelected: Boolean,
     override val id: String
-) : WikidataItem {
+) : WikidataItem, Parcelable {
 
     constructor(entity: Entities.Entity) : this(
         entity,

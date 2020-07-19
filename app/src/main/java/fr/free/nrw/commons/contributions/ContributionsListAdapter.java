@@ -78,5 +78,9 @@ public class ContributionsListAdapter extends
         void openMediaDetail(int contribution);
 
         void addImageToWikipedia(Contribution contribution);
+
+        void pauseUpload(Contribution contribution);
+
+        void resumeUpload(Contribution contribution);
     }
 }

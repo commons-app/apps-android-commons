@@ -4,12 +4,12 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyZeroInteractions
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import media
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -57,9 +57,8 @@ class ContributionBoundaryCallbackTest {
         whenever(repository.save(anyList<Contribution>()))
             .thenReturn(Single.just(listOf(1L, 2L)))
         whenever(sessionManager.userName).thenReturn("Test")
-        whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(
-            Single.just(listOf(mock(Media::class.java)))
-        )
+        whenever(mediaClient.getMediaListForUser(anyString()))
+            .thenReturn(Single.just(listOf(media())))
         contributionBoundaryCallback.onZeroItemsLoaded()
         verify(repository).save(anyList<Contribution>());
         verify(mediaClient).getMediaListForUser(anyString());
@@ -70,9 +69,8 @@ class ContributionBoundaryCallbackTest {
         whenever(repository.save(anyList<Contribution>()))
             .thenReturn(Single.just(listOf(1L, 2L)))
         whenever(sessionManager.userName).thenReturn("Test")
-        whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(
-            Single.just(listOf(mock(Media::class.java)))
-        )
+        whenever(mediaClient.getMediaListForUser(anyString()))
+            .thenReturn(Single.just(listOf(media())))
         contributionBoundaryCallback.onItemAtEndLoaded(mock(Contribution::class.java))
         verify(repository).save(anyList());
         verify(mediaClient).getMediaListForUser(anyString());
@@ -83,9 +81,8 @@ class ContributionBoundaryCallbackTest {
         whenever(repository.save(anyList<Contribution>()))
             .thenReturn(Single.just(listOf(1L, 2L)))
         whenever(sessionManager.userName).thenReturn("Test")
-        whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(
-            Single.just(listOf(mock(Media::class.java)))
-        )
+        whenever(mediaClient.getMediaListForUser(anyString()))
+            .thenReturn(Single.just(listOf(media())))
         contributionBoundaryCallback.onItemAtFrontLoaded(mock(Contribution::class.java))
         verify(repository).save(anyList());
         verify(mediaClient).getMediaListForUser(anyString());
@@ -97,7 +94,7 @@ class ContributionBoundaryCallbackTest {
             .thenReturn(Single.just(listOf(1L, 2L)))
         whenever(sessionManager.userName).thenReturn("Test")
         whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(
-            Single.just(listOf(mock(Media::class.java)))
+            Single.just(listOf(media()))
         )
         contributionBoundaryCallback.fetchContributions()
         verify(repository).save(anyList());

@@ -44,10 +44,11 @@ fun media(
     pageId: String = "pageId",
     categories: List<String>? = listOf("categories"),
     coordinates: LatLng? = LatLng(0.0, 0.0, 0.0f),
-    captions: Map<String?, String?> = mapOf("en" to "caption"),
-    descriptions: Map<String?, String?> = mapOf("en" to "description"),
+    captions: Map<String, String> = mapOf("en" to "caption"),
+    descriptions: Map<String, String> = mapOf("en" to "description"),
     depictionIds: List<String> = listOf("depictionId")
 ) = Media(
+    pageId,
     thumbUrl,
     imageUrl,
     filename,
@@ -56,7 +57,6 @@ fun media(
     license,
     licenseUrl,
     creator,
-    pageId,
     categories,
     coordinates,
     captions,

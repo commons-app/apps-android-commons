@@ -12,6 +12,7 @@
 * Iluvatar
 * Kaganer
 * MaxBioHazard
+* Monirec
 * Movses
 * Nitch
 * Okras
@@ -207,6 +208,7 @@
   <string name="detail_panel_cats_label">Категории</string>
   <string name="detail_panel_cats_loading">Загрузка…</string>
   <string name="detail_panel_cats_none">Ничего не выбрано</string>
+  <string name="detail_caption_empty">Без подписи</string>
   <string name="detail_description_empty">Нет описания</string>
   <string name="detail_discussion_empty">Обсуждений нет</string>
   <string name="detail_license_empty">Неизвестная лицензия</string>
@@ -430,7 +432,7 @@
   <string name="contributions_fragment">Вклад</string>
   <string name="nearby_fragment">Поблизости</string>
   <string name="notifications">Уведомления</string>
-  <string name="read_notifications" fuzzy="true">Уведомления (архивированные)</string>
+  <string name="read_notifications">Уведомления (читать)</string>
   <string name="display_nearby_notification">Уведомлять меня о местах поблизости</string>
   <string name="display_nearby_notification_summary">Нажмите здесь, чтобы увидеть ближайшее место без изображений</string>
   <string name="no_close_nearby">Не найдено мест поблизости</string>
@@ -620,6 +622,8 @@
   <string name="nearby_no_results">Мест не найдено, попытайтесь изменить критерии поиска.</string>
   <string name="add_picture_to_wikipedia_article_title">Добавить изображение в Википедию</string>
   <string name="add_picture_to_wikipedia_instructions_title">Инструкции</string>
+  <string name="add_picture_to_wikipedia_instructions_desc">Соблюдайте правила редактирования!</string>
   <string name="confirm">Подтвердить</string>
   <string name="instructions_title">Инструкции</string>
+  <string name="copy_wikicode_to_clipboard">Скопировать вики-код в буфер обмена</string>
 </resources>

@@ -366,6 +366,7 @@
   <string name="retry">إعادة المحاولة</string>
   <string name="showcase_view_got_it_button">فهمت!</string>
   <string name="showcase_view_whole_nearby_activity">هذه هي الأماكن القريبة منك التي تحتاج إلى صور لتوضيح مقالات ويكيبيديا الخاصة بها. \n\nيؤدي النقر فوق \"البحث في هذه المنطقة\" إلى إغلاق الخريطة وإطلاق بحث قريب حول هذا الموقع.</string>
+  <string name="showcase_view_no_longer_exists">هذه الصفحة لم تعد موجودة.</string>
   <string name="showcase_view_list_icon">يؤدي النقر على هذا الزر إلى جلب قائمة بهذه الأماكن</string>
   <string name="showcase_view_plus_fab">يمكنك رفع صورة لأي مكان من معرضك أو كاميرتك</string>
   <string name="no_images_found">لم يتم العثور على صور!</string>

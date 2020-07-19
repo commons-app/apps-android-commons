@@ -10,7 +10,7 @@ import fr.free.nrw.commons.contributions.ContributionDao
  * The database for accessing the respective DAOs
  *
  */
-@Database(entities = [Contribution::class], version = 3, exportSchema = false)
+@Database(entities = [Contribution::class], version = 5, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
   abstract fun contributionDao(): ContributionDao

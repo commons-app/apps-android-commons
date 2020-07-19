@@ -3,6 +3,7 @@ package fr.free.nrw.commons.contributions;
 import androidx.paging.DataSource.Factory;
 import io.reactivex.Completable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;

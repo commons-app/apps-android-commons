@@ -5,7 +5,7 @@ import fr.free.nrw.commons.nearby.Place
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-internal data class WikidataPlace(
+data class WikidataPlace(
     override val id: String,
     override val name: String,
     val imageValue: String?,
