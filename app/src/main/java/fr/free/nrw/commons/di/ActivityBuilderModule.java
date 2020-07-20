@@ -48,9 +48,6 @@ public abstract class ActivityBuilderModule {
     abstract NotificationActivity bindNotificationActivity();
 
     @ContributesAndroidInjector
-    abstract CategoryImagesActivity bindFeaturedImagesActivity();
-
-    @ContributesAndroidInjector
     abstract UploadActivity bindUploadActivity();
 
     @ContributesAndroidInjector
