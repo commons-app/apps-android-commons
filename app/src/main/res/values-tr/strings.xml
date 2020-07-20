@@ -299,7 +299,7 @@
   <string name="send_log_file_description">Uygulama ile ilgili sorunları çözmek için geliştiricilere günlük dosyasını e-posta yoluyla gönderin. Not: Günlükler potansiyel olarak tanımlayıcı bilgiler içerebilir</string>
   <string name="no_web_browser">URL\'yi açacak web tarayıcısı bulunamadı</string>
   <string name="null_url">Hata! URL bulunamadı</string>
-  <string name="nominate_deletion">Silinme Adayı</string>
+  <string name="nominate_deletion">Silinmeye aday göster</string>
   <string name="nominated_for_deletion">Bu görüntü silinmek üzere aday gösterildi.</string>
   <string name="nominated_see_more">Web sayfasının detaylarını gör</string>
   <string name="nominating_file_for_deletion">%1$s, silme için aday gösteriliyor.</string>
@@ -401,7 +401,7 @@
   <string name="delete_recent_searches_dialog">Arama geçmişinizi silmek istediğinizden emin misiniz?</string>
   <string name="delete_search_dialog">Bu aramayı silmek istiyor musunuz?</string>
   <string name="search_history_deleted">Arama geçmişi silindi</string>
-  <string name="nominate_delete">Silinmesi İçin Aday Göster</string>
+  <string name="nominate_delete">Silinmeye Aday Göster</string>
   <string name="delete">Sil</string>
   <string name="Achievements">Başarılar</string>
   <string name="statistics">İstatistikler</string>
@@ -494,11 +494,11 @@
   <string name="check_category_success_message">%1$s için istenen kategori kontrolü</string>
   <string name="check_category_failure_message">%1$s için kategori kontrolü istenemedi</string>
   <string name="check_category_toast">%1$s için kategori kontrolü isteniyor</string>
-  <string name="nominate_for_deletion_edit_file_page">Dosyaya silme mesajı ekleme</string>
+  <string name="nominate_for_deletion_edit_file_page">Dosyaya silme mesajı ekleniyor</string>
   <string name="nominate_for_deletion_done">Yapıldı</string>
-  <string name="nominate_for_deletion_notify_user">Mesaj sayfasında kullanıcıya haber verme</string>
-  <string name="nominate_for_deletion_edit_deletion_request_log">Silme isteklerine dosya ekleneme</string>
-  <string name="nominate_for_deletion_create_deletion_request">İstekleri sil alt sayfası oluşturma</string>
+  <string name="nominate_for_deletion_notify_user">Mesaj sayfasında kullanıcıya haber veriliyor</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">Dosya, silme istekleri kayıtlarına ekleniyor</string>
+  <string name="nominate_for_deletion_create_deletion_request">Silme istekleri alt sayfası oluşturuluyor</string>
   <string name="notsure">Emin değil</string>
   <string name="send_thank_success_title">Teşekkür Gönderme: Başarılı</string>
   <string name="send_thank_success_message">%1$s sayesinde başarıyla gönderildi</string>

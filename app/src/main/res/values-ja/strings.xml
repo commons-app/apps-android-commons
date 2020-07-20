@@ -3,6 +3,7 @@
 * Abijeet Patro
 * Aefgh39622
 * Afaz
+* Bonfire12
 * Dude1717
 * Hinaloe
 * Kkairri
@@ -12,6 +13,7 @@
 * Shirayuki
 * Suyama
 * Takot
+* Tmv
 * Whym
 * Yusuke1109
 * Yuukin0248
@@ -73,7 +75,9 @@
   <string name="upload_progress_notification_title_in_progress">%1$s をアップロード中</string>
   <string name="upload_progress_notification_title_finishing">%1$s のアップロードを完了中</string>
   <string name="upload_failed_notification_title">%1$s のアップロードに失敗しました</string>
+  <string name="upload_paused_notification_title">%1$sのアップロードに失敗しました</string>
   <string name="upload_failed_notification_subtitle">閲覧するにはタップしてください</string>
+  <string name="upload_paused_notification_subtitle">タップでビュー</string>
   <string name="title_activity_contributions">自分の最近のアップロードファイル</string>
   <string name="contribution_state_queued">順番待ち中</string>
   <string name="contribution_state_failed">失敗しました</string>
@@ -573,4 +577,7 @@
   <string name="ask_to_turn_location_on">位置を有効にしますか？</string>
   <string name="nearby_needs_location">付近が正確に機能するには、位置を有効にしてください</string>
   <string name="use_location_from_similar_image">これら2点の撮影場所は同じですか？ 右側の画像に緯度経度情報を添付しますか？</string>
+  <string name="pause">一時停止</string>
+  <string name="resume">継続</string>
+  <string name="paused">一時停止</string>
 </resources>

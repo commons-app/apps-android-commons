@@ -135,8 +135,8 @@
   <string name="menu_about">关于</string>
   <string name="about_license">维基共享资源应用是由维基媒体社区的受助者和志愿者创建和维护的开源应用。维基媒体基金会不参与该应用程序的创立，开发或维护。</string>
   <string name="about_improve">创建新的&lt;a href=\"%1$s\"&gt;GitHub问题&lt;/a&gt;以发送错误报告和建议。</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;隐私政策&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;信用&lt;/u&gt;</string>
+  <string name="about_privacy_policy">隐私政策</string>
+  <string name="about_credits">制作人员</string>
   <string name="title_activity_about">关于</string>
   <string name="menu_feedback">发送反馈（通过电子邮件）</string>
   <string name="no_email_client">未安装电子邮件客户端</string>
@@ -151,7 +151,7 @@
   <string name="use_previous">使用之前的标题及描述</string>
   <string name="allow_gps">自动获取当前位置</string>
   <string name="allow_gps_summary">如果图片没有地理标记，以及地理标签图片的话，就取得当前位置。警告：这将暴露您的当前位置。</string>
-  <string name="preference_theme" fuzzy="true">夜间模式</string>
+  <string name="preference_theme">主题</string>
   <string name="license_name_cc_by_sa_four">署名-ShareAlike4.0</string>
   <string name="license_name_cc_by_four">署名4.0</string>
   <string name="license_name_cc_by_sa">署名-ShareAlike3.0</string>
@@ -192,10 +192,11 @@
   <string name="welcome_copyright_subtext">请避免上传您在互联网找到的有版权的素材以及海报的图像、图书封面等。</string>
   <string name="welcome_final_text">您明白了吗？</string>
   <string name="welcome_final_button_text">是！</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;更多信息&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">更多信息</string>
   <string name="detail_panel_cats_label">分类</string>
   <string name="detail_panel_cats_loading">正在载入…</string>
   <string name="detail_panel_cats_none">未选择</string>
+  <string name="detail_caption_empty">无字幕</string>
   <string name="detail_description_empty">没有说明</string>
   <string name="detail_discussion_empty">没有讨论</string>
   <string name="detail_license_empty">未知许可协议</string>
@@ -296,7 +297,7 @@
   <string name="null_url">错误！找不到URL</string>
   <string name="nominate_deletion">提交删除</string>
   <string name="nominated_for_deletion">此图片已被提交删除。</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;查看网页获取详情&lt;/u&gt;</string>
+  <string name="nominated_see_more">查看网页获取详情</string>
   <string name="nominating_file_for_deletion">提名%1$s删除。</string>
   <string name="nominating_for_deletion_status">提名删除：%1$s</string>
   <string name="view_browser">在浏览器中预览</string>
@@ -338,6 +339,9 @@
   <string name="retry">重试</string>
   <string name="showcase_view_got_it_button">明白了！</string>
   <string name="showcase_view_whole_nearby_activity">这些是您附近需要图片以阐明维基百科条目的地方。\n点击“检索这个区域”来锁定地图并启动定位功能来检索附近位置。</string>
+  <string name="showcase_view_needs_photo">这个地点需要一张照片。</string>
+  <string name="showcase_view_has_photo">这个地点已经有一张图片了。</string>
+  <string name="showcase_view_no_longer_exists">这个地点不再存在。</string>
   <string name="showcase_view_list_icon">点按此按钮会出现这些地点的列表</string>
   <string name="showcase_view_plus_fab">您可以从您的图库或照相机中上传任意地点的图片</string>
   <string name="no_images_found">找不到图片！</string>

@@ -5,6 +5,7 @@
 * Ainali
 * Jopparn
 * Liuxinyu970226
+* Sabelöga
 * Skalman
 * Tor.klingberg
 * WikiPhoenix
@@ -32,12 +33,12 @@
     <item quantity="other">Dessa bilder kommer att licensieras under %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
-    <item quantity="one">%1$d uppladdning</item>
-    <item quantity="other">%1$d uppladdningar</item>
+    <item quantity="one">%1$d Uppladdning</item>
+    <item quantity="other">%1$d Uppladdningar</item>
   </plurals>
   <plurals name="receiving_shared_content">
     <item quantity="one">Hämtar delat innehåll. Det kan ta en stund att behandla bilden beroende på bildens storlek och din enhet</item>
-    <item quantity="other">Hämtar delat innehåll. Det kan ta en stund att behandla bilderna beroende på bildens storlek och din enhet</item>
+    <item quantity="other">Hämtar delat innehåll. Det kan ta en stund att behandla bilderna beroende på bildernas storlek och din enhet</item>
   </plurals>
   <string name="title_activity_explore">Utforska</string>
   <string name="navigation_item_explore">Utforska</string>
@@ -61,7 +62,7 @@
   <string name="login_success">Inloggningen lyckades!</string>
   <string name="login_failed">Det gick inte att logga in!</string>
   <string name="upload_failed">Filen hittades inte. Försök med en annan fil.</string>
-  <string name="authentication_failed">Autentisering misslyckades, var god logga in igen!</string>
+  <string name="authentication_failed">Autentisering misslyckades, var god logga in igen</string>
   <string name="uploading_started">Överföring påbörjad!</string>
   <string name="upload_completed_notification_title">%1$s överförd!</string>
   <string name="upload_completed_notification_text">Tryck för att visa din uppladdning</string>
@@ -83,7 +84,7 @@
   <string name="provider_contributions">Mina uppladdningar</string>
   <string name="menu_share">Dela</string>
   <string name="menu_open_in_browser">Visa i webbläsaren</string>
-  <string name="share_title_hint">Bildtext (nödvändigt)</string>
+  <string name="share_title_hint">Bildtext (obligatoriskt)</string>
   <string name="add_caption_toast">Var god ange en bildtext för denna fil</string>
   <string name="share_description_hint">Beskrivning</string>
   <string name="share_caption_hint">Bildtext (maximalt 255 tecken)</string>
@@ -124,7 +125,7 @@
   <string name="about_privacy_policy">Integritetspolicy</string>
   <string name="about_credits">Erkännande</string>
   <string name="title_activity_about">Om</string>
-  <string name="menu_feedback">Skicka feedback (via e-post)</string>
+  <string name="menu_feedback">Skicka återkoppling (via e-post)</string>
   <string name="no_email_client">Ingen e-postklient är installerad</string>
   <string name="provider_categories">Nyligen använda kategorier</string>
   <string name="provider_depictions">Senast använda skildringar</string>
@@ -296,7 +297,7 @@
   <string name="skip_login">Hoppa över</string>
   <string name="navigation_item_login">Logga in</string>
   <string name="skip_login_title">Vill du verkligen hoppa över inloggningen?</string>
-  <string name="skip_login_message">Du behöver logga ini för att ladda upp bilder i framtiden.</string>
+  <string name="skip_login_message">Du behöver logga in för att ladda upp bilder i framtiden.</string>
   <string name="login_alert_message">Logga in för att använda denna funktion</string>
   <string name="copy_wikicode">Kopiera wikitexten till urklipp</string>
   <string name="wikicode_copied">Wikitexten kopierades till urklipp</string>
@@ -365,20 +366,20 @@
   <string name="quiz_question_string">Är det okej att ladda upp denna bild?</string>
   <string name="question">Fråga</string>
   <string name="result">Resultat</string>
-  <string name="quiz_back_button">Om du fortsätter ladda upp bilder som kommer att raderas kommer ditt konto förmodligen bannlysas. Är du säker på att du vill avsluta frågesporten?</string>
-  <string name="quiz_alert_message">Fler än %1$s av bilderna du har laddat upp har raderats. Om du fortsätter ladda upp bilder som kommer att raderas kommer ditt konto förmodligen bannlysas.\n\nVill du se guiden igen och sedan göra frågesporten för att hjälpa dig förstå vilka bildtyper du bör och inte bör ladda upp?</string>
+  <string name="quiz_back_button">Om du fortsätter ladda upp bilder som behöver raderas kommer ditt konto förmodligen blockeras. Är du säker på att du vill avsluta frågorna?</string>
+  <string name="quiz_alert_message">Fler än %1$s av bilderna du laddat upp har raderats. Om du fortsätter ladda upp bilder som behöver raderas kommer ditt konto förmodligen blockeras.\n\nVill du se guiden igen och sedan svara på frågor för att hjälpa dig förstå vilka bildtyper du bör och inte bör ladda upp?</string>
   <string name="selfie_answer">Bilder på dig själv (selfies) har inte mycket encyklopediskt värde. Ladda inte upp en bild på dig själv såvida du inte har en Wikipedia-artikel om dig.</string>
   <string name="taj_mahal_answer">Bilder på monument och utomhuslandskap är okej att ladda upp i de flesta länder. Observera att tillfälliga konstinstallationer är oftast upphovsrättsskyddade och inte okej att ladda upp.</string>
   <string name="screenshot_answer">Skärmdumpar på webbplatser anses vara deriverade verk och föremål för all upphovsrätt på själva webbplatsen. Dessa kan användas efter tillstånd från författaren. Utan sådant tillstånd anses all konst du skapar baserat på deras verk juridiskt sett vara en olicensierad kopia som ägs av den ursprungliga författaren.</string>
   <string name="blurry_image_answer">Ett av Commons mål är att samla ihop kvalitetsbilder. Därför bör inte suddiga bilder laddas upp. Försök alltid att ta fina bilder med bra ljus.</string>
   <string name="construction_event_answer">Bilder som skildrar teknologi eller kultur är mycket välkomna på Commons.</string>
-  <string name="warning_for_image_reverts">VARNING: Fler än %1$s av bilderna du har laddat upp har raderats. Om du fortsätter ladda upp bilder som kommer att raderas kommer ditt konto förmodligen bannlysas.</string>
+  <string name="warning_for_image_reverts">VARNING: Fler än %1$s av bilderna du har laddat upp har raderats. Om du fortsätter ladda upp bilder som behöver raderas kommer ditt konto förmodligen blockeras.</string>
   <string name="congratulatory_message_quiz">Du svarade rätt på %1$s av svaren. Gratulerar!</string>
   <string name="warning_for_no_answer">Välj ett av de två alternativet för att svara på frågan</string>
   <string name="user_not_logged_in">Inloggningssessionen löptes ut, var god logga in igen.</string>
   <string name="quiz_result_share_message">Dela din frågesport med dina vänner!</string>
   <string name="continue_message">Fortsätt</string>
-  <string name="correct">Korrekt svar</string>
+  <string name="correct">Rätt svar</string>
   <string name="wrong">Fel svar</string>
   <string name="quiz_screenshot_question">Är det okej att ladda upp denna skärmdump?</string>
   <string name="share_app_title">Dela app</string>
@@ -542,7 +543,7 @@
   <string name="exif_tag_name_copyright">Upphovsrätt</string>
   <string name="exif_tag_name_location">Plats</string>
   <string name="exif_tag_name_cameraModel">Kameramodell</string>
-  <string name="exif_tag_name_lensModel">Linsmodell</string>
+  <string name="exif_tag_name_lensModel">Objektiv</string>
   <string name="exif_tag_name_serialNumbers">Serienummer</string>
   <string name="exif_tag_name_software">Programvara</string>
   <string name="share_text">Ladda upp foton till Wikimedia Commons direkt från din telefon. Ladda ned Commons-appen nu: %1$s</string>
