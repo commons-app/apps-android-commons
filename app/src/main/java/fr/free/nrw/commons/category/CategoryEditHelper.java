@@ -23,6 +23,7 @@ public class CategoryEditHelper {
     public final PageEditClient pageEditClient;
     private final ViewUtilWrapper viewUtil;
     private final String username;
+    private Callback callback;
 
     @Inject
     public CategoryEditHelper(NotificationHelper notificationHelper,
@@ -42,11 +43,12 @@ public class CategoryEditHelper {
      * @param categories
      * @return
      */
-    public Single<Boolean> makeCategoryEdit(Context context, Media media, List<String> categories) {
+    public Single<Boolean> makeCategoryEdit(Context context, Media media, List<String> categories, Callback callback) {
         viewUtil.showShortToast(context, context.getString(R.string.category_edit_helper_make_edit_toast));
-
         return addCategory(media, categories)
-            .flatMapSingle(result -> Single.just(showCategoryEditNotification(context, media, result)))
+            .flatMapSingle(result -> Single.just(
+                callback.updateCategoryDisplay(categories) && showCategoryEditNotification(context, media, result))
+            )
             .firstOrError();
     }
 
@@ -100,5 +102,9 @@ public class CategoryEditHelper {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlForFile));
         notificationHelper.showNotification(context, title, message, NOTIFICATION_EDIT_CATEGORY, browserIntent);
         return result;
+    }
+
+    public interface  Callback {
+        boolean updateCategoryDisplay(List<String> categories);
     }
 }

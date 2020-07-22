@@ -80,7 +80,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.util.DateUtil;
 import timber.log.Timber;
 
-public class MediaDetailFragment extends CommonsDaggerSupportFragment implements Callback {
+public class MediaDetailFragment extends CommonsDaggerSupportFragment implements Callback,
+    CategoryEditHelper.Callback {
 
     private boolean editable;
     private boolean isCategoryImage;
@@ -642,8 +643,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     public void updateCategories(List<String> selectedCategories) {
-        Single<Boolean> resultSingle = categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories)
-            .flatMap(result -> categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories));
+        Single<Boolean> resultSingle = categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories, this)
+            .flatMap(result -> categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories, this));
         compositeDisposable.add(resultSingle
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -777,6 +778,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     private void rebuildCatList(List<String> categories) {
+        Log.d("deneme","rebuild cat list size:"+categories.size());
         categoryContainer.removeAllViews();
         for (String category : categories) {
             categoryContainer.addView(buildCatLabel(sanitise(category), categoryContainer));
@@ -893,5 +895,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             return getString(R.string.media_detail_coordinates_empty);
         }
         return media.getCoordinates().getPrettyCoordinateString();
+    }
+
+    @Override
+    public boolean updateCategoryDisplay(List<String> categories) {
+        if (categories == null) {
+            return false;
+        } else {
+            rebuildCatList(categories);
+            return true;
+        }
     }
 }
