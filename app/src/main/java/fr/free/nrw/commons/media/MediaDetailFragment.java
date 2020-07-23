@@ -66,6 +66,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -540,13 +541,16 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     private void updateCategoryList() {
-        final List<String> categories = media.getCategories();
-        if (categories.isEmpty()) {
+        List<String> allCategories = new ArrayList<String>( media.getCategories());
+        if (media.getAddedCategories() != null) {
+            allCategories.addAll(media.getAddedCategories());
+        }
+        if (allCategories.isEmpty()) {
             // Stick in a filler element.
-            categories.add(getString(R.string.detail_panel_cats_none));
+            allCategories.add(getString(R.string.detail_panel_cats_none));
         }
 
-        rebuildCatList(categories);
+        rebuildCatList(allCategories);
     }
 
     @Override
@@ -643,8 +647,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     public void updateCategories(List<String> selectedCategories) {
-        Single<Boolean> resultSingle = categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories, this)
-            .flatMap(result -> categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories, this));
+        Single<Boolean> resultSingle =reasonBuilder.getReason(media, null)
+            .flatMap((reason) -> categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories, this));
         compositeDisposable.add(resultSingle
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -652,6 +656,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 //if (getActivity() != null) {
                     Timber.d("Categories are added.");
                     onOutsideOfCategoryEditClicked();
+                    media.setAddedCategories(selectedCategories);
+                    //rebuildCatList(selectedCategories);
                     updateCategoryList();
                 //}
             }));

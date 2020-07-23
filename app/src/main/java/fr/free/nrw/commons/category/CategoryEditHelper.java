@@ -5,6 +5,7 @@ import static fr.free.nrw.commons.notification.NotificationHelper.NOTIFICATION_E
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -46,9 +47,7 @@ public class CategoryEditHelper {
     public Single<Boolean> makeCategoryEdit(Context context, Media media, List<String> categories, Callback callback) {
         viewUtil.showShortToast(context, context.getString(R.string.category_edit_helper_make_edit_toast));
         return addCategory(media, categories)
-            .flatMapSingle(result -> Single.just(
-                callback.updateCategoryDisplay(categories) && showCategoryEditNotification(context, media, result))
-            )
+            .flatMapSingle(result -> Single.just(showCategoryEditNotification(context, media, result)))
             .firstOrError();
     }
 

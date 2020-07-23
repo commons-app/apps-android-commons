@@ -121,4 +121,12 @@ class Media constructor(
         get() = captions[Locale.getDefault().language]
             ?: captions.values.firstOrNull()
             ?: displayTitle
+
+    /**
+     * Gets the categories the file falls under.
+     * @return file categories as an ArrayList of Strings
+     */
+    var addedCategories: List<String>? = null
+        get() = field                     // getter
+        set(value) { field = value }      // setter
 }
