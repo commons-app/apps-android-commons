@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.profile.leaderboard;
 
+import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.AVATAR_SOURCE_URL;
+
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -7,16 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import fr.free.nrw.commons.R;
-import java.util.List;
 
-public class LeaderboardListAdapter extends RecyclerView.Adapter<LeaderboardListAdapter.ListViewHolder> {
+public class LeaderboardListAdapter extends PagedListAdapter<LeaderboardList, LeaderboardListAdapter.ListViewHolder> {
 
-    private List<LeaderboardList> leaderboardList;
-
-    private String avatarSourceURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/%s/1024px-%s.png";
+    protected LeaderboardListAdapter() {
+        super(LeaderboardList.DIFF_CALLBACK);
+    }
 
     public class ListViewHolder extends RecyclerView.ViewHolder {
         TextView rank;
@@ -39,10 +41,6 @@ public class LeaderboardListAdapter extends RecyclerView.Adapter<LeaderboardList
         public Context getContext() {
             return itemView.getContext();
         }
-    }
-
-    public LeaderboardListAdapter(List<LeaderboardList> leaderboardList) {
-        this.leaderboardList = leaderboardList;
     }
 
     /**
@@ -72,21 +70,12 @@ public class LeaderboardListAdapter extends RecyclerView.Adapter<LeaderboardList
         TextView username = holder.username;
         TextView count = holder.count;
 
-        rank.setText(leaderboardList.get(position).getRank().toString());
+        rank.setText(getItem(position).getRank().toString());
 
         avatar.setImageURI(
-            Uri.parse(String.format(avatarSourceURL, leaderboardList.get(position).getAvatar(),
-                leaderboardList.get(position).getAvatar())));
-        username.setText(leaderboardList.get(position).getUsername());
-        count.setText(leaderboardList.get(position).getCategoryCount().toString());
-    }
-
-    /**
-     * Override the getItemCount method
-     * @return the size of the recycler view list
-     */
-    @Override
-    public int getItemCount() {
-        return leaderboardList.size();
+            Uri.parse(String.format(AVATAR_SOURCE_URL, getItem(position).getAvatar(),
+                getItem(position).getAvatar())));
+        username.setText(getItem(position).getUsername());
+        count.setText(getItem(position).getCategoryCount().toString());
     }
 }

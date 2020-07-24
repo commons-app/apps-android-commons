@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.profile.leaderboard;
 
+import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.AVATAR_SOURCE_URL;
+
 import android.accounts.Account;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -21,7 +24,6 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import java.util.List;
 import java.util.Objects;
 import javax.inject.Inject;
 import timber.log.Timber;
@@ -52,7 +54,10 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
     @Inject
     OkHttpJsonApiClient okHttpJsonApiClient;
 
-    private String avatarSourceURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/%s/1024px-%s.png";
+    @Inject
+    ViewModelFactory viewModelFactory;
+
+    LeaderboardListViewModel viewModel;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -67,12 +72,13 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
     }
 
     /**
-     * To call the API to get results in form Single<JSONObject>
-     * which then calls parseJson when results are fetched
+     * To call the API to get results
+     * which then sets the views using setLeaderboardUser method
      */
     private void setLeaderboard() {
         if (checkAccount()) {
-            try{
+            try {
+                setLeaderboardList();
                 compositeDisposable.add(okHttpJsonApiClient
                     .getLeaderboard(Objects.requireNonNull(sessionManager.getCurrentAccount()).name,
                         "all_time", "upload", null, null)
@@ -82,7 +88,6 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
                         response -> {
                             if (response != null && response.getStatus() == 200) {
                                 setLeaderboardUser(response);
-                                setLeaderboardList(response.getLeaderboardList());
                             }
                         },
                         t -> {
@@ -104,17 +109,22 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
     private void setLeaderboardUser(LeaderboardResponse response) {
         hideProgressBar();
         avatar.setImageURI(
-            Uri.parse(String.format(avatarSourceURL, response.getAvatar(), response.getAvatar())));
+            Uri.parse(String.format(AVATAR_SOURCE_URL, response.getAvatar(), response.getAvatar())));
         username.setText(response.getUsername());
         rank.setText(String.format("%s %d", getString(R.string.rank_prefix), response.getRank()));
         count.setText(String.format("%s %d", getString(R.string.count_prefix), response.getCategoryCount()));
     }
 
-    private void setLeaderboardList(List<LeaderboardList> leaderboardList) {
-        LeaderboardListAdapter leaderboardListAdapter = new LeaderboardListAdapter(leaderboardList);
+    private void setLeaderboardList() {
+        viewModel = new ViewModelProvider(this, viewModelFactory).get(LeaderboardListViewModel.class);
+        LeaderboardListAdapter leaderboardListAdapter = new LeaderboardListAdapter();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         leaderboardListRecyclerView.setLayoutManager(linearLayoutManager);
         leaderboardListRecyclerView.setAdapter(leaderboardListAdapter);
+
+        viewModel.getListLiveData().observe(getViewLifecycleOwner(), leaderboardListAdapter::submitList);
+        viewModel.getProgressLoadStatus().observe(getViewLifecycleOwner(), status -> {
+        });
     }
 
     /**
