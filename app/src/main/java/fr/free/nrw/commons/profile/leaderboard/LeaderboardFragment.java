@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.profile.leaderboard;
 
+import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.LOADED;
+import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.LOADING;
+
 import android.accounts.Account;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -90,7 +93,6 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      * @param response Leaderboard Response Object
      */
     private void setViews(LeaderboardResponse response) {
-        hideProgressBar();
         viewModel = new ViewModelProvider(this, viewModelFactory).get(LeaderboardListViewModel.class);
         LeaderboardListAdapter leaderboardListAdapter = new LeaderboardListAdapter();
         UserDetailAdapter userDetailAdapter= new UserDetailAdapter(response);
@@ -101,6 +103,11 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
 
         viewModel.getListLiveData().observe(getViewLifecycleOwner(), leaderboardListAdapter::submitList);
         viewModel.getProgressLoadStatus().observe(getViewLifecycleOwner(), status -> {
+                if (Objects.requireNonNull(status).equalsIgnoreCase(LOADING)) {
+                    showProgressBar();
+                } else if (status.equalsIgnoreCase(LOADED)) {
+                    hideProgressBar();
+                }
         });
     }
 
@@ -111,6 +118,15 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
             leaderboardListRecyclerView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * to show progressbar
+     */
+    private void showProgressBar() {
+        if (progressBar != null) {
+            progressBar.setVisibility(View.VISIBLE);
         }
     }
 

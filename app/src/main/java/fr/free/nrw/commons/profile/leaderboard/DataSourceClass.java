@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.profile.leaderboard;
 
+import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.LOADED;
+import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.LOADING;
 import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.PAGE_SIZE;
 import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.START_OFFSET;
 
@@ -39,13 +41,18 @@ public class DataSourceClass extends PageKeyedDataSource<Integer, LeaderboardLis
                     "all_time", "upload", String.valueOf(PAGE_SIZE), String.valueOf(START_OFFSET))
                 .doOnSubscribe(disposable -> {
                     compositeDisposable.add(disposable);
+                    progressLiveStatus.postValue(LOADING);
                 }).subscribe(
                 response -> {
                     if (response != null && response.getStatus() == 200) {
+                        progressLiveStatus.postValue(LOADED);
                         callback.onResult(response.getLeaderboardList(), null, response.getLimit());
                     }
                 },
-                t -> Timber.e(t, "Fetching leaderboard statistics failed")
+                t -> {
+                    Timber.e(t, "Fetching leaderboard statistics failed");
+                    progressLiveStatus.postValue(LOADING);
+                }
             ));
 
     }
@@ -64,13 +71,18 @@ public class DataSourceClass extends PageKeyedDataSource<Integer, LeaderboardLis
                 "all_time", "upload", String.valueOf(PAGE_SIZE), String.valueOf(params.key))
             .doOnSubscribe(disposable -> {
                 compositeDisposable.add(disposable);
+                progressLiveStatus.postValue(LOADING);
             }).subscribe(
                 response -> {
                     if (response != null && response.getStatus() == 200) {
+                        progressLiveStatus.postValue(LOADED);
                         callback.onResult(response.getLeaderboardList(), params.key + PAGE_SIZE);
                     }
                 },
-                t -> Timber.e(t, "Fetching leaderboard statistics failed")
+                t -> {
+                    Timber.e(t, "Fetching leaderboard statistics failed");
+                    progressLiveStatus.postValue(LOADING);
+                }
             ));
     }
 }
