@@ -188,7 +188,6 @@ public class OkHttpJsonApiClient {
           userName);
       HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
       urlBuilder.addQueryParameter("user", userName);
-      Timber.i("Url %s", urlBuilder.toString());
       Request request = new Request.Builder()
           .url(urlBuilder.toString())
           .build();

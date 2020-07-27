@@ -211,8 +211,8 @@ android {
 
     configurations.all {
         resolutionStrategy.force 'androidx.annotation:annotation:1.0.2'
+        exclude module: 'okhttp-ws'
     }
-
     flavorDimensions 'tier'
     productFlavors {
         prod {
