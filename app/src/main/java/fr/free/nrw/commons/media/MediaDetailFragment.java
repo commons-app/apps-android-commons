@@ -543,6 +543,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     private void updateCategoryList() {
         List<String> allCategories = new ArrayList<String>( media.getCategories());
         if (media.getAddedCategories() != null) {
+            // if media.getCategories contains addedCategory, then do not re-add them
+            for (String addedCategory : media.getAddedCategories()) {
+                if (allCategories.contains(addedCategory)) {
+                    media.setAddedCategories(null);
+                    break;
+                }
+            }
             allCategories.addAll(media.getAddedCategories());
         }
         if (allCategories.isEmpty()) {
