@@ -287,7 +287,7 @@
   <string name="error_while_cache">Erreur en mettant les images en cache</string>
   <string name="title_info">Un titre descriptif unique pour le fichier, qui servira de nom de fichier. Vous pouvez utiliser un langage simple avec des espaces. N’incluez pas l’extension du fichier</string>
   <string name="description_info">Veuillez décrire le média autant que possible : Où a-t-il été enregistré ? Que montre-t-il ? Quel est le contexte ? Veuillez décrire les objets ou les personnes. Révélez les informations qui ne peuvent pas être devinées facilement, par exemple l’heure de la journée si c’est un paysage. Si le média montre quelque chose d’inhabituel, veuillez expliquer ce qui le rend exceptionnel.</string>
-  <string name="caption_info">Veuillez rédiger une brève description de l’image (limitée à 255 caractères).</string>
+  <string name="caption_info" fuzzy="true">Veuillez rédiger une brève description de l’image (limitée à 255 caractères).</string>
   <string name="upload_image_too_dark">Cette image est trop sombre, êtes-vous sûr de vouloir la téléverser ? Wikimedia Commons est réservé pour les images ayant une valeur encyclopédique.</string>
   <string name="upload_image_blurry">Cette image est floue, êtes-vous sûr de vouloir la téléverser ? Wikimedia Commons est réservé aux images ayant une valeur encyclopédique.</string>
   <string name="upload_problem_exist">Problèmes potentiels avec cette image :</string>

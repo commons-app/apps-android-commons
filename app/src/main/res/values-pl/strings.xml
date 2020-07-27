@@ -293,7 +293,7 @@
   <string name="error_while_cache">Błąd podczas buforowania zdjęć</string>
   <string name="title_info">Podaj krótką, opisową i unikalną nazwę, która będzie służyła jako nazwa pliku. Możesz używać prostego języka i spacji. Nie dodawaj rozszerzenia pliku.</string>
   <string name="description_info">Opisz jak najwięcej mediów: Gdzie zostało zrobione? Co to pokazuje? Jaki jest kontekst? Proszę opisać przedmioty lub osoby. Ujawnij informacje, których nie można łatwo odgadnąć, na przykład porę dnia, jeśli jest to krajobraz. Jeśli media pokazują coś niezwykłego, wyjaśnij, co sprawia, że ​​jest to niezwykłe.</string>
-  <string name="caption_info">Proszę napisać krótki opis obrazu. (Limit do 255 znaków)</string>
+  <string name="caption_info" fuzzy="true">Proszę napisać krótki opis obrazu. (Limit do 255 znaków)</string>
   <string name="upload_image_too_dark">To zdjęcie jest zbyt ciemne, czy na pewno chcesz je załadować? Wikimedia Commons jest tylko dla zdjęć o wartości encyklopedycznej.</string>
   <string name="upload_image_blurry">To zdjęcie jest rozmazane, czy na pewno chcesz je załadować? Wikimedia Commons jest tylko dla zdjęć o wartości encyklopedycznej.</string>
   <string name="upload_problem_exist">Potencjalne problemy z tym obrazem:</string>

@@ -274,7 +274,7 @@
   <string name="error_while_cache">在快取圖片時發生錯誤</string>
   <string name="title_info">用於本檔案的唯一描述性標題。您可以使用帶有空格的簡明語言，另外請不要包含副檔名。</string>
   <string name="description_info">請盡可能描述媒體內容：拍攝於何處？是顯示什麼事物？有什麼脈絡？請描述對象或人物。透露出一些較不易猜測的訊息，例如是風景的話，可以是一天裡的時間。如果媒體顯示出一些不正常的事物，請說明出造成不正常原因。</string>
-  <string name="caption_info">請寫入圖片的簡要描述（不能超過 255 個字元）</string>
+  <string name="caption_info" fuzzy="true">請寫入圖片的簡要描述（不能超過 255 個字元）</string>
   <string name="upload_image_too_dark">此圖片太暗，您確定您要上傳它嗎？維基共享資源僅適用對於百科全書有價值的圖片。</string>
   <string name="upload_image_blurry">此圖片太模糊，您確定您要上傳它嗎？維基共享資源僅適用對於百科全書有價值的圖片。</string>
   <string name="upload_problem_exist">此圖片有以下潛在問題：</string>

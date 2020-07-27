@@ -261,7 +261,7 @@
   <string name="error_while_cache">Eror antramentre ch\'as butavo le plance an memòria local</string>
   <string name="title_info">Un tìtol dëscritiv ùnich për l\'archivi, che a servirà com nòm d\'archivi. A peul dovré un lengagi sempi con djë spassi. Ch\'a ancluda pa l\'estension dl\'archivi</string>
   <string name="description_info">Për piasì, ch\'a descriva ël mojen mej ch\'a peul: Andoa a l\'é stàit fàit? Për piasì, ch\'a descriva j\'oget o le përson-e. Ch\'a arvela j\'anformassion ch\'a l\'é nen belfé andviné, për esempi l\'ora dël dì, s\'a l\'é un panorama. Si ël mojen a smon cheicòs ëd foravìa, për piasì ch\'a spiega lòn ch\'a lo rend foravìa.</string>
-  <string name="caption_info">Për piasì, ch\'a scriva na curta descrission ëd la plancia (limità a 255 caràter).</string>
+  <string name="caption_info" fuzzy="true">Për piasì, ch\'a scriva na curta descrission ëd la plancia (limità a 255 caràter).</string>
   <string name="upload_image_too_dark">Sa plancia a l\'é tròp sombra, e-lo sigur ëd vorèj cariela? Wikipedia Commons a l\'é mach për plance con un valor enciclopédich.</string>
   <string name="upload_image_blurry">Sa plancia a l\'é tërbola, e-lo sigur ëd vorèj cariela? Wikipedia Comun a l\'é mach për plance con un valor enciclopédich.</string>
   <string name="upload_problem_exist">Problema potensiaj con costa plancia:</string>

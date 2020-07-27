@@ -265,7 +265,7 @@
   <string name="error_while_cache">Chyba pri ukladaní obrázkov</string>
   <string name="title_info">Jedinečný popis súboru, ktorý bude slúžiť ako názov súboru. Môžete použiť bežný jazyk s medzerami. Nezadávajte príponu súboru.</string>
   <string name="description_info">Opíšte obrázok čo najviac, ako je to len možné: Kde bol zhotovený? Čo znázorňuje? Aký je kontext obrázku? Popíšte, prosím, predmety alebo osoby na obrázku a nezabudnite na informácie, ktoré nie je možné ľahko odhadnúť zo samotného obrázku, ako je napríklad denná doba, pokiaľ ide o krajinu. Ak je na obrázku niečo neobvyklé, popíšte, čo ho robí neobvyklým.</string>
-  <string name="caption_info">Prosím napíšte krátky popis obrázku (maximálne 255 znakov).</string>
+  <string name="caption_info" fuzzy="true">Prosím napíšte krátky popis obrázku (maximálne 255 znakov).</string>
   <string name="upload_image_too_dark">Tento obrázok je príliš tmavý. Ste si istí, že ho chcete nahrať? Wikimedia Commons slúži len na obrázky s encyklopedickou hodnotou.</string>
   <string name="upload_image_blurry">Tento obrázok je rozmazaný. Ste si istí, že ho chcete nahrať? Wikimedia Commons slúži len na obrázky s encyklopedickou hodnotou.</string>
   <string name="upload_problem_exist">Potenciálne problémy s týmto obrázkom:</string>

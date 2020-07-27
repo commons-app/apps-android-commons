@@ -275,7 +275,7 @@
   <string name="error_while_cache">Erro durante o cache de imagens</string>
   <string name="title_info">Um título descritivo exclusivo para o arquivo, que servirá como um nome de arquivo. Você pode usar linguagem simples com espaços. Não inclua a extensão do arquivo</string>
   <string name="description_info">Por favor, descreva a mídia tanto quanto possível: onde foi tomada? O que isso mostra? Qual é o contexto? Descreva os objetos ou pessoas. Revelar informações que não podem ser facilmente adivinhadas, por exemplo, a hora do dia, se for uma paisagem. Se a mídia mostrar algo incomum, explique o que torna incomum.</string>
-  <string name="caption_info">Por favor, escreva uma breve descrição da imagem. (Limite a 255 caracteres)</string>
+  <string name="caption_info" fuzzy="true">Por favor, escreva uma breve descrição da imagem. (Limite a 255 caracteres)</string>
   <string name="upload_image_too_dark">Esta foto está muito escura, você tem certeza de que deseja enviá-la? O Wikimedia Commons é apenas para imagens com valor enciclopédico.</string>
   <string name="upload_image_blurry">Esta foto está embaçada, tem certeza de que deseja enviá-la? O Wikimedia Commons é apenas para imagens com valor enciclopédico.</string>
   <string name="upload_problem_exist">Problemas potenciais com esta imagem:</string>
