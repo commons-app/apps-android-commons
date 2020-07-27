@@ -58,7 +58,7 @@ public class CommonsApplicationModule {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE contribution "
-                + " ADD COLUMN hasInvalidLocation INTEGER");
+                + " ADD COLUMN hasInvalidLocation INTEGER NOT NULL DEFAULT 0");
         }
     };
 
