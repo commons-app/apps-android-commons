@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.profile.leaderboard;
 
 import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.AVATAR_SOURCE_URL;
+import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.USER_LINK_PREFIX;
 
 import android.content.Context;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 
 public class LeaderboardListAdapter extends PagedListAdapter<LeaderboardList, LeaderboardListAdapter.ListViewHolder> {
 
@@ -77,5 +79,13 @@ public class LeaderboardListAdapter extends PagedListAdapter<LeaderboardList, Le
                 getItem(position).getAvatar())));
         username.setText(getItem(position).getUsername());
         count.setText(getItem(position).getCategoryCount().toString());
+
+        /*
+          Open the user profile in a webview when a username is clicked on leaderboard
+          We are not using the commons url from build config because the leaderboard is only
+          supported for prod at the moment
+         */
+        holder.itemView.setOnClickListener(view -> Utils.handleWebUrl(holder.getContext(), Uri.parse(
+            String.format("%s%s", USER_LINK_PREFIX, getItem(position).getUsername()))));
     }
 }
