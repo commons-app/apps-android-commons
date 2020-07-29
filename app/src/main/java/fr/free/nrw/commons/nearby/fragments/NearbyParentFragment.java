@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -29,6 +30,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -154,6 +156,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     MapView mapView;
     @BindView(R.id.rv_nearby_list)
     RecyclerView rvNearbyList;
+    @BindView(R.id.tv_attribution)
+    AppCompatTextView tvOpenStreetAttribution;
 
     @Inject LocationServiceManager locationManager;
     @Inject NearbyController nearbyController;
@@ -259,6 +263,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     .setTextBarMargin(R.dimen.tiny_padding);
                 scaleBarPlugin.create(scaleBarOptions);
             });
+        });
+        tvOpenStreetAttribution.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://www.openstreetmap.org/copyright"));
+            startActivity(intent);
         });
     }
 
