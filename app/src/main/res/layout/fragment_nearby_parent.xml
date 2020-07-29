@@ -45,10 +45,10 @@
               android:layout_width="wrap_content"
               android:layout_alignParentBottom="true"
               android:layout_alignParentRight="true"
-              android:text="&#169; OPENSTREETMAP"
+              android:text="&#169; OPENSTREETMAP \n contributors"
               android:textColor="@android:color/darker_gray"
               android:textStyle="bold"
-              android:layout_marginRight="4dp"
+              android:layout_margin="4dp"
               android:textAlignment="center"
               android:layout_height="wrap_content"/>
 
