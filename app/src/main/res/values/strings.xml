@@ -399,6 +399,7 @@
   <string name="nominate_delete">Nominate For Deletion</string>
   <string name="delete">Delete</string>
   <string name="Achievements">Achievements</string>
+  <string name="Profile">Profile</string>
   <string name="statistics">Statistics</string>
   <string name="statistics_thanks">Thanks Received</string>
   <string name="statistics_featured">Featured Images</string>
@@ -635,7 +636,6 @@ Upload your first media by tapping on the add button.</string>
   <string name="use_location_from_similar_image">Did you shoot these two pictures at the same place? Do you want to use the latitude/longitude of the picture on the right?</string>
   <string name="load_more">Load More</string>
   <string name="nearby_no_results">No places found, try changing your search criteria.</string>
-
   <string name="add_picture_to_wikipedia_article_title">Add image to Wikipedia</string>
   <string name="add_picture_to_wikipedia_article_desc">Do you want to add this picture to the %1$s language Wikipedia article?</string>
 
@@ -654,4 +654,11 @@ Upload your first media by tapping on the add button.</string>
   <string name="pause">pause</string>
   <string name="resume">resume</string>
   <string name="paused">Paused</string>
+  <string name="achievements_tab_title">Achievements</string>
+  <string name="leaderboard_tab_title">Leaderboard</string>
+  <string name="rank_prefix">Rank:</string>
+  <string name="count_prefix">Count:</string>
+  <string name="leaderboard_column_rank">Rank</string>
+  <string name="leaderboard_column_user">User</string>
+  <string name="leaderboard_column_count">Count</string>
 </resources>

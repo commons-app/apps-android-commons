@@ -3,10 +3,12 @@ package fr.free.nrw.commons.delete
 import android.content.Context
 import android.content.res.Resources
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.achievements.FeedbackResponse
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.profile.achievements.FeedbackResponse
+import fr.free.nrw.commons.profile.leaderboard.LeaderboardResponse
 import fr.free.nrw.commons.utils.ViewUtilWrapper
+import io.reactivex.Observable
 import io.reactivex.Single
 import media
 import org.junit.Before
@@ -54,6 +56,8 @@ class ReasonBuilderTest {
         `when`(sessionManager?.doesAccountExist()).thenReturn(true)
         `when`(okHttpJsonApiClient!!.getAchievements(anyString()))
                 .thenReturn(Single.just(mock(FeedbackResponse::class.java)))
+        `when`(okHttpJsonApiClient!!.getLeaderboard(anyString(), anyString(), anyString(), anyString(), anyString()))
+            .thenReturn(Observable.just(mock(LeaderboardResponse::class.java)))
 
         val media = media(filename="test_file", dateUploaded = Date())
 
