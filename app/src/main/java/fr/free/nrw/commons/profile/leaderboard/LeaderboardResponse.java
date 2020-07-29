@@ -9,30 +9,39 @@ public class LeaderboardResponse {
     @SerializedName("status")
     @Expose
     private Integer status;
+
     @SerializedName("username")
     @Expose
     private String username;
+
     @SerializedName("category_count")
     @Expose
     private Integer categoryCount;
+
     @SerializedName("limit")
     @Expose
-    private Object limit;
+    private int limit;
+
     @SerializedName("avatar")
     @Expose
     private String avatar;
+
     @SerializedName("offset")
     @Expose
-    private Object offset;
+    private int offset;
+
     @SerializedName("duration")
     @Expose
     private String duration;
+
     @SerializedName("leaderboard_list")
     @Expose
     private List<LeaderboardList> leaderboardList = null;
+
     @SerializedName("category")
     @Expose
     private String category;
+
     @SerializedName("rank")
     @Expose
     private Integer rank;
@@ -61,11 +70,11 @@ public class LeaderboardResponse {
         this.categoryCount = categoryCount;
     }
 
-    public Object getLimit() {
+    public int getLimit() {
         return limit;
     }
 
-    public void setLimit(Object limit) {
+    public void setLimit(int limit) {
         this.limit = limit;
     }
 
@@ -77,11 +86,11 @@ public class LeaderboardResponse {
         this.avatar = avatar;
     }
 
-    public Object getOffset() {
+    public int getOffset() {
         return offset;
     }
 
-    public void setOffset(Object offset) {
+    public void setOffset(int offset) {
         this.offset = offset;
     }
 

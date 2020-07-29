@@ -1,18 +1,20 @@
 package fr.free.nrw.commons.profile.leaderboard;
 
+import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.LOADED;
+import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.LOADING;
+
 import android.accounts.Account;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.MergeAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.facebook.drawee.view.SimpleDraweeView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
@@ -21,24 +23,11 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import java.util.List;
 import java.util.Objects;
 import javax.inject.Inject;
 import timber.log.Timber;
 
 public class LeaderboardFragment extends CommonsDaggerSupportFragment {
-
-    @BindView(R.id.avatar)
-    SimpleDraweeView avatar;
-
-    @BindView(R.id.username)
-    TextView username;
-
-    @BindView(R.id.rank)
-    TextView rank;
-
-    @BindView(R.id.count)
-    TextView count;
 
     @BindView(R.id.leaderboard_list)
     RecyclerView leaderboardListRecyclerView;
@@ -52,7 +41,10 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
     @Inject
     OkHttpJsonApiClient okHttpJsonApiClient;
 
-    private String avatarSourceURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/%s/1024px-%s.png";
+    @Inject
+    ViewModelFactory viewModelFactory;
+
+    LeaderboardListViewModel viewModel;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -67,12 +59,12 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
     }
 
     /**
-     * To call the API to get results in form Single<JSONObject>
-     * which then calls parseJson when results are fetched
+     * To call the API to get results
+     * which then sets the views using setLeaderboardUser method
      */
     private void setLeaderboard() {
         if (checkAccount()) {
-            try{
+            try {
                 compositeDisposable.add(okHttpJsonApiClient
                     .getLeaderboard(Objects.requireNonNull(sessionManager.getCurrentAccount()).name,
                         "all_time", "upload", null, null)
@@ -81,8 +73,7 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
                     .subscribe(
                         response -> {
                             if (response != null && response.getStatus() == 200) {
-                                setLeaderboardUser(response);
-                                setLeaderboardList(response.getLeaderboardList());
+                                setViews(response);
                             }
                         },
                         t -> {
@@ -101,20 +92,23 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      * Set the views
      * @param response Leaderboard Response Object
      */
-    private void setLeaderboardUser(LeaderboardResponse response) {
-        hideProgressBar();
-        avatar.setImageURI(
-            Uri.parse(String.format(avatarSourceURL, response.getAvatar(), response.getAvatar())));
-        username.setText(response.getUsername());
-        rank.setText(String.format("%s %d", getString(R.string.rank_prefix), response.getRank()));
-        count.setText(String.format("%s %d", getString(R.string.count_prefix), response.getCategoryCount()));
-    }
-
-    private void setLeaderboardList(List<LeaderboardList> leaderboardList) {
-        LeaderboardListAdapter leaderboardListAdapter = new LeaderboardListAdapter(leaderboardList);
+    private void setViews(LeaderboardResponse response) {
+        viewModel = new ViewModelProvider(this, viewModelFactory).get(LeaderboardListViewModel.class);
+        LeaderboardListAdapter leaderboardListAdapter = new LeaderboardListAdapter();
+        UserDetailAdapter userDetailAdapter= new UserDetailAdapter(response);
+        MergeAdapter mergeAdapter = new MergeAdapter(userDetailAdapter, leaderboardListAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         leaderboardListRecyclerView.setLayoutManager(linearLayoutManager);
-        leaderboardListRecyclerView.setAdapter(leaderboardListAdapter);
+        leaderboardListRecyclerView.setAdapter(mergeAdapter);
+
+        viewModel.getListLiveData().observe(getViewLifecycleOwner(), leaderboardListAdapter::submitList);
+        viewModel.getProgressLoadStatus().observe(getViewLifecycleOwner(), status -> {
+                if (Objects.requireNonNull(status).equalsIgnoreCase(LOADING)) {
+                    showProgressBar();
+                } else if (status.equalsIgnoreCase(LOADED)) {
+                    hideProgressBar();
+                }
+        });
     }
 
     /**
@@ -123,10 +117,16 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
     private void hideProgressBar() {
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
-            avatar.setVisibility(View.VISIBLE);
-            username.setVisibility(View.VISIBLE);
-            rank.setVisibility(View.VISIBLE);
             leaderboardListRecyclerView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * to show progressbar
+     */
+    private void showProgressBar() {
+        if (progressBar != null) {
+            progressBar.setVisibility(View.VISIBLE);
         }
     }
 
@@ -134,9 +134,6 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      * used to hide the layouts while fetching results from api
      */
     private void hideLayouts(){
-        avatar.setVisibility(View.INVISIBLE);
-        username.setVisibility(View.INVISIBLE);
-        rank.setVisibility(View.INVISIBLE);
         leaderboardListRecyclerView.setVisibility(View.INVISIBLE);
     }
 
