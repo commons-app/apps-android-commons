@@ -74,4 +74,6 @@
 
     <color name="current_marker_stroke">#55000000</color>
     <color name="current_marker_fill">#11000000</color>
+
+    <color name="nav_tab_icon_unselected_color">#61000000</color>
 </resources>

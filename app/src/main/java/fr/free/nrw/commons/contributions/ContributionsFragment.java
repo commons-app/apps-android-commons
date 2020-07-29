@@ -172,7 +172,7 @@ public class ContributionsFragment
      */
     private void showContributionsListFragment() {
         // show tabs on contribution list is visible
-        ((MainActivity) getActivity()).showTabs();
+        // ((MainActivity) getActivity()).showTabs();
         // show nearby card view on contributions list is visible
         if (nearbyNotificationCardView != null) {
             if (store.getBoolean("displayNearbyCardView", true)) {
@@ -189,7 +189,7 @@ public class ContributionsFragment
 
     private void showMediaDetailPagerFragment() {
         // hide tabs on media detail view is visible
-        ((MainActivity) getActivity()).hideTabs();
+        // ((MainActivity) getActivity()).hideTabs();
         // hide nearby card view on media detail is visible
         nearbyNotificationCardView.setVisibility(View.GONE);
 
@@ -200,7 +200,7 @@ public class ContributionsFragment
     private void setupViewForMediaDetails() {
         campaignView.setVisibility(View.GONE);
         nearbyNotificationCardView.setVisibility(View.GONE);
-        ((MainActivity)getActivity()).hideTabs();
+        // ((MainActivity)getActivity()).hideTabs();
     }
 
     @Override
@@ -272,7 +272,7 @@ public class ContributionsFragment
             return;
         }
 
-        ((MainActivity)getActivity()).setNumOfUploads(uploadCount);
+        //((MainActivity)getActivity()).setNumOfUploads(uploadCount);
 
     }
 

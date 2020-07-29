@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -24,6 +25,9 @@ import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.navtab.NavTabFragmentPagerAdapter;
+import fr.free.nrw.commons.navtab.NavTabLayout;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.notification.Notification;
@@ -41,15 +45,20 @@ import timber.log.Timber;
 
 public class MainActivity extends NavigationBaseActivity implements FragmentManager.OnBackStackChangedListener {
 
-    @BindView(R.id.tab_layout)
-    TabLayout tabLayout;
-    @BindView(R.id.pager)
-    public UnswipableViewPager viewPager;
-
     @Inject
     SessionManager sessionManager;
     @Inject
     ContributionController controller;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.pager)
+    public UnswipableViewPager viewPager;
+    @BindView(R.id.fragment_main_nav_tab_layout)
+    NavTabLayout tabLayout;
+    private MediaDetailPagerFragment mediaDetails;
+
+
+
     @Inject
     public LocationServiceManager locationManager;
     @Inject
@@ -70,25 +79,43 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
     private TextView notificationCount;
     private NearbyParentFragment nearbyParentFragment;
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contributions);
+        //setContentView(R.layout.activity_contributions);
+        setContentView(R.layout.main);
         ButterKnife.bind(this);
-
+        setSupportActionBar(toolbar);
         initDrawer();
+        setTitle(getString(R.string.contributions_fragment));
+        setUpPager();
+
+        /*initDrawer();
         setTitle(getString(R.string.navigation_item_home)); // Should I create a new string variable with another name instead?
 
         initMain();
 
         if (savedInstanceState != null ) {
             onOrientationChanged = true; // Will be used in nearby fragment to determine significant update of map
-
+*/
             //If nearby map was visible, call on Tab Selected to call all nearby operations
             /*if (savedInstanceState.getInt("viewPagerCurrentItem") == 1) {
                 ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
             }*/
-        }
+      //  }
+
     }
+
+    private void setUpPager() {
+        viewPager.setAdapter(new NavTabFragmentPagerAdapter(getSupportFragmentManager()));
+        viewPager.setOffscreenPageLimit(4);
+        tabLayout.setOnNavigationItemSelectedListener(item -> {
+            setTitle(item.getTitle());
+            viewPager.setCurrentItem(item.getOrder());
+            return true;
+        });
+    }
+
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
@@ -108,13 +135,15 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);
 
-        addTabsAndFragments();
+        //addTabsAndFragments();
         if (contributionsActivityPagerAdapter.getItem(0) != null) {
             ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(0)).onAuthCookieAcquired();
         }
     }
 
+   /*
     private void addTabsAndFragments() {
+
         contributionsActivityPagerAdapter = new ContributionsActivityPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(contributionsActivityPagerAdapter);
 
@@ -138,6 +167,8 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         ((ContributionsFragment) contributionsActivityPagerAdapter
                 .getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired();
         setTabAndViewPagerSynchronisation();
+
+
     }
 
     /**
@@ -145,17 +176,18 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
      * "Contributions (NUMBER)"
      * @param uploadCount
      */
-    public void setNumOfUploads(int uploadCount) {
+   /* public void setNumOfUploads(int uploadCount) {
         tabLayout.getTabAt(0).setText(getResources().getString(R.string.contributions_fragment) +" "+ getResources()
                 .getQuantityString(R.plurals.contributions_subtitle,
                         uploadCount, uploadCount));
     }
+    */
 
     /**
      * Normally tab layout and view pager has no relation, which means when you swipe view pager
      * tab won't change and vice versa. So we have to notify each of them.
      */
-    private void setTabAndViewPagerSynchronisation() {
+    /*private void setTabAndViewPagerSynchronisation() {
         viewPager.setFocusableInTouchMode(true);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -222,7 +254,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
             tabLayout.setVisibility(View.VISIBLE);
         }
     }
-
+*/
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -239,7 +271,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
                 // Then we want to go back to contributions list fragment on backbutton pressed from media detail fragment
                 contributionsFragment.getChildFragmentManager().popBackStack();
                 // Tabs were invisible when Media Details Fragment is active, make them visible again on Contrib List Fragment active
-                showTabs();
+                // showTabs();
                 // Nearby Notification Card View was invisible when Media Details Fragment is active, make it visible again on Contrib List Fragment active, according to preferences
                 if (defaultKvStore.getBoolean("displayNearbyCardView", true)) {
                     if (contributionsFragment.nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
