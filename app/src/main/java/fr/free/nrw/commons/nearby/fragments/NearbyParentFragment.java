@@ -17,12 +17,14 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.VectorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -38,6 +40,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -154,6 +157,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.rv_nearby_list)
     RecyclerView rvNearbyList;
     @BindView(R.id.no_results_message) TextView noResultsView;
+    @BindView(R.id.tv_attribution)
+    AppCompatTextView tvOpenStreetAttribution;
 
     @Inject LocationServiceManager locationManager;
     @Inject NearbyController nearbyController;
@@ -258,6 +263,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     .setTextBarMargin(R.dimen.tiny_padding);
                 scaleBarPlugin.create(scaleBarOptions);
             });
+        });
+        tvOpenStreetAttribution.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://www.openstreetmap.org/copyright"));
+            startActivity(intent);
         });
     }
 
