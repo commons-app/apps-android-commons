@@ -3,14 +3,14 @@ package fr.free.nrw.commons.mwapi;
 import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import com.google.gson.Gson;
-import fr.free.nrw.commons.profile.achievements.FeaturedImages;
-import fr.free.nrw.commons.profile.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
+import fr.free.nrw.commons.profile.achievements.FeaturedImages;
+import fr.free.nrw.commons.profile.achievements.FeedbackResponse;
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardResponse;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
@@ -65,32 +65,32 @@ public class OkHttpJsonApiClient {
   }
 
   @NonNull
-  public Single<LeaderboardResponse> getLeaderboard(String userName, String duration, String category, String limit, String offset) {
+  public Observable<LeaderboardResponse> getLeaderboard(String userName, String duration, String category, String limit, String offset) {
     final String fetchLeaderboardUrlTemplate = wikiMediaTestToolforgeUrl
         + "/leaderboard.py";
-    return Single.fromCallable(() -> {
-      String url = String.format(Locale.ENGLISH,
-          fetchLeaderboardUrlTemplate,
-          userName,
-          duration,
-          category,
-          limit,
-          offset);
-      HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-      urlBuilder.addQueryParameter("user", userName);
-      urlBuilder.addQueryParameter("duration", duration);
-      urlBuilder.addQueryParameter("category", category);
-      urlBuilder.addQueryParameter("limit", limit);
-      urlBuilder.addQueryParameter("offset", offset);
-      Timber.i("Url %s", urlBuilder.toString());
-      Request request = new Request.Builder()
-          .url(urlBuilder.toString())
-          .build();
+    String url = String.format(Locale.ENGLISH,
+        fetchLeaderboardUrlTemplate,
+        userName,
+        duration,
+        category,
+        limit,
+        offset);
+    HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+    urlBuilder.addQueryParameter("user", userName);
+    urlBuilder.addQueryParameter("duration", duration);
+    urlBuilder.addQueryParameter("category", category);
+    urlBuilder.addQueryParameter("limit", limit);
+    urlBuilder.addQueryParameter("offset", offset);
+    Timber.i("Url %s", urlBuilder.toString());
+    Request request = new Request.Builder()
+        .url(urlBuilder.toString())
+        .build();
+    return Observable.fromCallable(() -> {
       Response response = okHttpClient.newCall(request).execute();
       if (response != null && response.body() != null && response.isSuccessful()) {
         String json = response.body().string();
         if (json == null) {
-          return null;
+          return new LeaderboardResponse();
         }
         Timber.d("Response for leaderboard is %s", json);
         try {
@@ -99,7 +99,7 @@ public class OkHttpJsonApiClient {
           return new LeaderboardResponse();
         }
       }
-      return null;
+      return new LeaderboardResponse();
     });
   }
 
@@ -188,7 +188,6 @@ public class OkHttpJsonApiClient {
           userName);
       HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
       urlBuilder.addQueryParameter("user", userName);
-      Timber.i("Url %s", urlBuilder.toString());
       Request request = new Request.Builder()
           .url(urlBuilder.toString())
           .build();

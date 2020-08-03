@@ -56,6 +56,9 @@ public class ProfileActivity extends NavigationBaseActivity {
         context.startActivity(intent);
     }
 
+    /**
+     * Set the tabs for the fragments
+     */
     private void setTabs() {
         List<Fragment> fragmentList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
@@ -69,7 +72,6 @@ public class ProfileActivity extends NavigationBaseActivity {
         viewPagerAdapter.notifyDataSetChanged();
 
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();

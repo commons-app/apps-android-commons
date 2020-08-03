@@ -1,110 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+
+<androidx.constraintlayout.widget.ConstraintLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:fresco="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="wrap_content">
 
-  <androidx.constraintlayout.widget.ConstraintLayout
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/leaderboard_list"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" />
 
-    <com.facebook.drawee.view.SimpleDraweeView
-      android:id="@+id/avatar"
-      android:layout_width="100dp"
-      android:layout_height="100dp"
-      android:layout_margin="20dp"
-      fresco:roundAsCircle="true"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+  <ProgressBar
+    android:id="@+id/progressBar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/leaderboard_list" />
 
-    <TextView
-      android:id="@+id/username"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      style="?android:textAppearanceMedium"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/avatar" />
-
-    <TextView
-      android:id="@+id/rank"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      style="?android:textAppearanceMedium"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/username" />
-
-    <TextView
-      android:id="@+id/count"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      style="?android:textAppearanceMedium"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/rank" />
-
-    <LinearLayout
-      android:id="@+id/column_names"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      android:layout_margin="15dp"
-      android:weightSum="1"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/count">
-
-      <TextView
-        style="?android:textAppearanceButton"
-        android:gravity="center_vertical|start"
-        android:layout_width="0dp"
-        android:layout_weight="0.2"
-        android:text="@string/leaderboard_column_rank"
-        android:layout_height="match_parent"/>
-
-      <TextView
-        style="?android:textAppearanceButton"
-        android:gravity="center_vertical|start"
-        android:layout_width="0dp"
-        android:layout_weight="0.6"
-        android:text="@string/leaderboard_column_user"
-        android:layout_height="match_parent"/>
-
-      <TextView
-        style="?android:textAppearanceButton"
-        android:gravity="center_vertical|end"
-        android:layout_width="0dp"
-        android:layout_weight="0.2"
-        android:text="@string/leaderboard_column_count"
-        android:layout_height="match_parent"/>
-
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/leaderboard_list"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/column_names" />
-
-    <ProgressBar
-      android:id="@+id/progressBar"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_centerVertical="true"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
-
-  </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
