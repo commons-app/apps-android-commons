@@ -543,6 +543,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     private void updateCategoryList() {
         List<String> allCategories = new ArrayList<String>( media.getCategories());
         if (media.getAddedCategories() != null) {
+            // TODO this added categories logic should be removed.
+            //  It is just a short term hack. Categories should be fetch everytime they are updated.
             // if media.getCategories contains addedCategory, then do not re-add them
             for (String addedCategory : media.getAddedCategories()) {
                 if (allCategories.contains(addedCategory)) {

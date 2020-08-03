@@ -127,6 +127,8 @@ class Media constructor(
      * @return file categories as an ArrayList of Strings
      */
     var addedCategories: List<String>? = null
+        // TODO added categories should be removed. It is added for a short fix. On category update,
+        //  categories should be re-fetched instead
         get() = field                     // getter
         set(value) { field = value }      // setter
 }
