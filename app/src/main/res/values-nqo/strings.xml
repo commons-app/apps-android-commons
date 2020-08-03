@@ -95,7 +95,7 @@
   <string name="menu_retry_upload">ߊ߬ ߡߊߝߍߣߍ߲߫ ߕߎ߲߯</string>
   <string name="menu_cancel_upload">ߊ߬ ߘߐߛߊ߬</string>
   <string name="menu_download">ߟߊ߬ߖߌ߰ߒ߬ߞߎ߲߬ߠߌ߲</string>
-  <string name="preference_theme" fuzzy="true">ߛߎ ߞߍߗߏ߮</string>
+  <string name="preference_theme">ߞߍߗߏ߮</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ߏߛߑߕߙߊߟߌ߫)</string>
   <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (ߊߟߏߡߊ߲ߘߎ߯)</string>
   <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (ߋߛߑߕߏߣߌ߫)</string>
@@ -164,6 +164,7 @@
   <string name="welcome_image_proprietary">ߖߌ߬ߦߊ߬ߓߍ߫ ߕߌ߰ߟߊ߬ߡߊ</string>
   <string name="welcome_image_welcome_wikipedia">ߌ ߣߌ߫ ߛߣߍ߫ ߥߞߌߡߋߘߌߦߊ ߞߊ߲߬</string>
   <string name="welcome_image_welcome_copyright">ߓߊߦߟߍߡߊ߲ ߤߊߞߍ ߣߌ߫ ߛߣߍ߫</string>
+  <string name="welcome_image_sydney_opera_house">ߛߌߘߑߣߋ߫ ߏߔߋߙߊ߫ ߓߏ߲</string>
   <string name="cancel">ߊ߬ ߘߐߛߊ߬</string>
   <string name="navigation_drawer_open">ߊ߬ ߟߊߞߊ߬</string>
   <string name="navigation_drawer_close">ߊ߬ ߘߊߕߎ߲߯</string>
