@@ -37,6 +37,9 @@ class CheckBoxTriStatesTest {
         checkBoxTriStates.setOnCheckedChangeListener(onCheckChangeListener)
     }
 
+    /**
+     * If same state is trying to be set, nothing should happen
+     */
     @Test
     fun testSetStateWhenSameState() {
         checkBoxTriStates.state = CHECKED
@@ -44,6 +47,9 @@ class CheckBoxTriStatesTest {
         verifyNoMoreInteractions(callback)
     }
 
+    /**
+     * If different, markers should be filtered by new state
+     */
     @Test
     fun testSetStateWhenDiffState() {
         NearbyController.currentLocation = LatLng(0.0,0.0,0.0f)
@@ -52,6 +58,9 @@ class CheckBoxTriStatesTest {
         verify(callback).filterByMarkerType(null, UNCHECKED, false, true)
     }
 
+    /**
+     * If current latitude longtitude null, then no more interactions required
+     */
     @Test
     fun testSetStateWhenCurrLatLngNull() {
         NearbyController.currentLocation = null
