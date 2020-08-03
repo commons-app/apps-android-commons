@@ -654,19 +654,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     public void updateCategories(List<String> selectedCategories) {
-        Single<Boolean> resultSingle =reasonBuilder.getReason(media, null)
-            .flatMap((reason) -> categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories, this));
-        compositeDisposable.add(resultSingle
+        compositeDisposable.add(categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories, this)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(s -> {
-                //if (getActivity() != null) {
-                    Timber.d("Categories are added.");
-                    onOutsideOfCategoryEditClicked();
-                    media.setAddedCategories(selectedCategories);
-                    //rebuildCatList(selectedCategories);
-                    updateCategoryList();
-                //}
+                Timber.d("Categories are added.");
+                onOutsideOfCategoryEditClicked();
+                media.setAddedCategories(selectedCategories);
+                updateCategoryList();
             }));
     }
 
