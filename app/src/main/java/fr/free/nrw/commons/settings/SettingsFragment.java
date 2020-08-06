@@ -9,11 +9,14 @@ import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceFragmentCompat;
 import com.google.android.material.snackbar.Snackbar;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.maps.TelemetryDefinition;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
@@ -122,6 +125,24 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             findPreference("displayLocationPermissionForCardView").setEnabled(false);
             findPreference("displayCampaignsCardView").setEnabled(false);
             uploadLimit.setEnabled(false);
+        }
+
+        findPreference("telemetryOptIn").setOnPreferenceChangeListener(
+            (preference, newValue) -> {
+                telemetryOptInout((boolean)newValue);
+                defaultKvStore.putBoolean(Prefs.TELEMETRY_PREFERENCE,(boolean)newValue);
+                return false;
+            });
+    }
+
+    /**
+     * Opt in or out of MapBox telemetry
+     * @param shouldOptIn
+     */
+    private void telemetryOptInout(boolean shouldOptIn){
+        TelemetryDefinition telemetry = Mapbox.getTelemetry();
+        if (telemetry != null) {
+            telemetry.setUserTelemetryRequestState(shouldOptIn);
         }
     }
 

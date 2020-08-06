@@ -44,12 +44,17 @@
               android:id="@+id/tv_attribution"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_alignParentRight="true"
+              android:layout_alignParentLeft="true"
               android:layout_alignParentBottom="true"
-              android:layout_margin="4dp"
-              android:text="&#169; OPENSTREETMAP \n contributors"
+              android:layout_margin="8dp"
+              android:text="&#169;MapBox    &#169;OpenStreetMap \n Improve this map"
+              android:shadowColor="#000000"
+              android:shadowDx="2.5"
+              android:shadowDy="2.5"
+              android:shadowRadius="1.6"
+              android:textSize="14sp"
+              android:textColor="@android:color/white"
               android:textAlignment="center"
-              android:textColor="@android:color/darker_gray"
               android:textStyle="bold" />
 
         </RelativeLayout>

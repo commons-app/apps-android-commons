@@ -9,9 +9,15 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -157,7 +163,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.rv_nearby_list)
     RecyclerView rvNearbyList;
     @BindView(R.id.tv_attribution)
-    AppCompatTextView tvOpenStreetAttribution;
+    AppCompatTextView tvAttribution;
 
     @Inject LocationServiceManager locationManager;
     @Inject NearbyController nearbyController;
@@ -240,8 +246,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 UiSettings uiSettings = mapBoxMap.getUiSettings();
                 uiSettings.setCompassGravity(Gravity.BOTTOM | Gravity.LEFT);
                 uiSettings.setCompassMargins(12, 0, 0, 24);
-                uiSettings.setLogoEnabled(true);
-                uiSettings.setAttributionEnabled(true);
+                uiSettings.setLogoEnabled(false);
+                uiSettings.setAttributionEnabled(false);
                 uiSettings.setRotateGesturesEnabled(false);
                 NearbyParentFragment.this.isMapBoxReady=true;
                 performMapReadyActions();
@@ -264,11 +270,42 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 scaleBarPlugin.create(scaleBarOptions);
             });
         });
-        tvOpenStreetAttribution.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse("https://www.openstreetmap.org/copyright"));
-            startActivity(intent);
-        });
+
+        ClickableSpan spanMapBox=new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://www.mapbox.com/about/maps/"));
+                startActivity(intent);
+            }
+        };
+
+        ClickableSpan spanOpenStreet=new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("http://www.openstreetmap.org/copyright"));
+                startActivity(intent);
+            }
+        };
+
+        ClickableSpan spanImproveThisMap=new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://www.mapbox.com/map-feedback/"));
+                startActivity(intent);
+            }
+        };
+
+        SpannableString spannableString = new SpannableString(tvAttribution.getText());
+        spannableString.setSpan(spanMapBox, 0,6, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(spanOpenStreet, 11,24, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(spanImproveThisMap, 27,43, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(Color.WHITE),0,tvAttribution.getText().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tvAttribution.setText(spannableString);
+        tvAttribution.setMovementMethod(LinkMovementMethod.getInstance());
+
     }
 
     /**
