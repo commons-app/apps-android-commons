@@ -626,4 +626,7 @@
   <string name="confirm">Подтвердить</string>
   <string name="instructions_title">Инструкции</string>
   <string name="copy_wikicode_to_clipboard">Скопировать вики-код в буфер обмена</string>
+  <string name="pause">пауза</string>
+  <string name="resume">продолжить</string>
+  <string name="paused">Приостановлено</string>
 </resources>
