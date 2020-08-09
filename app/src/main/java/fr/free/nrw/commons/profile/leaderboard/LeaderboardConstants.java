@@ -6,8 +6,6 @@ public class LeaderboardConstants {
 
     public static final int START_OFFSET = 0;
 
-    public static final String AVATAR_SOURCE_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/%s/1024px-%s.png";
-
     public static final String USER_LINK_PREFIX = "https://commons.wikimedia.org/wiki/User:";
 
     public final static String LOADING = "Loading";

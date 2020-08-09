@@ -74,9 +74,7 @@ public class LeaderboardListAdapter extends PagedListAdapter<LeaderboardList, Le
 
         rank.setText(getItem(position).getRank().toString());
 
-        avatar.setImageURI(
-            Uri.parse(String.format(AVATAR_SOURCE_URL, getItem(position).getAvatar(),
-                getItem(position).getAvatar())));
+        avatar.setImageURI(Uri.parse(getItem(position).getAvatar()));
         username.setText(getItem(position).getUsername());
         count.setText(getItem(position).getCategoryCount().toString());
 

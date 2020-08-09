@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.profile.leaderboard;
 
-import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.AVATAR_SOURCE_URL;
-
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -62,8 +60,7 @@ public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.Da
             leaderboardResponse.getRank()));
 
         avatar.setImageURI(
-            Uri.parse(String.format(AVATAR_SOURCE_URL, leaderboardResponse.getAvatar(),
-                leaderboardResponse.getAvatar())));
+            Uri.parse(leaderboardResponse.getAvatar()));
         username.setText(leaderboardResponse.getUsername());
         count.setText(String.format("%s %d",
             holder.getContext().getResources().getString(R.string.count_prefix),
