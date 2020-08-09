@@ -12,6 +12,7 @@ import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.profile.achievements.FeaturedImages;
 import fr.free.nrw.commons.profile.achievements.FeedbackResponse;
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardResponse;
+import fr.free.nrw.commons.profile.leaderboard.UpdateAvatarResponse;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.ConfigUtils;
@@ -100,6 +101,38 @@ public class OkHttpJsonApiClient {
         }
       }
       return new LeaderboardResponse();
+    });
+  }
+
+  @NonNull
+  public Single<UpdateAvatarResponse> setAvatar(String username, String avatar) {
+    final String urlTemplate = wikiMediaTestToolforgeUrl
+        + "/update_avatar.py";
+    return Single.fromCallable(() -> {
+      String url = String.format(Locale.ENGLISH,
+          urlTemplate,
+          username,
+          avatar);
+      HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+      urlBuilder.addQueryParameter("user", username);
+      urlBuilder.addQueryParameter("avatar", avatar);
+      Timber.i("Url %s", urlBuilder.toString());
+      Request request = new Request.Builder()
+          .url(urlBuilder.toString())
+          .build();
+      Response response = okHttpClient.newCall(request).execute();
+      if (response != null && response.body() != null && response.isSuccessful()) {
+        String json = response.body().string();
+        if (json == null) {
+          return null;
+        }
+        try {
+          return gson.fromJson(json, UpdateAvatarResponse.class);
+        } catch (Exception e) {
+          return new UpdateAvatarResponse();
+        }
+      }
+      return null;
     });
   }
 
