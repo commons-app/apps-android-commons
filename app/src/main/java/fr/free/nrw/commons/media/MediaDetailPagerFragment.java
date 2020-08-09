@@ -22,21 +22,33 @@ import butterknife.ButterKnife;
 import com.google.android.material.snackbar.Snackbar;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.Bookmark;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.DownloadUtils;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.disposables.CompositeDisposable;
+import java.util.Objects;
 import javax.inject.Inject;
 import timber.log.Timber;
 
 public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
 
     @Inject BookmarkPicturesDao bookmarkDao;
+
+    @Inject
+    OkHttpJsonApiClient okHttpJsonApiClient;
+
+    @Inject
+    SessionManager sessionManager;
+
+    private static CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @BindView(R.id.mediaDetailsPager) ViewPager pager;
     private Boolean editable;
@@ -159,6 +171,10 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 // Set wallpaper
                 setWallpaper(m);
                 return true;
+            case R.id.menu_set_as_avatar:
+                // Set avatar
+                setAvatar(m);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -175,6 +191,20 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             return;
         }
         ImageUtils.setWallpaperFromImageUrl(getActivity(), Uri.parse(media.getImageUrl()));
+    }
+
+    /**
+     * Set the media as user's leaderboard avatar
+     * @param media
+     */
+    private void setAvatar(Media media) {
+        if (media.getImageUrl() == null || media.getImageUrl().isEmpty()) {
+            Timber.d("Media URL not present");
+            return;
+        }
+        ImageUtils.setAvatarFromImageUrl(getActivity(), media.getImageUrl(),
+            Objects.requireNonNull(sessionManager.getCurrentAccount()).name,
+            okHttpJsonApiClient, compositeDisposable);
     }
 
     @Override
