@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.profile.leaderboard;
 
-import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.AVATAR_SOURCE_URL;
 import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.USER_LINK_PREFIX;
 
 import android.content.Context;
