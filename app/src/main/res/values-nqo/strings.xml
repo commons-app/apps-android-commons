@@ -39,7 +39,9 @@
   <string name="upload_progress_notification_title_in_progress"> %1$s ߟߊ߬ߦߟߍ߬ߟߌ ߦߋ߫ ߛߋ߲߬ߠߊ߫</string>
   <string name="upload_progress_notification_title_finishing"> %1$s ߟߊ߬ߦߟߍ߬ߟߌ ߞߎ߲߬ߘߏ߲߬ߠߌ߲ ߦߴߌ ߘߐ߫</string>
   <string name="upload_failed_notification_title"> %1$s ߟߊ߬ߦߟߍ߬ߟߌ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
+  <string name="upload_paused_notification_title">%1$s ߟߊߦߟߍ߬ߟߌ ߓߘߊ߫ ߟߊߟߐ߬</string>
   <string name="upload_failed_notification_subtitle">ߊ߬ ߛߐ߲߬ߞߌ߲߫ ߞߵߊ߬ ߦߋ߫</string>
+  <string name="upload_paused_notification_subtitle">ߊ߬ ߛߐ߲߬ߞߌ߲߫ ߞߵߊ߬ ߦߋ߫</string>
   <string name="title_activity_contributions">ߒ ߠߊ߫ ߟߊ߬ߦߟߍ߬ߣߍ߲߬ ߞߐ߯ߟߕߊ ߟߎ߬</string>
   <string name="contribution_state_failed">ߊ߬ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
   <string name="contribution_state_in_progress">%1$d%% ߓߘߊ߫ ߘߝߊ߫</string>
@@ -72,6 +74,11 @@
   <string name="enable_gps">GPS ߟߊߞߎߣߎ߲߫</string>
   <string name="contributions_subtitle_zero">ߟߊ߬ߦߟߍ߬ߣߍ߲߬ ߕߴߦߋ߲߬ ߡߎߣߎ߲߬</string>
   <string name="categories_not_found">ߞߎߡߘߊ߫ %1$s ߡߊ߫ ߛߐ߬ߘߐ߲߬.</string>
+  <string name="depictions_not_found">ߥߞߌߘߕߊ ߞߣߐߘߐ߫ ߛߌ߫ ߕߍ߫ ߦߋ߲߬ %1$s ߘߌ߫</string>
+  <string name="no_child_classes">ߘߋߣߍ߲߫ ߛߊ߯ߘߊ߫ ߕߍ߫ %1$s ߓߟߏ߫</string>
+  <string name="no_parent_classes">ߡߏߦߌߓߊ߯ ߛߊ߯ߘߊ߫ ߛߌ߫ ߕߍ߫ %1$s ߓߟߏ߫.</string>
+  <string name="depictions_image_not_found">ߖߌ߬ߦߊ߬ߓߍ߫ ߦߌ߬ߘߊ߬ߕߊ߫ ߕߍ߫ ߦߋ߲߬</string>
+  <string name="categories_skip_explanation">ߦߌߟߡߊ ߘߏ߫ ߝߙߊ߬ ߞߵߌ ߟߊ߫ ߖߌ߬ߦߊ߬ߓߍ ߞߎ߲߬ߠߞߊ߬ߕߊ߫ ߘߌ߫ ߥߞߌߡߋߘߌߦߊ߫ ߞߐߡߐ߲ ߞߊ߲߬.\nߛߐ߲߬ߞߌ߲߬ߠߌ߲ ߘߊߡߌ߬ߣߊ߬ ߞߊ߬ ߦߌߟߡߊ ߟߎ߫ ߝߙߊ߬.</string>
   <string name="categories_activity_title">ߦߌߟߡߊ ߟߎ߬</string>
   <string name="title_activity_settings">ߟߊ߬ߓߍ߲߬ߢߐ߲߰ߡߦߊ߬ߘߊ</string>
   <string name="title_activity_signup">ߖߊ߬ߕߋ߬ߘߊ ߟߊߞߊ߬</string>
@@ -107,7 +114,7 @@
   <string name="tutorial_4_subtext_1">ߞߎ߲߬ߕߐ߮:ߛߌߘߑߣߋ߫ ߘߐ߬ߓߛߏ߬ߟߌ߬ ߟߎ</string>
   <string name="welcome_final_text">ߌ ߦߴߊ߬ ߖߌ߰ ߟߊ߫ ߞߴߌ ߓߘߴߊ߬ ߛߐ߬ߘߐ߲߬؟</string>
   <string name="welcome_final_button_text">ߐ߲߬ߐ߲߬ߐ߲߫߹</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;ߞߟߊ߬ߟߐ߲߬ߠߌ߲߬ ߜߘߍ߫ ߟߎ߫&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">ߞߎ߲߬ߠߊ߬ߝߎ߬ߟߋ߲߬ ߜߘߍ ߟߎ߬</string>
   <string name="detail_panel_cats_label">ߦߌߟߡߊ ߟߎ߬</string>
   <string name="detail_panel_cats_loading">ߟߊ߬ߢߎ߲߬ߠߌ߲ ߦߵߌ ߘߐ߫...</string>
   <string name="detail_panel_cats_none">ߊ߬ ߡߊ߫ ߓߊߕߐ߬ߡߐ߲߬</string>
@@ -146,6 +153,7 @@
   <string name="commons_logo">ߞߐߡߐ߲ ߛߌ߲ߞߐ߲</string>
   <string name="commons_website">ߞߐߡߐ߲ ߞߍߦߙߐ</string>
   <string name="commons_facebook">ߞߐߡߐ߲ ߝߋߛߑߓߎߞ ߞߐߜߍ</string>
+  <string name="background_image">ߝߊ߲߬ߝߘߊ ߞߘߐߟߊ ߖߌ߬ߦߊ߬ߓߍ</string>
   <string name="no_image_found">ߖߌ߬ߦߊ߬ߓߍ߫ ߡߊ߫ ߛߐ߬ߘߐ߲߬</string>
   <string name="no_subcategory_found">ߦߌߟߡߊߙߋ߲߫ ߕߴߦߋ߲߬</string>
   <string name="upload_image">ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߟߍ߬</string>
@@ -211,6 +219,11 @@
   <string name="about_translate_cancel">ߊ߬ ߘߐߛߊ߬</string>
   <string name="retry">ߊ߬ ߡߊߝߍߣߍ߲߫ ߕߎ߲߯</string>
   <string name="showcase_view_got_it_button">ߊ߬ ߟߊߛߐ߬ߘߐ߲߬߹</string>
+  <string name="showcase_view_needs_photo">ߦߙߐ ߡߊ߬ߞߏ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߊ߫</string>
+  <string name="showcase_view_has_photo">ߖߌ߬ߦߊ߬ߓߍ ߘߏ߫ ߦߋ߫ ߦߙߐ ߣߌ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߫</string>
+  <string name="showcase_view_no_longer_exists">ߦߙߐ ߣߌ߲߬ ߕߍߣߊ߬ ߡߍ߲߫ ߠߊ߫ ߓߍߓߊ߯ߦߊ ߘߐ߫ ߏ߬ ߞߐ߫.</string>
+  <string name="showcase_view_list_icon">ߞߎ߬ߘߎ ߣߌ߲߬ ߛߐ߲߬ߞߌ߲ ߘߌ߫ ߦߙߐ ߢߌ߲߬ ߠߎ߬ ߛߙߍߘߍ ߟߊߛߊ߬ߦߌ߫ ߟߊ߫.</string>
+  <string name="showcase_view_plus_fab">ߌ ߘߌ߫ ߛߋ߫ ߦߙߐ ߓߍ߯ ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߟߍ߬ ߟߊ߫ ߞߊ߬ ߓߐ߫ ߌ ߟߊ߫ ߖߌ߬ߦߊ߬ߝߍ ߘߐ߫ ߥߟߊ߫ ߞߍߟߊ߲ ߠߊ߫</string>
   <string name="no_images_found">ߖߌ߬ߦߊ߬ߓߍ߫ ߡߊ߫ ߛߐ߬ߘߐ߲߬</string>
   <string name="error_loading_images">ߝߎ߬ߕߎ߲߬ߕߌ ߓߌ߬ߟߊ߬ߣߍ߲߫ ߊ߬ ߘߐ߫ ߞߵߌ ߕߏ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߍ߬ߟߍ ߞߊ߲߬.</string>
   <string name="image_uploaded_by">ߖߌ߬ߦߊ߬ߓߍ ߟߊ߬ߦߟߍ߬ߣߍ߲߬ ߦߋ߫:  %1$s ߟߋ߬ ߓߟߏ߫</string>
@@ -257,6 +270,8 @@
   <string name="submit">ߊ߬ ߞߘߊߡߊ߫</string>
   <string name="upload_title_duplicate">ߞߐߕߐ߮ ߣߌ߲߬ ߕߐ߮ ߦߋ߫ ߦߋ߲߬ %1$s ߞߘߐ߬ߡߊ߲߫. ߌ ߦߴߊ߬ ߝߍ߬ ߞߵߊ߬ ߘߊߓߊ߲߫ ߓߊ߬؟</string>
   <string name="title_page_bookmarks_pictures">ߖߌ߬ߦߊ߬ߓߍ ߟߎ߬</string>
+  <string name="deletion_reason_uploaded_by_mistake">ߒ ߣߵߊ߬ ߟߊߦߟߍ߬ ߟߊ߫ ߢߌ߬ߣߊ߬ ߓߟߏ ߟߋ߬ ߡߊ߬</string>
+  <string name="deletion_reason_publicly_visible">ߒ ߕߎ߲߬ ߡߴߊ߬ ߟߐ߲߫ ߞߴߊ߬ ߘߌ߫ ߞߍ߫ ߟߊ߬ߥߊ߲߬ߞߊ߬ߟߌ߬ ߦߋߕߊ߫ ߘߌ߫</string>
   <string name="desc_language_Worldwide">ߞߌߢߍ߲߫ ߝߊ߲߭ ߓߍ߯</string>
   <string name="desc_language_America">ߊߡߋߙߌߞߌ߬</string>
   <string name="desc_language_Europe">ߋߙߐߔߎ߬</string>
@@ -299,6 +314,9 @@
   <string name="review_thanks_no_button_text">ߖߌ߬ߦߊ߬ߓߍ ߣߊ߬ߕߐ</string>
   <string name="no_image">ߖߌ߬ߦߊ߬ߓߍ߬ ߡߊ߫ ߟߊߓߊ߯ߙߊ߫</string>
   <string name="no_image_uploaded">ߖߌ߬ߦߊ߬ߓߍ߫ ߡߊ߫ ߟߊߦߟߍ߬</string>
+  <string name="menu_option_read">ߘߐ߬ߞߊ߬ߙߊ߲߬ߣߍ߲ ߠߎ߬ ߦߋ߫</string>
+  <string name="menu_option_unread">ߘߐ߬ߞߊ߬ߙߊ߲߬ߓߊߟߌ ߟߎ߬ ߦߋ߫</string>
+  <string name="error_occurred_in_picking_images">ߝߎ߬ߕߎ߲߬ߕߌ ߓߌ߬ߟߊ߬ߣߍ߲߫ ߊ߬ ߘߐ߫ ߞߵߌ ߕߏ߫ ߖߌ߬ߦߊ߬ߓߍ ߓߊߕߐ߬ߡߐ߲ ߞߊ߲߬.</string>
   <string name="image_chooser_title">ߖߌ߬ߦߊ߬ߓߍ߫ ߟߊߦߟߍ߬ߕߊ ߘߏ߫ ߛߎߥߊ߲ߘߌ߫</string>
   <string name="please_wait">ߡߊ߬ߞߐ߬ߣߐ߲߬ߠߌ߲ ߞߍ߫ ߖߊ߰ߣߌ߲߬...</string>
   <string name="skip_image">ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߠߊߜߊ߲߫</string>
@@ -306,10 +324,12 @@
   <string name="exif_tag_name_copyright">ߓߊߦߟߍߡߊ߲ ߤߊߞߍ</string>
   <string name="exif_tag_name_location">ߘߌ߲߬ߞߌߙߊ</string>
   <string name="exif_tag_name_cameraModel">ߖߌ߬ߦߊ߬ߕߊ߬ߟߊ߲ ߛߎ߮ߦߊ</string>
+  <string name="share_via">ߟߥߊ߬ߟߌ߬ߟߊ߲ ߠߊߖߍ߲ߛߍ߲ ߢߌ߲߬ ߠߎ߫ ߞߊ߲߬...</string>
   <string name="image_info">ߖߌ߬ߦߊ߬ߓߍ ߞߌ߬ߓߊ߬ߙߏ߬ߦߊ</string>
   <string name="no_categories_found">ߦߌߟߡߊߙߋ߲߫ ߕߴߦߋ߲߬</string>
   <string name="no_depiction_found">ߘߊ߲߬ߠߊ߬ߕߍ߰ߟߌ ߡߊ߫ ߛߐ߬ߘߐ߲߬</string>
   <string name="upload_cancelled">ߟߊ߬ߦߟߍ߬ߟߌ ߘߊߓߌ߬ߟߊ߬</string>
+  <string name="previous_image_title_description_not_found">ߓߟߏߡߟߊ߫ ߛߌ߫ ߕߍ߫ ߖߌ߬ߦߊ߬ߓߍ ߣߊ߬ߕߐ ߞߎ߲߬ߕߐ߮ ߟߊ߫ ߥߟߴߊ߬ ߞߊ߲߬ߛߓߍߟߌ</string>
   <string name="dialog_box_text_nomination">ߡߎ߲߬ߠߊ߫ %1$s ߖߏ߬ߛߌ߬ߕߐ߫؟</string>
   <string name="review_is_uploaded_by">%1$s ߟߊߦߟߍ߬ߣߍ߲߬ ߦߋ߫: %2$s ߟߋ߬ ߓߟߏ߫</string>
   <string name="default_description_language">ߞߊ߲߬ߛߓߍߟߌ ߞߍ߫ ߞߊ߲ ߓߊߖߎߡߊ</string>
@@ -319,6 +339,7 @@
   <string name="delete_helper_show_deletion_message_if">%1$s ߕߐ߯ߦߊߟߌ ߦߴߌ ߘߐ߫ ߖߏ߬ߛߌ߬ߟߌ ߞߊ߲ߡߊ߬</string>
   <string name="delete_helper_show_deletion_title_failed">ߊ߬ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
   <string name="delete_helper_show_deletion_message_else">ߌ ߕߍ߫ ߛߋ߫ ߖߏ߰ߛߌ߬ߟߌ ߡߊߢߌߣߌ߲߫ ߠߊ߫</string>
+  <string name="delete_helper_ask_spam_selfie">ߛߍߟߑߝߌ ߘߏ߫</string>
   <string name="delete_helper_ask_spam_blurry">ߢߟߊߝߎ߬ߟߎ߲߬ߜߊ߬ߣߍ߲</string>
   <string name="delete_helper_ask_spam_other">ߘߏ߫ ߜߘߍ߫</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">ߖߌ߬ߦߊ߬ߓߍ ߜߍ߬ߙߍ߲߬ߘߍ߬ߣߍ߲</string>
@@ -329,7 +350,17 @@
   <string name="no_achievements_yet">ߌ ߡߊ߫ ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲ ߛߌ߫ ߞߍ߫ ߡߎߣߎ߲߬</string>
   <string name="account_created">ߖߊ߬ߕߋ߬ߘߊ ߓߘߊ߫ ߛߌ߲ߘߌ߫߹</string>
   <string name="some_error">ߝߎ߬ߕߎ߲߬ߕߌ ߘߏ߫ ߕߘߍ߬ ߦߋ߫ ߦߋ߲߬߹</string>
+  <string name="place_state_exists">ߊ߬ ߦߋ߫ ߦߋ߲߬</string>
+  <string name="place_state_needs_photo">ߡߊ߬ߞߏ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߊ߫</string>
+  <string name="place_type">ߦߙߐ ߛߎ߯ߦߊ:</string>
+  <string name="nearby_search_hint">ߛߍ߲߸ ߗߍߓߏ߲߸ ߖߌ߬ߦߊ߬ߓߏ߲ ߊ߬ ߣߌ߫.</string>
+  <string name="you_must_reset_your_passsword">ߞߏ ߘߏ߫ ߓߍ߲߬ ߣߍ߲߬ ߕߍ߫ ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߘߐ߫߸ ߌ ߦߴߌ ߟߊ߫ ߕߊ߬ߡߌ߲߬ߞߊ߲ ߡߊߝߊ߲߬ߟߋ߲߬߹߹</string>
+  <string name="title_for_child_classes">ߘߋ߲ ߠߎ߬ ߟߊ߫ ߛߊ߯ߘߊ ߟߎ߫</string>
+  <string name="title_for_parent_classes">ߡߏߦߌߓߊ߮ ߟߎ߬ ߟߊ߫ ߛߊ߯ߘߊ ߟߎ߫</string>
+  <string name="upload_nearby_place_found_title">ߛߌ߰ߢߐ߲߰ ߦߙߐ ߦߴߊ߬ ߘߐ߫</string>
+  <string name="upload_nearby_place_found_description">ߦߙߐ %1$s ߖߌ߬ߦߊ߬ߓߍ ߟߋ߬ ߦߋ߫ ߣߌ߲߬ ߘߌ߫ ߓߊ߬؟</string>
   <string name="theme_dark_name">ߘߌ߬ߓߌ</string>
+  <string name="theme_light_name">ߦߋߟߋ߲</string>
   <string name="load_more">ߘߏߜߘߍ߫ ߟߎ߫ ߟߊߢߎ߲߫</string>
   <string name="add_picture_to_wikipedia_article_title">ߖߌ߬ߦߊ߬ߓߍ ߝߙߊ߬ ߥߞߌߔߋߘߌߦߊ ߞߊ߲߬</string>
   <string name="add_picture_to_wikipedia_article_desc">ߌ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߓߌ߬ߟߊ߬ %1$ ߞߊ߲ ߥߞߌߔߋߘߌߦߊ ߞߎߡߘߊ ߟߊ߫ ߓߊ߬؟</string>

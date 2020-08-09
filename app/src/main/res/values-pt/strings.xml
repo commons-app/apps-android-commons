@@ -77,7 +77,9 @@
   <string name="upload_progress_notification_title_in_progress">A carregar %1$s</string>
   <string name="upload_progress_notification_title_finishing">A terminar o carregamento de %1$s</string>
   <string name="upload_failed_notification_title">O carregamento de %1$s falhou</string>
+  <string name="upload_paused_notification_title">Carregamento de %1$s em pausa</string>
   <string name="upload_failed_notification_subtitle">Tocar para ver</string>
+  <string name="upload_paused_notification_subtitle">Tocar para ver</string>
   <string name="title_activity_contributions">Carregamentos recentes</string>
   <string name="contribution_state_queued">Em espera</string>
   <string name="contribution_state_failed">Falhado</string>
@@ -90,7 +92,9 @@
   <string name="menu_share">Partilhar</string>
   <string name="menu_open_in_browser">Ver no navegador</string>
   <string name="share_title_hint">Legenda (obrigatória)</string>
+  <string name="add_caption_toast">Forneça uma legenda para este ficheiro, por favor</string>
   <string name="share_description_hint">Descrição</string>
+  <string name="share_caption_hint">Legenda (limite de 255 caracteres)</string>
   <string name="login_failed_network">Não é possível iniciar uma sessão - falha de rede</string>
   <string name="login_failed_wrong_credentials">Não é possível iniciar uma sessão - verifique o seu nome de utilizador e a palavra-passe, por favor</string>
   <string name="login_failed_throttled">Demasiadas tentativas mal sucedidas. Por favor, tente novamente dentro de minutos.</string>
@@ -103,6 +107,7 @@
   <string name="provider_modifications">Modificações</string>
   <string name="menu_upload_single">Carregar</string>
   <string name="categories_search_text_hint">Pesquisar categorias</string>
+  <string name="depicts_search_text_hint">Procurar elementos que o seu conteúdo multimédia retrata (montanha, o Taj Mahal, etc.)</string>
   <string name="menu_save_categories">Gravar</string>
   <string name="refresh_button">Atualizar</string>
   <string name="display_list_button">Lista</string>
@@ -110,6 +115,10 @@
   <string name="enable_gps">Ativar GPS</string>
   <string name="contributions_subtitle_zero">Ainda não foram enviados ficheiros</string>
   <string name="categories_not_found">Não foi encontrada nenhuma categoria que corresponda a %1$s</string>
+  <string name="depictions_not_found">Não foi encontrado nenhum elemento Wikidata que corresponda a %1$s</string>
+  <string name="no_child_classes">%1$s não tem nenhuma classe descendente</string>
+  <string name="no_parent_classes">%1$s não tem nenhuma classe progenitora</string>
+  <string name="depictions_image_not_found">Não há nenhuma imagem para a representação</string>
   <string name="categories_skip_explanation">Adicione categorias para tornar as suas imagens mais fáceis de encontrar na wiki Wikimedia Commons.\nComece a escrever para adicionar categorias.</string>
   <string name="categories_activity_title">Categorias</string>
   <string name="title_activity_settings">Configurações</string>
@@ -126,6 +135,7 @@
   <string name="menu_feedback">Enviar comentários (por correio eletrónico)</string>
   <string name="no_email_client">Não foi instalado nenhum cliente de correio eletrónico</string>
   <string name="provider_categories">Categorias usadas recentemente</string>
+  <string name="provider_depictions">Representações usadas recentemente</string>
   <string name="waiting_first_sync">A aguardar pela primeira sincronização…</string>
   <string name="no_uploads_yet">Não carregou ainda nenhuma foto.</string>
   <string name="menu_retry_upload">Tentar novamente</string>
@@ -136,7 +146,7 @@
   <string name="use_previous">Usar título e descrição anteriores</string>
   <string name="allow_gps">Obter automaticamente a localização atual</string>
   <string name="allow_gps_summary">Se a imagem não estiver georreferenciada, obtém a localização atual e georreferencia a imagem com ela. Aviso: isto revela a sua localização corrente.</string>
-  <string name="preference_theme" fuzzy="true">Modo noturno</string>
+  <string name="preference_theme">Tema</string>
   <string name="license_name_cc_by_sa_four">Atribuição-CompartilhaIgual 4.0</string>
   <string name="license_name_cc_by_four">Atribuição 4.0</string>
   <string name="license_name_cc_by_sa"> Atribuição–CompartilhaIgual 3.0</string>
@@ -182,7 +192,8 @@
   <string name="detail_panel_cats_loading">A carregar…</string>
   <string name="detail_panel_cats_none">Nenhuma selecionada</string>
   <string name="detail_caption_empty">Sem legenda</string>
-  <string name="detail_description_empty">Sem descrição</string>
+  <string name="detail_depiction_empty">Não há nenhuma representação</string>
+  <string name="detail_description_empty">Não há nenhuma descrição</string>
   <string name="detail_discussion_empty">Não há nenhuma discussão</string>
   <string name="detail_license_empty">Licença desconhecida</string>
   <string name="menu_refresh">Atualizar</string>
@@ -195,11 +206,14 @@
   <string name="title_activity_nearby">Locais Próximos</string>
   <string name="no_nearby">Não foi encontrado nenhum local próximo</string>
   <string name="warning">Aviso</string>
-  <string name="upload_image_duplicate">Este ficheiro já existe na wiki Commons. Tem a certeza de que deseja continuar?</string>
+  <string name="duplicate_image_found">Foi encontrada uma imagem duplicada</string>
+  <string name="upload_image_duplicate">Este ficheiro já foi destruído na wiki Commons. Tem a certeza de que deseja continuar?</string>
+  <string name="upload">Carregar</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
   <string name="media_detail_caption">Legenda</string>
   <string name="media_detail_title">Título</string>
+  <string name="media_detail_depiction">Representações</string>
   <string name="media_detail_description">Descrição</string>
   <string name="media_detail_discussion">Discussão</string>
   <string name="media_detail_author">Autor</string>
@@ -261,6 +275,7 @@
   <string name="error_while_cache">Erro ao colocar imagens na cache</string>
   <string name="title_info">Um título descritivo exclusivo para o ficheiro, que servirá como um nome de ficheiro. Pode utilizar uma linguagem simples com espaços. Não inclua a extensão do ficheiro</string>
   <string name="description_info">Descreva o elemento multimédia da melhor forma possível, por favor. Onde foi tirado? O que é mostrado? Qual é o contexto? Descreva os objetos ou pessoas. Indique as informações que não podem ser facilmente adivinhadas; por exemplo, a hora do dia, se for uma paisagem. Se o ficheiro mostra algo incomum, explique o que é incomum.</string>
+  <string name="caption_info" fuzzy="true">Escreva uma breve descrição da imagem, por favor (limite de 255 caracteres).</string>
   <string name="upload_image_too_dark">Esta imagem está demasiado escura; tem a certeza de que deseja carregá-la? A wiki Wikimedia Commons só aceita as imagens de valor enciclopédico.</string>
   <string name="upload_image_blurry">Esta imagem está desfocada; tem a certeza de que deseja carregá-la? A wiki Wikimedia Commons serve apenas para imagens de valor enciclopédico.</string>
   <string name="upload_problem_exist">Possíveis problemas com esta imagem:</string>
@@ -270,6 +285,7 @@
   <string name="upload_problem_different_geolocation">Esta fotografia foi tirada num local diferente.</string>
   <string name="upload_problem_fbmd">Carregue só fotografias tiradas por si, por favor. Não carregue fotografias que encontrou na conta do Facebook de outra pessoa.</string>
   <string name="upload_problem_do_you_continue">Quer, mesmo assim, carregar esta fotografia?</string>
+  <string name="upload_problem_image">Problemas encontrados na imagem</string>
   <string name="internet_downloaded">Carregue só fotografias tiradas por si, por favor. Não carregue fotografias que tenha descarregado da Internet.</string>
   <string name="give_permission">Permitir</string>
   <string name="use_external_storage">Utilizar armazenamento externo</string>
@@ -323,6 +339,9 @@
   <string name="retry">Tentar novamente</string>
   <string name="showcase_view_got_it_button">Entendido!</string>
   <string name="showcase_view_whole_nearby_activity">Estes são os locais próximos de si que precisam de fotografias para ilustrar os respetivos artigos na Wikipédia.\n\nClicar em \'Pesquisar nesta área\' bloqueia a localização do mapa e inicia uma pesquisa de locais na área circundante.</string>
+  <string name="showcase_view_needs_photo">Este local precisa de uma foto.</string>
+  <string name="showcase_view_has_photo">Este local já tem uma foto.</string>
+  <string name="showcase_view_no_longer_exists">Este local já não existe.</string>
   <string name="showcase_view_list_icon">Tocar neste botão fará surgir uma lista destes locais</string>
   <string name="showcase_view_plus_fab">Pode carregar uma fotografia de qualquer local, vinda da sua galeria ou câmara</string>
   <string name="no_images_found">Não foi encontrada nenhuma imagem!</string>
@@ -339,6 +358,7 @@
   <string name="search_recent_header">Pesquisas recentes:</string>
   <string name="provider_searches">Consultas pesquisadas recentemente</string>
   <string name="error_loading_categories">Ocorreu um erro ao carregar categorias.</string>
+  <string name="error_loading_depictions">Ocorreu um erro ao carregar representações.</string>
   <string name="error_loading_subcategories">Ocorreu um erro ao carregar subcategorias.</string>
   <string name="search_tab_title_media">Multimédia</string>
   <string name="search_tab_title_categories">Categorias</string>
@@ -402,7 +422,7 @@
   <string name="contributions_fragment">Contribuições</string>
   <string name="nearby_fragment">Aqui perto</string>
   <string name="notifications">Notificações</string>
-  <string name="read_notifications" fuzzy="true">Notificações (arquivadas)</string>
+  <string name="read_notifications">Notificações (lidas)</string>
   <string name="display_nearby_notification">Apresentar notificação de proximidade</string>
   <string name="display_nearby_notification_summary">Toque aqui para ver o local mais próximo que precisa de fotos</string>
   <string name="no_close_nearby">Não foi encontrado nenhum local próximo</string>
@@ -442,6 +462,8 @@
   <string name="desc_language_Pacific">Pacífico</string>
   <string name="no_categories_selected">Não foi selecionada nenhuma categoria</string>
   <string name="no_categories_selected_warning_desc">As imagens sem categorias só raramente são utilizáveis. Tem a certeza de que deseja continuar sem selecionar categorias?</string>
+  <string name="no_depictions_selected">Não foram selecionadas representações</string>
+  <string name="no_depictions_selected_warning_desc">As imagens com representações são encontradas mais facilmente e mais propensas a serem usadas. Tem a certeza de que deseja continuar sem selecionar representações?</string>
   <string name="upload_flow_all_images_in_set">(Para todas as imagens do conjunto)</string>
   <string name="search_this_area">Pesquisar nesta área</string>
   <string name="nearby_card_permission_title">Pedido de permissões</string>
@@ -451,6 +473,7 @@
   <string name="display_location_permission_title">Apresentar permissões de localização</string>
   <string name="display_location_permission_explanation">Pedir permissões de localização quando for necessário para a funcionalidade do cartão de notificação de proximidade.</string>
   <string name="achievements_fetch_failed">Algo correu mal, não conseguimos obter as suas realizações</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">As suas contribuições foram tantas que o nosso sistema de cálculo de realizações não consegue processá-las. Essa é a realização máxima.</string>
   <string name="ends_on">Termina em:</string>
   <string name="display_campaigns">Apresentar campanhas</string>
   <string name="display_campaigns_explanation">Ver as campanhas em andamento</string>
@@ -505,9 +528,9 @@
   <string name="no_image_reverted">Não foi revertida nenhuma imagem</string>
   <string name="no_image_uploaded">Não foi carregada nenhuma imagem</string>
   <string name="no_notification">Não tem nenhuma notificação por ler</string>
-  <string name="no_read_notification" fuzzy="true">Não tem nenhuma notificação arquivada</string>
+  <string name="no_read_notification">Não tem nenhuma notificação lida</string>
   <string name="share_logs_using">Partilhar os registos usando</string>
-  <string name="menu_option_read" fuzzy="true">Ver arquivadas</string>
+  <string name="menu_option_read">Ver lidas</string>
   <string name="menu_option_unread">Ver não lidas</string>
   <string name="error_occurred_in_picking_images">Ocorreu um erro ao escolher imagens</string>
   <string name="image_chooser_title">Escolher imagens a carregar</string>
@@ -515,6 +538,7 @@
   <string name="images_featured_explanation">As fotografias destacadas são imagens de fotógrafos e ilustradores altamente qualificados, que a comunidade da wiki Wikimedia Commons escolheu como as de melhor qualidade do \'\'site\'\'.</string>
   <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo locais do mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidade permite que os editores enviem uma notificação de agradecimento aos utilizadores que fizerem edições úteis - usando uma pequena hiperligação de agradecimento na página do historial ou na de diferenças.</string>
+  <string name="previous_image_caption_description">Copiar legendas e descrição anteriores</string>
   <string name="previous_button_tooltip_message">Clique para reutilizar o título e a descrição que inseriu na sua fotografia anterior e adequá-los à atual</string>
   <string name="welcome_do_upload_content_description">Exemplos de imagens que podem ser carregadas na wiki Commons</string>
   <string name="welcome_dont_upload_content_description">Exemplos de imagens que não devem ser carregadas</string>
@@ -533,6 +557,7 @@
   <string name="share_via">Partilhar aplicação por...</string>
   <string name="image_info">Informação da imagem</string>
   <string name="no_categories_found">Não foi encontrada nenhuma categoria</string>
+  <string name="no_depiction_found">Não foi encontrada nenhuma representação</string>
   <string name="upload_cancelled">Carregamento cancelado</string>
   <string name="previous_image_title_description_not_found">Não há dados para o título ou descrição da imagem anterior</string>
   <string name="dialog_box_text_nomination">Porque deve %1$s ser eliminado?</string>
@@ -566,11 +591,43 @@
   <string name="nearby_search_hint">Ponte, museu, hotel, etc.</string>
   <string name="you_must_reset_your_passsword">Ocorreu algo de errado com a sessão, tem de redefinir a sua palavra-passe!</string>
   <string name="title_for_media">MULTIMÉDIA</string>
+  <string name="title_for_child_classes">CLASSES DESCENDENTES</string>
+  <string name="title_for_parent_classes">CLASSES PROGENITORAS</string>
   <string name="upload_nearby_place_found_title">Foi encontrado um local próximo</string>
   <string name="upload_nearby_place_found_description">Isto é uma foto do local %1$s?</string>
+  <string name="title_app_shortcut_explore">Explorar</string>
+  <string name="title_app_shortcut_bookmark">Marcadores</string>
+  <string name="title_app_shortcut_setting">Definições</string>
   <string name="remove_bookmark">Removido dos marcadores</string>
   <string name="add_bookmark">Adicionado aos marcadores</string>
   <string name="wallpaper_set_unsuccessfully">Ocorreu um problema. Não foi possível definir a imagem de fundo</string>
   <string name="setting_wallpaper_dialog_title">Definir como imagem de fundo</string>
   <string name="setting_wallpaper_dialog_message">A definir a imagem de fundo. Aguarde, por favor...</string>
+  <string name="theme_default_name">Seguir sistema</string>
+  <string name="theme_dark_name">Escuro</string>
+  <string name="theme_light_name">Claro</string>
+  <string name="cannot_open_location_settings">Não foi possível abrir as definições de localização. Ative a localização manualmente, por favor</string>
+  <string name="recommend_high_accuracy_mode">Para obter os melhores resultados, escolha o modo Alta Precisão.</string>
+  <string name="ask_to_turn_location_on">Ativar a localização?</string>
+  <string name="nearby_needs_location">A funcionalidade de proximidade precisa que a localização esteja ativada para funcionar corretamente</string>
+  <string name="use_location_from_similar_image">Tirou estas duas fotos no mesmo lugar? Quer usar a latitude/longitude da fotografia da direita?</string>
+  <string name="load_more">Carregar mais</string>
+  <string name="nearby_no_results">Não foi encontrado nenhum local; tente alterar os seus critérios de pesquisa.</string>
+  <string name="add_picture_to_wikipedia_article_title">Adicionar imagem à Wikipédia</string>
+  <string name="add_picture_to_wikipedia_article_desc">Deseja adicionar esta fotografia ao artigo da Wikipédia em %1$s?</string>
+  <string name="add_picture_to_wikipedia_instructions_title">Instruções</string>
+  <string name="add_picture_to_wikipedia_instructions_desc">Tenha o cuidado de seguir as diretrizes de edição!</string>
+  <string name="confirm">Confirmar</string>
+  <string name="instructions_title">Instruções</string>
+  <string name="wikipedia_instructions_step_1">1. Usar o seguinte texto wiki:</string>
+  <string name="wikipedia_instructions_step_2">2. Clicar em \"Confirmar\" abrirá o artigo da Wikipédia</string>
+  <string name="wikipedia_instructions_step_3">3. Encontrar uma secção apropriada no artigo para a sua imagem</string>
+  <string name="wikipedia_instructions_step_4">4. Clicar o ícone \"Editar\" (que parece um lápis) dessa secção.</string>
+  <string name="wikipedia_instructions_step_5">5. Inserir o texto wiki no local apropriado.</string>
+  <string name="wikipedia_instructions_step_6">6. Editar o texto wiki para colocar no posicionamento apropriado, se necessário. Para mais informações, ver &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;aqui&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_7">7. Publicar o artigo</string>
+  <string name="copy_wikicode_to_clipboard">Copiar código wiki para a área de transferência</string>
+  <string name="pause">pausar</string>
+  <string name="resume">continuar</string>
+  <string name="paused">Em pausa</string>
 </resources>

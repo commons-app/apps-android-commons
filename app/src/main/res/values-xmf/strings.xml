@@ -55,6 +55,7 @@
   <string name="upload_progress_notification_title_finishing">ეხარგუაშ თება %1$</string>
   <string name="upload_failed_notification_title">%1$ ეხარგუაქ ვემიხუჯინუ</string>
   <string name="upload_failed_notification_subtitle">ოძირაფალო ქეგუწკანტეთ</string>
+  <string name="upload_paused_notification_subtitle">ოძირაფალო ქეგუწკანტეთ</string>
   <string name="title_activity_contributions">ჩქიმი ბოლო ეხარგუეფი</string>
   <string name="contribution_state_queued">რადი</string>
   <string name="contribution_state_failed">ვემიხუჯინუ</string>

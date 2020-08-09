@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* 01miki10
 * Abijeet Patro
 * Alluk.
 * Crt
@@ -52,7 +53,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Asetukset</string>
   <string name="intent_share_upload_label">Tallenna Commonsiin</string>
-  <string name="username">Käyttäjätunnus</string>
+  <string name="username">Käyttäjänimi</string>
   <string name="password">Salasana</string>
   <string name="login_credential">Kirjaudu Commons Beta -tilillesi</string>
   <string name="login">Kirjaudu sisään</string>

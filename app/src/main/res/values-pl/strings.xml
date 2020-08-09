@@ -15,6 +15,7 @@
 * Rezonansowy
 * Rzuwig
 * Sp5uhe
+* Strebski
 * Ty221
 * Vesihiisi
 * WaldiSt
@@ -58,6 +59,12 @@
     <item quantity="many">%1$d Przesłanych</item>
     <item quantity="other">Przesłania</item>
   </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Odbieranie udostępnianych treści.  Przetwarzanie obrazu może zająć trochę czasu, w zależności od jego rozmiaru i urządzenia</item>
+    <item quantity="few">Odbieranie udostępnionej treści.  Przetwarzanie obrazów może zająć trochę czasu, w zależności od ich rozmiaru i urządzenia</item>
+    <item quantity="many">Odbieranie udostępnionej treści.  Przetwarzanie obrazów może zająć trochę czasu, w zależności od ich rozmiaru i urządzenia</item>
+    <item quantity="other"/>
+  </plurals>
   <string name="title_activity_explore">Odkrywaj</string>
   <string name="navigation_item_explore">Odkrywaj</string>
   <string name="preference_category_appearance">Wygląd</string>
@@ -71,7 +78,7 @@
   <string name="intent_share_upload_label">Prześlij do Commons</string>
   <string name="username">Nazwa użytkownika</string>
   <string name="password">Hasło</string>
-  <string name="login_credential">Zaloguj sie do Commons Beta</string>
+  <string name="login_credential">Zaloguj się na konto Commons Beta</string>
   <string name="login">Zaloguj się</string>
   <string name="forgot_password">Nie pamiętasz hasła?</string>
   <string name="signup">Zarejestruj się</string>
@@ -88,7 +95,9 @@
   <string name="upload_progress_notification_title_in_progress">Wysyłanie %1$s</string>
   <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$s</string>
   <string name="upload_failed_notification_title">Wysyłanie %1$s nieudane</string>
+  <string name="upload_paused_notification_title">Zatrzymano przesyłanie %1$ plików</string>
   <string name="upload_failed_notification_subtitle">Dotknij, aby zobaczyć</string>
+  <string name="upload_paused_notification_subtitle">Dotknij, aby zobaczyć</string>
   <string name="title_activity_contributions">Niedawno przesłane</string>
   <string name="contribution_state_queued">W kolejce</string>
   <string name="contribution_state_failed">Porażka</string>
@@ -198,7 +207,7 @@
   <string name="welcome_final_button_text">Tak!</string>
   <string name="welcome_help_button_text">Więcej informacji</string>
   <string name="detail_panel_cats_label">Kategorie</string>
-  <string name="detail_panel_cats_loading">Ładowanie…</string>
+  <string name="detail_panel_cats_loading">Wczytywanie…</string>
   <string name="detail_panel_cats_none">Nic nie zaznaczono</string>
   <string name="detail_caption_empty">Brak podpisu</string>
   <string name="detail_depiction_empty">Bez opisu</string>
@@ -284,7 +293,7 @@
   <string name="error_while_cache">Błąd podczas buforowania zdjęć</string>
   <string name="title_info">Podaj krótką, opisową i unikalną nazwę, która będzie służyła jako nazwa pliku. Możesz używać prostego języka i spacji. Nie dodawaj rozszerzenia pliku.</string>
   <string name="description_info">Opisz jak najwięcej mediów: Gdzie zostało zrobione? Co to pokazuje? Jaki jest kontekst? Proszę opisać przedmioty lub osoby. Ujawnij informacje, których nie można łatwo odgadnąć, na przykład porę dnia, jeśli jest to krajobraz. Jeśli media pokazują coś niezwykłego, wyjaśnij, co sprawia, że ​​jest to niezwykłe.</string>
-  <string name="caption_info">Proszę napisać krótki opis obrazu. (Limit do 255 znaków)</string>
+  <string name="caption_info" fuzzy="true">Proszę napisać krótki opis obrazu. (Limit do 255 znaków)</string>
   <string name="upload_image_too_dark">To zdjęcie jest zbyt ciemne, czy na pewno chcesz je załadować? Wikimedia Commons jest tylko dla zdjęć o wartości encyklopedycznej.</string>
   <string name="upload_image_blurry">To zdjęcie jest rozmazane, czy na pewno chcesz je załadować? Wikimedia Commons jest tylko dla zdjęć o wartości encyklopedycznej.</string>
   <string name="upload_problem_exist">Potencjalne problemy z tym obrazem:</string>
@@ -348,10 +357,13 @@
   <string name="retry">Ponów próbę</string>
   <string name="showcase_view_got_it_button">Wszystko jasne!</string>
   <string name="showcase_view_whole_nearby_activity">Kliknięcie „WYSZUKAJ TEN OBSZAR” blokuje mapę i rozpoczyna pobliskie wyszukiwanie w tej lokalizacji.</string>
+  <string name="showcase_view_needs_photo">To miejsce wymaga zdjęcia.</string>
+  <string name="showcase_view_has_photo">To miejsce już posiada zdjęcie.</string>
+  <string name="showcase_view_no_longer_exists">To miejsce już nie istnieje.</string>
   <string name="showcase_view_list_icon">Stuknięcie tego przycisku powoduje wyświetlenie listy tych miejsc</string>
   <string name="showcase_view_plus_fab">Możesz przesłać zdjęcie do dowolnego miejsca ze swojej galerii lub aparatu</string>
   <string name="no_images_found">Nie znaleziono grafik!</string>
-  <string name="error_loading_images">Wystąpił błąd podczas ładowania grafik.</string>
+  <string name="error_loading_images">Wystąpił błąd podczas wczytywania grafik.</string>
   <string name="image_uploaded_by">Przesłano przez %1$s</string>
   <string name="block_notification_title">Zablokowany(-a)</string>
   <string name="block_notification">Zostałeś zablokowany(-a) w Commons</string>
@@ -363,9 +375,9 @@
   <string name="title_activity_search">Szukaj</string>
   <string name="search_recent_header">Ostatnie wyszukiwania:</string>
   <string name="provider_searches">Ostatnio wyszukiwane zapytania</string>
-  <string name="error_loading_categories">Wystąpił błąd podczas ładowania kategorii.</string>
+  <string name="error_loading_categories">Wystąpił błąd podczas wczytywania kategorii.</string>
   <string name="error_loading_depictions">Wystąpił błąd podczas ładowania obrazów.</string>
-  <string name="error_loading_subcategories">Wystąpił błąd podczas ładowania podkategorii.</string>
+  <string name="error_loading_subcategories">Wystąpił błąd podczas wczytywania podkategorii.</string>
   <string name="search_tab_title_media">Multimedia</string>
   <string name="search_tab_title_categories">Kategorie</string>
   <string name="search_tab_title_depictions">Elementy</string>
@@ -431,6 +443,7 @@
   <string name="read_notifications">Powiadomienia (przeczytaj)</string>
   <string name="display_nearby_notification">Wyświetl powiadomienie w pobliżu</string>
   <string name="display_nearby_notification_summary">Stuknij tutaj, aby zobaczyć najbliższe miejsce, które wymaga zdjęć</string>
+  <string name="no_close_nearby">Nie odnaleziono pobliskich Tobie miejsc</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Uprawnienie do przechowywania</string>
   <string name="write_storage_permission_rationale_for_image_share">Potrzebujemy Twojej zgody na dostęp do zewnętrznej pamięci urządzenia w celu przesyłania obrazów.</string>
@@ -468,6 +481,7 @@
   <string name="no_categories_selected">Nie wybrano kategorii</string>
   <string name="no_categories_selected_warning_desc">Obrazy bez kategorii rzadko nadają się do użycia. Czy na pewno chcesz kontynuować bez wybierania kategorii?</string>
   <string name="no_depictions_selected">Nie wybrano żadnych obrazów</string>
+  <string name="no_depictions_selected_warning_desc">Obrazy ze wskazanymi przedstawieniami są łatwiejsze do znalezienia i częściej używane. Czy na pewno chcesz kontynuować bez wybierania przedstawień?</string>
   <string name="upload_flow_all_images_in_set">(Dla wszystkich obrazów w zestawie)</string>
   <string name="search_this_area">Przeszukaj ten obszar</string>
   <string name="nearby_card_permission_title">Prośba o pozwolenie</string>
@@ -479,6 +493,7 @@
   <string name="achievements_fetch_failed">Coś poszło nie tak, nie mogliśmy pobrać twoich osiągnięć</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Zrobiłeś tak wiele wkładu, że nasz system obliczania osiągnięć nie może sobie poradzić. To jest najwyższym osiągnięciem.</string>
   <string name="ends_on">Kończy się na:</string>
+  <string name="display_campaigns">Wyświetl kampanie</string>
   <string name="display_campaigns_explanation">Zobacz trwające kampanie</string>
   <string name="nearby_campaign_dismiss_message">Kampanie już nie będą widoczne. Jednak w razie potrzeby możesz ponownie włączyć to powiadomienie w ustawieniach.</string>
   <string name="this_function_needs_network_connection">Ta funkcja wymaga połączenia sieciowego, sprawdź ustawienia połączenia.</string>
@@ -512,6 +527,7 @@
   <string name="review_thanks">Czy chciałbyś podziękować autorowi?</string>
   <string name="review_spam_explanation">Kliknij NIE, aby nominować ten obraz do usunięcia, jeśli nie jest w ogóle przydatny.</string>
   <string name="review_copyright_explanation">Logo, zrzuty ekranu, plakaty filmowe często stanowią naruszenie praw autorskich.\nKliknij NIE, aby nominować ten obraz do usunięcia</string>
+  <string name="review_thanks_explanation">%1$s będzie wdzięczny za Twoje docenienie</string>
   <string name="review_no_category">Och, to nie jest nawet skategoryzowane!</string>
   <string name="review_category_explanation">Ten obraz należy do kategorii %1$s</string>
   <string name="review_spam_report_question">Jest poza zakresem, ponieważ jest</string>
@@ -593,6 +609,8 @@
   <string name="nearby_search_hint">Most, muzeum, hotel itp.</string>
   <string name="you_must_reset_your_passsword">Coś poszło nie tak podczas logowania, musisz zresetować hasło!</string>
   <string name="title_for_media">MEDIA</string>
+  <string name="title_for_child_classes">KLASY POTOMNE</string>
+  <string name="title_for_parent_classes">KLASY NADRZĘDNE</string>
   <string name="upload_nearby_place_found_title">Znaleziono miejsce w pobliżu</string>
   <string name="upload_nearby_place_found_description">Czy jest to zdjęcie miejsca %1$s?</string>
   <string name="title_app_shortcut_explore">Odkryj</string>
@@ -611,7 +629,7 @@
   <string name="ask_to_turn_location_on">Włączyć lokalizację?</string>
   <string name="nearby_needs_location">Lokalizacja W pobliżu wymaga włączonej lokalizacji, aby działać poprawnie</string>
   <string name="use_location_from_similar_image">Czy zrobiłeś te dwa zdjęcia w tym samym miejscu? Czy chcesz użyć szerokości/długości geograficznej obrazu po prawej stronie?</string>
-  <string name="load_more">Załaduj więcej</string>
+  <string name="load_more">Wczytaj więcej</string>
   <string name="nearby_no_results">Nie znaleziono miejsc, spróbuj zmienić kryteria wyszukiwania.</string>
   <string name="add_picture_to_wikipedia_article_title">Dodaj obraz do Wikipedii</string>
   <string name="add_picture_to_wikipedia_article_desc">Czy chcesz dodać to zdjęcie do artykułu w Wikipedii w języku %1$s?</string>
@@ -627,4 +645,7 @@
   <string name="wikipedia_instructions_step_6">6. Edytuj wikitekst w celu odpowiedniego pozycjonowania, jeśli to konieczne. Aby uzyskać więcej informacji, zobacz &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;here&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Opublikuj artykuł</string>
   <string name="copy_wikicode_to_clipboard">Skopiuj wikicode do schowka</string>
+  <string name="pause">zatrzymaj</string>
+  <string name="resume">wznów</string>
+  <string name="paused">Zatrzymano</string>
 </resources>

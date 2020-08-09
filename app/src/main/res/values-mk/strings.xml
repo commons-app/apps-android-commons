@@ -65,7 +65,9 @@
   <string name="upload_progress_notification_title_in_progress">Подигање на „%1$s“</string>
   <string name="upload_progress_notification_title_finishing">Завршувам со подигање на „%1$s“</string>
   <string name="upload_failed_notification_title">Подигањето на „%1$s“ не успеа</string>
+  <string name="upload_paused_notification_title">Подигањето на %1$s е запрено</string>
   <string name="upload_failed_notification_subtitle">Допрете за да погледате</string>
+  <string name="upload_paused_notification_subtitle">Допрете за да погледате</string>
   <string name="title_activity_contributions">Мои скорешни подигања</string>
   <string name="contribution_state_queued">Чека ред</string>
   <string name="contribution_state_failed">Не успеа</string>
@@ -93,7 +95,7 @@
   <string name="provider_modifications">Преиначувања</string>
   <string name="menu_upload_single">Подигни</string>
   <string name="categories_search_text_hint">Пребарај категории</string>
-  <string name="depicts_search_text_hint">Пребарајте ги предметите прикажани на сликата или снимката (планина, Лесновски манастир и тн.)</string>
+  <string name="depicts_search_text_hint">Пребарајте ги предметите прикажани на сликата или снимката (планина, Лесновски манастир итн.)</string>
   <string name="menu_save_categories">Зачувај</string>
   <string name="refresh_button">Превчитај</string>
   <string name="display_list_button">Список</string>
@@ -170,7 +172,7 @@
   <string name="welcome_wikipedia_text">Споделете ги Вашите слики. Да ги оживееме статиите на Википедија!</string>
   <string name="welcome_wikipedia_subtext">Сликите на Википедија доаѓаат од Ризницата.</string>
   <string name="welcome_copyright_text">Со Вашите слики помагате во образованието на луѓето ширум светот.</string>
-  <string name="welcome_copyright_subtext">Избегнуавјте материјали што сте ги нашле на семрежјето, како и слики од плакати, корици од книги и тн.</string>
+  <string name="welcome_copyright_subtext">Избегнуавјте материјали што сте ги нашле на семрежјето, како и слики од плакати, корици од книги итн.</string>
   <string name="welcome_final_text">Објаснивме добро?</string>
   <string name="welcome_final_button_text">Да!</string>
   <string name="welcome_help_button_text">Повеќе информации</string>
@@ -261,7 +263,7 @@
   <string name="error_while_cache">Грешка при меѓускладирање на сликите</string>
   <string name="title_info">Краток и единствен наслов на податотеката, кој ќе служи како нејзин назив. Можете да користите прост јазик со меѓупростор, но не пишувајте ја податотечната наставка</string>
   <string name="description_info">Објаснете ја податотеката што подобро можете: Каде е направена? Што е прикажано на неа? Кој е контекстот? Опишете ги предметите, објектите и личностите. Дајте сознанија што не можат лесно да се погодат, како на пр. време од денот ако се работи за природен предел. Ако на неа е претставено нешто необично, објаснете зошто прикажаното е необично.</string>
-  <string name="caption_info">Ставете краток опис на сликата. (највеќе 255 знаци)</string>
+  <string name="caption_info" fuzzy="true">Ставете краток опис на сликата. (највеќе 255 знаци)</string>
   <string name="upload_image_too_dark">Сликата ви е претемна. Дали сигурно сакате да ја подигнете? Ризницата е посветена само на слики со енциклопедиска вредност.</string>
   <string name="upload_image_blurry">Сликата ви е матна. Дали сигурно сакате да ја подигнете? Ризницата е посветена само на слики со енциклопедиска вредност.</string>
   <string name="upload_problem_exist">Потенцијални проблеми со сликава:</string>
@@ -325,6 +327,9 @@
   <string name="retry">Пробај пак</string>
   <string name="showcase_view_got_it_button">Јасно!</string>
   <string name="showcase_view_whole_nearby_activity">Ова се места во ваша близинана кои им требаат слики за илустрирање на нивните статии на Википедија.\n\nСо стискање на „ПРЕБАРАЈ НА ОВА ПОДРАЧЈЕ“ ќе направите задршка на картата и ќе ви се даде пребарување на нешта во таа околина.</string>
+  <string name="showcase_view_needs_photo">На местово му треба слика.</string>
+  <string name="showcase_view_has_photo">Местово веќе има слика.</string>
+  <string name="showcase_view_no_longer_exists">Местово повеќе не постои.</string>
   <string name="showcase_view_list_icon">Ако допрете на копчево ќе добиете список на тие места</string>
   <string name="showcase_view_plus_fab">Можете да подигнете слика за било кое од местата од вашата галерија или камера</string>
   <string name="no_images_found">Не пронајдов ниедна слика!</string>
@@ -571,7 +576,7 @@
   <string name="place_state_exists">Постои</string>
   <string name="place_state_needs_photo">Му треба слика</string>
   <string name="place_type">Вид на место:</string>
-  <string name="nearby_search_hint">Мост, музеј, хотел и тн.</string>
+  <string name="nearby_search_hint">Мост, музеј, хотел итн.</string>
   <string name="you_must_reset_your_passsword">Нешто не е во ред со најавата. Ќе мора да ставите нова лозинка !!</string>
   <string name="title_for_media">СЛИКИ/СНИМКИ</string>
   <string name="title_for_child_classes">ЗАВИСНИ КЛАСИ</string>
@@ -610,4 +615,7 @@
   <string name="wikipedia_instructions_step_6">6. По потреба, уредете го викитекстот за да ја ставите сликата во прикладна положба во одност на текстот. Повеќе информации за тоа ќе видите &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;тука&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Објавете ја статијата</string>
   <string name="copy_wikicode_to_clipboard">Прекопирајте го викикодот во меѓускладот</string>
+  <string name="pause">запри</string>
+  <string name="resume">продолжи</string>
+  <string name="paused">Запрено</string>
 </resources>

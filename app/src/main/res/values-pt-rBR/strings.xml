@@ -77,7 +77,9 @@
   <string name="upload_progress_notification_title_in_progress">%1$s enviando!</string>
   <string name="upload_progress_notification_title_finishing">Terminando o envio de %1$s</string>
   <string name="upload_failed_notification_title">Envio de %1$s falhou</string>
+  <string name="upload_paused_notification_title">Envio de %1$s em pausa</string>
   <string name="upload_failed_notification_subtitle">Toque para ver</string>
+  <string name="upload_paused_notification_subtitle">Toque para ver</string>
   <string name="title_activity_contributions">Meus envios recentes</string>
   <string name="contribution_state_queued">Na fila</string>
   <string name="contribution_state_failed">Falhou</string>
@@ -273,7 +275,7 @@
   <string name="error_while_cache">Erro durante o cache de imagens</string>
   <string name="title_info">Um título descritivo exclusivo para o arquivo, que servirá como um nome de arquivo. Você pode usar linguagem simples com espaços. Não inclua a extensão do arquivo</string>
   <string name="description_info">Por favor, descreva a mídia tanto quanto possível: onde foi tomada? O que isso mostra? Qual é o contexto? Descreva os objetos ou pessoas. Revelar informações que não podem ser facilmente adivinhadas, por exemplo, a hora do dia, se for uma paisagem. Se a mídia mostrar algo incomum, explique o que torna incomum.</string>
-  <string name="caption_info">Por favor, escreva uma breve descrição da imagem. (Limite a 255 caracteres)</string>
+  <string name="caption_info" fuzzy="true">Por favor, escreva uma breve descrição da imagem. (Limite a 255 caracteres)</string>
   <string name="upload_image_too_dark">Esta foto está muito escura, você tem certeza de que deseja enviá-la? O Wikimedia Commons é apenas para imagens com valor enciclopédico.</string>
   <string name="upload_image_blurry">Esta foto está embaçada, tem certeza de que deseja enviá-la? O Wikimedia Commons é apenas para imagens com valor enciclopédico.</string>
   <string name="upload_problem_exist">Problemas potenciais com esta imagem:</string>
@@ -337,6 +339,9 @@
   <string name="retry">Tentar novamente</string>
   <string name="showcase_view_got_it_button">Entendido!</string>
   <string name="showcase_view_whole_nearby_activity">Estes são os lugares perto de si que precisam de fotografias para ilustrar os respetivos artigos na Wikipédia.\n\nClicar em \'Pesquisar nesta área\' bloqueia a localização do mapa e inicia uma pesquisa de lugares na área circundante.</string>
+  <string name="showcase_view_needs_photo">Este lugar precisa de uma foto.</string>
+  <string name="showcase_view_has_photo">Este lugar já tem uma foto.</string>
+  <string name="showcase_view_no_longer_exists">Este lugar não existe mais.</string>
   <string name="showcase_view_list_icon">Tocar neste botão fará surgir uma lista destes lugares</string>
   <string name="showcase_view_plus_fab">Pode carregar uma fotografia para qualquer dos lugares, da sua galeria ou câmara</string>
   <string name="no_images_found">Não foi encontrada nenhuma imagem!</string>
@@ -622,4 +627,7 @@
   <string name="wikipedia_instructions_step_6">6. Editar o wikitexto para o posicionamento apropriado, se necessário. Para mais informações, veja &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;aqui&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Publique o artigo</string>
   <string name="copy_wikicode_to_clipboard">Copiar wikicode para a área de transferência</string>
+  <string name="pause">pausar</string>
+  <string name="resume">continuar</string>
+  <string name="paused">Pausado</string>
 </resources>

@@ -87,7 +87,9 @@
   <string name="upload_progress_notification_title_in_progress">%1$s завантажується</string>
   <string name="upload_progress_notification_title_finishing">Завершення завантаження %1$s</string>
   <string name="upload_failed_notification_title">Не вдалося завантажити %1$s</string>
+  <string name="upload_paused_notification_title">Завантаження %1$s призупинене</string>
   <string name="upload_failed_notification_subtitle">Торкніться, щоб переглянути</string>
+  <string name="upload_paused_notification_subtitle">Торкніться, щоб переглянути</string>
   <string name="title_activity_contributions">Мої останні завантаження</string>
   <string name="contribution_state_queued">У черзі</string>
   <string name="contribution_state_failed">Не вдалося</string>
@@ -283,7 +285,7 @@
   <string name="error_while_cache">Помилка кешування зображень</string>
   <string name="title_info">Унікальна описова назва файлу. Ви можете використовувати простий текст з пробілами. Не вказуйте розширення файлу</string>
   <string name="description_info">Будь ласка, докладно опишіть файл: де його було зроблено? що на ньому зображено? який контекст? Будь ласка, опишіть об\'єкти чи осіб. Додайте інформацію, яку не можна легко здогадатися, наприклад, пору доби для фотографії пейзажу. Якщо зображено щось незвичайне, спробуйте пояснити, що робить його незвичайним.</string>
-  <string name="caption_info">Будь ласка, створіть короткий опис цього зображення (не більше 255 символів).</string>
+  <string name="caption_info" fuzzy="true">Будь ласка, створіть короткий опис цього зображення (не більше 255 символів).</string>
   <string name="upload_image_too_dark">Це зображення надто темне; Ви впевнені, що хочете його завантажити? Вікісховище призначене для зображень, що мають енциклопедичне значення.</string>
   <string name="upload_image_blurry">Це зображення розмите; Ви впевнені, що хочете його завантажити? Вікісховище призначене для зображень, що мають енциклопедичне значення.</string>
   <string name="upload_problem_exist">Потенційні проблеми з цим зображенням:</string>
@@ -347,6 +349,9 @@
   <string name="retry">Повторити</string>
   <string name="showcase_view_got_it_button">Зрозуміло</string>
   <string name="showcase_view_whole_nearby_activity">Це місця поблизу, про які є статті Вікіпедії, але які потребують ілюстрацій.\n\nПісля натискання кнопки \"Шукати в цій зоні\" карта фіксується та відбувається пошук поблизу вказаного місця.</string>
+  <string name="showcase_view_needs_photo">Цьому місцю бракує фото.</string>
+  <string name="showcase_view_has_photo">Це місце уже має фото.</string>
+  <string name="showcase_view_no_longer_exists">Це місце більше не існує.</string>
   <string name="showcase_view_list_icon">Натискання цієї кнопки згенерує список таких місць</string>
   <string name="showcase_view_plus_fab">Ви можете завантажити зображення для любого з цих місць, зробивши знімок камерою або вибравши зображення з галереї</string>
   <string name="no_images_found">Зображень не знайдено!</string>
@@ -616,5 +621,23 @@
   <string name="ask_to_turn_location_on">Увімкнути визначення місця розташування?</string>
   <string name="nearby_needs_location">«Поблизу» потребує увімкненого визначення місця розташування, щоб працювати належним чином</string>
   <string name="use_location_from_similar_image">Ви зробили ці два знімки в одному й тому ж місці? Хочете використати широту/довготу зображення справа?</string>
+  <string name="load_more">Завантажити більше</string>
   <string name="nearby_no_results">Місць не знайдено, спробуйте змінити критерії пошуку.</string>
+  <string name="add_picture_to_wikipedia_article_title">Додати зображення у Вікіпедію</string>
+  <string name="add_picture_to_wikipedia_article_desc">Ви хочете додати це зображення у статтю Вікіпедії мовою %1$s?</string>
+  <string name="add_picture_to_wikipedia_instructions_title">Інструкції</string>
+  <string name="add_picture_to_wikipedia_instructions_desc">Дотримуйтеся правил редагування!</string>
+  <string name="confirm">Підтвердити</string>
+  <string name="instructions_title">Інструкції</string>
+  <string name="wikipedia_instructions_step_1">1. Використовуйте такий вікітекст:</string>
+  <string name="wikipedia_instructions_step_2">2. Натискання на «Підтвердити» відкриє статтю Вікіпедії</string>
+  <string name="wikipedia_instructions_step_3">3. Знайдіть розділ статті, до якого пасуватиме ваше зображення</string>
+  <string name="wikipedia_instructions_step_4">4. Натисніть на іконку «Редагувати» (у вигляді олівця) біля цього розділу.</string>
+  <string name="wikipedia_instructions_step_5">5. Вставте вікітекст у підхожому місці.</string>
+  <string name="wikipedia_instructions_step_6">6. Відредагуйте вікітекст за потреби, вказавши потрібне розміщення. Детальнішу інформацію знайдете &lt;a href=\"https://uk.wikipedia.org/wiki/Довідка:Розширений_синтаксис_зображень\"&gt;тут&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_7">7. Опублікуйте статтю</string>
+  <string name="copy_wikicode_to_clipboard">Скопіювати вікікод у буфер обміну</string>
+  <string name="pause">пауза</string>
+  <string name="resume">продовжити</string>
+  <string name="paused">Призупинено</string>
 </resources>

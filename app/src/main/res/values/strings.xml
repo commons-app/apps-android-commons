@@ -60,7 +60,9 @@
   <string name="upload_progress_notification_title_in_progress">%1$s uploading</string>
   <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
   <string name="upload_failed_notification_title">Uploading %1$s failed</string>
+  <string name="upload_paused_notification_title">Uploading %1$s paused</string>
   <string name="upload_failed_notification_subtitle">Tap to view</string>
+  <string name="upload_paused_notification_subtitle">Tap to view</string>
   <string name="title_activity_contributions">My Recent Uploads</string>
   <string name="contribution_state_queued">Queued</string>
   <string name="contribution_state_failed">Failed</string>
@@ -261,7 +263,7 @@
   <string name="error_while_cache">Error while caching pictures</string>
   <string name="title_info">A unique descriptive title for the file, which will serve as a filename. You may use plain language with spaces. Do not include the file extension</string>
   <string name="description_info">Please describe the media as much as possible: Where was it taken? What does it show? What is the context? Please describe the objects or persons. Reveal information that can not be easily guessed, for instance the time of day if it is a landscape. If the media shows something unusual, please explain what makes it unusual.</string>
-  <string name="caption_info">Please write a brief description of the image. (Limit to 255 characters)</string>
+  <string name="caption_info">Please write a brief description of the image. The first caption would be used as the Title for the image.</string>
 
   <string name="upload_image_too_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
   <string name="upload_image_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
@@ -649,6 +651,9 @@ Upload your first media by tapping on the add button.</string>
   <string name="wikipedia_instructions_step_6">6. Edit the wikitext for appropriate positioning, if necessary. For more information, see &lt;a href="https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image"&gt;here&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Publish the article</string>
   <string name="copy_wikicode_to_clipboard">Copy wikicode to clipboard</string>
+  <string name="pause">pause</string>
+  <string name="resume">resume</string>
+  <string name="paused">Paused</string>
   <string name="achievements_tab_title">Achievements</string>
   <string name="leaderboard_tab_title">Leaderboard</string>
   <string name="rank_prefix">Rank:</string>

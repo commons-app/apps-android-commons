@@ -12,6 +12,7 @@
 * Iluvatar
 * Kaganer
 * MaxBioHazard
+* Monirec
 * Movses
 * Nitch
 * Okras
@@ -207,6 +208,7 @@
   <string name="detail_panel_cats_label">Категории</string>
   <string name="detail_panel_cats_loading">Загрузка…</string>
   <string name="detail_panel_cats_none">Ничего не выбрано</string>
+  <string name="detail_caption_empty">Без подписи</string>
   <string name="detail_description_empty">Нет описания</string>
   <string name="detail_discussion_empty">Обсуждений нет</string>
   <string name="detail_license_empty">Неизвестная лицензия</string>
@@ -287,7 +289,7 @@
   <string name="error_while_cache">Ошибка при кэшировании картинок</string>
   <string name="title_info">Уникальное описание, которое будет сохранено как имя файла. Вы можете использовать естественный язык, разделяя слова пробелами. Пожалуйста, не указывайте расширение файла.</string>
   <string name="description_info">Пожалуйста, подробно опишите загружаемый файл: где он был снят? что на нём изображено? каков его контекст? Пожалуйста опишите изображённых персон или объекты. Добавьте информацию, о которой нельзя легко догадаться, например, время суток, когда снимался файл. Если снято что-то необычное, постарайтесь пояснить, что именно в этом необычного.</string>
-  <string name="caption_info">Пожалуйста, напишите краткое описание изображения (не более 255 символов).</string>
+  <string name="caption_info" fuzzy="true">Пожалуйста, напишите краткое описание изображения (не более 255 символов).</string>
   <string name="upload_image_too_dark">Это изображение слишком тёмное. Вы уверены, что хотите его загрузить? Викисклад подходит только для изображений, имеющих энциклопедическую ценность.</string>
   <string name="upload_image_blurry">Это изображение размыто. Вы уверены, что хотите его загрузить? Викисклад подходит только для изображений, имеющих энциклопедическую ценность.</string>
   <string name="upload_problem_exist">Потенциальные проблемы с этим изображением:</string>
@@ -430,7 +432,7 @@
   <string name="contributions_fragment">Вклад</string>
   <string name="nearby_fragment">Поблизости</string>
   <string name="notifications">Уведомления</string>
-  <string name="read_notifications" fuzzy="true">Уведомления (архивированные)</string>
+  <string name="read_notifications">Уведомления (читать)</string>
   <string name="display_nearby_notification">Уведомлять меня о местах поблизости</string>
   <string name="display_nearby_notification_summary">Нажмите здесь, чтобы увидеть ближайшее место без изображений</string>
   <string name="no_close_nearby">Не найдено мест поблизости</string>
@@ -620,6 +622,8 @@
   <string name="nearby_no_results">Мест не найдено, попытайтесь изменить критерии поиска.</string>
   <string name="add_picture_to_wikipedia_article_title">Добавить изображение в Википедию</string>
   <string name="add_picture_to_wikipedia_instructions_title">Инструкции</string>
+  <string name="add_picture_to_wikipedia_instructions_desc">Соблюдайте правила редактирования!</string>
   <string name="confirm">Подтвердить</string>
   <string name="instructions_title">Инструкции</string>
+  <string name="copy_wikicode_to_clipboard">Скопировать вики-код в буфер обмена</string>
 </resources>

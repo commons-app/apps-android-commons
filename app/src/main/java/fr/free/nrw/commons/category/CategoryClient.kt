@@ -92,8 +92,9 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
                 it.query()?.pages() ?: emptyList()
             }
             .map {
-                it.map { page -> page.title().replace(CATEGORY_PREFIX, "") }
+                it.filter {
+                    page -> page.categoryInfo() == null || !page.categoryInfo().isHidden
+                }.map { page -> page.title().replace(CATEGORY_PREFIX, "") }
             }
     }
-
 }

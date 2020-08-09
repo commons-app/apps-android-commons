@@ -56,7 +56,9 @@
   <string name="upload_progress_notification_title_in_progress">Postavljanje %1$s</string>
   <string name="upload_progress_notification_title_finishing">Završeno postavljanje %1$s</string>
   <string name="upload_failed_notification_title">Postavljanje %1$s neuspješno</string>
+  <string name="upload_paused_notification_title">Postavljanje %1$s pauzirano</string>
   <string name="upload_failed_notification_subtitle">Dodirnite da biste vidjeli</string>
+  <string name="upload_paused_notification_subtitle">Dodirnite da biste vidjeli</string>
   <string name="title_activity_contributions">Moja nedavja postavljanja</string>
   <string name="contribution_state_queued">U redu čekanja</string>
   <string name="contribution_state_failed">Neuspješno</string>
@@ -349,4 +351,7 @@
   <string name="theme_dark_name">Tamno</string>
   <string name="theme_light_name">Svijetlo</string>
   <string name="load_more">Učitaj više</string>
+  <string name="pause">stanka</string>
+  <string name="resume">nastavi</string>
+  <string name="paused">Pauzirano</string>
 </resources>

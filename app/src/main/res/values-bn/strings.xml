@@ -10,6 +10,7 @@
 * NahidHossain
 * Rasal Lia
 * Sankarshan
+* Sibabrata Banerjee
 * Tahmid02016
 * Tauhid16
 * আফতাবুজ্জামান
@@ -66,7 +67,9 @@
   <string name="upload_progress_notification_title_in_progress">%1$s আপলোড হচ্ছে</string>
   <string name="upload_progress_notification_title_finishing">%1$s আপলোড শেষ হয়েছে</string>
   <string name="upload_failed_notification_title">%1$s আপলোড ব্যর্থ</string>
+  <string name="upload_paused_notification_title">%1$s আপলোড বিরত রয়েছে</string>
   <string name="upload_failed_notification_subtitle">দেখার জন্য টোকা দিন</string>
+  <string name="upload_paused_notification_subtitle">দেখার জন্য টোকা দিন</string>
   <string name="title_activity_contributions">আমার সাম্প্রতিক আপলোড</string>
   <string name="contribution_state_queued">অপেক্ষারত</string>
   <string name="contribution_state_failed">ব্যর্থ</string>
@@ -326,4 +329,7 @@
   <string name="remove_bookmark">বুকমার্ক থেকে সরানো হয়েছে</string>
   <string name="add_bookmark">বুকমার্কে যোগ করা হয়েছে</string>
   <string name="confirm">নিশ্চিত করুন</string>
+  <string name="pause">থামান</string>
+  <string name="resume">পুনরায় শুরু করুন</string>
+  <string name="paused">থামানো হয়েছে</string>
 </resources>
