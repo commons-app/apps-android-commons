@@ -25,7 +25,7 @@
 
         <!--  I have done this intentionally, the mapview because of some elevation or something,
         sometimes hangs over the drawer layout and sometimes draws its onPaused state over the contributions, this seems to be the probable fix  -->
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/nearby_filter">
@@ -40,7 +40,19 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent" />
 
-        </FrameLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+              android:id="@+id/tv_attribution"
+              android:textStyle="bold"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_margin="8dp"
+              android:layout_alignParentBottom="true"
+              android:layout_alignParentLeft="true"
+              android:text="@string/map_attribution"
+              android:textAlignment="center"
+              android:textSize="10sp" />
+
+        </RelativeLayout>
 
 
         <Button
