@@ -610,6 +610,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="ask_to_turn_location_on">Turn on location?</string>
   <string name="nearby_needs_location">Nearby needs location enabled to work properly</string>
   <string name="use_location_from_similar_image">Did you shoot these two pictures at the same place? Do you want to use the latitude/longitude of the picture on the right?</string>
-  <string name="telemetry_opt_in">Telemetry Opt In</string>
-  <string name="telemetry_opt_in_summary">Mapbox Telemetry is a powerful location analytics platform included in this SDK. By default, the SDK sends anonymized location and usage data to Mapbox</string>
+  <string name="mapbox_telemetry">Telemetry Opt Out</string>
+  <string name="telemetry_opt_out_summary">Send anonymized location and usage data to Mapbox</string>
+  <string name="map_attribution" translatable="false"><![CDATA[&#169; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &#169; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/">Improve this map</a>]]></string>
 </resources>

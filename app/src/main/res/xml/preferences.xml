@@ -87,10 +87,10 @@
 
         <SwitchPreference
           android:defaultValue="true"
-          android:key="telemetryOptIn"
+          android:key="telemetryOptOut"
           app:singleLineTitle="false"
-          android:summary="@string/telemetry_opt_in_summary"
-          android:title="@string/telemetry_opt_in" />
+          android:summary="@string/telemetry_opt_out_summary"
+          android:title="@string/mapbox_telemetry" />
 
     </PreferenceCategory>
 

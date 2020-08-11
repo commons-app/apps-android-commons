@@ -1,5 +1,13 @@
 package fr.free.nrw.commons.nearby.fragments;
 
+import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
+import static fr.free.nrw.commons.nearby.Label.TEXT_TO_DESCRIPTION;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
+
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -9,15 +17,10 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.text.SpannableString;
-import android.text.Spanned;
+import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -33,7 +36,6 @@ import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -41,7 +43,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -66,17 +69,6 @@ import com.mapbox.mapboxsdk.maps.UiSettings;
 import com.mapbox.pluginscalebar.ScaleBarOptions;
 import com.mapbox.pluginscalebar.ScaleBarPlugin;
 import com.pedrogomez.renderers.RVRendererAdapter;
-
-import fr.free.nrw.commons.utils.DialogUtil;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -100,6 +92,7 @@ import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ExecutorUtils;
 import fr.free.nrw.commons.utils.LayoutUtils;
 import fr.free.nrw.commons.utils.LocationUtils;
@@ -113,15 +106,12 @@ import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
-import static fr.free.nrw.commons.nearby.Label.TEXT_TO_DESCRIPTION;
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 
 public class NearbyParentFragment extends CommonsDaggerSupportFragment
@@ -271,41 +261,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             });
         });
 
-        ClickableSpan spanMapBox=new ClickableSpan() {
-            @Override
-            public void onClick(@NonNull View widget) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://www.mapbox.com/about/maps/"));
-                startActivity(intent);
-            }
-        };
-
-        ClickableSpan spanOpenStreet=new ClickableSpan() {
-            @Override
-            public void onClick(@NonNull View widget) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("http://www.openstreetmap.org/copyright"));
-                startActivity(intent);
-            }
-        };
-
-        ClickableSpan spanImproveThisMap=new ClickableSpan() {
-            @Override
-            public void onClick(@NonNull View widget) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://www.mapbox.com/map-feedback/"));
-                startActivity(intent);
-            }
-        };
-
-        SpannableString spannableString = new SpannableString(tvAttribution.getText());
-        spannableString.setSpan(spanMapBox, 0,6, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(spanOpenStreet, 11,24, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(spanImproveThisMap, 27,43, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(Color.WHITE),0,tvAttribution.getText().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tvAttribution.setText(spannableString);
+        tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
         tvAttribution.setMovementMethod(LinkMovementMethod.getInstance());
-
     }
 
     /**

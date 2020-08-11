@@ -9,7 +9,6 @@ import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceFragmentCompat;
 import com.google.android.material.snackbar.Snackbar;
 import com.karumi.dexter.Dexter;
@@ -127,9 +126,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             uploadLimit.setEnabled(false);
         }
 
-        findPreference("telemetryOptIn").setOnPreferenceChangeListener(
+        findPreference("telemetryOptOut").setOnPreferenceChangeListener(
             (preference, newValue) -> {
-                telemetryOptInout((boolean)newValue);
+                telemetryOptInOut((boolean)newValue);
                 defaultKvStore.putBoolean(Prefs.TELEMETRY_PREFERENCE,(boolean)newValue);
                 return false;
             });
@@ -139,7 +138,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      * Opt in or out of MapBox telemetry
      * @param shouldOptIn
      */
-    private void telemetryOptInout(boolean shouldOptIn){
+    private void telemetryOptInOut(boolean shouldOptIn){
         TelemetryDefinition telemetry = Mapbox.getTelemetry();
         if (telemetry != null) {
             telemetry.setUserTelemetryRequestState(shouldOptIn);
