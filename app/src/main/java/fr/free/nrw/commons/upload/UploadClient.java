@@ -5,13 +5,13 @@ import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF;
 import android.content.Context;
 import android.net.Uri;
 import androidx.annotation.Nullable;
+import com.google.gson.Gson;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.contributions.ChunkInfo;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.upload.UploadService.NotificationUpdateProgressListener;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -24,6 +24,7 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import org.wikipedia.csrf.CsrfTokenClient;
+import org.wikipedia.dataclient.mwapi.MwException;
 import timber.log.Timber;
 
 @Singleton
@@ -39,6 +40,7 @@ public class UploadClient {
   private final CsrfTokenClient csrfTokenClient;
   private final PageContentsCreator pageContentsCreator;
   private final FileUtilsWrapper fileUtilsWrapper;
+  private final Gson gson;
   private boolean pauseUploads = false;
 
   private final CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -47,11 +49,12 @@ public class UploadClient {
   public UploadClient(final UploadInterface uploadInterface,
       @Named(NAMED_COMMONS_CSRF) final CsrfTokenClient csrfTokenClient,
       final PageContentsCreator pageContentsCreator,
-      final FileUtilsWrapper fileUtilsWrapper) {
+      final FileUtilsWrapper fileUtilsWrapper, final Gson gson) {
     this.uploadInterface = uploadInterface;
     this.csrfTokenClient = csrfTokenClient;
     this.pageContentsCreator = pageContentsCreator;
     this.fileUtilsWrapper = fileUtilsWrapper;
+    this.gson = gson;
   }
 
   /**
@@ -61,6 +64,10 @@ public class UploadClient {
   Observable<StashUploadResult> uploadFileToStash(
       final Context context, final String filename, final Contribution contribution,
       final NotificationUpdateProgressListener notificationUpdater) throws IOException {
+    if (contribution.getChunkInfo() != null && contribution.getChunkInfo().isLastChunkUploaded()) {
+      return Observable.just(new StashUploadResult(StashUploadState.SUCCESS,
+          contribution.getChunkInfo().getUploadResult().getFilekey()));
+    }
     pauseUploads = false;
     File file = new File(contribution.getLocalUri().getPath());
     final Observable<File> fileChunks = fileUtilsWrapper.getFileChunks(context, file, CHUNK_SIZE);
@@ -69,6 +76,7 @@ public class UploadClient {
 
     final AtomicInteger index = new AtomicInteger();
     final AtomicReference<ChunkInfo> chunkInfo = new AtomicReference<>();
+    Timber.d("Chunk info");
     if (contribution.getChunkInfo() != null && isStashValid(contribution)) {
       chunkInfo.set(contribution.getChunkInfo());
     }
@@ -96,12 +104,15 @@ public class UploadClient {
           offset,
           filekey,
           countingRequestBody).subscribe(uploadResult -> {
-        chunkInfo.set(new ChunkInfo(uploadResult, index.incrementAndGet()));
+        chunkInfo.set(new ChunkInfo(uploadResult, index.incrementAndGet(), false));
         notificationUpdater.onChunkUploaded(contribution, chunkInfo.get());
       }, throwable -> {
         Timber.e(throwable, "Error occurred in uploading chunk");
       }));
     }));
+
+    chunkInfo.get().setLastChunkUploaded(true);
+    notificationUpdater.onChunkUploaded(contribution, chunkInfo.get());
     if (pauseUploads) {
       return Observable.just(new StashUploadResult(StashUploadState.PAUSED, null));
     } else if (chunkInfo.get() != null) {
@@ -183,9 +194,16 @@ public class UploadClient {
               pageContentsCreator.createFrom(contribution),
               CommonsApplication.DEFAULT_EDIT_SUMMARY,
               uniqueFileName,
-              fileKey).map(UploadResponse::getUpload);
+              fileKey).map(uploadResponse -> {
+            UploadResponse uploadResult = gson.fromJson(uploadResponse, UploadResponse.class);
+            if (uploadResult.getUpload() == null) {
+              final MwException exception = gson.fromJson(uploadResponse, MwException.class);
+              throw new RuntimeException(exception.getErrorCode());
+            }
+            return uploadResult.getUpload();
+          });
     } catch (final Throwable throwable) {
-      throwable.printStackTrace();
+      Timber.e(throwable, "Exception occurred in uploading file from stash");
       return Observable.error(throwable);
     }
   }
