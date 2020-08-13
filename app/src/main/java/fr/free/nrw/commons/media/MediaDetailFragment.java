@@ -646,7 +646,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @OnClick(R.id.update_categories_button)
     public void onUpdateCategoriesClicked() {
-       updateCategories(categoryEditSearchRecyclerViewAdapter.getNewCategories());
+        updateCategories(categoryEditSearchRecyclerViewAdapter.getNewCategories());
         displayHideCategorySearch();
     }
 

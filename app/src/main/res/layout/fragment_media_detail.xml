@@ -12,7 +12,7 @@
       android:id="@+id/dummy_category_edit_container"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:elevation="20dp"
+      android:elevation="35dp"
       android:layout_gravity="bottom"
       android:visibility="gone"
       android:orientation="vertical"
