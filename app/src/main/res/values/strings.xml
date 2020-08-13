@@ -600,13 +600,12 @@ Upload your first media by tapping on the add button.</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Because it is</string>
 
   <string name="category_edit_helper_make_edit_toast">Trying to update categories.</string>
-  <string name="category_edit_helper_show_edit_title">Categories are updated</string>
+  <string name="category_edit_helper_show_edit_title">Category update</string>
   <string name="category_edit_helper_show_edit_title_success">Success</string>
   <plurals name="category_edit_helper_show_edit_message_if">
     <item quantity="one">Category %1$s is added.</item>
     <item quantity="other">Categories %1$s are added.</item>
   </plurals>
-  <string name="category_edit_helper_show_edit_title_failed">Failed</string>
   <string name="category_edit_helper_edit_message_else">Could not add categories.</string>
   <string name="category_edit_button_text">Update categories</string>
 
