@@ -15,8 +15,7 @@
     <item quantity="one">%1$d fil laddas upp</item>
     <item quantity="other">%1$d filer laddas upp</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -268,7 +267,7 @@
   <string name="error_while_cache">Fel uppstod när bilder cachelagras</string>
   <string name="title_info">En unik beskrivande titel för filen, som kommer att fungera som ett filnamn. Du kan använda klarspråk med mellanslag. Ta inte med filändelsen</string>
   <string name="description_info">Beskriv mediafilen så mycket som möjligt. Var togs den? Vad visar den? Vad är sammanhanget? Beskriv föremålen eller personerna. Ge information som inte kan gissas fram, t.ex. tidpunkten om det är ett landskap. Om mediafilen visar någonting ovanligt, förklara vad som gör den ovanlig.</string>
-  <string name="caption_info" fuzzy="true">Var god skriv en kort beskrivning av bilden. (Maximalt 255 tecken)</string>
+  <string name="caption_info">Var god skriv en kort beskrivning av bilden. Den första bildtexten skulle användas som bildens titel.</string>
   <string name="upload_image_too_dark">Denna bild är för mörk, är du säker på att du vill ladda upp den? Wikimedia Commons är endast till för bilder med encyklopediskt värde.</string>
   <string name="upload_image_blurry">Denna bild är suddig, är du säker på att du vill ladda upp den? Wikimedia Commons är endast till för bilder med encyklopediskt värde.</string>
   <string name="upload_problem_exist">Möjliga problem med denna bild:</string>

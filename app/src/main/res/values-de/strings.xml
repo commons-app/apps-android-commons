@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Abijeet Patro
+* BPX-web
 * Bjarncraft
 * Bxalber
 * Envlh
@@ -16,6 +17,7 @@
 * Tacsipacsi
 * Tobi 406
 * Ubahnverleih
+* Umherirrender
 * WikiBayer
 -->
 <resources>
@@ -92,6 +94,7 @@
   <string name="menu_open_in_browser">Im Browser anzeigen</string>
   <string name="share_title_hint">Untertitel (erforderlich)</string>
   <string name="share_description_hint">Beschreibung</string>
+  <string name="share_caption_hint">Beschriftung (bis zu 255 Zeichen)</string>
   <string name="login_failed_network">Anmeldung fehlgeschlagen – Netzwerkfehler</string>
   <string name="login_failed_wrong_credentials">Anmeldung fehlgeschlagen. Bitte Benutzernamen und Passwort überprüfen.</string>
   <string name="login_failed_throttled">Zu viele erfolglose Versuche. Bitte in einigen Minuten erneut versuchen.</string>
@@ -294,7 +297,7 @@
   <string name="copy_wikicode">Den Wikitext in die Zwischenablage kopieren</string>
   <string name="wikicode_copied">Der Wikitext wurde in die Zwischenablage kopiert</string>
   <string name="nearby_location_has_not_changed">Der Standort hat sich nicht geändert.</string>
-  <string name="nearby_location_not_available" fuzzy="true">Der Standort ist nicht verfügbar.</string>
+  <string name="nearby_location_not_available">„In der Nähe“ arbeiten möglicherwiese nicht richtig. Der Standort ist nicht verfügbar.</string>
   <string name="location_permission_rationale_nearby">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>
   <string name="get_directions">Richtungen abrufen</string>
   <string name="read_article">Artikel lesen</string>
@@ -348,7 +351,7 @@
   <string name="search_tab_title_categories">Kategorien</string>
   <string name="explore_tab_title_featured">Vorgestellt</string>
   <string name="explore_tab_title_mobile">Über mobil hochgeladen</string>
-  <string name="successful_wikidata_edit" fuzzy="true">Bild erfolgreich nach %1$s auf Wikidata hinzugefügt!</string>
+  <string name="successful_wikidata_edit">Bild zu %1$s auf Wikidata hinzugefügt!</string>
   <string name="wikidata_edit_failure">Fehler bei der Aktualisierung des dazugehörigen Wikidata-Objekts!</string>
   <string name="menu_set_wallpaper">Als Hintergrundbild festlegen</string>
   <string name="wallpaper_set_successfully">Hintergrundbild erfolgreich festgelegt!</string>
@@ -405,7 +408,7 @@
   <string name="contributions_fragment">Beiträge</string>
   <string name="nearby_fragment">In der Nähe</string>
   <string name="notifications">Benachrichtigungen</string>
-  <string name="read_notifications" fuzzy="true">Benachrichtigungen (archiviert)</string>
+  <string name="read_notifications">Benachrichtigungen (gelesen)</string>
   <string name="display_nearby_notification">Benachrichtigungen in der Nähe anzeigen</string>
   <string name="display_nearby_notification_summary">Hier tippen, um Orte in der Nähe anzusehen, die Bilder benötigen.</string>
   <string name="no_close_nearby">Keine Orte in deiner Umgebung gefunden.</string>
@@ -444,7 +447,7 @@
   <string name="desc_language_Asia">Asien</string>
   <string name="desc_language_Pacific">Pazifik</string>
   <string name="no_categories_selected">Keine Kategorien ausgewählt</string>
-  <string name="no_categories_selected_warning_desc" fuzzy="true">Bilder ohne Kategorien sind selten nutzbar. Bist du sicher, dass du ohne die Auswahl von Kategorien hochladen möchtest?</string>
+  <string name="no_categories_selected_warning_desc">Bilder ohne Kategorien sind selten nutzbar. Bist du sicher, dass du ohne die Auswahl von Kategorien hochladen möchtest?</string>
   <string name="upload_flow_all_images_in_set">(für alle Bilder im Satz)</string>
   <string name="search_this_area">Diesen Bereich durchsuchen</string>
   <string name="nearby_card_permission_title">Berechtigungsanfrage</string>
@@ -467,7 +470,7 @@
   <string name="check_category_edit_summary">Kategorieprüfung anfordern</string>
   <string name="check_category_success_title">Kategorieprüfung angefordert</string>
   <string name="check_category_failure_title">Die Anfrage zur Kategorieprüfung funktionierte nicht</string>
-  <string name="check_category_success_message" fuzzy="true">Kategorieprüfung für %1$s erfolgreich angefordert</string>
+  <string name="check_category_success_message">Kategorieprüfung für %1$s angefordert</string>
   <string name="check_category_failure_message">Eine Kategorieprüfung für %1$s konnte nicht angefordert werden</string>
   <string name="check_category_toast">Kategorieprüfung für %1$s anfordern</string>
   <string name="nominate_for_deletion_edit_file_page">Löschnachricht zur Datei hinzufügen</string>
@@ -508,9 +511,9 @@
   <string name="no_image_reverted">Keine Bilder zurückgesetzt</string>
   <string name="no_image_uploaded">Keine Bilder hochgeladen</string>
   <string name="no_notification">Du hast keine ungelesenen Benachrichtigungen</string>
-  <string name="no_read_notification" fuzzy="true">Du hast keine archivierten Benachrichtigungen</string>
+  <string name="no_read_notification">Du hast keine gelesenen Benachrichtigungen</string>
   <string name="share_logs_using">Lognutzung teilen</string>
-  <string name="menu_option_read" fuzzy="true">Archivierte ansehen</string>
+  <string name="menu_option_read">Gelesene ansehen</string>
   <string name="menu_option_unread">Ungelesene ansehen</string>
   <string name="error_occurred_in_picking_images">Beim Auswählen der Bilder ist ein Fehler aufgetreten</string>
   <string name="image_chooser_title">Hochzuladende Bilder auswählen</string>
@@ -531,6 +534,7 @@
   <string name="exif_tag_name_cameraModel">Kamera-Modell</string>
   <string name="exif_tag_name_lensModel">Kameralinse</string>
   <string name="exif_tag_name_serialNumbers">Seriennummer</string>
+  <string name="exif_tag_name_software">Software</string>
   <string name="share_text">Lade Fotos direkt von deinem Telefon auf Wikimedia Commons hoch. Lade die Commons-App jetzt herunter: %1$s</string>
   <string name="share_via">App teilen über …</string>
   <string name="image_info">Bildinformationen</string>
@@ -547,5 +551,15 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Andere</string>
   <string name="account_created">Benutzerkonto erstellt!</string>
+  <string name="text_copy">Text in die Zwischenablage kopiert</string>
+  <string name="notification_mark_read">Benachrichtigung als gelesen markieren</string>
+  <string name="nearby_search_hint">Brücke, Museum, Hotel etc.</string>
+  <string name="title_app_shortcut_bookmark">Lesezeichen</string>
   <string name="title_app_shortcut_setting">Einstellungen</string>
+  <string name="remove_bookmark">aus den Lesezeichen entfernt</string>
+  <string name="add_bookmark">zu den Lesezeichen hinzugefügt</string>
+  <string name="theme_dark_name">Dunkel</string>
+  <string name="theme_light_name">Hell</string>
+  <string name="add_picture_to_wikipedia_article_title">Bild zu Wikipedia hinzufügen</string>
+  <string name="copy_wikicode_to_clipboard">wikicode in die Zwischenablage kopieren</string>
 </resources>
