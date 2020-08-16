@@ -44,9 +44,11 @@ public class LeaderboardListViewModel extends ViewModel {
 
     }
 
-    public void refresh(String duration, String category) {
+    public void refresh(String duration, String category, int limit, int offset) {
         dataSourceFactory.setDuration(duration);
         dataSourceFactory.setCategory(category);
+        dataSourceFactory.setLimit(limit);
+        dataSourceFactory.setOffset(offset);
         dataSourceFactory.getMutableLiveData().getValue().invalidate();
     }
 

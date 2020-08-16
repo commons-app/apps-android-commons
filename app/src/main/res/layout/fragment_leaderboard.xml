@@ -4,12 +4,44 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
-  android:layout_height="wrap_content">
+  android:layout_height="match_parent">
+
+  <LinearLayout
+    android:id="@+id/filters"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="1"
+    android:layout_margin="20dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <Spinner
+      android:layout_marginStart="60dp"
+      android:id="@+id/duration_spinner"
+      android:layout_width="match_parent"
+      android:layout_weight="0.5"
+      android:layout_height="match_parent" />
+
+    <Spinner
+      android:layout_marginEnd="60dp"
+      android:id="@+id/category_spinner"
+      android:layout_width="match_parent"
+      android:layout_weight="0.5"
+      android:layout_height="match_parent" />
+
+  </LinearLayout>
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/leaderboard_list"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    android:layout_height="0dp"
+    android:layout_marginTop="10dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/filters" />
 
   <ProgressBar
     android:id="@+id/progressBar"
@@ -20,13 +52,5 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="@+id/leaderboard_list" />
-
-  <Button
-    android:id="@+id/scroll"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
