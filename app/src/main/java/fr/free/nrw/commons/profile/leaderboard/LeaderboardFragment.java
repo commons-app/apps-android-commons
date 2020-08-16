@@ -5,9 +5,12 @@ import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.LOADI
 
 import android.accounts.Account;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,6 +38,9 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
+    @BindView(R.id.scroll)
+    Button scrollButton;
+
     @Inject
     SessionManager sessionManager;
 
@@ -44,8 +50,6 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
     @Inject
     ViewModelFactory viewModelFactory;
 
-    LeaderboardListViewModel viewModel;
-
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
@@ -54,7 +58,13 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
         ButterKnife.bind(this, rootView);
         progressBar.setVisibility(View.VISIBLE);
         hideLayouts();
-        setLeaderboard();
+        setLeaderboard("all_time", "upload");
+        scrollButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setLeaderboard("weekly", "upload");
+            }
+        });
         return rootView;
     }
 
@@ -62,18 +72,18 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      * To call the API to get results
      * which then sets the views using setLeaderboardUser method
      */
-    private void setLeaderboard() {
+    private void setLeaderboard(String duration, String category) {
         if (checkAccount()) {
             try {
                 compositeDisposable.add(okHttpJsonApiClient
                     .getLeaderboard(Objects.requireNonNull(sessionManager.getCurrentAccount()).name,
-                        "all_time", "upload", null, null)
+                        duration, category, null, null)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                         response -> {
                             if (response != null && response.getStatus() == 200) {
-                                setViews(response);
+                                setViews(response, duration, category);
                             }
                         },
                         t -> {
@@ -92,23 +102,27 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      * Set the views
      * @param response Leaderboard Response Object
      */
-    private void setViews(LeaderboardResponse response) {
-        viewModel = new ViewModelProvider(this, viewModelFactory).get(LeaderboardListViewModel.class);
+    private void setViews(LeaderboardResponse response, String duration, String category) {
+        viewModelFactory.setDuration(duration);
+        viewModelFactory.setCategory(category);
+        viewModelFactory.setLimit(10);
+        viewModelFactory.setOffset(0);
+
+        LeaderboardListViewModel viewModel = new ViewModelProvider(this, viewModelFactory).get(LeaderboardListViewModel.class);
         LeaderboardListAdapter leaderboardListAdapter = new LeaderboardListAdapter();
         UserDetailAdapter userDetailAdapter= new UserDetailAdapter(response);
         MergeAdapter mergeAdapter = new MergeAdapter(userDetailAdapter, leaderboardListAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         leaderboardListRecyclerView.setLayoutManager(linearLayoutManager);
         leaderboardListRecyclerView.setAdapter(mergeAdapter);
-
+        leaderboardListAdapter.getItemId(1);
         viewModel.getListLiveData().observe(getViewLifecycleOwner(), leaderboardListAdapter::submitList);
         viewModel.getProgressLoadStatus().observe(getViewLifecycleOwner(), status -> {
-                if (Objects.requireNonNull(status).equalsIgnoreCase(LOADING)) {
-                    showProgressBar();
-                } else if (status.equalsIgnoreCase(LOADED)) {
-                    hideProgressBar();
-                }
-        });
+            if (Objects.requireNonNull(status).equalsIgnoreCase(LOADING)) {
+                showProgressBar();
+            } else if (status.equalsIgnoreCase(LOADED)) {
+                hideProgressBar();
+            } });
     }
 
     /**

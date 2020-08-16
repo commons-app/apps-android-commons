@@ -68,7 +68,7 @@ public class LeaderboardList {
             @Override
             public boolean areContentsTheSame(@NonNull LeaderboardList oldItem,
                 @NonNull LeaderboardList newItem) {
-                return newItem.getRank().equals(oldItem.getRank());
+                return newItem.getRank().equals(oldItem.getRank()) || newItem.getCategoryCount().equals(oldItem.getCategoryCount());
             }
         };
 
@@ -79,6 +79,6 @@ public class LeaderboardList {
         }
 
         LeaderboardList leaderboardList = (LeaderboardList) obj;
-        return leaderboardList.getRank().equals(this.getRank());
+        return leaderboardList.getRank().equals(this.getRank()) || leaderboardList.getCategoryCount().equals(this.getCategoryCount());
     }
 }

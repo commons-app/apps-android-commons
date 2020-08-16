@@ -20,8 +20,10 @@ public class LeaderboardListViewModel extends ViewModel {
 
     private LiveData<String> progressLoadStatus = new MutableLiveData<>();
 
-    public LeaderboardListViewModel(OkHttpJsonApiClient okHttpJsonApiClient, SessionManager sessionManager) {
-        dataSourceFactory = new DataSourceFactory(okHttpJsonApiClient, compositeDisposable, sessionManager);
+    public LeaderboardListViewModel(OkHttpJsonApiClient okHttpJsonApiClient, SessionManager
+        sessionManager, String duration, String category, int limit, int offset) {
+        dataSourceFactory = new DataSourceFactory(okHttpJsonApiClient,
+            compositeDisposable, sessionManager, duration, category, limit, offset);
         initializePaging();
     }
 

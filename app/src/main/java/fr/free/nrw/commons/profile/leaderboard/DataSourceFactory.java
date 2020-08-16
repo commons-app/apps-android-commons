@@ -12,12 +12,20 @@ public class DataSourceFactory extends DataSource.Factory<Integer, LeaderboardLi
     private OkHttpJsonApiClient okHttpJsonApiClient;
     private CompositeDisposable compositeDisposable;
     private SessionManager sessionManager;
+    private String duration;
+    private String category;
+    private int limit;
+    private int offset;
 
     public DataSourceFactory(OkHttpJsonApiClient okHttpJsonApiClient, CompositeDisposable compositeDisposable,
-        SessionManager sessionManager) {
+        SessionManager sessionManager, String duration, String category, int limit, int offset) {
         this.okHttpJsonApiClient = okHttpJsonApiClient;
         this.compositeDisposable = compositeDisposable;
         this.sessionManager = sessionManager;
+        this.duration = duration;
+        this.category = category;
+        this.limit = limit;
+        this.offset = offset;
         liveData = new MutableLiveData<>();
     }
 
@@ -27,7 +35,7 @@ public class DataSourceFactory extends DataSource.Factory<Integer, LeaderboardLi
 
     @Override
     public DataSource<Integer, LeaderboardList> create() {
-        DataSourceClass dataSourceClass = new DataSourceClass(okHttpJsonApiClient, sessionManager);
+        DataSourceClass dataSourceClass = new DataSourceClass(okHttpJsonApiClient, sessionManager, duration, category, limit, offset);
         liveData.postValue(dataSourceClass);
         return dataSourceClass;
     }
