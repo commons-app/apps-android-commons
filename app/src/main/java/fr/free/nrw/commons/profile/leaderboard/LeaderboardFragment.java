@@ -50,6 +50,8 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
     @Inject
     ViewModelFactory viewModelFactory;
 
+    LeaderboardListViewModel viewModel;
+
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
@@ -62,6 +64,7 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
         scrollButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                viewModel.refresh("weekly", "upload");
                 setLeaderboard("weekly", "upload");
             }
         });
@@ -108,14 +111,13 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
         viewModelFactory.setLimit(10);
         viewModelFactory.setOffset(0);
 
-        LeaderboardListViewModel viewModel = new ViewModelProvider(this, viewModelFactory).get(LeaderboardListViewModel.class);
+        viewModel = new ViewModelProvider(this, viewModelFactory).get(LeaderboardListViewModel.class);
         LeaderboardListAdapter leaderboardListAdapter = new LeaderboardListAdapter();
         UserDetailAdapter userDetailAdapter= new UserDetailAdapter(response);
         MergeAdapter mergeAdapter = new MergeAdapter(userDetailAdapter, leaderboardListAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         leaderboardListRecyclerView.setLayoutManager(linearLayoutManager);
         leaderboardListRecyclerView.setAdapter(mergeAdapter);
-        leaderboardListAdapter.getItemId(1);
         viewModel.getListLiveData().observe(getViewLifecycleOwner(), leaderboardListAdapter::submitList);
         viewModel.getProgressLoadStatus().observe(getViewLifecycleOwner(), status -> {
             if (Objects.requireNonNull(status).equalsIgnoreCase(LOADING)) {

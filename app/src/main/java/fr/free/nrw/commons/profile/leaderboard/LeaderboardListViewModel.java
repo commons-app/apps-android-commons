@@ -17,11 +17,11 @@ public class LeaderboardListViewModel extends ViewModel {
     private DataSourceFactory dataSourceFactory;
     private LiveData<PagedList<LeaderboardList>> listLiveData;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-
     private LiveData<String> progressLoadStatus = new MutableLiveData<>();
 
     public LeaderboardListViewModel(OkHttpJsonApiClient okHttpJsonApiClient, SessionManager
         sessionManager, String duration, String category, int limit, int offset) {
+
         dataSourceFactory = new DataSourceFactory(okHttpJsonApiClient,
             compositeDisposable, sessionManager, duration, category, limit, offset);
         initializePaging();
@@ -42,6 +42,12 @@ public class LeaderboardListViewModel extends ViewModel {
         progressLoadStatus = Transformations
             .switchMap(dataSourceFactory.getMutableLiveData(), DataSourceClass::getProgressLiveStatus);
 
+    }
+
+    public void refresh(String duration, String category) {
+        dataSourceFactory.setDuration(duration);
+        dataSourceFactory.setCategory(category);
+        dataSourceFactory.getMutableLiveData().getValue().invalidate();
     }
 
     public LiveData<String> getProgressLoadStatus() {
