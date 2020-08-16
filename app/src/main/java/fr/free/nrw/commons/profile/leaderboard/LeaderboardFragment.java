@@ -164,12 +164,8 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      * @param response Leaderboard Response Object
      */
     private void setViews(LeaderboardResponse response, String duration, String category, int limit, int offset) {
-        viewModelFactory.setDuration(duration);
-        viewModelFactory.setCategory(category);
-        viewModelFactory.setLimit(limit);
-        viewModelFactory.setOffset(offset);
-
         viewModel = new ViewModelProvider(this, viewModelFactory).get(LeaderboardListViewModel.class);
+        viewModel.setParams(duration, category, limit, offset);
         LeaderboardListAdapter leaderboardListAdapter = new LeaderboardListAdapter();
         UserDetailAdapter userDetailAdapter= new UserDetailAdapter(response);
         MergeAdapter mergeAdapter = new MergeAdapter(userDetailAdapter, leaderboardListAdapter);
@@ -182,7 +178,8 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
                 showProgressBar();
             } else if (status.equalsIgnoreCase(LOADED)) {
                 hideProgressBar();
-            } });
+            }
+        });
     }
 
     /**

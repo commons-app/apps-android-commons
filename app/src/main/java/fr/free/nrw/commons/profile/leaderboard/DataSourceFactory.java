@@ -50,14 +50,10 @@ public class DataSourceFactory extends DataSource.Factory<Integer, LeaderboardLi
     }
 
     public DataSourceFactory(OkHttpJsonApiClient okHttpJsonApiClient, CompositeDisposable compositeDisposable,
-        SessionManager sessionManager, String duration, String category, int limit, int offset) {
+        SessionManager sessionManager) {
         this.okHttpJsonApiClient = okHttpJsonApiClient;
         this.compositeDisposable = compositeDisposable;
         this.sessionManager = sessionManager;
-        this.duration = duration;
-        this.category = category;
-        this.limit = limit;
-        this.offset = offset;
         liveData = new MutableLiveData<>();
     }
 

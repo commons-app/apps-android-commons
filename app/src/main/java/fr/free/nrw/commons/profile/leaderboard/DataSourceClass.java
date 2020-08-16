@@ -54,7 +54,6 @@ public class DataSourceClass extends PageKeyedDataSource<Integer, LeaderboardLis
                     if (response != null && response.getStatus() == 200) {
                         progressLiveStatus.postValue(LOADED);
                         callback.onResult(response.getLeaderboardList(), null, response.getLimit());
-                        Timber.e("Fetched"+response.getLeaderboardList().get(0).getCategoryCount());
                     }
                 },
                 t -> {
@@ -85,7 +84,6 @@ public class DataSourceClass extends PageKeyedDataSource<Integer, LeaderboardLis
                     if (response != null && response.getStatus() == 200) {
                         progressLiveStatus.postValue(LOADED);
                         callback.onResult(response.getLeaderboardList(), params.key + limit);
-                        Timber.e("Fetched"+response.getLeaderboardList().get(0).getCategoryCount());
                     }
                 },
                 t -> {

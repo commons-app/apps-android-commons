@@ -20,10 +20,10 @@ public class LeaderboardListViewModel extends ViewModel {
     private LiveData<String> progressLoadStatus = new MutableLiveData<>();
 
     public LeaderboardListViewModel(OkHttpJsonApiClient okHttpJsonApiClient, SessionManager
-        sessionManager, String duration, String category, int limit, int offset) {
+        sessionManager) {
 
         dataSourceFactory = new DataSourceFactory(okHttpJsonApiClient,
-            compositeDisposable, sessionManager, duration, category, limit, offset);
+            compositeDisposable, sessionManager);
         initializePaging();
     }
 
@@ -50,6 +50,13 @@ public class LeaderboardListViewModel extends ViewModel {
         dataSourceFactory.setLimit(limit);
         dataSourceFactory.setOffset(offset);
         dataSourceFactory.getMutableLiveData().getValue().invalidate();
+    }
+
+    public void setParams(String duration, String category, int limit, int offset) {
+        dataSourceFactory.setDuration(duration);
+        dataSourceFactory.setCategory(category);
+        dataSourceFactory.setLimit(limit);
+        dataSourceFactory.setOffset(offset);
     }
 
     public LiveData<String> getProgressLoadStatus() {
