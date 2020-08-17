@@ -355,6 +355,9 @@
   <string name="upload_cancelled">Eroplueden ofgebrach</string>
   <string name="delete_helper_show_deletion_message_if">%1$s gouf nominéiert fir ze läschen</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="category_edit_helper_make_edit_toast">Probéiere Kategorien z\'aktualiséieren</string>
+  <string name="category_edit_helper_show_edit_title_success">Succès</string>
+  <string name="category_edit_button_text">Kategorien aktualiséieren</string>
   <string name="account_created">Benotzerkont ugeluecht!</string>
   <string name="place_state_needs_photo">Brauch eng Foto</string>
   <string name="upload_nearby_place_found_title">Plaz nobäi fonnt</string>
@@ -371,6 +374,8 @@
   <string name="theme_light_name">Hell</string>
   <string name="load_more">Méi lueden</string>
   <string name="nearby_no_results">Keng Plaze fonnt, probéiert Är Sich-Critèren z\'änneren.</string>
+  <string name="missing_category">- Kategorien bei dëst Bild derbäisetze fir seng Notzbarkeet ze verbesseren.</string>
+  <string name="edit_category">Kategorien änneren</string>
   <string name="add_picture_to_wikipedia_article_title">Bild op Wikipedia derbäisetzen</string>
   <string name="add_picture_to_wikipedia_instructions_title">Instruktiounen</string>
   <string name="confirm">Confirméieren</string>

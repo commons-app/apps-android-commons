@@ -570,6 +570,15 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logotyp</string>
   <string name="delete_helper_ask_reason_copyright_other">Annat</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Eftersom den är</string>
+  <string name="category_edit_helper_make_edit_toast">Försöker uppdatera kategorier.</string>
+  <string name="category_edit_helper_show_edit_title">Uppdatering av kategorier</string>
+  <string name="category_edit_helper_show_edit_title_success">Lyckades</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">Kategori %1$s har lagts till.</item>
+    <item quantity="other">Kategorierna %1$s har lagts till.</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">Kunde inte lägga till kategorier.</string>
+  <string name="category_edit_button_text">Uppdatera kategorier</string>
   <string name="share_image_via">Dela bild via</string>
   <string name="no_achievements_yet">Du har ännu inte gjort några bidrag</string>
   <string name="account_created">Konto har skapats!</string>
@@ -605,6 +614,10 @@
   <string name="use_location_from_similar_image">Tog du dessa två bilder på samma plats? Vill du använda den högra bildens latitud/longitud?</string>
   <string name="load_more">Läs in fler</string>
   <string name="nearby_no_results">Inga platser hittades, försök ändra dina sökkriterier.</string>
+  <string name="todo_improve">Föreslagna förbättringar:</string>
+  <string name="missing_category">- Lägg till kategorier till denna bild för att öka användbarheten.</string>
+  <string name="missing_article">- Lägg till den här bilden till den associerade Wikipediaartikeln som inte har några bilder.</string>
+  <string name="edit_category">Redigera kategorier</string>
   <string name="add_picture_to_wikipedia_article_title">Lägg till bild på Wikipedia</string>
   <string name="add_picture_to_wikipedia_article_desc">Vill du lägga till denna bild i Wikipedia-artikeln på %1$s?</string>
   <string name="add_picture_to_wikipedia_instructions_title">Instruktioner</string>
