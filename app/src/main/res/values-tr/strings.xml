@@ -11,7 +11,6 @@
 * Joseph
 * McAang
 * Mirzali
-* MuratTheTurkish
 * Neslihan Turan
 * Okkerem
 * Rapsar
@@ -280,7 +279,7 @@
   <string name="error_while_cache">Resimleri önbelleğe alırken hata oluştu</string>
   <string name="title_info">Dosya adı olarak kullanılacak benzersiz bir açıklayıcı başlık. Sade bir dil kullanabilirsiniz. Dosya uzantısını dahil etmeyin</string>
   <string name="description_info">Lütfen medyayı olabildiğince açıklayın: Nerede çekildi? Ne gösteriyor? Bağlam nedir? Lütfen nesneleri veya kişileri tanımlayın. Kolayca tahmin edilemeyen bilgileri, örneğin bir manzara ise günün saatini gösterin. Medya alışılmadık bir şey gösteriyorsa lütfen alışılmadık hâle getiren şeyi açıklayın.</string>
-  <string name="caption_info">Lütfen resmin kısa bir açıklamasını yazın. İlk resim yazısı resminin Başlığı olarak kullanılacaktır.</string>
+  <string name="caption_info" fuzzy="true">Lütfen resmin kısa bir açıklamasını yazın. (255 karakterle sınırı vardır)</string>
   <string name="upload_image_too_dark">Bu resim çok karanlık, yüklemek istediğinizden emin misiniz? Wikimedia Commons yalnızca ansiklopedik değeri olan resimler içindir.</string>
   <string name="upload_image_blurry">Bu resim bulanık, yüklemek istediğinizden emin misiniz? Wikimedia Commons yalnızca ansiklopedik değeri olan resimler içindir.</string>
   <string name="upload_problem_exist">Bu görselle ilgili olası sorunlar:</string>
@@ -528,7 +527,7 @@
   <string name="review_thanks_yes_button_text">Evet, neden olmasın</string>
   <string name="review_thanks_no_button_text">Sonraki resim</string>
   <string name="skip_image_explanation">Bu butona tıkladığınızda Wikimedia Commons\'tan yeni yüklediğiniz başka bir resim elde edersiniz</string>
-  <string name="review_image_explanation">Görüntüleri inceleyebilir ve Wikimedia Commons\'un kalitesini iyileştirebilirsiniz.\n  İncelemenin dört parametresi:\n  - Bu görüntü kapsam dahilinde mi?\n  - Bu resim telif hakkı kurallarına uyuyor mu?\n  - Bu resim doğru sınıflandırılmış mı?\n  - Her şey yolunda giderse katılımcıya da teşekkür edebilirsiniz.</string>
+  <string name="review_image_explanation">Görüntüleri inceleyebilir ve Wikimedia Commons\'un kalitesini iyileştirebilirsiniz.\n  İncelemenin dört parametresi:\n  - Bu görüntü kapsam dahilinde mi?\n  - Bu resim telif hakkı kurallarına uyuyor mu?\n  - Bu resim doğru sınıflandırılmış mı?\n  - Her şey yolunda giderse katılımcıya da teşekkür edebilirsiniz.</string>
   <string name="no_image">Hiç resim kullanılmadı</string>
   <string name="no_image_reverted">Geri getirilen resim yok</string>
   <string name="no_image_uploaded">Yüklenen resim yok</string>

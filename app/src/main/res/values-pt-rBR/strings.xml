@@ -275,7 +275,7 @@
   <string name="error_while_cache">Erro durante o cache de imagens</string>
   <string name="title_info">Um título descritivo exclusivo para o arquivo, que servirá como um nome de arquivo. Você pode usar linguagem simples com espaços. Não inclua a extensão do arquivo</string>
   <string name="description_info">Por favor, descreva a mídia tanto quanto possível: onde foi tomada? O que isso mostra? Qual é o contexto? Descreva os objetos ou pessoas. Revelar informações que não podem ser facilmente adivinhadas, por exemplo, a hora do dia, se for uma paisagem. Se a mídia mostrar algo incomum, explique o que torna incomum.</string>
-  <string name="caption_info">Por favor, escreva uma breve descrição da imagem. A primeira legenda seria usada como título da imagem.</string>
+  <string name="caption_info" fuzzy="true">Por favor, escreva uma breve descrição da imagem. (Limite a 255 caracteres)</string>
   <string name="upload_image_too_dark">Esta foto está muito escura, você tem certeza de que deseja enviá-la? O Wikimedia Commons é apenas para imagens com valor enciclopédico.</string>
   <string name="upload_image_blurry">Esta foto está embaçada, tem certeza de que deseja enviá-la? O Wikimedia Commons é apenas para imagens com valor enciclopédico.</string>
   <string name="upload_problem_exist">Problemas potenciais com esta imagem:</string>
@@ -508,7 +508,7 @@
   <string name="review_spam">Isso é dentro do escopo?</string>
   <string name="review_thanks">Gostaria de agradecer ao colaborador?</string>
   <string name="review_spam_explanation">Clique em NÃO para nomear esta imagem para exclusão, se não for útil.</string>
-  <string name="review_copyright_explanation">Logotipos, capturas de tela, pôsteres de filmes geralmente são violações de direitos autorais.\n  Clique em NÃO para indicar esta imagem para exclusão</string>
+  <string name="review_copyright_explanation">Logotipos, capturas de tela, pôsteres de filmes geralmente são violações de direitos autorais.\n  Clique em NÃO para indicar esta imagem para exclusão</string>
   <string name="review_thanks_explanation">%1$s será encorajado por sua apreciação</string>
   <string name="review_no_category">Ah, isso nem é categorizado!</string>
   <string name="review_category_explanation">Esta imagem está abaixo das %1$s categorias</string>
@@ -523,7 +523,7 @@
   <string name="review_thanks_yes_button_text">Sim, porque não?</string>
   <string name="review_thanks_no_button_text">Próxima imagem</string>
   <string name="skip_image_explanation">Clicando neste botão você terá uma outra imagem carregada recentemente do Wikimedia Commons</string>
-  <string name="review_image_explanation">Você pode rever imagens e melhorar a qualidade dos Wikimedia Commons.\n Os quatro parâmetros de revisão são:\n- Esta imagem está no escopo?\n- Esta imagem segue as regras de direitos autorais?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, você também pode agradecer ao colaborador.</string>
+  <string name="review_image_explanation">Você pode rever imagens e melhorar a qualidade dos Wikimedia Commons.\n Os quatro parâmetros de revisão são:\n- Esta imagem está no escopo?\n- Esta imagem segue as regras de direitos autorais?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, você também pode agradecer ao colaborador.</string>
   <string name="no_image">Nenhuma imagem usada</string>
   <string name="no_image_reverted">Nenhuma imagem revertida</string>
   <string name="no_image_uploaded">Nenhuma imagem enviada</string>
