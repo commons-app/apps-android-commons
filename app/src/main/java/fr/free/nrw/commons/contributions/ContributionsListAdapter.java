@@ -7,7 +7,6 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.media.MediaClient;
-import org.wikipedia.dataclient.WikiSite;
 
     /**
  * Represents The View Adapter for the List of Contributions
@@ -75,7 +74,7 @@ public class ContributionsListAdapter extends
 
         void deleteUpload(Contribution contribution);
 
-        void openMediaDetail(int contribution);
+        void openMediaDetail(int contribution, boolean isWikipediaPageExists);
 
         void addImageToWikipedia(Contribution contribution);
 

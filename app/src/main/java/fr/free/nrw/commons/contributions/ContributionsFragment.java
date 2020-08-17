@@ -482,12 +482,12 @@ public class ContributionsFragment
      * contribution.
      */
     @Override
-    public void showDetail(int position) {
+    public void showDetail(int position, boolean isWikipediaButtonDisplayed) {
         if (mediaDetailPagerFragment == null || !mediaDetailPagerFragment.isVisible()) {
             mediaDetailPagerFragment = new MediaDetailPagerFragment();
             showMediaDetailPagerFragment();
         }
-        mediaDetailPagerFragment.showImage(position);
+        mediaDetailPagerFragment.showImage(position, isWikipediaButtonDisplayed);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.actions;
 
+import io.reactivex.Single;
+import io.reactivex.SingleOnSubscribe;
 import org.wikipedia.csrf.CsrfTokenClient;
 import org.wikipedia.dataclient.Service;
 
@@ -48,12 +50,16 @@ public class PageEditClient {
      * @param summary     Edit summary
      */
     public Observable<Boolean> appendEdit(String pageTitle, String appendText, String summary) {
-        try {
-            return pageEditInterface.postAppendEdit(pageTitle, summary, appendText, csrfTokenClient.getTokenBlocking())
-                    .map(editResponse -> editResponse.edit().editSucceeded());
-        } catch (Throwable throwable) {
-            return Observable.just(false);
-        }
+        return Single.create((SingleOnSubscribe<String>) emitter -> {
+            try {
+                emitter.onSuccess(csrfTokenClient.getTokenBlocking());
+            } catch (Throwable throwable) {
+                emitter.onError(throwable);
+                throwable.printStackTrace();
+            }
+        }).flatMapObservable(token -> pageEditInterface.postAppendEdit(pageTitle, summary, appendText, token)
+            .map(editResponse -> editResponse.edit().editSucceeded()));
+
     }
 
     /**

@@ -8,6 +8,20 @@
     android:background="?attr/mainBackground"
     >
 
+    <LinearLayout
+      android:id="@+id/dummy_category_edit_container"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:elevation="35dp"
+      android:layout_gravity="bottom"
+      android:visibility="gone"
+      android:orientation="vertical"
+      android:weightSum="10">
+
+        <include
+          layout="@layout/layout_edit_categories" />
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/mediaDetailImageFailed"
         android:layout_height="wrap_content"
@@ -53,9 +67,12 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_250"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:id="@+id/mediaDetailImageViewSpacer" />
+                    android:id="@+id/mediaDetailImageViewSpacer"
+                  >
+
+                </LinearLayout>
 
             </FrameLayout>
 
@@ -86,6 +103,30 @@
                         android:textColor="@android:color/white"
                         android:layout_height="match_parent"
                         tools:text="Title of the media" />
+                </LinearLayout>
+
+                <LinearLayout
+                  android:id="@+id/toDoLayout"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:visibility="gone"
+                  android:background="@color/layout_light_grey"
+                  >
+
+                    <TextView
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      style="@style/MediaDetailTextLabel"
+                      android:text="@string/warning" />
+
+                    <TextView
+                      android:id="@+id/toDoReason"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginStart="@dimen/activity_margin_vertical"
+                      style="@style/MediaDetailTextBody" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -255,8 +296,18 @@
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
                         android:layout_weight="70"
-                        android:orientation="vertical" />
+                        android:orientation="vertical">
+                    </LinearLayout>
+
                 </LinearLayout>
+
+                <Button
+                  android:id="@+id/categoryEditButton"
+                  android:layout_width="24dp"
+                  android:layout_height="24dp"
+                  android:layout_margin="@dimen/standard_gap"
+                  android:layout_gravity="end"
+                  android:background="@drawable/ic_baseline_edit_24" />
 
                 <LinearLayout
                     style="@style/MediaDetailContainer"

@@ -41,6 +41,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     @BindView(R.id.mediaDetailsPager) ViewPager pager;
     private Boolean editable;
     private boolean isFeaturedImage;
+    private boolean isWikipediaButtonDisplayed;
     MediaDetailAdapter adapter;
     private Bookmark bookmark;
     private MediaDetailProvider provider;
@@ -249,6 +250,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         item.setIcon(icon);
     }
 
+    public void showImage(int i, boolean isWikipediaButtonDisplayed) {
+        this.isWikipediaButtonDisplayed = isWikipediaButtonDisplayed;
+        Handler handler =  new Handler();
+        handler.postDelayed(() -> pager.setCurrentItem(i), 5);
+    }
+
     public void showImage(int i) {
         Handler handler =  new Handler();
         handler.postDelayed(() -> pager.setCurrentItem(i), 5);
@@ -310,7 +317,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 }
                 pager.postDelayed(() -> getActivity().invalidateOptionsMenu(), 5);
             }
-            return MediaDetailFragment.forMedia(i, editable, isFeaturedImage);
+            return MediaDetailFragment.forMedia(i, editable, isFeaturedImage, isWikipediaButtonDisplayed);
         }
 
         @Override

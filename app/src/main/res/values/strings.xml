@@ -598,6 +598,17 @@ Upload your first media by tapping on the add button.</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Other</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Because it is</string>
+
+  <string name="category_edit_helper_make_edit_toast">Trying to update categories.</string>
+  <string name="category_edit_helper_show_edit_title">Category update</string>
+  <string name="category_edit_helper_show_edit_title_success">Success</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">Category %1$s is added.</item>
+    <item quantity="other">Categories %1$s are added.</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">Could not add categories.</string>
+  <string name="category_edit_button_text">Update categories</string>
+
   <string name="share_image_via">Share image via</string>
   <string name="no_achievements_yet">You haven\'t made any contributions yet</string>
   <string name="account_created">Account created!</string>
@@ -636,6 +647,10 @@ Upload your first media by tapping on the add button.</string>
   <string name="load_more">Load More</string>
   <string name="nearby_no_results">No places found, try changing your search criteria.</string>
 
+  <string name="todo_improve">Suggested improvements:</string>
+  <string name="missing_category">- Add categories to this image to improve usability.</string>
+  <string name="missing_article">- Add this image to the associated Wikipedia article that has no images.</string>
+  <string name="edit_category">Edit categories</string>
   <string name="add_picture_to_wikipedia_article_title">Add image to Wikipedia</string>
   <string name="add_picture_to_wikipedia_article_desc">Do you want to add this picture to the %1$s language Wikipedia article?</string>
 
