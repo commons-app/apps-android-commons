@@ -12,6 +12,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     private OkHttpJsonApiClient okHttpJsonApiClient;
     private SessionManager sessionManager;
 
+
     @Inject
     public ViewModelFactory(OkHttpJsonApiClient okHttpJsonApiClient, SessionManager sessionManager) {
         this.okHttpJsonApiClient = okHttpJsonApiClient;

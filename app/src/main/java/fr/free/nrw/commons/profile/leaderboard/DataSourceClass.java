@@ -2,8 +2,6 @@ package fr.free.nrw.commons.profile.leaderboard;
 
 import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.LOADED;
 import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.LOADING;
-import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.PAGE_SIZE;
-import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.START_OFFSET;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -20,10 +18,19 @@ public class DataSourceClass extends PageKeyedDataSource<Integer, LeaderboardLis
     private SessionManager sessionManager;
     private MutableLiveData<String> progressLiveStatus;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private String duration;
+    private String category;
+    private int limit;
+    private int offset;
 
-    public DataSourceClass(OkHttpJsonApiClient okHttpJsonApiClient,SessionManager sessionManager) {
+    public DataSourceClass(OkHttpJsonApiClient okHttpJsonApiClient,SessionManager sessionManager,
+        String duration, String category, int limit, int offset) {
         this.okHttpJsonApiClient = okHttpJsonApiClient;
         this.sessionManager = sessionManager;
+        this.duration = duration;
+        this.category = category;
+        this.limit = limit;
+        this.offset = offset;
         progressLiveStatus = new MutableLiveData<>();
     }
 
@@ -38,7 +45,7 @@ public class DataSourceClass extends PageKeyedDataSource<Integer, LeaderboardLis
 
         compositeDisposable.add(okHttpJsonApiClient
                 .getLeaderboard(Objects.requireNonNull(sessionManager.getCurrentAccount()).name,
-                    "all_time", "upload", String.valueOf(PAGE_SIZE), String.valueOf(START_OFFSET))
+                    duration, category, String.valueOf(limit), String.valueOf(offset))
                 .doOnSubscribe(disposable -> {
                     compositeDisposable.add(disposable);
                     progressLiveStatus.postValue(LOADING);
@@ -68,7 +75,7 @@ public class DataSourceClass extends PageKeyedDataSource<Integer, LeaderboardLis
         @NonNull LoadCallback<Integer, LeaderboardList> callback) {
         compositeDisposable.add(okHttpJsonApiClient
             .getLeaderboard(Objects.requireNonNull(sessionManager.getCurrentAccount()).name,
-                "all_time", "upload", String.valueOf(PAGE_SIZE), String.valueOf(params.key))
+                duration, category, String.valueOf(limit), String.valueOf(params.key))
             .doOnSubscribe(disposable -> {
                 compositeDisposable.add(disposable);
                 progressLiveStatus.postValue(LOADING);
@@ -76,7 +83,7 @@ public class DataSourceClass extends PageKeyedDataSource<Integer, LeaderboardLis
                 response -> {
                     if (response != null && response.getStatus() == 200) {
                         progressLiveStatus.postValue(LOADED);
-                        callback.onResult(response.getLeaderboardList(), params.key + PAGE_SIZE);
+                        callback.onResult(response.getLeaderboardList(), params.key + limit);
                     }
                 },
                 t -> {
