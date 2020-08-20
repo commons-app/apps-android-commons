@@ -9,8 +9,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -21,11 +23,14 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
 import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.di.CommonsDaggerAppCompatActivity;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.navtab.NavTab;
 import fr.free.nrw.commons.navtab.NavTabFragmentPagerAdapter;
 import fr.free.nrw.commons.navtab.NavTabLayout;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
@@ -43,7 +48,7 @@ import java.util.List;
 import javax.inject.Inject;
 import timber.log.Timber;
 
-public class MainActivity extends NavigationBaseActivity implements FragmentManager.OnBackStackChangedListener {
+public class MainActivity  extends CommonsDaggerAppCompatActivity implements FragmentManager.OnBackStackChangedListener {
 
     @Inject
     SessionManager sessionManager;
@@ -53,6 +58,8 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
     Toolbar toolbar;
     @BindView(R.id.pager)
     public UnswipableViewPager viewPager;
+    @BindView(R.id.fragmentContainer)
+    public FrameLayout fragmentContainer;
     @BindView(R.id.fragment_main_nav_tab_layout)
     NavTabLayout tabLayout;
     private MediaDetailPagerFragment mediaDetails;
@@ -86,41 +93,48 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         setContentView(R.layout.main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        initDrawer();
+        //initDrawer();
         setTitle(getString(R.string.contributions_fragment));
         setUpPager();
-
-        /*initDrawer();
-        setTitle(getString(R.string.navigation_item_home)); // Should I create a new string variable with another name instead?
-
         initMain();
-
-        if (savedInstanceState != null ) {
-            onOrientationChanged = true; // Will be used in nearby fragment to determine significant update of map
-*/
-            //If nearby map was visible, call on Tab Selected to call all nearby operations
-            /*if (savedInstanceState.getInt("viewPagerCurrentItem") == 1) {
-                ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
-            }*/
-      //  }
 
     }
 
     private void setUpPager() {
-        viewPager.setAdapter(new NavTabFragmentPagerAdapter(getSupportFragmentManager()));
-        viewPager.setOffscreenPageLimit(4);
-        tabLayout.setOnNavigationItemSelectedListener(item -> {
-            setTitle(item.getTitle());
-            viewPager.setCurrentItem(item.getOrder());
-            return true;
+
+        //viewPager.setAdapter(new NavTabFragmentPagerAdapter(getSupportFragmentManager()));
+        //viewPager.setOffscreenPageLimit(4);
+        loadFragment(ContributionsFragment.newInstance());
+        tabLayout.setOnNavigationItemSelectedListener(new OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                setTitle(item.getTitle());
+                //    viewPager.setCurrentItem(item.getOrder());
+                Fragment fragment = NavTab.of(item.getOrder()).newInstance();
+                return loadFragment(fragment);
+            }
         });
+
+
+
+    }
+
+    private boolean loadFragment(Fragment fragment) {
+        if (fragment != null) {
+            getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .commit();
+            return true;
+        }
+        return false;
     }
 
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        quizChecker.initQuizCheck(this);
+        //quizChecker.initQuizCheck(this);
     }
 
     @Override
@@ -136,9 +150,9 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         startService(uploadServiceIntent);
 
         //addTabsAndFragments();
-        if (contributionsActivityPagerAdapter.getItem(0) != null) {
+        /*if (contributionsActivityPagerAdapter.getItem(0) != null) {
             ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(0)).onAuthCookieAcquired();
-        }
+        }*/
     }
 
    /*
@@ -273,13 +287,13 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
                 // Tabs were invisible when Media Details Fragment is active, make them visible again on Contrib List Fragment active
                 // showTabs();
                 // Nearby Notification Card View was invisible when Media Details Fragment is active, make it visible again on Contrib List Fragment active, according to preferences
-                if (defaultKvStore.getBoolean("displayNearbyCardView", true)) {
+                /*if (defaultKvStore.getBoolean("displayNearbyCardView", true)) {
                     if (contributionsFragment.nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
                         contributionsFragment.nearbyNotificationCardView.setVisibility(View.VISIBLE);
                     }
                 } else {
                     contributionsFragment.nearbyNotificationCardView.setVisibility(View.GONE);
-                }
+                }*/
             } else {
                 finish();
             }
@@ -295,7 +309,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
 
     @Override
     public void onBackStackChanged() {
-        initBackButton();
+        //initBackButton();
     }
 
     @Override
@@ -317,11 +331,11 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
 
     @SuppressLint("CheckResult")
     private void setNotificationCount() {
-        compositeDisposable.add(notificationController.getNotifications(false)
+        /*compositeDisposable.add(notificationController.getNotifications(false)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::initNotificationViews,
-                        throwable -> Timber.e(throwable, "Error occurred while loading notifications")));
+                        throwable -> Timber.e(throwable, "Error occurred while loading notifications")));*/
     }
 
     private void initNotificationViews(List<Notification> notificationList) {
@@ -455,6 +469,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         controller.handleActivityResult(this, requestCode, resultCode, data);
     }
 
+    @Override
     protected void onResume() {
         super.onResume();
         setNotificationCount();

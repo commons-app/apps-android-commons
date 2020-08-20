@@ -5,20 +5,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 
+import fr.free.nrw.commons.contributions.ContributionsFragment;
+import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment;
 import org.wikipedia.model.EnumCode;
 import org.wikipedia.model.EnumCodeMap;
 
 //import fr.free.nrw.commons.MoreFragment;
 import fr.free.nrw.commons.R;
-/*
-import fr.free.nrw.commons.bookmarks.BookmarksFragment;
-import fr.free.nrw.commons.contributions.ContributionsFragment;
-import fr.free.nrw.commons.contributions.ContributionsMainFragment;
-import fr.free.nrw.commons.explore.ExploreFragment;
-import fr.free.nrw.commons.nearby.NearbyFragment;
-import org.wikipedia.model.EnumCode;
-import org.wikipedia.model.EnumCodeMap;
-*/
+
 
 
 public enum NavTab implements EnumCode {
@@ -26,8 +20,8 @@ public enum NavTab implements EnumCode {
     @NonNull
     @Override
     public Fragment newInstance() {
-      //return ContributionsFragment.newInstance();
-      return null;
+      return ContributionsFragment.newInstance();
+      //return null;
     }
   },
   NEARBY(R.string.nearby_fragment, R.drawable.ic_location_on_black_24dp){

@@ -76,11 +76,11 @@ public class NearbyNotificationCardView extends SwipableCardView {
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         // If you don't setVisibility after getting layout params, then you will se an empty space in place of nearby NotificationCardView
-        if (((MainActivity)getContext()).defaultKvStore.getBoolean("displayNearbyCardView", true) && this.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+        /*if (((MainActivity)getContext()).defaultKvStore.getBoolean("displayNearbyCardView", true) && this.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
             this.setVisibility(VISIBLE);
         } else {
             this.setVisibility(GONE);
-        }
+        }*/
     }
 
 
@@ -99,7 +99,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
     @Override public boolean onSwipe(View view) {
         view.setVisibility(GONE);
         // Save shared preference for nearby card view accordingly
-        ((MainActivity) getContext()).defaultKvStore.putBoolean("displayNearbyCardView", false);
+        //((MainActivity) getContext()).defaultKvStore.putBoolean("displayNearbyCardView", false);
         ViewUtil.showLongToast(getContext(),
             getResources().getString(R.string.nearby_notification_dismiss_message));
         return true;

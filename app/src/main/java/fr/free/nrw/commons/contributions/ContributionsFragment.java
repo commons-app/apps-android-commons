@@ -6,6 +6,7 @@ import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_P
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -89,6 +90,13 @@ public class ContributionsFragment
     private boolean isFragmentAttachedBefore = false;
     private View checkBoxView;
     private CheckBox checkBox;
+
+    @NonNull
+    public static ContributionsFragment newInstance() {
+        ContributionsFragment fragment = new ContributionsFragment();
+        fragment.setRetainInstance(true);
+        return fragment;
+    }
 
     /**
      * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
@@ -205,7 +213,7 @@ public class ContributionsFragment
 
     @Override
     public void onBackStackChanged() {
-        ((MainActivity)getActivity()).initBackButton();
+        //((MainActivity)getActivity()).initBackButton();
     }
 
     /**
