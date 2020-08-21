@@ -11,6 +11,7 @@
 * Joseph
 * McAang
 * Mirzali
+* MuratTheTurkish
 * Neslihan Turan
 * Okkerem
 * Rapsar
@@ -279,7 +280,7 @@
   <string name="error_while_cache">Resimleri önbelleğe alırken hata oluştu</string>
   <string name="title_info">Dosya adı olarak kullanılacak benzersiz bir açıklayıcı başlık. Sade bir dil kullanabilirsiniz. Dosya uzantısını dahil etmeyin</string>
   <string name="description_info">Lütfen medyayı olabildiğince açıklayın: Nerede çekildi? Ne gösteriyor? Bağlam nedir? Lütfen nesneleri veya kişileri tanımlayın. Kolayca tahmin edilemeyen bilgileri, örneğin bir manzara ise günün saatini gösterin. Medya alışılmadık bir şey gösteriyorsa lütfen alışılmadık hâle getiren şeyi açıklayın.</string>
-  <string name="caption_info" fuzzy="true">Lütfen resmin kısa bir açıklamasını yazın. (255 karakterle sınırı vardır)</string>
+  <string name="caption_info">Lütfen resmin kısa bir açıklamasını yazın. İlk resim yazısı resminin Başlığı olarak kullanılacaktır.</string>
   <string name="upload_image_too_dark">Bu resim çok karanlık, yüklemek istediğinizden emin misiniz? Wikimedia Commons yalnızca ansiklopedik değeri olan resimler içindir.</string>
   <string name="upload_image_blurry">Bu resim bulanık, yüklemek istediğinizden emin misiniz? Wikimedia Commons yalnızca ansiklopedik değeri olan resimler içindir.</string>
   <string name="upload_problem_exist">Bu görselle ilgili olası sorunlar:</string>
@@ -582,6 +583,15 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Diğer</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Çünkü</string>
+  <string name="category_edit_helper_make_edit_toast">Kategorileri güncellemeye çalışıyor.</string>
+  <string name="category_edit_helper_show_edit_title">Kategori güncellemesi</string>
+  <string name="category_edit_helper_show_edit_title_success">Başarılı</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">%1$s kategorisi eklendi.</item>
+    <item quantity="other">%1$s kategorisi eklendi.</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">Kategoriler eklenemedi.</string>
+  <string name="category_edit_button_text">Kategorileri güncelle</string>
   <string name="share_image_via">Resmi şununla paylaş</string>
   <string name="no_achievements_yet">Henüz bir katkı yapmadınız</string>
   <string name="account_created">Hesap oluşturuldu!</string>
@@ -617,6 +627,10 @@
   <string name="use_location_from_similar_image">Bu iki fotoğrafı aynı yerde mi çektiniz? Sağdaki resmin enlem/boylamını kullanmak ister misiniz?</string>
   <string name="load_more">Daha Fazla Yükle</string>
   <string name="nearby_no_results">Yer bulunamadı, arama kriterlerinizi değiştirmeyi deneyin.</string>
+  <string name="todo_improve">Önerilen geliştirmeler:</string>
+  <string name="missing_category">- Kullanılabilirliği artırmak için bu resme kategoriler ekleyin.</string>
+  <string name="missing_article">- Bu resmi, resim içermeyen ilgili Vikipedi maddesini ekleyin.</string>
+  <string name="edit_category">Kategorileri düzenle</string>
   <string name="add_picture_to_wikipedia_article_title">Vikipedi\'ye resim ekle</string>
   <string name="add_picture_to_wikipedia_article_desc">Bu resmi %1$s Vikipedi maddesine eklemek istiyor musunuz?</string>
   <string name="add_picture_to_wikipedia_instructions_title">Talimatlar</string>

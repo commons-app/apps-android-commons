@@ -7,6 +7,7 @@
 * Elisardojm
 * Iváns
 * Maria zaos
+* Mguix
 * Toliño
 * Vivaelcelta
 -->
@@ -370,11 +371,11 @@
   <string name="nominate_delete">Nomear para borrado</string>
   <string name="delete">Borrar</string>
   <string name="Achievements">Logros</string>
-  <string name="statistics">ESTATÍSTICAS</string>
+  <string name="statistics">Estatísticas</string>
   <string name="statistics_thanks">Agradecementos recibidos</string>
   <string name="statistics_featured">Imaxes destacadas</string>
   <string name="statistics_wikidata_edits">Imaxes vía \"Lugares próximos\"</string>
-  <string name="level">NIVEL</string>
+  <string name="level">Nivel</string>
   <string name="images_uploaded">Imaxes cargadas</string>
   <string name="image_reverts">Imaxes non revertidas</string>
   <string name="images_used_by_wiki">Imaxes usadas</string>

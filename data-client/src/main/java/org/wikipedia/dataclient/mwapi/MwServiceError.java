@@ -13,6 +13,7 @@ import java.util.List;
  * Gson POJO for a MediaWiki API error.
  */
 public class MwServiceError extends BaseModel implements ServiceError {
+
     @SuppressWarnings("unused") @Nullable private String code;
     @SuppressWarnings("unused") @Nullable private String text;
     @SuppressWarnings("unused") @Nullable private Data data;
@@ -53,6 +54,11 @@ public class MwServiceError extends BaseModel implements ServiceError {
             }
         }
         return null;
+    }
+
+    @Nullable
+    public String getCode() {
+        return code;
     }
 
     private static final class Data {

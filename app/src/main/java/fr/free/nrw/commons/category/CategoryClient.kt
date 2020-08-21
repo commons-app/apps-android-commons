@@ -8,6 +8,8 @@ import javax.inject.Singleton
 const val CATEGORY_PREFIX = "Category:"
 const val SUB_CATEGORY_CONTINUATION_PREFIX = "sub_category_"
 const val PARENT_CATEGORY_CONTINUATION_PREFIX = "parent_category_"
+const val CATEGORY_UNCATEGORISED = "uncategorised"
+const val CATEGORY_NEEDING_CATEGORIES = "needing categories"
 
 /**
  * Category Client to handle custom calls to Commons MediaWiki APIs

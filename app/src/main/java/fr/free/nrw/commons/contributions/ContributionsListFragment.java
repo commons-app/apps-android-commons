@@ -29,9 +29,8 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.utils.DialogUtil;
-import fr.free.nrw.commons.wikidata.WikidataEditService;
+import fr.free.nrw.commons.media.MediaClient;
 import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -244,9 +243,9 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   }
 
   @Override
-  public void openMediaDetail(final int position) {
+  public void openMediaDetail(final int position, boolean isWikipediaButtonDisplayed) {
     if (null != callback) {//Just being safe, ideally they won't be called when detached
-      callback.showDetail(position);
+      callback.showDetail(position, isWikipediaButtonDisplayed);
     }
   }
 
@@ -334,8 +333,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
     void retryUpload(Contribution contribution);
 
-    void pauseUpload(Contribution contribution);
+    void showDetail(int position, boolean isWikipediaButtonDisplayed);
 
-    void showDetail(int position);
+    void pauseUpload(Contribution contribution);
   }
 }

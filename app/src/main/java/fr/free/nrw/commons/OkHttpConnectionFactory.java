@@ -3,6 +3,9 @@ package fr.free.nrw.commons;
 import androidx.annotation.NonNull;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -62,6 +65,8 @@ public final class OkHttpConnectionFactory {
     }
 
     public static class UnsuccessfulResponseInterceptor implements Interceptor {
+        private static final List<String> DO_NOT_INTERCEPT = Collections.singletonList(
+            "api.php?format=json&formatversion=2&errorformat=plaintext&action=upload&ignorewarnings=1");
 
         private static final String ERRORS_PREFIX = "{\"error";
 
@@ -69,6 +74,11 @@ public final class OkHttpConnectionFactory {
         @NonNull
         public Response intercept(@NonNull final Chain chain) throws IOException {
             final Response rsp = chain.proceed(chain.request());
+
+            // Do not intercept certain requests and let the caller handle the errors
+            if(isExcludedUrl(chain.request())) {
+                return rsp;
+            }
             if (rsp.isSuccessful()) {
                 try (final ResponseBody responseBody = rsp.peekBody(ERRORS_PREFIX.length())) {
                     if (ERRORS_PREFIX.equals(responseBody.string())) {
@@ -82,6 +92,16 @@ public final class OkHttpConnectionFactory {
                 return rsp;
             }
             throw new HttpStatusException(rsp);
+        }
+
+        private boolean isExcludedUrl(final Request request) {
+            final String requestUrl = request.url().toString();
+            for(final String url: DO_NOT_INTERCEPT) {
+                if(requestUrl.contains(url)) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 
