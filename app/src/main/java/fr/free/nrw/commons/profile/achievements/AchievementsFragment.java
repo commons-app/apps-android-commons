@@ -118,7 +118,8 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     // To keep track of the number of wiki edits made by a user
     private int numberOfEdits = 0;
 
-    MenuItem item;
+    // menu item for action bar
+    private MenuItem item;
 
     /**
      * This method helps in the creation Achievement screen and
@@ -180,7 +181,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     }
 
     /**
-     * It display the alertDialog with Image of screenshot
+     * It displays the alertDialog with Image of screenshot
      * @param screenshot
      */
     public void showAlert(Bitmap screenshot){
