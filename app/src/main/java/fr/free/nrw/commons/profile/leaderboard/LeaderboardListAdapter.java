@@ -79,8 +79,6 @@ public class LeaderboardListAdapter extends PagedListAdapter<LeaderboardList, Le
 
         /*
           Open the user profile in a webview when a username is clicked on leaderboard
-          We are not using the commons url from build config because the leaderboard is only
-          supported for prod at the moment
          */
         holder.itemView.setOnClickListener(view -> Utils.handleWebUrl(holder.getContext(), Uri.parse(
             String.format("%s%s", USER_LINK_PREFIX, getItem(position).getUsername()))));

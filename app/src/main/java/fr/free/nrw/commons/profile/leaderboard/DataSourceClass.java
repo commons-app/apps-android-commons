@@ -23,6 +23,15 @@ public class DataSourceClass extends PageKeyedDataSource<Integer, LeaderboardLis
     private int limit;
     private int offset;
 
+    /**
+     * Initialise the Data Source Class with API params
+     * @param okHttpJsonApiClient
+     * @param sessionManager
+     * @param duration
+     * @param category
+     * @param limit
+     * @param offset
+     */
     public DataSourceClass(OkHttpJsonApiClient okHttpJsonApiClient,SessionManager sessionManager,
         String duration, String category, int limit, int offset) {
         this.okHttpJsonApiClient = okHttpJsonApiClient;
@@ -35,10 +44,18 @@ public class DataSourceClass extends PageKeyedDataSource<Integer, LeaderboardLis
     }
 
 
+    /**
+     * @return the status of the list
+     */
     public MutableLiveData<String> getProgressLiveStatus() {
         return progressLiveStatus;
     }
 
+    /**
+     * Loads the initial set of data from API
+     * @param params
+     * @param callback
+     */
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params,
         @NonNull LoadInitialCallback<Integer, LeaderboardList> callback) {
@@ -70,6 +87,11 @@ public class DataSourceClass extends PageKeyedDataSource<Integer, LeaderboardLis
 
     }
 
+    /**
+     * Loads the next set of data on scrolling with offset as the limit of the last set of data
+     * @param params
+     * @param callback
+     */
     @Override
     public void loadAfter(@NonNull LoadParams<Integer> params,
         @NonNull LoadCallback<Integer, LeaderboardList> callback) {

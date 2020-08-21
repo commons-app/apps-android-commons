@@ -110,6 +110,9 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
         return rootView;
     }
 
+    /**
+     * Refreshes the leaderboard list
+     */
     private void refreshLeaderboard() {
         if (viewModel != null) {
             viewModel.refresh(duration, category, limit, offset);
@@ -117,6 +120,9 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
         }
     }
 
+    /**
+     * Set the spinners for the leaderboard filters
+     */
     private void setSpinners() {
         ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(getContext(),
             R.array.leaderboard_categories, android.R.layout.simple_spinner_item);

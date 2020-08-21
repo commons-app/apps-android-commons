@@ -28,6 +28,9 @@ public class LeaderboardListViewModel extends ViewModel {
     }
 
 
+    /**
+     * Initialises the paging
+     */
     private void initializePaging() {
 
         PagedList.Config pagedListConfig =
@@ -44,6 +47,13 @@ public class LeaderboardListViewModel extends ViewModel {
 
     }
 
+    /**
+     * Refreshes the paged list with the new params and starts the loading of new data
+     * @param duration
+     * @param category
+     * @param limit
+     * @param offset
+     */
     public void refresh(String duration, String category, int limit, int offset) {
         dataSourceFactory.setDuration(duration);
         dataSourceFactory.setCategory(category);
@@ -52,6 +62,13 @@ public class LeaderboardListViewModel extends ViewModel {
         dataSourceFactory.getMutableLiveData().getValue().invalidate();
     }
 
+    /**
+     * Sets the new params for the paged list API calls
+     * @param duration
+     * @param category
+     * @param limit
+     * @param offset
+     */
     public void setParams(String duration, String category, int limit, int offset) {
         dataSourceFactory.setDuration(duration);
         dataSourceFactory.setCategory(category);

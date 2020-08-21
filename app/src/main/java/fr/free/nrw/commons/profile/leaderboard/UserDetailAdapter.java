@@ -34,11 +34,21 @@ public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.Da
             this.count = itemView.findViewById(R.id.count);
         }
 
+        /**
+         * This method will return the Context
+         * @return Context
+         */
         public Context getContext() {
             return itemView.getContext();
         }
     }
 
+    /**
+     * Overrides the onCreateViewHolder and sets the view with leaderboard user element layout
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @Override
     public UserDetailAdapter.DataViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
@@ -48,6 +58,11 @@ public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.Da
         return new DataViewHolder(view);
     }
 
+    /**
+     * Overrides the onBindViewHolder Set the view at the specific position with the specific value
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull UserDetailAdapter.DataViewHolder holder, int position) {
         TextView rank = holder.rank;

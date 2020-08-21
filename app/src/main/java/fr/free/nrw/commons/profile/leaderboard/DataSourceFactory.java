@@ -57,10 +57,17 @@ public class DataSourceFactory extends DataSource.Factory<Integer, LeaderboardLi
         liveData = new MutableLiveData<>();
     }
 
+    /**
+     * @return the live data
+     */
     public MutableLiveData<DataSourceClass> getMutableLiveData() {
         return liveData;
     }
 
+    /**
+     * Creates the new instance of data source class
+     * @return
+     */
     @Override
     public DataSource<Integer, LeaderboardList> create() {
         DataSourceClass dataSourceClass = new DataSourceClass(okHttpJsonApiClient, sessionManager, duration, category, limit, offset);

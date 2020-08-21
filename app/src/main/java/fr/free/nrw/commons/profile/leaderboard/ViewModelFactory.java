@@ -20,6 +20,12 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     }
 
 
+    /**
+     * Creats a new LeaderboardListViewModel
+     * @param modelClass
+     * @param <T>
+     * @return
+     */
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {

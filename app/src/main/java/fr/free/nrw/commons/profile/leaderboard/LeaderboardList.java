@@ -57,6 +57,9 @@ public class LeaderboardList {
     }
 
 
+    /**
+     * This method checks for the diff in the callbacks for paged lists
+     */
     public static DiffUtil.ItemCallback<LeaderboardList> DIFF_CALLBACK =
         new ItemCallback<LeaderboardList>() {
             @Override
