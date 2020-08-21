@@ -84,7 +84,7 @@
   <string name="provider_contributions">Omat tallennukset</string>
   <string name="menu_share">Jaa</string>
   <string name="menu_open_in_browser">Näytä selaimessa</string>
-  <string name="share_title_hint" fuzzy="true">Otsikko (Vaaditaan)</string>
+  <string name="share_title_hint">Kuvateksti (vaaditaan)</string>
   <string name="share_description_hint">Kuvaus</string>
   <string name="login_failed_network">Kirjautuminen epäonnistui - verkkovirhe</string>
   <string name="login_failed_wrong_credentials">Kirjautuminen epäonnistui - tarkista käyttäjänimesi ja salasanasi</string>
@@ -114,8 +114,8 @@
   <string name="menu_about">Tietoja</string>
   <string name="about_license">Wikimedia Commons -sovellus on vapaan lähdekoodin ohjelmisto, joka on luotu ja ylläpidetty Wikimedia-yhteisön apurahoilla ja vapaaehtoisilla. Wikimedia Foundation ei ole sitoutunut sovelluksen luomiseen, kehittämiseen tai ylläpitoon.</string>
   <string name="about_improve">Luo uusi &lt;a href=\"%1$s\"&gt;GitHub-issue&lt;/a&gt; bugiraporteille ja ehdotuksille.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Yksityisyydensuoja&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;Tekijät&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Tietosuojakäytäntö</string>
+  <string name="about_credits">Tekijät</string>
   <string name="title_activity_about">Tietoja</string>
   <string name="menu_feedback">Lähetä palautetta (sähköpostitse)</string>
   <string name="no_email_client">Sähköpostiohjelmaa ei ole asennettu</string>
@@ -127,10 +127,10 @@
   <string name="media_upload_policy">Lisäämällä kuvan, ilmoitan tämän olevan oma työ ja että se ei sisällä tekijänoikeuden alaista materiaalia tai selfietä ja muuten noudattaa &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Lataa</string>
   <string name="preference_license">Oletuslisenssi</string>
-  <string name="use_previous" fuzzy="true">Käytä edellistä otsikkoa/kuvausta</string>
+  <string name="use_previous">Käytä edellistä otsikkoa ja kuvausta</string>
   <string name="allow_gps">Hae tämänhetkinen sijainti automaattisesti</string>
   <string name="allow_gps_summary">Noutaa nykyisen sijainnin jos kuva ei ole paikkamerkitty, ja paikkamerkitsee kuvan. Varoitus: tämä paljastaa nykyisen sijaintisi.</string>
-  <string name="preference_theme" fuzzy="true">Yötila</string>
+  <string name="preference_theme">Teema</string>
   <string name="license_name_cc_by_sa_four">Nimeä-JaaSamoin 4.0</string>
   <string name="license_name_cc_by_four">Nimeä 4.0</string>
   <string name="license_name_cc_by_sa">Nimeä-JaaSamoin 3.0</string>
@@ -171,7 +171,7 @@
   <string name="welcome_copyright_subtext">Vältä tekijänoikeuksien alaista materiaalia, kuten julisteita, kirjan kansia ja useimpia Internetistä löydettyjä kuvia.</string>
   <string name="welcome_final_text">Luuletko ymmärtäneesi tämän?</string>
   <string name="welcome_final_button_text">Kyllä!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Lisätietoa&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Lisätietoja</string>
   <string name="detail_panel_cats_label">Luokat</string>
   <string name="detail_panel_cats_loading">Ladataan…</string>
   <string name="detail_panel_cats_none">Ei yhtään valittu</string>
@@ -187,8 +187,10 @@
   <string name="no_nearby">Lähistöltä ei löytynyt paikkoja</string>
   <string name="warning">Varoitus</string>
   <string name="upload_image_duplicate">Tämä tiedosto on jo Commonsissa. Haluatko varmasti jatkaa?</string>
+  <string name="upload">Tallenna</string>
   <string name="yes">Kyllä</string>
   <string name="no">Ei</string>
+  <string name="media_detail_caption">Kuvateksti</string>
   <string name="media_detail_title">Otsikko</string>
   <string name="media_detail_description">Kuvaus</string>
   <string name="media_detail_discussion">Keskustelu</string>
@@ -370,7 +372,7 @@
   <string name="contributions_fragment">Muokkaukset</string>
   <string name="nearby_fragment">Lähistöllä</string>
   <string name="notifications">Ilmoitukset</string>
-  <string name="read_notifications" fuzzy="true">Ilmoitukset (arkistoidut)</string>
+  <string name="read_notifications">Ilmoitukset (luetut)</string>
   <string name="display_nearby_notification">Näytä lähistöllä-ilmoitus</string>
   <string name="list_sheet">Lista</string>
   <string name="step_count">Vaihe %1$d/%2$d</string>
@@ -419,7 +421,7 @@
   <string name="review_copyright_no_button_text">Näyttää hyvälle</string>
   <string name="review_thanks_yes_button_text">Kyllä, miksi ei</string>
   <string name="review_thanks_no_button_text">Seuraava kuva</string>
-  <string name="menu_option_read" fuzzy="true">Näytä arkistoidut</string>
+  <string name="menu_option_read">Näytä luetut</string>
   <string name="menu_option_unread">Näytä lukemattomat</string>
   <string name="image_chooser_title">Valitse tallennettavat tiedostot</string>
   <string name="please_wait">Odota…</string>
@@ -443,4 +445,11 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Muu</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Koska se on</string>
+  <string name="theme_dark_name">Tumma</string>
+  <string name="theme_light_name">Vaalea</string>
+  <string name="load_more">Lataa lisää</string>
+  <string name="add_picture_to_wikipedia_article_title">Lisää kuva Wikipediaan</string>
+  <string name="wikipedia_instructions_step_7">7. Julkaise artikkeli</string>
+  <string name="copy_wikicode_to_clipboard">Kopioi wikikoodi leikepöydälle</string>
+  <string name="paused">Pysäytetty</string>
 </resources>

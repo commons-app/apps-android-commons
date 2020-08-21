@@ -4,6 +4,7 @@
 * Fitoschido
 * Kippelboy
 * MarionaDSR
+* Mguix
 * Pintor Smeargle
 * Pitort
 * Toniher
@@ -14,8 +15,7 @@
     <item quantity="one">s\'està carregant %1$d fitxer</item>
     <item quantity="other">s\'estan carregant %1$d fitxers</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -76,7 +76,7 @@
   <string name="provider_contributions">Les meves càrregues</string>
   <string name="menu_share">Comparteix</string>
   <string name="menu_open_in_browser">Mostra al navegador</string>
-  <string name="share_title_hint" fuzzy="true">Títol (obligatori)</string>
+  <string name="share_title_hint">Llegenda (obligatori)</string>
   <string name="share_description_hint">Descripció</string>
   <string name="login_failed_network">No s\'ha pogut iniciar la sessió – error de xarxa</string>
   <string name="login_failed_wrong_credentials">No es pot iniciar la sessió - comproveu el nom d\'usuari i la contrasenya</string>
@@ -108,7 +108,7 @@
   <string name="about_license">L’aplicació de codi obert Wikimedia Commons fou creada per, i rep manteniment de, cessionaris i voluntaris de la comunitat de Wikimedia. La Fundació Wikimedia no està involucrada en la creació, el desenvolupament ni el manteniment de l’aplicació.</string>
   <string name="about_improve">Crea una &lt;a href=\"%1$s\"&gt;incidència de GitHub&lt;/a&gt; nova per a informes d\'error i suggeriments.</string>
   <string name="about_privacy_policy">Política de privadesa</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;Crèdits&lt;/u&gt;</string>
+  <string name="about_credits">Crèdits</string>
   <string name="title_activity_about">Quant a</string>
   <string name="menu_feedback">Envia comentaris (per correu)</string>
   <string name="no_email_client">No hi ha cap client de correu instal·lat</string>
@@ -120,7 +120,7 @@
   <string name="media_upload_policy">En trametre aquesta imatge declaro que és fruit del meu treball, que no conté material amb drets d\'autor o amb autofotos, i que s\'adhereix a les &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;polítiques de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Baixa</string>
   <string name="preference_license">Llicència per defecte</string>
-  <string name="use_previous" fuzzy="true">Utilitza títol i descripció anteriors</string>
+  <string name="use_previous">Utilitzar títol i descripció anteriors</string>
   <string name="allow_gps">Obté la ubicació actual automàticament</string>
   <string name="allow_gps_summary">Recupera la ubicació actual si la imatge no està geoetiquetada, i n\'etiqueta la imatge geogràficament. Avís: això revelarà la vostra ubicació actual.</string>
   <string name="preference_theme">Tema</string>
@@ -163,7 +163,7 @@
   <string name="welcome_copyright_subtext">No utilitzis material amb copyright que puguis trobar a Internet, ni tampoc imatges de pòsters, portades de llibres, etc.</string>
   <string name="welcome_final_text">Creieu que ho heu entès?</string>
   <string name="welcome_final_button_text">Sí!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Més Informació&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Més informació</string>
   <string name="detail_panel_cats_label">Categories</string>
   <string name="detail_panel_cats_loading">Carregant…</string>
   <string name="detail_panel_cats_none">No se n\'ha seleccionat cap</string>
@@ -256,7 +256,7 @@
   <string name="null_url">Error! No s\'ha trobat l\'URL</string>
   <string name="nominate_deletion">Nomina per a supressió</string>
   <string name="nominated_for_deletion">S\'ha nominat la imatge per a supressió.</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Vegeu la pàgina web per a més detalls&lt;/u&gt;</string>
+  <string name="nominated_see_more">Vegeu la pàgina web per a més detalls</string>
   <string name="nominating_file_for_deletion">S\'està nominant %1$s per a ser eliminada.</string>
   <string name="nominating_for_deletion_status">S\'està nominant per a ser eliminat el fitxer: %1$s</string>
   <string name="view_browser">Mostra en el navegador</string>
@@ -268,7 +268,7 @@
   <string name="copy_wikicode">Copia el wikitext al portaretalls</string>
   <string name="wikicode_copied">S\'ha copiat el wikitext al portaretalls</string>
   <string name="nearby_location_has_not_changed">La ubicació no ha canviat.</string>
-  <string name="nearby_location_not_available" fuzzy="true">La ubicació no és disponible.</string>
+  <string name="nearby_location_not_available">\"Pels voltants\" podria no funcionar correctament, la ubicació no està disponible.</string>
   <string name="location_permission_rationale_nearby">Permís necessari per a mostrar una llista de llocs propers</string>
   <string name="get_directions">Com anar-hi</string>
   <string name="read_article">Llegeix l’article</string>
@@ -281,14 +281,14 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Viquipèdia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Valoreu-nos&lt;/u&gt;</string>
+  <string name="about_rate_us">Valoreu-nos</string>
   <string name="about_faq">Preguntes freqüents</string>
   <string name="welcome_skip_button">Omet la guia</string>
   <string name="no_internet">Internet no disponible</string>
   <string name="internet_established">Internet disponible</string>
   <string name="error_notifications">S\'ha produït un error en recuperar notificacions</string>
   <string name="no_notifications">No s\'ha trobat cap notificació</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;Tradueix&lt;/u&gt;</string>
+  <string name="about_translate">Traduir</string>
   <string name="about_translate_title">Llengües</string>
   <string name="about_translate_message">Seleccioneu la llengua en què voleu enviar traduccions</string>
   <string name="about_translate_proceed">Procedeix</string>
@@ -359,7 +359,7 @@
   <string name="contributions_fragment">Contribucions</string>
   <string name="nearby_fragment">A prop</string>
   <string name="notifications">Notificacions</string>
-  <string name="read_notifications" fuzzy="true">Notificacions (arxivades)</string>
+  <string name="read_notifications">Notificacions (llegides)</string>
   <string name="display_nearby_notification">Mostra notificacions properes</string>
   <string name="display_nearby_notification_summary">Feu un toc aquí per a veure el lloc més proper que necessiti fotos</string>
   <string name="no_close_nearby">No s\'han trobat llocs propers prop vostre</string>
@@ -394,7 +394,7 @@
   <string name="desc_language_Asia">Àsia</string>
   <string name="desc_language_Pacific">Pacífic</string>
   <string name="no_categories_selected">No s\'ha seleccionat cap categoria</string>
-  <string name="no_categories_selected_warning_desc" fuzzy="true">Les imatges sense categories rarament fan cap servei. Esteu segur que voleu procedir sense seleccionar cap categoria?</string>
+  <string name="no_categories_selected_warning_desc">Les imatges sense categories rarament fan cap servei. Esteu segur que voleu continuar sense seleccionar cap categoria?</string>
   <string name="upload_flow_all_images_in_set">(Per a totes les imatges en el conjunt)</string>
   <string name="search_this_area">Cerca en aquesta àrea</string>
   <string name="nearby_card_permission_title">Sol·licitud de permisos</string>
@@ -436,7 +436,7 @@
   <string name="no_notification">No teniu cap notificació sense llegir</string>
   <string name="no_read_notification">No teniu cap notificació llegida</string>
   <string name="share_logs_using">Comparteix els registres utilitzant</string>
-  <string name="menu_option_read" fuzzy="true">Mostra els arxivats</string>
+  <string name="menu_option_read">Mostra els llegits</string>
   <string name="menu_option_unread">Mostra aquelles per llegir</string>
   <string name="error_occurred_in_picking_images">S\'ha produït un error en escollir les imatges</string>
   <string name="image_chooser_title">Trieu les imatges per carregar</string>
@@ -488,7 +488,7 @@
   <string name="place_type">Tipus de lloc:</string>
   <string name="nearby_search_hint">Pont, museu, hotel, etc.</string>
   <string name="you_must_reset_your_passsword">Quelcom ha fallat amb la vostra sessió. Reinicieu la vostra contrasenya!!</string>
-  <string name="theme_default_name" fuzzy="true">Per defecte</string>
+  <string name="theme_default_name">Seguir el sistema</string>
   <string name="theme_dark_name">Fosc</string>
   <string name="theme_light_name">Clar</string>
 </resources>

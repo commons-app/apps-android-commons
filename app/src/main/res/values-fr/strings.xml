@@ -95,7 +95,7 @@
   <string name="title_activity_contributions">Mes téléversements récents</string>
   <string name="contribution_state_queued">Mis en file d’attente</string>
   <string name="contribution_state_failed">Échec</string>
-  <string name="contribution_state_in_progress">%1$d %% effectué</string>
+  <string name="contribution_state_in_progress">%1$d %% effectué</string>
   <string name="contribution_state_starting">Téléversement en cours</string>
   <string name="menu_from_gallery">Depuis la galerie</string>
   <string name="menu_from_camera">Prendre une photo</string>
@@ -287,7 +287,7 @@
   <string name="error_while_cache">Erreur en mettant les images en cache</string>
   <string name="title_info">Un titre descriptif unique pour le fichier, qui servira de nom de fichier. Vous pouvez utiliser un langage simple avec des espaces. N’incluez pas l’extension du fichier</string>
   <string name="description_info">Veuillez décrire le média autant que possible : Où a-t-il été enregistré ? Que montre-t-il ? Quel est le contexte ? Veuillez décrire les objets ou les personnes. Révélez les informations qui ne peuvent pas être devinées facilement, par exemple l’heure de la journée si c’est un paysage. Si le média montre quelque chose d’inhabituel, veuillez expliquer ce qui le rend exceptionnel.</string>
-  <string name="caption_info" fuzzy="true">Veuillez rédiger une brève description de l’image (limitée à 255 caractères).</string>
+  <string name="caption_info">Veuillez rédiger une brève description de l’image. La première légende sera utilisée comme titre de l\'image.</string>
   <string name="upload_image_too_dark">Cette image est trop sombre, êtes-vous sûr de vouloir la téléverser ? Wikimedia Commons est réservé pour les images ayant une valeur encyclopédique.</string>
   <string name="upload_image_blurry">Cette image est floue, êtes-vous sûr de vouloir la téléverser ? Wikimedia Commons est réservé aux images ayant une valeur encyclopédique.</string>
   <string name="upload_problem_exist">Problèmes potentiels avec cette image :</string>
@@ -321,7 +321,7 @@
   <string name="copy_wikicode">Copier le texte wiki dans le presse-papiers</string>
   <string name="wikicode_copied">Texte wiki copié dans le presse-papiers</string>
   <string name="nearby_location_has_not_changed">L’emplacement n’a pas changé.</string>
-  <string name="nearby_location_not_available">« À proximité » pourrait ne pas fonctionner correctement, votre emplacement étant indisponible.</string>
+  <string name="nearby_location_not_available">« À proximité » pourrait ne pas fonctionner correctement, votre emplacement étant indisponible.</string>
   <string name="location_permission_rationale_nearby">Une permission est requise pour afficher une liste de lieux à proximité</string>
   <string name="get_directions">Obtenir les directions</string>
   <string name="read_article">Lire l’article</string>
@@ -631,7 +631,7 @@
   <string name="add_picture_to_wikipedia_instructions_desc">Faites attention de suivre les lignes directrices de modification !</string>
   <string name="confirm">Confirmer</string>
   <string name="instructions_title">Instructions</string>
-  <string name="wikipedia_instructions_step_1">1. Utiliser le wikicode suivant :</string>
+  <string name="wikipedia_instructions_step_1">1. Utiliser le wikicode suivant :</string>
   <string name="wikipedia_instructions_step_2">2. Cliquer sur Confirmer ouvrira l’article Wikipédia</string>
   <string name="wikipedia_instructions_step_3">3. Trouver une section appropriée pour votre image dans l’article</string>
   <string name="wikipedia_instructions_step_4">4. Cliquer sur l’icône d’édition (celle ressemblant à un crayon) pour cette section.</string>

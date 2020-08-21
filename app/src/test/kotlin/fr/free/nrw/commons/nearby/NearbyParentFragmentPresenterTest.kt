@@ -11,6 +11,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
@@ -264,7 +265,7 @@ class NearbyParentFragmentPresenterTest {
     fun testFilterByMarkerTypeMultiSelectCHECKED() {
         val state = CheckBoxTriStates.CHECKED
         nearbyPresenter.filterByMarkerType(selectedLabels, state, false,true)
-        verify(nearbyParentFragmentView).displayAllMarkers()
+        verify(nearbyParentFragmentView).filterMarkersByLabels(ArgumentMatchers.anyList(),ArgumentMatchers.anyBoolean(),ArgumentMatchers.anyBoolean(),ArgumentMatchers.anyBoolean(),ArgumentMatchers.anyBoolean());
         verify(nearbyParentFragmentView).setRecyclerViewAdapterAllSelected()
         verifyNoMoreInteractions(nearbyParentFragmentView)
     }
