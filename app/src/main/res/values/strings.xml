@@ -677,9 +677,9 @@ Upload your first media by tapping on the add button.</string>
   <string name="leaderboard_column_rank">Rank</string>
   <string name="leaderboard_column_user">User</string>
   <string name="leaderboard_column_count">Count</string>
-  <string name="setting_avatar_dialog_title">Set as Leaderboard Avatar</string>
-  <string name="setting_avatar_dialog_message">Setting as Avatar, please wait</string>
-  <string name="avatar_set_successfully">Avatar Set Successfully</string>
+  <string name="setting_avatar_dialog_title">Set as leaderboard avatar</string>
+  <string name="setting_avatar_dialog_message">Setting as avatar, please wait</string>
+  <string name="avatar_set_successfully">Avatar set</string>
   <string name="avatar_set_unsuccessfully">Error setting new avatar, please try again</string>
   <string name="menu_set_avatar">Set as avatar</string>
   <string name="leaderboard_yearly">Yearly</string>

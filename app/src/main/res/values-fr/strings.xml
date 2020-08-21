@@ -95,7 +95,7 @@
   <string name="title_activity_contributions">Mes téléversements récents</string>
   <string name="contribution_state_queued">Mis en file d’attente</string>
   <string name="contribution_state_failed">Échec</string>
-  <string name="contribution_state_in_progress">%1$d %% effectué</string>
+  <string name="contribution_state_in_progress">%1$d %% effectué</string>
   <string name="contribution_state_starting">Téléversement en cours</string>
   <string name="menu_from_gallery">Depuis la galerie</string>
   <string name="menu_from_camera">Prendre une photo</string>
@@ -321,7 +321,7 @@
   <string name="copy_wikicode">Copier le texte wiki dans le presse-papiers</string>
   <string name="wikicode_copied">Texte wiki copié dans le presse-papiers</string>
   <string name="nearby_location_has_not_changed">L’emplacement n’a pas changé.</string>
-  <string name="nearby_location_not_available">« À proximité » pourrait ne pas fonctionner correctement, votre emplacement étant indisponible.</string>
+  <string name="nearby_location_not_available">« À proximité » pourrait ne pas fonctionner correctement, votre emplacement étant indisponible.</string>
   <string name="location_permission_rationale_nearby">Une permission est requise pour afficher une liste de lieux à proximité</string>
   <string name="get_directions">Obtenir les directions</string>
   <string name="read_article">Lire l’article</string>
@@ -637,7 +637,7 @@
   <string name="add_picture_to_wikipedia_instructions_desc">Faites attention de suivre les lignes directrices de modification !</string>
   <string name="confirm">Confirmer</string>
   <string name="instructions_title">Instructions</string>
-  <string name="wikipedia_instructions_step_1">1. Utiliser le wikicode suivant :</string>
+  <string name="wikipedia_instructions_step_1">1. Utiliser le wikicode suivant :</string>
   <string name="wikipedia_instructions_step_2">2. Cliquer sur Confirmer ouvrira l’article Wikipédia</string>
   <string name="wikipedia_instructions_step_3">3. Trouver une section appropriée pour votre image dans l’article</string>
   <string name="wikipedia_instructions_step_4">4. Cliquer sur l’icône d’édition (celle ressemblant à un crayon) pour cette section.</string>
