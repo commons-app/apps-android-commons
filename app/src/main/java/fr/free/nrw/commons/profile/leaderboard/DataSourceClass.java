@@ -12,6 +12,9 @@ import io.reactivex.disposables.CompositeDisposable;
 import java.util.Objects;
 import timber.log.Timber;
 
+/**
+ * This class will call the leaderboard API to get new list when the pagination is performed
+ */
 public class DataSourceClass extends PageKeyedDataSource<Integer, LeaderboardList> {
 
     private OkHttpJsonApiClient okHttpJsonApiClient;
@@ -81,6 +84,11 @@ public class DataSourceClass extends PageKeyedDataSource<Integer, LeaderboardLis
 
     }
 
+    /**
+     * Loads any data before the inital page is loaded
+     * @param params
+     * @param callback
+     */
     @Override
     public void loadBefore(@NonNull LoadParams<Integer> params,
         @NonNull LoadCallback<Integer, LeaderboardList> callback) {

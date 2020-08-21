@@ -33,6 +33,9 @@ import java.util.Objects;
 import javax.inject.Inject;
 import timber.log.Timber;
 
+/**
+ * This class extends the CommonsDaggerSupportFragment and creates leaderboard fragment
+ */
 public class LeaderboardFragment extends CommonsDaggerSupportFragment {
 
     @BindView(R.id.leaderboard_list)
@@ -56,14 +59,35 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
     @Inject
     ViewModelFactory viewModelFactory;
 
-    LeaderboardListViewModel viewModel;
+    /**
+     * View model for the paged leaderboard list
+     */
+    private LeaderboardListViewModel viewModel;
 
+    /**
+     * Composite disposable for API call
+     */
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    String duration;
-    String category;
-    int limit = PAGE_SIZE;
-    int offset = START_OFFSET;
+    /**
+     * Duration of the leaderboard API
+     */
+    private String duration;
+
+    /**
+     * Category of the Leaderboard API
+     */
+    private String category;
+
+    /**
+     * Page size of the leaderboard API
+     */
+    private int limit = PAGE_SIZE;
+
+    /**
+     * offset for the leaderboard API
+     */
+    private int offset = START_OFFSET;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

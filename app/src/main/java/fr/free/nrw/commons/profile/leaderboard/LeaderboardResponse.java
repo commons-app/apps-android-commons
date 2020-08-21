@@ -4,6 +4,9 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * GSON Response Class for Leaderboard API response
+ */
 public class LeaderboardResponse {
 
     @SerializedName("status")

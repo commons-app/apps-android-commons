@@ -12,6 +12,9 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.disposables.CompositeDisposable;
 
+/**
+ * Extends the ViewModel class and creates the LeaderboardList View Model
+ */
 public class LeaderboardListViewModel extends ViewModel {
 
     private DataSourceFactory dataSourceFactory;
@@ -19,6 +22,11 @@ public class LeaderboardListViewModel extends ViewModel {
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private LiveData<String> progressLoadStatus = new MutableLiveData<>();
 
+    /**
+     * Constructor for a new LeaderboardListViewModel
+     * @param okHttpJsonApiClient
+     * @param sessionManager
+     */
     public LeaderboardListViewModel(OkHttpJsonApiClient okHttpJsonApiClient, SessionManager
         sessionManager) {
 
@@ -76,10 +84,16 @@ public class LeaderboardListViewModel extends ViewModel {
         dataSourceFactory.setOffset(offset);
     }
 
+    /**
+     * @return the loading status of paged list
+     */
     public LiveData<String> getProgressLoadStatus() {
         return progressLoadStatus;
     }
 
+    /**
+     * @return the paged list with live data
+     */
     public LiveData<PagedList<LeaderboardList>> getListLiveData() {
         return listLiveData;
     }

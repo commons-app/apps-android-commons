@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import fr.free.nrw.commons.R;
 
+/**
+ * This class extends RecyclerView.Adapter and creates the UserDetail section of the leaderboard
+ */
 public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.DataViewHolder> {
 
     LeaderboardResponse leaderboardResponse;

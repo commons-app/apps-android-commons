@@ -6,6 +6,11 @@ import androidx.recyclerview.widget.DiffUtil.ItemCallback;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * This class represents the leaderboard API response sub part of i.e. leaderboard list
+ * The leaderboard list will contain the ranking of the users from 1 to n,
+ * avatars, username and count in the selected category.
+ */
 public class LeaderboardList {
 
     @SerializedName("username")

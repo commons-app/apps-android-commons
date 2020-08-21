@@ -3,6 +3,9 @@ package fr.free.nrw.commons.profile.leaderboard;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * GSON Response Class for Update Avatar API response
+ */
 public class UpdateAvatarResponse {
 
   @SerializedName("status")

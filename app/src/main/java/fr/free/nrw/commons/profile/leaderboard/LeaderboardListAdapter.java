@@ -15,6 +15,9 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 
+/**
+ * This class extends RecyclerView.Adapter and creates the List section of the leaderboard
+ */
 public class LeaderboardListAdapter extends PagedListAdapter<LeaderboardList, LeaderboardListAdapter.ListViewHolder> {
 
     protected LeaderboardListAdapter() {

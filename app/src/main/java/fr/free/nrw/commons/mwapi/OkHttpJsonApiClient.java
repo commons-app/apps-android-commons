@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.mwapi;
 
+import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.LEADERBOARD_END_POINT;
+import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.UPDATE_AVATAR_END_POINT;
+
 import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import com.google.gson.Gson;
@@ -65,10 +68,19 @@ public class OkHttpJsonApiClient {
     this.gson = gson;
   }
 
+  /**
+   * The method will gradually calls the leaderboard API and fetches the leaderboard
+   * @param userName username of leaderboard user
+   * @param duration duration for leaderboard
+   * @param category category for leaderboard
+   * @param limit page size limit for list
+   * @param offset offset for the list
+   * @return LeaderboardResponse object
+   */
   @NonNull
   public Observable<LeaderboardResponse> getLeaderboard(String userName, String duration, String category, String limit, String offset) {
     final String fetchLeaderboardUrlTemplate = wikiMediaTestToolforgeUrl
-        + "/leaderboard.py";
+        + LEADERBOARD_END_POINT;
     String url = String.format(Locale.ENGLISH,
         fetchLeaderboardUrlTemplate,
         userName,
@@ -104,10 +116,16 @@ public class OkHttpJsonApiClient {
     });
   }
 
+  /**
+   * This method will update the leaderboard user avatar
+   * @param username username to update
+   * @param avatar url of the new avatar
+   * @return UpdateAvatarResponse object
+   */
   @NonNull
   public Single<UpdateAvatarResponse> setAvatar(String username, String avatar) {
     final String urlTemplate = wikiMediaTestToolforgeUrl
-        + "/update_avatar.py";
+        + UPDATE_AVATAR_END_POINT;
     return Single.fromCallable(() -> {
       String url = String.format(Locale.ENGLISH,
           urlTemplate,

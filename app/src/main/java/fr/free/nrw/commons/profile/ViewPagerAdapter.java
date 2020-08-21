@@ -6,6 +6,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This View Pager Adapter will set the fragments for profile activity
+ */
 public class ViewPagerAdapter  extends FragmentPagerAdapter {
     private List<Fragment> fragmentList = new ArrayList<>();
     private List<String> fragmentTitleList = new ArrayList<>();

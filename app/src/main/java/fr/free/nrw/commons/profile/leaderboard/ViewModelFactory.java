@@ -7,6 +7,10 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import javax.inject.Inject;
 
+/**
+ * This class extends the ViewModelProvider.Factory and creates a ViewModelFactory class
+ * for leaderboardListViewModel
+ */
 public class ViewModelFactory implements ViewModelProvider.Factory {
 
     private OkHttpJsonApiClient okHttpJsonApiClient;

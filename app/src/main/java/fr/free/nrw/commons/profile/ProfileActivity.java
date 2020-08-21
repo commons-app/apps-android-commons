@@ -16,7 +16,10 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * This activity will set two tabs, achievements and
+ * each tab will have their own fragments
+ */
 public class ProfileActivity extends NavigationBaseActivity {
 
     private FragmentManager supportFragmentManager;
