@@ -383,6 +383,9 @@
   <string name="delete_helper_ask_spam_other">Andet</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Vilkårligt billede fra internettet</string>
   <string name="delete_helper_ask_reason_copyright_other">Andet</string>
+  <string name="category_edit_helper_show_edit_title_success">Succes</string>
+  <string name="category_edit_helper_edit_message_else">Kunne ikke tilføje kategorier.</string>
+  <string name="category_edit_button_text">Opdater kategorier</string>
   <string name="place_state_exists">Findes</string>
   <string name="place_state_needs_photo">Mangler et billede</string>
   <string name="nearby_search_hint">Bro, museum, hotel, osv.</string>
@@ -391,6 +394,7 @@
   <string name="theme_dark_name">Mørkt</string>
   <string name="theme_light_name">Lyst</string>
   <string name="load_more">Indlæs mere</string>
+  <string name="edit_category">Rediger kategorier</string>
   <string name="add_picture_to_wikipedia_instructions_title">Instruktioner</string>
   <string name="confirm">Bekræft</string>
   <string name="instructions_title">Instruktioner</string>

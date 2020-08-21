@@ -603,6 +603,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">شعار</string>
   <string name="delete_helper_ask_reason_copyright_other">أخرى</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">لأنها</string>
+  <string name="category_edit_button_text">تحديث التصنيفات</string>
   <string name="share_image_via">مشاركة الصور عبر</string>
   <string name="no_achievements_yet">أنت لم تقدم أية مساهمات حتى الآن</string>
   <string name="account_created">تم إنشاء الحساب!</string>

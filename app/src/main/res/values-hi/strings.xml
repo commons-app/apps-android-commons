@@ -395,4 +395,5 @@
   <string name="no_read_notification" fuzzy="true">आपकी कोई सूचना पुरालेखित नहीं है</string>
   <string name="menu_option_read" fuzzy="true">पुरालेखित देखें</string>
   <string name="menu_option_unread">अपठित देखें</string>
+  <string name="category_edit_helper_show_edit_title_success">सफल</string>
 </resources>

@@ -566,6 +566,15 @@
   <string name="delete_helper_ask_reason_copyright_logo">Лого</string>
   <string name="delete_helper_ask_reason_copyright_other">Друго</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Бидејќи е</string>
+  <string name="category_edit_helper_make_edit_toast">Се обидувам да ги подновам категориите.</string>
+  <string name="category_edit_helper_show_edit_title">Поднова на категории</string>
+  <string name="category_edit_helper_show_edit_title_success">Успеа</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">Додадена е категоријата %1$s.</item>
+    <item quantity="other">Додадени се категориите %1$s.</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">Не можев да ги додадам категориите.</string>
+  <string name="category_edit_button_text">Поднови категории</string>
   <string name="share_image_via">Сподели ја сликата преку</string>
   <string name="no_achievements_yet">Засега немате придонеси</string>
   <string name="account_created">Сметката е создадена!</string>
@@ -601,6 +610,10 @@
   <string name="use_location_from_similar_image">Дали ги направивте ови две слики на истото место? Дали сакате да ја искористите географската ширина/должина од десната слика?</string>
   <string name="load_more">Вчитај уште</string>
   <string name="nearby_no_results">Не пронајдов места. Изменете ги критериумите во барањето.</string>
+  <string name="todo_improve">Предложени подобрувања:</string>
+  <string name="missing_category">- Додајте ѝ категории на сликава за да ја подобрите нејзината употребливост.</string>
+  <string name="missing_article">- Додајте ја сликава во поврзаната статија на Википедија која нема слики.</string>
+  <string name="edit_category">Уреди категории</string>
   <string name="add_picture_to_wikipedia_article_title">Додај ја сликата на Википедија</string>
   <string name="add_picture_to_wikipedia_article_desc">Дали би сакале да ја додадете сликава во википедиската статија на %1$s?</string>
   <string name="add_picture_to_wikipedia_instructions_title">Напатствија</string>

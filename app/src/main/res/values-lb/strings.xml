@@ -356,7 +356,9 @@
   <string name="delete_helper_show_deletion_message_if">%1$s gouf nominéiert fir ze läschen</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="category_edit_helper_make_edit_toast">Probéiere Kategorien z\'aktualiséieren</string>
+  <string name="category_edit_helper_show_edit_title">Aktualiséierung vun der Kategorie</string>
   <string name="category_edit_helper_show_edit_title_success">Succès</string>
+  <string name="category_edit_helper_edit_message_else">Kategorie konnten net derbäigesat ginn.</string>
   <string name="category_edit_button_text">Kategorien aktualiséieren</string>
   <string name="account_created">Benotzerkont ugeluecht!</string>
   <string name="place_state_needs_photo">Brauch eng Foto</string>
@@ -374,7 +376,9 @@
   <string name="theme_light_name">Hell</string>
   <string name="load_more">Méi lueden</string>
   <string name="nearby_no_results">Keng Plaze fonnt, probéiert Är Sich-Critèren z\'änneren.</string>
+  <string name="todo_improve">Proposéiert Verbesserungen:</string>
   <string name="missing_category">- Kategorien bei dëst Bild derbäisetze fir seng Notzbarkeet ze verbesseren.</string>
+  <string name="missing_article">- Dëst Bild op den associéierte Wikipedia-Artikel derbäisetzen dee keng Biller huet.</string>
   <string name="edit_category">Kategorien änneren</string>
   <string name="add_picture_to_wikipedia_article_title">Bild op Wikipedia derbäisetzen</string>
   <string name="add_picture_to_wikipedia_instructions_title">Instruktiounen</string>

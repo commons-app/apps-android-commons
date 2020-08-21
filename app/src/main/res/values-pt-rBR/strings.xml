@@ -578,6 +578,15 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logótipo</string>
   <string name="delete_helper_ask_reason_copyright_other">Outro</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque é</string>
+  <string name="category_edit_helper_make_edit_toast">Tentando atualizar categorias.</string>
+  <string name="category_edit_helper_show_edit_title">Atualização de categoria</string>
+  <string name="category_edit_helper_show_edit_title_success">Sucesso</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">A categoria %1$s foi adicionada.</item>
+    <item quantity="other">As categorias %1$s foram adicionadas.</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">Não foi possível adicionar categorias.</string>
+  <string name="category_edit_button_text">Atualizar categorias</string>
   <string name="share_image_via">Compartilhar imagem via</string>
   <string name="no_achievements_yet">Você ainda não fez nenhuma contribuição</string>
   <string name="account_created">Conta criada!</string>
@@ -613,6 +622,10 @@
   <string name="use_location_from_similar_image">Você tirou essas duas fotos no mesmo lugar? Deseja usar a latitude/longitude da imagem à direita?</string>
   <string name="load_more">Carregar mais</string>
   <string name="nearby_no_results">Nenhum local encontrado, tente alterar seus critérios de pesquisa.</string>
+  <string name="todo_improve">Melhorias sugeridas:</string>
+  <string name="missing_category">- Adicione categorias a esta imagem para melhorar a usabilidade.</string>
+  <string name="missing_article">- Adicione esta imagem ao artigo da Wikipédia associado que não possui imagens.</string>
+  <string name="edit_category">Editar categorias</string>
   <string name="add_picture_to_wikipedia_article_title">Adicionar imagem à Wikipédia</string>
   <string name="add_picture_to_wikipedia_article_desc">Deseja adicionar esta imagem ao artigo da Wikipedia em %1$s?</string>
   <string name="add_picture_to_wikipedia_instructions_title">Instruções</string>
