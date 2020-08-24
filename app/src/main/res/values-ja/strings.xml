@@ -138,7 +138,7 @@
   <string name="no_uploads_yet">まだ写真をアップロードしていません。</string>
   <string name="menu_retry_upload">再試行</string>
   <string name="menu_cancel_upload">キャンセル</string>
-  <string name="media_upload_policy">この画像の投稿に当たり、私はこれが自分自身の作品であり、著作権のあるコンテンツや自撮りは含まれていないと宣言します。</string>
+  <string name="media_upload_policy">この画像の投稿に当たり、私はこれが自分自身の作品であり、著作権のあるコンテンツや自撮りは含まれず&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons の方針&lt;/a&gt;に従っていると宣言します。</string>
   <string name="menu_download">ダウンロード</string>
   <string name="preference_license">既定のライセンス</string>
   <string name="use_previous">前回のタイトルと記述を使用</string>
@@ -576,6 +576,14 @@
   <string name="delete_helper_ask_reason_copyright_logo">ロゴ</string>
   <string name="delete_helper_ask_reason_copyright_other">その他</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">その根拠</string>
+  <string name="category_edit_helper_make_edit_toast">カテゴリを更新中です。</string>
+  <string name="category_edit_helper_show_edit_title">カテゴリの更新</string>
+  <string name="category_edit_helper_show_edit_title_success">成功しました</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="other">カテゴリ %1$s を追加しました。</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">カテゴリを付与できませんでした。</string>
+  <string name="category_edit_button_text">カテゴリを更新</string>
   <string name="share_image_via">画像をシェア</string>
   <string name="no_achievements_yet">まだ投稿をしたことがありません</string>
   <string name="account_created">アカウントを作成しました</string>
@@ -611,6 +619,10 @@
   <string name="use_location_from_similar_image">これら2点の撮影場所は同じですか？ 右側の画像に緯度経度情報を添付しますか？</string>
   <string name="load_more">さらに読み込む</string>
   <string name="nearby_no_results">場所が見つかりませんので、検索条件を変えてみてください。</string>
+  <string name="todo_improve">修正の提案：</string>
+  <string name="missing_category">- もっと利用されるようようにこの画像に複数のカテゴリを追加します。</string>
+  <string name="missing_article">- この画像をウィキペディアのまだ画像がない記事に追加します。</string>
+  <string name="edit_category">カテゴリを編集</string>
   <string name="add_picture_to_wikipedia_article_title">ウィキペディアに画像を追加する</string>
   <string name="add_picture_to_wikipedia_article_desc">この画像を%1$s語版ウィキペディアの記事に追加しますか？</string>
   <string name="add_picture_to_wikipedia_instructions_title">手順</string>
