@@ -6,7 +6,9 @@ import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 
 import fr.free.nrw.commons.contributions.ContributionsFragment;
+import fr.free.nrw.commons.explore.ExploreFragment;
 import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment;
+import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import org.wikipedia.model.EnumCode;
 import org.wikipedia.model.EnumCodeMap;
 
@@ -28,16 +30,16 @@ public enum NavTab implements EnumCode {
     @NonNull
     @Override
     public Fragment newInstance() {
-      //return NearbyFragment.newInstance();
-      return null;
+      return NearbyParentFragment.newInstance();
+      //return null;
     }
   },
   EXPLORE(R.string.navigation_item_explore, R.drawable.ic_globe) {
     @NonNull
     @Override
     public Fragment newInstance() {
-      //return ExploreFragment.newInstance();
-      return null;
+      return ExploreFragment.newInstance();
+      //return null;
     }
   },
   FAVORITES(R.string.favorites, R.drawable.ic_round_star_border_24px) {

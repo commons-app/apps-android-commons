@@ -27,6 +27,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavig
 import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.di.CommonsDaggerAppCompatActivity;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
@@ -48,7 +49,8 @@ import java.util.List;
 import javax.inject.Inject;
 import timber.log.Timber;
 
-public class MainActivity  extends CommonsDaggerAppCompatActivity implements FragmentManager.OnBackStackChangedListener {
+public class MainActivity  extends CommonsDaggerAppCompatActivity
+    implements FragmentManager.OnBackStackChangedListener, CategoryImagesCallback {
 
     @Inject
     SessionManager sessionManager;
@@ -383,6 +385,16 @@ public class MainActivity  extends CommonsDaggerAppCompatActivity implements Fra
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void viewPagerNotifyDataSetChanged() {
+        // todo for explore
+    }
+
+    @Override
+    public void onMediaClicked(int position) {
+        // todo for explore
     }
 
     public class ContributionsActivityPagerAdapter extends FragmentPagerAdapter {
