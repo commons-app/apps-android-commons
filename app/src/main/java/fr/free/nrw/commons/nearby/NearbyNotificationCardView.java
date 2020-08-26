@@ -92,7 +92,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
             m.viewPager.setCurrentItem(NEARBY_TAB_POSITION);
 
             // Center the map to the place
-            ((NearbyParentFragment) m.contributionsActivityPagerAdapter.getItem(NEARBY_TAB_POSITION)).centerMapToPlace(place);
+            //TODO ((NearbyParentFragment) m.contributionsActivityPagerAdapter.getItem(NEARBY_TAB_POSITION)).centerMapToPlace(place);
         });
     }
 

@@ -181,8 +181,6 @@ public class ExploreFragment extends CommonsDaggerSupportFragment
    */
   @Override
   public void onMediaClicked( int position) {
-    tabLayout.setVisibility(View.GONE);
-    viewPager.setVisibility(View.GONE);
     mediaContainer.setVisibility(View.VISIBLE);
     if (mediaDetails == null || !mediaDetails.isVisible()) {
       // set isFeaturedImage true for featured images, to include author field on media detail
