@@ -593,10 +593,6 @@
   <string name="category_edit_helper_make_edit_toast">Essai de mise à jour des catégories.</string>
   <string name="category_edit_helper_show_edit_title">Mise à jour de la catégorie</string>
   <string name="category_edit_helper_show_edit_title_success">Succès</string>
-  <plurals name="category_edit_helper_show_edit_message_if">
-    <item quantity="one">La catégorie %1$s est ajoutée.</item>
-    <item quantity="other">Les catégories %1$s sont ajoutées.</item>
-  </plurals>
   <string name="category_edit_helper_edit_message_else">Impossible d\'ajouter des catégories.</string>
   <string name="category_edit_button_text">Mettre à jour les catégories</string>
   <string name="share_image_via">Partager l’image via</string>
@@ -634,9 +630,6 @@
   <string name="use_location_from_similar_image">Avez-vous pris ces deux photos du même endroit ? Voulez-vous utiliser les latitude/longitude de l’image sur la droite ?</string>
   <string name="load_more">Charger davantage</string>
   <string name="nearby_no_results">Pas d’endroit trouvé, essayez de modifier vos critères de recherche.</string>
-  <string name="todo_improve">Améliorations suggérées :</string>
-  <string name="missing_category">- Ajouter des catégories à cette image pour améliorer son utilisation.</string>
-  <string name="missing_article">- Ajouter cette image à l’article Wikipédia associé qui n’a pas d’image.</string>
   <string name="edit_category">Modifier les catégories</string>
   <string name="add_picture_to_wikipedia_article_title">Ajouter une image à Wikipédia</string>
   <string name="add_picture_to_wikipedia_article_desc">Voulez-vous ajouter cette image à l’article Wikipédia de langue %1$s ?</string>
