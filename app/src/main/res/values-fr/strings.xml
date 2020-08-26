@@ -95,7 +95,7 @@
   <string name="title_activity_contributions">Mes téléversements récents</string>
   <string name="contribution_state_queued">Mis en file d’attente</string>
   <string name="contribution_state_failed">Échec</string>
-  <string name="contribution_state_in_progress">%1$d %% effectué</string>
+  <string name="contribution_state_in_progress">%1$d %% effectué</string>
   <string name="contribution_state_starting">Téléversement en cours</string>
   <string name="menu_from_gallery">Depuis la galerie</string>
   <string name="menu_from_camera">Prendre une photo</string>
@@ -321,7 +321,7 @@
   <string name="copy_wikicode">Copier le texte wiki dans le presse-papiers</string>
   <string name="wikicode_copied">Texte wiki copié dans le presse-papiers</string>
   <string name="nearby_location_has_not_changed">L’emplacement n’a pas changé.</string>
-  <string name="nearby_location_not_available">« À proximité » pourrait ne pas fonctionner correctement, votre emplacement étant indisponible.</string>
+  <string name="nearby_location_not_available">« À proximité » pourrait ne pas fonctionner correctement, votre emplacement étant indisponible.</string>
   <string name="location_permission_rationale_nearby">Une permission est requise pour afficher une liste de lieux à proximité</string>
   <string name="get_directions">Obtenir les directions</string>
   <string name="read_article">Lire l’article</string>
@@ -593,6 +593,10 @@
   <string name="category_edit_helper_make_edit_toast">Essai de mise à jour des catégories.</string>
   <string name="category_edit_helper_show_edit_title">Mise à jour de la catégorie</string>
   <string name="category_edit_helper_show_edit_title_success">Succès</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">La catégorie %1$s est ajoutée.</item>
+    <item quantity="other">Les catégories %1$s sont ajoutées.</item>
+  </plurals>
   <string name="category_edit_helper_edit_message_else">Impossible d\'ajouter des catégories.</string>
   <string name="category_edit_button_text">Mettre à jour les catégories</string>
   <string name="share_image_via">Partager l’image via</string>
@@ -630,6 +634,9 @@
   <string name="use_location_from_similar_image">Avez-vous pris ces deux photos du même endroit ? Voulez-vous utiliser les latitude/longitude de l’image sur la droite ?</string>
   <string name="load_more">Charger davantage</string>
   <string name="nearby_no_results">Pas d’endroit trouvé, essayez de modifier vos critères de recherche.</string>
+  <string name="todo_improve">Améliorations suggérées :</string>
+  <string name="missing_category">- Ajouter des catégories à cette image pour améliorer son utilisation.</string>
+  <string name="missing_article">- Ajouter cette image à l’article Wikipédia associé qui n’a pas d’image.</string>
   <string name="edit_category">Modifier les catégories</string>
   <string name="add_picture_to_wikipedia_article_title">Ajouter une image à Wikipédia</string>
   <string name="add_picture_to_wikipedia_article_desc">Voulez-vous ajouter cette image à l’article Wikipédia de langue %1$s ?</string>
@@ -637,7 +644,7 @@
   <string name="add_picture_to_wikipedia_instructions_desc">Faites attention de suivre les lignes directrices de modification !</string>
   <string name="confirm">Confirmer</string>
   <string name="instructions_title">Instructions</string>
-  <string name="wikipedia_instructions_step_1">1. Utiliser le wikicode suivant :</string>
+  <string name="wikipedia_instructions_step_1">1. Utiliser le wikicode suivant :</string>
   <string name="wikipedia_instructions_step_2">2. Cliquer sur Confirmer ouvrira l’article Wikipédia</string>
   <string name="wikipedia_instructions_step_3">3. Trouver une section appropriée pour votre image dans l’article</string>
   <string name="wikipedia_instructions_step_4">4. Cliquer sur l’icône d’édition (celle ressemblant à un crayon) pour cette section.</string>

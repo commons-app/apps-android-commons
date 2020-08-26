@@ -508,7 +508,7 @@
   <string name="review_spam">Isso é dentro do escopo?</string>
   <string name="review_thanks">Gostaria de agradecer ao colaborador?</string>
   <string name="review_spam_explanation">Clique em NÃO para nomear esta imagem para exclusão, se não for útil.</string>
-  <string name="review_copyright_explanation">Logotipos, capturas de tela, pôsteres de filmes geralmente são violações de direitos autorais.\n  Clique em NÃO para indicar esta imagem para exclusão</string>
+  <string name="review_copyright_explanation">Logotipos, capturas de tela, pôsteres de filmes geralmente são violações de direitos autorais.\n  Clique em NÃO para indicar esta imagem para exclusão</string>
   <string name="review_thanks_explanation">%1$s será encorajado por sua apreciação</string>
   <string name="review_no_category">Ah, isso nem é categorizado!</string>
   <string name="review_category_explanation">Esta imagem está abaixo das %1$s categorias</string>
@@ -523,7 +523,7 @@
   <string name="review_thanks_yes_button_text">Sim, porque não?</string>
   <string name="review_thanks_no_button_text">Próxima imagem</string>
   <string name="skip_image_explanation">Clicando neste botão você terá uma outra imagem carregada recentemente do Wikimedia Commons</string>
-  <string name="review_image_explanation">Você pode rever imagens e melhorar a qualidade dos Wikimedia Commons.\n Os quatro parâmetros de revisão são:\n- Esta imagem está no escopo?\n- Esta imagem segue as regras de direitos autorais?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, você também pode agradecer ao colaborador.</string>
+  <string name="review_image_explanation">Você pode rever imagens e melhorar a qualidade dos Wikimedia Commons.\n Os quatro parâmetros de revisão são:\n- Esta imagem está no escopo?\n- Esta imagem segue as regras de direitos autorais?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, você também pode agradecer ao colaborador.</string>
   <string name="no_image">Nenhuma imagem usada</string>
   <string name="no_image_reverted">Nenhuma imagem revertida</string>
   <string name="no_image_uploaded">Nenhuma imagem enviada</string>
@@ -578,6 +578,15 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logótipo</string>
   <string name="delete_helper_ask_reason_copyright_other">Outro</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque é</string>
+  <string name="category_edit_helper_make_edit_toast">Tentando atualizar categorias.</string>
+  <string name="category_edit_helper_show_edit_title">Atualização de categoria</string>
+  <string name="category_edit_helper_show_edit_title_success">Sucesso</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">A categoria %1$s foi adicionada.</item>
+    <item quantity="other">As categorias %1$s foram adicionadas.</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">Não foi possível adicionar categorias.</string>
+  <string name="category_edit_button_text">Atualizar categorias</string>
   <string name="share_image_via">Compartilhar imagem via</string>
   <string name="no_achievements_yet">Você ainda não fez nenhuma contribuição</string>
   <string name="account_created">Conta criada!</string>
@@ -613,6 +622,10 @@
   <string name="use_location_from_similar_image">Você tirou essas duas fotos no mesmo lugar? Deseja usar a latitude/longitude da imagem à direita?</string>
   <string name="load_more">Carregar mais</string>
   <string name="nearby_no_results">Nenhum local encontrado, tente alterar seus critérios de pesquisa.</string>
+  <string name="todo_improve">Melhorias sugeridas:</string>
+  <string name="missing_category">- Adicione categorias a esta imagem para melhorar a usabilidade.</string>
+  <string name="missing_article">- Adicione esta imagem ao artigo da Wikipédia associado que não possui imagens.</string>
+  <string name="edit_category">Editar categorias</string>
   <string name="add_picture_to_wikipedia_article_title">Adicionar imagem à Wikipédia</string>
   <string name="add_picture_to_wikipedia_article_desc">Deseja adicionar esta imagem ao artigo da Wikipedia em %1$s?</string>
   <string name="add_picture_to_wikipedia_instructions_title">Instruções</string>
