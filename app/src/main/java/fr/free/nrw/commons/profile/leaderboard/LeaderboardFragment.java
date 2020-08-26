@@ -98,7 +98,16 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
         hideLayouts();
         setSpinners();
 
+        /**
+         * This array is for the duration filter, we have three filters weekly, yearly and all-time
+         * each filter have a key and value pair, the value represents the param of the API
+         */
         String[] durationValues = getContext().getResources().getStringArray(R.array.leaderboard_duration_values);
+
+        /**
+         * This array is for the category filter, we have three filters upload, used and nearby
+         * each filter have a key and value pair, the value represents the param of the API
+         */
         String[] categoryValues = getContext().getResources().getStringArray(R.array.leaderboard_category_values);
 
         duration = durationValues[0];

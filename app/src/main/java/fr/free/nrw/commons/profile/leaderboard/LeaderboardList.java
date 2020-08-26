@@ -13,50 +13,90 @@ import com.google.gson.annotations.SerializedName;
  */
 public class LeaderboardList {
 
+    /**
+     * Username of the user
+     * Example value - Syced
+     */
     @SerializedName("username")
     @Expose
     private String username;
 
+    /**
+     * Count in the category
+     * Example value - 10
+     */
     @SerializedName("category_count")
     @Expose
     private Integer categoryCount;
 
+    /**
+     * URL of the avatar of user
+     * Example value = https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Gnome-stock_person.svg/200px-Gnome-stock_person.svg.png
+     */
     @SerializedName("avatar")
     @Expose
     private String avatar;
 
+    /**
+     * Rank of the user
+     * Example value - 1
+     */
     @SerializedName("rank")
     @Expose
     private Integer rank;
 
+    /**
+     * @return the username of the user in the leaderboard list
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Sets the username of the user in the leaderboard list
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * @return the category count of the user in the leaderboard list
+     */
     public Integer getCategoryCount() {
         return categoryCount;
     }
 
+    /**
+     * Sets the category count of the user in the leaderboard list
+     */
     public void setCategoryCount(Integer categoryCount) {
         this.categoryCount = categoryCount;
     }
 
+    /**
+     * @return the avatar of the user in the leaderboard list
+     */
     public String getAvatar() {
         return avatar;
     }
 
+    /**
+     * Sets the avatar of the user in the leaderboard list
+     */
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 
+    /**
+     * @return the rank of the user in the leaderboard list
+     */
     public Integer getRank() {
         return rank;
     }
 
+    /**
+     * Sets the rank of the user in the leaderboard list
+     */
     public void setRank(Integer rank) {
         this.rank = rank;
     }
@@ -80,6 +120,11 @@ public class LeaderboardList {
             }
         };
 
+    /**
+     * Returns true if two objects are equal, false otherwise
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {

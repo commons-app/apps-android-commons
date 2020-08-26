@@ -16,7 +16,7 @@ import fr.free.nrw.commons.R;
  */
 public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.DataViewHolder> {
 
-    LeaderboardResponse leaderboardResponse;
+    private LeaderboardResponse leaderboardResponse;
 
     public UserDetailAdapter(LeaderboardResponse leaderboardResponse) {
         this.leaderboardResponse = leaderboardResponse;
@@ -24,10 +24,10 @@ public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.Da
 
     public class DataViewHolder extends RecyclerView.ViewHolder {
 
-        TextView rank;
-        SimpleDraweeView avatar;
-        TextView username;
-        TextView count;
+        private TextView rank;
+        private SimpleDraweeView avatar;
+        private TextView username;
+        private TextView count;
 
         public DataViewHolder(@NonNull View itemView) {
             super(itemView);

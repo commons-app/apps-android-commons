@@ -30,7 +30,7 @@ public class ProfileActivity extends NavigationBaseActivity {
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
 
-    ViewPagerAdapter viewPagerAdapter;
+    private ViewPagerAdapter viewPagerAdapter;
     private AchievementsFragment achievementsFragment;
     private LeaderboardFragment leaderboardFragment;
 
