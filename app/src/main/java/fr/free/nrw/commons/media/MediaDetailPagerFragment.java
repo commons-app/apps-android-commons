@@ -43,10 +43,10 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     @Inject BookmarkPicturesDao bookmarkDao;
 
     @Inject
-    OkHttpJsonApiClient okHttpJsonApiClient;
+    protected OkHttpJsonApiClient okHttpJsonApiClient;
 
     @Inject
-    SessionManager sessionManager;
+    protected SessionManager sessionManager;
 
     private static CompositeDisposable compositeDisposable = new CompositeDisposable();
 
