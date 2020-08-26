@@ -16,13 +16,12 @@
       android:id="@+id/fragmentContainer"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:orientation="horizontal">
-
+      android:orientation="horizontal"
+      android:layout_above="@id/fragment_main_nav_tab_layout">
       <fr.free.nrw.commons.contributions.UnswipableViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
     </FrameLayout>
 
     <fr.free.nrw.commons.navtab.NavTabLayout
