@@ -12,7 +12,7 @@ import javax.inject.Singleton;
 
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.achievements.FeedbackResponse;
+import fr.free.nrw.commons.profile.achievements.FeedbackResponse;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;

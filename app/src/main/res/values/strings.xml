@@ -399,6 +399,7 @@
   <string name="nominate_delete">Nominate For Deletion</string>
   <string name="delete">Delete</string>
   <string name="Achievements">Achievements</string>
+  <string name="Profile">Profile</string>
   <string name="statistics">Statistics</string>
   <string name="statistics_thanks">Thanks Received</string>
   <string name="statistics_featured">Featured Images</string>
@@ -669,4 +670,22 @@ Upload your first media by tapping on the add button.</string>
   <string name="pause">pause</string>
   <string name="resume">resume</string>
   <string name="paused">Paused</string>
+  <string name="achievements_tab_title">Achievements</string>
+  <string name="leaderboard_tab_title">Leaderboard</string>
+  <string name="rank_prefix">Rank:</string>
+  <string name="count_prefix">Count:</string>
+  <string name="leaderboard_column_rank">Rank</string>
+  <string name="leaderboard_column_user">User</string>
+  <string name="leaderboard_column_count">Count</string>
+  <string name="setting_avatar_dialog_title">Set as leaderboard avatar</string>
+  <string name="setting_avatar_dialog_message">Setting as avatar, please wait</string>
+  <string name="avatar_set_successfully">Avatar set</string>
+  <string name="avatar_set_unsuccessfully">Error setting new avatar, please try again</string>
+  <string name="menu_set_avatar">Set as avatar</string>
+  <string name="leaderboard_yearly">Yearly</string>
+  <string name="leaderboard_weekly">Weekly</string>
+  <string name="leaderboard_all_time">All time</string>
+  <string name="leaderboard_upload">Upload</string>
+  <string name="leaderboard_nearby">Nearby</string>
+  <string name="leaderboard_used">Used</string>
 </resources>

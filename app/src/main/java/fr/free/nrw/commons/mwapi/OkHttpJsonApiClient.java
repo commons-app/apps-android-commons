@@ -1,16 +1,21 @@
 package fr.free.nrw.commons.mwapi;
 
+import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.LEADERBOARD_END_POINT;
+import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.UPDATE_AVATAR_END_POINT;
+
 import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import com.google.gson.Gson;
-import fr.free.nrw.commons.achievements.FeaturedImages;
-import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
+import fr.free.nrw.commons.profile.achievements.FeaturedImages;
+import fr.free.nrw.commons.profile.achievements.FeedbackResponse;
+import fr.free.nrw.commons.profile.leaderboard.LeaderboardResponse;
+import fr.free.nrw.commons.profile.leaderboard.UpdateAvatarResponse;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.ConfigUtils;
@@ -40,6 +45,7 @@ public class OkHttpJsonApiClient {
   private final OkHttpClient okHttpClient;
   private final DepictsClient depictsClient;
   private final HttpUrl wikiMediaToolforgeUrl;
+  private final HttpUrl wikiMediaTestToolforgeUrl;
   private final String sparqlQueryUrl;
   private final String campaignsUrl;
   private final Gson gson;
@@ -49,15 +55,103 @@ public class OkHttpJsonApiClient {
   public OkHttpJsonApiClient(OkHttpClient okHttpClient,
       DepictsClient depictsClient,
       HttpUrl wikiMediaToolforgeUrl,
+      HttpUrl wikiMediaTestToolforgeUrl,
       String sparqlQueryUrl,
       String campaignsUrl,
       Gson gson) {
     this.okHttpClient = okHttpClient;
     this.depictsClient = depictsClient;
     this.wikiMediaToolforgeUrl = wikiMediaToolforgeUrl;
+    this.wikiMediaTestToolforgeUrl = wikiMediaTestToolforgeUrl;
     this.sparqlQueryUrl = sparqlQueryUrl;
     this.campaignsUrl = campaignsUrl;
     this.gson = gson;
+  }
+
+  /**
+   * The method will gradually calls the leaderboard API and fetches the leaderboard
+   * @param userName username of leaderboard user
+   * @param duration duration for leaderboard
+   * @param category category for leaderboard
+   * @param limit page size limit for list
+   * @param offset offset for the list
+   * @return LeaderboardResponse object
+   */
+  @NonNull
+  public Observable<LeaderboardResponse> getLeaderboard(String userName, String duration, String category, String limit, String offset) {
+    final String fetchLeaderboardUrlTemplate = wikiMediaTestToolforgeUrl
+        + LEADERBOARD_END_POINT;
+    String url = String.format(Locale.ENGLISH,
+        fetchLeaderboardUrlTemplate,
+        userName,
+        duration,
+        category,
+        limit,
+        offset);
+    HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+    urlBuilder.addQueryParameter("user", userName);
+    urlBuilder.addQueryParameter("duration", duration);
+    urlBuilder.addQueryParameter("category", category);
+    urlBuilder.addQueryParameter("limit", limit);
+    urlBuilder.addQueryParameter("offset", offset);
+    Timber.i("Url %s", urlBuilder.toString());
+    Request request = new Request.Builder()
+        .url(urlBuilder.toString())
+        .build();
+    return Observable.fromCallable(() -> {
+      Response response = okHttpClient.newCall(request).execute();
+      if (response != null && response.body() != null && response.isSuccessful()) {
+        String json = response.body().string();
+        if (json == null) {
+          return new LeaderboardResponse();
+        }
+        Timber.d("Response for leaderboard is %s", json);
+        try {
+          return gson.fromJson(json, LeaderboardResponse.class);
+        } catch (Exception e) {
+          return new LeaderboardResponse();
+        }
+      }
+      return new LeaderboardResponse();
+    });
+  }
+
+  /**
+   * This method will update the leaderboard user avatar
+   * @param username username to update
+   * @param avatar url of the new avatar
+   * @return UpdateAvatarResponse object
+   */
+  @NonNull
+  public Single<UpdateAvatarResponse> setAvatar(String username, String avatar) {
+    final String urlTemplate = wikiMediaTestToolforgeUrl
+        + UPDATE_AVATAR_END_POINT;
+    return Single.fromCallable(() -> {
+      String url = String.format(Locale.ENGLISH,
+          urlTemplate,
+          username,
+          avatar);
+      HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+      urlBuilder.addQueryParameter("user", username);
+      urlBuilder.addQueryParameter("avatar", avatar);
+      Timber.i("Url %s", urlBuilder.toString());
+      Request request = new Request.Builder()
+          .url(urlBuilder.toString())
+          .build();
+      Response response = okHttpClient.newCall(request).execute();
+      if (response != null && response.body() != null && response.isSuccessful()) {
+        String json = response.body().string();
+        if (json == null) {
+          return null;
+        }
+        try {
+          return gson.fromJson(json, UpdateAvatarResponse.class);
+        } catch (Exception e) {
+          return new UpdateAvatarResponse();
+        }
+      }
+      return null;
+    });
   }
 
   @NonNull
@@ -145,7 +239,6 @@ public class OkHttpJsonApiClient {
           userName);
       HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
       urlBuilder.addQueryParameter("user", userName);
-      Timber.i("Url %s", urlBuilder.toString());
       Request request = new Request.Builder()
           .url(urlBuilder.toString())
           .build();
