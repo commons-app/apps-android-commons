@@ -596,6 +596,11 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Inne</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Ponieważ jest to</string>
+  <string name="category_edit_helper_make_edit_toast">Próba aktualizacji kategorii.</string>
+  <string name="category_edit_helper_show_edit_title">Aktualizacja kategorii</string>
+  <string name="category_edit_helper_show_edit_title_success">Powodzenie</string>
+  <string name="category_edit_helper_edit_message_else">Nie udało się dodać kategorii.</string>
+  <string name="category_edit_button_text">Aktualizuj kategorie</string>
   <string name="share_image_via">Udostępnij obraz przez</string>
   <string name="no_achievements_yet">Nie wykonałeś jeszcze żadnej edycji</string>
   <string name="account_created">Konto zostało utworzone!</string>
@@ -631,6 +636,10 @@
   <string name="use_location_from_similar_image">Czy zrobiłeś te dwa zdjęcia w tym samym miejscu? Czy chcesz użyć szerokości/długości geograficznej obrazu po prawej stronie?</string>
   <string name="load_more">Wczytaj więcej</string>
   <string name="nearby_no_results">Nie znaleziono miejsc, spróbuj zmienić kryteria wyszukiwania.</string>
+  <string name="todo_improve">Sugerowane ulepszenia:</string>
+  <string name="missing_category">- Dodaj kategorie do tego obrazu, aby poprawić użyteczność.</string>
+  <string name="missing_article">- Dodaj to zdjęcie do powiązanego artykułu w Wikipedii, w którym nie ma żadnych obrazów.</string>
+  <string name="edit_category">Edytuj kategorie</string>
   <string name="add_picture_to_wikipedia_article_title">Dodaj obraz do Wikipedii</string>
   <string name="add_picture_to_wikipedia_article_desc">Czy chcesz dodać to zdjęcie do artykułu w Wikipedii w języku %1$s?</string>
   <string name="add_picture_to_wikipedia_instructions_title">Instrukcje</string>
