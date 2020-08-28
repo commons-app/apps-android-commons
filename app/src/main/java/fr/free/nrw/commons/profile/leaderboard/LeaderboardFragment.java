@@ -174,10 +174,14 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      * Performs Auto Scroll to the User's Rank
      */
     private void scrollToUserRank() {
-        if (viewModel != null) {
-            viewModel.refresh(duration, category, userRank, 0);
-            setLeaderboard(duration, category, userRank, 0);
-            scrollToRank = true;
+        if (Objects.requireNonNull(leaderboardListRecyclerView.getAdapter()).getItemCount() > userRank) {
+            leaderboardListRecyclerView.smoothScrollToPosition(userRank);
+        } else {
+            if (viewModel != null) {
+                viewModel.refresh(duration, category, userRank, 0);
+                setLeaderboard(duration, category, userRank, 0);
+                scrollToRank = true;
+            }
         }
     }
 
