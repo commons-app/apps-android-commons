@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import androidx.lifecycle.ViewModelProvider;
@@ -49,6 +50,9 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
 
     @BindView(R.id.duration_spinner)
     Spinner durationSpinner;
+
+    @BindView(R.id.scroll)
+    Button scrollButton;
 
     @Inject
     SessionManager sessionManager;
@@ -88,6 +92,16 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      * offset for the leaderboard API
      */
     private int offset = START_OFFSET;
+
+    /**
+     * Set initial User Rank to 0
+     */
+    private int userRank;
+
+    /**
+     * This variable represents if user wants to scroll to his rank or not
+     */
+    private boolean scrollToRank;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -140,6 +154,8 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
             }
         });
 
+        scrollButton.setOnClickListener(view -> scrollToUserRank());
+
         return rootView;
     }
 
@@ -147,9 +163,26 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      * Refreshes the leaderboard list
      */
     private void refreshLeaderboard() {
+        scrollToRank = false;
         if (viewModel != null) {
             viewModel.refresh(duration, category, limit, offset);
             setLeaderboard(duration, category, limit, offset);
+        }
+    }
+
+    /**
+     * Performs Auto Scroll to the User's Rank
+     * We use userRank+1 to load one extra user and prevent overlapping of my rank button
+     */
+    private void scrollToUserRank() {
+        if (Objects.requireNonNull(leaderboardListRecyclerView.getAdapter()).getItemCount() > userRank + 1) {
+            leaderboardListRecyclerView.smoothScrollToPosition(userRank + 1);
+        } else {
+            if (viewModel != null) {
+                viewModel.refresh(duration, category, userRank + 1, 0);
+                setLeaderboard(duration, category, userRank + 1, 0);
+                scrollToRank = true;
+            }
         }
     }
 
@@ -183,6 +216,7 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
                     .subscribe(
                         response -> {
                             if (response != null && response.getStatus() == 200) {
+                                userRank = response.getRank();
                                 setViews(response, duration, category, limit, offset);
                             }
                         },
@@ -217,6 +251,9 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
                 showProgressBar();
             } else if (status.equalsIgnoreCase(LOADED)) {
                 hideProgressBar();
+                if (scrollToRank) {
+                    leaderboardListRecyclerView.smoothScrollToPosition(userRank + 1);
+                }
             }
         });
     }
@@ -229,6 +266,7 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
             progressBar.setVisibility(View.GONE);
             categorySpinner.setVisibility(View.VISIBLE);
             durationSpinner.setVisibility(View.VISIBLE);
+            scrollButton.setVisibility(View.VISIBLE);
             leaderboardListRecyclerView.setVisibility(View.VISIBLE);
         }
     }
@@ -240,6 +278,7 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
         if (progressBar != null) {
             progressBar.setVisibility(View.VISIBLE);
         }
+        scrollButton.setVisibility(View.INVISIBLE);
     }
 
     /**

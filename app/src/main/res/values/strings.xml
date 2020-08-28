@@ -688,4 +688,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="leaderboard_upload">Upload</string>
   <string name="leaderboard_nearby">Nearby</string>
   <string name="leaderboard_used">Used</string>
+  <string name="leaderboard_my_rank_button_text">My Rank</string>
 </resources>
