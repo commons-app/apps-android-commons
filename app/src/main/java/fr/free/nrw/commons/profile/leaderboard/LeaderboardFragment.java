@@ -175,12 +175,12 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      * We use userRank+1 to load one extra user and prevent overlapping of my rank button
      */
     private void scrollToUserRank() {
-        if (Objects.requireNonNull(leaderboardListRecyclerView.getAdapter()).getItemCount() > userRank+1) {
-            leaderboardListRecyclerView.smoothScrollToPosition(userRank+1);
+        if (Objects.requireNonNull(leaderboardListRecyclerView.getAdapter()).getItemCount() > userRank + 1) {
+            leaderboardListRecyclerView.smoothScrollToPosition(userRank + 1);
         } else {
             if (viewModel != null) {
-                viewModel.refresh(duration, category, userRank+1, 0);
-                setLeaderboard(duration, category, userRank+1, 0);
+                viewModel.refresh(duration, category, userRank + 1, 0);
+                setLeaderboard(duration, category, userRank + 1, 0);
                 scrollToRank = true;
             }
         }
@@ -252,7 +252,7 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
             } else if (status.equalsIgnoreCase(LOADED)) {
                 hideProgressBar();
                 if (scrollToRank) {
-                    leaderboardListRecyclerView.smoothScrollToPosition(userRank+1);
+                    leaderboardListRecyclerView.smoothScrollToPosition(userRank + 1);
                 }
             }
         });
