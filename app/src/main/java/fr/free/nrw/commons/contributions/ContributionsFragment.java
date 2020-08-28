@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ import fr.free.nrw.commons.campaigns.CampaignView;
 import fr.free.nrw.commons.campaigns.CampaignsPresenter;
 import fr.free.nrw.commons.campaigns.ICampaignsView;
 import fr.free.nrw.commons.contributions.ContributionsListFragment.Callback;
+import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
@@ -280,7 +282,7 @@ public class ContributionsFragment
             return;
         }
 
-        //((MainActivity)getActivity()).setNumOfUploads(uploadCount);
+        ((MainActivity)getActivity()).setNumOfUploads(uploadCount);
 
     }
 
@@ -302,6 +304,9 @@ public class ContributionsFragment
         contributionsPresenter.onAttachView(this);
         firstLocationUpdate = true;
         locationManager.addLocationListener(this);
+        nearbyNotificationCardView.permissionRequestButton.setOnClickListener(v -> {
+            showNearbyCardPermissionRationale();
+        });
 
         if (store.getBoolean("displayNearbyCardView", true)) {
             checkPermissionsAndShowNearbyCardView();
@@ -322,7 +327,7 @@ public class ContributionsFragment
             onLocationPermissionGranted();
         } else if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
                 && store.getBoolean("displayLocationPermissionForCardView", true)
-                && (((MainActivity) getActivity()).viewPager.getCurrentItem() == CONTRIBUTIONS_TAB_POSITION)) {
+                && (((MainActivity) getActivity()).activeFragment == ActiveFragment.CONTRIBUTIONS)) {
             nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
             showNearbyCardPermissionRationale();
         }

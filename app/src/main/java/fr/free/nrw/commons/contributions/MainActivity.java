@@ -33,12 +33,16 @@ import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
+import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import java.util.List;
 import javax.inject.Inject;
 import timber.log.Timber;
 
-public class MainActivity  extends CommonsDaggerAppCompatActivity
+public class MainActivity  extends BaseActivity
     implements FragmentManager.OnBackStackChangedListener, CategoryImagesCallback {
 
     @Inject
@@ -58,6 +62,7 @@ public class MainActivity  extends CommonsDaggerAppCompatActivity
     private ContributionsFragment contributionsFragment;
     private NearbyParentFragment nearbyParentFragment;
     private ExploreFragment exploreFragment;
+    public ActiveFragment activeFragment;
 
     @Inject
     public LocationServiceManager locationManager;
@@ -100,12 +105,15 @@ public class MainActivity  extends CommonsDaggerAppCompatActivity
         if (fragment instanceof ContributionsFragment) {
             Log.d("deneme7","1");
             contributionsFragment = (ContributionsFragment) fragment;
+            activeFragment = ActiveFragment.CONTRIBUTIONS;
         } else if (fragment instanceof NearbyParentFragment) {
             Log.d("deneme7","2");
             nearbyParentFragment = (NearbyParentFragment) fragment;
+            activeFragment = ActiveFragment.NEARBY;
         } else if (fragment instanceof ExploreFragment) {
             Log.d("deneme7","3");
             exploreFragment = (ExploreFragment) fragment;
+            activeFragment = ActiveFragment.EXPLORE;
         }
         if (fragment != null) {
             getSupportFragmentManager()
@@ -117,6 +125,18 @@ public class MainActivity  extends CommonsDaggerAppCompatActivity
         return false;
     }
 
+    /**
+     * Adds number of uploads next to tab text "Contributions" then it will look like
+     * "Contributions (NUMBER)"
+     * @param uploadCount
+     */
+    public void setNumOfUploads(int uploadCount) {
+        if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
+            setTitle(getResources().getString(R.string.contributions_fragment) +" "+ getResources()
+                .getQuantityString(R.plurals.contributions_subtitle,
+                    uploadCount, uploadCount));
+        }
+    }
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
@@ -192,11 +212,11 @@ public class MainActivity  extends CommonsDaggerAppCompatActivity
 
     @SuppressLint("CheckResult")
     private void setNotificationCount() {
-        /*compositeDisposable.add(notificationController.getNotifications(false)
+        compositeDisposable.add(notificationController.getNotifications(false)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::initNotificationViews,
-                        throwable -> Timber.e(throwable, "Error occurred while loading notifications")));*/
+                        throwable -> Timber.e(throwable, "Error occurred while loading notifications")));
     }
 
     private void initNotificationViews(List<Notification> notificationList) {
@@ -254,83 +274,6 @@ public class MainActivity  extends CommonsDaggerAppCompatActivity
         // todo for explore
     }
 
-    public class ContributionsActivityPagerAdapter extends FragmentPagerAdapter {
-        FragmentManager fragmentManager;
-
-        public ContributionsActivityPagerAdapter(FragmentManager fragmentManager) {
-            super(fragmentManager);
-            this.fragmentManager = fragmentManager;
-        }
-
-        @Override
-        public int getCount() {
-            return 2;
-        }
-
-        /*
-         * Do not use getItem method to access fragments on pager adapter. User reference variables
-         * instead.
-         * */
-        @Override
-        public Fragment getItem(int position) {
-            switch (position){
-                case 0:
-                    ContributionsFragment retainedContributionsFragment = getContributionsFragment(0);
-                    if (retainedContributionsFragment != null) {
-                        return retainedContributionsFragment;
-                    } else {
-                        // If we reach here, retainedContributionsFragment is null
-                        return new ContributionsFragment();
-
-                    }
-
-                case 1:
-                    nearbyParentFragment = getNearbyFragment(1);
-                    if (nearbyParentFragment != null) {
-                        return nearbyParentFragment;
-                    } else {
-                        // If we reach here, retainedNearbyFragment is null
-                        nearbyParentFragment=new NearbyParentFragment();
-                        return nearbyParentFragment;
-                    }
-                default:
-                    return null;
-            }
-        }
-
-        /**
-         * Generates fragment tag with makeFragmentName method to get retained contributions fragment
-         * @param position index of tabs, in our case 0 or 1
-         * @return
-         */
-        private ContributionsFragment getContributionsFragment(int position) {
-            String tag = makeFragmentName(R.id.pager, position);
-            return (ContributionsFragment)fragmentManager.findFragmentByTag(tag);
-        }
-
-        /**
-         * Generates fragment tag with makeFragmentName method to get retained nearby fragment
-         * @param position index of tabs, in our case 0 or 1
-         * @return
-         */
-        private NearbyParentFragment getNearbyFragment(int position) {
-            String tag = makeFragmentName(R.id.pager, position);
-            return (NearbyParentFragment)fragmentManager.findFragmentByTag(tag);
-        }
-
-        /**
-         * A simple hack to use retained fragment when getID is called explicitly, if we don't use
-         * this method, a new fragment will be initialized on each explicit calls of getID
-         * @param viewId id of view pager
-         * @param index index of tabs, in our case 0 or 1
-         * @return
-         */
-        public String makeFragmentName(int viewId, int index) {
-            return "android:switcher:" + viewId + ":" + index;
-        }
-
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Timber.d(data!=null?data.toString():"onActivityResult data is null");
@@ -351,5 +294,12 @@ public class MainActivity  extends CommonsDaggerAppCompatActivity
         // Remove ourself from hashmap to prevent memory leaks
         locationManager = null;
         super.onDestroy();
+    }
+
+    public enum ActiveFragment {
+        CONTRIBUTIONS,
+        NEARBY,
+        EXPLORE,
+        MORE
     }
 }
