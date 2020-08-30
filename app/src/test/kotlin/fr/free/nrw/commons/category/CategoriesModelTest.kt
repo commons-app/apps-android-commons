@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.category
 
 import categoryItem
-import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
@@ -70,7 +69,13 @@ class CategoriesModelTest {
 
         whenever(gpsCategoryModel.categoriesFromLocation)
             .thenReturn(BehaviorSubject.createDefault(listOf("gpsCategory")))
-        whenever(categoryClient.searchCategories("tes", 25))
+        whenever(
+            categoryClient.searchCategories(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyInt(),
+                ArgumentMatchers.anyInt()
+            )
+        )
             .thenReturn(Single.just(listOf("titleSearch")))
         whenever(categoryDao.recentCategories(25)).thenReturn(listOf("recentCategories"))
         val imageTitleList = listOf("Test")
