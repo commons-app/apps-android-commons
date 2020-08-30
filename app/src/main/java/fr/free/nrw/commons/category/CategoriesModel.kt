@@ -122,7 +122,6 @@ class CategoriesModel @Inject constructor(
 
     /**
      * Return category for single title
-     * title is converted to lower case to make search case-insensitive
      * @param title
      * @return
      */
@@ -160,6 +159,6 @@ class CategoriesModel @Inject constructor(
     }
 
     companion object {
-        private const val SEARCH_CATS_LIMIT = 25
+        const val SEARCH_CATS_LIMIT = 25
     }
 }
