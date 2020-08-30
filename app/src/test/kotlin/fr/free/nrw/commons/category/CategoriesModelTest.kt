@@ -73,7 +73,7 @@ class CategoriesModelTest {
         whenever(categoryClient.searchCategories("tes", 25))
             .thenReturn(Single.just(listOf("titleSearch")))
         whenever(categoryDao.recentCategories(25)).thenReturn(listOf("recentCategories"))
-        val imageTitleList = listOf("tes")
+        val imageTitleList = listOf("Test")
         CategoriesModel(categoryClient, categoryDao, gpsCategoryModel)
             .searchAll("", imageTitleList, listOf(depictedItem))
             .test()
