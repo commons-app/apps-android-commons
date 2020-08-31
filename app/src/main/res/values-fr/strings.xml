@@ -412,6 +412,7 @@
   <string name="nominate_delete">Proposé à la suppression</string>
   <string name="delete">Supprimer</string>
   <string name="Achievements">Accomplissements</string>
+  <string name="Profile">Profil</string>
   <string name="statistics">Statistiques</string>
   <string name="statistics_thanks">Remerciements reçus</string>
   <string name="statistics_featured">Images remarquables</string>
@@ -655,4 +656,22 @@
   <string name="pause">pause</string>
   <string name="resume">reprise</string>
   <string name="paused">En pause</string>
+  <string name="achievements_tab_title">Réussites</string>
+  <string name="leaderboard_tab_title">Tableau de classement</string>
+  <string name="rank_prefix">Rang :</string>
+  <string name="count_prefix">Compteur :</string>
+  <string name="leaderboard_column_rank">Rang</string>
+  <string name="leaderboard_column_user">Utilisateur</string>
+  <string name="leaderboard_column_count">Compteur</string>
+  <string name="setting_avatar_dialog_title">Définir comme avatar du tableau de classement</string>
+  <string name="setting_avatar_dialog_message">Définition comme avatar, veuillez patienter</string>
+  <string name="avatar_set_successfully">Avatar défini</string>
+  <string name="avatar_set_unsuccessfully">Erreur en définissant le nouvel avatar, veuillez réessayer</string>
+  <string name="menu_set_avatar">Définir comme avatar</string>
+  <string name="leaderboard_yearly">Annuel</string>
+  <string name="leaderboard_weekly">Hebdomadaire</string>
+  <string name="leaderboard_all_time">Tout le temps</string>
+  <string name="leaderboard_upload">Télécharger</string>
+  <string name="leaderboard_nearby">À proximité</string>
+  <string name="leaderboard_used">Utilisé</string>
 </resources>

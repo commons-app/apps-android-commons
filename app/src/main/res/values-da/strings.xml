@@ -314,6 +314,7 @@
   <string name="nominate_delete">Nominer til sletning</string>
   <string name="delete">Slet</string>
   <string name="Achievements">Præstationer</string>
+  <string name="Profile">Profil</string>
   <string name="statistics">Statistik</string>
   <string name="statistics_thanks">Tak modtaget</string>
   <string name="statistics_featured">Udvalgte billeder</string>
@@ -401,4 +402,9 @@
   <string name="pause">sæt på pause</string>
   <string name="resume">genoptag</string>
   <string name="paused">Sat på pause</string>
+  <string name="leaderboard_column_rank">Rang</string>
+  <string name="leaderboard_column_user">Bruger</string>
+  <string name="leaderboard_yearly">Årlig</string>
+  <string name="leaderboard_weekly">Ugentlig</string>
+  <string name="leaderboard_nearby">I nærheden</string>
 </resources>

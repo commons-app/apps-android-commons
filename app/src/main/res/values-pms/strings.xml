@@ -386,6 +386,7 @@
   <string name="nominate_delete">Propon-e për la scancelassion</string>
   <string name="delete">Dëscancelé</string>
   <string name="Achievements">Realisassion</string>
+  <string name="Profile">Profil</string>
   <string name="statistics">Statìstiche</string>
   <string name="statistics_thanks">Aringrassiament arseivù</string>
   <string name="statistics_featured">Plance an evidensa</string>
@@ -629,4 +630,23 @@
   <string name="pause">pàusa</string>
   <string name="resume">ancaminé torna</string>
   <string name="paused">An pàura</string>
+  <string name="achievements_tab_title">Realisassion</string>
+  <string name="leaderboard_tab_title">Classìfica</string>
+  <string name="rank_prefix">Rangh:</string>
+  <string name="count_prefix">Conteur:</string>
+  <string name="leaderboard_column_rank">Rangh</string>
+  <string name="leaderboard_column_user">Utent</string>
+  <string name="leaderboard_column_count">Conteur</string>
+  <string name="setting_avatar_dialog_title">Definì coma plancia an sla classìfica</string>
+  <string name="setting_avatar_dialog_message">Definission \'me plancia, ch\'a l\'abia passiensa</string>
+  <string name="avatar_set_successfully">Plancia definìa</string>
+  <string name="avatar_set_unsuccessfully">Eror ant la definission dla neuva plancia, për piasì ch\'a preuva torna</string>
+  <string name="menu_set_avatar">Definì coma plancia</string>
+  <string name="leaderboard_yearly">Anual</string>
+  <string name="leaderboard_weekly">Ebdomadari</string>
+  <string name="leaderboard_all_time">Tut ël temp</string>
+  <string name="leaderboard_upload">Carié</string>
+  <string name="leaderboard_nearby">Davzin</string>
+  <string name="leaderboard_used">Dovrà</string>
+  <string name="leaderboard_my_rank_button_text">Mia classìfica</string>
 </resources>

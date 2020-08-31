@@ -20,6 +20,7 @@
 * Ommmmid
 * Physicsch
 * Reza1615
+* Sunfyre
 * Vahedi
 * Yoosef Pooranvary
 * جواد
@@ -381,6 +382,7 @@
   <string name="nominate_delete">نامزد کردن برای حذف</string>
   <string name="delete">حذف</string>
   <string name="Achievements">دستاوردها</string>
+  <string name="Profile">نمایه</string>
   <string name="statistics">آمار</string>
   <string name="statistics_thanks">تشکر دریافت‌شد</string>
   <string name="statistics_featured">تصاویر برگزیده</string>
@@ -525,4 +527,11 @@
   <string name="theme_dark_name">تیره</string>
   <string name="theme_light_name">روشن</string>
   <string name="ask_to_turn_location_on">روشن کردن مکان؟</string>
+  <string name="achievements_tab_title">دستاوردها</string>
+  <string name="leaderboard_column_rank">رتبه</string>
+  <string name="leaderboard_column_user">کاربر</string>
+  <string name="leaderboard_yearly">سالیانه</string>
+  <string name="leaderboard_weekly">هفتگی</string>
+  <string name="leaderboard_all_time">تمام وقت</string>
+  <string name="leaderboard_upload">بارگذاری</string>
 </resources>

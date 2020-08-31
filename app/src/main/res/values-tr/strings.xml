@@ -405,6 +405,7 @@
   <string name="nominate_delete">Silinmeye Aday Göster</string>
   <string name="delete">Sil</string>
   <string name="Achievements">Başarılar</string>
+  <string name="Profile">Profil</string>
   <string name="statistics">İstatistikler</string>
   <string name="statistics_thanks">Teşekkür Alındı</string>
   <string name="statistics_featured">Seçkin Resimler</string>
@@ -648,4 +649,23 @@
   <string name="pause">duraklat</string>
   <string name="resume">devam et</string>
   <string name="paused">Durduruldu</string>
+  <string name="achievements_tab_title">Başarılar</string>
+  <string name="leaderboard_tab_title">Liderlik sıralaması</string>
+  <string name="rank_prefix">Sıra:</string>
+  <string name="count_prefix">Sayı:</string>
+  <string name="leaderboard_column_rank">Sıra</string>
+  <string name="leaderboard_column_user">Kullanıcı</string>
+  <string name="leaderboard_column_count">Sayı</string>
+  <string name="setting_avatar_dialog_title">Liderlik sıralaması avatar olarak ayarla</string>
+  <string name="setting_avatar_dialog_message">Avatar olarak ayarlanıyor, lütfen bekleyin</string>
+  <string name="avatar_set_successfully">Avatar ayarlandı</string>
+  <string name="avatar_set_unsuccessfully">Yeni avatar ayarlanırken hata oluştu, lütfen tekrar deneyin</string>
+  <string name="menu_set_avatar">Avatar olarak ayarla</string>
+  <string name="leaderboard_yearly">Yıllık</string>
+  <string name="leaderboard_weekly">Haftalık</string>
+  <string name="leaderboard_all_time">Tüm zamanlar</string>
+  <string name="leaderboard_upload">Yükle</string>
+  <string name="leaderboard_nearby">Yakınındakiler</string>
+  <string name="leaderboard_used">Kullanılan</string>
+  <string name="leaderboard_my_rank_button_text">Sıralamam</string>
 </resources>

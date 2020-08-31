@@ -400,6 +400,7 @@
   <string name="nominate_delete">Nomear para exclusão</string>
   <string name="delete">Apagar</string>
   <string name="Achievements">Conquistas</string>
+  <string name="Profile">Perfil</string>
   <string name="statistics">Estatísticas</string>
   <string name="statistics_thanks">Agradecimentos recebidos</string>
   <string name="statistics_featured">Imagens destacadas</string>
@@ -643,4 +644,23 @@
   <string name="pause">pausar</string>
   <string name="resume">continuar</string>
   <string name="paused">Pausado</string>
+  <string name="achievements_tab_title">Conquistas</string>
+  <string name="leaderboard_tab_title">Tabela de classificação</string>
+  <string name="rank_prefix">Classificação:</string>
+  <string name="count_prefix">Contagem:</string>
+  <string name="leaderboard_column_rank">Classificação</string>
+  <string name="leaderboard_column_user">Usuário</string>
+  <string name="leaderboard_column_count">Contagem</string>
+  <string name="setting_avatar_dialog_title">Definir como avatar da tabela de classificação</string>
+  <string name="setting_avatar_dialog_message">Configurando como avatar, por favor aguarde</string>
+  <string name="avatar_set_successfully">Avatar definido</string>
+  <string name="avatar_set_unsuccessfully">Erro ao definir novo avatar, tente novamente</string>
+  <string name="menu_set_avatar">Definir como avatar</string>
+  <string name="leaderboard_yearly">Anualmente</string>
+  <string name="leaderboard_weekly">Semanalmente</string>
+  <string name="leaderboard_all_time">Desde sempre</string>
+  <string name="leaderboard_upload">Enviar</string>
+  <string name="leaderboard_nearby">Próximo</string>
+  <string name="leaderboard_used">Usado</string>
+  <string name="leaderboard_my_rank_button_text">Minha classificação</string>
 </resources>

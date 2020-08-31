@@ -361,6 +361,7 @@
   <string name="nominate_delete">Номиновање за брисање</string>
   <string name="delete">Избриши</string>
   <string name="Achievements">Достигнућа</string>
+  <string name="Profile">Профил</string>
   <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Примљене захвале</string>
   <string name="statistics_featured">Изабране слике</string>
@@ -529,4 +530,17 @@
   <string name="upload_nearby_place_found_title">Оближње место је пронађено</string>
   <string name="remove_bookmark">Уклоњено из обележивача</string>
   <string name="add_bookmark">Додато у обележиваче</string>
+  <string name="achievements_tab_title">Достигнућа</string>
+  <string name="rank_prefix">Ранг:</string>
+  <string name="count_prefix">Број:</string>
+  <string name="leaderboard_column_rank">Ранг</string>
+  <string name="leaderboard_column_user">Корисник</string>
+  <string name="leaderboard_column_count">Број</string>
+  <string name="setting_avatar_dialog_message">Постављам за аватара. Сачекајте.</string>
+  <string name="avatar_set_successfully">Аватар је постављен.</string>
+  <string name="avatar_set_unsuccessfully">Дошло је до грешке при постављању новог аватара. Покушајте поново.</string>
+  <string name="menu_set_avatar">Постави за аватара</string>
+  <string name="leaderboard_yearly">Годишње</string>
+  <string name="leaderboard_weekly">Недељно</string>
+  <string name="leaderboard_nearby">У близини</string>
 </resources>

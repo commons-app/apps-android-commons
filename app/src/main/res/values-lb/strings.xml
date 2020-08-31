@@ -290,6 +290,7 @@
   <string name="nominate_delete">Nominéiere fir ze Läschen</string>
   <string name="delete">Läschen</string>
   <string name="Achievements">Realisatiounen</string>
+  <string name="Profile">Profil</string>
   <string name="statistics">Statistiken</string>
   <string name="statistics_thanks">Merci\'e kritt</string>
   <string name="statistics_featured">Bemierkenswäert Biller</string>
@@ -388,4 +389,22 @@
   <string name="pause">ënnerbriechen</string>
   <string name="resume">virufueren</string>
   <string name="paused">Ënnerbrach</string>
+  <string name="achievements_tab_title">Realisatiounen</string>
+  <string name="leaderboard_tab_title">Leaderboard</string>
+  <string name="rank_prefix">Klassement:</string>
+  <string name="count_prefix">Zuel:</string>
+  <string name="leaderboard_column_rank">Klassement</string>
+  <string name="leaderboard_column_user">Benotzer</string>
+  <string name="leaderboard_column_count">Zuel</string>
+  <string name="setting_avatar_dialog_title">Als Avatar vum Leaderboard definéieren</string>
+  <string name="setting_avatar_dialog_message">Als Avatar festleeën, waart wgl.</string>
+  <string name="avatar_set_successfully">Avatar festgeluecht</string>
+  <string name="avatar_set_unsuccessfully">Feeler be3im Festleeë vum Avatar, probéiert wgl. nach eng Kéier</string>
+  <string name="menu_set_avatar">Als Avatar festleeën</string>
+  <string name="leaderboard_yearly">All Joer</string>
+  <string name="leaderboard_weekly">All Woch</string>
+  <string name="leaderboard_all_time">Vun Ufank un</string>
+  <string name="leaderboard_upload">Eroplueden</string>
+  <string name="leaderboard_nearby">Nobäi</string>
+  <string name="leaderboard_used">Benotzt</string>
 </resources>

@@ -399,6 +399,7 @@
   <string name="nominate_delete">提名刪除</string>
   <string name="delete">刪除</string>
   <string name="Achievements">成果</string>
+  <string name="Profile">個人檔案</string>
   <string name="statistics">統計內容</string>
   <string name="statistics_thanks">已收到的感謝</string>
   <string name="statistics_featured">特色圖片</string>
@@ -642,4 +643,23 @@
   <string name="pause">暫停</string>
   <string name="resume">繼續</string>
   <string name="paused">已暫停</string>
+  <string name="achievements_tab_title">成果</string>
+  <string name="leaderboard_tab_title">排行榜</string>
+  <string name="rank_prefix">排名：</string>
+  <string name="count_prefix">數量：</string>
+  <string name="leaderboard_column_rank">排名</string>
+  <string name="leaderboard_column_user">使用者</string>
+  <string name="leaderboard_column_count">數量</string>
+  <string name="setting_avatar_dialog_title">設定成排行榜頭像</string>
+  <string name="setting_avatar_dialog_message">正在設定成頭像，請稍待</string>
+  <string name="avatar_set_successfully">頭像設定</string>
+  <string name="avatar_set_unsuccessfully">設定新頭像發生錯誤，請重試</string>
+  <string name="menu_set_avatar">設定成頭像</string>
+  <string name="leaderboard_yearly">每年</string>
+  <string name="leaderboard_weekly">每週</string>
+  <string name="leaderboard_all_time">全部時間</string>
+  <string name="leaderboard_upload">上傳</string>
+  <string name="leaderboard_nearby">附近</string>
+  <string name="leaderboard_used">已使用</string>
+  <string name="leaderboard_my_rank_button_text">我的排名</string>
 </resources>

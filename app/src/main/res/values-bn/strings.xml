@@ -13,6 +13,7 @@
 * Sibabrata Banerjee
 * Tahmid02016
 * Tauhid16
+* Titodutta
 * YahyA
 * আফতাবুজ্জামান
 -->
@@ -181,6 +182,7 @@
   <string name="detail_panel_cats_loading">লোড হচ্ছে…</string>
   <string name="detail_panel_cats_none">কিছুই নির্বাচন করা হয়নি</string>
   <string name="detail_description_empty">বিবরণ নেই</string>
+  <string name="detail_discussion_empty">কোনো আলোচনা নেই</string>
   <string name="detail_license_empty">অজানা লাইসেন্স</string>
   <string name="menu_refresh">পুনঃসতেজ</string>
   <string name="read_storage_permission_rationale">প্রয়োজনীয় অনুমতি: বহিস্থ স্মৃতি পড়া। এটি ছাড়া এ্যাপ আপনার গ্যালারি দেখতে পাবে না।</string>
@@ -190,10 +192,13 @@
   <string name="title_activity_nearby">কাছাকাছি স্থান</string>
   <string name="no_nearby">কাছাকাছি কোন স্থান পাওয়া যায়নি</string>
   <string name="warning">সতর্কীকরণ</string>
+  <string name="upload">আপলোড</string>
   <string name="yes">হ্যাঁ</string>
   <string name="no">না</string>
+  <string name="media_detail_caption">চিত্রবর্ণনা</string>
   <string name="media_detail_title">শিরোনাম</string>
   <string name="media_detail_description">বিবরণ</string>
+  <string name="media_detail_discussion">আলোচনা</string>
   <string name="media_detail_author">স্রষ্টা</string>
   <string name="media_detail_uploaded_date">আপলোডের তারিখ</string>
   <string name="media_detail_license">লাইসেন্স</string>
@@ -248,9 +253,11 @@
   <string name="error_while_cache">ছবি আনার সময় ত্রুটি</string>
   <string name="title_info">ফাইলের একটি স্বতন্ত্র বর্ণনামূলক নাম যা ফাইলের নাম হিসাবে কাজ করবে। অাপনি সাধারণ ভাষা ব্যবহার করতে পারেন শূন্যস্থানসহ। ফাইলের এক্সটেনশন যুক্ত করবেন না।</string>
   <string name="description_info">যতটা সম্ভব মিডিয়াটি বর্ণনা করুন: এটি কোথায় ধারণ করা হয়েছিল? এটি কি প্রদর্শন করে? এটির প্রসঙ্গ কি? ধারণকৃত বস্তু অথবা ব্যক্তির বর্ণনা করুন। সহজে অনুমান করা যায়না সেরকম তথ্য উদঘাটন করুন, উদাহরণস্বরূপ, যদি ল্যান্ডস্কেপ হয় তাহলে দিবসকালের সময় দিন।</string>
+  <string name="upload_problem_image_blurry">চিত্রটি অস্পষ্ট।</string>
   <string name="upload_problem_image_duplicate">চিত্রটি ইতিমধ্যে কমন্সে রয়েছে।</string>
   <string name="upload_problem_different_geolocation">এই ছবিটি ভিন্ন একটি স্থানে তোলা হয়েছিল।</string>
   <string name="upload_problem_do_you_continue">আপনি কি এখনও এই ছবিটি আপলোড করতে চান?</string>
+  <string name="upload_problem_image">চিত্রটিতে কিছু সমস্যা পাওয়া গেছে</string>
   <string name="give_permission">অনুমতি দিন</string>
   <string name="use_external_storage">বাহ্যিক সঞ্চয়স্থান ব্যবহার করুন</string>
   <string name="use_external_storage_summary">অাপনার ডিভাইসের নিজস্ব ক্যামেরায় ধারণকৃত ছবি সংরক্ষণ করুন</string>
@@ -284,9 +291,11 @@
   <string name="no_notifications">কোন বিজ্ঞপ্তি পাওয়া যায়নি</string>
   <string name="about_translate">অনুবাদ করুন</string>
   <string name="about_translate_title">ভাষাসমূহ</string>
+  <string name="about_translate_proceed">অগ্রসর</string>
   <string name="about_translate_cancel">বাতিল</string>
   <string name="retry">পুনঃচেষ্টা করুন</string>
   <string name="showcase_view_got_it_button">বুঝেছি!</string>
+  <string name="showcase_view_needs_photo">এই স্থানটির একটি চিত্র দরকার।</string>
   <string name="no_images_found">কোন চিত্র পাওয়া যায়নি!</string>
   <string name="image_uploaded_by">আপলোড করেছেন: %1$s</string>
   <string name="appwidget_img">আজকের চিত্র</string>
@@ -294,10 +303,14 @@
   <string name="menu_search_button">অনুসন্ধান</string>
   <string name="search_commons">কমন্সে অনুসন্ধান করুন</string>
   <string name="title_activity_search">অনুসন্ধান</string>
+  <string name="search_recent_header">সাম্প্রতিক অনুসন্ধানগুলি:</string>
   <string name="search_tab_title_media">মিডিয়া</string>
+  <string name="search_tab_title_categories">বিষয়শ্রেণীসমূহ</string>
+  <string name="explore_tab_title_mobile">মোবাইলের মাধ্যমে আপলোডকৃত</string>
   <string name="quiz">কুইজ</string>
   <string name="question">প্রশ্ন</string>
   <string name="result">ফলাফল</string>
+  <string name="warning_for_no_answer">প্রশ্নের উত্তর দিতে দুটি বিকল্পের মধ্যে একটি চয়ন করুন</string>
   <string name="continue_message">অগ্রসর হোন</string>
   <string name="correct">সঠিক উত্তর</string>
   <string name="wrong">ভুল উত্তর</string>
@@ -306,9 +319,11 @@
   <string name="nominate_delete">অপসারণের জন্য মনোনীত করুন</string>
   <string name="delete">অপসারণ</string>
   <string name="Achievements">কৃতিত্বগুলি</string>
+  <string name="Profile">প্রোফাইল</string>
   <string name="statistics">পরিসংখ্যান</string>
   <string name="statistics_featured">নির্বাচিত ছবি</string>
   <string name="level">স্তর</string>
+  <string name="images_uploaded">চিত্রগুলি আপলোড করা হয়েছে</string>
   <string name="notifications_channel_name_all">কমন্স বিজ্ঞপ্তি</string>
   <string name="contributions_fragment">অবদান</string>
   <string name="nearby_fragment">কাছাকাছি</string>
@@ -324,6 +339,7 @@
   <string name="title_page_bookmarks_locations">অবস্থান</string>
   <string name="provider_bookmarks">বুকমার্ক</string>
   <string name="provider_bookmarks_location">বুকমার্ক</string>
+  <string name="deletion_reason_uploaded_by_mistake">আমি ভুল করে আপলোড করেছি</string>
   <string name="desc_language_Worldwide">বিশ্বব্যাপী</string>
   <string name="desc_language_America">আমেরিকা</string>
   <string name="desc_language_Europe">ইউরোপ</string>
@@ -333,11 +349,28 @@
   <string name="desc_language_Pacific">প্রশান্ত মহাসাগরীয়</string>
   <string name="please_wait">অনুগ্রহ করে অপেক্ষা করুন...</string>
   <string name="exif_tag_name_location">অবস্থান</string>
+  <string name="category_edit_helper_show_edit_title">বিষয়শ্রেণী হালনাগাদ করুন</string>
+  <string name="category_edit_helper_show_edit_title_success">সফল</string>
+  <string name="category_edit_helper_edit_message_else">বিষয়শ্রেণী হালনাগাদ করা সম্ভব হয়নি।</string>
   <string name="account_created">অ্যাকাউন্ট তৈরি করা হয়েছে!</string>
   <string name="remove_bookmark">বুকমার্ক থেকে সরানো হয়েছে</string>
   <string name="add_bookmark">বুকমার্কে যোগ করা হয়েছে</string>
+  <string name="edit_category">বিষয়শ্রেণীগুলি সম্পাদনা  করুন</string>
   <string name="confirm">নিশ্চিত করুন</string>
   <string name="pause">থামান</string>
   <string name="resume">পুনরায় শুরু করুন</string>
   <string name="paused">থামানো হয়েছে</string>
+  <string name="achievements_tab_title">কৃতিত্বসমূহ</string>
+  <string name="rank_prefix">ক্রম:</string>
+  <string name="count_prefix">গণনা:</string>
+  <string name="leaderboard_column_rank">ক্রম</string>
+  <string name="leaderboard_column_user">ব্যবহারকারী</string>
+  <string name="leaderboard_column_count">গণনা</string>
+  <string name="leaderboard_yearly">বাৎসরিক</string>
+  <string name="leaderboard_weekly">সাপ্তাহিক</string>
+  <string name="leaderboard_all_time">সব সময়</string>
+  <string name="leaderboard_upload">আপলোড</string>
+  <string name="leaderboard_nearby">কাছাকাছি</string>
+  <string name="leaderboard_used">ব্যবহৃত</string>
+  <string name="leaderboard_my_rank_button_text">আমার স্থান</string>
 </resources>

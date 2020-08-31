@@ -392,6 +392,7 @@
   <string name="nominate_delete">Nominera för radering</string>
   <string name="delete">Radera</string>
   <string name="Achievements">Prestationer</string>
+  <string name="Profile">Profil</string>
   <string name="statistics">Statistik</string>
   <string name="statistics_thanks">Mottagna tack</string>
   <string name="statistics_featured">Utvalda bilder</string>
@@ -635,4 +636,23 @@
   <string name="pause">pausa</string>
   <string name="resume">återuppta</string>
   <string name="paused">Pausad</string>
+  <string name="achievements_tab_title">Prestationer</string>
+  <string name="leaderboard_tab_title">Topplista</string>
+  <string name="rank_prefix">Rang:</string>
+  <string name="count_prefix">Antal:</string>
+  <string name="leaderboard_column_rank">Rang</string>
+  <string name="leaderboard_column_user">Användare</string>
+  <string name="leaderboard_column_count">Antal</string>
+  <string name="setting_avatar_dialog_title">Ange som avatar på topplistan</string>
+  <string name="setting_avatar_dialog_message">Sätter som profilbild, var vänlig vänta</string>
+  <string name="avatar_set_successfully">Ange avatar</string>
+  <string name="avatar_set_unsuccessfully">Fel uppstod när ny avatar skulle anges, försök igen senare</string>
+  <string name="menu_set_avatar">Använd som profilbild</string>
+  <string name="leaderboard_yearly">Årligen</string>
+  <string name="leaderboard_weekly">Varje vecka</string>
+  <string name="leaderboard_all_time">Hela tiden</string>
+  <string name="leaderboard_upload">Ladda upp</string>
+  <string name="leaderboard_nearby">I närheten</string>
+  <string name="leaderboard_used">Använd</string>
+  <string name="leaderboard_my_rank_button_text">Min rang</string>
 </resources>

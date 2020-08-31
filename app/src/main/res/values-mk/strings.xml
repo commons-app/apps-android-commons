@@ -388,6 +388,7 @@
   <string name="nominate_delete">Предложи за бришење</string>
   <string name="delete">Избриши</string>
   <string name="Achievements">Достигнувања</string>
+  <string name="Profile">Профил</string>
   <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Примени благодарници</string>
   <string name="statistics_featured">Избрани слики</string>
@@ -631,4 +632,23 @@
   <string name="pause">запри</string>
   <string name="resume">продолжи</string>
   <string name="paused">Запрено</string>
+  <string name="achievements_tab_title">Достигнувања</string>
+  <string name="leaderboard_tab_title">Предводници</string>
+  <string name="rank_prefix">Место:</string>
+  <string name="count_prefix">Број:</string>
+  <string name="leaderboard_column_rank">Место</string>
+  <string name="leaderboard_column_user">Корисник</string>
+  <string name="leaderboard_column_count">Број</string>
+  <string name="setting_avatar_dialog_title">Задај како аватар за табелата на предводници</string>
+  <string name="setting_avatar_dialog_message">Го поставувам аватарот. Почекајте.</string>
+  <string name="avatar_set_successfully">Аватарот е поставен</string>
+  <string name="avatar_set_unsuccessfully">Грешка при поставувањето на новиот аватар. Обидете се повторно.</string>
+  <string name="menu_set_avatar">Стави како аватар</string>
+  <string name="leaderboard_yearly">Годишно</string>
+  <string name="leaderboard_weekly">Неделно</string>
+  <string name="leaderboard_all_time">На сите времиња</string>
+  <string name="leaderboard_upload">Подигни</string>
+  <string name="leaderboard_nearby">Во близина</string>
+  <string name="leaderboard_used">Користено</string>
+  <string name="leaderboard_my_rank_button_text">Мој ранг</string>
 </resources>
