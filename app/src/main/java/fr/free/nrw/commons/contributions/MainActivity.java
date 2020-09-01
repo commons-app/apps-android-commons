@@ -76,10 +76,10 @@ public class MainActivity  extends BaseActivity
 
     public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
     public boolean onOrientationChanged;
-    private Menu menu;
+    public Menu menu;
 
     private MenuItem notificationsMenuItem;
-    private TextView notificationCount;
+    public TextView notificationCount;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -193,7 +193,7 @@ public class MainActivity  extends BaseActivity
         //initBackButton();
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
@@ -208,10 +208,10 @@ public class MainActivity  extends BaseActivity
         updateMenuItem();
         setNotificationCount();
         return true;
-    }
+    } */
 
     @SuppressLint("CheckResult")
-    private void setNotificationCount() {
+    public void setNotificationCount() {
         compositeDisposable.add(notificationController.getNotifications(false)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -233,7 +233,7 @@ public class MainActivity  extends BaseActivity
      * Responsible with displaying required menu items according to displayed fragment.
      * Notifications icon when contributions list is visible, list sheet icon when nearby is visible
      */
-    private void updateMenuItem() {
+    public void updateMenuItem() {
         if (menu != null) {
             if (isContributionsFragmentVisible) {
                 // Display notifications menu item

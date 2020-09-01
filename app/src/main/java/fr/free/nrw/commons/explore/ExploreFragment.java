@@ -3,6 +3,8 @@ package fr.free.nrw.commons.explore;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -81,6 +83,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment
     viewPager.setAdapter(viewPagerAdapter);
     tabLayout.setupWithViewPager(viewPager);
     setTabs();
+    setHasOptionsMenu(true);
     return view;
   }
 
@@ -203,30 +206,28 @@ public class ExploreFragment extends CommonsDaggerSupportFragment
   /**
    * This method inflates the menu in the toolbar
    */
-  /*@Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    MenuInflater inflater = getMenuInflater();
+  @Override
+  public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
     inflater.inflate(R.menu.menu_search, menu);
-    return super.onCreateOptionsMenu(menu);
+    super.onCreateOptionsMenu(menu, inflater);
   }
 
   /**
    * This method handles the logic on ItemSelect in toolbar menu
    * Currently only 1 choice is available to open search page of the app
    */
-  /*@Override
+  @Override
   public boolean onOptionsItemSelected(MenuItem item) {
 
     // Handle item selection
     switch (item.getItemId()) {
       case R.id.action_search:
-        NavigationBaseActivity.startActivityWithFlags(this, SearchActivity.class);
+        NavigationBaseActivity.startActivityWithFlags(getActivity(), SearchActivity.class);
         return true;
       default:
         return super.onOptionsItemSelected(item);
     }
-  }*/
-
+  }
 }
 
 

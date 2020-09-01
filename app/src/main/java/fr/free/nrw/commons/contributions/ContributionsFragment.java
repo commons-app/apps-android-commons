@@ -14,6 +14,9 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -45,6 +48,7 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -156,8 +160,24 @@ public class ContributionsFragment
         if (!ConfigUtils.isBetaFlavour()) {
             setUploadCount();
         }
-
+        setHasOptionsMenu(true);
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
+       // super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
+
+        MenuItem notificationsMenuItem = menu.findItem(R.id.notifications);
+        final View notification = notificationsMenuItem.getActionView();
+        ((MainActivity)getActivity()).notificationCount = notification.findViewById(R.id.notification_count_badge);
+        notification.setOnClickListener(view -> {
+            // TODO NotificationActivity.startYourself(MainActivity.this, "unread");
+        });
+        ((MainActivity)getActivity()).menu = menu;
+        ((MainActivity)getActivity()).updateMenuItem();
+        ((MainActivity)getActivity()).setNotificationCount();
     }
 
     @Override
