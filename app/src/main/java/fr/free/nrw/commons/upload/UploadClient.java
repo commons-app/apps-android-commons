@@ -15,6 +15,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import javax.inject.Inject;
@@ -80,8 +81,11 @@ public class UploadClient {
     if (contribution.getChunkInfo() != null && isStashValid(contribution)) {
       chunkInfo.set(contribution.getChunkInfo());
     }
+
+    final AtomicBoolean failures = new AtomicBoolean();
+
     compositeDisposable.add(fileChunks.forEach(chunkFile -> {
-      if (pauseUploads) {
+      if (pauseUploads || failures.get()) {
         return;
       }
       if (chunkInfo.get() != null && index.get() < chunkInfo.get().getLastChunkIndex()) {
@@ -107,6 +111,7 @@ public class UploadClient {
         chunkInfo.set(new ChunkInfo(uploadResult, index.incrementAndGet(), false));
         notificationUpdater.onChunkUploaded(contribution, chunkInfo.get());
       }, throwable -> {
+        failures.set(true);
         Timber.e(throwable, "Error occurred in uploading chunk");
       }));
     }));
@@ -115,6 +120,8 @@ public class UploadClient {
     notificationUpdater.onChunkUploaded(contribution, chunkInfo.get());
     if (pauseUploads) {
       return Observable.just(new StashUploadResult(StashUploadState.PAUSED, null));
+    } else if (failures.get()) {
+      return Observable.just(new StashUploadResult(StashUploadState.FAILED, null));
     } else if (chunkInfo.get() != null) {
       return Observable.just(new StashUploadResult(StashUploadState.SUCCESS,
           chunkInfo.get().getUploadResult().getFilekey()));
