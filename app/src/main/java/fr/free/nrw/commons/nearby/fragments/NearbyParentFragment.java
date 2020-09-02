@@ -307,7 +307,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void performMapReadyActions() {
-        if (isVisible() && isVisibleToUser && isMapBoxReady) {
+        if (isVisible() && isMapBoxReady) {
             checkPermissionsAndPerformAction(() -> {
                 lastKnownLocation = locationManager.getLastLocation();
                 fr.free.nrw.commons.location.LatLng target=lastFocusLocation;
@@ -616,6 +616,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * Centers the map in nearby fragment to a given place
      * @param place is new center of the map
      */
+    @Override
     public void centerMapToPlace(final Place place) {
         Timber.d("Map is centered to place");
         final double cameraShift;
@@ -853,6 +854,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void setTabItemContributions() {
         ((MainActivity)getActivity()).viewPager.setCurrentItem(0);
+        // TODO
     }
 
     @Override

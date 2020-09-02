@@ -25,7 +25,7 @@ import static fr.free.nrw.commons.contributions.MainActivity.NEARBY_TAB_POSITION
  * Custom card view for nearby notification card view on main screen, above contributions list
  */
 public class NearbyNotificationCardView extends SwipableCardView {
-    private Button permissionRequestButton;
+    public Button permissionRequestButton;
     private LinearLayout contentLayout;
     private TextView notificationTitle;
     private TextView notificationDistance;
@@ -89,7 +89,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
             MainActivity m = (MainActivity) getContext();
 
             // Change to nearby tab
-            m.viewPager.setCurrentItem(NEARBY_TAB_POSITION);
+            //m.viewPager.setCurrentItem(NEARBY_TAB_POSITION);
 
             // Center the map to the place
             //TODO ((NearbyParentFragment) m.contributionsActivityPagerAdapter.getItem(NEARBY_TAB_POSITION)).centerMapToPlace(place);

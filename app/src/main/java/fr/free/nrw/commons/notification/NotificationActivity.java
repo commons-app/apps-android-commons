@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 import com.google.android.material.snackbar.Snackbar;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -41,7 +42,7 @@ import timber.log.Timber;
  * Created by root on 18.12.2017.
  */
 
-public class NotificationActivity extends NavigationBaseActivity {
+public class NotificationActivity extends BaseActivity {
     @BindView(R.id.listView)
     RecyclerView recyclerView;
     @BindView(R.id.progressBar)
@@ -70,7 +71,6 @@ public class NotificationActivity extends NavigationBaseActivity {
         mNotificationWorkerFragment = (NotificationWorkerFragment) getFragmentManager()
                 .findFragmentByTag(TAG_NOTIFICATION_WORKER_FRAGMENT);
         initListView();
-        initDrawer();
         setPageTitle();
     }
 

@@ -173,11 +173,12 @@ public class ContributionsFragment
         final View notification = notificationsMenuItem.getActionView();
         ((MainActivity)getActivity()).notificationCount = notification.findViewById(R.id.notification_count_badge);
         notification.setOnClickListener(view -> {
-            // TODO NotificationActivity.startYourself(MainActivity.this, "unread");
+            NotificationActivity.startYourself(getContext(), "unread");
         });
         ((MainActivity)getActivity()).menu = menu;
         ((MainActivity)getActivity()).updateMenuItem();
         ((MainActivity)getActivity()).setNotificationCount();
+        // TODO move notification logic to this fragment
     }
 
     @Override
