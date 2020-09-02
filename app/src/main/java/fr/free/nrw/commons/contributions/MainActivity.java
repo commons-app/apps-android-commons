@@ -5,24 +5,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.bookmarks.BookmarkFragment;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
-import fr.free.nrw.commons.di.CommonsDaggerAppCompatActivity;
 import fr.free.nrw.commons.explore.ExploreFragment;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
@@ -34,7 +30,6 @@ import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -62,6 +57,7 @@ public class MainActivity  extends BaseActivity
     private ContributionsFragment contributionsFragment;
     private NearbyParentFragment nearbyParentFragment;
     private ExploreFragment exploreFragment;
+    private BookmarkFragment bookmarkFragment;
     public ActiveFragment activeFragment;
 
     @Inject
@@ -114,6 +110,10 @@ public class MainActivity  extends BaseActivity
             Log.d("deneme7","3");
             exploreFragment = (ExploreFragment) fragment;
             activeFragment = ActiveFragment.EXPLORE;
+        } else if (fragment instanceof BookmarkFragment) {
+            Log.d("deneme7","3");
+            bookmarkFragment = (BookmarkFragment) fragment;
+            activeFragment = ActiveFragment.BOOKMARK;
         }
         if (fragment != null) {
             getSupportFragmentManager()
@@ -300,6 +300,7 @@ public class MainActivity  extends BaseActivity
         CONTRIBUTIONS,
         NEARBY,
         EXPLORE,
+        BOOKMARK,
         MORE
     }
 }

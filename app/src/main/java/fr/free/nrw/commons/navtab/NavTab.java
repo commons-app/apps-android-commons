@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 
+import fr.free.nrw.commons.bookmarks.BookmarkFragment;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.explore.ExploreFragment;
 import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment;
@@ -23,7 +24,6 @@ public enum NavTab implements EnumCode {
     @Override
     public Fragment newInstance() {
       return ContributionsFragment.newInstance();
-      //return null;
     }
   },
   NEARBY(R.string.nearby_fragment, R.drawable.ic_location_on_black_24dp){
@@ -31,7 +31,6 @@ public enum NavTab implements EnumCode {
     @Override
     public Fragment newInstance() {
       return NearbyParentFragment.newInstance();
-      //return null;
     }
   },
   EXPLORE(R.string.navigation_item_explore, R.drawable.ic_globe) {
@@ -39,15 +38,13 @@ public enum NavTab implements EnumCode {
     @Override
     public Fragment newInstance() {
       return ExploreFragment.newInstance();
-      //return null;
     }
   },
   FAVORITES(R.string.favorites, R.drawable.ic_round_star_border_24px) {
     @NonNull
     @Override
     public Fragment newInstance() {
-      //return new BookmarksFragment();
-      return null;
+      return new BookmarkFragment();
     }
   },
   MORE(R.string.more, R.drawable.ic_menu_black_24dp) {
