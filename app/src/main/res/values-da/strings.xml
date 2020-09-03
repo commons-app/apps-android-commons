@@ -402,6 +402,7 @@
   <string name="pause">sæt på pause</string>
   <string name="resume">genoptag</string>
   <string name="paused">Sat på pause</string>
+  <string name="rank_prefix">Rang:</string>
   <string name="leaderboard_column_rank">Rang</string>
   <string name="leaderboard_column_user">Bruger</string>
   <string name="leaderboard_yearly">Årlig</string>

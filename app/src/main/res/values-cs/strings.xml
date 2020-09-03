@@ -15,6 +15,7 @@
 * Michaelbrabec
 * Mormegil
 * Patriccck
+* Robins7
 * Spotter
 * Vlad5250
 * Vojtěch Dostál
@@ -80,7 +81,9 @@
   <string name="upload_progress_notification_title_in_progress">Nahrává se soubor %1$s</string>
   <string name="upload_progress_notification_title_finishing">Dokončení nahrávání souboru %1$s</string>
   <string name="upload_failed_notification_title">Načítání souboru %1$s se nezdařilo</string>
+  <string name="upload_paused_notification_title">Načítání souboru %1$s bylo pozastaveno</string>
   <string name="upload_failed_notification_subtitle">Klepnutím zobrazíte</string>
+  <string name="upload_paused_notification_subtitle">Klepnutím zobrazíte</string>
   <string name="title_activity_contributions">Moje nedávné obrázky</string>
   <string name="contribution_state_queued">Ve frontě</string>
   <string name="contribution_state_failed">Selhalo</string>
@@ -92,8 +95,10 @@
   <string name="provider_contributions">Moje obrázky</string>
   <string name="menu_share">Sdílet</string>
   <string name="menu_open_in_browser">Zobrazit v prohlížeči</string>
-  <string name="share_title_hint" fuzzy="true">Název (povinný)</string>
+  <string name="share_title_hint">Název (povinný)</string>
+  <string name="add_caption_toast">Prosím, zadejte titulek pro tento soubor</string>
   <string name="share_description_hint">Popis</string>
+  <string name="share_caption_hint">Popisek (max. 255 znaků)</string>
   <string name="login_failed_network">Nelze se přihlásit - selhání sítě</string>
   <string name="login_failed_wrong_credentials">Není možné se přihlásit – zkontrolujte své uživatelské jméno a heslo</string>
   <string name="login_failed_throttled">Příliš mnoho neúspěšných pokusů. Zkuste to prosím znovu za několik minut.</string>
@@ -184,6 +189,7 @@
   <string name="detail_panel_cats_label">Kategorie</string>
   <string name="detail_panel_cats_loading">Načítá se…</string>
   <string name="detail_panel_cats_none">Nevybrány</string>
+  <string name="detail_caption_empty">Žádný titulek</string>
   <string name="detail_description_empty">Bez popisu</string>
   <string name="detail_discussion_empty">Žádná diskuse</string>
   <string name="detail_license_empty">Neznámá licence</string>
@@ -198,6 +204,7 @@
   <string name="no_nearby">Poblíž nebylo nic nalezeno</string>
   <string name="warning">Upozornění</string>
   <string name="upload_image_duplicate">Tento soubor již na Commons existuje. Jste si jist, že chcete pokračovat?</string>
+  <string name="upload">Nahrát</string>
   <string name="yes">Ano</string>
   <string name="no">Ne</string>
   <string name="media_detail_caption">Titulek</string>
@@ -325,6 +332,9 @@
   <string name="retry">Zkusit znovu</string>
   <string name="showcase_view_got_it_button">Jasně!</string>
   <string name="showcase_view_whole_nearby_activity">Toto jsou místa poblíž vaší současné polohy, které potřebují fotografie k ilustraci příslušných článků na Wikipedii.\n\nKlepnutím na „PROHLEDAT TUTO OBLAST“ se zamkne mapa a spustí se prohledávání okolí daného místa.</string>
+  <string name="showcase_view_needs_photo">Toto místo potřebuje obrázek.</string>
+  <string name="showcase_view_has_photo">Toto místo už má obrázek.</string>
+  <string name="showcase_view_no_longer_exists">Toto místo už neexistuje.</string>
   <string name="showcase_view_list_icon">Klíknutím na toto tlačítko otevřete seznam těchto míst</string>
   <string name="showcase_view_plus_fab">Můžete nahrát obrázek jakéhokoliv z těchto míst z vaší galerie nebo přímo z fotoaparátu.</string>
   <string name="no_images_found">Nebyly nalezeny žádné obrázky!</string>
@@ -344,6 +354,7 @@
   <string name="error_loading_subcategories">Chyba při načítání podkategorií.</string>
   <string name="search_tab_title_media">Mediální soubory</string>
   <string name="search_tab_title_categories">Kategorie</string>
+  <string name="search_tab_title_depictions">Položky</string>
   <string name="explore_tab_title_featured">Nejlepší</string>
   <string name="explore_tab_title_mobile">Nahrané z mobilu</string>
   <string name="successful_wikidata_edit">Obrázek byl přidán do položky %1$s na Wikidatech!</string>
@@ -381,6 +392,7 @@
   <string name="nominate_delete">Navrhnout na smazání</string>
   <string name="delete">Smazat</string>
   <string name="Achievements">Dosažené úspěchy</string>
+  <string name="Profile">Profil</string>
   <string name="statistics">Statistiky</string>
   <string name="statistics_thanks">Obdržená poděkování</string>
   <string name="statistics_featured">Nejlepší obrázky</string>
@@ -442,7 +454,7 @@
   <string name="desc_language_Asia">Asie</string>
   <string name="desc_language_Pacific">Tichomoří (Pacifik)</string>
   <string name="no_categories_selected">Nebyly vybrány žádné kategorie</string>
-  <string name="no_categories_selected_warning_desc" fuzzy="true">Obrázky bez kategorií jsou používány jen zřídka. Opravdu chcete nahrát obrázek bez výběru kategorií?</string>
+  <string name="no_categories_selected_warning_desc">Obrázky bez kategorií jsou používány jen zřídka. Opravdu chcete nahrát obrázek bez výběru kategorií?</string>
   <string name="upload_flow_all_images_in_set">(Pro všechny snímky v sadě)</string>
   <string name="search_this_area">Prohledat tuto oblast</string>
   <string name="nearby_card_permission_title">Je požadováno oprávnění</string>
@@ -554,6 +566,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Jiné</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Pretože to je</string>
+  <string name="category_edit_helper_show_edit_title_success">Úspěch</string>
   <string name="share_image_via">Sdílet obrázek pomocí</string>
   <string name="no_achievements_yet">Zatím nemáte žádné příspěvky</string>
   <string name="account_created">Účet byl založen!</string>
@@ -568,4 +581,50 @@
   <string name="you_must_reset_your_passsword">Při přihlášení nastala chyba, musíte si resetovat vaše heslo!</string>
   <string name="upload_nearby_place_found_title">Místo v okolí nalezeno</string>
   <string name="upload_nearby_place_found_description">Je toto fotka místa %1$s?</string>
+  <string name="title_app_shortcut_setting">Nastavení</string>
+  <string name="wallpaper_set_unsuccessfully">Něco se pokazilo. Tapetu se nepodařilo nastavit</string>
+  <string name="setting_wallpaper_dialog_title">Nastavit jako tapetu</string>
+  <string name="setting_wallpaper_dialog_message">Nastavování tapety. Prosím, čekejte…</string>
+  <string name="theme_dark_name">Tmavý</string>
+  <string name="theme_light_name">Světlý</string>
+  <string name="recommend_high_accuracy_mode">Pro nejpřesnější výsledky zvolte režim vysoké přesnosti.</string>
+  <string name="ask_to_turn_location_on">Zapnout lokaci?</string>
+  <string name="nearby_needs_location">Funkce Poblíž potřebuje pro správné fungování povolenou polohu</string>
+  <string name="use_location_from_similar_image">Pořídili jste tyto dva obrázky na stejném místě? Chcete použít zeměpisnou šířku/délku obrázku vpravo?</string>
+  <string name="load_more">Načíst další</string>
+  <string name="nearby_no_results">Nebyla nalezená žádná místa, zkuste změnit kritéria vyhledávání.</string>
+  <string name="todo_improve">Navrhovaná vylepšení:</string>
+  <string name="missing_article">Přidejte tento obrázek do přidruženého článku na Wikipedii, který neobsahuje žádné obrázky.</string>
+  <string name="edit_category">Editovat kategorie</string>
+  <string name="add_picture_to_wikipedia_article_title">Přidat obrázek na Wikipedii</string>
+  <string name="add_picture_to_wikipedia_article_desc">Chcete přidat tento obrázek do článku na %1$s Wikipedii?</string>
+  <string name="add_picture_to_wikipedia_instructions_title">Instrukce</string>
+  <string name="add_picture_to_wikipedia_instructions_desc">Dbejte na to, abyste postupovali podle pokynů pro úpravy!</string>
+  <string name="confirm">Potvrdit</string>
+  <string name="instructions_title">Instrukce</string>
+  <string name="wikipedia_instructions_step_1">1. Použijte následující wikitext:</string>
+  <string name="wikipedia_instructions_step_2">2. Kliknutím na Potvrdit otevřete článek ve Wikipedii</string>
+  <string name="wikipedia_instructions_step_3">3. Najděte v článku odpovídající sekci pro Váš obrázek</string>
+  <string name="wikipedia_instructions_step_4">4. Klikněte na ikonu Editovat (ikona tužky) pro danou sekci.</string>
+  <string name="wikipedia_instructions_step_5">5. Vložte wikitext na vhodné místo.</string>
+  <string name="wikipedia_instructions_step_7">7. Zveřejněte článek</string>
+  <string name="copy_wikicode_to_clipboard">Zkopírujte wikitext</string>
+  <string name="pause">pozastavit</string>
+  <string name="resume">pokračovat</string>
+  <string name="paused">Pozastaveno</string>
+  <string name="achievements_tab_title">Dosažené úspěchy</string>
+  <string name="leaderboard_tab_title">Žebříček</string>
+  <string name="rank_prefix">Pořadí</string>
+  <string name="count_prefix">Počet:</string>
+  <string name="leaderboard_column_rank">Pořadí</string>
+  <string name="leaderboard_column_user">Uživatel</string>
+  <string name="leaderboard_column_count">Počet</string>
+  <string name="setting_avatar_dialog_title">Nastavit jako avatar žebříčku</string>
+  <string name="setting_avatar_dialog_message">Nastavování avataru, prosím čekejte</string>
+  <string name="avatar_set_successfully">Sada avatarů</string>
+  <string name="avatar_set_unsuccessfully">Při nastavování avataru došlo k chybě, prosím, zkuste to znovu</string>
+  <string name="menu_set_avatar">Nastavit jako avatar</string>
+  <string name="leaderboard_yearly">Ročně</string>
+  <string name="leaderboard_weekly">Týdně</string>
+  <string name="leaderboard_upload">Nahrát</string>
 </resources>

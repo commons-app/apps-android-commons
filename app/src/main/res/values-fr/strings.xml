@@ -18,6 +18,7 @@
 * Nicolas Raoul
 * Orikrin1998
 * Patrick Star
+* Robins7
 * Sherbrooke
 * Tektasc
 * Thibaut120094
@@ -622,7 +623,7 @@
   <string name="title_app_shortcut_setting">Paramètres</string>
   <string name="remove_bookmark">Retiré des favoris</string>
   <string name="add_bookmark">Ajouté aux favoris</string>
-  <string name="wallpaper_set_unsuccessfully">Un problème est survenu. Impossible d\'installer le fond d\'écran.</string>
+  <string name="wallpaper_set_unsuccessfully">Un problème est survenu. Impossible d\'installer le fond d\'écran</string>
   <string name="setting_wallpaper_dialog_title">Définir comme fond d’écran</string>
   <string name="setting_wallpaper_dialog_message">Configuration du fond d\'écran. Veuillez attendre...</string>
   <string name="theme_default_name">Suivre le système</string>
@@ -674,4 +675,5 @@
   <string name="leaderboard_upload">Télécharger</string>
   <string name="leaderboard_nearby">À proximité</string>
   <string name="leaderboard_used">Utilisé</string>
+  <string name="leaderboard_my_rank_button_text">Mon rang</string>
 </resources>

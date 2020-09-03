@@ -4,6 +4,7 @@
 * BPX-web
 * Bjarncraft
 * Bxalber
+* Elliot
 * Envlh
 * FF11
 * Ferdinand0101
@@ -81,6 +82,7 @@
   <string name="upload_progress_notification_title_finishing">Hochladen von „%1$s“ abschließen</string>
   <string name="upload_failed_notification_title">Hochladen von „%1$s“ fehlgeschlagen</string>
   <string name="upload_failed_notification_subtitle">Tippen zum Betrachten</string>
+  <string name="upload_paused_notification_subtitle">Tippen zum Ansehen</string>
   <string name="title_activity_contributions">Meine kürzlich hochgeladenen Dateien</string>
   <string name="contribution_state_queued">In der Warteschlange</string>
   <string name="contribution_state_failed">Fehlgeschlagen</string>
@@ -92,7 +94,8 @@
   <string name="provider_contributions">Meine hochgeladenen Dateien</string>
   <string name="menu_share">Teilen</string>
   <string name="menu_open_in_browser">Im Browser anzeigen</string>
-  <string name="share_title_hint">Untertitel (erforderlich)</string>
+  <string name="share_title_hint">Titel (erforderlich)</string>
+  <string name="add_caption_toast">Bitte gib einen Titel für diese Datei an</string>
   <string name="share_description_hint">Beschreibung</string>
   <string name="share_caption_hint">Beschriftung (bis zu 255 Zeichen)</string>
   <string name="login_failed_network">Anmeldung fehlgeschlagen – Netzwerkfehler</string>
@@ -102,9 +105,9 @@
   <string name="login_failed_2fa_needed">Du musst deinen Code zur Zwei-Faktor-Authentifizierung angeben.</string>
   <string name="login_failed_generic">Anmeldung fehlgeschlagen</string>
   <string name="share_upload_button">Hochladen</string>
-  <string name="multiple_share_base_title">Benenne diesen Satz</string>
+  <string name="multiple_share_base_title">Benenne dieses Set</string>
   <string name="add_set_name_toast">Bitte einen Namen für diesen Satz angeben</string>
-  <string name="provider_modifications">Veränderungen</string>
+  <string name="provider_modifications">Anpassungen</string>
   <string name="menu_upload_single">Hochladen</string>
   <string name="categories_search_text_hint">Kategorien durchsuchen</string>
   <string name="menu_save_categories">Speichern</string>
@@ -125,7 +128,7 @@
   <string name="menu_about">Über</string>
   <string name="about_license">Die Wikimedia-Commons-App ist eine Open-Source-App, entwickelt und gewartet von Freiwilligen der Wikimedia-Gemeinschaft. Die Wikimedia Foundation ist nicht bei der Erstellung, Entwicklung oder Wartung der App beteiligt.</string>
   <string name="about_improve">Einen neuen &lt;a href=\"%1$s\"&gt;GitHub-Eintrag&lt;/a&gt; für Fehlerberichte und Vorschläge erstellen.</string>
-  <string name="about_privacy_policy">Datenschutzrichtlinie</string>
+  <string name="about_privacy_policy">Datenschutzbestimmungen</string>
   <string name="about_credits">Urheberschaft</string>
   <string name="title_activity_about">Über</string>
   <string name="menu_feedback">Rückmeldung per E-Mail senden</string>
@@ -200,6 +203,7 @@
   <string name="no_nearby">Keine Orte in der Nähe gefunden</string>
   <string name="warning">Warnung</string>
   <string name="upload_image_duplicate">Diese Datei ist bereits auf Commons vorhanden. Bist du sicher, dass du fortfahren möchtest?</string>
+  <string name="upload">Hochladen</string>
   <string name="yes">Ja</string>
   <string name="no">Nein</string>
   <string name="media_detail_caption">Beschriftung</string>
@@ -386,6 +390,7 @@
   <string name="nominate_delete">Zur Löschung vorschlagen</string>
   <string name="delete">Löschen</string>
   <string name="Achievements">Errungenschaften</string>
+  <string name="Profile">Profil</string>
   <string name="statistics">Statistiken</string>
   <string name="statistics_thanks">Erhaltene Dankeschöns</string>
   <string name="statistics_featured">Vorgestellte Bilder</string>
@@ -540,6 +545,7 @@
   <string name="image_info">Bildinformationen</string>
   <string name="no_categories_found">Keine Kategorien gefunden</string>
   <string name="upload_cancelled">Hochladen abbrechen</string>
+  <string name="delete_helper_show_deletion_title">Zur Löschung vorschlagen</string>
   <string name="delete_helper_show_deletion_title_success">Erfolgreich</string>
   <string name="delete_helper_show_deletion_title_failed">Fehlgeschlagen</string>
   <string name="delete_helper_ask_spam_selfie">Ein Selfie</string>
@@ -550,16 +556,32 @@
   <string name="delete_helper_ask_reason_copyright_internet_photo">Bild aus dem Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Andere</string>
+  <string name="category_edit_helper_show_edit_title_success">Erfolg</string>
+  <string name="category_edit_button_text">Kategorien aktualisieren</string>
   <string name="account_created">Benutzerkonto erstellt!</string>
   <string name="text_copy">Text in die Zwischenablage kopiert</string>
   <string name="notification_mark_read">Benachrichtigung als gelesen markieren</string>
+  <string name="place_state_exists">Existiert</string>
+  <string name="place_state_needs_photo">Benötigt Foto</string>
   <string name="nearby_search_hint">Brücke, Museum, Hotel etc.</string>
   <string name="title_app_shortcut_bookmark">Lesezeichen</string>
   <string name="title_app_shortcut_setting">Einstellungen</string>
   <string name="remove_bookmark">aus den Lesezeichen entfernt</string>
   <string name="add_bookmark">zu den Lesezeichen hinzugefügt</string>
+  <string name="setting_wallpaper_dialog_title">Als Hintergrundbild festlegen</string>
+  <string name="setting_wallpaper_dialog_message">Hintergrundbild wird festgelegt. Bitte warten...</string>
   <string name="theme_dark_name">Dunkel</string>
   <string name="theme_light_name">Hell</string>
+  <string name="load_more">Mehr laden</string>
   <string name="add_picture_to_wikipedia_article_title">Bild zu Wikipedia hinzufügen</string>
+  <string name="confirm">Bestätigen</string>
+  <string name="instructions_title">Anweisungen</string>
   <string name="copy_wikicode_to_clipboard">wikicode in die Zwischenablage kopieren</string>
+  <string name="pause">pausieren</string>
+  <string name="resume">fortfahren</string>
+  <string name="paused">Pausiert</string>
+  <string name="achievements_tab_title">Errungenschaften</string>
+  <string name="leaderboard_tab_title">Bestenliste</string>
+  <string name="rank_prefix">Rang:</string>
+  <string name="leaderboard_column_user">Benutzer</string>
 </resources>

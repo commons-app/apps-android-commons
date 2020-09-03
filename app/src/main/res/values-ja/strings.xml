@@ -398,6 +398,7 @@
   <string name="nominate_delete">削除候補</string>
   <string name="delete">削除</string>
   <string name="Achievements">貢献</string>
+  <string name="Profile">プロフィール</string>
   <string name="statistics">統計</string>
   <string name="statistics_thanks">受け取った感謝</string>
   <string name="statistics_featured">秀逸な画像</string>
@@ -640,4 +641,23 @@
   <string name="pause">一時停止</string>
   <string name="resume">継続</string>
   <string name="paused">一時停止</string>
+  <string name="achievements_tab_title">貢献</string>
+  <string name="leaderboard_tab_title">リーダーボード</string>
+  <string name="rank_prefix">順位</string>
+  <string name="count_prefix">件数:</string>
+  <string name="leaderboard_column_rank">順位</string>
+  <string name="leaderboard_column_user">利用者</string>
+  <string name="leaderboard_column_count">件数</string>
+  <string name="setting_avatar_dialog_title">リーダーボードのアバターに設定</string>
+  <string name="setting_avatar_dialog_message">アバターの設定のため、お待たせしています</string>
+  <string name="avatar_set_successfully">アバターを設定しました</string>
+  <string name="avatar_set_unsuccessfully">新しいアバターの設定に失敗しました。もう一度やり直してください</string>
+  <string name="menu_set_avatar">アバターに設定</string>
+  <string name="leaderboard_yearly">年間</string>
+  <string name="leaderboard_weekly">週間</string>
+  <string name="leaderboard_all_time">すべての期間</string>
+  <string name="leaderboard_upload">アップロード</string>
+  <string name="leaderboard_nearby">付近</string>
+  <string name="leaderboard_used">使用済み</string>
+  <string name="leaderboard_my_rank_button_text">あなたのランク</string>
 </resources>

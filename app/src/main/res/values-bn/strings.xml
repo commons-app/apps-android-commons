@@ -349,12 +349,15 @@
   <string name="desc_language_Pacific">প্রশান্ত মহাসাগরীয়</string>
   <string name="please_wait">অনুগ্রহ করে অপেক্ষা করুন...</string>
   <string name="exif_tag_name_location">অবস্থান</string>
+  <string name="category_edit_helper_make_edit_toast">বিষয়শ্রেণীগুলি হালনাগাদ করার চেষ্টা চলছে।</string>
   <string name="category_edit_helper_show_edit_title">বিষয়শ্রেণী হালনাগাদ করুন</string>
   <string name="category_edit_helper_show_edit_title_success">সফল</string>
   <string name="category_edit_helper_edit_message_else">বিষয়শ্রেণী হালনাগাদ করা সম্ভব হয়নি।</string>
+  <string name="category_edit_button_text">বিষয়শ্রেণীগুলি হালনাগাদ করুন</string>
   <string name="account_created">অ্যাকাউন্ট তৈরি করা হয়েছে!</string>
   <string name="remove_bookmark">বুকমার্ক থেকে সরানো হয়েছে</string>
   <string name="add_bookmark">বুকমার্কে যোগ করা হয়েছে</string>
+  <string name="todo_improve">প্রস্তাবিত উন্নতিসমূহ:</string>
   <string name="edit_category">বিষয়শ্রেণীগুলি সম্পাদনা  করুন</string>
   <string name="confirm">নিশ্চিত করুন</string>
   <string name="pause">থামান</string>
