@@ -3,8 +3,6 @@ package fr.free.nrw.commons.explore;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,7 +21,6 @@ import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
-import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
@@ -76,7 +73,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment
   @Override
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    View view = inflater.inflate(R.layout.activity_explore, container, false);
+    View view = inflater.inflate(R.layout.fragment_explore, container, false);
     ButterKnife.bind(this, view);
     supportFragmentManager = getChildFragmentManager();
     viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());

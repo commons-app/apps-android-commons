@@ -62,7 +62,7 @@ public class ExploreActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_explore);
+        setContentView(R.layout.fragment_explore);
         ButterKnife.bind(this);
         initDrawer();
         setTitle(getString(R.string.title_activity_explore));

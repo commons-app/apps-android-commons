@@ -26,7 +26,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
 public class BookmarkFragment extends CommonsDaggerSupportFragment
     implements FragmentManager.OnBackStackChangedListener,
@@ -61,7 +60,7 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment
   public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container,
       @Nullable final Bundle savedInstanceState) {
     super.onCreateView(inflater, container, savedInstanceState);
-    View view = inflater.inflate(R.layout.activity_bookmarks, container, false);
+    View view = inflater.inflate(R.layout.fragment_bookmarks, container, false);
     ButterKnife.bind(this, view);
 
     // Activity can call methods in the fragment by acquiring a

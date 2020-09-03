@@ -41,7 +41,7 @@ public class BookmarksActivity extends NavigationBaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bookmarks);
+        setContentView(R.layout.fragment_bookmarks);
         ButterKnife.bind(this);
 
         // Activity can call methods in the fragment by acquiring a
