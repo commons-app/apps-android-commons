@@ -22,6 +22,7 @@ import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.ExploreFragment;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.navtab.MoreBottomSheetFragment;
 import fr.free.nrw.commons.navtab.NavTab;
 import fr.free.nrw.commons.navtab.NavTabLayout;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
@@ -114,6 +115,10 @@ public class MainActivity  extends BaseActivity
             Log.d("deneme7","3");
             bookmarkFragment = (BookmarkFragment) fragment;
             activeFragment = ActiveFragment.BOOKMARK;
+        } else if (fragment == null) {
+            MoreBottomSheetFragment bottomSheet = new MoreBottomSheetFragment();
+            bottomSheet.show(getSupportFragmentManager(),
+                "ModalBottomSheet");
         }
         if (fragment != null) {
             getSupportFragmentManager()
