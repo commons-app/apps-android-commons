@@ -584,4 +584,6 @@
   <string name="leaderboard_tab_title">Bestenliste</string>
   <string name="rank_prefix">Rang:</string>
   <string name="leaderboard_column_user">Benutzer</string>
+  <string name="leaderboard_weekly">Wöchentlich</string>
+  <string name="leaderboard_my_rank_button_text">Mein Rang</string>
 </resources>

@@ -658,8 +658,9 @@
   <string name="menu_set_avatar">Definir como avatar</string>
   <string name="leaderboard_yearly">Anual</string>
   <string name="leaderboard_weekly">Semanal</string>
-  <string name="leaderboard_all_time">Desde sempre</string>
+  <string name="leaderboard_all_time">Desde o início</string>
   <string name="leaderboard_upload">Carregar</string>
   <string name="leaderboard_nearby">Aqui perto</string>
   <string name="leaderboard_used">Usados</string>
+  <string name="leaderboard_my_rank_button_text">A minha classificação</string>
 </resources>
