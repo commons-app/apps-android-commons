@@ -51,8 +51,6 @@ public enum NavTab implements EnumCode {
     @NonNull
     @Override
     public Fragment newInstance() {
-
-      //return MoreFragment.newInstance();
       return null;
     }
   };

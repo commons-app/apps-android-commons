@@ -92,7 +92,10 @@ public class MainActivity  extends BaseActivity
     private void setUpPager() {
         loadFragment(ContributionsFragment.newInstance());
         tabLayout.setOnNavigationItemSelectedListener(item -> {
-            setTitle(item.getTitle());
+            if (!item.getTitle().equals("More")) {
+                // do not change title for more fragment
+                setTitle(item.getTitle());
+            }
             Fragment fragment = NavTab.of(item.getOrder()).newInstance();
             return loadFragment(fragment);
         });
@@ -120,6 +123,7 @@ public class MainActivity  extends BaseActivity
             bottomSheet.show(getSupportFragmentManager(),
                 "ModalBottomSheet");
         }
+
         if (fragment != null) {
             getSupportFragmentManager()
                 .beginTransaction()
