@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
 
 import fr.free.nrw.commons.MediaDataExtractor;
+import fr.free.nrw.commons.auth.SessionManager;
 import io.reactivex.disposables.Disposable;
 import java.util.List;
 
@@ -94,6 +95,9 @@ public class ContributionsFragment
 
     @Inject ContributionsPresenter contributionsPresenter;
 
+    @Inject
+    SessionManager sessionManager;
+
     private LatLng curLatLng;
 
     private boolean firstLocationUpdate = true;
@@ -162,7 +166,8 @@ public class ContributionsFragment
             showContributionsListFragment();
         }
 
-        if (!ConfigUtils.isBetaFlavour()) {
+        if (!ConfigUtils.isBetaFlavour() && sessionManager.isUserLoggedIn()
+            && sessionManager.getCurrentAccount() != null) {
             setUploadCount();
         }
 
