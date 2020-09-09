@@ -27,6 +27,7 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
 
+import fr.free.nrw.commons.theme.BaseActivity;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -55,7 +56,7 @@ import timber.log.Timber;
 /**
  * activity for sharing feedback on uploaded activity
  */
-public class AchievementsActivity extends NavigationBaseActivity {
+public class AchievementsActivity extends BaseActivity {
 
     private static final double BADGE_IMAGE_WIDTH_RATIO = 0.4;
     private static final double BADGE_IMAGE_HEIGHT_RATIO = 0.3;
@@ -145,7 +146,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
         hideLayouts();
         setWikidataEditCount();
         setAchievements();
-        initDrawer();
     }
 
     @Override

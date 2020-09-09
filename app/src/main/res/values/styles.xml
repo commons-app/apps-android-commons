@@ -48,7 +48,7 @@
         <item name="tabBackground">@color/card_light_grey</item>
         <item name="tabIndicatorColor">@color/primaryDarkColor</item>
         <item name="tabSelectedTextColor">@color/primaryDarkColor</item>
-        <item name="tabTextColor">@color/primaryColor</item>
+        <item name="tabTextColor">@color/primaryDarkColor</item>
         <item name="mainBackground">@color/main_background_light</item>
         <item name="achievementBackground">@color/achievement_background_light</item>
         <item name="drawerHeaderBackground">@color/drawerHeader_background_light</item>
