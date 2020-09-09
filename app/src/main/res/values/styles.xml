@@ -74,7 +74,7 @@
         <item name="buttonBackgroundPressed">@color/pressed_button_light</item>
         <item name="textDisabled">@color/disabled_button_text_color_light</item>
         <item name="textEnabled">@color/enabled_button_text_color_light</item>
-        <item name="mainCardBackground">@color/primaryDarkColor</item>
+        <item name="mainCardBackground">@color/card_light_grey</item>
         <item name="mainScreenNearbyPermissionbutton">@style/LightFlatNearbyPermissionButton</item>
         <item name="iconInfo24">@drawable/ic_info_outline_dark_24dp</item>
         <item name="iconMap24">@drawable/ic_map_dark_24dp</item>

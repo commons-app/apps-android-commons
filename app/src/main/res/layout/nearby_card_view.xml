@@ -5,7 +5,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/mainCardBackground"
     android:layout_centerVertical="true"
-    android:minHeight="@dimen/large_height">
+    android:layout_margin="@dimen/small_gap"
+    android:minHeight="@dimen/large_height"
+    app:cardElevation="6dp"
+    >
 
     <Button
         android:layout_width="wrap_content"
@@ -17,7 +20,7 @@
         android:layout_marginRight="@dimen/activity_margin_horizontal"
         android:layout_marginTop="@dimen/activity_margin_horizontal"
         android:minWidth="@dimen/fragment_height"
-        android:textColor="@android:color/white"
+        android:textColor="@color/primaryDarkColor"
         android:singleLine="true"
         android:theme="?attr/mainScreenNearbyPermissionbutton"
         style="@style/Widget.AppCompat.Button.Borderless"/>
@@ -67,7 +70,7 @@
                 android:layout_marginLeft="@dimen/standard_gap"
                 android:layout_marginRight="@dimen/standard_gap"
                 tools:text="test distance"
-                android:textColor="@android:color/white"
+                android:textColor="@color/primaryDarkColor"
                 android:singleLine="true"
                 >
             </TextView>
@@ -82,7 +85,7 @@
                 android:minWidth="@dimen/fragment_height"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 tools:text="test distance"
-                android:textColor="@android:color/white"
+                android:textColor="@color/primaryDarkColor"
                 android:singleLine="true"
                 >
 
