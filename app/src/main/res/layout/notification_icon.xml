@@ -17,7 +17,7 @@
         android:layout_marginEnd="@dimen/activity_margin_horizontal"
         android:gravity="center"
         android:layout_marginRight="@dimen/activity_margin_horizontal"
-        app:srcCompat="@drawable/ic_notifications_white_24dp" />
+        app:srcCompat="@drawable/ic_notifications_blue_24dp" />
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/notification_count_badge"
@@ -29,7 +29,7 @@
         android:background="@drawable/notification_badge"
         android:gravity="center"
         android:padding="@dimen/miniscule_margin"
-        android:textColor="#ffffffff"
+        android:textColor="@color/primaryDarkColor"
         android:textSize="7sp"
         android:textStyle="bold"
         android:visibility="gone"

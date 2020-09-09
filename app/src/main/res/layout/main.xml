@@ -1,40 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  android:gravity="center_horizontal"
-  android:orientation="vertical"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-
-  <include layout="@layout/toolbar" />
-
-  <RelativeLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <FrameLayout
-      android:id="@+id/fragmentContainer"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:orientation="horizontal"
-      android:layout_above="@id/fragment_main_nav_tab_layout">
-      <fr.free.nrw.commons.contributions.UnswipableViewPager
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-    </FrameLayout>
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
-    <fr.free.nrw.commons.navtab.NavTabLayout
-      android:id="@+id/fragment_main_nav_tab_layout"
-      android:layout_width="match_parent"
-      android:layout_height="?attr/actionBarSize"
-      android:layout_alignParentBottom="true"
-      android:layout_gravity="bottom"
-      android:background="@android:color/white"
-      android:elevation="6dp"
-      app:itemIconTint="?attr/nav_tab_item_color_state"
-      app:itemTextColor="?attr/colorPrimaryDark"
-      />
-  </RelativeLayout>
+    <include layout="@layout/toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/fragment_main_nav_tab_layout"
+            android:orientation="horizontal">
+
+            <fr.free.nrw.commons.contributions.UnswipableViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
+
+        <fr.free.nrw.commons.navtab.NavTabLayout
+            android:id="@+id/fragment_main_nav_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="@android:color/white"
+            android:elevation="6dp"
+            app:itemIconTint="?attr/nav_tab_item_color_state"
+            app:itemTextColor="?attr/colorPrimaryDark" />
+    </RelativeLayout>
 </LinearLayout>
 

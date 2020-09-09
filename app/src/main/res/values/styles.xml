@@ -85,6 +85,14 @@
         <item name="nav_tab_item_color_state">@color/color_state_nav_tab_light</item>
     </style>
 
+    <style name="LightToolbarStyle" parent="LightAppTheme">
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="DarkToolbarStyle" parent="DarkAppTheme">
+        <item name="android:textColor">@color/primaryDarkColor</item>
+    </style>
+
     <style name="WhiteSearchBarTheme" parent="DarkAppTheme">
         <item name="colorControlActivated">@android:color/white</item>
     </style>
