@@ -2,6 +2,7 @@ package fr.free.nrw.commons.achievements;
 
 import android.accounts.Account;
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -139,13 +140,19 @@ public class AchievementsActivity extends BaseActivity {
         params.height = (int) (height * BADGE_IMAGE_HEIGHT_RATIO);
         params.width = (int) (width * BADGE_IMAGE_WIDTH_RATIO);
         imageView.requestLayout();
-
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         progressBar.setVisibility(View.VISIBLE);
 
         hideLayouts();
         setWikidataEditCount();
         setAchievements();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @Override
