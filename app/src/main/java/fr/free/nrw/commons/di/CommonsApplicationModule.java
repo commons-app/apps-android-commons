@@ -233,7 +233,7 @@ public class CommonsApplicationModule {
         appDatabase = Room.databaseBuilder(applicationContext, AppDatabase.class, "commons_room.db")
             .addMigrations(MIGRATION_1_2)
             .fallbackToDestructiveMigration()
-            .build().;
+            .build();
         return appDatabase;
     }
 
