@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import fr.free.nrw.commons.theme.BaseActivity;
 import java.lang.ref.SoftReference;
 import java.util.Collections;
 import java.util.List;
@@ -32,7 +33,7 @@ import fr.free.nrw.commons.utils.ConfigUtils;
 /**
  * Represents about screen of this app
  */
-public class AboutActivity extends NavigationBaseActivity {
+public class AboutActivity extends BaseActivity {
     @BindView(R.id.about_version) TextView versionText;
     @BindView(R.id.about_license) HtmlTextView aboutLicenseText;
     @BindView(R.id.about_faq) TextView faqText;
@@ -68,8 +69,6 @@ public class AboutActivity extends NavigationBaseActivity {
         Utils.setUnderlinedText(privacyPolicyText, R.string.about_privacy_policy, getApplicationContext());
         Utils.setUnderlinedText(translateText, R.string.about_translate, getApplicationContext());
         Utils.setUnderlinedText(creditsText, R.string.about_credits, getApplicationContext());
-
-        initDrawer();
     }
 
     @OnClick(R.id.facebook_launch_icon)

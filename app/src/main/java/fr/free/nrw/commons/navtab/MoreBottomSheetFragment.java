@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
@@ -78,7 +79,7 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
 
     @OnClick(R.id.more_about)
     public void onAboutClicked() {
-        final Intent intent = new Intent(getActivity(), CategoryImagesActivity.class);
+        final Intent intent = new Intent(getActivity(), AboutActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         getActivity().startActivity(intent);
     }
