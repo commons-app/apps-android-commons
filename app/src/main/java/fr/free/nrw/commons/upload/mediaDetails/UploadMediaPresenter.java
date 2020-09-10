@@ -134,7 +134,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                 .observeOn(mainThreadScheduler)
                 .subscribe(imageResult -> {
                             view.showProgress(false);
-                            handleImageResult(imageResult, uploadItem);
+                        handleImageResult(imageResult, uploadItem);
                         },
                         throwable -> {
                             view.showProgress(false);
@@ -201,6 +201,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
         UploadItem uploadItem) {
         if (imageResult == IMAGE_KEEP || imageResult == IMAGE_OK) {
             view.onImageValidationSuccess();
+            uploadItem.setHasInvalidLocation(false);
         } else {
             handleBadImage(imageResult, uploadItem);
         }
@@ -212,11 +213,12 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param errorCode
      * @param uploadItem
      */
-    public void handleBadImage(Integer errorCode, UploadItem uploadItem) {
+    public void handleBadImage(Integer errorCode,
+        UploadItem uploadItem) {
         Timber.d("Handle bad picture with error code %d", errorCode);
-        // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
-        if (errorCode >= 8) {
-            defaultKVStore.putBoolean("Picture_Has_Correct_Location", false);
+        if (errorCode
+            >= 8) { // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
+            uploadItem.setHasInvalidLocation(true);
         }
 
         switch (errorCode) {

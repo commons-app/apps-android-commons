@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.widget.CompoundButton;
 
@@ -12,7 +10,6 @@ import androidx.appcompat.widget.AppCompatCheckBox;
 import java.util.List;
 
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 
 /**
  * Base on https://stackoverflow.com/a/40939367/3950497 answer.
@@ -25,7 +22,7 @@ public class CheckBoxTriStates extends AppCompatCheckBox {
 
     static public final int CHECKED = 1;
 
-    private int state;
+    private int state=UNKNOWN;
 
     private Callback callback;
 
@@ -64,12 +61,6 @@ public class CheckBoxTriStates extends AppCompatCheckBox {
      */
     private OnCheckedChangeListener clientListener;
 
-    /**
-     * This flag is needed to avoid accidentally changing the current {@link #state} when
-     * {@link #onRestoreInstanceState(Parcelable)} calls {@link #setChecked(boolean)}
-     * evoking our {@link #privateListener} and therefore changing the real state.
-     */
-    private boolean restoring;
 
     public CheckBoxTriStates(Context context) {
         super(context);
@@ -91,7 +82,7 @@ public class CheckBoxTriStates extends AppCompatCheckBox {
     }
 
     public void setState(int state) {
-        if(!this.restoring && this.state != state) {
+        if(this.state != state) {
             this.state = state;
 
             if(this.clientListener != null) {
@@ -118,27 +109,6 @@ public class CheckBoxTriStates extends AppCompatCheckBox {
         super.setOnCheckedChangeListener(privateListener);
     }
 
-    @Override
-    public Parcelable onSaveInstanceState() {
-        Parcelable superState = super.onSaveInstanceState();
-
-        SavedState ss = new SavedState(superState);
-
-        ss.state = state;
-
-        return ss;
-    }
-
-    @Override
-    public void onRestoreInstanceState(Parcelable state) {
-        this.restoring = true; // indicates that the ui is restoring its state
-        SavedState ss = (SavedState) state;
-        super.onRestoreInstanceState(ss.getSuperState());
-        setState(ss.state);
-        requestLayout();
-        this.restoring = false;
-    }
-
     private void init() {
         state = UNKNOWN;
         updateBtn();
@@ -163,45 +133,5 @@ public class CheckBoxTriStates extends AppCompatCheckBox {
         }
         setButtonDrawable(btnDrawable);
 
-    }
-
-    static class SavedState extends BaseSavedState {
-        int state;
-
-        SavedState(Parcelable superState) {
-            super(superState);
-        }
-
-        private SavedState(Parcel in) {
-            super(in);
-            state = in.readInt();
-        }
-
-        @Override
-        public void writeToParcel(Parcel out, int flags) {
-            super.writeToParcel(out, flags);
-            out.writeValue(state);
-        }
-
-        @Override
-        public String toString() {
-            return "CheckboxTriState.SavedState{"
-                    + Integer.toHexString(System.identityHashCode(this))
-                    + " state=" + state + "}";
-        }
-
-        @SuppressWarnings("hiding")
-        public static final Parcelable.Creator<SavedState> CREATOR =
-                new Parcelable.Creator<SavedState>() {
-                    @Override
-                    public SavedState createFromParcel(Parcel in) {
-                        return new SavedState(in);
-                    }
-
-                    @Override
-                    public SavedState[] newArray(int size) {
-                        return new SavedState[size];
-                    }
-                };
     }
 }

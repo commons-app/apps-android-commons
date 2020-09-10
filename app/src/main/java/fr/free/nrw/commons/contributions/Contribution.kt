@@ -38,7 +38,8 @@ data class Contribution constructor(
     val localUri: Uri? = null,
     var dataLength: Long = 0,
     var dateCreated: Date? = null,
-    var dateModified: Date? = null
+    var dateModified: Date? = null,
+    var hasInvalidLocation : Int =  0
 ) : Parcelable {
 
     fun completeWith(media: Media): Contribution {
@@ -64,6 +65,18 @@ data class Contribution constructor(
         depictedItems = depictedItems,
         wikidataPlace = from(item.place)
     )
+
+    /**
+     * Set this true when ImageProcessor has said that the location is invalid
+     * @param hasInvalidLocation
+     */
+    fun setHasInvalidLocation(hasInvalidLocation: Boolean) {
+        this.hasInvalidLocation = if (hasInvalidLocation) 1 else 0
+    }
+
+    fun isHasInvalidLocation(): Boolean {
+        return hasInvalidLocation == 1
+    }
 
     companion object {
         const val STATE_COMPLETED = -1

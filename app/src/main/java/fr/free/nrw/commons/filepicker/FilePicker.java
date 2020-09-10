@@ -166,7 +166,7 @@ public class FilePicker implements Constants {
     public static List<UploadableFile> handleExternalImagesPicked(Intent data, Activity activity) {
         try {
             return getFilesFromGalleryPictures(data, activity);
-        } catch (IOException e) {
+        } catch (IOException | SecurityException e) {
             e.printStackTrace();
         }
         return new ArrayList<>();
@@ -207,7 +207,7 @@ public class FilePicker implements Constants {
         }
     }
 
-    private static List<UploadableFile> getFilesFromGalleryPictures(Intent data, Activity activity) throws IOException {
+    private static List<UploadableFile> getFilesFromGalleryPictures(Intent data, Activity activity) throws IOException, SecurityException {
         List<UploadableFile> files = new ArrayList<>();
         ClipData clipData = data.getClipData();
         if (clipData == null) {
