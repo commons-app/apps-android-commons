@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.navtab;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -22,6 +23,7 @@ import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
@@ -41,6 +43,15 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
         final View view = inflater.inflate(R.layout.more_bottom_sheet, container, false);
         ButterKnife.bind(this, view);
         return view;
+    }
+
+    @Override
+    public void onAttach(@NonNull final Context context) {
+        super.onAttach(context);
+        ApplicationlessInjection
+            .getInstance(getActivity().getApplicationContext())
+            .getCommonsApplicationComponent()
+            .inject(this);
     }
 
     @OnClick(R.id.more_logout)

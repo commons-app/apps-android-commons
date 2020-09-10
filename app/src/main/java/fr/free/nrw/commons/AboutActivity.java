@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import fr.free.nrw.commons.theme.BaseActivity;
 import java.lang.ref.SoftReference;
 import java.util.Collections;
@@ -42,6 +43,7 @@ public class AboutActivity extends BaseActivity {
     @BindView(R.id.about_privacy_policy) TextView privacyPolicyText;
     @BindView(R.id.about_translate) TextView translateText;
     @BindView(R.id.about_credits) TextView creditsText;
+    @BindView(R.id.toolbar) Toolbar toolbar;
     /**
      * This method helps in the creation About screen
      *
@@ -54,7 +56,8 @@ public class AboutActivity extends BaseActivity {
         setContentView(R.layout.activity_about);
 
         ButterKnife.bind(this);
-
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         String aboutText = getString(R.string.about_license);
         aboutLicenseText.setHtmlText(aboutText);
 
@@ -69,6 +72,12 @@ public class AboutActivity extends BaseActivity {
         Utils.setUnderlinedText(privacyPolicyText, R.string.about_privacy_policy, getApplicationContext());
         Utils.setUnderlinedText(translateText, R.string.about_translate, getApplicationContext());
         Utils.setUnderlinedText(creditsText, R.string.about_credits, getApplicationContext());
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @OnClick(R.id.facebook_launch_icon)

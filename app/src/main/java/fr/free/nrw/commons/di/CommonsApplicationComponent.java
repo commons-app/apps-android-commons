@@ -3,6 +3,7 @@ package fr.free.nrw.commons.di;
 import com.google.gson.Gson;
 
 import fr.free.nrw.commons.explore.categories.CategoriesModule;
+import fr.free.nrw.commons.navtab.MoreBottomSheetFragment;
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -47,6 +48,8 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
     void inject(LoginActivity activity);
 
     void inject(SettingsFragment fragment);
+
+    void inject(MoreBottomSheetFragment fragment);
 
     void inject(ReviewController reviewController);
 

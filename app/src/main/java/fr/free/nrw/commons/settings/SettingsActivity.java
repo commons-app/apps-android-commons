@@ -10,7 +10,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
 /**
  * allows the user to change the settings
