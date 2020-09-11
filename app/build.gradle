@@ -54,7 +54,7 @@ dependencies {
     testImplementation "androidx.paging:paging-common-ktx:$PAGING_VERSION"
     implementation "androidx.paging:paging-rxjava2-ktx:$PAGING_VERSION"
     implementation "androidx.recyclerview:recyclerview:1.2.0-alpha02"
-    implementation 'com.squareup.okhttp3:okhttp-ws:3.4.1'
+    implementation "com.squareup.okhttp3:okhttp-ws:$OKHTTP_VERSION"
 
     // Logging
     implementation 'ch.acra:acra-dialog:5.3.0'
@@ -84,7 +84,7 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     testImplementation 'org.robolectric:robolectric:4.3'
     testImplementation 'androidx.test:core:1.2.0'
-    testImplementation "com.squareup.okhttp3:mockwebserver:4.8.0"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$OKHTTP_VERSION"
     testImplementation "org.powermock:powermock-module-junit4:2.0.0-beta.5"
     testImplementation "org.powermock:powermock-api-mockito2:2.0.0-beta.5"
     testImplementation 'org.mockito:mockito-core:2.23.0'

@@ -43,29 +43,9 @@ class WikidataEditServiceTest {
     }
 
     @Test
-    fun noClaimsWhenLocationIsNotCorrect() {
-        whenever(directKvStore.getBoolean("Picture_Has_Correct_Location", true))
-            .thenReturn(false)
+    fun noClaimsWhenEntityIdIsNull() {
         wikidataEditService.createClaim(mock(), "Test.jpg", hashMapOf())
         verifyZeroInteractions(wikidataClient)
-    }
-
-    @Test
-    fun noClaimsWhenEntityIdIsNull() {
-        wikidataEditService!!.createClaimWithLogging(null, null,"Test.jpg","")
-        verifyZeroInteractions(wikidataClient!!)
-    }
-
-    @Test
-    fun noClaimsWhenFileNameIsNull() {
-        wikidataEditService!!.createClaimWithLogging("Q1", "Test", null,"")
-        verifyZeroInteractions(wikidataClient!!)
-    }
-
-    @Test
-    fun noClaimsWhenP18IsNotEmpty() {
-        wikidataEditService!!.createClaimWithLogging("Q1", "Test","Test.jpg","Previous.jpg")
-        verifyZeroInteractions(wikidataClient!!)
     }
 
     @Test

@@ -22,6 +22,7 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.di.CommonsDaggerService;
 import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
@@ -350,8 +351,14 @@ public class UploadService extends CommonsDaggerService {
         .add(wikidataEditService.addDepictionsAndCaptions(uploadResult, contribution));
     WikidataPlace wikidataPlace = contribution.getWikidataPlace();
     if (wikidataPlace != null && wikidataPlace.getImageValue() == null) {
-      wikidataEditService.createClaim(wikidataPlace, uploadResult.getFilename(),
-          contribution.getMedia().getCaptions());
+      if (!contribution.hasInvalidLocation()) {
+        wikidataEditService.createClaim(wikidataPlace, uploadResult.getFilename(),
+            contribution.getMedia().getCaptions());
+      } else {
+        ViewUtil.showShortToast(this, getString(R.string.wikidata_edit_failure));
+        Timber
+            .d("Image location and nearby place location mismatched, so Wikidata item won't be edited");
+      }
     }
     saveCompletedContribution(contribution, uploadResult);
   }

@@ -74,7 +74,7 @@ data class Contribution constructor(
         this.hasInvalidLocation = if (hasInvalidLocation) 1 else 0
     }
 
-    fun isHasInvalidLocation(): Boolean {
+    fun hasInvalidLocation(): Boolean {
         return hasInvalidLocation == 1
     }
 
