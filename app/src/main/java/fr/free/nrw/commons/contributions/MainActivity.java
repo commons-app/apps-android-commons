@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.contributions;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,11 +21,14 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.BookmarkFragment;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.ExploreFragment;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.navtab.MoreBottomSheetFragment;
+import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment;
 import fr.free.nrw.commons.navtab.NavTab;
 import fr.free.nrw.commons.navtab.NavTabLayout;
+import fr.free.nrw.commons.navtab.NavTabLoggedOut;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
@@ -36,6 +40,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.List;
 import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
 
 public class MainActivity  extends BaseActivity
@@ -67,6 +72,10 @@ public class MainActivity  extends BaseActivity
     NotificationController notificationController;
     @Inject
     QuizChecker quizChecker;
+    @Inject
+    @Named("default_preferences")
+    public
+    JsonKvStore applicationKvStore;
 
     public static final int CONTRIBUTIONS_TAB_POSITION = 0;
     public static final int NEARBY_TAB_POSITION = 1;
@@ -78,15 +87,31 @@ public class MainActivity  extends BaseActivity
     private MenuItem notificationsMenuItem;
     public TextView notificationCount;
 
+    /**
+     * Consumers should be simply using this method to use this activity.
+     *
+     * @param context A Context of the application package implementing this class.
+     */
+    public static void startYourself(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        context.startActivity(intent);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        setTitle(getString(R.string.contributions_fragment));
-        setUpPager();
-        initMain();
+        if (applicationKvStore.getBoolean("login_skipped") == true) {
+            setTitle(getString(R.string.explore_tab_title_mobile));
+            setUpLoggedOutPager();
+        } else {
+            setTitle(getString(R.string.contributions_fragment));
+            setUpPager();
+            initMain();
+        }
     }
 
     private void setUpPager() {
@@ -97,6 +122,18 @@ public class MainActivity  extends BaseActivity
                 setTitle(item.getTitle());
             }
             Fragment fragment = NavTab.of(item.getOrder()).newInstance();
+            return loadFragment(fragment);
+        });
+    }
+
+    private void setUpLoggedOutPager() {
+        loadFragment(ExploreFragment.newInstance());
+        tabLayout.setOnNavigationItemSelectedListener(item -> {
+            if (!item.getTitle().equals("More")) {
+                // do not change title for more fragment
+                setTitle(item.getTitle());
+            }
+            Fragment fragment = NavTabLoggedOut.of(item.getOrder()).newInstance();
             return loadFragment(fragment);
         });
     }
@@ -119,9 +156,15 @@ public class MainActivity  extends BaseActivity
             bookmarkFragment = (BookmarkFragment) fragment;
             activeFragment = ActiveFragment.BOOKMARK;
         } else if (fragment == null) {
-            MoreBottomSheetFragment bottomSheet = new MoreBottomSheetFragment();
-            bottomSheet.show(getSupportFragmentManager(),
-                "ModalBottomSheet");
+            if (applicationKvStore.getBoolean("login_skipped") == true) { // If logged out, more sheet is different
+                MoreBottomSheetLoggedOutFragment bottomSheet = new MoreBottomSheetLoggedOutFragment();
+                bottomSheet.show(getSupportFragmentManager(),
+                    "MoreBottomSheetLoggedOut");
+            } else {
+                MoreBottomSheetFragment bottomSheet = new MoreBottomSheetFragment();
+                bottomSheet.show(getSupportFragmentManager(),
+                    "MoreBottomSheet");
+            }
         }
 
         if (fragment != null) {

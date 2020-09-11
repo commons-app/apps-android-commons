@@ -28,7 +28,7 @@ import fr.free.nrw.commons.settings.SettingsActivity;
 import javax.inject.Inject;
 import timber.log.Timber;
 
-public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
+public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment {
 
     @Inject
     CommonsLogSender commonsLogSender;
@@ -38,7 +38,7 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull final LayoutInflater inflater,
         @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        final View view = inflater.inflate(R.layout.fragment_more_bottom_sheet, container, false);
+        final View view = inflater.inflate(R.layout.fragment_more_bottom_sheet_logged_out, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -103,18 +103,6 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
         final Intent intent = new Intent(getActivity(), SettingsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         getActivity().startActivity(intent);
-    }
-
-    @OnClick(R.id.more_achievements)
-    public void onAchievementsClicked() {
-        final Intent intent = new Intent(getActivity(), AchievementsActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        getActivity().startActivity(intent);
-    }
-
-    @OnClick(R.id.more_peer_review)
-    public void onPeerReviewClicked() {
-        ReviewActivity.startYourself(getActivity(), getString(R.string.title_activity_review));
     }
 
     private class BaseLogoutListener implements CommonsApplication.LogoutListener {

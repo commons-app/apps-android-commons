@@ -318,7 +318,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
      */
     private void performSkipLogin() {
         applicationKvStore.putBoolean("login_skipped", true);
-        ExploreActivity.startYourself(this);
+        MainActivity.startYourself(this);
         finish();
     }
 
@@ -412,6 +412,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     public void startMainActivity() {
+        // TODO move to base activity
         NavigationBaseActivity.startActivityWithFlags(this, MainActivity.class, Intent.FLAG_ACTIVITY_SINGLE_TOP);
         finish();
     }
