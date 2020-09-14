@@ -5,6 +5,7 @@ import com.mapbox.mapboxsdk.annotations.Marker;
 public class NearbyMarker extends Marker {
     private final Place place;
     private NearbyBaseMarker nearbyBaseMarker;
+    private boolean disabled;
 
     /**
      * Creates a instance of {@link Marker} using the builder of Marker.
@@ -23,5 +24,13 @@ public class NearbyMarker extends Marker {
 
     public Place getPlace() {
         return place;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
     }
 }
