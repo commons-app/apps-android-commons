@@ -45,7 +45,7 @@
         <item name="nav_bar_background">@color/main_background_dark</item>
         <item name="toolbar_text_color">@color/white</item>
         <item name="more_bottom_sheet_style">@style/DarkMoreBottomSheetStyle</item>
-        <item name="nav_bar_drawable_color">@color/white</item>
+        <item name="more_bottom_sheet_drawable_color">@color/white</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -92,7 +92,7 @@
         <item name="nav_bar_background">@color/white</item>
         <item name="toolbar_text_color">@color/primaryDarkColor</item>
         <item name="more_bottom_sheet_style">@style/LightMoreBottomSheetStyle</item>
-        <item name="nav_bar_drawable_color">@color/black</item>
+        <item name="more_bottom_sheet_drawable_color">@color/black</item>
     </style>
 
     <style name="LightMoreBottomSheetStyle" parent="LightAppTheme">
