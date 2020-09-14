@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="?attr/actionBarSize"
+    android:theme="?attr/more_bottom_sheet_style"
     android:orientation="vertical">
 
     <TextView
@@ -50,13 +51,13 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/more_logout"
+        android:id="@+id/more_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        android:drawableStart="@drawable/ic_exit_to_app_black_24dp"
+        android:drawableStart="@drawable/ic_baseline_person_24"
         android:drawablePadding="12dp"
         android:padding="8dp"
-        android:text="@string/navigation_item_logout"
+        android:text="@string/navigation_item_login"
         android:textSize="18sp" />
 </LinearLayout>

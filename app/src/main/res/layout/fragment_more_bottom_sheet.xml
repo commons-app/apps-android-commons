@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="?attr/actionBarSize"
+    android:theme="?attr/more_bottom_sheet_style"
     android:orientation="vertical">
 
     <TextView

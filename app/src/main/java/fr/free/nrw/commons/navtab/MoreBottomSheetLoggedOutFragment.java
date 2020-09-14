@@ -52,18 +52,11 @@ public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment 
             .inject(this);
     }
 
-    @OnClick(R.id.more_logout)
+    @OnClick(R.id.more_login)
     public void onLogoutClicked() {
-        new AlertDialog.Builder(getActivity())
-            .setMessage(R.string.logout_verification)
-            .setCancelable(false)
-            .setPositiveButton(R.string.yes, (dialog, which) -> {
-                BaseLogoutListener logoutListener = new BaseLogoutListener();
-                CommonsApplication app = (CommonsApplication) getContext().getApplicationContext();
-                app.clearApplicationData(getContext(), logoutListener);
-            })
-            .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
-            .show();
+        final Intent intent = new Intent(getActivity(), LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        getActivity().startActivity(intent);
     }
 
     @OnClick(R.id.more_feedback)

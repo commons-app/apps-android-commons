@@ -38,6 +38,8 @@
     <attr name="toolbar_text_color" format="reference"/>
     <attr name="navbar_item_text_color" format="reference"/>
     <attr name="nav_bar_background" format="reference"/>
+    <attr name="more_bottom_sheet_style" format="reference"/>
+    <attr name="nav_bar_drawable_color" format="reference"/>
 
     <declare-styleable name="Badge">
         <attr name="boundary" format="color"/>
