@@ -35,6 +35,9 @@
     <attr name="icon" format="reference"/>
     <attr name="aboutIconsColor" format="reference"/>
     <attr name="nav_tab_item_color_state" format="reference" />
+    <attr name="toolbar_text_color" format="reference"/>
+    <attr name="navbar_item_text_color" format="reference"/>
+    <attr name="nav_bar_background" format="reference"/>
 
     <declare-styleable name="Badge">
         <attr name="boundary" format="color"/>

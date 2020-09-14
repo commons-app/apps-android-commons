@@ -32,10 +32,10 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
-            android:background="@android:color/white"
+            android:background="?attr/nav_bar_background"
             android:elevation="6dp"
             app:itemIconTint="?attr/nav_tab_item_color_state"
-            app:itemTextColor="?attr/colorPrimaryDark" />
+            app:itemTextColor="?attr/navbar_item_text_color" />
     </RelativeLayout>
 </LinearLayout>
 

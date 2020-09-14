@@ -41,6 +41,9 @@
         <item name="mediaDetailNominationBackground">@color/deleteRedDark</item>
         <item name="mediaDetailSpacerColor">@color/browser_actions_divider_color</item>
         <item name="nav_tab_item_color_state">@color/color_state_nav_tab_dark</item>
+        <item name="navbar_item_text_color">@color/color_state_nav_tab_dark</item>
+        <item name="nav_bar_background">@color/main_background_dark</item>
+        <item name="toolbar_text_color">@color/white</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -83,6 +86,9 @@
         <item name="mediaDetailNominationBackground">@color/deleteRed</item>
         <item name="mediaDetailSpacerColor">@color/divider_grey</item>
         <item name="nav_tab_item_color_state">@color/color_state_nav_tab_light</item>
+        <item name="navbar_item_text_color">@color/color_state_nav_tab_light</item>
+        <item name="nav_bar_background">@color/white</item>
+        <item name="toolbar_text_color">@color/primaryDarkColor</item>
     </style>
 
     <style name="LightToolbarStyle" parent="LightAppTheme">

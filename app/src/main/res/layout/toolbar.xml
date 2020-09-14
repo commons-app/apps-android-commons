@@ -5,5 +5,5 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:fitsSystemWindows="true"
-    app:titleTextColor="@color/primaryDarkColor"
+    app:titleTextColor="?attr/toolbar_text_color"
     />
