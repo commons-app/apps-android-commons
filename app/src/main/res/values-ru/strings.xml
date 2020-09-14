@@ -35,11 +35,11 @@
     <item quantity="many">%1$d файлов загружается</item>
     <item quantity="other">%1$d файлов загружается</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="few">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
+    <item quantity="many">(%1$d)</item>
+    <item quantity="other">0=@string/contributions_subtitle_zero</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Начинается %1$d загрузка</item>
@@ -101,7 +101,9 @@
   <string name="upload_progress_notification_title_in_progress">%1$s загружается</string>
   <string name="upload_progress_notification_title_finishing">Завершение загрузки %1$s</string>
   <string name="upload_failed_notification_title">Загрузка %1$s не удалась</string>
+  <string name="upload_paused_notification_title">Загрузка %1$s приостановлена</string>
   <string name="upload_failed_notification_subtitle">Нажмите для просмотра</string>
+  <string name="upload_paused_notification_subtitle">Нажмите для просмотра</string>
   <string name="title_activity_contributions">Мои недавние загрузки</string>
   <string name="contribution_state_queued">В очереди</string>
   <string name="contribution_state_failed">Ошибка загрузки.</string>
@@ -137,6 +139,10 @@
   <string name="enable_gps">Включить GPS</string>
   <string name="contributions_subtitle_zero">Загрузок пока нет</string>
   <string name="categories_not_found">Не найдено категорий, соответствующих %1$s</string>
+  <string name="depictions_not_found">Элемент Викиданных, соответствующий %1$s, не найден.</string>
+  <string name="no_child_classes">У %1$s нет дочерних классов</string>
+  <string name="no_parent_classes">У %1$s нет родительских классов</string>
+  <string name="depictions_image_not_found">Изображений с таким описанием не найдено</string>
   <string name="categories_skip_explanation">Добавьте категории, чтобы ваши изображения можно было легко найти на Викискладе.\nНачните вводить название для добавления категорий.</string>
   <string name="categories_activity_title">Категории</string>
   <string name="title_activity_settings">Настройки</string>
@@ -153,6 +159,7 @@
   <string name="menu_feedback">Отправить отзыв (по эл. почте)</string>
   <string name="no_email_client">Почтовый клиент не установлен</string>
   <string name="provider_categories">Недавно использованные категории</string>
+  <string name="provider_depictions">Последние использованные описания</string>
   <string name="waiting_first_sync">Ожидание первой синхронизации…</string>
   <string name="no_uploads_yet">Вы ещё не загрузили ни одного изображения.</string>
   <string name="menu_retry_upload">Повторить</string>
@@ -209,6 +216,7 @@
   <string name="detail_panel_cats_loading">Загрузка…</string>
   <string name="detail_panel_cats_none">Ничего не выбрано</string>
   <string name="detail_caption_empty">Без подписи</string>
+  <string name="detail_depiction_empty">Нет описания</string>
   <string name="detail_description_empty">Нет описания</string>
   <string name="detail_discussion_empty">Обсуждений нет</string>
   <string name="detail_license_empty">Неизвестная лицензия</string>
@@ -222,12 +230,14 @@
   <string name="title_activity_nearby">Места поблизости</string>
   <string name="no_nearby">Места поблизости не найдены</string>
   <string name="warning">Внимание</string>
+  <string name="duplicate_image_found">Найден дубликат изображения</string>
   <string name="upload_image_duplicate">Этот файл уже существует на Викискладе. Вы уверены, что хотите продолжить?</string>
   <string name="upload">Загрузить</string>
   <string name="yes">Да</string>
   <string name="no">Нет</string>
   <string name="media_detail_caption">Подпись</string>
   <string name="media_detail_title">Название</string>
+  <string name="media_detail_depiction">Описания</string>
   <string name="media_detail_description">Описание</string>
   <string name="media_detail_discussion">Обсуждение</string>
   <string name="media_detail_author">Автор</string>
@@ -289,7 +299,7 @@
   <string name="error_while_cache">Ошибка при кэшировании картинок</string>
   <string name="title_info">Уникальное описание, которое будет сохранено как имя файла. Вы можете использовать естественный язык, разделяя слова пробелами. Пожалуйста, не указывайте расширение файла.</string>
   <string name="description_info">Пожалуйста, подробно опишите загружаемый файл: где он был снят? что на нём изображено? каков его контекст? Пожалуйста опишите изображённых персон или объекты. Добавьте информацию, о которой нельзя легко догадаться, например, время суток, когда снимался файл. Если снято что-то необычное, постарайтесь пояснить, что именно в этом необычного.</string>
-  <string name="caption_info" fuzzy="true">Пожалуйста, напишите краткое описание изображения (не более 255 символов).</string>
+  <string name="caption_info">Пожалуйста, напишите краткое описание изображения. Первое описание будет использовано в качестве названия изображения.</string>
   <string name="upload_image_too_dark">Это изображение слишком тёмное. Вы уверены, что хотите его загрузить? Викисклад подходит только для изображений, имеющих энциклопедическую ценность.</string>
   <string name="upload_image_blurry">Это изображение размыто. Вы уверены, что хотите его загрузить? Викисклад подходит только для изображений, имеющих энциклопедическую ценность.</string>
   <string name="upload_problem_exist">Потенциальные проблемы с этим изображением:</string>
@@ -353,6 +363,9 @@
   <string name="retry">Повторить</string>
   <string name="showcase_view_got_it_button">Понятно!</string>
   <string name="showcase_view_whole_nearby_activity">Это места поблизости, статьи о которых нуждаются в иллюстрациях.\n\nПосле нажатия кнопки \"Искать в этой области\" карта фиксируется и происходит поиск вокруг указанного места.</string>
+  <string name="showcase_view_needs_photo">Это место нуждается в фотографии.</string>
+  <string name="showcase_view_has_photo">У этого места уже есть фотография.</string>
+  <string name="showcase_view_no_longer_exists">Это место больше не существует.</string>
   <string name="showcase_view_list_icon">Нажатие этой кнопки сгенерирует список таких мест</string>
   <string name="showcase_view_plus_fab">Вы можете загрузить изображение для любого из этих мест, сделав снимок камерой или выбрав уже существующее изображение из галереи</string>
   <string name="no_images_found">Изображений не найдено!</string>
@@ -369,6 +382,7 @@
   <string name="search_recent_header">Последние поиски:</string>
   <string name="provider_searches">Последние запросы</string>
   <string name="error_loading_categories">При загрузке категорий произошла ошибка.</string>
+  <string name="error_loading_depictions">При загрузке описаний произошла ошибка.</string>
   <string name="error_loading_subcategories">При загрузке подкатегорий произошла ошибка.</string>
   <string name="search_tab_title_media">Мультимедиа</string>
   <string name="search_tab_title_categories">Категории</string>
@@ -410,6 +424,7 @@
   <string name="nominate_delete">Номинировать к удалению</string>
   <string name="delete">Удалить</string>
   <string name="Achievements">Достижения</string>
+  <string name="Profile">Профиль</string>
   <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Получены благодарности</string>
   <string name="statistics_featured">Избранные изображения</string>
@@ -472,6 +487,8 @@
   <string name="desc_language_Pacific">Океания</string>
   <string name="no_categories_selected">Не выбраны категории</string>
   <string name="no_categories_selected_warning_desc">Изображения без категорий используются редко. Вы уверены, что хотите продолжить, не выбрав категории?</string>
+  <string name="no_depictions_selected">Описания не выбраны</string>
+  <string name="no_depictions_selected_warning_desc">Изображения с описаниями будет проще найти и использовать. Вы уверены, что хотите продолжить без выбора описаний?</string>
   <string name="upload_flow_all_images_in_set">(Для всех изображений в наборе)</string>
   <string name="search_this_area">Искать в этой области</string>
   <string name="nearby_card_permission_title">Запрос разрешения</string>
@@ -536,9 +553,9 @@
   <string name="no_image_reverted">Нет откаченых изображений</string>
   <string name="no_image_uploaded">Нет загруженных изображений</string>
   <string name="no_notification">У вас нет непрочитанных уведомлений</string>
-  <string name="no_read_notification" fuzzy="true">Нет архивированных уведомлений</string>
+  <string name="no_read_notification">Нет прочитанных уведомлений</string>
   <string name="share_logs_using">Поделиться лог-файлами</string>
-  <string name="menu_option_read" fuzzy="true">См. архивированные</string>
+  <string name="menu_option_read">Просмотр прочитанного</string>
   <string name="menu_option_unread">См. непрочитанные</string>
   <string name="error_occurred_in_picking_images">Произошла ошибка при загрузке изображений</string>
   <string name="image_chooser_title">Выберите изображения для загрузки</string>
@@ -565,6 +582,7 @@
   <string name="share_via">Поделиться приложением с помощью...</string>
   <string name="image_info">Информация об изображении</string>
   <string name="no_categories_found">Категории не найдены.</string>
+  <string name="no_depiction_found">Описания не найдены</string>
   <string name="upload_cancelled">Загрузка отменена</string>
   <string name="previous_image_title_description_not_found">Отсутствует заголовок или описание предыдущего изображения</string>
   <string name="dialog_box_text_nomination">Почему %1$s должно быть удалено?</string>
@@ -585,6 +603,17 @@
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
   <string name="delete_helper_ask_reason_copyright_other">Другое</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Поскольку</string>
+  <string name="category_edit_helper_make_edit_toast">Обновление категорий.</string>
+  <string name="category_edit_helper_show_edit_title">Обновление категории</string>
+  <string name="category_edit_helper_show_edit_title_success">Успешно</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">Категория %1$s добавлена.</item>
+    <item quantity="few">Категории %1$s добавлены.</item>
+    <item quantity="many">Категории %1$s добавлены.</item>
+    <item quantity="other"/>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">Не удалось добавить категории.</string>
+  <string name="category_edit_button_text">Обновить категории</string>
   <string name="share_image_via">Поделиться изображением с помощью</string>
   <string name="no_achievements_yet">Пока что от вас нет вклада</string>
   <string name="account_created">Учётная запись создана!</string>
@@ -610,7 +639,7 @@
   <string name="wallpaper_set_unsuccessfully">Что-то пошло не так. Не удалось установить фоновую заставку</string>
   <string name="setting_wallpaper_dialog_title">Сделать фоновой заставкой</string>
   <string name="setting_wallpaper_dialog_message">Идёт установка фоновой заставки...</string>
-  <string name="theme_default_name" fuzzy="true">По умолчанию</string>
+  <string name="theme_default_name">Настройки системы</string>
   <string name="theme_dark_name">Тёмная</string>
   <string name="theme_light_name">Светлая</string>
   <string name="cannot_open_location_settings">Не удалось открыть настройки местоположения. Пожалуйста, включите местоположение вручную</string>
@@ -620,13 +649,44 @@
   <string name="use_location_from_similar_image">Вы снимали эти две фотографии в одном месте? Хотите использовать широту/долготу изображения справа?</string>
   <string name="load_more">Загрузить ещё</string>
   <string name="nearby_no_results">Мест не найдено, попытайтесь изменить критерии поиска.</string>
+  <string name="todo_improve">Предлагаемые улучшения:</string>
+  <string name="missing_category">— Добавьте категории этому изображению, чтобы повысить удобство использования.</string>
+  <string name="missing_article">— Добавьте это изображение в связанные статьи Википедии, которым не хватает иллюстраций.</string>
+  <string name="edit_category">Изменить категории</string>
   <string name="add_picture_to_wikipedia_article_title">Добавить изображение в Википедию</string>
+  <string name="add_picture_to_wikipedia_article_desc">Вы хотите добавить эту картинку в %1$s раздел Википедии?</string>
   <string name="add_picture_to_wikipedia_instructions_title">Инструкции</string>
   <string name="add_picture_to_wikipedia_instructions_desc">Соблюдайте правила редактирования!</string>
   <string name="confirm">Подтвердить</string>
   <string name="instructions_title">Инструкции</string>
+  <string name="wikipedia_instructions_step_1">1. Используйте следующий вики-код:</string>
+  <string name="wikipedia_instructions_step_2">2. Нажатие на кнопку «Подтвердить» откроет статью Википедии</string>
+  <string name="wikipedia_instructions_step_3">3. Найдите подходящий раздел статьи для вашего изображения</string>
+  <string name="wikipedia_instructions_step_4">4. Нажмите на иконку «Редактировать» (выглядит как карандаш) этого раздела</string>
+  <string name="wikipedia_instructions_step_5">5. Скопируйте вики-код в подходящее место</string>
+  <string name="wikipedia_instructions_step_6">6. Отредактируйте вики-код для исправления позиционирования, если это необходимо. Более подробную информацию можно получить &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;здесь&lt;/a&gt;</string>
+  <string name="wikipedia_instructions_step_7">7. Опубликуйте статью</string>
   <string name="copy_wikicode_to_clipboard">Скопировать вики-код в буфер обмена</string>
   <string name="pause">пауза</string>
   <string name="resume">продолжить</string>
   <string name="paused">Приостановлено</string>
+  <string name="achievements_tab_title">Достижения</string>
+  <string name="leaderboard_tab_title">Таблица лидеров</string>
+  <string name="rank_prefix">Ранг:</string>
+  <string name="count_prefix">Количество:</string>
+  <string name="leaderboard_column_rank">Ранг</string>
+  <string name="leaderboard_column_user">Участник</string>
+  <string name="leaderboard_column_count">Количество</string>
+  <string name="setting_avatar_dialog_title">Установить в качестве аватарки в таблице лидеров</string>
+  <string name="setting_avatar_dialog_message">Установка аватарки, пожалуйста, подождите</string>
+  <string name="avatar_set_successfully">Аватар установлен</string>
+  <string name="avatar_set_unsuccessfully">При установке аватарки произошла ошибка, пожалуйста, попробуйте снова</string>
+  <string name="menu_set_avatar">Установить как аватар</string>
+  <string name="leaderboard_yearly">За год</string>
+  <string name="leaderboard_weekly">За неделю</string>
+  <string name="leaderboard_all_time">За всё время</string>
+  <string name="leaderboard_upload">Загрузить</string>
+  <string name="leaderboard_nearby">Поблизости</string>
+  <string name="leaderboard_used">Использовано</string>
+  <string name="leaderboard_my_rank_button_text">Мой ранг</string>
 </resources>
