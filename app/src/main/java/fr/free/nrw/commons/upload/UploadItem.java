@@ -22,6 +22,8 @@ public class UploadItem {
   private final long createdTimestamp;
   private final String createdTimestampSource;
   private final BehaviorSubject<Integer> imageQuality;
+  private boolean hasInvalidLocation;
+
 
   @SuppressLint("CheckResult")
   UploadItem(final Uri mediaUri,
@@ -103,4 +105,11 @@ public class UploadItem {
     this.gpsCoords = gpsCoords;
   }
 
+  public void setHasInvalidLocation(boolean hasInvalidLocation) {
+    this.hasInvalidLocation=hasInvalidLocation;
+  }
+
+  public boolean hasInvalidLocation() {
+    return hasInvalidLocation;
+  }
 }

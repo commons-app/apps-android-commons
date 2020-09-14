@@ -132,7 +132,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         getSpanCount(getResources().getConfiguration().orientation));
     rvContributionsList.setLayoutManager(layoutManager);
     contributionsListPresenter.setup();
-    contributionsListPresenter.contributionList.observe(this, adapter::submitList);
+    contributionsListPresenter.contributionList.observe(this.getViewLifecycleOwner(), adapter::submitList);
     rvContributionsList.setAdapter(adapter);
   }
 

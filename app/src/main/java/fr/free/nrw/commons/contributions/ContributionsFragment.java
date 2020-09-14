@@ -22,6 +22,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
+
+import fr.free.nrw.commons.MediaDataExtractor;
+import fr.free.nrw.commons.auth.SessionManager;
+import io.reactivex.disposables.Disposable;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
@@ -83,6 +92,9 @@ public class ContributionsFragment
 
     @Inject ContributionsPresenter contributionsPresenter;
 
+    @Inject
+    SessionManager sessionManager;
+
     private LatLng curLatLng;
 
     private boolean firstLocationUpdate = true;
@@ -143,7 +155,14 @@ public class ContributionsFragment
 
         initFragments();
 
-        if (!ConfigUtils.isBetaFlavour()) {
+        if(shouldShowMediaDetailsFragment){
+            showMediaDetailPagerFragment();
+        }else{
+            showContributionsListFragment();
+        }
+
+        if (!ConfigUtils.isBetaFlavour() && sessionManager.isUserLoggedIn()
+            && sessionManager.getCurrentAccount() != null) {
             setUploadCount();
         }
 

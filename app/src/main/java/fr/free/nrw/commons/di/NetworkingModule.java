@@ -76,7 +76,7 @@ public class NetworkingModule {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> {
             Timber.tag("OkHttp").v(message);
         });
-        httpLoggingInterceptor.level(BuildConfig.DEBUG ? Level.BODY: Level.BASIC);
+        httpLoggingInterceptor.setLevel(BuildConfig.DEBUG ? Level.BODY: Level.BASIC);
         return httpLoggingInterceptor;
     }
 

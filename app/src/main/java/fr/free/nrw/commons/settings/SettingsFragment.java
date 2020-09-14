@@ -14,6 +14,8 @@ import com.google.android.material.snackbar.Snackbar;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.maps.TelemetryDefinition;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
@@ -84,6 +86,24 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             findPreference("displayNearbyCardView").setEnabled(false);
             findPreference("displayLocationPermissionForCardView").setEnabled(false);
             findPreference("displayCampaignsCardView").setEnabled(false);
+        }
+
+        findPreference("telemetryOptOut").setOnPreferenceChangeListener(
+            (preference, newValue) -> {
+                telemetryOptInOut((boolean)newValue);
+                defaultKvStore.putBoolean(Prefs.TELEMETRY_PREFERENCE,(boolean)newValue);
+                return false;
+            });
+    }
+
+    /**
+     * Opt in or out of MapBox telemetry
+     * @param shouldOptIn
+     */
+    private void telemetryOptInOut(boolean shouldOptIn){
+        TelemetryDefinition telemetry = Mapbox.getTelemetry();
+        if (telemetry != null) {
+            telemetry.setUserTelemetryRequestState(shouldOptIn);
         }
     }
 
