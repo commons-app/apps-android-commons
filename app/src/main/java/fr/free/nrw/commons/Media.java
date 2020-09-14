@@ -9,8 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.gallery.ExtMetadata;
@@ -29,7 +27,6 @@ import java.util.Map;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
-import timber.log.Timber;
 
 @Entity
 public class Media implements Parcelable {
@@ -236,11 +233,6 @@ public class Media implements Parcelable {
      * @return file name as a string
      */
     public String getFilename() {
-        try {
-            return URLEncoder.encode(filename,"utf-8");
-        } catch (UnsupportedEncodingException e) {
-            Timber.e(e);
-        }
         return filename;
     }
 
