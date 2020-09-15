@@ -15,6 +15,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
@@ -65,31 +66,39 @@ public class UploadClient {
   Observable<StashUploadResult> uploadFileToStash(
       final Context context, final String filename, final Contribution contribution,
       final NotificationUpdateProgressListener notificationUpdater) throws IOException {
-    if (contribution.getChunkInfo() != null && contribution.getChunkInfo().isLastChunkUploaded()) {
+    if (contribution.getChunkInfo() != null
+        && contribution.getChunkInfo().getTotalChunks() == contribution.getChunkInfo()
+        .getIndexOfNextChunkToUpload()) {
       return Observable.just(new StashUploadResult(StashUploadState.SUCCESS,
           contribution.getChunkInfo().getUploadResult().getFilekey()));
     }
     pauseUploads = false;
     File file = new File(contribution.getLocalUri().getPath());
-    final Observable<File> fileChunks = fileUtilsWrapper.getFileChunks(context, file, CHUNK_SIZE);
+    final List<File> fileChunks = fileUtilsWrapper.getFileChunks(context, file, CHUNK_SIZE);
+
+    int totalChunks = fileChunks.size();
+
     final MediaType mediaType = MediaType
         .parse(FileUtils.getMimeType(context, Uri.parse(file.getPath())));
 
-    final AtomicInteger index = new AtomicInteger();
+    final AtomicInteger indexOfNextChunkToBeUploaded = new AtomicInteger();
     final AtomicReference<ChunkInfo> chunkInfo = new AtomicReference<>();
     Timber.d("Chunk info");
     if (contribution.getChunkInfo() != null && isStashValid(contribution)) {
       chunkInfo.set(contribution.getChunkInfo());
+
+      for (int i = 0; i < contribution.getChunkInfo().getIndexOfNextChunkToUpload(); i++) {
+        Timber.d("Chunk: Removing chunks %d", i);
+        fileChunks.remove(i);
+      }
+
+      indexOfNextChunkToBeUploaded.set(contribution.getChunkInfo().getIndexOfNextChunkToUpload());
     }
 
     final AtomicBoolean failures = new AtomicBoolean();
 
-    compositeDisposable.add(fileChunks.forEach(chunkFile -> {
+    compositeDisposable.add(Observable.fromIterable(fileChunks).forEach(chunkFile -> {
       if (pauseUploads || failures.get()) {
-        return;
-      }
-      if (chunkInfo.get() != null && index.get() < chunkInfo.get().getLastChunkIndex()) {
-        index.getAndIncrement();
         return;
       }
       final int offset =
@@ -108,7 +117,10 @@ public class UploadClient {
           offset,
           filekey,
           countingRequestBody).subscribe(uploadResult -> {
-        chunkInfo.set(new ChunkInfo(uploadResult, index.incrementAndGet(), false));
+        Timber.d("Chunk: Uploaded chunk %d", indexOfNextChunkToBeUploaded.get());
+        Timber.d("Chunk: Queued chunk %d", indexOfNextChunkToBeUploaded.incrementAndGet());
+        chunkInfo.set(
+            new ChunkInfo(uploadResult, indexOfNextChunkToBeUploaded.get(), totalChunks));
         notificationUpdater.onChunkUploaded(contribution, chunkInfo.get());
       }, throwable -> {
         failures.set(true);
@@ -116,13 +128,12 @@ public class UploadClient {
       }));
     }));
 
-    chunkInfo.get().setLastChunkUploaded(true);
-    notificationUpdater.onChunkUploaded(contribution, chunkInfo.get());
     if (pauseUploads) {
       return Observable.just(new StashUploadResult(StashUploadState.PAUSED, null));
     } else if (failures.get()) {
       return Observable.just(new StashUploadResult(StashUploadState.FAILED, null));
     } else if (chunkInfo.get() != null) {
+      Timber.d("Going into stash upload success %s", chunkInfo.get());
       return Observable.just(new StashUploadResult(StashUploadState.SUCCESS,
           chunkInfo.get().getUploadResult().getFilekey()));
     } else {
