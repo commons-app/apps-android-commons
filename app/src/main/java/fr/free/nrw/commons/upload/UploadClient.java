@@ -3,6 +3,8 @@ package fr.free.nrw.commons.upload;
 import android.content.Context;
 import android.net.Uri;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import org.wikipedia.csrf.CsrfTokenClient;
 
 import java.io.File;
@@ -41,7 +43,15 @@ public class UploadClient {
                 (bytesWritten, contentLength) -> notificationUpdater
                         .onProgress(bytesWritten, contentLength));
 
-        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", filename, countingRequestBody);
+        MultipartBody.Part filePart;
+        try {
+            filePart = MultipartBody.Part
+                .createFormData("file", URLEncoder.encode(filename, "utf-8"), countingRequestBody);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            filePart = MultipartBody.Part
+                .createFormData("file", filename, countingRequestBody);
+        }
         RequestBody fileNameRequestBody = RequestBody.create(okhttp3.MultipartBody.FORM, filename);
         RequestBody tokenRequestBody;
         try {
