@@ -54,9 +54,9 @@ public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment 
 
     @OnClick(R.id.more_login)
     public void onLogoutClicked() {
-        final Intent intent = new Intent(getActivity(), LoginActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        getActivity().startActivity(intent);
+        Intent intent = new Intent(getContext(), LoginActivity.class);
+        getActivity().finish();  //Kill the activity from which you will go to next activity
+        startActivity(intent);
     }
 
     @OnClick(R.id.more_feedback)
