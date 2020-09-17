@@ -2,6 +2,7 @@
 <!-- Authors:
 * Adithyak1997
 * Akhilan
+* Kiran Gopi
 * Praveenp
 * Santhosh.thottingal
 -->
@@ -24,9 +25,12 @@
     <item quantity="other">%1$d അപ്‌ലോഡുകൾ</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">ചിത്രം %1$s പ്രകാരം അനുമതി നൽകപ്പെടുന്നതാണ്</string>
+  <string name="title_activity_explore">പര്യവേക്ഷണം</string>
+  <string name="navigation_item_explore">പര്യവേക്ഷണം</string>
   <string name="preference_category_appearance">ദൃശ്യരൂപം</string>
   <string name="preference_category_general">സാർവത്രികം</string>
   <string name="preference_category_feedback">പ്രതികരണം</string>
+  <string name="preference_category_privacy">സ്വകാര്യത</string>
   <string name="preference_category_location">സ്ഥലം</string>
   <string name="app_name">കോമൺസ്</string>
   <string name="menu_settings">സജ്ജീകരണങ്ങൾ</string>
@@ -50,6 +54,7 @@
   <string name="upload_progress_notification_title_finishing">%1$s അപ്‌ലോഡിങ് പൂർത്തിയാക്കുന്നു</string>
   <string name="upload_failed_notification_title">%1$s അപ്‌ലോഡിങ് പരാജയപ്പെട്ടു</string>
   <string name="upload_failed_notification_subtitle">കാണാനായി ടാപ് ചെയ്യുക</string>
+  <string name="upload_paused_notification_subtitle">കാണാനായി ടാപ് ചെയ്യുക</string>
   <string name="title_activity_contributions">എന്റെ സമീപകാല അപ്‌ലോഡുകൾ</string>
   <string name="contribution_state_queued">നിരയായി വെച്ചു</string>
   <string name="contribution_state_failed">പരാജയപ്പെട്ടു</string>
@@ -61,7 +66,7 @@
   <string name="provider_contributions">എന്റെ അപ്‌ലോഡുകൾ</string>
   <string name="menu_share">പങ്ക് വെയ്ക്കുക</string>
   <string name="menu_open_in_browser">ബ്രൗസറിൽ കാണുക</string>
-  <string name="share_title_hint" fuzzy="true">തലക്കെട്ട്</string>
+  <string name="share_title_hint">അടിക്കുറിപ്പ് (നിർബന്ധം)</string>
   <string name="share_description_hint">വിവരണം</string>
   <string name="login_failed_network">പ്രവേശിക്കാനായില്ല - നെറ്റ്‌വർക്ക് പരാജയപ്പെട്ടു</string>
   <string name="login_failed_throttled">നിരവധി വിജയകരമല്ലാത്ത ശ്രമങ്ങൾ നടന്നിരിക്കുന്നു. വീണ്ടും ശ്രമിക്കുന്നതിനു മുമ്പ് ഏതാനം മിനിറ്റുകൾ വിശ്രമിക്കുക.</string>
@@ -80,7 +85,7 @@
   <string name="enable_gps">ജി.പി.എസ്. സജ്ജമാക്കുക</string>
   <string name="contributions_subtitle_zero">ഇതുവരെ അപ്‌ലോഡുകൾ ഒന്നുമില്ല</string>
   <string name="categories_not_found">%1$s എന്നതുമായി പൊരുത്തമുള്ള ഒരു വർഗ്ഗവും കണ്ടെത്താനായില്ല</string>
-  <string name="categories_skip_explanation" fuzzy="true">താങ്കളുടെ ചിത്രങ്ങൾ വിക്കിമീഡിയ കോമൺസിൽ കൂടുതൽ എളുപ്പത്തിൽ കണ്ടെത്തപ്പെടാനായി വർഗ്ഗങ്ങൾ ചേർക്കുക.\n\nവർഗ്ഗങ്ങൾ ചേർക്കാനായി ടൈപ്പ് ചെയ്ത് തുടങ്ങുക.\nഈ ഘട്ടം ഒഴിവാക്കാൻ ടാപ് ചെയ്യുക (അല്ലെങ്കിൽ പിന്നോട്ട് പോവുക).</string>
+  <string name="categories_skip_explanation">താങ്കളുടെ ചിത്രങ്ങൾ വിക്കിമീഡിയ കോമൺസിൽ കൂടുതൽ എളുപ്പത്തിൽ കണ്ടെത്തപ്പെടാനായി വർഗ്ഗങ്ങൾ ചേർക്കുക.\n\nവർഗ്ഗങ്ങൾ ചേർക്കാനായി ടൈപ്പ് ചെയ്ത് തുടങ്ങുക.\nഈ ഘട്ടം ഒഴിവാക്കാൻ ടാപ് ചെയ്യുക (അല്ലെങ്കിൽ പിന്നോട്ട് പോവുക).</string>
   <string name="categories_activity_title">വർഗ്ഗങ്ങൾ</string>
   <string name="title_activity_settings">സജ്ജീകരണങ്ങൾ</string>
   <string name="title_activity_signup">അംഗത്വമെടുക്കുക</string>
@@ -89,7 +94,8 @@
   <string name="menu_about">വിവരണം</string>
   <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;അപാച്ചേ അനുമതിപത്രം പതിപ്പ് 2&lt;/a&gt; പ്രകാരം പുറത്തിറക്കപ്പെട്ട ഓപ്പൺ സോഴ്സ് സോഫ്റ്റ്‌വേർ</string>
   <string name="about_improve" fuzzy="true">സ്രോതസ്സ് രൂപം &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;ജിറ്റ്ഹബിൽ&lt;/a&gt; ലഭ്യമാണ്.\nപ്രശ്നങ്ങൾ &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;ബഗ്സില്ലയിൽ&lt;/a&gt; അറിയിക്കുക.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;സ്വകാര്യതാനയം&lt;/a&gt;</string>
+  <string name="about_privacy_policy">സ്വകാര്യതാനയം</string>
+  <string name="about_credits">കടപ്പാടുകൾ</string>
   <string name="title_activity_about">വിവരണം</string>
   <string name="menu_feedback">പ്രതികരണം അറിയിക്കുക (ഇമെയിൽ വഴി)</string>
   <string name="provider_categories">സമീപകാലത്ത് ഉപയോഗിച്ച വർഗ്ഗങ്ങൾ</string>
@@ -125,6 +131,7 @@
   <string name="welcome_copyright_subtext">ഇന്റർനെറ്റിൽ നിന്നും താങ്കൾക്ക് തേടിയെടുക്കാനാവുന്നതോ, പോസ്റ്ററുകൾ, പുസ്തകങ്ങളുടെ പുറംചട്ടകൾ എന്നിവിടങ്ങളിൽ നിന്നും മറ്റും ലഭിക്കുന്നതോ ആയ പകർപ്പവകാശസംരക്ഷിതങ്ങളായവ ഒഴിവാക്കുക.</string>
   <string name="welcome_final_text">മനസ്സിലായോ?</string>
   <string name="welcome_final_button_text">ശരി!</string>
+  <string name="welcome_help_button_text">കൂടുതൽ വിവരങ്ങൾ</string>
   <string name="detail_panel_cats_label">വർഗ്ഗങ്ങൾ</string>
   <string name="detail_panel_cats_loading">ശേഖരിക്കുന്നു…</string>
   <string name="detail_panel_cats_none">ഒന്നും തിരഞ്ഞെടുത്തിട്ടില്ല</string>
@@ -135,6 +142,7 @@
   <string name="ok">ശരി</string>
   <string name="title_activity_nearby">സമീപ സ്ഥലങ്ങൾ</string>
   <string name="warning">മുന്നറിയിപ്പ്</string>
+  <string name="upload">അപ്‌ലോഡ്</string>
   <string name="yes">അതെ</string>
   <string name="no">അല്ല</string>
   <string name="media_detail_title">ശീർഷകം</string>
@@ -175,19 +183,45 @@
   <string name="give_permission">അനുമതി നൽകുക</string>
   <string name="login_to_your_account">താങ്കളുടെ അംഗത്വത്തിൽ പ്രവേശിക്കുക</string>
   <string name="view_browser">ബ്രൗസറിൽ കാണുക</string>
-  <string name="nearby_wikidata" fuzzy="true">വിക്കിഡേറ്റാ</string>
-  <string name="nearby_wikipedia" fuzzy="true">വിക്കിപീഡിയ</string>
-  <string name="nearby_commons" fuzzy="true">കോമൺസ്</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;പതിവുചോദ്യങ്ങൾ&lt;/u&gt;</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;പരിഭാഷപ്പെടുത്തുക&lt;/u&gt;</string>
+  <string name="navigation_item_login">പ്രവേശിക്കുക</string>
+  <string name="nearby_wikidata">വിക്കിഡേറ്റാ</string>
+  <string name="nearby_wikipedia">വിക്കിപീഡിയ</string>
+  <string name="nearby_commons">കോമൺസ്</string>
+  <string name="about_faq">പതിവുചോദ്യങ്ങൾ</string>
+  <string name="about_translate">പരിഭാഷപ്പെടുത്തുക</string>
   <string name="about_translate_title">ഭാഷകൾ</string>
   <string name="about_translate_proceed">തുടരുക</string>
   <string name="about_translate_cancel">റദ്ദാക്കുക</string>
   <string name="retry">വീണ്ടും ശ്രമിക്കുക</string>
+  <string name="search_tab_title_categories">വർഗ്ഗങ്ങൾ</string>
+  <string name="nominate_delete">മായ്ക്കാനായി നിർദ്ദേശിക്കുക</string>
+  <string name="delete">മായ്ക്കുക</string>
+  <string name="statistics">സ്ഥിതിവിവരക്കണക്കുകൾ</string>
+  <string name="list_sheet">പട്ടിക</string>
+  <string name="next">അടുത്തത്</string>
+  <string name="desc_language_America">അമേരിക്ക</string>
+  <string name="desc_language_Europe">യൂറോപ്പ്</string>
+  <string name="desc_language_Middle_East">മദ്ധ്യപൂർവേഷ്യ</string>
+  <string name="desc_language_Africa">ആഫ്രിക്ക</string>
+  <string name="desc_language_Asia">ഏഷ്യ</string>
+  <string name="desc_language_Pacific">പസഫിക്</string>
+  <string name="no_categories_selected">വർഗ്ഗങ്ങൾ ഒന്നും തന്നെ തിരഞ്ഞെടുത്തിട്ടില്ല</string>
   <string name="ends_on">അവസാനിക്കുന്നത്:</string>
+  <string name="exif_tag_name_author">സ്രഷ്ടാവ്</string>
+  <string name="exif_tag_name_software">സോഫ്റ്റ്‌വെയർ</string>
+  <string name="account_created">അംഗത്വം സൃഷ്ടിച്ചിരിക്കുന്നു!</string>
   <string name="place_state">സ്ഥലത്തിന്റെ സ്ഥിതി:</string>
   <string name="place_state_exists">നിലവിലുണ്ട്</string>
   <string name="place_state_needs_photo">ചിത്രം വേണം</string>
   <string name="place_type">സ്ഥലത്തിന്റെ തരം:</string>
   <string name="nearby_search_hint">പാലം, മ്യൂസിയം, ഹോട്ടൽ തുടങ്ങിയവ</string>
+  <string name="title_app_shortcut_setting">സജ്ജീകരണങ്ങൾ</string>
+  <string name="pause">താത്കാലികമായി നിർത്തുക</string>
+  <string name="resume">തുടരുക</string>
+  <string name="paused">തത്കാലം നിർത്തിവെച്ചിരിക്കുന്നു</string>
+  <string name="rank_prefix">സ്ഥാനം:</string>
+  <string name="count_prefix">എണ്ണം</string>
+  <string name="leaderboard_column_rank">സ്ഥാനം</string>
+  <string name="leaderboard_column_user">ഉപയോക്താവ്</string>
+  <string name="leaderboard_column_count">എണ്ണം</string>
 </resources>

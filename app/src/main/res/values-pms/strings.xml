@@ -649,4 +649,7 @@
   <string name="leaderboard_nearby">Davzin</string>
   <string name="leaderboard_used">Dovrà</string>
   <string name="leaderboard_my_rank_button_text">Mia classìfica</string>
+  <string name="mapbox_telemetry">Disativassion ëd la telemetrìa</string>
+  <string name="telemetry_opt_out_summary">Mandé na locassion anonimisà e ij dàit d\'utilisassion a Mapbox cand as deuvra la fonsionalità Nearby</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Improve this map&lt;/a&gt;</string>
 </resources>

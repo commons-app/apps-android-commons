@@ -672,4 +672,6 @@
   <string name="leaderboard_weekly">Tygodniowo</string>
   <string name="leaderboard_all_time">Całość</string>
   <string name="leaderboard_nearby">W pobliżu</string>
+  <string name="mapbox_telemetry">Wypisz się z telemetrii</string>
+  <string name="telemetry_opt_out_summary">Wysyłaj anonimowe dane o lokalizacji i wykorzystywaniu danych do Mapboxa, gdy używasz funkcji „W pobliżu”</string>
 </resources>

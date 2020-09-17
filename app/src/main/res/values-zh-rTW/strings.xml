@@ -662,4 +662,7 @@
   <string name="leaderboard_nearby">附近</string>
   <string name="leaderboard_used">已使用</string>
   <string name="leaderboard_my_rank_button_text">我的排名</string>
+  <string name="mapbox_telemetry">遙測退出</string>
+  <string name="telemetry_opt_out_summary">當使用附近功能時，將匿名位置與使用情況資料發送到 Mapbox</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;改善此地圖&lt;/a&gt;</string>
 </resources>
