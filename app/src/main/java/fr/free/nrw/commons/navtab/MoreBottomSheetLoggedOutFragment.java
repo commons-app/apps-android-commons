@@ -22,16 +22,21 @@ import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
 
 public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment {
 
     @Inject
     CommonsLogSender commonsLogSender;
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore applicationKvStore;
 
     @Nullable
     @Override
@@ -54,6 +59,7 @@ public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment 
 
     @OnClick(R.id.more_login)
     public void onLogoutClicked() {
+        applicationKvStore.putBoolean("login_skipped", false);
         Intent intent = new Intent(getContext(), LoginActivity.class);
         getActivity().finish();  //Kill the activity from which you will go to next activity
         startActivity(intent);

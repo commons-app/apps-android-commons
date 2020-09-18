@@ -141,10 +141,6 @@
             android:label="@string/Achievements" />
 
         <activity
-            android:name=".bookmarks.BookmarksActivity"
-            android:label="@string/title_activity_bookmarks" />
-
-        <activity
             android:name=".review.ReviewActivity"
             android:label="@string/title_activity_review" />
 

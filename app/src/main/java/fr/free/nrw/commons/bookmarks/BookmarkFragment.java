@@ -15,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.ExploreFragment;
 import javax.inject.Inject;
@@ -79,7 +80,8 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment
    * @param context A Context of the application package implementing this class.
    */
   public static void startYourself(Context context) {
-    Intent intent = new Intent(context, BookmarksActivity.class);
+    // Todo, make display bookmark fragment
+    Intent intent = new Intent(context, MainActivity.class);
     intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
     context.startActivity(intent);
   }

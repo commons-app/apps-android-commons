@@ -40,7 +40,6 @@ import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.LogoutClient;
-import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.explore.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -233,7 +232,6 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 return true;
             case R.id.action_bookmarks:
                 drawerLayout.closeDrawer(navigationView);
-                BookmarksActivity.startYourself(this);
                 return true;
 
             case R.id.action_review:
