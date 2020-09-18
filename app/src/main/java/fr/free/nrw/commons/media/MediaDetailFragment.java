@@ -228,9 +228,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (getParentFragment() != null && getParentFragment().getParentFragment() != null) {
             //Added a check because, not necessarily, the parent fragment will have a parent fragment, say
             // in the case when MediaDetailPagerFragment is directly started by the CategoryImagesActivity
-            ((ContributionsFragment) (getParentFragment()
+            if (getParentFragment() instanceof ContributionsFragment) {
+                ((ContributionsFragment) (getParentFragment()
                     .getParentFragment())).nearbyNotificationCardView
                     .setVisibility(View.GONE);
+            }
         }
         media = detailProvider.getMediaAtPosition(index);
         scrollView.getViewTreeObserver().addOnGlobalLayoutListener(

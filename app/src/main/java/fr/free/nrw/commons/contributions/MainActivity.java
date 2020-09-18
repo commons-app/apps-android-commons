@@ -211,7 +211,7 @@ public class MainActivity  extends BaseActivity
 
     @Override
     public void onBackPressed() {
-        if (contributionsFragment != null && isContributionsFragmentVisible) {
+        if (contributionsFragment != null && activeFragment == ActiveFragment.CONTRIBUTIONS) {
             // Meas that contribution fragment is visible (not nearby fragment)
             if (contributionsFragment.getChildFragmentManager().findFragmentByTag(ContributionsFragment.MEDIA_DETAIL_PAGER_FRAGMENT_TAG) != null) {
                 // Means that media details fragment is visible to uer instead of contributions list fragment (As chils fragment)
@@ -230,11 +230,12 @@ public class MainActivity  extends BaseActivity
             } else {
                 finish();
             }
-        } else if (nearbyParentFragment != null && !isContributionsFragmentVisible) {
-            // Means that nearby fragment is visible (not contributions fragment)
-            if (null != nearbyParentFragment) {
+        } else if (nearbyParentFragment != null && activeFragment == ActiveFragment.NEARBY) {
+            // Means that nearby fragment is visible
                 nearbyParentFragment.backButtonClicked();
-            }
+        } else if (exploreFragment != null && activeFragment == ActiveFragment.EXPLORE) {
+            // Means that explore fragment is visible
+                exploreFragment.onBackPressed();
         } else {
             super.onBackPressed();
         }

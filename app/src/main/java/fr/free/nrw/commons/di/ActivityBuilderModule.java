@@ -12,7 +12,6 @@ import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.explore.SearchActivity;
-import fr.free.nrw.commons.explore.ExploreActivity;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
@@ -62,9 +61,6 @@ public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract WikidataItemDetailsActivity bindDepictionDetailsActivity();
-
-    @ContributesAndroidInjector
-    abstract ExploreActivity bindExploreActivity();
 
     @ContributesAndroidInjector
     abstract AchievementsActivity bindAchievementsActivity();

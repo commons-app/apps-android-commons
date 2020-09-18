@@ -21,6 +21,7 @@ import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
@@ -47,13 +48,15 @@ public class ExploreFragment extends CommonsDaggerSupportFragment
     private CategoriesMediaFragment mobileImagesListFragment;
     private CategoriesMediaFragment featuredImagesListFragment;
 
+    FragmentManager childFragmentManager;
+
     /**
      * Consumers should be simply using this method to use this activity.
      *
      * @param context A Context of the application package implementing this class.
      */
     public static void startYourself(Context context) {
-        Intent intent = new Intent(context, ExploreActivity.class);
+        Intent intent = new Intent(context, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);
     }
@@ -176,22 +179,37 @@ public class ExploreFragment extends CommonsDaggerSupportFragment
     super.onBackPressed();
   }*/
 
+    public void onBackPressed() {
+        if (mediaContainer.getVisibility() == View.VISIBLE) {
+            supportFragmentManager
+                .beginTransaction()
+                .show(mobileImagesListFragment)
+                .show(featuredImagesListFragment)
+                .remove(mediaDetails)
+                .commit();
+            tabLayout.setVisibility(View.VISIBLE);
+            viewPager.setVisibility(View.VISIBLE);
+            mediaContainer.setVisibility(View.GONE);
+        }
+        //super.onBackPressed();
+    }
+
     /**
      * This method is called onClick of media inside category featured images or mobile uploads.
      */
     @Override
     public void onMediaClicked(int position) {
         mediaContainer.setVisibility(View.VISIBLE);
+        tabLayout.setVisibility(View.GONE);
         if (mediaDetails == null || !mediaDetails.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
             mediaDetails = new MediaDetailPagerFragment(false, true);
-            FragmentManager supportFragmentManager = getChildFragmentManager();
             supportFragmentManager
                 .beginTransaction()
-                .hide(supportFragmentManager.getFragments()
-                    .get(supportFragmentManager.getBackStackEntryCount()))
+                .hide(featuredImagesListFragment)
+                .hide(mobileImagesListFragment)
                 .add(R.id.mediaContainer, mediaDetails)
-                .addToBackStack(null)
+                .addToBackStack("MediaDetails")
                 .commit();
             // Reason for using hide, add instead of replace is to maintain scroll position after
             // coming back to the explore activity. See https://github.com/commons-app/apps-android-commons/issues/1631
