@@ -67,7 +67,6 @@
         android:layout_margin="12dp"
         android:drawableStart="@drawable/ic_info_outline_24dp"
         android:drawablePadding="12dp"
-        android:drawableTint="@color/black"
         android:padding="8dp"
         android:text="@string/navigation_item_about"
         android:textSize="18sp" />
