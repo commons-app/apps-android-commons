@@ -190,6 +190,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment
             tabLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.VISIBLE);
             mediaContainer.setVisibility(View.GONE);
+            ((MainActivity)getActivity()).showTabs();
         }
         //super.onBackPressed();
     }

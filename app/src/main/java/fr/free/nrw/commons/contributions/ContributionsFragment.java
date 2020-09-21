@@ -222,16 +222,13 @@ public class ContributionsFragment
         // hide tabs on media detail view is visible
         // ((MainActivity) getActivity()).hideTabs();
         // hide nearby card view on media detail is visible
-        nearbyNotificationCardView.setVisibility(View.GONE);
-
+        setupViewForMediaDetails();
         showFragment(mediaDetailPagerFragment, MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
-
     }
 
     private void setupViewForMediaDetails() {
         campaignView.setVisibility(View.GONE);
         nearbyNotificationCardView.setVisibility(View.GONE);
-        // ((MainActivity)getActivity()).hideTabs();
     }
 
     @Override

@@ -29,6 +29,7 @@ import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment;
 import fr.free.nrw.commons.navtab.NavTab;
 import fr.free.nrw.commons.navtab.NavTabLayout;
 import fr.free.nrw.commons.navtab.NavTabLoggedOut;
+import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
@@ -185,6 +186,14 @@ public class MainActivity  extends BaseActivity
         return false;
     }
 
+    public void hideTabs() {
+        tabLayout.setVisibility(View.GONE);
+    }
+
+    public void showTabs() {
+        tabLayout.setVisibility(View.VISIBLE);
+    }
+
     /**
      * Adds number of uploads next to tab text "Contributions" then it will look like
      * "Contributions (NUMBER)"
@@ -226,24 +235,25 @@ public class MainActivity  extends BaseActivity
                 // Then we want to go back to contributions list fragment on backbutton pressed from media detail fragment
                 contributionsFragment.getChildFragmentManager().popBackStack();
                 // Tabs were invisible when Media Details Fragment is active, make them visible again on Contrib List Fragment active
-                // showTabs();
+                showTabs();
                 // Nearby Notification Card View was invisible when Media Details Fragment is active, make it visible again on Contrib List Fragment active, according to preferences
-                /*if (defaultKvStore.getBoolean("displayNearbyCardView", true)) {
+                if (defaultKvStore.getBoolean("displayNearbyCardView", true)) {
                     if (contributionsFragment.nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
                         contributionsFragment.nearbyNotificationCardView.setVisibility(View.VISIBLE);
                     }
                 } else {
                     contributionsFragment.nearbyNotificationCardView.setVisibility(View.GONE);
-                }*/
+                }
+                contributionsFragment.campaignView.setVisibility(View.VISIBLE);
             } else {
                 finish();
             }
         } else if (nearbyParentFragment != null && activeFragment == ActiveFragment.NEARBY) {
             // Means that nearby fragment is visible
-                nearbyParentFragment.backButtonClicked();
+            nearbyParentFragment.backButtonClicked();
         } else if (exploreFragment != null && activeFragment == ActiveFragment.EXPLORE) {
             // Means that explore fragment is visible
-                exploreFragment.onBackPressed();
+            exploreFragment.onBackPressed();
         } else {
             super.onBackPressed();
         }
