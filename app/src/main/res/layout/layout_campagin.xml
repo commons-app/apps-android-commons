@@ -21,7 +21,7 @@
       android:layout_marginStart="@dimen/standard_gap"
       android:scaleType="centerCrop"
       app:srcCompat="@drawable/ic_campaign"
-      android:tint="@color/primaryDarkColor"
+      android:tint="?attr/card_item_color"
       />
   <LinearLayout
       android:layout_width="match_parent"
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/standard_gap"
-        android:textColor="@color/primaryDarkColor"
+        android:textColor="?attr/card_item_color"
         android:textStyle="bold"
         tools:text="Campaign Title"
         tools:ignore="MissingConstraints" />
@@ -57,7 +57,7 @@
         android:gravity="start"
         android:paddingTop="@dimen/miniscule_margin"
         android:textAlignment="textStart"
-        android:textColor="@color/primaryDarkColor"
+        android:textColor="?attr/card_item_color"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/tv_title"
         tools:text="Campaign Description"
@@ -71,7 +71,7 @@
         android:layout_weight="1"
         android:paddingTop="@dimen/miniscule_margin"
         android:text="@string/ends_on"
-        android:textColor="@color/primaryDarkColor"
+        android:textColor="?attr/card_item_color"
         app:layout_constraintTop_toBottomOf="@id/tv_description"
         tools:ignore="MissingConstraints" />
   </androidx.constraintlayout.widget.ConstraintLayout>
