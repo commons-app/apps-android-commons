@@ -277,7 +277,7 @@
   <string name="get_directions">নির্দেশনা পান</string>
   <string name="read_article">নিবন্ধ পড়ুন</string>
   <string name="notifications_welcome">উইকিমিডিয়া কমন্সে স্বাগতম, %1$s! আপনাকে এখানে পেয়ে আমরা আনন্দিত।</string>
-  <string name="notifications_talk_page_message">%1$s আপনার আলাপ পাতায় একটি বার্তা দিয়েছেন</string>
+  <string name="notifications_talk_page_message">%1$s আপনার আলাপ পাতায় আপনাকে একটি বার্তা দিয়েছেন</string>
   <string name="notifications_thank_you_edit">একটি সম্পাদনা করার জন্য আপনাকে ধন্যবাদ</string>
   <string name="notifications_mention">%1$s আপনাকে %2$s-এ উল্লেখ করেছেন।</string>
   <string name="nearby_directions">দিকনির্দেশ</string>

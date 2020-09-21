@@ -306,6 +306,7 @@
   <string name="title_page_bookmarks_pictures">ߖߌ߬ߦߊ߬ߓߍ ߟߎ߬</string>
   <string name="deletion_reason_uploaded_by_mistake">ߒ ߣߵߊ߬ ߟߊߦߟߍ߬ ߟߊ߫ ߢߌ߬ߣߊ߬ ߓߟߏ ߟߋ߬ ߡߊ߬</string>
   <string name="deletion_reason_publicly_visible">ߒ ߕߎ߲߬ ߡߴߊ߬ ߟߐ߲߫ ߞߴߊ߬ ߘߌ߫ ߞߍ߫ ߟߊ߬ߥߊ߲߬ߞߊ߬ߟߌ߬ ߦߋߕߊ߫ ߘߌ߫</string>
+  <string name="uploaded_by_myself">ߡߍ߲ ߠߎ߬ ߟߊߦߟߍ߬ߣߍ߲߬ ߦߋ߫ ߒ ߖߘߍ߬ߞߊߣߌ߲ ߓߟߏ߫ %1$s ߟߊ߫߸ ߣߴߊ߬ ߟߊߓߊ߯ߙߊߣߍ߲߫ ߦߋ߫ %2$d ߞߎߡߘߊ (ߟߎ߬) ߘߐ߫.</string>
   <string name="desc_language_Worldwide">ߞߌߢߍ߲߫ ߝߊ߲߭ ߓߍ߯</string>
   <string name="desc_language_America">ߊߡߋߙߌߞߌ߬</string>
   <string name="desc_language_Europe">ߋߙߐߔߎ߬</string>

@@ -605,5 +605,9 @@
   <string name="resume">reanudar</string>
   <string name="paused">En pausa</string>
   <string name="achievements_tab_title">Logros</string>
+  <string name="count_prefix">Recuento:</string>
+  <string name="menu_set_avatar">Establecer como avatar</string>
+  <string name="leaderboard_yearly">Por año</string>
+  <string name="leaderboard_weekly">Por semana</string>
   <string name="leaderboard_all_time">Todo el tiempo</string>
 </resources>

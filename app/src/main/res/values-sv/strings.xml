@@ -655,4 +655,5 @@
   <string name="leaderboard_nearby">I närheten</string>
   <string name="leaderboard_used">Använd</string>
   <string name="leaderboard_my_rank_button_text">Min rang</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Förbättra den här kartan&lt;/a&gt;</string>
 </resources>
