@@ -140,19 +140,27 @@ public class MainActivity  extends BaseActivity
 
     private boolean loadFragment(Fragment fragment) {
         if (fragment instanceof ContributionsFragment) {
-            Log.d("deneme7","1");
+            if (activeFragment == ActiveFragment.CONTRIBUTIONS) { // Do nothing if same tab
+                return true;
+            }
             contributionsFragment = (ContributionsFragment) fragment;
             activeFragment = ActiveFragment.CONTRIBUTIONS;
         } else if (fragment instanceof NearbyParentFragment) {
-            Log.d("deneme7","2");
+            if (activeFragment == ActiveFragment.NEARBY) { // Do nothing if same tab
+                return true;
+            }
             nearbyParentFragment = (NearbyParentFragment) fragment;
             activeFragment = ActiveFragment.NEARBY;
         } else if (fragment instanceof ExploreFragment) {
-            Log.d("deneme7","3");
+            if (activeFragment == ActiveFragment.EXPLORE) { // Do nothing if same tab
+                return true;
+            }
             exploreFragment = (ExploreFragment) fragment;
             activeFragment = ActiveFragment.EXPLORE;
         } else if (fragment instanceof BookmarkFragment) {
-            Log.d("deneme7","3");
+            if (activeFragment == ActiveFragment.BOOKMARK) { // Do nothing if same tab
+                return true;
+            }
             bookmarkFragment = (BookmarkFragment) fragment;
             activeFragment = ActiveFragment.BOOKMARK;
         } else if (fragment == null) {
