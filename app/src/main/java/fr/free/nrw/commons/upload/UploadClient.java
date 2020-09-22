@@ -73,34 +73,35 @@ public class UploadClient {
           contribution.getChunkInfo().getUploadResult().getFilekey()));
     }
     pauseUploads = false;
-    File file = new File(contribution.getLocalUri().getPath());
+    final File file = new File(contribution.getLocalUri().getPath());
     final List<File> fileChunks = fileUtilsWrapper.getFileChunks(context, file, CHUNK_SIZE);
 
-    int totalChunks = fileChunks.size();
+    final int totalChunks = fileChunks.size();
 
     final MediaType mediaType = MediaType
         .parse(FileUtils.getMimeType(context, Uri.parse(file.getPath())));
 
     final AtomicInteger indexOfNextChunkToBeUploaded = new AtomicInteger();
     final AtomicReference<ChunkInfo> chunkInfo = new AtomicReference<>();
-    Timber.d("Chunk info");
-    if (contribution.getChunkInfo() != null && isStashValid(contribution)) {
+    if (isStashValid(contribution)) {
       chunkInfo.set(contribution.getChunkInfo());
-
-      for (int i = 0; i < contribution.getChunkInfo().getIndexOfNextChunkToUpload(); i++) {
-        Timber.d("Chunk: Removing chunks %d", i);
-        fileChunks.remove(i);
-      }
 
       indexOfNextChunkToBeUploaded.set(contribution.getChunkInfo().getIndexOfNextChunkToUpload());
     }
 
+    final AtomicInteger index = new AtomicInteger();
     final AtomicBoolean failures = new AtomicBoolean();
 
     compositeDisposable.add(Observable.fromIterable(fileChunks).forEach(chunkFile -> {
       if (pauseUploads || failures.get()) {
         return;
       }
+
+      if (chunkInfo.get() != null && index.get() < chunkInfo.get().getIndexOfNextChunkToUpload()) {
+        index.incrementAndGet();
+        return;
+      }
+      index.getAndIncrement();
       final int offset =
           chunkInfo.get() != null ? chunkInfo.get().getUploadResult().getOffset() : 0;
       final String filekey =
@@ -117,14 +118,11 @@ public class UploadClient {
           offset,
           filekey,
           countingRequestBody).subscribe(uploadResult -> {
-        Timber.d("Chunk: Uploaded chunk %d", indexOfNextChunkToBeUploaded.get());
-        Timber.d("Chunk: Queued chunk %d", indexOfNextChunkToBeUploaded.incrementAndGet());
         chunkInfo.set(
             new ChunkInfo(uploadResult, indexOfNextChunkToBeUploaded.get(), totalChunks));
         notificationUpdater.onChunkUploaded(contribution, chunkInfo.get());
       }, throwable -> {
         failures.set(true);
-        Timber.e(throwable, "Error occurred in uploading chunk");
       }));
     }));
 
@@ -133,7 +131,6 @@ public class UploadClient {
     } else if (failures.get()) {
       return Observable.just(new StashUploadResult(StashUploadState.FAILED, null));
     } else if (chunkInfo.get() != null) {
-      Timber.d("Going into stash upload success %s", chunkInfo.get());
       return Observable.just(new StashUploadResult(StashUploadState.SUCCESS,
           chunkInfo.get().getUploadResult().getFilekey()));
     } else {
@@ -147,8 +144,9 @@ public class UploadClient {
    * @return
    */
   private boolean isStashValid(Contribution contribution) {
-    return contribution.getDateModified()
-        .after(new Date(System.currentTimeMillis() - MAX_CHUNK_AGE));
+    return contribution.getChunkInfo() != null &&
+        contribution.getDateModified()
+            .after(new Date(System.currentTimeMillis() - MAX_CHUNK_AGE));
   }
 
   /**
