@@ -88,6 +88,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         checkIfMediaExistsOnWikipediaPage(contribution);
         break;
       case Contribution.STATE_QUEUED:
+      case Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE:
         stateView.setVisibility(View.VISIBLE);
         progressView.setVisibility(View.GONE);
         stateView.setText(R.string.contribution_state_queued);

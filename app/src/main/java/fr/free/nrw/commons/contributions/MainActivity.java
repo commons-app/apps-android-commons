@@ -3,6 +3,8 @@ package fr.free.nrw.commons.contributions;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
@@ -21,6 +24,7 @@ import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -33,6 +37,7 @@ import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.List;
@@ -56,6 +61,8 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
     NotificationController notificationController;
     @Inject
     QuizChecker quizChecker;
+    @Inject
+    ViewUtilWrapper viewUtilWrapper;
 
 
     public ContributionsActivityPagerAdapter contributionsActivityPagerAdapter;
@@ -70,6 +77,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
     private TextView notificationCount;
     private NearbyParentFragment nearbyParentFragment;
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contributions);
@@ -280,7 +288,23 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         this.menu = menu;
         updateMenuItem();
         setNotificationCount();
+
+        updateLimitedConnectionToggle(menu);
+
         return true;
+    }
+
+    private void updateLimitedConnectionToggle(Menu menu) {
+        MenuItem checkable = menu.findItem(R.id.toggle_limited_connection_mode);
+        boolean isEnabled = defaultKvStore
+            .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
+
+        Timber.d("Limited connection mode is %s", isEnabled);
+        checkable.setChecked(isEnabled);
+        final Switch switchToggleLimitedConnectionMode = checkable.getActionView()
+            .findViewById(R.id.switch_toggle_limited_connection_mode);
+        switchToggleLimitedConnectionMode.setOnCheckedChangeListener(
+            (buttonView, isChecked) -> toggleLimitedConnectionMode());
     }
 
     @SuppressLint("CheckResult")
@@ -336,6 +360,27 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void toggleLimitedConnectionMode() {
+        defaultKvStore.putBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED,
+            !defaultKvStore
+                .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false));
+        if (defaultKvStore
+            .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false)) {
+            viewUtilWrapper
+                .showShortToast(getBaseContext(), getString(R.string.limited_connection_enabled));
+        } else {
+            Intent intent = new Intent(this, UploadService.class);
+            intent.setAction(UploadService.PROCESS_PENDING_LIMITED_CONNECTION_MODE_UPLOADS);
+            if (VERSION.SDK_INT >= VERSION_CODES.O) {
+                startForegroundService(intent);
+            } else {
+                startService(intent);
+            }
+            viewUtilWrapper
+                .showShortToast(getBaseContext(), getString(R.string.limited_connection_disabled));
         }
     }
 
