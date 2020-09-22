@@ -29,6 +29,8 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import timber.log.Timber;
 
+// Custom implementation of Fresco's Network fetcher to skip downloading of images when limited connection mode is enabled
+// https://github.com/facebook/fresco/blob/master/imagepipeline-backends/imagepipeline-okhttp3/src/main/java/com/facebook/imagepipeline/backends/okhttp3/OkHttpNetworkFetcher.java
 @Singleton
 public class CustomOkHttpNetworkFetcher
     extends BaseNetworkFetcher<CustomOkHttpNetworkFetcher.OkHttpNetworkFetchState> {
