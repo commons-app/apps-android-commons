@@ -299,10 +299,10 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         boolean isEnabled = defaultKvStore
             .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
 
-        Timber.d("Limited connection mode is %s", isEnabled);
         checkable.setChecked(isEnabled);
         final Switch switchToggleLimitedConnectionMode = checkable.getActionView()
             .findViewById(R.id.switch_toggle_limited_connection_mode);
+        switchToggleLimitedConnectionMode.setChecked(isEnabled);
         switchToggleLimitedConnectionMode.setOnCheckedChangeListener(
             (buttonView, isChecked) -> toggleLimitedConnectionMode());
     }
