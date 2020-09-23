@@ -44,7 +44,7 @@ public enum NavTab implements EnumCode {
     @NonNull
     @Override
     public Fragment newInstance() {
-      return new BookmarkFragment();
+      return BookmarkFragment.newInstance();
     }
   },
   MORE(R.string.more, R.drawable.ic_menu_black_24dp) {

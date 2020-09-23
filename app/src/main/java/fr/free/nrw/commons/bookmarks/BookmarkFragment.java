@@ -109,7 +109,9 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment
       mediaDetails = new MediaDetailPagerFragment(false, true);
       supportFragmentManager
           .beginTransaction()
-          .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
+          //.hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
+          .hide(adapter.getItem(0))
+          .hide(adapter.getItem(1))
           .add(R.id.fragmentContainer, mediaDetails)
           .addToBackStack(null)
           .commit();
