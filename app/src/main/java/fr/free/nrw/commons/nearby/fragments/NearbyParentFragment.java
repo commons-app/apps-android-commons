@@ -1208,6 +1208,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 nearbyBaseMarker.icon(IconFactory.getInstance(getContext())
                         .fromBitmap(icon));
                 marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
+
+                if(marker instanceof  NearbyMarker){
+                    ((NearbyMarker) marker).setDisabled(false);
+                }
             }
         }
     }
@@ -1226,6 +1230,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         for (Marker marker : mapBox.getMarkers()) {
             if (!marker.equals(currentLocationMarker)) {
                 marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
+                if(marker instanceof NearbyMarker){
+                    ((NearbyMarker) marker).setDisabled(true);
+                }
             }
         }
         addCurrentLocationMarker(NearbyController.currentLocation);
@@ -1249,10 +1256,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             });
 
             mapBox.setOnMarkerClickListener(marker -> {
-                if (marker instanceof NearbyMarker) {
+                if (marker instanceof NearbyMarker && !((NearbyMarker) marker).isDisabled()) {
                     presenter.markerSelected(marker);
                 }
-                return false;
+                return true;
             });
         }
     }
