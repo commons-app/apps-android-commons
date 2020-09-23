@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.navtab;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -8,14 +10,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.navigation.NavigationView;
 import fr.free.nrw.commons.AboutActivity;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
@@ -25,6 +32,7 @@ import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import javax.inject.Inject;
 import timber.log.Timber;
 
@@ -32,6 +40,8 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
 
     @Inject
     CommonsLogSender commonsLogSender;
+    @BindView(R.id.more_profile)
+    TextView moreProfile;
 
     @Nullable
     @Override
@@ -50,6 +60,18 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
             .getInstance(getActivity().getApplicationContext())
             .getCommonsApplicationComponent()
             .inject(this);
+        setUserName();
+    }
+
+    /**
+     * Set the username in navigationHeader.
+     */
+    private void setUserName() {
+        AccountManager accountManager = AccountManager.get(getActivity());
+        Account[] allAccounts = accountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE);
+        if (allAccounts.length != 0) {
+            moreProfile.setText(allAccounts[0].name);
+        }
     }
 
     @OnClick(R.id.more_logout)
