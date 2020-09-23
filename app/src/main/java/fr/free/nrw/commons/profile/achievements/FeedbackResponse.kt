@@ -1,8 +1,8 @@
-package fr.free.nrw.commons.achievements
+package fr.free.nrw.commons.profile.achievements
 
 /**
-* Represent the Feedback Response of the user
-*/
+ * Represent the Feedback Response of the user
+ */
 data class FeedbackResponse(val uniqueUsedImages: Int,
                             val articlesUsingImages: Int,
                             val deletedUploads: Int,

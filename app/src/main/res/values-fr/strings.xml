@@ -18,6 +18,7 @@
 * Nicolas Raoul
 * Orikrin1998
 * Patrick Star
+* Robins7
 * Sherbrooke
 * Tektasc
 * Thibaut120094
@@ -287,7 +288,7 @@
   <string name="error_while_cache">Erreur en mettant les images en cache</string>
   <string name="title_info">Un titre descriptif unique pour le fichier, qui servira de nom de fichier. Vous pouvez utiliser un langage simple avec des espaces. N’incluez pas l’extension du fichier</string>
   <string name="description_info">Veuillez décrire le média autant que possible : Où a-t-il été enregistré ? Que montre-t-il ? Quel est le contexte ? Veuillez décrire les objets ou les personnes. Révélez les informations qui ne peuvent pas être devinées facilement, par exemple l’heure de la journée si c’est un paysage. Si le média montre quelque chose d’inhabituel, veuillez expliquer ce qui le rend exceptionnel.</string>
-  <string name="caption_info" fuzzy="true">Veuillez rédiger une brève description de l’image (limitée à 255 caractères).</string>
+  <string name="caption_info">Veuillez rédiger une brève description de l’image. La première légende sera utilisée comme titre de l\'image.</string>
   <string name="upload_image_too_dark">Cette image est trop sombre, êtes-vous sûr de vouloir la téléverser ? Wikimedia Commons est réservé pour les images ayant une valeur encyclopédique.</string>
   <string name="upload_image_blurry">Cette image est floue, êtes-vous sûr de vouloir la téléverser ? Wikimedia Commons est réservé aux images ayant une valeur encyclopédique.</string>
   <string name="upload_problem_exist">Problèmes potentiels avec cette image :</string>
@@ -412,6 +413,7 @@
   <string name="nominate_delete">Proposé à la suppression</string>
   <string name="delete">Supprimer</string>
   <string name="Achievements">Accomplissements</string>
+  <string name="Profile">Profil</string>
   <string name="statistics">Statistiques</string>
   <string name="statistics_thanks">Remerciements reçus</string>
   <string name="statistics_featured">Images remarquables</string>
@@ -590,6 +592,15 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Autre</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Parce qu’elle est</string>
+  <string name="category_edit_helper_make_edit_toast">Essai de mise à jour des catégories.</string>
+  <string name="category_edit_helper_show_edit_title">Mise à jour de la catégorie</string>
+  <string name="category_edit_helper_show_edit_title_success">Succès</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">La catégorie %1$s est ajoutée.</item>
+    <item quantity="other">Les catégories %1$s sont ajoutées.</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">Impossible d\'ajouter des catégories.</string>
+  <string name="category_edit_button_text">Mettre à jour les catégories</string>
   <string name="share_image_via">Partager l’image via</string>
   <string name="no_achievements_yet">Vous n’avez encore fait aucune contribution</string>
   <string name="account_created">Compte créé !</string>
@@ -612,7 +623,7 @@
   <string name="title_app_shortcut_setting">Paramètres</string>
   <string name="remove_bookmark">Retiré des favoris</string>
   <string name="add_bookmark">Ajouté aux favoris</string>
-  <string name="wallpaper_set_unsuccessfully">Un problème est survenu. Impossible d\'installer le fond d\'écran.</string>
+  <string name="wallpaper_set_unsuccessfully">Un problème est survenu. Impossible d\'installer le fond d\'écran</string>
   <string name="setting_wallpaper_dialog_title">Définir comme fond d’écran</string>
   <string name="setting_wallpaper_dialog_message">Configuration du fond d\'écran. Veuillez attendre...</string>
   <string name="theme_default_name">Suivre le système</string>
@@ -625,6 +636,10 @@
   <string name="use_location_from_similar_image">Avez-vous pris ces deux photos du même endroit ? Voulez-vous utiliser les latitude/longitude de l’image sur la droite ?</string>
   <string name="load_more">Charger davantage</string>
   <string name="nearby_no_results">Pas d’endroit trouvé, essayez de modifier vos critères de recherche.</string>
+  <string name="todo_improve">Améliorations suggérées :</string>
+  <string name="missing_category">- Ajouter des catégories à cette image pour améliorer son utilisation.</string>
+  <string name="missing_article">- Ajouter cette image à l’article Wikipédia associé qui n’a pas d’image.</string>
+  <string name="edit_category">Modifier les catégories</string>
   <string name="add_picture_to_wikipedia_article_title">Ajouter une image à Wikipédia</string>
   <string name="add_picture_to_wikipedia_article_desc">Voulez-vous ajouter cette image à l’article Wikipédia de langue %1$s ?</string>
   <string name="add_picture_to_wikipedia_instructions_title">Instructions</string>
@@ -642,4 +657,26 @@
   <string name="pause">pause</string>
   <string name="resume">reprise</string>
   <string name="paused">En pause</string>
+  <string name="achievements_tab_title">Réussites</string>
+  <string name="leaderboard_tab_title">Tableau de classement</string>
+  <string name="rank_prefix">Rang :</string>
+  <string name="count_prefix">Compteur :</string>
+  <string name="leaderboard_column_rank">Rang</string>
+  <string name="leaderboard_column_user">Utilisateur</string>
+  <string name="leaderboard_column_count">Compteur</string>
+  <string name="setting_avatar_dialog_title">Définir comme avatar du tableau de classement</string>
+  <string name="setting_avatar_dialog_message">Définition comme avatar, veuillez patienter</string>
+  <string name="avatar_set_successfully">Avatar défini</string>
+  <string name="avatar_set_unsuccessfully">Erreur en définissant le nouvel avatar, veuillez réessayer</string>
+  <string name="menu_set_avatar">Définir comme avatar</string>
+  <string name="leaderboard_yearly">Annuel</string>
+  <string name="leaderboard_weekly">Hebdomadaire</string>
+  <string name="leaderboard_all_time">Tout le temps</string>
+  <string name="leaderboard_upload">Télécharger</string>
+  <string name="leaderboard_nearby">À proximité</string>
+  <string name="leaderboard_used">Utilisé</string>
+  <string name="leaderboard_my_rank_button_text">Mon rang</string>
+  <string name="mapbox_telemetry">Désactivation de la télémétrie</string>
+  <string name="telemetry_opt_out_summary">Envoyer un emplacement anonymisé et les données d’utilisation à Mapbox en utilisant la fonctionnalité Nearby</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Améliorer cette carte&lt;/a&gt;</string>
 </resources>

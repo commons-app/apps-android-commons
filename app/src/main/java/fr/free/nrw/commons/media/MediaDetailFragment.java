@@ -2,7 +2,9 @@ package fr.free.nrw.commons.media;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_NEEDING_CATEGORIES;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_PREFIX;
+import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_UNCATEGORISED;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -13,7 +15,9 @@ import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +27,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -38,6 +46,8 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
+import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxSearchView;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
@@ -45,13 +55,18 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.category.CategoryClient;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
+import fr.free.nrw.commons.category.CategoryEditHelper;
+import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter;
+import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter.Callback;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -59,22 +74,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 import java.util.Map;
 import javax.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.util.DateUtil;
 import timber.log.Timber;
 
-public class MediaDetailFragment extends CommonsDaggerSupportFragment {
+public class MediaDetailFragment extends CommonsDaggerSupportFragment implements Callback,
+    CategoryEditHelper.Callback {
 
     private boolean editable;
     private boolean isCategoryImage;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
     private int index;
     private boolean isDeleted = false;
+    private boolean isWikipediaButtonDisplayed;
 
 
-    public static MediaDetailFragment forMedia(int index, boolean editable, boolean isCategoryImage) {
+    public static MediaDetailFragment forMedia(int index, boolean editable, boolean isCategoryImage, boolean isWikipediaButtonDisplayed) {
         MediaDetailFragment mf = new MediaDetailFragment();
 
         Bundle state = new Bundle();
@@ -83,6 +101,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         state.putInt("index", index);
         state.putInt("listIndex", 0);
         state.putInt("listTop", 0);
+        state.putBoolean("isWikipediaButtonDisplayed", isWikipediaButtonDisplayed);
 
         mf.setArguments(state);
 
@@ -96,7 +115,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @Inject
     DeleteHelper deleteHelper;
     @Inject
+    CategoryEditHelper categoryEditHelper;
+    @Inject
     ViewUtilWrapper viewUtil;
+    @Inject
+    CategoryClient categoryClient;
 
     private int initialListTop = 0;
 
@@ -132,6 +155,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     LinearLayout nominatedForDeletion;
     @BindView(R.id.mediaDetailCategoryContainer)
     LinearLayout categoryContainer;
+    @BindView(R.id.categoryEditButton)
+    Button categoryEditButton;
     @BindView(R.id.media_detail_depiction_container)
     LinearLayout depictionContainer;
     @BindView(R.id.authorLinearLayout)
@@ -140,6 +165,29 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     Button delete;
     @BindView(R.id.mediaDetailScrollView)
     ScrollView scrollView;
+    @BindView(R.id.toDoLayout)
+    LinearLayout toDoLayout;
+    @BindView(R.id.toDoReason)
+    TextView toDoReason;
+    @BindView(R.id.category_edit_layout)
+    LinearLayout categoryEditLayout;
+    @BindView(R.id.et_search)
+    SearchView categorySearchView;
+    @BindView(R.id.rv_categories)
+    RecyclerView categoryRecyclerView;
+    @BindView(R.id.update_categories_button)
+    Button updateCategoriesButton;
+    @BindView(R.id.dummy_category_edit_container)
+    LinearLayout dummyCategoryEditContainer;
+    @BindView(R.id.pb_categories)
+    ProgressBar progressbarCategories;
+    @BindView(R.id.existing_categories)
+    TextView existingCategories;
+    @BindView(R.id.no_results_found)
+    TextView noResultsFound;
+
+    private ArrayList<String> categoryNames = new ArrayList<>();
+    private String categorySearchQuery;
 
     /**
      * Depicts is a feature part of Structured data. Multiple Depictions can be added for an image just like categories.
@@ -151,6 +199,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private int newWidthOfImageView;
     private boolean heightVerifyingBoolean = true; // helps in maintaining aspect ratio
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
+    private CategoryEditSearchRecyclerViewAdapter categoryEditSearchRecyclerViewAdapter;
 
     //Had to make this class variable, to implement various onClicks, which access the media, also I fell why make separate variables when one can serve the purpose
     private Media media;
@@ -163,6 +212,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         outState.putInt("index", index);
         outState.putBoolean("editable", editable);
         outState.putBoolean("isCategoryImage", isCategoryImage);
+        outState.putBoolean("isWikipediaButtonDisplayed", isWikipediaButtonDisplayed);
 
         getScrollPosition();
         outState.putInt("listTop", initialListTop);
@@ -182,11 +232,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
             isCategoryImage = savedInstanceState.getBoolean("isCategoryImage");
+            isWikipediaButtonDisplayed = savedInstanceState.getBoolean("isWikipediaButtonDisplayed");
             index = savedInstanceState.getInt("index");
             initialListTop = savedInstanceState.getInt("listTop");
         } else {
             editable = getArguments().getBoolean("editable");
             isCategoryImage = getArguments().getBoolean("isCategoryImage");
+            isWikipediaButtonDisplayed = getArguments().getBoolean("isWikipediaButtonDisplayed");
             index = getArguments().getInt("index");
             initialListTop = 0;
         }
@@ -234,6 +286,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                     .setVisibility(View.GONE);
             }
         }
+        categoryEditSearchRecyclerViewAdapter =
+            new CategoryEditSearchRecyclerViewAdapter(getContext(), new ArrayList<>(
+                Label.valuesAsList()), categoryRecyclerView, categoryClient, this);
+        categoryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        categoryRecyclerView.setAdapter(categoryEditSearchRecyclerViewAdapter);
+
         media = detailProvider.getMediaAtPosition(index);
         scrollView.getViewTreeObserver().addOnGlobalLayoutListener(
             new OnGlobalLayoutListener() {
@@ -313,6 +371,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onDepictionsLoaded, Timber::e)
         );
+        // compositeDisposable.add(disposable);
+        setupToDo();
     }
 
     private void onDiscussionLoaded(String discussion) {
@@ -387,6 +447,63 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         imageLandscape.setController(controllerLandscape);
     }
 
+    /**
+     * Displays layout about missing actions to inform user
+     * - Images that they uploaded with no categories/descriptions, so that they can add them
+     * - Images that can be added to associated Wikipedia articles that have no pictures
+     */
+    private void setupToDo() {
+        updateToDoWarning();
+        compositeDisposable.add(RxSearchView.queryTextChanges(categorySearchView)
+            .takeUntil(RxView.detaches(categorySearchView))
+            .debounce(500, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(query -> {
+                    this.categorySearchQuery = query.toString();
+                    //update image list
+                    if (!TextUtils.isEmpty(query)) {
+                        if (categoryEditLayout.getVisibility() == VISIBLE) {
+                            ((CategoryEditSearchRecyclerViewAdapter) categoryRecyclerView.getAdapter()).
+                                getFilter().filter(query.toString());
+                        }
+                    }
+                }, Timber::e
+            ));
+    }
+
+    private void updateToDoWarning() {
+        String toDoMessage = "";
+        boolean toDoNeeded = false;
+        boolean categoriesPresent = media.getCategories() == null ? false : (media.getCategories().size() == 0 ? false : true);
+
+        // Check if the presented category is about need of category
+        if (categoriesPresent) {
+            for (String category : media.getCategories()) {
+                if (category.toLowerCase().contains(CATEGORY_NEEDING_CATEGORIES) ||
+                    category.toLowerCase().contains(CATEGORY_UNCATEGORISED)) {
+                    categoriesPresent = false;
+                }
+                break;
+            }
+        }
+        if (!categoriesPresent) {
+            toDoNeeded = true;
+            toDoMessage += getString(R.string.missing_category);
+        }
+        if (isWikipediaButtonDisplayed) {
+            toDoNeeded = true;
+            toDoMessage += (toDoMessage.isEmpty()) ? "" : "\n" + getString(R.string.missing_article);
+        }
+
+        if (toDoNeeded) {
+            toDoMessage = getString(R.string.todo_improve) + "\n" + toDoMessage;
+            toDoLayout.setVisibility(VISIBLE);
+            toDoReason.setText(toDoMessage);
+        } else {
+            toDoLayout.setVisibility(GONE);
+        }
+    }
+
     @Override
     public void onDestroyView() {
         if (layoutListener != null && getView() != null) {
@@ -411,21 +528,61 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             mediaCaption.setText(prettyCaption(media));
         }
 
-        final List<String> categories = media.getCategories();
-        if (categories.isEmpty()) {
-            // Stick in a filler element.
-            categories.add(getString(R.string.detail_panel_cats_none));
-        }
+        categoryNames.clear();
+        categoryNames.addAll(media.getCategories());
+        categoryEditSearchRecyclerViewAdapter.addToCategories(media.getCategories());
+        updateSelectedCategoriesTextView(categoryEditSearchRecyclerViewAdapter.getCategories());
 
-        rebuildCatList(categories);
-
-
+        updateCategoryList();
 
         if (media.getCreator() == null || media.getCreator().equals("")) {
             authorLayout.setVisibility(GONE);
         } else {
             author.setText(media.getCreator());
         }
+    }
+
+    private void updateCategoryList() {
+        List<String> allCategories = new ArrayList<String>( media.getCategories());
+        if (media.getAddedCategories() != null) {
+            // TODO this added categories logic should be removed.
+            //  It is just a short term hack. Categories should be fetch everytime they are updated.
+            // if media.getCategories contains addedCategory, then do not re-add them
+            for (String addedCategory : media.getAddedCategories()) {
+                if (allCategories.contains(addedCategory)) {
+                    media.setAddedCategories(null);
+                    break;
+                }
+            }
+            allCategories.addAll(media.getAddedCategories());
+        }
+        if (allCategories.isEmpty()) {
+            // Stick in a filler element.
+            allCategories.add(getString(R.string.detail_panel_cats_none));
+        }
+
+        rebuildCatList(allCategories);
+    }
+
+    @Override
+    public void updateSelectedCategoriesTextView(List<String> selectedCategories) {
+        if (selectedCategories == null || selectedCategories.size() == 0) {
+            updateCategoriesButton.setClickable(false);
+        }
+        if (selectedCategories != null) {
+            existingCategories.setText(StringUtils.join(selectedCategories,", "));
+            updateCategoriesButton.setClickable(true);
+        }
+    }
+
+    @Override
+    public void noResultsFound() {
+        noResultsFound.setVisibility(VISIBLE);
+    }
+
+    @Override
+    public void someResultsFound() {
+        noResultsFound.setVisibility(GONE);
     }
 
     /**
@@ -469,6 +626,50 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         Toast.makeText(getContext(), getString(R.string.wikicode_copied), Toast.LENGTH_SHORT).show();
     }
 
+    @OnClick(R.id.dummy_category_edit_container)
+    public void onOutsideOfCategoryEditClicked() {
+        if (dummyCategoryEditContainer.getVisibility() == VISIBLE) {
+            dummyCategoryEditContainer.setVisibility(GONE);
+        }
+    }
+
+    @OnClick(R.id.categoryEditButton)
+    public void onCategoryEditButtonClicked(){
+        displayHideCategorySearch();
+    }
+
+    public void displayHideCategorySearch() {
+        if (dummyCategoryEditContainer.getVisibility() != VISIBLE) {
+            dummyCategoryEditContainer.setVisibility(VISIBLE);
+        } else {
+            dummyCategoryEditContainer.setVisibility(GONE);
+        }
+    }
+
+    @OnClick(R.id.update_categories_button)
+    public void onUpdateCategoriesClicked() {
+        updateCategories(categoryEditSearchRecyclerViewAdapter.getNewCategories());
+        displayHideCategorySearch();
+    }
+
+    @OnClick(R.id.cancel_categories_button)
+    public void onCancelCategoriesClicked() {
+        displayHideCategorySearch();
+    }
+
+    public void updateCategories(List<String> selectedCategories) {
+        compositeDisposable.add(categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories, this)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(s -> {
+                Timber.d("Categories are added.");
+                onOutsideOfCategoryEditClicked();
+                media.setAddedCategories(selectedCategories);
+                updateCategoryList();
+            }));
+    }
+
+    @SuppressLint("StringFormatInvalid")
     @OnClick(R.id.nominateDeletion)
     public void onDeleteButtonClicked(){
             if (AccountUtil.getUserName(getContext()) != null && AccountUtil.getUserName(getContext()).equals(media.getCreator())) {
@@ -539,7 +740,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             }
         }
 
-
     @SuppressLint("CheckResult")
     private void onDeleteClicked(Spinner spinner) {
         String reason = spinner.getSelectedItem().toString();
@@ -590,6 +790,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
     private void rebuildCatList(List<String> categories) {
+        Log.d("deneme","rebuild cat list size:"+categories.size());
         categoryContainer.removeAllViews();
         for (String category : categories) {
             categoryContainer.addView(buildCatLabel(sanitise(category), categoryContainer));
@@ -708,4 +909,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         return media.getCoordinates().getPrettyCoordinateString();
     }
 
+    @Override
+    public boolean updateCategoryDisplay(List<String> categories) {
+        if (categories == null) {
+            return false;
+        } else {
+            rebuildCatList(categories);
+            return true;
+        }
+    }
 }

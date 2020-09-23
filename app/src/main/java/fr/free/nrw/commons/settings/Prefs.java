@@ -9,6 +9,7 @@ public class Prefs {
     public static final String MANAGED_EXIF_TAGS = "managed_exif_tags";
     public static final String KEY_LANGUAGE_VALUE = "languageDescription";
     public static final String KEY_THEME_VALUE = "appThemePref";
+    public static final String TELEMETRY_PREFERENCE = "telemetryPref";
 
     public static class Licenses {
         public static final String CC_BY_SA_3 = "CC BY-SA 3.0";

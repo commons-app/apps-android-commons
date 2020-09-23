@@ -394,6 +394,7 @@
   <string name="nominate_delete">삭제 신청</string>
   <string name="delete">삭제</string>
   <string name="Achievements">성과</string>
+  <string name="Profile">프로파일</string>
   <string name="statistics">통계</string>
   <string name="statistics_thanks">받은 감사</string>
   <string name="statistics_featured">알찬 그림</string>
@@ -524,6 +525,11 @@
   <string name="delete_helper_ask_reason_copyright_logo">로고</string>
   <string name="delete_helper_ask_reason_copyright_other">기타</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">왜냐하면</string>
+  <string name="category_edit_helper_make_edit_toast">분류 업데이트를 시도합니다.</string>
+  <string name="category_edit_helper_show_edit_title">분류 업데이트</string>
+  <string name="category_edit_helper_show_edit_title_success">성공</string>
+  <string name="category_edit_helper_edit_message_else">분류를 추가하지 못했습니다.</string>
+  <string name="category_edit_button_text">분류 업데이트</string>
   <string name="share_image_via">다음을 통해 이미지 공유</string>
   <string name="no_achievements_yet">아직 기여가 없습니다</string>
   <string name="account_created">계정을 만들었습니다!</string>
@@ -554,6 +560,7 @@
   <string name="ask_to_turn_location_on">위치를 켭니까?</string>
   <string name="load_more">더 불러오기</string>
   <string name="nearby_no_results">발견된 장소가 없습니다. 검색 기준을 바꾸어 보십시오.</string>
+  <string name="edit_category">분류 편집</string>
   <string name="add_picture_to_wikipedia_article_title">위키백과에 이미지 추가</string>
   <string name="add_picture_to_wikipedia_article_desc">이 그림을 %1$s 언어 위키백과 문서에 추가하시겠습니까?</string>
   <string name="add_picture_to_wikipedia_instructions_title">지침</string>
@@ -567,4 +574,14 @@
   <string name="pause">일시 정지</string>
   <string name="resume">계속하기</string>
   <string name="paused">일시 중단됨</string>
+  <string name="rank_prefix">순위:</string>
+  <string name="leaderboard_column_rank">순위</string>
+  <string name="leaderboard_column_user">사용자</string>
+  <string name="setting_avatar_dialog_message">아바타로 설정 중이니 기다려 주십시오</string>
+  <string name="avatar_set_unsuccessfully">새 아바타를 설정하는 중 오류가 발생했습니다. 다시 시도해 주십시오</string>
+  <string name="menu_set_avatar">아바타로 설정</string>
+  <string name="leaderboard_yearly">매년</string>
+  <string name="leaderboard_weekly">매주</string>
+  <string name="leaderboard_upload">업로드</string>
+  <string name="leaderboard_my_rank_button_text">내 순위</string>
 </resources>

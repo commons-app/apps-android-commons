@@ -19,6 +19,8 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -39,6 +41,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -76,7 +79,6 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.contributions.MainActivity;
-import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -155,6 +157,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.rv_nearby_list)
     RecyclerView rvNearbyList;
     @BindView(R.id.no_results_message) TextView noResultsView;
+    @BindView(R.id.tv_attribution)
+    AppCompatTextView tvAttribution;
 
     @Inject LocationServiceManager locationManager;
     @Inject NearbyController nearbyController;
@@ -243,8 +247,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 final UiSettings uiSettings = mapBoxMap.getUiSettings();
                 uiSettings.setCompassGravity(Gravity.BOTTOM | Gravity.LEFT);
                 uiSettings.setCompassMargins(12, 0, 0, 24);
-                uiSettings.setLogoEnabled(true);
-                uiSettings.setAttributionEnabled(true);
+                uiSettings.setLogoEnabled(false);
+                uiSettings.setAttributionEnabled(false);
                 uiSettings.setRotateGesturesEnabled(false);
                 isMapBoxReady =true;
                 performMapReadyActions();
@@ -267,6 +271,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 scaleBarPlugin.create(scaleBarOptions);
             });
         });
+
+        tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
+        tvAttribution.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     /**
@@ -668,7 +675,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public boolean isCurrentLocationMarkerVisible() {
-        if (latLngBounds == null) {
+        if (latLngBounds == null || currentLocationMarker==null) {
             Timber.d("Map projection bounds are null");
             return false;
         } else {

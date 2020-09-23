@@ -76,7 +76,7 @@ public class NetworkingModule {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> {
             Timber.tag("OkHttp").v(message);
         });
-        httpLoggingInterceptor.level(BuildConfig.DEBUG ? Level.BODY: Level.BASIC);
+        httpLoggingInterceptor.setLevel(BuildConfig.DEBUG ? Level.BODY: Level.BASIC);
         return httpLoggingInterceptor;
     }
 
@@ -85,11 +85,13 @@ public class NetworkingModule {
     public OkHttpJsonApiClient provideOkHttpJsonApiClient(OkHttpClient okHttpClient,
                                                           DepictsClient depictsClient,
                                                           @Named("tools_forge") HttpUrl toolsForgeUrl,
+                                                          @Named("test_tools_forge") HttpUrl testToolsForgeUrl,
                                                           @Named("default_preferences") JsonKvStore defaultKvStore,
                                                           Gson gson) {
         return new OkHttpJsonApiClient(okHttpClient,
                 depictsClient,
                 toolsForgeUrl,
+                testToolsForgeUrl,
                 WIKIDATA_SPARQL_QUERY_URL,
                 BuildConfig.WIKIMEDIA_CAMPAIGNS_URL,
             gson);
@@ -122,6 +124,14 @@ public class NetworkingModule {
     @SuppressWarnings("ConstantConditions")
     public HttpUrl provideToolsForgeUrl() {
         return HttpUrl.parse(TOOLS_FORGE_URL);
+    }
+
+    @Provides
+    @Named("test_tools_forge")
+    @NonNull
+    @SuppressWarnings("ConstantConditions")
+    public HttpUrl provideTestToolsForgeUrl() {
+        return HttpUrl.parse(TEST_TOOLS_FORGE_URL);
     }
 
     @Provides

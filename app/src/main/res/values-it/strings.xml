@@ -381,6 +381,7 @@
   <string name="nominate_delete">Proponi per la cancellazione</string>
   <string name="delete">Cancella</string>
   <string name="Achievements">Risultati</string>
+  <string name="Profile">Profilo</string>
   <string name="statistics">Statistiche</string>
   <string name="statistics_thanks">Ringraziamenti ricevuti</string>
   <string name="statistics_featured">Immagini in evidenza</string>
@@ -553,4 +554,16 @@
   <string name="pause">pausa</string>
   <string name="resume">riprendi</string>
   <string name="paused">In pausa</string>
+  <string name="achievements_tab_title">Risultati</string>
+  <string name="leaderboard_tab_title">Classifica</string>
+  <string name="rank_prefix">Posizione:</string>
+  <string name="count_prefix">Conteggio:</string>
+  <string name="leaderboard_column_rank">Posizione</string>
+  <string name="leaderboard_column_user">Utente</string>
+  <string name="leaderboard_yearly">Annuale</string>
+  <string name="leaderboard_weekly">Settimanale</string>
+  <string name="leaderboard_all_time">Intero periodo</string>
+  <string name="leaderboard_upload">Carica</string>
+  <string name="leaderboard_nearby">Nelle vicinanze</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Migliora questa mappa&lt;/a&gt;</string>
 </resources>

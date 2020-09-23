@@ -23,6 +23,8 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.navtab.MoreBottomSheetFragment;
 import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
+import fr.free.nrw.commons.profile.achievements.AchievementsFragment;
+import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment;
 import fr.free.nrw.commons.review.ReviewImageFragment;
 import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
@@ -119,4 +121,10 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract MoreBottomSheetLoggedOutFragment bindMoreBottomSheetLoggedOutFragment();
+
+    @ContributesAndroidInjector
+    abstract AchievementsFragment bindAchievementsFragment();
+
+    @ContributesAndroidInjector
+    abstract LeaderboardFragment bindLeaderboardFragment();
 }

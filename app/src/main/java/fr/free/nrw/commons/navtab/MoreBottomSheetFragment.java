@@ -19,10 +19,10 @@ import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
-import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.logging.CommonsLogSender;
+import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import javax.inject.Inject;
@@ -105,9 +105,9 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
         getActivity().startActivity(intent);
     }
 
-    @OnClick(R.id.more_achievements)
-    public void onAchievementsClicked() {
-        final Intent intent = new Intent(getActivity(), AchievementsActivity.class);
+    @OnClick(R.id.more_profile)
+    public void onProfileClicked() {
+        final Intent intent = new Intent(getActivity(), ProfileActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         getActivity().startActivity(intent);
     }

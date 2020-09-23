@@ -52,7 +52,6 @@ class CategoryClientTest {
             .test()
             .assertValues(emptyList())
     }
-
     @Test
     fun searchCategoriesForPrefixFound() {
         val mockResponse = withMockResponse("Category:Test")
@@ -78,7 +77,6 @@ class CategoryClientTest {
             .test()
             .assertValues(emptyList())
     }
-
     @Test
     fun getParentCategoryListFound() {
         val mockResponse = withMockResponse("Category:Test")

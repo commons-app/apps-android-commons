@@ -11,6 +11,7 @@
 * Joseph
 * McAang
 * Mirzali
+* MuratTheTurkish
 * Neslihan Turan
 * Okkerem
 * Rapsar
@@ -91,7 +92,7 @@
   <string name="contribution_state_starting">Yükleniyor</string>
   <string name="menu_from_gallery">Galeriden</string>
   <string name="menu_from_camera">Fotoğraf çek</string>
-  <string name="menu_nearby">Yakınındakiler</string>
+  <string name="menu_nearby">Yakınımdakiler</string>
   <string name="provider_contributions">Yüklemelerim</string>
   <string name="menu_share">Paylaş</string>
   <string name="menu_open_in_browser">Tarayıcıda Görüntüle</string>
@@ -262,7 +263,7 @@
   <string name="navigation_drawer_close">Kapat</string>
   <string name="navigation_item_home">Anasayfa</string>
   <string name="navigation_item_upload">Yükle</string>
-  <string name="navigation_item_nearby">Yakınındakiler</string>
+  <string name="navigation_item_nearby">Yakınımdakiler</string>
   <string name="navigation_item_about">Hakkında</string>
   <string name="navigation_item_settings">Ayarlar</string>
   <string name="navigation_item_feedback">Geri bildirim</string>
@@ -279,7 +280,7 @@
   <string name="error_while_cache">Resimleri önbelleğe alırken hata oluştu</string>
   <string name="title_info">Dosya adı olarak kullanılacak benzersiz bir açıklayıcı başlık. Sade bir dil kullanabilirsiniz. Dosya uzantısını dahil etmeyin</string>
   <string name="description_info">Lütfen medyayı olabildiğince açıklayın: Nerede çekildi? Ne gösteriyor? Bağlam nedir? Lütfen nesneleri veya kişileri tanımlayın. Kolayca tahmin edilemeyen bilgileri, örneğin bir manzara ise günün saatini gösterin. Medya alışılmadık bir şey gösteriyorsa lütfen alışılmadık hâle getiren şeyi açıklayın.</string>
-  <string name="caption_info" fuzzy="true">Lütfen resmin kısa bir açıklamasını yazın. (255 karakterle sınırı vardır)</string>
+  <string name="caption_info">Lütfen resmin kısa bir açıklamasını yazın. İlk resim yazısı resminin Başlığı olarak kullanılacaktır.</string>
   <string name="upload_image_too_dark">Bu resim çok karanlık, yüklemek istediğinizden emin misiniz? Wikimedia Commons yalnızca ansiklopedik değeri olan resimler içindir.</string>
   <string name="upload_image_blurry">Bu resim bulanık, yüklemek istediğinizden emin misiniz? Wikimedia Commons yalnızca ansiklopedik değeri olan resimler içindir.</string>
   <string name="upload_problem_exist">Bu görselle ilgili olası sorunlar:</string>
@@ -404,6 +405,7 @@
   <string name="nominate_delete">Silinmeye Aday Göster</string>
   <string name="delete">Sil</string>
   <string name="Achievements">Başarılar</string>
+  <string name="Profile">Profil</string>
   <string name="statistics">İstatistikler</string>
   <string name="statistics_thanks">Teşekkür Alındı</string>
   <string name="statistics_featured">Seçkin Resimler</string>
@@ -424,7 +426,7 @@
   <string name="preference_author_name_toggle_summary">Fotoğraf yüklerken kullanıcı adınız yerine özel bir yazar adı kullanın</string>
   <string name="preference_author_name">Özel yazar adı</string>
   <string name="contributions_fragment">Katkılar</string>
-  <string name="nearby_fragment">Yakınındakiler</string>
+  <string name="nearby_fragment">Yakınımdakiler</string>
   <string name="notifications">Bildirimler</string>
   <string name="read_notifications">Bildirimler (okunmuş)</string>
   <string name="display_nearby_notification">Yakınımdakiler bildirimi görüntüle</string>
@@ -582,6 +584,15 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Diğer</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Çünkü</string>
+  <string name="category_edit_helper_make_edit_toast">Kategorileri güncellemeye çalışıyor.</string>
+  <string name="category_edit_helper_show_edit_title">Kategori güncellemesi</string>
+  <string name="category_edit_helper_show_edit_title_success">Başarılı</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">%1$s kategorisi eklendi.</item>
+    <item quantity="other">%1$s kategorisi eklendi.</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">Kategoriler eklenemedi.</string>
+  <string name="category_edit_button_text">Kategorileri güncelle</string>
   <string name="share_image_via">Resmi şununla paylaş</string>
   <string name="no_achievements_yet">Henüz bir katkı yapmadınız</string>
   <string name="account_created">Hesap oluşturuldu!</string>
@@ -617,6 +628,10 @@
   <string name="use_location_from_similar_image">Bu iki fotoğrafı aynı yerde mi çektiniz? Sağdaki resmin enlem/boylamını kullanmak ister misiniz?</string>
   <string name="load_more">Daha Fazla Yükle</string>
   <string name="nearby_no_results">Yer bulunamadı, arama kriterlerinizi değiştirmeyi deneyin.</string>
+  <string name="todo_improve">Önerilen geliştirmeler:</string>
+  <string name="missing_category">- Kullanılabilirliği artırmak için bu resme kategoriler ekleyin.</string>
+  <string name="missing_article">- Bu resmi, resim içermeyen ilgili Vikipedi maddesini ekleyin.</string>
+  <string name="edit_category">Kategorileri düzenle</string>
   <string name="add_picture_to_wikipedia_article_title">Vikipedi\'ye resim ekle</string>
   <string name="add_picture_to_wikipedia_article_desc">Bu resmi %1$s Vikipedi maddesine eklemek istiyor musunuz?</string>
   <string name="add_picture_to_wikipedia_instructions_title">Talimatlar</string>
@@ -634,4 +649,26 @@
   <string name="pause">duraklat</string>
   <string name="resume">devam et</string>
   <string name="paused">Durduruldu</string>
+  <string name="achievements_tab_title">Başarılar</string>
+  <string name="leaderboard_tab_title">Liderlik sıralaması</string>
+  <string name="rank_prefix">Sıra:</string>
+  <string name="count_prefix">Sayı:</string>
+  <string name="leaderboard_column_rank">Sıra</string>
+  <string name="leaderboard_column_user">Kullanıcı</string>
+  <string name="leaderboard_column_count">Sayı</string>
+  <string name="setting_avatar_dialog_title">Liderlik sıralaması avatar olarak ayarla</string>
+  <string name="setting_avatar_dialog_message">Avatar olarak ayarlanıyor, lütfen bekleyin</string>
+  <string name="avatar_set_successfully">Avatar ayarlandı</string>
+  <string name="avatar_set_unsuccessfully">Yeni avatar ayarlanırken hata oluştu, lütfen tekrar deneyin</string>
+  <string name="menu_set_avatar">Avatar olarak ayarla</string>
+  <string name="leaderboard_yearly">Yıllık</string>
+  <string name="leaderboard_weekly">Haftalık</string>
+  <string name="leaderboard_all_time">Tüm zamanlar</string>
+  <string name="leaderboard_upload">Yükle</string>
+  <string name="leaderboard_nearby">Yakınımdakiler</string>
+  <string name="leaderboard_used">Kullanılan</string>
+  <string name="leaderboard_my_rank_button_text">Sıralamam</string>
+  <string name="mapbox_telemetry">Telemetriyi Devre Dışı Bırak</string>
+  <string name="telemetry_opt_out_summary">Yakındaki özelliğini kullanırken anonim konum ve kullanım verilerini Mapbox\'a gönderin</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Bu haritayı geliştirin&lt;/a&gt;</string>
 </resources>

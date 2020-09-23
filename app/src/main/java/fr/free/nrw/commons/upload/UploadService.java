@@ -22,15 +22,19 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.di.CommonsDaggerService;
 import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.processors.PublishProcessor;
 import io.reactivex.schedulers.Schedulers;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,6 +45,9 @@ import timber.log.Timber;
 public class UploadService extends CommonsDaggerService {
 
   private static final String EXTRA_PREFIX = "fr.free.nrw.commons.upload";
+
+  private static final List<String> STASH_ERROR_CODES = Arrays
+      .asList("uploadstash-file-not-found", "stashfailed", "verification-error", "chunk-too-small");
 
   public static final String ACTION_START_SERVICE = EXTRA_PREFIX + ".upload";
   public static final String EXTRA_FILES = EXTRA_PREFIX + ".files";
@@ -290,7 +297,15 @@ public class UploadService extends CommonsDaggerService {
                 getApplicationContext(),
                 contribution,
                 uniqueFilename,
-                uploadStash.getFileKey());
+                uploadStash.getFileKey()).doOnError(new Consumer<Throwable>() {
+              @Override
+              public void accept(Throwable throwable) throws Exception {
+                Timber.e(throwable, "Error occurred in uploading file from stash");
+                if (STASH_ERROR_CODES.contains(throwable.getMessage())) {
+                  clearChunks(contribution);
+                }
+              }
+            });
           } else if (uploadStash.getState() == StashUploadState.PAUSED) {
             Timber.d("Contribution upload paused");
             showPausedNotification(contribution);
@@ -308,6 +323,13 @@ public class UploadService extends CommonsDaggerService {
               notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
               showFailedNotification(contribution);
             });
+  }
+
+  private void clearChunks(Contribution contribution) {
+    contribution.setChunkInfo(null);
+    compositeDisposable.add(contributionDao.update(contribution)
+        .subscribeOn(ioThreadScheduler)
+        .subscribe());
   }
 
   private void onUpload(Contribution contribution, String notificationTag,
@@ -329,8 +351,14 @@ public class UploadService extends CommonsDaggerService {
         .add(wikidataEditService.addDepictionsAndCaptions(uploadResult, contribution));
     WikidataPlace wikidataPlace = contribution.getWikidataPlace();
     if (wikidataPlace != null && wikidataPlace.getImageValue() == null) {
-      wikidataEditService.createClaim(wikidataPlace, uploadResult.getFilename(),
-          contribution.getMedia().getCaptions());
+      if (!contribution.hasInvalidLocation()) {
+        wikidataEditService.createClaim(wikidataPlace, uploadResult.getFilename(),
+            contribution.getMedia().getCaptions());
+      } else {
+        ViewUtil.showShortToast(this, getString(R.string.wikidata_edit_failure));
+        Timber
+            .d("Image location and nearby place location mismatched, so Wikidata item won't be edited");
+      }
     }
     saveCompletedContribution(contribution, uploadResult);
   }

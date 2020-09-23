@@ -464,7 +464,7 @@
   <string name="deletion_reason_no_longer_want_public">התחרטתי, אינני רוצה עוד שהיא תוצג לציבור</string>
   <string name="deletion_reason_not_interesting">סליחה, התמונה אינה מעניינת עבור אנציקלופדיה</string>
   <string name="uploaded_by_myself">הועלה על ידי ב-%1$s, בשימוש ב-%2$d מאמר(ים)</string>
-  <string name="no_uploads">ברוך בואך לויקישיתוף!\n\nכדי להעלות את המדיה הראשונה שלך, נא להקיש על כפתור ההוספה.</string>
+  <string name="no_uploads">ברוך בואך לוויקישיתוף!\n\nכדי להעלות את המדיה הראשונה שלך, נא להקיש על כפתור ההוספה.</string>
   <string name="desc_language_Worldwide">בכל רחבי העולם</string>
   <string name="desc_language_America">אמריקה</string>
   <string name="desc_language_Europe">אירופה</string>

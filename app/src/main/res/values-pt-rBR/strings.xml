@@ -275,7 +275,7 @@
   <string name="error_while_cache">Erro durante o cache de imagens</string>
   <string name="title_info">Um título descritivo exclusivo para o arquivo, que servirá como um nome de arquivo. Você pode usar linguagem simples com espaços. Não inclua a extensão do arquivo</string>
   <string name="description_info">Por favor, descreva a mídia tanto quanto possível: onde foi tomada? O que isso mostra? Qual é o contexto? Descreva os objetos ou pessoas. Revelar informações que não podem ser facilmente adivinhadas, por exemplo, a hora do dia, se for uma paisagem. Se a mídia mostrar algo incomum, explique o que torna incomum.</string>
-  <string name="caption_info" fuzzy="true">Por favor, escreva uma breve descrição da imagem. (Limite a 255 caracteres)</string>
+  <string name="caption_info">Por favor, escreva uma breve descrição da imagem. A primeira legenda seria usada como título da imagem.</string>
   <string name="upload_image_too_dark">Esta foto está muito escura, você tem certeza de que deseja enviá-la? O Wikimedia Commons é apenas para imagens com valor enciclopédico.</string>
   <string name="upload_image_blurry">Esta foto está embaçada, tem certeza de que deseja enviá-la? O Wikimedia Commons é apenas para imagens com valor enciclopédico.</string>
   <string name="upload_problem_exist">Problemas potenciais com esta imagem:</string>
@@ -400,6 +400,7 @@
   <string name="nominate_delete">Nomear para exclusão</string>
   <string name="delete">Apagar</string>
   <string name="Achievements">Conquistas</string>
+  <string name="Profile">Perfil</string>
   <string name="statistics">Estatísticas</string>
   <string name="statistics_thanks">Agradecimentos recebidos</string>
   <string name="statistics_featured">Imagens destacadas</string>
@@ -578,6 +579,15 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logótipo</string>
   <string name="delete_helper_ask_reason_copyright_other">Outro</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque é</string>
+  <string name="category_edit_helper_make_edit_toast">Tentando atualizar categorias.</string>
+  <string name="category_edit_helper_show_edit_title">Atualização de categoria</string>
+  <string name="category_edit_helper_show_edit_title_success">Sucesso</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">A categoria %1$s foi adicionada.</item>
+    <item quantity="other">As categorias %1$s foram adicionadas.</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">Não foi possível adicionar categorias.</string>
+  <string name="category_edit_button_text">Atualizar categorias</string>
   <string name="share_image_via">Compartilhar imagem via</string>
   <string name="no_achievements_yet">Você ainda não fez nenhuma contribuição</string>
   <string name="account_created">Conta criada!</string>
@@ -613,6 +623,10 @@
   <string name="use_location_from_similar_image">Você tirou essas duas fotos no mesmo lugar? Deseja usar a latitude/longitude da imagem à direita?</string>
   <string name="load_more">Carregar mais</string>
   <string name="nearby_no_results">Nenhum local encontrado, tente alterar seus critérios de pesquisa.</string>
+  <string name="todo_improve">Melhorias sugeridas:</string>
+  <string name="missing_category">- Adicione categorias a esta imagem para melhorar a usabilidade.</string>
+  <string name="missing_article">- Adicione esta imagem ao artigo da Wikipédia associado que não possui imagens.</string>
+  <string name="edit_category">Editar categorias</string>
   <string name="add_picture_to_wikipedia_article_title">Adicionar imagem à Wikipédia</string>
   <string name="add_picture_to_wikipedia_article_desc">Deseja adicionar esta imagem ao artigo da Wikipedia em %1$s?</string>
   <string name="add_picture_to_wikipedia_instructions_title">Instruções</string>
@@ -630,4 +644,26 @@
   <string name="pause">pausar</string>
   <string name="resume">continuar</string>
   <string name="paused">Pausado</string>
+  <string name="achievements_tab_title">Conquistas</string>
+  <string name="leaderboard_tab_title">Tabela de classificação</string>
+  <string name="rank_prefix">Classificação:</string>
+  <string name="count_prefix">Contagem:</string>
+  <string name="leaderboard_column_rank">Classificação</string>
+  <string name="leaderboard_column_user">Usuário</string>
+  <string name="leaderboard_column_count">Contagem</string>
+  <string name="setting_avatar_dialog_title">Definir como avatar da tabela de classificação</string>
+  <string name="setting_avatar_dialog_message">Configurando como avatar, por favor aguarde</string>
+  <string name="avatar_set_successfully">Avatar definido</string>
+  <string name="avatar_set_unsuccessfully">Erro ao definir novo avatar, tente novamente</string>
+  <string name="menu_set_avatar">Definir como avatar</string>
+  <string name="leaderboard_yearly">Anualmente</string>
+  <string name="leaderboard_weekly">Semanalmente</string>
+  <string name="leaderboard_all_time">Desde sempre</string>
+  <string name="leaderboard_upload">Enviar</string>
+  <string name="leaderboard_nearby">Próximo</string>
+  <string name="leaderboard_used">Usado</string>
+  <string name="leaderboard_my_rank_button_text">Minha classificação</string>
+  <string name="mapbox_telemetry">Recusar telemetria</string>
+  <string name="telemetry_opt_out_summary">Enviar localização anônima e dados de uso para Mapbox ao usar o recurso nas proximidades</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Melhorar o mapa&lt;/a&gt;</string>
 </resources>

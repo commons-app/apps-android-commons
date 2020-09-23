@@ -274,7 +274,7 @@
   <string name="error_while_cache">在快取圖片時發生錯誤</string>
   <string name="title_info">用於本檔案的唯一描述性標題。您可以使用帶有空格的簡明語言，另外請不要包含副檔名。</string>
   <string name="description_info">請盡可能描述媒體內容：拍攝於何處？是顯示什麼事物？有什麼脈絡？請描述對象或人物。透露出一些較不易猜測的訊息，例如是風景的話，可以是一天裡的時間。如果媒體顯示出一些不正常的事物，請說明出造成不正常原因。</string>
-  <string name="caption_info" fuzzy="true">請寫入圖片的簡要描述（不能超過 255 個字元）</string>
+  <string name="caption_info">請寫入圖片的簡要描述。首個說明會作為圖片的標題。</string>
   <string name="upload_image_too_dark">此圖片太暗，您確定您要上傳它嗎？維基共享資源僅適用對於百科全書有價值的圖片。</string>
   <string name="upload_image_blurry">此圖片太模糊，您確定您要上傳它嗎？維基共享資源僅適用對於百科全書有價值的圖片。</string>
   <string name="upload_problem_exist">此圖片有以下潛在問題：</string>
@@ -399,6 +399,7 @@
   <string name="nominate_delete">提名刪除</string>
   <string name="delete">刪除</string>
   <string name="Achievements">成果</string>
+  <string name="Profile">個人檔案</string>
   <string name="statistics">統計內容</string>
   <string name="statistics_thanks">已收到的感謝</string>
   <string name="statistics_featured">特色圖片</string>
@@ -577,6 +578,15 @@
   <string name="delete_helper_ask_reason_copyright_logo">標誌</string>
   <string name="delete_helper_ask_reason_copyright_other">其它</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">因為這</string>
+  <string name="category_edit_helper_make_edit_toast">嘗試更新分類。</string>
+  <string name="category_edit_helper_show_edit_title">分類更新</string>
+  <string name="category_edit_helper_show_edit_title_success">成功</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">分類%1$s已添加。</item>
+    <item quantity="other">分類%1$s已添加。</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">無法添加分類。</string>
+  <string name="category_edit_button_text">更新分類</string>
   <string name="share_image_via">分享圖片透過</string>
   <string name="no_achievements_yet">您還沒有做出任何貢獻</string>
   <string name="account_created">已建立帳號！</string>
@@ -612,6 +622,10 @@
   <string name="use_location_from_similar_image">您是否在同一地點拍攝了這兩張圖片？您要使用圖片右側的緯度/經度嗎？</string>
   <string name="load_more">載入更多</string>
   <string name="nearby_no_results">查無地點，請嘗試更改您的搜尋條件。</string>
+  <string name="todo_improve">建議改進：</string>
+  <string name="missing_category">- 添加分類到此圖片以增加可用性。</string>
+  <string name="missing_article">- 添加此圖片到相關但尚未有圖片的維基百科條目。</string>
+  <string name="edit_category">編輯分類</string>
   <string name="add_picture_to_wikipedia_article_title">添加圖片到維基百科</string>
   <string name="add_picture_to_wikipedia_article_desc">您想要添加此圖片到%1$s維基百科條目上嗎？</string>
   <string name="add_picture_to_wikipedia_instructions_title">說明</string>
@@ -629,4 +643,26 @@
   <string name="pause">暫停</string>
   <string name="resume">繼續</string>
   <string name="paused">已暫停</string>
+  <string name="achievements_tab_title">成果</string>
+  <string name="leaderboard_tab_title">排行榜</string>
+  <string name="rank_prefix">排名：</string>
+  <string name="count_prefix">數量：</string>
+  <string name="leaderboard_column_rank">排名</string>
+  <string name="leaderboard_column_user">使用者</string>
+  <string name="leaderboard_column_count">數量</string>
+  <string name="setting_avatar_dialog_title">設定成排行榜頭像</string>
+  <string name="setting_avatar_dialog_message">正在設定成頭像，請稍待</string>
+  <string name="avatar_set_successfully">頭像設定</string>
+  <string name="avatar_set_unsuccessfully">設定新頭像發生錯誤，請重試</string>
+  <string name="menu_set_avatar">設定成頭像</string>
+  <string name="leaderboard_yearly">每年</string>
+  <string name="leaderboard_weekly">每週</string>
+  <string name="leaderboard_all_time">全部時間</string>
+  <string name="leaderboard_upload">上傳</string>
+  <string name="leaderboard_nearby">附近</string>
+  <string name="leaderboard_used">已使用</string>
+  <string name="leaderboard_my_rank_button_text">我的排名</string>
+  <string name="mapbox_telemetry">遙測退出</string>
+  <string name="telemetry_opt_out_summary">當使用附近功能時，將匿名位置與使用情況資料發送到 Mapbox</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;改善此地圖&lt;/a&gt;</string>
 </resources>

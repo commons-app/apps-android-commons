@@ -22,16 +22,20 @@ import butterknife.ButterKnife;
 import com.google.android.material.snackbar.Snackbar;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.Bookmark;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.DownloadUtils;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.disposables.CompositeDisposable;
+import java.util.Objects;
 import javax.inject.Inject;
 import timber.log.Timber;
 
@@ -39,9 +43,18 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     @Inject BookmarkPicturesDao bookmarkDao;
 
+    @Inject
+    protected OkHttpJsonApiClient okHttpJsonApiClient;
+
+    @Inject
+    protected SessionManager sessionManager;
+
+    private static CompositeDisposable compositeDisposable = new CompositeDisposable();
+
     @BindView(R.id.mediaDetailsPager) ViewPager pager;
     private Boolean editable;
     private boolean isFeaturedImage;
+    private boolean isWikipediaButtonDisplayed;
     MediaDetailAdapter adapter;
     private Bookmark bookmark;
     private MediaDetailProvider provider;
@@ -161,6 +174,10 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 // Set wallpaper
                 setWallpaper(m);
                 return true;
+            case R.id.menu_set_as_avatar:
+                // Set avatar
+                setAvatar(m);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -177,6 +194,20 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             return;
         }
         ImageUtils.setWallpaperFromImageUrl(getActivity(), Uri.parse(media.getImageUrl()));
+    }
+
+    /**
+     * Set the media as user's leaderboard avatar
+     * @param media
+     */
+    private void setAvatar(Media media) {
+        if (media.getImageUrl() == null || media.getImageUrl().isEmpty()) {
+            Timber.d("Media URL not present");
+            return;
+        }
+        ImageUtils.setAvatarFromImageUrl(getActivity(), media.getImageUrl(),
+            Objects.requireNonNull(sessionManager.getCurrentAccount()).name,
+            okHttpJsonApiClient, compositeDisposable);
     }
 
     @Override
@@ -251,6 +282,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         item.setIcon(icon);
     }
 
+    public void showImage(int i, boolean isWikipediaButtonDisplayed) {
+        this.isWikipediaButtonDisplayed = isWikipediaButtonDisplayed;
+        Handler handler =  new Handler();
+        handler.postDelayed(() -> pager.setCurrentItem(i), 5);
+    }
+
     public void showImage(int i) {
         Handler handler =  new Handler();
         handler.postDelayed(() -> pager.setCurrentItem(i), 5);
@@ -260,7 +297,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
      * The method notify the viewpager that number of items have changed.
      */
     public void notifyDataSetChanged(){
-        adapter.notifyDataSetChanged();
+        if (null != adapter) {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -312,7 +351,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 }
                 pager.postDelayed(() -> getActivity().invalidateOptionsMenu(), 5);
             }
-            return MediaDetailFragment.forMedia(i, editable, isFeaturedImage);
+            return MediaDetailFragment.forMedia(i, editable, isFeaturedImage, isWikipediaButtonDisplayed);
         }
 
         @Override

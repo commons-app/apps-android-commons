@@ -275,7 +275,7 @@
   <string name="error_while_cache">Erro ao colocar imagens na cache</string>
   <string name="title_info">Um título descritivo exclusivo para o ficheiro, que servirá como um nome de ficheiro. Pode utilizar uma linguagem simples com espaços. Não inclua a extensão do ficheiro</string>
   <string name="description_info">Descreva o elemento multimédia da melhor forma possível, por favor. Onde foi tirado? O que é mostrado? Qual é o contexto? Descreva os objetos ou pessoas. Indique as informações que não podem ser facilmente adivinhadas; por exemplo, a hora do dia, se for uma paisagem. Se o ficheiro mostra algo incomum, explique o que é incomum.</string>
-  <string name="caption_info" fuzzy="true">Escreva uma breve descrição da imagem, por favor (limite de 255 caracteres).</string>
+  <string name="caption_info">Escreva uma breve descrição da imagem, por favor. A primeira legenda seria usada como título da imagem.</string>
   <string name="upload_image_too_dark">Esta imagem está demasiado escura; tem a certeza de que deseja carregá-la? A wiki Wikimedia Commons só aceita as imagens de valor enciclopédico.</string>
   <string name="upload_image_blurry">Esta imagem está desfocada; tem a certeza de que deseja carregá-la? A wiki Wikimedia Commons serve apenas para imagens de valor enciclopédico.</string>
   <string name="upload_problem_exist">Possíveis problemas com esta imagem:</string>
@@ -400,6 +400,7 @@
   <string name="nominate_delete">Nomear para eliminação</string>
   <string name="delete">Eliminar</string>
   <string name="Achievements">Realizações</string>
+  <string name="Profile">Perfil</string>
   <string name="statistics">Estatísticas</string>
   <string name="statistics_thanks">Agradecimentos recebidos</string>
   <string name="statistics_featured">Imagens destacadas</string>
@@ -578,6 +579,15 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logótipo</string>
   <string name="delete_helper_ask_reason_copyright_other">Outro</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque é</string>
+  <string name="category_edit_helper_make_edit_toast">A tentar atualizar categorias.</string>
+  <string name="category_edit_helper_show_edit_title">Atualização da categoria</string>
+  <string name="category_edit_helper_show_edit_title_success">Êxito</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">A categoria %1$s foi adicionada.</item>
+    <item quantity="other">As categorias %1$s foram adicionadas.</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">Não foi possível adicionar categorias.</string>
+  <string name="category_edit_button_text">Atualizar categorias</string>
   <string name="share_image_via">Partilhar imagem via</string>
   <string name="no_achievements_yet">Ainda não fez nenhuma contribuição</string>
   <string name="account_created">Conta criada!</string>
@@ -613,6 +623,10 @@
   <string name="use_location_from_similar_image">Tirou estas duas fotos no mesmo lugar? Quer usar a latitude/longitude da fotografia da direita?</string>
   <string name="load_more">Carregar mais</string>
   <string name="nearby_no_results">Não foi encontrado nenhum local; tente alterar os seus critérios de pesquisa.</string>
+  <string name="todo_improve">Melhoramentos sugeridos:</string>
+  <string name="missing_category">- Adicionar categorias a esta imagem para melhorar a usabilidade.</string>
+  <string name="missing_article">- Adicionar esta imagem ao artigo relacionado da Wikipédia que não tem imagens.</string>
+  <string name="edit_category">Editar categorias</string>
   <string name="add_picture_to_wikipedia_article_title">Adicionar imagem à Wikipédia</string>
   <string name="add_picture_to_wikipedia_article_desc">Deseja adicionar esta fotografia ao artigo da Wikipédia em %1$s?</string>
   <string name="add_picture_to_wikipedia_instructions_title">Instruções</string>
@@ -630,4 +644,23 @@
   <string name="pause">pausar</string>
   <string name="resume">continuar</string>
   <string name="paused">Em pausa</string>
+  <string name="achievements_tab_title">Realizações</string>
+  <string name="leaderboard_tab_title">Tabela de classificação</string>
+  <string name="rank_prefix">Classificação:</string>
+  <string name="count_prefix">Número:</string>
+  <string name="leaderboard_column_rank">Classificação</string>
+  <string name="leaderboard_column_user">Utilizador</string>
+  <string name="leaderboard_column_count">Número</string>
+  <string name="setting_avatar_dialog_title">Definir como avatar da tabela de classificação</string>
+  <string name="setting_avatar_dialog_message">A definir como avatar; aguarde, por favor</string>
+  <string name="avatar_set_successfully">Avatar definido</string>
+  <string name="avatar_set_unsuccessfully">Erro ao definir o novo avatar; tente novamente, por favor</string>
+  <string name="menu_set_avatar">Definir como avatar</string>
+  <string name="leaderboard_yearly">Anual</string>
+  <string name="leaderboard_weekly">Semanal</string>
+  <string name="leaderboard_all_time">Desde o início</string>
+  <string name="leaderboard_upload">Carregar</string>
+  <string name="leaderboard_nearby">Aqui perto</string>
+  <string name="leaderboard_used">Usados</string>
+  <string name="leaderboard_my_rank_button_text">A minha classificação</string>
 </resources>

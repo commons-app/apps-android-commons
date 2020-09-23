@@ -263,7 +263,7 @@
   <string name="error_while_cache">Грешка при меѓускладирање на сликите</string>
   <string name="title_info">Краток и единствен наслов на податотеката, кој ќе служи како нејзин назив. Можете да користите прост јазик со меѓупростор, но не пишувајте ја податотечната наставка</string>
   <string name="description_info">Објаснете ја податотеката што подобро можете: Каде е направена? Што е прикажано на неа? Кој е контекстот? Опишете ги предметите, објектите и личностите. Дајте сознанија што не можат лесно да се погодат, како на пр. време од денот ако се работи за природен предел. Ако на неа е претставено нешто необично, објаснете зошто прикажаното е необично.</string>
-  <string name="caption_info" fuzzy="true">Ставете краток опис на сликата. (највеќе 255 знаци)</string>
+  <string name="caption_info">Ставете краток опис на сликата. Првиот опис ќе се користи како наслов на сликата.</string>
   <string name="upload_image_too_dark">Сликата ви е претемна. Дали сигурно сакате да ја подигнете? Ризницата е посветена само на слики со енциклопедиска вредност.</string>
   <string name="upload_image_blurry">Сликата ви е матна. Дали сигурно сакате да ја подигнете? Ризницата е посветена само на слики со енциклопедиска вредност.</string>
   <string name="upload_problem_exist">Потенцијални проблеми со сликава:</string>
@@ -388,6 +388,7 @@
   <string name="nominate_delete">Предложи за бришење</string>
   <string name="delete">Избриши</string>
   <string name="Achievements">Достигнувања</string>
+  <string name="Profile">Профил</string>
   <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Примени благодарници</string>
   <string name="statistics_featured">Избрани слики</string>
@@ -566,6 +567,15 @@
   <string name="delete_helper_ask_reason_copyright_logo">Лого</string>
   <string name="delete_helper_ask_reason_copyright_other">Друго</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Бидејќи е</string>
+  <string name="category_edit_helper_make_edit_toast">Се обидувам да ги подновам категориите.</string>
+  <string name="category_edit_helper_show_edit_title">Поднова на категории</string>
+  <string name="category_edit_helper_show_edit_title_success">Успеа</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">Додадена е категоријата %1$s.</item>
+    <item quantity="other">Додадени се категориите %1$s.</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">Не можев да ги додадам категориите.</string>
+  <string name="category_edit_button_text">Поднови категории</string>
   <string name="share_image_via">Сподели ја сликата преку</string>
   <string name="no_achievements_yet">Засега немате придонеси</string>
   <string name="account_created">Сметката е создадена!</string>
@@ -601,6 +611,10 @@
   <string name="use_location_from_similar_image">Дали ги направивте ови две слики на истото место? Дали сакате да ја искористите географската ширина/должина од десната слика?</string>
   <string name="load_more">Вчитај уште</string>
   <string name="nearby_no_results">Не пронајдов места. Изменете ги критериумите во барањето.</string>
+  <string name="todo_improve">Предложени подобрувања:</string>
+  <string name="missing_category">- Додајте ѝ категории на сликава за да ја подобрите нејзината употребливост.</string>
+  <string name="missing_article">- Додајте ја сликава во поврзаната статија на Википедија која нема слики.</string>
+  <string name="edit_category">Уреди категории</string>
   <string name="add_picture_to_wikipedia_article_title">Додај ја сликата на Википедија</string>
   <string name="add_picture_to_wikipedia_article_desc">Дали би сакале да ја додадете сликава во википедиската статија на %1$s?</string>
   <string name="add_picture_to_wikipedia_instructions_title">Напатствија</string>
@@ -618,4 +632,26 @@
   <string name="pause">запри</string>
   <string name="resume">продолжи</string>
   <string name="paused">Запрено</string>
+  <string name="achievements_tab_title">Достигнувања</string>
+  <string name="leaderboard_tab_title">Предводници</string>
+  <string name="rank_prefix">Место:</string>
+  <string name="count_prefix">Број:</string>
+  <string name="leaderboard_column_rank">Место</string>
+  <string name="leaderboard_column_user">Корисник</string>
+  <string name="leaderboard_column_count">Број</string>
+  <string name="setting_avatar_dialog_title">Задај како аватар за табелата на предводници</string>
+  <string name="setting_avatar_dialog_message">Го поставувам аватарот. Почекајте.</string>
+  <string name="avatar_set_successfully">Аватарот е поставен</string>
+  <string name="avatar_set_unsuccessfully">Грешка при поставувањето на новиот аватар. Обидете се повторно.</string>
+  <string name="menu_set_avatar">Стави како аватар</string>
+  <string name="leaderboard_yearly">Годишно</string>
+  <string name="leaderboard_weekly">Неделно</string>
+  <string name="leaderboard_all_time">На сите времиња</string>
+  <string name="leaderboard_upload">Подигни</string>
+  <string name="leaderboard_nearby">Во близина</string>
+  <string name="leaderboard_used">Користено</string>
+  <string name="leaderboard_my_rank_button_text">Мој ранг</string>
+  <string name="mapbox_telemetry">Откажување од телеметрија</string>
+  <string name="telemetry_opt_out_summary">Испраќајте анонимизирани податоци за место и употреба на Mapbox кога ја коиристите можноста „Во близина“</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Подобрете ја картава&lt;/a&gt;</string>
 </resources>

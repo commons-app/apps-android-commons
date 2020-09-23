@@ -7,11 +7,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
-
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
 import androidx.exifinterface.media.ExifInterface;
-
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.datasource.DataSource;
@@ -21,13 +19,15 @@ import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
 import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
-
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
 
 /**
@@ -69,7 +69,9 @@ public class ImageUtils {
     public static final int FILE_NAME_EXISTS = -4;
     static final int NO_CATEGORY_SELECTED = -5;
 
-    private static ProgressDialog progressDialog;
+    private static ProgressDialog progressDialogWallpaper;
+
+    private static ProgressDialog progressDialogAvatar;
 
     @IntDef(
             flag = true,
@@ -223,26 +225,76 @@ public class ImageUtils {
         }, CallerThreadExecutor.getInstance());
     }
 
+    /**
+     * Calls the set avatar api to set the image url as user's avatar
+     * @param context
+     * @param url
+     * @param username
+     * @param okHttpJsonApiClient
+     * @param compositeDisposable
+     */
+    public static void setAvatarFromImageUrl(Context context, String url, String username,
+        OkHttpJsonApiClient okHttpJsonApiClient, CompositeDisposable compositeDisposable) {
+        showSettingAvatarProgressBar(context);
+
+        try {
+            compositeDisposable.add(okHttpJsonApiClient
+                .setAvatar(username, url)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    response -> {
+                        if (response != null && response.getStatus().equals("200")) {
+                            ViewUtil.showLongToast(context, context.getString(R.string.avatar_set_successfully));
+                            if (progressDialogAvatar != null && progressDialogAvatar.isShowing()) {
+                                progressDialogAvatar.dismiss();
+                            }
+                        }
+                    },
+                    t -> {
+                        Timber.e(t, "Setting Avatar Failed");
+                        ViewUtil.showLongToast(context, context.getString(R.string.avatar_set_unsuccessfully));
+                        if (progressDialogAvatar != null) {
+                            progressDialogAvatar.cancel();
+                        }
+                    }
+                ));
+        }
+        catch (Exception e){
+            Timber.d(e+"success");
+            ViewUtil.showLongToast(context, context.getString(R.string.avatar_set_unsuccessfully));
+            if (progressDialogAvatar != null) {
+                progressDialogAvatar.cancel();
+            }
+        }
+
+    }
+
     private static void setWallpaper(Context context, Bitmap bitmap) {
         WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
         try {
             wallpaperManager.setBitmap(bitmap);
             ViewUtil.showLongToast(context, context.getString(R.string.wallpaper_set_successfully));
-            if (progressDialog != null && progressDialog.isShowing()) {
-                progressDialog.dismiss();
+            if (progressDialogWallpaper != null && progressDialogWallpaper.isShowing()) {
+                progressDialogWallpaper.dismiss();
             }
         } catch (IOException e) {
             Timber.e(e, "Error setting wallpaper");
             ViewUtil.showLongToast(context, context.getString(R.string.wallpaper_set_unsuccessfully));
-            if (progressDialog != null) {
-                progressDialog.cancel();
+            if (progressDialogWallpaper != null) {
+                progressDialogWallpaper.cancel();
             }
         }
     }
 
     private static void showSettingWallpaperProgressBar(Context context) {
-        progressDialog = ProgressDialog.show(context, context.getString(R.string.setting_wallpaper_dialog_title),
+        progressDialogWallpaper = ProgressDialog.show(context, context.getString(R.string.setting_wallpaper_dialog_title),
                 context.getString(R.string.setting_wallpaper_dialog_message), true);
+    }
+
+    private static void showSettingAvatarProgressBar(Context context) {
+        progressDialogAvatar = ProgressDialog.show(context, context.getString(R.string.setting_avatar_dialog_title),
+            context.getString(R.string.setting_avatar_dialog_message), true);
     }
 
     /**

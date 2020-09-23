@@ -15,10 +15,12 @@
 * Mehdi
 * Mjbmr
 * Mobin2008
+* Nightdevil
 * Omidh
 * Ommmmid
 * Physicsch
 * Reza1615
+* Sunfyre
 * Vahedi
 * Yoosef Pooranvary
 * جواد
@@ -81,6 +83,7 @@
   <string name="upload_progress_notification_title_finishing">اتمام بارگذاری %1$s</string>
   <string name="upload_failed_notification_title">%1$s بارگذاری نشد</string>
   <string name="upload_failed_notification_subtitle">برای دیدن انگشت بزنید</string>
+  <string name="upload_paused_notification_subtitle">برای دیدن انگشت بزنید</string>
   <string name="title_activity_contributions">بارگذاری‌های اخیر من</string>
   <string name="contribution_state_queued">در صف</string>
   <string name="contribution_state_failed">ناموفق بود</string>
@@ -108,6 +111,7 @@
   <string name="provider_modifications">تغییرها</string>
   <string name="menu_upload_single">بارگذاری</string>
   <string name="categories_search_text_hint">جستجوی رده‌ها</string>
+  <string name="depicts_search_text_hint">جستجو برای موضوعی که در پروندهٔ شما به‌نمایش کشیده‌شده است (مثلا کوه، تاج محل، ...)</string>
   <string name="menu_save_categories">ذخیره</string>
   <string name="refresh_button">تازه کردن</string>
   <string name="display_list_button">فهرست</string>
@@ -268,7 +272,7 @@
   <string name="error_while_cache">خطا در زمان دریافت تصاویر</string>
   <string name="title_info">عنوانی توصیفی و یکتا برای پرونده که به عنوان نام پرونده در نظر گرفته خواهد شد. ترجیحاً به زبان ساده باشد، می‌توانید فاصله هم به کار ببرید. پسوند پرونده را ننویسید.</string>
   <string name="description_info">لطفاً تصویر را تا حد توان شرح دهید. کجا گرفته شده‌است؟ شامل چه چیزی می‌شود؟ لطفاً اشیا یا افراد را شرح دهید. اطلاعاتی که به راحتی قابل مشاهده هستند را صرفه‌نظر کنید. اگر چیزی در تصویر غیر طبیعی به نظر می‌رسد آن را شرح دهید.</string>
-  <string name="caption_info" fuzzy="true">لطفاً شرح مختصری برای این تصویر بنویسید. (محدود به ۲۵۵ نویسه)</string>
+  <string name="caption_info">لطفاً شرح مختصری برای این تصویر بنویسید. از اولین توضیح برای عنوان تصویر استفاده خواهد شد.</string>
   <string name="upload_image_too_dark">این تصویر خیلی تار است. آیا مطمئنید که می‌خواهید آن را بارگذاری کنید؟ ویکی‌انبار فقط برای نگهداری از تصاویری است که ارزش دانشنامه‌ای داشته باشند.</string>
   <string name="upload_image_blurry">این تصویر خیلی محو است. آیا مطمئنید که می‌خواهید آن را بارگذاری کنید؟ ویکی‌انبار فقط برای نگهداری از تصاویری است که ارزش دانشنامه‌ای داشته باشند.</string>
   <string name="upload_problem_exist">مشکلات احتمالی با این تصویر :</string>
@@ -331,6 +335,8 @@
   <string name="about_translate_cancel">لغو</string>
   <string name="retry">سعى دوباره</string>
   <string name="showcase_view_got_it_button">فهمیدم!</string>
+  <string name="showcase_view_needs_photo">به تصویری از این مکان نیاز است.</string>
+  <string name="showcase_view_has_photo">هم‌اکنون تصویری از این مکان وجود دارد.</string>
   <string name="no_images_found">تصویری یافت نشد!</string>
   <string name="error_loading_images">خطایی هنگام بارگذاری پرونده‌ها رخ داد.</string>
   <string name="image_uploaded_by">بارگذاری‌شده توسط: %1$s</string>
@@ -376,6 +382,7 @@
   <string name="nominate_delete">نامزد کردن برای حذف</string>
   <string name="delete">حذف</string>
   <string name="Achievements">دستاوردها</string>
+  <string name="Profile">نمایه</string>
   <string name="statistics">آمار</string>
   <string name="statistics_thanks">تشکر دریافت‌شد</string>
   <string name="statistics_featured">تصاویر برگزیده</string>
@@ -427,7 +434,7 @@
   <string name="desc_language_Asia">آسیا</string>
   <string name="desc_language_Pacific">اقیانوس آرام</string>
   <string name="no_categories_selected">رده‌ای انتخاب نشده‌است</string>
-  <string name="no_categories_selected_warning_desc" fuzzy="true">تصاویر بدون رده به ندرت قابل‌استفاده هستند. آیا مطمئنید که می‌خواهید بدون انتخاب رده ادامه دهید؟</string>
+  <string name="no_categories_selected_warning_desc">تصاویر بدون رده به ندرت قابل‌استفاده هستند. آیا مطمئنید که می‌خواهید بدون انتخاب رده ادامه دهید؟</string>
   <string name="upload_flow_all_images_in_set">(برای همهٔ تصاویر موجود در مجموعه)</string>
   <string name="search_this_area">جستجوی این محدوده</string>
   <string name="nearby_card_permission_title">درخواست اجازه</string>
@@ -520,4 +527,11 @@
   <string name="theme_dark_name">تیره</string>
   <string name="theme_light_name">روشن</string>
   <string name="ask_to_turn_location_on">روشن کردن مکان؟</string>
+  <string name="achievements_tab_title">دستاوردها</string>
+  <string name="leaderboard_column_rank">رتبه</string>
+  <string name="leaderboard_column_user">کاربر</string>
+  <string name="leaderboard_yearly">سالیانه</string>
+  <string name="leaderboard_weekly">هفتگی</string>
+  <string name="leaderboard_all_time">تمام وقت</string>
+  <string name="leaderboard_upload">بارگذاری</string>
 </resources>

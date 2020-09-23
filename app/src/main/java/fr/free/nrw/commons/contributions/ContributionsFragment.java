@@ -27,6 +27,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
+
+import fr.free.nrw.commons.MediaDataExtractor;
+import fr.free.nrw.commons.auth.SessionManager;
+import io.reactivex.disposables.Disposable;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
@@ -89,6 +98,9 @@ public class ContributionsFragment
     @BindView(R.id.campaigns_view) CampaignView campaignView;
 
     @Inject ContributionsPresenter contributionsPresenter;
+
+    @Inject
+    SessionManager sessionManager;
 
     private LatLng curLatLng;
 
@@ -157,7 +169,14 @@ public class ContributionsFragment
 
         initFragments();
 
-        if (!ConfigUtils.isBetaFlavour()) {
+        if(shouldShowMediaDetailsFragment){
+            showMediaDetailPagerFragment();
+        }else{
+            showContributionsListFragment();
+        }
+
+        if (!ConfigUtils.isBetaFlavour() && sessionManager.isUserLoggedIn()
+            && sessionManager.getCurrentAccount() != null) {
             setUploadCount();
         }
         setHasOptionsMenu(true);
@@ -513,12 +532,12 @@ public class ContributionsFragment
      * contribution.
      */
     @Override
-    public void showDetail(int position) {
+    public void showDetail(int position, boolean isWikipediaButtonDisplayed) {
         if (mediaDetailPagerFragment == null || !mediaDetailPagerFragment.isVisible()) {
             mediaDetailPagerFragment = new MediaDetailPagerFragment();
             showMediaDetailPagerFragment();
         }
-        mediaDetailPagerFragment.showImage(position);
+        mediaDetailPagerFragment.showImage(position, isWikipediaButtonDisplayed);
     }
 
     @Override

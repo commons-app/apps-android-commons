@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.JsonObject;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -29,7 +30,7 @@ public interface UploadInterface {
   @POST(MW_API_PREFIX + "action=upload&ignorewarnings=1")
   @FormUrlEncoded
   @NonNull
-  Observable<UploadResponse> uploadFileFromStash(@NonNull @Field("token") String token,
+  Observable<JsonObject> uploadFileFromStash(@NonNull @Field("token") String token,
       @NonNull @Field("text") String text,
       @NonNull @Field("comment") String comment,
       @NonNull @Field("filename") String filename,

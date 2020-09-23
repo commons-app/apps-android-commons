@@ -397,6 +397,7 @@
   <string name="nominate_delete">Nominar para borrado</string>
   <string name="delete">Borrar</string>
   <string name="Achievements">Logros</string>
+  <string name="Profile">Perfil</string>
   <string name="statistics">Estadísticas</string>
   <string name="statistics_thanks">Agradecimientos recibidos</string>
   <string name="statistics_featured">Imágenes destacadas</string>
@@ -570,6 +571,15 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Otra</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque sí</string>
+  <string name="category_edit_helper_make_edit_toast">Intentando actualizar las categorías.</string>
+  <string name="category_edit_helper_show_edit_title">Actualización de categorías</string>
+  <string name="category_edit_helper_show_edit_title_success">Éxito</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">Se añade %1$s categoría.</item>
+    <item quantity="other">Se añaden %1$s categorías.</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">No se pudieron añadir las categorías.</string>
+  <string name="category_edit_button_text">Actualizar categorías</string>
   <string name="share_image_via">Compartir imagen via</string>
   <string name="no_achievements_yet">No ha realizado ninguna contribución aún</string>
   <string name="account_created">Cuenta creada</string>
@@ -589,7 +599,15 @@
   <string name="theme_default_name">Seguir sistema</string>
   <string name="theme_dark_name">Oscuro</string>
   <string name="theme_light_name">Claro</string>
+  <string name="todo_improve">Mejoras sugeridas:</string>
+  <string name="edit_category">Editar categorías</string>
   <string name="pause">pausar</string>
   <string name="resume">reanudar</string>
   <string name="paused">En pausa</string>
+  <string name="achievements_tab_title">Logros</string>
+  <string name="count_prefix">Recuento:</string>
+  <string name="menu_set_avatar">Establecer como avatar</string>
+  <string name="leaderboard_yearly">Por año</string>
+  <string name="leaderboard_weekly">Por semana</string>
+  <string name="leaderboard_all_time">Todo el tiempo</string>
 </resources>

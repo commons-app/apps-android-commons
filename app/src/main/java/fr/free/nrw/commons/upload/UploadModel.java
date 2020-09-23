@@ -141,6 +141,13 @@ public class UploadModel {
         {
             final Contribution contribution = new Contribution(
                 item, sessionManager, newListOf(selectedDepictions), newListOf(selectedCategories));
+
+            contribution.setHasInvalidLocation(item.hasInvalidLocation());
+
+            Timber.d("Created timestamp while building contribution is %s, %s",
+                item.getCreatedTimestamp(),
+                new Date(item.getCreatedTimestamp()));
+
             if (item.getCreatedTimestamp() != -1L) {
                 contribution.setDateCreated(new Date(item.getCreatedTimestamp()));
                 contribution.setDateCreatedSource(item.getCreatedTimestampSource());
@@ -188,4 +195,5 @@ public class UploadModel {
     public List<DepictedItem> getSelectedDepictions() {
         return selectedDepictions;
     }
+
 }

@@ -6,14 +6,14 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/more_achievements"
+        android:id="@+id/more_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:drawableStart="@drawable/ic_feedback_black_24dp"
         android:drawablePadding="12dp"
         android:padding="8dp"
-        android:text="@string/Achievements"
+        android:text="@string/Profile"
         android:textSize="18sp" />
 
     <TextView
