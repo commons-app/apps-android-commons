@@ -83,6 +83,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
+import fr.free.nrw.commons.navtab.NavTab;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
@@ -223,6 +224,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         ButterKnife.bind(this, view);
         initNetworkBroadCastReceiver();
         presenter=new NearbyParentFragmentPresenter(bookmarkLocationDao);
+
         // Inflate the layout for this fragment
         return view;
 
@@ -870,7 +872,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 runnable,
-                () -> ((MainActivity) getActivity()).viewPager.setCurrentItem(CONTRIBUTIONS_TAB_POSITION),
+                () -> ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code()),
                 R.string.location_permission_title,
                 R.string.location_permission_rationale_nearby);
     }

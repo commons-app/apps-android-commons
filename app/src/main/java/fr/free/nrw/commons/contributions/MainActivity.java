@@ -115,6 +115,10 @@ public class MainActivity  extends BaseActivity
         }
     }
 
+    public void setSelectedItemId(int id) {
+        tabLayout.setSelectedItemId(id);
+    }
+
     private void setUpPager() {
         loadFragment(ContributionsFragment.newInstance());
         tabLayout.setOnNavigationItemSelectedListener(item -> {

@@ -50,6 +50,7 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
         super.onCreateView(inflater, container, savedInstanceState);
         final View view = inflater.inflate(R.layout.fragment_more_bottom_sheet, container, false);
         ButterKnife.bind(this, view);
+        setUserName();
         return view;
     }
 
@@ -60,7 +61,6 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
             .getInstance(getActivity().getApplicationContext())
             .getCommonsApplicationComponent()
             .inject(this);
-        setUserName();
     }
 
     /**
