@@ -1,5 +1,10 @@
 # Wikimedia Commons for Android
 
+## v2.13.2
+- Fixed issue with invisible pins on Nearby map being targetable
+- Fixed logout bug
+- Fixed various crashes
+
 ## v2.13.1
 - Added OpenStreetMap attribution
 - Fixed various crashes
