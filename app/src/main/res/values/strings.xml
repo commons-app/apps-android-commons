@@ -10,6 +10,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads"> Starting Uploads</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Starting %1$d upload</item>
     <item quantity="other">Starting %1$d uploads</item>

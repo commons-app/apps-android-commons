@@ -14,7 +14,6 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ChunkInfo;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -27,15 +26,10 @@ import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
 import io.reactivex.Completable;
-import io.reactivex.CompletableObserver;
-import io.reactivex.CompletableSource;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Scheduler;
-import io.reactivex.Single;
-import io.reactivex.SingleSource;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.processors.PublishProcessor;
@@ -46,7 +40,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.inject.Inject;
@@ -231,6 +224,8 @@ public class UploadService extends CommonsDaggerService {
 
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
+    startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS,
+        curNotification.setContentText(getText(R.string.starting_uploads)).build());
     if (ACTION_START_SERVICE.equals(intent.getAction()) && freshStart) {
       compositeDisposable.add(contributionDao.updateStates(Contribution.STATE_FAILED,
           new int[]{Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS})
