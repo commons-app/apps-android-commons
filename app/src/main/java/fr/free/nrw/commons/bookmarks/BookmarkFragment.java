@@ -45,8 +45,8 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment
   ContributionController controller;
 
   @NonNull
-  public static ExploreFragment newInstance() {
-    ExploreFragment fragment = new ExploreFragment();
+  public static BookmarkFragment newInstance() {
+    BookmarkFragment fragment = new BookmarkFragment();
     fragment.setRetainInstance(true);
     return fragment;
   }
