@@ -25,7 +25,7 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.utils.ActivityUtils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -239,7 +239,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_search:
-                NavigationBaseActivity.startActivityWithFlags(getActivity(), SearchActivity.class);
+                ActivityUtils.startActivityWithFlags(getActivity(), SearchActivity.class);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

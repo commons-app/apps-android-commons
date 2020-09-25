@@ -19,7 +19,8 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.utils.ActivityUtils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ import java.util.List;
 
 
 public class ExploreActivity
-        extends NavigationBaseActivity
+        extends BaseActivity
         implements MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
 
     private static final String FEATURED_IMAGES_CATEGORY = "Featured_pictures_on_Wikimedia_Commons";
@@ -64,7 +65,6 @@ public class ExploreActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_explore);
         ButterKnife.bind(this);
-        initDrawer();
         setTitle(getString(R.string.title_activity_explore));
         supportFragmentManager = getSupportFragmentManager();
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -162,7 +162,6 @@ public class ExploreActivity
             viewPager.setVisibility(View.VISIBLE);
             mediaContainer.setVisibility(View.GONE);
         }
-        initDrawer();
         super.onBackPressed();
     }
 
@@ -189,7 +188,6 @@ public class ExploreActivity
             // https://stackoverflow.com/questions/11353075/how-can-i-maintain-fragment-state-when-added-to-the-back-stack/19022550#19022550            supportFragmentManager.executePendingTransactions();
         }
         mediaDetails.showImage(position);
-        forceInitBackButton();
     }
 
     /**
@@ -212,7 +210,7 @@ public class ExploreActivity
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_search:
-                NavigationBaseActivity.startActivityWithFlags(this, SearchActivity.class);
+                ActivityUtils.startActivityWithFlags(this, SearchActivity.class);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
