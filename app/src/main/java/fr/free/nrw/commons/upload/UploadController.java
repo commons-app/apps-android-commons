@@ -94,12 +94,13 @@ public class UploadController {
         //Set creator, desc, and license
 
         // If author name is enabled and set, use it
+        final Media media = contribution.getMedia();
         if (store.getBoolean("useAuthorName", false)) {
             final String authorName = store.getString("authorName", "");
-            contribution.setCreator(authorName);
+            media.setCreator(authorName);
         }
 
-        if (TextUtils.isEmpty(contribution.getCreator())) {
+        if (TextUtils.isEmpty(media.getCreator())) {
             final Account currentAccount = sessionManager.getCurrentAccount();
             if (currentAccount == null) {
                 Timber.d("Current account is null");
@@ -107,15 +108,15 @@ public class UploadController {
                 sessionManager.forceLogin(context);
                 return;
             }
-            contribution.setCreator(sessionManager.getAuthorName());
+            media.setCreator(sessionManager.getAuthorName());
         }
 
-        if (contribution.getDescription() == null) {
-            contribution.setDescription("");
+        if (media.getFallbackDescription() == null) {
+            media.setFallbackDescription("");
         }
 
         final String license = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
-        contribution.setLicense(license);
+        media.setLicense(license);
 
         uploadTask(contribution);
     }
@@ -164,7 +165,7 @@ public class UploadController {
         return mimeType;
     }
 
-    private long resolveDataLength(final ContentResolver contentResolver, final Media contribution) {
+    private long resolveDataLength(final ContentResolver contentResolver, final Contribution contribution) {
         try {
             if (contribution.getDataLength() <= 0) {
                 Timber.d("UploadController/doInBackground, contribution.getLocalUri():%s", contribution.getLocalUri());
@@ -182,7 +183,7 @@ public class UploadController {
         return contribution.getDataLength();
     }
 
-    private Date resolveDateTakenOrNow(final ContentResolver contentResolver, final Media contribution) {
+    private Date resolveDateTakenOrNow(final ContentResolver contentResolver, final Contribution contribution) {
         Timber.d("local uri   %s", contribution.getLocalUri());
         try(final Cursor cursor = dateTakenCursor(contentResolver, contribution)) {
             if (cursor != null && cursor.getCount() != 0 && cursor.getColumnCount() != 0) {
@@ -196,7 +197,7 @@ public class UploadController {
         }
     }
 
-    private Cursor dateTakenCursor(final ContentResolver contentResolver, final Media contribution) {
+    private Cursor dateTakenCursor(final ContentResolver contentResolver, final Contribution contribution) {
         return contentResolver.query(contribution.getLocalUri(),
             new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
     }

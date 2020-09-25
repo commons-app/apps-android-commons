@@ -158,6 +158,7 @@
   <string name="add_description">+ Pievienot aprakstu</string>
   <string name="search_history_deleted">Meklējumu vēsture izdzēsta</string>
   <string name="delete">Dzēst</string>
+  <string name="Profile">Profils</string>
   <string name="statistics">Statistika</string>
   <string name="level">Līmenis</string>
   <string name="nearby_fragment">Tuvumā</string>
@@ -205,4 +206,10 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logotips</string>
   <string name="delete_helper_ask_reason_copyright_other">Cits</string>
   <string name="account_created">Konts izveidots!</string>
+  <string name="achievements_tab_title">Sasniegumi</string>
+  <string name="count_prefix">Skaits:</string>
+  <string name="leaderboard_column_rank">Rangs</string>
+  <string name="leaderboard_column_user">Dalībnieks</string>
+  <string name="leaderboard_column_count">Skaits</string>
+  <string name="leaderboard_nearby">Tuvumā</string>
 </resources>

@@ -3,17 +3,20 @@ package fr.free.nrw.commons.delete
 import android.content.Context
 import android.content.res.Resources
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.achievements.FeedbackResponse
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.profile.achievements.FeedbackResponse
+import fr.free.nrw.commons.profile.leaderboard.LeaderboardResponse
+import fr.free.nrw.commons.profile.leaderboard.UpdateAvatarResponse
 import fr.free.nrw.commons.utils.ViewUtilWrapper
+import io.reactivex.Observable
 import io.reactivex.Single
+import media
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import java.util.*
@@ -54,9 +57,12 @@ class ReasonBuilderTest {
         `when`(sessionManager?.doesAccountExist()).thenReturn(true)
         `when`(okHttpJsonApiClient!!.getAchievements(anyString()))
                 .thenReturn(Single.just(mock(FeedbackResponse::class.java)))
+        `when`(okHttpJsonApiClient!!.getLeaderboard(anyString(), anyString(), anyString(), anyString(), anyString()))
+            .thenReturn(Observable.just(mock(LeaderboardResponse::class.java)))
+        `when`(okHttpJsonApiClient!!.setAvatar(anyString(), anyString()))
+            .thenReturn(Single.just(mock(UpdateAvatarResponse::class.java)))
 
-        val media = Media("test_file")
-        media.dateUploaded=Date()
+        val media = media(filename="test_file", dateUploaded = Date())
 
         reasonBuilder!!.getReason(media, "test")
         verify(sessionManager, times(0))!!.forceLogin(any(Context::class.java))

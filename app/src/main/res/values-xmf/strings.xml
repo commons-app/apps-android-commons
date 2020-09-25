@@ -14,10 +14,12 @@
   <plurals name="starting_multiple_uploads">
     <item quantity="one">იჭყაფუ %1$d ეხარგუა</item>
     <item quantity="few">იჭყაფუ %1$d ეხარგუა</item>
+    <item quantity="other">იჭყაფუ %1$d ეხარგუა</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d ეხარგუა</item>
     <item quantity="few">%1$d ეხარგუა</item>
+    <item quantity="other">%1$d ეხარგუა</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">თე სურათი გიბჟინუ %1$s ლიცენზიათ</item>
@@ -53,6 +55,7 @@
   <string name="upload_progress_notification_title_finishing">ეხარგუაშ თება %1$</string>
   <string name="upload_failed_notification_title">%1$ ეხარგუაქ ვემიხუჯინუ</string>
   <string name="upload_failed_notification_subtitle">ოძირაფალო ქეგუწკანტეთ</string>
+  <string name="upload_paused_notification_subtitle">ოძირაფალო ქეგუწკანტეთ</string>
   <string name="title_activity_contributions">ჩქიმი ბოლო ეხარგუეფი</string>
   <string name="contribution_state_queued">რადი</string>
   <string name="contribution_state_failed">ვემიხუჯინუ</string>

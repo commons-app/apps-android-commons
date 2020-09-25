@@ -6,6 +6,7 @@
 * Leducthn
 * Leduyquang753
 * Minh Nguyen
+* Nguyễn Mạnh An
 * Nhatminh01
 * Phjtieudoc
 * Thanhtai2009
@@ -294,4 +295,13 @@
   <string name="share_coordinates_not_present">Tọa độ không được chỉ định khi chọn hình ảnh</string>
   <string name="error_fetching_nearby_places">Lỗi khi lấy các nơi lân cận.</string>
   <string name="search_this_area">Tìm kiếm khu vực này</string>
+  <string name="category_edit_helper_make_edit_toast">Đang cố gắng cập nhật danh mục.</string>
+  <string name="category_edit_helper_show_edit_title">Cập nhật danh mục</string>
+  <string name="category_edit_helper_show_edit_title_success">Thành công</string>
+  <string name="category_edit_helper_edit_message_else">Không thể thêm danh mục.</string>
+  <string name="category_edit_button_text">Cập nhật danh mục</string>
+  <string name="todo_improve">Các cải thiện được đề xuất:</string>
+  <string name="missing_category">- Thêm danh mục vào hình ảnh này để cải thiện khả năng sử dụng.</string>
+  <string name="missing_article">- Thêm hình ảnh này vào bài viết Wikipedia được liên kết không có hình ảnh.</string>
+  <string name="edit_category">Sửa thể loại</string>
 </resources>

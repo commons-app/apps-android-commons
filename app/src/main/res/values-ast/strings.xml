@@ -259,7 +259,7 @@
   <string name="error_while_cache">Error al poner les fotos na caché</string>
   <string name="title_info">Un títulu descriptivu únicu pal ficheru, que sirvirá para da-y nome al mesmu. Puede usase llinguaxe normal con espacios. Nun incluyas la estensión del ficheru</string>
   <string name="description_info">Por favor, describi l\'elementu multimedia tantu como sía posible: ¿ónde se tomó?, ¿qué amuesa?, ¿cuál ye\'l contestu? Por favor, describi los oxetos o persones. Revela la información que nun pueda aldovinase de mou cenciellu, por casu el momentu del día si ye un paisaxe. Si\'l mediu amuesa daqué desacostumao, esplica qué lo fai raro.</string>
-  <string name="caption_info">Escribi una descripción curtia de la imaxe. (Llende de 255 caráuteres)</string>
+  <string name="caption_info" fuzzy="true">Escribi una descripción curtia de la imaxe. (Llende de 255 caráuteres)</string>
   <string name="upload_image_too_dark">Esta imaxe ye escura enforma, ¿tas seguru de que quies xubila? Wikimedia Commons ye sólo pa imaxes con valor enciclopédicu.</string>
   <string name="upload_image_blurry">Esta imaxe ta borrosa, ¿tas seguru de que quies xubila? Wikimedia Commons ye sólo pa imaxes con valor enciclopédicu.</string>
   <string name="upload_problem_exist">Problemes potenciales con esta imaxe:</string>

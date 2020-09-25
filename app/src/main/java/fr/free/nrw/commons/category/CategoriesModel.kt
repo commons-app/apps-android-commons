@@ -91,8 +91,9 @@ class CategoriesModel @Inject constructor(
                 Function4(::combine)
             )
         else
-            categoryClient.searchCategoriesForPrefix(term.toLowerCase(), SEARCH_CATS_LIMIT)
+            categoryClient.searchCategoriesForPrefix(term, SEARCH_CATS_LIMIT)
                 .map { it.sortedWith(StringSortingUtils.sortBySimilarity(term)) }
+                .toObservable()
     }
 
     private fun categoriesFromDepiction(selectedDepictions: List<DepictedItem>) =
@@ -121,12 +122,11 @@ class CategoriesModel @Inject constructor(
 
     /**
      * Return category for single title
-     * title is converted to lower case to make search case-insensitive
      * @param title
      * @return
      */
     private fun getTitleCategories(title: String): Observable<List<String>> {
-        return categoryClient.searchCategories(title.toLowerCase(), SEARCH_CATS_LIMIT)
+        return categoryClient.searchCategories(title, SEARCH_CATS_LIMIT).toObservable()
     }
 
 
@@ -159,6 +159,6 @@ class CategoriesModel @Inject constructor(
     }
 
     companion object {
-        private const val SEARCH_CATS_LIMIT = 25
+        const val SEARCH_CATS_LIMIT = 25
     }
 }

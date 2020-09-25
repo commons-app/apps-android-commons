@@ -46,4 +46,29 @@
         <item>1</item>
         <item>0</item>
     </string-array>
+
+    <string-array name="leaderboard_categories">
+        <item>@string/leaderboard_upload</item>
+        <item>@string/leaderboard_used</item>
+        <item>@string/leaderboard_nearby</item>
+    </string-array>
+
+    <string-array name="leaderboard_category_values">
+        <item>upload</item>
+        <item>used</item>
+        <item>nearby</item>
+    </string-array>
+
+    <string-array name="leaderboard_durations">
+        <item>@string/leaderboard_weekly</item>
+        <item>@string/leaderboard_yearly</item>
+        <item>@string/leaderboard_all_time</item>
+    </string-array>
+
+    <string-array name="leaderboard_duration_values">
+        <item>weekly</item>
+        <item>yearly</item>
+        <item>all_time</item>
+    </string-array>
+    
 </resources>

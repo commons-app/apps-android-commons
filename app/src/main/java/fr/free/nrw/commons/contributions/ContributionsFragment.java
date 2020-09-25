@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.contributions;
 
 import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
+import static fr.free.nrw.commons.contributions.Contribution.STATE_PAUSED;
 import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
@@ -21,6 +22,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
+
+import fr.free.nrw.commons.MediaDataExtractor;
+import fr.free.nrw.commons.auth.SessionManager;
+import io.reactivex.disposables.Disposable;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
@@ -41,7 +51,6 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -82,6 +91,9 @@ public class ContributionsFragment
     @BindView(R.id.campaigns_view) CampaignView campaignView;
 
     @Inject ContributionsPresenter contributionsPresenter;
+
+    @Inject
+    SessionManager sessionManager;
 
     private LatLng curLatLng;
 
@@ -143,7 +155,14 @@ public class ContributionsFragment
 
         initFragments();
 
-        if (!ConfigUtils.isBetaFlavour()) {
+        if(shouldShowMediaDetailsFragment){
+            showMediaDetailPagerFragment();
+        }else{
+            showContributionsListFragment();
+        }
+
+        if (!ConfigUtils.isBetaFlavour() && sessionManager.isUserLoggedIn()
+            && sessionManager.getCurrentAccount() != null) {
             setUploadCount();
         }
 
@@ -455,7 +474,7 @@ public class ContributionsFragment
     @Override
     public void retryUpload(Contribution contribution) {
         if (NetworkUtils.isInternetConnectionEstablished(getContext())) {
-            if (contribution.getState() == STATE_FAILED && null != uploadService) {
+            if (contribution.getState() == STATE_FAILED || contribution.getState() == STATE_PAUSED || contribution.getState()==Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE && null != uploadService) {
                 uploadService.queue(contribution);
                 Timber.d("Restarting for %s", contribution.toString());
             } else {
@@ -468,17 +487,26 @@ public class ContributionsFragment
     }
 
     /**
+     * Pauses the upload
+     * @param contribution
+     */
+    @Override
+    public void pauseUpload(Contribution contribution) {
+        uploadService.pauseUpload(contribution);
+    }
+
+    /**
      * Replace whatever is in the current contributionsFragmentContainer view with
      * mediaDetailPagerFragment, and preserve previous state in back stack. Called when user selects a
      * contribution.
      */
     @Override
-    public void showDetail(int position) {
+    public void showDetail(int position, boolean isWikipediaButtonDisplayed) {
         if (mediaDetailPagerFragment == null || !mediaDetailPagerFragment.isVisible()) {
             mediaDetailPagerFragment = new MediaDetailPagerFragment();
             showMediaDetailPagerFragment();
         }
-        mediaDetailPagerFragment.showImage(position);
+        mediaDetailPagerFragment.showImage(position, isWikipediaButtonDisplayed);
     }
 
     @Override
@@ -489,6 +517,11 @@ public class ContributionsFragment
     @Override
     public int getTotalMediaCount() {
         return contributionsListFragment.getTotalMediaCount();
+    }
+
+    @Override
+    public Integer getContributionStateAt(int position) {
+        return contributionsListFragment.getContributionStateAt(position);
     }
 }
 

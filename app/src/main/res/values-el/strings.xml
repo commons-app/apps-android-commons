@@ -12,6 +12,7 @@
 * ManosHacker
 * Nikosgranturismogt
 * Nikosguard
+* Norhorn
 * Panos78
 * Protnet
 * Tgkarounos
@@ -300,6 +301,9 @@
   <string name="retry">Ξαναπροσπαθήστε</string>
   <string name="showcase_view_got_it_button">Κατάλαβα!</string>
   <string name="showcase_view_whole_nearby_activity" fuzzy="true">Αυτά είναι τα μέρη κοντά σας που χρειάζονται φωτογραφίες για να εικονογραφηθούν τα λήμματά τους στη Βικιπαίδεια</string>
+  <string name="showcase_view_needs_photo">Αυτή η τοποθεσία χρειάζεται φωτογραφία.</string>
+  <string name="showcase_view_has_photo">Αυτή η τοποθεσία έχει ήδη φωτογραφία.</string>
+  <string name="showcase_view_no_longer_exists">Η τοποθεσία δεν υπάρχει πλέον.</string>
   <string name="showcase_view_list_icon">Πατώντας αυτό το κουμπί φέρνει μια λίστα αυτών των μερών</string>
   <string name="showcase_view_plus_fab">Μπορείτε να ανεβάσετε μια εικόνα για οποιοδήποτε μέρος από την γκαλερί ή την κάμερά σας</string>
   <string name="no_images_found">Δεν βρέθηκαν εικόνες!</string>
@@ -352,6 +356,7 @@
   <string name="nominate_delete">Ορίστε για Αφαίρεση</string>
   <string name="delete">Διαγραφή</string>
   <string name="Achievements">Κατορθώματα</string>
+  <string name="Profile">Προφίλ</string>
   <string name="statistics">Στατιστικά</string>
   <string name="statistics_thanks">Ευχαριστίες που έχουν ληφθεί</string>
   <string name="statistics_featured">Προβεβλημμένες εικόνες</string>
@@ -413,4 +418,17 @@
   <string name="exif_tag_name_software">Λογισμικό</string>
   <string name="image_info">Πληροφορίες Εικόνας</string>
   <string name="delete_helper_show_deletion_title_failed">Απέτυχε</string>
+  <string name="achievements_tab_title">Κατορθώματα</string>
+  <string name="leaderboard_tab_title">Λίστα κατάταξης</string>
+  <string name="rank_prefix">Κατάταξη:</string>
+  <string name="leaderboard_column_rank">Κατάταξη</string>
+  <string name="leaderboard_column_user">Χρήστης</string>
+  <string name="avatar_set_unsuccessfully">Σφάλμα ορισμού νέου άβαταρ, παρακαλούμε δοκιμάστε ξανά.</string>
+  <string name="menu_set_avatar">Ορισμός ως άβαταρ</string>
+  <string name="leaderboard_yearly">Ετήσια</string>
+  <string name="leaderboard_weekly">Εβδομαδιαίο</string>
+  <string name="leaderboard_all_time">Όλων των εποχών</string>
+  <string name="leaderboard_upload">Ανέβασμα</string>
+  <string name="leaderboard_nearby">Γειτονικά</string>
+  <string name="leaderboard_used">Σε χρήση</string>
 </resources>

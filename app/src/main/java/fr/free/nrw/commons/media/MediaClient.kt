@@ -1,18 +1,20 @@
 package fr.free.nrw.commons.media
 
+import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.media.Depictions.Companion.from
+import fr.free.nrw.commons.category.ContinuationClient
+import fr.free.nrw.commons.explore.media.MediaConverter
 import fr.free.nrw.commons.utils.CommonsDateUtil
-import io.reactivex.Observable
 import io.reactivex.Single
 import org.wikipedia.dataclient.mwapi.MwQueryPage
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import org.wikipedia.wikidata.Entities
-import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.collections.ArrayList
+
+const val PAGE_ID_PREFIX = "M"
+const val CATEGORY_CONTINUATION_PREFIX = "category_"
 
 /**
  * Media Client to handle custom calls to Commons MediaWiki APIs
@@ -21,12 +23,12 @@ import kotlin.collections.ArrayList
 class MediaClient @Inject constructor(
     private val mediaInterface: MediaInterface,
     private val pageMediaInterface: PageMediaInterface,
-    private val mediaDetailInterface: MediaDetailInterface
-) {
+    private val mediaDetailInterface: MediaDetailInterface,
+    private val mediaConverter: MediaConverter
+) : ContinuationClient<MwQueryResponse, Media>() {
 
-    //OkHttpJsonApiClient used JsonKvStore for this. I don't know why.
-    private val continuationStore: MutableMap<String, Map<String, String>?>
-    private val continuationExists: MutableMap<String, Boolean>
+    fun getMediaById(id: String) =
+        responseMapper(mediaInterface.getMediaById(id)).map { it.first() }
 
     /**
      * Checks if a page exists on Commons
@@ -36,11 +38,7 @@ class MediaClient @Inject constructor(
      */
     fun checkPageExistsUsingTitle(title: String?): Single<Boolean> {
         return mediaInterface.checkPageExistsUsingTitle(title)
-            .map { mwQueryResponse: MwQueryResponse ->
-                mwQueryResponse
-                    .query()!!.firstPage()!!.pageId() > 0
-            }
-            .singleOrError()
+            .map { it.query()!!.firstPage()!!.pageId() > 0 }
     }
 
     /**
@@ -50,11 +48,7 @@ class MediaClient @Inject constructor(
      */
     fun checkFileExistsUsingSha(fileSha: String?): Single<Boolean> {
         return mediaInterface.checkFileExistsUsingSha(fileSha)
-            .map { mwQueryResponse: MwQueryResponse ->
-                mwQueryResponse
-                    .query()!!.allImages().size > 0
-            }
-            .singleOrError()
+            .map { it.query()!!.allImages().size > 0 }
     }
 
     /**
@@ -65,19 +59,9 @@ class MediaClient @Inject constructor(
      * @return
      */
     fun getMediaListFromCategory(category: String): Single<List<Media>> {
-        return responseToMediaList(
-            if (continuationStore.containsKey("category_$category")) mediaInterface.getMediaListFromCategory(
-                category,
-                10,
-                continuationStore["category_$category"]
-            ) else  //if true
-                mediaInterface.getMediaListFromCategory(
-                    category,
-                    10,
-                    emptyMap()
-                ),
-            "category_$category"
-        ) //if false
+        return continuationRequest(CATEGORY_CONTINUATION_PREFIX, category) {
+            mediaInterface.getMediaListFromCategory(category, 10, it)
+        }
     }
 
     /**
@@ -89,24 +73,9 @@ class MediaClient @Inject constructor(
      * @return
      */
     fun getMediaListForUser(userName: String): Single<List<Media>> {
-        val continuation =
-            if (continuationStore.containsKey("user_$userName")) continuationStore["user_$userName"] else emptyMap()
-        return responseToMediaList(
-            mediaInterface
-                .getMediaListForUser(userName, 10, continuation), "user_$userName"
-        )
-    }
-
-    /**
-     * Check if media for user has reached the end of the list.
-     * @param userName
-     * @return
-     */
-    fun doesMediaListForUserHaveMorePages(userName: String): Boolean {
-        val key = "user_$userName"
-        return if (continuationExists.containsKey(key)) {
-            continuationExists[key]!!
-        } else true
+        return continuationRequest("user_", userName) {
+            mediaInterface.getMediaListForUser(userName, 10, it)
+        }
     }
 
     /**
@@ -118,40 +87,24 @@ class MediaClient @Inject constructor(
      * @param offset
      * @return
      */
-    fun getMediaListFromSearch(
-        keyword: String?,
-        limit: Int,
-        offset: Int
-    ): Single<MwQueryResponse> {
-        return mediaInterface.getMediaListFromSearch(keyword, limit, offset)
-    }
+    fun getMediaListFromSearch(keyword: String?, limit: Int, offset: Int) =
+        responseMapper(mediaInterface.getMediaListFromSearch(keyword, limit, offset))
 
-    private fun responseToMediaList(
-        response: Observable<MwQueryResponse>,
-        key: String
+    /**
+     * @return list of images for a particular depict entity
+     */
+    fun fetchImagesForDepictedItem(
+        query: String,
+        srlimit: Int,
+        sroffset: Int
     ): Single<List<Media>> {
-        return response.flatMap { mwQueryResponse: MwQueryResponse? ->
-            if (null == mwQueryResponse || null == mwQueryResponse.query() || null == mwQueryResponse.query()!!
-                    .pages()
-            ) {
-                return@flatMap Observable.empty<MwQueryPage>()
-            }
-            if (mwQueryResponse.continuation() != null) {
-                continuationStore[key] = mwQueryResponse.continuation()
-                continuationExists[key] = true
-            } else {
-                continuationExists[key] = false
-            }
-            Observable.fromIterable(mwQueryResponse.query()!!.pages())
-        }
-            .map { page: MwQueryPage? -> Media.from(page) }
-            .collect(
-                { ArrayList() }
-            ) { obj: MutableList<Media>, e: Media ->
-                obj.add(
-                    e
-                )
-            }.map { it.toList() }
+        return responseMapper(
+            mediaInterface.fetchImagesForDepictedItem(
+                "haswbstatement:" + BuildConfig.DEPICTS_PROPERTY + "=" + query,
+                srlimit.toString(),
+                sroffset.toString()
+            )
+        )
     }
 
     /**
@@ -161,17 +114,8 @@ class MediaClient @Inject constructor(
      * @return
      */
     fun getMedia(titles: String?): Single<Media> {
-        return mediaInterface.getMedia(titles)
-            .flatMap { mwQueryResponse: MwQueryResponse? ->
-                if (null == mwQueryResponse || null == mwQueryResponse.query() || null == mwQueryResponse.query()!!
-                        .firstPage()
-                ) {
-                    return@flatMap Observable.empty<MwQueryPage>()
-                }
-                Observable.just(mwQueryResponse.query()!!.firstPage())
-            }
-            .map { page: MwQueryPage? -> Media.from(page) }
-            .single(Media.EMPTY)
+        return responseMapper(mediaInterface.getMedia(titles))
+            .map { it.first() }
     }
 
     /**
@@ -179,52 +123,21 @@ class MediaClient @Inject constructor(
      *
      * @return Media object corresponding to the picture of the day
      */
-    val pictureOfTheDay: Single<Media>
-        get() {
-            val date =
-                CommonsDateUtil.getIso8601DateFormatShort().format(Date())
-            Timber.d("Current date is %s", date)
-            val template = "Template:Potd/$date"
-            return mediaInterface.getMediaWithGenerator(template)
-                .flatMap { mwQueryResponse: MwQueryResponse? ->
-                    if (null == mwQueryResponse || null == mwQueryResponse.query() || null == mwQueryResponse.query()!!
-                            .firstPage()
-                    ) {
-                        return@flatMap Observable.empty<MwQueryPage>()
-                    }
-                    Observable.just(mwQueryResponse.query()!!.firstPage())
-                }
-                .map { page: MwQueryPage? -> Media.from(page) }
-                .single(Media.EMPTY)
-        }
+    fun getPictureOfTheDay(): Single<Media> {
+        val date = CommonsDateUtil.getIso8601DateFormatShort().format(Date())
+        return responseMapper(mediaInterface.getMediaWithGenerator("Template:Potd/$date")).map { it.first() }
+    }
 
     fun getPageHtml(title: String?): Single<String> {
         return mediaInterface.getPageHtml(title)
-            .filter { obj: MwParseResponse -> obj.success() }
-            .map { obj: MwParseResponse -> obj.parse() }
-            .map { obj: MwParseResult? -> obj!!.text() }
-            .first("")
+            .map { obj: MwParseResponse -> obj.parse()?.text() ?: "" }
     }
 
-    /**
-     * @return  caption for image using wikibaseIdentifier
-     */
-    fun getCaptionByWikibaseIdentifier(wikibaseIdentifier: String?): Single<String> {
-        return mediaDetailInterface.getEntityForImage(
-            Locale.getDefault().language,
-            wikibaseIdentifier
-        )
-            .map { mediaDetailResponse: Entities ->
-                if (isSuccess(mediaDetailResponse)) {
-                    for (wikibaseItem in mediaDetailResponse.entities().values) {
-                        for (label in wikibaseItem.labels().values) {
-                            return@map label.value()
-                        }
-                    }
-                }
-                NO_CAPTION
-            }
-            .singleOrError()
+    fun getEntities(entityIds: List<String>): Single<Entities> {
+        return if (entityIds.isEmpty())
+            Single.error(Exception("empty list passed for ids"))
+        else
+            mediaDetailInterface.getEntity(entityIds.joinToString("|"))
     }
 
     fun doesPageContainMedia(title: String?): Single<Boolean> {
@@ -232,69 +145,32 @@ class MediaClient @Inject constructor(
             .map { it.items.isNotEmpty() }
     }
 
-    private fun isSuccess(response: Entities?): Boolean {
-        return response != null && response.success == 1 && response.entities() != null
+    fun resetCategoryContinuation(category: String) {
+        resetContinuation(CATEGORY_CONTINUATION_PREFIX, category)
     }
 
-    /**
-     * Fetches Structured data from API
-     *
-     * @param filename
-     * @return a map containing caption and depictions (empty string in the map if no caption/depictions)
-     */
-    fun getDepictions(filename: String?): Single<Depictions> {
-        return mediaDetailInterface.fetchEntitiesByFileName(
-            Locale.getDefault().language, filename
-        )
-            .map { entities: Entities? ->
-                from(
-                    entities!!,
-                    this
-                )
-            }
-            .singleOrError()
+    override fun responseMapper(
+        networkResult: Single<MwQueryResponse>,
+        key: String?
+    ): Single<List<Media>> {
+        return networkResult.map {
+            handleContinuationResponse(it.continuation(), key)
+            it.query()?.pages() ?: emptyList()
+        }.flatMap(::mediaFromPageAndEntity)
     }
 
-    /**
-     * Gets labels for Depictions using Entity Id from MediaWikiAPI
-     *
-     * @param entityId  EntityId (Ex: Q81566) of the depict entity
-     * @return label
-     */
-    fun getLabelForDepiction(
-        entityId: String?,
-        language: String
-    ): Single<String> {
-        return mediaDetailInterface.getEntity(entityId)
-            .map { entities: Entities ->
-                if (isSuccess(entities)) {
-                    for (entity in entities.entities().values) {
-                        val languageToLabelMap =
-                            entity.labels()
-                        if (languageToLabelMap.containsKey(language)) {
-                            return@map languageToLabelMap[language]!!.value()
+    private fun mediaFromPageAndEntity(pages: List<MwQueryPage>): Single<List<Media>> {
+        return if (pages.isEmpty())
+            Single.just(emptyList())
+        else
+            getEntities(pages.map { "$PAGE_ID_PREFIX${it.pageId()}" })
+                .map {
+                    pages.zip(it.entities().values)
+                        .mapNotNull { (page, entity) ->
+                            page.imageInfo()?.let {
+                                mediaConverter.convert(page, entity, it)
+                            }
                         }
-                        for (label in languageToLabelMap.values) {
-                            return@map label.value()
-                        }
-                    }
                 }
-                throw RuntimeException("failed getEntities")
-            }
-    }
-
-    fun getEntities(entityId: String?): Single<Entities> {
-        return mediaDetailInterface.getEntity(entityId)
-    }
-
-    companion object {
-        const val NO_CAPTION = "No caption"
-        private const val NO_DEPICTION = "No depiction"
-    }
-
-    init {
-        continuationStore =
-            HashMap()
-        continuationExists = HashMap()
     }
 }

@@ -282,6 +282,9 @@
   <string name="about_translate_cancel">Annullér</string>
   <string name="retry">Prøv igen</string>
   <string name="showcase_view_got_it_button">Forstået!</string>
+  <string name="showcase_view_needs_photo">Dette sted mangler et billede.</string>
+  <string name="showcase_view_has_photo">Dette sted har allerede et billede.</string>
+  <string name="showcase_view_no_longer_exists">Dette sted findes ikke længere.</string>
   <string name="no_images_found">Ingen billeder fundet!</string>
   <string name="error_loading_images">Der opstod en fejl under indlæsningen af billeder.</string>
   <string name="image_uploaded_by">Lagt op af: %1$s</string>
@@ -311,6 +314,7 @@
   <string name="nominate_delete">Nominer til sletning</string>
   <string name="delete">Slet</string>
   <string name="Achievements">Præstationer</string>
+  <string name="Profile">Profil</string>
   <string name="statistics">Statistik</string>
   <string name="statistics_thanks">Tak modtaget</string>
   <string name="statistics_featured">Udvalgte billeder</string>
@@ -380,6 +384,9 @@
   <string name="delete_helper_ask_spam_other">Andet</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Vilkårligt billede fra internettet</string>
   <string name="delete_helper_ask_reason_copyright_other">Andet</string>
+  <string name="category_edit_helper_show_edit_title_success">Succes</string>
+  <string name="category_edit_helper_edit_message_else">Kunne ikke tilføje kategorier.</string>
+  <string name="category_edit_button_text">Opdater kategorier</string>
   <string name="place_state_exists">Findes</string>
   <string name="place_state_needs_photo">Mangler et billede</string>
   <string name="nearby_search_hint">Bro, museum, hotel, osv.</string>
@@ -388,7 +395,17 @@
   <string name="theme_dark_name">Mørkt</string>
   <string name="theme_light_name">Lyst</string>
   <string name="load_more">Indlæs mere</string>
+  <string name="edit_category">Rediger kategorier</string>
   <string name="add_picture_to_wikipedia_instructions_title">Instruktioner</string>
   <string name="confirm">Bekræft</string>
   <string name="instructions_title">Instruktioner</string>
+  <string name="pause">sæt på pause</string>
+  <string name="resume">genoptag</string>
+  <string name="paused">Sat på pause</string>
+  <string name="rank_prefix">Rang:</string>
+  <string name="leaderboard_column_rank">Rang</string>
+  <string name="leaderboard_column_user">Bruger</string>
+  <string name="leaderboard_yearly">Årlig</string>
+  <string name="leaderboard_weekly">Ugentlig</string>
+  <string name="leaderboard_nearby">I nærheden</string>
 </resources>

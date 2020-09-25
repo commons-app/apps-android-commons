@@ -2,11 +2,10 @@ package fr.free.nrw.commons.category
 
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
-import io.reactivex.Observable
+import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers.anyInt
-import org.mockito.ArgumentMatchers.anyString
+import org.mockito.ArgumentMatchers.*
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.mock
@@ -32,7 +31,7 @@ class CategoryClientTest {
     fun searchCategoriesFound() {
         val mockResponse = withMockResponse("Category:Test")
         whenever(categoryInterface.searchCategories(anyString(), anyInt(), anyInt()))
-            .thenReturn(Observable.just(mockResponse))
+            .thenReturn(Single.just(mockResponse))
         categoryClient.searchCategories("tes", 10)
             .test()
             .assertValues(listOf("Test"))
@@ -45,7 +44,7 @@ class CategoryClientTest {
     fun searchCategoriesNull() {
         val mockResponse = withNullPages()
         whenever(categoryInterface.searchCategories(anyString(), anyInt(), anyInt()))
-            .thenReturn(Observable.just(mockResponse))
+            .thenReturn(Single.just(mockResponse))
         categoryClient.searchCategories("tes", 10)
             .test()
             .assertValues(emptyList())
@@ -53,12 +52,11 @@ class CategoryClientTest {
             .test()
             .assertValues(emptyList())
     }
-
     @Test
     fun searchCategoriesForPrefixFound() {
         val mockResponse = withMockResponse("Category:Test")
         whenever(categoryInterface.searchCategoriesForPrefix(anyString(), anyInt(), anyInt()))
-            .thenReturn(Observable.just(mockResponse))
+            .thenReturn(Single.just(mockResponse))
         categoryClient.searchCategoriesForPrefix("tes", 10)
             .test()
             .assertValues(listOf("Test"))
@@ -71,7 +69,7 @@ class CategoryClientTest {
     fun searchCategoriesForPrefixNull() {
         val mockResponse = withNullPages()
         whenever(categoryInterface.searchCategoriesForPrefix(anyString(), anyInt(), anyInt()))
-            .thenReturn(Observable.just(mockResponse))
+            .thenReturn(Single.just(mockResponse))
         categoryClient.searchCategoriesForPrefix("tes", 10)
             .test()
             .assertValues(emptyList())
@@ -79,12 +77,11 @@ class CategoryClientTest {
             .test()
             .assertValues(emptyList())
     }
-
     @Test
     fun getParentCategoryListFound() {
         val mockResponse = withMockResponse("Category:Test")
-        whenever(categoryInterface.getParentCategoryList(anyString()))
-            .thenReturn(Observable.just(mockResponse))
+        whenever(categoryInterface.getParentCategoryList(anyString(), anyMap()))
+            .thenReturn(Single.just(mockResponse))
         categoryClient.getParentCategoryList("tes")
             .test()
             .assertValues(listOf("Test"))
@@ -93,8 +90,8 @@ class CategoryClientTest {
     @Test
     fun getParentCategoryListNull() {
         val mockResponse = withNullPages()
-        whenever(categoryInterface.getParentCategoryList(anyString()))
-            .thenReturn(Observable.just(mockResponse))
+        whenever(categoryInterface.getParentCategoryList(anyString(), anyMap()))
+            .thenReturn(Single.just(mockResponse))
         categoryClient.getParentCategoryList("tes")
             .test()
             .assertValues(emptyList())
@@ -103,8 +100,8 @@ class CategoryClientTest {
     @Test
     fun getSubCategoryListFound() {
         val mockResponse = withMockResponse("Category:Test")
-        whenever(categoryInterface.getSubCategoryList("tes"))
-            .thenReturn(Observable.just(mockResponse))
+        whenever(categoryInterface.getSubCategoryList("tes", emptyMap()))
+            .thenReturn(Single.just(mockResponse))
         categoryClient.getSubCategoryList("tes")
             .test()
             .assertValues(listOf("Test"))
@@ -113,8 +110,11 @@ class CategoryClientTest {
     @Test
     fun getSubCategoryListNull() {
         val mockResponse = withNullPages()
-        whenever(categoryInterface.getSubCategoryList(anyString()))
-            .thenReturn(Observable.just(mockResponse))
+        whenever(categoryInterface.getSubCategoryList(
+            anyString(),
+            anyMap()
+        ))
+            .thenReturn(Single.just(mockResponse))
         categoryClient.getSubCategoryList("tes")
             .test()
             .assertValues(emptyList())

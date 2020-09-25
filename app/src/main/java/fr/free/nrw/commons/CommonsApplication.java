@@ -36,6 +36,7 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.FileLoggingTree;
 import fr.free.nrw.commons.logging.LogUtils;
+import fr.free.nrw.commons.media.CustomOkHttpNetworkFetcher;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.ConfigUtils;
@@ -77,10 +78,19 @@ import timber.log.Timber;
 )
 
 public class CommonsApplication extends MultiDexApplication {
-    @Inject SessionManager sessionManager;
-    @Inject DBOpenHelper dbOpenHelper;
 
-    @Inject @Named("default_preferences") JsonKvStore defaultPrefs;
+  public static final String IS_LIMITED_CONNECTION_MODE_ENABLED = "is_limited_connection_mode_enabled";
+  @Inject
+  SessionManager sessionManager;
+  @Inject
+  DBOpenHelper dbOpenHelper;
+
+  @Inject
+  @Named("default_preferences")
+  JsonKvStore defaultPrefs;
+
+  @Inject
+  CustomOkHttpNetworkFetcher customOkHttpNetworkFetcher;
 
     /**
      * Constants begin
@@ -147,6 +157,7 @@ public class CommonsApplication extends MultiDexApplication {
 
 //        Set DownsampleEnabled to True to downsample the image in case it's heavy
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
+                .setNetworkFetcher(customOkHttpNetworkFetcher)
                 .setDownsampleEnabled(true)
                 .build();
         try {

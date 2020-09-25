@@ -270,7 +270,7 @@
   <string name="error_while_cache">Eroare la cache imaginilor</string>
   <string name="title_info">Un titlu descriptiv unic pentru fișier, care va servi ca nume de fișier. Puteți utiliza un limbaj simplu cu spații. Nu includeți extensia de fișier</string>
   <string name="description_info">Vă rugăm să descrieți media cât mai mult posibil: Unde a fost făcut? Ce arată? Care este contextul? Descrieți obiectele sau persoanele. Dezvăluiți informații care nu pot fi ușor ghicite, cum ar fi timpul zilei dacă este un peisaj. În cazul în care materialul transmis arată ceva neobișnuit, vă rugăm să explicați ceea ce o face neobișnuită.</string>
-  <string name="caption_info">Vă rugăm să scrieți o scurtă descriere a imaginii. (Limită la 255 de caractere)</string>
+  <string name="caption_info" fuzzy="true">Vă rugăm să scrieți o scurtă descriere a imaginii. (Limită la 255 de caractere)</string>
   <string name="upload_image_too_dark">Această imagine este prea întunecată, sunteți sigur că doriți să o încărcați? Wikimedia Commons este numai pentru imagini cu valoare enciclopedică.</string>
   <string name="upload_image_blurry">Această imagine este neclară, sunteți sigur că doriți să o încărcați? Wikimedia Commons este numai pentru imagini cu valoare enciclopedică.</string>
   <string name="upload_problem_exist">Probleme potențiale cu această imagine:</string>

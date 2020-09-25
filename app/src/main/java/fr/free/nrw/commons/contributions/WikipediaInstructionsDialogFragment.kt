@@ -30,7 +30,7 @@ class WikipediaInstructionsDialogFragment : DialogFragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         contribution = arguments!!.getParcelable(ARG_CONTRIBUTION)
-        tv_wikicode.setText(contribution?.wikiCode)
+        tv_wikicode.setText(contribution?.media?.wikiCode)
         instructions_cancel.setOnClickListener {
             dismiss()
         }

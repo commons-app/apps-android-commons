@@ -10,8 +10,11 @@
 * NahidHossain
 * Rasal Lia
 * Sankarshan
+* Sibabrata Banerjee
 * Tahmid02016
 * Tauhid16
+* Titodutta
+* YahyA
 * আফতাবুজ্জামান
 -->
 <resources>
@@ -32,7 +35,10 @@
     <item quantity="one">%1$dটি আপলোড</item>
     <item quantity="other">%1$dটি আপলোড</item>
   </plurals>
-  <string name="share_license_summary" fuzzy="true">এই ছবিটি %1$s এর অধীনে লাইসেন্স করা হবে</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">এই ছবিটি %1$ এর অধীনে লাইসেন্স করা হবে</item>
+    <item quantity="other">এই ছবিগুলো %1$ এর অধীনে লাইসেন্স করা হবে</item>
+  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$dটি আপলোড</item>
     <item quantity="other">%1$dটি আপলোড</item>
@@ -42,6 +48,7 @@
   <string name="preference_category_appearance">অবয়ব</string>
   <string name="preference_category_general">সাধারণ</string>
   <string name="preference_category_feedback">প্রতিক্রিয়া</string>
+  <string name="preference_category_privacy">গোপনীয়তা</string>
   <string name="preference_category_location">অবস্থান</string>
   <string name="app_name">কমন্স</string>
   <string name="bullet">•</string>
@@ -56,17 +63,19 @@
   <string name="logging_in_title">প্রবেশ হচ্ছে</string>
   <string name="logging_in_message">অনুগ্রহ করে অপেক্ষা করুন...</string>
   <string name="login_success">প্রবেশ সফল!</string>
-  <string name="login_failed">প্রবেশ ব্যর্থ :(</string>
+  <string name="login_failed">প্রবেশ ব্যর্থ!</string>
   <string name="upload_failed">ফাইল পাওয়া যায়নি। আরেকটি ফাইল চেষ্টা করুন।</string>
-  <string name="authentication_failed">প্রমাণীকরণ ব্যর্থ হয়েছে, আবার প্রবেশ করুন</string>
-  <string name="uploading_started"> আপলোড আরম্ভ হয়েছে!</string>
-  <string name="upload_completed_notification_title">%1$s আপলোড হয়েছে!</string>
+  <string name="authentication_failed">প্রমাণীকরণ ব্যর্থ হয়েছে, অনুগ্রহ করে আবার প্রবেশ করুন</string>
+  <string name="uploading_started">আপলোড আরম্ভ হয়েছে!</string>
+  <string name="upload_completed_notification_title">%1$ আপলোড হয়েছে!</string>
   <string name="upload_completed_notification_text">আপনার আপলোড দেখতে টোকা দিন</string>
   <string name="upload_progress_notification_title_start">%1$s আপলোড শুরু হচ্ছে</string>
   <string name="upload_progress_notification_title_in_progress">%1$s আপলোড হচ্ছে</string>
   <string name="upload_progress_notification_title_finishing">%1$s আপলোড শেষ হয়েছে</string>
   <string name="upload_failed_notification_title">%1$s আপলোড ব্যর্থ</string>
+  <string name="upload_paused_notification_title">%1$s আপলোড বিরত রয়েছে</string>
   <string name="upload_failed_notification_subtitle">দেখার জন্য টোকা দিন</string>
+  <string name="upload_paused_notification_subtitle">দেখার জন্য টোকা দিন</string>
   <string name="title_activity_contributions">আমার সাম্প্রতিক আপলোড</string>
   <string name="contribution_state_queued">অপেক্ষারত</string>
   <string name="contribution_state_failed">ব্যর্থ</string>
@@ -79,12 +88,14 @@
   <string name="menu_share">বণ্টন</string>
   <string name="menu_open_in_browser">ব্রাউজারে দেখুন</string>
   <string name="share_title_hint">ক্যাপশন (আবশ্যক)</string>
+  <string name="add_caption_toast">অনুগ্রহ করে এই ফাইলটির জন্য একটি ক্যাপশন দিন</string>
   <string name="share_description_hint">বিবরণ</string>
+  <string name="share_caption_hint">ক্যাপশন (২৫৫ অক্ষরে সীমাবদ্ধ)</string>
   <string name="login_failed_network">প্রবেশ করা যাচ্ছে না - নেটওয়ার্ক ব্যর্থতা</string>
   <string name="login_failed_wrong_credentials">প্রবেশ করতে অক্ষম - দয়া করে আপনার ব্যবহারকারী নাম এবং পাসওয়ার্ড পরীক্ষা করুন</string>
   <string name="login_failed_throttled">খুব বেশি অসফল প্রচেষ্টা। অনুগ্রহ করে কয়েক মিনিট পরে আবারও চেষ্টা করুন।</string>
   <string name="login_failed_blocked">দুঃখিত, এই ব্যবহারকারীকে কমন্সে বাধা দেয়া হয়েছে</string>
-  <string name="login_failed_2fa_needed">অাপনাকে অবশ্যই অাপনার দু\'স্তরের সত্যায়নকরণ কোড দিতে হবে।</string>
+  <string name="login_failed_2fa_needed">আপনাকে অবশ্যই আপনার দু\'স্তরের সত্যায়নকরণ কোড দিতে হবে।</string>
   <string name="login_failed_generic">প্রবেশ ব্যর্থ</string>
   <string name="share_upload_button">আপলোড</string>
   <string name="multiple_share_base_title">এই সেটের নাম</string>
@@ -92,11 +103,12 @@
   <string name="provider_modifications">পরিবর্তনসমূহ</string>
   <string name="menu_upload_single">আপলোড</string>
   <string name="categories_search_text_hint">বিষয়শ্রেণী অনুসন্ধান</string>
+  <string name="depicts_search_text_hint">আপনার মিডিয়া চিত্রিত আইটেমগুলি অনুসন্ধান করুন (পর্বত, তাজমহল, ইত্যাদি)</string>
   <string name="menu_save_categories">সংরক্ষণ</string>
   <string name="refresh_button">পুনঃসতেজ</string>
   <string name="display_list_button">তালিকা</string>
-  <string name="gps_disabled">GPS আপনার ডিভাইসে অক্ষম করা আছে। আপনি কি এটি সক্ষম করতে চান?</string>
-  <string name="enable_gps">GPS সক্রিয় করুন</string>
+  <string name="gps_disabled">আপনার ডিভাইসে জিপিএস নিষ্ক্রিয় করা আছে। আপনি কি এটি সক্রিয় করতে চান?</string>
+  <string name="enable_gps">জিপিএস সক্রিয় করুন</string>
   <string name="contributions_subtitle_zero">এখনো কোন আপলোড নেই</string>
   <string name="categories_not_found">%1$s-এর সাথে মিলে এমন কোন বিষয়শ্রেণী পাওয়া যায়নি</string>
   <string name="categories_skip_explanation">উইকিমিডিয়া কমন্স থেকে আপনার মিডিয়া ফাইলটি সহজে খুঁজে পেতে বিষয়শ্রেণী যুক্ত করুন।\n\nবিষয়শ্রেণী যোগ করার জন্য টাইপিং শুরু করুন।</string>
@@ -109,7 +121,7 @@
   <string name="about_license">উইকিমিডিয়া কমন্স অ্যাপ হচ্ছে একটি উন্মুক্ত উৎস সম্বলিত অ্যাপ যা উইকিমিডিয়া সম্প্রদায়ের ব্যবহারকারী ও সেচ্ছাসেবকবৃন্দ কর্তৃক তৈরিকৃত এবং পরিচালিত। উইকিমিডিয়া ফাউন্ডেশন এই অ্যাপ তৈরি, উন্নয়ন বা রক্ষণাবেক্ষণে জড়িত নয়।</string>
   <string name="about_improve">কোন সমস্যা ও পরামর্শের জন্য &lt;a href=\"%1$s\"&gt;গিটহাব ইস্যু&lt;/a&gt; তৈরি করুন।</string>
   <string name="about_privacy_policy">গোপনীয়তার নীতি</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;কৃতিত্ব&lt;/u&gt;</string>
+  <string name="about_credits">কৃতিত্ব</string>
   <string name="title_activity_about">পরিচিতি</string>
   <string name="menu_feedback">প্রতিক্রিয়া পাঠান (ইমেইলের মাধ্যমে)</string>
   <string name="no_email_client">কোন ই-মেইল ক্লায়েন্ট ইনস্টল করা নেই</string>
@@ -121,10 +133,10 @@
   <string name="media_upload_policy">এই চিত্র জমা দেয়ার দ্বারা, আমি ঘোষণা দিচ্ছি যে এটি আমার নিজস্ব কাজ, এতে কপিরাইটযুক্ত উপাদান নেই বা এটই সেলফি নয়, এবং &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/bn\"&gt;উইকিমিডিয়া কমন্স নীতি&lt;/a&gt; অনুসরণ করে।</string>
   <string name="menu_download">ডাউনলোড</string>
   <string name="preference_license">পূর্বনির্ধারিত লাইসেন্স</string>
-  <string name="use_previous" fuzzy="true">পূর্ববর্তী শিরোনাম/বিবরণ ব্যবহার করুন</string>
+  <string name="use_previous">পূর্ববর্তী শিরোনাম ও বিবরণ ব্যবহার করুন</string>
   <string name="allow_gps">স্বয়ংক্রিয়ভাবে বর্তমান অবস্থান পান</string>
   <string name="allow_gps_summary">বর্তমান অবস্থান চিহ্নিত করুন যদি ছবিতে অবস্থানের তথ্য না থাকে, এবং ছবির অবস্থান হিসেবে নির্বাচন করুন।\nসাবধান: এতে আপনার বর্তমান অবস্থান প্রকাশিত হবে।</string>
-  <string name="preference_theme" fuzzy="true">রাত্রি মোড</string>
+  <string name="preference_theme">থিম</string>
   <string name="license_name_cc_by_sa_four">অ্যাট্রিবিউশন-শেয়ারঅ্যালাইক ৪.০</string>
   <string name="license_name_cc_by_four">অ্যাট্রিবিউশন ৪.০</string>
   <string name="license_name_cc_by_sa">অ্যাট্রিবিউশন-শেয়ারঅ্যালাইক ৩.০</string>
@@ -165,11 +177,12 @@
   <string name="welcome_copyright_subtext">পোষ্টারের চিত্র, বইয়ের কভার ইত্যাদির পাশাপাশি ইন্টারনেট থেকে পাওয়া কপিরাইটযুক্ত উপকরণ এড়িয়ে চলুন।</string>
   <string name="welcome_final_text">আপনি মনে করেন আপনি বুঝতে পেরেছেন?</string>
   <string name="welcome_final_button_text">হ্যাঁ!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;আরো তথ্য&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">আরো তথ্য</string>
   <string name="detail_panel_cats_label">বিষয়শ্রেণীসমূহ</string>
   <string name="detail_panel_cats_loading">লোড হচ্ছে…</string>
   <string name="detail_panel_cats_none">কিছুই নির্বাচন করা হয়নি</string>
   <string name="detail_description_empty">বিবরণ নেই</string>
+  <string name="detail_discussion_empty">কোনো আলোচনা নেই</string>
   <string name="detail_license_empty">অজানা লাইসেন্স</string>
   <string name="menu_refresh">পুনঃসতেজ</string>
   <string name="read_storage_permission_rationale">প্রয়োজনীয় অনুমতি: বহিস্থ স্মৃতি পড়া। এটি ছাড়া এ্যাপ আপনার গ্যালারি দেখতে পাবে না।</string>
@@ -179,10 +192,13 @@
   <string name="title_activity_nearby">কাছাকাছি স্থান</string>
   <string name="no_nearby">কাছাকাছি কোন স্থান পাওয়া যায়নি</string>
   <string name="warning">সতর্কীকরণ</string>
+  <string name="upload">আপলোড</string>
   <string name="yes">হ্যাঁ</string>
   <string name="no">না</string>
+  <string name="media_detail_caption">চিত্রবর্ণনা</string>
   <string name="media_detail_title">শিরোনাম</string>
   <string name="media_detail_description">বিবরণ</string>
+  <string name="media_detail_discussion">আলোচনা</string>
   <string name="media_detail_author">স্রষ্টা</string>
   <string name="media_detail_uploaded_date">আপলোডের তারিখ</string>
   <string name="media_detail_license">লাইসেন্স</string>
@@ -237,15 +253,17 @@
   <string name="error_while_cache">ছবি আনার সময় ত্রুটি</string>
   <string name="title_info">ফাইলের একটি স্বতন্ত্র বর্ণনামূলক নাম যা ফাইলের নাম হিসাবে কাজ করবে। অাপনি সাধারণ ভাষা ব্যবহার করতে পারেন শূন্যস্থানসহ। ফাইলের এক্সটেনশন যুক্ত করবেন না।</string>
   <string name="description_info">যতটা সম্ভব মিডিয়াটি বর্ণনা করুন: এটি কোথায় ধারণ করা হয়েছিল? এটি কি প্রদর্শন করে? এটির প্রসঙ্গ কি? ধারণকৃত বস্তু অথবা ব্যক্তির বর্ণনা করুন। সহজে অনুমান করা যায়না সেরকম তথ্য উদঘাটন করুন, উদাহরণস্বরূপ, যদি ল্যান্ডস্কেপ হয় তাহলে দিবসকালের সময় দিন।</string>
+  <string name="upload_problem_image_blurry">চিত্রটি অস্পষ্ট।</string>
   <string name="upload_problem_image_duplicate">চিত্রটি ইতিমধ্যে কমন্সে রয়েছে।</string>
   <string name="upload_problem_different_geolocation">এই ছবিটি ভিন্ন একটি স্থানে তোলা হয়েছিল।</string>
   <string name="upload_problem_do_you_continue">আপনি কি এখনও এই ছবিটি আপলোড করতে চান?</string>
+  <string name="upload_problem_image">চিত্রটিতে কিছু সমস্যা পাওয়া গেছে</string>
   <string name="give_permission">অনুমতি দিন</string>
   <string name="use_external_storage">বাহ্যিক সঞ্চয়স্থান ব্যবহার করুন</string>
   <string name="use_external_storage_summary">অাপনার ডিভাইসের নিজস্ব ক্যামেরায় ধারণকৃত ছবি সংরক্ষণ করুন</string>
   <string name="login_to_your_account">আপনার অ্যাকাউন্টে প্রবেশ করুন</string>
   <string name="send_log_file">লগ ফাইল পাঠান</string>
-  <string name="send_log_file_description" fuzzy="true">ইমেইলের মাধ্যমে উন্নয়নকারীর কাছে লগ ফাইল পাঠান</string>
+  <string name="send_log_file_description">অ্যাপটির সমস্যা ডিবাগ করার জন্য ইমেইলের মাধ্যমে উন্নয়নকারীদের কাছে লগ ফাইল পাঠান। লক্ষ্য করুন: লগে সম্ভাব্য শনাক্তকরণ তথ্য থাকতে পারে</string>
   <string name="no_web_browser">ইউআরএল খোলার জন্য কোনো ওয়েব ব্রাউজার পাওয়া যায়নি</string>
   <string name="null_url">ত্রুটি! ইউআরএল পাওয়া যায়নি</string>
   <string name="nominate_deletion">অপসারণের জন্য মনোনীত</string>
@@ -254,12 +272,12 @@
   <string name="navigation_item_login">প্রবেশ করুন</string>
   <string name="login_alert_message">এই সুবিধাটি ব্যাবহার করতে প্রবেশ করুন</string>
   <string name="nearby_location_has_not_changed">অবস্থান পরিবর্তন হয়নি।</string>
-  <string name="nearby_location_not_available" fuzzy="true">অবস্থান উপলব্ধ নয়।</string>
+  <string name="nearby_location_not_available">কাছাকাছি সঠিকভাবে কাজ করছে না, অবস্থান উপলব্ধ নয়।</string>
   <string name="location_permission_rationale_nearby">কাছাকাছি স্থানসমূহের একটি তালিকা প্রদর্শন করতে অনুমতি প্রয়োজন</string>
   <string name="get_directions">নির্দেশনা পান</string>
   <string name="read_article">নিবন্ধ পড়ুন</string>
   <string name="notifications_welcome">উইকিমিডিয়া কমন্সে স্বাগতম, %1$s! আপনাকে এখানে পেয়ে আমরা আনন্দিত।</string>
-  <string name="notifications_talk_page_message">%1$s আপনার আলাপ পাতায় একটি বার্তা দিয়েছেন</string>
+  <string name="notifications_talk_page_message">%1$s আপনার আলাপ পাতায় আপনাকে একটি বার্তা দিয়েছেন</string>
   <string name="notifications_thank_you_edit">একটি সম্পাদনা করার জন্য আপনাকে ধন্যবাদ</string>
   <string name="notifications_mention">%1$s আপনাকে %2$s-এ উল্লেখ করেছেন।</string>
   <string name="nearby_directions">দিকনির্দেশ</string>
@@ -273,9 +291,11 @@
   <string name="no_notifications">কোন বিজ্ঞপ্তি পাওয়া যায়নি</string>
   <string name="about_translate">অনুবাদ করুন</string>
   <string name="about_translate_title">ভাষাসমূহ</string>
+  <string name="about_translate_proceed">অগ্রসর</string>
   <string name="about_translate_cancel">বাতিল</string>
   <string name="retry">পুনঃচেষ্টা করুন</string>
   <string name="showcase_view_got_it_button">বুঝেছি!</string>
+  <string name="showcase_view_needs_photo">এই স্থানটির একটি চিত্র দরকার।</string>
   <string name="no_images_found">কোন চিত্র পাওয়া যায়নি!</string>
   <string name="image_uploaded_by">আপলোড করেছেন: %1$s</string>
   <string name="appwidget_img">আজকের চিত্র</string>
@@ -283,10 +303,14 @@
   <string name="menu_search_button">অনুসন্ধান</string>
   <string name="search_commons">কমন্সে অনুসন্ধান করুন</string>
   <string name="title_activity_search">অনুসন্ধান</string>
+  <string name="search_recent_header">সাম্প্রতিক অনুসন্ধানগুলি:</string>
   <string name="search_tab_title_media">মিডিয়া</string>
+  <string name="search_tab_title_categories">বিষয়শ্রেণীসমূহ</string>
+  <string name="explore_tab_title_mobile">মোবাইলের মাধ্যমে আপলোডকৃত</string>
   <string name="quiz">কুইজ</string>
   <string name="question">প্রশ্ন</string>
   <string name="result">ফলাফল</string>
+  <string name="warning_for_no_answer">প্রশ্নের উত্তর দিতে দুটি বিকল্পের মধ্যে একটি চয়ন করুন</string>
   <string name="continue_message">অগ্রসর হোন</string>
   <string name="correct">সঠিক উত্তর</string>
   <string name="wrong">ভুল উত্তর</string>
@@ -295,9 +319,11 @@
   <string name="nominate_delete">অপসারণের জন্য মনোনীত করুন</string>
   <string name="delete">অপসারণ</string>
   <string name="Achievements">কৃতিত্বগুলি</string>
+  <string name="Profile">প্রোফাইল</string>
   <string name="statistics">পরিসংখ্যান</string>
   <string name="statistics_featured">নির্বাচিত ছবি</string>
   <string name="level">স্তর</string>
+  <string name="images_uploaded">চিত্রগুলি আপলোড করা হয়েছে</string>
   <string name="notifications_channel_name_all">কমন্স বিজ্ঞপ্তি</string>
   <string name="contributions_fragment">অবদান</string>
   <string name="nearby_fragment">কাছাকাছি</string>
@@ -313,6 +339,7 @@
   <string name="title_page_bookmarks_locations">অবস্থান</string>
   <string name="provider_bookmarks">বুকমার্ক</string>
   <string name="provider_bookmarks_location">বুকমার্ক</string>
+  <string name="deletion_reason_uploaded_by_mistake">আমি ভুল করে আপলোড করেছি</string>
   <string name="desc_language_Worldwide">বিশ্বব্যাপী</string>
   <string name="desc_language_America">আমেরিকা</string>
   <string name="desc_language_Europe">ইউরোপ</string>
@@ -322,8 +349,31 @@
   <string name="desc_language_Pacific">প্রশান্ত মহাসাগরীয়</string>
   <string name="please_wait">অনুগ্রহ করে অপেক্ষা করুন...</string>
   <string name="exif_tag_name_location">অবস্থান</string>
+  <string name="category_edit_helper_make_edit_toast">বিষয়শ্রেণীগুলি হালনাগাদ করার চেষ্টা চলছে।</string>
+  <string name="category_edit_helper_show_edit_title">বিষয়শ্রেণী হালনাগাদ করুন</string>
+  <string name="category_edit_helper_show_edit_title_success">সফল</string>
+  <string name="category_edit_helper_edit_message_else">বিষয়শ্রেণী হালনাগাদ করা সম্ভব হয়নি।</string>
+  <string name="category_edit_button_text">বিষয়শ্রেণীগুলি হালনাগাদ করুন</string>
   <string name="account_created">অ্যাকাউন্ট তৈরি করা হয়েছে!</string>
   <string name="remove_bookmark">বুকমার্ক থেকে সরানো হয়েছে</string>
   <string name="add_bookmark">বুকমার্কে যোগ করা হয়েছে</string>
+  <string name="todo_improve">প্রস্তাবিত উন্নতিসমূহ:</string>
+  <string name="edit_category">বিষয়শ্রেণীগুলি সম্পাদনা  করুন</string>
   <string name="confirm">নিশ্চিত করুন</string>
+  <string name="pause">থামান</string>
+  <string name="resume">পুনরায় শুরু করুন</string>
+  <string name="paused">থামানো হয়েছে</string>
+  <string name="achievements_tab_title">কৃতিত্বসমূহ</string>
+  <string name="rank_prefix">ক্রম:</string>
+  <string name="count_prefix">গণনা:</string>
+  <string name="leaderboard_column_rank">ক্রম</string>
+  <string name="leaderboard_column_user">ব্যবহারকারী</string>
+  <string name="leaderboard_column_count">গণনা</string>
+  <string name="leaderboard_yearly">বাৎসরিক</string>
+  <string name="leaderboard_weekly">সাপ্তাহিক</string>
+  <string name="leaderboard_all_time">সব সময়</string>
+  <string name="leaderboard_upload">আপলোড</string>
+  <string name="leaderboard_nearby">কাছাকাছি</string>
+  <string name="leaderboard_used">ব্যবহৃত</string>
+  <string name="leaderboard_my_rank_button_text">আমার স্থান</string>
 </resources>

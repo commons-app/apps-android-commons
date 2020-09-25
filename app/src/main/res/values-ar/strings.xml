@@ -302,7 +302,7 @@
   <string name="error_while_cache">خطأ أثناء تخزين الصور</string>
   <string name="title_info">عنوان وصفي فريد للملف، والذي سيكون بمثابة اسم الملف، يمكنك استخدام لغة واضحة مع مسافات، لا تقم بتضمين امتداد الملف</string>
   <string name="description_info">يُرجَى وصف الوسائط قدر الإمكان: أين تم التقاطها؟ ما تظهر؟ ما هو السياق؟ يُرجَى وصف الأشياء أو الأشخاص، اكشف المعلومات التي لا يمكن تخمينها بسهولة، على سبيل المثال الوقت في اليوم إذا كان منظرا طبيعيا، إذا أظهرت الوسائط شيئا غير عادي، فيُرجَى توضيح ما يجعله غير عادي.</string>
-  <string name="caption_info">(يرجى كتابة وصف موجز للصورة (قيد ٢٥٥ حرف</string>
+  <string name="caption_info" fuzzy="true">(يرجى كتابة وصف موجز للصورة (قيد ٢٥٥ حرف</string>
   <string name="upload_image_too_dark">هذه الصورة مظلمة للغاية، هل أنت متأكد من رغبتك في رفعها؟ ويكيميديا ​​كومنز للصور ذات القيمة الموسوعية فقط.</string>
   <string name="upload_image_blurry">هذه الصورة ضبابية، هل أنت متأكد من رغبتك في رفعها؟ ويكيميديا ​​كومنز للصور ذات القيمة الموسوعية فقط.</string>
   <string name="upload_problem_exist">مشاكل محتملة في هذه الصورة:</string>
@@ -366,6 +366,7 @@
   <string name="retry">إعادة المحاولة</string>
   <string name="showcase_view_got_it_button">فهمت!</string>
   <string name="showcase_view_whole_nearby_activity">هذه هي الأماكن القريبة منك التي تحتاج إلى صور لتوضيح مقالات ويكيبيديا الخاصة بها. \n\nيؤدي النقر فوق \"البحث في هذه المنطقة\" إلى إغلاق الخريطة وإطلاق بحث قريب حول هذا الموقع.</string>
+  <string name="showcase_view_no_longer_exists">هذه الصفحة لم تعد موجودة.</string>
   <string name="showcase_view_list_icon">يؤدي النقر على هذا الزر إلى جلب قائمة بهذه الأماكن</string>
   <string name="showcase_view_plus_fab">يمكنك رفع صورة لأي مكان من معرضك أو كاميرتك</string>
   <string name="no_images_found">لم يتم العثور على صور!</string>
@@ -602,6 +603,8 @@
   <string name="delete_helper_ask_reason_copyright_logo">شعار</string>
   <string name="delete_helper_ask_reason_copyright_other">أخرى</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">لأنها</string>
+  <string name="category_edit_helper_show_edit_title">تحديث التصنيف</string>
+  <string name="category_edit_button_text">تحديث التصنيفات</string>
   <string name="share_image_via">مشاركة الصور عبر</string>
   <string name="no_achievements_yet">أنت لم تقدم أية مساهمات حتى الآن</string>
   <string name="account_created">تم إنشاء الحساب!</string>

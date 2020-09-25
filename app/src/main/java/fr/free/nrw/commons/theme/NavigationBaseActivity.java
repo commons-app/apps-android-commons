@@ -26,6 +26,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
+import fr.free.nrw.commons.profile.ProfileActivity;
 import org.wikipedia.dataclient.Service;
 
 import javax.inject.Inject;
@@ -37,12 +38,11 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
-import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.LogoutClient;
 import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
-import fr.free.nrw.commons.explore.categories.ExploreActivity;
+import fr.free.nrw.commons.explore.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.review.ReviewActivity;
@@ -140,7 +140,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
         LinearLayout userIcon = navHeaderView.findViewById(R.id.user_details);
         userIcon.setOnClickListener(v -> {
             drawerLayout.closeDrawer(navigationView);
-            AchievementsActivity.startYourself(NavigationBaseActivity.this);
+            ProfileActivity.startYourself(NavigationBaseActivity.this);
         });
     }
 

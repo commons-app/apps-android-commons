@@ -17,7 +17,7 @@ public abstract class MwResponse extends BaseModel implements PostProcessingType
     @Override
     public void postProcess() {
         if (errors != null && !errors.isEmpty()) {
-            throw new MwException(errors.get(0));
+            throw new MwException(errors.get(0), errors);
         }
     }
 }

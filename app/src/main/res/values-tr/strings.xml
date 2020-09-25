@@ -11,6 +11,7 @@
 * Joseph
 * McAang
 * Mirzali
+* MuratTheTurkish
 * Neslihan Turan
 * Okkerem
 * Rapsar
@@ -81,7 +82,9 @@
   <string name="upload_progress_notification_title_in_progress">%1$s yükleniyor</string>
   <string name="upload_progress_notification_title_finishing">%1$s yüklemesi bitiriliyor</string>
   <string name="upload_failed_notification_title">%1$s dosyasının yüklemesi başarısız oldu</string>
-  <string name="upload_failed_notification_subtitle">Görüntülemek için dokunun</string>
+  <string name="upload_paused_notification_title">%1$s yükleme duraklatıldı</string>
+  <string name="upload_failed_notification_subtitle">Görüntülemek için tıklayın</string>
+  <string name="upload_paused_notification_subtitle">Görüntülemek için tıklayın</string>
   <string name="title_activity_contributions">Son Yüklemelerim</string>
   <string name="contribution_state_queued">Sırada</string>
   <string name="contribution_state_failed">Başarısız</string>
@@ -89,7 +92,7 @@
   <string name="contribution_state_starting">Yükleniyor</string>
   <string name="menu_from_gallery">Galeriden</string>
   <string name="menu_from_camera">Fotoğraf çek</string>
-  <string name="menu_nearby">Yakınındakiler</string>
+  <string name="menu_nearby">Yakınımdakiler</string>
   <string name="provider_contributions">Yüklemelerim</string>
   <string name="menu_share">Paylaş</string>
   <string name="menu_open_in_browser">Tarayıcıda Görüntüle</string>
@@ -142,17 +145,17 @@
   <string name="no_uploads_yet">Henüz yüklenmiş hiç fotoğrafınız yok.</string>
   <string name="menu_retry_upload">Tekrar dene</string>
   <string name="menu_cancel_upload">İptal</string>
-  <string name="media_upload_policy">Bu resmi göndererek bunun kendi çalışmam olduğunu, telif hakkıyla korunan materyal veya özçekim (selfie) içermediğini ve başka türlü &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons politikalarına&lt;/a&gt; uyduğunu beyan ederim</string>
+  <string name="media_upload_policy">Bu resmi göndererek bunun kendi çalışmam olduğunu, telif hakkıyla korunan materyal veya özçekim (selfie) içermediğini ve diğer &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons politikalarına&lt;/a&gt; uyduğunu beyan ederim.</string>
   <string name="menu_download">İndir</string>
   <string name="preference_license">Varsayılan Lisans</string>
   <string name="use_previous">Önceki başlığı ve açıklamayı kullan</string>
   <string name="allow_gps">Otomatik olarak mevcut konumu al</string>
   <string name="allow_gps_summary">Görüntü coğrafi olarak etiketlenmemişse geçerli konumu alır ve görüntüye coğrafi etiket ekler. Uyarı: Bu, geçerli konumunuzu gösterir.</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four"> Atıf-BenzerPaylaşım 4.0</string>
+  <string name="license_name_cc_by_four"> Atıf 4.0</string>
+  <string name="license_name_cc_by_sa">Atıf-BenzerPaylaşım 3.0</string>
+  <string name="license_name_cc_by"> Atıf 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Avusturya)</string>
@@ -260,7 +263,7 @@
   <string name="navigation_drawer_close">Kapat</string>
   <string name="navigation_item_home">Anasayfa</string>
   <string name="navigation_item_upload">Yükle</string>
-  <string name="navigation_item_nearby">Yakınındakiler</string>
+  <string name="navigation_item_nearby">Yakınımdakiler</string>
   <string name="navigation_item_about">Hakkında</string>
   <string name="navigation_item_settings">Ayarlar</string>
   <string name="navigation_item_feedback">Geri bildirim</string>
@@ -277,7 +280,7 @@
   <string name="error_while_cache">Resimleri önbelleğe alırken hata oluştu</string>
   <string name="title_info">Dosya adı olarak kullanılacak benzersiz bir açıklayıcı başlık. Sade bir dil kullanabilirsiniz. Dosya uzantısını dahil etmeyin</string>
   <string name="description_info">Lütfen medyayı olabildiğince açıklayın: Nerede çekildi? Ne gösteriyor? Bağlam nedir? Lütfen nesneleri veya kişileri tanımlayın. Kolayca tahmin edilemeyen bilgileri, örneğin bir manzara ise günün saatini gösterin. Medya alışılmadık bir şey gösteriyorsa lütfen alışılmadık hâle getiren şeyi açıklayın.</string>
-  <string name="caption_info">Lütfen resmin kısa bir açıklamasını yazın. (255 karakterle sınırı vardır)</string>
+  <string name="caption_info">Lütfen resmin kısa bir açıklamasını yazın. İlk resim yazısı resminin Başlığı olarak kullanılacaktır.</string>
   <string name="upload_image_too_dark">Bu resim çok karanlık, yüklemek istediğinizden emin misiniz? Wikimedia Commons yalnızca ansiklopedik değeri olan resimler içindir.</string>
   <string name="upload_image_blurry">Bu resim bulanık, yüklemek istediğinizden emin misiniz? Wikimedia Commons yalnızca ansiklopedik değeri olan resimler içindir.</string>
   <string name="upload_problem_exist">Bu görselle ilgili olası sorunlar:</string>
@@ -297,7 +300,7 @@
   <string name="send_log_file_description">Uygulama ile ilgili sorunları çözmek için geliştiricilere günlük dosyasını e-posta yoluyla gönderin. Not: Günlükler potansiyel olarak tanımlayıcı bilgiler içerebilir</string>
   <string name="no_web_browser">URL\'yi açacak web tarayıcısı bulunamadı</string>
   <string name="null_url">Hata! URL bulunamadı</string>
-  <string name="nominate_deletion">Silinme Adayı</string>
+  <string name="nominate_deletion">Silinmeye aday göster</string>
   <string name="nominated_for_deletion">Bu görüntü silinmek üzere aday gösterildi.</string>
   <string name="nominated_see_more">Web sayfasının detaylarını gör</string>
   <string name="nominating_file_for_deletion">%1$s, silme için aday gösteriliyor.</string>
@@ -341,6 +344,9 @@
   <string name="retry">Tekrar dene</string>
   <string name="showcase_view_got_it_button">Anladım!</string>
   <string name="showcase_view_whole_nearby_activity">Bunlar, Vikipedi maddeleri görselleştirmek için resimlere ihtiyaç duyan size yakın yerler.\n\n\'BU ALANI ARA\'yı tıklamak haritayı açar ve o konumun yakınında bir arama başlatır.</string>
+  <string name="showcase_view_needs_photo">Burada bir fotoğrafa ihtiyacı var.</string>
+  <string name="showcase_view_has_photo">Burada zaten bir fotoğrafı var.</string>
+  <string name="showcase_view_no_longer_exists">Burası artık mevcut değil.</string>
   <string name="showcase_view_list_icon">Bu butona dokunduğunuzda bu yerlerin bir listesi görüntülenir</string>
   <string name="showcase_view_plus_fab">Galerinizden veya kameranızdan herhangi bir yer için resim yükleyebilirsiniz</string>
   <string name="no_images_found">Resim bulunamadı!</string>
@@ -396,9 +402,10 @@
   <string name="delete_recent_searches_dialog">Arama geçmişinizi silmek istediğinizden emin misiniz?</string>
   <string name="delete_search_dialog">Bu aramayı silmek istiyor musunuz?</string>
   <string name="search_history_deleted">Arama geçmişi silindi</string>
-  <string name="nominate_delete">Silinmesi İçin Aday Göster</string>
+  <string name="nominate_delete">Silinmeye Aday Göster</string>
   <string name="delete">Sil</string>
   <string name="Achievements">Başarılar</string>
+  <string name="Profile">Profil</string>
   <string name="statistics">İstatistikler</string>
   <string name="statistics_thanks">Teşekkür Alındı</string>
   <string name="statistics_featured">Seçkin Resimler</string>
@@ -489,11 +496,11 @@
   <string name="check_category_success_message">%1$s için istenen kategori kontrolü</string>
   <string name="check_category_failure_message">%1$s için kategori kontrolü istenemedi</string>
   <string name="check_category_toast">%1$s için kategori kontrolü isteniyor</string>
-  <string name="nominate_for_deletion_edit_file_page">Dosyaya silme mesajı ekleme</string>
+  <string name="nominate_for_deletion_edit_file_page">Dosyaya silme mesajı ekleniyor</string>
   <string name="nominate_for_deletion_done">Yapıldı</string>
-  <string name="nominate_for_deletion_notify_user">Mesaj sayfasında kullanıcıya haber verme</string>
-  <string name="nominate_for_deletion_edit_deletion_request_log">Silme isteklerine dosya ekleneme</string>
-  <string name="nominate_for_deletion_create_deletion_request">İstekleri sil alt sayfası oluşturma</string>
+  <string name="nominate_for_deletion_notify_user">Mesaj sayfasında kullanıcıya haber veriliyor</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">Dosya, silme istekleri kayıtlarına ekleniyor</string>
+  <string name="nominate_for_deletion_create_deletion_request">Silme istekleri alt sayfası oluşturuluyor</string>
   <string name="notsure">Emin değil</string>
   <string name="send_thank_success_title">Teşekkür Gönderme: Başarılı</string>
   <string name="send_thank_success_message">%1$s sayesinde başarıyla gönderildi</string>
@@ -577,6 +584,15 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Diğer</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Çünkü</string>
+  <string name="category_edit_helper_make_edit_toast">Kategorileri güncellemeye çalışıyor.</string>
+  <string name="category_edit_helper_show_edit_title">Kategori güncellemesi</string>
+  <string name="category_edit_helper_show_edit_title_success">Başarılı</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">%1$s kategorisi eklendi.</item>
+    <item quantity="other">%1$s kategorisi eklendi.</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">Kategoriler eklenemedi.</string>
+  <string name="category_edit_button_text">Kategorileri güncelle</string>
   <string name="share_image_via">Resmi şununla paylaş</string>
   <string name="no_achievements_yet">Henüz bir katkı yapmadınız</string>
   <string name="account_created">Hesap oluşturuldu!</string>
@@ -612,6 +628,10 @@
   <string name="use_location_from_similar_image">Bu iki fotoğrafı aynı yerde mi çektiniz? Sağdaki resmin enlem/boylamını kullanmak ister misiniz?</string>
   <string name="load_more">Daha Fazla Yükle</string>
   <string name="nearby_no_results">Yer bulunamadı, arama kriterlerinizi değiştirmeyi deneyin.</string>
+  <string name="todo_improve">Önerilen geliştirmeler:</string>
+  <string name="missing_category">- Kullanılabilirliği artırmak için bu resme kategoriler ekleyin.</string>
+  <string name="missing_article">- Bu resmi, resim içermeyen ilgili Vikipedi maddesini ekleyin.</string>
+  <string name="edit_category">Kategorileri düzenle</string>
   <string name="add_picture_to_wikipedia_article_title">Vikipedi\'ye resim ekle</string>
   <string name="add_picture_to_wikipedia_article_desc">Bu resmi %1$s Vikipedi maddesine eklemek istiyor musunuz?</string>
   <string name="add_picture_to_wikipedia_instructions_title">Talimatlar</string>
@@ -626,4 +646,29 @@
   <string name="wikipedia_instructions_step_6">6. Gerekirse vikimetini uygun konumlandırma için düzenleyin. Daha fazla bilgi için &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;buraya&lt;/a&gt; bakın.</string>
   <string name="wikipedia_instructions_step_7">7. Maddeyi yayınlayın</string>
   <string name="copy_wikicode_to_clipboard">Vikikodu panoya kopyala</string>
+  <string name="pause">duraklat</string>
+  <string name="resume">devam et</string>
+  <string name="paused">Durduruldu</string>
+  <string name="achievements_tab_title">Başarılar</string>
+  <string name="leaderboard_tab_title">Liderlik sıralaması</string>
+  <string name="rank_prefix">Sıra:</string>
+  <string name="count_prefix">Sayı:</string>
+  <string name="leaderboard_column_rank">Sıra</string>
+  <string name="leaderboard_column_user">Kullanıcı</string>
+  <string name="leaderboard_column_count">Sayı</string>
+  <string name="setting_avatar_dialog_title">Liderlik sıralaması avatar olarak ayarla</string>
+  <string name="setting_avatar_dialog_message">Avatar olarak ayarlanıyor, lütfen bekleyin</string>
+  <string name="avatar_set_successfully">Avatar ayarlandı</string>
+  <string name="avatar_set_unsuccessfully">Yeni avatar ayarlanırken hata oluştu, lütfen tekrar deneyin</string>
+  <string name="menu_set_avatar">Avatar olarak ayarla</string>
+  <string name="leaderboard_yearly">Yıllık</string>
+  <string name="leaderboard_weekly">Haftalık</string>
+  <string name="leaderboard_all_time">Tüm zamanlar</string>
+  <string name="leaderboard_upload">Yükle</string>
+  <string name="leaderboard_nearby">Yakınımdakiler</string>
+  <string name="leaderboard_used">Kullanılan</string>
+  <string name="leaderboard_my_rank_button_text">Sıralamam</string>
+  <string name="mapbox_telemetry">Telemetriyi Devre Dışı Bırak</string>
+  <string name="telemetry_opt_out_summary">Yakındaki özelliğini kullanırken anonim konum ve kullanım verilerini Mapbox\'a gönderin</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Bu haritayı geliştirin&lt;/a&gt;</string>
 </resources>

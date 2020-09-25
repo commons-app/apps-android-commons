@@ -1,5 +1,17 @@
 # Wikimedia Commons for Android
 
+## v2.13.1
+- Added OpenStreetMap attribution
+- Fixed various crashes
+- Fixed SQLite error in Nearby map
+- Fixed issue with Nearby uploads not being associated with Wikidata p18
+
+## v2.13.0
+- New media details UI, ability to zoom and pan around image
+- Added suggestions for a place that needs photos if user uploads a photo that is near one of them
+- Modifications and fixes to Nearby filters based on user feedback
+- Multiple crash and bug fixes
+
 ## v2.12.3
 - Fixed issue with EXIF data, including coords, being removed from uploads
 

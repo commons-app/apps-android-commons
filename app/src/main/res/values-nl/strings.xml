@@ -3,6 +3,7 @@
 * A67-A67
 * Abijeet Patro
 * Bouman4
+* Dutchy45
 * Elroy
 * Festina90
 * Klaas van Buiten
@@ -67,6 +68,7 @@
   <string name="upload_progress_notification_title_in_progress">Bezig met het uploaden van %1$s</string>
   <string name="upload_progress_notification_title_finishing">Het uploaden van %1$s is afgerond</string>
   <string name="upload_failed_notification_title">Het uploaden van %1$s is mislukt</string>
+  <string name="upload_paused_notification_title">Het uploaden van %1$s is gepauzeerd</string>
   <string name="upload_failed_notification_subtitle">Wijs aan om te bekijken</string>
   <string name="title_activity_contributions">Mijn recente uploads</string>
   <string name="contribution_state_queued">In wachtrij</string>
@@ -325,4 +327,7 @@
   <string name="add_picture_to_wikipedia_instructions_title">Instructies</string>
   <string name="confirm">Bevestigen</string>
   <string name="instructions_title">Instructies</string>
+  <string name="pause">pauzeren</string>
+  <string name="resume">hervatten</string>
+  <string name="paused">Gepauzeerd</string>
 </resources>

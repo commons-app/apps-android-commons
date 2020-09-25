@@ -14,6 +14,7 @@
 * Looong
 * Qiyue2001
 * Shizhao
+* Shuiwater
 * SomeyaMako
 * VulpesVulpes825
 * Wxyveronica
@@ -87,7 +88,9 @@
   <string name="upload_progress_notification_title_in_progress">%1$s正在上传</string>
   <string name="upload_progress_notification_title_finishing">正在完成上传%1$s</string>
   <string name="upload_failed_notification_title">上传%1$s失败</string>
+  <string name="upload_paused_notification_title">上传%1$s已暂停</string>
   <string name="upload_failed_notification_subtitle">点击查看</string>
+  <string name="upload_paused_notification_subtitle">点击查看</string>
   <string name="title_activity_contributions">我的最近上传</string>
   <string name="contribution_state_queued">已入队列</string>
   <string name="contribution_state_failed">失败</string>
@@ -99,9 +102,10 @@
   <string name="provider_contributions">我的上传</string>
   <string name="menu_share">分享</string>
   <string name="menu_open_in_browser">在浏览器中查看</string>
-  <string name="share_title_hint" fuzzy="true">标题 （要求）</string>
+  <string name="share_title_hint">说明 （要求）</string>
   <string name="add_caption_toast">请提供此文件的描述</string>
   <string name="share_description_hint">描述</string>
+  <string name="share_caption_hint">说明（255个字符以内）</string>
   <string name="login_failed_network">无法登录 - 网络故障</string>
   <string name="login_failed_wrong_credentials">无法登录——请检查您的用户名和密码</string>
   <string name="login_failed_throttled">失败次数过多。请在几分钟后重试。</string>
@@ -131,8 +135,8 @@
   <string name="menu_about">关于</string>
   <string name="about_license">维基共享资源应用是由维基媒体社区的受助者和志愿者创建和维护的开源应用。维基媒体基金会不参与该应用程序的创立，开发或维护。</string>
   <string name="about_improve">创建新的&lt;a href=\"%1$s\"&gt;GitHub问题&lt;/a&gt;以发送错误报告和建议。</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;隐私政策&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;信用&lt;/u&gt;</string>
+  <string name="about_privacy_policy">隐私政策</string>
+  <string name="about_credits">制作人员</string>
   <string name="title_activity_about">关于</string>
   <string name="menu_feedback">发送反馈（通过电子邮件）</string>
   <string name="no_email_client">未安装电子邮件客户端</string>
@@ -147,7 +151,7 @@
   <string name="use_previous">使用之前的标题及描述</string>
   <string name="allow_gps">自动获取当前位置</string>
   <string name="allow_gps_summary">如果图片没有地理标记，以及地理标签图片的话，就取得当前位置。警告：这将暴露您的当前位置。</string>
-  <string name="preference_theme" fuzzy="true">夜间模式</string>
+  <string name="preference_theme">主题</string>
   <string name="license_name_cc_by_sa_four">署名-ShareAlike4.0</string>
   <string name="license_name_cc_by_four">署名4.0</string>
   <string name="license_name_cc_by_sa">署名-ShareAlike3.0</string>
@@ -188,10 +192,11 @@
   <string name="welcome_copyright_subtext">请避免上传您在互联网找到的有版权的素材以及海报的图像、图书封面等。</string>
   <string name="welcome_final_text">您明白了吗？</string>
   <string name="welcome_final_button_text">是！</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;更多信息&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">更多信息</string>
   <string name="detail_panel_cats_label">分类</string>
   <string name="detail_panel_cats_loading">正在载入…</string>
   <string name="detail_panel_cats_none">未选择</string>
+  <string name="detail_caption_empty">无字幕</string>
   <string name="detail_description_empty">没有说明</string>
   <string name="detail_discussion_empty">没有讨论</string>
   <string name="detail_license_empty">未知许可协议</string>
@@ -206,8 +211,10 @@
   <string name="no_nearby">找不到附近地点</string>
   <string name="warning">警告</string>
   <string name="upload_image_duplicate">此文件已在共享资源下存在。您确定要继续吗？</string>
+  <string name="upload">上传</string>
   <string name="yes">是</string>
   <string name="no">否</string>
+  <string name="media_detail_caption">说明</string>
   <string name="media_detail_title">标题</string>
   <string name="media_detail_description">描述</string>
   <string name="media_detail_discussion">讨论</string>
@@ -290,7 +297,7 @@
   <string name="null_url">错误！找不到URL</string>
   <string name="nominate_deletion">提交删除</string>
   <string name="nominated_for_deletion">此图片已被提交删除。</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;查看网页获取详情&lt;/u&gt;</string>
+  <string name="nominated_see_more">查看网页获取详情</string>
   <string name="nominating_file_for_deletion">提名%1$s删除。</string>
   <string name="nominating_for_deletion_status">提名删除：%1$s</string>
   <string name="view_browser">在浏览器中预览</string>
@@ -315,8 +322,8 @@
   <string name="nearby_wikidata">维基数据</string>
   <string name="nearby_wikipedia">维基百科</string>
   <string name="nearby_commons">共享资源</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;评价我们&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;常见问题&lt;/u&gt;</string>
+  <string name="about_rate_us">评价我们</string>
+  <string name="about_faq">常见问题</string>
   <string name="welcome_skip_button">跳过指导</string>
   <string name="no_internet">互联网不可用</string>
   <string name="internet_established">互联网可用</string>
@@ -324,7 +331,7 @@
   <string name="error_review">获取审查图片错误。按刷新键重试。</string>
   <string name="error_review_categories">获取审查图片类别错误。按刷新按键重试。</string>
   <string name="no_notifications">找不到通知</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;翻译&lt;/u&gt;</string>
+  <string name="about_translate">翻译</string>
   <string name="about_translate_title">语言</string>
   <string name="about_translate_message">选择您希望提交翻译的语言</string>
   <string name="about_translate_proceed">已处理</string>
@@ -332,6 +339,9 @@
   <string name="retry">重试</string>
   <string name="showcase_view_got_it_button">明白了！</string>
   <string name="showcase_view_whole_nearby_activity">这些是您附近需要图片以阐明维基百科条目的地方。\n点击“检索这个区域”来锁定地图并启动定位功能来检索附近位置。</string>
+  <string name="showcase_view_needs_photo">这个地点需要一张照片。</string>
+  <string name="showcase_view_has_photo">这个地点已经有一张图片了。</string>
+  <string name="showcase_view_no_longer_exists">这个地点不再存在。</string>
   <string name="showcase_view_list_icon">点按此按钮会出现这些地点的列表</string>
   <string name="showcase_view_plus_fab">您可以从您的图库或照相机中上传任意地点的图片</string>
   <string name="no_images_found">找不到图片！</string>
@@ -351,6 +361,7 @@
   <string name="error_loading_subcategories">加载子分类时发生错误。</string>
   <string name="search_tab_title_media">媒体</string>
   <string name="search_tab_title_categories">分类</string>
+  <string name="search_tab_title_depictions">项目</string>
   <string name="explore_tab_title_featured">特色</string>
   <string name="explore_tab_title_mobile">通过移动端上传</string>
   <string name="successful_wikidata_edit">图片已添加到维基数据上的%1$s！</string>
@@ -575,6 +586,9 @@
   <string name="place_type">地点类型：</string>
   <string name="nearby_search_hint">桥梁、博物馆、旅馆等</string>
   <string name="you_must_reset_your_passsword">登录时出现一些问题，您必须重新设置您的密码！</string>
+  <string name="title_app_shortcut_explore">探索</string>
+  <string name="title_app_shortcut_bookmark">书签</string>
+  <string name="title_app_shortcut_setting">设置</string>
   <string name="wallpaper_set_unsuccessfully">出错了。无法设置壁纸</string>
   <string name="setting_wallpaper_dialog_title">设为壁纸</string>
   <string name="setting_wallpaper_dialog_message">正在设置壁纸。请稍等…</string>
@@ -582,4 +596,8 @@
   <string name="add_picture_to_wikipedia_instructions_title">说明</string>
   <string name="confirm">确认</string>
   <string name="instructions_title">说明</string>
+  <string name="copy_wikicode_to_clipboard">复制维基代码到剪贴板</string>
+  <string name="pause">暂停</string>
+  <string name="resume">继续</string>
+  <string name="paused">已暂停</string>
 </resources>

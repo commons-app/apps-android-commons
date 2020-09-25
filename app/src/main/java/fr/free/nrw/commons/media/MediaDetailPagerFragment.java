@@ -13,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -23,16 +22,19 @@ import butterknife.ButterKnife;
 import com.google.android.material.snackbar.Snackbar;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.Bookmark;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
-import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.DownloadUtils;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.disposables.CompositeDisposable;
+import java.util.Objects;
 import javax.inject.Inject;
 import timber.log.Timber;
 
@@ -40,9 +42,18 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     @Inject BookmarkPicturesDao bookmarkDao;
 
+    @Inject
+    protected OkHttpJsonApiClient okHttpJsonApiClient;
+
+    @Inject
+    protected SessionManager sessionManager;
+
+    private static CompositeDisposable compositeDisposable = new CompositeDisposable();
+
     @BindView(R.id.mediaDetailsPager) ViewPager pager;
     private Boolean editable;
     private boolean isFeaturedImage;
+    private boolean isWikipediaButtonDisplayed;
     MediaDetailAdapter adapter;
     private Bookmark bookmark;
     private MediaDetailProvider provider;
@@ -161,6 +172,10 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 // Set wallpaper
                 setWallpaper(m);
                 return true;
+            case R.id.menu_set_as_avatar:
+                // Set avatar
+                setAvatar(m);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -179,6 +194,20 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         ImageUtils.setWallpaperFromImageUrl(getActivity(), Uri.parse(media.getImageUrl()));
     }
 
+    /**
+     * Set the media as user's leaderboard avatar
+     * @param media
+     */
+    private void setAvatar(Media media) {
+        if (media.getImageUrl() == null || media.getImageUrl().isEmpty()) {
+            Timber.d("Media URL not present");
+            return;
+        }
+        ImageUtils.setAvatarFromImageUrl(getActivity(), media.getImageUrl(),
+            Objects.requireNonNull(sessionManager.getCurrentAccount()).name,
+            okHttpJsonApiClient, compositeDisposable);
+    }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         if (!editable) { // Disable menu options for editable views
@@ -190,7 +219,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     return;
                 }
 
-                Media m = provider.getMediaAtPosition(pager.getCurrentItem());
+                final int position = pager.getCurrentItem();
+                Media m = provider.getMediaAtPosition(position);
                 if (m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
                     menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true);
@@ -206,10 +236,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                             BookmarkPicturesContentProvider.uriForName(m.getFilename())
                     );
                     updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
-
-                    if (m instanceof Contribution) {
-                        Contribution c = (Contribution) m;
-                        switch (c.getState()) {
+                    final Integer contributionState = provider.getContributionStateAt(position);
+                    if (contributionState != null) {
+                        switch (contributionState) {
                             case Contribution.STATE_FAILED:
                             case Contribution.STATE_IN_PROGRESS:
                             case Contribution.STATE_QUEUED:
@@ -251,6 +280,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         item.setIcon(icon);
     }
 
+    public void showImage(int i, boolean isWikipediaButtonDisplayed) {
+        this.isWikipediaButtonDisplayed = isWikipediaButtonDisplayed;
+        Handler handler =  new Handler();
+        handler.postDelayed(() -> pager.setCurrentItem(i), 5);
+    }
+
     public void showImage(int i) {
         Handler handler =  new Handler();
         handler.postDelayed(() -> pager.setCurrentItem(i), 5);
@@ -260,7 +295,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
      * The method notify the viewpager that number of items have changed.
      */
     public void notifyDataSetChanged(){
-        adapter.notifyDataSetChanged();
+        if (null != adapter) {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -269,8 +306,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             Timber.d("Returning as activity is destroyed!");
             return;
         }
-        if (i+1 >= adapter.getCount() && getContext() instanceof CategoryImagesCallback)
-            ((CategoryImagesCallback) getContext()).requestMoreImages();
 
         getActivity().invalidateOptionsMenu();
     }
@@ -293,6 +328,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         Media getMediaAtPosition(int i);
 
         int getTotalMediaCount();
+
+        Integer getContributionStateAt(int position);
     }
 
     //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)
@@ -312,7 +349,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 }
                 pager.postDelayed(() -> getActivity().invalidateOptionsMenu(), 5);
             }
-            return MediaDetailFragment.forMedia(i, editable, isFeaturedImage);
+            return MediaDetailFragment.forMedia(i, editable, isFeaturedImage, isWikipediaButtonDisplayed);
         }
 
         @Override

@@ -1,10 +1,10 @@
 package fr.free.nrw.commons.review
 
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Observable
 import io.reactivex.Single
-import junit.framework.Assert.assertNotNull
 import junit.framework.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -61,7 +61,7 @@ class ReviewHelperTest {
                 .thenReturn(Observable.just(mockResponse))
 
         val media = mock(Media::class.java)
-        media.filename="File:Test.jpg"
+        whenever(media.filename).thenReturn("Test file.jpg")
         `when`(mediaClient?.getMedia(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(media))
     }

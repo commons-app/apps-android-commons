@@ -29,19 +29,21 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.utils.DialogUtil;
+import fr.free.nrw.commons.media.MediaClient;
 import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.wikipedia.dataclient.WikiSite;
+import timber.log.Timber;
 
 /**
  * Created by root on 01.06.2018.
  */
 
 public class ContributionsListFragment extends CommonsDaggerSupportFragment implements
-    ContributionsListContract.View, ContributionsListAdapter.Callback, WikipediaInstructionsDialogFragment.Callback {
+    ContributionsListContract.View, ContributionsListAdapter.Callback,
+    WikipediaInstructionsDialogFragment.Callback {
 
   private static final String RV_STATE = "rv_scroll_state";
 
@@ -88,6 +90,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   private final int SPAN_COUNT_PORTRAIT = 1;
 
 
+  @Override
   public View onCreateView(
       final LayoutInflater inflater, @Nullable final ViewGroup container,
       @Nullable final Bundle savedInstanceState) {
@@ -129,7 +132,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         getSpanCount(getResources().getConfiguration().orientation));
     rvContributionsList.setLayoutManager(layoutManager);
     contributionsListPresenter.setup();
-    contributionsListPresenter.contributionList.observe(this, adapter::submitList);
+    contributionsListPresenter.contributionList.observe(this.getViewLifecycleOwner(), adapter::submitList);
     rvContributionsList.setAdapter(adapter);
   }
 
@@ -190,6 +193,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   /**
    * Shows welcome message if user has no contributions yet i.e. new user.
    */
+  @Override
   public void showWelcomeTip(final boolean shouldShow) {
     noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
   }
@@ -199,10 +203,12 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
    *
    * @param shouldShow True when contributions list should be hidden.
    */
+  @Override
   public void showProgress(final boolean shouldShow) {
     progressBar.setVisibility(shouldShow ? VISIBLE : GONE);
   }
 
+  @Override
   public void showNoContributionsUI(final boolean shouldShow) {
     noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
   }
@@ -237,9 +243,9 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   }
 
   @Override
-  public void openMediaDetail(final int position) {
+  public void openMediaDetail(final int position, boolean isWikipediaButtonDisplayed) {
     if (null != callback) {//Just being safe, ideally they won't be called when detached
-      callback.showDetail(position);
+      callback.showDetail(position, isWikipediaButtonDisplayed);
     }
   }
 
@@ -262,6 +268,24 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   }
 
   /**
+   * Pauses the current upload
+   * @param contribution
+   */
+  @Override
+  public void pauseUpload(Contribution contribution) {
+    callback.pauseUpload(contribution);
+  }
+
+  /**
+   * Resumes the current upload
+   * @param contribution
+   */
+  @Override
+  public void resumeUpload(Contribution contribution) {
+    callback.retryUpload(contribution);
+  }
+
+  /**
    * Display confirmation dialog with instructions when the user tries to add image to wikipedia
    *
    * @param contribution
@@ -275,9 +299,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   }
 
 
-
   public Media getMediaAtPosition(final int i) {
-    return adapter.getContributionForPosition(i);
+    return adapter.getContributionForPosition(i).getMedia();
   }
 
   public int getTotalMediaCount() {
@@ -291,20 +314,27 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
    */
   @Override
   public void onConfirmClicked(@Nullable Contribution contribution, boolean copyWikicode) {
-    if(copyWikicode) {
-      String wikicode = contribution.getWikiCode();
+    if (copyWikicode) {
+      String wikicode = contribution.getMedia().getWikiCode();
       Utils.copy("wikicode", wikicode, getContext());
     }
 
-    final String url = languageWikipediaSite.mobileUrl() + "/wiki/" + contribution.getWikidataPlace()
-        .getWikipediaPageTitle();
+    final String url =
+        languageWikipediaSite.mobileUrl() + "/wiki/" + contribution.getWikidataPlace()
+            .getWikipediaPageTitle();
     Utils.handleWebUrl(getContext(), Uri.parse(url));
+  }
+
+  public Integer getContributionStateAt(int position) {
+    return adapter.getContributionForPosition(position).getState();
   }
 
   public interface Callback {
 
     void retryUpload(Contribution contribution);
 
-    void showDetail(int position);
+    void showDetail(int position, boolean isWikipediaButtonDisplayed);
+
+    void pauseUpload(Contribution contribution);
   }
 }

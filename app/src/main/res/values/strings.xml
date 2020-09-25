@@ -10,6 +10,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads"> Starting Uploads</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Starting %1$d upload</item>
     <item quantity="other">Starting %1$d uploads</item>
@@ -54,13 +55,16 @@
   <string name="upload_failed">File not found. Please try another file.</string>
   <string name="authentication_failed">Authentication failed, please login again</string>
   <string name="uploading_started">Upload started!</string>
+  <string name="uploading_queued">Upload queued (limited connection mode enabled)</string>
   <string name="upload_completed_notification_title">%1$s uploaded!</string>
   <string name="upload_completed_notification_text">Tap to view your upload</string>
   <string name="upload_progress_notification_title_start">Starting %1$s upload</string>
   <string name="upload_progress_notification_title_in_progress">%1$s uploading</string>
   <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
   <string name="upload_failed_notification_title">Uploading %1$s failed</string>
+  <string name="upload_paused_notification_title">Uploading %1$s paused</string>
   <string name="upload_failed_notification_subtitle">Tap to view</string>
+  <string name="upload_paused_notification_subtitle">Tap to view</string>
   <string name="title_activity_contributions">My Recent Uploads</string>
   <string name="contribution_state_queued">Queued</string>
   <string name="contribution_state_failed">Failed</string>
@@ -261,7 +265,7 @@
   <string name="error_while_cache">Error while caching pictures</string>
   <string name="title_info">A unique descriptive title for the file, which will serve as a filename. You may use plain language with spaces. Do not include the file extension</string>
   <string name="description_info">Please describe the media as much as possible: Where was it taken? What does it show? What is the context? Please describe the objects or persons. Reveal information that can not be easily guessed, for instance the time of day if it is a landscape. If the media shows something unusual, please explain what makes it unusual.</string>
-  <string name="caption_info">Please write a brief description of the image. (Limit to 255 characters)</string>
+  <string name="caption_info">Please write a brief description of the image. The first caption would be used as the Title for the image.</string>
 
   <string name="upload_image_too_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
   <string name="upload_image_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
@@ -331,6 +335,9 @@
   <string name="retry">Retry</string>
   <string name="showcase_view_got_it_button">Got it!</string>
   <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles.\n\nClicking on \'SEARCH THIS AREA\' locks the map and launches a nearby search around that location.</string>
+  <string name="showcase_view_needs_photo">This place needs a photo.</string>
+  <string name="showcase_view_has_photo">This place already has a photo.</string>
+  <string name="showcase_view_no_longer_exists">This place no longer exists.</string>
 
   <string name="showcase_view_list_icon">Tapping this button brings up a list of these places</string>
   <string name="showcase_view_plus_fab">You can upload a picture for any place from your gallery or camera</string>
@@ -394,6 +401,7 @@
   <string name="nominate_delete">Nominate For Deletion</string>
   <string name="delete">Delete</string>
   <string name="Achievements">Achievements</string>
+  <string name="Profile">Profile</string>
   <string name="statistics">Statistics</string>
   <string name="statistics_thanks">Thanks Received</string>
   <string name="statistics_featured">Featured Images</string>
@@ -593,6 +601,17 @@ Upload your first media by tapping on the add button.</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Other</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Because it is</string>
+
+  <string name="category_edit_helper_make_edit_toast">Trying to update categories.</string>
+  <string name="category_edit_helper_show_edit_title">Category update</string>
+  <string name="category_edit_helper_show_edit_title_success">Success</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">Category %1$s is added.</item>
+    <item quantity="other">Categories %1$s are added.</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">Could not add categories.</string>
+  <string name="category_edit_button_text">Update categories</string>
+
   <string name="share_image_via">Share image via</string>
   <string name="no_achievements_yet">You haven\'t made any contributions yet</string>
   <string name="account_created">Account created!</string>
@@ -631,6 +650,10 @@ Upload your first media by tapping on the add button.</string>
   <string name="load_more">Load More</string>
   <string name="nearby_no_results">No places found, try changing your search criteria.</string>
 
+  <string name="todo_improve">Suggested improvements:</string>
+  <string name="missing_category">- Add categories to this image to improve usability.</string>
+  <string name="missing_article">- Add this image to the associated Wikipedia article that has no images.</string>
+  <string name="edit_category">Edit categories</string>
   <string name="add_picture_to_wikipedia_article_title">Add image to Wikipedia</string>
   <string name="add_picture_to_wikipedia_article_desc">Do you want to add this picture to the %1$s language Wikipedia article?</string>
 
@@ -646,4 +669,32 @@ Upload your first media by tapping on the add button.</string>
   <string name="wikipedia_instructions_step_6">6. Edit the wikitext for appropriate positioning, if necessary. For more information, see &lt;a href="https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image"&gt;here&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Publish the article</string>
   <string name="copy_wikicode_to_clipboard">Copy wikicode to clipboard</string>
+  <string name="pause">pause</string>
+  <string name="resume">resume</string>
+  <string name="paused">Paused</string>
+  <string name="achievements_tab_title">Achievements</string>
+  <string name="leaderboard_tab_title">Leaderboard</string>
+  <string name="rank_prefix">Rank:</string>
+  <string name="count_prefix">Count:</string>
+  <string name="leaderboard_column_rank">Rank</string>
+  <string name="leaderboard_column_user">User</string>
+  <string name="leaderboard_column_count">Count</string>
+  <string name="setting_avatar_dialog_title">Set as leaderboard avatar</string>
+  <string name="setting_avatar_dialog_message">Setting as avatar, please wait</string>
+  <string name="avatar_set_successfully">Avatar set</string>
+  <string name="avatar_set_unsuccessfully">Error setting new avatar, please try again</string>
+  <string name="menu_set_avatar">Set as avatar</string>
+  <string name="leaderboard_yearly">Yearly</string>
+  <string name="leaderboard_weekly">Weekly</string>
+  <string name="leaderboard_all_time">All time</string>
+  <string name="leaderboard_upload">Upload</string>
+  <string name="leaderboard_nearby">Nearby</string>
+  <string name="leaderboard_used">Used</string>
+  <string name="leaderboard_my_rank_button_text">My Rank</string>
+  <string name="mapbox_telemetry">Telemetry Opt Out</string>
+  <string name="telemetry_opt_out_summary">Send anonymized location and usage data to Mapbox when using Nearby feature</string>
+  <string name="map_attribution" translatable="false"><![CDATA[&#169; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &#169; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/">Improve this map</a>]]></string>
+  <string name="limited_connection_enabled">Limited connection mode enabled!</string>
+  <string name="limited_connection_disabled">Limited connection mode disabled. Pending uploads will resume now.</string>
+  <string name="limited_connection">Limited Connection</string>
 </resources>

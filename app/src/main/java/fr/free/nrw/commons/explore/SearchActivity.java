@@ -19,8 +19,8 @@ import com.jakewharton.rxbinding2.widget.RxSearchView;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
-import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
-import fr.free.nrw.commons.explore.depictions.SearchDepictionsFragment;
+import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment;
+import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment;
 import fr.free.nrw.commons.explore.media.SearchMediaFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
@@ -165,7 +165,7 @@ public class SearchActivity extends NavigationBaseActivity
      */
     @Override
     public Media getMediaAtPosition(int i) {
-        return searchMediaFragment.getImageAtPosition(i);
+        return searchMediaFragment.getMediaAtPosition(i);
     }
 
     /**
@@ -173,7 +173,12 @@ public class SearchActivity extends NavigationBaseActivity
      */
     @Override
     public int getTotalMediaCount() {
-       return searchMediaFragment.getTotalImagesCount();
+       return searchMediaFragment.getTotalMediaCount();
+    }
+
+    @Override
+    public Integer getContributionStateAt(int position) {
+        return null;
     }
 
     /**
@@ -191,7 +196,8 @@ public class SearchActivity extends NavigationBaseActivity
      * Open media detail pager fragment on click of image in search results
      * @param index item index that should be opened
      */
-    public void onSearchImageClicked(int index) {
+    @Override
+    public void onMediaClicked(int index) {
         ViewUtil.hideKeyboard(this.findViewById(R.id.searchBox));
         toolbar.setVisibility(View.GONE);
         tabLayout.setVisibility(View.GONE);
@@ -261,17 +267,6 @@ public class SearchActivity extends NavigationBaseActivity
         // Clear focus of searchView now. searchView.clearFocus(); does not seem to work Check the below link for more details.
         // https://stackoverflow.com/questions/6117967/how-to-remove-focus-without-setting-focus-to-another-control/15481511
         viewPager.requestFocus();
-    }
-
-    /**
-     * This method is called when viewPager has reached its end.
-     * Fetches more images using search query and adds it to the recycler view and viewpager adapter
-     */
-    @Override
-    public void requestMoreImages() {
-        if (searchMediaFragment!=null){
-            searchMediaFragment.requestMoreImages();
-        }
     }
 
     @Override protected void onDestroy() {

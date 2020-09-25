@@ -75,7 +75,9 @@
   <string name="upload_progress_notification_title_in_progress">Sto caricando %1$s</string>
   <string name="upload_progress_notification_title_finishing">Terminato il caricamento di %1$s</string>
   <string name="upload_failed_notification_title">Caricamento di %1$s non riuscito</string>
+  <string name="upload_paused_notification_title">Caricamento di %1$s in pausa</string>
   <string name="upload_failed_notification_subtitle">Premi per visualizzare</string>
+  <string name="upload_paused_notification_subtitle">Premi per visualizzare</string>
   <string name="title_activity_contributions">I miei ultimi caricamenti</string>
   <string name="contribution_state_queued">In coda</string>
   <string name="contribution_state_failed">Non riuscito</string>
@@ -320,6 +322,9 @@
   <string name="retry">Riprova</string>
   <string name="showcase_view_got_it_button">Capito!</string>
   <string name="showcase_view_whole_nearby_activity">Questi sono i luoghi vicino a te che necessitano di immagini per illustrare le loro voci di Wikipedia.\n\nCliccando su \"CERCA QUESTA AREA\" si blocca la mappa e si avvia una ricerca nelle vicinanze intorno a quella posizione.</string>
+  <string name="showcase_view_needs_photo">Questo luogo ha molto bisogno di una foto.</string>
+  <string name="showcase_view_has_photo">Questo luogo già ha una foto.</string>
+  <string name="showcase_view_no_longer_exists">Questo luogo non esiste più.</string>
   <string name="showcase_view_list_icon">Toccando questo pulsante viene visualizzato un elenco di questi luoghi</string>
   <string name="showcase_view_plus_fab">Puoi caricare un\'immagine per ogni luogo dalla tua galleria o fotocamera</string>
   <string name="no_images_found">Nessuna immagine trovata!</string>
@@ -376,6 +381,7 @@
   <string name="nominate_delete">Proponi per la cancellazione</string>
   <string name="delete">Cancella</string>
   <string name="Achievements">Risultati</string>
+  <string name="Profile">Profilo</string>
   <string name="statistics">Statistiche</string>
   <string name="statistics_thanks">Ringraziamenti ricevuti</string>
   <string name="statistics_featured">Immagini in evidenza</string>
@@ -545,4 +551,19 @@
   <string name="wikipedia_instructions_step_6">6. Modifica il wikitesto per il posizionamento appropriato, se necessario. Per ulteriori informazioni vedi &lt;a href=\"https://it.wikipedia.org/wiki/Aiuto:Markup_immagini\"&gt;questa pagina&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Pubblica la voce</string>
   <string name="copy_wikicode_to_clipboard">Copia il wikicodice negli appunti</string>
+  <string name="pause">pausa</string>
+  <string name="resume">riprendi</string>
+  <string name="paused">In pausa</string>
+  <string name="achievements_tab_title">Risultati</string>
+  <string name="leaderboard_tab_title">Classifica</string>
+  <string name="rank_prefix">Posizione:</string>
+  <string name="count_prefix">Conteggio:</string>
+  <string name="leaderboard_column_rank">Posizione</string>
+  <string name="leaderboard_column_user">Utente</string>
+  <string name="leaderboard_yearly">Annuale</string>
+  <string name="leaderboard_weekly">Settimanale</string>
+  <string name="leaderboard_all_time">Intero periodo</string>
+  <string name="leaderboard_upload">Carica</string>
+  <string name="leaderboard_nearby">Nelle vicinanze</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Migliora questa mappa&lt;/a&gt;</string>
 </resources>

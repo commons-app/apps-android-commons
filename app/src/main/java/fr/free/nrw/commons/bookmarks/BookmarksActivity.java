@@ -141,5 +141,12 @@ public class BookmarksActivity extends NavigationBaseActivity
     }
 
     @Override
-    public void requestMoreImages() { }
+    public void onMediaClicked(int position) {
+        //TODO use with pagination
+    }
+
+    @Override
+    public Integer getContributionStateAt(int position) {
+        return null;
+    }
 }

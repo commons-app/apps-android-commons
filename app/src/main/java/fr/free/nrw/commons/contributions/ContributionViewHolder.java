@@ -1,12 +1,9 @@
 package fr.free.nrw.commons.contributions;
 
-import static fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_ID_PREFIX;
-
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,8 +21,6 @@ import fr.free.nrw.commons.media.MediaClient;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import org.wikipedia.dataclient.WikiSite;
-import timber.log.Timber;
 
 public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
@@ -48,12 +43,15 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
   ImageButton retryButton;
   @BindView(R.id.cancelButton)
   ImageButton cancelButton;
+  @BindView(R.id.pauseResumeButton)
+  ImageButton pauseResumeButton;
 
 
   private int position;
   private Contribution contribution;
   private final CompositeDisposable compositeDisposable = new CompositeDisposable();
   private final MediaClient mediaClient;
+  private boolean isWikipediaButtonDisplayed;
 
   ContributionViewHolder(final View parent, final Callback callback,
       final MediaClient mediaClient) {
@@ -65,9 +63,14 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
   public void init(final int position, final Contribution contribution) {
     this.contribution = contribution;
-    fetchAndDisplayCaption(contribution);
     this.position = position;
-    final String imageSource = chooseImageSource(contribution.getThumbUrl(),
+    titleView.setText(contribution.getMedia().getMostRelevantCaption());
+
+    imageView.getHierarchy().setPlaceholderImage(R.drawable.image_placeholder);
+    imageView.getHierarchy().setFailureImage(R.drawable.image_placeholder);
+
+
+    final String imageSource = chooseImageSource(contribution.getMedia().getThumbUrl(),
         contribution.getLocalUri());
     if (!TextUtils.isEmpty(imageSource)) {
       final ImageRequest imageRequest =
@@ -90,6 +93,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         checkIfMediaExistsOnWikipediaPage(contribution);
         break;
       case Contribution.STATE_QUEUED:
+      case Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE:
         stateView.setVisibility(View.VISIBLE);
         progressView.setVisibility(View.GONE);
         stateView.setText(R.string.contribution_state_queued);
@@ -98,7 +102,11 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
       case Contribution.STATE_IN_PROGRESS:
         stateView.setVisibility(View.GONE);
         progressView.setVisibility(View.VISIBLE);
-        imageOptions.setVisibility(View.GONE);
+        addToWikipediaButton.setVisibility(View.GONE);
+        pauseResumeButton.setVisibility(View.VISIBLE);
+        cancelButton.setVisibility(View.GONE);
+        retryButton.setVisibility(View.GONE);
+        imageOptions.setVisibility(View.VISIBLE);
         final long total = contribution.getDataLength();
         final long transferred = contribution.getTransferred();
         if (transferred == 0 || transferred >= total) {
@@ -107,43 +115,25 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
           progressView.setProgress((int) (((double) transferred / (double) total) * 100));
         }
         break;
+      case Contribution.STATE_PAUSED:
+        stateView.setVisibility(View.VISIBLE);
+        stateView.setText(R.string.paused);
+        setResume();
+        progressView.setVisibility(View.GONE);
+        cancelButton.setVisibility(View.GONE);
+        retryButton.setVisibility(View.GONE);
+        pauseResumeButton.setVisibility(View.VISIBLE);
+        imageOptions.setVisibility(View.VISIBLE);
+        break;
       case Contribution.STATE_FAILED:
         stateView.setVisibility(View.VISIBLE);
         stateView.setText(R.string.contribution_state_failed);
         progressView.setVisibility(View.GONE);
+        cancelButton.setVisibility(View.VISIBLE);
+        retryButton.setVisibility(View.VISIBLE);
+        pauseResumeButton.setVisibility(View.GONE);
         imageOptions.setVisibility(View.VISIBLE);
         break;
-    }
-  }
-
-  /**
-   * In contributions first we show the title for the image stored in cache, then we fetch captions
-   * associated with the image and replace title on the thumbnail with caption
-   *
-   * @param contribution
-   */
-  private void fetchAndDisplayCaption(final Contribution contribution) {
-    if ((contribution.getState() != Contribution.STATE_COMPLETED)) {
-      titleView.setText(contribution.getDisplayTitle());
-    } else {
-      final String pageId = contribution.getPageId();
-      if (pageId != null) {
-        Timber.d("Fetching caption for %s", contribution.getFilename());
-        final String wikibaseMediaId = PAGE_ID_PREFIX
-            + pageId; // Create Wikibase media id from the page id. Example media id: M80618155 for https://commons.wikimedia.org/wiki/File:Tantanmen.jpeg with has the pageid 80618155
-        compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseMediaId)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(subscriber -> {
-              if (!subscriber.trim().equals(MediaClient.NO_CAPTION)) {
-                titleView.setText(subscriber);
-              } else {
-                titleView.setText(contribution.getDisplayTitle());
-              }
-            }));
-      } else {
-        titleView.setText(contribution.getDisplayTitle());
-      }
     }
   }
 
@@ -177,6 +167,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
   private void displayWikipediaButton(Boolean mediaExists) {
     if (!mediaExists) {
       addToWikipediaButton.setVisibility(View.VISIBLE);
+      isWikipediaButtonDisplayed = true;
       cancelButton.setVisibility(View.GONE);
       retryButton.setVisibility(View.GONE);
       imageOptions.setVisibility(View.VISIBLE);
@@ -216,11 +207,41 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
   @OnClick(R.id.contributionImage)
   public void imageClicked() {
-    callback.openMediaDetail(position);
+    callback.openMediaDetail(position, isWikipediaButtonDisplayed);
   }
 
   @OnClick(R.id.wikipediaButton)
   public void wikipediaButtonClicked() {
     callback.addImageToWikipedia(contribution);
+  }
+
+  /**
+   * Triggers a callback for pause/resume
+   */
+  @OnClick(R.id.pauseResumeButton)
+  public void onPauseResumeButtonClicked() {
+    if (pauseResumeButton.getTag().toString().equals("pause")) {
+      callback.pauseUpload(contribution);
+      setResume();
+    } else {
+      callback.resumeUpload(contribution);
+      setPaused();
+    }
+  }
+
+  /**
+   * Update pause/resume button to show pause state
+   */
+  private void setPaused() {
+    pauseResumeButton.setImageResource(R.drawable.pause_icon);
+    pauseResumeButton.setTag(R.string.pause);
+  }
+
+  /**
+   * Update pause/resume button to show resume state
+   */
+  private void setResume() {
+    pauseResumeButton.setImageResource(R.drawable.play_icon);
+    pauseResumeButton.setTag(R.string.resume);
   }
 }

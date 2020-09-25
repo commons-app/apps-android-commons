@@ -45,7 +45,7 @@ import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
 
 public class UploadMediaDetailFragment extends UploadBaseFragment implements
-        UploadMediaDetailsContract.View, UploadMediaDetailAdapter.EventListener {
+    UploadMediaDetailsContract.View, UploadMediaDetailAdapter.EventListener {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
@@ -98,7 +98,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+        @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_upload_media_detail_fragment, container, false);
     }
 
@@ -111,7 +111,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     private void init() {
         tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
-                callback.getTotalNumberOfSteps()));
+            callback.getTotalNumberOfSteps()));
         initRecyclerView();
         initPresenter();
         presenter.receiveImage(uploadableFile, place);
@@ -140,10 +140,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     private void attachImageViewScaleChangeListener() {
         photoViewBackgroundImage.setOnScaleChangeListener(
-                (scaleFactor, focusX, focusY) -> {
-                    //Whenever the uses plays with the image, lets collapse the media detail container
-                    expandCollapseLlMediaDetail(false);
-                });
+            (scaleFactor, focusX, focusY) -> {
+                //Whenever the uses plays with the image, lets collapse the media detail container
+                expandCollapseLlMediaDetail(false);
+            });
     }
 
     /**
@@ -188,6 +188,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         UploadMediaDetail uploadMediaDetail = new UploadMediaDetail();
         uploadMediaDetail.setManuallyAdded(true);//This was manually added by the user
         uploadMediaDetailAdapter.addDescription(uploadMediaDetail);
+        rvDescriptions.scrollToPosition(uploadMediaDetailAdapter.getItemCount()-1);
     }
 
     @Override
@@ -227,16 +228,16 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void onNearbyPlaceFound(UploadItem uploadItem, Place place) {
         DialogUtil.showAlertDialog(getActivity(),
-                getString(R.string.upload_nearby_place_found_title),
-                String.format(Locale.getDefault(),
-                        getString(R.string.upload_nearby_place_found_description),
-                        place.getName()),
-                () -> {
-                    presenter.onUserConfirmedUploadIsOfPlace(place, callback.getIndexInViewFlipper(this));
-                },
-                () -> {
+            getString(R.string.upload_nearby_place_found_title),
+            String.format(Locale.getDefault(),
+                getString(R.string.upload_nearby_place_found_description),
+                place.getName()),
+            () -> {
+                presenter.onUserConfirmedUploadIsOfPlace(place, callback.getIndexInViewFlipper(this));
+            },
+            () -> {
 
-                });
+            });
     }
 
     @Override
@@ -263,16 +264,16 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public void showDuplicatePicturePopup(UploadItem uploadItem) {
         String uploadTitleFormat = getString(R.string.upload_title_duplicate);
         DialogUtil.showAlertDialog(getActivity(),
-                getString(R.string.duplicate_image_found),
-                String.format(Locale.getDefault(),
-                        uploadTitleFormat,
-                        uploadItem.getFileName()),
-                getString(R.string.upload),
-                getString(R.string.cancel),
-                () -> {
-                    uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
-                    onNextButtonClicked();
-                }, null);
+            getString(R.string.duplicate_image_found),
+            String.format(Locale.getDefault(),
+                uploadTitleFormat,
+                uploadItem.getFileName()),
+            getString(R.string.upload),
+            getString(R.string.cancel),
+            () -> {
+                uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
+                onNextButtonClicked();
+            }, null);
 
     }
 
@@ -282,16 +283,16 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         String errorMessageForResult = getErrorMessageForResult(getContext(), errorCode);
         if (!StringUtils.isBlank(errorMessageForResult)) {
             DialogUtil.showAlertDialog(getActivity(),
-                    getString(R.string.upload_problem_image),
-                    errorMessageForResult,
-                    getString(R.string.upload),
-                    getString(R.string.cancel),
+                getString(R.string.upload_problem_image),
+                errorMessageForResult,
+                getString(R.string.upload),
+                getString(R.string.cancel),
                 () -> {
-                        uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
-                        onNextButtonClicked();
-                    },
-                    () -> deleteThisPicture()
-        );
+                    uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
+                    onNextButtonClicked();
+                },
+                () -> deleteThisPicture()
+            );
         }
         //If the error message is null, we will probably not show anything
     }

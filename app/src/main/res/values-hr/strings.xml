@@ -56,7 +56,9 @@
   <string name="upload_progress_notification_title_in_progress">Postavljanje %1$s</string>
   <string name="upload_progress_notification_title_finishing">Završeno postavljanje %1$s</string>
   <string name="upload_failed_notification_title">Postavljanje %1$s neuspješno</string>
+  <string name="upload_paused_notification_title">Postavljanje %1$s pauzirano</string>
   <string name="upload_failed_notification_subtitle">Dodirnite da biste vidjeli</string>
+  <string name="upload_paused_notification_subtitle">Dodirnite da biste vidjeli</string>
   <string name="title_activity_contributions">Moja nedavja postavljanja</string>
   <string name="contribution_state_queued">U redu čekanja</string>
   <string name="contribution_state_failed">Neuspješno</string>
@@ -323,6 +325,7 @@
   <string name="delete_search_dialog">Želite li izbrisati ovu pretragu?</string>
   <string name="nominate_delete">Predloži za brisanje</string>
   <string name="delete">Izbriši</string>
+  <string name="Profile">Podatci o suradnici/suradniku</string>
   <string name="statistics">Statistike</string>
   <string name="level">Razina</string>
   <string name="error_occurred">Došlo je do pogrješke!</string>
@@ -337,6 +340,9 @@
   <string name="please_wait">Molimo Vas, pričekajte ...</string>
   <string name="skip_image">Preskoči ovu sliku</string>
   <string name="default_description_language">Zadani jezik za opis</string>
+  <string name="category_edit_helper_make_edit_toast">Pokušavanje ažuriranja kategorija.</string>
+  <string name="category_edit_helper_show_edit_title_success">Uspješno!</string>
+  <string name="category_edit_button_text">Ažuriraj kategorije</string>
   <string name="title_app_shortcut_explore">Istraži</string>
   <string name="title_app_shortcut_bookmark">Oznake</string>
   <string name="title_app_shortcut_setting">Postavke</string>
@@ -349,4 +355,12 @@
   <string name="theme_dark_name">Tamno</string>
   <string name="theme_light_name">Svijetlo</string>
   <string name="load_more">Učitaj više</string>
+  <string name="edit_category">Uredi kategorije</string>
+  <string name="pause">stanka</string>
+  <string name="resume">nastavi</string>
+  <string name="paused">Pauzirano</string>
+  <string name="count_prefix">Broj:</string>
+  <string name="leaderboard_column_rank">Mjesto</string>
+  <string name="leaderboard_column_user">Suradnica/suradnik</string>
+  <string name="avatar_set_unsuccessfully">Pogrješka pri postavljanju novoga avatara, molimo Vas, pokušajte ponovno.</string>
 </resources>

@@ -194,7 +194,6 @@ class UploadMediaPresenterTest {
     @Test
     fun handleBadImageBaseTestInvalidLocation() {
         uploadMediaPresenter.handleBadImage(8, uploadItem)
-        verify(jsonKvStore).putBoolean(ArgumentMatchers.anyString(), eq(false))
         verify(view).showBadImagePopup(8, uploadItem)
     }
 

@@ -287,7 +287,7 @@
   <string name="error_while_cache">שגיאה בעת שמירת תמונות במטמון</string>
   <string name="title_info">כותרת מתארת ייחודית לקובץ, שתשמש כשם הקובץ. ניתן להשתמש בשפה טבעית עם רווחים. אין לכלול את סיומת הקובץ</string>
   <string name="description_info">נא לתאר את המדיה כמה שיותר: איפה היא נוצרה? מה היא מראה? מה ההקשר? נא לתאר את העצמים או את האנשים. נא לחשוף מידע שאי־אפשר לנחש בקלות, למשל, הזמן ביום אם זאת תמונת נוף. אם המדיה מציגה משהו בלתי־רגיל, נא להסביר מה מיוחד בה.</string>
-  <string name="caption_info">נא לרשום תיאור קצר של התמונה. (מוגבל ל־255 תווים)</string>
+  <string name="caption_info" fuzzy="true">נא לרשום תיאור קצר של התמונה. (מוגבל ל־255 תווים)</string>
   <string name="upload_image_too_dark">התמונה הזאת חשוכה מדי, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
   <string name="upload_image_blurry">התמונה הזאת מטושטשת, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
   <string name="upload_problem_exist">בעיות פוטנציאליות עם התמונה הזאת:</string>
@@ -351,6 +351,9 @@
   <string name="retry">לנסות שוב</string>
   <string name="showcase_view_got_it_button">הבנתי!</string>
   <string name="showcase_view_whole_nearby_activity">אלה המקומות בסביבתך שזקוקים לתמונות כדי להמחיש את הערכים שלהם בוויקיפדיה.\n\nלחיצה על חיפוש באזור הזה נועלת את המפה ומתחילה חיפוש סביב המיקום הזה.</string>
+  <string name="showcase_view_needs_photo">מקום זה צריך תמונה.</string>
+  <string name="showcase_view_has_photo">למקום הזה יש כבר תמונה.</string>
+  <string name="showcase_view_no_longer_exists">מקום זה לא קיים יותר.</string>
   <string name="showcase_view_list_icon">ניתן ללחוץ על כפתור זה כדי להציג רשימה של המקומות האלה</string>
   <string name="showcase_view_plus_fab">באפשרותך להעלות תמונה של כל מקום מהגלריה או מהמצלמה שלך</string>
   <string name="no_images_found">לא נמצאו תמונות!</string>
@@ -461,7 +464,7 @@
   <string name="deletion_reason_no_longer_want_public">התחרטתי, אינני רוצה עוד שהיא תוצג לציבור</string>
   <string name="deletion_reason_not_interesting">סליחה, התמונה אינה מעניינת עבור אנציקלופדיה</string>
   <string name="uploaded_by_myself">הועלה על ידי ב-%1$s, בשימוש ב-%2$d מאמר(ים)</string>
-  <string name="no_uploads">ברוך בואך לויקישיתוף!\n\nכדי להעלות את המדיה הראשונה שלך, נא להקיש על כפתור ההוספה.</string>
+  <string name="no_uploads">ברוך בואך לוויקישיתוף!\n\nכדי להעלות את המדיה הראשונה שלך, נא להקיש על כפתור ההוספה.</string>
   <string name="desc_language_Worldwide">בכל רחבי העולם</string>
   <string name="desc_language_America">אמריקה</string>
   <string name="desc_language_Europe">אירופה</string>
@@ -622,4 +625,10 @@
   <string name="use_location_from_similar_image">האם צילמת את שתי התמונות באותו המקום? האם ברצונך להשתמש בקו הרוחב וקו האורך של התמונה משמאל?</string>
   <string name="load_more">לטעון עוד</string>
   <string name="nearby_no_results">לא נמצאו מקומות, נא לנסות לשנות את החיפוש.</string>
+  <string name="add_picture_to_wikipedia_article_title">הוספת תמונה לוויקיפדיה</string>
+  <string name="add_picture_to_wikipedia_instructions_title">הוראות</string>
+  <string name="confirm">אישור</string>
+  <string name="instructions_title">הוראות</string>
+  <string name="copy_wikicode_to_clipboard">העתקת קוד־ויקי ללוח</string>
+  <string name="pause">השהיה</string>
 </resources>

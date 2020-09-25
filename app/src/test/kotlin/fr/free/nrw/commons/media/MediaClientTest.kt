@@ -1,289 +1,235 @@
 package fr.free.nrw.commons.media
 
+import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
+import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.media.model.PageMediaListItem
+import fr.free.nrw.commons.explore.media.MediaConverter
 import fr.free.nrw.commons.media.model.PageMediaListResponse
-import fr.free.nrw.commons.utils.CommonsDateUtil
-import io.reactivex.Observable
 import io.reactivex.Single
-import junit.framework.Assert.*
+import media
 import org.junit.Before
 import org.junit.Test
-import org.mockito.*
-import org.mockito.Mockito.*
-import org.wikipedia.dataclient.mwapi.ImageDetails
+import org.mockito.ArgumentMatchers
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations
 import org.wikipedia.dataclient.mwapi.MwQueryPage
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import org.wikipedia.dataclient.mwapi.MwQueryResult
 import org.wikipedia.gallery.ImageInfo
-import java.util.*
+import org.wikipedia.wikidata.Entities
 
 
 class MediaClientTest {
 
     @Mock
-    internal var mediaInterface: MediaInterface? = null
+    internal lateinit var mediaInterface: MediaInterface
 
     @Mock
-    internal var pageMediaInterface: PageMediaInterface? = null
+    internal lateinit var mediaConverter: MediaConverter
 
     @Mock
-    internal var mediaDetailInterface: MediaDetailInterface? = null
+    internal lateinit var mediaDetailInterface: MediaDetailInterface
 
-    @InjectMocks
-    var mediaClient: MediaClient? = null
+    @Mock
+    internal lateinit var pageMediaInterface: PageMediaInterface
+
+    val continuationMap = mapOf("continuation" to "continuation")
+
+    private lateinit var mediaClient: MediaClient
 
     @Before
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
+        mediaClient =
+            MediaClient(mediaInterface, pageMediaInterface, mediaDetailInterface, mediaConverter)
     }
 
     @Test
-    fun checkPageExistsUsingTitle() {
-        val mwQueryPage = mock(MwQueryPage::class.java)
-        `when`(mwQueryPage.pageId()).thenReturn(10)
-        val mwQueryResult = mock(MwQueryResult::class.java)
-        `when`(mwQueryResult.firstPage()).thenReturn(mwQueryPage)
-        `when`(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
-        val mockResponse = mock(MwQueryResponse::class.java)
-        `when`(mockResponse.query()).thenReturn(mwQueryResult)
-
-        `when`(mediaInterface!!.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
-            .thenReturn(Observable.just(mockResponse))
-
-        val checkPageExistsUsingTitle =
-            mediaClient!!.checkPageExistsUsingTitle("File:Test.jpg").blockingGet()
-        assertTrue(checkPageExistsUsingTitle)
+    fun `getMediaById maps response of interface`() {
+        val (mwQueryResponse, media) = expectSuccessfulMapping()
+        whenever(mediaInterface.getMediaById("id")).thenReturn(Single.just(mwQueryResponse))
+        mediaClient.getMediaById("id").test().assertValue(media)
     }
 
     @Test
-    fun checkPageNotExistsUsingTitle() {
-        val mwQueryPage = mock(MwQueryPage::class.java)
-        `when`(mwQueryPage.pageId()).thenReturn(0)
-        val mwQueryResult = mock(MwQueryResult::class.java)
-        `when`(mwQueryResult.firstPage()).thenReturn(mwQueryPage)
-        `when`(mwQueryResult.pages()).thenReturn(listOf())
-        val mockResponse = mock(MwQueryResponse::class.java)
-        `when`(mockResponse.query()).thenReturn(mwQueryResult)
-
-        `when`(mediaInterface!!.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
-            .thenReturn(Observable.just(mockResponse))
-
-        val checkPageExistsUsingTitle =
-            mediaClient!!.checkPageExistsUsingTitle("File:Test.jpg").blockingGet()
-        assertFalse(checkPageExistsUsingTitle)
+    fun `checkPageExistsUsingTitle returns true for greater than 0 id`() {
+        val mwQueryResponse = expectResponseWithPageId(1)
+        whenever(mediaInterface.checkPageExistsUsingTitle(""))
+            .thenReturn(Single.just(mwQueryResponse))
+        mediaClient.checkPageExistsUsingTitle("").test().assertValue(true)
     }
 
     @Test
-    fun checkFileExistsUsingSha() {
-        val mwQueryPage = mock(MwQueryPage::class.java)
-        val mwQueryResult = mock(MwQueryResult::class.java)
-        `when`(mwQueryResult.allImages()).thenReturn(listOf(mock(ImageDetails::class.java)))
-        `when`(mwQueryResult.firstPage()).thenReturn(mwQueryPage)
-        `when`(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
-        val mockResponse = mock(MwQueryResponse::class.java)
-        `when`(mockResponse.query()).thenReturn(mwQueryResult)
-
-        `when`(mediaInterface!!.checkFileExistsUsingSha(ArgumentMatchers.anyString()))
-            .thenReturn(Observable.just(mockResponse))
-
-        val checkFileExistsUsingSha = mediaClient!!.checkFileExistsUsingSha("abcde").blockingGet()
-        assertTrue(checkFileExistsUsingSha)
+    fun `checkPageExistsUsingTitle returns false for 0 id`() {
+        val mwQueryResponse = expectResponseWithPageId(0)
+        whenever(mediaInterface.checkPageExistsUsingTitle(""))
+            .thenReturn(Single.just(mwQueryResponse))
+        mediaClient.checkPageExistsUsingTitle("").test().assertValue(false)
     }
 
     @Test
-    fun checkFileNotExistsUsingSha() {
-        val mwQueryPage = mock(MwQueryPage::class.java)
-        val mwQueryResult = mock(MwQueryResult::class.java)
-        `when`(mwQueryResult.allImages()).thenReturn(listOf())
-        `when`(mwQueryResult.firstPage()).thenReturn(mwQueryPage)
-        `when`(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
-        val mockResponse = mock(MwQueryResponse::class.java)
-        `when`(mockResponse.query()).thenReturn(mwQueryResult)
-
-        `when`(mediaInterface!!.checkFileExistsUsingSha(ArgumentMatchers.anyString()))
-            .thenReturn(Observable.just(mockResponse))
-
-        val checkFileExistsUsingSha = mediaClient!!.checkFileExistsUsingSha("abcde").blockingGet()
-        assertFalse(checkFileExistsUsingSha)
+    fun `checkFileExistsUsingSha returns false with no Images`() {
+        val mwQueryResponse = mockQuery {
+            whenever(allImages()).thenReturn(listOf())
+        }
+        whenever(mediaInterface.checkFileExistsUsingSha(""))
+            .thenReturn(Single.just(mwQueryResponse))
+        mediaClient.checkFileExistsUsingSha("").test().assertValue(false)
     }
 
     @Test
-    fun getMedia() {
-        val imageInfo = ImageInfo()
-
-        val mwQueryPage = mock(MwQueryPage::class.java)
-        `when`(mwQueryPage.title()).thenReturn("Test")
-        `when`(mwQueryPage.imageInfo()).thenReturn(imageInfo)
-
-        val mwQueryResult = mock(MwQueryResult::class.java)
-        `when`(mwQueryResult.firstPage()).thenReturn(mwQueryPage)
-        val mockResponse = mock(MwQueryResponse::class.java)
-        `when`(mockResponse.query()).thenReturn(mwQueryResult)
-
-        `when`(mediaInterface!!.getMedia(ArgumentMatchers.anyString()))
-            .thenReturn(Observable.just(mockResponse))
-
-        assertEquals("Test", mediaClient!!.getMedia("abcde").blockingGet().filename)
+    fun `checkFileExistsUsingSha returns true with Images`() {
+        val mwQueryResponse = mockQuery {
+            whenever(allImages()).thenReturn(listOf(mock()))
+        }
+        whenever(mediaInterface.checkFileExistsUsingSha(""))
+            .thenReturn(Single.just(mwQueryResponse))
+        mediaClient.checkFileExistsUsingSha("").test().assertValue(true)
     }
 
     @Test
-    fun getMediaNull() {
-        val imageInfo = ImageInfo()
+    fun `getMediaListFromCategory is continuable and returns mapped response`() {
+        val (mwQueryResponse, media) = expectSuccessfulMapping(continuationMap)
+        whenever(mediaInterface.getMediaListFromCategory("", 10, emptyMap()))
+            .thenReturn(Single.just(mwQueryResponse))
+        mediaClient.getMediaListFromCategory("").test().assertValues(listOf(media))
 
-        val mwQueryPage = mock(MwQueryPage::class.java)
-        `when`(mwQueryPage.title()).thenReturn("Test")
-        `when`(mwQueryPage.imageInfo()).thenReturn(imageInfo)
+        whenever(mediaInterface.getMediaListFromCategory("", 10, continuationMap))
+            .thenReturn(Single.error(Exception()))
+        mediaClient.getMediaListFromCategory("").test().assertError { true }
 
-        val mwQueryResult = mock(MwQueryResult::class.java)
-        `when`(mwQueryResult.firstPage()).thenReturn(null)
-        val mockResponse = mock(MwQueryResponse::class.java)
-        `when`(mockResponse.query()).thenReturn(mwQueryResult)
-
-        `when`(mediaInterface!!.getMedia(ArgumentMatchers.anyString()))
-            .thenReturn(Observable.just(mockResponse))
-
-        assertEquals(Media.EMPTY, mediaClient!!.getMedia("abcde").blockingGet())
-    }
-
-    @Captor
-    private val filenameCaptor: ArgumentCaptor<String>? = null
-
-    @Test
-    fun getPictureOfTheDay() {
-        val template = "Template:Potd/" + CommonsDateUtil.getIso8601DateFormatShort().format(Date())
-
-        val imageInfo = ImageInfo()
-
-        val mwQueryPage = mock(MwQueryPage::class.java)
-        `when`(mwQueryPage.title()).thenReturn("Test")
-        `when`(mwQueryPage.imageInfo()).thenReturn(imageInfo)
-
-        val mwQueryResult = mock(MwQueryResult::class.java)
-        `when`(mwQueryResult.firstPage()).thenReturn(mwQueryPage)
-        val mockResponse = mock(MwQueryResponse::class.java)
-        `when`(mockResponse.query()).thenReturn(mwQueryResult)
-
-        `when`(mediaInterface!!.getMediaWithGenerator(filenameCaptor!!.capture()))
-            .thenReturn(Observable.just(mockResponse))
-
-        assertEquals("Test", mediaClient!!.pictureOfTheDay.blockingGet().filename)
-        assertEquals(template, filenameCaptor.value);
-    }
-
-    @Captor
-    private val continuationCaptor: ArgumentCaptor<Map<String, String>>? = null
-
-    @Test
-    fun getMediaListFromCategoryTwice() {
-        val mockContinuation = mapOf(Pair("gcmcontinue", "test"))
-        val imageInfo = ImageInfo()
-
-        val mwQueryPage = mock(MwQueryPage::class.java)
-        `when`(mwQueryPage.title()).thenReturn("Test")
-        `when`(mwQueryPage.imageInfo()).thenReturn(imageInfo)
-
-        val mwQueryResult = mock(MwQueryResult::class.java)
-        `when`(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
-
-        val mockResponse = mock(MwQueryResponse::class.java)
-        `when`(mockResponse.query()).thenReturn(mwQueryResult)
-        `when`(mockResponse.continuation()).thenReturn(mockContinuation)
-
-        `when`(
-            mediaInterface!!.getMediaListFromCategory(
-                ArgumentMatchers.anyString(), ArgumentMatchers.anyInt(),
-                continuationCaptor!!.capture()
-            )
-        )
-            .thenReturn(Observable.just(mockResponse))
-        val media1 = mediaClient!!.getMediaListFromCategory("abcde").blockingGet().get(0)
-        val media2 = mediaClient!!.getMediaListFromCategory("abcde").blockingGet().get(0)
-
-        assertEquals(continuationCaptor.allValues[0], emptyMap<String, String>())
-        assertEquals(continuationCaptor.allValues[1], mockContinuation)
-
-        assertEquals(media1.filename, "Test")
-        assertEquals(media2.filename, "Test")
+        mediaClient.resetCategoryContinuation("")
+        val (resetMwQueryResponse, resetMedia)=expectSuccessfulMapping()
+        whenever(mediaInterface.getMediaListFromCategory("", 10, emptyMap()))
+            .thenReturn(Single.just(resetMwQueryResponse))
+        mediaClient.getMediaListFromCategory("").test().assertValues(listOf(resetMedia))
     }
 
     @Test
-    fun getMediaListForUser() {
-        val mockContinuation = mapOf("gcmcontinue" to "test")
-        val imageInfo = ImageInfo()
-
-        val mwQueryPage = mock(MwQueryPage::class.java)
-        whenever(mwQueryPage.title()).thenReturn("Test")
-        whenever(mwQueryPage.imageInfo()).thenReturn(imageInfo)
-
-        val mwQueryResult = mock(MwQueryResult::class.java)
-        whenever(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
-
-        val mockResponse = mock(MwQueryResponse::class.java)
-        whenever(mockResponse.query()).thenReturn(mwQueryResult)
-        whenever(mockResponse.continuation()).thenReturn(mockContinuation)
-
-        whenever(
-            mediaInterface!!.getMediaListForUser(
-                ArgumentMatchers.anyString(), ArgumentMatchers.anyInt(),
-                continuationCaptor!!.capture()
-            )
-        )
-            .thenReturn(Observable.just(mockResponse))
-        val media1 = mediaClient!!.getMediaListForUser("Test").blockingGet().get(0)
-        val media2 = mediaClient!!.getMediaListForUser("Test").blockingGet().get(0)
-
-        verify(mediaInterface, times(2))?.getMediaListForUser(
-            ArgumentMatchers.anyString(),
-            ArgumentMatchers.anyInt(), ArgumentMatchers.anyMap<String, String>()
-        )
+    fun `getMediaListForUser is continuable and returns mapped response`() {
+        val (mwQueryResponse, media) = expectSuccessfulMapping(null)
+        whenever(mediaInterface.getMediaListForUser("", 10, emptyMap()))
+            .thenReturn(Single.just(mwQueryResponse))
+        mediaClient.getMediaListForUser("").test().assertValues(listOf(media))
+        mediaClient.getMediaListForUser("").test().assertValue(emptyList())
     }
 
     @Test
-    fun getPageHtmlTest() {
-        val mwParseResult = mock(MwParseResult::class.java)
-
-        `when`(mwParseResult.text()).thenReturn("Test")
-
-        val mockResponse = MwParseResponse()
-        mockResponse.setParse(mwParseResult)
-
-        `when`(mediaInterface!!.getPageHtml(ArgumentMatchers.anyString()))
-            .thenReturn(Observable.just(mockResponse))
-
-        assertEquals("Test", mediaClient!!.getPageHtml("abcde").blockingGet())
+    fun `getMediaListFromSearch returns mapped response`() {
+        val (mwQueryResponse, media) = expectSuccessfulMapping()
+        whenever(mediaInterface.getMediaListFromSearch("", 0, 1))
+            .thenReturn(Single.just(mwQueryResponse))
+        mediaClient.getMediaListFromSearch("", 0, 1)
+            .test()
+            .assertValues(listOf(media))
     }
 
     @Test
-    fun doesPageContainMedia() {
-        val mock = mock(PageMediaListResponse::class.java)
-        whenever(mock.items).thenReturn(listOf<PageMediaListItem>(mock(PageMediaListItem::class.java)))
-        `when`(pageMediaInterface!!.getMediaList(ArgumentMatchers.anyString()))
-            .thenReturn(Single.just(mock))
-
-        mediaClient!!.doesPageContainMedia("Test").test().assertValue(true)
+    fun `fetchImagesForDepictedItem returns mapped response`() {
+        val (mwQueryResponse, media) = expectSuccessfulMapping()
+        whenever(mediaInterface.fetchImagesForDepictedItem("haswbstatement:${BuildConfig.DEPICTS_PROPERTY}=", "0", "1"))
+            .thenReturn(Single.just(mwQueryResponse))
+        mediaClient.fetchImagesForDepictedItem("", 0, 1)
+            .test()
+            .assertValues(listOf(media))
     }
 
     @Test
-    fun doesPageContainMediaWithNoMedia() {
-        val mock = mock(PageMediaListResponse::class.java)
-        whenever(mock.items).thenReturn(listOf<PageMediaListItem>())
-        `when`(pageMediaInterface!!.getMediaList(ArgumentMatchers.anyString()))
-            .thenReturn(Single.just(mock))
-
-        mediaClient!!.doesPageContainMedia("Test").test().assertValue(false)
+    fun `getMedia returns mapped response`() {
+        val (mwQueryResponse, media) = expectSuccessfulMapping()
+        whenever(mediaInterface.getMedia("")).thenReturn(Single.just(mwQueryResponse))
+        mediaClient.getMedia("").test().assertValues(media)
     }
 
     @Test
-    fun getPageHtmlTestNull() {
-        val mockResponse = MwParseResponse()
-        mockResponse.setParse(null)
+    fun `getPictureOfTheDay returns mapped response`() {
+        val (mwQueryResponse, media) = expectSuccessfulMapping()
+        whenever(mediaInterface.getMediaWithGenerator(ArgumentMatchers.startsWith("Template:Potd/")))
+            .thenReturn(Single.just(mwQueryResponse))
+        mediaClient.getPictureOfTheDay().test().assertValues(media)
+    }
 
-        `when`(mediaInterface!!.getPageHtml(ArgumentMatchers.anyString()))
-            .thenReturn(Observable.just(mockResponse))
+    @Test
+    fun `getPageHtml with null parse result returns empty`() {
+        val mwParseResponse = mock<MwParseResponse>()
+        whenever(mediaInterface.getPageHtml("")).thenReturn(Single.just(mwParseResponse))
+        whenever(mwParseResponse.parse()).thenReturn(null)
+        mediaClient.getPageHtml("").test().assertValues("")
+    }
 
-        assertEquals("", mediaClient!!.getPageHtml("abcde").blockingGet())
+    @Test
+    fun `getPageHtml with parse result returns text`() {
+        val mwParseResponse = mock<MwParseResponse>()
+        whenever(mediaInterface.getPageHtml("")).thenReturn(Single.just(mwParseResponse))
+        val mwParseResult = mock<MwParseResult>()
+        whenever(mwParseResponse.parse()).thenReturn(mwParseResult)
+        whenever(mwParseResult.text()).thenReturn("text")
+        mediaClient.getPageHtml("").test().assertValues("text")
+    }
+
+    @Test
+    fun `getEntities throws exception for empty ids`() {
+        mediaClient.getEntities(emptyList()).test().assertErrorMessage("empty list passed for ids")
+    }
+
+    @Test
+    fun `getEntities invokes interface with non empty ids`() {
+        val entities = mock<Entities>()
+        whenever(mediaDetailInterface.getEntity("1|2")).thenReturn(Single.just(entities))
+        mediaClient.getEntities(listOf("1","2")).test().assertValue(entities)
+    }
+
+    @Test
+    fun `doesPageContainMedia returns false for empty items`() {
+        val pageMediaListResponse = mock<PageMediaListResponse>()
+        whenever(pageMediaInterface.getMediaList(""))
+            .thenReturn(Single.just(pageMediaListResponse))
+        whenever(pageMediaListResponse.items).thenReturn(emptyList())
+        mediaClient.doesPageContainMedia("").test().assertValue(false)
+    }
+
+    @Test
+    fun `doesPageContainMedia returns true for non empty items`() {
+        val pageMediaListResponse = mock<PageMediaListResponse>()
+        whenever(pageMediaInterface.getMediaList(""))
+            .thenReturn(Single.just(pageMediaListResponse))
+        whenever(pageMediaListResponse.items).thenReturn(listOf(mock()))
+        mediaClient.doesPageContainMedia("").test().assertValue(true)
+    }
+
+    private fun mockQuery(queryReceiver: MwQueryResult.() -> Unit): MwQueryResponse {
+        val mwQueryResponse = mock<MwQueryResponse>()
+        val mwQueryResult = mock<MwQueryResult>()
+        whenever(mwQueryResponse.query()).thenReturn(mwQueryResult)
+        mwQueryResult.queryReceiver()
+        return mwQueryResponse
+    }
+
+    private fun expectResponseWithPageId(expectedId: Int): MwQueryResponse {
+        return mockQuery {
+            val mwQueryPage = mock<MwQueryPage>()
+            whenever(firstPage()).thenReturn(mwQueryPage)
+            whenever(mwQueryPage.pageId()).thenReturn(expectedId)
+        }
+    }
+
+    private fun expectSuccessfulMapping(continuationMap: Map<String, String>? = emptyMap()): Pair<MwQueryResponse, Media> {
+        val media = media()
+        val mwQueryPage = mock<MwQueryPage>()
+        val mwQueryResponse = mockQuery {
+            whenever(pages()).thenReturn(listOf(mwQueryPage, mwQueryPage))
+            whenever(mwQueryPage.pageId()).thenReturn(1, 2)
+        }
+        whenever(mwQueryResponse.continuation()).thenReturn(continuationMap)
+        val entities = mock<Entities>()
+        whenever(mediaDetailInterface.getEntity("M1|M2")).thenReturn(Single.just(entities))
+        val entity = mock<Entities.Entity>()
+        whenever(entities.entities()).thenReturn(mapOf("a" to entity, "b" to entity))
+        val imageInfo = mock<ImageInfo>()
+        whenever(mwQueryPage.imageInfo()).thenReturn(imageInfo, null)
+        whenever(mediaConverter.convert(mwQueryPage, entity, imageInfo)).thenReturn(media)
+        return Pair(mwQueryResponse, media)
     }
 }

@@ -5,7 +5,6 @@ import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -13,32 +12,34 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.contributions.ChunkInfo;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.di.CommonsDaggerService;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.utils.CommonsDateUtil;
+import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.Scheduler;
-import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.processors.PublishProcessor;
 import io.reactivex.schedulers.Schedulers;
-import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.inject.Inject;
@@ -49,7 +50,11 @@ public class UploadService extends CommonsDaggerService {
 
   private static final String EXTRA_PREFIX = "fr.free.nrw.commons.upload";
 
+  private static final List<String> STASH_ERROR_CODES = Arrays
+      .asList("uploadstash-file-not-found", "stashfailed", "verification-error", "chunk-too-small");
+
   public static final String ACTION_START_SERVICE = EXTRA_PREFIX + ".upload";
+  public static final String PROCESS_PENDING_LIMITED_CONNECTION_MODE_UPLOADS = EXTRA_PREFIX + "process_limited_connection_mode_uploads";
   public static final String EXTRA_FILES = EXTRA_PREFIX + ".files";
   @Inject
   WikidataEditService wikidataEditService;
@@ -67,6 +72,9 @@ public class UploadService extends CommonsDaggerService {
   @Inject
   @Named(CommonsApplicationModule.IO_THREAD)
   Scheduler ioThreadScheduler;
+  @Inject
+  @Named("default_preferences")
+  public JsonKvStore defaultKvStore;
 
   private NotificationManagerCompat notificationManager;
   private NotificationCompat.Builder curNotification;
@@ -83,6 +91,7 @@ public class UploadService extends CommonsDaggerService {
   // Seriously, Android?
   public static final int NOTIFICATION_UPLOAD_IN_PROGRESS = 1;
   public static final int NOTIFICATION_UPLOAD_FAILED = 3;
+  public static final int NOTIFICATION_UPLOAD_PAUSED = 4;
 
   protected class NotificationUpdateProgressListener {
 
@@ -126,6 +135,24 @@ public class UploadService extends CommonsDaggerService {
           .subscribe());
     }
 
+    public void onChunkUploaded(Contribution contribution, ChunkInfo chunkInfo) {
+      contribution.setChunkInfo(chunkInfo);
+      compositeDisposable.add(contributionDao.update(contribution)
+          .subscribeOn(ioThreadScheduler)
+          .subscribe());
+    }
+  }
+
+  /**
+   * Sets contribution state to paused and disposes the active disposable
+   * @param contribution
+   */
+  public void pauseUpload(Contribution contribution) {
+    uploadClient.pauseUpload();
+    contribution.setState(Contribution.STATE_PAUSED);
+    compositeDisposable.add(contributionDao.update(contribution)
+        .subscribeOn(ioThreadScheduler)
+        .subscribe());
   }
 
   @Override
@@ -184,11 +211,21 @@ public class UploadService extends CommonsDaggerService {
   private boolean freshStart = true;
 
   public void queue(Contribution contribution) {
+    if (defaultKvStore
+        .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false)) {
+      contribution.setState(Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE);
+      contributionDao.save(contribution)
+          .subscribeOn(ioThreadScheduler)
+          .subscribe();
+      return;
+    }
     contributionsToUpload.offer(contribution);
   }
 
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
+    startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS,
+        curNotification.setContentText(getText(R.string.starting_uploads)).build());
     if (ACTION_START_SERVICE.equals(intent.getAction()) && freshStart) {
       compositeDisposable.add(contributionDao.updateStates(Contribution.STATE_FAILED,
           new int[]{Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS})
@@ -196,7 +233,14 @@ public class UploadService extends CommonsDaggerService {
           .subscribeOn(ioThreadScheduler)
           .subscribe());
       freshStart = false;
-    }
+    } else if (PROCESS_PENDING_LIMITED_CONNECTION_MODE_UPLOADS.equals(intent.getAction())) {
+        contributionDao.getContribution(Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE)
+            .flatMapObservable(
+                (Function<List<Contribution>, ObservableSource<Contribution>>) contributions -> Observable.fromIterable(contributions))
+            .concatMapCompletable(contribution -> Completable.fromAction(() -> queue(contribution)))
+        .subscribeOn(ioThreadScheduler)
+        .subscribe();
+      }
     return START_REDELIVER_INTENT;
   }
 
@@ -215,40 +259,40 @@ public class UploadService extends CommonsDaggerService {
 
   @SuppressLint("CheckResult")
   private void uploadContribution(Contribution contribution) {
-    Uri localUri = contribution.getLocalUri();
-    if (localUri == null || localUri.getPath() == null) {
+    if (contribution.getLocalUri() == null || contribution.getLocalUri().getPath() == null) {
       Timber.d("localUri/path is null");
       return;
     }
-    String notificationTag = localUri.toString();
-    File localFile = new File(localUri.getPath());
+    String notificationTag = contribution.getLocalUri().toString();
 
     Timber.d("Before execution!");
+    final Media media = contribution.getMedia();
+    final String displayTitle = media.getDisplayTitle();
     curNotification.setContentTitle(getString(R.string.upload_progress_notification_title_start,
-        contribution.getDisplayTitle()))
+        displayTitle))
         .setContentText(getResources()
             .getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload,
                 toUpload))
         .setTicker(getString(R.string.upload_progress_notification_title_in_progress,
-            contribution.getDisplayTitle()))
+            displayTitle))
         .setOngoing(true);
     notificationManager
         .notify(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
 
-    String filename = contribution.getFilename();
+    String filename = media.getFilename();
 
     NotificationUpdateProgressListener notificationUpdater = new NotificationUpdateProgressListener(
         notificationTag,
         getString(R.string.upload_progress_notification_title_in_progress,
-            contribution.getDisplayTitle()),
+            displayTitle),
         getString(R.string.upload_progress_notification_title_finishing,
-            contribution.getDisplayTitle()),
+            displayTitle),
         contribution
     );
 
     Observable.fromCallable(() -> "Temp_" + contribution.hashCode() + filename)
         .flatMap(stashFilename -> uploadClient
-            .uploadFileToStash(getApplicationContext(), stashFilename, localFile,
+            .uploadFileToStash(getApplicationContext(), stashFilename, contribution,
                 notificationUpdater))
         .subscribeOn(Schedulers.io())
         .observeOn(Schedulers.io())
@@ -270,7 +314,7 @@ public class UploadService extends CommonsDaggerService {
 
           Timber.d("Stash upload response 1 is %s", uploadStash.toString());
 
-          if (uploadStash.isSuccessful()) {
+          if (uploadStash.getState() == StashUploadState.SUCCESS) {
             Timber.d("making sure of uniqueness of name: %s", filename);
             String uniqueFilename = findUniqueFilename(filename);
             unfinishedUploads.add(uniqueFilename);
@@ -278,7 +322,19 @@ public class UploadService extends CommonsDaggerService {
                 getApplicationContext(),
                 contribution,
                 uniqueFilename,
-                uploadStash.getFilekey());
+                uploadStash.getFileKey()).doOnError(new Consumer<Throwable>() {
+              @Override
+              public void accept(Throwable throwable) throws Exception {
+                Timber.e(throwable, "Error occurred in uploading file from stash");
+                if (STASH_ERROR_CODES.contains(throwable.getMessage())) {
+                  clearChunks(contribution);
+                }
+              }
+            });
+          } else if (uploadStash.getState() == StashUploadState.PAUSED) {
+            Timber.d("Contribution upload paused");
+            showPausedNotification(contribution);
+            return Observable.never();
           } else {
             Timber.d("Contribution upload failed. Wikidata entity won't be edited");
             showFailedNotification(contribution);
@@ -292,6 +348,13 @@ public class UploadService extends CommonsDaggerService {
               notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
               showFailedNotification(contribution);
             });
+  }
+
+  private void clearChunks(Contribution contribution) {
+    contribution.setChunkInfo(null);
+    compositeDisposable.add(contributionDao.update(contribution)
+        .subscribeOn(ioThreadScheduler)
+        .subscribe());
   }
 
   private void onUpload(Contribution contribution, String notificationTag,
@@ -313,32 +376,35 @@ public class UploadService extends CommonsDaggerService {
         .add(wikidataEditService.addDepictionsAndCaptions(uploadResult, contribution));
     WikidataPlace wikidataPlace = contribution.getWikidataPlace();
     if (wikidataPlace != null && wikidataPlace.getImageValue() == null) {
-      wikidataEditService.createImageClaim(wikidataPlace, uploadResult);
+      if (!contribution.hasInvalidLocation()) {
+        wikidataEditService.createClaim(wikidataPlace, uploadResult.getFilename(),
+            contribution.getMedia().getCaptions());
+      } else {
+        ViewUtil.showShortToast(this, getString(R.string.wikidata_edit_failure));
+        Timber
+            .d("Image location and nearby place location mismatched, so Wikidata item won't be edited");
+      }
     }
     saveCompletedContribution(contribution, uploadResult);
   }
 
   private void saveCompletedContribution(Contribution contribution, UploadResult uploadResult) {
     compositeDisposable.add(mediaClient.getMedia("File:" + uploadResult.getFilename())
-        .map(media -> {
-          Contribution newContribution = new Contribution(media, Contribution.STATE_COMPLETED);
-          if (contribution.getWikidataPlace() != null) {
-            newContribution.setWikidataPlace(contribution.getWikidataPlace());
-          }
-          return newContribution;
-        })
+        .map(contribution::completeWith)
         .flatMapCompletable(
-            newContribution -> contributionDao.saveAndDelete(contribution, newContribution))
+            newContribution -> {
+              newContribution.setDateModified(new Date());
+              return contributionDao.saveAndDelete(contribution, newContribution);
+            })
         .subscribe());
   }
 
   @SuppressLint("StringFormatInvalid")
   @SuppressWarnings("deprecation")
   private void showFailedNotification(Contribution contribution) {
-    curNotification.setTicker(
-        getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
-        .setContentTitle(
-            getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
+    final String displayTitle = contribution.getMedia().getDisplayTitle();
+    curNotification.setTicker(getString(R.string.upload_failed_notification_title, displayTitle))
+        .setContentTitle(getString(R.string.upload_failed_notification_title, displayTitle))
         .setContentText(getString(R.string.upload_failed_notification_subtitle))
         .setProgress(0, 0, false)
         .setOngoing(false);
@@ -346,6 +412,24 @@ public class UploadService extends CommonsDaggerService {
         curNotification.build());
 
     contribution.setState(Contribution.STATE_FAILED);
+
+    compositeDisposable.add(contributionDao
+        .update(contribution)
+        .subscribeOn(ioThreadScheduler)
+        .subscribe());
+  }
+
+  private void showPausedNotification(Contribution contribution) {
+    final String displayTitle = contribution.getMedia().getDisplayTitle();
+    curNotification.setTicker(getString(R.string.upload_paused_notification_title, displayTitle))
+        .setContentTitle(getString(R.string.upload_paused_notification_title, displayTitle))
+        .setContentText(getString(R.string.upload_paused_notification_subtitle))
+        .setProgress(0, 0, false)
+        .setOngoing(false);
+    notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_PAUSED,
+        curNotification.build());
+
+    contribution.setState(Contribution.STATE_PAUSED);
 
     compositeDisposable.add(contributionDao
         .update(contribution)

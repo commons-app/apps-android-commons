@@ -5,13 +5,12 @@ import androidx.room.TypeConverter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.contributions.ChunkInfo;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.media.Depictions;
 import fr.free.nrw.commons.upload.WikidataPlace;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,13 +54,13 @@ public class Converters {
     }
 
     @TypeConverter
-    public static String mapObjectToString(HashMap<String,String> objectList) {
+    public static String mapObjectToString(Map<String,String> objectList) {
         return writeObjectToString(objectList);
     }
 
     @TypeConverter
-    public static HashMap<String,String> stringToMap(String objectList) {
-        return readObjectWithTypeToken(objectList, new TypeToken<HashMap<String,String>>(){});
+    public static Map<String,String> stringToMap(String objectList) {
+        return readObjectWithTypeToken(objectList, new TypeToken<Map<String,String>>(){});
     }
 
     @TypeConverter
@@ -85,6 +84,16 @@ public class Converters {
     }
 
     @TypeConverter
+    public static String chunkInfoToString(ChunkInfo chunkInfo) {
+        return writeObjectToString(chunkInfo);
+    }
+
+    @TypeConverter
+    public static ChunkInfo stringToChunkInfo(String chunkInfo) {
+        return readObjectFromString(chunkInfo, ChunkInfo.class);
+    }
+
+    @TypeConverter
     public static String depictionListToString(List<DepictedItem> depictedItems) {
         return writeObjectToString(depictedItems);
     }
@@ -92,16 +101,6 @@ public class Converters {
     @TypeConverter
     public static List<DepictedItem> stringToList(String depictedItems) {
         return readObjectWithTypeToken(depictedItems, new TypeToken<List<DepictedItem>>() {});
-    }
-
-    @TypeConverter
-    public static String depictionsToString(Depictions depictedItems) {
-        return writeObjectToString(depictedItems);
-    }
-
-    @TypeConverter
-    public static Depictions stringToDepictions(String depictedItems) {
-        return readObjectFromString(depictedItems, Depictions.class);
     }
 
     private static String writeObjectToString(Object object) {

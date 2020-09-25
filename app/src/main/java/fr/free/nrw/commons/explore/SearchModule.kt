@@ -2,11 +2,12 @@ package fr.free.nrw.commons.explore
 
 import dagger.Binds
 import dagger.Module
-import fr.free.nrw.commons.explore.categories.SearchCategoriesFragmentContract
-import fr.free.nrw.commons.explore.depictions.SearchDepictionsFragmentContract
-import fr.free.nrw.commons.explore.depictions.SearchDepictionsFragmentPresenter
-import fr.free.nrw.commons.explore.media.SearchMediaFragmentContract
+import fr.free.nrw.commons.explore.categories.search.SearchCategoriesFragmentPresenter
+import fr.free.nrw.commons.explore.categories.search.SearchCategoriesFragmentPresenterImpl
+import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragmentPresenter
+import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragmentPresenterImpl
 import fr.free.nrw.commons.explore.media.SearchMediaFragmentPresenter
+import fr.free.nrw.commons.explore.media.SearchMediaFragmentPresenterImpl
 
 /**
  * The Dagger Module for explore:depictions related presenters and (some other objects maybe in future)
@@ -14,18 +15,14 @@ import fr.free.nrw.commons.explore.media.SearchMediaFragmentPresenter
 @Module
 abstract class SearchModule {
     @Binds
-    abstract fun bindsSearchDepictionsFragmentPresenter(
-        presenter: SearchDepictionsFragmentPresenter
-    ): SearchDepictionsFragmentContract.Presenter
+    abstract fun SearchDepictionsFragmentPresenterImpl.bindsSearchDepictionsFragmentPresenter()
+            : SearchDepictionsFragmentPresenter
 
     @Binds
-    abstract fun bindsSearchCategoriesFragmentPresenter(
-        presenter: SearchCategoriesFragmentPresenter
-    ): SearchCategoriesFragmentContract.Presenter
+    abstract fun SearchCategoriesFragmentPresenterImpl.bindsSearchCategoriesFragmentPresenter()
+            : SearchCategoriesFragmentPresenter
 
     @Binds
-    abstract fun bindsSearchMediaFragmentPresenter(
-        presenter: SearchMediaFragmentPresenter
-    ): SearchMediaFragmentContract.Presenter
-
+    abstract fun SearchMediaFragmentPresenterImpl.bindsSearchMediaFragmentPresenter()
+            : SearchMediaFragmentPresenter
 }
