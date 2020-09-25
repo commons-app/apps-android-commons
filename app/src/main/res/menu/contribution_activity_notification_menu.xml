@@ -1,5 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/toggle_limited_connection_mode"
+      android:title="@string/limited_connection"
+      app:showAsAction="always"
+      android:checkable="true"
+      app:actionLayout="@layout/menu_switch"
+      />
     <item android:id="@+id/notifications"
         android:title="@string/notifications"
         app:showAsAction="ifRoom|withText"

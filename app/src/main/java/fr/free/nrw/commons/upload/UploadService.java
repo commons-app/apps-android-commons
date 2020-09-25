@@ -21,13 +21,17 @@ import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.di.CommonsDaggerService;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.processors.PublishProcessor;
 import io.reactivex.schedulers.Schedulers;
 import java.io.IOException;
@@ -50,6 +54,7 @@ public class UploadService extends CommonsDaggerService {
       .asList("uploadstash-file-not-found", "stashfailed", "verification-error", "chunk-too-small");
 
   public static final String ACTION_START_SERVICE = EXTRA_PREFIX + ".upload";
+  public static final String PROCESS_PENDING_LIMITED_CONNECTION_MODE_UPLOADS = EXTRA_PREFIX + "process_limited_connection_mode_uploads";
   public static final String EXTRA_FILES = EXTRA_PREFIX + ".files";
   @Inject
   WikidataEditService wikidataEditService;
@@ -67,6 +72,9 @@ public class UploadService extends CommonsDaggerService {
   @Inject
   @Named(CommonsApplicationModule.IO_THREAD)
   Scheduler ioThreadScheduler;
+  @Inject
+  @Named("default_preferences")
+  public JsonKvStore defaultKvStore;
 
   private NotificationManagerCompat notificationManager;
   private NotificationCompat.Builder curNotification;
@@ -203,11 +211,21 @@ public class UploadService extends CommonsDaggerService {
   private boolean freshStart = true;
 
   public void queue(Contribution contribution) {
+    if (defaultKvStore
+        .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false)) {
+      contribution.setState(Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE);
+      contributionDao.save(contribution)
+          .subscribeOn(ioThreadScheduler)
+          .subscribe();
+      return;
+    }
     contributionsToUpload.offer(contribution);
   }
 
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
+    startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS,
+        curNotification.setContentText(getText(R.string.starting_uploads)).build());
     if (ACTION_START_SERVICE.equals(intent.getAction()) && freshStart) {
       compositeDisposable.add(contributionDao.updateStates(Contribution.STATE_FAILED,
           new int[]{Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS})
@@ -215,7 +233,14 @@ public class UploadService extends CommonsDaggerService {
           .subscribeOn(ioThreadScheduler)
           .subscribe());
       freshStart = false;
-    }
+    } else if (PROCESS_PENDING_LIMITED_CONNECTION_MODE_UPLOADS.equals(intent.getAction())) {
+        contributionDao.getContribution(Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE)
+            .flatMapObservable(
+                (Function<List<Contribution>, ObservableSource<Contribution>>) contributions -> Observable.fromIterable(contributions))
+            .concatMapCompletable(contribution -> Completable.fromAction(() -> queue(contribution)))
+        .subscribeOn(ioThreadScheduler)
+        .subscribe();
+      }
     return START_REDELIVER_INTENT;
   }
 

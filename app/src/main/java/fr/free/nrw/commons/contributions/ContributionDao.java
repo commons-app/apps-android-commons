@@ -61,6 +61,9 @@ public abstract class ContributionDao {
   @Query("SELECT * from contribution WHERE pageId=:pageId")
   public abstract Contribution getContribution(String pageId);
 
+  @Query("SELECT * from contribution WHERE state=:state")
+  public abstract Single<List<Contribution>> getContribution(int state);
+
   @Query("UPDATE contribution SET state=:state WHERE state in (:toUpdateStates)")
   public abstract Single<Integer> updateStates(int state, int[] toUpdateStates);
 

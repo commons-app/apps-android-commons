@@ -1,8 +1,10 @@
 package fr.free.nrw.commons.upload
 
 import com.nhaarman.mockitokotlin2.verify
+import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.filepicker.UploadableFile
+import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.repository.UploadRepository
 import io.reactivex.Observable
 import org.junit.Before
@@ -26,6 +28,9 @@ class UploadPresenterTest {
     internal lateinit var view: UploadContract.View
     @Mock
     lateinit var contribution: Contribution
+
+    @Mock
+    lateinit var defaultKvStore: JsonKvStore
 
     @Mock
     private lateinit var uploadableFile: UploadableFile
@@ -57,6 +62,22 @@ class UploadPresenterTest {
      */
     @Test
     fun handleSubmitTestUserLoggedIn() {
+        `when`(view.isLoggedIn).thenReturn(true)
+        uploadPresenter.handleSubmit()
+        verify(view).isLoggedIn
+        verify(view).showProgress(true)
+        verify(repository).buildContributions()
+        verify(repository).buildContributions()
+    }
+
+    @Test
+    fun handleSubmitTestUserLoggedInAndLimitedConnectionOn() {
+        `when`(
+            defaultKvStore
+                .getBoolean(
+                    CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED,
+                    false
+                )).thenReturn(true)
         `when`(view.isLoggedIn).thenReturn(true)
         uploadPresenter.handleSubmit()
         verify(view).isLoggedIn
