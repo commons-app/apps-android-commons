@@ -278,7 +278,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     private void updateBookmarkState(MenuItem item) {
         boolean isBookmarked = bookmarkDao.findBookmark(bookmark);
-        int icon = isBookmarked ? R.drawable.ic_round_star_filled_24px : R.drawable.ic_round_star_border_24px;
+        int icon = isBookmarked ? R.drawable.menu_ic_round_star_filled_24px : R.drawable.menu_ic_round_star_border_24px;
         item.setIcon(icon);
     }
 

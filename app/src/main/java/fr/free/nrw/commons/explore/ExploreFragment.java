@@ -192,7 +192,6 @@ public class ExploreFragment extends CommonsDaggerSupportFragment
             mediaContainer.setVisibility(View.GONE);
             ((MainActivity)getActivity()).showTabs();
         }
-        //super.onBackPressed();
     }
 
     /**
@@ -217,7 +216,6 @@ public class ExploreFragment extends CommonsDaggerSupportFragment
             // https://stackoverflow.com/questions/11353075/how-can-i-maintain-fragment-state-when-added-to-the-back-stack/19022550#19022550            supportFragmentManager.executePendingTransactions();
         }
         mediaDetails.showImage(position);
-        //forceInitBackButton();
     }
 
     /**
