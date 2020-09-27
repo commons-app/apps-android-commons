@@ -476,7 +476,4 @@
         </LinearLayout>
       </LinearLayout>
     </ScrollView>
-
-  <include layout="@layout/drawer_view" />
-
 </androidx.drawerlayout.widget.DrawerLayout>
