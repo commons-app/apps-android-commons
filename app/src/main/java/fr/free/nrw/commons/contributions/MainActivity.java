@@ -265,6 +265,9 @@ public class MainActivity  extends BaseActivity
         } else if (exploreFragment != null && activeFragment == ActiveFragment.EXPLORE) {
             // Means that explore fragment is visible
             exploreFragment.onBackPressed();
+        } else if (bookmarkFragment != null && activeFragment == ActiveFragment.BOOKMARK) {
+            // Means that explore fragment is visible
+            bookmarkFragment.onBackPressed();
         } else {
             super.onBackPressed();
         }

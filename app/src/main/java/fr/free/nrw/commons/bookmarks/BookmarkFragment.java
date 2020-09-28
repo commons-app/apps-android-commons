@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
@@ -40,6 +41,8 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment
   ViewPager viewPager;
   @BindView(R.id.tab_layout)
   TabLayout tabLayout;
+  @BindView(R.id.fragmentContainer)
+  FrameLayout fragmentContainer;
 
   @Inject
   ContributionController controller;
@@ -105,6 +108,8 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment
    */
   @Override
   public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    fragmentContainer.setVisibility(View.VISIBLE);
+    tabLayout.setVisibility(View.GONE);
     if (mediaDetails == null || !mediaDetails.isVisible()) {
       mediaDetails = new MediaDetailPagerFragment(false, true);
       supportFragmentManager
@@ -113,11 +118,26 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment
           .hide(adapter.getItem(0))
           .hide(adapter.getItem(1))
           .add(R.id.fragmentContainer, mediaDetails)
-          .addToBackStack(null)
+          .addToBackStack("MediaDetails")
           .commit();
-      supportFragmentManager.executePendingTransactions();
+      // supportFragmentManager.executePendingTransactions();
     }
     mediaDetails.showImage(i);
+  }
+
+  public void onBackPressed() {
+    if (fragmentContainer.getVisibility() == View.VISIBLE) {
+      supportFragmentManager
+          .beginTransaction()
+          .show(adapter.getItem(0))
+          .show(adapter.getItem(1))
+          .remove(mediaDetails)
+          .commit();
+      tabLayout.setVisibility(View.VISIBLE);
+      viewPager.setVisibility(View.VISIBLE);
+      fragmentContainer.setVisibility(View.GONE);
+      ((MainActivity)getActivity()).showTabs();
+    }
   }
 
   /**
