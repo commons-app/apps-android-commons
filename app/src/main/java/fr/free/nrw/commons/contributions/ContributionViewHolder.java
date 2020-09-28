@@ -65,6 +65,11 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     this.contribution = contribution;
     this.position = position;
     titleView.setText(contribution.getMedia().getMostRelevantCaption());
+
+    imageView.getHierarchy().setPlaceholderImage(R.drawable.image_placeholder);
+    imageView.getHierarchy().setFailureImage(R.drawable.image_placeholder);
+
+
     final String imageSource = chooseImageSource(contribution.getMedia().getThumbUrl(),
         contribution.getLocalUri());
     if (!TextUtils.isEmpty(imageSource)) {
@@ -88,6 +93,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         checkIfMediaExistsOnWikipediaPage(contribution);
         break;
       case Contribution.STATE_QUEUED:
+      case Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE:
         stateView.setVisibility(View.VISIBLE);
         progressView.setVisibility(View.GONE);
         stateView.setText(R.string.contribution_state_queued);

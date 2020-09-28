@@ -49,6 +49,7 @@
         <item name="card_item_color">@color/white</item>
         <item name="notification_icon_drawable">@drawable/ic_notifications_white_24dp</item>
         <item name="notification_icon_text_color">@color/white</item>
+        <item name="toggle_theme">@style/SwitchThemeDark</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -99,6 +100,7 @@
         <item name="card_item_color">@color/primaryDarkColor</item>
         <item name="notification_icon_drawable">@drawable/ic_notifications_blue_24dp</item>
         <item name="notification_icon_text_color">@color/primaryDarkColor</item>
+        <item name="toggle_theme">@style/SwitchThemeLight</item>
     </style>
 
     <style name="LightMoreBottomSheetStyle" parent="LightAppTheme">
@@ -206,6 +208,14 @@
         <item name="android:padding">@dimen/small_gap</item>
         <item name="android:textColor">?attr/mediaDetailsText</item>
         <item name="android:textSize">@dimen/description_text_size</item>
+    </style>
+
+    <style name="SwitchThemeLight" parent="LightAppTheme" >
+        <item name="colorControlActivated">@color/primaryDarkColor</item>
+    </style>
+
+    <style name="SwitchThemeDark" parent="DarkAppTheme" >
+        <item name="colorControlActivated">@color/primaryColor</item>
     </style>
 
 </resources>

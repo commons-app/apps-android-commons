@@ -1,22 +1,21 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
-
-import java.lang.reflect.Proxy;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.repository.UploadRepository;
 import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import java.lang.reflect.Proxy;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import timber.log.Timber;
 
 /**
@@ -29,13 +28,16 @@ public class UploadPresenter implements UploadContract.UserActionListener {
             UploadContract.View.class.getClassLoader(),
             new Class[]{UploadContract.View.class}, (proxy, method, methodArgs) -> null);
     private final UploadRepository repository;
+    private final JsonKvStore defaultKvStore;
     private UploadContract.View view = DUMMY;
 
     private CompositeDisposable compositeDisposable;
 
     @Inject
-    UploadPresenter(UploadRepository uploadRepository) {
+    UploadPresenter(UploadRepository uploadRepository,
+        @Named("default_preferences") JsonKvStore defaultKvStore) {
         this.repository = uploadRepository;
+        this.defaultKvStore = defaultKvStore;
         compositeDisposable = new CompositeDisposable();
     }
 
@@ -54,7 +56,14 @@ public class UploadPresenter implements UploadContract.UserActionListener {
                         @Override
                         public void onSubscribe(Disposable d) {
                             view.showProgress(false);
-                            view.showMessage(R.string.uploading_started);
+                            if (defaultKvStore
+                                .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED,
+                                    false)) {
+                                view.showMessage(R.string.uploading_queued);
+                            } else {
+                                view.showMessage(R.string.uploading_started);
+                            }
+
                             compositeDisposable.add(d);
                         }
 

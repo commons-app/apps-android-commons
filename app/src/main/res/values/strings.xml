@@ -10,6 +10,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads"> Starting Uploads</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Starting %1$d upload</item>
     <item quantity="other">Starting %1$d uploads</item>
@@ -54,6 +55,7 @@
   <string name="upload_failed">File not found. Please try another file.</string>
   <string name="authentication_failed">Authentication failed, please login again</string>
   <string name="uploading_started">Upload started!</string>
+  <string name="uploading_queued">Upload queued (limited connection mode enabled)</string>
   <string name="upload_completed_notification_title">%1$s uploaded!</string>
   <string name="upload_completed_notification_text">Tap to view your upload</string>
   <string name="upload_progress_notification_title_start">Starting %1$s upload</string>
@@ -694,4 +696,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="mapbox_telemetry">Telemetry Opt Out</string>
   <string name="telemetry_opt_out_summary">Send anonymized location and usage data to Mapbox when using Nearby feature</string>
   <string name="map_attribution" translatable="false"><![CDATA[&#169; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &#169; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/">Improve this map</a>]]></string>
+  <string name="limited_connection_enabled">Limited connection mode enabled!</string>
+  <string name="limited_connection_disabled">Limited connection mode disabled. Pending uploads will resume now.</string>
+  <string name="limited_connection">Limited Connection</string>
 </resources>

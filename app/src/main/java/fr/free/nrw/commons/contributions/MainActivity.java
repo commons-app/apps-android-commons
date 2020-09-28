@@ -3,19 +3,23 @@ package fr.free.nrw.commons.contributions;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.BookmarkFragment;
@@ -37,6 +41,7 @@ import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.List;
@@ -77,6 +82,8 @@ public class MainActivity  extends BaseActivity
     @Named("default_preferences")
     public
     JsonKvStore applicationKvStore;
+    @Inject
+    ViewUtilWrapper viewUtilWrapper;
 
     public static final int CONTRIBUTIONS_TAB_POSITION = 0;
     public static final int NEARBY_TAB_POSITION = 1;
@@ -268,7 +275,7 @@ public class MainActivity  extends BaseActivity
         //initBackButton();
     }
 
-    /*@Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
@@ -282,8 +289,24 @@ public class MainActivity  extends BaseActivity
         this.menu = menu;
         updateMenuItem();
         setNotificationCount();
+
+        updateLimitedConnectionToggle(menu);
+
         return true;
-    } */
+    }*/
+
+    public void updateLimitedConnectionToggle(Menu menu) {
+        MenuItem checkable = menu.findItem(R.id.toggle_limited_connection_mode);
+        boolean isEnabled = defaultKvStore
+            .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
+
+        checkable.setChecked(isEnabled);
+        final SwitchCompat switchToggleLimitedConnectionMode = checkable.getActionView()
+            .findViewById(R.id.switch_toggle_limited_connection_mode);
+        switchToggleLimitedConnectionMode.setChecked(isEnabled);
+        switchToggleLimitedConnectionMode.setOnCheckedChangeListener(
+            (buttonView, isChecked) -> toggleLimitedConnectionMode());
+    }
 
     @SuppressLint("CheckResult")
     public void setNotificationCount() {
@@ -342,6 +365,26 @@ public class MainActivity  extends BaseActivity
     @Override
     public void viewPagerNotifyDataSetChanged() {
         // todo for explore
+    }
+    private void toggleLimitedConnectionMode() {
+        defaultKvStore.putBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED,
+            !defaultKvStore
+                .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false));
+        if (defaultKvStore
+            .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false)) {
+            viewUtilWrapper
+                .showShortToast(getBaseContext(), getString(R.string.limited_connection_enabled));
+        } else {
+            Intent intent = new Intent(this, UploadService.class);
+            intent.setAction(UploadService.PROCESS_PENDING_LIMITED_CONNECTION_MODE_UPLOADS);
+            if (VERSION.SDK_INT >= VERSION_CODES.O) {
+                startForegroundService(intent);
+            } else {
+                startService(intent);
+            }
+            viewUtilWrapper
+                .showShortToast(getBaseContext(), getString(R.string.limited_connection_disabled));
+        }
     }
 
     @Override

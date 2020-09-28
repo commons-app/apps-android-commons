@@ -431,6 +431,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
      * - when the high resolution image is available, it replaces the low resolution image
      */
     private void setupImageView() {
+
+        image.getHierarchy().setPlaceholderImage(R.drawable.image_placeholder);
+        image.getHierarchy().setFailureImage(R.drawable.image_placeholder);
+
+        imageLandscape.getHierarchy().setPlaceholderImage(R.drawable.image_placeholder);
+        imageLandscape.getHierarchy().setFailureImage(R.drawable.image_placeholder);
+
         DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setLowResImageRequest(ImageRequest.fromUri(media.getThumbUrl()))
                 .setImageRequest(ImageRequest.fromUri(media.getImageUrl()))
