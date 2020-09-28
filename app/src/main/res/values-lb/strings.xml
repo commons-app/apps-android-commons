@@ -407,4 +407,5 @@
   <string name="leaderboard_upload">Eroplueden</string>
   <string name="leaderboard_nearby">Nobäi</string>
   <string name="leaderboard_used">Benotzt</string>
+  <string name="limited_connection">Limitéiert Verbindung</string>
 </resources>

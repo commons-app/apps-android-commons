@@ -13,6 +13,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">Ancamin dij cariament</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">%1$d cariament ancaminà</item>
     <item quantity="other">%1$d cariament ancaminà</item>
@@ -57,6 +58,7 @@
   <string name="upload_failed">Archivi nen trovà. Për piasì, ch\'a preuva con n\'àutr.</string>
   <string name="authentication_failed">Autentificassion falìa, për piasì ch\'as colega torna</string>
   <string name="uploading_started">Cariament ancaminà!</string>
+  <string name="uploading_queued">Carié an coa (manera ëd conession limità abilità)</string>
   <string name="upload_completed_notification_title">%1$s carià!</string>
   <string name="upload_completed_notification_text">Sgnaché për vëdde sò cariament</string>
   <string name="upload_progress_notification_title_start">Inissi dël cariament %1$s</string>
@@ -652,4 +654,7 @@
   <string name="mapbox_telemetry">Disativassion ëd la telemetrìa</string>
   <string name="telemetry_opt_out_summary">Mandé na locassion anonimisà e ij dàit d\'utilisassion a Mapbox cand as deuvra la fonsionalità Nearby</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Improve this map&lt;/a&gt;</string>
+  <string name="limited_connection_enabled">Meud ëd conession limità abilità!</string>
+  <string name="limited_connection_disabled">Meud ëd conession limità disabilità. Ij cariament an atèisa a arpijëran adess.</string>
+  <string name="limited_connection">Conession limità</string>
 </resources>

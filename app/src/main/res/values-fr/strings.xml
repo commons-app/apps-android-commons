@@ -40,6 +40,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">Démarrage des téléchargements</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">%1$d téléversement démarré</item>
     <item quantity="other">%1$d téléversements démarrés</item>
@@ -84,6 +85,7 @@
   <string name="upload_failed">Fichier non trouvé. Veuillez en essayer un autre.</string>
   <string name="authentication_failed">Échec de l’authentification, veuillez vous connecter à nouveau</string>
   <string name="uploading_started">Téléversement démarré !</string>
+  <string name="uploading_queued">Téléchargement mis en file (mode de connexion limitée activé)</string>
   <string name="upload_completed_notification_title">%1$s téléversé !</string>
   <string name="upload_completed_notification_text">Appuyer pour voir votre téléversement</string>
   <string name="upload_progress_notification_title_start">Début de téléversement de %1$s</string>
@@ -679,4 +681,7 @@
   <string name="mapbox_telemetry">Désactivation de la télémétrie</string>
   <string name="telemetry_opt_out_summary">Envoyer un emplacement anonymisé et les données d’utilisation à Mapbox en utilisant la fonctionnalité Nearby</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Améliorer cette carte&lt;/a&gt;</string>
+  <string name="limited_connection_enabled">Mode de connexion limitée activé !</string>
+  <string name="limited_connection_disabled">Mode de connexion limitée désactivé. Les téléchargements en attente seront maintenant repris.</string>
+  <string name="limited_connection">Connexion limitée</string>
 </resources>
