@@ -34,6 +34,7 @@ import fr.free.nrw.commons.navtab.NavTab;
 import fr.free.nrw.commons.navtab.NavTabLayout;
 import fr.free.nrw.commons.navtab.NavTabLoggedOut;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
+import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
@@ -85,15 +86,7 @@ public class MainActivity  extends BaseActivity
     @Inject
     ViewUtilWrapper viewUtilWrapper;
 
-    public static final int CONTRIBUTIONS_TAB_POSITION = 0;
-    public static final int NEARBY_TAB_POSITION = 1;
-
-    public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
-    public boolean onOrientationChanged;
     public Menu menu;
-
-    private MenuItem notificationsMenuItem;
-    public TextView notificationCount;
 
     /**
      * Consumers should be simply using this method to use this activity.
@@ -278,78 +271,6 @@ public class MainActivity  extends BaseActivity
         //initBackButton();
     }
 
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
-
-        notificationsMenuItem = menu.findItem(R.id.notifications);
-        final View notification = notificationsMenuItem.getActionView();
-        notificationCount = notification.findViewById(R.id.notification_count_badge);
-        notification.setOnClickListener(view -> {
-            NotificationActivity.startYourself(MainActivity.this, "unread");
-        });
-        this.menu = menu;
-        updateMenuItem();
-        setNotificationCount();
-
-        updateLimitedConnectionToggle(menu);
-
-        return true;
-    }*/
-
-    public void updateLimitedConnectionToggle(Menu menu) {
-        MenuItem checkable = menu.findItem(R.id.toggle_limited_connection_mode);
-        boolean isEnabled = defaultKvStore
-            .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
-
-        checkable.setChecked(isEnabled);
-        final SwitchCompat switchToggleLimitedConnectionMode = checkable.getActionView()
-            .findViewById(R.id.switch_toggle_limited_connection_mode);
-        switchToggleLimitedConnectionMode.setChecked(isEnabled);
-        switchToggleLimitedConnectionMode.setOnCheckedChangeListener(
-            (buttonView, isChecked) -> toggleLimitedConnectionMode());
-    }
-
-    @SuppressLint("CheckResult")
-    public void setNotificationCount() {
-        compositeDisposable.add(notificationController.getNotifications(false)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::initNotificationViews,
-                        throwable -> Timber.e(throwable, "Error occurred while loading notifications")));
-    }
-
-    private void initNotificationViews(List<Notification> notificationList) {
-        Timber.d("Number of notifications is %d", notificationList.size());
-        if (notificationList.isEmpty()) {
-            notificationCount.setVisibility(View.GONE);
-        } else {
-            notificationCount.setVisibility(View.VISIBLE);
-            notificationCount.setText(String.valueOf(notificationList.size()));
-        }
-    }
-
-    /**
-     * Responsible with displaying required menu items according to displayed fragment.
-     * Notifications icon when contributions list is visible, list sheet icon when nearby is visible
-     */
-    public void updateMenuItem() {
-        if (menu != null) {
-            if (isContributionsFragmentVisible) {
-                // Display notifications menu item
-                menu.findItem(R.id.notifications).setVisible(true);
-                menu.findItem(R.id.list_sheet).setVisible(false);
-                Timber.d("Contributions fragment notifications menu item is visible");
-            } else {
-                // Display bottom list menu item
-                menu.findItem(R.id.notifications).setVisible(false);
-                menu.findItem(R.id.list_sheet).setVisible(true);
-                Timber.d("Nearby fragment list sheet menu item is visible");
-            }
-        }
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -369,7 +290,8 @@ public class MainActivity  extends BaseActivity
     public void viewPagerNotifyDataSetChanged() {
         // todo for explore
     }
-    private void toggleLimitedConnectionMode() {
+
+    public void toggleLimitedConnectionMode() {
         defaultKvStore.putBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED,
             !defaultKvStore
                 .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false));
@@ -395,6 +317,11 @@ public class MainActivity  extends BaseActivity
         // todo for explore
     }
 
+    public void centerMapToPlace(Place place) {
+        setSelectedItemId(NavTab.NEARBY.code());
+        nearbyParentFragment.centerMapToPlace(place);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Timber.d(data!=null?data.toString():"onActivityResult data is null");
@@ -405,7 +332,6 @@ public class MainActivity  extends BaseActivity
     @Override
     protected void onResume() {
         super.onResume();
-        setNotificationCount();
     }
 
     @Override

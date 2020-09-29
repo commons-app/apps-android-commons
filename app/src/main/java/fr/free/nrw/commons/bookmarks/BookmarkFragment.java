@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.bookmarks;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +16,6 @@ import com.google.android.material.tabs.TabLayout;
 
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.explore.ExploreFragment;
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -34,6 +31,7 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment
     MediaDetailPagerFragment.MediaDetailProvider,
     AdapterView.OnItemClickListener, CategoryImagesCallback {
 
+  private static final String MEDIA_DETAILS_FRAGMENT_TAG = "MediaDetailsFragment";
   private FragmentManager supportFragmentManager;
   private BookmarksPagerAdapter adapter;
   private MediaDetailPagerFragment mediaDetails;
@@ -78,17 +76,6 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment
     return view;
   }
 
-  /**
-   * Consumers should be simply using this method to use this activity.
-   * @param context A Context of the application package implementing this class.
-   */
-  public static void startYourself(Context context) {
-    // Todo, make display bookmark fragment
-    Intent intent = new Intent(context, MainActivity.class);
-    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-    context.startActivity(intent);
-  }
-
   @Override
   public void onBackStackChanged() {
     if (supportFragmentManager.getBackStackEntryCount() == 0) {
@@ -96,12 +83,6 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment
       adapter.requestPictureListUpdate();
     }
   }
-
-  /*@Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-    controller.handleActivityResult(this, requestCode, resultCode, data);
-  }*/
 
   /**
    * This method is called onClick of media inside category details (CategoryImageListFragment).
@@ -114,13 +95,11 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment
       mediaDetails = new MediaDetailPagerFragment(false, true);
       supportFragmentManager
           .beginTransaction()
-          //.hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
           .hide(adapter.getItem(0))
           .hide(adapter.getItem(1))
           .add(R.id.fragmentContainer, mediaDetails)
-          .addToBackStack("MediaDetails")
+          .addToBackStack(MEDIA_DETAILS_FRAGMENT_TAG)
           .commit();
-      // supportFragmentManager.executePendingTransactions();
     }
     mediaDetails.showImage(i);
   }
@@ -150,7 +129,6 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment
       mediaDetails.notifyDataSetChanged();
     }
   }
-
 
   /**
    * This method is called mediaDetailPagerFragment. It returns the Media Object at that Index

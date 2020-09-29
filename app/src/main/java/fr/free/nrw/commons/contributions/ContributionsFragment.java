@@ -2,10 +2,10 @@ package fr.free.nrw.commons.contributions;
 
 import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_PAUSED;
-import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -21,15 +21,20 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
 
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.notification.Notification;
+import fr.free.nrw.commons.notification.NotificationController;
 import io.reactivex.disposables.Disposable;
 import java.util.List;
 
@@ -68,8 +73,6 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import javax.inject.Inject;
-import javax.inject.Named;
 import timber.log.Timber;
 
 public class ContributionsFragment
@@ -84,6 +87,7 @@ public class ContributionsFragment
     @Inject OkHttpJsonApiClient okHttpJsonApiClient;
     @Inject CampaignsPresenter presenter;
     @Inject LocationServiceManager locationManager;
+    @Inject NotificationController notificationController;
 
     private UploadService uploadService;
     private boolean isUploadServiceConnected;
@@ -108,6 +112,8 @@ public class ContributionsFragment
     private boolean isFragmentAttachedBefore = false;
     private View checkBoxView;
     private CheckBox checkBox;
+
+    public TextView notificationCount;
 
     @NonNull
     public static ContributionsFragment newInstance() {
@@ -185,21 +191,51 @@ public class ContributionsFragment
 
     @Override
     public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
-       // super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
+
 
         MenuItem notificationsMenuItem = menu.findItem(R.id.notifications);
         final View notification = notificationsMenuItem.getActionView();
-        ((MainActivity)getActivity()).notificationCount = notification.findViewById(R.id.notification_count_badge);
+        notificationCount = notification.findViewById(R.id.notification_count_badge);
         notification.setOnClickListener(view -> {
             NotificationActivity.startYourself(getContext(), "unread");
         });
-        ((MainActivity)getActivity()).menu = menu;
-        ((MainActivity)getActivity()).updateMenuItem();
-        ((MainActivity)getActivity()).setNotificationCount();
-        ((MainActivity)getActivity()).updateLimitedConnectionToggle(menu);
+        setNotificationCount();
+        updateLimitedConnectionToggle(menu);
 
         // TODO move notification logic to this fragment
+    }
+
+    @SuppressLint("CheckResult")
+    public void setNotificationCount() {
+        compositeDisposable.add(notificationController.getNotifications(false)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(this::initNotificationViews,
+                throwable -> Timber.e(throwable, "Error occurred while loading notifications")));
+    }
+
+    private void initNotificationViews(List<Notification> notificationList) {
+        Timber.d("Number of notifications is %d", notificationList.size());
+        if (notificationList.isEmpty()) {
+            notificationCount.setVisibility(View.GONE);
+        } else {
+            notificationCount.setVisibility(View.VISIBLE);
+            notificationCount.setText(String.valueOf(notificationList.size()));
+        }
+    }
+
+    public void updateLimitedConnectionToggle(Menu menu) {
+        MenuItem checkable = menu.findItem(R.id.toggle_limited_connection_mode);
+        boolean isEnabled = store
+            .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
+
+        checkable.setChecked(isEnabled);
+        final SwitchCompat switchToggleLimitedConnectionMode = checkable.getActionView()
+            .findViewById(R.id.switch_toggle_limited_connection_mode);
+        switchToggleLimitedConnectionMode.setChecked(isEnabled);
+        switchToggleLimitedConnectionMode.setOnCheckedChangeListener(
+            (buttonView, isChecked) -> ((MainActivity)getActivity()).toggleLimitedConnectionMode());
     }
 
     @Override
@@ -223,8 +259,6 @@ public class ContributionsFragment
      * new one if null.
      */
     private void showContributionsListFragment() {
-        // show tabs on contribution list is visible
-        // ((MainActivity) getActivity()).showTabs();
         // show nearby card view on contributions list is visible
         if (nearbyNotificationCardView != null) {
             if (store.getBoolean("displayNearbyCardView", true)) {
@@ -240,8 +274,6 @@ public class ContributionsFragment
     }
 
     private void showMediaDetailPagerFragment() {
-        // hide tabs on media detail view is visible
-        // ((MainActivity) getActivity()).hideTabs();
         // hide nearby card view on media detail is visible
         setupViewForMediaDetails();
         showFragment(mediaDetailPagerFragment, MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
@@ -254,7 +286,7 @@ public class ContributionsFragment
 
     @Override
     public void onBackStackChanged() {
-        //((MainActivity)getActivity()).initBackButton();
+
     }
 
     /**

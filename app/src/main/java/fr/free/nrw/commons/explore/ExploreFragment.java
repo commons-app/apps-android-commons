@@ -34,6 +34,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment
 
     private static final String FEATURED_IMAGES_CATEGORY = "Featured_pictures_on_Wikimedia_Commons";
     private static final String MOBILE_UPLOADS_CATEGORY = "Uploaded_with_Mobile/Android";
+    private static final String MEDIA_DETAILS_FRAGMENT_TAG = "MediaDetailsFragment";
 
 
     @BindView(R.id.mediaContainer)
@@ -47,8 +48,6 @@ public class ExploreFragment extends CommonsDaggerSupportFragment
     private MediaDetailPagerFragment mediaDetails;
     private CategoriesMediaFragment mobileImagesListFragment;
     private CategoriesMediaFragment featuredImagesListFragment;
-
-    FragmentManager childFragmentManager;
 
     /**
      * Consumers should be simply using this method to use this activity.
@@ -164,21 +163,6 @@ public class ExploreFragment extends CommonsDaggerSupportFragment
         }
     }
 
-    /**
-     * This method is called on backPressed of anyFragment in the activity.
-     * If condition is called when mediaDetailFragment is opened.
-     */
-  /*@Override
-  public void onBackPressed() {
-    if (supportFragmentManager.getBackStackEntryCount() == 1) {
-      tabLayout.setVisibility(View.VISIBLE);
-      viewPager.setVisibility(View.VISIBLE);
-      mediaContainer.setVisibility(View.GONE);
-    }
-    initDrawer();
-    super.onBackPressed();
-  }*/
-
     public void onBackPressed() {
         if (mediaContainer.getVisibility() == View.VISIBLE) {
             supportFragmentManager
@@ -209,7 +193,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment
                 .hide(featuredImagesListFragment)
                 .hide(mobileImagesListFragment)
                 .add(R.id.mediaContainer, mediaDetails)
-                .addToBackStack("MediaDetails")
+                .addToBackStack(MEDIA_DETAILS_FRAGMENT_TAG)
                 .commit();
             // Reason for using hide, add instead of replace is to maintain scroll position after
             // coming back to the explore activity. See https://github.com/commons-app/apps-android-commons/issues/1631
