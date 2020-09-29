@@ -10,7 +10,6 @@ import fr.free.nrw.commons.contributions.MainActivity;
 
 public class NavTabLayout extends BottomNavigationView {
 
-  // TODO inject applicatio kvstore to here
   public NavTabLayout(Context context) {
     super(context);
     setTabViews();

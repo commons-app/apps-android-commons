@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.contributions;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build.VERSION;
@@ -10,10 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Switch;
-import android.widget.TextView;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -36,22 +32,18 @@ import fr.free.nrw.commons.navtab.NavTabLoggedOut;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
-import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
 
 public class MainActivity  extends BaseActivity
-    implements FragmentManager.OnBackStackChangedListener, CategoryImagesCallback {
+    implements FragmentManager.OnBackStackChangedListener {
 
     @Inject
     SessionManager sessionManager;
@@ -259,7 +251,7 @@ public class MainActivity  extends BaseActivity
             // Means that explore fragment is visible
             exploreFragment.onBackPressed();
         } else if (bookmarkFragment != null && activeFragment == ActiveFragment.BOOKMARK) {
-            // Means that explore fragment is visible
+            // Means that bookmark fragment is visible
             bookmarkFragment.onBackPressed();
         } else {
             super.onBackPressed();
@@ -286,11 +278,6 @@ public class MainActivity  extends BaseActivity
         }
     }
 
-    @Override
-    public void viewPagerNotifyDataSetChanged() {
-        // todo for explore
-    }
-
     public void toggleLimitedConnectionMode() {
         defaultKvStore.putBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED,
             !defaultKvStore
@@ -310,11 +297,6 @@ public class MainActivity  extends BaseActivity
             viewUtilWrapper
                 .showShortToast(getBaseContext(), getString(R.string.limited_connection_disabled));
         }
-    }
-
-    @Override
-    public void onMediaClicked(int position) {
-        // todo for explore
     }
 
     public void centerMapToPlace(Place place) {

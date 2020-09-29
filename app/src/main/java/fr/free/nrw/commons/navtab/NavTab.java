@@ -13,7 +13,6 @@ import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import org.wikipedia.model.EnumCode;
 import org.wikipedia.model.EnumCodeMap;
 
-//import fr.free.nrw.commons.MoreFragment;
 import fr.free.nrw.commons.R;
 
 
