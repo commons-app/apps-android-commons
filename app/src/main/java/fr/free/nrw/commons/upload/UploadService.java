@@ -148,7 +148,7 @@ public class UploadService extends CommonsDaggerService {
    * @param contribution
    */
   public void pauseUpload(Contribution contribution) {
-    uploadClient.pauseUpload();
+    uploadClient.pauseUpload(contribution.getPageId());
     contribution.setState(Contribution.STATE_PAUSED);
     compositeDisposable.add(contributionDao.update(contribution)
         .subscribeOn(ioThreadScheduler)
