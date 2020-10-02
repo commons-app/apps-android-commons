@@ -29,6 +29,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d件のアップロード)</item>
   </plurals>
+  <string name="starting_uploads">アップロードを開始中です</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="other">%1$d 件のアップロードを開始中</item>
   </plurals>
@@ -70,6 +71,7 @@
   <string name="upload_failed">ファイルが見つかりません。別のファイルでお試しください。</string>
   <string name="authentication_failed">認証に失敗しました!　もう一度ログインしてください</string>
   <string name="uploading_started">アップロードを開始しました!</string>
+  <string name="uploading_queued">アップロードは待機中です（接続制限モードが有効）</string>
   <string name="upload_completed_notification_title">%1$s をアップロードしました!</string>
   <string name="upload_completed_notification_text">アップロードしたものを表示するにはタップしてください</string>
   <string name="upload_progress_notification_title_start">%1$s のアップロードを開始中</string>
@@ -661,4 +663,9 @@
   <string name="leaderboard_nearby">付近</string>
   <string name="leaderboard_used">使用済み</string>
   <string name="leaderboard_my_rank_button_text">あなたのランク</string>
+  <string name="mapbox_telemetry">測地を退出</string>
+  <string name="telemetry_opt_out_summary">周辺を表示させるときは現在地と使用状況データを匿名化してMapbox に送信</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;この地図を改善&lt;/a&gt;</string>
+  <string name="limited_connection_enabled">接続制限を有効にしました。</string>
+  <string name="limited_connection">接続制限</string>
 </resources>

@@ -25,6 +25,7 @@
 * MarionaDSR
 * Miguel2706
 * Mirzali
+* Rodney Araujo
 * Tiberius1701
 * Vivaelcelta
 * Wizardeck
@@ -83,6 +84,7 @@
   <string name="upload_failed">No se encontró el archivo. Prueba con otro.</string>
   <string name="authentication_failed">La autenticación ha fallado, prueba a acceder otra vez</string>
   <string name="uploading_started">¡Subiendo!</string>
+  <string name="uploading_queued">Carga en cola (modo de conexión limitada activado)</string>
   <string name="upload_completed_notification_title">¡Se ha cargado %1$s!</string>
   <string name="upload_completed_notification_text">Pulsa para ver tu subida</string>
   <string name="upload_progress_notification_title_start">Empezando la subida de %1$s</string>
@@ -103,6 +105,7 @@
   <string name="menu_share">Compartir</string>
   <string name="menu_open_in_browser">Ver en el navegador</string>
   <string name="share_title_hint">Leyenda (requerido)</string>
+  <string name="add_caption_toast">Por favor, proporciona un título para este archivo</string>
   <string name="share_description_hint">Descripción</string>
   <string name="login_failed_network">No se pudo iniciar sesión: error de red</string>
   <string name="login_failed_wrong_credentials">No se puede acceder. Revisa el nombre de usuario y la contraseña</string>
@@ -356,6 +359,7 @@
   <string name="search_recent_header">Búsquedas recientes:</string>
   <string name="provider_searches">Consultas recientemente buscadas</string>
   <string name="error_loading_categories">Se produjo un error al cargar las categorías.</string>
+  <string name="error_loading_depictions">Se produjo un error al cargar las representaciones.</string>
   <string name="error_loading_subcategories">Se produjo un error al cargar las subcategorías.</string>
   <string name="search_tab_title_media">Multimedia</string>
   <string name="search_tab_title_categories">Categorías</string>
@@ -611,4 +615,7 @@
   <string name="leaderboard_yearly">Por año</string>
   <string name="leaderboard_weekly">Por semana</string>
   <string name="leaderboard_all_time">Todo el tiempo</string>
+  <string name="limited_connection_enabled">Se activó el modo de conexión limitada.</string>
+  <string name="limited_connection_disabled">Se desactivó el modo de conexión limitada. Las cargas pendientes se reanudarán ahora.</string>
+  <string name="limited_connection">Conexión limitada</string>
 </resources>
