@@ -21,38 +21,38 @@ public class QuizController {
 
     public void initialize(Context context){
         QuizQuestion q1 = new QuizQuestion(1,
-                context.getResources().getString(R.string.quiz_question_string),
+                context.getString(R.string.quiz_question_string),
                 URL_FOR_SELFIE,
                 false,
-                context.getResources().getString(R.string.selfie_answer));
+                context.getString(R.string.selfie_answer));
         quiz.add(q1);
 
         QuizQuestion q2 = new QuizQuestion(2,
-                context.getResources().getString(R.string.quiz_question_string),
+                context.getString(R.string.quiz_question_string),
                 URL_FOR_TAJ_MAHAL,
                 true,
-                context.getResources().getString(R.string.taj_mahal_answer));
+                context.getString(R.string.taj_mahal_answer));
         quiz.add(q2);
 
         QuizQuestion q3 = new QuizQuestion(3,
-                context.getResources().getString(R.string.quiz_question_string),
+                context.getString(R.string.quiz_question_string),
                 URL_FOR_BLURRY_IMAGE,
                 false,
-                context.getResources().getString(R.string.blurry_image_answer));
+                context.getString(R.string.blurry_image_answer));
         quiz.add(q3);
 
         QuizQuestion q4 = new QuizQuestion(4,
-                context.getResources().getString(R.string.quiz_screenshot_question),
+                context.getString(R.string.quiz_screenshot_question),
                 URL_FOR_SCREENSHOT,
                 false,
-                context.getResources().getString(R.string.screenshot_answer));
+                context.getString(R.string.screenshot_answer));
         quiz.add(q4);
 
         QuizQuestion q5 = new QuizQuestion(5,
-                context.getResources().getString(R.string.quiz_question_string),
+                context.getString(R.string.quiz_question_string),
                 URL_FOR_EVENT,
                 true,
-                context.getResources().getString(R.string.construction_event_answer));
+                context.getString(R.string.construction_event_answer));
         quiz.add(q5);
 
     }
