@@ -31,6 +31,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">ההעלאות מתחילות</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">התחלת העלאה</item>
     <item quantity="two">התחלת 1$d% העלאות</item>
@@ -85,13 +86,16 @@
   <string name="upload_failed">הקובץ לא נמצא. נא לנסות קובץ אחר.</string>
   <string name="authentication_failed">אימות הפרטים נכשל, נא להיכנס מחדש</string>
   <string name="uploading_started">ההעלאה התחילה!</string>
+  <string name="uploading_queued">ההעלאות בתור (מופעל מצב חיבור מוגבל)</string>
   <string name="upload_completed_notification_title">הקובץ %1$s הועלה!</string>
   <string name="upload_completed_notification_text">ללחוץ כאן כדי לצפות בהעלאה שלך</string>
   <string name="upload_progress_notification_title_start">התחלת העלאת %1$s</string>
   <string name="upload_progress_notification_title_in_progress">מתבצעת העלאת %1$s</string>
   <string name="upload_progress_notification_title_finishing">העלאת %1$s מסתיימת</string>
   <string name="upload_failed_notification_title">העלאת %1$s נכשלה</string>
+  <string name="upload_paused_notification_title">ההעלאה של %1$s הושהתה</string>
   <string name="upload_failed_notification_subtitle">לחץ כדי להציג</string>
+  <string name="upload_paused_notification_subtitle">יש לגעת כדי לראות</string>
   <string name="title_activity_contributions">ההעלאות האחרונות שלי</string>
   <string name="contribution_state_queued">בתור</string>
   <string name="contribution_state_failed">נכשלה</string>
@@ -287,7 +291,7 @@
   <string name="error_while_cache">שגיאה בעת שמירת תמונות במטמון</string>
   <string name="title_info">כותרת מתארת ייחודית לקובץ, שתשמש כשם הקובץ. ניתן להשתמש בשפה טבעית עם רווחים. אין לכלול את סיומת הקובץ</string>
   <string name="description_info">נא לתאר את המדיה כמה שיותר: איפה היא נוצרה? מה היא מראה? מה ההקשר? נא לתאר את העצמים או את האנשים. נא לחשוף מידע שאי־אפשר לנחש בקלות, למשל, הזמן ביום אם זאת תמונת נוף. אם המדיה מציגה משהו בלתי־רגיל, נא להסביר מה מיוחד בה.</string>
-  <string name="caption_info" fuzzy="true">נא לרשום תיאור קצר של התמונה. (מוגבל ל־255 תווים)</string>
+  <string name="caption_info">נא לרשום תיאור קצר של התמונה. התיאור הראשון ישמש ככותרת התמונה.</string>
   <string name="upload_image_too_dark">התמונה הזאת חשוכה מדי, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
   <string name="upload_image_blurry">התמונה הזאת מטושטשת, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
   <string name="upload_problem_exist">בעיות פוטנציאליות עם התמונה הזאת:</string>
@@ -412,6 +416,7 @@
   <string name="nominate_delete">העמדה למחיקה</string>
   <string name="delete">מחיקה</string>
   <string name="Achievements">הישגים</string>
+  <string name="Profile">פרופיל</string>
   <string name="statistics">סטטיסטיקה</string>
   <string name="statistics_thanks">התודה התקבלה</string>
   <string name="statistics_featured">תמונות מומלצות</string>
@@ -590,6 +595,11 @@
   <string name="delete_helper_ask_reason_copyright_logo">לוגו</string>
   <string name="delete_helper_ask_reason_copyright_other">אחר</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">כיוון שזה</string>
+  <string name="category_edit_helper_make_edit_toast">מתבצע ניסיון לעדכון הקטגוריות.</string>
+  <string name="category_edit_helper_show_edit_title">עדכון קטגוריות</string>
+  <string name="category_edit_helper_show_edit_title_success">הצלחה</string>
+  <string name="category_edit_helper_edit_message_else">לא ניתן להוסיף קטגוריות.</string>
+  <string name="category_edit_button_text">עדכון קטגוריות</string>
   <string name="share_image_via">שיתוף תמונה דרך</string>
   <string name="no_achievements_yet">לא תרמת שום דבר עדיין</string>
   <string name="account_created">חשבון נוצר!</string>
@@ -625,10 +635,49 @@
   <string name="use_location_from_similar_image">האם צילמת את שתי התמונות באותו המקום? האם ברצונך להשתמש בקו הרוחב וקו האורך של התמונה משמאל?</string>
   <string name="load_more">לטעון עוד</string>
   <string name="nearby_no_results">לא נמצאו מקומות, נא לנסות לשנות את החיפוש.</string>
+  <string name="todo_improve">שיפורים אפשריים:</string>
+  <string name="missing_category">- להוסיף קטגוריות לתמונה הזאת כדי לשפר נגישות.</string>
+  <string name="missing_article">- להוסיף את התמונה הזאת לערך המשויך בוויקיפדיה שאין בו תמונות.</string>
+  <string name="edit_category">עריכת קטגוריות</string>
   <string name="add_picture_to_wikipedia_article_title">הוספת תמונה לוויקיפדיה</string>
+  <string name="add_picture_to_wikipedia_article_desc">להוסיף את התמונה הזאת לערך בוויקיפדיה ה%1$s?</string>
   <string name="add_picture_to_wikipedia_instructions_title">הוראות</string>
+  <string name="add_picture_to_wikipedia_instructions_desc">חשוב לציית לכללי העריכה!</string>
   <string name="confirm">אישור</string>
   <string name="instructions_title">הוראות</string>
+  <string name="wikipedia_instructions_step_1">1. להשתמש בטקסט מקור הוויקי הבא:</string>
+  <string name="wikipedia_instructions_step_2">2. לחיצה על אישור תפתח את הערך</string>
+  <string name="wikipedia_instructions_step_3">3. יש לנסות למצוא סעיף מתאים בערך לתמונה שלך</string>
+  <string name="wikipedia_instructions_step_4">4. ללחוץ על סמל העריכה (זה שדומה לעיפרון) עבור אותו הסעיף.</string>
+  <string name="wikipedia_instructions_step_5">5. להדביק את טקסט המקור הוויקי במקום המתאים.</string>
+  <string name="wikipedia_instructions_step_6">6. עליך לערוך את טקסט מקור הוויקי כדי למקם כראוי במידת הצורך. מידע נוסף ניתן לקרוא &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;כאן&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_7">7. לפרסם את הערך</string>
   <string name="copy_wikicode_to_clipboard">העתקת קוד־ויקי ללוח</string>
   <string name="pause">השהיה</string>
+  <string name="resume">להמשיך</string>
+  <string name="paused">מושהה</string>
+  <string name="achievements_tab_title">הישגים</string>
+  <string name="leaderboard_tab_title">לוח מובילים</string>
+  <string name="rank_prefix">דירוג:</string>
+  <string name="count_prefix">מספר:</string>
+  <string name="leaderboard_column_rank">דירוג</string>
+  <string name="leaderboard_column_user">משתמש</string>
+  <string name="leaderboard_column_count">מספר</string>
+  <string name="setting_avatar_dialog_title">הגדרה כתמונה ייצוגית ללוח המובילים</string>
+  <string name="setting_avatar_dialog_message">מוגדרת כתמונה ייצוגית, נא להמתין</string>
+  <string name="avatar_set_successfully">התמונה הייצוגית הוגדרה</string>
+  <string name="avatar_set_unsuccessfully">שגיאה בהגדרת תמונה ייצוגית חדשה, נא לנסות שוב</string>
+  <string name="menu_set_avatar">הגדרה כתמונה ייצוגית</string>
+  <string name="leaderboard_yearly">שנתי</string>
+  <string name="leaderboard_weekly">חודשי</string>
+  <string name="leaderboard_all_time">כל הזמנים</string>
+  <string name="leaderboard_upload">העלאה</string>
+  <string name="leaderboard_nearby">בסביבה</string>
+  <string name="leaderboard_my_rank_button_text">הדירוג שלי</string>
+  <string name="mapbox_telemetry">להפסיק מדידה טלמטרית</string>
+  <string name="telemetry_opt_out_summary">לשלוח מיקום ונתוני שימוש אלמוניים ל־Mapbox בעת שימוש בתכונה „בסביבה”</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;שיפור המפה הזו&lt;/a&gt;</string>
+  <string name="limited_connection_enabled">מופעל מצב חיבור מוגבל!</string>
+  <string name="limited_connection_disabled">מצב חיבור מוגבל הושבת. ההעלאות שממתינות תמשכנה כעת.</string>
+  <string name="limited_connection">החיבור מוגבל</string>
 </resources>
