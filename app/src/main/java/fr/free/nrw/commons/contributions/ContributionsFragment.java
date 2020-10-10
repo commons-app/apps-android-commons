@@ -194,7 +194,6 @@ public class ContributionsFragment
     public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
         inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
 
-
         MenuItem notificationsMenuItem = menu.findItem(R.id.notifications);
         final View notification = notificationsMenuItem.getActionView();
         notificationCount = notification.findViewById(R.id.notification_count_badge);
@@ -203,8 +202,6 @@ public class ContributionsFragment
         });
         setNotificationCount();
         updateLimitedConnectionToggle(menu);
-
-        // TODO move notification logic to this fragment
     }
 
     @SuppressLint("CheckResult")

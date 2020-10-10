@@ -270,9 +270,6 @@ public class MainActivity  extends BaseActivity
                 // Starts notification activity on click to notification icon
                 NotificationActivity.startYourself(this, "unread");
                 return true;
-            case R.id.list_sheet:
-
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

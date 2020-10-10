@@ -13,9 +13,4 @@
         android:menuCategory="secondary"
         app:actionLayout="@layout/notification_icon"
         />
-    <item android:id="@+id/list_sheet"
-        android:title="@string/list_sheet"
-        app:showAsAction="ifRoom|withText"
-        android:icon="@drawable/ic_list_white_24dp"
-        />
 </menu>

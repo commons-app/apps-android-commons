@@ -23,6 +23,10 @@ import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -94,6 +98,7 @@ import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
+import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ExecutorUtils;
 import fr.free.nrw.commons.utils.LayoutUtils;
@@ -223,10 +228,23 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         ButterKnife.bind(this, view);
         initNetworkBroadCastReceiver();
         presenter=new NearbyParentFragmentPresenter(bookmarkLocationDao);
-
+        setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         return view;
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
+        inflater.inflate(R.menu.nearby_fragment_menu, menu);
+        MenuItem listMenu = menu.findItem(R.id.list_sheet);
+        listMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                listOptionMenuItemClicked();
+                return false;
+            }
+        });
     }
 
     @Override
