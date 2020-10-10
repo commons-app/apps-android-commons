@@ -188,19 +188,41 @@ public class CommonsApplication extends MultiDexApplication {
      *
      */
     private void initTimber() {
-        boolean isBeta = ConfigUtils.isBetaFlavour();
-        String logFileName = isBeta ? "CommonsBetaAppLogs" : "CommonsAppLogs";
-        String logDirectory = LogUtils.getLogDirectory();
-        FileLoggingTree tree = new FileLoggingTree(
-                Log.VERBOSE,
-                logFileName,
-                logDirectory,
-                1000,
-                getFileLoggingThreadPool());
+      boolean isBeta = ConfigUtils.isBetaFlavour();
+      String logFileName =
+          isBeta ? "CommonsBetaAppLogs" : "CommonsAppLogs";
+      String logDirectory = LogUtils.getLogDirectory();
+      //Delete stale logs if they have exceeded the specified size
+      deleteStaleLogs(logFileName, logDirectory);
 
-        Timber.plant(tree);
-        Timber.plant(new Timber.DebugTree());
+      FileLoggingTree tree = new FileLoggingTree(
+          Log.VERBOSE,
+          logFileName,
+          logDirectory,
+          1000,
+          getFileLoggingThreadPool());
+
+      Timber.plant(tree);
+      Timber.plant(new Timber.DebugTree());
     }
+
+  /**
+   * Deletes the logs zip file at the specified directory and file locations specified in the
+   * params
+   *
+   * @param logFileName
+   * @param logDirectory
+   */
+  private void deleteStaleLogs(String logFileName, String logDirectory) {
+    try {
+      File file = new File(logDirectory + "/zip/" + logFileName + ".zip");
+      if (file.exists() && file.getTotalSpace() > 1000000) {// In Kbs
+        file.delete();
+      }
+    } catch (Exception e) {
+      Timber.e(e);
+    }
+  }
 
     public static boolean isRoboUnitTest() {
         return "robolectric".equals(Build.FINGERPRINT);
