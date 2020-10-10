@@ -5,7 +5,7 @@
       android:title="@string/limited_connection"
       app:showAsAction="always"
       android:checkable="true"
-      app:actionLayout="@layout/menu_switch"
+      android:icon="@drawable/ic_baseline_cloud_queue_24"
       />
     <item android:id="@+id/notifications"
         android:title="@string/notifications"

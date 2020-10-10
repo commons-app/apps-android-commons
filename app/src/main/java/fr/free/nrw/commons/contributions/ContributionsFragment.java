@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -231,11 +232,18 @@ public class ContributionsFragment
             .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
 
         checkable.setChecked(isEnabled);
-        final SwitchCompat switchToggleLimitedConnectionMode = checkable.getActionView()
-            .findViewById(R.id.switch_toggle_limited_connection_mode);
-        switchToggleLimitedConnectionMode.setChecked(isEnabled);
-        switchToggleLimitedConnectionMode.setOnCheckedChangeListener(
-            (buttonView, isChecked) -> ((MainActivity)getActivity()).toggleLimitedConnectionMode());
+        /*final SwitchCompat switchToggleLimitedConnectionMode = checkable.getActionView()
+            .findViewById(R.id.switch_toggle_limited_connection_mode);*/
+        checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
+        checkable.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                ((MainActivity) getActivity()).toggleLimitedConnectionMode();
+                boolean isEnabled = store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
+                checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
+                return false;
+            }
+        });
     }
 
     @Override

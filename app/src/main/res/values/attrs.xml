@@ -46,6 +46,7 @@
     <attr name="toggle_theme" format="reference"/>
     <attr name="contributionsListTextSecondary" format="reference"/>
     <attr name="contributionsListTextPrimary" format="reference"/>
+    <attr name="menu_item_tint" format="reference"/>
 
     <declare-styleable name="Badge">
         <attr name="boundary" format="color"/>
