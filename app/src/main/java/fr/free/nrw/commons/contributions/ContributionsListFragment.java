@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -134,6 +135,15 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     contributionsListPresenter.setup();
     contributionsListPresenter.contributionList.observe(this.getViewLifecycleOwner(), adapter::submitList);
     rvContributionsList.setAdapter(adapter);
+    adapter.registerAdapterDataObserver(new AdapterDataObserver() {
+      @Override
+      public void onItemRangeInserted(int positionStart, int itemCount) {
+        super.onItemRangeInserted(positionStart, itemCount);
+        if (itemCount > 0) {
+          rvContributionsList.scrollToPosition(0);//Newly upload items are always added to the top
+        }
+      }
+    });
   }
 
   private int getSpanCount(final int orientation) {
