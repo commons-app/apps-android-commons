@@ -20,6 +20,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">Barkerdış serniyeno</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">%1$d bar beno</item>
     <item quantity="other">%1$d bar benê</item>
@@ -31,6 +32,10 @@
   <plurals name="share_license_summary">
     <item quantity="one">no resım , lisansê %1$s bın bo</item>
     <item quantity="other">Nê resımi, lisansê %1$s bın bê</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d biyo bar</item>
+    <item quantity="other">%1$d biyo bar</item>
   </plurals>
   <string name="title_activity_explore">Keşf bıkerê</string>
   <string name="navigation_item_explore">Keşf kerê</string>
@@ -63,6 +68,7 @@
   <string name="upload_progress_notification_title_finishing">Barkerdışe %1$s qedya</string>
   <string name="upload_failed_notification_title">%1$s bar nêbeno.</string>
   <string name="upload_failed_notification_subtitle">pıpawane xo bıvin</string>
+  <string name="upload_paused_notification_subtitle">Mocnayışi re bıvinê</string>
   <string name="title_activity_contributions">Barkerdışê mınê peyêni</string>
   <string name="contribution_state_queued">Gêriyayo rêze</string>
   <string name="contribution_state_failed">Ebe ser nêkewt</string>
@@ -244,6 +250,7 @@
   <string name="view_browser">Browser de bıvinê</string>
   <string name="skip_login">Ser çek</string>
   <string name="navigation_item_login">Cı kewe</string>
+  <string name="get_directions">Tarif bıgêrê</string>
   <string name="read_article">Meqaley bıwanê</string>
   <string name="toggle_view_button">Asayışi bıvurnê</string>
   <string name="nearby_directions">Telimati</string>
@@ -287,15 +294,27 @@
   <string name="continue_message">Dewam kerê</string>
   <string name="correct">Cewabo raşt</string>
   <string name="wrong">Cewabo ğelet</string>
+  <string name="share_app_title">Aplikasyoni bıvılayne</string>
+  <string name="add_description">+ Şınastiye cı kere</string>
+  <string name="no_recent_searches">Cıgeyrayışo peyên çıniyo</string>
   <string name="delete">Bestere</string>
+  <string name="Achievements">Destgrotey</string>
+  <string name="Profile">Profile</string>
   <string name="statistics">İstatistiki</string>
   <string name="statistics_thanks">Teşekurê gêriyayi</string>
+  <string name="statistics_featured">Resımê weçinıteyi</string>
+  <string name="statistics_wikidata_edits">\"Cayê nezdı\" ra resımi</string>
   <string name="level">Sewiya</string>
+  <string name="images_uploaded">Resımi biyê bar</string>
+  <string name="image_reverts">Resımi peyser nêgeriyaye</string>
+  <string name="images_used_by_wiki">Gureyniyaye resımi</string>
   <string name="preference_author_name_toggle">Nameyê nuştekariyo xısusiyi bıgurene</string>
   <string name="preference_author_name">Nameyê nuştekariyo xısusi</string>
   <string name="contributions_fragment">İştıraki</string>
+  <string name="nearby_fragment">Nezdı ra</string>
   <string name="notifications">Tebliği</string>
   <string name="read_notifications">Pêhesnayışi (waniyayê)</string>
+  <string name="display_nearby_notification">Nezdı ra peyhesnayışa bımocne</string>
   <string name="list_sheet">Liste</string>
   <string name="next">Bahdoyên</string>
   <string name="previous">Verên</string>
@@ -339,6 +358,29 @@
   <string name="place_state">Weziyetê cayi:</string>
   <string name="place_state_exists">Esto</string>
   <string name="place_state_needs_photo">Fotraf gani</string>
+  <string name="title_app_shortcut_explore">Keşıf</string>
+  <string name="title_app_shortcut_bookmark">Nişani</string>
+  <string name="title_app_shortcut_setting">Eyari</string>
+  <string name="remove_bookmark">Nışanan ra wedarne</string>
+  <string name="add_bookmark">Nışanan ke</string>
   <string name="theme_dark_name">Tari</string>
   <string name="theme_light_name">Akerde</string>
+  <string name="pause">bıvındarne</string>
+  <string name="resume">devam kerê</string>
+  <string name="paused">Vındarneya</string>
+  <string name="achievements_tab_title">Destgrotey</string>
+  <string name="leaderboard_tab_title">Lista lideran</string>
+  <string name="rank_prefix">Rêze:</string>
+  <string name="count_prefix">Amar:</string>
+  <string name="leaderboard_column_rank">Rêze</string>
+  <string name="leaderboard_column_user">Karber</string>
+  <string name="leaderboard_column_count">Amar</string>
+  <string name="leaderboard_yearly">Sereyi</string>
+  <string name="leaderboard_weekly">Hewteyi</string>
+  <string name="leaderboard_all_time">Tım</string>
+  <string name="leaderboard_upload">Bar ke</string>
+  <string name="leaderboard_nearby">Nezdı ra</string>
+  <string name="leaderboard_used">Gureyniyaye</string>
+  <string name="leaderboard_my_rank_button_text">Rêza mı</string>
+  <string name="mapbox_telemetry">Telemetreyi Devre ra vece</string>
 </resources>
