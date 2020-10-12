@@ -92,7 +92,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             (preference, newValue) -> {
                 telemetryOptInOut((boolean)newValue);
                 defaultKvStore.putBoolean(Prefs.TELEMETRY_PREFERENCE,(boolean)newValue);
-                return false;
+                return true;
             });
     }
 
