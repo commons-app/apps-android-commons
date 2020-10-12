@@ -98,7 +98,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         } else {
             pager.setAdapter(adapter);
         }
-        ((MainActivity)getActivity()).hideTabs();
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity)getActivity()).hideTabs();
+        }
         return view;
     }
 

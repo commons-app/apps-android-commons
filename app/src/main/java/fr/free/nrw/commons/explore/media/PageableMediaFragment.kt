@@ -25,7 +25,11 @@ abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailP
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        categoryImagesCallback = (parentFragment as CategoryImagesCallback)
+        if (parentFragment != null) {
+            categoryImagesCallback = (parentFragment as CategoryImagesCallback)
+        } else {
+            categoryImagesCallback = (activity as CategoryImagesCallback)
+        }
     }
 
     private val simpleDataObserver =
