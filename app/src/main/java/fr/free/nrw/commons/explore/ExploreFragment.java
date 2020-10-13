@@ -34,9 +34,6 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     private static final String MOBILE_UPLOADS_CATEGORY = "Uploaded_with_Mobile/Android";
     private static final String MEDIA_DETAILS_FRAGMENT_TAG = "MediaDetailsFragment";
 
-
-    @BindView(R.id.mediaContainer)
-    FrameLayout mediaContainer;
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
     @BindView(R.id.viewPager)

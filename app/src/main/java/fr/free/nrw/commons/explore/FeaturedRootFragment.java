@@ -2,19 +2,26 @@ package fr.free.nrw.commons.explore;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
+import fr.free.nrw.commons.contributions.ContributionsListFragment;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.settings.SettingsFragment;
 
 public class FeaturedRootFragment extends CommonsDaggerSupportFragment implements
     MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
@@ -25,13 +32,16 @@ public class FeaturedRootFragment extends CommonsDaggerSupportFragment implement
   private MediaDetailPagerFragment mediaDetails;
   private CategoriesMediaFragment listFragment;
 
+  @BindView(R.id.explore_container)
+  FrameLayout container;
+
   @Nullable
   @Override
   public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container,
       @Nullable final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     View view = inflater.inflate(R.layout.fragment_featured_root, container, false);
-
+    ButterKnife.bind(this, view);
     String title = FEATURED_IMAGES_CATEGORY;
     if (savedInstanceState != null) {
       title = savedInstanceState.getString("categoryName");
@@ -53,7 +63,8 @@ public class FeaturedRootFragment extends CommonsDaggerSupportFragment implement
   public void setFragment(Fragment fragment) {
     getChildFragmentManager()
         .beginTransaction()
-        .replace(R.id.container, fragment)
+        .replace(R.id.explore_container, fragment)
+        .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
         .commit();
     getChildFragmentManager().executePendingTransactions();
   }
@@ -66,11 +77,13 @@ public class FeaturedRootFragment extends CommonsDaggerSupportFragment implement
 
   @Override
   public void onMediaClicked(int position) {
-    ((ExploreFragment)getParentFragment()).mediaContainer.setVisibility(View.VISIBLE);
+    Log.d("deneme8","on media clicked");
+    container.setVisibility(View.VISIBLE);
     ((ExploreFragment)getParentFragment()).tabLayout.setVisibility(View.GONE);
+    //setFragment(new SettingsFragment()); show that problem is not because of fragment replace
     mediaDetails = new MediaDetailPagerFragment(false, true);
     setFragment(mediaDetails);
-    mediaDetails.showImage(position);
+    //mediaDetails.showImage(position);
   }
 
   /**

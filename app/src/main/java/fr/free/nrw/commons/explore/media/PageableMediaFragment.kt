@@ -42,14 +42,14 @@ abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailP
 
     override fun onDestroyView() {
         super.onDestroyView()
-        pagedListAdapter.unregisterAdapterDataObserver(simpleDataObserver)
+        //pagedListAdapter.unregisterAdapterDataObserver(simpleDataObserver)
     }
 
     override fun getMediaAtPosition(position: Int): Media? =
         pagedListAdapter.currentList?.get(position)?.takeIf { it.filename != null }
             .also {
                 pagedListAdapter.currentList?.loadAround(position)
-                paginatedSearchResultsList.scrollToPosition(position)
+                //paginatedSearchResultsList.scrollToPosition(position)
             }
 
     override fun getTotalMediaCount(): Int = pagedListAdapter.itemCount
