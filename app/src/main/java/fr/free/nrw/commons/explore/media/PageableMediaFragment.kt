@@ -49,7 +49,7 @@ abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailP
         pagedListAdapter.currentList?.get(position)?.takeIf { it.filename != null }
             .also {
                 pagedListAdapter.currentList?.loadAround(position)
-                //paginatedSearchResultsList.scrollToPosition(position)
+                paginatedSearchResultsList.scrollToPosition(position)
             }
 
     override fun getTotalMediaCount(): Int = pagedListAdapter.itemCount
