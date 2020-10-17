@@ -77,6 +77,9 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.image_featured)
     TextView imagesFeatured;
 
+    @BindView(R.id.quality_images)
+    TextView tvQualityImages;
+
     @BindView(R.id.images_revert_limit_text)
     TextView imagesRevertLimitText;
 
@@ -414,6 +417,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         imagesUsedByWikiProgressBar.setProgressTextFormatPattern
                 (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
         imagesFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
+        tvQualityImages.setText(String.valueOf(achievements.getQualityImages()));
         String levelUpInfoString = getString(R.string.level).toUpperCase();
         levelUpInfoString += " " + levelInfo.getLevelNumber();
         levelNumber.setText(levelUpInfoString);
@@ -490,6 +494,12 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     public void showThanksReceivedInfo(){
         launchAlert(getResources().getString(R.string.statistics_thanks)
                 ,getResources().getString(R.string.thanks_received_explanation));
+    }
+
+    @OnClick(R.id.quality_images_info)
+    public void showQualityImagesInfo() {
+        launchAlert(getResources().getString(R.string.statistics_quality)
+            , getResources().getString(R.string.quality_images_info));
     }
 
     /**
