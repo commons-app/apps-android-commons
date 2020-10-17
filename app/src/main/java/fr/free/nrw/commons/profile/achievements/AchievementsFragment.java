@@ -149,6 +149,8 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
         setHasOptionsMenu(true);
 
+        // Set the initial value of WikiData edits to 0
+        wikidataEditsText.setText("0");
         hideLayouts();
         setWikidataEditCount();
         setAchievements();
