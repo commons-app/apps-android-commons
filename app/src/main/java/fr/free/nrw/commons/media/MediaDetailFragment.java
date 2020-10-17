@@ -3,7 +3,6 @@ package fr.free.nrw.commons.media;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_NEEDING_CATEGORIES;
-import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_PREFIX;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_UNCATEGORISED;
 
 import android.annotation.SuppressLint;
@@ -295,6 +294,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             new OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
+                    if (getContext() == null) {
+                        return;
+                    }
                     scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                         imageLandscape.setVisibility(VISIBLE);
@@ -837,9 +839,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         if(!getString(R.string.detail_panel_cats_none).equals(catName)) {
             textView.setOnClickListener(view -> {
                 // Open Category Details page
-                String selectedCategoryTitle = CATEGORY_PREFIX + catName;
                 Intent intent = new Intent(getContext(), CategoryDetailsActivity.class);
-                intent.putExtra("categoryName", selectedCategoryTitle);
+                intent.putExtra("categoryName", catName);
                 getContext().startActivity(intent);
             });
         }
