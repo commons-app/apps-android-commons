@@ -130,6 +130,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
             mediaContainer.setVisibility(View.GONE);
             ((MainActivity)getActivity()).showTabs();
         }*/
+        featuredRootFragment.backPressed();
     }
 
     /**

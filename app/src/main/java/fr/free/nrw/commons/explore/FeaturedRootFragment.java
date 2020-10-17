@@ -18,9 +18,11 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.contributions.ContributionsListFragment;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.navtab.NavTab;
 import fr.free.nrw.commons.settings.SettingsFragment;
 
 public class FeaturedRootFragment extends CommonsDaggerSupportFragment implements
@@ -130,6 +132,15 @@ public class FeaturedRootFragment extends CommonsDaggerSupportFragment implement
   public void viewPagerNotifyDataSetChanged() {
     if (mediaDetails != null) {
       mediaDetails.notifyDataSetChanged();
+    }
+  }
+
+  public void backPressed() {
+    if (mediaDetails.isVisible()) {
+      // todo add get list fragment
+      setFragment(listFragment);
+    } else {
+      ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
     }
   }
 }
