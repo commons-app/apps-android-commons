@@ -42,7 +42,7 @@ abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailP
 
     override fun onDestroyView() {
         super.onDestroyView()
-        //pagedListAdapter.unregisterAdapterDataObserver(simpleDataObserver)
+        pagedListAdapter.unregisterAdapterDataObserver(simpleDataObserver)
     }
 
     override fun getMediaAtPosition(position: Int): Media? =

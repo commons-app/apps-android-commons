@@ -59,16 +59,49 @@ public class FeaturedRootFragment extends CommonsDaggerSupportFragment implement
   @Override
   public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    setFragment(listFragment);
+    setFragment(listFragment, mediaDetails);
   }
 
-  public void setFragment(Fragment fragment) {
-    getChildFragmentManager()
-        .beginTransaction()
-        .replace(R.id.explore_container, fragment)
-        .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
-        .commit();
-    getChildFragmentManager().executePendingTransactions();
+  public void setFragment(Fragment fragment, Fragment otherFragment) {
+    if (fragment.isAdded() && otherFragment != null) {
+      getChildFragmentManager()
+          .beginTransaction()
+          .hide(otherFragment)
+          .show( fragment)
+          .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
+          .commit();
+      getChildFragmentManager().executePendingTransactions();
+    } else if (fragment.isAdded() && otherFragment == null) {
+      getChildFragmentManager()
+          .beginTransaction()
+          .show( fragment)
+          .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
+          .commit();
+      getChildFragmentManager().executePendingTransactions();
+    }else if (!fragment.isAdded() && otherFragment != null ) {
+      getChildFragmentManager()
+          .beginTransaction()
+          .hide(otherFragment)
+          .add(R.id.explore_container, fragment)
+          .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
+          .commit();
+      getChildFragmentManager().executePendingTransactions();
+    } else if (!fragment.isAdded()) {
+      getChildFragmentManager()
+          .beginTransaction()
+          .replace(R.id.explore_container, fragment)
+          .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
+          .commit();
+      getChildFragmentManager().executePendingTransactions();
+    }
+  }
+
+  public void removeFragment(Fragment fragment) {
+      getChildFragmentManager()
+          .beginTransaction()
+          .remove(fragment)
+          .commit();
+      getChildFragmentManager().executePendingTransactions();
   }
 
   @Override
@@ -84,7 +117,7 @@ public class FeaturedRootFragment extends CommonsDaggerSupportFragment implement
     ((ExploreFragment)getParentFragment()).tabLayout.setVisibility(View.GONE);
     //setFragment(new SettingsFragment()); show that problem is not because of fragment replace
     mediaDetails = new MediaDetailPagerFragment(false, true);
-    setFragment(mediaDetails);
+    setFragment(mediaDetails, listFragment);
     //mediaDetails.showImage(position);
   }
 
@@ -138,7 +171,9 @@ public class FeaturedRootFragment extends CommonsDaggerSupportFragment implement
   public void backPressed() {
     if (mediaDetails.isVisible()) {
       // todo add get list fragment
-      setFragment(listFragment);
+      ((ExploreFragment)getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
+      removeFragment(mediaDetails);
+      setFragment(listFragment, mediaDetails);
     } else {
       ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
     }
