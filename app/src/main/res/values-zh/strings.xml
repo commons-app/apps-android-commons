@@ -197,7 +197,7 @@
   <string name="welcome_final_button_text">是！</string>
   <string name="welcome_help_button_text">更多信息</string>
   <string name="detail_panel_cats_label">分类</string>
-  <string name="detail_panel_cats_loading">正在载入…</string>
+  <string name="detail_panel_cats_loading">正在载入……</string>
   <string name="detail_panel_cats_none">未选择</string>
   <string name="detail_caption_empty">无字幕</string>
   <string name="detail_description_empty">没有说明</string>
