@@ -374,8 +374,8 @@ class NearbyParentFragmentPresenterTest {
     fun testBackButtonClickedWhenNoSheetVisible() {
         whenever(nearbyParentFragmentView.isListBottomSheetExpanded()).thenReturn(false)
         whenever(nearbyParentFragmentView.isDetailsBottomSheetVisible()).thenReturn(false)
-        nearbyPresenter.backButtonClicked()
-        verify(nearbyParentFragmentView).setTabItemContributions()
+        val hasNearbyHandledBackPress = nearbyPresenter.backButtonClicked()
+        assertFalse(hasNearbyHandledBackPress)
     }
 
     @Test
