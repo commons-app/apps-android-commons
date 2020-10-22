@@ -207,7 +207,7 @@
   <string name="media_detail_license">License</string>
   <string name="media_detail_coordinates">Coordinates</string>
   <string name="media_detail_coordinates_empty">None provided</string>
-  <string name="become_a_tester_title">Become a Beta Tester</string>
+  <string name="become_a_tester_title">Become a Beta Tester (if not one already)</string>
   <string name="become_a_tester_description">Opt-in to our beta channel on Google Play and get early access to new features and bug fixes</string>
   <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
   <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
