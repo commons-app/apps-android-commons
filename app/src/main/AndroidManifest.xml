@@ -94,6 +94,7 @@
 
         <activity
             android:name=".auth.SignupActivity"
+          android:configChanges="orientation|screenLayout|screenSize"
             android:label="@string/title_activity_signup" />
 
         <activity
