@@ -175,14 +175,13 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      * We use userRank+1 to load one extra user and prevent overlapping of my rank button
      */
     private void scrollToUserRank() {
-        Timber.tag("current offset").e(String.valueOf(this.offset));
-
         if (Objects.requireNonNull(leaderboardListRecyclerView.getAdapter()).getItemCount() > userRank + 1) {
-            int currPosition = ((LinearLayoutManager) leaderboardListRecyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+            int currPosition = ((LinearLayoutManager) leaderboardListRecyclerView.getLayoutManager())
+                .findFirstCompletelyVisibleItemPosition();
             // if you are below your rank, scroll to userRank
             if (currPosition > userRank) {
                 leaderboardListRecyclerView.smoothScrollToPosition(userRank);
-            } else { // if you are above rank, scroll to userRank + 1
+            } else {
                 leaderboardListRecyclerView.smoothScrollToPosition(userRank + 1);
             }
         } else {
