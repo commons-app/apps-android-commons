@@ -260,8 +260,6 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
             } else if (status.equalsIgnoreCase(LOADED)) {
                 hideProgressBar();
                 if (scrollToRank) {
-                    // if you are below your rank, scroll to userRank
-                    // if you are above rank, scroll to userRank + 1
                     leaderboardListRecyclerView.smoothScrollToPosition(userRank + 1);
                 }
             }
