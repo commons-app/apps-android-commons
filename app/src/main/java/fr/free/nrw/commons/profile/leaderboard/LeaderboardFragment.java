@@ -173,6 +173,7 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
     /**
      * Performs Auto Scroll to the User's Rank
      * We use userRank+1 to load one extra user and prevent overlapping of my rank button
+     * If you are viewing the leaderboard below userRank, it scrolls to the user rank at the top
      */
     private void scrollToUserRank() {
         if (Objects.requireNonNull(leaderboardListRecyclerView.getAdapter()).getItemCount() > userRank + 1) {
