@@ -2,6 +2,7 @@
 <!-- Authors:
 * Lamine
 * Lancine.kounfantoh.fofana
+* MuratTheTurkish
 -->
 <resources>
   <plurals name="contributions_subtitle" fuzzy="true">
@@ -9,7 +10,9 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <string name="starting_multiple_uploads" fuzzy="true">{{Plural|ߟߊ߬ߝߟߐ߬ߟߌ=ߞߋߟߋ߲߫ %1$d ߟߊߦߟߍ߬|ߟߊߝߟߐߟߌ %1$d ߟߊ߬ߦߟߍ߬ߟߌ|ߟߊߝߟߐߟߌ %1$d ߟߎ߫ ߟߊߦߍ߬ߟߍ}}</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="other">ߞߋߟߋ߲߫ %1$d ߟߊߦߟߍ߬</item>
+  </plurals>
   <string name="title_activity_explore">ߛߏ߲߯ߓߊߟߌ</string>
   <string name="navigation_item_explore">ߛߏ߲߯ߓߊߟߌ</string>
   <string name="preference_category_appearance">ߟߊ߲ߞߣߍߡߊߟߌ</string>

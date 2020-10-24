@@ -15,6 +15,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">Cychwyn Uwchlwytho</string>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Cychwyn %1$d uwchlwythiad</item>
     <item quantity="other">Cychwyn uwchlwytho %1$d ffeil</item>
@@ -28,6 +29,7 @@
     <item quantity="other">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
   </plurals>
   <string name="title_activity_explore">Archwilio</string>
+  <string name="navigation_item_explore">Archwilio</string>
   <string name="preference_category_appearance">Ymddangosiad</string>
   <string name="preference_category_general">Cyffredinol</string>
   <string name="preference_category_feedback">Adborth</string>
@@ -160,6 +162,8 @@
   <string name="detail_panel_cats_label">Categorïau</string>
   <string name="detail_panel_cats_loading">Wrthi\'n llwytho…</string>
   <string name="detail_panel_cats_none">Dim categorïau wedi eu dewis</string>
+  <string name="detail_caption_empty">Dim testun</string>
+  <string name="detail_depiction_empty">Dim llun</string>
   <string name="detail_description_empty">Dim disgrifiad</string>
   <string name="detail_discussion_empty">Dim trafodaeth</string>
   <string name="detail_license_empty">Trwydded anhysbys</string>
@@ -176,7 +180,9 @@
   <string name="upload_image_duplicate">Mae\'r ffeil yma eisioes wedi\'i dileu. Ydych chi\'n sicr eich bod yn dymuno parhau?</string>
   <string name="yes">Ydw</string>
   <string name="no">Nac ydw</string>
+  <string name="media_detail_caption">Testun</string>
   <string name="media_detail_title">Teitl</string>
+  <string name="media_detail_depiction">Llun</string>
   <string name="media_detail_description">Disgrifiad</string>
   <string name="media_detail_discussion">Trafodaeth</string>
   <string name="media_detail_author">Awdur</string>
@@ -198,6 +204,7 @@
   <string name="commons_website">Gwefan Comin</string>
   <string name="commons_facebook">Tudalen Adborth Comin</string>
   <string name="background_image">Delwedd y cefndir</string>
+  <string name="mediaimage_failed">Methodd y ddelwedd</string>
   <string name="no_image_found">Ni chafwyd hyd i ddelwedd</string>
   <string name="no_subcategory_found">Ni chafwyd hyd i is-gategoriau</string>
   <string name="upload_image">Uwchlwytho ffeil</string>
@@ -232,6 +239,7 @@
   <string name="upload_problem_image_duplicate">Mae\'r ddelwedd hon eisioes ar Comin.</string>
   <string name="upload_problem_different_geolocation">Cymerwyd y llun mewn lleoliad gwahanol.</string>
   <string name="upload_problem_do_you_continue">Wyt ti\'n dal yn awyddus i uwchlwytho\'r ddelwedd?</string>
+  <string name="upload_problem_image">Gwallau yn y ddelwedd</string>
   <string name="give_permission">Rhoi hawl</string>
   <string name="use_external_storage">Defnyddia storfa allanol</string>
   <string name="login_to_your_account">Mewngofnodwch i\'ch cyfri</string>
@@ -249,19 +257,65 @@
   <string name="login_alert_message">Er mwyn defnyddio\'r nodwedd yma, mewngofnodwch!</string>
   <string name="nearby_location_has_not_changed">Nid yw\'r lleoliad wedi newid.</string>
   <string name="nearby_location_not_available" fuzzy="true">Nid yw\'r lleoliad ar gael.</string>
+  <string name="get_directions">Nol cyfeiriadau</string>
+  <string name="read_article">Darllen yr erthygl</string>
+  <string name="notifications_welcome">Croeso i Gomin Wicimedia, %1$s! Da ni\'n falch o\'ch gweld!</string>
+  <string name="notifications_talk_page_message">Mae %1$s wedi gadael neges ar eich tudalen Sgwrs</string>
+  <string name="notifications_thank_you_edit">Diolch am olygu</string>
+  <string name="notifications_mention">Mae %1$s wedi son amdanoch ar %2$s.</string>
+  <string name="toggle_view_button">Newid y golwg</string>
+  <string name="nearby_directions">Cyfeiriadau</string>
   <string name="nearby_wikidata">Wicidata</string>
   <string name="nearby_wikipedia">Wicipedia</string>
   <string name="nearby_commons">Comin</string>
+  <string name="about_rate_us">Pa mor dda wnaethom?</string>
+  <string name="about_faq">FAQ</string>
+  <string name="welcome_skip_button">Pasio\'r Tiwtorial</string>
+  <string name="no_internet">Nid yw\'r rhyngrwyd ar gael</string>
+  <string name="internet_established">Mae\'r rhyngrwyd ar gael</string>
+  <string name="error_notifications">Cafwyd gwall wrth nol yr hysbysiadau</string>
+  <string name="error_review">Cafwyd gwall wrth nol y ddelwedd. Adfywiwch y dudalen.</string>
+  <string name="error_review_categories">Cafwyd gwall wrth nol y categoriau. Adfywich a cheisiwch eilwaith.</string>
+  <string name="no_notifications">Dim hysbysiadau</string>
+  <string name="about_translate">Cyfieithwch</string>
   <string name="about_translate_title">Ieithoedd</string>
+  <string name="about_translate_message">Dewisiwch yr iaith y dymunwch eu cyfieithu</string>
   <string name="about_translate_proceed">Parhau</string>
-  <string name="about_translate_cancel">Canslo</string>
+  <string name="about_translate_cancel">Diddymu (canslo)</string>
   <string name="retry">Ailgeisio</string>
   <string name="showcase_view_got_it_button">Gwnaed!</string>
+  <string name="showcase_view_whole_nearby_activity">Dyma\'r llefydd sydd angen lluniau ohonyn nhw ar gyfer erthyglau Wicipedia.\n\nMae clicio ar \'Archwilio\'r Lleoliad Hwn\'yn cloi\'r map ac yn lansio archwiliad cyfagos.</string>
+  <string name="showcase_view_needs_photo">Mae\'r lleoliad yma wirioneddol angen llun ohono!</string>
+  <string name="showcase_view_has_photo">Mae gan y lleoliad yma lun.</string>
+  <string name="showcase_view_no_longer_exists">Dyw\'r lle yma ddim bellach yn bodoli.</string>
+  <string name="showcase_view_list_icon">Mae gwthio\'r botwm yma\'n creu rhestr o\'r llefydd hyn</string>
+  <string name="showcase_view_plus_fab">Gallwch uwchlwytho llun unrhyw le o\'ch galeri neu gamera</string>
   <string name="no_images_found">Dim delweddau!</string>
+  <string name="error_loading_images">Cafwyd nam tra\'n llwytho delweddau.</string>
+  <string name="image_uploaded_by">%1$s wedi uwchlwytho</string>
+  <string name="block_notification_title">Blociwyd</string>
+  <string name="block_notification">Rydych wedi eich blocio rhag golygu ar Comin</string>
   <string name="appwidget_img">Llun y Dydd</string>
   <string name="app_widget_heading">Llun y Dydd</string>
   <string name="menu_search_button">Chwilio</string>
   <string name="search_commons">Chwilio o fewn Comin</string>
   <string name="title_activity_search">Chwilio</string>
+  <string name="search_recent_header">Chwilio diweddar:</string>
+  <string name="provider_searches">Ymchwiliadau diweddar</string>
+  <string name="error_loading_categories">Cafwyd nam tra\'n llwytho\'r categoriau.</string>
+  <string name="error_loading_depictions">Cafwyd nam tra\'n llwytho\'r testun.</string>
+  <string name="error_loading_subcategories">Cafwyd nam tra\'n llwytho\'r isgategoriau.</string>
+  <string name="search_tab_title_media">Cyfrwng</string>
+  <string name="search_tab_title_categories">Categoriau</string>
+  <string name="search_tab_title_depictions">Eitemau</string>
+  <string name="explore_tab_title_featured">Detholiad</string>
+  <string name="explore_tab_title_mobile">Uwchlwytho drwy declyn symudol</string>
   <string name="successful_wikidata_edit" fuzzy="true">Mae %1$s o luniau wedi\'u hychwanegu ar Wicidata!</string>
+  <string name="menu_set_wallpaper">Gosod fel papur wal</string>
+  <string name="wallpaper_set_successfully">Gosodwyd y papur wal!</string>
+  <string name="quiz">Cwis</string>
+  <string name="quiz_question_string">Ydy hi\'n iawn uwchlwytho\'r llun hwn?</string>
+  <string name="question">Cwestiwn</string>
+  <string name="result">Canlyniad</string>
+  <string name="quiz_back_button">Os ydych yn parhau i uwchlwytho lluniau sy\'n cael eu dileu, fe gaiffeich cyfri ei flocio. Gorffen y cwis?</string>
 </resources>
