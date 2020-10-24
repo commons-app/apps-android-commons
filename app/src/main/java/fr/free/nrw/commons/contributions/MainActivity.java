@@ -111,11 +111,6 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
     }
 
     private void initMain() {
-        //Do not remove this, this triggers the sync service
-        Intent uploadServiceIntent = new Intent(this, UploadService.class);
-        uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
-        startService(uploadServiceIntent);
-
         addTabsAndFragments();
         if (contributionsActivityPagerAdapter.getItem(0) != null) {
             ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(0)).onAuthCookieAcquired();
