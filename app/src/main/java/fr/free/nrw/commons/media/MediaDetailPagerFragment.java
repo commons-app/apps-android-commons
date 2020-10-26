@@ -58,6 +58,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     MediaDetailAdapter adapter;
     private Bookmark bookmark;
     private MediaDetailProvider provider;
+    private boolean isFromFeaturedRootFragment;
+    private int position;
 
     public MediaDetailPagerFragment() {
         this(false, false);
@@ -67,6 +69,15 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     public MediaDetailPagerFragment(Boolean editable, boolean isFeaturedImage) {
         this.editable = editable;
         this.isFeaturedImage = isFeaturedImage;
+        isFromFeaturedRootFragment = false;
+    }
+
+    @SuppressLint("ValidFragment")
+    public MediaDetailPagerFragment(Boolean editable, boolean isFeaturedImage, int position) {
+        this.editable = editable;
+        this.isFeaturedImage = isFeaturedImage;
+        isFromFeaturedRootFragment = true;
+        this.position = position;
     }
 
     @Override
@@ -222,8 +233,13 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 if(provider == null) {
                     return;
                 }
+                final int position;
+                if (isFromFeaturedRootFragment) {
+                    position = this.position;
+                } else {
+                    position = pager.getCurrentItem();
+                }
 
-                final int position = pager.getCurrentItem();
                 Media m = provider.getMediaAtPosition(position);
                 if (m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
@@ -353,7 +369,11 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 }
                 pager.postDelayed(() -> getActivity().invalidateOptionsMenu(), 5);
             }
-            return MediaDetailFragment.forMedia(i, editable, isFeaturedImage, isWikipediaButtonDisplayed);
+            if (isFromFeaturedRootFragment) {
+                return MediaDetailFragment.forMedia(position+i, editable, isFeaturedImage, isWikipediaButtonDisplayed);
+            } else {
+                return MediaDetailFragment.forMedia(i, editable, isFeaturedImage, isWikipediaButtonDisplayed);
+            }
         }
 
         @Override

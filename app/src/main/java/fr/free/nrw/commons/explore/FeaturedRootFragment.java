@@ -116,7 +116,7 @@ public class FeaturedRootFragment extends CommonsDaggerSupportFragment implement
     container.setVisibility(View.VISIBLE);
     ((ExploreFragment)getParentFragment()).tabLayout.setVisibility(View.GONE);
     //setFragment(new SettingsFragment()); show that problem is not because of fragment replace
-    mediaDetails = new MediaDetailPagerFragment(false, true);
+    mediaDetails = new MediaDetailPagerFragment(false, true, position);
     setFragment(mediaDetails, listFragment);
     //mediaDetails.showImage(position);
   }
