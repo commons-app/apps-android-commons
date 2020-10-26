@@ -684,4 +684,6 @@
   <string name="limited_connection_enabled">Mode de connexion limitée activé !</string>
   <string name="limited_connection_disabled">Mode de connexion limitée désactivé. Les téléversements en attente seront maintenant repris.</string>
   <string name="limited_connection">Connexion limitée</string>
+  <string name="statistics_quality">Images de qualité</string>
+  <string name="quality_images_info">Les images de qualité sont des diagrammes ou des photographies qui respectent certains standards de qualité (qui sont, par nature, essentiellement techniques), et sont précieuses pour les projets Wikimédia</string>
 </resources>
