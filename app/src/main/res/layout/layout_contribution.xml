@@ -16,12 +16,7 @@
     android:textColor="#33FFFFFF"
     android:textSize="98sp"
     android:typeface="serif" />
-
-  <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
+  
   <com.facebook.drawee.view.SimpleDraweeView
     android:id="@+id/contributionImage"
     android:layout_width="match_parent"
@@ -156,7 +151,6 @@
 
     </RelativeLayout>
 
-  </LinearLayout>
   </LinearLayout>
 
 </FrameLayout>

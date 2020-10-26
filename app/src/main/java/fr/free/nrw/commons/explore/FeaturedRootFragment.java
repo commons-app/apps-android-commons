@@ -174,6 +174,7 @@ public class FeaturedRootFragment extends CommonsDaggerSupportFragment implement
       ((ExploreFragment)getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
       removeFragment(mediaDetails);
       setFragment(listFragment, mediaDetails);
+      ((MainActivity)getActivity()).showTabs();
     } else {
       ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
     }
