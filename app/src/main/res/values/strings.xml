@@ -50,7 +50,7 @@
   <string name="signup">Sign up</string>
   <string name="logging_in_title">Logging in</string>
   <string name="logging_in_message">Please wait…</string>
-  <string name="login_success">Login success!</string>
+  <string name="login_success">You are logged in!</string>
   <string name="login_failed">Login failed!</string>
   <string name="upload_failed">File not found. Please try another file.</string>
   <string name="authentication_failed">Authentication failed, please login again</string>
@@ -82,7 +82,7 @@
   <string name="share_caption_hint">Caption (limit 255 characters)</string>
   <string name="login_failed_network">Unable to login - network failure</string>
   <string name="login_failed_wrong_credentials">Unable to login - please check your username and password</string>
-  <string name="login_failed_throttled">Too many unsuccessful attempts. Please try again in a few minutes.</string>
+  <string name="login_failed_throttled">Too many invalid attempts. Please try again in a few minutes.</string>
   <string name="login_failed_blocked">Sorry, this user has been blocked on Commons</string>
   <string name="login_failed_2fa_needed">You must provide your two factor authentication code.</string>
   <string name="login_failed_generic">Login failed</string>
@@ -367,7 +367,7 @@
   <string name="successful_wikidata_edit">Image added to %1$s on Wikidata!</string>
   <string name="wikidata_edit_failure">Failed to update corresponding Wikidata entity!</string>
   <string name="menu_set_wallpaper">Set as wallpaper</string>
-  <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>
+  <string name="wallpaper_set_successfully">Wallpaper set!</string>
   <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Is this picture OK to upload?</string>
   <string name="question">Question </string>
@@ -510,10 +510,10 @@ Upload your first media by tapping on the add button.</string>
   <string name="nominate_for_deletion_edit_deletion_request_log">Adding file to Delete requests log</string>
   <string name="nominate_for_deletion_create_deletion_request">Creating Delete requests subpage</string>
   <string name="notsure">Not sure</string>
-  <string name="send_thank_success_title">Sending Thanks: Success</string>
+  <string name="send_thank_success_title">Thanks Sent.</string>
   <string name="send_thank_success_message">Successfully sent thanks to %1$s</string>
   <string name="send_thank_failure_message">Failed to send thanks %1$s</string>
-  <string name="send_thank_failure_title">Sending Thanks: Failure</string>
+  <string name="send_thank_failure_title">Failed to send thanks.</string>
   <string name="send_thank_send">Sending thanks</string>
   <string name="send_thank_notification_title">Sending thanks</string>
 
@@ -588,7 +588,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="default_description_language">Default description language</string>
   <string name="delete_helper_make_deletion_toast">Trying to nominate %1$s for deletion</string>
   <string name="delete_helper_show_deletion_title">Nominating for deletion</string>
-  <string name="delete_helper_show_deletion_title_success">Success</string>
+  <string name="delete_helper_show_deletion_title_success">Deleted</string>
   <string name="delete_helper_show_deletion_message_if">Nominated %1$s for deletion.</string>
   <string name="delete_helper_show_deletion_title_failed">Failed</string>
   <string name="delete_helper_show_deletion_message_else">Could not request deletion.</string>
@@ -604,7 +604,7 @@ Upload your first media by tapping on the add button.</string>
 
   <string name="category_edit_helper_make_edit_toast">Trying to update categories.</string>
   <string name="category_edit_helper_show_edit_title">Category update</string>
-  <string name="category_edit_helper_show_edit_title_success">Success</string>
+  <string name="category_edit_helper_show_edit_title_success">Added</string>
   <plurals name="category_edit_helper_show_edit_message_if">
     <item quantity="one">Category %1$s is added.</item>
     <item quantity="other">Categories %1$s are added.</item>
