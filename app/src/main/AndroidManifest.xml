@@ -94,6 +94,7 @@
 
         <activity
             android:name=".auth.SignupActivity"
+            android:configChanges="orientation|screenLayout|screenSize"
             android:label="@string/title_activity_signup" />
 
         <activity
@@ -182,7 +183,7 @@
             android:authorities="${applicationId}.categories.contentprovider"
             android:exported="false"
             android:label="@string/provider_categories"
-          android:syncable="false" />
+            android:syncable="false" />
 
         <provider
             android:name=".explore.recentsearches.RecentSearchesContentProvider"
