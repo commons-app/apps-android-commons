@@ -32,12 +32,13 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
   private MediaDetailPagerFragment mediaDetails;
   //private BookmarkPicturesFragment bookmarkPicturesFragment;
   private BookmarkLocationsFragment bookmarkLocationsFragment;
-  private Fragment listFragment;
+  public Fragment listFragment;
+  private BookmarksPagerAdapter bookmarksPagerAdapter;
 
   @BindView(R.id.explore_container)
   FrameLayout container;
 
-  public BookmarkListRootFragment(Bundle bundle) {
+  public BookmarkListRootFragment(Bundle bundle, BookmarksPagerAdapter bookmarksPagerAdapter) {
     String title = bundle.getString("categoryName");
     int order = bundle.getInt("order");
     if (order == 0) {
@@ -48,6 +49,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
     Bundle featuredArguments = new Bundle();
     featuredArguments.putString("categoryName", title);
     listFragment.setArguments(featuredArguments);
+    this.bookmarksPagerAdapter = bookmarksPagerAdapter;
   }
 
   @Nullable
@@ -131,11 +133,11 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
    */
   @Override
   public Media getMediaAtPosition(int i) {
-    if (listFragment != null) {
-      //return listFragment.getMediaAtPosition(i);
+    if (bookmarksPagerAdapter.getMediaAdapter() == null) {
+      // not yet ready to return data
       return null;
     } else {
-      return null;
+      return (Media) bookmarksPagerAdapter.getMediaAdapter().getItem(i);
     }
   }
 
@@ -147,11 +149,10 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
    */
   @Override
   public int getTotalMediaCount() {
-    if (listFragment !=null) {
-      return 0;
-    } else {
+    if (bookmarksPagerAdapter.getMediaAdapter() == null) {
       return 0;
     }
+    return bookmarksPagerAdapter.getMediaAdapter().getCount();
   }
 
   @Override

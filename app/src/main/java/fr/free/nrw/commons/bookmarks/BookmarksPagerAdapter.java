@@ -26,14 +26,14 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
         picturesBundle.putString("categoryName", context.getString(R.string.title_page_bookmarks_pictures));
         picturesBundle.putInt("order", 0);
         pages.add(new BookmarkPages(
-                new BookmarkListRootFragment(picturesBundle),
+                new BookmarkListRootFragment(picturesBundle, this),
                 context.getString(R.string.title_page_bookmarks_pictures)));
 
         Bundle locationBundle = new Bundle();
         locationBundle.putString("categoryName", context.getString(R.string.title_page_bookmarks_locations));
         locationBundle.putInt("order", 1);
         pages.add(new BookmarkPages(
-            new BookmarkListRootFragment(locationBundle),
+            new BookmarkListRootFragment(locationBundle, this),
             context.getString(R.string.title_page_bookmarks_locations)));
         notifyDataSetChanged();
     }
@@ -59,7 +59,7 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
      * @return adapter
      */
     public ListAdapter getMediaAdapter() {
-        BookmarkPicturesFragment fragment = (BookmarkPicturesFragment)(pages.get(0).getPage());
+        BookmarkPicturesFragment fragment = (BookmarkPicturesFragment)(((BookmarkListRootFragment)pages.get(0).getPage()).listFragment);
         return fragment.getAdapter();
     }
 
@@ -67,7 +67,7 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
      * Update the pictures list for the bookmark fragment
      */
     public void requestPictureListUpdate() {
-        BookmarkPicturesFragment fragment = (BookmarkPicturesFragment)(pages.get(0).getPage());
+        BookmarkPicturesFragment fragment = (BookmarkPicturesFragment)(((BookmarkListRootFragment)pages.get(0).getPage()).listFragment);
         fragment.onResume();
     }
 }
