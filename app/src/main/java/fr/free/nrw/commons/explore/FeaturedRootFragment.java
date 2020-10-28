@@ -53,12 +53,6 @@ public class FeaturedRootFragment extends CommonsDaggerSupportFragment implement
   }
 
   @Override
-  public void onSaveInstanceState(@NonNull Bundle outState) {
-    super.onSaveInstanceState(outState);
-    Log.d("deneme8","olduuu");
-  }
-
-  @Override
   public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     setFragment(listFragment, mediaDetails);
@@ -109,7 +103,6 @@ public class FeaturedRootFragment extends CommonsDaggerSupportFragment implement
   @Override
   public void onAttach(final Context context) {
     super.onAttach(context);
-    //setFragment(listFragment);
   }
 
   @Override
@@ -117,10 +110,8 @@ public class FeaturedRootFragment extends CommonsDaggerSupportFragment implement
     Log.d("deneme8","on media clicked");
     container.setVisibility(View.VISIBLE);
     ((ExploreFragment)getParentFragment()).tabLayout.setVisibility(View.GONE);
-    //setFragment(new SettingsFragment()); show that problem is not because of fragment replace
     mediaDetails = new MediaDetailPagerFragment(false, true, position);
     setFragment(mediaDetails, listFragment);
-    //mediaDetails.showImage(position);
   }
 
   /**
@@ -179,6 +170,7 @@ public class FeaturedRootFragment extends CommonsDaggerSupportFragment implement
       ((MainActivity)getActivity()).showTabs();
     } else {
       ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
+      ((MainActivity)getActivity()).showTabs();
     }
   }
 }

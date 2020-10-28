@@ -116,19 +116,11 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     }*/
 
     public void onBackPressed() {
-        /*if (mediaContainer.getVisibility() == View.VISIBLE) {
-            supportFragmentManager
-                .beginTransaction()
-                .show(mobileImagesListFragment)
-                .show(featuredImagesListFragment)
-                .remove(mediaDetails)
-                .commit();
-            tabLayout.setVisibility(View.VISIBLE);
-            viewPager.setVisibility(View.VISIBLE);
-            mediaContainer.setVisibility(View.GONE);
-            ((MainActivity)getActivity()).showTabs();
-        }*/
-        featuredRootFragment.backPressed();
+        if (tabLayout.getSelectedTabPosition() == 0) {
+            featuredRootFragment.backPressed();
+        } else {
+            mobileRootFragment.backPressed();
+        }
     }
 
     /**
