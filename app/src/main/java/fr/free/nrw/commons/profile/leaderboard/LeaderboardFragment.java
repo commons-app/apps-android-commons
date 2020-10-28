@@ -176,8 +176,10 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
     /**
      * Performs Auto Scroll to the User's Rank
      * We use userRank+1 to load one extra user and prevent overlapping of my rank button
+     * If you are viewing the leaderboard below userRank, it scrolls to the user rank at the top
      */
     private void scrollToUserRank() {
+
         if(userRank==0){
             Toast.makeText(getContext(),R.string.no_achievements_yet,Toast.LENGTH_SHORT).show();
         }else {
@@ -192,6 +194,7 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
                 }
             }
         }
+              
     }
 
     /**
