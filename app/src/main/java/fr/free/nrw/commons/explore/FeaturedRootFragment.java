@@ -27,15 +27,20 @@ import fr.free.nrw.commons.settings.SettingsFragment;
 
 public class FeaturedRootFragment extends CommonsDaggerSupportFragment implements
     MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
-  private static final String FEATURED_IMAGES_CATEGORY = "Featured_pictures_on_Wikimedia_Commons";
-  private static final String MOBILE_UPLOADS_CATEGORY = "Uploaded_with_Mobile/Android";
-  private static final String MEDIA_DETAILS_FRAGMENT_TAG = "MediaDetailsFragment";
 
   private MediaDetailPagerFragment mediaDetails;
   private CategoriesMediaFragment listFragment;
 
   @BindView(R.id.explore_container)
   FrameLayout container;
+
+  public FeaturedRootFragment(Bundle bundle) {
+    String title = bundle.getString("categoryName");
+    listFragment = new CategoriesMediaFragment();
+    Bundle featuredArguments = new Bundle();
+    featuredArguments.putString("categoryName", title);
+    listFragment.setArguments(featuredArguments);
+  }
 
   @Nullable
   @Override
@@ -44,16 +49,13 @@ public class FeaturedRootFragment extends CommonsDaggerSupportFragment implement
     super.onCreate(savedInstanceState);
     View view = inflater.inflate(R.layout.fragment_featured_root, container, false);
     ButterKnife.bind(this, view);
-    String title = FEATURED_IMAGES_CATEGORY;
-    if (savedInstanceState != null) {
-      title = savedInstanceState.getString("categoryName");
-    }
-    listFragment = new CategoriesMediaFragment();
-    Bundle featuredArguments = new Bundle();
-    featuredArguments.putString("categoryName", title);
-    listFragment.setArguments(featuredArguments);
-
     return view;
+  }
+
+  @Override
+  public void onSaveInstanceState(@NonNull Bundle outState) {
+    super.onSaveInstanceState(outState);
+    Log.d("deneme8","olduuu");
   }
 
   @Override

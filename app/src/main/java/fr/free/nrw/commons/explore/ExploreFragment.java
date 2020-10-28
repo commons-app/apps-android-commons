@@ -85,10 +85,8 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         Bundle mobileArguments = new Bundle();
         mobileArguments.putString("categoryName", MOBILE_UPLOADS_CATEGORY);
 
-        featuredRootFragment = new FeaturedRootFragment();
-        featuredRootFragment.setArguments(featuredArguments);
-        mobileRootFragment = new FeaturedRootFragment();
-        mobileRootFragment.setArguments(mobileArguments);
+        featuredRootFragment = new FeaturedRootFragment(featuredArguments);
+        mobileRootFragment = new FeaturedRootFragment(mobileArguments);
         fragmentList.add(featuredRootFragment);
         titleList.add(getString(R.string.explore_tab_title_featured).toUpperCase());
 
