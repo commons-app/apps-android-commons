@@ -3,12 +3,13 @@ package fr.free.nrw.commons.di;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import fr.free.nrw.commons.bookmarks.BookmarkFragment;
+import fr.free.nrw.commons.bookmarks.BookmarkListRootFragment;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.contributions.ContributionsListFragment;
 import fr.free.nrw.commons.explore.ExploreFragment;
-import fr.free.nrw.commons.explore.FeaturedRootFragment;
+import fr.free.nrw.commons.explore.ExploreListRootFragment;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment;
 import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment;
@@ -115,7 +116,10 @@ public abstract class FragmentBuilderModule {
     abstract ExploreFragment bindExploreFragmentFragment();
 
     @ContributesAndroidInjector
-    abstract FeaturedRootFragment bindExploreFeaturedRootFragment();
+    abstract ExploreListRootFragment bindExploreFeaturedRootFragment();
+
+    @ContributesAndroidInjector
+    abstract BookmarkListRootFragment bindBookmarkListRootFragment();
 
     @ContributesAndroidInjector
     abstract BookmarkFragment bindBookmarkFragmentFragment();

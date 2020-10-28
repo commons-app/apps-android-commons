@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.bookmarks;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.widget.ListAdapter;
 
 import androidx.annotation.Nullable;
@@ -21,14 +22,19 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
     BookmarksPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         pages = new ArrayList<>();
+        Bundle picturesBundle = new Bundle();
+        picturesBundle.putString("categoryName", context.getString(R.string.title_page_bookmarks_pictures));
+        picturesBundle.putInt("order", 0);
         pages.add(new BookmarkPages(
-                BookmarkPicturesFragment.newInstance(),
-                context.getString(R.string.title_page_bookmarks_pictures)
-        ));
+                new BookmarkListRootFragment(picturesBundle),
+                context.getString(R.string.title_page_bookmarks_pictures)));
+
+        Bundle locationBundle = new Bundle();
+        locationBundle.putString("categoryName", context.getString(R.string.title_page_bookmarks_locations));
+        locationBundle.putInt("order", 1);
         pages.add(new BookmarkPages(
-                BookmarkLocationsFragment.newInstance(),
-                context.getString(R.string.title_page_bookmarks_locations)
-        ));
+            new BookmarkListRootFragment(locationBundle),
+            context.getString(R.string.title_page_bookmarks_locations)));
         notifyDataSetChanged();
     }
 

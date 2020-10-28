@@ -25,7 +25,7 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.navtab.NavTab;
 import fr.free.nrw.commons.settings.SettingsFragment;
 
-public class FeaturedRootFragment extends CommonsDaggerSupportFragment implements
+public class ExploreListRootFragment extends CommonsDaggerSupportFragment implements
     MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
 
   private MediaDetailPagerFragment mediaDetails;
@@ -34,7 +34,7 @@ public class FeaturedRootFragment extends CommonsDaggerSupportFragment implement
   @BindView(R.id.explore_container)
   FrameLayout container;
 
-  public FeaturedRootFragment(Bundle bundle) {
+  public ExploreListRootFragment(Bundle bundle) {
     String title = bundle.getString("categoryName");
     listFragment = new CategoriesMediaFragment();
     Bundle featuredArguments = new Bundle();

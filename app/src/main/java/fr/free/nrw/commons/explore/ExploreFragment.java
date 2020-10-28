@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.explore;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -9,21 +7,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
-import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
-import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.utils.ActivityUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +31,8 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.viewPager)
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
-    /*private MediaDetailPagerFragment mediaDetails;
-    private CategoriesMediaFragment mobileImagesListFragment;
-    private CategoriesMediaFragment featuredImagesListFragment;*/
-    private FeaturedRootFragment featuredRootFragment;
-    private FeaturedRootFragment mobileRootFragment;
+    private ExploreListRootFragment featuredRootFragment;
+    private ExploreListRootFragment mobileRootFragment;
 
     @NonNull
     public static ExploreFragment newInstance() {
@@ -85,8 +74,8 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         Bundle mobileArguments = new Bundle();
         mobileArguments.putString("categoryName", MOBILE_UPLOADS_CATEGORY);
 
-        featuredRootFragment = new FeaturedRootFragment(featuredArguments);
-        mobileRootFragment = new FeaturedRootFragment(mobileArguments);
+        featuredRootFragment = new ExploreListRootFragment(featuredArguments);
+        mobileRootFragment = new ExploreListRootFragment(mobileArguments);
         fragmentList.add(featuredRootFragment);
         titleList.add(getString(R.string.explore_tab_title_featured).toUpperCase());
 
@@ -97,24 +86,6 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         viewPagerAdapter.notifyDataSetChanged();
     }
 
-    /**
-     * This method is called mediaDetailPagerFragment. It returns the Media Object at that Index
-     *
-     //* @param i It is the index of which media object is to be returned which is same as current
-     *          index of viewPager.
-     * @return Media Object
-     */
-    /*@Override
-    public Media getMediaAtPosition(int i) {
-        if (tabLayout.getSelectedTabPosition() == 1) {
-            return mobileImagesListFragment.getMediaAtPosition(i);
-        } else if (tabLayout.getSelectedTabPosition() == 0) {
-            return featuredImagesListFragment.getMediaAtPosition(i);
-        } else {
-            return null;
-        }
-    }*/
-
     public void onBackPressed() {
         if (tabLayout.getSelectedTabPosition() == 0) {
             featuredRootFragment.backPressed();
@@ -122,38 +93,6 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
             mobileRootFragment.backPressed();
         }
     }
-
-    /**
-     * This method is called onClick of media inside category featured images or mobile uploads.
-     */
-    /*@Override
-    public void onMediaClicked(int position) {
-        mediaContainer.setVisibility(View.VISIBLE);
-        tabLayout.setVisibility(View.GONE);
-        mediaDetails = new MediaDetailPagerFragment(false, true);
-
-        if (tabLayout.getSelectedTabPosition() == 0) {
-            featuredRootFragment.setFragment(mediaDetails);
-        } else if (tabLayout.getSelectedTabPosition() == 1) {
-            //mediaDetails = mobileImagesListFragment.onMediaItemClicked(position);
-        }*/
-        //if (mediaDetails == null || !mediaDetails.isVisible()) {
-            // set isFeaturedImage true for featured images, to include author field on media detail
-            //mediaDetails = new MediaDetailPagerFragment(false, true);
-            //supportFragmentManager
-                //.beginTransaction()
-                //.hide(featuredImagesListFragment)
-                //.hide(mobileImagesListFragment)
-                //.add(R.id.mediaContainer, mediaDetails)
-                //.replace(R.id.mediaContainer, mediaDetails)
-                //.addToBackStack(MEDIA_DETAILS_FRAGMENT_TAG)
-                //.commit();
-            // Reason for using hide, add instead of replace is to maintain scroll position after
-            // coming back to the explore activity. See https://github.com/commons-app/apps-android-commons/issues/1631
-            // https://stackoverflow.com/questions/11353075/how-can-i-maintain-fragment-state-when-added-to-the-back-stack/19022550#19022550            supportFragmentManager.executePendingTransactions();
-        //}
-
-    //}
 
     /**
      * This method inflates the menu in the toolbar
