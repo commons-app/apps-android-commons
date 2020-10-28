@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.MergeAdapter;
@@ -154,7 +155,9 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
             }
         });
 
-        scrollButton.setOnClickListener(view -> scrollToUserRank());
+
+            scrollButton.setOnClickListener(view -> scrollToUserRank());
+
 
         return rootView;
     }
@@ -175,13 +178,18 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      * We use userRank+1 to load one extra user and prevent overlapping of my rank button
      */
     private void scrollToUserRank() {
-        if (Objects.requireNonNull(leaderboardListRecyclerView.getAdapter()).getItemCount() > userRank + 1) {
-            leaderboardListRecyclerView.smoothScrollToPosition(userRank + 1);
-        } else {
-            if (viewModel != null) {
-                viewModel.refresh(duration, category, userRank + 1, 0);
-                setLeaderboard(duration, category, userRank + 1, 0);
-                scrollToRank = true;
+        if(userRank==0){
+            Toast.makeText(getContext(),R.string.no_achievements_yet,Toast.LENGTH_SHORT).show();
+        }else {
+            if (Objects.requireNonNull(leaderboardListRecyclerView.getAdapter()).getItemCount()
+                > userRank + 1) {
+                leaderboardListRecyclerView.smoothScrollToPosition(userRank + 1);
+            } else {
+                if (viewModel != null) {
+                    viewModel.refresh(duration, category, userRank + 1, 0);
+                    setLeaderboard(duration, category, userRank + 1, 0);
+                    scrollToRank = true;
+                }
             }
         }
     }
