@@ -671,4 +671,6 @@
   <string name="limited_connection_enabled">Modo de ligação limitada ativado!</string>
   <string name="limited_connection_disabled">Modo de ligação limitada desativado. Os carregamentos pendentes serão retomados agora.</string>
   <string name="limited_connection">Ligação limitada</string>
+  <string name="statistics_quality">Imagens de qualidade</string>
+  <string name="quality_images_info">As imagens de qualidade são diagramas ou fotografias que satisfazem certos padrões de qualidade (principalmente de natureza técnica) e são valiosos para projetos da Wikimedia</string>
 </resources>

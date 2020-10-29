@@ -663,4 +663,6 @@
   <string name="limited_connection_enabled">Begränsat anslutningsläge har aktiverats!</string>
   <string name="limited_connection_disabled">Begränsat anslutningsläge har inaktiverats. Väntande uppladdningar kommer nu återupptas.</string>
   <string name="limited_connection">Begränsad anslutning</string>
+  <string name="statistics_quality">Kvalitetsbilder</string>
+  <string name="quality_images_info">Kvalitetsbilder är diagram eller fotografier som möter vissa kvalitetsstandarder (som är mestadels tekniska) och är värdefulla för Wikimedia-projekt.</string>
 </resources>

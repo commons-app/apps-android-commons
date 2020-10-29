@@ -659,4 +659,6 @@
   <string name="limited_connection_enabled">Овозможен режимот на ограничена врска.</string>
   <string name="limited_connection_disabled">Режимот на ограничена врска е оневозоможен. Сега ќе продолжат преземањата во исчекување.</string>
   <string name="limited_connection">Ограничена врска</string>
+  <string name="statistics_quality">Квалитетни слики</string>
+  <string name="quality_images_info">Квалитетните слики се дијаграми или фотографии кои задоволуваат извесни стандарди за квалитет (кои се од претежно техничка природа) или имаат вредност за Викимедиините проекти</string>
 </resources>
