@@ -281,8 +281,8 @@
   <string name="upload_problem_image">Problems found in image</string>
   <string name="internet_downloaded">Please only upload pictures that you have taken by yourself. Don\'t upload pictures that you have downloaded from the Internet.</string>
   <string name="give_permission">Give permission</string>
-  <string name="use_external_storage">Use external storage</string>
-  <string name="use_external_storage_summary">Save pictures taken with the in-app camera on your device</string>
+  <string name="use_external_storage">Save pictures</string>
+  <string name="use_external_storage_summary">Save pictures taken with the in-app camera to your device's disk</string>
   <string name="login_to_your_account">Log in to your account</string>
   <string name="send_log_file">Send log file</string>
   <string name="send_log_file_description">Send log file to developers via email to help debug problems with the app. Note: logs may potentially contain identifying information</string>
