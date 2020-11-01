@@ -63,10 +63,10 @@ public class NetworkingModule {
                                             HttpLoggingInterceptor httpLoggingInterceptor) {
         File dir = new File(context.getCacheDir(), "okHttpCache");
         return new OkHttpClient.Builder()
-            .connectTimeout(60, TimeUnit.SECONDS)
-            .writeTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(120, TimeUnit.SECONDS)
+            .writeTimeout(120, TimeUnit.SECONDS)
                 .addInterceptor(httpLoggingInterceptor)
-            .readTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(120, TimeUnit.SECONDS)
             .cache(new Cache(dir, OK_HTTP_CACHE_SIZE))
             .build();
     }
