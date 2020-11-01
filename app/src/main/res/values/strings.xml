@@ -428,7 +428,7 @@
   <string name="notifications">Notifications</string>
   <string name="read_notifications">Notifications (read)</string>
   <string name="display_nearby_notification">Display nearby notification</string>
-  <string name="display_nearby_notification_summary">Tap here to see the nearest place that needs pictures</string>
+  <string name="display_nearby_notification_summary">Show in-app notification for the nearest place that needs pictures</string>
 
   <string name="no_close_nearby">No nearby places found close to you</string>
   <string name="list_sheet">List</string>
