@@ -134,18 +134,23 @@ public class UploadClient {
             new ChunkInfo(uploadResult, index.get(), totalChunks));
         notificationUpdater.onChunkUploaded(contribution, chunkInfo.get());
       }, throwable -> {
+            Timber.e(throwable, "Received error in chunk upload");
         failures.set(true);
       }));
     }));
 
     if (pauseUploads.get(contribution.getPageId())) {
+      Timber.d("Upload stash paused %s", contribution.getPageId());
       return Observable.just(new StashUploadResult(StashUploadState.PAUSED, null));
     } else if (failures.get()) {
+      Timber.d("Upload stash contains failures %s", contribution.getPageId());
       return Observable.just(new StashUploadResult(StashUploadState.FAILED, null));
     } else if (chunkInfo.get() != null) {
+      Timber.d("Upload stash success %s", contribution.getPageId());
       return Observable.just(new StashUploadResult(StashUploadState.SUCCESS,
           chunkInfo.get().getUploadResult().getFilekey()));
     } else {
+      Timber.d("Upload stash failed %s", contribution.getPageId());
       return Observable.just(new StashUploadResult(StashUploadState.FAILED, null));
     }
   }
@@ -227,6 +232,7 @@ public class UploadClient {
             UploadResponse uploadResult = gson.fromJson(uploadResponse, UploadResponse.class);
             if (uploadResult.getUpload() == null) {
               final MwException exception = gson.fromJson(uploadResponse, MwException.class);
+              Timber.e(exception, "Error in uploading file from stash");
               throw new RuntimeException(exception.getErrorCode());
             }
             return uploadResult.getUpload();

@@ -310,6 +310,7 @@ public class UploadService extends CommonsDaggerService {
           }
         })
         .flatMap(uploadStash -> {
+          Timber.d("Upload stash result %s", uploadStash.toString());
           notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
 
           if (uploadStash.getState() == StashUploadState.SUCCESS) {
