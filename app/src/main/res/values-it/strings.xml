@@ -407,7 +407,7 @@
   <string name="notifications">Notifiche</string>
   <string name="read_notifications">Notifiche (lette)</string>
   <string name="display_nearby_notification">Mostra notifica nelle vicinanze</string>
-  <string name="display_nearby_notification_summary">Tocca qui per vedere il luogo più vicino che ha bisogno di immagini</string>
+  <string name="display_nearby_notification_summary">Mostra notifiche nell\'applicazione per il luogo più vicino che ha bisogno di immagini</string>
   <string name="no_close_nearby">Nessun posto nelle vicinanze trovato vicino a te</string>
   <string name="list_sheet">Elenco</string>
   <string name="storage_permission">Autorizzazione di archiviazione</string>

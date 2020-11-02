@@ -415,7 +415,7 @@
   <string name="notifications">Известувања</string>
   <string name="read_notifications">Известувања (прочитани)</string>
   <string name="display_nearby_notification">Известувај ме за места во близина</string>
-  <string name="display_nearby_notification_summary">Допрете тука за да го видите најблиското место без слика</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Допрете тука за да го видите најблиското место без слика</string>
   <string name="no_close_nearby">Не најдов места во ваша близина</string>
   <string name="list_sheet">Список</string>
   <string name="storage_permission">Дозвола за складирање</string>

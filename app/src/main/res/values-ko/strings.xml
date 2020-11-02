@@ -417,7 +417,7 @@
   <string name="notifications">알림</string>
   <string name="read_notifications">알림 (읽음)</string>
   <string name="display_nearby_notification">주변 알림 표시</string>
-  <string name="display_nearby_notification_summary">사진이 필요한 주변 장소를 보려면 여기를 탭하세요</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">사진이 필요한 주변 장소를 보려면 여기를 탭하세요</string>
   <string name="no_close_nearby">당신에게 가까운 주변 장소를 찾지 못했습니다</string>
   <string name="list_sheet">목록</string>
   <string name="storage_permission">기억 장치 권한</string>

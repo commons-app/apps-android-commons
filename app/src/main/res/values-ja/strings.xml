@@ -426,7 +426,7 @@
   <string name="notifications">通知</string>
   <string name="read_notifications">通知（既読）</string>
   <string name="display_nearby_notification">近くの場所の通知を表示する</string>
-  <string name="display_nearby_notification_summary">ここをタップして、近くで画像を募集中の場所を表示</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">ここをタップして、近くで画像を募集中の場所を表示</string>
   <string name="no_close_nearby">現在地の近くに該当する場所が見つかりません</string>
   <string name="list_sheet">一覧</string>
   <string name="storage_permission">ストレージの許可</string>

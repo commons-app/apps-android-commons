@@ -382,7 +382,7 @@
   <string name="notifications">Pemberitahuan</string>
   <string name="read_notifications" fuzzy="true">Pemberitahuan (diarsipkan)</string>
   <string name="display_nearby_notification">Tampilkan pemberitahuan sekitar</string>
-  <string name="display_nearby_notification_summary">Tekan di sini untuk melihat tempat terdekat yang membutuhkan gambar</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Tekan di sini untuk melihat tempat terdekat yang membutuhkan gambar</string>
   <string name="no_close_nearby">Tidak ada tempat sekitaran yang ditemukan di dekat Anda</string>
   <string name="list_sheet">Daftar</string>
   <string name="storage_permission">Izin Penyimpanan</string>

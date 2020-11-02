@@ -405,7 +405,7 @@
   <string name="notifications">Avisos</string>
   <string name="read_notifications">Avisos (lleíos)</string>
   <string name="display_nearby_notification">Amosar notificaciones de cercanía</string>
-  <string name="display_nearby_notification_summary">Toca equí para ver el llugar más cercanu que precisa semeyes</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Toca equí para ver el llugar más cercanu que precisa semeyes</string>
   <string name="no_close_nearby">Nun s\'atoparon llugares cercanos nos alredores</string>
   <string name="list_sheet">Llista</string>
   <string name="storage_permission">Permisu d\'almacenamientu</string>

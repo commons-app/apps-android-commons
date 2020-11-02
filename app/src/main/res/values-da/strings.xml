@@ -101,7 +101,7 @@
   <string name="about_license">Wikimedia Commons-programmet oprettet og udviklet af frivillige i Wikimediafællesskabet. Wikimedia Foundation er ikke involveret i oprettelse, udvikling eller vedligeholdelse af programmet.</string>
   <string name="about_improve">Opret en ny &lt;a href=\"%1$s\"&gt;GitHub-sag&lt;/a&gt; for fejlrapporter og forslag.</string>
   <string name="about_privacy_policy">Privatlivspolitik</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;Bidragsydere&lt;/u&gt;</string>
+  <string name="about_credits">Tak til</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Send tilbagemelding (med e-mail)</string>
   <string name="no_email_client">Ingen e-postklient installeret</string>
@@ -157,7 +157,7 @@
   <string name="welcome_copyright_subtext">Undgå ophavsretligt beskyttede materialer du har fundet på internettet samt billeder af plakater, bogomslag osv.</string>
   <string name="welcome_final_text">Forstået?</string>
   <string name="welcome_final_button_text">Ja!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Mere information&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Flere oplysninger</string>
   <string name="detail_panel_cats_label">Kategorier</string>
   <string name="detail_panel_cats_loading">Indlæser…</string>
   <string name="detail_panel_cats_none">Ingen valgt</string>
@@ -251,7 +251,7 @@
   <string name="null_url">Fejl! Adressen blev ikke fundet</string>
   <string name="nominate_deletion">Nomineret til sletning</string>
   <string name="nominated_for_deletion">Dette billede er blevet nomineret til sletning.</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Se webside for detaljer&lt;/u&gt;</string>
+  <string name="nominated_see_more">Se webstedet for information</string>
   <string name="view_browser">Se i browser</string>
   <string name="skip_login">Spring over</string>
   <string name="navigation_item_login">Log på</string>
@@ -269,8 +269,8 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Vurder os&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;OSS&lt;/u&gt;</string>
+  <string name="about_rate_us">Vurder os</string>
+  <string name="about_faq">Ofte Stillede Spørgsmål</string>
   <string name="welcome_skip_button">Udelad øvelse</string>
   <string name="no_internet">Internet er utilgængeligt</string>
   <string name="internet_established">Internet tilgængeligt</string>
@@ -300,9 +300,11 @@
   <string name="search_tab_title_media">Medier</string>
   <string name="search_tab_title_categories">Kategorier</string>
   <string name="search_tab_title_depictions">Emner</string>
+  <string name="explore_tab_title_featured">Fremhævet</string>
   <string name="quiz_question_string">Er det i orden at lægge dette billede op?</string>
   <string name="question">Spørgsmål</string>
   <string name="result">Resultat</string>
+  <string name="quiz_result_share_message">Del din quiz med dine venner!</string>
   <string name="continue_message">Fortsæt</string>
   <string name="correct">Rigtigt svar</string>
   <string name="wrong">Forkert svar</string>
@@ -310,6 +312,7 @@
   <string name="share_app_title">Del appen</string>
   <string name="add_description">+ Tilføj en beskrivelse</string>
   <string name="no_recent_searches">Ingen seneste søgninger</string>
+  <string name="delete_search_dialog">Ønsker du at slette denne søgning?</string>
   <string name="search_history_deleted">Søgehistorik slettet</string>
   <string name="nominate_delete">Nominer til sletning</string>
   <string name="delete">Slet</string>
@@ -358,9 +361,12 @@
   <string name="display_location_permission_title">Vis placeringstilladelse</string>
   <string name="ends_on">Slutter den:</string>
   <string name="display_campaigns">Vis kampagner</string>
+  <string name="display_campaigns_explanation">Se aktive kampagner</string>
   <string name="nominate_for_deletion_done">Udført</string>
   <string name="notsure">Ikke sikker</string>
+  <string name="send_thank_send">Sender tak</string>
   <string name="send_thank_notification_title">Sender tak</string>
+  <string name="review_no_category">Så for pokker da, dette er ikke engang kategoriseret!</string>
   <string name="review_category_no_button_text">Ser fint ud</string>
   <string name="review_spam_no_button_text">Ser fint ud</string>
   <string name="review_copyright_no_button_text">Ser fint ud</string>
@@ -368,13 +374,15 @@
   <string name="review_thanks_no_button_text">Næste billede</string>
   <string name="no_image">Ingen billeder brugt</string>
   <string name="share_logs_using">Del logs ved hjælp af</string>
-  <string name="menu_option_read" fuzzy="true">Vis arkiverede</string>
+  <string name="menu_option_read">Vis læste</string>
   <string name="menu_option_unread">Vis ulæste</string>
   <string name="error_occurred_in_picking_images">Der opstod en fejl under udvælgelse af billeder</string>
   <string name="please_wait">Vent venligst…</string>
   <string name="skip_image">Spring over dette billede</string>
   <string name="exif_tag_name_copyright">Ophavsret</string>
+  <string name="exif_tag_name_location">Placering</string>
   <string name="exif_tag_name_cameraModel">Kameramodel</string>
+  <string name="exif_tag_name_lensModel">Linsemodel</string>
   <string name="exif_tag_name_serialNumbers">Serienumre</string>
   <string name="share_via">Del app via...</string>
   <string name="no_categories_found">Ingen kategorier blev fundet</string>
@@ -384,28 +392,49 @@
   <string name="delete_helper_ask_spam_other">Andet</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Vilkårligt billede fra internettet</string>
   <string name="delete_helper_ask_reason_copyright_other">Andet</string>
+  <string name="category_edit_helper_make_edit_toast">Prøver på at opdatere kategorier.</string>
   <string name="category_edit_helper_show_edit_title_success">Succes</string>
   <string name="category_edit_helper_edit_message_else">Kunne ikke tilføje kategorier.</string>
   <string name="category_edit_button_text">Opdater kategorier</string>
+  <string name="share_image_via">Del billede via</string>
+  <string name="account_created">Konto oprettet!</string>
+  <string name="some_error">Der var en fejl!</string>
+  <string name="place_state">Placeringstatus:</string>
   <string name="place_state_exists">Findes</string>
   <string name="place_state_needs_photo">Mangler et billede</string>
+  <string name="place_type">Placeringstype:</string>
   <string name="nearby_search_hint">Bro, museum, hotel, osv.</string>
+  <string name="title_app_shortcut_explore">Udforsk</string>
   <string name="title_app_shortcut_bookmark">Bogmærker</string>
-  <string name="theme_default_name" fuzzy="true">Standard</string>
+  <string name="title_app_shortcut_setting">Indstillinger</string>
+  <string name="remove_bookmark">Fjernet fra bogmærker</string>
+  <string name="add_bookmark">Tilføjet til borgmærker</string>
+  <string name="theme_default_name">Følg systemet</string>
   <string name="theme_dark_name">Mørkt</string>
   <string name="theme_light_name">Lyst</string>
   <string name="load_more">Indlæs mere</string>
+  <string name="todo_improve">Forslag til forbedringer:</string>
+  <string name="missing_category">- Tilføj kategorier til dette billede for at forbedre brugbarheden.</string>
   <string name="edit_category">Rediger kategorier</string>
+  <string name="add_picture_to_wikipedia_article_title">Tilføj billede til Wikipedia</string>
   <string name="add_picture_to_wikipedia_instructions_title">Instruktioner</string>
   <string name="confirm">Bekræft</string>
   <string name="instructions_title">Instruktioner</string>
+  <string name="wikipedia_instructions_step_7">7. Udgiv artiklen</string>
   <string name="pause">sæt på pause</string>
   <string name="resume">genoptag</string>
   <string name="paused">Sat på pause</string>
+  <string name="achievements_tab_title">Præstationer</string>
+  <string name="leaderboard_tab_title">Topliste</string>
   <string name="rank_prefix">Rang:</string>
   <string name="leaderboard_column_rank">Rang</string>
   <string name="leaderboard_column_user">Bruger</string>
   <string name="leaderboard_yearly">Årlig</string>
   <string name="leaderboard_weekly">Ugentlig</string>
+  <string name="leaderboard_all_time">Hele tiden</string>
   <string name="leaderboard_nearby">I nærheden</string>
+  <string name="leaderboard_used">Brugt</string>
+  <string name="leaderboard_my_rank_button_text">Min rang</string>
+  <string name="limited_connection">Begrænset forbindelse</string>
+  <string name="statistics_quality">Kvalitetsbilleder</string>
 </resources>

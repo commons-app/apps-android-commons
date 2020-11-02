@@ -427,7 +427,7 @@
   <string name="notifications">通知</string>
   <string name="read_notifications">通知（已读）</string>
   <string name="display_nearby_notification">显示附近通知</string>
-  <string name="display_nearby_notification_summary">点击此处查看最近需要图片的地方</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">点击此处查看最近需要图片的地方</string>
   <string name="no_close_nearby">附近找不到靠近您的地方</string>
   <string name="list_sheet">列表</string>
   <string name="storage_permission">存储权限</string>

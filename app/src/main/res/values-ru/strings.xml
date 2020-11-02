@@ -450,7 +450,7 @@
   <string name="notifications">Уведомления</string>
   <string name="read_notifications">Уведомления (читать)</string>
   <string name="display_nearby_notification">Уведомлять меня о местах поблизости</string>
-  <string name="display_nearby_notification_summary">Нажмите здесь, чтобы увидеть ближайшее место без изображений</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Нажмите здесь, чтобы увидеть ближайшее место без изображений</string>
   <string name="no_close_nearby">Не найдено мест поблизости</string>
   <string name="list_sheet">Список</string>
   <string name="storage_permission">Разрешение для использования внешнего носителя</string>

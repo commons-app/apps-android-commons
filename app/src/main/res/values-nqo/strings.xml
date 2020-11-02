@@ -352,6 +352,7 @@
   <string name="check_category_success_message">ߦߌߟߡߊ ߝߛߍ߬ߝߛߍ߬ߟߌ ߡߊߢߌ߬ߣߌ߲߬ߞߊ߬ߣߍ߲߫ %1$s ߦߋ߫</string>
   <string name="check_category_failure_message">ߦߌߟߡߊ ߝߛߍ߬ߝߛߍ߬ߟߌ ߕߍ߫ ߛߐ߲߬ ߡߊߢߌ߬ߣߌ߲߬ߞߊ߬ ߟߊ߫ %1$s ߦߋ߫</string>
   <string name="check_category_toast">ߦߌߟߡߊ ߝߛߍ߬ߝߛߍ߬ߟߌ ߡߊߢߌ߬ߣߌ߲߬ߞߊ߬ߣߍ߲߫ %1$s ߦߋ߫</string>
+  <string name="nominate_for_deletion_edit_file_page">ߗߋߛߓߍ߫ ߖߏ߰ߛߌ߬ߣߍ߲ ߠߎ߬ ߝߙߊ߬ ߞߐߕߐ߮ ߟߊ߫</string>
   <string name="nominate_for_deletion_done">ߊ߬ ߓߘߊ߫ ߞߍ߫</string>
   <string name="nominate_for_deletion_edit_deletion_request_log">ߞߐߕߐ߮ ߟߊߘߏ߲߬ߠߌ߲ ߖߏ߬ߛߌ߬ߟߌ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߘߊ߲ߖߐ ߘߐ߫</string>
   <string name="nominate_for_deletion_create_deletion_request">ߖߏ߰ߛߌ߬ߟߌ ߡߊ߬ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߞߐߜߍߙߋ߲ ߛߌ߲ߘߟߌ</string>
@@ -434,4 +435,7 @@
   <string name="wikipedia_instructions_step_1">߁߭. ߥߞߌߛߓߍߟߌ ߢߌ߲߬ ߠߎ߬ ߟߊߓߊ߯ߙߊ߫:</string>
   <string name="wikipedia_instructions_step_2">߂.ߟߊ߬ߛߙߋ߬ߦߊ߬ߟߌ ߛߐ߲߬ߞߌ߲ ߓߍߣߊ߬ ߥߞߌߔߋߘߌߦߊ ߞߎߡߘߊ ߘߊߦߟߍ߬</string>
   <string name="wikipedia_instructions_step_7">߇߲. ߞߎߡߘߊ ߟߊߥߊ߲߬ߞߊ߫</string>
+  <string name="pause">ߊ߬ ߟߊߟߐ߬</string>
+  <string name="paused">ߊ߬ ߓߘߊ߫ ߟߊߟߐ߬</string>
+  <string name="achievements_tab_title">ߞߎ߲߬ߝߊ߰ߟߌ</string>
 </resources>

@@ -434,7 +434,7 @@
   <string name="notifications">Bildirimler</string>
   <string name="read_notifications">Bildirimler (okunmuş)</string>
   <string name="display_nearby_notification">Yakınımdakiler bildirimi görüntüle</string>
-  <string name="display_nearby_notification_summary">Size en yakın olan ve resme ihtiyaç duyan yerleri görmek için dokunun</string>
+  <string name="display_nearby_notification_summary">Resimlere ihtiyaç duyan en yakın yer için uygulama içi bildirim göster</string>
   <string name="no_close_nearby">Size yakın bir yer bulunamadı</string>
   <string name="list_sheet">Liste</string>
   <string name="storage_permission">Depolama İzni</string>

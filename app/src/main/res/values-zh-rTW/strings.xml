@@ -426,7 +426,7 @@
   <string name="notifications">通知</string>
   <string name="read_notifications">通知（已讀）</string>
   <string name="display_nearby_notification">顯示附近地點通知</string>
-  <string name="display_nearby_notification_summary">在此輕觸來查看缺少圖片的最近地點</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">在此輕觸來查看缺少圖片的最近地點</string>
   <string name="no_close_nearby">查無靠近您的附近地點</string>
   <string name="list_sheet">清單</string>
   <string name="storage_permission">存儲裝置權限</string>

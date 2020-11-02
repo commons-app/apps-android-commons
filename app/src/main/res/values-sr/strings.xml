@@ -386,7 +386,7 @@
   <string name="notifications">Обавештења</string>
   <string name="read_notifications" fuzzy="true">Обавештења (архивирана)</string>
   <string name="display_nearby_notification">Прикажи обавештење у близини</string>
-  <string name="display_nearby_notification_summary">Притисните овде да бисте видели најближе место којем треба слика</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Притисните овде да бисте видели најближе место којем треба слика</string>
   <string name="no_close_nearby">Нису пронађена места у близини близу вас</string>
   <string name="list_sheet">Списак</string>
   <string name="storage_permission">Дозвола за складиштење</string>

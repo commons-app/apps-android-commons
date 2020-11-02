@@ -419,7 +419,7 @@
   <string name="notifications">Aviseringar</string>
   <string name="read_notifications">Aviseringar (lästa)</string>
   <string name="display_nearby_notification">Visa avisering för i närheten</string>
-  <string name="display_nearby_notification_summary">Tryck här för att se den närmaste platsen som behöver bilder</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Tryck här för att se den närmaste platsen som behöver bilder</string>
   <string name="no_close_nearby">Inga platser i närheten hittades som är nära dig</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Lagringsbehörighet</string>

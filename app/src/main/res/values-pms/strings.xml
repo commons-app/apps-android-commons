@@ -413,7 +413,7 @@
   <string name="notifications">Notìfiche</string>
   <string name="read_notifications">Notìfiche (lesùe)</string>
   <string name="display_nearby_notification">Smon-e la notìfica ëd prossimità</string>
-  <string name="display_nearby_notification_summary">Sgnaché sì për vëdde ël pòst pi davzin ch\'a l\'ha damanca ëd plance</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Sgnaché sì për vëdde ël pòst pi davzin ch\'a l\'ha damanca ëd plance</string>
   <string name="no_close_nearby">Gnun pòst trovà davzin a chiel</string>
   <string name="list_sheet">Listé</string>
   <string name="storage_permission">Përmess d\'anmagasinament</string>

@@ -361,7 +361,7 @@
   <string name="notifications">Notificacions</string>
   <string name="read_notifications">Notificacions (llegides)</string>
   <string name="display_nearby_notification">Mostra notificacions properes</string>
-  <string name="display_nearby_notification_summary">Feu un toc aquí per a veure el lloc més proper que necessiti fotos</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Feu un toc aquí per a veure el lloc més proper que necessiti fotos</string>
   <string name="no_close_nearby">No s\'han trobat llocs propers prop vostre</string>
   <string name="list_sheet">Llista</string>
   <string name="storage_permission">Permissos d\'emmagatzematge</string>

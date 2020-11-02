@@ -440,7 +440,7 @@
   <string name="notifications">Notifications</string>
   <string name="read_notifications">Notifications (lues)</string>
   <string name="display_nearby_notification">Afficher la notification de proximité</string>
-  <string name="display_nearby_notification_summary">Taper ici pour voir l’endroit le plus proche qui a besoin d’images</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Taper ici pour voir l’endroit le plus proche qui a besoin d’images</string>
   <string name="no_close_nearby">Aucun endroit à proximité trouvé près de chez vous</string>
   <string name="list_sheet">Lister</string>
   <string name="storage_permission">Droit de stockage</string>
