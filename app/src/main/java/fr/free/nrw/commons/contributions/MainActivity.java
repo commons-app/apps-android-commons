@@ -57,7 +57,6 @@ public class MainActivity  extends BaseActivity
     public FrameLayout fragmentContainer;
     @BindView(R.id.fragment_main_nav_tab_layout)
     NavTabLayout tabLayout;
-    private MediaDetailPagerFragment mediaDetails;
 
     private ContributionsFragment contributionsFragment;
     private NearbyParentFragment nearbyParentFragment;

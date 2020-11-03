@@ -18,7 +18,7 @@ import fr.free.nrw.commons.R;
 
 
 public enum NavTab implements EnumCode {
-  CONTRIBUTIONS(R.string.contributions_fragment, R.drawable.ic_person_black_24dp) {
+  CONTRIBUTIONS(R.string.contributions_fragment, R.drawable.ic_baseline_person_24) {
     @NonNull
     @Override
     public Fragment newInstance() {
