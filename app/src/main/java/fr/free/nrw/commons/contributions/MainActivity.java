@@ -94,6 +94,9 @@ public class MainActivity  extends BaseActivity
     public boolean onSupportNavigateUp() {
         if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
             contributionsFragment.backButtonClicked();
+        } else {
+            onBackPressed();
+            showTabs();
         }
         return true;
     }
