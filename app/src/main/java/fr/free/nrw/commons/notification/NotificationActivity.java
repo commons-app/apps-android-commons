@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -52,6 +53,9 @@ public class NotificationActivity extends BaseActivity {
     ConstraintLayout no_notification;
     @BindView(R.id.no_notification_text)
     TextView noNotificationText;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
 
     @Inject
     NotificationController controller;
@@ -71,6 +75,14 @@ public class NotificationActivity extends BaseActivity {
                 .findFragmentByTag(TAG_NOTIFICATION_WORKER_FRAGMENT);
         initListView();
         setPageTitle();
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @SuppressLint("CheckResult")
