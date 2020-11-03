@@ -329,7 +329,7 @@
   <string name="nearby_fragment">근처</string>
   <string name="notifications">알림</string>
   <string name="display_nearby_notification">주변 알림 표시</string>
-  <string name="display_nearby_notification_summary">화상이 필요한 주변 장소를 보려면 여기를 두드리세요</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">화상이 필요한 주변 장소를 보려면 여기를 두드리세요</string>
   <string name="no_close_nearby">당신에게 가까운 주변 장소를 찾지 못했습니다</string>
   <string name="list_sheet">목록</string>
   <string name="step_count">단계 %2$d 중 %1$d</string>

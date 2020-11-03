@@ -415,7 +415,7 @@
   <string name="notifications">Benachrichtigungen</string>
   <string name="read_notifications">Benachrichtigungen (gelesen)</string>
   <string name="display_nearby_notification">Benachrichtigungen in der Nähe anzeigen</string>
-  <string name="display_nearby_notification_summary">Hier tippen, um Orte in der Nähe anzusehen, die Bilder benötigen.</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Hier tippen, um Orte in der Nähe anzusehen, die Bilder benötigen.</string>
   <string name="no_close_nearby">Keine Orte in deiner Umgebung gefunden.</string>
   <string name="list_sheet">Liste</string>
   <string name="storage_permission">Speicherberechtigung</string>

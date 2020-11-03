@@ -375,7 +375,7 @@
   <string name="contributions_fragment">Συνεισφορές</string>
   <string name="nearby_fragment">Κοντά σας</string>
   <string name="notifications">Ενημερώσεις</string>
-  <string name="display_nearby_notification_summary">Πατήστε εδώ για να δείτε την πιο κοντινή θέση που χρειάζεται εικόνες</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Πατήστε εδώ για να δείτε την πιο κοντινή θέση που χρειάζεται εικόνες</string>
   <string name="no_close_nearby">Δεν βρέθηκαν μέρη κοντά σας</string>
   <string name="list_sheet">Λίστα</string>
   <string name="nearby_notification_dismiss_message">Δεν θα δείτε την πιο κοντινή τοποθεσία που χρειάζεται επιπλέον εικόνες. Ωστόσο, μπορείτε να ενεργοποιήσετε ξανά αυτή την ειδοποίηση στις Ρυθμίσεις αν θέλετε.</string>

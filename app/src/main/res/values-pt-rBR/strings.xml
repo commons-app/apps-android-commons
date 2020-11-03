@@ -27,6 +27,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">Iniciando carregamentos</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Iniciando %1$d carregamento</item>
     <item quantity="other">Iniciando %1$d carregamentos</item>
@@ -71,6 +72,7 @@
   <string name="upload_failed">Arquivo não encontrado. Tente outro arquivo.</string>
   <string name="authentication_failed">A autenticação falhou, inicie uma nova sessão, por favor</string>
   <string name="uploading_started">Upload iniciado!</string>
+  <string name="uploading_queued">Fila de carregamento (modo de conexão limitada ativado)</string>
   <string name="upload_completed_notification_title">%1$s enviado!</string>
   <string name="upload_completed_notification_text">Toque para ver os seu upload</string>
   <string name="upload_progress_notification_title_start">Começando envio de %1$s</string>
@@ -425,7 +427,7 @@
   <string name="notifications">Notificações</string>
   <string name="read_notifications">Notificações (lidas)</string>
   <string name="display_nearby_notification">Exibir notificação próxima</string>
-  <string name="display_nearby_notification_summary">Toque aqui para ver o local mais próximo que precisa de fotos</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Toque aqui para ver o local mais próximo que precisa de fotos</string>
   <string name="no_close_nearby">Nenhum lugar próximo encontrado perto de você</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Permissão de Armazenamento</string>
@@ -666,4 +668,9 @@
   <string name="mapbox_telemetry">Recusar telemetria</string>
   <string name="telemetry_opt_out_summary">Enviar localização anônima e dados de uso para Mapbox ao usar o recurso nas proximidades</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Melhorar o mapa&lt;/a&gt;</string>
+  <string name="limited_connection_enabled">Modo de conexão limitada habilitado!</string>
+  <string name="limited_connection_disabled">Modo de conexão limitada desativado. Os carregamentos pendentes serão retomados agora.</string>
+  <string name="limited_connection">Conexão limitada</string>
+  <string name="statistics_quality">Imagens de qualidade</string>
+  <string name="quality_images_info">Imagens de qualidade são diagramas ou fotografias que atendem a certos padrões de qualidade (que são principalmente de natureza técnica) e são valiosos para projetos da Wikimedia</string>
 </resources>

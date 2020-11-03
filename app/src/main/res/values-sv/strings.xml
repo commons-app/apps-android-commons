@@ -19,6 +19,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">Startar uppladdningar</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Startar %1$d uppladdning</item>
     <item quantity="other">Startar %1$d uppladdningar</item>
@@ -63,6 +64,7 @@
   <string name="upload_failed">Filen hittades inte. Försök med en annan fil.</string>
   <string name="authentication_failed">Autentisering misslyckades, var god logga in igen</string>
   <string name="uploading_started">Överföring påbörjad!</string>
+  <string name="uploading_queued">Kölagd uppladdning (begränsat anslutningsläge har aktiverats)</string>
   <string name="upload_completed_notification_title">%1$s överförd!</string>
   <string name="upload_completed_notification_text">Tryck för att visa din uppladdning</string>
   <string name="upload_progress_notification_title_start">Påbörjar uppladdning av %1$s</string>
@@ -417,7 +419,7 @@
   <string name="notifications">Aviseringar</string>
   <string name="read_notifications">Aviseringar (lästa)</string>
   <string name="display_nearby_notification">Visa avisering för i närheten</string>
-  <string name="display_nearby_notification_summary">Tryck här för att se den närmaste platsen som behöver bilder</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Tryck här för att se den närmaste platsen som behöver bilder</string>
   <string name="no_close_nearby">Inga platser i närheten hittades som är nära dig</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Lagringsbehörighet</string>
@@ -658,4 +660,9 @@
   <string name="mapbox_telemetry">Inaktivera telemetri</string>
   <string name="telemetry_opt_out_summary">Skicka anonym plats- och användningsdata till Mapbox när funktionen I närheten används</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Förbättra den här kartan&lt;/a&gt;</string>
+  <string name="limited_connection_enabled">Begränsat anslutningsläge har aktiverats!</string>
+  <string name="limited_connection_disabled">Begränsat anslutningsläge har inaktiverats. Väntande uppladdningar kommer nu återupptas.</string>
+  <string name="limited_connection">Begränsad anslutning</string>
+  <string name="statistics_quality">Kvalitetsbilder</string>
+  <string name="quality_images_info">Kvalitetsbilder är diagram eller fotografier som möter vissa kvalitetsstandarder (som är mestadels tekniska) och är värdefulla för Wikimedia-projekt.</string>
 </resources>

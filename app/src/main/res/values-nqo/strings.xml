@@ -2,6 +2,7 @@
 <!-- Authors:
 * Lamine
 * Lancine.kounfantoh.fofana
+* MuratTheTurkish
 -->
 <resources>
   <plurals name="contributions_subtitle" fuzzy="true">
@@ -9,7 +10,9 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <string name="starting_multiple_uploads" fuzzy="true">{{Plural|ߟߊ߬ߝߟߐ߬ߟߌ=ߞߋߟߋ߲߫ %1$d ߟߊߦߟߍ߬|ߟߊߝߟߐߟߌ %1$d ߟߊ߬ߦߟߍ߬ߟߌ|ߟߊߝߟߐߟߌ %1$d ߟߎ߫ ߟߊߦߍ߬ߟߍ}}</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="other">ߞߋߟߋ߲߫ %1$d ߟߊߦߟߍ߬</item>
+  </plurals>
   <string name="title_activity_explore">ߛߏ߲߯ߓߊߟߌ</string>
   <string name="navigation_item_explore">ߛߏ߲߯ߓߊߟߌ</string>
   <string name="preference_category_appearance">ߟߊ߲ߞߣߍߡߊߟߌ</string>
@@ -111,12 +114,20 @@
   <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (ߣߐߙߑߝ߭ߍߗ߭)</string>
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (ߔߏߟߐ߲ߢ)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (ߙߏߡߊߣߌ߫</string>
+  <string name="tutorial_1_subtext">ߌ ߟߊ߫ ߖߌ߬ߦߊ߬ߓߍ ߦߋ߫ ߡߐ߱ ߟߎ߬ ߘߍ߬ߡߍ߲߬ ߠߊ߫ ߞߊ߬ߙߊ߲ ߡߊ߬ ߘߎߢߊ߫ ߝߊ߲߭ ߓߍ߯߹</string>
+  <string name="tutorial_2_text">ߖߊ߰ߣߌ߲߫ ߌ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ߫ ߟߎ߫ ߟߋ߬ ߟߊߦߟߍ߬ ߡߍ߲ ߠߎ߬ ߕߊ߬ߣߍ߲߫ ߥߟߊ߫ ߛߌ߲ߘߌߣߍ߲߫ ߦߴߌ ߖߍ߬ߘߍ ߓߟߏ߫:</string>
+  <string name="tutorial_2_subtext_1">ߛߎ߲ߞߎ߲ ߝߋ߲ ߠߎ߬ (ߝߙߋ ߟߎ߬߸ ߓߌߦߊ߲ ߠߎ߬߸ ߞߎ߬ߙߎ ߟߎ߬)</string>
+  <string name="tutorial_2_subtext_2">ߝߋ߲߫ ߠߊߓߊ߯ߙߕߊ߫ ߞߏߟߌߞߏߟߌ ߟߎ߬ (ߣߍ߰ߛߏ߸ ߛߌ߬ߛߌ߬ߞߎ߬ߟߎ߲߬ ߟߐ߬ߦߙߐ)</string>
   <string name="tutorial_3_text">ߌ ߞߊ߫ ߢߌ߲߬ ߠߎ߬ ߟߊߦߍ߬ߟߍ߫ ߖߊ߰ߣߌ߲߫:</string>
   <string name="tutorial_3_subtext_1">ߌ ߖߍ߬ߘߍ ߥߟߊ߫ ߌ ߕߋߙߌ ߘߏ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߎ߬</string>
   <string name="tutorial_3_subtext_2">ߌ ߣߌ߬ ߖߌ߬ߦߊ߬ߓߍ ߡߍ߲ ߠߎ߬ ߟߊߖߌ߰ ߟߴߌ ߞߎ߲߬ ߓߟߐߟߐ ߟߊ߫</string>
   <string name="tutorial_3_subtext_3">ߟߥߊ߬ߟߌ߬ߟߊ߲ ߕߌ߰ߟߊ߬ߡߊ ߢߊߝߘߍ ߖߌ߬ߦߊߕߊ߬ߣߍ߲</string>
   <string name="tutorial_4_text">ߟߊߒߡߊ߫ ߘߐ߫ ߡߍ߲ ߠߎ߬ ߟߊߦߟߍ߬ߕߊ ߦߋ߫:</string>
   <string name="tutorial_4_subtext_1">ߞߎ߲߬ߕߐ߮:ߛߌߘߑߣߋ߫ ߘߐ߬ߓߛߏ߬ߟߌ߬ ߟߎ</string>
+  <string name="welcome_wikipedia_text">ߌ ߟߊ߫ ߖߌ߬ߦߊ߬ߓߍ ߓߟߏߡߊߜߍ߲ ߞߍ߫. ߏ߬ ߦߋ߫ ߥߞߌߔߋߘߌߦߊ߫ ߞߎߡߘߊ ߟߎ߬ ߡߊߘߍ߬ߡߍ߲߫ ߠߊ߫ ߞߊ߬ ߣߊ߬ ߢߣߊߡߦߊ ߘߐ߫߹</string>
+  <string name="welcome_wikipedia_subtext">ߖߌ߬ߦߊ߬ߓߍ ߡߍ߲ ߠߎ߬ ߦߋ߫ ߥߞߌߔߋߘߌߦߊ߫ ߞߊ߲߬߸ ߏ߬ ߟߎ߬ ߝߘߊߣߍ߲߫ ߦߋ߫ ߥߞߌߡߋߘߌߦߊ߫ ߞߐߡߐ߲ߛ ߟߋ߬ ߟߊ߫.</string>
+  <string name="welcome_copyright_text">ߌ ߟߊ߫ ߖߌ߬ߦߊ߬ߓߍ ߦߋ߫ ߡߐ߱ ߟߎ߬ ߘߍ߬ߡߍ߲߬ ߠߊ߫ ߞߊ߬ߙߊ߲ ߡߊ߬ ߘߎߢߊ߫ ߝߊ߲߭ ߓߍ߯߹</string>
+  <string name="welcome_copyright_subtext">ߓߊߦߟߍߡߊ߲ ߤߊߞߍ ߖߐ߯ߙߊ߲ ߠߎ߬ ߡߊߕߊ߲߬ߞߊ߫ ߡߍ߲ ߠߎ߬ ߦߋ߫ ߓߟߐߟߐ ߞߊ߲߬߸ ߊ߬ ߣߌ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߟߍ߬ߣߍ߲ ߠߎ߬߸ ߊ߬ ߣߌ߫ ߞߝߊ߬ ߝߘߊ ߟߎ߬ ߞߊ߲߬߸ ߊ߬ ߣߌ߫.</string>
   <string name="welcome_final_text">ߌ ߦߴߊ߬ ߖߌ߰ ߟߊ߫ ߞߴߌ ߓߘߴߊ߬ ߛߐ߬ߘߐ߲߬؟</string>
   <string name="welcome_final_button_text">ߐ߲߬ߐ߲߬ߐ߲߫߹</string>
   <string name="welcome_help_button_text">ߞߎ߲߬ߠߊ߬ߝߎ߬ߟߋ߲߬ ߜߘߍ ߟߎ߬</string>
@@ -129,6 +140,11 @@
   <string name="detail_discussion_empty">ߘߊߘߐߖߊߥߏ߫ ߕߴߦߋ߲߬</string>
   <string name="detail_license_empty">ߕߌ߰ߦߊ߫ ߡߊߟߐ߲ߓߊߟߌ</string>
   <string name="menu_refresh">ߞߵߊ߬ ߟߊߛߎߡߊ߫</string>
+  <string name="storage_permission_title">ߟߊ߬ߡߙߊ߬ߟߌ ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ ߡߊߢߌߣߌ߲߫</string>
+  <string name="read_storage_permission_rationale">ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ ߡߊߢߌߣߌ߲ߠߌ߲: ߞߐߞߊ߲ߠߊ ߟߊ߬ߡߙߊ߬ߟߌ ߘߐߞߊ߬ߙߊ߲߬. ߟߥߊ߬ߟߌ߬ߟߊ߲ ߕߍ߫ ߣߊ߬ ߛߐ߲߬ ߠߊ߫ ߖߌ߬ߦߊ߬ߝߍ ߟߊߛߐ߬ߘߐ߲߬ ߠߊ߫ ߣߴߏ߬ ߕߍ߫.</string>
+  <string name="write_storage_permission_rationale">ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ ߡߊߢߌߣߌ߲ߠߌ߲: ߞߐߞߊ߲ߠߊ ߟߊ߬ߡߙߊ߬ߟߌ ߛߓߍ߫. ߟߥߊ߬ߟߌ߬ߟߊ߲ ߕߍ߫ ߛߋ߫ ߌ ߟߊ߫ ߖߌ߬ߦߊ߬ߕߊ߬ߟߊ߲/ߖߌ߬ߦߊ߬ߝߍ ߟߊߛߐ߬ߘߐ߲߬ ߠߊ߫ ߣߴߏ߬ ߕߍ߫.</string>
+  <string name="location_permission_title">ߘߌ߲߬ߞߌߙߊ ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ ߡߊߢߌߣߌ߲ߠߌ߲</string>
+  <string name="location_permission_rationale">ߢߣߊߕߊߟߌ ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ: ߕߋ߲߭ߕߋ߲߭ ߦߌߟߡߊ߫ ߦߌ߬ߘߊ߬ߣߍ߲ ߠߎ߬ ߘߌ߲߬ߞߌߙߊ ߟߊߛߐ߬ߘߐ߲߬.</string>
   <string name="ok">ߏ߬ߞߍ߫</string>
   <string name="title_activity_nearby">ߛߌ߰ߢߐ߲߰ ߦߙߐ ߟߎ߬</string>
   <string name="no_nearby">ߛߌ߰ߢߐ߲߰ ߦߙߐ߫ ߡߊ߫ ߛߐ߬ߘߐ߲߫</string>
@@ -189,6 +205,7 @@
   <string name="nearby_info_menu_commons_article">ߞߐߡߐ߲ ߞߐߕߐ߯ ߞߐߜߍ</string>
   <string name="nearby_info_menu_wikidata_article">ߥߞߌߘߕߊ ߞߎߡߘߊ</string>
   <string name="nearby_info_menu_wikipedia_article">ߥߞߌߔߋߘߌߦߊ ߞߎߡߘߊ</string>
+  <string name="title_info">ߛߓߍߢߊ߫ ߞߋߟߋ߲ ߡߍ߲ ߦߋ߫ ߞߐߕߐ߮ ߟߊ߫߸ ߡߍ߲ ߡߊߛߐ߫ ߕߐ߫ ߦߋ߫ ߞߐߕߐ߮ ߕߐ߮ ߘߌ߫. ߌ ߞߊ߫ ߞߊ߲߫ ߞߊ߬ ߞߊ߲ ߘߏ߲߬ߖߟߎ߬ߡߊ߬ߣߍ߲ ߠߋ߬ ߟߊߓߊ߯ߙߊ߫ ߞߣߍ ߟߎ߬ ߘߌ߫. ߌ ߞߊߣߊ߬ ߞߐߕߐ߮ ߥߊ߲߬ߥߊ߲ ߠߊߘߏ߲߬ ߘߋ߬</string>
   <string name="upload_problem_image_dark">ߖߌ߬ߦߊ߬ߓߍ ߢߟߊߝߌ߲߬ߣߍ߲߬ ߞߏߖߎ߯ߦߊ߫.</string>
   <string name="upload_problem_image_blurry">ߖߌ߬ߦߊ߬ߓߍ ߟߊߝߎ߬ߟߎ߲߬ߜߊ߬ߣߍ߲߫</string>
   <string name="upload_problem_image_duplicate">ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߦߋ߫ ߞߐߡߐ߲ ߞߊ߲߬ ߞߘߐ߬ߡߊ߲߫.</string>
@@ -262,8 +279,11 @@
   <string name="search_recent_header">ߢߌߣߌ߲ߣߌ߲߫ ߠߊߓߊ߲</string>
   <string name="provider_searches">ߢߌߣߌ߲ߠߌ߲߫ ߞߍߣߍ߲߫ ߞߎߘߊ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</string>
   <string name="error_loading_categories">ߝߎ߬ߕߎ߲߬ߕߌ ߓߌ߬ߟߊ߬ߣߍ߲߫ ߊ߬ ߘߐ߫ ߞߵߌ ߕߏ߫ ߦߌߟߡߊ ߟߎ߬ ߟߊߦߍ߬ߟߍ ߞߊ߲߬.</string>
+  <string name="error_loading_depictions">ߝߎ߬ߕߎ߲߬ߕߌ ߓߘߊ߫ ߓߌ߬ߟߵߊ߬ ߘߐ߫ ߞߊ߬ ߦߌ߬ߘߊ߬ߟߌ ߟߊߢߎ߲ ߕߴߌ ߘߐ߫.</string>
+  <string name="error_loading_subcategories">ߝߎ߬ߕߎ߲߬ߕߌ ߓߌ߬ߟߊ߬ߣߍ߲߫ ߊ߬ ߘߐ߫ ߞߵߌ ߕߏ߫ ߦߌߟߡߊ ߟߎ߬ ߟߊߦߍ߬ߟߍ ߞߊ߲߬.</string>
   <string name="search_tab_title_categories">ߦߌߟߡߊ ߟߎ߬</string>
   <string name="search_tab_title_depictions">ߝߌ߬ߛߌ</string>
+  <string name="explore_tab_title_featured">ߡߊߦߋߙߋ߲ߣߍ߲</string>
   <string name="explore_tab_title_mobile">ߟߊ߬ߦߟߍ߬ߣߍ߲ ߠߎ߬ ߜߋߟߋ߲ߜߋߟߋ߲ ߠߊ߫</string>
   <string name="successful_wikidata_edit">ߖߌ߬ߦߊ߬ߓߍ ߓߌ߬ߟߊ߬ߣߍ߲߬ ߦߋ߫ %1$s ߟߊ߫ ߥߞߌߘߕߊ ߛߌߟߊ ߟߋ߬ ߝߍ߬߹</string>
   <string name="menu_set_wallpaper">ߊ߬ ߓߌ߬ߟߊ߬ ߘߊ߬ߣߊ߲߬ߥߟߊ ߟߊ߫.</string>
@@ -332,6 +352,7 @@
   <string name="check_category_success_message">ߦߌߟߡߊ ߝߛߍ߬ߝߛߍ߬ߟߌ ߡߊߢߌ߬ߣߌ߲߬ߞߊ߬ߣߍ߲߫ %1$s ߦߋ߫</string>
   <string name="check_category_failure_message">ߦߌߟߡߊ ߝߛߍ߬ߝߛߍ߬ߟߌ ߕߍ߫ ߛߐ߲߬ ߡߊߢߌ߬ߣߌ߲߬ߞߊ߬ ߟߊ߫ %1$s ߦߋ߫</string>
   <string name="check_category_toast">ߦߌߟߡߊ ߝߛߍ߬ߝߛߍ߬ߟߌ ߡߊߢߌ߬ߣߌ߲߬ߞߊ߬ߣߍ߲߫ %1$s ߦߋ߫</string>
+  <string name="nominate_for_deletion_edit_file_page">ߗߋߛߓߍ߫ ߖߏ߰ߛߌ߬ߣߍ߲ ߠߎ߬ ߝߙߊ߬ ߞߐߕߐ߮ ߟߊ߫</string>
   <string name="nominate_for_deletion_done">ߊ߬ ߓߘߊ߫ ߞߍ߫</string>
   <string name="nominate_for_deletion_edit_deletion_request_log">ߞߐߕߐ߮ ߟߊߘߏ߲߬ߠߌ߲ ߖߏ߬ߛߌ߬ߟߌ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߘߊ߲ߖߐ ߘߐ߫</string>
   <string name="nominate_for_deletion_create_deletion_request">ߖߏ߰ߛߌ߬ߟߌ ߡߊ߬ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߞߐߜߍߙߋ߲ ߛߌ߲ߘߟߌ</string>
@@ -414,4 +435,7 @@
   <string name="wikipedia_instructions_step_1">߁߭. ߥߞߌߛߓߍߟߌ ߢߌ߲߬ ߠߎ߬ ߟߊߓߊ߯ߙߊ߫:</string>
   <string name="wikipedia_instructions_step_2">߂.ߟߊ߬ߛߙߋ߬ߦߊ߬ߟߌ ߛߐ߲߬ߞߌ߲ ߓߍߣߊ߬ ߥߞߌߔߋߘߌߦߊ ߞߎߡߘߊ ߘߊߦߟߍ߬</string>
   <string name="wikipedia_instructions_step_7">߇߲. ߞߎߡߘߊ ߟߊߥߊ߲߬ߞߊ߫</string>
+  <string name="pause">ߊ߬ ߟߊߟߐ߬</string>
+  <string name="paused">ߊ߬ ߓߘߊ߫ ߟߊߟߐ߬</string>
+  <string name="achievements_tab_title">ߞߎ߲߬ߝߊ߰ߟߌ</string>
 </resources>

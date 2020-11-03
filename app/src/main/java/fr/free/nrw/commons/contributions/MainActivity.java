@@ -242,7 +242,7 @@ public class MainActivity  extends BaseActivity
                 }
                 contributionsFragment.campaignView.setVisibility(View.VISIBLE);
             } else {
-                finish();
+                super.onBackPressed();
             }
         } else if (nearbyParentFragment != null && activeFragment == ActiveFragment.NEARBY) {
             // Means that nearby fragment is visible

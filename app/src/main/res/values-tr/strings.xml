@@ -16,6 +16,8 @@
 * Okkerem
 * Rapsar
 * Sayginer
+* Sezgin İbiş
+* Stonecy
 * Sucsuzz
 * TmY e12
 * ToprakM
@@ -32,6 +34,7 @@
     <item quantity="one">(%1$d</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">Yüklemeye Başlıyor</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">%1$d yüklenmeye başlanıyor</item>
     <item quantity="other">%1$d yüklenmeye başlanıyor</item>
@@ -76,6 +79,7 @@
   <string name="upload_failed">Dosya bulunamadı. Lütfen başka bir dosya deneyin.</string>
   <string name="authentication_failed">Kimlik doğrulama başarısız oldu, lütfen tekrar giriş yapın</string>
   <string name="uploading_started">Yükleme başladı!</string>
+  <string name="uploading_queued">Yükleme kuyruğunda (sınırlı bağlantı modu etkin)</string>
   <string name="upload_completed_notification_title">%1$s yüklendi!</string>
   <string name="upload_completed_notification_text">Yüklemenizi görüntülemek için hafifçe tıklayın</string>
   <string name="upload_progress_notification_title_start">%1$s yüklemesine başlanıyor</string>
@@ -145,7 +149,7 @@
   <string name="no_uploads_yet">Henüz yüklenmiş hiç fotoğrafınız yok.</string>
   <string name="menu_retry_upload">Tekrar dene</string>
   <string name="menu_cancel_upload">İptal</string>
-  <string name="media_upload_policy">Bu resmi göndererek bunun kendi çalışmam olduğunu, telif hakkıyla korunan materyal veya özçekim (selfie) içermediğini ve diğer &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons politikalarına&lt;/a&gt; uyduğunu beyan ederim.</string>
+  <string name="media_upload_policy">Bu resmi göndererek bunun kendi çalışmam olduğunu, telif hakkıyla korunan materyal veya özçekim (selfie) içermediğini ve diğer &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/tr\"&gt;Wikimedia Commons politikalarına&lt;/a&gt; uyduğunu beyan ederim.</string>
   <string name="menu_download">İndir</string>
   <string name="preference_license">Varsayılan Lisans</string>
   <string name="use_previous">Önceki başlığı ve açıklamayı kullan</string>
@@ -430,7 +434,7 @@
   <string name="notifications">Bildirimler</string>
   <string name="read_notifications">Bildirimler (okunmuş)</string>
   <string name="display_nearby_notification">Yakınımdakiler bildirimi görüntüle</string>
-  <string name="display_nearby_notification_summary">Size en yakın olan ve resme ihtiyaç duyan yerleri görmek için dokunun</string>
+  <string name="display_nearby_notification_summary">Resimlere ihtiyaç duyan en yakın yer için uygulama içi bildirim göster</string>
   <string name="no_close_nearby">Size yakın bir yer bulunamadı</string>
   <string name="list_sheet">Liste</string>
   <string name="storage_permission">Depolama İzni</string>
@@ -643,7 +647,7 @@
   <string name="wikipedia_instructions_step_3">3. Maddenizde resminiz için uygun bir bölüm bulun</string>
   <string name="wikipedia_instructions_step_4">4. Bu bölüm için Düzenle simgesine (kurşun kalem gibi) tıklayın.</string>
   <string name="wikipedia_instructions_step_5">5. Vikimetin dosyasını uygun yere yapıştırın.</string>
-  <string name="wikipedia_instructions_step_6">6. Gerekirse vikimetini uygun konumlandırma için düzenleyin. Daha fazla bilgi için &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;buraya&lt;/a&gt; bakın.</string>
+  <string name="wikipedia_instructions_step_6">6. Gerekirse vikimetini uygun konumlandırma için düzenleyin. Daha fazla bilgi için &lt;a href=\"https://tr.wikipedia.org/wiki/Vikipedi:Biçem_el_kitabı/Görseller#Görsel_nasıl_yerleştirilir\"&gt;buraya&lt;/a&gt; bakın.</string>
   <string name="wikipedia_instructions_step_7">7. Maddeyi yayınlayın</string>
   <string name="copy_wikicode_to_clipboard">Vikikodu panoya kopyala</string>
   <string name="pause">duraklat</string>
@@ -671,4 +675,9 @@
   <string name="mapbox_telemetry">Telemetriyi Devre Dışı Bırak</string>
   <string name="telemetry_opt_out_summary">Yakındaki özelliğini kullanırken anonim konum ve kullanım verilerini Mapbox\'a gönderin</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Bu haritayı geliştirin&lt;/a&gt;</string>
+  <string name="limited_connection_enabled">Sınırlı bağlantı modu etkinleştirildi!</string>
+  <string name="limited_connection_disabled">Sınırlı bağlantı modu devre dışı bırakıldı. Bekleyen yüklemeler şimdi devam ettirilecek.</string>
+  <string name="limited_connection">Sınırlı Bağlantı</string>
+  <string name="statistics_quality">Kaliteli Resimler</string>
+  <string name="quality_images_info">Kaliteli resimler, belirli kalite standartlarını (doğası gereği çoğunlukla teknik olan) karşılayan ve Wikimedia projeleri için değerli olan diyagramlar veya fotoğraflardır.</string>
 </resources>

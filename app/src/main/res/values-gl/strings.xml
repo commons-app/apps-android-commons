@@ -395,7 +395,7 @@
   <string name="notifications">Notificacións</string>
   <string name="read_notifications">Notificacións (lidas)</string>
   <string name="display_nearby_notification">Amosar notificacións de proximidade</string>
-  <string name="display_nearby_notification_summary">Prema aquí para ver o lugar máis preto que necesita fotos</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Prema aquí para ver o lugar máis preto que necesita fotos</string>
   <string name="no_close_nearby">Non se atoparon lugares preto de ti</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Permiso de almacenamento</string>

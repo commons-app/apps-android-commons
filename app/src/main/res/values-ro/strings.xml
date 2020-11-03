@@ -416,7 +416,7 @@
   <string name="notifications">Notificări</string>
   <string name="read_notifications">Notificări (citite)</string>
   <string name="display_nearby_notification">Afișați notificarea din apropiere</string>
-  <string name="display_nearby_notification_summary">Apăsați aici pentru a vedea cel mai apropiat loc care are nevoie de imagini</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Apăsați aici pentru a vedea cel mai apropiat loc care are nevoie de imagini</string>
   <string name="no_close_nearby">Nu există locuri apropiate găsite în apropierea dvs.</string>
   <string name="list_sheet">Listă</string>
   <string name="storage_permission">Permisiune de stocare</string>

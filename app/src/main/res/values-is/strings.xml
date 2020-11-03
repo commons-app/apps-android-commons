@@ -379,7 +379,7 @@
   <string name="notifications">Tilkynningar</string>
   <string name="read_notifications">Tilkynningar (lesnar)</string>
   <string name="display_nearby_notification">Birta tilkynningu um nágrenni</string>
-  <string name="display_nearby_notification_summary">Ýttu hér til að sjá nálægasta staðinn sem þarfnast mynda</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Ýttu hér til að sjá nálægasta staðinn sem þarfnast mynda</string>
   <string name="no_close_nearby">Engir staðir fundust í nágrenninu</string>
   <string name="list_sheet">Listi</string>
   <string name="storage_permission">Heimild á gagnageymslu</string>

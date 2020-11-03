@@ -387,7 +387,7 @@
   <string name="notifications">Notifeghe</string>
   <string name="read_notifications">Notifeghe (archiviae)</string>
   <string name="display_nearby_notification">Fa vedare notifega cuà rente</string>
-  <string name="display_nearby_notification_summary">Struca cuà par vardare el posto pì rente che ghe serve łe imajini</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Struca cuà par vardare el posto pì rente che ghe serve łe imajini</string>
   <string name="no_close_nearby">Nisun posto cuà rente de ti catà</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Autorixasion de archiviasion</string>

@@ -344,6 +344,7 @@
   <string name="error_loading_subcategories">Si è verificato un errore durante il caricamento delle sottocategorie.</string>
   <string name="search_tab_title_media">Media</string>
   <string name="search_tab_title_categories">Categorie</string>
+  <string name="search_tab_title_depictions">Elementi</string>
   <string name="explore_tab_title_featured">In vetrina</string>
   <string name="explore_tab_title_mobile">Caricato tramite dispositivi mobili</string>
   <string name="successful_wikidata_edit">Immagine aggiunta a %1$s su Wikidata!</string>
@@ -406,7 +407,7 @@
   <string name="notifications">Notifiche</string>
   <string name="read_notifications">Notifiche (lette)</string>
   <string name="display_nearby_notification">Mostra notifica nelle vicinanze</string>
-  <string name="display_nearby_notification_summary">Tocca qui per vedere il luogo più vicino che ha bisogno di immagini</string>
+  <string name="display_nearby_notification_summary">Mostra notifiche nell\'applicazione per il luogo più vicino che ha bisogno di immagini</string>
   <string name="no_close_nearby">Nessun posto nelle vicinanze trovato vicino a te</string>
   <string name="list_sheet">Elenco</string>
   <string name="storage_permission">Autorizzazione di archiviazione</string>
@@ -461,6 +462,7 @@
   <string name="bad_token_error_proposed_solution">Caricamento non riuscito a causa di problemi con il token di modifica. Si prega di provare a disconnettersi e riconnettersi nuovamente.</string>
   <string name="error_processing_image">Si è verificato un errore durante l\'elaborazione dell\'immagine. Per favore riprova!</string>
   <string name="nominate_for_deletion_done">Fatto</string>
+  <string name="notsure">Non sono sicuro</string>
   <string name="send_thank_send">Invia ringraziamento</string>
   <string name="send_thank_notification_title">Invia ringraziamento</string>
   <string name="send_thank_toast">Inviando ringraziamento per %1$s</string>
@@ -487,6 +489,7 @@
   <string name="previous_button_tooltip_message">Clicca per riusare il titolo e la descrizione dell\'immagine precedente e adattarli all\'immagine attuale.</string>
   <string name="skip_image">Salta questa immagine</string>
   <string name="exif_tag_name_author">Autore</string>
+  <string name="exif_tag_name_copyright">Copyright</string>
   <string name="exif_tag_name_location">Posizione</string>
   <string name="exif_tag_name_cameraModel">Modello fotocamera</string>
   <string name="exif_tag_name_lensModel">Modello di lente</string>
@@ -515,6 +518,9 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Altro</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Perché sì</string>
+  <string name="category_edit_helper_show_edit_title">Aggiorna la categoria</string>
+  <string name="category_edit_helper_show_edit_title_success">Successo</string>
+  <string name="category_edit_button_text">Aggiorna le categorie</string>
   <string name="share_image_via">Condividi immagine tramite</string>
   <string name="no_achievements_yet">Non hai fatto alcun contributo ancora</string>
   <string name="account_created">Utenza creata!</string>
@@ -537,6 +543,7 @@
   <string name="theme_dark_name">Scuro</string>
   <string name="theme_light_name">Chiaro</string>
   <string name="load_more">Caricane ancora</string>
+  <string name="edit_category">Modifica le categorie</string>
   <string name="add_picture_to_wikipedia_article_title">Aggiungi immagine a Wikipedia</string>
   <string name="add_picture_to_wikipedia_article_desc">Vuoi aggiungere questa immagine alla voce di Wikipedia in lingua %1$s?</string>
   <string name="add_picture_to_wikipedia_instructions_title">Istruzioni</string>
@@ -560,10 +567,15 @@
   <string name="count_prefix">Conteggio:</string>
   <string name="leaderboard_column_rank">Posizione</string>
   <string name="leaderboard_column_user">Utente</string>
+  <string name="leaderboard_column_count">Conteggio</string>
+  <string name="setting_avatar_dialog_title">Imposta come avatar della classifica</string>
+  <string name="setting_avatar_dialog_message">Sto impostando come avatar, attendi</string>
+  <string name="avatar_set_successfully">Avatar set</string>
   <string name="leaderboard_yearly">Annuale</string>
   <string name="leaderboard_weekly">Settimanale</string>
   <string name="leaderboard_all_time">Intero periodo</string>
   <string name="leaderboard_upload">Carica</string>
   <string name="leaderboard_nearby">Nelle vicinanze</string>
+  <string name="leaderboard_used">Usa</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Migliora questa mappa&lt;/a&gt;</string>
 </resources>

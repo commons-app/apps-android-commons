@@ -396,7 +396,7 @@
   <string name="notifications">Varsler</string>
   <string name="read_notifications" fuzzy="true">Varsler (arkivert)</string>
   <string name="display_nearby_notification">Vis varsel for steder i nærheten</string>
-  <string name="display_nearby_notification_summary">Trykk her for å se det nærmeste stedet som trenger bilder</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Trykk her for å se det nærmeste stedet som trenger bilder</string>
   <string name="no_close_nearby">Ingen steder funnet i nærheten av deg</string>
   <string name="list_sheet">Liste</string>
   <string name="storage_permission">Lagringstillatelse</string>

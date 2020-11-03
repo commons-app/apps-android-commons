@@ -413,7 +413,7 @@
   <string name="notifications">Upozornenia</string>
   <string name="read_notifications">Upozornenia (prečítané)</string>
   <string name="display_nearby_notification">Zobraziť notifikáciu o miestach v okolí</string>
-  <string name="display_nearby_notification_summary">Kliknutím sem sa zobrazí najbližšie miesto, ktoré potrebuje obrázky</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Kliknutím sem sa zobrazí najbližšie miesto, ktoré potrebuje obrázky</string>
   <string name="no_close_nearby">Vo vašej blízkosti neboli nájdené žiadne miesta</string>
   <string name="list_sheet">Zoznam</string>
   <string name="storage_permission">Povolenie k prístupu k úložnému priestoru</string>

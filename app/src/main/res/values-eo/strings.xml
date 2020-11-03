@@ -390,7 +390,7 @@
   <string name="notifications">Sciigoj</string>
   <string name="read_notifications" fuzzy="true">Sciigoj (enarkivigitaj)</string>
   <string name="display_nearby_notification">Montri sciigojn pri apudaĵoj</string>
-  <string name="display_nearby_notification_summary">Tuŝetu ĉi tie por vidi apudan lokon kiu bezonas bildojn</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Tuŝetu ĉi tie por vidi apudan lokon kiu bezonas bildojn</string>
   <string name="no_close_nearby">Neniu proksima loko trovita ĉe vi.</string>
   <string name="list_sheet">Listo</string>
   <string name="storage_permission">Permeso por Konservado</string>

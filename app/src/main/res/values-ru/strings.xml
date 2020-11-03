@@ -12,6 +12,7 @@
 * Iluvatar
 * Kaganer
 * MaxBioHazard
+* Megakott
 * Monirec
 * Movses
 * Nitch
@@ -449,7 +450,7 @@
   <string name="notifications">Уведомления</string>
   <string name="read_notifications">Уведомления (читать)</string>
   <string name="display_nearby_notification">Уведомлять меня о местах поблизости</string>
-  <string name="display_nearby_notification_summary">Нажмите здесь, чтобы увидеть ближайшее место без изображений</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Нажмите здесь, чтобы увидеть ближайшее место без изображений</string>
   <string name="no_close_nearby">Не найдено мест поблизости</string>
   <string name="list_sheet">Список</string>
   <string name="storage_permission">Разрешение для использования внешнего носителя</string>
@@ -692,4 +693,6 @@
   <string name="mapbox_telemetry">Отключение телеметрии</string>
   <string name="telemetry_opt_out_summary">Отправлять анонимизированные данные о местоположении и использовании в Mapbox при применении функции «Поблизости»</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Улучшить эту карту&lt;/a&gt;</string>
+  <string name="statistics_quality">Качественные изображения</string>
+  <string name="quality_images_info">Качественные изображения - это диаграммы или фотографии, которые соответствуют определенным стандартам качества (которые в основном носят технический характер) и представляют ценность для проектов Викимедиа</string>
 </resources>

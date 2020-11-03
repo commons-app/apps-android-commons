@@ -2,6 +2,7 @@
 <!-- Authors:
 * Adithyak1997
 * Akhilan
+* Jacob.jose
 * Kiran Gopi
 * Praveenp
 * Santhosh.thottingal
@@ -25,8 +26,8 @@
     <item quantity="other">%1$d അപ്‌ലോഡുകൾ</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">ചിത്രം %1$s പ്രകാരം അനുമതി നൽകപ്പെടുന്നതാണ്</string>
-  <string name="title_activity_explore">പര്യവേക്ഷണം</string>
-  <string name="navigation_item_explore">പര്യവേക്ഷണം</string>
+  <string name="title_activity_explore">പര്യവേഷണം</string>
+  <string name="navigation_item_explore">പര്യവേഷണം</string>
   <string name="preference_category_appearance">ദൃശ്യരൂപം</string>
   <string name="preference_category_general">സാർവത്രികം</string>
   <string name="preference_category_feedback">പ്രതികരണം</string>

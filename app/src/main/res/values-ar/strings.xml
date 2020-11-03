@@ -449,7 +449,7 @@
   <string name="notifications">الإشعارات</string>
   <string name="read_notifications">الإخطارات (مقروءة)</string>
   <string name="display_nearby_notification">عرض الإخطار القريب</string>
-  <string name="display_nearby_notification_summary">انقر هنا لرؤية أقرب مكان يحتاج إلى صور</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">انقر هنا لرؤية أقرب مكان يحتاج إلى صور</string>
   <string name="no_close_nearby">لم يتم العثور على أماكن قريبة بالقرب منك</string>
   <string name="list_sheet">قائمة</string>
   <string name="storage_permission">سماح التخزين</string>
@@ -644,4 +644,5 @@
   <string name="add_picture_to_wikipedia_instructions_title">التعليمات</string>
   <string name="confirm">تأكيد</string>
   <string name="instructions_title">التعليمات</string>
+  <string name="limited_connection">اتصال محدود</string>
 </resources>

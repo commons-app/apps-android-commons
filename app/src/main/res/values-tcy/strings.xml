@@ -369,7 +369,7 @@
   <string name="notifications">ಅಧಿಸೂಚನೆಲು</string>
   <string name="read_notifications" fuzzy="true">ಅಧಿಸೂಚನೆಲು(ಅನುರಕ್ಷಿತ)</string>
   <string name="display_nearby_notification">ಕೈತಲ್ದ ಅಧಿಸೂಚನೆ ತೋಜಾಲೆ</string>
-  <string name="display_nearby_notification_summary">ಚಿತ್ರ ಬೋಡಾಯಿನ ಕೈತಲ್ದ ಜಾಗ ತೂವರೆ ಮುಲ್ಪ ತಟ್ಟ್\'ಲೆ</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">ಚಿತ್ರ ಬೋಡಾಯಿನ ಕೈತಲ್ದ ಜಾಗ ತೂವರೆ ಮುಲ್ಪ ತಟ್ಟ್\'ಲೆ</string>
   <string name="no_close_nearby">ಇರೆನ ಮುಟ್ಟೊಡು ಕೈತಲ್ದ ಜಾಗೊಲು ತಿಕ್ಕುಜಾ.</string>
   <string name="list_sheet">ಪಟ್ಟಿ</string>
   <string name="storage_permission">ಶೇಖರಣ ಅನುಮತಿ</string>

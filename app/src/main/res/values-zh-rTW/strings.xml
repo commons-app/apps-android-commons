@@ -26,6 +26,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">開始上傳</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">開始 %1$d 次上傳</item>
     <item quantity="other">開始 %1$d 次上傳</item>
@@ -70,6 +71,7 @@
   <string name="upload_failed">找不到檔案。請試試看其它檔案。</string>
   <string name="authentication_failed">身份驗證失敗，請重新登入</string>
   <string name="uploading_started">開始上傳！</string>
+  <string name="uploading_queued">上傳已排定（限制連線模式已啟用）</string>
   <string name="upload_completed_notification_title">已上傳%1$s！</string>
   <string name="upload_completed_notification_text">輕觸來檢視您上傳的項目</string>
   <string name="upload_progress_notification_title_start">開始上傳%1$s</string>
@@ -424,7 +426,7 @@
   <string name="notifications">通知</string>
   <string name="read_notifications">通知（已讀）</string>
   <string name="display_nearby_notification">顯示附近地點通知</string>
-  <string name="display_nearby_notification_summary">在此輕觸來查看缺少圖片的最近地點</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">在此輕觸來查看缺少圖片的最近地點</string>
   <string name="no_close_nearby">查無靠近您的附近地點</string>
   <string name="list_sheet">清單</string>
   <string name="storage_permission">存儲裝置權限</string>
@@ -478,7 +480,7 @@
   <string name="display_campaigns">顯示活動</string>
   <string name="display_campaigns_explanation">查看進行中的活動</string>
   <string name="nearby_campaign_dismiss_message">您不會再看到活動。然而，若您有意的話您可以在設定裡重新啟動此通知。</string>
-  <string name="this_function_needs_network_connection">此功能需要連接到網路，請檢查您的連接設定。</string>
+  <string name="this_function_needs_network_connection">此功能需要連接到網路，請檢查您的連線設定。</string>
   <string name="bad_token_error_proposed_solution">出於編輯訊標問題導致上傳失敗。請重試登入後再登入。</string>
   <string name="error_processing_image">處理圖片時出現錯誤。請重試！</string>
   <string name="getting_edit_token">取得編輯用訊標</string>
@@ -665,4 +667,9 @@
   <string name="mapbox_telemetry">遙測退出</string>
   <string name="telemetry_opt_out_summary">當使用附近功能時，將匿名位置與使用情況資料發送到 Mapbox</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;改善此地圖&lt;/a&gt;</string>
+  <string name="limited_connection_enabled">限制連線模式已啟用！</string>
+  <string name="limited_connection_disabled">限制連線模式已停用。待定上傳將會立刻恢復。</string>
+  <string name="limited_connection">限制連線</string>
+  <string name="statistics_quality">品質圖片</string>
+  <string name="quality_images_info">品質圖片是符合某些品質標準（本質上大多是技術性方面）的圖表或照片，並且對於維基媒體計劃很有價值</string>
 </resources>

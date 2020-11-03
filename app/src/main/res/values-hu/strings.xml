@@ -7,6 +7,7 @@
 * Dj
 * Einstein2
 * Envlh
+* Hanna Tardos
 * MeskoBalazs
 * Misibacsi
 * Máté
@@ -25,6 +26,7 @@
     <item quantity="one">%1$d feltöltés</item>
     <item quantity="other">%1$d feltöltés</item>
   </plurals>
+  <string name="starting_uploads">Feltöltések indítása</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">%1$d feltöltés kezdése</item>
     <item quantity="other">%1$d feltöltés kezdése</item>
@@ -69,6 +71,7 @@
   <string name="upload_failed">A fájl nem található. Próbálkozz másik fájllal.</string>
   <string name="authentication_failed">Sikertelen hitelesítés, kérlek jelentkezz be újra</string>
   <string name="uploading_started">Feltöltés elindult.</string>
+  <string name="uploading_queued">Feltöltések késleltetése (korlátozott kapcsolat-mód bekapcsolva)</string>
   <string name="upload_completed_notification_title">%1$s feltöltve.</string>
   <string name="upload_completed_notification_text">Feltöltés megtekintése</string>
   <string name="upload_progress_notification_title_start">Feltöltés indul: %1$s</string>
@@ -552,4 +555,8 @@
   <string name="theme_default_name">Rendszerbeállítás követése</string>
   <string name="theme_dark_name">Sötét</string>
   <string name="theme_light_name">Világos</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Térkép fejlesztése&lt;/a&gt;</string>
+  <string name="limited_connection_enabled">Korlátozott kapcsolat-mód bekapcsolva!</string>
+  <string name="limited_connection_disabled">Korlátozott kapcsolat-mód kikapcsolva. Függőben lévő feltöltések folytatása.</string>
+  <string name="limited_connection">Korlátozott kapcsolat</string>
 </resources>

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -36,6 +37,9 @@ public final class OkHttpConnectionFactory {
         return new OkHttpClient.Builder()
                 .cookieJar(SharedPreferenceCookieManager.getInstance())
                 .cache(NET_CACHE)
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
                 .addInterceptor(getLoggingInterceptor())
                 .addInterceptor(new UnsuccessfulResponseInterceptor())
                 .addInterceptor(new CommonHeaderRequestInterceptor())

@@ -434,7 +434,7 @@
   <string name="notifications">Сповіщення</string>
   <string name="read_notifications">Сповіщення (прочитані)</string>
   <string name="display_nearby_notification">Повідомляти мене про місця поблизу</string>
-  <string name="display_nearby_notification_summary">Торкніться тут, щоб побачити найближчі місця, які ще не мають зображень</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Торкніться тут, щоб побачити найближчі місця, які ще не мають зображень</string>
   <string name="no_close_nearby">Не знайдено місць поблизу Вас</string>
   <string name="list_sheet">Список</string>
   <string name="storage_permission">Дозвіл на зберігання</string>

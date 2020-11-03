@@ -15,6 +15,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">Почеток на подигањата</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Започнувам %1$d подигање</item>
     <item quantity="other">Започнувам %1$d подигања</item>
@@ -59,6 +60,7 @@
   <string name="upload_failed">Не ја пронајдов податотеката. Пробајте со друга.</string>
   <string name="authentication_failed">Заверката не успеа. Најавете се повторно.</string>
   <string name="uploading_started">Подигањето започна</string>
+  <string name="uploading_queued">Подигањето е во редица (овозможен режимот на ограничена врска)</string>
   <string name="upload_completed_notification_title">Податотеката „%1$s“ е подигната!</string>
   <string name="upload_completed_notification_text">Допрете за да го погледате подигањето</string>
   <string name="upload_progress_notification_title_start">Почнувам со подигањето на „%1$s“</string>
@@ -413,7 +415,7 @@
   <string name="notifications">Известувања</string>
   <string name="read_notifications">Известувања (прочитани)</string>
   <string name="display_nearby_notification">Известувај ме за места во близина</string>
-  <string name="display_nearby_notification_summary">Допрете тука за да го видите најблиското место без слика</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Допрете тука за да го видите најблиското место без слика</string>
   <string name="no_close_nearby">Не најдов места во ваша близина</string>
   <string name="list_sheet">Список</string>
   <string name="storage_permission">Дозвола за складирање</string>
@@ -654,4 +656,9 @@
   <string name="mapbox_telemetry">Откажување од телеметрија</string>
   <string name="telemetry_opt_out_summary">Испраќајте анонимизирани податоци за место и употреба на Mapbox кога ја коиристите можноста „Во близина“</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Подобрете ја картава&lt;/a&gt;</string>
+  <string name="limited_connection_enabled">Овозможен режимот на ограничена врска.</string>
+  <string name="limited_connection_disabled">Режимот на ограничена врска е оневозоможен. Сега ќе продолжат преземањата во исчекување.</string>
+  <string name="limited_connection">Ограничена врска</string>
+  <string name="statistics_quality">Квалитетни слики</string>
+  <string name="quality_images_info">Квалитетните слики се дијаграми или фотографии кои задоволуваат извесни стандарди за квалитет (кои се од претежно техничка природа) или имаат вредност за Викимедиините проекти</string>
 </resources>

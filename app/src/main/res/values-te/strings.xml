@@ -393,7 +393,7 @@
   <string name="notifications">గమనింపులు</string>
   <string name="read_notifications" fuzzy="true">గమనింపులు (ఆర్కైవు చేసినవి)</string>
   <string name="display_nearby_notification">చుట్టుపక్కల గమనింపును చూపించు</string>
-  <string name="display_nearby_notification_summary">బొమ్మలు అవసరమైన చుట్టుపక్కల స్థలాన్ని చూసేందుకు ఇక్కడ నొక్కండి</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">బొమ్మలు అవసరమైన చుట్టుపక్కల స్థలాన్ని చూసేందుకు ఇక్కడ నొక్కండి</string>
   <string name="no_close_nearby">మీ చుట్టుపక్కల స్థలాలేమీ కనబడలేదు</string>
   <string name="list_sheet">జాబితా</string>
   <string name="storage_permission">స్టోరేజి అనుమతి</string>

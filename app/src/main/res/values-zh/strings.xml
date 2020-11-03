@@ -39,6 +39,7 @@
     <item quantity="one">%1$d次上传</item>
     <item quantity="other">%1$d次上传</item>
   </plurals>
+  <string name="starting_uploads">开始上传</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">开始%1$d次上传</item>
     <item quantity="other">开始%1$d次上传</item>
@@ -125,6 +126,8 @@
   <string name="enable_gps">启用GPS</string>
   <string name="contributions_subtitle_zero">尚无上传</string>
   <string name="categories_not_found">没有找到匹配%1$s的分类</string>
+  <string name="no_child_classes">%1$s没有子类别</string>
+  <string name="no_parent_classes">%1$s没有父类别</string>
   <string name="categories_skip_explanation">添加分类使您的图像更容易在维基共享资源被找到。开始输入以添加分类。</string>
   <string name="categories_activity_title">分类</string>
   <string name="title_activity_settings">设置</string>
@@ -194,7 +197,7 @@
   <string name="welcome_final_button_text">是！</string>
   <string name="welcome_help_button_text">更多信息</string>
   <string name="detail_panel_cats_label">分类</string>
-  <string name="detail_panel_cats_loading">正在载入…</string>
+  <string name="detail_panel_cats_loading">正在载入……</string>
   <string name="detail_panel_cats_none">未选择</string>
   <string name="detail_caption_empty">无字幕</string>
   <string name="detail_description_empty">没有说明</string>
@@ -399,6 +402,7 @@
   <string name="nominate_delete">提名删除</string>
   <string name="delete">删除</string>
   <string name="Achievements">成就</string>
+  <string name="Profile">个人资料</string>
   <string name="statistics">统计</string>
   <string name="statistics_thanks">已收到感谢</string>
   <string name="statistics_featured">特色图片</string>
@@ -423,7 +427,7 @@
   <string name="notifications">通知</string>
   <string name="read_notifications">通知（已读）</string>
   <string name="display_nearby_notification">显示附近通知</string>
-  <string name="display_nearby_notification_summary">点击此处查看最近需要图片的地方</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">点击此处查看最近需要图片的地方</string>
   <string name="no_close_nearby">附近找不到靠近您的地方</string>
   <string name="list_sheet">列表</string>
   <string name="storage_permission">存储权限</string>
@@ -460,7 +464,8 @@
   <string name="desc_language_Asia">亚洲</string>
   <string name="desc_language_Pacific">太平洋</string>
   <string name="no_categories_selected">未提交分类</string>
-  <string name="no_categories_selected_warning_desc" fuzzy="true">没有类别的图像很少可用。确实要提交而不选择类别吗？</string>
+  <string name="no_categories_selected_warning_desc">没有类别的图像很少可用。确实要继续而不选择类别吗？</string>
+  <string name="no_depictions_selected">没有选择描写</string>
   <string name="upload_flow_all_images_in_set">（对于集合中的所有图像）</string>
   <string name="search_this_area">搜索这个区域</string>
   <string name="nearby_card_permission_title">需要许可</string>
@@ -554,6 +559,7 @@
   <string name="share_via">分享到...</string>
   <string name="image_info">图像信息</string>
   <string name="no_categories_found">找不到分类</string>
+  <string name="no_depiction_found">找不到描写。</string>
   <string name="upload_cancelled">取消上传</string>
   <string name="previous_image_title_description_not_found">没有之前图片的标题或描述对应的数据</string>
   <string name="dialog_box_text_nomination">%1$s为何应被删除？</string>
@@ -574,6 +580,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">标志</string>
   <string name="delete_helper_ask_reason_copyright_other">其他</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">由于他是</string>
+  <string name="category_edit_helper_show_edit_title_success">成功</string>
   <string name="share_image_via">分享图片透过</string>
   <string name="no_achievements_yet">您目前还没有作出任何贡献</string>
   <string name="account_created">账户已创建！</string>
@@ -586,12 +593,21 @@
   <string name="place_type">地点类型：</string>
   <string name="nearby_search_hint">桥梁、博物馆、旅馆等</string>
   <string name="you_must_reset_your_passsword">登录时出现一些问题，您必须重新设置您的密码！</string>
+  <string name="title_for_media">媒体</string>
+  <string name="title_for_child_classes">子类别</string>
+  <string name="title_for_parent_classes">父类别</string>
+  <string name="upload_nearby_place_found_title">找到附近地点</string>
+  <string name="upload_nearby_place_found_description">这是地点%1$s的照片吗？</string>
   <string name="title_app_shortcut_explore">探索</string>
   <string name="title_app_shortcut_bookmark">书签</string>
   <string name="title_app_shortcut_setting">设置</string>
+  <string name="remove_bookmark">已从书签中移除</string>
   <string name="wallpaper_set_unsuccessfully">出错了。无法设置壁纸</string>
   <string name="setting_wallpaper_dialog_title">设为壁纸</string>
   <string name="setting_wallpaper_dialog_message">正在设置壁纸。请稍等…</string>
+  <string name="theme_dark_name">暗黑</string>
+  <string name="theme_light_name">明亮</string>
+  <string name="ask_to_turn_location_on">打开位置？</string>
   <string name="load_more">加载更多</string>
   <string name="add_picture_to_wikipedia_instructions_title">说明</string>
   <string name="confirm">确认</string>
@@ -600,4 +616,5 @@
   <string name="pause">暂停</string>
   <string name="resume">继续</string>
   <string name="paused">已暂停</string>
+  <string name="limited_connection">限制连接</string>
 </resources>
