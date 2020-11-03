@@ -30,6 +30,7 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.DownloadUtils;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -89,6 +90,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         pager.addOnPageChangeListener(this);
 
         adapter = new MediaDetailAdapter(getChildFragmentManager());
+        ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (savedInstanceState != null) {
             final int pageNumber = savedInstanceState.getInt("current-page");

@@ -92,6 +92,14 @@ public class MainActivity  extends BaseActivity
     }
 
     @Override
+    public boolean onSupportNavigateUp() {
+        if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
+            contributionsFragment.backButtonClicked();
+        }
+        return true;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);

@@ -36,6 +36,7 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
+import fr.free.nrw.commons.theme.BaseActivity;
 import io.reactivex.disposables.Disposable;
 import java.util.List;
 
@@ -592,6 +593,14 @@ public class ContributionsFragment
     @Override
     public Integer getContributionStateAt(int position) {
         return contributionsListFragment.getContributionStateAt(position);
+    }
+
+    public void backButtonClicked() {
+        if (mediaDetailPagerFragment.isVisible()) {
+            getChildFragmentManager().popBackStack();
+            ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            ((MainActivity)getActivity()).showTabs();
+        }
     }
 }
 
