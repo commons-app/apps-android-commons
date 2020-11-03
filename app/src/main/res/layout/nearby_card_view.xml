@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="?attr/mainCardBackground"
     android:layout_centerVertical="true"
-    android:layout_margin="@dimen/small_gap"
     android:minHeight="@dimen/large_height"
-    app:cardElevation="6dp"
-    >
+    android:layout_margin="@dimen/tiny_gap"
+    android:padding="@dimen/small_gap"
+    android:background="@drawable/card_border"
+  >
 
     <Button
         android:layout_width="wrap_content"
@@ -48,7 +48,9 @@
             android:layout_marginLeft="@dimen/standard_gap"
             android:layout_marginStart="@dimen/standard_gap"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/ic_location_white_24dp"/>
+            app:srcCompat="@drawable/ic_location_white_24dp"
+            android:tint="?attr/card_item_color"
+          />
 
 
         <LinearLayout
