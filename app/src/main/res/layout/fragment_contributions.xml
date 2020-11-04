@@ -9,15 +9,14 @@
     android:id="@+id/card_view_nearby"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="?attr/contributionsListBackground"
-    />
+    android:layout_margin="@dimen/very_tiny_gap"/>
 
   <fr.free.nrw.commons.campaigns.CampaignView
       android:id="@+id/campaigns_view"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/miniscule_margin"
-      app:cardBackgroundColor="?attr/contributionsListBackground" />
+      android:layout_margin="@dimen/very_tiny_gap"/>
 
   <FrameLayout
       android:id="@+id/root_frame"
