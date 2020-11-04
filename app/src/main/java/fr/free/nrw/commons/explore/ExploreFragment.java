@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.ActivityUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -92,6 +93,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         } else {
             mobileRootFragment.backPressed();
         }
+        ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
     /**

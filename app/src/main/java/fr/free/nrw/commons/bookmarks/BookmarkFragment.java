@@ -16,6 +16,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.theme.BaseActivity;
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -74,5 +75,6 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment {
   public void onBackPressed() {
     ((BookmarkListRootFragment) (adapter.getItem(tabLayout.getSelectedTabPosition())))
         .backPressed();
+    ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
   }
 }

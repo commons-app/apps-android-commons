@@ -292,7 +292,7 @@ public class ContributionsFragment
 
     @Override
     public void onBackStackChanged() {
-
+        fetchCampaigns();
     }
 
     /**
@@ -597,9 +597,17 @@ public class ContributionsFragment
 
     public void backButtonClicked() {
         if (mediaDetailPagerFragment.isVisible()) {
+            if (store.getBoolean("displayNearbyCardView", true)) {
+                if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+                    nearbyNotificationCardView.setVisibility(View.VISIBLE);
+                }
+            } else {
+                nearbyNotificationCardView.setVisibility(View.GONE);
+            }
             getChildFragmentManager().popBackStack();
             ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             ((MainActivity)getActivity()).showTabs();
+            fetchCampaigns();
         }
     }
 }

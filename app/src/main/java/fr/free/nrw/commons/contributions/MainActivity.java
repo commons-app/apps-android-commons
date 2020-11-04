@@ -235,25 +235,8 @@ public class MainActivity  extends BaseActivity
     @Override
     public void onBackPressed() {
         if (contributionsFragment != null && activeFragment == ActiveFragment.CONTRIBUTIONS) {
-            // Meas that contribution fragment is visible (not nearby fragment)
-            if (contributionsFragment.getChildFragmentManager().findFragmentByTag(ContributionsFragment.MEDIA_DETAIL_PAGER_FRAGMENT_TAG) != null) {
-                // Means that media details fragment is visible to uer instead of contributions list fragment (As chils fragment)
-                // Then we want to go back to contributions list fragment on backbutton pressed from media detail fragment
-                contributionsFragment.getChildFragmentManager().popBackStack();
-                // Tabs were invisible when Media Details Fragment is active, make them visible again on Contrib List Fragment active
-                showTabs();
-                // Nearby Notification Card View was invisible when Media Details Fragment is active, make it visible again on Contrib List Fragment active, according to preferences
-                if (defaultKvStore.getBoolean("displayNearbyCardView", true)) {
-                    if (contributionsFragment.nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
-                        contributionsFragment.nearbyNotificationCardView.setVisibility(View.VISIBLE);
-                    }
-                } else {
-                    contributionsFragment.nearbyNotificationCardView.setVisibility(View.GONE);
-                }
-                contributionsFragment.campaignView.setVisibility(View.VISIBLE);
-            } else {
-                super.onBackPressed();
-            }
+            // Meas that contribution fragment is visible
+            contributionsFragment.backButtonClicked();
         } else if (nearbyParentFragment != null && activeFragment == ActiveFragment.NEARBY) {
             // Means that nearby fragment is visible
             nearbyParentFragment.backButtonClicked();
