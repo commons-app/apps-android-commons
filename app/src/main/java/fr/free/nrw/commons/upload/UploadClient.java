@@ -14,6 +14,8 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -181,9 +183,11 @@ public class UploadClient {
       final long offset,
       final String fileKey,
       final CountingRequestBody countingRequestBody) {
-    final MultipartBody.Part filePart = MultipartBody.Part
-        .createFormData("chunk", filename, countingRequestBody);
+    final MultipartBody.Part filePart;
     try {
+      filePart = MultipartBody.Part
+          .createFormData("chunk", URLEncoder.encode(filename, "utf-8"), countingRequestBody);
+
       return uploadInterface.uploadFileToStash(toRequestBody(filename),
           toRequestBody(String.valueOf(fileSize)),
           toRequestBody(String.valueOf(offset)),
