@@ -254,8 +254,8 @@
   <string name="upload_problem_image">พบปัญหาในภาพ</string>
   <string name="internet_downloaded">กรุณาอัพโหลดเฉพาะภาพที่คุณเป็นคนถ่ายหรือสร้างสรรค์ขึ้นมาเองเท่านั้น อย่าอัพโหลดรูปภาพที่คุณได้มาจากการดาวน์โหลดบนอินเทอร์เน็ต</string>
   <string name="give_permission">ให้สิทธิ์</string>
-  <string name="use_external_storage">ใช้ที่จัดเก็บข้อมูลภายนอก</string>
-  <string name="use_external_storage_summary">บันทึกรูปภาพที่ถ่ายด้วยกล้องในแอปบนอุปกรณ์ของคุณ</string>
+  <string name="use_external_storage" fuzzy="true">ใช้ที่จัดเก็บข้อมูลภายนอก</string>
+  <string name="use_external_storage_summary" fuzzy="true">บันทึกรูปภาพที่ถ่ายด้วยกล้องในแอปบนอุปกรณ์ของคุณ</string>
   <string name="login_to_your_account">ลงชื่อเข้าใช้บัญชีของคุณ</string>
   <string name="send_log_file">ส่งไฟล์ปูม</string>
   <string name="send_log_file_description">ส่งไฟล์ปูมไปให้กับผู้พัฒนาทางอีเมล สำหระบการแก้ไขข้อผืดพลาดที่คุณพบ (ไฟล์ปูมจะไม่มีข้อมูลส่วนบุคคลหรือการยืนยันตัวตนรวมอยู่ด้วย)</string>

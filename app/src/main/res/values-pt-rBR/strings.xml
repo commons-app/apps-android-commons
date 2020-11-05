@@ -290,8 +290,8 @@
   <string name="upload_problem_image">Problemas encontrados na imagem</string>
   <string name="internet_downloaded">Por favor, só envie fotos que você tirou. Não faça upload de fotos baixadas da Internet.</string>
   <string name="give_permission">Dar permissão</string>
-  <string name="use_external_storage">Usar o armazenamento externo</string>
-  <string name="use_external_storage_summary">Salvar as fotos tiradas com a câmera no aplicativo no seu dispositivo</string>
+  <string name="use_external_storage">Salvar fotos no aplicativo</string>
+  <string name="use_external_storage_summary" fuzzy="true">Salvar as fotos tiradas com a câmera no aplicativo no seu dispositivo</string>
   <string name="login_to_your_account">Faça login na sua conta</string>
   <string name="send_log_file">Enviar arquivo de registro</string>
   <string name="send_log_file_description">Enviar arquivo de registro para desenvolvedores via e-mail para ajudar a depurar problemas com o aplicativo. Nota: os registros podem conter informações de identificação</string>
@@ -427,7 +427,7 @@
   <string name="notifications">Notificações</string>
   <string name="read_notifications">Notificações (lidas)</string>
   <string name="display_nearby_notification">Exibir notificação próxima</string>
-  <string name="display_nearby_notification_summary" fuzzy="true">Toque aqui para ver o local mais próximo que precisa de fotos</string>
+  <string name="display_nearby_notification_summary">Mostrar notificação no aplicativo para o lugar mais próximo que precisa de fotos</string>
   <string name="no_close_nearby">Nenhum lugar próximo encontrado perto de você</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Permissão de Armazenamento</string>

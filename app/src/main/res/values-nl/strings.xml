@@ -218,7 +218,7 @@
   <string name="upload_problem_do_you_continue">Wil je deze afbeelding nog steeds uploaden?</string>
   <string name="internet_downloaded">Upload alleen foto\'s die je zelf hebt genomen. Upload geen foto\'s die je van internet hebt gedownload.</string>
   <string name="give_permission">Geef toestemming</string>
-  <string name="use_external_storage">Gebruik externe opslag</string>
+  <string name="use_external_storage" fuzzy="true">Gebruik externe opslag</string>
   <string name="login_to_your_account">Aanmelden bij je profiel</string>
   <string name="send_log_file">Logboekbestand verzenden</string>
   <string name="no_web_browser">Geen webbrowser gevonden om URL te openen</string>

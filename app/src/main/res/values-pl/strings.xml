@@ -306,8 +306,8 @@
   <string name="upload_problem_image">Problemy znalezione na obrazie</string>
   <string name="internet_downloaded">Prześlij tylko zdjęcia, które sam wykonałeś. Nie przesyłaj zdjęć pobranych z Internetu.</string>
   <string name="give_permission">Uzyskaj uprawnienie</string>
-  <string name="use_external_storage">Użyj pamięci zewnętrznej</string>
-  <string name="use_external_storage_summary">Zapisz zdjęcia zrobione w aplikacji na swoim urzadzeniu</string>
+  <string name="use_external_storage">Zapisz zdjęcia wykonane w aplikacji</string>
+  <string name="use_external_storage_summary">Zapisz zdjęcia zrobione w aplikacji w pamięci swojego urządzenia</string>
   <string name="login_to_your_account">Zaloguj się na swoje konto</string>
   <string name="send_log_file">Wyślij plik rejestru</string>
   <string name="send_log_file_description">Wyślij plik rejestru w e-mailu do twórców, aby ułatwić im rozwiązanie aplikemów z aplikacją Uwaga: rejestry mogą potencjalnie zawierać informacje, dzięki którym można cię zidentyfikować</string>

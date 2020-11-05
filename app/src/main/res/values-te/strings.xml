@@ -262,8 +262,8 @@
   <string name="upload_problem_do_you_continue">అయినా సరే.. ఈ బొమ్మను ఎక్కించాలనే నిశ్చయించుకున్నారా?</string>
   <string name="internet_downloaded">మీరు తీసిన బొమ్మలను మాత్రమే ఎక్కించండి. అంతర్జాలం నుండి దించుకున్న బొమ్మలను ఎక్కించకండి.</string>
   <string name="give_permission">అనుమతి ఇవ్వండి</string>
-  <string name="use_external_storage">బయటి స్టోరేజిని వాడండి</string>
-  <string name="use_external_storage_summary">యాప్‌లోని కెమెరాను వాడి తీసిన ఫోటోలను మీ పరికరంలో భద్రపరచండి</string>
+  <string name="use_external_storage" fuzzy="true">బయటి స్టోరేజిని వాడండి</string>
+  <string name="use_external_storage_summary" fuzzy="true">యాప్‌లోని కెమెరాను వాడి తీసిన ఫోటోలను మీ పరికరంలో భద్రపరచండి</string>
   <string name="login_to_your_account">మీ ఖాతాలోకి లాగినవండి</string>
   <string name="send_log_file">లాగ్ ఫైలును పంపించు</string>
   <string name="send_log_file_description">లాగ్ ఫైలును ఈమెయిలు ద్వారా డెవలపర్లకు పంపించి, యాప్ లోని సమస్యలను పరిష్కరించేందుకు సాయపడండి. గమనిక: లాగ్‌లలో మీ గుర్తింపు సమాచారం ఉండే అవకాశం ఉంది</string>

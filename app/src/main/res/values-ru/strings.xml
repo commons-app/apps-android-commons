@@ -313,8 +313,8 @@
   <string name="upload_problem_image">Проблемы, найденные в изображении</string>
   <string name="internet_downloaded">Пожалуйста, загружайте только те изображения, которые были сделаны вами. Не загружайте изображений, которые вы скачали из Интернета.</string>
   <string name="give_permission">Разрешить</string>
-  <string name="use_external_storage">Использовать внешний носитель</string>
-  <string name="use_external_storage_summary">Сохранять изображения, сделанные с помощью встроенной камеры на устройстве</string>
+  <string name="use_external_storage" fuzzy="true">Использовать внешний носитель</string>
+  <string name="use_external_storage_summary" fuzzy="true">Сохранять изображения, сделанные с помощью встроенной камеры на устройстве</string>
   <string name="login_to_your_account">Войдите в свою учётную запись</string>
   <string name="send_log_file">Выслать лог-файл</string>
   <string name="send_log_file_description">Выслать журнальный файл разработчикам по эл. почте для решения проблем в приложении. Замечание: журналы потенциально могут содержать личные данные.</string>

@@ -270,8 +270,8 @@
   <string name="upload_problem_do_you_continue">Biztosan fel akarod tölteni ezt a képet?</string>
   <string name="internet_downloaded">Csak saját magad által készített képeket töltsél fel. Ne tölts fel az Internetről letöltött képeket.</string>
   <string name="give_permission">Engedély adása</string>
-  <string name="use_external_storage">Külső tárhely használata</string>
-  <string name="use_external_storage_summary">Az alkalmazáson belüli kamerával készült képek mentése az eszközre</string>
+  <string name="use_external_storage" fuzzy="true">Külső tárhely használata</string>
+  <string name="use_external_storage_summary" fuzzy="true">Az alkalmazáson belüli kamerával készült képek mentése az eszközre</string>
   <string name="login_to_your_account">Bejelentkezés a fiókodba</string>
   <string name="send_log_file">Naplófájl küldése</string>
   <string name="send_log_file_description">Naplófájl küldése e-mailben a fejlesztőknek, az alkalmazásban található hiba kiküszöbölésére. Megjegyzés: a napló potenciálisan azonosításra alkalmas adatokat tartalmazhat.</string>

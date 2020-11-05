@@ -265,8 +265,8 @@
   <string name="upload_problem_do_you_continue">Ønsker du fortsatt å laste opp dette bildet?</string>
   <string name="internet_downloaded">Last kun opp bilder du har tatt selv. Ikke last opp bilder du har lastet ned fra internett.</string>
   <string name="give_permission">Gi tillatelse</string>
-  <string name="use_external_storage">Bruk ekstern lagring</string>
-  <string name="use_external_storage_summary">Lagre bilder som er tatt med kameraet i appen på enheten din</string>
+  <string name="use_external_storage" fuzzy="true">Bruk ekstern lagring</string>
+  <string name="use_external_storage_summary" fuzzy="true">Lagre bilder som er tatt med kameraet i appen på enheten din</string>
   <string name="login_to_your_account">Logg inn med kontoen din</string>
   <string name="send_log_file">Send loggfil</string>
   <string name="send_log_file_description">Send loggfil til utviklerne via epost for å hjelpe til å feilsøke problemer med appen. Merk: Logger kan potensielt inneholde identifiserende informasjon.</string>

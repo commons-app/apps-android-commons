@@ -289,8 +289,8 @@
   <string name="upload_problem_image">Problemas encontrados en la imagen</string>
   <string name="internet_downloaded">Carga únicamente fotografías que hayas creado tú. No cargues imágenes o fotografías que hayas descargado de Internet.</string>
   <string name="give_permission">Otorgar permiso</string>
-  <string name="use_external_storage">Utilizar almacenamiento externo</string>
-  <string name="use_external_storage_summary">Guardar en el dispositivo imágenes capturadas con la cámara de la aplicación</string>
+  <string name="use_external_storage" fuzzy="true">Utilizar almacenamiento externo</string>
+  <string name="use_external_storage_summary" fuzzy="true">Guardar en el dispositivo imágenes capturadas con la cámara de la aplicación</string>
   <string name="login_to_your_account">Accede a tu cuenta</string>
   <string name="send_log_file">Enviar archivo de registro</string>
   <string name="send_log_file_description">Enviar archivo de registro a los desarrolladores por correo electrónico para ayudar a depurar problemas con la aplicación. Nota: los registros pueden potencialmente contener información que te identifique</string>

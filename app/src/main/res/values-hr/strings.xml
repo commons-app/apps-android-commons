@@ -244,8 +244,8 @@
   <string name="upload_problem_image">Pronađeni problemi sa slikom</string>
   <string name="internet_downloaded">Molimo Vas da samo postavljate slike koje ste sami snimili. Ne postavljajte slike koje ste preuzeli s interneta.</string>
   <string name="give_permission">Daj dopuštenje</string>
-  <string name="use_external_storage">Rabi vanjsku pohranu</string>
-  <string name="use_external_storage_summary">Spremite slike načinjene kamerom Vašeg uređaja</string>
+  <string name="use_external_storage" fuzzy="true">Rabi vanjsku pohranu</string>
+  <string name="use_external_storage_summary" fuzzy="true">Spremite slike načinjene kamerom Vašeg uređaja</string>
   <string name="login_to_your_account">Prijavite se na Vaš račun</string>
   <string name="send_log_file">Pošalji zapisnik</string>
   <string name="send_log_file_description" fuzzy="true">Pošalji zapisnik elektroničkom poštom razvijateljima</string>

@@ -246,8 +246,8 @@
   <string name="upload_problem_do_you_continue">Wil u nog hierdie foto oplaai?</string>
   <string name="internet_downloaded">Laai asseblief slegs foto\'s op wat u self geneem het. Moenie prente oplaai wat u van die internet afgelaai het nie.</string>
   <string name="give_permission">Gee toestemming</string>
-  <string name="use_external_storage">Gebruik eksterne stoor</string>
-  <string name="use_external_storage_summary">Stoor foto\'s wat met die in-app-kamera op u toestel geneem is</string>
+  <string name="use_external_storage" fuzzy="true">Gebruik eksterne stoor</string>
+  <string name="use_external_storage_summary" fuzzy="true">Stoor foto\'s wat met die in-app-kamera op u toestel geneem is</string>
   <string name="login_to_your_account">Teken in op jou rekening</string>
   <string name="send_log_file">Stuur loglêer</string>
   <string name="send_log_file_description">Stuur loglêers per e-pos aan ontwikkelaars om probleme met die app te ontfout. Opmerking: logs kan moontlik identifiserende inligting bevat</string>

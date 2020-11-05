@@ -291,8 +291,8 @@
   <string name="upload_problem_do_you_continue">仍然上传这张图片？</string>
   <string name="internet_downloaded">请仅上传由您自己拍摄的图像。请勿上传您从互联网下载的图像。</string>
   <string name="give_permission">提供权限</string>
-  <string name="use_external_storage">使用外部存储</string>
-  <string name="use_external_storage_summary">保存有您的设备的内部照相机应用拍摄的照片</string>
+  <string name="use_external_storage" fuzzy="true">使用外部存储</string>
+  <string name="use_external_storage_summary" fuzzy="true">保存有您的设备的内部照相机应用拍摄的照片</string>
   <string name="login_to_your_account">登录您的账户</string>
   <string name="send_log_file">发送日志文件</string>
   <string name="send_log_file_description">通过电子邮件发送日志文件给开发人员，以帮助调试应用程序的问题。注意：日志可能包含标识信息。</string>

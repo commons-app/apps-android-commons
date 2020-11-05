@@ -246,8 +246,8 @@
   <string name="upload_problem_fbmd">Vui lòng chỉ đăng tải hình ảnh bạn đã tự chụp. Xin đừng đăng tải hình ảnh bạn tìm thấy trên tài không Facebook của người khác.</string>
   <string name="upload_problem_do_you_continue">Bạn vẫn muốn đăng tải bức ảnh này?</string>
   <string name="give_permission">Cho phép</string>
-  <string name="use_external_storage">Sử dụng thiết bị lưu trữ bên ngoài</string>
-  <string name="use_external_storage_summary">Lưu các hình ảnh được chụp bằng máy chụp hình trong ứng dụng vào thiết bị của bạn</string>
+  <string name="use_external_storage" fuzzy="true">Sử dụng thiết bị lưu trữ bên ngoài</string>
+  <string name="use_external_storage_summary" fuzzy="true">Lưu các hình ảnh được chụp bằng máy chụp hình trong ứng dụng vào thiết bị của bạn</string>
   <string name="login_to_your_account">Đăng nhập vào tài khoản của bạn</string>
   <string name="send_log_file">Gửi tập tin nhật trình</string>
   <string name="send_log_file_description" fuzzy="true">Gửi tập tin nhật trình cho nhà phát triển qua thư điện tử</string>

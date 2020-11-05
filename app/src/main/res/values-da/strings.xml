@@ -242,8 +242,8 @@
   <string name="upload_problem_different_geolocation">Billedet blev taget et andet sted.</string>
   <string name="upload_problem_do_you_continue">Ønsker du stadig at overføre dette billede?</string>
   <string name="give_permission">Giv tilladelse</string>
-  <string name="use_external_storage">Brug eksternt lager</string>
-  <string name="use_external_storage_summary">Gem billeder taget med din enheds program på kameraet</string>
+  <string name="use_external_storage" fuzzy="true">Brug eksternt lager</string>
+  <string name="use_external_storage_summary" fuzzy="true">Gem billeder taget med din enheds program på kameraet</string>
   <string name="login_to_your_account">Log ind på din konto</string>
   <string name="send_log_file">Send logfil</string>
   <string name="send_log_file_description" fuzzy="true">Send logfil til udviklerne via e-post</string>

@@ -252,8 +252,8 @@
   <string name="upload_problem_do_you_continue">Viltu samt senda inn þessa mynd?</string>
   <string name="upload_problem_image">Vandamál fannst í myndinni</string>
   <string name="give_permission">Gefa heimild</string>
-  <string name="use_external_storage">Nota ytri gagnageymslu</string>
-  <string name="use_external_storage_summary">Vistaðu myndir sem teknar hafa verið með innbyggðu myndavélinni í tækinu þínu</string>
+  <string name="use_external_storage" fuzzy="true">Nota ytri gagnageymslu</string>
+  <string name="use_external_storage_summary" fuzzy="true">Vistaðu myndir sem teknar hafa verið með innbyggðu myndavélinni í tækinu þínu</string>
   <string name="login_to_your_account">Skrá inn á aðganginn þinn</string>
   <string name="send_log_file">Senda atvikaskrá</string>
   <string name="send_log_file_description">Senda atvikaskrá til forritaranna með tölvupósti til að hjálpa við að aflúsa vandamál í forritinu. Athugaðu: atvikaskrár geta innihaldið persónugreinanleg gögn</string>

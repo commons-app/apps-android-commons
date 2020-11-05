@@ -260,8 +260,8 @@
   <string name="upload_problem_do_you_continue">Ĉu vi ankoraŭ volas alŝuti ĉi tiun bildon?</string>
   <string name="internet_downloaded">Bonvolu nur alŝuti bildojn faritajn de vi mem. Ne alŝutu bildojn kiujn vi elŝutis el la Interreto.</string>
   <string name="give_permission">Doni permeson</string>
-  <string name="use_external_storage">Uzi eksteran konservejon</string>
-  <string name="use_external_storage_summary">Konservi bildojn fotitajn per la en-aplikaĵa fotilo sur via aparato</string>
+  <string name="use_external_storage" fuzzy="true">Uzi eksteran konservejon</string>
+  <string name="use_external_storage_summary" fuzzy="true">Konservi bildojn fotitajn per la en-aplikaĵa fotilo sur via aparato</string>
   <string name="login_to_your_account">Ensaluti en vian konton</string>
   <string name="send_log_file">Sendi la protokolan dosieron</string>
   <string name="send_log_file_description">Sendi protokolan dosieron al evoluigantoj per retpoŝto por helpi riparadon de problemoj pri la aplikaĵo. Notu: protokoloj eble enhavas identigan informon</string>

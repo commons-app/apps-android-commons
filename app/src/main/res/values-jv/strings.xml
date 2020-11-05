@@ -199,7 +199,7 @@
   <string name="nearby_info_menu_wikidata_article">Wiji Wikidhata</string>
   <string name="nearby_info_menu_wikipedia_article">Artikel Wikipédia</string>
   <string name="give_permission">Awèh idin</string>
-  <string name="use_external_storage">Anggo panyimpenan njaba</string>
+  <string name="use_external_storage" fuzzy="true">Anggo panyimpenan njaba</string>
   <string name="login_to_your_account">Mlebu log ing akun panjenengan</string>
   <string name="send_log_file">Kirim barkas log</string>
   <string name="send_log_file_description" fuzzy="true">Kirim barkas log menyang juru pangembang lumantar pos-èl</string>

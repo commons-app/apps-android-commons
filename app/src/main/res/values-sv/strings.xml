@@ -282,8 +282,8 @@
   <string name="upload_problem_image">Problem hittades i bilden</string>
   <string name="internet_downloaded">Var god ladda bara upp bilder som du själv har tagit. Ladda inte upp bilder som du har laddat ned från Internet.</string>
   <string name="give_permission">Ge behörighet</string>
-  <string name="use_external_storage">Använd extern lagring</string>
-  <string name="use_external_storage_summary">Spara bilder som tas med kameran i appen på din enhet</string>
+  <string name="use_external_storage" fuzzy="true">Använd extern lagring</string>
+  <string name="use_external_storage_summary" fuzzy="true">Spara bilder som tas med kameran i appen på din enhet</string>
   <string name="login_to_your_account">Logga in på ditt konto</string>
   <string name="send_log_file">Skicka loggfil</string>
   <string name="send_log_file_description">Skicka loggfilen till utvecklarna via e-post för att hjälpa till att felsöka problem i appen. OBS: Loggar kan innehålla identifierande information.</string>

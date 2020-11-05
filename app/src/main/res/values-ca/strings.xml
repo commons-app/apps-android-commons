@@ -247,8 +247,8 @@
   <string name="upload_problem_different_geolocation">Aquesta imatge s\'ha pres a una altra ubicació.</string>
   <string name="upload_problem_do_you_continue">Encara voleu carregar la imatge?</string>
   <string name="give_permission">Dóna permís</string>
-  <string name="use_external_storage">Utilitza l’emmagatzematge extern</string>
-  <string name="use_external_storage_summary">Desa les fotos fetes amb la càmera integrada del dispositiu</string>
+  <string name="use_external_storage" fuzzy="true">Utilitza l’emmagatzematge extern</string>
+  <string name="use_external_storage_summary" fuzzy="true">Desa les fotos fetes amb la càmera integrada del dispositiu</string>
   <string name="login_to_your_account">Entreu en el vostre compte</string>
   <string name="send_log_file">Envia el fitxer de registre</string>
   <string name="send_log_file_description">Envia el fitxer de registre a l\'equip de desenvolupament per correu per ajudar a depurar problemes amb l\'aplicació. Nota: els registres poden incorporar informació identificadora</string>

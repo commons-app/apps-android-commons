@@ -262,8 +262,8 @@
   <string name="upload_problem_do_you_continue">Haluatko silti tallentaa tämän kuvan?</string>
   <string name="internet_downloaded">Tallenna vain kuvia, jotka olet itse ottanut. Älä tallenna kuvia, joita olet ladannut internetistä.</string>
   <string name="give_permission">Anna lupa</string>
-  <string name="use_external_storage">Käytä ulkoista tallennustilaa</string>
-  <string name="use_external_storage_summary">Tallenna sovelluksen sisäisen kameran kanssa otetut kuvat laitteellesi</string>
+  <string name="use_external_storage" fuzzy="true">Käytä ulkoista tallennustilaa</string>
+  <string name="use_external_storage_summary" fuzzy="true">Tallenna sovelluksen sisäisen kameran kanssa otetut kuvat laitteellesi</string>
   <string name="login_to_your_account">Kirjaudu tilillesi</string>
   <string name="send_log_file">Lähetä lokitiedosto</string>
   <string name="send_log_file_description">Lähetä lokitiedosto kehittäjille sähköpostin välityksellä auttaaksesi sovelluksen ongelmien korjaamisessa. Huomautus: lokit saattavat mahdollisesti sisältää tunnistettavaa tietoa</string>

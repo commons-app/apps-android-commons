@@ -315,8 +315,8 @@
   <string name="upload_problem_image">تم العثور على مشاكل في الصورة</string>
   <string name="internet_downloaded">يُرجَى فقط رفع الصور التي التقطتها بنفسك، لا ترفع الصور التي قمت بتنزيلها من الإنترنت.</string>
   <string name="give_permission">إعطاء السماح</string>
-  <string name="use_external_storage">استخدم تخزينا خارجيا</string>
-  <string name="use_external_storage_summary">حفظ الصور الملتقطة بالكاميرا داخل التطبيق على جهازك</string>
+  <string name="use_external_storage" fuzzy="true">استخدم تخزينا خارجيا</string>
+  <string name="use_external_storage_summary" fuzzy="true">حفظ الصور الملتقطة بالكاميرا داخل التطبيق على جهازك</string>
   <string name="login_to_your_account">تسجيل الدخول إلى حسابك</string>
   <string name="send_log_file">إرسال ملف السجل</string>
   <string name="send_log_file_description">إرسال ملف السجل للمطورين عبر البريد الإلكتروني للمساعدة في تصحيح مشكلات التطبيق. ملاحظة: من المحتمل أن تحتوي السجلات على معلومات تعريف</string>

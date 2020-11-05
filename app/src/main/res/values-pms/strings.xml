@@ -276,8 +276,8 @@
   <string name="upload_problem_image">Trovà un problema con la plancia</string>
   <string name="internet_downloaded">Për piasì, ch\'a caria mach dle fòto ch\'a l\'ha fàit chiel-midem. Ch\'a caria pa dle fòto che a l\'ha dëscarià da \'ns l\'aragnà.</string>
   <string name="give_permission">Dé ël përmess</string>
-  <string name="use_external_storage">Dovré n\'anmagasinament estern</string>
-  <string name="use_external_storage_summary">Argistré le plance pijà con la màchina fòto ëd sò angign</string>
+  <string name="use_external_storage" fuzzy="true">Dovré n\'anmagasinament estern</string>
+  <string name="use_external_storage_summary" fuzzy="true">Argistré le plance pijà con la màchina fòto ëd sò angign</string>
   <string name="login_to_your_account">Ch\'as colega a sò cont</string>
   <string name="send_log_file">Mandé l\'archivi d\'argistr</string>
   <string name="send_log_file_description">Mandé l\'archivi d\'argistr ai dësvlupator për pòsta eletrònica për giuté a corege ij problema dl\'aplicassion. Nòta: j\'argistr a peulo potensialman conten-e d\'anformassion d\'identificassion</string>

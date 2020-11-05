@@ -264,8 +264,8 @@
   <string name="upload_problem_do_you_continue">Aínda quere subir esta imaxe?</string>
   <string name="internet_downloaded">Por favor suba so fotografías feitas por vostede mesmo. Non suba imaxes ou fotografías que descargara da Internet.</string>
   <string name="give_permission">Outorgar permiso</string>
-  <string name="use_external_storage">Usar o almacenamento externo</string>
-  <string name="use_external_storage_summary">Gardar as imaxes capturadas coa cámara do seu dispositivo</string>
+  <string name="use_external_storage" fuzzy="true">Usar o almacenamento externo</string>
+  <string name="use_external_storage_summary" fuzzy="true">Gardar as imaxes capturadas coa cámara do seu dispositivo</string>
   <string name="login_to_your_account">Comezar sesión na súa conta</string>
   <string name="send_log_file">Enviar ficheiro de rexistro</string>
   <string name="send_log_file_description">Enviar o rexistro ós desenvolvedores por correo electrónico para axudar na corrección de problemas coa aplicación. Nota: os rexistros poden conter información potencialmente identificativa</string>

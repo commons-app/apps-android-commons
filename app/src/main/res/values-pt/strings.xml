@@ -290,8 +290,8 @@
   <string name="upload_problem_image">Problemas encontrados na imagem</string>
   <string name="internet_downloaded">Carregue só fotografias tiradas por si, por favor. Não carregue fotografias que tenha descarregado da Internet.</string>
   <string name="give_permission">Permitir</string>
-  <string name="use_external_storage">Utilizar armazenamento externo</string>
-  <string name="use_external_storage_summary">Gravar as fotografias tiradas com a câmara da aplicação no seu dispositivo</string>
+  <string name="use_external_storage" fuzzy="true">Utilizar armazenamento externo</string>
+  <string name="use_external_storage_summary" fuzzy="true">Gravar as fotografias tiradas com a câmara da aplicação no seu dispositivo</string>
   <string name="login_to_your_account">Inicie sessão na sua conta</string>
   <string name="send_log_file">Enviar ficheiro de registos</string>
   <string name="send_log_file_description">Enviar o ficheiro de registos aos programadores por correio eletrónico para ajudar a corrigir problemas da aplicação. Nota: os registos podem conter informações identificativas</string>

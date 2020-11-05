@@ -283,8 +283,8 @@
   <string name="upload_problem_image">Probleme găsite în imagine</string>
   <string name="internet_downloaded">Vă rugăm să încărcați doar fotografiile realizate de dvs. Nu încărcați imaginile pe care le-ați descărcat de pe Internet.</string>
   <string name="give_permission">Obțineți permisiunea</string>
-  <string name="use_external_storage">Utilizați spațiul de stocare extern</string>
-  <string name="use_external_storage_summary">Salvați fotografiile realizate cu aparatul foto în aplicație de pe dispozitiv</string>
+  <string name="use_external_storage" fuzzy="true">Utilizați spațiul de stocare extern</string>
+  <string name="use_external_storage_summary" fuzzy="true">Salvați fotografiile realizate cu aparatul foto în aplicație de pe dispozitiv</string>
   <string name="login_to_your_account">Conectați-vă la contul dvs.</string>
   <string name="send_log_file">Trimiteți fișierul jurnal</string>
   <string name="send_log_file_description">Trimiteți istoricul fișierului dezvoltatorilor prin e-mail pentru a ajuta la depanarea problemelor legate de aplicație. Notă: jurnalele pot conține informații de identificare</string>

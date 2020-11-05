@@ -225,8 +225,8 @@
   <string name="upload_problem_image_blurry">그림이 흐릿합니다.</string>
   <string name="upload_problem_image_duplicate">그림이 이미 공용에 있습니다.</string>
   <string name="give_permission">권한 주기</string>
-  <string name="use_external_storage">외부기억기 사용하기</string>
-  <string name="use_external_storage_summary">장치의 프로그람안 촬영기로 찍은 화상 보관하기</string>
+  <string name="use_external_storage" fuzzy="true">외부기억기 사용하기</string>
+  <string name="use_external_storage_summary" fuzzy="true">장치의 프로그람안 촬영기로 찍은 화상 보관하기</string>
   <string name="login_to_your_account">자신의 계산자리로 가입</string>
   <string name="send_log_file">일지서류 발신하기</string>
   <string name="send_log_file_description" fuzzy="true">전자우편으로 개발자에게 일지서류 발신하기</string>

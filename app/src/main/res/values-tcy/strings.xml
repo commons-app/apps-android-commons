@@ -247,8 +247,8 @@
   <string name="upload_problem_different_geolocation">ಈ ಚಿತ್ರೊನು ಗೆತ್ತಿದಿನಿ ಬೇತೆ ತಾಣೊಡು.</string>
   <string name="upload_problem_do_you_continue">ಈರ್ ನನಲಾ ಈ ಚಿತ್ರೊನು ಮಿತೇರಾವರೆ ಬಯಕುವರಾ?</string>
   <string name="give_permission">ಒಪ್ಪಿಗೆ ಪಡೆಲೆ.</string>
-  <string name="use_external_storage">ಉಂದು ಎಕ್ಸ್‌ಟರ್ನಲ್ ಸ್ಟೊರೆಜ್.</string>
-  <string name="use_external_storage_summary">ಈ ಸಾಧನಟ್ ಅಪ್ಲಿಕೇಶನ್ ಕ್ಯಾಮೆರಾದೊಂಟ್ಟಗ್ ದೆತ್ತಿನ ಚಿತ್ರೊನ್ ಒರಿಪಾಲೆ.</string>
+  <string name="use_external_storage" fuzzy="true">ಉಂದು ಎಕ್ಸ್‌ಟರ್ನಲ್ ಸ್ಟೊರೆಜ್.</string>
+  <string name="use_external_storage_summary" fuzzy="true">ಈ ಸಾಧನಟ್ ಅಪ್ಲಿಕೇಶನ್ ಕ್ಯಾಮೆರಾದೊಂಟ್ಟಗ್ ದೆತ್ತಿನ ಚಿತ್ರೊನ್ ಒರಿಪಾಲೆ.</string>
   <string name="login_to_your_account">ಇರೇನಾ ಖಾತೆಗ್ ಲಾಗಿನ್ ಅಲೇ.</string>
   <string name="send_log_file">ಲಾಗ್ ಫೈಲ್ ಕಡ್ಪುಡ್ಲೆ.</string>
   <string name="send_log_file_description"> ಸದರಿ ಕರಣ(ಆಪ್\')ದ ಪೀಡನಿವಾರಣ ಸಮಸ್ಯೆಲೆಗಾದ್ ಗಮನ ಕಡತೊನು ಅಭಿವರ್ಧಕರೆಗ್ ಇಮೇಲ್ ಮೂಲಕ ಕಡಪುಡುಲೆ.ಸೂಚನೆ:ಗಮನೊಲೆಡ್ ಸಂಭಾವ್ಯ ಗುರ್ತಿಸಾವುನ ಮಾಹಿತಿ ಉಪ್ಪರೆ ಯಾವು.</string>
