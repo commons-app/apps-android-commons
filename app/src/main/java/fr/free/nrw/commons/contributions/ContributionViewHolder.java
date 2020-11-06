@@ -221,12 +221,20 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
   @OnClick(R.id.pauseResumeButton)
   public void onPauseResumeButtonClicked() {
     if (pauseResumeButton.getTag().toString().equals("pause")) {
-      callback.pauseUpload(contribution);
-      setResume();
+      pause();
     } else {
-      callback.resumeUpload(contribution);
-      setPaused();
+      resume();
     }
+  }
+
+  private void resume() {
+    callback.resumeUpload(contribution);
+    setPaused();
+  }
+
+  private void pause() {
+    callback.pauseUpload(contribution);
+    setResume();
   }
 
   /**

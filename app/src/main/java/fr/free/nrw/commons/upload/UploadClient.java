@@ -36,7 +36,7 @@ import timber.log.Timber;
 @Singleton
 public class UploadClient {
 
-  private final int CHUNK_SIZE = 1024 * 1024; // 256 KB
+  private final int CHUNK_SIZE = 512 * 1024; // 512 KB
 
   //This is maximum duration for which a stash is persisted on MediaWiki
   // https://www.mediawiki.org/wiki/Manual:$wgUploadStashMaxAge
