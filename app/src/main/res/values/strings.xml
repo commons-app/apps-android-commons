@@ -672,6 +672,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="pause">pause</string>
   <string name="resume">resume</string>
   <string name="paused">Paused</string>
+  <string name="more">More</string>
+  <string name="favorites">Favorites</string>
   <string name="achievements_tab_title">Achievements</string>
   <string name="leaderboard_tab_title">Leaderboard</string>
   <string name="rank_prefix">Rank:</string>

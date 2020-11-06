@@ -2,10 +2,11 @@ package fr.free.nrw.commons.contributions;
 
 import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_PAUSED;
-import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -13,18 +14,29 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
 
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.notification.Notification;
+import fr.free.nrw.commons.notification.NotificationController;
+import fr.free.nrw.commons.theme.BaseActivity;
 import io.reactivex.disposables.Disposable;
 import java.util.List;
 
@@ -40,6 +52,7 @@ import fr.free.nrw.commons.campaigns.CampaignView;
 import fr.free.nrw.commons.campaigns.CampaignsPresenter;
 import fr.free.nrw.commons.campaigns.ICampaignsView;
 import fr.free.nrw.commons.contributions.ContributionsListFragment.Callback;
+import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
@@ -51,6 +64,7 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -61,8 +75,6 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import javax.inject.Inject;
-import javax.inject.Named;
 import timber.log.Timber;
 
 public class ContributionsFragment
@@ -77,6 +89,7 @@ public class ContributionsFragment
     @Inject OkHttpJsonApiClient okHttpJsonApiClient;
     @Inject CampaignsPresenter presenter;
     @Inject LocationServiceManager locationManager;
+    @Inject NotificationController notificationController;
 
     private UploadService uploadService;
     private boolean isUploadServiceConnected;
@@ -101,6 +114,15 @@ public class ContributionsFragment
     private boolean isFragmentAttachedBefore = false;
     private View checkBoxView;
     private CheckBox checkBox;
+
+    public TextView notificationCount;
+
+    @NonNull
+    public static ContributionsFragment newInstance() {
+        ContributionsFragment fragment = new ContributionsFragment();
+        fragment.setRetainInstance(true);
+        return fragment;
+    }
 
     /**
      * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
@@ -165,8 +187,61 @@ public class ContributionsFragment
             && sessionManager.getCurrentAccount() != null) {
             setUploadCount();
         }
-
+        setHasOptionsMenu(true);
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
+        inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
+
+        MenuItem notificationsMenuItem = menu.findItem(R.id.notifications);
+        final View notification = notificationsMenuItem.getActionView();
+        notificationCount = notification.findViewById(R.id.notification_count_badge);
+        notification.setOnClickListener(view -> {
+            NotificationActivity.startYourself(getContext(), "unread");
+        });
+        setNotificationCount();
+        updateLimitedConnectionToggle(menu);
+    }
+
+    @SuppressLint("CheckResult")
+    public void setNotificationCount() {
+        compositeDisposable.add(notificationController.getNotifications(false)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(this::initNotificationViews,
+                throwable -> Timber.e(throwable, "Error occurred while loading notifications")));
+    }
+
+    private void initNotificationViews(List<Notification> notificationList) {
+        Timber.d("Number of notifications is %d", notificationList.size());
+        if (notificationList.isEmpty()) {
+            notificationCount.setVisibility(View.GONE);
+        } else {
+            notificationCount.setVisibility(View.VISIBLE);
+            notificationCount.setText(String.valueOf(notificationList.size()));
+        }
+    }
+
+    public void updateLimitedConnectionToggle(Menu menu) {
+        MenuItem checkable = menu.findItem(R.id.toggle_limited_connection_mode);
+        boolean isEnabled = store
+            .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
+
+        checkable.setChecked(isEnabled);
+        /*final SwitchCompat switchToggleLimitedConnectionMode = checkable.getActionView()
+            .findViewById(R.id.switch_toggle_limited_connection_mode);*/
+        checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
+        checkable.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                ((MainActivity) getActivity()).toggleLimitedConnectionMode();
+                boolean isEnabled = store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
+                checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
+                return false;
+            }
+        });
     }
 
     @Override
@@ -190,8 +265,6 @@ public class ContributionsFragment
      * new one if null.
      */
     private void showContributionsListFragment() {
-        // show tabs on contribution list is visible
-        ((MainActivity) getActivity()).showTabs();
         // show nearby card view on contributions list is visible
         if (nearbyNotificationCardView != null) {
             if (store.getBoolean("displayNearbyCardView", true)) {
@@ -207,24 +280,19 @@ public class ContributionsFragment
     }
 
     private void showMediaDetailPagerFragment() {
-        // hide tabs on media detail view is visible
-        ((MainActivity) getActivity()).hideTabs();
         // hide nearby card view on media detail is visible
-        nearbyNotificationCardView.setVisibility(View.GONE);
-
+        setupViewForMediaDetails();
         showFragment(mediaDetailPagerFragment, MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
-
     }
 
     private void setupViewForMediaDetails() {
         campaignView.setVisibility(View.GONE);
         nearbyNotificationCardView.setVisibility(View.GONE);
-        ((MainActivity)getActivity()).hideTabs();
     }
 
     @Override
     public void onBackStackChanged() {
-        ((MainActivity)getActivity()).initBackButton();
+        fetchCampaigns();
     }
 
     /**
@@ -313,6 +381,9 @@ public class ContributionsFragment
         contributionsPresenter.onAttachView(this);
         firstLocationUpdate = true;
         locationManager.addLocationListener(this);
+        nearbyNotificationCardView.permissionRequestButton.setOnClickListener(v -> {
+            showNearbyCardPermissionRationale();
+        });
 
         if (store.getBoolean("displayNearbyCardView", true)) {
             checkPermissionsAndShowNearbyCardView();
@@ -333,7 +404,7 @@ public class ContributionsFragment
             onLocationPermissionGranted();
         } else if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
                 && store.getBoolean("displayLocationPermissionForCardView", true)
-                && (((MainActivity) getActivity()).viewPager.getCurrentItem() == CONTRIBUTIONS_TAB_POSITION)) {
+                && (((MainActivity) getActivity()).activeFragment == ActiveFragment.CONTRIBUTIONS)) {
             nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
             showNearbyCardPermissionRationale();
         }
@@ -522,6 +593,22 @@ public class ContributionsFragment
     @Override
     public Integer getContributionStateAt(int position) {
         return contributionsListFragment.getContributionStateAt(position);
+    }
+
+    public void backButtonClicked() {
+        if (mediaDetailPagerFragment.isVisible()) {
+            if (store.getBoolean("displayNearbyCardView", true)) {
+                if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+                    nearbyNotificationCardView.setVisibility(View.VISIBLE);
+                }
+            } else {
+                nearbyNotificationCardView.setVisibility(View.GONE);
+            }
+            getChildFragmentManager().popBackStack();
+            ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            ((MainActivity)getActivity()).showTabs();
+            fetchCampaigns();
+        }
     }
 }
 

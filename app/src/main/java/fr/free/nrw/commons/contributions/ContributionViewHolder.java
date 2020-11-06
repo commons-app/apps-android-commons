@@ -29,6 +29,8 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
   SimpleDraweeView imageView;
   @BindView(R.id.contributionTitle)
   TextView titleView;
+  @BindView(R.id.authorView)
+  TextView authorView;
   @BindView(R.id.contributionState)
   TextView stateView;
   @BindView(R.id.contributionSequenceNumber)
@@ -65,6 +67,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     this.contribution = contribution;
     this.position = position;
     titleView.setText(contribution.getMedia().getMostRelevantCaption());
+    authorView.setText(contribution.getMedia().getCreator());
 
     imageView.getHierarchy().setPlaceholderImage(R.drawable.image_placeholder);
     imageView.getHierarchy().setFailureImage(R.drawable.image_placeholder);

@@ -19,7 +19,7 @@ import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment;
 import fr.free.nrw.commons.explore.depictions.parent.ParentDepictionsFragment;
 import fr.free.nrw.commons.explore.ViewPagerAdapter;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Activity to show depiction media, parent classes and child classes of depicted items in Explore
  */
-public class WikidataItemDetailsActivity extends NavigationBaseActivity implements MediaDetailPagerFragment.MediaDetailProvider,
+public class WikidataItemDetailsActivity extends BaseActivity implements MediaDetailPagerFragment.MediaDetailProvider,
     CategoryImagesCallback {
     private FragmentManager supportFragmentManager;
     private DepictedImagesFragment depictionImagesListFragment;
@@ -58,8 +58,6 @@ public class WikidataItemDetailsActivity extends NavigationBaseActivity implemen
         tabLayout.setupWithViewPager(viewPager);
         setTabs();
         setPageTitle();
-        initDrawer();
-        forceInitBackButton();
     }
 
     /**
@@ -118,6 +116,7 @@ public class WikidataItemDetailsActivity extends NavigationBaseActivity implemen
     /**
      * Shows media detail fragment when user clicks on any image in the list
      */
+    @Override
     public void onMediaClicked(int position) {
         tabLayout.setVisibility(View.GONE);
         viewPager.setVisibility(View.GONE);
@@ -134,7 +133,6 @@ public class WikidataItemDetailsActivity extends NavigationBaseActivity implemen
             supportFragmentManager.executePendingTransactions();
         }
         mediaDetailPagerFragment.showImage(position);
-        forceInitBackButton();
     }
 
     /**

@@ -16,7 +16,8 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.utils.ActivityUtils;
 
 /**
  * This activity displays pictures of a particular category
@@ -26,7 +27,7 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
  */
 
 public class CategoryImagesActivity
-        extends NavigationBaseActivity
+        extends BaseActivity
         implements FragmentManager.OnBackStackChangedListener,
                     MediaDetailPagerFragment.MediaDetailProvider,
                     AdapterView.OnItemClickListener, CategoryImagesCallback {
@@ -42,7 +43,6 @@ public class CategoryImagesActivity
      */
     @Override
     public void onBackPressed() {
-        initDrawer();
         super.onBackPressed();
     }
 
@@ -57,7 +57,6 @@ public class CategoryImagesActivity
         supportFragmentManager = getSupportFragmentManager();
         setCategoryImagesFragment();
         supportFragmentManager.addOnBackStackChangedListener(this);
-        initDrawer();
         setPageTitle();
     }
 
@@ -111,7 +110,6 @@ public class CategoryImagesActivity
             // https://stackoverflow.com/questions/11353075/how-can-i-maintain-fragment-state-when-added-to-the-back-stack/19022550#19022550            supportFragmentManager.executePendingTransactions();
         }
         mediaDetails.showImage(i);
-        forceInitBackButton();
     }
 
     /**
@@ -185,7 +183,7 @@ public class CategoryImagesActivity
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_search:
-                NavigationBaseActivity.startActivityWithFlags(this, SearchActivity.class);
+                ActivityUtils.startActivityWithFlags(this, SearchActivity.class);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

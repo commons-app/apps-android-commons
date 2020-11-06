@@ -27,8 +27,10 @@ import fr.free.nrw.commons.bookmarks.Bookmark;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.DownloadUtils;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -57,6 +59,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     MediaDetailAdapter adapter;
     private Bookmark bookmark;
     private MediaDetailProvider provider;
+    private boolean isFromFeaturedRootFragment;
+    private int position;
 
     public MediaDetailPagerFragment() {
         this(false, false);
@@ -66,6 +70,15 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     public MediaDetailPagerFragment(Boolean editable, boolean isFeaturedImage) {
         this.editable = editable;
         this.isFeaturedImage = isFeaturedImage;
+        isFromFeaturedRootFragment = false;
+    }
+
+    @SuppressLint("ValidFragment")
+    public MediaDetailPagerFragment(Boolean editable, boolean isFeaturedImage, int position) {
+        this.editable = editable;
+        this.isFeaturedImage = isFeaturedImage;
+        isFromFeaturedRootFragment = true;
+        this.position = position;
     }
 
     @Override
@@ -77,6 +90,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         pager.addOnPageChangeListener(this);
 
         adapter = new MediaDetailAdapter(getChildFragmentManager());
+        ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (savedInstanceState != null) {
             final int pageNumber = savedInstanceState.getInt("current-page");
@@ -96,6 +110,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             }, 100);
         } else {
             pager.setAdapter(adapter);
+        }
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity)getActivity()).hideTabs();
         }
         return view;
     }
@@ -218,8 +235,13 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 if(provider == null) {
                     return;
                 }
+                final int position;
+                if (isFromFeaturedRootFragment) {
+                    position = this.position;
+                } else {
+                    position = pager.getCurrentItem();
+                }
 
-                final int position = pager.getCurrentItem();
                 Media m = provider.getMediaAtPosition(position);
                 if (m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
@@ -276,7 +298,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     private void updateBookmarkState(MenuItem item) {
         boolean isBookmarked = bookmarkDao.findBookmark(bookmark);
-        int icon = isBookmarked ? R.drawable.ic_round_star_filled_24px : R.drawable.ic_round_star_border_24px;
+        int icon = isBookmarked ? R.drawable.menu_ic_round_star_filled_24px : R.drawable.menu_ic_round_star_border_24px;
         item.setIcon(icon);
     }
 
@@ -349,7 +371,11 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 }
                 pager.postDelayed(() -> getActivity().invalidateOptionsMenu(), 5);
             }
-            return MediaDetailFragment.forMedia(i, editable, isFeaturedImage, isWikipediaButtonDisplayed);
+            if (isFromFeaturedRootFragment) {
+                return MediaDetailFragment.forMedia(position+i, editable, isFeaturedImage, isWikipediaButtonDisplayed);
+            } else {
+                return MediaDetailFragment.forMedia(i, editable, isFeaturedImage, isWikipediaButtonDisplayed);
+            }
         }
 
         @Override

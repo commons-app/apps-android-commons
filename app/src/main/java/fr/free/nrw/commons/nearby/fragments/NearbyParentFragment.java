@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.nearby.fragments;
 
-import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
@@ -24,6 +23,10 @@ import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -77,11 +80,13 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
+import fr.free.nrw.commons.navtab.NavTab;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
@@ -93,6 +98,7 @@ import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
+import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ExecutorUtils;
 import fr.free.nrw.commons.utils.LayoutUtils;
@@ -208,6 +214,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private LatLngBounds latLngBounds;
     private PlaceAdapter adapter;
 
+    @NonNull
+    public static NearbyParentFragment newInstance() {
+        NearbyParentFragment fragment = new NearbyParentFragment();
+        fragment.setRetainInstance(true);
+        return fragment;
+    }
+
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
@@ -215,9 +228,23 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         ButterKnife.bind(this, view);
         initNetworkBroadCastReceiver();
         presenter=new NearbyParentFragmentPresenter(bookmarkLocationDao);
+        setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         return view;
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
+        inflater.inflate(R.menu.nearby_fragment_menu, menu);
+        MenuItem listMenu = menu.findItem(R.id.list_sheet);
+        listMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                listOptionMenuItemClicked();
+                return false;
+            }
+        });
     }
 
     @Override
@@ -306,7 +333,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void performMapReadyActions() {
-        if (isVisible() && isVisibleToUser && isMapBoxReady) {
+        if (isVisible() && isMapBoxReady) {
             checkPermissionsAndPerformAction(() -> {
                 lastKnownLocation = locationManager.getLastLocation();
                 fr.free.nrw.commons.location.LatLng target=lastFocusLocation;
@@ -615,6 +642,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * Centers the map in nearby fragment to a given place
      * @param place is new center of the map
      */
+    @Override
     public void centerMapToPlace(final Place place) {
         Timber.d("Map is centered to place");
         final double cameraShift;
@@ -852,6 +880,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void setTabItemContributions() {
         ((MainActivity)getActivity()).viewPager.setCurrentItem(0);
+        // TODO
     }
 
     @Override
@@ -860,7 +889,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 runnable,
-                () -> ((MainActivity) getActivity()).viewPager.setCurrentItem(CONTRIBUTIONS_TAB_POSITION),
+                () -> ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code()),
                 R.string.location_permission_title,
                 R.string.location_permission_rationale_nearby);
     }
