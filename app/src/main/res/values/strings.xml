@@ -699,4 +699,6 @@ Upload your first media by tapping on the add button.</string>
   <string name="limited_connection">Limited Connection</string>
   <string name="statistics_quality">Quality Images</string>
   <string name="quality_images_info">Quality images are diagrams or photographs that meet certain quality standards (which are mostly technical in nature) and are valuable for Wikimedia projects</string>
+  <string name="resuming_upload">Resuming upload…</string>
+  <string name="pausing_upload">Pausing upload…</string>
 </resources>

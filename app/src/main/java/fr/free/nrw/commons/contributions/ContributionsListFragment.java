@@ -32,6 +32,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -283,6 +284,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
    */
   @Override
   public void pauseUpload(Contribution contribution) {
+    ViewUtil.showShortToast(getContext(), R.string.pausing_upload);
     callback.pauseUpload(contribution);
   }
 
@@ -292,6 +294,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
    */
   @Override
   public void resumeUpload(Contribution contribution) {
+    ViewUtil.showShortToast(getContext(), R.string.resuming_upload);
     callback.retryUpload(contribution);
   }
 
