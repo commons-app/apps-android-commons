@@ -84,7 +84,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     private void setDepictsSubTitle() {
         final Activity activity = getActivity();
         if (activity instanceof UploadActivity) {
-            final boolean isMultipleFileSelected = ((UploadActivity) activity).getIsMultipleItemSelected();
+            final boolean isMultipleFileSelected = ((UploadActivity) activity).getIsMultipleFilesSelected();
             if (!isMultipleFileSelected) {
                 depictsSubTitle.setVisibility(View.GONE);
             }

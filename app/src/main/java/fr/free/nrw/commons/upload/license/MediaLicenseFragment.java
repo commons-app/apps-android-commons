@@ -81,7 +81,7 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
     private void setTvSubTitle() {
         final Activity activity = getActivity();
         if (activity instanceof  UploadActivity) {
-            final boolean isMultipleFileSelected = ((UploadActivity) activity).getIsMultipleItemSelected();
+            final boolean isMultipleFileSelected = ((UploadActivity) activity).getIsMultipleFilesSelected();
             if (!isMultipleFileSelected) {
                 tvSubTitle.setVisibility(View.GONE);
             }

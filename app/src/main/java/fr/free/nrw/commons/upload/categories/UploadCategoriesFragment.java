@@ -85,10 +85,9 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
                 .subscribe(filter -> searchForCategory(filter.toString()), Timber::e);
     }
     private void setTvSubTitle() {
-        Log.d("gouri", "setTvSubTitle: in uploadfragments");
         final Activity activity = getActivity();
         if (activity instanceof UploadActivity) {
-            final boolean isMultipleFileSelected = ((UploadActivity) activity).getIsMultipleItemSelected();
+            final boolean isMultipleFileSelected = ((UploadActivity) activity).getIsMultipleFilesSelected();
             if (!isMultipleFileSelected) {
                 tvSubTitle.setVisibility(View.GONE);
             }
