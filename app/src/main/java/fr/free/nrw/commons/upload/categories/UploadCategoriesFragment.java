@@ -1,7 +1,9 @@
 package fr.free.nrw.commons.upload.categories;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryItem;
+import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -34,6 +37,8 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.tv_subtitle)
+    TextView tvSubTitle;
     @BindView(R.id.til_container_search)
     TextInputLayout tilContainerEtSearch;
     @BindView(R.id.et_search)
@@ -65,6 +70,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     private void init() {
         tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
                 callback.getTotalNumberOfSteps()));
+        setTvSubTitle();
         presenter.onAttachView(this);
         initRecyclerView();
         addTextChangeListenerToEtSearch();
@@ -77,6 +83,16 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(filter -> searchForCategory(filter.toString()), Timber::e);
+    }
+    private void setTvSubTitle() {
+        Log.d("gouri", "setTvSubTitle: in uploadfragments");
+        final Activity activity = getActivity();
+        if (activity instanceof UploadActivity) {
+            final boolean isMultipleFileSelected = ((UploadActivity) activity).getIsMultipleItemSelected();
+            if (!isMultipleFileSelected) {
+                tvSubTitle.setVisibility(View.GONE);
+            }
+        }
     }
 
     private void searchForCategory(String query) {

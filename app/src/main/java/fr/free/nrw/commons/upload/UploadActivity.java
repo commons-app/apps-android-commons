@@ -102,6 +102,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private Place place;
     private List<UploadableFile> uploadableFiles = Collections.emptyList();
     private int currentSelectedPosition = 0;
+    private boolean isMultipleItemSelected = false;
 
     @SuppressLint("CheckResult")
     @Override
@@ -377,10 +378,14 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         Timber.d("Received intent %s with action %s", intent.toString(), intent.getAction());
 
         uploadableFiles = intent.getParcelableArrayListExtra(EXTRA_FILES);
+        isMultipleItemSelected = uploadableFiles.size() > 1;
         Timber.i("Received multiple upload %s", uploadableFiles.size());
 
         place = intent.getParcelableExtra(PLACE_OBJECT);
         resetDirectPrefs();
+    }
+    public boolean getIsMultipleItemSelected() {
+        return isMultipleItemSelected;
     }
 
     public void resetDirectPrefs() {

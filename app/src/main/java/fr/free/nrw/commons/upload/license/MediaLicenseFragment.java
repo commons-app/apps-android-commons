@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload.license;
 
+import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import fr.free.nrw.commons.upload.UploadActivity;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -35,6 +37,8 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.tv_subtitle)
+    TextView tvSubTitle;
     @BindView(R.id.spinner_license_list)
     Spinner spinnerLicenseList;
     @BindView(R.id.tv_share_license_summary)
@@ -68,9 +72,20 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
     private void init() {
         tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
                 callback.getTotalNumberOfSteps()));
+        setTvSubTitle();
         initPresenter();
         initLicenseSpinner();
         presenter.getLicenses();
+    }
+
+    private void setTvSubTitle() {
+        final Activity activity = getActivity();
+        if (activity instanceof  UploadActivity) {
+            final boolean isMultipleFileSelected = ((UploadActivity) activity).getIsMultipleItemSelected();
+            if (!isMultipleFileSelected) {
+                tvSubTitle.setVisibility(View.GONE);
+            }
+        }
     }
 
     private void initPresenter() {
