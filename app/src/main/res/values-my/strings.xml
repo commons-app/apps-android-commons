@@ -203,7 +203,7 @@
   <string name="upload_problem_do_you_continue">ဤရုပ်ပုံအား အက်ပလုပ်တင်ချင်နေတုန်းပဲလား</string>
   <string name="internet_downloaded">သင်ကိုယ်တိုင်ရိုက်ကူးထားသော ရုပ်ပုံများကိုသာ အက်ပလုပ်တင်ပါ။ အင်တာနက်မှဒေါင်းလုတ်ဆွဲထားသည့်ရုပ်ပုံများကို မတင်ပါနှင့်။</string>
   <string name="give_permission">ခွင့်ပြုချက် ပေးမည်</string>
-  <string name="use_external_storage">ပြင်ပြသိုလှောင်ခန်းကို သုံးမည်</string>
+  <string name="use_external_storage" fuzzy="true">ပြင်ပြသိုလှောင်ခန်းကို သုံးမည်</string>
   <string name="login_to_your_account">သင်၏အကောင့်သို့ ဝင်ရန်</string>
   <string name="no_web_browser">URL ဖွင့်ရန် ဝဘ်ဘရောက်ဆာ မတွေ့ရှိပါ</string>
   <string name="null_url">အမှား! URL မတွေ့ရှိပါ</string>

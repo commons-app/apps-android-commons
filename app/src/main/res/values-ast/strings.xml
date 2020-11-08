@@ -272,8 +272,8 @@
   <string name="upload_problem_image">Alcontráronse problemes na imaxe</string>
   <string name="internet_downloaded">Por favor xube solo fotografies que tomasti tu mesmu. Nun xubas imaxes que descargasti d\'Internet.</string>
   <string name="give_permission">Dar permisu</string>
-  <string name="use_external_storage">Usar almacenamientu esternu</string>
-  <string name="use_external_storage_summary">Guardar nel preséu les imaxes tomaes cola cámara de la app</string>
+  <string name="use_external_storage" fuzzy="true">Usar almacenamientu esternu</string>
+  <string name="use_external_storage_summary" fuzzy="true">Guardar nel preséu les imaxes tomaes cola cámara de la app</string>
   <string name="login_to_your_account">Anicia sesión na to cuenta</string>
   <string name="send_log_file">Unviar ficheru de rexistru</string>
   <string name="send_log_file_description">Unviar ficheru de rexistru a los desendolcadores per corréu electrónicu p\'ayudar a depurar problemes cola aplicación. Nota: los rexistros pueden contener potencialmente información que t\'identifique</string>
@@ -405,7 +405,7 @@
   <string name="notifications">Avisos</string>
   <string name="read_notifications">Avisos (lleíos)</string>
   <string name="display_nearby_notification">Amosar notificaciones de cercanía</string>
-  <string name="display_nearby_notification_summary">Toca equí para ver el llugar más cercanu que precisa semeyes</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Toca equí para ver el llugar más cercanu que precisa semeyes</string>
   <string name="no_close_nearby">Nun s\'atoparon llugares cercanos nos alredores</string>
   <string name="list_sheet">Llista</string>
   <string name="storage_permission">Permisu d\'almacenamientu</string>

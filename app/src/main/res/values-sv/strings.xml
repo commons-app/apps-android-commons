@@ -282,8 +282,8 @@
   <string name="upload_problem_image">Problem hittades i bilden</string>
   <string name="internet_downloaded">Var god ladda bara upp bilder som du själv har tagit. Ladda inte upp bilder som du har laddat ned från Internet.</string>
   <string name="give_permission">Ge behörighet</string>
-  <string name="use_external_storage">Använd extern lagring</string>
-  <string name="use_external_storage_summary">Spara bilder som tas med kameran i appen på din enhet</string>
+  <string name="use_external_storage" fuzzy="true">Använd extern lagring</string>
+  <string name="use_external_storage_summary" fuzzy="true">Spara bilder som tas med kameran i appen på din enhet</string>
   <string name="login_to_your_account">Logga in på ditt konto</string>
   <string name="send_log_file">Skicka loggfil</string>
   <string name="send_log_file_description">Skicka loggfilen till utvecklarna via e-post för att hjälpa till att felsöka problem i appen. OBS: Loggar kan innehålla identifierande information.</string>
@@ -419,7 +419,7 @@
   <string name="notifications">Aviseringar</string>
   <string name="read_notifications">Aviseringar (lästa)</string>
   <string name="display_nearby_notification">Visa avisering för i närheten</string>
-  <string name="display_nearby_notification_summary">Tryck här för att se den närmaste platsen som behöver bilder</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Tryck här för att se den närmaste platsen som behöver bilder</string>
   <string name="no_close_nearby">Inga platser i närheten hittades som är nära dig</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Lagringsbehörighet</string>
@@ -663,4 +663,6 @@
   <string name="limited_connection_enabled">Begränsat anslutningsläge har aktiverats!</string>
   <string name="limited_connection_disabled">Begränsat anslutningsläge har inaktiverats. Väntande uppladdningar kommer nu återupptas.</string>
   <string name="limited_connection">Begränsad anslutning</string>
+  <string name="statistics_quality">Kvalitetsbilder</string>
+  <string name="quality_images_info">Kvalitetsbilder är diagram eller fotografier som möter vissa kvalitetsstandarder (som är mestadels tekniska) och är värdefulla för Wikimedia-projekt.</string>
 </resources>

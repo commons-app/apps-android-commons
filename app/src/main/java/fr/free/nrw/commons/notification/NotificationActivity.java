@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
 import com.google.android.material.snackbar.Snackbar;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -41,7 +42,7 @@ import timber.log.Timber;
  * Created by root on 18.12.2017.
  */
 
-public class NotificationActivity extends NavigationBaseActivity {
+public class NotificationActivity extends BaseActivity {
     @BindView(R.id.listView)
     RecyclerView recyclerView;
     @BindView(R.id.progressBar)
@@ -52,6 +53,9 @@ public class NotificationActivity extends NavigationBaseActivity {
     ConstraintLayout no_notification;
     @BindView(R.id.no_notification_text)
     TextView noNotificationText;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
 
     @Inject
     NotificationController controller;
@@ -70,8 +74,15 @@ public class NotificationActivity extends NavigationBaseActivity {
         mNotificationWorkerFragment = (NotificationWorkerFragment) getFragmentManager()
                 .findFragmentByTag(TAG_NOTIFICATION_WORKER_FRAGMENT);
         initListView();
-        initDrawer();
         setPageTitle();
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @SuppressLint("CheckResult")

@@ -22,6 +22,17 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.FileProvider;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+
+import com.dinuscxj.progressbar.CircleProgressBar;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Objects;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -147,7 +158,6 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         params.height = (int) (height * BADGE_IMAGE_HEIGHT_RATIO);
         params.width = (int) (width * BADGE_IMAGE_WIDTH_RATIO);
         imageView.requestLayout();
-
         progressBar.setVisibility(View.VISIBLE);
 
         setHasOptionsMenu(true);

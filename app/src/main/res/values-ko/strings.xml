@@ -284,8 +284,8 @@
   <string name="upload_problem_image">이미지에 문제가 있습니다</string>
   <string name="internet_downloaded">직접 찍은 사진만 업로드하세요. 인터넷에서 다운로드한 사진을 업로드하지 마세요.</string>
   <string name="give_permission">권한 부여</string>
-  <string name="use_external_storage">외부 저장소 사용하기</string>
-  <string name="use_external_storage_summary">장치의 인앱 카메라로 찍은 사진 저장하기</string>
+  <string name="use_external_storage" fuzzy="true">외부 저장소 사용하기</string>
+  <string name="use_external_storage_summary" fuzzy="true">장치의 인앱 카메라로 찍은 사진 저장하기</string>
   <string name="login_to_your_account">자신의 계정으로 로그인</string>
   <string name="send_log_file">로그 파일 보내기</string>
   <string name="send_log_file_description">앱 문제의 디버깅을 지원하기 위해 이메일로 개발자에게 로그 파일을 보냅니다. 주의: 로그는 당신을 식별할 수 있는 정보를 잠재적으로 포함하고 있을 수 있습니다.</string>
@@ -417,7 +417,7 @@
   <string name="notifications">알림</string>
   <string name="read_notifications">알림 (읽음)</string>
   <string name="display_nearby_notification">주변 알림 표시</string>
-  <string name="display_nearby_notification_summary">사진이 필요한 주변 장소를 보려면 여기를 탭하세요</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">사진이 필요한 주변 장소를 보려면 여기를 탭하세요</string>
   <string name="no_close_nearby">당신에게 가까운 주변 장소를 찾지 못했습니다</string>
   <string name="list_sheet">목록</string>
   <string name="storage_permission">기억 장치 권한</string>

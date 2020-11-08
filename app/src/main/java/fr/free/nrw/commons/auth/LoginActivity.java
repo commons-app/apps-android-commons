@@ -29,6 +29,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import fr.free.nrw.commons.utils.ActivityUtils;
 import org.wikipedia.AppAdapter;
 import org.wikipedia.dataclient.ServiceFactory;
 import org.wikipedia.dataclient.WikiSite;
@@ -51,9 +52,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.explore.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -318,7 +317,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
      */
     private void performSkipLogin() {
         applicationKvStore.putBoolean("login_skipped", true);
-        ExploreActivity.startYourself(this);
+        MainActivity.startYourself(this);
         finish();
     }
 
@@ -412,7 +411,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     public void startMainActivity() {
-        NavigationBaseActivity.startActivityWithFlags(this, MainActivity.class, Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        ActivityUtils.startActivityWithFlags(this, MainActivity.class, Intent.FLAG_ACTIVITY_SINGLE_TOP);
         finish();
     }
 

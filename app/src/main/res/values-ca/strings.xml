@@ -247,8 +247,8 @@
   <string name="upload_problem_different_geolocation">Aquesta imatge s\'ha pres a una altra ubicació.</string>
   <string name="upload_problem_do_you_continue">Encara voleu carregar la imatge?</string>
   <string name="give_permission">Dóna permís</string>
-  <string name="use_external_storage">Utilitza l’emmagatzematge extern</string>
-  <string name="use_external_storage_summary">Desa les fotos fetes amb la càmera integrada del dispositiu</string>
+  <string name="use_external_storage" fuzzy="true">Utilitza l’emmagatzematge extern</string>
+  <string name="use_external_storage_summary" fuzzy="true">Desa les fotos fetes amb la càmera integrada del dispositiu</string>
   <string name="login_to_your_account">Entreu en el vostre compte</string>
   <string name="send_log_file">Envia el fitxer de registre</string>
   <string name="send_log_file_description">Envia el fitxer de registre a l\'equip de desenvolupament per correu per ajudar a depurar problemes amb l\'aplicació. Nota: els registres poden incorporar informació identificadora</string>
@@ -361,7 +361,7 @@
   <string name="notifications">Notificacions</string>
   <string name="read_notifications">Notificacions (llegides)</string>
   <string name="display_nearby_notification">Mostra notificacions properes</string>
-  <string name="display_nearby_notification_summary">Feu un toc aquí per a veure el lloc més proper que necessiti fotos</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Feu un toc aquí per a veure el lloc més proper que necessiti fotos</string>
   <string name="no_close_nearby">No s\'han trobat llocs propers prop vostre</string>
   <string name="list_sheet">Llista</string>
   <string name="storage_permission">Permissos d\'emmagatzematge</string>

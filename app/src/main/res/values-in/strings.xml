@@ -252,8 +252,8 @@
   <string name="upload_problem_do_you_continue">Apakah Anda masih ingin mengunggah gambar ini?</string>
   <string name="internet_downloaded">Unggah hanya gambar yang sudah Anda potret sendiri. Jangan unggah gambar yang Anda ambil dari Internet.</string>
   <string name="give_permission">Beri Izin</string>
-  <string name="use_external_storage">Gunakan penyimpanan eksternal</string>
-  <string name="use_external_storage_summary">Simpan gambar yang diambil menggunakan kamera dalam aplikasi ke perangkat Anda</string>
+  <string name="use_external_storage" fuzzy="true">Gunakan penyimpanan eksternal</string>
+  <string name="use_external_storage_summary" fuzzy="true">Simpan gambar yang diambil menggunakan kamera dalam aplikasi ke perangkat Anda</string>
   <string name="login_to_your_account">Masuk ke akun Anda</string>
   <string name="send_log_file">Kirim berkas log</string>
   <string name="send_log_file_description">Kirim berkas log ke pengembang via email untuk membantu mengurai masalah dengan aplikasi. Catatan: log dapat mengandung informasi yang berpotensi mengidentifikasi</string>
@@ -382,7 +382,7 @@
   <string name="notifications">Pemberitahuan</string>
   <string name="read_notifications" fuzzy="true">Pemberitahuan (diarsipkan)</string>
   <string name="display_nearby_notification">Tampilkan pemberitahuan sekitar</string>
-  <string name="display_nearby_notification_summary">Tekan di sini untuk melihat tempat terdekat yang membutuhkan gambar</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Tekan di sini untuk melihat tempat terdekat yang membutuhkan gambar</string>
   <string name="no_close_nearby">Tidak ada tempat sekitaran yang ditemukan di dekat Anda</string>
   <string name="list_sheet">Daftar</string>
   <string name="storage_permission">Izin Penyimpanan</string>

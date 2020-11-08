@@ -14,18 +14,15 @@ import androidx.annotation.Nullable;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
-import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.utils.SwipableCardView;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.contributions.MainActivity.NEARBY_TAB_POSITION;
 
 /**
  * Custom card view for nearby notification card view on main screen, above contributions list
  */
 public class NearbyNotificationCardView extends SwipableCardView {
-    private Button permissionRequestButton;
+    public Button permissionRequestButton;
     private LinearLayout contentLayout;
     private TextView notificationTitle;
     private TextView notificationDistance;
@@ -77,22 +74,16 @@ public class NearbyNotificationCardView extends SwipableCardView {
         super.onAttachedToWindow();
         // If you don't setVisibility after getting layout params, then you will se an empty space in place of nearby NotificationCardView
         if (((MainActivity)getContext()).defaultKvStore.getBoolean("displayNearbyCardView", true) && this.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
-            this.setVisibility(VISIBLE);
+            setVisibility(VISIBLE);
         } else {
-            this.setVisibility(GONE);
+            setVisibility(GONE);
         }
     }
 
 
     private void setActionListeners(Place place) {
         this.setOnClickListener(view -> {
-            MainActivity m = (MainActivity) getContext();
-
-            // Change to nearby tab
-            m.viewPager.setCurrentItem(NEARBY_TAB_POSITION);
-
-            // Center the map to the place
-            ((NearbyParentFragment) m.contributionsActivityPagerAdapter.getItem(NEARBY_TAB_POSITION)).centerMapToPlace(place);
+            ((MainActivity) getContext()).centerMapToPlace(place);
         });
     }
 

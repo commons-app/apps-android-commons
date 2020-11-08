@@ -277,8 +277,8 @@
   <string name="upload_problem_do_you_continue">Naozaj chcete nahrať tento obrázok?</string>
   <string name="internet_downloaded">Nahrávajte, prosím, len obrázky, ktoré ste sami zhotovili. Nenahrávajte obrázky, ktoré ste stiahli z internetu.</string>
   <string name="give_permission">Dať povolenie</string>
-  <string name="use_external_storage">Použiť externé úložisko</string>
-  <string name="use_external_storage_summary">Uložiť obrázky nasnímané fotoaparátom, ktorý je súčasťou tejto aplikácie</string>
+  <string name="use_external_storage" fuzzy="true">Použiť externé úložisko</string>
+  <string name="use_external_storage_summary" fuzzy="true">Uložiť obrázky nasnímané fotoaparátom, ktorý je súčasťou tejto aplikácie</string>
   <string name="login_to_your_account">Prihlásiť sa do účtu</string>
   <string name="send_log_file">Odoslať log</string>
   <string name="send_log_file_description">Odoslať log vývojárom e-mailom za účelom odstránenia problémov s aplikáciou. Poznámka: Logy môžu obsahovať indentifikačné údaje.</string>
@@ -413,7 +413,7 @@
   <string name="notifications">Upozornenia</string>
   <string name="read_notifications">Upozornenia (prečítané)</string>
   <string name="display_nearby_notification">Zobraziť notifikáciu o miestach v okolí</string>
-  <string name="display_nearby_notification_summary">Kliknutím sem sa zobrazí najbližšie miesto, ktoré potrebuje obrázky</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Kliknutím sem sa zobrazí najbližšie miesto, ktoré potrebuje obrázky</string>
   <string name="no_close_nearby">Vo vašej blízkosti neboli nájdené žiadne miesta</string>
   <string name="list_sheet">Zoznam</string>
   <string name="storage_permission">Povolenie k prístupu k úložnému priestoru</string>

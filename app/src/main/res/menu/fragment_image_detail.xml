@@ -4,17 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_bookmark_current_image"
-        android:icon="@drawable/ic_round_star_border_24px"
+        android:icon="@drawable/menu_ic_round_star_border_24px"
         android:title="@string/menu_bookmark"
         app:showAsAction="always" />
     <item
         android:id="@+id/menu_share_current_image"
-        android:icon="@drawable/ic_share_black_24dp"
+        android:icon="@drawable/menu_ic_share_24dp"
         android:title="@string/menu_share"
         app:showAsAction="always" />
     <item
         android:id="@+id/menu_download_current_image"
-        android:icon="@drawable/ic_download_white_24dp"
+        android:icon="@drawable/menu_ic_download_24dp"
         android:title="@string/menu_download"
         app:showAsAction="always" />
     <item

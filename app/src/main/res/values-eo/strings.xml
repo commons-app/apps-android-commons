@@ -260,8 +260,8 @@
   <string name="upload_problem_do_you_continue">Ĉu vi ankoraŭ volas alŝuti ĉi tiun bildon?</string>
   <string name="internet_downloaded">Bonvolu nur alŝuti bildojn faritajn de vi mem. Ne alŝutu bildojn kiujn vi elŝutis el la Interreto.</string>
   <string name="give_permission">Doni permeson</string>
-  <string name="use_external_storage">Uzi eksteran konservejon</string>
-  <string name="use_external_storage_summary">Konservi bildojn fotitajn per la en-aplikaĵa fotilo sur via aparato</string>
+  <string name="use_external_storage" fuzzy="true">Uzi eksteran konservejon</string>
+  <string name="use_external_storage_summary" fuzzy="true">Konservi bildojn fotitajn per la en-aplikaĵa fotilo sur via aparato</string>
   <string name="login_to_your_account">Ensaluti en vian konton</string>
   <string name="send_log_file">Sendi la protokolan dosieron</string>
   <string name="send_log_file_description">Sendi protokolan dosieron al evoluigantoj per retpoŝto por helpi riparadon de problemoj pri la aplikaĵo. Notu: protokoloj eble enhavas identigan informon</string>
@@ -390,7 +390,7 @@
   <string name="notifications">Sciigoj</string>
   <string name="read_notifications" fuzzy="true">Sciigoj (enarkivigitaj)</string>
   <string name="display_nearby_notification">Montri sciigojn pri apudaĵoj</string>
-  <string name="display_nearby_notification_summary">Tuŝetu ĉi tie por vidi apudan lokon kiu bezonas bildojn</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Tuŝetu ĉi tie por vidi apudan lokon kiu bezonas bildojn</string>
   <string name="no_close_nearby">Neniu proksima loko trovita ĉe vi.</string>
   <string name="list_sheet">Listo</string>
   <string name="storage_permission">Permeso por Konservado</string>

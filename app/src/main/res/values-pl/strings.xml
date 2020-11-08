@@ -306,8 +306,8 @@
   <string name="upload_problem_image">Problemy znalezione na obrazie</string>
   <string name="internet_downloaded">Prześlij tylko zdjęcia, które sam wykonałeś. Nie przesyłaj zdjęć pobranych z Internetu.</string>
   <string name="give_permission">Uzyskaj uprawnienie</string>
-  <string name="use_external_storage">Użyj pamięci zewnętrznej</string>
-  <string name="use_external_storage_summary">Zapisz zdjęcia zrobione w aplikacji na swoim urzadzeniu</string>
+  <string name="use_external_storage">Zapisz zdjęcia wykonane w aplikacji</string>
+  <string name="use_external_storage_summary">Zapisz zdjęcia zrobione w aplikacji w pamięci swojego urządzenia</string>
   <string name="login_to_your_account">Zaloguj się na swoje konto</string>
   <string name="send_log_file">Wyślij plik rejestru</string>
   <string name="send_log_file_description">Wyślij plik rejestru w e-mailu do twórców, aby ułatwić im rozwiązanie aplikemów z aplikacją Uwaga: rejestry mogą potencjalnie zawierać informacje, dzięki którym można cię zidentyfikować</string>
@@ -443,7 +443,7 @@
   <string name="notifications">Powiadomienia</string>
   <string name="read_notifications">Powiadomienia (przeczytaj)</string>
   <string name="display_nearby_notification">Wyświetl powiadomienie w pobliżu</string>
-  <string name="display_nearby_notification_summary">Stuknij tutaj, aby zobaczyć najbliższe miejsce, które wymaga zdjęć</string>
+  <string name="display_nearby_notification_summary">Pokazuj w aplikacji powiadomienia o pobliskich miejscach wymagających zilustrowania</string>
   <string name="no_close_nearby">Nie odnaleziono pobliskich Tobie miejsc</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Uprawnienie do przechowywania</string>

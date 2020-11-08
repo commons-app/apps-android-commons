@@ -259,8 +259,8 @@
   <string name="upload_problem_do_you_continue">আপনি কি এখনও এই ছবিটি আপলোড করতে চান?</string>
   <string name="upload_problem_image">চিত্রটিতে কিছু সমস্যা পাওয়া গেছে</string>
   <string name="give_permission">অনুমতি দিন</string>
-  <string name="use_external_storage">বাহ্যিক সঞ্চয়স্থান ব্যবহার করুন</string>
-  <string name="use_external_storage_summary">অাপনার ডিভাইসের নিজস্ব ক্যামেরায় ধারণকৃত ছবি সংরক্ষণ করুন</string>
+  <string name="use_external_storage" fuzzy="true">বাহ্যিক সঞ্চয়স্থান ব্যবহার করুন</string>
+  <string name="use_external_storage_summary" fuzzy="true">অাপনার ডিভাইসের নিজস্ব ক্যামেরায় ধারণকৃত ছবি সংরক্ষণ করুন</string>
   <string name="login_to_your_account">আপনার অ্যাকাউন্টে প্রবেশ করুন</string>
   <string name="send_log_file">লগ ফাইল পাঠান</string>
   <string name="send_log_file_description">অ্যাপটির সমস্যা ডিবাগ করার জন্য ইমেইলের মাধ্যমে উন্নয়নকারীদের কাছে লগ ফাইল পাঠান। লক্ষ্য করুন: লগে সম্ভাব্য শনাক্তকরণ তথ্য থাকতে পারে</string>

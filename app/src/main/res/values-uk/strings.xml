@@ -298,8 +298,8 @@
   <string name="upload_problem_image">Виявлено проблеми із зображенням</string>
   <string name="internet_downloaded">Будь ласка, завантажуйте тільки ті зображення, які були зроблені вами. Не завантажуйте зображень, які ви знайшли в інтернеті.</string>
   <string name="give_permission">Надати дозвіл</string>
-  <string name="use_external_storage">Використовувати зовнішнє сховище</string>
-  <string name="use_external_storage_summary">Зберігати зображення, виконані вбудованою камерою Вашого пристрою</string>
+  <string name="use_external_storage" fuzzy="true">Використовувати зовнішнє сховище</string>
+  <string name="use_external_storage_summary" fuzzy="true">Зберігати зображення, виконані вбудованою камерою Вашого пристрою</string>
   <string name="login_to_your_account">Увійдіть у свій обліковий запис</string>
   <string name="send_log_file">Надіслати файл журналу</string>
   <string name="send_log_file_description">Надіслати файл журналу розробникам електронною поштою, щоб допомогти розв\'язати проблему із програмою. Зауважте, що журнали можуть містити ідентифікаційну інформацію.</string>
@@ -434,7 +434,7 @@
   <string name="notifications">Сповіщення</string>
   <string name="read_notifications">Сповіщення (прочитані)</string>
   <string name="display_nearby_notification">Повідомляти мене про місця поблизу</string>
-  <string name="display_nearby_notification_summary">Торкніться тут, щоб побачити найближчі місця, які ще не мають зображень</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Торкніться тут, щоб побачити найближчі місця, які ще не мають зображень</string>
   <string name="no_close_nearby">Не знайдено місць поблизу Вас</string>
   <string name="list_sheet">Список</string>
   <string name="storage_permission">Дозвіл на зберігання</string>

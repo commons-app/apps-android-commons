@@ -35,8 +35,7 @@
     <item quantity="one">%1$d fichier en cours de téléversement</item>
     <item quantity="other">%1$d fichiers en cours de téléversement</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -303,8 +302,8 @@
   <string name="upload_problem_image">Problème trouvé avec l\'image</string>
   <string name="internet_downloaded">Veuillez ne téléverser que des images que vous avez prises vous-même. Ne téléversez aucune image que vous avez téléchargée depuis Internet.</string>
   <string name="give_permission">Accorder le droit</string>
-  <string name="use_external_storage">Utiliser le stockage externe</string>
-  <string name="use_external_storage_summary">Enregistrer les images prises avec l’appareil photo de votre appareil</string>
+  <string name="use_external_storage" fuzzy="true">Utiliser le stockage externe</string>
+  <string name="use_external_storage_summary" fuzzy="true">Enregistrer les images prises avec l’appareil photo de votre appareil</string>
   <string name="login_to_your_account">Connectez-vous à votre compte</string>
   <string name="send_log_file">Envoyer le journal</string>
   <string name="send_log_file_description">Envoyer par courriel le journal aux développeurs pour aider à la correction des problèmes de l’application. Note : les journaux peuvent potentiellement comporter des informations d’identification</string>
@@ -440,7 +439,7 @@
   <string name="notifications">Notifications</string>
   <string name="read_notifications">Notifications (lues)</string>
   <string name="display_nearby_notification">Afficher la notification de proximité</string>
-  <string name="display_nearby_notification_summary">Taper ici pour voir l’endroit le plus proche qui a besoin d’images</string>
+  <string name="display_nearby_notification_summary">Afficher les notifications d’application pour l’endroit le plus proche qui a besoin d’images</string>
   <string name="no_close_nearby">Aucun endroit à proximité trouvé près de chez vous</string>
   <string name="list_sheet">Lister</string>
   <string name="storage_permission">Droit de stockage</string>

@@ -281,8 +281,8 @@
   <string name="upload_problem_image">Problems found in image</string>
   <string name="internet_downloaded">Please only upload pictures that you have taken by yourself. Don\'t upload pictures that you have downloaded from the Internet.</string>
   <string name="give_permission">Give permission</string>
-  <string name="use_external_storage">Use external storage</string>
-  <string name="use_external_storage_summary">Save pictures taken with the in-app camera on your device</string>
+  <string name="use_external_storage">Save In-app shots</string>
+  <string name="use_external_storage_summary">Save pictures taken with the in-app camera to your device storage</string>
   <string name="login_to_your_account">Log in to your account</string>
   <string name="send_log_file">Send log file</string>
   <string name="send_log_file_description">Send log file to developers via email to help debug problems with the app. Note: logs may potentially contain identifying information</string>
@@ -428,7 +428,7 @@
   <string name="notifications">Notifications</string>
   <string name="read_notifications">Notifications (read)</string>
   <string name="display_nearby_notification">Display nearby notification</string>
-  <string name="display_nearby_notification_summary">Tap here to see the nearest place that needs pictures</string>
+  <string name="display_nearby_notification_summary">Show in-app notification for the nearest place that needs pictures</string>
 
   <string name="no_close_nearby">No nearby places found close to you</string>
   <string name="list_sheet">List</string>
@@ -672,6 +672,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="pause">pause</string>
   <string name="resume">resume</string>
   <string name="paused">Paused</string>
+  <string name="more">More</string>
+  <string name="favorites">Favorites</string>
   <string name="achievements_tab_title">Achievements</string>
   <string name="leaderboard_tab_title">Leaderboard</string>
   <string name="rank_prefix">Rank:</string>

@@ -274,8 +274,8 @@
   <string name="upload_problem_do_you_continue">Vuoi caricare lo stesso questa immagine?</string>
   <string name="internet_downloaded">Carica solo le foto che hai scattato da solo. Non caricare immagini scaricate da Internet.</string>
   <string name="give_permission">Dai autorizzazione</string>
-  <string name="use_external_storage">Usa memoria esterna</string>
-  <string name="use_external_storage_summary">Salva le foto scattate con la fotocamera in-app sul dispositivo</string>
+  <string name="use_external_storage">Salva scatti in-app</string>
+  <string name="use_external_storage_summary">Salva le foto scattate con la fotocamera in-app nella memoria del tuo dispositivo</string>
   <string name="login_to_your_account">Accedi alla tua utenza</string>
   <string name="send_log_file">Invia file di registro</string>
   <string name="send_log_file_description">Invia il file di registro agli sviluppatori tramite email per aiutarli a risolvere i problemi con l\'applicazione. Nota: i log potrebbero contenere informazioni di identificazione</string>
@@ -407,7 +407,7 @@
   <string name="notifications">Notifiche</string>
   <string name="read_notifications">Notifiche (lette)</string>
   <string name="display_nearby_notification">Mostra notifica nelle vicinanze</string>
-  <string name="display_nearby_notification_summary">Tocca qui per vedere il luogo più vicino che ha bisogno di immagini</string>
+  <string name="display_nearby_notification_summary">Mostra notifiche nell\'applicazione per il luogo più vicino che ha bisogno di immagini</string>
   <string name="no_close_nearby">Nessun posto nelle vicinanze trovato vicino a te</string>
   <string name="list_sheet">Elenco</string>
   <string name="storage_permission">Autorizzazione di archiviazione</string>

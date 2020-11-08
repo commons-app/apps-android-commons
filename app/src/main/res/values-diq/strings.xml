@@ -241,7 +241,7 @@
   <string name="upload_problem_different_geolocation">No resım cana de anciyayo</string>
   <string name="upload_problem_image">Resım de problem vineya</string>
   <string name="give_permission">Destur bıde</string>
-  <string name="use_external_storage">Depoy teberi bıkarnê</string>
+  <string name="use_external_storage" fuzzy="true">Depoy teberi bıkarnê</string>
   <string name="login_to_your_account">Hesabê ho kewê</string>
   <string name="send_log_file">Pela qeydi bırışê</string>
   <string name="null_url">Xeta! URL nêvineya</string>

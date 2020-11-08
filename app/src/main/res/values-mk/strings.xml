@@ -278,8 +278,8 @@
   <string name="upload_problem_image">Пронајдени проблеми во сликата</string>
   <string name="internet_downloaded">Подигајте само слики кои самите сте ги направиле. Не подигајте слики што сте ги нашле некаде на семрежјето.</string>
   <string name="give_permission">Дај дозвола</string>
-  <string name="use_external_storage">Користи надворешен склад</string>
-  <string name="use_external_storage_summary">Зачувување на направените слики во прилогот со камерата на вашиот уред</string>
+  <string name="use_external_storage" fuzzy="true">Користи надворешен склад</string>
+  <string name="use_external_storage_summary" fuzzy="true">Зачувување на направените слики во прилогот со камерата на вашиот уред</string>
   <string name="login_to_your_account">Најавете се со вашата сметка</string>
   <string name="send_log_file">Испрати дневничка податотека</string>
   <string name="send_log_file_description">Испрати дневничка податотека на разработувачите по е-пошта за да се решат грешките во прилогот. Напомена: дневниците потенцијално може да содржат лични податоци.</string>
@@ -415,7 +415,7 @@
   <string name="notifications">Известувања</string>
   <string name="read_notifications">Известувања (прочитани)</string>
   <string name="display_nearby_notification">Известувај ме за места во близина</string>
-  <string name="display_nearby_notification_summary">Допрете тука за да го видите најблиското место без слика</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Допрете тука за да го видите најблиското место без слика</string>
   <string name="no_close_nearby">Не најдов места во ваша близина</string>
   <string name="list_sheet">Список</string>
   <string name="storage_permission">Дозвола за складирање</string>
@@ -659,4 +659,6 @@
   <string name="limited_connection_enabled">Овозможен режимот на ограничена врска.</string>
   <string name="limited_connection_disabled">Режимот на ограничена врска е оневозоможен. Сега ќе продолжат преземањата во исчекување.</string>
   <string name="limited_connection">Ограничена врска</string>
+  <string name="statistics_quality">Квалитетни слики</string>
+  <string name="quality_images_info">Квалитетните слики се дијаграми или фотографии кои задоволуваат извесни стандарди за квалитет (кои се од претежно техничка природа) или имаат вредност за Викимедиините проекти</string>
 </resources>

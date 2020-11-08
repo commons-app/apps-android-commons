@@ -241,7 +241,7 @@
   <string name="upload_problem_do_you_continue">Wyt ti\'n dal yn awyddus i uwchlwytho\'r ddelwedd?</string>
   <string name="upload_problem_image">Gwallau yn y ddelwedd</string>
   <string name="give_permission">Rhoi hawl</string>
-  <string name="use_external_storage">Defnyddia storfa allanol</string>
+  <string name="use_external_storage" fuzzy="true">Defnyddia storfa allanol</string>
   <string name="login_to_your_account">Mewngofnodwch i\'ch cyfri</string>
   <string name="send_log_file">Danfonwch y ffeil log</string>
   <string name="null_url">Gwall! Ni chafwyd hyd i\'r URL</string>

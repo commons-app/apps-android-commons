@@ -256,8 +256,8 @@
   <string name="upload_problem_image">Problemi catai in te l\'imajine</string>
   <string name="internet_downloaded">Carga soło łe foto che te ghè fato da soło. No sta cargar imajine catae so internet</string>
   <string name="give_permission">Dati autorixasion</string>
-  <string name="use_external_storage">Dopara memoria esterna</string>
-  <string name="use_external_storage_summary">Salva łe foto fate co ła fotocamara in-app sol dispoxidivo</string>
+  <string name="use_external_storage" fuzzy="true">Dopara memoria esterna</string>
+  <string name="use_external_storage_summary" fuzzy="true">Salva łe foto fate co ła fotocamara in-app sol dispoxidivo</string>
   <string name="login_to_your_account">Va drento al to uxuario</string>
   <string name="send_log_file">Invia file de rejistro</string>
   <string name="send_log_file_description">Invia el file de rejistro ai xviłupadori co ła email par jutarli a rixolvare i problemi co l\'aplicasion. Notasion: I log i podaria contegnere informasion de identifegasion</string>
@@ -387,7 +387,7 @@
   <string name="notifications">Notifeghe</string>
   <string name="read_notifications">Notifeghe (archiviae)</string>
   <string name="display_nearby_notification">Fa vedare notifega cuà rente</string>
-  <string name="display_nearby_notification_summary">Struca cuà par vardare el posto pì rente che ghe serve łe imajini</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Struca cuà par vardare el posto pì rente che ghe serve łe imajini</string>
   <string name="no_close_nearby">Nisun posto cuà rente de ti catà</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Autorixasion de archiviasion</string>

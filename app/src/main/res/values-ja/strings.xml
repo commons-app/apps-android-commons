@@ -289,8 +289,8 @@
   <string name="upload_problem_image">画像に問題があります</string>
   <string name="internet_downloaded">あなた自身の撮影した画像に限定してアップロードしてください。ウェブ上からダウンロードした画像はアップロードできません。</string>
   <string name="give_permission">権限を付与</string>
-  <string name="use_external_storage">外部ストレージを使用</string>
-  <string name="use_external_storage_summary">アプリ内のカメラで撮影した写真を端末に保存する</string>
+  <string name="use_external_storage" fuzzy="true">外部ストレージを使用</string>
+  <string name="use_external_storage_summary" fuzzy="true">アプリ内のカメラで撮影した写真を端末に保存する</string>
   <string name="login_to_your_account">自分のアカウントにログイン</string>
   <string name="send_log_file">ログファイルを送信する</string>
   <string name="send_log_file_description">メールで開発者にログファイルを送信、アプリのバグ解消をサポートする。注記：ログには利用者特定情報が含まれることがあります</string>
@@ -426,7 +426,7 @@
   <string name="notifications">通知</string>
   <string name="read_notifications">通知（既読）</string>
   <string name="display_nearby_notification">近くの場所の通知を表示する</string>
-  <string name="display_nearby_notification_summary">ここをタップして、近くで画像を募集中の場所を表示</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">ここをタップして、近くで画像を募集中の場所を表示</string>
   <string name="no_close_nearby">現在地の近くに該当する場所が見つかりません</string>
   <string name="list_sheet">一覧</string>
   <string name="storage_permission">ストレージの許可</string>

@@ -246,8 +246,8 @@
   <string name="upload_problem_different_geolocation">Tennet eo bet ar skeudenn en ul lec\'h disheñvel.</string>
   <string name="upload_problem_image">Kudennoù stag ouzh ar bajenn-mañ</string>
   <string name="give_permission">Reiñ ar gwir</string>
-  <string name="use_external_storage">Implijout ar stokañ diavaez</string>
-  <string name="use_external_storage_summary">Enrollit ar skeudennoù tennet gant luc\'hskeudennerez ho penveg</string>
+  <string name="use_external_storage" fuzzy="true">Implijout ar stokañ diavaez</string>
+  <string name="use_external_storage_summary" fuzzy="true">Enrollit ar skeudennoù tennet gant luc\'hskeudennerez ho penveg</string>
   <string name="login_to_your_account">Kevreit ouzh ho kont</string>
   <string name="send_log_file">Kas ar renabl</string>
   <string name="send_log_file_description">Kas ar renabl dre bostel d\'an diorroerien evit sikour reizhañ kudennoù an arload. Notenn : er renabl e c\'hall bezañ titouroù anaout enno</string>

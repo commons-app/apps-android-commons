@@ -280,8 +280,8 @@
   <string name="upload_problem_do_you_continue">Möchtest du immer noch dieses Bild hochladen?</string>
   <string name="internet_downloaded">Lade bitte nur Bilder hoch, die du selber aufgenommen hast. Lade keine Bilder hoch, die du aus dem Internet heruntergeladen hast.</string>
   <string name="give_permission">Berechtigung geben</string>
-  <string name="use_external_storage">Externen Speicher verwenden</string>
-  <string name="use_external_storage_summary">Mit der In-App-Kamera aufgenommene Bilder auf deinem Gerät speichern</string>
+  <string name="use_external_storage" fuzzy="true">Externen Speicher verwenden</string>
+  <string name="use_external_storage_summary" fuzzy="true">Mit der In-App-Kamera aufgenommene Bilder auf deinem Gerät speichern</string>
   <string name="login_to_your_account">Bei deinem Benutzerkonto anmelden</string>
   <string name="send_log_file">Logdatei senden</string>
   <string name="send_log_file_description">Logdatei an die Entwickler per E-Mail senden, um Probleme mit der App zu beheben. Hinweis: Die Protokolle können potentiell Informationen zur Identifizierung enthalten.</string>
@@ -415,7 +415,7 @@
   <string name="notifications">Benachrichtigungen</string>
   <string name="read_notifications">Benachrichtigungen (gelesen)</string>
   <string name="display_nearby_notification">Benachrichtigungen in der Nähe anzeigen</string>
-  <string name="display_nearby_notification_summary">Hier tippen, um Orte in der Nähe anzusehen, die Bilder benötigen.</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Hier tippen, um Orte in der Nähe anzusehen, die Bilder benötigen.</string>
   <string name="no_close_nearby">Keine Orte in deiner Umgebung gefunden.</string>
   <string name="list_sheet">Liste</string>
   <string name="storage_permission">Speicherberechtigung</string>

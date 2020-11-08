@@ -6,8 +6,6 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -116,9 +114,6 @@
 
             </RelativeLayout>
 
-
         </LinearLayout>
-
-    <include layout="@layout/drawer_view" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

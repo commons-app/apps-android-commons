@@ -189,7 +189,7 @@
   <string name="upload_problem_fbmd">Качвайте само изображения, които сте направили. Не качвайте изображения, намерени на някой друг профил в Facebook.</string>
   <string name="upload_problem_do_you_continue">Все още ли искате да я качете?</string>
   <string name="give_permission">Даване на позволение</string>
-  <string name="use_external_storage_summary">Съхраняване на направените картини в приложението с камерата на устройството Ви</string>
+  <string name="use_external_storage_summary" fuzzy="true">Съхраняване на направените картини в приложението с камерата на устройството Ви</string>
   <string name="nominate_deletion">Номиниране за изтриване</string>
   <string name="nominated_for_deletion">Изображението е предложено за изтриване.</string>
   <string name="nominated_see_more">По-подробно ще намерите на уеб страницата</string>

@@ -8,6 +8,7 @@ import javax.inject.Inject
 
 
 class CategoriesMediaFragment : PageableMediaFragment() {
+
     @Inject
     lateinit var presenter: CategoryMediaPresenter
 

@@ -256,8 +256,8 @@
   <string name="upload_problem_different_geolocation">Η εικόνα λήφθηκε σε διαφορετική τοποθεσία.</string>
   <string name="upload_problem_do_you_continue">Θέλετε ακόμη να ανεβάσετε αυτή την εικόνα;</string>
   <string name="give_permission">Χορηγήστε άδεια</string>
-  <string name="use_external_storage">Χρησιμοποιήσετε την εξωτερική αποθήκευση</string>
-  <string name="use_external_storage_summary">Αποθηκεύσετε εικόνες που παίρνονται στην κάμερα εφαρμογής στην συσκευή σας</string>
+  <string name="use_external_storage" fuzzy="true">Χρησιμοποιήσετε την εξωτερική αποθήκευση</string>
+  <string name="use_external_storage_summary" fuzzy="true">Αποθηκεύσετε εικόνες που παίρνονται στην κάμερα εφαρμογής στην συσκευή σας</string>
   <string name="login_to_your_account">Συνδεθείτε στο λογαριασμό σας.</string>
   <string name="send_log_file">Αποστείλατε τον φάκελλο σύνδεσης</string>
   <string name="send_log_file_description">Στείλτε το αρχείο καταγραφής στους προγραμματιστές μέσω email για να βοηθήσετε τη διόρθωση σφαλμάτων της εφαρμογής. Σημείωση: οι καταγραφές ενδέχεται να περιλαμβάνουν αναγνωριστικές πληροφορίες</string>
@@ -375,7 +375,7 @@
   <string name="contributions_fragment">Συνεισφορές</string>
   <string name="nearby_fragment">Κοντά σας</string>
   <string name="notifications">Ενημερώσεις</string>
-  <string name="display_nearby_notification_summary">Πατήστε εδώ για να δείτε την πιο κοντινή θέση που χρειάζεται εικόνες</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Πατήστε εδώ για να δείτε την πιο κοντινή θέση που χρειάζεται εικόνες</string>
   <string name="no_close_nearby">Δεν βρέθηκαν μέρη κοντά σας</string>
   <string name="list_sheet">Λίστα</string>
   <string name="nearby_notification_dismiss_message">Δεν θα δείτε την πιο κοντινή τοποθεσία που χρειάζεται επιπλέον εικόνες. Ωστόσο, μπορείτε να ενεργοποιήσετε ξανά αυτή την ειδοποίηση στις Ρυθμίσεις αν θέλετε.</string>

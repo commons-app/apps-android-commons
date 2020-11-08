@@ -276,8 +276,8 @@
   <string name="upload_problem_image">Trovà un problema con la plancia</string>
   <string name="internet_downloaded">Për piasì, ch\'a caria mach dle fòto ch\'a l\'ha fàit chiel-midem. Ch\'a caria pa dle fòto che a l\'ha dëscarià da \'ns l\'aragnà.</string>
   <string name="give_permission">Dé ël përmess</string>
-  <string name="use_external_storage">Dovré n\'anmagasinament estern</string>
-  <string name="use_external_storage_summary">Argistré le plance pijà con la màchina fòto ëd sò angign</string>
+  <string name="use_external_storage" fuzzy="true">Dovré n\'anmagasinament estern</string>
+  <string name="use_external_storage_summary" fuzzy="true">Argistré le plance pijà con la màchina fòto ëd sò angign</string>
   <string name="login_to_your_account">Ch\'as colega a sò cont</string>
   <string name="send_log_file">Mandé l\'archivi d\'argistr</string>
   <string name="send_log_file_description">Mandé l\'archivi d\'argistr ai dësvlupator për pòsta eletrònica për giuté a corege ij problema dl\'aplicassion. Nòta: j\'argistr a peulo potensialman conten-e d\'anformassion d\'identificassion</string>
@@ -413,7 +413,7 @@
   <string name="notifications">Notìfiche</string>
   <string name="read_notifications">Notìfiche (lesùe)</string>
   <string name="display_nearby_notification">Smon-e la notìfica ëd prossimità</string>
-  <string name="display_nearby_notification_summary">Sgnaché sì për vëdde ël pòst pi davzin ch\'a l\'ha damanca ëd plance</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Sgnaché sì për vëdde ël pòst pi davzin ch\'a l\'ha damanca ëd plance</string>
   <string name="no_close_nearby">Gnun pòst trovà davzin a chiel</string>
   <string name="list_sheet">Listé</string>
   <string name="storage_permission">Përmess d\'anmagasinament</string>
@@ -657,4 +657,6 @@
   <string name="limited_connection_enabled">Meud ëd conession limità abilità!</string>
   <string name="limited_connection_disabled">Meud ëd conession limità disabilità. Ij cariament an atèisa a arpijëran adess.</string>
   <string name="limited_connection">Conession limità</string>
+  <string name="statistics_quality">Plancia ëd qualità</string>
+  <string name="quality_images_info">Le plance ëd qualità a son dij diagrama o dle fòto che a sodisfo chèich criteri ëd qualità (dzortut ëd natura técnica) e a son pressiose për ij proget Wikimedia</string>
 </resources>
