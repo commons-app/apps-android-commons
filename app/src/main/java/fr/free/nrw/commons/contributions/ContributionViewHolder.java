@@ -18,6 +18,7 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
 import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -224,12 +225,20 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
   @OnClick(R.id.pauseResumeButton)
   public void onPauseResumeButtonClicked() {
     if (pauseResumeButton.getTag().toString().equals("pause")) {
-      callback.pauseUpload(contribution);
-      setResume();
+      pause();
     } else {
-      callback.resumeUpload(contribution);
-      setPaused();
+      resume();
     }
+  }
+
+  private void resume() {
+    callback.resumeUpload(contribution);
+    setPaused();
+  }
+
+  private void pause() {
+    callback.pauseUpload(contribution);
+    setResume();
   }
 
   /**
