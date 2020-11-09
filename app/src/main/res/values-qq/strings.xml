@@ -5,6 +5,7 @@
 * Liuxinyu970226
 * Madhurgupta10
 * Minh Nguyen
+* MuratTheTurkish
 * Nemo bis
 * Nicolas Raoul
 * Robby
@@ -163,4 +164,6 @@
   <string name="exif_tag_name_author">{{Identical|Author}}</string>
   <string name="exif_tag_name_location">{{Identical|Location}}</string>
   <string name="title_app_shortcut_bookmark">{{identical|Bookmark}}</string>
+  <string name="more">{{Identical|More}}</string>
+  <string name="favorites">{{Identical|Favorite}}</string>
 </resources>

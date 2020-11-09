@@ -302,8 +302,8 @@
   <string name="upload_problem_image">Problème trouvé avec l\'image</string>
   <string name="internet_downloaded">Veuillez ne téléverser que des images que vous avez prises vous-même. Ne téléversez aucune image que vous avez téléchargée depuis Internet.</string>
   <string name="give_permission">Accorder le droit</string>
-  <string name="use_external_storage" fuzzy="true">Utiliser le stockage externe</string>
-  <string name="use_external_storage_summary" fuzzy="true">Enregistrer les images prises avec l’appareil photo de votre appareil</string>
+  <string name="use_external_storage">Enregistrer les prises de vue dans l’application</string>
+  <string name="use_external_storage_summary">Enregistrer les images prises avec l’appareil photo de votre appareil dans son stockage</string>
   <string name="login_to_your_account">Connectez-vous à votre compte</string>
   <string name="send_log_file">Envoyer le journal</string>
   <string name="send_log_file_description">Envoyer par courriel le journal aux développeurs pour aider à la correction des problèmes de l’application. Note : les journaux peuvent potentiellement comporter des informations d’identification</string>
@@ -658,6 +658,8 @@
   <string name="pause">pause</string>
   <string name="resume">reprise</string>
   <string name="paused">En pause</string>
+  <string name="more">Plus</string>
+  <string name="favorites">Favoris</string>
   <string name="achievements_tab_title">Réussites</string>
   <string name="leaderboard_tab_title">Tableau de classement</string>
   <string name="rank_prefix">Rang :</string>

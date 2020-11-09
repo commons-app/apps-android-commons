@@ -658,6 +658,8 @@
   <string name="pause">zatrzymaj</string>
   <string name="resume">wznów</string>
   <string name="paused">Zatrzymano</string>
+  <string name="more">Więcej</string>
+  <string name="favorites">Ulubione</string>
   <string name="achievements_tab_title">Osiągnięcia</string>
   <string name="leaderboard_tab_title">Ranking</string>
   <string name="count_prefix">Licznik:</string>

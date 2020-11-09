@@ -289,8 +289,8 @@
   <string name="upload_problem_image">画像に問題があります</string>
   <string name="internet_downloaded">あなた自身の撮影した画像に限定してアップロードしてください。ウェブ上からダウンロードした画像はアップロードできません。</string>
   <string name="give_permission">権限を付与</string>
-  <string name="use_external_storage" fuzzy="true">外部ストレージを使用</string>
-  <string name="use_external_storage_summary" fuzzy="true">アプリ内のカメラで撮影した写真を端末に保存する</string>
+  <string name="use_external_storage">アプリの画面キャプチャを保存</string>
+  <string name="use_external_storage_summary">アプリ内のカメラで撮影した写真を端末のメモリに保存する</string>
   <string name="login_to_your_account">自分のアカウントにログイン</string>
   <string name="send_log_file">ログファイルを送信する</string>
   <string name="send_log_file_description">メールで開発者にログファイルを送信、アプリのバグ解消をサポートする。注記：ログには利用者特定情報が含まれることがあります</string>
@@ -426,7 +426,7 @@
   <string name="notifications">通知</string>
   <string name="read_notifications">通知（既読）</string>
   <string name="display_nearby_notification">近くの場所の通知を表示する</string>
-  <string name="display_nearby_notification_summary" fuzzy="true">ここをタップして、近くで画像を募集中の場所を表示</string>
+  <string name="display_nearby_notification_summary">アプリ内の通知を表示して、近くで画像を募集中の場所を表示</string>
   <string name="no_close_nearby">現在地の近くに該当する場所が見つかりません</string>
   <string name="list_sheet">一覧</string>
   <string name="storage_permission">ストレージの許可</string>
@@ -644,6 +644,8 @@
   <string name="pause">一時停止</string>
   <string name="resume">継続</string>
   <string name="paused">一時停止</string>
+  <string name="more">もっと見る</string>
+  <string name="favorites">お気に入り</string>
   <string name="achievements_tab_title">貢献</string>
   <string name="leaderboard_tab_title">リーダーボード</string>
   <string name="rank_prefix">順位</string>
@@ -667,5 +669,8 @@
   <string name="telemetry_opt_out_summary">周辺を表示させるときは現在地と使用状況データを匿名化してMapbox に送信</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;この地図を改善&lt;/a&gt;</string>
   <string name="limited_connection_enabled">接続制限を有効にしました。</string>
+  <string name="limited_connection_disabled">接続制限モードを解除。待機中のアップロードを再開します。</string>
   <string name="limited_connection">接続制限</string>
+  <string name="statistics_quality">上質な画像</string>
+  <string name="quality_images_info">上質な画像とは図や写真で一定の（主に技術的な）条件を満たすもので、ウィキメディアのプロジェクト群に使えそうなもののこと</string>
 </resources>
