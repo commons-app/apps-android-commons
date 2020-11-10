@@ -116,7 +116,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Call<MwQueryResponse> loginToken;
-
+    final  String progressDailog_key="ProgressDailog_state";
+    final String errorMessage_key ="errorMessage";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -455,5 +456,28 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     public static void startYourself(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        if(progressDialog!=null&&progressDialog.isShowing()){
+            outState.putBoolean(progressDailog_key,true);
+        }else{
+            outState.putBoolean(progressDailog_key,false);
+        }
+
+        outState.putString(errorMessage_key,errorMessage.getText().toString());
+    }
+
+
+    @Override
+    protected void onRestoreInstanceState(final Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if(savedInstanceState.getBoolean(progressDailog_key)){
+            performLogin();
+        }
+        String error=savedInstanceState.getString(errorMessage_key);
+        showMessage(error,R.color.secondaryDarkColor);
     }
 }
