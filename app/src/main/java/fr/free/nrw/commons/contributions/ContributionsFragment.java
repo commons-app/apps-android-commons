@@ -118,6 +118,12 @@ public class ContributionsFragment
         public void onServiceDisconnected(ComponentName componentName) {
             // this should never happen
             Timber.e(new RuntimeException("UploadService died but the rest of the process did not!"));
+            isUploadServiceConnected = false;
+        }
+
+        @Override
+        public void onBindingDied(final ComponentName name) {
+            isUploadServiceConnected = false;
         }
     };
     private boolean shouldShowMediaDetailsFragment;
@@ -463,6 +469,7 @@ public class ContributionsFragment
 
     @Override public void onDestroyView() {
         super.onDestroyView();
+        isUploadServiceConnected = false;
         presenter.onDetachView();
     }
 
