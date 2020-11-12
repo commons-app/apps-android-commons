@@ -9,14 +9,21 @@ import android.text.style.ClickableSpan;
 import android.text.style.URLSpan;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import fr.free.nrw.commons.utils.DialogUtil;
+import java.util.List;
+
+import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -35,6 +42,8 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
     Spinner spinnerLicenseList;
     @BindView(R.id.tv_share_license_summary)
     TextView tvShareLicenseSummary;
+    @BindView(R.id.tooltip)
+    ImageView tooltip;
 
     @Inject
     MediaLicenseContract.UserActionListener presenter;
@@ -63,7 +72,13 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
 
     private void init() {
         tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
-                callback.getTotalNumberOfSteps()));
+                callback.getTotalNumberOfSteps(), getString(R.string.license_step_title)));
+        tooltip.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogUtil.showAlertDialog(getActivity(), getString(R.string.license_step_title), getString(R.string.license_tooltip), getString(android.R.string.ok), null, true);
+            }
+        });
         initPresenter();
         initLicenseSpinner();
         presenter.getLicenses();
