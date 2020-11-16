@@ -663,4 +663,6 @@
   <string name="limited_connection">Ограничена врска</string>
   <string name="statistics_quality">Квалитетни слики</string>
   <string name="quality_images_info">Квалитетните слики се дијаграми или фотографии кои задоволуваат извесни стандарди за квалитет (кои се од претежно техничка природа) или имаат вредност за Викимедиините проекти</string>
+  <string name="resuming_upload">Продолжувам со подигањето…</string>
+  <string name="pausing_upload">Го паузирам подигањето…</string>
 </resources>

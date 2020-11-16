@@ -11,6 +11,7 @@
 * SimondR
 * Viiictorrr
 * Vlad5250
+* Vlnt
 * Ата
 -->
 <resources>
@@ -588,6 +589,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
   <string name="delete_helper_ask_reason_copyright_other">Інше</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Оскільки</string>
+  <string name="category_edit_helper_edit_message_else">Неможливо додати категорії</string>
   <string name="share_image_via">Поширити зображення через</string>
   <string name="no_achievements_yet">Поки що від вас немає вкладу</string>
   <string name="account_created">Обліковий запис створено!</string>

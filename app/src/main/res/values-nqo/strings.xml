@@ -10,6 +10,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">ߟߊ߬ߦߟߍ߬ߟߌ ߓߘߊ߫ ߘߊߡߌ߬ߣߊ߫</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="other">ߞߋߟߋ߲߫ %1$d ߟߊߦߟߍ߬</item>
   </plurals>
@@ -180,6 +181,7 @@
   <string name="background_image">ߝߊ߲߬ߝߘߊ ߞߘߐߟߊ ߖߌ߬ߦߊ߬ߓߍ</string>
   <string name="no_image_found">ߖߌ߬ߦߊ߬ߓߍ߫ ߡߊ߫ ߛߐ߬ߘߐ߲߬</string>
   <string name="no_subcategory_found">ߦߌߟߡߊߙߋ߲߫ ߕߴߦߋ߲߬</string>
+  <string name="no_parentcategory_found">ߡߏߦߌߓߊ߯ ߦߌߟߡߊ ߟߎ߬ ߝߋ߲߫ ߡߊ߫ ߛߐ߬ߘߐ߲߫.</string>
   <string name="upload_image">ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߟߍ߬</string>
   <string name="welcome_image_mount_zao">ߖ߭ߊߏ߫ ߞߎ߬ߙߎ</string>
   <string name="welcome_image_llamas">ߞߏ߲ߞߏߛߊ߱</string>
@@ -281,6 +283,7 @@
   <string name="error_loading_categories">ߝߎ߬ߕߎ߲߬ߕߌ ߓߌ߬ߟߊ߬ߣߍ߲߫ ߊ߬ ߘߐ߫ ߞߵߌ ߕߏ߫ ߦߌߟߡߊ ߟߎ߬ ߟߊߦߍ߬ߟߍ ߞߊ߲߬.</string>
   <string name="error_loading_depictions">ߝߎ߬ߕߎ߲߬ߕߌ ߓߘߊ߫ ߓߌ߬ߟߵߊ߬ ߘߐ߫ ߞߊ߬ ߦߌ߬ߘߊ߬ߟߌ ߟߊߢߎ߲ ߕߴߌ ߘߐ߫.</string>
   <string name="error_loading_subcategories">ߝߎ߬ߕߎ߲߬ߕߌ ߓߌ߬ߟߊ߬ߣߍ߲߫ ߊ߬ ߘߐ߫ ߞߵߌ ߕߏ߫ ߦߌߟߡߊ ߟߎ߬ ߟߊߦߍ߬ߟߍ ߞߊ߲߬.</string>
+  <string name="search_tab_title_media">ߞߟߋߞߟߋ</string>
   <string name="search_tab_title_categories">ߦߌߟߡߊ ߟߎ߬</string>
   <string name="search_tab_title_depictions">ߝߌ߬ߛߌ</string>
   <string name="explore_tab_title_featured">ߡߊߦߋߙߋ߲ߣߍ߲</string>
@@ -288,12 +291,21 @@
   <string name="successful_wikidata_edit">ߖߌ߬ߦߊ߬ߓߍ ߓߌ߬ߟߊ߬ߣߍ߲߬ ߦߋ߫ %1$s ߟߊ߫ ߥߞߌߘߕߊ ߛߌߟߊ ߟߋ߬ ߝߍ߬߹</string>
   <string name="menu_set_wallpaper">ߊ߬ ߓߌ߬ߟߊ߬ ߘߊ߬ߣߊ߲߬ߥߟߊ ߟߊ߫.</string>
   <string name="wallpaper_set_successfully">ߘߊ߬ߣߊ߲߬ߥߟߊ ߓߌ߬ߟߊ ߓߘߊ߫ ߛߎߘߊ߲߫߹</string>
+  <string name="quiz">ߡߊ߬ߝߍ߬ߣߍ߲߬ߠߌ߲</string>
   <string name="quiz_question_string">ߊ߬ ߝߐ߫ ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߢߊ߬ߣߍ߲߬ ߝߋߎ߫ ߞߊ߬ ߛߋ߫ ߟߊߦߟߍ߬ ߟߊ߫؟</string>
   <string name="question">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</string>
   <string name="result">ߖߋ߬ߓߌ</string>
+  <string name="quiz_back_button">ߣߴߌ ߕߏ߫ ߘߊ߫ ߖߌ߬ߦߌ߬ߓߍ߫ ߖߏ߰ߛߌ߬ߕߊ ߟߎ߬ ߟߊߦߟߍ߬ ߟߊ߫ ߛߐ߲߬߸ ߊ߬ ߘߌ߫ ߞߍ߫ ߦߏ߫ ߌ ߟߊ߫ ߖߊ߬ߕߋ߬ߘߊ ߦߋ߫ ߟߊߘߎ߲߫.ߌ ߘߍ߲߬ߞߣߍ߬ߦߊ߬ߣߍ߲߫ ߞߴߌ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߊ߬ߝߍ߬ߣߍ߲߬ߠߌ߲ ߟߊߛߴߊ߬ ߘߊ߲߬ ߠߊ߫؟</string>
+  <string name="quiz_alert_message">ߊ߬ ߞߊߛߌߦߊ߫ ߖߌ߬ߦߊ߬ߓߍ %1$s ߟߎ߬ ߘߴߌ ߣߊ߬ ߡߍ߲ ߠߎ߬ ߟߊߦߟߍ߬ ߟߊ߫߸ ߏ߬ ߟߎ߬ ߓߘߊ߫ ߖߏ߬ߛߌ߬.ߣߴߌ ߕߏ߫ ߘߊ߫ ߖߌ߬ߦߌ߬ߓߍ߫ ߖߏ߰ߛߌ߬ߕߊ ߟߎ߬ ߟߊߦߟߍ߬ ߟߊ߫ ߛߐ߲߬߸ ߊ߬ ߘߌ߫ ߞߍ߫ ߦߴߌ ߟߊ߫ ߖߊ߬ߕߋ߬ߘߊ ߦߋ߫ ߟߊߘߎ߲߫.\n\nߊ߬ ߞߊߘߴߌ ߦߋ߫ ߓߊ߬ ߞߊ߬ ߟߞߊ߬ߙߊ߲߬ߠߌ߲ ߦߋ߫ ߕߎ߲߯ ߏ߬ ߓߊ߯ ߞߍ߫ ߌ ߦߋ߫ ߡߊ߬ߝߍ߬ߣߍ߲߬ߠߌ߲ ߘߏ߫ ߟߊߛߐ߬ߘߐ߲߬ ߞߵߌ ߟߊߞߊ߬ߙߊ߲߬ ߖߌ߬ߦߊ߬ߓߍ ߛߎ߯ߦߊ߫ ߟߊߦߟߍ߬ߕߊ ߣߴߊ߬ ߟߊߦߟߍ߬ߓߊߟߌ ߟߎ߬ ߟߊ߫؟</string>
+  <string name="selfie_answer">ߔߘߋߞߎ ߡߐ߬ߟߐ߲߬ ߕߍ߫ ߖߘߍ߬ߖߌߦߊ (Selfies) ߟߊ߫.ߖߊ߰ߣߌ߲߬ ߌ ߞߊߣߊ߬ ߌ ߖߘߍ߬ߞߊߣߌ߲  ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߟߍ߬ ߝߏߣߴߊ߬ ߕߘߍ߬ ߘߊ߫ ߥߞߌߔߋߘߌߦߊ ߞߎߡߘߊ ߘߏ߫ ߓߘߊ߫ ߛߓߍ߫ ߌ ߞߊ߲߬.</string>
+  <string name="taj_mahal_answer">ߝߙߎߕߎ ߟߎ߬ ߣߌ߫ ߢߊߡߌߟߏ ߟߎ߬ ߟߋ߬ ߟߊߦߍ߬ߟߍ ߓߍ߲߬ߣߍ߲߫ ߦߋ߫ ߖߡߊ߬ߣߊ ߝߊ߲߬ߓߊ ߘߐ߫. ߌ ߦߟߌߕߏ߫ ߞߏ߫ ߥߊ߯ߕߌ߫ ߟߕߊߡߌ߲߫ ߞߎߛߊ߲ߧߊߞߏ ߡߊߞߍߣߍ߲ ߞߣߍߡߊ ߟߎ߬ ߦߋ߫ ߓߊߦߟߍߡߊ߲ ߤߊߞߍ ߞߘߐ߫ ߟߋ߬߸ ߏ߬ ߟߎ߬ ߡߊ߲ߞߊ߲߫ ߞߊ߬ ߟߊߦߟߍ߬.</string>
+  <string name="congratulatory_message_quiz">ߌ ߓߘߊ߫  %1$s ߖߋ߬ߓߟߌ߬ ߓߘߍ ߛߐ߬ߘߐ߲߬. ߌ ߞߎߟߎ߲ߖߋ߫߹</string>
+  <string name="warning_for_no_answer">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߝߌ߬ߟߊ ߘߏ߫ ߘߐ߫ ߞߋߟߋ߲߫ ߢߣߊߕߊߟߌ ߓߊߕߐ߬ߡߐ߲߫ ߞߊ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߖߋ߬ߓߌ߫</string>
+  <string name="user_not_logged_in">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߥߎ߬ߛߎ ߓߘߊ߫ ߕߊ߬ߡߌ߲߬߸ ߌ ߜߊ߲߬ߞߎ߲߬ ߕߎ߲߯ߣߌ߲߫ ߖߊ߰ߣߌ߲߫.</string>
   <string name="continue_message">ߘߊߓߊ߲ߠߌ߲</string>
   <string name="correct">ߖߋ߬ߓߟߌ߬ ߢߌߡߊ</string>
   <string name="wrong">ߖߋ߬ߓߌ߬ߟߌ ߝߘߏ߬ߣߍ߲</string>
+  <string name="quiz_screenshot_question">ߊ߬ ߝߐ߫ ߘߊ߬ߣߊ߲߬ߥߟߊ߬ߖߌߦߊ ߣߌ߲߬ ߓߍ߲߬ߣߍ߲߫ ߦߋ߫ ߟߊ߬ߦߟߍ߬ߟߌ ߘߐ߫ ߝߋߎ߫؟</string>
   <string name="share_app_title">ߟߥߊ߬ߟߌ߬ߟߊ߲ ߟߊ߬ߖߍ߲߬ߛߍ߲߬ߠߌ߲</string>
   <string name="error_fetching_nearby_places">ߝߌ߬ߟߌ ߦߋ߫ ߛߌ߰ߢߐ߲߰ ߘߌ߲ߞߌߙߊ ߟߊߘߏ߲߬ߕߐ ߘߐ߫.</string>
   <string name="add_description">ߞߊ߲߬ߛߓߍߟߌ ߟߊߘߏ߲߬</string>
@@ -311,12 +323,15 @@
   <string name="images_uploaded">ߖߌ߬ߦߊ߬ߓߍ ߓߘߊ߫ ߟߊߦߟߍ߬</string>
   <string name="image_reverts">ߖߌ߬ߦߊ߬ߓߍ ߡߊ߫ ߖߏ߰ߛߌ߬</string>
   <string name="images_used_by_wiki">ߖߌ߬ߦߊ߬ߓߍ߬ ߟߊߓߊ߯ߙߊߣߍ߲ ߠߎ߬</string>
+  <string name="achievements_share_message">ߌ ߟߊ߫ ߞߎ߲߬ߝߊ߰ߟߌ ߟߎ߫ ߟߊߖߍ߲ߛߍ߲߫ ߌ ߕߋߙߌ ߟߎ߬ ߡߊ߬߹</string>
+  <string name="achievements_revert_limit_message">ߘߎ߰ߟߊ߬ߘߊ߲߫ ߞߊ߬ߣߌ߲߬ߣߍ߲:</string>
   <string name="images_uploaded_explanation">ߌ ߓߘߊ߫ ߖߌ߬ߦߊ߬ߓߍ ߦߙߌߞߊ ߡߍ߲ ߠߊߦߟߍ߬ ߞߐ߲ߡߐ߲ߛ ߞߊ߲߬߸ ߟߊ߬ߦߟߍ߬ߟߌ߬ ߛߎ߲ߝߘߍ ߛߎ߯-ߎ-ߛߎ߫ ߟߊ߫.</string>
   <string name="images_reverted_explanation">ߌ ߓߘߊ߫ ߖߌ߬ߦߊ߬ߓߍ ߗߡߍ߬ߘߐ߬ߦߊ ߡߍ߲ ߠߊߦߟߍ߬ ߞߐ߲ߡߐ߲ߛ ߞߊ߲߬߸ ߏ߬ ߡߊ߫ ߖߏ߰ߛߌ߫.</string>
   <string name="images_used_explanation">ߌ ߓߘߊ߫ ߖߌ߬ߦߊ߬ߓߍ ߡߍ߲ ߠߎ߬ ߟߊߦߟߍ߬ ߞߐ߲ߡߐ߲ߛ ߞߊ߲߬ ߣߴߊ߬ߟߎ߬ ߓߘߊ߫ ߟߊߓߊ߯ߙߊ߫ ߥߞߌߔߋߘߌߦߊ߫ ߞߎߡߘߊ ߟߎ߬ ߟߊ߫.</string>
   <string name="error_occurred">ߝߎ߬ߕߎ߲߬ߕߌ ߓߘߊ߫ ߓߌ߬ߟߵߊ߬ ߘߐ߫߹</string>
   <string name="contributions_fragment">ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲ ߠߎ߬</string>
   <string name="nearby_fragment">ߛߌ߰ߢߐ߲߮</string>
+  <string name="no_close_nearby">ߛߌ߬ߢߐ߲߰ ߘߌ߲ߞߌߙߊ ߝߋ߲߫ ߡߊ߫ ߛߐ߬ߘߐ߲߫ ߡߍ߲ ߜߎߣߴߌ ߟߊ߫</string>
   <string name="list_sheet">ߛߙߍߘߍ</string>
   <string name="image_in_set_label">ߖߌ߬ߦߊ߬ߓߍ߫ %1$d ߘߐߓߍ߲߬ߕߊ</string>
   <string name="next">ߢߍߕߊ</string>
@@ -386,6 +401,8 @@
   <string name="error_occurred_in_picking_images">ߝߎ߬ߕߎ߲߬ߕߌ ߓߌ߬ߟߊ߬ߣߍ߲߫ ߊ߬ ߘߐ߫ ߞߵߌ ߕߏ߫ ߖߌ߬ߦߊ߬ߓߍ ߓߊߕߐ߬ߡߐ߲ ߞߊ߲߬.</string>
   <string name="image_chooser_title">ߖߌ߬ߦߊ߬ߓߍ߫ ߟߊߦߟߍ߬ߕߊ ߘߏ߫ ߛߎߥߊ߲ߘߌ߫</string>
   <string name="please_wait">ߡߊ߬ߞߐ߬ߣߐ߲߬ߠߌ߲ ߞߍ߫ ߖߊ߰ߣߌ߲߬...</string>
+  <string name="welcome_do_upload_content_description">ߖߌ߬ߦߊ߬ߓߍ߬ ߢߌ߬ߡߊ߬ ߟߊߦߟߍ߬ߕߊ ߟߎ߬ ߞߏߟߊ߲ߞߏߡߊ</string>
+  <string name="welcome_dont_upload_content_description">ߖߌ߬ߦߊ߬ߓߍ߬ ߖߎ߰ ߟߊߦߟߍ߬ߓߊߟߌ ߟߎ߬ ߞߏߟߊ߲ߞߏߡߊ</string>
   <string name="skip_image">ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߠߊߜߊ߲߫</string>
   <string name="exif_tag_name_author">ߛߓߍߦߟߊ</string>
   <string name="exif_tag_name_copyright">ߓߊߦߟߍߡߊ߲ ߤߊߞߍ</string>
@@ -410,6 +427,7 @@
   <string name="delete_helper_ask_spam_blurry">ߢߟߊߝߎ߬ߟߎ߲߬ߜߊ߬ߣߍ߲</string>
   <string name="delete_helper_ask_spam_other">ߘߏ߫ ߜߘߍ߫</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">ߖߌ߬ߦߊ߬ߓߍ ߜߍ߬ߙߍ߲߬ߘߍ߬ߣߍ߲</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">ߓߍ߲߬ߛߋ߲߬ߡߊ߫ ߖߌߦߊߓߍ ߟߎ߬ ߞߊ߬ ߝߘߊ߫ ߓߟߐߟߐ ߟߊ߫</string>
   <string name="delete_helper_ask_reason_copyright_logo">ߛߌ߲ߞߐ߲</string>
   <string name="delete_helper_ask_reason_copyright_other">ߘߏ߫ ߜߘߍ߫</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">ߓߊߏ߬ ߊ߬ ߦߋ߫</string>
@@ -437,5 +455,13 @@
   <string name="wikipedia_instructions_step_7">߇߲. ߞߎߡߘߊ ߟߊߥߊ߲߬ߞߊ߫</string>
   <string name="pause">ߊ߬ ߟߊߟߐ߬</string>
   <string name="paused">ߊ߬ ߓߘߊ߫ ߟߊߟߐ߬</string>
+  <string name="more">ߡߊߞߊ߬ߝߏ߬ ߜߘߍ ߟߎ߬</string>
   <string name="achievements_tab_title">ߞߎ߲߬ߝߊ߰ߟߌ</string>
+  <string name="leaderboard_column_user">ߟߊ߬ߓߊ߰ߙߊ߬ߟߊ</string>
+  <string name="leaderboard_column_count">ߦߙߌߞߊ</string>
+  <string name="leaderboard_yearly">ߛߊ߲߬ߓߍ߲</string>
+  <string name="leaderboard_weekly">ߞߎ߲߬ߢߐ߰ߓߍ߲</string>
+  <string name="leaderboard_all_time">ߕߎ߬ߡߊ ߓߍ߯</string>
+  <string name="leaderboard_upload">ߟߊ߬ߦߟߍ߬ߟߌ</string>
+  <string name="leaderboard_nearby">ߛߌ߬ߢߐ߲߮</string>
 </resources>

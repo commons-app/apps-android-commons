@@ -678,4 +678,6 @@
   <string name="telemetry_opt_out_summary">Wysyłaj anonimowe dane o lokalizacji i wykorzystywaniu danych do Mapboxa, gdy używasz funkcji „W pobliżu”</string>
   <string name="statistics_quality">Obrazy wysokiej jakości</string>
   <string name="quality_images_info">Obrazy wysokiej jakości to diagramy lub fotografie, które spełniają określone standardy dotyczące jakości (które w większości są ściśle techniczne) i są wartościowymi materiałami dla projektów Wikimedii.</string>
+  <string name="resuming_upload">Wznawianie przesyłania…</string>
+  <string name="pausing_upload">Wstrzymywanie przesyłania…</string>
 </resources>

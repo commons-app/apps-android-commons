@@ -682,4 +682,6 @@
   <string name="limited_connection">Sınırlı Bağlantı</string>
   <string name="statistics_quality">Kaliteli Resimler</string>
   <string name="quality_images_info">Kaliteli resimler, belirli kalite standartlarını (doğası gereği çoğunlukla teknik olan) karşılayan ve Wikimedia projeleri için değerli olan diyagramlar veya fotoğraflardır.</string>
+  <string name="resuming_upload">Yüklemeye devam ediliyor…</string>
+  <string name="pausing_upload">Yükleme duraklatılıyor…</string>
 </resources>

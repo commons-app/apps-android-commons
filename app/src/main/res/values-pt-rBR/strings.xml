@@ -675,4 +675,6 @@
   <string name="limited_connection">Conexão limitada</string>
   <string name="statistics_quality">Imagens de qualidade</string>
   <string name="quality_images_info">Imagens de qualidade são diagramas ou fotografias que atendem a certos padrões de qualidade (que são principalmente de natureza técnica) e são valiosos para projetos da Wikimedia</string>
+  <string name="resuming_upload">Retomando carregamento…</string>
+  <string name="pausing_upload">Pausando carregamento…</string>
 </resources>

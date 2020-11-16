@@ -661,4 +661,6 @@
   <string name="limited_connection">Conession limità</string>
   <string name="statistics_quality">Plancia ëd qualità</string>
   <string name="quality_images_info">Le plance ëd qualità a son dij diagrama o dle fòto che a sodisfo chèich criteri ëd qualità (dzortut ëd natura técnica) e a son pressiose për ij proget Wikimedia</string>
+  <string name="resuming_upload">Arpijé ël cariament…</string>
+  <string name="pausing_upload">Pàusa ant ël cariament…</string>
 </resources>

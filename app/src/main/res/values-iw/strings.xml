@@ -656,6 +656,8 @@
   <string name="pause">השהיה</string>
   <string name="resume">להמשיך</string>
   <string name="paused">מושהה</string>
+  <string name="more">עוד</string>
+  <string name="favorites">מועדפים</string>
   <string name="achievements_tab_title">הישגים</string>
   <string name="leaderboard_tab_title">לוח מובילים</string>
   <string name="rank_prefix">דירוג:</string>
@@ -682,4 +684,6 @@
   <string name="limited_connection">החיבור מוגבל</string>
   <string name="statistics_quality">תמונות איכות</string>
   <string name="quality_images_info">תמונות איכות הן תרשימים או תמונות שעומדות בתקני איכות מסוימים (שמטבעם בעיקר טכניים) והן בעלות ערך למיזמי ויקימדיה</string>
+  <string name="resuming_upload">ההעלאה ממשיכה…</string>
+  <string name="pausing_upload">ההעלאה מושהית…</string>
 </resources>
