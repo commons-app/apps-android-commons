@@ -68,8 +68,9 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     this.contribution = contribution;
     this.position = position;
     titleView.setText(contribution.getMedia().getMostRelevantCaption());
-    authorView.setText(contribution.getMedia().getCreator());
-
+    if (contribution.getMedia() != null && contribution.getMedia().getCreator() != null) {
+      authorView.setText(contribution.getMedia().getCreator());
+    }
     imageView.getHierarchy().setPlaceholderImage(R.drawable.image_placeholder);
     imageView.getHierarchy().setFailureImage(R.drawable.image_placeholder);
 
