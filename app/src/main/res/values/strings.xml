@@ -436,7 +436,7 @@
 
   <string name="write_storage_permission_rationale_for_image_share">We need your permission to access the external storage of your device in order to upload images.</string>
   <string name="nearby_notification_dismiss_message">You won\'t see the nearest place that needs pictures anymore. However, you can re-enable this notification in Settings if you wish.</string>
-  <string name="step_count">Step %1$d of %2$d</string>
+  <string name="step_count">Step %1$d of %2$d: %3$s</string>
   <string name="image_in_set_label">Image %1$d in set</string>
   <string name="next">Next</string>
   <string name="previous">Previous</string>
@@ -703,4 +703,13 @@ Upload your first media by tapping on the add button.</string>
   <string name="quality_images_info">Quality images are diagrams or photographs that meet certain quality standards (which are mostly technical in nature) and are valuable for Wikimedia projects</string>
   <string name="resuming_upload">Resuming upload…</string>
   <string name="pausing_upload">Pausing upload…</string>
+
+  <string name="media_details_tooltip">Please write a short caption that says what your picture shows. In the description, say what makes the picture interesting or typical or rare, and explain the context, visible or not. Use exact terminology as much as you can.</string>
+  <string name="depicts_tooltip">Please find and select all concepts that this image portrays. Be as specific as you can. If the image portrays multiple items, choose them all within reason. Do not choose generic tags if more specific tags are available.</string>
+  <string name="categories_tooltip">Please select the appropriate categories. Unlike depictions, categories are only in English.</string>
+  <string name="license_tooltip">Commons makes your pictures reusable and adapted by everyone. Do you want to waive all rights? Do you want to be attributed? Do you want adaptations to use the same license?</string>
+  <string name="depicts_step_title">Depicts</string>
+  <string name="license_step_title">Media License</string>
+  <string name="media_detail_step_title">Media Details</string>
+
 </resources>
