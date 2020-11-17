@@ -82,6 +82,7 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -333,7 +334,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void performMapReadyActions() {
-        if (isVisible() && isMapBoxReady) {
+        if (((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY && isMapBoxReady) {
             checkPermissionsAndPerformAction(() -> {
                 lastKnownLocation = locationManager.getLastLocation();
                 fr.free.nrw.commons.location.LatLng target=lastFocusLocation;
@@ -362,7 +363,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         mapView.onResume();
         presenter.attachView(this);
         registerNetworkReceiver();
-        if (isResumed() && isVisibleToUser) {
+        if (isResumed() && ((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY) {
             startTheMap();
         }
     }
