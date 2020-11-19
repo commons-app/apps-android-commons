@@ -393,7 +393,7 @@
   <string name="storage_permission">Autorixasion de archiviasion</string>
   <string name="write_storage_permission_rationale_for_image_share">Ne serve ła to autorixasion par ndar drento a ła memoria esterna del to dispoxidivo par cargar łe imajini</string>
   <string name="nearby_notification_dismiss_message">No te vedarè el posto pì rente che ghe serve imajini. Tuta via, te połi riativar sta notifega n\'te łe inpostasion, se te vołi.</string>
-  <string name="step_count">Paso %1$d de %2$d</string>
+  <string name="step_count" fuzzy="true">Paso %1$d de %2$d</string>
   <string name="image_in_set_label">Imajine %1$d in tel\'union</string>
   <string name="next">Dopo</string>
   <string name="previous">Prima</string>

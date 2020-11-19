@@ -441,7 +441,7 @@
   <string name="storage_permission">Дозвіл на зберігання</string>
   <string name="write_storage_permission_rationale_for_image_share">Нам потрібен ваш дозвіл на доступ до зовнішнього сховища на Вашому пристрої, щоб завантажувати зображення.</string>
   <string name="nearby_notification_dismiss_message">Ви більше не бачитимете сповіщень про найближчі місця без зображень. Однак Ви можете увімкнути ці сповіщення повторно у своїх налаштуваннях, якщо забажаєте.</string>
-  <string name="step_count">Крок %1$d із %2$d</string>
+  <string name="step_count" fuzzy="true">Крок %1$d із %2$d</string>
   <string name="image_in_set_label">Зображення %1$d у наборі</string>
   <string name="next">Наступне</string>
   <string name="previous">Попереднє</string>

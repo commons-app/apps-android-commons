@@ -311,7 +311,7 @@
   <string name="read_notifications" fuzzy="true">შეტყობინებები (არქივი)</string>
   <string name="list_sheet">სია</string>
   <string name="storage_permission">მეხსიერების ნებართვა</string>
-  <string name="step_count">ნაბიჯი %1$d %2$d-დან</string>
+  <string name="step_count" fuzzy="true">ნაბიჯი %1$d %2$d-დან</string>
   <string name="next">შემდეგი</string>
   <string name="previous">წინა</string>
   <string name="submit">გაგზავნა</string>

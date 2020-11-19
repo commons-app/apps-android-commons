@@ -366,7 +366,7 @@
   <string name="list_sheet">Llista</string>
   <string name="storage_permission">Permissos d\'emmagatzematge</string>
   <string name="write_storage_permission_rationale_for_image_share">Ens calen permisos per a accedir a l\'emmagatzematge extern del vostre dispositiu per tal de pujar imatges.</string>
-  <string name="step_count">Pas %1$d de %2$d</string>
+  <string name="step_count" fuzzy="true">Pas %1$d de %2$d</string>
   <string name="image_in_set_label">Imatge %1$s en el conjunt</string>
   <string name="next">Següent</string>
   <string name="previous">Anterior</string>

@@ -411,7 +411,7 @@
   <string name="storage_permission">Permisu d\'almacenamientu</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos el to permisu p\'aportar al almacenamientu esternu del to preséu pa poder xubir imaxes.</string>
   <string name="nearby_notification_dismiss_message">Yá nun vas ver el llugar más cercanu que precisa semeyes. Sicasí, puedes reactivar esti avisu na configuración si lo desees.</string>
-  <string name="step_count">Pasu %1$d de %2$d</string>
+  <string name="step_count" fuzzy="true">Pasu %1$d de %2$d</string>
   <string name="image_in_set_label">Imaxe %1$d del conxuntu</string>
   <string name="next">Siguiente</string>
   <string name="previous">Anterior</string>

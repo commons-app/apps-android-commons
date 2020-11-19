@@ -396,7 +396,7 @@
   <string name="storage_permission">Permeso por Konservado</string>
   <string name="write_storage_permission_rationale_for_image_share">Ni bezonas vian permeson aliri eksteran konservejon de via aparato por alŝuti bildojn.</string>
   <string name="nearby_notification_dismiss_message">Vi ne plu vidos la plej proksiman lokon bezonantan bildojn. Tamen, vi povas reŝalti tiun sciigon en Agordoj se vi volas.</string>
-  <string name="step_count">Paŝo %1$d el %2$d</string>
+  <string name="step_count" fuzzy="true">Paŝo %1$d el %2$d</string>
   <string name="image_in_set_label">%1$d en bildaro</string>
   <string name="next">Sekva</string>
   <string name="previous">Antaŭa</string>

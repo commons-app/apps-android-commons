@@ -419,7 +419,7 @@
   <string name="storage_permission">Izin Penyimpanan</string>
   <string name="write_storage_permission_rationale_for_image_share">Kami memerlukan izin Anda untuk mengakses penyimpanan eksternal perangkat Anda untuk mengunggah gambar.</string>
   <string name="nearby_notification_dismiss_message">Anda tidak akan melihat tempat di sekitar yang membutuhkan gambar lagi. Namun, Anda dapat mengaktifkan kembali pemberitahuan ini di Pengaturan jika diinginkan.</string>
-  <string name="step_count">Langkah %1$d dari %2$d</string>
+  <string name="step_count" fuzzy="true">Langkah %1$d dari %2$d</string>
   <string name="image_in_set_label">Gambar %1$d di set</string>
   <string name="next">Selanjutnya</string>
   <string name="previous">Sebelumnya</string>

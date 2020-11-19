@@ -419,7 +419,7 @@
   <string name="storage_permission">Povolenie k prístupu k úložnému priestoru</string>
   <string name="write_storage_permission_rationale_for_image_share">Potrebujeme povolenie k prístupu k externému úložisku vášho zariadenia na nahranie obrázkov.</string>
   <string name="nearby_notification_dismiss_message">Už neuvidíte najbližšie miesto, ktoré potrebuje obrázky. Túto notifikáciu môžete znovu povoliť v Nastaveniach.</string>
-  <string name="step_count">Krok %1$d z %2$d</string>
+  <string name="step_count" fuzzy="true">Krok %1$d z %2$d</string>
   <string name="image_in_set_label">Obrázok %1$d v sade</string>
   <string name="next">Ďalej</string>
   <string name="previous">Späť</string>

@@ -447,7 +447,7 @@
   <string name="storage_permission">הרשאת אחסון</string>
   <string name="write_storage_permission_rationale_for_image_share">אנחנו זקוקים להרשאה שלך לגשת לאחסון חיצוני במכשיר שלך כדי להעלות תמונות.</string>
   <string name="nearby_notification_dismiss_message">לא יופיעו עוד בפניך מקומות בסביבה שדורשים צילום. עם זאת, ניתן להפעיל התראה זו מחדש דרך ההגדרות במידת הצורך.</string>
-  <string name="step_count">שלב %1$d מתוך %2$d</string>
+  <string name="step_count" fuzzy="true">שלב %1$d מתוך %2$d</string>
   <string name="image_in_set_label">תמונה %1$d בסדרה</string>
   <string name="next">הבאה</string>
   <string name="previous">הקודמת</string>

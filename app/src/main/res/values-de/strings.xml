@@ -421,7 +421,7 @@
   <string name="storage_permission">Speicherberechtigung</string>
   <string name="write_storage_permission_rationale_for_image_share">Wir benötigen deine Berechtigung für den Zugriff auf den externen Speicher deines Geräts, um Bilder hochzuladen.</string>
   <string name="nearby_notification_dismiss_message">Du wirst nicht mehr den nähersten Ort sehen, der noch Bilder braucht. Du kannst jedoch diese Benachrichtigung in den Einstellungen erneut aktivieren, falls du das zu wünschen tust.</string>
-  <string name="step_count">Schritt %1$d von %2$d</string>
+  <string name="step_count" fuzzy="true">Schritt %1$d von %2$d</string>
   <string name="image_in_set_label">Bild %1$d im Satz</string>
   <string name="next">Nächste</string>
   <string name="previous">Vorherige</string>

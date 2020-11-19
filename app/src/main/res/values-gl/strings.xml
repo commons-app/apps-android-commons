@@ -401,7 +401,7 @@
   <string name="storage_permission">Permiso de almacenamento</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos o seu permiso para acceder ó almacenamento externo do seu dispositivo para cargar imaxes.</string>
   <string name="nearby_notification_dismiss_message">Xa non verá o lugar máis próximo que precisa fotos. Porén, podes volver habilitar esta notificación na configuración.</string>
-  <string name="step_count">Paso %1$d de %2$d</string>
+  <string name="step_count" fuzzy="true">Paso %1$d de %2$d</string>
   <string name="image_in_set_label">Imaxe %1$d do conxunto</string>
   <string name="next">Seguinte</string>
   <string name="previous">Anterior</string>

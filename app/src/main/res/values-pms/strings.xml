@@ -419,7 +419,7 @@
   <string name="storage_permission">Përmess d\'anmagasinament</string>
   <string name="write_storage_permission_rationale_for_image_share">I l\'oma damanca ëd sò përmess për acede a l\'anmagasinament estern ëd so aparechio për carié dle plance.</string>
   <string name="nearby_notification_dismiss_message">A s-ciairërà pi ël pòst pi davzin ch\'a l\'ha damanca ëd plance. Comsëssìa, a peul torna ativé costa notìfica ant ij paràmeter, s\'a veul.</string>
-  <string name="step_count">Pass %1$d ëd %2$d</string>
+  <string name="step_count" fuzzy="true">Pass %1$d ëd %2$d</string>
   <string name="image_in_set_label">La plancia %1$d ant l\'ansem</string>
   <string name="next">Apress</string>
   <string name="previous">Precedent</string>

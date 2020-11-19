@@ -375,7 +375,7 @@
   <string name="storage_permission">ಶೇಖರಣ ಅನುಮತಿ</string>
   <string name="write_storage_permission_rationale_for_image_share">ಆಕೃತಿಲೆನ್ ಮಿತೇರಾವರೆಗಾದ್  ಇರೆನ ಬಾಹ್ಯ ಶೇಖರಣೊನು ಪ್ರವೇಶ ಮಲ್ಪರೆ ಎಂಕಲೆಗ್  ಇರೆನ ಅನುಮತಿ ಬೋಡು.</string>
   <string name="nearby_notification_dismiss_message">ಚಿತ್ರೊಲು ಬೋಡಾಯಿನ ಕೈತಲ್ದ ಜಾಗೊಲೆನ್ ಈರ್ ನನ ತೂಪುಜರ್. ಆಂಡಾ ಇರೆಗ್ ಬೋಡಾಂಡ ಈರ್ ಈ ಅಧಿಸೂಚನೆನ್ ಗಣಸ್ಥಿತಿಲೆಡ್ ಪಿರ ಶಕ್ತ ಮಲ್ಪೊಲಿ.</string>
-  <string name="step_count">%2$d ಉಂದೆತ  %1$d ಮುಟ್ಟು</string>
+  <string name="step_count" fuzzy="true">%2$d ಉಂದೆತ  %1$d ಮುಟ್ಟು</string>
   <string name="image_in_set_label">ಆಕೃತಿ  %1$d ಗುಚ್ಚೊಡು</string>
   <string name="next">ದುಂಬುದ</string>
   <string name="previous">ಪಿರವುದ</string>

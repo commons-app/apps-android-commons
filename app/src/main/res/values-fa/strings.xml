@@ -406,7 +406,7 @@
   <string name="no_close_nearby">هیچ‌ مکان نزدیکی به شما یافته نشد</string>
   <string name="list_sheet">فهرست</string>
   <string name="storage_permission">اجازه ذخیره</string>
-  <string name="step_count">گام %1$d از %2$d</string>
+  <string name="step_count" fuzzy="true">گام %1$d از %2$d</string>
   <string name="image_in_set_label">تصویر %1$d در مجموعه</string>
   <string name="next">بعدی</string>
   <string name="previous">قبلی</string>

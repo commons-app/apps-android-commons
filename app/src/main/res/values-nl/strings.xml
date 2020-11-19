@@ -294,7 +294,7 @@
   <string name="display_nearby_notification">Meldingen dichtbij weergeven</string>
   <string name="list_sheet">Lijst</string>
   <string name="storage_permission">Toestemming om op te slaan</string>
-  <string name="step_count">Stap %1$d van %2$d</string>
+  <string name="step_count" fuzzy="true">Stap %1$d van %2$d</string>
   <string name="next">Volgende</string>
   <string name="previous">Vorige</string>
   <string name="submit">Verzenden</string>

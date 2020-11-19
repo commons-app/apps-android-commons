@@ -423,7 +423,7 @@
   <string name="storage_permission">기억 장치 권한</string>
   <string name="write_storage_permission_rationale_for_image_share">이미지를 업로드하려면 외부 기억 장치에 접근할 권한이 필요합니다.</string>
   <string name="nearby_notification_dismiss_message">더 이상 사진이 필요한 주변 장소를 보지 못하게 됩니다. 그러나 원할 경우 설정에서 이 알림을 다시 활성화할 수 있습니다.</string>
-  <string name="step_count">단계 %2$d 중 %1$d</string>
+  <string name="step_count">단계 %2$d 중 %1$d: %3$s</string>
   <string name="next">다음</string>
   <string name="previous">이전</string>
   <string name="submit">제출</string>
@@ -584,4 +584,6 @@
   <string name="leaderboard_weekly">매주</string>
   <string name="leaderboard_upload">업로드</string>
   <string name="leaderboard_my_rank_button_text">내 순위</string>
+  <string name="license_step_title">미디어 라이선스</string>
+  <string name="media_detail_step_title">미디어 상세 정보</string>
 </resources>

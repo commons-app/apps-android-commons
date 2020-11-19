@@ -433,7 +433,7 @@
   <string name="storage_permission">Autorização de acesso</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos da sua autorização para aceder ao armazenamento externo do seu dispositivo para carregar imagens.</string>
   <string name="nearby_notification_dismiss_message">Deixará de ver o local mais próximo que precisa de fotos. No entanto, pode reativar esta notificação nas configurações, se desejar.</string>
-  <string name="step_count">Passo %1$d de %2$d</string>
+  <string name="step_count" fuzzy="true">Passo %1$d de %2$d</string>
   <string name="image_in_set_label">Imagem %1$d no conjunto</string>
   <string name="next">Seguinte</string>
   <string name="previous">Anterior</string>

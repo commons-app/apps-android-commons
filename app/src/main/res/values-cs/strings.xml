@@ -423,7 +423,7 @@
   <string name="storage_permission">Povolení k ukládání</string>
   <string name="write_storage_permission_rationale_for_image_share">Potřebujeme povolení k přístupu k externí paměti vašeho zařízení, abychom mohli nahrávat obrázky.</string>
   <string name="nearby_notification_dismiss_message">Nevidíte nejbližší místo, které už potřebuje obrázky. Toto oznámení však můžete znovu povolit v nastavení.</string>
-  <string name="step_count">Krok %1$d z %2$d</string>
+  <string name="step_count" fuzzy="true">Krok %1$d z %2$d</string>
   <string name="image_in_set_label">Obrázek %1$d v sadě</string>
   <string name="next">Další</string>
   <string name="previous">Předchozí</string>

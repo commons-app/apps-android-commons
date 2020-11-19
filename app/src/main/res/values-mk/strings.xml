@@ -421,7 +421,7 @@
   <string name="storage_permission">Дозвола за складирање</string>
   <string name="write_storage_permission_rationale_for_image_share">Ни треба ваша дозвола за пристап до надворешниот склад на вашиот уред за да се подигнат сликите.</string>
   <string name="nearby_notification_dismiss_message">Повеќе нема да ви се прикажува најблиското место без слика. Доколку се премислите, таа поставка ќе ја најдете во Нагодувањата.</string>
-  <string name="step_count">Чекор %1$d од %2$d</string>
+  <string name="step_count">Чекор %1$d од %2$d: %3$s</string>
   <string name="image_in_set_label">Слика %1$d во збирот</string>
   <string name="next">Следно</string>
   <string name="previous">Претходно</string>
@@ -665,4 +665,11 @@
   <string name="quality_images_info">Квалитетните слики се дијаграми или фотографии кои задоволуваат извесни стандарди за квалитет (кои се од претежно техничка природа) или имаат вредност за Викимедиините проекти</string>
   <string name="resuming_upload">Продолжувам со подигањето…</string>
   <string name="pausing_upload">Го паузирам подигањето…</string>
+  <string name="media_details_tooltip">Напишете краток опис кој кажува што е прикажано на сликата. Во него образложете зошто сликата е интересна, типична или ретка, и објаснете го контекстот, било да е видлив или не. Користете што поточни поими, секогаш кога можете.</string>
+  <string name="depicts_tooltip">Најдете ги и изберете ги сите концепти претставени на сликава. Настојувајте да биде што поуточнето. Ако сликата прикажува повеќе предмети, изберете ги сите, во рамките на разумноста. Не избирајте општи ознаки ако имате на располагање поуточнети.</string>
+  <string name="categories_tooltip">Изберете ги прикладните категории. За разлика од приказите, категориите се исклучиво на англиски.</string>
+  <string name="license_tooltip">Ризницата ги става вашите дела на располагање за употреба и преработка за секого. Дали сакате да се одречете од сите права? Дали сакате делото да ви се припишува? Дали сакате преработените дела да ја имаат истата лиценца?</string>
+  <string name="depicts_step_title">Прикажува</string>
+  <string name="license_step_title">Лиценца на творбата</string>
+  <string name="media_detail_step_title">Поединости за творбата</string>
 </resources>

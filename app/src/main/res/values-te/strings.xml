@@ -399,7 +399,7 @@
   <string name="storage_permission">స్టోరేజి అనుమతి</string>
   <string name="write_storage_permission_rationale_for_image_share">బొమ్మలను ఎక్కించేందుకు గాను మీ బయటి స్టోరేజిని చూసే అనుమతులు కావాలి</string>
   <string name="nearby_notification_dismiss_message">బొమ్మలు అవసరమైన చుట్టుపక్కల స్థలాలు ఇక మీకు కనబడవు. అయితే, ఎప్పుడు కావాలంటే అప్పుడు మీరీ సెట్టింగును మార్చుకోవచ్చు.</string>
-  <string name="step_count">%2$d లో %1$d అంగ</string>
+  <string name="step_count" fuzzy="true">%2$d లో %1$d అంగ</string>
   <string name="image_in_set_label">సెట్టులో %1$d వ బొమ్మ</string>
   <string name="next">తదుపరి</string>
   <string name="previous">మునుపటి</string>

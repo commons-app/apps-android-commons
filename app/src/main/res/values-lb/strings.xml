@@ -303,7 +303,7 @@
   <string name="nearby_fragment">Nobäi</string>
   <string name="notifications">Notifikatiounen</string>
   <string name="list_sheet">Lëscht</string>
-  <string name="step_count">Schrëtt %1$d vu(n) %2$d</string>
+  <string name="step_count" fuzzy="true">Schrëtt %1$d vu(n) %2$d</string>
   <string name="next">Weider</string>
   <string name="previous">Vireg</string>
   <string name="submit">Späicheren</string>

@@ -402,7 +402,7 @@
   <string name="storage_permission">Lagringstillatelse</string>
   <string name="write_storage_permission_rationale_for_image_share">Vi trenger din tillatelse for å få tilgang til enhetens eksterne lagring for å kunne laste opp bilder.</string>
   <string name="nearby_notification_dismiss_message">Du vil ikke se det nærmeste stedet som trenger bilder lenger. Du kan imidlertid slå på dette varselet igjen i innstillingene om du ønsker.</string>
-  <string name="step_count">Steg %1$d av %2$d</string>
+  <string name="step_count" fuzzy="true">Steg %1$d av %2$d</string>
   <string name="image_in_set_label">Bilde %1$d i sett</string>
   <string name="next">Neste</string>
   <string name="previous">Forrige</string>

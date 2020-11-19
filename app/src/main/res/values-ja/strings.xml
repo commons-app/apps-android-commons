@@ -432,7 +432,7 @@
   <string name="storage_permission">ストレージの許可</string>
   <string name="write_storage_permission_rationale_for_image_share">画像の投稿には、外部ストレージへのアクセス権限を許可してください。</string>
   <string name="nearby_notification_dismiss_message">今後、画像募集中の近くの場所は表示されません。ただしこの通知機能は、いつでも「設定」画面から有効にできます。</string>
-  <string name="step_count">全部で%2$d件のうち%1$d件目の手順</string>
+  <string name="step_count" fuzzy="true">全部で%2$d件のうち%1$d件目の手順</string>
   <string name="image_in_set_label">%1$d 点を組み写真にする</string>
   <string name="next">次へ</string>
   <string name="previous">前へ</string>

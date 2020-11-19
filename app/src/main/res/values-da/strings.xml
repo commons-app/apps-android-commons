@@ -332,7 +332,7 @@
   <string name="no_close_nearby">Ingen steder i nærheden fundet der var tæt på dig</string>
   <string name="list_sheet">Liste</string>
   <string name="storage_permission">Lagringstilladelse</string>
-  <string name="step_count">Trin %1$d af %2$d</string>
+  <string name="step_count">Trin %1$d af %2$d: %3$s</string>
   <string name="next">Næste</string>
   <string name="previous">Forrige</string>
   <string name="submit">Indsend</string>

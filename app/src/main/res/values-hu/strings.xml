@@ -402,7 +402,7 @@
   <string name="storage_permission">Tárolási engedély</string>
   <string name="write_storage_permission_rationale_for_image_share">Szükséges az engedélyed a külső tárolóhoz való hozzáféréshez. Ez a képek feltöltéséhez kell.</string>
   <string name="nearby_notification_dismiss_message">Nem lesznek láthatók a képet igénylő közeli helyek. Az értesítés visszakapcsolható a Beállításoknál.</string>
-  <string name="step_count">%1$d. lépés, összesen: %2$d</string>
+  <string name="step_count" fuzzy="true">%1$d. lépés, összesen: %2$d</string>
   <string name="image_in_set_label">%1$d kép a gyűjteményben</string>
   <string name="next">Következő</string>
   <string name="previous">Előző</string>

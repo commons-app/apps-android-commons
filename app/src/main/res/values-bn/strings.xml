@@ -329,7 +329,7 @@
   <string name="nearby_fragment">কাছাকাছি</string>
   <string name="notifications">বিজ্ঞপ্তি</string>
   <string name="list_sheet">তালিকা</string>
-  <string name="step_count">ধাপ %2$d এর %1$d</string>
+  <string name="step_count" fuzzy="true">ধাপ %2$d এর %1$d</string>
   <string name="next">পরবর্তী</string>
   <string name="previous">পূর্ববর্তী</string>
   <string name="submit">জমা দিন</string>

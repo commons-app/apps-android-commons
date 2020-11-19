@@ -433,7 +433,7 @@
   <string name="storage_permission">存储权限</string>
   <string name="write_storage_permission_rationale_for_image_share">我们需要您的许可才能访问设备的外部存储空间以上传图片。</string>
   <string name="nearby_notification_dismiss_message">您再也看不到最近需要图片的地方了。但是，如果希望的话，可以在设置中重新启用此通知。</string>
-  <string name="step_count">%2$d中的第%1$d步</string>
+  <string name="step_count" fuzzy="true">%2$d中的第%1$d步</string>
   <string name="image_in_set_label">图像%1$d在相册中</string>
   <string name="next">下一个</string>
   <string name="previous">上一个</string>

@@ -413,7 +413,7 @@
   <string name="storage_permission">Autorizzazione di archiviazione</string>
   <string name="write_storage_permission_rationale_for_image_share">Abbiamo bisogno della tua autorizzazione per accedere alla memoria esterna del tuo dispositivo per caricare le immagini.</string>
   <string name="nearby_notification_dismiss_message">Non vedrai più il luogo più vicino che ha bisogno di immagini. Tuttavia, puoi riattivare questa notifica in Impostazioni, se lo desideri.</string>
-  <string name="step_count">Passo %1$d di %2$d</string>
+  <string name="step_count">Passo %1$d di %2$d: %3$s</string>
   <string name="image_in_set_label">Immagine %1$d nell\'insieme</string>
   <string name="next">Successivo</string>
   <string name="previous">Precedente</string>

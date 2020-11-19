@@ -385,7 +385,7 @@
   <string name="storage_permission">Heimild á gagnageymslu</string>
   <string name="write_storage_permission_rationale_for_image_share">Við þurfum að fá heimild frá þér fyrir aðgang í gagnageymslu tækisins svo hægt sé að senda inn myndir.</string>
   <string name="nearby_notification_dismiss_message">Þú munt ekki lengur sjá nálægasta staðinn sem þarfnast mynda. Hinsvegar geturðu, ef þú vilt, endurvirkjað þessar tilkynningar í stillingunum.</string>
-  <string name="step_count">Skref %1$d af %2$d</string>
+  <string name="step_count" fuzzy="true">Skref %1$d af %2$d</string>
   <string name="image_in_set_label">Mynd %1$d í setti</string>
   <string name="next">Næsta</string>
   <string name="previous">Fyrri</string>

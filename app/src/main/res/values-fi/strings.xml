@@ -375,7 +375,7 @@
   <string name="read_notifications">Ilmoitukset (luetut)</string>
   <string name="display_nearby_notification">Näytä lähistöllä-ilmoitus</string>
   <string name="list_sheet">Lista</string>
-  <string name="step_count">Vaihe %1$d/%2$d</string>
+  <string name="step_count" fuzzy="true">Vaihe %1$d/%2$d</string>
   <string name="next">Seuraava</string>
   <string name="previous">Edellinen</string>
   <string name="submit">Lähetä</string>

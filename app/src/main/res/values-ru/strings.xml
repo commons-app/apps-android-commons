@@ -456,7 +456,7 @@
   <string name="storage_permission">Разрешение для использования внешнего носителя</string>
   <string name="write_storage_permission_rationale_for_image_share">Нам требуется разрешение доступа к внешнему носителю вашего устройства для того, чтобы загружать изображения.</string>
   <string name="nearby_notification_dismiss_message">Вы больше не будете видеть ближайшие места без изображений. Если передумаете, вы найдете этот параметр в настройках.</string>
-  <string name="step_count">Шаг %1$d из %2$d</string>
+  <string name="step_count" fuzzy="true">Шаг %1$d из %2$d</string>
   <string name="image_in_set_label">Изображение %1$d в наборе</string>
   <string name="next">Далее</string>
   <string name="previous">Назад</string>

@@ -364,7 +364,7 @@
   <string name="no_close_nearby">ไม่พบสถานที่ใกล้เคียงที่อยู่ใกล้คุณ</string>
   <string name="list_sheet">รายการ</string>
   <string name="storage_permission">สิทธิอนุญาตที่เก็บข้อมูล</string>
-  <string name="step_count">ขั้นตอนที่ %1$d จาก %2$d</string>
+  <string name="step_count" fuzzy="true">ขั้นตอนที่ %1$d จาก %2$d</string>
   <string name="next">ถัดไป</string>
   <string name="previous">ก่อนหน้า</string>
   <string name="submit">ส่ง</string>
