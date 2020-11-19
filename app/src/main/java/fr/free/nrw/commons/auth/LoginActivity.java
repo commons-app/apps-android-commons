@@ -116,10 +116,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Call<MwQueryResponse> loginToken;
-    final  String Save_progressDailog="ProgressDailog_state";
-    final String Save_errorMessage ="errorMessage";
-    final String Save_username="username";
-    final  String Save_password="password";
+    final  String saveProgressDailog="ProgressDailog_state";
+    final String saveErrorMessage ="errorMessage";
+    final String saveUsername="username";
+    final  String savePassword="password";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -464,17 +464,15 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     protected void onSaveInstanceState(Bundle outState) {
         // if progressDialog is visible during the configuration change  then store state as  true else false so that
         // we maintain visiblity of progressDailog after configuration change
-        if(progressDialog!=null&&progressDialog.isShowing()){
-            outState.putBoolean(Save_progressDailog,true);
-        }else{
-            outState.putBoolean(Save_progressDailog,false);
+        if(progressDialog!=null&&progressDialog.isShowing()) {
+            outState.putBoolean(saveProgressDailog,true);
+        } else {
+            outState.putBoolean(saveProgressDailog,false);
         }
-
-        outState.putString(Save_errorMessage,errorMessage.getText().toString()); //Save the errorMessage
-        outState.putString(Save_username,getUsername()); // Save the username
-        outState.putString(Save_password,getPassword()); // Save thte password
+        outState.putString(saveErrorMessage,errorMessage.getText().toString()); //Save the errorMessage
+        outState.putString(saveUsername,getUsername()); // Save the username
+        outState.putString(savePassword,getPassword()); // Save thte password
     }
-
     private String getUsername() {
         return usernameEdit.getText().toString();
     }
@@ -486,19 +484,15 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     protected void onRestoreInstanceState(final Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        usernameEdit.setText(savedInstanceState.getString(Save_username));
-        passwordEdit.setText(savedInstanceState.getString(Save_password));
-
-
-        if(savedInstanceState.getBoolean(Save_progressDailog)){
+        usernameEdit.setText(savedInstanceState.getString(saveUsername));
+        passwordEdit.setText(savedInstanceState.getString(savePassword));
+        if(savedInstanceState.getBoolean(saveProgressDailog)) {
             performLogin();
         }
-
-        String errorMessage=savedInstanceState.getString(Save_errorMessage);
-
-        if(sessionManager.isUserLoggedIn()){
+        String errorMessage=savedInstanceState.getString(saveErrorMessage);
+        if(sessionManager.isUserLoggedIn()) {
             showMessage(R.string.login_success, R.color.primaryDarkColor);
-        }else{
+        } else {
             showMessage(errorMessage, R.color.secondaryDarkColor);
         }
 
