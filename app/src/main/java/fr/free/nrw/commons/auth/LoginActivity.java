@@ -483,7 +483,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @Override
     protected void onRestoreInstanceState(final Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-
         usernameEdit.setText(savedInstanceState.getString(saveUsername));
         passwordEdit.setText(savedInstanceState.getString(savePassword));
         if(savedInstanceState.getBoolean(saveProgressDailog)) {
@@ -495,6 +494,5 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         } else {
             showMessage(errorMessage, R.color.secondaryDarkColor);
         }
-
     }
 }
