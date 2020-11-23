@@ -45,7 +45,7 @@ public class FileUtilsWrapper {
   /**
    * Takes a file as input and returns an Observable of files with the specified chunk size
    */
-  public Observable<File> getFileChunks(Context context, File file, final int chunkSize)
+  public List<File> getFileChunks(Context context, File file, final int chunkSize)
       throws IOException {
     final byte[] buffer = new byte[chunkSize];
 
@@ -58,7 +58,7 @@ public class FileUtilsWrapper {
         buffers.add(writeToFile(context, Arrays.copyOf(buffer, size), file.getName(),
             getFileExt(file.getName())));
       }
-      return Observable.fromIterable(buffers);
+      return buffers;
     }
   }
 

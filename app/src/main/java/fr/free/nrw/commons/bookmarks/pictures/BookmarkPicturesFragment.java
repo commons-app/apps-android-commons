@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.bookmarks.BookmarksActivity;
+import fr.free.nrw.commons.bookmarks.BookmarkListRootFragment;
 import fr.free.nrw.commons.category.GridViewAdapter;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -67,7 +67,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        gridView.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
+        gridView.setOnItemClickListener((AdapterView.OnItemClickListener) getParentFragment());
         initList();
     }
 
@@ -90,7 +90,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
             gridView.setVisibility(GONE);
             if (gridAdapter != null) {
                 gridAdapter.clear();
-                ((BookmarksActivity) getContext()).viewPagerNotifyDataSetChanged();
+                ((BookmarkListRootFragment)getParentFragment()).viewPagerNotifyDataSetChanged();
             }
             initList();
         }
@@ -191,7 +191,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
                 return;
             }
             gridAdapter.addItems(collection);
-            ((BookmarksActivity) getContext()).viewPagerNotifyDataSetChanged();
+            ((BookmarkListRootFragment) getParentFragment()).viewPagerNotifyDataSetChanged();
         }
         progressBar.setVisibility(GONE);
         statusTextView.setVisibility(GONE);

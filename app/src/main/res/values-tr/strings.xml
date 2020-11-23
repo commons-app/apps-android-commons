@@ -16,6 +16,7 @@
 * Okkerem
 * Rapsar
 * Sayginer
+* Sezgin İbiş
 * Stonecy
 * Sucsuzz
 * TmY e12
@@ -296,8 +297,8 @@
   <string name="upload_problem_image">Resimde bulunan sorunlar</string>
   <string name="internet_downloaded">Lütfen yalnızca kendi çektiğiniz resimleri yükleyin. İnternetten indirdiğiniz resimleri yüklemeyin.</string>
   <string name="give_permission">İzin ver</string>
-  <string name="use_external_storage">Harici depolamayı kullanın</string>
-  <string name="use_external_storage_summary">Uygulama içi kamera ile çekilen resimleri cihazınıza kaydedin</string>
+  <string name="use_external_storage">Uygulama içi çekimleri kaydedin</string>
+  <string name="use_external_storage_summary">Uygulama içi kamera ile çekilmiş resimleri cihazınızın depolama alanına kaydedin</string>
   <string name="login_to_your_account">Hesabınızda oturum açın</string>
   <string name="send_log_file">Kayıt dosyasını gönder</string>
   <string name="send_log_file_description">Uygulama ile ilgili sorunları çözmek için geliştiricilere günlük dosyasını e-posta yoluyla gönderin. Not: Günlükler potansiyel olarak tanımlayıcı bilgiler içerebilir</string>
@@ -433,13 +434,13 @@
   <string name="notifications">Bildirimler</string>
   <string name="read_notifications">Bildirimler (okunmuş)</string>
   <string name="display_nearby_notification">Yakınımdakiler bildirimi görüntüle</string>
-  <string name="display_nearby_notification_summary">Size en yakın olan ve resme ihtiyaç duyan yerleri görmek için dokunun</string>
+  <string name="display_nearby_notification_summary">Resimlere ihtiyaç duyan en yakın yer için uygulama içi bildirim göster</string>
   <string name="no_close_nearby">Size yakın bir yer bulunamadı</string>
   <string name="list_sheet">Liste</string>
   <string name="storage_permission">Depolama İzni</string>
   <string name="write_storage_permission_rationale_for_image_share">Görüntüleri yüklemek için cihazınızın harici belleğine erişim iznine sahip olmamız gerekiyor.</string>
   <string name="nearby_notification_dismiss_message">Artık size en yakın yerleri görmeyeceksiniz. Ancak isterseniz bu bildirimi Ayarlar\'da yeniden etkinleştirebilirsiniz.</string>
-  <string name="step_count">Aşama %1$d/%2$d</string>
+  <string name="step_count">Aşama %1$d/%2$d: %3$s</string>
   <string name="image_in_set_label">Resim %1$d kayıtta</string>
   <string name="next">Sonraki</string>
   <string name="previous">Önceki</string>
@@ -652,6 +653,8 @@
   <string name="pause">duraklat</string>
   <string name="resume">devam et</string>
   <string name="paused">Durduruldu</string>
+  <string name="more">Daha fazla</string>
+  <string name="favorites">Favoriler</string>
   <string name="achievements_tab_title">Başarılar</string>
   <string name="leaderboard_tab_title">Liderlik sıralaması</string>
   <string name="rank_prefix">Sıra:</string>
@@ -677,4 +680,15 @@
   <string name="limited_connection_enabled">Sınırlı bağlantı modu etkinleştirildi!</string>
   <string name="limited_connection_disabled">Sınırlı bağlantı modu devre dışı bırakıldı. Bekleyen yüklemeler şimdi devam ettirilecek.</string>
   <string name="limited_connection">Sınırlı Bağlantı</string>
+  <string name="statistics_quality">Kaliteli Resimler</string>
+  <string name="quality_images_info">Kaliteli resimler, belirli kalite standartlarını (doğası gereği çoğunlukla teknik olan) karşılayan ve Wikimedia projeleri için değerli olan diyagramlar veya fotoğraflardır.</string>
+  <string name="resuming_upload">Yüklemeye devam ediliyor…</string>
+  <string name="pausing_upload">Yükleme duraklatılıyor…</string>
+  <string name="media_details_tooltip">Lütfen resminizin ne gösterdiğini anlatan kısa bir başlık yazın. Açıklamada, resmi neyin ilginç veya tipik veya nadir kıldığını söyleyin ve bağlamı görünür olsun veya olmasın açıklayın. Mümkün olduğu kadar kesin terminoloji kullanın.</string>
+  <string name="depicts_tooltip">Lütfen bu resminin tasvir ettiği tüm kavramları bulun ve seçin. Mümkün olduğunca spesifik olun. Resim birden çok öğeyi tasvir ediyorsa, hepsini gerekçeyle seçin. Daha spesifik etiketler varsa genel etiketleri seçmeyin.</string>
+  <string name="categories_tooltip">Lütfen uygun kategorileri seçin. Tasvirlerin aksine, kategoriler yalnızca İngilizce\'dir.</string>
+  <string name="license_tooltip">Commons, resimlerinizi herkes tarafından yeniden kullanılabilir ve uyarlanabilir hale getirir. Tüm haklardan feragat etmek istiyor musunuz? İlişkilendirilmek istiyor musunuz? Uyarlamaların aynı lisansı kullanmasını ister misiniz?</string>
+  <string name="depicts_step_title">Tasvir</string>
+  <string name="license_step_title">Medya Lisansı</string>
+  <string name="media_detail_step_title">Medya Ayrıntılar</string>
 </resources>

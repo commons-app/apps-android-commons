@@ -240,7 +240,7 @@
   <string name="upload_problem_different_geolocation">ეს სურათი სხვა ადგილას არის გადაღებული.</string>
   <string name="upload_problem_do_you_continue">მაინც გსურთ ამ სურათის ატვირთვა?</string>
   <string name="give_permission">ნების დართვა</string>
-  <string name="use_external_storage">გარე მეხსიერების გამოყენება</string>
+  <string name="use_external_storage" fuzzy="true">გარე მეხსიერების გამოყენება</string>
   <string name="null_url">შეცდომა! URL ვერ მოიძებნა</string>
   <string name="nominate_deletion">წაშლაზე ნომინირება</string>
   <string name="nominated_for_deletion">ეს სურათი წარდგენილია წაშლაზე</string>
@@ -311,7 +311,7 @@
   <string name="read_notifications" fuzzy="true">შეტყობინებები (არქივი)</string>
   <string name="list_sheet">სია</string>
   <string name="storage_permission">მეხსიერების ნებართვა</string>
-  <string name="step_count">ნაბიჯი %1$d %2$d-დან</string>
+  <string name="step_count" fuzzy="true">ნაბიჯი %1$d %2$d-დან</string>
   <string name="next">შემდეგი</string>
   <string name="previous">წინა</string>
   <string name="submit">გაგზავნა</string>

@@ -148,7 +148,7 @@ public class UploadService extends CommonsDaggerService {
    * @param contribution
    */
   public void pauseUpload(Contribution contribution) {
-    uploadClient.pauseUpload();
+    uploadClient.pauseUpload(contribution.getPageId());
     contribution.setState(Contribution.STATE_PAUSED);
     compositeDisposable.add(contributionDao.update(contribution)
         .subscribeOn(ioThreadScheduler)
@@ -310,9 +310,8 @@ public class UploadService extends CommonsDaggerService {
           }
         })
         .flatMap(uploadStash -> {
+          Timber.d("Upload stash result %s", uploadStash.toString());
           notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
-
-          Timber.d("Stash upload response 1 is %s", uploadStash.toString());
 
           if (uploadStash.getState() == StashUploadState.SUCCESS) {
             Timber.d("making sure of uniqueness of name: %s", filename);
@@ -332,7 +331,6 @@ public class UploadService extends CommonsDaggerService {
               }
             });
           } else if (uploadStash.getState() == StashUploadState.PAUSED) {
-            Timber.d("Contribution upload paused");
             showPausedNotification(contribution);
             return Observable.never();
           } else {
@@ -359,7 +357,6 @@ public class UploadService extends CommonsDaggerService {
 
   private void onUpload(Contribution contribution, String notificationTag,
       UploadResult uploadResult) {
-    Timber.d("Stash upload response 2 is %s", uploadResult.toString());
 
     notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
 
@@ -401,7 +398,7 @@ public class UploadService extends CommonsDaggerService {
 
   @SuppressLint("StringFormatInvalid")
   @SuppressWarnings("deprecation")
-  private void showFailedNotification(Contribution contribution) {
+  private void showFailedNotification(final Contribution contribution) {
     final String displayTitle = contribution.getMedia().getDisplayTitle();
     curNotification.setTicker(getString(R.string.upload_failed_notification_title, displayTitle))
         .setContentTitle(getString(R.string.upload_failed_notification_title, displayTitle))
@@ -412,6 +409,7 @@ public class UploadService extends CommonsDaggerService {
         curNotification.build());
 
     contribution.setState(Contribution.STATE_FAILED);
+    contribution.setChunkInfo(null);
 
     compositeDisposable.add(contributionDao
         .update(contribution)
@@ -419,7 +417,7 @@ public class UploadService extends CommonsDaggerService {
         .subscribe());
   }
 
-  private void showPausedNotification(Contribution contribution) {
+  private void showPausedNotification(final Contribution contribution) {
     final String displayTitle = contribution.getMedia().getDisplayTitle();
     curNotification.setTicker(getString(R.string.upload_paused_notification_title, displayTitle))
         .setContentTitle(getString(R.string.upload_paused_notification_title, displayTitle))

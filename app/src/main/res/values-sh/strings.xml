@@ -199,8 +199,8 @@
   <string name="error_while_cache">Greška predmemoriranja slika</string>
   <string name="title_info">Kratki i jedinstveni naslov datoteke, koji će služiti kao njen naziv. Možete koristiti čist jezik s međuprostorom, ali nemojte pisati datotečni nastavak</string>
   <string name="give_permission">Daj dopuštenje</string>
-  <string name="use_external_storage">Koristi spoljašnju memoriju</string>
-  <string name="use_external_storage_summary">Spremanje napravljenih slika u privitku s kamerom na Vašem uređaju</string>
+  <string name="use_external_storage" fuzzy="true">Koristi spoljašnju memoriju</string>
+  <string name="use_external_storage_summary" fuzzy="true">Spremanje napravljenih slika u privitku s kamerom na Vašem uređaju</string>
   <string name="login_to_your_account">Prijavite se s svojim računom</string>
   <string name="send_log_file">Pošalji dnevničku datoteku</string>
   <string name="send_log_file_description">Pošalji evidencijsku datoteku programerima putem e-pošte kako biste riješili probleme u privitku. Napomena: dnevnici potencijalno mogu sadržati lične podatke.</string>

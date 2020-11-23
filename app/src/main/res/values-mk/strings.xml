@@ -278,8 +278,8 @@
   <string name="upload_problem_image">Пронајдени проблеми во сликата</string>
   <string name="internet_downloaded">Подигајте само слики кои самите сте ги направиле. Не подигајте слики што сте ги нашле некаде на семрежјето.</string>
   <string name="give_permission">Дај дозвола</string>
-  <string name="use_external_storage">Користи надворешен склад</string>
-  <string name="use_external_storage_summary">Зачувување на направените слики во прилогот со камерата на вашиот уред</string>
+  <string name="use_external_storage">Зачувај слики направени во прилогот</string>
+  <string name="use_external_storage_summary">Зачувување на сликите направени со камерата во прилогот на вашиот уред</string>
   <string name="login_to_your_account">Најавете се со вашата сметка</string>
   <string name="send_log_file">Испрати дневничка податотека</string>
   <string name="send_log_file_description">Испрати дневничка податотека на разработувачите по е-пошта за да се решат грешките во прилогот. Напомена: дневниците потенцијално може да содржат лични податоци.</string>
@@ -415,13 +415,13 @@
   <string name="notifications">Известувања</string>
   <string name="read_notifications">Известувања (прочитани)</string>
   <string name="display_nearby_notification">Известувај ме за места во близина</string>
-  <string name="display_nearby_notification_summary">Допрете тука за да го видите најблиското место без слика</string>
+  <string name="display_nearby_notification_summary">Прикажувај известувања во прилогот за најблиското место без слика</string>
   <string name="no_close_nearby">Не најдов места во ваша близина</string>
   <string name="list_sheet">Список</string>
   <string name="storage_permission">Дозвола за складирање</string>
   <string name="write_storage_permission_rationale_for_image_share">Ни треба ваша дозвола за пристап до надворешниот склад на вашиот уред за да се подигнат сликите.</string>
   <string name="nearby_notification_dismiss_message">Повеќе нема да ви се прикажува најблиското место без слика. Доколку се премислите, таа поставка ќе ја најдете во Нагодувањата.</string>
-  <string name="step_count">Чекор %1$d од %2$d</string>
+  <string name="step_count">Чекор %1$d од %2$d: %3$s</string>
   <string name="image_in_set_label">Слика %1$d во збирот</string>
   <string name="next">Следно</string>
   <string name="previous">Претходно</string>
@@ -634,6 +634,8 @@
   <string name="pause">запри</string>
   <string name="resume">продолжи</string>
   <string name="paused">Запрено</string>
+  <string name="more">Повеќе</string>
+  <string name="favorites">Омилени</string>
   <string name="achievements_tab_title">Достигнувања</string>
   <string name="leaderboard_tab_title">Предводници</string>
   <string name="rank_prefix">Место:</string>
@@ -659,4 +661,15 @@
   <string name="limited_connection_enabled">Овозможен режимот на ограничена врска.</string>
   <string name="limited_connection_disabled">Режимот на ограничена врска е оневозоможен. Сега ќе продолжат преземањата во исчекување.</string>
   <string name="limited_connection">Ограничена врска</string>
+  <string name="statistics_quality">Квалитетни слики</string>
+  <string name="quality_images_info">Квалитетните слики се дијаграми или фотографии кои задоволуваат извесни стандарди за квалитет (кои се од претежно техничка природа) или имаат вредност за Викимедиините проекти</string>
+  <string name="resuming_upload">Продолжувам со подигањето…</string>
+  <string name="pausing_upload">Го паузирам подигањето…</string>
+  <string name="media_details_tooltip">Напишете краток опис кој кажува што е прикажано на сликата. Во него образложете зошто сликата е интересна, типична или ретка, и објаснете го контекстот, било да е видлив или не. Користете што поточни поими, секогаш кога можете.</string>
+  <string name="depicts_tooltip">Најдете ги и изберете ги сите концепти претставени на сликава. Настојувајте да биде што поуточнето. Ако сликата прикажува повеќе предмети, изберете ги сите, во рамките на разумноста. Не избирајте општи ознаки ако имате на располагање поуточнети.</string>
+  <string name="categories_tooltip">Изберете ги прикладните категории. За разлика од приказите, категориите се исклучиво на англиски.</string>
+  <string name="license_tooltip">Ризницата ги става вашите дела на располагање за употреба и преработка за секого. Дали сакате да се одречете од сите права? Дали сакате делото да ви се припишува? Дали сакате преработените дела да ја имаат истата лиценца?</string>
+  <string name="depicts_step_title">Прикажува</string>
+  <string name="license_step_title">Лиценца на творбата</string>
+  <string name="media_detail_step_title">Поединости за творбата</string>
 </resources>

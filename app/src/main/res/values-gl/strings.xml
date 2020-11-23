@@ -264,8 +264,8 @@
   <string name="upload_problem_do_you_continue">Aínda quere subir esta imaxe?</string>
   <string name="internet_downloaded">Por favor suba so fotografías feitas por vostede mesmo. Non suba imaxes ou fotografías que descargara da Internet.</string>
   <string name="give_permission">Outorgar permiso</string>
-  <string name="use_external_storage">Usar o almacenamento externo</string>
-  <string name="use_external_storage_summary">Gardar as imaxes capturadas coa cámara do seu dispositivo</string>
+  <string name="use_external_storage" fuzzy="true">Usar o almacenamento externo</string>
+  <string name="use_external_storage_summary" fuzzy="true">Gardar as imaxes capturadas coa cámara do seu dispositivo</string>
   <string name="login_to_your_account">Comezar sesión na súa conta</string>
   <string name="send_log_file">Enviar ficheiro de rexistro</string>
   <string name="send_log_file_description">Enviar o rexistro ós desenvolvedores por correo electrónico para axudar na corrección de problemas coa aplicación. Nota: os rexistros poden conter información potencialmente identificativa</string>
@@ -395,13 +395,13 @@
   <string name="notifications">Notificacións</string>
   <string name="read_notifications">Notificacións (lidas)</string>
   <string name="display_nearby_notification">Amosar notificacións de proximidade</string>
-  <string name="display_nearby_notification_summary">Prema aquí para ver o lugar máis preto que necesita fotos</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Prema aquí para ver o lugar máis preto que necesita fotos</string>
   <string name="no_close_nearby">Non se atoparon lugares preto de ti</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Permiso de almacenamento</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos o seu permiso para acceder ó almacenamento externo do seu dispositivo para cargar imaxes.</string>
   <string name="nearby_notification_dismiss_message">Xa non verá o lugar máis próximo que precisa fotos. Porén, podes volver habilitar esta notificación na configuración.</string>
-  <string name="step_count">Paso %1$d de %2$d</string>
+  <string name="step_count" fuzzy="true">Paso %1$d de %2$d</string>
   <string name="image_in_set_label">Imaxe %1$d do conxunto</string>
   <string name="next">Seguinte</string>
   <string name="previous">Anterior</string>

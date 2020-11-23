@@ -265,8 +265,8 @@
   <string name="upload_problem_do_you_continue">Ønsker du fortsatt å laste opp dette bildet?</string>
   <string name="internet_downloaded">Last kun opp bilder du har tatt selv. Ikke last opp bilder du har lastet ned fra internett.</string>
   <string name="give_permission">Gi tillatelse</string>
-  <string name="use_external_storage">Bruk ekstern lagring</string>
-  <string name="use_external_storage_summary">Lagre bilder som er tatt med kameraet i appen på enheten din</string>
+  <string name="use_external_storage" fuzzy="true">Bruk ekstern lagring</string>
+  <string name="use_external_storage_summary" fuzzy="true">Lagre bilder som er tatt med kameraet i appen på enheten din</string>
   <string name="login_to_your_account">Logg inn med kontoen din</string>
   <string name="send_log_file">Send loggfil</string>
   <string name="send_log_file_description">Send loggfil til utviklerne via epost for å hjelpe til å feilsøke problemer med appen. Merk: Logger kan potensielt inneholde identifiserende informasjon.</string>
@@ -396,13 +396,13 @@
   <string name="notifications">Varsler</string>
   <string name="read_notifications" fuzzy="true">Varsler (arkivert)</string>
   <string name="display_nearby_notification">Vis varsel for steder i nærheten</string>
-  <string name="display_nearby_notification_summary">Trykk her for å se det nærmeste stedet som trenger bilder</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Trykk her for å se det nærmeste stedet som trenger bilder</string>
   <string name="no_close_nearby">Ingen steder funnet i nærheten av deg</string>
   <string name="list_sheet">Liste</string>
   <string name="storage_permission">Lagringstillatelse</string>
   <string name="write_storage_permission_rationale_for_image_share">Vi trenger din tillatelse for å få tilgang til enhetens eksterne lagring for å kunne laste opp bilder.</string>
   <string name="nearby_notification_dismiss_message">Du vil ikke se det nærmeste stedet som trenger bilder lenger. Du kan imidlertid slå på dette varselet igjen i innstillingene om du ønsker.</string>
-  <string name="step_count">Steg %1$d av %2$d</string>
+  <string name="step_count" fuzzy="true">Steg %1$d av %2$d</string>
   <string name="image_in_set_label">Bilde %1$d i sett</string>
   <string name="next">Neste</string>
   <string name="previous">Forrige</string>

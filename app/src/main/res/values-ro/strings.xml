@@ -283,8 +283,8 @@
   <string name="upload_problem_image">Probleme găsite în imagine</string>
   <string name="internet_downloaded">Vă rugăm să încărcați doar fotografiile realizate de dvs. Nu încărcați imaginile pe care le-ați descărcat de pe Internet.</string>
   <string name="give_permission">Obțineți permisiunea</string>
-  <string name="use_external_storage">Utilizați spațiul de stocare extern</string>
-  <string name="use_external_storage_summary">Salvați fotografiile realizate cu aparatul foto în aplicație de pe dispozitiv</string>
+  <string name="use_external_storage" fuzzy="true">Utilizați spațiul de stocare extern</string>
+  <string name="use_external_storage_summary" fuzzy="true">Salvați fotografiile realizate cu aparatul foto în aplicație de pe dispozitiv</string>
   <string name="login_to_your_account">Conectați-vă la contul dvs.</string>
   <string name="send_log_file">Trimiteți fișierul jurnal</string>
   <string name="send_log_file_description">Trimiteți istoricul fișierului dezvoltatorilor prin e-mail pentru a ajuta la depanarea problemelor legate de aplicație. Notă: jurnalele pot conține informații de identificare</string>
@@ -416,13 +416,13 @@
   <string name="notifications">Notificări</string>
   <string name="read_notifications">Notificări (citite)</string>
   <string name="display_nearby_notification">Afișați notificarea din apropiere</string>
-  <string name="display_nearby_notification_summary">Apăsați aici pentru a vedea cel mai apropiat loc care are nevoie de imagini</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Apăsați aici pentru a vedea cel mai apropiat loc care are nevoie de imagini</string>
   <string name="no_close_nearby">Nu există locuri apropiate găsite în apropierea dvs.</string>
   <string name="list_sheet">Listă</string>
   <string name="storage_permission">Permisiune de stocare</string>
   <string name="write_storage_permission_rationale_for_image_share">Avem nevoie de permisiunea dvs. pentru a accesa spațiul de stocare extern al dispozitivului dvs. pentru a încărca imagini.</string>
   <string name="nearby_notification_dismiss_message">Nu veți vedea cel mai apropiat loc care are nevoie de imagini. Cu toate acestea, puteți reactiva această notificare în Setări, dacă doriți.</string>
-  <string name="step_count">Pasul %1$d din %2$d</string>
+  <string name="step_count" fuzzy="true">Pasul %1$d din %2$d</string>
   <string name="image_in_set_label">Imaginea %1$d în set</string>
   <string name="next">Următor</string>
   <string name="previous">Precedent</string>

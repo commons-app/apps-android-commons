@@ -247,8 +247,8 @@
   <string name="upload_problem_different_geolocation">Aquesta imatge s\'ha pres a una altra ubicació.</string>
   <string name="upload_problem_do_you_continue">Encara voleu carregar la imatge?</string>
   <string name="give_permission">Dóna permís</string>
-  <string name="use_external_storage">Utilitza l’emmagatzematge extern</string>
-  <string name="use_external_storage_summary">Desa les fotos fetes amb la càmera integrada del dispositiu</string>
+  <string name="use_external_storage">Deseu fotos a l\'aplicació</string>
+  <string name="use_external_storage_summary">Deseu les fotos fetes amb la càmera de l\'aplicació a l\'emmagatzematge del dispositiu</string>
   <string name="login_to_your_account">Entreu en el vostre compte</string>
   <string name="send_log_file">Envia el fitxer de registre</string>
   <string name="send_log_file_description">Envia el fitxer de registre a l\'equip de desenvolupament per correu per ajudar a depurar problemes amb l\'aplicació. Nota: els registres poden incorporar informació identificadora</string>
@@ -361,12 +361,12 @@
   <string name="notifications">Notificacions</string>
   <string name="read_notifications">Notificacions (llegides)</string>
   <string name="display_nearby_notification">Mostra notificacions properes</string>
-  <string name="display_nearby_notification_summary">Feu un toc aquí per a veure el lloc més proper que necessiti fotos</string>
+  <string name="display_nearby_notification_summary">Mostra la notificació a l\'aplicació del lloc més proper que necessiti fotos</string>
   <string name="no_close_nearby">No s\'han trobat llocs propers prop vostre</string>
   <string name="list_sheet">Llista</string>
   <string name="storage_permission">Permissos d\'emmagatzematge</string>
   <string name="write_storage_permission_rationale_for_image_share">Ens calen permisos per a accedir a l\'emmagatzematge extern del vostre dispositiu per tal de pujar imatges.</string>
-  <string name="step_count">Pas %1$d de %2$d</string>
+  <string name="step_count" fuzzy="true">Pas %1$d de %2$d</string>
   <string name="image_in_set_label">Imatge %1$s en el conjunt</string>
   <string name="next">Següent</string>
   <string name="previous">Anterior</string>

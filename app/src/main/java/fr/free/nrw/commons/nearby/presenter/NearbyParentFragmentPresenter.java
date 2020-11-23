@@ -111,16 +111,16 @@ public class NearbyParentFragmentPresenter
     }
 
     @Override
-    public void backButtonClicked() {
+    public boolean backButtonClicked() {
         if(nearbyParentFragmentView.isListBottomSheetExpanded()) {
             // Back should first hide the bottom sheet if it is expanded
             nearbyParentFragmentView.listOptionMenuItemClicked();
+            return true;
         } else if (nearbyParentFragmentView.isDetailsBottomSheetVisible()) {
             nearbyParentFragmentView.setBottomSheetDetailsSmaller();
-        } else {
-            // Otherwise go back to contributions fragment
-            nearbyParentFragmentView.setTabItemContributions();
+            return true;
         }
+        return false;
     }
 
     public void markerUnselected() {

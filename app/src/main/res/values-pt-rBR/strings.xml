@@ -290,8 +290,8 @@
   <string name="upload_problem_image">Problemas encontrados na imagem</string>
   <string name="internet_downloaded">Por favor, só envie fotos que você tirou. Não faça upload de fotos baixadas da Internet.</string>
   <string name="give_permission">Dar permissão</string>
-  <string name="use_external_storage">Usar o armazenamento externo</string>
-  <string name="use_external_storage_summary">Salvar as fotos tiradas com a câmera no aplicativo no seu dispositivo</string>
+  <string name="use_external_storage">Salvar fotos no aplicativo</string>
+  <string name="use_external_storage_summary">Salvar as fotos tiradas com a câmera do aplicativo no armazenamento do dispositivo</string>
   <string name="login_to_your_account">Faça login na sua conta</string>
   <string name="send_log_file">Enviar arquivo de registro</string>
   <string name="send_log_file_description">Enviar arquivo de registro para desenvolvedores via e-mail para ajudar a depurar problemas com o aplicativo. Nota: os registros podem conter informações de identificação</string>
@@ -427,13 +427,13 @@
   <string name="notifications">Notificações</string>
   <string name="read_notifications">Notificações (lidas)</string>
   <string name="display_nearby_notification">Exibir notificação próxima</string>
-  <string name="display_nearby_notification_summary">Toque aqui para ver o local mais próximo que precisa de fotos</string>
+  <string name="display_nearby_notification_summary">Mostrar notificação no aplicativo para o lugar mais próximo que precisa de fotos</string>
   <string name="no_close_nearby">Nenhum lugar próximo encontrado perto de você</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Permissão de Armazenamento</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos da sua permissão para acessar o armazenamento externo do seu dispositivo para fazer upload de imagens.</string>
   <string name="nearby_notification_dismiss_message">Você não verá mais o lugar mais próximo que precisa de fotos. No entanto, você pode reativar essa notificação em Configurações, se desejar.</string>
-  <string name="step_count">Passo %1$d de %2$d</string>
+  <string name="step_count">Passo %1$d de %2$d: %3$s</string>
   <string name="image_in_set_label">Imagem %1$d em conjunto</string>
   <string name="next">Próximo</string>
   <string name="previous">Anterior</string>
@@ -646,6 +646,8 @@
   <string name="pause">pausar</string>
   <string name="resume">continuar</string>
   <string name="paused">Pausado</string>
+  <string name="more">Mais</string>
+  <string name="favorites">Favoritos</string>
   <string name="achievements_tab_title">Conquistas</string>
   <string name="leaderboard_tab_title">Tabela de classificação</string>
   <string name="rank_prefix">Classificação:</string>
@@ -671,4 +673,15 @@
   <string name="limited_connection_enabled">Modo de conexão limitada habilitado!</string>
   <string name="limited_connection_disabled">Modo de conexão limitada desativado. Os carregamentos pendentes serão retomados agora.</string>
   <string name="limited_connection">Conexão limitada</string>
+  <string name="statistics_quality">Imagens de qualidade</string>
+  <string name="quality_images_info">Imagens de qualidade são diagramas ou fotografias que atendem a certos padrões de qualidade (que são principalmente de natureza técnica) e são valiosos para projetos da Wikimedia</string>
+  <string name="resuming_upload">Retomando carregamento…</string>
+  <string name="pausing_upload">Pausando carregamento…</string>
+  <string name="media_details_tooltip">Escreva uma pequena legenda que diga o que sua imagem mostra. Na descrição, diga o que torna a imagem interessante ou típica ou rara e explique o contexto, visível ou não. Use a terminologia exata tanto quanto você puder.</string>
+  <string name="depicts_tooltip">Encontre e selecione todos os conceitos que esta imagem retrata. Seja o mais específico possível. Se a imagem retrata vários itens, escolha todos dentro do razoável. Não escolha tags genéricas se tags mais específicas estiverem disponíveis.</string>
+  <string name="categories_tooltip">Selecione as categorias apropriadas. Ao contrário das representações, as categorias estão apenas em inglês.</string>
+  <string name="license_tooltip">Commons torna suas fotos reutilizáveis e adaptadas por todos. Você quer renunciar a todos os direitos? Você quer ser atribuído? Você quer adaptações para usar a mesma licença?</string>
+  <string name="depicts_step_title">Descreve</string>
+  <string name="license_step_title">Licença de mídia</string>
+  <string name="media_detail_step_title">Detalhes de mídia</string>
 </resources>

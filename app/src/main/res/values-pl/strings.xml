@@ -306,8 +306,8 @@
   <string name="upload_problem_image">Problemy znalezione na obrazie</string>
   <string name="internet_downloaded">Prześlij tylko zdjęcia, które sam wykonałeś. Nie przesyłaj zdjęć pobranych z Internetu.</string>
   <string name="give_permission">Uzyskaj uprawnienie</string>
-  <string name="use_external_storage">Użyj pamięci zewnętrznej</string>
-  <string name="use_external_storage_summary">Zapisz zdjęcia zrobione w aplikacji na swoim urzadzeniu</string>
+  <string name="use_external_storage">Zapisz zdjęcia wykonane w aplikacji</string>
+  <string name="use_external_storage_summary">Zapisz zdjęcia zrobione w aplikacji w pamięci swojego urządzenia</string>
   <string name="login_to_your_account">Zaloguj się na swoje konto</string>
   <string name="send_log_file">Wyślij plik rejestru</string>
   <string name="send_log_file_description">Wyślij plik rejestru w e-mailu do twórców, aby ułatwić im rozwiązanie aplikemów z aplikacją Uwaga: rejestry mogą potencjalnie zawierać informacje, dzięki którym można cię zidentyfikować</string>
@@ -443,13 +443,13 @@
   <string name="notifications">Powiadomienia</string>
   <string name="read_notifications">Powiadomienia (przeczytaj)</string>
   <string name="display_nearby_notification">Wyświetl powiadomienie w pobliżu</string>
-  <string name="display_nearby_notification_summary">Stuknij tutaj, aby zobaczyć najbliższe miejsce, które wymaga zdjęć</string>
+  <string name="display_nearby_notification_summary">Pokazuj w aplikacji powiadomienia o pobliskich miejscach wymagających zilustrowania</string>
   <string name="no_close_nearby">Nie odnaleziono pobliskich Tobie miejsc</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Uprawnienie do przechowywania</string>
   <string name="write_storage_permission_rationale_for_image_share">Potrzebujemy Twojej zgody na dostęp do zewnętrznej pamięci urządzenia w celu przesyłania obrazów.</string>
   <string name="nearby_notification_dismiss_message">Nie zobaczysz już najbliższego miejsca, które potrzebuje zdjęć. Możesz jednak ponownie włączyć to powiadomienie w Ustawieniach, jeśli chcesz.</string>
-  <string name="step_count">Krok %1$d z %2$d</string>
+  <string name="step_count" fuzzy="true">Krok %1$d z %2$d</string>
   <string name="image_in_set_label">Obraz %1$d w zestawie</string>
   <string name="next">Następny</string>
   <string name="previous">Poprzedni</string>
@@ -658,6 +658,8 @@
   <string name="pause">zatrzymaj</string>
   <string name="resume">wznów</string>
   <string name="paused">Zatrzymano</string>
+  <string name="more">Więcej</string>
+  <string name="favorites">Ulubione</string>
   <string name="achievements_tab_title">Osiągnięcia</string>
   <string name="leaderboard_tab_title">Ranking</string>
   <string name="count_prefix">Licznik:</string>
@@ -674,4 +676,8 @@
   <string name="leaderboard_nearby">W pobliżu</string>
   <string name="mapbox_telemetry">Wypisz się z telemetrii</string>
   <string name="telemetry_opt_out_summary">Wysyłaj anonimowe dane o lokalizacji i wykorzystywaniu danych do Mapboxa, gdy używasz funkcji „W pobliżu”</string>
+  <string name="statistics_quality">Obrazy wysokiej jakości</string>
+  <string name="quality_images_info">Obrazy wysokiej jakości to diagramy lub fotografie, które spełniają określone standardy dotyczące jakości (które w większości są ściśle techniczne) i są wartościowymi materiałami dla projektów Wikimedii.</string>
+  <string name="resuming_upload">Wznawianie przesyłania…</string>
+  <string name="pausing_upload">Wstrzymywanie przesyłania…</string>
 </resources>

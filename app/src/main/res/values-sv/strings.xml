@@ -282,8 +282,8 @@
   <string name="upload_problem_image">Problem hittades i bilden</string>
   <string name="internet_downloaded">Var god ladda bara upp bilder som du själv har tagit. Ladda inte upp bilder som du har laddat ned från Internet.</string>
   <string name="give_permission">Ge behörighet</string>
-  <string name="use_external_storage">Använd extern lagring</string>
-  <string name="use_external_storage_summary">Spara bilder som tas med kameran i appen på din enhet</string>
+  <string name="use_external_storage">Spara bilder i appen</string>
+  <string name="use_external_storage_summary">Spara bilder som tas med kameran i appen till din enhetslagring</string>
   <string name="login_to_your_account">Logga in på ditt konto</string>
   <string name="send_log_file">Skicka loggfil</string>
   <string name="send_log_file_description">Skicka loggfilen till utvecklarna via e-post för att hjälpa till att felsöka problem i appen. OBS: Loggar kan innehålla identifierande information.</string>
@@ -419,13 +419,13 @@
   <string name="notifications">Aviseringar</string>
   <string name="read_notifications">Aviseringar (lästa)</string>
   <string name="display_nearby_notification">Visa avisering för i närheten</string>
-  <string name="display_nearby_notification_summary">Tryck här för att se den närmaste platsen som behöver bilder</string>
+  <string name="display_nearby_notification_summary">Visa meddelande i appen för den närmaste platsen som behöver bilder</string>
   <string name="no_close_nearby">Inga platser i närheten hittades som är nära dig</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Lagringsbehörighet</string>
   <string name="write_storage_permission_rationale_for_image_share">Vi behöver ditt tillstånd för att komma åt externa lagringen för din enhet för att ladda upp bilder.</string>
   <string name="nearby_notification_dismiss_message">Du kommer inte längre se den närmaste platsen som behöver bilder. Om du vill kan du återaktivera denna avisering i inställningarna.</string>
-  <string name="step_count">Steg %1$d av %2$d</string>
+  <string name="step_count">Steg %1$d av %2$d: %3$s</string>
   <string name="image_in_set_label">Bild %1$d i uppsättningen</string>
   <string name="next">Nästa</string>
   <string name="previous">Föregående</string>
@@ -638,6 +638,8 @@
   <string name="pause">pausa</string>
   <string name="resume">återuppta</string>
   <string name="paused">Pausad</string>
+  <string name="more">Mer</string>
+  <string name="favorites">Favoriter</string>
   <string name="achievements_tab_title">Prestationer</string>
   <string name="leaderboard_tab_title">Topplista</string>
   <string name="rank_prefix">Rang:</string>
@@ -663,4 +665,15 @@
   <string name="limited_connection_enabled">Begränsat anslutningsläge har aktiverats!</string>
   <string name="limited_connection_disabled">Begränsat anslutningsläge har inaktiverats. Väntande uppladdningar kommer nu återupptas.</string>
   <string name="limited_connection">Begränsad anslutning</string>
+  <string name="statistics_quality">Kvalitetsbilder</string>
+  <string name="quality_images_info">Kvalitetsbilder är diagram eller fotografier som möter vissa kvalitetsstandarder (som är mestadels tekniska) och är värdefulla för Wikimedia-projekt.</string>
+  <string name="resuming_upload">Återupptar uppladdning…</string>
+  <string name="pausing_upload">Pausar uppladdning…</string>
+  <string name="media_details_tooltip">Skriv en kort bildtext som berättar vad din bild skildrar. Berätta i beskrivningen vad som gör bilden intressant, typisk eller sällsynt och beskriv innehållet, vare sig det syns eller inte. Använd så exakta termer som möjligt.</string>
+  <string name="depicts_tooltip">Hitta och välj ut alla koncept som denna bild skildrar. Var så specifik som möjligt. Om bilden skildrar flera objekt väljer du alla med förnuft. Välj inte generiska taggar om mer specifika taggar finns tillgängliga.</string>
+  <string name="categories_tooltip">Välj lämpliga kategorier. Till skillnad ifrån skildringar är kategorier endast på engelska.</string>
+  <string name="license_tooltip">Commons gör dina bilder återanvändbara och anpassningsbara för alla. Vill du avstå från alla rättigheter? Vill du tillskrivas? Vill du att anpassningar ska använda samma licens?</string>
+  <string name="depicts_step_title">Skildrar</string>
+  <string name="license_step_title">Medielicens</string>
+  <string name="media_detail_step_title">Mediedetaljer</string>
 </resources>

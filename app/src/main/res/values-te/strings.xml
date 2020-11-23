@@ -262,8 +262,8 @@
   <string name="upload_problem_do_you_continue">అయినా సరే.. ఈ బొమ్మను ఎక్కించాలనే నిశ్చయించుకున్నారా?</string>
   <string name="internet_downloaded">మీరు తీసిన బొమ్మలను మాత్రమే ఎక్కించండి. అంతర్జాలం నుండి దించుకున్న బొమ్మలను ఎక్కించకండి.</string>
   <string name="give_permission">అనుమతి ఇవ్వండి</string>
-  <string name="use_external_storage">బయటి స్టోరేజిని వాడండి</string>
-  <string name="use_external_storage_summary">యాప్‌లోని కెమెరాను వాడి తీసిన ఫోటోలను మీ పరికరంలో భద్రపరచండి</string>
+  <string name="use_external_storage" fuzzy="true">బయటి స్టోరేజిని వాడండి</string>
+  <string name="use_external_storage_summary" fuzzy="true">యాప్‌లోని కెమెరాను వాడి తీసిన ఫోటోలను మీ పరికరంలో భద్రపరచండి</string>
   <string name="login_to_your_account">మీ ఖాతాలోకి లాగినవండి</string>
   <string name="send_log_file">లాగ్ ఫైలును పంపించు</string>
   <string name="send_log_file_description">లాగ్ ఫైలును ఈమెయిలు ద్వారా డెవలపర్లకు పంపించి, యాప్ లోని సమస్యలను పరిష్కరించేందుకు సాయపడండి. గమనిక: లాగ్‌లలో మీ గుర్తింపు సమాచారం ఉండే అవకాశం ఉంది</string>
@@ -393,13 +393,13 @@
   <string name="notifications">గమనింపులు</string>
   <string name="read_notifications" fuzzy="true">గమనింపులు (ఆర్కైవు చేసినవి)</string>
   <string name="display_nearby_notification">చుట్టుపక్కల గమనింపును చూపించు</string>
-  <string name="display_nearby_notification_summary">బొమ్మలు అవసరమైన చుట్టుపక్కల స్థలాన్ని చూసేందుకు ఇక్కడ నొక్కండి</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">బొమ్మలు అవసరమైన చుట్టుపక్కల స్థలాన్ని చూసేందుకు ఇక్కడ నొక్కండి</string>
   <string name="no_close_nearby">మీ చుట్టుపక్కల స్థలాలేమీ కనబడలేదు</string>
   <string name="list_sheet">జాబితా</string>
   <string name="storage_permission">స్టోరేజి అనుమతి</string>
   <string name="write_storage_permission_rationale_for_image_share">బొమ్మలను ఎక్కించేందుకు గాను మీ బయటి స్టోరేజిని చూసే అనుమతులు కావాలి</string>
   <string name="nearby_notification_dismiss_message">బొమ్మలు అవసరమైన చుట్టుపక్కల స్థలాలు ఇక మీకు కనబడవు. అయితే, ఎప్పుడు కావాలంటే అప్పుడు మీరీ సెట్టింగును మార్చుకోవచ్చు.</string>
-  <string name="step_count">%2$d లో %1$d అంగ</string>
+  <string name="step_count" fuzzy="true">%2$d లో %1$d అంగ</string>
   <string name="image_in_set_label">సెట్టులో %1$d వ బొమ్మ</string>
   <string name="next">తదుపరి</string>
   <string name="previous">మునుపటి</string>

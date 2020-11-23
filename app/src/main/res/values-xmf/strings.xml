@@ -245,7 +245,7 @@
   <string name="upload_problem_different_geolocation">თე სურათი შხვა აბანს რე გინოღალირი.</string>
   <string name="upload_problem_do_you_continue">იშენ გოკონანო თე სურათიშ ეხარგუა?</string>
   <string name="give_permission">ოჸიაშ მეჩამა</string>
-  <string name="use_external_storage">გალენური შვენაშ გჷმორინაფა</string>
+  <string name="use_external_storage" fuzzy="true">გალენური შვენაშ გჷმორინაფა</string>
   <string name="login_to_your_account">გემშართით თქვან პროფილშა</string>
   <string name="send_log_file">ლოგ-ფაილიშ ჯღონუა</string>
   <string name="null_url">ჩილათა! URL ვეგორუ</string>

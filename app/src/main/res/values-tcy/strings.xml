@@ -247,8 +247,8 @@
   <string name="upload_problem_different_geolocation">ಈ ಚಿತ್ರೊನು ಗೆತ್ತಿದಿನಿ ಬೇತೆ ತಾಣೊಡು.</string>
   <string name="upload_problem_do_you_continue">ಈರ್ ನನಲಾ ಈ ಚಿತ್ರೊನು ಮಿತೇರಾವರೆ ಬಯಕುವರಾ?</string>
   <string name="give_permission">ಒಪ್ಪಿಗೆ ಪಡೆಲೆ.</string>
-  <string name="use_external_storage">ಉಂದು ಎಕ್ಸ್‌ಟರ್ನಲ್ ಸ್ಟೊರೆಜ್.</string>
-  <string name="use_external_storage_summary">ಈ ಸಾಧನಟ್ ಅಪ್ಲಿಕೇಶನ್ ಕ್ಯಾಮೆರಾದೊಂಟ್ಟಗ್ ದೆತ್ತಿನ ಚಿತ್ರೊನ್ ಒರಿಪಾಲೆ.</string>
+  <string name="use_external_storage" fuzzy="true">ಉಂದು ಎಕ್ಸ್‌ಟರ್ನಲ್ ಸ್ಟೊರೆಜ್.</string>
+  <string name="use_external_storage_summary" fuzzy="true">ಈ ಸಾಧನಟ್ ಅಪ್ಲಿಕೇಶನ್ ಕ್ಯಾಮೆರಾದೊಂಟ್ಟಗ್ ದೆತ್ತಿನ ಚಿತ್ರೊನ್ ಒರಿಪಾಲೆ.</string>
   <string name="login_to_your_account">ಇರೇನಾ ಖಾತೆಗ್ ಲಾಗಿನ್ ಅಲೇ.</string>
   <string name="send_log_file">ಲಾಗ್ ಫೈಲ್ ಕಡ್ಪುಡ್ಲೆ.</string>
   <string name="send_log_file_description"> ಸದರಿ ಕರಣ(ಆಪ್\')ದ ಪೀಡನಿವಾರಣ ಸಮಸ್ಯೆಲೆಗಾದ್ ಗಮನ ಕಡತೊನು ಅಭಿವರ್ಧಕರೆಗ್ ಇಮೇಲ್ ಮೂಲಕ ಕಡಪುಡುಲೆ.ಸೂಚನೆ:ಗಮನೊಲೆಡ್ ಸಂಭಾವ್ಯ ಗುರ್ತಿಸಾವುನ ಮಾಹಿತಿ ಉಪ್ಪರೆ ಯಾವು.</string>
@@ -369,13 +369,13 @@
   <string name="notifications">ಅಧಿಸೂಚನೆಲು</string>
   <string name="read_notifications" fuzzy="true">ಅಧಿಸೂಚನೆಲು(ಅನುರಕ್ಷಿತ)</string>
   <string name="display_nearby_notification">ಕೈತಲ್ದ ಅಧಿಸೂಚನೆ ತೋಜಾಲೆ</string>
-  <string name="display_nearby_notification_summary">ಚಿತ್ರ ಬೋಡಾಯಿನ ಕೈತಲ್ದ ಜಾಗ ತೂವರೆ ಮುಲ್ಪ ತಟ್ಟ್\'ಲೆ</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">ಚಿತ್ರ ಬೋಡಾಯಿನ ಕೈತಲ್ದ ಜಾಗ ತೂವರೆ ಮುಲ್ಪ ತಟ್ಟ್\'ಲೆ</string>
   <string name="no_close_nearby">ಇರೆನ ಮುಟ್ಟೊಡು ಕೈತಲ್ದ ಜಾಗೊಲು ತಿಕ್ಕುಜಾ.</string>
   <string name="list_sheet">ಪಟ್ಟಿ</string>
   <string name="storage_permission">ಶೇಖರಣ ಅನುಮತಿ</string>
   <string name="write_storage_permission_rationale_for_image_share">ಆಕೃತಿಲೆನ್ ಮಿತೇರಾವರೆಗಾದ್  ಇರೆನ ಬಾಹ್ಯ ಶೇಖರಣೊನು ಪ್ರವೇಶ ಮಲ್ಪರೆ ಎಂಕಲೆಗ್  ಇರೆನ ಅನುಮತಿ ಬೋಡು.</string>
   <string name="nearby_notification_dismiss_message">ಚಿತ್ರೊಲು ಬೋಡಾಯಿನ ಕೈತಲ್ದ ಜಾಗೊಲೆನ್ ಈರ್ ನನ ತೂಪುಜರ್. ಆಂಡಾ ಇರೆಗ್ ಬೋಡಾಂಡ ಈರ್ ಈ ಅಧಿಸೂಚನೆನ್ ಗಣಸ್ಥಿತಿಲೆಡ್ ಪಿರ ಶಕ್ತ ಮಲ್ಪೊಲಿ.</string>
-  <string name="step_count">%2$d ಉಂದೆತ  %1$d ಮುಟ್ಟು</string>
+  <string name="step_count" fuzzy="true">%2$d ಉಂದೆತ  %1$d ಮುಟ್ಟು</string>
   <string name="image_in_set_label">ಆಕೃತಿ  %1$d ಗುಚ್ಚೊಡು</string>
   <string name="next">ದುಂಬುದ</string>
   <string name="previous">ಪಿರವುದ</string>

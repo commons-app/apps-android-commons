@@ -280,9 +280,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         if (getParentFragment() != null && getParentFragment().getParentFragment() != null) {
             //Added a check because, not necessarily, the parent fragment will have a parent fragment, say
             // in the case when MediaDetailPagerFragment is directly started by the CategoryImagesActivity
-            ((ContributionsFragment) (getParentFragment()
+            if (getParentFragment() instanceof ContributionsFragment) {
+                ((ContributionsFragment) (getParentFragment()
                     .getParentFragment())).nearbyNotificationCardView
                     .setVisibility(View.GONE);
+            }
         }
         categoryEditSearchRecyclerViewAdapter =
             new CategoryEditSearchRecyclerViewAdapter(getContext(), new ArrayList<>(
@@ -795,7 +797,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     private void rebuildCatList(List<String> categories) {
-        Log.d("deneme","rebuild cat list size:"+categories.size());
         categoryContainer.removeAllViews();
         for (String category : categories) {
             categoryContainer.addView(buildCatLabel(sanitise(category), categoryContainer));

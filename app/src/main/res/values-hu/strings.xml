@@ -270,8 +270,8 @@
   <string name="upload_problem_do_you_continue">Biztosan fel akarod tölteni ezt a képet?</string>
   <string name="internet_downloaded">Csak saját magad által készített képeket töltsél fel. Ne tölts fel az Internetről letöltött képeket.</string>
   <string name="give_permission">Engedély adása</string>
-  <string name="use_external_storage">Külső tárhely használata</string>
-  <string name="use_external_storage_summary">Az alkalmazáson belüli kamerával készült képek mentése az eszközre</string>
+  <string name="use_external_storage" fuzzy="true">Külső tárhely használata</string>
+  <string name="use_external_storage_summary" fuzzy="true">Az alkalmazáson belüli kamerával készült képek mentése az eszközre</string>
   <string name="login_to_your_account">Bejelentkezés a fiókodba</string>
   <string name="send_log_file">Naplófájl küldése</string>
   <string name="send_log_file_description">Naplófájl küldése e-mailben a fejlesztőknek, az alkalmazásban található hiba kiküszöbölésére. Megjegyzés: a napló potenciálisan azonosításra alkalmas adatokat tartalmazhat.</string>
@@ -402,7 +402,7 @@
   <string name="storage_permission">Tárolási engedély</string>
   <string name="write_storage_permission_rationale_for_image_share">Szükséges az engedélyed a külső tárolóhoz való hozzáféréshez. Ez a képek feltöltéséhez kell.</string>
   <string name="nearby_notification_dismiss_message">Nem lesznek láthatók a képet igénylő közeli helyek. Az értesítés visszakapcsolható a Beállításoknál.</string>
-  <string name="step_count">%1$d. lépés, összesen: %2$d</string>
+  <string name="step_count" fuzzy="true">%1$d. lépés, összesen: %2$d</string>
   <string name="image_in_set_label">%1$d kép a gyűjteményben</string>
   <string name="next">Következő</string>
   <string name="previous">Előző</string>

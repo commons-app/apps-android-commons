@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,6 +32,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -134,6 +136,15 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     contributionsListPresenter.setup();
     contributionsListPresenter.contributionList.observe(this.getViewLifecycleOwner(), adapter::submitList);
     rvContributionsList.setAdapter(adapter);
+    adapter.registerAdapterDataObserver(new AdapterDataObserver() {
+      @Override
+      public void onItemRangeInserted(int positionStart, int itemCount) {
+        super.onItemRangeInserted(positionStart, itemCount);
+        if (itemCount > 0 && positionStart == 0) {
+          rvContributionsList.scrollToPosition(0);//Newly upload items are always added to the top
+        }
+      }
+    });
   }
 
   private int getSpanCount(final int orientation) {
@@ -273,6 +284,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
    */
   @Override
   public void pauseUpload(Contribution contribution) {
+    ViewUtil.showShortToast(getContext(), R.string.pausing_upload);
     callback.pauseUpload(contribution);
   }
 
@@ -282,6 +294,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
    */
   @Override
   public void resumeUpload(Contribution contribution) {
+    ViewUtil.showShortToast(getContext(), R.string.resuming_upload);
     callback.retryUpload(contribution);
   }
 

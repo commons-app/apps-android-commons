@@ -281,8 +281,8 @@
   <string name="upload_problem_do_you_continue">Pořád chcete tento obrázek nahrát?</string>
   <string name="internet_downloaded">Prosíme, nahrávejte pouze obrázky, které jste sami vytvořili. Nenahrávejte obrázky, které jste našli na internetu.</string>
   <string name="give_permission">Dát povolení</string>
-  <string name="use_external_storage">Použít externí úložiště</string>
-  <string name="use_external_storage_summary">Uložit obrázky pořízené fotoaparátem, jenž je součástí této aplikace</string>
+  <string name="use_external_storage" fuzzy="true">Použít externí úložiště</string>
+  <string name="use_external_storage_summary" fuzzy="true">Uložit obrázky pořízené fotoaparátem, jenž je součástí této aplikace</string>
   <string name="login_to_your_account">Přihlásit se k účtu</string>
   <string name="send_log_file">Odeslat log</string>
   <string name="send_log_file_description">Odeslat log vývojářům e-mailem za účelem odstranění problémů s aplikací. Poznámka: Logy mohou obsahovat identifikační údaje.</string>
@@ -417,13 +417,13 @@
   <string name="notifications">Upozornění</string>
   <string name="read_notifications">Upozornění (přečtená)</string>
   <string name="display_nearby_notification">Zobrazit upozornění v okolí</string>
-  <string name="display_nearby_notification_summary">Klepnutím sem zobrazíte nejbližší místo, které potřebuje obrázky</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Klepnutím sem zobrazíte nejbližší místo, které potřebuje obrázky</string>
   <string name="no_close_nearby">Nebyla nalezena žádná místa v okolí</string>
   <string name="list_sheet">Seznam</string>
   <string name="storage_permission">Povolení k ukládání</string>
   <string name="write_storage_permission_rationale_for_image_share">Potřebujeme povolení k přístupu k externí paměti vašeho zařízení, abychom mohli nahrávat obrázky.</string>
   <string name="nearby_notification_dismiss_message">Nevidíte nejbližší místo, které už potřebuje obrázky. Toto oznámení však můžete znovu povolit v nastavení.</string>
-  <string name="step_count">Krok %1$d z %2$d</string>
+  <string name="step_count" fuzzy="true">Krok %1$d z %2$d</string>
   <string name="image_in_set_label">Obrázek %1$d v sadě</string>
   <string name="next">Další</string>
   <string name="previous">Předchozí</string>

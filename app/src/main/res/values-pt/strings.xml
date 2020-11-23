@@ -27,6 +27,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">A iniciar carregamentos</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">A iniciar %1$d carregamento</item>
     <item quantity="other">A iniciar %1$d carregamentos</item>
@@ -71,6 +72,7 @@
   <string name="upload_failed">O ficheiro não foi encontrado. Tente outro, por favor.</string>
   <string name="authentication_failed">A autenticação falhou; inicie novamente a sessão, por favor</string>
   <string name="uploading_started">Carregamento iniciado!</string>
+  <string name="uploading_queued">Fila de carregamento (modo de ligação limitada ativado)</string>
   <string name="upload_completed_notification_title">%1$s carregado!</string>
   <string name="upload_completed_notification_text">Toque para ver o seu carregamento</string>
   <string name="upload_progress_notification_title_start">A iniciar o carregamento de %1$s</string>
@@ -288,8 +290,8 @@
   <string name="upload_problem_image">Problemas encontrados na imagem</string>
   <string name="internet_downloaded">Carregue só fotografias tiradas por si, por favor. Não carregue fotografias que tenha descarregado da Internet.</string>
   <string name="give_permission">Permitir</string>
-  <string name="use_external_storage">Utilizar armazenamento externo</string>
-  <string name="use_external_storage_summary">Gravar as fotografias tiradas com a câmara da aplicação no seu dispositivo</string>
+  <string name="use_external_storage">Guardar fotos tiradas com a aplicação</string>
+  <string name="use_external_storage_summary">Gravar as fotografias tiradas com a câmara da aplicação no armazenamento do seu dispositivo</string>
   <string name="login_to_your_account">Inicie sessão na sua conta</string>
   <string name="send_log_file">Enviar ficheiro de registos</string>
   <string name="send_log_file_description">Enviar o ficheiro de registos aos programadores por correio eletrónico para ajudar a corrigir problemas da aplicação. Nota: os registos podem conter informações identificativas</string>
@@ -425,13 +427,13 @@
   <string name="notifications">Notificações</string>
   <string name="read_notifications">Notificações (lidas)</string>
   <string name="display_nearby_notification">Apresentar notificação de proximidade</string>
-  <string name="display_nearby_notification_summary">Toque aqui para ver o local mais próximo que precisa de fotos</string>
+  <string name="display_nearby_notification_summary">Mostrar notificação na aplicação sobre o local mais próximo que precisa de fotos</string>
   <string name="no_close_nearby">Não foi encontrado nenhum local próximo</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Autorização de acesso</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos da sua autorização para aceder ao armazenamento externo do seu dispositivo para carregar imagens.</string>
   <string name="nearby_notification_dismiss_message">Deixará de ver o local mais próximo que precisa de fotos. No entanto, pode reativar esta notificação nas configurações, se desejar.</string>
-  <string name="step_count">Passo %1$d de %2$d</string>
+  <string name="step_count" fuzzy="true">Passo %1$d de %2$d</string>
   <string name="image_in_set_label">Imagem %1$d no conjunto</string>
   <string name="next">Seguinte</string>
   <string name="previous">Anterior</string>
@@ -644,6 +646,8 @@
   <string name="pause">pausar</string>
   <string name="resume">continuar</string>
   <string name="paused">Em pausa</string>
+  <string name="more">Mais</string>
+  <string name="favorites">Preferidos</string>
   <string name="achievements_tab_title">Realizações</string>
   <string name="leaderboard_tab_title">Tabela de classificação</string>
   <string name="rank_prefix">Classificação:</string>
@@ -663,4 +667,14 @@
   <string name="leaderboard_nearby">Aqui perto</string>
   <string name="leaderboard_used">Usados</string>
   <string name="leaderboard_my_rank_button_text">A minha classificação</string>
+  <string name="mapbox_telemetry">Recusar telemetria</string>
+  <string name="telemetry_opt_out_summary">Enviar localização anonimizada e dados de utilização para Mapbox ao usar a funcionalidade \'Aqui perto\'</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Melhorar este mapa&lt;/a&gt;</string>
+  <string name="limited_connection_enabled">Modo de ligação limitada ativado!</string>
+  <string name="limited_connection_disabled">Modo de ligação limitada desativado. Os carregamentos pendentes serão retomados agora.</string>
+  <string name="limited_connection">Ligação limitada</string>
+  <string name="statistics_quality">Imagens de qualidade</string>
+  <string name="quality_images_info">As imagens de qualidade são diagramas ou fotografias que satisfazem certos padrões de qualidade (principalmente de natureza técnica) e são valiosos para projetos da Wikimedia</string>
+  <string name="resuming_upload">A retomar carregamento...</string>
+  <string name="pausing_upload">A pausar carregamento...</string>
 </resources>

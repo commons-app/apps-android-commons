@@ -227,8 +227,8 @@
   <string name="upload_image_too_dark">Ova slika je pretamna; da li ste sigurni da je želite otpremiti? Vikimedijina ostava je samo za slike sa enciklopedijskom vrednošću.</string>
   <string name="upload_image_blurry">Ova slika je mutna; da li ste sigurni da je želite otpremiti? Vikimedijina ostava je samo za slike sa enciklopedijskom vrednošću.</string>
   <string name="give_permission">Davanje dozvole</string>
-  <string name="use_external_storage">Upotreba spoljašnje memorije</string>
-  <string name="use_external_storage_summary">Spremanje slika napravljenih kamerom aplikacije na Vašem uređaju</string>
+  <string name="use_external_storage" fuzzy="true">Upotreba spoljašnje memorije</string>
+  <string name="use_external_storage_summary" fuzzy="true">Spremanje slika napravljenih kamerom aplikacije na Vašem uređaju</string>
   <string name="login_to_your_account">Prijavite se na svoj nalog</string>
   <string name="send_log_file">Pošalji dnevničku datoteku</string>
   <string name="send_log_file_description">Pošaljite datoteku evidencije programerima putem e-pošte kako biste pomogli u rešavanju problema sa aplikacijom.\nNapomena: dnevnici mogu potencijalno sadržati identifikacione informacije</string>
