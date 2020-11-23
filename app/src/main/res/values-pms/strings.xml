@@ -419,7 +419,7 @@
   <string name="storage_permission">Përmess d\'anmagasinament</string>
   <string name="write_storage_permission_rationale_for_image_share">I l\'oma damanca ëd sò përmess për acede a l\'anmagasinament estern ëd so aparechio për carié dle plance.</string>
   <string name="nearby_notification_dismiss_message">A s-ciairërà pi ël pòst pi davzin ch\'a l\'ha damanca ëd plance. Comsëssìa, a peul torna ativé costa notìfica ant ij paràmeter, s\'a veul.</string>
-  <string name="step_count" fuzzy="true">Pass %1$d ëd %2$d</string>
+  <string name="step_count">Pass %1$d ëd %2$d: : %3$s</string>
   <string name="image_in_set_label">La plancia %1$d ant l\'ansem</string>
   <string name="next">Apress</string>
   <string name="previous">Precedent</string>
@@ -663,4 +663,11 @@
   <string name="quality_images_info">Le plance ëd qualità a son dij diagrama o dle fòto che a sodisfo chèich criteri ëd qualità (dzortut ëd natura técnica) e a son pressiose për ij proget Wikimedia</string>
   <string name="resuming_upload">Arpijé ël cariament…</string>
   <string name="pausing_upload">Pàusa ant ël cariament…</string>
+  <string name="media_details_tooltip">Për piasì, ch\'a scriva na curta legenda ch\'a disa lòn ch\'a smon la plancia. Ant la descrission, ch\'a disa lòn ch\'a rend la plancia anteressanta o tìpica o ràira, e ch\'a spiega ël contest, visìbil o pa. Dovré na terminologìa pi precisa ch\'a peul.</string>
+  <string name="depicts_tooltip">Për piasì, ch\'a treuva tuti ij concet che costa plancia a arpresenta. Ch\'a sia pi spessìfich ch\'a peul. Si la plancia a arpresenta vàire element, ch\'a-j serna con na rason. Ch\'a serna nen dle tichëtte genériche s\'a-i na j\'é ëd pi spessìfiche disponìbij.</string>
+  <string name="categories_tooltip">Për piasì, ch\'a selession-a dle categorìe apropià. A diferensa da le descrission, le categorìe a son mach an anglèis.</string>
+  <string name="license_tooltip">Comun a rend soe plance dovràbij e adatà a tutin. Veul-lo arnonsié a tuti ij drit? Veul-lo esse arconossù për sò travaj? Veul-lo dj\'adatament për dovré la midema licensa?</string>
+  <string name="depicts_step_title">A arpresenta</string>
+  <string name="license_step_title">Licensa dël mojen</string>
+  <string name="media_detail_step_title">Detaj dël mojen</string>
 </resources>
