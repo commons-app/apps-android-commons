@@ -59,23 +59,32 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:id="@+id/depicts_search_layout"
+        android:layout_height="wrap_content"
+        android:id="@+id/depicts_search_layout"
         android:layout_marginStart="@dimen/standard_gap"
         android:layout_marginLeft="@dimen/standard_gap"
         android:layout_marginEnd="@dimen/standard_gap"
         android:layout_marginRight="@dimen/standard_gap"
         android:layout_below="@id/depicts_subtitle">
 
+         <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginBottom="@dimen/standard_gap"
+           android:hint="@string/depicts_search_text_hint"
+          />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/depicts_search_container"
             android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/standard_gap"
+            android:layout_marginTop="@dimen/standard_gap"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/depicts_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/depicts_search_text_hint"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:maxLines="1" />
