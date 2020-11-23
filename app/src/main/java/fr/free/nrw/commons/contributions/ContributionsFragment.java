@@ -472,17 +472,21 @@ public class ContributionsFragment
 
     @Override
     public void onDestroy() {
-        compositeDisposable.clear();
-        getChildFragmentManager().removeOnBackStackChangedListener(this);
-        locationManager.unregisterLocationManager();
-        locationManager.removeLocationListener(this);
-        super.onDestroy();
+        try{
+            compositeDisposable.clear();
+            getChildFragmentManager().removeOnBackStackChangedListener(this);
+            locationManager.unregisterLocationManager();
+            locationManager.removeLocationListener(this);
+            super.onDestroy();
 
-        if (isUploadServiceConnected) {
-            if (getActivity() != null) {
-                getActivity().unbindService(uploadServiceConnection);
-                isUploadServiceConnected = false;
+            if (isUploadServiceConnected) {
+                if (getActivity() != null) {
+                    getActivity().unbindService(uploadServiceConnection);
+                    isUploadServiceConnected = false;
+                }
             }
+        } catch (IllegalArgumentException | IllegalStateException exception) {
+            Timber.e(exception);
         }
     }
 
