@@ -140,6 +140,12 @@ public class ContributionsFragment
         public void onServiceDisconnected(ComponentName componentName) {
             // this should never happen
             Timber.e(new RuntimeException("UploadService died but the rest of the process did not!"));
+            isUploadServiceConnected = false;
+        }
+
+        @Override
+        public void onBindingDied(final ComponentName name) {
+            isUploadServiceConnected = false;
         }
     };
     private boolean shouldShowMediaDetailsFragment;
@@ -466,17 +472,21 @@ public class ContributionsFragment
 
     @Override
     public void onDestroy() {
-        compositeDisposable.clear();
-        getChildFragmentManager().removeOnBackStackChangedListener(this);
-        locationManager.unregisterLocationManager();
-        locationManager.removeLocationListener(this);
-        super.onDestroy();
+        try{
+            compositeDisposable.clear();
+            getChildFragmentManager().removeOnBackStackChangedListener(this);
+            locationManager.unregisterLocationManager();
+            locationManager.removeLocationListener(this);
+            super.onDestroy();
 
-        if (isUploadServiceConnected) {
-            if (getActivity() != null) {
-                getActivity().unbindService(uploadServiceConnection);
-                isUploadServiceConnected = false;
+            if (isUploadServiceConnected) {
+                if (getActivity() != null) {
+                    getActivity().unbindService(uploadServiceConnection);
+                    isUploadServiceConnected = false;
+                }
             }
+        } catch (IllegalArgumentException | IllegalStateException exception) {
+            Timber.e(exception);
         }
     }
 
@@ -534,6 +544,7 @@ public class ContributionsFragment
 
     @Override public void onDestroyView() {
         super.onDestroyView();
+        isUploadServiceConnected = false;
         presenter.onDetachView();
     }
 
