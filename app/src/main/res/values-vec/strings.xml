@@ -398,7 +398,7 @@
   <string name="next">Dopo</string>
   <string name="previous">Prima</string>
   <string name="submit">Envia</string>
-  <string name="upload_title_duplicate">Xà ghe xé on file col nome %1$s. Sito seguro de vołer ndar vanti?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Xà ghe xé on file col nome %1$s. Sito seguro de vołer ndar vanti?</string>
   <string name="map_application_missing">Nisuna aplicasion de mape conpatibiłe ła xé sta catada sol to dispoxidivo. Instała on aplicasion par łe mape par poder doparare sta funsion.</string>
   <string name="navigation_item_bookmarks">Segnałibri</string>
   <string name="title_activity_bookmarks">Segnałibri</string>

@@ -406,7 +406,7 @@
   <string name="next">Seguinte</string>
   <string name="previous">Anterior</string>
   <string name="submit">Enviar</string>
-  <string name="upload_title_duplicate">Xa existe un ficheiro co nome %1$s. Está seguro que quere continuar?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Xa existe un ficheiro co nome %1$s. Está seguro que quere continuar?</string>
   <string name="map_application_missing">Non se atopou ningunha aplicación de mapas compatible no seu dispositivo. Por favor, instale unha aplicación de mapas para usar esta funcionalidade.</string>
   <string name="navigation_item_bookmarks">Favoritos</string>
   <string name="title_activity_bookmarks">Favoritos</string>

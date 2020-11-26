@@ -437,7 +437,7 @@
   <string name="next">下一個</string>
   <string name="previous">上一個</string>
   <string name="submit">提交</string>
-  <string name="upload_title_duplicate">檔案名稱為「%1$s」的檔案已存在，您確定要繼續嗎？</string>
+  <string name="upload_title_duplicate" fuzzy="true">檔案名稱為「%1$s」的檔案已存在，您確定要繼續嗎？</string>
   <string name="map_application_missing">在您的裝置上找不到相容的地圖應用程式，請安裝地圖應用程式來使用此功能。</string>
   <string name="navigation_item_bookmarks">書籤</string>
   <string name="title_activity_bookmarks">書籤</string>

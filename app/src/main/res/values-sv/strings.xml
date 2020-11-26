@@ -430,7 +430,7 @@
   <string name="next">Nästa</string>
   <string name="previous">Föregående</string>
   <string name="submit">Skicka</string>
-  <string name="upload_title_duplicate">En fil med filnamnet %1$s finns. Är du säker på att du vill fortsätta?</string>
+  <string name="upload_title_duplicate">En fil med filnamnet %1$s finns. Är du säker på att du vill fortsätta?\n\nObs: ett lämpligt suffix till tilldelas filnamnet automatiskt.</string>
   <string name="map_application_missing">Ingen kompatibel kartapp hittades på din enhet. Installera en kartapp för att använda denna funktion.</string>
   <string name="navigation_item_bookmarks">Bokmärken</string>
   <string name="title_activity_bookmarks">Bokmärken</string>

@@ -426,7 +426,7 @@
   <string name="next">Следно</string>
   <string name="previous">Претходно</string>
   <string name="submit">Поднеси</string>
-  <string name="upload_title_duplicate">Веќе постои податотека со име %1$s. Дали сигурно сакате да продолжите?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Веќе постои податотека со име %1$s. Дали сигурно сакате да продолжите?</string>
   <string name="map_application_missing">Не пронајдов складен картографски прилог на вашиот уред. Преземете еден таков за да можете да ја користите оваа можност.</string>
   <string name="navigation_item_bookmarks">Обележани</string>
   <string name="title_activity_bookmarks">Обележани</string>

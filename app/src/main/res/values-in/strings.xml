@@ -424,7 +424,7 @@
   <string name="next">Selanjutnya</string>
   <string name="previous">Sebelumnya</string>
   <string name="submit">Kirim</string>
-  <string name="upload_title_duplicate">Berkas dengan nama %1$s sudah ada. Anda yakin ingin melanjutkan?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Berkas dengan nama %1$s sudah ada. Anda yakin ingin melanjutkan?</string>
   <string name="map_application_missing">Tidak ada aplikasi peta yang kompatibel dapat ditemukan di perangkat Anda. Silakan instal aplikasi peta untuk menggunakan fitur ini.</string>
   <string name="navigation_item_bookmarks">Markah</string>
   <string name="title_activity_bookmarks">Markah</string>

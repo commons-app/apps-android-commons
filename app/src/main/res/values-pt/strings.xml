@@ -438,7 +438,7 @@
   <string name="next">Seguinte</string>
   <string name="previous">Anterior</string>
   <string name="submit">Enviar</string>
-  <string name="upload_title_duplicate">Já existe um ficheiro com o nome %1$s. Tem a certeza de que deseja continuar?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Já existe um ficheiro com o nome %1$s. Tem a certeza de que deseja continuar?</string>
   <string name="map_application_missing">Não foi encontrada no seu dispositivo nenhuma aplicação de mapas compatível. Para usar esta funcionalidade instale uma aplicação de mapas, por favor.</string>
   <string name="navigation_item_bookmarks">Marcadores</string>
   <string name="title_activity_bookmarks">Marcadores</string>

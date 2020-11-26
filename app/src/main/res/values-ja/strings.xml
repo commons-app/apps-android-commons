@@ -432,12 +432,12 @@
   <string name="storage_permission">ストレージの許可</string>
   <string name="write_storage_permission_rationale_for_image_share">画像の投稿には、外部ストレージへのアクセス権限を許可してください。</string>
   <string name="nearby_notification_dismiss_message">今後、画像募集中の近くの場所は表示されません。ただしこの通知機能は、いつでも「設定」画面から有効にできます。</string>
-  <string name="step_count" fuzzy="true">全部で%2$d件のうち%1$d件目の手順</string>
+  <string name="step_count">全部で%2$d件のうち%1$d件目の手順：%3$s</string>
   <string name="image_in_set_label">%1$d 点を組み写真にする</string>
   <string name="next">次へ</string>
   <string name="previous">前へ</string>
   <string name="submit">送信</string>
-  <string name="upload_title_duplicate">%1$s という題名のファイルはすでに保存されています。処理をほんとうに続けますか？</string>
+  <string name="upload_title_duplicate">%1$s という題名のファイルはすでに保存されています。処理をほんとうに続けますか？\n\n注記：ファイル名には適切な接頭辞が自動的に付与されます。</string>
   <string name="map_application_missing">お使いの機器に適したアプリが見つかりませんでした。この機能を使用できる地図アプリをインストールしてください。</string>
   <string name="navigation_item_bookmarks">ブックマーク</string>
   <string name="title_activity_bookmarks">ブックマーク</string>
@@ -673,4 +673,13 @@
   <string name="limited_connection">接続制限</string>
   <string name="statistics_quality">上質な画像</string>
   <string name="quality_images_info">上質な画像とは図や写真で一定の（主に技術的な）条件を満たすもので、ウィキメディアのプロジェクト群に使えそうなもののこと</string>
+  <string name="resuming_upload">アップロードを再開中……</string>
+  <string name="pausing_upload">アップロードを停止中……</string>
+  <string name="media_details_tooltip">この写真の被写体について短く説明してください。文中にこの写真の見どころや特徴、特異性を書き、見てわかる文脈、写っていないけれど大切なことを加えます。専門用語も必要なだけ使えます。</string>
+  <string name="depicts_tooltip">この画像に関連する概念をすべて選んでください。曖昧にならないよう、ずばり適するものを探します。被写体が複数なら、過剰にならない程度に選んでください。一般的な説明語ではなく、個別に対応するタグにしぼりこみます。</string>
+  <string name="categories_tooltip">適合するカテゴリを選びます。描写と異なり、カテゴリは英語のみです。</string>
+  <string name="license_tooltip">コモンズに置くと、皆さんの画像はだれでも再利用できます。著作権ほか、すべての権利は適用されませんが、同意しますか？ 作者として名前を表示してほしいですか？ 改変された場合も、同じライセンス条件を継承してほしいですか？</string>
+  <string name="depicts_step_title">描写</string>
+  <string name="license_step_title">メディアのライセンス</string>
+  <string name="media_detail_step_title">メディアの詳細</string>
 </resources>

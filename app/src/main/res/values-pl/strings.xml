@@ -454,7 +454,7 @@
   <string name="next">Następny</string>
   <string name="previous">Poprzedni</string>
   <string name="submit">Prześlij</string>
-  <string name="upload_title_duplicate">Plik o nazwie pliku %1$s już istnieje. Czy na pewno chcesz kontynuować?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Plik o nazwie pliku %1$s już istnieje. Czy na pewno chcesz kontynuować?</string>
   <string name="map_application_missing">W twoim urządzeniu nie znaleziono kompatybilnej aplikacji mapowej. Zainstaluj aplikację mapową, aby korzystać z tej funkcji.</string>
   <string name="navigation_item_bookmarks">Zakładki</string>
   <string name="title_activity_bookmarks">Zakładki</string>

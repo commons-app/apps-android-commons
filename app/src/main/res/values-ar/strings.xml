@@ -460,7 +460,7 @@
   <string name="next">التالي</string>
   <string name="previous">السابق</string>
   <string name="submit">إرسال</string>
-  <string name="upload_title_duplicate">يوجد ملف باسم الملف %1$s، هل أنت متأكد أنك تريد المتابعة؟</string>
+  <string name="upload_title_duplicate" fuzzy="true">يوجد ملف باسم الملف %1$s، هل أنت متأكد أنك تريد المتابعة؟</string>
   <string name="map_application_missing">لا يمكن العثور على تطبيق خرائط متوافق على جهازك; الرجاء تثبيت تطبيق خرائط لاستخدام هذه الميزة.</string>
   <string name="navigation_item_bookmarks">العلامات</string>
   <string name="title_activity_bookmarks">العلامات</string>

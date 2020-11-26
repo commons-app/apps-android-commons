@@ -407,7 +407,7 @@
   <string name="next">Neste</string>
   <string name="previous">Forrige</string>
   <string name="submit">Send</string>
-  <string name="upload_title_duplicate">En fil med navnet %1$s finnes fra før. Er du sikker på at du vil fortsette?</string>
+  <string name="upload_title_duplicate" fuzzy="true">En fil med navnet %1$s finnes fra før. Er du sikker på at du vil fortsette?</string>
   <string name="map_application_missing">Ingen kompatibel kartapplikasjon funnet på enheten din. Installer en kartapplikasjon for å bruke denne funksjonen.</string>
   <string name="navigation_item_bookmarks">Bokmerker</string>
   <string name="title_activity_bookmarks">Bokmerker</string>

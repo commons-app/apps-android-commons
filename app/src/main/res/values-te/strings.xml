@@ -404,7 +404,7 @@
   <string name="next">తదుపరి</string>
   <string name="previous">మునుపటి</string>
   <string name="submit">పంపించు</string>
-  <string name="upload_title_duplicate">%1$s పేరుతో ఒక ఫైలు ఈసరికే ఉంది. ఈ పేరుతోటే ముందుకు పోతారా?</string>
+  <string name="upload_title_duplicate" fuzzy="true">%1$s పేరుతో ఒక ఫైలు ఈసరికే ఉంది. ఈ పేరుతోటే ముందుకు పోతారా?</string>
   <string name="map_application_missing">దీనికి సరిపడే మ్యాపు అప్లికేషనేదీ మీ పరికరంలో కనబడలేదు. ఈ విశేషాన్ని వాడాలంటే, దీనికి సరిపడే మ్యాపు అప్లికేషన్ను స్థాపించుకోండి.</string>
   <string name="navigation_item_bookmarks">పేజీకలు</string>
   <string name="title_activity_bookmarks">పేజీకలు</string>

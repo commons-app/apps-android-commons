@@ -388,7 +388,7 @@
   <string name="next">volgende</string>
   <string name="previous">Vorige</string>
   <string name="submit">Indien</string>
-  <string name="upload_title_duplicate">\'N Lêer met die lêernaam %1$s bestaan. Is u seker dat u wil voortgaan?</string>
+  <string name="upload_title_duplicate" fuzzy="true">\'N Lêer met die lêernaam %1$s bestaan. Is u seker dat u wil voortgaan?</string>
   <string name="map_application_missing">Geen versoenbare kaarttoepassing kon op u toestel gevind word nie. Installeer \'n kaarttoepassing om hierdie funksie te gebruik.</string>
   <string name="navigation_item_bookmarks">Boekmerke</string>
   <string name="title_activity_bookmarks">Boekmerke</string>

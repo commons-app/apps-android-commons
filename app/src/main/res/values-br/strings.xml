@@ -335,7 +335,7 @@
   <string name="next">War-lerc\'h</string>
   <string name="previous">Kent</string>
   <string name="submit">Kas</string>
-  <string name="upload_title_duplicate">Ur restr gant an anv %1$s zo anezhi. Ha sur eo hoc\'h eus c\'hoant da genderc\'hel ?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Ur restr gant an anv %1$s zo anezhi. Ha sur eo hoc\'h eus c\'hoant da genderc\'hel ?</string>
   <string name="navigation_item_bookmarks">Sinedoù</string>
   <string name="title_activity_bookmarks">Sinedoù</string>
   <string name="title_page_bookmarks_pictures">Skeudennoù</string>

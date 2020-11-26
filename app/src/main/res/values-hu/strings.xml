@@ -407,7 +407,7 @@
   <string name="next">Következő</string>
   <string name="previous">Előző</string>
   <string name="submit">Küldés</string>
-  <string name="upload_title_duplicate">Már létezik \"%1$s\" nevű fájl. Biztosan folytatod?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Már létezik \"%1$s\" nevű fájl. Biztosan folytatod?</string>
   <string name="map_application_missing">Nem található kompatibilis térképalkalmazás az eszközödön. Kérjük rakj fel ilyen appot a funkció használatához.</string>
   <string name="navigation_item_bookmarks">Könyvjelzők</string>
   <string name="title_activity_bookmarks">Könyvjelzők</string>

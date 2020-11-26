@@ -380,7 +380,7 @@
   <string name="next">ದುಂಬುದ</string>
   <string name="previous">ಪಿರವುದ</string>
   <string name="submit">ಒಪ್ಪಿಸಾಲೆ</string>
-  <string name="upload_title_duplicate">ಕಡತಪುದರ್ %1$s ದ ಒಂಜಿ ಕಡತ ಉಂಡು. ಈರ್ ಖಂಡಿತಾ ದುಂಬು ಪೋವರೆ ಬಯಕುವರಾ?\nA file with the file name  exists. Are you sure you want to proceed?</string>
+  <string name="upload_title_duplicate" fuzzy="true">ಕಡತಪುದರ್ %1$s ದ ಒಂಜಿ ಕಡತ ಉಂಡು. ಈರ್ ಖಂಡಿತಾ ದುಂಬು ಪೋವರೆ ಬಯಕುವರಾ?\nA file with the file name  exists. Are you sure you want to proceed?</string>
   <string name="map_application_missing">ಹೊಂದುನ ನಕಾಶೆ ಪರಿಕರನ  ಇರೆನ ಸಲಕರಣೆಡ್ ತಿಕ್ಕುಜಿ. ಈ ಗುಣಧರ್ಮನ್ ಬಳಸರೆ  ದಯಮಲ್ತ್ ಒಂಜಿ ನಕಾಶೆ ಪರಿಕರನ  ತಾಪನೆ ಮಲ್ಪುಲೆ.</string>
   <string name="navigation_item_bookmarks">ಪುಸ್ತಕಗುರ್ತುಲು</string>
   <string name="title_activity_bookmarks">ಪುಸ್ತಕಗುರ್ತುಲು</string>

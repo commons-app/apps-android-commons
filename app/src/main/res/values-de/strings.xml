@@ -426,7 +426,7 @@
   <string name="next">Nächste</string>
   <string name="previous">Vorherige</string>
   <string name="submit">Einreichen</string>
-  <string name="upload_title_duplicate">Eine Datei mit dem Namen %1$s ist bereits vorhanden. Bist du sicher, dass du fortfahren möchtest?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Eine Datei mit dem Namen %1$s ist bereits vorhanden. Bist du sicher, dass du fortfahren möchtest?</string>
   <string name="map_application_missing">Auf deinem Gerät konnte keine kompatible Karten-App gefunden werden. Bitte installiere eine Karten-App, um diese Funktion nutzen zu können.</string>
   <string name="navigation_item_bookmarks">Lesezeichen</string>
   <string name="title_activity_bookmarks">Lesezeichen</string>

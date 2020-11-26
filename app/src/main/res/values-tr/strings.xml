@@ -445,7 +445,7 @@
   <string name="next">Sonraki</string>
   <string name="previous">Önceki</string>
   <string name="submit">Gönder</string>
-  <string name="upload_title_duplicate">%1$s adında zaten bir dosya var. Devam etmek istediğine emin misin?</string>
+  <string name="upload_title_duplicate">%1$s adında zaten bir dosya var. Devam etmek istediğine emin misin?\n\nNot: Dosya adına otomatik olarak uygun bir sonek eklenecektir.</string>
   <string name="map_application_missing">Cihazınızda uyumlu bir harita uygulaması bulunamadı. Lütfen bu özelliği kullanmak için bir harita uygulaması yükleyin.</string>
   <string name="navigation_item_bookmarks">Yer imleri</string>
   <string name="title_activity_bookmarks">Yer imleri</string>

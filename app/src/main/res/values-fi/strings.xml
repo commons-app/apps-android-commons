@@ -379,7 +379,7 @@
   <string name="next">Seuraava</string>
   <string name="previous">Edellinen</string>
   <string name="submit">Lähetä</string>
-  <string name="upload_title_duplicate">Tiedosto tiedostonimellä %1$s on jo olemassa. Oletko varma, että haluat jatkaa?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Tiedosto tiedostonimellä %1$s on jo olemassa. Oletko varma, että haluat jatkaa?</string>
   <string name="map_application_missing">Laitteestasi ei löydy yhteensopivaa karttasovellusta. Asenna karttasovellus käyttääksesi tätä toimintoa.</string>
   <string name="navigation_item_bookmarks">Kirjanmerkit</string>
   <string name="title_activity_bookmarks">Kirjanmerkit</string>

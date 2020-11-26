@@ -438,7 +438,7 @@
   <string name="next">Próximo</string>
   <string name="previous">Anterior</string>
   <string name="submit">Enviar</string>
-  <string name="upload_title_duplicate">Um arquivo com o nome do arquivo% 1 $ s existe. Tem certeza de que deseja continuar?</string>
+  <string name="upload_title_duplicate">Um arquivo com o nome do arquivo% 1 $ s existe. Tem certeza de que deseja continuar?\n\nNota: Um sufixo adequado será adicionado ao nome do arquivo automaticamente.</string>
   <string name="map_application_missing">Nenhum aplicativo de mapa compatível pode ser encontrado no seu dispositivo. Por favor, instale um aplicativo de mapa para usar este recurso.</string>
   <string name="navigation_item_bookmarks">Favoritos</string>
   <string name="title_activity_bookmarks">Favoritos</string>

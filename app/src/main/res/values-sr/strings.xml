@@ -397,7 +397,7 @@
   <string name="next">Следеће</string>
   <string name="previous">Претходно</string>
   <string name="submit">Пошаљи</string>
-  <string name="upload_title_duplicate">Већ постоји датотека са именом %1$s. Заиста желите да наставите?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Већ постоји датотека са именом %1$s. Заиста желите да наставите?</string>
   <string name="map_application_missing">Није могуће пронаћи апликацију компатибилне мапе на вашем уређају. Инсталирајте апликацију мапе да бисте користили ову функцију.</string>
   <string name="navigation_item_bookmarks">Обележивачи</string>
   <string name="title_activity_bookmarks">Обележивачи</string>

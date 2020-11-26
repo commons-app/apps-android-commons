@@ -464,7 +464,7 @@
   <string name="next">Далее</string>
   <string name="previous">Назад</string>
   <string name="submit">Отправить</string>
-  <string name="upload_title_duplicate">Уже существует файл с именем %1$s. Вы уверены, что хотите продолжить?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Уже существует файл с именем %1$s. Вы уверены, что хотите продолжить?</string>
   <string name="map_application_missing">Не найдено совместимое картографическое приложение на вашем устройстве. Установите его, чтобы вы могли использовать эту функцию.</string>
   <string name="navigation_item_bookmarks">Закладки</string>
   <string name="title_activity_bookmarks">Закладки</string>

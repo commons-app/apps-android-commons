@@ -427,7 +427,7 @@
   <string name="next">다음</string>
   <string name="previous">이전</string>
   <string name="submit">제출</string>
-  <string name="upload_title_duplicate">%1$s 이름의 파일이 존재합니다. 계속하시겠습니까?</string>
+  <string name="upload_title_duplicate" fuzzy="true">%1$s 이름의 파일이 존재합니다. 계속하시겠습니까?</string>
   <string name="map_application_missing">장치에서 호환되는 지도 애플리케이션을 찾지 못했습니다. 이 기능을 사용하려면 지도 애플리케이션을 설치해 주십시오.</string>
   <string name="navigation_item_bookmarks">북마크</string>
   <string name="title_activity_bookmarks">북마크</string>

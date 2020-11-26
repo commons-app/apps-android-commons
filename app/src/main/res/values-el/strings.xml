@@ -383,7 +383,7 @@
   <string name="next">Επόμενο</string>
   <string name="previous">Προηγούμενο</string>
   <string name="submit">Υποβολή</string>
-  <string name="upload_title_duplicate">Υπάρχει ήδη ένας φάκελλος με όνομα %1$s. Είστε σίγουρος πως θέλετε να προχωρήσετε ?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Υπάρχει ήδη ένας φάκελλος με όνομα %1$s. Είστε σίγουρος πως θέλετε να προχωρήσετε ?</string>
   <string name="map_application_missing">Καμία εφαρμογή χάρτη δεν βρέθηκε στον υπολογιστή. Παρακαλώ εγκαταστήστε εφαρμογή χάρτη για να χρησιμοποιήσετε αυτήν την ιδιότητα.</string>
   <string name="navigation_item_bookmarks">Σελιδοδείκτες</string>
   <string name="title_activity_bookmarks">Σελιδοδείκτες</string>

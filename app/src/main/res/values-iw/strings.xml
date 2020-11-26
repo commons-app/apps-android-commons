@@ -452,7 +452,7 @@
   <string name="next">הבאה</string>
   <string name="previous">הקודמת</string>
   <string name="submit">שליחה</string>
-  <string name="upload_title_duplicate">כבר קיים קובץ בשם %1$s. להמשיך?</string>
+  <string name="upload_title_duplicate" fuzzy="true">כבר קיים קובץ בשם %1$s. להמשיך?</string>
   <string name="map_application_missing">לא נמצא יישום מפה תואם במכשיר שלך. נא להתקין יישום מפה כדי להשתמש בתכונה זו.</string>
   <string name="navigation_item_bookmarks">סימניות</string>
   <string name="title_activity_bookmarks">סימניות</string>

@@ -432,12 +432,12 @@
   <string name="storage_permission">Permiso de almacenamiento</string>
   <string name="write_storage_permission_rationale_for_image_share">Necesitamos tu permiso para acceder al almacenamiento externo de tu dispositivo para poder subir imágenes.</string>
   <string name="nearby_notification_dismiss_message">Ya no verás el lugar más cercano que necesita fotos. Sin embargo, puedes volver a habilitar esta notificación en la configuración.</string>
-  <string name="step_count" fuzzy="true">Paso %1$d de %2$d</string>
+  <string name="step_count">Paso %1$d de %2$d: %3$s</string>
   <string name="image_in_set_label">Imagen %1$d del conjunto</string>
   <string name="next">Siguiente</string>
   <string name="previous">Anterior</string>
   <string name="submit">Enviar</string>
-  <string name="upload_title_duplicate">Ya existe un archivo con el nombre %1$. ¿Seguro que deseas continuar?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Ya existe un archivo con el nombre %1$. ¿Seguro que deseas continuar?</string>
   <string name="map_application_missing">No se encontró una aplicación de mapas compatible en tu dispositivo. Instala una para usar esta característica.</string>
   <string name="navigation_item_bookmarks">Marcadores</string>
   <string name="title_activity_bookmarks">Marcadores</string>

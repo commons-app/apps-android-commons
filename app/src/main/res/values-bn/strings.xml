@@ -329,7 +329,7 @@
   <string name="nearby_fragment">কাছাকাছি</string>
   <string name="notifications">বিজ্ঞপ্তি</string>
   <string name="list_sheet">তালিকা</string>
-  <string name="step_count" fuzzy="true">ধাপ %2$d এর %1$d</string>
+  <string name="step_count">ধাপ %2$d এর %1$d: %3$s</string>
   <string name="next">পরবর্তী</string>
   <string name="previous">পূর্ববর্তী</string>
   <string name="submit">জমা দিন</string>
@@ -376,4 +376,5 @@
   <string name="leaderboard_nearby">কাছাকাছি</string>
   <string name="leaderboard_used">ব্যবহৃত</string>
   <string name="leaderboard_my_rank_button_text">আমার স্থান</string>
+  <string name="license_step_title">মিডিয়ার লাইসেন্স</string>
 </resources>

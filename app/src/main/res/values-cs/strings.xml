@@ -428,7 +428,7 @@
   <string name="next">Další</string>
   <string name="previous">Předchozí</string>
   <string name="submit">Odeslat</string>
-  <string name="upload_title_duplicate">Soubor s názvem %1$s již existuje. Opravdu chcete pokračovat?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Soubor s názvem %1$s již existuje. Opravdu chcete pokračovat?</string>
   <string name="map_application_missing">Na vašem zařízení nebyla nalezena žádná kompatibilní aplikace poskytující mapy. Pro použití této funkce nainstalujte aplikaci poskytující mapy.</string>
   <string name="navigation_item_bookmarks">Záložky</string>
   <string name="title_activity_bookmarks">Záložky</string>

@@ -390,7 +390,7 @@
   <string name="next">Næsta</string>
   <string name="previous">Fyrri</string>
   <string name="submit">Senda inn</string>
-  <string name="upload_title_duplicate">Skrá með heitinu %1$s er til staðar. Ertu viss um að þú viljir halda áfram?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Skrá með heitinu %1$s er til staðar. Ertu viss um að þú viljir halda áfram?</string>
   <string name="map_application_missing">Ekkert samhæft landakortaforrit fannst á tækinu þínu. Settu kortaforrit til að nýta þennan möguleika.</string>
   <string name="navigation_item_bookmarks">Bókamerki</string>
   <string name="title_activity_bookmarks">Bókamerki</string>

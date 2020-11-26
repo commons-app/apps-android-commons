@@ -411,7 +411,7 @@
   <string name="next">بعدی</string>
   <string name="previous">قبلی</string>
   <string name="submit">ارسال</string>
-  <string name="upload_title_duplicate">پرونده‌ای با نام %1$s وجود دارد. آیا اطمینان دارید که می‌خواهید ادامه دهید؟</string>
+  <string name="upload_title_duplicate" fuzzy="true">پرونده‌ای با نام %1$s وجود دارد. آیا اطمینان دارید که می‌خواهید ادامه دهید؟</string>
   <string name="navigation_item_bookmarks">نشانک‌ها</string>
   <string name="title_activity_bookmarks">نشانک‌ها</string>
   <string name="title_page_bookmarks_pictures">تصویرها</string>

@@ -424,7 +424,7 @@
   <string name="next">Apress</string>
   <string name="previous">Precedent</string>
   <string name="submit">Mandé</string>
-  <string name="upload_title_duplicate">N\'archivi con ël nòm %1$s a esist. É-lo sigur ëd vorèj andé anans?</string>
+  <string name="upload_title_duplicate" fuzzy="true">N\'archivi con ël nòm %1$s a esist. É-lo sigur ëd vorèj andé anans?</string>
   <string name="map_application_missing">Gnun-a aplicassion cartogràfica compatìbil a l\'é trovasse an sò angign. Për piasì, ch\'a na anstala un-a për dovré costa fonsionalità.</string>
   <string name="navigation_item_bookmarks">Marcapàgine</string>
   <string name="title_activity_bookmarks">Marcapàgine</string>

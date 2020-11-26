@@ -337,7 +337,7 @@
   <string name="next">ߢߍߕߊ</string>
   <string name="previous">ߟߊ߬ߕߎ߲߰ߠߊ ߟߎ߬</string>
   <string name="submit">ߊ߬ ߞߘߊߡߊ߫</string>
-  <string name="upload_title_duplicate">ߞߐߕߐ߮ ߣߌ߲߬ ߕߐ߮ ߦߋ߫ ߦߋ߲߬ %1$s ߞߘߐ߬ߡߊ߲߫. ߌ ߦߴߊ߬ ߝߍ߬ ߞߵߊ߬ ߘߊߓߊ߲߫ ߓߊ߬؟</string>
+  <string name="upload_title_duplicate" fuzzy="true">ߞߐߕߐ߮ ߣߌ߲߬ ߕߐ߮ ߦߋ߫ ߦߋ߲߬ %1$s ߞߘߐ߬ߡߊ߲߫. ߌ ߦߴߊ߬ ߝߍ߬ ߞߵߊ߬ ߘߊߓߊ߲߫ ߓߊ߬؟</string>
   <string name="title_page_bookmarks_pictures">ߖߌ߬ߦߊ߬ߓߍ ߟߎ߬</string>
   <string name="deletion_reason_uploaded_by_mistake">ߒ ߣߵߊ߬ ߟߊߦߟߍ߬ ߟߊ߫ ߢߌ߬ߣߊ߬ ߓߟߏ ߟߋ߬ ߡߊ߬</string>
   <string name="deletion_reason_publicly_visible">ߒ ߕߎ߲߬ ߡߴߊ߬ ߟߐ߲߫ ߞߴߊ߬ ߘߌ߫ ߞߍ߫ ߟߊ߬ߥߊ߲߬ߞߊ߬ߟߌ߬ ߦߋߕߊ߫ ߘߌ߫</string>

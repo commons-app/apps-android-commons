@@ -446,7 +446,7 @@
   <string name="next">Наступне</string>
   <string name="previous">Попереднє</string>
   <string name="submit">Надіслати</string>
-  <string name="upload_title_duplicate">Файл із назвою %1$s існує. Ви впевнені, що хочете продовжити?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Файл із назвою %1$s існує. Ви впевнені, що хочете продовжити?</string>
   <string name="map_application_missing">На Вашому пристрої не знайдено сумісного додатка з картами. Будь ласка, встановіть додаток з картами, якщо хочете скористатись цією функцією.</string>
   <string name="navigation_item_bookmarks">Закладки</string>
   <string name="title_activity_bookmarks">Закладки</string>

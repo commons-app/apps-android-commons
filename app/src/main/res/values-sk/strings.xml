@@ -424,7 +424,7 @@
   <string name="next">Ďalej</string>
   <string name="previous">Späť</string>
   <string name="submit">Odoslať</string>
-  <string name="upload_title_duplicate">Súbor s názvom %1$s už existuje. Naozaj chcete pokračovať?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Súbor s názvom %1$s už existuje. Naozaj chcete pokračovať?</string>
   <string name="map_application_missing">Nebola nájdená žiadna kompatibilná aplikácia s mapami. Pre použitie tejto fukncie si, prosím, nainštalujte aplikáciu poskytujúcu mapy.</string>
   <string name="navigation_item_bookmarks">Záložky</string>
   <string name="title_activity_bookmarks">Záložky</string>

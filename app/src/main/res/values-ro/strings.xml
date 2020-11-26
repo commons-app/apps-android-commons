@@ -427,7 +427,7 @@
   <string name="next">Următor</string>
   <string name="previous">Precedent</string>
   <string name="submit">Trimite</string>
-  <string name="upload_title_duplicate">Există un fișier cu numele de fișier %1$s. Sunteți sigur că doriți să continuați?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Există un fișier cu numele de fișier %1$s. Sunteți sigur că doriți să continuați?</string>
   <string name="map_application_missing">Nu s-a găsit nicio aplicație de hartă compatibilă pe dispozitiv. Instalați o aplicație de hartă pentru a utiliza această caracteristică.</string>
   <string name="navigation_item_bookmarks">Semne de carte</string>
   <string name="title_activity_bookmarks">Semne de carte</string>

@@ -416,7 +416,7 @@
   <string name="next">Siguiente</string>
   <string name="previous">Anterior</string>
   <string name="submit">Unviar</string>
-  <string name="upload_title_duplicate">Yá esiste un ficheru col nome %1$. ¿Tas seguru de que quies siguir?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Yá esiste un ficheru col nome %1$. ¿Tas seguru de que quies siguir?</string>
   <string name="map_application_missing">Nun s\'atopó una aplicación de mapes compatible nel to preséu. Instala una pa usar esta carauterística.</string>
   <string name="navigation_item_bookmarks">Marcadores</string>
   <string name="title_activity_bookmarks">Marcadores</string>

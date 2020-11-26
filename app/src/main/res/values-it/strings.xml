@@ -418,7 +418,7 @@
   <string name="next">Successivo</string>
   <string name="previous">Precedente</string>
   <string name="submit">Invia</string>
-  <string name="upload_title_duplicate">Esiste già un file con il nome %1$s. Sei sicuro di voler procedere?</string>
+  <string name="upload_title_duplicate">Esiste già un file con il nome %1$s. Sei sicuro di voler procedere?\n\nNota: verrà aggiunto automaticamente un suffisso adatto al nome del file.</string>
   <string name="map_application_missing">Nessuna applicazione di mappe compatibile è stata trovata sul tuo dispositivo. Installa un\'applicazione per le mappe per poter utilizzare questa funzionalità.</string>
   <string name="navigation_item_bookmarks">Segnalibri</string>
   <string name="title_activity_bookmarks">Segnalibri</string>

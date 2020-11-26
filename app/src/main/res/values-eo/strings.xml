@@ -401,7 +401,7 @@
   <string name="next">Sekva</string>
   <string name="previous">Antaŭa</string>
   <string name="submit">Sendi</string>
-  <string name="upload_title_duplicate">Ekzistas dosiero kun la nomo %1$s. Ĉu vi certas ke vi volas daŭrigi?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Ekzistas dosiero kun la nomo %1$s. Ĉu vi certas ke vi volas daŭrigi?</string>
   <string name="map_application_missing">Neniu kongrua aplikaĵo troveblas en via aparato. Bonvolu instali tian por uzo kun ĉi tiu funkcio.</string>
   <string name="navigation_item_bookmarks">Legosignoj</string>
   <string name="title_activity_bookmarks">Legosignoj</string>

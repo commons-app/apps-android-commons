@@ -438,7 +438,7 @@
   <string name="next">下一个</string>
   <string name="previous">上一个</string>
   <string name="submit">发布</string>
-  <string name="upload_title_duplicate">名为%1$s的文件已经存在。您确定要继续吗？</string>
+  <string name="upload_title_duplicate" fuzzy="true">名为%1$s的文件已经存在。您确定要继续吗？</string>
   <string name="map_application_missing">您的设备上无法找到兼容的地图应用程序。请安装地图应用程序来使用此功能。</string>
   <string name="navigation_item_bookmarks">书签</string>
   <string name="title_activity_bookmarks">书签</string>
