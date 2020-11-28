@@ -94,7 +94,7 @@ public class DeleteHelper {
         String userPageString = "\n{{subst:idw|" + media.getFilename() +
                 "}} ~~~~";
 
-        String creator = media.getCreator();
+        String creator = media.getAuthor();
         if (creator == null || creator.isEmpty()) {
             throw new RuntimeException("Failed to nominate for deletion");
         }

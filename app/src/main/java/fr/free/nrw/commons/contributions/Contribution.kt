@@ -57,7 +57,8 @@ data class Contribution constructor(
             categories,
             item.fileName,
             formatDescriptions(item.uploadMediaDetails),
-            sessionManager.authorName
+            sessionManager.userName,
+            sessionManager.userName
         ),
         localUri = item.mediaUri,
         decimalCoords = item.gpsCoords.decimalCoords,
