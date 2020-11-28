@@ -55,13 +55,15 @@ class Media constructor(
     val licenseUrl: String? = null,
     /**
      * Gets the name of the creator of the file.
-     * @return creator name as a String
+     * @return author name as a String
      */
     /**
-     * Sets the creator name of the file.
-     * @param creator creator name as a string
+     * Sets the author name of the file.
+     * @param author creator name as a string
      */
-    var creator: String? = null,
+    var author: String? = null,
+
+    var user:String?=null,
 
     /**
      * Gets the categories the file falls under.
@@ -83,12 +85,13 @@ class Media constructor(
         categories: List<String>?,
         filename: String?,
         fallbackDescription: String?,
-        creator: String?
+        author: String?, user:String?
     ) : this(
         filename = filename,
         fallbackDescription = fallbackDescription,
         dateUploaded = Date(),
-        creator = creator,
+        author = author,
+        user=user,
         categories = categories,
         captions = captions
     )

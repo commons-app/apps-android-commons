@@ -37,10 +37,10 @@ class SearchImagesViewHolder(containerView: View, val onImageClicked: (Int) -> U
         categoryImageView.setOnClickListener { onImageClicked(item.second) }
         categoryImageTitle.text = media.mostRelevantCaption
         categoryImageView.setImageURI(media.thumbUrl)
-        if (media.creator?.isNotEmpty() == true) {
+        if (media.author?.isNotEmpty() == true) {
             categoryImageAuthor.visibility = View.VISIBLE
             categoryImageAuthor.text =
-                containerView.context.getString(R.string.image_uploaded_by, media.creator)
+                containerView.context.getString(R.string.image_uploaded_by, media.user)
         } else {
             categoryImageAuthor.visibility = View.GONE
         }
