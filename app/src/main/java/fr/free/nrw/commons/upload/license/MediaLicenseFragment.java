@@ -92,10 +92,10 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
      * Initialise the license spinner
      */
     private void initLicenseSpinner() {
-        if (getContext() == null) {
+        if (getActivity() == null) {
             return;
         }
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item);
+        adapter = new ArrayAdapter<>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_dropdown_item);
         spinnerLicenseList.setAdapter(adapter);
         spinnerLicenseList.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
