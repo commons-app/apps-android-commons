@@ -207,9 +207,11 @@ public class MainActivity  extends BaseActivity
      */
     public void setNumOfUploads(int uploadCount) {
         if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
-            setTitle(getResources().getString(R.string.contributions_fragment) +" "+ getResources()
+            setTitle(getResources().getString(R.string.contributions_fragment) +" "+ (
+                !(uploadCount == 0) ?
+                getResources()
                 .getQuantityString(R.plurals.contributions_subtitle,
-                    uploadCount, uploadCount));
+                    uploadCount, uploadCount):getString(R.string.contributions_subtitle_zero)));
         }
     }
 
