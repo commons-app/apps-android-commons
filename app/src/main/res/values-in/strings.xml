@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Arifin.wijaya
+* Daud I.F. Argana
 * Farras
 * Hidayatsrf
 * Ilham151096
@@ -419,12 +420,12 @@
   <string name="storage_permission">Izin Penyimpanan</string>
   <string name="write_storage_permission_rationale_for_image_share">Kami memerlukan izin Anda untuk mengakses penyimpanan eksternal perangkat Anda untuk mengunggah gambar.</string>
   <string name="nearby_notification_dismiss_message">Anda tidak akan melihat tempat di sekitar yang membutuhkan gambar lagi. Namun, Anda dapat mengaktifkan kembali pemberitahuan ini di Pengaturan jika diinginkan.</string>
-  <string name="step_count" fuzzy="true">Langkah %1$d dari %2$d</string>
+  <string name="step_count">Langkah %1$d dari %2$d: %3$s</string>
   <string name="image_in_set_label">Gambar %1$d di set</string>
   <string name="next">Selanjutnya</string>
   <string name="previous">Sebelumnya</string>
   <string name="submit">Kirim</string>
-  <string name="upload_title_duplicate" fuzzy="true">Berkas dengan nama %1$s sudah ada. Anda yakin ingin melanjutkan?</string>
+  <string name="upload_title_duplicate">Berkas dengan nama %1$s sudah ada. Anda yakin ingin melanjutkan?\n\nCatatan: Sufiks yang sesuai akan ditambahkan ke nama berkas secara otomatis.</string>
   <string name="map_application_missing">Tidak ada aplikasi peta yang kompatibel dapat ditemukan di perangkat Anda. Silakan instal aplikasi peta untuk menggunakan fitur ini.</string>
   <string name="navigation_item_bookmarks">Markah</string>
   <string name="title_activity_bookmarks">Markah</string>
@@ -461,6 +462,7 @@
   <string name="display_campaigns">Sinahang penyobyahan</string>
   <string name="bad_token_error_proposed_solution">Unggahan gagal karena masalah pada token penyuntingan. Coba keluar log dan masuk log lagi.</string>
   <string name="error_processing_image">Terjadi masalah saat memproses gambar. Harap mengulang lagi.</string>
+  <string name="nominate_for_deletion_done">Selesai</string>
   <string name="nominate_for_deletion_notify_user">Beritahu Pengguna di halaman Pembicaraan</string>
   <string name="review_no_category">Oh, gambar ini belum pun diberi kategori!</string>
   <string name="review_category_explanation">Gambar ini ada dalam kategori %1$s.</string>
@@ -491,8 +493,10 @@
   <string name="exif_tag_name_lensModel">Model lensa</string>
   <string name="exif_tag_name_serialNumbers">Nomor seri</string>
   <string name="exif_tag_name_software">Perangkat lunak</string>
+  <string name="delete_helper_make_deletion_toast">Mencoba menominasikan %1$s untuk dihapus</string>
+  <string name="delete_helper_show_deletion_title">Sedang menominasikan untuk dihapus</string>
   <string name="delete_helper_show_deletion_title_success">Sukses</string>
-  <string name="delete_helper_show_deletion_message_if" fuzzy="true">Berhasil dinominasikan %1$ untuk dihapus.</string>
+  <string name="delete_helper_show_deletion_message_if">Berhasil menominasikan %1$ untuk dihapus.</string>
   <string name="delete_helper_show_deletion_title_failed">Gagal</string>
   <string name="delete_helper_show_deletion_message_else">Tidak dapat meminta penghapusan.</string>
   <string name="delete_helper_ask_spam_selfie">Foto selfi</string>
