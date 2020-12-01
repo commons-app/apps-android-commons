@@ -37,8 +37,8 @@ class PageContentsCreator {
         .append("{{Information\n")
         .append("|description=").append(media.getFallbackDescription()).append("\n")
         .append("|source=").append("{{own}}\n")
-        .append("|author=[[User:").append(media.getCreator()).append("|")
-        .append(media.getCreator()).append("]]\n");
+        .append("|author=[[User:").append(media.getAuthor()).append("|")
+        .append(media.getAuthor()).append("]]\n");
 
     String templatizedCreatedDate = getTemplatizedCreatedDate(
         contribution.getDateCreated(), contribution.getDateCreatedSource());

@@ -28,7 +28,6 @@ public class SessionManager {
     private final Context context;
     private Account currentAccount; // Unlike a savings account...  ;-)
     private JsonKvStore defaultKvStore;
-    private static final String KEY_RAWUSERNAME = "rawusername";
 
     @Inject
     public SessionManager(Context context,
@@ -98,17 +97,6 @@ public class SessionManager {
         Account account = getCurrentAccount();
         return account == null ? null : account.name;
     }
-
-    @Nullable
-    private String getRawUserName() {
-        Account account = getCurrentAccount();
-        return account == null ? null : accountManager().getUserData(account, KEY_RAWUSERNAME);
-    }
-
-    public String getAuthorName(){
-        return getRawUserName() == null ? getUserName() : getRawUserName();
-    }
-
 
     @Nullable
     public String getPassword() {
