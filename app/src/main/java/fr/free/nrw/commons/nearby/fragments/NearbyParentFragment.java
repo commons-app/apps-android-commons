@@ -319,8 +319,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                             .zoom(ZOOM_LEVEL) // Same zoom level
                             .build();
                     mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
-                } else {
-                    Toast.makeText(getContext(), getString(R.string.nearby_location_not_available), Toast.LENGTH_LONG).show();
                 }
                 presenter.onMapReady();
                 registerUnregisterLocationListener(false);
