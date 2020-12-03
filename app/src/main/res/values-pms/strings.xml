@@ -8,7 +8,7 @@
     <item quantity="one">%1$d archivi an camin ch\'as caria</item>
     <item quantity="other">%1$d archivi an camin ch\'as cario</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -101,7 +101,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">Ël GPS a l\'é disabilità su sò angign. Veul-lo ativelo?</string>
   <string name="enable_gps">Ativé ël GPS</string>
-  <string name="contributions_subtitle_zero">Ancor gnun cariament</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Ancor gnun cariament</string>
   <string name="categories_not_found">Gnun-e categorìe rëspondente a %1$s trovà</string>
   <string name="depictions_not_found">Gnun element Wikidata trovà ch\'a corësponda a %1$s</string>
   <string name="no_child_classes">%1$s a l\'ha gnun-e classe masnà</string>

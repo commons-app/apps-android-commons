@@ -34,7 +34,7 @@
     <item quantity="one">%1$d个文件正在上传</item>
     <item quantity="other">%1$d个文件正在上传</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d次上传</item>
     <item quantity="other">%1$d次上传</item>
@@ -124,7 +124,7 @@
   <string name="display_list_button">列表</string>
   <string name="gps_disabled">您的设备禁用了GPS。您是否要启用它？</string>
   <string name="enable_gps">启用GPS</string>
-  <string name="contributions_subtitle_zero">尚无上传</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">尚无上传</string>
   <string name="categories_not_found">没有找到匹配%1$s的分类</string>
   <string name="no_child_classes">%1$s没有子类别</string>
   <string name="no_parent_classes">%1$s没有父类别</string>

@@ -8,7 +8,7 @@
     <item quantity="one">ဝှာင် %1$d file uploadingဂှ် ပတိုန်ပၠုပ်ဒၟံင်</item>
     <item quantity="other">ဝှာင် %1$d files uploadingဂှ် ပတိုန်ပၠုပ်ဒၟံင်</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -89,7 +89,7 @@
   <string name="display_list_button">စရၚ်</string>
   <string name="gps_disabled">ပ္ဍဲကဵု စက်မၞးဂှ် ဂျဳပဳအေသ် ကၟာတ်လဝ်။ မိက်ဂွံ ပံက်ဍေဟ်ဟာ?</string>
   <string name="enable_gps">ပံက် GPS</string>
-  <string name="contributions_subtitle_zero">ဟွံဂွံ ပတိုန်ပၠုပ်ဏီ</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">ဟွံဂွံ ပတိုန်ပၠုပ်ဏီ</string>
   <string name="categories_not_found">ကဏ္ဍ မကိတ်ညဳ ကု %1$s ဟွံဆဵု</string>
   <string name="depictions_not_found">တင်ဂၞင် ဝဳကဳဒေတာ မကိတ်ညဳ ကု%1$s ဟွံဆဵု</string>
   <string name="no_child_classes">%1$s ဂှ် ဟွံမဲ ကုတန်ဗတောန် ကောန်ၚာ်</string>

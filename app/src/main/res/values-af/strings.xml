@@ -90,7 +90,7 @@
   <string name="display_list_button">Lys</string>
   <string name="gps_disabled">GPS is uitgesit in uw apparaat. Wil u die aansit?</string>
   <string name="enable_gps">GPS aansit</string>
-  <string name="contributions_subtitle_zero">Nog geen uploads</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Nog geen uploads</string>
   <string name="categories_not_found">Geen kategorieë met \"%1$s\" gevind nie</string>
   <string name="categories_skip_explanation">Voeg kategorieë by om u beelde meer sigbaar te maak op Wikimedia Commons.\nBegin tik om kategorieë by te voeg.</string>
   <string name="categories_activity_title">Kategorieë</string>

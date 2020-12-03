@@ -85,7 +85,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">GPS je onemogućen na vašem uređaju. Želite li da ga omogućite?</string>
   <string name="enable_gps">Omogući GPS</string>
-  <string name="contributions_subtitle_zero">Još uvek nema otpremanja</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Još uvek nema otpremanja</string>
   <string name="categories_not_found">Nema kategorija koje odgovaraju %1$s</string>
   <string name="categories_skip_explanation">Dodajte kategorije na slike da biste olakšali korisnicima njihovo pronalaženje na Ostavi.\n\nDa biste dodali kategoriju, počnite sa pisanjem njenog imena.</string>
   <string name="categories_activity_title">Kategorije</string>

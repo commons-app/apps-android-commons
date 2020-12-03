@@ -15,7 +15,7 @@
     <item quantity="one">s\'està carregant %1$d fitxer</item>
     <item quantity="other">s\'estan carregant %1$d fitxers</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -95,7 +95,7 @@
   <string name="display_list_button">Llista</string>
   <string name="gps_disabled">El vostre dispositiu no té el GPS habilitat. El voleu habilitar?</string>
   <string name="enable_gps">Habilita el GPS</string>
-  <string name="contributions_subtitle_zero">Encara no hi ha cap càrrega</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Encara no hi ha cap càrrega</string>
   <string name="categories_not_found">No s\'ha trobat cap categoria que coincideixi amb %1$s</string>
   <string name="categories_skip_explanation">Afegiu categories per fer que les vostres imatges siguin més fàcils de trobar a Wikimedia Commons.</string>
   <string name="categories_activity_title">Categories</string>

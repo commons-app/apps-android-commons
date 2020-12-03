@@ -8,7 +8,7 @@
     <item quantity="one">%1$d file en cargamento</item>
     <item quantity="other">%1$d file en cargamento</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -96,7 +96,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">El GPS el xé inabiłità sol dispoxidivo. Vuto tacarlo?</string>
   <string name="enable_gps">Taca el GPS</string>
-  <string name="contributions_subtitle_zero">No xé njiancora sta cargà calcosa</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">No xé njiancora sta cargà calcosa</string>
   <string name="categories_not_found">No ła xé sta catada na categoria che ła contegna %1$s</string>
   <string name="depictions_not_found">No gò catà nisun elemento Wikidata che corisponda a %1$s</string>
   <string name="categories_skip_explanation">Xonta categorie par far sì che łe to someje e imajini łe sia pì façilmente riçercae so Wikimedia Commons.\nScumisia a dijitare par xontare categorie.</string>

@@ -124,7 +124,7 @@
   <string name="display_list_button">Список</string>
   <string name="gps_disabled">GPS вимкнено на Вашому пристрої. Бажаєте увімкнути його?</string>
   <string name="enable_gps">Увімкнути GPS</string>
-  <string name="contributions_subtitle_zero">Ще нема завантажень</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Ще нема завантажень</string>
   <string name="categories_not_found">Категорій, відповідних %1$s, не знайдено</string>
   <string name="depictions_not_found">Не знайдено елементів вікіданих, що відповідають %1$s</string>
   <string name="no_child_classes">%1$s не має дочірніх класів</string>

@@ -20,8 +20,7 @@
     <item quantity="one">%1$d file in caricamento</item>
     <item quantity="other">%1$d file in caricamento</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -110,7 +109,7 @@
   <string name="display_list_button">Elenco</string>
   <string name="gps_disabled">Il GPS è disabilitato nel dispositivo. Vuoi attivarlo?</string>
   <string name="enable_gps">Attiva GPS</string>
-  <string name="contributions_subtitle_zero">Non è stato ancora caricato niente</string>
+  <string name="contributions_subtitle_zero">(Non è stato ancora caricato niente)</string>
   <string name="categories_not_found">Non è stata trovata alcuna categoria che contiene %1$s</string>
   <string name="categories_skip_explanation">Aggiungi categorie per rendere le tue immagini più facilmente individuabili su Wikimedia Commons.\nInizia a digitare per aggiungere categorie.</string>
   <string name="categories_activity_title">Categorie</string>

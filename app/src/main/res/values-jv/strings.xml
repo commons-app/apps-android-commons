@@ -12,7 +12,7 @@
     <item quantity="one">%1$d barkas lagi kaunggah</item>
     <item quantity="other">%1$d barkas lagi kaunggah</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -86,7 +86,7 @@
   <string name="display_list_button">Pratélan</string>
   <string name="gps_disabled">GPS dipatèni ing pirantiné panjenengan. Panjenengan arep ngurubaké?</string>
   <string name="enable_gps">Urubaké GPS</string>
-  <string name="contributions_subtitle_zero">Durung ana unggahan</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Durung ana unggahan</string>
   <string name="categories_not_found">Ora ana kategori kang cocog karo %1$s</string>
   <string name="categories_skip_explanation">Wuwuh kategori supaya gambar-gambaré panjenengan gampang tinemu ing Wikimedia Commons.\nWiwit nulis saperlu muwuhi kategori.</string>
   <string name="categories_activity_title">Kategori</string>

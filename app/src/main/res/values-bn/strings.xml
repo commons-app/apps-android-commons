@@ -109,7 +109,7 @@
   <string name="display_list_button">তালিকা</string>
   <string name="gps_disabled">আপনার ডিভাইসে জিপিএস নিষ্ক্রিয় করা আছে। আপনি কি এটি সক্রিয় করতে চান?</string>
   <string name="enable_gps">জিপিএস সক্রিয় করুন</string>
-  <string name="contributions_subtitle_zero">এখনো কোন আপলোড নেই</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">এখনো কোন আপলোড নেই</string>
   <string name="categories_not_found">%1$s-এর সাথে মিলে এমন কোন বিষয়শ্রেণী পাওয়া যায়নি</string>
   <string name="categories_skip_explanation">উইকিমিডিয়া কমন্স থেকে আপনার মিডিয়া ফাইলটি সহজে খুঁজে পেতে বিষয়শ্রেণী যুক্ত করুন।\n\nবিষয়শ্রেণী যোগ করার জন্য টাইপিং শুরু করুন।</string>
   <string name="categories_activity_title">বিষয়শ্রেণীসমূহ</string>

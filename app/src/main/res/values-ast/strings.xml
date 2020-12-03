@@ -9,7 +9,7 @@
     <item quantity="one">Xubiendo un ficheru</item>
     <item quantity="other">Xubiendo %1$d ficheros</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -97,7 +97,7 @@
   <string name="display_list_button">Llista</string>
   <string name="gps_disabled">El GPS ta desactiváu nel preséu. ¿Quiés activalu?</string>
   <string name="enable_gps">Activar GPS</string>
-  <string name="contributions_subtitle_zero">Inda nun hai xubes</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Inda nun hai xubes</string>
   <string name="categories_not_found">Nun s\'alcontró denguna categoría que case con %1$s</string>
   <string name="depictions_not_found">Nun s\'alcontraron elementos de Wikidata que casen con %1$s</string>
   <string name="no_child_classes">%1$s nun tien clases fíes</string>

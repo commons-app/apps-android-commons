@@ -97,7 +97,7 @@
   <string name="display_list_button">Lijst</string>
   <string name="gps_disabled">GPS is uitgezet in uw apparaat. Wilt u het aanzetten?</string>
   <string name="enable_gps">GPS aanzetten</string>
-  <string name="contributions_subtitle_zero">Nog geen uploads</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Nog geen uploads</string>
   <string name="categories_not_found">Er zijn geen categorieën met \"%1$s\" gevonden</string>
   <string name="categories_skip_explanation" fuzzy="true">Voeg categorieën toe om uw afbeeldingen makkelijker te vinden te maken op Wikimedia Commons.\n\nBegin met het toevoegen van categorieën.\n\nKlik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="categories_activity_title">Categorieën</string>

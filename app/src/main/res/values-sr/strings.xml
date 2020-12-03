@@ -18,7 +18,7 @@
     <item quantity="one">%1$d датотека се отпрема</item>
     <item quantity="other">%1$d датотеке се отпремају</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d отпремање</item>
     <item quantity="other">%1$d отпремања</item>
@@ -100,7 +100,7 @@
   <string name="display_list_button">Списак</string>
   <string name="gps_disabled">GPS је онемогућен на вашем уређају. Желите ли да га омогућите?</string>
   <string name="enable_gps">Омогући GPS</string>
-  <string name="contributions_subtitle_zero">Још увек нема отпремања</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Још увек нема отпремања</string>
   <string name="categories_not_found">Нема категорија које одговарају %1$s</string>
   <string name="categories_skip_explanation">Додајте категорије на слике да бисте олакшали корисницима њихово проналажење на Остави.\n\nДа бисте додали категорију, почните са писањем њеног имена.</string>
   <string name="categories_activity_title">Категорије</string>

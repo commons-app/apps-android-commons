@@ -98,7 +98,7 @@
   <string name="display_list_button">Listo</string>
   <string name="gps_disabled">GPS estas malŝaltita en via aparato. Ĉu vi volas ŝalti ĝin?</string>
   <string name="enable_gps">Ŝalti la GPS</string>
-  <string name="contributions_subtitle_zero">Neniuj alŝutaĵoj ĝis nun!</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Neniuj alŝutaĵoj ĝis nun!</string>
   <string name="categories_not_found">Troviĝis neniu kategorio kongrua kun serĉoteksto %1$s</string>
   <string name="categories_skip_explanation">Aldonu kategoriojn por plitrovebligi viajn bildojn ĉe Vikimeda Komunejo.\nEktajpu por aldoni kategoriojn.</string>
   <string name="categories_activity_title">Kategorioj</string>

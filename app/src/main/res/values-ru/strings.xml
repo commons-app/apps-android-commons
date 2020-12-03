@@ -37,7 +37,7 @@
     <item quantity="many">%1$d файлов загружается</item>
     <item quantity="other">%1$d файлов загружается</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="one">(%1$d)</item>
     <item quantity="few">(%1$d)</item>
     <item quantity="many">(%1$d)</item>
@@ -141,7 +141,7 @@
   <string name="display_list_button">Список</string>
   <string name="gps_disabled">GPS отключён в вашем устройстве. Хотите включить его?</string>
   <string name="enable_gps">Включить GPS</string>
-  <string name="contributions_subtitle_zero">Загрузок пока нет</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Загрузок пока нет</string>
   <string name="categories_not_found">Не найдено категорий, соответствующих %1$s</string>
   <string name="depictions_not_found">Элемент Викиданных, соответствующий %1$s, не найден.</string>
   <string name="no_child_classes">У %1$s нет дочерних классов</string>

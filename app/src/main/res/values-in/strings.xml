@@ -17,7 +17,7 @@
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="other">mengunggah %1$d berkas</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Memulai Unggahan</string>
@@ -103,7 +103,7 @@
   <string name="display_list_button">Daftar</string>
   <string name="gps_disabled">GPS dimatikan di peranti Anda. Apakah Anda mau menghidupkannya?</string>
   <string name="enable_gps">Hidupkan GPS</string>
-  <string name="contributions_subtitle_zero">Belum ada unggahan</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Belum ada unggahan</string>
   <string name="categories_not_found">Tidak ada kategori yang cocok dengan %1$s</string>
   <string name="depictions_not_found">Tidak ada butir Wikidata yang sesuai %1$s ditemukan</string>
   <string name="no_child_classes">%1$s tidak memiliki kelas turunan</string>

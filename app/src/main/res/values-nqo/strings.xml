@@ -76,7 +76,7 @@
   <string name="display_list_button">ߛߙߍߘߍ</string>
   <string name="gps_disabled">GPS ߟߊߞߎߣߎ߲ߣߍ߲߫ ߕߴߌ ߟߊ߫ ߞߍߟߊ߲ ߠߊ߫. ߊ߬ ߟߊߞߎߣߎ߲ ߞߊߘߴߌ ߦߋ߫ ߓߊ߬؟</string>
   <string name="enable_gps">GPS ߟߊߞߎߣߎ߲߫</string>
-  <string name="contributions_subtitle_zero">ߟߊ߬ߦߟߍ߬ߣߍ߲߬ ߕߴߦߋ߲߬ ߡߎߣߎ߲߬</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">ߟߊ߬ߦߟߍ߬ߣߍ߲߬ ߕߴߦߋ߲߬ ߡߎߣߎ߲߬</string>
   <string name="categories_not_found">ߞߎߡߘߊ߫ %1$s ߡߊ߫ ߛߐ߬ߘߐ߲߬.</string>
   <string name="depictions_not_found">ߥߞߌߘߕߊ ߞߣߐߘߐ߫ ߛߌ߫ ߕߍ߫ ߦߋ߲߬ %1$s ߘߌ߫</string>
   <string name="no_child_classes">ߘߋߣߍ߲߫ ߛߊ߯ߘߊ߫ ߕߍ߫ %1$s ߓߟߏ߫</string>

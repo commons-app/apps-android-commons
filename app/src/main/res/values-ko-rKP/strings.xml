@@ -8,7 +8,7 @@
     <item quantity="one">%1$d개의 서류를 올리적재하는중</item>
     <item quantity="other">%1$d개의 서류를 올리적재하는중</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -82,7 +82,7 @@
   <string name="display_list_button">목록</string>
   <string name="gps_disabled">장치에서 GPS가 금지되여있습니다. 허가하시겠습니까?</string>
   <string name="enable_gps">GPS 허가</string>
-  <string name="contributions_subtitle_zero">아직 올리적재가 없습니다</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">아직 올리적재가 없습니다</string>
   <string name="categories_not_found">%1$s와(과) 일치하는 분류를 찾을수 없습니다</string>
   <string name="categories_skip_explanation">위키매체 공용에서 그림을 더 찾기 쉽게 만들기 위해 분류를 추가합니다.\n분류를 추가하려면 입력을 시작하세요.</string>
   <string name="categories_activity_title">분류</string>

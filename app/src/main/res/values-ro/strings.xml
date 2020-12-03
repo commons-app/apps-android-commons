@@ -108,7 +108,7 @@
   <string name="display_list_button">Listă</string>
   <string name="gps_disabled">GPS-ul este dezactivat pe device-ul dumneavoastră. Doriți să-l activați?</string>
   <string name="enable_gps">Activează GPS</string>
-  <string name="contributions_subtitle_zero">Niciun fișier încă!</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Niciun fișier încă!</string>
   <string name="categories_not_found">Nu s-a găsit nicio categorie corespunzătoare cu %1$s</string>
   <string name="depictions_not_found">Nu s-au găsit articole Wikidata care corespund %1$s</string>
   <string name="no_child_classes">%1$s nu are clase copil</string>

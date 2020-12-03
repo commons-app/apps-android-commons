@@ -115,7 +115,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">O GPS está desativado no seu dispositivo. Gostaria de ativá-lo?</string>
   <string name="enable_gps">Ativar GPS</string>
-  <string name="contributions_subtitle_zero">Ainda não foram enviados ficheiros</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Ainda não foram enviados ficheiros</string>
   <string name="categories_not_found">Não foi encontrada nenhuma categoria que corresponda a %1$s</string>
   <string name="depictions_not_found">Não foi encontrado nenhum elemento Wikidata que corresponda a %1$s</string>
   <string name="no_child_classes">%1$s não tem nenhuma classe descendente</string>

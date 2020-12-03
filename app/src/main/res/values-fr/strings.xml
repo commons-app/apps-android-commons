@@ -127,7 +127,7 @@
   <string name="display_list_button">Liste</string>
   <string name="gps_disabled">Le GPS est désactivé sur votre appareil. Voulez-vous l’activer ?</string>
   <string name="enable_gps">Activer le GPS</string>
-  <string name="contributions_subtitle_zero">Encore aucun téléversement</string>
+  <string name="contributions_subtitle_zero">(Pas encore de téléversement)</string>
   <string name="categories_not_found">Aucune catégorie trouvée correspondant à %1$s</string>
   <string name="depictions_not_found">Aucun élément Wikidata trouvé correspondant à %1$s</string>
   <string name="no_child_classes">%1$s n’a pas de classes enfant</string>

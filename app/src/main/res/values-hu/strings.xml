@@ -21,7 +21,7 @@
     <item quantity="one">%1$d fájl feltöltése folyamatban</item>
     <item quantity="other">%1$d fájl feltöltése folyamatban</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d feltöltés</item>
     <item quantity="other">%1$d feltöltés</item>
@@ -109,7 +109,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">A GPS le van tiltva az eszközén. Szeretné engedélyezni?</string>
   <string name="enable_gps">GPS engedélyezése</string>
-  <string name="contributions_subtitle_zero">Még nincsenek feltöltések</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Még nincsenek feltöltések</string>
   <string name="categories_not_found">Nincs a(z) „%1$s” keresési kifejezésnek megfelelő kategória</string>
   <string name="categories_skip_explanation">Adj kategóriákat a képekhez, hogy könnyebben meg lehessen találni őket a Commonson.\nKezdd el beírni a kategória nevét, hogy hozzáadd.\nBökj erre az üzenetre (vagy a vissza gombra) a lépés kihagyásához</string>
   <string name="categories_activity_title">Kategóriák</string>

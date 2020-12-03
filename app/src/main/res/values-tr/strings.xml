@@ -30,8 +30,7 @@
     <item quantity="other">%1$d dosya yükleniyor</item>
   </plurals>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d</item>
+    <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Yüklemeye Başlıyor</string>
@@ -122,7 +121,7 @@
   <string name="display_list_button">Liste</string>
   <string name="gps_disabled">GPS, cihazınızda devre dışı bırakılmıştır. Etkinleştirmek ister misiniz?</string>
   <string name="enable_gps">GPS\'i etkinleştir</string>
-  <string name="contributions_subtitle_zero">Henüz yüklenmedi</string>
+  <string name="contributions_subtitle_zero">!Henüz yükleme yok)</string>
   <string name="categories_not_found">%1$s ile eşleşen bir kategori bulunamadı</string>
   <string name="depictions_not_found">%1$s ile eşleşen Vikiveri ögesi bulunamadı</string>
   <string name="no_child_classes">%1$s alt sınıfı yok</string>

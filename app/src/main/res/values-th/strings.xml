@@ -11,7 +11,7 @@
 -->
 <resources>
   <string name="uploads_pending_notification_indicator">กำลังอัปโหลดไฟล์ %1$d ไฟล์</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -89,7 +89,7 @@
   <string name="display_list_button">รายการ</string>
   <string name="gps_disabled">GPS ถูกปิดใช้งานในอุปกรณ์ของคุณอยู่ คุณต้องการเปิดใช้งานหรือไม่?</string>
   <string name="enable_gps">เปิดใช้งาน GPS</string>
-  <string name="contributions_subtitle_zero">ยังไม่มีการอัปโหลด</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">ยังไม่มีการอัปโหลด</string>
   <string name="categories_not_found">ไม่พบหมวดหมู่ที่ตรงกับ %$1s</string>
   <string name="categories_skip_explanation">เพิ่มหมวดหมู่เพื่อทำให้รูปภาพของคุณค้นพบได้ง่ายขึ้นบนวิกิมีเดียคอมมอนส์\nเริ่มพิมพ์เพื่อเพิ่มหมวดหมู่</string>
   <string name="categories_activity_title">หมวดหมู่</string>

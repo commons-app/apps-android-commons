@@ -103,7 +103,7 @@
   <string name="display_list_button">Zoznam</string>
   <string name="gps_disabled">GPS nie je povolené vo vašom zariadení. Chceli by ste ho povoliť?</string>
   <string name="enable_gps">Povoliť GPS</string>
-  <string name="contributions_subtitle_zero">Žiadne nahrané súbory</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Žiadne nahrané súbory</string>
   <string name="categories_not_found">Žiadne kategórie nezodpovedajú „%1$s“</string>
   <string name="depictions_not_found">Neboli nájdené žiadne položky Wikiúdajov zhodujúce sa s %1$s</string>
   <string name="no_child_classes">%1$s nemá žiadne dcérske triedy</string>

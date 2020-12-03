@@ -90,7 +90,7 @@
   <string name="display_list_button">Listi</string>
   <string name="gps_disabled">GPS er óvirkt í tækinu þínu. Viltu virkja það?</string>
   <string name="enable_gps">Virkja GPS</string>
-  <string name="contributions_subtitle_zero">Engar innsendingar ennþá</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Engar innsendingar ennþá</string>
   <string name="categories_not_found">Engir flokkar sem samsvara %1$s fundust</string>
   <string name="categories_skip_explanation">Bættu við flokkum til að gera myndirnar þínar aðgengilegri á Wikimedia Commons\nByrjaðu að skrifa til að bæta við flokkum.</string>
   <string name="categories_activity_title">Flokkar</string>

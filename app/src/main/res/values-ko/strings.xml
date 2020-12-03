@@ -23,7 +23,7 @@
     <item quantity="one">%1$d개의 파일을 올리는 중</item>
     <item quantity="other">%1$d개의 파일을 올리는 중</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -109,7 +109,7 @@
   <string name="display_list_button">목록</string>
   <string name="gps_disabled">장치에서 GPS가 꺼져 있습니다. 켜시겠습니까?</string>
   <string name="enable_gps">GPS 사용</string>
-  <string name="contributions_subtitle_zero">아직 올린 항목이 없습니다</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">아직 올린 항목이 없습니다</string>
   <string name="categories_not_found">%1$s와(과) 일치하는 분류를 찾을 수 없습니다</string>
   <string name="depictions_not_found">%1$s에 대한 위키데이터 검색 결과가 없습니다</string>
   <string name="no_child_classes">%1$s에 자식 클래스가 없습니다</string>

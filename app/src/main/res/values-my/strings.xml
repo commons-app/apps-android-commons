@@ -78,7 +78,7 @@
   <string name="display_list_button">စာရင်း</string>
   <string name="gps_disabled">သင်၏စက်ပစ္စည်းတွင် ဂျီအက်စ်ကိုပိတ်ထားပါသည်။ ယင်းအား ဖွင့်လိုပါသလား။</string>
   <string name="enable_gps">ဂျီပီအက်စ် ဖွင့်ရန်</string>
-  <string name="contributions_subtitle_zero">ဖိုင်မတင်ရသေးပါ</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">ဖိုင်မတင်ရသေးပါ</string>
   <string name="categories_not_found">%1$ နှင့်ကိုက်ညီသော ကဏ္ဍများ မတွေ့ရှိပါ</string>
   <string name="categories_activity_title">ကဏ္ဍများ</string>
   <string name="title_activity_settings">အပြင်အဆင်များ</string>

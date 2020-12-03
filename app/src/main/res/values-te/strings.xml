@@ -97,7 +97,7 @@
   <string name="display_list_button">జాబితా</string>
   <string name="gps_disabled">మీ పరికరంలో GPS అచేతనం చేసి ఉంది. దాన్ని చేతనం చేస్తారా?</string>
   <string name="enable_gps">GPS ను చేతనం చెయ్యి</string>
-  <string name="contributions_subtitle_zero">ఇంకా ఎక్కింపులేమీ లేవు</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">ఇంకా ఎక్కింపులేమీ లేవు</string>
   <string name="categories_not_found">%1$s తో సరిపోలే వర్గాలేమీ లేవు</string>
   <string name="categories_skip_explanation">వికీమీడియా కామన్స్ లో వెతికేటపుడు మీ బొమ్మలు మరింత సులువుగా కనబడేందుకు వాటికి వర్గాలను చేర్చండి.</string>
   <string name="categories_activity_title">వర్గాలు</string>

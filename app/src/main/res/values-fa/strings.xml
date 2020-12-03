@@ -32,7 +32,7 @@
     <item quantity="one">%1$d پرونده در حال بارگذاری</item>
     <item quantity="other">%1$d پرونده در حال بارگذاری</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -118,7 +118,7 @@
   <string name="display_list_button">فهرست</string>
   <string name="gps_disabled">مکان‌یاب در دستگاه شما خاموش است. آیا دوست دارید فعال شود؟</string>
   <string name="enable_gps">فعال کردن مکان‌یاب</string>
-  <string name="contributions_subtitle_zero">هنوز هیچ بارگذاری</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">هنوز هیچ بارگذاری</string>
   <string name="categories_not_found">رده‌ای منطبق با %1$s یافت نشد</string>
   <string name="categories_skip_explanation">برای دسترسی آسان‌تر در ویکی‌انبار به تصویرهایتان رده بیافزائید.\n\nشروع به افزودن رده.</string>
   <string name="categories_activity_title">رده‌ها</string>

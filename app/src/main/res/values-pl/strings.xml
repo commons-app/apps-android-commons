@@ -29,7 +29,7 @@
     <item quantity="many">Przesyłanie %1$d plików</item>
     <item quantity="other">Przesyłanie %1$d plików</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="one">\@string/contributions_subtitle_zero</item>
     <item quantity="few">(%1$d)</item>
     <item quantity="many">(%1$d)</item>
@@ -131,7 +131,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">GPS w twoim urządzeniu jest wyłączony. Czy chcesz go włączyć?</string>
   <string name="enable_gps">Włącz GPS</string>
-  <string name="contributions_subtitle_zero">Na razie brak przesłanych plików!</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Na razie brak przesłanych plików!</string>
   <string name="categories_not_found">Nie znaleziono kategorii pasujących do %1$s</string>
   <string name="depictions_not_found">Nie znaleziono przedmiotów Wikidata pasujących do %1$s</string>
   <string name="no_child_classes">%1$s nie ma klas podrzędnych</string>

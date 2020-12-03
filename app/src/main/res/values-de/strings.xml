@@ -115,7 +115,7 @@
   <string name="display_list_button">Liste</string>
   <string name="gps_disabled">GPS ist auf deinem Gerät deaktiviert. Möchtest du es aktivieren?</string>
   <string name="enable_gps">GPS aktivieren</string>
-  <string name="contributions_subtitle_zero">Noch keine hochgeladenen Dateien</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Noch keine hochgeladenen Dateien</string>
   <string name="categories_not_found">Die Kategorie „%1$s“ wurde nicht gefunden</string>
   <string name="depictions_not_found">Keine Wikidata Gegenstände gefunden für %1$s</string>
   <string name="categories_skip_explanation">Füge Kategorien hinzu, um deine Bilder auf Wikimedia Commons auffindbarer zu machen.\nBeginne mit der Eingabe, um Kategorien hinzuzufügen.</string>

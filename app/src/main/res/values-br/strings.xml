@@ -90,7 +90,7 @@
   <string name="display_list_button">Roll</string>
   <string name="gps_disabled">Diwerededkaet eo ar GPS war hoc\'h ardivink.\nHa c\'hoant ho peus da weredekaat anezhañ ?</string>
   <string name="enable_gps">Gweredekaat ar GPS</string>
-  <string name="contributions_subtitle_zero">Enporzhiadenn ebet c\'hoazh !</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Enporzhiadenn ebet c\'hoazh !</string>
   <string name="categories_not_found">N\'eus bet kavet rummad ebet o klotañ gant %1$s</string>
   <string name="depictions_not_found">N\'eus bet kavet elfenn Wikidata ebet o klotañ gant %1$s</string>
   <string name="no_child_classes">N\'eus ket a glasoù bugale e %1$s</string>

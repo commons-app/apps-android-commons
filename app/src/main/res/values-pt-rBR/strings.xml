@@ -22,7 +22,7 @@
     <item quantity="one">carregando arquivo</item>
     <item quantity="other">carregando %1$d arquivos</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -115,7 +115,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">O GPS está desligado no seu aparelho. Gostarias de ligá-lo ?</string>
   <string name="enable_gps">GPS inapto.</string>
-  <string name="contributions_subtitle_zero">Ainda não carregado</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Ainda não carregado</string>
   <string name="categories_not_found">Nenhuma categoria correspondente %1$s encontrada</string>
   <string name="depictions_not_found">Nenhum item do Wikidata correspondente a %1$s encontrado</string>
   <string name="no_child_classes">%1$s não tem classes filho</string>

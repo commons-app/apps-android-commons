@@ -24,7 +24,7 @@
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="other">%1$d 件のファイルをアップロード中</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d件のアップロード)</item>
@@ -114,7 +114,7 @@
   <string name="display_list_button">一覧</string>
   <string name="gps_disabled">お使いのデバイスではGPSが無効になっています。有効にしますか?</string>
   <string name="enable_gps">GPSを有効にする</string>
-  <string name="contributions_subtitle_zero">まだ何もアップロードされていません。</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">まだ何もアップロードされていません。</string>
   <string name="categories_not_found">%1$s に一致するカテゴリが見つかりません</string>
   <string name="depictions_not_found">%1$s に一致する項目が見つかりません</string>
   <string name="no_child_classes">%1$s に子のクラスはありません</string>

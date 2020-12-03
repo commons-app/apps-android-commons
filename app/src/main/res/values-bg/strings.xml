@@ -82,7 +82,7 @@
   <string name="display_list_button">Списък</string>
   <string name="gps_disabled">GPS е изключен на устройството Ви. Желаете ли да го включите?</string>
   <string name="enable_gps">Включи GPS</string>
-  <string name="contributions_subtitle_zero">Все още няма качени файлове</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Все още няма качени файлове</string>
   <string name="categories_not_found">Няма категории, отговарящи на %1$s</string>
   <string name="categories_skip_explanation">Поставете категории на изображения, за да могат потребителите по-лесно да ги намерят на Общомедия.\n\nЗа да поставите категория, почнете с писане на нейното име.</string>
   <string name="categories_activity_title">Категории</string>

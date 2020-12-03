@@ -102,7 +102,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">GPS ei ole käytössä. Haluatko ottaa sen käyttöön?</string>
   <string name="enable_gps">Ota GPS käyttöön</string>
-  <string name="contributions_subtitle_zero">Ei tallennuksia vielä</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Ei tallennuksia vielä</string>
   <string name="categories_not_found">Luokkaa %1$s ei löytynyt</string>
   <string name="categories_skip_explanation">Lisää luokkia tehdäksesi kuvistasi enemmän löydettäviä Wikimedia Commonssissa.\nAloita kirjoittaminen lisätäksesi luokkia.</string>
   <string name="categories_activity_title">Luokat</string>

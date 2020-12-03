@@ -15,7 +15,7 @@
     <item quantity="one">%1$d fil laddas upp</item>
     <item quantity="other">%1$d filer laddas upp</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -107,7 +107,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">GPS:en är inaktiverad på denna enhet. Vill du aktivera den?</string>
   <string name="enable_gps">Aktivera GPS</string>
-  <string name="contributions_subtitle_zero">Inga uppladdningar ännu</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Inga uppladdningar ännu</string>
   <string name="categories_not_found">Inga kategorier som stämmer överens med %1$s hittades</string>
   <string name="depictions_not_found">Inga Wikidata-objekt som matchar %1$s hittades</string>
   <string name="no_child_classes">%1$s har inga underordnade klasser</string>

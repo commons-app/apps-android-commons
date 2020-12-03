@@ -129,7 +129,7 @@
   <string name="display_list_button">רשימה</string>
   <string name="gps_disabled">ה־GPS במכשיר שלך אינו מופעל. האם להפעיל אותו?</string>
   <string name="enable_gps">הפעלת GPS</string>
-  <string name="contributions_subtitle_zero">לא הועלה עדיין שום דבר</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">לא הועלה עדיין שום דבר</string>
   <string name="categories_not_found">לא נמצאו קטגוריות בשם %1$s</string>
   <string name="depictions_not_found">לא נמצאו פריטי ויקינתונים שמתאימים לחיפוש %1$s</string>
   <string name="no_child_classes">ל%1$s אין מחלקות יורשות</string>

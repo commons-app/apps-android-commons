@@ -28,7 +28,7 @@
     <item quantity="many">%1$d ملف جاري رفعه</item>
     <item quantity="other">%1$d ملفات جاري رفعها</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="two">(%1$d)</item>
@@ -140,7 +140,7 @@
   <string name="display_list_button">القائمة</string>
   <string name="gps_disabled">عطل نظام الملاحة العالمي GPS بجهازك. أترغب في التنشيط؟</string>
   <string name="enable_gps">تفعيل GPS</string>
-  <string name="contributions_subtitle_zero">لا مرفوعات بعد</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">لا مرفوعات بعد</string>
   <string name="categories_not_found">لا توجد تصنيفات تطابق %1$s</string>
   <string name="depictions_not_found">لا توجد عناصر ويكيداتا مطابقة ل   s$%1</string>
   <string name="no_child_classes">%1$s لا يملك تصنيف الأطفال</string>
