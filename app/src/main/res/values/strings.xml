@@ -50,7 +50,7 @@
   <string name="signup">Sign up</string>
   <string name="logging_in_title">Logging in</string>
   <string name="logging_in_message">Please wait…</string>
-  <string name="login_success">You are logged in!</string>
+  <string name="login_success">Logged in!</string>
   <string name="login_failed">Cannot Login!</string>
   <string name="upload_failed">File not found. Please try another file.</string>
   <string name="authentication_failed">Error in authentication, please login again</string>
