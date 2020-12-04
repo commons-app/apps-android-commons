@@ -243,18 +243,23 @@ public class SearchActivity extends NavigationBaseActivity
      */
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() == 1){
-            // back to search so show search toolbar and hide navigation toolbar
+        //according to first condition mediaDetailFragemnt is opened and then backButton is pressed then on phone screen show the ViewPager
+        //according to second condtion Viewpager is open and then backButton is pressed then on phone screren show the recentSearchesFragment
+        // according to thrid condion  recentSearchesFragment is opened and then backButton is pressed then exploreActivity opened
+        if(mediaContainer.isShown()&&viewPager.isShown()==false) {
             toolbar.setVisibility(View.VISIBLE);
             tabLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.VISIBLE);
             mediaContainer.setVisibility(View.GONE);
             setNavigationBaseToolbarVisibility(false);
-        }else {
-            toolbar.setVisibility(View.GONE);
-            setNavigationBaseToolbarVisibility(true);
+        } else if(viewPager.isShown()) {
+            viewPager.setVisibility(View.GONE);
+            tabLayout.setVisibility(View.GONE);
+            setSearchHistoryFragment();
+            searchHistoryContainer.setVisibility(View.VISIBLE);
+        } else {
+            super.onBackPressed();
         }
-        super.onBackPressed();
     }
 
     /**
