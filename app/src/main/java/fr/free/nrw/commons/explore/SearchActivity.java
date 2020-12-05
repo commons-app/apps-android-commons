@@ -243,8 +243,7 @@ public class SearchActivity extends NavigationBaseActivity
      */
     @Override
     public void onBackPressed() {
-        manageFragement();
-        if (getSupportFragmentManager().getBackStackEntryCount() == 1){
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
             // back to search so show search toolbar and hide navigation toolbar
             toolbar.setVisibility(View.VISIBLE);
             tabLayout.setVisibility(View.VISIBLE);
@@ -256,6 +255,7 @@ public class SearchActivity extends NavigationBaseActivity
             setNavigationBaseToolbarVisibility(true);
         }
         //super.onBackPressed();
+        manageFragement();
     }
 
     private void manageFragement() {
