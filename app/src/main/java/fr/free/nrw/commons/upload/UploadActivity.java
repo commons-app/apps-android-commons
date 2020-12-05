@@ -290,6 +290,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     private void receiveSharedItems() {
+        thumbnailsAdapter.context=this;
         Intent intent = getIntent();
         String action = intent.getAction();
         if (Intent.ACTION_SEND.equals(action) || Intent.ACTION_SEND_MULTIPLE.equals(action)) {
