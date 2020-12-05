@@ -102,7 +102,7 @@
   <string name="display_list_button">सूची</string>
   <string name="gps_disabled">आपके डिवाइस में जीपीएस अक्षम है। क्या आप इसे सक्षम करना चाहेंगे?</string>
   <string name="enable_gps">जीपीएस सक्षम करें</string>
-  <string name="contributions_subtitle_zero">अभी तक कोई अपलोड नहीं</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">अभी तक कोई अपलोड नहीं</string>
   <string name="categories_not_found">%1$s से कोई श्रेणी मेल नहीं खाती</string>
   <string name="categories_skip_explanation">विकिमीडिया कॉमन्स पर अपनी छवियों को अधिक खोजने योग्य बनाने के लिए श्रेणियां जोड़ें|\nश्रेणियां जोड़ने के लिए टाइप करना प्रारंभ करें|</string>
   <string name="categories_activity_title">श्रेणियाँ</string>
@@ -250,8 +250,8 @@
   <string name="upload_problem_different_geolocation">यह चित्र किसी अलग स्थान पर लिया गया है।</string>
   <string name="upload_problem_do_you_continue">क्या आप अब भी इस चित्र को अपलोड करना चाहते हैं?</string>
   <string name="give_permission">अनुमति दें</string>
-  <string name="use_external_storage">बाहरी स्टॉरज का पृयोग करे।</string>
-  <string name="use_external_storage_summary">आप अपने डिवाइस के इन-ऐप कैमरा से ली गई तस्वीरों को सहेजें।</string>
+  <string name="use_external_storage" fuzzy="true">बाहरी स्टॉरज का पृयोग करे।</string>
+  <string name="use_external_storage_summary" fuzzy="true">आप अपने डिवाइस के इन-ऐप कैमरा से ली गई तस्वीरों को सहेजें।</string>
   <string name="login_to_your_account">अपने खाते में प्रवेश करें</string>
   <string name="send_log_file">लॉग फाइल भेजें</string>
   <string name="send_log_file_description" fuzzy="true">डेवेलपर्स को लॉग फाइल ई-मेल से भेजें</string>

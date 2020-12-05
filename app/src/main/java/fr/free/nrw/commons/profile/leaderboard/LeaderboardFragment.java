@@ -173,10 +173,18 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
     /**
      * Performs Auto Scroll to the User's Rank
      * We use userRank+1 to load one extra user and prevent overlapping of my rank button
+     * If you are viewing the leaderboard below userRank, it scrolls to the user rank at the top
      */
     private void scrollToUserRank() {
         if (Objects.requireNonNull(leaderboardListRecyclerView.getAdapter()).getItemCount() > userRank + 1) {
-            leaderboardListRecyclerView.smoothScrollToPosition(userRank + 1);
+            int currPosition = ((LinearLayoutManager) leaderboardListRecyclerView.getLayoutManager())
+                .findFirstCompletelyVisibleItemPosition();
+            // if you are below your rank, scroll to userRank
+            if (currPosition > userRank) {
+                leaderboardListRecyclerView.smoothScrollToPosition(userRank);
+            } else {
+                leaderboardListRecyclerView.smoothScrollToPosition(userRank + 1);
+            }
         } else {
             if (viewModel != null) {
                 viewModel.refresh(duration, category, userRank + 1, 0);

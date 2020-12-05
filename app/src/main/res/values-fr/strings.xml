@@ -35,8 +35,7 @@
     <item quantity="one">%1$d fichier en cours de téléversement</item>
     <item quantity="other">%1$d fichiers en cours de téléversement</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -128,7 +127,7 @@
   <string name="display_list_button">Liste</string>
   <string name="gps_disabled">Le GPS est désactivé sur votre appareil. Voulez-vous l’activer ?</string>
   <string name="enable_gps">Activer le GPS</string>
-  <string name="contributions_subtitle_zero">Encore aucun téléversement</string>
+  <string name="contributions_subtitle_zero">(Pas encore de téléversement)</string>
   <string name="categories_not_found">Aucune catégorie trouvée correspondant à %1$s</string>
   <string name="depictions_not_found">Aucun élément Wikidata trouvé correspondant à %1$s</string>
   <string name="no_child_classes">%1$s n’a pas de classes enfant</string>
@@ -303,8 +302,8 @@
   <string name="upload_problem_image">Problème trouvé avec l\'image</string>
   <string name="internet_downloaded">Veuillez ne téléverser que des images que vous avez prises vous-même. Ne téléversez aucune image que vous avez téléchargée depuis Internet.</string>
   <string name="give_permission">Accorder le droit</string>
-  <string name="use_external_storage">Utiliser le stockage externe</string>
-  <string name="use_external_storage_summary">Enregistrer les images prises avec l’appareil photo de votre appareil</string>
+  <string name="use_external_storage">Enregistrer les prises de vue dans l’application</string>
+  <string name="use_external_storage_summary">Enregistrer les images prises avec l’appareil photo de votre appareil dans son stockage</string>
   <string name="login_to_your_account">Connectez-vous à votre compte</string>
   <string name="send_log_file">Envoyer le journal</string>
   <string name="send_log_file_description">Envoyer par courriel le journal aux développeurs pour aider à la correction des problèmes de l’application. Note : les journaux peuvent potentiellement comporter des informations d’identification</string>
@@ -440,13 +439,13 @@
   <string name="notifications">Notifications</string>
   <string name="read_notifications">Notifications (lues)</string>
   <string name="display_nearby_notification">Afficher la notification de proximité</string>
-  <string name="display_nearby_notification_summary">Taper ici pour voir l’endroit le plus proche qui a besoin d’images</string>
+  <string name="display_nearby_notification_summary">Afficher les notifications d’application pour l’endroit le plus proche qui a besoin d’images</string>
   <string name="no_close_nearby">Aucun endroit à proximité trouvé près de chez vous</string>
   <string name="list_sheet">Lister</string>
   <string name="storage_permission">Droit de stockage</string>
   <string name="write_storage_permission_rationale_for_image_share">Nous avons besoin de votre autorisation pour accéder au stockage externe de votre appareil, afin de téléverser des images.</string>
   <string name="nearby_notification_dismiss_message">Vous ne verrez plus l’endroit le plus proche ayant besoin d’images. Toutefois, vous pouvez réactiver cette notification dans les paramètres, si vous le souhaitez.</string>
-  <string name="step_count">Etape %1$d de %2$d</string>
+  <string name="step_count">Étape %1$d sur %2$d : %3$s</string>
   <string name="image_in_set_label">L’image %1$d dans l’ensemble</string>
   <string name="next">Suivant</string>
   <string name="previous">Précédent</string>
@@ -659,6 +658,8 @@
   <string name="pause">pause</string>
   <string name="resume">reprise</string>
   <string name="paused">En pause</string>
+  <string name="more">Plus</string>
+  <string name="favorites">Favoris</string>
   <string name="achievements_tab_title">Réussites</string>
   <string name="leaderboard_tab_title">Tableau de classement</string>
   <string name="rank_prefix">Rang :</string>
@@ -684,4 +685,15 @@
   <string name="limited_connection_enabled">Mode de connexion limitée activé !</string>
   <string name="limited_connection_disabled">Mode de connexion limitée désactivé. Les téléversements en attente seront maintenant repris.</string>
   <string name="limited_connection">Connexion limitée</string>
+  <string name="statistics_quality">Images de qualité</string>
+  <string name="quality_images_info">Les images de qualité sont des diagrammes ou des photographies qui respectent certains standards de qualité (qui sont, par nature, essentiellement techniques), et sont précieuses pour les projets Wikimédia</string>
+  <string name="resuming_upload">Reprise du téléversement…</string>
+  <string name="pausing_upload">Mise en pause du téléversement…</string>
+  <string name="media_details_tooltip">Veuillez écrire un court résumé qui dit ce que montre votre image. Dans la description, dire ce qui rend l’image intéressante ou typique ou rare, et expliquer le contexte, visible ou non. Utiliser une terminologie aussi exacte que possible.</string>
+  <string name="depicts_tooltip">Veuillez trouver et sélectionner tous les concepts que dépeint cette image. Soyez aussi spécifique que possible. Si l’image dépeint plusieurs éléments, choisissez-les tous avec un motif. Ne choisissez pas de balise générique si des balises plus spécifiques sont disponibles.</string>
+  <string name="categories_tooltip">Veuillez sélectionner les catégories appropriées. À l’inverse des descriptions, les catégories ne sont qu’en anglais.</string>
+  <string name="license_tooltip">Communs rend vos images réutilisables et adaptées à chacun. Voulez-vous renoncer à tous les droits ? Voulez-vous être crédité pour cela ? Voulez-vous des adaptations pour utiliser la même licence ?</string>
+  <string name="depicts_step_title">Dépeint</string>
+  <string name="license_step_title">Licence du média</string>
+  <string name="media_detail_step_title">Détails du média</string>
 </resources>

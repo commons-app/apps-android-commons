@@ -13,7 +13,7 @@ import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.Place
-import fr.free.nrw.commons.theme.NavigationBaseActivity
+import fr.free.nrw.commons.utils.ActivityUtils
 import fr.free.nrw.commons.wikidata.WikidataConstants
 import timber.log.Timber
 import javax.inject.Inject
@@ -85,7 +85,7 @@ class CommonPlaceClickActions @Inject constructor(
         AlertDialog.Builder(activity)
             .setMessage(R.string.login_alert_message)
             .setPositiveButton(R.string.login) { dialog, which ->
-                NavigationBaseActivity.startActivityWithFlags(
+                ActivityUtils.startActivityWithFlags(
                     activity,
                     LoginActivity::class.java,
                     Intent.FLAG_ACTIVITY_CLEAR_TOP,

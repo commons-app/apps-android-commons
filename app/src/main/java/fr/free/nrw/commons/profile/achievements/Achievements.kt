@@ -33,6 +33,15 @@ class Achievements {
      */
     var featuredImages = 0
     /**
+     * getter function to get count of featured images
+     * @return
+     */
+    /**
+     * setter function to set count of featured images
+     * @param featuredImages
+     */
+    var qualityImages = 0
+    /**
      * getter function to get count of images uploaded
      * @return
      */
@@ -57,12 +66,14 @@ class Achievements {
                 articlesUsingImages: Int,
                 thanksReceived: Int,
                 featuredImages: Int,
+                qualityImages: Int,
                 imagesUploaded: Int,
                 revertCount: Int) {
         this.uniqueUsedImages = uniqueUsedImages
         this.articlesUsingImages = articlesUsingImages
         this.thanksReceived = thanksReceived
         this.featuredImages = featuredImages
+        this.qualityImages = qualityImages
         this.imagesUploaded = imagesUploaded
         this.revertCount = revertCount
     }
@@ -91,8 +102,8 @@ class Achievements {
                 response.uniqueUsedImages,
                 response.articlesUsingImages,
                 response.thanksReceived,
-                response.featuredImages.qualityImages
-                        + response.featuredImages.featuredPicturesOnWikimediaCommons, 0,
+                response.featuredImages.featuredPicturesOnWikimediaCommons,
+                response.featuredImages.qualityImages, 0,
                 response.deletedUploads
             )
         }

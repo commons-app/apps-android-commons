@@ -17,7 +17,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,7 +65,6 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -280,9 +278,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         if (getParentFragment() != null && getParentFragment().getParentFragment() != null) {
             //Added a check because, not necessarily, the parent fragment will have a parent fragment, say
             // in the case when MediaDetailPagerFragment is directly started by the CategoryImagesActivity
-            ((ContributionsFragment) (getParentFragment()
+            if (getParentFragment() instanceof ContributionsFragment) {
+                ((ContributionsFragment) (getParentFragment()
                     .getParentFragment())).nearbyNotificationCardView
                     .setVisibility(View.GONE);
+            }
         }
         categoryEditSearchRecyclerViewAdapter =
             new CategoryEditSearchRecyclerViewAdapter(getContext(), new ArrayList<>(
@@ -540,10 +540,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         updateCategoryList();
 
-        if (media.getCreator() == null || media.getCreator().equals("")) {
+        if (media.getAuthor() == null || media.getAuthor().equals("")) {
             authorLayout.setVisibility(GONE);
         } else {
-            author.setText(media.getCreator());
+            author.setText(media.getAuthor());
         }
     }
 
@@ -677,7 +677,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @SuppressLint("StringFormatInvalid")
     @OnClick(R.id.nominateDeletion)
     public void onDeleteButtonClicked(){
-            if (AccountUtil.getUserName(getContext()) != null && AccountUtil.getUserName(getContext()).equals(media.getCreator())) {
+            if (AccountUtil.getUserName(getContext()) != null && AccountUtil.getUserName(getContext()).equals(media.getAuthor())) {
                 final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(getActivity(),
                     R.layout.simple_spinner_dropdown_list, reasonList);
                 final Spinner spinner = new Spinner(getActivity());
@@ -795,7 +795,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     private void rebuildCatList(List<String> categories) {
-        Log.d("deneme","rebuild cat list size:"+categories.size());
         categoryContainer.removeAllViews();
         for (String category : categories) {
             categoryContainer.addView(buildCatLabel(sanitise(category), categoryContainer));

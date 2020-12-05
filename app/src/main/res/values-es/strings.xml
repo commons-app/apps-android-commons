@@ -124,7 +124,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">El GPS está desactivado en tu dispositivo. ¿Quieres activarlo?</string>
   <string name="enable_gps">Activar GPS</string>
-  <string name="contributions_subtitle_zero">No hay subidas aún</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">No hay subidas aún</string>
   <string name="categories_not_found">No se encontraron categorías que coincidieran con %1$s</string>
   <string name="categories_skip_explanation">Añade categorías para hacer que tus imágenes sean más fáciles de encontrar en Wikimedia Commons.\nComienza a escribir para añadir categorías.</string>
   <string name="categories_activity_title">Categorías</string>
@@ -289,8 +289,8 @@
   <string name="upload_problem_image">Problemas encontrados en la imagen</string>
   <string name="internet_downloaded">Carga únicamente fotografías que hayas creado tú. No cargues imágenes o fotografías que hayas descargado de Internet.</string>
   <string name="give_permission">Otorgar permiso</string>
-  <string name="use_external_storage">Utilizar almacenamiento externo</string>
-  <string name="use_external_storage_summary">Guardar en el dispositivo imágenes capturadas con la cámara de la aplicación</string>
+  <string name="use_external_storage" fuzzy="true">Utilizar almacenamiento externo</string>
+  <string name="use_external_storage_summary" fuzzy="true">Guardar en el dispositivo imágenes capturadas con la cámara de la aplicación</string>
   <string name="login_to_your_account">Accede a tu cuenta</string>
   <string name="send_log_file">Enviar archivo de registro</string>
   <string name="send_log_file_description">Enviar archivo de registro a los desarrolladores por correo electrónico para ayudar a depurar problemas con la aplicación. Nota: los registros pueden potencialmente contener información que te identifique</string>
@@ -426,18 +426,18 @@
   <string name="notifications">Notificaciones</string>
   <string name="read_notifications">Notificaciones (leídas)</string>
   <string name="display_nearby_notification">Mostrar notificaciones de cercanía</string>
-  <string name="display_nearby_notification_summary">Toca aquí para ver el lugar más cercano que necesita fotos</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Toca aquí para ver el lugar más cercano que necesita fotos</string>
   <string name="no_close_nearby">No se encontraron lugares cercanos cerca de ti</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Permiso de almacenamiento</string>
   <string name="write_storage_permission_rationale_for_image_share">Necesitamos tu permiso para acceder al almacenamiento externo de tu dispositivo para poder subir imágenes.</string>
   <string name="nearby_notification_dismiss_message">Ya no verás el lugar más cercano que necesita fotos. Sin embargo, puedes volver a habilitar esta notificación en la configuración.</string>
-  <string name="step_count">Paso %1$d de %2$d</string>
+  <string name="step_count">Paso %1$d de %2$d: %3$s</string>
   <string name="image_in_set_label">Imagen %1$d del conjunto</string>
   <string name="next">Siguiente</string>
   <string name="previous">Anterior</string>
   <string name="submit">Enviar</string>
-  <string name="upload_title_duplicate">Ya existe un archivo con el nombre %1$. ¿Seguro que deseas continuar?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Ya existe un archivo con el nombre %1$. ¿Seguro que deseas continuar?</string>
   <string name="map_application_missing">No se encontró una aplicación de mapas compatible en tu dispositivo. Instala una para usar esta característica.</string>
   <string name="navigation_item_bookmarks">Marcadores</string>
   <string name="title_activity_bookmarks">Marcadores</string>

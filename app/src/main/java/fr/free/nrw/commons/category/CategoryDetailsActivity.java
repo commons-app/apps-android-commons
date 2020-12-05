@@ -23,7 +23,7 @@ import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment;
 import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.theme.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +33,7 @@ import java.util.List;
  * a particular category on wikimedia commons.
  */
 
-public class CategoryDetailsActivity extends NavigationBaseActivity
+public class CategoryDetailsActivity extends BaseActivity
         implements MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
 
 
@@ -59,8 +59,6 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         tabLayout.setupWithViewPager(viewPager);
         setTabs();
         setPageTitle();
-        initDrawer();
-        forceInitBackButton();
     }
 
     /**
@@ -104,6 +102,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
     /**
      * This method is called onClick of media inside category details (CategoryImageListFragment).
      */
+    @Override
     public void onMediaClicked(int position) {
         tabLayout.setVisibility(View.GONE);
         viewPager.setVisibility(View.GONE);
@@ -120,7 +119,6 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
             supportFragmentManager.executePendingTransactions();
         }
         mediaDetails.showImage(position);
-        forceInitBackButton();
     }
 
 

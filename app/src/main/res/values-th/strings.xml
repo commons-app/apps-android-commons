@@ -11,7 +11,7 @@
 -->
 <resources>
   <string name="uploads_pending_notification_indicator">กำลังอัปโหลดไฟล์ %1$d ไฟล์</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -70,7 +70,7 @@
   <string name="provider_contributions">การอัปโหลดของฉัน</string>
   <string name="menu_share">แชร์</string>
   <string name="menu_open_in_browser">ดูในเบราว์เซอร์</string>
-  <string name="share_title_hint" fuzzy="true">ชื่อเรื่อง (จำเป็น)</string>
+  <string name="share_title_hint">คำบรรยาย (จำเป็น)</string>
   <string name="share_description_hint">คำอธิบาย</string>
   <string name="login_failed_network">ไม่สามารถเข้าสู่ระบบได้ - ความล้มเหลวของเครือข่าย</string>
   <string name="login_failed_wrong_credentials">เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบชื่อผู้ใช้และรหัสผ้านและลองอีกครั้ง</string>
@@ -89,7 +89,7 @@
   <string name="display_list_button">รายการ</string>
   <string name="gps_disabled">GPS ถูกปิดใช้งานในอุปกรณ์ของคุณอยู่ คุณต้องการเปิดใช้งานหรือไม่?</string>
   <string name="enable_gps">เปิดใช้งาน GPS</string>
-  <string name="contributions_subtitle_zero">ยังไม่มีการอัปโหลด</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">ยังไม่มีการอัปโหลด</string>
   <string name="categories_not_found">ไม่พบหมวดหมู่ที่ตรงกับ %$1s</string>
   <string name="categories_skip_explanation">เพิ่มหมวดหมู่เพื่อทำให้รูปภาพของคุณค้นพบได้ง่ายขึ้นบนวิกิมีเดียคอมมอนส์\nเริ่มพิมพ์เพื่อเพิ่มหมวดหมู่</string>
   <string name="categories_activity_title">หมวดหมู่</string>
@@ -254,8 +254,8 @@
   <string name="upload_problem_image">พบปัญหาในภาพ</string>
   <string name="internet_downloaded">กรุณาอัพโหลดเฉพาะภาพที่คุณเป็นคนถ่ายหรือสร้างสรรค์ขึ้นมาเองเท่านั้น อย่าอัพโหลดรูปภาพที่คุณได้มาจากการดาวน์โหลดบนอินเทอร์เน็ต</string>
   <string name="give_permission">ให้สิทธิ์</string>
-  <string name="use_external_storage">ใช้ที่จัดเก็บข้อมูลภายนอก</string>
-  <string name="use_external_storage_summary">บันทึกรูปภาพที่ถ่ายด้วยกล้องในแอปบนอุปกรณ์ของคุณ</string>
+  <string name="use_external_storage" fuzzy="true">ใช้ที่จัดเก็บข้อมูลภายนอก</string>
+  <string name="use_external_storage_summary" fuzzy="true">บันทึกรูปภาพที่ถ่ายด้วยกล้องในแอปบนอุปกรณ์ของคุณ</string>
   <string name="login_to_your_account">ลงชื่อเข้าใช้บัญชีของคุณ</string>
   <string name="send_log_file">ส่งไฟล์ปูม</string>
   <string name="send_log_file_description">ส่งไฟล์ปูมไปให้กับผู้พัฒนาทางอีเมล สำหระบการแก้ไขข้อผืดพลาดที่คุณพบ (ไฟล์ปูมจะไม่มีข้อมูลส่วนบุคคลหรือการยืนยันตัวตนรวมอยู่ด้วย)</string>
@@ -324,6 +324,7 @@
   <string name="error_loading_subcategories">เกิดข้อผิดพลาดขณะโหลดหมวดหมู่ย่อย</string>
   <string name="search_tab_title_media">สื่อ</string>
   <string name="search_tab_title_categories">หมวดหมู่</string>
+  <string name="search_tab_title_depictions">รายการ</string>
   <string name="explore_tab_title_featured">แนะนำ</string>
   <string name="explore_tab_title_mobile">อัปโหลดผ่านอุปกรณ์เคลื่อนที่</string>
   <string name="successful_wikidata_edit">เพิ่มภาพไปยัง %1$s บนวิกิสนเทศแล้ว!</string>
@@ -337,10 +338,107 @@
   <string name="quiz_back_button">หากคุณยังคงอัปโหลดภาพที่ต้องการให้ลบต่อไป บัญชีของคุณอาจถูกห้ามได้ คุณแน่ใจหรือไม่ว่าต้องการจบคำถาม?</string>
   <string name="quiz_alert_message">ภาพมากกว่า %1$s ภาพที่คุณอัปโหลดได้ถูกลบแล้ว หากคุณยังคงอัปโหลดภาพที่จำเป็นต้องลบอีก บัญชีของคุณอาจถูกห้ามได้\n\nคุณต้องการดูบทช่วยสอนอีกครั้งแล้วตอบคำถามเพื่อช่วยคุณเรียนรู้ว่าภาพประเภทใดบ้างที่คุณควรหรือไม่ควรอัปโหลด?</string>
   <string name="selfie_answer">ภาพเซลฟีไม่มีคุณค่าทางสารานุกรมมากนัก โปรดอย่าอัปโหลดรูปภาพตัวคุณเอง นอกจากคุณมีบทความวิกิพีเดียที่เกี่ยวกับคุณอยู่แล้ว</string>
+  <string name="continue_message">ดำเนินการต่อ</string>
+  <string name="correct">คำตอบที่ถูกต้อง</string>
+  <string name="wrong">คำตอบที่ไม่ถูกต้อง</string>
+  <string name="quiz_screenshot_question">ภาพหน้าจอนี้สามารถอัปโหลดได้หรือไม่</string>
+  <string name="share_app_title">แบ่งปันแอป</string>
+  <string name="add_description">+ เพิ่มคำอธิบาย</string>
+  <string name="no_recent_searches">ไม่มีการค้นหาล่าสุด</string>
+  <string name="search_history_deleted">ลบประวัติการค้นหาแล้ว</string>
+  <string name="nominate_delete">เสนอให้ลบ</string>
+  <string name="delete">ลบ</string>
+  <string name="Achievements">ความสำเร็จ</string>
+  <string name="Profile">โปรไฟล์</string>
+  <string name="statistics">สถิติ</string>
+  <string name="statistics_thanks">คำขอบคุณที่ได้รับแล้ว</string>
+  <string name="statistics_featured">ภาพคัดสรร</string>
+  <string name="statistics_wikidata_edits">ภาพผ่านทาง \"สถานที่ใกล้เคียง\"</string>
+  <string name="level">ระดับ</string>
+  <string name="images_uploaded">ภาพที่อัปโหลดแล้ว</string>
+  <string name="images_used_by_wiki">ภาพที่ใช้แล้ว</string>
+  <string name="achievements_revert_limit_message">ที่ต้องการขั้นต่ำ:</string>
+  <string name="error_occurred">เกิดข้อผิดพลาด!</string>
+  <string name="contributions_fragment">การมีส่วนร่วม</string>
+  <string name="nearby_fragment">ใกล้เคียง</string>
+  <string name="no_close_nearby">ไม่พบสถานที่ใกล้เคียงที่อยู่ใกล้คุณ</string>
+  <string name="list_sheet">รายการ</string>
+  <string name="storage_permission">สิทธิอนุญาตที่เก็บข้อมูล</string>
+  <string name="step_count" fuzzy="true">ขั้นตอนที่ %1$d จาก %2$d</string>
+  <string name="next">ถัดไป</string>
+  <string name="previous">ก่อนหน้า</string>
+  <string name="submit">ส่ง</string>
+  <string name="navigation_item_bookmarks">ที่คั่นหน้า</string>
+  <string name="title_activity_bookmarks">ที่คั่นหน้า</string>
+  <string name="title_page_bookmarks_pictures">รูปภาพ</string>
+  <string name="title_page_bookmarks_locations">ที่ตั้ง</string>
+  <string name="menu_bookmark">เพิ่มไปยัง/เอาออกจากที่คั่นหน้า</string>
+  <string name="provider_bookmarks">ที่คั่นหน้า</string>
+  <string name="bookmark_empty">คุณไม่ได้เพิ่มที่คั่นหน้าใด</string>
+  <string name="provider_bookmarks_location">ที่คั่นหน้า</string>
+  <string name="deletion_reason_uploaded_by_mistake">ฉันอัปโหลดโดยไม่ได้ตั้งใจ</string>
+  <string name="deletion_reason_publicly_visible">ฉันไม่รู้ว่าทุกคนสามารถเห็นได้</string>
+  <string name="deletion_reason_bad_for_my_privacy">ฉันรู้สึกว่าไม่ดีต่อความเป็นส่วนตัวของฉัน</string>
+  <string name="deletion_reason_no_longer_want_public">ฉันเปลี่ยนใจแล้ว ฉันไม่อยากให้ทุกคนสามารถเห็นได้อีกต่อไป</string>
+  <string name="desc_language_Worldwide">ทั่วโลก</string>
+  <string name="desc_language_America">อเมริกา</string>
+  <string name="desc_language_Europe">ยุโรป</string>
+  <string name="desc_language_Middle_East">ตะวันออกกลาง</string>
+  <string name="desc_language_Africa">แอฟริกา</string>
+  <string name="desc_language_Asia">เอเชีย</string>
+  <string name="desc_language_Pacific">แปซิฟิก</string>
+  <string name="no_categories_selected">ไม่ได้เลือกหมวดหมู่ใด</string>
+  <string name="search_this_area">ค้นหาพื้นที่นี้</string>
+  <string name="never_ask_again">อย่าถามคำถามนี้อีก</string>
+  <string name="display_location_permission_title">แสดงสิทธิอนุญาตที่ตั้ง</string>
+  <string name="ends_on">สิ้นสุดเมื่อ:</string>
+  <string name="display_campaigns">แสดงแคมเปญ</string>
+  <string name="nominate_for_deletion_done">เสร็จสิ้น</string>
+  <string name="notsure">ไม่แน่ใจ</string>
+  <string name="send_thank_notification_title">ส่งคำขอบคุณ</string>
+  <string name="review_thanks_no_button_text">ภาพถัดไป</string>
   <string name="no_image">ไม่มีภาพที่ใช้</string>
   <string name="no_image_reverted">ไม่มีภาพย้อนกลับ</string>
   <string name="no_image_uploaded">ไม่มีภาพที่อัปโหลด</string>
+  <string name="share_logs_using">แบ่งปันปูมโดยใช้</string>
+  <string name="menu_option_read">ดูที่อ่านแล้ว</string>
+  <string name="menu_option_unread">ดูที่ยังไม่ได้อ่าน</string>
   <string name="error_occurred_in_picking_images">เกิดข้อผิดพลาดขณะเลือกภาพ</string>
   <string name="image_chooser_title">เลือกรูปภาพที่จะอัปโหลด</string>
   <string name="please_wait">โปรดรอ…</string>
+  <string name="skip_image">ข้ามภาพนี้</string>
+  <string name="exif_tag_name_author">ผู้สร้างสรรค์</string>
+  <string name="exif_tag_name_copyright">ลิขสิทธิ์</string>
+  <string name="exif_tag_name_location">ที่ตั้ง</string>
+  <string name="exif_tag_name_cameraModel">รุ่นกล้อง</string>
+  <string name="exif_tag_name_lensModel">รุ่นเลนส์</string>
+  <string name="exif_tag_name_serialNumbers">หมายเลขซีเรียล</string>
+  <string name="exif_tag_name_software">ซอฟต์แวร์</string>
+  <string name="share_via">แบ่งปันแอปผ่าน...</string>
+  <string name="no_categories_found">ไม่พบหมวดหมู่</string>
+  <string name="delete_helper_ask_spam_selfie">ภาพเซลฟี</string>
+  <string name="delete_helper_ask_spam_blurry">ภาพเบลอ</string>
+  <string name="delete_helper_ask_spam_nonsense">ไร้สาระ</string>
+  <string name="delete_helper_ask_spam_other">อื่น ๆ</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">ภาพจากสื่อข่าว</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">ภาพสุ่มจากอินเทอร์เน็ต</string>
+  <string name="delete_helper_ask_reason_copyright_logo">โลโก้</string>
+  <string name="delete_helper_ask_reason_copyright_other">อื่น ๆ</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">เนื่องจากเป็น</string>
+  <string name="category_edit_helper_show_edit_title_success">สำเร็จ</string>
+  <string name="account_created">สร้างบัญชีแล้ว!</string>
+  <string name="place_state">สถานะของสถานที่:</string>
+  <string name="place_state_exists">มีอยู่</string>
+  <string name="place_state_needs_photo">ต้องการภาพถ่าย</string>
+  <string name="place_type">ชนิดสถานที่:</string>
+  <string name="nearby_search_hint">สะพาน พิพิธภัณฑ์ โรงแรม ฯลฯ</string>
+  <string name="title_app_shortcut_explore">สำรวจ</string>
+  <string name="title_app_shortcut_bookmark">ที่คั่นหน้า</string>
+  <string name="title_app_shortcut_setting">การตั้งค่า</string>
+  <string name="remove_bookmark">เอาออกจากที่คั่นหน้าแล้ว</string>
+  <string name="add_bookmark">เพิ่มลงในที่คั่นหน้าแล้ว</string>
+  <string name="theme_default_name">ตามระบบ</string>
+  <string name="theme_dark_name">มืด</string>
+  <string name="theme_light_name">สว่าง</string>
+  <string name="load_more">โหลดเพิ่มเติม</string>
 </resources>

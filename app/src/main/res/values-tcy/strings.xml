@@ -12,7 +12,7 @@
     <item quantity="one">%1$d ಕಡತ ಅಪ್ಲೊಡ್ ಆವೊಂದುಂಡು</item>
     <item quantity="other">%1$d ಕಡತೊಲು ಅಪ್ಲೋಡ್ ಆವೊಂದುಂಡು</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d ಮಿತೆರಾಯಿನ</item>
     <item quantity="other">%1$d ಮಿತೆರಾಯಿನವು</item>
@@ -92,7 +92,7 @@
   <string name="display_list_button">ಪಟ್ಟಿ</string>
   <string name="gps_disabled">ಇರೇನಾ ಈ ಮೊಬೈಲ್ ಡ್ ಜಿಪಿಸ್ ವಜಾ ಅತುಂಡು. ಆಯಿನ್ ಬೇಲೆ</string>
   <string name="enable_gps">ಜಿಪಿಎಸ್ ಸಕ್ರಿಯ ಮಾಲ್ಪುಲೆ.</string>
-  <string name="contributions_subtitle_zero">ಇಂದೆಟ್ ಒವೆ ಅಪ್ಲೋಡ್ ಇಜ್ಜಿ.</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">ಇಂದೆಟ್ ಒವೆ ಅಪ್ಲೋಡ್ ಇಜ್ಜಿ.</string>
   <string name="categories_not_found">No categories matching %1$s found</string>
   <string name="categories_skip_explanation">ಇರೆನಾ ಪಟೊನ್ ವಿಕಿಮೀಡಿಯ ಕಾಮನ್ಸ್‌ಟ್  ಪತ್ತೆ ಮಾಲ್ಪುಯರ ವರ್ಗೊನ್ ಸೇರಾಲೆ.ವರ್ಗೊನ್ ಸೇರಾಯರ ಟೈಪ್ ಮಾಲ್ಪುಯರ ಪ್ರಾರಂಭ  ಮಾಲ್ಪುಲೆ.</string>
   <string name="categories_activity_title">ವರ್ಗೊಲು</string>
@@ -247,8 +247,8 @@
   <string name="upload_problem_different_geolocation">ಈ ಚಿತ್ರೊನು ಗೆತ್ತಿದಿನಿ ಬೇತೆ ತಾಣೊಡು.</string>
   <string name="upload_problem_do_you_continue">ಈರ್ ನನಲಾ ಈ ಚಿತ್ರೊನು ಮಿತೇರಾವರೆ ಬಯಕುವರಾ?</string>
   <string name="give_permission">ಒಪ್ಪಿಗೆ ಪಡೆಲೆ.</string>
-  <string name="use_external_storage">ಉಂದು ಎಕ್ಸ್‌ಟರ್ನಲ್ ಸ್ಟೊರೆಜ್.</string>
-  <string name="use_external_storage_summary">ಈ ಸಾಧನಟ್ ಅಪ್ಲಿಕೇಶನ್ ಕ್ಯಾಮೆರಾದೊಂಟ್ಟಗ್ ದೆತ್ತಿನ ಚಿತ್ರೊನ್ ಒರಿಪಾಲೆ.</string>
+  <string name="use_external_storage" fuzzy="true">ಉಂದು ಎಕ್ಸ್‌ಟರ್ನಲ್ ಸ್ಟೊರೆಜ್.</string>
+  <string name="use_external_storage_summary" fuzzy="true">ಈ ಸಾಧನಟ್ ಅಪ್ಲಿಕೇಶನ್ ಕ್ಯಾಮೆರಾದೊಂಟ್ಟಗ್ ದೆತ್ತಿನ ಚಿತ್ರೊನ್ ಒರಿಪಾಲೆ.</string>
   <string name="login_to_your_account">ಇರೇನಾ ಖಾತೆಗ್ ಲಾಗಿನ್ ಅಲೇ.</string>
   <string name="send_log_file">ಲಾಗ್ ಫೈಲ್ ಕಡ್ಪುಡ್ಲೆ.</string>
   <string name="send_log_file_description"> ಸದರಿ ಕರಣ(ಆಪ್\')ದ ಪೀಡನಿವಾರಣ ಸಮಸ್ಯೆಲೆಗಾದ್ ಗಮನ ಕಡತೊನು ಅಭಿವರ್ಧಕರೆಗ್ ಇಮೇಲ್ ಮೂಲಕ ಕಡಪುಡುಲೆ.ಸೂಚನೆ:ಗಮನೊಲೆಡ್ ಸಂಭಾವ್ಯ ಗುರ್ತಿಸಾವುನ ಮಾಹಿತಿ ಉಪ್ಪರೆ ಯಾವು.</string>
@@ -369,18 +369,18 @@
   <string name="notifications">ಅಧಿಸೂಚನೆಲು</string>
   <string name="read_notifications" fuzzy="true">ಅಧಿಸೂಚನೆಲು(ಅನುರಕ್ಷಿತ)</string>
   <string name="display_nearby_notification">ಕೈತಲ್ದ ಅಧಿಸೂಚನೆ ತೋಜಾಲೆ</string>
-  <string name="display_nearby_notification_summary">ಚಿತ್ರ ಬೋಡಾಯಿನ ಕೈತಲ್ದ ಜಾಗ ತೂವರೆ ಮುಲ್ಪ ತಟ್ಟ್\'ಲೆ</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">ಚಿತ್ರ ಬೋಡಾಯಿನ ಕೈತಲ್ದ ಜಾಗ ತೂವರೆ ಮುಲ್ಪ ತಟ್ಟ್\'ಲೆ</string>
   <string name="no_close_nearby">ಇರೆನ ಮುಟ್ಟೊಡು ಕೈತಲ್ದ ಜಾಗೊಲು ತಿಕ್ಕುಜಾ.</string>
   <string name="list_sheet">ಪಟ್ಟಿ</string>
   <string name="storage_permission">ಶೇಖರಣ ಅನುಮತಿ</string>
   <string name="write_storage_permission_rationale_for_image_share">ಆಕೃತಿಲೆನ್ ಮಿತೇರಾವರೆಗಾದ್  ಇರೆನ ಬಾಹ್ಯ ಶೇಖರಣೊನು ಪ್ರವೇಶ ಮಲ್ಪರೆ ಎಂಕಲೆಗ್  ಇರೆನ ಅನುಮತಿ ಬೋಡು.</string>
   <string name="nearby_notification_dismiss_message">ಚಿತ್ರೊಲು ಬೋಡಾಯಿನ ಕೈತಲ್ದ ಜಾಗೊಲೆನ್ ಈರ್ ನನ ತೂಪುಜರ್. ಆಂಡಾ ಇರೆಗ್ ಬೋಡಾಂಡ ಈರ್ ಈ ಅಧಿಸೂಚನೆನ್ ಗಣಸ್ಥಿತಿಲೆಡ್ ಪಿರ ಶಕ್ತ ಮಲ್ಪೊಲಿ.</string>
-  <string name="step_count">%2$d ಉಂದೆತ  %1$d ಮುಟ್ಟು</string>
+  <string name="step_count" fuzzy="true">%2$d ಉಂದೆತ  %1$d ಮುಟ್ಟು</string>
   <string name="image_in_set_label">ಆಕೃತಿ  %1$d ಗುಚ್ಚೊಡು</string>
   <string name="next">ದುಂಬುದ</string>
   <string name="previous">ಪಿರವುದ</string>
   <string name="submit">ಒಪ್ಪಿಸಾಲೆ</string>
-  <string name="upload_title_duplicate">ಕಡತಪುದರ್ %1$s ದ ಒಂಜಿ ಕಡತ ಉಂಡು. ಈರ್ ಖಂಡಿತಾ ದುಂಬು ಪೋವರೆ ಬಯಕುವರಾ?\nA file with the file name  exists. Are you sure you want to proceed?</string>
+  <string name="upload_title_duplicate" fuzzy="true">ಕಡತಪುದರ್ %1$s ದ ಒಂಜಿ ಕಡತ ಉಂಡು. ಈರ್ ಖಂಡಿತಾ ದುಂಬು ಪೋವರೆ ಬಯಕುವರಾ?\nA file with the file name  exists. Are you sure you want to proceed?</string>
   <string name="map_application_missing">ಹೊಂದುನ ನಕಾಶೆ ಪರಿಕರನ  ಇರೆನ ಸಲಕರಣೆಡ್ ತಿಕ್ಕುಜಿ. ಈ ಗುಣಧರ್ಮನ್ ಬಳಸರೆ  ದಯಮಲ್ತ್ ಒಂಜಿ ನಕಾಶೆ ಪರಿಕರನ  ತಾಪನೆ ಮಲ್ಪುಲೆ.</string>
   <string name="navigation_item_bookmarks">ಪುಸ್ತಕಗುರ್ತುಲು</string>
   <string name="title_activity_bookmarks">ಪುಸ್ತಕಗುರ್ತುಲು</string>

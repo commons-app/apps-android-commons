@@ -1,11 +1,13 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="?attr/mainCardBackground"
     android:layout_centerVertical="true"
-    android:minHeight="@dimen/large_height">
+    android:background="@drawable/card_border"
+    android:minHeight="@dimen/large_height"
+    android:padding="@dimen/small_gap"
+  >
 
     <Button
         android:layout_width="wrap_content"
@@ -17,7 +19,7 @@
         android:layout_marginRight="@dimen/activity_margin_horizontal"
         android:layout_marginTop="@dimen/activity_margin_horizontal"
         android:minWidth="@dimen/fragment_height"
-        android:textColor="@android:color/white"
+        android:textColor="?attr/card_item_color"
         android:singleLine="true"
         android:theme="?attr/mainScreenNearbyPermissionbutton"
         style="@style/Widget.AppCompat.Button.Borderless"/>
@@ -28,6 +30,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/content_layout"
         android:layout_centerInParent="true"
+      android:orientation="horizontal"
         >
 
         <ProgressBar
@@ -44,7 +47,9 @@
             android:layout_marginLeft="@dimen/standard_gap"
             android:layout_marginStart="@dimen/standard_gap"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/ic_location_white_24dp"/>
+            app:srcCompat="@drawable/ic_location_white_24dp"
+            android:tint="?attr/card_item_color"
+          />
 
 
         <LinearLayout
@@ -66,7 +71,7 @@
                 android:layout_marginLeft="@dimen/standard_gap"
                 android:layout_marginRight="@dimen/standard_gap"
                 tools:text="test distance"
-                android:textColor="@android:color/white"
+                android:textColor="?attr/card_item_color"
                 android:singleLine="true"
                 >
             </TextView>
@@ -81,7 +86,7 @@
                 android:minWidth="@dimen/fragment_height"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 tools:text="test distance"
-                android:textColor="@android:color/white"
+                android:textColor="?attr/card_item_color"
                 android:singleLine="true"
                 >
 
@@ -91,4 +96,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

@@ -10,7 +10,7 @@
     <item quantity="one">ngunjal %1$d berkas</item>
     <item quantity="other">ngunjal %1$d berkas</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -88,7 +88,7 @@
   <string name="display_list_button">Béréndélan</string>
   <string name="gps_disabled">GPS dipareuman na parangkat anjeun. Rék dihurungkeun waé atuh?</string>
   <string name="enable_gps">Hirupan GPS</string>
-  <string name="contributions_subtitle_zero">Can aya nu diunjal</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Can aya nu diunjal</string>
   <string name="categories_not_found">Teu mendak kategori anu cocog jeung %1$s</string>
   <string name="categories_skip_explanation">Tambahkeun kategori hambéh gambar anjeun leuwih gampang katara di Wikimédia Commons.\n\nMimitian ngetik pikeun nambah kategori.</string>
   <string name="categories_activity_title">Kategori</string>
@@ -250,8 +250,8 @@
   <string name="upload_problem_do_you_continue">Anjeun keukeuh rék ngunjal ieu gambar?</string>
   <string name="internet_downloaded">Wayahna nguunjal gambarna hasil sorangan hungkul. Ulah ngunjal gambar nu meunang ngundeur ti internet.</string>
   <string name="give_permission">Béré idin</string>
-  <string name="use_external_storage">Paké panyimpenan éksternal</string>
-  <string name="use_external_storage_summary">Simpen gambar nu nyomotna ku aplikasi kaména na parangkat anjeun</string>
+  <string name="use_external_storage" fuzzy="true">Paké panyimpenan éksternal</string>
+  <string name="use_external_storage_summary" fuzzy="true">Simpen gambar nu nyomotna ku aplikasi kaména na parangkat anjeun</string>
   <string name="login_to_your_account">Asup log kana akun anjeun</string>
   <string name="send_log_file">Kirim berkas log</string>
   <string name="send_log_file_description">Kirim berkas log ka pamekar liwat surélék pikeun mantuan ngarucat masalah aplikasi. Catetan: log bisa ngandung poténsi ngidéntifikasi informasi</string>

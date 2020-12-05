@@ -97,10 +97,10 @@ public class UploadController {
         final Media media = contribution.getMedia();
         if (store.getBoolean("useAuthorName", false)) {
             final String authorName = store.getString("authorName", "");
-            media.setCreator(authorName);
+            media.setAuthor(authorName);
         }
 
-        if (TextUtils.isEmpty(media.getCreator())) {
+        if (TextUtils.isEmpty(media.getAuthor())) {
             final Account currentAccount = sessionManager.getCurrentAccount();
             if (currentAccount == null) {
                 Timber.d("Current account is null");
@@ -108,7 +108,7 @@ public class UploadController {
                 sessionManager.forceLogin(context);
                 return;
             }
-            media.setCreator(sessionManager.getAuthorName());
+            media.setAuthor(sessionManager.getUserName());
         }
 
         if (media.getFallbackDescription() == null) {

@@ -102,7 +102,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">GPS ei ole käytössä. Haluatko ottaa sen käyttöön?</string>
   <string name="enable_gps">Ota GPS käyttöön</string>
-  <string name="contributions_subtitle_zero">Ei tallennuksia vielä</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Ei tallennuksia vielä</string>
   <string name="categories_not_found">Luokkaa %1$s ei löytynyt</string>
   <string name="categories_skip_explanation">Lisää luokkia tehdäksesi kuvistasi enemmän löydettäviä Wikimedia Commonssissa.\nAloita kirjoittaminen lisätäksesi luokkia.</string>
   <string name="categories_activity_title">Luokat</string>
@@ -262,8 +262,8 @@
   <string name="upload_problem_do_you_continue">Haluatko silti tallentaa tämän kuvan?</string>
   <string name="internet_downloaded">Tallenna vain kuvia, jotka olet itse ottanut. Älä tallenna kuvia, joita olet ladannut internetistä.</string>
   <string name="give_permission">Anna lupa</string>
-  <string name="use_external_storage">Käytä ulkoista tallennustilaa</string>
-  <string name="use_external_storage_summary">Tallenna sovelluksen sisäisen kameran kanssa otetut kuvat laitteellesi</string>
+  <string name="use_external_storage" fuzzy="true">Käytä ulkoista tallennustilaa</string>
+  <string name="use_external_storage_summary" fuzzy="true">Tallenna sovelluksen sisäisen kameran kanssa otetut kuvat laitteellesi</string>
   <string name="login_to_your_account">Kirjaudu tilillesi</string>
   <string name="send_log_file">Lähetä lokitiedosto</string>
   <string name="send_log_file_description">Lähetä lokitiedosto kehittäjille sähköpostin välityksellä auttaaksesi sovelluksen ongelmien korjaamisessa. Huomautus: lokit saattavat mahdollisesti sisältää tunnistettavaa tietoa</string>
@@ -375,11 +375,11 @@
   <string name="read_notifications">Ilmoitukset (luetut)</string>
   <string name="display_nearby_notification">Näytä lähistöllä-ilmoitus</string>
   <string name="list_sheet">Lista</string>
-  <string name="step_count">Vaihe %1$d/%2$d</string>
+  <string name="step_count" fuzzy="true">Vaihe %1$d/%2$d</string>
   <string name="next">Seuraava</string>
   <string name="previous">Edellinen</string>
   <string name="submit">Lähetä</string>
-  <string name="upload_title_duplicate">Tiedosto tiedostonimellä %1$s on jo olemassa. Oletko varma, että haluat jatkaa?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Tiedosto tiedostonimellä %1$s on jo olemassa. Oletko varma, että haluat jatkaa?</string>
   <string name="map_application_missing">Laitteestasi ei löydy yhteensopivaa karttasovellusta. Asenna karttasovellus käyttääksesi tätä toimintoa.</string>
   <string name="navigation_item_bookmarks">Kirjanmerkit</string>
   <string name="title_activity_bookmarks">Kirjanmerkit</string>

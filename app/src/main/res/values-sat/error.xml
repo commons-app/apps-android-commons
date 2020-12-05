@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* R Ashwani Banjan Murmu
 * Ramjit Tudu
 -->
 <resources>
+  <string name="crash_dialog_title">ᱠᱳᱢᱳᱱᱥ ᱠᱨᱟᱥ ᱟᱠᱟᱱᱟ</string>
+  <string name="crash_dialog_text">ᱩᱯᱥ᱾ ᱪᱮᱫ ᱪᱚᱸ ᱵᱟᱹᱲᱤᱡ ᱮᱱ!</string>
+  <string name="crash_dialog_comment_prompt">ᱪᱮᱫ ᱮᱢ ᱪᱤᱠᱟᱹ ᱮᱫᱟ ᱞᱟᱹᱭ ᱟᱞᱮᱢᱮ, ᱤ ᱢᱮᱞ ᱛᱮ ᱟᱞᱮ ᱥᱟᱶ ᱦᱟᱹᱴᱤᱧ ᱢᱮ᱾ ᱱᱚᱣᱟ ᱥᱚᱞᱦᱮ ᱞᱟᱹᱜᱤᱫ ᱟᱞᱮ ᱜᱚᱲᱚ ᱮᱞᱮᱭᱟᱭ!</string>
   <string name="crash_dialog_ok_toast">ᱥᱟᱨᱦᱟᱣ!</string>
 </resources>

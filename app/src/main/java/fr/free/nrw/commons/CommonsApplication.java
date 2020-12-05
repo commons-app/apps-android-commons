@@ -13,6 +13,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.os.Build;
 import android.os.Process;
 import android.util.Log;
@@ -324,7 +325,12 @@ public class CommonsApplication extends MultiDexApplication {
 
         CategoryDao.Table.onDelete(db);
         dbOpenHelper.deleteTable(db,CONTRIBUTIONS_TABLE);//Delete the contributions table in the existing db on older versions
-        contributionDao.deleteAll();
+
+        try {
+          contributionDao.deleteAll();
+        } catch (SQLiteException e) {
+          Timber.e(e);
+        }
         BookmarkPicturesDao.Table.onDelete(db);
         BookmarkLocationsDao.Table.onDelete(db);
     }

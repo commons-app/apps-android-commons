@@ -5,8 +5,6 @@
     <item quantity="other">%1$d files uploading</item>
   </plurals>
   <plurals name="contributions_subtitle">
-    <!--zero is not used in english. Category mentioned here for easy reference in future-->
-    <item quantity="zero">@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -98,7 +96,7 @@
   <string name="display_list_button">List</string>
   <string name="gps_disabled">GPS is disabled in your device. Would you like to enable it?</string>
   <string name="enable_gps">Enable GPS</string>
-  <string name="contributions_subtitle_zero">No uploads yet</string>
+  <string name="contributions_subtitle_zero">(No uploads yet)</string>
   <string name="categories_not_found">No categories matching %1$s found</string>
   <string name="depictions_not_found">No Wikidata items matching %1$s found</string>
   <string name="no_child_classes">%1$s has no child classes</string>
@@ -281,8 +279,8 @@
   <string name="upload_problem_image">Problems found in image</string>
   <string name="internet_downloaded">Please only upload pictures that you have taken by yourself. Don\'t upload pictures that you have downloaded from the Internet.</string>
   <string name="give_permission">Give permission</string>
-  <string name="use_external_storage">Use external storage</string>
-  <string name="use_external_storage_summary">Save pictures taken with the in-app camera on your device</string>
+  <string name="use_external_storage">Save In-app shots</string>
+  <string name="use_external_storage_summary">Save pictures taken with the in-app camera to your device storage</string>
   <string name="login_to_your_account">Log in to your account</string>
   <string name="send_log_file">Send log file</string>
   <string name="send_log_file_description">Send log file to developers via email to help debug problems with the app. Note: logs may potentially contain identifying information</string>
@@ -428,7 +426,7 @@
   <string name="notifications">Notifications</string>
   <string name="read_notifications">Notifications (read)</string>
   <string name="display_nearby_notification">Display nearby notification</string>
-  <string name="display_nearby_notification_summary">Tap here to see the nearest place that needs pictures</string>
+  <string name="display_nearby_notification_summary">Show in-app notification for the nearest place that needs pictures</string>
 
   <string name="no_close_nearby">No nearby places found close to you</string>
   <string name="list_sheet">List</string>
@@ -436,12 +434,12 @@
 
   <string name="write_storage_permission_rationale_for_image_share">We need your permission to access the external storage of your device in order to upload images.</string>
   <string name="nearby_notification_dismiss_message">You won\'t see the nearest place that needs pictures anymore. However, you can re-enable this notification in Settings if you wish.</string>
-  <string name="step_count">Step %1$d of %2$d</string>
+  <string name="step_count">Step %1$d of %2$d: %3$s</string>
   <string name="image_in_set_label">Image %1$d in set</string>
   <string name="next">Next</string>
   <string name="previous">Previous</string>
   <string name="submit">Submit</string>
-  <string formatted="true" name="upload_title_duplicate">A file with the file name %1$s exists. Are you sure you want to proceed?</string>
+  <string formatted="true" name="upload_title_duplicate">A file with the file name %1$s exists. Are you sure you want to proceed?\n\nNote: A suitable suffix will be added to the file name automatically.</string>
   <string name="map_application_missing">No compatible map application could be found on your device. Please install a map application to use this feature.</string>
   <string name="navigation_item_bookmarks">Bookmarks</string>
   <string name="title_activity_bookmarks">Bookmarks</string>
@@ -672,6 +670,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="pause">pause</string>
   <string name="resume">resume</string>
   <string name="paused">Paused</string>
+  <string name="more">More</string>
+  <string name="favorites">Favorites</string>
   <string name="achievements_tab_title">Achievements</string>
   <string name="leaderboard_tab_title">Leaderboard</string>
   <string name="rank_prefix">Rank:</string>
@@ -697,4 +697,17 @@ Upload your first media by tapping on the add button.</string>
   <string name="limited_connection_enabled">Limited connection mode enabled!</string>
   <string name="limited_connection_disabled">Limited connection mode disabled. Pending uploads will resume now.</string>
   <string name="limited_connection">Limited Connection</string>
+  <string name="statistics_quality">Quality Images</string>
+  <string name="quality_images_info">Quality images are diagrams or photographs that meet certain quality standards (which are mostly technical in nature) and are valuable for Wikimedia projects</string>
+  <string name="resuming_upload">Resuming upload…</string>
+  <string name="pausing_upload">Pausing upload…</string>
+
+  <string name="media_details_tooltip">Please write a short caption that says what your picture shows. In the description, say what makes the picture interesting or typical or rare, and explain the context, visible or not. Use exact terminology as much as you can.</string>
+  <string name="depicts_tooltip">Please find and select all concepts that this image portrays. Be as specific as you can. If the image portrays multiple items, choose them all within reason. Do not choose generic tags if more specific tags are available.</string>
+  <string name="categories_tooltip">Please select the appropriate categories. Unlike depictions, categories are only in English.</string>
+  <string name="license_tooltip">Commons makes your pictures reusable and adapted by everyone. Do you want to waive all rights? Do you want to be attributed? Do you want adaptations to use the same license?</string>
+  <string name="depicts_step_title">Depicts</string>
+  <string name="license_step_title">Media License</string>
+  <string name="media_detail_step_title">Media Details</string>
+
 </resources>

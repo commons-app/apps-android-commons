@@ -9,7 +9,7 @@
     <item quantity="one">Xubiendo un ficheru</item>
     <item quantity="other">Xubiendo %1$d ficheros</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -97,7 +97,7 @@
   <string name="display_list_button">Llista</string>
   <string name="gps_disabled">El GPS ta desactiváu nel preséu. ¿Quiés activalu?</string>
   <string name="enable_gps">Activar GPS</string>
-  <string name="contributions_subtitle_zero">Inda nun hai xubes</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Inda nun hai xubes</string>
   <string name="categories_not_found">Nun s\'alcontró denguna categoría que case con %1$s</string>
   <string name="depictions_not_found">Nun s\'alcontraron elementos de Wikidata que casen con %1$s</string>
   <string name="no_child_classes">%1$s nun tien clases fíes</string>
@@ -272,8 +272,8 @@
   <string name="upload_problem_image">Alcontráronse problemes na imaxe</string>
   <string name="internet_downloaded">Por favor xube solo fotografies que tomasti tu mesmu. Nun xubas imaxes que descargasti d\'Internet.</string>
   <string name="give_permission">Dar permisu</string>
-  <string name="use_external_storage">Usar almacenamientu esternu</string>
-  <string name="use_external_storage_summary">Guardar nel preséu les imaxes tomaes cola cámara de la app</string>
+  <string name="use_external_storage" fuzzy="true">Usar almacenamientu esternu</string>
+  <string name="use_external_storage_summary" fuzzy="true">Guardar nel preséu les imaxes tomaes cola cámara de la app</string>
   <string name="login_to_your_account">Anicia sesión na to cuenta</string>
   <string name="send_log_file">Unviar ficheru de rexistru</string>
   <string name="send_log_file_description">Unviar ficheru de rexistru a los desendolcadores per corréu electrónicu p\'ayudar a depurar problemes cola aplicación. Nota: los rexistros pueden contener potencialmente información que t\'identifique</string>
@@ -405,18 +405,18 @@
   <string name="notifications">Avisos</string>
   <string name="read_notifications">Avisos (lleíos)</string>
   <string name="display_nearby_notification">Amosar notificaciones de cercanía</string>
-  <string name="display_nearby_notification_summary">Toca equí para ver el llugar más cercanu que precisa semeyes</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Toca equí para ver el llugar más cercanu que precisa semeyes</string>
   <string name="no_close_nearby">Nun s\'atoparon llugares cercanos nos alredores</string>
   <string name="list_sheet">Llista</string>
   <string name="storage_permission">Permisu d\'almacenamientu</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos el to permisu p\'aportar al almacenamientu esternu del to preséu pa poder xubir imaxes.</string>
   <string name="nearby_notification_dismiss_message">Yá nun vas ver el llugar más cercanu que precisa semeyes. Sicasí, puedes reactivar esti avisu na configuración si lo desees.</string>
-  <string name="step_count">Pasu %1$d de %2$d</string>
+  <string name="step_count" fuzzy="true">Pasu %1$d de %2$d</string>
   <string name="image_in_set_label">Imaxe %1$d del conxuntu</string>
   <string name="next">Siguiente</string>
   <string name="previous">Anterior</string>
   <string name="submit">Unviar</string>
-  <string name="upload_title_duplicate">Yá esiste un ficheru col nome %1$. ¿Tas seguru de que quies siguir?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Yá esiste un ficheru col nome %1$. ¿Tas seguru de que quies siguir?</string>
   <string name="map_application_missing">Nun s\'atopó una aplicación de mapes compatible nel to preséu. Instala una pa usar esta carauterística.</string>
   <string name="navigation_item_bookmarks">Marcadores</string>
   <string name="title_activity_bookmarks">Marcadores</string>

@@ -104,7 +104,7 @@
   <string name="display_list_button">Κατάλογος</string>
   <string name="gps_disabled">Το GPS στην συσκευή είναι απενεργοποιημένο. Θέλετε να το ενεργοποιήσετε;</string>
   <string name="enable_gps">  Ενεργοποιήσετε το GPS</string>
-  <string name="contributions_subtitle_zero">Δεν έχουν ακόμη επιφορτωθεί αρχεία</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Δεν έχουν ακόμη επιφορτωθεί αρχεία</string>
   <string name="categories_not_found">Δεν βρέθηκαν κατηγορίες που ταιριάζουν %1$s</string>
   <string name="categories_skip_explanation">Προσθέστε κατηγορίες για να κάνετε τις εικόνες σας πιο ανιχνεύσιμες στα Wikimedia Commons.\n\nΑρχίστε να γράφετε για να προσθέσετε κατηγορίες.\nΠατήστε αυτό το μήνυμα (ή πατήστε επιστροφή) για να παραλείψετε αυτό το βήμα.</string>
   <string name="categories_activity_title">Κατηγορίες</string>
@@ -256,8 +256,8 @@
   <string name="upload_problem_different_geolocation">Η εικόνα λήφθηκε σε διαφορετική τοποθεσία.</string>
   <string name="upload_problem_do_you_continue">Θέλετε ακόμη να ανεβάσετε αυτή την εικόνα;</string>
   <string name="give_permission">Χορηγήστε άδεια</string>
-  <string name="use_external_storage">Χρησιμοποιήσετε την εξωτερική αποθήκευση</string>
-  <string name="use_external_storage_summary">Αποθηκεύσετε εικόνες που παίρνονται στην κάμερα εφαρμογής στην συσκευή σας</string>
+  <string name="use_external_storage" fuzzy="true">Χρησιμοποιήσετε την εξωτερική αποθήκευση</string>
+  <string name="use_external_storage_summary" fuzzy="true">Αποθηκεύσετε εικόνες που παίρνονται στην κάμερα εφαρμογής στην συσκευή σας</string>
   <string name="login_to_your_account">Συνδεθείτε στο λογαριασμό σας.</string>
   <string name="send_log_file">Αποστείλατε τον φάκελλο σύνδεσης</string>
   <string name="send_log_file_description">Στείλτε το αρχείο καταγραφής στους προγραμματιστές μέσω email για να βοηθήσετε τη διόρθωση σφαλμάτων της εφαρμογής. Σημείωση: οι καταγραφές ενδέχεται να περιλαμβάνουν αναγνωριστικές πληροφορίες</string>
@@ -375,7 +375,7 @@
   <string name="contributions_fragment">Συνεισφορές</string>
   <string name="nearby_fragment">Κοντά σας</string>
   <string name="notifications">Ενημερώσεις</string>
-  <string name="display_nearby_notification_summary">Πατήστε εδώ για να δείτε την πιο κοντινή θέση που χρειάζεται εικόνες</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Πατήστε εδώ για να δείτε την πιο κοντινή θέση που χρειάζεται εικόνες</string>
   <string name="no_close_nearby">Δεν βρέθηκαν μέρη κοντά σας</string>
   <string name="list_sheet">Λίστα</string>
   <string name="nearby_notification_dismiss_message">Δεν θα δείτε την πιο κοντινή τοποθεσία που χρειάζεται επιπλέον εικόνες. Ωστόσο, μπορείτε να ενεργοποιήσετε ξανά αυτή την ειδοποίηση στις Ρυθμίσεις αν θέλετε.</string>
@@ -383,7 +383,7 @@
   <string name="next">Επόμενο</string>
   <string name="previous">Προηγούμενο</string>
   <string name="submit">Υποβολή</string>
-  <string name="upload_title_duplicate">Υπάρχει ήδη ένας φάκελλος με όνομα %1$s. Είστε σίγουρος πως θέλετε να προχωρήσετε ?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Υπάρχει ήδη ένας φάκελλος με όνομα %1$s. Είστε σίγουρος πως θέλετε να προχωρήσετε ?</string>
   <string name="map_application_missing">Καμία εφαρμογή χάρτη δεν βρέθηκε στον υπολογιστή. Παρακαλώ εγκαταστήστε εφαρμογή χάρτη για να χρησιμοποιήσετε αυτήν την ιδιότητα.</string>
   <string name="navigation_item_bookmarks">Σελιδοδείκτες</string>
   <string name="title_activity_bookmarks">Σελιδοδείκτες</string>
