@@ -60,6 +60,11 @@ public class LocationServiceManager implements LocationListener {
      */
     private boolean requestLocationUpdatesFromProvider(String locationProvider) {
         try {
+            // If both providers are not available
+            if (locationManager == null || !(locationManager.getAllProviders().contains(LocationManager.NETWORK_PROVIDER))
+                || !(locationManager.getAllProviders().contains(LocationManager.GPS_PROVIDER))) {
+                return false;
+            }
             locationManager.requestLocationUpdates(locationProvider,
                     MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS,
                     MIN_LOCATION_UPDATE_REQUEST_DISTANCE_IN_METERS,

@@ -5,11 +5,13 @@
 * Liuxinyu970226
 * Madhurgupta10
 * Minh Nguyen
+* MuratTheTurkish
 * Nemo bis
 * Nicolas Raoul
 * Robby
 * Shirayuki
 * Siebrand
+* Verdy p
 * Whym
 * Woytecr
 * Yuvipanda
@@ -20,6 +22,7 @@
     <item quantity="one">Status text about number of uploads left.\n* %1$d represents number of uploads left, including current one\n</item>
     <item quantity="other">Status text about number of uploads left.\n* %1$d represents number of uploads left, including current one\n</item>
   </plurals>
+  <string name="contributions_subtitle">See the current issue [https://phabricator.wikimedia.org/T267142 T267142]  tracked in Phabricator about the &lt;code&gt;&lt;nowiki&gt;|zero=&lt;/nowiki&gt;&lt;/code&gt; option currently not supported on Translatewiki.net with the custom &lt;code&gt;&lt;nowiki&gt;{{PLURAL}}&lt;/nowiki&gt;&lt;/code&gt; rules used by this project for Android, using a non-Mediawiki syntax.</string>
   <string name="multiple_uploads_title">{{Identical|Upload}}</string>
   <string name="share_license_summary">Text label telling user the license of the current upload in progress. %1$s refers to appropriate display text for the chosen CC license</string>
   <string name="navigation_item_explore">{{Identical|Explore}}</string>
@@ -161,4 +164,6 @@
   <string name="exif_tag_name_author">{{Identical|Author}}</string>
   <string name="exif_tag_name_location">{{Identical|Location}}</string>
   <string name="title_app_shortcut_bookmark">{{identical|Bookmark}}</string>
+  <string name="more">{{Identical|More}}</string>
+  <string name="favorites">{{Identical|Favorite}}</string>
 </resources>

@@ -11,6 +11,7 @@
 * SimondR
 * Viiictorrr
 * Vlad5250
+* Vlnt
 * Ата
 -->
 <resources>
@@ -123,7 +124,7 @@
   <string name="display_list_button">Список</string>
   <string name="gps_disabled">GPS вимкнено на Вашому пристрої. Бажаєте увімкнути його?</string>
   <string name="enable_gps">Увімкнути GPS</string>
-  <string name="contributions_subtitle_zero">Ще нема завантажень</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Ще нема завантажень</string>
   <string name="categories_not_found">Категорій, відповідних %1$s, не знайдено</string>
   <string name="depictions_not_found">Не знайдено елементів вікіданих, що відповідають %1$s</string>
   <string name="no_child_classes">%1$s не має дочірніх класів</string>
@@ -298,8 +299,8 @@
   <string name="upload_problem_image">Виявлено проблеми із зображенням</string>
   <string name="internet_downloaded">Будь ласка, завантажуйте тільки ті зображення, які були зроблені вами. Не завантажуйте зображень, які ви знайшли в інтернеті.</string>
   <string name="give_permission">Надати дозвіл</string>
-  <string name="use_external_storage">Використовувати зовнішнє сховище</string>
-  <string name="use_external_storage_summary">Зберігати зображення, виконані вбудованою камерою Вашого пристрою</string>
+  <string name="use_external_storage" fuzzy="true">Використовувати зовнішнє сховище</string>
+  <string name="use_external_storage_summary" fuzzy="true">Зберігати зображення, виконані вбудованою камерою Вашого пристрою</string>
   <string name="login_to_your_account">Увійдіть у свій обліковий запис</string>
   <string name="send_log_file">Надіслати файл журналу</string>
   <string name="send_log_file_description">Надіслати файл журналу розробникам електронною поштою, щоб допомогти розв\'язати проблему із програмою. Зауважте, що журнали можуть містити ідентифікаційну інформацію.</string>
@@ -434,18 +435,18 @@
   <string name="notifications">Сповіщення</string>
   <string name="read_notifications">Сповіщення (прочитані)</string>
   <string name="display_nearby_notification">Повідомляти мене про місця поблизу</string>
-  <string name="display_nearby_notification_summary">Торкніться тут, щоб побачити найближчі місця, які ще не мають зображень</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Торкніться тут, щоб побачити найближчі місця, які ще не мають зображень</string>
   <string name="no_close_nearby">Не знайдено місць поблизу Вас</string>
   <string name="list_sheet">Список</string>
   <string name="storage_permission">Дозвіл на зберігання</string>
   <string name="write_storage_permission_rationale_for_image_share">Нам потрібен ваш дозвіл на доступ до зовнішнього сховища на Вашому пристрої, щоб завантажувати зображення.</string>
   <string name="nearby_notification_dismiss_message">Ви більше не бачитимете сповіщень про найближчі місця без зображень. Однак Ви можете увімкнути ці сповіщення повторно у своїх налаштуваннях, якщо забажаєте.</string>
-  <string name="step_count">Крок %1$d із %2$d</string>
+  <string name="step_count" fuzzy="true">Крок %1$d із %2$d</string>
   <string name="image_in_set_label">Зображення %1$d у наборі</string>
   <string name="next">Наступне</string>
   <string name="previous">Попереднє</string>
   <string name="submit">Надіслати</string>
-  <string name="upload_title_duplicate">Файл із назвою %1$s існує. Ви впевнені, що хочете продовжити?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Файл із назвою %1$s існує. Ви впевнені, що хочете продовжити?</string>
   <string name="map_application_missing">На Вашому пристрої не знайдено сумісного додатка з картами. Будь ласка, встановіть додаток з картами, якщо хочете скористатись цією функцією.</string>
   <string name="navigation_item_bookmarks">Закладки</string>
   <string name="title_activity_bookmarks">Закладки</string>
@@ -588,6 +589,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
   <string name="delete_helper_ask_reason_copyright_other">Інше</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Оскільки</string>
+  <string name="category_edit_helper_edit_message_else">Неможливо додати категорії</string>
   <string name="share_image_via">Поширити зображення через</string>
   <string name="no_achievements_yet">Поки що від вас немає вкладу</string>
   <string name="account_created">Обліковий запис створено!</string>

@@ -36,6 +36,4 @@
           android:layout_below="@id/toolbar_layout" />
     </RelativeLayout>
 
-    <include layout="@layout/drawer_view" />
-
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -122,7 +122,7 @@
   <string name="upload_problem_image_blurry">Attēls ir izplūdis.</string>
   <string name="upload_problem_different_geolocation">Šis attēls tika uzņemts citur.</string>
   <string name="give_permission">Atļaut</string>
-  <string name="use_external_storage">Izmantot ārējo krātuvi</string>
+  <string name="use_external_storage" fuzzy="true">Izmantot ārējo krātuvi</string>
   <string name="view_browser">Skatīt pārlūkā</string>
   <string name="skip_login">Izlaist</string>
   <string name="navigation_item_login">Pieslēgties</string>

@@ -411,6 +411,74 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_margin_horizontal"
             android:layout_marginRight="@dimen/activity_margin_horizontal"
+            android:layout_marginEnd="@dimen/activity_margin_horizontal"
+            android:layout_marginStart="@dimen/activity_margin_horizontal"
+            android:layout_marginTop="@dimen/activity_margin_horizontal">
+
+            <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerVertical="true"
+              android:layout_alignParentStart="true"
+              android:layout_alignParentLeft="true"
+              android:layout_toStartOf="@+id/quality_images"
+              android:layout_toLeftOf="@+id/quality_images"
+              android:orientation="horizontal"
+              android:gravity="center_vertical">
+
+              <ImageView
+                android:layout_width="@dimen/overflow_icon_dimen"
+                android:layout_height="@dimen/overflow_icon_dimen"
+                android:id="@+id/quality_image_icon"
+                app:srcCompat="@drawable/ic_quality_images_logo"
+                android:scaleType="centerInside" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:textAppearanceMedium"
+                android:layout_marginStart="@dimen/activity_margin_horizontal"
+                android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                android:layout_marginRight="@dimen/activity_margin_horizontal"
+                android:text="@string/statistics_quality"  />
+
+              <ImageView
+                android:layout_width="@dimen/medium_width"
+                android:layout_height="@dimen/medium_height"
+                android:id="@+id/quality_images_info"
+                android:layout_marginTop="@dimen/activity_margin_horizontal"
+                android:layout_marginRight="@dimen/activity_margin_horizontal"
+                android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                android:layout_gravity="top"
+                app:srcCompat="@drawable/ic_info_outline_24dp"
+                android:tint="@color/primaryDarkColor" />
+
+            </LinearLayout>
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              style="?android:textAppearanceMedium"
+              android:layout_alignParentRight="true"
+              android:layout_alignParentEnd="true"
+              android:layout_marginTop="@dimen/activity_margin_horizontal"
+              android:layout_marginStart="@dimen/activity_margin_horizontal"
+              android:layout_centerVertical="true"
+              tools:text="2"
+              android:text="0"
+              android:id="@+id/quality_images"
+              android:layout_marginLeft="@dimen/activity_margin_horizontal"
+              android:layout_marginEnd="@dimen/half_standard_height"
+              android:layout_marginRight="@dimen/half_standard_height" />
+
+          </RelativeLayout>
+
+          <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_margin_horizontal"
+            android:layout_marginRight="@dimen/activity_margin_horizontal"
             android:layout_marginStart="@dimen/activity_margin_horizontal"
             android:layout_marginTop="@dimen/activity_margin_horizontal"
             android:layout_marginEnd="@dimen/activity_margin_horizontal">
@@ -476,7 +544,4 @@
         </LinearLayout>
       </LinearLayout>
     </ScrollView>
-
-  <include layout="@layout/drawer_view" />
-
 </androidx.drawerlayout.widget.DrawerLayout>

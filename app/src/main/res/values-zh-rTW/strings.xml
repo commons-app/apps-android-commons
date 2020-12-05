@@ -22,7 +22,6 @@
     <item quantity="other">正在上載 %1$d 個檔案</item>
   </plurals>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -114,7 +113,7 @@
   <string name="display_list_button">清單</string>
   <string name="gps_disabled">您的裝置停用了 GPS。想啟用嗎？</string>
   <string name="enable_gps">啟用 GPS</string>
-  <string name="contributions_subtitle_zero">尚未上傳</string>
+  <string name="contributions_subtitle_zero">（尚未上傳）</string>
   <string name="categories_not_found">沒有發現與 %1$s 相符的分類</string>
   <string name="depictions_not_found">找不到符合%1$s的維基數據項目</string>
   <string name="no_child_classes">%1$s沒有子類別</string>
@@ -181,7 +180,7 @@
   <string name="tutorial_4_text">上傳範例：</string>
   <string name="tutorial_4_subtext_1">標題：雪梨歌劇院</string>
   <string name="tutorial_4_subtext_2">描述：從對面海灣所看到的雪梨歌劇院</string>
-  <string name="tutorial_4_subtext_3">分類：雪梨歌劇院的西側、雪梨歌劇院的遠方外觀</string>
+  <string name="tutorial_4_subtext_3">分類：Sydney Opera House from the west（雪梨歌劇院的西側）、Sydney Opera House remote views（雪梨歌劇院的遠方外觀）</string>
   <string name="welcome_wikipedia_text">貢獻您的圖片，使維基百科的文章更加生動！</string>
   <string name="welcome_wikipedia_subtext">維基百科的圖片，來自維基共享資源。</string>
   <string name="welcome_copyright_text">您的圖片可以幫助教育世界各地的人。</string>
@@ -198,8 +197,8 @@
   <string name="detail_discussion_empty">沒有討論</string>
   <string name="detail_license_empty">不明授權</string>
   <string name="menu_refresh">重新整理</string>
-  <string name="storage_permission_title">請求存儲裝置權限</string>
-  <string name="read_storage_permission_rationale">必要權限：讀取外部存儲裝置。否則應用程式無法存取您的圖庫。</string>
+  <string name="storage_permission_title">請求儲存裝置權限</string>
+  <string name="read_storage_permission_rationale">必要權限：讀取外部儲存裝置。否則應用程式無法存取您的圖庫。</string>
   <string name="write_storage_permission_rationale">必要權限：寫入外部存儲裝置。否則應用程式無法取用您的相機/圖庫。</string>
   <string name="location_permission_title">請求位置權限</string>
   <string name="location_permission_rationale">可有可無的權限：獲取目前的地理位置，以用於分類建議</string>
@@ -289,8 +288,8 @@
   <string name="upload_problem_image">在圖片裡發現問題</string>
   <string name="internet_downloaded">請僅上傳您自己拍攝的圖片。不要上傳您從網路下載來的圖片。</string>
   <string name="give_permission">給予權限</string>
-  <string name="use_external_storage">使用外部存儲裝置</string>
-  <string name="use_external_storage_summary">在您的裝置上使用照相機應用程式來儲存照片</string>
+  <string name="use_external_storage">儲存應用程式所提供的快照</string>
+  <string name="use_external_storage_summary">保存以應用程式相機所拍攝的圖片到您的裝置儲存裡</string>
   <string name="login_to_your_account">登入您的帳號</string>
   <string name="send_log_file">發送日誌檔案</string>
   <string name="send_log_file_description">透過電子郵件寄送日誌檔案給開發人員，來協助除錯應用程式上的問題。注意：日誌可能會包含識別方面的資訊</string>
@@ -426,18 +425,18 @@
   <string name="notifications">通知</string>
   <string name="read_notifications">通知（已讀）</string>
   <string name="display_nearby_notification">顯示附近地點通知</string>
-  <string name="display_nearby_notification_summary">在此輕觸來查看缺少圖片的最近地點</string>
+  <string name="display_nearby_notification_summary">顯示用於缺少圖片之最近地點的應用程式所提供通知</string>
   <string name="no_close_nearby">查無靠近您的附近地點</string>
   <string name="list_sheet">清單</string>
-  <string name="storage_permission">存儲裝置權限</string>
+  <string name="storage_permission">儲存裝置權限</string>
   <string name="write_storage_permission_rationale_for_image_share">為了上傳圖片，我們需要存取裝置的外部儲存空間的權限。</string>
   <string name="nearby_notification_dismiss_message">您不會再看到缺少圖片的最近地點。然而，若您有意的話您可以在設定裡重新啟動此通知。</string>
-  <string name="step_count">步驟 %2$d 之 %1$d</string>
+  <string name="step_count">步驟 %2$d 之 %1$d：%3$s</string>
   <string name="image_in_set_label">圖片「%1$d」在集合裡</string>
   <string name="next">下一個</string>
   <string name="previous">上一個</string>
   <string name="submit">提交</string>
-  <string name="upload_title_duplicate">檔案名稱為「%1$s」的檔案已存在，您確定要繼續嗎？</string>
+  <string name="upload_title_duplicate">檔案名稱為「%1$s」的檔案已存在，您確定要繼續嗎？\n\n註：合適的後綴會自動添加到檔案名稱。</string>
   <string name="map_application_missing">在您的裝置上找不到相容的地圖應用程式，請安裝地圖應用程式來使用此功能。</string>
   <string name="navigation_item_bookmarks">書籤</string>
   <string name="title_activity_bookmarks">書籤</string>
@@ -545,7 +544,7 @@
   <string name="welcome_do_upload_content_description">上傳到維基共享資源的優良圖片範例</string>
   <string name="welcome_dont_upload_content_description">未上傳範例圖片</string>
   <string name="skip_image">略過此圖片</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">下載失敗！因為缺少外部存儲裝置權限緣故，我們無法下載檔案。</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">下載失敗！因為缺少外部儲存裝置權限緣故，我們無法下載檔案。</string>
   <string name="manage_exif_tags">管理 EXIF 標籤</string>
   <string name="manage_exif_tags_summary">選擇要保持上傳的 EXIF 標籤</string>
   <string name="exif_tag_name_author">作者</string>
@@ -645,6 +644,8 @@
   <string name="pause">暫停</string>
   <string name="resume">繼續</string>
   <string name="paused">已暫停</string>
+  <string name="more">更多</string>
+  <string name="favorites">個人最愛</string>
   <string name="achievements_tab_title">成果</string>
   <string name="leaderboard_tab_title">排行榜</string>
   <string name="rank_prefix">排名：</string>
@@ -670,4 +671,15 @@
   <string name="limited_connection_enabled">限制連線模式已啟用！</string>
   <string name="limited_connection_disabled">限制連線模式已停用。待定上傳將會立刻恢復。</string>
   <string name="limited_connection">限制連線</string>
+  <string name="statistics_quality">品質圖片</string>
+  <string name="quality_images_info">品質圖片是符合某些品質標準（本質上大多是技術性方面）的圖表或照片，並且對於維基媒體計劃很有價值</string>
+  <string name="resuming_upload">重新開始上傳…</string>
+  <string name="pausing_upload">暫停上傳…</string>
+  <string name="media_details_tooltip">請寫一個簡短說明來描述您的圖片所展示內容。在描述中，請說出是什麼內容讓圖片有趣、典型、或罕見，並解釋來龍去脈（可見或不可見）。另外盡可能使用確切的行話術語。</string>
+  <string name="depicts_tooltip">請找出並選擇該圖片所描繪出的所有概念，並盡可能具體。若圖片描繪了多個項目，請依據合理的原因內將項目給全部選擇。如果有可用的特定標籤，就不必選擇通用標籤。</string>
+  <string name="categories_tooltip">請選擇適當的分類。與描寫不同，分類僅使用英文。</string>
+  <string name="license_tooltip">維基共享資源讓您的圖片可重複使用，並可讓任何人修改。您想要放棄所有使用權嗎？您想要被標示出嗎？您想要依據相同的授權條款來改編內容嗎？</string>
+  <string name="depicts_step_title">描述</string>
+  <string name="license_step_title">媒體授權條款</string>
+  <string name="media_detail_step_title">媒體詳細資料</string>
 </resources>

@@ -26,7 +26,7 @@ import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.FragmentUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -41,7 +41,7 @@ import timber.log.Timber;
  * Represents search screen of this app
  */
 
-public class SearchActivity extends NavigationBaseActivity
+public class SearchActivity extends BaseActivity
         implements MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
 
     @BindView(R.id.toolbar_search) Toolbar toolbar;
@@ -67,7 +67,6 @@ public class SearchActivity extends NavigationBaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
-        initDrawer();
         setTitle(getString(R.string.title_activity_search));
         toolbar.setNavigationOnClickListener(v->onBackPressed());
         supportFragmentManager = getSupportFragmentManager();
@@ -203,7 +202,6 @@ public class SearchActivity extends NavigationBaseActivity
         tabLayout.setVisibility(View.GONE);
         viewPager.setVisibility(View.GONE);
         mediaContainer.setVisibility(View.VISIBLE);
-        setNavigationBaseToolbarVisibility(true);
         if (mediaDetails == null || !mediaDetails.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
             mediaDetails = new MediaDetailPagerFragment(false, true);
@@ -219,7 +217,6 @@ public class SearchActivity extends NavigationBaseActivity
             supportFragmentManager.executePendingTransactions();
         }
         mediaDetails.showImage(index);
-        forceInitBackButton();
     }
 
     /**

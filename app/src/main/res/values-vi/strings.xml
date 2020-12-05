@@ -95,7 +95,7 @@
   <string name="display_list_button">Danh sách</string>
   <string name="gps_disabled">Chức năng GPS đang tắt trên thiết bị của bạn. Bạn có muốn bật nó lên?</string>
   <string name="enable_gps">Bật GPS</string>
-  <string name="contributions_subtitle_zero">Chưa có tập tin tải lên</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Chưa có tập tin tải lên</string>
   <string name="categories_not_found">Không tìm thấy thể loại khớp với %1$s</string>
   <string name="categories_skip_explanation">Xếp các hình ảnh vào thể loại để giúp chúng dễ tìm kiếm hơn trên Wikimedia Commons.\nHãy bắt đầu nhập để thêm thể loại.</string>
   <string name="categories_activity_title">Thể loại</string>
@@ -246,8 +246,8 @@
   <string name="upload_problem_fbmd">Vui lòng chỉ đăng tải hình ảnh bạn đã tự chụp. Xin đừng đăng tải hình ảnh bạn tìm thấy trên tài không Facebook của người khác.</string>
   <string name="upload_problem_do_you_continue">Bạn vẫn muốn đăng tải bức ảnh này?</string>
   <string name="give_permission">Cho phép</string>
-  <string name="use_external_storage">Sử dụng thiết bị lưu trữ bên ngoài</string>
-  <string name="use_external_storage_summary">Lưu các hình ảnh được chụp bằng máy chụp hình trong ứng dụng vào thiết bị của bạn</string>
+  <string name="use_external_storage" fuzzy="true">Sử dụng thiết bị lưu trữ bên ngoài</string>
+  <string name="use_external_storage_summary" fuzzy="true">Lưu các hình ảnh được chụp bằng máy chụp hình trong ứng dụng vào thiết bị của bạn</string>
   <string name="login_to_your_account">Đăng nhập vào tài khoản của bạn</string>
   <string name="send_log_file">Gửi tập tin nhật trình</string>
   <string name="send_log_file_description" fuzzy="true">Gửi tập tin nhật trình cho nhà phát triển qua thư điện tử</string>

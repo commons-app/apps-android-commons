@@ -34,7 +34,7 @@
     <item quantity="one">%1$d个文件正在上传</item>
     <item quantity="other">%1$d个文件正在上传</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d次上传</item>
     <item quantity="other">%1$d次上传</item>
@@ -124,7 +124,7 @@
   <string name="display_list_button">列表</string>
   <string name="gps_disabled">您的设备禁用了GPS。您是否要启用它？</string>
   <string name="enable_gps">启用GPS</string>
-  <string name="contributions_subtitle_zero">尚无上传</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">尚无上传</string>
   <string name="categories_not_found">没有找到匹配%1$s的分类</string>
   <string name="no_child_classes">%1$s没有子类别</string>
   <string name="no_parent_classes">%1$s没有父类别</string>
@@ -197,7 +197,7 @@
   <string name="welcome_final_button_text">是！</string>
   <string name="welcome_help_button_text">更多信息</string>
   <string name="detail_panel_cats_label">分类</string>
-  <string name="detail_panel_cats_loading">正在载入…</string>
+  <string name="detail_panel_cats_loading">正在载入……</string>
   <string name="detail_panel_cats_none">未选择</string>
   <string name="detail_caption_empty">无字幕</string>
   <string name="detail_description_empty">没有说明</string>
@@ -291,8 +291,8 @@
   <string name="upload_problem_do_you_continue">仍然上传这张图片？</string>
   <string name="internet_downloaded">请仅上传由您自己拍摄的图像。请勿上传您从互联网下载的图像。</string>
   <string name="give_permission">提供权限</string>
-  <string name="use_external_storage">使用外部存储</string>
-  <string name="use_external_storage_summary">保存有您的设备的内部照相机应用拍摄的照片</string>
+  <string name="use_external_storage" fuzzy="true">使用外部存储</string>
+  <string name="use_external_storage_summary" fuzzy="true">保存有您的设备的内部照相机应用拍摄的照片</string>
   <string name="login_to_your_account">登录您的账户</string>
   <string name="send_log_file">发送日志文件</string>
   <string name="send_log_file_description">通过电子邮件发送日志文件给开发人员，以帮助调试应用程序的问题。注意：日志可能包含标识信息。</string>
@@ -427,18 +427,18 @@
   <string name="notifications">通知</string>
   <string name="read_notifications">通知（已读）</string>
   <string name="display_nearby_notification">显示附近通知</string>
-  <string name="display_nearby_notification_summary">点击此处查看最近需要图片的地方</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">点击此处查看最近需要图片的地方</string>
   <string name="no_close_nearby">附近找不到靠近您的地方</string>
   <string name="list_sheet">列表</string>
   <string name="storage_permission">存储权限</string>
   <string name="write_storage_permission_rationale_for_image_share">我们需要您的许可才能访问设备的外部存储空间以上传图片。</string>
   <string name="nearby_notification_dismiss_message">您再也看不到最近需要图片的地方了。但是，如果希望的话，可以在设置中重新启用此通知。</string>
-  <string name="step_count">%2$d中的第%1$d步</string>
+  <string name="step_count" fuzzy="true">%2$d中的第%1$d步</string>
   <string name="image_in_set_label">图像%1$d在相册中</string>
   <string name="next">下一个</string>
   <string name="previous">上一个</string>
   <string name="submit">发布</string>
-  <string name="upload_title_duplicate">名为%1$s的文件已经存在。您确定要继续吗？</string>
+  <string name="upload_title_duplicate" fuzzy="true">名为%1$s的文件已经存在。您确定要继续吗？</string>
   <string name="map_application_missing">您的设备上无法找到兼容的地图应用程序。请安装地图应用程序来使用此功能。</string>
   <string name="navigation_item_bookmarks">书签</string>
   <string name="title_activity_bookmarks">书签</string>

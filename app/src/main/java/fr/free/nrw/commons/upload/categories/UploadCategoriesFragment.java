@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -42,6 +44,8 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     ProgressBar pbCategories;
     @BindView(R.id.rv_categories)
     RecyclerView rvCategories;
+    @BindView(R.id.tooltip)
+    ImageView tooltip;
 
     @Inject
     CategoriesContract.UserActionListener presenter;
@@ -64,7 +68,13 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     private void init() {
         tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
-                callback.getTotalNumberOfSteps()));
+                callback.getTotalNumberOfSteps(), getString(R.string.categories_activity_title)));
+        tooltip.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogUtil.showAlertDialog(getActivity(), getString(R.string.categories_activity_title), getString(R.string.categories_tooltip), getString(android.R.string.ok), null, true);
+            }
+        });
         presenter.onAttachView(this);
         initRecyclerView();
         addTextChangeListenerToEtSearch();

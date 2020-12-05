@@ -5,16 +5,19 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
+import androidx.appcompat.widget.Toolbar;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.theme.BaseActivity;
 
 /**
  * allows the user to change the settings
  */
-public class SettingsActivity extends NavigationBaseActivity {
+public class SettingsActivity extends BaseActivity {
     private AppCompatDelegate settingsDelegate;
-
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     /**
      * to be called when the activity starts
      * @param savedInstanceState the previously saved state
@@ -25,7 +28,8 @@ public class SettingsActivity extends NavigationBaseActivity {
         setContentView(R.layout.activity_settings);
 
         ButterKnife.bind(this);
-        initDrawer();
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     // Get an action bar
@@ -40,11 +44,14 @@ public class SettingsActivity extends NavigationBaseActivity {
             settingsDelegate = AppCompatDelegate.create(this, null);
         }
         settingsDelegate.onPostCreate(savedInstanceState);
-
-        //Get an up button
-        //settingsDelegate.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-    
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
     /**
      * Handle action-bar clicks
      * @param item the selected item

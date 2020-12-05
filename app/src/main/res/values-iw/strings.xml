@@ -129,7 +129,7 @@
   <string name="display_list_button">רשימה</string>
   <string name="gps_disabled">ה־GPS במכשיר שלך אינו מופעל. האם להפעיל אותו?</string>
   <string name="enable_gps">הפעלת GPS</string>
-  <string name="contributions_subtitle_zero">לא הועלה עדיין שום דבר</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">לא הועלה עדיין שום דבר</string>
   <string name="categories_not_found">לא נמצאו קטגוריות בשם %1$s</string>
   <string name="depictions_not_found">לא נמצאו פריטי ויקינתונים שמתאימים לחיפוש %1$s</string>
   <string name="no_child_classes">ל%1$s אין מחלקות יורשות</string>
@@ -304,8 +304,8 @@
   <string name="upload_problem_image">נמצאו בעיות בתמונה</string>
   <string name="internet_downloaded">נא להעלות רק תמונות שצילמת בעצמך. לא להעלות תמונות שהורדת מהאינטרנט.</string>
   <string name="give_permission">לתת הרשאה</string>
-  <string name="use_external_storage">להשתמש באחסון חיצוני</string>
-  <string name="use_external_storage_summary">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום במכשיר שלך</string>
+  <string name="use_external_storage" fuzzy="true">להשתמש באחסון חיצוני</string>
+  <string name="use_external_storage_summary" fuzzy="true">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום במכשיר שלך</string>
   <string name="login_to_your_account">כניסה לחשבון שלך</string>
   <string name="send_log_file">שליחת קובץ יומן</string>
   <string name="send_log_file_description">שליחת קובץ יומן למפתחים בדואר אלקטרוני כדי לחפש בעיות עם היישום. לתשומת לבך: יומנים יכולים להכיל מידע מזהה</string>
@@ -441,18 +441,18 @@
   <string name="notifications">התראות</string>
   <string name="read_notifications">התראות (שנקראו)</string>
   <string name="display_nearby_notification">הצגת התראות סמוכות</string>
-  <string name="display_nearby_notification_summary">יש לגעת כאן כדי לצפות במקום הקרוב ביותר שדורש תמונות</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">יש לגעת כאן כדי לצפות במקום הקרוב ביותר שדורש תמונות</string>
   <string name="no_close_nearby">לא נמצאו מקומות בסביבתך</string>
   <string name="list_sheet">רשימה</string>
   <string name="storage_permission">הרשאת אחסון</string>
   <string name="write_storage_permission_rationale_for_image_share">אנחנו זקוקים להרשאה שלך לגשת לאחסון חיצוני במכשיר שלך כדי להעלות תמונות.</string>
   <string name="nearby_notification_dismiss_message">לא יופיעו עוד בפניך מקומות בסביבה שדורשים צילום. עם זאת, ניתן להפעיל התראה זו מחדש דרך ההגדרות במידת הצורך.</string>
-  <string name="step_count">שלב %1$d מתוך %2$d</string>
+  <string name="step_count" fuzzy="true">שלב %1$d מתוך %2$d</string>
   <string name="image_in_set_label">תמונה %1$d בסדרה</string>
   <string name="next">הבאה</string>
   <string name="previous">הקודמת</string>
   <string name="submit">שליחה</string>
-  <string name="upload_title_duplicate">כבר קיים קובץ בשם %1$s. להמשיך?</string>
+  <string name="upload_title_duplicate" fuzzy="true">כבר קיים קובץ בשם %1$s. להמשיך?</string>
   <string name="map_application_missing">לא נמצא יישום מפה תואם במכשיר שלך. נא להתקין יישום מפה כדי להשתמש בתכונה זו.</string>
   <string name="navigation_item_bookmarks">סימניות</string>
   <string name="title_activity_bookmarks">סימניות</string>
@@ -656,6 +656,8 @@
   <string name="pause">השהיה</string>
   <string name="resume">להמשיך</string>
   <string name="paused">מושהה</string>
+  <string name="more">עוד</string>
+  <string name="favorites">מועדפים</string>
   <string name="achievements_tab_title">הישגים</string>
   <string name="leaderboard_tab_title">לוח מובילים</string>
   <string name="rank_prefix">דירוג:</string>
@@ -680,4 +682,8 @@
   <string name="limited_connection_enabled">מופעל מצב חיבור מוגבל!</string>
   <string name="limited_connection_disabled">מצב חיבור מוגבל הושבת. ההעלאות שממתינות תמשכנה כעת.</string>
   <string name="limited_connection">החיבור מוגבל</string>
+  <string name="statistics_quality">תמונות איכות</string>
+  <string name="quality_images_info">תמונות איכות הן תרשימים או תמונות שעומדות בתקני איכות מסוימים (שמטבעם בעיקר טכניים) והן בעלות ערך למיזמי ויקימדיה</string>
+  <string name="resuming_upload">ההעלאה ממשיכה…</string>
+  <string name="pausing_upload">ההעלאה מושהית…</string>
 </resources>

@@ -6,7 +6,10 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -63,6 +66,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     AppCompatButton btnNext;
     @BindView(R.id.btn_previous)
     AppCompatButton btnPrevious;
+    @BindView(R.id.tooltip)
+    ImageView tooltip;
     private UploadMediaDetailAdapter uploadMediaDetailAdapter;
     @BindView(R.id.btn_copy_prev_title_desc)
     AppCompatButton btnCopyPreviousTitleDesc;
@@ -111,7 +116,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     private void init() {
         tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
-            callback.getTotalNumberOfSteps()));
+            callback.getTotalNumberOfSteps(), getString(R.string.media_detail_step_title)));
+        tooltip.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showInfoAlert(R.string.media_detail_step_title, R.string.media_details_tooltip);
+            }
+        });
         initRecyclerView();
         initPresenter();
         presenter.receiveImage(uploadableFile, place);
@@ -262,19 +273,33 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @Override
     public void showDuplicatePicturePopup(UploadItem uploadItem) {
-        String uploadTitleFormat = getString(R.string.upload_title_duplicate);
-        DialogUtil.showAlertDialog(getActivity(),
-            getString(R.string.duplicate_image_found),
-            String.format(Locale.getDefault(),
-                uploadTitleFormat,
-                uploadItem.getFileName()),
-            getString(R.string.upload),
-            getString(R.string.cancel),
-            () -> {
-                uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
-                onNextButtonClicked();
-            }, null);
-
+        if (defaultKvStore.getBoolean("showDuplicatePicturePopup", true)) {
+            String uploadTitleFormat = getString(R.string.upload_title_duplicate);
+            View checkBoxView = View
+                .inflate(getActivity(), R.layout.nearby_permission_dialog, null);
+            CheckBox checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
+            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (isChecked) {
+                    defaultKvStore.putBoolean("showDuplicatePicturePopup", false);
+                }
+            });
+            DialogUtil.showAlertDialog(getActivity(),
+                getString(R.string.duplicate_image_found),
+                String.format(Locale.getDefault(),
+                    uploadTitleFormat,
+                    uploadItem.getFileName()),
+                getString(R.string.upload),
+                getString(R.string.cancel),
+                () -> {
+                    uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
+                    onNextButtonClicked();
+                }, null,
+                checkBoxView,
+                false);
+        } else {
+            uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
+            onNextButtonClicked();
+        }
     }
 
     @Override

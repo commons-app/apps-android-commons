@@ -82,7 +82,7 @@
   <string name="display_list_button">Списък</string>
   <string name="gps_disabled">GPS е изключен на устройството Ви. Желаете ли да го включите?</string>
   <string name="enable_gps">Включи GPS</string>
-  <string name="contributions_subtitle_zero">Все още няма качени файлове</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Все още няма качени файлове</string>
   <string name="categories_not_found">Няма категории, отговарящи на %1$s</string>
   <string name="categories_skip_explanation">Поставете категории на изображения, за да могат потребителите по-лесно да ги намерят на Общомедия.\n\nЗа да поставите категория, почнете с писане на нейното име.</string>
   <string name="categories_activity_title">Категории</string>
@@ -189,7 +189,7 @@
   <string name="upload_problem_fbmd">Качвайте само изображения, които сте направили. Не качвайте изображения, намерени на някой друг профил в Facebook.</string>
   <string name="upload_problem_do_you_continue">Все още ли искате да я качете?</string>
   <string name="give_permission">Даване на позволение</string>
-  <string name="use_external_storage_summary">Съхраняване на направените картини в приложението с камерата на устройството Ви</string>
+  <string name="use_external_storage_summary" fuzzy="true">Съхраняване на направените картини в приложението с камерата на устройството Ви</string>
   <string name="nominate_deletion">Номиниране за изтриване</string>
   <string name="nominated_for_deletion">Изображението е предложено за изтриване.</string>
   <string name="nominated_see_more">По-подробно ще намерите на уеб страницата</string>

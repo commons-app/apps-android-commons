@@ -94,7 +94,7 @@
   <string name="display_list_button">Zerrenda</string>
   <string name="gps_disabled">GPSa desgaituta dago gailu honetan. Gaitu nahi duzu?</string>
   <string name="enable_gps">GPSa gaitu</string>
-  <string name="contributions_subtitle_zero">Oraindik ez da ezer igo</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Oraindik ez da ezer igo</string>
   <string name="categories_not_found">Ez da kategoriak aukritu %1$s izenarekin</string>
   <string name="categories_skip_explanation">Gehitu kategoriak zure argazkiak Wikimedia Commonsen aurkitzen errazagoak izan daitezen.\nHasi idazten kategoriak gehitzeko.</string>
   <string name="categories_activity_title">Kategoriak</string>
@@ -230,8 +230,8 @@
   <string name="description_info">Mesedez, deskribatu multimedia elementua ahal duzun gehien: non hartu zen? zer erakusten du? zein da bere testuingurua? Mesedez, objektuak eta pertsonak deskribatu. Eman asmatzeko erraza ez den informazioa, adibidez, paisaia bat izatekotan, eguneko zein orudtan hartu den. Multimediak zerbait berezia erakusten badu, mesedez azaldu zerk egiten duen berezia.</string>
   <string name="upload_problem_image">arazoak aurkitu dira irudian</string>
   <string name="give_permission">Baimena eman</string>
-  <string name="use_external_storage">Kanpo-biltegia erabili</string>
-  <string name="use_external_storage_summary">Aplikazioaren kamerarekin ateratako argazkiak zure gailuan gorde</string>
+  <string name="use_external_storage" fuzzy="true">Kanpo-biltegia erabili</string>
+  <string name="use_external_storage_summary" fuzzy="true">Aplikazioaren kamerarekin ateratako argazkiak zure gailuan gorde</string>
   <string name="login_to_your_account">Zure kontuan saioa hasi</string>
   <string name="send_log_file">Erregistro fitxategia bidali</string>
   <string name="send_log_file_description">Bidali erregistro fitxategia garatzaileei emailaren bitartez aplikazioaren dauden arazoak konpontzeko. Oharra: erregistroek identifika zaitzaken informazioa eduki dezakete</string>

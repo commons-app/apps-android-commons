@@ -19,12 +19,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.google.android.material.navigation.NavigationView;
 import com.viewpagerindicator.CirclePageIndicator;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.delete.DeleteHelper;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -32,14 +31,12 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import javax.inject.Inject;
 
-public class ReviewActivity extends NavigationBaseActivity {
+public class ReviewActivity extends BaseActivity {
 
     @BindView(R.id.pager_indicator_review)
     public CirclePageIndicator pagerIndicator;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.navigation_view)
-    NavigationView navigationView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
     @BindView(R.id.view_pager_review)
@@ -95,8 +92,7 @@ public class ReviewActivity extends NavigationBaseActivity {
         setContentView(R.layout.activity_review);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        initDrawer();
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         reviewController = new ReviewController(deleteHelper, this);
 
@@ -130,6 +126,12 @@ public class ReviewActivity extends NavigationBaseActivity {
             }
             return false;
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @SuppressLint("CheckResult")

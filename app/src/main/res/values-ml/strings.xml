@@ -84,7 +84,7 @@
   <string name="display_list_button">പട്ടിക</string>
   <string name="gps_disabled">താങ്കളുടെ ഉപകരണത്തിൽ ജി.പി.എസ്. പ്രവർത്തനരഹിതമാണ്. അത് പ്രവർത്തനസജ്ജമാക്കണോ?</string>
   <string name="enable_gps">ജി.പി.എസ്. സജ്ജമാക്കുക</string>
-  <string name="contributions_subtitle_zero">ഇതുവരെ അപ്‌ലോഡുകൾ ഒന്നുമില്ല</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">ഇതുവരെ അപ്‌ലോഡുകൾ ഒന്നുമില്ല</string>
   <string name="categories_not_found">%1$s എന്നതുമായി പൊരുത്തമുള്ള ഒരു വർഗ്ഗവും കണ്ടെത്താനായില്ല</string>
   <string name="categories_skip_explanation">താങ്കളുടെ ചിത്രങ്ങൾ വിക്കിമീഡിയ കോമൺസിൽ കൂടുതൽ എളുപ്പത്തിൽ കണ്ടെത്തപ്പെടാനായി വർഗ്ഗങ്ങൾ ചേർക്കുക.\n\nവർഗ്ഗങ്ങൾ ചേർക്കാനായി ടൈപ്പ് ചെയ്ത് തുടങ്ങുക.\nഈ ഘട്ടം ഒഴിവാക്കാൻ ടാപ് ചെയ്യുക (അല്ലെങ്കിൽ പിന്നോട്ട് പോവുക).</string>
   <string name="categories_activity_title">വർഗ്ഗങ്ങൾ</string>

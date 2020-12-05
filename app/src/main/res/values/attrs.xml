@@ -34,7 +34,20 @@
     <attr name="mediaDetailSpacerColor" format="reference" />
     <attr name="icon" format="reference"/>
     <attr name="aboutIconsColor" format="reference"/>
-    
+    <attr name="nav_tab_item_color_state" format="reference" />
+    <attr name="toolbar_text_color" format="reference"/>
+    <attr name="navbar_item_text_color" format="reference"/>
+    <attr name="nav_bar_background" format="reference"/>
+    <attr name="more_bottom_sheet_style" format="reference"/>
+    <attr name="more_bottom_sheet_drawable_color" format="reference"/>
+    <attr name="card_item_color" format="reference"/>
+    <attr name="notification_icon_drawable" format="reference"/>
+    <attr name="notification_icon_text_color" format="reference"/>
+    <attr name="toggle_theme" format="reference"/>
+    <attr name="contributionsListTextSecondary" format="reference"/>
+    <attr name="contributionsListTextPrimary" format="reference"/>
+    <attr name="menu_item_tint" format="reference"/>
+
     <declare-styleable name="Badge">
         <attr name="boundary" format="color"/>
         <attr name="camera" format="color"/>
