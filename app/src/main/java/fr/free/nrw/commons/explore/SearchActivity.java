@@ -249,13 +249,28 @@ public class SearchActivity extends NavigationBaseActivity
             tabLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.VISIBLE);
             mediaContainer.setVisibility(View.GONE);
-            setNavigationBaseToolbarVisibility(false);
         } else {
             toolbar.setVisibility(View.GONE);
-            setNavigationBaseToolbarVisibility(true);
         }
-        //super.onBackPressed();
         manageFragement();
+    }
+
+    /**
+     * This method is called on click of a recent search to update query in SearchView.
+     * @param query Recent Search Query
+     */
+    public void updateText(String query) {
+        searchView.setQuery(query, true);
+        // Clear focus of searchView now. searchView.clearFocus(); does not seem to work Check the below link for more details.
+        // https://stackoverflow.com/questions/6117967/how-to-remove-focus-without-setting-focus-to-another-control/15481511
+        viewPager.requestFocus();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //Dispose the disposables when the activity is destroyed
+        compositeDisposable.dispose();
     }
 
     private void manageFragement() {
@@ -279,21 +294,4 @@ public class SearchActivity extends NavigationBaseActivity
         }
     }
 
-    /**
-     * This method is called on click of a recent search to update query in SearchView.
-     *
-     * @param query Recent Search Query
-     */
-    public void updateText(String query) {
-        searchView.setQuery(query, true);
-        // Clear focus of searchView now. searchView.clearFocus(); does not seem to work Check the below link for more details.
-        // https://stackoverflow.com/questions/6117967/how-to-remove-focus-without-setting-focus-to-another-control/15481511
-        viewPager.requestFocus();
-    }
-
-    @Override protected void onDestroy() {
-        super.onDestroy();
-        //Dispose the disposables when the activity is destroyed
-        compositeDisposable.dispose();
-    }
 }
