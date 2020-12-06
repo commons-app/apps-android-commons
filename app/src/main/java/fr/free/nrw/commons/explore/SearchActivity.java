@@ -68,6 +68,7 @@ public class SearchActivity extends BaseActivity
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
         setTitle(getString(R.string.title_activity_search));
+        setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v->onBackPressed());
         supportFragmentManager = getSupportFragmentManager();
         setSearchHistoryFragment();
@@ -198,10 +199,10 @@ public class SearchActivity extends BaseActivity
     @Override
     public void onMediaClicked(int index) {
         ViewUtil.hideKeyboard(this.findViewById(R.id.searchBox));
-        toolbar.setVisibility(View.GONE);
         tabLayout.setVisibility(View.GONE);
         viewPager.setVisibility(View.GONE);
         mediaContainer.setVisibility(View.VISIBLE);
+        searchView.setVisibility(View.GONE);// to remove searchview when mediaDetails fragment open
         if (mediaDetails == null || !mediaDetails.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
             mediaDetails = new MediaDetailPagerFragment(false, true);
@@ -243,7 +244,7 @@ public class SearchActivity extends BaseActivity
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() == 1){
             // back to search so show search toolbar and hide navigation toolbar
-            toolbar.setVisibility(View.VISIBLE);
+            searchView.setVisibility(View.VISIBLE);//set the searchview
             tabLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.VISIBLE);
             mediaContainer.setVisibility(View.GONE);
