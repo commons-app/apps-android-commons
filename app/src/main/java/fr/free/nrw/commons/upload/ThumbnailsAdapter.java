@@ -87,7 +87,6 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
             UploadableFile uploadableFile = uploadableFiles.get(position);
             Uri uri = uploadableFile.getMediaUri();
             background.setImageURI(Uri.fromFile(new File(String.valueOf(uri))));
-
             if (position == callback.getCurrentSelectedFilePosition()) {
                 GradientDrawable border = new GradientDrawable();
                 border.setShape(GradientDrawable.RECTANGLE);
@@ -95,7 +94,7 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
                 rlContainer.setEnabled(true);
                 rlContainer.setClickable(true);
                 rlContainer.setAlpha(1.0f);
-                rlContainer.setForeground(border);
+                rlContainer.setBackground(border);
                 if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
                     rlContainer.setElevation(10);
                 }
@@ -103,7 +102,7 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
                 rlContainer.setEnabled(false);
                 rlContainer.setClickable(false);
                 rlContainer.setAlpha(0.7f);
-                rlContainer.setForeground(null);
+                rlContainer.setBackground(null);
                 if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
                     rlContainer.setElevation(0);
                 }
