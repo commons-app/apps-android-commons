@@ -237,8 +237,16 @@ public class MainActivity  extends BaseActivity
     @Override
     public void onBackPressed() {
         if (contributionsFragment != null && activeFragment == ActiveFragment.CONTRIBUTIONS) {
-            // Meas that contribution fragment is visible
-            contributionsFragment.backButtonClicked();
+            //  Means that contributions fragment is visible
+           if (ContributionsFragment.mediaDetailPagerFragment==null) { //means you open the app currently and not open mediaDetailPage fragment
+               super.onBackPressed();
+           } else if (ContributionsFragment.mediaDetailPagerFragment!=null) {
+             if(!ContributionsFragment.mediaDetailPagerFragment.isVisible()){  //mean you are at contributions fragement
+                 super.onBackPressed();
+             } else {  //mean you are at mediaDetailPager Fragment
+                 contributionsFragment.backButtonClicked();
+             }
+           }
         } else if (nearbyParentFragment != null && activeFragment == ActiveFragment.NEARBY) {
             // Means that nearby fragment is visible
             nearbyParentFragment.backButtonClicked();

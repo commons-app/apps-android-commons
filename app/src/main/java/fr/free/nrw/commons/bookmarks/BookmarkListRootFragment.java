@@ -172,15 +172,21 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
   }
 
   public void backPressed() {
-    if (mediaDetails.isVisible()) {
-      // todo add get list fragment
-      ((BookmarkFragment)getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
-      removeFragment(mediaDetails);
-      setFragment(listFragment, mediaDetails);
-      ((MainActivity)getActivity()).showTabs();
+    //check medaiDetailPage fragment is not null then we check medaiDetail.is Visible or not to avoid NullPointerException
+    if (mediaDetails != null) {
+       if (mediaDetails.isVisible()) {
+        // todo add get list fragment
+        ((BookmarkFragment) getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
+        removeFragment(mediaDetails);
+        setFragment(listFragment, mediaDetails);
+        ((MainActivity) getActivity()).showTabs();
+       } else {
+        ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
+        ((MainActivity) getActivity()).showTabs();
+       }
     } else {
       ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
-      ((MainActivity)getActivity()).showTabs();
+      ((MainActivity) getActivity()).showTabs();
     }
   }
 
