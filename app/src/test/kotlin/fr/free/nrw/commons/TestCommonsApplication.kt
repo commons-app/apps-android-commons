@@ -6,7 +6,6 @@ import android.content.Context
 import androidx.collection.LruCache
 import com.google.gson.Gson
 import com.nhaarman.mockitokotlin2.mock
-import com.squareup.leakcanary.RefWatcher
 import fr.free.nrw.commons.auth.AccountUtil
 import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.CommonsApplicationComponent
@@ -54,8 +53,6 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
     override fun provideContributionContentProviderClient(context: Context?): ContentProviderClient = contributionClient
 
     override fun provideModificationContentProviderClient(context: Context?): ContentProviderClient = modificationClient
-
-    override fun providesAccountUtil(context: Context): AccountUtil = accountUtil
 
     override fun providesDefaultKvStore(context: Context, gson: Gson): JsonKvStore = defaultSharedPreferences
 
