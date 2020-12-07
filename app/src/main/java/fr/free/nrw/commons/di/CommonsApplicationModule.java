@@ -99,11 +99,6 @@ public class CommonsApplicationModule {
         return byName;
     }
 
-    @Provides
-    public AccountUtil providesAccountUtil(Context context) {
-        return new AccountUtil();
-    }
-
     /**
      * Provides an instance of CategoryContentProviderClient i.e. the categories
      * that are there in local storage
