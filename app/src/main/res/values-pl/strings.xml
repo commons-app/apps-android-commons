@@ -674,7 +674,7 @@
   <string name="leaderboard_weekly">Tygodniowo</string>
   <string name="leaderboard_all_time">Całość</string>
   <string name="leaderboard_nearby">W pobliżu</string>
-  <string name="mapbox_telemetry">Wypisz się z telemetrii</string>
+  <string name="mapbox_telemetry" fuzzy="true">Wypisz się z telemetrii</string>
   <string name="telemetry_opt_out_summary">Wysyłaj anonimowe dane o lokalizacji i wykorzystywaniu danych do Mapboxa, gdy używasz funkcji „W pobliżu”</string>
   <string name="statistics_quality">Obrazy wysokiej jakości</string>
   <string name="quality_images_info">Obrazy wysokiej jakości to diagramy lub fotografie, które spełniają określone standardy dotyczące jakości (które w większości są ściśle techniczne) i są wartościowymi materiałami dla projektów Wikimedii.</string>

@@ -116,7 +116,7 @@
   <string name="display_list_button">Seznam</string>
   <string name="gps_disabled">GPS ve vašem zařízení není povoleno. Chtěli byste ho spustit?</string>
   <string name="enable_gps">Spustit GPS</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Žádné nahrané soubory</string>
+  <string name="contributions_subtitle_zero">(Žádné nahrané soubory)</string>
   <string name="categories_not_found">Žádné kategorie neodpovídají „%1$s“</string>
   <string name="categories_skip_explanation">Přidejte kategorie, aby bylo vaše obrázky možno na Wikimedia Commons najít.</string>
   <string name="categories_activity_title">Kategorie</string>

@@ -382,5 +382,5 @@
   <string name="leaderboard_nearby">Nezdı ra</string>
   <string name="leaderboard_used">Gureyniyaye</string>
   <string name="leaderboard_my_rank_button_text">Rêza mı</string>
-  <string name="mapbox_telemetry">Telemetreyi Devre ra vece</string>
+  <string name="mapbox_telemetry" fuzzy="true">Telemetreyi Devre ra vece</string>
 </resources>

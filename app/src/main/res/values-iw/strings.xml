@@ -26,9 +26,10 @@
     <item quantity="many">מועלים %1$d קבצים</item>
     <item quantity="other">מועלים %1$d קבצים</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
+    <item quantity="two">(%1$d)</item>
+    <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">ההעלאות מתחילות</string>
@@ -129,7 +130,7 @@
   <string name="display_list_button">רשימה</string>
   <string name="gps_disabled">ה־GPS במכשיר שלך אינו מופעל. האם להפעיל אותו?</string>
   <string name="enable_gps">הפעלת GPS</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">לא הועלה עדיין שום דבר</string>
+  <string name="contributions_subtitle_zero">(לא הועלה עדיין שום דבר)</string>
   <string name="categories_not_found">לא נמצאו קטגוריות בשם %1$s</string>
   <string name="depictions_not_found">לא נמצאו פריטי ויקינתונים שמתאימים לחיפוש %1$s</string>
   <string name="no_child_classes">ל%1$s אין מחלקות יורשות</string>
@@ -304,8 +305,8 @@
   <string name="upload_problem_image">נמצאו בעיות בתמונה</string>
   <string name="internet_downloaded">נא להעלות רק תמונות שצילמת בעצמך. לא להעלות תמונות שהורדת מהאינטרנט.</string>
   <string name="give_permission">לתת הרשאה</string>
-  <string name="use_external_storage" fuzzy="true">להשתמש באחסון חיצוני</string>
-  <string name="use_external_storage_summary" fuzzy="true">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום במכשיר שלך</string>
+  <string name="use_external_storage">שמירת צילומים מתוך היישומון</string>
+  <string name="use_external_storage_summary">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום לאחסון של המכשיר שלך</string>
   <string name="login_to_your_account">כניסה לחשבון שלך</string>
   <string name="send_log_file">שליחת קובץ יומן</string>
   <string name="send_log_file_description">שליחת קובץ יומן למפתחים בדואר אלקטרוני כדי לחפש בעיות עם היישום. לתשומת לבך: יומנים יכולים להכיל מידע מזהה</string>
@@ -441,18 +442,18 @@
   <string name="notifications">התראות</string>
   <string name="read_notifications">התראות (שנקראו)</string>
   <string name="display_nearby_notification">הצגת התראות סמוכות</string>
-  <string name="display_nearby_notification_summary" fuzzy="true">יש לגעת כאן כדי לצפות במקום הקרוב ביותר שדורש תמונות</string>
+  <string name="display_nearby_notification_summary">הצגת התראות בתוך היישומון כדי לצפות במקום הקרוב ביותר שדורש תמונות</string>
   <string name="no_close_nearby">לא נמצאו מקומות בסביבתך</string>
   <string name="list_sheet">רשימה</string>
   <string name="storage_permission">הרשאת אחסון</string>
   <string name="write_storage_permission_rationale_for_image_share">אנחנו זקוקים להרשאה שלך לגשת לאחסון חיצוני במכשיר שלך כדי להעלות תמונות.</string>
   <string name="nearby_notification_dismiss_message">לא יופיעו עוד בפניך מקומות בסביבה שדורשים צילום. עם זאת, ניתן להפעיל התראה זו מחדש דרך ההגדרות במידת הצורך.</string>
-  <string name="step_count" fuzzy="true">שלב %1$d מתוך %2$d</string>
+  <string name="step_count">שלב %1$d מתוך %2$d:‏ %3$s</string>
   <string name="image_in_set_label">תמונה %1$d בסדרה</string>
   <string name="next">הבאה</string>
   <string name="previous">הקודמת</string>
   <string name="submit">שליחה</string>
-  <string name="upload_title_duplicate" fuzzy="true">כבר קיים קובץ בשם %1$s. להמשיך?</string>
+  <string name="upload_title_duplicate">כבר קיים קובץ בשם %1$s. להמשיך?\n\nלתשומת לבך: לשם הקובץ תווסף סיומת מתאימה אוטומטית.</string>
   <string name="map_application_missing">לא נמצא יישום מפה תואם במכשיר שלך. נא להתקין יישום מפה כדי להשתמש בתכונה זו.</string>
   <string name="navigation_item_bookmarks">סימניות</string>
   <string name="title_activity_bookmarks">סימניות</string>
@@ -676,7 +677,7 @@
   <string name="leaderboard_upload">העלאה</string>
   <string name="leaderboard_nearby">בסביבה</string>
   <string name="leaderboard_my_rank_button_text">הדירוג שלי</string>
-  <string name="mapbox_telemetry">להפסיק מדידה טלמטרית</string>
+  <string name="mapbox_telemetry">מדידה טלמטרית של Mapbox</string>
   <string name="telemetry_opt_out_summary">לשלוח מיקום ונתוני שימוש אלמוניים ל־Mapbox בעת שימוש בתכונה „בסביבה”</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;שיפור המפה הזו&lt;/a&gt;</string>
   <string name="limited_connection_enabled">מופעל מצב חיבור מוגבל!</string>
@@ -686,4 +687,7 @@
   <string name="quality_images_info">תמונות איכות הן תרשימים או תמונות שעומדות בתקני איכות מסוימים (שמטבעם בעיקר טכניים) והן בעלות ערך למיזמי ויקימדיה</string>
   <string name="resuming_upload">ההעלאה ממשיכה…</string>
   <string name="pausing_upload">ההעלאה מושהית…</string>
+  <string name="license_tooltip">ויקישיתוף הופך את התמונות שלך לזמינות לשימוש חוזר ולהתאמה על ידי כל אחד. בא לך לוותר על כל הזכויות? שייחסו את היצירה אליך? שההתאמות ישתמשו באותו הרישיון?</string>
+  <string name="license_step_title">רישיון מדיה</string>
+  <string name="media_detail_step_title">פרטי מדיה</string>
 </resources>
