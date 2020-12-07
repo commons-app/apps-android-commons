@@ -136,6 +136,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     contributionsListPresenter.setup();
     contributionsListPresenter.contributionList.observe(this.getViewLifecycleOwner(), adapter::submitList);
     rvContributionsList.setAdapter(adapter);
+    adapter.setHasStableIds(true);
     adapter.registerAdapterDataObserver(new AdapterDataObserver() {
       @Override
       public void onItemRangeInserted(int positionStart, int itemCount) {
