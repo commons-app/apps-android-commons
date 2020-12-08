@@ -97,7 +97,7 @@ public class ContributionsFragment
 
     private ContributionsListFragment contributionsListFragment;
     private static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
-    static MediaDetailPagerFragment mediaDetailPagerFragment;
+    static  MediaDetailPagerFragment mediaDetailPagerFragment;
     static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
 
     @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;

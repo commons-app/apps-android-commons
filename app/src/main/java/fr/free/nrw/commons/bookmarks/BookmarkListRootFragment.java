@@ -181,12 +181,10 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
         setFragment(listFragment, mediaDetails);
         ((MainActivity) getActivity()).showTabs();
        } else {
-        ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
-        ((MainActivity) getActivity()).showTabs();
+        moveToContributionsFragment();
        }
     } else {
-      ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
-      ((MainActivity) getActivity()).showTabs();
+        moveToContributionsFragment();
     }
   }
 
@@ -204,4 +202,10 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
   public void onBackStackChanged() {
 
   }
+
+  void moveToContributionsFragment(){
+    ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
+    ((MainActivity) getActivity()).showTabs();
+  }
+
 }
