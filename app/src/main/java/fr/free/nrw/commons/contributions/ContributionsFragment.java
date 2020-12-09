@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -102,6 +103,7 @@ public class ContributionsFragment
 
     @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
     @BindView(R.id.campaigns_view) CampaignView campaignView;
+    @BindView(R.id.limited_connection_enabled_layout) LinearLayout limitedConnectionEnabledLayout;
 
     @Inject ContributionsPresenter contributionsPresenter;
 
@@ -236,14 +238,22 @@ public class ContributionsFragment
             .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
 
         checkable.setChecked(isEnabled);
-        /*final SwitchCompat switchToggleLimitedConnectionMode = checkable.getActionView()
-            .findViewById(R.id.switch_toggle_limited_connection_mode);*/
+        if (isEnabled) {
+            limitedConnectionEnabledLayout.setVisibility(View.VISIBLE);
+        } else {
+            limitedConnectionEnabledLayout.setVisibility(View.GONE);
+        }
         checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
         checkable.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 ((MainActivity) getActivity()).toggleLimitedConnectionMode();
                 boolean isEnabled = store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
+                if (isEnabled) {
+                    limitedConnectionEnabledLayout.setVisibility(View.VISIBLE);
+                } else {
+                    limitedConnectionEnabledLayout.setVisibility(View.GONE);
+                }
                 checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
                 return false;
             }
