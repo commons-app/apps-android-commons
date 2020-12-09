@@ -78,4 +78,6 @@
     <color name="nav_tab_icon_unselected_color">#61000000</color>
     <color name="card_light_grey">#EDEDED</color>
 
+    <color name="wikimedia_green">#339966</color>
+
 </resources>
