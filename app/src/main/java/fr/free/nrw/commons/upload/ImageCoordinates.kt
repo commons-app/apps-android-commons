@@ -44,9 +44,6 @@ class ImageCoordinates internal constructor(exif: ExifInterface?) {
                 val longitude = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE)
                 val longitudeRef = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF)
                 if (latitude != null && longitude != null && latitudeRef != null && longitudeRef != null) {
-                    //If image has EXIF data, extract image coords
-                    imageCoordsExists = true
-                    Timber.d("EXIF data has location info")
                     decLatitude =
                         if (ExifInterface.LATITUDE_NORTH == latitudeRef) convertToDegree(latitude)
                         else 0 - convertToDegree(latitude)
@@ -57,6 +54,9 @@ class ImageCoordinates internal constructor(exif: ExifInterface?) {
             }
             if (!(decLatitude == 0.0 && decLongitude == 0.0)) {
                 decimalCoords = "$decLatitude|$decLongitude"
+                //If image has EXIF data, extract image coords
+                imageCoordsExists = true
+                Timber.d("EXIF data has location info")
             }
         }
     }
