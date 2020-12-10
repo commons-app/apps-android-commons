@@ -4,6 +4,7 @@
 * Aefgh39622
 * B20180
 * Horus
+* Just Sayori
 * Korrawit
 * Nitisart Jungtrakungrat
 * Octahedron80
@@ -59,6 +60,7 @@
   <string name="upload_progress_notification_title_finishing">กำลังเสร็จสิ้นการอัปโหลด %1$s</string>
   <string name="upload_failed_notification_title">การอัปโหลด %1$s ล้มเหลว</string>
   <string name="upload_failed_notification_subtitle">แตะเพื่อดู</string>
+  <string name="upload_paused_notification_subtitle">แตะเพื่อดู</string>
   <string name="title_activity_contributions">การอัปโหลดล่าสุดของฉัน</string>
   <string name="contribution_state_queued">อยู่ในคิว</string>
   <string name="contribution_state_failed">ล้มเหลว</string>
@@ -72,6 +74,7 @@
   <string name="menu_open_in_browser">ดูในเบราว์เซอร์</string>
   <string name="share_title_hint">คำบรรยาย (จำเป็น)</string>
   <string name="share_description_hint">คำอธิบาย</string>
+  <string name="share_caption_hint">คำอธิบายภาพ (จำกัดที่ 255 อักขระ)</string>
   <string name="login_failed_network">ไม่สามารถเข้าสู่ระบบได้ - ความล้มเหลวของเครือข่าย</string>
   <string name="login_failed_wrong_credentials">เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบชื่อผู้ใช้และรหัสผ้านและลองอีกครั้ง</string>
   <string name="login_failed_throttled">จำนวนครั้งที่พยายามไม่สำเร็จมากเกินไป กรุณาลองอีกครั้งในอีกสักครู่</string>
@@ -162,6 +165,7 @@
   <string name="detail_panel_cats_label">หมวดหมู่</string>
   <string name="detail_panel_cats_loading">กำลังโหลด…</string>
   <string name="detail_panel_cats_none">ไม่ได้เลือกไว้</string>
+  <string name="detail_caption_empty">ไม่มีคำบรรยายภาพ</string>
   <string name="detail_description_empty">ไม่มีคำอธิบาย</string>
   <string name="detail_discussion_empty">ไม่มีการพูดคุยที่เกี่ยวกับภาพนี้</string>
   <string name="detail_license_empty">สัญญาอนุญาตที่ไม่รู้จัก</string>

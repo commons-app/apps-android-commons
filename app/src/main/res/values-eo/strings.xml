@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Abijeet Patro
+* Javiero
 * Metraduk
 * Mirin
 * Robin van der Vliet
@@ -539,4 +540,5 @@
   <string name="delete_helper_ask_reason_copyright_logo">Emblemo</string>
   <string name="delete_helper_ask_reason_copyright_other">Alia</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Ĉar ĝi estas</string>
+  <string name="mapbox_telemetry">Mapbox Telemetry</string>
 </resources>
