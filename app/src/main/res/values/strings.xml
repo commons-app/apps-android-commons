@@ -701,7 +701,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="quality_images_info">Quality images are diagrams or photographs that meet certain quality standards (which are mostly technical in nature) and are valuable for Wikimedia projects</string>
   <string name="resuming_upload">Resuming upload…</string>
   <string name="pausing_upload">Pausing upload…</string>
-  <string name="limited_connection_explanation">You have enabled limited connection mode. Thus, your uploads will be pended until you disabled this mode. Once you have disabled the limited connection mode, pending uploads will resume</string>
+  <string name="limited_connection_explanation">You have enabled limited connection mode. All uploads are paused and will resume once you disable this mode.</string>
   <string name="limited_connection_is_on">Limited connection mode is on.</string>
 
   <string name="media_details_tooltip">Please write a short caption that says what your picture shows. In the description, say what makes the picture interesting or typical or rare, and explain the context, visible or not. Use exact terminology as much as you can.</string>
