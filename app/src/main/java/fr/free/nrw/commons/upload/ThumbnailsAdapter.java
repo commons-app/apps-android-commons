@@ -90,7 +90,7 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
             if (position == callback.getCurrentSelectedFilePosition()) {
                 GradientDrawable border = new GradientDrawable();
                 border.setShape(GradientDrawable.RECTANGLE);
-                border.setStroke(10, context.getResources().getColor(R.color.primaryColor));
+                border.setStroke(8, context.getResources().getColor(R.color.primaryColor));
                 rlContainer.setEnabled(true);
                 rlContainer.setClickable(true);
                 rlContainer.setAlpha(1.0f);
