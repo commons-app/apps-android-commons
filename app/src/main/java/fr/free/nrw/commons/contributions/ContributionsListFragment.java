@@ -23,6 +23,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
+import androidx.recyclerview.widget.RecyclerView.ItemAnimator;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -133,6 +135,13 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     final GridLayoutManager layoutManager = new GridLayoutManager(getContext(),
         getSpanCount(getResources().getConfiguration().orientation));
     rvContributionsList.setLayoutManager(layoutManager);
+
+    //Setting flicker animation of recycler view to false.
+    final ItemAnimator animator = rvContributionsList.getItemAnimator();
+    if (animator instanceof SimpleItemAnimator) {
+      ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
+    }
+
     contributionsListPresenter.setup();
     contributionsListPresenter.contributionList.observe(this.getViewLifecycleOwner(), adapter::submitList);
     rvContributionsList.setAdapter(adapter);

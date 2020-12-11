@@ -69,6 +69,9 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     titleView.setText(contribution.getMedia().getMostRelevantCaption());
     authorView.setText(contribution.getMedia().getAuthor());
 
+    //Removes flicker of loading image.
+    imageView.getHierarchy().setFadeDuration(0);
+
     imageView.getHierarchy().setPlaceholderImage(R.drawable.image_placeholder);
     imageView.getHierarchy().setFailureImage(R.drawable.image_placeholder);
 
