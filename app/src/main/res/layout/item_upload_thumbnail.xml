@@ -13,6 +13,7 @@
     android:id="@+id/iv_thumbnail"
     android:layout_width="@dimen/big_height"
     android:layout_height="@dimen/big_height"
+    android:padding="8px"
     fresco:actualImageScaleType="fitCenter"/>
 
   <ImageView
