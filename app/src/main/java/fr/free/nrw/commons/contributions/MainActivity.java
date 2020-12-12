@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -293,7 +294,15 @@ public class MainActivity  extends BaseActivity
 
     public void centerMapToPlace(Place place) {
         setSelectedItemId(NavTab.NEARBY.code());
-        nearbyParentFragment.centerMapToPlace(place);
+     //   addd the postDelayed function so that before call the nearbyParentFragment.centerMapToplace(). nearbyParentFragment
+//      initialise complete so that it so that it dooes give any Nullpointer exception when we nearbyParentFragment.centerMapToplace() is called
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                nearbyParentFragment.centerMapToPlace(place);
+            }
+        },1000);
     }
 
     @Override
