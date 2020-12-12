@@ -211,7 +211,6 @@ public class SearchActivity extends BaseActivity
                     .beginTransaction()
                     .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
                     .add(R.id.mediaContainer, mediaDetails)
-                    .addToBackStack(null)
                     .commit();
             // Reason for using hide, add instead of replace is to maintain scroll position after
             // coming back to the search activity. See https://github.com/commons-app/apps-android-commons/issues/1631
@@ -242,18 +241,25 @@ public class SearchActivity extends BaseActivity
      */
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() == 1){
-            // back to search so show search toolbar and hide navigation toolbar
+        //according to first condition mediaDetailFragemnt is opened and then backButton is pressed then open the ViewPager
+        //according to second condtion Viewpager is open and then backButton is pressed then open the recentSearchesFragment
+        // according to thrid condion  recentSearchesFragment is opened and then backButton is pressed then open exploreActivity opened
+        if (mediaContainer.isShown() && viewPager.isShown() == false) {
+            getSupportFragmentManager().beginTransaction().remove(mediaDetails).commit();
             searchView.setVisibility(View.VISIBLE);//set the searchview
             tabLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.VISIBLE);
             mediaContainer.setVisibility(View.GONE);
-        }else {
-            toolbar.setVisibility(View.GONE);
+        } else if (viewPager.isShown()) {
+            viewPager.setVisibility(View.GONE);
+            tabLayout.setVisibility(View.GONE);
+            setSearchHistoryFragment();
+            searchView.setQuery("", false);
+            searchHistoryContainer.setVisibility(View.VISIBLE);
+        } else {
+            super.onBackPressed();
         }
-        super.onBackPressed();
     }
-
     /**
      * This method is called on click of a recent search to update query in SearchView.
      * @param query Recent Search Query
