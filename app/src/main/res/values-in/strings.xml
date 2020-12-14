@@ -17,7 +17,7 @@
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="other">mengunggah %1$d berkas</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Memulai Unggahan</string>
@@ -103,11 +103,12 @@
   <string name="display_list_button">Daftar</string>
   <string name="gps_disabled">GPS dimatikan di peranti Anda. Apakah Anda mau menghidupkannya?</string>
   <string name="enable_gps">Hidupkan GPS</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Belum ada unggahan</string>
+  <string name="contributions_subtitle_zero">(Belum ada unggahan)</string>
   <string name="categories_not_found">Tidak ada kategori yang cocok dengan %1$s</string>
   <string name="depictions_not_found">Tidak ada butir Wikidata yang sesuai %1$s ditemukan</string>
   <string name="no_child_classes">%1$s tidak memiliki kelas turunan</string>
   <string name="no_parent_classes">%1$s tidak memiliki kelas utama</string>
+  <string name="depictions_image_not_found">Tidak Ada Gambar untuk Penggambaran</string>
   <string name="categories_skip_explanation">Tambahkan kategori agar foto Anda lebih mudah ditemukan di Wikimedia Commons.\n\nMulai mengetik untuk menambahkan kategori.</string>
   <string name="categories_activity_title">Kategori</string>
   <string name="title_activity_settings">Pengaturan</string>
@@ -452,6 +453,8 @@
   <string name="desc_language_Pacific">Pasifik</string>
   <string name="no_categories_selected">Tidak ada Kategori yang Dipilih</string>
   <string name="no_categories_selected_warning_desc">Gambar tanpa kategori jarang dapat digunakan. Apakah Anda yakin ingin mengirim tanpa memilih kategori?</string>
+  <string name="no_depictions_selected">Tidak Ada Penggambaran yang Dipilih</string>
+  <string name="no_depictions_selected_warning_desc">Gambar yang punya penggambaran lebih mudah ditemukan dan kemungkinan lebih banyak digunakan. Apakah Anda yakin Anda ingin melanjurkan tanpa memilih penggambaran?</string>
   <string name="upload_flow_all_images_in_set">(Untuk semua gambar dalam set)</string>
   <string name="search_this_area">Cari area ini</string>
   <string name="nearby_card_permission_title">Permintaan Izin</string>
@@ -459,15 +462,50 @@
   <string name="unable_to_display_nearest_place">Tidak dapat menampilkan tempat terdekat yang membutuhkan gambar tanpa izin lokasi</string>
   <string name="never_ask_again">Jangan pernah menanyakan ini lagi</string>
   <string name="display_location_permission_title">Tampilkan izin lokasi</string>
+  <string name="display_location_permission_explanation">Minta izin lokasi ketika diperlukan untuk fitur tampilan kartu pemberitahuan sekitar.</string>
+  <string name="achievements_fetch_failed">Terjadi kesalahan. Kami tidak dapat mengambil pencapaian Anda</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">Anda telah membuat begitu banyak kontribusi sehingga sistem perhitungan pencapaian kami tidak dapat menanggulanginya. Ini adalah pencapaian yang tertinggi.</string>
+  <string name="ends_on">Berakhir pada:</string>
   <string name="display_campaigns">Sinahang penyobyahan</string>
+  <string name="display_campaigns_explanation">Lihat kampanye yang sedang berlangsung</string>
+  <string name="nearby_campaign_dismiss_message">Anda tidak akan melihat kampanye ini lagi. Namun, Anda bisa mengaktifkan kembali pemberitahuan ini di Pengaturan jika diinginkan.</string>
+  <string name="this_function_needs_network_connection">Fungsi ini membutuhkan hubungan jaringan, tolong periksa pengaturan jaringan Anda.</string>
   <string name="bad_token_error_proposed_solution">Unggahan gagal karena masalah pada token penyuntingan. Coba keluar log dan masuk log lagi.</string>
   <string name="error_processing_image">Terjadi masalah saat memproses gambar. Harap mengulang lagi.</string>
+  <string name="getting_edit_token">Dapatkan token untuk menyunting</string>
+  <string name="check_category_adding_template">Menambahkan templat untuk pemeriksaan kategori</string>
+  <string name="check_category_notification_title">Meminta pemeriksaan kategori untuk %1$s</string>
+  <string name="check_category_edit_summary">Meminta pemeriksaan kategori</string>
+  <string name="check_category_success_title">Pemeriksaan kategori diminta</string>
+  <string name="check_category_failure_title">Permintaan pemeriksaan kategori tidak bekerja</string>
+  <string name="check_category_success_message">Telah meminta pemeriksaan kategori untuk %1$s</string>
+  <string name="check_category_failure_message">Tidak bisa meminta pemeriksaan kategori untuk %1$s</string>
+  <string name="check_category_toast">Meminta pemeriksaan kategori untuk %1$s</string>
+  <string name="nominate_for_deletion_edit_file_page">Menambahkan pesan penghapusan ke berkas</string>
   <string name="nominate_for_deletion_done">Selesai</string>
   <string name="nominate_for_deletion_notify_user">Beritahu Pengguna di halaman Pembicaraan</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">Menambahkan berkas ke catatan permintaan penghapusan</string>
+  <string name="nominate_for_deletion_create_deletion_request">Membuat subhalaman permintaan penghapusan</string>
+  <string name="notsure">Tidak yakin</string>
+  <string name="send_thank_success_title">Mengirimkan Terima Kasih: Berhasil</string>
+  <string name="send_thank_success_message">Berhasil mengirimkan terima kasih kepada %1$s</string>
+  <string name="send_thank_failure_message">Gagal mengirimkan terima kasih kepada %1$s</string>
+  <string name="send_thank_failure_title">Mengirimkan Terima Kasih: Gagal</string>
+  <string name="send_thank_send">Mengirimkan ucapan terima kasih</string>
+  <string name="send_thank_notification_title">Mengirimkan ucapan terima kasih</string>
+  <string name="send_thank_toast">Mengirimkan Terima Kasih kepada %1$s</string>
+  <string name="review_copyright">Apakah ini memenuhi aturan hak cipta?</string>
+  <string name="review_category">Apakah ini dikategorikan dengan tepat?</string>
+  <string name="review_spam">Apakah ini sesuai dengan cakupan?</string>
+  <string name="review_thanks">Apakah Anda ingin berterima kasih kepada kontributor?</string>
+  <string name="review_spam_explanation">Tekan TIDAK untuk menominasikan gambar ini untuk dihapus apabila gambarnya sama sekali tidak berguna.</string>
+  <string name="review_copyright_explanation">Logo, cuplikan, poster film biasanya adalah pelanggaran hak cipta.\nTekan TIDAK untuk menominasikan gambar ini untuk dihapus</string>
+  <string name="review_thanks_explanation">%1$s akan merasa didorong oleh apresiasi Anda</string>
   <string name="review_no_category">Oh, gambar ini belum pun diberi kategori!</string>
   <string name="review_category_explanation">Gambar ini ada dalam kategori %1$s.</string>
   <string name="review_spam_report_question">Di luar cakupan karena</string>
   <string name="review_c_violation_report_question">Pelanggaran hak cipta karena</string>
+  <string name="review_category_yes_button_text">Tidak, salah kategori</string>
   <string name="review_category_no_button_text">Kelihatan bagus</string>
   <string name="review_spam_yes_button_text">Tidak, di luar cakupan</string>
   <string name="review_spam_no_button_text">Kelihatan bagus</string>
@@ -475,11 +513,14 @@
   <string name="review_copyright_no_button_text">Kelihatan bagus</string>
   <string name="review_thanks_yes_button_text">Ya, mengapa tidak</string>
   <string name="review_thanks_no_button_text">Gambar selanjutnya</string>
+  <string name="skip_image_explanation">Menekan tombol ini akan memberikan Anda gambar lain yang baru diunggah dari Wikimedia Commons</string>
+  <string name="review_image_explanation">Anda dapat meninjau gambar dan meningkatkan kualitas Wikimedia Commons.\n Empat parameter peninjauan adalah: \n - Apakah gambar ini di dalam cakupan? \n - Apakah gambar ini mengikut aturan hak cipta? \n - Apakah gambar ini dikategorikan dengan benar? \n - Jika semuanya berjalan lancar Anda juga bisa berterima kasih kepada kontributor.</string>
   <string name="no_image">Tidak ada gambar digunakan</string>
   <string name="no_image_reverted">Tidak ada gambar dibalikkan</string>
   <string name="no_image_uploaded">Tidak ada gambar diunggah</string>
   <string name="no_notification">Anda tidak memiliki notifikasi belum dibaca</string>
   <string name="no_read_notification">Anda tidak memiliki notifikasi terbaca</string>
+  <string name="share_logs_using">Bagikan log menggunakan</string>
   <string name="menu_option_read">Lihat yang telah dibaca</string>
   <string name="menu_option_unread">Lihat yang belum terbaca</string>
   <string name="error_occurred_in_picking_images">Terjadi kesalahan ketika memilih gambar</string>

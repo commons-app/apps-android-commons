@@ -665,7 +665,7 @@
   <string name="leaderboard_nearby">附近</string>
   <string name="leaderboard_used">已使用</string>
   <string name="leaderboard_my_rank_button_text">我的排名</string>
-  <string name="mapbox_telemetry" fuzzy="true">遙測退出</string>
+  <string name="mapbox_telemetry">Mapbox Telemetry</string>
   <string name="telemetry_opt_out_summary">當使用附近功能時，將匿名位置與使用情況資料發送到 Mapbox</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;改善此地圖&lt;/a&gt;</string>
   <string name="limited_connection_enabled">限制連線模式已啟用！</string>
@@ -675,6 +675,8 @@
   <string name="quality_images_info">品質圖片是符合某些品質標準（本質上大多是技術性方面）的圖表或照片，並且對於維基媒體計劃很有價值</string>
   <string name="resuming_upload">重新開始上傳…</string>
   <string name="pausing_upload">暫停上傳…</string>
+  <string name="limited_connection_explanation">您已啟用限制連線模式。在您停用此模式前，所有上傳將會暫停。</string>
+  <string name="limited_connection_is_on">限制連線模式啟用中。</string>
   <string name="media_details_tooltip">請寫一個簡短說明來描述您的圖片所展示內容。在描述中，請說出是什麼內容讓圖片有趣、典型、或罕見，並解釋來龍去脈（可見或不可見）。另外盡可能使用確切的行話術語。</string>
   <string name="depicts_tooltip">請找出並選擇該圖片所描繪出的所有概念，並盡可能具體。若圖片描繪了多個項目，請依據合理的原因內將項目給全部選擇。如果有可用的特定標籤，就不必選擇通用標籤。</string>
   <string name="categories_tooltip">請選擇適當的分類。與描寫不同，分類僅使用英文。</string>

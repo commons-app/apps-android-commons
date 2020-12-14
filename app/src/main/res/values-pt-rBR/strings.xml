@@ -676,6 +676,8 @@
   <string name="quality_images_info">Imagens de qualidade são diagramas ou fotografias que atendem a certos padrões de qualidade (que são principalmente de natureza técnica) e são valiosos para projetos da Wikimedia</string>
   <string name="resuming_upload">Retomando carregamento…</string>
   <string name="pausing_upload">Pausando carregamento…</string>
+  <string name="limited_connection_explanation">Você habilitou o modo de conexão limitada. Todos os carregamentos são pausados e serão retomados assim que você desativar este modo.</string>
+  <string name="limited_connection_is_on">O modo de conexão limitada está ativado.</string>
   <string name="media_details_tooltip">Escreva uma pequena legenda que diga o que sua imagem mostra. Na descrição, diga o que torna a imagem interessante ou típica ou rara e explique o contexto, visível ou não. Use a terminologia exata tanto quanto você puder.</string>
   <string name="depicts_tooltip">Encontre e selecione todos os conceitos que esta imagem retrata. Seja o mais específico possível. Se a imagem retrata vários itens, escolha todos dentro do razoável. Não escolha tags genéricas se tags mais específicas estiverem disponíveis.</string>
   <string name="categories_tooltip">Selecione as categorias apropriadas. Ao contrário das representações, as categorias estão apenas em inglês.</string>

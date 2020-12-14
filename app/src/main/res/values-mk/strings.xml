@@ -10,8 +10,7 @@
     <item quantity="one">Се подига %1$d податотека</item>
     <item quantity="other">Се подигаат %1$d податотеки</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -103,7 +102,7 @@
   <string name="display_list_button">Список</string>
   <string name="gps_disabled">GPS е исклучен на вашиот уред. Дали сакате да го вклучите?</string>
   <string name="enable_gps">Вклучи GPS</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Сè уште нема подигања</string>
+  <string name="contributions_subtitle_zero">(Сè уште нема подигања)</string>
   <string name="categories_not_found">Нема категории што одговараат на %1$s</string>
   <string name="depictions_not_found">Не најдов предмети од Википодатоците што одговараат на %1$s</string>
   <string name="no_child_classes">%1$s нема зависни класи</string>
@@ -426,7 +425,7 @@
   <string name="next">Следно</string>
   <string name="previous">Претходно</string>
   <string name="submit">Поднеси</string>
-  <string name="upload_title_duplicate" fuzzy="true">Веќе постои податотека со име %1$s. Дали сигурно сакате да продолжите?</string>
+  <string name="upload_title_duplicate">Веќе постои податотека со име %1$s. Дали сигурно сакате да продолжите?\n\nНапомена: На податотечното име автоматски ќе му се додаде соодветна наставка.</string>
   <string name="map_application_missing">Не пронајдов складен картографски прилог на вашиот уред. Преземете еден таков за да можете да ја користите оваа можност.</string>
   <string name="navigation_item_bookmarks">Обележани</string>
   <string name="title_activity_bookmarks">Обележани</string>
@@ -655,7 +654,7 @@
   <string name="leaderboard_nearby">Во близина</string>
   <string name="leaderboard_used">Користено</string>
   <string name="leaderboard_my_rank_button_text">Мој ранг</string>
-  <string name="mapbox_telemetry" fuzzy="true">Откажување од телеметрија</string>
+  <string name="mapbox_telemetry">Телеметрија на Mapbox</string>
   <string name="telemetry_opt_out_summary">Испраќајте анонимизирани податоци за место и употреба на Mapbox кога ја коиристите можноста „Во близина“</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Подобрете ја картава&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Овозможен режимот на ограничена врска.</string>
@@ -665,6 +664,8 @@
   <string name="quality_images_info">Квалитетните слики се дијаграми или фотографии кои задоволуваат извесни стандарди за квалитет (кои се од претежно техничка природа) или имаат вредност за Викимедиините проекти</string>
   <string name="resuming_upload">Продолжувам со подигањето…</string>
   <string name="pausing_upload">Го паузирам подигањето…</string>
+  <string name="limited_connection_explanation">Овозможивте режим на ограничена врска. Сите подигања се времено запреми и ќе продолжат штом ќе го оневозможите овој режим.</string>
+  <string name="limited_connection_is_on">Работи режимот на ограничена врска.</string>
   <string name="media_details_tooltip">Напишете краток опис кој кажува што е прикажано на сликата. Во него образложете зошто сликата е интересна, типична или ретка, и објаснете го контекстот, било да е видлив или не. Користете што поточни поими, секогаш кога можете.</string>
   <string name="depicts_tooltip">Најдете ги и изберете ги сите концепти претставени на сликава. Настојувајте да биде што поуточнето. Ако сликата прикажува повеќе предмети, изберете ги сите, во рамките на разумноста. Не избирајте општи ознаки ако имате на располагање поуточнети.</string>
   <string name="categories_tooltip">Изберете ги прикладните категории. За разлика од приказите, категориите се исклучиво на англиски.</string>

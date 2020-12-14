@@ -15,7 +15,7 @@
     <item quantity="one">%1$d fil laddas upp</item>
     <item quantity="other">%1$d filer laddas upp</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -107,7 +107,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">GPS:en är inaktiverad på denna enhet. Vill du aktivera den?</string>
   <string name="enable_gps">Aktivera GPS</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Inga uppladdningar ännu</string>
+  <string name="contributions_subtitle_zero">(Inga uppladdningar ännu)</string>
   <string name="categories_not_found">Inga kategorier som stämmer överens med %1$s hittades</string>
   <string name="depictions_not_found">Inga Wikidata-objekt som matchar %1$s hittades</string>
   <string name="no_child_classes">%1$s har inga underordnade klasser</string>
@@ -659,16 +659,18 @@
   <string name="leaderboard_nearby">I närheten</string>
   <string name="leaderboard_used">Använd</string>
   <string name="leaderboard_my_rank_button_text">Min rang</string>
-  <string name="mapbox_telemetry" fuzzy="true">Inaktivera telemetri</string>
+  <string name="mapbox_telemetry">Mapbox-telemetri</string>
   <string name="telemetry_opt_out_summary">Skicka anonym plats- och användningsdata till Mapbox när funktionen I närheten används</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Förbättra den här kartan&lt;/a&gt;</string>
-  <string name="limited_connection_enabled">Begränsat anslutningsläge har aktiverats!</string>
+  <string name="limited_connection_enabled">Läget för begränsad anslutning har aktiverats!</string>
   <string name="limited_connection_disabled">Begränsat anslutningsläge har inaktiverats. Väntande uppladdningar kommer nu återupptas.</string>
   <string name="limited_connection">Begränsad anslutning</string>
   <string name="statistics_quality">Kvalitetsbilder</string>
   <string name="quality_images_info">Kvalitetsbilder är diagram eller fotografier som möter vissa kvalitetsstandarder (som är mestadels tekniska) och är värdefulla för Wikimedia-projekt.</string>
   <string name="resuming_upload">Återupptar uppladdning…</string>
   <string name="pausing_upload">Pausar uppladdning…</string>
+  <string name="limited_connection_explanation">Du har aktiverat läget för begränsad anslutning. Alla uppladdningar har pausats och kommer återupptas när du har inaktiverat detta läge.</string>
+  <string name="limited_connection_is_on">Läget för begränsad anslutning är aktiverat.</string>
   <string name="media_details_tooltip">Skriv en kort bildtext som berättar vad din bild skildrar. Berätta i beskrivningen vad som gör bilden intressant, typisk eller sällsynt och beskriv innehållet, vare sig det syns eller inte. Använd så exakta termer som möjligt.</string>
   <string name="depicts_tooltip">Hitta och välj ut alla koncept som denna bild skildrar. Var så specifik som möjligt. Om bilden skildrar flera objekt väljer du alla med förnuft. Välj inte generiska taggar om mer specifika taggar finns tillgängliga.</string>
   <string name="categories_tooltip">Välj lämpliga kategorier. Till skillnad ifrån skildringar är kategorier endast på engelska.</string>

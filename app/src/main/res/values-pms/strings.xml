@@ -8,8 +8,7 @@
     <item quantity="one">%1$d archivi an camin ch\'as caria</item>
     <item quantity="other">%1$d archivi an camin ch\'as cario</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -101,7 +100,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">Ël GPS a l\'é disabilità su sò angign. Veul-lo ativelo?</string>
   <string name="enable_gps">Ativé ël GPS</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Ancor gnun cariament</string>
+  <string name="contributions_subtitle_zero">(Ancor gnun cariament)</string>
   <string name="categories_not_found">Gnun-e categorìe rëspondente a %1$s trovà</string>
   <string name="depictions_not_found">Gnun element Wikidata trovà ch\'a corësponda a %1$s</string>
   <string name="no_child_classes">%1$s a l\'ha gnun-e classe masnà</string>
@@ -424,7 +423,7 @@
   <string name="next">Apress</string>
   <string name="previous">Precedent</string>
   <string name="submit">Mandé</string>
-  <string name="upload_title_duplicate" fuzzy="true">N\'archivi con ël nòm %1$s a esist. É-lo sigur ëd vorèj andé anans?</string>
+  <string name="upload_title_duplicate">N\'archivi con ël nòm %1$s a esist. É-lo sigur ëd vorèj andé anans?\n\nNòta: Un sufiss oportun a sarà giontà al nòm ëd l\'archivi an automàtich.</string>
   <string name="map_application_missing">Gnun-a aplicassion cartogràfica compatìbil a l\'é trovasse an sò angign. Për piasì, ch\'a na anstala un-a për dovré costa fonsionalità.</string>
   <string name="navigation_item_bookmarks">Marcapàgine</string>
   <string name="title_activity_bookmarks">Marcapàgine</string>
@@ -653,7 +652,7 @@
   <string name="leaderboard_nearby">Davzin</string>
   <string name="leaderboard_used">Dovrà</string>
   <string name="leaderboard_my_rank_button_text">Mia classìfica</string>
-  <string name="mapbox_telemetry" fuzzy="true">Disativassion ëd la telemetrìa</string>
+  <string name="mapbox_telemetry">Telemetrìa ëd Mapbox</string>
   <string name="telemetry_opt_out_summary">Mandé na locassion anonimisà e ij dàit d\'utilisassion a Mapbox cand as deuvra la fonsionalità Nearby</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Improve this map&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Meud ëd conession limità abilità!</string>
@@ -663,6 +662,8 @@
   <string name="quality_images_info">Le plance ëd qualità a son dij diagrama o dle fòto che a sodisfo chèich criteri ëd qualità (dzortut ëd natura técnica) e a son pressiose për ij proget Wikimedia</string>
   <string name="resuming_upload">Arpijé ël cariament…</string>
   <string name="pausing_upload">Pàusa ant ël cariament…</string>
+  <string name="limited_connection_explanation">A l\'ha abilità ël meud ëd conession limità. Tuti ij cariament a son an pàusa e a arpijëran na vira che chiel a l\'avrà disabilità ës meud.</string>
+  <string name="limited_connection_is_on">Ël meud ëd conession limità a l\'e ativ.</string>
   <string name="media_details_tooltip">Për piasì, ch\'a scriva na curta legenda ch\'a disa lòn ch\'a smon la plancia. Ant la descrission, ch\'a disa lòn ch\'a rend la plancia anteressanta o tìpica o ràira, e ch\'a spiega ël contest, visìbil o pa. Dovré na terminologìa pi precisa ch\'a peul.</string>
   <string name="depicts_tooltip">Për piasì, ch\'a treuva tuti ij concet che costa plancia a arpresenta. Ch\'a sia pi spessìfich ch\'a peul. Si la plancia a arpresenta vàire element, ch\'a-j serna con na rason. Ch\'a serna nen dle tichëtte genériche s\'a-i na j\'é ëd pi spessìfiche disponìbij.</string>
   <string name="categories_tooltip">Për piasì, ch\'a selession-a dle categorìe apropià. A diferensa da le descrission, le categorìe a son mach an anglèis.</string>

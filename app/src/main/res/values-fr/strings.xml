@@ -689,6 +689,8 @@
   <string name="quality_images_info">Les images de qualité sont des diagrammes ou des photographies qui respectent certains standards de qualité (qui sont, par nature, essentiellement techniques), et sont précieuses pour les projets Wikimédia</string>
   <string name="resuming_upload">Reprise du téléversement…</string>
   <string name="pausing_upload">Mise en pause du téléversement…</string>
+  <string name="limited_connection_explanation">Vous avez activé le mode de connexion limitée. Tous les téléversements sont suspendus et reprendront une fois ce mode désactivé.</string>
+  <string name="limited_connection_is_on">Le mode de connexion limitée est actif.</string>
   <string name="media_details_tooltip">Veuillez écrire un court résumé qui dit ce que montre votre image. Dans la description, dire ce qui rend l’image intéressante ou typique ou rare, et expliquer le contexte, visible ou non. Utiliser une terminologie aussi exacte que possible.</string>
   <string name="depicts_tooltip">Veuillez trouver et sélectionner tous les concepts que dépeint cette image. Soyez aussi spécifique que possible. Si l’image dépeint plusieurs éléments, choisissez-les tous avec un motif. Ne choisissez pas de balise générique si des balises plus spécifiques sont disponibles.</string>
   <string name="categories_tooltip">Veuillez sélectionner les catégories appropriées. À l’inverse des descriptions, les catégories ne sont qu’en anglais.</string>

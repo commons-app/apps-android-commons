@@ -683,6 +683,8 @@
   <string name="quality_images_info">Kaliteli resimler, belirli kalite standartlarını (doğası gereği çoğunlukla teknik olan) karşılayan ve Wikimedia projeleri için değerli olan diyagramlar veya fotoğraflardır.</string>
   <string name="resuming_upload">Yüklemeye devam ediliyor…</string>
   <string name="pausing_upload">Yükleme duraklatılıyor…</string>
+  <string name="limited_connection_explanation">Sınırlı bağlantı modunu etkinleştirdiniz. Tüm yüklemeler duraklatılır ve bu modu devre dışı bıraktığınızda kaldığı yerden devam eder.</string>
+  <string name="limited_connection_is_on">Sınırlı bağlantı modu açık.</string>
   <string name="media_details_tooltip">Lütfen resminizin ne gösterdiğini anlatan kısa bir başlık yazın. Açıklamada, resmi neyin ilginç veya tipik veya nadir kıldığını söyleyin ve bağlamı görünür olsun veya olmasın açıklayın. Mümkün olduğu kadar kesin terminoloji kullanın.</string>
   <string name="depicts_tooltip">Lütfen bu resminin tasvir ettiği tüm kavramları bulun ve seçin. Mümkün olduğunca spesifik olun. Resim birden çok öğeyi tasvir ediyorsa, hepsini gerekçeyle seçin. Daha spesifik etiketler varsa genel etiketleri seçmeyin.</string>
   <string name="categories_tooltip">Lütfen uygun kategorileri seçin. Tasvirlerin aksine, kategoriler yalnızca İngilizce\'dir.</string>
