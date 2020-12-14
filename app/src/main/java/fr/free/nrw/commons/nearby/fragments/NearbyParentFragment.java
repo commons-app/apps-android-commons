@@ -675,14 +675,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         noResultsView.setVisibility(placeList.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
-    public void clearNearbyList() {
-        adapter.clear();
-    }
-
-    public void addPlaceToNearbyList(final Place place) {
-        adapter.add(place);
-    }
-
     @Override
     public fr.free.nrw.commons.location.LatLng getLastLocation() {
         return lastKnownLocation;
@@ -1206,8 +1198,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param curLatLng current location
      */
     public void updateMarker(final boolean isBookmarked, final Place place, @Nullable final fr.free.nrw.commons.location.LatLng curLatLng) {
-        addPlaceToNearbyList(place);
-
         VectorDrawableCompat vectorDrawable = VectorDrawableCompat.create(
             getContext().getResources(), getIconFor(place, isBookmarked), getContext().getTheme());
 
@@ -1266,7 +1256,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
         }
         addCurrentLocationMarker(NearbyController.currentLocation);
-        clearNearbyList();
     }
 
     private void addNearbyMarkersToMapBoxMap(final List<NearbyBaseMarker> nearbyBaseMarkers, final Marker selectedMarker) {
