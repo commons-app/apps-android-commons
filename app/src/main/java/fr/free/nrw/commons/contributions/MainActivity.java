@@ -241,7 +241,11 @@ public class MainActivity  extends BaseActivity
             contributionsFragment.backButtonClicked();
         } else if (nearbyParentFragment != null && activeFragment == ActiveFragment.NEARBY) {
             // Means that nearby fragment is visible
-            nearbyParentFragment.backButtonClicked();
+           //  function nearbyParentFragment.backButtonClick() return false mean bottomsheet is not expand then if backbutton pressed then come to Contributions tab
+            if(!nearbyParentFragment.backButtonClicked()){
+                getSupportFragmentManager().beginTransaction().remove(nearbyParentFragment).commit();
+                setSelectedItemId(NavTab.CONTRIBUTIONS.code());
+            }
         } else if (exploreFragment != null && activeFragment == ActiveFragment.EXPLORE) {
             // Means that explore fragment is visible
             exploreFragment.onBackPressed();
