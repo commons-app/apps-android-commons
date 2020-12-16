@@ -241,7 +241,8 @@ public class MainActivity  extends BaseActivity
             contributionsFragment.backButtonClicked();
         } else if (nearbyParentFragment != null && activeFragment == ActiveFragment.NEARBY) {
             // Means that nearby fragment is visible
-           //  function nearbyParentFragment.backButtonClick() return false mean bottomsheet is not expand then if backbutton pressed then come to Contributions tab
+            // function nearbyParentFragment.backButtonClick() return false mean bottomsheet
+            // is not expand then if backbutton pressed then come to Contributions tab
             if(!nearbyParentFragment.backButtonClicked()){
                 getSupportFragmentManager().beginTransaction().remove(nearbyParentFragment).commit();
                 setSelectedItemId(NavTab.CONTRIBUTIONS.code());
