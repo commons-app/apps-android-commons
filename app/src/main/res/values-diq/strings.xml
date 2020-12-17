@@ -248,7 +248,7 @@
   <string name="nominate_deletion">Esterıtışi rê Eza</string>
   <string name="nominated_for_deletion">No resım seba esterıtışi eza nışan kerdo</string>
   <string name="view_browser">Browser de bıvinê</string>
-  <string name="skip_login">Ser çek</string>
+  <string name="skip_login">Ravêre</string>
   <string name="navigation_item_login">Cı kewe</string>
   <string name="get_directions">Tarif bıgêrê</string>
   <string name="read_article">Meqaley bıwanê</string>
@@ -259,7 +259,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Rey bıdê</string>
   <string name="about_faq">PZP</string>
-  <string name="welcome_skip_button">Musnayoği ser çek</string>
+  <string name="welcome_skip_button">Musnayoği ravêre</string>
   <string name="no_internet">İnternet nêresêno</string>
   <string name="internet_established">İnternet resiyeno</string>
   <string name="no_notifications">Pêhesnayışi nêvineyay</string>

@@ -666,7 +666,7 @@
   <string name="leaderboard_nearby">Aqui perto</string>
   <string name="leaderboard_used">Usados</string>
   <string name="leaderboard_my_rank_button_text">A minha classificação</string>
-  <string name="mapbox_telemetry" fuzzy="true">Recusar telemetria</string>
+  <string name="mapbox_telemetry">Telemetria Mapbox</string>
   <string name="telemetry_opt_out_summary">Enviar localização anonimizada e dados de utilização para Mapbox ao usar a funcionalidade \'Aqui perto\'</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Melhorar este mapa&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Modo de ligação limitada ativado!</string>
@@ -676,6 +676,8 @@
   <string name="quality_images_info">As imagens de qualidade são diagramas ou fotografias que satisfazem certos padrões de qualidade (principalmente de natureza técnica) e são valiosos para projetos da Wikimedia</string>
   <string name="resuming_upload">A retomar carregamento...</string>
   <string name="pausing_upload">A pausar carregamento...</string>
+  <string name="limited_connection_explanation">Ativou o modo de ligação limitada. Todos os carregamentos foram colocados em pausa e serão retomados quando desativar este modo.</string>
+  <string name="limited_connection_is_on">O modo de ligação limitada está ligado.</string>
   <string name="media_details_tooltip">Escreva, por favor, uma pequena legenda a descrever o que é mostrado na sua imagem. Na descrição, explique o que torna a imagem interessante, ou típica, ou rara, e explique o contexto, seja este visível ou não. Use uma terminologia tão precisa quanto lhe seja possível.</string>
   <string name="depicts_tooltip">Encontre e selecione todos os conceitos ilustrados nesta imagem, por favor. Seja tão específico quanto puder. Se a imagem ilustra vários conceitos escolha todos, dentro do razoável. Não escolha etiquetas genéricas se estiverem disponíveis outras mais específicas.</string>
   <string name="categories_tooltip">Selecione as categorias apropriadas. Ao contrário das representações, as categorias só estão em inglês.</string>

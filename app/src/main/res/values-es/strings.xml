@@ -35,8 +35,7 @@
     <item quantity="one">Cargando %1$d archivo</item>
     <item quantity="other">Cargando %1$d archivos</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -124,7 +123,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">El GPS está desactivado en tu dispositivo. ¿Quieres activarlo?</string>
   <string name="enable_gps">Activar GPS</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">No hay subidas aún</string>
+  <string name="contributions_subtitle_zero">(No hay subidas aún)</string>
   <string name="categories_not_found">No se encontraron categorías que coincidieran con %1$s</string>
   <string name="categories_skip_explanation">Añade categorías para hacer que tus imágenes sean más fáciles de encontrar en Wikimedia Commons.\nComienza a escribir para añadir categorías.</string>
   <string name="categories_activity_title">Categorías</string>
@@ -437,7 +436,7 @@
   <string name="next">Siguiente</string>
   <string name="previous">Anterior</string>
   <string name="submit">Enviar</string>
-  <string name="upload_title_duplicate" fuzzy="true">Ya existe un archivo con el nombre %1$. ¿Seguro que deseas continuar?</string>
+  <string name="upload_title_duplicate">Ya existe un archivo con el nombre %1$s. ¿Estás seguro que deseas continuar?\n\nNota: se añadirá un sufijo apropiado al nombre del archivo de manera automática.</string>
   <string name="map_application_missing">No se encontró una aplicación de mapas compatible en tu dispositivo. Instala una para usar esta característica.</string>
   <string name="navigation_item_bookmarks">Marcadores</string>
   <string name="title_activity_bookmarks">Marcadores</string>

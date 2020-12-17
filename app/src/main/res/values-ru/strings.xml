@@ -38,11 +38,11 @@
     <item quantity="many">%1$d файлов загружается</item>
     <item quantity="other">%1$d файлов загружается</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="few">(%1$d)</item>
     <item quantity="many">(%1$d)</item>
-    <item quantity="other">0=@string/contributions_subtitle_zero</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Начало загрузки</string>
   <plurals name="starting_multiple_uploads">
@@ -142,7 +142,7 @@
   <string name="display_list_button">Список</string>
   <string name="gps_disabled">GPS отключён в вашем устройстве. Хотите включить его?</string>
   <string name="enable_gps">Включить GPS</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Загрузок пока нет</string>
+  <string name="contributions_subtitle_zero">(Загрузок пока нет)</string>
   <string name="categories_not_found">Не найдено категорий, соответствующих %1$s</string>
   <string name="depictions_not_found">Элемент Викиданных, соответствующий %1$s, не найден.</string>
   <string name="no_child_classes">У %1$s нет дочерних классов</string>
@@ -465,7 +465,7 @@
   <string name="next">Далее</string>
   <string name="previous">Назад</string>
   <string name="submit">Отправить</string>
-  <string name="upload_title_duplicate" fuzzy="true">Уже существует файл с именем %1$s. Вы уверены, что хотите продолжить?</string>
+  <string name="upload_title_duplicate">Уже существует файл с именем %1$s. Вы уверены, что хотите продолжить?\n\nПримечание: подходящий суффикс будет добавлен к имени файла автоматически.</string>
   <string name="map_application_missing">Не найдено совместимое картографическое приложение на вашем устройстве. Установите его, чтобы вы могли использовать эту функцию.</string>
   <string name="navigation_item_bookmarks">Закладки</string>
   <string name="title_activity_bookmarks">Закладки</string>
@@ -696,7 +696,7 @@
   <string name="leaderboard_nearby">Поблизости</string>
   <string name="leaderboard_used">Использовано</string>
   <string name="leaderboard_my_rank_button_text">Мой ранг</string>
-  <string name="mapbox_telemetry" fuzzy="true">Отключение телеметрии</string>
+  <string name="mapbox_telemetry">Телеметрия Mapbox</string>
   <string name="telemetry_opt_out_summary">Отправлять анонимизированные данные о местоположении и использовании в Mapbox при применении функции «Поблизости»</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Улучшить эту карту&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Включен режим ограниченного подключения!</string>
