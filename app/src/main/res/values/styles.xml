@@ -51,7 +51,7 @@
         <item name="notification_icon_text_color">@color/white</item>
         <item name="toggle_theme">@style/SwitchThemeDark</item>
         <item name="contributionsListTextPrimary">@color/white</item>
-        <item name="contributionsListTextSecondary">@color/browser_actions_divider_color</item>
+        <item name="contributionsListTextSecondary">@color/white</item>
         <item name="menu_item_tint">@color/white</item>
     </style>
 
