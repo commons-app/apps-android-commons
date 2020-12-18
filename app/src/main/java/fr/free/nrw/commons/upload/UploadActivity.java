@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -119,6 +120,13 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                 this::receiveSharedItems,
                 R.string.storage_permission_title,
                 R.string.write_storage_permission_rationale_for_image_share);
+        //getting the current dpi of the device and if it is less than 320dp i.e. overlapping
+        //threshold, thumbnails automatically minimizes
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        float dpi = (metrics.widthPixels)/(metrics.density);
+        if (dpi<=321) {
+            onRlContainerTitleClicked();
+        }
     }
 
     private void init() {
