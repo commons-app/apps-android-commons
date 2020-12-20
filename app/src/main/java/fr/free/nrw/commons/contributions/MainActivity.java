@@ -63,6 +63,7 @@ public class MainActivity  extends BaseActivity
     private ExploreFragment exploreFragment;
     private BookmarkFragment bookmarkFragment;
     public ActiveFragment activeFragment;
+    private MediaDetailPagerFragment mediaDetailPagerFragment;
 
     @Inject
     public LocationServiceManager locationManager;
@@ -238,10 +239,11 @@ public class MainActivity  extends BaseActivity
     public void onBackPressed() {
         if (contributionsFragment != null && activeFragment == ActiveFragment.CONTRIBUTIONS) {
             // Meas that contribution fragment is visible
-            if (ContributionsFragment.mediaDetailPagerFragment==null) { //means you open the app currently and not open mediaDetailPage fragment
+            mediaDetailPagerFragment=contributionsFragment.getMediaDetailPagerFragment();
+            if (mediaDetailPagerFragment ==null) { //means you open the app currently and not open mediaDetailPage fragment
                 super.onBackPressed();
-            } else if (ContributionsFragment.mediaDetailPagerFragment!=null) {
-                if(!ContributionsFragment.mediaDetailPagerFragment.isVisible()){  //mean you are at contributions fragement
+            } else if (mediaDetailPagerFragment!=null) {
+                if(!mediaDetailPagerFragment.isVisible()){  //means you are at contributions fragement
                     super.onBackPressed();
                 } else {  //mean you are at mediaDetailPager Fragment
                     contributionsFragment.backButtonClicked();

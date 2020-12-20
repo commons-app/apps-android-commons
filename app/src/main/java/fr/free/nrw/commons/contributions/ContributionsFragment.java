@@ -98,7 +98,7 @@ public class ContributionsFragment
 
     private ContributionsListFragment contributionsListFragment;
     private static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
-    static MediaDetailPagerFragment mediaDetailPagerFragment;
+    private MediaDetailPagerFragment mediaDetailPagerFragment;
     static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
 
     @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
@@ -630,6 +630,11 @@ public class ContributionsFragment
             ((MainActivity)getActivity()).showTabs();
             fetchCampaigns();
         }
+    }
+
+    // Getter for mediaDetailPagerFragment
+    public MediaDetailPagerFragment getMediaDetailPagerFragment() {
+        return mediaDetailPagerFragment;
     }
 }
 
