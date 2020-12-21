@@ -428,7 +428,7 @@
   <string name="notifications">Notifications</string>
   <string name="read_notifications">Notifications (read)</string>
   <string name="display_nearby_notification">Display nearby notification</string>
-  <string name="display_nearby_notification_summary">Tap here to see the nearest place that needs pictures</string>
+  <string name="display_nearby_notification_summary">Show in-app notification for the nearest place that needs pictures</string>
 
   <string name="no_close_nearby">No nearby places found close to you</string>
   <string name="list_sheet">List</string>
@@ -699,4 +699,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="limited_connection">Limited Connection</string>
   <string name="statistics_quality">Quality Images</string>
   <string name="quality_images_info">Quality images are diagrams or photographs that meet certain quality standards (which are mostly technical in nature) and are valuable for Wikimedia projects</string>
+  <string name="HandleLargeMedia">Please upload atmost 5 images at a time!</string>
 </resources>

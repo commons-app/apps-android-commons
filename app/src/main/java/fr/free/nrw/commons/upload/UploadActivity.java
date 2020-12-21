@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -115,10 +116,10 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         init();
 
         PermissionUtils.checkPermissionsAndPerformAction(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                this::receiveSharedItems,
-                R.string.storage_permission_title,
-                R.string.write_storage_permission_rationale_for_image_share);
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            this::receiveSharedItems,
+            R.string.storage_permission_title,
+            R.string.write_storage_permission_rationale_for_image_share);
     }
 
     private void init() {
@@ -135,7 +136,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     private void initThumbnailsRecyclerView() {
         rvThumbnails.setLayoutManager(new LinearLayoutManager(this,
-                LinearLayoutManager.HORIZONTAL, false));
+            LinearLayoutManager.HORIZONTAL, false));
         thumbnailsAdapter = new ThumbnailsAdapter(() -> currentSelectedPosition);
         rvThumbnails.setAdapter(thumbnailsAdapter);
 
@@ -147,7 +148,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         vpUpload.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset,
-                                       int positionOffsetPixels) {
+                int positionOffsetPixels) {
 
             }
 
@@ -192,22 +193,22 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      */
     protected void checkBlockStatus() {
         compositeDisposable.add(userClient.isUserBlockedFromCommons()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .filter(result -> result)
-                .subscribe(result -> showInfoAlert(R.string.block_notification_title,
-                        R.string.block_notification, UploadActivity.this::finish)
-                ));
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .filter(result -> result)
+            .subscribe(result -> showInfoAlert(R.string.block_notification_title,
+                R.string.block_notification, UploadActivity.this::finish)
+            ));
     }
 
     private void checkStoragePermissions() {
         PermissionUtils.checkPermissionsAndPerformAction(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                () -> {
-                    //TODO handle this
-                },
-                R.string.storage_permission_title,
-                R.string.write_storage_permission_rationale_for_image_share);
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            () -> {
+                //TODO handle this
+            },
+            R.string.storage_permission_title,
+            R.string.write_storage_permission_rationale_for_image_share);
     }
 
 
@@ -268,7 +269,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     @Override
     public void updateTopCardTitle() {
         tvTopCardTitle.setText(getResources()
-                .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
+            .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
     }
 
     @Override
@@ -297,19 +298,21 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         } else if (ACTION_INTERNAL_UPLOADS.equals(action)) {
             receiveInternalSharedItems();
         }
-
-        if (uploadableFiles == null || uploadableFiles.isEmpty()) {
+        if (uploadableFiles.size() > 5) {
+            handleLargeMedia();
+        }
+        else if (uploadableFiles == null || uploadableFiles.isEmpty()) {
             handleNullMedia();
         } else {
             //Show thumbnails
             if (uploadableFiles.size()
-                    > 1) {//If there is only file, no need to show the image thumbnails
+                > 1) {//If there is only file, no need to show the image thumbnails
                 thumbnailsAdapter.setUploadableFiles(uploadableFiles);
             } else {
                 llContainerTopCard.setVisibility(View.GONE);
             }
             tvTopCardTitle.setText(getResources()
-                    .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
+                .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
 
             fragments = new ArrayList<>();
             for (UploadableFile uploadableFile : uploadableFiles) {
@@ -395,18 +398,22 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         ViewUtil.showLongToast(this, R.string.error_processing_image);
         finish();
     }
+    private void handleLargeMedia() {
+        ViewUtil.showLongToast(this, R.string.HandleLargeMedia);
+        finish();
+    }
 
     private void showInfoAlert(int titleStringID, int messageStringId, Runnable positive, String... formatArgs) {
         new AlertDialog.Builder(this)
-                .setTitle(titleStringID)
-                .setMessage(getString(messageStringId, (Object[]) formatArgs))
-                .setCancelable(true)
-                .setPositiveButton(android.R.string.ok, (dialog, id) -> {
-                    positive.run();
-                    dialog.cancel();
-                })
-                .create()
-                .show();
+            .setTitle(titleStringID)
+            .setMessage(getString(messageStringId, (Object[]) formatArgs))
+            .setCancelable(true)
+            .setPositiveButton(android.R.string.ok, (dialog, id) -> {
+                positive.run();
+                dialog.cancel();
+            })
+            .create()
+            .show();
     }
 
     @Override
