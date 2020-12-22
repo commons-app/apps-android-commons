@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.category;
 
+import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_PREFIX;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -26,6 +28,7 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
+import org.wikipedia.page.PageTitle;
 
 /**
  * This activity displays details of a particular category
@@ -179,7 +182,8 @@ public class CategoryDetailsActivity extends BaseActivity
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.menu_browser_current_category:
-                Utils.handleWebUrl(this, Uri.parse(Utils.getPageTitle(categoryName).getCanonicalUri()));
+                PageTitle title = Utils.getPageTitle(CATEGORY_PREFIX + categoryName);
+                Utils.handleWebUrl(this, Uri.parse(title.getCanonicalUri()));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
