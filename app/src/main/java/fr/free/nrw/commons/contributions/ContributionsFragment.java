@@ -209,7 +209,6 @@ public class ContributionsFragment
         notification.setOnClickListener(view -> {
             NotificationActivity.startYourself(getContext(), "unread");
         });
-        setNotificationCount();
         updateLimitedConnectionToggle(menu);
     }
 
@@ -412,6 +411,7 @@ public class ContributionsFragment
             nearbyNotificationCardView.setVisibility(View.GONE);
         }
 
+        setNotificationCount();
         fetchCampaigns();
     }
 
