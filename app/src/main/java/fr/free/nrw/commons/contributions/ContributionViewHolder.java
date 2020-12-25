@@ -64,6 +64,12 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
   }
 
   public void init(final int position, final Contribution contribution) {
+
+    //handling crashes when the contribution is null.
+    if( null == contribution) {
+      return;
+    }
+
     this.contribution = contribution;
     this.position = position;
     titleView.setText(contribution.getMedia().getMostRelevantCaption());
