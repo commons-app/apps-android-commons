@@ -11,7 +11,8 @@
         android:layout_gravity="center_vertical"
         android:paddingStart="@dimen/filter_padding"
         android:text="@string/place_state"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:textSize="@dimen/subheading_text_size"/>
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/choice_chip_group"
