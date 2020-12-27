@@ -179,12 +179,20 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                     // If user has chosen a default language from settings activity savedLanguageValue is not null
                     spinnerDescriptionLanguages.setSelection(languagesAdapter.getIndexOfLanguageCode(savedLanguageValue));
                 } else {
-                    if (position == 0) {
-                        int defaultLocaleIndex = languagesAdapter
-                                .getIndexOfUserDefaultLocale(spinnerDescriptionLanguages.getContext());
-                        spinnerDescriptionLanguages.setSelection(defaultLocaleIndex, true);
+                    //Checking whether Language Code attribute is null or not.
+                    if(uploadMediaDetails.get(position).getLanguageCode() != null){
+                        //If it is not null that means it is fetching details from the previous upload (i.e. when user has pressed copy previous caption & description)
+                        //hence providing same language code for the current upload.
+                        spinnerDescriptionLanguages.setSelection(languagesAdapter
+                            .getIndexOfLanguageCode(uploadMediaDetails.get(position).getLanguageCode()), true);
                     } else {
-                        spinnerDescriptionLanguages.setSelection(0,true);
+                        if (position == 0) {
+                            int defaultLocaleIndex = languagesAdapter
+                                .getIndexOfUserDefaultLocale(spinnerDescriptionLanguages.getContext());
+                            spinnerDescriptionLanguages.setSelection(defaultLocaleIndex, true);
+                        } else {
+                            spinnerDescriptionLanguages.setSelection(0,true);
+                        }
                     }
                 }
 
