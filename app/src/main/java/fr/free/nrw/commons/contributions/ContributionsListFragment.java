@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -150,6 +151,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
       public void onItemRangeInserted(int positionStart, int itemCount) {
         super.onItemRangeInserted(positionStart, itemCount);
         if (itemCount > 0 && positionStart == 0) {
+            Log.i("Aditya"," "+positionStart+" "+itemCount);
           rvContributionsList.scrollToPosition(0);//Newly upload items are always added to the top
         }
       }
