@@ -421,7 +421,7 @@
   <string name="nearby_card_permission_explanation">Wil u hê ons moet u huidige ligging gebruik om die naaste plek waar u foto\'s benodig te vertoon?</string>
   <string name="unable_to_display_nearest_place">Kan nie die naaste plek wat foto\'s benodig sonder toestemming vir ligging, vertoon nie</string>
   <string name="never_ask_again">Moet dit nooit weer vra nie</string>
-  <string name="display_location_permission_title">Wys toestemming vir ligging</string>
+  <string name="display_location_permission_title" fuzzy="true">Wys toestemming vir ligging</string>
   <string name="display_location_permission_explanation">Vra vir liggingstoestemming indien nodig vir die nabygeleë kennisgewingkaartweergawe.</string>
   <string name="achievements_fetch_failed">Iets het verkeerd geloop. Ons kon nie u prestasies haal nie</string>
   <string name="ends_on">Eindig op:</string>

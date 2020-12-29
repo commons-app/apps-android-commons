@@ -2,6 +2,7 @@
 <!-- Authors:
 * Abijeet Patro
 * Ademo
+* Alefar
 * Amire80
 * Barakolo
 * Deborahjay
@@ -488,7 +489,7 @@
   <string name="nearby_card_permission_explanation">מקובל עליך שנשתמש במיקום הנוכחי שלך כדי להציג את המקומות בסביבה שדורשים תמונות?</string>
   <string name="unable_to_display_nearest_place"> ללא הרשאות מיקום לא ניתן להציג את המקום הקרוב ביותר הזקוק לתמונות</string>
   <string name="never_ask_again">לעולם לא לשאול שוב</string>
-  <string name="display_location_permission_title">הצגת הרשאת מיקום</string>
+  <string name="display_location_permission_title">לבקש הרשאת מיקום</string>
   <string name="display_location_permission_explanation">לבקש הרשאות מיקום לפי הצורך, לשם קבלת התראה על מקומות בסביבה בתצוגת כרטיס.</string>
   <string name="achievements_fetch_failed">משהו השתבש, לא הצלחנו לקבל את ההישגים שלך</string>
   <string name="achievements_fetch_failed_ultimate_achievement">תרמת כל־כך הרבה שמערכת חישוב ההישגים שלנו לא מתמודדת עם זה. זה ההישג הגדול ביותר.</string>
@@ -599,6 +600,12 @@
   <string name="category_edit_helper_make_edit_toast">מתבצע ניסיון לעדכון הקטגוריות.</string>
   <string name="category_edit_helper_show_edit_title">עדכון קטגוריות</string>
   <string name="category_edit_helper_show_edit_title_success">הצלחה</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">נוספה קטגוריה.</item>
+    <item quantity="two">נוספו %1$s קטגוריות.</item>
+    <item quantity="many">נוספו %1$s קטגוריות.</item>
+    <item quantity="other">נוספו %1$s קטגוריות.</item>
+  </plurals>
   <string name="category_edit_helper_edit_message_else">לא ניתן להוסיף קטגוריות.</string>
   <string name="category_edit_button_text">עדכון קטגוריות</string>
   <string name="share_image_via">שיתוף תמונה דרך</string>
@@ -676,6 +683,7 @@
   <string name="leaderboard_all_time">כל הזמנים</string>
   <string name="leaderboard_upload">העלאה</string>
   <string name="leaderboard_nearby">בסביבה</string>
+  <string name="leaderboard_used">בשימוש</string>
   <string name="leaderboard_my_rank_button_text">הדירוג שלי</string>
   <string name="mapbox_telemetry">מדידה טלמטרית של Mapbox</string>
   <string name="telemetry_opt_out_summary">לשלוח מיקום ונתוני שימוש אלמוניים ל־Mapbox בעת שימוש בתכונה „בסביבה”</string>
@@ -687,7 +695,13 @@
   <string name="quality_images_info">תמונות איכות הן תרשימים או תמונות שעומדות בתקני איכות מסוימים (שמטבעם בעיקר טכניים) והן בעלות ערך למיזמי ויקימדיה</string>
   <string name="resuming_upload">ההעלאה ממשיכה…</string>
   <string name="pausing_upload">ההעלאה מושהית…</string>
+  <string name="limited_connection_explanation">הפעלת מצב חיבור מוגבל. כל ההעלאות מושהות ותמשכנה לאחר השבתת המצב הזה.</string>
+  <string name="limited_connection_is_on">מצב חיבור מוגבל פעיל.</string>
+  <string name="media_details_tooltip">נא לכתוב תיאור קצר שמסביר מה מופיע בתמונה. בתיאור, כדאי לכתוב מה הופך את התמונה הזאת למעניינת, טיפוסית או נדירה ולהסביר את ההקשר, בין אם גלוי או סמוי. יש להשתמש במינוח מדויק ככל הניתן.</string>
+  <string name="depicts_tooltip">נא למצוא ולבחור את כל העקרונות שהתמונה הזאת מתארת. נא לשמור על דיוק מרבי. אם התמונה מתארת מגוון פריטים, נא לבחור אותם בגבולות הסביר. לא לבחור תגיות גנריות אם יש תגיות יותר נקודתית זמינות.</string>
+  <string name="categories_tooltip">נא לבחור את הקטגוריות המתאימות. בניגוד למאפייני \"מציג\", הקטגוריות כתובות רק באנגלית.</string>
   <string name="license_tooltip">ויקישיתוף הופך את התמונות שלך לזמינות לשימוש חוזר ולהתאמה על ידי כל אחד. בא לך לוותר על כל הזכויות? שייחסו את היצירה אליך? שההתאמות ישתמשו באותו הרישיון?</string>
+  <string name="depicts_step_title">מציג</string>
   <string name="license_step_title">רישיון מדיה</string>
   <string name="media_detail_step_title">פרטי מדיה</string>
 </resources>

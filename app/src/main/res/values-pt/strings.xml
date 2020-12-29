@@ -472,7 +472,7 @@
   <string name="nearby_card_permission_explanation">Gostaria que usássemos a sua localização corrente para apresentar o local mais próximo que precisa de fotografias?</string>
   <string name="unable_to_display_nearest_place">Não é possível apresentar o local mais próximo que necessita de fotografias sem ter permissões de localização</string>
   <string name="never_ask_again">Não voltar a perguntar isto</string>
-  <string name="display_location_permission_title">Apresentar permissões de localização</string>
+  <string name="display_location_permission_title" fuzzy="true">Apresentar permissões de localização</string>
   <string name="display_location_permission_explanation">Pedir permissões de localização quando for necessário para a funcionalidade do cartão de notificação de proximidade.</string>
   <string name="achievements_fetch_failed">Algo correu mal, não conseguimos obter as suas realizações</string>
   <string name="achievements_fetch_failed_ultimate_achievement">As suas contribuições foram tantas que o nosso sistema de cálculo de realizações não consegue processá-las. Essa é a realização máxima.</string>

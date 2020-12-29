@@ -479,7 +479,7 @@
   <string name="nearby_card_permission_explanation">Resimlere ihtiyaç duyulan en yakın yeri görüntülemek için mevcut konumunuzu kullanmamızı ister misiniz?</string>
   <string name="unable_to_display_nearest_place">Konum izni olmadan resme ihtiyaç duyulan en yakın yer görüntülenemiyor</string>
   <string name="never_ask_again">Bunu bir daha sorma</string>
-  <string name="display_location_permission_title">Konum iznini görüntüle</string>
+  <string name="display_location_permission_title">Konum izni isteyin</string>
   <string name="display_location_permission_explanation">Yakındaki bildirim kartı görüntüleme özelliği için gerektiğinde konum izni isteyin.</string>
   <string name="achievements_fetch_failed">Bir şeyler ters gitti, başarılarınızı getiremedik</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Başarı hesaplama sistemimizin üstesinden gelemeyeceği pek çok katkı yaptınız. Bu nihai başarıdır.</string>

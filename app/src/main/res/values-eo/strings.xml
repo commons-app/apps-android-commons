@@ -435,7 +435,7 @@
   <string name="nearby_card_permission_explanation">Ĉu vi volas ke ni uzu vian aktualan lokon por montri la plej proksima loko bezonanta bildojn?</string>
   <string name="unable_to_display_nearest_place">Ne povas montri apudajn lokojn bezonantajn bildojn, pro manko de permeso de lokado.</string>
   <string name="never_ask_again">Ne plu repeti</string>
-  <string name="display_location_permission_title">Montri permeson pri loko</string>
+  <string name="display_location_permission_title" fuzzy="true">Montri permeson pri loko</string>
   <string name="display_location_permission_explanation">Peti por permeso de lokado, kiam ĝi estas postulata por la funkciado de la karta vido de de apudaj sciigoj.</string>
   <string name="achievements_fetch_failed">Io misfunkciis; ni ne povis akiri viajn atingojn</string>
   <string name="ends_on">Finiĝas je:</string>

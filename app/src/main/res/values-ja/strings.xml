@@ -6,6 +6,7 @@
 * Afaz
 * Bonfire12
 * Dude1717
+* Foomin10
 * Hinaloe
 * Kkairri
 * Nicolas Raoul
@@ -114,7 +115,7 @@
   <string name="display_list_button">一覧</string>
   <string name="gps_disabled">お使いのデバイスではGPSが無効になっています。有効にしますか?</string>
   <string name="enable_gps">GPSを有効にする</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">まだ何もアップロードされていません。</string>
+  <string name="contributions_subtitle_zero">（まだ何もアップロードされていません）</string>
   <string name="categories_not_found">%1$s に一致するカテゴリが見つかりません</string>
   <string name="depictions_not_found">%1$s に一致する項目が見つかりません</string>
   <string name="no_child_classes">%1$s に子のクラスはありません</string>
@@ -472,7 +473,7 @@
   <string name="nearby_card_permission_explanation">画像を募集している近くの場所を表示するため、あなたの現在の位置情報を提供してもよいですか？</string>
   <string name="unable_to_display_nearest_place">位置情報の使用を許可していないため、近くの画像募集中の場所を表示できません</string>
   <string name="never_ask_again">以後、表示しない</string>
-  <string name="display_location_permission_title">位置情報の許可の状態を表示</string>
+  <string name="display_location_permission_title" fuzzy="true">位置情報の許可の状態を表示</string>
   <string name="display_location_permission_explanation">通知カードで近くの場所を表示するたび、位置情報の使用を許可するかどうか尋ねる</string>
   <string name="achievements_fetch_failed">何か問題が発生し、あなたの貢献を表示できませんでした</string>
   <string name="achievements_fetch_failed_ultimate_achievement">たくさんの貢献をしていただいたのですが、件数が多すぎるため貢献度算出システムが処理できません。まさに究極の貢献をされました。</string>

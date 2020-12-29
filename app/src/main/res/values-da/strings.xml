@@ -358,7 +358,7 @@
   <string name="no_categories_selected">Ingen valgte kategorier</string>
   <string name="search_this_area">Søg i dette område</string>
   <string name="never_ask_again">Spørg aldrig om dette igen</string>
-  <string name="display_location_permission_title">Vis placeringstilladelse</string>
+  <string name="display_location_permission_title">Bed om placeringstilladelse</string>
   <string name="ends_on">Slutter den:</string>
   <string name="display_campaigns">Vis kampagner</string>
   <string name="display_campaigns_explanation">Se aktive kampagner</string>

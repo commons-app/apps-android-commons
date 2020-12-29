@@ -365,6 +365,7 @@
   <string name="error_occurred">เกิดข้อผิดพลาด!</string>
   <string name="contributions_fragment">การมีส่วนร่วม</string>
   <string name="nearby_fragment">ใกล้เคียง</string>
+  <string name="notifications">การแจ้งเตือน</string>
   <string name="no_close_nearby">ไม่พบสถานที่ใกล้เคียงที่อยู่ใกล้คุณ</string>
   <string name="list_sheet">รายการ</string>
   <string name="storage_permission">สิทธิอนุญาตที่เก็บข้อมูล</string>
@@ -384,6 +385,7 @@
   <string name="deletion_reason_publicly_visible">ฉันไม่รู้ว่าทุกคนสามารถเห็นได้</string>
   <string name="deletion_reason_bad_for_my_privacy">ฉันรู้สึกว่าไม่ดีต่อความเป็นส่วนตัวของฉัน</string>
   <string name="deletion_reason_no_longer_want_public">ฉันเปลี่ยนใจแล้ว ฉันไม่อยากให้ทุกคนสามารถเห็นได้อีกต่อไป</string>
+  <string name="no_uploads">ยินดีต้อนรับสู่คอมมอนส์!\n\nอัพโหลดสื่อแรกของคุณด้วยการแตะที่ปุ่ม \"+\"</string>
   <string name="desc_language_Worldwide">ทั่วโลก</string>
   <string name="desc_language_America">อเมริกา</string>
   <string name="desc_language_Europe">ยุโรป</string>
@@ -394,7 +396,7 @@
   <string name="no_categories_selected">ไม่ได้เลือกหมวดหมู่ใด</string>
   <string name="search_this_area">ค้นหาพื้นที่นี้</string>
   <string name="never_ask_again">อย่าถามคำถามนี้อีก</string>
-  <string name="display_location_permission_title">แสดงสิทธิอนุญาตที่ตั้ง</string>
+  <string name="display_location_permission_title" fuzzy="true">แสดงสิทธิอนุญาตที่ตั้ง</string>
   <string name="ends_on">สิ้นสุดเมื่อ:</string>
   <string name="display_campaigns">แสดงแคมเปญ</string>
   <string name="nominate_for_deletion_done">เสร็จสิ้น</string>
@@ -431,11 +433,13 @@
   <string name="delete_helper_ask_alert_set_positive_button_reason">เนื่องจากเป็น</string>
   <string name="category_edit_helper_show_edit_title_success">สำเร็จ</string>
   <string name="account_created">สร้างบัญชีแล้ว!</string>
+  <string name="notification_mark_read">การแจ้งเตือนที่ทำเครื่องหมายว่าอ่านแล้ว</string>
   <string name="place_state">สถานะของสถานที่:</string>
   <string name="place_state_exists">มีอยู่</string>
   <string name="place_state_needs_photo">ต้องการภาพถ่าย</string>
   <string name="place_type">ชนิดสถานที่:</string>
   <string name="nearby_search_hint">สะพาน พิพิธภัณฑ์ โรงแรม ฯลฯ</string>
+  <string name="upload_nearby_place_found_title">พบสถานที่ใกล้เคียง</string>
   <string name="title_app_shortcut_explore">สำรวจ</string>
   <string name="title_app_shortcut_bookmark">ที่คั่นหน้า</string>
   <string name="title_app_shortcut_setting">การตั้งค่า</string>
@@ -445,4 +449,6 @@
   <string name="theme_dark_name">มืด</string>
   <string name="theme_light_name">สว่าง</string>
   <string name="load_more">โหลดเพิ่มเติม</string>
+  <string name="wikipedia_instructions_step_1">1. ใช้ข้อความวิกิดังต่อไปนี้:</string>
+  <string name="leaderboard_nearby">สถานที่ใกล้เคียง</string>
 </resources>

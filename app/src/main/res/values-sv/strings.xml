@@ -465,7 +465,7 @@
   <string name="nearby_card_permission_explanation">Vill du att vi ska använda din nuvarande plats för att visa den närmaste platsen som behöver bilder?</string>
   <string name="unable_to_display_nearest_place">Kunde inte visa den närmaste platsen som behöver bilder utan platsbehörigheter</string>
   <string name="never_ask_again">Fråga inte detta igen</string>
-  <string name="display_location_permission_title">Visa platsbehörighet</string>
+  <string name="display_location_permission_title">Be om platsbehörighet</string>
   <string name="display_location_permission_explanation">Fråga efter platsbehörighet vid behov för att visa aviseringskortet för i närheten.</string>
   <string name="achievements_fetch_failed">Någonting gick fel. Vi kunde inte hämta dina prestationer</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Du har gjort så många bidrag att vårt system för att beräkna prestationer inte hinner med. Detta är den ultimata prestationen.</string>

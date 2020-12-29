@@ -458,7 +458,7 @@
   <string name="nearby_card_permission_explanation">Veul-lo ch\'i dovroma soa localisassion atual pr\'ësmon-e ël pòst pi davzin ch\'a l\'ha da manca ëd fòto?</string>
   <string name="unable_to_display_nearest_place">A l\'é impossìbil ësmon-e ij pòst ant j\'anviron ch\'a l\'han damanca ëd fòto sensa ij përmess ëd localisassion</string>
   <string name="never_ask_again">Mai pi ciamé sòn</string>
-  <string name="display_location_permission_title">Smon-e l\'autorisassion ëd localisassion</string>
+  <string name="display_location_permission_title" fuzzy="true">Smon-e l\'autorisassion ëd localisassion</string>
   <string name="display_location_permission_explanation">Ciamé ël përmess ëd localisé cand a-i na j\'é da manca për la fonsion ëd visualisassion ëd la carta dle notìfiche dë vzinansa.</string>
   <string name="achievements_fetch_failed">Cheicòs a l\'ha nen marcià, i l\'oma nen podù arcuperé soe realisassion</string>
   <string name="achievements_fetch_failed_ultimate_achievement">A l\'ha fàit tante contribussion che ël sistema ëd càlcol dj\'arzultà otnù a l\'é debordà. Cost-sì a l\'é l\'ùltim arzultà otnù.</string>

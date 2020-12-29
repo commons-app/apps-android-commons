@@ -324,7 +324,7 @@
   <string name="search_this_area">ဤဧရိယာကို ရှာဖွေပါ</string>
   <string name="nearby_card_permission_title">ခွင့်ပြုချက် တောင်းခံရန်</string>
   <string name="never_ask_again">နောက်တခါ ထပ်မမေးပါနှင့်</string>
-  <string name="display_location_permission_title">တည်နေရာခွင့်ပြုချက်ကို ပြသရန်</string>
+  <string name="display_location_permission_title">တည်နေရာခွင့်ပြုချက်ကို တောင်းခံရန်</string>
   <string name="ends_on">ပြီးဆုံးမည်-</string>
   <string name="this_function_needs_network_connection">ဤလုပ်ဆောင်ချက်သည် ကွန်ရက်ချိတ်ဆက်မှုကိုလိုအပ်သည်၊ သင်၏ချိတ်ဆက်မှု အပြင်အဆင်များကို စစ်ဆေးပါ။</string>
   <string name="error_processing_image">ရုပ်ပုံကို ပရိုဆက်ဆင်းလုပ်နေစဉ် အမှားဖြစ်ပွားခဲ့သည်။ ထပ်မံကြိုးစားကြည့်ပါ။</string>

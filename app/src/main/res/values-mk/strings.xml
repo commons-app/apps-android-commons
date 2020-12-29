@@ -460,7 +460,7 @@
   <string name="nearby_card_permission_explanation">Дали би сакале да се користи вашата тековна местоположба за приказ на околните места на кои им требаат слики?</string>
   <string name="unable_to_display_nearest_place">Не можам да го прикажам најблиското место на кое му требаат слики без да дадете дозвола за местоположба</string>
   <string name="never_ask_again">Повеќе не прашувај</string>
-  <string name="display_location_permission_title">Дозвола за приказ на местоположба</string>
+  <string name="display_location_permission_title" fuzzy="true">Дозвола за приказ на местоположба</string>
   <string name="display_location_permission_explanation">Барај дозвола за местоположба кога ќе треба да се даде известување за околно место.</string>
   <string name="achievements_fetch_failed">Нешто не е во ред. Не можев да ги добијам вашите достигнувања</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Имате толку многу придонеси што нашиот пресметувач на достигнувања просто не може да постигне. Ова е врховното достигнување.</string>

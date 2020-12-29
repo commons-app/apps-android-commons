@@ -495,7 +495,7 @@
   <string name="nearby_card_permission_explanation">هل تريد منا استخدام موقعك الحالي لعرض أقرب مكان يحتاج إلى صور؟</string>
   <string name="unable_to_display_nearest_place">يتعذر عرض أقرب مكان يحتاج إلى صور بدون أذونات الموقع</string>
   <string name="never_ask_again">لا تسأل هذا مرة أخرى</string>
-  <string name="display_location_permission_title">عرض إذن الموقع</string>
+  <string name="display_location_permission_title" fuzzy="true">عرض إذن الموقع</string>
   <string name="display_location_permission_explanation">اطلب إذن الموقع عند الحاجة إلى ميزة عرض بطاقة التنبيه القريبة.</string>
   <string name="achievements_fetch_failed">حدث خطأ ما; لم نتمكن من جلب إنجازاتك</string>
   <string name="achievements_fetch_failed_ultimate_achievement">لقد قدمت الكثير من المساهمات لا يستطيع نظامنا لحساب الإنجازات التعامل معها. هذا هو الإنجاز النهائي.</string>

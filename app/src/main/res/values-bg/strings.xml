@@ -230,7 +230,7 @@
   <string name="nearby_card_permission_explanation">Искате ли да използвате текущото си местоположение за показване на близките места, които се нуждаят от снимки?</string>
   <string name="unable_to_display_nearest_place">Не мога да покажа най-близкото място, където имам нужда от изображения, без да давам разрешение за местоположение</string>
   <string name="never_ask_again">Не питай повече</string>
-  <string name="display_location_permission_title">Разрешение за показване на местоположение</string>
+  <string name="display_location_permission_title" fuzzy="true">Разрешение за показване на местоположение</string>
   <string name="display_location_permission_explanation">Потърсете разрешение за местоположение, когато трябва да уведомите за местоположението.</string>
   <string name="ends_on">Завършва:</string>
   <string name="display_campaigns">Показване на кампании</string>

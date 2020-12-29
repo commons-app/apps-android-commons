@@ -313,7 +313,7 @@
   <string name="search_this_area">ھي علائقو ڳوليو</string>
   <string name="nearby_card_permission_title">اجازت جي درخواست</string>
   <string name="never_ask_again">ھي ٻيھر ڪڏھن نہ پڇو</string>
-  <string name="display_location_permission_title">مڪانيت جي اجازت ڏيکاريو</string>
+  <string name="display_location_permission_title" fuzzy="true">مڪانيت جي اجازت ڏيکاريو</string>
   <string name="ends_on">تي ختم:</string>
   <string name="nominate_for_deletion_done">ٿي-ويو</string>
   <string name="nominate_for_deletion_notify_user">واپرائيندڙ کي بحث صفحي تي اطلاع ڏيندي</string>

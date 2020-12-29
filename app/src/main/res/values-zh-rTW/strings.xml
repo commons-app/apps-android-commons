@@ -471,7 +471,7 @@
   <string name="nearby_card_permission_explanation">您是否願意讓我們使用您的目前位置，來顯示出缺少圖片的最近地點？</string>
   <string name="unable_to_display_nearest_place">沒有位置權限會無法顯示缺少圖片的最近地點</string>
   <string name="never_ask_again">永遠不再詢問</string>
-  <string name="display_location_permission_title">顯示位置權限</string>
+  <string name="display_location_permission_title" fuzzy="true">顯示位置權限</string>
   <string name="display_location_permission_explanation">當需要附近地點通知卡片的檢視功能時，要求位置權限。</string>
   <string name="achievements_fetch_failed">發生了一些狀況，我們無法索取您的成果</string>
   <string name="achievements_fetch_failed_ultimate_achievement">您做出的貢獻多到讓我們的成果系統無法因應，此為終極成果。</string>

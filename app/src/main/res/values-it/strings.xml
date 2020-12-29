@@ -450,7 +450,7 @@
   <string name="nearby_card_permission_explanation">Vuoi che usiamo la tua posizione attuale per visualizzare il luogo più vicino che ha bisogno di immagini?</string>
   <string name="unable_to_display_nearest_place">Impossibile visualizzare il luogo più vicino che ha bisogno di immagini senza autorizzazioni della posizione</string>
   <string name="never_ask_again">Non chiedermelo mai più</string>
-  <string name="display_location_permission_title">Autorizzazione di visualizzazione della posizione</string>
+  <string name="display_location_permission_title">Chiedi autorizzazione alla posizione</string>
   <string name="display_location_permission_explanation">Chiedi il permesso di localizzazione quando necessario per la funzione di visualizzazione della scheda di notifica nelle vicinanze.</string>
   <string name="achievements_fetch_failed">Qualcosa è andato storto, non siamo riusciti a recuperare i tuoi risultati</string>
   <string name="ends_on">Termina il:</string>

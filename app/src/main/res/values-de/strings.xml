@@ -20,6 +20,7 @@
 * Ubahnverleih
 * Umherirrender
 * WikiBayer
+* Zauberzunge2000
 -->
 <resources>
   <plurals name="uploads_pending_notification_indicator">
@@ -459,7 +460,7 @@
   <string name="nearby_card_permission_explanation">Dürfen wir deinen aktuellen Standort verwenden, um den nächsten Ort anzuzeigen, der Bilder benötigt?</string>
   <string name="unable_to_display_nearest_place">Der nächste Ort, der Bilder benötigt, kann ohne Standortberechtigungen nicht angezeigt werden.</string>
   <string name="never_ask_again">Nicht erneut fragen</string>
-  <string name="display_location_permission_title">Standortberechtigung anzeigen</string>
+  <string name="display_location_permission_title">Standortberechtigung anfragen</string>
   <string name="display_location_permission_explanation">Anfrage für eine Standortberechtigung, die für die Nachbarbenachrichtigungskartenansichtsfunktion erforderlich ist.</string>
   <string name="achievements_fetch_failed">Etwas ist schief gelaufen. Wir konnten deine Errungenschaften nicht abrufen.</string>
   <string name="ends_on">Endet am:</string>
