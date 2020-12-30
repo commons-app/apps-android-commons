@@ -151,8 +151,9 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
       public void onItemRangeInserted(int positionStart, int itemCount) {
         super.onItemRangeInserted(positionStart, itemCount);
         if (itemCount > 0 && positionStart == 0) {
-            Log.i("Aditya"," "+positionStart+" "+itemCount);
-          rvContributionsList.scrollToPosition(0);//Newly upload items are always added to the top
+          if(adapter.getContributionForPosition(positionStart)!=null) {
+            rvContributionsList.scrollToPosition(0);//Newly upload items are always added to the top
+          }
         }
       }
     });
