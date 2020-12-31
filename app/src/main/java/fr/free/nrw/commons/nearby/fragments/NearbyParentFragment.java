@@ -214,7 +214,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private fr.free.nrw.commons.location.LatLng lastFocusLocation;
     private LatLngBounds latLngBounds;
     private PlaceAdapter adapter;
-    private CallBack callBack;
+    private NearbyParentFragmentListener nearbyParentFragmentListener;
 
     @NonNull
     public static NearbyParentFragment newInstance() {
@@ -272,8 +272,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 uiSettings.setAttributionEnabled(false);
                 uiSettings.setRotateGesturesEnabled(false);
                 isMapBoxReady =true;
-                if(callBack!=null){
-                    callBack.MapReady();
+                if(nearbyParentFragmentListener!=null){
+                    nearbyParentFragmentListener.onMapReady();
                 }
                 performMapReadyActions();
                 final CameraPosition cameraPosition = new CameraPosition.Builder()
@@ -1536,11 +1536,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         performMapReadyActions();
     }
 
-    public interface  CallBack{
-        void MapReady();
+    public interface  NearbyParentFragmentListener{
+        void onMapReady();
     }
 
-    public void setCallBack(final CallBack callBack) {
-        this.callBack = callBack;
+    public void setNearbyParentFragmentListener(final NearbyParentFragmentListener nearbyParentFragmentListener) {
+        this.nearbyParentFragmentListener = nearbyParentFragmentListener;
     }
 }
