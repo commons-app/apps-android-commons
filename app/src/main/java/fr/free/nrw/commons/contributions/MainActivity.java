@@ -32,6 +32,7 @@ import fr.free.nrw.commons.navtab.NavTabLoggedOut;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
+import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
@@ -298,7 +299,14 @@ public class MainActivity  extends BaseActivity
 
     public void centerMapToPlace(Place place) {
         setSelectedItemId(NavTab.NEARBY.code());
-        nearbyParentFragment.centerMapToPlace(place);
+        nearbyParentFragment.setNearbyParentFragmentInstanceReadyCallback(new NearbyParentFragmentInstanceReadyCallback() {
+            // if mapBox initialize in nearbyParentFragment then MapReady() function called
+            // so that nearbyParentFragemt.centerMaptoPlace(place) not throw any null pointer exception
+            @Override
+            public void onReady() {
+                nearbyParentFragment.centerMapToPlace(place);
+            }
+        });
     }
 
     @Override
