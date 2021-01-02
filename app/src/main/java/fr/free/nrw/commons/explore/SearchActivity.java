@@ -69,6 +69,7 @@ public class SearchActivity extends BaseActivity
         ButterKnife.bind(this);
         setTitle(getString(R.string.title_activity_search));
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v->onBackPressed());
         supportFragmentManager = getSupportFragmentManager();
         setSearchHistoryFragment();
