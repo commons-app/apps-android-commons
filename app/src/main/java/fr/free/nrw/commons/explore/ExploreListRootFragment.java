@@ -34,6 +34,10 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
   @BindView(R.id.explore_container)
   FrameLayout container;
 
+  public ExploreListRootFragment(){
+    //empty constructor necessary otherwise crashes or recreate
+  }
+
   public ExploreListRootFragment(Bundle bundle) {
     String title = bundle.getString("categoryName");
     listFragment = new CategoriesMediaFragment();
@@ -55,7 +59,9 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
   @Override
   public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    setFragment(listFragment, mediaDetails);
+    if(savedInstanceState == null) {
+      setFragment(listFragment, mediaDetails);
+    }
   }
 
   public void setFragment(Fragment fragment, Fragment otherFragment) {
