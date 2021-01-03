@@ -39,7 +39,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
   FrameLayout container;
 
   public BookmarkListRootFragment(){
-    //empty constructor necessary otherwise crashes or recreate
+    //empty constructor necessary otherwise crashes on recreate
   }
 
   public BookmarkListRootFragment(Bundle bundle, BookmarksPagerAdapter bookmarksPagerAdapter) {

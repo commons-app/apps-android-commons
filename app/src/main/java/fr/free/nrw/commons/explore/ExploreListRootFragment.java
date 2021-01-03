@@ -35,7 +35,7 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
   FrameLayout container;
 
   public ExploreListRootFragment(){
-    //empty constructor necessary otherwise crashes or recreate
+    //empty constructor necessary otherwise crashes on recreate
   }
 
   public ExploreListRootFragment(Bundle bundle) {
