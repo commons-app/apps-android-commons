@@ -74,7 +74,7 @@
   <string name="menu_open_in_browser">ดูในเบราว์เซอร์</string>
   <string name="share_title_hint">คำบรรยาย (จำเป็น)</string>
   <string name="share_description_hint">คำอธิบาย</string>
-  <string name="share_caption_hint">คำอธิบายภาพ (จำกัดที่ 255 อักขระ)</string>
+  <string name="share_caption_hint" fuzzy="true">คำอธิบายภาพ (จำกัดที่ 255 อักขระ)</string>
   <string name="login_failed_network">ไม่สามารถเข้าสู่ระบบได้ - ความล้มเหลวของเครือข่าย</string>
   <string name="login_failed_wrong_credentials">เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบชื่อผู้ใช้และรหัสผ้านและลองอีกครั้ง</string>
   <string name="login_failed_throttled">จำนวนครั้งที่พยายามไม่สำเร็จมากเกินไป กรุณาลองอีกครั้งในอีกสักครู่</string>

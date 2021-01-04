@@ -89,7 +89,7 @@
   <string name="share_title_hint">Descriere (Necesară)</string>
   <string name="add_caption_toast">Vă rugăm să oferiți o descriere pentru acest fișier</string>
   <string name="share_description_hint">Descriere</string>
-  <string name="share_caption_hint">Descriere (limită 255 caractere)</string>
+  <string name="share_caption_hint" fuzzy="true">Descriere (limită 255 caractere)</string>
   <string name="login_failed_network">Autentificare nereușită – defecțiune de rețea</string>
   <string name="login_failed_wrong_credentials">Nu poți să te autentifici - verifică-ți numele de utilizator și parola</string>
   <string name="login_failed_throttled">Prea multe încercări nereușite. Încercați din nou peste câteva minute.</string>

@@ -78,7 +78,7 @@
   <string name="share_title_hint">Pie (Riquíu)</string>
   <string name="add_caption_toast">Apurre un pie pa esti ficheru</string>
   <string name="share_description_hint">Descripción</string>
-  <string name="share_caption_hint">Pie (llende 255 caráuteres)</string>
+  <string name="share_caption_hint" fuzzy="true">Pie (llende 255 caráuteres)</string>
   <string name="login_failed_network">Nun se pudo aniciar sesión – error de rede</string>
   <string name="login_failed_wrong_credentials">Nun pudo aniciase sesión. Revisa\'l nome d\'usuariu y la contraseña</string>
   <string name="login_failed_throttled">Demasiaos intentos incorreutos. Téntalo otra vuelta n\'unos minutos.</string>

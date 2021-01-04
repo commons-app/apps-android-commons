@@ -121,7 +121,7 @@
   <string name="share_title_hint">العنوان (مطلوب)</string>
   <string name="add_caption_toast">يُرجَى تقديم عنوان لهذا الملف</string>
   <string name="share_description_hint">الوصف</string>
-  <string name="share_caption_hint">العنوان (قيد 255 حرف)</string>
+  <string name="share_caption_hint" fuzzy="true">العنوان (قيد 255 حرف)</string>
   <string name="login_failed_network">لا يمكن تسجيل الدخول - فشل في شبكة الاتصال</string>
   <string name="login_failed_wrong_credentials">غير قادر على تسجيل الدخول - يُرجَى التحقق من اسم المستخدم وكلمة المرور الخاصين بك</string>
   <string name="login_failed_throttled">الكثير من المحاولات غير الناجحة. الرجاء المحاولة مرة أخرى في بضع دقائق.</string>

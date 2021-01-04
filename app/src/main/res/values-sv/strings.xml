@@ -88,7 +88,7 @@
   <string name="share_title_hint">Bildtext (obligatoriskt)</string>
   <string name="add_caption_toast">Var god ange en bildtext för denna fil</string>
   <string name="share_description_hint">Beskrivning</string>
-  <string name="share_caption_hint">Bildtext (maximalt 255 tecken)</string>
+  <string name="share_caption_hint" fuzzy="true">Bildtext (maximalt 255 tecken)</string>
   <string name="login_failed_network">Det gick inte att logga in - nätverksfel</string>
   <string name="login_failed_wrong_credentials">Kunde inte logga in - kontrollera ditt användarnamn och lösenord</string>
   <string name="login_failed_throttled">För många misslyckade försök. Var god försök igen om några minuter.</string>
@@ -269,7 +269,7 @@
   <string name="error_while_cache">Fel uppstod när bilder cachelagras</string>
   <string name="title_info">En unik beskrivande titel för filen, som kommer att fungera som ett filnamn. Du kan använda klarspråk med mellanslag. Ta inte med filändelsen</string>
   <string name="description_info">Beskriv mediafilen så mycket som möjligt. Var togs den? Vad visar den? Vad är sammanhanget? Beskriv föremålen eller personerna. Ge information som inte kan gissas fram, t.ex. tidpunkten om det är ett landskap. Om mediafilen visar någonting ovanligt, förklara vad som gör den ovanlig.</string>
-  <string name="caption_info">Var god skriv en kort beskrivning av bilden. Den första bildtexten skulle användas som bildens titel.</string>
+  <string name="caption_info" fuzzy="true">Var god skriv en kort beskrivning av bilden. Den första bildtexten skulle användas som bildens titel.</string>
   <string name="upload_image_too_dark">Denna bild är för mörk, är du säker på att du vill ladda upp den? Wikimedia Commons är endast till för bilder med encyklopediskt värde.</string>
   <string name="upload_image_blurry">Denna bild är suddig, är du säker på att du vill ladda upp den? Wikimedia Commons är endast till för bilder med encyklopediskt värde.</string>
   <string name="upload_problem_exist">Möjliga problem med denna bild:</string>

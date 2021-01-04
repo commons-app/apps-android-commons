@@ -90,7 +90,7 @@
   <string name="share_title_hint">캡션 (필수)</string>
   <string name="add_caption_toast">이 파일의 설명을 작성해 주십시오</string>
   <string name="share_description_hint">설명</string>
-  <string name="share_caption_hint">캡션 (255자 제한)</string>
+  <string name="share_caption_hint">캡션</string>
   <string name="login_failed_network">로그인할 수 없습니다 - 네트워크 오류입니다</string>
   <string name="login_failed_wrong_credentials">로그인할 수 없습니다 - 사용자 이름과 비밀번호를 확인해 주십시오</string>
   <string name="login_failed_throttled">실패한 시도가 너무 많습니다. 몇 분 후에 다시 시도하세요.</string>

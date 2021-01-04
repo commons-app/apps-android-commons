@@ -83,7 +83,7 @@
   <string name="share_title_hint">Judul (Kudu)</string>
   <string name="add_caption_toast">Sadiakeun pertélaan pikeun ieu berkas</string>
   <string name="share_description_hint">Pedaran</string>
-  <string name="share_caption_hint">Pertélaan (wates 255 karakter)</string>
+  <string name="share_caption_hint" fuzzy="true">Pertélaan (wates 255 karakter)</string>
   <string name="login_failed_network">Teu bisa login - gangguan jaringan</string>
   <string name="login_failed_wrong_credentials">Teu bisa asup log - pariksa deui sandiasma jeung kecap sandina</string>
   <string name="login_failed_throttled">Loba teuing nu gagalna. Mangga cobian sababaraha menit deui mah</string>

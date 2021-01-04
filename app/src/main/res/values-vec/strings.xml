@@ -77,7 +77,7 @@
   <string name="share_title_hint">Didascalia (obligatorio)</string>
   <string name="add_caption_toast">Par piaser, daghe na didascalia a sto file</string>
   <string name="share_description_hint">Descrision</string>
-  <string name="share_caption_hint">Didascalia (màsimo 255 caràteri)</string>
+  <string name="share_caption_hint" fuzzy="true">Didascalia (màsimo 255 caràteri)</string>
   <string name="login_failed_network">No xé posibiłe ndarghe drento - erore de rete</string>
   <string name="login_failed_wrong_credentials">Entrada no riusia - Daghe na ociada al nome utente e ciave</string>
   <string name="login_failed_throttled">Masa volte te ghè provà. Riprova tra on fià de minudi.</string>

@@ -83,7 +83,7 @@
   <string name="share_title_hint">Bınnuşte (lazımo)</string>
   <string name="add_caption_toast">Kerem ke, seba na dosya rê yew bınnuşte cı ke</string>
   <string name="share_description_hint">Şınasnayış</string>
-  <string name="share_caption_hint">Bınnus (sindor 255 karakter)</string>
+  <string name="share_caption_hint" fuzzy="true">Bınnus (sindor 255 karakter)</string>
   <string name="login_failed_network">Xırabiya kewten-network xeta</string>
   <string name="login_failed_wrong_credentials">Nêgêriyeno miyan - kerem ke, parola û nameyê xo kontrol ke</string>
   <string name="login_failed_throttled">Şıma xeylê rayi kerd ke cı kewê, a ser nêvıst. Şıma rê zehmet 2-3 deqey ra tepeya reyna bıcerrebnên.</string>

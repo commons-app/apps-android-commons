@@ -84,7 +84,7 @@
   <string name="share_title_hint">Takarir (Wajib)</string>
   <string name="add_caption_toast">Berikan takarir untuk berkas ini</string>
   <string name="share_description_hint">Deskripsi</string>
-  <string name="share_caption_hint">Takarir (terbatas 255 karakter)</string>
+  <string name="share_caption_hint" fuzzy="true">Takarir (terbatas 255 karakter)</string>
   <string name="login_failed_network">Tidak dapat login - kesalahan pada jaringan</string>
   <string name="login_failed_wrong_credentials">Tak berhasil masuk - silakan periksa nama pengguna dan kata sandi</string>
   <string name="login_failed_throttled">Terlalu banyak percobaan masuk yang gagal. Harap coba lagi dalam beberapa menit</string>
@@ -265,7 +265,7 @@
   <string name="error_while_cache">Kesalahan saat menyimpan gambar</string>
   <string name="title_info">Judul yang unik untuk file tersebut, yang akan berfungsi sebagai nama file. Anda dapat menggunakan bahasa sederhana dengan spasi. Jangan sertakan ekstensi berkas</string>
   <string name="description_info">Tolong jelaskan perihal foto sebanyak mungkin: Di mana dipotret? Apa yang ditampilkan? Apa konteksnya? Tolong jelaskan perihal benda atau orang tersebut. Ungkapkan informasi yang tidak mudah ditebak, misalnya tanggal saat itu jika itu foto pemandangan. Jika berkas menunjukkan sesuatu yang tidak biasa, tolong jelaskan apa yang membuatnya tidak biasa.</string>
-  <string name="caption_info">Tulislah deskripsi ringkas untuk gambar ini. Takarir pertama akan digunakan sebagai Judul gambar ini.</string>
+  <string name="caption_info" fuzzy="true">Tulislah deskripsi ringkas untuk gambar ini. Takarir pertama akan digunakan sebagai Judul gambar ini.</string>
   <string name="upload_image_too_dark">Gambar ini terlalu gelap, Anda yakin ingin mengunggahnya? Wikimedia Commons hanya untuk gambar yang bernilai ensiklopedia.</string>
   <string name="upload_image_blurry">Gambar ini buram, Anda yakin ingin mengunggahnya? Wikimedia Commons hanya untuk gambar yang bernilai ensiklopedia.</string>
   <string name="upload_problem_exist">Potensi masalah dengan gambar ini :</string>

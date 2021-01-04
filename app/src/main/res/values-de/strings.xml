@@ -98,7 +98,7 @@
   <string name="share_title_hint">Titel (erforderlich)</string>
   <string name="add_caption_toast">Bitte gib einen Titel für diese Datei an</string>
   <string name="share_description_hint">Beschreibung</string>
-  <string name="share_caption_hint">Beschriftung (bis zu 255 Zeichen)</string>
+  <string name="share_caption_hint" fuzzy="true">Beschriftung (bis zu 255 Zeichen)</string>
   <string name="login_failed_network">Anmeldung fehlgeschlagen – Netzwerkfehler</string>
   <string name="login_failed_wrong_credentials">Anmeldung fehlgeschlagen. Bitte Benutzernamen und Passwort überprüfen.</string>
   <string name="login_failed_throttled">Zu viele erfolglose Versuche. Bitte in einigen Minuten erneut versuchen.</string>

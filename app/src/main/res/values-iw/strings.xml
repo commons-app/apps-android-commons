@@ -112,7 +112,7 @@
   <string name="share_title_hint">כיתוב (נדרש)</string>
   <string name="add_caption_toast">נא לרשום כיתוב לקובץ הזה</string>
   <string name="share_description_hint">תיאור</string>
-  <string name="share_caption_hint">כיתוב (מוגבל ל־255 תווים)</string>
+  <string name="share_caption_hint">כיתוב</string>
   <string name="login_failed_network">לא ניתן להיכנס – כשל בתקשורת</string>
   <string name="login_failed_wrong_credentials">לא ניתן להיכנס לחשבון – נא לבדוק את שם המשתמש ואת הסיסמה</string>
   <string name="login_failed_throttled">יותר מדי ניסיונות כניסה כושלים. נא לנסות שוב בעוד מספר דקות.</string>
@@ -293,7 +293,7 @@
   <string name="error_while_cache">שגיאה בעת שמירת תמונות במטמון</string>
   <string name="title_info">כותרת מתארת ייחודית לקובץ, שתשמש כשם הקובץ. ניתן להשתמש בשפה טבעית עם רווחים. אין לכלול את סיומת הקובץ</string>
   <string name="description_info">נא לתאר את המדיה כמה שיותר: איפה היא נוצרה? מה היא מראה? מה ההקשר? נא לתאר את העצמים או את האנשים. נא לחשוף מידע שאי־אפשר לנחש בקלות, למשל, הזמן ביום אם זאת תמונת נוף. אם המדיה מציגה משהו בלתי־רגיל, נא להסביר מה מיוחד בה.</string>
-  <string name="caption_info">נא לרשום תיאור קצר של התמונה. התיאור הראשון ישמש ככותרת התמונה.</string>
+  <string name="caption_info">נא לרשום תיאור קצר של התמונה. התיאור הראשון ישמש ככותרת התמונה. מוגבל ל־255 תווים.</string>
   <string name="upload_image_too_dark">התמונה הזאת חשוכה מדי, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
   <string name="upload_image_blurry">התמונה הזאת מטושטשת, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
   <string name="upload_problem_exist">בעיות פוטנציאליות עם התמונה הזאת:</string>

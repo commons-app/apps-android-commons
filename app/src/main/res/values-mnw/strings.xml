@@ -70,7 +70,7 @@
   <string name="share_title_hint">က္ဍိုပ်လိက် (အာတ်မိက်ဒၟံင်)</string>
   <string name="add_caption_toast">ပဂုန်တုဲ ကဵု က္ဍိုပ်လိက် ဝှာင်ဏအ်ညိ</string>
   <string name="share_description_hint">မဗမံက်ထ္ၜး</string>
-  <string name="share_caption_hint">က္ဍိုပ်လိက် (ပိုင်ခြာလဝ် လၟိဟ်မလိက် ၂၅၅)</string>
+  <string name="share_caption_hint" fuzzy="true">က္ဍိုပ်လိက် (ပိုင်ခြာလဝ် လၟိဟ်မလိက် ၂၅၅)</string>
   <string name="login_failed_network">လုပ်လံက်အေန် ဟွံဂွံ - ဇာဇၞိက် ဗၠေတ်</string>
   <string name="login_failed_wrong_credentials">လုပ်လံက်အေန် ဟွံဂွံ - ပဂုန်တုဲ ကလေင်ရံင် ယၟုလွပ် ကေုာံ မလိက်ပၞုက် မၞးညိ</string>
   <string name="login_failed_throttled">ပရေင်ဂိုတ်ဂစာန် ဟွံအံင်ဇၞး ဂၠိုင်လောန်အာရ။ ပဂုန်တုဲ မိနေတ်ညိညပၠန် ကလေင်စမ်ပၠန်။</string>

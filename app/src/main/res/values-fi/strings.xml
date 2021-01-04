@@ -90,7 +90,7 @@
   <string name="share_title_hint">Kuvateksti (vaaditaan)</string>
   <string name="add_caption_toast">Anna kuvateksti tälle tiedostolle</string>
   <string name="share_description_hint">Kuvaus</string>
-  <string name="share_caption_hint">Tekstitys (rajoitus 255 merkkiä)</string>
+  <string name="share_caption_hint" fuzzy="true">Tekstitys (rajoitus 255 merkkiä)</string>
   <string name="login_failed_network">Kirjautuminen epäonnistui - verkkovirhe</string>
   <string name="login_failed_wrong_credentials">Kirjautuminen epäonnistui - tarkista käyttäjänimesi ja salasanasi</string>
   <string name="login_failed_throttled">Liikaa epäonnistuneita yrityksiä. Yritä uudelleen parin minuutin kuluttua.</string>
@@ -271,7 +271,7 @@
   <string name="error_while_cache">Virhe varastoidessa kuvia</string>
   <string name="title_info">Tiedoston yksilöllinen ja kuvaava otsikko, jota käytetään tiedostonimenä. Voit käyttää tavallista kieltä välilyönnein. Älä sisällytä tiedoston päätettä.</string>
   <string name="description_info">Kuvaile mediaa niin paljon kuin mahdollista: Missä se otettiin? Mitä se esittää? Mikä on asiayhteys? Kuvaile esineitä tai henkilöitä. Tuo ilmi tietoja, joita ei ole helppo arvailla, esimerkiksi vuorokaudenaika, jos se on maisema. Jos media esittää jotain epätavallista, selitä, mikä tekee siitä epätavallisen.</string>
-  <string name="caption_info">Kirjoita lyhyt kuvaus kuvasta. Ensimmäistä kuvatekstiä käytetään kuvan otsikkona.</string>
+  <string name="caption_info" fuzzy="true">Kirjoita lyhyt kuvaus kuvasta. Ensimmäistä kuvatekstiä käytetään kuvan otsikkona.</string>
   <string name="upload_image_too_dark">Tämä kuva on liian tumma, haluatko varmasti ladata sen? Wikimedia Commons on vain kuville, joilla on tietosanakirja-arvoa.</string>
   <string name="upload_image_blurry">Tämä kuva on epäselvä. Haluatko varmasti ladata sen? Wikimedia Commons on tarkoitettu vain kuville, joilla on arvoa tietosanakirjoissa.</string>
   <string name="upload_problem_exist">Kuvan mahdolliset ongelmat:</string>

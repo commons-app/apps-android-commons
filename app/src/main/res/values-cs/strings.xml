@@ -98,7 +98,7 @@
   <string name="share_title_hint">Název (povinný)</string>
   <string name="add_caption_toast">Prosím, zadejte titulek pro tento soubor</string>
   <string name="share_description_hint">Popis</string>
-  <string name="share_caption_hint">Popisek (max. 255 znaků)</string>
+  <string name="share_caption_hint" fuzzy="true">Popisek (max. 255 znaků)</string>
   <string name="login_failed_network">Nelze se přihlásit - selhání sítě</string>
   <string name="login_failed_wrong_credentials">Není možné se přihlásit – zkontrolujte své uživatelské jméno a heslo</string>
   <string name="login_failed_throttled">Příliš mnoho neúspěšných pokusů. Zkuste to prosím znovu za několik minut.</string>

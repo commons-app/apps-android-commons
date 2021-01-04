@@ -84,7 +84,7 @@
   <string name="share_title_hint">Popisok (povinné)</string>
   <string name="add_caption_toast">Prosím, pridajte popisok pre tento súbor</string>
   <string name="share_description_hint">Opis</string>
-  <string name="share_caption_hint">Popisok (max. 255 znakov)</string>
+  <string name="share_caption_hint" fuzzy="true">Popisok (max. 255 znakov)</string>
   <string name="login_failed_network">prihlásenie zlyhalo - zlyhanie siete</string>
   <string name="login_failed_wrong_credentials">Nie je možné sa prihlásiť – skontrolujte, prosím, svoje používateľské meno a heslo</string>
   <string name="login_failed_throttled">Príliš veľa neúspešných pokusov. Skúste to znova o niekoľko minút.</string>

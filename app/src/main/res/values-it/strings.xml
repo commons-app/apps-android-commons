@@ -91,7 +91,7 @@
   <string name="share_title_hint">Didascalia (obbligatoria)</string>
   <string name="add_caption_toast">Per favore, fornisci una didascalia per questo file</string>
   <string name="share_description_hint">Descrizione</string>
-  <string name="share_caption_hint">Didascalia (limite 255 caratteri)</string>
+  <string name="share_caption_hint">Didascalia</string>
   <string name="login_failed_network">Impossibile effettuare l\'accesso - errore di rete</string>
   <string name="login_failed_wrong_credentials">Accesso non riuscito - controlla nome utente e password</string>
   <string name="login_failed_throttled">Troppi tentativi falliti. Riprova tra alcuni minuti.</string>
