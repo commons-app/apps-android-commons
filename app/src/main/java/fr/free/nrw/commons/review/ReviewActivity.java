@@ -226,4 +226,16 @@ public class ReviewActivity extends BaseActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reviewPager.setAdapter(reviewPagerAdapter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        reviewPager.setAdapter(null); 
+    }
 }
