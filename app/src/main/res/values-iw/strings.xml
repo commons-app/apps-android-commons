@@ -687,7 +687,7 @@
   <string name="leaderboard_my_rank_button_text">הדירוג שלי</string>
   <string name="mapbox_telemetry">מדידה טלמטרית של Mapbox</string>
   <string name="telemetry_opt_out_summary">לשלוח מיקום ונתוני שימוש אלמוניים ל־Mapbox בעת שימוש בתכונה „בסביבה”</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;שיפור המפה הזו&lt;/a&gt;</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;שיפור המפה הזאת&lt;/a&gt;</string>
   <string name="limited_connection_enabled">מופעל מצב חיבור מוגבל!</string>
   <string name="limited_connection_disabled">מצב חיבור מוגבל הושבת. ההעלאות שממתינות תמשכנה כעת.</string>
   <string name="limited_connection">החיבור מוגבל</string>

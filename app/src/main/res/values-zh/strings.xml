@@ -473,7 +473,7 @@
   <string name="nearby_card_permission_explanation">您希望我们获取您当前的位置来显示最近的需要图片的地方吗？</string>
   <string name="unable_to_display_nearest_place">无法显示没有位置权限的需要图片的最近位置</string>
   <string name="never_ask_again">不再询问</string>
-  <string name="display_location_permission_title" fuzzy="true">显示位置许可</string>
+  <string name="display_location_permission_title">显示位置许可</string>
   <string name="display_location_permission_explanation">当需要附近通知卡查看功能时，请求位置许可。</string>
   <string name="achievements_fetch_failed">有错误发生，无法获取你的成就</string>
   <string name="achievements_fetch_failed_ultimate_achievement">您做出了许多贡献，我们的计算系统无法应对。这是最终的成就。</string>
