@@ -85,7 +85,7 @@
   <string name="display_list_button">Lëscht</string>
   <string name="gps_disabled">GPS ass op Ärem Apparat ausgeschalt. Wëllt Dir en aktivéieren?</string>
   <string name="enable_gps">GPS aktivéieren</string>
-  <string name="contributions_subtitle_zero">Nach keng eropgeluede Fichieren</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Nach keng eropgeluede Fichieren</string>
   <string name="categories_not_found">D\'Kategorie %1$s gouf net fonnt</string>
   <string name="categories_skip_explanation">Setzt Kategorien derbäi fir datt Är Biller méi einfach op Wikimedia Commons ze fanne sinn.\n\nFänkt u mat Kategorien derbäizesetzen.</string>
   <string name="categories_activity_title">Kategorien</string>
@@ -225,7 +225,7 @@
   <string name="upload_problem_do_you_continue">Wëllt Dir dëst Bild nach ëmmer eroplueden?</string>
   <string name="internet_downloaded">Luet wgl. nëmme Biller erop déi Dir selwer opgeholl hutt. Luet keng Biller erop déi Dir aus dem Internet erofgelueden hutt.</string>
   <string name="give_permission">Autorisatioun ginn</string>
-  <string name="use_external_storage">Externe Späicher benotzen</string>
+  <string name="use_external_storage">Opnamen vun der In-App späicheren</string>
   <string name="use_external_storage_summary">Biller späicheren déi mat der in-app Kamera vun Ärem Apparat gemaach goufen</string>
   <string name="login_to_your_account">An Äre Benotzerkont aloggen</string>
   <string name="send_log_file">Log-Fichier schécken</string>
@@ -303,7 +303,7 @@
   <string name="nearby_fragment">Nobäi</string>
   <string name="notifications">Notifikatiounen</string>
   <string name="list_sheet">Lëscht</string>
-  <string name="step_count">Schrëtt %1$d vu(n) %2$d</string>
+  <string name="step_count" fuzzy="true">Schrëtt %1$d vu(n) %2$d</string>
   <string name="next">Weider</string>
   <string name="previous">Vireg</string>
   <string name="submit">Späicheren</string>
@@ -389,6 +389,8 @@
   <string name="pause">ënnerbriechen</string>
   <string name="resume">virufueren</string>
   <string name="paused">Ënnerbrach</string>
+  <string name="more">Méi</string>
+  <string name="favorites">Favoritten</string>
   <string name="achievements_tab_title">Realisatiounen</string>
   <string name="leaderboard_tab_title">Leaderboard</string>
   <string name="rank_prefix">Klassement:</string>

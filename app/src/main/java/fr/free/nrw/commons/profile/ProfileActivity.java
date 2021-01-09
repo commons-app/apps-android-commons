@@ -12,7 +12,7 @@ import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.profile.achievements.AchievementsFragment;
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.theme.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +20,7 @@ import java.util.List;
  * This activity will set two tabs, achievements and
  * each tab will have their own fragments
  */
-public class ProfileActivity extends NavigationBaseActivity {
+public class ProfileActivity extends BaseActivity {
 
     private FragmentManager supportFragmentManager;
 
@@ -39,7 +39,6 @@ public class ProfileActivity extends NavigationBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
-        initDrawer();
         setTitle(R.string.Profile);
 
         supportFragmentManager = getSupportFragmentManager();

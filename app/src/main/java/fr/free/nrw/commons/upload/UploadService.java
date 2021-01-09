@@ -224,8 +224,7 @@ public class UploadService extends CommonsDaggerService {
 
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
-    startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS,
-        curNotification.setContentText(getText(R.string.starting_uploads)).build());
+    showUploadNotification();
     if (ACTION_START_SERVICE.equals(intent.getAction()) && freshStart) {
       compositeDisposable.add(contributionDao.updateStates(Contribution.STATE_FAILED,
           new int[]{Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS})
@@ -234,19 +233,32 @@ public class UploadService extends CommonsDaggerService {
           .subscribe());
       freshStart = false;
     } else if (PROCESS_PENDING_LIMITED_CONNECTION_MODE_UPLOADS.equals(intent.getAction())) {
-        contributionDao.getContribution(Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE)
-            .flatMapObservable(
-                (Function<List<Contribution>, ObservableSource<Contribution>>) contributions -> Observable.fromIterable(contributions))
-            .concatMapCompletable(contribution -> Completable.fromAction(() -> queue(contribution)))
-        .subscribeOn(ioThreadScheduler)
-        .subscribe();
-      }
+      contributionDao.getContribution(Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE)
+          .flatMapObservable(
+              (Function<List<Contribution>, ObservableSource<Contribution>>) contributions -> Observable
+                  .fromIterable(contributions))
+          .concatMapCompletable(contribution -> Completable.fromAction(() -> queue(contribution)))
+          .subscribeOn(ioThreadScheduler)
+          .subscribe();
+    }
     return START_REDELIVER_INTENT;
+  }
+
+  private void showUploadNotification() {
+    compositeDisposable.add(contributionDao
+        .getPendingUploads(new int[]{Contribution.STATE_IN_PROGRESS, Contribution.STATE_QUEUED})
+        .subscribe(count -> {
+          if (count > 0) {
+            startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS,
+                curNotification.setContentText(getText(R.string.starting_uploads)).build());
+          }
+        }));
   }
 
   @SuppressLint("StringFormatInvalid")
   private NotificationCompat.Builder getNotificationBuilder(String channelId) {
-    return new NotificationCompat.Builder(this, channelId).setAutoCancel(true)
+    return new NotificationCompat.Builder(this, channelId)
+        .setAutoCancel(true)
         .setSmallIcon(R.drawable.ic_launcher)
         .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
         .setAutoCancel(true)
@@ -310,6 +322,7 @@ public class UploadService extends CommonsDaggerService {
           }
         })
         .flatMap(uploadStash -> {
+          Timber.d("Upload stash result %s", uploadStash.toString());
           notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
 
           if (uploadStash.getState() == StashUploadState.SUCCESS) {

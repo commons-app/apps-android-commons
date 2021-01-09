@@ -23,7 +23,6 @@
     <item quantity="other">carregando %1$d arquivos</item>
   </plurals>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -96,7 +95,7 @@
   <string name="share_title_hint">Legenda (obrigatório)</string>
   <string name="add_caption_toast">Forneça uma legenda para este arquivo</string>
   <string name="share_description_hint">Descrição</string>
-  <string name="share_caption_hint">Legenda (limite de 255 caracteres)</string>
+  <string name="share_caption_hint">Legenda</string>
   <string name="login_failed_network">Erro ao efetuar o login - falha na rede</string>
   <string name="login_failed_wrong_credentials">Não é possível fazer o login - verifique seu nome de usuário e senha</string>
   <string name="login_failed_throttled">Muitas tentativas malsucedidas. Tente de novo daqui alguns minutos.</string>
@@ -115,7 +114,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">O GPS está desligado no seu aparelho. Gostarias de ligá-lo ?</string>
   <string name="enable_gps">GPS inapto.</string>
-  <string name="contributions_subtitle_zero">Ainda não carregado</string>
+  <string name="contributions_subtitle_zero">(Ainda não foi carregado nenhum arquivo)</string>
   <string name="categories_not_found">Nenhuma categoria correspondente %1$s encontrada</string>
   <string name="depictions_not_found">Nenhum item do Wikidata correspondente a %1$s encontrado</string>
   <string name="no_child_classes">%1$s não tem classes filho</string>
@@ -277,7 +276,7 @@
   <string name="error_while_cache">Erro durante o cache de imagens</string>
   <string name="title_info">Um título descritivo exclusivo para o arquivo, que servirá como um nome de arquivo. Você pode usar linguagem simples com espaços. Não inclua a extensão do arquivo</string>
   <string name="description_info">Por favor, descreva a mídia tanto quanto possível: onde foi tomada? O que isso mostra? Qual é o contexto? Descreva os objetos ou pessoas. Revelar informações que não podem ser facilmente adivinhadas, por exemplo, a hora do dia, se for uma paisagem. Se a mídia mostrar algo incomum, explique o que torna incomum.</string>
-  <string name="caption_info">Por favor, escreva uma breve descrição da imagem. A primeira legenda seria usada como título da imagem.</string>
+  <string name="caption_info">Por favor, escreva uma breve descrição da imagem. A primeira legenda seria usada como título da imagem. Limite de 255 caracteres.</string>
   <string name="upload_image_too_dark">Esta foto está muito escura, você tem certeza de que deseja enviá-la? O Wikimedia Commons é apenas para imagens com valor enciclopédico.</string>
   <string name="upload_image_blurry">Esta foto está embaçada, tem certeza de que deseja enviá-la? O Wikimedia Commons é apenas para imagens com valor enciclopédico.</string>
   <string name="upload_problem_exist">Problemas potenciais com esta imagem:</string>
@@ -290,8 +289,8 @@
   <string name="upload_problem_image">Problemas encontrados na imagem</string>
   <string name="internet_downloaded">Por favor, só envie fotos que você tirou. Não faça upload de fotos baixadas da Internet.</string>
   <string name="give_permission">Dar permissão</string>
-  <string name="use_external_storage">Usar o armazenamento externo</string>
-  <string name="use_external_storage_summary">Salvar as fotos tiradas com a câmera no aplicativo no seu dispositivo</string>
+  <string name="use_external_storage">Salvar fotos no aplicativo</string>
+  <string name="use_external_storage_summary">Salvar as fotos tiradas com a câmera do aplicativo no armazenamento do dispositivo</string>
   <string name="login_to_your_account">Faça login na sua conta</string>
   <string name="send_log_file">Enviar arquivo de registro</string>
   <string name="send_log_file_description">Enviar arquivo de registro para desenvolvedores via e-mail para ajudar a depurar problemas com o aplicativo. Nota: os registros podem conter informações de identificação</string>
@@ -427,18 +426,18 @@
   <string name="notifications">Notificações</string>
   <string name="read_notifications">Notificações (lidas)</string>
   <string name="display_nearby_notification">Exibir notificação próxima</string>
-  <string name="display_nearby_notification_summary">Toque aqui para ver o local mais próximo que precisa de fotos</string>
+  <string name="display_nearby_notification_summary">Mostrar notificação no aplicativo para o lugar mais próximo que precisa de fotos</string>
   <string name="no_close_nearby">Nenhum lugar próximo encontrado perto de você</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Permissão de Armazenamento</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos da sua permissão para acessar o armazenamento externo do seu dispositivo para fazer upload de imagens.</string>
   <string name="nearby_notification_dismiss_message">Você não verá mais o lugar mais próximo que precisa de fotos. No entanto, você pode reativar essa notificação em Configurações, se desejar.</string>
-  <string name="step_count">Passo %1$d de %2$d</string>
+  <string name="step_count">Passo %1$d de %2$d: %3$s</string>
   <string name="image_in_set_label">Imagem %1$d em conjunto</string>
   <string name="next">Próximo</string>
   <string name="previous">Anterior</string>
   <string name="submit">Enviar</string>
-  <string name="upload_title_duplicate">Um arquivo com o nome do arquivo% 1 $ s existe. Tem certeza de que deseja continuar?</string>
+  <string name="upload_title_duplicate">Um arquivo com o nome do arquivo% 1 $ s existe. Tem certeza de que deseja continuar?\n\nNota: Um sufixo adequado será adicionado ao nome do arquivo automaticamente.</string>
   <string name="map_application_missing">Nenhum aplicativo de mapa compatível pode ser encontrado no seu dispositivo. Por favor, instale um aplicativo de mapa para usar este recurso.</string>
   <string name="navigation_item_bookmarks">Favoritos</string>
   <string name="title_activity_bookmarks">Favoritos</string>
@@ -473,7 +472,7 @@
   <string name="nearby_card_permission_explanation">Você gostaria que usássemos sua localização atual para exibir o local mais próximo que precisa de fotos?</string>
   <string name="unable_to_display_nearest_place">Não é possível exibir o local mais próximo que precisa de fotos sem permissões de localização</string>
   <string name="never_ask_again">Nunca mais pergunte isso</string>
-  <string name="display_location_permission_title">Exibir permissão de local</string>
+  <string name="display_location_permission_title">Pedir permissão de localização</string>
   <string name="display_location_permission_explanation">Peça permissão de localização quando necessário para o recurso de exibição de cartão de notificação nas proximidades.</string>
   <string name="achievements_fetch_failed">Algo deu errado, não conseguimos buscar suas conquistas</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Você fez tantas contribuições que nosso sistema de cálculo de conquistas não consegue lidar. Esta é a conquista final.</string>
@@ -646,6 +645,8 @@
   <string name="pause">pausar</string>
   <string name="resume">continuar</string>
   <string name="paused">Pausado</string>
+  <string name="more">Mais</string>
+  <string name="favorites">Favoritos</string>
   <string name="achievements_tab_title">Conquistas</string>
   <string name="leaderboard_tab_title">Tabela de classificação</string>
   <string name="rank_prefix">Classificação:</string>
@@ -665,7 +666,7 @@
   <string name="leaderboard_nearby">Próximo</string>
   <string name="leaderboard_used">Usado</string>
   <string name="leaderboard_my_rank_button_text">Minha classificação</string>
-  <string name="mapbox_telemetry">Recusar telemetria</string>
+  <string name="mapbox_telemetry">Telemetria do Mapbox</string>
   <string name="telemetry_opt_out_summary">Enviar localização anônima e dados de uso para Mapbox ao usar o recurso nas proximidades</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Melhorar o mapa&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Modo de conexão limitada habilitado!</string>
@@ -673,4 +674,15 @@
   <string name="limited_connection">Conexão limitada</string>
   <string name="statistics_quality">Imagens de qualidade</string>
   <string name="quality_images_info">Imagens de qualidade são diagramas ou fotografias que atendem a certos padrões de qualidade (que são principalmente de natureza técnica) e são valiosos para projetos da Wikimedia</string>
+  <string name="resuming_upload">Retomando carregamento…</string>
+  <string name="pausing_upload">Pausando carregamento…</string>
+  <string name="limited_connection_explanation">Você habilitou o modo de conexão limitada. Todos os carregamentos são pausados e serão retomados assim que você desativar este modo.</string>
+  <string name="limited_connection_is_on">O modo de conexão limitada está ativado.</string>
+  <string name="media_details_tooltip">Escreva uma pequena legenda que diga o que sua imagem mostra. Na descrição, diga o que torna a imagem interessante ou típica ou rara e explique o contexto, visível ou não. Use a terminologia exata tanto quanto você puder.</string>
+  <string name="depicts_tooltip">Encontre e selecione todos os conceitos que esta imagem retrata. Seja o mais específico possível. Se a imagem retrata vários itens, escolha todos dentro do razoável. Não escolha tags genéricas se tags mais específicas estiverem disponíveis.</string>
+  <string name="categories_tooltip">Selecione as categorias apropriadas. Ao contrário das representações, as categorias estão apenas em inglês.</string>
+  <string name="license_tooltip">Commons torna suas fotos reutilizáveis e adaptadas por todos. Você quer renunciar a todos os direitos? Você quer ser atribuído? Você quer adaptações para usar a mesma licença?</string>
+  <string name="depicts_step_title">Descreve</string>
+  <string name="license_step_title">Licença de mídia</string>
+  <string name="media_detail_step_title">Detalhes de mídia</string>
 </resources>

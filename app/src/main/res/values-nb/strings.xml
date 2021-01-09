@@ -103,7 +103,7 @@
   <string name="display_list_button">Liste</string>
   <string name="gps_disabled">GPS er slått av på denne enheten. Ønsker du å slå den på?</string>
   <string name="enable_gps">Slå på GPS</string>
-  <string name="contributions_subtitle_zero">Ingen opplastinger ennå</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Ingen opplastinger ennå</string>
   <string name="categories_not_found">Ingen kategorier som stemte overens med %1$s funnet</string>
   <string name="categories_skip_explanation">Legg til kategorier for å gjøre bildene dine lettere å finne på Wikimedia Commons.\n\nBegynn å skrive navnet på kategoriene.</string>
   <string name="categories_activity_title">Kategorier</string>
@@ -265,8 +265,8 @@
   <string name="upload_problem_do_you_continue">Ønsker du fortsatt å laste opp dette bildet?</string>
   <string name="internet_downloaded">Last kun opp bilder du har tatt selv. Ikke last opp bilder du har lastet ned fra internett.</string>
   <string name="give_permission">Gi tillatelse</string>
-  <string name="use_external_storage">Bruk ekstern lagring</string>
-  <string name="use_external_storage_summary">Lagre bilder som er tatt med kameraet i appen på enheten din</string>
+  <string name="use_external_storage" fuzzy="true">Bruk ekstern lagring</string>
+  <string name="use_external_storage_summary" fuzzy="true">Lagre bilder som er tatt med kameraet i appen på enheten din</string>
   <string name="login_to_your_account">Logg inn med kontoen din</string>
   <string name="send_log_file">Send loggfil</string>
   <string name="send_log_file_description">Send loggfil til utviklerne via epost for å hjelpe til å feilsøke problemer med appen. Merk: Logger kan potensielt inneholde identifiserende informasjon.</string>
@@ -396,18 +396,18 @@
   <string name="notifications">Varsler</string>
   <string name="read_notifications" fuzzy="true">Varsler (arkivert)</string>
   <string name="display_nearby_notification">Vis varsel for steder i nærheten</string>
-  <string name="display_nearby_notification_summary">Trykk her for å se det nærmeste stedet som trenger bilder</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Trykk her for å se det nærmeste stedet som trenger bilder</string>
   <string name="no_close_nearby">Ingen steder funnet i nærheten av deg</string>
   <string name="list_sheet">Liste</string>
   <string name="storage_permission">Lagringstillatelse</string>
   <string name="write_storage_permission_rationale_for_image_share">Vi trenger din tillatelse for å få tilgang til enhetens eksterne lagring for å kunne laste opp bilder.</string>
   <string name="nearby_notification_dismiss_message">Du vil ikke se det nærmeste stedet som trenger bilder lenger. Du kan imidlertid slå på dette varselet igjen i innstillingene om du ønsker.</string>
-  <string name="step_count">Steg %1$d av %2$d</string>
+  <string name="step_count" fuzzy="true">Steg %1$d av %2$d</string>
   <string name="image_in_set_label">Bilde %1$d i sett</string>
   <string name="next">Neste</string>
   <string name="previous">Forrige</string>
   <string name="submit">Send</string>
-  <string name="upload_title_duplicate">En fil med navnet %1$s finnes fra før. Er du sikker på at du vil fortsette?</string>
+  <string name="upload_title_duplicate" fuzzy="true">En fil med navnet %1$s finnes fra før. Er du sikker på at du vil fortsette?</string>
   <string name="map_application_missing">Ingen kompatibel kartapplikasjon funnet på enheten din. Installer en kartapplikasjon for å bruke denne funksjonen.</string>
   <string name="navigation_item_bookmarks">Bokmerker</string>
   <string name="title_activity_bookmarks">Bokmerker</string>
@@ -440,7 +440,7 @@
   <string name="nearby_card_permission_explanation">Ønsker du å bruke din nåværende plassering for å vise det nærmeste stedet som trenger bilder?</string>
   <string name="unable_to_display_nearest_place">Kan ikke vise steder som trenger bilder i nærheten uten stedstillatelse</string>
   <string name="never_ask_again">Ikke spør meg igjen</string>
-  <string name="display_location_permission_title">Vis stedstillatelse</string>
+  <string name="display_location_permission_title" fuzzy="true">Vis stedstillatelse</string>
   <string name="display_location_permission_explanation">Ber om plasseringstillatelse som trengs når man bruker funksjonen for steder i nærheten.</string>
   <string name="achievements_fetch_failed">Noe gikk galt. Vi kunne ikke hente prestasjonene dine.</string>
   <string name="ends_on">Slutter:</string>

@@ -32,7 +32,7 @@
         <item name="buttonBackgroundPressed">@color/pressed_button_dark</item>
         <item name="textDisabled">@color/disabled_button_text_color_dark</item>
         <item name="textEnabled">@color/enabled_button_text_color_dark</item>
-        <item name="mainCardBackground">@color/main_background_dark</item>
+        <item name="mainCardBackground">@color/black</item>
         <item name="mainScreenNearbyPermissionbutton">@style/DarkFlatNearbyPermissionButton</item>
         <item name="iconInfo24">@drawable/ic_info_outline_24dp</item>
         <item name="iconMap24" >@drawable/ic_map_white_24dp</item>
@@ -40,14 +40,28 @@
         <item name="mediaDetailsHeadingText">@color/layout_light_grey</item>
         <item name="mediaDetailNominationBackground">@color/deleteRedDark</item>
         <item name="mediaDetailSpacerColor">@color/browser_actions_divider_color</item>
+        <item name="nav_tab_item_color_state">@color/color_state_nav_tab_dark</item>
+        <item name="navbar_item_text_color">@color/color_state_nav_tab_dark</item>
+        <item name="nav_bar_background">@color/main_background_dark</item>
+        <item name="toolbar_text_color">@color/white</item>
+        <item name="more_bottom_sheet_style">@style/DarkMoreBottomSheetStyle</item>
+        <item name="more_bottom_sheet_drawable_color">@color/white</item>
+        <item name="card_item_color">@color/white</item>
+        <item name="notification_icon_drawable">@drawable/ic_notifications_white_24dp</item>
+        <item name="notification_icon_text_color">@color/white</item>
+        <item name="toggle_theme">@style/SwitchThemeDark</item>
+        <item name="contributionsListTextPrimary">@color/white</item>
+        <item name="contributionsListTextSecondary">@color/white</item>
+        <item name="menu_item_tint">@color/white</item>
+        <item name="search_icon">@drawable/ic_search_white_24dp</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="contributionsListBackground">@color/white</item>
-        <item name="tabBackground">@color/primaryColor</item>
-        <item name="tabIndicatorColor">@color/white</item>
-        <item name="tabSelectedTextColor">@color/white</item>
-        <item name="tabTextColor">@color/white</item>
+        <item name="tabBackground">@color/card_light_grey</item>
+        <item name="tabIndicatorColor">@color/primaryDarkColor</item>
+        <item name="tabSelectedTextColor">@color/primaryDarkColor</item>
+        <item name="tabTextColor">@color/primaryDarkColor</item>
         <item name="mainBackground">@color/main_background_light</item>
         <item name="achievementBackground">@color/achievement_background_light</item>
         <item name="drawerHeaderBackground">@color/drawerHeader_background_light</item>
@@ -73,14 +87,46 @@
         <item name="buttonBackgroundPressed">@color/pressed_button_light</item>
         <item name="textDisabled">@color/disabled_button_text_color_light</item>
         <item name="textEnabled">@color/enabled_button_text_color_light</item>
-        <item name="mainCardBackground">@color/primaryDarkColor</item>
+        <item name="mainCardBackground">@color/card_light_grey</item>
         <item name="mainScreenNearbyPermissionbutton">@style/LightFlatNearbyPermissionButton</item>
         <item name="iconInfo24">@drawable/ic_info_outline_dark_24dp</item>
         <item name="iconMap24">@drawable/ic_map_dark_24dp</item>
         <item name="mediaDetailsText">@color/enabled_button_text_color_light</item>
-        <item name="mediaDetailsHeadingText">@color/primaryDarkColor</item>
+        <item name="mediaDetailsHeadingText">@color/primaryColor</item>
         <item name="mediaDetailNominationBackground">@color/deleteRed</item>
         <item name="mediaDetailSpacerColor">@color/divider_grey</item>
+        <item name="nav_tab_item_color_state">@color/color_state_nav_tab_light</item>
+        <item name="navbar_item_text_color">@color/color_state_nav_tab_light</item>
+        <item name="nav_bar_background">@color/white</item>
+        <item name="toolbar_text_color">@color/primaryDarkColor</item>
+        <item name="more_bottom_sheet_style">@style/LightMoreBottomSheetStyle</item>
+        <item name="more_bottom_sheet_drawable_color">@color/black</item>
+        <item name="card_item_color">@color/primaryDarkColor</item>
+        <item name="notification_icon_drawable">@drawable/ic_notifications_blue_24dp</item>
+        <item name="notification_icon_text_color">@color/primaryDarkColor</item>
+        <item name="toggle_theme">@style/SwitchThemeLight</item>
+        <item name="contributionsListTextPrimary">@color/black</item>
+        <item name="contributionsListTextSecondary">@color/disabled_button_text_color_dark</item>
+        <item name="menu_item_tint">@color/primaryDarkColor</item>
+        <item name="search_icon">@drawable/ic_search_blue_24dp</item>
+    </style>
+
+    <style name="LightMoreBottomSheetStyle" parent="LightAppTheme">
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="DarkMoreBottomSheetStyle" parent="DarkAppTheme">
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="LightToolbarStyle" parent="LightAppTheme">
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="DarkToolbarStyle" parent="DarkAppTheme">
+        <item name="android:textColor">@color/primaryDarkColor</item>
     </style>
 
     <style name="WhiteSearchBarTheme" parent="DarkAppTheme">
@@ -170,6 +216,14 @@
         <item name="android:padding">@dimen/small_gap</item>
         <item name="android:textColor">?attr/mediaDetailsText</item>
         <item name="android:textSize">@dimen/description_text_size</item>
+    </style>
+
+    <style name="SwitchThemeLight" parent="LightAppTheme" >
+        <item name="colorControlActivated">@color/primaryDarkColor</item>
+    </style>
+
+    <style name="SwitchThemeDark" parent="DarkAppTheme" >
+        <item name="colorControlActivated">@color/primaryColor</item>
     </style>
 
 </resources>

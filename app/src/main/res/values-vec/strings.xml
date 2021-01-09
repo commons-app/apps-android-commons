@@ -8,7 +8,7 @@
     <item quantity="one">%1$d file en cargamento</item>
     <item quantity="other">%1$d file en cargamento</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -77,7 +77,7 @@
   <string name="share_title_hint">Didascalia (obligatorio)</string>
   <string name="add_caption_toast">Par piaser, daghe na didascalia a sto file</string>
   <string name="share_description_hint">Descrision</string>
-  <string name="share_caption_hint">Didascalia (màsimo 255 caràteri)</string>
+  <string name="share_caption_hint" fuzzy="true">Didascalia (màsimo 255 caràteri)</string>
   <string name="login_failed_network">No xé posibiłe ndarghe drento - erore de rete</string>
   <string name="login_failed_wrong_credentials">Entrada no riusia - Daghe na ociada al nome utente e ciave</string>
   <string name="login_failed_throttled">Masa volte te ghè provà. Riprova tra on fià de minudi.</string>
@@ -96,7 +96,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">El GPS el xé inabiłità sol dispoxidivo. Vuto tacarlo?</string>
   <string name="enable_gps">Taca el GPS</string>
-  <string name="contributions_subtitle_zero">No xé njiancora sta cargà calcosa</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">No xé njiancora sta cargà calcosa</string>
   <string name="categories_not_found">No ła xé sta catada na categoria che ła contegna %1$s</string>
   <string name="depictions_not_found">No gò catà nisun elemento Wikidata che corisponda a %1$s</string>
   <string name="categories_skip_explanation">Xonta categorie par far sì che łe to someje e imajini łe sia pì façilmente riçercae so Wikimedia Commons.\nScumisia a dijitare par xontare categorie.</string>
@@ -256,8 +256,8 @@
   <string name="upload_problem_image">Problemi catai in te l\'imajine</string>
   <string name="internet_downloaded">Carga soło łe foto che te ghè fato da soło. No sta cargar imajine catae so internet</string>
   <string name="give_permission">Dati autorixasion</string>
-  <string name="use_external_storage">Dopara memoria esterna</string>
-  <string name="use_external_storage_summary">Salva łe foto fate co ła fotocamara in-app sol dispoxidivo</string>
+  <string name="use_external_storage" fuzzy="true">Dopara memoria esterna</string>
+  <string name="use_external_storage_summary" fuzzy="true">Salva łe foto fate co ła fotocamara in-app sol dispoxidivo</string>
   <string name="login_to_your_account">Va drento al to uxuario</string>
   <string name="send_log_file">Invia file de rejistro</string>
   <string name="send_log_file_description">Invia el file de rejistro ai xviłupadori co ła email par jutarli a rixolvare i problemi co l\'aplicasion. Notasion: I log i podaria contegnere informasion de identifegasion</string>
@@ -387,18 +387,18 @@
   <string name="notifications">Notifeghe</string>
   <string name="read_notifications">Notifeghe (archiviae)</string>
   <string name="display_nearby_notification">Fa vedare notifega cuà rente</string>
-  <string name="display_nearby_notification_summary">Struca cuà par vardare el posto pì rente che ghe serve łe imajini</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Struca cuà par vardare el posto pì rente che ghe serve łe imajini</string>
   <string name="no_close_nearby">Nisun posto cuà rente de ti catà</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Autorixasion de archiviasion</string>
   <string name="write_storage_permission_rationale_for_image_share">Ne serve ła to autorixasion par ndar drento a ła memoria esterna del to dispoxidivo par cargar łe imajini</string>
   <string name="nearby_notification_dismiss_message">No te vedarè el posto pì rente che ghe serve imajini. Tuta via, te połi riativar sta notifega n\'te łe inpostasion, se te vołi.</string>
-  <string name="step_count">Paso %1$d de %2$d</string>
+  <string name="step_count" fuzzy="true">Paso %1$d de %2$d</string>
   <string name="image_in_set_label">Imajine %1$d in tel\'union</string>
   <string name="next">Dopo</string>
   <string name="previous">Prima</string>
   <string name="submit">Envia</string>
-  <string name="upload_title_duplicate">Xà ghe xé on file col nome %1$s. Sito seguro de vołer ndar vanti?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Xà ghe xé on file col nome %1$s. Sito seguro de vołer ndar vanti?</string>
   <string name="map_application_missing">Nisuna aplicasion de mape conpatibiłe ła xé sta catada sol to dispoxidivo. Instała on aplicasion par łe mape par poder doparare sta funsion.</string>
   <string name="navigation_item_bookmarks">Segnałibri</string>
   <string name="title_activity_bookmarks">Segnałibri</string>
@@ -431,7 +431,7 @@
   <string name="nearby_card_permission_explanation">Vuto che doparemo ła to poxision corente par vardare el posto cuà rente che\'l ga pì bixogno de imajini?</string>
   <string name="unable_to_display_nearest_place">Inposibiłe vardare el posto cuà rente che\'l ga biogmno de imajini, sensa l\'autorixasion de ła poxision</string>
   <string name="never_ask_again">No sta domandarmelo altro.</string>
-  <string name="display_location_permission_title">Autorixasion de vedare ła poxision</string>
+  <string name="display_location_permission_title" fuzzy="true">Autorixasion de vedare ła poxision</string>
   <string name="display_location_permission_explanation">Domanda el parmeso de locałixasion co xé neçesario par ła funsion de vixuałixasion de ła scheda de notifega cuà rente.</string>
   <string name="achievements_fetch_failed">Calcosa el xé ndà roerso, no semo stai boni a trar fora i to rixultai.</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Te ghè fato cusì tante contribusion che te ne ghè inbałinà el sistema de calcoło. Sto cuà el xé el to ultimo rixultà disponibiłe</string>

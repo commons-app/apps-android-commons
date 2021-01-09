@@ -30,7 +30,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/share_caption_hint"
             android:imeOptions="actionNext|flagNoExtractUi"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:maxLength="255" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

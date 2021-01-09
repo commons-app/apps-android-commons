@@ -23,6 +23,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
+import androidx.recyclerview.widget.RecyclerView.ItemAnimator;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,6 +34,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -132,6 +135,13 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     final GridLayoutManager layoutManager = new GridLayoutManager(getContext(),
         getSpanCount(getResources().getConfiguration().orientation));
     rvContributionsList.setLayoutManager(layoutManager);
+
+    //Setting flicker animation of recycler view to false.
+    final ItemAnimator animator = rvContributionsList.getItemAnimator();
+    if (animator instanceof SimpleItemAnimator) {
+      ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
+    }
+
     contributionsListPresenter.setup();
     contributionsListPresenter.contributionList.observe(this.getViewLifecycleOwner(), adapter::submitList);
     rvContributionsList.setAdapter(adapter);
@@ -140,7 +150,9 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
       public void onItemRangeInserted(int positionStart, int itemCount) {
         super.onItemRangeInserted(positionStart, itemCount);
         if (itemCount > 0 && positionStart == 0) {
-          rvContributionsList.scrollToPosition(0);//Newly upload items are always added to the top
+          if(adapter.getContributionForPosition(positionStart)!=null) {
+            rvContributionsList.scrollToPosition(0);//Newly upload items are always added to the top
+          }
         }
       }
     });
@@ -283,6 +295,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
    */
   @Override
   public void pauseUpload(Contribution contribution) {
+    ViewUtil.showShortToast(getContext(), R.string.pausing_upload);
     callback.pauseUpload(contribution);
   }
 
@@ -292,6 +305,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
    */
   @Override
   public void resumeUpload(Contribution contribution) {
+    ViewUtil.showShortToast(getContext(), R.string.resuming_upload);
     callback.retryUpload(contribution);
   }
 

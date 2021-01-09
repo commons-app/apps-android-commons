@@ -28,7 +28,7 @@
     <item quantity="many">%1$d ملف جاري رفعه</item>
     <item quantity="other">%1$d ملفات جاري رفعها</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="two">(%1$d)</item>
@@ -121,7 +121,7 @@
   <string name="share_title_hint">العنوان (مطلوب)</string>
   <string name="add_caption_toast">يُرجَى تقديم عنوان لهذا الملف</string>
   <string name="share_description_hint">الوصف</string>
-  <string name="share_caption_hint">العنوان (قيد 255 حرف)</string>
+  <string name="share_caption_hint" fuzzy="true">العنوان (قيد 255 حرف)</string>
   <string name="login_failed_network">لا يمكن تسجيل الدخول - فشل في شبكة الاتصال</string>
   <string name="login_failed_wrong_credentials">غير قادر على تسجيل الدخول - يُرجَى التحقق من اسم المستخدم وكلمة المرور الخاصين بك</string>
   <string name="login_failed_throttled">الكثير من المحاولات غير الناجحة. الرجاء المحاولة مرة أخرى في بضع دقائق.</string>
@@ -140,7 +140,7 @@
   <string name="display_list_button">القائمة</string>
   <string name="gps_disabled">عطل نظام الملاحة العالمي GPS بجهازك. أترغب في التنشيط؟</string>
   <string name="enable_gps">تفعيل GPS</string>
-  <string name="contributions_subtitle_zero">لا مرفوعات بعد</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">لا مرفوعات بعد</string>
   <string name="categories_not_found">لا توجد تصنيفات تطابق %1$s</string>
   <string name="depictions_not_found">لا توجد عناصر ويكيداتا مطابقة ل   s$%1</string>
   <string name="no_child_classes">%1$s لا يملك تصنيف الأطفال</string>
@@ -315,8 +315,8 @@
   <string name="upload_problem_image">تم العثور على مشاكل في الصورة</string>
   <string name="internet_downloaded">يُرجَى فقط رفع الصور التي التقطتها بنفسك، لا ترفع الصور التي قمت بتنزيلها من الإنترنت.</string>
   <string name="give_permission">إعطاء السماح</string>
-  <string name="use_external_storage">استخدم تخزينا خارجيا</string>
-  <string name="use_external_storage_summary">حفظ الصور الملتقطة بالكاميرا داخل التطبيق على جهازك</string>
+  <string name="use_external_storage" fuzzy="true">استخدم تخزينا خارجيا</string>
+  <string name="use_external_storage_summary" fuzzy="true">حفظ الصور الملتقطة بالكاميرا داخل التطبيق على جهازك</string>
   <string name="login_to_your_account">تسجيل الدخول إلى حسابك</string>
   <string name="send_log_file">إرسال ملف السجل</string>
   <string name="send_log_file_description">إرسال ملف السجل للمطورين عبر البريد الإلكتروني للمساعدة في تصحيح مشكلات التطبيق. ملاحظة: من المحتمل أن تحتوي السجلات على معلومات تعريف</string>
@@ -449,18 +449,18 @@
   <string name="notifications">الإشعارات</string>
   <string name="read_notifications">الإخطارات (مقروءة)</string>
   <string name="display_nearby_notification">عرض الإخطار القريب</string>
-  <string name="display_nearby_notification_summary">انقر هنا لرؤية أقرب مكان يحتاج إلى صور</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">انقر هنا لرؤية أقرب مكان يحتاج إلى صور</string>
   <string name="no_close_nearby">لم يتم العثور على أماكن قريبة بالقرب منك</string>
   <string name="list_sheet">قائمة</string>
   <string name="storage_permission">سماح التخزين</string>
   <string name="write_storage_permission_rationale_for_image_share">نحتاج إلى سماحك للوصول إلى التخزين الخارجي لجهازك من أجل رفع الصور.</string>
   <string name="nearby_notification_dismiss_message">لن ترى أقرب مكان يحتاج إلى صور بعد الآن، ومع ذلك، يمكنك إعادة تمكين هذا الإشعار في الإعدادات إذا كنت ترغب في ذلك.</string>
-  <string name="step_count">الخطوة %1$d من %2$d</string>
+  <string name="step_count" fuzzy="true">الخطوة %1$d من %2$d</string>
   <string name="image_in_set_label">الصورة %1$d في المجموعة</string>
   <string name="next">التالي</string>
   <string name="previous">السابق</string>
   <string name="submit">إرسال</string>
-  <string name="upload_title_duplicate">يوجد ملف باسم الملف %1$s، هل أنت متأكد أنك تريد المتابعة؟</string>
+  <string name="upload_title_duplicate" fuzzy="true">يوجد ملف باسم الملف %1$s، هل أنت متأكد أنك تريد المتابعة؟</string>
   <string name="map_application_missing">لا يمكن العثور على تطبيق خرائط متوافق على جهازك; الرجاء تثبيت تطبيق خرائط لاستخدام هذه الميزة.</string>
   <string name="navigation_item_bookmarks">العلامات</string>
   <string name="title_activity_bookmarks">العلامات</string>
@@ -495,7 +495,7 @@
   <string name="nearby_card_permission_explanation">هل تريد منا استخدام موقعك الحالي لعرض أقرب مكان يحتاج إلى صور؟</string>
   <string name="unable_to_display_nearest_place">يتعذر عرض أقرب مكان يحتاج إلى صور بدون أذونات الموقع</string>
   <string name="never_ask_again">لا تسأل هذا مرة أخرى</string>
-  <string name="display_location_permission_title">عرض إذن الموقع</string>
+  <string name="display_location_permission_title" fuzzy="true">عرض إذن الموقع</string>
   <string name="display_location_permission_explanation">اطلب إذن الموقع عند الحاجة إلى ميزة عرض بطاقة التنبيه القريبة.</string>
   <string name="achievements_fetch_failed">حدث خطأ ما; لم نتمكن من جلب إنجازاتك</string>
   <string name="achievements_fetch_failed_ultimate_achievement">لقد قدمت الكثير من المساهمات لا يستطيع نظامنا لحساب الإنجازات التعامل معها. هذا هو الإنجاز النهائي.</string>

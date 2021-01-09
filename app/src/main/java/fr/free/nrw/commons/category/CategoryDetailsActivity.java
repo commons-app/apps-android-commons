@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.category;
 
+import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_PREFIX;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -23,9 +25,10 @@ import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment;
 import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.theme.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
+import org.wikipedia.page.PageTitle;
 
 /**
  * This activity displays details of a particular category
@@ -33,7 +36,7 @@ import java.util.List;
  * a particular category on wikimedia commons.
  */
 
-public class CategoryDetailsActivity extends NavigationBaseActivity
+public class CategoryDetailsActivity extends BaseActivity
         implements MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
 
 
@@ -59,8 +62,6 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         tabLayout.setupWithViewPager(viewPager);
         setTabs();
         setPageTitle();
-        initDrawer();
-        forceInitBackButton();
     }
 
     /**
@@ -104,6 +105,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
     /**
      * This method is called onClick of media inside category details (CategoryImageListFragment).
      */
+    @Override
     public void onMediaClicked(int position) {
         tabLayout.setVisibility(View.GONE);
         viewPager.setVisibility(View.GONE);
@@ -120,7 +122,6 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
             supportFragmentManager.executePendingTransactions();
         }
         mediaDetails.showImage(position);
-        forceInitBackButton();
     }
 
 
@@ -181,7 +182,8 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.menu_browser_current_category:
-                Utils.handleWebUrl(this, Uri.parse(Utils.getPageTitle(categoryName).getCanonicalUri()));
+                PageTitle title = Utils.getPageTitle(CATEGORY_PREFIX + categoryName);
+                Utils.handleWebUrl(this, Uri.parse(title.getCanonicalUri()));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

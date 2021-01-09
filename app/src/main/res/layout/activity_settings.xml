@@ -12,7 +12,6 @@
         android:layout_height="?attr/actionBarSize">
         <include layout="@layout/toolbar" />
     </LinearLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,7 +26,4 @@
             tools:layout="@xml/preferences"
             />
     </RelativeLayout>
-
-    <include layout="@layout/drawer_view" />
-
 </androidx.drawerlayout.widget.DrawerLayout>

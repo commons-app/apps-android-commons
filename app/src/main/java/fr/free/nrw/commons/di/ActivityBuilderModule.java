@@ -6,13 +6,11 @@ import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SignupActivity;
-import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.explore.SearchActivity;
-import fr.free.nrw.commons.explore.ExploreActivity;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.review.ReviewActivity;
@@ -65,13 +63,7 @@ public abstract class ActivityBuilderModule {
     abstract WikidataItemDetailsActivity bindDepictionDetailsActivity();
 
     @ContributesAndroidInjector
-    abstract ExploreActivity bindExploreActivity();
-
-    @ContributesAndroidInjector
     abstract ProfileActivity bindAchievementsActivity();
-
-    @ContributesAndroidInjector
-    abstract BookmarksActivity bindBookmarksActivity();
 
     @ContributesAndroidInjector
     abstract ReviewActivity bindReviewActivity();

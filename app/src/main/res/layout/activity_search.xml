@@ -23,15 +23,14 @@
             android:id="@+id/toolbar_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimaryDark"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:navigationIcon="@drawable/ic_arrow_back_white">
+            app:titleTextColor="?attr/toolbar_text_color"
+            app:subtitleTextColor="?attr/toolbar_text_color"
+          >
             <SearchView
                 android:id="@+id/searchBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="true"
-                app:theme="@style/WhiteSearchBarTheme"
                 android:queryBackground="@android:color/transparent"
                 android:searchIcon="@null"
                 android:paddingLeft="-16dp"
@@ -84,7 +83,5 @@
             android:layout_below="@id/toolbar_layout"
             />
     </RelativeLayout>
-
-    <include layout="@layout/drawer_view" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

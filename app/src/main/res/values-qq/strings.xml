@@ -5,11 +5,13 @@
 * Liuxinyu970226
 * Madhurgupta10
 * Minh Nguyen
+* MuratTheTurkish
 * Nemo bis
 * Nicolas Raoul
 * Robby
 * Shirayuki
 * Siebrand
+* Verdy p
 * Whym
 * Woytecr
 * Yuvipanda
@@ -20,6 +22,7 @@
     <item quantity="one">Status text about number of uploads left.\n* %1$d represents number of uploads left, including current one\n</item>
     <item quantity="other">Status text about number of uploads left.\n* %1$d represents number of uploads left, including current one\n</item>
   </plurals>
+  <string name="contributions_subtitle">See the current issue [https://phabricator.wikimedia.org/T267142 T267142]  tracked in Phabricator about the &lt;code&gt;&lt;nowiki&gt;|zero=&lt;/nowiki&gt;&lt;/code&gt; option currently not supported on Translatewiki.net with the custom &lt;code&gt;&lt;nowiki&gt;{{PLURAL}}&lt;/nowiki&gt;&lt;/code&gt; rules used by this project for Android, using a non-Mediawiki syntax.</string>
   <string name="multiple_uploads_title">{{Identical|Upload}}</string>
   <string name="share_license_summary">Text label telling user the license of the current upload in progress. %1$s refers to appropriate display text for the chosen CC license</string>
   <string name="navigation_item_explore">{{Identical|Explore}}</string>
@@ -67,7 +70,7 @@
   <string name="categories_search_text_hint">This message is followed by a list of the categories.\n{{Identical|Search category}}</string>
   <string name="menu_save_categories">Hint text on menu item to save selected categories.\n{{Identical|Save}}</string>
   <string name="refresh_button">{{Identical|Refresh}}</string>
-  <string name="display_list_button">{{Identical|List}}</string>
+  <string name="display_list_button">This is an action button, usually a verb (just like Continue, Cancel, Delete, Search, and so on).\n{{Identical|List}}</string>
   <string name="categories_not_found">Message shown to the user when no category matching what they searched for was found. %1$s represents the category name</string>
   <string name="categories_skip_explanation">Text explaining to users why and how to add categories to images. Users can also tap this message to skip adding categories.</string>
   <string name="categories_activity_title">Title for the activity where Categories are being selected to add to the Image.\n{{Identical|Category}}</string>
@@ -155,10 +158,16 @@
   <string name="statistics">Èstatistik</string>
   <string name="statistics_featured">To see the correct translation for your language, please go to https://commons.wikimedia.org/wiki/Commons:Featured_pictures and select your language in \"This project page in other languages\".</string>
   <string name="nearby_fragment">{{Identical|Nearby}}</string>
+  <string name="next">Refers to the next \'\'\'step\'\'\' in the uploading process.</string>
+  <string name="previous">Refers to the previous \'\'\'step\'\'\' in the uploading process.</string>
   <string name="submit">{{Identical|Submit}}</string>
   <string name="log_collection_started">\"Send log file\" is {{msg-wm|Commons-android-strings-send log file}}.</string>
   <string name="nominate_for_deletion_done">{{Identical|Done}}</string>
+  <string name="review_category_explanation">\'%1$s\' is replaced by a formatted number (of categories).</string>
   <string name="exif_tag_name_author">{{Identical|Author}}</string>
   <string name="exif_tag_name_location">{{Identical|Location}}</string>
   <string name="title_app_shortcut_bookmark">{{identical|Bookmark}}</string>
+  <string name="more">{{Identical|More}}</string>
+  <string name="favorites">{{Identical|Favorite}}</string>
+  <string name="map_attribution">&lt;code&gt;&amp;amp;#169;&lt;/code&gt;  is the copyright symbol (©).</string>
 </resources>

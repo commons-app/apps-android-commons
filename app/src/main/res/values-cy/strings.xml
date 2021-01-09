@@ -89,7 +89,7 @@
   <string name="display_list_button">Rhestr</string>
   <string name="gps_disabled">Ataliwyd GPS ar eich dyfais. Ydych chi am ei droi\'n weithredol?</string>
   <string name="enable_gps">Gweithredu\'r GPS</string>
-  <string name="contributions_subtitle_zero">Heb uwchlwytho eto</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Heb uwchlwytho eto</string>
   <string name="categories_not_found">Dim categori\'n cyfateb i %1$s ar gael</string>
   <string name="categories_skip_explanation">Ychwanegwch gategori/au er mwyn i bobl fedru canfod eich ffeiliau ar Gomin Wicimedia.\n\nCychwynwch deipio i ychwanegu categori/au.</string>
   <string name="categories_activity_title">Categorïau</string>
@@ -241,7 +241,7 @@
   <string name="upload_problem_do_you_continue">Wyt ti\'n dal yn awyddus i uwchlwytho\'r ddelwedd?</string>
   <string name="upload_problem_image">Gwallau yn y ddelwedd</string>
   <string name="give_permission">Rhoi hawl</string>
-  <string name="use_external_storage">Defnyddia storfa allanol</string>
+  <string name="use_external_storage" fuzzy="true">Defnyddia storfa allanol</string>
   <string name="login_to_your_account">Mewngofnodwch i\'ch cyfri</string>
   <string name="send_log_file">Danfonwch y ffeil log</string>
   <string name="null_url">Gwall! Ni chafwyd hyd i\'r URL</string>

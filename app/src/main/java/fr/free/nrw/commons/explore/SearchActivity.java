@@ -26,7 +26,7 @@ import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.FragmentUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -41,7 +41,7 @@ import timber.log.Timber;
  * Represents search screen of this app
  */
 
-public class SearchActivity extends NavigationBaseActivity
+public class SearchActivity extends BaseActivity
         implements MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
 
     @BindView(R.id.toolbar_search) Toolbar toolbar;
@@ -67,8 +67,9 @@ public class SearchActivity extends NavigationBaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
-        initDrawer();
         setTitle(getString(R.string.title_activity_search));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v->onBackPressed());
         supportFragmentManager = getSupportFragmentManager();
         setSearchHistoryFragment();
@@ -199,11 +200,10 @@ public class SearchActivity extends NavigationBaseActivity
     @Override
     public void onMediaClicked(int index) {
         ViewUtil.hideKeyboard(this.findViewById(R.id.searchBox));
-        toolbar.setVisibility(View.GONE);
         tabLayout.setVisibility(View.GONE);
         viewPager.setVisibility(View.GONE);
         mediaContainer.setVisibility(View.VISIBLE);
-        setNavigationBaseToolbarVisibility(true);
+        searchView.setVisibility(View.GONE);// to remove searchview when mediaDetails fragment open
         if (mediaDetails == null || !mediaDetails.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
             mediaDetails = new MediaDetailPagerFragment(false, true);
@@ -220,7 +220,6 @@ public class SearchActivity extends NavigationBaseActivity
             supportFragmentManager.executePendingTransactions();
         }
         mediaDetails.showImage(index);
-        forceInitBackButton();
     }
 
     /**
@@ -246,14 +245,12 @@ public class SearchActivity extends NavigationBaseActivity
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() == 1){
             // back to search so show search toolbar and hide navigation toolbar
-            toolbar.setVisibility(View.VISIBLE);
+            searchView.setVisibility(View.VISIBLE);//set the searchview
             tabLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.VISIBLE);
             mediaContainer.setVisibility(View.GONE);
-            setNavigationBaseToolbarVisibility(false);
         }else {
             toolbar.setVisibility(View.GONE);
-            setNavigationBaseToolbarVisibility(true);
         }
         super.onBackPressed();
     }

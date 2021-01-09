@@ -15,7 +15,7 @@
     <item quantity="one">1 dosya bar bena</item>
     <item quantity="other">%1$d dosyeyi bar benê</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -83,7 +83,7 @@
   <string name="share_title_hint">Bınnuşte (lazımo)</string>
   <string name="add_caption_toast">Kerem ke, seba na dosya rê yew bınnuşte cı ke</string>
   <string name="share_description_hint">Şınasnayış</string>
-  <string name="share_caption_hint">Bınnus (sindor 255 karakter)</string>
+  <string name="share_caption_hint" fuzzy="true">Bınnus (sindor 255 karakter)</string>
   <string name="login_failed_network">Xırabiya kewten-network xeta</string>
   <string name="login_failed_wrong_credentials">Nêgêriyeno miyan - kerem ke, parola û nameyê xo kontrol ke</string>
   <string name="login_failed_throttled">Şıma xeylê rayi kerd ke cı kewê, a ser nêvıst. Şıma rê zehmet 2-3 deqey ra tepeya reyna bıcerrebnên.</string>
@@ -101,7 +101,7 @@
   <string name="display_list_button">Liste</string>
   <string name="gps_disabled">Cihazê GPSiyê şıma de dewre ra veciyayo. Şıma qayılê aktif kerê?</string>
   <string name="enable_gps">GPSi aktif kerê</string>
-  <string name="contributions_subtitle_zero">Hewna bar nêbiyo</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Hewna bar nêbiyo</string>
   <string name="categories_not_found">Kategoriyan de %1$s deye theba çıniyo</string>
   <string name="depictions_image_not_found">Seba izahati resım çıniyo</string>
   <string name="categories_skip_explanation">Seba, tayêna rındvênayışê resmanê xoyê ke Wikimedia Commonsi derê, kategoriyan cı kerê.\nDest be cıkerdena kategoriyan ke.</string>
@@ -241,14 +241,14 @@
   <string name="upload_problem_different_geolocation">No resım cana de anciyayo</string>
   <string name="upload_problem_image">Resım de problem vineya</string>
   <string name="give_permission">Destur bıde</string>
-  <string name="use_external_storage">Depoy teberi bıkarnê</string>
+  <string name="use_external_storage" fuzzy="true">Depoy teberi bıkarnê</string>
   <string name="login_to_your_account">Hesabê ho kewê</string>
   <string name="send_log_file">Pela qeydi bırışê</string>
   <string name="null_url">Xeta! URL nêvineya</string>
   <string name="nominate_deletion">Esterıtışi rê Eza</string>
   <string name="nominated_for_deletion">No resım seba esterıtışi eza nışan kerdo</string>
   <string name="view_browser">Browser de bıvinê</string>
-  <string name="skip_login">Ser çek</string>
+  <string name="skip_login">Ravêre</string>
   <string name="navigation_item_login">Cı kewe</string>
   <string name="get_directions">Tarif bıgêrê</string>
   <string name="read_article">Meqaley bıwanê</string>
@@ -259,7 +259,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Rey bıdê</string>
   <string name="about_faq">PZP</string>
-  <string name="welcome_skip_button">Musnayoği ser çek</string>
+  <string name="welcome_skip_button">Musnayoği ravêre</string>
   <string name="no_internet">İnternet nêresêno</string>
   <string name="internet_established">İnternet resiyeno</string>
   <string name="no_notifications">Pêhesnayışi nêvineyay</string>
@@ -382,5 +382,5 @@
   <string name="leaderboard_nearby">Nezdı ra</string>
   <string name="leaderboard_used">Gureyniyaye</string>
   <string name="leaderboard_my_rank_button_text">Rêza mı</string>
-  <string name="mapbox_telemetry">Telemetreyi Devre ra vece</string>
+  <string name="mapbox_telemetry" fuzzy="true">Telemetreyi Devre ra vece</string>
 </resources>

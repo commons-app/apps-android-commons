@@ -22,6 +22,17 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.FileProvider;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+
+import com.dinuscxj.progressbar.CircleProgressBar;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Objects;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -147,14 +158,12 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         params.height = (int) (height * BADGE_IMAGE_HEIGHT_RATIO);
         params.width = (int) (width * BADGE_IMAGE_WIDTH_RATIO);
         imageView.requestLayout();
-
         progressBar.setVisibility(View.VISIBLE);
 
         setHasOptionsMenu(true);
 
         // Set the initial value of WikiData edits to 0
         wikidataEditsText.setText("0");
-        hideLayouts();
         setWikidataEditCount();
         setAchievements();
         return rootView;
@@ -441,26 +450,9 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
             setImageRevertPercentage(achievements.getNotRevertPercentage());
             progressBar.setVisibility(View.GONE);
             item.setVisible(true);
-            layoutImageReverts.setVisibility(View.VISIBLE);
-            layoutImageUploaded.setVisibility(View.VISIBLE);
-            layoutImageUsedByWiki.setVisibility(View.VISIBLE);
-            layoutStatistics.setVisibility(View.VISIBLE);
-            imageView.setVisibility(View.VISIBLE);
-            levelNumber.setVisibility(View.VISIBLE);
         }
     }
 
-    /**
-     * used to hide the layouts while fetching results from api
-     */
-    private void hideLayouts(){
-        layoutImageUsedByWiki.setVisibility(View.INVISIBLE);
-        layoutImageUploaded.setVisibility(View.INVISIBLE);
-        layoutImageReverts.setVisibility(View.INVISIBLE);
-        layoutStatistics.setVisibility(View.INVISIBLE);
-        imageView.setVisibility(View.INVISIBLE);
-        levelNumber.setVisibility(View.INVISIBLE);
-    }
 
     @OnClick(R.id.images_upload_info)
     public void showUploadInfo(){

@@ -84,7 +84,7 @@
   <string name="share_title_hint">Popisok (povinné)</string>
   <string name="add_caption_toast">Prosím, pridajte popisok pre tento súbor</string>
   <string name="share_description_hint">Opis</string>
-  <string name="share_caption_hint">Popisok (max. 255 znakov)</string>
+  <string name="share_caption_hint" fuzzy="true">Popisok (max. 255 znakov)</string>
   <string name="login_failed_network">prihlásenie zlyhalo - zlyhanie siete</string>
   <string name="login_failed_wrong_credentials">Nie je možné sa prihlásiť – skontrolujte, prosím, svoje používateľské meno a heslo</string>
   <string name="login_failed_throttled">Príliš veľa neúspešných pokusov. Skúste to znova o niekoľko minút.</string>
@@ -103,7 +103,7 @@
   <string name="display_list_button">Zoznam</string>
   <string name="gps_disabled">GPS nie je povolené vo vašom zariadení. Chceli by ste ho povoliť?</string>
   <string name="enable_gps">Povoliť GPS</string>
-  <string name="contributions_subtitle_zero">Žiadne nahrané súbory</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Žiadne nahrané súbory</string>
   <string name="categories_not_found">Žiadne kategórie nezodpovedajú „%1$s“</string>
   <string name="depictions_not_found">Neboli nájdené žiadne položky Wikiúdajov zhodujúce sa s %1$s</string>
   <string name="no_child_classes">%1$s nemá žiadne dcérske triedy</string>
@@ -277,8 +277,8 @@
   <string name="upload_problem_do_you_continue">Naozaj chcete nahrať tento obrázok?</string>
   <string name="internet_downloaded">Nahrávajte, prosím, len obrázky, ktoré ste sami zhotovili. Nenahrávajte obrázky, ktoré ste stiahli z internetu.</string>
   <string name="give_permission">Dať povolenie</string>
-  <string name="use_external_storage">Použiť externé úložisko</string>
-  <string name="use_external_storage_summary">Uložiť obrázky nasnímané fotoaparátom, ktorý je súčasťou tejto aplikácie</string>
+  <string name="use_external_storage" fuzzy="true">Použiť externé úložisko</string>
+  <string name="use_external_storage_summary" fuzzy="true">Uložiť obrázky nasnímané fotoaparátom, ktorý je súčasťou tejto aplikácie</string>
   <string name="login_to_your_account">Prihlásiť sa do účtu</string>
   <string name="send_log_file">Odoslať log</string>
   <string name="send_log_file_description">Odoslať log vývojárom e-mailom za účelom odstránenia problémov s aplikáciou. Poznámka: Logy môžu obsahovať indentifikačné údaje.</string>
@@ -413,18 +413,18 @@
   <string name="notifications">Upozornenia</string>
   <string name="read_notifications">Upozornenia (prečítané)</string>
   <string name="display_nearby_notification">Zobraziť notifikáciu o miestach v okolí</string>
-  <string name="display_nearby_notification_summary">Kliknutím sem sa zobrazí najbližšie miesto, ktoré potrebuje obrázky</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Kliknutím sem sa zobrazí najbližšie miesto, ktoré potrebuje obrázky</string>
   <string name="no_close_nearby">Vo vašej blízkosti neboli nájdené žiadne miesta</string>
   <string name="list_sheet">Zoznam</string>
   <string name="storage_permission">Povolenie k prístupu k úložnému priestoru</string>
   <string name="write_storage_permission_rationale_for_image_share">Potrebujeme povolenie k prístupu k externému úložisku vášho zariadenia na nahranie obrázkov.</string>
   <string name="nearby_notification_dismiss_message">Už neuvidíte najbližšie miesto, ktoré potrebuje obrázky. Túto notifikáciu môžete znovu povoliť v Nastaveniach.</string>
-  <string name="step_count">Krok %1$d z %2$d</string>
+  <string name="step_count" fuzzy="true">Krok %1$d z %2$d</string>
   <string name="image_in_set_label">Obrázok %1$d v sade</string>
   <string name="next">Ďalej</string>
   <string name="previous">Späť</string>
   <string name="submit">Odoslať</string>
-  <string name="upload_title_duplicate">Súbor s názvom %1$s už existuje. Naozaj chcete pokračovať?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Súbor s názvom %1$s už existuje. Naozaj chcete pokračovať?</string>
   <string name="map_application_missing">Nebola nájdená žiadna kompatibilná aplikácia s mapami. Pre použitie tejto fukncie si, prosím, nainštalujte aplikáciu poskytujúcu mapy.</string>
   <string name="navigation_item_bookmarks">Záložky</string>
   <string name="title_activity_bookmarks">Záložky</string>
@@ -458,7 +458,7 @@
   <string name="nearby_card_permission_explanation">Chceli by ste, aby sme pomocou aktuálnej polohy zobrazili najbližšie miesto, ktoré potrebuje obrázky?</string>
   <string name="unable_to_display_nearest_place">Nedá sa zobraziť najbližšie miesto, ktoré potrebuje obrázky, bez oprávnenia k umiestneniu</string>
   <string name="never_ask_again">Znovu nezobrazovať</string>
-  <string name="display_location_permission_title">Zobraziť povolenia prístupu k polohe</string>
+  <string name="display_location_permission_title" fuzzy="true">Zobraziť povolenia prístupu k polohe</string>
   <string name="display_location_permission_explanation">Požiada o oprávnenie k prístupu k polohe, pokiaľ je to potrebné pre funkciu zobrazenia miest v okolí.</string>
   <string name="achievements_fetch_failed">Nastala chyba, nepodarilo sa nám načítať vaše úspechy</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Urobili ste toľko príspevkov, že to náš systém výpočtu úspechov nedokáže zvládnuť. Toto je konečný úspech.</string>

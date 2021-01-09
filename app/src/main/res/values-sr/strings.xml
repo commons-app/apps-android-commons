@@ -18,7 +18,7 @@
     <item quantity="one">%1$d датотека се отпрема</item>
     <item quantity="other">%1$d датотеке се отпремају</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d отпремање</item>
     <item quantity="other">%1$d отпремања</item>
@@ -100,7 +100,7 @@
   <string name="display_list_button">Списак</string>
   <string name="gps_disabled">GPS је онемогућен на вашем уређају. Желите ли да га омогућите?</string>
   <string name="enable_gps">Омогући GPS</string>
-  <string name="contributions_subtitle_zero">Још увек нема отпремања</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Још увек нема отпремања</string>
   <string name="categories_not_found">Нема категорија које одговарају %1$s</string>
   <string name="categories_skip_explanation">Додајте категорије на слике да бисте олакшали корисницима њихово проналажење на Остави.\n\nДа бисте додали категорију, почните са писањем њеног имена.</string>
   <string name="categories_activity_title">Категорије</string>
@@ -261,8 +261,8 @@
   <string name="upload_problem_do_you_continue">Желите ли још увек да отпремите ову слику?</string>
   <string name="internet_downloaded">Молимо Вас да отпремате слике које сте ви направили. Не отпремајте слике које сте преузели са интернета.</string>
   <string name="give_permission">Давање дозволе</string>
-  <string name="use_external_storage">Користи спољашње складиште</string>
-  <string name="use_external_storage_summary">Чување слика снимљених камером у апликацији на вашем уређају</string>
+  <string name="use_external_storage" fuzzy="true">Користи спољашње складиште</string>
+  <string name="use_external_storage_summary" fuzzy="true">Чување слика снимљених камером у апликацији на вашем уређају</string>
   <string name="login_to_your_account">Пријава на налог</string>
   <string name="send_log_file">Пошаљи датотеку евиденције</string>
   <string name="send_log_file_description">Пошаљите датотеку евиденције програмерима путем е-поште да бисте помогли у решавању проблема са апликацијом. Напомена: евиденције могу потенцијално садржавати идентификационе информације</string>
@@ -386,18 +386,18 @@
   <string name="notifications">Обавештења</string>
   <string name="read_notifications" fuzzy="true">Обавештења (архивирана)</string>
   <string name="display_nearby_notification">Прикажи обавештење у близини</string>
-  <string name="display_nearby_notification_summary">Притисните овде да бисте видели најближе место којем треба слика</string>
+  <string name="display_nearby_notification_summary" fuzzy="true">Притисните овде да бисте видели најближе место којем треба слика</string>
   <string name="no_close_nearby">Нису пронађена места у близини близу вас</string>
   <string name="list_sheet">Списак</string>
   <string name="storage_permission">Дозвола за складиштење</string>
   <string name="write_storage_permission_rationale_for_image_share">Потребна нам је ваша дозвола да бисмо приступили спољашњем складишту вашег уређаја како бисмо отпремали слике.</string>
   <string name="nearby_notification_dismiss_message">Више нећете видети најближе место којем требају слике. Међутим, ако желите, можете поново да омогућите ово обавештење у Подешавањима.</string>
-  <string name="step_count">Корак %1$d од %2$d</string>
+  <string name="step_count" fuzzy="true">Корак %1$d од %2$d</string>
   <string name="image_in_set_label">Слика %1$d у скупу</string>
   <string name="next">Следеће</string>
   <string name="previous">Претходно</string>
   <string name="submit">Пошаљи</string>
-  <string name="upload_title_duplicate">Већ постоји датотека са именом %1$s. Заиста желите да наставите?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Већ постоји датотека са именом %1$s. Заиста желите да наставите?</string>
   <string name="map_application_missing">Није могуће пронаћи апликацију компатибилне мапе на вашем уређају. Инсталирајте апликацију мапе да бисте користили ову функцију.</string>
   <string name="navigation_item_bookmarks">Обележивачи</string>
   <string name="title_activity_bookmarks">Обележивачи</string>
@@ -429,7 +429,7 @@
   <string name="nearby_card_permission_explanation">Желите ли да користимо вашу тренутну локацију да би приказали најближе место којем требају слике?</string>
   <string name="unable_to_display_nearest_place">Није могуће приказати најближе место којем требају слике без дозволе за локацију.</string>
   <string name="never_ask_again">Не питај ово поново</string>
-  <string name="display_location_permission_title">Дозвола за приказ локације</string>
+  <string name="display_location_permission_title" fuzzy="true">Дозвола за приказ локације</string>
   <string name="display_location_permission_explanation">Тражи дозволу за локацију када је то потребно за функцију приказа картице обавештења у близини.</string>
   <string name="achievements_fetch_failed">Нешто није у реду. Није могуће добавити достигнућа.</string>
   <string name="ends_on">Завршава:</string>

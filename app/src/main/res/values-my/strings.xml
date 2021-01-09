@@ -78,7 +78,7 @@
   <string name="display_list_button">စာရင်း</string>
   <string name="gps_disabled">သင်၏စက်ပစ္စည်းတွင် ဂျီအက်စ်ကိုပိတ်ထားပါသည်။ ယင်းအား ဖွင့်လိုပါသလား။</string>
   <string name="enable_gps">ဂျီပီအက်စ် ဖွင့်ရန်</string>
-  <string name="contributions_subtitle_zero">ဖိုင်မတင်ရသေးပါ</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">ဖိုင်မတင်ရသေးပါ</string>
   <string name="categories_not_found">%1$ နှင့်ကိုက်ညီသော ကဏ္ဍများ မတွေ့ရှိပါ</string>
   <string name="categories_activity_title">ကဏ္ဍများ</string>
   <string name="title_activity_settings">အပြင်အဆင်များ</string>
@@ -203,7 +203,7 @@
   <string name="upload_problem_do_you_continue">ဤရုပ်ပုံအား အက်ပလုပ်တင်ချင်နေတုန်းပဲလား</string>
   <string name="internet_downloaded">သင်ကိုယ်တိုင်ရိုက်ကူးထားသော ရုပ်ပုံများကိုသာ အက်ပလုပ်တင်ပါ။ အင်တာနက်မှဒေါင်းလုတ်ဆွဲထားသည့်ရုပ်ပုံများကို မတင်ပါနှင့်။</string>
   <string name="give_permission">ခွင့်ပြုချက် ပေးမည်</string>
-  <string name="use_external_storage">ပြင်ပြသိုလှောင်ခန်းကို သုံးမည်</string>
+  <string name="use_external_storage" fuzzy="true">ပြင်ပြသိုလှောင်ခန်းကို သုံးမည်</string>
   <string name="login_to_your_account">သင်၏အကောင့်သို့ ဝင်ရန်</string>
   <string name="no_web_browser">URL ဖွင့်ရန် ဝဘ်ဘရောက်ဆာ မတွေ့ရှိပါ</string>
   <string name="null_url">အမှား! URL မတွေ့ရှိပါ</string>
@@ -298,7 +298,7 @@
   <string name="list_sheet">စာရင်း</string>
   <string name="storage_permission">သိုလှောင်ခန်း ခွင်ပြုချက်</string>
   <string name="write_storage_permission_rationale_for_image_share">ရုပ်ပုံများ အက်ပလုဒ်တင်ရန်အတွက် သင်၏စက်ပစ္စည်းပြင်ပသိုလှောင်ခန်းကို ဝင်ရောက်ခွင့်ရရှိရန် ခွင့်ပြုချက်လိုအပ်နေပါသည်။</string>
-  <string name="step_count">%2$d ၏ အဆင့် %1$d</string>
+  <string name="step_count" fuzzy="true">%2$d ၏ အဆင့် %1$d</string>
   <string name="next">ရှေ့</string>
   <string name="previous">နောက်</string>
   <string name="submit">ထည့်သွင်းရန်</string>
@@ -324,7 +324,7 @@
   <string name="search_this_area">ဤဧရိယာကို ရှာဖွေပါ</string>
   <string name="nearby_card_permission_title">ခွင့်ပြုချက် တောင်းခံရန်</string>
   <string name="never_ask_again">နောက်တခါ ထပ်မမေးပါနှင့်</string>
-  <string name="display_location_permission_title">တည်နေရာခွင့်ပြုချက်ကို ပြသရန်</string>
+  <string name="display_location_permission_title">တည်နေရာခွင့်ပြုချက်ကို တောင်းခံရန်</string>
   <string name="ends_on">ပြီးဆုံးမည်-</string>
   <string name="this_function_needs_network_connection">ဤလုပ်ဆောင်ချက်သည် ကွန်ရက်ချိတ်ဆက်မှုကိုလိုအပ်သည်၊ သင်၏ချိတ်ဆက်မှု အပြင်အဆင်များကို စစ်ဆေးပါ။</string>
   <string name="error_processing_image">ရုပ်ပုံကို ပရိုဆက်ဆင်းလုပ်နေစဉ် အမှားဖြစ်ပွားခဲ့သည်။ ထပ်မံကြိုးစားကြည့်ပါ။</string>

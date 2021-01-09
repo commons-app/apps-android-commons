@@ -22,6 +22,7 @@
     <dimen name="small_gap">8dp</dimen>
     <dimen name="small_height">7dp</dimen>
     <dimen name="tiny_gap">4dp</dimen>
+    <dimen name="very_tiny_gap">2dp</dimen>
     <dimen name="landscape_width">400sp</dimen>
     <dimen name="large_height">72dp</dimen>
     <dimen name="question_height">252dp</dimen>

@@ -2,6 +2,7 @@
 <!-- Authors:
 * Abijeet Patro
 * Ademo
+* Alefar
 * Amire80
 * Barakolo
 * Deborahjay
@@ -26,9 +27,10 @@
     <item quantity="many">מועלים %1$d קבצים</item>
     <item quantity="other">מועלים %1$d קבצים</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
+    <item quantity="two">(%1$d)</item>
+    <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">ההעלאות מתחילות</string>
@@ -110,7 +112,7 @@
   <string name="share_title_hint">כיתוב (נדרש)</string>
   <string name="add_caption_toast">נא לרשום כיתוב לקובץ הזה</string>
   <string name="share_description_hint">תיאור</string>
-  <string name="share_caption_hint">כיתוב (מוגבל ל־255 תווים)</string>
+  <string name="share_caption_hint">כיתוב</string>
   <string name="login_failed_network">לא ניתן להיכנס – כשל בתקשורת</string>
   <string name="login_failed_wrong_credentials">לא ניתן להיכנס לחשבון – נא לבדוק את שם המשתמש ואת הסיסמה</string>
   <string name="login_failed_throttled">יותר מדי ניסיונות כניסה כושלים. נא לנסות שוב בעוד מספר דקות.</string>
@@ -129,7 +131,7 @@
   <string name="display_list_button">רשימה</string>
   <string name="gps_disabled">ה־GPS במכשיר שלך אינו מופעל. האם להפעיל אותו?</string>
   <string name="enable_gps">הפעלת GPS</string>
-  <string name="contributions_subtitle_zero">לא הועלה עדיין שום דבר</string>
+  <string name="contributions_subtitle_zero">(לא הועלה עדיין שום דבר)</string>
   <string name="categories_not_found">לא נמצאו קטגוריות בשם %1$s</string>
   <string name="depictions_not_found">לא נמצאו פריטי ויקינתונים שמתאימים לחיפוש %1$s</string>
   <string name="no_child_classes">ל%1$s אין מחלקות יורשות</string>
@@ -291,7 +293,7 @@
   <string name="error_while_cache">שגיאה בעת שמירת תמונות במטמון</string>
   <string name="title_info">כותרת מתארת ייחודית לקובץ, שתשמש כשם הקובץ. ניתן להשתמש בשפה טבעית עם רווחים. אין לכלול את סיומת הקובץ</string>
   <string name="description_info">נא לתאר את המדיה כמה שיותר: איפה היא נוצרה? מה היא מראה? מה ההקשר? נא לתאר את העצמים או את האנשים. נא לחשוף מידע שאי־אפשר לנחש בקלות, למשל, הזמן ביום אם זאת תמונת נוף. אם המדיה מציגה משהו בלתי־רגיל, נא להסביר מה מיוחד בה.</string>
-  <string name="caption_info">נא לרשום תיאור קצר של התמונה. התיאור הראשון ישמש ככותרת התמונה.</string>
+  <string name="caption_info">נא לרשום תיאור קצר של התמונה. התיאור הראשון ישמש ככותרת התמונה. מוגבל ל־255 תווים.</string>
   <string name="upload_image_too_dark">התמונה הזאת חשוכה מדי, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
   <string name="upload_image_blurry">התמונה הזאת מטושטשת, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
   <string name="upload_problem_exist">בעיות פוטנציאליות עם התמונה הזאת:</string>
@@ -304,8 +306,8 @@
   <string name="upload_problem_image">נמצאו בעיות בתמונה</string>
   <string name="internet_downloaded">נא להעלות רק תמונות שצילמת בעצמך. לא להעלות תמונות שהורדת מהאינטרנט.</string>
   <string name="give_permission">לתת הרשאה</string>
-  <string name="use_external_storage">להשתמש באחסון חיצוני</string>
-  <string name="use_external_storage_summary">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום במכשיר שלך</string>
+  <string name="use_external_storage">שמירת צילומים מתוך היישומון</string>
+  <string name="use_external_storage_summary">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום לאחסון של המכשיר שלך</string>
   <string name="login_to_your_account">כניסה לחשבון שלך</string>
   <string name="send_log_file">שליחת קובץ יומן</string>
   <string name="send_log_file_description">שליחת קובץ יומן למפתחים בדואר אלקטרוני כדי לחפש בעיות עם היישום. לתשומת לבך: יומנים יכולים להכיל מידע מזהה</string>
@@ -441,18 +443,18 @@
   <string name="notifications">התראות</string>
   <string name="read_notifications">התראות (שנקראו)</string>
   <string name="display_nearby_notification">הצגת התראות סמוכות</string>
-  <string name="display_nearby_notification_summary">יש לגעת כאן כדי לצפות במקום הקרוב ביותר שדורש תמונות</string>
+  <string name="display_nearby_notification_summary">הצגת התראות בתוך היישומון כדי לצפות במקום הקרוב ביותר שדורש תמונות</string>
   <string name="no_close_nearby">לא נמצאו מקומות בסביבתך</string>
   <string name="list_sheet">רשימה</string>
   <string name="storage_permission">הרשאת אחסון</string>
   <string name="write_storage_permission_rationale_for_image_share">אנחנו זקוקים להרשאה שלך לגשת לאחסון חיצוני במכשיר שלך כדי להעלות תמונות.</string>
   <string name="nearby_notification_dismiss_message">לא יופיעו עוד בפניך מקומות בסביבה שדורשים צילום. עם זאת, ניתן להפעיל התראה זו מחדש דרך ההגדרות במידת הצורך.</string>
-  <string name="step_count">שלב %1$d מתוך %2$d</string>
+  <string name="step_count">שלב %1$d מתוך %2$d:‏ %3$s</string>
   <string name="image_in_set_label">תמונה %1$d בסדרה</string>
-  <string name="next">הבאה</string>
-  <string name="previous">הקודמת</string>
+  <string name="next">הבא</string>
+  <string name="previous">הקודם</string>
   <string name="submit">שליחה</string>
-  <string name="upload_title_duplicate">כבר קיים קובץ בשם %1$s. להמשיך?</string>
+  <string name="upload_title_duplicate">כבר קיים קובץ בשם %1$s. להמשיך?\n\nלתשומת לבך: לשם הקובץ תווסף סיומת מתאימה אוטומטית.</string>
   <string name="map_application_missing">לא נמצא יישום מפה תואם במכשיר שלך. נא להתקין יישום מפה כדי להשתמש בתכונה זו.</string>
   <string name="navigation_item_bookmarks">סימניות</string>
   <string name="title_activity_bookmarks">סימניות</string>
@@ -487,7 +489,7 @@
   <string name="nearby_card_permission_explanation">מקובל עליך שנשתמש במיקום הנוכחי שלך כדי להציג את המקומות בסביבה שדורשים תמונות?</string>
   <string name="unable_to_display_nearest_place"> ללא הרשאות מיקום לא ניתן להציג את המקום הקרוב ביותר הזקוק לתמונות</string>
   <string name="never_ask_again">לעולם לא לשאול שוב</string>
-  <string name="display_location_permission_title">הצגת הרשאת מיקום</string>
+  <string name="display_location_permission_title">לבקש הרשאת מיקום</string>
   <string name="display_location_permission_explanation">לבקש הרשאות מיקום לפי הצורך, לשם קבלת התראה על מקומות בסביבה בתצוגת כרטיס.</string>
   <string name="achievements_fetch_failed">משהו השתבש, לא הצלחנו לקבל את ההישגים שלך</string>
   <string name="achievements_fetch_failed_ultimate_achievement">תרמת כל־כך הרבה שמערכת חישוב ההישגים שלנו לא מתמודדת עם זה. זה ההישג הגדול ביותר.</string>
@@ -598,6 +600,12 @@
   <string name="category_edit_helper_make_edit_toast">מתבצע ניסיון לעדכון הקטגוריות.</string>
   <string name="category_edit_helper_show_edit_title">עדכון קטגוריות</string>
   <string name="category_edit_helper_show_edit_title_success">הצלחה</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">נוספה קטגוריה.</item>
+    <item quantity="two">נוספו %1$s קטגוריות.</item>
+    <item quantity="many">נוספו %1$s קטגוריות.</item>
+    <item quantity="other">נוספו %1$s קטגוריות.</item>
+  </plurals>
   <string name="category_edit_helper_edit_message_else">לא ניתן להוסיף קטגוריות.</string>
   <string name="category_edit_button_text">עדכון קטגוריות</string>
   <string name="share_image_via">שיתוף תמונה דרך</string>
@@ -656,6 +664,8 @@
   <string name="pause">השהיה</string>
   <string name="resume">להמשיך</string>
   <string name="paused">מושהה</string>
+  <string name="more">עוד</string>
+  <string name="favorites">מועדפים</string>
   <string name="achievements_tab_title">הישגים</string>
   <string name="leaderboard_tab_title">לוח מובילים</string>
   <string name="rank_prefix">דירוג:</string>
@@ -673,11 +683,25 @@
   <string name="leaderboard_all_time">כל הזמנים</string>
   <string name="leaderboard_upload">העלאה</string>
   <string name="leaderboard_nearby">בסביבה</string>
+  <string name="leaderboard_used">בשימוש</string>
   <string name="leaderboard_my_rank_button_text">הדירוג שלי</string>
-  <string name="mapbox_telemetry">להפסיק מדידה טלמטרית</string>
+  <string name="mapbox_telemetry">מדידה טלמטרית של Mapbox</string>
   <string name="telemetry_opt_out_summary">לשלוח מיקום ונתוני שימוש אלמוניים ל־Mapbox בעת שימוש בתכונה „בסביבה”</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;שיפור המפה הזו&lt;/a&gt;</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;שיפור המפה הזאת&lt;/a&gt;</string>
   <string name="limited_connection_enabled">מופעל מצב חיבור מוגבל!</string>
   <string name="limited_connection_disabled">מצב חיבור מוגבל הושבת. ההעלאות שממתינות תמשכנה כעת.</string>
   <string name="limited_connection">החיבור מוגבל</string>
+  <string name="statistics_quality">תמונות איכות</string>
+  <string name="quality_images_info">תמונות איכות הן תרשימים או תמונות שעומדות בתקני איכות מסוימים (שמטבעם בעיקר טכניים) והן בעלות ערך למיזמי ויקימדיה</string>
+  <string name="resuming_upload">ההעלאה ממשיכה…</string>
+  <string name="pausing_upload">ההעלאה מושהית…</string>
+  <string name="limited_connection_explanation">הפעלת מצב חיבור מוגבל. כל ההעלאות מושהות ותמשכנה לאחר השבתת המצב הזה.</string>
+  <string name="limited_connection_is_on">מצב חיבור מוגבל פעיל.</string>
+  <string name="media_details_tooltip">נא לכתוב תיאור קצר שמסביר מה מופיע בתמונה. בתיאור, כדאי לכתוב מה הופך את התמונה הזאת למעניינת, טיפוסית או נדירה ולהסביר את ההקשר, בין אם גלוי או סמוי. יש להשתמש במינוח מדויק ככל הניתן.</string>
+  <string name="depicts_tooltip">נא למצוא ולבחור את כל העקרונות שהתמונה הזאת מתארת. נא לשמור על דיוק מרבי. אם התמונה מתארת מגוון פריטים, נא לבחור אותם בגבולות הסביר. לא לבחור תגיות גנריות אם יש תגיות יותר נקודתית זמינות.</string>
+  <string name="categories_tooltip">נא לבחור את הקטגוריות המתאימות. בניגוד למאפייני \"מציג\", הקטגוריות כתובות רק באנגלית.</string>
+  <string name="license_tooltip">ויקישיתוף הופך את התמונות שלך לזמינות לשימוש חוזר ולהתאמה על ידי כל אחד. בא לך לוותר על כל הזכויות? שייחסו את היצירה אליך? שההתאמות ישתמשו באותו הרישיון?</string>
+  <string name="depicts_step_title">מציג</string>
+  <string name="license_step_title">רישיון מדיה</string>
+  <string name="media_detail_step_title">פרטי מדיה</string>
 </resources>

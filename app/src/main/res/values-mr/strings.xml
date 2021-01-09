@@ -81,7 +81,7 @@
   <string name="refresh_button">ताजेतवाने करा</string>
   <string name="gps_disabled">आपल्या मोबाईलचे गिपीएस बंद आहे, तुम्हांला ते चालू करायचे आहे का?</string>
   <string name="enable_gps">जिपीएस चालू करा</string>
-  <string name="contributions_subtitle_zero">अद्याप काहीही चढवलेले नाही</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">अद्याप काहीही चढवलेले नाही</string>
   <string name="categories_not_found">%1$s शी जुळणारे कोणतेच वर्ग सापडले नाहीत</string>
   <string name="categories_skip_explanation">विकिमिडिया कॉमन्सवर आपल्या संचिकांना शोधणे सोपी जाण्यासाठी त्यांना वर्ग जोडा.\n\nवर्ग जोडण्यास टंकन सुरू करा.\nही पायरी चुकविण्यास या संदेशावर अलगद टिचका (किंवा बॅक कळ टिचका)</string>
   <string name="categories_activity_title">वर्ग</string>
@@ -214,8 +214,8 @@
   <string name="title_info">फ़ाईलला असे नाव द्या जे सुयोग्य असेल,चित्राविषयी त्यामधून माहिती कळेल अशी साधी भाषा वापरा,नावामध्ये फ़ाईलचे एक्सटेन्शन लिहू नका.</string>
   <string name="description_info">माध्यमांची शक्य तितकी जास्त माहिती द्या:छायाचित्र/चलचित्र/ध्वनिमुद्रण कोठे घेतले आहे? त्यात काय दाखवले आहे? त्या माध्यमांचा संदर्भ काय? त्यातील वस्तू,व्यक्ति व इतर माहिती द्या? अशी सगळी माहिती जी त्या माध्यमाकडे पाहून लक्षात येणार नाही पण ती महत्वाचे आहे ती सर्व पुरवा. जर त्या माध्यमामध्ये काहीही वेगळे दिसत असेल तर ते वेगळे का आहे याची माहिती पुरवा.</string>
   <string name="give_permission">परवानगी द्या</string>
-  <string name="use_external_storage">बाहेरील स्टोरेज वापरा</string>
-  <string name="use_external_storage_summary">आपल्या डिव्हाइसवरील इन-अॅप्स कॅमेर्यासह घेतलेली चित्रे जतन करा</string>
+  <string name="use_external_storage" fuzzy="true">बाहेरील स्टोरेज वापरा</string>
+  <string name="use_external_storage_summary" fuzzy="true">आपल्या डिव्हाइसवरील इन-अॅप्स कॅमेर्यासह घेतलेली चित्रे जतन करा</string>
   <string name="login_to_your_account">तुमच्या खात्यावरुन सनोंद प्रवेश करा</string>
   <string name="send_log_file">लॉग फ़ाईल पाठवा</string>
   <string name="send_log_file_description" fuzzy="true">विकसकांना लॉग फ़ाईल विपत्राने पाठवा</string>

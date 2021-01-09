@@ -20,8 +20,7 @@
     <item quantity="one">%1$d file in caricamento</item>
     <item quantity="other">%1$d file in caricamento</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -92,7 +91,7 @@
   <string name="share_title_hint">Didascalia (obbligatoria)</string>
   <string name="add_caption_toast">Per favore, fornisci una didascalia per questo file</string>
   <string name="share_description_hint">Descrizione</string>
-  <string name="share_caption_hint">Didascalia (limite 255 caratteri)</string>
+  <string name="share_caption_hint">Didascalia</string>
   <string name="login_failed_network">Impossibile effettuare l\'accesso - errore di rete</string>
   <string name="login_failed_wrong_credentials">Accesso non riuscito - controlla nome utente e password</string>
   <string name="login_failed_throttled">Troppi tentativi falliti. Riprova tra alcuni minuti.</string>
@@ -110,7 +109,7 @@
   <string name="display_list_button">Elenco</string>
   <string name="gps_disabled">Il GPS è disabilitato nel dispositivo. Vuoi attivarlo?</string>
   <string name="enable_gps">Attiva GPS</string>
-  <string name="contributions_subtitle_zero">Non è stato ancora caricato niente</string>
+  <string name="contributions_subtitle_zero">(Non è stato ancora caricato niente)</string>
   <string name="categories_not_found">Non è stata trovata alcuna categoria che contiene %1$s</string>
   <string name="categories_skip_explanation">Aggiungi categorie per rendere le tue immagini più facilmente individuabili su Wikimedia Commons.\nInizia a digitare per aggiungere categorie.</string>
   <string name="categories_activity_title">Categorie</string>
@@ -274,8 +273,8 @@
   <string name="upload_problem_do_you_continue">Vuoi caricare lo stesso questa immagine?</string>
   <string name="internet_downloaded">Carica solo le foto che hai scattato da solo. Non caricare immagini scaricate da Internet.</string>
   <string name="give_permission">Dai autorizzazione</string>
-  <string name="use_external_storage">Usa memoria esterna</string>
-  <string name="use_external_storage_summary">Salva le foto scattate con la fotocamera in-app sul dispositivo</string>
+  <string name="use_external_storage">Salva scatti in-app</string>
+  <string name="use_external_storage_summary">Salva le foto scattate con la fotocamera in-app nella memoria del tuo dispositivo</string>
   <string name="login_to_your_account">Accedi alla tua utenza</string>
   <string name="send_log_file">Invia file di registro</string>
   <string name="send_log_file_description">Invia il file di registro agli sviluppatori tramite email per aiutarli a risolvere i problemi con l\'applicazione. Nota: i log potrebbero contenere informazioni di identificazione</string>
@@ -407,18 +406,18 @@
   <string name="notifications">Notifiche</string>
   <string name="read_notifications">Notifiche (lette)</string>
   <string name="display_nearby_notification">Mostra notifica nelle vicinanze</string>
-  <string name="display_nearby_notification_summary">Tocca qui per vedere il luogo più vicino che ha bisogno di immagini</string>
+  <string name="display_nearby_notification_summary">Mostra notifiche nell\'applicazione per il luogo più vicino che ha bisogno di immagini</string>
   <string name="no_close_nearby">Nessun posto nelle vicinanze trovato vicino a te</string>
   <string name="list_sheet">Elenco</string>
   <string name="storage_permission">Autorizzazione di archiviazione</string>
   <string name="write_storage_permission_rationale_for_image_share">Abbiamo bisogno della tua autorizzazione per accedere alla memoria esterna del tuo dispositivo per caricare le immagini.</string>
   <string name="nearby_notification_dismiss_message">Non vedrai più il luogo più vicino che ha bisogno di immagini. Tuttavia, puoi riattivare questa notifica in Impostazioni, se lo desideri.</string>
-  <string name="step_count">Passo %1$d di %2$d</string>
+  <string name="step_count">Passo %1$d di %2$d: %3$s</string>
   <string name="image_in_set_label">Immagine %1$d nell\'insieme</string>
   <string name="next">Successivo</string>
   <string name="previous">Precedente</string>
   <string name="submit">Invia</string>
-  <string name="upload_title_duplicate">Esiste già un file con il nome %1$s. Sei sicuro di voler procedere?</string>
+  <string name="upload_title_duplicate">Esiste già un file con il nome %1$s. Sei sicuro di voler procedere?\n\nNota: verrà aggiunto automaticamente un suffisso adatto al nome del file.</string>
   <string name="map_application_missing">Nessuna applicazione di mappe compatibile è stata trovata sul tuo dispositivo. Installa un\'applicazione per le mappe per poter utilizzare questa funzionalità.</string>
   <string name="navigation_item_bookmarks">Segnalibri</string>
   <string name="title_activity_bookmarks">Segnalibri</string>
@@ -451,7 +450,7 @@
   <string name="nearby_card_permission_explanation">Vuoi che usiamo la tua posizione attuale per visualizzare il luogo più vicino che ha bisogno di immagini?</string>
   <string name="unable_to_display_nearest_place">Impossibile visualizzare il luogo più vicino che ha bisogno di immagini senza autorizzazioni della posizione</string>
   <string name="never_ask_again">Non chiedermelo mai più</string>
-  <string name="display_location_permission_title">Autorizzazione di visualizzazione della posizione</string>
+  <string name="display_location_permission_title">Chiedi autorizzazione alla posizione</string>
   <string name="display_location_permission_explanation">Chiedi il permesso di localizzazione quando necessario per la funzione di visualizzazione della scheda di notifica nelle vicinanze.</string>
   <string name="achievements_fetch_failed">Qualcosa è andato storto, non siamo riusciti a recuperare i tuoi risultati</string>
   <string name="ends_on">Termina il:</string>

@@ -9,15 +9,42 @@
     android:id="@+id/card_view_nearby"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="?attr/mainCardBackground"
-    />
+    android:layout_margin="@dimen/very_tiny_gap"/>
 
   <fr.free.nrw.commons.campaigns.CampaignView
       android:id="@+id/campaigns_view"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/miniscule_margin"
-      app:cardBackgroundColor="?attr/mainCardBackground" />
+      android:layout_margin="@dimen/very_tiny_gap"/>
+
+  <LinearLayout
+    android:id="@+id/limited_connection_enabled_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/miniscule_margin"
+    android:padding="@dimen/standard_gap"
+    android:orientation="vertical"
+    android:background="@color/wikimedia_green">
+    <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/small_gap"
+      app:srcCompat="@drawable/ic_baseline_cloud_off_72"/>
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@android:color/white"
+      android:layout_marginBottom="@dimen/tiny_gap"
+      android:textSize="@dimen/subheading_text_size"
+      android:text="@string/limited_connection_is_on"/>
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@android:color/white"
+      android:textSize="@dimen/description_text_size"
+      android:text="@string/limited_connection_explanation"/>
+  </LinearLayout>
 
   <FrameLayout
       android:id="@+id/root_frame"

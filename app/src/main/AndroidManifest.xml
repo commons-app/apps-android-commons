@@ -17,6 +17,7 @@
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <uses-permission android:name="com.google.android.apps.photos.permission.GOOGLE_PHOTOS" />
     <uses-permission android:name="android.permission.SET_WALLPAPER"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
 
     <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
@@ -124,12 +125,6 @@
             android:parentActivityName=".contributions.MainActivity" />
 
         <activity
-            android:name=".explore.ExploreActivity"
-            android:label="@string/title_activity_explore"
-            android:parentActivityName=".contributions.MainActivity"
-            android:configChanges="orientation|screenSize|keyboard" />
-
-        <activity
             android:name=".explore.SearchActivity"
             android:label="@string/title_activity_search"
             android:launchMode="singleTop"
@@ -141,10 +136,6 @@
             android:name=".profile.ProfileActivity"
             android:configChanges="orientation|screenSize|keyboard"
             android:label="@string/Profile" />
-
-        <activity
-            android:name=".bookmarks.BookmarksActivity"
-            android:label="@string/title_activity_bookmarks" />
 
         <activity
             android:name=".review.ReviewActivity"
