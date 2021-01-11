@@ -111,9 +111,9 @@ public class MainActivity  extends BaseActivity
             setTitle(getString(R.string.explore_tab_title_mobile));
             setUpLoggedOutPager();
         } else {
-            setTitle(getString(R.string.contributions_fragment));
             if(savedInstanceState == null){
                 //starting a fresh fragment.
+                setTitle(getString(R.string.contributions_fragment));
                 loadFragment(ContributionsFragment.newInstance(),false);
             }
             setUpPager();
