@@ -64,6 +64,7 @@ public class MainActivity  extends BaseActivity
     private ExploreFragment exploreFragment;
     private BookmarkFragment bookmarkFragment;
     public ActiveFragment activeFragment;
+    private MediaDetailPagerFragment mediaDetailPagerFragment;
 
     @Inject
     public LocationServiceManager locationManager;
@@ -239,7 +240,16 @@ public class MainActivity  extends BaseActivity
     public void onBackPressed() {
         if (contributionsFragment != null && activeFragment == ActiveFragment.CONTRIBUTIONS) {
             // Meas that contribution fragment is visible
-            contributionsFragment.backButtonClicked();
+            mediaDetailPagerFragment=contributionsFragment.getMediaDetailPagerFragment();
+            if (mediaDetailPagerFragment ==null) { //means you open the app currently and not open mediaDetailPage fragment
+                super.onBackPressed();
+            } else if (mediaDetailPagerFragment!=null) {
+                if(!mediaDetailPagerFragment.isVisible()){  //means you are at contributions fragement
+                    super.onBackPressed();
+                } else {  //mean you are at mediaDetailPager Fragment
+                    contributionsFragment.backButtonClicked();
+                }
+            }
         } else if (nearbyParentFragment != null && activeFragment == ActiveFragment.NEARBY) {
             // Means that nearby fragment is visible
             /* If function nearbyParentFragment.backButtonClick() returns false, it means that the bottomsheet is

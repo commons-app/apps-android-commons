@@ -631,5 +631,10 @@ public class ContributionsFragment
             fetchCampaigns();
         }
     }
+
+    // Getter for mediaDetailPagerFragment
+    public MediaDetailPagerFragment getMediaDetailPagerFragment() {
+        return mediaDetailPagerFragment;
+    }
 }
 
