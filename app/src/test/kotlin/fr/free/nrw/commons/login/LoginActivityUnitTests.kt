@@ -27,13 +27,11 @@ class LoginActivityUnitTests {
     @Mock
     private lateinit var activity: LoginActivity
 
-    @Mock
     private lateinit var context: Context
 
     @Mock
     private lateinit var progressDialog: ProgressDialog
 
-    @Mock
     private lateinit var menuItem: MenuItem
 
     @Before
