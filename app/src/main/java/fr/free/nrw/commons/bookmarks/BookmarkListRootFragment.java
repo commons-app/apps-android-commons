@@ -38,6 +38,10 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
   @BindView(R.id.explore_container)
   FrameLayout container;
 
+  public BookmarkListRootFragment(){
+    //empty constructor necessary otherwise crashes on recreate
+  }
+
   public BookmarkListRootFragment(Bundle bundle, BookmarksPagerAdapter bookmarksPagerAdapter) {
     String title = bundle.getString("categoryName");
     int order = bundle.getInt("order");
@@ -65,7 +69,9 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
   @Override
   public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    setFragment(listFragment, mediaDetails);
+    if(savedInstanceState==null) {
+      setFragment(listFragment, mediaDetails);
+    }
   }
 
   public void setFragment(Fragment fragment, Fragment otherFragment) {
