@@ -3,7 +3,7 @@ To prevent sad pandas, please check the following items before making a release:
 - Make sure that the APP POINTS TO COMMONS. This is very important, and should be
   ensured. The variables to check are `API_URL`, `IMAGE_URL_BASE`, `HOME_URL` and
   `EVENTLOG_WIKI`, in `CommonsApplication.java`. There is a patch for this named
-  `upload-to-commons.patch` in the root directory
+  `upload-to-commons.patch` in the root directory.
 - Check for database schema migrations. If you modified the `DATABASE_VERSION` in
   `DBOpenHelper`, ensure that you have appropriately written recursive migrations
   in your appropriate `onUpgrade` methods. **Test** this before pushing out! You
