@@ -66,8 +66,6 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        user = SAVED_USER;
-
     }
 
     @Override
@@ -77,7 +75,6 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         View layoutView = inflater.inflate(R.layout.fragment_review_image, container,
                 false);
         ButterKnife.bind(this, layoutView);
-        user = SAVED_USER;
 
         String question, explanation=null, yesButtonText, noButtonText;
         switch (position) {
