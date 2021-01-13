@@ -3,7 +3,10 @@ package fr.free.nrw.commons.login
 import android.app.ProgressDialog
 import android.content.Context
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.LoginActivity
 import org.junit.Assert
@@ -17,6 +20,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenuItem
+import org.wikipedia.AppAdapter
 import java.lang.reflect.Field
 
 
@@ -32,12 +36,20 @@ class LoginActivityUnitTests {
     @Mock
     private lateinit var progressDialog: ProgressDialog
 
+    @Mock
+    private lateinit var view: View
+
+    @Mock
+    private lateinit var params: ViewGroup.LayoutParams
+
     private lateinit var menuItem: MenuItem
 
     @Before
     fun setUp() {
 
         MockitoAnnotations.initMocks(this)
+
+        AppAdapter.set(TestAppAdapter())
 
         activity = Robolectric.buildActivity(LoginActivity::class.java).create().get()
 
@@ -91,6 +103,18 @@ class LoginActivityUnitTests {
     @Throws(Exception::class)
     fun testOnOptionsItemSelected() {
         activity.onOptionsItemSelected(menuItem)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testPerformLogin() {
+        activity.performLogin()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testSetContentView() {
+        activity.setContentView(view, params)
     }
 
 }
