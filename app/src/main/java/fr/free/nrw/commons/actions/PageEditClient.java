@@ -30,7 +30,7 @@ public class PageEditClient {
 
     /**
      * This method is used when the content of the page is to be replaced by new content received
-     * @param pagetitle   Title of the page to edit
+     * @param pageTitle   Title of the page to edit
      * @param text        Holds the page content
      * @param summary     Edit summary
      */
@@ -45,7 +45,7 @@ public class PageEditClient {
 
     /**
      * This method is used when we need to append something to the end of wiki page content
-     * @param pagetitle   Title of the page to edit
+     * @param pageTitle   Title of the page to edit
      * @param appendText  The received page content is added to beginning of the page
      * @param summary     Edit summary
      */
@@ -64,7 +64,7 @@ public class PageEditClient {
 
     /**
      * This method is used when we need to add something to the starting of the page
-     * @param pagetitle   Title of the page to edit
+     * @param pageTitle   Title of the page to edit
      * @param prependText The received page content is added to beginning of the page
      * @param summary     Edit summary
      */
