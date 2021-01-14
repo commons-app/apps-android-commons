@@ -212,27 +212,12 @@ public class SearchActivity extends BaseActivity
                     .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
                     .add(R.id.mediaContainer, mediaDetails)
                     .commit();
-            // Reason for using hide, add instead of replace is to maintain scroll position after
+            // Reason for using hide, add instead of replace is to maintain scroll0 position after
             // coming back to the search activity. See https://github.com/commons-app/apps-android-commons/issues/1631
             // https://stackoverflow.com/questions/11353075/how-can-i-maintain-fragment-state-when-added-to-the-back-stack/19022550#19022550
             supportFragmentManager.executePendingTransactions();
         }
         mediaDetails.showImage(index);
-    }
-
-    /**
-     * This method is called on Screen Rotation
-     */
-    @Override
-    protected void onResume() {
-        if (supportFragmentManager.getBackStackEntryCount()==1){
-            //FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.
-            //FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894
-            // This is called on screen rotation when user is inside media details. Ideally it should show Media Details but since we are not saving the state now. We are throwing the user to search screen otherwise the app was crashing.
-            //
-            onBackPressed();
-        }
-        super.onResume();
     }
 
     /**
@@ -242,21 +227,13 @@ public class SearchActivity extends BaseActivity
     @Override
     public void onBackPressed() {
         //according to first condition mediaDetailFragemnt is opened and then backButton is pressed then open the ViewPager
-        //according to second condtion Viewpager is open and then backButton is pressed then open the recentSearchesFragment
-        // according to thrid condion  recentSearchesFragment is opened and then backButton is pressed then open exploreActivity opened
+        //according to second condtion Viewpager is open and then backButton is pressed then open the exploreActivity
         if (mediaContainer.isShown() && viewPager.isShown() == false) {
-            getSupportFragmentManager().beginTransaction().remove(mediaDetails).commit();
             searchView.setVisibility(View.VISIBLE);//set the searchview
             tabLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.VISIBLE);
             mediaContainer.setVisibility(View.GONE);
-        } else if (viewPager.isShown()) {
-            viewPager.setVisibility(View.GONE);
-            tabLayout.setVisibility(View.GONE);
-            setSearchHistoryFragment();
-            searchView.setQuery("", false);
-            searchHistoryContainer.setVisibility(View.VISIBLE);
-        } else {
+        }  else {
             super.onBackPressed();
         }
     }
