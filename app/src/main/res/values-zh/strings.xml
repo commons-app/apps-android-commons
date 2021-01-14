@@ -107,7 +107,7 @@
   <string name="share_title_hint">说明 （要求）</string>
   <string name="add_caption_toast">请提供此文件的描述</string>
   <string name="share_description_hint">描述</string>
-  <string name="share_caption_hint" fuzzy="true">说明（255个字符以内）</string>
+  <string name="share_caption_hint">说明</string>
   <string name="login_failed_network">无法登录 - 网络故障</string>
   <string name="login_failed_wrong_credentials">无法登录——请检查您的用户名和密码</string>
   <string name="login_failed_throttled">失败次数过多。请在几分钟后重试。</string>
