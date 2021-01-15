@@ -94,7 +94,9 @@ public class MainActivity  extends BaseActivity
     @Override
     public boolean onSupportNavigateUp() {
         if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
-            contributionsFragment.backButtonClicked();
+            if (!contributionsFragment.backButtonClicked()) {
+                return false;
+            }
         } else {
             onBackPressed();
             showTabs();
@@ -238,8 +240,11 @@ public class MainActivity  extends BaseActivity
     @Override
     public void onBackPressed() {
         if (contributionsFragment != null && activeFragment == ActiveFragment.CONTRIBUTIONS) {
-            // Meas that contribution fragment is visible
-            contributionsFragment.backButtonClicked();
+            // Means that contribution fragment is visible
+            if (!contributionsFragment.backButtonClicked()) {//If this one does not wan't to handle
+                // the back press, let the activity do so
+                super.onBackPressed();
+            }
         } else if (nearbyParentFragment != null && activeFragment == ActiveFragment.NEARBY) {
             // Means that nearby fragment is visible
             /* If function nearbyParentFragment.backButtonClick() returns false, it means that the bottomsheet is
