@@ -110,6 +110,9 @@ public class MainActivity  extends BaseActivity
         setContentView(R.layout.main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(view -> {
+            onSupportNavigateUp();
+        });
         if (applicationKvStore.getBoolean("login_skipped") == true) {
             setTitle(getString(R.string.explore_tab_title_mobile));
             setUpLoggedOutPager();
