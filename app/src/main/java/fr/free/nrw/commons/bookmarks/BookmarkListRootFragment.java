@@ -172,16 +172,15 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
   }
 
   public void backPressed() {
-    if (mediaDetails.isVisible()) {
+    if (null != mediaDetails && mediaDetails.isVisible()) {
       // todo add get list fragment
-      ((BookmarkFragment)getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
+      ((BookmarkFragment) getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
       removeFragment(mediaDetails);
       setFragment(listFragment, mediaDetails);
-      ((MainActivity)getActivity()).showTabs();
     } else {
       ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
-      ((MainActivity)getActivity()).showTabs();
     }
+    ((MainActivity) getActivity()).showTabs();
   }
 
   @Override
