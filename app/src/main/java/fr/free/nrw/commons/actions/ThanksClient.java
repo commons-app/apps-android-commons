@@ -11,7 +11,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import io.reactivex.Observable;
 
 /**
- * Facilitates the Wkikimedia Thanks api extention, as described in the 
+ * Facilitates the Wkikimedia Thanks api extension, as described in the 
  * api documentation: "The Thanks extension includes an API for sending thanks"
  * 
  * In simple terms this class is used by a user to thank someone for adding 
@@ -32,8 +32,8 @@ public class ThanksClient {
 
     /**
      * Handles the Thanking logic
-     * @param revesionID The revision ID you would like to thank someone for
-     * @return if thanks was successfully sent to intended recepient, returned as a boolean observable
+     * @param revisionID The revision ID you would like to thank someone for
+     * @return if thanks was successfully sent to intended recipient, returned as a boolean observable
      */
     public Observable<Boolean> thank(long revisionId) {
         try {
