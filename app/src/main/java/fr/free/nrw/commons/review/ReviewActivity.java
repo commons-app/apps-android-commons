@@ -55,6 +55,7 @@ public class ReviewActivity extends BaseActivity {
     ReviewHelper reviewHelper;
     @Inject
     DeleteHelper deleteHelper;
+    private ReviewImageFragment reviewImageFragment;
 
     final String SAVED_MEDIA = "saved_media";
     private Media media;
@@ -98,7 +99,7 @@ public class ReviewActivity extends BaseActivity {
 
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
         reviewPager.setAdapter(reviewPagerAdapter);
-        reviewPagerAdapter.getItem(0);
+        reviewPager.setOffscreenPageLimit(2);
         pagerIndicator.setViewPager(reviewPager);
         progressBar.setVisibility(View.VISIBLE);
 
@@ -113,7 +114,8 @@ public class ReviewActivity extends BaseActivity {
         }
 
         btnSkipImage.setOnClickListener(view -> {
-            reviewPagerAdapter.disableButtons();
+            reviewImageFragment=getInstanceOfReviewImageFragment();
+            reviewImageFragment.disableButtons();
             runRandomizer();
         });
 
@@ -142,7 +144,8 @@ public class ReviewActivity extends BaseActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(media -> {
-                    reviewPagerAdapter.disableButtons();
+                    reviewImageFragment=getInstanceOfReviewImageFragment();
+                    reviewImageFragment.disableButtons();
                     updateImage(media);
                 }));
         return true;
@@ -169,7 +172,8 @@ public class ReviewActivity extends BaseActivity {
                     String caption = String.format(getString(R.string.review_is_uploaded_by), fileName, revision.getUser());
                     imageCaption.setText(caption);
                     progressBar.setVisibility(View.GONE);
-                    reviewPagerAdapter.enableButtons();
+                    reviewImageFragment=getInstanceOfReviewImageFragment();
+                    reviewImageFragment.enableButtons();
                 }));
         reviewPager.setCurrentItem(0);
     }
@@ -227,15 +231,9 @@ public class ReviewActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        reviewPager.setAdapter(reviewPagerAdapter);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        reviewPager.setAdapter(null); 
+    public ReviewImageFragment getInstanceOfReviewImageFragment(){
+        int pos=reviewPager.getCurrentItem();
+        reviewImageFragment= (ReviewImageFragment) reviewPagerAdapter.instantiateItem(reviewPager,pos);
+        return reviewImageFragment;
     }
 }
