@@ -1543,4 +1543,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void setNearbyParentFragmentInstanceReadyCallback(NearbyParentFragmentInstanceReadyCallback nearbyParentFragmentInstanceReadyCallback) {
         this.nearbyParentFragmentInstanceReadyCallback = nearbyParentFragmentInstanceReadyCallback;
     }
+
+    @Override
+    public void onConfigurationChanged(@NonNull final Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+            rlBottomSheet.getLayoutParams().height = getActivity().getWindowManager()
+                .getDefaultDisplay().getHeight() / 16 * 9;
+        }
 }
