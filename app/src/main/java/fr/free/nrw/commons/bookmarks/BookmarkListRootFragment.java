@@ -19,10 +19,13 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
+import fr.free.nrw.commons.category.GridViewAdapter;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.navtab.NavTab;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class BookmarkListRootFragment extends CommonsDaggerSupportFragment implements
     FragmentManager.OnBackStackChangedListener,
@@ -183,9 +186,19 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
       if (mediaDetails.isVisible()) {
         // todo add get list fragment
         ((BookmarkFragment) getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
+        ArrayList<Integer> removed=mediaDetails.getRemovedItems();
         removeFragment(mediaDetails);
         setFragment(listFragment, mediaDetails);
         ((MainActivity) getActivity()).showTabs();
+        if(listFragment instanceof BookmarkPicturesFragment){
+          GridViewAdapter adapter=((GridViewAdapter)((BookmarkPicturesFragment)listFragment).getAdapter());
+          Iterator i = removed.iterator();
+          while (i.hasNext()) {
+            adapter.remove(adapter.getItem((int)i.next()));
+          }
+          mediaDetails.clearRemoved();
+
+        }
       } else {
         moveToContributionsFragment();
       }
