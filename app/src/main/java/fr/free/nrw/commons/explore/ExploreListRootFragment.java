@@ -110,7 +110,8 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
     Log.d("deneme8","on media clicked");
     container.setVisibility(View.VISIBLE);
     ((ExploreFragment)getParentFragment()).tabLayout.setVisibility(View.GONE);
-    mediaDetails = new MediaDetailPagerFragment(false, true, position);
+    mediaDetails = new MediaDetailPagerFragment(false, true);
+    mediaDetails.showImage(position);
     setFragment(mediaDetails, listFragment);
   }
 
