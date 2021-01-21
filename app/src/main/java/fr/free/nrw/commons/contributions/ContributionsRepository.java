@@ -53,6 +53,10 @@ public class ContributionsRepository {
         return localDataSource.saveContributions(contributions);
     }
 
+    public Completable save(Contribution contributions){
+        return localDataSource.saveContributions(contributions);
+    }
+
     public void set(String key, long value) {
         localDataSource.set(key,value);
     }

@@ -39,7 +39,7 @@ class WikipediaInstructionsDialogFragment : DialogFragment() {
             callback?.onConfirmClicked(contribution, checkbox_copy_wikicode.isChecked)
         }
 
-        dialog!!.window.setSoftInputMode(
+        dialog!!.window?.setSoftInputMode(
             WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         )
     }

@@ -31,20 +31,14 @@ class UploadControllerTest {
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        val uploadService = mock(UploadService::class.java)
-        val binder = mock(UploadService.UploadServiceLocalBinder::class.java)
-        `when`(binder.service).thenReturn(uploadService)
-        uploadController!!.uploadServiceConnection.onServiceConnected(mock(ComponentName::class.java), binder)
     }
 
     @Test
     fun prepareService() {
-        uploadController!!.prepareService()
     }
 
     @Test
     fun cleanup() {
-        uploadController!!.cleanup()
     }
 
     @Test
@@ -53,6 +47,6 @@ class UploadControllerTest {
         val media = mock<Media>()
         whenever(contribution.media).thenReturn(media)
         whenever(media.author).thenReturn("Creator")
-        uploadController!!.startUpload(contribution)
+        uploadController!!.prepareMedia(contribution)
     }
 }

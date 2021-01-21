@@ -8,6 +8,7 @@ import android.content.Context;
 
 import androidx.fragment.app.Fragment;
 
+import dagger.android.HasAndroidInjector;
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
@@ -25,6 +26,7 @@ import dagger.android.support.HasSupportFragmentInjector;
  */
 public class ApplicationlessInjection
         implements
+        HasAndroidInjector,
         HasActivityInjector,
         HasFragmentInjector,
         HasSupportFragmentInjector,
@@ -34,6 +36,7 @@ public class ApplicationlessInjection
 
     private static ApplicationlessInjection instance = null;
 
+    @Inject DispatchingAndroidInjector<Object> androidInjector;
     @Inject DispatchingAndroidInjector<Activity> activityInjector;
     @Inject DispatchingAndroidInjector<BroadcastReceiver> broadcastReceiverInjector;
     @Inject DispatchingAndroidInjector<android.app.Fragment> fragmentInjector;
@@ -47,6 +50,11 @@ public class ApplicationlessInjection
         commonsApplicationComponent = DaggerCommonsApplicationComponent.builder()
                 .appModule(new CommonsApplicationModule(applicationContext)).build();
         commonsApplicationComponent.inject(this);
+    }
+
+    @Override
+    public AndroidInjector<Object> androidInjector() {
+        return androidInjector;
     }
 
     @Override
@@ -94,5 +102,4 @@ public class ApplicationlessInjection
 
         return instance;
     }
-
 }

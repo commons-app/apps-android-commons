@@ -3,21 +3,8 @@
 * Anakmalaysia
 * Aurora
 * Muhdnurhidayat
-* Tofeiku
 -->
 <resources>
-  <string name="uploads_pending_notification_indicator" fuzzy="true">%d fail sedang dimuat naik</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Belum ada muatnaik</item>
-    <item quantity="one">%1$d muatnaik</item>
-    <item quantity="other">%1$d muatnaik</item>
-  </plurals>
-  <string name="starting_multiple_uploads" fuzzy="true">Memulakan %d kerja muat naik</string>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d muatnaik</item>
-    <item quantity="other">%1$d muatnaik</item>
-  </plurals>
-  <string name="share_license_summary" fuzzy="true">Gambar ini akan dilesenkan di bawah %1$s</string>
   <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Tetapan</string>
   <string name="username">Nama pengguna</string>
@@ -36,6 +23,7 @@
   <string name="upload_progress_notification_title_finishing">%1$s akan siap dimuat naik</string>
   <string name="upload_failed_notification_title">%1$s gagal dimuat naik</string>
   <string name="upload_failed_notification_subtitle">Ketik untuk lihat</string>
+  <string name="uploads_pending_notification_indicator" fuzzy="true">%d fail sedang dimuat naik</string>
   <string name="title_activity_contributions">Muat Naik Terbaru Saya</string>
   <string name="contribution_state_queued">Dibaris gilir</string>
   <string name="contribution_state_failed">Gagal</string>
@@ -45,10 +33,9 @@
   <string name="menu_from_camera">Ambil gambar</string>
   <string name="provider_contributions">Muatan naik saya</string>
   <string name="menu_share">Kongsi</string>
-  <string name="menu_view_file_page">Lihat laman fail</string>
-  <string name="share_title_hint" fuzzy="true">Tajuk</string>
+  <string name="menu_open_in_browser">Lihat dalam Pelayar</string>
+  <string name="share_title_hint">Tajuk</string>
   <string name="share_description_hint">Keterangan</string>
-  <string name="share_caption_hint">Kapsyen</string>
   <string name="login_failed_network">Tidak boleh log masuk - kegagalan rangkaian</string>
   <string name="login_failed_throttled" fuzzy="true">Terlalu banyak cubaan yang tidak berjaya. Sila cuba lagi dalam beberapa minit</string>
   <string name="login_failed_blocked">Maaf, pengguna ini telah disekat di Commons</string>
@@ -59,6 +46,19 @@
   <string name="menu_upload_single">Muat naik</string>
   <string name="categories_search_text_hint">Cari dalam kategori</string>
   <string name="menu_save_categories">Simpan</string>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">Belum ada muatnaik</item>
+    <item quantity="one">%1$d muatnaik</item>
+    <item quantity="other">%1$d muatnaik</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Memulakan %d kerja muat naik</item>
+    <item quantity="other">Memulakan %d kerja muat naik</item>
+  </plurals>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d muatnaik</item>
+    <item quantity="other">%1$d muatnaik</item>
+  </plurals>
   <string name="categories_not_found">Tiada kategori yang sepadan dengan %1$s dijumpai</string>
   <string name="categories_skip_explanation" fuzzy="true">Tambahkan kategori supaya gambar-gambar anda lebih senang ditemui di Wikimedia Commons.\n\nMula menaip untuk menambahkan kategori.\nKetik mesej ini (atau tekan butang undur) untuk melangkau langkah ini.</string>
   <string name="categories_activity_title">Kategori</string>
@@ -74,13 +74,25 @@
   <string name="no_uploads_yet">Anda belum memuat naik sebarang gambar.</string>
   <string name="menu_retry_upload">Cuba lagi</string>
   <string name="menu_cancel_upload">Batalkan</string>
+  <string name="share_license_summary">Gambar ini akan dilesenkan di bawah %1$s</string>
   <string name="menu_download">Muat Turun</string>
   <string name="preference_license" fuzzy="true">Lesen</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Jerman)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Sepanyol)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croatia)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxembourg)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Belanda)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norway)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Poland)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
   <string name="welcome_wikipedia_text">Sumbangkan gambar-gambar anda.\nHidupkan rencana-rencana di Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Gambar-gambar di Wikipedia datang dari Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Gambar-gambar anda akan membantu mendidik masyarakat seluruh dunia.</string>
@@ -95,21 +107,4 @@
   <string name="menu_refresh">Muat semula</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="no_description_found">tiada huraian dijumpai</string>
-  <string name="Profile">Profil</string>
-  <string name="category_edit_helper_show_edit_title">Kemas kini kategori</string>
-  <string name="category_edit_button_text">Kemas kini kategori</string>
-  <string name="add_picture_to_wikipedia_article_title">Tambah imej ke Wikipedia</string>
-  <string name="add_picture_to_wikipedia_article_desc">Adakah anda mahu menambah gambar ini ke rencana Wikipedia bahasa %1$s?</string>
-  <string name="confirm">Sahkan</string>
-  <string name="instructions_title">Arahan</string>
-  <string name="wikipedia_instructions_step_1">1. Guna teks wiki berikut:</string>
-  <string name="wikipedia_instructions_step_7">7. Terbit rencana</string>
-  <string name="leaderboard_tab_title">Carta kedudukan</string>
-  <string name="count_prefix">Kiraan:</string>
-  <string name="leaderboard_column_user">Pengguna</string>
-  <string name="leaderboard_yearly">Tahunan</string>
-  <string name="leaderboard_weekly">Mingguan</string>
-  <string name="leaderboard_all_time">Sepanjang masa</string>
-  <string name="leaderboard_upload">Muat naik</string>
-  <string name="leaderboard_nearby">Berdekatan</string>
 </resources>
