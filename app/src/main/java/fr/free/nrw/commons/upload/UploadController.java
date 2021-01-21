@@ -13,12 +13,16 @@ import android.net.Uri;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.upload.worker.UploadWorker;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -35,53 +39,18 @@ import timber.log.Timber;
 
 @Singleton
 public class UploadController {
-    private UploadService uploadService;
+
     private final SessionManager sessionManager;
     private final Context context;
     private final JsonKvStore store;
 
     @Inject
     public UploadController(final SessionManager sessionManager,
-                            final Context context,
-                            final JsonKvStore store) {
+        final Context context,
+        final JsonKvStore store) {
         this.sessionManager = sessionManager;
         this.context = context;
         this.store = store;
-    }
-
-    private boolean isUploadServiceConnected;
-    public ServiceConnection uploadServiceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(final ComponentName componentName, final IBinder binder) {
-            uploadService =  ((UploadService.UploadServiceLocalBinder) binder).getService();
-            isUploadServiceConnected = true;
-        }
-
-        @Override
-        public void onServiceDisconnected(final ComponentName componentName) {
-            // this should never happen
-            isUploadServiceConnected = false;
-            Timber.e(new RuntimeException("UploadService died but the rest of the process did not!"));
-        }
-    };
-
-    /**
-     * Prepares the upload service.
-     */
-    public void prepareService() {
-        final Intent uploadServiceIntent = new Intent(context, UploadService.class);
-        uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
-        context.startService(uploadServiceIntent);
-        context.bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
-    }
-
-    /**
-     * Disconnects the upload service.
-     */
-    public void cleanup() {
-        if (isUploadServiceConnected) {
-            context.unbindService(uploadServiceConnection);
-        }
     }
 
     /**
@@ -90,7 +59,7 @@ public class UploadController {
      * @param contribution the contribution object
      */
     @SuppressLint("StaticFieldLeak")
-    public void startUpload(final Contribution contribution) {
+    public void prepareMedia(final Contribution contribution) {
         //Set creator, desc, and license
 
         // If author name is enabled and set, use it
@@ -118,20 +87,7 @@ public class UploadController {
         final String license = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         media.setLicense(license);
 
-        uploadTask(contribution);
-    }
-
-    /**
-     * Initiates the upload task
-     * @param contribution
-     * @return
-     */
-    private Disposable uploadTask(final Contribution contribution) {
-        return Single.just(contribution)
-                .map(this::buildUpload)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::upload);
+        buildUpload(contribution);
     }
 
     /**
@@ -139,7 +95,7 @@ public class UploadController {
      * @param contribution
      * @return
      */
-    private Contribution buildUpload(final Contribution contribution) {
+    private void buildUpload(final Contribution contribution) {
         final ContentResolver contentResolver = context.getContentResolver();
 
         contribution.setDataLength(resolveDataLength(contentResolver, contribution));
@@ -153,8 +109,6 @@ public class UploadController {
                 contribution.setDateCreated(resolveDateTakenOrNow(contentResolver, contribution));
             }
         }
-
-        return contribution;
     }
 
     private String resolveMimeType(final ContentResolver contentResolver, final Contribution contribution) {
@@ -200,15 +154,6 @@ public class UploadController {
     private Cursor dateTakenCursor(final ContentResolver contentResolver, final Contribution contribution) {
         return contentResolver.query(contribution.getLocalUri(),
             new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
-    }
-
-    /**
-     * When the contribution object is completely formed, the item is queued to the upload service
-     * @param contribution
-     */
-    private void upload(final Contribution contribution) {
-        //Starts the upload. If commented out, user can proceed to next Fragment but upload doesn't happen
-        uploadService.queue(contribution);
     }
 
 

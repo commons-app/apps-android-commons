@@ -1,13 +1,11 @@
 package fr.free.nrw.commons.contributions;
 
-import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import androidx.annotation.NonNull;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.DefaultCallback;
@@ -29,7 +27,6 @@ import javax.inject.Singleton;
 public class ContributionController {
 
     public static final String ACTION_INTERNAL_UPLOADS = "internalImageUploads";
-
     private final JsonKvStore defaultKvStore;
 
     @Inject
@@ -130,7 +127,8 @@ public class ContributionController {
         List<UploadableFile> imagesFiles) {
         Intent shareIntent = new Intent(context, UploadActivity.class);
         shareIntent.setAction(ACTION_INTERNAL_UPLOADS);
-        shareIntent.putParcelableArrayListExtra(EXTRA_FILES, new ArrayList<>(imagesFiles));
+        shareIntent
+            .putParcelableArrayListExtra(UploadActivity.EXTRA_FILES, new ArrayList<>(imagesFiles));
         Place place = defaultKvStore.getJson(PLACE_OBJECT, Place.class);
 
         if (place != null) {

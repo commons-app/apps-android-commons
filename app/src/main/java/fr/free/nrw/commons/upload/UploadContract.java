@@ -29,6 +29,8 @@ public interface UploadContract {
         void onUploadMediaDeleted(int index);
 
         void updateTopCardTitle();
+
+        void makeUploadRequest();
     }
 
     public interface UserActionListener extends BasePresenter<View> {
