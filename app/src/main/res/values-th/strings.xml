@@ -3,6 +3,7 @@
 * Abijeet Patro
 * Aefgh39622
 * B20180
+* Geonuch
 * Horus
 * Just Sayori
 * Korrawit
@@ -237,7 +238,7 @@
   <string name="navigation_item_info">บทช่วยสอน</string>
   <string name="navigation_item_notification">การแจ้งเตือน</string>
   <string name="navigation_item_featured_images">แนะนำ</string>
-  <string name="navigation_item_review">ตรวจสอบ</string>
+  <string name="navigation_item_review">ทบทวน</string>
   <string name="nearby_needs_permissions">ไม่สามารถแสดงสถานที่ใกล้เคียงได้โดยขาดสิทธิ์การเข้าถึงตำแหน่ง</string>
   <string name="no_description_found">ไม่พบคำอธิบาย</string>
   <string name="nearby_info_menu_commons_article">หน้าไฟล์คอมมอนส์</string>

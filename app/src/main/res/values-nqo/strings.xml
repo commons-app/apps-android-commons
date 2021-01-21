@@ -205,10 +205,12 @@
   <string name="navigation_item_logout">ߌ ߜߊ߲߬ߞߎ߲߬ߣߍ߲ ߓߐ߫</string>
   <string name="navigation_item_info">ߟߞߊ߬ߙߊ߲߬ߠߌ߲</string>
   <string name="navigation_item_featured_images">ߡߊߦߋߙߋ߲ߣߍ߲ ߠߎ߬</string>
+  <string name="nearby_needs_permissions">ߛߌ߰ߢߐ߰ ߘߌ߲ߞߌߙߊ ߕߍߣߊ߬ ߛߐ߲߬ ߠߊ߫ ߟߊߓߊ߯ߙߊ߫ ߘߌ߲߬ߞߌߙߊ ߟߊߘߌ߬ߢߍ߬ߟߌ ߞߐ߫</string>
   <string name="no_description_found">ߞߊ߲߬ߛߓߍ߬ߟߌ߬ ߡߊ߫ ߛߐ߬ߘߐ߲߬</string>
   <string name="nearby_info_menu_commons_article">ߞߐߡߐ߲ ߞߐߕߐ߯ ߞߐߜߍ</string>
   <string name="nearby_info_menu_wikidata_article">ߥߞߌߘߕߊ ߞߎߡߘߊ</string>
   <string name="nearby_info_menu_wikipedia_article">ߥߞߌߔߋߘߌߦߊ ߞߎߡߘߊ</string>
+  <string name="error_while_cache">ߝߎ߬ߕߎ߲߬ߕߌ ߞߊ߬ ߖߌ߬ߦߊ߬ߓߍ ߟߊߛߐ߬ߘߐ߲ ߕߴߌ ߘߐ߫</string>
   <string name="title_info">ߛߓߍߢߊ߫ ߞߋߟߋ߲ ߡߍ߲ ߦߋ߫ ߞߐߕߐ߮ ߟߊ߫߸ ߡߍ߲ ߡߊߛߐ߫ ߕߐ߫ ߦߋ߫ ߞߐߕߐ߮ ߕߐ߮ ߘߌ߫. ߌ ߞߊ߫ ߞߊ߲߫ ߞߊ߬ ߞߊ߲ ߘߏ߲߬ߖߟߎ߬ߡߊ߬ߣߍ߲ ߠߋ߬ ߟߊߓߊ߯ߙߊ߫ ߞߣߍ ߟߎ߬ ߘߌ߫. ߌ ߞߊߣߊ߬ ߞߐߕߐ߮ ߥߊ߲߬ߥߊ߲ ߠߊߘߏ߲߬ ߘߋ߬</string>
   <string name="upload_problem_image_dark">ߖߌ߬ߦߊ߬ߓߍ ߢߟߊߝߌ߲߬ߣߍ߲߬ ߞߏߖߎ߯ߦߊ߫.</string>
   <string name="upload_problem_image_blurry">ߖߌ߬ߦߊ߬ߓߍ ߟߊߝߎ߬ߟߎ߲߬ߜߊ߬ߣߍ߲߫</string>
@@ -219,6 +221,8 @@
   <string name="upload_problem_image">ߝߙߋߞߋ ߓߘߊ߫ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߊ߫</string>
   <string name="internet_downloaded">ߖߊ߰ߣߌ߲߬ ߌ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ߬ ߟߎ߫ ߟߋ߬ ߟߊߦߟߍ߬ ߌ ߖߍ߬ߘߍ ߞߊ߬ ߡߍ߲ ߠߎ߬ ߕߊ߬. ߞߏ߬ߣߌ߲߬ ߌ ߞߊߣߊ߬ ߖߌ߬ߦߊ߬ߓߍ߬ ߟߊߦߟߍ߬ ߌ ߣߊ߬ ߡߍ߲ ߠߊߖߌ߰ ߟߴߌ ߞߎ߲߬ ߓߟߐߟߐ ߟߊ߫.</string>
   <string name="give_permission">ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ ߦߌ߬ߘߊ߬</string>
+  <string name="use_external_storage">ߊ߬ ߟߊߞߎ߲߬ߘߎ߫ ߟߥߊ߬ߟߌ߬ߟߊ߲ ߘߐ߫ ߜߍ߲ߜߍߘߍ߲߫</string>
+  <string name="use_external_storage_summary">ߖߌ߬ߦߊ߬ߓߍ ߡߍ߲ ߠߎ߬ ߕߊ߬ߣߍ߲߬ ߦߋ߫ ߟߥߊ߬ߟߌ߬ߟߊ߲ ߖߌ߬ߦߕߊ߬ߟߊ߲ ߠߊ߫߸ ߏ߬ ߟߎ߬ ߟߊߞߎ߲߬ߘߎ߫ ߞߍߟߊ߲ ߟߊ߬ߡߙߊ߬ߟߌ߬ ߦߙߐ ߘߐ߫</string>
   <string name="login_to_your_account">ߌ ߜߊ߲߬ߞߎ߲߫ ߌ ߟߊ߫ ߖߊ߬ߕߋ߬ߘߊ ߟߊ߫.</string>
   <string name="no_web_browser">ߓߟߐߟߐ ߛߏ߲߯ߓߊߟߊ߲߫ ߡߊ߫ ߛߐ߬ߘߐ߲߬ ߞߊ߬ URL ߟߊߞߊ߬</string>
   <string name="null_url">ߝߎ߬ߕߎ߲߬ߕߌ߹ URL ߡߊ߫ ߛߐ߬ߘߐ߲߬</string>
@@ -301,9 +305,12 @@
   <string name="quiz_alert_message">ߊ߬ ߞߊߛߌߦߊ߫ ߖߌ߬ߦߊ߬ߓߍ %1$s ߟߎ߬ ߘߴߌ ߣߊ߬ ߡߍ߲ ߠߎ߬ ߟߊߦߟߍ߬ ߟߊ߫߸ ߏ߬ ߟߎ߬ ߓߘߊ߫ ߖߏ߬ߛߌ߬.ߣߴߌ ߕߏ߫ ߘߊ߫ ߖߌ߬ߦߌ߬ߓߍ߫ ߖߏ߰ߛߌ߬ߕߊ ߟߎ߬ ߟߊߦߟߍ߬ ߟߊ߫ ߛߐ߲߬߸ ߊ߬ ߘߌ߫ ߞߍ߫ ߦߴߌ ߟߊ߫ ߖߊ߬ߕߋ߬ߘߊ ߦߋ߫ ߟߊߘߎ߲߫.\n\nߊ߬ ߞߊߘߴߌ ߦߋ߫ ߓߊ߬ ߞߊ߬ ߟߞߊ߬ߙߊ߲߬ߠߌ߲ ߦߋ߫ ߕߎ߲߯ ߏ߬ ߓߊ߯ ߞߍ߫ ߌ ߦߋ߫ ߡߊ߬ߝߍ߬ߣߍ߲߬ߠߌ߲ ߘߏ߫ ߟߊߛߐ߬ߘߐ߲߬ ߞߵߌ ߟߊߞߊ߬ߙߊ߲߬ ߖߌ߬ߦߊ߬ߓߍ ߛߎ߯ߦߊ߫ ߟߊߦߟߍ߬ߕߊ ߣߴߊ߬ ߟߊߦߟߍ߬ߓߊߟߌ ߟߎ߬ ߟߊ߫؟</string>
   <string name="selfie_answer">ߔߘߋߞߎ ߡߐ߬ߟߐ߲߬ ߕߍ߫ ߖߘߍ߬ߖߌߦߊ (Selfies) ߟߊ߫.ߖߊ߰ߣߌ߲߬ ߌ ߞߊߣߊ߬ ߌ ߖߘߍ߬ߞߊߣߌ߲  ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߟߍ߬ ߝߏߣߴߊ߬ ߕߘߍ߬ ߘߊ߫ ߥߞߌߔߋߘߌߦߊ ߞߎߡߘߊ ߘߏ߫ ߓߘߊ߫ ߛߓߍ߫ ߌ ߞߊ߲߬.</string>
   <string name="taj_mahal_answer">ߝߙߎߕߎ ߟߎ߬ ߣߌ߫ ߢߊߡߌߟߏ ߟߎ߬ ߟߋ߬ ߟߊߦߍ߬ߟߍ ߓߍ߲߬ߣߍ߲߫ ߦߋ߫ ߖߡߊ߬ߣߊ ߝߊ߲߬ߓߊ ߘߐ߫. ߌ ߦߟߌߕߏ߫ ߞߏ߫ ߥߊ߯ߕߌ߫ ߟߕߊߡߌ߲߫ ߞߎߛߊ߲ߧߊߞߏ ߡߊߞߍߣߍ߲ ߞߣߍߡߊ ߟߎ߬ ߦߋ߫ ߓߊߦߟߍߡߊ߲ ߤߊߞߍ ߞߘߐ߫ ߟߋ߬߸ ߏ߬ ߟߎ߬ ߡߊ߲ߞߊ߲߫ ߞߊ߬ ߟߊߦߟߍ߬.</string>
+  <string name="construction_event_answer">ߖߌ߬ߦߊ߬ߓߍ ߡߍ߲ ߠߎ߬ ߦߋ߫ ߛߋߒߞߏߟߦߊ ߦߌ߬ߘߊ߬ ߟߊ߫ ߥߟߊ߫ ߟߐ߲ߠߌ߲ߦߊ߸ ߏ߬ ߟߎ߬ ߟߊߛߣߍߣߍ߲ߓߊ ߟߋ߬ ߦߋ߫ ߞߐߡߐ߲ߛ ߞߊ߲߬.</string>
+  <string name="warning_for_image_reverts">ߖߊ߬ߛߙߋ߬ߡߊ߬ߟߊ: ߌ ߟߊ߫ ߖߌ߬ߦߊ߬ߓߍ߬ ߟߊߦߟߍ߬ߣߍ߲ %1$s ߟߎ߫ ߓߘߊ߫ ߖߏ߬ߛߌ߬. ߣߴߌ ߕߏ߫ ߘߊ߫ ߖߌ߬ߦߊ߬ߓߍ߬ ߟߊߦߟߍ߬ߕߊ ߟߎ߬ ߟߊߦߟߍ߬ ߟߊ߫ ߛߐ߲߬߸ ߊ߬ ߘߌ߫ ߞߍ߫ ߦߴߌ ߟߊ߫ ߖߊ߬ߕߋ߬ߘߊ ߦߋ߫ ߟߊߘߎ߲߫.</string>
   <string name="congratulatory_message_quiz">ߌ ߓߘߊ߫  %1$s ߖߋ߬ߓߟߌ߬ ߓߘߍ ߛߐ߬ߘߐ߲߬. ߌ ߞߎߟߎ߲ߖߋ߫߹</string>
   <string name="warning_for_no_answer">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߝߌ߬ߟߊ ߘߏ߫ ߘߐ߫ ߞߋߟߋ߲߫ ߢߣߊߕߊߟߌ ߓߊߕߐ߬ߡߐ߲߫ ߞߊ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߖߋ߬ߓߌ߫</string>
   <string name="user_not_logged_in">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߥߎ߬ߛߎ ߓߘߊ߫ ߕߊ߬ߡߌ߲߬߸ ߌ ߜߊ߲߬ߞߎ߲߬ ߕߎ߲߯ߣߌ߲߫ ߖߊ߰ߣߌ߲߫.</string>
+  <string name="quiz_result_share_message">ߌ ߟߊ߫ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߊߖߍ߲ߛߍ߲߫ ߌ ߕߋߙߌ ߟߎ߬ ߡߊ߬߹</string>
   <string name="continue_message">ߘߊߓߊ߲ߠߌ߲</string>
   <string name="correct">ߖߋ߬ߓߟߌ߬ ߢߌߡߊ</string>
   <string name="wrong">ߖߋ߬ߓߌ߬ߟߌ ߝߘߏ߬ߣߍ߲</string>
@@ -361,7 +368,7 @@
   <string name="nearby_card_permission_explanation">ߊ߬ ߞߊߘߴߌ ߦߋ߫ ߓߊ߬ ߞߊ߬ ߞߵߌ ߘߌ߲߬ߞߌߙߊ ߢߌ߲߬ ߠߊߓߊ߯ߙߊ߫ ߌ ߡߊߛߎߘߎ߲ߧߊ߫ ߦߙߐ ߘߌ߫ ߡߍ߲ ߡߊ߬ߞߏ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߊ߫؟</string>
   <string name="unable_to_display_nearest_place">ߊ߬ ߟߊߓߊ߯ߙߊ߫ ߡߊ߬ߛߎ߬ߘߎ߲߬ߧߊ߬ ߦߙߐ ߘߌ߫ ߡߍ߲ ߡߊ߬ߞߏ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߊ߫ ߘߌ߲߬ߞߌߙߊ ߟߊߘߌ߬ߢߍ߬ߓߊߟߌߦߊ ߘߐ߫.</string>
   <string name="never_ask_again">ߏ߬ ߞߊ߫ ߡߊߢߌ߬ߣߌ߲߬ߞߊ߫ ߏ߬ ߞߐ߫ ߡߎ߰ߡߍ߫</string>
-  <string name="display_location_permission_title" fuzzy="true">ߘߌ߲߬ߞߌߙߊ ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ ߟߊߓߊ߯ߙߊ߫</string>
+  <string name="display_location_permission_title">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߞߍ߫ ߘߌ߲߬ߞߌߙߊ ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ߬ ߞߏ ߘߐ߫</string>
   <string name="error_processing_image">ߝߎ߬ߕߎ߲߬ߕߌ ߘߏ߫ ߓߘߊ߫ ߓߌ߬ߟߵߊ߬ ߘߐ߫ ߞߵߌ ߕߏ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߍ߬ߟߍ ߞߊ߲߬߸ ߊ߬ ߡߊߝߍߣߍ߲߫ ߌߞߐ߫ ߖߊ߰ߣߌ߲߬߹</string>
   <string name="getting_edit_token">ߖߐߟߐ߲ߞߐ ߘߏ߫ ߟߊߛߐ߬ߘߐ߲߬ ߡߊ߬ߦߟߍ߬ߡߊ߲߬ߠߌ߲߬ ߞߊ߲ߡߊ߬</string>
   <string name="check_category_adding_template">ߞߙߊߞߏ ߟߊߘߏ߲߬ߠߌ߲ ߦߌߟߡߊ ߝߛߍ߬ߝߛߍ߬ ߞߊ߲ߡߊ߬.</string>
