@@ -6,6 +6,7 @@
 * Afaz
 * Bonfire12
 * Dude1717
+* Foomin10
 * Hinaloe
 * Kkairri
 * Nicolas Raoul
@@ -95,7 +96,7 @@
   <string name="share_title_hint">キャプション (必須)</string>
   <string name="add_caption_toast">キャプションを記入してください</string>
   <string name="share_description_hint">説明</string>
-  <string name="share_caption_hint">キャプション（上限は半角255文字）</string>
+  <string name="share_caption_hint" fuzzy="true">キャプション（上限は半角255文字）</string>
   <string name="login_failed_network">ログインできません - ネットワークのエラーです</string>
   <string name="login_failed_wrong_credentials">ログインできません - 利用者名とパスワードを確認してください</string>
   <string name="login_failed_throttled">失敗した回数が多すぎます。数分待ってからもう一度お試しください。</string>
@@ -114,7 +115,7 @@
   <string name="display_list_button">一覧</string>
   <string name="gps_disabled">お使いのデバイスではGPSが無効になっています。有効にしますか?</string>
   <string name="enable_gps">GPSを有効にする</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">まだ何もアップロードされていません。</string>
+  <string name="contributions_subtitle_zero">（まだ何もアップロードされていません）</string>
   <string name="categories_not_found">%1$s に一致するカテゴリが見つかりません</string>
   <string name="depictions_not_found">%1$s に一致する項目が見つかりません</string>
   <string name="no_child_classes">%1$s に子のクラスはありません</string>
@@ -276,7 +277,7 @@
   <string name="error_while_cache">画像をキャッシュする際のエラー</string>
   <string name="title_info">ファイル固有の説明的な表題。ファイル名として使われます。平易な言葉を使い、空白を入れることができます。拡張子は含めないでください。</string>
   <string name="description_info">可能な限りメディアを説明してください: 撮影地はどこですか? それは何を示していますか? どんな文脈がありますか? 被写体の物や人を説明してください。容易に推測できない情報、例えば風景であれば時刻を明示します。特筆すべき物事が映っている場合は、何が珍しいのかを説明してください。</string>
-  <string name="caption_info">画像に簡単な説明を書いてください。最初のキャプションは画像の題名になります。</string>
+  <string name="caption_info" fuzzy="true">画像に簡単な説明を書いてください。最初のキャプションは画像の題名になります。</string>
   <string name="upload_image_too_dark">この画像は暗すぎますがアップロードしますか？ ウィキメディア・コモンズは百科事典に適した画像のみ受け付けます。</string>
   <string name="upload_image_blurry">ピントが合っていませんが、アップロードしますか？ ウィキメディア・コモンズは百科事典に適した画像のみ受け付けます。</string>
   <string name="upload_problem_exist">この画像には問題があるかもしれません。</string>
@@ -472,7 +473,7 @@
   <string name="nearby_card_permission_explanation">画像を募集している近くの場所を表示するため、あなたの現在の位置情報を提供してもよいですか？</string>
   <string name="unable_to_display_nearest_place">位置情報の使用を許可していないため、近くの画像募集中の場所を表示できません</string>
   <string name="never_ask_again">以後、表示しない</string>
-  <string name="display_location_permission_title">位置情報の許可の状態を表示</string>
+  <string name="display_location_permission_title" fuzzy="true">位置情報の許可の状態を表示</string>
   <string name="display_location_permission_explanation">通知カードで近くの場所を表示するたび、位置情報の使用を許可するかどうか尋ねる</string>
   <string name="achievements_fetch_failed">何か問題が発生し、あなたの貢献を表示できませんでした</string>
   <string name="achievements_fetch_failed_ultimate_achievement">たくさんの貢献をしていただいたのですが、件数が多すぎるため貢献度算出システムが処理できません。まさに究極の貢献をされました。</string>
@@ -665,7 +666,7 @@
   <string name="leaderboard_nearby">付近</string>
   <string name="leaderboard_used">使用済み</string>
   <string name="leaderboard_my_rank_button_text">あなたのランク</string>
-  <string name="mapbox_telemetry">測地を退出</string>
+  <string name="mapbox_telemetry" fuzzy="true">測地を退出</string>
   <string name="telemetry_opt_out_summary">周辺を表示させるときは現在地と使用状況データを匿名化してMapbox に送信</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;この地図を改善&lt;/a&gt;</string>
   <string name="limited_connection_enabled">接続制限を有効にしました。</string>

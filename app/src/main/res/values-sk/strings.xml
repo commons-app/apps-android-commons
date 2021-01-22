@@ -84,7 +84,7 @@
   <string name="share_title_hint">Popisok (povinné)</string>
   <string name="add_caption_toast">Prosím, pridajte popisok pre tento súbor</string>
   <string name="share_description_hint">Opis</string>
-  <string name="share_caption_hint">Popisok (max. 255 znakov)</string>
+  <string name="share_caption_hint" fuzzy="true">Popisok (max. 255 znakov)</string>
   <string name="login_failed_network">prihlásenie zlyhalo - zlyhanie siete</string>
   <string name="login_failed_wrong_credentials">Nie je možné sa prihlásiť – skontrolujte, prosím, svoje používateľské meno a heslo</string>
   <string name="login_failed_throttled">Príliš veľa neúspešných pokusov. Skúste to znova o niekoľko minút.</string>
@@ -458,7 +458,7 @@
   <string name="nearby_card_permission_explanation">Chceli by ste, aby sme pomocou aktuálnej polohy zobrazili najbližšie miesto, ktoré potrebuje obrázky?</string>
   <string name="unable_to_display_nearest_place">Nedá sa zobraziť najbližšie miesto, ktoré potrebuje obrázky, bez oprávnenia k umiestneniu</string>
   <string name="never_ask_again">Znovu nezobrazovať</string>
-  <string name="display_location_permission_title">Zobraziť povolenia prístupu k polohe</string>
+  <string name="display_location_permission_title" fuzzy="true">Zobraziť povolenia prístupu k polohe</string>
   <string name="display_location_permission_explanation">Požiada o oprávnenie k prístupu k polohe, pokiaľ je to potrebné pre funkciu zobrazenia miest v okolí.</string>
   <string name="achievements_fetch_failed">Nastala chyba, nepodarilo sa nám načítať vaše úspechy</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Urobili ste toľko príspevkov, že to náš systém výpočtu úspechov nedokáže zvládnuť. Toto je konečný úspech.</string>

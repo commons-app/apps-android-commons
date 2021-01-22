@@ -102,7 +102,7 @@
   <string name="share_title_hint">Başlık (Zorunlu)</string>
   <string name="add_caption_toast">Lütfen bu dosya için bir başlık girin</string>
   <string name="share_description_hint">Açıklama</string>
-  <string name="share_caption_hint">Altyazı (sınırı 255 karakter)</string>
+  <string name="share_caption_hint">Altyazı</string>
   <string name="login_failed_network">Oturum açılamıyor - ağ hatası</string>
   <string name="login_failed_wrong_credentials">Giriş yapılamıyor - lütfen kullanıcı adınızı ve şifrenizi kontrol edin</string>
   <string name="login_failed_throttled">Çok sayıda başarısız girişimde bulundunuz. Birkaç dakika sonra tekrar deneyin.</string>
@@ -283,7 +283,7 @@
   <string name="error_while_cache">Resimleri önbelleğe alırken hata oluştu</string>
   <string name="title_info">Dosya adı olarak kullanılacak benzersiz bir açıklayıcı başlık. Sade bir dil kullanabilirsiniz. Dosya uzantısını dahil etmeyin</string>
   <string name="description_info">Lütfen medyayı olabildiğince açıklayın: Nerede çekildi? Ne gösteriyor? Bağlam nedir? Lütfen nesneleri veya kişileri tanımlayın. Kolayca tahmin edilemeyen bilgileri, örneğin bir manzara ise günün saatini gösterin. Medya alışılmadık bir şey gösteriyorsa lütfen alışılmadık hâle getiren şeyi açıklayın.</string>
-  <string name="caption_info">Lütfen resmin kısa bir açıklamasını yazın. İlk resim yazısı resminin Başlığı olarak kullanılacaktır.</string>
+  <string name="caption_info">Lütfen resmin kısa bir açıklamasını yazın. İlk resim yazısı resminin Başlığı olarak kullanılacaktır. 255 karakterle sınırlıdır.</string>
   <string name="upload_image_too_dark">Bu resim çok karanlık, yüklemek istediğinizden emin misiniz? Wikimedia Commons yalnızca ansiklopedik değeri olan resimler içindir.</string>
   <string name="upload_image_blurry">Bu resim bulanık, yüklemek istediğinizden emin misiniz? Wikimedia Commons yalnızca ansiklopedik değeri olan resimler içindir.</string>
   <string name="upload_problem_exist">Bu görselle ilgili olası sorunlar:</string>
@@ -479,7 +479,7 @@
   <string name="nearby_card_permission_explanation">Resimlere ihtiyaç duyulan en yakın yeri görüntülemek için mevcut konumunuzu kullanmamızı ister misiniz?</string>
   <string name="unable_to_display_nearest_place">Konum izni olmadan resme ihtiyaç duyulan en yakın yer görüntülenemiyor</string>
   <string name="never_ask_again">Bunu bir daha sorma</string>
-  <string name="display_location_permission_title">Konum iznini görüntüle</string>
+  <string name="display_location_permission_title">Konum izni isteyin</string>
   <string name="display_location_permission_explanation">Yakındaki bildirim kartı görüntüleme özelliği için gerektiğinde konum izni isteyin.</string>
   <string name="achievements_fetch_failed">Bir şeyler ters gitti, başarılarınızı getiremedik</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Başarı hesaplama sistemimizin üstesinden gelemeyeceği pek çok katkı yaptınız. Bu nihai başarıdır.</string>
@@ -673,7 +673,7 @@
   <string name="leaderboard_nearby">Yakınımdakiler</string>
   <string name="leaderboard_used">Kullanılan</string>
   <string name="leaderboard_my_rank_button_text">Sıralamam</string>
-  <string name="mapbox_telemetry">Telemetriyi Devre Dışı Bırak</string>
+  <string name="mapbox_telemetry">Mapbox Telemetrisi</string>
   <string name="telemetry_opt_out_summary">Yakındaki özelliğini kullanırken anonim konum ve kullanım verilerini Mapbox\'a gönderin</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Bu haritayı geliştirin&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Sınırlı bağlantı modu etkinleştirildi!</string>
@@ -683,6 +683,8 @@
   <string name="quality_images_info">Kaliteli resimler, belirli kalite standartlarını (doğası gereği çoğunlukla teknik olan) karşılayan ve Wikimedia projeleri için değerli olan diyagramlar veya fotoğraflardır.</string>
   <string name="resuming_upload">Yüklemeye devam ediliyor…</string>
   <string name="pausing_upload">Yükleme duraklatılıyor…</string>
+  <string name="limited_connection_explanation">Sınırlı bağlantı modunu etkinleştirdiniz. Tüm yüklemeler duraklatılır ve bu modu devre dışı bıraktığınızda kaldığı yerden devam eder.</string>
+  <string name="limited_connection_is_on">Sınırlı bağlantı modu açık.</string>
   <string name="media_details_tooltip">Lütfen resminizin ne gösterdiğini anlatan kısa bir başlık yazın. Açıklamada, resmi neyin ilginç veya tipik veya nadir kıldığını söyleyin ve bağlamı görünür olsun veya olmasın açıklayın. Mümkün olduğu kadar kesin terminoloji kullanın.</string>
   <string name="depicts_tooltip">Lütfen bu resminin tasvir ettiği tüm kavramları bulun ve seçin. Mümkün olduğunca spesifik olun. Resim birden çok öğeyi tasvir ediyorsa, hepsini gerekçeyle seçin. Daha spesifik etiketler varsa genel etiketleri seçmeyin.</string>
   <string name="categories_tooltip">Lütfen uygun kategorileri seçin. Tasvirlerin aksine, kategoriler yalnızca İngilizce\'dir.</string>

@@ -304,7 +304,7 @@
   <string name="desc_language_Europe">Europa</string>
   <string name="nearby_card_permission_title">Machtigingsverzoek</string>
   <string name="never_ask_again">Niet meer vragen</string>
-  <string name="display_location_permission_title">Machtiging voor locatie weergeven</string>
+  <string name="display_location_permission_title" fuzzy="true">Machtiging voor locatie weergeven</string>
   <string name="display_location_permission_explanation">Naar machtiging voor locatie vragen als dat nodig is voor de functie meldingskaart dichtbij weergeven.</string>
   <string name="no_image_uploaded">Geen afbeeldingen geüpload</string>
   <string name="no_read_notification">U hebt geen gelezen melding</string>

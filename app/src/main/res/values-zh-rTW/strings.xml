@@ -12,6 +12,7 @@
 * StephDC
 * Wwycheuk
 * ZhaoGang
+* 列维劳德
 * 和平奮鬥救地球
 * 沈澄心
 * 烈羽
@@ -94,7 +95,7 @@
   <string name="share_title_hint">說明（需要）</string>
   <string name="add_caption_toast">請提供此檔案的說明</string>
   <string name="share_description_hint">描述</string>
-  <string name="share_caption_hint">說明（不能超過 255 個字元）</string>
+  <string name="share_caption_hint">說明</string>
   <string name="login_failed_network">無法登入－網路故障</string>
   <string name="login_failed_wrong_credentials">無法登入 - 請檢查您的使用者名稱與密碼</string>
   <string name="login_failed_throttled">失敗次數過多。請於幾分鐘後重試。</string>
@@ -275,7 +276,7 @@
   <string name="error_while_cache">在快取圖片時發生錯誤</string>
   <string name="title_info">用於本檔案的唯一描述性標題。您可以使用帶有空格的簡明語言，另外請不要包含副檔名。</string>
   <string name="description_info">請盡可能描述媒體內容：拍攝於何處？是顯示什麼事物？有什麼脈絡？請描述對象或人物。透露出一些較不易猜測的訊息，例如是風景的話，可以是一天裡的時間。如果媒體顯示出一些不正常的事物，請說明出造成不正常原因。</string>
-  <string name="caption_info">請寫入圖片的簡要描述。首個說明會作為圖片的標題。</string>
+  <string name="caption_info">請寫入圖片的簡要描述。首個說明會作為圖片的標題。不能超過 225 個字元。</string>
   <string name="upload_image_too_dark">此圖片太暗，您確定您要上傳它嗎？維基共享資源僅適用對於百科全書有價值的圖片。</string>
   <string name="upload_image_blurry">此圖片太模糊，您確定您要上傳它嗎？維基共享資源僅適用對於百科全書有價值的圖片。</string>
   <string name="upload_problem_exist">此圖片有以下潛在問題：</string>
@@ -471,7 +472,7 @@
   <string name="nearby_card_permission_explanation">您是否願意讓我們使用您的目前位置，來顯示出缺少圖片的最近地點？</string>
   <string name="unable_to_display_nearest_place">沒有位置權限會無法顯示缺少圖片的最近地點</string>
   <string name="never_ask_again">永遠不再詢問</string>
-  <string name="display_location_permission_title">顯示位置權限</string>
+  <string name="display_location_permission_title">要求位置權限</string>
   <string name="display_location_permission_explanation">當需要附近地點通知卡片的檢視功能時，要求位置權限。</string>
   <string name="achievements_fetch_failed">發生了一些狀況，我們無法索取您的成果</string>
   <string name="achievements_fetch_failed_ultimate_achievement">您做出的貢獻多到讓我們的成果系統無法因應，此為終極成果。</string>
@@ -665,7 +666,7 @@
   <string name="leaderboard_nearby">附近</string>
   <string name="leaderboard_used">已使用</string>
   <string name="leaderboard_my_rank_button_text">我的排名</string>
-  <string name="mapbox_telemetry">遙測退出</string>
+  <string name="mapbox_telemetry">Mapbox Telemetry</string>
   <string name="telemetry_opt_out_summary">當使用附近功能時，將匿名位置與使用情況資料發送到 Mapbox</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;改善此地圖&lt;/a&gt;</string>
   <string name="limited_connection_enabled">限制連線模式已啟用！</string>
@@ -675,6 +676,8 @@
   <string name="quality_images_info">品質圖片是符合某些品質標準（本質上大多是技術性方面）的圖表或照片，並且對於維基媒體計劃很有價值</string>
   <string name="resuming_upload">重新開始上傳…</string>
   <string name="pausing_upload">暫停上傳…</string>
+  <string name="limited_connection_explanation">您已啟用限制連線模式。在您停用此模式前，所有上傳將會暫停。</string>
+  <string name="limited_connection_is_on">限制連線模式啟用中。</string>
   <string name="media_details_tooltip">請寫一個簡短說明來描述您的圖片所展示內容。在描述中，請說出是什麼內容讓圖片有趣、典型、或罕見，並解釋來龍去脈（可見或不可見）。另外盡可能使用確切的行話術語。</string>
   <string name="depicts_tooltip">請找出並選擇該圖片所描繪出的所有概念，並盡可能具體。若圖片描繪了多個項目，請依據合理的原因內將項目給全部選擇。如果有可用的特定標籤，就不必選擇通用標籤。</string>
   <string name="categories_tooltip">請選擇適當的分類。與描寫不同，分類僅使用英文。</string>

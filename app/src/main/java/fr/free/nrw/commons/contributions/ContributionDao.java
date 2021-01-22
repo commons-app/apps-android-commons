@@ -68,6 +68,9 @@ public abstract class ContributionDao {
   @Query("UPDATE contribution SET state=:state WHERE state in (:toUpdateStates)")
   public abstract Single<Integer> updateStates(int state, int[] toUpdateStates);
 
+  @Query("SELECT COUNT(*) from contribution WHERE state in (:toUpdateStates)")
+  public abstract Single<Integer> getPendingUploads(int[] toUpdateStates);
+
   @Query("Delete FROM contribution")
   public abstract void deleteAll() throws SQLiteException;
 

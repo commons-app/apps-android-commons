@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -102,6 +103,7 @@ public class ContributionsFragment
 
     @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
     @BindView(R.id.campaigns_view) CampaignView campaignView;
+    @BindView(R.id.limited_connection_enabled_layout) LinearLayout limitedConnectionEnabledLayout;
 
     @Inject ContributionsPresenter contributionsPresenter;
 
@@ -207,7 +209,6 @@ public class ContributionsFragment
         notification.setOnClickListener(view -> {
             NotificationActivity.startYourself(getContext(), "unread");
         });
-        setNotificationCount();
         updateLimitedConnectionToggle(menu);
     }
 
@@ -236,14 +237,22 @@ public class ContributionsFragment
             .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
 
         checkable.setChecked(isEnabled);
-        /*final SwitchCompat switchToggleLimitedConnectionMode = checkable.getActionView()
-            .findViewById(R.id.switch_toggle_limited_connection_mode);*/
+        if (isEnabled) {
+            limitedConnectionEnabledLayout.setVisibility(View.VISIBLE);
+        } else {
+            limitedConnectionEnabledLayout.setVisibility(View.GONE);
+        }
         checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
         checkable.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 ((MainActivity) getActivity()).toggleLimitedConnectionMode();
                 boolean isEnabled = store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
+                if (isEnabled) {
+                    limitedConnectionEnabledLayout.setVisibility(View.VISIBLE);
+                } else {
+                    limitedConnectionEnabledLayout.setVisibility(View.GONE);
+                }
                 checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
                 return false;
             }
@@ -282,13 +291,13 @@ public class ContributionsFragment
                 nearbyNotificationCardView.setVisibility(View.GONE);
             }
         }
-        showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG);
+        showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG, mediaDetailPagerFragment);
     }
 
     private void showMediaDetailPagerFragment() {
         // hide nearby card view on media detail is visible
         setupViewForMediaDetails();
-        showFragment(mediaDetailPagerFragment, MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
+        showFragment(mediaDetailPagerFragment, MEDIA_DETAIL_PAGER_FRAGMENT_TAG, contributionsListFragment);
     }
 
     private void setupViewForMediaDetails() {
@@ -325,7 +334,7 @@ public class ContributionsFragment
             showContributionsListFragment();
         }
 
-        showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG);
+        showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG, mediaDetailPagerFragment);
     }
 
     /**
@@ -333,14 +342,43 @@ public class ContributionsFragment
      *
      * @param fragment
      * @param tag
+     * @param otherFragment
      */
-    private void showFragment(Fragment fragment, String tag) {
+    private void showFragment(Fragment fragment, String tag, Fragment otherFragment) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.root_frame, fragment, tag);
-        transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
-        transaction.commit();
+        if (fragment.isAdded() && otherFragment != null) {
+            transaction.hide(otherFragment);
+            transaction.show(fragment);
+            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
+            transaction.commit();
+            getChildFragmentManager().executePendingTransactions();
+        } else if (fragment.isAdded() && otherFragment == null) {
+            transaction.show(fragment);
+            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
+            transaction.commit();
+            getChildFragmentManager().executePendingTransactions();
+        }else if (!fragment.isAdded() && otherFragment != null ) {
+            transaction.hide(otherFragment);
+            transaction.add(R.id.root_frame, fragment, tag);
+            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
+            transaction.commit();
+            getChildFragmentManager().executePendingTransactions();
+        } else if (!fragment.isAdded()) {
+            transaction.replace(R.id.root_frame, fragment, tag);
+            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
+            transaction.commit();
+            getChildFragmentManager().executePendingTransactions();
+        }
+    }
+
+    public void removeFragment(Fragment fragment) {
+        getChildFragmentManager()
+            .beginTransaction()
+            .remove(fragment)
+            .commit();
         getChildFragmentManager().executePendingTransactions();
     }
+
 
     public Intent getUploadServiceIntent(){
         Intent intent = new Intent(getActivity(), UploadService.class);
@@ -402,6 +440,7 @@ public class ContributionsFragment
             nearbyNotificationCardView.setVisibility(View.GONE);
         }
 
+        setNotificationCount();
         fetchCampaigns();
     }
 
@@ -615,11 +654,17 @@ public class ContributionsFragment
             } else {
                 nearbyNotificationCardView.setVisibility(View.GONE);
             }
-            getChildFragmentManager().popBackStack();
+            removeFragment(mediaDetailPagerFragment);
+            showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG, mediaDetailPagerFragment);
             ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             ((MainActivity)getActivity()).showTabs();
             fetchCampaigns();
         }
+    }
+
+    // Getter for mediaDetailPagerFragment
+    public MediaDetailPagerFragment getMediaDetailPagerFragment() {
+        return mediaDetailPagerFragment;
     }
 }
 

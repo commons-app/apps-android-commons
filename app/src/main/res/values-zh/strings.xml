@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* )8
 * 94rain
 * A Chinese Wikipedian
 * A Retired User
@@ -106,7 +107,7 @@
   <string name="share_title_hint">说明 （要求）</string>
   <string name="add_caption_toast">请提供此文件的描述</string>
   <string name="share_description_hint">描述</string>
-  <string name="share_caption_hint">说明（255个字符以内）</string>
+  <string name="share_caption_hint">说明</string>
   <string name="login_failed_network">无法登录 - 网络故障</string>
   <string name="login_failed_wrong_credentials">无法登录——请检查您的用户名和密码</string>
   <string name="login_failed_throttled">失败次数过多。请在几分钟后重试。</string>
@@ -616,5 +617,7 @@
   <string name="pause">暂停</string>
   <string name="resume">继续</string>
   <string name="paused">已暂停</string>
+  <string name="leaderboard_column_user">用户</string>
+  <string name="leaderboard_upload">上传</string>
   <string name="limited_connection">限制连接</string>
 </resources>

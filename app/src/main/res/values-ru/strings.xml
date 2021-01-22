@@ -10,6 +10,7 @@
 * Gazimagomedov
 * Happy13241
 * Iluvatar
+* Jesusmc
 * Kaganer
 * Kareyac
 * MaxBioHazard
@@ -25,6 +26,7 @@
 * Vlad5250
 * VoxelJ
 * Wikisaurus
+* Wileyfoxyx
 * Wirbel78
 * Евгения
 * ЛингвоЧел
@@ -37,11 +39,11 @@
     <item quantity="many">%1$d файлов загружается</item>
     <item quantity="other">%1$d файлов загружается</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="few">(%1$d)</item>
     <item quantity="many">(%1$d)</item>
-    <item quantity="other">0=@string/contributions_subtitle_zero</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Начало загрузки</string>
   <plurals name="starting_multiple_uploads">
@@ -122,7 +124,7 @@
   <string name="share_title_hint">Подпись (Обязательна)</string>
   <string name="add_caption_toast">Пожалуйста, укажите название этого файла</string>
   <string name="share_description_hint">Описание</string>
-  <string name="share_caption_hint">Подпись (не более 255 символов)</string>
+  <string name="share_caption_hint">Подпись</string>
   <string name="login_failed_network">Не удаётся войти — сбой сети</string>
   <string name="login_failed_wrong_credentials">Не удаётся войти — проверьте ваше имя пользователя и пароль</string>
   <string name="login_failed_throttled">Слишком много неудачных попыток. Пожалуйста, попробуйте ещё раз через несколько минут.</string>
@@ -141,7 +143,7 @@
   <string name="display_list_button">Список</string>
   <string name="gps_disabled">GPS отключён в вашем устройстве. Хотите включить его?</string>
   <string name="enable_gps">Включить GPS</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Загрузок пока нет</string>
+  <string name="contributions_subtitle_zero">(Загрузок пока нет)</string>
   <string name="categories_not_found">Не найдено категорий, соответствующих %1$s</string>
   <string name="depictions_not_found">Элемент Викиданных, соответствующий %1$s, не найден.</string>
   <string name="no_child_classes">У %1$s нет дочерних классов</string>
@@ -303,7 +305,7 @@
   <string name="error_while_cache">Ошибка при кэшировании картинок</string>
   <string name="title_info">Уникальное описание, которое будет сохранено как имя файла. Вы можете использовать естественный язык, разделяя слова пробелами. Пожалуйста, не указывайте расширение файла.</string>
   <string name="description_info">Пожалуйста, подробно опишите загружаемый файл: где он был снят? что на нём изображено? каков его контекст? Пожалуйста опишите изображённых персон или объекты. Добавьте информацию, о которой нельзя легко догадаться, например, время суток, когда снимался файл. Если снято что-то необычное, постарайтесь пояснить, что именно в этом необычного.</string>
-  <string name="caption_info">Пожалуйста, напишите краткое описание изображения. Первое описание будет использовано в качестве названия изображения.</string>
+  <string name="caption_info">Пожалуйста, напишите краткое описание изображения. Первое описание будет использовано в качестве названия изображения. Ограничение - 255 символов.</string>
   <string name="upload_image_too_dark">Это изображение слишком тёмное. Вы уверены, что хотите его загрузить? Викисклад подходит только для изображений, имеющих энциклопедическую ценность.</string>
   <string name="upload_image_blurry">Это изображение размыто. Вы уверены, что хотите его загрузить? Викисклад подходит только для изображений, имеющих энциклопедическую ценность.</string>
   <string name="upload_problem_exist">Потенциальные проблемы с этим изображением:</string>
@@ -464,7 +466,7 @@
   <string name="next">Далее</string>
   <string name="previous">Назад</string>
   <string name="submit">Отправить</string>
-  <string name="upload_title_duplicate" fuzzy="true">Уже существует файл с именем %1$s. Вы уверены, что хотите продолжить?</string>
+  <string name="upload_title_duplicate">Уже существует файл с именем %1$s. Вы уверены, что хотите продолжить?\n\nПримечание: подходящий суффикс будет добавлен к имени файла автоматически.</string>
   <string name="map_application_missing">Не найдено совместимое картографическое приложение на вашем устройстве. Установите его, чтобы вы могли использовать эту функцию.</string>
   <string name="navigation_item_bookmarks">Закладки</string>
   <string name="title_activity_bookmarks">Закладки</string>
@@ -499,7 +501,7 @@
   <string name="nearby_card_permission_explanation">Вы бы хотели чтобы использовалось ваше текущее местоположение для показа ближайшего места, у которого ещё нет изображений?</string>
   <string name="unable_to_display_nearest_place">Невозможно отобразить ближайшее место, которому требуются изображения без разрешения на геолокацию</string>
   <string name="never_ask_again">Больше не спрашивать</string>
-  <string name="display_location_permission_title">Показать разрешение на геолокацию</string>
+  <string name="display_location_permission_title">Запросить разрешение на геолокацию</string>
   <string name="display_location_permission_explanation">Запрашивать разрешение на геолокацию, которое требуется для нотификаций мест поблизости.</string>
   <string name="achievements_fetch_failed">Что-то пошло не так. Не получается получить список ваших достижений</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Вы сделали так много, что наша система расчёта достижений не справляется. Это финальное достижение.</string>
@@ -695,7 +697,7 @@
   <string name="leaderboard_nearby">Поблизости</string>
   <string name="leaderboard_used">Использовано</string>
   <string name="leaderboard_my_rank_button_text">Мой ранг</string>
-  <string name="mapbox_telemetry">Отключение телеметрии</string>
+  <string name="mapbox_telemetry">Телеметрия Mapbox</string>
   <string name="telemetry_opt_out_summary">Отправлять анонимизированные данные о местоположении и использовании в Mapbox при применении функции «Поблизости»</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Улучшить эту карту&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Включен режим ограниченного подключения!</string>
@@ -705,6 +707,8 @@
   <string name="quality_images_info">Качественные изображения - это диаграммы или фотографии, которые соответствуют определенным стандартам качества (которые в основном носят технический характер) и представляют ценность для проектов Викимедиа</string>
   <string name="resuming_upload">Возобновление загрузки...</string>
   <string name="pausing_upload">Приостановка загрузки...</string>
+  <string name="limited_connection_explanation">Вы включили ограниченный режим подключения. Все загрузки приостановлены и возобновятся после отключения этого режима.</string>
+  <string name="limited_connection_is_on">Включен ограниченный режим подключения.</string>
   <string name="media_details_tooltip">Добавьте короткую подпись, которая скажет, что изображено на вашей картинке. В описании укажите, что делает изображение интересным, обычным или редким, и поясните контекст, видимый или нет. По возможности используйте точную терминологию.</string>
   <string name="depicts_tooltip">Найдите и выберите все объекты, изображенные на этом изображении. Будьте как можно более конкретными. Если изображение изображает несколько предметов, выберите их все в разумных пределах. Не выбирайте общие теги, если доступны более конкретные теги.</string>
   <string name="categories_tooltip">Пожалуйста, выберите соответствующие категории. В отличие от изображений, категории указываются только на английском языке.</string>

@@ -121,7 +121,7 @@
   <string name="share_title_hint">العنوان (مطلوب)</string>
   <string name="add_caption_toast">يُرجَى تقديم عنوان لهذا الملف</string>
   <string name="share_description_hint">الوصف</string>
-  <string name="share_caption_hint">العنوان (قيد 255 حرف)</string>
+  <string name="share_caption_hint" fuzzy="true">العنوان (قيد 255 حرف)</string>
   <string name="login_failed_network">لا يمكن تسجيل الدخول - فشل في شبكة الاتصال</string>
   <string name="login_failed_wrong_credentials">غير قادر على تسجيل الدخول - يُرجَى التحقق من اسم المستخدم وكلمة المرور الخاصين بك</string>
   <string name="login_failed_throttled">الكثير من المحاولات غير الناجحة. الرجاء المحاولة مرة أخرى في بضع دقائق.</string>
@@ -495,7 +495,7 @@
   <string name="nearby_card_permission_explanation">هل تريد منا استخدام موقعك الحالي لعرض أقرب مكان يحتاج إلى صور؟</string>
   <string name="unable_to_display_nearest_place">يتعذر عرض أقرب مكان يحتاج إلى صور بدون أذونات الموقع</string>
   <string name="never_ask_again">لا تسأل هذا مرة أخرى</string>
-  <string name="display_location_permission_title">عرض إذن الموقع</string>
+  <string name="display_location_permission_title" fuzzy="true">عرض إذن الموقع</string>
   <string name="display_location_permission_explanation">اطلب إذن الموقع عند الحاجة إلى ميزة عرض بطاقة التنبيه القريبة.</string>
   <string name="achievements_fetch_failed">حدث خطأ ما; لم نتمكن من جلب إنجازاتك</string>
   <string name="achievements_fetch_failed_ultimate_achievement">لقد قدمت الكثير من المساهمات لا يستطيع نظامنا لحساب الإنجازات التعامل معها. هذا هو الإنجاز النهائي.</string>

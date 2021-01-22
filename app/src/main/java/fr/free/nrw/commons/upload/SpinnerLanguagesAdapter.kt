@@ -12,6 +12,7 @@ import fr.free.nrw.commons.utils.LangCodeUtils
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.row_item_languages_spinner.*
 import org.apache.commons.lang3.StringUtils
+import org.wikipedia.language.AppLanguageLookUpTable
 import java.util.*
 
 /**
@@ -28,13 +29,10 @@ class SpinnerLanguagesAdapter constructor(
 
     private val languageNamesList: List<String>
     private val languageCodesList: List<String>
-
+    var language: AppLanguageLookUpTable = AppLanguageLookUpTable(context)
     init {
-        val sortedLanguages = Locale.getAvailableLocales()
-            .map(::Language)
-            .sortedBy { it.locale.displayName }
-        languageNamesList = sortedLanguages.map { it.locale.displayName }
-        languageCodesList = sortedLanguages.map { it.locale.language }
+        languageNamesList = language.localizedNames;
+        languageCodesList = language.codes;
     }
 
     var selectedLangCode = ""

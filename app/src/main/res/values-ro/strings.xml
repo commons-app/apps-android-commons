@@ -89,7 +89,7 @@
   <string name="share_title_hint">Descriere (Necesară)</string>
   <string name="add_caption_toast">Vă rugăm să oferiți o descriere pentru acest fișier</string>
   <string name="share_description_hint">Descriere</string>
-  <string name="share_caption_hint">Descriere (limită 255 caractere)</string>
+  <string name="share_caption_hint" fuzzy="true">Descriere (limită 255 caractere)</string>
   <string name="login_failed_network">Autentificare nereușită – defecțiune de rețea</string>
   <string name="login_failed_wrong_credentials">Nu poți să te autentifici - verifică-ți numele de utilizator și parola</string>
   <string name="login_failed_throttled">Prea multe încercări nereușite. Încercați din nou peste câteva minute.</string>
@@ -462,7 +462,7 @@
   <string name="nearby_card_permission_explanation">Doriți ca noi să folosim locația dvs. curentă pentru a afișa cel mai apropiat loc care are nevoie de imagini?</string>
   <string name="unable_to_display_nearest_place">Imposibil să afișăm cel mai apropiat loc care are nevoie de imagini fără să avem permisiuni de locație</string>
   <string name="never_ask_again">Nu mai întrebați niciodată acest lucru</string>
-  <string name="display_location_permission_title">Afișați permisiunea de locație</string>
+  <string name="display_location_permission_title" fuzzy="true">Afișați permisiunea de locație</string>
   <string name="display_location_permission_explanation">Solicitați permisiunea de localizare atunci când este necesar pentru a utiliza funcția notificărilor de localizare.</string>
   <string name="achievements_fetch_failed">Ceva a mers prost, nu am reușit să ne aducem realizările</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Ai făcut atâtea contribuții sistemul nostru de calcul al realizărilor nu poate face față. Aceasta este realizarea finală.</string>

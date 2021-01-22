@@ -72,7 +72,7 @@
   <string name="menu_open_in_browser">Diskwel er meerder</string>
   <string name="share_title_hint">Alc\'hwez (ret)</string>
   <string name="share_description_hint">Deskrivadur</string>
-  <string name="share_caption_hint">Alc\'hwez (bevennet da 255 arouezenn)</string>
+  <string name="share_caption_hint" fuzzy="true">Alc\'hwez (bevennet da 255 arouezenn)</string>
   <string name="login_failed_network">Ne c\'haller ket kevreañ - rouedad sac\'het</string>
   <string name="login_failed_wrong_credentials">Ne c\'haller ket kevreañ - gwiriit hoc\'h anv implijer hag ho ker-tremen mar plij</string>
   <string name="login_failed_throttled">Re a daolioù-esae. Klaskit en-dro a-benn ur pennadig amzer.</string>

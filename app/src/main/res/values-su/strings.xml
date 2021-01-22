@@ -10,11 +10,11 @@
     <item quantity="one">ngunjal %1$d berkas</item>
     <item quantity="other">ngunjal %1$d berkas</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">Mitembeyan Ngamuat</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Ngamimitian saunjalan</item>
     <item quantity="other">Ngamimitian %1$d unjalan</item>
@@ -26,6 +26,14 @@
   <plurals name="share_license_summary">
     <item quantity="one">Ieu gambar bakal dilisénsi %1$s</item>
     <item quantity="other">Ieu gambar bakal dilisénsi %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d Dimuat</item>
+    <item quantity="other">%1$d Dimuat</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Nampa kontén anu dibagikeun. Ngolah gambarna bisa jadi rada lila gumantung kana ukuran gambar jeung gaway anjeun</item>
+    <item quantity="other">Nampa kontén anu dibagikeun</item>
   </plurals>
   <string name="title_activity_explore">Langlang</string>
   <string name="navigation_item_explore">Langlang</string>
@@ -51,13 +59,16 @@
   <string name="upload_failed">Berkas teu kapanggih. Coba berkas séjén.</string>
   <string name="authentication_failed">Oténtikasi gagal! mangga asup log deui</string>
   <string name="uploading_started">Mitembeyan ngunjal!</string>
+  <string name="uploading_queued">Muatan geus ngantri (sambungan diwates dijalankeun)</string>
   <string name="upload_completed_notification_title">%1$s diunjal!</string>
   <string name="upload_completed_notification_text">Toél pikeun némpo unjalan anjeun</string>
   <string name="upload_progress_notification_title_start">Ngamimitian %1$s ngunjal</string>
   <string name="upload_progress_notification_title_in_progress">Ngunjal %1$s</string>
   <string name="upload_progress_notification_title_finishing">Méréskeun unjalan %1$s</string>
   <string name="upload_failed_notification_title">Ngunjal %1$s gagal</string>
+  <string name="upload_paused_notification_title">Ngamuat %1$s eureun heula</string>
   <string name="upload_failed_notification_subtitle">Toél pikeun nempo</string>
+  <string name="upload_paused_notification_subtitle">Toél pikeun nempo</string>
   <string name="title_activity_contributions">Unjalan kami panungtung</string>
   <string name="contribution_state_queued">Antrian</string>
   <string name="contribution_state_failed">Gagal</string>
@@ -69,8 +80,10 @@
   <string name="provider_contributions">Unjalan kami</string>
   <string name="menu_share">Bagikeun</string>
   <string name="menu_open_in_browser">Tęmbong dina panyungsi</string>
-  <string name="share_title_hint" fuzzy="true">Judul (Kudu)</string>
+  <string name="share_title_hint">Judul (Kudu)</string>
+  <string name="add_caption_toast">Sadiakeun pertélaan pikeun ieu berkas</string>
   <string name="share_description_hint">Pedaran</string>
+  <string name="share_caption_hint" fuzzy="true">Pertélaan (wates 255 karakter)</string>
   <string name="login_failed_network">Teu bisa login - gangguan jaringan</string>
   <string name="login_failed_wrong_credentials">Teu bisa asup log - pariksa deui sandiasma jeung kecap sandina</string>
   <string name="login_failed_throttled">Loba teuing nu gagalna. Mangga cobian sababaraha menit deui mah</string>
@@ -83,13 +96,18 @@
   <string name="provider_modifications">Modifikasi</string>
   <string name="menu_upload_single">Unjal</string>
   <string name="categories_search_text_hint">Paluruh kategori</string>
+  <string name="depicts_search_text_hint">Paluruh hal anu katémbong dina média anjeun (gunung, wangunan, jsb.)</string>
   <string name="menu_save_categories">Simpen</string>
   <string name="refresh_button">Segerkeun</string>
   <string name="display_list_button">Béréndélan</string>
   <string name="gps_disabled">GPS dipareuman na parangkat anjeun. Rék dihurungkeun waé atuh?</string>
   <string name="enable_gps">Hirupan GPS</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Can aya nu diunjal</string>
+  <string name="contributions_subtitle_zero">(Can aya muatan)</string>
   <string name="categories_not_found">Teu mendak kategori anu cocog jeung %1$s</string>
+  <string name="depictions_not_found">Taya butir Wikidata nu cocog %1$s kapanggih</string>
+  <string name="no_child_classes">%1$s teu boga kelas turunan</string>
+  <string name="no_parent_classes">%1$s teu boga kelas luluhur</string>
+  <string name="depictions_image_not_found">Taya Gambar Témbongkeuneun</string>
   <string name="categories_skip_explanation">Tambahkeun kategori hambéh gambar anjeun leuwih gampang katara di Wikimédia Commons.\n\nMimitian ngetik pikeun nambah kategori.</string>
   <string name="categories_activity_title">Kategori</string>
   <string name="title_activity_settings">Séting</string>
@@ -100,7 +118,7 @@
   <string name="menu_about">Ngeunaan</string>
   <string name="about_license">Aplikasi Wikimédia Commons mangrupa aplikasi sumber nembrak nu dijieun jeung dikokolakeun ku panampa hibah sarta rélawan komunitas Wikimédia. Wikimedia Foundation teu pépérodeun dina nyieun, ngamekarkeun, atawa mulasara ieu aplikasi.</string>
   <string name="about_improve">Jieun &lt;a href=\"%1$s\"&gt;isu GitHub anyar&lt;/a&gt; pikeun laporan jeung kamandang bug.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Kawijakan privasi&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Kawijakan pripasi</string>
   <string name="about_credits" fuzzy="true">&lt;u&gt;Pangajén&lt;/u&gt;</string>
   <string name="title_activity_about">Ngeunaan</string>
   <string name="menu_feedback">Kirim eupan balik (via Surélék)</string>
@@ -116,7 +134,7 @@
   <string name="use_previous">Paké judul jeung dadaran saméméhna</string>
   <string name="allow_gps">Comot lokasi sacara otomatis</string>
   <string name="allow_gps_summary">Catet lokasi ayeuna lamun gambar tanpa géotag, jeung géotagan gambarna. Perhatian: Ieu bakal ngungkab lokasi anjeun ayeuna.</string>
-  <string name="preference_theme" fuzzy="true">Modus peuting</string>
+  <string name="preference_theme">Téma</string>
   <string name="license_name_cc_by_sa_four">Atribusi-BabagiSarupa 4.0</string>
   <string name="license_name_cc_by_four">Atribusi 4.0</string>
   <string name="license_name_cc_by_sa">Atribusi-BabagiSarupa 3.0</string>
@@ -157,10 +175,11 @@
   <string name="welcome_copyright_subtext">Singkahan bahan-bahan ti Internét anu boga hak cipta, kaasup poto poster, jilid buku, jsb.</string>
   <string name="welcome_final_text">Anjeun geus ngarti?</string>
   <string name="welcome_final_button_text">Enya</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Info salengkepna&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Leuwih teleb</string>
   <string name="detail_panel_cats_label">Kategori</string>
   <string name="detail_panel_cats_loading">Keur muat…</string>
   <string name="detail_panel_cats_none">Taya nu dipilih</string>
+  <string name="detail_caption_empty">Taya pertélaan</string>
   <string name="detail_description_empty">Tanpa pedaran</string>
   <string name="detail_discussion_empty">Tanpa sawala</string>
   <string name="detail_license_empty">Lisénsi teu dipikanyaho</string>
@@ -399,7 +418,7 @@
   <string name="search_this_area">Paluruh ieu aréa</string>
   <string name="nearby_card_permission_title">Pamundut Idin</string>
   <string name="never_ask_again">Moal ménta ieu deui</string>
-  <string name="display_location_permission_title">Pidangan idin perenah</string>
+  <string name="display_location_permission_title" fuzzy="true">Pidangan idin perenah</string>
   <string name="getting_edit_token">Nyokot token jang ngédit</string>
   <string name="check_category_adding_template">Nambahkeun citakan jang ngecék kategori</string>
   <string name="check_category_notification_title">Pamundutan ngecék kategori pikeun %1$s</string>

@@ -15,7 +15,7 @@
     <item quantity="one">s\'està carregant %1$d fitxer</item>
     <item quantity="other">s\'estan carregant %1$d fitxers</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -95,7 +95,7 @@
   <string name="display_list_button">Llista</string>
   <string name="gps_disabled">El vostre dispositiu no té el GPS habilitat. El voleu habilitar?</string>
   <string name="enable_gps">Habilita el GPS</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Encara no hi ha cap càrrega</string>
+  <string name="contributions_subtitle_zero">(Encara no hi ha cap pujada)</string>
   <string name="categories_not_found">No s\'ha trobat cap categoria que coincideixi amb %1$s</string>
   <string name="categories_skip_explanation">Afegiu categories per fer que les vostres imatges siguin més fàcils de trobar a Wikimedia Commons.</string>
   <string name="categories_activity_title">Categories</string>
@@ -371,7 +371,7 @@
   <string name="next">Següent</string>
   <string name="previous">Anterior</string>
   <string name="submit">Envia</string>
-  <string name="upload_title_duplicate" fuzzy="true">Ja existeix un fitxer amb el nom %1$s. Segur que voleu procedir?</string>
+  <string name="upload_title_duplicate">Ja existeix un fitxer amb el nom %1$s. Segur que voleu procedir?\n\nNota: S\'afegirà un sufix adequat al nom del fitxer automàticament.</string>
   <string name="navigation_item_bookmarks">Adreces d\'interès</string>
   <string name="title_activity_bookmarks">Adreces d\'interès</string>
   <string name="title_page_bookmarks_pictures">Imatges</string>
@@ -401,7 +401,7 @@
   <string name="nearby_card_permission_explanation">Voldríeu fer servir la vostra ubicació actual per a mostrar el lloc més proper que necessiti fotos?</string>
   <string name="unable_to_display_nearest_place">No es pot mostrar el lloc més proper que necessita fotos sense permisos d\'ubicació</string>
   <string name="never_ask_again">No ho tornis a demanar</string>
-  <string name="display_location_permission_title">Mostra el permís d\'ubicació</string>
+  <string name="display_location_permission_title" fuzzy="true">Mostra el permís d\'ubicació</string>
   <string name="ends_on">Finalitza el:</string>
   <string name="display_campaigns">Mostra les campanyes</string>
   <string name="display_campaigns_explanation">Consulta les campanyes en curs</string>

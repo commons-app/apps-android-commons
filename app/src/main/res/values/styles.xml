@@ -51,8 +51,9 @@
         <item name="notification_icon_text_color">@color/white</item>
         <item name="toggle_theme">@style/SwitchThemeDark</item>
         <item name="contributionsListTextPrimary">@color/white</item>
-        <item name="contributionsListTextSecondary">@color/browser_actions_divider_color</item>
+        <item name="contributionsListTextSecondary">@color/white</item>
         <item name="menu_item_tint">@color/white</item>
+        <item name="search_icon">@drawable/ic_search_white_24dp</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -107,6 +108,7 @@
         <item name="contributionsListTextPrimary">@color/black</item>
         <item name="contributionsListTextSecondary">@color/disabled_button_text_color_dark</item>
         <item name="menu_item_tint">@color/primaryDarkColor</item>
+        <item name="search_icon">@drawable/ic_search_blue_24dp</item>
     </style>
 
     <style name="LightMoreBottomSheetStyle" parent="LightAppTheme">

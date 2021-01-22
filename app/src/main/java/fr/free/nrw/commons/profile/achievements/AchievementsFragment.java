@@ -164,7 +164,6 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
         // Set the initial value of WikiData edits to 0
         wikidataEditsText.setText("0");
-        hideLayouts();
         setWikidataEditCount();
         setAchievements();
         return rootView;
@@ -451,26 +450,9 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
             setImageRevertPercentage(achievements.getNotRevertPercentage());
             progressBar.setVisibility(View.GONE);
             item.setVisible(true);
-            layoutImageReverts.setVisibility(View.VISIBLE);
-            layoutImageUploaded.setVisibility(View.VISIBLE);
-            layoutImageUsedByWiki.setVisibility(View.VISIBLE);
-            layoutStatistics.setVisibility(View.VISIBLE);
-            imageView.setVisibility(View.VISIBLE);
-            levelNumber.setVisibility(View.VISIBLE);
         }
     }
 
-    /**
-     * used to hide the layouts while fetching results from api
-     */
-    private void hideLayouts(){
-        layoutImageUsedByWiki.setVisibility(View.INVISIBLE);
-        layoutImageUploaded.setVisibility(View.INVISIBLE);
-        layoutImageReverts.setVisibility(View.INVISIBLE);
-        layoutStatistics.setVisibility(View.INVISIBLE);
-        imageView.setVisibility(View.INVISIBLE);
-        levelNumber.setVisibility(View.INVISIBLE);
-    }
 
     @OnClick(R.id.images_upload_info)
     public void showUploadInfo(){

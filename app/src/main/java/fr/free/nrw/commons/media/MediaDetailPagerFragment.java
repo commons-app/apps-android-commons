@@ -36,6 +36,7 @@ import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.disposables.CompositeDisposable;
+import java.util.ArrayList;
 import java.util.Objects;
 import javax.inject.Inject;
 import timber.log.Timber;
@@ -61,6 +62,15 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     private MediaDetailProvider provider;
     private boolean isFromFeaturedRootFragment;
     private int position;
+
+    private ArrayList<Integer> removedItems=new ArrayList<Integer>();
+
+    public void clearRemoved(){
+        removedItems.clear();
+    }
+    public ArrayList<Integer> getRemovedItems() {
+        return removedItems;
+    }
 
     public MediaDetailPagerFragment() {
         this(false, false);
@@ -298,6 +308,16 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     private void updateBookmarkState(MenuItem item) {
         boolean isBookmarked = bookmarkDao.findBookmark(bookmark);
+        if(isBookmarked) {
+            if(removedItems.contains(pager.getCurrentItem())) {
+                removedItems.remove(new Integer(pager.getCurrentItem()));
+            }
+        }
+        else {
+            if(!removedItems.contains(pager.getCurrentItem())) {
+                removedItems.add(pager.getCurrentItem());
+            }
+        }
         int icon = isBookmarked ? R.drawable.menu_ic_round_star_filled_24px : R.drawable.menu_ic_round_star_border_24px;
         item.setIcon(icon);
     }

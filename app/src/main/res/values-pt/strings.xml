@@ -22,8 +22,7 @@
     <item quantity="one">a carregar %1$d ficheiro</item>
     <item quantity="other">a carregar %1$d ficheiros</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -96,7 +95,7 @@
   <string name="share_title_hint">Legenda (obrigatória)</string>
   <string name="add_caption_toast">Forneça uma legenda para este ficheiro, por favor</string>
   <string name="share_description_hint">Descrição</string>
-  <string name="share_caption_hint">Legenda (limite de 255 caracteres)</string>
+  <string name="share_caption_hint" fuzzy="true">Legenda (limite de 255 caracteres)</string>
   <string name="login_failed_network">Não é possível iniciar uma sessão - falha de rede</string>
   <string name="login_failed_wrong_credentials">Não é possível iniciar uma sessão - verifique o seu nome de utilizador e a palavra-passe, por favor</string>
   <string name="login_failed_throttled">Demasiadas tentativas mal sucedidas. Por favor, tente novamente dentro de minutos.</string>
@@ -115,7 +114,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">O GPS está desativado no seu dispositivo. Gostaria de ativá-lo?</string>
   <string name="enable_gps">Ativar GPS</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Ainda não foram enviados ficheiros</string>
+  <string name="contributions_subtitle_zero">(Ainda não foi carregado nenhum ficheiro)</string>
   <string name="categories_not_found">Não foi encontrada nenhuma categoria que corresponda a %1$s</string>
   <string name="depictions_not_found">Não foi encontrado nenhum elemento Wikidata que corresponda a %1$s</string>
   <string name="no_child_classes">%1$s não tem nenhuma classe descendente</string>
@@ -277,7 +276,7 @@
   <string name="error_while_cache">Erro ao colocar imagens na cache</string>
   <string name="title_info">Um título descritivo exclusivo para o ficheiro, que servirá como um nome de ficheiro. Pode utilizar uma linguagem simples com espaços. Não inclua a extensão do ficheiro</string>
   <string name="description_info">Descreva o elemento multimédia da melhor forma possível, por favor. Onde foi tirado? O que é mostrado? Qual é o contexto? Descreva os objetos ou pessoas. Indique as informações que não podem ser facilmente adivinhadas; por exemplo, a hora do dia, se for uma paisagem. Se o ficheiro mostra algo incomum, explique o que é incomum.</string>
-  <string name="caption_info">Escreva uma breve descrição da imagem, por favor. A primeira legenda seria usada como título da imagem.</string>
+  <string name="caption_info" fuzzy="true">Escreva uma breve descrição da imagem, por favor. A primeira legenda seria usada como título da imagem.</string>
   <string name="upload_image_too_dark">Esta imagem está demasiado escura; tem a certeza de que deseja carregá-la? A wiki Wikimedia Commons só aceita as imagens de valor enciclopédico.</string>
   <string name="upload_image_blurry">Esta imagem está desfocada; tem a certeza de que deseja carregá-la? A wiki Wikimedia Commons serve apenas para imagens de valor enciclopédico.</string>
   <string name="upload_problem_exist">Possíveis problemas com esta imagem:</string>
@@ -433,12 +432,12 @@
   <string name="storage_permission">Autorização de acesso</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos da sua autorização para aceder ao armazenamento externo do seu dispositivo para carregar imagens.</string>
   <string name="nearby_notification_dismiss_message">Deixará de ver o local mais próximo que precisa de fotos. No entanto, pode reativar esta notificação nas configurações, se desejar.</string>
-  <string name="step_count" fuzzy="true">Passo %1$d de %2$d</string>
+  <string name="step_count">Passo %1$d de %2$d: %3$s</string>
   <string name="image_in_set_label">Imagem %1$d no conjunto</string>
   <string name="next">Seguinte</string>
   <string name="previous">Anterior</string>
   <string name="submit">Enviar</string>
-  <string name="upload_title_duplicate" fuzzy="true">Já existe um ficheiro com o nome %1$s. Tem a certeza de que deseja continuar?</string>
+  <string name="upload_title_duplicate">Já existe um ficheiro com o nome %1$s. Tem a certeza de que deseja continuar?\n\n\nNota: será adicionado automaticamente ao nome do ficheiro um sufixo apropriado.</string>
   <string name="map_application_missing">Não foi encontrada no seu dispositivo nenhuma aplicação de mapas compatível. Para usar esta funcionalidade instale uma aplicação de mapas, por favor.</string>
   <string name="navigation_item_bookmarks">Marcadores</string>
   <string name="title_activity_bookmarks">Marcadores</string>
@@ -473,7 +472,7 @@
   <string name="nearby_card_permission_explanation">Gostaria que usássemos a sua localização corrente para apresentar o local mais próximo que precisa de fotografias?</string>
   <string name="unable_to_display_nearest_place">Não é possível apresentar o local mais próximo que necessita de fotografias sem ter permissões de localização</string>
   <string name="never_ask_again">Não voltar a perguntar isto</string>
-  <string name="display_location_permission_title">Apresentar permissões de localização</string>
+  <string name="display_location_permission_title" fuzzy="true">Apresentar permissões de localização</string>
   <string name="display_location_permission_explanation">Pedir permissões de localização quando for necessário para a funcionalidade do cartão de notificação de proximidade.</string>
   <string name="achievements_fetch_failed">Algo correu mal, não conseguimos obter as suas realizações</string>
   <string name="achievements_fetch_failed_ultimate_achievement">As suas contribuições foram tantas que o nosso sistema de cálculo de realizações não consegue processá-las. Essa é a realização máxima.</string>
@@ -667,7 +666,7 @@
   <string name="leaderboard_nearby">Aqui perto</string>
   <string name="leaderboard_used">Usados</string>
   <string name="leaderboard_my_rank_button_text">A minha classificação</string>
-  <string name="mapbox_telemetry">Recusar telemetria</string>
+  <string name="mapbox_telemetry">Telemetria Mapbox</string>
   <string name="telemetry_opt_out_summary">Enviar localização anonimizada e dados de utilização para Mapbox ao usar a funcionalidade \'Aqui perto\'</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Melhorar este mapa&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Modo de ligação limitada ativado!</string>
@@ -677,4 +676,13 @@
   <string name="quality_images_info">As imagens de qualidade são diagramas ou fotografias que satisfazem certos padrões de qualidade (principalmente de natureza técnica) e são valiosos para projetos da Wikimedia</string>
   <string name="resuming_upload">A retomar carregamento...</string>
   <string name="pausing_upload">A pausar carregamento...</string>
+  <string name="limited_connection_explanation">Ativou o modo de ligação limitada. Todos os carregamentos foram colocados em pausa e serão retomados quando desativar este modo.</string>
+  <string name="limited_connection_is_on">O modo de ligação limitada está ligado.</string>
+  <string name="media_details_tooltip">Escreva, por favor, uma pequena legenda a descrever o que é mostrado na sua imagem. Na descrição, explique o que torna a imagem interessante, ou típica, ou rara, e explique o contexto, seja este visível ou não. Use uma terminologia tão precisa quanto lhe seja possível.</string>
+  <string name="depicts_tooltip">Encontre e selecione todos os conceitos ilustrados nesta imagem, por favor. Seja tão específico quanto puder. Se a imagem ilustra vários conceitos escolha todos, dentro do razoável. Não escolha etiquetas genéricas se estiverem disponíveis outras mais específicas.</string>
+  <string name="categories_tooltip">Selecione as categorias apropriadas. Ao contrário das representações, as categorias só estão em inglês.</string>
+  <string name="license_tooltip">A wiki Commons torna as suas fotografias reutilizáveis e adaptáveis por todos. Quer renunciar a todos os direitos? Quer que a sua autoria lhe seja atribuída? Quer que as adaptações usem a mesma licença?</string>
+  <string name="depicts_step_title">Representa</string>
+  <string name="license_step_title">Licença de multimédia</string>
+  <string name="media_detail_step_title">Detalhes de multimédia</string>
 </resources>

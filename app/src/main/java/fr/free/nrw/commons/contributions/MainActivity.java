@@ -32,6 +32,7 @@ import fr.free.nrw.commons.navtab.NavTabLoggedOut;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
+import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
@@ -63,6 +64,7 @@ public class MainActivity  extends BaseActivity
     private ExploreFragment exploreFragment;
     private BookmarkFragment bookmarkFragment;
     public ActiveFragment activeFragment;
+    private MediaDetailPagerFragment mediaDetailPagerFragment;
 
     @Inject
     public LocationServiceManager locationManager;
@@ -107,11 +109,18 @@ public class MainActivity  extends BaseActivity
         setContentView(R.layout.main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(view -> {
+            onSupportNavigateUp();
+        });
         if (applicationKvStore.getBoolean("login_skipped") == true) {
             setTitle(getString(R.string.explore_tab_title_mobile));
             setUpLoggedOutPager();
         } else {
-            setTitle(getString(R.string.contributions_fragment));
+            if(savedInstanceState == null){
+                //starting a fresh fragment.
+                setTitle(getString(R.string.contributions_fragment));
+                loadFragment(ContributionsFragment.newInstance(),false);
+            }
             setUpPager();
             initMain();
         }
@@ -122,30 +131,31 @@ public class MainActivity  extends BaseActivity
     }
 
     private void setUpPager() {
-        loadFragment(ContributionsFragment.newInstance());
         tabLayout.setOnNavigationItemSelectedListener(item -> {
             if (!item.getTitle().equals("More")) {
                 // do not change title for more fragment
                 setTitle(item.getTitle());
             }
             Fragment fragment = NavTab.of(item.getOrder()).newInstance();
-            return loadFragment(fragment);
+            return loadFragment(fragment,true);
         });
     }
 
     private void setUpLoggedOutPager() {
-        loadFragment(ExploreFragment.newInstance());
+        loadFragment(ExploreFragment.newInstance(),false);
         tabLayout.setOnNavigationItemSelectedListener(item -> {
             if (!item.getTitle().equals("More")) {
                 // do not change title for more fragment
                 setTitle(item.getTitle());
             }
             Fragment fragment = NavTabLoggedOut.of(item.getOrder()).newInstance();
-            return loadFragment(fragment);
+            return loadFragment(fragment,true);
         });
     }
 
-    private boolean loadFragment(Fragment fragment) {
+    private boolean loadFragment(Fragment fragment,boolean showBottom ) {
+        //showBottom so that we do not show the bottom tray again when constructing
+        //from the saved instance state.
         if (fragment instanceof ContributionsFragment) {
             if (activeFragment == ActiveFragment.CONTRIBUTIONS) { // Do nothing if same tab
                 return true;
@@ -170,7 +180,7 @@ public class MainActivity  extends BaseActivity
             }
             bookmarkFragment = (BookmarkFragment) fragment;
             activeFragment = ActiveFragment.BOOKMARK;
-        } else if (fragment == null) {
+        } else if (fragment == null && showBottom) {
             if (applicationKvStore.getBoolean("login_skipped") == true) { // If logged out, more sheet is different
                 MoreBottomSheetLoggedOutFragment bottomSheet = new MoreBottomSheetLoggedOutFragment();
                 bottomSheet.show(getSupportFragmentManager(),
@@ -238,10 +248,24 @@ public class MainActivity  extends BaseActivity
     public void onBackPressed() {
         if (contributionsFragment != null && activeFragment == ActiveFragment.CONTRIBUTIONS) {
             // Meas that contribution fragment is visible
-            contributionsFragment.backButtonClicked();
+            mediaDetailPagerFragment=contributionsFragment.getMediaDetailPagerFragment();
+            if (mediaDetailPagerFragment ==null) { //means you open the app currently and not open mediaDetailPage fragment
+                super.onBackPressed();
+            } else if (mediaDetailPagerFragment!=null) {
+                if(!mediaDetailPagerFragment.isVisible()){  //means you are at contributions fragement
+                    super.onBackPressed();
+                } else {  //mean you are at mediaDetailPager Fragment
+                    contributionsFragment.backButtonClicked();
+                }
+            }
         } else if (nearbyParentFragment != null && activeFragment == ActiveFragment.NEARBY) {
             // Means that nearby fragment is visible
-            nearbyParentFragment.backButtonClicked();
+            /* If function nearbyParentFragment.backButtonClick() returns false, it means that the bottomsheet is
+              not expanded. So if the back button is pressed, then go back to the Contributions tab */
+            if(!nearbyParentFragment.backButtonClicked()){
+                getSupportFragmentManager().beginTransaction().remove(nearbyParentFragment).commit();
+                setSelectedItemId(NavTab.CONTRIBUTIONS.code());
+            }
         } else if (exploreFragment != null && activeFragment == ActiveFragment.EXPLORE) {
             // Means that explore fragment is visible
             exploreFragment.onBackPressed();
@@ -293,7 +317,14 @@ public class MainActivity  extends BaseActivity
 
     public void centerMapToPlace(Place place) {
         setSelectedItemId(NavTab.NEARBY.code());
-        nearbyParentFragment.centerMapToPlace(place);
+        nearbyParentFragment.setNearbyParentFragmentInstanceReadyCallback(new NearbyParentFragmentInstanceReadyCallback() {
+            // if mapBox initialize in nearbyParentFragment then MapReady() function called
+            // so that nearbyParentFragemt.centerMaptoPlace(place) not throw any null pointer exception
+            @Override
+            public void onReady() {
+                nearbyParentFragment.centerMapToPlace(place);
+            }
+        });
     }
 
     @Override

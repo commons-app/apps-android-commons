@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.MergeAdapter;
@@ -154,7 +155,9 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
             }
         });
 
-        scrollButton.setOnClickListener(view -> scrollToUserRank());
+
+            scrollButton.setOnClickListener(view -> scrollToUserRank());
+
 
         return rootView;
     }
@@ -176,22 +179,22 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      * If you are viewing the leaderboard below userRank, it scrolls to the user rank at the top
      */
     private void scrollToUserRank() {
-        if (Objects.requireNonNull(leaderboardListRecyclerView.getAdapter()).getItemCount() > userRank + 1) {
-            int currPosition = ((LinearLayoutManager) leaderboardListRecyclerView.getLayoutManager())
-                .findFirstCompletelyVisibleItemPosition();
-            // if you are below your rank, scroll to userRank
-            if (currPosition > userRank) {
-                leaderboardListRecyclerView.smoothScrollToPosition(userRank);
-            } else {
+
+        if(userRank==0){
+            Toast.makeText(getContext(),R.string.no_achievements_yet,Toast.LENGTH_SHORT).show();
+        }else {
+            if (Objects.requireNonNull(leaderboardListRecyclerView.getAdapter()).getItemCount()
+                > userRank + 1) {
                 leaderboardListRecyclerView.smoothScrollToPosition(userRank + 1);
-            }
-        } else {
-            if (viewModel != null) {
-                viewModel.refresh(duration, category, userRank + 1, 0);
-                setLeaderboard(duration, category, userRank + 1, 0);
-                scrollToRank = true;
+            } else {
+                if (viewModel != null) {
+                    viewModel.refresh(duration, category, userRank + 1, 0);
+                    setLeaderboard(duration, category, userRank + 1, 0);
+                    scrollToRank = true;
+                }
             }
         }
+              
     }
 
     /**

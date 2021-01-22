@@ -7,10 +7,12 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.DefaultCallback;
 import fr.free.nrw.commons.filepicker.FilePicker;
+import fr.free.nrw.commons.filepicker.FilePicker.ImageSource;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
@@ -95,6 +97,13 @@ public class ContributionController {
      */
     public void handleActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
         FilePicker.handleActivityResult(requestCode, resultCode, data, activity, new DefaultCallback() {
+
+            @Override
+            public void onCanceled(final ImageSource source, final int type) {
+                super.onCanceled(source, type);
+                defaultKvStore.remove(PLACE_OBJECT);
+            }
+
             @Override
             public void onImagePickerError(Exception e, FilePicker.ImageSource source, int type) {
                 ViewUtil.showShortToast(activity, R.string.error_occurred_in_picking_images);
@@ -123,6 +132,7 @@ public class ContributionController {
         shareIntent.setAction(ACTION_INTERNAL_UPLOADS);
         shareIntent.putParcelableArrayListExtra(EXTRA_FILES, new ArrayList<>(imagesFiles));
         Place place = defaultKvStore.getJson(PLACE_OBJECT, Place.class);
+
         if (place != null) {
             shareIntent.putExtra(PLACE_OBJECT, place);
         }

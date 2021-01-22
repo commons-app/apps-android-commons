@@ -440,7 +440,7 @@
   <string name="nearby_card_permission_explanation">Ønsker du å bruke din nåværende plassering for å vise det nærmeste stedet som trenger bilder?</string>
   <string name="unable_to_display_nearest_place">Kan ikke vise steder som trenger bilder i nærheten uten stedstillatelse</string>
   <string name="never_ask_again">Ikke spør meg igjen</string>
-  <string name="display_location_permission_title">Vis stedstillatelse</string>
+  <string name="display_location_permission_title" fuzzy="true">Vis stedstillatelse</string>
   <string name="display_location_permission_explanation">Ber om plasseringstillatelse som trengs når man bruker funksjonen for steder i nærheten.</string>
   <string name="achievements_fetch_failed">Noe gikk galt. Vi kunne ikke hente prestasjonene dine.</string>
   <string name="ends_on">Slutter:</string>

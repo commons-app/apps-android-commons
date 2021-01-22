@@ -77,7 +77,7 @@
   <string name="share_title_hint">Didascalia (obligatorio)</string>
   <string name="add_caption_toast">Par piaser, daghe na didascalia a sto file</string>
   <string name="share_description_hint">Descrision</string>
-  <string name="share_caption_hint">Didascalia (màsimo 255 caràteri)</string>
+  <string name="share_caption_hint" fuzzy="true">Didascalia (màsimo 255 caràteri)</string>
   <string name="login_failed_network">No xé posibiłe ndarghe drento - erore de rete</string>
   <string name="login_failed_wrong_credentials">Entrada no riusia - Daghe na ociada al nome utente e ciave</string>
   <string name="login_failed_throttled">Masa volte te ghè provà. Riprova tra on fià de minudi.</string>
@@ -431,7 +431,7 @@
   <string name="nearby_card_permission_explanation">Vuto che doparemo ła to poxision corente par vardare el posto cuà rente che\'l ga pì bixogno de imajini?</string>
   <string name="unable_to_display_nearest_place">Inposibiłe vardare el posto cuà rente che\'l ga biogmno de imajini, sensa l\'autorixasion de ła poxision</string>
   <string name="never_ask_again">No sta domandarmelo altro.</string>
-  <string name="display_location_permission_title">Autorixasion de vedare ła poxision</string>
+  <string name="display_location_permission_title" fuzzy="true">Autorixasion de vedare ła poxision</string>
   <string name="display_location_permission_explanation">Domanda el parmeso de locałixasion co xé neçesario par ła funsion de vixuałixasion de ła scheda de notifega cuà rente.</string>
   <string name="achievements_fetch_failed">Calcosa el xé ndà roerso, no semo stai boni a trar fora i to rixultai.</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Te ghè fato cusì tante contribusion che te ne ghè inbałinà el sistema de calcoło. Sto cuà el xé el to ultimo rixultà disponibiłe</string>

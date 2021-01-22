@@ -79,7 +79,7 @@
   <string name="share_title_hint">శీర్షిక (తప్పనిసరి)</string>
   <string name="add_caption_toast">ఈ ఫైలుకు ఒక శీర్షిక ఇవ్వండి</string>
   <string name="share_description_hint">వివరణ</string>
-  <string name="share_caption_hint">శీర్షిక (పరిమితి 255 అక్షరాలు)</string>
+  <string name="share_caption_hint" fuzzy="true">శీర్షిక (పరిమితి 255 అక్షరాలు)</string>
   <string name="login_failed_network">లాగిన్ చెయ్యలేకపోయాం - నెట్‍వర్కు విఫలం</string>
   <string name="login_failed_wrong_credentials">లాగినవలేదు - మీ వాడుకరిపేరు, సంకేతపదం సరిచూసుకోండి</string>
   <string name="login_failed_throttled">మరీ ఎక్కువ విఫల యత్నాలు చేసారు. కొద్ది నిముషాలాగి ప్రయత్నించండి</string>
@@ -437,7 +437,7 @@
   <string name="nearby_card_permission_explanation">మీ చుట్టుపక్కల ఉన్న, బొమ్మ అవసరమైన, స్థలాన్ని చూపించేందుకు మీ ప్రస్తుత స్థలాన్ని వాడుకోమంటారా?</string>
   <string name="unable_to_display_nearest_place">స్థలపు అనుమతులు లేకుండా, మీ చుట్టుపక్కల ఉన్న, బొమ్మ అవసరమైన స్థలాన్ని చూపించలేకున్నాం</string>
   <string name="never_ask_again">దీన్ని ఇంకెప్పుడూ అడగకు</string>
-  <string name="display_location_permission_title">స్థల అనుమతిని చూపించు</string>
+  <string name="display_location_permission_title" fuzzy="true">స్థల అనుమతిని చూపించు</string>
   <string name="display_location_permission_explanation">చుట్టుపక్కల స్థలం గమనింపును చూపించేందుకు, అవసరమైనప్పుడల్లా స్థలపు అనుమతి అడుగు</string>
   <string name="achievements_fetch_failed">ఏదో లోపం జరిగింది, మీరు సాధించిన వాటిని తేలేక పోయాం</string>
   <string name="ends_on">ముగిసే సమయం:</string>

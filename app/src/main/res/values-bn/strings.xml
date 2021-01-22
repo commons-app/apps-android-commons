@@ -90,7 +90,7 @@
   <string name="share_title_hint">ক্যাপশন (আবশ্যক)</string>
   <string name="add_caption_toast">অনুগ্রহ করে এই ফাইলটির জন্য একটি ক্যাপশন দিন</string>
   <string name="share_description_hint">বিবরণ</string>
-  <string name="share_caption_hint">ক্যাপশন (২৫৫ অক্ষরে সীমাবদ্ধ)</string>
+  <string name="share_caption_hint" fuzzy="true">ক্যাপশন (২৫৫ অক্ষরে সীমাবদ্ধ)</string>
   <string name="login_failed_network">প্রবেশ করা যাচ্ছে না - নেটওয়ার্ক ব্যর্থতা</string>
   <string name="login_failed_wrong_credentials">প্রবেশ করতে অক্ষম - দয়া করে আপনার ব্যবহারকারী নাম এবং পাসওয়ার্ড পরীক্ষা করুন</string>
   <string name="login_failed_throttled">খুব বেশি অসফল প্রচেষ্টা। অনুগ্রহ করে কয়েক মিনিট পরে আবারও চেষ্টা করুন।</string>
