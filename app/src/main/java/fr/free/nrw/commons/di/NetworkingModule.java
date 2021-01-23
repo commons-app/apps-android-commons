@@ -216,9 +216,8 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public PageEditClient provideCommonsPageEditClient(@Named(NAMED_COMMONS_CSRF) CsrfTokenClient csrfTokenClient,
-                                                       @Named("commons-page-edit-service") PageEditInterface pageEditInterface,
-                                                       @Named("commons-service") Service service) {
-        return new PageEditClient(csrfTokenClient, pageEditInterface, service);
+                                                       @Named("commons-page-edit-service") PageEditInterface pageEditInterface) {
+        return new PageEditClient(csrfTokenClient, pageEditInterface);
     }
 
     @Provides
