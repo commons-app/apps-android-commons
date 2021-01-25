@@ -5,6 +5,7 @@
 * Kippelboy
 * MarionaDSR
 * Mguix
+* Paucabot
 * Pintor Smeargle
 * Pitort
 * Toniher
@@ -364,7 +365,7 @@
   <string name="display_nearby_notification_summary">Mostra la notificació a l\'aplicació del lloc més proper que necessiti fotos</string>
   <string name="no_close_nearby">No s\'han trobat llocs propers prop vostre</string>
   <string name="list_sheet">Llista</string>
-  <string name="storage_permission">Permissos d\'emmagatzematge</string>
+  <string name="storage_permission">Permisos d\'emmagatzematge</string>
   <string name="write_storage_permission_rationale_for_image_share">Ens calen permisos per a accedir a l\'emmagatzematge extern del vostre dispositiu per tal de pujar imatges.</string>
   <string name="step_count">Pas %1$d de %2$d: %3$s</string>
   <string name="image_in_set_label">Imatge %1$s en el conjunt</string>
