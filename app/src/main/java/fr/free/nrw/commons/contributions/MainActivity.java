@@ -110,11 +110,18 @@ public class MainActivity  extends BaseActivity
         setContentView(R.layout.main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(view -> {
+            onSupportNavigateUp();
+        });
         if (applicationKvStore.getBoolean("login_skipped") == true) {
             setTitle(getString(R.string.explore_tab_title_mobile));
             setUpLoggedOutPager();
         } else {
-            setTitle(getString(R.string.contributions_fragment));
+            if(savedInstanceState == null){
+                //starting a fresh fragment.
+                setTitle(getString(R.string.contributions_fragment));
+                loadFragment(ContributionsFragment.newInstance(),false);
+            }
             setUpPager();
             initMain();
         }
@@ -125,30 +132,31 @@ public class MainActivity  extends BaseActivity
     }
 
     private void setUpPager() {
-        loadFragment(ContributionsFragment.newInstance());
         tabLayout.setOnNavigationItemSelectedListener(item -> {
             if (!item.getTitle().equals("More")) {
                 // do not change title for more fragment
                 setTitle(item.getTitle());
             }
             Fragment fragment = NavTab.of(item.getOrder()).newInstance();
-            return loadFragment(fragment);
+            return loadFragment(fragment,true);
         });
     }
 
     private void setUpLoggedOutPager() {
-        loadFragment(ExploreFragment.newInstance());
+        loadFragment(ExploreFragment.newInstance(),false);
         tabLayout.setOnNavigationItemSelectedListener(item -> {
             if (!item.getTitle().equals("More")) {
                 // do not change title for more fragment
                 setTitle(item.getTitle());
             }
             Fragment fragment = NavTabLoggedOut.of(item.getOrder()).newInstance();
-            return loadFragment(fragment);
+            return loadFragment(fragment,true);
         });
     }
 
-    private boolean loadFragment(Fragment fragment) {
+    private boolean loadFragment(Fragment fragment,boolean showBottom ) {
+        //showBottom so that we do not show the bottom tray again when constructing
+        //from the saved instance state.
         if (fragment instanceof ContributionsFragment) {
             if (activeFragment == ActiveFragment.CONTRIBUTIONS) { // Do nothing if same tab
                 return true;
@@ -173,7 +181,7 @@ public class MainActivity  extends BaseActivity
             }
             bookmarkFragment = (BookmarkFragment) fragment;
             activeFragment = ActiveFragment.BOOKMARK;
-        } else if (fragment == null) {
+        } else if (fragment == null && showBottom) {
             if (applicationKvStore.getBoolean("login_skipped") == true) { // If logged out, more sheet is different
                 MoreBottomSheetLoggedOutFragment bottomSheet = new MoreBottomSheetLoggedOutFragment();
                 bottomSheet.show(getSupportFragmentManager(),

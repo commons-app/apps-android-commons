@@ -115,7 +115,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
                 //Get existing user name if it is already saved using savedInstanceState else get from reviewController
                 if (savedInstanceState == null) {
-                    if (getReviewActivity().reviewController != null) {
+                    if (getReviewActivity().reviewController.firstRevision != null) {
                         user = getReviewActivity().reviewController.firstRevision.getUser();
                     }
                 } else {
