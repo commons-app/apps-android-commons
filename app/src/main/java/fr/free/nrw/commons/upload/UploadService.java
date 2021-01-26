@@ -80,6 +80,7 @@ public class UploadService extends CommonsDaggerService {
   private NotificationCompat.Builder curNotification;
   private int toUpload;
   private CompositeDisposable compositeDisposable;
+  private ServiceCallback serviceCallback;
 
   /**
    * The filePath names of unfinished uploads, used to prevent overwriting
@@ -395,6 +396,10 @@ public class UploadService extends CommonsDaggerService {
       }
     }
     saveCompletedContribution(contribution, uploadResult);
+    if(serviceCallback!=null) {
+      //this function update the tatol number media Uploaded  or contributions
+      serviceCallback.updateUploadCount();
+    }
   }
 
   private void saveCompletedContribution(Contribution contribution, UploadResult uploadResult) {
@@ -471,4 +476,13 @@ public class UploadService extends CommonsDaggerService {
     }
     return sequenceFileName;
   }
+
+  public interface  ServiceCallback{
+    void updateUploadCount() ;
+  }
+
+  public void setServiceCallback(ServiceCallback serviceCallback) {
+    this.serviceCallback = serviceCallback;
+  }
+
 }
