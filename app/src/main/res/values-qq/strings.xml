@@ -17,7 +17,7 @@
 * Yuvipanda
 * Ата
 -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="all">
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Status text about number of uploads left.\n* %1$d represents number of uploads left, including current one\n</item>
     <item quantity="other">Status text about number of uploads left.\n* %1$d represents number of uploads left, including current one\n</item>
