@@ -426,6 +426,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onDestroyView() {
         super.onDestroyView();
         mapView.onDestroy();
+        presenter.removeNearbyPreferences(applicationKvStore);
     }
 
     private void initViews() {

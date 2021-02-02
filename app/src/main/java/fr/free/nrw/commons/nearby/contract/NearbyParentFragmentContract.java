@@ -89,6 +89,7 @@ public interface NearbyParentFragmentContract {
         void detachView();
 
         void setActionListeners(JsonKvStore applicationKvStore);
+        void removeNearbyPreferences(JsonKvStore applicationKvStore);
         boolean backButtonClicked();
         void onCameraMove(com.mapbox.mapboxsdk.geometry.LatLng latLng);
         void filterByMarkerType(List<Label> selectedLabels, int state, boolean filterForPlaceState, boolean filterForAllNoneType);
