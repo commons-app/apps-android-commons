@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Ahmed-Najib-Biabani-Ibrahimkhel
+* Amjad Khan
 * Baloch Khan
 * Ibrahim khashrowdi
 * Saraiki
 -->
 <resources>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">1 پورته کول</item>
+    <item quantity="other">%1$d پورته کول</item>
+  </plurals>
+  <string name="share_license_summary" fuzzy="true">دا انځور به د %1$s په منښتليک سمبال وي.</string>
   <string name="preference_category_location">ځای</string>
   <string name="app_name">ويکي خونديځ</string>
   <string name="bullet">•</string>
@@ -33,8 +39,7 @@
   <string name="provider_contributions">زما پورته کېدنې</string>
   <string name="menu_share">شريکول</string>
   <string name="menu_open_in_browser">په کتنمل کې کتل</string>
-  <string name="share_title_hint">سرليک</string>
-  <string name="add_title_toast">مهرباني وکړئ د دې دوتنې لپاره سرلیک چمتو کړئ</string>
+  <string name="share_title_hint" fuzzy="true">سرليک</string>
   <string name="share_description_hint">څرگندونه</string>
   <string name="login_failed_network">د ننوتلو توان نلري - د شبکې ناکامي</string>
   <string name="login_failed_throttled">ډیری ناکامه هڅې. لطفا څو دقیقې وروسته بیا هڅه وکړئ.</string>
@@ -46,10 +51,6 @@
   <string name="categories_search_text_hint">وېشنيزې پلټل</string>
   <string name="menu_save_categories">خوندي کول</string>
   <string name="refresh_button">بياتازه کول</string>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">1 پورته کول</item>
-    <item quantity="other">%1$d پورته کول</item>
-  </plurals>
   <string name="categories_activity_title">وېشنيزې</string>
   <string name="title_activity_settings">امستنې</string>
   <string name="title_activity_signup">نومليکنه</string>
@@ -60,11 +61,9 @@
   <string name="no_uploads_yet">تاسې تر اوسه کوم انځور نه دی پورته کړی.</string>
   <string name="menu_retry_upload">بياآزمويل</string>
   <string name="menu_cancel_upload">ناگارل</string>
-  <string name="share_license_summary">دا انځور به د %1$s په منښتليک سمبال وي.</string>
   <string name="menu_download">ښکته کول</string>
   <string name="preference_license">تلواليز منښتليک</string>
-  <string name="preference_theme">د شپې بڼه</string>
-  <string name="preference_theme_summary">تیارې والا موضوع وکاروئ</string>
+  <string name="preference_theme" fuzzy="true">د شپې بڼه</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (اتريش)</string>
   <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (جرمني)</string>
   <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (اېسټونيا)</string>

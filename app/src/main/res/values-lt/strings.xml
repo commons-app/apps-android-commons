@@ -9,6 +9,24 @@
 * Zygimantus
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+    <item quantity="one">%1$d keliamas failas</item>
+    <item quantity="other">%1$d keliami failai</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="other"/>
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">1 įkėlimas</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">Pradedamas %1$d įkėlimas</item>
+    <item quantity="other">Pradedami %1$d įkėlimai</item>
+  </plurals>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d įkėlimas</item>
+    <item quantity="other">%1$d įkėlimai</item>
+  </plurals>
+  <string name="share_license_summary" fuzzy="true">Šio paveikslėlio licencija bus %1$s</string>
   <string name="preference_category_appearance">Išvaizda</string>
   <string name="preference_category_general">Bendra</string>
   <string name="preference_category_feedback">Atsiliepimai</string>
@@ -36,10 +54,6 @@
   <string name="upload_progress_notification_title_finishing">Baigiamas įkelti %1$s</string>
   <string name="upload_failed_notification_title">Įkelti %1$s nepavyko</string>
   <string name="upload_failed_notification_subtitle">Bakstelėkite norėdami Rodyti</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d keliamas failas</item>
-    <item quantity="other">%1$d keliami failai</item>
-  </plurals>
   <string name="title_activity_contributions">Naujausi mano įkėlimai</string>
   <string name="contribution_state_queued">Eilėje</string>
   <string name="contribution_state_failed">Nepavyko</string>
@@ -52,7 +66,6 @@
   <string name="menu_share">Dalintis</string>
   <string name="menu_open_in_browser">Atidaryti naršyklėje</string>
   <string name="share_title_hint" fuzzy="true">Pavadinimas</string>
-  <string name="add_title_toast">Prašome pateikti šiam failui pavadinimą</string>
   <string name="share_description_hint">Aprašymas</string>
   <string name="login_failed_network">Negalima prisijungti - tinklo klaida</string>
   <string name="login_failed_wrong_credentials">Nepavyko prisijungti - prašome patikrinti savo naudotojo vardą ir slaptažodį</string>
@@ -70,20 +83,7 @@
   <string name="display_list_button">Sąrašas</string>
   <string name="gps_disabled">GPS išjungta jūsų įrenginyje. Ar norite įjungti?</string>
   <string name="enable_gps">Išjungti GPS</string>
-  <string name="contributions_subtitle_zero">Nėra įkėlimų kol kas</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="other"/>
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">1 įkėlimas</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Pradedamas %1$d įkėlimas</item>
-    <item quantity="other">Pradedami %1$d įkėlimai</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d įkėlimas</item>
-    <item quantity="other">%1$d įkėlimai</item>
-  </plurals>
+  <string name="contributions_subtitle_zero">(Kol kas įkėlimų nėra)</string>
   <string name="categories_not_found">Nerasta kategorijų, atitinkančiu %1$s</string>
   <string name="categories_skip_explanation" fuzzy="true">Pridėkite kategorijas, kad jūsų paveikslėliai būtų lengviau randami Vikimedija Commons.\n -\n -Pradėkite rašyti, kad pridėtumėte kategorijas.</string>
   <string name="categories_activity_title">Kategorijos</string>
@@ -101,13 +101,12 @@
   <string name="no_uploads_yet">Dar neįkėlėte jokių nuotraukų.</string>
   <string name="menu_retry_upload">Bandykite dar kartą</string>
   <string name="menu_cancel_upload">Atšaukti</string>
-  <string name="share_license_summary" fuzzy="true">Šio paveikslėlio licencija bus %1$s</string>
   <string name="menu_download">Parsisiųsti</string>
   <string name="preference_license">Numatytoji Licencija</string>
   <string name="use_previous" fuzzy="true">Naudoti ankstesnį pavadinimą/aprašymą</string>
   <string name="allow_gps">Automatiškai gauti dabartinę vietą</string>
   <string name="allow_gps_summary" fuzzy="true">Gauti dabartinę vietove, kad būtų pasiūlytos kategorijos, jei paveikslėlis neturi geografinės žymės</string>
-  <string name="preference_theme" fuzzy="true">Naktinis režimas</string>
+  <string name="preference_theme">Tema</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="tutorial_1_text">Vikimedija Commons talpina daugumą paveikslėlių, kurie yra naudojami Vikipedijoje.</string>

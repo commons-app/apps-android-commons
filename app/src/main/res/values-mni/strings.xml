@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Afingba Mangang
 * Awangba Mangang
 -->
 <resources>
@@ -31,7 +32,7 @@
   <string name="refresh_button">ꯇꯦꯛꯈꯠꯍꯟꯕꯥ</string>
   <string name="display_list_button">ꯄꯥꯔꯤꯡ</string>
   <string name="enable_gps">ꯖꯤꯄꯦꯑꯦꯁ ꯌꯥꯍꯟꯕ</string>
-  <string name="contributions_subtitle_zero">ꯍꯧꯖꯤꯛꯐꯥꯎ ꯊꯥꯒꯠꯈꯤꯕ ꯂꯩꯇ꯭ꯔꯤ</string>
+  <string name="contributions_subtitle_zero">(ꯍꯧꯖꯤꯛꯐꯥꯎ ꯊꯥꯒꯠꯈꯤꯕ ꯂꯩꯇ꯭ꯔꯤ)</string>
   <string name="title_activity_settings">ꯁꯦꯝꯐꯝ</string>
   <string name="title_activity_category_details">ꯃꯆꯥꯈꯥꯏꯕ</string>
   <string name="menu_about">ꯃꯔꯝꯗ</string>

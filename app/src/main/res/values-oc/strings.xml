@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Cedric31
 * Guilhelma
+* Quentí
 * Unuaiga
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+    <item quantity="one">%1$d fichièr en cors de cargament</item>
+    <item quantity="other">%1$d fichièrs en cors de cargament</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d cargament</item>
+    <item quantity="other">%1$d cargaments</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">%1$d cargament aviat</item>
+    <item quantity="other">%1$d cargaments aviats</item>
+  </plurals>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d cargament</item>
+    <item quantity="other">%1$d cargaments</item>
+  </plurals>
+  <string name="share_license_summary" fuzzy="true">Aqueste imatge serà jos licéncia %1$s</string>
   <string name="title_activity_explore">Explorar</string>
   <string name="navigation_item_explore">Explorar</string>
   <string name="app_name">Commons</string>
@@ -27,10 +47,6 @@
   <string name="upload_progress_notification_title_finishing">Fin del telecargament %1$s</string>
   <string name="upload_failed_notification_title">Telecargament fracassat a %1$s</string>
   <string name="upload_failed_notification_subtitle">Quichar per afichar</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">%1$d fichièr en cors de cargament</item>
-    <item quantity="other">%1$d fichièrs en cors de cargament</item>
-  </plurals>
   <string name="title_activity_contributions">Mos darrièrs cargaments</string>
   <string name="contribution_state_queued">Mes en fila d\'espèra</string>
   <string name="contribution_state_failed">Fracàs</string>
@@ -55,26 +71,13 @@
   <string name="categories_search_text_hint">Recercar de categorias</string>
   <string name="menu_save_categories">Enregistrar</string>
   <string name="refresh_button">Refrescar</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d cargament</item>
-    <item quantity="other">%1$d cargaments</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">%1$d cargament aviat</item>
-    <item quantity="other">%1$d cargaments aviats</item>
-  </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d cargament</item>
-    <item quantity="other">%1$d cargaments</item>
-  </plurals>
   <string name="categories_not_found">Cap de categoria que correspond a %1$s pas trobada</string>
   <string name="categories_activity_title">Categorias</string>
   <string name="title_activity_settings">Paramètres</string>
   <string name="title_activity_signup">S’inscriure</string>
   <string name="title_activity_category_details">Categoria</string>
   <string name="menu_about">A prepaus</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Fonts&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;site web&lt;/a&gt; sus GitHub. Crear un novèl &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;senhalament GitHub&lt;/a&gt; per senhalar de bugs o de suggestions.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Fonts&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;site web&lt;/a&gt; sus GitHub. Crear un novèl &lt;a href=\"%1$s\"&gt;senhalament GitHub&lt;/a&gt; per senhalar de bugs o de suggestions.</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica de confidencialitat&lt;/a&gt;</string>
   <string name="title_activity_about">A prepaus</string>
   <string name="menu_feedback">Mandar vòstres comentaris (per corrièl)</string>
@@ -84,11 +87,9 @@
   <string name="no_uploads_yet">Avètz pas encara telecargat cap de fòto.</string>
   <string name="menu_retry_upload">Tornar ensajar</string>
   <string name="menu_cancel_upload">Anullar</string>
-  <string name="share_license_summary" fuzzy="true">Aqueste imatge serà jos licéncia %1$s</string>
   <string name="menu_download">Telecargar</string>
   <string name="preference_license" fuzzy="true">Licéncia</string>
-  <string name="preference_theme">Mòde de nuèit</string>
-  <string name="preference_theme_summary">Utilizar un tèma escur</string>
+  <string name="preference_theme">Tèma</string>
   <string name="license_name_cc_by_sa_four"> Atribucion-PartimentIdentic 4.0</string>
   <string name="license_name_cc_by_four">Atribucion 4.0</string>
   <string name="license_name_cc_by_sa"> Atribucion-PartimentIdentic 3.0</string>
@@ -132,13 +133,13 @@
   <string name="no_subcategory_found">Cap de jos-categoria trobada</string>
   <string name="no_parentcategory_found">Cap de categoria parenta trobada</string>
   <string name="nominated_for_deletion">Aqueste imatge es estat designat per supression</string>
-  <string name="about_rate_us">&lt;u&gt;Nos notar&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Nos notar&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="no_internet">Internet pas disponible</string>
   <string name="internet_established">Internet disponible</string>
   <string name="error_notifications">Error en anant cercar las notificacions.</string>
   <string name="no_notifications">Cap de notificacion trobada.</string>
-  <string name="about_translate">&lt;u&gt;Revirar&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Revirar&lt;/u&gt;</string>
   <string name="about_translate_message">Seleccionatz la lenga dins la quala volriatz sometre de traduccions</string>
   <string name="retry">Tornar ensajar</string>
   <string name="menu_search_button">Cercar</string>
@@ -151,4 +152,9 @@
   <string name="error_loading_subcategories">I aguèt una error pendent lo cargament de las jos-categorias.</string>
   <string name="delete_recent_searches_dialog">Sètz segur de voler vuejar vòstre istoric de recèrca ?</string>
   <string name="search_history_deleted">Istoric de recèrca suprimit</string>
+  <string name="title_app_shortcut_setting">Paramètres</string>
+  <string name="theme_default_name" fuzzy="true">Per defaut</string>
+  <string name="theme_dark_name">Fosc</string>
+  <string name="theme_light_name">Clar</string>
+  <string name="mapbox_telemetry">Telemetria de Mapbox</string>
 </resources>

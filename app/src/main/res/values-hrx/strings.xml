@@ -4,6 +4,7 @@
 * Paul Beppler
 -->
 <resources>
+  <string name="share_license_summary" fuzzy="true">Das Bild weard lizenziert unner %1$s</string>
   <string name="app_name" fuzzy="true">Wikimedia Commons (Wikimedia Allmend)</string>
   <string name="menu_settings">Instellunge</string>
   <string name="username">Benutzernoome</string>
@@ -32,7 +33,7 @@
   <string name="provider_contributions">Meine hochgeladne Dateie</string>
   <string name="menu_share">Vertele</string>
   <string name="menu_open_in_browser">Im Browser oonzeiche</string>
-  <string name="share_title_hint">Titel</string>
+  <string name="share_title_hint" fuzzy="true">Titel</string>
   <string name="share_description_hint">Beschreibung</string>
   <string name="login_failed_network">Oonmeldung fehlgeschlooht – Netzwerrekfehler</string>
   <string name="login_failed_throttled" fuzzy="true">Zu viele erfollichlose Versuche. Bittschön in en poor Minute wieder erneit versuche.</string>
@@ -59,7 +60,6 @@
   <string name="no_uploads_yet">Du host noch keh Fotos hochgelood.</string>
   <string name="menu_retry_upload">Wieder erneit versuche</string>
   <string name="menu_cancel_upload">Abbreche</string>
-  <string name="share_license_summary">Das Bild weard lizenziert unner %1$s</string>
   <string name="menu_download">Herunnerloode</string>
   <string name="preference_license" fuzzy="true">Lizenz</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>

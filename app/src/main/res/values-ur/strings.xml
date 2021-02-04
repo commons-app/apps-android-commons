@@ -9,6 +9,24 @@
 * Sayam Asjad
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d فائل اپلوڈ ہورہی ہے</item>
+    <item quantity="other">%1$d فائلیں اپلوڈ ہورہی ہے</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d اپلوڈ</item>
+    <item quantity="other">%1$d اپلوڈ</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">شروع %1$d اپلوڈ</item>
+    <item quantity="other">شروع %d$1 اپلوڈ</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d اپلوڈ</item>
+    <item quantity="other">%1$d اپلوڈز</item>
+  </plurals>
+  <string name="share_license_summary" fuzzy="true">%1$s تلے یہ تصویر لائسنس یافتہ ہو گی</string>
   <string name="title_activity_explore">ایکسپلور</string>
   <string name="navigation_item_explore">ایکسپلور</string>
   <string name="preference_category_appearance">ظاہریت</string>
@@ -35,10 +53,6 @@
   <string name="upload_progress_notification_title_finishing">%1$s کی اپلوڈنگ مکمل ہو رہی ہے</string>
   <string name="upload_failed_notification_title">اپلوڈ %1$s ہونے میں ناکام</string>
   <string name="upload_failed_notification_subtitle">دیکھنے کے لیے ٹیپ کریں</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d فائل اپلوڈ ہورہی ہے</item>
-    <item quantity="other">%1$d فائلیں اپلوڈ ہورہی ہے</item>
-  </plurals>
   <string name="title_activity_contributions">میں حالیہ اپلوڈ</string>
   <string name="contribution_state_queued">قطار</string>
   <string name="contribution_state_failed">ناکام</string>
@@ -67,20 +81,7 @@
   <string name="display_list_button">فہرست</string>
   <string name="gps_disabled">جی پی ایس آپ کے آلے میں غیر فعال ہے۔ آپ اس کو فعال کرنا چاہینگے؟</string>
   <string name="enable_gps">جی پی ایس فعال کریں</string>
-  <string name="contributions_subtitle_zero">ابھی تک کوئی اپلوڈ نہیں</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d اپلوڈ</item>
-    <item quantity="other">%1$d اپلوڈ</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">شروع %1$d اپلوڈ</item>
-    <item quantity="other">شروع %d$1 اپلوڈ</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d اپلوڈ</item>
-    <item quantity="other">%1$d اپلوڈز</item>
-  </plurals>
+  <string name="contributions_subtitle_zero" fuzzy="true">ابھی تک کوئی اپلوڈ نہیں</string>
   <string name="categories_not_found">%1$s سے کوئی زمرہ جات میل نہیں کھاتے</string>
   <string name="categories_skip_explanation">ویکیمیڈیا کامنز پر اپنی تصاویر کو قابل دریافت بنانے کے لیے زمرے شامل کریں۔\n\nزمرے شامل کرنے کے لیے لکھنا شروع کریں۔\n\nاس مرحلے کو نظر انداز کرنے کے لیے اس پیغام یا (یا پیچھے) پر ٹیپ کریں۔</string>
   <string name="categories_activity_title">زمرہ جات</string>
@@ -100,15 +101,13 @@
   <string name="no_uploads_yet">آپ نے ابھی تک کوئی تصاویر اپلوڈ نہیں کی ہے۔</string>
   <string name="menu_retry_upload">دوبارہ کوشش کریں</string>
   <string name="menu_cancel_upload">منسوخ</string>
-  <string name="share_license_summary" fuzzy="true">%1$s تلے یہ تصویر لائسنس یافتہ ہو گی</string>
   <string name="media_upload_policy">اس تصویر کو درج کر کے، میں اقرار کرتا ہوں کہ یہ میرا اپنا کام ہے، اس ميں کاپی رائٹ مواد یا سیلفیاں نہیں ہیں، اور بصورت دیگر میں &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;ویکیمیڈیا کامنز پالیسیوں&lt;/a&gt; کا پابند ہوں۔</string>
   <string name="menu_download">ڈاؤنلوڈ</string>
   <string name="preference_license" fuzzy="true">اجازت نامہ</string>
-  <string name="use_previous">گزشتہ عنوان/وضاحت استعمال کریں</string>
+  <string name="use_previous" fuzzy="true">گزشتہ عنوان/وضاحت استعمال کریں</string>
   <string name="allow_gps">خودکارانہ طریقے سے حالیہ جگہ حاصل کریں</string>
   <string name="allow_gps_summary" fuzzy="true">اگر تصویر جغرافیائی نہیں ہے تو قسم کے تجاویز پیش کرنے کیلئے موجودہ مقام کو دوبارہ حاصل کریں</string>
-  <string name="preference_theme">نائٹ موڈ</string>
-  <string name="preference_theme_summary">کالا تھیم استعمال کریں</string>
+  <string name="preference_theme" fuzzy="true">نائٹ موڈ</string>
   <string name="license_name_cc_by_sa_four">انتباہ-شراکت 4.0</string>
   <string name="license_name_cc_by_four">انتباہ 4.0</string>
   <string name="license_name_cc_by_sa">انتباہ-شراکت 3.0</string>

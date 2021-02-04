@@ -6,6 +6,10 @@
 * Simbu123
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$dটা ফাইল আপল\'ড হৈছে</item>
+    <item quantity="other">%1$dটা ফাইল আপল\'ড হৈছে</item>
+  </plurals>
   <string name="title_activity_explore">অন্বেষণ কৰক</string>
   <string name="navigation_item_explore">অন্বেষণ কৰক</string>
   <string name="preference_category_appearance">ৰূপ</string>
@@ -37,10 +41,7 @@
   <string name="upload_progress_notification_title_finishing">%1$s আপল\'ড শেষ হৈছে</string>
   <string name="upload_failed_notification_title">%1$s আপল\'ড ব্যৰ্থ হৈছে</string>
   <string name="upload_failed_notification_subtitle">চাবৰ বাবে স্পৰ্শ কৰক</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$dটা ফাইল আপল\'ড হৈছে</item>
-    <item quantity="other">%1$dটা ফাইল আপল\'ড হৈছে</item>
-  </plurals>
+  <string name="upload_paused_notification_subtitle">চাবৰ বাবে স্পৰ্শ কৰক</string>
   <string name="title_activity_contributions">মোৰ শেহতীয়া আপল\'ড</string>
   <string name="contribution_state_queued">অপে‌ক্ষাৰত</string>
   <string name="contribution_state_failed">ব্যৰ্থ হৈছে</string>
@@ -52,8 +53,7 @@
   <string name="provider_contributions">মোৰ আপল\'ডসমূহ</string>
   <string name="menu_share">শ্বেয়াৰ কৰক</string>
   <string name="menu_open_in_browser">ব্ৰাউজাৰত চাওক</string>
-  <string name="share_title_hint">শীৰ্ষক (প্ৰয়োজনীয়)</string>
-  <string name="add_title_toast">অনুগ্ৰহ কৰি এই ফাই‍লটোৰ এটা শিৰোনাম দিয়ক</string>
+  <string name="share_title_hint" fuzzy="true">শীৰ্ষক (প্ৰয়োজনীয়)</string>
   <string name="share_description_hint">বিৱৰণ</string>
   <string name="login_failed_network">প্ৰৱেশ ব্যৰ্থ হৈছে - নে\'টৱৰ্ক সমস্যা</string>
   <string name="login_failed_wrong_credentials">প্ৰৱেশ ব্যৰ্থ হৈছে - অনুগ্ৰহ কৰি আপোনাৰ সদস্যনাম আৰু গুপ্তশব্দ পৰীক্ষা কৰক</string>
@@ -69,7 +69,7 @@
   <string name="display_list_button">তালিকা</string>
   <string name="gps_disabled">আপোনাৰ সঁজুলিত GPS নিষ্ক্ৰিয় হৈ আছে। আপুনি ইয়াক সক্ৰিয় কৰিব খুজিছে নেকি?</string>
   <string name="enable_gps">GPS সক্ৰিয় কৰক</string>
-  <string name="contributions_subtitle_zero">এতিয়ালৈকে কোনো আপল\'ড নাই</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">এতিয়ালৈকে কোনো আপল\'ড নাই</string>
   <string name="categories_activity_title">শ্ৰেণী</string>
   <string name="title_activity_settings">ছেটিংছ</string>
   <string name="title_activity_signup">পঞ্জীয়ন কৰক</string>
@@ -139,7 +139,6 @@
   <string name="error_occurred">ত্ৰুটি সংঘটিত হ\'ল!</string>
   <string name="notifications">জাননী</string>
   <string name="submit">দাখিল কৰক</string>
-  <string name="yes_submit">হয়, দাখিল কৰক</string>
   <string name="dialog_box_text_nomination">%1$s কিয় বিলোপ কৰা হ\'ব লাগে?</string>
   <string name="delete_helper_show_deletion_title_success">সফল</string>
   <string name="delete_helper_show_deletion_title_failed">বিফল হ\'ল</string>

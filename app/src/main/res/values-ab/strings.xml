@@ -41,6 +41,7 @@
   <string name="refresh_button">Ирҿыцтәуп</string>
   <string name="gps_disabled">GPS аҿыхуп шәара шәҟны. Ишәҭахума иаҿашәкыр?</string>
   <string name="enable_gps">Иаҿактәуп GPS</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Аҭагаламҭақәа макьана иҟам</string>
   <string name="categories_activity_title">Акатегориақәа</string>
   <string name="title_activity_settings">Архиарақәа</string>
   <string name="title_activity_signup">Арегистрациа ҟаҵатәуп</string>
@@ -48,8 +49,7 @@
   <string name="menu_cancel_upload">Аҟәыхра</string>
   <string name="menu_download">Иҭыгатәуп</string>
   <string name="preference_license" fuzzy="true">Алицензиа</string>
-  <string name="preference_theme">Уахынлатәи арежим</string>
-  <string name="preference_theme_summary">Ихархәатәуп еиқәаҵәоу атема</string>
+  <string name="preference_theme" fuzzy="true">Уахынлатәи арежим</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four">Attribution 4.0</string>
   <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>

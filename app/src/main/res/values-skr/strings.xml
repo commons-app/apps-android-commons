@@ -53,7 +53,7 @@
   <string name="refresh_button">سجرا، تازہ کرو</string>
   <string name="display_list_button">فہرست</string>
   <string name="enable_gps">جی پی ایس چلاؤ</string>
-  <string name="contributions_subtitle_zero">اڄݨ ککھ وی اپ لوڈ نی تھیا</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">اڄݨ ککھ وی اپ لوڈ نی تھیا</string>
   <string name="categories_activity_title">ونکیاں</string>
   <string name="title_activity_settings">ترتیباں</string>
   <string name="title_activity_signup">سائن اپ</string>
@@ -147,6 +147,7 @@
   <string name="question">سوال</string>
   <string name="result">نتیجہ</string>
   <string name="continue_message">جاری رکھو</string>
+  <string name="Profile">پروفائل</string>
   <string name="statistics" fuzzy="true">شماریات</string>
   <string name="level" fuzzy="true">سطح</string>
   <string name="error_occurred">خرابی تھی ڳئی ہے!</string>
@@ -157,6 +158,15 @@
   <string name="provider_bookmarks">کتاب نشان</string>
   <string name="provider_bookmarks_location">کتاب نشان</string>
   <string name="delete_helper_show_deletion_title_failed">ناکام تھیا</string>
+  <string name="category_edit_helper_show_edit_title_success">کامیابی</string>
   <string name="theme_dark_name">ڳوڑھا</string>
   <string name="theme_light_name">پھکّا</string>
+  <string name="confirm">تصدیق</string>
+  <string name="leaderboard_tab_title">لیڈر بورڈ</string>
+  <string name="count_prefix">ڳیݨ:</string>
+  <string name="leaderboard_column_rank">درجہ</string>
+  <string name="leaderboard_column_user">ورتݨ آلا</string>
+  <string name="leaderboard_yearly">سالانہ</string>
+  <string name="leaderboard_weekly">ہفتہ وار</string>
+  <string name="leaderboard_all_time">سارے ویلے</string>
 </resources>

@@ -1,15 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Brazal.dang
+* Geopoet
+-->
 <resources>
-  <string name="app_name" fuzzy="true">Mga Wikimidyang Karugaringan</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d file uploading</item>
+    <item quantity="other">%1$d an mga files ikinakarga</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Starting %1$d upload</item>
+    <item quantity="other">Nagpuon na %1$d an pagkarga</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d upload</item>
+    <item quantity="other">%1$d mga karga</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">This image will be licensed under %1$s</item>
+    <item quantity="other">Ining imahe magin lisensiyada sa lindong kan %1$s</item>
+  </plurals>
+  <string name="title_activity_explore">Maghiling-hiling</string>
+  <string name="navigation_item_explore">Maghiling-hiling</string>
+  <string name="preference_category_appearance">Hitsurahon</string>
+  <string name="preference_category_general">Pankagabsan</string>
+  <string name="preference_category_feedback">Balik-simbag</string>
+  <string name="preference_category_privacy">Pribasidad</string>
+  <string name="preference_category_location">Lokasyon</string>
+  <string name="app_name">Mga Wikimidyang Karugaringan</string>
   <string name="menu_settings">Mga Panuytoy</string>
+  <string name="intent_share_upload_label">Ikarga sa Commons</string>
   <string name="username">Paragamit na Pangaran</string>
   <string name="password">Sekretong Panalaog</string>
+  <string name="login_credential">Maglaog sa saimong panindog na Commons Beta</string>
   <string name="login">Maglaog</string>
+  <string name="forgot_password">Nalingawan na panpalaog?</string>
+  <string name="signup">Mag-ayon</string>
   <string name="logging_in_title">Maglalaog sa</string>
   <string name="logging_in_message">Pakihalat tabi…</string>
   <string name="login_success">An paglaog mo matrayumpo!</string>
   <string name="login_failed">An paglaog mo nagpalya!</string>
-  <string name="authentication_failed">An awtentikasyon nagpalya!</string>
+  <string name="upload_failed">Dai nahiling an file. Magporbar nin ibang file.</string>
+  <string name="authentication_failed">An awtentikasyon nagpalya! maglaog ulit</string>
   <string name="uploading_started">Pinagpoonan na an pagkarga!</string>
   <string name="upload_completed_notification_title">%1$s pinagkarga na!</string>
   <string name="upload_completed_notification_text">Taptapa tanganing matanaw an saimong kinarga</string>
@@ -18,48 +55,61 @@
   <string name="upload_progress_notification_title_finishing">Tinatapos pa an pagkakarga sa %1$s</string>
   <string name="upload_failed_notification_title">An ikinakarga na %1$s nagpalya</string>
   <string name="upload_failed_notification_subtitle">Taptapon tanganing matanaw</string>
-  <string name="title_activity_contributions" fuzzy="true">An sakuyang mga ikinarga</string>
+  <string name="title_activity_contributions">An sakuyang mga ikinarga</string>
   <string name="contribution_state_queued">Pinaghalat</string>
   <string name="contribution_state_failed">Nagpalya</string>
   <string name="contribution_state_in_progress">%1$d%% nakumpleto na</string>
   <string name="contribution_state_starting">Ikinakarga</string>
   <string name="menu_from_gallery">Gikan sa Galeriya</string>
   <string name="menu_from_camera">Magkua nin retrato</string>
+  <string name="menu_nearby">Harani sana</string>
   <string name="provider_contributions">An sakuyang mga ikinarga</string>
   <string name="menu_share">Iheras</string>
   <string name="menu_open_in_browser">Tanawon sa Kilyawan</string>
-  <string name="share_title_hint">Titulo</string>
+  <string name="share_title_hint" fuzzy="true">Titulo (Kaipuhan)</string>
   <string name="share_description_hint">Deskripsyon</string>
   <string name="login_failed_network">Dae makadagos sa paglaog - minapalya an kabitanahan</string>
-  <string name="login_failed_username">Dae makadagos sa paglaog - pakirikisáha an saimong paragamit na pangaran</string>
-  <string name="login_failed_password">Dae makadagos sa paglaog - pakirikisáha an saimong sekretong panlaog</string>
-  <string name="login_failed_throttled" fuzzy="true">Kadakulon na an bakong matrayumpong pagprubar. Pakiotro na sana giraray sa laog nin nagkapirang mga minutos</string>
+  <string name="login_failed_wrong_credentials">Dai nakalaog - pakihiling ulit an saimong panindog asin sekretong panlaog</string>
+  <string name="login_failed_throttled">Kadakulon na an bakong matrayumpong pagprubar. Pakiotro na sana giraray sa laog nin nagkapirang mga minutos</string>
   <string name="login_failed_blocked">Sori, ining paragamit pinagkubkob na sa Kagrugaringan</string>
   <string name="login_failed_generic">An Paglaog nagpalya</string>
   <string name="share_upload_button">Ikarga</string>
   <string name="multiple_share_base_title">Pangarani ining katiriponan</string>
+  <string name="add_set_name_toast">Magtao nin ngaran para sa grupo na ini</string>
   <string name="provider_modifications">Mga Modipikasyon</string>
   <string name="menu_upload_single">Ikarga</string>
   <string name="categories_search_text_hint">Hanapa an mga kategoriya</string>
   <string name="menu_save_categories">Itagama</string>
+  <string name="refresh_button">Preskohon otro</string>
+  <string name="display_list_button">Listahan</string>
+  <string name="gps_disabled">Ang GPS sa saimong gamit dae pinagana. Gusto mong paganahon ini?</string>
+  <string name="enable_gps">Paganahon an GPS</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Mayo pang ikinakarga</string>
   <string name="categories_not_found">Mayong mga kategoriya an mainukno sa %1$s an nanagboan</string>
-  <string name="categories_skip_explanation" fuzzy="true">Magpoon sa pagtipa tanganing magdugang nin mga kategoriya.\nTaptapon ining mensahe (o pinduta an ibalik) tanganing luksuhan ining panuntungan.</string>
+  <string name="categories_skip_explanation">Magpoon sa pagtipa tanganing magdugang nin mga kategoriya.\nTaptapon ining mensahe (o pinduta an ibalik) tanganing luksuhan ining panuntungan.</string>
   <string name="categories_activity_title">Mga Kategoriya</string>
   <string name="title_activity_settings">Mga Panuytoy</string>
+  <string name="title_activity_signup">Mag-ayon</string>
+  <string name="title_activity_featured_images">Mga na-feature na imahe</string>
+  <string name="title_activity_category_details">Kategoriya</string>
   <string name="menu_about">Panunungod</string>
-  <string name="about_license" fuzzy="true">Bukas na Ginikanang panuklob ipinaghaya na sa lindong kan  &lt;a href=\" https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">Ginikanan sa &lt;a href=\"https://github.com/commons-app/android-commons\"&gt;GitHub&lt;/a&gt;. Mga kubol sa &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
-  <string name="about_privacy_policy" fuzzy="true">Ano ini?</string>
+  <string name="about_license">An Wikimedia Commons app sarong bukas na app na ginibo asin minamantehir kan mga grantees asin volunteers kan Wikimedia Community. An Wikimedia Foundaton dai imbwelto sa paggibo, pagpalago o pagmantiner kan app.</string>
+  <string name="about_improve">Maggibu nin bagong &lt;a href=\"%1$s\"&gt;GitHub isyu&lt;/a&gt; para sa mga report sa bug asin mga suhestiyon.</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Privacy policy&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Credits&lt;/u&gt;</string>
   <string name="title_activity_about">Panunungod</string>
   <string name="menu_feedback">Ipadara an balik-simbag (sa paagi nin E-surat)</string>
   <string name="provider_categories">Dae pa sana nahaloy na pinaggamit na mga kategoriya</string>
   <string name="waiting_first_sync">Naghahalat para sa enot na panganduyog…</string>
   <string name="no_uploads_yet">Ika dae pa nakapagkarga nin anuman na mga litrato.</string>
-  <string name="share_license_summary">Ining imahe magin lisensiyada sa lindong kan %1$s</string>
+  <string name="menu_retry_upload">Uliton</string>
+  <string name="menu_cancel_upload">Kanselaron</string>
   <string name="menu_download">Kargahon</string>
-  <string name="preference_license" fuzzy="true">Lisensiya</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CC Panungdanan-HerasPararehas</string>
-  <string name="license_name_cc_by" fuzzy="true">CC Panungdanan</string>
+  <string name="preference_license">Lisensiya</string>
+  <string name="use_previous" fuzzy="true">Maggamit nin dating titulo/deskripsiyon</string>
+  <string name="allow_gps">Awtomatikong magkua nin presenteng lokasyon</string>
+  <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">Mag-ambag kan saimong mga imahe. Magtabang sa mga artikulo nin Wikipedia na magka-igwa nin buhay!</string>
   <string name="welcome_wikipedia_subtext">An mga imahe sa Wikipedia naggigikan sa mga Karugaringan nin Wikimedia.</string>

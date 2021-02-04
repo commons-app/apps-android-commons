@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Autokrator
+* Laurentianus
+* UV
+-->
 <resources>
+  <string name="share_license_summary" fuzzy="true">Haec imago sub licentia %1$s communicabitur.</string>
   <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Modi</string>
   <string name="username">Nomen usoris</string>
@@ -26,9 +32,8 @@
   <string name="provider_contributions">Contributiones meae</string>
   <string name="menu_share">Communicare</string>
   <string name="menu_open_in_browser">In navigatro spectare</string>
-  <string name="share_title_hint">Titulus</string>
+  <string name="share_title_hint" fuzzy="true">Titulus</string>
   <string name="share_description_hint">Descriptio</string>
-  <string name="login_failed_password">Tessera vitiosa</string>
   <string name="login_failed_generic">Ratio aperiri non potuit</string>
   <string name="share_upload_button">Imaginem imponere</string>
   <string name="multiple_share_base_title">Seriem imaginum nuncupare</string>
@@ -45,9 +50,8 @@
   <string name="menu_feedback">Relationem mittere</string>
   <string name="provider_categories">Categoriae nuper adhibitae</string>
   <string name="no_uploads_yet">Nullae iam imagines adduntur.</string>
-  <string name="share_license_summary">Haec imago sub licentia %1$s communicabitur.</string>
   <string name="menu_download">Inmissio</string>
-  <string name="preference_license">Licentia</string>
+  <string name="preference_license" fuzzy="true">Licentia</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike</string>
   <string name="license_name_cc_by" fuzzy="true">CC Attribution</string>
   <string name="license_name_cc0">CC0</string>

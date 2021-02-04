@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Arya sarhan
+* Cwtiyar
+* Épine
+-->
 <resources>
+  <string name="share_license_summary" fuzzy="true">ئەم پەڕەیە مۆڵەتنامەی %1 پێ دەدرێت</string>
+  <string name="title_activity_explore">بگەڕێ</string>
+  <string name="navigation_item_explore">بگەڕێ</string>
+  <string name="preference_category_appearance">ڕواڵەت</string>
+  <string name="preference_category_general">گشتی</string>
+  <string name="preference_category_feedback">فیدباک</string>
+  <string name="preference_category_privacy">تایبەتێتی</string>
+  <string name="preference_category_location">شوێن</string>
   <string name="app_name">کۆمنز</string>
   <string name="menu_settings">ڕێکخستنەکان</string>
+  <string name="intent_share_upload_label">بارکردن بۆ کۆمنز</string>
   <string name="username">ناوی بەکارھێنەر</string>
   <string name="password">تێپەڕوشە</string>
+  <string name="login_credential">بچۆ ژوورەوە لە ھەژماری کۆمنز بێتاکەت</string>
   <string name="login">چوونە ژوورەوە</string>
+  <string name="forgot_password">تێپەڕە وشەت لەبیرکردووە؟</string>
   <string name="signup">خۆ تۆمارکردن</string>
   <string name="logging_in_title">چوونە ژوورەوە…</string>
   <string name="logging_in_message">تکایە چاوەڕوان بە…</string>
@@ -19,14 +35,31 @@
   <string name="upload_progress_notification_title_finishing">تەواو بوونی بارکردنی %1$</string>
   <string name="upload_failed_notification_title">بارکردنی %1 شکستی ھێنا</string>
   <string name="upload_failed_notification_subtitle">کرتە بکە بۆ بینین</string>
+  <string name="contribution_state_failed">سەرکەوتوو نەبوو</string>
+  <string name="contribution_state_in_progress">%1$d%% تەواو</string>
+  <string name="contribution_state_starting">بارکردن</string>
+  <string name="provider_contributions">بارکردنەکانم</string>
+  <string name="menu_share">هاوبەشی کردن</string>
+  <string name="menu_open_in_browser">بینین لە وێبگە</string>
+  <string name="login_failed_generic">چوونە ژوورەوە شکستی ھێنا</string>
+  <string name="share_upload_button">بارکردن</string>
+  <string name="menu_upload_single">بارکردن</string>
+  <string name="categories_search_text_hint">پۆلەکان بگەڕێ</string>
+  <string name="menu_save_categories">پاشەکەوت</string>
+  <string name="refresh_button">نوێکردنەوە</string>
+  <string name="display_list_button">پێرست</string>
+  <string name="title_activity_settings">ڕێکخستنەکان</string>
+  <string name="title_activity_signup">خۆ تۆمارکردن</string>
+  <string name="title_activity_category_details">پۆل</string>
+  <string name="menu_about">دەربارە</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;سیاسەتی تایبەتێتی&lt;/u&gt;</string>
   <string name="title_activity_about">سەبارەت</string>
   <string name="no_uploads_yet">تاکو ئێستا ھیچ پەڕگەیەکت بار نەکردووە.</string>
   <string name="menu_retry_upload">ھەوڵداناوە</string>
   <string name="menu_cancel_upload">ھەڵوەشاندنەوە</string>
-  <string name="share_license_summary">ئەم پەڕەیە مۆڵەتنامەی %1 پێ دەدرێت</string>
   <string name="menu_download">داگرتن</string>
-  <string name="preference_license">مۆڵەتنامە</string>
-  <string name="preference_theme">مۆدی شەو</string>
+  <string name="preference_license" fuzzy="true">مۆڵەتنامە</string>
+  <string name="preference_theme" fuzzy="true">مۆدی شەو</string>
   <string name="welcome_wikipedia_subtext">وێنەکانی سەر ویکیپیدیا لە ویکیمیدیا کۆمنزەوە دەھێندرێن.</string>
   <string name="welcome_copyright_text">وێنەکانت یارمەتی فێرکردنی خەڵکی دەدات لە سەرانسەری جیھان دا.</string>
   <string name="welcome_copyright_subtext">خۆت لەو کارانە لابدە کە مافی بڵاوکردنەوەیان پارێزراوە وەک ئەو شتانەی کە لەسەر ئینتەرنێت دەیان دۆزیتەوە، بە تایبەتی وێنەی پۆستەر، بەرگی کتێب و یاری، ھتد…</string>
@@ -41,11 +74,10 @@
   <string name="ok">باشە</string>
   <string name="title_activity_nearby">شوێنە نزیکەکان</string>
   <string name="warning">ئاگاداری</string>
-  <string name="upload_image_problem_duplicate">ئەم پەڕگەیە لەسەر کۆمنز ھەیە. دڵنیایت کە دەتەوێت بەردەوام بیت؟</string>
   <string name="yes">بەڵێ</string>
   <string name="no">نەخێر</string>
   <string name="media_detail_title">ناونیشان</string>
-  <string name="media_detail_media_title">ناونیشانی میدیا</string>
   <string name="media_detail_description">وەسف</string>
-  <string name="use_wikidata">بەکارھێنانی ویکیدراوە</string>
+  <string name="confirm">جەخت کردنەوە</string>
+  <string name="wikipedia_instructions_step_7">وتار بلاوبکەرەوە</string>
 </resources>

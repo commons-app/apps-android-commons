@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Anoop rao
+* Mahadevaiah Siddaiah
 * Omshivaprakash
 * VASANTH S.N.
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d ಕಡತ ಅಪ್ಲೋಡ್ ಅಗುತ್ತಿದೆ</item>
+    <item quantity="other">%1$d ಕಡತಗಳು ಅಪ್ಲೋಡ್ ಅಗುತ್ತಿದೆ</item>
+  </plurals>
   <string name="app_name">ಕಾಮನ್ಸ್</string>
   <string name="menu_settings">ವ್ಯವಸ್ಥೆಗಳು</string>
   <string name="username">ಬಳಕೆದಾರ ಹೆಸರು</string>
@@ -16,7 +21,7 @@
   <string name="login_success">ಲಾಗಿನ್ ಯಶಸ್ವಿ!</string>
   <string name="login_failed">ಲಾಗಿನ್ ಸಾಧ್ಯವಾಗಿಲ್ಲ!</string>
   <string name="upload_failed">ಈ ಕಡತ ಕಂಡುಬಂದಿಲ್ಲ. ದಯವಿಟ್ಟು ಇನ್ನೊಂದು ಕಡತ ಪ್ರಯತ್ನಿಸಿ.</string>
-  <string name="authentication_failed">ದೃಢೀಕರಣ ವಿಫಲ!</string>
+  <string name="authentication_failed" fuzzy="true">ದೃಢೀಕರಣ ವಿಫಲ!</string>
   <string name="uploading_started">ಅಪ್ಲೋಡ್ ಪ್ರಾರಂಭವಾಗಿದೆ!</string>
   <string name="upload_completed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಆಗಿದೆ!</string>
   <string name="upload_completed_notification_text">ನಿಮ್ಮ ನಕಲೇರಿಕೆಯನ್ನು ನೋಡಲು ಮೆಲ್ಲಗೆ ತಟ್ಟಿ</string>
@@ -25,10 +30,6 @@
   <string name="upload_progress_notification_title_finishing">%1$s ಅಪ್ಲೋಡ್ ಮಾಡುವಿಕೆಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಲಾಗುತ್ತಿದೆ</string>
   <string name="upload_failed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಮಾಡುವಿಕೆ ವಿಫಲವಾಗಿದೆ</string>
   <string name="upload_failed_notification_subtitle">ನೋಡಲು ಮೆಲ್ಲಗೆ ತಟ್ಟಿ</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d ಕಡತ ಅಪ್ಲೋಡ್ ಅಗುತ್ತಿದೆ</item>
-    <item quantity="other">%1$d ಕಡತಗಳು ಅಪ್ಲೋಡ್ ಅಗುತ್ತಿದೆ</item>
-  </plurals>
   <string name="title_activity_contributions">ನನ್ನ ಇತ್ತಿಚಿನ ಅಪ್ಲೋಡ್ಗಳು</string>
   <string name="contribution_state_queued">ಸರತಿಸಾಲಿನಲ್ಲಿದೆ</string>
   <string name="contribution_state_failed">ವಿಫಲವಾಗಿದೆ</string>
@@ -40,11 +41,9 @@
   <string name="provider_contributions">ನನ್ನ ನಕಲೇರಿಕೆಗಳು</string>
   <string name="menu_share">ಹಂಚು</string>
   <string name="menu_open_in_browser">ಬ್ರೌಸರ್‌ನಲ್ಲಿ ತೆರೆ</string>
-  <string name="share_title_hint">ಶೀರ್ಷಿಕೆ</string>
+  <string name="share_title_hint" fuzzy="true">ಶೀರ್ಷಿಕೆ</string>
   <string name="share_description_hint">ವಿವರ</string>
   <string name="login_failed_network">ಲಾಗಿನ್ ಮಾಡಲಾಗಲಿಲ್ಲ - ನೆಟ್ವರ್ಕ್ ವೈಫಲ್ಯ</string>
-  <string name="login_failed_username">ಲಾಗಿನ್ ಮಾಡಲಾಗಲಿಲ್ಲ - ದಯವಿಟ್ಟು ನಿಮ್ಮ ಬಳಕೆದಾರ ಹೆಸರು ಪರಿಶೀಲಿಸಿ</string>
-  <string name="login_failed_password">ಲಾಗಿನ್ ಮಾಡಲಾಗಲಿಲ್ಲ - ದಯವಿಟ್ಟು ನಿಮ್ಮ ಸ೦ಕೇತದ ಪದ  ಪರಿಶೀಲಿಸಿ</string>
   <string name="login_failed_throttled">ಹಲವಾರು ವಿಫಲ ಪ್ರಯತ್ನಗಳು. ದಯವಿಟ್ಟು ಕೆಲವು ನಿಮಿಷಗಳಲ್ಲಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.</string>
   <string name="login_failed_blocked">ಕ್ಷಮಿಸಿ, ಈ ಬಳಕೆದಾರರನ್ನು ಕಾಮನ್ಸ್ನಲ್ಲಿ ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ</string>
   <string name="login_failed_2fa_needed">ನಿಮ್ಮ ಎರಡು ಅಂಶ ದೃಢೀಕರಣ ಕೋಡ್ ಅನ್ನು ನೀವು ಒದಗಿಸಬೇಕು.</string>
@@ -58,7 +57,7 @@
   <string name="refresh_button">ಪುನಶ್ಚೇತನಗೊಳಿಸು</string>
   <string name="gps_disabled">ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಜಿಪಿಎಸ್ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ. ನೀವು ಅದನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು ಬಯಸುವಿರಾ?</string>
   <string name="enable_gps">ಜಿಪಿಎಸ್ ಸಕ್ರಿಯಗೊಳಿಸು</string>
-  <string name="contributions_subtitle_zero">ಇನ್ನೂ ಯಾವುದೆ ಅಪ್ಲೋಡ್ಗಳಿಲ್ಲ</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">ಇನ್ನೂ ಯಾವುದೆ ಅಪ್ಲೋಡ್ಗಳಿಲ್ಲ</string>
   <string name="categories_activity_title">ವರ್ಗಗಳು</string>
   <string name="title_activity_settings">ವ್ಯವಸ್ಥೆಗಳು</string>
   <string name="menu_about">ಕುರಿತು</string>
@@ -70,4 +69,5 @@
   <string name="welcome_final_button_text">ಹೌದು!</string>
   <string name="detail_panel_cats_label">ವರ್ಗಗಳು</string>
   <string name="detail_panel_cats_loading">ತುಂಬಿಸಲಾಗುತ್ತಿದೆ….</string>
+  <string name="use_external_storage_summary">ಸಂಗ್ರಹಣೆ</string>
 </resources>
