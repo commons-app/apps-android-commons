@@ -135,6 +135,7 @@
         <activity
             android:name=".profile.ProfileActivity"
             android:configChanges="orientation|screenSize|keyboard"
+            android:parentActivityName=".category.CategoryDetailsActivity"
             android:label="@string/Profile" />
 
         <activity
