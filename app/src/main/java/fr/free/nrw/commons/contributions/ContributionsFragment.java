@@ -38,6 +38,7 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.upload.UploadService.ServiceCallback;
 import io.reactivex.disposables.Disposable;
 import java.util.List;
 
@@ -84,7 +85,7 @@ public class ContributionsFragment
         OnBackStackChangedListener,
         LocationUpdateListener,
     MediaDetailProvider,
-    ICampaignsView, ContributionsContract.View, Callback {
+    ICampaignsView, ContributionsContract.View, Callback , ServiceCallback {
     @Inject @Named("default_preferences") JsonKvStore store;
     @Inject NearbyController nearbyController;
     @Inject OkHttpJsonApiClient okHttpJsonApiClient;
@@ -135,6 +136,7 @@ public class ContributionsFragment
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
             uploadService = (UploadService) ((UploadService.UploadServiceLocalBinder) binder)
                     .getService();
+            uploadService.setServiceCallback(ContributionsFragment.this);
             isUploadServiceConnected = true;
         }
 
@@ -520,6 +522,7 @@ public class ContributionsFragment
 
             if (isUploadServiceConnected) {
                 if (getActivity() != null) {
+                    uploadService.setServiceCallback(null);
                     getActivity().unbindService(uploadServiceConnection);
                     isUploadServiceConnected = false;
                 }
@@ -665,6 +668,11 @@ public class ContributionsFragment
     // Getter for mediaDetailPagerFragment
     public MediaDetailPagerFragment getMediaDetailPagerFragment() {
         return mediaDetailPagerFragment;
+    }
+
+    @Override
+    public void updateUploadCount() {
+        setUploadCount();
     }
 }
 
