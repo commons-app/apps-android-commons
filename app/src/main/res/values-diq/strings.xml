@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * 1917 Ekim Devrimi
-* Abijeet Patro
 * Envlh
 * Gambollar
 * Gorizon
@@ -335,6 +334,7 @@
   <string name="no_categories_selected">Kategoriyê ke nêweçiniyê</string>
   <string name="nominate_for_deletion_done">Temam</string>
   <string name="review_thanks_yes_button_text">Eya, çıra mebo</string>
+  <string name="review_thanks_no_button_text">Resımo bahdoyên</string>
   <string name="no_notification">Beyanatên şımayê nêwendeyi çıniyê</string>
   <string name="no_read_notification">Pêhesnayışê toyê wendışi çıniyê</string>
   <string name="menu_option_read">Wendışi bıvêne</string>
@@ -343,6 +343,7 @@
   <string name="skip_image">Nê resımi raviyarnê</string>
   <string name="image_info">Melumatê resımi</string>
   <string name="delete_helper_ask_spam_blurry">Xesratın</string>
+  <string name="delete_helper_ask_spam_nonsense">Bêmena</string>
   <string name="delete_helper_ask_spam_other">Zewbi</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Fotrafi çap kerê</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">İnternet ra resimo raştameye</string>
@@ -383,4 +384,5 @@
   <string name="leaderboard_used">Gureyniyaye</string>
   <string name="leaderboard_my_rank_button_text">Rêza mı</string>
   <string name="mapbox_telemetry" fuzzy="true">Telemetreyi Devre ra vece</string>
+  <string name="license_step_title">Lisansê Medya</string>
 </resources>
