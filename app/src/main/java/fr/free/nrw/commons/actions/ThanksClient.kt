@@ -27,7 +27,7 @@ class ThanksClient @Inject constructor(
     fun thank(revisionId: Long): Observable<Boolean> {
         return try {
             service.thank(revisionId.toString(), null, csrfTokenClient.tokenBlocking, CommonsApplication.getInstance().userAgent)
-                .map { mwQueryResponse -> mwQueryResponse.successVal == 1 }
+                .map { mwThankPostResponse -> mwThankPostResponse.result.success== 1 }
         } catch (throwable: Throwable) {
             Observable.just(false)
         }
