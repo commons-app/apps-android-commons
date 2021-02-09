@@ -235,6 +235,26 @@ public class MainActivity  extends BaseActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("viewPagerCurrentItem", viewPager.getCurrentItem());
+        outState.putString("activeFragment", activeFragment.name());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        String currentFragmentName = savedInstanceState.getString("activeFragment");
+        if(currentFragmentName == ActiveFragment.CONTRIBUTIONS.name()) {
+            setTitle(getString(R.string.contributions_fragment));
+            loadFragment(ContributionsFragment.newInstance(),false);
+        }else if(currentFragmentName == ActiveFragment.NEARBY.name()) {
+            setTitle(getString(R.string.nearby_fragment));
+            loadFragment(NearbyParentFragment.newInstance(),false);
+        }else if(currentFragmentName == ActiveFragment.EXPLORE.name()) {
+            setTitle(getString(R.string.navigation_item_explore));
+            loadFragment(ExploreFragment.newInstance(),false);
+        }else if(currentFragmentName == ActiveFragment.BOOKMARK.name()) {
+            setTitle(getString(R.string.favorites));
+            loadFragment(BookmarkFragment.newInstance(),false);
+        }
     }
 
     private void initMain() {
