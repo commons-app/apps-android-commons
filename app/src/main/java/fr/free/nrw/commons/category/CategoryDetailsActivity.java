@@ -20,7 +20,7 @@ import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.explore.ViewPagerAdapter;
+import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment;
 import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment;

@@ -18,6 +18,7 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment;
 import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment;
