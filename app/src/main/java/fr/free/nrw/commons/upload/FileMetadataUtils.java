@@ -4,7 +4,7 @@ import timber.log.Timber;
 
 import static androidx.exifinterface.media.ExifInterface.TAG_ARTIST;
 import static androidx.exifinterface.media.ExifInterface.TAG_BODY_SERIAL_NUMBER;
-import static androidx.exifinterface.media.ExifInterface.TAG_CAMARA_OWNER_NAME;
+import static androidx.exifinterface.media.ExifInterface.TAG_CAMERA_OWNER_NAME;
 import static androidx.exifinterface.media.ExifInterface.TAG_COPYRIGHT;
 import static androidx.exifinterface.media.ExifInterface.TAG_GPS_ALTITUDE;
 import static androidx.exifinterface.media.ExifInterface.TAG_GPS_ALTITUDE_REF;
@@ -36,7 +36,7 @@ public class FileMetadataUtils {
         Timber.d("Retuning tags for pref:%s", pref);
         switch (pref) {
             case "Author":
-                return new String[]{TAG_ARTIST, TAG_CAMARA_OWNER_NAME};
+                return new String[]{TAG_ARTIST, TAG_CAMERA_OWNER_NAME};
             case "Copyright":
                 return new String[]{TAG_COPYRIGHT};
             case "Location":
