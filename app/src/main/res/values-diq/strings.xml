@@ -385,4 +385,5 @@
   <string name="leaderboard_my_rank_button_text">Rêza mı</string>
   <string name="mapbox_telemetry" fuzzy="true">Telemetreyi Devre ra vece</string>
   <string name="license_step_title">Lisansê Medya</string>
+  <string name="media_detail_step_title">Teferuatê medya</string>
 </resources>

@@ -114,7 +114,7 @@
   <string name="share_caption_hint">כיתוב</string>
   <string name="login_failed_network">לא ניתן להיכנס – כשל בתקשורת</string>
   <string name="login_failed_wrong_credentials">לא ניתן להיכנס לחשבון – נא לבדוק את שם המשתמש ואת הסיסמה</string>
-  <string name="login_failed_throttled">יותר מדי ניסיונות כניסה כושלים. נא לנסות שוב בעוד מספר דקות.</string>
+  <string name="login_failed_throttled">יותר מדי ניסיונות כניסה כושלים. נא לנסות שוב בעוד כמה דקות.</string>
   <string name="login_failed_blocked">סליחה, החשבון הזה חסום בוויקישיתוף</string>
   <string name="login_failed_2fa_needed">יש לספק את קוד האימות הדו־שלבי שלך.</string>
   <string name="login_failed_generic">כניסה נכשלה</string>
