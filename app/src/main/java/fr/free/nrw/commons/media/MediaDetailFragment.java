@@ -302,7 +302,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                         imageLandscape.setVisibility(VISIBLE);
                     }
                     oldWidthOfImageView = scrollView.getWidth();
+
+                    // If this is not checked app will crash with IndexOutOfBoundsException
+                    if (index < detailProvider.getTotalMediaCount()) {
                     displayMediaDetails();
+                    }
                 }
             }
         );

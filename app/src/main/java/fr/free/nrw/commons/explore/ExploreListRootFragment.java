@@ -130,7 +130,7 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
    */
   @Override
   public Media getMediaAtPosition(int i) {
-    if (listFragment != null) {
+    if (listFragment != null && i < listFragment.getTotalMediaCount()) {
       return listFragment.getMediaAtPosition(i);
     } else {
       return null;
