@@ -118,6 +118,7 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
     ((ExploreFragment)getParentFragment()).tabLayout.setVisibility(View.GONE);
     mediaDetails = new MediaDetailPagerFragment(false, true);
     mediaDetails.showImage(position);
+    ((ExploreFragment) getParentFragment()).setScroll(false);
     setFragment(mediaDetails, listFragment);
   }
 
@@ -173,6 +174,7 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
       // todo add get list fragment
       ((ExploreFragment)getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
       removeFragment(mediaDetails);
+      ((ExploreFragment) getParentFragment()).setScroll(true);
       setFragment(listFragment, mediaDetails);
     } else {
       ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
