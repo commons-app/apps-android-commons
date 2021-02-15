@@ -97,7 +97,7 @@
   <string name="share_title_hint">Titel (erforderlich)</string>
   <string name="add_caption_toast">Bitte gib einen Titel für diese Datei an</string>
   <string name="share_description_hint">Beschreibung</string>
-  <string name="share_caption_hint" fuzzy="true">Beschriftung (bis zu 255 Zeichen)</string>
+  <string name="share_caption_hint">Beschriftung</string>
   <string name="login_failed_network">Anmeldung fehlgeschlagen – Netzwerkfehler</string>
   <string name="login_failed_wrong_credentials">Anmeldung fehlgeschlagen. Bitte Benutzernamen und Passwort überprüfen.</string>
   <string name="login_failed_throttled">Zu viele erfolglose Versuche. Bitte in einigen Minuten erneut versuchen.</string>
@@ -115,7 +115,7 @@
   <string name="display_list_button">Liste</string>
   <string name="gps_disabled">GPS ist auf deinem Gerät deaktiviert. Möchtest du es aktivieren?</string>
   <string name="enable_gps">GPS aktivieren</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Noch keine hochgeladenen Dateien</string>
+  <string name="contributions_subtitle_zero">(Noch keine hochgeladenen Dateien)</string>
   <string name="categories_not_found">Die Kategorie „%1$s“ wurde nicht gefunden</string>
   <string name="depictions_not_found">Keine Wikidata Gegenstände gefunden für %1$s</string>
   <string name="categories_skip_explanation">Füge Kategorien hinzu, um deine Bilder auf Wikimedia Commons auffindbarer zu machen.\nBeginne mit der Eingabe, um Kategorien hinzuzufügen.</string>

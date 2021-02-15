@@ -34,6 +34,7 @@
     <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">Rozpoczynanie przesyłania</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Rozpoczęto %1$d przesyłanie</item>
     <item quantity="few">Rozpoczęto %1$d przesyłania</item>
@@ -88,6 +89,7 @@
   <string name="upload_failed">Nie znaleziono pliku. Spróbuj znaleźć inny.</string>
   <string name="authentication_failed">Uwierzytelnianie nie powiodło się, zaloguj się ponownie</string>
   <string name="uploading_started">Wysyłanie rozpoczęte!</string>
+  <string name="uploading_queued">Prześlij w kolejce (włączony tryb ograniczonego połączenia)</string>
   <string name="upload_completed_notification_title">Przesłano %1$s!</string>
   <string name="upload_completed_notification_text">Dotknij, aby zobaczyć przesłany plik</string>
   <string name="upload_progress_notification_title_start">Rozpoczęto przesyłanie pliku %1$s</string>
@@ -111,7 +113,7 @@
   <string name="share_title_hint">Podpis (wymagany)</string>
   <string name="add_caption_toast">Podaj podpis dla tego pliku</string>
   <string name="share_description_hint">Opis</string>
-  <string name="share_caption_hint" fuzzy="true">Podpis (limit 255 znaków)</string>
+  <string name="share_caption_hint">Podpis</string>
   <string name="login_failed_network">Nie można zalogować - błąd sieci</string>
   <string name="login_failed_wrong_credentials">Nie można się zalogować - sprawdź swoją nazwę użytkownika i hasło</string>
   <string name="login_failed_throttled">Zbyt wiele nieudanych prób zalogowania. Spróbuj ponownie za kilka minut.</string>
@@ -130,7 +132,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">GPS w twoim urządzeniu jest wyłączony. Czy chcesz go włączyć?</string>
   <string name="enable_gps">Włącz GPS</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Na razie brak przesłanych plików!</string>
+  <string name="contributions_subtitle_zero">(Nie ma jeszcze przesłanych plików)</string>
   <string name="categories_not_found">Nie znaleziono kategorii pasujących do %1$s</string>
   <string name="depictions_not_found">Nie znaleziono przedmiotów Wikidata pasujących do %1$s</string>
   <string name="no_child_classes">%1$s nie ma klas podrzędnych</string>
@@ -292,7 +294,7 @@
   <string name="error_while_cache">Błąd podczas buforowania zdjęć</string>
   <string name="title_info">Podaj krótką, opisową i unikalną nazwę, która będzie służyła jako nazwa pliku. Możesz używać prostego języka i spacji. Nie dodawaj rozszerzenia pliku.</string>
   <string name="description_info">Opisz jak najwięcej mediów: Gdzie zostało zrobione? Co to pokazuje? Jaki jest kontekst? Proszę opisać przedmioty lub osoby. Ujawnij informacje, których nie można łatwo odgadnąć, na przykład porę dnia, jeśli jest to krajobraz. Jeśli media pokazują coś niezwykłego, wyjaśnij, co sprawia, że ​​jest to niezwykłe.</string>
-  <string name="caption_info" fuzzy="true">Proszę napisać krótki opis obrazu. Pierwszy podpis zostanie użyty jako tytuł obrazu.</string>
+  <string name="caption_info">Napisz krótki opis obrazu. Pierwszy podpis zostanie użyty jako tytuł obrazu. Limit 255 znaków.</string>
   <string name="upload_image_too_dark">To zdjęcie jest zbyt ciemne, czy na pewno chcesz je załadować? Wikimedia Commons jest tylko dla zdjęć o wartości encyklopedycznej.</string>
   <string name="upload_image_blurry">To zdjęcie jest rozmazane, czy na pewno chcesz je załadować? Wikimedia Commons jest tylko dla zdjęć o wartości encyklopedycznej.</string>
   <string name="upload_problem_exist">Potencjalne problemy z tym obrazem:</string>
@@ -448,12 +450,12 @@
   <string name="storage_permission">Uprawnienie do przechowywania</string>
   <string name="write_storage_permission_rationale_for_image_share">Potrzebujemy Twojej zgody na dostęp do zewnętrznej pamięci urządzenia w celu przesyłania obrazów.</string>
   <string name="nearby_notification_dismiss_message">Nie zobaczysz już najbliższego miejsca, które potrzebuje zdjęć. Możesz jednak ponownie włączyć to powiadomienie w Ustawieniach, jeśli chcesz.</string>
-  <string name="step_count" fuzzy="true">Krok %1$d z %2$d</string>
+  <string name="step_count">Krok %1$d z %2$d: %3$s</string>
   <string name="image_in_set_label">Obraz %1$d w zestawie</string>
   <string name="next">Następny</string>
   <string name="previous">Poprzedni</string>
   <string name="submit">Prześlij</string>
-  <string name="upload_title_duplicate" fuzzy="true">Plik o nazwie pliku %1$s już istnieje. Czy na pewno chcesz kontynuować?</string>
+  <string name="upload_title_duplicate">Istnieje plik o nazwie %1$s. Na pewno chcesz kontynuować?\n\nUwaga: odpowiedni przyrostek zostanie automatycznie dodany do nazwy pliku.</string>
   <string name="map_application_missing">W twoim urządzeniu nie znaleziono kompatybilnej aplikacji mapowej. Zainstaluj aplikację mapową, aby korzystać z tej funkcji.</string>
   <string name="navigation_item_bookmarks">Zakładki</string>
   <string name="title_activity_bookmarks">Zakładki</string>
@@ -667,16 +669,32 @@
   <string name="leaderboard_column_count">Licznik</string>
   <string name="setting_avatar_dialog_title">Ustaw jako awatar w rankingu</string>
   <string name="setting_avatar_dialog_message">Konfigurowanie awataru, proszę czekać</string>
+  <string name="avatar_set_successfully">Zestaw awatarów</string>
   <string name="avatar_set_unsuccessfully">Wystąpił błąd podczas konfiguracji awataru. Spróbuj ponownie.</string>
   <string name="menu_set_avatar">Ustaw awatar</string>
   <string name="leaderboard_yearly">Rocznie</string>
   <string name="leaderboard_weekly">Tygodniowo</string>
   <string name="leaderboard_all_time">Całość</string>
+  <string name="leaderboard_upload">Prześlij</string>
   <string name="leaderboard_nearby">W pobliżu</string>
-  <string name="mapbox_telemetry" fuzzy="true">Wypisz się z telemetrii</string>
+  <string name="leaderboard_used">Użyj</string>
+  <string name="mapbox_telemetry">Telemetria Mapbox</string>
   <string name="telemetry_opt_out_summary">Wysyłaj anonimowe dane o lokalizacji i wykorzystywaniu danych do Mapboxa, gdy używasz funkcji „W pobliżu”</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Ulepsz tę mapę&lt;/a&gt;</string>
+  <string name="limited_connection_enabled">Tryb ograniczonego połączenia włączony!</string>
+  <string name="limited_connection_disabled">Tryb ograniczonego połączenia wyłączony. Przesyłanie oczekujące zostanie teraz wznowione.</string>
+  <string name="limited_connection">Ograniczone połączenie</string>
   <string name="statistics_quality">Obrazy wysokiej jakości</string>
   <string name="quality_images_info">Obrazy wysokiej jakości to diagramy lub fotografie, które spełniają określone standardy dotyczące jakości (które w większości są ściśle techniczne) i są wartościowymi materiałami dla projektów Wikimedii.</string>
   <string name="resuming_upload">Wznawianie przesyłania…</string>
   <string name="pausing_upload">Wstrzymywanie przesyłania…</string>
+  <string name="limited_connection_explanation">Włączyłeś tryb ograniczonego połączenia. Wszystkie operacje przesyłania są wstrzymane i zostaną wznowione po wyłączeniu tego trybu.</string>
+  <string name="limited_connection_is_on">ryb ograniczonego połączenia jest włączony.</string>
+  <string name="media_details_tooltip">Napisz krótki podpis z napisem, co pokazuje Twoje zdjęcie. W opisie powiedz, co sprawia, że obraz jest interesujący lub typowy lub rzadki, i wyjaśnij kontekst, widoczny lub nie. Użyj dokładnej terminologii, jak to tylko możliwe.</string>
+  <string name="depicts_tooltip">Znajdź i zaznacz wszystkie koncepcje, które przedstawia ten obraz. Podaj jak najwięcej szczegółów. Jeśli obraz przedstawia wiele elementów, wybierz je wszystkie w rozsądnym zakresie. Nie wybieraj tagów ogólnych, jeśli dostępne są bardziej szczegółowe tagi.</string>
+  <string name="categories_tooltip">Wybierz odpowiednie kategorie. W przeciwieństwie do przedstawień kategorie są dostępne tylko w języku angielskim.</string>
+  <string name="license_tooltip">Commons umożliwia ponowne użycie i dostosowanie Twoich zdjęć przez wszystkich. Czy chcesz zrzec się wszelkich praw? Czy chcesz, aby Ci przypisywano? Czy chcesz, aby adaptacje korzystały z tej samej licencji?</string>
+  <string name="depicts_step_title">Przedstawia</string>
+  <string name="license_step_title">Licencja dla mediów</string>
+  <string name="media_detail_step_title">Szczegóły mediów</string>
 </resources>
