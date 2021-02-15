@@ -118,10 +118,10 @@ dependencies {
 
     // Support libraries
     implementation "com.google.android.material:material:1.1.0-alpha04"
-    implementation "androidx.browser:browser:1.0.0"
+    implementation "androidx.browser:browser:1.3.0"
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation "androidx.exifinterface:exifinterface:1.0.0"
+    implementation "androidx.exifinterface:exifinterface:1.3.2"
     implementation "androidx.core:core-ktx:$CORE_KTX_VERSION"
     implementation "androidx.multidex:multidex:2.0.1"
 
