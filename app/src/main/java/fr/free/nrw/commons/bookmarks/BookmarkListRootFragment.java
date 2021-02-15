@@ -181,13 +181,14 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
   }
 
   public void backPressed() {
-    //check medaiDetailPage fragment is not null then we check medaiDetail.is Visible or not to avoid NullPointerException
+    //check mediaDetailPage fragment is not null then we check mediaDetail.is Visible or not to avoid NullPointerException
     if(mediaDetails!=null) {
       if (mediaDetails.isVisible()) {
         // todo add get list fragment
         ((BookmarkFragment) getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
         ArrayList<Integer> removed=mediaDetails.getRemovedItems();
         removeFragment(mediaDetails);
+        ((BookmarkFragment) getParentFragment()).setScroll(true);
         setFragment(listFragment, mediaDetails);
         ((MainActivity) getActivity()).showTabs();
         if(listFragment instanceof BookmarkPicturesFragment){
@@ -217,6 +218,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
     container.setVisibility(View.VISIBLE);
     ((BookmarkFragment)getParentFragment()).tabLayout.setVisibility(View.GONE);
     mediaDetails = new MediaDetailPagerFragment(false, true);
+    ((BookmarkFragment) getParentFragment()).setScroll(false);
     setFragment(mediaDetails, listFragment);
     mediaDetails.showImage(position);
   }

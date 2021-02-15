@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
@@ -30,10 +29,14 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
     @BindView(R.id.viewPager)
-    ViewPager viewPager;
+    ParentViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
     private ExploreListRootFragment featuredRootFragment;
     private ExploreListRootFragment mobileRootFragment;
+
+    public void setScroll(boolean canScroll){
+        viewPager.setCanScroll(canScroll);
+    }
 
     @NonNull
     public static ExploreFragment newInstance() {

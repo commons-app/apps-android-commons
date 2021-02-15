@@ -4,35 +4,30 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
-import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.explore.ParentViewPager;
 import fr.free.nrw.commons.theme.BaseActivity;
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 
 public class BookmarkFragment extends CommonsDaggerSupportFragment {
 
   private FragmentManager supportFragmentManager;
   private BookmarksPagerAdapter adapter;
   @BindView(R.id.viewPagerBookmarks)
-  ViewPager viewPager;
+  ParentViewPager viewPager;
   @BindView(R.id.tab_layout)
   TabLayout tabLayout;
   @BindView(R.id.fragmentContainer)
@@ -46,6 +41,10 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment {
     BookmarkFragment fragment = new BookmarkFragment();
     fragment.setRetainInstance(true);
     return fragment;
+  }
+
+  public void setScroll(boolean canScroll){
+    viewPager.setCanScroll(canScroll);
   }
 
   @Override
