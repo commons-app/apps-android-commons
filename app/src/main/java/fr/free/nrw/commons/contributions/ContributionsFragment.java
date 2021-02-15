@@ -572,6 +572,9 @@ public class ContributionsFragment
         if (store.getBoolean("displayCampaignsCardView", true)) {
             presenter.getCampaigns();
         }
+        else{
+            campaignView.setVisibility(View.GONE);
+        }
     }
 
     @Override public void showMessage(String message) {
@@ -579,9 +582,7 @@ public class ContributionsFragment
     }
 
     @Override public void showCampaigns(Campaign campaign) {
-        if (campaign != null) {
             campaignView.setCampaign(campaign);
-        }
     }
 
     @Override public void onDestroyView() {
