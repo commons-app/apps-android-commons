@@ -45,7 +45,6 @@ class LeaderboardActivityTest {
     @Test
     fun testScrollToRankFromAbove() {
         Espresso.onView(ViewMatchers.withId(R.id.drawer_layout)).perform(DrawerActions.open())
-        Espresso.onView(ViewMatchers.withId(R.id.user_icon)).perform(ViewActions.click())
 
         Espresso.onView(ViewMatchers.withId(R.id.tab_layout)).perform(ViewActions.click())
         Espresso.onView(ViewMatchers.withId(R.id.tab_layout)).perform(selectTabAtPosition(1))
@@ -58,7 +57,6 @@ class LeaderboardActivityTest {
     @Test
     fun testScrollToRankFromBelow() {
         Espresso.onView(ViewMatchers.withId(R.id.drawer_layout)).perform(DrawerActions.open())
-        Espresso.onView(ViewMatchers.withId(R.id.user_icon)).perform(ViewActions.click())
 
         Espresso.onView(ViewMatchers.withId(R.id.tab_layout)).perform(ViewActions.click())
         Espresso.onView(ViewMatchers.withId(R.id.tab_layout)).perform(selectTabAtPosition(1))
