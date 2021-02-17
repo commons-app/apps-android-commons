@@ -4,20 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build.VERSION_CODES;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.Nullable;
-
+import androidx.exifinterface.media.ExifInterface;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.nio.file.attribute.FileTime;
 import java.util.Date;
 
 import fr.free.nrw.commons.upload.FileUtils;
@@ -129,27 +123,12 @@ public class UploadableFile implements Parcelable {
      */
     private DateTimeWithSource getDateTime() {
         try {
-            /**
-             * fetch the last modified date of the selected file.
-             */
-                Date lastModDate= new Date(file.lastModified());
-            /**
-             * if android version is greater than 8.0 then
-             * we can get the creation Time of the file.
-             */
-                if(android.os.Build.VERSION.SDK_INT >= VERSION_CODES.O){
-                    Path path= Paths.get(file.getAbsolutePath());
-                    BasicFileAttributes attr= Files.readAttributes(path,BasicFileAttributes.class);
-                    FileTime last=attr.creationTime();
-                    if(last!=null) {
-                        return new DateTimeWithSource(last.toMillis(),
-                            DateTimeWithSource.EXIF_SOURCE);
-                    }
-                }
-                if(lastModDate!=null){
-                        return new DateTimeWithSource(lastModDate.getTime(),
-                            DateTimeWithSource.EXIF_SOURCE);
-                }
+            ExifInterface exif = new ExifInterface(file.getAbsolutePath());
+                @SuppressLint("RestrictedApi") Long dateTime = exif.getDateTime();
+                if(dateTime != null){
+                    Date date = new Date(dateTime);
+                    return new DateTimeWithSource(date, DateTimeWithSource.EXIF_SOURCE);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
