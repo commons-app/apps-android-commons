@@ -235,7 +235,9 @@ public class MainActivity  extends BaseActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("viewPagerCurrentItem", viewPager.getCurrentItem());
-        outState.putString("activeFragment", activeFragment.name());
+        if (activeFragment != null) {
+            outState.putString("activeFragment", activeFragment.name());
+        }
     }
 
     @Override
