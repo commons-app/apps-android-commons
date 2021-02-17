@@ -6,6 +6,6 @@
 <resources>
   <string name="crash_dialog_title">Commons has crashed! 🙁</string>
   <string name="crash_dialog_text">Oops. Something went wrong! 😐</string>
-  <string name="crash_dialog_comment_prompt">Tell us what you were doing, then share it via email to us. wE Will help us fix it!</string>
-  <string name="crash_dialog_ok_toast">ThankS!</string>
+  <string name="crash_dialog_comment_prompt">Tell us what you were doing, then share it via email to us.Will help us fix it!</string>
+  <string name="crash_dialog_ok_toast">Thanks!</string>
 </resources>
