@@ -16,6 +16,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.VectorDrawable;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Html;
@@ -351,7 +352,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                             .zoom(ZOOM_LEVEL) // Same zoom level
                             .build();
                     mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
-                } else {
+                }
+                else if(locationManager.isGPSProviderEnabled()||locationManager.isNetworkProviderEnabled()){
+                    locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
+                    locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
+                    setProgressBarVisibility(true);
+                }
+                else {
                     Toast.makeText(getContext(), getString(R.string.nearby_location_not_available), Toast.LENGTH_LONG).show();
                 }
                 presenter.onMapReady();
