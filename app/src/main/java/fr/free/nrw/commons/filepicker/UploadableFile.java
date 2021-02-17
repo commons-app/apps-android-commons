@@ -80,11 +80,11 @@ public class UploadableFile implements Parcelable {
      */
     @Nullable
     public DateTimeWithSource getFileCreatedDate(Context context) {
-        DateTimeWithSource dateTime = getDateTime();
-        if (dateTime == null) {
+        DateTimeWithSource dateTimeFromExif = getDateTimeFromExif();
+        if (dateTimeFromExif == null) {
             return getFileCreatedDateFromCP(context);
         } else {
-            return dateTime;
+            return dateTimeFromExif;
         }
     }
 
@@ -117,11 +117,11 @@ public class UploadableFile implements Parcelable {
     }
 
     /**
-     * Get filePath creation date from uri
+     * Get filePath creation date from uri from EXIF
      *
      * @return
      */
-    private DateTimeWithSource getDateTime() {
+    private DateTimeWithSource getDateTimeFromExif() {
         try {
             ExifInterface exif = new ExifInterface(file.getAbsolutePath());
                 @SuppressLint("RestrictedApi") Long dateTime = exif.getDateTime();
