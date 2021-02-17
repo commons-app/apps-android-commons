@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -47,7 +48,7 @@ public class CategoryDetailsActivity extends BaseActivity
     @BindView(R.id.mediaContainer) FrameLayout mediaContainer;
     @BindView(R.id.tab_layout) TabLayout tabLayout;
     @BindView(R.id.viewPager) ViewPager viewPager;
-
+    @BindView(R.id.toolbar) Toolbar toolbar;
     ViewPagerAdapter viewPagerAdapter;
 
     @Override
@@ -60,6 +61,7 @@ public class CategoryDetailsActivity extends BaseActivity
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setOffscreenPageLimit(2);
         tabLayout.setupWithViewPager(viewPager);
+        setSupportActionBar(toolbar);
         setTabs();
         setPageTitle();
     }
