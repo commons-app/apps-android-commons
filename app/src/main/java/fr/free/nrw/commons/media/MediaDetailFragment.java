@@ -263,7 +263,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             authorLayout.setVisibility(GONE);
         }
 
-        if(applicationKvStore.getBoolean("login_skipped") == true){
+        if(applicationKvStore.getBoolean("login_skipped")){
             delete.setVisibility(GONE);
         }
 
