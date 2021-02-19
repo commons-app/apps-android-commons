@@ -64,11 +64,13 @@ public class NotificationActivity extends BaseActivity {
     private NotificationWorkerFragment mNotificationWorkerFragment;
     private NotificatinAdapter adapter;
     private List<Notification> notificationList;
+    private boolean isRead;
     MenuItem notificationMenuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        isRead=getIntent().getStringExtra("title").equals("read");
         setContentView(R.layout.activity_notification);
         ButterKnife.bind(this);
         mNotificationWorkerFragment = (NotificationWorkerFragment) getFragmentManager()
@@ -87,6 +89,9 @@ public class NotificationActivity extends BaseActivity {
 
     @SuppressLint("CheckResult")
     public void removeNotification(Notification notification) {
+        if(isRead) {
+            return;
+        }
         Disposable disposable = Observable.defer((Callable<ObservableSource<Boolean>>)
                 () -> controller.markAsRead(notification))
                 .subscribeOn(Schedulers.io())
@@ -126,7 +131,7 @@ public class NotificationActivity extends BaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration itemDecor = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecor);
-        if (getIntent().getStringExtra("title").equals("read")) {
+        if (isRead) {
             refresh(true);
         } else {
             refresh(false);
@@ -240,7 +245,7 @@ public class NotificationActivity extends BaseActivity {
 
     private void setPageTitle() {
         if (getSupportActionBar() != null) {
-            if (getIntent().getStringExtra("title").equals("read")) {
+            if (isRead) {
                 getSupportActionBar().setTitle(R.string.read_notifications);
             } else {
                 getSupportActionBar().setTitle(R.string.notifications);
@@ -249,7 +254,7 @@ public class NotificationActivity extends BaseActivity {
     }
 
     private void setEmptyView() {
-        if (getIntent().getStringExtra("title").equals("read")) {
+        if (isRead) {
             noNotificationText.setText(R.string.no_read_notification);
         }else {
             noNotificationText.setText(R.string.no_notification);
@@ -257,7 +262,7 @@ public class NotificationActivity extends BaseActivity {
     }
 
     private void setMenuItemTitle() {
-        if (getIntent().getStringExtra("title").equals("read")) {
+        if (isRead) {
             notificationMenuItem.setTitle(R.string.menu_option_unread);
 
         }else {
