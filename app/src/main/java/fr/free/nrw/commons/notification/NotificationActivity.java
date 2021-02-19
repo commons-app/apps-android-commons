@@ -64,8 +64,11 @@ public class NotificationActivity extends BaseActivity {
     private NotificationWorkerFragment mNotificationWorkerFragment;
     private NotificatinAdapter adapter;
     private List<Notification> notificationList;
-    private boolean isRead;
     MenuItem notificationMenuItem;
+    /**
+     * Boolean isRead is true if this notification activity is for read section of notification.
+     */
+    private boolean isRead;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,16 @@ public class NotificationActivity extends BaseActivity {
         return true;
     }
 
+    /**
+     * If this is unread section of the notifications, removeNotification method
+     *  Marks the notification as read,
+     *  Removes the notification from unread,
+     *  Displays the Snackbar.
+     *
+     * Otherwise returns (read section).
+     *
+     * @param notification
+     */
     @SuppressLint("CheckResult")
     public void removeNotification(Notification notification) {
         if (isRead) {
