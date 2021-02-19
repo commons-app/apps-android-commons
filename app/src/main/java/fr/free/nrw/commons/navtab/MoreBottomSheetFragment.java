@@ -26,11 +26,13 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
 
 public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
@@ -40,6 +42,11 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
     @BindView(R.id.more_profile)
     TextView moreProfile;
 
+    @BindView((R.id.more_peer_review)) TextView morePeerReview;
+
+    @Inject @Named("default_preferences")
+    JsonKvStore store;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater,
@@ -47,6 +54,9 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
         super.onCreateView(inflater, container, savedInstanceState);
         final View view = inflater.inflate(R.layout.fragment_more_bottom_sheet, container, false);
         ButterKnife.bind(this, view);
+        if(store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED)){
+            morePeerReview.setVisibility(View.GONE);
+        }
         setUserName();
         return view;
     }
