@@ -70,7 +70,7 @@ public class NotificationActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        isRead=getIntent().getStringExtra("title").equals("read");
+        isRead = getIntent().getStringExtra("title").equals("read");
         setContentView(R.layout.activity_notification);
         ButterKnife.bind(this);
         mNotificationWorkerFragment = (NotificationWorkerFragment) getFragmentManager()
@@ -89,7 +89,7 @@ public class NotificationActivity extends BaseActivity {
 
     @SuppressLint("CheckResult")
     public void removeNotification(Notification notification) {
-        if(isRead) {
+        if (isRead) {
             return;
         }
         Disposable disposable = Observable.defer((Callable<ObservableSource<Boolean>>)
