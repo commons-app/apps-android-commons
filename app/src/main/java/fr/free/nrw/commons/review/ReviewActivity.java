@@ -55,7 +55,11 @@ public class ReviewActivity extends BaseActivity {
     ReviewHelper reviewHelper;
     @Inject
     DeleteHelper deleteHelper;
-    private ReviewImageFragment reviewImageFragment;
+    /**
+     * Represent fragment for ReviewImage
+     * Use to call some methods of ReviewImage fragment
+     */
+     private ReviewImageFragment reviewImageFragment;
 
     final String SAVED_MEDIA = "saved_media";
     private Media media;
