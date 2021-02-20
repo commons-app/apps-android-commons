@@ -138,7 +138,8 @@ public class PermissionUtils {
                         activity.getString(rationaleMessage),
                         activity.getString(android.R.string.ok),
                         activity.getString(android.R.string.cancel),
-                        token::continuePermissionRequest, token::cancelPermissionRequest);
+                        token::continuePermissionRequest, token::cancelPermissionRequest,
+                        null,false);
                 }
             })
             .check();
