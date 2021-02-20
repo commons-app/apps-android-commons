@@ -431,6 +431,7 @@ public class ContributionsFragment
             showNearbyCardPermissionRationale();
         });
 
+        //notification cards should only be seen on contributions list, not in media details
         if(mediaDetailPagerFragment == null){
             if (store.getBoolean("displayNearbyCardView", true)) {
                 checkPermissionsAndShowNearbyCardView();
