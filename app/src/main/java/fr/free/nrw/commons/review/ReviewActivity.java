@@ -99,7 +99,6 @@ public class ReviewActivity extends BaseActivity {
 
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
         reviewPager.setAdapter(reviewPagerAdapter);
-        reviewPager.setOffscreenPageLimit(2);
         pagerIndicator.setViewPager(reviewPager);
         progressBar.setVisibility(View.VISIBLE);
 
@@ -114,7 +113,7 @@ public class ReviewActivity extends BaseActivity {
         }
 
         btnSkipImage.setOnClickListener(view -> {
-            reviewImageFragment=getInstanceOfReviewImageFragment();
+            reviewImageFragment = getInstanceOfReviewImageFragment();
             reviewImageFragment.disableButtons();
             runRandomizer();
         });
@@ -144,7 +143,7 @@ public class ReviewActivity extends BaseActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(media -> {
-                    reviewImageFragment=getInstanceOfReviewImageFragment();
+                    reviewImageFragment = getInstanceOfReviewImageFragment();
                     reviewImageFragment.disableButtons();
                     updateImage(media);
                 }));
@@ -172,7 +171,7 @@ public class ReviewActivity extends BaseActivity {
                     String caption = String.format(getString(R.string.review_is_uploaded_by), fileName, revision.getUser());
                     imageCaption.setText(caption);
                     progressBar.setVisibility(View.GONE);
-                    reviewImageFragment=getInstanceOfReviewImageFragment();
+                    reviewImageFragment = getInstanceOfReviewImageFragment();
                     reviewImageFragment.enableButtons();
                 }));
         reviewPager.setCurrentItem(0);
@@ -232,8 +231,8 @@ public class ReviewActivity extends BaseActivity {
     }
 
     public ReviewImageFragment getInstanceOfReviewImageFragment(){
-        int pos=reviewPager.getCurrentItem();
-        reviewImageFragment= (ReviewImageFragment) reviewPagerAdapter.instantiateItem(reviewPager,pos);
+        int currentItemOfReviewPager = reviewPager.getCurrentItem();
+        reviewImageFragment = (ReviewImageFragment) reviewPagerAdapter.instantiateItem(reviewPager,currentItemOfReviewPager);
         return reviewImageFragment;
     }
 }
