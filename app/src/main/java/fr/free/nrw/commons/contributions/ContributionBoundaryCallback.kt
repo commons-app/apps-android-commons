@@ -27,7 +27,8 @@ class ContributionBoundaryCallback @Inject constructor(
      * network
      */
     override fun onZeroItemsLoaded() {
-        fetchContributions()
+        if (sessionManager.userName != null)
+            fetchContributions()
     }
 
     /**
@@ -54,7 +55,7 @@ class ContributionBoundaryCallback @Inject constructor(
             mediaClient.getMediaListForUser(sessionManager.userName!!)
                 .map { mediaList ->
                     mediaList.map {
-                        Contribution(media=it, state=Contribution.STATE_COMPLETED)
+                        Contribution(media = it, state = Contribution.STATE_COMPLETED)
                     }
                 }
                 .subscribeOn(ioThreadScheduler)
