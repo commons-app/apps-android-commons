@@ -37,6 +37,9 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment {
 
   @Inject
   ContributionController controller;
+  /**
+   * To check if the user is loggedIn or not.
+   */
   @Inject
   @Named("default_preferences")
   public
