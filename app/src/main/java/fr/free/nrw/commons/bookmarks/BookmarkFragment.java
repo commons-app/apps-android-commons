@@ -14,6 +14,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.ParentViewPager;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.theme.BaseActivity;
 import javax.inject.Inject;
 
@@ -21,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
+import javax.inject.Named;
 
 public class BookmarkFragment extends CommonsDaggerSupportFragment {
 
@@ -35,6 +37,10 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment {
 
   @Inject
   ContributionController controller;
+  @Inject
+  @Named("default_preferences")
+  public
+  JsonKvStore applicationKvStore;
 
   @NonNull
   public static BookmarkFragment newInstance() {
@@ -65,11 +71,25 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment {
     // reference to the Fragment from FragmentManager, using findFragmentById()
     supportFragmentManager = getChildFragmentManager();
 
-    adapter = new BookmarksPagerAdapter(supportFragmentManager, getContext());
+    adapter = new BookmarksPagerAdapter(supportFragmentManager, getContext(),
+                                        applicationKvStore.getBoolean("login_skipped"));
     viewPager.setAdapter(adapter);
     tabLayout.setupWithViewPager(viewPager);
+    setupTabLayout();
     return view;
   }
+
+  /**
+   * This method sets up the tab layout.
+   * If the adapter has only one element it sets the visibility of tabLayout to gone.
+   */
+  public void setupTabLayout(){
+    tabLayout.setVisibility(View.VISIBLE);
+    if(adapter.getCount()==1){
+      tabLayout.setVisibility(View.GONE);
+    }
+  }
+
 
   public void onBackPressed() {
     ((BookmarkListRootFragment) (adapter.getItem(tabLayout.getSelectedTabPosition())))

@@ -19,7 +19,7 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
 
     private ArrayList<BookmarkPages> pages;
 
-    BookmarksPagerAdapter(FragmentManager fm, Context context) {
+    BookmarksPagerAdapter(FragmentManager fm, Context context,boolean onlyPictures) {
         super(fm);
         pages = new ArrayList<>();
         Bundle picturesBundle = new Bundle();
@@ -28,13 +28,15 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
         pages.add(new BookmarkPages(
                 new BookmarkListRootFragment(picturesBundle, this),
                 context.getString(R.string.title_page_bookmarks_pictures)));
-
-        Bundle locationBundle = new Bundle();
-        locationBundle.putString("categoryName", context.getString(R.string.title_page_bookmarks_locations));
-        locationBundle.putInt("order", 1);
-        pages.add(new BookmarkPages(
-            new BookmarkListRootFragment(locationBundle, this),
-            context.getString(R.string.title_page_bookmarks_locations)));
+        if (!onlyPictures) {
+            Bundle locationBundle = new Bundle();
+            locationBundle.putString("categoryName",
+                context.getString(R.string.title_page_bookmarks_locations));
+            locationBundle.putInt("order", 1);
+            pages.add(new BookmarkPages(
+                new BookmarkListRootFragment(locationBundle, this),
+                context.getString(R.string.title_page_bookmarks_locations)));
+        }
         notifyDataSetChanged();
     }
 
