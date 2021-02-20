@@ -11,6 +11,9 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
     private ReviewImageFragment[] reviewImageFragments;
 
+    /**
+     * this function return the instance of ReviewviewPage current item
+     */
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         return super.instantiateItem(container, position);

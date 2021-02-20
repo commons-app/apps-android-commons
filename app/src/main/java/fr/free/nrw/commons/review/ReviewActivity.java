@@ -234,6 +234,9 @@ public class ReviewActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * this function return the instance of  reviewImageFragment
+     */
     public ReviewImageFragment getInstanceOfReviewImageFragment(){
         int currentItemOfReviewPager = reviewPager.getCurrentItem();
         reviewImageFragment = (ReviewImageFragment) reviewPagerAdapter.instantiateItem(reviewPager, currentItemOfReviewPager);
