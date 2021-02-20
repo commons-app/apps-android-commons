@@ -232,7 +232,7 @@ public class ReviewActivity extends BaseActivity {
 
     public ReviewImageFragment getInstanceOfReviewImageFragment(){
         int currentItemOfReviewPager = reviewPager.getCurrentItem();
-        reviewImageFragment = (ReviewImageFragment) reviewPagerAdapter.instantiateItem(reviewPager,currentItemOfReviewPager);
+        reviewImageFragment = (ReviewImageFragment) reviewPagerAdapter.instantiateItem(reviewPager, currentItemOfReviewPager);
         return reviewImageFragment;
     }
 }
