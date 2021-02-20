@@ -19,6 +19,13 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
 
     private ArrayList<BookmarkPages> pages;
 
+    /**
+     * Default Constructor
+     * @param fm
+     * @param context
+     * @param onlyPictures is true if the fragment requires only BookmarkPictureFragment
+     *                     (i.e. when no user is logged in).
+     */
     BookmarksPagerAdapter(FragmentManager fm, Context context,boolean onlyPictures) {
         super(fm);
         pages = new ArrayList<>();
@@ -29,6 +36,7 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
                 new BookmarkListRootFragment(picturesBundle, this),
                 context.getString(R.string.title_page_bookmarks_pictures)));
         if (!onlyPictures) {
+            // if onlyPictures is false we also add the location fragment.
             Bundle locationBundle = new Bundle();
             locationBundle.putString("categoryName",
                 context.getString(R.string.title_page_bookmarks_locations));
