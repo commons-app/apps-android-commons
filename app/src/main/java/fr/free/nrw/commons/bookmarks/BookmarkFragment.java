@@ -88,7 +88,7 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment {
    */
   public void setupTabLayout(){
     tabLayout.setVisibility(View.VISIBLE);
-    if(adapter.getCount()==1){
+    if (adapter.getCount() == 1) {
       tabLayout.setVisibility(View.GONE);
     }
   }
