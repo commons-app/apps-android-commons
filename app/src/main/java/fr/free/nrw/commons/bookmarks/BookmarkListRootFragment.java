@@ -185,7 +185,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
     if(mediaDetails!=null) {
       if (mediaDetails.isVisible()) {
         // todo add get list fragment
-        ((BookmarkFragment) getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
+        ((BookmarkFragment) getParentFragment()).setupTabLayout();
         ArrayList<Integer> removed=mediaDetails.getRemovedItems();
         removeFragment(mediaDetails);
         ((BookmarkFragment) getParentFragment()).setScroll(true);

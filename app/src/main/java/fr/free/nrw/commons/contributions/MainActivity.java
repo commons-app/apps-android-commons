@@ -113,7 +113,7 @@ public class MainActivity  extends BaseActivity
             onSupportNavigateUp();
         });
         if (applicationKvStore.getBoolean("login_skipped") == true) {
-            setTitle(getString(R.string.explore_tab_title_mobile));
+            setTitle(getString(R.string.navigation_item_explore));
             setUpLoggedOutPager();
         } else {
             if(savedInstanceState == null){

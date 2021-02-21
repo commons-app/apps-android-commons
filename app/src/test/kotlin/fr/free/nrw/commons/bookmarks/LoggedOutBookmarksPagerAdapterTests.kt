@@ -8,7 +8,10 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-class BookmarksPagerAdapterTests {
+/**
+ * BookmarksPagerAdapter when user is not loggedIn.
+ */
+class LoggedOutBookmarksPagerAdapterTests {
     @Mock
     private lateinit var bookmarksPagerAdapter: BookmarksPagerAdapter
 
@@ -18,28 +21,44 @@ class BookmarksPagerAdapterTests {
     @Mock
     private lateinit var context: Context
 
+    /**
+     * Setup the adapter
+     */
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        bookmarksPagerAdapter = BookmarksPagerAdapter(fragmentManager, context, false)
+        bookmarksPagerAdapter = BookmarksPagerAdapter(fragmentManager, context, true)
     }
 
+    /**
+     * checkNotNull
+     */
     @Test
     fun checkNotNull() {
         Assert.assertNotNull(bookmarksPagerAdapter)
     }
 
+    /**
+     * getItems
+     * Logged out bookmark adapter has just one item.
+     */
     @Test
     fun testGetItem() {
         bookmarksPagerAdapter.getItem(0)
-        bookmarksPagerAdapter.getItem(1)
     }
 
+    /**
+     * itemCount
+     * Logged out bookmark adapter has just one item.
+     */
     @Test
     fun testGetCount() {
-        Assert.assertEquals(bookmarksPagerAdapter.count, 2)
+        Assert.assertEquals(bookmarksPagerAdapter.count, 1)
     }
 
+    /**
+     * getTitle.
+     */
     @Test
     fun testGetPageTitle() {
         bookmarksPagerAdapter.getPageTitle(0)
