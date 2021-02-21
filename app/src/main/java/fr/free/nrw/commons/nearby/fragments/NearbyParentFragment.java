@@ -206,6 +206,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private boolean isMapBoxReady;
     private boolean isPermissionDenied;
+    private boolean recenterToUserLocation;
     private MapboxMap mapBox;
     IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
     private Marker currentLocationMarker;
@@ -260,6 +261,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         addCheckBoxCallback();
         presenter.attachView(this);
         isPermissionDenied = false;
+        recenterToUserLocation = false;
         initRvNearbyList();
         initThemePreferences();
         mapView.onCreate(savedInstanceState);
@@ -343,12 +345,20 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void performMapReadyActions() {
         if (((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY && isMapBoxReady) {
-            checkPermissionsAndPerformAction();
+            if(!applicationKvStore.getBoolean("NotDisplayLocationPermissionAlertBox", false) ||
+                PermissionUtils.hasPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)){
+                checkPermissionsAndPerformAction();
+            }else{
+                isPermissionDenied = true;
+                addOnCameraMoveListener();
+            }
         }
     }
 
     private void locationPermissionGranted() {
         isPermissionDenied = false;
+
+        applicationKvStore.putBoolean("NotDisplayLocationPermissionAlertBox", false);
         lastKnownLocation = locationManager.getLastLocation();
         fr.free.nrw.commons.location.LatLng target=lastFocusLocation;
         if(null==lastFocusLocation){
@@ -381,7 +391,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         presenter.attachView(this);
         registerNetworkReceiver();
         if (isResumed() && ((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY) {
-            if(!isPermissionDenied){
+            if(!isPermissionDenied && !applicationKvStore.getBoolean("NotDisplayLocationPermissionAlertBox", false)){
                 startTheMap();
             }else{
                 startMapWithoutPermission();
@@ -392,15 +402,17 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void startMapWithoutPermission() {
         mapView.onStart();
 
+        applicationKvStore.putBoolean("NotDisplayLocationPermissionAlertBox", true);
         lastKnownLocation = new fr.free.nrw.commons.location.LatLng(51.50550,-0.07520,1f);
         final CameraPosition position = new CameraPosition.Builder()
             .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation))
             .zoom(ZOOM_OUT)
             .build();
-        mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
-
+        if(mapBox != null){
+            mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
+            addOnCameraMoveListener();
+        }
         presenter.onMapReady();
-        addOnCameraMoveListener();
         removeCurrentLocationMarker();
     }
 
@@ -790,10 +802,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void populatePlaces(final fr.free.nrw.commons.location.LatLng curlatLng) {
-        if (curlatLng.equals(lastFocusLocation)|| lastFocusLocation==null) { // Means we are checking around current location
+        if (curlatLng.equals(lastFocusLocation) || lastFocusLocation == null || recenterToUserLocation) { // Means we are checking around current location
             populatePlacesForCurrentLocation(lastKnownLocation, curlatLng);
         } else {
             populatePlacesForAnotherLocation(lastKnownLocation, curlatLng);
+        }
+        if(recenterToUserLocation) {
+            recenterToUserLocation = false;
         }
     }
 
@@ -1329,6 +1344,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void recenterMap(final fr.free.nrw.commons.location.LatLng curLatLng) {
         if (isPermissionDenied || curLatLng == null) {
+            recenterToUserLocation = true;
             checkPermissionsAndPerformAction();
             if (!isPermissionDenied && !(locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled())) {
                 showLocationOffDialog();
