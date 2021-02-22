@@ -450,9 +450,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * a) Creates bottom sheet behaviours from bottom sheets, sets initial states and visibility
      * b) Gets the touch event on the map to perform following actions:
      *      collapse fab if fab is open.
-     *      collapse bottom sheet if bottom sheet details are expanded.
-     *      hide the bottom sheet details if bottom sheet details are collapsed.
-     *      hide the list bottom sheet if listBottomSheet is open.
+     *      if bottom sheet details are expanded .
+     *      if bottom sheet details are collapsed then hide the bottom sheet details.
+     *      if listBottomSheet is open then hide the list bottom sheet.
      */
     @SuppressLint("ClickableViewAccessibility")
     private void initBottomSheets() {
@@ -470,21 +470,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if(event.getAction() == MotionEvent.ACTION_DOWN) {
                 if (isFABsExpanded) {
                     collapseFABs(true);
-                    return true;
-                }
-                if (bottomSheetDetailsBehavior.getState()
+                }else if (bottomSheetDetailsBehavior.getState()
                     == BottomSheetBehavior.STATE_EXPANDED) {
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    return true;
-                }
-                if (bottomSheetDetailsBehavior.getState()
+                }else if (bottomSheetDetailsBehavior.getState()
                     == BottomSheetBehavior.STATE_COLLAPSED) {
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                    return true;
-                }
-                if (isListBottomSheetExpanded()) {
+                }else if (isListBottomSheetExpanded()) {
                     bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                    return true;
                 }
             }
             return false;
