@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -24,6 +25,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
 import androidx.recyclerview.widget.RecyclerView.ItemAnimator;
+import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -154,6 +156,29 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
             rvContributionsList.scrollToPosition(0);//Newly upload items are always added to the top
           }
         }
+      }
+    });
+
+    //Fab close on touch outside (Scrolling or taping on item triggers this action).
+    rvContributionsList.addOnItemTouchListener(new OnItemTouchListener() {
+      @Override
+      public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+        if (e.getAction() == MotionEvent.ACTION_DOWN) {
+          if (isFabOpen) {
+            animateFAB(isFabOpen);
+          }
+        }
+        return false;
+      }
+
+      @Override
+      public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+
+      }
+
+      @Override
+      public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
       }
     });
   }
