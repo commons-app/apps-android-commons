@@ -23,6 +23,7 @@
             android:id="@+id/toolbar_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?attr/mainBackground"
             app:titleTextColor="?attr/toolbar_text_color"
             app:subtitleTextColor="?attr/toolbar_text_color"
           >
