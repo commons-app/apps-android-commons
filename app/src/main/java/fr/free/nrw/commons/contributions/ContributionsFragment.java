@@ -431,19 +431,22 @@ public class ContributionsFragment
             showNearbyCardPermissionRationale();
         });
 
-        if (store.getBoolean("displayNearbyCardView", true)) {
-            checkPermissionsAndShowNearbyCardView();
-            if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
-                nearbyNotificationCardView.setVisibility(View.VISIBLE);
+        // Notification cards should only be seen on contributions list, not in media details
+        if (mediaDetailPagerFragment == null) {
+            if (store.getBoolean("displayNearbyCardView", true)) {
+                checkPermissionsAndShowNearbyCardView();
+                if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+                    nearbyNotificationCardView.setVisibility(View.VISIBLE);
+                }
+
+            } else {
+                // Hide nearby notification card view if related shared preferences is false
+                nearbyNotificationCardView.setVisibility(View.GONE);
             }
 
-        } else {
-            // Hide nearby notification card view if related shared preferences is false
-            nearbyNotificationCardView.setVisibility(View.GONE);
+            setNotificationCount();
+            fetchCampaigns();
         }
-
-        setNotificationCount();
-        fetchCampaigns();
     }
 
     private void checkPermissionsAndShowNearbyCardView() {
