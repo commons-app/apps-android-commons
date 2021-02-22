@@ -52,7 +52,6 @@
   <string name="menu_nearby">Naibi</string>
   <string name="provider_contributions">Min huuchschüürd datein</string>
   <string name="menu_share">Skaft</string>
-  <string name="menu_open_in_browser">Uun browser uunwise</string>
   <string name="share_title_hint" fuzzy="true">Tiitel</string>
   <string name="share_description_hint">Beskriiwang</string>
   <string name="login_failed_network">Bi\'t uunmeldin as wat skiaf gingen - näätwerk-feeler</string>

@@ -80,7 +80,6 @@
   <string name="menu_nearby">Sekitar</string>
   <string name="provider_contributions">Unggahan saya</string>
   <string name="menu_share">Bagikan</string>
-  <string name="menu_open_in_browser">Buka di Peramban</string>
   <string name="share_title_hint">Takarir (Wajib)</string>
   <string name="add_caption_toast">Berikan takarir untuk berkas ini</string>
   <string name="share_description_hint">Deskripsi</string>

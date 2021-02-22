@@ -119,7 +119,7 @@
   <string name="menu_nearby">Поблизости</string>
   <string name="provider_contributions">Мои загрузки</string>
   <string name="menu_share">Поделиться</string>
-  <string name="menu_open_in_browser">Открыть в браузере</string>
+  <string name="menu_view_file_page">Просмотреть страницу файла</string>
   <string name="share_title_hint">Подпись (Обязательна)</string>
   <string name="add_caption_toast">Пожалуйста, укажите название этого файла</string>
   <string name="share_description_hint">Описание</string>

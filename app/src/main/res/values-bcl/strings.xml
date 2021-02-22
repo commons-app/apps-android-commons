@@ -65,7 +65,6 @@
   <string name="menu_nearby">Harani sana</string>
   <string name="provider_contributions">An sakuyang mga ikinarga</string>
   <string name="menu_share">Iheras</string>
-  <string name="menu_open_in_browser">Tanawon sa Kilyawan</string>
   <string name="share_title_hint" fuzzy="true">Titulo (Kaipuhan)</string>
   <string name="share_description_hint">Deskripsyon</string>
   <string name="login_failed_network">Dae makadagos sa paglaog - minapalya an kabitanahan</string>

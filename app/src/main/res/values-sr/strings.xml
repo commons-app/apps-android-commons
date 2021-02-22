@@ -79,7 +79,6 @@
   <string name="menu_nearby">У близини</string>
   <string name="provider_contributions">Моја отпремања</string>
   <string name="menu_share">Дели</string>
-  <string name="menu_open_in_browser">Прикажи у прегледачу</string>
   <string name="share_title_hint" fuzzy="true">Наслов (обавезно)</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Пријава није могућа — грешка на мрежи</string>

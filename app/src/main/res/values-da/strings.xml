@@ -68,7 +68,6 @@
   <string name="menu_nearby">I nærhenden</string>
   <string name="provider_contributions">Mine uploads</string>
   <string name="menu_share">Del</string>
-  <string name="menu_open_in_browser">Åbn i browser</string>
   <string name="share_title_hint">Billedtekst (Påkrævet)</string>
   <string name="share_description_hint">Beskrivelse</string>
   <string name="login_failed_network">Kan ikke logge på - netværksfejl</string>

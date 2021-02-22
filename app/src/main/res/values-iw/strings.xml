@@ -107,7 +107,7 @@
   <string name="menu_nearby">בסביבה</string>
   <string name="provider_contributions">ההעלאות שלי</string>
   <string name="menu_share">שיתוף</string>
-  <string name="menu_open_in_browser">הצגה בדפדפן</string>
+  <string name="menu_view_file_page">הצגת דף קובץ</string>
   <string name="share_title_hint">כיתוב (נדרש)</string>
   <string name="add_caption_toast">נא לרשום כיתוב לקובץ הזה</string>
   <string name="share_description_hint">תיאור</string>

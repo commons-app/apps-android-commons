@@ -79,7 +79,6 @@
   <string name="menu_nearby">In de buurt</string>
   <string name="provider_contributions">Mijn uploads</string>
   <string name="menu_share">Delen</string>
-  <string name="menu_open_in_browser">In browser bekijken</string>
   <string name="share_title_hint" fuzzy="true">Titel (verplicht)</string>
   <string name="share_description_hint">Beschrijving</string>
   <string name="login_failed_network">Aanmelden niet mogelijk. Er is een probleem met het netwerk</string>

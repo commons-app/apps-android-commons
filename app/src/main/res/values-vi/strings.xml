@@ -74,7 +74,6 @@
   <string name="menu_nearby">Lân cận</string>
   <string name="provider_contributions">Tập tin tôi tải lên</string>
   <string name="menu_share">Chia sẻ</string>
-  <string name="menu_open_in_browser">Mở trong Trình duyệt</string>
   <string name="share_title_hint" fuzzy="true">Tựa đề (Yêu cầu)</string>
   <string name="share_description_hint">Miêu tả</string>
   <string name="login_failed_network">Không thể đăng nhập – có lỗi mạng</string>

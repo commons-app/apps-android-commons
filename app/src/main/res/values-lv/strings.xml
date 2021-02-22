@@ -39,7 +39,6 @@
   <string name="menu_nearby">Tuvumā</string>
   <string name="provider_contributions">Manas augsupielades</string>
   <string name="menu_share">Dalīties</string>
-  <string name="menu_open_in_browser">Skatīt pārlūkprogrammā</string>
   <string name="share_title_hint" fuzzy="true">Nosaukums (obligāts)</string>
   <string name="share_description_hint">Apraksts</string>
   <string name="login_failed_blocked">Atvainojiet, šis lietotājs tika bloķēts uz Commons</string>

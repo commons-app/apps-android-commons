@@ -40,7 +40,6 @@
   <string name="menu_nearby">அருகிலுள்ள</string>
   <string name="provider_contributions">எனது பதிவேற்றங்கள்</string>
   <string name="menu_share">பகிர்</string>
-  <string name="menu_open_in_browser">உலாவியில் திற</string>
   <string name="share_title_hint" fuzzy="true">தலைப்பு (தேவை)</string>
   <string name="share_description_hint">விளக்கம்</string>
   <string name="login_failed_generic">புகுபதிகை தோல்வியடைந்தது</string>

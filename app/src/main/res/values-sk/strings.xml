@@ -81,7 +81,6 @@
   <string name="menu_nearby">V okolí</string>
   <string name="provider_contributions">Moje obrázky</string>
   <string name="menu_share">Zdieľať</string>
-  <string name="menu_open_in_browser">Otvoriť v prehliadači</string>
   <string name="share_title_hint">Popisok (povinné)</string>
   <string name="add_caption_toast">Prosím, pridajte popisok pre tento súbor</string>
   <string name="share_description_hint">Opis</string>

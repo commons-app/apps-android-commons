@@ -56,7 +56,6 @@
   <string name="menu_nearby">A proximitat</string>
   <string name="provider_contributions">Mos telecargaments</string>
   <string name="menu_share">Partejar</string>
-  <string name="menu_open_in_browser">Afichar dins lo navigador</string>
   <string name="share_title_hint" fuzzy="true">Títol</string>
   <string name="share_description_hint">Descripcion</string>
   <string name="login_failed_network">Impossible de se connectar — pana de ret</string>

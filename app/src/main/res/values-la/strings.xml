@@ -31,7 +31,6 @@
   <string name="menu_from_camera">Photographare</string>
   <string name="provider_contributions">Contributiones meae</string>
   <string name="menu_share">Communicare</string>
-  <string name="menu_open_in_browser">In navigatro spectare</string>
   <string name="share_title_hint" fuzzy="true">Titulus</string>
   <string name="share_description_hint">Descriptio</string>
   <string name="login_failed_generic">Ratio aperiri non potuit</string>

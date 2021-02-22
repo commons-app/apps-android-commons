@@ -94,7 +94,6 @@
   <string name="menu_nearby">در نزدیکی</string>
   <string name="provider_contributions">بارگذاری‌های من</string>
   <string name="menu_share">به اشتراک‌گذاشتن</string>
-  <string name="menu_open_in_browser">مشاهده در مرورگر</string>
   <string name="share_title_hint">شرح مختصر (الزامی)</string>
   <string name="add_caption_toast">لطفاً شرح مختصری برای این پرونده بنویسید</string>
   <string name="share_description_hint">توضیحات</string>

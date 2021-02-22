@@ -31,7 +31,6 @@
   <string name="menu_from_camera">Foto maken</string>
   <string name="provider_contributions">De bestaanden die\'k op-estuurd hebbe</string>
   <string name="menu_share">Delen</string>
-  <string name="menu_open_in_browser">In webkieker bekieken</string>
   <string name="share_title_hint" fuzzy="true">Titel</string>
   <string name="share_description_hint">Beschrieving</string>
   <string name="login_failed_network">Kon niet anmelden. Der is n probleem mit t netwark</string>

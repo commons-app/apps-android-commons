@@ -63,7 +63,6 @@
   <string name="menu_nearby">ახლოს</string>
   <string name="provider_contributions">ჩემი ატვირთვები</string>
   <string name="menu_share">გაზიარება</string>
-  <string name="menu_open_in_browser">ბრაუზერში გახსნა</string>
   <string name="share_title_hint" fuzzy="true">სათაური (საჭიროა)</string>
   <string name="share_description_hint">აღწერა</string>
   <string name="login_failed_network">შესვლა ვერ ხერხდება - ქსელის შეცდომა</string>

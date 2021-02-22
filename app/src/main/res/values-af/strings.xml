@@ -70,7 +70,6 @@
   <string name="menu_nearby">Naby</string>
   <string name="provider_contributions">My oplaaie</string>
   <string name="menu_share">Deel</string>
-  <string name="menu_open_in_browser">Wys in blaaier</string>
   <string name="share_title_hint" fuzzy="true">Titel (verplig)</string>
   <string name="share_description_hint">Beskrywing</string>
   <string name="login_failed_network">Aanmelding nie moontlik - probleem met netwerk</string>

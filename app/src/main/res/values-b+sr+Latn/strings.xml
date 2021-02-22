@@ -64,7 +64,6 @@
   <string name="menu_nearby">U blizini</string>
   <string name="provider_contributions">Moja otpremanja</string>
   <string name="menu_share">Deli</string>
-  <string name="menu_open_in_browser">Prikaži u pregledaču</string>
   <string name="share_title_hint" fuzzy="true">Naslov</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Prijava nije moguća — greška na mreži</string>

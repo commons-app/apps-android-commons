@@ -56,7 +56,6 @@
   <string name="menu_nearby">{{Identical|Nearby}}</string>
   <string name="provider_contributions">Display name for user\'s contributions in the phone\'s settings sync screen.\n{{Identical|My upload}}</string>
   <string name="menu_share">{{Identical|Share}}</string>
-  <string name="menu_open_in_browser">Menu item that opens image in the browser.</string>
   <string name="share_title_hint">{{Identical|Title}}</string>
   <string name="share_description_hint">{{Identical|Description}}</string>
   <string name="login_failed_network">Error message shown to user when login can not be completed due to network issues.</string>

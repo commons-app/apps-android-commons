@@ -31,7 +31,6 @@
   <string name="menu_from_camera">Tak mynd</string>
   <string name="provider_contributions">Tað sum eg havi lagt út</string>
   <string name="menu_share">Deil</string>
-  <string name="menu_open_in_browser">Síggj í internetkaga</string>
   <string name="share_title_hint" fuzzy="true">Heiti</string>
   <string name="share_description_hint">Frágreiðing</string>
   <string name="login_failed_network">Ómøguligt at rita inn - feilur í netsambandinum</string>

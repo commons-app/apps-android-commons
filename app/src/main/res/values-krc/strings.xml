@@ -28,7 +28,6 @@
   <string name="menu_from_gallery">Галереядан</string>
   <string name="menu_from_camera">Суратха ал</string>
   <string name="provider_contributions">Джюклегенлерим</string>
-  <string name="menu_open_in_browser">Браузерде ач</string>
   <string name="share_title_hint" fuzzy="true">Башлыкъ</string>
   <string name="share_description_hint">Ачыкълау</string>
   <string name="login_failed_generic">Системагъа кириуде халат!</string>

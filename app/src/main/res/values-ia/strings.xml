@@ -31,7 +31,6 @@
   <string name="menu_from_camera">Prender photo</string>
   <string name="provider_contributions">Mi incargamentos</string>
   <string name="menu_share">Divider</string>
-  <string name="menu_open_in_browser">Vider in navigator</string>
   <string name="write_storage_permission_rationale">Permission necessari: Scriber sur immagazinage externe. Le app non pote acceder a tu camera/galeria sin isto.</string>
   <string name="use_external_storage" fuzzy="true">Usar immagazinage externe</string>
   <string name="use_external_storage_summary" fuzzy="true">Immagazinar photos prendite con le camera de tu dispositivo</string>

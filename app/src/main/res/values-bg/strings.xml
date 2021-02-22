@@ -63,7 +63,6 @@
   <string name="menu_nearby">Наблизо</string>
   <string name="provider_contributions">Моите качвания</string>
   <string name="menu_share">Споделяне</string>
-  <string name="menu_open_in_browser">Преглед в браузъра</string>
   <string name="share_title_hint">Описание (задълж.)</string>
   <string name="share_description_hint">Описание</string>
   <string name="login_failed_network">Неуспешно влизане – проблем в мрежата</string>

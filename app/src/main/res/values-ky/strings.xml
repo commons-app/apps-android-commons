@@ -49,7 +49,6 @@
   <string name="menu_from_camera">Сүрөткө тартуу</string>
   <string name="provider_contributions">Менин жүктөөлөрүм</string>
   <string name="menu_share">Бөлүшүү</string>
-  <string name="menu_open_in_browser">Браузерден ачуу</string>
   <string name="share_title_hint" fuzzy="true">Аталышы</string>
   <string name="share_description_hint">Баяндамасы</string>
   <string name="login_failed_network">Кирүүгө болбой жатат - тармакта үзгүлтүк бар</string>

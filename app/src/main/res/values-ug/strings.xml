@@ -45,7 +45,6 @@
   <string name="menu_nearby">يېقىندىكى</string>
   <string name="provider_contributions">يۈكلىگەنلىرىم</string>
   <string name="menu_share">ئورتاقلىشىش</string>
-  <string name="menu_open_in_browser">توركۆرگۈدە ئېچىڭ</string>
   <string name="share_title_hint" fuzzy="true">ماۋزۇ</string>
   <string name="add_caption_toast">بۇ ھۆججەتنىڭ ئىزاھاتىنى تەمىنلەڭ</string>
   <string name="share_description_hint">چۈشەندۈرۈش</string>

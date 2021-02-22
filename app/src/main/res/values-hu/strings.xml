@@ -88,7 +88,6 @@
   <string name="menu_nearby">Közelben</string>
   <string name="provider_contributions">Feltöltéseim</string>
   <string name="menu_share">Megosztás</string>
-  <string name="menu_open_in_browser">Megtekintés böngészőben</string>
   <string name="share_title_hint">Képaláírás (kötelező)</string>
   <string name="share_description_hint">Leírás</string>
   <string name="login_failed_network">Nem lehet bejelentkezni - hálózati hiba</string>

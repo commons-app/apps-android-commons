@@ -54,7 +54,6 @@
   <string name="menu_nearby">අවට</string>
   <string name="provider_contributions">මගේ උඩුගතකිරීම්</string>
   <string name="menu_share">හුවමාරු කරන්න</string>
-  <string name="menu_open_in_browser">ගවේෂකයෙහි විවෘත කරන්න</string>
   <string name="share_title_hint" fuzzy="true">මාතෘකාව</string>
   <string name="share_description_hint">විස්තරය</string>
   <string name="login_failed_network">පිවිසීමට නොහැකිය-ජාලය ඇනහිටීමක්</string>

@@ -78,7 +78,7 @@
   <string name="menu_nearby">Во близина</string>
   <string name="provider_contributions">Мои подигања</string>
   <string name="menu_share">Сподели</string>
-  <string name="menu_open_in_browser">Погледај во прелистувач</string>
+  <string name="menu_view_file_page">Погл. податотечната страница</string>
   <string name="share_title_hint">Опис (задолж.)</string>
   <string name="add_caption_toast">Ставете ѝ опис на податотеката</string>
   <string name="share_description_hint">Опис</string>

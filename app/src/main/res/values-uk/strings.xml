@@ -101,7 +101,6 @@
   <string name="menu_nearby">Поблизу</string>
   <string name="provider_contributions">Мої завантаження</string>
   <string name="menu_share">Поширити</string>
-  <string name="menu_open_in_browser">Відкрити у браузері</string>
   <string name="share_title_hint">Підпис (обов\'язково)</string>
   <string name="add_caption_toast">Будь ласка, вкажіть підпис цьому файлу</string>
   <string name="share_description_hint">Опис</string>

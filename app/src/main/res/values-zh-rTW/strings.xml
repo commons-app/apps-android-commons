@@ -90,7 +90,7 @@
   <string name="menu_nearby">附近</string>
   <string name="provider_contributions">我的上傳</string>
   <string name="menu_share">分享</string>
-  <string name="menu_open_in_browser">於瀏覽器檢視</string>
+  <string name="menu_view_file_page">檢視檔案頁面</string>
   <string name="share_title_hint">說明（需要）</string>
   <string name="add_caption_toast">請提供此檔案的說明</string>
   <string name="share_description_hint">描述</string>

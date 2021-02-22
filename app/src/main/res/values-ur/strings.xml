@@ -62,7 +62,6 @@
   <string name="menu_nearby">قریبی</string>
   <string name="provider_contributions">میرے اپلوڈ کردہ</string>
   <string name="menu_share">شیئر</string>
-  <string name="menu_open_in_browser">براؤزر میں کھولیں</string>
   <string name="share_title_hint" fuzzy="true">عنوان</string>
   <string name="share_description_hint">وضاحت</string>
   <string name="login_failed_network">لاگ ان ہونے میں ناکام - نیٹ ورک ناکامی</string>

@@ -109,7 +109,6 @@
   <string name="menu_nearby">W pobliżu</string>
   <string name="provider_contributions">Wysłane przeze mnie pliki</string>
   <string name="menu_share">Udostępnij</string>
-  <string name="menu_open_in_browser">Zobacz w przeglądarce</string>
   <string name="share_title_hint">Podpis (wymagany)</string>
   <string name="add_caption_toast">Podaj podpis dla tego pliku</string>
   <string name="share_description_hint">Opis</string>

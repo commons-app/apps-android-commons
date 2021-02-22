@@ -29,7 +29,6 @@
   <string name="menu_from_gallery">Агалереиа аҟынтәи</string>
   <string name="menu_from_camera">Афото ҭыхтәуп</string>
   <string name="provider_contributions">Сара сҭагаламҭақәа</string>
-  <string name="menu_open_in_browser">Иаарттәуп абраузер аҟны</string>
   <string name="share_title_hint" fuzzy="true">Ахьӡ</string>
   <string name="share_description_hint">Ахҳәаа</string>
   <string name="login_failed_generic">Асистемахь аҭалара агха!</string>

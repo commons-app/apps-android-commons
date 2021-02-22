@@ -52,7 +52,6 @@
   <string name="menu_nearby">কাষৰীয়া</string>
   <string name="provider_contributions">মোৰ আপল\'ডসমূহ</string>
   <string name="menu_share">শ্বেয়াৰ কৰক</string>
-  <string name="menu_open_in_browser">ব্ৰাউজাৰত চাওক</string>
   <string name="share_title_hint" fuzzy="true">শীৰ্ষক (প্ৰয়োজনীয়)</string>
   <string name="share_description_hint">বিৱৰণ</string>
   <string name="login_failed_network">প্ৰৱেশ ব্যৰ্থ হৈছে - নে\'টৱৰ্ক সমস্যা</string>

@@ -76,7 +76,6 @@
   <string name="menu_nearby">A prop</string>
   <string name="provider_contributions">Les meves càrregues</string>
   <string name="menu_share">Comparteix</string>
-  <string name="menu_open_in_browser">Mostra al navegador</string>
   <string name="share_title_hint">Llegenda (obligatori)</string>
   <string name="share_description_hint">Descripció</string>
   <string name="login_failed_network">No s\'ha pogut iniciar la sessió – error de xarxa</string>

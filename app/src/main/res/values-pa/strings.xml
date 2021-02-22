@@ -54,7 +54,6 @@
   <string name="menu_nearby">ਨੇੜੇ-ਤੇੜੇ</string>
   <string name="provider_contributions">ਮੇਰੇ ਅੱਪਲੋਡ</string>
   <string name="menu_share">ਸਾਂਝਾ ਕਰੋ</string>
-  <string name="menu_open_in_browser">ਬਰਾਊਜ਼ਰ ਵਿਚ ਵੇਖੋ</string>
   <string name="share_title_hint" fuzzy="true">ਸਿਰਲੇਖ</string>
   <string name="share_description_hint">ਵੇਰਵਾ</string>
   <string name="login_failed_network">ਦਾਖ਼ਲਾ ਨਹੀਂ ਹੋ ਰਿਹਾ - ਨੈੱਟਵਰਕ ਫੇਲ੍ਹ ਹੋਇਆ ਹੈ</string>

@@ -71,7 +71,6 @@
   <string name="menu_nearby">ใกล้เคียง</string>
   <string name="provider_contributions">การอัปโหลดของฉัน</string>
   <string name="menu_share">แชร์</string>
-  <string name="menu_open_in_browser">ดูในเบราว์เซอร์</string>
   <string name="share_title_hint">คำบรรยาย (จำเป็น)</string>
   <string name="share_description_hint">คำอธิบาย</string>
   <string name="share_caption_hint" fuzzy="true">คำอธิบายภาพ (จำกัดที่ 255 อักขระ)</string>

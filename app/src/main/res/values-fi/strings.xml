@@ -85,7 +85,6 @@
   <string name="menu_nearby">Lähistöllä</string>
   <string name="provider_contributions">Omat tallennukset</string>
   <string name="menu_share">Jaa</string>
-  <string name="menu_open_in_browser">Näytä selaimessa</string>
   <string name="share_title_hint">Kuvateksti (vaaditaan)</string>
   <string name="add_caption_toast">Anna kuvateksti tälle tiedostolle</string>
   <string name="share_description_hint">Kuvaus</string>

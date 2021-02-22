@@ -82,7 +82,6 @@
   <string name="menu_nearby">I nærheten</string>
   <string name="provider_contributions">Mine opplastinger</string>
   <string name="menu_share">Del</string>
-  <string name="menu_open_in_browser">Vis i nettleser</string>
   <string name="share_title_hint" fuzzy="true">Tittel (påkrevd)</string>
   <string name="share_description_hint">Beskrivelse</string>
   <string name="login_failed_network">Innlogging feilet - nettverksproblem</string>

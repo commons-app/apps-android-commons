@@ -69,7 +69,6 @@
   <string name="menu_nearby">Í nágrenninu</string>
   <string name="provider_contributions">Innsendu skrárnar mínar</string>
   <string name="menu_share">Deila</string>
-  <string name="menu_open_in_browser">Skoða í vafra</string>
   <string name="share_title_hint" fuzzy="true">Titill (krafist)</string>
   <string name="share_description_hint">Lýsing</string>
   <string name="login_failed_network">Innskráning mistókst - bilun í neti</string>

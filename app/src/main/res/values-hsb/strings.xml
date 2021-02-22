@@ -34,7 +34,6 @@
   <string name="menu_from_camera">Fotografować</string>
   <string name="provider_contributions">Moje nahraća</string>
   <string name="menu_share">Dźělić</string>
-  <string name="menu_open_in_browser">We wobhladowaku pokazać</string>
   <string name="share_title_hint" fuzzy="true">Titul</string>
   <string name="share_description_hint">Wopisanje</string>
   <string name="login_failed_network">Přizjewjenje je so njeporadźiło - syćowy zmylk</string>

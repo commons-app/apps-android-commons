@@ -75,7 +75,6 @@
   <string name="menu_nearby">చుట్టుపక్కల</string>
   <string name="provider_contributions">నా ఎక్కింపులు</string>
   <string name="menu_share">పంచుకోండి</string>
-  <string name="menu_open_in_browser">విహారిణిలో చూపు</string>
   <string name="share_title_hint">శీర్షిక (తప్పనిసరి)</string>
   <string name="add_caption_toast">ఈ ఫైలుకు ఒక శీర్షిక ఇవ్వండి</string>
   <string name="share_description_hint">వివరణ</string>

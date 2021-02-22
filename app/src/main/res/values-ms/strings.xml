@@ -45,7 +45,7 @@
   <string name="menu_from_camera">Ambil gambar</string>
   <string name="provider_contributions">Muatan naik saya</string>
   <string name="menu_share">Kongsi</string>
-  <string name="menu_open_in_browser">Lihat dalam Pelayar</string>
+  <string name="menu_view_file_page">Lihat laman fail</string>
   <string name="share_title_hint" fuzzy="true">Tajuk</string>
   <string name="share_description_hint">Keterangan</string>
   <string name="share_caption_hint">Kapsyen</string>

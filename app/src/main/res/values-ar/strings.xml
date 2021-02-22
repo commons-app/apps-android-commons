@@ -116,7 +116,6 @@
   <string name="menu_nearby">بالقرب من هنا</string>
   <string name="provider_contributions">مرفوعاتي</string>
   <string name="menu_share">انشرها</string>
-  <string name="menu_open_in_browser">افتح في المتصفح</string>
   <string name="share_title_hint">العنوان (مطلوب)</string>
   <string name="add_caption_toast">يُرجَى تقديم عنوان لهذا الملف</string>
   <string name="share_description_hint">الوصف</string>

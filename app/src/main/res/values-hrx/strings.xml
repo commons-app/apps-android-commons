@@ -32,7 +32,6 @@
   <string name="menu_from_camera">Foto schiesse</string>
   <string name="provider_contributions">Meine hochgeladne Dateie</string>
   <string name="menu_share">Vertele</string>
-  <string name="menu_open_in_browser">Im Browser oonzeiche</string>
   <string name="share_title_hint" fuzzy="true">Titel</string>
   <string name="share_description_hint">Beschreibung</string>
   <string name="login_failed_network">Oonmeldung fehlgeschlooht – Netzwerrekfehler</string>

@@ -38,7 +38,6 @@
   <string name="menu_nearby">نژدې</string>
   <string name="provider_contributions">زما پورته کېدنې</string>
   <string name="menu_share">شريکول</string>
-  <string name="menu_open_in_browser">په کتنمل کې کتل</string>
   <string name="share_title_hint" fuzzy="true">سرليک</string>
   <string name="share_description_hint">څرگندونه</string>
   <string name="login_failed_network">د ننوتلو توان نلري - د شبکې ناکامي</string>

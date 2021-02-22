@@ -40,7 +40,6 @@
   <string name="menu_nearby">ಹತ್ತಿರದ</string>
   <string name="provider_contributions">ನನ್ನ ನಕಲೇರಿಕೆಗಳು</string>
   <string name="menu_share">ಹಂಚು</string>
-  <string name="menu_open_in_browser">ಬ್ರೌಸರ್‌ನಲ್ಲಿ ತೆರೆ</string>
   <string name="share_title_hint" fuzzy="true">ಶೀರ್ಷಿಕೆ</string>
   <string name="share_description_hint">ವಿವರ</string>
   <string name="login_failed_network">ಲಾಗಿನ್ ಮಾಡಲಾಗಲಿಲ್ಲ - ನೆಟ್ವರ್ಕ್ ವೈಫಲ್ಯ</string>

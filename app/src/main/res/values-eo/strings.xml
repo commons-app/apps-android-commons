@@ -78,7 +78,6 @@
   <string name="menu_nearby">Apuda</string>
   <string name="provider_contributions">Miaj alŝutoj</string>
   <string name="menu_share">Konigi</string>
-  <string name="menu_open_in_browser">Vidi en retumilo</string>
   <string name="share_title_hint" fuzzy="true">Titolo (deviga)</string>
   <string name="share_description_hint">Priskribo</string>
   <string name="login_failed_network">Ne eblas ensaluti. Estas problemo pri la loka reto.</string>

@@ -61,7 +61,6 @@
   <string name="menu_nearby">အနီးအနား</string>
   <string name="provider_contributions">မိမိ တင်ထားသည်များ</string>
   <string name="menu_share">မျှဝေ</string>
-  <string name="menu_open_in_browser">ဘရောက်ဆာတွင် ကြည့်ရန်</string>
   <string name="share_title_hint" fuzzy="true">ခေါင်းစဉ် (လိုအပ်သည်)</string>
   <string name="share_description_hint">ဖော်ပြချက်</string>
   <string name="login_failed_network">လော့အင် မဝင်နိုင်ပါ - ကွန်ရက် အမှား</string>

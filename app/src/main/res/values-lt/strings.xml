@@ -64,7 +64,6 @@
   <string name="menu_nearby">Netoliese</string>
   <string name="provider_contributions">Mano įkėlimai</string>
   <string name="menu_share">Dalintis</string>
-  <string name="menu_open_in_browser">Atidaryti naršyklėje</string>
   <string name="share_title_hint" fuzzy="true">Pavadinimas</string>
   <string name="share_description_hint">Aprašymas</string>
   <string name="login_failed_network">Negalima prisijungti - tinklo klaida</string>

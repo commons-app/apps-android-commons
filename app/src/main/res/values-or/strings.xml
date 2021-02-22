@@ -32,7 +32,6 @@
   <string name="menu_from_camera">ଫଟୋଟିଏ ଉଠାନ୍ତୁ</string>
   <string name="provider_contributions">ମୋ ଅପଲୋଡ଼</string>
   <string name="menu_share">ସଭିଙ୍କୁ ଜଣାନ୍ତୁ</string>
-  <string name="menu_open_in_browser">ବ୍ରାଉଜରରେ ଦେଖନ୍ତୁ</string>
   <string name="share_title_hint" fuzzy="true">ଶିରୋନାମ</string>
   <string name="share_description_hint">ବିବରଣୀ</string>
   <string name="login_failed_network">ଲଗ ଇନ କରିବାରେ ବିଫଳ - ନେଟୱାର୍କରେ ଅସୁବିଧା</string>

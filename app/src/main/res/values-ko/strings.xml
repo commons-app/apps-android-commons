@@ -22,8 +22,7 @@
     <item quantity="one">%1$d개의 파일을 올리는 중</item>
     <item quantity="other">%1$d개의 파일을 올리는 중</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -85,7 +84,7 @@
   <string name="menu_nearby">근처</string>
   <string name="provider_contributions">내 올린 파일</string>
   <string name="menu_share">공유</string>
-  <string name="menu_open_in_browser">브라우저로 보기</string>
+  <string name="menu_view_file_page">파일 문서 보기</string>
   <string name="share_title_hint">캡션 (필수)</string>
   <string name="add_caption_toast">이 파일의 설명을 작성해 주십시오</string>
   <string name="share_description_hint">설명</string>
@@ -471,7 +470,7 @@
   <string name="check_category_edit_summary">분류 검사를 요청합니다</string>
   <string name="check_category_success_title">분류 검사 요청됨</string>
   <string name="check_category_failure_title">분류 검사 요청이 동작하지 못했습니다</string>
-  <string name="check_category_success_message" fuzzy="true">%1$s을(를) 위한 분류 검사 요청을 성공했습니다</string>
+  <string name="check_category_success_message">%1$s을(를) 위한 분류 검사를 요청했습니다</string>
   <string name="check_category_failure_message">%1$s을(를) 위한 분류 검사를 요청하지 못했습니다</string>
   <string name="check_category_toast">%1$s을(를) 위한 분류 검사를 요청합니다</string>
   <string name="nominate_for_deletion_edit_file_page">파일에 삭제 메시지를 추가합니다</string>

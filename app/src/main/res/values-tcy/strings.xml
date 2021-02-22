@@ -71,7 +71,6 @@
   <string name="menu_nearby">ಕೈತಲ್‍ದ</string>
   <string name="provider_contributions">ಎನ್ನ ದಿಂಜಯೀನಾ ವಿಚಾರೊಲು</string>
   <string name="menu_share">ಪಟ್ಟುಲೆ</string>
-  <string name="menu_open_in_browser">ಬ್ರೌಸರ್‌ಡ್ ತೂಲೆ</string>
   <string name="share_title_hint" fuzzy="true">ತರೆಬರವು (ಬೋಡಾಯಿನವು)</string>
   <string name="share_description_hint">ವಿವರಣೆ</string>
   <string name="login_failed_network">ಲಾಗಿನ್ ಅತುಜಿ - ನೆಟ್ವರ್ಕ್ ತಿಕೊಂತಿಜ್ಜಿ</string>

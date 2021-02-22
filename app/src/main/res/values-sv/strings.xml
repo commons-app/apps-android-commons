@@ -83,7 +83,6 @@
   <string name="menu_nearby">I närheten</string>
   <string name="provider_contributions">Mina uppladdningar</string>
   <string name="menu_share">Dela</string>
-  <string name="menu_open_in_browser">Visa i webbläsaren</string>
   <string name="share_title_hint">Bildtext (obligatoriskt)</string>
   <string name="add_caption_toast">Var god ange en bildtext för denna fil</string>
   <string name="share_description_hint">Beskrivning</string>

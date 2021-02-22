@@ -45,7 +45,6 @@
   <string name="menu_nearby">Yaxınlıqdakılar</string>
   <string name="provider_contributions">Yükləmələrim</string>
   <string name="menu_share">Paylaş</string>
-  <string name="menu_open_in_browser">Brauzerdə görüntülə</string>
   <string name="share_title_hint">Başlıq (Zəruri)</string>
   <string name="share_description_hint">Açıqlama</string>
   <string name="login_failed_network">Daxil olmaq olmur — şəbəkə xətası</string>

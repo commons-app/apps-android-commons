@@ -66,7 +66,6 @@
   <string name="menu_nearby">സമീപസ്ഥം</string>
   <string name="provider_contributions">എന്റെ അപ്‌ലോഡുകൾ</string>
   <string name="menu_share">പങ്ക് വെയ്ക്കുക</string>
-  <string name="menu_open_in_browser">ബ്രൗസറിൽ കാണുക</string>
   <string name="share_title_hint">അടിക്കുറിപ്പ് (നിർബന്ധം)</string>
   <string name="share_description_hint">വിവരണം</string>
   <string name="login_failed_network">പ്രവേശിക്കാനായില്ല - നെറ്റ്‌വർക്ക് പരാജയപ്പെട്ടു</string>

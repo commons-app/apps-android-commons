@@ -51,7 +51,6 @@
   <string name="menu_nearby">वरिपरिका</string>
   <string name="provider_contributions">मेरा उर्ध्वभरणहरू</string>
   <string name="menu_share">बाड्ने</string>
-  <string name="menu_open_in_browser">ब्राउजरमा हेर्ने</string>
   <string name="share_title_hint" fuzzy="true">शीर्षक (आवश्यक)</string>
   <string name="share_description_hint">वर्णन</string>
   <string name="login_failed_network">प्रवेश गर्न असमर्थ - जडान खराबी</string>

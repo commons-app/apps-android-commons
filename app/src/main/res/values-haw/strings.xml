@@ -31,7 +31,6 @@
   <string name="menu_from_camera">Paʻi kiʻi</string>
   <string name="provider_contributions">Kaʻu hoʻouka</string>
   <string name="menu_share">ʻAlo</string>
-  <string name="menu_open_in_browser">Wehe ma ka pōlamu pūnaewele</string>
   <string name="share_title_hint" fuzzy="true">Poʻo Inoa</string>
   <string name="share_description_hint">Hōʻike ʻAno</string>
   <string name="login_failed_network">Hiki ʻole ke ʻeʻe - hāʻule pūnaewele</string>

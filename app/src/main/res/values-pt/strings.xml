@@ -90,7 +90,6 @@
   <string name="menu_nearby">Nas redondezas</string>
   <string name="provider_contributions">Carregamentos</string>
   <string name="menu_share">Partilhar</string>
-  <string name="menu_open_in_browser">Ver no navegador</string>
   <string name="share_title_hint">Legenda (obrigatória)</string>
   <string name="add_caption_toast">Forneça uma legenda para este ficheiro, por favor</string>
   <string name="share_description_hint">Descrição</string>

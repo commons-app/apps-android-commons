@@ -83,7 +83,6 @@
   <string name="menu_nearby">Κοντά</string>
   <string name="provider_contributions">Οι επιφορτώσεις μου</string>
   <string name="menu_share">Κοινοποίηση</string>
-  <string name="menu_open_in_browser">Προβολή στον περιηγητή</string>
   <string name="share_title_hint" fuzzy="true">Τίτλος (Υποχρεωτικό)</string>
   <string name="share_description_hint">Περιγραφή</string>
   <string name="login_failed_network">Δεν είναι δυνατή η σύνδεση - αποτυχία του δικτύου</string>

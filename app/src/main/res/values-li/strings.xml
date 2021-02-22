@@ -59,7 +59,6 @@
   <string name="menu_nearby">Kórtbie</string>
   <string name="provider_contributions">Mien uploads</string>
   <string name="menu_share">Deil</string>
-  <string name="menu_open_in_browser">Tuin in browser</string>
   <string name="share_title_hint" fuzzy="true">Titel</string>
   <string name="share_description_hint">Besjrieving</string>
   <string name="login_failed_network">Kan zich neet aanmelde - netwirkfout</string>

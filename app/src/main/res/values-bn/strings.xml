@@ -86,7 +86,7 @@
   <string name="menu_nearby">কাছাকাছি</string>
   <string name="provider_contributions">আমার আপলোড</string>
   <string name="menu_share">বণ্টন</string>
-  <string name="menu_open_in_browser">ব্রাউজারে দেখুন</string>
+  <string name="menu_view_file_page">ফাইলের পাতাটি দেখুন</string>
   <string name="share_title_hint">ক্যাপশন (আবশ্যক)</string>
   <string name="add_caption_toast">অনুগ্রহ করে এই ফাইলটির জন্য একটি ক্যাপশন দিন</string>
   <string name="share_description_hint">বিবরণ</string>

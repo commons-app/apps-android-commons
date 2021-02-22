@@ -38,7 +38,6 @@
   <string name="menu_nearby">Наздикӣ</string>
   <string name="provider_contributions">Боргузориҳои ман</string>
   <string name="menu_share">Бо ҳам дидан</string>
-  <string name="menu_open_in_browser">Дидан дар Мурургар</string>
   <string name="share_title_hint" fuzzy="true">Унвон</string>
   <string name="share_description_hint">Тавзеҳот</string>
   <string name="login_failed_generic">Вуруд номуваффақ шуд</string>

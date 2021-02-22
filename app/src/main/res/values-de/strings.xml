@@ -93,7 +93,6 @@
   <string name="menu_nearby">In der Nähe</string>
   <string name="provider_contributions">Meine hochgeladenen Dateien</string>
   <string name="menu_share">Teilen</string>
-  <string name="menu_open_in_browser">Im Browser anzeigen</string>
   <string name="share_title_hint">Titel (erforderlich)</string>
   <string name="add_caption_toast">Bitte gib einen Titel für diese Datei an</string>
   <string name="share_description_hint">Beschreibung</string>

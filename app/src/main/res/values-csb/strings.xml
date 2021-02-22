@@ -51,7 +51,6 @@
   <string name="menu_nearby">W òkòlim</string>
   <string name="provider_contributions">Mòjé wladënczi</string>
   <string name="menu_share">Ùprzistãpni</string>
-  <string name="menu_open_in_browser">Òbôczë w przezérnikù</string>
   <string name="share_title_hint" fuzzy="true">Titel</string>
   <string name="share_description_hint">Òpisënk</string>
   <string name="login_failed_network">Ni mòże sã wlogòwac - fela sécë</string>

@@ -101,7 +101,6 @@
   <string name="menu_nearby">Cercanos</string>
   <string name="provider_contributions">Mis subidas</string>
   <string name="menu_share">Compartir</string>
-  <string name="menu_open_in_browser">Ver en el navegador</string>
   <string name="share_title_hint">Leyenda (requerido)</string>
   <string name="add_caption_toast">Por favor, proporciona un título para este archivo</string>
   <string name="share_description_hint">Descripción</string>

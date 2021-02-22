@@ -54,7 +54,6 @@
   <string name="menu_nearby">U blizini</string>
   <string name="provider_contributions">Moje postavljene datoteke</string>
   <string name="menu_share">Podijeli</string>
-  <string name="menu_open_in_browser">Vidi u pregledniku</string>
   <string name="share_title_hint" fuzzy="true">Naslov</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Ne mogu Vas prijaviti – mreža ne radi</string>

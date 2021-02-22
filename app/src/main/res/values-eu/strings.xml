@@ -73,7 +73,6 @@
   <string name="menu_nearby">Gertukoak</string>
   <string name="provider_contributions">Nire igoerak</string>
   <string name="menu_share">Partekatu</string>
-  <string name="menu_open_in_browser">Ikusi nabigatzailean</string>
   <string name="share_title_hint" fuzzy="true">Izenburua (beharrezkoa)</string>
   <string name="share_description_hint">Deskribapena</string>
   <string name="login_failed_network">Ezin izan da sartu - sarean akatsa</string>

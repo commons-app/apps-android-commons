@@ -82,7 +82,6 @@
   <string name="menu_nearby">आसपास</string>
   <string name="provider_contributions">मेरे अपलोड</string>
   <string name="menu_share">साझा करें</string>
-  <string name="menu_open_in_browser">ब्राउज़र में देखें</string>
   <string name="share_title_hint" fuzzy="true">शीर्षक (आवश्यक)</string>
   <string name="share_description_hint">विवरण</string>
   <string name="login_failed_network">प्रवेश नहीं हो रहा - नेटवर्क विफल</string>

@@ -86,7 +86,6 @@
   <string name="menu_nearby">Nelle vicinanze</string>
   <string name="provider_contributions">I miei caricamenti</string>
   <string name="menu_share">Condividi</string>
-  <string name="menu_open_in_browser">Visualizza nel browser</string>
   <string name="share_title_hint">Didascalia (obbligatoria)</string>
   <string name="add_caption_toast">Per favore, fornisci una didascalia per questo file</string>
   <string name="share_description_hint">Descrizione</string>

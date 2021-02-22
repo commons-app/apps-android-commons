@@ -55,7 +55,6 @@
   <string name="menu_nearby">דערבײ</string>
   <string name="provider_contributions">מײַנע ארויפלאדן</string>
   <string name="menu_share">טיילן</string>
-  <string name="menu_open_in_browser">באקוקן אין בלעטערער</string>
   <string name="share_title_hint" fuzzy="true">טיטל (געפֿאדערט)</string>
   <string name="share_description_hint">באַשרײַבונג</string>
   <string name="login_failed_network">נישט מעגלעך אריינלאגירן – נעצווערק פֿעלער</string>

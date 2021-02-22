@@ -76,7 +76,7 @@
   <string name="menu_nearby">Davzin</string>
   <string name="provider_contributions">Ij mè cariament</string>
   <string name="menu_share">Partagé</string>
-  <string name="menu_open_in_browser">Smon-e ant ël navigador</string>
+  <string name="menu_view_file_page">Vëdde la pàgina dl\'archivi</string>
   <string name="share_title_hint">Legenda (obligatòria)</string>
   <string name="add_caption_toast">Për piasì, ch\'a-j buta na legenda a s\'archivi</string>
   <string name="share_description_hint">Descrission</string>

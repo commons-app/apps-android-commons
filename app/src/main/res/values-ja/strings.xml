@@ -91,7 +91,6 @@
   <string name="menu_nearby">付近</string>
   <string name="provider_contributions">自分のアップロード</string>
   <string name="menu_share">共有</string>
-  <string name="menu_open_in_browser">ブラウザーで表示</string>
   <string name="share_title_hint">キャプション (必須)</string>
   <string name="add_caption_toast">キャプションを記入してください</string>
   <string name="share_description_hint">説明</string>

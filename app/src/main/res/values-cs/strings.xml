@@ -94,7 +94,6 @@
   <string name="menu_nearby">Poblíž</string>
   <string name="provider_contributions">Moje obrázky</string>
   <string name="menu_share">Sdílet</string>
-  <string name="menu_open_in_browser">Zobrazit v prohlížeči</string>
   <string name="share_title_hint">Název (povinný)</string>
   <string name="add_caption_toast">Prosím, zadejte titulek pro tento soubor</string>
   <string name="share_description_hint">Popis</string>

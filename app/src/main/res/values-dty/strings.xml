@@ -25,7 +25,6 @@
   <string name="upload_failed_notification_subtitle">तक्दाइ ट्याप अरऽ</string>
   <string name="provider_contributions">मेरा अपलोडअन</string>
   <string name="menu_share">बाँँणऽ</string>
-  <string name="menu_open_in_browser">ब्राउजर मी तकऽ</string>
   <string name="share_title_hint" fuzzy="true">शीर्षक</string>
   <string name="share_description_hint">बेलिविस्तार</string>
   <string name="login_failed_network">लगइन अद्दाइ असमर्थ - नेटवर्क असफलता</string>

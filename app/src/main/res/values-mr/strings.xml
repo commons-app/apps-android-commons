@@ -63,7 +63,6 @@
   <string name="menu_nearby">जवळपास</string>
   <string name="provider_contributions">माझी अपभारणे</string>
   <string name="menu_share">सहभाग करा</string>
-  <string name="menu_open_in_browser">न्याहाळकात उघडा</string>
   <string name="share_title_hint" fuzzy="true">शीर्षक</string>
   <string name="share_description_hint">वर्णन</string>
   <string name="login_failed_network">सनोंद प्रवेश अशक्य - नेटवर्क नाही</string>

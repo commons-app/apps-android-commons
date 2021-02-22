@@ -40,7 +40,6 @@
   <string name="menu_nearby">نیڑے</string>
   <string name="provider_contributions">میݙے اپ لوڈ</string>
   <string name="menu_share">شیئر</string>
-  <string name="menu_open_in_browser">براؤزر وچ ݙیکھو</string>
   <string name="share_title_hint" fuzzy="true">عنوان</string>
   <string name="share_description_hint">تفصیل</string>
   <string name="login_failed_generic">لاگ ان ناکام</string>
