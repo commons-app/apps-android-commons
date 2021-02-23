@@ -33,6 +33,7 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
 import static fr.free.nrw.commons.nearby.CheckBoxTriStates.CHECKED;
 import static fr.free.nrw.commons.nearby.CheckBoxTriStates.UNCHECKED;
 import static fr.free.nrw.commons.nearby.CheckBoxTriStates.UNKNOWN;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 public class NearbyParentFragmentPresenter
         implements NearbyParentFragmentContract.UserActions,
@@ -81,6 +82,12 @@ public class NearbyParentFragmentPresenter
     @Override
     public void detachView(){
         this.nearbyParentFragmentView=DUMMY;
+    }
+
+    @Override
+    public void removeNearbyPreferences(JsonKvStore applicationKvStore) {
+        Timber.d("Remove place objects");
+        applicationKvStore.remove(PLACE_OBJECT);
     }
 
     public void initializeMapOperations() {
