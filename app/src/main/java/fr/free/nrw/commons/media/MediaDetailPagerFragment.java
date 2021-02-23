@@ -305,6 +305,11 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(false)
                             .setVisible(false);
                 }
+
+                if (!sessionManager.isUserLoggedIn()) {
+                    menu.findItem(R.id.menu_set_as_avatar).setVisible(false);
+                }
+
             }
         }
     }
