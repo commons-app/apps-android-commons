@@ -27,8 +27,7 @@ class ContributionBoundaryCallback @Inject constructor(
      * network
      */
     override fun onZeroItemsLoaded() {
-        if (sessionManager.userName != null)
-            fetchContributions()
+        fetchContributions()
     }
 
     /**
@@ -51,21 +50,23 @@ class ContributionBoundaryCallback @Inject constructor(
      * Fetches contributions using the MediaWiki API
      */
     fun fetchContributions() {
-        compositeDisposable.add(
-            mediaClient.getMediaListForUser(sessionManager.userName!!)
-                .map { mediaList ->
-                    mediaList.map {
-                        Contribution(media = it, state = Contribution.STATE_COMPLETED)
+        if (sessionManager.userName != null) {
+            compositeDisposable.add(
+                mediaClient.getMediaListForUser(sessionManager.userName!!)
+                    .map { mediaList ->
+                        mediaList.map {
+                            Contribution(media = it, state = Contribution.STATE_COMPLETED)
+                        }
                     }
-                }
-                .subscribeOn(ioThreadScheduler)
-                .subscribe(::saveContributionsToDB) { error: Throwable ->
-                    Timber.e(
-                        "Failed to fetch contributions: %s",
-                        error.message
-                    )
-                }
-        )
+                    .subscribeOn(ioThreadScheduler)
+                    .subscribe(::saveContributionsToDB) { error: Throwable ->
+                        Timber.e(
+                            "Failed to fetch contributions: %s",
+                            error.message
+                        )
+                    }
+            )
+        }
     }
 
     /**
