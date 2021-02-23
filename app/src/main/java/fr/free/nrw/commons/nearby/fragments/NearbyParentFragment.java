@@ -449,8 +449,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     /**
      * a) Creates bottom sheet behaviours from bottom sheets, sets initial states and visibility
      * b) Gets the touch event on the map to perform following actions:
-     *      collapse fab if fab is open.
-     *      if bottom sheet details are expanded .
+     *      if fab is open then close fab.
+     *      if bottom sheet details are expanded then collapse bottom sheet details.
      *      if bottom sheet details are collapsed then hide the bottom sheet details.
      *      if listBottomSheet is open then hide the list bottom sheet.
      */
@@ -470,13 +470,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if(event.getAction() == MotionEvent.ACTION_DOWN) {
                 if (isFABsExpanded) {
                     collapseFABs(true);
-                }else if (bottomSheetDetailsBehavior.getState()
+                } else if (bottomSheetDetailsBehavior.getState()
                     == BottomSheetBehavior.STATE_EXPANDED) {
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                }else if (bottomSheetDetailsBehavior.getState()
+                } else if (bottomSheetDetailsBehavior.getState()
                     == BottomSheetBehavior.STATE_COLLAPSED) {
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                }else if (isListBottomSheetExpanded()) {
+                } else if (isListBottomSheetExpanded()) {
                     bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                 }
             }
