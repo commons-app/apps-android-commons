@@ -8,6 +8,7 @@ import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +29,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -445,14 +447,41 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Creates bottom sheet behaviours from bottom sheets, sets initial states and visibility
+     * a) Creates bottom sheet behaviours from bottom sheets, sets initial states and visibility
+     * b) Gets the touch event on the map to perform following actions:
+     *      if fab is open then close fab.
+     *      if bottom sheet details are expanded then collapse bottom sheet details.
+     *      if bottom sheet details are collapsed then hide the bottom sheet details.
+     *      if listBottomSheet is open then hide the list bottom sheet.
      */
+    @SuppressLint("ClickableViewAccessibility")
     private void initBottomSheets() {
         bottomSheetListBehavior = BottomSheetBehavior.from(rlBottomSheet);
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         bottomSheetDetails.setVisibility(View.VISIBLE);
         bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        mapView.setOnTouchListener((v, event) -> {
+
+            // Motion event is triggered two times on a touch event, one as ACTION_UP
+            // and other as ACTION_DOWN, we only want one trigger per touch event.
+
+            if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (isFABsExpanded) {
+                    collapseFABs(true);
+                } else if (bottomSheetDetailsBehavior.getState()
+                    == BottomSheetBehavior.STATE_EXPANDED) {
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                } else if (bottomSheetDetailsBehavior.getState()
+                    == BottomSheetBehavior.STATE_COLLAPSED) {
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                } else if (isListBottomSheetExpanded()) {
+                    bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                }
+            }
+            return false;
+        });
     }
 
     public void initNearbyFilter() {
