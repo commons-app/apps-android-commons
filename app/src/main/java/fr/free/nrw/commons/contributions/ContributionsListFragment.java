@@ -171,15 +171,30 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         return false;
       }
 
+      /**
+       * Process a touch event as part of a gesture that was claimed by returning true
+       * from a previous call to {@link #onInterceptTouchEvent}.
+       *
+       * @param rv
+       * @param e  MotionEvent describing the touch event. All coordinates are in
+       */
       @Override
       public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-
+        //required abstract method DO NOT DELETE
       }
 
+      /**
+       * Called when a child of RecyclerView does not want RecyclerView and its ancestors
+       * to intercept touch events with {@link ViewGroup#onInterceptTouchEvent(MotionEvent)}.
+       *
+       * @param disallowIntercept True if the child does not want the parent to intercept
+       *                          touch events.
+       */
       @Override
       public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
+        //required abstract method DO NOT DELETE
       }
+
     });
   }
 
