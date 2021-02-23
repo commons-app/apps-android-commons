@@ -181,7 +181,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
        * from a previous call to {@link #onInterceptTouchEvent}.
        *
        * @param rv
-       * @param e  MotionEvent describing the touch event. All coordinates are in
+       * @param e  MotionEvent describing the touch event. All coordinates are in the
+       *           RecyclerView's coordinate system.
        */
       @Override
       public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
