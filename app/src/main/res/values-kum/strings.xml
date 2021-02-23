@@ -5,6 +5,9 @@
 <resources>
   <string name="preference_category_appearance">Гёрюнюш</string>
   <string name="preference_category_general">Ортакъ</string>
+  <string name="preference_category_feedback">Герибилдирим</string>
+  <string name="preference_category_privacy">Энчилик</string>
+  <string name="preference_category_location">Макан</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Кюйлевлер</string>
   <string name="username">Къоллавчу аты</string>
@@ -12,6 +15,7 @@
   <string name="login">Гирмек</string>
   <string name="forgot_password">Чечилни унутдунгму?</string>
   <string name="signup">Къайытланмакъ</string>
+  <string name="logging_in_title">Гирив</string>
   <string name="upload_completed_notification_title">%1$s юкленген!</string>
   <string name="upload_progress_notification_title_in_progress">%1$s юкленип тура</string>
   <string name="upload_failed_notification_subtitle">Къарамакъ учун бас</string>
@@ -21,7 +25,7 @@
   <string name="menu_nearby">Ювукъда</string>
   <string name="provider_contributions">Юклевлерим</string>
   <string name="menu_share">Пайлашмакъ</string>
-  <string name="share_title_hint">Ат</string>
+  <string name="share_title_hint" fuzzy="true">Ат (борчлу)</string>
   <string name="share_description_hint">Тасвир</string>
   <string name="share_upload_button">Юклев</string>
   <string name="menu_upload_single">Юклев</string>
@@ -29,12 +33,12 @@
   <string name="refresh_button">Янгыртмакъ</string>
   <string name="display_list_button">Тизме</string>
   <string name="enable_gps">GPS ишлетмек</string>
-  <string name="contributions_subtitle_zero">Юклевлер ёкъ гьали де</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Юклевлер ёкъ гьали де</string>
   <string name="categories_activity_title">Категориялар</string>
   <string name="title_activity_settings">Кюйлевлер</string>
   <string name="title_activity_signup">Къайытланмакъ</string>
   <string name="menu_about">Тасвири</string>
-  <string name="about_credits">&lt;u&gt;Баракаллалар&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Баракаллалар&lt;/u&gt;</string>
   <string name="title_activity_about">Тасвири</string>
   <string name="menu_retry_upload">Такрарламакъ</string>
   <string name="menu_cancel_upload">Гери алмакъ</string>
@@ -54,6 +58,7 @@
   <string name="detail_panel_cats_loading">Юклев...</string>
   <string name="detail_panel_cats_none">Бир зат сайланмагъан</string>
   <string name="detail_description_empty">Тасвири ёкъ</string>
+  <string name="detail_discussion_empty">Пикирлешивлер ёкъ</string>
   <string name="menu_refresh">Янгыртмакъ</string>
   <string name="ok">OK</string>
   <string name="warning">Буварыв</string>
@@ -61,6 +66,7 @@
   <string name="no">Ёкъ</string>
   <string name="media_detail_title">Ат</string>
   <string name="media_detail_description">Тасвир</string>
+  <string name="media_detail_discussion">Пикирлешив</string>
   <string name="media_detail_author">Ясавчу</string>
   <string name="media_detail_uploaded_date">Юклев тархы</string>
   <string name="_2fa_code">2FA код</string>
@@ -78,20 +84,27 @@
   <string name="navigation_item_logout">Чыкъмакъ</string>
   <string name="navigation_item_notification">Билдиривлер</string>
   <string name="navigation_item_featured_images">Сайламлы</string>
+  <string name="navigation_item_review">Тергев</string>
   <string name="no_description_found">тасвири табылмады</string>
   <string name="nearby_info_menu_wikipedia_article">Википедия макъала</string>
   <string name="null_url">Янгылыш! Байланыв табылмады</string>
-  <string name="nearby_directions">ЯКЪЛАР</string>
-  <string name="nearby_wikipedia">ВИКИПЕДИЯ</string>
-  <string name="about_rate_us">&lt;u&gt;Къыйматла бизин&lt;/u&gt;</string>
+  <string name="navigation_item_login">Гирмек</string>
+  <string name="nearby_directions" fuzzy="true">ЯКЪЛАР</string>
+  <string name="nearby_wikipedia" fuzzy="true">ВИКИПЕДИЯ</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Къыйматла бизин&lt;/u&gt;</string>
   <string name="no_internet">Интернет гиришсиз</string>
   <string name="internet_established">Интернет гиришли</string>
   <string name="no_notifications">Билдиривлер ёкъ</string>
-  <string name="about_translate">&lt;u&gt;Таржума этмек&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Таржума этмек&lt;/u&gt;</string>
   <string name="about_translate_title">Тиллер</string>
   <string name="about_translate_cancel">Гери алыв</string>
   <string name="retry">Такрарламакъ</string>
   <string name="showcase_view_got_it_button">Тюшюндюм!</string>
   <string name="no_images_found">Гьеч сурат табылмады!</string>
   <string name="share_app_title">Уьстевню пайлашмакъ</string>
+  <string name="delete" fuzzy="true">ТАЙДЫРМАКЪ</string>
+  <string name="nominate_for_deletion_done">Гьазир</string>
+  <string name="notsure">Шекли</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">ДЮР, НЕГЕ ТЮГЮЛ</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">ГЕЛЕГЕН СУРАТ</string>
 </resources>

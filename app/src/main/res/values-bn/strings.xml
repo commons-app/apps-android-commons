@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Aftabuzzaman
 * Bellayet
 * Elias Ahmmad
@@ -15,6 +14,7 @@
 * Tauhid16
 * Titodutta
 * YahyA
+* Yahya
 * আফতাবুজ্জামান
 -->
 <resources>
@@ -86,11 +86,11 @@
   <string name="menu_nearby">কাছাকাছি</string>
   <string name="provider_contributions">আমার আপলোড</string>
   <string name="menu_share">বণ্টন</string>
-  <string name="menu_open_in_browser">ব্রাউজারে দেখুন</string>
+  <string name="menu_view_file_page">ফাইলের পাতাটি দেখুন</string>
   <string name="share_title_hint">ক্যাপশন (আবশ্যক)</string>
   <string name="add_caption_toast">অনুগ্রহ করে এই ফাইলটির জন্য একটি ক্যাপশন দিন</string>
   <string name="share_description_hint">বিবরণ</string>
-  <string name="share_caption_hint">ক্যাপশন (২৫৫ অক্ষরে সীমাবদ্ধ)</string>
+  <string name="share_caption_hint" fuzzy="true">ক্যাপশন (২৫৫ অক্ষরে সীমাবদ্ধ)</string>
   <string name="login_failed_network">প্রবেশ করা যাচ্ছে না - নেটওয়ার্ক ব্যর্থতা</string>
   <string name="login_failed_wrong_credentials">প্রবেশ করতে অক্ষম - দয়া করে আপনার ব্যবহারকারী নাম এবং পাসওয়ার্ড পরীক্ষা করুন</string>
   <string name="login_failed_throttled">খুব বেশি অসফল প্রচেষ্টা। অনুগ্রহ করে কয়েক মিনিট পরে আবারও চেষ্টা করুন।</string>
@@ -109,7 +109,7 @@
   <string name="display_list_button">তালিকা</string>
   <string name="gps_disabled">আপনার ডিভাইসে জিপিএস নিষ্ক্রিয় করা আছে। আপনি কি এটি সক্রিয় করতে চান?</string>
   <string name="enable_gps">জিপিএস সক্রিয় করুন</string>
-  <string name="contributions_subtitle_zero">এখনো কোন আপলোড নেই</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">এখনো কোন আপলোড নেই</string>
   <string name="categories_not_found">%1$s-এর সাথে মিলে এমন কোন বিষয়শ্রেণী পাওয়া যায়নি</string>
   <string name="categories_skip_explanation">উইকিমিডিয়া কমন্স থেকে আপনার মিডিয়া ফাইলটি সহজে খুঁজে পেতে বিষয়শ্রেণী যুক্ত করুন।\n\nবিষয়শ্রেণী যোগ করার জন্য টাইপিং শুরু করুন।</string>
   <string name="categories_activity_title">বিষয়শ্রেণীসমূহ</string>
@@ -329,7 +329,7 @@
   <string name="nearby_fragment">কাছাকাছি</string>
   <string name="notifications">বিজ্ঞপ্তি</string>
   <string name="list_sheet">তালিকা</string>
-  <string name="step_count">ধাপ %2$d এর %1$d</string>
+  <string name="step_count">ধাপ %2$d এর %1$d: %3$s</string>
   <string name="next">পরবর্তী</string>
   <string name="previous">পূর্ববর্তী</string>
   <string name="submit">জমা দিন</string>
@@ -376,4 +376,5 @@
   <string name="leaderboard_nearby">কাছাকাছি</string>
   <string name="leaderboard_used">ব্যবহৃত</string>
   <string name="leaderboard_my_rank_button_text">আমার স্থান</string>
+  <string name="license_step_title">মিডিয়ার লাইসেন্স</string>
 </resources>

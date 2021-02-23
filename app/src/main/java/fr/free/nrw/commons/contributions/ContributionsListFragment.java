@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -23,6 +24,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
+import androidx.recyclerview.widget.RecyclerView.ItemAnimator;
+import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,6 +36,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -132,6 +137,13 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     final GridLayoutManager layoutManager = new GridLayoutManager(getContext(),
         getSpanCount(getResources().getConfiguration().orientation));
     rvContributionsList.setLayoutManager(layoutManager);
+
+    //Setting flicker animation of recycler view to false.
+    final ItemAnimator animator = rvContributionsList.getItemAnimator();
+    if (animator instanceof SimpleItemAnimator) {
+      ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
+    }
+
     contributionsListPresenter.setup();
     contributionsListPresenter.contributionList.observe(this.getViewLifecycleOwner(), adapter::submitList);
     rvContributionsList.setAdapter(adapter);
@@ -140,9 +152,55 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
       public void onItemRangeInserted(int positionStart, int itemCount) {
         super.onItemRangeInserted(positionStart, itemCount);
         if (itemCount > 0 && positionStart == 0) {
-          rvContributionsList.scrollToPosition(0);//Newly upload items are always added to the top
+          if(adapter.getContributionForPosition(positionStart)!=null) {
+            rvContributionsList.scrollToPosition(0);//Newly upload items are always added to the top
+          }
         }
       }
+    });
+
+    //Fab close on touch outside (Scrolling or taping on item triggers this action).
+    rvContributionsList.addOnItemTouchListener(new OnItemTouchListener() {
+
+      /**
+       * Silently observe and/or take over touch events sent to the RecyclerView before
+       * they are handled by either the RecyclerView itself or its child views.
+       */
+      @Override
+      public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+        if (e.getAction() == MotionEvent.ACTION_DOWN) {
+          if (isFabOpen) {
+            animateFAB(isFabOpen);
+          }
+        }
+        return false;
+      }
+
+      /**
+       * Process a touch event as part of a gesture that was claimed by returning true
+       * from a previous call to {@link #onInterceptTouchEvent}.
+       *
+       * @param rv
+       * @param e  MotionEvent describing the touch event. All coordinates are in the
+       *           RecyclerView's coordinate system.
+       */
+      @Override
+      public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+        //required abstract method DO NOT DELETE
+      }
+
+      /**
+       * Called when a child of RecyclerView does not want RecyclerView and its ancestors
+       * to intercept touch events with {@link ViewGroup#onInterceptTouchEvent(MotionEvent)}.
+       *
+       * @param disallowIntercept True if the child does not want the parent to intercept
+       *                          touch events.
+       */
+      @Override
+      public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+        //required abstract method DO NOT DELETE
+      }
+
     });
   }
 
@@ -283,6 +341,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
    */
   @Override
   public void pauseUpload(Contribution contribution) {
+    ViewUtil.showShortToast(getContext(), R.string.pausing_upload);
     callback.pauseUpload(contribution);
   }
 
@@ -292,6 +351,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
    */
   @Override
   public void resumeUpload(Contribution contribution) {
+    ViewUtil.showShortToast(getContext(), R.string.resuming_upload);
     callback.retryUpload(contribution);
   }
 

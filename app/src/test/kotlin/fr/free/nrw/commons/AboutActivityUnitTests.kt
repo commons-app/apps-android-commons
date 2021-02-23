@@ -8,7 +8,6 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
@@ -24,16 +23,15 @@ import org.robolectric.shadows.ShadowActivity
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class AboutActivityUnitTests {
 
-    private lateinit var activity:AboutActivity
+    private lateinit var activity: AboutActivity
 
-    @Mock
     private lateinit var context: Context
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
 
-        activity = Robolectric.buildActivity(AboutActivity::class.java).get()
+        activity = Robolectric.buildActivity(AboutActivity::class.java).create().get()
 
         context = RuntimeEnvironment.application.applicationContext
     }
@@ -105,6 +103,12 @@ class AboutActivityUnitTests {
         activity.onOptionsItemSelected(menuItem)
         val shadowActivity = Shadows.shadowOf(activity)
         shadowActivity.clickMenuItem(R.id.share_app_icon)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnSupportNavigateUp() {
+        activity.onSupportNavigateUp()
     }
 
 }

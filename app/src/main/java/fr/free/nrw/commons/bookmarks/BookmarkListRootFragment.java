@@ -19,10 +19,13 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
+import fr.free.nrw.commons.category.GridViewAdapter;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.navtab.NavTab;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class BookmarkListRootFragment extends CommonsDaggerSupportFragment implements
     FragmentManager.OnBackStackChangedListener,
@@ -37,6 +40,10 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
 
   @BindView(R.id.explore_container)
   FrameLayout container;
+
+  public BookmarkListRootFragment(){
+    //empty constructor necessary otherwise crashes on recreate
+  }
 
   public BookmarkListRootFragment(Bundle bundle, BookmarksPagerAdapter bookmarksPagerAdapter) {
     String title = bundle.getString("categoryName");
@@ -65,7 +72,9 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
   @Override
   public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    setFragment(listFragment, mediaDetails);
+    if(savedInstanceState==null) {
+      setFragment(listFragment, mediaDetails);
+    }
   }
 
   public void setFragment(Fragment fragment, Fragment otherFragment) {
@@ -172,24 +181,44 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
   }
 
   public void backPressed() {
-    if (mediaDetails.isVisible()) {
-      // todo add get list fragment
-      ((BookmarkFragment)getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
-      removeFragment(mediaDetails);
-      setFragment(listFragment, mediaDetails);
-      ((MainActivity)getActivity()).showTabs();
+    //check mediaDetailPage fragment is not null then we check mediaDetail.is Visible or not to avoid NullPointerException
+    if(mediaDetails!=null) {
+      if (mediaDetails.isVisible()) {
+        // todo add get list fragment
+        ((BookmarkFragment) getParentFragment()).setupTabLayout();
+        ArrayList<Integer> removed=mediaDetails.getRemovedItems();
+        removeFragment(mediaDetails);
+        ((BookmarkFragment) getParentFragment()).setScroll(true);
+        setFragment(listFragment, mediaDetails);
+        ((MainActivity) getActivity()).showTabs();
+        if(listFragment instanceof BookmarkPicturesFragment){
+          GridViewAdapter adapter=((GridViewAdapter)((BookmarkPicturesFragment)listFragment).getAdapter());
+          Iterator i = removed.iterator();
+          while (i.hasNext()) {
+            adapter.remove(adapter.getItem((int)i.next()));
+          }
+          mediaDetails.clearRemoved();
+
+        }
+      } else {
+        moveToContributionsFragment();
+      }
     } else {
-      ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
-      ((MainActivity)getActivity()).showTabs();
+      moveToContributionsFragment();
     }
   }
 
+  void moveToContributionsFragment(){
+    ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
+    ((MainActivity) getActivity()).showTabs();
+  }
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
     Log.d("deneme8","on media clicked");
     container.setVisibility(View.VISIBLE);
     ((BookmarkFragment)getParentFragment()).tabLayout.setVisibility(View.GONE);
     mediaDetails = new MediaDetailPagerFragment(false, true);
+    ((BookmarkFragment) getParentFragment()).setScroll(false);
     setFragment(mediaDetails, listFragment);
     mediaDetails.showImage(position);
   }

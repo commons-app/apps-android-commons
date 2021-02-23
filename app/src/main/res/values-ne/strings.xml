@@ -51,7 +51,6 @@
   <string name="menu_nearby">वरिपरिका</string>
   <string name="provider_contributions">मेरा उर्ध्वभरणहरू</string>
   <string name="menu_share">बाड्ने</string>
-  <string name="menu_open_in_browser">ब्राउजरमा हेर्ने</string>
   <string name="share_title_hint" fuzzy="true">शीर्षक (आवश्यक)</string>
   <string name="share_description_hint">वर्णन</string>
   <string name="login_failed_network">प्रवेश गर्न असमर्थ - जडान खराबी</string>
@@ -71,7 +70,7 @@
   <string name="display_list_button">सूची</string>
   <string name="gps_disabled">विश्वव्यापी स्थान निर्धारण प्रणाली तपाईको उपकरणमा असक्षम छ। के तपाइ यसलाई सक्षम गर्न चाहानुहुन्छ?</string>
   <string name="enable_gps">विश्वव्यापी स्थान निर्धारण प्रणालीलाई सक्षम गर्नुहाेस्</string>
-  <string name="contributions_subtitle_zero">कुनैपनि उर्ध्वभरण छैन</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">कुनैपनि उर्ध्वभरण छैन</string>
   <string name="categories_not_found">मिल्दो वर्ग %1$s फेला परेन</string>
   <string name="categories_skip_explanation">विकिमिडिया कमन्समा आफ्नो तस्वीरहरू थप भेट्टाउने बनाउन श्रेणीहरू थप्नुहोस।\nश्रेणीहरू थप्नको लागि लेख्न सुरु गर्नुहोस्।</string>
   <string name="categories_activity_title">श्रेणीहरू</string>

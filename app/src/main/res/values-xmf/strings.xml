@@ -5,7 +5,7 @@
 -->
 <resources>
   <string name="uploads_pending_notification_indicator">%1$d {{PLURAL:%1$d|one=ფაილი იხარგუ|few=ფაილი იხარგუ}}</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="few">(%1$d)</item>
@@ -66,7 +66,6 @@
   <string name="menu_nearby">გოხოლუას</string>
   <string name="provider_contributions">ჩქიმი ეხარგუეფი</string>
   <string name="menu_share">გობჟინაფა</string>
-  <string name="menu_open_in_browser">ბრაუზერს გონწყუმა</string>
   <string name="share_title_hint" fuzzy="true">დუდჯოხო (უციო)</string>
   <string name="share_description_hint">ეჭარუა</string>
   <string name="login_failed_network">მიშულაქ ვემიხუჯინუ - რშვილიშ ჩილათა</string>
@@ -86,7 +85,7 @@
   <string name="display_list_button">ერკებული</string>
   <string name="gps_disabled">თქვან მონწყილობას GPS თიშილი რე. თახმო გოკონანო ჩართება?</string>
   <string name="enable_gps">GPS-იშ ჩართება</string>
-  <string name="contributions_subtitle_zero">ეხარგუეფი ვა რე</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">ეხარგუეფი ვა რე</string>
   <string name="categories_not_found">ვეგორინჷ კატეგორიეფქ, ნამუეფით მოგენა %1$s</string>
   <string name="categories_skip_explanation">ქეგუძინით კატეგორიეფი, თქვანი სურათეფი უმოს მოხუჯურ მიოგორალქ იჸუას ვიკიოწკარუესჷნ.\nგემშეჸონით ჯოხო კატეგორიეფიშ გიოძინალო.</string>
   <string name="categories_activity_title">კატეგორიეფი</string>

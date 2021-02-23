@@ -82,7 +82,6 @@
   <string name="menu_nearby">आसपास</string>
   <string name="provider_contributions">मेरे अपलोड</string>
   <string name="menu_share">साझा करें</string>
-  <string name="menu_open_in_browser">ब्राउज़र में देखें</string>
   <string name="share_title_hint" fuzzy="true">शीर्षक (आवश्यक)</string>
   <string name="share_description_hint">विवरण</string>
   <string name="login_failed_network">प्रवेश नहीं हो रहा - नेटवर्क विफल</string>
@@ -102,7 +101,7 @@
   <string name="display_list_button">सूची</string>
   <string name="gps_disabled">आपके डिवाइस में जीपीएस अक्षम है। क्या आप इसे सक्षम करना चाहेंगे?</string>
   <string name="enable_gps">जीपीएस सक्षम करें</string>
-  <string name="contributions_subtitle_zero">अभी तक कोई अपलोड नहीं</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">अभी तक कोई अपलोड नहीं</string>
   <string name="categories_not_found">%1$s से कोई श्रेणी मेल नहीं खाती</string>
   <string name="categories_skip_explanation">विकिमीडिया कॉमन्स पर अपनी छवियों को अधिक खोजने योग्य बनाने के लिए श्रेणियां जोड़ें|\nश्रेणियां जोड़ने के लिए टाइप करना प्रारंभ करें|</string>
   <string name="categories_activity_title">श्रेणियाँ</string>

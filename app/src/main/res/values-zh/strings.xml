@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* )8
 * 94rain
 * A Chinese Wikipedian
 * A Retired User
-* Abijeet Patro
 * Aefgh39622
 * Angrydog001
 * D41D8CD98F
@@ -16,9 +16,11 @@
 * Shizhao
 * Shuiwater
 * SomeyaMako
+* Vikarna
 * VulpesVulpes825
 * Wxyveronica
 * Yfdyh000
+* Zhang8569
 * ZhaoGang
 * 予弦
 * 佛壁灯
@@ -35,7 +37,6 @@
     <item quantity="other">%1$d个文件正在上传</item>
   </plurals>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d次上传</item>
     <item quantity="other">%1$d次上传</item>
   </plurals>
@@ -83,6 +84,7 @@
   <string name="upload_failed">找不到文件。请尝试其他文件。</string>
   <string name="authentication_failed">身份验证失败，请重新登录</string>
   <string name="uploading_started">上传开始！</string>
+  <string name="uploading_queued">上传排队中（已启用连接受限模式）</string>
   <string name="upload_completed_notification_title">%1$s已上传！</string>
   <string name="upload_completed_notification_text">点击查看您的上传</string>
   <string name="upload_progress_notification_title_start">开始%1$s的上传</string>
@@ -102,11 +104,11 @@
   <string name="menu_nearby">附近</string>
   <string name="provider_contributions">我的上传</string>
   <string name="menu_share">分享</string>
-  <string name="menu_open_in_browser">在浏览器中查看</string>
+  <string name="menu_view_file_page">查看文件页面</string>
   <string name="share_title_hint">说明 （要求）</string>
   <string name="add_caption_toast">请提供此文件的描述</string>
   <string name="share_description_hint">描述</string>
-  <string name="share_caption_hint">说明（255个字符以内）</string>
+  <string name="share_caption_hint">说明</string>
   <string name="login_failed_network">无法登录 - 网络故障</string>
   <string name="login_failed_wrong_credentials">无法登录——请检查您的用户名和密码</string>
   <string name="login_failed_throttled">失败次数过多。请在几分钟后重试。</string>
@@ -124,8 +126,9 @@
   <string name="display_list_button">列表</string>
   <string name="gps_disabled">您的设备禁用了GPS。您是否要启用它？</string>
   <string name="enable_gps">启用GPS</string>
-  <string name="contributions_subtitle_zero">尚无上传</string>
+  <string name="contributions_subtitle_zero">（尚无上传）</string>
   <string name="categories_not_found">没有找到匹配%1$s的分类</string>
+  <string name="depictions_not_found">未找到符合%1$的维基数据项目。</string>
   <string name="no_child_classes">%1$s没有子类别</string>
   <string name="no_parent_classes">%1$s没有父类别</string>
   <string name="categories_skip_explanation">添加分类使您的图像更容易在维基共享资源被找到。开始输入以添加分类。</string>
@@ -292,7 +295,7 @@
   <string name="internet_downloaded">请仅上传由您自己拍摄的图像。请勿上传您从互联网下载的图像。</string>
   <string name="give_permission">提供权限</string>
   <string name="use_external_storage" fuzzy="true">使用外部存储</string>
-  <string name="use_external_storage_summary" fuzzy="true">保存有您的设备的内部照相机应用拍摄的照片</string>
+  <string name="use_external_storage_summary">将您设备内部照相机应用拍摄的照片保存至您的设备存储中</string>
   <string name="login_to_your_account">登录您的账户</string>
   <string name="send_log_file">发送日志文件</string>
   <string name="send_log_file_description">通过电子邮件发送日志文件给开发人员，以帮助调试应用程序的问题。注意：日志可能包含标识信息。</string>
@@ -433,12 +436,12 @@
   <string name="storage_permission">存储权限</string>
   <string name="write_storage_permission_rationale_for_image_share">我们需要您的许可才能访问设备的外部存储空间以上传图片。</string>
   <string name="nearby_notification_dismiss_message">您再也看不到最近需要图片的地方了。但是，如果希望的话，可以在设置中重新启用此通知。</string>
-  <string name="step_count">%2$d中的第%1$d步</string>
+  <string name="step_count">%2$d中的第%1$d步：%3$s</string>
   <string name="image_in_set_label">图像%1$d在相册中</string>
   <string name="next">下一个</string>
   <string name="previous">上一个</string>
   <string name="submit">发布</string>
-  <string name="upload_title_duplicate">名为%1$s的文件已经存在。您确定要继续吗？</string>
+  <string name="upload_title_duplicate">名为%1$s的文件已经存在。您确定要继续吗？\n\n注意：将会自动将合适的后缀名添加到文件名中。</string>
   <string name="map_application_missing">您的设备上无法找到兼容的地图应用程序。请安装地图应用程序来使用此功能。</string>
   <string name="navigation_item_bookmarks">书签</string>
   <string name="title_activity_bookmarks">书签</string>
@@ -616,5 +619,7 @@
   <string name="pause">暂停</string>
   <string name="resume">继续</string>
   <string name="paused">已暂停</string>
+  <string name="leaderboard_column_user">用户</string>
+  <string name="leaderboard_upload">上传</string>
   <string name="limited_connection">限制连接</string>
 </resources>

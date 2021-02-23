@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Amaia
 * An13sa
 * EukeneFL
@@ -74,7 +73,6 @@
   <string name="menu_nearby">Gertukoak</string>
   <string name="provider_contributions">Nire igoerak</string>
   <string name="menu_share">Partekatu</string>
-  <string name="menu_open_in_browser">Ikusi nabigatzailean</string>
   <string name="share_title_hint" fuzzy="true">Izenburua (beharrezkoa)</string>
   <string name="share_description_hint">Deskribapena</string>
   <string name="login_failed_network">Ezin izan da sartu - sarean akatsa</string>
@@ -94,7 +92,7 @@
   <string name="display_list_button">Zerrenda</string>
   <string name="gps_disabled">GPSa desgaituta dago gailu honetan. Gaitu nahi duzu?</string>
   <string name="enable_gps">GPSa gaitu</string>
-  <string name="contributions_subtitle_zero">Oraindik ez da ezer igo</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Oraindik ez da ezer igo</string>
   <string name="categories_not_found">Ez da kategoriak aukritu %1$s izenarekin</string>
   <string name="categories_skip_explanation">Gehitu kategoriak zure argazkiak Wikimedia Commonsen aurkitzen errazagoak izan daitezen.\nHasi idazten kategoriak gehitzeko.</string>
   <string name="categories_activity_title">Kategoriak</string>

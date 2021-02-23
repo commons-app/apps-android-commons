@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * CYAN
 * Codenstory
 * Dlsrks1021
@@ -24,7 +23,6 @@
     <item quantity="other">%1$d개의 파일을 올리는 중</item>
   </plurals>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -86,11 +84,11 @@
   <string name="menu_nearby">근처</string>
   <string name="provider_contributions">내 올린 파일</string>
   <string name="menu_share">공유</string>
-  <string name="menu_open_in_browser">브라우저로 보기</string>
+  <string name="menu_view_file_page">파일 문서 보기</string>
   <string name="share_title_hint">캡션 (필수)</string>
   <string name="add_caption_toast">이 파일의 설명을 작성해 주십시오</string>
   <string name="share_description_hint">설명</string>
-  <string name="share_caption_hint">캡션 (255자 제한)</string>
+  <string name="share_caption_hint">캡션</string>
   <string name="login_failed_network">로그인할 수 없습니다 - 네트워크 오류입니다</string>
   <string name="login_failed_wrong_credentials">로그인할 수 없습니다 - 사용자 이름과 비밀번호를 확인해 주십시오</string>
   <string name="login_failed_throttled">실패한 시도가 너무 많습니다. 몇 분 후에 다시 시도하세요.</string>
@@ -109,7 +107,7 @@
   <string name="display_list_button">목록</string>
   <string name="gps_disabled">장치에서 GPS가 꺼져 있습니다. 켜시겠습니까?</string>
   <string name="enable_gps">GPS 사용</string>
-  <string name="contributions_subtitle_zero">아직 올린 항목이 없습니다</string>
+  <string name="contributions_subtitle_zero">(아직 올린 항목이 없음)</string>
   <string name="categories_not_found">%1$s와(과) 일치하는 분류를 찾을 수 없습니다</string>
   <string name="depictions_not_found">%1$s에 대한 위키데이터 검색 결과가 없습니다</string>
   <string name="no_child_classes">%1$s에 자식 클래스가 없습니다</string>
@@ -423,11 +421,11 @@
   <string name="storage_permission">기억 장치 권한</string>
   <string name="write_storage_permission_rationale_for_image_share">이미지를 업로드하려면 외부 기억 장치에 접근할 권한이 필요합니다.</string>
   <string name="nearby_notification_dismiss_message">더 이상 사진이 필요한 주변 장소를 보지 못하게 됩니다. 그러나 원할 경우 설정에서 이 알림을 다시 활성화할 수 있습니다.</string>
-  <string name="step_count">단계 %2$d 중 %1$d</string>
+  <string name="step_count">단계 %2$d 중 %1$d: %3$s</string>
   <string name="next">다음</string>
   <string name="previous">이전</string>
   <string name="submit">제출</string>
-  <string name="upload_title_duplicate">%1$s 이름의 파일이 존재합니다. 계속하시겠습니까?</string>
+  <string name="upload_title_duplicate" fuzzy="true">%1$s 이름의 파일이 존재합니다. 계속하시겠습니까?</string>
   <string name="map_application_missing">장치에서 호환되는 지도 애플리케이션을 찾지 못했습니다. 이 기능을 사용하려면 지도 애플리케이션을 설치해 주십시오.</string>
   <string name="navigation_item_bookmarks">북마크</string>
   <string name="title_activity_bookmarks">북마크</string>
@@ -459,7 +457,7 @@
   <string name="nearby_card_permission_explanation">사진이 필요한 주변 장소를 표시하기 위해 현재 위치를 사용하시겠습니까?</string>
   <string name="unable_to_display_nearest_place">위치 권한 없이 사진이 필요한 주변 장소를 표시할 수 없습니다</string>
   <string name="never_ask_again">다시는 묻지 않음</string>
-  <string name="display_location_permission_title">위치 권한 표시</string>
+  <string name="display_location_permission_title">위치 권한 요청</string>
   <string name="achievements_fetch_failed">무언가가 잘못되어, 저희는 당신의 업적을 가져올 수 없었습니다</string>
   <string name="display_campaigns">캠페인 표시</string>
   <string name="display_campaigns_explanation">진행되고 있는 캠페인 보기</string>
@@ -472,7 +470,7 @@
   <string name="check_category_edit_summary">분류 검사를 요청합니다</string>
   <string name="check_category_success_title">분류 검사 요청됨</string>
   <string name="check_category_failure_title">분류 검사 요청이 동작하지 못했습니다</string>
-  <string name="check_category_success_message" fuzzy="true">%1$s을(를) 위한 분류 검사 요청을 성공했습니다</string>
+  <string name="check_category_success_message">%1$s을(를) 위한 분류 검사를 요청했습니다</string>
   <string name="check_category_failure_message">%1$s을(를) 위한 분류 검사를 요청하지 못했습니다</string>
   <string name="check_category_toast">%1$s을(를) 위한 분류 검사를 요청합니다</string>
   <string name="nominate_for_deletion_edit_file_page">파일에 삭제 메시지를 추가합니다</string>
@@ -584,4 +582,8 @@
   <string name="leaderboard_weekly">매주</string>
   <string name="leaderboard_upload">업로드</string>
   <string name="leaderboard_my_rank_button_text">내 순위</string>
+  <string name="limited_connection_explanation">연결 제한 모드를 사용 중입니다. 모든 업로드는 일시 중단되며 이 모드를 끄면 재개됩니다.</string>
+  <string name="limited_connection_is_on">연결 제한 모드가 켜져 있습니다.</string>
+  <string name="license_step_title">미디어 라이선스</string>
+  <string name="media_detail_step_title">미디어 상세 정보</string>
 </resources>

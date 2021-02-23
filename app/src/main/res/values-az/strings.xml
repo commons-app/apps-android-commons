@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Dağlı95
+* Khan27
+* MuratTheTurkish
+* Mushviq Abdulla
+* Neriman2003
+* Toghrul Rahimli
+* Wertuose
+* Şeyx Şamil
+-->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d fayl yüklənir</item>
+    <item quantity="other">%1$d fayllar yüklənir</item>
+  </plurals>
+  <string name="preference_category_privacy">Məxfilik</string>
   <string name="app_name">Vikimedia Commons</string>
   <string name="menu_settings">Tənzimləmələr</string>
   <string name="username">Ləqəb</string>
   <string name="password">Parol</string>
   <string name="login">Daxil ol</string>
+  <string name="signup">Qeydiyyatdan keç</string>
   <string name="logging_in_title">Giriş edilir</string>
   <string name="logging_in_message">Lütfən gözləyin…</string>
   <string name="login_success">Daxil oldunuz!</string>
   <string name="login_failed">Giriş baş tutmadı!</string>
-  <string name="authentication_failed">Şəxsiyyət təsdiqləmə uğursuz oldu!</string>
+  <string name="upload_failed">Fayl tapılmadı. Xahiş edirik başqa bir fayl üzərində cəhd edin.</string>
+  <string name="authentication_failed">Doğrulama alınmadı, xahiş edirəm yenidən daxil olun</string>
   <string name="uploading_started">Yükləmə başladı!</string>
   <string name="upload_completed_notification_title">%1$s yükləndi!</string>
   <string name="upload_completed_notification_text">Yüklədiyini izlə</string>
@@ -25,19 +42,58 @@
   <string name="contribution_state_starting">Yüklənir</string>
   <string name="menu_from_gallery">Qalereyadan</string>
   <string name="menu_from_camera">Foto çək</string>
+  <string name="menu_nearby">Yaxınlıqdakılar</string>
   <string name="provider_contributions">Yükləmələrim</string>
   <string name="menu_share">Paylaş</string>
-  <string name="menu_open_in_browser">Brauzerdə görüntülə</string>
-  <string name="share_title_hint">Başlıq</string>
+  <string name="share_title_hint">Başlıq (Zəruri)</string>
   <string name="share_description_hint">Açıqlama</string>
   <string name="login_failed_network">Daxil olmaq olmur — şəbəkə xətası</string>
-  <string name="login_failed_username">Daxil olmaq mümkün olmadı — lütfən, öz istifadəçi adınızı yoxlayın</string>
+  <string name="login_failed_throttled">Çox sayda uğursuz daxil olma. Xahiş edirik bir neçə dəqiqə sonra yenidən cəhd edin.</string>
+  <string name="login_failed_blocked">Bağışlayın, bu istifadəçi Commons-da bloklanmışdır.</string>
+  <string name="login_failed_2fa_needed">İki faktorlu giriş doğrulama kodunu verməlisiniz.</string>
+  <string name="login_failed_generic">Daxil olma uğursuz oldu</string>
   <string name="share_upload_button">Yüklə</string>
+  <string name="multiple_share_base_title">Bu dəsti adlandırın</string>
   <string name="provider_modifications">Bildirişlər</string>
   <string name="menu_upload_single">Yüklə</string>
   <string name="categories_search_text_hint">Kateqoriyaları axtar</string>
   <string name="menu_save_categories">Qeyd et</string>
+  <string name="refresh_button">Yenilə</string>
+  <string name="display_list_button">Siyahı</string>
+  <string name="gps_disabled">GPS sizin cihazınızda qeyri-aktivdir. Aktivləşdirmək istəyirsiniz?</string>
+  <string name="enable_gps">GPS-ni aktivləşdir</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Hələlik yüklənməyib</string>
   <string name="categories_not_found">%1$s axtarışına uyğun kateqoriya tapılmadı</string>
+  <string name="categories_activity_title">Kateqoriyalar</string>
+  <string name="title_activity_settings">Nizamlamalar</string>
+  <string name="title_activity_signup">Qeydiyyatdan keç</string>
+  <string name="title_activity_featured_images">Seçilmiş şəkillər</string>
+  <string name="title_activity_category_details">Kateqoriya</string>
+  <string name="menu_about">Haqqında</string>
+  <string name="about_privacy_policy">Məxfilik siyasəti</string>
+  <string name="title_activity_about">Haqqında</string>
+  <string name="menu_retry_upload">Yenidən cəhd edin</string>
+  <string name="menu_download">Endir</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_zero">CC0</string>
+  <string name="welcome_help_button_text">Əlavə məlumat</string>
+  <string name="detail_panel_cats_label">Kateqoriyalar</string>
+  <string name="detail_panel_cats_loading">Yüklənir...</string>
+  <string name="detail_panel_cats_none">Heç biri seçilməmişdir</string>
+  <string name="detail_license_empty">Naməlum lisenziya</string>
+  <string name="menu_refresh">Yenilə</string>
+  <string name="yes">Bəli</string>
+  <string name="no">Xeyr</string>
+  <string name="media_detail_title">Başlıq</string>
+  <string name="media_detail_discussion">Müzakirə</string>
+  <string name="media_detail_author">Müəllif</string>
+  <string name="media_detail_license">Lisenziya</string>
+  <string name="nearby_wikipedia">Vikipediya</string>
+  <string name="send_thank_success_title">Təşəkkür uğurla göndərildi</string>
+  <string name="send_thank_failure_message">Təşəkkür göndərilə bilmədi %1$s</string>
+  <string name="send_thank_failure_title">Təşəkkür göndərilir: Xəta</string>
+  <string name="send_thank_send">Təşəkkür göndərilir</string>
+  <string name="send_thank_notification_title">Təşəkkür göndərilir</string>
+  <string name="send_thank_toast">%1$s üçün təşəkkür göndərişi</string>
+  <string name="notification_mark_read">Bildiriş oxunmuş olaraq işarələndi</string>
 </resources>

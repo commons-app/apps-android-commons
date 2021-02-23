@@ -3,6 +3,7 @@
 * EileenSanda
 -->
 <resources>
+  <string name="share_license_summary" fuzzy="true">Henda myndin kemur undir %1$s lisensin</string>
   <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Innstillingar</string>
   <string name="username">Brúkaranavn</string>
@@ -30,8 +31,7 @@
   <string name="menu_from_camera">Tak mynd</string>
   <string name="provider_contributions">Tað sum eg havi lagt út</string>
   <string name="menu_share">Deil</string>
-  <string name="menu_open_in_browser">Síggj í internetkaga</string>
-  <string name="share_title_hint">Heiti</string>
+  <string name="share_title_hint" fuzzy="true">Heiti</string>
   <string name="share_description_hint">Frágreiðing</string>
   <string name="login_failed_network">Ómøguligt at rita inn - feilur í netsambandinum</string>
   <string name="login_failed_throttled" fuzzy="true">Ov nógv miseydnaðar royndir. Vinarliga royn aftur um fáir minuttir</string>
@@ -58,7 +58,6 @@
   <string name="no_uploads_yet">Tú hevur ikki lagt nakrar myndir út enn.</string>
   <string name="menu_retry_upload">Royn aftur</string>
   <string name="menu_cancel_upload">Angra</string>
-  <string name="share_license_summary">Henda myndin kemur undir %1$s lisensin</string>
   <string name="menu_download">Tak niður</string>
   <string name="preference_license" fuzzy="true">Lisensur</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Navnageving-DeilLíka 3.0</string>

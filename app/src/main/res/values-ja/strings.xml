@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * A2y4
-* Abijeet Patro
 * Aefgh39622
 * Afaz
 * Bonfire12
 * Dude1717
+* Foomin10
 * Hinaloe
 * Kkairri
+* LaMagiaaa
 * Nicolas Raoul
 * Omotecho
 * Otokoume
@@ -25,9 +26,8 @@
     <item quantity="other">%1$d 件のファイルをアップロード中</item>
   </plurals>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d件のアップロード)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">アップロードを開始中です</string>
   <plurals name="starting_multiple_uploads">
@@ -91,11 +91,10 @@
   <string name="menu_nearby">付近</string>
   <string name="provider_contributions">自分のアップロード</string>
   <string name="menu_share">共有</string>
-  <string name="menu_open_in_browser">ブラウザーで表示</string>
   <string name="share_title_hint">キャプション (必須)</string>
   <string name="add_caption_toast">キャプションを記入してください</string>
   <string name="share_description_hint">説明</string>
-  <string name="share_caption_hint">キャプション（上限は半角255文字）</string>
+  <string name="share_caption_hint">キャプション</string>
   <string name="login_failed_network">ログインできません - ネットワークのエラーです</string>
   <string name="login_failed_wrong_credentials">ログインできません - 利用者名とパスワードを確認してください</string>
   <string name="login_failed_throttled">失敗した回数が多すぎます。数分待ってからもう一度お試しください。</string>
@@ -114,7 +113,7 @@
   <string name="display_list_button">一覧</string>
   <string name="gps_disabled">お使いのデバイスではGPSが無効になっています。有効にしますか?</string>
   <string name="enable_gps">GPSを有効にする</string>
-  <string name="contributions_subtitle_zero">まだ何もアップロードされていません。</string>
+  <string name="contributions_subtitle_zero">（まだ何もアップロードされていません）</string>
   <string name="categories_not_found">%1$s に一致するカテゴリが見つかりません</string>
   <string name="depictions_not_found">%1$s に一致する項目が見つかりません</string>
   <string name="no_child_classes">%1$s に子のクラスはありません</string>
@@ -276,7 +275,7 @@
   <string name="error_while_cache">画像をキャッシュする際のエラー</string>
   <string name="title_info">ファイル固有の説明的な表題。ファイル名として使われます。平易な言葉を使い、空白を入れることができます。拡張子は含めないでください。</string>
   <string name="description_info">可能な限りメディアを説明してください: 撮影地はどこですか? それは何を示していますか? どんな文脈がありますか? 被写体の物や人を説明してください。容易に推測できない情報、例えば風景であれば時刻を明示します。特筆すべき物事が映っている場合は、何が珍しいのかを説明してください。</string>
-  <string name="caption_info">画像に簡単な説明を書いてください。最初のキャプションは画像の題名になります。</string>
+  <string name="caption_info">画像に簡単な説明を書いてください。最初のキャプションは画像の題名になります。上限は半角255文字。</string>
   <string name="upload_image_too_dark">この画像は暗すぎますがアップロードしますか？ ウィキメディア・コモンズは百科事典に適した画像のみ受け付けます。</string>
   <string name="upload_image_blurry">ピントが合っていませんが、アップロードしますか？ ウィキメディア・コモンズは百科事典に適した画像のみ受け付けます。</string>
   <string name="upload_problem_exist">この画像には問題があるかもしれません。</string>
@@ -289,8 +288,8 @@
   <string name="upload_problem_image">画像に問題があります</string>
   <string name="internet_downloaded">あなた自身の撮影した画像に限定してアップロードしてください。ウェブ上からダウンロードした画像はアップロードできません。</string>
   <string name="give_permission">権限を付与</string>
-  <string name="use_external_storage" fuzzy="true">外部ストレージを使用</string>
-  <string name="use_external_storage_summary" fuzzy="true">アプリ内のカメラで撮影した写真を端末に保存する</string>
+  <string name="use_external_storage">アプリの画面キャプチャを保存</string>
+  <string name="use_external_storage_summary">アプリ内のカメラで撮影した写真を端末のメモリに保存する</string>
   <string name="login_to_your_account">自分のアカウントにログイン</string>
   <string name="send_log_file">ログファイルを送信する</string>
   <string name="send_log_file_description">メールで開発者にログファイルを送信、アプリのバグ解消をサポートする。注記：ログには利用者特定情報が含まれることがあります</string>
@@ -426,18 +425,18 @@
   <string name="notifications">通知</string>
   <string name="read_notifications">通知（既読）</string>
   <string name="display_nearby_notification">近くの場所の通知を表示する</string>
-  <string name="display_nearby_notification_summary" fuzzy="true">ここをタップして、近くで画像を募集中の場所を表示</string>
+  <string name="display_nearby_notification_summary">アプリ内の通知を表示して、近くで画像を募集中の場所を表示</string>
   <string name="no_close_nearby">現在地の近くに該当する場所が見つかりません</string>
   <string name="list_sheet">一覧</string>
   <string name="storage_permission">ストレージの許可</string>
   <string name="write_storage_permission_rationale_for_image_share">画像の投稿には、外部ストレージへのアクセス権限を許可してください。</string>
   <string name="nearby_notification_dismiss_message">今後、画像募集中の近くの場所は表示されません。ただしこの通知機能は、いつでも「設定」画面から有効にできます。</string>
-  <string name="step_count">全部で%2$d件のうち%1$d件目の手順</string>
+  <string name="step_count">全部で%2$d件のうち%1$d件目の手順：%3$s</string>
   <string name="image_in_set_label">%1$d 点を組み写真にする</string>
   <string name="next">次へ</string>
   <string name="previous">前へ</string>
   <string name="submit">送信</string>
-  <string name="upload_title_duplicate">%1$s という題名のファイルはすでに保存されています。処理をほんとうに続けますか？</string>
+  <string name="upload_title_duplicate">%1$s という題名のファイルはすでに保存されています。処理をほんとうに続けますか？\n\n注記：ファイル名には適切な接頭辞が自動的に付与されます。</string>
   <string name="map_application_missing">お使いの機器に適したアプリが見つかりませんでした。この機能を使用できる地図アプリをインストールしてください。</string>
   <string name="navigation_item_bookmarks">ブックマーク</string>
   <string name="title_activity_bookmarks">ブックマーク</string>
@@ -472,7 +471,7 @@
   <string name="nearby_card_permission_explanation">画像を募集している近くの場所を表示するため、あなたの現在の位置情報を提供してもよいですか？</string>
   <string name="unable_to_display_nearest_place">位置情報の使用を許可していないため、近くの画像募集中の場所を表示できません</string>
   <string name="never_ask_again">以後、表示しない</string>
-  <string name="display_location_permission_title">位置情報の許可の状態を表示</string>
+  <string name="display_location_permission_title">位置情報許可を請求</string>
   <string name="display_location_permission_explanation">通知カードで近くの場所を表示するたび、位置情報の使用を許可するかどうか尋ねる</string>
   <string name="achievements_fetch_failed">何か問題が発生し、あなたの貢献を表示できませんでした</string>
   <string name="achievements_fetch_failed_ultimate_achievement">たくさんの貢献をしていただいたのですが、件数が多すぎるため貢献度算出システムが処理できません。まさに究極の貢献をされました。</string>
@@ -644,6 +643,8 @@
   <string name="pause">一時停止</string>
   <string name="resume">継続</string>
   <string name="paused">一時停止</string>
+  <string name="more">もっと見る</string>
+  <string name="favorites">お気に入り</string>
   <string name="achievements_tab_title">貢献</string>
   <string name="leaderboard_tab_title">リーダーボード</string>
   <string name="rank_prefix">順位</string>
@@ -663,9 +664,23 @@
   <string name="leaderboard_nearby">付近</string>
   <string name="leaderboard_used">使用済み</string>
   <string name="leaderboard_my_rank_button_text">あなたのランク</string>
-  <string name="mapbox_telemetry">測地を退出</string>
+  <string name="mapbox_telemetry" fuzzy="true">測地を退出</string>
   <string name="telemetry_opt_out_summary">周辺を表示させるときは現在地と使用状況データを匿名化してMapbox に送信</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;この地図を改善&lt;/a&gt;</string>
   <string name="limited_connection_enabled">接続制限を有効にしました。</string>
+  <string name="limited_connection_disabled">接続制限モードを解除。待機中のアップロードを再開します。</string>
   <string name="limited_connection">接続制限</string>
+  <string name="statistics_quality">上質な画像</string>
+  <string name="quality_images_info">上質な画像とは図や写真で一定の（主に技術的な）条件を満たすもので、ウィキメディアのプロジェクト群に使えそうなもののこと</string>
+  <string name="resuming_upload">アップロードを再開中……</string>
+  <string name="pausing_upload">アップロードを停止中……</string>
+  <string name="limited_connection_explanation">接続制限を有効にしました。無効にするまでアップロードはすべて一時停止されます。</string>
+  <string name="limited_connection_is_on">接続制限は有効です。</string>
+  <string name="media_details_tooltip">この写真の被写体について短く説明してください。文中にこの写真の見どころや特徴、特異性を書き、見てわかる文脈、写っていないけれど大切なことを加えます。専門用語も必要なだけ使えます。</string>
+  <string name="depicts_tooltip">この画像に関連する概念をすべて選んでください。曖昧にならないよう、ずばり適するものを探します。被写体が複数なら、過剰にならない程度に選んでください。一般的な説明語ではなく、個別に対応するタグにしぼりこみます。</string>
+  <string name="categories_tooltip">適合するカテゴリを選びます。描写と異なり、カテゴリは英語のみです。</string>
+  <string name="license_tooltip">コモンズに置くと、皆さんの画像はだれでも再利用できます。著作権ほか、すべての権利は適用されませんが、同意しますか？ 作者として名前を表示してほしいですか？ 改変された場合も、同じライセンス条件を継承してほしいですか？</string>
+  <string name="depicts_step_title">描写</string>
+  <string name="license_step_title">メディアのライセンス</string>
+  <string name="media_detail_step_title">メディアの詳細</string>
 </resources>

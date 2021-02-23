@@ -14,6 +14,8 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +36,7 @@ import timber.log.Timber;
 @Singleton
 public class UploadClient {
 
-  private final int CHUNK_SIZE = 256 * 1024; // 256 KB
+  private final int CHUNK_SIZE = 512 * 1024; // 512 KB
 
   //This is maximum duration for which a stash is persisted on MediaWiki
   // https://www.mediawiki.org/wiki/Manual:$wgUploadStashMaxAge
@@ -134,18 +136,23 @@ public class UploadClient {
             new ChunkInfo(uploadResult, index.get(), totalChunks));
         notificationUpdater.onChunkUploaded(contribution, chunkInfo.get());
       }, throwable -> {
+            Timber.e(throwable, "Received error in chunk upload");
         failures.set(true);
       }));
     }));
 
     if (pauseUploads.get(contribution.getPageId())) {
+      Timber.d("Upload stash paused %s", contribution.getPageId());
       return Observable.just(new StashUploadResult(StashUploadState.PAUSED, null));
     } else if (failures.get()) {
+      Timber.d("Upload stash contains failures %s", contribution.getPageId());
       return Observable.just(new StashUploadResult(StashUploadState.FAILED, null));
     } else if (chunkInfo.get() != null) {
+      Timber.d("Upload stash success %s", contribution.getPageId());
       return Observable.just(new StashUploadResult(StashUploadState.SUCCESS,
           chunkInfo.get().getUploadResult().getFilekey()));
     } else {
+      Timber.d("Upload stash failed %s", contribution.getPageId());
       return Observable.just(new StashUploadResult(StashUploadState.FAILED, null));
     }
   }
@@ -176,9 +183,11 @@ public class UploadClient {
       final long offset,
       final String fileKey,
       final CountingRequestBody countingRequestBody) {
-    final MultipartBody.Part filePart = MultipartBody.Part
-        .createFormData("chunk", filename, countingRequestBody);
+    final MultipartBody.Part filePart;
     try {
+      filePart = MultipartBody.Part
+          .createFormData("chunk", URLEncoder.encode(filename, "utf-8"), countingRequestBody);
+
       return uploadInterface.uploadFileToStash(toRequestBody(filename),
           toRequestBody(String.valueOf(fileSize)),
           toRequestBody(String.valueOf(offset)),
@@ -227,6 +236,7 @@ public class UploadClient {
             UploadResponse uploadResult = gson.fromJson(uploadResponse, UploadResponse.class);
             if (uploadResult.getUpload() == null) {
               final MwException exception = gson.fromJson(uploadResponse, MwException.class);
+              Timber.e(exception, "Error in uploading file from stash");
               throw new RuntimeException(exception.getErrorCode());
             }
             return uploadResult.getUpload();

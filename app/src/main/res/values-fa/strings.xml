@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * 4nn1l2
-* Abijeet Patro
+* Ajam
 * Amirsara
 * Arash.pt
 * BaRaN6161 TURK
@@ -31,7 +31,7 @@
     <item quantity="one">%1$d پرونده در حال بارگذاری</item>
     <item quantity="other">%1$d پرونده در حال بارگذاری</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -94,11 +94,10 @@
   <string name="menu_nearby">در نزدیکی</string>
   <string name="provider_contributions">بارگذاری‌های من</string>
   <string name="menu_share">به اشتراک‌گذاشتن</string>
-  <string name="menu_open_in_browser">مشاهده در مرورگر</string>
   <string name="share_title_hint">شرح مختصر (الزامی)</string>
   <string name="add_caption_toast">لطفاً شرح مختصری برای این پرونده بنویسید</string>
   <string name="share_description_hint">توضیحات</string>
-  <string name="share_caption_hint">شرح مختصر (محدود به ۲۵۵ نویسه)</string>
+  <string name="share_caption_hint" fuzzy="true">شرح مختصر (محدود به ۲۵۵ نویسه)</string>
   <string name="login_failed_network">قادر به ورود نیست - شکست شبکه‌ای</string>
   <string name="login_failed_wrong_credentials">ورود به سیستم امکان پذیر نیست . لطفا نام کاربری و رمز عبور خود را بررسی کنید.</string>
   <string name="login_failed_throttled">تلاش ناموفق بیش از حد. لطفاً چند دقیقهٔ دیگر دوباره تلاش کنید</string>
@@ -117,7 +116,7 @@
   <string name="display_list_button">فهرست</string>
   <string name="gps_disabled">مکان‌یاب در دستگاه شما خاموش است. آیا دوست دارید فعال شود؟</string>
   <string name="enable_gps">فعال کردن مکان‌یاب</string>
-  <string name="contributions_subtitle_zero">هنوز هیچ بارگذاری</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">هنوز هیچ بارگذاری</string>
   <string name="categories_not_found">رده‌ای منطبق با %1$s یافت نشد</string>
   <string name="categories_skip_explanation">برای دسترسی آسان‌تر در ویکی‌انبار به تصویرهایتان رده بیافزائید.\n\nشروع به افزودن رده.</string>
   <string name="categories_activity_title">رده‌ها</string>
@@ -272,7 +271,7 @@
   <string name="error_while_cache">خطا در زمان دریافت تصاویر</string>
   <string name="title_info">عنوانی توصیفی و یکتا برای پرونده که به عنوان نام پرونده در نظر گرفته خواهد شد. ترجیحاً به زبان ساده باشد، می‌توانید فاصله هم به کار ببرید. پسوند پرونده را ننویسید.</string>
   <string name="description_info">لطفاً تصویر را تا حد توان شرح دهید. کجا گرفته شده‌است؟ شامل چه چیزی می‌شود؟ لطفاً اشیا یا افراد را شرح دهید. اطلاعاتی که به راحتی قابل مشاهده هستند را صرفه‌نظر کنید. اگر چیزی در تصویر غیر طبیعی به نظر می‌رسد آن را شرح دهید.</string>
-  <string name="caption_info">لطفاً شرح مختصری برای این تصویر بنویسید. از اولین توضیح برای عنوان تصویر استفاده خواهد شد.</string>
+  <string name="caption_info" fuzzy="true">لطفاً شرح مختصری برای این تصویر بنویسید. از اولین توضیح برای عنوان تصویر استفاده خواهد شد.</string>
   <string name="upload_image_too_dark">این تصویر خیلی تار است. آیا مطمئنید که می‌خواهید آن را بارگذاری کنید؟ ویکی‌انبار فقط برای نگهداری از تصاویری است که ارزش دانشنامه‌ای داشته باشند.</string>
   <string name="upload_image_blurry">این تصویر خیلی محو است. آیا مطمئنید که می‌خواهید آن را بارگذاری کنید؟ ویکی‌انبار فقط برای نگهداری از تصاویری است که ارزش دانشنامه‌ای داشته باشند.</string>
   <string name="upload_problem_exist">مشکلات احتمالی با این تصویر :</string>
@@ -285,8 +284,8 @@
   <string name="upload_problem_image">مشکلاتی در عکس پیدا شد</string>
   <string name="internet_downloaded">لطفاً فقط تصاویری را بارگذاری کنید که خودتان گرفته‌اید. تصاویری را که از اینترنت بارگیری کرده‌اید بارگذاری نکنید.</string>
   <string name="give_permission">اجازه بده</string>
-  <string name="use_external_storage" fuzzy="true">استفاده از حافظهٔ خارجی</string>
-  <string name="use_external_storage_summary" fuzzy="true">ذخیرهٔ تصویرهای گرفته شده توسط دوربین درونکار اپلیکیشن بر روی دستگاه شما</string>
+  <string name="use_external_storage">ذخیره‌سازی تصاویر درون‌برنامه‌ای</string>
+  <string name="use_external_storage_summary">ذخیره‌ی تصاویر گرفته شده توسط اپلیکیشن درون‌برنامه‌ای دوربین بر روی حافظه‌ی دستگاه شما</string>
   <string name="login_to_your_account">ورود به حساب کاربریتان</string>
   <string name="send_log_file">ارسال فایل سیاهه</string>
   <string name="send_log_file_description">ارسال فایل سیاهه به‌وسیلهٔ ایمیل برای توسعه‌دهندگان برای رفع مشکل خطای اپلیکیشن. توجه: سیاه‌ها دارای اطلاعات شناسایی هستند</string>
@@ -405,12 +404,12 @@
   <string name="no_close_nearby">هیچ‌ مکان نزدیکی به شما یافته نشد</string>
   <string name="list_sheet">فهرست</string>
   <string name="storage_permission">اجازه ذخیره</string>
-  <string name="step_count">گام %1$d از %2$d</string>
+  <string name="step_count" fuzzy="true">گام %1$d از %2$d</string>
   <string name="image_in_set_label">تصویر %1$d در مجموعه</string>
   <string name="next">بعدی</string>
   <string name="previous">قبلی</string>
   <string name="submit">ارسال</string>
-  <string name="upload_title_duplicate">پرونده‌ای با نام %1$s وجود دارد. آیا اطمینان دارید که می‌خواهید ادامه دهید؟</string>
+  <string name="upload_title_duplicate" fuzzy="true">پرونده‌ای با نام %1$s وجود دارد. آیا اطمینان دارید که می‌خواهید ادامه دهید؟</string>
   <string name="navigation_item_bookmarks">نشانک‌ها</string>
   <string name="title_activity_bookmarks">نشانک‌ها</string>
   <string name="title_page_bookmarks_pictures">تصویرها</string>
@@ -527,6 +526,8 @@
   <string name="theme_dark_name">تیره</string>
   <string name="theme_light_name">روشن</string>
   <string name="ask_to_turn_location_on">روشن کردن مکان؟</string>
+  <string name="more">بیشتر</string>
+  <string name="favorites">علاقه‌مندی‌ها</string>
   <string name="achievements_tab_title">دستاوردها</string>
   <string name="leaderboard_column_rank">رتبه</string>
   <string name="leaderboard_column_user">کاربر</string>

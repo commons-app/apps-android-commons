@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * BPX-web
 * Bjarncraft
 * Bxalber
@@ -20,6 +19,7 @@
 * Ubahnverleih
 * Umherirrender
 * WikiBayer
+* Zauberzunge2000
 -->
 <resources>
   <plurals name="uploads_pending_notification_indicator">
@@ -93,11 +93,10 @@
   <string name="menu_nearby">In der Nähe</string>
   <string name="provider_contributions">Meine hochgeladenen Dateien</string>
   <string name="menu_share">Teilen</string>
-  <string name="menu_open_in_browser">Im Browser anzeigen</string>
   <string name="share_title_hint">Titel (erforderlich)</string>
   <string name="add_caption_toast">Bitte gib einen Titel für diese Datei an</string>
   <string name="share_description_hint">Beschreibung</string>
-  <string name="share_caption_hint">Beschriftung (bis zu 255 Zeichen)</string>
+  <string name="share_caption_hint">Beschriftung</string>
   <string name="login_failed_network">Anmeldung fehlgeschlagen – Netzwerkfehler</string>
   <string name="login_failed_wrong_credentials">Anmeldung fehlgeschlagen. Bitte Benutzernamen und Passwort überprüfen.</string>
   <string name="login_failed_throttled">Zu viele erfolglose Versuche. Bitte in einigen Minuten erneut versuchen.</string>
@@ -115,7 +114,7 @@
   <string name="display_list_button">Liste</string>
   <string name="gps_disabled">GPS ist auf deinem Gerät deaktiviert. Möchtest du es aktivieren?</string>
   <string name="enable_gps">GPS aktivieren</string>
-  <string name="contributions_subtitle_zero">Noch keine hochgeladenen Dateien</string>
+  <string name="contributions_subtitle_zero">(Noch keine hochgeladenen Dateien)</string>
   <string name="categories_not_found">Die Kategorie „%1$s“ wurde nicht gefunden</string>
   <string name="depictions_not_found">Keine Wikidata Gegenstände gefunden für %1$s</string>
   <string name="categories_skip_explanation">Füge Kategorien hinzu, um deine Bilder auf Wikimedia Commons auffindbarer zu machen.\nBeginne mit der Eingabe, um Kategorien hinzuzufügen.</string>
@@ -421,12 +420,12 @@
   <string name="storage_permission">Speicherberechtigung</string>
   <string name="write_storage_permission_rationale_for_image_share">Wir benötigen deine Berechtigung für den Zugriff auf den externen Speicher deines Geräts, um Bilder hochzuladen.</string>
   <string name="nearby_notification_dismiss_message">Du wirst nicht mehr den nähersten Ort sehen, der noch Bilder braucht. Du kannst jedoch diese Benachrichtigung in den Einstellungen erneut aktivieren, falls du das zu wünschen tust.</string>
-  <string name="step_count">Schritt %1$d von %2$d</string>
+  <string name="step_count" fuzzy="true">Schritt %1$d von %2$d</string>
   <string name="image_in_set_label">Bild %1$d im Satz</string>
   <string name="next">Nächste</string>
   <string name="previous">Vorherige</string>
   <string name="submit">Einreichen</string>
-  <string name="upload_title_duplicate">Eine Datei mit dem Namen %1$s ist bereits vorhanden. Bist du sicher, dass du fortfahren möchtest?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Eine Datei mit dem Namen %1$s ist bereits vorhanden. Bist du sicher, dass du fortfahren möchtest?</string>
   <string name="map_application_missing">Auf deinem Gerät konnte keine kompatible Karten-App gefunden werden. Bitte installiere eine Karten-App, um diese Funktion nutzen zu können.</string>
   <string name="navigation_item_bookmarks">Lesezeichen</string>
   <string name="title_activity_bookmarks">Lesezeichen</string>
@@ -459,7 +458,7 @@
   <string name="nearby_card_permission_explanation">Dürfen wir deinen aktuellen Standort verwenden, um den nächsten Ort anzuzeigen, der Bilder benötigt?</string>
   <string name="unable_to_display_nearest_place">Der nächste Ort, der Bilder benötigt, kann ohne Standortberechtigungen nicht angezeigt werden.</string>
   <string name="never_ask_again">Nicht erneut fragen</string>
-  <string name="display_location_permission_title">Standortberechtigung anzeigen</string>
+  <string name="display_location_permission_title">Standortberechtigung anfragen</string>
   <string name="display_location_permission_explanation">Anfrage für eine Standortberechtigung, die für die Nachbarbenachrichtigungskartenansichtsfunktion erforderlich ist.</string>
   <string name="achievements_fetch_failed">Etwas ist schief gelaufen. Wir konnten deine Errungenschaften nicht abrufen.</string>
   <string name="ends_on">Endet am:</string>

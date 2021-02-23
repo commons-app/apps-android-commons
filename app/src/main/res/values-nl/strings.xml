@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * A67-A67
-* Abijeet Patro
 * Bouman4
 * Dutchy45
 * Elroy
@@ -80,7 +79,6 @@
   <string name="menu_nearby">In de buurt</string>
   <string name="provider_contributions">Mijn uploads</string>
   <string name="menu_share">Delen</string>
-  <string name="menu_open_in_browser">In browser bekijken</string>
   <string name="share_title_hint" fuzzy="true">Titel (verplicht)</string>
   <string name="share_description_hint">Beschrijving</string>
   <string name="login_failed_network">Aanmelden niet mogelijk. Er is een probleem met het netwerk</string>
@@ -97,7 +95,7 @@
   <string name="display_list_button">Lijst</string>
   <string name="gps_disabled">GPS is uitgezet in uw apparaat. Wilt u het aanzetten?</string>
   <string name="enable_gps">GPS aanzetten</string>
-  <string name="contributions_subtitle_zero">Nog geen uploads</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Nog geen uploads</string>
   <string name="categories_not_found">Er zijn geen categorieën met \"%1$s\" gevonden</string>
   <string name="categories_skip_explanation" fuzzy="true">Voeg categorieën toe om uw afbeeldingen makkelijker te vinden te maken op Wikimedia Commons.\n\nBegin met het toevoegen van categorieën.\n\nKlik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="categories_activity_title">Categorieën</string>
@@ -294,7 +292,7 @@
   <string name="display_nearby_notification">Meldingen dichtbij weergeven</string>
   <string name="list_sheet">Lijst</string>
   <string name="storage_permission">Toestemming om op te slaan</string>
-  <string name="step_count">Stap %1$d van %2$d</string>
+  <string name="step_count" fuzzy="true">Stap %1$d van %2$d</string>
   <string name="next">Volgende</string>
   <string name="previous">Vorige</string>
   <string name="submit">Verzenden</string>
@@ -304,7 +302,7 @@
   <string name="desc_language_Europe">Europa</string>
   <string name="nearby_card_permission_title">Machtigingsverzoek</string>
   <string name="never_ask_again">Niet meer vragen</string>
-  <string name="display_location_permission_title">Machtiging voor locatie weergeven</string>
+  <string name="display_location_permission_title" fuzzy="true">Machtiging voor locatie weergeven</string>
   <string name="display_location_permission_explanation">Naar machtiging voor locatie vragen als dat nodig is voor de functie meldingskaart dichtbij weergeven.</string>
   <string name="no_image_uploaded">Geen afbeeldingen geüpload</string>
   <string name="no_read_notification">U hebt geen gelezen melding</string>

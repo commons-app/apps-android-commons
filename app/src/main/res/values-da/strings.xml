@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Christian List
 * Envlh
 * Joedalton
@@ -69,7 +68,6 @@
   <string name="menu_nearby">I nærhenden</string>
   <string name="provider_contributions">Mine uploads</string>
   <string name="menu_share">Del</string>
-  <string name="menu_open_in_browser">Åbn i browser</string>
   <string name="share_title_hint">Billedtekst (Påkrævet)</string>
   <string name="share_description_hint">Beskrivelse</string>
   <string name="login_failed_network">Kan ikke logge på - netværksfejl</string>
@@ -89,7 +87,7 @@
   <string name="display_list_button">Liste</string>
   <string name="gps_disabled">GPS er deaktiveret i din enhed. Ønsker du at aktivere den?</string>
   <string name="enable_gps">Aktiver GPS</string>
-  <string name="contributions_subtitle_zero">Ingen overførelser endnu</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Ingen overførelser endnu</string>
   <string name="categories_not_found">Ingen kategorier matchende %1$s er fundet</string>
   <string name="categories_skip_explanation">Tilføj kategorier for at gøre billederne mere synlig på Wikimedia Commons. Tast for at tilføje kategorier.</string>
   <string name="categories_activity_title">Kategorier</string>
@@ -332,7 +330,7 @@
   <string name="no_close_nearby">Ingen steder i nærheden fundet der var tæt på dig</string>
   <string name="list_sheet">Liste</string>
   <string name="storage_permission">Lagringstilladelse</string>
-  <string name="step_count">Trin %1$d af %2$d</string>
+  <string name="step_count">Trin %1$d af %2$d: %3$s</string>
   <string name="next">Næste</string>
   <string name="previous">Forrige</string>
   <string name="submit">Indsend</string>
@@ -358,7 +356,7 @@
   <string name="no_categories_selected">Ingen valgte kategorier</string>
   <string name="search_this_area">Søg i dette område</string>
   <string name="never_ask_again">Spørg aldrig om dette igen</string>
-  <string name="display_location_permission_title">Vis placeringstilladelse</string>
+  <string name="display_location_permission_title">Bed om placeringstilladelse</string>
   <string name="ends_on">Slutter den:</string>
   <string name="display_campaigns">Vis kampagner</string>
   <string name="display_campaigns_explanation">Se aktive kampagner</string>

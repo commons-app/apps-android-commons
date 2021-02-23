@@ -11,6 +11,7 @@ import org.wikipedia.dataclient.mwapi.SiteMatrix;
 import org.wikipedia.dataclient.mwapi.page.MwMobileViewPageLead;
 import org.wikipedia.dataclient.mwapi.page.MwMobileViewPageRemaining;
 import org.wikipedia.dataclient.mwapi.page.MwQueryPageSummary;
+import org.wikipedia.dataclient.mwapi.page.MwThankPostResponse;
 import org.wikipedia.edit.Edit;
 import org.wikipedia.edit.preview.EditPreview;
 import org.wikipedia.login.LoginClient;
@@ -192,7 +193,7 @@ public interface Service {
 
     @FormUrlEncoded
     @POST(MW_API_PREFIX + "action=thank")
-    @NonNull Observable<MwPostResponse> thank(@Nullable @Field("rev") String rev,
+    @NonNull Observable<MwThankPostResponse> thank(@Nullable @Field("rev") String rev,
                                               @Nullable @Field("log") String log,
                                               @NonNull @Field("token") String token,
                                               @Nullable @Field("source") String source);

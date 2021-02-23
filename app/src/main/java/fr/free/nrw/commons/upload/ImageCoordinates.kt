@@ -34,21 +34,29 @@ class ImageCoordinates internal constructor(exif: ExifInterface?) {
         //If image has no EXIF data and user has enabled GPS setting, get user's location
         //Always return null as a temporary fix for #1599
         if (exif != null) {
-            val latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE)
-            val latitudeRef = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF)
-            val longitude = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE)
-            val longitudeRef = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF)
-            if (latitude != null && longitude != null && latitudeRef != null && longitudeRef != null) {
+            val latAndLong = exif.latLong
+            if (latAndLong != null) {
+                decLatitude = latAndLong[0]
+                decLongitude = latAndLong[1]
+            } else {
+                val latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE)
+                val latitudeRef = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF)
+                val longitude = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE)
+                val longitudeRef = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF)
+                if (latitude != null && longitude != null && latitudeRef != null && longitudeRef != null) {
+                    decLatitude =
+                        if (ExifInterface.LATITUDE_NORTH == latitudeRef) convertToDegree(latitude)
+                        else 0 - convertToDegree(latitude)
+                    decLongitude =
+                        if (ExifInterface.LONGITUDE_EAST == longitudeRef) convertToDegree(longitude)
+                        else 0 - convertToDegree(longitude)
+                }
+            }
+            if (!(decLatitude == 0.0 && decLongitude == 0.0)) {
+                decimalCoords = "$decLatitude|$decLongitude"
                 //If image has EXIF data, extract image coords
                 imageCoordsExists = true
                 Timber.d("EXIF data has location info")
-                decLatitude =
-                    if (ExifInterface.LATITUDE_NORTH == latitudeRef) convertToDegree(latitude)
-                    else 0 - convertToDegree(latitude)
-                decLongitude =
-                    if (ExifInterface.LONGITUDE_EAST == longitudeRef) convertToDegree(longitude)
-                    else 0 - convertToDegree(longitude)
-                decimalCoords = "$decLatitude|$decLongitude"
             }
         }
     }

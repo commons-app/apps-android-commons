@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Alex Khimich
 * Alexander Yukal
 * Andriykopanytsia
@@ -11,6 +10,7 @@
 * SimondR
 * Viiictorrr
 * Vlad5250
+* Vlnt
 * Ата
 -->
 <resources>
@@ -20,13 +20,13 @@
     <item quantity="many">Завантажується %1$d файлів</item>
     <item quantity="other">Завантажується %1$d файлів</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d завантаження</item>
-    <item quantity="few">%1$d завантаження</item>
-    <item quantity="many">%1$d завантажень</item>
-    <item quantity="other">%1$d завантажень</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="few">(%1$d)</item>
+    <item quantity="many">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">Початок завантаження</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Починається %1$d завантаження</item>
     <item quantity="few">Починаються %1$d завантаження</item>
@@ -81,6 +81,7 @@
   <string name="upload_failed">Файл не знайдено. Будь ласка, спробуйте інший файл.</string>
   <string name="authentication_failed">Помилка автентифікації. Будь ласка, увійдіть у свій обліковий запис знову</string>
   <string name="uploading_started">Завантаження розпочато!</string>
+  <string name="uploading_queued">Завантаження додано до черги (увімкнений режим обмеженого з\'єднання)</string>
   <string name="upload_completed_notification_title">Завантажено %1$s!</string>
   <string name="upload_completed_notification_text">Торкніться, щоб переглянути Ваше завантаження</string>
   <string name="upload_progress_notification_title_start">Розпочинається завантаження %1$s</string>
@@ -100,11 +101,10 @@
   <string name="menu_nearby">Поблизу</string>
   <string name="provider_contributions">Мої завантаження</string>
   <string name="menu_share">Поширити</string>
-  <string name="menu_open_in_browser">Відкрити у браузері</string>
   <string name="share_title_hint">Підпис (обов\'язково)</string>
   <string name="add_caption_toast">Будь ласка, вкажіть підпис цьому файлу</string>
   <string name="share_description_hint">Опис</string>
-  <string name="share_caption_hint">Підпис (не більше 255 символів)</string>
+  <string name="share_caption_hint" fuzzy="true">Підпис (не більше 255 символів)</string>
   <string name="login_failed_network">Неможливо увійти — збій у мережі</string>
   <string name="login_failed_wrong_credentials">Неможливо увійти — будь ласка перевірте ім\'я користувача та пароль</string>
   <string name="login_failed_throttled">Надто багато невдалих спроб. Будь ласка, спробуйте знову через кілька хвилин.</string>
@@ -123,7 +123,7 @@
   <string name="display_list_button">Список</string>
   <string name="gps_disabled">GPS вимкнено на Вашому пристрої. Бажаєте увімкнути його?</string>
   <string name="enable_gps">Увімкнути GPS</string>
-  <string name="contributions_subtitle_zero">Ще нема завантажень</string>
+  <string name="contributions_subtitle_zero">(Ще нема завантажень)</string>
   <string name="categories_not_found">Категорій, відповідних %1$s, не знайдено</string>
   <string name="depictions_not_found">Не знайдено елементів вікіданих, що відповідають %1$s</string>
   <string name="no_child_classes">%1$s не має дочірніх класів</string>
@@ -285,7 +285,7 @@
   <string name="error_while_cache">Помилка кешування зображень</string>
   <string name="title_info">Унікальна описова назва файлу. Ви можете використовувати простий текст з пробілами. Не вказуйте розширення файлу</string>
   <string name="description_info">Будь ласка, докладно опишіть файл: де його було зроблено? що на ньому зображено? який контекст? Будь ласка, опишіть об\'єкти чи осіб. Додайте інформацію, яку не можна легко здогадатися, наприклад, пору доби для фотографії пейзажу. Якщо зображено щось незвичайне, спробуйте пояснити, що робить його незвичайним.</string>
-  <string name="caption_info" fuzzy="true">Будь ласка, створіть короткий опис цього зображення (не більше 255 символів).</string>
+  <string name="caption_info" fuzzy="true">Будь ласка, створіть короткий опис цього зображення Перший заголовок буде використано як назву зображення.</string>
   <string name="upload_image_too_dark">Це зображення надто темне; Ви впевнені, що хочете його завантажити? Вікісховище призначене для зображень, що мають енциклопедичне значення.</string>
   <string name="upload_image_blurry">Це зображення розмите; Ви впевнені, що хочете його завантажити? Вікісховище призначене для зображень, що мають енциклопедичне значення.</string>
   <string name="upload_problem_exist">Потенційні проблеми з цим зображенням:</string>
@@ -298,8 +298,8 @@
   <string name="upload_problem_image">Виявлено проблеми із зображенням</string>
   <string name="internet_downloaded">Будь ласка, завантажуйте тільки ті зображення, які були зроблені вами. Не завантажуйте зображень, які ви знайшли в інтернеті.</string>
   <string name="give_permission">Надати дозвіл</string>
-  <string name="use_external_storage" fuzzy="true">Використовувати зовнішнє сховище</string>
-  <string name="use_external_storage_summary" fuzzy="true">Зберігати зображення, виконані вбудованою камерою Вашого пристрою</string>
+  <string name="use_external_storage">Зберігати зроблені в програмці знімки</string>
+  <string name="use_external_storage_summary">Зберігати зображення, зроблені камерою з додатку, у пам\'яті Вашого пристрою</string>
   <string name="login_to_your_account">Увійдіть у свій обліковий запис</string>
   <string name="send_log_file">Надіслати файл журналу</string>
   <string name="send_log_file_description">Надіслати файл журналу розробникам електронною поштою, щоб допомогти розв\'язати проблему із програмою. Зауважте, що журнали можуть містити ідентифікаційну інформацію.</string>
@@ -313,7 +313,7 @@
   <string name="view_browser">Переглянути в браузері</string>
   <string name="skip_login">Пропустити</string>
   <string name="navigation_item_login">Увійти</string>
-  <string name="skip_login_title">Ви дійсно бажаєте пропустити авторизацію?</string>
+  <string name="skip_login_title">Ви дійсно бажаєте пропустити автентифікацію?</string>
   <string name="skip_login_message">Вам треба буде увійти в систему для завантаження зображень у майбутньому.</string>
   <string name="login_alert_message">Увійдіть, щоб використати цю функцію</string>
   <string name="copy_wikicode">Скопіювати вікітекст у буфер обміну</string>
@@ -410,6 +410,7 @@
   <string name="nominate_delete">Номінувати на вилучення</string>
   <string name="delete">Вилучити</string>
   <string name="Achievements">Досягнення</string>
+  <string name="Profile">Профіль</string>
   <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Отримані подяки</string>
   <string name="statistics_featured">Вибрані зображення</string>
@@ -434,18 +435,18 @@
   <string name="notifications">Сповіщення</string>
   <string name="read_notifications">Сповіщення (прочитані)</string>
   <string name="display_nearby_notification">Повідомляти мене про місця поблизу</string>
-  <string name="display_nearby_notification_summary" fuzzy="true">Торкніться тут, щоб побачити найближчі місця, які ще не мають зображень</string>
+  <string name="display_nearby_notification_summary">Показувати сповіщення про найближчі місця, які ще не мають зображень, всередині додатку</string>
   <string name="no_close_nearby">Не знайдено місць поблизу Вас</string>
   <string name="list_sheet">Список</string>
   <string name="storage_permission">Дозвіл на зберігання</string>
   <string name="write_storage_permission_rationale_for_image_share">Нам потрібен ваш дозвіл на доступ до зовнішнього сховища на Вашому пристрої, щоб завантажувати зображення.</string>
   <string name="nearby_notification_dismiss_message">Ви більше не бачитимете сповіщень про найближчі місця без зображень. Однак Ви можете увімкнути ці сповіщення повторно у своїх налаштуваннях, якщо забажаєте.</string>
-  <string name="step_count">Крок %1$d із %2$d</string>
+  <string name="step_count">Крок %1$d із %2$d: %3$s</string>
   <string name="image_in_set_label">Зображення %1$d у наборі</string>
   <string name="next">Наступне</string>
   <string name="previous">Попереднє</string>
   <string name="submit">Надіслати</string>
-  <string name="upload_title_duplicate">Файл із назвою %1$s існує. Ви впевнені, що хочете продовжити?</string>
+  <string name="upload_title_duplicate">Файл із назвою %1$s існує. Ви впевнені, що хочете продовжити?\n\nПримітка: Відповідне розширення буде додано до назви файлу автоматично</string>
   <string name="map_application_missing">На Вашому пристрої не знайдено сумісного додатка з картами. Будь ласка, встановіть додаток з картами, якщо хочете скористатись цією функцією.</string>
   <string name="navigation_item_bookmarks">Закладки</string>
   <string name="title_activity_bookmarks">Закладки</string>
@@ -480,7 +481,7 @@
   <string name="nearby_card_permission_explanation">Чи хотіли б Ви, щоб ми використали Ваше поточне місце перебування, щоб показати Вам найближче місце, для якого ще немає зображень?</string>
   <string name="unable_to_display_nearest_place">Не вдалося показати найближче місце, для якого ще немає зображень, без дозволу на визначення місця перебування</string>
   <string name="never_ask_again">Ніколи більше про це не запитувати</string>
-  <string name="display_location_permission_title">Дозвіл на показ місця перебування</string>
+  <string name="display_location_permission_title">Запитувати дозвіл на геолокацію</string>
   <string name="display_location_permission_explanation">Запитувати про дозвіл на показ місця перебування, коли це потрібно для функції перегляду місць поблизу.</string>
   <string name="achievements_fetch_failed">Щось пішло не так. Нам не вдалося отримати Ваші досягнення</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Ви зробили так багато, що наша система підрахунку досягнень не може впоратись зі своїм завданням. Це — абсолютне досягнення.</string>
@@ -588,6 +589,17 @@
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
   <string name="delete_helper_ask_reason_copyright_other">Інше</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Оскільки</string>
+  <string name="category_edit_helper_make_edit_toast">У процесі спроби оновлення категорій.</string>
+  <string name="category_edit_helper_show_edit_title">Оновлення категорій</string>
+  <string name="category_edit_helper_show_edit_title_success">Успіх</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">Додано категорію %1$s.</item>
+    <item quantity="few">Додано категорії %1$s.</item>
+    <item quantity="many">Додано категорії %1$s.</item>
+    <item quantity="other">Додано категорії %1$s.</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">Неможливо додати категорії</string>
+  <string name="category_edit_button_text">Оновити категорії</string>
   <string name="share_image_via">Поширити зображення через</string>
   <string name="no_achievements_yet">Поки що від вас немає вкладу</string>
   <string name="account_created">Обліковий запис створено!</string>
@@ -623,6 +635,10 @@
   <string name="use_location_from_similar_image">Ви зробили ці два знімки в одному й тому ж місці? Хочете використати широту/довготу зображення справа?</string>
   <string name="load_more">Завантажити більше</string>
   <string name="nearby_no_results">Місць не знайдено, спробуйте змінити критерії пошуку.</string>
+  <string name="todo_improve">Запропоновані поліпшення:</string>
+  <string name="missing_category">— Додати категорії до цього зображення для покращення можливості його використання.</string>
+  <string name="missing_article">— Додати це зображення до відповідної статті Вікіпедії без зображень.</string>
+  <string name="edit_category">Редагувати категорії</string>
   <string name="add_picture_to_wikipedia_article_title">Додати зображення у Вікіпедію</string>
   <string name="add_picture_to_wikipedia_article_desc">Ви хочете додати це зображення у статтю Вікіпедії мовою %1$s?</string>
   <string name="add_picture_to_wikipedia_instructions_title">Інструкції</string>
@@ -640,4 +656,44 @@
   <string name="pause">пауза</string>
   <string name="resume">продовжити</string>
   <string name="paused">Призупинено</string>
+  <string name="more">Більше</string>
+  <string name="favorites">Улюблені</string>
+  <string name="achievements_tab_title">Досягнення</string>
+  <string name="leaderboard_tab_title">Таблиця лідерів</string>
+  <string name="rank_prefix">Ранг:</string>
+  <string name="count_prefix">Кількість:</string>
+  <string name="leaderboard_column_rank">Ранг</string>
+  <string name="leaderboard_column_user">Користувач</string>
+  <string name="leaderboard_column_count">Кількість</string>
+  <string name="setting_avatar_dialog_title">Встановити як аватарку таблиці лідерів</string>
+  <string name="setting_avatar_dialog_message">Встановлення аватаркою, будь ласка, зачекайте</string>
+  <string name="avatar_set_successfully">Аватарку встановлено</string>
+  <string name="avatar_set_unsuccessfully">Помилка встановлення нової аватарки, будь ласка, спробуйте знову</string>
+  <string name="menu_set_avatar">Встановити аватаркою</string>
+  <string name="leaderboard_yearly">За рік</string>
+  <string name="leaderboard_weekly">За тиждень</string>
+  <string name="leaderboard_all_time">За весь час</string>
+  <string name="leaderboard_upload">Завантажити</string>
+  <string name="leaderboard_nearby">Поблизу</string>
+  <string name="leaderboard_used">Використання</string>
+  <string name="leaderboard_my_rank_button_text">Мій ранг</string>
+  <string name="mapbox_telemetry">Телеметрія Mapbox</string>
+  <string name="telemetry_opt_out_summary">Надсилати анонімізоване розташування та дані щодо користування до Mapbox при використанні функції Поблизу</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Покращити цю карту&lt;/a&gt;</string>
+  <string name="limited_connection_enabled">Увімкнено режим обмеженого з\'єднання!</string>
+  <string name="limited_connection_disabled">Вимкнено режим обмеженого з\'єднання. Завантаження в процесі очікування тепер відновляться.</string>
+  <string name="limited_connection">Обмежене з\'єднання</string>
+  <string name="statistics_quality">Якісні зображення</string>
+  <string name="quality_images_info">Якісні зображення — це діаграми чи фотографії, що відповідають певним стандартам якості (переважно технічним за природою) та цінні для проектів Вікімедіа</string>
+  <string name="resuming_upload">Продовження завантаження…</string>
+  <string name="pausing_upload">Призупинення завантаження…</string>
+  <string name="limited_connection_explanation">Ви ввімкнули режим обмеженого з\'єднання. Усі завантаження призупинено та буде відновлено коли Ви вимкнете цей режим.</string>
+  <string name="limited_connection_is_on">Режим обмеженого з\'єднання ввімкнено.</string>
+  <string name="media_details_tooltip">Будь ласка, напишіть короткий опис, що розповідає що представлено на зображенні. В описі розкажіть що робить це зображення цікавим, типовим або рідкісним, опишіть контекст — видимий чи ні. Старайтесь максимально використовувати точну термінологію.</string>
+  <string name="depicts_tooltip">Будь ласка, знайдіть та оберіть всі концепти, що це зображення показує. Будьте настільки точними, наскільки можливо. Якщо зображення зображує декілька речей, у межах здорового глузду оберіть їх всі. Не обирайте загальніші теґи, коли є доступні точніші.</string>
+  <string name="categories_tooltip">Будь ласка, оберіть відповідні категорії. На відміну від описів, назви категорій лише англійською.</string>
+  <string name="license_tooltip">Вікісховище робить Ваші зображення доступними до використання та адаптації іншими. Хочете відмовитись від усіх прав? Хочете, щоб Ваше авторство вказувалось? Хочете, щоб адаптації використовували таку ж ліцензію?</string>
+  <string name="depicts_step_title">Зображує</string>
+  <string name="license_step_title">Ліцензія медіа</string>
+  <string name="media_detail_step_title">Деталі медіа</string>
 </resources>

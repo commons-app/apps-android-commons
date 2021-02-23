@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * BanKris
 * Bencemac
 * Csega
@@ -21,7 +20,7 @@
     <item quantity="one">%1$d fájl feltöltése folyamatban</item>
     <item quantity="other">%1$d fájl feltöltése folyamatban</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d feltöltés</item>
     <item quantity="other">%1$d feltöltés</item>
@@ -89,7 +88,6 @@
   <string name="menu_nearby">Közelben</string>
   <string name="provider_contributions">Feltöltéseim</string>
   <string name="menu_share">Megosztás</string>
-  <string name="menu_open_in_browser">Megtekintés böngészőben</string>
   <string name="share_title_hint">Képaláírás (kötelező)</string>
   <string name="share_description_hint">Leírás</string>
   <string name="login_failed_network">Nem lehet bejelentkezni - hálózati hiba</string>
@@ -109,7 +107,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">A GPS le van tiltva az eszközén. Szeretné engedélyezni?</string>
   <string name="enable_gps">GPS engedélyezése</string>
-  <string name="contributions_subtitle_zero">Még nincsenek feltöltések</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Még nincsenek feltöltések</string>
   <string name="categories_not_found">Nincs a(z) „%1$s” keresési kifejezésnek megfelelő kategória</string>
   <string name="categories_skip_explanation">Adj kategóriákat a képekhez, hogy könnyebben meg lehessen találni őket a Commonson.\nKezdd el beírni a kategória nevét, hogy hozzáadd.\nBökj erre az üzenetre (vagy a vissza gombra) a lépés kihagyásához</string>
   <string name="categories_activity_title">Kategóriák</string>
@@ -402,12 +400,12 @@
   <string name="storage_permission">Tárolási engedély</string>
   <string name="write_storage_permission_rationale_for_image_share">Szükséges az engedélyed a külső tárolóhoz való hozzáféréshez. Ez a képek feltöltéséhez kell.</string>
   <string name="nearby_notification_dismiss_message">Nem lesznek láthatók a képet igénylő közeli helyek. Az értesítés visszakapcsolható a Beállításoknál.</string>
-  <string name="step_count">%1$d. lépés, összesen: %2$d</string>
+  <string name="step_count" fuzzy="true">%1$d. lépés, összesen: %2$d</string>
   <string name="image_in_set_label">%1$d kép a gyűjteményben</string>
   <string name="next">Következő</string>
   <string name="previous">Előző</string>
   <string name="submit">Küldés</string>
-  <string name="upload_title_duplicate">Már létezik \"%1$s\" nevű fájl. Biztosan folytatod?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Már létezik \"%1$s\" nevű fájl. Biztosan folytatod?</string>
   <string name="map_application_missing">Nem található kompatibilis térképalkalmazás az eszközödön. Kérjük rakj fel ilyen appot a funkció használatához.</string>
   <string name="navigation_item_bookmarks">Könyvjelzők</string>
   <string name="title_activity_bookmarks">Könyvjelzők</string>
@@ -440,7 +438,7 @@
   <string name="nearby_card_permission_explanation">A földrajzi hely ismerete szükséges a közeli hely meghatározásához, ami képet igényel.</string>
   <string name="unable_to_display_nearest_place">A helymeghatározás nélkül nem használható ez a funkció.</string>
   <string name="never_ask_again">Ne kérdezd meg többször</string>
-  <string name="display_location_permission_title">Helymeghatározási engedély</string>
+  <string name="display_location_permission_title" fuzzy="true">Helymeghatározási engedély</string>
   <string name="achievements_fetch_failed">Valami hiba történt, nem sikerült az eredményeid betöltése</string>
   <string name="display_campaigns">Kampányok megjelenítése</string>
   <string name="display_campaigns_explanation">Folyamatban lévő kampányok megjelenítése</string>

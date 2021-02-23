@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Wisdom
+-->
 <resources>
   <string name="app_name" fuzzy="true">Wikimedia Commons програм</string>
   <string name="menu_settings">Тохиргоо</string>
@@ -9,7 +12,7 @@
   <string name="logging_in_message">Түр хүлээнэ үү …</string>
   <string name="login_success">Нэвтрэлт амжилттай боллоо!</string>
   <string name="login_failed">Нэвтэрч чадсангүй!</string>
-  <string name="authentication_failed">Таныг танихад алдаа гарлаа!</string>
+  <string name="authentication_failed" fuzzy="true">Таныг танихад алдаа гарлаа!</string>
   <string name="uploading_started">Upload хийж эхэллээ!</string>
   <string name="upload_completed_notification_title">%1$s upload хийсэн!</string>
   <string name="upload_completed_notification_text">upload хийсэн жагсаалт харах</string>
@@ -27,12 +30,9 @@
   <string name="menu_from_camera">Зураг авах</string>
   <string name="provider_contributions">Миний хийсэн upload</string>
   <string name="menu_share">Хуваалцах</string>
-  <string name="menu_open_in_browser">Веб хөтөч дээр үзэх</string>
-  <string name="share_title_hint">Гарчиг</string>
+  <string name="share_title_hint" fuzzy="true">Гарчиг</string>
   <string name="share_description_hint">Тайлбар</string>
   <string name="login_failed_network">Нэвтрэхэд алдаа - сүлжээ</string>
-  <string name="login_failed_username">Нэвтрэхэд алдаа - хэрэглэгчийн нэр</string>
-  <string name="login_failed_password">Нэвтрэхэд алдаа - нууц үг</string>
   <string name="login_failed_throttled" fuzzy="true">Алдаатай оролдлогуудын тоо гүйцсэн. Түр хүлээгээд дахин оролдоно уу.</string>
   <string name="login_failed_blocked">Энэ хэрэглэгч Commons дээр блок хийгдсэн байна</string>
   <string name="login_failed_generic">Нэвтэрч чадсангүй!</string>
@@ -48,7 +48,7 @@
   <string name="menu_retry_upload">Дахин оролд</string>
   <string name="menu_cancel_upload">Болих</string>
   <string name="menu_download">Татаж авах</string>
-  <string name="preference_license">Зохиогчийн эрх:</string>
+  <string name="preference_license" fuzzy="true">Зохиогчийн эрх:</string>
   <string name="welcome_final_button_text">Тийм!</string>
   <string name="detail_panel_cats_label">Нэр төрөл</string>
   <string name="detail_panel_cats_loading">Уншиж байна…</string>

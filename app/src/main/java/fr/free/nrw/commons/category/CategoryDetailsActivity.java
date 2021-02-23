@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.category;
 
+import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_PREFIX;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -18,7 +21,7 @@ import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.explore.ViewPagerAdapter;
+import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment;
 import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment;
@@ -26,6 +29,7 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
+import org.wikipedia.page.PageTitle;
 
 /**
  * This activity displays details of a particular category
@@ -44,7 +48,7 @@ public class CategoryDetailsActivity extends BaseActivity
     @BindView(R.id.mediaContainer) FrameLayout mediaContainer;
     @BindView(R.id.tab_layout) TabLayout tabLayout;
     @BindView(R.id.viewPager) ViewPager viewPager;
-
+    @BindView(R.id.toolbar) Toolbar toolbar;
     ViewPagerAdapter viewPagerAdapter;
 
     @Override
@@ -57,6 +61,7 @@ public class CategoryDetailsActivity extends BaseActivity
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setOffscreenPageLimit(2);
         tabLayout.setupWithViewPager(viewPager);
+        setSupportActionBar(toolbar);
         setTabs();
         setPageTitle();
     }
@@ -179,7 +184,8 @@ public class CategoryDetailsActivity extends BaseActivity
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.menu_browser_current_category:
-                Utils.handleWebUrl(this, Uri.parse(Utils.getPageTitle(categoryName).getCanonicalUri()));
+                PageTitle title = Utils.getPageTitle(CATEGORY_PREFIX + categoryName);
+                Utils.handleWebUrl(this, Uri.parse(title.getCanonicalUri()));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

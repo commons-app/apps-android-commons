@@ -8,6 +8,7 @@ import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.VectorDrawable;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Html;
@@ -27,6 +29,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -82,6 +85,7 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -213,6 +217,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private fr.free.nrw.commons.location.LatLng lastFocusLocation;
     private LatLngBounds latLngBounds;
     private PlaceAdapter adapter;
+    private NearbyParentFragmentInstanceReadyCallback nearbyParentFragmentInstanceReadyCallback;
 
     @NonNull
     public static NearbyParentFragment newInstance() {
@@ -270,6 +275,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 uiSettings.setAttributionEnabled(false);
                 uiSettings.setRotateGesturesEnabled(false);
                 isMapBoxReady =true;
+                if(nearbyParentFragmentInstanceReadyCallback!=null){
+                    nearbyParentFragmentInstanceReadyCallback.onReady();
+                }
                 performMapReadyActions();
                 final CameraPosition cameraPosition = new CameraPosition.Builder()
                         .target(new LatLng(51.50550, -0.07520))
@@ -333,7 +341,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void performMapReadyActions() {
-        if (isVisible() && isMapBoxReady) {
+        if (((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY && isMapBoxReady) {
             checkPermissionsAndPerformAction(() -> {
                 lastKnownLocation = locationManager.getLastLocation();
                 fr.free.nrw.commons.location.LatLng target=lastFocusLocation;
@@ -346,7 +354,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                             .zoom(ZOOM_LEVEL) // Same zoom level
                             .build();
                     mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
-                } else {
+                }
+                else if(locationManager.isGPSProviderEnabled()||locationManager.isNetworkProviderEnabled()){
+                    locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
+                    locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
+                    setProgressBarVisibility(true);
+                }
+                else {
                     Toast.makeText(getContext(), getString(R.string.nearby_location_not_available), Toast.LENGTH_LONG).show();
                 }
                 presenter.onMapReady();
@@ -362,7 +376,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         mapView.onResume();
         presenter.attachView(this);
         registerNetworkReceiver();
-        if (isResumed() && isVisibleToUser) {
+        if (isResumed() && ((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY) {
             startTheMap();
         }
     }
@@ -433,14 +447,41 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Creates bottom sheet behaviours from bottom sheets, sets initial states and visibility
+     * a) Creates bottom sheet behaviours from bottom sheets, sets initial states and visibility
+     * b) Gets the touch event on the map to perform following actions:
+     *      if fab is open then close fab.
+     *      if bottom sheet details are expanded then collapse bottom sheet details.
+     *      if bottom sheet details are collapsed then hide the bottom sheet details.
+     *      if listBottomSheet is open then hide the list bottom sheet.
      */
+    @SuppressLint("ClickableViewAccessibility")
     private void initBottomSheets() {
         bottomSheetListBehavior = BottomSheetBehavior.from(rlBottomSheet);
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         bottomSheetDetails.setVisibility(View.VISIBLE);
         bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        mapView.setOnTouchListener((v, event) -> {
+
+            // Motion event is triggered two times on a touch event, one as ACTION_UP
+            // and other as ACTION_DOWN, we only want one trigger per touch event.
+
+            if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (isFABsExpanded) {
+                    collapseFABs(true);
+                } else if (bottomSheetDetailsBehavior.getState()
+                    == BottomSheetBehavior.STATE_EXPANDED) {
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                } else if (bottomSheetDetailsBehavior.getState()
+                    == BottomSheetBehavior.STATE_COLLAPSED) {
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                } else if (isListBottomSheetExpanded()) {
+                    bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                }
+            }
+            return false;
+        });
     }
 
     public void initNearbyFilter() {
@@ -672,14 +713,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void updateListFragment(final List<Place> placeList) {
         adapter.setItems(placeList);
         noResultsView.setVisibility(placeList.isEmpty() ? View.VISIBLE : View.GONE);
-    }
-
-    public void clearNearbyList() {
-        adapter.clear();
-    }
-
-    public void addPlaceToNearbyList(final Place place) {
-        adapter.add(place);
     }
 
     @Override
@@ -1205,8 +1238,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param curLatLng current location
      */
     public void updateMarker(final boolean isBookmarked, final Place place, @Nullable final fr.free.nrw.commons.location.LatLng curLatLng) {
-        addPlaceToNearbyList(place);
-
         VectorDrawableCompat vectorDrawable = VectorDrawableCompat.create(
             getContext().getResources(), getIconFor(place, isBookmarked), getContext().getTheme());
 
@@ -1265,7 +1296,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
         }
         addCurrentLocationMarker(NearbyController.currentLocation);
-        clearNearbyList();
     }
 
     private void addNearbyMarkersToMapBoxMap(final List<NearbyBaseMarker> nearbyBaseMarkers, final Marker selectedMarker) {
@@ -1541,4 +1571,20 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         mapView.onStart();
         performMapReadyActions();
     }
+
+    public interface  NearbyParentFragmentInstanceReadyCallback{
+        void onReady();
+    }
+
+    public void setNearbyParentFragmentInstanceReadyCallback(NearbyParentFragmentInstanceReadyCallback nearbyParentFragmentInstanceReadyCallback) {
+        this.nearbyParentFragmentInstanceReadyCallback = nearbyParentFragmentInstanceReadyCallback;
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull final Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        ViewGroup.LayoutParams rlBottomSheetLayoutParams = rlBottomSheet.getLayoutParams();
+        rlBottomSheetLayoutParams.height = getActivity().getWindowManager().getDefaultDisplay().getHeight() / 16 * 9;
+        rlBottomSheet.setLayoutParams(rlBottomSheetLayoutParams);
+        }
 }

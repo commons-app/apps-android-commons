@@ -7,9 +7,9 @@ Here's a gist of the guidelines,
 
 1. Make separate commits for logically separate changes
 
-1. Describe your changes well in the commit message
+2. Describe your changes well in the commit message
 
-    The first line of the commit message should be a short description of what has
+The first line of the commit message should be a short description of what has
 changed. It is also good to prefix the first line with "area: " where the "area"
 is a filename or identifier for the general area of the code being modified.
 The body should provide a meaningful commit message.
@@ -29,9 +29,9 @@ The body should provide a meaningful commit message.
       and if needed, Git allows us to see who wrote something without needing
       to add these tags (`git blame`)
 
-1. Write tests for your code (if possible)
+2. Write tests for your code (if possible)
 
-1. Make sure the Wiki pages don't become stale by updating them (if needed)
+3. Make sure the Wiki pages don't become stale by updating them (if needed)
 
 ### Further reading
 

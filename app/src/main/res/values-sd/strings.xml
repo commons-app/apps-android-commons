@@ -69,7 +69,6 @@
   <string name="menu_nearby">ويجھڙائيءَ ۾</string>
   <string name="provider_contributions">منھنجا چاڙھ</string>
   <string name="menu_share">ونڊيو</string>
-  <string name="menu_open_in_browser">جھانگوءَ ۾ ڏسو</string>
   <string name="share_title_hint">عنوان (گھربل)</string>
   <string name="share_description_hint">تشريح</string>
   <string name="login_failed_network">ناقابلِ داخل ٿيڻ - باھمڄار ناڪامي</string>
@@ -89,7 +88,7 @@
   <string name="display_list_button">فھرست</string>
   <string name="gps_disabled">اوهان جي ڊوائيس ۾ جي پي ايس بند آهي. ڇا اوهان ان کي کولڻ چاهيو ٿا؟</string>
   <string name="enable_gps">جي پي ايس چالو ڪيو (اين ايبل جي پي ايس)</string>
-  <string name="contributions_subtitle_zero">اڃا تائين ڪوبہ چاڙھ ناھي</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">اڃا تائين ڪوبہ چاڙھ ناھي</string>
   <string name="categories_not_found">%1$s سان ملندڙ ڪوبہ زمرو نہ لڌو</string>
   <string name="categories_skip_explanation">پنھنجي عڪسن ۾ زمرا وجھو تہ جيئن وڪيميڊيا العام تي وڌيڪ ڳولا لائق ٿي سگھن.\n\nزمرا وجھڻ لاءِ لکڻ شروع ڪريو.</string>
   <string name="categories_activity_title">زمرا</string>
@@ -313,7 +312,7 @@
   <string name="search_this_area">ھي علائقو ڳوليو</string>
   <string name="nearby_card_permission_title">اجازت جي درخواست</string>
   <string name="never_ask_again">ھي ٻيھر ڪڏھن نہ پڇو</string>
-  <string name="display_location_permission_title">مڪانيت جي اجازت ڏيکاريو</string>
+  <string name="display_location_permission_title">مڪانيت جي اجازت وٺو</string>
   <string name="ends_on">تي ختم:</string>
   <string name="nominate_for_deletion_done">ٿي-ويو</string>
   <string name="nominate_for_deletion_notify_user">واپرائيندڙ کي بحث صفحي تي اطلاع ڏيندي</string>

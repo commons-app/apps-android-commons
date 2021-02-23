@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Astralnet
 * Domdomegg
 * Evropi
@@ -10,6 +9,7 @@
 * KATRINE1992
 * KATRINE1993
 * ManosHacker
+* NikosLikomitros
 * Nikosgranturismogt
 * Nikosguard
 * Norhorn
@@ -22,10 +22,9 @@
     <item quantity="one">1 αρχείο επιφορτώνεται</item>
     <item quantity="other">%1$d αρχεία επιφορτώνονται</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Δεν υπάρχουν φορτώσεις ακόμη</item>
-    <item quantity="one">%1$d φόρτωση</item>
-    <item quantity="other">%1$d φορτώσεις</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Έναρξη %1$d επιφόρτωσης</item>
@@ -84,7 +83,6 @@
   <string name="menu_nearby">Κοντά</string>
   <string name="provider_contributions">Οι επιφορτώσεις μου</string>
   <string name="menu_share">Κοινοποίηση</string>
-  <string name="menu_open_in_browser">Προβολή στον περιηγητή</string>
   <string name="share_title_hint" fuzzy="true">Τίτλος (Υποχρεωτικό)</string>
   <string name="share_description_hint">Περιγραφή</string>
   <string name="login_failed_network">Δεν είναι δυνατή η σύνδεση - αποτυχία του δικτύου</string>
@@ -104,7 +102,7 @@
   <string name="display_list_button">Κατάλογος</string>
   <string name="gps_disabled">Το GPS στην συσκευή είναι απενεργοποιημένο. Θέλετε να το ενεργοποιήσετε;</string>
   <string name="enable_gps">  Ενεργοποιήσετε το GPS</string>
-  <string name="contributions_subtitle_zero">Δεν έχουν ακόμη επιφορτωθεί αρχεία</string>
+  <string name="contributions_subtitle_zero">(Καμία μεταφόρτωση ακόμα)</string>
   <string name="categories_not_found">Δεν βρέθηκαν κατηγορίες που ταιριάζουν %1$s</string>
   <string name="categories_skip_explanation">Προσθέστε κατηγορίες για να κάνετε τις εικόνες σας πιο ανιχνεύσιμες στα Wikimedia Commons.\n\nΑρχίστε να γράφετε για να προσθέσετε κατηγορίες.\nΠατήστε αυτό το μήνυμα (ή πατήστε επιστροφή) για να παραλείψετε αυτό το βήμα.</string>
   <string name="categories_activity_title">Κατηγορίες</string>
@@ -383,7 +381,7 @@
   <string name="next">Επόμενο</string>
   <string name="previous">Προηγούμενο</string>
   <string name="submit">Υποβολή</string>
-  <string name="upload_title_duplicate">Υπάρχει ήδη ένας φάκελλος με όνομα %1$s. Είστε σίγουρος πως θέλετε να προχωρήσετε ?</string>
+  <string name="upload_title_duplicate">Υπάρχει ήδη αρχείο με όνομα %1$s. Είστε σίγουροι πως θέλετε να προχωρήσετε;\n\nΣημείωση: θα προστεθεί αυτόματα μια διόρθωση όνομα αρχείου.</string>
   <string name="map_application_missing">Καμία εφαρμογή χάρτη δεν βρέθηκε στον υπολογιστή. Παρακαλώ εγκαταστήστε εφαρμογή χάρτη για να χρησιμοποιήσετε αυτήν την ιδιότητα.</string>
   <string name="navigation_item_bookmarks">Σελιδοδείκτες</string>
   <string name="title_activity_bookmarks">Σελιδοδείκτες</string>

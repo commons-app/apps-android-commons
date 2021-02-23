@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * C1pr1an
 * GabiBil
 * Kyouko
@@ -85,11 +84,10 @@
   <string name="menu_nearby">În apropiere</string>
   <string name="provider_contributions">Încărcările mele</string>
   <string name="menu_share">Partajare</string>
-  <string name="menu_open_in_browser">Afișează în navigator</string>
   <string name="share_title_hint">Descriere (Necesară)</string>
   <string name="add_caption_toast">Vă rugăm să oferiți o descriere pentru acest fișier</string>
   <string name="share_description_hint">Descriere</string>
-  <string name="share_caption_hint">Descriere (limită 255 caractere)</string>
+  <string name="share_caption_hint">Descriere</string>
   <string name="login_failed_network">Autentificare nereușită – defecțiune de rețea</string>
   <string name="login_failed_wrong_credentials">Nu poți să te autentifici - verifică-ți numele de utilizator și parola</string>
   <string name="login_failed_throttled">Prea multe încercări nereușite. Încercați din nou peste câteva minute.</string>
@@ -108,7 +106,7 @@
   <string name="display_list_button">Listă</string>
   <string name="gps_disabled">GPS-ul este dezactivat pe device-ul dumneavoastră. Doriți să-l activați?</string>
   <string name="enable_gps">Activează GPS</string>
-  <string name="contributions_subtitle_zero">Niciun fișier încă!</string>
+  <string name="contributions_subtitle_zero">(Fără încărcări încă)</string>
   <string name="categories_not_found">Nu s-a găsit nicio categorie corespunzătoare cu %1$s</string>
   <string name="depictions_not_found">Nu s-au găsit articole Wikidata care corespund %1$s</string>
   <string name="no_child_classes">%1$s nu are clase copil</string>
@@ -270,7 +268,7 @@
   <string name="error_while_cache">Eroare la cache imaginilor</string>
   <string name="title_info">Un titlu descriptiv unic pentru fișier, care va servi ca nume de fișier. Puteți utiliza un limbaj simplu cu spații. Nu includeți extensia de fișier</string>
   <string name="description_info">Vă rugăm să descrieți media cât mai mult posibil: Unde a fost făcut? Ce arată? Care este contextul? Descrieți obiectele sau persoanele. Dezvăluiți informații care nu pot fi ușor ghicite, cum ar fi timpul zilei dacă este un peisaj. În cazul în care materialul transmis arată ceva neobișnuit, vă rugăm să explicați ceea ce o face neobișnuită.</string>
-  <string name="caption_info" fuzzy="true">Vă rugăm să scrieți o scurtă descriere a imaginii. (Limită la 255 de caractere)</string>
+  <string name="caption_info">Vă rugăm să scrieți o scurtă descriere a imaginii. Prima descriere va fi folosită ca Titlu pentru imagine. Limită 255 de caractere.</string>
   <string name="upload_image_too_dark">Această imagine este prea întunecată, sunteți sigur că doriți să o încărcați? Wikimedia Commons este numai pentru imagini cu valoare enciclopedică.</string>
   <string name="upload_image_blurry">Această imagine este neclară, sunteți sigur că doriți să o încărcați? Wikimedia Commons este numai pentru imagini cu valoare enciclopedică.</string>
   <string name="upload_problem_exist">Probleme potențiale cu această imagine:</string>
@@ -422,12 +420,12 @@
   <string name="storage_permission">Permisiune de stocare</string>
   <string name="write_storage_permission_rationale_for_image_share">Avem nevoie de permisiunea dvs. pentru a accesa spațiul de stocare extern al dispozitivului dvs. pentru a încărca imagini.</string>
   <string name="nearby_notification_dismiss_message">Nu veți vedea cel mai apropiat loc care are nevoie de imagini. Cu toate acestea, puteți reactiva această notificare în Setări, dacă doriți.</string>
-  <string name="step_count">Pasul %1$d din %2$d</string>
+  <string name="step_count" fuzzy="true">Pasul %1$d din %2$d</string>
   <string name="image_in_set_label">Imaginea %1$d în set</string>
   <string name="next">Următor</string>
   <string name="previous">Precedent</string>
   <string name="submit">Trimite</string>
-  <string name="upload_title_duplicate">Există un fișier cu numele de fișier %1$s. Sunteți sigur că doriți să continuați?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Există un fișier cu numele de fișier %1$s. Sunteți sigur că doriți să continuați?</string>
   <string name="map_application_missing">Nu s-a găsit nicio aplicație de hartă compatibilă pe dispozitiv. Instalați o aplicație de hartă pentru a utiliza această caracteristică.</string>
   <string name="navigation_item_bookmarks">Semne de carte</string>
   <string name="title_activity_bookmarks">Semne de carte</string>
@@ -462,7 +460,7 @@
   <string name="nearby_card_permission_explanation">Doriți ca noi să folosim locația dvs. curentă pentru a afișa cel mai apropiat loc care are nevoie de imagini?</string>
   <string name="unable_to_display_nearest_place">Imposibil să afișăm cel mai apropiat loc care are nevoie de imagini fără să avem permisiuni de locație</string>
   <string name="never_ask_again">Nu mai întrebați niciodată acest lucru</string>
-  <string name="display_location_permission_title">Afișați permisiunea de locație</string>
+  <string name="display_location_permission_title">Cere permisiunea de locație</string>
   <string name="display_location_permission_explanation">Solicitați permisiunea de localizare atunci când este necesar pentru a utiliza funcția notificărilor de localizare.</string>
   <string name="achievements_fetch_failed">Ceva a mers prost, nu am reușit să ne aducem realizările</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Ai făcut atâtea contribuții sistemul nostru de calcul al realizărilor nu poate face față. Aceasta este realizarea finală.</string>

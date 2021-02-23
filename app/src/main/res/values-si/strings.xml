@@ -6,6 +6,24 @@
 * 1100100
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+    <item quantity="one">1 ගොනුවක් උඩුගත කෙරේ</item>
+    <item quantity="other">ගොනු %d ක් උඩුගත කෙරේ</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">තවමත් කිසිදු උඩුගත කිරීමක් නැත</item>
+    <item quantity="one">එක් උඩුගත කිරීමක් ඇත</item>
+    <item quantity="other">උඩුගත කිරීම් %1$d ක් ඇත</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">1 උඩුගත කිරීමක් ආරම්භ කරමින්</item>
+    <item quantity="other">උඩුගත කිරීම් %1$d ක් ආරම්භ කරමින්</item>
+  </plurals>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">1 උඩුගත කිරීමක්</item>
+    <item quantity="other">උඩුගත කිරීම් %1$d ක්</item>
+  </plurals>
+  <string name="share_license_summary" fuzzy="true">මෙම පින්තූරය %1$s යටතේ වලංගු වනු ඇත</string>
   <string name="app_name">කොමන්ස්</string>
   <string name="menu_settings">සැකසුම්</string>
   <string name="username">පරිශීලක නාමය</string>
@@ -26,10 +44,6 @@
   <string name="upload_progress_notification_title_finishing"> %1$s උඩුගතකිරීම් අවසන් කරමින්</string>
   <string name="upload_failed_notification_title">උදුගතකරමින්  %1$s අසාර්ථකයි</string>
   <string name="upload_failed_notification_subtitle">පෙන්වන්න තට්ටු කරන්න.</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">1 ගොනුවක් උඩුගත කෙරේ</item>
-    <item quantity="other">ගොනු %d ක් උඩුගත කෙරේ</item>
-  </plurals>
   <string name="title_activity_contributions">මගේ අලුත්ම උඩුගතකිරීම්</string>
   <string name="contribution_state_queued">පෝලිමට එක්වූවා</string>
   <string name="contribution_state_failed">අසාර්ථකයි</string>
@@ -40,7 +54,6 @@
   <string name="menu_nearby">අවට</string>
   <string name="provider_contributions">මගේ උඩුගතකිරීම්</string>
   <string name="menu_share">හුවමාරු කරන්න</string>
-  <string name="menu_open_in_browser">ගවේෂකයෙහි විවෘත කරන්න</string>
   <string name="share_title_hint" fuzzy="true">මාතෘකාව</string>
   <string name="share_description_hint">විස්තරය</string>
   <string name="login_failed_network">පිවිසීමට නොහැකිය-ජාලය ඇනහිටීමක්</string>
@@ -57,20 +70,7 @@
   <string name="refresh_button">නැවත ප්‍රාණවත් කරන්න</string>
   <string name="gps_disabled">ඔබගේ උපකරණයේ GPS ක්‍රියා විරහිත කර ඇත. ඔබ එය නැවත ක්‍රියා කිරීමට කැමතිද?</string>
   <string name="enable_gps">GPS ක්‍රියා කරවන්න</string>
-  <string name="contributions_subtitle_zero">තවම උඩුගත කිරීම් කිසිවක් නැත</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">තවමත් කිසිදු උඩුගත කිරීමක් නැත</item>
-    <item quantity="one">එක් උඩුගත කිරීමක් ඇත</item>
-    <item quantity="other">උඩුගත කිරීම් %1$d ක් ඇත</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">1 උඩුගත කිරීමක් ආරම්භ කරමින්</item>
-    <item quantity="other">උඩුගත කිරීම් %1$d ක් ආරම්භ කරමින්</item>
-  </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">1 උඩුගත කිරීමක්</item>
-    <item quantity="other">උඩුගත කිරීම් %1$d ක්</item>
-  </plurals>
+  <string name="contributions_subtitle_zero" fuzzy="true">තවම උඩුගත කිරීම් කිසිවක් නැත</string>
   <string name="categories_not_found">ප්‍රවර්ග සැසඳේන්නේ නැත %1$s හමුවිsය</string>
   <string name="categories_activity_title">ප්‍රවර්ග</string>
   <string name="title_activity_settings">සැකසුම්</string>
@@ -85,7 +85,6 @@
   <string name="no_uploads_yet">ඔබ තවමත් කිසිදු ඡායාරුපයක් උඩුගත කර නැත.</string>
   <string name="menu_retry_upload">නැවත උත්සහ කරන්න</string>
   <string name="menu_cancel_upload">අවලංගු කරන්න</string>
-  <string name="share_license_summary" fuzzy="true">මෙම පින්තූරය %1$s යටතේ වලංගු වනු ඇත</string>
   <string name="menu_download">බාගන්න</string>
   <string name="preference_license" fuzzy="true">බලපත්‍රය</string>
   <string name="use_previous" fuzzy="true">පෙර මාතෘකාව/විස්තරය භාවිතා කරන්න</string>
@@ -168,7 +167,7 @@
   <string name="navigation_item_notification">නිවේදන</string>
   <string name="no_description_found">කිසිම තොරතුරක් සොයාගැනීමට නොමැත</string>
   <string name="nearby_info_menu_wikidata_article">විකිදත්ත අයිතමය</string>
-  <string name="use_external_storage">භාහිර ගබඩාව භාවිතා කරන්න</string>
+  <string name="use_external_storage" fuzzy="true">භාහිර ගබඩාව භාවිතා කරන්න</string>
   <string name="login_to_your_account">ඔබගේ ගිණුමට පිවිසෙන්න</string>
   <string name="nearby_location_has_not_changed">ස්ථානය වෙනස් වී නොමැත</string>
   <string name="nearby_location_not_available" fuzzy="true">ස්ථානය දී නොමැත</string>

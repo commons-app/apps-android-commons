@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Vlad5250
 -->
 <resources>
@@ -65,7 +64,6 @@
   <string name="menu_nearby">U blizini</string>
   <string name="provider_contributions">Moja otpremanja</string>
   <string name="menu_share">Podijeli</string>
-  <string name="menu_open_in_browser">Pogledaj u pregledniku</string>
   <string name="share_title_hint" fuzzy="true">Naslov (obavez.)</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Ne mogu Vas prijaviti — mreža ne radi</string>
@@ -85,7 +83,7 @@
   <string name="display_list_button">Popis</string>
   <string name="gps_disabled">GPS je onemogućen na Vašem uređaju. Želite li ga omogućiti?</string>
   <string name="enable_gps">Omogući GPS</string>
-  <string name="contributions_subtitle_zero">Još uvijek nema otpremanja</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Još uvijek nema otpremanja</string>
   <string name="categories_not_found">Nema kategorija što odgovoraju %1$s</string>
   <string name="categories_skip_explanation">Stavite kategorije slikama kako biste olakšali korisnicima njihovo pronalaženje na Ostavi.\n\nDa biste stavili kategoriju, počnite sa pisanjem njenog imena.</string>
   <string name="categories_activity_title">Kategorije</string>

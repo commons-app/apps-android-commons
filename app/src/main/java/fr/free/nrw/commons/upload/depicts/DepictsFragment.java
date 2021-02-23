@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -49,6 +51,8 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     ProgressBar depictsSearchInProgress;
     @BindView(R.id.depicts_recycler_view)
     RecyclerView depictsRecyclerView;
+    @BindView(R.id.tooltip)
+    ImageView tooltip;
 
     @Inject
     DepictsContract.UserActionListener presenter;
@@ -77,6 +81,13 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         depictsTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
                 callback.getTotalNumberOfSteps()));
         setDepictsSubTitle();
+                callback.getTotalNumberOfSteps(), getString(R.string.depicts_step_title)));
+        tooltip.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogUtil.showAlertDialog(getActivity(), getString(R.string.depicts_step_title), getString(R.string.depicts_tooltip), getString(android.R.string.ok), null, true);
+            }
+        });
         presenter.onAttachView(this);
         initRecyclerView();
         addTextChangeListenerToSearchBox();

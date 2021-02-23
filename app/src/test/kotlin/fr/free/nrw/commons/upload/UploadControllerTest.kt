@@ -52,7 +52,7 @@ class UploadControllerTest {
         val contribution = mock(Contribution::class.java)
         val media = mock<Media>()
         whenever(contribution.media).thenReturn(media)
-        whenever(media.creator).thenReturn("Creator")
+        whenever(media.author).thenReturn("Creator")
         uploadController!!.startUpload(contribution)
     }
 }

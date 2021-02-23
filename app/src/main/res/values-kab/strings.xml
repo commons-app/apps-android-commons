@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Belkacem77
 * Hociben
 -->
@@ -53,7 +52,6 @@
   <string name="menu_nearby">S lqeṛban</string>
   <string name="provider_contributions">Ifuyla i suliɣ</string>
   <string name="menu_share">Bḍu</string>
-  <string name="menu_open_in_browser">Sken deg yiminig</string>
   <string name="share_title_hint" fuzzy="true">Azwel</string>
   <string name="share_description_hint">Aglam</string>
   <string name="login_failed_network">Ur izmir ara ad yeqqen - tuccḍa n uẓeṭṭa</string>
@@ -70,7 +68,7 @@
   <string name="refresh_button">Smiren</string>
   <string name="gps_disabled">GPS ur yermid ɣef yibenk-ik. Tebɣiḍ ad tremdeḍ-t?</string>
   <string name="enable_gps">Rmed GPS</string>
-  <string name="contributions_subtitle_zero">Usla ayen yulin</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Usla ayen yulin</string>
   <string name="categories_not_found">Ulac taggayin imenṭaḍen akked %1$s i yettwafen</string>
   <string name="categories_skip_explanation">Rnu taggayin akken ad terreḍ tugniwin-ik sehlent i tifin di Wikimedia Commons.\n\nBdu timerna n taggayin.</string>
   <string name="categories_activity_title">Taggayin</string>

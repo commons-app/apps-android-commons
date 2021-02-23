@@ -36,6 +36,7 @@ import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.disposables.CompositeDisposable;
+import java.util.ArrayList;
 import java.util.Objects;
 import javax.inject.Inject;
 import timber.log.Timber;
@@ -61,6 +62,15 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     private MediaDetailProvider provider;
     private boolean isFromFeaturedRootFragment;
     private int position;
+
+    private ArrayList<Integer> removedItems=new ArrayList<Integer>();
+
+    public void clearRemoved(){
+        removedItems.clear();
+    }
+    public ArrayList<Integer> getRemovedItems() {
+        return removedItems;
+    }
 
     public MediaDetailPagerFragment() {
         this(false, false);
@@ -90,7 +100,10 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         pager.addOnPageChangeListener(this);
 
         adapter = new MediaDetailAdapter(getChildFragmentManager());
-        ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (((BaseActivity) getActivity()).getSupportActionBar() != null) {
+            ((BaseActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         if (savedInstanceState != null) {
             final int pageNumber = savedInstanceState.getInt("current-page");
@@ -254,7 +267,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     // Initialize bookmark object
                     bookmark = new Bookmark(
                             m.getFilename(),
-                            m.getCreator(),
+                            m.getAuthor(),
                             BookmarkPicturesContentProvider.uriForName(m.getFilename())
                     );
                     updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
@@ -292,12 +305,27 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(false)
                             .setVisible(false);
                 }
+
+                if (!sessionManager.isUserLoggedIn()) {
+                    menu.findItem(R.id.menu_set_as_avatar).setVisible(false);
+                }
+
             }
         }
     }
 
     private void updateBookmarkState(MenuItem item) {
         boolean isBookmarked = bookmarkDao.findBookmark(bookmark);
+        if(isBookmarked) {
+            if(removedItems.contains(pager.getCurrentItem())) {
+                removedItems.remove(new Integer(pager.getCurrentItem()));
+            }
+        }
+        else {
+            if(!removedItems.contains(pager.getCurrentItem())) {
+                removedItems.add(pager.getCurrentItem());
+            }
+        }
         int icon = isBookmarked ? R.drawable.menu_ic_round_star_filled_24px : R.drawable.menu_ic_round_star_border_24px;
         item.setIcon(icon);
     }

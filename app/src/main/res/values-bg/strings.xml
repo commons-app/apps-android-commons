@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * DCLXVI
 * Datawiki30
 * MegaAlex
@@ -64,7 +63,6 @@
   <string name="menu_nearby">Наблизо</string>
   <string name="provider_contributions">Моите качвания</string>
   <string name="menu_share">Споделяне</string>
-  <string name="menu_open_in_browser">Преглед в браузъра</string>
   <string name="share_title_hint">Описание (задълж.)</string>
   <string name="share_description_hint">Описание</string>
   <string name="login_failed_network">Неуспешно влизане – проблем в мрежата</string>
@@ -82,7 +80,7 @@
   <string name="display_list_button">Списък</string>
   <string name="gps_disabled">GPS е изключен на устройството Ви. Желаете ли да го включите?</string>
   <string name="enable_gps">Включи GPS</string>
-  <string name="contributions_subtitle_zero">Все още няма качени файлове</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Все още няма качени файлове</string>
   <string name="categories_not_found">Няма категории, отговарящи на %1$s</string>
   <string name="categories_skip_explanation">Поставете категории на изображения, за да могат потребителите по-лесно да ги намерят на Общомедия.\n\nЗа да поставите категория, почнете с писане на нейното име.</string>
   <string name="categories_activity_title">Категории</string>
@@ -230,7 +228,7 @@
   <string name="nearby_card_permission_explanation">Искате ли да използвате текущото си местоположение за показване на близките места, които се нуждаят от снимки?</string>
   <string name="unable_to_display_nearest_place">Не мога да покажа най-близкото място, където имам нужда от изображения, без да давам разрешение за местоположение</string>
   <string name="never_ask_again">Не питай повече</string>
-  <string name="display_location_permission_title">Разрешение за показване на местоположение</string>
+  <string name="display_location_permission_title" fuzzy="true">Разрешение за показване на местоположение</string>
   <string name="display_location_permission_explanation">Потърсете разрешение за местоположение, когато трябва да уведомите за местоположението.</string>
   <string name="ends_on">Завършва:</string>
   <string name="display_campaigns">Показване на кампании</string>

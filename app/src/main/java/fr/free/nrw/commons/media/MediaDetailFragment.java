@@ -3,7 +3,6 @@ package fr.free.nrw.commons.media;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_NEEDING_CATEGORIES;
-import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_PREFIX;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_UNCATEGORISED;
 
 import android.annotation.SuppressLint;
@@ -17,7 +16,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +51,7 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AccountUtil;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoryClient;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.category.CategoryEditHelper;
@@ -63,10 +62,10 @@ import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -77,6 +76,7 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.Map;
 import javax.inject.Inject;
+import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.util.DateUtil;
 import timber.log.Timber;
@@ -109,6 +109,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     @Inject
+    SessionManager sessionManager;
+
+    @Inject
     MediaDataExtractor mediaDataExtractor;
     @Inject
     ReasonBuilder reasonBuilder;
@@ -120,6 +123,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     ViewUtilWrapper viewUtil;
     @Inject
     CategoryClient categoryClient;
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore applicationKvStore;
 
     private int initialListTop = 0;
 
@@ -261,6 +267,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             authorLayout.setVisibility(GONE);
         }
 
+        if (!sessionManager.isUserLoggedIn()) {
+            categoryEditButton.setVisibility(GONE);
+        }
+
+        if(applicationKvStore.getBoolean("login_skipped")){
+            delete.setVisibility(GONE);
+        }
+      
         return view;
     }
 
@@ -297,6 +311,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             new OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
+                    if (getContext() == null) {
+                        return;
+                    }
                     scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                         imageLandscape.setVisibility(VISIBLE);
@@ -542,10 +559,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         updateCategoryList();
 
-        if (media.getCreator() == null || media.getCreator().equals("")) {
+        if (media.getAuthor() == null || media.getAuthor().equals("")) {
             authorLayout.setVisibility(GONE);
         } else {
-            author.setText(media.getCreator());
+            author.setText(media.getAuthor());
         }
     }
 
@@ -679,7 +696,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @SuppressLint("StringFormatInvalid")
     @OnClick(R.id.nominateDeletion)
     public void onDeleteButtonClicked(){
-            if (AccountUtil.getUserName(getContext()) != null && AccountUtil.getUserName(getContext()).equals(media.getCreator())) {
+            if (AccountUtil.getUserName(getContext()) != null && AccountUtil.getUserName(getContext()).equals(media.getAuthor())) {
                 final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(getActivity(),
                     R.layout.simple_spinner_dropdown_list, reasonList);
                 final Spinner spinner = new Spinner(getActivity());
@@ -838,9 +855,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         if(!getString(R.string.detail_panel_cats_none).equals(catName)) {
             textView.setOnClickListener(view -> {
                 // Open Category Details page
-                String selectedCategoryTitle = CATEGORY_PREFIX + catName;
                 Intent intent = new Intent(getContext(), CategoryDetailsActivity.class);
-                intent.putExtra("categoryName", selectedCategoryTitle);
+                intent.putExtra("categoryName", catName);
                 getContext().startActivity(intent);
             });
         }

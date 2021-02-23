@@ -34,6 +34,10 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
   @BindView(R.id.explore_container)
   FrameLayout container;
 
+  public ExploreListRootFragment(){
+    //empty constructor necessary otherwise crashes on recreate
+  }
+
   public ExploreListRootFragment(Bundle bundle) {
     String title = bundle.getString("categoryName");
     listFragment = new CategoriesMediaFragment();
@@ -55,7 +59,9 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
   @Override
   public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    setFragment(listFragment, mediaDetails);
+    if(savedInstanceState == null) {
+      setFragment(listFragment, mediaDetails);
+    }
   }
 
   public void setFragment(Fragment fragment, Fragment otherFragment) {
@@ -110,7 +116,9 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
     Log.d("deneme8","on media clicked");
     container.setVisibility(View.VISIBLE);
     ((ExploreFragment)getParentFragment()).tabLayout.setVisibility(View.GONE);
-    mediaDetails = new MediaDetailPagerFragment(false, true, position);
+    mediaDetails = new MediaDetailPagerFragment(false, true);
+    mediaDetails.showImage(position);
+    ((ExploreFragment) getParentFragment()).setScroll(false);
     setFragment(mediaDetails, listFragment);
   }
 
@@ -162,15 +170,15 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
   }
 
   public void backPressed() {
-    if (mediaDetails.isVisible()) {
+    if (null!=mediaDetails && mediaDetails.isVisible()) {
       // todo add get list fragment
       ((ExploreFragment)getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
       removeFragment(mediaDetails);
+      ((ExploreFragment) getParentFragment()).setScroll(true);
       setFragment(listFragment, mediaDetails);
-      ((MainActivity)getActivity()).showTabs();
     } else {
       ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
-      ((MainActivity)getActivity()).showTabs();
     }
+    ((MainActivity)getActivity()).showTabs();
   }
 }

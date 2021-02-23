@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Fohanno
+* Fulup
 * Gwenn-Ael
 -->
 <resources>
-  <string name="crash_dialog_title">Commons zo aet er c\'hleuz</string>
+  <string name="crash_dialog_title">Commons zo chomet boud</string>
   <string name="crash_dialog_text">Hopala ! Un dra bennak a-dreuz zo bet !</string>
   <string name="crash_dialog_comment_prompt">Lavarit din ar pezh e oac\'h oc\'h ober, ha kasit dimp ar pezh e oac\'h oc\'h ober dre bostel da c\'houde. Sikour a ray ac\'hanomp da reizhañ an dra-se !</string>
   <string name="crash_dialog_ok_toast">Trugarez deoc\'h</string>

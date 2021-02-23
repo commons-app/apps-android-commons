@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Alexander Yukal
 * Alexandr Efremov
 * Av6
@@ -10,7 +9,9 @@
 * Gazimagomedov
 * Happy13241
 * Iluvatar
+* Jesusmc
 * Kaganer
+* Kareyac
 * MaxBioHazard
 * Megakott
 * Monirec
@@ -24,6 +25,7 @@
 * Vlad5250
 * VoxelJ
 * Wikisaurus
+* Wileyfoxyx
 * Wirbel78
 * Евгения
 * ЛингвоЧел
@@ -40,8 +42,9 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="few">(%1$d)</item>
     <item quantity="many">(%1$d)</item>
-    <item quantity="other">0=@string/contributions_subtitle_zero</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">Начало загрузки</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Начинается %1$d загрузка</item>
     <item quantity="few">Начинается %1$d загрузки</item>
@@ -96,6 +99,7 @@
   <string name="upload_failed">Файл не найден. Попробуйте другой файл.</string>
   <string name="authentication_failed">Ошибка аутентификации. Пожалуйста, авторизуйтесь ещё раз.</string>
   <string name="uploading_started">Загрузка началась!</string>
+  <string name="uploading_queued">Загрузка в очереди (включен режим ограниченного подключения)</string>
   <string name="upload_completed_notification_title">%1$s загружен!</string>
   <string name="upload_completed_notification_text">Нажмите для просмотра загруженного файла</string>
   <string name="upload_progress_notification_title_start">Загрузка %1$s начата</string>
@@ -115,11 +119,11 @@
   <string name="menu_nearby">Поблизости</string>
   <string name="provider_contributions">Мои загрузки</string>
   <string name="menu_share">Поделиться</string>
-  <string name="menu_open_in_browser">Открыть в браузере</string>
+  <string name="menu_view_file_page">Просмотреть страницу файла</string>
   <string name="share_title_hint">Подпись (Обязательна)</string>
   <string name="add_caption_toast">Пожалуйста, укажите название этого файла</string>
   <string name="share_description_hint">Описание</string>
-  <string name="share_caption_hint">Подпись (не более 255 символов)</string>
+  <string name="share_caption_hint">Подпись</string>
   <string name="login_failed_network">Не удаётся войти — сбой сети</string>
   <string name="login_failed_wrong_credentials">Не удаётся войти — проверьте ваше имя пользователя и пароль</string>
   <string name="login_failed_throttled">Слишком много неудачных попыток. Пожалуйста, попробуйте ещё раз через несколько минут.</string>
@@ -138,7 +142,7 @@
   <string name="display_list_button">Список</string>
   <string name="gps_disabled">GPS отключён в вашем устройстве. Хотите включить его?</string>
   <string name="enable_gps">Включить GPS</string>
-  <string name="contributions_subtitle_zero">Загрузок пока нет</string>
+  <string name="contributions_subtitle_zero">(Загрузок пока нет)</string>
   <string name="categories_not_found">Не найдено категорий, соответствующих %1$s</string>
   <string name="depictions_not_found">Элемент Викиданных, соответствующий %1$s, не найден.</string>
   <string name="no_child_classes">У %1$s нет дочерних классов</string>
@@ -300,7 +304,7 @@
   <string name="error_while_cache">Ошибка при кэшировании картинок</string>
   <string name="title_info">Уникальное описание, которое будет сохранено как имя файла. Вы можете использовать естественный язык, разделяя слова пробелами. Пожалуйста, не указывайте расширение файла.</string>
   <string name="description_info">Пожалуйста, подробно опишите загружаемый файл: где он был снят? что на нём изображено? каков его контекст? Пожалуйста опишите изображённых персон или объекты. Добавьте информацию, о которой нельзя легко догадаться, например, время суток, когда снимался файл. Если снято что-то необычное, постарайтесь пояснить, что именно в этом необычного.</string>
-  <string name="caption_info">Пожалуйста, напишите краткое описание изображения. Первое описание будет использовано в качестве названия изображения.</string>
+  <string name="caption_info">Пожалуйста, напишите краткое описание изображения. Первое описание будет использовано в качестве названия изображения. Ограничение - 255 символов.</string>
   <string name="upload_image_too_dark">Это изображение слишком тёмное. Вы уверены, что хотите его загрузить? Викисклад подходит только для изображений, имеющих энциклопедическую ценность.</string>
   <string name="upload_image_blurry">Это изображение размыто. Вы уверены, что хотите его загрузить? Викисклад подходит только для изображений, имеющих энциклопедическую ценность.</string>
   <string name="upload_problem_exist">Потенциальные проблемы с этим изображением:</string>
@@ -313,8 +317,8 @@
   <string name="upload_problem_image">Проблемы, найденные в изображении</string>
   <string name="internet_downloaded">Пожалуйста, загружайте только те изображения, которые были сделаны вами. Не загружайте изображений, которые вы скачали из Интернета.</string>
   <string name="give_permission">Разрешить</string>
-  <string name="use_external_storage" fuzzy="true">Использовать внешний носитель</string>
-  <string name="use_external_storage_summary" fuzzy="true">Сохранять изображения, сделанные с помощью встроенной камеры на устройстве</string>
+  <string name="use_external_storage">Сохранять сделанные в приложении снимки</string>
+  <string name="use_external_storage_summary">Сохранять изображения, сделанные с помощью встроенной камеры, в памяти устройства</string>
   <string name="login_to_your_account">Войдите в свою учётную запись</string>
   <string name="send_log_file">Выслать лог-файл</string>
   <string name="send_log_file_description">Выслать журнальный файл разработчикам по эл. почте для решения проблем в приложении. Замечание: журналы потенциально могут содержать личные данные.</string>
@@ -450,18 +454,18 @@
   <string name="notifications">Уведомления</string>
   <string name="read_notifications">Уведомления (читать)</string>
   <string name="display_nearby_notification">Уведомлять меня о местах поблизости</string>
-  <string name="display_nearby_notification_summary" fuzzy="true">Нажмите здесь, чтобы увидеть ближайшее место без изображений</string>
+  <string name="display_nearby_notification_summary">Показывать уведомления о ближайшем месте без изображений</string>
   <string name="no_close_nearby">Не найдено мест поблизости</string>
   <string name="list_sheet">Список</string>
   <string name="storage_permission">Разрешение для использования внешнего носителя</string>
   <string name="write_storage_permission_rationale_for_image_share">Нам требуется разрешение доступа к внешнему носителю вашего устройства для того, чтобы загружать изображения.</string>
   <string name="nearby_notification_dismiss_message">Вы больше не будете видеть ближайшие места без изображений. Если передумаете, вы найдете этот параметр в настройках.</string>
-  <string name="step_count">Шаг %1$d из %2$d</string>
+  <string name="step_count">Шаг %1$d из %2$d: %3$s</string>
   <string name="image_in_set_label">Изображение %1$d в наборе</string>
   <string name="next">Далее</string>
   <string name="previous">Назад</string>
   <string name="submit">Отправить</string>
-  <string name="upload_title_duplicate">Уже существует файл с именем %1$s. Вы уверены, что хотите продолжить?</string>
+  <string name="upload_title_duplicate">Уже существует файл с именем %1$s. Вы уверены, что хотите продолжить?\n\nПримечание: подходящий суффикс будет добавлен к имени файла автоматически.</string>
   <string name="map_application_missing">Не найдено совместимое картографическое приложение на вашем устройстве. Установите его, чтобы вы могли использовать эту функцию.</string>
   <string name="navigation_item_bookmarks">Закладки</string>
   <string name="title_activity_bookmarks">Закладки</string>
@@ -496,7 +500,7 @@
   <string name="nearby_card_permission_explanation">Вы бы хотели чтобы использовалось ваше текущее местоположение для показа ближайшего места, у которого ещё нет изображений?</string>
   <string name="unable_to_display_nearest_place">Невозможно отобразить ближайшее место, которому требуются изображения без разрешения на геолокацию</string>
   <string name="never_ask_again">Больше не спрашивать</string>
-  <string name="display_location_permission_title">Показать разрешение на геолокацию</string>
+  <string name="display_location_permission_title">Запросить разрешение на геолокацию</string>
   <string name="display_location_permission_explanation">Запрашивать разрешение на геолокацию, которое требуется для нотификаций мест поблизости.</string>
   <string name="achievements_fetch_failed">Что-то пошло не так. Не получается получить список ваших достижений</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Вы сделали так много, что наша система расчёта достижений не справляется. Это финальное достижение.</string>
@@ -671,6 +675,8 @@
   <string name="pause">пауза</string>
   <string name="resume">продолжить</string>
   <string name="paused">Приостановлено</string>
+  <string name="more">Ещё</string>
+  <string name="favorites">Избранное</string>
   <string name="achievements_tab_title">Достижения</string>
   <string name="leaderboard_tab_title">Таблица лидеров</string>
   <string name="rank_prefix">Ранг:</string>
@@ -690,9 +696,23 @@
   <string name="leaderboard_nearby">Поблизости</string>
   <string name="leaderboard_used">Использовано</string>
   <string name="leaderboard_my_rank_button_text">Мой ранг</string>
-  <string name="mapbox_telemetry">Отключение телеметрии</string>
+  <string name="mapbox_telemetry">Телеметрия Mapbox</string>
   <string name="telemetry_opt_out_summary">Отправлять анонимизированные данные о местоположении и использовании в Mapbox при применении функции «Поблизости»</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Улучшить эту карту&lt;/a&gt;</string>
+  <string name="limited_connection_enabled">Включен режим ограниченного подключения!</string>
+  <string name="limited_connection_disabled">Отключен режим ограниченного подключения. Незавершенные загрузки будут возобновлены сейчас.</string>
+  <string name="limited_connection">Ограниченное подключение</string>
   <string name="statistics_quality">Качественные изображения</string>
   <string name="quality_images_info">Качественные изображения - это диаграммы или фотографии, которые соответствуют определенным стандартам качества (которые в основном носят технический характер) и представляют ценность для проектов Викимедиа</string>
+  <string name="resuming_upload">Возобновление загрузки...</string>
+  <string name="pausing_upload">Приостановка загрузки...</string>
+  <string name="limited_connection_explanation">Вы включили ограниченный режим подключения. Все загрузки приостановлены и возобновятся после отключения этого режима.</string>
+  <string name="limited_connection_is_on">Включен ограниченный режим подключения.</string>
+  <string name="media_details_tooltip">Добавьте короткую подпись, которая скажет, что изображено на вашей картинке. В описании укажите, что делает изображение интересным, обычным или редким, и поясните контекст, видимый или нет. По возможности используйте точную терминологию.</string>
+  <string name="depicts_tooltip">Найдите и выберите все объекты, изображенные на этом изображении. Будьте как можно более конкретными. Если изображение изображает несколько предметов, выберите их все в разумных пределах. Не выбирайте общие теги, если доступны более конкретные теги.</string>
+  <string name="categories_tooltip">Пожалуйста, выберите соответствующие категории. В отличие от изображений, категории указываются только на английском языке.</string>
+  <string name="license_tooltip">Викисклад делает ваши фотографии доступными всем для повторного использования и изменения. Вы хотите отказаться от всех прав? Вы хотите, чтобы вас указывали в описании? Вы хотите, чтобы производные работы использовали ту же лицензию?</string>
+  <string name="depicts_step_title">Изображает</string>
+  <string name="license_step_title">Лицензия файла</string>
+  <string name="media_detail_step_title">Детали файла</string>
 </resources>

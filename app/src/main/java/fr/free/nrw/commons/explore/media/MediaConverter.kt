@@ -29,7 +29,8 @@ class MediaConverter @Inject constructor() {
             safeParseDate(metadata.dateTime()),
             metadata.licenseShortName(),
             metadata.prefixedLicenseUrl,
-            getArtist(metadata),
+            getAuthor(metadata),
+            imageInfo.user,
             MediaDataExtractorUtil.extractCategoriesFromList(metadata.categories),
             metadata.latLng,
             entity.labels().mapValues { it.value.value() },
@@ -61,11 +62,16 @@ class MediaConverter @Inject constructor() {
      * @param metadata
      * @return
      */
-    private fun getArtist(metadata: ExtMetadata): String? {
+    private fun getAuthor(metadata: ExtMetadata): String? {
         return try {
-            val artistHtml = metadata.artist()
-            artistHtml.substring(artistHtml.indexOf("title=\""), artistHtml.indexOf("\">"))
-                .replace("title=\"User:", "")
+            val authorHtml = metadata.artist()
+            val anchorStartTagTerminalChars = "\">"
+            val anchorCloseTag = "</a>"
+
+            return authorHtml.substring(
+                authorHtml.indexOf(anchorStartTagTerminalChars) + anchorStartTagTerminalChars
+                    .length, authorHtml.indexOf(anchorCloseTag)
+            )
         } catch (ex: java.lang.Exception) {
             ""
         }

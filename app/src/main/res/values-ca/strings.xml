@@ -5,6 +5,7 @@
 * Kippelboy
 * MarionaDSR
 * Mguix
+* Paucabot
 * Pintor Smeargle
 * Pitort
 * Toniher
@@ -75,7 +76,6 @@
   <string name="menu_nearby">A prop</string>
   <string name="provider_contributions">Les meves càrregues</string>
   <string name="menu_share">Comparteix</string>
-  <string name="menu_open_in_browser">Mostra al navegador</string>
   <string name="share_title_hint">Llegenda (obligatori)</string>
   <string name="share_description_hint">Descripció</string>
   <string name="login_failed_network">No s\'ha pogut iniciar la sessió – error de xarxa</string>
@@ -95,7 +95,7 @@
   <string name="display_list_button">Llista</string>
   <string name="gps_disabled">El vostre dispositiu no té el GPS habilitat. El voleu habilitar?</string>
   <string name="enable_gps">Habilita el GPS</string>
-  <string name="contributions_subtitle_zero">Encara no hi ha cap càrrega</string>
+  <string name="contributions_subtitle_zero">(Encara no hi ha cap pujada)</string>
   <string name="categories_not_found">No s\'ha trobat cap categoria que coincideixi amb %1$s</string>
   <string name="categories_skip_explanation">Afegiu categories per fer que les vostres imatges siguin més fàcils de trobar a Wikimedia Commons.</string>
   <string name="categories_activity_title">Categories</string>
@@ -247,8 +247,8 @@
   <string name="upload_problem_different_geolocation">Aquesta imatge s\'ha pres a una altra ubicació.</string>
   <string name="upload_problem_do_you_continue">Encara voleu carregar la imatge?</string>
   <string name="give_permission">Dóna permís</string>
-  <string name="use_external_storage" fuzzy="true">Utilitza l’emmagatzematge extern</string>
-  <string name="use_external_storage_summary" fuzzy="true">Desa les fotos fetes amb la càmera integrada del dispositiu</string>
+  <string name="use_external_storage">Deseu fotos a l\'aplicació</string>
+  <string name="use_external_storage_summary">Deseu les fotos fetes amb la càmera de l\'aplicació a l\'emmagatzematge del dispositiu</string>
   <string name="login_to_your_account">Entreu en el vostre compte</string>
   <string name="send_log_file">Envia el fitxer de registre</string>
   <string name="send_log_file_description">Envia el fitxer de registre a l\'equip de desenvolupament per correu per ajudar a depurar problemes amb l\'aplicació. Nota: els registres poden incorporar informació identificadora</string>
@@ -361,17 +361,17 @@
   <string name="notifications">Notificacions</string>
   <string name="read_notifications">Notificacions (llegides)</string>
   <string name="display_nearby_notification">Mostra notificacions properes</string>
-  <string name="display_nearby_notification_summary" fuzzy="true">Feu un toc aquí per a veure el lloc més proper que necessiti fotos</string>
+  <string name="display_nearby_notification_summary">Mostra la notificació a l\'aplicació del lloc més proper que necessiti fotos</string>
   <string name="no_close_nearby">No s\'han trobat llocs propers prop vostre</string>
   <string name="list_sheet">Llista</string>
-  <string name="storage_permission">Permissos d\'emmagatzematge</string>
+  <string name="storage_permission">Permisos d\'emmagatzematge</string>
   <string name="write_storage_permission_rationale_for_image_share">Ens calen permisos per a accedir a l\'emmagatzematge extern del vostre dispositiu per tal de pujar imatges.</string>
-  <string name="step_count">Pas %1$d de %2$d</string>
+  <string name="step_count">Pas %1$d de %2$d: %3$s</string>
   <string name="image_in_set_label">Imatge %1$s en el conjunt</string>
   <string name="next">Següent</string>
   <string name="previous">Anterior</string>
   <string name="submit">Envia</string>
-  <string name="upload_title_duplicate">Ja existeix un fitxer amb el nom %1$s. Segur que voleu procedir?</string>
+  <string name="upload_title_duplicate">Ja existeix un fitxer amb el nom %1$s. Segur que voleu procedir?\n\nNota: S\'afegirà un sufix adequat al nom del fitxer automàticament.</string>
   <string name="navigation_item_bookmarks">Adreces d\'interès</string>
   <string name="title_activity_bookmarks">Adreces d\'interès</string>
   <string name="title_page_bookmarks_pictures">Imatges</string>
@@ -401,7 +401,7 @@
   <string name="nearby_card_permission_explanation">Voldríeu fer servir la vostra ubicació actual per a mostrar el lloc més proper que necessiti fotos?</string>
   <string name="unable_to_display_nearest_place">No es pot mostrar el lloc més proper que necessita fotos sense permisos d\'ubicació</string>
   <string name="never_ask_again">No ho tornis a demanar</string>
-  <string name="display_location_permission_title">Mostra el permís d\'ubicació</string>
+  <string name="display_location_permission_title" fuzzy="true">Mostra el permís d\'ubicació</string>
   <string name="ends_on">Finalitza el:</string>
   <string name="display_campaigns">Mostra les campanyes</string>
   <string name="display_campaigns_explanation">Consulta les campanyes en curs</string>

@@ -1,5 +1,13 @@
 # Wikimedia Commons for Android
 
+## v3.0.0
+- Added Structured Data to upload workflow, users can now add depicts
+- Added Leaderboard in Achievements screen
+- Added to-do system for images with no categories/descriptions or with associated Wikipedia articles that have no pictures
+- Users can now modify and add categories to their uploads from the media details view
+- New UI for main screen
+- Limited connection mode added, users can now pause and resume uploads
+
 ## v2.13.1
 - Added OpenStreetMap attribution
 - Fixed various crashes

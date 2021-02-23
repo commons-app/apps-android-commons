@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * 1917 Ekim Devrimi
-* Abijeet Patro
 * Envlh
 * Gambollar
 * Gorizon
@@ -15,7 +14,7 @@
     <item quantity="one">1 dosya bar bena</item>
     <item quantity="other">%1$d dosyeyi bar benê</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -79,11 +78,10 @@
   <string name="menu_nearby">Nezdıra</string>
   <string name="provider_contributions">Barkerdışê mı</string>
   <string name="menu_share">Vıla ke</string>
-  <string name="menu_open_in_browser">Rovıte dı akê</string>
   <string name="share_title_hint">Bınnuşte (lazımo)</string>
   <string name="add_caption_toast">Kerem ke, seba na dosya rê yew bınnuşte cı ke</string>
   <string name="share_description_hint">Şınasnayış</string>
-  <string name="share_caption_hint">Bınnus (sindor 255 karakter)</string>
+  <string name="share_caption_hint" fuzzy="true">Bınnus (sindor 255 karakter)</string>
   <string name="login_failed_network">Xırabiya kewten-network xeta</string>
   <string name="login_failed_wrong_credentials">Nêgêriyeno miyan - kerem ke, parola û nameyê xo kontrol ke</string>
   <string name="login_failed_throttled">Şıma xeylê rayi kerd ke cı kewê, a ser nêvıst. Şıma rê zehmet 2-3 deqey ra tepeya reyna bıcerrebnên.</string>
@@ -101,7 +99,7 @@
   <string name="display_list_button">Liste</string>
   <string name="gps_disabled">Cihazê GPSiyê şıma de dewre ra veciyayo. Şıma qayılê aktif kerê?</string>
   <string name="enable_gps">GPSi aktif kerê</string>
-  <string name="contributions_subtitle_zero">Hewna bar nêbiyo</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Hewna bar nêbiyo</string>
   <string name="categories_not_found">Kategoriyan de %1$s deye theba çıniyo</string>
   <string name="depictions_image_not_found">Seba izahati resım çıniyo</string>
   <string name="categories_skip_explanation">Seba, tayêna rındvênayışê resmanê xoyê ke Wikimedia Commonsi derê, kategoriyan cı kerê.\nDest be cıkerdena kategoriyan ke.</string>
@@ -248,7 +246,7 @@
   <string name="nominate_deletion">Esterıtışi rê Eza</string>
   <string name="nominated_for_deletion">No resım seba esterıtışi eza nışan kerdo</string>
   <string name="view_browser">Browser de bıvinê</string>
-  <string name="skip_login">Ser çek</string>
+  <string name="skip_login">Ravêre</string>
   <string name="navigation_item_login">Cı kewe</string>
   <string name="get_directions">Tarif bıgêrê</string>
   <string name="read_article">Meqaley bıwanê</string>
@@ -259,7 +257,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Rey bıdê</string>
   <string name="about_faq">PZP</string>
-  <string name="welcome_skip_button">Musnayoği ser çek</string>
+  <string name="welcome_skip_button">Musnayoği ravêre</string>
   <string name="no_internet">İnternet nêresêno</string>
   <string name="internet_established">İnternet resiyeno</string>
   <string name="no_notifications">Pêhesnayışi nêvineyay</string>
@@ -335,6 +333,7 @@
   <string name="no_categories_selected">Kategoriyê ke nêweçiniyê</string>
   <string name="nominate_for_deletion_done">Temam</string>
   <string name="review_thanks_yes_button_text">Eya, çıra mebo</string>
+  <string name="review_thanks_no_button_text">Resımo bahdoyên</string>
   <string name="no_notification">Beyanatên şımayê nêwendeyi çıniyê</string>
   <string name="no_read_notification">Pêhesnayışê toyê wendışi çıniyê</string>
   <string name="menu_option_read">Wendışi bıvêne</string>
@@ -343,6 +342,7 @@
   <string name="skip_image">Nê resımi raviyarnê</string>
   <string name="image_info">Melumatê resımi</string>
   <string name="delete_helper_ask_spam_blurry">Xesratın</string>
+  <string name="delete_helper_ask_spam_nonsense">Bêmena</string>
   <string name="delete_helper_ask_spam_other">Zewbi</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Fotrafi çap kerê</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">İnternet ra resimo raştameye</string>
@@ -382,5 +382,7 @@
   <string name="leaderboard_nearby">Nezdı ra</string>
   <string name="leaderboard_used">Gureyniyaye</string>
   <string name="leaderboard_my_rank_button_text">Rêza mı</string>
-  <string name="mapbox_telemetry">Telemetreyi Devre ra vece</string>
+  <string name="mapbox_telemetry" fuzzy="true">Telemetreyi Devre ra vece</string>
+  <string name="license_step_title">Lisansê Medya</string>
+  <string name="media_detail_step_title">Teferuatê medya</string>
 </resources>

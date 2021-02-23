@@ -100,6 +100,31 @@ object DialogUtil {
         title: String,
         message: String,
         positiveButtonText: String?,
+        negativeButtonText: String?,
+        onPositiveBtnClick: Runnable?,
+        onNegativeBtnClick: Runnable?,
+        customView: View?,
+        cancelable: Boolean
+    ) {
+        createAndShowDialogSafely(
+            activity = activity,
+            title = title,
+            message = message,
+            positiveButtonText = positiveButtonText,
+            negativeButtonText = negativeButtonText,
+            onPositiveBtnClick = onPositiveBtnClick,
+            onNegativeBtnClick = onNegativeBtnClick,
+            customView = customView,
+            cancelable = cancelable
+        )
+    }
+
+    @JvmStatic
+    fun showAlertDialog(
+        activity: Activity,
+        title: String,
+        message: String,
+        positiveButtonText: String?,
         onPositiveBtnClick: Runnable?,
         cancelable: Boolean
     ) {

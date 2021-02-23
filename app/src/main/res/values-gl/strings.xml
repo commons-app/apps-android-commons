@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
+* ArenaL5
 * Athena in Wonderland
 * Banjo
 * Chairego apc
@@ -16,8 +16,7 @@
     <item quantity="one">Cargando %1$d ficheiro</item>
     <item quantity="other">Cargando %1$d ficheiros</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -82,8 +81,7 @@
   <string name="menu_nearby">Preto</string>
   <string name="provider_contributions">As miñas subidas</string>
   <string name="menu_share">Compartir</string>
-  <string name="menu_open_in_browser">Amosar no navegador</string>
-  <string name="share_title_hint" fuzzy="true">Título (Requerido)</string>
+  <string name="share_title_hint">Lenda (Obrigatoria)</string>
   <string name="share_description_hint">Descrición</string>
   <string name="login_failed_network">Erro ao acceder ao sistema: Fallou a rede</string>
   <string name="login_failed_wrong_credentials">Non se pode acceder. Revise o nome de usuario e o contrasinal</string>
@@ -102,7 +100,7 @@
   <string name="display_list_button">Lista</string>
   <string name="gps_disabled">O GPS está desactivado no seu dispositivo. Quere activalo?</string>
   <string name="enable_gps">Activar GPS</string>
-  <string name="contributions_subtitle_zero">Aínda non hai subas</string>
+  <string name="contributions_subtitle_zero">(Aínda non hai subas)</string>
   <string name="categories_not_found">Non se atopou ningunha categoría que coincidise con \"%1$s\"</string>
   <string name="categories_skip_explanation">Engada categorías para facer máis accesibles as súas imaxes na Wikimedia Commons.\nComece a escribir para engadir categorías.</string>
   <string name="categories_activity_title">Categorías</string>
@@ -264,8 +262,8 @@
   <string name="upload_problem_do_you_continue">Aínda quere subir esta imaxe?</string>
   <string name="internet_downloaded">Por favor suba so fotografías feitas por vostede mesmo. Non suba imaxes ou fotografías que descargara da Internet.</string>
   <string name="give_permission">Outorgar permiso</string>
-  <string name="use_external_storage" fuzzy="true">Usar o almacenamento externo</string>
-  <string name="use_external_storage_summary" fuzzy="true">Gardar as imaxes capturadas coa cámara do seu dispositivo</string>
+  <string name="use_external_storage">Gardar fotos tiradas na aplicación</string>
+  <string name="use_external_storage_summary">Gardar ao almacenamento interno as fotografías tiradas na aplicación</string>
   <string name="login_to_your_account">Comezar sesión na súa conta</string>
   <string name="send_log_file">Enviar ficheiro de rexistro</string>
   <string name="send_log_file_description">Enviar o rexistro ós desenvolvedores por correo electrónico para axudar na corrección de problemas coa aplicación. Nota: os rexistros poden conter información potencialmente identificativa</string>
@@ -395,18 +393,18 @@
   <string name="notifications">Notificacións</string>
   <string name="read_notifications">Notificacións (lidas)</string>
   <string name="display_nearby_notification">Amosar notificacións de proximidade</string>
-  <string name="display_nearby_notification_summary" fuzzy="true">Prema aquí para ver o lugar máis preto que necesita fotos</string>
+  <string name="display_nearby_notification_summary">Mostrar notificación na aplicación para o lugar máis preto que necesita fotos</string>
   <string name="no_close_nearby">Non se atoparon lugares preto de ti</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Permiso de almacenamento</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos o seu permiso para acceder ó almacenamento externo do seu dispositivo para cargar imaxes.</string>
   <string name="nearby_notification_dismiss_message">Xa non verá o lugar máis próximo que precisa fotos. Porén, podes volver habilitar esta notificación na configuración.</string>
-  <string name="step_count">Paso %1$d de %2$d</string>
+  <string name="step_count">Paso %1$d de %2$d: %3$s</string>
   <string name="image_in_set_label">Imaxe %1$d do conxunto</string>
   <string name="next">Seguinte</string>
   <string name="previous">Anterior</string>
   <string name="submit">Enviar</string>
-  <string name="upload_title_duplicate">Xa existe un ficheiro co nome %1$s. Está seguro que quere continuar?</string>
+  <string name="upload_title_duplicate">Xa existe un ficheiro co nome %1$s. Quere continuar?\n\nNota: Engadirase automaticamente un sufixo axeitado ao nome do ficheiro.</string>
   <string name="map_application_missing">Non se atopou ningunha aplicación de mapas compatible no seu dispositivo. Por favor, instale unha aplicación de mapas para usar esta funcionalidade.</string>
   <string name="navigation_item_bookmarks">Favoritos</string>
   <string name="title_activity_bookmarks">Favoritos</string>
@@ -432,14 +430,14 @@
   <string name="desc_language_Asia">Asia</string>
   <string name="desc_language_Pacific">Pacífico</string>
   <string name="no_categories_selected">Non hai categorías seleccionadas</string>
-  <string name="no_categories_selected_warning_desc" fuzzy="true">As imaxes sen categorías só son utilizables en contadas ocasións. Está seguro de que quere cargar sen seleccionar categorías?</string>
+  <string name="no_categories_selected_warning_desc">As imaxes sen categorías só son utilizables en contadas ocasións. Está seguro de que quere continuar sen seleccionar categorías?</string>
   <string name="upload_flow_all_images_in_set">(Para tódalas imaxes no conxunto)</string>
   <string name="search_this_area">Procurar nesta área</string>
   <string name="nearby_card_permission_title">Solicitude de permisos</string>
   <string name="nearby_card_permission_explanation">Desexa que usemos a súa localizacións actual para amosarlle o lugar máis preto que precisa imaxes?</string>
   <string name="unable_to_display_nearest_place">Imposible amosar o sitio máis achegado que precisa fotos sen ter permisos de localización</string>
   <string name="never_ask_again">Non volver a preguntar isto nunca</string>
-  <string name="display_location_permission_title">Amosar permiso de localización</string>
+  <string name="display_location_permission_title" fuzzy="true">Amosar permiso de localización</string>
   <string name="display_location_permission_explanation">Pedir permisos de localización cando sexa necesario para a funcionalidade de notificación de proximidade.</string>
   <string name="achievements_fetch_failed">Algo foi mal, non puidemos obter as túas achegas</string>
   <string name="ends_on">Finaliza o:</string>
@@ -480,7 +478,7 @@
   <string name="no_image_reverted">Ningunha imaxe revertida</string>
   <string name="no_image_uploaded">Ningunha imaxe subida</string>
   <string name="no_notification">Non ten ningunha notificación sen ler</string>
-  <string name="no_read_notification" fuzzy="true">Non ten notificacións arquivadas</string>
+  <string name="no_read_notification">Non ten notificacións lidas</string>
   <string name="share_logs_using">Compartir os rexistros usando</string>
   <string name="menu_option_read">Ver lidas</string>
   <string name="menu_option_unread">Ver as non lidas</string>

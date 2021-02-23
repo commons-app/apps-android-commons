@@ -4,6 +4,7 @@
 * Psubhashish
 -->
 <resources>
+  <string name="share_license_summary" fuzzy="true">ଏହି ଛବିଟି %1$s ରେ ଲାଇସେନ୍ସକୃତ ହେବ</string>
   <string name="app_name" fuzzy="true">ଉଇକିମିଡ଼ିଆ କମନ୍ସ</string>
   <string name="menu_settings">ସଂରଚନା</string>
   <string name="username">ସଭ୍ୟ ନାମ</string>
@@ -31,8 +32,7 @@
   <string name="menu_from_camera">ଫଟୋଟିଏ ଉଠାନ୍ତୁ</string>
   <string name="provider_contributions">ମୋ ଅପଲୋଡ଼</string>
   <string name="menu_share">ସଭିଙ୍କୁ ଜଣାନ୍ତୁ</string>
-  <string name="menu_open_in_browser">ବ୍ରାଉଜରରେ ଦେଖନ୍ତୁ</string>
-  <string name="share_title_hint">ଶିରୋନାମ</string>
+  <string name="share_title_hint" fuzzy="true">ଶିରୋନାମ</string>
   <string name="share_description_hint">ବିବରଣୀ</string>
   <string name="login_failed_network">ଲଗ ଇନ କରିବାରେ ବିଫଳ - ନେଟୱାର୍କରେ ଅସୁବିଧା</string>
   <string name="login_failed_throttled" fuzzy="true">ଖୁବ ଅଧିକ ଅସଫଳ ଚେଷ୍ଟା । ଦୟାକରି କେଇ ମିନିଟ ଛାଡ଼ି ଚେଷ୍ଟା କରନ୍ତୁ</string>
@@ -59,7 +59,6 @@
   <string name="no_uploads_yet">ଆପଣ ଏ ଯାଏ ଗୋଟିଏ ବି ଫଟୋ ଅପଲୋଡ଼ କରିନାହାନ୍ତି ।</string>
   <string name="menu_retry_upload">ଆଉଥରେ ଚେଷ୍ଟା କରନ୍ତୁ</string>
   <string name="menu_cancel_upload">ବାତିଲ</string>
-  <string name="share_license_summary">ଏହି ଛବିଟି %1$s ରେ ଲାଇସେନ୍ସକୃତ ହେବ</string>
   <string name="menu_download">ଡାଉନଲୋଡ଼</string>
   <string name="preference_license" fuzzy="true">ଲାଇସେନ୍ସ</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>

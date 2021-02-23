@@ -8,7 +8,7 @@
     <item quantity="one">%1$d개의 서류를 올리적재하는중</item>
     <item quantity="other">%1$d개의 서류를 올리적재하는중</item>
   </plurals>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -62,7 +62,6 @@
   <string name="menu_nearby">근처</string>
   <string name="provider_contributions">내 올리적재</string>
   <string name="menu_share">공유</string>
-  <string name="menu_open_in_browser">열람기로 보기</string>
   <string name="share_title_hint" fuzzy="true">제목 (필수)</string>
   <string name="share_description_hint">설명</string>
   <string name="login_failed_network">가입할수 없습니다 - 망 오유입니다</string>
@@ -82,7 +81,7 @@
   <string name="display_list_button">목록</string>
   <string name="gps_disabled">장치에서 GPS가 금지되여있습니다. 허가하시겠습니까?</string>
   <string name="enable_gps">GPS 허가</string>
-  <string name="contributions_subtitle_zero">아직 올리적재가 없습니다</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">아직 올리적재가 없습니다</string>
   <string name="categories_not_found">%1$s와(과) 일치하는 분류를 찾을수 없습니다</string>
   <string name="categories_skip_explanation">위키매체 공용에서 그림을 더 찾기 쉽게 만들기 위해 분류를 추가합니다.\n분류를 추가하려면 입력을 시작하세요.</string>
   <string name="categories_activity_title">분류</string>
@@ -332,7 +331,7 @@
   <string name="display_nearby_notification_summary" fuzzy="true">화상이 필요한 주변 장소를 보려면 여기를 두드리세요</string>
   <string name="no_close_nearby">당신에게 가까운 주변 장소를 찾지 못했습니다</string>
   <string name="list_sheet">목록</string>
-  <string name="step_count">단계 %2$d 중 %1$d</string>
+  <string name="step_count" fuzzy="true">단계 %2$d 중 %1$d</string>
   <string name="next">다음</string>
   <string name="previous">이전</string>
   <string name="title_page_bookmarks_pictures">화상</string>

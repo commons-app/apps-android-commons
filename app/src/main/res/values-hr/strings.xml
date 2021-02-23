@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Anarhistička Maca
 * Astrind
 * Bugoslav
@@ -69,7 +68,6 @@
   <string name="menu_nearby">U blizini</string>
   <string name="provider_contributions">Moja postavljanja</string>
   <string name="menu_share">Podijeli</string>
-  <string name="menu_open_in_browser">Pogledaj u pregledniku</string>
   <string name="share_title_hint" fuzzy="true">Naziv (obavezno)</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Prijava nije moguća - mrežna pogrješka</string>
@@ -88,7 +86,7 @@
   <string name="display_list_button">Popis</string>
   <string name="gps_disabled">GPS je onemogućen na Vašem uređaju. Želite li ga omogućiti?</string>
   <string name="enable_gps">Omogući GPS</string>
-  <string name="contributions_subtitle_zero">Nemate još postavljenih datoteka</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Nemate još postavljenih datoteka</string>
   <string name="categories_not_found">Nema kategorija koje odgovoraju upitu %1$s</string>
   <string name="categories_skip_explanation">Dodajte slikama kategorije kako bi se lakše pronašle. Da biste ih dodali, započnite s upisivanjem.</string>
   <string name="categories_activity_title">Kategorije</string>

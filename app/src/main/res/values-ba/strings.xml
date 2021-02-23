@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Lizalizaufa
 * Sagan
 * Рустам Нурыев
@@ -62,7 +61,6 @@
   <string name="menu_from_camera">Фотоға төшөрөргә</string>
   <string name="provider_contributions">Минең тейәүҙәрем</string>
   <string name="menu_share">Уртаҡлашырға</string>
-  <string name="menu_open_in_browser">Браузерҙа асырға</string>
   <string name="share_title_hint" fuzzy="true">Исем</string>
   <string name="share_description_hint">Тасуирлама</string>
   <string name="login_failed_network">Инеп булмай - интернет хатаһы</string>
@@ -77,7 +75,7 @@
   <string name="menu_save_categories">Һаҡларға</string>
   <string name="gps_disabled">Ҡоролмағыҙҙа GPS һүнгән. Тоҡандырырғамы?</string>
   <string name="enable_gps">GPS-ты тоҡандырыу</string>
-  <string name="contributions_subtitle_zero">Тейәүҙәр әлегә юҡ</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Тейәүҙәр әлегә юҡ</string>
   <string name="categories_not_found">%1$s тап килгән категориялар табылманы</string>
   <string name="categories_skip_explanation">Викискладта һәрәтегеҙҙе тиҙерәк табыу өсөн категоиялар өҫтәгеҙ.\nКатегория өҫтәү өсөн атама яҙа башлағыҙ.</string>
   <string name="title_activity_settings">Көйләүҙәр</string>

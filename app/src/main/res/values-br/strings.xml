@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Dishual
 * Fohanno
 * Fulup
@@ -69,10 +68,9 @@
   <string name="menu_nearby">Tostik</string>
   <string name="provider_contributions">Ma enporzhiadennoù</string>
   <string name="menu_share">Rannañ</string>
-  <string name="menu_open_in_browser">Diskwel er meerder</string>
   <string name="share_title_hint">Alc\'hwez (ret)</string>
   <string name="share_description_hint">Deskrivadur</string>
-  <string name="share_caption_hint">Alc\'hwez (bevennet da 255 arouezenn)</string>
+  <string name="share_caption_hint" fuzzy="true">Alc\'hwez (bevennet da 255 arouezenn)</string>
   <string name="login_failed_network">Ne c\'haller ket kevreañ - rouedad sac\'het</string>
   <string name="login_failed_wrong_credentials">Ne c\'haller ket kevreañ - gwiriit hoc\'h anv implijer hag ho ker-tremen mar plij</string>
   <string name="login_failed_throttled">Re a daolioù-esae. Klaskit en-dro a-benn ur pennadig amzer.</string>
@@ -90,7 +88,7 @@
   <string name="display_list_button">Roll</string>
   <string name="gps_disabled">Diwerededkaet eo ar GPS war hoc\'h ardivink.\nHa c\'hoant ho peus da weredekaat anezhañ ?</string>
   <string name="enable_gps">Gweredekaat ar GPS</string>
-  <string name="contributions_subtitle_zero">Enporzhiadenn ebet c\'hoazh !</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Enporzhiadenn ebet c\'hoazh !</string>
   <string name="categories_not_found">N\'eus bet kavet rummad ebet o klotañ gant %1$s</string>
   <string name="depictions_not_found">N\'eus bet kavet elfenn Wikidata ebet o klotañ gant %1$s</string>
   <string name="no_child_classes">N\'eus ket a glasoù bugale e %1$s</string>
@@ -335,7 +333,7 @@
   <string name="next">War-lerc\'h</string>
   <string name="previous">Kent</string>
   <string name="submit">Kas</string>
-  <string name="upload_title_duplicate">Ur restr gant an anv %1$s zo anezhi. Ha sur eo hoc\'h eus c\'hoant da genderc\'hel ?</string>
+  <string name="upload_title_duplicate" fuzzy="true">Ur restr gant an anv %1$s zo anezhi. Ha sur eo hoc\'h eus c\'hoant da genderc\'hel ?</string>
   <string name="navigation_item_bookmarks">Sinedoù</string>
   <string name="title_activity_bookmarks">Sinedoù</string>
   <string name="title_page_bookmarks_pictures">Skeudennoù</string>

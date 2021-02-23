@@ -75,11 +75,10 @@
   <string name="menu_nearby">చుట్టుపక్కల</string>
   <string name="provider_contributions">నా ఎక్కింపులు</string>
   <string name="menu_share">పంచుకోండి</string>
-  <string name="menu_open_in_browser">విహారిణిలో చూపు</string>
   <string name="share_title_hint">శీర్షిక (తప్పనిసరి)</string>
   <string name="add_caption_toast">ఈ ఫైలుకు ఒక శీర్షిక ఇవ్వండి</string>
   <string name="share_description_hint">వివరణ</string>
-  <string name="share_caption_hint">శీర్షిక (పరిమితి 255 అక్షరాలు)</string>
+  <string name="share_caption_hint" fuzzy="true">శీర్షిక (పరిమితి 255 అక్షరాలు)</string>
   <string name="login_failed_network">లాగిన్ చెయ్యలేకపోయాం - నెట్‍వర్కు విఫలం</string>
   <string name="login_failed_wrong_credentials">లాగినవలేదు - మీ వాడుకరిపేరు, సంకేతపదం సరిచూసుకోండి</string>
   <string name="login_failed_throttled">మరీ ఎక్కువ విఫల యత్నాలు చేసారు. కొద్ది నిముషాలాగి ప్రయత్నించండి</string>
@@ -97,7 +96,7 @@
   <string name="display_list_button">జాబితా</string>
   <string name="gps_disabled">మీ పరికరంలో GPS అచేతనం చేసి ఉంది. దాన్ని చేతనం చేస్తారా?</string>
   <string name="enable_gps">GPS ను చేతనం చెయ్యి</string>
-  <string name="contributions_subtitle_zero">ఇంకా ఎక్కింపులేమీ లేవు</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">ఇంకా ఎక్కింపులేమీ లేవు</string>
   <string name="categories_not_found">%1$s తో సరిపోలే వర్గాలేమీ లేవు</string>
   <string name="categories_skip_explanation">వికీమీడియా కామన్స్ లో వెతికేటపుడు మీ బొమ్మలు మరింత సులువుగా కనబడేందుకు వాటికి వర్గాలను చేర్చండి.</string>
   <string name="categories_activity_title">వర్గాలు</string>
@@ -399,12 +398,12 @@
   <string name="storage_permission">స్టోరేజి అనుమతి</string>
   <string name="write_storage_permission_rationale_for_image_share">బొమ్మలను ఎక్కించేందుకు గాను మీ బయటి స్టోరేజిని చూసే అనుమతులు కావాలి</string>
   <string name="nearby_notification_dismiss_message">బొమ్మలు అవసరమైన చుట్టుపక్కల స్థలాలు ఇక మీకు కనబడవు. అయితే, ఎప్పుడు కావాలంటే అప్పుడు మీరీ సెట్టింగును మార్చుకోవచ్చు.</string>
-  <string name="step_count">%2$d లో %1$d అంగ</string>
+  <string name="step_count" fuzzy="true">%2$d లో %1$d అంగ</string>
   <string name="image_in_set_label">సెట్టులో %1$d వ బొమ్మ</string>
   <string name="next">తదుపరి</string>
   <string name="previous">మునుపటి</string>
   <string name="submit">పంపించు</string>
-  <string name="upload_title_duplicate">%1$s పేరుతో ఒక ఫైలు ఈసరికే ఉంది. ఈ పేరుతోటే ముందుకు పోతారా?</string>
+  <string name="upload_title_duplicate" fuzzy="true">%1$s పేరుతో ఒక ఫైలు ఈసరికే ఉంది. ఈ పేరుతోటే ముందుకు పోతారా?</string>
   <string name="map_application_missing">దీనికి సరిపడే మ్యాపు అప్లికేషనేదీ మీ పరికరంలో కనబడలేదు. ఈ విశేషాన్ని వాడాలంటే, దీనికి సరిపడే మ్యాపు అప్లికేషన్ను స్థాపించుకోండి.</string>
   <string name="navigation_item_bookmarks">పేజీకలు</string>
   <string name="title_activity_bookmarks">పేజీకలు</string>
@@ -437,7 +436,7 @@
   <string name="nearby_card_permission_explanation">మీ చుట్టుపక్కల ఉన్న, బొమ్మ అవసరమైన, స్థలాన్ని చూపించేందుకు మీ ప్రస్తుత స్థలాన్ని వాడుకోమంటారా?</string>
   <string name="unable_to_display_nearest_place">స్థలపు అనుమతులు లేకుండా, మీ చుట్టుపక్కల ఉన్న, బొమ్మ అవసరమైన స్థలాన్ని చూపించలేకున్నాం</string>
   <string name="never_ask_again">దీన్ని ఇంకెప్పుడూ అడగకు</string>
-  <string name="display_location_permission_title">స్థల అనుమతిని చూపించు</string>
+  <string name="display_location_permission_title" fuzzy="true">స్థల అనుమతిని చూపించు</string>
   <string name="display_location_permission_explanation">చుట్టుపక్కల స్థలం గమనింపును చూపించేందుకు, అవసరమైనప్పుడల్లా స్థలపు అనుమతి అడుగు</string>
   <string name="achievements_fetch_failed">ఏదో లోపం జరిగింది, మీరు సాధించిన వాటిని తేలేక పోయాం</string>
   <string name="ends_on">ముగిసే సమయం:</string>

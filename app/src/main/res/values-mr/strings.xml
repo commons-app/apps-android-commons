@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Liuxinyu970226
 * Sureshkhole
 * Susheelkasab
@@ -64,7 +63,6 @@
   <string name="menu_nearby">जवळपास</string>
   <string name="provider_contributions">माझी अपभारणे</string>
   <string name="menu_share">सहभाग करा</string>
-  <string name="menu_open_in_browser">न्याहाळकात उघडा</string>
   <string name="share_title_hint" fuzzy="true">शीर्षक</string>
   <string name="share_description_hint">वर्णन</string>
   <string name="login_failed_network">सनोंद प्रवेश अशक्य - नेटवर्क नाही</string>
@@ -81,7 +79,7 @@
   <string name="refresh_button">ताजेतवाने करा</string>
   <string name="gps_disabled">आपल्या मोबाईलचे गिपीएस बंद आहे, तुम्हांला ते चालू करायचे आहे का?</string>
   <string name="enable_gps">जिपीएस चालू करा</string>
-  <string name="contributions_subtitle_zero">अद्याप काहीही चढवलेले नाही</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">अद्याप काहीही चढवलेले नाही</string>
   <string name="categories_not_found">%1$s शी जुळणारे कोणतेच वर्ग सापडले नाहीत</string>
   <string name="categories_skip_explanation">विकिमिडिया कॉमन्सवर आपल्या संचिकांना शोधणे सोपी जाण्यासाठी त्यांना वर्ग जोडा.\n\nवर्ग जोडण्यास टंकन सुरू करा.\nही पायरी चुकविण्यास या संदेशावर अलगद टिचका (किंवा बॅक कळ टिचका)</string>
   <string name="categories_activity_title">वर्ग</string>

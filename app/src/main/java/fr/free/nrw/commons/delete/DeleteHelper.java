@@ -94,11 +94,10 @@ public class DeleteHelper {
         String userPageString = "\n{{subst:idw|" + media.getFilename() +
                 "}} ~~~~";
 
-        String creator = media.getCreator();
+        String creator = media.getAuthor();
         if (creator == null || creator.isEmpty()) {
             throw new RuntimeException("Failed to nominate for deletion");
         }
-        String creatorName = creator.replace(" (page does not exist)", "");
 
         return pageEditClient.prependEdit(media.getFilename(), fileDeleteString + "\n", summary)
                 .flatMap(result -> {
@@ -113,7 +112,7 @@ public class DeleteHelper {
                     throw new RuntimeException("Failed to nominate for deletion");
                 }).flatMap(result -> {
                     if (result) {
-                        return pageEditClient.appendEdit("User_Talk:" + creatorName, userPageString + "\n", summary);
+                        return pageEditClient.appendEdit("User_Talk:" + creator, userPageString + "\n", summary);
                     }
                     throw new RuntimeException("Failed to nominate for deletion");
                 });

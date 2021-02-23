@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Ooswesthoesbes
 * Pahles
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d bestandj up \'nt loade</item>
+    <item quantity="other">%1$d bestenj up \'nt loade</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d upload</item>
+    <item quantity="other">%1$d uploads</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Beginnendj mit %1$d upload</item>
+    <item quantity="other">Beginnendj mit %1$d uploads</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d upload</item>
+    <item quantity="other">%1$d uploads</item>
+  </plurals>
+  <string name="share_license_summary" fuzzy="true">Dit plaetje weurt gelicenseerd ónger %1$s</string>
   <string name="preference_category_appearance">Uterlik</string>
   <string name="preference_category_general">Algemein</string>
   <string name="preference_category_feedback">Feedback</string>
@@ -32,10 +49,6 @@
   <string name="upload_progress_notification_title_finishing">d\'n Upload van %1$s is vaerdig</string>
   <string name="upload_failed_notification_title">d\'n Upload van %1$s is mislök</string>
   <string name="upload_failed_notification_subtitle">Wies aan veur te betrachte</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d bestandj up \'nt loade</item>
-    <item quantity="other">%1$d bestenj up \'nt loade</item>
-  </plurals>
   <string name="title_activity_contributions">Mien recènte uploads</string>
   <string name="contribution_state_queued">Inne wachrie</string>
   <string name="contribution_state_failed">Mislök</string>
@@ -46,9 +59,7 @@
   <string name="menu_nearby">Kórtbie</string>
   <string name="provider_contributions">Mien uploads</string>
   <string name="menu_share">Deil</string>
-  <string name="menu_open_in_browser">Tuin in browser</string>
   <string name="share_title_hint" fuzzy="true">Titel</string>
-  <string name="add_title_toast">Gaef estebleef \'ne naam veur dit bestandj</string>
   <string name="share_description_hint">Besjrieving</string>
   <string name="login_failed_network">Kan zich neet aanmelde - netwirkfout</string>
   <string name="login_failed_throttled">Te väöl mislökde kieëre geperbeerd. Perbeer estebleef oppernuuj euver e paar menuut.</string>
@@ -65,20 +76,7 @@
   <string name="display_list_button">Lies</string>
   <string name="gps_disabled">GPS steit oet op die toestèl. Wils se \'t aanzètte?</string>
   <string name="enable_gps">Zèt GPS aan</string>
-  <string name="contributions_subtitle_zero">Nag gein uploads</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d upload</item>
-    <item quantity="other">%1$d uploads</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Beginnendj mit %1$d upload</item>
-    <item quantity="other">Beginnendj mit %1$d uploads</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d upload</item>
-    <item quantity="other">%1$d uploads</item>
-  </plurals>
+  <string name="contributions_subtitle_zero" fuzzy="true">Nag gein uploads</string>
   <string name="categories_not_found">Gein categorieje die euvereinkómme mit %1$s gevónje</string>
   <string name="categories_skip_explanation">Veug categorieje toe veur dien plaetjes mekkeliker te kinne vinje op Wikimedia Commons.\nBegin mit tikke veur categorieje toe te veuge.</string>
   <string name="categories_activity_title">Categorieje</string>
@@ -88,8 +86,8 @@
   <string name="menu_about">Euver</string>
   <string name="about_license">De Wikimedia Commons-app is \'nen app op aope brónne, gemaak en óngerhaje door gerechtigde en vriewilligers vanne Wikimedia-gemeinsjap. De Wikimedia Foundation is neet betróch inne maak, óntwikkeling of \'t óngerhawd vannen app.</string>
   <string name="about_improve">Maak e nuuj &lt;a href=\"%1$s\"&gt;GitHub-perbleem&lt;/a&gt; veur fouteverslaag en veurstèlle.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Privaatbeleid&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Toesjrif&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Privaatbeleid&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Toesjrif&lt;/u&gt;</string>
   <string name="title_activity_about">Euver</string>
   <string name="menu_feedback">Sjik feedback (mitten e-mail)</string>
   <string name="no_email_client">Geine e-mailcliënt geïnstalleerd</string>
@@ -98,15 +96,13 @@
   <string name="no_uploads_yet">Doe höbs nag gein plaetjes geüpload.</string>
   <string name="menu_retry_upload">Perbeer oppernuuj</string>
   <string name="menu_cancel_upload">Braek aaf</string>
-  <string name="share_license_summary" fuzzy="true">Dit plaetje weurt gelicenseerd ónger %1$s</string>
   <string name="media_upload_policy">Door dit plaetje toe te veuge verklaor ich det dit mien eige werk is en det \'t gein auteursrechtelik besjurmp matterjaal of selfies bevatj en angeszins instump mit \'t &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;beleid op Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Standerdlicentie</string>
   <string name="use_previous" fuzzy="true">Gebroek veurige naam/besjrieving</string>
   <string name="allow_gps">Haol autematis de hujige locatie op</string>
   <string name="allow_gps_summary" fuzzy="true">Haol de hujige locatie op veur categorieveurstèlle te make wen \'t bild gein geotags haet</string>
-  <string name="preference_theme">Nachmodus</string>
-  <string name="preference_theme_summary">Gebroeker duuster thema</string>
+  <string name="preference_theme" fuzzy="true">Nachmodus</string>
   <string name="license_name_cc_by_sa_four"> Naamsvermeljing-GeliekDeile 4.0</string>
   <string name="license_name_cc_by_four">Naamsvermeljing 4.0</string>
   <string name="license_name_cc_by_sa">Naamsvermeljing-GeliekDeile 3.0</string>

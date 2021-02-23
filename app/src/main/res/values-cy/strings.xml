@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Cymrodor
 * Lloffiwr
 * Robin Owain
@@ -69,7 +68,6 @@
   <string name="menu_nearby">Gerllaw</string>
   <string name="provider_contributions">Fy uwchlwythiadau</string>
   <string name="menu_share">Rhannu</string>
-  <string name="menu_open_in_browser">Agor yn y Porwr</string>
   <string name="share_title_hint" fuzzy="true">Teitl (angenrheidiol)</string>
   <string name="share_description_hint">Disgrifiad</string>
   <string name="login_failed_network">Yn methu mewngofnodi - methodd y rhwydwaith</string>
@@ -89,7 +87,7 @@
   <string name="display_list_button">Rhestr</string>
   <string name="gps_disabled">Ataliwyd GPS ar eich dyfais. Ydych chi am ei droi\'n weithredol?</string>
   <string name="enable_gps">Gweithredu\'r GPS</string>
-  <string name="contributions_subtitle_zero">Heb uwchlwytho eto</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Heb uwchlwytho eto</string>
   <string name="categories_not_found">Dim categori\'n cyfateb i %1$s ar gael</string>
   <string name="categories_skip_explanation">Ychwanegwch gategori/au er mwyn i bobl fedru canfod eich ffeiliau ar Gomin Wicimedia.\n\nCychwynwch deipio i ychwanegu categori/au.</string>
   <string name="categories_activity_title">Categorïau</string>

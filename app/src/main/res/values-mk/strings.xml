@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Bjankuloski06
 * Violetova
 * Vlad5250
@@ -10,8 +9,7 @@
     <item quantity="one">Се подига %1$d податотека</item>
     <item quantity="other">Се подигаат %1$d податотеки</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -80,11 +78,11 @@
   <string name="menu_nearby">Во близина</string>
   <string name="provider_contributions">Мои подигања</string>
   <string name="menu_share">Сподели</string>
-  <string name="menu_open_in_browser">Погледај во прелистувач</string>
+  <string name="menu_view_file_page">Погл. податотечната страница</string>
   <string name="share_title_hint">Опис (задолж.)</string>
   <string name="add_caption_toast">Ставете ѝ опис на податотеката</string>
   <string name="share_description_hint">Опис</string>
-  <string name="share_caption_hint">Опис (највеќе 255 знаци)</string>
+  <string name="share_caption_hint">Опис</string>
   <string name="login_failed_network">Не можам да Ве најавам — мрежата не работи</string>
   <string name="login_failed_wrong_credentials">Не можев да ве најавам. Проверете ги корисничкото име и лозинката.</string>
   <string name="login_failed_throttled">Направени се премногу неуспешни обиди. Обидете се пак за некоја минута.</string>
@@ -103,7 +101,7 @@
   <string name="display_list_button">Список</string>
   <string name="gps_disabled">GPS е исклучен на вашиот уред. Дали сакате да го вклучите?</string>
   <string name="enable_gps">Вклучи GPS</string>
-  <string name="contributions_subtitle_zero">Сè уште нема подигања</string>
+  <string name="contributions_subtitle_zero">(Сè уште нема подигања)</string>
   <string name="categories_not_found">Нема категории што одговараат на %1$s</string>
   <string name="depictions_not_found">Не најдов предмети од Википодатоците што одговараат на %1$s</string>
   <string name="no_child_classes">%1$s нема зависни класи</string>
@@ -265,7 +263,7 @@
   <string name="error_while_cache">Грешка при меѓускладирање на сликите</string>
   <string name="title_info">Краток и единствен наслов на податотеката, кој ќе служи како нејзин назив. Можете да користите прост јазик со меѓупростор, но не пишувајте ја податотечната наставка</string>
   <string name="description_info">Објаснете ја податотеката што подобро можете: Каде е направена? Што е прикажано на неа? Кој е контекстот? Опишете ги предметите, објектите и личностите. Дајте сознанија што не можат лесно да се погодат, како на пр. време од денот ако се работи за природен предел. Ако на неа е претставено нешто необично, објаснете зошто прикажаното е необично.</string>
-  <string name="caption_info">Ставете краток опис на сликата. Првиот опис ќе се користи како наслов на сликата.</string>
+  <string name="caption_info">Ставете краток опис на сликата. Првиот опис ќе се користи како наслов на сликата. Допуштени се највеќе 255 знаци.</string>
   <string name="upload_image_too_dark">Сликата ви е претемна. Дали сигурно сакате да ја подигнете? Ризницата е посветена само на слики со енциклопедиска вредност.</string>
   <string name="upload_image_blurry">Сликата ви е матна. Дали сигурно сакате да ја подигнете? Ризницата е посветена само на слики со енциклопедиска вредност.</string>
   <string name="upload_problem_exist">Потенцијални проблеми со сликава:</string>
@@ -278,8 +276,8 @@
   <string name="upload_problem_image">Пронајдени проблеми во сликата</string>
   <string name="internet_downloaded">Подигајте само слики кои самите сте ги направиле. Не подигајте слики што сте ги нашле некаде на семрежјето.</string>
   <string name="give_permission">Дај дозвола</string>
-  <string name="use_external_storage" fuzzy="true">Користи надворешен склад</string>
-  <string name="use_external_storage_summary" fuzzy="true">Зачувување на направените слики во прилогот со камерата на вашиот уред</string>
+  <string name="use_external_storage">Зачувај слики направени во прилогот</string>
+  <string name="use_external_storage_summary">Зачувување на сликите направени со камерата во прилогот на вашиот уред</string>
   <string name="login_to_your_account">Најавете се со вашата сметка</string>
   <string name="send_log_file">Испрати дневничка податотека</string>
   <string name="send_log_file_description">Испрати дневничка податотека на разработувачите по е-пошта за да се решат грешките во прилогот. Напомена: дневниците потенцијално може да содржат лични податоци.</string>
@@ -415,18 +413,18 @@
   <string name="notifications">Известувања</string>
   <string name="read_notifications">Известувања (прочитани)</string>
   <string name="display_nearby_notification">Известувај ме за места во близина</string>
-  <string name="display_nearby_notification_summary" fuzzy="true">Допрете тука за да го видите најблиското место без слика</string>
+  <string name="display_nearby_notification_summary">Прикажувај известувања во прилогот за најблиското место без слика</string>
   <string name="no_close_nearby">Не најдов места во ваша близина</string>
   <string name="list_sheet">Список</string>
   <string name="storage_permission">Дозвола за складирање</string>
   <string name="write_storage_permission_rationale_for_image_share">Ни треба ваша дозвола за пристап до надворешниот склад на вашиот уред за да се подигнат сликите.</string>
   <string name="nearby_notification_dismiss_message">Повеќе нема да ви се прикажува најблиското место без слика. Доколку се премислите, таа поставка ќе ја најдете во Нагодувањата.</string>
-  <string name="step_count">Чекор %1$d од %2$d</string>
+  <string name="step_count">Чекор %1$d од %2$d: %3$s</string>
   <string name="image_in_set_label">Слика %1$d во збирот</string>
   <string name="next">Следно</string>
   <string name="previous">Претходно</string>
   <string name="submit">Поднеси</string>
-  <string name="upload_title_duplicate">Веќе постои податотека со име %1$s. Дали сигурно сакате да продолжите?</string>
+  <string name="upload_title_duplicate">Веќе постои податотека со име %1$s. Дали сигурно сакате да продолжите?\n\nНапомена: На податотечното име автоматски ќе му се додаде соодветна наставка.</string>
   <string name="map_application_missing">Не пронајдов складен картографски прилог на вашиот уред. Преземете еден таков за да можете да ја користите оваа можност.</string>
   <string name="navigation_item_bookmarks">Обележани</string>
   <string name="title_activity_bookmarks">Обележани</string>
@@ -461,7 +459,7 @@
   <string name="nearby_card_permission_explanation">Дали би сакале да се користи вашата тековна местоположба за приказ на околните места на кои им требаат слики?</string>
   <string name="unable_to_display_nearest_place">Не можам да го прикажам најблиското место на кое му требаат слики без да дадете дозвола за местоположба</string>
   <string name="never_ask_again">Повеќе не прашувај</string>
-  <string name="display_location_permission_title">Дозвола за приказ на местоположба</string>
+  <string name="display_location_permission_title">Побарај дозвола за местоположба</string>
   <string name="display_location_permission_explanation">Барај дозвола за местоположба кога ќе треба да се даде известување за околно место.</string>
   <string name="achievements_fetch_failed">Нешто не е во ред. Не можев да ги добијам вашите достигнувања</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Имате толку многу придонеси што нашиот пресметувач на достигнувања просто не може да постигне. Ова е врховното достигнување.</string>
@@ -634,6 +632,8 @@
   <string name="pause">запри</string>
   <string name="resume">продолжи</string>
   <string name="paused">Запрено</string>
+  <string name="more">Повеќе</string>
+  <string name="favorites">Омилени</string>
   <string name="achievements_tab_title">Достигнувања</string>
   <string name="leaderboard_tab_title">Предводници</string>
   <string name="rank_prefix">Место:</string>
@@ -653,7 +653,7 @@
   <string name="leaderboard_nearby">Во близина</string>
   <string name="leaderboard_used">Користено</string>
   <string name="leaderboard_my_rank_button_text">Мој ранг</string>
-  <string name="mapbox_telemetry">Откажување од телеметрија</string>
+  <string name="mapbox_telemetry">Телеметрија на Mapbox</string>
   <string name="telemetry_opt_out_summary">Испраќајте анонимизирани податоци за место и употреба на Mapbox кога ја коиристите можноста „Во близина“</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Подобрете ја картава&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Овозможен режимот на ограничена врска.</string>
@@ -661,4 +661,15 @@
   <string name="limited_connection">Ограничена врска</string>
   <string name="statistics_quality">Квалитетни слики</string>
   <string name="quality_images_info">Квалитетните слики се дијаграми или фотографии кои задоволуваат извесни стандарди за квалитет (кои се од претежно техничка природа) или имаат вредност за Викимедиините проекти</string>
+  <string name="resuming_upload">Продолжувам со подигањето…</string>
+  <string name="pausing_upload">Го паузирам подигањето…</string>
+  <string name="limited_connection_explanation">Овозможивте режим на ограничена врска. Сите подигања се времено запреми и ќе продолжат штом ќе го оневозможите овој режим.</string>
+  <string name="limited_connection_is_on">Работи режимот на ограничена врска.</string>
+  <string name="media_details_tooltip">Напишете краток опис кој кажува што е прикажано на сликата. Во него образложете зошто сликата е интересна, типична или ретка, и објаснете го контекстот, било да е видлив или не. Користете што поточни поими, секогаш кога можете.</string>
+  <string name="depicts_tooltip">Најдете ги и изберете ги сите концепти претставени на сликава. Настојувајте да биде што поуточнето. Ако сликата прикажува повеќе предмети, изберете ги сите, во рамките на разумноста. Не избирајте општи ознаки ако имате на располагање поуточнети.</string>
+  <string name="categories_tooltip">Изберете ги прикладните категории. За разлика од приказите, категориите се исклучиво на англиски.</string>
+  <string name="license_tooltip">Ризницата ги става вашите дела на располагање за употреба и преработка за секого. Дали сакате да се одречете од сите права? Дали сакате делото да ви се припишува? Дали сакате преработените дела да ја имаат истата лиценца?</string>
+  <string name="depicts_step_title">Прикажува</string>
+  <string name="license_step_title">Лиценца на творбата</string>
+  <string name="media_detail_step_title">Поединости за творбата</string>
 </resources>
