@@ -161,6 +161,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
     //Fab close on touch outside (Scrolling or taping on item triggers this action).
     rvContributionsList.addOnItemTouchListener(new OnItemTouchListener() {
+
+      /**
+       * Silently observe and/or take over touch events sent to the RecyclerView before
+       * they are handled by either the RecyclerView itself or its child views.
+       */
       @Override
       public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
         if (e.getAction() == MotionEvent.ACTION_DOWN) {
