@@ -3,8 +3,12 @@ package fr.free.nrw.commons.profile.achievements
 import android.content.Context
 import android.graphics.Bitmap
 import android.view.MenuItem
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.dinuscxj.progressbar.CircleProgressBar
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.profile.ProfileActivity
@@ -14,12 +18,14 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenuItem
 import org.wikipedia.AppAdapter
+import java.lang.reflect.Method
 
 
 @RunWith(RobolectricTestRunner::class)
@@ -32,8 +38,52 @@ class AchievementsFragmentUnitTests {
 
     private lateinit var menuItem: MenuItem
 
+    private lateinit var achievements: Achievements
+
+    @Mock
+    private lateinit var imageView: ImageView
+
+    @Mock
+    private lateinit var badgeText: TextView
+
+    @Mock
+    private lateinit var levelNumber: TextView
+
+    @Mock
+    private lateinit var thanksReceived: TextView
+
+    @Mock
+    private lateinit var imagesUploadedProgressbar: CircleProgressBar
+
+    @Mock
+    private lateinit var imagesUsedByWikiProgressBar: CircleProgressBar
+
+    @Mock
+    private lateinit var imageRevertsProgressbar: CircleProgressBar
+
+    @Mock
+    private lateinit var imagesFeatured: TextView
+
+    @Mock
+    private lateinit var tvQualityImages: TextView
+
+    @Mock
+    private lateinit var imagesRevertLimitText: TextView
+
+    @Mock
+    private lateinit var imageByWikiText: TextView
+
+    @Mock
+    private lateinit var imageRevertedText: TextView
+
+    @Mock
+    private lateinit var imageUploadedText: TextView
+
     @Mock
     private lateinit var bitmap: Bitmap
+
+    @Mock
+    private lateinit var progressBar: ProgressBar
 
     @Before
     fun setUp() {
@@ -48,6 +98,39 @@ class AchievementsFragmentUnitTests {
         fragmentTransaction.add(fragment, null)
         fragmentTransaction.commit()
 
+        achievements = Achievements(0, 0, 0, 0, 0, 0, 0)
+
+        Whitebox.setInternalState(fragment, "thanksReceived", thanksReceived)
+        Whitebox.setInternalState(
+            fragment,
+            "imagesUsedByWikiProgressBar",
+            imagesUsedByWikiProgressBar
+        )
+        Whitebox.setInternalState(
+            fragment,
+            "imagesUsedByWikiProgressBar",
+            imagesUsedByWikiProgressBar
+        )
+        Whitebox.setInternalState(fragment, "imagesFeatured", imagesFeatured)
+        Whitebox.setInternalState(fragment, "tvQualityImages", tvQualityImages)
+        Whitebox.setInternalState(fragment, "levelNumber", levelNumber)
+        Whitebox.setInternalState(fragment, "imageView", imageView)
+        Whitebox.setInternalState(fragment, "badgeText", badgeText)
+        Whitebox.setInternalState(fragment, "imagesUploadedProgressbar", imagesUploadedProgressbar)
+        Whitebox.setInternalState(fragment, "imageRevertsProgressbar", imageRevertsProgressbar)
+        Whitebox.setInternalState(
+            fragment,
+            "imagesUsedByWikiProgressBar",
+            imagesUsedByWikiProgressBar
+        )
+        Whitebox.setInternalState(fragment, "imageView", imageView)
+        Whitebox.setInternalState(fragment, "imageByWikiText", imageByWikiText)
+        Whitebox.setInternalState(fragment, "imageRevertedText", imageRevertedText)
+        Whitebox.setInternalState(fragment, "imageUploadedText", imageUploadedText)
+        Whitebox.setInternalState(fragment, "imageView", imageView)
+        Whitebox.setInternalState(fragment, "progressBar", progressBar)
+        Whitebox.setInternalState(fragment, "imagesRevertLimitText", imagesRevertLimitText)
+        Whitebox.setInternalState(fragment, "item", menuItem)
     }
 
     @Test
@@ -115,6 +198,122 @@ class AchievementsFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnOptionsItemSelected() {
         fragment.onOptionsItemSelected(menuItem)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testLaunchAlert() {
+        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
+            "launchAlert",
+            String::class.java,
+            String::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, "", "")
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testHideProgressBar() {
+        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
+            "hideProgressBar",
+            Achievements::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, achievements)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testSetAchievementsUploadCount() {
+        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
+            "setAchievementsUploadCount",
+            Achievements::class.java,
+            Int::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, achievements, 0)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testCheckAccount() {
+        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
+            "checkAccount"
+        )
+        method.isAccessible = true
+        method.invoke(fragment)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testSetUploadCount() {
+        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
+            "setUploadCount",
+            Achievements::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, achievements)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnError() {
+        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
+            "onError"
+        )
+        method.isAccessible = true
+        method.invoke(fragment)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testShowSnackBarWithRetryTrue() {
+        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
+            "showSnackBarWithRetry", Boolean::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, true)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testShowSnackBarWithRetryFalse() {
+        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
+            "showSnackBarWithRetry", Boolean::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, false)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testSetWikidataEditCount() {
+        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
+            "setWikidataEditCount"
+        )
+        method.isAccessible = true
+        method.invoke(fragment)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testSetAchievements() {
+        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
+            "setAchievements"
+        )
+        method.isAccessible = true
+        method.invoke(fragment)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testShareScreen() {
+        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
+            "shareScreen", Bitmap::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, bitmap)
     }
 
 }
