@@ -345,7 +345,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void performMapReadyActions() {
         if (((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY && isMapBoxReady) {
-            if(!applicationKvStore.getBoolean("DoNotAskForLocationPermission", false) ||
+            if(!applicationKvStore.getBoolean("doNotAskForLocationPermission", false) ||
                 PermissionUtils.hasPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)){
                 checkPermissionsAndPerformAction();
             }else{
@@ -358,7 +358,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void locationPermissionGranted() {
         isPermissionDenied = false;
 
-        applicationKvStore.putBoolean("DoNotAskForLocationPermission", false);
+        applicationKvStore.putBoolean("doNotAskForLocationPermission", false);
         lastKnownLocation = locationManager.getLastLocation();
         fr.free.nrw.commons.location.LatLng target=lastFocusLocation;
         if(null==lastFocusLocation){
@@ -391,7 +391,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         presenter.attachView(this);
         registerNetworkReceiver();
         if (isResumed() && ((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY) {
-            if(!isPermissionDenied && !applicationKvStore.getBoolean("DoNotAskForLocationPermission", false)){
+            if(!isPermissionDenied && !applicationKvStore.getBoolean("doNotAskForLocationPermission", false)){
                 startTheMap();
             }else{
                 startMapWithoutPermission();
@@ -402,7 +402,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void startMapWithoutPermission() {
         mapView.onStart();
 
-        applicationKvStore.putBoolean("DoNotAskForLocationPermission", true);
+        applicationKvStore.putBoolean("doNotAskForLocationPermission", true);
         lastKnownLocation = new fr.free.nrw.commons.location.LatLng(51.50550,-0.07520,1f);
         final CameraPosition position = new CameraPosition.Builder()
             .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation))
