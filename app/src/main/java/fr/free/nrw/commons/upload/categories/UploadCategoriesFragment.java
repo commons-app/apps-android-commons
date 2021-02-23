@@ -73,9 +73,8 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     private void init() {
         tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
-                callback.getTotalNumberOfSteps()));
+            callback.getTotalNumberOfSteps(), getString(R.string.categories_activity_title)));
         setTvSubTitle();
-                callback.getTotalNumberOfSteps(), getString(R.string.categories_activity_title)));
         tooltip.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

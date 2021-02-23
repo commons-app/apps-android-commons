@@ -79,9 +79,8 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      */
     private void init() {
         depictsTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
-                callback.getTotalNumberOfSteps()));
+            callback.getTotalNumberOfSteps(), getString(R.string.depicts_step_title)));
         setDepictsSubTitle();
-                callback.getTotalNumberOfSteps(), getString(R.string.depicts_step_title)));
         tooltip.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
