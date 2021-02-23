@@ -51,6 +51,7 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AccountUtil;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoryClient;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.category.CategoryEditHelper;
@@ -106,6 +107,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         return mf;
     }
+
+    @Inject
+    SessionManager sessionManager;
 
     @Inject
     MediaDataExtractor mediaDataExtractor;
@@ -263,10 +267,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             authorLayout.setVisibility(GONE);
         }
 
+        if (!sessionManager.isUserLoggedIn()) {
+            categoryEditButton.setVisibility(GONE);
+        }
+
         if(applicationKvStore.getBoolean("login_skipped")){
             delete.setVisibility(GONE);
         }
-
+      
         return view;
     }
 
