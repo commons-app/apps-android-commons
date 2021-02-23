@@ -582,7 +582,9 @@ public class ContributionsFragment
     }
 
     @Override public void showCampaigns(Campaign campaign) {
+        if ( campaign != null) {
             campaignView.setCampaign(campaign);
+        }
     }
 
     @Override public void onDestroyView() {
