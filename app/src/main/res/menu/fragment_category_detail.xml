@@ -4,6 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_browser_current_category"
-        android:title="@string/menu_view_file_page"
+        android:title="@string/menu_view_category_page"
         app:showAsAction="never" />
 </menu>

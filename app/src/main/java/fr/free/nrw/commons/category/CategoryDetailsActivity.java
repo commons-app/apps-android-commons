@@ -62,6 +62,7 @@ public class CategoryDetailsActivity extends BaseActivity
         viewPager.setOffscreenPageLimit(2);
         tabLayout.setupWithViewPager(viewPager);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTabs();
         setPageTitle();
     }
@@ -187,6 +188,9 @@ public class CategoryDetailsActivity extends BaseActivity
                 PageTitle title = Utils.getPageTitle(CATEGORY_PREFIX + categoryName);
                 Utils.handleWebUrl(this, Uri.parse(title.getCanonicalUri()));
                 return true;
+            case android.R.id.home:
+                onBackPressed();
+                return  true;
             default:
                 return super.onOptionsItemSelected(item);
         }

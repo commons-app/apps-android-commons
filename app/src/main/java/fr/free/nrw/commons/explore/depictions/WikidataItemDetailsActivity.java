@@ -2,9 +2,14 @@ package fr.free.nrw.commons.explore.depictions;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -13,6 +18,7 @@ import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.depictions.child.ChildDepictionsFragment;
@@ -43,6 +49,8 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     TabLayout tabLayout;
     @BindView(R.id.viewPager)
     ViewPager viewPager;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     ViewPagerAdapter viewPagerAdapter;
 
@@ -56,6 +64,8 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setOffscreenPageLimit(2);
         tabLayout.setupWithViewPager(viewPager);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTabs();
         setPageTitle();
     }
@@ -187,5 +197,35 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         intent.putExtra("wikidataItemName", depictedItem.getName());
         intent.putExtra("entityId", depictedItem.getId());
         context.startActivity(intent);
+    }
+
+    /**
+     * this function inflate the menu
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater=getMenuInflater();
+        menuInflater.inflate(R.menu.menu_wikidata_item,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    /**
+     * This method handles the logic on ItemSelect in toolbar menu
+     * Currently only 1 choice is available to open Wikidataitem details page in browser
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.browser_actions_menu_items:
+                String entityId=getIntent().getStringExtra("entityId");
+                Uri uri = Uri.parse("https://www.wikidata.org/wiki/" + entityId);
+                Utils.handleWebUrl(this, uri);
+                return  true;
+            case  android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
