@@ -94,6 +94,10 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(filter -> searchForCategory(filter.toString()), Timber::e);
     }
+
+    /**
+     * Sets the Tv subtitle.
+     */
     private void setTvSubTitle() {
         final Activity activity = getActivity();
         if (activity instanceof UploadActivity) {

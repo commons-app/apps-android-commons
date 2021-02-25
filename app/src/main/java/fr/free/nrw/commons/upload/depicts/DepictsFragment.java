@@ -91,6 +91,10 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         initRecyclerView();
         addTextChangeListenerToSearchBox();
     }
+
+    /**
+     * Sets the Depicts subtitle
+     */
     private void setDepictsSubTitle() {
         final Activity activity = getActivity();
         if (activity instanceof UploadActivity) {

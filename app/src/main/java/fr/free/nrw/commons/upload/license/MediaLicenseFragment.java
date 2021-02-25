@@ -89,6 +89,9 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
         presenter.getLicenses();
     }
 
+    /**
+     * Sets the Tv Subtitle
+     */
     private void setTvSubTitle() {
         final Activity activity = getActivity();
         if (activity instanceof  UploadActivity) {

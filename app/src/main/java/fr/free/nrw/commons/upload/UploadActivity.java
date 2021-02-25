@@ -393,6 +393,10 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         place = intent.getParcelableExtra(PLACE_OBJECT);
         resetDirectPrefs();
     }
+
+    /**
+     * Returns if multiple files selected or not.
+     */
     public boolean getIsMultipleFilesSelected() {
         return isMultipleFilesSelected;
     }
