@@ -191,6 +191,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private Animation rotate_forward;
 
     private static final float ZOOM_LEVEL = 14f;
+    private static final float ZOOM_OUT = 0f;
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
     private boolean isNetworkErrorOccurred;
@@ -206,6 +207,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004;
 
     private boolean isMapBoxReady;
+    private boolean isPermissionDenied;
+    private boolean recenterToUserLocation;
     private MapboxMap mapBox;
     IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
     private Marker currentLocationMarker;
@@ -259,6 +262,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         cameraMoveListener= () -> presenter.onCameraMove(mapBox.getCameraPosition().target);
         addCheckBoxCallback();
         presenter.attachView(this);
+        isPermissionDenied = false;
+        recenterToUserLocation = false;
         initRvNearbyList();
         initThemePreferences();
         mapView.onCreate(savedInstanceState);
@@ -281,7 +286,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 performMapReadyActions();
                 final CameraPosition cameraPosition = new CameraPosition.Builder()
                         .target(new LatLng(51.50550, -0.07520))
-                        .zoom(ZOOM_LEVEL)
+                        .zoom(ZOOM_OUT)
                         .build();
                 mapBoxMap.setCameraPosition(cameraPosition);
 
@@ -342,32 +347,43 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void performMapReadyActions() {
         if (((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY && isMapBoxReady) {
-            checkPermissionsAndPerformAction(() -> {
-                lastKnownLocation = locationManager.getLastLocation();
-                fr.free.nrw.commons.location.LatLng target=lastFocusLocation;
-                if(null==lastFocusLocation){
-                    target=lastKnownLocation;
-                }
-                if (lastKnownLocation != null) {
-                    final CameraPosition position = new CameraPosition.Builder()
-                            .target(LocationUtils.commonsLatLngToMapBoxLatLng(target)) // Sets the new camera position
-                            .zoom(ZOOM_LEVEL) // Same zoom level
-                            .build();
-                    mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
-                }
-                else if(locationManager.isGPSProviderEnabled()||locationManager.isNetworkProviderEnabled()){
-                    locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
-                    locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
-                    setProgressBarVisibility(true);
-                }
-                else {
-                    Toast.makeText(getContext(), getString(R.string.nearby_location_not_available), Toast.LENGTH_LONG).show();
-                }
-                presenter.onMapReady();
-                registerUnregisterLocationListener(false);
+            if(!applicationKvStore.getBoolean("doNotAskForLocationPermission", false) ||
+                PermissionUtils.hasPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)){
+                checkPermissionsAndPerformAction();
+            }else{
+                isPermissionDenied = true;
                 addOnCameraMoveListener();
-            });
+            }
         }
+    }
+
+    private void locationPermissionGranted() {
+        isPermissionDenied = false;
+
+        applicationKvStore.putBoolean("doNotAskForLocationPermission", false);
+        lastKnownLocation = locationManager.getLastLocation();
+        fr.free.nrw.commons.location.LatLng target=lastFocusLocation;
+        if(null==lastFocusLocation){
+            target=lastKnownLocation;
+        }
+        if (lastKnownLocation != null) {
+            final CameraPosition position = new CameraPosition.Builder()
+                .target(LocationUtils.commonsLatLngToMapBoxLatLng(target)) // Sets the new camera position
+                .zoom(ZOOM_LEVEL) // Same zoom level
+                .build();
+            mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
+        }
+        else if(locationManager.isGPSProviderEnabled()||locationManager.isNetworkProviderEnabled()){
+            locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
+            locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
+            setProgressBarVisibility(true);
+        }
+        else {
+            Toast.makeText(getContext(), getString(R.string.nearby_location_not_available), Toast.LENGTH_LONG).show();
+        }
+        presenter.onMapReady();
+        registerUnregisterLocationListener(false);
+        addOnCameraMoveListener();
     }
 
     @Override
@@ -377,8 +393,29 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         presenter.attachView(this);
         registerNetworkReceiver();
         if (isResumed() && ((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY) {
-            startTheMap();
+            if(!isPermissionDenied && !applicationKvStore.getBoolean("doNotAskForLocationPermission", false)){
+                startTheMap();
+            }else{
+                startMapWithoutPermission();
+            }
         }
+    }
+
+    private void startMapWithoutPermission() {
+        mapView.onStart();
+
+        applicationKvStore.putBoolean("doNotAskForLocationPermission", true);
+        lastKnownLocation = new fr.free.nrw.commons.location.LatLng(51.50550,-0.07520,1f);
+        final CameraPosition position = new CameraPosition.Builder()
+            .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation))
+            .zoom(ZOOM_OUT)
+            .build();
+        if(mapBox != null){
+            mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
+            addOnCameraMoveListener();
+        }
+        presenter.onMapReady();
+        removeCurrentLocationMarker();
     }
 
     private void registerNetworkReceiver() {
@@ -795,10 +832,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void populatePlaces(final fr.free.nrw.commons.location.LatLng curlatLng) {
-        if (curlatLng.equals(lastFocusLocation)|| lastFocusLocation==null) { // Means we are checking around current location
+        if (curlatLng.equals(lastFocusLocation) || lastFocusLocation == null || recenterToUserLocation) { // Means we are checking around current location
             populatePlacesForCurrentLocation(lastKnownLocation, curlatLng);
         } else {
             populatePlacesForAnotherLocation(lastKnownLocation, curlatLng);
+        }
+        if(recenterToUserLocation) {
+            recenterToUserLocation = false;
         }
     }
 
@@ -918,12 +958,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void checkPermissionsAndPerformAction(final Runnable runnable) {
+    public void checkPermissionsAndPerformAction() {
         Timber.d("Checking permission and perfoming action");
         PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION,
-                runnable,
-                () -> ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code()),
+                () -> locationPermissionGranted(),
+                () -> isPermissionDenied = true,
                 R.string.location_permission_title,
                 R.string.location_permission_rationale_nearby);
     }
@@ -1095,7 +1135,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     @Override
     public void addCurrentLocationMarker(final fr.free.nrw.commons.location.LatLng curLatLng) {
-        if (null != curLatLng) {
+        if (null != curLatLng && !isPermissionDenied) {
             ExecutorUtils.get().submit(() -> {
                 mapView.post(() -> removeCurrentLocationMarker());
                 Timber.d("Adds current location marker");
@@ -1141,8 +1181,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void updateMapToTrackPosition(final fr.free.nrw.commons.location.LatLng curLatLng) {
         Timber.d("Updates map camera to track user position");
-        final CameraPosition cameraPosition = new CameraPosition.Builder().target
+        final CameraPosition cameraPosition;
+        if(isPermissionDenied){
+            cameraPosition = new CameraPosition.Builder().target
                 (LocationUtils.commonsLatLngToMapBoxLatLng(curLatLng)).build();
+        }else{
+            cameraPosition = new CameraPosition.Builder().target
+                (LocationUtils.commonsLatLngToMapBoxLatLng(curLatLng))
+                .zoom(ZOOM_LEVEL).build();
+        }
         if(null!=mapBox) {
             mapBox.setCameraPosition(cameraPosition);
             mapBox.animateCamera(CameraUpdateFactory
@@ -1326,8 +1373,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void recenterMap(final fr.free.nrw.commons.location.LatLng curLatLng) {
-        if (curLatLng == null) {
-            if (!(locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled())) {
+        if (isPermissionDenied || curLatLng == null) {
+            recenterToUserLocation = true;
+            checkPermissionsAndPerformAction();
+            if (!isPermissionDenied && !(locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled())) {
                 showLocationOffDialog();
             }
             return;

@@ -22,7 +22,7 @@ public interface NearbyParentFragmentContract {
         void listOptionMenuItemClicked();
         void populatePlaces(LatLng curlatLng);
         boolean isListBottomSheetExpanded();
-        void checkPermissionsAndPerformAction(Runnable runnable);
+        void checkPermissionsAndPerformAction();
         void displayLoginSkippedWarning();
         void setFABPlusAction(android.view.View.OnClickListener onClickListener);
         void setFABRecenterAction(android.view.View.OnClickListener onClickListener);
