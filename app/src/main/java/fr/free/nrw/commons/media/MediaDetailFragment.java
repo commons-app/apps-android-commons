@@ -616,7 +616,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
      */
     private void buildDepictionList(List<IdAndCaptions> idAndCaptions) {
         depictionContainer.removeAllViews();
-        String locale = applicationKvStore.getString(Prefs.KEY_LANGUAGE_VALUE, "");
+        String locale = Locale.getDefault().getLanguage();
         for (IdAndCaptions idAndCaption : idAndCaptions) {
                 depictionContainer.addView(buildDepictLabel(
                     //Check if the Depiction Caption is available in user's locale if not then check for english, else show any available.
