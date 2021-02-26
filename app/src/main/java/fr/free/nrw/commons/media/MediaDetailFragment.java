@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
@@ -129,6 +131,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     private int initialListTop = 0;
 
+    @BindView(R.id.mediaDetailFrameLayout)
+    FrameLayout frameLayout;
     @BindView(R.id.mediaDetailImageView)
     SimpleDraweeView image;
     @BindView(R.id.mediaDetailImageViewLandscape)
@@ -211,6 +215,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     private Media media;
     private ArrayList<String> reasonList;
 
+    /**
+     * Height stores the height of the frame layout as soon as its intialised and updates itself on
+     * configuration change.
+     * Used to adjust aspect ratio of image when length of the image is too large.
+     */
+    private int heightFrameLayuot;
+
+    private int minimumHeightOfMetadata=200;
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -274,7 +286,17 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         if(applicationKvStore.getBoolean("login_skipped")){
             delete.setVisibility(GONE);
         }
-      
+        /**
+         * gets the height of the frame layout as soon as the view is ready and updates aspect ratio
+         * of the picture.
+         */
+        view.post(new Runnable() {
+            @Override
+            public void run() {
+                heightFrameLayuot = frameLayout.getMeasuredHeight();
+                updateAspectRatio(scrollView.getWidth());
+            }
+        });
         return view;
     }
 
@@ -328,6 +350,16 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        /**
+         * we update the height of the frame layout as the configuration changes.
+         */
+        frameLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                heightFrameLayuot = frameLayout.getMeasuredHeight();
+                updateAspectRatio(scrollView.getWidth());
+            }
+        });
         scrollView.getViewTreeObserver().addOnGlobalLayoutListener(
             new OnGlobalLayoutListener() {
                 @Override
@@ -344,9 +376,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         );
         // check orientation
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            image.setVisibility(GONE);
             imageLandscape.setVisibility(VISIBLE);
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             imageLandscape.setVisibility(GONE);
+            image.setVisibility(VISIBLE);
         }
         // ensuring correct aspect ratio for landscape mode
         if (heightVerifyingBoolean) {
@@ -414,6 +448,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
      * The imageSpacer is Basically a transparent overlay for the SimpleDraweeView
      * which holds the image to be displayed( moreover this image is out of
      * the scroll view )
+     *
+     *
+     * If the image is sufficiently large i.e. the image height extends the view height, we reduce
+     * the height and change the width to maintain the aspect ratio, otherwise image takes up the
+     * total possible width and height is adjusted accordingly.
+     *
      * @param scrollWidth the current width of the scrollView
      */
     private void updateAspectRatio(int scrollWidth) {
@@ -421,6 +461,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             int finalHeight = (scrollWidth*imageInfoCache.getHeight()) / imageInfoCache.getWidth();
             ViewGroup.LayoutParams params = image.getLayoutParams();
             ViewGroup.LayoutParams spacerParams = imageSpacer.getLayoutParams();
+            params.width=scrollWidth;
+                if(finalHeight>heightFrameLayuot-minimumHeightOfMetadata)
+                {
+                    int temp=heightFrameLayuot-minimumHeightOfMetadata;
+                    params.width=scrollWidth*temp/finalHeight;
+                    finalHeight=temp;
+                }
             params.height = finalHeight;
             spacerParams.height = finalHeight;
             image.setLayoutParams(params);
