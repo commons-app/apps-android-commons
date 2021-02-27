@@ -64,7 +64,6 @@ import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Label;
-import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
@@ -619,15 +618,22 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         String locale = Locale.getDefault().getLanguage();
         for (IdAndCaptions idAndCaption : idAndCaptions) {
                 depictionContainer.addView(buildDepictLabel(
-                    //Check if the Depiction Caption is available in user's locale if not then check for english, else show any available.
-                    idAndCaption.getCaptions().get(locale) != null
-                        ? idAndCaption.getCaptions().get(locale)
-                        : ((idAndCaption.getCaptions().get("en") != null) ? idAndCaption.getCaptions().get("en")
-                            : idAndCaption.getCaptions().values().iterator().next()),
+                    getDepictionCaption(idAndCaption, locale),
                     idAndCaption.getId(),
                     depictionContainer
                 ));
         }
+    }
+
+    private String getDepictionCaption(IdAndCaptions idAndCaption, String locale) {
+        //Check if the Depiction Caption is available in user's locale if not then check for english, else show any available.
+        if(idAndCaption.getCaptions().get(locale) != null) {
+            return idAndCaption.getCaptions().get(locale);
+        }
+        if(idAndCaption.getCaptions().get("en") != null) {
+            return idAndCaption.getCaptions().get("en");
+        }
+        return idAndCaption.getCaptions().values().iterator().next();
     }
 
     @OnClick(R.id.mediaDetailLicense)
