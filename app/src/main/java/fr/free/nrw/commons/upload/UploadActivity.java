@@ -103,6 +103,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private Place place;
     private List<UploadableFile> uploadableFiles = Collections.emptyList();
     private int currentSelectedPosition = 0;
+    // Checks for if multiple files selected
     private boolean isMultipleFilesSelected = false;
 
     @SuppressLint("CheckResult")
