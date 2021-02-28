@@ -216,13 +216,16 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     private ArrayList<String> reasonList;
 
     /**
-     * Height stores the height of the frame layout as soon as its intialised and updates itself on
-     * configuration change.
+     * Height stores the height of the frame layout as soon as it is initialised and updates itself on
+     * configuration changes.
      * Used to adjust aspect ratio of image when length of the image is too large.
      */
-    private int heightFrameLayuot;
+    private int frameLayoutHeight;
 
-    private int minimumHeightOfMetadata=200;
+    /**
+     * minimumHeightOfMetadataLayout in pixels.
+     */
+    private int minimumHeightOfMetadata = 200;
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -293,7 +296,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         view.post(new Runnable() {
             @Override
             public void run() {
-                heightFrameLayuot = frameLayout.getMeasuredHeight();
+                frameLayoutHeight = frameLayout.getMeasuredHeight();
                 updateAspectRatio(scrollView.getWidth());
             }
         });
@@ -356,7 +359,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         frameLayout.post(new Runnable() {
             @Override
             public void run() {
-                heightFrameLayuot = frameLayout.getMeasuredHeight();
+                frameLayoutHeight = frameLayout.getMeasuredHeight();
                 updateAspectRatio(scrollView.getWidth());
             }
         });
@@ -461,13 +464,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             int finalHeight = (scrollWidth*imageInfoCache.getHeight()) / imageInfoCache.getWidth();
             ViewGroup.LayoutParams params = image.getLayoutParams();
             ViewGroup.LayoutParams spacerParams = imageSpacer.getLayoutParams();
-            params.width=scrollWidth;
-                if(finalHeight>heightFrameLayuot-minimumHeightOfMetadata)
-                {
-                    int temp=heightFrameLayuot-minimumHeightOfMetadata;
-                    params.width=scrollWidth*temp/finalHeight;
-                    finalHeight=temp;
-                }
+            params.width  = scrollWidth;
+            if(finalHeight > frameLayoutHeight - minimumHeightOfMetadata) {
+
+                // adjust the height and width of image.
+                int temp = frameLayoutHeight - minimumHeightOfMetadata;
+                params.width = (scrollWidth*temp) / finalHeight;
+                finalHeight = temp;
+
+            }
             params.height = finalHeight;
             spacerParams.height = finalHeight;
             image.setLayoutParams(params);
