@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,8 +134,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     FrameLayout frameLayout;
     @BindView(R.id.mediaDetailImageView)
     SimpleDraweeView image;
-    @BindView(R.id.mediaDetailImageViewLandscape)
-    SimpleDraweeView imageLandscape;
     @BindView(R.id.mediaDetailImageViewSpacer)
     LinearLayout imageSpacer;
     @BindView(R.id.mediaDetailTitle)
@@ -223,7 +220,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     private int frameLayoutHeight;
 
     /**
-     * minimumHeightOfMetadataLayout in pixels.
+     * Minimum height of the metadata, in pixels.
+     * Images with a very narrow aspect ratio will be reduced so that the metadata information panel always has at least this height.
      */
     private int minimumHeightOfMetadata = 200;
 
@@ -340,9 +338,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                         return;
                     }
                     scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                        imageLandscape.setVisibility(VISIBLE);
-                    }
                     oldWidthOfImageView = scrollView.getWidth();
                     displayMediaDetails();
                 }
@@ -353,20 +348,20 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        /**
-         * we update the height of the frame layout as the configuration changes.
-         */
-        frameLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                frameLayoutHeight = frameLayout.getMeasuredHeight();
-                updateAspectRatio(scrollView.getWidth());
-            }
-        });
         scrollView.getViewTreeObserver().addOnGlobalLayoutListener(
             new OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
+                    /**
+                     * we update the height of the frame layout as the configuration changes.
+                     */
+                    frameLayout.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            frameLayoutHeight = frameLayout.getMeasuredHeight();
+                            updateAspectRatio(scrollView.getWidth());
+                        }
+                    });
                     if (scrollView.getWidth() != oldWidthOfImageView) {
                         if (newWidthOfImageView == 0) {
                             newWidthOfImageView = scrollView.getWidth();
@@ -377,14 +372,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 }
             }
         );
-        // check orientation
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            image.setVisibility(GONE);
-            imageLandscape.setVisibility(VISIBLE);
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            imageLandscape.setVisibility(GONE);
-            image.setVisibility(VISIBLE);
-        }
         // ensuring correct aspect ratio for landscape mode
         if (heightVerifyingBoolean) {
             updateAspectRatio(newWidthOfImageView);
@@ -464,7 +451,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             int finalHeight = (scrollWidth*imageInfoCache.getHeight()) / imageInfoCache.getWidth();
             ViewGroup.LayoutParams params = image.getLayoutParams();
             ViewGroup.LayoutParams spacerParams = imageSpacer.getLayoutParams();
-            params.width  = scrollWidth;
+            params.width = scrollWidth;
             if(finalHeight > frameLayoutHeight - minimumHeightOfMetadata) {
 
                 // adjust the height and width of image.
@@ -477,7 +464,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             spacerParams.height = finalHeight;
             image.setLayoutParams(params);
             imageSpacer.setLayoutParams(spacerParams);
-            imageLandscape.setLayoutParams(params);
         }
     }
 
@@ -504,23 +490,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         image.getHierarchy().setPlaceholderImage(R.drawable.image_placeholder);
         image.getHierarchy().setFailureImage(R.drawable.image_placeholder);
 
-        imageLandscape.getHierarchy().setPlaceholderImage(R.drawable.image_placeholder);
-        imageLandscape.getHierarchy().setFailureImage(R.drawable.image_placeholder);
-
         DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setLowResImageRequest(ImageRequest.fromUri(media.getThumbUrl()))
                 .setImageRequest(ImageRequest.fromUri(media.getImageUrl()))
                 .setControllerListener(aspectRatioListener)
                 .setOldController(image.getController())
                 .build();
-        DraweeController controllerLandscape = Fresco.newDraweeControllerBuilder()
-            .setLowResImageRequest(ImageRequest.fromUri(media.getThumbUrl()))
-            .setImageRequest(ImageRequest.fromUri(media.getImageUrl()))
-            .setControllerListener(aspectRatioListener)
-            .setOldController(imageLandscape.getController())
-            .build();
         image.setController(controller);
-        imageLandscape.setController(controllerLandscape);
     }
 
     /**

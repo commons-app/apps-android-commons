@@ -60,13 +60,6 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content" >
 
-                <com.facebook.drawee.view.SimpleDraweeView
-                  android:id="@+id/mediaDetailImageViewLandscape"
-                  android:layout_width="match_parent"
-                  android:layout_height="@dimen/dimen_250"
-                  app:actualImageScaleType="none"
-                  android:visibility="gone" />
-
                 <LinearLayout
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
