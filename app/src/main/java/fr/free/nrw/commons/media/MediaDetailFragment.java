@@ -24,6 +24,7 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
@@ -129,10 +130,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     private int initialListTop = 0;
 
+    @BindView(R.id.mediaDetailFrameLayout)
+    FrameLayout frameLayout;
     @BindView(R.id.mediaDetailImageView)
     SimpleDraweeView image;
-    @BindView(R.id.mediaDetailImageViewLandscape)
-    SimpleDraweeView imageLandscape;
     @BindView(R.id.mediaDetailImageViewSpacer)
     LinearLayout imageSpacer;
     @BindView(R.id.mediaDetailTitle)
@@ -211,6 +212,18 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     private Media media;
     private ArrayList<String> reasonList;
 
+    /**
+     * Height stores the height of the frame layout as soon as it is initialised and updates itself on
+     * configuration changes.
+     * Used to adjust aspect ratio of image when length of the image is too large.
+     */
+    private int frameLayoutHeight;
+
+    /**
+     * Minimum height of the metadata, in pixels.
+     * Images with a very narrow aspect ratio will be reduced so that the metadata information panel always has at least this height.
+     */
+    private int minimumHeightOfMetadata = 200;
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -274,7 +287,17 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         if(applicationKvStore.getBoolean("login_skipped")){
             delete.setVisibility(GONE);
         }
-      
+        /**
+         * Gets the height of the frame layout as soon as the view is ready and updates aspect ratio
+         * of the picture.
+         */
+        view.post(new Runnable() {
+            @Override
+            public void run() {
+                frameLayoutHeight = frameLayout.getMeasuredHeight();
+                updateAspectRatio(scrollView.getWidth());
+            }
+        });
         return view;
     }
 
@@ -315,9 +338,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                         return;
                     }
                     scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                        imageLandscape.setVisibility(VISIBLE);
-                    }
                     oldWidthOfImageView = scrollView.getWidth();
                     displayMediaDetails();
                 }
@@ -332,6 +352,16 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             new OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
+                    /**
+                     * We update the height of the frame layout as the configuration changes.
+                     */
+                    frameLayout.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            frameLayoutHeight = frameLayout.getMeasuredHeight();
+                            updateAspectRatio(scrollView.getWidth());
+                        }
+                    });
                     if (scrollView.getWidth() != oldWidthOfImageView) {
                         if (newWidthOfImageView == 0) {
                             newWidthOfImageView = scrollView.getWidth();
@@ -342,13 +372,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 }
             }
         );
-        // check orientation
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            imageLandscape.setVisibility(VISIBLE);
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            imageLandscape.setVisibility(GONE);
-        }
-        // ensuring correct aspect ratio for landscape mode
+        // Ensuring correct aspect ratio for landscape mode
         if (heightVerifyingBoolean) {
             updateAspectRatio(newWidthOfImageView);
             heightVerifyingBoolean = false;
@@ -414,6 +438,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
      * The imageSpacer is Basically a transparent overlay for the SimpleDraweeView
      * which holds the image to be displayed( moreover this image is out of
      * the scroll view )
+     *
+     *
+     * If the image is sufficiently large i.e. the image height extends the view height, we reduce
+     * the height and change the width to maintain the aspect ratio, otherwise image takes up the
+     * total possible width and height is adjusted accordingly.
+     *
      * @param scrollWidth the current width of the scrollView
      */
     private void updateAspectRatio(int scrollWidth) {
@@ -421,11 +451,19 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             int finalHeight = (scrollWidth*imageInfoCache.getHeight()) / imageInfoCache.getWidth();
             ViewGroup.LayoutParams params = image.getLayoutParams();
             ViewGroup.LayoutParams spacerParams = imageSpacer.getLayoutParams();
+            params.width = scrollWidth;
+            if(finalHeight > frameLayoutHeight - minimumHeightOfMetadata) {
+
+                // Adjust the height and width of image.
+                int temp = frameLayoutHeight - minimumHeightOfMetadata;
+                params.width = (scrollWidth*temp) / finalHeight;
+                finalHeight = temp;
+
+            }
             params.height = finalHeight;
             spacerParams.height = finalHeight;
             image.setLayoutParams(params);
             imageSpacer.setLayoutParams(spacerParams);
-            imageLandscape.setLayoutParams(params);
         }
     }
 
@@ -452,23 +490,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         image.getHierarchy().setPlaceholderImage(R.drawable.image_placeholder);
         image.getHierarchy().setFailureImage(R.drawable.image_placeholder);
 
-        imageLandscape.getHierarchy().setPlaceholderImage(R.drawable.image_placeholder);
-        imageLandscape.getHierarchy().setFailureImage(R.drawable.image_placeholder);
-
         DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setLowResImageRequest(ImageRequest.fromUri(media.getThumbUrl()))
                 .setImageRequest(ImageRequest.fromUri(media.getImageUrl()))
                 .setControllerListener(aspectRatioListener)
                 .setOldController(image.getController())
                 .build();
-        DraweeController controllerLandscape = Fresco.newDraweeControllerBuilder()
-            .setLowResImageRequest(ImageRequest.fromUri(media.getThumbUrl()))
-            .setImageRequest(ImageRequest.fromUri(media.getImageUrl()))
-            .setControllerListener(aspectRatioListener)
-            .setOldController(imageLandscape.getController())
-            .build();
         image.setController(controller);
-        imageLandscape.setController(controllerLandscape);
     }
 
     /**

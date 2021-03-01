@@ -6,6 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:background="?attr/mainBackground"
+  android:id="@+id/mediaDetailFrameLayout"
   >
 
     <LinearLayout
@@ -34,8 +35,9 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
       android:id="@+id/mediaDetailImageView"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="@dimen/dimen_250"
+      android:layout_gravity="center_horizontal"
       app:actualImageScaleType="none" />
 
     <ScrollView
@@ -57,13 +59,6 @@
             <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content" >
-
-                <com.facebook.drawee.view.SimpleDraweeView
-                  android:id="@+id/mediaDetailImageViewLandscape"
-                  android:layout_width="match_parent"
-                  android:layout_height="@dimen/dimen_250"
-                  app:actualImageScaleType="none"
-                  android:visibility="gone" />
 
                 <LinearLayout
                   android:layout_width="match_parent"
