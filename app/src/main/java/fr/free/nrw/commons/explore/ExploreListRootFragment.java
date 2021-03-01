@@ -10,20 +10,16 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
-import fr.free.nrw.commons.contributions.ContributionsListFragment;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.navtab.NavTab;
-import fr.free.nrw.commons.settings.SettingsFragment;
 
 public class ExploreListRootFragment extends CommonsDaggerSupportFragment implements
     MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
@@ -33,18 +29,6 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
 
   @BindView(R.id.explore_container)
   FrameLayout container;
-
-  public ExploreListRootFragment(){
-    //empty constructor necessary otherwise crashes on recreate
-  }
-
-  public ExploreListRootFragment(Bundle bundle) {
-    String title = bundle.getString("categoryName");
-    listFragment = new CategoriesMediaFragment();
-    Bundle featuredArguments = new Bundle();
-    featuredArguments.putString("categoryName", title);
-    listFragment.setArguments(featuredArguments);
-  }
 
   @Nullable
   @Override
@@ -59,8 +43,28 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
   @Override
   public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    if(savedInstanceState == null) {
-      setFragment(listFragment, mediaDetails);
+    if (savedInstanceState == null) {
+      final Bundle bundle = getArguments();
+      if (bundle != null) {
+        final String title = bundle.getString("categoryName");
+        listFragment = new CategoriesMediaFragment();
+        final Bundle featuredArguments = new Bundle();
+        featuredArguments.putString("categoryName", title);
+        listFragment.setArguments(featuredArguments);
+        setFragment(listFragment, mediaDetails);
+      }
+    } else {
+      listFragment = (CategoriesMediaFragment) getChildFragmentManager().getFragment(savedInstanceState, "listFragment");
+      mediaDetails = (MediaDetailPagerFragment) getChildFragmentManager().getFragment(savedInstanceState, "mediaDetails");
+    }
+  }
+
+  @Override
+  public void onSaveInstanceState(@NonNull final Bundle outState) {
+    super.onSaveInstanceState(outState);
+    getChildFragmentManager().putFragment(outState, "listFragment", listFragment);
+    if (mediaDetails != null && mediaDetails.isAdded()) {
+      getChildFragmentManager().putFragment(outState, "mediaDetails", mediaDetails);
     }
   }
 
