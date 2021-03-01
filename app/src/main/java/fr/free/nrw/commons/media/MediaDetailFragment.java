@@ -288,7 +288,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             delete.setVisibility(GONE);
         }
         /**
-         * gets the height of the frame layout as soon as the view is ready and updates aspect ratio
+         * Gets the height of the frame layout as soon as the view is ready and updates aspect ratio
          * of the picture.
          */
         view.post(new Runnable() {
@@ -353,7 +353,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 @Override
                 public void onGlobalLayout() {
                     /**
-                     * we update the height of the frame layout as the configuration changes.
+                     * We update the height of the frame layout as the configuration changes.
                      */
                     frameLayout.post(new Runnable() {
                         @Override
@@ -372,7 +372,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 }
             }
         );
-        // ensuring correct aspect ratio for landscape mode
+        // Ensuring correct aspect ratio for landscape mode
         if (heightVerifyingBoolean) {
             updateAspectRatio(newWidthOfImageView);
             heightVerifyingBoolean = false;
@@ -454,7 +454,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             params.width = scrollWidth;
             if(finalHeight > frameLayoutHeight - minimumHeightOfMetadata) {
 
-                // adjust the height and width of image.
+                // Adjust the height and width of image.
                 int temp = frameLayoutHeight - minimumHeightOfMetadata;
                 params.width = (scrollWidth*temp) / finalHeight;
                 finalHeight = temp;
