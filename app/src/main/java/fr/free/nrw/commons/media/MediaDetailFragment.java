@@ -615,13 +615,25 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
      */
     private void buildDepictionList(List<IdAndCaptions> idAndCaptions) {
         depictionContainer.removeAllViews();
+        String locale = Locale.getDefault().getLanguage();
         for (IdAndCaptions idAndCaption : idAndCaptions) {
                 depictionContainer.addView(buildDepictLabel(
-                    idAndCaption.getCaptions().values().iterator().next(),
+                    getDepictionCaption(idAndCaption, locale),
                     idAndCaption.getId(),
                     depictionContainer
                 ));
         }
+    }
+
+    private String getDepictionCaption(IdAndCaptions idAndCaption, String locale) {
+        //Check if the Depiction Caption is available in user's locale if not then check for english, else show any available.
+        if(idAndCaption.getCaptions().get(locale) != null) {
+            return idAndCaption.getCaptions().get(locale);
+        }
+        if(idAndCaption.getCaptions().get("en") != null) {
+            return idAndCaption.getCaptions().get("en");
+        }
+        return idAndCaption.getCaptions().values().iterator().next();
     }
 
     @OnClick(R.id.mediaDetailLicense)
