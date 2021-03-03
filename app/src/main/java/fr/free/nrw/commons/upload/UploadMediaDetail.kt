@@ -20,7 +20,7 @@ data class UploadMediaDetail constructor(
     fun javaCopy() = copy()
 
     constructor(place: Place) : this(
-        Locale.getDefault().language,
+        place.lang,
         place.longDescription,
         place.name
     )

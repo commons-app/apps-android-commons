@@ -26,6 +26,7 @@ import org.robolectric.annotation.Config
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class BookMarkLocationDaoTest {
     private val columns = arrayOf(COLUMN_NAME,
+            COLUMN_LANGUAGE,
             COLUMN_DESCRIPTION,
             COLUMN_CATEGORY,
             COLUMN_LABEL_TEXT,
@@ -61,7 +62,7 @@ class BookMarkLocationDaoTest {
         builder.setCommonsLink("commonsLink")
 
 
-        examplePlaceBookmark = Place("placeName", exampleLabel, "placeDescription"
+        examplePlaceBookmark = Place("en","placeName", exampleLabel, "placeDescription"
                 , exampleLocation, "placeCategory", builder.build(),"picName","placeDestroyed")
         testObject = BookmarkLocationsDao { client }
     }
@@ -87,6 +88,7 @@ class BookMarkLocationDaoTest {
             cursor.moveToFirst()
             testObject.fromCursor(cursor).let {
                 assertEquals("placeName", it.name)
+                assertEquals("en", it.lang)
                 assertEquals(Label.FOREST, it.label)
                 assertEquals("placeDescription", it.longDescription)
                 assertEquals(40.0, it.location.latitude)
@@ -149,8 +151,9 @@ class BookMarkLocationDaoTest {
         assertTrue(testObject.updateBookmarkLocation(examplePlaceBookmark))
         verify(client).insert(eq(BASE_URI), captor.capture())
         captor.firstValue.let { cv ->
-            assertEquals(12, cv.size())
+            assertEquals(13, cv.size())
             assertEquals(examplePlaceBookmark.name, cv.getAsString(COLUMN_NAME))
+            assertEquals(examplePlaceBookmark.lang, cv.getAsString(COLUMN_LANGUAGE))
             assertEquals(examplePlaceBookmark.longDescription, cv.getAsString(COLUMN_DESCRIPTION))
             assertEquals(examplePlaceBookmark.label.text, cv.getAsString(COLUMN_LABEL_TEXT))
             assertEquals(examplePlaceBookmark.category, cv.getAsString(COLUMN_CATEGORY))
@@ -262,10 +265,17 @@ class BookMarkLocationDaoTest {
         verify(database).execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_destroyed STRING;")
     }
 
+    @Test
+    fun migrateTableVersionFrom_v14_to_v15() {
+        onUpdate(database, 14, 15)
+        verify(database).execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_lang STRING;")
+    }
+
+
     private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
 
         for (i in 0 until rowCount) {
-            addRow(listOf("placeName", "placeDescription","placeCategory", exampleLabel.text, exampleLabel.icon,
+            addRow(listOf("en", "placeName", "placeDescription","placeCategory", exampleLabel.text, exampleLabel.icon,
                     exampleUri, builder.build().wikipediaLink, builder.build().wikidataLink, builder.build().commonsLink,
                     exampleLocation.latitude, exampleLocation.longitude, "picName", "placeDestroyed"))
         }
