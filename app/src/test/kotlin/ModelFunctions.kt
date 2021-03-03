@@ -76,6 +76,7 @@ fun depictSearchItem(
 
 fun place(
     name: String = "name",
+    lang: String = "en",
     label: Label? = null,
     longDescription: String = "longDescription",
     latLng: LatLng? = null,
@@ -84,7 +85,7 @@ fun place(
     pic: String = "pic",
     destroyed: String = "destroyed"
 ): Place {
-    return Place(name, label, longDescription, latLng, category, siteLinks, pic, destroyed)
+    return Place(lang, name, label, longDescription, latLng, category, siteLinks, pic, destroyed)
 }
 
 fun entityId(wikiBaseEntityValue: WikiBaseEntityValue = wikiBaseEntityValue()) =
