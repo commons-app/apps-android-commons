@@ -200,7 +200,7 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     }
 
     /**
-     * this function inflate the menu
+     * This function inflates the menu
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -210,8 +210,8 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     }
 
     /**
-     * This method handles the logic on ItemSelect in toolbar menu
-     * Currently only 1 choice is available to open Wikidataitem details page in browser
+     * This method handles the logic on item select in toolbar menu
+     * Currently only 1 choice is available to open Wikidata item details page in browser
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -220,7 +220,7 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
                 String entityId=getIntent().getStringExtra("entityId");
                 Uri uri = Uri.parse("https://www.wikidata.org/wiki/" + entityId);
                 Utils.handleWebUrl(this, uri);
-                return  true;
+                return true;
             case  android.R.id.home:
                 onBackPressed();
                 return true;

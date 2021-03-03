@@ -190,7 +190,7 @@ public class CategoryDetailsActivity extends BaseActivity
                 return true;
             case android.R.id.home:
                 onBackPressed();
-                return  true;
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
