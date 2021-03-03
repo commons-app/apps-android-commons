@@ -109,12 +109,6 @@
             android:label="@string/result"/>
 
         <activity
-            android:name=".category.CategoryImagesActivity"
-            android:label="@string/title_activity_featured_images"
-            android:parentActivityName=".contributions.MainActivity"
-            android:configChanges="orientation|screenSize|keyboard"/>
-
-        <activity
             android:name=".category.CategoryDetailsActivity"
             android:label="@string/title_activity_featured_images"
             android:parentActivityName=".contributions.MainActivity" />
