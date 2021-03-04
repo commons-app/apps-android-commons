@@ -424,7 +424,7 @@
   <string name="desc_language_Pacific">Pasifego</string>
   <string name="no_categories_selected">Nisuna categoria sełesionà</string>
   <string name="no_categories_selected_warning_desc" fuzzy="true">Le imajini sensa categorie łe xé poche olte doparabiłi. Sito seguro de vołer enviar sensa sełesionar categorie?</string>
-  <string name="upload_flow_all_images_in_set">(Par tute łe imajini n\'te l\'union)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(Par tute łe imajini n\'te l\'union)</string>
   <string name="search_this_area">Serca in sto posto</string>
   <string name="nearby_card_permission_title">Domanda de parmeso</string>
   <string name="nearby_card_permission_explanation">Vuto che doparemo ła to poxision corente par vardare el posto cuà rente che\'l ga pì bixogno de imajini?</string>

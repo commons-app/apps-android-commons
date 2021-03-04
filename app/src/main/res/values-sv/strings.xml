@@ -458,7 +458,7 @@
   <string name="no_categories_selected_warning_desc">Bilder utan kategorier används sällan. Är du säker på att du vill fortsätta utan att välja kategorier?</string>
   <string name="no_depictions_selected">Inga skildringar har valts</string>
   <string name="no_depictions_selected_warning_desc">Bilder med skildringar kan hittas lättare och kommer mer sannolikt användas. Är du säker på att du vill fortsätta utan att välja skildringar?</string>
-  <string name="upload_flow_all_images_in_set">(För alla bilder i uppsättningen)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(För alla bilder i uppsättningen)</string>
   <string name="search_this_area">Sök i detta område</string>
   <string name="nearby_card_permission_title">Begäran om behörighet</string>
   <string name="nearby_card_permission_explanation">Vill du att vi ska använda din nuvarande plats för att visa den närmaste platsen som behöver bilder?</string>
@@ -663,7 +663,7 @@
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Förbättra den här kartan&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Läget för begränsad anslutning har aktiverats!</string>
   <string name="limited_connection_disabled">Begränsat anslutningsläge har inaktiverats. Väntande uppladdningar kommer nu återupptas.</string>
-  <string name="limited_connection">Begränsad anslutning</string>
+  <string name="limited_connection_mode" fuzzy="true">Begränsad anslutning</string>
   <string name="statistics_quality">Kvalitetsbilder</string>
   <string name="quality_images_info">Kvalitetsbilder är diagram eller fotografier som möter vissa kvalitetsstandarder (som är mestadels tekniska) och är värdefulla för Wikimedia-projekt.</string>
   <string name="resuming_upload">Återupptar uppladdning…</string>

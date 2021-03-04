@@ -427,7 +427,7 @@
   <string name="desc_language_Pacific">Pacifiko</string>
   <string name="no_categories_selected">Neniu Elektita Kategorio</string>
   <string name="no_categories_selected_warning_desc" fuzzy="true">Bildo sen kategorioj estas malofte uzebla. Ĉu vi nepre volas aldoni sen elekti kategoriojn?</string>
-  <string name="upload_flow_all_images_in_set">(Je ĉiuj bildoj en aro)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(Je ĉiuj bildoj en aro)</string>
   <string name="search_this_area">Serĉi ĉi tiun areon</string>
   <string name="nearby_card_permission_title">Peto por Permeso</string>
   <string name="nearby_card_permission_explanation">Ĉu vi volas ke ni uzu vian aktualan lokon por montri la plej proksima loko bezonanta bildojn?</string>

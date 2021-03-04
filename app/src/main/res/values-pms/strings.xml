@@ -451,7 +451,7 @@
   <string name="no_categories_selected_warning_desc">Le plance sensa categorìa, a so da ràir dovràbij. É-lo sigur ëd vorèj continué sensa serne dle categorìe?</string>
   <string name="no_depictions_selected">Gnun-e descrission selessionà</string>
   <string name="no_depictions_selected_warning_desc">Le plance con dle descrission a l\'é pi bel fé troveje e a l\'é pi probàbil ch\'as deuvro. É-lo sigur ëd vorèj continué sensa selessioné dla descrission?</string>
-  <string name="upload_flow_all_images_in_set">(Për tute le plance dl\'ansem)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(Për tute le plance dl\'ansem)</string>
   <string name="search_this_area">Arserché an costa zòna</string>
   <string name="nearby_card_permission_title">Arcesta d\'autorisassion</string>
   <string name="nearby_card_permission_explanation">Veul-lo ch\'i dovroma soa localisassion atual pr\'ësmon-e ël pòst pi davzin ch\'a l\'ha da manca ëd fòto?</string>
@@ -656,7 +656,7 @@
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Improve this map&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Meud ëd conession limità abilità!</string>
   <string name="limited_connection_disabled">Meud ëd conession limità disabilità. Ij cariament an atèisa a arpijëran adess.</string>
-  <string name="limited_connection">Conession limità</string>
+  <string name="limited_connection_mode" fuzzy="true">Conession limità</string>
   <string name="statistics_quality">Plancia ëd qualità</string>
   <string name="quality_images_info">Le plance ëd qualità a son dij diagrama o dle fòto che a sodisfo chèich criteri ëd qualità (dzortut ëd natura técnica) e a son pressiose për ij proget Wikimedia</string>
   <string name="resuming_upload">Arpijé ël cariament…</string>

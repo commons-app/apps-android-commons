@@ -431,7 +431,7 @@
   <string name="desc_language_Pacific">Pacífico</string>
   <string name="no_categories_selected">Non hai categorías seleccionadas</string>
   <string name="no_categories_selected_warning_desc">As imaxes sen categorías só son utilizables en contadas ocasións. Está seguro de que quere continuar sen seleccionar categorías?</string>
-  <string name="upload_flow_all_images_in_set">(Para tódalas imaxes no conxunto)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(Para tódalas imaxes no conxunto)</string>
   <string name="search_this_area">Procurar nesta área</string>
   <string name="nearby_card_permission_title">Solicitude de permisos</string>
   <string name="nearby_card_permission_explanation">Desexa que usemos a súa localizacións actual para amosarlle o lugar máis preto que precisa imaxes?</string>

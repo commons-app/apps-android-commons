@@ -129,7 +129,7 @@
   <string name="desc_language_Asia">Asie</string>
   <string name="desc_language_Pacific">Pacifeche</string>
   <string name="no_categories_selected">Nisicuna categorije scacchiate</string>
-  <string name="upload_flow_all_images_in_set">(Pe tutte le immaggine jndr\'à \'u \'nzieme)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(Pe tutte le immaggine jndr\'à \'u \'nzieme)</string>
   <string name="search_this_area">Cirche jndr\'à sta arèe</string>
   <string name="nearby_card_permission_title">Permesse richieste</string>
   <string name="no_notification">Non ge tìne notifeche non lette</string>

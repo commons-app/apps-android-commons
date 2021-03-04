@@ -454,7 +454,7 @@
   <string name="no_categories_selected_warning_desc">Imaginile fără categorii sunt rareori utilizabile. Sigur doriți să continuați fără a selecta categorii?</string>
   <string name="no_depictions_selected">Nu Sunt Selectate Reprezentări</string>
   <string name="no_depictions_selected_warning_desc">Imaginile cu ilustrații sunt mai ușor de găsit și mai probabil să fie utilizate. Sunteți sigur că doriți să continuați fără a selecta reprezentări?</string>
-  <string name="upload_flow_all_images_in_set">(Pentru toate imaginile din set)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(Pentru toate imaginile din set)</string>
   <string name="search_this_area">Căutați în acest domeniu</string>
   <string name="nearby_card_permission_title">Cerere de permisiune</string>
   <string name="nearby_card_permission_explanation">Doriți ca noi să folosim locația dvs. curentă pentru a afișa cel mai apropiat loc care are nevoie de imagini?</string>

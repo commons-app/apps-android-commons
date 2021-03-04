@@ -469,7 +469,7 @@
   <string name="no_categories_selected">未提交分类</string>
   <string name="no_categories_selected_warning_desc">没有类别的图像很少可用。确实要继续而不选择类别吗？</string>
   <string name="no_depictions_selected">没有选择描写</string>
-  <string name="upload_flow_all_images_in_set">（对于集合中的所有图像）</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">（对于集合中的所有图像）</string>
   <string name="search_this_area">搜索这个区域</string>
   <string name="nearby_card_permission_title">需要许可</string>
   <string name="nearby_card_permission_explanation">您希望我们获取您当前的位置来显示最近的需要图片的地方吗？</string>
@@ -621,5 +621,5 @@
   <string name="paused">已暂停</string>
   <string name="leaderboard_column_user">用户</string>
   <string name="leaderboard_upload">上传</string>
-  <string name="limited_connection">限制连接</string>
+  <string name="limited_connection_mode" fuzzy="true">限制连接</string>
 </resources>

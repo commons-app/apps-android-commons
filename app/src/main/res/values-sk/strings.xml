@@ -452,7 +452,7 @@
   <string name="no_categories_selected">Neboli vybrané žiadne kategórie</string>
   <string name="no_categories_selected_warning_desc">Obrázky bez kategórií sú zriedka použiteľné. Naozaj chcete nahrať obrázok bez výberu kategórií?</string>
   <string name="no_depictions_selected">Neboli zvolené žiadne zobrazenia</string>
-  <string name="upload_flow_all_images_in_set">(Pre všetky obrázky v sade)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(Pre všetky obrázky v sade)</string>
   <string name="search_this_area">Prehľadať túto oblasť</string>
   <string name="nearby_card_permission_title">Je požadované oprávnenie</string>
   <string name="nearby_card_permission_explanation">Chceli by ste, aby sme pomocou aktuálnej polohy zobrazili najbližšie miesto, ktoré potrebuje obrázky?</string>

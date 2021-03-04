@@ -434,7 +434,7 @@
   <string name="desc_language_Pacific">اقیانوس آرام</string>
   <string name="no_categories_selected">رده‌ای انتخاب نشده‌است</string>
   <string name="no_categories_selected_warning_desc">تصاویر بدون رده به ندرت قابل‌استفاده هستند. آیا مطمئنید که می‌خواهید بدون انتخاب رده ادامه دهید؟</string>
-  <string name="upload_flow_all_images_in_set">(برای همهٔ تصاویر موجود در مجموعه)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(برای همهٔ تصاویر موجود در مجموعه)</string>
   <string name="search_this_area">جستجوی این محدوده</string>
   <string name="nearby_card_permission_title">درخواست اجازه</string>
   <string name="never_ask_again">این را دیگر نپرس</string>

@@ -453,7 +453,7 @@
   <string name="no_categories_selected_warning_desc">Некатегоризираните слики се слабо употребливи. Дали сигурно сакате да продолжите без да ставите категории?</string>
   <string name="no_depictions_selected">Немате избрано прикажувања</string>
   <string name="no_depictions_selected_warning_desc">Сликите со прикажувања се полезни за наоѓање, со што е поголема веројатноста дека ќе бидат искористени. Дали сигурно сакате да продолжите без да изберете прикажувања?</string>
-  <string name="upload_flow_all_images_in_set">(За сите слики во збирот)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(За сите слики во збирот)</string>
   <string name="search_this_area">Пребарај на ова подрачје</string>
   <string name="nearby_card_permission_title">Барање за дозвола</string>
   <string name="nearby_card_permission_explanation">Дали би сакале да се користи вашата тековна местоположба за приказ на околните места на кои им требаат слики?</string>
@@ -658,7 +658,7 @@
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Подобрете ја картава&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Овозможен режимот на ограничена врска.</string>
   <string name="limited_connection_disabled">Режимот на ограничена врска е оневозоможен. Сега ќе продолжат преземањата во исчекување.</string>
-  <string name="limited_connection">Ограничена врска</string>
+  <string name="limited_connection_mode" fuzzy="true">Ограничена врска</string>
   <string name="statistics_quality">Квалитетни слики</string>
   <string name="quality_images_info">Квалитетните слики се дијаграми или фотографии кои задоволуваат извесни стандарди за квалитет (кои се од претежно техничка природа) или имаат вредност за Викимедиините проекти</string>
   <string name="resuming_upload">Продолжувам со подигањето…</string>

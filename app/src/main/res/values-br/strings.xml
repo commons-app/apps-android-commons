@@ -350,7 +350,7 @@
   <string name="desc_language_Pacific">Habask</string>
   <string name="no_categories_selected">Rummad ebet diuzet</string>
   <string name="no_depictions_selected">Deskrivadur ebet diuzet</string>
-  <string name="upload_flow_all_images_in_set">(Evit holl skeudennoù an  hollad)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(Evit holl skeudennoù an  hollad)</string>
   <string name="nearby_card_permission_title">Goulenn aotre</string>
   <string name="no_depiction_found">Deskrivadur ebet kavet</string>
   <string name="title_for_media">MEDIA</string>

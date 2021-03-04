@@ -379,7 +379,7 @@
   <string name="desc_language_Pacific">प्रशांत</string>
   <string name="no_categories_selected">कोई श्रेणी नहीं चुनी</string>
   <string name="no_categories_selected_warning_desc" fuzzy="true">बिना श्रेणियों के चित्र बहुत कम उपयोगी होते हैं। क्या आप सचमुच बिना श्रेणी चुने चित्र जमा करना चाहते हैं?</string>
-  <string name="upload_flow_all_images_in_set">(सेट के सभी चित्रों के लिये)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(सेट के सभी चित्रों के लिये)</string>
   <string name="search_this_area">इस क्षेत्र में ढूंढें</string>
   <string name="nearby_card_permission_title">स्वीकृति अनुरोध</string>
   <string name="never_ask_again">फिर कभी न पूछें</string>

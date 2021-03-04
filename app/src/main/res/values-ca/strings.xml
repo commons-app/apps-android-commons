@@ -396,7 +396,7 @@
   <string name="desc_language_Pacific">Pacífic</string>
   <string name="no_categories_selected">No s\'ha seleccionat cap categoria</string>
   <string name="no_categories_selected_warning_desc">Les imatges sense categories rarament fan cap servei. Esteu segur que voleu continuar sense seleccionar cap categoria?</string>
-  <string name="upload_flow_all_images_in_set">(Per a totes les imatges en el conjunt)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(Per a totes les imatges en el conjunt)</string>
   <string name="search_this_area">Cerca en aquesta àrea</string>
   <string name="nearby_card_permission_title">Sol·licitud de permisos</string>
   <string name="nearby_card_permission_explanation">Voldríeu fer servir la vostra ubicació actual per a mostrar el lloc més proper que necessiti fotos?</string>

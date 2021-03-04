@@ -462,7 +462,7 @@
   <string name="desc_language_Pacific">Pacífico</string>
   <string name="no_categories_selected">No hay categorías seleccionadas</string>
   <string name="no_categories_selected_warning_desc" fuzzy="true">Las imágenes sin categorías raramente se pueden usar. ¿Seguro que la quieres enviar sin seleccionar ninguna categoría?</string>
-  <string name="upload_flow_all_images_in_set">(Para todas las imágenes en el conjunto)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(Para todas las imágenes en el conjunto)</string>
   <string name="search_this_area">Buscar en esta área</string>
   <string name="nearby_card_permission_title">Solicitud de permiso</string>
   <string name="nearby_card_permission_explanation">¿Deseas que usemos tu ubicación actual para mostrarte el lugar más cercano que necesita imágenes?</string>
@@ -615,5 +615,5 @@
   <string name="leaderboard_all_time">Todo el tiempo</string>
   <string name="limited_connection_enabled">Se activó el modo de conexión limitada.</string>
   <string name="limited_connection_disabled">Se desactivó el modo de conexión limitada. Las cargas pendientes se reanudarán ahora.</string>
-  <string name="limited_connection">Conexión limitada</string>
+  <string name="limited_connection_mode" fuzzy="true">Conexión limitada</string>
 </resources>

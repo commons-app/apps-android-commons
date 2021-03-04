@@ -120,7 +120,7 @@
   <string name="provider_modifications">Modifications</string>
   <string name="menu_upload_single">Téléverser</string>
   <string name="categories_search_text_hint">Rechercher des catégories</string>
-  <string name="depicts_search_text_hint">Rechercher les éléments que votre média dépeint (montagne, Taj Mahal, etc.).</string>
+  <string name="depicts_search_text_hint">Rechercher les éléments que votre média représente (montagne, Taj Mahal, etc.).</string>
   <string name="menu_save_categories">Enregistrer</string>
   <string name="refresh_button">Actualiser</string>
   <string name="display_list_button">Lister</string>
@@ -131,7 +131,7 @@
   <string name="depictions_not_found">Aucun élément Wikidata trouvé correspondant à %1$s.</string>
   <string name="no_child_classes">%1$s n’a aucune classe enfant</string>
   <string name="no_parent_classes">%1$s n’a aucune classe parente</string>
-  <string name="depictions_image_not_found">Aucune image pour la description</string>
+  <string name="depictions_image_not_found">Aucune image pour l\'élément représenté</string>
   <string name="categories_skip_explanation">Ajoutez des catégories pour rendre vos images plus simples à trouver sur Wikimedia Commons.\nCommencer à saisir un nom pour ajouter des catégories.</string>
   <string name="categories_activity_title">Catégories</string>
   <string name="title_activity_settings">Paramètres</string>
@@ -148,7 +148,7 @@
   <string name="menu_feedback">Envoyer vos commentaires (par courriel)</string>
   <string name="no_email_client">Aucun client de messagerie installé</string>
   <string name="provider_categories">Catégories récemment utilisées</string>
-  <string name="provider_depictions">Descriptions récemment utilisées</string>
+  <string name="provider_depictions">Éléments représentés récemment utilisés</string>
   <string name="waiting_first_sync">En attente de première synchronisation...</string>
   <string name="no_uploads_yet">Vous n’avez encore téléchargé aucune photo.</string>
   <string name="menu_retry_upload">Réessayer</string>
@@ -205,7 +205,7 @@
   <string name="detail_panel_cats_loading">Chargement...</string>
   <string name="detail_panel_cats_none">Aucune catégorie sélectionnée</string>
   <string name="detail_caption_empty">Aucune légende</string>
-  <string name="detail_depiction_empty">Aucune description</string>
+  <string name="detail_depiction_empty">Aucun élément représenté</string>
   <string name="detail_description_empty">Aucune description</string>
   <string name="detail_discussion_empty">Aucune discussion</string>
   <string name="detail_license_empty">Licence inconnue</string>
@@ -226,7 +226,7 @@
   <string name="no">Non</string>
   <string name="media_detail_caption">Légende</string>
   <string name="media_detail_title">Titre</string>
-  <string name="media_detail_depiction">Descriptions</string>
+  <string name="media_detail_depiction">Éléments représentés</string>
   <string name="media_detail_description">Description</string>
   <string name="media_detail_discussion">Discussion</string>
   <string name="media_detail_author">Auteur</string>
@@ -371,7 +371,7 @@
   <string name="search_recent_header">Recherches récentes :</string>
   <string name="provider_searches">Requêtes de recherches récentes</string>
   <string name="error_loading_categories">Erreur durant le chargement des catégories.</string>
-  <string name="error_loading_depictions">Erreur lors du chargement des descriptions.</string>
+  <string name="error_loading_depictions">Erreur lors du chargement des éléments représentés.</string>
   <string name="error_loading_subcategories">Erreur durant le chargement des sous-catégories.</string>
   <string name="search_tab_title_media">Média</string>
   <string name="search_tab_title_categories">Catégories</string>
@@ -476,9 +476,9 @@
   <string name="desc_language_Pacific">Pacifique</string>
   <string name="no_categories_selected">Aucune catégorie sélectionnée</string>
   <string name="no_categories_selected_warning_desc">Les images sans catégories sont rarement utilisables. Voulez-vous vraiment continuer sans sélectionner des catégories  appropriées ?</string>
-  <string name="no_depictions_selected">Aucune description sélectionnée</string>
-  <string name="no_depictions_selected_warning_desc">Les images avec description sont plus faciles à trouver et plus susceptibles d’être utilisées. Voulez-vous vraiment continuer sans sélectionner des descriptions ?</string>
-  <string name="upload_flow_all_images_in_set">(Pour toutes les images du jeu)</string>
+  <string name="no_depictions_selected">Aucun élément représenté sélectionné</string>
+  <string name="no_depictions_selected_warning_desc">Les images avec des éléments représentés sont plus faciles à trouver et plus susceptibles d’être utilisées. Voulez-vous vraiment continuer sans sélectionner des éléments représentés ?</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(Pour toutes les images du jeu)</string>
   <string name="search_this_area">Chercher dans cette zone</string>
   <string name="nearby_card_permission_title">Demande d’autorisation</string>
   <string name="nearby_card_permission_explanation">Désirez-vous que nous utilisions votre géolocalisation actuelle pour afficher les endroits proches qui ont besoin d\'images ?</string>
@@ -571,7 +571,7 @@
   <string name="share_via">Partager l’application via...</string>
   <string name="image_info">Informations de l’image</string>
   <string name="no_categories_found">Aucune catégorie trouvée</string>
-  <string name="no_depiction_found">Aucune description trouvée</string>
+  <string name="no_depiction_found">Aucun élément représenté trouvé</string>
   <string name="upload_cancelled">Téléversement annulé</string>
   <string name="previous_image_title_description_not_found">Il n’y a aucune donnée pour le titre ou la description de l’image précédente</string>
   <string name="dialog_box_text_nomination">Pourquoi %1$s devrait-il être supprimé ?</string>
@@ -683,7 +683,7 @@
   <string name="map_attribution">© &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; · © &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; · &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Améliorer cette carte&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Mode de connexion limitée activé !</string>
   <string name="limited_connection_disabled">Mode de connexion limitée désactivé. Les téléversements en attente seront maintenant repris.</string>
-  <string name="limited_connection">Connexion limitée</string>
+  <string name="limited_connection_mode" fuzzy="true">Connexion limitée</string>
   <string name="statistics_quality">Images de qualité</string>
   <string name="quality_images_info">Les images de qualité sont des diagrammes ou des photographies qui respectent certains standards de qualité (qui sont, par nature, essentiellement techniques) et sont précieuses pour les projets Wikimedia.</string>
   <string name="resuming_upload">Reprise du téléversement...</string>
@@ -692,9 +692,9 @@
   <string name="limited_connection_is_on">Le mode de connexion limitée est actif.</string>
   <string name="media_details_tooltip">Veuillez écrire un court résumé qui décrit ce que montre votre image. Dans la description, dites ce qui rend l’image intéressante ou typique ou rare et expliquez-en le contexte, qu’il soit visible ou pas. Utilisez une terminologie aussi exacte que possible.</string>
   <string name="depicts_tooltip">Veuillez trouver et sélectionner tous les concepts dépeints par cette image. Soyez aussi spécifique que possible. Si l’image dépeint plusieurs éléments, choisissez-les tous de façon raisonnée. Ne choisissez pas d’étiquette générique si des étiquettes plus spécifiques sont disponibles.</string>
-  <string name="categories_tooltip">Veuillez sélectionner les catégories appropriées. À l’inverse des descriptions, les catégories ne sont qu’en anglais.</string>
+  <string name="categories_tooltip">Veuillez sélectionner les catégories appropriées. À l’inverse des éléments représentés, les catégories ne sont qu’en anglais.</string>
   <string name="license_tooltip">Communs rend vos images réutilisables et adaptées à chacun. Voulez-vous renoncer à tous les droits ? Voulez-vous être crédité pour cela ? Voulez-vous que les adaptations utilisent la même licence ?</string>
-  <string name="depicts_step_title">Dépeint</string>
+  <string name="depicts_step_title">Éléments représentés</string>
   <string name="license_step_title">Licence du média</string>
   <string name="media_detail_step_title">Détails du média</string>
 </resources>

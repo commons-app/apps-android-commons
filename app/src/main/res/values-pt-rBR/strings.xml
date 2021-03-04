@@ -466,7 +466,7 @@
   <string name="no_categories_selected_warning_desc">Imagens sem categorias raramente são utilizáveis. Tem certeza de que deseja continuar sem selecionar categorias?</string>
   <string name="no_depictions_selected">Nenhuma representação selecionada</string>
   <string name="no_depictions_selected_warning_desc">Imagens com representações são mais facilmente encontradas e mais propensas a serem usadas. Tem certeza de que deseja continuar sem selecionar representações?</string>
-  <string name="upload_flow_all_images_in_set">(Para todas as imagens no conjunto)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(Para todas as imagens no conjunto)</string>
   <string name="search_this_area">Pesquisar nesta área</string>
   <string name="nearby_card_permission_title">Pedido de Permissão</string>
   <string name="nearby_card_permission_explanation">Você gostaria que usássemos sua localização atual para exibir o local mais próximo que precisa de fotos?</string>
@@ -671,7 +671,7 @@
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Melhorar o mapa&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Modo de conexão limitada habilitado!</string>
   <string name="limited_connection_disabled">Modo de conexão limitada desativado. Os carregamentos pendentes serão retomados agora.</string>
-  <string name="limited_connection">Conexão limitada</string>
+  <string name="limited_connection_mode" fuzzy="true">Conexão limitada</string>
   <string name="statistics_quality">Imagens de qualidade</string>
   <string name="quality_images_info">Imagens de qualidade são diagramas ou fotografias que atendem a certos padrões de qualidade (que são principalmente de natureza técnica) e são valiosos para projetos da Wikimedia</string>
   <string name="resuming_upload">Retomando carregamento…</string>

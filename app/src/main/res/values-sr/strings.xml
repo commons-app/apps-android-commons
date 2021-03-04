@@ -421,7 +421,7 @@
   <string name="desc_language_Pacific">Пацифик</string>
   <string name="no_categories_selected">Категорије нису изабране</string>
   <string name="no_categories_selected_warning_desc" fuzzy="true">Слике без категорија ретко су употребљиве. Заиста желите да пошаљете без избора категорија?</string>
-  <string name="upload_flow_all_images_in_set">(За све слике у скупу)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(За све слике у скупу)</string>
   <string name="search_this_area">Претражите ову област</string>
   <string name="nearby_card_permission_title">Захтев за дозволу</string>
   <string name="nearby_card_permission_explanation">Желите ли да користимо вашу тренутну локацију да би приказали најближе место којем требају слике?</string>

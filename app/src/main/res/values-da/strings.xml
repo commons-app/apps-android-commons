@@ -433,6 +433,6 @@
   <string name="leaderboard_nearby">I nærheden</string>
   <string name="leaderboard_used">Brugt</string>
   <string name="leaderboard_my_rank_button_text">Min rang</string>
-  <string name="limited_connection">Begrænset forbindelse</string>
+  <string name="limited_connection_mode" fuzzy="true">Begrænset forbindelse</string>
   <string name="statistics_quality">Kvalitetsbilleder</string>
 </resources>

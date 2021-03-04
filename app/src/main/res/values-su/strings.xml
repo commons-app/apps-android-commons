@@ -412,7 +412,7 @@
   <string name="desc_language_Asia">Asia</string>
   <string name="desc_language_Pacific">Pasifik</string>
   <string name="no_categories_selected">Euwuh Kategori Dipilih</string>
-  <string name="upload_flow_all_images_in_set">(Pikeun kabéh gambar dina sét)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(Pikeun kabéh gambar dina sét)</string>
   <string name="search_this_area">Paluruh ieu aréa</string>
   <string name="nearby_card_permission_title">Pamundut Idin</string>
   <string name="never_ask_again">Moal ménta ieu deui</string>

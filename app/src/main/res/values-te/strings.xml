@@ -430,7 +430,7 @@
   <string name="desc_language_Pacific">పసిఫిక్</string>
   <string name="no_categories_selected">వర్గాలేమీ ఎంచుకోలేదు</string>
   <string name="no_categories_selected_warning_desc" fuzzy="true">వర్గాల్లేని బొమ్మలను అరుదుగా వాడగలం. వర్గాలేమీ ఎంచుకోకుండానే ఎక్కించాలని అనుకుంటున్నారా?</string>
-  <string name="upload_flow_all_images_in_set">(సెట్టులో ఉన్న బొమ్మలన్నిటికీ)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(సెట్టులో ఉన్న బొమ్మలన్నిటికీ)</string>
   <string name="search_this_area">ఈ ప్రాంతంలో వెతుకు</string>
   <string name="nearby_card_permission_title">అనుమతి అభ్యర్ధన</string>
   <string name="nearby_card_permission_explanation">మీ చుట్టుపక్కల ఉన్న, బొమ్మ అవసరమైన, స్థలాన్ని చూపించేందుకు మీ ప్రస్తుత స్థలాన్ని వాడుకోమంటారా?</string>

@@ -454,7 +454,7 @@
   <string name="no_categories_selected_warning_desc">Gambar tanpa kategori jarang dapat digunakan. Apakah Anda yakin ingin mengirim tanpa memilih kategori?</string>
   <string name="no_depictions_selected">Tidak Ada Penggambaran yang Dipilih</string>
   <string name="no_depictions_selected_warning_desc">Gambar yang punya penggambaran lebih mudah ditemukan dan kemungkinan lebih banyak digunakan. Apakah Anda yakin Anda ingin melanjurkan tanpa memilih penggambaran?</string>
-  <string name="upload_flow_all_images_in_set">(Untuk semua gambar dalam set)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(Untuk semua gambar dalam set)</string>
   <string name="search_this_area">Cari area ini</string>
   <string name="nearby_card_permission_title">Permintaan Izin</string>
   <string name="nearby_card_permission_explanation">Apakah Anda ingin kami menggunakan lokasi Anda saat ini untuk menampilkan tempat terdekat yang membutuhkan gambar?</string>
@@ -659,7 +659,7 @@
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Perbaiki peta ini&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Mode sambungan terbatas diaktifkan!</string>
   <string name="limited_connection_disabled">Mode sambungan terbatas dimatikan. Unggahan dijeda akan dilanjutkan.</string>
-  <string name="limited_connection">Sambungan Terbatas</string>
+  <string name="limited_connection_mode" fuzzy="true">Sambungan Terbatas</string>
   <string name="statistics_quality">Gambar Berkualitas</string>
   <string name="quality_images_info">Gambar berkualitas adalah diagram atau foto yang memenuhi standar kualitas tertentu (yang sifatnya teknis) dan berharga bagi proyek Wikimedia</string>
   <string name="resuming_upload">Melanjutkan unggahan...</string>

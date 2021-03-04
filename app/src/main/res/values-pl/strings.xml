@@ -483,7 +483,7 @@
   <string name="no_categories_selected_warning_desc">Obrazy bez kategorii rzadko nadają się do użycia. Czy na pewno chcesz kontynuować bez wybierania kategorii?</string>
   <string name="no_depictions_selected">Nie wybrano żadnych obrazów</string>
   <string name="no_depictions_selected_warning_desc">Obrazy ze wskazanymi przedstawieniami są łatwiejsze do znalezienia i częściej używane. Czy na pewno chcesz kontynuować bez wybierania przedstawień?</string>
-  <string name="upload_flow_all_images_in_set">(Dla wszystkich obrazów w zestawie)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(Dla wszystkich obrazów w zestawie)</string>
   <string name="search_this_area">Przeszukaj ten obszar</string>
   <string name="nearby_card_permission_title">Prośba o pozwolenie</string>
   <string name="nearby_card_permission_explanation">Czy chcesz, abyśmy użyli Twojej bieżącej lokalizacji do wyświetlenia najbliższego miejsca, w którym będą potrzebne zdjęcia?</string>
@@ -682,7 +682,7 @@
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Ulepsz tę mapę&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Tryb ograniczonego połączenia włączony!</string>
   <string name="limited_connection_disabled">Tryb ograniczonego połączenia wyłączony. Przesyłanie oczekujące zostanie teraz wznowione.</string>
-  <string name="limited_connection">Ograniczone połączenie</string>
+  <string name="limited_connection_mode" fuzzy="true">Ograniczone połączenie</string>
   <string name="statistics_quality">Obrazy wysokiej jakości</string>
   <string name="quality_images_info">Obrazy wysokiej jakości to diagramy lub fotografie, które spełniają określone standardy dotyczące jakości (które w większości są ściśle techniczne) i są wartościowymi materiałami dla projektów Wikimedii.</string>
   <string name="resuming_upload">Wznawianie przesyłania…</string>

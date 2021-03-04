@@ -670,7 +670,7 @@
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;改善此地圖&lt;/a&gt;</string>
   <string name="limited_connection_enabled">限制連線模式已啟用！</string>
   <string name="limited_connection_disabled">限制連線模式已停用。待定上傳將會立刻恢復。</string>
-  <string name="limited_connection">限制連線</string>
+  <string name="limited_connection_mode">限制連線模式</string>
   <string name="statistics_quality">品質圖片</string>
   <string name="quality_images_info">品質圖片是符合某些品質標準（本質上大多是技術性方面）的圖表或照片，並且對於維基媒體計劃很有價值</string>
   <string name="resuming_upload">重新開始上傳…</string>
@@ -684,4 +684,6 @@
   <string name="depicts_step_title">描述</string>
   <string name="license_step_title">媒體授權條款</string>
   <string name="media_detail_step_title">媒體詳細資料</string>
+  <string name="menu_view_category_page">檢視分類頁面</string>
+  <string name="menu_view_item_page">檢視項目頁面</string>
 </resources>

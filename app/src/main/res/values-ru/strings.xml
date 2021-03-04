@@ -494,7 +494,7 @@
   <string name="no_categories_selected_warning_desc">Изображения без категорий используются редко. Вы уверены, что хотите продолжить, не выбрав категории?</string>
   <string name="no_depictions_selected">Описания не выбраны</string>
   <string name="no_depictions_selected_warning_desc">Изображения с описаниями будет проще найти и использовать. Вы уверены, что хотите продолжить без выбора описаний?</string>
-  <string name="upload_flow_all_images_in_set">(Для всех изображений в наборе)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(Для всех изображений в наборе)</string>
   <string name="search_this_area">Искать в этой области</string>
   <string name="nearby_card_permission_title">Запрос разрешения</string>
   <string name="nearby_card_permission_explanation">Вы бы хотели чтобы использовалось ваше текущее местоположение для показа ближайшего места, у которого ещё нет изображений?</string>
@@ -701,7 +701,7 @@
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Улучшить эту карту&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Включен режим ограниченного подключения!</string>
   <string name="limited_connection_disabled">Отключен режим ограниченного подключения. Незавершенные загрузки будут возобновлены сейчас.</string>
-  <string name="limited_connection">Ограниченное подключение</string>
+  <string name="limited_connection_mode" fuzzy="true">Ограниченное подключение</string>
   <string name="statistics_quality">Качественные изображения</string>
   <string name="quality_images_info">Качественные изображения - это диаграммы или фотографии, которые соответствуют определенным стандартам качества (которые в основном носят технический характер) и представляют ценность для проектов Викимедиа</string>
   <string name="resuming_upload">Возобновление загрузки...</string>

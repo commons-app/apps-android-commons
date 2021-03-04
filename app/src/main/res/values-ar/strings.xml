@@ -487,7 +487,7 @@
   <string name="no_categories_selected_warning_desc">نادرًا ما تكون الصور الخالية من التصنيفات قابلة للاستخدام، هل أنت متأكد أنك تريد الإرسال دون تحديد التصنيفات؟</string>
   <string name="no_depictions_selected">لم يتم تحديد الصور</string>
   <string name="no_depictions_selected_warning_desc">يتم العثور على الصور التي تحتوي على صور بسهولة أكبر و يكونون أكثر استعمالا</string>
-  <string name="upload_flow_all_images_in_set">(لجميع الصور في مجموعة)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(لجميع الصور في مجموعة)</string>
   <string name="search_this_area">ابحث في هذا المجال</string>
   <string name="nearby_card_permission_title">طلب إذن</string>
   <string name="nearby_card_permission_explanation">هل تريد منا استخدام موقعك الحالي لعرض أقرب مكان يحتاج إلى صور؟</string>
@@ -642,5 +642,5 @@
   <string name="add_picture_to_wikipedia_instructions_title">التعليمات</string>
   <string name="confirm">تأكيد</string>
   <string name="instructions_title">التعليمات</string>
-  <string name="limited_connection">اتصال محدود</string>
+  <string name="limited_connection_mode" fuzzy="true">اتصال محدود</string>
 </resources>

@@ -415,7 +415,7 @@
   <string name="desc_language_Pacific">Kyrrahaf</string>
   <string name="no_categories_selected">Engir flokkar valdir</string>
   <string name="no_categories_selected_warning_desc" fuzzy="true">Myndir án flokka eru sjaldnast nýtilegar. Ertu viss um að þú viljir senda þetta inn án þess að velja flokka?</string>
-  <string name="upload_flow_all_images_in_set">(fyrir allar myndir í setti)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(fyrir allar myndir í setti)</string>
   <string name="search_this_area">Leita á þessu svæði</string>
   <string name="nearby_card_permission_title">Beiðni um heimild</string>
   <string name="nearby_card_permission_explanation">Viltu að við notum núverandi staðsetningu þína til að sjá nálægasta staðinn sem þarfnast mynda?</string>

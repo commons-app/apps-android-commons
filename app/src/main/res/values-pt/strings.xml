@@ -464,7 +464,7 @@
   <string name="no_categories_selected_warning_desc">As imagens sem categorias só raramente são utilizáveis. Tem a certeza de que deseja continuar sem selecionar categorias?</string>
   <string name="no_depictions_selected">Não foram selecionadas representações</string>
   <string name="no_depictions_selected_warning_desc">As imagens com representações são encontradas mais facilmente e mais propensas a serem usadas. Tem a certeza de que deseja continuar sem selecionar representações?</string>
-  <string name="upload_flow_all_images_in_set">(Para todas as imagens do conjunto)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(Para todas as imagens do conjunto)</string>
   <string name="search_this_area">Pesquisar nesta área</string>
   <string name="nearby_card_permission_title">Pedido de permissões</string>
   <string name="nearby_card_permission_explanation">Gostaria que usássemos a sua localização corrente para apresentar o local mais próximo que precisa de fotografias?</string>
@@ -669,7 +669,7 @@
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Melhorar este mapa&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Modo de ligação limitada ativado!</string>
   <string name="limited_connection_disabled">Modo de ligação limitada desativado. Os carregamentos pendentes serão retomados agora.</string>
-  <string name="limited_connection">Ligação limitada</string>
+  <string name="limited_connection_mode" fuzzy="true">Ligação limitada</string>
   <string name="statistics_quality">Imagens de qualidade</string>
   <string name="quality_images_info">As imagens de qualidade são diagramas ou fotografias que satisfazem certos padrões de qualidade (principalmente de natureza técnica) e são valiosos para projetos da Wikimedia</string>
   <string name="resuming_upload">A retomar carregamento...</string>
