@@ -212,7 +212,7 @@ public class SearchActivity extends BaseActivity
                     .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
                     .add(R.id.mediaContainer, mediaDetails)
                     .commit();
-            // Reason for using hide, add instead of replace is to maintain scroll0 position after
+            // Reason for using hide, add instead of replace is to maintain scroll position after
             // coming back to the search activity. See https://github.com/commons-app/apps-android-commons/issues/1631
             // https://stackoverflow.com/questions/11353075/how-can-i-maintain-fragment-state-when-added-to-the-back-stack/19022550#19022550
             supportFragmentManager.executePendingTransactions();
