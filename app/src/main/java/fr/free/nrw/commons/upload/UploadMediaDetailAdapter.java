@@ -175,12 +175,13 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
             });
 
 
-            if(description.getCaptionText().isEmpty() == false){
-                // If the user selects a nearby pin or location bookmark to upload a picture.
+            if(description.getCaptionText().isEmpty() == false
+                && languagesAdapter.getIndexOfLanguageCode(description.getLanguageCode()) != -1){
+                // If the user selects a nearby pin or location bookmark to upload a picture and language is present in spinner we set the language.
                 spinnerDescriptionLanguages.setSelection(languagesAdapter.getIndexOfLanguageCode(description.getLanguageCode()));
             }
             else {
-
+                // This is a contribution upload or the language from description is not present in spinner.
                 if (description.getSelectedLanguageIndex() == -1) {
                     if (!TextUtils.isEmpty(savedLanguageValue)) {
                         // If user has chosen a default language from settings activity savedLanguageValue is not null

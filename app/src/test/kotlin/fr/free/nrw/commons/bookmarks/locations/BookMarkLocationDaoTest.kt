@@ -275,7 +275,7 @@ class BookMarkLocationDaoTest {
     private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
 
         for (i in 0 until rowCount) {
-            addRow(listOf("en", "placeName", "placeDescription","placeCategory", exampleLabel.text, exampleLabel.icon,
+            addRow(listOf("placeName", "en", "placeDescription", "placeCategory", exampleLabel.text, exampleLabel.icon,
                     exampleUri, builder.build().wikipediaLink, builder.build().wikidataLink, builder.build().commonsLink,
                     exampleLocation.latitude, exampleLocation.longitude, "picName", "placeDestroyed"))
         }
