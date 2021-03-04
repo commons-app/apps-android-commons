@@ -268,7 +268,7 @@ class BookMarkLocationDaoTest {
     @Test
     fun migrateTableVersionFrom_v13_to_v14() {
         onUpdate(database, 13, 14)
-        verify(database).execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_lang STRING;")
+        verify(database).execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_language STRING;")
     }
 
 

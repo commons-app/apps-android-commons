@@ -191,7 +191,7 @@ public class BookmarkLocationsDao {
         public static final String TABLE_NAME = "bookmarksLocations";
 
         static final String COLUMN_NAME = "location_name";
-        static final String COLUMN_LANGUAGE = "location_lang";
+        static final String COLUMN_LANGUAGE = "location_language";
         static final String COLUMN_DESCRIPTION = "location_description";
         static final String COLUMN_LAT = "location_lat";
         static final String COLUMN_LONG = "location_long";
@@ -294,7 +294,7 @@ public class BookmarkLocationsDao {
             }
             if (from == 13){
                 try {
-                    db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_lang STRING;");
+                    db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_language STRING;");
                 } catch (SQLiteException exception){
                     Timber.e(exception);
                 }
