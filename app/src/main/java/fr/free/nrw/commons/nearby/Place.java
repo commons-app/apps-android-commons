@@ -18,6 +18,7 @@ import timber.log.Timber;
  */
 public class Place implements Parcelable {
 
+    public final String language;
     public final String name;
     private final Label label;
     private final String longDescription;
@@ -30,7 +31,8 @@ public class Place implements Parcelable {
     public final Sitelinks siteLinks;
 
 
-    public Place(String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, String destroyed) {
+    public Place(String language,String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, String destroyed) {
+        this.language = language;
         this.name = name;
         this.label = label;
         this.longDescription = longDescription;
@@ -40,8 +42,8 @@ public class Place implements Parcelable {
         this.pic = (pic == null) ? "":pic;
         this.destroyed = (destroyed == null) ? "":destroyed;
     }
-
     public Place(Parcel in) {
+        this.language = in.readString();
         this.name = in.readString();
         this.label = (Label) in.readSerializable();
         this.longDescription = in.readString();
@@ -53,7 +55,6 @@ public class Place implements Parcelable {
         String destroyedString = in.readString();
         this.destroyed = (destroyedString == null) ? "":destroyedString;
     }
-
     public static Place from(NearbyResultItem item) {
         String itemClass = item.getClassName().getValue();
         String classEntityId = "";
@@ -61,6 +62,7 @@ public class Place implements Parcelable {
             classEntityId = itemClass.replace("http://www.wikidata.org/entity/", "");
         }
         return new Place(
+                item.getLabel().getLanguage(),
                 item.getLabel().getValue(),
                 Label.fromText(classEntityId), // list
                 item.getClassLabel().getValue(), // details
@@ -73,6 +75,14 @@ public class Place implements Parcelable {
                         .build(),
                 item.getPic().getValue(),
                 item.getDestroyed().getValue());
+    }
+
+    /**
+     * Gets the language of the caption ie name.
+     * @return language
+     */
+    public String getLanguage() {
+        return language;
     }
 
     /**
@@ -176,6 +186,7 @@ public class Place implements Parcelable {
     public String toString() {
         return "Place{" +
                 "name='" + name + '\'' +
+                ", lang='" + language + '\'' +
                 ", label='" + label + '\'' +
                 ", longDescription='" + longDescription + '\'' +
                 ", location='" + location + '\'' +
@@ -194,6 +205,7 @@ public class Place implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(language);
         dest.writeString(name);
         dest.writeSerializable(label);
         dest.writeString(longDescription);
