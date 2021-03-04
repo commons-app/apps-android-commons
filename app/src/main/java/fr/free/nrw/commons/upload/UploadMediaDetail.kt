@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload
 
 import fr.free.nrw.commons.nearby.Place
-import java.util.*
 
 /**
  * Holds a description of an item being uploaded by [UploadActivity]
@@ -20,7 +19,7 @@ data class UploadMediaDetail constructor(
     fun javaCopy() = copy()
 
     constructor(place: Place) : this(
-        place.lang,
+        place.language,
         place.longDescription,
         place.name
     )

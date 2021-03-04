@@ -62,7 +62,7 @@ class BookMarkLocationDaoTest {
         builder.setCommonsLink("commonsLink")
 
 
-        examplePlaceBookmark = Place("en","placeName", exampleLabel, "placeDescription"
+        examplePlaceBookmark = Place("en", "placeName", exampleLabel, "placeDescription"
                 , exampleLocation, "placeCategory", builder.build(),"picName","placeDestroyed")
         testObject = BookmarkLocationsDao { client }
     }
@@ -87,8 +87,8 @@ class BookMarkLocationDaoTest {
         createCursor(1).let { cursor ->
             cursor.moveToFirst()
             testObject.fromCursor(cursor).let {
+                assertEquals("en", it.language)
                 assertEquals("placeName", it.name)
-                assertEquals("en", it.lang)
                 assertEquals(Label.FOREST, it.label)
                 assertEquals("placeDescription", it.longDescription)
                 assertEquals(40.0, it.location.latitude)
@@ -153,7 +153,7 @@ class BookMarkLocationDaoTest {
         captor.firstValue.let { cv ->
             assertEquals(13, cv.size())
             assertEquals(examplePlaceBookmark.name, cv.getAsString(COLUMN_NAME))
-            assertEquals(examplePlaceBookmark.lang, cv.getAsString(COLUMN_LANGUAGE))
+            assertEquals(examplePlaceBookmark.language, cv.getAsString(COLUMN_LANGUAGE))
             assertEquals(examplePlaceBookmark.longDescription, cv.getAsString(COLUMN_DESCRIPTION))
             assertEquals(examplePlaceBookmark.label.text, cv.getAsString(COLUMN_LABEL_TEXT))
             assertEquals(examplePlaceBookmark.category, cv.getAsString(COLUMN_CATEGORY))
@@ -266,8 +266,8 @@ class BookMarkLocationDaoTest {
     }
 
     @Test
-    fun migrateTableVersionFrom_v14_to_v15() {
-        onUpdate(database, 14, 15)
+    fun migrateTableVersionFrom_v13_to_v14() {
+        onUpdate(database, 13, 14)
         verify(database).execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_lang STRING;")
     }
 

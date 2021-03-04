@@ -18,7 +18,7 @@ import timber.log.Timber;
  */
 public class Place implements Parcelable {
 
-    public final String lang;
+    public final String language;
     public final String name;
     private final Label label;
     private final String longDescription;
@@ -31,8 +31,8 @@ public class Place implements Parcelable {
     public final Sitelinks siteLinks;
 
 
-    public Place(String lang,String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, String destroyed) {
-        this.lang = lang;
+    public Place(String language,String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, String destroyed) {
+        this.language = language;
         this.name = name;
         this.label = label;
         this.longDescription = longDescription;
@@ -43,7 +43,7 @@ public class Place implements Parcelable {
         this.destroyed = (destroyed == null) ? "":destroyed;
     }
     public Place(Parcel in) {
-        this.lang = in.readString();
+        this.language = in.readString();
         this.name = in.readString();
         this.label = (Label) in.readSerializable();
         this.longDescription = in.readString();
@@ -62,7 +62,7 @@ public class Place implements Parcelable {
             classEntityId = itemClass.replace("http://www.wikidata.org/entity/", "");
         }
         return new Place(
-                item.getLabel().getLang(),
+                item.getLabel().getLanguage(),
                 item.getLabel().getValue(),
                 Label.fromText(classEntityId), // list
                 item.getClassLabel().getValue(), // details
@@ -77,9 +77,12 @@ public class Place implements Parcelable {
                 item.getDestroyed().getValue());
     }
 
-
-    public String getLang() {
-        return lang;
+    /**
+     * Gets the language of the caption ie name.
+     * @return language
+     */
+    public String getLanguage() {
+        return language;
     }
 
     /**
@@ -183,7 +186,7 @@ public class Place implements Parcelable {
     public String toString() {
         return "Place{" +
                 "name='" + name + '\'' +
-                ", lang='" + lang + '\'' +
+                ", lang='" + language + '\'' +
                 ", label='" + label + '\'' +
                 ", longDescription='" + longDescription + '\'' +
                 ", location='" + location + '\'' +
@@ -202,7 +205,7 @@ public class Place implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(lang);
+        dest.writeString(language);
         dest.writeString(name);
         dest.writeSerializable(label);
         dest.writeString(longDescription);

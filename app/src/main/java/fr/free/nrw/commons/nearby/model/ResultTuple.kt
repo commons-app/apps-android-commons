@@ -4,18 +4,18 @@ import com.google.gson.annotations.SerializedName
 
 class ResultTuple {
     @SerializedName("xml:lang")
-    val lang: String
+    val language: String
     val type: String
     val value: String
 
-    constructor(lang: String,type: String, value: String) {
-        this.lang = lang
+    constructor(lang: String, type: String, value: String) {
+        this.language = lang
         this.type = type
         this.value = value
     }
 
     constructor() {
-        lang = ""
+        language = ""
         type = ""
         value = ""
     }

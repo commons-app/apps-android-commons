@@ -172,7 +172,7 @@ public class BookmarkLocationsDao {
     private ContentValues toContentValues(Place bookmarkLocation) {
         ContentValues cv = new ContentValues();
         cv.put(BookmarkLocationsDao.Table.COLUMN_NAME, bookmarkLocation.getName());
-        cv.put(BookmarkLocationsDao.Table.COLUMN_LANGUAGE,bookmarkLocation.getLang());
+        cv.put(BookmarkLocationsDao.Table.COLUMN_LANGUAGE, bookmarkLocation.getLanguage());
         cv.put(BookmarkLocationsDao.Table.COLUMN_DESCRIPTION, bookmarkLocation.getLongDescription());
         cv.put(BookmarkLocationsDao.Table.COLUMN_CATEGORY, bookmarkLocation.getCategory());
         cv.put(BookmarkLocationsDao.Table.COLUMN_LABEL_TEXT, bookmarkLocation.getLabel().getText());
@@ -292,8 +292,8 @@ public class BookmarkLocationsDao {
                     Timber.e(exception);
                 }
             }
-            if (from == 14){
-                try{
+            if (from == 13){
+                try {
                     db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_lang STRING;");
                 } catch (SQLiteException exception){
                     Timber.e(exception);
