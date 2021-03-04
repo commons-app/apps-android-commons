@@ -176,7 +176,8 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
 
 
             if(description.getCaptionText().isEmpty() == false){
-             spinnerDescriptionLanguages.setSelection(languagesAdapter.getIndexOfLanguageCode(description.getLanguageCode()));
+                // If the user selects a nearby pin or location bookmark to upload a picture.
+                spinnerDescriptionLanguages.setSelection(languagesAdapter.getIndexOfLanguageCode(description.getLanguageCode()));
             }
             else {
 
