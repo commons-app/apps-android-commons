@@ -25,7 +25,6 @@
   <string name="preference_category_appearance">Uterlik</string>
   <string name="preference_category_general">Algemein</string>
   <string name="preference_category_feedback">Feedback</string>
-  <string name="preference_category_location">Locatie</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Instèllinge</string>
@@ -74,8 +73,6 @@
   <string name="menu_save_categories">Slaon op</string>
   <string name="refresh_button">Vernuuj</string>
   <string name="display_list_button">Lies</string>
-  <string name="gps_disabled">GPS steit oet op die toestèl. Wils se \'t aanzètte?</string>
-  <string name="enable_gps">Zèt GPS aan</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Nag gein uploads</string>
   <string name="categories_not_found">Gein categorieje die euvereinkómme mit %1$s gevónje</string>
   <string name="categories_skip_explanation">Veug categorieje toe veur dien plaetjes mekkeliker te kinne vinje op Wikimedia Commons.\nBegin mit tikke veur categorieje toe te veuge.</string>
@@ -100,8 +97,6 @@
   <string name="menu_download">Download</string>
   <string name="preference_license">Standerdlicentie</string>
   <string name="use_previous" fuzzy="true">Gebroek veurige naam/besjrieving</string>
-  <string name="allow_gps">Haol autematis de hujige locatie op</string>
-  <string name="allow_gps_summary" fuzzy="true">Haol de hujige locatie op veur categorieveurstèlle te make wen \'t bild gein geotags haet</string>
   <string name="preference_theme" fuzzy="true">Nachmodus</string>
   <string name="license_name_cc_by_sa_four"> Naamsvermeljing-GeliekDeile 4.0</string>
   <string name="license_name_cc_by_four">Naamsvermeljing 4.0</string>
@@ -109,20 +104,9 @@
   <string name="license_name_cc_by">Naamsvermeljing 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Oeësteriek)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Duutsjlandj)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Eslandj)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spaanje)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatië)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Nederlandj)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Noorwaeg)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Pole)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Roemenië)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY-4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">Op Wikimedia Commons staon de meiste plaetjes die waere gebroek op Wikipedia.</string>
   <string name="tutorial_1_subtext">Dien plaetjes helpe luuj oppe ganse werreld mit \'t opdoon van kènnis!</string>
   <string name="tutorial_2_text">Upload estebleef allein plaetjes die gans door dichzelf zint gemaak:</string>
@@ -150,8 +134,6 @@
   <string name="detail_license_empty">Ónbekande licentie</string>
   <string name="menu_refresh">Vernuuj</string>
   <string name="ok">Klaor</string>
-  <string name="title_activity_nearby">Plaatse in de buurt</string>
-  <string name="no_nearby">Gein plaatse in de buurt gevónje</string>
   <string name="warning">Waorsjoewing</string>
   <string name="yes">Jao</string>
   <string name="no">Nae</string>

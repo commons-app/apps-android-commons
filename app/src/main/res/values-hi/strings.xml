@@ -42,12 +42,10 @@
     <item quantity="one">इस चित्र का प्रयोग %1$s लाइसेंस के अन्तर्गत होगा</item>
     <item quantity="other">इन चित्रों का प्रयोग %1$s लाइसेंस के अन्तर्गत होगा</item>
   </plurals>
-  <string name="title_activity_explore">खोजें</string>
   <string name="navigation_item_explore">खोजें</string>
   <string name="preference_category_appearance">स्वरूप</string>
   <string name="preference_category_general">सामान्य</string>
   <string name="preference_category_feedback">आपके सुझाव</string>
-  <string name="preference_category_location">अवस्थिति</string>
   <string name="app_name">कॉमन्स</string>
   <string name="bullet">•</string>
   <string name="menu_settings">सेटिंग्स</string>
@@ -85,22 +83,18 @@
   <string name="share_title_hint" fuzzy="true">शीर्षक (आवश्यक)</string>
   <string name="share_description_hint">विवरण</string>
   <string name="login_failed_network">प्रवेश नहीं हो रहा - नेटवर्क विफल</string>
-  <string name="login_failed_wrong_credentials">लॉगिन विफल - कृपया अपना यूज़रनेम व पासवर्ड की जाँच करें</string>
   <string name="login_failed_throttled">ढेर सारे असफल प्रयास होने के कारण कुछ मिनटों के बाद प्रयास करें।</string>
   <string name="login_failed_blocked">क्षमा करें, यह सदस्य कॉमन्स में अवरोधित है</string>
   <string name="login_failed_2fa_needed">आपको अपना दो कारक प्रमाणन कोड प्रदान करना होगा।</string>
   <string name="login_failed_generic">प्रवेश विफल</string>
   <string name="share_upload_button">अपलोड</string>
   <string name="multiple_share_base_title">सूचियों को नाम दें</string>
-  <string name="add_set_name_toast">इस सेट के लिये उचित नाम प्रदान करें</string>
   <string name="provider_modifications">बदलाव</string>
   <string name="menu_upload_single">अपलोड</string>
   <string name="categories_search_text_hint">श्रेणियाँ खोजें</string>
   <string name="menu_save_categories">सहेजें</string>
   <string name="refresh_button">ताजा करें</string>
   <string name="display_list_button">सूची</string>
-  <string name="gps_disabled">आपके डिवाइस में जीपीएस अक्षम है। क्या आप इसे सक्षम करना चाहेंगे?</string>
-  <string name="enable_gps">जीपीएस सक्षम करें</string>
   <string name="contributions_subtitle_zero" fuzzy="true">अभी तक कोई अपलोड नहीं</string>
   <string name="categories_not_found">%1$s से कोई श्रेणी मेल नहीं खाती</string>
   <string name="categories_skip_explanation">विकिमीडिया कॉमन्स पर अपनी छवियों को अधिक खोजने योग्य बनाने के लिए श्रेणियां जोड़ें|\nश्रेणियां जोड़ने के लिए टाइप करना प्रारंभ करें|</string>
@@ -126,8 +120,6 @@
   <string name="menu_download">डाउनलोड</string>
   <string name="preference_license">डिफॉल्ट लाइसेन्स</string>
   <string name="use_previous" fuzzy="true">पिछले शीर्षक/विवरण का उपयोग करें</string>
-  <string name="allow_gps">वर्तमान स्थान स्वतः ज्ञात करें</string>
-  <string name="allow_gps_summary" fuzzy="true">यदि छवि पर जियोटैग नहीं है तो श्रेणियों के सुझाव हेतु वर्तमान स्थान ज्ञात करें।</string>
   <string name="preference_theme" fuzzy="true">रात्रि मोड</string>
   <string name="license_name_cc_by_sa_four">एट्रीब्यूशन-शेयरअलाइक 4.0</string>
   <string name="license_name_cc_by_four">एट्रिब्यूशन 4.0</string>
@@ -135,20 +127,9 @@
   <string name="license_name_cc_by">एट्रीब्यूशन 3.0</string>
   <string name="license_name_cc0">सीसी0</string>
   <string name="license_name_cc_by_sa_3_0">सीसी बाय-एसए 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">सीसी बाय-एसए 3.0 (ऑस्ट्रिया)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (जर्मनी)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (एस्टोनिया)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (स्पेन)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (क्रोएशिया)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (लक्समबर्ग)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (नीदरलैंड)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (नॉर्वे)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (पोलैंड)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (रोमानिया)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">विकिपीडिया में उपयोग होने वाले अधिकतर चित्र विकिमीडिया कॉमन्स पर रखे जाते है।</string>
   <string name="tutorial_1_subtext">आपके लिए चित्र पूरे विश्व के लोगों को शिक्षित करने में सहायता करेंगे!</string>
   <string name="tutorial_2_text">कृपया उन तस्वीरों को डालें, जो केवल आपके द्वारा ली गई या बनाई गई है:</string>
@@ -177,10 +158,7 @@
   <string name="menu_refresh">ताजा करें</string>
   <string name="read_storage_permission_rationale" fuzzy="true">अनिवार्य अनुमति: बाहरी स्मृति पढ़ें। एप इसके बिना कार्य नहीं करेगा।</string>
   <string name="write_storage_permission_rationale" fuzzy="true">अनिवार्य अनुमति:बाहरी कंप्यूटर स्टोरेज लिखना|इसके बिना एप कार्य नहीं करेगा।</string>
-  <string name="location_permission_rationale">वैकल्पिक अनुमति: श्रेणी सुझाव हेतु वर्तमान स्थान ज्ञात करें</string>
   <string name="ok">ठीक है</string>
-  <string name="title_activity_nearby">आसपास के स्थान</string>
-  <string name="no_nearby">पास के कोई भी स्थान नहीं मिले</string>
   <string name="warning">चेतावनी</string>
   <string name="yes">हाँ</string>
   <string name="no">नहीं</string>
@@ -194,28 +172,18 @@
   <string name="become_a_tester_title">बीटा परीक्षक बनें</string>
   <string name="become_a_tester_description">गूगल प्ले पर हमारे बीटा चैनल का चयन करें और नई सुविधाओं व त्रुटिसुधारों तक पहले पहुँचे</string>
   <string name="_2fa_code">2 एफए कोड</string>
-  <string name="number_of_uploads">मेरी हाल ही की अपलोड सीमा</string>
-  <string name="maximum_limit">अधिकतम सीमा</string>
-  <string name="maximum_limit_alert">500 से अधिक प्रदर्शित करने में असमर्थ</string>
-  <string name="set_limit" fuzzy="true">हाल ही में अपलोड सीमा सेट करें</string>
-  <string name="login_failed_2fa_not_supported">दो कारक प्रमाणीकरण वर्तमान में समर्थित नहीं है</string>
   <string name="logout_verification">क्या आप वास्तव में निकास करना चाहते हैं?</string>
   <string name="commons_logo">कॉमन्स का प्रतीक चिन्ह</string>
   <string name="commons_website">कॉमन्स जालस्थान</string>
   <string name="commons_facebook">कॉमन्स फेसबुक पृष्ठ</string>
   <string name="commons_github">कॉमन्स गिटहब स्त्रोत कूटशब्द</string>
-  <string name="background_image">पृष्ठभूमि छवि</string>
   <string name="mediaimage_failed">मीडिया छवि विफल</string>
-  <string name="no_image_found">कोई छवि नहीं मिली</string>
   <string name="no_subcategory_found">कोई उपश्रेणी नहीं मिली</string>
   <string name="no_parentcategory_found">कोई मूल श्रेणी नहीं मिली</string>
-  <string name="upload_image">तस्वीर डालिये</string>
   <string name="welcome_image_mount_zao">माउंट ज़ाओ</string>
   <string name="welcome_image_llamas">ल्लामस</string>
   <string name="welcome_image_rainbow_bridge">इंद्रधनुष के पुल</string>
   <string name="welcome_image_tulip">ट्यूलिप</string>
-  <string name="welcome_image_no_selfies">कोई सेल्फीज़ नहीं</string>
-  <string name="welcome_image_proprietary">स्वामित्व छवि</string>
   <string name="welcome_image_welcome_wikipedia">विकिपीडिया में स्वागत है</string>
   <string name="welcome_image_welcome_copyright">प्रतिलिप्याधिकार में स्वागत है</string>
   <string name="welcome_image_sydney_opera_house">सिडनी का ओपेरा हाउस</string>
@@ -231,24 +199,17 @@
   <string name="navigation_item_logout">प्रस्थान करें</string>
   <string name="navigation_item_info">अनुशिक्षण</string>
   <string name="navigation_item_notification">सूचनायें</string>
-  <string name="navigation_item_featured_images">निर्वाचित</string>
-  <string name="nearby_needs_permissions">आस-पास के स्थान बिना स्थान अनुमतियों के प्रदर्शित नहीं किए जा सकते हैं</string>
   <string name="no_description_found">कोई विवरण नहीं मिला</string>
   <string name="nearby_info_menu_commons_article">कॉमन्स फाइल पृष्ठ</string>
   <string name="nearby_info_menu_wikidata_article">विकिडाटा वस्तु</string>
   <string name="nearby_info_menu_wikipedia_article">विकीपीडिया लेख</string>
-  <string name="error_while_cache">चित्र कैशिंग करते समय त्रुटि</string>
-  <string name="title_info">फ़ाइल के लिए एक अद्वितीय वर्णनात्मक शीर्षक, जो एक फ़ाइल नाम के रूप में काम करेगा। आप रिक्त स्थान के साथ सादे भाषा का उपयोग कर सकते हैं। फ़ाइल विस्तार शामिल न करें</string>
   <string name="description_info">कृपया मीडिया जितना संभव हो उतना बताएं: यह कहां लिया गया? यह क्या दिखाता है? संदर्भ क्या है? कृपया वस्तुओं या व्यक्तियों का वर्णन करें। ऐसी जानकारी का खुलासा करें जिसे आसानी से अनुमानित नहीं किया जा सकता, उदाहरण के लिए दिन का समय यदि यह परिदृश्य है। अगर मीडिया कुछ असामान्य दिखाता है, तो कृपया बताएं कि इसे क्या असामान्य बनाता है।</string>
-  <string name="upload_image_too_dark">यह चित्र अंधकारमय है, क्या आप इसे सचमुच अपलोड करना चाहते हैं? विकिपीडिया कॉमन्स केवल ज्ञानकोशीय महत्त्व के चित्रों के लिये ही है।</string>
-  <string name="upload_image_blurry">यह चित्र अस्पष्ट है, क्या आप इसे सचमुच अपलोड करना चाहते हैं? विकिपीडिया कॉमन्स केवल ज्ञानकोशीय महत्त्व के चित्रों के लिये ही है।</string>
   <string name="upload_problem_exist">इस चित्र के साथ सम्भावित समस्या:</string>
   <string name="upload_problem_image_dark">चित्र बहुत अंधकारमय है।</string>
   <string name="upload_problem_image_blurry">चित्र अस्पष्ट है</string>
   <string name="upload_problem_image_duplicate">चित्र पहले से कॉमन्स पर है</string>
   <string name="upload_problem_different_geolocation">यह चित्र किसी अलग स्थान पर लिया गया है।</string>
   <string name="upload_problem_do_you_continue">क्या आप अब भी इस चित्र को अपलोड करना चाहते हैं?</string>
-  <string name="give_permission">अनुमति दें</string>
   <string name="use_external_storage" fuzzy="true">बाहरी स्टॉरज का पृयोग करे।</string>
   <string name="use_external_storage_summary" fuzzy="true">आप अपने डिवाइस के इन-ऐप कैमरा से ली गई तस्वीरों को सहेजें।</string>
   <string name="login_to_your_account">अपने खाते में प्रवेश करें</string>
@@ -259,7 +220,6 @@
   <string name="nominate_deletion">हटाने के लिये नामांकन करें</string>
   <string name="nominated_for_deletion">यह चित्र हटाने के लिये नामांकित किया गया है।</string>
   <string name="nominated_see_more" fuzzy="true">&lt;u&gt;विवरण के लिये वेबपेज खोलें&lt;/u&gt;</string>
-  <string name="view_browser">ब्राउज़र में देखें</string>
   <string name="skip_login">छोड़ें</string>
   <string name="navigation_item_login">लॉगिन</string>
   <string name="skip_login_title">क्या आप वास्तव में लॉगिन नहीं करना चाहते?</string>
@@ -267,16 +227,8 @@
   <string name="login_alert_message">इस सुविधा का उपयोग करने के लिये लॉग इन करें</string>
   <string name="copy_wikicode">विकिटेक्स्ट को क्लिपबोर्ड पर कॉपी करें</string>
   <string name="wikicode_copied">विकिटेक्सट क्लिपबोर्ड पर कॉपी किया जा चुका है</string>
-  <string name="nearby_location_has_not_changed">स्थान परिवर्तन नहीं हुआ।</string>
   <string name="nearby_location_not_available">स्थान उपलब्ध नहीं है।</string>
   <string name="location_permission_rationale_nearby">आसपास के स्थान दिखाने के लिए अनुमति चाहिए</string>
-  <string name="get_directions" fuzzy="true">दिशा - निर्देश प्राप्त करें</string>
-  <string name="read_article" fuzzy="true">लेख पढ़ें</string>
-  <string name="notifications_welcome">विकिमीडिया कॉमन्स पर आपका स्वागत है, %1$s! हमें हर्ष है कि आप यहाँ हैं।</string>
-  <string name="notifications_talk_page_message">%1$s ने आपके वार्ता पृष्ठ पर सन्देश छोड़ा है</string>
-  <string name="notifications_thank_you_edit">सम्पादन करने के लिए धन्यवाद</string>
-  <string name="notifications_mention">%1$s ने %2$s में आपका उल्लेख किया है</string>
-  <string name="toggle_view_button">टूगल दृश्य</string>
   <string name="nearby_directions" fuzzy="true">दिशा-निर्देश</string>
   <string name="nearby_wikidata" fuzzy="true">विकीडाटा</string>
   <string name="nearby_wikipedia" fuzzy="true">विकीपीडिया</string>
@@ -285,7 +237,6 @@
   <string name="about_faq" fuzzy="true">&lt;u&gt;अक्सर पूछे जाने वाले प्रश्न&lt;/u&gt;</string>
   <string name="welcome_skip_button">प्रशिक्षण छोड़ें</string>
   <string name="no_internet">इंटरनेट उपलब्ध नहीं</string>
-  <string name="internet_established">इंटरनेट उपलब्ध</string>
   <string name="error_notifications">सूचनाएं लाने में त्रुटि</string>
   <string name="no_notifications">कोई सूचनाएँ नहीं मिलीं</string>
   <string name="about_translate" fuzzy="true">&lt;u&gt;अनुवाद&lt;/u&gt;</string>
@@ -293,8 +244,6 @@
   <string name="about_translate_proceed">आगे बढ़ें</string>
   <string name="about_translate_cancel">रद्द करें</string>
   <string name="retry">पुनः प्रयास करें</string>
-  <string name="showcase_view_got_it_button">समझ गया!</string>
-  <string name="showcase_view_plus_fab">आप अपनी गैलरी या कैमरे से किसी भी स्थान के चित्र को अपलोड कर सकते हैं।</string>
   <string name="no_images_found">कोई चित्र नहीं मिला!</string>
   <string name="error_loading_images">चित्र अपलोड करते समय त्रुटि उत्पन्न हुई।</string>
   <string name="image_uploaded_by">अपलोड: %1$s</string>
@@ -303,12 +252,10 @@
   <string name="app_widget_heading">आज का चित्र</string>
   <string name="menu_search_button">खोजें</string>
   <string name="search_commons">कॉमन्स में खोजें</string>
-  <string name="images_not_found">%1$s के नाम से कोई चित्र नहीं मिले</string>
   <string name="title_activity_search">खोजें</string>
   <string name="search_recent_header">हाल की खोजें</string>
   <string name="provider_searches">हाल में खोजे गये प्रश्न</string>
   <string name="error_loading_categories">श्रेणी लोड करते समय त्रुटि उत्पन्न हुई।</string>
-  <string name="error_loading_subcategories">उपश्रेणी लोड करते समय त्रुटि उत्पन्न हुई।</string>
   <string name="search_tab_title_media" fuzzy="true">मीडिया</string>
   <string name="search_tab_title_categories">श्रेणियाँ</string>
   <string name="explore_tab_title_featured">निर्वाचित</string>
@@ -328,9 +275,7 @@
   <string name="wrong">गलत उत्तर</string>
   <string name="quiz_screenshot_question">क्या यह स्क्रीनशॉट अपलोड होने के लिये तैयार है?</string>
   <string name="share_app_title">एप साझा करें</string>
-  <string name="share_coordinates_not_present">चित्र चुनने के दौरान निर्देशांक निर्दिष्ट नहीं किये जा सके</string>
   <string name="error_fetching_nearby_places">निकट के स्थान लाने में त्रुटि हुई।</string>
-  <string name="add_description">+विवरण जोड़ें</string>
   <string name="no_recent_searches">हाल में कोई खोज नहीं</string>
   <string name="delete_recent_searches_dialog">क्या आप सचमुच अपना खोज इतिहास मिटाना चाहते हैं?</string>
   <string name="search_history_deleted">खोज इतिहास मिट गया</string>
@@ -355,8 +300,6 @@
   <string name="next">अगला</string>
   <string name="previous">पिछला</string>
   <string name="submit">जमा करें</string>
-  <string name="navigation_item_bookmarks">बुकमार्क</string>
-  <string name="title_activity_bookmarks">बुकमार्क</string>
   <string name="title_page_bookmarks_pictures">चित्र</string>
   <string name="title_page_bookmarks_locations">स्थान</string>
   <string name="menu_bookmark">बुकमार्क से जोड़ें/हटायें</string>
@@ -370,13 +313,6 @@
   <string name="deletion_reason_not_interesting">क्षमा करें, यह चित्र ज्ञानकोष के लिये दिलचस्प नहीं है</string>
   <string name="uploaded_by_myself" fuzzy="true">मेरे द्वारा अपलोड किया गया</string>
   <string name="no_uploads" fuzzy="true">कॉमन्स पर आपका स्वागत है!</string>
-  <string name="desc_language_Worldwide">वैश्विक</string>
-  <string name="desc_language_America">अमेरिका</string>
-  <string name="desc_language_Europe">यूरोप</string>
-  <string name="desc_language_Middle_East">मध्य पूर्व</string>
-  <string name="desc_language_Africa">अफ्रीका</string>
-  <string name="desc_language_Asia">एशिया</string>
-  <string name="desc_language_Pacific">प्रशांत</string>
   <string name="no_categories_selected">कोई श्रेणी नहीं चुनी</string>
   <string name="no_categories_selected_warning_desc" fuzzy="true">बिना श्रेणियों के चित्र बहुत कम उपयोगी होते हैं। क्या आप सचमुच बिना श्रेणी चुने चित्र जमा करना चाहते हैं?</string>
   <string name="upload_flow_all_images_in_set">(सेट के सभी चित्रों के लिये)</string>

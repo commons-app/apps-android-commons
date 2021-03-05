@@ -38,13 +38,11 @@
     <item quantity="one">%1$d отпремање</item>
     <item quantity="other">%1$d отпремања</item>
   </plurals>
-  <string name="title_activity_explore">Истрага</string>
   <string name="navigation_item_explore">Истрага</string>
   <string name="preference_category_appearance">Изглед</string>
   <string name="preference_category_general">Опште</string>
   <string name="preference_category_feedback">Повратне информације</string>
   <string name="preference_category_privacy">Приватност</string>
-  <string name="preference_category_location">Локација</string>
   <string name="app_name">Остава</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Подешавања</string>
@@ -82,22 +80,18 @@
   <string name="share_title_hint" fuzzy="true">Наслов (обавезно)</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Пријава није могућа — грешка на мрежи</string>
-  <string name="login_failed_wrong_credentials">Пријава није могућа — проверите корисничко име и лозинку</string>
   <string name="login_failed_throttled">Превише неуспешних покушаја. Покушајте поново за неколико минута.</string>
   <string name="login_failed_blocked">Овај корисник је блокиран на Остави</string>
   <string name="login_failed_2fa_needed">Морате да наведете свој двофакторски кôд за потврду идентитета.</string>
   <string name="login_failed_generic">Пријава није успела</string>
   <string name="share_upload_button">Отпреми</string>
   <string name="multiple_share_base_title">Именујте овај комплет</string>
-  <string name="add_set_name_toast">Наведите име за овај комплет</string>
   <string name="provider_modifications">Измене</string>
   <string name="menu_upload_single">Отпремите</string>
   <string name="categories_search_text_hint">Претражи категорије</string>
   <string name="menu_save_categories">Сачувај</string>
   <string name="refresh_button">Освежи</string>
   <string name="display_list_button">Списак</string>
-  <string name="gps_disabled">GPS је онемогућен на вашем уређају. Желите ли да га омогућите?</string>
-  <string name="enable_gps">Омогући GPS</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Још увек нема отпремања</string>
   <string name="categories_not_found">Нема категорија које одговарају %1$s</string>
   <string name="categories_skip_explanation">Додајте категорије на слике да бисте олакшали корисницима њихово проналажење на Остави.\n\nДа бисте додали категорију, почните са писањем њеног имена.</string>
@@ -123,8 +117,6 @@
   <string name="menu_download">Преузми</string>
   <string name="preference_license">Подразумевана лиценца</string>
   <string name="use_previous">Користи претходан наслов и опис</string>
-  <string name="allow_gps">Аутоматски добави тренутну локацију</string>
-  <string name="allow_gps_summary">Прима тренутну локацију ако слика није геотагована и геотагује исту њоме. Упозорење: Овиме ће да се открије Ваша тренутна локација.</string>
   <string name="preference_theme">Тема</string>
   <string name="license_name_cc_by_sa_four">Ауторство-Делити под истим условима 4.0</string>
   <string name="license_name_cc_by_four">Ауторство 4.0</string>
@@ -132,20 +124,9 @@
   <string name="license_name_cc_by">Ауторство 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Аустрија)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Немачка)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Естонија)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Шпанија)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Хрватска)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Луксембург)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Холандија)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Норвешка)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Пољска)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Румунија)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Нула</string>
   <string name="tutorial_1_text">Викимедијина остава садржи већину слика које се користе на Википедији.</string>
   <string name="tutorial_1_subtext">Ваше слике помажу у образовању људи широм света.</string>
   <string name="tutorial_2_text">Отпремајте слике које сте снимили или направили у потпуности сами:</string>
@@ -178,12 +159,8 @@
   <string name="read_storage_permission_rationale">Потребна дозвола: Читање спољашње меморије. Апликација не може да приступи Ваших галерији без овога.</string>
   <string name="write_storage_permission_rationale">Потребна дозвола: Писање у спољашњој меморији. Апликација не може да приступи Вашој камери/галерији без ове дозволе.</string>
   <string name="location_permission_title">Захтевање дозволе за локацију</string>
-  <string name="location_permission_rationale">Необавезна дозвола: преузми тренутну локацију за предлоге категорија</string>
   <string name="ok">У реду</string>
-  <string name="title_activity_nearby">Места у близини</string>
-  <string name="no_nearby">Нису пронађена оближња места</string>
   <string name="warning">Упозорење</string>
-  <string name="upload_image_duplicate">Ова датотека већ постоји на Остави. Заиста желите да наставите?</string>
   <string name="yes">Да</string>
   <string name="no">Не</string>
   <string name="media_detail_title">Наслов</string>
@@ -197,32 +174,18 @@
   <string name="become_a_tester_title">Постаните бета-тестер</string>
   <string name="become_a_tester_description">Прикључите се нашем каналу бета верзија на Google Play-у и раније приступајте новим функцијама и исправкама грешака</string>
   <string name="_2fa_code">2FA код</string>
-  <string name="number_of_uploads">Мој лимит за скорашња отпремања</string>
-  <string name="maximum_limit">Максимални лимит</string>
-  <string name="invalid_zero">Нула није важећа</string>
-  <string name="invalid_input">Неважећи унос</string>
-  <string name="maximum_limit_alert">Није могуће приказати више од 500</string>
-  <string name="enter_valid">Унесите важећи број</string>
-  <string name="cannot_be_zero">Граница отпремања не може бити 0</string>
-  <string name="set_limit">Ограничење за недавна отпремања</string>
-  <string name="login_failed_2fa_not_supported">Двофакторска аутентификација тренутно није подржана.</string>
   <string name="logout_verification">Заиста желите да се одјавите?</string>
   <string name="commons_logo">Лого Оставе</string>
   <string name="commons_website">Веб-сајт Оставе</string>
   <string name="commons_facebook">Фејсбук страница Оставе</string>
   <string name="commons_github">Изворни код на Github-у</string>
-  <string name="background_image">Позадинска слика</string>
   <string name="mediaimage_failed">Медијска слика неуспешна</string>
-  <string name="no_image_found">Слика није пронађена</string>
   <string name="no_subcategory_found">Поткатегорије нису пронађене</string>
   <string name="no_parentcategory_found">Надређене категорије нису пронађене</string>
-  <string name="upload_image">Отпреми слику</string>
   <string name="welcome_image_mount_zao">Планина Зао</string>
   <string name="welcome_image_llamas">Ламе</string>
   <string name="welcome_image_rainbow_bridge">Дугин мост</string>
   <string name="welcome_image_tulip">Тулипан</string>
-  <string name="welcome_image_no_selfies">Без селфија</string>
-  <string name="welcome_image_proprietary">Власничка слика</string>
   <string name="welcome_image_welcome_wikipedia">Добродошлица Википедији</string>
   <string name="welcome_image_welcome_copyright">Добродошлица за ауторска права</string>
   <string name="welcome_image_sydney_opera_house">Сиднејска опера</string>
@@ -238,18 +201,12 @@
   <string name="navigation_item_logout">Одјави ме</string>
   <string name="navigation_item_info">Упутство</string>
   <string name="navigation_item_notification">Обавештења</string>
-  <string name="navigation_item_featured_images">Изабрана</string>
   <string name="navigation_item_review">Прегледај</string>
-  <string name="nearby_needs_permissions">Оближња места не могу да се приказују без дозволе за локацију</string>
   <string name="no_description_found">опис није пронађен</string>
   <string name="nearby_info_menu_commons_article">Страница датотеке на Остави</string>
   <string name="nearby_info_menu_wikidata_article">Ставка на Википодацима</string>
   <string name="nearby_info_menu_wikipedia_article">Википедијски чланак</string>
-  <string name="error_while_cache">Грешка при кеширању слика</string>
-  <string name="title_info">Јединствен описни наслов за датотеку, који ће бити име датотеке. Можете да користите обични језик са размацима. Не треба уносити екстензију датотеке</string>
   <string name="description_info">Молимо да опишете датотеку колико је то могуће: Где је направљена? Шта приказује? Шта је контекст? Опишите објекте и/или особе. Откријте информације које се не могу лако погодити, на пример доба дана ако је у питању пејзаж. Ако датотека приказује нешто необично, молимо да објасните шта је то чини необичном.</string>
-  <string name="upload_image_too_dark">Ова слика је претамна; заиста желите да је отпремите? Викимедијина остава је само за слике са енциклопедијском вредношћу.</string>
-  <string name="upload_image_blurry">Ова слика је мутна; заиста желите да је отпремите? Викимедијина остава је само за слике са енциклопедијском вредношћу.</string>
   <string name="upload_problem_exist">Потенцијални проблеми са овом сликом:</string>
   <string name="upload_problem_image_dark">Слика је сувише тамна.</string>
   <string name="upload_problem_image_blurry">Слика је мутна.</string>
@@ -258,7 +215,6 @@
   <string name="upload_problem_fbmd">Молимо Вас да само отпремате слике које сте ви направили. Не отпремајте слике које сте пронашли на другим налозима на Фејсбуку.</string>
   <string name="upload_problem_do_you_continue">Желите ли још увек да отпремите ову слику?</string>
   <string name="internet_downloaded">Молимо Вас да отпремате слике које сте ви направили. Не отпремајте слике које сте преузели са интернета.</string>
-  <string name="give_permission">Давање дозволе</string>
   <string name="use_external_storage" fuzzy="true">Користи спољашње складиште</string>
   <string name="use_external_storage_summary" fuzzy="true">Чување слика снимљених камером у апликацији на вашем уређају</string>
   <string name="login_to_your_account">Пријава на налог</string>
@@ -269,9 +225,6 @@
   <string name="nominate_deletion">Номиновање за брисање</string>
   <string name="nominated_for_deletion">Ова слика је била номинована за брисање</string>
   <string name="nominated_see_more">Погледајте веб-страницу за више информација</string>
-  <string name="nominating_file_for_deletion">Предлагање %1$s за брисање.</string>
-  <string name="nominating_for_deletion_status">Предлагање датотеке %1$s за брисање.</string>
-  <string name="view_browser">Види у претраживачу</string>
   <string name="skip_login">Прескочи</string>
   <string name="navigation_item_login">Пријави ме</string>
   <string name="skip_login_title">Заиста желите да прескочите пријаву?</string>
@@ -279,16 +232,8 @@
   <string name="login_alert_message">Пријавите се да бисте користили ову функцију</string>
   <string name="copy_wikicode">Копирај викитекст у оставу</string>
   <string name="wikicode_copied">Викитекст је копиран у оставу</string>
-  <string name="nearby_location_has_not_changed">Локација није промењена.</string>
   <string name="nearby_location_not_available">„У близини” можда не ради како треба. Локација није доступна.</string>
   <string name="location_permission_rationale_nearby">Потребна је дозвола за приказивање листе локација у близини</string>
-  <string name="get_directions">Добити упутства</string>
-  <string name="read_article">Прочитај чланак</string>
-  <string name="notifications_welcome">Добро дошли на Викимедијину оставу, %1$s! Драго нам је што сте овде.</string>
-  <string name="notifications_talk_page_message">%1$s је оставио поруку на вашој страници за разговор</string>
-  <string name="notifications_thank_you_edit">Хвала вам за прављење измене</string>
-  <string name="notifications_mention">%1$s Вас је поменуо на страници %2$s.</string>
-  <string name="toggle_view_button">Пребаци приказ</string>
   <string name="nearby_directions">Упутства</string>
   <string name="nearby_wikidata">Википодаци</string>
   <string name="nearby_wikipedia">Википедија</string>
@@ -297,10 +242,8 @@
   <string name="about_faq">ЧПП</string>
   <string name="welcome_skip_button">Прескочи упутство</string>
   <string name="no_internet">Интернет није доступан</string>
-  <string name="internet_established">Интернет је доступан</string>
   <string name="error_notifications">Грешка при добављању обавештења</string>
   <string name="error_review">Грешка при преузимању слике за преглед. Притисните освежи да бисте покушали поново.</string>
-  <string name="error_review_categories">Грешка при преузимању категорија слика за преглед. Притисните освежи да би сте покушали поново.</string>
   <string name="no_notifications">Обавештења нису пронађена</string>
   <string name="about_translate">Превођење</string>
   <string name="about_translate_title">Језици</string>
@@ -308,10 +251,7 @@
   <string name="about_translate_proceed">Настави</string>
   <string name="about_translate_cancel">Откажи</string>
   <string name="retry">Покушај поново</string>
-  <string name="showcase_view_got_it_button">Разумем</string>
   <string name="showcase_view_whole_nearby_activity">Ово су места у Вашој близини којима је потребна слика да илуструје њихове чланке на Википедији.\n\nКликом на \"ПРЕТРАЖИТЕ ОВУ ОБЛАСТ\" закључава се мапа и покреће претрагу у близини те локације.</string>
-  <string name="showcase_view_list_icon">Додир овог дугмета даће вам листу ових места</string>
-  <string name="showcase_view_plus_fab">Можете да отпремите слику за било које место из своје галерије или камере</string>
   <string name="no_images_found">Слике нису пронађене.</string>
   <string name="error_loading_images">Дошло је до грешке при учитавању слика.</string>
   <string name="image_uploaded_by">Отпремио/ла: %1$s</string>
@@ -321,12 +261,10 @@
   <string name="app_widget_heading">Слика дана</string>
   <string name="menu_search_button">Претражи</string>
   <string name="search_commons">Претрага Оставе</string>
-  <string name="images_not_found">Нису пронађене слике које одговарају %1$s</string>
   <string name="title_activity_search">Претрага</string>
   <string name="search_recent_header">Недавне претраге:</string>
   <string name="provider_searches">Недавнo претражени упити</string>
   <string name="error_loading_categories">Дошло је до грешке при учитавању категорија.</string>
-  <string name="error_loading_subcategories">Дошло је до грешке при учитавању поткатегорија.</string>
   <string name="search_tab_title_media">Медији</string>
   <string name="search_tab_title_categories">Категорије</string>
   <string name="explore_tab_title_featured">Изабрано</string>
@@ -350,9 +288,7 @@
   <string name="wrong">Погрешан одговор</string>
   <string name="quiz_screenshot_question">Желите ли да отпремите овај снимак екрана?</string>
   <string name="share_app_title">Дели апликацију</string>
-  <string name="share_coordinates_not_present">Координате нису биле наведене током избора слике</string>
   <string name="error_fetching_nearby_places">Грешка при добављању места у близини.</string>
-  <string name="add_description">+ Додај опис</string>
   <string name="no_recent_searches">Нема недавних претрага</string>
   <string name="delete_recent_searches_dialog">Да ли сте сигурни да желите да очистите своју историју претраге?</string>
   <string name="delete_search_dialog">Да ли желите да избришете ову претрагу?</string>
@@ -385,20 +321,16 @@
   <string name="read_notifications" fuzzy="true">Обавештења (архивирана)</string>
   <string name="display_nearby_notification">Прикажи обавештење у близини</string>
   <string name="display_nearby_notification_summary" fuzzy="true">Притисните овде да бисте видели најближе место којем треба слика</string>
-  <string name="no_close_nearby">Нису пронађена места у близини близу вас</string>
   <string name="list_sheet">Списак</string>
   <string name="storage_permission">Дозвола за складиштење</string>
   <string name="write_storage_permission_rationale_for_image_share">Потребна нам је ваша дозвола да бисмо приступили спољашњем складишту вашег уређаја како бисмо отпремали слике.</string>
   <string name="nearby_notification_dismiss_message">Више нећете видети најближе место којем требају слике. Међутим, ако желите, можете поново да омогућите ово обавештење у Подешавањима.</string>
   <string name="step_count" fuzzy="true">Корак %1$d од %2$d</string>
-  <string name="image_in_set_label">Слика %1$d у скупу</string>
   <string name="next">Следеће</string>
   <string name="previous">Претходно</string>
   <string name="submit">Пошаљи</string>
   <string name="upload_title_duplicate" fuzzy="true">Већ постоји датотека са именом %1$s. Заиста желите да наставите?</string>
   <string name="map_application_missing">Није могуће пронаћи апликацију компатибилне мапе на вашем уређају. Инсталирајте апликацију мапе да бисте користили ову функцију.</string>
-  <string name="navigation_item_bookmarks">Обележивачи</string>
-  <string name="title_activity_bookmarks">Обележивачи</string>
   <string name="title_page_bookmarks_pictures">Слике</string>
   <string name="title_page_bookmarks_locations">Локације</string>
   <string name="menu_bookmark">Додај/уклони обележивач</string>
@@ -412,13 +344,6 @@
   <string name="deletion_reason_not_interesting">Ова слика није занимљива за енциклопедију</string>
   <string name="uploaded_by_myself">Отпремио/ла сам на %1$s, користи се у чланку/цима — %2$d.</string>
   <string name="no_uploads">Добро дошли на Оставу!\n\nОтпремите прве медије додиром дугмета за додавање.</string>
-  <string name="desc_language_Worldwide">Светски</string>
-  <string name="desc_language_America">Америка</string>
-  <string name="desc_language_Europe">Европа</string>
-  <string name="desc_language_Middle_East">Средњи исток</string>
-  <string name="desc_language_Africa">Африка</string>
-  <string name="desc_language_Asia">Азија</string>
-  <string name="desc_language_Pacific">Пацифик</string>
   <string name="no_categories_selected">Категорије нису изабране</string>
   <string name="no_categories_selected_warning_desc" fuzzy="true">Слике без категорија ретко су употребљиве. Заиста желите да пошаљете без избора категорија?</string>
   <string name="upload_flow_all_images_in_set">(За све слике у скупу)</string>
@@ -434,7 +359,6 @@
   <string name="display_campaigns">Прикажи кампање</string>
   <string name="display_campaigns_explanation">Погледајте текуће кампање</string>
   <string name="this_function_needs_network_connection">Ова функција захтева мрежну везу. Проверите подешавања везе.</string>
-  <string name="bad_token_error_proposed_solution">Отпремање није успело због проблема са токеном за уређивање. Покушајте да се пријавите поново.</string>
   <string name="error_processing_image">Дошло је до грешке током обраде слике. Молим вас, покушајте поново!</string>
   <string name="getting_edit_token">Добијање токена за уређивање</string>
   <string name="check_category_adding_template">Додавање шаблона за проверу категорије</string>
@@ -445,18 +369,11 @@
   <string name="check_category_success_message">Затражена провера категорије за %1$s</string>
   <string name="check_category_failure_message">Није могуће затражити проверу категорије за %1$s</string>
   <string name="check_category_toast">Захтевање провере категорије за %1$s</string>
-  <string name="nominate_for_deletion_edit_file_page">Додавање поруке за брисање у датотеку</string>
   <string name="nominate_for_deletion_done">Урађено</string>
-  <string name="nominate_for_deletion_notify_user">Обавештавање корисника на страници за разговор</string>
-  <string name="nominate_for_deletion_edit_deletion_request_log">Додавање датотеке у дневник захтева за брисање</string>
-  <string name="nominate_for_deletion_create_deletion_request">Креирање подстранице захтева за брисање</string>
-  <string name="notsure">Несигурно</string>
   <string name="send_thank_success_title">Слање захвалнице: Успешно</string>
   <string name="send_thank_success_message">Успешно послата захвалница на %1$s</string>
   <string name="send_thank_failure_message">Није успело слање захвалнице %1$s</string>
   <string name="send_thank_failure_title">Слање захвалнице: Није успело</string>
-  <string name="send_thank_send">Слање захвалница</string>
-  <string name="send_thank_notification_title">Слање захвалница</string>
   <string name="send_thank_toast">Слање захвалница за %1$s</string>
   <string name="review_copyright">Да ли прати правила ауторских права?</string>
   <string name="review_category">Да ли је ово коректно категоризовано?</string>
@@ -477,7 +394,6 @@
   <string name="menu_option_read" fuzzy="true">Прикажи архивирано</string>
   <string name="menu_option_unread">Прикажи непрочитано</string>
   <string name="error_occurred_in_picking_images">Дошло је до грешке при избору слика</string>
-  <string name="image_chooser_title">Одабир слика за отпремање</string>
   <string name="please_wait">Сачекајте…</string>
   <string name="welcome_do_upload_content_description">Примери добрих слика за отпремање на Оставу</string>
   <string name="welcome_dont_upload_content_description">Примери слика које нису за отпремање</string>
@@ -501,7 +417,6 @@
   <string name="dialog_box_text_nomination">Зашто би %1$s требало обрисати?</string>
   <string name="review_is_uploaded_by">Датотека %1$s је отпремљена од стране: %2$s</string>
   <string name="default_description_language">Подразумевани језик отписа</string>
-  <string name="delete_helper_make_deletion_toast">Покушавање предлагања %1$s за брисање</string>
   <string name="delete_helper_show_deletion_title">Предлагање за брисање</string>
   <string name="delete_helper_show_deletion_title_success">Успешно</string>
   <string name="delete_helper_show_deletion_message_if">Номинован %1$s за брисање.</string>
@@ -510,11 +425,9 @@
   <string name="delete_helper_ask_spam_selfie">Селфи</string>
   <string name="delete_helper_ask_spam_blurry">Замагљено</string>
   <string name="delete_helper_ask_spam_nonsense">Бесмислено</string>
-  <string name="delete_helper_ask_spam_other">Остало</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Фото репортажа</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Насумична фотографија са интерната</string>
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
-  <string name="delete_helper_ask_reason_copyright_other">Остало</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Зато што је то</string>
   <string name="share_image_via">Подели слику преко</string>
   <string name="no_achievements_yet">Још нисте допринели</string>

@@ -75,13 +75,11 @@
     <item quantity="many">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
     <item quantity="other">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
   </plurals>
-  <string name="title_activity_explore">استكشف</string>
   <string name="navigation_item_explore">استكشف</string>
   <string name="preference_category_appearance">المظهر</string>
   <string name="preference_category_general">عام</string>
   <string name="preference_category_feedback">التعليقات</string>
   <string name="preference_category_privacy">الخصوصية</string>
-  <string name="preference_category_location">الموقع</string>
   <string name="app_name">المشاعات</string>
   <string name="bullet">•</string>
   <string name="menu_settings">الإعدادات</string>
@@ -121,14 +119,12 @@
   <string name="share_description_hint">الوصف</string>
   <string name="share_caption_hint" fuzzy="true">العنوان (قيد 255 حرف)</string>
   <string name="login_failed_network">لا يمكن تسجيل الدخول - فشل في شبكة الاتصال</string>
-  <string name="login_failed_wrong_credentials">غير قادر على تسجيل الدخول - يُرجَى التحقق من اسم المستخدم وكلمة المرور الخاصين بك</string>
   <string name="login_failed_throttled">الكثير من المحاولات غير الناجحة. الرجاء المحاولة مرة أخرى في بضع دقائق.</string>
   <string name="login_failed_blocked">عذراً، لقد تم منع هذا المستخدم على كومنز</string>
   <string name="login_failed_2fa_needed">يجب توفير رمز التحقق المزدوج.</string>
   <string name="login_failed_generic">فشل تسجيل الدخول</string>
   <string name="share_upload_button">ارفع</string>
   <string name="multiple_share_base_title">اسم هذه المجموعة</string>
-  <string name="add_set_name_toast">يُرجَى تقديم اسم لهذه المجموعة</string>
   <string name="provider_modifications">تعديلات</string>
   <string name="menu_upload_single">ارفع</string>
   <string name="categories_search_text_hint">تصنيفات البحث</string>
@@ -136,14 +132,11 @@
   <string name="menu_save_categories">حفظ</string>
   <string name="refresh_button">أنعش</string>
   <string name="display_list_button">القائمة</string>
-  <string name="gps_disabled">عطل نظام الملاحة العالمي GPS بجهازك. أترغب في التنشيط؟</string>
-  <string name="enable_gps">تفعيل GPS</string>
   <string name="contributions_subtitle_zero" fuzzy="true">لا مرفوعات بعد</string>
   <string name="categories_not_found">لا توجد تصنيفات تطابق %1$s</string>
   <string name="depictions_not_found">لا توجد عناصر ويكيداتا مطابقة ل   s$%1</string>
   <string name="no_child_classes">%1$s لا يملك تصنيف الأطفال</string>
   <string name="no_parent_classes">لا يملك تصنيف الأهل  s$%1</string>
-  <string name="depictions_image_not_found">لا توجد صورة للتصوير</string>
   <string name="categories_skip_explanation">أضف تصنيفات لجعل صورك أكثر قابلية للاكتشاف على ويكيميديا ​​كومنز.\n\nابدأ الكتابة لإضافة تصنيفات.</string>
   <string name="categories_activity_title">تصنيفات</string>
   <string name="title_activity_settings">الإعدادات</string>
@@ -160,7 +153,6 @@
   <string name="menu_feedback">إرسال ملاحظات (عبر البريد الإلكتروني)</string>
   <string name="no_email_client">عميل البريد الإلكتروني غير مثبت</string>
   <string name="provider_categories">التصانيف المستخدمة مؤخرا</string>
-  <string name="provider_depictions">تصوير المستخدم حديثا</string>
   <string name="waiting_first_sync">ينتظر أول مزامنة…</string>
   <string name="no_uploads_yet">لم ترفع بعد أية صور.</string>
   <string name="menu_retry_upload">إعادة المحاولة</string>
@@ -169,8 +161,6 @@
   <string name="menu_download">نزّل</string>
   <string name="preference_license">الرخصة الافتراضية</string>
   <string name="use_previous">استخدم العنوان والوصف السابق</string>
-  <string name="allow_gps">الحصول تلقائيا على الموقع الحالي</string>
-  <string name="allow_gps_summary">يسترد الموقع الحالي إذا لم يتم وسم الصورة جغرافيا، وكان هناك وسم جغرافي عليها، تحذير: سيكشف هذا عن موقعك الحالي.</string>
   <string name="preference_theme">الوضع الليلي</string>
   <string name="license_name_cc_by_sa_four">النسبة-الترخيص بالمثل 4.0</string>
   <string name="license_name_cc_by_four">الإحالة 4.0</string>
@@ -178,20 +168,9 @@
   <string name="license_name_cc_by">الإحالة 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">النسبة-الترخيص بالمثل 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">النسبة-الترخيص بالمثل 3.0 (النمسا)</string>
-  <string name="license_name_cc_by_sa_3_0_de">النسبة-الترخيص بالمثل (ألمانيا)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">النسبة-الترخيص بالمثل (إستونيا)</string>
-  <string name="license_name_cc_by_sa_3_0_es">النسبة-الترخيص بالمثل (إسبانيا)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">النسبة-الترخيص بالمثل (كرواتيا)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">النسبة-الترخيص بالمثل (لوكسمبورغ)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">النسبة-الترخيص بالمثل (هولندا)</string>
-  <string name="license_name_cc_by_sa_3_0_no">النسبة-الترخيص بالمثل (النرويج)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">النسبة-الترخيص بالمثل (بولندا)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">النسبة-الترخيص بالمثل (رومانيا)</string>
   <string name="license_name_cc_by_3_0">النسبة 3.0</string>
   <string name="license_name_cc_by_sa_4_0">النسبة-الترخيص بالمثل 4.0</string>
   <string name="license_name_cc_by_4_0">النسبة 4.0</string>
-  <string name="license_name_cc_zero">المشاع الإبداعي صفر</string>
   <string name="tutorial_1_text">يستضيف ويكيميديا ​​كومنز معظم الصور المستخدمة في ويكيبيديا.</string>
   <string name="tutorial_1_subtext">تساعد صورك في تثقيف الناس حول العالم!</string>
   <string name="tutorial_2_text">يُرجَى رفع الصور الملتقطة أو المنشأة بالكامل بنفسك:</string>
@@ -217,7 +196,6 @@
   <string name="detail_panel_cats_loading">جارٍ التحميل…</string>
   <string name="detail_panel_cats_none">لا شيء محدد</string>
   <string name="detail_caption_empty">لا تعليق</string>
-  <string name="detail_depiction_empty">لا يوجد تصوير</string>
   <string name="detail_description_empty">لا وصف</string>
   <string name="detail_discussion_empty">لا يوجد نقاش</string>
   <string name="detail_license_empty">ترخيص غير معلوم</string>
@@ -226,13 +204,9 @@
   <string name="read_storage_permission_rationale">صلاحية مطلوبة: قراءة وحدة التخزين الخارجية، لا يمكن للتطبيق الوصول إلى معرض الصور الخاص بك بدونها.</string>
   <string name="write_storage_permission_rationale">صلاحية مطلوبة: اكتب وحدة التخزين الخارجية، لا يمكن للتطبيق الوصول إلى معرض الصور/الكاميرا الخاصة بك بدونها.</string>
   <string name="location_permission_title">جارٍ طلب إذن الموقع</string>
-  <string name="location_permission_rationale">صلاحية اختيارية: احصل على الموقع الحالي لاقتراحات التصنيفات</string>
   <string name="ok">موافق</string>
-  <string name="title_activity_nearby">الأماكن القريبة</string>
-  <string name="no_nearby">الأماكن القريبة غير متوفرة</string>
   <string name="warning">تحذير</string>
   <string name="duplicate_image_found">تم العثور على صورة مكررة</string>
-  <string name="upload_image_duplicate">هذا الملف موجود بالفعل في كومنز، هل أنت متأكد أنك تريد المتابعة؟</string>
   <string name="upload">رفع</string>
   <string name="yes">نعم</string>
   <string name="no">لا</string>
@@ -249,32 +223,18 @@
   <string name="become_a_tester_title">انضم لمختبري اصدارات Beta (بيتا)</string>
   <string name="become_a_tester_description">يمكنك الاشتراك في القناة التجريبية على جوجل بلاي والحصول على إمكانية الوصول المبكر إلى الميزات الجديدة وإصلاحات الأخطاء</string>
   <string name="_2fa_code">رمز التحقق المزدوج 2FA</string>
-  <string name="number_of_uploads">حد الرفع الحالي</string>
-  <string name="maximum_limit">الحد الأقصى</string>
-  <string name="invalid_zero">الصفر غير صالح</string>
-  <string name="invalid_input">إدخال غير صالح</string>
-  <string name="maximum_limit_alert">لا يمكن عرض أكثر من 500</string>
-  <string name="enter_valid">أدخل رقما صحيحا</string>
-  <string name="cannot_be_zero">لا يمكن أن يكون حد الرفع 0</string>
-  <string name="set_limit">حد الرفع الأخير</string>
-  <string name="login_failed_2fa_not_supported">التحقق المزدودج 2FA غير مدعوم حاليا</string>
   <string name="logout_verification">أترغب فعلا في الخروج؟</string>
   <string name="commons_logo">شعار كومنز</string>
   <string name="commons_website">موقع كومنز</string>
   <string name="commons_facebook">صفحة فيسبوك الخاصة بكومنز</string>
   <string name="commons_github">كود مصدر كومنز في غيت هب</string>
-  <string name="background_image">صورة الخلفية</string>
   <string name="mediaimage_failed">صورة الوسائط فشلت</string>
-  <string name="no_image_found">لم يتم العثور على صورة</string>
   <string name="no_subcategory_found">لم يتم العثور على تصنيفات فرعية.</string>
   <string name="no_parentcategory_found">لم يتم العثور على تصنيفات رئيسية.</string>
-  <string name="upload_image">رفع صورة</string>
   <string name="welcome_image_mount_zao">جبل زوا</string>
   <string name="welcome_image_llamas">لاماس</string>
   <string name="welcome_image_rainbow_bridge">جسر قوس قزح</string>
   <string name="welcome_image_tulip">تيوليب</string>
-  <string name="welcome_image_no_selfies">لا صور سيلفي</string>
-  <string name="welcome_image_proprietary">صورة ذات حقوق</string>
   <string name="welcome_image_welcome_wikipedia">مرحبا في ويكيبيديا</string>
   <string name="welcome_image_welcome_copyright">حقوق نسخ الترحيب</string>
   <string name="welcome_image_sydney_opera_house">بيت أوبرا سيدني</string>
@@ -290,19 +250,13 @@
   <string name="navigation_item_logout">تسجيل الخروج</string>
   <string name="navigation_item_info">مقدمة تعليمية</string>
   <string name="navigation_item_notification">إشعارات</string>
-  <string name="navigation_item_featured_images">مميزة</string>
   <string name="navigation_item_review">مراجعة</string>
-  <string name="nearby_needs_permissions">لا يمكن عرض الأماكن القريبة بدون أذونات الموقع</string>
   <string name="no_description_found">لم يتم العثور على وصف</string>
   <string name="nearby_info_menu_commons_article">صفحة ملف كومنز</string>
   <string name="nearby_info_menu_wikidata_article">عنصر ويكي بيانات</string>
   <string name="nearby_info_menu_wikipedia_article">مقالة ويكيبيديا</string>
-  <string name="error_while_cache">خطأ أثناء تخزين الصور</string>
-  <string name="title_info">عنوان وصفي فريد للملف، والذي سيكون بمثابة اسم الملف، يمكنك استخدام لغة واضحة مع مسافات، لا تقم بتضمين امتداد الملف</string>
   <string name="description_info">يُرجَى وصف الوسائط قدر الإمكان: أين تم التقاطها؟ ما تظهر؟ ما هو السياق؟ يُرجَى وصف الأشياء أو الأشخاص، اكشف المعلومات التي لا يمكن تخمينها بسهولة، على سبيل المثال الوقت في اليوم إذا كان منظرا طبيعيا، إذا أظهرت الوسائط شيئا غير عادي، فيُرجَى توضيح ما يجعله غير عادي.</string>
   <string name="caption_info" fuzzy="true">(يرجى كتابة وصف موجز للصورة (قيد ٢٥٥ حرف</string>
-  <string name="upload_image_too_dark">هذه الصورة مظلمة للغاية، هل أنت متأكد من رغبتك في رفعها؟ ويكيميديا ​​كومنز للصور ذات القيمة الموسوعية فقط.</string>
-  <string name="upload_image_blurry">هذه الصورة ضبابية، هل أنت متأكد من رغبتك في رفعها؟ ويكيميديا ​​كومنز للصور ذات القيمة الموسوعية فقط.</string>
   <string name="upload_problem_exist">مشاكل محتملة في هذه الصورة:</string>
   <string name="upload_problem_image_dark">الصورة مظلمة للغاية.</string>
   <string name="upload_problem_image_blurry">الصورة ضبابية.</string>
@@ -312,7 +266,6 @@
   <string name="upload_problem_do_you_continue">هل ما زلت تريد رفع هذه الصورة؟</string>
   <string name="upload_problem_image">تم العثور على مشاكل في الصورة</string>
   <string name="internet_downloaded">يُرجَى فقط رفع الصور التي التقطتها بنفسك، لا ترفع الصور التي قمت بتنزيلها من الإنترنت.</string>
-  <string name="give_permission">إعطاء السماح</string>
   <string name="use_external_storage" fuzzy="true">استخدم تخزينا خارجيا</string>
   <string name="use_external_storage_summary" fuzzy="true">حفظ الصور الملتقطة بالكاميرا داخل التطبيق على جهازك</string>
   <string name="login_to_your_account">تسجيل الدخول إلى حسابك</string>
@@ -323,9 +276,6 @@
   <string name="nominate_deletion">ترشيح للحذف</string>
   <string name="nominated_for_deletion">الصورة تم ترشيحها للحذف.</string>
   <string name="nominated_see_more">انظر صفحة الويب للتفاصيل</string>
-  <string name="nominating_file_for_deletion">جارٍ ترشيح %1$s للحذف.</string>
-  <string name="nominating_for_deletion_status">جارٍ ترشيح الملف للحذف: %1$s</string>
-  <string name="view_browser">عرض في المتصفح</string>
   <string name="skip_login">تجاوز</string>
   <string name="navigation_item_login">تسجيل الدخول</string>
   <string name="skip_login_title">هل تريد حقا تخطي تسجيل الدخول؟</string>
@@ -333,16 +283,8 @@
   <string name="login_alert_message">الرجاء تسجيل الدخول لاستخدام هذه الميزة</string>
   <string name="copy_wikicode">انسخ نص الويكي إلى الكليب بورد</string>
   <string name="wikicode_copied">نص الويكي تم نسخه إلى الكليب بورد</string>
-  <string name="nearby_location_has_not_changed">الموقع لم يتغير.</string>
   <string name="nearby_location_not_available">قد لا تعمل الأجهزة المجاورة بشكل صحيح، الموقع غير متوفر.</string>
   <string name="location_permission_rationale_nearby">صلاحية مطلوبة لعرض قائمة بالأماكن القريبة</string>
-  <string name="get_directions">الحصول على الاتجاهات</string>
-  <string name="read_article">قراءة المقالة</string>
-  <string name="notifications_welcome">مرحبا بكم في ويكيمديا كومنز، %1$s! نحن سعداء لأنك هنا.</string>
-  <string name="notifications_talk_page_message">%1$s رسالة على صفحة الحديث</string>
-  <string name="notifications_thank_you_edit">شكرا لك لعمل تعديل</string>
-  <string name="notifications_mention">%1$s ذكر لك على %2$s.</string>
-  <string name="toggle_view_button">تبديل العرض</string>
   <string name="nearby_directions">الاتجاهات</string>
   <string name="nearby_wikidata">ويكي بيانات</string>
   <string name="nearby_wikipedia">ويكيبيديا</string>
@@ -351,10 +293,8 @@
   <string name="about_faq">الأسئلة المتكررة</string>
   <string name="welcome_skip_button">تخطي البرنامج التعليمي</string>
   <string name="no_internet">الإنترنت غير متوفر</string>
-  <string name="internet_established">الإنترنت متاح</string>
   <string name="error_notifications">خطأ في جلب الإشعارت</string>
   <string name="error_review">خطأ في جلب الصورة للمراجعة، اضغط على تحديث للمحاولة مرة أخرى.</string>
-  <string name="error_review_categories">خطأ في جلب تصنيات الصورة للمراجعة، اضغط على تحديث للمحاولة مرة أخرى.</string>
   <string name="no_notifications">لم يتم العثور على إشعارات</string>
   <string name="about_translate">ترجمة</string>
   <string name="about_translate_title">اللغات</string>
@@ -362,11 +302,8 @@
   <string name="about_translate_proceed">تقدم</string>
   <string name="about_translate_cancel">إلغاء</string>
   <string name="retry">إعادة المحاولة</string>
-  <string name="showcase_view_got_it_button">فهمت!</string>
   <string name="showcase_view_whole_nearby_activity">هذه هي الأماكن القريبة منك التي تحتاج إلى صور لتوضيح مقالات ويكيبيديا الخاصة بها. \n\nيؤدي النقر فوق \"البحث في هذه المنطقة\" إلى إغلاق الخريطة وإطلاق بحث قريب حول هذا الموقع.</string>
   <string name="showcase_view_no_longer_exists">هذه الصفحة لم تعد موجودة.</string>
-  <string name="showcase_view_list_icon">يؤدي النقر على هذا الزر إلى جلب قائمة بهذه الأماكن</string>
-  <string name="showcase_view_plus_fab">يمكنك رفع صورة لأي مكان من معرضك أو كاميرتك</string>
   <string name="no_images_found">لم يتم العثور على صور!</string>
   <string name="error_loading_images">حدث خطأ أثناء تحميل الصور.</string>
   <string name="image_uploaded_by">%1$s :تم الرفع بواسطة</string>
@@ -376,13 +313,11 @@
   <string name="app_widget_heading">صورة اليوم</string>
   <string name="menu_search_button">بحث</string>
   <string name="search_commons">ابحث في كومنز</string>
-  <string name="images_not_found">لم يتم العثور على صور مطابقة لـ%1$s</string>
   <string name="title_activity_search">بحث</string>
   <string name="search_recent_header">أحدث عمليات البحث:</string>
   <string name="provider_searches">طلبات البحث التي تم البحث عنها مؤخرا</string>
   <string name="error_loading_categories">حدث خطأ أثناء تحميل التصنيفات.</string>
   <string name="error_loading_depictions">حدث خطأ أثناء تحميل الصور</string>
-  <string name="error_loading_subcategories">حدث خطأ أثناء تحميل التصنيفات الفرعية.</string>
   <string name="search_tab_title_media">وسائط</string>
   <string name="search_tab_title_categories">تصنيفات</string>
   <string name="search_tab_title_depictions">العناصر</string>
@@ -403,7 +338,6 @@
   <string name="screenshot_answer">تُعتبَر لقطات شاشة المواقع الإلكترونية أعمالا مشتقة وتخضع لأي حقوق نشر على الموقع نفسه، ويمكن استخدامها بعد الحصول على إذن من المؤلف، بدون هذا الإذن، يُعتبَر أي فن تقوم بإنشائه بناءً على عملهم نسخة غير مرخصة من قبل المؤلف الأصلي.</string>
   <string name="blurry_image_answer">أحد أهداف كومنز جمع صور عالية الجودة، لذلك; لا يجب رفع صور باهتة; حاول دائما التقاط صور جميلة بإضاءة جيدة.</string>
   <string name="construction_event_answer">الصور التي تظهر التكنولوجيا أو الثقافة موضع ترحيب كبير في كومنز.</string>
-  <string name="warning_for_image_reverts">تحذير: تم حذف أكثر من %1$s من الصور التي رفعلتها، إذا استمر رفع الصور التي تتطلب الحذف، فمن المحتمل أن يتم منعحسابك.</string>
   <string name="congratulatory_message_quiz">لقد حصلت عل %1$s من الإجابات الصحيحة، تهانينا!</string>
   <string name="warning_for_no_answer">حدد أحد الخيارين للإجابة على السؤال</string>
   <string name="user_not_logged_in">انتهت صلاحية جلسة تسجيل الدخول; يُرجَى تسجيل الدخول مرة أخرى.</string>
@@ -413,9 +347,7 @@
   <string name="wrong">إجابة خاطئة</string>
   <string name="quiz_screenshot_question">هل هذه الصورة موافقة للرفع؟</string>
   <string name="share_app_title">شارك التطبيق</string>
-  <string name="share_coordinates_not_present">لم يتم تحديد الإحداثيات أثناء اختيار الصورة</string>
   <string name="error_fetching_nearby_places">خطأ في جلب الأماكن المجاورة.</string>
-  <string name="add_description">+ إضافة الوصف</string>
   <string name="no_recent_searches">لا توجد عمليات بحث حديثة</string>
   <string name="delete_recent_searches_dialog">هل أنت متأكد من أنك تريد مسح سجل بحثك؟</string>
   <string name="delete_search_dialog">هل تريد حذف هذا البحث؟</string>
@@ -448,20 +380,16 @@
   <string name="read_notifications">الإخطارات (مقروءة)</string>
   <string name="display_nearby_notification">عرض الإخطار القريب</string>
   <string name="display_nearby_notification_summary" fuzzy="true">انقر هنا لرؤية أقرب مكان يحتاج إلى صور</string>
-  <string name="no_close_nearby">لم يتم العثور على أماكن قريبة بالقرب منك</string>
   <string name="list_sheet">قائمة</string>
   <string name="storage_permission">سماح التخزين</string>
   <string name="write_storage_permission_rationale_for_image_share">نحتاج إلى سماحك للوصول إلى التخزين الخارجي لجهازك من أجل رفع الصور.</string>
   <string name="nearby_notification_dismiss_message">لن ترى أقرب مكان يحتاج إلى صور بعد الآن، ومع ذلك، يمكنك إعادة تمكين هذا الإشعار في الإعدادات إذا كنت ترغب في ذلك.</string>
   <string name="step_count" fuzzy="true">الخطوة %1$d من %2$d</string>
-  <string name="image_in_set_label">الصورة %1$d في المجموعة</string>
   <string name="next">التالي</string>
   <string name="previous">السابق</string>
   <string name="submit">إرسال</string>
   <string name="upload_title_duplicate" fuzzy="true">يوجد ملف باسم الملف %1$s، هل أنت متأكد أنك تريد المتابعة؟</string>
   <string name="map_application_missing">لا يمكن العثور على تطبيق خرائط متوافق على جهازك; الرجاء تثبيت تطبيق خرائط لاستخدام هذه الميزة.</string>
-  <string name="navigation_item_bookmarks">العلامات</string>
-  <string name="title_activity_bookmarks">العلامات</string>
   <string name="title_page_bookmarks_pictures">الصور</string>
   <string name="title_page_bookmarks_locations">المواقع</string>
   <string name="menu_bookmark">إضافة إلى/إزالة من العلامات</string>
@@ -476,13 +404,6 @@
   <string name="deletion_reason_not_interesting">آسف هذه الصورة ليست مثيرة للاهتمام لموسوعة</string>
   <string name="uploaded_by_myself">رفعته بنفسي في %1$s، مستخدم في %2$d مقالة(ات).</string>
   <string name="no_uploads">مرحبا بك في كومنز! \n\nارفع الوسائط الأولى عن طريق النقر على زر الإضافة.</string>
-  <string name="desc_language_Worldwide">في جميع أنحاء العالم</string>
-  <string name="desc_language_America">أمريكا</string>
-  <string name="desc_language_Europe">أوروبا</string>
-  <string name="desc_language_Middle_East">الشرق الأوسط</string>
-  <string name="desc_language_Africa">أفريقيا</string>
-  <string name="desc_language_Asia">آسيا</string>
-  <string name="desc_language_Pacific">المحيط الهادئ</string>
   <string name="no_categories_selected">لا توجد تصنيفات مختارة</string>
   <string name="no_categories_selected_warning_desc">نادرًا ما تكون الصور الخالية من التصنيفات قابلة للاستخدام، هل أنت متأكد أنك تريد الإرسال دون تحديد التصنيفات؟</string>
   <string name="no_depictions_selected">لم يتم تحديد الصور</string>
@@ -502,7 +423,6 @@
   <string name="display_campaigns_explanation">انظر الحملات الجارية</string>
   <string name="nearby_campaign_dismiss_message">لن ترى الحملات بعد الآن، ومع ذلك، يمكنك إعادة تمكين هذا الإشعار في الإعدادات إذا كنت ترغب.</string>
   <string name="this_function_needs_network_connection">تتطلب هذه الوظيفة الاتصال بالشبكة; يُرجَى التحقق من إعدادات اتصالك.</string>
-  <string name="bad_token_error_proposed_solution">فشل التحميل بسبب مشكلات في الرمز المميز للتعديل تُرجَى محاولة تسجيل الخروج والدخول مرة ​​أخرى.</string>
   <string name="error_processing_image">حدث خطأ أثناء معالجة الصورة. رجاءً حاول مرة أخرى!</string>
   <string name="getting_edit_token">الحصول على رمز للتحرير</string>
   <string name="check_category_adding_template">تجري إضافة قالب لفخص التصنيف</string>
@@ -513,18 +433,11 @@
   <string name="check_category_success_message">تم طلب التحقق من التصنيف %1$s</string>
   <string name="check_category_failure_message">لا يمكن طلب التحقق من التصنيف %1$s</string>
   <string name="check_category_toast">جارٍ طلب التحقق من التصنيف %1$s</string>
-  <string name="nominate_for_deletion_edit_file_page">إضافة رسالة حذف إلى الملف</string>
   <string name="nominate_for_deletion_done">تم</string>
-  <string name="nominate_for_deletion_notify_user">إخطار المستخدم في صفحة النقاش</string>
-  <string name="nominate_for_deletion_edit_deletion_request_log">تجري إضافة الملف لسجل طلبات الحذف</string>
-  <string name="nominate_for_deletion_create_deletion_request">جارٍ إنشاء صفحة طلبات حذف فرعية</string>
-  <string name="notsure">غير متأكد</string>
   <string name="send_thank_success_title">إرسال الشكر: نجاح</string>
   <string name="send_thank_success_message">تم بنجاح إرسال الشكر ل%1$s</string>
   <string name="send_thank_failure_message">أخفق إرسال الشكر ل%1$s</string>
   <string name="send_thank_failure_title">إرسال الشكر: فشل</string>
-  <string name="send_thank_send">جارٍ إرسال الشكر</string>
-  <string name="send_thank_notification_title">إرسال الشكر</string>
   <string name="send_thank_toast">جارٍ إرسال شكرا على %1$s</string>
   <string name="review_copyright">هل يتبع هذا قواعد حقوق النشر؟</string>
   <string name="review_category">هل تم تصنيف هذا بشكل صحيح؟</string>
@@ -556,13 +469,11 @@
   <string name="menu_option_read">عرض المقروءة</string>
   <string name="menu_option_unread">عرض غير المقروءة</string>
   <string name="error_occurred_in_picking_images">حدث خطأ أثناء التقاط الصور</string>
-  <string name="image_chooser_title">اختيار الصور للرفع</string>
   <string name="please_wait">الرجاء الانتظار...</string>
   <string name="images_featured_explanation">الصور المختارة هي صور من مصورين ورسامين ذوي مهارات عالية اختارها مجتمع ويكيميديا ​​كومنز كبعض الأفضل جودة على الموقع.</string>
   <string name="images_via_nearby_explanation">الصور المرفوعة عبر الأماكن القريبة هي الصور المرفوعة عن طريق اكتشاف الأماكن على الخريطة.</string>
   <string name="thanks_received_explanation">تتيح هذه الميزة للمحررين إرسال إشعار شكر للمستخدمين الذين يقومون بتعديلات مفيدة - باستخدام رابط شكر صغير في صفحة التاريخ أو صفحة الفرق.</string>
   <string name="previous_image_caption_description">نسخ العنوان/الوصف السابق</string>
-  <string name="previous_button_tooltip_message">انقر لإعادة استخدام العنوان والوصف الذي أدخلته في صورتك السابقة وتعديله ليناسب الحالي</string>
   <string name="welcome_do_upload_content_description">أمثلة على صور جيدة لرفعها إلى كومنز</string>
   <string name="welcome_dont_upload_content_description">أمثلة على صور لعدم رفعها</string>
   <string name="skip_image">تخطي هذه الصورة</string>
@@ -586,7 +497,6 @@
   <string name="dialog_box_text_nomination">لماذا يجب حذف %1$s؟</string>
   <string name="review_is_uploaded_by">%1$s رُفِع بواسطة: %2$s</string>
   <string name="default_description_language">لغة الوصف الافتراضية</string>
-  <string name="delete_helper_make_deletion_toast">تجري محاولة ترشيح %1$s للحذف</string>
   <string name="delete_helper_show_deletion_title">ترشيح للحذف</string>
   <string name="delete_helper_show_deletion_title_success">نجاح</string>
   <string name="delete_helper_show_deletion_message_if">تم ترشيح %1$s للحذف.</string>
@@ -595,11 +505,9 @@
   <string name="delete_helper_ask_spam_selfie">سيلفي</string>
   <string name="delete_helper_ask_spam_blurry">ضبابية</string>
   <string name="delete_helper_ask_spam_nonsense">كلام فارغ</string>
-  <string name="delete_helper_ask_spam_other">أخرى</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">اضغط على الصورة</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">صورة عشوائية من الإنترنت</string>
   <string name="delete_helper_ask_reason_copyright_logo">شعار</string>
-  <string name="delete_helper_ask_reason_copyright_other">أخرى</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">لأنها</string>
   <string name="category_edit_helper_show_edit_title">تحديث التصنيف</string>
   <string name="category_edit_button_text">تحديث التصنيفات</string>
@@ -620,7 +528,6 @@
   <string name="title_for_parent_classes">تصنيف أولياء الأمور</string>
   <string name="upload_nearby_place_found_title">تم العثور على مكان قريب</string>
   <string name="upload_nearby_place_found_description">هل هذه صورة للمكان %1$؟</string>
-  <string name="title_app_shortcut_explore">استكشف</string>
   <string name="title_app_shortcut_bookmark">العلامات</string>
   <string name="title_app_shortcut_setting">الإعدادات</string>
   <string name="remove_bookmark">أزل من العلامات</string>
@@ -639,8 +546,6 @@
   <string name="load_more">تحميل المزيد</string>
   <string name="nearby_no_results">لم يتم العثور على أي أماكن، جرب تغيير محددات بحثك.</string>
   <string name="add_picture_to_wikipedia_article_title">أضف صورة إلى ويكيبيديا</string>
-  <string name="add_picture_to_wikipedia_instructions_title">التعليمات</string>
   <string name="confirm">تأكيد</string>
   <string name="instructions_title">التعليمات</string>
-  <string name="limited_connection">اتصال محدود</string>
 </resources>

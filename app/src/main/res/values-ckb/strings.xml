@@ -6,13 +6,11 @@
 -->
 <resources>
   <string name="share_license_summary" fuzzy="true">ئەم پەڕەیە مۆڵەتنامەی %1 پێ دەدرێت</string>
-  <string name="title_activity_explore">بگەڕێ</string>
   <string name="navigation_item_explore">بگەڕێ</string>
   <string name="preference_category_appearance">ڕواڵەت</string>
   <string name="preference_category_general">گشتی</string>
   <string name="preference_category_feedback">فیدباک</string>
   <string name="preference_category_privacy">تایبەتێتی</string>
-  <string name="preference_category_location">شوێن</string>
   <string name="app_name">کۆمنز</string>
   <string name="menu_settings">ڕێکخستنەکان</string>
   <string name="intent_share_upload_label">بارکردن بۆ کۆمنز</string>
@@ -71,7 +69,6 @@
   <string name="detail_license_empty">مۆڵەتنامە نەزانراوە</string>
   <string name="menu_refresh">نوێکردنەوە</string>
   <string name="ok">باشە</string>
-  <string name="title_activity_nearby">شوێنە نزیکەکان</string>
   <string name="warning">ئاگاداری</string>
   <string name="yes">بەڵێ</string>
   <string name="no">نەخێر</string>

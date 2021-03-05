@@ -61,8 +61,6 @@
   <string name="menu_save_categories">Qeyd et</string>
   <string name="refresh_button">Yenilə</string>
   <string name="display_list_button">Siyahı</string>
-  <string name="gps_disabled">GPS sizin cihazınızda qeyri-aktivdir. Aktivləşdirmək istəyirsiniz?</string>
-  <string name="enable_gps">GPS-ni aktivləşdir</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Hələlik yüklənməyib</string>
   <string name="categories_not_found">%1$s axtarışına uyğun kateqoriya tapılmadı</string>
   <string name="categories_activity_title">Kateqoriyalar</string>
@@ -76,7 +74,6 @@
   <string name="menu_retry_upload">Yenidən cəhd edin</string>
   <string name="menu_download">Endir</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_zero">CC0</string>
   <string name="welcome_help_button_text">Əlavə məlumat</string>
   <string name="detail_panel_cats_label">Kateqoriyalar</string>
   <string name="detail_panel_cats_loading">Yüklənir...</string>
@@ -93,8 +90,6 @@
   <string name="send_thank_success_title">Təşəkkür uğurla göndərildi</string>
   <string name="send_thank_failure_message">Təşəkkür göndərilə bilmədi %1$s</string>
   <string name="send_thank_failure_title">Təşəkkür göndərilir: Xəta</string>
-  <string name="send_thank_send">Təşəkkür göndərilir</string>
-  <string name="send_thank_notification_title">Təşəkkür göndərilir</string>
   <string name="send_thank_toast">%1$s üçün təşəkkür göndərişi</string>
   <string name="notification_mark_read">Bildiriş oxunmuş olaraq işarələndi</string>
 </resources>

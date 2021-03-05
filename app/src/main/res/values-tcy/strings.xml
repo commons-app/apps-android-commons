@@ -31,12 +31,10 @@
   <plurals name="upload_count_title">
     <item quantity="other">ಒಂಜಿ=%1$d ಮಿತೇರಾಯಿನ</item>
   </plurals>
-  <string name="title_activity_explore">ನಾಡುಲೆ</string>
   <string name="navigation_item_explore">ನಾಡುಲೆ.</string>
   <string name="preference_category_appearance">ಗೋಚರೊ</string>
   <string name="preference_category_general">ಸಾಮಾನ್ಯೊ</string>
   <string name="preference_category_feedback">ಅಬಿಪ್ರಾಯೊ</string>
-  <string name="preference_category_location">ಜಾಗೊ</string>
   <string name="app_name">ಕಾಮನ್ಸ್</string>
   <string name="bullet">•</string>
   <string name="menu_settings">ಸಂಯೋಜನೆಲು</string>
@@ -74,22 +72,18 @@
   <string name="share_title_hint" fuzzy="true">ತರೆಬರವು (ಬೋಡಾಯಿನವು)</string>
   <string name="share_description_hint">ವಿವರಣೆ</string>
   <string name="login_failed_network">ಲಾಗಿನ್ ಅತುಜಿ - ನೆಟ್ವರ್ಕ್ ತಿಕೊಂತಿಜ್ಜಿ</string>
-  <string name="login_failed_wrong_credentials">ಲಾಗಿನ್ ಅಯರಾ ಸಾಧ್ಯ ಇಜ್ಜಿ - ಸದಸ್ಯೆರ್ನ ಪುದರ್ ಬುಕ್ಕೊ ಪ್ರವೇಸೊಪದೊನ್ ಸರಿ ಉಂಡ ತೂಲೆ.</string>
   <string name="login_failed_throttled">ಇರ್ ಮಸ್ತ್ ಪ್ರಯತ್ನ ಮಾಲ್ತರ್. ದಯ ದಿತ್ ಕೆಲ ನಿಮಿಷಟ್ಡತ್ ಬುಕ್ಕ ಪ್ರಯತ್ನ ಮಾಲ್ಪುಲೆ.</string>
   <string name="login_failed_blocked">ಕ್ಷಮೆ ಉಪ್ಪಾಡ್, ಇ ಬಳಕೆದಾರರೆನ್ ಕಾಮನ್ಸ್‌ಟ್ ನಿರ್ಬಂಧ ಮಾಲ್ತೆರ್.</string>
   <string name="login_failed_2fa_needed">ಇರ್ ರಡ್ಡ್ ಅಂಶೊತ ದೃಢೀಕರಣ ಕೋಡ್‌ನ್ ಕೊರ್ಲೆ.</string>
   <string name="login_failed_generic">ಲಾಗಿನ್ ಆಯಾರಾ ಅಯಿಜಿ</string>
   <string name="share_upload_button">ದಿಂಜಾಲೆ</string>
   <string name="multiple_share_base_title">ಈ ಪಟ್ಟಿತ ಪುದಾರ್.</string>
-  <string name="add_set_name_toast">ದಯ ಮಾಲ್ತ್ ಈ ಫೈಲ್‌ಗ್ ಶೀರ್ಷಿಕೆನ್ ಒದಗಾಲೆ.</string>
   <string name="provider_modifications">ಬದಲ್ ಮಂತಿನವು</string>
   <string name="menu_upload_single">ದಿಂಜಾಲೆ</string>
   <string name="categories_search_text_hint">ವರ್ಗಲೇನ್ ನಾಡ್</string>
   <string name="menu_save_categories">ಒರಿಪಾಲೆ</string>
   <string name="refresh_button">ರಿಫ್ರೆಶ್ ಮಲ್ಪುಲೆ</string>
   <string name="display_list_button">ಪಟ್ಟಿ</string>
-  <string name="gps_disabled">ಇರೇನಾ ಈ ಮೊಬೈಲ್ ಡ್ ಜಿಪಿಸ್ ವಜಾ ಅತುಂಡು. ಆಯಿನ್ ಬೇಲೆ</string>
-  <string name="enable_gps">ಜಿಪಿಎಸ್ ಸಕ್ರಿಯ ಮಾಲ್ಪುಲೆ.</string>
   <string name="contributions_subtitle_zero" fuzzy="true">ಇಂದೆಟ್ ಒವೆ ಅಪ್ಲೋಡ್ ಇಜ್ಜಿ.</string>
   <string name="categories_not_found">No categories matching %1$s found</string>
   <string name="categories_skip_explanation">ಇರೆನಾ ಪಟೊನ್ ವಿಕಿಮೀಡಿಯ ಕಾಮನ್ಸ್‌ಟ್  ಪತ್ತೆ ಮಾಲ್ಪುಯರ ವರ್ಗೊನ್ ಸೇರಾಲೆ.ವರ್ಗೊನ್ ಸೇರಾಯರ ಟೈಪ್ ಮಾಲ್ಪುಯರ ಪ್ರಾರಂಭ  ಮಾಲ್ಪುಲೆ.</string>
@@ -115,8 +109,6 @@
   <string name="menu_download">ಡೌನ್‍ಲೋಡ್</string>
   <string name="preference_license">ಪೂರ್ವನಿಯೋಜಿತ ಲೈಸನ್ಸ್‌.</string>
   <string name="use_previous" fuzzy="true">ಒಂದ್ಕಕ್ ಪುದರ್ ಬಕ್ಕ ವಿವರಣೆ ಕೊರ್ಲೆ.</string>
-  <string name="allow_gps">ಸ್ವಯಂ ಚಾಲಿತವಾತ್ ಇರೆನ ಜಾಗೆತ ಗುರುತು.</string>
-  <string name="allow_gps_summary">ಇಮೇಜ್ ಜಿಯೋಟ್ಯಾಗ್ಡ್ ಮಾಲ್ತಿಯಾಂಟ ಬುಕ್ಕ ಅಯಿನೊಟ್ಟಗ್ ಜಿಯೋಟ್ಯಾಗ್ಸ್ ಇಮೇಜ್ ಇತ್ತಂಟ್ ಇತ್ತೆತ ಸ್ಥಳೋನ್ ವಾಪಸ್ಸ್ ಪಡೆಯೊಲಿ.\nಎಚ್ಚರಿಕೆ: ಉಂದು ಇರೆನ ಇತ್ತೆತ ಸ್ಥಳೊನ್ ಬಹಿರಂಗ ಮಾಲ್ಪುಂಡು.</string>
   <string name="preference_theme" fuzzy="true">ಕತ್ತಲೆದ ಕ್ರಮೊ</string>
   <string name="license_name_cc_by_sa_four">ಅಸ್ಟ್ರೀಬುಷನ್ - ಸೇರ್ ಎ ಲೈಕ್  4.0.</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
@@ -124,20 +116,9 @@
   <string name="license_name_cc_by"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ಆಸ್ಟ್ರಿಯಾ)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (ಜರ್ಮನಿ)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (ಇಸ್ಟೊನಿಯಾ)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (ಸ್ಪೇನ್)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (ಕ್ರೊಯೇಷಿಯಾ)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxembourg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Netherlands)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (ನಾರ್ವೆ)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (ಪೋಲೆಂಡ್)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (ರೊಮೇನಿಯಾ)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">ವಿಕಿಮೀಡಿಯಾ ಕಾಮನ್ಸ್ ವಿಕಿಪೀಡಿಯಟ್ ಬಲಕೆ ಮಾಲ್ಪೊಲಿ, ಮಸ್ತ್ ಪಟೊನ್ ಹೋಸ್ಟ್ ಮಾಲ್ಪೊಲಿ.</string>
   <string name="tutorial_1_subtext">ಜಗತ್ತಿನಾದ್ಯಂತೊ ಜನಕ್ಕುಲೆಗ್ ಶಿಕ್ಷಣ ಕೊರ್ಯರ ಇರೆನ ಚಿತ್ರೊ ಸಹಾಯ ಅಪುಂಡು!</string>
   <string name="tutorial_2_text">ಇರ್ ಸಂಪೂರ್ಣವಾತ್ ದೆತೊಂಡು ಅತ್ತಂದೆ ರಚನೆ ಅಯಿನ ಚಿತ್ರೊನ್ ಅಪ್ಲೋಡ್ ಮಾಲ್ಪುಲೆ:</string>
@@ -168,12 +149,8 @@
   <string name="storage_permission_title">ಶೇಖರಣ ಅನುಮತಿ ಕೇಣುನು</string>
   <string name="read_storage_permission_rationale">ಅಗತ್ಯ ಇಪ್ಪುನ ಅನುಮತಿ: ಬಾಹ್ಯ ಸಂಗ್ರಹಣೆನ್ ಓದಿ. ಇದೆಂಡ್ತ್ ಇರ್ ಗ್ಯಾಲರಿಗ್ ಅಪ್ಲಿಕೇಶನ್ ಪ್ರವೇಶಗ್ ಸಾಧ್ಯ ಇಜ್ಜಿ.</string>
   <string name="write_storage_permission_rationale" fuzzy="true">ಅಗತ್ಯ ಇಪ್ಪುನ ಅನುಮತಿ: ಬಾಹ್ಯ ಸಂಗ್ರಹಣೆನ್ ಬರೆಲೆ. ಇದೆಂಡ್ತ್ ಅಪ್ಲಿಕೇಶನ್ ಇರೆನ ಕ್ಯಾಮರೊನ್ ಪ್ರವೇಶ ಮಾಲ್ಪಯರ ಸಾಧ್ಯಿಜ್ಜಿ.</string>
-  <string name="location_permission_rationale">ಐಚ್ಛಿಕ ಅನುಮತಿ: ವರ್ಗೊ ಸಲಹೆಗ್ ಇತ್ತೆತ ಸ್ಥಳೊನ್ ಪಡೆಲೆ.</string>
   <string name="ok">ಅವು</string>
-  <string name="title_activity_nearby">ಕೈದಲ್ತಾ ಜಾಗೆಲು</string>
-  <string name="no_nearby">ಮುಟ್ಟ ಇಪ್ಪುನ ಜಾಗೆ ತೋಜಾತ್ ಬರ್ಪುಜ್ಜಿ.</string>
   <string name="warning">ಎಚ್ಚರಿಕೆ</string>
-  <string name="upload_image_duplicate">ಈ ಕಡತ  ಇತ್ತೆನೆ ಕಾಮನ್ಸ್\'ಡು ಉಂಡು. ಈರ್ ಖಂಡಿತಾ ದುಂಬರಿಯೆರೆ ಬಯಕುವರಾ?</string>
   <string name="yes">ಅಂದ್</string>
   <string name="no">ಅತ್ತ್</string>
   <string name="media_detail_title">ತರೆಬರವು</string>
@@ -186,32 +163,18 @@
   <string name="become_a_tester_title">ಉಂದು ಬೇಟ ಟೆಸ್ಟರ್.</string>
   <string name="become_a_tester_description">Google Play ತಲ್ಪ  ಇರ್ ಬೀಟಾ ಚಾನೆಲ್ ಆಯ್ಕೆ ಮಾಲ್ಪುಲೆ ಬುಕ್ಕ ಪೊಸ ವೈಶಿಷ್ಟ್ಯೊ ಅತ್ತಂದೆ ದೋಷ ಪರಿಹಾರಗ್ ದುಂಬು ಪ್ರವೇಶ ಪಡೆಲೆ.</string>
   <string name="_2fa_code">2FA Code</string>
-  <string name="number_of_uploads">ಎನ್ನ ಇಂಚಿಪೋದ ಅಪ್ಲೋಡ್ ಮಿತಿ.</string>
-  <string name="maximum_limit">Maximum ಮಿತಿ.</string>
-  <string name="invalid_zero">ಶೂನ್ಯ ಮಾನ್ಯ ಅತ್ತ್.</string>
-  <string name="invalid_input">ಉಳಸೇರಿನವು ಅಮಾನ್ಯ ಆದುಂಡು</string>
-  <string name="maximum_limit_alert">500 ಮಿತ್ತ್ ತೊಜಾಯರ ಸಾದ್ಯ ಇಜ್ಜಿ.</string>
-  <string name="enter_valid">ಒಂಜಿ ಮಾನ್ಯ ಸಂಖ್ಯೆನ್ ಸೇರಾಲೆ</string>
-  <string name="cannot_be_zero">ಮಿತೆರಾವುನ ಮಿತಿ ೦ (ಸೊನ್ನೆ) ಆವರೆ ಬಲ್ಲಿ</string>
-  <string name="set_limit" fuzzy="true">ಇಂಚಿಪೋದ ಅಪ್ಲೋಡ್ ಮಿತಿ.</string>
-  <string name="login_failed_2fa_not_supported">ರಡ್ಡ್ ಅಂಶೊತ ದೃಢೀಕರಣ ಇತ್ತೆ ತಿಕ್ಕುಜ್ಜಿ.</string>
   <string name="logout_verification">ಇರ್ ನಿಜವಾತ್ ಲಾಗ್ಔಟ್ ಮಾಲ್ಪಿಯರ ಬಯಸುವರಾ?</string>
   <string name="commons_logo">\nಕಾಮನ್ಸ್ ಲೋಗೋ.</string>
   <string name="commons_website">\nಕಾಮನ್ಸ್ ವೆಬ್ಸೈಟ್.</string>
   <string name="commons_facebook">\nಕಾಮನ್ಸ್ ಫೇಸ್ಬುಕ್ ಪುಟೊ.</string>
   <string name="commons_github">\nಕಾಮನ್ಸ್ ಗಿಥಬ್ ಮೂಲ ಕೋಡ್.</string>
-  <string name="background_image">\nಹಿನ್ನೆಲೆ ಚಿತ್ರೊ.</string>
   <string name="mediaimage_failed">ಮೀಡಿಯಾ ಪಟೊ ಅಪ್ಲೋಡ್ ಅತ್‌ಜ್ಜಿ.</string>
-  <string name="no_image_found">ಒವೆ ಪಟೊ ಇಜ್ಜಿ.</string>
   <string name="no_subcategory_found">ಒವೆ ಉಪವರ್ಗೊಲು ಇಜ್ಜಿ.</string>
   <string name="no_parentcategory_found">ಇತ್ತೆ ಒವೆ ವರ್ಗೊಲು ಇಜ್ಜಿ.</string>
-  <string name="upload_image">ಪಟೊ ಅಪ್ಲೋಡ್.</string>
   <string name="welcome_image_mount_zao">\nಮೌಂಟ್ ಝಾವೋ.</string>
   <string name="welcome_image_llamas">\nಲಾಮಾಸ್.</string>
   <string name="welcome_image_rainbow_bridge">\nರೇನ್ಬೋ ಬ್ರಿಡ್ಜ್.</string>
   <string name="welcome_image_tulip">ಟುಲಿಪ್.</string>
-  <string name="welcome_image_no_selfies">ಸ್ವಂತಿ ಬೊಡ್ಚಿ.</string>
-  <string name="welcome_image_proprietary">ಅವಶ್ಯ ಪಟೊ.</string>
   <string name="welcome_image_welcome_wikipedia">ವಿಕಿಪೀಡಿಯಗ್ ಸ್ವಾಗತೊ.</string>
   <string name="welcome_image_welcome_copyright">ಕೃತಿಸ್ವಾಮ್ಯಗ್ ಸ್ವಾಗತೊ.</string>
   <string name="welcome_image_sydney_opera_house">\nಸಿಡ್ನಿ ಒಪೇರಾ ಹೌಸ್.</string>
@@ -227,24 +190,17 @@
   <string name="navigation_item_logout">ನಿರ್ಗಮಿಸಾಲೆ</string>
   <string name="navigation_item_info">\nಟ್ಯುಟೋರಿಯಲ್.</string>
   <string name="navigation_item_notification">ಸೂಚನೆಲು.</string>
-  <string name="navigation_item_featured_images">ಭವಿಷ್ಯತವು.</string>
-  <string name="nearby_needs_permissions">ಜಾಗೆತ ಅನುಮತಿ ಇಜ್ಜಿಯಾಂತೆ ಕೈತಲ್ದ ಜಾಗೆನ್ ತೊಜಾಯರ ಸಾದ್ಯ ಇಜ್ಜಿ.</string>
   <string name="no_description_found">ಒವೆ ವಿವರಣೆ ಇಜ್ಜಿ.</string>
   <string name="nearby_info_menu_commons_article">ಕಾಮನ್ಸ್ ಫೈಲ್ ಪುಟೊ.</string>
   <string name="nearby_info_menu_wikidata_article">\nವಿಕಿಡಾಟ ಐಟಂ.</string>
   <string name="nearby_info_menu_wikipedia_article">\nವಿಕಿಪೀಡಿಯ ಲೇಖನೊ.</string>
-  <string name="error_while_cache">ಚಿತ್ರೊಲೆನ್ ಕ್ಯಾಶಿಂಗ್ ಮಾಲ್ಪುನಗ ದೋಷೊ.</string>
-  <string name="title_info">ಫೈಲ್ಗಾತ್ ಒಂಜಿ ಬೇತೆ ವಿವರಣಾತ್ಮಕೊ ಪುದಾರ್, ಉಂದು ಫೈಲ್ ಪುದಾರ್ ಆತ್ ಕಾರ್ಯನಿರ್ವಹಣೆ ಅಪುಂಡು. ಇರೆನ ಜಾಗೆತೊಟ್ಟಗ್ ಸರಳ ಭಾಷೆನ್ ಬಲಕೆ ಮಾಪ್ಲೊಲಿ. ಫೈಲ್ ವಿಸ್ತರಣೆನ್ ಮಾಲ್ಪೊಲಿ.</string>
   <string name="description_info">ದಯಮಾಲ್ತ್ ಸಾಧ್ಯವಾಯಿನ ಮಾಧ್ಯಮಟ್ ವಿವರಣೆ ಕೊರ್ಲೆ: ಒಲ್ಪಾ ಅಯಿನ್ ದೆಪ್ಪೊಲಿ? ಉಂದೆನ್ ಎಂಚ ತೋಜಾವೊಲಿ? ಸನ್ನಿವೇಶ ಪಂಡದಾದ? ದಯಮಾಲ್ತ್ ವಸ್ತುಲು ಅತ್ತಂದೆ ವ್ಯಕ್ತಿಲು ಸುಲಭವಾತ್ ಊಹಿಸಲು ಸಾದ್ಯ ಇಜ್ಜಿ ಮಾಹಿತಿನ್ ಬಹಿರಂಗ ಮಾಲ್ಪುಲೆ, ಉದಾಹರಣೆಗ್ ಉಂದು ಭೂದೃಶ್ಯವಾತ್ ಇತ್ತಂಡ್ ದಿನೊತ ಸಮಯ. ಮಾಧ್ಯಮೊ ಅಸಾಮಾನ್ಯವಾತ್ ಇಪ್ಪುನಯಿನ್ ತೋಜಾತ್, ಅವು ಅಸಾಮಾನ್ಯವಾತ್ ವಿವರಣೆ ಇಪ್ಪು.</string>
-  <string name="upload_image_too_dark">ಈ ಚಿತ್ರ ಮಸ್ತ್ ಕಪ್ಪಾದುಂಡು, ಈರ್ ಅವೆನ್ ಖಂಡಿತವಾದ್ ಮಿತೆರಾವರೆ ಬಯಕುವರಾ? ವಿಕಿಮೀಡಿಯಾ ಕಾಮನ್ಸ್  ಉಪ್ಪುನಿ ವಿಶ್ವಕೋಶ ಮೌಲ್ಯದ ಚಿತ್ರೊಲೆಗ್ ಮಾತ್ರಾ.</string>
-  <string name="upload_image_blurry">ಈ ಚಿತ್ರ ಮಂಜಾದುಂಡು, ಈರ್ ಅವೆನ್ ಖಂಡಿತವಾದ್ ಮಿತೆರಾವರೆ ಬಯಕುವರಾ? ವಿಕಿಮೀಡಿಯಾ ಕಾಮನ್ಸ್  ಉಪ್ಪುನಿ ವಿಶ್ವಕೋಶ ಮೌಲ್ಯದ ಚಿತ್ರೊಲೆಗ್ ಮಾತ್ರಾ.</string>
   <string name="upload_problem_exist">ಈ ಆಕೃತಿದ ಸಂಭಾವ್ಯ ಸಮಸ್ಯೆಲು:</string>
   <string name="upload_problem_image_dark">ಆಕೃತಿ ಮಸ್ತ್ ಕಪ್ಪಾದುಂಡು.</string>
   <string name="upload_problem_image_blurry">ಆಕೃತಿ ಮಂಜಾದುಂಡು.</string>
   <string name="upload_problem_image_duplicate">ಆಕೃತಿ ಕಾಮನ್ಸ್\'ಡ್ ಇತ್ತೆನೆ ಉಂಡು.</string>
   <string name="upload_problem_different_geolocation">ಈ ಚಿತ್ರೊನು ಗೆತ್ತಿದಿನಿ ಬೇತೆ ತಾಣೊಡು.</string>
   <string name="upload_problem_do_you_continue">ಈರ್ ನನಲಾ ಈ ಚಿತ್ರೊನು ಮಿತೇರಾವರೆ ಬಯಕುವರಾ?</string>
-  <string name="give_permission">ಒಪ್ಪಿಗೆ ಪಡೆಲೆ.</string>
   <string name="use_external_storage" fuzzy="true">ಉಂದು ಎಕ್ಸ್‌ಟರ್ನಲ್ ಸ್ಟೊರೆಜ್.</string>
   <string name="use_external_storage_summary" fuzzy="true">ಈ ಸಾಧನಟ್ ಅಪ್ಲಿಕೇಶನ್ ಕ್ಯಾಮೆರಾದೊಂಟ್ಟಗ್ ದೆತ್ತಿನ ಚಿತ್ರೊನ್ ಒರಿಪಾಲೆ.</string>
   <string name="login_to_your_account">ಇರೇನಾ ಖಾತೆಗ್ ಲಾಗಿನ್ ಅಲೇ.</string>
@@ -255,7 +211,6 @@
   <string name="nominate_deletion">ಮಾಜಾಯರ ನಾಮನಿರ್ದೇಶನೊ.</string>
   <string name="nominated_for_deletion">ಮಾಜಾಯರ ಈ ಚಿತ್ರೊನ್ ನಾಮನಿರ್ದೇಶನೊ ಮಾಲ್ತೆರ್.</string>
   <string name="nominated_see_more" fuzzy="true">&lt;u&gt;ವಿವರಗಾತ್ ವೆಬ್ಪುಟೊನ್ ತೂಲೆ&lt;/u&gt;</string>
-  <string name="view_browser">\nಬ್ರೌಸರ್ಟ್ ತೂಲೆ.</string>
   <string name="skip_login">ಬುಡ್ಲೆ</string>
   <string name="navigation_item_login">ಲಾಗಿನ್ ಆಲೆ.</string>
   <string name="skip_login_title">\nಇರ್ ನಿಜವಾತ್ ಲಾಗಿನ್ ಬುಡಿಯರ ಬಯಸುವರಾ?</string>
@@ -263,16 +218,8 @@
   <string name="login_alert_message">ದಯಮಾಲ್ತ್ ಲಾಗೀನ್ ಆಲೆ ಬುಕ್ಕ ಉಪಯೋಗ ಮಾಲ್ಪುಲೆ.</string>
   <string name="copy_wikicode">ವಿಕಿಪಠ್ಯೊನ್ ಪಿಡಿಪಲಾಯಿಗ್ ನಕಲ್ ಮಲ್ಪುಲೆ.</string>
   <string name="wikicode_copied">ವಿಕಿಪಠ್ಯೊನ್ ಪಿಡಿಪಲಾಯಿಗ್ ನಕಲ್ ಮಲ್ತ್ಂಡ್.</string>
-  <string name="nearby_location_has_not_changed">ಜಾಗೆ ಬದಲಾವಣೆ ಇಜ್ಜಿ.</string>
   <string name="nearby_location_not_available" fuzzy="true">ಜಾಗೆತ ಗುರುತು ಇಜ್ಜಿ.</string>
   <string name="location_permission_rationale_nearby">ಮುಟ್ಟತ ಜಾಗೆತ ಪಟ್ಟಿನ್ ತೋಜಾಯರ ಅನುಮತಿ ಅಗತ್ಯವಾತ್ ಬೋಡು.</string>
-  <string name="get_directions" fuzzy="true">ನಿರ್ದೇಶನೊ ಉಂಡಾ.</string>
-  <string name="read_article" fuzzy="true">ಲೇಖನೊ ಓದುಲೆ.</string>
-  <string name="notifications_welcome">ವಿಕಿಮಿಡಿಯ ಕಾಮಸ್ಸ್‌ಗ್ ಸ್ವಾಗತೊ, %1$s! ಇರ್ ಉಲ್ಲಾರ್ಂದ್ ಎಕ್ಲೆಗ್ ಖುಷಿಯಾಂಡ್.</string>
-  <string name="notifications_talk_page_message">\n%1$s ಇರೆನ ಚರ್ಚಾಪುಟೊಗ್ ಇಂಜಿ ಮೆಸೆಜ್ ಕೊರ್ಲೆ.</string>
-  <string name="notifications_thank_you_edit">ಇರೆನ ಸಂಪೊಲೊಗೆಗ್ ಸೊಲ್ಮೆಲು.</string>
-  <string name="notifications_mention">%1$s ಇಂದೆನ್ ಇರ್ ಒರಿಪಾಲೆ %2$s.</string>
-  <string name="toggle_view_button">ಟಾಗಲ್ ನ್ ತೂಲೆ.</string>
   <string name="nearby_directions" fuzzy="true">ನಿರ್ದೆಶನೊ.</string>
   <string name="nearby_wikidata" fuzzy="true">\nವಿಕಿಡಾಟ.</string>
   <string name="nearby_wikipedia" fuzzy="true">\nವಿಕಿಪೀಡಿಯ.</string>
@@ -281,7 +228,6 @@
   <string name="about_faq" fuzzy="true">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="welcome_skip_button">ಟ್ಯುಟೋರಿಯಲ್‌ನ್ ಬುಡ್ಲೆ.</string>
   <string name="no_internet">ಇಂಟರ್ನೆಟ್ ಇಜ್ಜಿ.</string>
-  <string name="internet_established">ಇಂಟರ್ನೆಟ್ ಉಂಡು.</string>
   <string name="error_notifications">\nಅಧಿಸೂಚನೆಟ್ ದೋಷೊ ಉಂಡು.</string>
   <string name="no_notifications">ಅಧಿಸೂಚನೆ ಇಜ್ಜಿ.</string>
   <string name="about_translate" fuzzy="true">&lt;u&gt;ಅನುವಾದೊ&lt;/u&gt;</string>
@@ -290,10 +236,7 @@
   <string name="about_translate_proceed">ಮುಂದುವರಿಪುಲೆ.</string>
   <string name="about_translate_cancel">ವಜಾ ಮಲ್ಪುಲೆ</string>
   <string name="retry">ನನೊರ ಪ್ರಯತ್ನ ಮಾನ್ಪುಲೇ</string>
-  <string name="showcase_view_got_it_button">ಗೊತ್ತಂಡಾ!</string>
   <string name="showcase_view_whole_nearby_activity" fuzzy="true">ವಿಕಿಪೀಡಿಯ ಲೇಕನೊಲೆನ್ ಸಚಿತ್ರ ಮಲ್ಪರೆ  ಚಿತ್ರೊಲು ಬೋಡಾಯಿನ,  ಇರೆನ ಕೈತಲ್ದ ಜಾಗೊಲು ಮೂಲುಂಡು.</string>
-  <string name="showcase_view_list_icon">ಈ ಗುಬ್ಬಿನ್ ತಟಿಂಡ ಈ ಜಾಗೊಲೆನ ಒಂಜಿ ಪಟ್ಟಿ ಬರ್ಪುಂಡು.</string>
-  <string name="showcase_view_plus_fab">ಈರ್ ಇರೆನ ಚಿತ್ರದರ್ಶಿನಿ ಇಜಿಂಡ ಕೆಮಾರೊರ್ದು ಒವ್ವೆ ಜಾಗೊದ ಒಂಜಿ ಚಿತ್ರೊನು ಮಿತೇರಾವೊಲಿ.</string>
   <string name="no_images_found">ಒವ್ವೆ ಆಕೃತಿಲು ತಿಕ್ಕುಜಾ!</string>
   <string name="error_loading_images">ಆಕೃತಿಲೆನ್ ಏರಾನಗ ದೋಷ ಆಂಡ್.</string>
   <string name="image_uploaded_by">ಮಿತೇರಾಯಿನಾರ್: %1$s</string>
@@ -302,12 +245,10 @@
   <string name="app_widget_heading">ದಿನೊತ್ತ ಪಟ</string>
   <string name="menu_search_button">ನಾಡ್‍ಲೆ</string>
   <string name="search_commons">ಕಾಮನ್ಸ್ ಡ್ ನಾಡ್‍ಲೆ</string>
-  <string name="images_not_found">ಒವ್ವೆ  %1$ ಅನುರೂಪ ಆಕೃತಿಲು ತಿಕ್ಕುಜಾ.</string>
   <string name="title_activity_search">ನಾಡ್‍ಲೆ</string>
   <string name="search_recent_header">ಇನ್ಚಿಪ ನಾಡ್ನವು:</string>
   <string name="provider_searches">ಇಂಚೊಗು ನಾಡಿನ ಕೇಣಿಲು</string>
   <string name="error_loading_categories">ವರ್ಗೊಲೆನ್ ಏರಾನಗ ದೋಷ ಆಂಡ್.</string>
-  <string name="error_loading_subcategories">ಉಪವರ್ಗೊಲೆನ್ ಏರಾನಗ ದೋಷ ಆಂಡ್.</string>
   <string name="search_tab_title_media" fuzzy="true">ಮಾಧ್ಯಮ</string>
   <string name="search_tab_title_categories" fuzzy="true">ವರ್ಗೊಲು</string>
   <string name="successful_wikidata_edit" fuzzy="true">ವಿಕಿಡೇಟೊಡು ಆಕೃತಿನ್ ಸಫಲವಾದ್ %1$ ಗು ಸೇರಾಂಡ್!</string>
@@ -325,7 +266,6 @@
   <string name="screenshot_answer">ಜಾಲತಾನೊಲೆನ ಪರದೆಚಿತ್ರೊಲು ನಿಷ್ಪನ್ನ ಕಾಯಕೊಲು ಇಂದ್ ಪಿನೊಲಿ, ಬೊಕ ಜಾಲತಾನೊಡೆ ಒವ್ವೆ ಕೃತಿಸ್ವಾಮ್ಯೊದ ಉಲಾಯಿ ಬರ್ಪುಂಡು. ಇಂಚಿನವೆನ್ ಲೇಖಕನ ಅನುಮತಿ ಗೆತೊಂದು ಬಳಸೊಲಿ. ಅನುಮತಿದಾಂತೆ ಅರೆನ ಕಾಯಕೊದ ಆಧಾರೊಡು ಈರ್ ರಚಿಸಾಯಿನ ಒವ್ವೆ ಕಲಾಕೃತಿ,  ನ್ಯಾಯವಾದ್  ಮೂಲ ಲೇಖಕನ ಸೊತ್ತಾದ್ ಲೈಸನ್ಸ್ ಆವಂದಿನ ಪ್ರತಿ ಇಂದ್ ಪಿನೊಡಾಪುಂಡು.</string>
   <string name="blurry_image_answer">ಗುಣಮಾನದ  ಆಕೃತಿಲೆನ್ ಒಟ್ಟು ಮಲ್ಪುನವು ಕಾಮನ್ಸ್\'ದ ಗುರಿಕುಲೆಡ್ ಒಂಜಿ ಆದುಂಡು. ಆಯಿನೆರ್ದಾವರಾ, ಮಂಜಾದಿಪ್ಪುನ ಆಕೃತಿಲೆನ್ ಮಿತೇರಾವರೆ ಬಲ್ಲಿ. ಏಪಲಾ ಎಡ್ಡೆ ಬೊಲ್ಪುದ  ಪೊರ್ಲುದ ಚಿತ್ರೊಲೆನ್ ದೆಪ್ಪರೆ ಯತ್ನ ಮಲ್ಪುಲೆ.</string>
   <string name="construction_event_answer">ತಂತ್ರಜ್ಞಾನ ಇಜಿಂಡ ಸಂಸ್ಕೃತಿ ತೋಜಾವುನ ಚಿತ್ರೊಲೆಗ್ ಕಾಮನ್ಸ್\'ಡು ಬಾರೀ ಸ್ವಾಗತ ಉಂಡು.</string>
-  <string name="warning_for_image_reverts">ಎಚ್ಚರಿಕೆ: ಈರ್  ಮಿತೇರಾಯಿನೆಟ್  %1$ ನೆಡ್ದ್  ಹೆಚ್ಚಿನ ಆಕೃತಿಲೆನ್ ಮಾಜಾದಾ. ಮಾಜಾವೊಡಾಯಿನ  ಆಕೃತಿಲೆನ್ ಮಿತೇರಾವುನೆನ್  ಈರ್  ದುಂಬರಿಯರ್ಡ, ಇರೆನ ಖಾತೆ ನಿಷೇಧ  ಆಪಿನ  ಸಾಧ್ಯವುಂಡು.</string>
   <string name="congratulatory_message_quiz">ಇರೆನ  %1$ ಉತ್ತರೊಲು ಸರಿಯಾದುಂಡು. ಧನ್ಯವಾದೊಲು!</string>
   <string name="warning_for_no_answer">ಪ್ರಶ್ನೆಗ್ ಉತ್ತರ ಕೊರಿಯರೆ ರಡ್ಡ್ ಆಯ್ಲೆಲೆಡ್ ಒಂಜೆನ್ ಪೆಜಿಲೆ.</string>
   <string name="user_not_logged_in">ಉಳಗಮನದ ಕಲಾಪ ಮುಗಿದಿಂಡ್, ದಯಮಲ್ತ್ ಕುಡಾ ಉಳಗಮನ ಮಲ್ಪುಲೆ.</string>
@@ -335,9 +275,7 @@
   <string name="wrong">ತಪ್ಪು ಉತ್ತರೊ.</string>
   <string name="quiz_screenshot_question">ಈ ಪರದೆಚಿತ್ರನ್ ಮಿತೇರಾವರೆ ಒಪ್ಪಿಗೆ ಉಂಡಾ?</string>
   <string name="share_app_title">ಶೇರ್ ಅಪ್ಯ್.</string>
-  <string name="share_coordinates_not_present">ಆಕೃತಿ ಪೆಜಿನಗ ನಿರ್ದೇಶಾಂಶೋಲೆನ್ ನಿರೂಪಿಸಾಜೆರ್.</string>
   <string name="error_fetching_nearby_places">ಕೈತಲ್ದ ಜಾಗೊಲೆನ್ ಕಣನಗ ದೋಷವಾಂಡ್.</string>
-  <string name="add_description">ವಿವರಣೆ ಸೇರಾಲೆ.</string>
   <string name="no_recent_searches">ಇಂಚೊಗು ನಾಡಿನವು ದಾಲಾ ಇಜ್ಜಿ</string>
   <string name="delete_recent_searches_dialog">ಇರ್ ನಾಡ್ನಾ ಇತಿಹಾಸೋನ್ ಮಾಜಾಯಾರಾ ಉಪ್ಪುವರತಾ?</string>
   <string name="search_history_deleted">ನನಾಡುನ ಇತಿಹಾಸೊ ಮಾಜಾತೆರ್.</string>
@@ -368,20 +306,16 @@
   <string name="read_notifications" fuzzy="true">ಅಧಿಸೂಚನೆಲು(ಅನುರಕ್ಷಿತ)</string>
   <string name="display_nearby_notification">ಕೈತಲ್ದ ಅಧಿಸೂಚನೆ ತೋಜಾಲೆ</string>
   <string name="display_nearby_notification_summary" fuzzy="true">ಚಿತ್ರ ಬೋಡಾಯಿನ ಕೈತಲ್ದ ಜಾಗ ತೂವರೆ ಮುಲ್ಪ ತಟ್ಟ್\'ಲೆ</string>
-  <string name="no_close_nearby">ಇರೆನ ಮುಟ್ಟೊಡು ಕೈತಲ್ದ ಜಾಗೊಲು ತಿಕ್ಕುಜಾ.</string>
   <string name="list_sheet">ಪಟ್ಟಿ</string>
   <string name="storage_permission">ಶೇಖರಣ ಅನುಮತಿ</string>
   <string name="write_storage_permission_rationale_for_image_share">ಆಕೃತಿಲೆನ್ ಮಿತೇರಾವರೆಗಾದ್  ಇರೆನ ಬಾಹ್ಯ ಶೇಖರಣೊನು ಪ್ರವೇಶ ಮಲ್ಪರೆ ಎಂಕಲೆಗ್  ಇರೆನ ಅನುಮತಿ ಬೋಡು.</string>
   <string name="nearby_notification_dismiss_message">ಚಿತ್ರೊಲು ಬೋಡಾಯಿನ ಕೈತಲ್ದ ಜಾಗೊಲೆನ್ ಈರ್ ನನ ತೂಪುಜರ್. ಆಂಡಾ ಇರೆಗ್ ಬೋಡಾಂಡ ಈರ್ ಈ ಅಧಿಸೂಚನೆನ್ ಗಣಸ್ಥಿತಿಲೆಡ್ ಪಿರ ಶಕ್ತ ಮಲ್ಪೊಲಿ.</string>
   <string name="step_count" fuzzy="true">%2$d ಉಂದೆತ  %1$d ಮುಟ್ಟು</string>
-  <string name="image_in_set_label">ಆಕೃತಿ  %1$d ಗುಚ್ಚೊಡು</string>
   <string name="next">ದುಂಬುದ</string>
   <string name="previous">ಪಿರವುದ</string>
   <string name="submit">ಒಪ್ಪಿಸಾಲೆ</string>
   <string name="upload_title_duplicate" fuzzy="true">ಕಡತಪುದರ್ %1$s ದ ಒಂಜಿ ಕಡತ ಉಂಡು. ಈರ್ ಖಂಡಿತಾ ದುಂಬು ಪೋವರೆ ಬಯಕುವರಾ?\nA file with the file name  exists. Are you sure you want to proceed?</string>
   <string name="map_application_missing">ಹೊಂದುನ ನಕಾಶೆ ಪರಿಕರನ  ಇರೆನ ಸಲಕರಣೆಡ್ ತಿಕ್ಕುಜಿ. ಈ ಗುಣಧರ್ಮನ್ ಬಳಸರೆ  ದಯಮಲ್ತ್ ಒಂಜಿ ನಕಾಶೆ ಪರಿಕರನ  ತಾಪನೆ ಮಲ್ಪುಲೆ.</string>
-  <string name="navigation_item_bookmarks">ಪುಸ್ತಕಗುರ್ತುಲು</string>
-  <string name="title_activity_bookmarks">ಪುಸ್ತಕಗುರ್ತುಲು</string>
   <string name="title_page_bookmarks_pictures">ಚಿತ್ರೊಲು</string>
   <string name="title_page_bookmarks_locations">ಜಾಗೊಲು</string>
   <string name="menu_bookmark"> ಪುಸ್ತಕಗುರ್ತುಲೆನ್ ಸೇರಾಲೆ/ದೆಪ್ಪುಲೆ</string>
@@ -396,6 +330,5 @@
   <string name="menu_option_read" fuzzy="true">ಅನುರಕ್ಷಿತ ತೂಲೆ</string>
   <string name="menu_option_unread">ಓದಂದಿನ ತೂಲೆ</string>
   <string name="error_occurred_in_picking_images">ಆಕೃತಿಲೆನ್ ಪೆಜ್ಜಿನಗ ದೋಷ ಆಂಡ್</string>
-  <string name="image_chooser_title">ಮಿತರಾರೆ ಆಕೃತಿಲೆನ್ ಆಯುಲೆ</string>
   <string name="please_wait">ದಯಮಲ್ತ್ ಕಾಪುಲೆ</string>
 </resources>

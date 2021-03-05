@@ -25,13 +25,11 @@
     <item quantity="one">თე სურათი გიბჟინუ %1$s ლიცენზიათ</item>
     <item quantity="other">თე სურათეფი გიბჟინუ %1$s ლიცენზიათ</item>
   </plurals>
-  <string name="title_activity_explore">გჷნოჯინა</string>
   <string name="navigation_item_explore">გჷნოჯინა</string>
   <string name="preference_category_appearance">მიოჯინი</string>
   <string name="preference_category_general">თარი</string>
   <string name="preference_category_feedback">წიმოხრსხუ</string>
   <string name="preference_category_privacy">კონფიდენციალურობა</string>
-  <string name="preference_category_location">ორენი</string>
   <string name="app_name">ვიკიოწკარუე</string>
   <string name="menu_settings">პარამეტრეფი</string>
   <string name="intent_share_upload_label">ვიკიოწკარუეშა ეხარგუა</string>
@@ -69,22 +67,18 @@
   <string name="share_title_hint" fuzzy="true">დუდჯოხო (უციო)</string>
   <string name="share_description_hint">ეჭარუა</string>
   <string name="login_failed_network">მიშულაქ ვემიხუჯინუ - რშვილიშ ჩილათა</string>
-  <string name="login_failed_wrong_credentials">მიშულაქ ვემიხუჯინჷ - ქორთხინთ გეგნაჯინით თქვანი მახვარებუშ ჯოხოს დო პაროლს</string>
   <string name="login_failed_throttled">ძალამ მიარე უმწუძინუ ცადება. ქორთხინ, მუხირენ წუთშა ხოლო ქოცადით.</string>
   <string name="login_failed_blocked">მორდება, თე მახვარებუ ბლოკირი რე ვიკიოწკარუეს</string>
   <string name="login_failed_2fa_needed">თქვა გემშიონათ ოკო ჟირფაქტორიანი ავტორიზაციაშ კოდი.</string>
   <string name="login_failed_generic">მიშულაქ ვემიხუჯინუ</string>
   <string name="share_upload_button">ეხარგუა</string>
   <string name="multiple_share_base_title">სერიაშ ჯოხო</string>
-  <string name="add_set_name_toast">ქორთხინთ, ქემიოწურეთ თე ფაილეფიშ ბუნაშ ჯოხო</string>
   <string name="provider_modifications">მოდიფიკაციეფი</string>
   <string name="menu_upload_single">ეხარგუა</string>
   <string name="categories_search_text_hint">კატეგორიაშ გიშაგორუა</string>
   <string name="menu_save_categories">ჩუალა</string>
   <string name="refresh_button">გოახალაფა</string>
   <string name="display_list_button">ერკებული</string>
-  <string name="gps_disabled">თქვან მონწყილობას GPS თიშილი რე. თახმო გოკონანო ჩართება?</string>
-  <string name="enable_gps">GPS-იშ ჩართება</string>
   <string name="contributions_subtitle_zero" fuzzy="true">ეხარგუეფი ვა რე</string>
   <string name="categories_not_found">ვეგორინჷ კატეგორიეფქ, ნამუეფით მოგენა %1$s</string>
   <string name="categories_skip_explanation">ქეგუძინით კატეგორიეფი, თქვანი სურათეფი უმოს მოხუჯურ მიოგორალქ იჸუას ვიკიოწკარუესჷნ.\nგემშეჸონით ჯოხო კატეგორიეფიშ გიოძინალო.</string>
@@ -111,8 +105,6 @@
   <string name="menu_download">გჷნოჭარუა</string>
   <string name="preference_license">გურგოჩამილი ლიცენზია</string>
   <string name="use_previous">წჷმი დუდჯოხოშ/ეჭარუაშ გჷმორინაფა</string>
-  <string name="allow_gps">ასეიანი ორენიშ ავტომატური მეღება</string>
-  <string name="allow_gps_summary">ლასუნს მიმალი ორენს, დო სურათი ვა რე გედვალირი რუკას-და. ხვილაფა! თე თირუა გოძირანა თქვანი მიმალი ორენს.</string>
   <string name="preference_theme" fuzzy="true">სერიშ რეჟიმი</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
@@ -120,20 +112,9 @@
   <string name="license_name_cc_by"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ავსტრია)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (გერმანია)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (ესტონეთი)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (ესპანეთი)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (ხორვატია)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (ლუქსემბურგი)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (ნიდერლანდი)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (ნორვეგია)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (პოლონეთი)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (რუმინეთი)</string>
   <string name="license_name_cc_by_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">ვიკიოწკარუე იკათუანს ვიკიპედიას გჷმორინაფილი სურათეფიშ უმენტაშობას.</string>
   <string name="tutorial_1_subtext">თქვანი სურათი მეხვარებუ მახორობაშ გონათუას მოსოფელიშ მუკი-მუკი!</string>
   <string name="tutorial_2_text">ქორთხინთ გეხარგეთ, ხვალე თქვანით ინოღალირი ვარდა აკოქიმინელი სურათეფი:</string>
@@ -166,12 +147,8 @@
   <string name="read_storage_permission_rationale">ოჸია: გალენი შვენაშ კითხირი. აპლიკაციას ვემიაჭირინე თქვან გალერეაშა თეშ უმუშო.</string>
   <string name="write_storage_permission_rationale">ოჸიას ოხვილუ: გალენი შვენაშ გიმორინაფა. აპლიკაციას ვემიახუჯინე თქვან კამერაშა/გალერეაშა თეშ უმუშო.</string>
   <string name="location_permission_title">ორენიშ გჷმორინაფაშ მოთხირი</string>
-  <string name="location_permission_rationale">გეძინელი ოჸია: მიმალი ორენიშ გოთანჯუა კატეგორიაშ მიორზიებელო</string>
   <string name="ok">ჯგირი</string>
-  <string name="title_activity_nearby">გოხოლუაშ აბანეფი</string>
-  <string name="no_nearby">გოხოლუაშ აბანეფქ ვეგორუ</string>
   <string name="warning">ხვილაფა</string>
-  <string name="upload_image_duplicate">თე ფაილი Commons-ს უკვე რე. დარწუმებული რეთო გაგირძოება გოკონან?</string>
   <string name="upload">ეხარგუა</string>
   <string name="yes">ქო</string>
   <string name="no">ვარი</string>
@@ -185,31 +162,18 @@
   <string name="media_detail_coordinates_empty">ვა რე წჷმორინაფილი</string>
   <string name="become_a_tester_title">ბეტა ტესტირებას კათაფი</string>
   <string name="_2fa_code">2ფა კოდი</string>
-  <string name="number_of_uploads">ჩქიმი ბოლო ეხარგუეფიშ ლიმიტი</string>
-  <string name="maximum_limit">მაქსიმალური ლიმიტი</string>
-  <string name="invalid_zero">Zero ვაქიმინჯენს</string>
-  <string name="maximum_limit_alert">500-შე უმოსიშ ძირაფა ვეშილებე</string>
-  <string name="enter_valid">ქემიოწურეთ თინი რიცხუ</string>
-  <string name="cannot_be_zero">ეხარგუაშ ლიმიტი ვა შილებე ორდას 0</string>
-  <string name="set_limit">ბოლო ეხარგუეფიშ ლიმიტი</string>
-  <string name="login_failed_2fa_not_supported">ჟირფაქტორამი აუთენტიფიკაცია ასეიან ბორჯიშო ვამიხუჯინე.</string>
   <string name="logout_verification">გოკონანო გიშულა?</string>
   <string name="commons_logo">ვიკიოწკარუეშ ლოგო</string>
   <string name="commons_website">ვიკიოწკარუეშ ვებ-ხასჷლა</string>
   <string name="commons_facebook">ვიკიოწკარუეშ Facebook ხასჷლა</string>
   <string name="commons_github">ვიკიოწკარუეს წყუშ კოდი Github-ის</string>
-  <string name="background_image">ფონური სურათი</string>
   <string name="mediaimage_failed">მედიაფაილიშ ჩილათა</string>
-  <string name="no_image_found">სურათიქ ვეგორინუ</string>
   <string name="no_subcategory_found">გიმენკატეგორიეფქ ვეგორინუ</string>
   <string name="no_parentcategory_found">ომასქერე კატეგორიეფქ ვეგორინუ</string>
-  <string name="upload_image">სურათიშ ეხარგუა</string>
   <string name="welcome_image_mount_zao">ზაოშ გვალა</string>
   <string name="welcome_image_llamas">ლამეფი</string>
   <string name="welcome_image_rainbow_bridge">ცაშორტყაფუშ ხინჯი</string>
   <string name="welcome_image_tulip">ტიტა</string>
-  <string name="welcome_image_no_selfies">ვა სელფი</string>
-  <string name="welcome_image_proprietary">ვადუდიშული სურათი</string>
   <string name="welcome_image_welcome_wikipedia">მოზოჯით ვიკიპედიაშა</string>
   <string name="welcome_image_welcome_copyright">მოზოჯით — ოავტორე ნებეფი</string>
   <string name="welcome_image_sydney_opera_house">სიდნეიშ ოპერაშ თეატრი</string>
@@ -225,25 +189,18 @@
   <string name="navigation_item_logout">გიშულა</string>
   <string name="navigation_item_info">გიოგურაფალი</string>
   <string name="navigation_item_notification">გინაფეფი</string>
-  <string name="navigation_item_featured_images">გიშნაგორა</string>
   <string name="navigation_item_review">გინოჯინა</string>
-  <string name="nearby_needs_permissions">გოხოლუაშ აბანეფიშ ძირაფა ორენიშ გოთანჯუაშ ოჸიაშ უმუშო ვემიხუჯინე</string>
   <string name="no_description_found">ეჭარუაქ ვეგორინუ</string>
   <string name="nearby_info_menu_commons_article">ვიკიოწკარუეშ ფაილიშ ხასჷლა</string>
   <string name="nearby_info_menu_wikidata_article">ვიკიმუნაჩემეფიშ ელემენტი</string>
   <string name="nearby_info_menu_wikipedia_article">ვიკიპედიაშ სტატია</string>
-  <string name="error_while_cache">ჩილათა სურათეფიშ ქეშირაფაშ ბორჯის</string>
-  <string name="title_info">უნიკალური ეჭარუა, ნამუთ მუჭოთ ფაილიშ ჯოხოთ იჸი ჩუალირი. თქვა შეილებჷნა გჷმირინუათ დორხველი ნინა, სოდე ზიტყვეფს ასა-გასეფით გეგშართჷნთ. ქორთხინთ, ვემიოწურუათ ფაილიშ რეზოლუცია.</string>
   <string name="description_info">ქორთხინთ, კილიშკილშა გეჭარით ეიოხარგალი ფაილი: სო რდჷ გინოღალირი? მუ რე თექ ეხანტილი? მუ კონტექსტიში რე? ქორთხინთ გეჭარით ეხანტილი პერსონეფი ვარდა ობიექტეფი. ქეგუძინით ინფორმაცია, ნამუშეთ ვემიხუჯინე ლექინას ქუგოხვადენ, სამანგათ, დღა დო სერიშ ბორჯი,მუჟამსჷთ გინიღით სურათინ. მუთუნ ვარჩქვანელობურ ქორე გინოღალირი-და, ქეშეცადით გოსხუნათ, მუ რე თექ ვარჩქვანელობურინ.</string>
-  <string name="upload_image_too_dark">თე სურათი ძალამი რუმე რე. დარწუმებული რეთო, თეშ ეხარგუა გოკონან? ვიკიოწკარუე აკმოდირთუ ხვალე თი სურათეფშე, ნამუეფსჷთ ენციკლოპედიური ღება უღჷნ.</string>
-  <string name="upload_image_blurry">თე სურათი ბონდღილი რე. დარწუმებული რეთო, თეშ ეხარგუა გოკონან? ვიკიოწკარუე აკმოდირთუ ხვალე თი სურათეფშე, ნამუეფსჷთ ენციკლოპედიური ღება უღჷნ.</string>
   <string name="upload_problem_exist">პოტენციური პრობლემეფი თე სურათწკჷმაː</string>
   <string name="upload_problem_image_dark">სურათი ძალამი რუმე რე.</string>
   <string name="upload_problem_image_blurry">სურათი ბონდღილი რე.</string>
   <string name="upload_problem_image_duplicate">თე სურათი უკვე ვიკიოწკარუეს რე,</string>
   <string name="upload_problem_different_geolocation">თე სურათი შხვა აბანს რე გინოღალირი.</string>
   <string name="upload_problem_do_you_continue">იშენ გოკონანო თე სურათიშ ეხარგუა?</string>
-  <string name="give_permission">ოჸიაშ მეჩამა</string>
   <string name="use_external_storage" fuzzy="true">გალენური შვენაშ გჷმორინაფა</string>
   <string name="login_to_your_account">გემშართით თქვან პროფილშა</string>
   <string name="send_log_file">ლოგ-ფაილიშ ჯღონუა</string>
@@ -251,14 +208,9 @@
   <string name="nominate_deletion">ლასუაშ ნომინანტი</string>
   <string name="nominated_for_deletion">თე სურათი ოლასარო რე წჷმორინაფილი</string>
   <string name="nominated_see_more" fuzzy="true">&lt;u&gt;დეტალეფშო ვებ-ხასჷლაშ ძირაფა&lt;/u&gt;</string>
-  <string name="nominating_file_for_deletion">%1$s ოლასარო რე მიკოწონებული.</string>
-  <string name="nominating_for_deletion_status">ოლასარო მიკოწონებული ფაილი: %1$s</string>
-  <string name="view_browser">ბრაუზერს გონწყუმა</string>
   <string name="skip_login">გიშატება</string>
   <string name="navigation_item_login">მიშულა</string>
   <string name="skip_login_title">ნანდულო გოკონანო მიშულაშ გიშატება?</string>
-  <string name="nearby_location_has_not_changed">ორენი ვა რე თირელი.</string>
-  <string name="read_article">სტატიაშ კითხირი</string>
   <string name="nearby_wikidata">ვიკიმუნაჩემეფი</string>
   <string name="nearby_wikipedia">ვიკიპედია</string>
   <string name="nearby_commons">ვიკიოწკარუე</string>
@@ -266,14 +218,12 @@
   <string name="about_faq" fuzzy="true">&lt;u&gt;შხკ&lt;/u&gt;</string>
   <string name="welcome_skip_button">ოხემანჯღვერეშ გიშატება</string>
   <string name="no_internet">ინტერნეტი ვა რე</string>
-  <string name="internet_established">ინტერნეტი რე</string>
   <string name="no_notifications">გინაფეფქ ვეგორუ</string>
   <string name="about_translate" fuzzy="true">&lt;u&gt;თანგუა&lt;/u&gt;</string>
   <string name="about_translate_title">ნინეფი</string>
   <string name="about_translate_proceed">გაგჷნძორება</string>
   <string name="about_translate_cancel">გოუქვაფა</string>
   <string name="retry">გომაჟირაფა</string>
-  <string name="showcase_view_got_it_button">გასაგები რე!</string>
   <string name="no_images_found">სურათეფქ ვეგორინუ!</string>
   <string name="error_loading_images">სურათიშ ეხარგუაშ ბორჯის ჩილათაქ მოხვადჷ.</string>
   <string name="image_uploaded_by">ეხარგილი რე $1-იშით</string>
@@ -298,7 +248,6 @@
   <string name="correct">თინი გამა</string>
   <string name="wrong">გამა ჩილათირი რე</string>
   <string name="quiz_screenshot_question">თე სკრინშოტი ჯგირი რენო ეიოხარგალო?</string>
-  <string name="add_description">+ ეჭარუაშ გეძინა</string>
   <string name="delete_recent_searches_dialog">დასურო გოკონანო გორილეფიშ ისტორიაშ ლასუა?</string>
   <string name="search_history_deleted">გორუაშ ისტორია ლასირი რე</string>
   <string name="delete">ლასუა</string>
@@ -314,6 +263,5 @@
   <string name="notifications_channel_name_all">ვიკიოწკარუეშ გინაფა</string>
   <string name="preference_author_name_toggle">ავტორიშ შხვა ჯოხოშ გჷმორინაფა</string>
   <string name="error_occurred_in_picking_images">სურათიშ ეხარგუაშ ბორჯის ჩილათაქ მოხვადჷ</string>
-  <string name="image_chooser_title">გეგშაგორით ეიოხარგალი სურათი</string>
   <string name="please_wait">ქორთხინთ ქჷმიცადით …</string>
 </resources>

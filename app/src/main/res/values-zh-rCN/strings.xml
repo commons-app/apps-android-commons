@@ -86,18 +86,7 @@
   <string name="license_name_cc_by">CC 署名 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">知识共享 署名-相同方式共享 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC署名-相同方式共享3.0（奥地利）</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC署名-相同方式共享3.0（德国）</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC署名-相同方式共享3.0（爱沙尼亚）</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC署名-相同方式共享3.0（西班牙）</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC署名-相同方式共享3.0（克罗地亚）</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC署名-相同方式共享3.0（卢森堡）</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC署名-相同方式共享3.0（荷兰）</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC署名-相同方式共享3.0（挪威）</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC署名-相同方式共享3.0（波兰）</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC署名-相同方式共享3.0（罗马尼亚）</string>
   <string name="license_name_cc_by_3_0">CC署名3.0</string>
-  <string name="license_name_cc_zero">CC0</string>
   <string name="welcome_wikipedia_text">贡献您持有的图像。
 让维基百科的条目更加生活化！</string>
   <string name="welcome_wikipedia_subtext">维基百科上的图像来自维基共享资源。</string>
