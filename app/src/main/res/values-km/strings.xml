@@ -32,11 +32,13 @@
     <item quantity="one">%1$d ផ្ទុកឡើង</item>
     <item quantity="other">%1$d បានផ្ទុកឡើង</item>
   </plurals>
+  <string name="title_activity_explore">រុករក</string>
   <string name="navigation_item_explore">រុករក</string>
   <string name="preference_category_appearance">ការ​រចនា</string>
   <string name="preference_category_general">ទូទៅ​</string>
   <string name="preference_category_feedback">មតិយោបល់</string>
   <string name="preference_category_privacy">ឯកជនភាព</string>
+  <string name="preference_category_location">ទីតាំង​</string>
   <string name="app_name">ទូទៅ</string>
   <string name="menu_settings">ការកំណត់​</string>
   <string name="username">ឈ្មោះអ្នកប្រើ</string>
@@ -76,18 +78,22 @@
   <string name="share_description_hint">ការពិពណ៌នា</string>
   <string name="share_caption_hint" fuzzy="true">ចំណងជើង (កំហិត ២៥៥តួ)</string>
   <string name="login_failed_network">មិនអាចកត់ឈ្មោះចូលបានទេ ព្រោះបណ្ដាញកំពុងមានបញ្ហា។</string>
+  <string name="login_failed_wrong_credentials">មិនអាចកត់ឈ្មោះចូលបានទេ។ សូមពិនិត្យអត្តនាមនិងពាក្យសម្ងាត់របស់អ្នកឡើងវិញ។</string>
   <string name="login_failed_throttled">ការព្យាយាមមិនបានសម្រេចច្រើនដងពេក។ សូមព្យាយាមម្តងទៀតនៅប៉ុន្មាននាទីក្រោយ។</string>
   <string name="login_failed_blocked">សូមអភ័យទោស អ្នកប្រើប្រាស់រូបនេះត្រូវបានហាមឃាត់នៅវិគីមេឌារួម</string>
   <string name="login_failed_2fa_needed">អ្នកចាំបាច់ត្រូវតែផ្ដល់លេខកូដសម្រាប់បញ្ជាក់ទទួលស្គាល់ពីរតង់។</string>
   <string name="login_failed_generic">កត់ឈ្មោះចូលមិនបានសម្រេច</string>
   <string name="share_upload_button">ផ្ទុកឡើង</string>
   <string name="multiple_share_base_title">ដាក់ឈ្មោះឲ្យសំនុំនេះ</string>
+  <string name="add_set_name_toast">សូមផ្ដល់ឈ្មោះសម្រាប់សំនុំនេះផង</string>
   <string name="provider_modifications">បម្រែបម្រួល</string>
   <string name="menu_upload_single">ផ្ទុកឡើង</string>
   <string name="categories_search_text_hint">ស្វែងរកចំណាត់ថ្នាក់ក្រុម</string>
   <string name="menu_save_categories">រក្សាទុក</string>
   <string name="refresh_button">ផ្ទុកឡើងវិញ</string>
   <string name="display_list_button">បញ្ជី</string>
+  <string name="gps_disabled">ឧបករណ៍របស់អ្នកកំពុងបិទមិនប្រើGPS។ តើអ្នកចង់បើកវាប្រើទេ?</string>
+  <string name="enable_gps">បើកប្រើ GPS</string>
   <string name="contributions_subtitle_zero" fuzzy="true">គ្មានអ្វីដែលបានផ្ទុកឡើងទេ</string>
   <string name="categories_not_found">រកមិនឃើញចំណាត់ថ្នាក់ក្រុមដែលត្រូវនឹង %1$s ទេ</string>
   <string name="categories_skip_explanation">បន្ថែមចំណាត់ថ្នាក់ក្រុមអោយរូបភាពរបស់អ្នកដើម្បីអោយងាយស្រួលស្វែងរកក្នុងវិគីមេឌារួម។ ចាប់ផ្ដើមវាយបញ្ចូលឈ្មោះចំណាត់ថ្នាក់ក្រុម។</string>
@@ -112,7 +118,18 @@
   <string name="license_name_cc_by"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Germany)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spain)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croatia)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxembourg)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Netherlands)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norway)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Poland)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
   <string name="welcome_wikipedia_text">បរិច្ចាគរូបភាពរបស់អ្នក។ សូមជួយផ្ដល់ភាពរស់រវើកដល់អត្ថបទវិគីភីឌា។</string>
   <string name="welcome_wikipedia_subtext">រូបភាពនៅលើវិគីភីឌាបានមកពីWikimedia Commons។</string>
   <string name="welcome_copyright_text">រូបភាពរបស់អ្នកជួយផ្ដល់ចំណេះដឹងដល់ប្រជាជនទូទាំងពិភពលោក។</string>
@@ -125,6 +142,9 @@
   <string name="detail_description_empty">គ្មាន​ការ​ពណ៌នា</string>
   <string name="detail_license_empty">Unknown license</string>
   <string name="menu_refresh">ធ្វើឱ្យស្រស់</string>
+  <string name="background_image">រូបភាពផ្ទៃខាងក្រោយ</string>
+  <string name="no_image_found">គ្មានរូបភាព</string>
+  <string name="upload_image">ផ្ទុករូបភាពឡើង</string>
   <string name="welcome_image_mount_zao">ភ្នំហ្សាអូ</string>
   <string name="welcome_image_rainbow_bridge">ស្ពានឥន្ទធនូ</string>
   <string name="cancel">បោះបង់</string>
@@ -139,6 +159,7 @@
   <string name="navigation_item_logout">កត់ឈ្មោះចេញ</string>
   <string name="navigation_item_info">រៀនប្រើ</string>
   <string name="navigation_item_notification">សារជូនដំណឹង</string>
+  <string name="navigation_item_featured_images">ឆ្នើម</string>
   <string name="no_description_found">គ្មានការពិពណ៌នា</string>
   <string name="nearby_info_menu_wikidata_article">វត្ថុក្នុងវិគីទិន្នន័យ</string>
   <string name="nearby_info_menu_wikipedia_article">អត្ថបទវិគីភីឌៀ</string>

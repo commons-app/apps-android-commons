@@ -66,6 +66,8 @@
   <string name="categories_search_text_hint">Schük uun kategoriin</string>
   <string name="menu_save_categories">Seekre</string>
   <string name="refresh_button">Nei loose</string>
+  <string name="gps_disabled">GPS as üüb dan aperoot ei uun. Wel dü det nü aktiwiare?</string>
+  <string name="enable_gps">GPS aktiwiare</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Bit nü nian uploads</string>
   <string name="categories_not_found">Det kategorii „%1$s“ küd ei fünjen wurd.</string>
   <string name="categories_skip_explanation" fuzzy="true">Dü könst nei kategoriin iinracht, amdat din bilen beeder fünjen wurd. Eder skriiw en kategorii-nööm of tipe üüb det nooracht (of gung üüb det \'turag\'-fial), an läät di straal ütj.</string>
@@ -88,6 +90,8 @@
   <string name="menu_download">Deelloose</string>
   <string name="preference_license" fuzzy="true">Lisens</string>
   <string name="use_previous" fuzzy="true">Ual tiitel/beskriiwang brük</string>
+  <string name="allow_gps">Aktuel plak automaatisk ufrep</string>
+  <string name="allow_gps_summary" fuzzy="true">Rept di aktuel plak uf, am kategoriin föörtuslauen, wan det bil nian geotags hää.</string>
   <string name="preference_theme" fuzzy="true">Naacht muude</string>
   <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four">Attribution 4.0</string>
@@ -95,9 +99,20 @@
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Uastenrik)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Schiisklun)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estlun)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spoonien)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatien)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luksemborag)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Neederlunen)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norweegen)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Poolen)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumeenien)</string>
   <string name="license_name_cc_by_3_0">CC-BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">A miast bilen uun Wikipedia lei bi Wikimedia Commons.</string>
   <string name="tutorial_1_subtext">Mä din bilen halepst dü minsken üüb a hialer welt.</string>
   <string name="tutorial_2_text">Wees so gud an schüür bilen huuch, diar dü salew maaget heest:</string>
@@ -116,7 +131,10 @@
   <string name="detail_license_empty">Ünbekäänd lisens</string>
   <string name="menu_refresh">Nei loose</string>
   <string name="read_storage_permission_rationale" fuzzy="true">Ferlangd rochten: Ekstern seekrang lees. Det app koon saner detdiar rocht ei werke.</string>
+  <string name="location_permission_rationale">Mögelk rocht: Rept di aktuel plak för kategoriiföörslacher ap.</string>
   <string name="ok">OK</string>
+  <string name="title_activity_nearby">Steeden naibi</string>
+  <string name="no_nearby">Nian steeden uun a naite fünjen</string>
   <string name="warning">Wäärnang</string>
   <string name="yes">Ja</string>
   <string name="no">Naan</string>
@@ -126,6 +144,11 @@
   <string name="become_a_tester_title">Beta-Tester wurd</string>
   <string name="become_a_tester_description">Melde di bi üüs beta-kanool üüb Google Play uun, an fu ääder tugang tu nei funktjuunen.</string>
   <string name="_2fa_code">2FA-code</string>
+  <string name="number_of_uploads">Min grens för huuchschüürd datein</string>
+  <string name="maximum_limit">Boowergrens</string>
+  <string name="maximum_limit_alert">Muar üs 500 iindracher kön ei uunwiset wurd</string>
+  <string name="set_limit" fuzzy="true">Grens för huuchschüürd datein fäästlei</string>
+  <string name="login_failed_2fa_not_supported">Tau-straal-gudkäänen (2FA) wal uun uugenblak ei.</string>
   <string name="logout_verification">Wel dü di würelk ufmelde?</string>
   <string name="cancel">Ufbreeg</string>
   <string name="navigation_drawer_open">Wise</string>

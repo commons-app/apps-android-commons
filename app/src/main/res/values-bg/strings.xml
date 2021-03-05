@@ -25,10 +25,12 @@
     <item quantity="one">Получавам споделено съдържание. Обработката може да потрае, в зависимостта от размера на картината и вашето устройство</item>
     <item quantity="other">Получавам споделено съдържание. Обработката може да потрае, в зависимостта от размера на картините и вашето устройство</item>
   </plurals>
+  <string name="title_activity_explore">Изследвайте</string>
   <string name="navigation_item_explore">Изследвайте</string>
   <string name="preference_category_appearance">Изглед</string>
   <string name="preference_category_general">Общи</string>
   <string name="preference_category_feedback">Обратна връзка</string>
+  <string name="preference_category_location">Местоположение</string>
   <string name="app_name">Общомедия</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Настройки</string>
@@ -64,16 +66,20 @@
   <string name="share_title_hint">Описание (задълж.)</string>
   <string name="share_description_hint">Описание</string>
   <string name="login_failed_network">Неуспешно влизане – проблем в мрежата</string>
+  <string name="login_failed_wrong_credentials">Неуспешно влизане. Проверете потребителското Ви име и паролата.</string>
   <string name="login_failed_blocked">За съжаление, потребителят е блокиран на Общомедия</string>
   <string name="login_failed_generic">Грешка при влизане</string>
   <string name="share_upload_button">Качване</string>
   <string name="multiple_share_base_title">Дайте име на този комплект</string>
+  <string name="add_set_name_toast">Дайте име на набора</string>
   <string name="provider_modifications">Изменения</string>
   <string name="menu_upload_single">Качване</string>
   <string name="categories_search_text_hint">Търсене на категории</string>
   <string name="menu_save_categories">Съхраняване</string>
   <string name="refresh_button">Обновяване</string>
   <string name="display_list_button">Списък</string>
+  <string name="gps_disabled">GPS е изключен на устройството Ви. Желаете ли да го включите?</string>
+  <string name="enable_gps">Включи GPS</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Все още няма качени файлове</string>
   <string name="categories_not_found">Няма категории, отговарящи на %1$s</string>
   <string name="categories_skip_explanation">Поставете категории на изображения, за да могат потребителите по-лесно да ги намерят на Общомедия.\n\nЗа да поставите категория, почнете с писане на нейното име.</string>
@@ -97,9 +103,20 @@
   <string name="license_name_cc_by_sa">Признание-Споделяне на Споделеното 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Австрия)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Германия)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Естония)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Испания)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Хърватия)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Люксембург)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Нидерландия)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Норвегия)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Полша)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Румъния)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">В Общомедия се намират повечето изображения, използвани в Уикипедия.</string>
   <string name="tutorial_1_subtext">Вашите изображения помагат за образоването на хората по целия свят!</string>
   <string name="tutorial_3_text">Моля, НЕ качвайте:</string>
@@ -113,7 +130,10 @@
   <string name="read_storage_permission_rationale">Изисква се разрешение: Трябва да се прочита от външен склад. Приложението без това няма достъп до вашата галерия.</string>
   <string name="write_storage_permission_rationale">Изисква се разрешение: Трябва да се запише на външен склад. Приложението без това няма достъп до вашата камера/галерия.</string>
   <string name="ok">Добре</string>
+  <string name="title_activity_nearby">Близки места</string>
+  <string name="no_nearby">Не са намерени близки места</string>
   <string name="warning">Предупреждение</string>
+  <string name="upload_image_duplicate">Този файл вече съществува в Общомедия. Наистина ли искате да продължите?</string>
   <string name="yes">Да</string>
   <string name="no">Не</string>
   <string name="media_detail_title">Заглавие</string>
@@ -123,13 +143,23 @@
   <string name="media_detail_license">Лиценз</string>
   <string name="media_detail_coordinates">Координати</string>
   <string name="media_detail_coordinates_empty">не са посочени</string>
+  <string name="number_of_uploads">Мое ограничение на последните качвания</string>
+  <string name="maximum_limit">Максимален лимит</string>
+  <string name="invalid_zero">Нулата не е валидна</string>
+  <string name="invalid_input">Недопустим вход</string>
+  <string name="enter_valid">Внесете валиден брой</string>
+  <string name="cannot_be_zero">Границата на качвания не може да е 0</string>
+  <string name="set_limit">Ограничение на последните качвания</string>
   <string name="commons_logo">Лого на Общомедия</string>
   <string name="commons_website">Общомедия</string>
   <string name="commons_facebook">Общомедия на Facebook</string>
+  <string name="no_image_found">Не са намерени изображения</string>
   <string name="no_subcategory_found">Не са намерени подкатегории</string>
+  <string name="upload_image">Качване на изображение</string>
   <string name="welcome_image_mount_zao">Зао</string>
   <string name="welcome_image_llamas">Лами</string>
   <string name="welcome_image_tulip">Лале</string>
+  <string name="welcome_image_proprietary">Собственическа картина</string>
   <string name="welcome_image_welcome_wikipedia">Добре дошли в Уикипедия</string>
   <string name="cancel">Отказ</string>
   <string name="navigation_drawer_open">Отваряне</string>
@@ -143,10 +173,12 @@
   <string name="navigation_item_logout">Излизане</string>
   <string name="navigation_item_info">Ръководство</string>
   <string name="navigation_item_notification">Известия</string>
+  <string name="navigation_item_featured_images">Избрана</string>
   <string name="no_description_found">не са намерени описания</string>
   <string name="nearby_info_menu_commons_article">Страница на файла в Общомедия</string>
   <string name="nearby_info_menu_wikidata_article">Обект в Уикиданни</string>
   <string name="nearby_info_menu_wikipedia_article">Статия на Уикипедия</string>
+  <string name="error_while_cache">Грешка при кеширане на изображенията</string>
   <string name="upload_problem_exist">Потенциални проблеми с изображението:</string>
   <string name="upload_problem_image_dark">Картината е тъмна.</string>
   <string name="upload_problem_image_blurry">Картината е непрозрачна.</string>
@@ -154,6 +186,7 @@
   <string name="upload_problem_different_geolocation">Това изображение е направено другаде.</string>
   <string name="upload_problem_fbmd">Качвайте само изображения, които сте направили. Не качвайте изображения, намерени на някой друг профил в Facebook.</string>
   <string name="upload_problem_do_you_continue">Все още ли искате да я качете?</string>
+  <string name="give_permission">Даване на позволение</string>
   <string name="use_external_storage_summary" fuzzy="true">Съхраняване на направените картини в приложението с камерата на устройството Ви</string>
   <string name="nominate_deletion">Номиниране за изтриване</string>
   <string name="nominated_for_deletion">Изображението е предложено за изтриване.</string>
@@ -164,7 +197,9 @@
   <string name="login_alert_message">Влезте в сметката си, за да използвате тази възможност.</string>
   <string name="copy_wikicode">Копиране на уикитекста в кеша</string>
   <string name="wikicode_copied">Уикитекстът е копиран в кеша</string>
+  <string name="nearby_location_has_not_changed">Местоположението не е променено.</string>
   <string name="nearby_location_not_available">„Близки места“ може да не работи правилно, тъй като местоположението не е налично.</string>
+  <string name="toggle_view_button">Превключване на изгледа</string>
   <string name="nearby_wikidata">Уикиданни</string>
   <string name="nearby_wikipedia">Уикипедия</string>
   <string name="nearby_commons">Общомедия</string>
@@ -184,6 +219,10 @@
   <string name="list_sheet">Списък</string>
   <string name="next">Следваща</string>
   <string name="submit">Изпращане</string>
+  <string name="desc_language_America">Америка</string>
+  <string name="desc_language_Europe">Европа</string>
+  <string name="desc_language_Africa">Африка</string>
+  <string name="desc_language_Asia">Азия</string>
   <string name="search_this_area">Търсене в тази област</string>
   <string name="nearby_card_permission_title">Искане за разрешение</string>
   <string name="nearby_card_permission_explanation">Искате ли да използвате текущото си местоположение за показване на близките места, които се нуждаят от снимки?</string>
@@ -196,6 +235,7 @@
   <string name="display_campaigns_explanation">Вижте текущите кампании</string>
   <string name="nearby_campaign_dismiss_message">Вече няма да ви се показват кампаниите. Ако промените решението си, ще намерите тази настройка в Настройки.</string>
   <string name="this_function_needs_network_connection">Тази опция изисква да сте свързани към мрежата. Проверете настройките за връзка.</string>
+  <string name="bad_token_error_proposed_solution">Качването не е успешно поради проблеми с редакторския шифър. Моля, излезете и отново влезете в системата.</string>
   <string name="error_processing_image">Възникна грешка при обработката на картината. Моля, опитайте отново!</string>
   <string name="no_image">Няма използвани изображения</string>
   <string name="no_image_reverted">Няма върнати изображения</string>
@@ -206,5 +246,6 @@
   <string name="menu_option_read">Преглеждане на прочетени</string>
   <string name="menu_option_unread">Преглеждане на непрочетени</string>
   <string name="error_occurred_in_picking_images">Възникна грешка при избирането на изображенията</string>
+  <string name="image_chooser_title">Изберете изображения за качване</string>
   <string name="please_wait">Моля, изчакайте...</string>
 </resources>

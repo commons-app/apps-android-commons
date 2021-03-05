@@ -37,11 +37,13 @@
     <item quantity="one">Ricevante komunan enhavon. Traktado de la bildo eble iom daŭros, depende de la grando de la bildo kaj via aparato</item>
     <item quantity="other">Ricevante komunan enhavon. Traktado de la bildoj eble iom daŭros, depende de la grando de la bildo kaj via aparato</item>
   </plurals>
+  <string name="title_activity_explore">Esplori</string>
   <string name="navigation_item_explore">Esplori</string>
   <string name="preference_category_appearance">Aspekto</string>
   <string name="preference_category_general">Ĝenerala</string>
   <string name="preference_category_feedback">Prikomentado</string>
   <string name="preference_category_privacy">Privateco</string>
+  <string name="preference_category_location">Pozicio</string>
   <string name="app_name">Komunejo</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Agordoj</string>
@@ -79,18 +81,22 @@
   <string name="share_title_hint" fuzzy="true">Titolo (deviga)</string>
   <string name="share_description_hint">Priskribo</string>
   <string name="login_failed_network">Ne eblas ensaluti. Estas problemo pri la loka reto.</string>
+  <string name="login_failed_wrong_credentials">Ne eblas ensaluti. Bonvolu kontroli viajn uzantnomon kaj pasvorton</string>
   <string name="login_failed_throttled">Tro da,nesukcesaj provoj. Bonvolu provi denove post kelkaj minutoj.</string>
   <string name="login_failed_blocked">Pardonon, ĉi tiu uzanto estas barita de la Vikimedia Komunejo</string>
   <string name="login_failed_2fa_needed">Vi devas provizi vian dupaŝan aŭtentigan kodon.</string>
   <string name="login_failed_generic">Ensalutado malsukcesis</string>
   <string name="share_upload_button">Alŝuti</string>
   <string name="multiple_share_base_title">Nomu ĉi tiun aron</string>
+  <string name="add_set_name_toast">Bonvolu provizi nomon por ĉi tiu aro</string>
   <string name="provider_modifications">Ŝanĝoj</string>
   <string name="menu_upload_single">Alŝuti</string>
   <string name="categories_search_text_hint">Serĉi tra kategorioj</string>
   <string name="menu_save_categories">Konservi</string>
   <string name="refresh_button">Aktualigi</string>
   <string name="display_list_button">Listo</string>
+  <string name="gps_disabled">GPS estas malŝaltita en via aparato. Ĉu vi volas ŝalti ĝin?</string>
+  <string name="enable_gps">Ŝalti la GPS</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Neniuj alŝutaĵoj ĝis nun!</string>
   <string name="categories_not_found">Troviĝis neniu kategorio kongrua kun serĉoteksto %1$s</string>
   <string name="categories_skip_explanation">Aldonu kategoriojn por plitrovebligi viajn bildojn ĉe Vikimeda Komunejo.\nEktajpu por aldoni kategoriojn.</string>
@@ -117,6 +123,8 @@
   <string name="menu_download">Elŝuti</string>
   <string name="preference_license">Defaŭlta permesilo</string>
   <string name="use_previous" fuzzy="true">Uzi la antaŭan titolon/priskribon</string>
+  <string name="allow_gps">Aŭtomate akiri la nunan pozicion</string>
+  <string name="allow_gps_summary">Akiri aktualan lokon se geografia etikedo mankas sur bildo, kaj aldoni tiun etikedon. Averto: tio rivelos vian aktualan lokon.</string>
   <string name="preference_theme" fuzzy="true">Nokta reĝimo</string>
   <string name="license_name_cc_by_sa_four">Atribuite-Samkondiĉe 4.0</string>
   <string name="license_name_cc_by_four">Atribuite 4.0</string>
@@ -124,9 +132,20 @@
   <string name="license_name_cc_by">Atribuite 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Aŭstrio)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Germanio)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonio)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Hispanio)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatio)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luksemburgo)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Nederlando)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norvegio)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Pollando)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumanio)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">La Vikimedia Komunejo gastigas plej multajn bildojn kiuj estas uzataj sur Vikipedio.</string>
   <string name="tutorial_1_subtext">Viaj bildoj helpas klerigi homojn en la tuta mondo!</string>
   <string name="tutorial_2_text">Bonvolu nur alŝuti bildojn kiujn vi mem fotis aŭ kreis.</string>
@@ -159,8 +178,12 @@
   <string name="read_storage_permission_rationale">Postulata permeso: Legi eksteran konservejon. La aplikaĵo ne povas atingi vian galerion sen tio.</string>
   <string name="write_storage_permission_rationale">Postulata permeso: Skribi al ekstera konservejo. La aplikaĵo ne povas atingi viajn fotilon/galerion sen tio.</string>
   <string name="location_permission_title">Petante Permeson por Lokado</string>
+  <string name="location_permission_rationale">Laŭvola permeso: Akiri aktualan lokon por sugestoj pri kategorio</string>
   <string name="ok">Bone</string>
+  <string name="title_activity_nearby">Apudaj Lokoj</string>
+  <string name="no_nearby">Neniu apuda loko troviĝas</string>
   <string name="warning">Averto</string>
+  <string name="upload_image_duplicate">Ĉi tiu dosiero jam ekzistas ĉe Komunejo. Ĉu vi certas ke vi volas daŭrigi?</string>
   <string name="yes">Jes</string>
   <string name="no">Ne</string>
   <string name="media_detail_title">Titolo</string>
@@ -174,18 +197,32 @@
   <string name="become_a_tester_title">Fariĝi Beta-Testanto</string>
   <string name="become_a_tester_description">Abonu nian beta-kanalon ĉe Google Play kaj frue ekprovu novajn trajtojn kaj riparojn de cimoj</string>
   <string name="_2fa_code">2FA-Kodo</string>
+  <string name="number_of_uploads">Mia Ĵusa Limo de Alŝutado</string>
+  <string name="maximum_limit">Maksimuma Limo</string>
+  <string name="invalid_zero">Nul ne estas valida</string>
+  <string name="invalid_input">Ne valida enigaĵo</string>
+  <string name="maximum_limit_alert">Ne povas montri pli ol 500</string>
+  <string name="enter_valid">Enigu validan nombron</string>
+  <string name="cannot_be_zero">Limo de alŝutado ne povas esti 0</string>
+  <string name="set_limit">Ĵusa limo de alŝutado</string>
+  <string name="login_failed_2fa_not_supported">Nuntempe, ni ne subtenas du-faktoran aŭtentokontroladon.</string>
   <string name="logout_verification">Ĉu vi vere volas elsaluti?</string>
   <string name="commons_logo">Emblemo de Komunejo</string>
   <string name="commons_website">Retejo de Komunejo</string>
   <string name="commons_facebook">Facebook-Paĝo de Komunejo</string>
   <string name="commons_github">Fontokodo de Komunejo ĉe Github</string>
+  <string name="background_image">Fona Bildo</string>
   <string name="mediaimage_failed">Aŭdvidaĵo-Bildo Malsukcesis</string>
+  <string name="no_image_found">Neniu Bildo Trovita</string>
   <string name="no_subcategory_found">Neniu subkategorio trovita</string>
   <string name="no_parentcategory_found">Neniu superkategorio trovita</string>
+  <string name="upload_image">Alŝuti Bildon</string>
   <string name="welcome_image_mount_zao">Monto Zao</string>
   <string name="welcome_image_llamas">Lamoj</string>
   <string name="welcome_image_rainbow_bridge">Ĉielarka Ponto</string>
   <string name="welcome_image_tulip">Tulipo</string>
+  <string name="welcome_image_no_selfies">Neniuj Memfotoj</string>
+  <string name="welcome_image_proprietary">Mallibera Bildo</string>
   <string name="welcome_image_welcome_wikipedia">Bonvenon al Vikipedio</string>
   <string name="welcome_image_welcome_copyright">Kopirajto</string>
   <string name="welcome_image_sydney_opera_house">Sidneja Operejo</string>
@@ -201,12 +238,18 @@
   <string name="navigation_item_logout">Elsaluti</string>
   <string name="navigation_item_info">Lernilo</string>
   <string name="navigation_item_notification">Sciigoj</string>
+  <string name="navigation_item_featured_images">Elstarigita</string>
   <string name="navigation_item_review">Revizii</string>
+  <string name="nearby_needs_permissions">Apudaj lokoj ne povas esti montrata sen permeso pri lokado</string>
   <string name="no_description_found">neniu priskribo trovita</string>
   <string name="nearby_info_menu_commons_article">Dosiera paĝo de la Komunejo</string>
   <string name="nearby_info_menu_wikidata_article">Vikidatumero</string>
   <string name="nearby_info_menu_wikipedia_article">Vikipedia artikolo</string>
+  <string name="error_while_cache">Eraro dum enkaŝmemorigado de bildoj</string>
+  <string name="title_info">Unika priskribanta titolo por la dosiero, funkcionta kiel dosiernomo. Vi povas uzi ordinaran lingvon kun spacetoj. Ne inkluzivu dosiersufikson</string>
   <string name="description_info">Bonvolu priskribi la aŭdvidaĵon plej detale laŭeble: Kie ĝi estis fotita? Kio estas la kunteksto? Bonvolu priskribi la prezentatajn objektojn aŭ homojn. Rivelu informon ne facile konjekteblan, ekz. la horo de la tago por pejzaĝo. Se la aŭdvidaĵo prezentas ion malordinaran, bonvolu klarigi kiel ĝi estas malordinara.</string>
+  <string name="upload_image_too_dark">La bildo estas tro malluma. Ĉu vi tamen volas alŝuti ĝin? La Komunejo (Wikimedia Commons) estas nur por bildoj kun enciklopedia valoro.</string>
+  <string name="upload_image_blurry">La bildo estas malklara. Ĉu vi tamen volas alŝuti ĝin? La Komunejo (Wikimedia Commons) estas nur por bildoj kun enciklopedia valoro.</string>
   <string name="upload_problem_exist">Eblaj problemoj pri ĉi tiu bildo:</string>
   <string name="upload_problem_image_dark">Bildo estas tro malluma.</string>
   <string name="upload_problem_image_blurry">Bildo estas malklara.</string>
@@ -215,6 +258,7 @@
   <string name="upload_problem_fbmd">Bonvolu nur alŝuti bildojn faritajn de vi mem. Ne alŝutu bildojn kiujn vi trovis ĉe Facebook-kontoj de aliuloj.</string>
   <string name="upload_problem_do_you_continue">Ĉu vi ankoraŭ volas alŝuti ĉi tiun bildon?</string>
   <string name="internet_downloaded">Bonvolu nur alŝuti bildojn faritajn de vi mem. Ne alŝutu bildojn kiujn vi elŝutis el la Interreto.</string>
+  <string name="give_permission">Doni permeson</string>
   <string name="use_external_storage" fuzzy="true">Uzi eksteran konservejon</string>
   <string name="use_external_storage_summary" fuzzy="true">Konservi bildojn fotitajn per la en-aplikaĵa fotilo sur via aparato</string>
   <string name="login_to_your_account">Ensaluti en vian konton</string>
@@ -225,6 +269,9 @@
   <string name="nominate_deletion">Proponi forigon</string>
   <string name="nominated_for_deletion">Oni proponis ke ĉi tiu bildo estu forigota.</string>
   <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Vidu la retpaĝon por pliaj detaloj&lt;/u&gt;</string>
+  <string name="nominating_file_for_deletion">Proponante forigon de %1$s.</string>
+  <string name="nominating_for_deletion_status">Proponante forigon de dosiero: %1$s.</string>
+  <string name="view_browser">Malfermi en retumilo</string>
   <string name="skip_login">Preterpasi</string>
   <string name="navigation_item_login">Ensaluti</string>
   <string name="skip_login_title">Ĉu vere vi volas transpasi la ensalutadon?</string>
@@ -232,8 +279,16 @@
   <string name="login_alert_message">Bonvolu ensaluti por uzi ĉi tiun eblon</string>
   <string name="copy_wikicode">Kopii la vikitekston en la tondujon</string>
   <string name="wikicode_copied">La vikiteksto kopiiĝis en la tondujon</string>
+  <string name="nearby_location_has_not_changed">La pozicio ne ŝanĝiĝis.</string>
   <string name="nearby_location_not_available" fuzzy="true">Pozicio ne havebla.</string>
   <string name="location_permission_rationale_nearby">Permeso estas postulata por montri liston de apudaj lokoj</string>
+  <string name="get_directions">Ricevi instrukcion</string>
+  <string name="read_article">Legi artikolon</string>
+  <string name="notifications_welcome">Bonvenon al Vikimedia Komunejo, %1$s! Ni ĝojas ke vi ĉeestas.</string>
+  <string name="notifications_talk_page_message">%1$s lasis mesaĝon sur via diskutpaĝo</string>
+  <string name="notifications_thank_you_edit">Dankon pro tio ke vi faris redakton</string>
+  <string name="notifications_mention">%1$s menciis vin sur %2$s.</string>
+  <string name="toggle_view_button">Baskuligi vidon</string>
   <string name="nearby_directions">Instrukcio</string>
   <string name="nearby_wikidata">Vikidatumoj</string>
   <string name="nearby_wikipedia">Vikipedio</string>
@@ -242,8 +297,10 @@
   <string name="about_faq" fuzzy="true">&lt;u&gt;Oftaj demandoj&lt;/u&gt;</string>
   <string name="welcome_skip_button">Preterpasi Lernilon</string>
   <string name="no_internet">Interreto ne disponas</string>
+  <string name="internet_established">Interreto disponas</string>
   <string name="error_notifications">Eraro pri akirado de sciigoj</string>
   <string name="error_review">Eraro dum akirado de bildo por revizio. Alklaku \'Aktualigi\' por reprovi.</string>
+  <string name="error_review_categories">Eraro dum akirado de bildaj kategorioj por revizio. Alklaku \'Aktualigi\' por reprovi.</string>
   <string name="no_notifications">Neniu sciigo troviĝis</string>
   <string name="about_translate" fuzzy="true">&lt;u&gt;Traduki&lt;/u&gt;</string>
   <string name="about_translate_title">Lingvoj</string>
@@ -251,7 +308,10 @@
   <string name="about_translate_proceed">Daŭrigi</string>
   <string name="about_translate_cancel">Nuligi</string>
   <string name="retry">Reprovi</string>
+  <string name="showcase_view_got_it_button">Komprenite!</string>
   <string name="showcase_view_whole_nearby_activity">Jen lokoj apud vi bezonantajn bildojn por ilustri siajn Vikipediaj artikolojn.\n\nAlklakado de \'Serĉi ĉi tiun areon\' ŝlosas la mapon kaj komencas apudan serĉon ĉirkaŭ tiu loko.</string>
+  <string name="showcase_view_list_icon">Frapetado de ĉi tiu butono montras liston de tiuj lokoj.</string>
+  <string name="showcase_view_plus_fab">Vi povas alŝuti bildon de ajna loko el via galerio aŭ per via fotilo</string>
   <string name="no_images_found">Neniuj bildoj trovitaj!</string>
   <string name="error_loading_images">Okazis eraro ŝargante la bildojn.</string>
   <string name="image_uploaded_by">Alŝutita de: %1$s</string>
@@ -260,10 +320,12 @@
   <string name="app_widget_heading">Bildo de la Tago</string>
   <string name="menu_search_button">Serĉi</string>
   <string name="search_commons">Serĉi Komunejon</string>
+  <string name="images_not_found">Troviĝis neniu Bildo kongrua kun %1$s</string>
   <string name="title_activity_search">Serĉi</string>
   <string name="search_recent_header">Lastaj serĉoj:</string>
   <string name="provider_searches">Ĵusaj serĉoj</string>
   <string name="error_loading_categories">Eraro okazis dum ŝargado de kategorioj.</string>
+  <string name="error_loading_subcategories">Eraro okazis dum ŝargado de subkategorioj.</string>
   <string name="search_tab_title_media">Aŭdvidaĵo</string>
   <string name="search_tab_title_categories">Kategorioj</string>
   <string name="explore_tab_title_featured">Elstaraj</string>
@@ -283,6 +345,7 @@
   <string name="screenshot_answer">Ekrankopio de retejo konsideriĝas kiel derivitan verkon, kaj sub ajnaj aŭtorrajtoj de la retejo mem. Tiu povas esti uzata post permeso de la aŭtoro. Sen tia permeso, ajna artaĵo kreita de vi, surbaze de la verko de la aŭtoro, jure konsideriĝas kiel senpermesa kopio posedata de la originala aŭtoro.</string>
   <string name="blurry_image_answer">Unu el la celoj de Komunejo estas kolekti bonkvalitajn bildojn. Do, malklaraj bildoj ne estas alŝutindaj. Ĉiam provu foti bonkvalite kun bona prilumado.</string>
   <string name="construction_event_answer">Ĉe Komunejo, ni bonvenigas bildojn prezentantajn teknologion aŭ kulturon.</string>
+  <string name="warning_for_image_reverts">AVERTO: Pli ol %1$s de la bildoj alŝutitaj de vi estas forigitaj. Se vi daŭre alŝutos forigindajn bildojn, via konto probable estos forbarata.</string>
   <string name="congratulatory_message_quiz">%1$s el viaj respondoj estis ĝustaj. Gratulon!</string>
   <string name="warning_for_no_answer">Elektu unu el la du respondoj al la demando</string>
   <string name="user_not_logged_in">Ensaluta sesio eksvalidiĝis; bonvolu reensaluti.</string>
@@ -292,7 +355,9 @@
   <string name="wrong">Malĝusta Respondo</string>
   <string name="quiz_screenshot_question">Ĉu ĉi tiu ekrankopio estas alŝutebla?</string>
   <string name="share_app_title">Diskonigi Aplikaĵon</string>
+  <string name="share_coordinates_not_present">Koordinatoj ne specifiĝis dum elektado de bildo</string>
   <string name="error_fetching_nearby_places">Eraro dum akirado de apudaj lokoj.</string>
+  <string name="add_description">+ Aldoni priskribon</string>
   <string name="no_recent_searches">Neniu ĵusa serĉo</string>
   <string name="delete_recent_searches_dialog">Ĉu vi certas ke vi volas malplenigi vian serĉ-historion?</string>
   <string name="delete_search_dialog">Ĉu vi volas forigi ĉi tiun serĉon?</string>
@@ -325,16 +390,20 @@
   <string name="read_notifications" fuzzy="true">Sciigoj (enarkivigitaj)</string>
   <string name="display_nearby_notification">Montri sciigojn pri apudaĵoj</string>
   <string name="display_nearby_notification_summary" fuzzy="true">Tuŝetu ĉi tie por vidi apudan lokon kiu bezonas bildojn</string>
+  <string name="no_close_nearby">Neniu proksima loko trovita ĉe vi.</string>
   <string name="list_sheet">Listo</string>
   <string name="storage_permission">Permeso por Konservado</string>
   <string name="write_storage_permission_rationale_for_image_share">Ni bezonas vian permeson aliri eksteran konservejon de via aparato por alŝuti bildojn.</string>
   <string name="nearby_notification_dismiss_message">Vi ne plu vidos la plej proksiman lokon bezonantan bildojn. Tamen, vi povas reŝalti tiun sciigon en Agordoj se vi volas.</string>
   <string name="step_count" fuzzy="true">Paŝo %1$d el %2$d</string>
+  <string name="image_in_set_label">%1$d en bildaro</string>
   <string name="next">Sekva</string>
   <string name="previous">Antaŭa</string>
   <string name="submit">Sendi</string>
   <string name="upload_title_duplicate" fuzzy="true">Ekzistas dosiero kun la nomo %1$s. Ĉu vi certas ke vi volas daŭrigi?</string>
   <string name="map_application_missing">Neniu kongrua aplikaĵo troveblas en via aparato. Bonvolu instali tian por uzo kun ĉi tiu funkcio.</string>
+  <string name="navigation_item_bookmarks">Legosignoj</string>
+  <string name="title_activity_bookmarks">Legosignoj</string>
   <string name="title_page_bookmarks_pictures">Bildoj</string>
   <string name="title_page_bookmarks_locations">Lokoj</string>
   <string name="menu_bookmark">Aldoni/Forigi legosignon</string>
@@ -349,6 +418,13 @@
   <string name="deletion_reason_not_interesting">Domaĝe, ĉi tiu bildo ne estas interesa por enciklopedio</string>
   <string name="uploaded_by_myself">Alŝutita de mi je %1$s, uzata en %2$d artikolo(j).</string>
   <string name="no_uploads">Bonvenon al Komunejo!\n\nAlŝutu vian unuan aŭdvidaĵon per frapeto de la butono \'Aldoni\'.</string>
+  <string name="desc_language_Worldwide">Tutmonda</string>
+  <string name="desc_language_America">Ameriko</string>
+  <string name="desc_language_Europe">Eŭropo</string>
+  <string name="desc_language_Middle_East">Meza Oriento</string>
+  <string name="desc_language_Africa">Afriko</string>
+  <string name="desc_language_Asia">Azio</string>
+  <string name="desc_language_Pacific">Pacifiko</string>
   <string name="no_categories_selected">Neniu Elektita Kategorio</string>
   <string name="no_categories_selected_warning_desc" fuzzy="true">Bildo sen kategorioj estas malofte uzebla. Ĉu vi nepre volas aldoni sen elekti kategoriojn?</string>
   <string name="upload_flow_all_images_in_set">(Je ĉiuj bildoj en aro)</string>
@@ -365,6 +441,7 @@
   <string name="display_campaigns_explanation">Vidi estantajn kampanjojn</string>
   <string name="nearby_campaign_dismiss_message">Vi ne plu vidos la kampanjojn. Tamen, vi povas reŝalti tiun sciigon en Agordoj se vi volas.</string>
   <string name="this_function_needs_network_connection">Ĉi tiu funkcio postulas konekton al reto; bonvolu kontroli viajn agordojn pri konektado.</string>
+  <string name="bad_token_error_proposed_solution">Alŝutado malsukcesis pro problemoj pri redakta ĵetono. Bonvolu elsaluti kaj reensaluti.</string>
   <string name="error_processing_image">Eraro okazis dum traktado de la bildo. Bonvolu reprovi!</string>
   <string name="getting_edit_token">Akirante ĵetonon por redaktado</string>
   <string name="check_category_adding_template">Aldonante ŝablonon por kategoria kontrolo</string>
@@ -375,11 +452,18 @@
   <string name="check_category_success_message" fuzzy="true">Sukcese petis kontrolon de kategorio pri %1$s</string>
   <string name="check_category_failure_message">Ne povis peti kontrolon de kategorio pri %1$s</string>
   <string name="check_category_toast">Petante kontrolon de kategorio pri %1$s</string>
+  <string name="nominate_for_deletion_edit_file_page">Aldonante forigan mesaĝon al dosiero</string>
   <string name="nominate_for_deletion_done">Farite</string>
+  <string name="nominate_for_deletion_notify_user">Sciigante Uzanton ĉe Diskutpaĝo</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">Aldonante dosieron al protokolo pri Petoj por forigado</string>
+  <string name="nominate_for_deletion_create_deletion_request">Farante subpaĝon pri Petoj por forigo</string>
+  <string name="notsure">Ne certe</string>
   <string name="send_thank_success_title">Sendante Dankon: Sukcesis</string>
   <string name="send_thank_success_message">Sukcese dankis uzanton %1$s</string>
   <string name="send_thank_failure_message">Malsukcesis sendi dankon %1$s</string>
   <string name="send_thank_failure_title">Dankado: Malsukcesis</string>
+  <string name="send_thank_send">Sendante dankon</string>
+  <string name="send_thank_notification_title">Sendante dankon</string>
   <string name="send_thank_toast">Sendante Dankon por %1$s</string>
   <string name="review_copyright">Ĉu tio observas la regulojn pri aŭtorrajtoj?</string>
   <string name="review_category">Ĉu ĉi tiu estis ĝuste enkategoriigita?</string>
@@ -411,10 +495,12 @@
   <string name="menu_option_read" fuzzy="true">Vidi enarkivigitojn</string>
   <string name="menu_option_unread">Vidi nelegitojn</string>
   <string name="error_occurred_in_picking_images">Eraro okazis dum elektado de bildoj</string>
+  <string name="image_chooser_title">Elekti alŝutotajn bildojn</string>
   <string name="please_wait">Bonvolu atendi...</string>
   <string name="images_featured_explanation">Elstaraj bildoj estas tiuj bildoj far tre spertaj fotografistoj kaj ilustristoj, kiujn la komunumo de Vikimedia Komunejo elektis kiel iujn de la plej alta kvalito en la retejo.</string>
   <string name="images_via_nearby_explanation">Bildoj Alŝutitaj per Apudaj lokoj estas bildoj alŝutitaj per trovado de lokoj sur la mapo.</string>
   <string name="thanks_received_explanation">Tiu funkcio ebligas sendi Dankantan sciigon al farinto de utila redakto – per malgranda dankiga ligilo ĉe la paĝo de historio aŭ diferenco.</string>
+  <string name="previous_button_tooltip_message">Alklaku por reuzi la titolon kaj priskribon vi enigis por via antaŭa bildo kaj modifi ĝin por via aktuala bildo</string>
   <string name="welcome_do_upload_content_description">Ekzemploj de alŝutindaj bildoj por Komunejo</string>
   <string name="welcome_dont_upload_content_description">Ekzemploj de ne alŝutindaj bildoj</string>
   <string name="skip_image">Preterpasi ĉi tiun bildon</string>
@@ -437,6 +523,7 @@
   <string name="dialog_box_text_nomination">Kial %1$s foriĝu?</string>
   <string name="review_is_uploaded_by">%1$s estas alŝutita de: %2$s</string>
   <string name="default_description_language">Implicita priskriba lingvo</string>
+  <string name="delete_helper_make_deletion_toast">Provante proponi la forigon de %1$s</string>
   <string name="delete_helper_show_deletion_title">Proponi forigon</string>
   <string name="delete_helper_show_deletion_title_success">Sukcesis</string>
   <string name="delete_helper_show_deletion_message_if" fuzzy="true">Sukcese proponis la forigon de %1$s.</string>
@@ -445,9 +532,11 @@
   <string name="delete_helper_ask_spam_selfie">Memfoto</string>
   <string name="delete_helper_ask_spam_blurry">Malklara</string>
   <string name="delete_helper_ask_spam_nonsense">Sensencaĵo</string>
+  <string name="delete_helper_ask_spam_other">Alia</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Gazetara showImageWithItem</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Hazarda foto el Interreto</string>
   <string name="delete_helper_ask_reason_copyright_logo">Emblemo</string>
+  <string name="delete_helper_ask_reason_copyright_other">Alia</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Ĉar ĝi estas</string>
   <string name="mapbox_telemetry">Mapbox Telemetry</string>
 </resources>

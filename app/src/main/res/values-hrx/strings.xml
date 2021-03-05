@@ -65,7 +65,18 @@
   <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Österreich)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Deitschland)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estland)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spanie)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatie)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburg)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Niederlande)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norweche)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polen)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumänie)</string>
   <string name="license_name_cc_by_3_0">CC-BY 3.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
   <string name="welcome_wikipedia_text">Teil deine Bilder. Erweck Wikipedia-Artikel zum Lewe!</string>
   <string name="welcome_wikipedia_subtext">Die Bilder uff Wikipedia komme von Wikimedia Commons (Wikimedia Allmend).</string>
   <string name="welcome_copyright_text">Deine Bilder helfe dabei, Mensche uff der ganze Welt zu bilde.</string>

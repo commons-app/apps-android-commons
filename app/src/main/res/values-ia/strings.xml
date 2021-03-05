@@ -34,7 +34,10 @@
   <string name="write_storage_permission_rationale">Permission necessari: Scriber sur immagazinage externe. Le app non pote acceder a tu camera/galeria sin isto.</string>
   <string name="use_external_storage" fuzzy="true">Usar immagazinage externe</string>
   <string name="use_external_storage_summary" fuzzy="true">Immagazinar photos prendite con le camera de tu dispositivo</string>
+  <string name="nearby_location_has_not_changed">Le loco non ha cambiate.</string>
   <string name="nearby_location_not_available">\"A proximitate\" poterea non functionar, perque le position geographic non es disponibile.</string>
+  <string name="get_directions">Obtener itinerario</string>
+  <string name="read_article">Leger articulo</string>
   <string name="nearby_directions">Itinerario</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -51,6 +54,7 @@
   <string name="skip_image">Saltar iste imagine</string>
   <string name="review_is_uploaded_by">%1$s es incargate per: %2$s</string>
   <string name="you_must_reset_your_passsword">Un error ha occurrite durante le apertura de session. Es necessari reinitialisar tu contrasigno.</string>
+  <string name="title_app_shortcut_explore">Explorar</string>
   <string name="title_app_shortcut_bookmark">Marcapaginas</string>
   <string name="title_app_shortcut_setting">Configurationes</string>
 </resources>

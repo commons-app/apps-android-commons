@@ -33,10 +33,12 @@
     <item quantity="one">Irudi hau %1$s lizentziapean egongo da</item>
     <item quantity="other">Irudi hauek %1$s lizentziapean egongo dira</item>
   </plurals>
+  <string name="title_activity_explore">Esploratu</string>
   <string name="navigation_item_explore">Esploratu</string>
   <string name="preference_category_appearance">Itxura</string>
   <string name="preference_category_general">Orokorra</string>
   <string name="preference_category_feedback">Feedback</string>
+  <string name="preference_category_location">Kokapena</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Hobespenak</string>
@@ -74,18 +76,22 @@
   <string name="share_title_hint" fuzzy="true">Izenburua (beharrezkoa)</string>
   <string name="share_description_hint">Deskribapena</string>
   <string name="login_failed_network">Ezin izan da sartu - sarean akatsa</string>
+  <string name="login_failed_wrong_credentials">Ezin da sartu. Mesedez, berrikusi zure erabiltzaile izena eta pasahitza</string>
   <string name="login_failed_throttled">Sartzeko saiakera txar gehiegi. Mesedez saiatu zaitez minutu batzuk barru.</string>
   <string name="login_failed_blocked">Barka, baina erabiltzaile hau blokeatuta dago Commonsen</string>
   <string name="login_failed_2fa_needed">Zure bi faktoreko autentifikazio kodea eman behar duzu.</string>
   <string name="login_failed_generic">Saio hasieran akatsa</string>
   <string name="share_upload_button">Igo</string>
   <string name="multiple_share_base_title">Izena eman bilduma honi</string>
+  <string name="add_set_name_toast">Mesedez, eman izenburu bat multzo honetarako</string>
   <string name="provider_modifications">Aldaketak</string>
   <string name="menu_upload_single">Igo</string>
   <string name="categories_search_text_hint">Kategoriak bilatu</string>
   <string name="menu_save_categories">Gorde</string>
   <string name="refresh_button">Eguneratu</string>
   <string name="display_list_button">Zerrenda</string>
+  <string name="gps_disabled">GPSa desgaituta dago gailu honetan. Gaitu nahi duzu?</string>
+  <string name="enable_gps">GPSa gaitu</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Oraindik ez da ezer igo</string>
   <string name="categories_not_found">Ez da kategoriak aukritu %1$s izenarekin</string>
   <string name="categories_skip_explanation">Gehitu kategoriak zure argazkiak Wikimedia Commonsen aurkitzen errazagoak izan daitezen.\nHasi idazten kategoriak gehitzeko.</string>
@@ -111,6 +117,7 @@
   <string name="menu_download">Jaitsi</string>
   <string name="preference_license">Berezko lizentzia</string>
   <string name="use_previous" fuzzy="true">Aurreko izenburu/deskribapena erabili</string>
+  <string name="allow_gps">Oraingo kokapena automatikoki lortu</string>
   <string name="preference_theme" fuzzy="true">Gau modua</string>
   <string name="license_name_cc_by_sa_four"> Aitortu-PartekatuBerdin 4.0</string>
   <string name="license_name_cc_by_four">Aitortu 4.0</string>
@@ -118,9 +125,20 @@
   <string name="license_name_cc_by">Esleipena 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Alemania)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Espainia)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroazia)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxenburgo)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Herbehereak)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norvegia)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polonia)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Errumania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">Wikimedia Commons-ek Wikipedian erabiltzen diren irudi gehienak barne hartzen ditu.</string>
   <string name="tutorial_1_subtext">Zure irudiek mundu osoko jendeari irakasten laguntzen dute!</string>
   <string name="tutorial_2_text">Mesedez, igo bakarrik zuk ateratako edo sortutako irudiak:</string>
@@ -149,7 +167,10 @@
   <string name="menu_refresh">Eguneratu</string>
   <string name="read_storage_permission_rationale">Nahitaezko baimena: kanpo-biltegiaren irakurketa. Aplikazioa ezin da zure galeriara sartu hau gabe.</string>
   <string name="write_storage_permission_rationale">Nahitaezko baimena: kanpo-biltegiratzearen idazketa. Aplikazioa ezin da zure kamerara/galeriara sartu hau gabe.</string>
+  <string name="location_permission_rationale">Aukerako baimena: momentuko kokapena zehaztu kategoriak iradokitzeko</string>
   <string name="ok">Ados</string>
+  <string name="title_activity_nearby">Gertuko lekuak</string>
+  <string name="no_nearby">Ez da hurbileko lekurik aurkitu</string>
   <string name="warning">Oharra</string>
   <string name="yes">Bai</string>
   <string name="no">Ez</string>
@@ -162,17 +183,25 @@
   <string name="media_detail_coordinates_empty">Ez da eskeini</string>
   <string name="become_a_tester_title">Beta testatzaile bihurtu</string>
   <string name="_2fa_code">2FA Kodea</string>
+  <string name="maximum_limit">Gehienezko muga</string>
+  <string name="maximum_limit_alert">500 baino gehiago ezin dira erakutsi</string>
+  <string name="login_failed_2fa_not_supported">Oraingoz ez da bi faktoreko egiaztapenik onartzen.</string>
   <string name="logout_verification">Benetan itxi nahi duzu saioa?</string>
   <string name="commons_logo">Commonsen logoa</string>
   <string name="commons_website">Commons webgunea</string>
   <string name="commons_facebook">Commons-en Facebook orria</string>
+  <string name="background_image">Atzealdeko irudia</string>
   <string name="mediaimage_failed">Media irudiak kale egin du</string>
+  <string name="no_image_found">Ez da irudirik aurkitu</string>
   <string name="no_subcategory_found">Ez da azpikategoriarik aurkitu</string>
   <string name="no_parentcategory_found">Ez da guraso kategoriarik aurkitu</string>
+  <string name="upload_image">Igo irudia</string>
   <string name="welcome_image_mount_zao">Zao Mendia</string>
   <string name="welcome_image_llamas">Llamak</string>
   <string name="welcome_image_rainbow_bridge">Ortzadar zubia</string>
   <string name="welcome_image_tulip">Tulipa</string>
+  <string name="welcome_image_no_selfies">Selfirik ez</string>
+  <string name="welcome_image_proprietary">Jabetza irudia</string>
   <string name="welcome_image_welcome_wikipedia">Ongi etorri Wikipedia</string>
   <string name="welcome_image_welcome_copyright">Ongi etorri copyright-a</string>
   <string name="welcome_image_sydney_opera_house">Sidneiko Opera Etxea</string>
@@ -188,12 +217,17 @@
   <string name="navigation_item_logout">Saioa itxi</string>
   <string name="navigation_item_info">Tutoriala</string>
   <string name="navigation_item_notification">Jakinarazpenak</string>
+  <string name="navigation_item_featured_images">Nabarmendua</string>
+  <string name="nearby_needs_permissions">Ezin dira hurbileko lekuak erakutsi kokapen baimenik gabe</string>
   <string name="no_description_found">Deskripziorik ez da aurkitu</string>
   <string name="nearby_info_menu_commons_article">Artxibo orrialde komuna</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata itema</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipediako artikulua</string>
+  <string name="error_while_cache">Argazkiak hartzerakoan sortutako akatsa</string>
+  <string name="title_info">Fitxategi izenburu deskribatzaile bakarra, fitxategi-izen gisa balioko duena. Hizkuntza arrunta erabil dezakezu espazioekin. Ez sartu fitxategiaren luzapena.</string>
   <string name="description_info">Mesedez, deskribatu multimedia elementua ahal duzun gehien: non hartu zen? zer erakusten du? zein da bere testuingurua? Mesedez, objektuak eta pertsonak deskribatu. Eman asmatzeko erraza ez den informazioa, adibidez, paisaia bat izatekotan, eguneko zein orudtan hartu den. Multimediak zerbait berezia erakusten badu, mesedez azaldu zerk egiten duen berezia.</string>
   <string name="upload_problem_image">arazoak aurkitu dira irudian</string>
+  <string name="give_permission">Baimena eman</string>
   <string name="use_external_storage" fuzzy="true">Kanpo-biltegia erabili</string>
   <string name="use_external_storage_summary" fuzzy="true">Aplikazioaren kamerarekin ateratako argazkiak zure gailuan gorde</string>
   <string name="login_to_your_account">Zure kontuan saioa hasi</string>
@@ -203,13 +237,22 @@
   <string name="null_url">Errorea! Ez da URLa aurkitu</string>
   <string name="nominate_deletion">Ezabaketarako izendatu</string>
   <string name="nominated_for_deletion">Irudi hau ezabaketarako izendatua izan da.</string>
+  <string name="view_browser">Nabigatzailean ikusi</string>
   <string name="skip_login">Jauzi</string>
   <string name="navigation_item_login">Hasi saioa</string>
   <string name="skip_login_title">Benetan saioa hastea jauzi nahi duzula?</string>
   <string name="skip_login_message">Argazkiak igotzeko saioa hasi beharko duzu.</string>
   <string name="login_alert_message">Mesedez, hasi saioa funtzio hau erabili ahal izateko</string>
+  <string name="nearby_location_has_not_changed">Kokapena ez da aldatu.</string>
   <string name="nearby_location_not_available" fuzzy="true">Kokapena ez dago erabilgarri.</string>
   <string name="location_permission_rationale_nearby">Baimena beharrezkoa da hurbil dauden lekuen zerrende ikusteko</string>
+  <string name="get_directions">Nola iritsi</string>
+  <string name="read_article">Artikulua irakurri</string>
+  <string name="notifications_welcome">Ongi etorri Wikimedia Commons-era! Pozten gara zu hemen egoteaz.</string>
+  <string name="notifications_talk_page_message">%1$s-(e)k mezu bat utzi du zure eztabaida orrian</string>
+  <string name="notifications_thank_you_edit">Eskerrik asko aldaketa bat egiteagatik</string>
+  <string name="notifications_mention">%1$s(e)k %2$s(e)an aipatu zaitu.</string>
+  <string name="toggle_view_button">Toggle ikuspegia</string>
   <string name="nearby_directions">Nola iritsi</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -218,6 +261,7 @@
   <string name="about_faq" fuzzy="true">&lt;u&gt;Maiz egindako galderak&lt;/u&gt;</string>
   <string name="welcome_skip_button">Tutoriala jauzi</string>
   <string name="no_internet">Interneta ez dago erabilgarri</string>
+  <string name="internet_established">Interneta erabilgarri</string>
   <string name="error_notifications">Errorea jakinarazpenak ekartzean</string>
   <string name="no_notifications">Ez da jakinarazpenik aurkitu</string>
   <string name="about_translate" fuzzy="true">&lt;u&gt;Itzuli&lt;/u&gt;</string>
@@ -226,7 +270,10 @@
   <string name="about_translate_proceed">Jarraitu</string>
   <string name="about_translate_cancel">Utzi</string>
   <string name="retry">Saiatu berriro</string>
+  <string name="showcase_view_got_it_button">Ulertu dut!</string>
   <string name="showcase_view_whole_nearby_activity">Zugandik hurbil dauden leku hauek irudiak behar dituzte beren Wikipedia artikuluak hornitzeko.\n\nSakatu \'EREMU HONETAN BILATU\' mapa zentratzeko eta kokapen horren inguruan bilaketa hasteko.</string>
+  <string name="showcase_view_list_icon">Botoi hau sakatzeak leku hauetako zerrenda eskeiniko dizu</string>
+  <string name="showcase_view_plus_fab">Edozein lekutako irudi bat igo dezakezu zure kamera edo galeriatik</string>
   <string name="no_images_found">Ez da irudirik aurkitu!</string>
   <string name="error_loading_images">Arazo bat egon da irudiak kargatzerakoan.</string>
   <string name="image_uploaded_by">Nork igota: %1$s</string>
@@ -235,10 +282,12 @@
   <string name="app_widget_heading">Eguneko argazkia</string>
   <string name="menu_search_button">Bilatu</string>
   <string name="search_commons">Commons-en bilatu</string>
+  <string name="images_not_found">Ez da %1$s-(r)ekin bat datorren irudirik aurkitu</string>
   <string name="title_activity_search">Bilatu</string>
   <string name="search_recent_header">Azken bilaketak:</string>
   <string name="provider_searches">Bilatutako azken galderak</string>
   <string name="error_loading_categories">Arazo bat egon da kategoriak kargatzerakoan.</string>
+  <string name="error_loading_subcategories">Arazo bat egon da azpikategoriak kargatzerakoan.</string>
   <string name="successful_wikidata_edit" fuzzy="true">Irudia arazorik gabe gehitu da %1$s-(e)ra Wikidatan!</string>
   <string name="wikidata_edit_failure">Ezin izan da dagokion Wikidata entitatea eguneratu!</string>
   <string name="menu_set_wallpaper">Horma-paper gisa ezarri</string>
@@ -252,6 +301,7 @@
   <string name="selfie_answer">Norberaren argazkiek ez daukate balio entziklopediko handirik. Mesedez, ez igo zure buruaren argazkirik, lehendik zuri buruzko Wikipedia artikulu bat ez badaukazu.</string>
   <string name="taj_mahal_answer">Monumentuen eta paisaien argazkiak herrialde gehienetan igo daitezke. Mesedez, kontuan hartu askotan kanpoan instalatutako epe laburreko arte erakusketek copyright-a daukatela eta ezin direla igo.</string>
   <string name="construction_event_answer">Teknologia edo kultura erakusten duten irudiak ongi etorriak dira Commons-en.</string>
+  <string name="warning_for_image_reverts">ABISUA: Igo dituzun argazkien %1$sa baino gehiago ezabatu da. Ezabatu beharreko argazkiak igotzen jarraitzekotan, zure kontua ezabatua izan liteke.</string>
   <string name="congratulatory_message_quiz">Erantzunetako %1$s zuzen erantzun dituzu. Zorionak!</string>
   <string name="warning_for_no_answer">Hautatu bi aukeretako bat galderari erantzuteko</string>
   <string name="user_not_logged_in">Saioa hasteko denbora amaituta, mesedez, hasi saioa berriro.</string>
@@ -261,7 +311,9 @@
   <string name="wrong">Erantzun okerra</string>
   <string name="quiz_screenshot_question">Pantaila-kaptura hau ondo al dago igotzeko?</string>
   <string name="share_app_title">Aplikazioa partekatu</string>
+  <string name="share_coordinates_not_present">Ez da koordenaturik zehaztu irudia aukeratzean</string>
   <string name="error_fetching_nearby_places">Ezin izan dira hurbileko lekuak ekarri.</string>
+  <string name="add_description">+ Deskribapena gehitu</string>
   <string name="delete_recent_searches_dialog">Ziur zaude zure bilaketen historia garbitu nahi duzula?</string>
   <string name="search_history_deleted">Bilaketa historia ezabatuta</string>
   <string name="Achievements">Lorpenak</string>
@@ -280,4 +332,5 @@
   <string name="error_occurred">Errorea gertatu da!</string>
   <string name="notifications_channel_name_all">Commons Jakinarazpena</string>
   <string name="storage_permission">Biltegiratze baimena</string>
+  <string name="desc_language_Asia">Asia</string>
 </resources>

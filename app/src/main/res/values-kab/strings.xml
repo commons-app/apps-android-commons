@@ -66,6 +66,8 @@
   <string name="categories_search_text_hint">Nadi taggayin</string>
   <string name="menu_save_categories">Sekles</string>
   <string name="refresh_button">Smiren</string>
+  <string name="gps_disabled">GPS ur yermid ɣef yibenk-ik. Tebɣiḍ ad tremdeḍ-t?</string>
+  <string name="enable_gps">Rmed GPS</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Usla ayen yulin</string>
   <string name="categories_not_found">Ulac taggayin imenṭaḍen akked %1$s i yettwafen</string>
   <string name="categories_skip_explanation">Rnu taggayin akken ad terreḍ tugniwin-ik sehlent i tifin di Wikimedia Commons.\n\nBdu timerna n taggayin.</string>
@@ -89,6 +91,8 @@
   <string name="menu_download">Sider</string>
   <string name="preference_license" fuzzy="true">Turagt</string>
   <string name="use_previous" fuzzy="true">Seqdec azwel neɣ aglam yezrin</string>
+  <string name="allow_gps">Awi s wudem awurman adig amiran</string>
+  <string name="allow_gps_summary" fuzzy="true">Awi adig amiran akken ad tsumreḍ taggayt ma yella tugna ur tettwacreḍ ara di tirakalt</string>
   <string name="preference_theme" fuzzy="true">Askar  n yiḍ</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
@@ -96,9 +100,20 @@
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Ustriya)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Alman)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Istunya)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spanya)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Karwasya)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luksumburg)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Huland)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Nurvij)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Puland)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (ṛumanya)</string>
   <string name="license_name_cc_by_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">Wikimedia Commons tettmuddu tanezduɣt i tugett n tugniwin ara yettwasqedcen di Wikipedia.</string>
   <string name="tutorial_1_subtext">Tugniwin-ik ad d-muddent afus i useklem n yimdanen deg umaḍal meṛṛa.</string>
   <string name="tutorial_2_text">Sali tugniwin yettwaṭṭfen neɣ yettwarnan kan sɣuṛ-k.</string>
@@ -118,7 +133,10 @@
   <string name="menu_refresh">Smiren</string>
   <string name="read_storage_permission_rationale" fuzzy="true">Yesra tasiregt: Ɣeṛ asekles azɣaray. Asnas ur yezmir ara ad yeddu s war aya.</string>
   <string name="write_storage_permission_rationale" fuzzy="true">Ysera tasiregt: Aru deg usekles azɣaray. Asnas ur yezmir ara ad yeddu s war aya.</string>
+  <string name="location_permission_rationale">Tasiregt tafrayant: Awi adig amiran i yisumar n taggayt</string>
   <string name="ok">IH</string>
+  <string name="title_activity_nearby">Idigen iqeṛben</string>
+  <string name="no_nearby">Ulac ayen yettwafen s lqerb</string>
   <string name="warning">Ɣur-k</string>
   <string name="yes">Ih</string>
   <string name="no">Uhu</string>
@@ -131,16 +149,26 @@
   <string name="become_a_tester_title">Uɣal d amsekyad Beta</string>
   <string name="become_a_tester_description">Jerred ar ubadu-nneɣ Beta di Google Play sakin awi anekcum uzwir ar tmahilin timaynutin akked useɣti n ibugen.</string>
   <string name="_2fa_code">Tangalt 2FA</string>
+  <string name="number_of_uploads">Talast-iw n usali n melmi kan</string>
+  <string name="maximum_limit">Talast tafellayt</string>
+  <string name="maximum_limit_alert">Ur izmir ara ad d-yesken ugar n 500</string>
+  <string name="set_limit" fuzzy="true">Sbadu talast n usali n melmi kan</string>
+  <string name="login_failed_2fa_not_supported">Asesteb s snat n tarrayin ur yettusefrak ara akka tura.</string>
   <string name="logout_verification">Tabɣiḍ ad teffɣeḍ?</string>
   <string name="commons_logo">Alugu Commons</string>
   <string name="commons_website">Asmel wen n Commons</string>
   <string name="commons_facebook">Asmel Facebook n Commons</string>
   <string name="commons_github">Tangalt aɣbalu Github n Commons</string>
+  <string name="background_image">Tugna n ugilal</string>
   <string name="mediaimage_failed">Tugna n midya ur teddi ara</string>
+  <string name="no_image_found">Ulac tugna</string>
+  <string name="upload_image">Sali tugna</string>
   <string name="welcome_image_mount_zao">Taqirruct Zao</string>
   <string name="welcome_image_llamas">Lamas</string>
   <string name="welcome_image_rainbow_bridge">Taqenṭart tislit n unẓaṛ</string>
   <string name="welcome_image_tulip">Taxlult</string>
+  <string name="welcome_image_no_selfies">Ulac iselfiyen</string>
+  <string name="welcome_image_proprietary">Tugna tusligt</string>
   <string name="welcome_image_welcome_wikipedia">Anṣuf ar wikipedia</string>
   <string name="welcome_image_welcome_copyright">Izerfan n umeskar n usterḥeb</string>
   <string name="welcome_image_sydney_opera_house">Tazeqqa Opera n Sydney</string>
@@ -156,15 +184,26 @@
   <string name="navigation_item_logout">Tuffɣa</string>
   <string name="navigation_item_info">Atuṭuryel</string>
   <string name="navigation_item_notification">Ilɣa</string>
+  <string name="nearby_needs_permissions">Imḍiqen iqerben zemren ur ttwaskanen ara ma yella ur tebḍiḍ ara adig-ik arakal.</string>
   <string name="no_description_found">ulac aglam yettwafen</string>
   <string name="nearby_info_menu_commons_article">Asebter n ifuyla yettwasnen</string>
   <string name="nearby_info_menu_wikidata_article">Aferdis Wikipedia</string>
+  <string name="error_while_cache">Tuccḍa di tririt n tugniwin ar tuffirt</string>
+  <string name="title_info">Azwul n useglem asuf i ufaylu, ara ttwasqedcen d isem n ufaylu. Tzemreḍ ad tesqedceḍ tutlayt fessusen s isekkilen ilmawen. Ur sedday ara asiɣzef n ufaylu</string>
   <string name="description_info">Ma ulac aɣilf, seglem amidya s wayen akk i tzemreḍ: Anida yettwasekles? Acu i d-yemmal? D acu-t usatal-is? Seglem tiɣawsiwin neɣ imdanen. Mudd-d talɣut ur yezmiren ad tettwaf s wudem fessusen, amedya akud n wass ma yella d agama. Ma yella admidya yaskan-d ayen ur nuɣ ara tanumi, ini-d d aci i tyettarran d ayen ifazen.</string>
+  <string name="give_permission">Mudd tasiregt</string>
   <string name="use_external_storage" fuzzy="true">Seqdec asekles azɣaray</string>
   <string name="use_external_storage_summary" fuzzy="true">Sekles tiwlafin yettwaṭṭfen s tkamirat yellan deg ibenk</string>
   <string name="login_to_your_account">Qqen ar umiḍan-ik</string>
   <string name="send_log_file">Azen afaylu n uɣmis</string>
   <string name="send_log_file_description" fuzzy="true">Azen afaylu n uɣmis i yinermisen s yimayl</string>
+  <string name="nearby_location_has_not_changed">Adeg ur ibeddel ara.</string>
   <string name="nearby_location_not_available" fuzzy="true">Ulac adeg</string>
   <string name="location_permission_rationale_nearby">Ilaq usireg i uskan tabdart n wadigen iqerben</string>
+  <string name="get_directions" fuzzy="true">AWI IWELLIHEN</string>
+  <string name="read_article" fuzzy="true">ƔER AMAGRAD</string>
+  <string name="notifications_welcome">Anṣuf ar Wikimedia Commons, %1$s! Nefreḥ yes-k dagi.</string>
+  <string name="notifications_talk_page_message">%1$syeǧǧa-d izen deg usenter n uskasi</string>
+  <string name="notifications_thank_you_edit">Tanemmirt ɣef ubeddel</string>
+  <string name="notifications_mention">%1$s yemmel-ak-id deg %2$s .</string>
 </resources>

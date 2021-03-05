@@ -68,6 +68,8 @@
   <string name="categories_search_text_hint">සෙවුම් ප්‍රවර්ග</string>
   <string name="menu_save_categories">සුරකින්න</string>
   <string name="refresh_button">නැවත ප්‍රාණවත් කරන්න</string>
+  <string name="gps_disabled">ඔබගේ උපකරණයේ GPS ක්‍රියා විරහිත කර ඇත. ඔබ එය නැවත ක්‍රියා කිරීමට කැමතිද?</string>
+  <string name="enable_gps">GPS ක්‍රියා කරවන්න</string>
   <string name="contributions_subtitle_zero" fuzzy="true">තවම උඩුගත කිරීම් කිසිවක් නැත</string>
   <string name="categories_not_found">ප්‍රවර්ග සැසඳේන්නේ නැත %1$s හමුවිsය</string>
   <string name="categories_activity_title">ප්‍රවර්ග</string>
@@ -86,15 +88,27 @@
   <string name="menu_download">බාගන්න</string>
   <string name="preference_license" fuzzy="true">බලපත්‍රය</string>
   <string name="use_previous" fuzzy="true">පෙර මාතෘකාව/විස්තරය භාවිතා කරන්න</string>
+  <string name="allow_gps">වත්මන් ස්ථානය ස්වයංක්රීයව ලබාගන්න</string>
   <string name="preference_theme" fuzzy="true">රාත්‍රී ආකාරය</string>
   <string name="license_name_cc_by_sa_four">ඇට්‍රිබ්යුශන්-ශෙයාඅලයික් 4.0</string>
   <string name="license_name_cc_by_sa">ඇට්‍රිබ්යුශන්-ශෙයාඅලයික් 3.0</string>
   <string name="license_name_cc_by">ඇට්‍රිබ්යුශන්</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ඔස්ට්‍රියාව)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (ජර්මනිය)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (එස්තෝනියා)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (ස්පාඤ්ඤය)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (ක්රොඒෂියාව)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (ලක්සම්බර්ග්)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (නෙදර්ලන්තය)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (නෝර්වේ)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (පෝලන්තය)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (රුමේනියාව)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">විකිමාධ්‍ය කොමන්ස් විසින් විකිපීඩියාහි බාවිතා වන ඡායාරූප වලින් වැඩි කොටසක් සදහා සත්කාරකත්වය දරයි.</string>
   <string name="tutorial_1_subtext">ඔබේ ඡායාරූප ලොව පුරා ජනතාව දැනුවත් කිරීමට උදව් වේ!</string>
   <string name="tutorial_2_text">කරුණාකර ඔබ විසින් නිපදවූ හෝ ඔබ විසින් ගනු ලැබූ චායාරූප පමණක් උඩුගත කරන්න:</string>
@@ -112,6 +126,8 @@
   <string name="detail_license_empty">නොදන්නා බලපත්‍රය</string>
   <string name="menu_refresh">නැවත ප්‍රාණවත් කරන්න</string>
   <string name="ok">හරි</string>
+  <string name="title_activity_nearby">අවට ස්ථාන</string>
+  <string name="no_nearby">ළඟපාත තැන් කිසිවක් සොයා ගැනීමට නොහැකි විය</string>
   <string name="warning">අනතුරු හැඟවීමයි</string>
   <string name="yes">ඔව්</string>
   <string name="no">නැත</string>
@@ -122,10 +138,17 @@
   <string name="media_detail_coordinates">ඛණ්ඩාංක</string>
   <string name="media_detail_coordinates_empty">කිසිවක් සපයා නොමැත</string>
   <string name="_2fa_code">දිවිත්ව තහවුරු කිරීමේ කේතය</string>
+  <string name="number_of_uploads">මගේ අලුත්ම උඩුගත කිරීම් පෙන්වීමේ සීමාව</string>
+  <string name="maximum_limit">උපරිම සීමාව</string>
+  <string name="maximum_limit_alert">500 කට වඩා පෙන්විය නොහැක</string>
+  <string name="set_limit" fuzzy="true">අලුත්ම උඩුගත කිරීම් පෙන්වීමට සීමාවක් දමන්න</string>
+  <string name="login_failed_2fa_not_supported">ද්විත්ව තහවුරු කිරීමේ ක්‍රියා මාර්ගය තවම ක්‍රියා කරන්නෙ නැත.</string>
   <string name="logout_verification">ඔබට ඇත්තටම නික්මීමට අවශ්‍යද?</string>
   <string name="commons_logo">කොමන්ස් ලාන්චනය</string>
   <string name="commons_website">කොමන්ස් වෙබ් අඩවිය</string>
   <string name="commons_facebook">කොමන්ස් ෆේස්බුක් පිටුව</string>
+  <string name="no_image_found">කිසිම චායාරූපයක් සොයාගැනීමට නොහැකි විය</string>
+  <string name="upload_image">පිතූරය උඩුගත කරන්න</string>
   <string name="welcome_image_llamas">ලාමා සතුන්</string>
   <string name="welcome_image_tulip">ටියුලිප්</string>
   <string name="welcome_image_welcome_wikipedia">විකිපීඩියා වෙතට ඔබව සාදරයෙන් පිළිගනිමු.</string>
@@ -146,5 +169,9 @@
   <string name="nearby_info_menu_wikidata_article">විකිදත්ත අයිතමය</string>
   <string name="use_external_storage" fuzzy="true">භාහිර ගබඩාව භාවිතා කරන්න</string>
   <string name="login_to_your_account">ඔබගේ ගිණුමට පිවිසෙන්න</string>
+  <string name="nearby_location_has_not_changed">ස්ථානය වෙනස් වී නොමැත</string>
   <string name="nearby_location_not_available" fuzzy="true">ස්ථානය දී නොමැත</string>
+  <string name="read_article" fuzzy="true">මෙමේ ලිපිය කියවන්න</string>
+  <string name="notifications_welcome" fuzzy="true">විකිමීඩියා කොමන්ස් වෙත ඔබව සාදරයෙන් පිළිගනිමු! ඔබ මෙහි පැමිණීම ගැන අපි හද පත්ලෙන්ම සතුටු වෙමු.</string>
+  <string name="notifications_talk_page_message" fuzzy="true">ඔබගේ කතා පිටුවේ %1$s විසින් පණිවුඩයක් තබා ඇත</string>
 </resources>

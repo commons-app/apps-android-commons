@@ -23,6 +23,7 @@
   </plurals>
   <string name="preference_category_general">אַלגעמיין</string>
   <string name="preference_category_feedback">פֿידבעק</string>
+  <string name="preference_category_location">לאקאציע</string>
   <string name="app_name">קאמאנס</string>
   <string name="bullet">•</string>
   <string name="menu_settings">איינשטעלונגען</string>
@@ -82,9 +83,20 @@
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (עסטרייך)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (דייטשלאנד)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (עסטלאנד)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (שפאניע)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (קראאטיע)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (לוקסעמבורג)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (האלאנד)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (נארוועגיע)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (פוילן)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (רומעניע)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
   <string name="welcome_final_button_text">יא!</string>
   <string name="detail_panel_cats_label">קאַטעגאריעס</string>
   <string name="detail_panel_cats_loading">לאָדט…</string>
@@ -113,6 +125,7 @@
   <string name="navigation_item_settings">איינשטעלונגען</string>
   <string name="navigation_item_feedback">פֿידבעק</string>
   <string name="navigation_item_logout">אַרויסלאָגירן</string>
+  <string name="navigation_item_featured_images">רעקאמנדירט</string>
   <string name="upload_problem_image_dark">בילד איז צו טונקל</string>
   <string name="appwidget_img">בילד פונעם טאָג</string>
   <string name="app_widget_heading">בילד פונעם טאָג</string>

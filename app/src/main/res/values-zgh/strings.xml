@@ -5,6 +5,7 @@
 -->
 <resources>
   <string name="preference_category_general">ⴰⵎⴰⵜⴰⵢ</string>
+  <string name="preference_category_location">ⴰⴷⵖⴰⵔ</string>
   <string name="app_name">ⴽⵓⵎⵏⵣ</string>
   <string name="bullet">•</string>
   <string name="menu_settings">ⵜⵉⵙⵖⴰⵍ</string>
@@ -40,6 +41,7 @@
   <string name="menu_upload_single">ⵙⵙⴽⵜⵔ</string>
   <string name="categories_search_text_hint">ⵔⵣⵓ ⵜⴰⴳⴳⴰⵢⵉⵏ</string>
   <string name="menu_save_categories">ⵃⴹⵓ</string>
+  <string name="enable_gps">ⵙⴻⵙⵡⵓⵔⵉ GPS</string>
   <string name="contributions_subtitle_zero" fuzzy="true">ⵓⵔ ⵜⴰ ⵍⵍⵉⵏ ⵉⵙⴽⵜⴰⵔⵏ</string>
   <string name="categories_not_found">ⵜⵉⵙⵖⴰⵍ</string>
   <string name="categories_activity_title">ⵜⴰⴳⴳⴰⵢⵉⵏ</string>
@@ -54,6 +56,11 @@
   <string name="menu_download">ⴰⴳⵎ</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ⵜⵓⵜⵔⵉⵛⵜ)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (ⴰⵍⵎⴰⵏⵢⴰ)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (ⵉⵙⵜⵓⵏⵢⴰ)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (ⵙⴱⴰⵏⵢⴰ)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (ⴽⵔⵡⴰⵜⵢⴰ)</string>
   <string name="welcome_final_button_text">ⵢⴰⵀ!</string>
   <string name="ok">ⵡⴰⵅⵅⴰ</string>
   <string name="yes">ⵢⴰⵀ</string>
@@ -71,6 +78,7 @@
   <string name="navigation_item_settings">ⵜⵉⵙⵖⴰⵍ</string>
   <string name="navigation_item_notification">ⵜⵉⵏⵖⵎⵉⵙⵉⵏ</string>
   <string name="navigation_item_login">ⴽⵛⵎ</string>
+  <string name="read_article">ⵖⵔ ⴰⵎⴳⵔⴰⴷ</string>
   <string name="nearby_wikipedia">ⵡⵉⴽⵉⴱⵉⴷⵢⴰ</string>
   <string name="about_translate">ⵙⵙⵓⵖⵍ</string>
   <string name="about_translate_title">ⵜⵓⵜⵍⴰⵢⵉⵏ</string>
@@ -79,6 +87,13 @@
   <string name="delete">ⴽⴽⵙ</string>
   <string name="Profile">ⵉⴼⵔⵙ</string>
   <string name="statistics">ⵉⵙⵉⴹⵏⵏ</string>
+  <string name="desc_language_Worldwide">ⴰⵎⴰⴹⴰⵍ ⴰⴽⴽ</string>
+  <string name="desc_language_America">ⵜⴰⵎⵔⵉⴽⵜ</string>
+  <string name="desc_language_Europe">ⵜⵓⵔⵓⴼⵜ</string>
+  <string name="desc_language_Middle_East">ⴰⴳⵎⵓⴹ ⴰⵏⴰⵎⵎⴰⵙ</string>
+  <string name="desc_language_Africa">ⵜⴰⴼⵔⵉⴽⵜ</string>
+  <string name="desc_language_Asia">ⵜⴰⵣⵉⵜ</string>
+  <string name="desc_language_Pacific">ⴰⴳⴰⵔⴰⵡ ⵉⵎⵣⴳⵉ</string>
   <string name="title_app_shortcut_setting">ⵜⵉⵙⵖⴰⵍ</string>
   <string name="leaderboard_column_user">ⴰⵏⵙⵙⵎⵔⵙ</string>
   <string name="leaderboard_column_count">ⵙⵙⵉⴹⵏ</string>

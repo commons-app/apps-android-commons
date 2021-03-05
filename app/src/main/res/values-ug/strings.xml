@@ -6,10 +6,12 @@
 * چۈشكۈن
 -->
 <resources>
+  <string name="title_activity_explore">ئىزدىنىش</string>
   <string name="navigation_item_explore">ئىزدىنىش</string>
   <string name="preference_category_appearance">تاشقى كۆرۈنۈش</string>
   <string name="preference_category_general">ئادەتتە</string>
   <string name="preference_category_feedback">ئىنكاس</string>
+  <string name="preference_category_location">ئورنى</string>
   <string name="app_name">بايلىق ھەمبەھىرلەش</string>
   <string name="bullet">.</string>
   <string name="menu_settings">تەڭشەكلەر</string>
@@ -47,6 +49,7 @@
   <string name="add_caption_toast">بۇ ھۆججەتنىڭ ئىزاھاتىنى تەمىنلەڭ</string>
   <string name="share_description_hint">چۈشەندۈرۈش</string>
   <string name="login_failed_network">تىزىملىتىش - تور كاشىلىسى</string>
+  <string name="login_failed_wrong_credentials">كىرەلمىدى، ئابۇنىت نامى ۋە پارولىڭىزنى تەكشۈرۈڭ.</string>
   <string name="login_failed_throttled">مەغلۇپ بولغان قېتىم سانى بەك كۆپ .  نەچچە مىنۇتتىن كېيىن قايتا سىناڭ .</string>
   <string name="login_failed_blocked">كەچۈرۈڭ، بۇ ئابونت ئاللىقاچان ئورتاق بەھرىمەن بولىدىغان بايلىق مەنبەسى دائىرىلىك</string>
   <string name="login_failed_2fa_needed">سىز چوقۇم سىزنىڭ قوش ئامىل تەكشۈرۈش كودىنى تاپشۇرىسىز .</string>
@@ -59,6 +62,8 @@
   <string name="menu_save_categories">ساقلاڭ</string>
   <string name="refresh_button">يېڭىلاش</string>
   <string name="display_list_button">تىزىم</string>
+  <string name="gps_disabled">GPS سىزنىڭ ئۈسكۈنەم ئىشلىتىشتىن توختىدى . سىز قوزغىتامسىز يوق ؟</string>
+  <string name="enable_gps">ئىشلىشكە باشلاشGPS</string>
   <string name="categories_activity_title">تۈرلەر</string>
   <string name="title_activity_settings">تەڭشەكلەر</string>
   <string name="title_activity_signup">تىزىملىتىش</string>
@@ -77,8 +82,17 @@
   <string name="license_name_cc_by">ئىمزا قويۇش</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ئاۋستىرىيە)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (گېرمانىيە)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (ئىسپانىيە)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (كىروتىيە)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (گوللاندىيە)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (نورۋىگىيە)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (پولشا)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (رومىنىيە)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_zero">CC0</string>
   <string name="welcome_final_text">چۈشەندىڭىزمۇ؟</string>
   <string name="welcome_final_button_text">ھەئە!</string>
   <string name="detail_panel_cats_label">تۈرلەر</string>
@@ -100,11 +114,20 @@
   <string name="become_a_tester_title">سىناق نۇسخىدىكى سىناق قىلغۇچى بولۇپ قالدى</string>
   <string name="become_a_tester_description">بىز كىرگەن Google Play، ئۈستىدىكى ئۆلچەش قانىلى ، ھەمدە تېخىمۇ بالدۇر يېڭى ئىقتىدارى ۋە خاتا ئەسلىگە كەلتۈرۈش</string>
   <string name="_2fa_code">2FAكودى</string>
+  <string name="number_of_uploads">مېنىڭ يېقىندىن بۇيان يۇقىرىغا يوللاش چەكلەش</string>
+  <string name="maximum_limit">ئەڭ چوڭ چەكلەش</string>
+  <string name="set_limit" fuzzy="true">يېقىندا چىقىرىش چەكلىمىسى تەڭشەش</string>
+  <string name="login_failed_2fa_not_supported">نۆۋەتتىكى قوش ئامىل دەلىللەشنى قوللىمايدۇ</string>
   <string name="logout_verification">سىز راستتىنلا چېكىنىپ چىقامسىز ؟</string>
   <string name="commons_logo">بايلىقتىن ئورتاق بەھرىمەن بولۇش بەلگىسى</string>
   <string name="commons_website">ئورتاق بەھرىمان بولىدىغان توربەت بايلىقى</string>
+  <string name="background_image">كۆرۈنۈش رەسىمى</string>
   <string name="mediaimage_failed">ۋاستە رەسىمى مەغلۇپ بولدى</string>
+  <string name="no_image_found">رەسىمنى تاپالمىدى</string>
+  <string name="upload_image">رەسىم يەتكۈزۈش</string>
   <string name="welcome_image_rainbow_bridge">ھەسەت ھۈسەن كۆۋرۈك</string>
+  <string name="notifications_thank_you_edit">تەھرىرلەپ چىقارغىنىڭىزغا رەھمەت</string>
+  <string name="toggle_view_button">مۇۋاپىق كۆرۈنۈش ئالماشتۇرۇش</string>
   <string name="previous_image_caption_description">ئالدىنقى ماۋزۇ ۋە چۈشەندۈرۈشنى كۆچۈرۈڭ</string>
   <string name="nearby_no_results">ھېچقانداق يەر تېپىلمىدى ، ئىزدەش ئۆلچىمىڭىزنى ئۆزگەرتىپ بېقىڭ.</string>
 </resources>

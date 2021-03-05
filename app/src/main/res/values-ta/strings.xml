@@ -10,10 +10,12 @@
     <item quantity="one">%1$d கோப்பு தரவேற்றப்படுகிறது</item>
     <item quantity="other">%1$d கோப்புகள்  தரவேற்றப்படுகின்றன</item>
   </plurals>
+  <string name="title_activity_explore">சுற்றிப்பார்</string>
   <string name="navigation_item_explore">சுற்றிப்பார்</string>
   <string name="preference_category_appearance">தோற்றம்</string>
   <string name="preference_category_general">பொது</string>
   <string name="preference_category_feedback">பின்னூட்டம்</string>
+  <string name="preference_category_location">இருப்பிடம்</string>
   <string name="app_name">காமன்சு</string>
   <string name="bullet">•</string>
   <string name="menu_settings">அமைப்புகள்</string>
@@ -49,6 +51,15 @@
   <string name="menu_download">பதிவிறக்கு</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ஆஸ்திரியா)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (ஜெர்மனி)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (எஸ்டோனியா)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (ஸ்பெயின்)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (குரோசியா)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (நெதர்லாந்து)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (நார்வே)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (போலந்து)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (ரோமானியா)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="tutorial_3_text">அருள்கூர்ந்து பதிவேற்றவேண்டாம்:</string>
@@ -57,6 +68,7 @@
   <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;மேலதிக விவரம்&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">பகுப்புகள்</string>
   <string name="ok">சரி</string>
+  <string name="title_activity_nearby">அருகாமை இடங்கள்</string>
   <string name="warning">எச்சரிக்கை</string>
   <string name="yes">ஆம்</string>
   <string name="no">இல்லை</string>

@@ -33,11 +33,13 @@
     <item quantity="one">Riçevimento de contegnui spartii. La laorasion de l\'imajine la podaria domandar del tenpo dipendendo da ła grandesa de l\'imajine e del dispoxidivo</item>
     <item quantity="other">Riçevimento de contegnui spartii. La łaorasion de łe imajini ła podaria domandar del tenpo dipendendo da ła grandesa de łe imajini e del dispoxidivo</item>
   </plurals>
+  <string name="title_activity_explore">Esplora</string>
   <string name="navigation_item_explore">Esplora</string>
   <string name="preference_category_appearance">Siera de ła gràfega</string>
   <string name="preference_category_general">Xenerałe</string>
   <string name="preference_category_feedback">Feedback</string>
   <string name="preference_category_privacy">Privacy</string>
+  <string name="preference_category_location">Poxision</string>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Inpostasion</string>
   <string name="intent_share_upload_label">Carga so Commons</string>
@@ -76,12 +78,14 @@
   <string name="share_description_hint">Descrision</string>
   <string name="share_caption_hint" fuzzy="true">Didascalia (màsimo 255 caràteri)</string>
   <string name="login_failed_network">No xé posibiłe ndarghe drento - erore de rete</string>
+  <string name="login_failed_wrong_credentials">Entrada no riusia - Daghe na ociada al nome utente e ciave</string>
   <string name="login_failed_throttled">Masa volte te ghè provà. Riprova tra on fià de minudi.</string>
   <string name="login_failed_blocked">Ne despiaxe, sto utente el xé sta blocà so Commons</string>
   <string name="login_failed_2fa_needed">Te ghè da darne el to codaxe de autenticasion a do fatori</string>
   <string name="login_failed_generic">Entrada no riusìa</string>
   <string name="share_upload_button">Carga</string>
   <string name="multiple_share_base_title">Nome de sto set</string>
+  <string name="add_set_name_toast">Par favore, daghe on titoło a sto set</string>
   <string name="provider_modifications">Modifeghe</string>
   <string name="menu_upload_single">Carga</string>
   <string name="categories_search_text_hint">Serca łe categorie</string>
@@ -89,6 +93,8 @@
   <string name="menu_save_categories">Salva</string>
   <string name="refresh_button">Ajorna</string>
   <string name="display_list_button">Lista</string>
+  <string name="gps_disabled">El GPS el xé inabiłità sol dispoxidivo. Vuto tacarlo?</string>
+  <string name="enable_gps">Taca el GPS</string>
   <string name="contributions_subtitle_zero" fuzzy="true">No xé njiancora sta cargà calcosa</string>
   <string name="categories_not_found">No ła xé sta catada na categoria che ła contegna %1$s</string>
   <string name="depictions_not_found">No gò catà nisun elemento Wikidata che corisponda a %1$s</string>
@@ -116,11 +122,23 @@
   <string name="menu_download">Descarga</string>
   <string name="preference_license">Liçensa predefinìa</string>
   <string name="use_previous">Dopara titoło e descrision preçedente</string>
+  <string name="allow_gps">Automadegamente tote ła locałixasion corente</string>
+  <string name="allow_gps_summary">Ricata fora ła poxision corente se l\'imanjine no ła xé xiołocałixada. Ocio: Sta cuà ła publegarà ła to locałixasion corente.</string>
   <string name="preference_theme">Tema</string>
   <string name="license_name_cc_by_sa_four">Atribusion-Spartisi n\'te ła stesa manjiera 4.0</string>
   <string name="license_name_cc_by_four">Atribusion 4.0</string>
   <string name="license_name_cc_by_sa"> Atribusion-Spartisi n\'te ła stesa manjiera 3.0</string>
   <string name="license_name_cc_by"> Atribusion 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Xermania)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spagna)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croasia)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Lusenburgo)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Paixi Basi)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norveja)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Połonia)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
   <string name="tutorial_1_text">la Wikimedia Commons ła ospita ła major parte de łe imajini che njien doparae so Wikipedia</string>
   <string name="tutorial_1_subtext">Le to imajini łe juta l\'istrusion de łe persone in tuto el mondo!</string>
   <string name="tutorial_2_text">Se ve prega de cargar łe imajini che njien tolte o creae interamente da sołi</string>
@@ -153,9 +171,13 @@
   <string name="read_storage_permission_rationale">Autorixasion domandada: Lexare ła memoria esterna. L\'aplicasion no ła połe ndar rento a ła to gałaria sensa sta autorixasion.</string>
   <string name="write_storage_permission_rationale">Autorixasion domandada: Scrivare n\'te ła memoria esterna. L\'aplicasion no ła połe ndar rento a ła videocamara/gałaria sensa sta autorixasion</string>
   <string name="location_permission_title">Domanda de autorixasion par ła locałixasion.</string>
+  <string name="location_permission_rationale">Autorixasion opsionałe: Dopara ła poxision corente par i sujerimenti de categoria</string>
   <string name="ok">Va ben</string>
+  <string name="title_activity_nearby">Posti cuà rente</string>
+  <string name="no_nearby">Nisun posto catà cuà rente</string>
   <string name="warning">Òcio!</string>
   <string name="duplicate_image_found">Catada na imajine dopiada</string>
+  <string name="upload_image_duplicate">Sto file xà el ghe xé so Common. Sito seguro de vołer ndar vanti?</string>
   <string name="upload">Carga</string>
   <string name="yes">Sì</string>
   <string name="no">No</string>
@@ -170,18 +192,32 @@
   <string name="become_a_tester_title">Divien on Beta-Tester</string>
   <string name="become_a_tester_description">Va drento al nostro canałe beta so Google Play par torte suito łe nove funsionałità e i erori corexùi</string>
   <string name="_2fa_code">Codaxe 2FA</string>
+  <string name="number_of_uploads">El me limite di cargamento ultimo</string>
+  <string name="maximum_limit">Limite masimo</string>
+  <string name="invalid_zero">Xero no\'l xé vałido</string>
+  <string name="invalid_input">Dato no justo</string>
+  <string name="maximum_limit_alert">No xé posibiłe farteghine vedare pì de 500</string>
+  <string name="enter_valid">Inserisi on numaro justo</string>
+  <string name="cannot_be_zero">El limite de cargamento no\'l połe esare 0</string>
+  <string name="set_limit">El me limite di cargamento ultimo</string>
+  <string name="login_failed_2fa_not_supported">L\'autenticasion a do fatori no ła xé pa\'l momento suportada</string>
   <string name="logout_verification">Vuto seriamente sevitar a ndaxer fora?</string>
   <string name="commons_logo">Logo de Commons</string>
   <string name="commons_website">Sito web de Commons</string>
   <string name="commons_facebook">Pajina Facebook de Commons</string>
   <string name="commons_github">Codaxe fonte Github de Commons</string>
+  <string name="background_image">Imajine de sfondo</string>
   <string name="mediaimage_failed">Imajine multimediałe no riusìa</string>
+  <string name="no_image_found">Nisuna imajine catada</string>
   <string name="no_subcategory_found">Nisuna categoria catada</string>
   <string name="no_parentcategory_found">Nisuna categoria superiore catada</string>
+  <string name="upload_image">Carga imajine</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
   <string name="welcome_image_llamas">Lama</string>
   <string name="welcome_image_rainbow_bridge">Arcobałen</string>
   <string name="welcome_image_tulip">Tulpan</string>
+  <string name="welcome_image_no_selfies">No selfie</string>
+  <string name="welcome_image_proprietary">Imajine propietaria</string>
   <string name="welcome_image_welcome_wikipedia">Benvegnuo Wikipedia</string>
   <string name="welcome_image_welcome_copyright">Benvegnuo Copyright</string>
   <string name="welcome_image_sydney_opera_house">Teatro de l\'opara de Sydney</string>
@@ -197,12 +233,18 @@
   <string name="navigation_item_logout">Deslòghite</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notifega</string>
+  <string name="navigation_item_featured_images">In evidensa</string>
   <string name="navigation_item_review">Revisiona</string>
+  <string name="nearby_needs_permissions">I posti cuà rente no i pole mia esar mostrai sensa ver autorixà l\'uxo de la poxision</string>
   <string name="no_description_found">Nisuna descrision catada</string>
   <string name="nearby_info_menu_commons_article">Pajina de Commons del file</string>
   <string name="nearby_info_menu_wikidata_article">Ełemento Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Articulo so Wikipedia</string>
+  <string name="error_while_cache">Eror co se jera drio memorixare le imajini n\'te la cache</string>
+  <string name="title_info">On unego titoło descrivitivo par el file, che el vegnarà doparà come so no,e. Te połi doparar on lenguajo senpliçe co spasi. No sta scrivere l\'estension del file</string>
   <string name="description_info">Descrivi el pì pusibiłe el file multimediałe: Andove xeo sta fato? Coxa mostreo? Cual xeo el contesto? Descrivi i ojeti o łe persone. Scrivi łe informasion che no łe połe esare capire façilmente, par exenpio a che boti del dì la xé sta fata, se se xé drio far vedare calcosa de poco doparà, spiega el pì posibiłe.</string>
+  <string name="upload_image_too_dark">Sta imajine ła xé masa scura. Sito seguro de vołer cargarla? Wikimedia Commons ła xé soło par imajini co vałore ençiclopedego.</string>
+  <string name="upload_image_blurry">Sta imajine ła xé sfogada. Wikimedia Commons ła xé soło par imajini co vałore ençiclopedego.</string>
   <string name="upload_problem_exist">Ghe xé forti problemi co sta imajine</string>
   <string name="upload_problem_image_dark">L\'imajine ła xé masa scura</string>
   <string name="upload_problem_image_blurry">L\'imajine ła xé masa sfogada</string>
@@ -212,6 +254,7 @@
   <string name="upload_problem_do_you_continue">Vuto cargare insteso sta imajine?</string>
   <string name="upload_problem_image">Problemi catai in te l\'imajine</string>
   <string name="internet_downloaded">Carga soło łe foto che te ghè fato da soło. No sta cargar imajine catae so internet</string>
+  <string name="give_permission">Dati autorixasion</string>
   <string name="use_external_storage" fuzzy="true">Dopara memoria esterna</string>
   <string name="use_external_storage_summary" fuzzy="true">Salva łe foto fate co ła fotocamara in-app sol dispoxidivo</string>
   <string name="login_to_your_account">Va drento al to uxuario</string>
@@ -222,6 +265,9 @@
   <string name="nominate_deletion">Domanda par ła scançełasion</string>
   <string name="nominated_for_deletion">Sta imajine ła xé sta domandada par ła scançełasion</string>
   <string name="nominated_see_more">Varda ła pajina web par informasion detajade</string>
+  <string name="nominating_file_for_deletion">Nominà %1$s par ła scançełasion.</string>
+  <string name="nominating_for_deletion_status">Nomina file par scançełasion: %1$s</string>
+  <string name="view_browser">Varda sol navegadore web</string>
   <string name="skip_login">Salta</string>
   <string name="navigation_item_login">Va drento a l\'uxuario</string>
   <string name="skip_login_title">Vuto da vero saltar l\'entrada n\'tel uxuario?</string>
@@ -229,8 +275,16 @@
   <string name="login_alert_message">Fa l\'entrada al uxuario par doparar sta funsion</string>
   <string name="copy_wikicode">Copia el Wikitesto n\'tel aponti</string>
   <string name="wikicode_copied">El Wikitesto el xé sta copià in tei aponti</string>
+  <string name="nearby_location_has_not_changed">La poxision no ła xé canbiada</string>
   <string name="nearby_location_not_available">Cuà rente  el podaria no funsionar ben, la locałixasion no ła xé disponibiłe</string>
   <string name="location_permission_rationale_nearby">Xé domandada l\'autorixasion par vardar on ełenco de posti cuà rente</string>
+  <string name="get_directions">Ciapa indicasion</string>
+  <string name="read_article">Lexi ła voxe</string>
+  <string name="notifications_welcome">Benvenguo so Wikimedia Commons, %1$s! Semo contenti de verte cuà.</string>
+  <string name="notifications_talk_page_message">%1$s el te ga dasà on mesajo n\'te ła to pajina de discusion</string>
+  <string name="notifications_thank_you_edit">Grasie par ver fato na modifega!</string>
+  <string name="notifications_mention">%1$s el te ga mensionà so %2$s.</string>
+  <string name="toggle_view_button">Ativa/Dexativa vixuałixasion</string>
   <string name="nearby_directions">Indicasion</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -239,8 +293,10 @@
   <string name="about_faq">Domande frecuenti</string>
   <string name="welcome_skip_button">Salta lesion</string>
   <string name="no_internet">Internet no disponibiłe</string>
+  <string name="internet_established">Internet disponibiłe</string>
   <string name="error_notifications">Eror co se jera drio trar fora łe notifeghe</string>
   <string name="error_review">Erore co se jera drio trar fora l\'imajine par revixionarla. Struca ajorna par riproare</string>
+  <string name="error_review_categories">Erore co se jera drio trar fora łe categorie de imajini par ła revixion. Struca ajorna par riproare.</string>
   <string name="no_notifications">Nisuna notifega catà</string>
   <string name="about_translate">Traduxi</string>
   <string name="about_translate_title">Lengue</string>
@@ -248,7 +304,10 @@
   <string name="about_translate_proceed">Va vanti</string>
   <string name="about_translate_cancel">Descançełare</string>
   <string name="retry">Riproa</string>
+  <string name="showcase_view_got_it_button">Capìo!</string>
   <string name="showcase_view_whole_nearby_activity">Sti cuà i xé i posti rente a ti che i vołe imajini par mostrar łe so voxi de Wikipedia.\n\nSchiciando so \"SERCA STA AREA\" se bloca ła mapa e se fa partire na riserca n\'tei posti cuà rente a ła poxision.</string>
+  <string name="showcase_view_list_icon">Strucando sto boton el njien fato vedare on ełenco de sti posti</string>
+  <string name="showcase_view_plus_fab">Te połi cargar na imajine par ogni posto da ła to gałaria o da ła fotocamara</string>
   <string name="no_images_found">Nisuna imajine catada</string>
   <string name="error_loading_images">Se ga vuo on eror co se jera drio cargar łe imajini.</string>
   <string name="image_uploaded_by">Cargà da $1</string>
@@ -258,10 +317,12 @@
   <string name="app_widget_heading">Someja del dì</string>
   <string name="menu_search_button">Serca</string>
   <string name="search_commons">Serca so Commons</string>
+  <string name="images_not_found">Nisuna imajine che ła corispondee a  %1$s catada fora</string>
   <string name="title_activity_search">Serca</string>
   <string name="search_recent_header">Ultime riserche</string>
   <string name="provider_searches">Query fate ultimamente</string>
   <string name="error_loading_categories">Se ga vuo on eror co se jera drio cargar łe categorie.</string>
+  <string name="error_loading_subcategories">Se ga vuo on eror co se jera drio cargar łe sotocategorie.</string>
   <string name="search_tab_title_media">Media</string>
   <string name="search_tab_title_categories">Categorie</string>
   <string name="explore_tab_title_featured">De cuałità</string>
@@ -281,6 +342,7 @@
   <string name="screenshot_answer">Schermae de siti Web łe xé considarae opare derivae e sojete a copyright del sito steso. Ste cuà łe połe esare doparae soło dopo el permeso de l\'autor del sito. Sensa sto permeso, calsiasi arte creada so ła baxe del lavoro de st\'ultimi ła njien legalmente considerada na copia sensa liçensa, de propietà de l\'autore de orixane.</string>
   <string name="blurry_image_answer">Uno dei fini de Commons el xé cheło de tor su imajini de cualità. Par sto motivo łe imajini sfogae no łe garia da esar cargae. Serca senpre de far bełe foto co na bona cuałità e bona iłuminasensa.</string>
   <string name="construction_event_answer">Le foto che łe mostra tecnołoxia o cultura łe xé on piasere so Commons.</string>
+  <string name="warning_for_image_reverts">ATENSION: pì de %1$s de łe imajini che te ghè cargà łe xé stae scançełae. Se te vè vanti cargar imajini che domanda ła so scançełasion, el to uxuario ła vegnarà façilmente banada.</string>
   <string name="congratulatory_message_quiz">Te ghè ciapà %1$s de łe risposte juste. Congratułasion!</string>
   <string name="warning_for_no_answer">Ełexi una de łe do opsion par rispondare a ła dimanda</string>
   <string name="user_not_logged_in">Sesion de login scadesta. Va drento da novo.</string>
@@ -290,7 +352,9 @@
   <string name="wrong">Risposta xbajada</string>
   <string name="quiz_screenshot_question">Sta schermada ła xé bona par esare cargada?</string>
   <string name="share_app_title">Spartisi aplicasion</string>
+  <string name="share_coordinates_not_present">Le coordinae no łe xé stae speçifegae co se jera drio sełesionar l\'imajine</string>
   <string name="error_fetching_nearby_places">Erore co se jera drio ricatar fora i posti cuà rente</string>
+  <string name="add_description">+Xonta na descrision</string>
   <string name="no_recent_searches">Nisuna riserca fata ultimamente</string>
   <string name="delete_recent_searches_dialog">Sito seguro de vołer scançełare el to storego de riserca?</string>
   <string name="delete_search_dialog">Vuto scançełare sta riserca?</string>
@@ -323,16 +387,20 @@
   <string name="read_notifications">Notifeghe (archiviae)</string>
   <string name="display_nearby_notification">Fa vedare notifega cuà rente</string>
   <string name="display_nearby_notification_summary" fuzzy="true">Struca cuà par vardare el posto pì rente che ghe serve łe imajini</string>
+  <string name="no_close_nearby">Nisun posto cuà rente de ti catà</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Autorixasion de archiviasion</string>
   <string name="write_storage_permission_rationale_for_image_share">Ne serve ła to autorixasion par ndar drento a ła memoria esterna del to dispoxidivo par cargar łe imajini</string>
   <string name="nearby_notification_dismiss_message">No te vedarè el posto pì rente che ghe serve imajini. Tuta via, te połi riativar sta notifega n\'te łe inpostasion, se te vołi.</string>
   <string name="step_count" fuzzy="true">Paso %1$d de %2$d</string>
+  <string name="image_in_set_label">Imajine %1$d in tel\'union</string>
   <string name="next">Dopo</string>
   <string name="previous">Prima</string>
   <string name="submit">Envia</string>
   <string name="upload_title_duplicate" fuzzy="true">Xà ghe xé on file col nome %1$s. Sito seguro de vołer ndar vanti?</string>
   <string name="map_application_missing">Nisuna aplicasion de mape conpatibiłe ła xé sta catada sol to dispoxidivo. Instała on aplicasion par łe mape par poder doparare sta funsion.</string>
+  <string name="navigation_item_bookmarks">Segnałibri</string>
+  <string name="title_activity_bookmarks">Segnałibri</string>
   <string name="title_page_bookmarks_pictures">Imajini</string>
   <string name="title_page_bookmarks_locations">Locałixasion</string>
   <string name="menu_bookmark">Xonta o cava segnałibri</string>
@@ -347,6 +415,13 @@
   <string name="deletion_reason_not_interesting">Ne despiaxe, sta imajine no ła xé intaresante par na ençiclopedia.</string>
   <string name="uploaded_by_myself">Cargà da mi el %1$s, doparà in %2$d voxe.</string>
   <string name="no_uploads">Benvegnuo so Commons!\n\nCarga el to primo file multimediałe strucando el boton \"xonta\".</string>
+  <string name="desc_language_Worldwide">Tuto el mondo</string>
+  <string name="desc_language_America">Mèrica</string>
+  <string name="desc_language_Europe">Eoropa</string>
+  <string name="desc_language_Middle_East">Levante mexan</string>
+  <string name="desc_language_Africa">Àfrica</string>
+  <string name="desc_language_Asia">Axia</string>
+  <string name="desc_language_Pacific">Pasifego</string>
   <string name="no_categories_selected">Nisuna categoria sełesionà</string>
   <string name="no_categories_selected_warning_desc" fuzzy="true">Le imajini sensa categorie łe xé poche olte doparabiłi. Sito seguro de vołer enviar sensa sełesionar categorie?</string>
   <string name="upload_flow_all_images_in_set">(Par tute łe imajini n\'te l\'union)</string>
@@ -364,6 +439,7 @@
   <string name="display_campaigns_explanation">Varda łe canpagne drio cargar</string>
   <string name="nearby_campaign_dismiss_message">No te vedarè altre canpagne. Tuta via, te połi riativar sta notifega n\'te łe inpostasion, se te vołi.</string>
   <string name="this_function_needs_network_connection">A sta funsion ghe serve na conesion de rete, controła łe inpostasion de conesion</string>
+  <string name="bad_token_error_proposed_solution">Cargamento fałìo par colpa de problemi co\'l token de modifega. Se prega de proar de disconetarse e riconetarse da novo</string>
   <string name="error_processing_image">Se ga vuo on erore co se jera drio cargar l\'imajine. Par favore riproa!</string>
   <string name="getting_edit_token">Ciapate token par ła modifega</string>
   <string name="check_category_adding_template">Xonta on modèl par el controło de ła categoria</string>
@@ -374,11 +450,18 @@
   <string name="check_category_success_message">Domanda de controło categoria par %1$s</string>
   <string name="check_category_failure_message">Inposibiłe domandare el controło de ła categoria par %1$s</string>
   <string name="check_category_toast">Domanda de controło categoria par %1$s</string>
+  <string name="nominate_for_deletion_edit_file_page">Xontamento del mesajo de ełiminasion del file</string>
   <string name="nominate_for_deletion_done">Fato</string>
+  <string name="nominate_for_deletion_notify_user">Notifega a l\'uxuario n\'te ła pajina de discusion</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">La xonta de on file al rejistro de łe domande de scançełasion</string>
+  <string name="nominate_for_deletion_create_deletion_request">Creasion de ła sotopajina par ła domanda de scançełasion</string>
+  <string name="notsure">No so mija seguro</string>
   <string name="send_thank_success_title">Invià, grasie: Fato</string>
   <string name="send_thank_success_message">Ringrasiamenti inviai co suçeso a %1$s</string>
   <string name="send_thank_failure_message">Fałio el envio del grasie a %1$s</string>
   <string name="send_thank_failure_title">Envio grasie: Fałìo</string>
+  <string name="send_thank_send">Envio ringrasiamento</string>
+  <string name="send_thank_notification_title">Envio ringrasiamenti</string>
   <string name="send_thank_toast">Envio de ringrasiamenti par %1$s</string>
   <string name="review_copyright">Sto cuà el rispeta el regołamento del copyright?</string>
   <string name="review_category">Sto cuà xeło categorixà coretamente?</string>
@@ -410,10 +493,12 @@
   <string name="menu_option_read">Varda no lexeste</string>
   <string name="menu_option_unread">Varda no lexeste</string>
   <string name="error_occurred_in_picking_images">Se ga vuo on eror co se jera drio ełexare łe imajini.</string>
+  <string name="image_chooser_title">Ełexi łe imajini da cargare</string>
   <string name="please_wait">Speta on fià...</string>
   <string name="images_featured_explanation">Le foto in primo pian łe xé imajini de fotografi altamente cuałifegai che ła comunità de Wikimedia Commons ła ga ełeto come fotografi de alta cuałità sol sito.</string>
   <string name="images_via_nearby_explanation">Imajini cargae via \"Posti cuà rente\", imajini che łe njien cargae scoerxendo posti n\'te ła mapa</string>
   <string name="thanks_received_explanation">Sta funsion ła consente ai editori de enviar na notifega de ringrasiamento ai uxuari che i fa modifeghe che serve, doparando on lingambo picenin de ringrasiamento n\'te ła pajina del storego o n\'te ła pajina de łe difarense.\n\nQuesta funzione consente agli editor di inviare una notifica di ringraziamento agli utenti che apportano modifiche utili, utilizzando un piccolo link di ringraziamento nella pagina della cronologia o nella pagina delle differenze.</string>
+  <string name="previous_button_tooltip_message">Schicia par ridoparar el titpło e ła descrision de l\'imajine preçedente e justarli a l\'imajine de deso.</string>
   <string name="welcome_do_upload_content_description">Exenpi de bone imajini da cargar so Commons</string>
   <string name="welcome_dont_upload_content_description">Exenpi de imajini da no cargar</string>
   <string name="skip_image">Salta sta imajine</string>
@@ -436,6 +521,7 @@
   <string name="dialog_box_text_nomination">Parché %1$s el garia da esare scançełà?</string>
   <string name="review_is_uploaded_by">%1$s el xé sta cargà da: %2$s</string>
   <string name="default_description_language">Lengua predefinia de descrision</string>
+  <string name="delete_helper_make_deletion_toast">Tentadivo de nominar %1$s par ła scançełasion</string>
   <string name="delete_helper_show_deletion_title">Nominà par ła scançełasion</string>
   <string name="delete_helper_show_deletion_title_success">Vegnesto fora ben!</string>
   <string name="delete_helper_show_deletion_message_if">Nominà %1$s par ła scançełasion.</string>
@@ -444,9 +530,11 @@
   <string name="delete_helper_ask_spam_selfie">On selfie</string>
   <string name="delete_helper_ask_spam_blurry">Sfogà</string>
   <string name="delete_helper_ask_spam_nonsense">Sensa senso</string>
+  <string name="delete_helper_ask_spam_other">Altro</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Stanpa foto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto a ocio da internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_other">Altro</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Parché el xé</string>
   <string name="share_image_via">Spartisi in jiro tra imajine co</string>
   <string name="no_achievements_yet">No te ghe njiancora contribuìo</string>
@@ -462,6 +550,7 @@
   <string name="you_must_reset_your_passsword">Se ga verifegà on erore co te jeri drio entrare n\'te l\'utensa, xé neçesario rinpostar ła ciave.</string>
   <string name="upload_nearby_place_found_title">Posto cuà rente catà</string>
   <string name="upload_nearby_place_found_description">Sta cuà ła xé na foto del posto %1$s?</string>
+  <string name="title_app_shortcut_explore">Esplora</string>
   <string name="title_app_shortcut_bookmark">Segnałibri</string>
   <string name="title_app_shortcut_setting">Inpostasion</string>
   <string name="remove_bookmark">Cava dai favorii</string>

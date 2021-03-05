@@ -80,7 +80,18 @@
   <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Jerman)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Sepanyol)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croatia)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxembourg)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Belanda)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norway)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Poland)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
   <string name="welcome_wikipedia_text">Sumbangkan gambar-gambar anda.\nHidupkan rencana-rencana di Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Gambar-gambar di Wikipedia datang dari Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Gambar-gambar anda akan membantu mendidik masyarakat seluruh dunia.</string>
@@ -98,8 +109,10 @@
   <string name="Profile">Profil</string>
   <string name="category_edit_helper_show_edit_title">Kemas kini kategori</string>
   <string name="category_edit_button_text">Kemas kini kategori</string>
+  <string name="edit_category">Sunting kategori</string>
   <string name="add_picture_to_wikipedia_article_title">Tambah imej ke Wikipedia</string>
   <string name="add_picture_to_wikipedia_article_desc">Adakah anda mahu menambah gambar ini ke rencana Wikipedia bahasa %1$s?</string>
+  <string name="add_picture_to_wikipedia_instructions_title">Arahan</string>
   <string name="confirm">Sahkan</string>
   <string name="instructions_title">Arahan</string>
   <string name="wikipedia_instructions_step_1">1. Guna teks wiki berikut:</string>
