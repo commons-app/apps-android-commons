@@ -96,7 +96,8 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     }
 
     /**
-     * Sets the Tv subtitle.
+     * Removes  the tv subtitle If the activity is the instance of [UploadActivity] and
+     * if multiple files aren't selected.
      */
     private void setTvSubTitle() {
         final Activity activity = getActivity();

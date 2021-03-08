@@ -93,7 +93,8 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     }
 
     /**
-     * Sets the Depicts subtitle
+     * Removes the depicts subtitle If the activity is the instance of [UploadActivity] and
+     * if multiple files aren't selected.
      */
     private void setDepictsSubTitle() {
         final Activity activity = getActivity();

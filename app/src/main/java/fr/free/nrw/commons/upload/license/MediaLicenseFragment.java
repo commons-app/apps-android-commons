@@ -90,7 +90,8 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
     }
 
     /**
-     * Sets the Tv Subtitle
+     * Removes the tv Subtitle If the activity is the instance of [UploadActivity] and
+     * if multiple files aren't selected.
      */
     private void setTvSubTitle() {
         final Activity activity = getActivity();
