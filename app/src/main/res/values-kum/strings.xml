@@ -7,7 +7,6 @@
   <string name="preference_category_general">Ортакъ</string>
   <string name="preference_category_feedback">Герибилдирим</string>
   <string name="preference_category_privacy">Энчилик</string>
-  <string name="preference_category_location">Макан</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Кюйлевлер</string>
   <string name="username">Къоллавчу аты</string>
@@ -32,7 +31,6 @@
   <string name="menu_save_categories">Сакъламакъ</string>
   <string name="refresh_button">Янгыртмакъ</string>
   <string name="display_list_button">Тизме</string>
-  <string name="enable_gps">GPS ишлетмек</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Юклевлер ёкъ гьали де</string>
   <string name="categories_activity_title">Категориялар</string>
   <string name="title_activity_settings">Кюйлевлер</string>
@@ -45,12 +43,9 @@
   <string name="menu_download">Эндирмек</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Алмания)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Эстония)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_3_subtext_2">Интернетден эндирген суратларынг</string>
   <string name="tutorial_4_text">Юклев уьлгю:</string>
   <string name="welcome_final_button_text">Дюр!</string>
@@ -71,7 +66,6 @@
   <string name="media_detail_uploaded_date">Юклев тархы</string>
   <string name="_2fa_code">2FA код</string>
   <string name="welcome_image_tulip">Лале</string>
-  <string name="welcome_image_no_selfies">Оьзсуратсыз</string>
   <string name="welcome_image_welcome_wikipedia">Хош гел Википедиягъа</string>
   <string name="cancel">Гери алмакъ</string>
   <string name="navigation_drawer_open">Ачмакъ</string>
@@ -83,7 +77,6 @@
   <string name="navigation_item_settings">Кюйлевлер</string>
   <string name="navigation_item_logout">Чыкъмакъ</string>
   <string name="navigation_item_notification">Билдиривлер</string>
-  <string name="navigation_item_featured_images">Сайламлы</string>
   <string name="navigation_item_review">Тергев</string>
   <string name="no_description_found">тасвири табылмады</string>
   <string name="nearby_info_menu_wikipedia_article">Википедия макъала</string>
@@ -93,18 +86,15 @@
   <string name="nearby_wikipedia" fuzzy="true">ВИКИПЕДИЯ</string>
   <string name="about_rate_us" fuzzy="true">&lt;u&gt;Къыйматла бизин&lt;/u&gt;</string>
   <string name="no_internet">Интернет гиришсиз</string>
-  <string name="internet_established">Интернет гиришли</string>
   <string name="no_notifications">Билдиривлер ёкъ</string>
   <string name="about_translate" fuzzy="true">&lt;u&gt;Таржума этмек&lt;/u&gt;</string>
   <string name="about_translate_title">Тиллер</string>
   <string name="about_translate_cancel">Гери алыв</string>
   <string name="retry">Такрарламакъ</string>
-  <string name="showcase_view_got_it_button">Тюшюндюм!</string>
   <string name="no_images_found">Гьеч сурат табылмады!</string>
   <string name="share_app_title">Уьстевню пайлашмакъ</string>
   <string name="delete" fuzzy="true">ТАЙДЫРМАКЪ</string>
   <string name="nominate_for_deletion_done">Гьазир</string>
-  <string name="notsure">Шекли</string>
   <string name="review_thanks_yes_button_text" fuzzy="true">ДЮР, НЕГЕ ТЮГЮЛ</string>
   <string name="review_thanks_no_button_text" fuzzy="true">ГЕЛЕГЕН СУРАТ</string>
 </resources>

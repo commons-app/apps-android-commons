@@ -24,13 +24,11 @@
     <item quantity="one">Ova slika će se izvoditi pod licencom %1$s</item>
     <item quantity="other">Ove slike će se izvoditi pod licencama %1$s</item>
   </plurals>
-  <string name="title_activity_explore">Istraži</string>
   <string name="navigation_item_explore">Istraži</string>
   <string name="preference_category_appearance">Izgled</string>
   <string name="preference_category_general">Opšte</string>
   <string name="preference_category_feedback">Povratna informacija</string>
   <string name="preference_category_privacy">Lični podaci</string>
-  <string name="preference_category_location">Lokacija</string>
   <string name="app_name">Ostava</string>
   <string name="menu_settings">Postavke</string>
   <string name="intent_share_upload_label">Otpremi na Ostavu</string>
@@ -67,22 +65,18 @@
   <string name="share_title_hint" fuzzy="true">Naslov (obavez.)</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Ne mogu Vas prijaviti — mreža ne radi</string>
-  <string name="login_failed_wrong_credentials">Nisam mogao vas prijaviti. Proverite korisničko ime i lozinku</string>
   <string name="login_failed_throttled">Napraveni su previše neuspješnih pokušaja. Pokušajte pak za neku minutu.</string>
   <string name="login_failed_blocked">Žao nam je, korisnik je blokiran na Ostavi</string>
   <string name="login_failed_2fa_needed">Morate upisati svoj kôd za dvočiniteljsku potvrdu identiteta.</string>
   <string name="login_failed_generic">Prijava nije uspjela</string>
   <string name="share_upload_button">Otpremi</string>
   <string name="multiple_share_base_title">Dajte ime ovom kompletu</string>
-  <string name="add_set_name_toast">Dajte ime zbiru</string>
   <string name="provider_modifications">Preinačivanja</string>
   <string name="menu_upload_single">Otpremi</string>
   <string name="categories_search_text_hint">Pretraži kategorije</string>
   <string name="menu_save_categories">Snimi</string>
   <string name="refresh_button">Preučitaj</string>
   <string name="display_list_button">Popis</string>
-  <string name="gps_disabled">GPS je onemogućen na Vašem uređaju. Želite li ga omogućiti?</string>
-  <string name="enable_gps">Omogući GPS</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Još uvijek nema otpremanja</string>
   <string name="categories_not_found">Nema kategorija što odgovoraju %1$s</string>
   <string name="categories_skip_explanation">Stavite kategorije slikama kako biste olakšali korisnicima njihovo pronalaženje na Ostavi.\n\nDa biste stavili kategoriju, počnite sa pisanjem njenog imena.</string>
@@ -109,23 +103,11 @@
   <string name="menu_download">Preuzmi</string>
   <string name="preference_license">Standardna licenca</string>
   <string name="use_previous" fuzzy="true">Koristi prethodan naslov/opis</string>
-  <string name="allow_gps">Automatski dobavljaj trenutnu lokaciju</string>
-  <string name="allow_gps_summary">Stavlja geooznaku s trenutne lokacije (ako je nema). Upozorenje: to će vam otkriti nalazište.</string>
   <string name="preference_theme" fuzzy="true">Noćni režim</string>
   <string name="license_name_cc_by_sa_four">Autorstvo-Dijeliti pod istim uslovima 4.0</string>
   <string name="license_name_cc_by_four"> Autorstvo 4.0</string>
   <string name="license_name_cc_by_sa"> Autorstvo-Dijeliti pod istim uslovima 3.0</string>
   <string name="license_name_cc_by"> Autorstvo 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austrija)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Njemačka)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonija)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Španija)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Hrvatska)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luksemburg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Holandija)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norveška)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Poljska)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumunija)</string>
   <string name="tutorial_1_text">Ostava je udomljač najvećine slika što se koriste na Wikipediji.</string>
   <string name="tutorial_1_subtext">Vaše slike pomažu u obrazovanju ljudi širom svijeta!</string>
   <string name="tutorial_2_text">Postavljajte slike koje su u potpunosti Vaše djelo:</string>
@@ -150,7 +132,6 @@
   <string name="menu_refresh">Preučitaj</string>
   <string name="read_storage_permission_rationale">Potrebna dozvola: Treba da se pročita iz spoljašnje memorije. Privitak bez ovoga nema pristupa Vašoj galeriji.</string>
   <string name="write_storage_permission_rationale">Potrebna dozvola: Treba da se zapiše na spoljašnju memoriju. Privitak bez ovoga nema pristupa Vašoj kameri/galeriji.</string>
-  <string name="location_permission_rationale">Dozvola po potrebi: Utvrđavanje trenutne lokacije za predlaganje kategorija</string>
   <string name="ok">U redu</string>
   <string name="warning">Upozorenje</string>
   <string name="yes">Da</string>
@@ -165,20 +146,14 @@
   <string name="media_detail_coordinates_empty">nisu unete</string>
   <string name="become_a_tester_title">Postanite beta-tester</string>
   <string name="become_a_tester_description">Prijavite se na naš beta-kanal na Google Playu i dobijte raniji pristup novim mogućnostima i ispravkama grešaka</string>
-  <string name="login_failed_2fa_not_supported">Dvočiniteljska autentifikacija za sad nije podržana.</string>
   <string name="logout_verification">Zaista želite da se odjavite?</string>
   <string name="commons_logo">Logo Ostave</string>
   <string name="commons_website">Ostava</string>
   <string name="commons_facebook">Ostava na Facebooku</string>
   <string name="commons_github">Izvorni kôd Ostave na Githubu</string>
-  <string name="background_image">Pozadinska slika</string>
   <string name="mediaimage_failed">Slika nije uspjela</string>
-  <string name="no_image_found">Nisam našao slike</string>
   <string name="no_subcategory_found">Nisam pronašao potkategorije</string>
   <string name="no_parentcategory_found">Nisam pronašao nadređene kategorije</string>
-  <string name="upload_image">Postavi sliku</string>
-  <string name="welcome_image_no_selfies">Bez selfija</string>
-  <string name="welcome_image_proprietary">Vlasnička slika</string>
   <string name="cancel">Otkaži</string>
   <string name="navigation_drawer_open">Otvori</string>
   <string name="navigation_drawer_close">Zatvori</string>
@@ -191,12 +166,7 @@
   <string name="navigation_item_logout">Odjava</string>
   <string name="navigation_item_info">Uputstva</string>
   <string name="navigation_item_notification">Obavještenja</string>
-  <string name="navigation_item_featured_images">Izvrstana</string>
   <string name="navigation_item_review">Ocijeni</string>
-  <string name="nearby_needs_permissions">Mjesta u blizini ne mogu se prikazati bez dozvole za lokaciju</string>
-  <string name="error_while_cache">Greška predmemoriranja slika</string>
-  <string name="title_info">Kratki i jedinstveni naslov datoteke, koji će služiti kao njen naziv. Možete koristiti čist jezik s međuprostorom, ali nemojte pisati datotečni nastavak</string>
-  <string name="give_permission">Daj dopuštenje</string>
   <string name="use_external_storage" fuzzy="true">Koristi spoljašnju memoriju</string>
   <string name="use_external_storage_summary" fuzzy="true">Spremanje napravljenih slika u privitku s kamerom na Vašem uređaju</string>
   <string name="login_to_your_account">Prijavite se s svojim računom</string>
@@ -206,7 +176,6 @@
   <string name="nominate_deletion">Predloži za brisanje</string>
   <string name="nominated_for_deletion">Ova slika je predložena za brisanje</string>
   <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Pojedinije ćete naći na webstranici&lt;/u&gt;</string>
-  <string name="view_browser">Pogledaj u pregledniku</string>
   <string name="skip_login">Preskoči</string>
   <string name="continue_message">Nastavi</string>
   <string name="correct">Tačan odgovor</string>
@@ -214,7 +183,5 @@
   <string name="quiz_screenshot_question">Da li ovaj ekranski snimak je u redu za otpremanje?</string>
   <string name="share_app_title">Dijeli privitak</string>
   <string name="delete_helper_show_deletion_title_failed">Nije uspelo</string>
-  <string name="delete_helper_ask_spam_other">Ostalo</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
-  <string name="delete_helper_ask_reason_copyright_other">Ostalo</string>
 </resources>

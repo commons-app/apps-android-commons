@@ -12,7 +12,6 @@
     <item quantity="other">%1$d پورته کول</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">دا انځور به د %1$s په منښتليک سمبال وي.</string>
-  <string name="preference_category_location">ځای</string>
   <string name="app_name">ويکي خونديځ</string>
   <string name="bullet">•</string>
   <string name="menu_settings">امستنې</string>
@@ -63,18 +62,7 @@
   <string name="menu_download">ښکته کول</string>
   <string name="preference_license">تلواليز منښتليک</string>
   <string name="preference_theme" fuzzy="true">د شپې بڼه</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (اتريش)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (جرمني)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (اېسټونيا)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (سپانيا)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (کرواسيا)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (لوکسزمبورگ)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (نېدرلند)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (ناروې)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (پولند)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (رومانيا)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_zero">CC صفر</string>
   <string name="welcome_final_button_text">هو</string>
   <string name="detail_panel_cats_label">وېشنيزې</string>
   <string name="detail_panel_cats_loading">رابرسېرېږي...</string>
@@ -83,8 +71,6 @@
   <string name="detail_license_empty">نامعلوم جواز</string>
   <string name="menu_refresh">تازه کول</string>
   <string name="ok">ښه</string>
-  <string name="title_activity_nearby">نږدې ځایونه</string>
-  <string name="no_nearby">نږدې ځایونه ونه موندل شول</string>
   <string name="warning">گواښنه</string>
   <string name="yes">هو</string>
   <string name="no">نه</string>

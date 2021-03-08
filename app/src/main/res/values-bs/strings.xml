@@ -68,8 +68,6 @@
   <string name="categories_search_text_hint">Pretraži kategorije</string>
   <string name="menu_save_categories">Sačuvaj</string>
   <string name="refresh_button">Osvježi</string>
-  <string name="gps_disabled">GPS je onemogućen na Vašem uređaju. Želite li ga omogućiti?</string>
-  <string name="enable_gps">Omogući GPS</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Zasad nema postavljenih datoteka</string>
   <string name="categories_not_found">Nema kategorija koje odgovoraju %1$s</string>
   <string name="categories_skip_explanation" fuzzy="true">Dodajte kategorije da biste korisnicima olakšali pronalaženje slika na Wikimedia Commonsu.\n\nPočnite pisati da biste dodali kategoriju.\nDodirnite ovu poruku (ili pritisnite dugme \"nazad\") da biste preskočili ovaj korak.</string>
@@ -92,8 +90,6 @@
   <string name="menu_download">Preuzmi</string>
   <string name="preference_license" fuzzy="true">Licenca</string>
   <string name="use_previous">Koristi prethodni naziv i opis</string>
-  <string name="allow_gps">Automatski dobavi trenutnu lokaciju</string>
-  <string name="allow_gps_summary" fuzzy="true">Dobavi trenutnu lokaciju za davanje prijedloga o kategorijama ako nema geooznaku</string>
   <string name="preference_theme" fuzzy="true">Noćni režim</string>
   <string name="license_name_cc_by_sa_four">Autorstvo-Dijeliti pod istim uslovima 4.0</string>
   <string name="license_name_cc_by_four">Autorstvo 4.0</string>
@@ -101,20 +97,9 @@
   <string name="license_name_cc_by">Autorstvo 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austrija)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Njemačka)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonija)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Španija)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Hrvatska)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luksemburg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Holandija)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norveška)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Poljska)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumunija)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">Wikimedia Commons skladišti većinu slika koje se koriste na Wikipediji.</string>
   <string name="tutorial_1_subtext">Vaše slike pomažu u obrazovanju ljudi širom svijeta!</string>
   <string name="tutorial_2_text">Postavljajte slike koje su u potpunosti Vaše djelo:</string>
@@ -133,10 +118,7 @@
   <string name="detail_license_empty">Nepoznata licenca</string>
   <string name="menu_refresh">Osvježi</string>
   <string name="read_storage_permission_rationale" fuzzy="true">Potrebna dozvola: Čitanje vanjske memorije. Aplikacija ne može raditi bez ovog.</string>
-  <string name="location_permission_rationale">Neobavezna dozvola: Dobavljanje trenutne lokacije za predlaganje kategorija</string>
   <string name="ok">U redu</string>
-  <string name="title_activity_nearby">Mjesta u blizini</string>
-  <string name="no_nearby">Nema okolnih mjesta</string>
   <string name="warning">Upozorenje</string>
   <string name="yes">Da</string>
   <string name="no">Ne</string>
@@ -146,23 +128,13 @@
   <string name="become_a_tester_title">Postanite beta-tester</string>
   <string name="become_a_tester_description">Prijavite se na naš beta-kanal na Google Playu i dobijte raniji pristup novim mogućnostima i ispravkama grešaka</string>
   <string name="_2fa_code">Kôd za provjeru u 2 koraka</string>
-  <string name="number_of_uploads">Moje ograničenje za nedavna postavljanja</string>
-  <string name="maximum_limit">Krajnja granica</string>
-  <string name="maximum_limit_alert">Ne mogu prikazati više od 500</string>
-  <string name="set_limit" fuzzy="true">Postavi ograničenje za nedavna postavljanja</string>
-  <string name="login_failed_2fa_not_supported">Potvrda u 2 koraka trenutno nije podržana.</string>
   <string name="logout_verification">Želite li se zaista odjaviti?</string>
   <string name="commons_logo">Logo Commonsa</string>
-  <string name="background_image">Pozadinska slika</string>
   <string name="mediaimage_failed">Slika nije uspjela</string>
-  <string name="no_image_found">Nije pronađena slika</string>
-  <string name="upload_image">Postavi sliku</string>
   <string name="welcome_image_mount_zao">Zao</string>
   <string name="welcome_image_llamas">Ljame</string>
   <string name="welcome_image_rainbow_bridge">Dugin most</string>
   <string name="welcome_image_tulip">Tulipan</string>
-  <string name="welcome_image_no_selfies">Bez selfija</string>
-  <string name="welcome_image_proprietary">Vlasnička slika</string>
   <string name="welcome_image_welcome_wikipedia">Dobro došli (Wikipedia)</string>
   <string name="welcome_image_welcome_copyright">Dobro došli (autorska prava)</string>
   <string name="welcome_image_sydney_opera_house">Sidnejska opera</string>
@@ -177,7 +149,6 @@
   <string name="navigation_item_feedback">Povratne informacije</string>
   <string name="navigation_item_logout">Odjavi me</string>
   <string name="navigation_item_info">Uputstva</string>
-  <string name="nearby_needs_permissions">Mjesta u blizini ne mogu se prikazati bez dozvole za lokaciju</string>
   <string name="no_description_found">nema opisa</string>
   <string name="nearby_info_menu_commons_article" fuzzy="true">Članak na Commonsu</string>
   <string name="nearby_info_menu_wikidata_article">Stavka na Wikipodacima</string>

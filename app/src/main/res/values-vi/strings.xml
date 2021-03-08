@@ -33,13 +33,11 @@
     <item quantity="one">Hình này sẽ được phát hành theo giấy phép %1$s</item>
     <item quantity="other">Những hình này sẽ được phát hành theo giấy phép %1$s</item>
   </plurals>
-  <string name="title_activity_explore">Khám phá</string>
   <string name="navigation_item_explore">Khám phá</string>
   <string name="preference_category_appearance">Giao diện</string>
   <string name="preference_category_general">Tổng quát</string>
   <string name="preference_category_feedback">Phản hồi</string>
   <string name="preference_category_privacy">Sự riêng tư</string>
-  <string name="preference_category_location">Vị trí</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Thiết lập</string>
@@ -77,22 +75,18 @@
   <string name="share_title_hint" fuzzy="true">Tựa đề (Yêu cầu)</string>
   <string name="share_description_hint">Miêu tả</string>
   <string name="login_failed_network">Không thể đăng nhập – có lỗi mạng</string>
-  <string name="login_failed_wrong_credentials">Không thể đăng nhập – vui lòng kiểm tra tên người dùng và mật khẩu của bạn</string>
   <string name="login_failed_throttled">Đã đăng nhập thất bại quá nhiều lần. Xin vui lòng thử lại trong vòng vài phút.</string>
   <string name="login_failed_blocked">Rất tiếc, người dùng này đã bị cấm tại Commons</string>
   <string name="login_failed_2fa_needed">Bạn phải cung cấp mã xác thực dùng hai nhân tố.</string>
   <string name="login_failed_generic">Đăng nhập thất bại</string>
   <string name="share_upload_button">Tải lên</string>
   <string name="multiple_share_base_title">Đặt tên nhóm này</string>
-  <string name="add_set_name_toast">Vui lòng đặt tên cho tập tin này</string>
   <string name="provider_modifications">Sửa đổi</string>
   <string name="menu_upload_single">Tải lên</string>
   <string name="categories_search_text_hint">Tìm thể loại</string>
   <string name="menu_save_categories">Lưu</string>
   <string name="refresh_button">Làm mới</string>
   <string name="display_list_button">Danh sách</string>
-  <string name="gps_disabled">Chức năng GPS đang tắt trên thiết bị của bạn. Bạn có muốn bật nó lên?</string>
-  <string name="enable_gps">Bật GPS</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Chưa có tập tin tải lên</string>
   <string name="categories_not_found">Không tìm thấy thể loại khớp với %1$s</string>
   <string name="categories_skip_explanation">Xếp các hình ảnh vào thể loại để giúp chúng dễ tìm kiếm hơn trên Wikimedia Commons.\nHãy bắt đầu nhập để thêm thể loại.</string>
@@ -118,8 +112,6 @@
   <string name="menu_download">Tải về</string>
   <string name="preference_license">Giấy phép mặc định</string>
   <string name="use_previous">Sử dụng tiêu đề và miêu tả trước</string>
-  <string name="allow_gps">Lấy vị trí hiện tại tự động</string>
-  <string name="allow_gps_summary" fuzzy="true">Định vị hiện tại để nhận gợi ý thể loại trong trường hợp hình ảnh chưa được gắn thẻ địa lý</string>
   <string name="preference_theme">Giao diện</string>
   <string name="license_name_cc_by_sa_four">Ghi công–Chia sẻ tương tự 4.0</string>
   <string name="license_name_cc_by_four">Ghi công 4.0</string>
@@ -127,20 +119,9 @@
   <string name="license_name_cc_by">Ghi công 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Áo)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Đức)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Tây Ban Nha)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croatia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxembourg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Hà Lan)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Na Uy)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Ba Lan)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC0</string>
   <string name="tutorial_1_text">Wikimedia Commons là nơi lưu giữ phần nhiều hình ảnh xuất hiện trong Wikipedia.</string>
   <string name="tutorial_1_subtext">Các hình ảnh của bạn giúp giáo dục người dân trên khắp thế giới!</string>
   <string name="tutorial_2_text">Xin hãy tải lên các hình ảnh do chính bạn chụp hoặc vẽ:</string>
@@ -171,12 +152,8 @@
   <string name="storage_permission_title">Yêu cầu Quyền Lưu trữ</string>
   <string name="read_storage_permission_rationale">Yêu cầu cấp phép: Đọc thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép đọc thiết bị lưu trữ bên ngoài để truy cập kho ảnh của bạn.</string>
   <string name="write_storage_permission_rationale" fuzzy="true">Yêu cầu cấp phép: Ghi vào thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép ghi vào thiết bị lưu trữ bên ngoài để truy cập máy chụp hình của bạn.</string>
-  <string name="location_permission_rationale">Tùy chọn cấp phép: Định vị hiện tại để nhận gợi ý thể loại</string>
   <string name="ok">OK</string>
-  <string name="title_activity_nearby">Nơi Lân cận</string>
-  <string name="no_nearby">Không tìm thấy nơi lân cận</string>
   <string name="warning">Cảnh báo</string>
-  <string name="upload_image_duplicate">Tập tin này đã tồn tại trên Commons. Bạn có chắc muốn tiếp tục</string>
   <string name="upload">Tải lên</string>
   <string name="yes">Có</string>
   <string name="no">Không</string>
@@ -191,28 +168,16 @@
   <string name="become_a_tester_title">Trở thành người dùng thử nghiệm</string>
   <string name="become_a_tester_description">Tham gia kênh thử nghiệm của chúng tôi trên Google Play và nhận các tính năng mới cùng những bản sửa lỗi sớm hơn</string>
   <string name="_2fa_code">Mã Hai Nhân tố</string>
-  <string name="number_of_uploads">Giới hạn Tải lên Gần đây của Tôi</string>
-  <string name="maximum_limit">Tối đa</string>
-  <string name="invalid_input">Thông tin không hợp lệ</string>
-  <string name="maximum_limit_alert">Không thể hiển thị hơn 500 cái</string>
-  <string name="cannot_be_zero">Giới hạn đăng tải không thể là 0</string>
-  <string name="set_limit">Giới hạn đăng tải gần đây</string>
-  <string name="login_failed_2fa_not_supported">Hiện chưa hỗ trợ xác thực dùng hai nhân tố.</string>
   <string name="logout_verification">Bạn có chắc chắn muốn đăng xuất?</string>
   <string name="commons_logo">Biểu trưng Commons</string>
   <string name="commons_website">Trang Web Commons</string>
   <string name="commons_facebook">Trang Commons tại Facebook</string>
   <string name="commons_github">Mã nguồn Commons tại GitHub</string>
-  <string name="background_image">Hình nền</string>
   <string name="mediaimage_failed">Hình ảnh bị Thất bại</string>
-  <string name="no_image_found">Không tìm thấy Hình ảnh</string>
-  <string name="upload_image">Tải lên Hình</string>
   <string name="welcome_image_mount_zao">Núi Zaō</string>
   <string name="welcome_image_llamas">Lạc đà không bướu</string>
   <string name="welcome_image_rainbow_bridge">Cầu Cầu vồng</string>
   <string name="welcome_image_tulip">Tu-líp</string>
-  <string name="welcome_image_no_selfies">Không cho phép Ảnh tự chụp</string>
-  <string name="welcome_image_proprietary">Hình có Bản quyền</string>
   <string name="welcome_image_welcome_wikipedia">Hoan nghênh: Wikipedia</string>
   <string name="welcome_image_welcome_copyright">Hoan nghênh: Bản quyền</string>
   <string name="welcome_image_sydney_opera_house">Nhà hát Opera Sydney</string>
@@ -228,14 +193,10 @@
   <string name="navigation_item_logout">Đăng xuất</string>
   <string name="navigation_item_info">Hướng dẫn</string>
   <string name="navigation_item_notification">Thông báo</string>
-  <string name="navigation_item_featured_images">Chọn lọc</string>
-  <string name="nearby_needs_permissions">Cần có quyền truy cập vị trí của bạn để hiển thị các địa điểm lân cận</string>
   <string name="no_description_found">không tìm thấy miêu tả</string>
   <string name="nearby_info_menu_commons_article">Trang tập tin Commons</string>
   <string name="nearby_info_menu_wikidata_article">Khoản mục Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Bài Wikipedia</string>
-  <string name="error_while_cache">Xuất hiện lỗi khi đưa hình ảnh vào vùng nhớ đệm</string>
-  <string name="title_info">Tên ngắn và duy nhất cho tập tin sẽ được dùng làm tên tập tin. Có thể dùng thuật ngữ bình thường với khoảng cách. Đừng bao gồm phần mở rộng tập tin.</string>
   <string name="description_info">Xin vui lòng miêu tả phương tiện càng đầy đủ càng tốt: Chụp ở đâu? Trong hình có gì? Bối cảnh làm sao? Xin vui lòng miêu tả các đối tượng và người trong hình. Cho biết những thông tin khó đoán ra, chẳng hạn giờ trong ngày nếu là phong cảnh. Nếu phương tiện có gì kỳ lạ, xin vui lòng giải thích tại sao nó kỳ lạ.</string>
   <string name="upload_problem_image_dark">Hình ảnh quá tối.</string>
   <string name="upload_problem_image_blurry">Hình ảnh bị nhòe.</string>
@@ -243,7 +204,6 @@
   <string name="upload_problem_different_geolocation">Bức ảnh này được chụp ở một địa điểm khác.</string>
   <string name="upload_problem_fbmd">Vui lòng chỉ đăng tải hình ảnh bạn đã tự chụp. Xin đừng đăng tải hình ảnh bạn tìm thấy trên tài không Facebook của người khác.</string>
   <string name="upload_problem_do_you_continue">Bạn vẫn muốn đăng tải bức ảnh này?</string>
-  <string name="give_permission">Cho phép</string>
   <string name="use_external_storage" fuzzy="true">Sử dụng thiết bị lưu trữ bên ngoài</string>
   <string name="use_external_storage_summary" fuzzy="true">Lưu các hình ảnh được chụp bằng máy chụp hình trong ứng dụng vào thiết bị của bạn</string>
   <string name="login_to_your_account">Đăng nhập vào tài khoản của bạn</string>
@@ -253,18 +213,10 @@
   <string name="null_url">Lỗi! Không tìm thấy URL</string>
   <string name="nominate_deletion">Bầu chọn để xóa</string>
   <string name="nominated_for_deletion">Có đề nghị xóa hình này.</string>
-  <string name="view_browser">Hiện lên ở trang xem browse</string>
   <string name="skip_login">Bỏ qua</string>
   <string name="navigation_item_login">Đăng nhập</string>
-  <string name="nearby_location_has_not_changed">Vị trí không thay đổi.</string>
   <string name="nearby_location_not_available" fuzzy="true">Vị trí không có sẵn.</string>
   <string name="location_permission_rationale_nearby">Bạn cần cho phép để hiển thị danh sách nơi lân cận</string>
-  <string name="get_directions">Hướng dẫn</string>
-  <string name="read_article">Đọc bài</string>
-  <string name="notifications_welcome">Hoan nghênh %1$s đã đến Wikimedia Commons! Chúng tôi rất mừng bạn đến đây.</string>
-  <string name="notifications_talk_page_message">%1$s đã nhắn tin tại trang thảo luận của bạn</string>
-  <string name="notifications_thank_you_edit">Cảm ơn vì bạn đã thực hiện sửa đổi</string>
-  <string name="notifications_mention">%1$s đã nhắc đến bạn tại %2$s.</string>
   <string name="nearby_directions">Hướng dẫn</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -273,7 +225,6 @@
   <string name="about_faq">Câu thường hỏi</string>
   <string name="welcome_skip_button">Bỏ qua Hướng dẫn</string>
   <string name="no_internet">Internet không có sẵn</string>
-  <string name="internet_established">Internet có sẵn</string>
   <string name="error_notifications">Lỗi khi lấy thông báo</string>
   <string name="no_notifications">Không tìm thấy thông báo</string>
   <string name="about_translate">Biên dịch</string>
@@ -282,15 +233,12 @@
   <string name="about_translate_proceed">Tiến hành</string>
   <string name="about_translate_cancel">Hủy bỏ</string>
   <string name="retry">Thử lại</string>
-  <string name="showcase_view_got_it_button">Được rồi!</string>
   <string name="no_images_found">Không tìm thấy hình ảnh!</string>
   <string name="error_loading_images">Đã xuất hiện lỗi khi tải hình ảnh.</string>
   <string name="image_uploaded_by">Tải lên bởi: %1$s</string>
   <string name="menu_set_wallpaper">Đặt làm hình nền</string>
   <string name="taj_mahal_answer">Hình chứa di tích và cảnh vật thiên nhiên thường được chấp nhận tải lên ở hầu hết các quốc gia. Xin lưu ý rằng các công trình nghệ thuật được trưng bày tạm thời thường có bản quyền và không được chấp nhận tải lên.</string>
-  <string name="warning_for_image_reverts">CẢNH BÁO: Hơn %1$s hình mà bạn tải lên đã bị xoá. Nếu tiếp tục tải lên hình ảnh bị yêu cầu xoá, tài khoản của bạn có thể bị chặn.</string>
   <string name="share_app_title">Chia sẻ Ứng dụng</string>
-  <string name="share_coordinates_not_present">Tọa độ không được chỉ định khi chọn hình ảnh</string>
   <string name="error_fetching_nearby_places">Lỗi khi lấy các nơi lân cận.</string>
   <string name="search_this_area">Tìm kiếm khu vực này</string>
   <string name="category_edit_helper_make_edit_toast">Đang cố gắng cập nhật danh mục.</string>
@@ -301,5 +249,4 @@
   <string name="todo_improve">Các cải thiện được đề xuất:</string>
   <string name="missing_category">- Thêm danh mục vào hình ảnh này để cải thiện khả năng sử dụng.</string>
   <string name="missing_article">- Thêm hình ảnh này vào bài viết Wikipedia được liên kết không có hình ảnh.</string>
-  <string name="edit_category">Sửa thể loại</string>
 </resources>

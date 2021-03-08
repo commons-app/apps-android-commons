@@ -38,8 +38,6 @@
   <string name="categories_search_text_hint">Актегориа алхра</string>
   <string name="menu_save_categories">Еиқәырхатәуп</string>
   <string name="refresh_button">Ирҿыцтәуп</string>
-  <string name="gps_disabled">GPS аҿыхуп шәара шәҟны. Ишәҭахума иаҿашәкыр?</string>
-  <string name="enable_gps">Иаҿактәуп GPS</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Аҭагаламҭақәа макьана иҟам</string>
   <string name="categories_activity_title">Акатегориақәа</string>
   <string name="title_activity_settings">Архиарақәа</string>
@@ -55,20 +53,9 @@
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Австриа)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Германиа)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Естониа)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Испаниа)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Хорватиа)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Лиуксембург)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Нидерланды)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Норвегиа)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Польша)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Румыниа)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_4_text">Аҭагалара аҿырҧштәы:</string>
   <string name="welcome_final_text">Ари шәара еилышәкаама?</string>
   <string name="welcome_final_button_text">Ааи!</string>
@@ -87,14 +74,8 @@
   <string name="media_detail_license">Алицензиа</string>
   <string name="media_detail_coordinates">Акоординатқәа</string>
   <string name="_2fa_code">2ФА Акод</string>
-  <string name="maximum_limit">Имаксималу алимит</string>
-  <string name="maximum_limit_alert">Иауам 500 иреиҳаны раарҧшра</string>
-  <string name="background_image">Аҿаҧшыратә сахьа</string>
-  <string name="no_image_found">Асахьа ҧшаам</string>
-  <string name="upload_image">Иҭагалатәуп асахьа</string>
   <string name="welcome_image_mount_zao">Ашьха Зао</string>
   <string name="welcome_image_tulip">Атиульпан</string>
-  <string name="welcome_image_no_selfies">Аселфи ыҟаӡам</string>
   <string name="welcome_image_welcome_wikipedia">Бзиала шәаабеит Википедиа ахь</string>
   <string name="welcome_image_sydney_opera_house">Сиднеи аопера атеатр</string>
   <string name="cancel">Аҟәыхра</string>

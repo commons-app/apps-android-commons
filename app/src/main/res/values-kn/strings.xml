@@ -54,8 +54,6 @@
   <string name="categories_search_text_hint">ವರ್ಗಗಳಲ್ಲಿ ಹುಡುಕು</string>
   <string name="menu_save_categories">ಉಳಿಸಿ</string>
   <string name="refresh_button">ಪುನಶ್ಚೇತನಗೊಳಿಸು</string>
-  <string name="gps_disabled">ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಜಿಪಿಎಸ್ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ. ನೀವು ಅದನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು ಬಯಸುವಿರಾ?</string>
-  <string name="enable_gps">ಜಿಪಿಎಸ್ ಸಕ್ರಿಯಗೊಳಿಸು</string>
   <string name="contributions_subtitle_zero" fuzzy="true">ಇನ್ನೂ ಯಾವುದೆ ಅಪ್ಲೋಡ್ಗಳಿಲ್ಲ</string>
   <string name="categories_activity_title">ವರ್ಗಗಳು</string>
   <string name="title_activity_settings">ವ್ಯವಸ್ಥೆಗಳು</string>

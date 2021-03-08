@@ -29,7 +29,6 @@
   <string name="preference_category_appearance">स्वरूप</string>
   <string name="preference_category_general">सामान्य</string>
   <string name="preference_category_feedback">अभिप्राय</string>
-  <string name="preference_category_location">स्थान</string>
   <string name="app_name">कॉमन्स</string>
   <string name="bullet">•</string>
   <string name="menu_settings">सेटिंग्स</string>
@@ -77,8 +76,6 @@
   <string name="categories_search_text_hint">वर्ग शोधा</string>
   <string name="menu_save_categories">जतन करा</string>
   <string name="refresh_button">ताजेतवाने करा</string>
-  <string name="gps_disabled">आपल्या मोबाईलचे गिपीएस बंद आहे, तुम्हांला ते चालू करायचे आहे का?</string>
-  <string name="enable_gps">जिपीएस चालू करा</string>
   <string name="contributions_subtitle_zero" fuzzy="true">अद्याप काहीही चढवलेले नाही</string>
   <string name="categories_not_found">%1$s शी जुळणारे कोणतेच वर्ग सापडले नाहीत</string>
   <string name="categories_skip_explanation">विकिमिडिया कॉमन्सवर आपल्या संचिकांना शोधणे सोपी जाण्यासाठी त्यांना वर्ग जोडा.\n\nवर्ग जोडण्यास टंकन सुरू करा.\nही पायरी चुकविण्यास या संदेशावर अलगद टिचका (किंवा बॅक कळ टिचका)</string>
@@ -102,8 +99,6 @@
   <string name="menu_download">अधिभारण करा</string>
   <string name="preference_license">डिफॉल्ट परवाना</string>
   <string name="use_previous" fuzzy="true">मागील शीर्षक/वर्णन वापरा</string>
-  <string name="allow_gps">आपोआप सध्याचे स्थान मिळवा</string>
-  <string name="allow_gps_summary" fuzzy="true">जर छायाचित्राला जिओटॅग नसल्यास तुम्ही तुमच्या स्थानाची निश्चिती करा जेणे करुन संबंधीत वर्ग सुचवले जातील</string>
   <string name="preference_theme" fuzzy="true">रात्रीच्या वेळेच्या व्यवस्था</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by_four"> Attribution 3.0</string>
@@ -111,20 +106,9 @@
   <string name="license_name_cc_by"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Germany)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spain)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croatia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxembourg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Netherlands)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norway)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Poland)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">विकिपीडियात वापरल्या जाणाऱ्या बहुतेक चित्रांचे यजमानत्व विकिमिडिया कॉमन्स स्वीकारते.</string>
   <string name="tutorial_1_subtext">जगातल्या अनेक लोकांना आपल्या चित्राद्वारे शिकता येते!</string>
   <string name="tutorial_2_text">कृपया निव्वळ आपण घेतलेल्या किंवा तयार केलेल्या चित्रांचेच अपभारण करा:</string>
@@ -153,10 +137,7 @@
   <string name="menu_refresh">ताजेतवाने करा</string>
   <string name="read_storage_permission_rationale" fuzzy="true">परवानगी आवश्यक:बाह्य भंडारण वाचन. याशिवाय अॅप काम करू शकत नाही.</string>
   <string name="write_storage_permission_rationale" fuzzy="true">परवानगी आवश्यक:बाह्य भंडारण वाचन. याशिवाय अॅप काम करू शकत नाही.</string>
-  <string name="location_permission_rationale">ऐच्छिक परवानगी:वर्ग सुचवण्यांसाठी सध्याचे स्थान मिळवा</string>
   <string name="ok">ठीक आहे</string>
-  <string name="title_activity_nearby">जवळपासची स्थाने</string>
-  <string name="no_nearby">आसपास काहीही सापडले नाही</string>
   <string name="warning">इशारा</string>
   <string name="yes">होय</string>
   <string name="no">नाही</string>
@@ -169,26 +150,16 @@
   <string name="become_a_tester_title">बिटा आवृत्तीचे तपासक बना</string>
   <string name="become_a_tester_description">गुगल प्ले वरील आमच्या बिटा चॅनलचा पाठलाग करा आणि आमच्या नव्या सेवा-सुविधांचा तसाच त्रुटी-निरसनांचा फ़ायदा घ्या.</string>
   <string name="_2fa_code">2FA कोड</string>
-  <string name="number_of_uploads">माझ्या अलिकडच्या अपभरणाची मर्यादा</string>
-  <string name="maximum_limit">जास्तीची मर्यादा</string>
-  <string name="maximum_limit_alert">५०० पेक्षा जास्त दाखवण्यास असमर्थ</string>
-  <string name="set_limit" fuzzy="true">माझ्या अलिकडच्या अपभरणाची मर्यादा</string>
-  <string name="login_failed_2fa_not_supported">दोन पायऱ्यांची वैधता तपासणी सध्या उपलब्ध नाही.</string>
   <string name="logout_verification">काय आपणास खरेच बंद करायचे आहे?</string>
   <string name="commons_logo">कॉमन्सचे चिन्ह</string>
   <string name="commons_website">कॉमन्सचे संकेतस्थळ</string>
   <string name="commons_facebook">कॉमन्सचे फ़ेसबुक पान</string>
   <string name="commons_github">कॉमन्सचे गिटहब स्त्रोत कोड</string>
-  <string name="background_image">पार्श्वभूमी चित्र</string>
   <string name="mediaimage_failed"> चित्र माध्यमे कोसळली</string>
-  <string name="no_image_found">कोणतेही चित्र सापडले नाही</string>
-  <string name="upload_image">चित्र अपभारीत करा</string>
   <string name="welcome_image_mount_zao">जाओ जान पर्वत</string>
   <string name="welcome_image_llamas">लामा</string>
   <string name="welcome_image_rainbow_bridge">रेनबो पूल</string>
   <string name="welcome_image_tulip">टुलिप</string>
-  <string name="welcome_image_no_selfies">सेल्फ़ी चालणार नाहीत</string>
-  <string name="welcome_image_proprietary">मालकी हक्क प्रतिमा</string>
   <string name="welcome_image_welcome_wikipedia">विकीपिडीयात स्वागत आहे</string>
   <string name="welcome_image_welcome_copyright">प्रताधिकार स्वागत आहे</string>
   <string name="welcome_image_sydney_opera_house">सिडनीचे ओपेरा हाऊस</string>
@@ -204,14 +175,10 @@
   <string name="navigation_item_logout">बाहेर पडा</string>
   <string name="navigation_item_info">माहिती पुस्तिका</string>
   <string name="navigation_item_notification">अधिसूचना</string>
-  <string name="nearby_needs_permissions">लोकेशन सेवा वापराची परवानगी दिल्याशिवाय जवळपासची ठिकाणे दाखवली जाउ शकत नाहीत.</string>
   <string name="no_description_found">कोणतीही माहिती सापडली नाही</string>
   <string name="nearby_info_menu_commons_article">कॉमन्स फ़ाईलचे पान</string>
   <string name="nearby_info_menu_wikidata_article">विकिबेस कलम</string>
-  <string name="error_while_cache">चित्र दाखवताना त्रुटी आढळली</string>
-  <string name="title_info">फ़ाईलला असे नाव द्या जे सुयोग्य असेल,चित्राविषयी त्यामधून माहिती कळेल अशी साधी भाषा वापरा,नावामध्ये फ़ाईलचे एक्सटेन्शन लिहू नका.</string>
   <string name="description_info">माध्यमांची शक्य तितकी जास्त माहिती द्या:छायाचित्र/चलचित्र/ध्वनिमुद्रण कोठे घेतले आहे? त्यात काय दाखवले आहे? त्या माध्यमांचा संदर्भ काय? त्यातील वस्तू,व्यक्ति व इतर माहिती द्या? अशी सगळी माहिती जी त्या माध्यमाकडे पाहून लक्षात येणार नाही पण ती महत्वाचे आहे ती सर्व पुरवा. जर त्या माध्यमामध्ये काहीही वेगळे दिसत असेल तर ते वेगळे का आहे याची माहिती पुरवा.</string>
-  <string name="give_permission">परवानगी द्या</string>
   <string name="use_external_storage" fuzzy="true">बाहेरील स्टोरेज वापरा</string>
   <string name="use_external_storage_summary" fuzzy="true">आपल्या डिव्हाइसवरील इन-अॅप्स कॅमेर्यासह घेतलेली चित्रे जतन करा</string>
   <string name="login_to_your_account">तुमच्या खात्यावरुन सनोंद प्रवेश करा</string>
@@ -219,16 +186,8 @@
   <string name="send_log_file_description" fuzzy="true">विकसकांना लॉग फ़ाईल विपत्राने पाठवा</string>
   <string name="no_web_browser">URL उघडण्यासाठी कोणतेही वेब ब्राउझर आढळले नाही</string>
   <string name="null_url">त्रुटी! URL आढळली नाही</string>
-  <string name="nearby_location_has_not_changed">लोकेशन बदलली नाहीये.</string>
   <string name="nearby_location_not_available" fuzzy="true">ही लोकेशन उपलब्ध नाही</string>
   <string name="location_permission_rationale_nearby">जवळपासच्या ठिकाणांची यादी दाखवण्यासाठी आपली परवानगी आवश्यक आहे</string>
-  <string name="get_directions" fuzzy="true">दिशानिर्देश मिळवा</string>
-  <string name="read_article" fuzzy="true">लेख वाचा</string>
-  <string name="notifications_welcome">विकीमिडीया कॉमन्समध्ये आपले स्वागत आहे,%1$s! आम्हांला आनंद आहे आपण इथे आलात.</string>
-  <string name="notifications_talk_page_message">%1$s यांनी तुमच्या चर्चापानावर संदेश टाकला</string>
-  <string name="notifications_thank_you_edit">तुमच्या संपादनासाठी तुमचे आभार !</string>
-  <string name="notifications_mention">%1$s यांनी तुमचा उल्लेख %2$s येथे केला.</string>
-  <string name="toggle_view_button">टॉगल दृश्य</string>
   <string name="about_rate_us" fuzzy="true"/>
   <string name="about_faq" fuzzy="true">सतत विचारले जाणारे प्रश्न</string>
   <string name="welcome_skip_button">ट्यूटोरियल वगळा</string>

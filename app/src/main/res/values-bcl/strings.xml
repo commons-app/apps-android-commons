@@ -25,13 +25,11 @@
     <item quantity="one">This image will be licensed under %1$s</item>
     <item quantity="other">Ining imahe magin lisensiyada sa lindong kan %1$s</item>
   </plurals>
-  <string name="title_activity_explore">Maghiling-hiling</string>
   <string name="navigation_item_explore">Maghiling-hiling</string>
   <string name="preference_category_appearance">Hitsurahon</string>
   <string name="preference_category_general">Pankagabsan</string>
   <string name="preference_category_feedback">Balik-simbag</string>
   <string name="preference_category_privacy">Pribasidad</string>
-  <string name="preference_category_location">Lokasyon</string>
   <string name="app_name">Mga Wikimidyang Karugaringan</string>
   <string name="menu_settings">Mga Panuytoy</string>
   <string name="intent_share_upload_label">Ikarga sa Commons</string>
@@ -68,21 +66,17 @@
   <string name="share_title_hint" fuzzy="true">Titulo (Kaipuhan)</string>
   <string name="share_description_hint">Deskripsyon</string>
   <string name="login_failed_network">Dae makadagos sa paglaog - minapalya an kabitanahan</string>
-  <string name="login_failed_wrong_credentials">Dai nakalaog - pakihiling ulit an saimong panindog asin sekretong panlaog</string>
   <string name="login_failed_throttled">Kadakulon na an bakong matrayumpong pagprubar. Pakiotro na sana giraray sa laog nin nagkapirang mga minutos</string>
   <string name="login_failed_blocked">Sori, ining paragamit pinagkubkob na sa Kagrugaringan</string>
   <string name="login_failed_generic">An Paglaog nagpalya</string>
   <string name="share_upload_button">Ikarga</string>
   <string name="multiple_share_base_title">Pangarani ining katiriponan</string>
-  <string name="add_set_name_toast">Magtao nin ngaran para sa grupo na ini</string>
   <string name="provider_modifications">Mga Modipikasyon</string>
   <string name="menu_upload_single">Ikarga</string>
   <string name="categories_search_text_hint">Hanapa an mga kategoriya</string>
   <string name="menu_save_categories">Itagama</string>
   <string name="refresh_button">Preskohon otro</string>
   <string name="display_list_button">Listahan</string>
-  <string name="gps_disabled">Ang GPS sa saimong gamit dae pinagana. Gusto mong paganahon ini?</string>
-  <string name="enable_gps">Paganahon an GPS</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Mayo pang ikinakarga</string>
   <string name="categories_not_found">Mayong mga kategoriya an mainukno sa %1$s an nanagboan</string>
   <string name="categories_skip_explanation">Magpoon sa pagtipa tanganing magdugang nin mga kategoriya.\nTaptapon ining mensahe (o pinduta an ibalik) tanganing luksuhan ining panuntungan.</string>
@@ -106,7 +100,6 @@
   <string name="menu_download">Kargahon</string>
   <string name="preference_license">Lisensiya</string>
   <string name="use_previous" fuzzy="true">Maggamit nin dating titulo/deskripsiyon</string>
-  <string name="allow_gps">Awtomatikong magkua nin presenteng lokasyon</string>
   <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>

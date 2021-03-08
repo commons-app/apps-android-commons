@@ -21,13 +21,11 @@
     <item quantity="one">%1$d အက်ပလုပ်</item>
     <item quantity="other">%1$d အက်ပလုပ်များ</item>
   </plurals>
-  <string name="title_activity_explore">ရှာဖွေစူးစမ်းပါ</string>
   <string name="navigation_item_explore">ရှာဖွေစူးစမ်းပါ</string>
   <string name="preference_category_appearance">ပုံပန်းသွင်ပြင်</string>
   <string name="preference_category_general">အထွေထွေ</string>
   <string name="preference_category_feedback">အကြံပေးရန်</string>
   <string name="preference_category_privacy">ကိုယ်ရေးမူဝါဒ</string>
-  <string name="preference_category_location">နေရာ</string>
   <string name="app_name">ကွန်မွန်းစ်</string>
   <string name="bullet">•</string>
   <string name="menu_settings">အပြင်အဆင်များ</string>
@@ -64,7 +62,6 @@
   <string name="share_title_hint" fuzzy="true">ခေါင်းစဉ် (လိုအပ်သည်)</string>
   <string name="share_description_hint">ဖော်ပြချက်</string>
   <string name="login_failed_network">လော့အင် မဝင်နိုင်ပါ - ကွန်ရက် အမှား</string>
-  <string name="login_failed_wrong_credentials">လော့အင် မဝင်နိုင်ပါ - အသုံးပြုသူအမည်နှင့် စကားဝှက်ကို စစ်ဆေးပါ</string>
   <string name="login_failed_throttled">မအောင်မြင်သော ကြိုးပမ်းများစွာ ရှိပါပြီ။ နောက်မိနစ်အနည်းငယ်ကြာလျင် ထပ်မံစမ်းကြည့်ပါ။</string>
   <string name="login_failed_blocked">စိတ်မကောင်းပါ၊ ဤအသုံးပြုသူအား ကွန်မွန်းစ်မှ ပိတ်ပင်ထားသည်</string>
   <string name="login_failed_generic">လော့ဂ်အင် မအောင်မြင်ပါ</string>
@@ -75,8 +72,6 @@
   <string name="menu_save_categories">သိမ်းရန်</string>
   <string name="refresh_button">ပြန်လည်ဆန်းသစ်ရန်</string>
   <string name="display_list_button">စာရင်း</string>
-  <string name="gps_disabled">သင်၏စက်ပစ္စည်းတွင် ဂျီအက်စ်ကိုပိတ်ထားပါသည်။ ယင်းအား ဖွင့်လိုပါသလား။</string>
-  <string name="enable_gps">ဂျီပီအက်စ် ဖွင့်ရန်</string>
   <string name="contributions_subtitle_zero" fuzzy="true">ဖိုင်မတင်ရသေးပါ</string>
   <string name="categories_not_found">%1$ နှင့်ကိုက်ညီသော ကဏ္ဍများ မတွေ့ရှိပါ</string>
   <string name="categories_activity_title">ကဏ္ဍများ</string>
@@ -95,7 +90,6 @@
   <string name="menu_download">ဒေါင်းလုပ်ယူရန်</string>
   <string name="preference_license">နဂို လိုင်စင်</string>
   <string name="use_previous" fuzzy="true">ယခင် ခေါင်းစဉ်/ဖော်ပြချက် သုံးမည်</string>
-  <string name="allow_gps">လက်ရှိနေရာကို အလိုအလျောက်ယူရန်</string>
   <string name="preference_theme" fuzzy="true">ညကြည့်ပုံစံ</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
@@ -103,20 +97,9 @@
   <string name="license_name_cc_by"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ဩစတြီးယား)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (ဂျာမနီ)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (အီစတိုနီးယား)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (စပိန်)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (ခရိုအေးရှား)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (လူဇင်ဘတ်)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (နယ်သာလန်)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (နော်ဝေး)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (ပိုလန်)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (ရိုမေးနီးယား)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_subtext">သင်၏ ရုပ်ပုံများသည် တစ်ကမ္ဘာလုံးရှိ လူပုဂ္ဂိုလ်များကို ပညာတတ်စေရန် ကူညီပါသည်</string>
   <string name="tutorial_2_subtext_1">သဘာဝ အရာဝတ္ထုများ (ပန်းများ၊ တိရိစ္ဆာန်များ၊ တောင်များ)</string>
   <string name="tutorial_2_subtext_2">အသုံးဝင်သော အရာဝတ္ထုများ (စက်ဘီးများ၊ ရထားဘူတာများ)</string>
@@ -141,10 +124,7 @@
   <string name="storage_permission_title">သိုလှောင်ခန်း ခွင့်ပြုချက် တောင်းဆိုနေသည်</string>
   <string name="location_permission_title">တည်နေရာ ခွင့်ပြုချက် တောင်းဆိုနေသည်</string>
   <string name="ok">အိုကေ</string>
-  <string name="title_activity_nearby">အနီးအနား နေရာများ</string>
-  <string name="no_nearby">အနီးအနား နေရာများ မတွေ့ပါ</string>
   <string name="warning">သတိပေးချက်</string>
-  <string name="upload_image_duplicate">ဤဖိုင်သည် ကွန်မွန်းစ်ပေါ်တွင် ရှိနှင့်ပြီးဖြစ်သည်။ ဆက်လုပ်ရန် သေချာပါသလား။</string>
   <string name="yes">မှန်</string>
   <string name="no">မလုပ်ပါ</string>
   <string name="media_detail_title">ခေါင်းစဉ်</string>
@@ -155,23 +135,13 @@
   <string name="media_detail_license">လိုင်စင်</string>
   <string name="media_detail_coordinates">ကိုဩဒိနိတ်</string>
   <string name="media_detail_coordinates_empty">မဖြည့်ထားပါ</string>
-  <string name="number_of_uploads">မိမိ၏ လတ်တလော အပ်ပလုတ်ကန့်သတ်ချက်</string>
-  <string name="maximum_limit">အများဆုံး ကန့်သတ်ချက်</string>
-  <string name="invalid_zero">သုညသည် မကိုက်ညီပါ</string>
-  <string name="invalid_input">မကိုက်ညီသော ထည့်သွင်းမှု</string>
-  <string name="maximum_limit_alert">၅၀၀ ထက်ပို၍ မပြသနိုင်ပါ</string>
-  <string name="enter_valid">ကိုက်ညီသောနံပါတ်တစ်ခု ရိုက်ထည့်ပါ</string>
-  <string name="set_limit">လတ်တလော အပ်ပလုတ်ကန့်သတ်ချက်</string>
   <string name="logout_verification">အမှန်တကယ် ထွက်သွားလိုပါသလား</string>
   <string name="commons_logo">ကွန်မွန်းစ် လိုဂို</string>
   <string name="commons_website">ကွန်မွန်းစ် ဝဘ်ဆိုဒ်</string>
   <string name="commons_facebook">ကွန်မွန်းစ် ဖေ့ဘုတ်စာမျက်နှာ</string>
-  <string name="background_image">နောက်ခံ ဓါတ်ပုံ</string>
   <string name="mediaimage_failed">မီဒီယာရုပ်ပုံ မအောင်မြင်ပါ</string>
-  <string name="no_image_found">ပုံ မတွေ့ပါ</string>
   <string name="no_subcategory_found">ကဏ္ဍခွဲများ မတွေ့ရှိပါ</string>
   <string name="no_parentcategory_found">ပင်မကဏ္ဍများ မတွေ့ရှိပါ</string>
-  <string name="upload_image">ရုပ်ပုံ အက်ပလုတ်တင်ရန်</string>
   <string name="welcome_image_tulip">ခတ္တာပန်း</string>
   <string name="welcome_image_welcome_wikipedia">ဝီကီပီးဒီးယားမှ ကြိုဆိုပါသည်။</string>
   <string name="welcome_image_welcome_copyright">မူပိုင်ခွင့်မှ ကြိုဆိုပါသည်</string>
@@ -187,9 +157,7 @@
   <string name="navigation_item_logout">အကောင့်မှပြန်ထွက်ခြင်း</string>
   <string name="navigation_item_info">ကစားနည်းသင်ကြားရန်</string>
   <string name="navigation_item_notification">အသိပေးချက်များ</string>
-  <string name="navigation_item_featured_images">အထူး</string>
   <string name="navigation_item_review">ပြန်လည်ဆန်းစစ်</string>
-  <string name="nearby_needs_permissions">တည်နေရာ ခွင့်ပြုချက်မရှိဘဲ အနီးအနားနေရာများကို မပြနိုင်ပါ</string>
   <string name="no_description_found">ဖော်ပြချက် မတွေ့ပါ</string>
   <string name="nearby_info_menu_commons_article">ကွန်မွန်းစ် ဖိုင်စာမျက်နှာ</string>
   <string name="nearby_info_menu_wikidata_article">ဝီကီးဒေတာ item</string>
@@ -201,7 +169,6 @@
   <string name="upload_problem_fbmd">သင်ကိုယ်တိုင်ရိုက်ကူးထားသော ရုပ်ပုံများကိုသာ အက်ပလုပ်တင်ပါ။ အခြားသူ၏ ဖေ့ဘုတ်အကောင့်များတွင်တွေ့သည့်ရုပ်ပုံများကို မတင်ပါနှင့်။</string>
   <string name="upload_problem_do_you_continue">ဤရုပ်ပုံအား အက်ပလုပ်တင်ချင်နေတုန်းပဲလား</string>
   <string name="internet_downloaded">သင်ကိုယ်တိုင်ရိုက်ကူးထားသော ရုပ်ပုံများကိုသာ အက်ပလုပ်တင်ပါ။ အင်တာနက်မှဒေါင်းလုတ်ဆွဲထားသည့်ရုပ်ပုံများကို မတင်ပါနှင့်။</string>
-  <string name="give_permission">ခွင့်ပြုချက် ပေးမည်</string>
   <string name="use_external_storage" fuzzy="true">ပြင်ပြသိုလှောင်ခန်းကို သုံးမည်</string>
   <string name="login_to_your_account">သင်၏အကောင့်သို့ ဝင်ရန်</string>
   <string name="no_web_browser">URL ဖွင့်ရန် ဝဘ်ဘရောက်ဆာ မတွေ့ရှိပါ</string>
@@ -209,21 +176,13 @@
   <string name="nominate_deletion">ဖျက်ပစ်ရန် အဆိုပြုပါ</string>
   <string name="nominated_for_deletion">ဤရုပ်ပုံအား ဖျက်ပစ်ရန် အဆိုပြုခံထားရသည်။</string>
   <string name="nominated_see_more" fuzzy="true">&lt;u&gt;အသေးစိတ်အတွက် ဝဘ်စာမျက်ကိုကြည့်ပါ&lt;/u&gt;</string>
-  <string name="view_browser">ဘရောက်ဆာတွင် ကြည့်ရန်</string>
   <string name="skip_login">ကျော်ရန်</string>
   <string name="navigation_item_login">အကောင့်ဝင်ရန်</string>
   <string name="skip_login_title">အကောင့်ထဲဝင်ခြင်းကို အမှန်တကယ် ကျော်သွားလိုပါသလား</string>
   <string name="skip_login_message">အနာဂတ်ကာလတွင် ရုပ်ပုံများတင်ရန် အကောင့်ထဲဝင်ရပါမည်။</string>
   <string name="login_alert_message">ဤအင်္ဂါရပ်ကို အသုံးပြုရန် အကောင့်ထဲသို့ဝင်ပါ</string>
-  <string name="nearby_location_has_not_changed">တည်နေရာ မပြောင်းလဲပါ</string>
   <string name="nearby_location_not_available" fuzzy="true">တည်နေရာ မရရှိနိုင်ပါ</string>
   <string name="location_permission_rationale_nearby">အနီးအနားနေရာများစာရင်းကို ပြသပေးရန် ခွင့်ပြုချက် လိုအပ်ပါသည်</string>
-  <string name="get_directions">လမ်းညွှန်များ ရယူရန်</string>
-  <string name="read_article">ဆောင်းပါး ဖတ်ရှုရန်</string>
-  <string name="notifications_welcome">ဝီကီမီဒီယာ ကွန်မွန်းစ်မှ ကြိုဆိုပါသည်၊ %1$s သင် ဤနေရာသို့ရောက်လာသည်ကို ကျွန်ုပ်တို့ ဝမ်းသာပါသည်။</string>
-  <string name="notifications_talk_page_message">%1$sက သင်၏ဆွေးနွေးချက် စာမျက်နှာတွင် မက်ဆေ့တစ်ခု ချန်ခဲ့သည်။</string>
-  <string name="notifications_thank_you_edit">တည်းဖြတ်မှုတစ်ခု လုပ်ဆောင်သည့်အတွက် ကျေးဇူးတင်ပါသည်</string>
-  <string name="notifications_mention">%1$s က %2$s ပေါ်တွင် သင့်ကို ရည်ညွှန်းပြောဆိုခဲ့သည်။</string>
   <string name="nearby_directions">လမ်းညွှန်များ</string>
   <string name="nearby_wikidata">ဝီကီဒေတာ</string>
   <string name="nearby_wikipedia">ဝီကီပီးဒီးယား</string>
@@ -231,14 +190,12 @@
   <string name="about_faq" fuzzy="true">&lt;u&gt;မေးလေ့ရှိသည့် မေးခွန်းများ&lt;/u&gt;</string>
   <string name="welcome_skip_button">သင်ခန်းစာကို ကျော်သွားရန်</string>
   <string name="no_internet">အင်တာနက် မရရှိပါ</string>
-  <string name="internet_established">အင်တာနက် ရရှိ</string>
   <string name="no_notifications">အသိပေးချက်များ မတွေ့ပါ</string>
   <string name="about_translate" fuzzy="true">&lt;u&gt;ဘာသာပြန်ပါ&lt;/u&gt;</string>
   <string name="about_translate_title">ဘာသာစကားများ</string>
   <string name="about_translate_proceed">ဆက်လက်လုပ်ဆောင်ရန်</string>
   <string name="about_translate_cancel">မလုပ်တော့ပါ</string>
   <string name="retry">ပြန်လုပ်</string>
-  <string name="showcase_view_got_it_button">သဘောပေါက်ပြီ</string>
   <string name="no_images_found">ရုပ်ပုံများ မတွေ့ပါ</string>
   <string name="error_loading_images">ရုပ်ပုံများကို ဝန်ဆွဲတင်နေစဉ် အမှားဖြစ်ပွားခဲ့ပါသည်။</string>
   <string name="image_uploaded_by">အက်ပလုတ်တင်သူ: %1$s</string>
@@ -248,11 +205,9 @@
   <string name="app_widget_heading">ယနေ့အတွက် အထူးဓာတ်ပုံ</string>
   <string name="menu_search_button">ရှာဖွေရန်</string>
   <string name="search_commons">ကွန်မွန်းစ်တွင် ရှာဖွေရန်</string>
-  <string name="images_not_found">%1$ နှင့်ကိုက်ညီသော ရုပ်ပုံများ မတွေ့ရှိပါ</string>
   <string name="title_activity_search">ရှာဖွေရန်</string>
   <string name="search_recent_header">လတ်တလော ရှာဖွေမှုများ :</string>
   <string name="error_loading_categories">ကဏ္ဍများကို ဝန်ဆွဲတင်နေစဉ် အမှားဖြစ်ပွားခဲ့ပါသည်။</string>
-  <string name="error_loading_subcategories">ကဏ္ဍခွဲများကို ဝန်ဆွဲတင်နေစဉ် အမှားဖြစ်ပွားခဲ့ပါသည်။</string>
   <string name="search_tab_title_media">မီဒီယာ</string>
   <string name="search_tab_title_categories">ကဏ္ဍများ</string>
   <string name="explore_tab_title_featured">အထူး</string>
@@ -262,15 +217,12 @@
   <string name="question">မေးခွန်း</string>
   <string name="result">ရလဒ်</string>
   <string name="construction_event_answer">နည်းပညာ သို့မဟုတ် ယဉ်ကျေးမှုကိုပြသသော ရုပ်ပုံများသည် ကွန်မွန်းစ်ပေါ်တွင် အလွန်ကြိုဆိုပါသည်။</string>
-  <string name="warning_for_image_reverts">သတိပေးချက်: သင် တင်လိုက်သော %1$s ထက်ပိုသည့်ရုပ်ပုံများသည် အဖျက်ခံလိုက်ရပါသည်။ ဖျက်ပစ်ရန် လိုအပ်သော ရုပ်ပုံများကို ဆက်လက်တင်ပါက သင်၏အကောင့်သည် ပိတ်ပင်တားဆီးခြင်း ခံရကိန်းရှိပါသည်။</string>
   <string name="congratulatory_message_quiz">အဖြေများ၏ %$s ကို မှန်ကန်စွာဖြေခဲ့သည်။ ဂုဏ်ယူပါ၏။</string>
   <string name="warning_for_no_answer">မေးခွန်းကိုဖြေဆိုရန် ရွေးစရာနှစ်ခုထဲမှ တစ်ခုကို ရွေးချယ်ပါ</string>
   <string name="quiz_result_share_message">သင်၏ဉာဏ်စမ်းများကို မိတ်ဆွေများနှင့် မျှဝေပါ။</string>
   <string name="continue_message">ဆက်လက်</string>
   <string name="correct">အဖြေမှန်</string>
   <string name="wrong">အဖြေမှား</string>
-  <string name="share_coordinates_not_present">ရုပ်ပုံရွေးချယ်စဉ်အတွင်း ကိုဩဒိနိတ်များကို မသတ်မှတ်ထားပါ</string>
-  <string name="add_description">+ ဖော်ပြချက် ထည့်ရန်</string>
   <string name="no_recent_searches">လတ်တလော ရှာဖွေမှုများ မရှိပါ</string>
   <string name="delete_recent_searches_dialog">သင့်ရှာဖွေမှု ရာဇဝင်ကို ရှင်းလင်းမည်မှာ သေချာပါသလား?</string>
   <string name="delete_search_dialog">ဤရှာဖွေမှုကို ဖျက်လိုပါသလား</string>
@@ -301,8 +253,6 @@
   <string name="next">ရှေ့</string>
   <string name="previous">နောက်</string>
   <string name="submit">ထည့်သွင်းရန်</string>
-  <string name="navigation_item_bookmarks">ဖတ်ရန်မှတ်ထားမှုများ</string>
-  <string name="title_activity_bookmarks">ဖတ်ရန်မှတ်ထားမှုများ</string>
   <string name="title_page_bookmarks_pictures">ရုပ်ပုံများ</string>
   <string name="title_page_bookmarks_locations">တည်နေရာများ</string>
   <string name="provider_bookmarks">ဖတ်ရန်မှတ်ထားမှုများ</string>
@@ -312,13 +262,6 @@
   <string name="deletion_reason_bad_for_my_privacy">ယင်းသည် မိမိ၏ကိုယ်ရေးကိုယ်တာလုံရေးအတွက် မကောင်းမှန်းသိလိုက်ပါပြီ</string>
   <string name="deletion_reason_no_longer_want_public">စိတ်ပြောင်းသွားပါပြီ၊ ယင်းအား အများသူငှာကြည့်ရှုနိုင်စေရန် မလိုလားတော့ပါ။</string>
   <string name="deletion_reason_not_interesting">စိတ်မကောင်းပါ ဤရုပ်ပုံသည် စွယ်စုံကျမ်းအတွက် စိတ်ဝင်စားဖွယ်မကောင်းပါ</string>
-  <string name="desc_language_Worldwide">တစ်ကမ္ဘာလုံး</string>
-  <string name="desc_language_America">အမေရိက</string>
-  <string name="desc_language_Europe">ဥရောပ</string>
-  <string name="desc_language_Middle_East">အရှေ့အလယ်ပိုင်း</string>
-  <string name="desc_language_Africa">အာဖရိက</string>
-  <string name="desc_language_Asia">အာရှ</string>
-  <string name="desc_language_Pacific">ပစိဖိတ်</string>
   <string name="no_categories_selected">ကဏ္ဍများ မရွေးချယ်ထားပါ</string>
   <string name="search_this_area">ဤဧရိယာကို ရှာဖွေပါ</string>
   <string name="nearby_card_permission_title">ခွင့်ပြုချက် တောင်းခံရန်</string>
@@ -330,12 +273,8 @@
   <string name="check_category_edit_summary">ကဏ္ဍစစ်ဆေးမှု တောင်းဆိုနေသည်</string>
   <string name="check_category_success_title">ကဏ္ဍစစ်ဆေးမှု တောင်းဆိုခဲ့သည်</string>
   <string name="nominate_for_deletion_done">ပြီးပြီ</string>
-  <string name="nominate_for_deletion_notify_user">ဆွေးနွေးချက်စာမျက်နှာပေါ်တွင် အသုံးပြုသူအား အသိပေးခြင်း</string>
-  <string name="notsure">မသေချာပါ</string>
   <string name="send_thank_success_title">ကျေးဇူးတင်စကားပို့ခြင်း- အောင်မြင်သည်</string>
   <string name="send_thank_failure_title">ကျေးဇူးတင်စကားပို့ခြင်း- မအောင်မြင်ပါ</string>
-  <string name="send_thank_send">ကျေးဇူးတင်မှု ပို့နေသည်</string>
-  <string name="send_thank_notification_title">ကျေးဇူးတင်မှု ပို့နေသည်</string>
   <string name="send_thank_toast">%1$ အတွက် ကျေးဇူးတင်မှု ပို့နေသည်</string>
   <string name="review_category">မှန်ကန်စွာ ကဏ္ဍခွဲထားပါသလား</string>
   <string name="review_spam_report_question">ဘောင်ကျော်နေပါသည် အကြောင်းမှာ</string>
@@ -368,9 +307,7 @@
   <string name="delete_helper_show_deletion_message_else">ပယ်ဖျက်ရန် မတောင်းဆိုနိုင်ပါ</string>
   <string name="delete_helper_ask_spam_blurry">မှုန်ဝါး</string>
   <string name="delete_helper_ask_spam_nonsense">အဓိပ္ပါယ်မရှိ</string>
-  <string name="delete_helper_ask_spam_other">အခြား</string>
   <string name="delete_helper_ask_reason_copyright_logo">လိုဂို</string>
-  <string name="delete_helper_ask_reason_copyright_other">အခြား</string>
   <string name="no_achievements_yet">မည့်သည့်ပံ့ပိုးမှုမျှ မရှိသေးပါ</string>
   <string name="account_created">အကောင့်ဖန်တီးပြီးပါပြီ</string>
   <string name="notification_mark_read">အသိပေးချက်ကို ဖတ်ပြီးကြောင်းမှတ်သားပြီးပြီ</string>

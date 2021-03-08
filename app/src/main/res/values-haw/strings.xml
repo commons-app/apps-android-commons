@@ -64,18 +64,7 @@
   <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ʻAukekulia)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Kelemānia)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (ʻEsetonia)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Kepania)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Koloatia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Lukemepōke)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Nekelana)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Nolewai)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Pōlani)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="welcome_wikipedia_text">Hāʻawi i kāu mau kiʻi. E kōkua i nā ʻatikala Wikipikia me ka hoʻohoihoi ʻana!</string>
   <string name="welcome_wikipedia_subtext">No Kahilehulehu Wikimedia mai nā kiʻi ma Wikipikia.</string>
   <string name="welcome_copyright_text">Kōkua kāu mau kiʻi i ke ʻao aku ʻana i nā kānaka a puni i ka hōnua.</string>

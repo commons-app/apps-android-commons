@@ -64,18 +64,7 @@
   <string name="license_name_cc_by" fuzzy="true">CC Navnageving 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Eysturríki)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Týskland)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estland)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spania)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luksemburg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Niðurlond)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Noreg)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Pólland)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumenia)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="welcome_wikipedia_text">Luttak við tínum myndum. Hjálp Wikipedia greinum at gerast livandi!</string>
   <string name="welcome_wikipedia_subtext">Myndir á Wikipedia koma frá Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Tínar myndir hjálpa við at útbúgva fólk kring heimin.</string>
