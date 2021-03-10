@@ -52,6 +52,8 @@ import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType.Object;
+import kotlin.reflect.jvm.internal.impl.util.Checks;
 import timber.log.Timber;
 
 public class UploadActivity extends BaseActivity implements UploadContract.View, UploadBaseFragment.Callback {
@@ -103,7 +105,9 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private Place place;
     private List<UploadableFile> uploadableFiles = Collections.emptyList();
     private int currentSelectedPosition = 0;
-    // Checks for if multiple files selected
+    /*
+     Checks for if multiple files selected
+     */
     private boolean isMultipleFilesSelected = false;
 
     @SuppressLint("CheckResult")
