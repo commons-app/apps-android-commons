@@ -12,6 +12,14 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Stoche accumenze le carecaminde</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Ste accumenze %1$d carecamende</item>
+    <item quantity="other">Stonne accumenzane %1$d carecaminde</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d carecamende</item>
+    <item quantity="other">%1$d carecaminde</item>
+  </plurals>
   <string name="navigation_item_explore">Esplore</string>
   <string name="preference_category_appearance">Aspette</string>
   <string name="preference_category_general">Generale</string>
@@ -104,7 +112,7 @@
   <string name="provider_bookmarks_location">Signalibbre</string>
   <string name="no_uploads">Bovègne jndr\'à Commons!\n\nCareche \'u prime media tune cazzanne sus a \'u buttone ca aggiunge.</string>
   <string name="no_categories_selected">Nisicuna categorije scacchiate</string>
-  <string name="upload_flow_all_images_in_set" fuzzy="true">(Pe tutte le immaggine jndr\'à \'u \'nzieme)</string>
+  <string name="upload_flow_all_images_in_set">(Pe tutte le immaggine jndr\'à \'u \'nzieme)</string>
   <string name="search_this_area">Cirche jndr\'à sta arèe</string>
   <string name="nearby_card_permission_title">Permesse richieste</string>
   <string name="no_notification">Non ge tìne notifeche non lette</string>

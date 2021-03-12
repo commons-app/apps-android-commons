@@ -88,10 +88,11 @@
   <string name="menu_nearby">Nas redondezas</string>
   <string name="provider_contributions">Carregamentos</string>
   <string name="menu_share">Partilhar</string>
+  <string name="menu_view_file_page">Ver página do ficheiro</string>
   <string name="share_title_hint">Legenda (obrigatória)</string>
   <string name="add_caption_toast">Forneça uma legenda para este ficheiro, por favor</string>
   <string name="share_description_hint">Descrição</string>
-  <string name="share_caption_hint" fuzzy="true">Legenda (limite de 255 caracteres)</string>
+  <string name="share_caption_hint">Legenda</string>
   <string name="login_failed_network">Não é possível iniciar uma sessão - falha de rede</string>
   <string name="login_failed_throttled">Demasiadas tentativas mal sucedidas. Por favor, tente novamente dentro de minutos.</string>
   <string name="login_failed_blocked">Desculpe, este utilizador foi bloqueado na wiki Commons</string>
@@ -230,7 +231,7 @@
   <string name="nearby_info_menu_wikidata_article">Item do Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Artigo da Wikipédia</string>
   <string name="description_info">Descreva o elemento multimédia da melhor forma possível, por favor. Onde foi tirado? O que é mostrado? Qual é o contexto? Descreva os objetos ou pessoas. Indique as informações que não podem ser facilmente adivinhadas; por exemplo, a hora do dia, se for uma paisagem. Se o ficheiro mostra algo incomum, explique o que é incomum.</string>
-  <string name="caption_info" fuzzy="true">Escreva uma breve descrição da imagem, por favor. A primeira legenda seria usada como título da imagem.</string>
+  <string name="caption_info">Escreva uma breve descrição da imagem, por favor. A primeira legenda será usada como título da imagem. Máximo de 255 caracteres.</string>
   <string name="upload_problem_exist">Possíveis problemas com esta imagem:</string>
   <string name="upload_problem_image_dark">A imagem está demasiado escura.</string>
   <string name="upload_problem_image_blurry">A imagem está desfocada.</string>
@@ -385,13 +386,13 @@
   <string name="no_categories_selected_warning_desc">As imagens sem categorias só raramente são utilizáveis. Tem a certeza de que deseja continuar sem selecionar categorias?</string>
   <string name="no_depictions_selected">Não foram selecionadas representações</string>
   <string name="no_depictions_selected_warning_desc">As imagens com representações são encontradas mais facilmente e mais propensas a serem usadas. Tem a certeza de que deseja continuar sem selecionar representações?</string>
-  <string name="upload_flow_all_images_in_set" fuzzy="true">(Para todas as imagens do conjunto)</string>
+  <string name="upload_flow_all_images_in_set">(Para todas as imagens do conjunto)</string>
   <string name="search_this_area">Pesquisar nesta área</string>
   <string name="nearby_card_permission_title">Pedido de permissões</string>
   <string name="nearby_card_permission_explanation">Gostaria que usássemos a sua localização corrente para apresentar o local mais próximo que precisa de fotografias?</string>
   <string name="unable_to_display_nearest_place">Não é possível apresentar o local mais próximo que necessita de fotografias sem ter permissões de localização</string>
   <string name="never_ask_again">Não voltar a perguntar isto</string>
-  <string name="display_location_permission_title" fuzzy="true">Apresentar permissões de localização</string>
+  <string name="display_location_permission_title">Pedir autorização de localização</string>
   <string name="display_location_permission_explanation">Pedir permissões de localização quando for necessário para a funcionalidade do cartão de notificação de proximidade.</string>
   <string name="achievements_fetch_failed">Algo correu mal, não conseguimos obter as suas realizações</string>
   <string name="achievements_fetch_failed_ultimate_achievement">As suas contribuições foram tantas que o nosso sistema de cálculo de realizações não consegue processá-las. Essa é a realização máxima.</string>
@@ -573,7 +574,7 @@
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Melhorar este mapa&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Modo de ligação limitada ativado!</string>
   <string name="limited_connection_disabled">Modo de ligação limitada desativado. Os carregamentos pendentes serão retomados agora.</string>
-  <string name="limited_connection_mode" fuzzy="true">Ligação limitada</string>
+  <string name="limited_connection_mode">Modo de ligação limitada</string>
   <string name="statistics_quality">Imagens de qualidade</string>
   <string name="quality_images_info">As imagens de qualidade são diagramas ou fotografias que satisfazem certos padrões de qualidade (principalmente de natureza técnica) e são valiosos para projetos da Wikimedia</string>
   <string name="resuming_upload">A retomar carregamento...</string>
@@ -587,4 +588,6 @@
   <string name="depicts_step_title">Representa</string>
   <string name="license_step_title">Licença de multimédia</string>
   <string name="media_detail_step_title">Detalhes de multimédia</string>
+  <string name="menu_view_category_page">Ver página de categoria</string>
+  <string name="menu_view_item_page">Ver página do elemento</string>
 </resources>

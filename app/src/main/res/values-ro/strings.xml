@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Andreyyshore
 * C1pr1an
 * GabiBil
 * Kyouko
@@ -30,7 +31,7 @@
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Această imagine va fi licențiată sub %1$s</item>
-    <item quantity="few">Aceste imagini vor fi licenţiate sub %1$s</item>
+    <item quantity="few">Aceste imagini vor fi licențiate sub %1$s</item>
     <item quantity="other"/>
   </plurals>
   <plurals name="upload_count_title">
@@ -56,7 +57,7 @@
   <string name="password">Parolă</string>
   <string name="login_credential">Intrați în contul dumneavoastră Commons Beta</string>
   <string name="login">Autentificare</string>
-  <string name="forgot_password">V-aţi  uitat parola?</string>
+  <string name="forgot_password">V-ați uitat parola?</string>
   <string name="signup">Înregistrare</string>
   <string name="logging_in_title">Se conectează</string>
   <string name="logging_in_message">Vă rugăm să așteptați ...</string>
@@ -116,7 +117,7 @@
   <string name="about_license">Aplicația Wikimedia Commons este un software cu sursă deschisă creat și menținut de bursieri și voluntari ai comunității Wikimedia. Fundația Wikimedia nu este implicată în crearea, dezvoltarea sau mentenanța aplicației.</string>
   <string name="about_improve">Creați un nou &lt;a href=\"%1$s\"&gt;tichet pe GitHub&lt;/a&gt; pentru a raporta buguri sau sugestii.</string>
   <string name="about_privacy_policy">Politica de confidențialitate</string>
-  <string name="about_credits">&lt;u&gt;Mulţumiri&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Mulțumiri&lt;/u&gt;</string>
   <string name="title_activity_about">Despre</string>
   <string name="menu_feedback">Trimitere reacții (prin e-mail)</string>
   <string name="no_email_client">Niciun client de email instalat</string>
@@ -402,7 +403,7 @@
   <string name="check_category_toast">Solicitați verificarea categoriei pentru %1$s</string>
   <string name="nominate_for_deletion_done">Realizat</string>
   <string name="send_thank_success_title">Se Trimit Mulțumiri: Succes</string>
-  <string name="send_thank_success_message">Trimis mulţumiri cu succes datorită %1$s</string>
+  <string name="send_thank_success_message">Trimis mulțumiri cu succes datorită %1$s</string>
   <string name="send_thank_failure_message">Nu a reușit să trimită mulțumiri %1$s</string>
   <string name="send_thank_failure_title">Se trimite mulțumiri: Eșec</string>
   <string name="send_thank_toast">Se trimite Mulțumiri pentru %1$s</string>
@@ -444,7 +445,7 @@
   <string name="welcome_do_upload_content_description">Exemple de imagini bune de încărcat pe Commons</string>
   <string name="welcome_dont_upload_content_description">Exemple de imagini care nu trebuie încărcate</string>
   <string name="skip_image">Săriți această imagine</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Descarcare Eşuată!!. Nu putem descărca fișierul fără permisiunea de stocare externă.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Descărcare eșuată!! Nu putem descărca fișierul fără permisiunea de stocare externă.</string>
   <string name="manage_exif_tags">Gestionați etichetele EXIF</string>
   <string name="manage_exif_tags_summary">Selectați ce etichete EXIF de păstrat în încărcări</string>
   <string name="exif_tag_name_author">Autor</string>
@@ -499,7 +500,7 @@
   <string name="add_bookmark">Adăugat la semne de carte</string>
   <string name="wallpaper_set_unsuccessfully">Ceva n-a mers bine. Imposibil de setat imaginea de fundal</string>
   <string name="setting_wallpaper_dialog_title">Setează ca Imagine de fundal</string>
-  <string name="setting_wallpaper_dialog_message">Setează Imaginea de fundal. Te rog aşteaptă…</string>
+  <string name="setting_wallpaper_dialog_message">Se setează imaginea de fundal. Așteaptă…</string>
   <string name="theme_default_name">Urmăriți sistemul</string>
   <string name="theme_dark_name">Întunecat</string>
   <string name="theme_light_name">Deschis</string>
