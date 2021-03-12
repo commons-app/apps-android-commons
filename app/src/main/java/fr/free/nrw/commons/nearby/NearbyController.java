@@ -201,7 +201,7 @@ public class NearbyController {
                         nearbyBaseMarker.icon(IconFactory.getInstance(context)
                                 .fromBitmap(iconGreen));
                     }
-                } else if (!place.destroyed.trim().isEmpty()) { // Means place is destroyed
+                } else if (!place.exists) { // Means place is destroyed
                     if (iconGrey != null) {
                         nearbyBaseMarker.icon(IconFactory.getInstance(context)
                                 .fromBitmap(iconGrey));

@@ -1254,12 +1254,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
             if (displayExists && displayNeedsPhoto) {
                 // Exists and needs photo
-                if (place.destroyed.trim().isEmpty() && place.pic.trim().isEmpty()) {
+                if (place.exists && place.pic.trim().isEmpty()) {
                     updateMarker(markerPlaceGroup.getIsBookmarked(), place, NearbyController.currentLocation);
                 }
             } else if (displayExists && !displayNeedsPhoto) {
                 // Exists and all included needs and doesn't needs photo
-                if (place.destroyed.trim().isEmpty()) {
+                if (place.exists) {
                     updateMarker(markerPlaceGroup.getIsBookmarked(), place, NearbyController.currentLocation);
                 }
             } else if (!displayExists && displayNeedsPhoto) {
@@ -1317,7 +1317,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_green_bookmarked :
                 R.drawable.ic_custom_map_marker_green);
-        } else if (!place.destroyed.trim().isEmpty()) { // Means place is destroyed
+        } else if (!place.exists) { // Means place is destroyed
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_grey_bookmarked :
                 R.drawable.ic_custom_map_marker_grey);

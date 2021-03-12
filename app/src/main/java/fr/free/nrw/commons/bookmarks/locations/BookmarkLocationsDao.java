@@ -165,7 +165,8 @@ public class BookmarkLocationsDao {
                 cursor.getString(cursor.getColumnIndex(Table.COLUMN_CATEGORY)),
                 builder.build(),
                 cursor.getString(cursor.getColumnIndex(Table.COLUMN_PIC)),
-                cursor.getString(cursor.getColumnIndex(Table.COLUMN_DESTROYED))
+                cursor.getString(cursor.getColumnIndex(Table.COLUMN_DESTROYED)),
+                cursor.getString(cursor.getColumnIndex(Table.COLUMN_ENDTIME))
         );
     }
 
@@ -184,6 +185,7 @@ public class BookmarkLocationsDao {
         cv.put(BookmarkLocationsDao.Table.COLUMN_LONG, bookmarkLocation.location.getLongitude());
         cv.put(BookmarkLocationsDao.Table.COLUMN_PIC, bookmarkLocation.pic);
         cv.put(BookmarkLocationsDao.Table.COLUMN_DESTROYED, bookmarkLocation.destroyed);
+        cv.put(BookmarkLocationsDao.Table.COLUMN_ENDTIME, bookmarkLocation.endTime);
         return cv;
     }
 
@@ -204,6 +206,7 @@ public class BookmarkLocationsDao {
         static final String COLUMN_COMMONS_LINK = "location_commons_link";
         static final String COLUMN_PIC = "location_pic";
         static final String COLUMN_DESTROYED = "location_destroyed";
+        static final String COLUMN_ENDTIME = "location_end_time";
 
         // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
         public static final String[] ALL_FIELDS = {
@@ -220,7 +223,8 @@ public class BookmarkLocationsDao {
                 COLUMN_WIKIDATA_LINK,
                 COLUMN_COMMONS_LINK,
                 COLUMN_PIC,
-                COLUMN_DESTROYED
+                COLUMN_DESTROYED,
+                COLUMN_ENDTIME
         };
 
         static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS " + TABLE_NAME;
@@ -239,7 +243,8 @@ public class BookmarkLocationsDao {
                 + COLUMN_WIKIDATA_LINK + " STRING,"
                 + COLUMN_COMMONS_LINK + " STRING,"
                 + COLUMN_PIC + " STRING,"
-                + COLUMN_DESTROYED + " STRING"
+                + COLUMN_DESTROYED + " STRING,"
+                + COLUMN_ENDTIME + " STRING"
                 + ");";
 
         public static void onCreate(SQLiteDatabase db) {

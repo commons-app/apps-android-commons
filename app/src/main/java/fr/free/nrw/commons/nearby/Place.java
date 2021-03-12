@@ -26,12 +26,14 @@ public class Place implements Parcelable {
     private final String category;
     public final String pic;
     public final String destroyed;
+    public final String endTime;
+    public final Boolean exists;
 
     public String distance;
     public final Sitelinks siteLinks;
 
 
-    public Place(String language,String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, String destroyed) {
+    public Place(String language,String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, String destroyed, String endTime) {
         this.language = language;
         this.name = name;
         this.label = label;
@@ -41,6 +43,8 @@ public class Place implements Parcelable {
         this.siteLinks = siteLinks;
         this.pic = (pic == null) ? "":pic;
         this.destroyed = (destroyed == null) ? "":destroyed;
+        this.endTime = (endTime == null) ? "":endTime;
+        this.exists = (destroyed == "") && (endTime == "");
     }
     public Place(Parcel in) {
         this.language = in.readString();
@@ -54,6 +58,9 @@ public class Place implements Parcelable {
         this.pic = (picString == null) ? "":picString;
         String destroyedString = in.readString();
         this.destroyed = (destroyedString == null) ? "":destroyedString;
+        String endTimeString = in.readString();
+        this.endTime = (endTimeString == null) ? "":endTimeString;
+        this.exists = (destroyedString == null) && (endTimeString == null);
     }
     public static Place from(NearbyResultItem item) {
         String itemClass = item.getClassName().getValue();
@@ -74,7 +81,8 @@ public class Place implements Parcelable {
                         .setWikidataLink(item.getItem().getValue())
                         .build(),
                 item.getPic().getValue(),
-                item.getDestroyed().getValue());
+                item.getDestroyed().getValue(),
+                item.getEndTime().getValue());
     }
 
     /**
@@ -195,6 +203,7 @@ public class Place implements Parcelable {
                 ", siteLinks='" + siteLinks.toString() + '\'' +
                 ", pic='" + pic + '\'' +
                 ", destroyed='" + destroyed + '\'' +
+                ", endTime='" + endTime + '\'' +
                 '}';
     }
 
@@ -214,6 +223,7 @@ public class Place implements Parcelable {
         dest.writeParcelable(siteLinks, 0);
         dest.writeString(pic);
         dest.writeString(destroyed);
+        dest.writeString(endTime);
     }
 
     public static final Creator<Place> CREATOR = new Creator<Place>() {
