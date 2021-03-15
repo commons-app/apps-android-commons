@@ -299,6 +299,13 @@ public class BookmarkLocationsDao {
                     Timber.e(exception);
                 }
             }
+            if (from == 14){
+                try {
+                    db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_exists STRING;");
+                } catch (SQLiteException exception){
+                    Timber.e(exception);
+                }
+            }
         }
     }
 }

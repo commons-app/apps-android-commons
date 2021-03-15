@@ -271,6 +271,12 @@ class BookMarkLocationDaoTest {
         verify(database).execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_language STRING;")
     }
 
+    @Test
+    fun migrateTableVersionFrom_v14_to_v15() {
+        onUpdate(database, 14, 15)
+        verify(database).execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_exists STRING;")
+    }
+
 
     private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
 
