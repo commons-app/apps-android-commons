@@ -38,7 +38,7 @@ class BookMarkLocationDaoTest {
             COLUMN_LAT,
             COLUMN_LONG,
             COLUMN_PIC,
-            COLUMN_DESTROYED)
+            COLUMN_EXISTS)
     private val client: ContentProviderClient = mock()
     private val database: SQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
@@ -63,7 +63,7 @@ class BookMarkLocationDaoTest {
 
 
         examplePlaceBookmark = Place("en", "placeName", exampleLabel, "placeDescription"
-                , exampleLocation, "placeCategory", builder.build(),"picName","placeDestroyed")
+                , exampleLocation, "placeCategory", builder.build(),"picName",false)
         testObject = BookmarkLocationsDao { client }
     }
 
@@ -98,7 +98,7 @@ class BookMarkLocationDaoTest {
                 assertEquals(builder.build().wikidataLink, it.siteLinks.wikidataLink)
                 assertEquals(builder.build().commonsLink, it.siteLinks.commonsLink)
                 assertEquals("picName",it.pic)
-                assertEquals("placeDestroyed", it.destroyed)
+                assertEquals("placeExists", it.exists)
             }
         }
     }
@@ -163,7 +163,7 @@ class BookMarkLocationDaoTest {
             assertEquals(examplePlaceBookmark.siteLinks.wikidataLink.toString(), cv.getAsString(COLUMN_WIKIDATA_LINK))
             assertEquals(examplePlaceBookmark.siteLinks.commonsLink.toString(), cv.getAsString(COLUMN_COMMONS_LINK))
             assertEquals(examplePlaceBookmark.pic.toString(), cv.getAsString(COLUMN_PIC))
-            assertEquals(examplePlaceBookmark.destroyed.toString(), cv.getAsString(COLUMN_DESTROYED))
+            assertEquals(examplePlaceBookmark.exists.toString(), cv.getAsString(COLUMN_EXISTS))
         }
     }
 
@@ -277,7 +277,7 @@ class BookMarkLocationDaoTest {
         for (i in 0 until rowCount) {
             addRow(listOf("placeName", "en", "placeDescription", "placeCategory", exampleLabel.text, exampleLabel.icon,
                     exampleUri, builder.build().wikipediaLink, builder.build().wikidataLink, builder.build().commonsLink,
-                    exampleLocation.latitude, exampleLocation.longitude, "picName", "placeDestroyed"))
+                    exampleLocation.latitude, exampleLocation.longitude, "picName", "placeExists"))
         }
     }
 }

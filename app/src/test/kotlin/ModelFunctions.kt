@@ -83,9 +83,9 @@ fun place(
     category: String = "category",
     siteLinks: Sitelinks? = null,
     pic: String = "pic",
-    destroyed: String = "destroyed"
+    exists: Boolean = false
 ): Place {
-    return Place(lang, name, label, longDescription, latLng, category, siteLinks, pic, destroyed)
+    return Place(lang, name, label, longDescription, latLng, category, siteLinks, pic, exists)
 }
 
 fun entityId(wikiBaseEntityValue: WikiBaseEntityValue = wikiBaseEntityValue()) =
