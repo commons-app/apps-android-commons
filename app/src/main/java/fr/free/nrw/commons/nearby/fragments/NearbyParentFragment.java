@@ -1317,7 +1317,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_green_bookmarked :
                 R.drawable.ic_custom_map_marker_green);
-        } else if (!place.exists) { // Means place is destroyed
+        } else if (!place.exists) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_grey_bookmarked :
                 R.drawable.ic_custom_map_marker_grey);
