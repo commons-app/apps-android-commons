@@ -567,7 +567,7 @@
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Förbättra den här kartan&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Läget för begränsad anslutning har aktiverats!</string>
   <string name="limited_connection_disabled">Begränsat anslutningsläge har inaktiverats. Väntande uppladdningar kommer nu återupptas.</string>
-  <string name="limited_connection_mode" fuzzy="true">Begränsad anslutning</string>
+  <string name="limited_connection_mode">Begränsat anslutningsläge</string>
   <string name="statistics_quality">Kvalitetsbilder</string>
   <string name="quality_images_info">Kvalitetsbilder är diagram eller fotografier som möter vissa kvalitetsstandarder (som är mestadels tekniska) och är värdefulla för Wikimedia-projekt.</string>
   <string name="resuming_upload">Återupptar uppladdning…</string>
