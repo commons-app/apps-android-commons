@@ -192,6 +192,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     TextView existingCategories;
     @BindView(R.id.no_results_found)
     TextView noResultsFound;
+    @BindView(R.id.progressBarDeletion)
+    ProgressBar progressBarDeletion;
 
     private ArrayList<String> categoryNames = new ArrayList<>();
     private String categorySearchQuery;
@@ -779,7 +781,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 input.addTextChangedListener(new TextWatcher() {
                     private void handleText() {
                         final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
-                        if (input.getText().length() == 0) {
+                        if (input.getText().length() == 0 || isDeleted) {
                             okButton.setEnabled(false);
                         } else {
                             okButton.setEnabled(true);
@@ -806,35 +808,41 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @SuppressLint("CheckResult")
     private void onDeleteClicked(Spinner spinner) {
+        progressBarDeletion.setVisibility(VISIBLE);
+        delete.setText("Nominating for Deletion");
+        isDeleted = true;
         String reason = spinner.getSelectedItem().toString();
         Single<Boolean> resultSingle = reasonBuilder.getReason(media, reason)
                 .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
-        compositeDisposable.add(resultSingle
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(s -> {
-                    if (getActivity() != null) {
-                        isDeleted = true;
-                        enableDeleteButton(false);
-                    }
-                }));
-
+        resultSingle
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(s -> {
+                if (getActivity() != null & isVisible()) {
+                    progressBarDeletion.setVisibility(GONE);
+                    enableDeleteButton(false);
+                    displayMediaDetails();
+                }
+            });
     }
 
     @SuppressLint("CheckResult")
     private void onDeleteClickeddialogtext(String reason) {
+        progressBarDeletion.setVisibility(VISIBLE);
+        delete.setText("Nominating for Deletion");
+        isDeleted = true;
         Single<Boolean> resultSingletext = reasonBuilder.getReason(media, reason)
                 .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
-        compositeDisposable.add(resultSingletext
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(s -> {
-                    if (getActivity() != null) {
-                        isDeleted = true;
-                        enableDeleteButton(false);
-                    }
-                }));
-
+        resultSingletext
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(s -> {
+                if (getActivity() != null && isVisible()) {
+                    progressBarDeletion.setVisibility(GONE);
+                    enableDeleteButton(false);
+                    displayMediaDetails();
+                }
+            });
     }
 
     @OnClick(R.id.seeMore)
