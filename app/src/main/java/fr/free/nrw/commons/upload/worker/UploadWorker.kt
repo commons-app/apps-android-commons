@@ -188,6 +188,10 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     PROCESSING_UPLOADS_NOTIFICATION_TAG,
                     PROCESSING_UPLOADS_NOTIFICATION_ID
                 )
+
+                if(isLimitedConnectionModeEnabled()){
+                    break;
+                }
             }
         }
         return Result.success()

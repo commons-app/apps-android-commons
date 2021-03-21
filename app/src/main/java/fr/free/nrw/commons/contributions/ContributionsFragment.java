@@ -63,9 +63,6 @@ import io.reactivex.schedulers.Schedulers;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.List;
-import javax.inject.Inject;
-import javax.inject.Named;
 import timber.log.Timber;
 
 public class ContributionsFragment
