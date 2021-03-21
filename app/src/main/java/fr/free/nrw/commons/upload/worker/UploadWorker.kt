@@ -21,7 +21,6 @@ import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.StashUploadState
 import fr.free.nrw.commons.upload.UploadClient
 import fr.free.nrw.commons.upload.UploadResult
-import fr.free.nrw.commons.utils.ViewUtil
 import fr.free.nrw.commons.wikidata.WikidataEditService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.asFlow
@@ -29,8 +28,8 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import java.lang.Exception
 import java.util.*
+import java.util.regex.Pattern
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
@@ -184,23 +183,34 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     }
                 }.collect()
 
+                //Dismiss the global notification
                 notificationManager?.cancel(
                     PROCESSING_UPLOADS_NOTIFICATION_TAG,
                     PROCESSING_UPLOADS_NOTIFICATION_ID
                 )
 
+                //No need to keep looking if the limited connection mode is on,
+                //If the user toggles it, the work manager will be started again
                 if(isLimitedConnectionModeEnabled()){
                     break;
                 }
             }
         }
+        //TODO make this smart, think of handling retries in the future
         return Result.success()
     }
 
+    /**
+     * Returns true is the limited connection mode is enabled
+     */
     private fun isLimitedConnectionModeEnabled(): Boolean {
         return sessionManager.getPreference(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED)
     }
 
+    /**
+     * Upload the contribution
+     * @param contribution
+     */
     @SuppressLint("StringFormatInvalid")
     private suspend fun uploadContribution(contribution: Contribution) {
         if (contribution.localUri == null || contribution.localUri.path == null) {
@@ -211,7 +221,8 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         val displayTitle = contribution.media.displayTitle
 
         currentNotificationTag = contribution.localUri.toString()
-        currentNotificationID = contribution.hashCode()
+        currentNotificationID =
+            (contribution.localUri.toString() + contribution.media.filename).hashCode()
 
         curentNotification
         getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)!!
@@ -239,18 +250,21 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         )
 
         try {
+            //Upload the file to stash
             val stashUploadResult = uploadClient.uploadFileToStash(
                 appContext, filename, contribution, notificationProgressUpdater
             ).blockingSingle()
 
             when (stashUploadResult.state) {
                 StashUploadState.SUCCESS -> {
+                    //If the stash upload succeeds
                     Timber.d("Upload to stash success for fileName: $filename")
                     Timber.d("Ensure uniqueness of filename");
                     val uniqueFileName = findUniqueFileName(filename!!)
 
 
                     try {
+                        //Upload the file from stash
                         val uploadResult = uploadClient.uploadFileFromStash(
                             contribution, uniqueFileName, stashUploadResult.fileKey
                         ).blockingSingle()
@@ -306,6 +320,9 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         }
     }
 
+    /**
+     * Make the WikiData Edit, if applicable
+     */
     private suspend fun makeWikiDataEdit(uploadResult: UploadResult, contribution: Contribution) {
         wikidataEditService.addDepictionsAndCaptions(uploadResult, contribution)
         val wikiDataPlace = contribution.wikidataPlace
@@ -351,10 +368,54 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             .blockingAwait()
     }
 
-    private fun findUniqueFileName(filename: String): String {
-        return filename;
+    private fun findUniqueFileName(fileName: String): String {
+        var sequenceFileName: String?
+        var sequenceNumber = 1
+        while (true) {
+            sequenceFileName = if (sequenceNumber == 1) {
+                fileName
+            } else {
+                if (fileName.indexOf('.') == -1) {
+                    "$fileName $sequenceNumber"
+                } else {
+                    val regex =
+                        Pattern.compile("^(.*)(\\..+?)$")
+                    val regexMatcher = regex.matcher(fileName)
+                    regexMatcher.replaceAll("$1 $sequenceNumber$2")
+                }
+            }
+            if (!mediaClient.checkPageExistsUsingTitle(
+                    String.format(
+                        "File:%s",
+                        sequenceFileName
+                    )
+                )
+                    .blockingGet()
+                && !isThereAnUnfinishedUploadWithFileName(sequenceFileName!!)
+            ) {
+                break
+            }
+            sequenceNumber++
+        }
+        return sequenceFileName!!
     }
 
+    /**
+     * To remove possibilities of overriding already uploaded files partially/fully, lets
+     * make sure we don't already have a file with the same same
+     */
+    private fun isThereAnUnfinishedUploadWithFileName(fileName: String): Boolean {
+        val contributionWithTitle = contributionDao.getContributionWithTitle(fileName)
+        if (contributionWithTitle.isEmpty()) {
+            return false
+        }
+        return true
+    }
+
+    /**
+     * Notify that the current upload has succeeded
+     * @param contribution
+     */
     @SuppressLint("StringFormatInvalid")
     private fun showSuccessNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
@@ -375,6 +436,10 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         contributionDao.save(contribution).blockingAwait()
     }
 
+    /**
+     * Notify that the current upload has failed
+     * @param contribution
+     */
     @SuppressLint("StringFormatInvalid")
     private fun showFailedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
@@ -393,6 +458,10 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         )
     }
 
+    /**
+     * Notify that the current upload is paused
+     * @param contribution
+     */
     private fun showPausedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
         curentNotification.setContentTitle(
