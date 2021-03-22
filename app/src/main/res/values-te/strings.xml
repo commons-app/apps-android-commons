@@ -393,12 +393,6 @@
   <string name="review_category_explanation">ఈ బొమ్మ %1$s వర్గాల్లో ఉంది.</string>
   <string name="review_spam_report_question">అది స్కోపులో లేదు, ఎందుకంటే</string>
   <string name="review_c_violation_report_question">అది కాపీహక్కుల ఉల్లంఘన, ఎందుకంటే</string>
-  <string name="review_category_yes_button_text">లేదు, తప్పు వర్గీకరణ</string>
-  <string name="review_category_no_button_text">బానే ఉన్నట్టుంది</string>
-  <string name="review_spam_yes_button_text">లేదు, స్కోపులో లేదు</string>
-  <string name="review_spam_no_button_text">బానే ఉన్నట్టుంది</string>
-  <string name="review_copyright_yes_button_text">లేదు, కాపీహక్కుల ఉల్లంఘన</string>
-  <string name="review_copyright_no_button_text">బానే ఉన్నట్టుంది</string>
   <string name="review_thanks_yes_button_text">అవును, ఎందుక్కాదు</string>
   <string name="review_thanks_no_button_text">తరువాతి బొమ్మ</string>
   <string name="skip_image_explanation">ఈ బొత్తాన్ని నొక్కితే వికీమీడియా కామన్స్ లోకి ఇటీవల ఎక్కించిన మరో బొమ్మ కనిపిస్తుంది</string>

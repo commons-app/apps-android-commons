@@ -414,12 +414,6 @@
   <string name="review_category_explanation">Costa plancia a l\'é ant le categorìe %1$s .</string>
   <string name="review_spam_report_question">A l\'é fòra argoment përché a l\'é</string>
   <string name="review_c_violation_report_question">A l\'é na violassion dij drit d\'autor përché a l\'é</string>
-  <string name="review_category_yes_button_text">Nò, eror ëd categorìa</string>
-  <string name="review_category_no_button_text">A smija giust</string>
-  <string name="review_spam_yes_button_text">Nò, fòra argoment</string>
-  <string name="review_spam_no_button_text">A smija giust</string>
-  <string name="review_copyright_yes_button_text">Nò, violassion dij drit d\'autor</string>
-  <string name="review_copyright_no_button_text">A smija ch\'a vada bin</string>
   <string name="review_thanks_yes_button_text">É, përchè nò</string>
   <string name="review_thanks_no_button_text">Plancia apress</string>
   <string name="skip_image_explanation">Sgnaché ansima a \'s boton a-j darà n\'àutra plancia carià ëd recent ëd Wikimedia Comun</string>

@@ -384,10 +384,6 @@
   <string name="review_no_category">عجب، این حتی رده‌بندی هم نشده!</string>
   <string name="review_spam_report_question">این از محدوده خارج است زیرا که</string>
   <string name="review_c_violation_report_question">این فایل ناقض حق تکثیر است به خاطر اینکه</string>
-  <string name="review_category_no_button_text">خوب به نظر می‌رسد</string>
-  <string name="review_spam_yes_button_text">نه، این از محدوده خارج است</string>
-  <string name="review_spam_no_button_text">خوب به نظر می‌رسد</string>
-  <string name="review_copyright_no_button_text">خوب به نظر می‌رسد</string>
   <string name="review_thanks_yes_button_text">بله، چرا که نه</string>
   <string name="review_thanks_no_button_text">تصویر بعدی</string>
   <string name="no_image">هیچ تصویری به کار نرفته است</string>

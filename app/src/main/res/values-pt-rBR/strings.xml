@@ -430,12 +430,6 @@
   <string name="review_category_explanation">Esta imagem está abaixo das %1$s categorias</string>
   <string name="review_spam_report_question">Está fora do escopo porque é</string>
   <string name="review_c_violation_report_question">É violação de direitos autorais porque é</string>
-  <string name="review_category_yes_button_text">Não, mal categorizado</string>
-  <string name="review_category_no_button_text">Parece bem</string>
-  <string name="review_spam_yes_button_text">Não, fora do escopo</string>
-  <string name="review_spam_no_button_text">Parece bem</string>
-  <string name="review_copyright_yes_button_text">Não, violação de direitos autorais</string>
-  <string name="review_copyright_no_button_text">Parece bem</string>
   <string name="review_thanks_yes_button_text">Sim, porque não?</string>
   <string name="review_thanks_no_button_text">Próxima imagem</string>
   <string name="skip_image_explanation">Clicando neste botão você terá uma outra imagem carregada recentemente do Wikimedia Commons</string>

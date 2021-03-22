@@ -141,11 +141,6 @@
   <string name="statistics_wikidata_edits">Wêneyên bi riya \"Cihên Nêz\"</string>
   <string name="level">Derece</string>
   <string name="images_uploaded">Wêneyên Hilbarkirî</string>
-  <string name="review_category_no_button_text">Baş dixuye</string>
-  <string name="review_spam_yes_button_text">Na, li derveyî çarçoveyê ye</string>
-  <string name="review_spam_no_button_text">Baş dixuye</string>
-  <string name="review_copyright_yes_button_text">Na, îxlala mafê telîfê</string>
-  <string name="review_copyright_no_button_text">Baş dixuye</string>
   <string name="review_thanks_yes_button_text">Belê, çima nebe</string>
   <string name="review_thanks_no_button_text">Wêneya pêş</string>
   <string name="please_wait">Ji kerema xwe re bisekine ...</string>

@@ -350,12 +350,6 @@
   <string name="review_category_explanation">Aquesta imatge està sota les categories %1$s.</string>
   <string name="review_spam_report_question">És fora d\'abast perquè és</string>
   <string name="review_c_violation_report_question">És una violació de drets d\'autor perquè és</string>
-  <string name="review_category_yes_button_text">No, mala categorització</string>
-  <string name="review_category_no_button_text">Sembla bé</string>
-  <string name="review_spam_yes_button_text">No, fora d\'abast</string>
-  <string name="review_spam_no_button_text">Sembla bé</string>
-  <string name="review_copyright_yes_button_text">No, vulneració de drets d\'autor</string>
-  <string name="review_copyright_no_button_text">Sembla bé</string>
   <string name="review_thanks_yes_button_text">I tant</string>
   <string name="review_thanks_no_button_text">Imatge següent</string>
   <string name="no_image">No s\'ha utilitzat cap imatge</string>

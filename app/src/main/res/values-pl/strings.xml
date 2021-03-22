@@ -448,12 +448,6 @@
   <string name="review_category_explanation">Ten obraz należy do kategorii %1$s</string>
   <string name="review_spam_report_question">Jest poza zakresem, ponieważ jest</string>
   <string name="review_c_violation_report_question">Jest to naruszeniem praw autorskich, ponieważ</string>
-  <string name="review_category_yes_button_text">Nie, błędnie skategoryzowane</string>
-  <string name="review_category_no_button_text">Wydaje się w porządku</string>
-  <string name="review_spam_yes_button_text">Nie, poza zakresem</string>
-  <string name="review_spam_no_button_text">Wydaje się w porządku</string>
-  <string name="review_copyright_yes_button_text">Nie, naruszenie praw autorskich</string>
-  <string name="review_copyright_no_button_text">Wydaje się w porządku</string>
   <string name="review_thanks_yes_button_text">Tak, czemu nie</string>
   <string name="review_thanks_no_button_text">Następny obraz</string>
   <string name="skip_image_explanation">Kliknięcie tego przycisku spowoduje wyświetlenie kolejnego ostatnio przesłanego obrazu z Wikimedia Commons</string>

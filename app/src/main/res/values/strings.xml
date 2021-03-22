@@ -438,14 +438,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="review_category_explanation">This image is under %1$s categories.</string>
   <string name="review_spam_report_question">It is out of scope because it is</string>
   <string name="review_c_violation_report_question">It is copyright violation because it is</string>
-  <string name="review_category_yes_button_text">No, mis-categorized</string>
-  <string name="review_category_no_button_text">Seems fine</string>
-  <string name="review_spam_yes_button_text">No, out of scope</string>
-  <string name="review_spam_no_button_text">Seems fine</string>
-  <string name="review_copyright_yes_button_text">No, copyright violation</string>
-  <string name="review_copyright_no_button_text">Seems fine</string>
-  <string name="review_thanks_yes_button_text">Yes, why not</string>
-  <string name="review_thanks_no_button_text">Next image</string>
+  <string name="review_thanks_yes_button_text">Next image</string>
+  <string name="review_thanks_no_button_text">Yes, why not</string>
   <string name="skip_image_explanation">Clicking this button will give you another recently uploaded image from Wikimedia Commons</string>
 
   <string name="review_image_explanation">You can review images and improve the quality of Wikimedia Commons.\n The four parameters of review are: \n - Is this image in-scope? \n - Does this image follow the rules of copyright? \n - Is this image correctly categorized? \n - If all goes well you can also thank the contributor.</string>

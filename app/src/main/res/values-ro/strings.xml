@@ -418,12 +418,6 @@
   <string name="review_category_explanation">Această imagine este sub %1$s categorii.</string>
   <string name="review_spam_report_question">Este în afara scopului, deoarece este</string>
   <string name="review_c_violation_report_question">Este încălcare a dreptului de autor, deoarece este</string>
-  <string name="review_category_yes_button_text">Nu, categorizat greșit</string>
-  <string name="review_category_no_button_text">Pare bine</string>
-  <string name="review_spam_yes_button_text">Nu, în afara scopului</string>
-  <string name="review_spam_no_button_text">Pare bine</string>
-  <string name="review_copyright_yes_button_text">Nu, încălcarea dreptului de autor</string>
-  <string name="review_copyright_no_button_text">Pare bine</string>
   <string name="review_thanks_yes_button_text">Da, de ce nu</string>
   <string name="review_thanks_no_button_text">Următoarea imagine</string>
   <string name="skip_image_explanation">Dacă faceți click pe acest buton vă va oferi o altă imagine încărcată recent de pe Wikimedia Commons</string>

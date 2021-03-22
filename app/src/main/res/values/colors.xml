@@ -69,8 +69,8 @@
 
     <color name="swipe_red" tools:ignore="MissingDefaultResource">#FF0000</color>
     <color name="color_error">#FF0000</color>
-    <color name="yes_button_color">#B22222</color>
-    <color name="no_button_color">#006400</color>
+    <color name="yes_button_color">#006400</color>
+    <color name="no_button_color">#B22222</color>
 
     <color name="current_marker_stroke">#55000000</color>
     <color name="current_marker_fill">#11000000</color>

@@ -397,12 +397,6 @@
   <string name="review_category_explanation">Dette bildet ligger i %1$s kategorier.</string>
   <string name="review_spam_report_question">Det er ikke relevant fordi det er</string>
   <string name="review_c_violation_report_question">Det er et opphavsrettbrudd fordi det er</string>
-  <string name="review_category_yes_button_text">Nei, feilkategorisert</string>
-  <string name="review_category_no_button_text">Ser greit ut</string>
-  <string name="review_spam_yes_button_text">Nei, ikke relevant</string>
-  <string name="review_spam_no_button_text">Ser greit ut</string>
-  <string name="review_copyright_yes_button_text">Nei, opphavsrettsbrudd</string>
-  <string name="review_copyright_no_button_text">Ser greit ut</string>
   <string name="review_thanks_yes_button_text">Ja, hvorfor ikke</string>
   <string name="review_thanks_no_button_text">Neste bilde</string>
   <string name="skip_image_explanation">Når du klikker på denne knappen vil du få et nytt nylig opplastet bilde fra Wikimedia Commons</string>

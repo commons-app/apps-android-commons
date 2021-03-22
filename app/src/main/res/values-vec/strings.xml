@@ -391,12 +391,6 @@
   <string name="review_category_explanation">Sta imajine ła xé n\'te %1$s categorie.</string>
   <string name="review_spam_report_question">No ła xé a tema parché</string>
   <string name="review_c_violation_report_question">La xé na viołasion de copyright parché</string>
-  <string name="review_category_yes_button_text">No, ła categoria ła xé sbajada</string>
-  <string name="review_category_no_button_text">Pare tuto ben!</string>
-  <string name="review_spam_yes_button_text">No, el xé fora tema</string>
-  <string name="review_spam_no_button_text">Pare tuto ben!</string>
-  <string name="review_copyright_yes_button_text">No, ła xé na viołasion del copyright</string>
-  <string name="review_copyright_no_button_text">Pare tuto ben!</string>
   <string name="review_thanks_yes_button_text">Bona, parché no!</string>
   <string name="review_thanks_no_button_text">Imajine dopo</string>
   <string name="skip_image_explanation">Schiciando sto boton te vegnarà fora na imajine cargda ultimamente da Wikimedia Commons</string>

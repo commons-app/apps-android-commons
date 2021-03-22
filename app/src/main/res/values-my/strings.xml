@@ -279,11 +279,6 @@
   <string name="review_category">မှန်ကန်စွာ ကဏ္ဍခွဲထားပါသလား</string>
   <string name="review_spam_report_question">ဘောင်ကျော်နေပါသည် အကြောင်းမှာ</string>
   <string name="review_c_violation_report_question">မူပိုင်ခွင့်ချိုးဖောက်မှုဖြစ်သည် အကြောင်းမှာ</string>
-  <string name="review_category_no_button_text">အဆင်ပြေပုံပေါက်ပါသည်</string>
-  <string name="review_spam_yes_button_text">ဟင့်အင်း၊ ဘောင်ကျော်နေသည်</string>
-  <string name="review_spam_no_button_text">အဆင်ပြေပုံပေါက်ပါသည်</string>
-  <string name="review_copyright_yes_button_text">ဟင့်အင်း၊ မူပိုင်ခွင့် ချိုးဖောက်မှု</string>
-  <string name="review_copyright_no_button_text">အဆင်ပြေပုံပေါက်ပါသည်</string>
   <string name="review_thanks_no_button_text">နောက်ရုပ်ပုံ</string>
   <string name="no_notification">မဖတ်ရသေးသော အသိပေးချက်များ မရှိပါ</string>
   <string name="no_read_notification" fuzzy="true">မော်ကွန်းတင်ပြီးသော အသိပေးချက်များ မရှိပါ</string>

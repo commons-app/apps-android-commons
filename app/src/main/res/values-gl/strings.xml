@@ -383,11 +383,6 @@
   <string name="send_thank_success_title">Enviando agradecementos: Éxito</string>
   <string name="send_thank_success_message">Enviado correctamente o agradecemento a %1$s</string>
   <string name="send_thank_toast">Enviando agradecementos por %1$s</string>
-  <string name="review_category_no_button_text">Parece ben</string>
-  <string name="review_spam_yes_button_text">Non, fóra de alcance</string>
-  <string name="review_spam_no_button_text">Parece ben</string>
-  <string name="review_copyright_yes_button_text">Non, violación de copyright</string>
-  <string name="review_copyright_no_button_text">Parece ben</string>
   <string name="review_thanks_yes_button_text">Si, por que non</string>
   <string name="review_thanks_no_button_text">Seguinte imaxe</string>
   <string name="no_image">Ningunha imaxe usada</string>
