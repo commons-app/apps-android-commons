@@ -494,9 +494,11 @@
   <string name="leaderboard_weekly">매주</string>
   <string name="leaderboard_upload">업로드</string>
   <string name="leaderboard_my_rank_button_text">내 순위</string>
+  <string name="limited_connection_mode">제한된 연결 모드</string>
   <string name="limited_connection_explanation">연결 제한 모드를 사용 중입니다. 모든 업로드는 일시 중단되며 이 모드를 끄면 재개됩니다.</string>
   <string name="limited_connection_is_on">연결 제한 모드가 켜져 있습니다.</string>
   <string name="license_step_title">미디어 라이선스</string>
   <string name="media_detail_step_title">미디어 상세 정보</string>
+  <string name="menu_view_category_page">분류 문서 보기</string>
   <string name="menu_view_item_page">항목 문서 보기</string>
 </resources>
