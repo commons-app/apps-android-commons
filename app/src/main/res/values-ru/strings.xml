@@ -457,6 +457,12 @@
   <string name="review_category_explanation">Это изображение отнесено к следующим категориям: %1$s</string>
   <string name="review_spam_report_question">Файл не уместен на Викискладе, поскольку</string>
   <string name="review_c_violation_report_question">Это нарушение авторских прав, поскольку</string>
+  <string name="review_category_yes_button_text">Неверно категоризировано</string>
+  <string name="review_category_no_button_text">Уместен</string>
+  <string name="review_spam_yes_button_text">Нет</string>
+  <string name="review_spam_no_button_text">Уместен</string>
+  <string name="review_copyright_yes_button_text">Нет, это нарушение авторского права</string>
+  <string name="review_copyright_no_button_text">Уместен</string>
   <string name="review_thanks_yes_button_text">Да</string>
   <string name="review_thanks_no_button_text">Следующий файл</string>
   <string name="skip_image_explanation">Нажатие этой кнопки приводит к показу следующего недавно загруженного изображения с Викисклада</string>

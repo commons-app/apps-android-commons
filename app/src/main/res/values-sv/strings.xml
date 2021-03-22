@@ -421,6 +421,12 @@
   <string name="review_category_explanation">Denna bild finns i %1$s kategorier.</string>
   <string name="review_spam_report_question">Det är irrelevant eftersom det är</string>
   <string name="review_c_violation_report_question">Den bryter mot upphovsrätten eftersom den är</string>
+  <string name="review_category_yes_button_text">Nej, felkategoriserad</string>
+  <string name="review_category_no_button_text">Verkar okej</string>
+  <string name="review_spam_yes_button_text">Nej, irrelevant</string>
+  <string name="review_spam_no_button_text">Verkar okej</string>
+  <string name="review_copyright_yes_button_text">Nej, upphovsbrott</string>
+  <string name="review_copyright_no_button_text">Verkar okej</string>
   <string name="review_thanks_yes_button_text">Visst, varför inte</string>
   <string name="review_thanks_no_button_text">Nästa bild</string>
   <string name="skip_image_explanation">När du klickar på knappen får du en annan bild som laddades upp nyligen från Wikimedia Commons</string>

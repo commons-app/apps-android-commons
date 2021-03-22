@@ -427,6 +427,12 @@
   <string name="review_category_explanation">Esta imagen esta dentro de %1$s categorías.</string>
   <string name="review_spam_report_question">Esta fuera del alcance porque es</string>
   <string name="review_c_violation_report_question">Es una violación de derechos de autor porque es</string>
+  <string name="review_category_yes_button_text">No, mal categorizado</string>
+  <string name="review_category_no_button_text">Parece bien</string>
+  <string name="review_spam_yes_button_text">No, fuera de alcance</string>
+  <string name="review_spam_no_button_text">Parece bien</string>
+  <string name="review_copyright_yes_button_text">No, vulneración de copyright</string>
+  <string name="review_copyright_no_button_text">Parece bien</string>
   <string name="review_thanks_yes_button_text">Sí, por qué no</string>
   <string name="review_thanks_no_button_text">Imagen siguiente</string>
   <string name="skip_image_explanation">Haciendo clic a este botón obtendrá otra imagen de Wikimedia Commons subida recientemente</string>

@@ -386,6 +386,12 @@
   <string name="nominate_for_deletion_done">Fatto</string>
   <string name="send_thank_toast">Inviando ringraziamento per %1$s</string>
   <string name="review_copyright_explanation">I loghi, gli screenshot e le locandine di film sono solitamente violazioni del copyright.\nClicca NO per proporre l\'eliminazione di questa immagine</string>
+  <string name="review_category_yes_button_text">No, la categoria è sbagliata</string>
+  <string name="review_category_no_button_text">Sembra tutto ok</string>
+  <string name="review_spam_yes_button_text">No, è fuori tema</string>
+  <string name="review_spam_no_button_text">Sembra tutto ok</string>
+  <string name="review_copyright_yes_button_text">No, è una violazione di copyright</string>
+  <string name="review_copyright_no_button_text">Sembra tutto ok</string>
   <string name="review_thanks_yes_button_text">Certo, perché no</string>
   <string name="review_thanks_no_button_text">Immagine successiva</string>
   <string name="no_image">Nessuna immagine utilizzata</string>

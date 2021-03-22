@@ -441,6 +441,12 @@
   <string name="review_category_explanation">Cette image est classée dans %1$s catégories.</string>
   <string name="review_spam_report_question">Ceci est hors sujet parce que c’est</string>
   <string name="review_c_violation_report_question">Ceci est une violation des droits d’auteur parce que c’est</string>
+  <string name="review_category_yes_button_text">Non, mal catégorisé</string>
+  <string name="review_category_no_button_text">Semble correct</string>
+  <string name="review_spam_yes_button_text">Non, hors sujet</string>
+  <string name="review_spam_no_button_text">Semble correct</string>
+  <string name="review_copyright_yes_button_text">Non, violation de droits d’auteur</string>
+  <string name="review_copyright_no_button_text">Semble correct</string>
   <string name="review_thanks_yes_button_text">Oui, pourquoi pas</string>
   <string name="review_thanks_no_button_text">Image suivante</string>
   <string name="skip_image_explanation">Cliquer sur ce bouton vous donnera une autre image récemment téléversée sur Wikimédia Commons.</string>

@@ -320,6 +320,12 @@
   <string name="review_no_category">ߐ߲߬ߤߐ߲߯߹ ߣߌ߲߬ ߝߊ߲߭ ߡߊ߫ ߦߌߟߡߊߦߊ߫ ߟߋ߬߹</string>
   <string name="review_category_explanation">ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߦߋ߫ %1$s ߦߌߟߡߊ ߟߎ߬ ߞߘߐ߫.</string>
   <string name="review_c_violation_report_question">ߊ߬ ߦߋ߫ ߓߊߦߟߍߡߊ߲ߠߌ߲ ߤߊߞߍ ߞߎ߬ߙߎ߲߬ߘߎ ߕߌߢߍ ߟߋ߬ ߘߌ߫ ߓߊߏ߬ ߊ߬ ߦߋ߫</string>
+  <string name="review_category_yes_button_text">ߒ߬ߒ߫߸ ߦߌߟߡߦߊߟߌ ߞߐߢߌ߬ߣߊ߬ߣߍ߲߹</string>
+  <string name="review_category_no_button_text">ߊ߬ ߞߍߣߍ߲߫ ߦߴߊ߬ ߢߊ߬ߣߍ߲߫</string>
+  <string name="review_spam_yes_button_text">ߒ߬ߒ߫߸ ߊ߬ ߞߍߣߍ߲߫ ߦߏ߫ ߞߣߍ ߕߴߦߋ߲߬</string>
+  <string name="review_spam_no_button_text">ߊ߬ ߞߍߣߍ߲߫ ߦߴߊ߬ ߢߊ߬ߣߍ߲߫</string>
+  <string name="review_copyright_yes_button_text">ߒ߬ߒ߫߸ ߓߊߦߟߍߡߊ߲ ߤߊߞߍ ߡߊ߫ ߕߌߢߍ߫</string>
+  <string name="review_copyright_no_button_text">ߊ߬ ߞߍߣߍ߲߫ ߦߴߊ߬ ߓߍ߲߬ߣߍ߲߫</string>
   <string name="review_thanks_yes_button_text">ߐ߲߬ߐ߲ߐ߲߫߸ ߡߎ߲߬ߠߊ߫ ߍ߲߬ߍ߲߫</string>
   <string name="review_thanks_no_button_text">ߖߌ߬ߦߊ߬ߓߍ ߣߊ߬ߕߐ</string>
   <string name="no_image">ߖߌ߬ߦߊ߬ߓߍ߬ ߡߊ߫ ߟߊߓߊ߯ߙߊ߫</string>

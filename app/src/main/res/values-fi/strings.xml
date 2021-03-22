@@ -418,6 +418,10 @@
   <string name="review_category_explanation">Tämä kuva kuuluu %1$s luokkaan.</string>
   <string name="review_spam_report_question">Se ei kuulu soveltamisalaan, koska se on</string>
   <string name="review_c_violation_report_question">Se on tekijänoikeusrikkomusta, koska se on</string>
+  <string name="review_category_no_button_text">Näyttää hyvälle</string>
+  <string name="review_spam_no_button_text">Näyttää hyvälle</string>
+  <string name="review_copyright_yes_button_text">Ei, tekijänoikeusloukkaus</string>
+  <string name="review_copyright_no_button_text">Näyttää hyvälle</string>
   <string name="review_thanks_yes_button_text">Kyllä, miksi ei</string>
   <string name="review_thanks_no_button_text">Seuraava kuva</string>
   <string name="no_image">Ei käytettyjä kuvia</string>

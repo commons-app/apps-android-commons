@@ -418,6 +418,12 @@
   <string name="review_category_explanation">Dieses Bild ist unter %1$s Kategorien.</string>
   <string name="review_spam_report_question">Sie ist außerhalb des Geltungsbereichs, da sie</string>
   <string name="review_c_violation_report_question">Sie ist eine Urheberrechtsverletzung, da sie</string>
+  <string name="review_category_yes_button_text">Nein, falsch kategorisiert</string>
+  <string name="review_category_no_button_text">Sieht gut aus</string>
+  <string name="review_spam_yes_button_text">Nein, außerhalb des Geltungsbereichs</string>
+  <string name="review_spam_no_button_text">Sieht gut aus</string>
+  <string name="review_copyright_yes_button_text">Nein, Urheberrechtsverletzung</string>
+  <string name="review_copyright_no_button_text">Sieht gut aus</string>
   <string name="review_thanks_yes_button_text">Ja, warum nicht</string>
   <string name="review_thanks_no_button_text">Nächstes Bild</string>
   <string name="skip_image_explanation">Das Anklicken dieser Schaltfläche gibt dir ein anderes kürzlich hochgeladenes Bild von Wikimedia Commons</string>

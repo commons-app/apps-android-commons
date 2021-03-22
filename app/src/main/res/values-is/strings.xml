@@ -357,6 +357,12 @@
   <string name="review_category">Er þetta rétt flokkað?</string>
   <string name="review_spam">Kemur þetta umfjöllunarefninu við?</string>
   <string name="review_c_violation_report_question">Það brýtur á móti höfundarrétti því það er</string>
+  <string name="review_category_yes_button_text">Nei, rangt flokkað</string>
+  <string name="review_category_no_button_text">Lítur vel út</string>
+  <string name="review_spam_yes_button_text">Nei, kemur efninu ekki við</string>
+  <string name="review_spam_no_button_text">Lítur vel út</string>
+  <string name="review_copyright_yes_button_text">Nei, höfundarréttarbrot</string>
+  <string name="review_copyright_no_button_text">Lítur vel út</string>
   <string name="review_thanks_yes_button_text">Já, því ekki</string>
   <string name="review_thanks_no_button_text">Næsta mynd</string>
   <string name="no_image">Enagar myndir notaðar</string>

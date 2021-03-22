@@ -435,6 +435,12 @@
   <string name="review_category_explanation">Bu resim %1$s kategorisindedir.</string>
   <string name="review_spam_report_question">Kapsam dışında çünkü</string>
   <string name="review_c_violation_report_question">Telif hakkı ihlalidir çünkü</string>
+  <string name="review_category_yes_button_text">Hayır, yanlış kategorize edilmiş</string>
+  <string name="review_category_no_button_text">İyi görünüyor</string>
+  <string name="review_spam_yes_button_text">Hayır, kapsam dışı</string>
+  <string name="review_spam_no_button_text">İyi görünüyor</string>
+  <string name="review_copyright_yes_button_text">Hayır, telif hakkı ihlali</string>
+  <string name="review_copyright_no_button_text">İyi görünüyor</string>
   <string name="review_thanks_yes_button_text">Evet, neden olmasın</string>
   <string name="review_thanks_no_button_text">Sonraki resim</string>
   <string name="skip_image_explanation">Bu butona tıkladığınızda Wikimedia Commons\'tan yeni yüklediğiniz başka bir resim elde edersiniz</string>

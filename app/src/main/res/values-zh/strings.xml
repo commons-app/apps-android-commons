@@ -435,6 +435,12 @@
   <string name="review_category_explanation">该图片是在%1类别下</string>
   <string name="review_spam_report_question">该文件不在收录范围内，原因是</string>
   <string name="review_c_violation_report_question">该文件侵犯版权，原因是</string>
+  <string name="review_category_yes_button_text">否，分类错误</string>
+  <string name="review_category_no_button_text">看起来没问题</string>
+  <string name="review_spam_yes_button_text">否，不在收录范围内</string>
+  <string name="review_spam_no_button_text">看起来没问题</string>
+  <string name="review_copyright_yes_button_text">否，侵犯版权</string>
+  <string name="review_copyright_no_button_text">看起来没问题</string>
   <string name="review_thanks_yes_button_text">是，为什么不呢</string>
   <string name="review_thanks_no_button_text">下一张图片</string>
   <string name="skip_image_explanation">点击这个按钮会给你另外一个来自于Wikimedia Common上传的图片</string>

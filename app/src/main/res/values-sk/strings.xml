@@ -415,6 +415,12 @@
   <string name="review_category_explanation">Tento obrázok patrí do %1$s kategórií.</string>
   <string name="review_spam_report_question">Nie je to v poriadku, pretože</string>
   <string name="review_c_violation_report_question">Je to porušenie autorských práv, pretože</string>
+  <string name="review_category_yes_button_text">Nie, zle kategorizované</string>
+  <string name="review_category_no_button_text">Vyzerá to byť v poriadku</string>
+  <string name="review_spam_yes_button_text">Nie, nie je to v poriadku</string>
+  <string name="review_spam_no_button_text">Vyzerá to byť v poriadku</string>
+  <string name="review_copyright_yes_button_text">Nie, porušenie autorských práv</string>
+  <string name="review_copyright_no_button_text">Vyzerá to byť v poriadku</string>
   <string name="review_thanks_yes_button_text">Áno, prečo nie</string>
   <string name="review_thanks_no_button_text">Ďalší súbor</string>
   <string name="skip_image_explanation">Kliknutím na toto tlačidlo sa zobrazí ďalší nedávno nahraný obrázok z Wikimedia Commons</string>
