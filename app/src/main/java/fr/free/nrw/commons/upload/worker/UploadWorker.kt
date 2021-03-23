@@ -146,22 +146,20 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 val queuedContributions = contributionDao.getContribution(statesToProcess)
                     .blockingGet()
                 //Showing initial notification for the number of uploads being processed
-                withContext(Dispatchers.Main) {
-                    processingUploads.setContentTitle(appContext.getString(R.string.starting_uploads))
-                    processingUploads.setContentText(
-                        appContext.resources.getQuantityString(
-                            R.plurals.starting_multiple_uploads,
-                            queuedContributions.size,
-                            queuedContributions.size
-                        )
-                    )
-                    notificationManager?.notify(
-                        PROCESSING_UPLOADS_NOTIFICATION_TAG,
-                        PROCESSING_UPLOADS_NOTIFICATION_ID,
-                        processingUploads.build()
-                    )
-                }
 
+                processingUploads.setContentTitle(appContext.getString(R.string.starting_uploads))
+                processingUploads.setContentText(
+                    appContext.resources.getQuantityString(
+                        R.plurals.starting_multiple_uploads,
+                        queuedContributions.size,
+                        queuedContributions.size
+                    )
+                )
+                notificationManager?.notify(
+                    PROCESSING_UPLOADS_NOTIFICATION_TAG,
+                    PROCESSING_UPLOADS_NOTIFICATION_ID,
+                    processingUploads.build()
+                )
 
                 queuedContributions.asFlow().map { contribution ->
                     /**
@@ -390,8 +388,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                         sequenceFileName
                     )
                 )
-                    .blockingGet()
-                && !isThereAnUnfinishedUploadWithFileName(sequenceFileName!!)
+                    .blockingGet() && !isThereAnUnfinishedUploadWithFileName(sequenceFileName!!)
             ) {
                 break
             }
