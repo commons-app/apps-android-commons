@@ -6,11 +6,16 @@ import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
 import androidx.preference.EditTextPreference;
+import android.view.View;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import com.google.android.material.snackbar.Snackbar;
+import androidx.preference.PreferenceGroupAdapter;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceViewHolder;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
@@ -105,6 +110,21 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if (telemetry != null) {
             telemetry.setUserTelemetryRequestState(shouldOptIn);
         }
+    }
+
+    @Override
+    protected Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
+        return new PreferenceGroupAdapter(preferenceScreen) {
+            @Override
+            public void onBindViewHolder(PreferenceViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                Preference preference = getItem(position);
+                View iconFrame = holder.itemView.findViewById(R.id.icon_frame);
+                if (iconFrame != null) {
+                    iconFrame.setVisibility(View.GONE);
+                }
+            }
+        };
     }
 
     /**
