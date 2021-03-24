@@ -51,6 +51,20 @@
     android:weightSum="2">
 
     <Button
+      android:id="@+id/button_no"
+      android:layout_width="@dimen/dimen_0"
+      android:layout_height="@dimen/fragment_height"
+      android:layout_weight="1"
+      android:layout_margin="@dimen/activity_margin_horizontal"
+      android:background="@android:color/transparent"
+      android:text="@string/no"
+      android:enabled="false"
+      android:alpha="0.5"
+      android:textAllCaps="true"
+      android:textAlignment="center"
+      android:textColor="@color/no_button_color"/>
+
+    <Button
       android:id="@+id/button_yes"
       android:layout_width="@dimen/dimen_0"
       android:layout_height="@dimen/fragment_height"
@@ -63,21 +77,6 @@
       android:textAllCaps="true"
       android:textAlignment="center"
       android:textColor="@color/yes_button_color"/>
-
-    <Button
-      android:textAllCaps="true"
-      android:id="@+id/button_no"
-      android:layout_width="@dimen/dimen_0"
-      android:layout_height="@dimen/fragment_height"
-      android:layout_weight="1"
-      android:enabled="false"
-      android:alpha="0.5"
-      android:layout_margin="@dimen/activity_margin_horizontal"
-      android:background="@android:color/transparent"
-      android:text="@string/no"
-      android:textAlignment="center"
-      android:textColor="@color/no_button_color"
-      />
 
   </LinearLayout>
 
