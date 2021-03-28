@@ -39,12 +39,6 @@ public abstract class ContributionDao {
     saveSynchronous(newContribution);
   }
 
-  public Completable saveAndDelete(final Contribution oldContribution,
-      final Contribution newContribution) {
-    return Completable
-        .fromAction(() -> deleteAndSaveContribution(oldContribution, newContribution));
-  }
-
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   public abstract Single<List<Long>> save(List<Contribution> contribution);
 

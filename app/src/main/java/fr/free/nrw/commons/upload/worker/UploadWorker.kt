@@ -65,6 +65,14 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
 
     private val statesToProcess= ArrayList<Int>()
 
+    private val STASH_ERROR_CODES = Arrays
+        .asList(
+            "uploadstash-file-not-found",
+            "stashfailed",
+            "verification-error",
+            "chunk-too-small"
+        )
+
     init {
         ApplicationlessInjection
             .getInstance(appContext)
@@ -276,6 +284,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                                 Timber.d(
                                     "WikiDataEdit not required, upload success"
                                 )
+                                saveCompletedContribution(contribution,uploadResult)
                                 showSuccessNotification(contribution)
                             }else{
                                 Timber.d(
@@ -296,6 +305,9 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                         Timber.e(exception)
                         Timber.e("Upload from stash failed for contribution : $filename")
                         showFailedNotification(contribution)
+                        if (STASH_ERROR_CODES.contains(exception.message)) {
+                            clearChunks(contribution)
+                        }
                     }
                 }
                 StashUploadState.PAUSED -> {
@@ -316,6 +328,11 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             Timber.e("Stash upload failed for contribution: $filename")
             showFailedNotification(contribution)
         }
+    }
+
+    private fun clearChunks(contribution: Contribution) {
+        contribution.chunkInfo=null
+        contributionDao.save(contribution).blockingAwait()
     }
 
     /**
@@ -357,13 +374,11 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     }
 
     private fun saveCompletedContribution(contribution: Contribution, uploadResult: UploadResult) {
-        mediaClient.getMedia("File:" + uploadResult.filename)
+        val contributionFromUpload = mediaClient.getMedia("File:" + uploadResult.filename)
             .map { media: Media? -> contribution.completeWith(media!!) }
-            .flatMapCompletable { newContribution: Contribution ->
-                newContribution.dateModified = Date()
-                contributionDao.saveAndDelete(contribution, newContribution)
-            }
-            .blockingAwait()
+            .blockingGet()
+        contributionFromUpload.dateModified=Date()
+        contributionDao.deleteAndSaveContribution(contribution, contributionFromUpload)
     }
 
     private fun findUniqueFileName(fileName: String): String {
@@ -388,25 +403,13 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                         sequenceFileName
                     )
                 )
-                    .blockingGet() && !isThereAnUnfinishedUploadWithFileName(sequenceFileName!!)
+                    .blockingGet()
             ) {
                 break
             }
             sequenceNumber++
         }
         return sequenceFileName!!
-    }
-
-    /**
-     * To remove possibilities of overriding already uploaded files partially/fully, lets
-     * make sure we don't already have a file with the same same
-     */
-    private fun isThereAnUnfinishedUploadWithFileName(fileName: String): Boolean {
-        val contributionWithTitle = contributionDao.getContributionWithTitle(fileName)
-        if (contributionWithTitle.isEmpty()) {
-            return false
-        }
-        return true
     }
 
     /**
@@ -430,7 +433,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             currentNotificationTag, currentNotificationID,
             curentNotification.build()
         )
-        contributionDao.save(contribution).blockingAwait()
     }
 
     /**
