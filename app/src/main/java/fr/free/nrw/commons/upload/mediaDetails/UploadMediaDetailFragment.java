@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
@@ -69,8 +70,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @BindView(R.id.tooltip)
     ImageView tooltip;
     private UploadMediaDetailAdapter uploadMediaDetailAdapter;
-    @BindView(R.id.btn_copy_prev_title_desc)
-    AppCompatButton btnCopyPreviousTitleDesc;
+    @BindView(R.id.btn_copy_subsequent_media)
+    AppCompatButton btnCopyToSubsequentMedia;
 
     @Inject
     UploadMediaDetailsContract.UserActionListener presenter;
@@ -123,9 +124,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 showInfoAlert(R.string.media_detail_step_title, R.string.media_details_tooltip);
             }
         });
-        initRecyclerView();
         initPresenter();
         presenter.receiveImage(uploadableFile, place);
+        initRecyclerView();
 
         if (callback.getIndexInViewFlipper(this) == 0) {
             btnPrevious.setEnabled(false);
@@ -135,11 +136,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             btnPrevious.setAlpha(1.0f);
         }
 
-        //If this is the first media, we have nothing to copy, lets not show the button
-        if (callback.getIndexInViewFlipper(this) == 0) {
-            btnCopyPreviousTitleDesc.setVisibility(View.GONE);
+        //If this is the last media, we have nothing to copy, lets not show the button
+        if (callback.getIndexInViewFlipper(this) == callback.getTotalNumberOfSteps()-4) {
+            btnCopyToSubsequentMedia.setVisibility(View.GONE);
         } else {
-            btnCopyPreviousTitleDesc.setVisibility(View.VISIBLE);
+            btnCopyToSubsequentMedia.setVisibility(View.VISIBLE);
         }
 
         attachImageViewScaleChangeListener();
@@ -262,6 +263,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
+    protected void onBecameVisible() {
+        super.onBecameVisible();
+        presenter.fetchTitleAndDescription(callback.getIndexInViewFlipper(this));
+    }
+
+    @Override
     public void showMessage(int stringResourceId, int colorResourceId) {
         ViewUtil.showLongToast(getContext(), stringResourceId);
     }
@@ -369,6 +376,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @Override
     public void onPrimaryCaptionTextChange(boolean isNotEmpty) {
+        btnCopyToSubsequentMedia.setEnabled(isNotEmpty);
+        btnCopyToSubsequentMedia.setClickable(isNotEmpty);
+        btnCopyToSubsequentMedia.setAlpha(isNotEmpty ? 1.0f: 0.5f);
         btnNext.setEnabled(isNotEmpty);
         btnNext.setClickable(isNotEmpty);
         btnNext.setAlpha(isNotEmpty ? 1.0f: 0.5f);
@@ -380,9 +390,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
 
-    @OnClick(R.id.btn_copy_prev_title_desc)
-    public void onButtonCopyPreviousTitleDesc(){
-        presenter.fetchPreviousTitleAndDescription(callback.getIndexInViewFlipper(this));
+    @OnClick(R.id.btn_copy_subsequent_media)
+    public void onButtonCopyTitleDescToSubsequentMedia(){
+        presenter.copyTitleAndDescriptionToSubsequentMedia(callback.getIndexInViewFlipper(this));
+        Toast.makeText(getContext(), getResources().getString(R.string.copied_successfully), Toast.LENGTH_SHORT).show();
     }
 
 }
