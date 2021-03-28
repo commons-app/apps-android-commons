@@ -160,7 +160,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     }
 
   /**
-   * Fetches and set the caption and description of the item, if it is not null that means the user has pressed the copy button
+   * Fetches and set the caption and description of the item
    *
    * @param indexInViewFlipper
    */
