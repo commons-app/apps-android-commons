@@ -418,14 +418,8 @@
   <string name="review_category_explanation">Gambar ini ada dalam kategori %1$s.</string>
   <string name="review_spam_report_question">Di luar cakupan karena</string>
   <string name="review_c_violation_report_question">Pelanggaran hak cipta karena</string>
-  <string name="review_category_yes_button_text">Tidak, salah kategori</string>
-  <string name="review_category_no_button_text">Kelihatan bagus</string>
-  <string name="review_spam_yes_button_text">Tidak, di luar cakupan</string>
-  <string name="review_spam_no_button_text">Kelihatan bagus</string>
-  <string name="review_copyright_yes_button_text">Tidak, melanggar hak cipta</string>
-  <string name="review_copyright_no_button_text">Kelihatan bagus</string>
-  <string name="review_thanks_yes_button_text">Ya, mengapa tidak</string>
-  <string name="review_thanks_no_button_text">Gambar selanjutnya</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">Ya, mengapa tidak</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">Gambar selanjutnya</string>
   <string name="skip_image_explanation">Menekan tombol ini akan memberikan Anda gambar lain yang baru diunggah dari Wikimedia Commons</string>
   <string name="review_image_explanation">Anda dapat meninjau gambar dan meningkatkan kualitas Wikimedia Commons.\n Empat parameter peninjauan adalah: \n - Apakah gambar ini di dalam cakupan? \n - Apakah gambar ini mengikut aturan hak cipta? \n - Apakah gambar ini dikategorikan dengan benar? \n - Jika semuanya berjalan lancar Anda juga bisa berterima kasih kepada kontributor.</string>
   <string name="no_image">Tidak ada gambar digunakan</string>

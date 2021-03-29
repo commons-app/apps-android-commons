@@ -297,6 +297,8 @@
   <string name="provider_bookmarks">বুকমার্ক</string>
   <string name="provider_bookmarks_location">বুকমার্ক</string>
   <string name="deletion_reason_uploaded_by_mistake">আমি ভুল করে আপলোড করেছি</string>
+  <string name="review_thanks_yes_button_text">পরবর্তী ছবি</string>
+  <string name="review_thanks_no_button_text">হ্যাঁ, কেন নয়</string>
   <string name="please_wait">অনুগ্রহ করে অপেক্ষা করুন...</string>
   <string name="exif_tag_name_copyright">কপিরাইট</string>
   <string name="exif_tag_name_location">অবস্থান</string>
@@ -334,5 +336,5 @@
   <string name="leaderboard_used">ব্যবহৃত</string>
   <string name="leaderboard_my_rank_button_text">আমার স্থান</string>
   <string name="license_step_title">মিডিয়ার লাইসেন্স</string>
-  <string name="menu_view_category_page">বিষয়শ্রেণী পাতা দেখুন</string>
+  <string name="menu_view_category_page">বিষয়শ্রেণীর পাতাটি দেখুন</string>
 </resources>

@@ -278,8 +278,8 @@
   <string name="provider_bookmarks_location">Nişani</string>
   <string name="no_categories_selected">Kategoriyê ke nêweçiniyê</string>
   <string name="nominate_for_deletion_done">Temam</string>
-  <string name="review_thanks_yes_button_text">Eya, çıra mebo</string>
-  <string name="review_thanks_no_button_text">Resımo bahdoyên</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">Eya, çıra mebo</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">Resımo bahdoyên</string>
   <string name="no_notification">Beyanatên şımayê nêwendeyi çıniyê</string>
   <string name="no_read_notification">Pêhesnayışê toyê wendışi çıniyê</string>
   <string name="menu_option_read">Wendışi bıvêne</string>

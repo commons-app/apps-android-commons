@@ -15,6 +15,7 @@
 * Shirayuki
 * Suyama
 * Takot
+* Tamaki Wakita
 * Tmv
 * Whym
 * Yusuke1109
@@ -429,14 +430,8 @@
   <string name="review_category_explanation">この画像は%1$s 件のコテゴリに分類されています。</string>
   <string name="review_spam_report_question">これは次の理由により該当しません。</string>
   <string name="review_c_violation_report_question">これは次の理由により著作権違反です。</string>
-  <string name="review_category_yes_button_text">カテゴリが間違っています</string>
-  <string name="review_category_no_button_text">問題なさそうです</string>
-  <string name="review_spam_yes_button_text">いいえ、該当しません</string>
-  <string name="review_spam_no_button_text">問題なさそうです</string>
-  <string name="review_copyright_yes_button_text">著作権違反です</string>
-  <string name="review_copyright_no_button_text">問題なさそうです</string>
-  <string name="review_thanks_yes_button_text">はい、すぐに処理しましょう</string>
-  <string name="review_thanks_no_button_text">次の画像</string>
+  <string name="review_thanks_yes_button_text">次の画像</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">次の画像</string>
   <string name="skip_image_explanation">このボタンをクリックすると、ウィキメディアコモンズに最近、投稿された別の写真をお見せします</string>
   <string name="review_image_explanation">ウィキメディアコモンズの質を高めるため、画像のレビューをお願いします。\nレビューの指針は4点あります。\n - これはコモンズの目的に合っていますか？\n - 著作権のルールをきちんと守っていますか？\n - カテゴリは正しいですか？\n - これらの条件をクリアしたら、投稿者に感謝を送信しませんか。</string>
   <string name="no_image">使用された画像はありません</string>

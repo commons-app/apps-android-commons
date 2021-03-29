@@ -129,7 +129,7 @@
   <string name="menu_about">Hakkında</string>
   <string name="about_license">Wikimedia Commons uygulaması, Wikimedia topluluğunun hibeleri ve gönüllüleri tarafından oluşturulan ve sürdürülen açık kaynaklı bir uygulamadır. Wikimedia Vakfı, uygulamanın oluşturulması, geliştirilmesi veya bakımı ile ilgili değildir.</string>
   <string name="about_improve">Hata raporları ve önerileri için yeni bir &lt;a href=\"%1$s\"&gt;GitHub sorunu&lt;/a&gt; oluşturun.</string>
-  <string name="about_privacy_policy">Gizlilik politikası</string>
+  <string name="about_privacy_policy">Gizlilik ilkesi</string>
   <string name="about_credits">Katkıda bulunanlar</string>
   <string name="title_activity_about">Hakkında</string>
   <string name="menu_feedback">Geri Bildirim Gönder (E-posta ile)</string>
@@ -435,14 +435,8 @@
   <string name="review_category_explanation">Bu resim %1$s kategorisindedir.</string>
   <string name="review_spam_report_question">Kapsam dışında çünkü</string>
   <string name="review_c_violation_report_question">Telif hakkı ihlalidir çünkü</string>
-  <string name="review_category_yes_button_text">Hayır, yanlış kategorize edilmiş</string>
-  <string name="review_category_no_button_text">İyi görünüyor</string>
-  <string name="review_spam_yes_button_text">Hayır, kapsam dışı</string>
-  <string name="review_spam_no_button_text">İyi görünüyor</string>
-  <string name="review_copyright_yes_button_text">Hayır, telif hakkı ihlali</string>
-  <string name="review_copyright_no_button_text">İyi görünüyor</string>
-  <string name="review_thanks_yes_button_text">Evet, neden olmasın</string>
-  <string name="review_thanks_no_button_text">Sonraki resim</string>
+  <string name="review_thanks_yes_button_text">Sonraki resim</string>
+  <string name="review_thanks_no_button_text">Evet, neden olmasın</string>
   <string name="skip_image_explanation">Bu butona tıkladığınızda Wikimedia Commons\'tan yeni yüklediğiniz başka bir resim elde edersiniz</string>
   <string name="review_image_explanation">Görüntüleri inceleyebilir ve Wikimedia Commons\'un kalitesini iyileştirebilirsiniz.\n  İncelemenin dört parametresi:\n  - Bu görüntü kapsam dahilinde mi?\n  - Bu resim telif hakkı kurallarına uyuyor mu?\n  - Bu resim doğru sınıflandırılmış mı?\n  - Her şey yolunda giderse katılımcıya da teşekkür edebilirsiniz.</string>
   <string name="no_image">Hiç resim kullanılmadı</string>

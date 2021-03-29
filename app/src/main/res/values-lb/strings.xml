@@ -278,13 +278,8 @@
   <string name="achievements_fetch_failed_ultimate_achievement">Dir hutt esou vill Kontributioune gemaach datt eise Berechnungssystem iwwerfuerdert ass. Dëst ass déi bescht Leeschtung.</string>
   <string name="nominate_for_deletion_done">Fäerdeg</string>
   <string name="review_category">Ass dëst richteg kategoriséiert?</string>
-  <string name="review_category_yes_button_text">Neen, falsch kategoriséiert</string>
-  <string name="review_category_no_button_text">Gesäit gutt aus</string>
-  <string name="review_spam_no_button_text">Gesäit gutt aus</string>
-  <string name="review_copyright_yes_button_text">Keng Violatioun vum Copyright</string>
-  <string name="review_copyright_no_button_text">Gesäit gutt aus</string>
-  <string name="review_thanks_yes_button_text">Jo, firwat net</string>
-  <string name="review_thanks_no_button_text">Nächst BILD</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">Jo, firwat net</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">Nächst BILD</string>
   <string name="no_image">Keng Biller benotzt</string>
   <string name="no_image_uploaded">Keng Biller eropgelueden</string>
   <string name="no_read_notification">Dir hutt keng net-geliest Notifikatiounen</string>

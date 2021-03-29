@@ -394,14 +394,8 @@
   <string name="review_category_explanation">Ez a kép a következő kategóriában van: %1$s.</string>
   <string name="review_spam_report_question">A kép nem megfelelő, mivel</string>
   <string name="review_c_violation_report_question">Megsérti a szerzői jogokat, mivel</string>
-  <string name="review_category_yes_button_text">Nem, rosszul kategorizált</string>
-  <string name="review_category_no_button_text">Jónak tűnik</string>
-  <string name="review_spam_yes_button_text">Nem megfelelő</string>
-  <string name="review_spam_no_button_text">Jónak tűnik</string>
-  <string name="review_copyright_yes_button_text">Nem, szerzői jogsértés</string>
-  <string name="review_copyright_no_button_text">Jónak tűnik</string>
-  <string name="review_thanks_yes_button_text">Miért ne?</string>
-  <string name="review_thanks_no_button_text">Következő kép</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">Miért ne?</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">Következő kép</string>
   <string name="skip_image_explanation">Erre a gombra kattintva egy másik mostanában feltöltött képet kaphatsz a Wikimedia Commonsból.</string>
   <string name="review_image_explanation">Átnézheted a képeket, ezzel növelve a Wikimedia Commons minőségét.\nAz átnézés négy szempontja a következő:\n- Megfelelő a kép?\n- Megfelel a szerzői jogvédelmi szabályoknak?\n- Helyesen van kategorizálva?\n- Ha minden jól megy, meg is köszönheted a közreműködőnek.</string>
   <string name="no_image">Nincs felhasznált kép</string>

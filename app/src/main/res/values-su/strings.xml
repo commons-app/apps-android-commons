@@ -363,14 +363,8 @@
   <string name="review_category_explanation">Ieu gambar téh dina kategori %1$s.</string>
   <string name="review_spam_report_question">Ieu di luar wengkuan lantaran kieu</string>
   <string name="review_c_violation_report_question">Ieu ngalanggar hak cipta lantaran kieu</string>
-  <string name="review_category_yes_button_text">Teu, salah dikategorikeun</string>
-  <string name="review_category_no_button_text">Katémbongna mah alus</string>
-  <string name="review_spam_yes_button_text">Teu, di luar wengkuan</string>
-  <string name="review_spam_no_button_text">Katémbongna mah alus</string>
-  <string name="review_copyright_yes_button_text">Teu, palanggaran hak cipta</string>
-  <string name="review_copyright_no_button_text">Katémbongna mah alus</string>
-  <string name="review_thanks_yes_button_text">Nya, hayu</string>
-  <string name="review_thanks_no_button_text">Gambar salajengna</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">Nya, hayu</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">Gambar salajengna</string>
   <string name="skip_image_explanation">Ngaklik ieu tumbul bakal méré anjeun gambar unjalan kiwari séjén ti Wikimédia Commons</string>
   <string name="no_image">Taya gambar dipaké</string>
   <string name="no_image_reverted">Taya gambar nu dibalikkeun</string>

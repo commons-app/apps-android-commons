@@ -333,8 +333,8 @@
   <string name="deletion_reason_not_interesting">Λυπάμαι αυτή η εικόνα δεν έχει ενδιαφέρον για εγκυκλοπαίδεια</string>
   <string name="uploaded_by_myself" fuzzy="true">Φορτώθηκε από μένα σε</string>
   <string name="no_categories_selected_warning_desc" fuzzy="true">Εικόνες χωρίς κατηγορίες χρησιμοποιούνται σπάνια. Θέλετε πράγματι να στείλετε δίχως να επιλέξετε κατηγορίες?</string>
-  <string name="review_thanks_yes_button_text">Ναι, γιατί όχι</string>
-  <string name="review_thanks_no_button_text">Επόμενη εικόνα</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">Ναι, γιατί όχι</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">Επόμενη εικόνα</string>
   <string name="no_image">Δεν χρησιμοποιούνται εικόνες</string>
   <string name="no_image_uploaded">Δεν έχουν ανεβεί εικόνες</string>
   <string name="no_notification">Δεν έχετε αδιάβαστες ενημερώσεις</string>

@@ -407,14 +407,8 @@
   <string name="review_category_explanation">Esta imaxe ta baxo %1$s categoríes.</string>
   <string name="review_spam_report_question">Esto ta fora de la tema porque ye</string>
   <string name="review_c_violation_report_question">Ye un frayamientu de derechos d\'autor porque ye</string>
-  <string name="review_category_yes_button_text">Non, mal categorizao</string>
-  <string name="review_category_no_button_text">Paez bien</string>
-  <string name="review_spam_yes_button_text">Non, fora de contestu</string>
-  <string name="review_spam_no_button_text">Paez bien</string>
-  <string name="review_copyright_yes_button_text">Non, vulneración de derechos d\'autor</string>
-  <string name="review_copyright_no_button_text">Paez bien</string>
-  <string name="review_thanks_yes_button_text">Sí, por qué non</string>
-  <string name="review_thanks_no_button_text">Imaxe siguiente</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">Sí, por qué non</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">Imaxe siguiente</string>
   <string name="skip_image_explanation">Faciendo clic nesti botón recibirás otra imaxe de Wikimedia Commons xubida apocayá</string>
   <string name="review_image_explanation">Puedes revisar imaxes y ameyorar la calidá de Wikimedia Commons.\nLos cuatro parámetros de revisión son: \n - ¿Ésta imaxe tien rellación col contestu? \n - ¿La imaxe cumple les riegles de copyright? \n - ¿La imaxe ta correchamente categorizada? \n - Si too ta correuto, tamién pues dar les gracies al collaborador.</string>
   <string name="no_image">Nun s\'usó nenguna imaxe</string>

@@ -439,14 +439,8 @@
   <string name="review_category_explanation">Це зображення належить до наступних категорій: %1$s</string>
   <string name="review_spam_report_question">Файл недоречний для Вікісховища, тому що</string>
   <string name="review_c_violation_report_question">Це порушення авторських прав, тому що</string>
-  <string name="review_category_yes_button_text">Ні, хибно категоризовано</string>
-  <string name="review_category_no_button_text">Виглядає добре</string>
-  <string name="review_spam_yes_button_text">Ні, не доречно</string>
-  <string name="review_spam_no_button_text">Виглядає добре</string>
-  <string name="review_copyright_yes_button_text">Ні, це порушення авторського права</string>
-  <string name="review_copyright_no_button_text">Виглядає добре</string>
-  <string name="review_thanks_yes_button_text">Так, чому б і ні</string>
-  <string name="review_thanks_no_button_text">Наступне зображення</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">Так, чому б і ні</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">Наступне зображення</string>
   <string name="skip_image_explanation">Натискання цієї кнопки дасть вам інше недавно завантажене зображення з Вікісховища</string>
   <string name="review_image_explanation">Ви можете перевіряти зображення і покращувати якість Вікісховища.\nЄ чотири параметри перевірки:\n— Чи зображення відповідає призначенню Вікісховища?\n— Чи зображення відповідає правилам авторського права?\n— Чи зображення коректно категоризоване?\n— Якщо все добре, то ви можете подякувати завантажувачу.</string>
   <string name="no_image">Використаних зображень немає</string>

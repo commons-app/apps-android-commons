@@ -11,6 +11,7 @@
 * Kwj2772
 * Naramoksu
 * Nuevo Paso
+* Ohw0zuz4
 * Revi
 * Ykhwong
 * YuzaTea
@@ -401,8 +402,8 @@
   <string name="send_thank_failure_title">감사 표현 보내기: 실패</string>
   <string name="review_thanks">기여자에게 감사를 표하시겠습니까?</string>
   <string name="review_category_explanation">이 이미지는 %1$s 분류에 속해 있습니다.</string>
-  <string name="review_thanks_yes_button_text">예</string>
-  <string name="review_thanks_no_button_text">다음 이미지</string>
+  <string name="review_thanks_yes_button_text">다음 이미지</string>
+  <string name="review_thanks_no_button_text">예</string>
   <string name="skip_image_explanation">이 버튼을 클릭하면 위키미디어 공용으로부터 최근 업로드된 다른 이미지를 제공합니다</string>
   <string name="review_image_explanation">이미지를 검토하고 위키미디어 공용의 품질을 개선할 수 있습니다.\n 4가지 검토 변수가 있습니다:\n - 이 이미지가 범위 내에 있는가? \n - 이 이미지가 저작권 규정을 준수하고 있는가? \n - 이 이미지가 올바르게 분류되어 있는가? \n - 모든 것이 문제 없다면 기여자에게 감사를 표할 수도 있습니다.</string>
   <string name="no_notification">읽지 않은 알림이 없습니다</string>
