@@ -27,11 +27,6 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
   private MediaDetailPagerFragment mediaDetails;
   private CategoriesMediaFragment listFragment;
 
-  /**
-   * bool openMediaDetails is true when a media detail can be opened.
-   */
-  private boolean openMediaDetails = true;
-
   @BindView(R.id.explore_container)
   FrameLayout container;
 
@@ -81,7 +76,7 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
           .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
           .commit();
       getChildFragmentManager().executePendingTransactions();
-    }else if (!fragment.isAdded() && otherFragment != null ) {
+    } else if (!fragment.isAdded() && otherFragment != null ) {
       getChildFragmentManager()
           .beginTransaction()
           .hide(otherFragment)
@@ -115,11 +110,6 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
   @Override
   public void onMediaClicked(int position) {
 
-    if(!openMediaDetails) {
-      // do not open Media detail if openMediaDetails is false
-      return;
-    }
-    openMediaDetails = false;
     container.setVisibility(View.VISIBLE);
     ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.GONE);
     mediaDetails = new MediaDetailPagerFragment(false, true);
@@ -127,13 +117,6 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
     ((ExploreFragment) getParentFragment()).setScroll(false);
     setFragment(mediaDetails, listFragment);
 
-    // Handler which re-enables the click action on Media
-    new Handler().postDelayed(new Runnable() {
-      @Override
-      public void run() {
-        openMediaDetails = true;
-      }
-    }, 2000);
   }
 
   /**
