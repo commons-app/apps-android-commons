@@ -2,6 +2,7 @@ package fr.free.nrw.commons.explore;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,9 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
 
   private MediaDetailPagerFragment mediaDetails;
   private CategoriesMediaFragment listFragment;
+
+  // true when an item can be clicked.
+  private boolean openMediaDetail=true;
 
   @BindView(R.id.explore_container)
   FrameLayout container;
@@ -113,13 +117,27 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
 
   @Override
   public void onMediaClicked(int position) {
-    Log.d("deneme8","on media clicked");
+
+    if(!openMediaDetail) {
+      // do not open Media detail if openMediaDetail is false
+      return;
+    }
+    openMediaDetail=false;
+    Log.d("deneme8", "on media clicked");
     container.setVisibility(View.VISIBLE);
-    ((ExploreFragment)getParentFragment()).tabLayout.setVisibility(View.GONE);
+    ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.GONE);
     mediaDetails = new MediaDetailPagerFragment(false, true);
     mediaDetails.showImage(position);
     ((ExploreFragment) getParentFragment()).setScroll(false);
     setFragment(mediaDetails, listFragment);
+
+    // Handler which re-enables the click action on Media
+    new Handler().postDelayed(new Runnable() {
+      @Override
+      public void run() {
+        openMediaDetail = true;
+      }
+    }, 2000);
   }
 
   /**
