@@ -3,7 +3,6 @@ package fr.free.nrw.commons.explore;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +10,16 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
-import fr.free.nrw.commons.contributions.ContributionsListFragment;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.navtab.NavTab;
-import fr.free.nrw.commons.settings.SettingsFragment;
 
 public class ExploreListRootFragment extends CommonsDaggerSupportFragment implements
     MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
@@ -32,8 +27,10 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
   private MediaDetailPagerFragment mediaDetails;
   private CategoriesMediaFragment listFragment;
 
-  // true when an item can be clicked.
-  private boolean openMediaDetail=true;
+  /**
+   * bool openMediaDetails is true when a media detail can be opened.
+   */
+  private boolean openMediaDetails = true;
 
   @BindView(R.id.explore_container)
   FrameLayout container;
@@ -118,12 +115,11 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
   @Override
   public void onMediaClicked(int position) {
 
-    if(!openMediaDetail) {
-      // do not open Media detail if openMediaDetail is false
+    if(!openMediaDetails) {
+      // do not open Media detail if openMediaDetails is false
       return;
     }
-    openMediaDetail=false;
-    Log.d("deneme8", "on media clicked");
+    openMediaDetails = false;
     container.setVisibility(View.VISIBLE);
     ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.GONE);
     mediaDetails = new MediaDetailPagerFragment(false, true);
@@ -135,7 +131,7 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
     new Handler().postDelayed(new Runnable() {
       @Override
       public void run() {
-        openMediaDetail = true;
+        openMediaDetails = true;
       }
     }, 2000);
   }
