@@ -112,20 +112,20 @@
               android:layout_marginStart="@dimen/activity_margin_horizontal"/>
 
             <com.dinuscxj.progressbar.CircleProgressBar
+              android:id="@+id/images_uploaded_progressbar"
               android:layout_width="@dimen/dimen_40"
               android:layout_height="@dimen/dimen_40"
-              android:layout_alignParentRight="true"
               android:layout_alignParentEnd="true"
+              android:layout_alignParentRight="true"
               android:layout_marginEnd="@dimen/large_gap"
               android:layout_marginRight="@dimen/large_gap"
-              android:id="@+id/images_uploaded_progressbar"
               android:progress="50"
-              app:progress_text_size="@dimen/progressbar_text"
               app:progress_end_color="#8C8B98"
               app:progress_start_color="#3A3381"
               app:progress_stroke_width="@dimen/progressbar_stroke"
-              app:progress_text_format_pattern="573/110"
               app:progress_text_color="@color/secondaryColor"
+              app:progress_text_format_pattern="573/110"
+              app:progress_text_size="@dimen/progressbar_text"
               app:style="solid_line" />
 
           </RelativeLayout>

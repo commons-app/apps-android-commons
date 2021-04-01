@@ -2,6 +2,7 @@ package fr.free.nrw.commons.profile.achievements;
 
 import android.accounts.Account;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.FileProvider;
@@ -36,7 +38,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.dinuscxj.progressbar.CircleProgressBar;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -46,12 +47,6 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Objects;
-import javax.inject.Inject;
-import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
 
 /**
@@ -61,6 +56,8 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
     private static final double BADGE_IMAGE_WIDTH_RATIO = 0.4;
     private static final double BADGE_IMAGE_HEIGHT_RATIO = 0.3;
+    private static final String IMAGES_UPLOADED_URL = "https://commons.wikimedia.org/wiki/Commons:Project_scope";
+
 
     private LevelController.LevelInfo levelInfo;
 
@@ -456,43 +453,43 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.images_upload_info)
     public void showUploadInfo(){
-        launchAlert(getResources().getString(R.string.images_uploaded)
+        launchAlertWithHelpLink(getResources().getString(R.string.images_uploaded)
                 ,getResources().getString(R.string.images_uploaded_explanation));
     }
 
     @OnClick(R.id.images_reverted_info)
     public void showRevertedInfo(){
-        launchAlert(getResources().getString(R.string.image_reverts)
+        launchAlertWithHelpLink(getResources().getString(R.string.image_reverts)
                 ,getResources().getString(R.string.images_reverted_explanation));
     }
 
     @OnClick(R.id.images_used_by_wiki_info)
     public void showUsedByWikiInfo(){
-        launchAlert(getResources().getString(R.string.images_used_by_wiki)
+        launchAlertWithHelpLink(getResources().getString(R.string.images_used_by_wiki)
                 ,getResources().getString(R.string.images_used_explanation));
     }
 
     @OnClick(R.id.images_nearby_info)
     public void showImagesViaNearbyInfo(){
-        launchAlert(getResources().getString(R.string.statistics_wikidata_edits)
+        launchAlertWithHelpLink(getResources().getString(R.string.statistics_wikidata_edits)
                 ,getResources().getString(R.string.images_via_nearby_explanation));
     }
 
     @OnClick(R.id.images_featured_info)
     public void showFeaturedImagesInfo(){
-        launchAlert(getResources().getString(R.string.statistics_featured)
+        launchAlertWithHelpLink(getResources().getString(R.string.statistics_featured)
                 ,getResources().getString(R.string.images_featured_explanation));
     }
 
     @OnClick(R.id.thanks_received_info)
     public void showThanksReceivedInfo(){
-        launchAlert(getResources().getString(R.string.statistics_thanks)
+        launchAlertWithHelpLink(getResources().getString(R.string.statistics_thanks)
                 ,getResources().getString(R.string.thanks_received_explanation));
     }
 
     @OnClick(R.id.quality_images_info)
     public void showQualityImagesInfo() {
-        launchAlert(getResources().getString(R.string.statistics_quality)
+        launchAlertWithHelpLink(getResources().getString(R.string.statistics_quality)
             , getResources().getString(R.string.quality_images_info));
     }
 
@@ -509,6 +506,18 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
                 .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
                 .create()
                 .show();
+    }
+    private void launchAlertWithHelpLink(String title, String message){
+        new Builder(getActivity())
+            .setTitle(title)
+            .setMessage(message)
+            .setCancelable(true)
+            .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+            .setNegativeButton(R.string.Help_Link_Read, (dialog ,id) ->{
+                Toast.makeText(requireActivity(),"Replace this with a link",Toast.LENGTH_LONG).show();
+            })
+            .create()
+            .show();
     }
 
     /**
