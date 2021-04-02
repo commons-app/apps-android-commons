@@ -164,28 +164,17 @@ class UploadMediaPresenterTest {
     }
 
     /**
-     * Test fetch previous image title when there was one
+     * Test fetch image title when there was one
      */
     @Test
-    fun fetchPreviousImageAndTitleTestPositive() {
+    fun fetchImageAndTitleTest() {
         whenever(repository.uploads).thenReturn(listOf(uploadItem))
-        whenever(repository.getPreviousUploadItem(ArgumentMatchers.anyInt()))
+        whenever(repository.getUploadItem(ArgumentMatchers.anyInt()))
             .thenReturn(uploadItem)
         whenever(uploadItem.uploadMediaDetails).thenReturn(listOf())
 
-        uploadMediaPresenter.fetchPreviousTitleAndDescription(0)
+        uploadMediaPresenter.fetchTitleAndDescription(0)
         verify(view).updateMediaDetails(ArgumentMatchers.any())
-    }
-
-    /**
-     * Test fetch previous image title when there was none
-     */
-    @Test
-    fun fetchPreviousImageAndTitleTestNegative() {
-        whenever(repository.getPreviousUploadItem(ArgumentMatchers.anyInt()))
-            .thenReturn(null)
-        uploadMediaPresenter.fetchPreviousTitleAndDescription(0)
-        verify(view).showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
     }
 
     /**
