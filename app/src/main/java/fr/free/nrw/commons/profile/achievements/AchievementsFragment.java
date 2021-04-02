@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -21,11 +22,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
+import fr.free.nrw.commons.BuildConfig;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -56,7 +60,15 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
     private static final double BADGE_IMAGE_WIDTH_RATIO = 0.4;
     private static final double BADGE_IMAGE_HEIGHT_RATIO = 0.3;
+
+    // Help link URLs
     private static final String IMAGES_UPLOADED_URL = "https://commons.wikimedia.org/wiki/Commons:Project_scope";
+    private static final String IMAGES_REVERT_URL = "https://commons.wikimedia.org/wiki/Commons:Deletion_policy#Reasons_for_deletion";
+    private static final String IMAGES_USED_URL = "https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images";
+    private static final String IMAGES_NEARBY_PLACES_URL = "https://www.wikidata.org/wiki/Property:P18";
+    private static final String IMAGES_FEATURED_URL = "https://commons.wikimedia.org/wiki/Commons:Featured_pictures";
+    private static final String QUALITY_IMAGE_URL = "https://commons.wikimedia.org/wiki/Commons:Quality_images";
+    private static final String THANKS_URL = "https://www.mediawiki.org/wiki/Extension:Thanks";
 
 
     private LevelController.LevelInfo levelInfo;
@@ -454,43 +466,50 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     @OnClick(R.id.images_upload_info)
     public void showUploadInfo(){
         launchAlertWithHelpLink(getResources().getString(R.string.images_uploaded)
-                ,getResources().getString(R.string.images_uploaded_explanation));
+                ,getResources().getString(R.string.images_uploaded_explanation)
+            ,IMAGES_UPLOADED_URL);
     }
 
     @OnClick(R.id.images_reverted_info)
     public void showRevertedInfo(){
         launchAlertWithHelpLink(getResources().getString(R.string.image_reverts)
-                ,getResources().getString(R.string.images_reverted_explanation));
+                ,getResources().getString(R.string.images_reverted_explanation)
+            ,IMAGES_REVERT_URL);
     }
 
     @OnClick(R.id.images_used_by_wiki_info)
     public void showUsedByWikiInfo(){
         launchAlertWithHelpLink(getResources().getString(R.string.images_used_by_wiki)
-                ,getResources().getString(R.string.images_used_explanation));
+                ,getResources().getString(R.string.images_used_explanation)
+            ,IMAGES_USED_URL);
     }
 
     @OnClick(R.id.images_nearby_info)
     public void showImagesViaNearbyInfo(){
         launchAlertWithHelpLink(getResources().getString(R.string.statistics_wikidata_edits)
-                ,getResources().getString(R.string.images_via_nearby_explanation));
+                ,getResources().getString(R.string.images_via_nearby_explanation)
+            ,IMAGES_NEARBY_PLACES_URL);
     }
 
     @OnClick(R.id.images_featured_info)
     public void showFeaturedImagesInfo(){
         launchAlertWithHelpLink(getResources().getString(R.string.statistics_featured)
-                ,getResources().getString(R.string.images_featured_explanation));
+                ,getResources().getString(R.string.images_featured_explanation)
+            , IMAGES_FEATURED_URL);
     }
 
     @OnClick(R.id.thanks_received_info)
     public void showThanksReceivedInfo(){
         launchAlertWithHelpLink(getResources().getString(R.string.statistics_thanks)
-                ,getResources().getString(R.string.thanks_received_explanation));
+                ,getResources().getString(R.string.thanks_received_explanation)
+            ,THANKS_URL);
     }
 
     @OnClick(R.id.quality_images_info)
     public void showQualityImagesInfo() {
         launchAlertWithHelpLink(getResources().getString(R.string.statistics_quality)
-            , getResources().getString(R.string.quality_images_info));
+            , getResources().getString(R.string.quality_images_info)
+            ,QUALITY_IMAGE_URL);
     }
 
     /**
@@ -507,14 +526,15 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
                 .create()
                 .show();
     }
-    private void launchAlertWithHelpLink(String title, String message){
+    // Launch Alert with a READ MORE button and clicking it open a custom webpage
+    private void launchAlertWithHelpLink(String title, String message, String helpLinkUrl){
         new Builder(getActivity())
             .setTitle(title)
             .setMessage(message)
             .setCancelable(true)
             .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
             .setNegativeButton(R.string.Help_Link_Read, (dialog ,id) ->{
-                Toast.makeText(requireActivity(),"Replace this with a link",Toast.LENGTH_LONG).show();
+                Utils.handleWebUrl(requireContext(), Uri.parse(helpLinkUrl));;
             })
             .create()
             .show();
