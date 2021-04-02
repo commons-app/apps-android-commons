@@ -84,6 +84,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private Place place;
 
     private boolean isExpanded = true;
+    private boolean showNearbyFound;
+
+    private Place nearbyPlace;
+    private UploadItem uploadItem;
+
 
     private UploadMediaDetailFragmentCallback callback;
 
@@ -232,13 +237,30 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     /**
-     * Shows popup if any nearby location needing pictures matches uploadable picture's GPS location
+     * Sets variables to Show popup if any nearby location needing pictures matches uploadable picture's GPS location
      * @param uploadItem
      * @param place
      */
-    @SuppressLint("StringFormatInvalid")
     @Override
     public void onNearbyPlaceFound(UploadItem uploadItem, Place place) {
+        nearbyPlace = place;
+        this.uploadItem = uploadItem;
+        showNearbyFound = true;
+        if(showNearbyFound && callback.getIndexInViewFlipper(this) == 0) {
+            showNearbyPlaceFound(nearbyPlace);
+            showNearbyFound = false;
+        }
+    }
+
+    /**
+     * Shows nearby place found popup
+     * @param place
+     */
+    @SuppressLint("StringFormatInvalid")
+    private void showNearbyPlaceFound(Place place) {
+        final View customLayout = getLayoutInflater().inflate(R.layout.custom_nearby_found, null);
+        ImageView nearbyFoundImage = customLayout.findViewById(R.id.nearbyItemImage);
+        nearbyFoundImage.setImageURI(uploadItem.getMediaUri());
         DialogUtil.showAlertDialog(getActivity(),
             getString(R.string.upload_nearby_place_found_title),
             String.format(Locale.getDefault(),
@@ -249,7 +271,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             },
             () -> {
 
-            });
+            },
+            customLayout, true);
     }
 
     @Override
@@ -262,10 +285,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
     }
 
+    /**
+     * This method gets called whenever the next/previous button is pressed
+     */
     @Override
     protected void onBecameVisible() {
         super.onBecameVisible();
         presenter.fetchTitleAndDescription(callback.getIndexInViewFlipper(this));
+        if(showNearbyFound) {
+            showNearbyPlaceFound(nearbyPlace);
+            showNearbyFound = false;
+        }
     }
 
     @Override
