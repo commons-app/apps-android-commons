@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.wikipedia.language.AppLanguageLookUpTable;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
@@ -144,20 +145,18 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      * to remember later
      */
     private void prepareLanguages() {
-        List<String> languageNamesList = new ArrayList<>();
-        List<String> languageCodesList = new ArrayList<>();
-        List<Language> languages = getLanguagesSupportedByDevice();
+        List<String> languageNamesList;
+        List<String> languageCodesList;
+        AppLanguageLookUpTable appLanguageLookUpTable = new AppLanguageLookUpTable(getContext());
+        languageNamesList = appLanguageLookUpTable.getLocalizedNames();
+        languageCodesList = appLanguageLookUpTable.getCodes();
+        List<String> languageNameWithCodeList = new ArrayList<>();
 
-        for(Language language: languages) {
-            // Go through all languages and add them to lists
-            if(!languageCodesList.contains(language.getLocale().getLanguage())) {
-                // This if prevents us from adding same language twice
-                languageNamesList.add(language.getLocale().getDisplayName());
-                languageCodesList.add(language.getLocale().getLanguage());
-            }
+        for (int i = 0; i < languageNamesList.size(); i++) {
+            languageNameWithCodeList.add(languageNamesList.get(i) + "[" + languageCodesList.get(i) + "]");
         }
 
-        CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[0]);
+        CharSequence[] languageNames = languageNameWithCodeList.toArray(new CharSequence[0]);
         CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[0]);
         // Add all languages and languages codes to lists preference as pair
         langListPreference.setEntries(languageNames);
@@ -165,7 +164,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         // Gets current language code from shared preferences
         String languageCode = getCurrentLanguageCode();
-        if (languageCode.equals("")){
+        if (languageCode.equals("")) {
             // If current language code is empty, means none selected by user yet so use phone local
             langListPreference.setValue(Locale.getDefault().getLanguage());
         } else {
@@ -186,18 +185,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     private String getCurrentLanguageCode() {
         return defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE, "");
-    }
-
-    private List<Language> getLanguagesSupportedByDevice() {
-        List<Language> languages = new ArrayList<>();
-        Locale[] localesArray = Locale.getAvailableLocales();
-        for (Locale locale : localesArray) {
-            languages.add(new Language(locale));
-        }
-
-        Collections.sort(languages, (language, t1) -> language.getLocale().getDisplayName()
-                .compareTo(t1.getLocale().getDisplayName()));
-        return languages;
     }
 
     /**
