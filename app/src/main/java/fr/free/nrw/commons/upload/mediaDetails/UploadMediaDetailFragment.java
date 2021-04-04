@@ -84,8 +84,15 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private Place place;
 
     private boolean isExpanded = true;
+    /**
+     * showNearbyFound will be true, if any nearby location found that needs pictures and the nearby popup is yet to be shown
+     * Used to show and check if the nearby found popup is already shown
+     */
     private boolean showNearbyFound;
 
+    /**
+     * nearbyPlace holds the detail of nearby place that need pictures, if any found
+     */
     private Place nearbyPlace;
     private UploadItem uploadItem;
 
@@ -246,7 +253,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         nearbyPlace = place;
         this.uploadItem = uploadItem;
         showNearbyFound = true;
-        if(showNearbyFound && callback.getIndexInViewFlipper(this) == 0) {
+        if(callback.getIndexInViewFlipper(this) == 0) {
             showNearbyPlaceFound(nearbyPlace);
             showNearbyFound = false;
         }
@@ -256,7 +263,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * Shows nearby place found popup
      * @param place
      */
-    @SuppressLint("StringFormatInvalid")
+    @SuppressLint("StringFormatInvalid") // To avoid the unwanted lint warning that string 'upload_nearby_place_found_description' is not of a valid format
     private void showNearbyPlaceFound(Place place) {
         final View customLayout = getLayoutInflater().inflate(R.layout.custom_nearby_found, null);
         ImageView nearbyFoundImage = customLayout.findViewById(R.id.nearbyItemImage);
