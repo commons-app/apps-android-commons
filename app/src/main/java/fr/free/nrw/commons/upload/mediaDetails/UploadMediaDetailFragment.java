@@ -84,6 +84,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private Place place;
 
     private boolean isExpanded = true;
+
     /**
      * showNearbyFound will be true, if any nearby location found that needs pictures and the nearby popup is yet to be shown
      * Used to show and check if the nearby found popup is already shown
