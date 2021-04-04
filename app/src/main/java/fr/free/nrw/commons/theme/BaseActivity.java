@@ -28,7 +28,8 @@ public abstract class BaseActivity extends CommonsDaggerAppCompatActivity {
         super.onCreate(savedInstanceState);
         wasPreviouslyDarkTheme = systemThemeUtils.isDeviceInNightMode();
         setTheme(wasPreviouslyDarkTheme ? R.style.DarkAppTheme : R.style.LightAppTheme);
-        float fontScale = android.provider.Settings.System.getFloat(getBaseContext().getContentResolver(),android.provider.Settings.System.FONT_SCALE, 1f);
+        float fontScale = android.provider.Settings.System.getFloat(getBaseContext().getContentResolver()
+                , android.provider.Settings.System.FONT_SCALE, 1f);
         adjustFontScale(getResources().getConfiguration(),fontScale);
     }
 
