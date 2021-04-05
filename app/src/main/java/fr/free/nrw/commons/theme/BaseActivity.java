@@ -56,8 +56,8 @@ public abstract class BaseActivity extends CommonsDaggerAppCompatActivity {
      */
     public void adjustFontScale(Configuration configuration, float scale) {
         configuration.fontScale = scale;
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        final DisplayMetrics metrics = getResources().getDisplayMetrics();
+        final WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         wm.getDefaultDisplay().getMetrics(metrics);
         metrics.scaledDensity = configuration.fontScale * metrics.density;
         getBaseContext().getResources().updateConfiguration(configuration, metrics);
