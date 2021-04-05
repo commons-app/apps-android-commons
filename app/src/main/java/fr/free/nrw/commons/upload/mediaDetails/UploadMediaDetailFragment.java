@@ -85,6 +85,19 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     private boolean isExpanded = true;
 
+    /**
+     * showNearbyFound will be true, if any nearby location found that needs pictures and the nearby popup is yet to be shown
+     * Used to show and check if the nearby found popup is already shown
+     */
+    private boolean showNearbyFound;
+
+    /**
+     * nearbyPlace holds the detail of nearby place that need pictures, if any found
+     */
+    private Place nearbyPlace;
+    private UploadItem uploadItem;
+
+
     private UploadMediaDetailFragmentCallback callback;
 
     public void setCallback(UploadMediaDetailFragmentCallback callback) {
@@ -232,13 +245,30 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     /**
-     * Shows popup if any nearby location needing pictures matches uploadable picture's GPS location
+     * Sets variables to Show popup if any nearby location needing pictures matches uploadable picture's GPS location
      * @param uploadItem
      * @param place
      */
-    @SuppressLint("StringFormatInvalid")
     @Override
     public void onNearbyPlaceFound(UploadItem uploadItem, Place place) {
+        nearbyPlace = place;
+        this.uploadItem = uploadItem;
+        showNearbyFound = true;
+        if(callback.getIndexInViewFlipper(this) == 0) {
+            showNearbyPlaceFound(nearbyPlace);
+            showNearbyFound = false;
+        }
+    }
+
+    /**
+     * Shows nearby place found popup
+     * @param place
+     */
+    @SuppressLint("StringFormatInvalid") // To avoid the unwanted lint warning that string 'upload_nearby_place_found_description' is not of a valid format
+    private void showNearbyPlaceFound(Place place) {
+        final View customLayout = getLayoutInflater().inflate(R.layout.custom_nearby_found, null);
+        ImageView nearbyFoundImage = customLayout.findViewById(R.id.nearbyItemImage);
+        nearbyFoundImage.setImageURI(uploadItem.getMediaUri());
         DialogUtil.showAlertDialog(getActivity(),
             getString(R.string.upload_nearby_place_found_title),
             String.format(Locale.getDefault(),
@@ -249,7 +279,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             },
             () -> {
 
-            });
+            },
+            customLayout, true);
     }
 
     @Override
@@ -262,10 +293,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
     }
 
+    /**
+     * This method gets called whenever the next/previous button is pressed
+     */
     @Override
     protected void onBecameVisible() {
         super.onBecameVisible();
         presenter.fetchTitleAndDescription(callback.getIndexInViewFlipper(this));
+        if(showNearbyFound) {
+            showNearbyPlaceFound(nearbyPlace);
+            showNearbyFound = false;
+        }
     }
 
     @Override
