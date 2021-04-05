@@ -38,6 +38,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">Comenzando las subidas</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Iniciando %1$d carga</item>
     <item quantity="other">Iniciando %1$d cargas</item>
@@ -77,16 +78,17 @@
   <string name="logging_in_message">Espera un momento…</string>
   <string name="login_success">Inicio de sesión exitoso</string>
   <string name="login_failed">Falló el inicio de sesión</string>
-  <string name="upload_failed">No se encontró el archivo. Prueba con otro.</string>
-  <string name="authentication_failed">La autenticación ha fallado, prueba a acceder otra vez</string>
+  <string name="upload_failed">No se encontró el archivo. Por favor prueba con otro.</string>
+  <string name="authentication_failed">La autenticación ha fallado, por favor prueba a acceder otra vez</string>
   <string name="uploading_started">¡Subiendo!</string>
   <string name="uploading_queued">Carga en cola (modo de conexión limitada activado)</string>
-  <string name="upload_completed_notification_title">¡Se ha cargado %1$s!</string>
+  <string name="upload_completed_notification_title">¡Se ha subido %1$s!</string>
   <string name="upload_completed_notification_text">Pulsa para ver tu subida</string>
   <string name="upload_progress_notification_title_start">Empezando la subida de %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Subiendo %1$s</string>
   <string name="upload_progress_notification_title_finishing">Finalizando la subida de %1$s</string>
   <string name="upload_failed_notification_title">Falló la carga de %1$s</string>
+  <string name="upload_paused_notification_title">Falló la subida de %1$s</string>
   <string name="upload_failed_notification_subtitle">Toca para ver</string>
   <string name="upload_paused_notification_subtitle">Tocar para ver</string>
   <string name="title_activity_contributions">Mis subidas recientes</string>
@@ -99,6 +101,7 @@
   <string name="menu_nearby">Cercanos</string>
   <string name="provider_contributions">Mis subidas</string>
   <string name="menu_share">Compartir</string>
+  <string name="menu_view_file_page">Ver página del archivo</string>
   <string name="share_title_hint">Leyenda (requerido)</string>
   <string name="add_caption_toast">Por favor, proporciona un título para este archivo</string>
   <string name="share_description_hint">Descripción</string>
@@ -113,11 +116,15 @@
   <string name="provider_modifications">Modificaciones</string>
   <string name="menu_upload_single">Subir</string>
   <string name="categories_search_text_hint">Buscar categorías</string>
+  <string name="depicts_search_text_hint">Buscar elementos que tu archivo multimedia representa (montaña, Taj Mahal, etc.)</string>
   <string name="menu_save_categories">Guardar</string>
   <string name="refresh_button">Actualizar</string>
   <string name="display_list_button">Lista</string>
   <string name="contributions_subtitle_zero">(No hay subidas aún)</string>
   <string name="categories_not_found">No se encontraron categorías que coincidieran con %1$s</string>
+  <string name="depictions_not_found">No se encontraron elementos de Wikidata que coincidieran con %1$s</string>
+  <string name="no_child_classes">%1$s no tiene clases hijas</string>
+  <string name="no_parent_classes">%1$s no tiene clases padres</string>
   <string name="categories_skip_explanation">Añade categorías para hacer que tus imágenes sean más fáciles de encontrar en Wikimedia Commons.\nComienza a escribir para añadir categorías.</string>
   <string name="categories_activity_title">Categorías</string>
   <string name="title_activity_settings">Ajustes</string>
@@ -154,28 +161,29 @@
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="tutorial_1_text">Wikimedia Commons aloja la mayoría de las imágenes utilizadas en Wikipedia.</string>
   <string name="tutorial_1_subtext">¡Tus imágenes ayudan a instruir a personas de todo el mundo!</string>
-  <string name="tutorial_2_text">Carga únicamente imágenes capturadas o creadas por ti.</string>
+  <string name="tutorial_2_text">Por favor sube únicamente imágenes capturadas o creadas por ti.</string>
   <string name="tutorial_2_subtext_1">Naturaleza (flores, animales, montañas)</string>
   <string name="tutorial_2_subtext_2">Objetos utilitarios (bicicletas, estaciones de tren)</string>
   <string name="tutorial_2_subtext_3">Gente famosa (tu regente, algún atleta que hayas conocido…)</string>
-  <string name="tutorial_3_text">NO cargues:</string>
+  <string name="tutorial_3_text">Por favor NO subas:</string>
   <string name="tutorial_3_subtext_1">Autorretratos o fotos de tus amigos</string>
   <string name="tutorial_3_subtext_2">Imágenes descargadas de Internet</string>
   <string name="tutorial_3_subtext_3">Capturas de pantalla de aplicaciones privativas</string>
-  <string name="tutorial_4_text">Ejemplo de carga:</string>
+  <string name="tutorial_4_text">Ejemplo de subida:</string>
   <string name="tutorial_4_subtext_1">Título: Ópera de Sídney</string>
   <string name="tutorial_4_subtext_2">Descripción: La Ópera de Sídney, vista desde el otro lado de la bahía</string>
   <string name="tutorial_4_subtext_3">Categorías: Ópera de Sídney desde el oeste, Vistas a distancia de la Ópera de Sídney</string>
   <string name="welcome_wikipedia_text">Contribuye con tus imágenes.\n¡Ayuda a que los artículos de Wikipedia tengan vida!</string>
   <string name="welcome_wikipedia_subtext">Las imágenes en Wikipedia proceden de\nWikimedia Commons.</string>
   <string name="welcome_copyright_text">Tus imágenes ayudan a educar a la gente\nalrededor del mundo.</string>
-  <string name="welcome_copyright_subtext">Evita materiales con derechos de autor\nque hayas encontrado en Internet, así como\nimágenes de carteles, portadas de libro, etc.</string>
+  <string name="welcome_copyright_subtext">Evita materiales con derechos de autor\nque hayas encontrado en Internet, así como\nimágenes de carteles, portadas de libros, etc.</string>
   <string name="welcome_final_text">¿Crees que ya lo tienes?</string>
   <string name="welcome_final_button_text">¡Sí!</string>
   <string name="welcome_help_button_text">Más información</string>
   <string name="detail_panel_cats_label">Categorías</string>
   <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">No hay nada seleccionado</string>
+  <string name="detail_caption_empty">Sin leyenda</string>
   <string name="detail_description_empty">Sin descripción</string>
   <string name="detail_discussion_empty">Sin discusiones</string>
   <string name="detail_license_empty">Licencia desconocida</string>
@@ -190,7 +198,9 @@
   <string name="upload">Cargar</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
+  <string name="media_detail_caption">Leyenda</string>
   <string name="media_detail_title">Título</string>
+  <string name="media_detail_depiction">Representaciones</string>
   <string name="media_detail_description">Descripción</string>
   <string name="media_detail_discussion">Discusión</string>
   <string name="media_detail_author">Autor</string>
@@ -234,6 +244,7 @@
   <string name="nearby_info_menu_wikidata_article">Elemento de Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Artículo de Wikipedia</string>
   <string name="description_info">Por favor, describe el elemento multimedia tanto como sea posible: ¿dónde fue tomado?, ¿qué muestra?, ¿cuál es el contexto? Por favor, describe los objetos o personas. Ofrece la información que no puede ser inferida tan fácilmente, por ejemplo el momento del día si es un paisaje. Si el medio muestra algo inusual, explica qué lo hace inusual.</string>
+  <string name="caption_info">Por favor escribe una breve descripción de la imagen. La primera leyenda será utilizada como el Título para la imagen. Límite de 255 caracteres.</string>
   <string name="upload_problem_exist">Problemas potenciales con esta imagen:</string>
   <string name="upload_problem_image_dark">La imagen está demasiado oscura.</string>
   <string name="upload_problem_image_blurry">La imagen está borrosa.</string>
@@ -243,8 +254,8 @@
   <string name="upload_problem_do_you_continue">¿Todavía quieres cargar esta imagen?</string>
   <string name="upload_problem_image">Problemas encontrados en la imagen</string>
   <string name="internet_downloaded">Carga únicamente fotografías que hayas creado tú. No cargues imágenes o fotografías que hayas descargado de Internet.</string>
-  <string name="use_external_storage" fuzzy="true">Utilizar almacenamiento externo</string>
-  <string name="use_external_storage_summary" fuzzy="true">Guardar en el dispositivo imágenes capturadas con la cámara de la aplicación</string>
+  <string name="use_external_storage">Guardar tomas en la aplicación</string>
+  <string name="use_external_storage_summary">Guardar en el almacenamiento del dispositivo imágenes capturadas con la cámara de la aplicación</string>
   <string name="login_to_your_account">Accede a tu cuenta</string>
   <string name="send_log_file">Enviar archivo de registro</string>
   <string name="send_log_file_description">Enviar archivo de registro a los desarrolladores por correo electrónico para ayudar a depurar problemas con la aplicación. Nota: los registros pueden potencialmente contener información que te identifique</string>
@@ -260,7 +271,7 @@
   <string name="login_alert_message">Por favor inicia sesion para usar esta característica</string>
   <string name="copy_wikicode">Copia el wikitexto al portapapeles</string>
   <string name="wikicode_copied">El wikitexto fue copiado al portapapeles</string>
-  <string name="nearby_location_not_available" fuzzy="true">La ubicación no está disponible.</string>
+  <string name="nearby_location_not_available">Cercanos no puede funcionar correctamente. La ubicación no está disponible.</string>
   <string name="location_permission_rationale_nearby">Se necesita permiso para mostrar una lista de lugares cercanos</string>
   <string name="nearby_directions">Cómo llegar</string>
   <string name="nearby_wikidata">Wikidata</string>
@@ -359,7 +370,7 @@
   <string name="notifications">Notificaciones</string>
   <string name="read_notifications">Notificaciones (leídas)</string>
   <string name="display_nearby_notification">Mostrar notificaciones de cercanía</string>
-  <string name="display_nearby_notification_summary" fuzzy="true">Toca aquí para ver el lugar más cercano que necesita fotos</string>
+  <string name="display_nearby_notification_summary">Mostrar notificación dentro de la aplicación para el lugar más cercano que necesita fotos</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Permiso de almacenamiento</string>
   <string name="write_storage_permission_rationale_for_image_share">Necesitamos tu permiso para acceder al almacenamiento externo de tu dispositivo para poder subir imágenes.</string>
@@ -385,14 +396,15 @@
   <string name="uploaded_by_myself">Subida por mí mismo el %1$s, usado en %2$d artículo(s).</string>
   <string name="no_uploads">Te damos la bienvenida a Commons.\n\nCarga tu primer archivo mediante el botón Añadir.</string>
   <string name="no_categories_selected">No hay categorías seleccionadas</string>
-  <string name="no_categories_selected_warning_desc" fuzzy="true">Las imágenes sin categorías raramente se pueden usar. ¿Seguro que la quieres enviar sin seleccionar ninguna categoría?</string>
-  <string name="upload_flow_all_images_in_set" fuzzy="true">(Para todas las imágenes en el conjunto)</string>
+  <string name="no_categories_selected_warning_desc">Las imágenes sin categorías raramente se pueden usar. ¿Seguro que quieres continuar sin seleccionar ninguna categoría?</string>
+  <string name="no_depictions_selected">No se han seleccionado representaciones</string>
+  <string name="upload_flow_all_images_in_set">(Para todas las imágenes en el conjunto)</string>
   <string name="search_this_area">Buscar en esta área</string>
   <string name="nearby_card_permission_title">Solicitud de permiso</string>
   <string name="nearby_card_permission_explanation">¿Deseas que usemos tu ubicación actual para mostrarte el lugar más cercano que necesita imágenes?</string>
   <string name="unable_to_display_nearest_place">Incapaz de mostrar el sitio más cercano que necesitas fotos sin permisos de ubicación</string>
   <string name="never_ask_again">Nunca preguntar esto de nuevo</string>
-  <string name="display_location_permission_title" fuzzy="true">Mostrar permiso de ubicación</string>
+  <string name="display_location_permission_title">Pedir permiso de ubicación</string>
   <string name="display_location_permission_explanation">Pida permiso de ubicación cuando sea necesario para ver la tarjeta de notificación cercana.</string>
   <string name="achievements_fetch_failed">Algo salió mal, no pudimos obtener tus logros</string>
   <string name="ends_on">Finaliza el:</string>
@@ -427,14 +439,8 @@
   <string name="review_category_explanation">Esta imagen esta dentro de %1$s categorías.</string>
   <string name="review_spam_report_question">Esta fuera del alcance porque es</string>
   <string name="review_c_violation_report_question">Es una violación de derechos de autor porque es</string>
-  <string name="review_category_yes_button_text">No, mal categorizado</string>
-  <string name="review_category_no_button_text">Parece bien</string>
-  <string name="review_spam_yes_button_text">No, fuera de alcance</string>
-  <string name="review_spam_no_button_text">Parece bien</string>
-  <string name="review_copyright_yes_button_text">No, vulneración de copyright</string>
-  <string name="review_copyright_no_button_text">Parece bien</string>
-  <string name="review_thanks_yes_button_text">Sí, por qué no</string>
-  <string name="review_thanks_no_button_text">Imagen siguiente</string>
+  <string name="review_thanks_yes_button_text">Imagen siguiente</string>
+  <string name="review_thanks_no_button_text">Sí, por qué no</string>
   <string name="skip_image_explanation">Haciendo clic a este botón obtendrá otra imagen de Wikimedia Commons subida recientemente</string>
   <string name="review_image_explanation">Es posible revisar las imágenes y mejorar la calidad de Wikimedia Commons.\nLos cuatro criterios de revisión son:\n- ¿La imagen recae dentro del alcance del proyecto?\n- ¿La imagen sigue las normas de derechos de autor?\n- ¿Las categorías son las correctas?\n- Si todo va bien, es posible enviar un agradecimiento al contribuidor.</string>
   <string name="no_image">No se utilizó ninguna imagen</string>
@@ -463,10 +469,11 @@
   <string name="exif_tag_name_lensModel">Modelo de lente</string>
   <string name="exif_tag_name_serialNumbers">Números de serie</string>
   <string name="exif_tag_name_software">Programa</string>
-  <string name="share_text" fuzzy="true">Sube fotos a Wikimedia Commons desde tu celular, descarga la aplicación de Commons: %1$s</string>
+  <string name="share_text">Sube fotos a Wikimedia Commons directamente desde tu celular. Descarga la aplicación de Commons ahora: %1$s</string>
   <string name="share_via">Compartir la aplicación vía...</string>
   <string name="image_info">Información de la imagen</string>
   <string name="no_categories_found">No se encontró ninguna categoría</string>
+  <string name="no_depiction_found">No se encontraron representaciones</string>
   <string name="upload_cancelled">Se canceló la carga</string>
   <string name="previous_image_title_description_not_found">No hay datos sobre el título o la descripción anteriores de la imagen</string>
   <string name="dialog_box_text_nomination">¿Por qué debe borrarse %1$s?</string>
@@ -505,6 +512,7 @@
   <string name="place_type">Tipo de lugar:</string>
   <string name="nearby_search_hint">Puente, museo, hotel…</string>
   <string name="you_must_reset_your_passsword">Hubo un error con el inicio de sesión, debe restablecer su contraseña !!</string>
+  <string name="title_for_media">MULTIMEDIA</string>
   <string name="upload_nearby_place_found_title">Lugar cercano encontrado</string>
   <string name="title_app_shortcut_bookmark">Marcadores</string>
   <string name="title_app_shortcut_setting">Configuración</string>

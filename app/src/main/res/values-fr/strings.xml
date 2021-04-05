@@ -441,14 +441,8 @@
   <string name="review_category_explanation">Cette image est classée dans %1$s catégories.</string>
   <string name="review_spam_report_question">Ceci est hors sujet parce que c’est</string>
   <string name="review_c_violation_report_question">Ceci est une violation des droits d’auteur parce que c’est</string>
-  <string name="review_category_yes_button_text">Non, mal catégorisé</string>
-  <string name="review_category_no_button_text">Semble correct</string>
-  <string name="review_spam_yes_button_text">Non, hors sujet</string>
-  <string name="review_spam_no_button_text">Semble correct</string>
-  <string name="review_copyright_yes_button_text">Non, violation de droits d’auteur</string>
-  <string name="review_copyright_no_button_text">Semble correct</string>
-  <string name="review_thanks_yes_button_text">Oui, pourquoi pas</string>
-  <string name="review_thanks_no_button_text">Image suivante</string>
+  <string name="review_thanks_yes_button_text">Image suivante</string>
+  <string name="review_thanks_no_button_text">Oui, pourquoi pas</string>
   <string name="skip_image_explanation">Cliquer sur ce bouton vous donnera une autre image récemment téléversée sur Wikimédia Commons.</string>
   <string name="review_image_explanation">Vous pouvez revoir les images et améliorer la qualité de Wikimedia Commons.\n Les quatre paramètres à revoir sont :\n – Cette image convient-elle au champ du projet ?\n – Cette image respecte-t-elle les règles de droits d’auteur ?\n – Cette image est-elle bien catégorisée ?\n – Si tout va bien, vous pouvez aussi remercier le contributeur.</string>
   <string name="no_image">Aucune image utilisée</string>
@@ -464,7 +458,8 @@
   <string name="images_featured_explanation">Les images en vedette sont des images de photographes et d’illustrateurs très doués que la communauté de Wikimédia Commons a choisies comme étant de la meilleure qualité pour le site.</string>
   <string name="images_via_nearby_explanation">Les images téléversées par « Lieux à proximité » sont les images téléversées lors de la découverte de lieux sur la carte.</string>
   <string name="thanks_received_explanation">Cette fonctionnalité permet aux contributeurs d’envoyer une notification de remerciement aux utilisateurs qui font des modifications utiles ― en utilisant un petit lien de remerciement sur la page historique ou sur celle du diff.</string>
-  <string name="previous_image_caption_description">Copier les légendes et la description précédentes</string>
+  <string name="copy_image_caption_description" fuzzy="true">Copier vers le média subséquent</string>
+  <string name="copied_successfully" fuzzy="true">Copié avec succès</string>
   <string name="welcome_do_upload_content_description">Exemples de bonnes images à téléverser sur Commons</string>
   <string name="welcome_dont_upload_content_description">Exemples d’images à ne pas téléverser</string>
   <string name="skip_image">Sauter cette image</string>
@@ -603,4 +598,5 @@
   <string name="media_detail_step_title">Détails du média</string>
   <string name="menu_view_category_page">Voir la page de catégorie</string>
   <string name="menu_view_item_page">Voir la page de l’élément</string>
+  <string name="read_help_link">En savoir plus</string>
 </resources>

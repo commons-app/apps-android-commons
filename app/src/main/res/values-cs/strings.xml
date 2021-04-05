@@ -419,14 +419,8 @@
   <string name="review_category_explanation">Tento obrázek patří do %1$s kategórií.</string>
   <string name="review_spam_report_question">Není to v pořádku, protože</string>
   <string name="review_c_violation_report_question">Porušuje to autorská prává, protože</string>
-  <string name="review_category_yes_button_text">Ne, špatně kategorizováno</string>
-  <string name="review_category_no_button_text">Vypadá to dobře</string>
-  <string name="review_spam_yes_button_text">Ne, není to v pořádku</string>
-  <string name="review_spam_no_button_text">Vypadá to v pořádku</string>
-  <string name="review_copyright_yes_button_text">Ne, porušení autorských práv</string>
-  <string name="review_copyright_no_button_text">Vypadá to v pořádku</string>
-  <string name="review_thanks_yes_button_text">Ano, proč ne</string>
-  <string name="review_thanks_no_button_text">Další soubor</string>
+  <string name="review_thanks_yes_button_text">Další soubor</string>
+  <string name="review_thanks_no_button_text">Ano, proč ne</string>
   <string name="skip_image_explanation">Kliknutím na toto tlačítko se zobrazí další nedávno nahraný obrázek z Wikimedia Commons</string>
   <string name="review_image_explanation">Můžete kontrolovat obrázky a zlepšit kvalitu Wikimedia Commons.\n\nTři aspekty, které se posuzují:\n  - Je tento obrázek v pořádku?\n  - Dodržuje tento obrázok pravidla autorských práv?\n  - Je tento obrázek správně kategorizován?\n\nPokud je vše v pořádku, autorovi můžete poděkovat.</string>
   <string name="no_image">Nejsou použity žádné obrázky</string>

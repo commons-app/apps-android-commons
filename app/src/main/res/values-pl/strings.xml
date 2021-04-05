@@ -448,14 +448,8 @@
   <string name="review_category_explanation">Ten obraz należy do kategorii %1$s</string>
   <string name="review_spam_report_question">Jest poza zakresem, ponieważ jest</string>
   <string name="review_c_violation_report_question">Jest to naruszeniem praw autorskich, ponieważ</string>
-  <string name="review_category_yes_button_text">Nie, błędnie skategoryzowane</string>
-  <string name="review_category_no_button_text">Wydaje się w porządku</string>
-  <string name="review_spam_yes_button_text">Nie, poza zakresem</string>
-  <string name="review_spam_no_button_text">Wydaje się w porządku</string>
-  <string name="review_copyright_yes_button_text">Nie, naruszenie praw autorskich</string>
-  <string name="review_copyright_no_button_text">Wydaje się w porządku</string>
-  <string name="review_thanks_yes_button_text">Tak, czemu nie</string>
-  <string name="review_thanks_no_button_text">Następny obraz</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">Tak, czemu nie</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">Następny obraz</string>
   <string name="skip_image_explanation">Kliknięcie tego przycisku spowoduje wyświetlenie kolejnego ostatnio przesłanego obrazu z Wikimedia Commons</string>
   <string name="review_image_explanation">Możesz przeglądać obrazy i poprawiać jakość Wikimedia Commons.\n Cztery parametry przeglądu to:\n - Czy ten obraz jest objęty zakresem?\n - Czy ten obraz jest zgodny z zasadami praw autorskich?\n - Czy ten obraz jest poprawnie sklasyfikowany?\n - Jeśli wszystko pójdzie dobrze, możesz również podziękować autorowi.</string>
   <string name="no_image">Nie użyto żadnych obrazów</string>
@@ -471,7 +465,6 @@
   <string name="images_featured_explanation">Polecane zdjęcia to zdjęcia wysoko wykwalifikowanych fotografów i ilustratorów, które społeczność Wikimedia Commons wybrała jako jedne z najwyższych jakości na stronie.</string>
   <string name="images_via_nearby_explanation">Obrazy przesłane przez Pobliskie miejsca to obrazy, które są przesyłane przez odkrywanie miejsc na mapie.</string>
   <string name="thanks_received_explanation">Ta funkcja umożliwia redaktorom wysyłanie powiadomień z podziękowaniem do użytkowników, którzy dokonują przydatnych zmian - za pomocą małego linku z podziękowaniem na stronie historii lub na stronie diff.</string>
-  <string name="previous_image_caption_description">Skopiuj poprzednie podpisy i opis</string>
   <string name="welcome_do_upload_content_description">Przykłady dobrych zdjęć do przesłania na Commons</string>
   <string name="welcome_dont_upload_content_description">Przykłady obrazów, których nie można przesyłać</string>
   <string name="skip_image">Pomiń ten obraz</string>

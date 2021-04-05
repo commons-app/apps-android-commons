@@ -445,14 +445,8 @@
   <string name="review_category_explanation">התמונה הזאת משויכת ל־%1$s קטגוריות.</string>
   <string name="review_spam_report_question">זה פשוט מחוץ לתחום כי ככה</string>
   <string name="review_c_violation_report_question">זאת הפרת זכויות יוצרים כי ככה</string>
-  <string name="review_category_yes_button_text">לא, טעות בקטגוריה</string>
-  <string name="review_category_no_button_text">נראה בסדר</string>
-  <string name="review_spam_yes_button_text">לא, אין שום קשר</string>
-  <string name="review_spam_no_button_text">נראה בסדר</string>
-  <string name="review_copyright_yes_button_text">לא, הפרת זכויות יוצרים</string>
-  <string name="review_copyright_no_button_text">נראה בסדר</string>
-  <string name="review_thanks_yes_button_text">כן, למה לא</string>
-  <string name="review_thanks_no_button_text">התמונה הבאה</string>
+  <string name="review_thanks_yes_button_text">התמונה הבאה</string>
+  <string name="review_thanks_no_button_text">כן, למה לא</string>
   <string name="skip_image_explanation">לחיצה על הכפתור הזה תציג בפניך תמונה נוספת שנוספה לאחרונה לוויקישיתוף</string>
   <string name="review_image_explanation">ניתן לסקור את התמונות ולשפר את האיכות של ויקישיתוף.\nארבע יסודות הסקירה הם:\n- האם התמונה קשורה לנושא?\n- האם התמונה תואמת לכללי זכויות היוצרים?\n- האם התמונה נמצאת בקטגוריה הנכונה?\n- אם הכול בסדר, ניתן גם להודות למי שתרם אותה.</string>
   <string name="no_image">לא נעשה שימוש בתמונות</string>
@@ -468,7 +462,8 @@
   <string name="images_featured_explanation">תמונות מובילות הן תמונות של צלמים ומאיירים מיומנים אותם בחרה קהילת ויקישיתוף בזכות איכות התוצר שהם תורמים לאתר.</string>
   <string name="images_via_nearby_explanation">תמונות שהועלו דרך מקומות בסביבה הן התמונות שנשלחות על ידי גילוי מקומות במפה.</string>
   <string name="thanks_received_explanation">תכונה זו מאפשרת לעורכים לשלוח מסרי תודה למשתמשים שביצעו עריכות מועילות - על ידי שימוש בקישור תודה בעמוד ההיסטוריה או עמוד ההבדלים.</string>
-  <string name="previous_image_caption_description">העתקת כיתבוים ותיאורים קודמים</string>
+  <string name="copy_image_caption_description">העתקה למדיה הלאה</string>
+  <string name="copied_successfully">הועתק</string>
   <string name="welcome_do_upload_content_description">דוגמאות של תמונות טובות להעלאה לוויקישיתוף</string>
   <string name="welcome_dont_upload_content_description">דוגמאות של תמונות שאין להעלות</string>
   <string name="skip_image">דילוג על התמונה הזאת</string>
@@ -609,4 +604,5 @@
   <string name="media_detail_step_title">פרטי מדיה</string>
   <string name="menu_view_category_page">הצגת דף הקטגוריה</string>
   <string name="menu_view_item_page">הצגת דף הפריט</string>
+  <string name="read_help_link">מידע נוסף</string>
 </resources>

@@ -416,14 +416,8 @@
   <string name="review_category_explanation">Оваа слика се води под %1$s категории.</string>
   <string name="review_spam_report_question">Не е во делокругот бидејќи е</string>
   <string name="review_c_violation_report_question">Нарушува авторски права бидејќи е</string>
-  <string name="review_category_yes_button_text">Не, погрешно категоризирано</string>
-  <string name="review_category_no_button_text">Делува во ред</string>
-  <string name="review_spam_yes_button_text">Не, вон делокруг</string>
-  <string name="review_spam_no_button_text">Делува во ред</string>
-  <string name="review_copyright_yes_button_text">Не, авторскоправно нарушување</string>
-  <string name="review_copyright_no_button_text">Делува во ред</string>
-  <string name="review_thanks_yes_button_text">Да, што да не</string>
-  <string name="review_thanks_no_button_text">Следна слика</string>
+  <string name="review_thanks_yes_button_text">Следна слика</string>
+  <string name="review_thanks_no_button_text">Да, што да не</string>
   <string name="skip_image_explanation">Копчево ќе ви даде друга неодамна подигната слика од Ризницата</string>
   <string name="review_image_explanation">Можете да оценувате слики и да го подобрувате квалитетот на Ризницата.\n Четирите мерила за оценка се следниве: \n - Дали сликата е во делокругот? \n - Дали сликата ги следи правилата за авторски права? \n - Дали сликата е исправно категоризирана? \n - Ако сè е во ред, можете и да му се заблагодарите на подигачот.</string>
   <string name="no_image">Нема искористени слики</string>
@@ -439,7 +433,6 @@
   <string name="images_featured_explanation">Избраните слики се дела на високообучени фотографи и илустратори кои заедницата ги избрала за да бидат истакнати како едни од најдобрите слики на Ризницата.</string>
   <string name="images_via_nearby_explanation">Сликите подигнати преку „Околни места“ се оние подигнати при откривање на места на картата.</string>
   <string name="thanks_received_explanation">Ова им дава можност на уредниците да им испраќаат благодарници на корисниците што вршат полезни уредувања. Ова се прави стискајќи на малата врска за заблагодарување во страницата за историја или разлики.</string>
-  <string name="previous_image_caption_description">Прекопирај претходни описи и текст</string>
   <string name="welcome_do_upload_content_description">Примери — Добри слики за подигање</string>
   <string name="welcome_dont_upload_content_description">Примери — Слики што не се за подигање</string>
   <string name="skip_image">Прескокни ја сликава</string>

@@ -451,14 +451,8 @@
   <string name="review_category_explanation">هذه الصورة تحت %1$s تصنيفات.</string>
   <string name="review_spam_report_question">إنه خارج النطاق لأنه</string>
   <string name="review_c_violation_report_question">إنه انتهاك لحقوق الطبع والنشر لأنه</string>
-  <string name="review_category_yes_button_text">لا، مصنف بشكل خاطئ</string>
-  <string name="review_category_no_button_text">يبدو جيدا</string>
-  <string name="review_spam_yes_button_text">لا، خارج النطاق</string>
-  <string name="review_spam_no_button_text">يبدو جيدا</string>
-  <string name="review_copyright_yes_button_text">لا، انتهاك حقوق النشر</string>
-  <string name="review_copyright_no_button_text">يبدو جيدا</string>
-  <string name="review_thanks_yes_button_text">نعم، لم لا</string>
-  <string name="review_thanks_no_button_text">الصورة التالية</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">نعم، لم لا</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">الصورة التالية</string>
   <string name="skip_image_explanation">النقر فوق هذا الزر سيمنحك صورة أخرى مرفوعة مؤخرا من ويكيميديا ​​كومنز</string>
   <string name="review_image_explanation">يمكنك مراجعة الصور وتحسين جودة ويكيميديا ​​كومنز.\n وسائط اللمراجعة الأربعة هي:\n - هل هذه الصورة في النطاق؟\n - هل تتبع هذه الصورة قواعد حقوق النشر؟\n - هل هذه الصورة مصنفة بشكل صحيح؟\n - إذا سارت الأمور على ما يرام يمكنك أيضا شكر المساهم.</string>
   <string name="no_image">لا صور مستخدمة</string>
@@ -474,7 +468,6 @@
   <string name="images_featured_explanation">الصور المختارة هي صور من مصورين ورسامين ذوي مهارات عالية اختارها مجتمع ويكيميديا ​​كومنز كبعض الأفضل جودة على الموقع.</string>
   <string name="images_via_nearby_explanation">الصور المرفوعة عبر الأماكن القريبة هي الصور المرفوعة عن طريق اكتشاف الأماكن على الخريطة.</string>
   <string name="thanks_received_explanation">تتيح هذه الميزة للمحررين إرسال إشعار شكر للمستخدمين الذين يقومون بتعديلات مفيدة - باستخدام رابط شكر صغير في صفحة التاريخ أو صفحة الفرق.</string>
-  <string name="previous_image_caption_description">نسخ العنوان/الوصف السابق</string>
   <string name="welcome_do_upload_content_description">أمثلة على صور جيدة لرفعها إلى كومنز</string>
   <string name="welcome_dont_upload_content_description">أمثلة على صور لعدم رفعها</string>
   <string name="skip_image">تخطي هذه الصورة</string>

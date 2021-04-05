@@ -414,14 +414,8 @@
   <string name="review_category_explanation">Costa plancia a l\'é ant le categorìe %1$s .</string>
   <string name="review_spam_report_question">A l\'é fòra argoment përché a l\'é</string>
   <string name="review_c_violation_report_question">A l\'é na violassion dij drit d\'autor përché a l\'é</string>
-  <string name="review_category_yes_button_text">Nò, eror ëd categorìa</string>
-  <string name="review_category_no_button_text">A smija giust</string>
-  <string name="review_spam_yes_button_text">Nò, fòra argoment</string>
-  <string name="review_spam_no_button_text">A smija giust</string>
-  <string name="review_copyright_yes_button_text">Nò, violassion dij drit d\'autor</string>
-  <string name="review_copyright_no_button_text">A smija ch\'a vada bin</string>
-  <string name="review_thanks_yes_button_text">É, përchè nò</string>
-  <string name="review_thanks_no_button_text">Plancia apress</string>
+  <string name="review_thanks_yes_button_text">Plancia apress</string>
+  <string name="review_thanks_no_button_text">É, përchè nò</string>
   <string name="skip_image_explanation">Sgnaché ansima a \'s boton a-j darà n\'àutra plancia carià ëd recent ëd Wikimedia Comun</string>
   <string name="review_image_explanation">A peul revisioné le plance e amelioré la qualità ëd Wikimedia Comun.\nIj quatr paràmeter dla revision a son:\n- Costa plancia a l\'é an argoment?\n- Costa plancia a rëspeta le régole ëd drit d\'autor?\n- Costa plancia a l\'é categorisà për da bin?\n- Si tut a va bin, a peul ëdcò aringrassié ël contributor.</string>
   <string name="no_image">Gnun-e plance dovrà</string>
@@ -437,7 +431,8 @@
   <string name="images_featured_explanation">Le fòto an evidensa a son ëd plance fàite da dij fotògraf e ilustrator motobin àbij che la comunità ëd Wikipedia Commons a l\'ha sernù tra cole ëd qualità pi àuta an sël sit.</string>
   <string name="images_via_nearby_explanation">Le plance carià dai pòst ëd prossimità a son le plance carià con la dëscuverta dij pòst an sla carta.</string>
   <string name="thanks_received_explanation">Costa fonsionalità a përmet ai contributor ëd mandé na notìfica d\'aringrassiament a j\'utent ch\'a fan dle modìfiche ùtij -  an dovrand na cita liura d\'aringrassiament an sla pàgina dla stòria o cola dle diferense.</string>
-  <string name="previous_image_caption_description">Copié le legende e descrission precedente</string>
+  <string name="copy_image_caption_description" fuzzy="true">Copié al mojen apress</string>
+  <string name="copied_successfully" fuzzy="true">Copià për da bin</string>
   <string name="welcome_do_upload_content_description">Esempi ëd plance bon-e da carié su Commons</string>
   <string name="welcome_dont_upload_content_description">Esempi ëd plance da nen carié</string>
   <string name="skip_image">Sauté costa plancia</string>
@@ -576,4 +571,5 @@
   <string name="media_detail_step_title">Detaj dël mojen</string>
   <string name="menu_view_category_page">Vëdde la pàgina ëd categorìa</string>
   <string name="menu_view_item_page">Vëdde la pàgina ëd l\'element</string>
+  <string name="read_help_link">Lese ëd pi</string>
 </resources>

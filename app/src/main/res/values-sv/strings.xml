@@ -421,14 +421,8 @@
   <string name="review_category_explanation">Denna bild finns i %1$s kategorier.</string>
   <string name="review_spam_report_question">Det är irrelevant eftersom det är</string>
   <string name="review_c_violation_report_question">Den bryter mot upphovsrätten eftersom den är</string>
-  <string name="review_category_yes_button_text">Nej, felkategoriserad</string>
-  <string name="review_category_no_button_text">Verkar okej</string>
-  <string name="review_spam_yes_button_text">Nej, irrelevant</string>
-  <string name="review_spam_no_button_text">Verkar okej</string>
-  <string name="review_copyright_yes_button_text">Nej, upphovsbrott</string>
-  <string name="review_copyright_no_button_text">Verkar okej</string>
-  <string name="review_thanks_yes_button_text">Visst, varför inte</string>
-  <string name="review_thanks_no_button_text">Nästa bild</string>
+  <string name="review_thanks_yes_button_text">Nästa bild</string>
+  <string name="review_thanks_no_button_text">Visst, varför inte</string>
   <string name="skip_image_explanation">När du klickar på knappen får du en annan bild som laddades upp nyligen från Wikimedia Commons</string>
   <string name="review_image_explanation">Du kan granska bilder och förbättra kvaliteten för Wikimedia Commons.\n De fyra granskningsparametrarna är: \n - Är denna bild relevant \n - Följer denna bild upphovsrättsreglerna? \n - Är denna bild riktigt kategoriserad? \n - Om allting får bra kan du också tacka bidragsgivaren.</string>
   <string name="no_image">Inga bilder används</string>
@@ -444,7 +438,6 @@
   <string name="images_featured_explanation">Utmärkta bilder är bilder från skickliga fotografer och illustratörer som gemenskapen på Wikimedia Commons har valt ut som bilder med den högsta kvalitetet på webbplatsen.</string>
   <string name="images_via_nearby_explanation">Bilder som har laddats upp via \"Platser i närheten\" är bilderna som laddas upp genom att upptäcka platser på kartan.</string>
   <string name="thanks_received_explanation">Denna funktion låter redigerare skicka en tackavisering till användare som gör användbara redigeringar – genom att använda en liten tacklänk på historik- eller diff-sidor.</string>
-  <string name="previous_image_caption_description">Kopiera föregående bildtexter och beskrivning</string>
   <string name="welcome_do_upload_content_description">Exempel på bra bilder att ladda upp på Commons</string>
   <string name="welcome_dont_upload_content_description">Exempel på bilder att inte ladda upp</string>
   <string name="skip_image">Hoppa över denna bild</string>
