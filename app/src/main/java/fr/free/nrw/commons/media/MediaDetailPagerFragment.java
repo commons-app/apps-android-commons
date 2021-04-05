@@ -120,7 +120,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
                 getActivity().supportInvalidateOptionsMenu();
                 adapter.notifyDataSetChanged();
-            }, 100);
+            }, 1000);
         } else {
             pager.setAdapter(adapter);
         }

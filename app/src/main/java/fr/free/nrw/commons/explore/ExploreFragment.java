@@ -10,15 +10,17 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.ActivityUtils;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ExploreFragment extends CommonsDaggerSupportFragment {
@@ -30,10 +32,9 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
     @BindView(R.id.viewPager)
+
     ParentViewPager viewPager;
-    ViewPagerAdapter viewPagerAdapter;
-    private ExploreListRootFragment featuredRootFragment;
-    private ExploreListRootFragment mobileRootFragment;
+    ExploreViewPagerAdapter viewPagerAdapter;
 
     public void setScroll(boolean canScroll){
         viewPager.setCanScroll(canScroll);
@@ -41,7 +42,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
 
     @NonNull
     public static ExploreFragment newInstance() {
-        ExploreFragment fragment = new ExploreFragment();
+        final ExploreFragment fragment = new ExploreFragment();
         fragment.setRetainInstance(true);
         return fragment;
     }
@@ -52,52 +53,112 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("viewPagerAdapter", viewPagerAdapter.saveState());
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
         @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
         ButterKnife.bind(this, view);
-        viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
+        viewPagerAdapter = new ExploreViewPagerAdapter(getChildFragmentManager());
+        if (savedInstanceState != null) {
+            viewPagerAdapter.restoreState(savedInstanceState.getParcelable("viewPagerAdapter"), ClassLoader.getSystemClassLoader());
+        }
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setId(R.id.viewPager);
         tabLayout.setupWithViewPager(viewPager);
-        setTabs();
         setHasOptionsMenu(true);
         return view;
     }
 
     /**
-     * Sets the titles in the tabLayout and fragments in the viewPager
+     * Adapter that sets the titles in the tabLayout and fragments in the viewPager
      */
-    public void setTabs() {
-        List<Fragment> fragmentList = new ArrayList<>();
-        List<String> titleList = new ArrayList<>();
+    private class ExploreViewPagerAdapter extends FragmentPagerAdapter {
 
-        Bundle featuredArguments = new Bundle();
-        featuredArguments.putString("categoryName", FEATURED_IMAGES_CATEGORY);
+        public static final int FEATURED_IMAGES_POSITION = 0;
+        public static final int MOBILE_UPLOADS_POSITION = 1;
 
-        Bundle mobileArguments = new Bundle();
-        mobileArguments.putString("categoryName", MOBILE_UPLOADS_CATEGORY);
+        private final List<Bundle> mBundleList = new ArrayList<>();
+        private final List<String> mTitlesList = new ArrayList<>();
 
-        featuredRootFragment = new ExploreListRootFragment(featuredArguments);
-        mobileRootFragment = new ExploreListRootFragment(mobileArguments);
-        fragmentList.add(featuredRootFragment);
-        titleList.add(getString(R.string.explore_tab_title_featured).toUpperCase());
+        private final HashMap<Integer, Fragment> mFragments = new HashMap<>();
 
-        fragmentList.add(mobileRootFragment);
-        titleList.add(getString(R.string.explore_tab_title_mobile).toUpperCase());
+        public ExploreViewPagerAdapter(@NonNull FragmentManager fm) {
+            super(fm);
 
-        viewPagerAdapter.setTabData(fragmentList, titleList);
-        viewPagerAdapter.notifyDataSetChanged();
+            final Bundle featuredArguments = new Bundle();
+            featuredArguments.putString("categoryName", FEATURED_IMAGES_CATEGORY);
+            mBundleList.add(featuredArguments);
+
+            final Bundle mobileArguments = new Bundle();
+            mobileArguments.putString("categoryName", MOBILE_UPLOADS_CATEGORY);
+            mBundleList.add(mobileArguments);
+
+            mTitlesList.add(getString(R.string.explore_tab_title_featured).toUpperCase());
+            mTitlesList.add(getString(R.string.explore_tab_title_mobile).toUpperCase());
+        }
+
+        @NonNull
+        @Override
+        public Fragment getItem(final int position) {
+            final ExploreListRootFragment fragment = new ExploreListRootFragment();
+            if (position < mBundleList.size()) {
+                fragment.setArguments(mBundleList.get(position));
+            }
+            return fragment;
+        }
+
+        @Override
+        public int getCount() {
+            return mBundleList.size();
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(final int position) {
+            return mTitlesList.get(position);
+        }
+
+        @NonNull
+        @Override
+        public Object instantiateItem(@NonNull final ViewGroup container, final int position) {
+            final Fragment fragment = (Fragment) super.instantiateItem(container, position);
+            mFragments.put(position, fragment);
+            return fragment;
+        }
+
+        /***
+         * Returns the fragment at the specified position. If there are no fragments or if the
+         * position is invalid, it returns null.
+         *
+         * @param position the position in the adapter.
+         * @return the {@link Fragment} at the specified position in the adapter.
+         */
+        public Fragment getFragment(int position) {
+            return mFragments.size() == 0 ? null : mFragments.get(position);
+        }
     }
 
     public void onBackPressed() {
+        final Fragment fragment;
         if (tabLayout.getSelectedTabPosition() == 0) {
-            featuredRootFragment.backPressed();
+            fragment =
+                viewPagerAdapter.getFragment(ExploreViewPagerAdapter.FEATURED_IMAGES_POSITION);
         } else {
-            mobileRootFragment.backPressed();
+            fragment =
+                viewPagerAdapter.getFragment(ExploreViewPagerAdapter.MOBILE_UPLOADS_POSITION);
         }
-        ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        if (fragment instanceof ExploreListRootFragment) {
+            final ExploreListRootFragment exploreListRootFragment = (ExploreListRootFragment) fragment;
+            exploreListRootFragment.backPressed();
+            ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        }
     }
 
     /**

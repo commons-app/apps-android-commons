@@ -19,7 +19,6 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.BookmarkFragment;
-import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.ExploreFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -29,7 +28,6 @@ import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment;
 import fr.free.nrw.commons.navtab.NavTab;
 import fr.free.nrw.commons.navtab.NavTabLayout;
 import fr.free.nrw.commons.navtab.NavTabLoggedOut;
-import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback;
@@ -64,7 +62,6 @@ public class MainActivity  extends BaseActivity
     private ExploreFragment exploreFragment;
     private BookmarkFragment bookmarkFragment;
     public ActiveFragment activeFragment;
-    private MediaDetailPagerFragment mediaDetailPagerFragment;
 
     @Inject
     public LocationServiceManager locationManager;
@@ -112,7 +109,7 @@ public class MainActivity  extends BaseActivity
         toolbar.setNavigationOnClickListener(view -> {
             onSupportNavigateUp();
         });
-        if (applicationKvStore.getBoolean("login_skipped") == true) {
+        if (applicationKvStore.getBoolean("login_skipped")) {
             setTitle(getString(R.string.navigation_item_explore));
             setUpLoggedOutPager();
         } else {
@@ -120,6 +117,8 @@ public class MainActivity  extends BaseActivity
                 //starting a fresh fragment.
                 setTitle(getString(R.string.contributions_fragment));
                 loadFragment(ContributionsFragment.newInstance(),false);
+            } else {
+                initFragmentData();
             }
             setUpPager();
             initMain();
@@ -264,14 +263,34 @@ public class MainActivity  extends BaseActivity
         startService(uploadServiceIntent);
     }
 
+    private void initFragmentData() {
+        final Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
+        if (fragment != null) {
+            if (fragment instanceof ContributionsFragment) {
+                contributionsFragment = (ContributionsFragment) fragment;
+                activeFragment = ActiveFragment.CONTRIBUTIONS;
+            } else if (fragment instanceof NearbyParentFragment) {
+                nearbyParentFragment = (NearbyParentFragment) fragment;
+                activeFragment = ActiveFragment.NEARBY;
+            } else if (fragment instanceof ExploreFragment) {
+                exploreFragment = (ExploreFragment) fragment;
+                activeFragment = ActiveFragment.EXPLORE;
+            } else if (fragment instanceof BookmarkFragment) {
+                bookmarkFragment = (BookmarkFragment) fragment;
+                activeFragment = ActiveFragment.BOOKMARK;
+            }
+        }
+    }
+
     @Override
     public void onBackPressed() {
         if (contributionsFragment != null && activeFragment == ActiveFragment.CONTRIBUTIONS) {
             // Meas that contribution fragment is visible
-            mediaDetailPagerFragment=contributionsFragment.getMediaDetailPagerFragment();
+            final MediaDetailPagerFragment mediaDetailPagerFragment = contributionsFragment
+                .getMediaDetailPagerFragment();
             if (mediaDetailPagerFragment ==null) { //means you open the app currently and not open mediaDetailPage fragment
                 super.onBackPressed();
-            } else if (mediaDetailPagerFragment!=null) {
+            } else {
                 if(!mediaDetailPagerFragment.isVisible()){  //means you are at contributions fragement
                     super.onBackPressed();
                 } else {  //mean you are at mediaDetailPager Fragment
@@ -352,11 +371,6 @@ public class MainActivity  extends BaseActivity
         Timber.d(data!=null?data.toString():"onActivityResult data is null");
         super.onActivityResult(requestCode, resultCode, data);
         controller.handleActivityResult(this, requestCode, resultCode, data);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     @Override

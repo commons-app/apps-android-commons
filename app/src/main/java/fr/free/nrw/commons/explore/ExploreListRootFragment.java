@@ -30,18 +30,6 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
   @BindView(R.id.explore_container)
   FrameLayout container;
 
-  public ExploreListRootFragment(){
-    //empty constructor necessary otherwise crashes on recreate
-  }
-
-  public ExploreListRootFragment(Bundle bundle) {
-    String title = bundle.getString("categoryName");
-    listFragment = new CategoriesMediaFragment();
-    Bundle featuredArguments = new Bundle();
-    featuredArguments.putString("categoryName", title);
-    listFragment.setArguments(featuredArguments);
-  }
-
   @Nullable
   @Override
   public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container,
@@ -55,8 +43,28 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
   @Override
   public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    if(savedInstanceState == null) {
-      setFragment(listFragment, mediaDetails);
+    if (savedInstanceState == null) {
+      final Bundle bundle = getArguments();
+      if (bundle != null) {
+        final String title = bundle.getString("categoryName");
+        listFragment = new CategoriesMediaFragment();
+        final Bundle featuredArguments = new Bundle();
+        featuredArguments.putString("categoryName", title);
+        listFragment.setArguments(featuredArguments);
+        setFragment(listFragment, mediaDetails);
+      }
+    } else {
+      listFragment = (CategoriesMediaFragment) getChildFragmentManager().getFragment(savedInstanceState, "listFragment");
+      mediaDetails = (MediaDetailPagerFragment) getChildFragmentManager().getFragment(savedInstanceState, "mediaDetails");
+    }
+  }
+
+  @Override
+  public void onSaveInstanceState(@NonNull final Bundle outState) {
+    super.onSaveInstanceState(outState);
+    getChildFragmentManager().putFragment(outState, "listFragment", listFragment);
+    if (mediaDetails != null && mediaDetails.isAdded()) {
+      getChildFragmentManager().putFragment(outState, "mediaDetails", mediaDetails);
     }
   }
 

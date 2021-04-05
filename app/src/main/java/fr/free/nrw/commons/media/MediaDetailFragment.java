@@ -235,6 +235,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         getScrollPosition();
         outState.putInt("listTop", initialListTop);
+
+        if (media != null) {
+            outState.putParcelable("current-media", media);
+        }
     }
 
     private void getScrollPosition() {
@@ -254,12 +258,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             isWikipediaButtonDisplayed = savedInstanceState.getBoolean("isWikipediaButtonDisplayed");
             index = savedInstanceState.getInt("index");
             initialListTop = savedInstanceState.getInt("listTop");
+            media = savedInstanceState.getParcelable("current-media");
         } else {
             editable = getArguments().getBoolean("editable");
             isCategoryImage = getArguments().getBoolean("isCategoryImage");
             isWikipediaButtonDisplayed = getArguments().getBoolean("isWikipediaButtonDisplayed");
             index = getArguments().getInt("index");
             initialListTop = 0;
+            media = detailProvider.getMediaAtPosition(index);
         }
 
         reasonList = new ArrayList<>();
@@ -329,7 +335,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         categoryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         categoryRecyclerView.setAdapter(categoryEditSearchRecyclerViewAdapter);
 
-        media = detailProvider.getMediaAtPosition(index);
         scrollView.getViewTreeObserver().addOnGlobalLayoutListener(
             new OnGlobalLayoutListener() {
                 @Override
