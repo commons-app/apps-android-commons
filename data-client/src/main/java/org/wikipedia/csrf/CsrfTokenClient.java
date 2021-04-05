@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
 import org.wikipedia.AppAdapter;
 import org.wikipedia.dataclient.Service;
 import org.wikipedia.dataclient.ServiceFactory;
@@ -142,7 +144,9 @@ public class CsrfTokenClient {
                             AppAdapter.get().getPassword(), "");
                 }
 
-                Response<MwQueryResponse> response = service.getCsrfTokenCall().execute();
+                //Get CSRFToken response off the main thread.
+                Response<MwQueryResponse> response = Executors.newSingleThreadExecutor().submit(new getCSRFTokenResponse(service)).get();
+
                 if (response.body() == null || response.body().query() == null
                         || TextUtils.isEmpty(response.body().query().csrfToken())) {
                     continue;
@@ -209,5 +213,28 @@ public class CsrfTokenClient {
 
     private interface RetryCallback {
         void retry();
+    }
+
+    class getCSRFTokenResponse implements Callable<Response<MwQueryResponse>> {
+        private Service service;
+
+        /**
+         * Default Constructor.
+         * @param service
+         */
+        public getCSRFTokenResponse(Service service){
+            this.service = service;
+        }
+
+        /**
+         * Computes a result, or throws an exception if unable to do so.
+         *
+         * @return computed result
+         * @throws Exception if unable to compute a result
+         */
+        @Override
+        public Response<MwQueryResponse> call() throws Exception {
+            return service.getCsrfTokenCall().execute();
+        }
     }
 }
