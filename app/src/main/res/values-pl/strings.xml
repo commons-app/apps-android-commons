@@ -465,7 +465,6 @@
   <string name="images_featured_explanation">Polecane zdjęcia to zdjęcia wysoko wykwalifikowanych fotografów i ilustratorów, które społeczność Wikimedia Commons wybrała jako jedne z najwyższych jakości na stronie.</string>
   <string name="images_via_nearby_explanation">Obrazy przesłane przez Pobliskie miejsca to obrazy, które są przesyłane przez odkrywanie miejsc na mapie.</string>
   <string name="thanks_received_explanation">Ta funkcja umożliwia redaktorom wysyłanie powiadomień z podziękowaniem do użytkowników, którzy dokonują przydatnych zmian - za pomocą małego linku z podziękowaniem na stronie historii lub na stronie diff.</string>
-  <string name="previous_image_caption_description">Skopiuj poprzednie podpisy i opis</string>
   <string name="welcome_do_upload_content_description">Przykłady dobrych zdjęć do przesłania na Commons</string>
   <string name="welcome_dont_upload_content_description">Przykłady obrazów, których nie można przesyłać</string>
   <string name="skip_image">Pomiń ten obraz</string>

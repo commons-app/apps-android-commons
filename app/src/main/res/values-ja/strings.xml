@@ -447,7 +447,6 @@
   <string name="images_featured_explanation">秀逸な画像とは、技術力の高い写真家や作画家による作品で、ウィキメディアコモンズのコミュニティから最高の品質を誇るものとして選出されています。</string>
   <string name="images_via_nearby_explanation">「近くの場所でアップロードした画像」とは、地図上で検索した結果に基づいてアップロードした画像のことです。</string>
   <string name="thanks_received_explanation">この機能を使うと有効な編集をしたユーザーに感謝を伝えることができます – 変更履歴もしくは差分のページに表示される小さな感謝リンクを押します。</string>
-  <string name="previous_image_caption_description">以前のキャプションと説明をコピーする</string>
   <string name="welcome_do_upload_content_description">コモンズへの投稿画像の良い例</string>
   <string name="welcome_dont_upload_content_description">投稿に適さない画像のサンプル</string>
   <string name="skip_image">この画像をスキップ</string>

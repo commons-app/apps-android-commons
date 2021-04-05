@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Eleassar
+-->
+<resources>
+  <string name="crash_dialog_title">Zbirka se je sesula</string>
+  <string name="crash_dialog_text">Ups. Nekaj je šlo narobe!</string>
+  <string name="crash_dialog_ok_toast">Hvala!</string>
+</resources>
