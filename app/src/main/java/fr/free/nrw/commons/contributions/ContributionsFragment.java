@@ -349,6 +349,7 @@ public class ContributionsFragment
     private void showFragment(Fragment fragment, String tag, Fragment otherFragment) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         if (fragment.isAdded() && otherFragment != null) {
+            removeFragment(otherFragment);
             transaction.hide(otherFragment);
             transaction.show(fragment);
             transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
@@ -665,7 +666,6 @@ public class ContributionsFragment
             } else {
                 nearbyNotificationCardView.setVisibility(View.GONE);
             }
-            removeFragment(mediaDetailPagerFragment);
             showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG, mediaDetailPagerFragment);
             ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             ((MainActivity)getActivity()).showTabs();
