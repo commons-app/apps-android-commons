@@ -25,13 +25,15 @@ public class Place implements Parcelable {
     public final LatLng location;
     private final String category;
     public final String pic;
-    public final String destroyed;
+    // exists boolean will tell whether the place exists or not,
+    // For a place to be existing both destroyed and endTime property should be null but it is also not necessary for a non-existing place to have both properties either one property is enough (in such case that not given property will be considered as null).
+    public final Boolean exists;
 
     public String distance;
     public final Sitelinks siteLinks;
 
 
-    public Place(String language,String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, String destroyed) {
+    public Place(String language,String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, Boolean exists) {
         this.language = language;
         this.name = name;
         this.label = label;
@@ -40,7 +42,7 @@ public class Place implements Parcelable {
         this.category = category;
         this.siteLinks = siteLinks;
         this.pic = (pic == null) ? "":pic;
-        this.destroyed = (destroyed == null) ? "":destroyed;
+        this.exists = exists;
     }
     public Place(Parcel in) {
         this.language = in.readString();
@@ -52,8 +54,8 @@ public class Place implements Parcelable {
         this.siteLinks = in.readParcelable(Sitelinks.class.getClassLoader());
         String picString = in.readString();
         this.pic = (picString == null) ? "":picString;
-        String destroyedString = in.readString();
-        this.destroyed = (destroyedString == null) ? "":destroyedString;
+        String existString = in.readString();
+        this.exists = Boolean.parseBoolean(existString);
     }
     public static Place from(NearbyResultItem item) {
         String itemClass = item.getClassName().getValue();
@@ -74,7 +76,8 @@ public class Place implements Parcelable {
                         .setWikidataLink(item.getItem().getValue())
                         .build(),
                 item.getPic().getValue(),
-                item.getDestroyed().getValue());
+                // Checking if the place exists or not
+                (item.getDestroyed().getValue() == "") && (item.getEndTime().getValue() == ""));
     }
 
     /**
@@ -194,7 +197,7 @@ public class Place implements Parcelable {
                 ", distance='" + distance + '\'' +
                 ", siteLinks='" + siteLinks.toString() + '\'' +
                 ", pic='" + pic + '\'' +
-                ", destroyed='" + destroyed + '\'' +
+                ", exists='" + exists.toString() + '\'' +
                 '}';
     }
 
@@ -213,7 +216,7 @@ public class Place implements Parcelable {
         dest.writeString(category);
         dest.writeParcelable(siteLinks, 0);
         dest.writeString(pic);
-        dest.writeString(destroyed);
+        dest.writeString(exists.toString());
     }
 
     public static final Creator<Place> CREATOR = new Creator<Place>() {

@@ -201,7 +201,7 @@ public class NearbyController {
                         nearbyBaseMarker.icon(IconFactory.getInstance(context)
                                 .fromBitmap(iconGreen));
                     }
-                } else if (!place.destroyed.trim().isEmpty()) { // Means place is destroyed
+                } else if (!place.exists) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
                     if (iconGrey != null) {
                         nearbyBaseMarker.icon(IconFactory.getInstance(context)
                                 .fromBitmap(iconGrey));

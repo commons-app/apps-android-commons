@@ -12,9 +12,11 @@
 * Rasal Lia
 * Sankarshan
 * Sibabrata Banerjee
+* Tahmid
 * Tahmid02016
 * Tauhid16
 * Titodutta
+* WikiAbuHuraira
 * YahyA
 * Yahya
 * আফতাবুজ্জামান
@@ -296,6 +298,8 @@
   <string name="provider_bookmarks">বুকমার্ক</string>
   <string name="provider_bookmarks_location">বুকমার্ক</string>
   <string name="deletion_reason_uploaded_by_mistake">আমি ভুল করে আপলোড করেছি</string>
+  <string name="review_thanks_yes_button_text">পরবর্তী ছবি</string>
+  <string name="review_thanks_no_button_text">হ্যাঁ, কেন নয়</string>
   <string name="please_wait">অনুগ্রহ করে অপেক্ষা করুন...</string>
   <string name="exif_tag_name_copyright">কপিরাইট</string>
   <string name="exif_tag_name_location">অবস্থান</string>

@@ -5,6 +5,7 @@
 * Bxalber
 * Elliot
 * Envlh
+* FF-11
 * FF11
 * Ferdinand0101
 * Inkowik
@@ -377,7 +378,7 @@
   <string name="no_uploads">Willkommen bei Commons!\n\nLade deine erste Datei hoch, indem du auf die Hinzufügen-Schaltfläche tippst.</string>
   <string name="no_categories_selected">Keine Kategorien ausgewählt</string>
   <string name="no_categories_selected_warning_desc">Bilder ohne Kategorien sind selten nutzbar. Bist du sicher, dass du ohne die Auswahl von Kategorien hochladen möchtest?</string>
-  <string name="upload_flow_all_images_in_set" fuzzy="true">(für alle Bilder im Satz)</string>
+  <string name="upload_flow_all_images_in_set">(für alle Bilder im Satz)</string>
   <string name="search_this_area">Diesen Bereich durchsuchen</string>
   <string name="nearby_card_permission_title">Berechtigungsanfrage</string>
   <string name="nearby_card_permission_explanation">Dürfen wir deinen aktuellen Standort verwenden, um den nächsten Ort anzuzeigen, der Bilder benötigt?</string>
@@ -418,14 +419,8 @@
   <string name="review_category_explanation">Dieses Bild ist unter %1$s Kategorien.</string>
   <string name="review_spam_report_question">Sie ist außerhalb des Geltungsbereichs, da sie</string>
   <string name="review_c_violation_report_question">Sie ist eine Urheberrechtsverletzung, da sie</string>
-  <string name="review_category_yes_button_text">Nein, falsch kategorisiert</string>
-  <string name="review_category_no_button_text">Sieht gut aus</string>
-  <string name="review_spam_yes_button_text">Nein, außerhalb des Geltungsbereichs</string>
-  <string name="review_spam_no_button_text">Sieht gut aus</string>
-  <string name="review_copyright_yes_button_text">Nein, Urheberrechtsverletzung</string>
-  <string name="review_copyright_no_button_text">Sieht gut aus</string>
-  <string name="review_thanks_yes_button_text">Ja, warum nicht</string>
-  <string name="review_thanks_no_button_text">Nächstes Bild</string>
+  <string name="review_thanks_yes_button_text">Nächstes Bild</string>
+  <string name="review_thanks_no_button_text">Ja, warum nicht</string>
   <string name="skip_image_explanation">Das Anklicken dieser Schaltfläche gibt dir ein anderes kürzlich hochgeladenes Bild von Wikimedia Commons</string>
   <string name="review_image_explanation">Du kannst Bilder überprüfen und die Qualität von Wikimedia Commons verbessern.\nDie vier Parameter der Überprüfung sind: \n- Ist dieses Bild im Geltungsbereich? \n- Folgt dieses Bild den Regeln des Urheberrechts? \n- Ist dieses Bild korrekt kategorisiert? \n- Falls alles gut geht, kannst du auch dem Beitrager danken.</string>
   <string name="no_image">Keine Bilder verwendet</string>
@@ -498,4 +493,5 @@
   <string name="leaderboard_column_user">Benutzer</string>
   <string name="leaderboard_weekly">Wöchentlich</string>
   <string name="leaderboard_my_rank_button_text">Mein Rang</string>
+  <string name="menu_view_category_page">Kategorieseite anzeigen</string>
 </resources>

@@ -298,11 +298,8 @@
   <string name="display_campaigns_explanation">Se aktive kampagner</string>
   <string name="nominate_for_deletion_done">Udført</string>
   <string name="review_no_category">Så for pokker da, dette er ikke engang kategoriseret!</string>
-  <string name="review_category_no_button_text">Ser fint ud</string>
-  <string name="review_spam_no_button_text">Ser fint ud</string>
-  <string name="review_copyright_no_button_text">Ser fint ud</string>
-  <string name="review_thanks_yes_button_text">Ja, hvorfor ikke</string>
-  <string name="review_thanks_no_button_text">Næste billede</string>
+  <string name="review_thanks_yes_button_text">Næste billede</string>
+  <string name="review_thanks_no_button_text">Ja, hvorfor ikke</string>
   <string name="no_image">Ingen billeder brugt</string>
   <string name="share_logs_using">Del logs ved hjælp af</string>
   <string name="menu_option_read">Vis læste</string>
@@ -363,4 +360,5 @@
   <string name="leaderboard_my_rank_button_text">Min rang</string>
   <string name="limited_connection_mode">Begrænset forbindelsestilstand</string>
   <string name="statistics_quality">Kvalitetsbilleder</string>
+  <string name="read_help_link">Læs mere</string>
 </resources>

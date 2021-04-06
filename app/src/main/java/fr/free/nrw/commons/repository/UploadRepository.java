@@ -208,16 +208,16 @@ public class UploadRepository {
     }
 
     /**
-     * fetches and returns the previous upload item
+     * fetches and returns the upload item
      *
      * @param index
      * @return
      */
-    public UploadItem getPreviousUploadItem(int index) {
-        if (index - 1 >= 0) {
-            return uploadModel.getItems().get(index - 1);
+    public UploadItem getUploadItem(int index) {
+        if (index >= 0) {
+            return uploadModel.getItems().get(index);
         }
-        return null; //There is no previous item to copy details
+        return null; //There is no item to copy details
     }
 
     /**

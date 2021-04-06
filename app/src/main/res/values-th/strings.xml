@@ -2,6 +2,7 @@
 <!-- Authors:
 * Aefgh39622
 * B20180
+* Bebiezaza
 * Geonuch
 * Horus
 * Just Sayori
@@ -326,7 +327,8 @@
   <string name="ends_on">สิ้นสุดเมื่อ:</string>
   <string name="display_campaigns">แสดงแคมเปญ</string>
   <string name="nominate_for_deletion_done">เสร็จสิ้น</string>
-  <string name="review_thanks_no_button_text">ภาพถัดไป</string>
+  <string name="review_thanks_yes_button_text">ภาพถัดไป</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">ภาพถัดไป</string>
   <string name="no_image">ไม่มีภาพที่ใช้</string>
   <string name="no_image_reverted">ไม่มีภาพย้อนกลับ</string>
   <string name="no_image_uploaded">ไม่มีภาพที่อัปโหลด</string>
