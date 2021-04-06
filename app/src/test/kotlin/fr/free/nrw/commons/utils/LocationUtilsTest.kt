@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.utils
 
 import fr.free.nrw.commons.location.LatLng
-import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 
@@ -18,6 +17,7 @@ class LocationUtilsTest {
         val commonsLatLngTest = LocationUtils.mapBoxLatLngToCommonsLatLng(com.mapbox.mapboxsdk.geometry.LatLng(0.0, 0.0))
         assertEquals(0.0, commonsLatLngTest.latitude)
         assertEquals(0.0, commonsLatLngTest.longitude)
+        assertEquals(0f, commonsLatLngTest.accuracy)
     }
 
     /**
@@ -28,6 +28,7 @@ class LocationUtilsTest {
         val geoLatLngTest = LocationUtils.commonsLatLngToMapBoxLatLng(LatLng(0.0, 0.0, 0f))
         assertEquals(0.0, geoLatLngTest.latitude)
         assertEquals(0.0, geoLatLngTest.longitude)
+        assertEquals(0.0, geoLatLngTest.altitude)
     }
 
 }
