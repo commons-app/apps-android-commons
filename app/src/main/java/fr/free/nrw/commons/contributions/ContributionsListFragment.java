@@ -2,9 +2,7 @@ package fr.free.nrw.commons.contributions;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static fr.free.nrw.commons.db.UploadedImagesKt.uploadedImagesToImages;
 import static fr.free.nrw.commons.di.NetworkingModule.NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE;
-import static fr.free.nrw.commons.filepicker.FilePicker.handleActivityResult;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -35,8 +33,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.db.AppDatabase;
-import fr.free.nrw.commons.db.UploadedImagesDao;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.media.MediaClient;
@@ -45,6 +41,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.wikipedia.dataclient.WikiSite;
+import timber.log.Timber;
 
 /**
  * Created by root on 01.06.2018.
@@ -64,8 +61,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   FloatingActionButton fabPlus;
   @BindView(R.id.fab_camera)
   FloatingActionButton fabCamera;
-  @BindView(R.id.fab_custom_gallery)
-  FloatingActionButton fabCustomGallery;
   @BindView(R.id.fab_gallery)
   FloatingActionButton fabGallery;
   @BindView(R.id.noContributionsYet)
@@ -99,7 +94,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
   private final int SPAN_COUNT_LANDSCAPE = 3;
   private final int SPAN_COUNT_PORTRAIT = 1;
-  private UploadedImagesDao uploadImagesDao;
 
 
   @Override
@@ -108,8 +102,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
       @Nullable final Bundle savedInstanceState) {
     final View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
     ButterKnife.bind(this, view);
-    uploadImagesDao = AppDatabase.Companion.getInstance((getActivity()).getApplication())
-        .getUploadedImagesDao();
     contributionsListPresenter.onAttachView(this);
     initAdapter();
     return view;
@@ -153,15 +145,14 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     }
 
     contributionsListPresenter.setup();
-    contributionsListPresenter.contributionList
-        .observe(this.getViewLifecycleOwner(), adapter::submitList);
+    contributionsListPresenter.contributionList.observe(this.getViewLifecycleOwner(), adapter::submitList);
     rvContributionsList.setAdapter(adapter);
     adapter.registerAdapterDataObserver(new AdapterDataObserver() {
       @Override
       public void onItemRangeInserted(int positionStart, int itemCount) {
         super.onItemRangeInserted(positionStart, itemCount);
         if (itemCount > 0 && positionStart == 0) {
-          if (adapter.getContributionForPosition(positionStart) != null) {
+          if(adapter.getContributionForPosition(positionStart)!=null) {
             rvContributionsList.scrollToPosition(0);//Newly upload items are always added to the top
           }
         }
@@ -241,12 +232,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
       controller.initiateCameraPick(getActivity());
       animateFAB(isFabOpen);
     });
-    fabCustomGallery.setOnClickListener(view -> {
-      uploadingImagesFromCustomGallery();
-      animateFAB(isFabOpen);
-    });
     fabGallery.setOnClickListener(view -> {
-      controller.initiateGalleryPick(getActivity(), true, GalleryType.NORMAL, null);
+      controller.initiateGalleryPick(getActivity(), true);
       animateFAB(isFabOpen);
     });
   }
@@ -257,18 +244,14 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
       if (isFabOpen) {
         fabPlus.startAnimation(rotate_backward);
         fabCamera.startAnimation(fab_close);
-        fabCustomGallery.startAnimation(fab_close);
         fabGallery.startAnimation(fab_close);
         fabCamera.hide();
-        fabCustomGallery.hide();
         fabGallery.hide();
       } else {
         fabPlus.startAnimation(rotate_forward);
         fabCamera.startAnimation(fab_open);
-        fabCustomGallery.startAnimation(fab_open);
         fabGallery.startAnimation(fab_open);
         fabCamera.show();
-        fabCustomGallery.show();
         fabGallery.show();
       }
       this.isFabOpen = !isFabOpen;
@@ -354,7 +337,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
   /**
    * Pauses the current upload
-   *
    * @param contribution
    */
   @Override
@@ -365,7 +347,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
   /**
    * Resumes the current upload
-   *
    * @param contribution
    */
   @Override
@@ -426,17 +407,4 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
     void pauseUpload(Contribution contribution);
   }
-
-
-  /**
-   * creating a background thread and getting data from database and converting into Image format
-   */
-  public void uploadingImagesFromCustomGallery() {
-    final Runnable runnable = () -> controller.initiateGalleryPick(getActivity(), true, GalleryType.CUSTOM,
-        uploadedImagesToImages(uploadImagesDao.get()));
-    // starting the thread created above
-    new Thread(runnable).start();
-  }
 }
-
-

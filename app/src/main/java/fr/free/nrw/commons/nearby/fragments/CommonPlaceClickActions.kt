@@ -11,7 +11,6 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.contributions.ContributionController
-import fr.free.nrw.commons.contributions.GalleryType
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ActivityUtils
@@ -43,8 +42,7 @@ class CommonPlaceClickActions @Inject constructor(
         } else {
             Timber.d("Gallery button tapped. Image title: ${it.getName()}Image desc: ${it.getLongDescription()}")
             storeSharedPrefs(it)
-            //todo
-            contributionController.initiateGalleryPick(activity, false,GalleryType.NORMAL,null)
+            contributionController.initiateGalleryPick(activity, false)
         }
     }
 

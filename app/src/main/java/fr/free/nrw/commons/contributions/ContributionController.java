@@ -9,9 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import androidx.annotation.NonNull;
-import com.nguyenhoanglam.imagepicker.model.Image;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.db.UploadedImagesDao;
 import fr.free.nrw.commons.filepicker.DefaultCallback;
 import fr.free.nrw.commons.filepicker.FilePicker;
 import fr.free.nrw.commons.filepicker.FilePicker.ImageSource;
@@ -59,11 +57,10 @@ public class ContributionController {
     /**
      * Check for permissions and initiate gallery picker
      */
-    public void initiateGalleryPick(Activity activity, boolean allowMultipleUploads, GalleryType type,
-        ArrayList<Image> uploadedImages) {
+    public void initiateGalleryPick(Activity activity, boolean allowMultipleUploads) {
         PermissionUtils.checkPermissionsAndPerformAction(activity,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
-                () -> initiateGalleryUpload(activity, allowMultipleUploads,type,uploadedImages),
+                () -> initiateGalleryUpload(activity, allowMultipleUploads),
                 R.string.storage_permission_title,
                 R.string.read_storage_permission_rationale);
     }
@@ -71,16 +68,9 @@ public class ContributionController {
     /**
      * Open chooser for gallery uploads
      */
-    private void initiateGalleryUpload(Activity activity, boolean allowMultipleUploads,GalleryType type,ArrayList<Image> uploadedImages) {
-        switch (type) {
-            case CUSTOM:
-                FilePicker.openGalleryByImagePicker(activity,allowMultipleUploads,uploadedImages);
-                break;
-            case NORMAL:
-                setPickerConfiguration(activity, allowMultipleUploads);
-                FilePicker.openGallery(activity, 0);
-                break;
-        }
+    private void initiateGalleryUpload(Activity activity, boolean allowMultipleUploads) {
+        setPickerConfiguration(activity, allowMultipleUploads);
+        FilePicker.openGallery(activity, 0);
     }
 
     /**
@@ -126,7 +116,6 @@ public class ContributionController {
             }
         });
     }
-
 
     public List<UploadableFile> handleExternalImagesPicked(Activity activity,
                                                            Intent data) {

@@ -15,20 +15,12 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.nguyenhoanglam.imagepicker.model.Image;
-import com.nguyenhoanglam.imagepicker.ui.imagepicker.ImagePicker;
-import fr.free.nrw.commons.db.AppDatabase;
-import fr.free.nrw.commons.db.UploadedImages;
-import fr.free.nrw.commons.db.UploadedImagesDao;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-import okhttp3.Dispatcher;
-import timber.log.Timber;
 
-import static fr.free.nrw.commons.db.UploadedImagesKt.imageToUploadedImage;
 import static fr.free.nrw.commons.filepicker.PickedFiles.singleFileList;
 
 public class FilePicker implements Constants {
@@ -105,12 +97,6 @@ public class FilePicker implements Constants {
         activity.startActivityForResult(intent, RequestCodes.PICK_PICTURE_FROM_GALLERY);
     }
 
-    public static void openGalleryByImagePicker(Activity activity,boolean allowMultipleUploads,ArrayList<Image> uploadedImages){
-        ImagePicker.with(activity)
-            .setDisabledImages(uploadedImages)
-            .setMultipleMode(allowMultipleUploads)
-            .start();
-    }
     /**
      * Opens the camera app to pick image clicked by user 
      */
@@ -144,10 +130,6 @@ public class FilePicker implements Constants {
      */
     public static void handleActivityResult(int requestCode, int resultCode, Intent data, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
         boolean isHandledPickedFile = (requestCode & RequestCodes.FILE_PICKER_IMAGE_IDENTIFICATOR) > 0;
-        if (ImagePicker.shouldHandleResult(requestCode, resultCode, data, 100)) {
-            ImagePickerResultHandle(data, activity);
-
-        }
         if (isHandledPickedFile) {
             requestCode &= ~RequestCodes.SOURCE_CHOOSER;
             if (requestCode == RequestCodes.PICK_PICTURE_FROM_GALLERY ||
@@ -180,40 +162,6 @@ public class FilePicker implements Constants {
             }
         }
     }
-
-    /**
-     * Image picker will handle the result and data got will be stored in the database in the
-     * background
-     */
-    private static void ImagePickerResultHandle(Intent data, Activity activity) {
-        final ArrayList<Image> images= ImagePicker.getImages(data);
-        UploadedImagesDao uploadedImagesDao = AppDatabase.Companion.getInstance(activity.getApplication()).getUploadedImagesDao();
-        // creating a background thread do that the main ui thread is not blocked while putting data
-        // in the background
-        Runnable runnable = () -> {
-            // looping to each images
-            for (int i= 0; i<images.size();i++){
-                // images are converted into database format and then stored
-                uploadedImagesDao.insert(imageToUploadedImage(images.get(i)));
-            }
-        };
-        // stating the thread which we created above
-        new Thread(runnable).start();
-    }
-
-    public static void handleActivityResult(int requestCode, int resultCode, Intent data, UploadedImagesDao uploadedImagesDao){
-        if (ImagePicker.shouldHandleResult(requestCode, resultCode, data, 100)) {
-            final ArrayList<Image> images= ImagePicker.getImages(data);
-            for (int i= 0; i<images.size();i++){
-                uploadedImagesDao.insert(imageToUploadedImage(images.get(i)));
-            }
-            // Do stuff with image's path or id. For example:
-            for(int i = 0; i < images.size(); i++) {
-                Timber.e("onActivityResult: %s", images.get(i));
-            }
-        }
-    }
-
 
     public static List<UploadableFile> handleExternalImagesPicked(Intent data, Activity activity) {
         try {

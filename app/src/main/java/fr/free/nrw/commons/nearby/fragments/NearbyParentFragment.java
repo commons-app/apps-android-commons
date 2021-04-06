@@ -84,7 +84,6 @@ import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
-import fr.free.nrw.commons.contributions.GalleryType;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
@@ -1536,8 +1535,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (fabGallery.isShown()) {
                 Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString());
                 storeSharedPrefs(selectedPlace);
-                //todo
-                controller.initiateGalleryPick(getActivity(), false, GalleryType.NORMAL,null);
+
+                controller.initiateGalleryPick(getActivity(), false);
             }
         });
     }
