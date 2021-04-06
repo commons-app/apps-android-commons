@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.nguyenhoanglam.imagepicker.widget.SquareFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/image_folder_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@drawable/imagepicker_image_placeholder" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/imagepicker_black_alpha_30"
+        android:orientation="vertical"
+        android:padding="@dimen/imagepicker_padding_small">
+
+        <TextView
+            android:id="@+id/text_folder_name"
+            style="@style/imagepicker_TextSmall"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/imagepicker_white" />
+
+        <TextView
+            android:id="@+id/text_photo_count"
+            style="@style/imagepicker_TextSmall"
+            android:textColor="@color/imagepicker_white" />
+    </LinearLayout>
+
+</com.nguyenhoanglam.imagepicker.widget.SquareFrameLayout>

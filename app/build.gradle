@@ -46,6 +46,7 @@ dependencies {
     implementation 'com.karumi:dexter:5.0.0'
     implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation project(path: ':imagepicker')
 
     kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
     implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:$ADAPTER_DELEGATES_VERSION"
@@ -307,7 +308,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    buildToolsVersion buildToolsVersion
 }
 
 if (isRunningOnTravisAndIsNotPRBuild) {

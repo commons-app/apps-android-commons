@@ -1,0 +1,27 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="imagepicker_BaseTheme" parent="Theme.AppCompat.NoActionBar"></style>
+
+    <style name="imagepicker_ImagePickerTheme" parent="imagepicker_BaseTheme"></style>
+
+    <style name="imagepicker_CameraTheme" parent="imagepicker_BaseTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="imagepicker_ToolbarTitleText" parent="@android:style/TextAppearance.Material.Widget.ActionBar.Title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="imagepicker_ToolbarMenuText" parent="@android:style/TextAppearance.Material.Widget.ActionBar.Menu">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+</resources>
