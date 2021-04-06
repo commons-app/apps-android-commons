@@ -219,6 +219,10 @@ public class CsrfTokenClient {
      * Class CsrfTokenCallExecutor which implement callable interface to get CsrfTokenCall.
      */
     class CsrfTokenCallExecutor implements Callable<Response<MwQueryResponse>> {
+
+        /**
+         * Service for token call.
+         */
         private Service service;
 
         /**
