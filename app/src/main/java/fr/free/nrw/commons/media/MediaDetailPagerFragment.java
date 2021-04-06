@@ -110,8 +110,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             // Adapter doesn't seem to be loading immediately.
             // Dear God, please forgive us for our sins
             view.postDelayed(() -> {
-                pager.setAdapter(adapter);
                 pager.setCurrentItem(pageNumber);
+                pager.setAdapter(adapter);
 
                 if (getActivity() == null) {
                     Timber.d("Returning as activity is destroyed!");
