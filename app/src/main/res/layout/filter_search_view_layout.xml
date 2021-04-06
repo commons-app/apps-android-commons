@@ -13,7 +13,7 @@
         android:text="@string/place_type"
         android:textColor="@color/white"/>
 
-    <SearchView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
