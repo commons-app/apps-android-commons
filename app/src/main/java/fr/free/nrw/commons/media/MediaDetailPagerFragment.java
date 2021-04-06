@@ -111,7 +111,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             // Dear God, please forgive us for our sins
             view.postDelayed(() -> {
                 pager.setAdapter(adapter);
-                pager.setCurrentItem(pageNumber, false);
+                pager.setCurrentItem(pageNumber);
 
                 if (getActivity() == null) {
                     Timber.d("Returning as activity is destroyed!");
@@ -332,13 +332,11 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     public void showImage(int i, boolean isWikipediaButtonDisplayed) {
         this.isWikipediaButtonDisplayed = isWikipediaButtonDisplayed;
-        Handler handler =  new Handler();
-        handler.postDelayed(() -> pager.setCurrentItem(i), 5);
+        pager.setCurrentItem(i);
     }
 
     public void showImage(int i) {
-        Handler handler =  new Handler();
-        handler.postDelayed(() -> pager.setCurrentItem(i), 5);
+        pager.setCurrentItem(i);
     }
 
     /**

@@ -348,30 +348,21 @@ public class ContributionsFragment
      */
     private void showFragment(Fragment fragment, String tag, Fragment otherFragment) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        if (fragment.isAdded() && otherFragment != null) {
-            transaction.hide(otherFragment);
+        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+        if (fragment.isAdded()) {
+            if (otherFragment != null) { transaction.hide(otherFragment); }
             transaction.show(fragment);
-            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
-            transaction.commit();
-            getChildFragmentManager().executePendingTransactions();
-        } else if (fragment.isAdded() && otherFragment == null) {
-            transaction.show(fragment);
-            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
-            transaction.commit();
-            getChildFragmentManager().executePendingTransactions();
-        }else if (!fragment.isAdded() && otherFragment != null ) {
-            transaction.hide(otherFragment);
-            transaction.add(R.id.root_frame, fragment, tag);
-            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
-            transaction.commit();
-            getChildFragmentManager().executePendingTransactions();
-        } else if (!fragment.isAdded()) {
-            transaction.replace(R.id.root_frame, fragment, tag);
-            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
-            transaction.commit();
-            getChildFragmentManager().executePendingTransactions();
+        } else {
+            if (otherFragment != null) {
+                transaction.hide(otherFragment);
+                transaction.add(R.id.root_frame, fragment, tag);
+            } else { transaction.replace(R.id.root_frame, fragment, tag); }
         }
+        transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
+        transaction.commit();
+        getChildFragmentManager().executePendingTransactions();
     }
+
 
     public void removeFragment(Fragment fragment) {
         getChildFragmentManager()
