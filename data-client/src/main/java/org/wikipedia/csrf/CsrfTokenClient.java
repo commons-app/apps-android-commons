@@ -144,8 +144,8 @@ public class CsrfTokenClient {
                             AppAdapter.get().getPassword(), "");
                 }
 
-                //Get CSRFToken response off the main thread.
-                Response<MwQueryResponse> response = Executors.newSingleThreadExecutor().submit(new getCSRFTokenResponse(service)).get();
+                // Get CSRFToken response off the main thread.
+                Response<MwQueryResponse> response = Executors.newSingleThreadExecutor().submit(new CsrfTokenCallExecutor(service)).get();
 
                 if (response.body() == null || response.body().query() == null
                         || TextUtils.isEmpty(response.body().query().csrfToken())) {
@@ -215,14 +215,17 @@ public class CsrfTokenClient {
         void retry();
     }
 
-    class getCSRFTokenResponse implements Callable<Response<MwQueryResponse>> {
+    /**
+     * Class CsrfTokenCallExecutor which implement callable interface to get CsrfTokenCall.
+     */
+    class CsrfTokenCallExecutor implements Callable<Response<MwQueryResponse>> {
         private Service service;
 
         /**
          * Default Constructor.
          * @param service
          */
-        public getCSRFTokenResponse(Service service){
+        public CsrfTokenCallExecutor(Service service){
             this.service = service;
         }
 
