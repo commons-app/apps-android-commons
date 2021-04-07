@@ -344,7 +344,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             @Override
             public void run() {
                 while(currentItemNotShown[0]){
-                    if(pager.getCurrentItem()>i){
+                    if(adapter.getCount()>i){
                         pager.setCurrentItem(i,false);
                         currentItemNotShown[0] = false;
                     }
@@ -428,4 +428,5 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             return provider.getTotalMediaCount();
         }
     }
+
 }
