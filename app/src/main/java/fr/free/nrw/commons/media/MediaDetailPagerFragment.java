@@ -111,7 +111,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             // Dear God, please forgive us for our sins
             view.postDelayed(() -> {
                 pager.setAdapter(adapter);
-                pager.setCurrentItem(pageNumber);
+                pager.setCurrentItem(pageNumber,false);
 
                 if (getActivity() == null) {
                     Timber.d("Returning as activity is destroyed!");
@@ -345,7 +345,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             public void run() {
                 while(currentItemNotShown[0]){
                     if(pager.getCurrentItem()>i){
-                        pager.setCurrentItem(i);
+                        pager.setCurrentItem(i,false);
                         currentItemNotShown[0] = false;
                     }
                 }
