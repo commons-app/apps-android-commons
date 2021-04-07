@@ -368,7 +368,6 @@ public class ContributionsFragment
    */
   private void showFragment(Fragment fragment, String tag, Fragment otherFragment) {
     FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-    transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
     if (fragment.isAdded()) {
       if (otherFragment != null) { transaction.hide(otherFragment); }
       transaction.show(fragment);

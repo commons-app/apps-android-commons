@@ -110,8 +110,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             // Adapter doesn't seem to be loading immediately.
             // Dear God, please forgive us for our sins
             view.postDelayed(() -> {
-                pager.setCurrentItem(pageNumber);
                 pager.setAdapter(adapter);
+                pager.setCurrentItem(pageNumber);
 
                 if (getActivity() == null) {
                     Timber.d("Returning as activity is destroyed!");
@@ -332,11 +332,26 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     public void showImage(int i, boolean isWikipediaButtonDisplayed) {
         this.isWikipediaButtonDisplayed = isWikipediaButtonDisplayed;
-        pager.setCurrentItem(i);
+        settingViewPagerCurrentItem(i);
     }
 
     public void showImage(int i) {
-        pager.setCurrentItem(i);
+        settingViewPagerCurrentItem(i);
+    }
+    private void settingViewPagerCurrentItem(int i) {
+        final Boolean[] currentItemNotShown = {true};
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                while(currentItemNotShown[0]){
+                    if(pager.getCurrentItem()>i){
+                        pager.setCurrentItem(i);
+                        currentItemNotShown[0] = false;
+                    }
+                }
+            }
+        };
+        new Thread(runnable).start();
     }
 
     /**
