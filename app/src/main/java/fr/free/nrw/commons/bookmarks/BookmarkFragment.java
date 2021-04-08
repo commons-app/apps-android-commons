@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.ParentViewPager;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -78,6 +79,10 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment {
                                         applicationKvStore.getBoolean("login_skipped"));
     viewPager.setAdapter(adapter);
     tabLayout.setupWithViewPager(viewPager);
+
+    ((MainActivity)getActivity()).showTabs();
+    ((BaseActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
     setupTabLayout();
     return view;
   }

@@ -148,6 +148,9 @@ public class ContributionsFragment
         if(shouldShowMediaDetailsFragment){
             showMediaDetailPagerFragment();
         }else{
+            if (mediaDetailPagerFragment != null) {
+                removeFragment(mediaDetailPagerFragment);
+            }
             showContributionsListFragment();
         }
 
