@@ -105,14 +105,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             ((BaseActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        pager.setAdapter(adapter);
         if (savedInstanceState != null) {
             final int pageNumber = savedInstanceState.getInt("current-page");
-                pager.setAdapter(adapter);
                 pager.setCurrentItem(pageNumber, false);
                 getActivity().invalidateOptionsMenu();
                 adapter.notifyDataSetChanged();
-        } else {
-            pager.setAdapter(adapter);
         }
         if (getActivity() instanceof MainActivity) {
             ((MainActivity)getActivity()).hideTabs();
