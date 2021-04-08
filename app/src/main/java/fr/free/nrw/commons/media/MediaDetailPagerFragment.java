@@ -328,19 +328,17 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     }
 
   /**
-   * This function is called to check if the selected item(item to be displayed) is loaded in the
-   * adapter or not, and when its done in background so that it does not block the ui if item is
-   * removed
-   * @param i current item that to be shown
+   * This function waits for the item to load then sets the item to current item
+   * @param position current item that to be shown
    */
-    private void settingViewPagerCurrentItem(int i) {
+    private void settingViewPagerCurrentItem(int position) {
         final Boolean[] currentItemNotShown = {true};
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 while(currentItemNotShown[0]){
-                    if(adapter.getCount() > i){
-                        pager.setCurrentItem(i, false);
+                    if(adapter.getCount() > position){
+                        pager.setCurrentItem(position, false);
                         currentItemNotShown[0] = false;
                     }
                 }
