@@ -1,58 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
 
   <fr.free.nrw.commons.nearby.NearbyNotificationCardView
     android:id="@+id/card_view_nearby"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/very_tiny_gap"/>
+    android:layout_margin="@dimen/very_tiny_gap" />
 
   <fr.free.nrw.commons.campaigns.CampaignView
-      android:id="@+id/campaigns_view"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/miniscule_margin"
-      android:layout_margin="@dimen/very_tiny_gap"/>
+    android:id="@+id/campaigns_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/very_tiny_gap"
+    android:layout_marginTop="@dimen/miniscule_margin" />
 
   <LinearLayout
     android:id="@+id/limited_connection_enabled_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/limited_connection_enabled_layout_height"
     android:layout_margin="@dimen/miniscule_margin"
-    android:padding="@dimen/standard_gap"
-    android:orientation="vertical"
-    android:background="@color/wikimedia_green">
+    android:padding="@dimen/small_gap"
+    android:background="@color/wikimedia_green"
+    android:orientation="horizontal">
+
     <ImageView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/small_gap"
-      app:srcCompat="@drawable/ic_baseline_cloud_off_72"/>
+      android:layout_gravity="center_vertical|start"
+      app:srcCompat="@drawable/ic_baseline_cloud_off_72" />
+
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="@string/limited_connection_is_on"
       android:textColor="@android:color/white"
-      android:layout_marginBottom="@dimen/tiny_gap"
-      android:textSize="@dimen/subheading_text_size"
-      android:text="@string/limited_connection_is_on"/>
+      android:textSize="@dimen/subheading_text_size" />
+
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:text="@string/limited_connection_explanation"
       android:textColor="@android:color/white"
       android:textSize="@dimen/description_text_size"
-      android:text="@string/limited_connection_explanation"/>
+      android:visibility="gone" />
   </LinearLayout>
 
   <FrameLayout
-      android:id="@+id/root_frame"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_marginTop="@dimen/miniscule_margin"
-      android:background="#000"
-      >
-  </FrameLayout>
+    android:id="@+id/root_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/miniscule_margin"
+    android:background="#000"/>
 
 </LinearLayout>
