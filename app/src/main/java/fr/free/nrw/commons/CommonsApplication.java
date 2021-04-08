@@ -47,7 +47,9 @@ import io.reactivex.internal.functions.Functions;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 import java.io.File;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -126,7 +128,12 @@ public class CommonsApplication extends MultiDexApplication {
 
     @Inject ContributionDao contributionDao;
 
-    /**
+  /**
+   * In memory list of contributios whose uploads ahve been paused by the user
+   */
+  public static Map<String, Boolean> pauseUploads = new HashMap<>();
+
+  /**
      * Used to declare and initialize various components and dependencies
      */
     @Override

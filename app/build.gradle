@@ -67,9 +67,11 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
 
     // Dependency injector
+    implementation "com.google.dagger:dagger-android:$DAGGER_VERSION"
     implementation "com.google.dagger:dagger-android-support:$DAGGER_VERSION"
     kapt "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
     kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
@@ -145,6 +147,10 @@ dependencies {
     implementation "androidx.preference:preference-ktx:$PREFERENCE_VERSION"
 
     implementation "androidx.multidex:multidex:$MULTIDEX_VERSION"
+
+    def work_version = "2.4.0"
+    // Kotlin + coroutines
+    implementation "androidx.work:work-runtime-ktx:$work_version"
 }
 
 android {

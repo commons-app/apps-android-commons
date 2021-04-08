@@ -135,8 +135,7 @@
             android:name=".review.ReviewActivity"
             android:label="@string/title_activity_review" />
 
-        <service android:name=".upload.UploadService" />
-        <service
+      <service
             android:name=".auth.WikiAccountAuthenticatorService"
             android:exported="true"
             android:process=":auth">

@@ -6,6 +6,7 @@ import fr.free.nrw.commons.explore.categories.CategoriesModule;
 import fr.free.nrw.commons.navtab.MoreBottomSheetFragment;
 import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment;
 import fr.free.nrw.commons.navtab.NavTabLayout;
+import fr.free.nrw.commons.upload.worker.UploadWorker;
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -46,6 +47,8 @@ import fr.free.nrw.commons.widget.PicOfDayAppWidget;
 })
 public interface CommonsApplicationComponent extends AndroidInjector<ApplicationlessInjection> {
     void inject(CommonsApplication application);
+
+    void inject(UploadWorker worker);
 
     void inject(LoginActivity activity);
 

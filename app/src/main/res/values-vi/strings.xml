@@ -24,7 +24,12 @@
     <item quantity="one">%1$d tập tin đã tải lên</item>
     <item quantity="other">%1$d tập tin đã tải lên</item>
   </plurals>
-  <string name="starting_multiple_uploads">Đang bắt đầu tải lên %1$d tập tin</string>
+
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Đang bắt đầu tải lên %1$d tập tin</item>
+    <item quantity="other">Đang bắt đầu tải lên %1$d tập tin</item>
+  </plurals>
+
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d tập tin đã tải lên</item>
     <item quantity="other">%1$d tập tin đã tải lên</item>

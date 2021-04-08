@@ -124,7 +124,7 @@ class BookmarkPictureDaoTest {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(1))
 
         assertFalse(testObject.updateBookmark(exampleBookmark))
-        verify(client).delete(eq(exampleBookmark.contentUri), isNull(), isNull())
+        verify(client).delete(eq(exampleBookmark.contentUri!!), isNull(), isNull())
     }
 
     @Test

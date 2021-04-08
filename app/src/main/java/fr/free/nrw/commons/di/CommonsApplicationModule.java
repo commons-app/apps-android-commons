@@ -165,7 +165,7 @@ public class CommonsApplicationModule {
     @Provides
     public UploadController providesUploadController(SessionManager sessionManager,
                                                      @Named("default_preferences") JsonKvStore kvStore,
-                                                     Context context) {
+                                                     Context context, ContributionDao contributionDao) {
         return new UploadController(sessionManager, context, kvStore);
     }
 
