@@ -107,8 +107,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
         if (savedInstanceState != null) {
             final int pageNumber = savedInstanceState.getInt("current-page");
-            // Adapter doesn't seem to be loading immediately.
-            // Dear God, please forgive us for our sins
                 pager.setAdapter(adapter);
                 pager.setCurrentItem(pageNumber, false);
                 getActivity().invalidateOptionsMenu();
