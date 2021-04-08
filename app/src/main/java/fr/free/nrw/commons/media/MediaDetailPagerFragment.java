@@ -332,13 +332,26 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     public void showImage(int i, boolean isWikipediaButtonDisplayed) {
         this.isWikipediaButtonDisplayed = isWikipediaButtonDisplayed;
-        Handler handler =  new Handler();
-        handler.postDelayed(() -> pager.setCurrentItem(i), 5);
+        settingViewPagerCurrentItem(i);
     }
 
     public void showImage(int i) {
-        Handler handler =  new Handler();
-        handler.postDelayed(() -> pager.setCurrentItem(i), 5);
+        settingViewPagerCurrentItem(i);
+    }
+    private void settingViewPagerCurrentItem(int i) {
+        final Boolean[] currentItemNotShown = {true};
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                while(currentItemNotShown[0]){
+                    if(adapter.getCount()>i){
+                        pager.setCurrentItem(i,false);
+                        currentItemNotShown[0] = false;
+                    }
+                }
+            }
+        };
+        new Thread(runnable).start();
     }
 
     /**
@@ -415,4 +428,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             return provider.getTotalMediaCount();
         }
     }
+
+
 }
