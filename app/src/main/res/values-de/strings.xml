@@ -27,10 +27,9 @@
     <item quantity="one">Eine Datei wird hochgeladen</item>
     <item quantity="other">%1$d Dateien werden hochgeladen</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">Eine hochgeladene Datei</item>
-    <item quantity="other">%1$d hochgeladene Dateien</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Starte einen Upload</item>
@@ -351,12 +350,12 @@
   <string name="notifications">Benachrichtigungen</string>
   <string name="read_notifications">Benachrichtigungen (gelesen)</string>
   <string name="display_nearby_notification">Benachrichtigungen in der Nähe anzeigen</string>
-  <string name="display_nearby_notification_summary" fuzzy="true">Hier tippen, um Orte in der Nähe anzusehen, die Bilder benötigen.</string>
+  <string name="display_nearby_notification_summary">In-App-Benachrichtigung für den nächstgelegenen Ort anzeigen, der Bilder benötigt</string>
   <string name="list_sheet">Liste</string>
   <string name="storage_permission">Speicherberechtigung</string>
   <string name="write_storage_permission_rationale_for_image_share">Wir benötigen deine Berechtigung für den Zugriff auf den externen Speicher deines Geräts, um Bilder hochzuladen.</string>
   <string name="nearby_notification_dismiss_message">Du wirst nicht mehr den nähersten Ort sehen, der noch Bilder braucht. Du kannst jedoch diese Benachrichtigung in den Einstellungen erneut aktivieren, falls du das zu wünschen tust.</string>
-  <string name="step_count" fuzzy="true">Schritt %1$d von %2$d</string>
+  <string name="step_count">Schritt %1$d von %2$d: %3$s</string>
   <string name="next">Nächste</string>
   <string name="previous">Vorherige</string>
   <string name="submit">Einreichen</string>

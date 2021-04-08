@@ -5,6 +5,7 @@
 * Clon
 * Dvorapa
 * Frettie
+* Georg101
 * Ilimanaq29
 * Jkjk
 * Ján Kepler
@@ -436,6 +437,8 @@
   <string name="images_featured_explanation">Nejlepší obrázky jsou soubory od vysoce zkušených fotografů a ilustrátorů, které vybrala komunita Wikimedia Commons jako jedny z nejkvalitnějších.</string>
   <string name="images_via_nearby_explanation">Obrázky nahrané přes Poblíž jsou obrázky, které jsou nahrané díky objevování míst na mapě.</string>
   <string name="thanks_received_explanation">Tato funkce umožňuje uživatelům poslat poděkování za užitečné editace – použitím odkazu poděkovat v historii stránky anebo na stránce rozdílu mezi revizemi.</string>
+  <string name="copy_image_caption_description">Kopírovat do následujícího média</string>
+  <string name="copied_successfully">Zkopírováno!</string>
   <string name="welcome_do_upload_content_description">Příklady dobrých obrázků k nahrání na Commons</string>
   <string name="welcome_dont_upload_content_description">Příklady obrázků, které byste neměli nahrávat</string>
   <string name="skip_image">Přeskočit obrázek</string>
@@ -528,4 +531,5 @@
   <string name="leaderboard_yearly">Ročně</string>
   <string name="leaderboard_weekly">Týdně</string>
   <string name="leaderboard_upload">Nahrát</string>
+  <string name="read_help_link">Číst dál</string>
 </resources>

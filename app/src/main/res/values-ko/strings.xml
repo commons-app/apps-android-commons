@@ -412,8 +412,8 @@
   <string name="menu_option_unread">읽지 않은 항목 보기</string>
   <string name="error_occurred_in_picking_images">이미지 선택 도중 오류가 발생했습니다</string>
   <string name="please_wait">기다려 주십시오...</string>
-  <string name="copy_image_caption_description" fuzzy="true">다음 미디어로 복사</string>
-  <string name="copied_successfully" fuzzy="true">성공적으로 복사했습니다</string>
+  <string name="copy_image_caption_description">다음 미디어로 복사</string>
+  <string name="copied_successfully">복사했습니다</string>
   <string name="welcome_do_upload_content_description">공용에 업로드할 좋은 이미지의 예</string>
   <string name="skip_image">이 이미지 건너뛰기</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">다운로드를 실패했습니다!! 외장 스토리지 권한 없이 파일을 다운로드할 수 없습니다.</string>

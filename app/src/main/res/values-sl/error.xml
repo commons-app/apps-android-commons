@@ -5,5 +5,6 @@
 <resources>
   <string name="crash_dialog_title">Zbirka se je sesula</string>
   <string name="crash_dialog_text">Ups. Nekaj je šlo narobe!</string>
+  <string name="crash_dialog_comment_prompt">Po e-pošti nam sporočite, kaj ste počeli. To nam pomagalo, da bomo težavo lahko odpravili!</string>
   <string name="crash_dialog_ok_toast">Hvala!</string>
 </resources>

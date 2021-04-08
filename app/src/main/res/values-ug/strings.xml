@@ -2,6 +2,7 @@
 <!-- Authors:
 * AlimOmar
 * HushBeg
+* Sahran
 * Tel'et
 * چۈشكۈن
 -->
@@ -105,5 +106,9 @@
   <string name="commons_website">ئورتاق بەھرىمان بولىدىغان توربەت بايلىقى</string>
   <string name="mediaimage_failed">ۋاستە رەسىمى مەغلۇپ بولدى</string>
   <string name="welcome_image_rainbow_bridge">ھەسەت ھۈسەن كۆۋرۈك</string>
+  <string name="review_thanks_yes_button_text">كېيىنكى سۈرەت</string>
+  <string name="review_thanks_no_button_text">ھەئە، نېمىشقا بولمىسۇن</string>
+  <string name="copy_image_caption_description">كېيىنكى ۋاسىتەگە كۆچۈر</string>
+  <string name="copied_successfully">كۆچۈرۈلدى</string>
   <string name="nearby_no_results">ھېچقانداق يەر تېپىلمىدى ، ئىزدەش ئۆلچىمىڭىزنى ئۆزگەرتىپ بېقىڭ.</string>
 </resources>

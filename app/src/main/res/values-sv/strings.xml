@@ -438,6 +438,7 @@
   <string name="images_featured_explanation">Utmärkta bilder är bilder från skickliga fotografer och illustratörer som gemenskapen på Wikimedia Commons har valt ut som bilder med den högsta kvalitetet på webbplatsen.</string>
   <string name="images_via_nearby_explanation">Bilder som har laddats upp via \"Platser i närheten\" är bilderna som laddas upp genom att upptäcka platser på kartan.</string>
   <string name="thanks_received_explanation">Denna funktion låter redigerare skicka en tackavisering till användare som gör användbara redigeringar – genom att använda en liten tacklänk på historik- eller diff-sidor.</string>
+  <string name="copied_successfully">Kopierad</string>
   <string name="welcome_do_upload_content_description">Exempel på bra bilder att ladda upp på Commons</string>
   <string name="welcome_dont_upload_content_description">Exempel på bilder att inte ladda upp</string>
   <string name="skip_image">Hoppa över denna bild</string>
@@ -576,4 +577,5 @@
   <string name="media_detail_step_title">Mediedetaljer</string>
   <string name="menu_view_category_page">Visa kategorisida</string>
   <string name="menu_view_item_page">Visa objektsida</string>
+  <string name="read_help_link">Läs mer</string>
 </resources>

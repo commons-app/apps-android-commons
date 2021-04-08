@@ -398,6 +398,7 @@
   <string name="menu_option_unread">Vedi non lette</string>
   <string name="error_occurred_in_picking_images">Si è verificato un errore durante la selezione delle immagini</string>
   <string name="please_wait">Attendi per favore…</string>
+  <string name="copied_successfully">Copiato</string>
   <string name="skip_image">Salta questa immagine</string>
   <string name="exif_tag_name_author">Autore</string>
   <string name="exif_tag_name_copyright">Copyright</string>
