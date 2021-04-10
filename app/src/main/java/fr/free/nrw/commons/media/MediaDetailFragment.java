@@ -16,8 +16,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -298,6 +300,34 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 updateAspectRatio(scrollView.getWidth());
             }
         });
+
+        /**
+         * Key listener on the fragment.
+         * We request focus, to track the key events in fragment.
+         */
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener( new OnKeyListener()
+        {
+            /**
+             * onKey is triggered on a key event in fragment.
+             */
+            @Override
+            public boolean onKey( View v, int keyCode, KeyEvent event )
+            {
+                // Back pressed
+                if(keyCode == KeyEvent.KEYCODE_BACK)
+                {
+                    // If category edit container is visible we remove it.
+                    if (dummyCategoryEditContainer.getVisibility() == VISIBLE) {
+                        dummyCategoryEditContainer.setVisibility(GONE);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        } );
+
         return view;
     }
 
