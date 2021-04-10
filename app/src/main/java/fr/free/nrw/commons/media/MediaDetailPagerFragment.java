@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -320,18 +319,18 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     public void showImage(int i, boolean isWikipediaButtonDisplayed) {
         this.isWikipediaButtonDisplayed = isWikipediaButtonDisplayed;
-        settingViewPagerCurrentItem(i);
+        setViewPagerCurrentItem(i);
     }
 
     public void showImage(int i) {
-        settingViewPagerCurrentItem(i);
+        setViewPagerCurrentItem(i);
     }
 
   /**
    * This function waits for the item to load then sets the item to current item
    * @param position current item that to be shown
    */
-    private void settingViewPagerCurrentItem(int position) {
+    private void setViewPagerCurrentItem(int position) {
         final Boolean[] currentItemNotShown = {true};
         Runnable runnable = new Runnable() {
             @Override
