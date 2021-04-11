@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.ViewPagerAdapter;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.ActivityUtils;
@@ -86,6 +87,9 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
 
         fragmentList.add(mobileRootFragment);
         titleList.add(getString(R.string.explore_tab_title_mobile).toUpperCase());
+
+        ((MainActivity)getActivity()).showTabs();
+        ((BaseActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
