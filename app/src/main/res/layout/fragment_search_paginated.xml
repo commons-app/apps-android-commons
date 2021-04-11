@@ -3,8 +3,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical"
-  android:paddingTop="@dimen/tiny_gap"
-  android:background="?attr/mainBackground">
+  android:paddingTop="@dimen/tiny_gap">
 
   <TextView
     android:id="@+id/contentNotFound"
