@@ -13,11 +13,11 @@
     <item quantity="one">%1$d n usali</item>
     <item quantity="other">%1$d n usali</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Beddu n %1$d n usali</item>
     <item quantity="other">Beddu n %1$d n usali</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d n usali</item>
     <item quantity="other">%1$d n usali</item>
   </plurals>
@@ -37,7 +37,7 @@
   <string name="uploading_started">Asali yebda!</string>
   <string name="upload_completed_notification_title">%1$s yuli!</string>
   <string name="upload_completed_notification_text">Senned akken ad twaliḍ asali-ik</string>
-  <string name="upload_progress_notification_title_start">Beddu n usali n %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Beddu n usali n %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ulin</string>
   <string name="upload_progress_notification_title_finishing">Tagara n usali n %1$s</string>
   <string name="upload_failed_notification_title">Asali n  %1$s ur yeddi ara</string>

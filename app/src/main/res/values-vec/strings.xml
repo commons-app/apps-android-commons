@@ -13,11 +13,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Scumisià %1$d cargamento</item>
     <item quantity="other">Scumisiai %1$d cargamenti</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d cargamento</item>
     <item quantity="other">%1$d cargamenti</item>
   </plurals>
@@ -56,7 +56,7 @@
   <string name="uploading_started">Cargamento scumisià</string>
   <string name="upload_completed_notification_title">%1$s cargà!</string>
   <string name="upload_completed_notification_text">Schicia par vardar i to cargamenti</string>
-  <string name="upload_progress_notification_title_start">Scumisio del cargamento de %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Scumisio del cargamento de %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s cargà!</string>
   <string name="upload_progress_notification_title_finishing">Finio el cargamento de %1$s</string>
   <string name="upload_failed_notification_title">Cargamento de %1$s no riusio</string>

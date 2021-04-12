@@ -12,11 +12,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Stoche accumenze le carecaminde</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Ste accumenze %1$d carecamende</item>
     <item quantity="other">Stonne accumenzane %1$d carecaminde</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d carecamende</item>
     <item quantity="other">%1$d carecaminde</item>
   </plurals>

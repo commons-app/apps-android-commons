@@ -12,11 +12,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Ancamin dij cariament</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d cariament ancaminà</item>
     <item quantity="other">%1$d cariament ancaminà</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d cariament</item>
     <item quantity="other">%1$d cariament</item>
   </plurals>
@@ -57,7 +57,7 @@
   <string name="uploading_queued">Carié an coa (manera ëd conession limità abilità)</string>
   <string name="upload_completed_notification_title">%1$s carià!</string>
   <string name="upload_completed_notification_text">Sgnaché për vëdde sò cariament</string>
-  <string name="upload_progress_notification_title_start">Inissi dël cariament %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Inissi dël cariament %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s carià</string>
   <string name="upload_progress_notification_title_finishing">Fin dël cariament %1$s</string>
   <string name="upload_failed_notification_title">Cariament falì a %1$s</string>

@@ -31,7 +31,7 @@
   <string name="uploading_started">Yükləmə başladı!</string>
   <string name="upload_completed_notification_title">%1$s yükləndi!</string>
   <string name="upload_completed_notification_text">Yüklədiyini izlə</string>
-  <string name="upload_progress_notification_title_start">%1$s yüklənməsi başlanır</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s yüklənməsi başlanır</string>
   <string name="upload_progress_notification_title_in_progress">%1$s yüklənir</string>
   <string name="upload_progress_notification_title_finishing">%1$s yüklənməsi başa çatdı</string>
   <string name="upload_failed_notification_title">%1$s faylının yüklənməsi alınmadı</string>

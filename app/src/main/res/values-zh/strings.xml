@@ -43,11 +43,11 @@
     <item quantity="other">%1$d次上传</item>
   </plurals>
   <string name="starting_uploads">开始上传</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">开始%1$d次上传</item>
     <item quantity="other">开始%1$d次上传</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d次上传</item>
     <item quantity="other">%1$d次上传</item>
   </plurals>
@@ -87,7 +87,7 @@
   <string name="uploading_queued">上传排队中（已启用连接受限模式）</string>
   <string name="upload_completed_notification_title">%1$s已上传！</string>
   <string name="upload_completed_notification_text">点击查看您的上传</string>
-  <string name="upload_progress_notification_title_start">开始%1$s的上传</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">开始%1$s的上传</string>
   <string name="upload_progress_notification_title_in_progress">%1$s正在上传</string>
   <string name="upload_progress_notification_title_finishing">正在完成上传%1$s</string>
   <string name="upload_failed_notification_title">上传%1$s失败</string>

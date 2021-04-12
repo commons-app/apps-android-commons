@@ -51,7 +51,7 @@
   <string name="uploading_started">Kroget da enporzhiañ!</string>
   <string name="upload_completed_notification_title">%1$s bet enporzhiet !</string>
   <string name="upload_completed_notification_text">Pouezit evit gwelet hoc\'h enporzhiadenn</string>
-  <string name="upload_progress_notification_title_start">O kregiñ da enporzhiañ %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">O kregiñ da enporzhiañ %1$s</string>
   <string name="upload_progress_notification_title_in_progress">O enporzhiañ %1$s !</string>
   <string name="upload_progress_notification_title_finishing">Oc\'h echuiñ enporzhiadenn %1$s</string>
   <string name="upload_failed_notification_title">C\'hwitet en deus enporzhiañ %1$s</string>

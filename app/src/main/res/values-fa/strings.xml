@@ -36,11 +36,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">شروع %1$d بارگذاری پرونده</item>
     <item quantity="other">شروع بارگذاری %1$d پرونده</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d بارگذاری</item>
     <item quantity="other">%1$d بارگذاری</item>
   </plurals>
@@ -76,7 +76,7 @@
   <string name="uploading_started">بارگذاری آغاز شد!</string>
   <string name="upload_completed_notification_title">%1$s بارگذاری شد!</string>
   <string name="upload_completed_notification_text">برای دیدن بارگذاریتان بر روی صفحه انگشت بزنید</string>
-  <string name="upload_progress_notification_title_start">شروع بارگذاری %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">شروع بارگذاری %1$s</string>
   <string name="upload_progress_notification_title_in_progress">بارگذاری %1$s</string>
   <string name="upload_progress_notification_title_finishing">اتمام بارگذاری %1$s</string>
   <string name="upload_failed_notification_title">%1$s بارگذاری نشد</string>

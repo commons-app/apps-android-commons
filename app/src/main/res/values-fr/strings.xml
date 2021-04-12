@@ -39,11 +39,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Démarrage des téléversements</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d téléversement démarré</item>
     <item quantity="other">%1$d téléversements démarrés</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d téléversement</item>
     <item quantity="other">%1$d téléversements</item>
   </plurals>
@@ -84,7 +84,7 @@
   <string name="uploading_queued">Téléversement mis en file d’attente (mode de connexion limitée activé)</string>
   <string name="upload_completed_notification_title">%1$s téléversé !</string>
   <string name="upload_completed_notification_text">Appuyer pour voir votre téléversement</string>
-  <string name="upload_progress_notification_title_start">Début de téléversement de %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Début de téléversement de %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s en cours de téléversement</string>
   <string name="upload_progress_notification_title_finishing">Fin du téléversement de %1$s</string>
   <string name="upload_failed_notification_title">Le téléversement de %1$s a échoué</string>

@@ -12,13 +12,13 @@
     <item quantity="other">Nalagam %1$d datotek</item>
   </plurals>
   <string name="starting_uploads">Začenjam nalaganje</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Začenjam %1$d nalaganje</item>
     <item quantity="two">Začenjam %1$d nalaganji</item>
     <item quantity="few">Začenjam %1$d nalaganja</item>
     <item quantity="other">Začenjam %1$d nalaganj</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d nalaganje</item>
     <item quantity="two">%1$d nalaganji</item>
     <item quantity="few">%1$d nalaganja</item>
@@ -66,7 +66,7 @@
   <string name="uploading_queued">Nalaganje na čakanju (omogočen je način omejene povezanosti)</string>
   <string name="upload_completed_notification_title">Datoteka »%1$s« je naložena!</string>
   <string name="upload_completed_notification_text">Tapnite za ogled naložene datoteke</string>
-  <string name="upload_progress_notification_title_start">Začenjam nalaganje %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Začenjam nalaganje %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Nalagam %1$s</string>
   <string name="upload_progress_notification_title_finishing">Končujem nalaganje datoteke »%1$s«</string>
   <string name="upload_failed_notification_title">Nalaganje datoteke »%1%s« ni uspelo</string>

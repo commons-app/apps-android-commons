@@ -18,7 +18,7 @@
   <string name="authentication_failed" fuzzy="true">प्रमाणीकरण असफल!</string>
   <string name="uploading_started">अपलोड शुरू होइग्यो!</string>
   <string name="upload_completed_notification_text">तमले अर्याऽ अपलोड तक्दाइ ट्याप अरऽ</string>
-  <string name="upload_progress_notification_title_start">%1$s अपलोड पैटौन्‍नाछ़</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s अपलोड पैटौन्‍नाछ़</string>
   <string name="upload_progress_notification_title_in_progress">%1$s अपलोड अद्दाछ़</string>
   <string name="upload_progress_notification_title_finishing"> %1$s अपलोड सक्दाछ़</string>
   <string name="upload_failed_notification_title">%1$s अपलोड असफल</string>

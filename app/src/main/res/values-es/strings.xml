@@ -39,11 +39,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Comenzando las subidas</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Iniciando %1$d carga</item>
     <item quantity="other">Iniciando %1$d cargas</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d carga</item>
     <item quantity="other">%1$d cargas</item>
   </plurals>
@@ -84,7 +84,7 @@
   <string name="uploading_queued">Carga en cola (modo de conexión limitada activado)</string>
   <string name="upload_completed_notification_title">¡Se ha subido %1$s!</string>
   <string name="upload_completed_notification_text">Pulsa para ver tu subida</string>
-  <string name="upload_progress_notification_title_start">Empezando la subida de %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Empezando la subida de %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Subiendo %1$s</string>
   <string name="upload_progress_notification_title_finishing">Finalizando la subida de %1$s</string>
   <string name="upload_failed_notification_title">Falló la carga de %1$s</string>

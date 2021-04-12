@@ -14,11 +14,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Mitembeyan Ngamuat</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Ngamimitian saunjalan</item>
     <item quantity="other">Ngamimitian %1$d unjalan</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d unggahan</item>
     <item quantity="other">%1$d unggahan</item>
   </plurals>
@@ -59,7 +59,7 @@
   <string name="uploading_queued">Muatan geus ngantri (sambungan diwates dijalankeun)</string>
   <string name="upload_completed_notification_title">%1$s diunjal!</string>
   <string name="upload_completed_notification_text">Toél pikeun némpo unjalan anjeun</string>
-  <string name="upload_progress_notification_title_start">Ngamimitian %1$s ngunjal</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Ngamimitian %1$s ngunjal</string>
   <string name="upload_progress_notification_title_in_progress">Ngunjal %1$s</string>
   <string name="upload_progress_notification_title_finishing">Méréskeun unjalan %1$s</string>
   <string name="upload_failed_notification_title">Ngunjal %1$s gagal</string>

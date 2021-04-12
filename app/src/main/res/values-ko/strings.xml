@@ -27,11 +27,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d장의 업로드를 시작합니다</item>
     <item quantity="other">%1$d장의 업로드를 시작합니다</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d개 업로드</item>
     <item quantity="other">%1$d개 업로드</item>
   </plurals>
@@ -67,7 +67,7 @@
   <string name="uploading_started">올리기를 시작했습니다!</string>
   <string name="upload_completed_notification_title">%1$s 파일을 올렸습니다!</string>
   <string name="upload_completed_notification_text">올린 것을 보려면 탭하세요</string>
-  <string name="upload_progress_notification_title_start">%1$s 파일 업로드를 시작하는 중</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s 파일 업로드를 시작하는 중</string>
   <string name="upload_progress_notification_title_in_progress">%1$s 파일을 올리는 중</string>
   <string name="upload_progress_notification_title_finishing">%1$s 파일 올리기를 끝내는 중</string>
   <string name="upload_failed_notification_title">%1$s 파일 올리기 실패</string>

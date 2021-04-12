@@ -26,11 +26,11 @@
     <item quantity="other">%1$d feltöltés</item>
   </plurals>
   <string name="starting_uploads">Feltöltések indítása</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d feltöltés kezdése</item>
     <item quantity="other">%1$d feltöltés kezdése</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d feltöltés</item>
     <item quantity="other">%1$d feltöltés</item>
   </plurals>
@@ -71,7 +71,7 @@
   <string name="uploading_queued">Feltöltések késleltetése (korlátozott kapcsolat-mód bekapcsolva)</string>
   <string name="upload_completed_notification_title">%1$s feltöltve.</string>
   <string name="upload_completed_notification_text">Feltöltés megtekintése</string>
-  <string name="upload_progress_notification_title_start">Feltöltés indul: %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Feltöltés indul: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s feltöltése</string>
   <string name="upload_progress_notification_title_finishing">%1$s feltöltése befejezve</string>
   <string name="upload_failed_notification_title">%1$s feltöltése sikertelen</string>

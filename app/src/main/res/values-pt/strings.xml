@@ -26,11 +26,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">A iniciar carregamentos</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">A iniciar %1$d carregamento</item>
     <item quantity="other">A iniciar %1$d carregamentos</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d carregamento</item>
     <item quantity="other">%1$d carregamentos</item>
   </plurals>
@@ -71,7 +71,7 @@
   <string name="uploading_queued">Fila de carregamento (modo de ligação limitada ativado)</string>
   <string name="upload_completed_notification_title">%1$s carregado!</string>
   <string name="upload_completed_notification_text">Toque para ver o seu carregamento</string>
-  <string name="upload_progress_notification_title_start">A iniciar o carregamento de %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">A iniciar o carregamento de %1$s</string>
   <string name="upload_progress_notification_title_in_progress">A carregar %1$s</string>
   <string name="upload_progress_notification_title_finishing">A terminar o carregamento de %1$s</string>
   <string name="upload_failed_notification_title">O carregamento de %1$s falhou</string>

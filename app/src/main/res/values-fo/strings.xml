@@ -17,7 +17,7 @@
   <string name="uploading_started">Upplóting er byrjað!</string>
   <string name="upload_completed_notification_title">%1$s er lagt út!</string>
   <string name="upload_completed_notification_text">Trýst fyri at síggja tað sum tú legði út</string>
-  <string name="upload_progress_notification_title_start">Byrjar %1$s útlegging</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Byrjar %1$s útlegging</string>
   <string name="upload_progress_notification_title_in_progress">%1$s verður lagt út</string>
   <string name="upload_progress_notification_title_finishing">Útlegging av %1$s er við at vera liðug</string>
   <string name="upload_failed_notification_title">Tað miseydnaðist at leggja %1$s út</string>

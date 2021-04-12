@@ -26,11 +26,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">開始上傳</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">開始 %1$d 次上傳</item>
     <item quantity="other">開始 %1$d 次上傳</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d 次上傳</item>
     <item quantity="other">%1$d 次上傳</item>
   </plurals>
@@ -71,7 +71,7 @@
   <string name="uploading_queued">上傳已排定（限制連線模式已啟用）</string>
   <string name="upload_completed_notification_title">已上傳%1$s！</string>
   <string name="upload_completed_notification_text">輕觸來檢視您上傳的項目</string>
-  <string name="upload_progress_notification_title_start">開始上傳%1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">開始上傳%1$s</string>
   <string name="upload_progress_notification_title_in_progress">正在上傳%1$s</string>
   <string name="upload_progress_notification_title_finishing">即將完成上傳%1$s</string>
   <string name="upload_failed_notification_title">上傳%1$s失敗</string>

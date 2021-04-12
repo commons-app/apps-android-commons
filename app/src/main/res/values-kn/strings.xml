@@ -29,7 +29,7 @@
   <string name="uploading_started">ಅಪ್ಲೋಡ್ ಪ್ರಾರಂಭವಾಗಿದೆ!</string>
   <string name="upload_completed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಆಗಿದೆ!</string>
   <string name="upload_completed_notification_text">ನಿಮ್ಮ ನಕಲೇರಿಕೆಯನ್ನು ನೋಡಲು ಮೆಲ್ಲಗೆ ತಟ್ಟಿ</string>
-  <string name="upload_progress_notification_title_start">ನಕಲೇರಿಕೆಯ%1$s ಪ್ರಾರಂಭ</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">ನಕಲೇರಿಕೆಯ%1$s ಪ್ರಾರಂಭ</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ನಕಲೇರಿಕೆ  ಆಗಿದೆ!</string>
   <string name="upload_progress_notification_title_finishing">%1$s ಅಪ್ಲೋಡ್ ಮಾಡುವಿಕೆಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಲಾಗುತ್ತಿದೆ</string>
   <string name="upload_failed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಮಾಡುವಿಕೆ ವಿಫಲವಾಗಿದೆ</string>
@@ -162,4 +162,5 @@
   <string name="exif_tag_name_location">ಸ್ಥಳ</string>
   <string name="no_categories_found">ಯಾವುದೇ ವರ್ಗಗಳು ಸಿಗಲಿಲ್ಲ</string>
   <string name="delete_helper_show_deletion_title_success">ಯಶಸ್ವಿ</string>
+  <string name="read_help_link">ಇನ್ನೂ ಓದಿ</string>
 </resources>

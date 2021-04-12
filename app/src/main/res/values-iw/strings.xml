@@ -34,16 +34,16 @@
   </plurals>
   <string name="starting_uploads">ההעלאות מתחילות</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">התחלת העלאה</item>
-    <item quantity="two">התחלת 1$d% העלאות</item>
-    <item quantity="many">התחלת 1$d% העלאות</item>
-    <item quantity="other">התחלת 1$d% העלאות</item>
+    <item quantity="one">עיבוד העלאה</item>
+    <item quantity="two">עיבוד d% העלאות</item>
+    <item quantity="many">עיבוד d% העלאות</item>
+    <item quantity="other">עיבוד d% העלאות</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">העלאה אחת</item>
-    <item quantity="two">%1$d העלאות</item>
-    <item quantity="many">%1$d העלאות</item>
-    <item quantity="other">%1$d העלאות</item>
+    <item quantity="two">%d העלאות</item>
+    <item quantity="many">%d העלאות</item>
+    <item quantity="other">%d העלאות</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">התמונה הזאת תפורסם ברישיון %1$s</item>
@@ -88,7 +88,7 @@
   <string name="uploading_queued">ההעלאות בתור (מופעל מצב חיבור מוגבל)</string>
   <string name="upload_completed_notification_title">הקובץ %1$s הועלה!</string>
   <string name="upload_completed_notification_text">ללחוץ כאן כדי לצפות בהעלאה שלך</string>
-  <string name="upload_progress_notification_title_start">התחלת העלאת %1$s</string>
+  <string name="upload_progress_notification_title_start">העלאת קובץ: %s</string>
   <string name="upload_progress_notification_title_in_progress">מתבצעת העלאת %1$s</string>
   <string name="upload_progress_notification_title_finishing">העלאת %1$s מסתיימת</string>
   <string name="upload_failed_notification_title">העלאת %1$s נכשלה</string>

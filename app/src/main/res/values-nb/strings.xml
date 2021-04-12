@@ -21,11 +21,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Starter opplastinger</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Starter %1$d opplasting</item>
     <item quantity="other">Starter %1$d opplastinger</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d opplasting</item>
     <item quantity="other">%1$d opplastinger</item>
   </plurals>
@@ -66,7 +66,7 @@
   <string name="uploading_queued">Køede opplastinger (begrenset tilkoblingsmodus aktivert)</string>
   <string name="upload_completed_notification_title">%1$s lastet opp!</string>
   <string name="upload_completed_notification_text">Trykk for å vise din opplasting</string>
-  <string name="upload_progress_notification_title_start">Starter opplasting av %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Starter opplasting av %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s lastet opp</string>
   <string name="upload_progress_notification_title_finishing">Avslutter opplasting av %1$s</string>
   <string name="upload_failed_notification_title">Opplastingen av %1$s feilet</string>

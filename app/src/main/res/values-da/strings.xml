@@ -18,11 +18,11 @@
     <item quantity="one">%1$d overførsel</item>
     <item quantity="other">%1$d overførsler</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Starter %1$d overførsel</item>
     <item quantity="other">Starter %1$d overførsler</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d overførsel</item>
     <item quantity="other">%1$d overførsler</item>
   </plurals>
@@ -51,7 +51,7 @@
   <string name="uploading_started">Overførsel begyndt!</string>
   <string name="upload_completed_notification_title">%1$s overført!</string>
   <string name="upload_completed_notification_text">Tryk for at få vist din upload</string>
-  <string name="upload_progress_notification_title_start">Starter med at uploade %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Starter med at uploade %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s overføres</string>
   <string name="upload_progress_notification_title_finishing">Afslutter uploadning af %1$s</string>
   <string name="upload_failed_notification_title">Overførsel af %1$s mislykkedes</string>

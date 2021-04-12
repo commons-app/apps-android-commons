@@ -46,13 +46,13 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Начало загрузки</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Начинается %1$d загрузка</item>
     <item quantity="few">Начинается %1$d загрузки</item>
     <item quantity="many">Начинается %1$d загрузок</item>
     <item quantity="other">Начинается %1$d загрузок</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d загрузка</item>
     <item quantity="few">%1$d загрузки</item>
     <item quantity="many">%1$d загрузок</item>
@@ -101,7 +101,7 @@
   <string name="uploading_queued">Загрузка в очереди (включен режим ограниченного подключения)</string>
   <string name="upload_completed_notification_title">%1$s загружен!</string>
   <string name="upload_completed_notification_text">Нажмите для просмотра загруженного файла</string>
-  <string name="upload_progress_notification_title_start">Загрузка %1$s начата</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Загрузка %1$s начата</string>
   <string name="upload_progress_notification_title_in_progress">%1$s загружается</string>
   <string name="upload_progress_notification_title_finishing">Завершение загрузки %1$s</string>
   <string name="upload_failed_notification_title">Загрузка %1$s не удалась</string>
@@ -475,8 +475,8 @@
   <string name="images_featured_explanation">Избранные изображения обычно сделаны профессиональными фотографами и иллюстраторами. Такие изображения отмечены сообществом участников Викисклада как имеющие высшее качество на этом вебсайте.</string>
   <string name="images_via_nearby_explanation">Изображения, загруженные участниками, которые находили места с помощью функционала \"Места поблизости\".</string>
   <string name="thanks_received_explanation">Это функция позволяет участникам послать благодарность другим участникам за их полезные правки с помощью маленькой ссылки на странице истории страницы или странице разницы версий.</string>
-  <string name="copy_image_caption_description" fuzzy="true">Копирование на последующие носители</string>
-  <string name="copied_successfully" fuzzy="true">Успешно Скопировано</string>
+  <string name="copy_image_caption_description">Копирование на последующие носители</string>
+  <string name="copied_successfully">Скопировано</string>
   <string name="welcome_do_upload_content_description">Примеры изображений, подходящих для загрузки на Викисклад</string>
   <string name="welcome_dont_upload_content_description">Примеры изображений, которые не следует загружать на Викисклад</string>
   <string name="skip_image">Пропустить это изображение</string>

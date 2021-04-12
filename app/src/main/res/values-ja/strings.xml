@@ -31,10 +31,10 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">アップロードを開始中です</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="other">%1$d 件のアップロードを開始中</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="other">%1$d 件のアップロード</item>
   </plurals>
   <plurals name="share_license_summary">
@@ -73,7 +73,7 @@
   <string name="uploading_queued">アップロードは待機中です（接続制限モードが有効）</string>
   <string name="upload_completed_notification_title">%1$s をアップロードしました!</string>
   <string name="upload_completed_notification_text">アップロードしたものを表示するにはタップしてください</string>
-  <string name="upload_progress_notification_title_start">%1$s のアップロードを開始中</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s のアップロードを開始中</string>
   <string name="upload_progress_notification_title_in_progress">%1$s をアップロード中</string>
   <string name="upload_progress_notification_title_finishing">%1$s のアップロードを完了中</string>
   <string name="upload_failed_notification_title">%1$s のアップロードに失敗しました</string>

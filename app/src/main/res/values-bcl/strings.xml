@@ -13,11 +13,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Starting %1$d upload</item>
     <item quantity="other">Nagpuon na %1$d an pagkarga</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d mga karga</item>
   </plurals>
@@ -48,7 +48,7 @@
   <string name="uploading_started">Pinagpoonan na an pagkarga!</string>
   <string name="upload_completed_notification_title">%1$s pinagkarga na!</string>
   <string name="upload_completed_notification_text">Taptapa tanganing matanaw an saimong kinarga</string>
-  <string name="upload_progress_notification_title_start">Nagpopoon na an %1$s na pagkakarga</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Nagpopoon na an %1$s na pagkakarga</string>
   <string name="upload_progress_notification_title_in_progress">%1$s nagkakarga na</string>
   <string name="upload_progress_notification_title_finishing">Tinatapos pa an pagkakarga sa %1$s</string>
   <string name="upload_failed_notification_title">An ikinakarga na %1$s nagpalya</string>

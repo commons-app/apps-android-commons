@@ -13,11 +13,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Principiando %1$d carga</item>
     <item quantity="other">Principiando %1$d cargues</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d carga</item>
     <item quantity="other">%1$d cargues</item>
   </plurals>
@@ -57,7 +57,7 @@
   <string name="uploading_started">Principió la xuba</string>
   <string name="upload_completed_notification_title">¡%1$s xubíu!</string>
   <string name="upload_completed_notification_text">Toque pa ver la xuba</string>
-  <string name="upload_progress_notification_title_start">Principiando la xuba de %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Principiando la xuba de %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ta xubiendo</string>
   <string name="upload_progress_notification_title_finishing">Acabando de xubir %1$s</string>
   <string name="upload_failed_notification_title">Falló la xuba de %1$s</string>

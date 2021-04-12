@@ -76,7 +76,7 @@
   <string name="uploading_started">Nahrávání začalo!</string>
   <string name="upload_completed_notification_title">%1$s nahráno!</string>
   <string name="upload_completed_notification_text">Klepnutím zobrazíte upload</string>
-  <string name="upload_progress_notification_title_start">Spouští se načítání souboru %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Spouští se načítání souboru %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Nahrává se soubor %1$s</string>
   <string name="upload_progress_notification_title_finishing">Dokončení nahrávání souboru %1$s</string>
   <string name="upload_failed_notification_title">Načítání souboru %1$s se nezdařilo</string>
@@ -420,7 +420,7 @@
   <string name="review_category_explanation">Tento obrázek patří do %1$s kategórií.</string>
   <string name="review_spam_report_question">Není to v pořádku, protože</string>
   <string name="review_c_violation_report_question">Porušuje to autorská prává, protože</string>
-  <string name="review_thanks_yes_button_text">Další soubor</string>
+  <string name="review_thanks_yes_button_text">Další obrázek</string>
   <string name="review_thanks_no_button_text">Ano, proč ne</string>
   <string name="skip_image_explanation">Kliknutím na toto tlačítko se zobrazí další nedávno nahraný obrázek z Wikimedia Commons</string>
   <string name="review_image_explanation">Můžete kontrolovat obrázky a zlepšit kvalitu Wikimedia Commons.\n\nTři aspekty, které se posuzují:\n  - Je tento obrázek v pořádku?\n  - Dodržuje tento obrázok pravidla autorských práv?\n  - Je tento obrázek správně kategorizován?\n\nPokud je vše v pořádku, autorovi můžete poděkovat.</string>

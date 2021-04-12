@@ -49,7 +49,7 @@
   <string name="uploading_started">Postavljanje započeto!</string>
   <string name="upload_completed_notification_title">%1$s postavljeno!</string>
   <string name="upload_completed_notification_text">Dodirnite da biste vidjeli datoteku</string>
-  <string name="upload_progress_notification_title_start">Počinje postavljanje %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Počinje postavljanje %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Postavljanje %1$s</string>
   <string name="upload_progress_notification_title_finishing">Završeno postavljanje %1$s</string>
   <string name="upload_failed_notification_title">Postavljanje %1$s neuspješno</string>

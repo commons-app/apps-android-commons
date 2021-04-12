@@ -35,7 +35,7 @@
     <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="zero">جارٍ بدء %1$d رفع</item>
     <item quantity="one">جارٍ بدء %1$d رفع</item>
     <item quantity="two">جارٍ بدء %1$d رفع</item>
@@ -43,7 +43,7 @@
     <item quantity="many">جارٍ بدء %1$d رفع</item>
     <item quantity="other">جارٍ بدء %1$d مرفوعات</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="zero">%1$d رفع</item>
     <item quantity="one">%1$d رفع</item>
     <item quantity="two">%1$d رفع</item>
@@ -99,7 +99,7 @@
   <string name="uploading_started">بدأ الرفع!</string>
   <string name="upload_completed_notification_title">رُفع %1$s!</string>
   <string name="upload_completed_notification_text">انقر لعرض ملفك المرفوع</string>
-  <string name="upload_progress_notification_title_start">بدء رفع %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">بدء رفع %1$s</string>
   <string name="upload_progress_notification_title_in_progress">يجري رفع %1$s</string>
   <string name="upload_progress_notification_title_finishing">اكتمال رفع %1$s</string>
   <string name="upload_failed_notification_title">فشل رفع %1$s</string>

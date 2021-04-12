@@ -27,13 +27,13 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Початок завантаження</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Починається %1$d завантаження</item>
     <item quantity="few">Починаються %1$d завантаження</item>
     <item quantity="many">Починаються %1$d завантажень</item>
     <item quantity="other">Починаються %1$d завантажень</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d завантаження</item>
     <item quantity="few">%1$d завантаження</item>
     <item quantity="many">%1$d завантажень</item>
@@ -82,7 +82,7 @@
   <string name="uploading_queued">Завантаження додано до черги (увімкнений режим обмеженого з\'єднання)</string>
   <string name="upload_completed_notification_title">Завантажено %1$s!</string>
   <string name="upload_completed_notification_text">Торкніться, щоб переглянути Ваше завантаження</string>
-  <string name="upload_progress_notification_title_start">Розпочинається завантаження %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Розпочинається завантаження %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s завантажується</string>
   <string name="upload_progress_notification_title_finishing">Завершення завантаження %1$s</string>
   <string name="upload_failed_notification_title">Не вдалося завантажити %1$s</string>

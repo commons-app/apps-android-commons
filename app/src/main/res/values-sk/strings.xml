@@ -23,13 +23,13 @@
     <item quantity="other"/>
   </plurals>
   <string name="starting_uploads">Začatie nahrávania</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Začínam nahrávať %1$d</item>
     <item quantity="few">Začínam nahrávanie Starting %1$d</item>
     <item quantity="many">Začínam nahrávanie %1$d</item>
     <item quantity="other"/>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d nahranie</item>
     <item quantity="few">%1$d nahrania</item>
     <item quantity="many">%1$d nahraní</item>
@@ -78,7 +78,7 @@
   <string name="uploading_queued">Nahrávanie v poradí (je zapnuté limitované pripojenie)</string>
   <string name="upload_completed_notification_title">%1$s je nahraný!</string>
   <string name="upload_completed_notification_text">Kliknutím zobrazíte váš upload</string>
-  <string name="upload_progress_notification_title_start">Spúšťa sa nahrávanie súboru %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Spúšťa sa nahrávanie súboru %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s nahrávanie</string>
   <string name="upload_progress_notification_title_finishing">Dokončenie nahrávania %1$s</string>
   <string name="upload_failed_notification_title">Nahrávanie %1$s zlyhalo</string>

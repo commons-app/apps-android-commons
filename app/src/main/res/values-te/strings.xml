@@ -13,11 +13,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d ఎక్కింపును మొదలు పెడుతున్నాం</item>
     <item quantity="other">%1$d ఎక్కింపులను మొదలు పెడుతున్నాం</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d ఎక్కింపు</item>
     <item quantity="other">%1$d ఎక్కింపులు</item>
   </plurals>
@@ -57,7 +57,7 @@
   <string name="uploading_started">ఎక్కింపు మొదలైంది!</string>
   <string name="upload_completed_notification_title">%1$s ను ఎక్కించాం!</string>
   <string name="upload_completed_notification_text">మీ ఎక్కింపును చూసేందుకు నొక్కండి</string>
-  <string name="upload_progress_notification_title_start">%1$s ఎక్కింపును మొదలుపెడుతున్నాం</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s ఎక్కింపును మొదలుపెడుతున్నాం</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ను ఎక్కిస్తున్నాం</string>
   <string name="upload_progress_notification_title_finishing">%1$s ఎక్కింపు పూర్తికావస్తోంది</string>
   <string name="upload_failed_notification_title">%1$s ఎక్కింపు విఫలమైంది</string>

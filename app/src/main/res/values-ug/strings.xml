@@ -29,7 +29,7 @@
   <string name="uploading_started">يۈكلەش باشلاندى!</string>
   <string name="upload_completed_notification_title">%1$s يۈكلەندى!</string>
   <string name="upload_completed_notification_text">چېكىپ كۆرۈپ بېقىڭ ، سىزنىڭ يۇقىرىغا يوللاش</string>
-  <string name="upload_progress_notification_title_start">باشلىنىۋاتىدۇ %1$s يۈكلەندى</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">باشلىنىۋاتىدۇ %1$s يۈكلەندى</string>
   <string name="upload_progress_notification_title_in_progress">%1$s يۈكلىنىۋاتىدۇ!</string>
   <string name="upload_progress_notification_title_finishing"> %1$s يۈكلەش تاماملىنىۋاتىدۇ</string>
   <string name="upload_failed_notification_title">يۈكلىنىۋاتىدۇ %1$s مەغلۇپ بولدى</string>

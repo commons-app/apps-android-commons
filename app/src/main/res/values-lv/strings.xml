@@ -23,7 +23,7 @@
   <string name="authentication_failed" fuzzy="true">Autentifikācija neizdevās!</string>
   <string name="uploading_started">Augšupielāde sākās!</string>
   <string name="upload_completed_notification_title">%1$s augšupielādēti!</string>
-  <string name="upload_progress_notification_title_start">Uzsāk %1$s augšupielādi</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Uzsāk %1$s augšupielādi</string>
   <string name="upload_progress_notification_title_in_progress">%1$s augšupielādēti</string>
   <string name="upload_progress_notification_title_finishing">Pabeidz %1$s augšupielādi</string>
   <string name="upload_failed_notification_title">Neizdevās augšupielādēt %1$s</string>
