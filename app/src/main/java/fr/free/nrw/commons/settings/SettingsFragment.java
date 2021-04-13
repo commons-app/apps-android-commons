@@ -90,6 +90,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             findPreference("useExternalStorage").setEnabled(false);
             findPreference("useAuthorName").setEnabled(false);
             findPreference("displayNearbyCardView").setEnabled(false);
+            findPreference("descriptionDefaultLanguagePref").setEnabled(false);
             findPreference("displayLocationPermissionForCardView").setEnabled(false);
             findPreference("displayCampaignsCardView").setEnabled(false);
         }

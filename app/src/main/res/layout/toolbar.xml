@@ -6,4 +6,5 @@
     android:layout_height="?attr/actionBarSize"
     android:fitsSystemWindows="true"
     app:titleTextColor="?attr/toolbar_text_color"
+    android:background="?attr/mainBackground"
     />
