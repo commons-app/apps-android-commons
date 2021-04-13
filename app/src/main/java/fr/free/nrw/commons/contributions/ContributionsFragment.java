@@ -682,5 +682,15 @@ public class ContributionsFragment
     public void updateUploadCount() {
         setUploadCount();
     }
+
+    @Override
+    public void refreshNominatedMedia(int index) {
+        if(mediaDetailPagerFragment != null) {
+            removeFragment(mediaDetailPagerFragment);
+            mediaDetailPagerFragment = new MediaDetailPagerFragment(false, true);
+            mediaDetailPagerFragment.showImage(index);
+            showMediaDetailPagerFragment();
+        }
+    }
 }
 

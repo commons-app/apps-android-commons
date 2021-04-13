@@ -165,6 +165,12 @@ public class CategoryDetailsActivity extends BaseActivity
         return null;
     }
 
+    @Override
+    public void refreshNominatedMedia(int index) {
+        onBackPressed();
+        onMediaClicked(index);
+    }
+
     /**
      * This method inflates the menu in the toolbar
      */

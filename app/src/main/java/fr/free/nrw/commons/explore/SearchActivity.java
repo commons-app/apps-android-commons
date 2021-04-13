@@ -183,6 +183,12 @@ public class SearchActivity extends BaseActivity
         return null;
     }
 
+    @Override
+    public void refreshNominatedMedia(int index) {
+        onBackPressed();
+        onMediaClicked(index);
+    }
+
     /**
      * This method is called on success of API call for image Search.
      * The viewpager will notified that number of items have changed.

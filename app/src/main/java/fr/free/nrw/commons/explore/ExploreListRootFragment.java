@@ -158,6 +158,14 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
     return null;
   }
 
+  @Override
+  public void refreshNominatedMedia(int index) {
+    if(mediaDetails != null) {
+      removeFragment(mediaDetails);
+      onMediaClicked(index);
+    }
+  }
+
   /**
    * This method is called on success of API call for featured images or mobile uploads. The
    * viewpager will notified that number of items have changed.

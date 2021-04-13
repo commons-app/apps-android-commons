@@ -186,6 +186,12 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         return null;
     }
 
+    @Override
+    public void refreshNominatedMedia(int index) {
+        onBackPressed();
+        onMediaClicked(index);
+    }
+
     /**
      * Consumers should be simply using this method to use this activity.
      *

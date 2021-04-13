@@ -41,7 +41,7 @@ import java.util.Objects;
 import javax.inject.Inject;
 import timber.log.Timber;
 
-public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
+public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener, MediaDetailFragment.Callback {
 
     @Inject BookmarkPicturesDao bookmarkDao;
 
@@ -374,12 +374,19 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         }
     }
 
+    @Override
+    public void nominatingForDeletion(int index) {
+            provider.refreshNominatedMedia(index);
+    }
+
     public interface MediaDetailProvider {
         Media getMediaAtPosition(int i);
 
         int getTotalMediaCount();
 
         Integer getContributionStateAt(int position);
+
+        void refreshNominatedMedia(int index);
     }
 
     //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)

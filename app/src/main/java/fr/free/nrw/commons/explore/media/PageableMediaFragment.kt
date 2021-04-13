@@ -55,4 +55,9 @@ abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailP
     override fun getTotalMediaCount(): Int = pagedListAdapter.itemCount
 
     override fun getContributionStateAt(position: Int) = null
+
+    override fun refreshNominatedMedia(index: Int) {
+        activity?.onBackPressed()
+        categoryImagesCallback.onMediaClicked(index)
+    }
 }
