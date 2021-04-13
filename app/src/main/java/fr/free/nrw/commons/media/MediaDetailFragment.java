@@ -16,8 +16,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -303,6 +305,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         if(applicationKvStore.getBoolean("login_skipped")){
             delete.setVisibility(GONE);
         }
+
+        handleBackEvent(view);
+
         /**
          * Gets the height of the frame layout as soon as the view is ready and updates aspect ratio
          * of the picture.
@@ -317,7 +322,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         return view;
     }
 
-    @OnClick(R.id.mediaDetailImageViewSpacer)
+  @OnClick(R.id.mediaDetailImageViewSpacer)
     public void launchZoomActivity(View view) {
         if (media.getImageUrl() != null) {
             Context ctx = view.getContext();
@@ -1066,8 +1071,30 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             descriptionHtmlCode = descriptionHtmlCode + s.toCharArray()[i];
         }
 
-        descriptionWebView.loadDataWithBaseURL(null, descriptionHtmlCode, "text/html", "utf-8", null);
+        descriptionWebView
+            .loadDataWithBaseURL(null, descriptionHtmlCode, "text/html", "utf-8", null);
         progressBar.setVisibility(GONE);
+    }
+
+    /**
+     * Handle back event when fragment when showCaptionAndDescriptionContainer is visible
+     */
+    private void handleBackEvent(View view) {
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keycode, KeyEvent keyEvent) {
+                if (keycode == KeyEvent.KEYCODE_BACK) {
+                    if (showCaptionAndDescriptionContainer.getVisibility() == VISIBLE) {
+                        showCaptionAndDescriptionContainer.setVisibility(View.INVISIBLE);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
     }
 
 }
