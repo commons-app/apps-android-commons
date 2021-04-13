@@ -21,11 +21,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.SearchView;
@@ -61,8 +63,8 @@ import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter.Callba
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
-import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
@@ -74,11 +76,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.language.AppLanguageLookUpTable;
 import org.wikipedia.util.DateUtil;
 import timber.log.Timber;
 
@@ -129,7 +132,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     JsonKvStore applicationKvStore;
 
     private int initialListTop = 0;
-
+    @BindView(R.id.description_webview)
+    WebView descriptionWebView;
     @BindView(R.id.mediaDetailFrameLayout)
     FrameLayout frameLayout;
     @BindView(R.id.mediaDetailImageView)
@@ -192,7 +196,19 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     TextView existingCategories;
     @BindView(R.id.no_results_found)
     TextView noResultsFound;
-
+    @BindView(R.id.dummy_caption_description_container)
+    LinearLayout showCaptionAndDescriptionContainer;
+    @BindView(R.id.show_caption_description_textview)
+    TextView showCaptionDescriptionTextView;
+    @BindView(R.id.caption_listview)
+    ListView captionsListView;
+    @BindView(R.id.caption_label)
+    TextView captionLabel;
+    @BindView(R.id.description_label)
+    TextView descriptionLabel;
+    @BindView(R.id.pb_circular)
+     ProgressBar progressBar;
+    String descriptionHtmlCode;
     private ArrayList<String> categoryNames = new ArrayList<>();
     private String categorySearchQuery;
 
@@ -703,6 +719,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     public void displayHideCategorySearch() {
+        showCaptionAndDescriptionContainer.setVisibility(GONE);
         if (dummyCategoryEditContainer.getVisibility() != VISIBLE) {
             dummyCategoryEditContainer.setVisibility(VISIBLE);
         } else {
@@ -980,4 +997,77 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             return true;
         }
     }
+
+    @OnClick(R.id.show_caption_description_textview)
+    void showCaptionAndDescription() {
+        dummyCategoryEditContainer.setVisibility(GONE);
+        if (showCaptionAndDescriptionContainer.getVisibility() == View.INVISIBLE) {
+            showCaptionAndDescriptionContainer.setVisibility(VISIBLE);
+            setUpCaptionAndDescriptionLayout();
+        } else {
+            showCaptionAndDescriptionContainer.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    /**
+     * setUp Caption And Description Layout
+     */
+    private void setUpCaptionAndDescriptionLayout() {
+        List<Caption> captions = getCaptions();
+
+        if (descriptionHtmlCode == null) {
+            progressBar.setVisibility(VISIBLE);
+        }
+
+        getDescription();
+        CaptionListViewAdapter adapter = new CaptionListViewAdapter(captions);
+        captionsListView.setAdapter(adapter);
+    }
+
+    /**
+     * Generate the caption with lanuage
+     */
+    private List<Caption> getCaptions() {
+        List<Caption> captionList = new ArrayList<>();
+        Map<String, String> captions = media.getCaptions();
+        AppLanguageLookUpTable appLanguageLookUpTable = new AppLanguageLookUpTable(getContext());
+        for (Map.Entry<String, String> map : captions.entrySet()) {
+            String language = appLanguageLookUpTable.getLocalizedName(map.getKey());
+            String languageCaption = map.getValue();
+            captionList.add(new Caption(language, languageCaption));
+        }
+
+        if (captionList.size() == 0) {
+            captionList.add(new Caption("", "No Caption"));
+        }
+        return captionList;
+    }
+
+
+    /**
+     * fetch the image page in html
+     */
+    private void getDescription() {
+        compositeDisposable.add(mediaDataExtractor.getHtmlOfPage(media.getFilename())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(this::extractDescription, Timber::e));
+    }
+
+    /**
+     * extract the description from html of imagepage
+     */
+    private void extractDescription(String s) {
+        String descriptionClassName = "<td class=\"description\">";
+        int start = s.indexOf(descriptionClassName) + descriptionClassName.length();
+        int end = s.indexOf("</td>", start);
+        descriptionHtmlCode = "";
+        for (int i = start; i < end; i++) {
+            descriptionHtmlCode = descriptionHtmlCode + s.toCharArray()[i];
+        }
+
+        descriptionWebView.loadDataWithBaseURL(null, descriptionHtmlCode, "text/html", "utf-8", null);
+        progressBar.setVisibility(GONE);
+    }
+
 }
