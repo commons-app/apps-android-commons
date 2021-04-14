@@ -13,11 +13,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Principiando %1$d carga</item>
     <item quantity="other">Principiando %1$d cargues</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d carga</item>
     <item quantity="other">%1$d cargues</item>
   </plurals>
@@ -57,7 +57,7 @@
   <string name="uploading_started">Principió la xuba</string>
   <string name="upload_completed_notification_title">¡%1$s xubíu!</string>
   <string name="upload_completed_notification_text">Toque pa ver la xuba</string>
-  <string name="upload_progress_notification_title_start">Principiando la xuba de %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Principiando la xuba de %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ta xubiendo</string>
   <string name="upload_progress_notification_title_finishing">Acabando de xubir %1$s</string>
   <string name="upload_failed_notification_title">Falló la xuba de %1$s</string>
@@ -407,14 +407,8 @@
   <string name="review_category_explanation">Esta imaxe ta baxo %1$s categoríes.</string>
   <string name="review_spam_report_question">Esto ta fora de la tema porque ye</string>
   <string name="review_c_violation_report_question">Ye un frayamientu de derechos d\'autor porque ye</string>
-  <string name="review_category_yes_button_text">Non, mal categorizao</string>
-  <string name="review_category_no_button_text">Paez bien</string>
-  <string name="review_spam_yes_button_text">Non, fora de contestu</string>
-  <string name="review_spam_no_button_text">Paez bien</string>
-  <string name="review_copyright_yes_button_text">Non, vulneración de derechos d\'autor</string>
-  <string name="review_copyright_no_button_text">Paez bien</string>
-  <string name="review_thanks_yes_button_text">Sí, por qué non</string>
-  <string name="review_thanks_no_button_text">Imaxe siguiente</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">Sí, por qué non</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">Imaxe siguiente</string>
   <string name="skip_image_explanation">Faciendo clic nesti botón recibirás otra imaxe de Wikimedia Commons xubida apocayá</string>
   <string name="review_image_explanation">Puedes revisar imaxes y ameyorar la calidá de Wikimedia Commons.\nLos cuatro parámetros de revisión son: \n - ¿Ésta imaxe tien rellación col contestu? \n - ¿La imaxe cumple les riegles de copyright? \n - ¿La imaxe ta correchamente categorizada? \n - Si too ta correuto, tamién pues dar les gracies al collaborador.</string>
   <string name="no_image">Nun s\'usó nenguna imaxe</string>
@@ -430,7 +424,6 @@
   <string name="images_featured_explanation">Les imaxes destacaes son creaciones de talentosos fotógrafos y ilustradores que la comunidá de Wikimedia Commons reconoció como les de mayor calidá del sitiu.</string>
   <string name="images_via_nearby_explanation">Les imaxes xubíes via Llugares Cercanos son les imaxes que se cargaron descubriendo llugares nel mapa.</string>
   <string name="thanks_received_explanation">Esta función permite que los editores unvien una nota Gracies a los usuarios que realicen ediciones útiles usando un pequeñu enllaz d\'agradecimientu na páxina d\'historial o na de diferencies.</string>
-  <string name="previous_image_caption_description">Copiar los retratos y descripción anteriores</string>
   <string name="welcome_do_upload_content_description">Exemplos d\'imaxes bones pa xubir a Commons</string>
   <string name="welcome_dont_upload_content_description">Exemplos d\'imaxes que nun tienen de xubise</string>
   <string name="skip_image">Saltar esta imaxe</string>

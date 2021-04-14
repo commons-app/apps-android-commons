@@ -28,11 +28,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Iniciando carregamentos</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Iniciando %1$d carregamento</item>
     <item quantity="other">Iniciando %1$d carregamentos</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d carregamento</item>
     <item quantity="other">%1$d carregamentos</item>
   </plurals>
@@ -73,7 +73,7 @@
   <string name="uploading_queued">Fila de carregamento (modo de conexão limitada ativado)</string>
   <string name="upload_completed_notification_title">%1$s enviado!</string>
   <string name="upload_completed_notification_text">Toque para ver os seu upload</string>
-  <string name="upload_progress_notification_title_start">Começando envio de %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Começando envio de %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s enviando!</string>
   <string name="upload_progress_notification_title_finishing">Terminando o envio de %1$s</string>
   <string name="upload_failed_notification_title">Envio de %1$s falhou</string>
@@ -430,14 +430,8 @@
   <string name="review_category_explanation">Esta imagem está abaixo das %1$s categorias</string>
   <string name="review_spam_report_question">Está fora do escopo porque é</string>
   <string name="review_c_violation_report_question">É violação de direitos autorais porque é</string>
-  <string name="review_category_yes_button_text">Não, mal categorizado</string>
-  <string name="review_category_no_button_text">Parece bem</string>
-  <string name="review_spam_yes_button_text">Não, fora do escopo</string>
-  <string name="review_spam_no_button_text">Parece bem</string>
-  <string name="review_copyright_yes_button_text">Não, violação de direitos autorais</string>
-  <string name="review_copyright_no_button_text">Parece bem</string>
-  <string name="review_thanks_yes_button_text">Sim, porque não?</string>
-  <string name="review_thanks_no_button_text">Próxima imagem</string>
+  <string name="review_thanks_yes_button_text">Próxima imagem</string>
+  <string name="review_thanks_no_button_text">Sim, porque não</string>
   <string name="skip_image_explanation">Clicando neste botão você terá uma outra imagem carregada recentemente do Wikimedia Commons</string>
   <string name="review_image_explanation">Você pode rever imagens e melhorar a qualidade dos Wikimedia Commons.\n Os quatro parâmetros de revisão são:\n- Esta imagem está no escopo?\n- Esta imagem segue as regras de direitos autorais?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, você também pode agradecer ao colaborador.</string>
   <string name="no_image">Nenhuma imagem usada</string>
@@ -453,7 +447,8 @@
   <string name="images_featured_explanation">As fotografias destacadas são imagens de fotógrafos e ilustradores altamente qualificados, que a comunidade da wiki Wikimedia Commons escolheu como as de melhor qualidade do \'\'site\'\'.</string>
   <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo sítios do mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidade permite que os editores enviem uma notificação de agradecimento aos usuários que fizerem edições úteis - usando uma pequena hiperligação de agradecimento na página do historial ou na de diferenças.</string>
-  <string name="previous_image_caption_description">Copiar legendas e descrição anteriores</string>
+  <string name="copy_image_caption_description">Copiar para a mídia subsequente</string>
+  <string name="copied_successfully">Copiado!</string>
   <string name="welcome_do_upload_content_description">Exemplos de imagens que podem ser carregadas na wiki Commons</string>
   <string name="welcome_dont_upload_content_description">Exemplos de imagens que não devem ser carregadas</string>
   <string name="skip_image">Pular esta imagem</string>
@@ -592,4 +587,5 @@
   <string name="media_detail_step_title">Detalhes de mídia</string>
   <string name="menu_view_category_page">Ver página de categorias</string>
   <string name="menu_view_item_page">Ver página do item</string>
+  <string name="read_help_link">Leia mais</string>
 </resources>

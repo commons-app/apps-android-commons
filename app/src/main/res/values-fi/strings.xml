@@ -4,6 +4,7 @@
 * Alluk.
 * Crt
 * FinlandMan
+* Joquliina
 * Kyykaarme
 * Maantietäjä
 * Nike
@@ -27,11 +28,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Aloitetaan latauksia</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Aloitetaan %1$d tallennus</item>
     <item quantity="other">Aloitetaan %1$d tallennusta</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d tallennus</item>
     <item quantity="other">%1$d tallennusta</item>
   </plurals>
@@ -67,7 +68,7 @@
   <string name="uploading_started">Tallentaminen aloitettiin!</string>
   <string name="upload_completed_notification_title">%1$s tallennettiin!</string>
   <string name="upload_completed_notification_text">Napauta katsoaksesi tallennusta</string>
-  <string name="upload_progress_notification_title_start">Aloitetaan tiedoston %1$s tallennusta</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Aloitetaan tiedoston %1$s tallennusta</string>
   <string name="upload_progress_notification_title_in_progress">Tallennetaan %1$s</string>
   <string name="upload_progress_notification_title_finishing">%1$s tallennettu</string>
   <string name="upload_failed_notification_title">Tiedoston %1$s tallentaminen epäonnistui</string>
@@ -418,12 +419,8 @@
   <string name="review_category_explanation">Tämä kuva kuuluu %1$s luokkaan.</string>
   <string name="review_spam_report_question">Se ei kuulu soveltamisalaan, koska se on</string>
   <string name="review_c_violation_report_question">Se on tekijänoikeusrikkomusta, koska se on</string>
-  <string name="review_category_no_button_text">Näyttää hyvälle</string>
-  <string name="review_spam_no_button_text">Näyttää hyvälle</string>
-  <string name="review_copyright_yes_button_text">Ei, tekijänoikeusloukkaus</string>
-  <string name="review_copyright_no_button_text">Näyttää hyvälle</string>
-  <string name="review_thanks_yes_button_text">Kyllä, miksi ei</string>
-  <string name="review_thanks_no_button_text">Seuraava kuva</string>
+  <string name="review_thanks_yes_button_text">Seuraava kuva</string>
+  <string name="review_thanks_no_button_text">Kyllä, miksi ei</string>
   <string name="no_image">Ei käytettyjä kuvia</string>
   <string name="share_logs_using">Jaa lokit käyttämällä</string>
   <string name="menu_option_read">Näytä luetut</string>

@@ -39,7 +39,7 @@
   <string name="uploading_started">උඩුගතකිරීම ආරම්හවූවා!</string>
   <string name="upload_completed_notification_title">%1$s උඩුගතකලා!</string>
   <string name="upload_completed_notification_text">ඔබගේ උඩුගතකිරීම පෙන්වන්න තට්ටු කරන්න</string>
-  <string name="upload_progress_notification_title_start">%1$s උඩුගතකිරීම් ආරම්භ කරමින්</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s උඩුගතකිරීම් ආරම්භ කරමින්</string>
   <string name="upload_progress_notification_title_in_progress">%1$s උඩුගත කෙරිමින්</string>
   <string name="upload_progress_notification_title_finishing"> %1$s උඩුගතකිරීම් අවසන් කරමින්</string>
   <string name="upload_failed_notification_title">උදුගතකරමින්  %1$s අසාර්ථකයි</string>

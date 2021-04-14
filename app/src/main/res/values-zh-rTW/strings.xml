@@ -26,11 +26,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">開始上傳</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">開始 %1$d 次上傳</item>
     <item quantity="other">開始 %1$d 次上傳</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d 次上傳</item>
     <item quantity="other">%1$d 次上傳</item>
   </plurals>
@@ -71,7 +71,7 @@
   <string name="uploading_queued">上傳已排定（限制連線模式已啟用）</string>
   <string name="upload_completed_notification_title">已上傳%1$s！</string>
   <string name="upload_completed_notification_text">輕觸來檢視您上傳的項目</string>
-  <string name="upload_progress_notification_title_start">開始上傳%1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">開始上傳%1$s</string>
   <string name="upload_progress_notification_title_in_progress">正在上傳%1$s</string>
   <string name="upload_progress_notification_title_finishing">即將完成上傳%1$s</string>
   <string name="upload_failed_notification_title">上傳%1$s失敗</string>
@@ -428,14 +428,8 @@
   <string name="review_category_explanation">此圖片屬於%1$s分類。</string>
   <string name="review_spam_report_question">這超出範圍是因為</string>
   <string name="review_c_violation_report_question">這侵犯版權是因為</string>
-  <string name="review_category_yes_button_text">否，缺少分類</string>
-  <string name="review_category_no_button_text">看起來沒問題</string>
-  <string name="review_spam_yes_button_text">否，超出範圍</string>
-  <string name="review_spam_no_button_text">看起來沒問題</string>
-  <string name="review_copyright_yes_button_text">不，侵犯版權</string>
-  <string name="review_copyright_no_button_text">看起來沒問題</string>
-  <string name="review_thanks_yes_button_text">是的，為何不呢</string>
-  <string name="review_thanks_no_button_text">下一張圖片</string>
+  <string name="review_thanks_yes_button_text">下一張圖片</string>
+  <string name="review_thanks_no_button_text">是的，為何不呢</string>
   <string name="skip_image_explanation">點擊此按鈕會提供給您其它近期從維基共享資源上傳的圖片</string>
   <string name="review_image_explanation">您可以檢閱和改善維基共享資源的品質。\n檢閱的四個項目有：\n - 此圖片是否符合範圍？\n - 此圖片是否遵守版權規範？\n - 此圖片是否有分類正確？\n - 如果一切沒問題，您可以感謝貢獻者。</string>
   <string name="no_image">沒有圖片被使用到</string>
@@ -451,7 +445,8 @@
   <string name="images_featured_explanation">特色圖片是出自於高水準技巧的攝影師或繪圖師，且被維基共享資源社群挑選為在站台上的最高品質圖片。</string>
   <string name="images_via_nearby_explanation">以「附近地點」所上傳的圖片，是透過找出在地圖上地點來上傳的。</string>
   <string name="thanks_received_explanation">此功能允許編輯者透過利用在歷史頁面或是差異頁面上的感謝連結，來發送感謝通知給做出有用編輯的使用者。</string>
-  <string name="previous_image_caption_description">複製先前說明與描述</string>
+  <string name="copy_image_caption_description" fuzzy="true">複製到後續媒體</string>
+  <string name="copied_successfully" fuzzy="true">複製成功</string>
   <string name="welcome_do_upload_content_description">上傳到維基共享資源的優良圖片範例</string>
   <string name="welcome_dont_upload_content_description">未上傳範例圖片</string>
   <string name="skip_image">略過此圖片</string>
@@ -590,4 +585,5 @@
   <string name="media_detail_step_title">媒體詳細資料</string>
   <string name="menu_view_category_page">檢視分類頁面</string>
   <string name="menu_view_item_page">檢視項目頁面</string>
+  <string name="read_help_link">延伸閱讀</string>
 </resources>

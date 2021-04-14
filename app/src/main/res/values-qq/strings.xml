@@ -9,6 +9,7 @@
 * Nemo bis
 * Nicolas Raoul
 * Robby
+* Rodney Araujo
 * Shirayuki
 * Siebrand
 * Verdy p
@@ -102,7 +103,7 @@
   <string name="welcome_wikipedia_text">Message inviting users to contribute their images.\n\nFollowed by {{msg-wm|Commons-android-strings-welcome wikipedia subtext}}.</string>
   <string name="welcome_wikipedia_subtext">Preceded by {{msg-wm|Commons-android-strings-welcome wikipedia text}}.</string>
   <string name="welcome_copyright_text">Message explaining the educational benefit of contributing images.</string>
-  <string name="welcome_copyright_subtext">Message explaining what kind of images not to submit.</string>
+  <string name="welcome_copyright_subtext">Message explaining what kind of images not to submit, without a received permission from the copyright holder.</string>
   <string name="welcome_final_text">Message asking user if they understand what kinds of images to upload.</string>
   <string name="welcome_final_button_text">Button text for confirming the user understands what kinds of images to upload.\n{{Identical|Yes}}</string>
   <string name="welcome_help_button_text">NEEDS DOCUMENTATION</string>

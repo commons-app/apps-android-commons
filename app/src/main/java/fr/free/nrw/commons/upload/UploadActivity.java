@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload;
 
 import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
-import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 import android.Manifest;
@@ -24,6 +23,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -42,6 +44,7 @@ import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
+import fr.free.nrw.commons.upload.worker.UploadWorker;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -55,6 +58,7 @@ import javax.inject.Named;
 import timber.log.Timber;
 
 public class UploadActivity extends BaseActivity implements UploadContract.View, UploadBaseFragment.Callback {
+
     @Inject
     ContributionController contributionController;
     @Inject
@@ -103,6 +107,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private Place place;
     private List<UploadableFile> uploadableFiles = Collections.emptyList();
     private int currentSelectedPosition = 0;
+
+    public static final String EXTRA_FILES = "commons_image_exta";
 
     @SuppressLint("CheckResult")
     @Override
@@ -277,6 +283,13 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     public void updateTopCardTitle() {
         tvTopCardTitle.setText(getResources()
                 .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
+    }
+
+    @Override
+    public void makeUploadRequest() {
+        WorkManager.getInstance(getApplicationContext()).enqueueUniqueWork(
+            UploadWorker.class.getSimpleName(),
+            ExistingWorkPolicy.KEEP, OneTimeWorkRequest.from(UploadWorker.class));
     }
 
     @Override

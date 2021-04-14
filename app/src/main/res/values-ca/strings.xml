@@ -20,11 +20,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">S\'està iniciant %1$d càrrega</item>
     <item quantity="other">S\'estan iniciant %1$d càrregues</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d càrrega</item>
     <item quantity="other">%1$d càrregues</item>
   </plurals>
@@ -59,7 +59,7 @@
   <string name="uploading_started">Ha començat la càrrega!</string>
   <string name="upload_completed_notification_title">S’ha pujat %1$s.</string>
   <string name="upload_completed_notification_text">Prem per veure la teva càrrega</string>
-  <string name="upload_progress_notification_title_start">Començant la càrrega al servidor de  %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Començant la càrrega al servidor de  %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Carregant %1$s</string>
   <string name="upload_progress_notification_title_finishing">Acabant la càrrega al servidor de %1$s</string>
   <string name="upload_failed_notification_title">Error al carregar %1$s</string>
@@ -326,13 +326,13 @@
   <string name="no_uploads">Us donem la benvinguda a Commons!\n\nPugeu el vostre primer fitxer multimèdia fent un toc al botó Afegeix.</string>
   <string name="no_categories_selected">No s\'ha seleccionat cap categoria</string>
   <string name="no_categories_selected_warning_desc">Les imatges sense categories rarament fan cap servei. Esteu segur que voleu continuar sense seleccionar cap categoria?</string>
-  <string name="upload_flow_all_images_in_set" fuzzy="true">(Per a totes les imatges en el conjunt)</string>
+  <string name="upload_flow_all_images_in_set">(Per a totes les imatges en el conjunt)</string>
   <string name="search_this_area">Cerca en aquesta àrea</string>
   <string name="nearby_card_permission_title">Sol·licitud de permisos</string>
   <string name="nearby_card_permission_explanation">Voldríeu fer servir la vostra ubicació actual per a mostrar el lloc més proper que necessiti fotos?</string>
   <string name="unable_to_display_nearest_place">No es pot mostrar el lloc més proper que necessita fotos sense permisos d\'ubicació</string>
   <string name="never_ask_again">No ho tornis a demanar</string>
-  <string name="display_location_permission_title" fuzzy="true">Mostra el permís d\'ubicació</string>
+  <string name="display_location_permission_title">Sol·licita el permís d\'ubicació</string>
   <string name="ends_on">Finalitza el:</string>
   <string name="display_campaigns">Mostra les campanyes</string>
   <string name="display_campaigns_explanation">Consulta les campanyes en curs</string>
@@ -350,14 +350,8 @@
   <string name="review_category_explanation">Aquesta imatge està sota les categories %1$s.</string>
   <string name="review_spam_report_question">És fora d\'abast perquè és</string>
   <string name="review_c_violation_report_question">És una violació de drets d\'autor perquè és</string>
-  <string name="review_category_yes_button_text">No, mala categorització</string>
-  <string name="review_category_no_button_text">Sembla bé</string>
-  <string name="review_spam_yes_button_text">No, fora d\'abast</string>
-  <string name="review_spam_no_button_text">Sembla bé</string>
-  <string name="review_copyright_yes_button_text">No, vulneració de drets d\'autor</string>
-  <string name="review_copyright_no_button_text">Sembla bé</string>
-  <string name="review_thanks_yes_button_text">I tant</string>
-  <string name="review_thanks_no_button_text">Imatge següent</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">I tant</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">Imatge següent</string>
   <string name="no_image">No s\'ha utilitzat cap imatge</string>
   <string name="no_image_reverted">No s\'ha revertit cap imatge</string>
   <string name="no_image_uploaded">No s\'ha carregat cap imatge</string>

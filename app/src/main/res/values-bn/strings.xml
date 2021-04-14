@@ -12,9 +12,11 @@
 * Rasal Lia
 * Sankarshan
 * Sibabrata Banerjee
+* Tahmid
 * Tahmid02016
 * Tauhid16
 * Titodutta
+* WikiAbuHuraira
 * YahyA
 * Yahya
 * আফতাবুজ্জামান
@@ -29,11 +31,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">আপলোড শুরু হচ্ছে</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$dটি আপলোড শুরু হয়েছে</item>
     <item quantity="other">%1$dটি আপলোড শুরু হয়েছে</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$dটি আপলোড</item>
     <item quantity="other">%1$dটি আপলোড</item>
   </plurals>
@@ -69,7 +71,7 @@
   <string name="uploading_started">আপলোড আরম্ভ হয়েছে!</string>
   <string name="upload_completed_notification_title">%1$ আপলোড হয়েছে!</string>
   <string name="upload_completed_notification_text">আপনার আপলোড দেখতে টোকা দিন</string>
-  <string name="upload_progress_notification_title_start">%1$s আপলোড শুরু হচ্ছে</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s আপলোড শুরু হচ্ছে</string>
   <string name="upload_progress_notification_title_in_progress">%1$s আপলোড হচ্ছে</string>
   <string name="upload_progress_notification_title_finishing">%1$s আপলোড শেষ হয়েছে</string>
   <string name="upload_failed_notification_title">%1$s আপলোড ব্যর্থ</string>
@@ -296,6 +298,8 @@
   <string name="provider_bookmarks">বুকমার্ক</string>
   <string name="provider_bookmarks_location">বুকমার্ক</string>
   <string name="deletion_reason_uploaded_by_mistake">আমি ভুল করে আপলোড করেছি</string>
+  <string name="review_thanks_yes_button_text">পরবর্তী ছবি</string>
+  <string name="review_thanks_no_button_text">হ্যাঁ, কেন নয়</string>
   <string name="please_wait">অনুগ্রহ করে অপেক্ষা করুন...</string>
   <string name="exif_tag_name_copyright">কপিরাইট</string>
   <string name="exif_tag_name_location">অবস্থান</string>

@@ -16,16 +16,16 @@
     <item quantity="one">%1$d fil lastes opp</item>
     <item quantity="other">%1$d filer lastes opp</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <string name="starting_uploads">Starter opplastinger</string>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Starter %1$d opplasting</item>
     <item quantity="other">Starter %1$d opplastinger</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d opplasting</item>
     <item quantity="other">%1$d opplastinger</item>
   </plurals>
@@ -63,13 +63,16 @@
   <string name="upload_failed">Filen ble ikke funnet. Forsøk med en annen fil.</string>
   <string name="authentication_failed">Autentiseringen feilet, vennligst logg inn igjen</string>
   <string name="uploading_started">Opplastingen startet</string>
+  <string name="uploading_queued">Køede opplastinger (begrenset tilkoblingsmodus aktivert)</string>
   <string name="upload_completed_notification_title">%1$s lastet opp!</string>
   <string name="upload_completed_notification_text">Trykk for å vise din opplasting</string>
-  <string name="upload_progress_notification_title_start">Starter opplasting av %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Starter opplasting av %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s lastet opp</string>
   <string name="upload_progress_notification_title_finishing">Avslutter opplasting av %1$s</string>
   <string name="upload_failed_notification_title">Opplastingen av %1$s feilet</string>
+  <string name="upload_paused_notification_title">Opplasting av %1$s pauset</string>
   <string name="upload_failed_notification_subtitle">Trykk for å vise</string>
+  <string name="upload_paused_notification_subtitle">Trykk for å vise</string>
   <string name="title_activity_contributions">Mine nylige opplastinger</string>
   <string name="contribution_state_queued">I ventekø</string>
   <string name="contribution_state_failed">Feilet</string>
@@ -80,8 +83,11 @@
   <string name="menu_nearby">I nærheten</string>
   <string name="provider_contributions">Mine opplastinger</string>
   <string name="menu_share">Del</string>
-  <string name="share_title_hint" fuzzy="true">Tittel (påkrevd)</string>
+  <string name="menu_view_file_page">Vis filside</string>
+  <string name="share_title_hint">Bildetekst (påkrevd)</string>
+  <string name="add_caption_toast">Angi en bildetekst for denne fila</string>
   <string name="share_description_hint">Beskrivelse</string>
+  <string name="share_caption_hint">Bildetekst</string>
   <string name="login_failed_network">Innlogging feilet - nettverksproblem</string>
   <string name="login_failed_throttled">For mange misslykkede forsøk. Vennligst prøv igjen om noen få minutter.</string>
   <string name="login_failed_blocked">Beklager, denne brukeren har blitt blokkert på Commons</string>
@@ -92,11 +98,15 @@
   <string name="provider_modifications">Endringer</string>
   <string name="menu_upload_single">Last opp</string>
   <string name="categories_search_text_hint">Søk kategorier</string>
+  <string name="depicts_search_text_hint">Søk etter elementer din mediefil skildrer (fjell, Nidarosdomen, etc.)</string>
   <string name="menu_save_categories">Lagre</string>
   <string name="refresh_button">Oppdater</string>
   <string name="display_list_button">Liste</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Ingen opplastinger ennå</string>
+  <string name="contributions_subtitle_zero">(Ingen opplastinger ennå)</string>
   <string name="categories_not_found">Ingen kategorier som stemte overens med %1$s funnet</string>
+  <string name="depictions_not_found">Ingen Wikidata-elementer som matcher %1$s funnet</string>
+  <string name="no_child_classes">%1$s har ingen underklasser</string>
+  <string name="no_parent_classes">%1$s har ingen overklasser</string>
   <string name="categories_skip_explanation">Legg til kategorier for å gjøre bildene dine lettere å finne på Wikimedia Commons.\n\nBegynn å skrive navnet på kategoriene.</string>
   <string name="categories_activity_title">Kategorier</string>
   <string name="title_activity_settings">Innstillinger</string>
@@ -107,8 +117,8 @@
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-appen er åpen kildekode og er skapt og vedlikeholdt av stipendiater og frivillige fra Wikimedia-fellesskapet. Wikimedia Foundation er ikke involvert i utviklingen eller vedlikeholdet av appen.</string>
   <string name="about_improve">Opprett en ny &lt;a href=\"%1$s\"&gt;GitHub-sak&lt;/a&gt; for feilrapporter og forslag.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Personvernpolicy&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;Bidragsytere&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Personvernspolitikk</string>
+  <string name="about_credits">Bidragsytere</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Send tilbakemelding (via Epost)</string>
   <string name="no_email_client">Ingen epostklient installert</string>
@@ -120,8 +130,8 @@
   <string name="media_upload_policy">Ved å laste opp dette bildet erklærer jeg at dette er mitt eget verk, og at det ikke inneholder opphavsrettsbeskyttet materiale eller selvportretter, og ellers er i samsvar med &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons\' retningslinjer&lt;/a&gt;.</string>
   <string name="menu_download">Last ned</string>
   <string name="preference_license">Standardlisens</string>
-  <string name="use_previous" fuzzy="true">Bruk forrige tittel/beskrivelse</string>
-  <string name="preference_theme" fuzzy="true">Nattmodus</string>
+  <string name="use_previous">Bruk forrige tittel og beskrivelse</string>
+  <string name="preference_theme">Tema</string>
   <string name="license_name_cc_by_sa_four">Navngivelse-Del på samme vilkår 4.0</string>
   <string name="license_name_cc_by_four">Navngivelse 4.0</string>
   <string name="license_name_cc_by_sa"> Navngivelse-Del på samme vilkår 3.0</string>
@@ -151,10 +161,11 @@
   <string name="welcome_copyright_subtext">Unngå opphavsrettsbeskyttet materiale som du har funnet på internett samt bilder av plakater, bokomslag, osv.</string>
   <string name="welcome_final_text">Forstått?</string>
   <string name="welcome_final_button_text">Ja!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Mer informasjon&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Mer informasjon</string>
   <string name="detail_panel_cats_label">Kategorier</string>
   <string name="detail_panel_cats_loading">Laster …</string>
   <string name="detail_panel_cats_none">Ingen valgt</string>
+  <string name="detail_caption_empty">Ingen bildetekst</string>
   <string name="detail_description_empty">Ingen beskrivelse</string>
   <string name="detail_discussion_empty">Ingen diskusjon</string>
   <string name="detail_license_empty">Ukjent lisens</string>
@@ -165,9 +176,13 @@
   <string name="location_permission_title">Ber om plasseringstillatelse</string>
   <string name="ok">OK</string>
   <string name="warning">Advarsel</string>
+  <string name="duplicate_image_found">Duplikatbilde funnet</string>
+  <string name="upload">Last opp</string>
   <string name="yes">Ja</string>
   <string name="no">Nei</string>
+  <string name="media_detail_caption">Bildetekst</string>
   <string name="media_detail_title">Tittel</string>
+  <string name="media_detail_depiction">Skildringer</string>
   <string name="media_detail_description">Beskrivelse</string>
   <string name="media_detail_discussion">Diskusjon</string>
   <string name="media_detail_author">Opphavsperson</string>
@@ -211,6 +226,7 @@
   <string name="nearby_info_menu_wikidata_article">Wikidata-element</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipedia-artikkel</string>
   <string name="description_info">Beskriv bidraget så mye som mulig: Hvor ble det tatt? Hva viser det? Hva er konteksten? Beskriv objektene eller personene. Gi informasjon som ikke kan gjettes lett, for eksempel når på dagen bildet ble tatt om det er et landskapsbilde. Om bildet viser noe uvanlig, forklar hva som gjør det uvanlig.</string>
+  <string name="caption_info">Skriv en kort beskrivelse av bildet. Den første bildeteksten blir brukt som tittel for bildet. Grensa er på 255 tegn.</string>
   <string name="upload_problem_exist">Potensielle problemer med dette bildet:</string>
   <string name="upload_problem_image_dark">Bildet er for mørkt.</string>
   <string name="upload_problem_image_blurry">Bildet er uklart.</string>
@@ -218,6 +234,7 @@
   <string name="upload_problem_different_geolocation">Dette bildet ble tatt et annet sted.</string>
   <string name="upload_problem_fbmd">Last kun opp bilder du har tatt selv. Ikke last opp bilder du har funnet på andres Facebook-kontoer.</string>
   <string name="upload_problem_do_you_continue">Ønsker du fortsatt å laste opp dette bildet?</string>
+  <string name="upload_problem_image">Problemer funnet i bildet</string>
   <string name="internet_downloaded">Last kun opp bilder du har tatt selv. Ikke last opp bilder du har lastet ned fra internett.</string>
   <string name="use_external_storage" fuzzy="true">Bruk ekstern lagring</string>
   <string name="use_external_storage_summary" fuzzy="true">Lagre bilder som er tatt med kameraet i appen på enheten din</string>
@@ -397,14 +414,8 @@
   <string name="review_category_explanation">Dette bildet ligger i %1$s kategorier.</string>
   <string name="review_spam_report_question">Det er ikke relevant fordi det er</string>
   <string name="review_c_violation_report_question">Det er et opphavsrettbrudd fordi det er</string>
-  <string name="review_category_yes_button_text">Nei, feilkategorisert</string>
-  <string name="review_category_no_button_text">Ser greit ut</string>
-  <string name="review_spam_yes_button_text">Nei, ikke relevant</string>
-  <string name="review_spam_no_button_text">Ser greit ut</string>
-  <string name="review_copyright_yes_button_text">Nei, opphavsrettsbrudd</string>
-  <string name="review_copyright_no_button_text">Ser greit ut</string>
-  <string name="review_thanks_yes_button_text">Ja, hvorfor ikke</string>
-  <string name="review_thanks_no_button_text">Neste bilde</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">Ja, hvorfor ikke</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">Neste bilde</string>
   <string name="skip_image_explanation">Når du klikker på denne knappen vil du få et nytt nylig opplastet bilde fra Wikimedia Commons</string>
   <string name="review_image_explanation">Du kan gå gjennom bildene og forbedre kvaliteten på Wikimedia Commons.\nDe fire parameterne for gjennomgang er:\n• Er bildet relevant?\n• Følger bildet opphavsrettsreglene?\n• Er bildet riktig kategorisert?\n• Hvis alt ser greit ut kan du også takke bidragsyteren.</string>
   <string name="no_image">Ingen bilder brukt</string>

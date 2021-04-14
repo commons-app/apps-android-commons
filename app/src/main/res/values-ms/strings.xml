@@ -12,17 +12,24 @@
     <item quantity="one">%1$d muatnaik</item>
     <item quantity="other">%1$d muatnaik</item>
   </plurals>
+  <string name="starting_uploads">Memulakan Muat Naik</string>
   <string name="starting_multiple_uploads" fuzzy="true">Memulakan %d kerja muat naik</string>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d muatnaik</item>
     <item quantity="other">%1$d muatnaik</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">Gambar ini akan dilesenkan di bawah %1$s</string>
-  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
+  <string name="navigation_item_explore">Jelajah</string>
+  <string name="preference_category_feedback">Maklum balas</string>
+  <string name="preference_category_privacy">Privasi</string>
+  <string name="app_name">Commons</string>
   <string name="menu_settings">Tetapan</string>
+  <string name="intent_share_upload_label">Muat naik ke Commons</string>
   <string name="username">Nama pengguna</string>
   <string name="password">Kata laluan</string>
+  <string name="login_credential">Log masuk ke akaun Commons Beta anda</string>
   <string name="login">Log masuk</string>
+  <string name="forgot_password">Lupa Kata Laluan?</string>
   <string name="logging_in_title">Sedang log masuk</string>
   <string name="logging_in_message">Sila tunggu…</string>
   <string name="login_success">Berjaya log masuk!</string>
@@ -31,7 +38,7 @@
   <string name="uploading_started">Pemuatnaikan telah bermula!</string>
   <string name="upload_completed_notification_title">%1$s telah dimuat naik!</string>
   <string name="upload_completed_notification_text">Ketik untuk melihat muatan naik anda</string>
-  <string name="upload_progress_notification_title_start">Mula memuat naik %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Mula memuat naik %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s sedang dimuat naik</string>
   <string name="upload_progress_notification_title_finishing">%1$s akan siap dimuat naik</string>
   <string name="upload_failed_notification_title">%1$s gagal dimuat naik</string>
@@ -43,6 +50,7 @@
   <string name="contribution_state_starting">Memuat naik</string>
   <string name="menu_from_gallery">Dari Galeri</string>
   <string name="menu_from_camera">Ambil gambar</string>
+  <string name="menu_nearby">Berdekatan</string>
   <string name="provider_contributions">Muatan naik saya</string>
   <string name="menu_share">Kongsi</string>
   <string name="menu_view_file_page">Lihat laman fail</string>
@@ -59,10 +67,12 @@
   <string name="menu_upload_single">Muat naik</string>
   <string name="categories_search_text_hint">Cari dalam kategori</string>
   <string name="menu_save_categories">Simpan</string>
+  <string name="display_list_button">Senarai</string>
   <string name="categories_not_found">Tiada kategori yang sepadan dengan %1$s dijumpai</string>
   <string name="categories_skip_explanation" fuzzy="true">Tambahkan kategori supaya gambar-gambar anda lebih senang ditemui di Wikimedia Commons.\n\nMula menaip untuk menambahkan kategori.\nKetik mesej ini (atau tekan butang undur) untuk melangkau langkah ini.</string>
   <string name="categories_activity_title">Kategori</string>
   <string name="title_activity_settings">Tetapan</string>
+  <string name="title_activity_category_details">Kategori</string>
   <string name="menu_about">Perihal</string>
   <string name="about_license" fuzzy="true">Perisian Sumber Terbuka yang dikeluarkan dengan &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Lesen Apache v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Sumber di &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Pepijat di &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
@@ -76,26 +86,120 @@
   <string name="menu_cancel_upload">Batalkan</string>
   <string name="menu_download">Muat Turun</string>
   <string name="preference_license" fuzzy="true">Lesen</string>
+  <string name="preference_theme">Tema</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="tutorial_3_text">Tolong JANGAN muat naik:</string>
+  <string name="tutorial_3_subtext_1">Swafoto atau gambar kawan anda</string>
+  <string name="tutorial_3_subtext_2">Gambar yang anda muat turun dari Internet</string>
+  <string name="tutorial_4_text">Contoh muat naik:</string>
   <string name="welcome_wikipedia_text">Sumbangkan gambar-gambar anda.\nHidupkan rencana-rencana di Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Gambar-gambar di Wikipedia datang dari Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Gambar-gambar anda akan membantu mendidik masyarakat seluruh dunia.</string>
   <string name="welcome_copyright_subtext">Elakkan bahan-bahan terhak cipta yang anda jumpai di Internet dan juga gambar-gambar poster, kulit buku, dsb.</string>
   <string name="welcome_final_text">Adakah anda faham?</string>
   <string name="welcome_final_button_text">Faham!</string>
+  <string name="welcome_help_button_text">Lebih Maklumat</string>
   <string name="detail_panel_cats_label">Kategori</string>
   <string name="detail_panel_cats_loading">Sedang dimuatkan…</string>
   <string name="detail_panel_cats_none">Tiada yang dipilih</string>
   <string name="detail_description_empty">Tiada keterangan</string>
+  <string name="detail_discussion_empty">Tiada perbincangan</string>
   <string name="detail_license_empty">Lesen tidak diketahui</string>
   <string name="menu_refresh">Muat semula</string>
+  <string name="storage_permission_title">Memohon Kebenaran Storan</string>
+  <string name="warning">Amaran</string>
+  <string name="upload">Muat naik</string>
+  <string name="yes">Ya</string>
+  <string name="no">Tidak</string>
+  <string name="media_detail_title">Tajuk</string>
+  <string name="media_detail_description">Keterangan</string>
+  <string name="media_detail_discussion">Perbincangan</string>
+  <string name="media_detail_author">Pengarang</string>
+  <string name="media_detail_uploaded_date">Tarikh dimuat naik</string>
+  <string name="media_detail_license">Lesen</string>
+  <string name="media_detail_coordinates">Koordinat</string>
+  <string name="media_detail_coordinates_empty">Tiada diberikan</string>
+  <string name="become_a_tester_title">Jadilah Penguji Beta</string>
+  <string name="_2fa_code">Kod 2FA</string>
+  <string name="logout_verification">Adakah anda benar-benar mahu log keluar?</string>
+  <string name="commons_logo">Logo Commons</string>
+  <string name="commons_website">Tapak Sesawang Commons</string>
+  <string name="commons_facebook">Laman Facebook Commons</string>
+  <string name="mediaimage_failed">Imej Media Gagal</string>
+  <string name="no_subcategory_found">Tiada subkategori dijumpai</string>
+  <string name="cancel">Batalkan</string>
+  <string name="navigation_item_upload">Muat naik</string>
+  <string name="navigation_item_nearby">Berdekatan</string>
+  <string name="navigation_item_about">Perihal</string>
+  <string name="navigation_item_settings">Tetapan</string>
+  <string name="navigation_item_feedback">Maklum balas</string>
+  <string name="navigation_item_logout">Log keluar</string>
   <string name="navigation_item_info">Tutorial</string>
+  <string name="navigation_item_notification">Pemberitahuan</string>
   <string name="no_description_found">tiada huraian dijumpai</string>
+  <string name="nearby_info_menu_wikidata_article">Butir Wikidata</string>
+  <string name="nearby_info_menu_wikipedia_article">Rencana Wikipedia</string>
+  <string name="upload_problem_image_dark">Imej terlalu gelap.</string>
+  <string name="upload_problem_image_blurry">Imej terlalu kabur.</string>
+  <string name="upload_problem_image_duplicate">Imej sudah ada di Commons.</string>
+  <string name="upload_problem_different_geolocation">Gambar ini diambil di lokasi yang berbeza.</string>
+  <string name="upload_problem_image">Masalah yang dijumpai dalam imej</string>
+  <string name="send_log_file">Hantar fail log</string>
+  <string name="null_url">Ralat! URL tidak dijumpai</string>
+  <string name="nominate_deletion">Calonkan untuk Penghapusan</string>
+  <string name="nominated_for_deletion">Imej ini telah dicalonkan untuk penghapusan.</string>
+  <string name="nominated_see_more">Lihat laman sesawang untuk butiran</string>
+  <string name="skip_login">Langkau</string>
+  <string name="navigation_item_login">Log masuk</string>
+  <string name="nearby_wikidata">Wikidata</string>
+  <string name="nearby_wikipedia">Wikipedia</string>
+  <string name="nearby_commons">Commons</string>
+  <string name="about_translate">Terjemah</string>
+  <string name="about_translate_title">Bahasa</string>
+  <string name="about_translate_cancel">Batalkan</string>
+  <string name="retry">Cuba lagi</string>
+  <string name="showcase_view_needs_photo">Tempat ini memerlukan foto.</string>
+  <string name="showcase_view_has_photo">Tempat ini sudah mempunyai foto.</string>
+  <string name="showcase_view_no_longer_exists">Tempat ini tidak lagi wujud.</string>
+  <string name="no_images_found">Tiada imej dijumpai!</string>
+  <string name="block_notification_title">Disekat</string>
+  <string name="block_notification">Anda disekat daripada menyunting Commons</string>
+  <string name="search_tab_title_media">Media</string>
+  <string name="search_tab_title_categories">Kategori</string>
+  <string name="search_tab_title_depictions">Butir</string>
+  <string name="quiz">Kuiz</string>
+  <string name="question">Soalan</string>
+  <string name="result">Hasil</string>
+  <string name="continue_message">Teruskan</string>
+  <string name="correct">Jawapan Betul</string>
+  <string name="wrong">Jawapan Salah</string>
+  <string name="Achievements">Pencapaian</string>
   <string name="Profile">Profil</string>
+  <string name="statistics">Statistik</string>
+  <string name="level">Tahap</string>
+  <string name="images_uploaded">Imej Dimuat Naik</string>
+  <string name="images_used_by_wiki">Imej Digunakan</string>
+  <string name="achievements_share_message">Kongsi pencapaian anda dengan kawan anda!</string>
+  <string name="achievements_revert_limit_message">minimum diperlukan:</string>
+  <string name="error_occurred">Ralat berlaku!</string>
+  <string name="notifications_channel_name_all">Pemberitahuan Commons</string>
+  <string name="contributions_fragment">Sumbangan</string>
+  <string name="nearby_fragment">Berdekatan</string>
+  <string name="notifications">Pemberitahuan</string>
+  <string name="read_notifications">Pemberitahuan (dibaca)</string>
+  <string name="display_nearby_notification">Paparkan pemberitahuan berdekatan</string>
+  <string name="list_sheet">Senarai</string>
+  <string name="title_page_bookmarks_pictures">Gambar</string>
+  <string name="title_page_bookmarks_locations">Lokasi</string>
+  <string name="no_categories_selected">Tiada Kategori Dipilih</string>
+  <string name="search_this_area">Cari kawasan ini</string>
+  <string name="ends_on">Tamat pada:</string>
+  <string name="review_thanks_yes_button_text">Imej berikutnya</string>
+  <string name="review_thanks_no_button_text">Ya, kenapa tidak</string>
   <string name="category_edit_helper_show_edit_title">Kemas kini kategori</string>
   <string name="category_edit_button_text">Kemas kini kategori</string>
   <string name="add_picture_to_wikipedia_article_title">Tambah imej ke Wikipedia</string>

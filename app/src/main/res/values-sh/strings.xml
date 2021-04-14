@@ -47,7 +47,7 @@
   <string name="uploading_started">Otpremanje je započeto!</string>
   <string name="upload_completed_notification_title">Datoteka „%1$s” je otpremljena!</string>
   <string name="upload_completed_notification_text">Dodirnite da biste pogledali datoteku</string>
-  <string name="upload_progress_notification_title_start">Počinje otpremanje „%1$s”</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Počinje otpremanje „%1$s”</string>
   <string name="upload_progress_notification_title_in_progress">Otpremanje „%1$s”</string>
   <string name="upload_progress_notification_title_finishing">Završavanje otpremanja „%1$s”</string>
   <string name="upload_failed_notification_title">Otpremanje „%1$s” nije uspelo</string>

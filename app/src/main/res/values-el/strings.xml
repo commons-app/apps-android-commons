@@ -26,11 +26,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Έναρξη %1$d επιφόρτωσης</item>
     <item quantity="other">Έναρξη %1$d επιφορτώσεων</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d επιφόρτωση</item>
     <item quantity="other">%1$d επιφορτώσεις</item>
   </plurals>
@@ -66,7 +66,7 @@
   <string name="uploading_started">Η αποστολή ξεκίνησε!</string>
   <string name="upload_completed_notification_title">%1$s επιφορτώθηκε!</string>
   <string name="upload_completed_notification_text">Πατήστε για να προβάλλετε την αποστολή</string>
-  <string name="upload_progress_notification_title_start">Έναρξη  %1$s  επιφορτώθηκε</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Έναρξη  %1$s  επιφορτώθηκε</string>
   <string name="upload_progress_notification_title_in_progress">%1$s επιφορτώνεται</string>
   <string name="upload_progress_notification_title_finishing">Ολοκλήρωση επιφόρτωσης %1$s</string>
   <string name="upload_failed_notification_title">Ανέβασμα του %1$s απέτυχε</string>
@@ -333,8 +333,8 @@
   <string name="deletion_reason_not_interesting">Λυπάμαι αυτή η εικόνα δεν έχει ενδιαφέρον για εγκυκλοπαίδεια</string>
   <string name="uploaded_by_myself" fuzzy="true">Φορτώθηκε από μένα σε</string>
   <string name="no_categories_selected_warning_desc" fuzzy="true">Εικόνες χωρίς κατηγορίες χρησιμοποιούνται σπάνια. Θέλετε πράγματι να στείλετε δίχως να επιλέξετε κατηγορίες?</string>
-  <string name="review_thanks_yes_button_text">Ναι, γιατί όχι</string>
-  <string name="review_thanks_no_button_text">Επόμενη εικόνα</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">Ναι, γιατί όχι</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">Επόμενη εικόνα</string>
   <string name="no_image">Δεν χρησιμοποιούνται εικόνες</string>
   <string name="no_image_uploaded">Δεν έχουν ανεβεί εικόνες</string>
   <string name="no_notification">Δεν έχετε αδιάβαστες ενημερώσεις</string>

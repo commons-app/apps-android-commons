@@ -69,7 +69,9 @@ public class UploadPresenter implements UploadContract.UserActionListener {
 
                         @Override
                         public void onNext(Contribution contribution) {
-                            repository.startUpload(contribution);
+                            repository.prepareMedia(contribution);
+                            contribution.setState(Contribution.STATE_QUEUED);
+                            repository.saveContribution(contribution);
                         }
 
                         @Override
@@ -83,6 +85,7 @@ public class UploadPresenter implements UploadContract.UserActionListener {
 
                         @Override
                         public void onComplete() {
+                            view.makeUploadRequest();
                             repository.cleanup();
                             view.finish();
                             compositeDisposable.clear();
@@ -119,7 +122,6 @@ public class UploadPresenter implements UploadContract.UserActionListener {
     @Override
     public void onAttachView(UploadContract.View view) {
         this.view = view;
-        repository.prepareService();
     }
 
     @Override

@@ -13,11 +13,11 @@
     <item quantity="one">%1$d ატვირთვა</item>
     <item quantity="other">%1$d ატვირთვა</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">იწყება %1$d ატვირთვა</item>
     <item quantity="other">იწყება %1$d ატვირთვა</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d ატვირთვა</item>
     <item quantity="other">%1$d ატვირთვები</item>
   </plurals>
@@ -46,7 +46,7 @@
   <string name="uploading_started">ატვირთვა დაიწყო!</string>
   <string name="upload_completed_notification_title">%1$ ატვირთულია!</string>
   <string name="upload_completed_notification_text">დააჭირეთ თქვენი ატვირთვის სანახავად</string>
-  <string name="upload_progress_notification_title_start">დაიწყო %1$ ატვირთვა</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">დაიწყო %1$ ატვირთვა</string>
   <string name="upload_progress_notification_title_in_progress">%1$ ატვირთვა</string>
   <string name="upload_progress_notification_title_finishing">ატვირთვის დასრულება %1$</string>
   <string name="upload_failed_notification_title">%1$ ატვირთვა ვერ მოხერხდა</string>

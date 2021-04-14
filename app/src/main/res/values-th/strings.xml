@@ -2,6 +2,7 @@
 <!-- Authors:
 * Aefgh39622
 * B20180
+* Bebiezaza
 * Geonuch
 * Horus
 * Just Sayori
@@ -17,11 +18,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">กำลังเริ่มอัปโหลด %1$d รายการ</item>
     <item quantity="other">กำลังเริ่มอัปโหลด %1$d รายการ</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">การอัปโหลด %1$d รายการ</item>
     <item quantity="other">การอัปโหลด %1$d รายการ</item>
   </plurals>
@@ -53,7 +54,7 @@
   <string name="uploading_started">เริ่มการอัปโหลดแล้ว!</string>
   <string name="upload_completed_notification_title">อัปโหลด %1$s แล้ว!</string>
   <string name="upload_completed_notification_text">แตะเพื่อดูการอัปโหลดของคุณ</string>
-  <string name="upload_progress_notification_title_start">กำลังเริ่มการอัปโหลด %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">กำลังเริ่มการอัปโหลด %1$s</string>
   <string name="upload_progress_notification_title_in_progress">กำลังอัปโหลด %1$s</string>
   <string name="upload_progress_notification_title_finishing">กำลังเสร็จสิ้นการอัปโหลด %1$s</string>
   <string name="upload_failed_notification_title">การอัปโหลด %1$s ล้มเหลว</string>
@@ -326,7 +327,8 @@
   <string name="ends_on">สิ้นสุดเมื่อ:</string>
   <string name="display_campaigns">แสดงแคมเปญ</string>
   <string name="nominate_for_deletion_done">เสร็จสิ้น</string>
-  <string name="review_thanks_no_button_text">ภาพถัดไป</string>
+  <string name="review_thanks_yes_button_text">ภาพถัดไป</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">ภาพถัดไป</string>
   <string name="no_image">ไม่มีภาพที่ใช้</string>
   <string name="no_image_reverted">ไม่มีภาพย้อนกลับ</string>
   <string name="no_image_uploaded">ไม่มีภาพที่อัปโหลด</string>

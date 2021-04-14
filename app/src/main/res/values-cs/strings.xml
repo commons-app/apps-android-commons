@@ -5,6 +5,7 @@
 * Clon
 * Dvorapa
 * Frettie
+* Georg101
 * Ilimanaq29
 * Jkjk
 * Ján Kepler
@@ -75,7 +76,7 @@
   <string name="uploading_started">Nahrávání začalo!</string>
   <string name="upload_completed_notification_title">%1$s nahráno!</string>
   <string name="upload_completed_notification_text">Klepnutím zobrazíte upload</string>
-  <string name="upload_progress_notification_title_start">Spouští se načítání souboru %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Spouští se načítání souboru %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Nahrává se soubor %1$s</string>
   <string name="upload_progress_notification_title_finishing">Dokončení nahrávání souboru %1$s</string>
   <string name="upload_failed_notification_title">Načítání souboru %1$s se nezdařilo</string>
@@ -419,14 +420,8 @@
   <string name="review_category_explanation">Tento obrázek patří do %1$s kategórií.</string>
   <string name="review_spam_report_question">Není to v pořádku, protože</string>
   <string name="review_c_violation_report_question">Porušuje to autorská prává, protože</string>
-  <string name="review_category_yes_button_text">Ne, špatně kategorizováno</string>
-  <string name="review_category_no_button_text">Vypadá to dobře</string>
-  <string name="review_spam_yes_button_text">Ne, není to v pořádku</string>
-  <string name="review_spam_no_button_text">Vypadá to v pořádku</string>
-  <string name="review_copyright_yes_button_text">Ne, porušení autorských práv</string>
-  <string name="review_copyright_no_button_text">Vypadá to v pořádku</string>
-  <string name="review_thanks_yes_button_text">Ano, proč ne</string>
-  <string name="review_thanks_no_button_text">Další soubor</string>
+  <string name="review_thanks_yes_button_text">Další obrázek</string>
+  <string name="review_thanks_no_button_text">Ano, proč ne</string>
   <string name="skip_image_explanation">Kliknutím na toto tlačítko se zobrazí další nedávno nahraný obrázek z Wikimedia Commons</string>
   <string name="review_image_explanation">Můžete kontrolovat obrázky a zlepšit kvalitu Wikimedia Commons.\n\nTři aspekty, které se posuzují:\n  - Je tento obrázek v pořádku?\n  - Dodržuje tento obrázok pravidla autorských práv?\n  - Je tento obrázek správně kategorizován?\n\nPokud je vše v pořádku, autorovi můžete poděkovat.</string>
   <string name="no_image">Nejsou použity žádné obrázky</string>
@@ -442,6 +437,8 @@
   <string name="images_featured_explanation">Nejlepší obrázky jsou soubory od vysoce zkušených fotografů a ilustrátorů, které vybrala komunita Wikimedia Commons jako jedny z nejkvalitnějších.</string>
   <string name="images_via_nearby_explanation">Obrázky nahrané přes Poblíž jsou obrázky, které jsou nahrané díky objevování míst na mapě.</string>
   <string name="thanks_received_explanation">Tato funkce umožňuje uživatelům poslat poděkování za užitečné editace – použitím odkazu poděkovat v historii stránky anebo na stránce rozdílu mezi revizemi.</string>
+  <string name="copy_image_caption_description">Kopírovat do následujícího média</string>
+  <string name="copied_successfully">Zkopírováno!</string>
   <string name="welcome_do_upload_content_description">Příklady dobrých obrázků k nahrání na Commons</string>
   <string name="welcome_dont_upload_content_description">Příklady obrázků, které byste neměli nahrávat</string>
   <string name="skip_image">Přeskočit obrázek</string>
@@ -534,4 +531,5 @@
   <string name="leaderboard_yearly">Ročně</string>
   <string name="leaderboard_weekly">Týdně</string>
   <string name="leaderboard_upload">Nahrát</string>
+  <string name="read_help_link">Číst dál</string>
 </resources>

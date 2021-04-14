@@ -9,11 +9,11 @@
 * АдмиралАнимЕ
 -->
 <resources>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Започвам %1$d качване</item>
     <item quantity="other">Започвам %1$d качвания</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d качване</item>
     <item quantity="other">%1$d качвания</item>
   </plurals>
@@ -48,7 +48,7 @@
   <string name="uploading_started">Качването започна!</string>
   <string name="upload_completed_notification_title">Файл %1$s е качен!</string>
   <string name="upload_completed_notification_text">Докоснете, за да видите качения файл</string>
-  <string name="upload_progress_notification_title_start">Започвам с качването на „%1$s“</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Започвам с качването на „%1$s“</string>
   <string name="upload_progress_notification_title_in_progress">„%1$s“ е в процес на качване</string>
   <string name="upload_progress_notification_title_finishing">Завършвам с качване на „%1$s“</string>
   <string name="upload_failed_notification_title">Качването на „%1$s“ е неуспешно</string>

@@ -11,6 +11,7 @@
 * Kwj2772
 * Naramoksu
 * Nuevo Paso
+* Ohw0zuz4
 * Revi
 * Ykhwong
 * YuzaTea
@@ -26,11 +27,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d장의 업로드를 시작합니다</item>
     <item quantity="other">%1$d장의 업로드를 시작합니다</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d개 업로드</item>
     <item quantity="other">%1$d개 업로드</item>
   </plurals>
@@ -66,7 +67,7 @@
   <string name="uploading_started">올리기를 시작했습니다!</string>
   <string name="upload_completed_notification_title">%1$s 파일을 올렸습니다!</string>
   <string name="upload_completed_notification_text">올린 것을 보려면 탭하세요</string>
-  <string name="upload_progress_notification_title_start">%1$s 파일 업로드를 시작하는 중</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s 파일 업로드를 시작하는 중</string>
   <string name="upload_progress_notification_title_in_progress">%1$s 파일을 올리는 중</string>
   <string name="upload_progress_notification_title_finishing">%1$s 파일 올리기를 끝내는 중</string>
   <string name="upload_failed_notification_title">%1$s 파일 올리기 실패</string>
@@ -401,8 +402,8 @@
   <string name="send_thank_failure_title">감사 표현 보내기: 실패</string>
   <string name="review_thanks">기여자에게 감사를 표하시겠습니까?</string>
   <string name="review_category_explanation">이 이미지는 %1$s 분류에 속해 있습니다.</string>
-  <string name="review_thanks_yes_button_text">예</string>
-  <string name="review_thanks_no_button_text">다음 이미지</string>
+  <string name="review_thanks_yes_button_text">다음 이미지</string>
+  <string name="review_thanks_no_button_text">예</string>
   <string name="skip_image_explanation">이 버튼을 클릭하면 위키미디어 공용으로부터 최근 업로드된 다른 이미지를 제공합니다</string>
   <string name="review_image_explanation">이미지를 검토하고 위키미디어 공용의 품질을 개선할 수 있습니다.\n 4가지 검토 변수가 있습니다:\n - 이 이미지가 범위 내에 있는가? \n - 이 이미지가 저작권 규정을 준수하고 있는가? \n - 이 이미지가 올바르게 분류되어 있는가? \n - 모든 것이 문제 없다면 기여자에게 감사를 표할 수도 있습니다.</string>
   <string name="no_notification">읽지 않은 알림이 없습니다</string>
@@ -411,7 +412,8 @@
   <string name="menu_option_unread">읽지 않은 항목 보기</string>
   <string name="error_occurred_in_picking_images">이미지 선택 도중 오류가 발생했습니다</string>
   <string name="please_wait">기다려 주십시오...</string>
-  <string name="previous_image_caption_description">이전의 제목 및 설명 복사</string>
+  <string name="copy_image_caption_description">다음 미디어로 복사</string>
+  <string name="copied_successfully">복사했습니다</string>
   <string name="welcome_do_upload_content_description">공용에 업로드할 좋은 이미지의 예</string>
   <string name="skip_image">이 이미지 건너뛰기</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">다운로드를 실패했습니다!! 외장 스토리지 권한 없이 파일을 다운로드할 수 없습니다.</string>
@@ -494,9 +496,12 @@
   <string name="leaderboard_weekly">매주</string>
   <string name="leaderboard_upload">업로드</string>
   <string name="leaderboard_my_rank_button_text">내 순위</string>
+  <string name="limited_connection_mode">제한된 연결 모드</string>
   <string name="limited_connection_explanation">연결 제한 모드를 사용 중입니다. 모든 업로드는 일시 중단되며 이 모드를 끄면 재개됩니다.</string>
   <string name="limited_connection_is_on">연결 제한 모드가 켜져 있습니다.</string>
   <string name="license_step_title">미디어 라이선스</string>
   <string name="media_detail_step_title">미디어 상세 정보</string>
+  <string name="menu_view_category_page">분류 문서 보기</string>
   <string name="menu_view_item_page">항목 문서 보기</string>
+  <string name="read_help_link">더 읽어보기</string>
 </resources>

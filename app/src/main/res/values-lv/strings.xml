@@ -23,7 +23,7 @@
   <string name="authentication_failed" fuzzy="true">Autentifikācija neizdevās!</string>
   <string name="uploading_started">Augšupielāde sākās!</string>
   <string name="upload_completed_notification_title">%1$s augšupielādēti!</string>
-  <string name="upload_progress_notification_title_start">Uzsāk %1$s augšupielādi</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Uzsāk %1$s augšupielādi</string>
   <string name="upload_progress_notification_title_in_progress">%1$s augšupielādēti</string>
   <string name="upload_progress_notification_title_finishing">Pabeidz %1$s augšupielādi</string>
   <string name="upload_failed_notification_title">Neizdevās augšupielādēt %1$s</string>
@@ -160,7 +160,7 @@
   <string name="nearby_card_permission_title">Atļaujas pieprasījums</string>
   <string name="never_ask_again">Nekad vairs šo nejautāt</string>
   <string name="nominate_for_deletion_done">Pabeigts</string>
-  <string name="review_thanks_no_button_text">Nākamais attēls</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">Nākamais attēls</string>
   <string name="menu_option_read" fuzzy="true">Skatīt arhivētos</string>
   <string name="menu_option_unread">Skatīt nelasītos</string>
   <string name="please_wait">Lūdzu, uzgaidiet...</string>

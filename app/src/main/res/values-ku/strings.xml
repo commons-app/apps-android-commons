@@ -12,11 +12,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Hilbarkirinan bide dest pê kirin</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d barkirinê dide destpêkirin</item>
     <item quantity="other">%1$d barkirinan dide destpêkirin</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d barkirin</item>
     <item quantity="other">%1$d barkirin</item>
   </plurals>
@@ -141,13 +141,8 @@
   <string name="statistics_wikidata_edits">Wêneyên bi riya \"Cihên Nêz\"</string>
   <string name="level">Derece</string>
   <string name="images_uploaded">Wêneyên Hilbarkirî</string>
-  <string name="review_category_no_button_text">Baş dixuye</string>
-  <string name="review_spam_yes_button_text">Na, li derveyî çarçoveyê ye</string>
-  <string name="review_spam_no_button_text">Baş dixuye</string>
-  <string name="review_copyright_yes_button_text">Na, îxlala mafê telîfê</string>
-  <string name="review_copyright_no_button_text">Baş dixuye</string>
-  <string name="review_thanks_yes_button_text">Belê, çima nebe</string>
-  <string name="review_thanks_no_button_text">Wêneya pêş</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">Belê, çima nebe</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">Wêneya pêş</string>
   <string name="please_wait">Ji kerema xwe re bisekine ...</string>
   <string name="add_picture_to_wikipedia_article_title">Wêne tevlî Wîkîpediyayê bike</string>
   <string name="add_picture_to_wikipedia_article_desc">Tu dixwazî vê wêneyê tevlî gotara Wîkîpediyayê ya bi zimanê %1$s bikî?</string>

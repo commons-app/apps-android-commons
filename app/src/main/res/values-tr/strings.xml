@@ -14,6 +14,7 @@
 * Neslihan Turan
 * Okkerem
 * Rapsar
+* SaldırganSincap
 * Sayginer
 * Sezgin İbiş
 * Stonecy
@@ -33,11 +34,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Yüklemeye Başlıyor</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d yüklenmeye başlanıyor</item>
     <item quantity="other">%1$d yüklenmeye başlanıyor</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d yükleme</item>
     <item quantity="other">%1$d yükleme</item>
   </plurals>
@@ -78,7 +79,7 @@
   <string name="uploading_queued">Yükleme kuyruğunda (sınırlı bağlantı modu etkin)</string>
   <string name="upload_completed_notification_title">%1$s yüklendi!</string>
   <string name="upload_completed_notification_text">Yüklemenizi görüntülemek için hafifçe tıklayın</string>
-  <string name="upload_progress_notification_title_start">%1$s yüklemesine başlanıyor</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s yüklemesine başlanıyor</string>
   <string name="upload_progress_notification_title_in_progress">%1$s yükleniyor</string>
   <string name="upload_progress_notification_title_finishing">%1$s yüklemesi bitiriliyor</string>
   <string name="upload_failed_notification_title">%1$s dosyasının yüklemesi başarısız oldu</string>
@@ -129,7 +130,7 @@
   <string name="menu_about">Hakkında</string>
   <string name="about_license">Wikimedia Commons uygulaması, Wikimedia topluluğunun hibeleri ve gönüllüleri tarafından oluşturulan ve sürdürülen açık kaynaklı bir uygulamadır. Wikimedia Vakfı, uygulamanın oluşturulması, geliştirilmesi veya bakımı ile ilgili değildir.</string>
   <string name="about_improve">Hata raporları ve önerileri için yeni bir &lt;a href=\"%1$s\"&gt;GitHub sorunu&lt;/a&gt; oluşturun.</string>
-  <string name="about_privacy_policy">Gizlilik politikası</string>
+  <string name="about_privacy_policy">Gizlilik ilkesi</string>
   <string name="about_credits">Katkıda bulunanlar</string>
   <string name="title_activity_about">Hakkında</string>
   <string name="menu_feedback">Geri Bildirim Gönder (E-posta ile)</string>
@@ -435,14 +436,8 @@
   <string name="review_category_explanation">Bu resim %1$s kategorisindedir.</string>
   <string name="review_spam_report_question">Kapsam dışında çünkü</string>
   <string name="review_c_violation_report_question">Telif hakkı ihlalidir çünkü</string>
-  <string name="review_category_yes_button_text">Hayır, yanlış kategorize edilmiş</string>
-  <string name="review_category_no_button_text">İyi görünüyor</string>
-  <string name="review_spam_yes_button_text">Hayır, kapsam dışı</string>
-  <string name="review_spam_no_button_text">İyi görünüyor</string>
-  <string name="review_copyright_yes_button_text">Hayır, telif hakkı ihlali</string>
-  <string name="review_copyright_no_button_text">İyi görünüyor</string>
-  <string name="review_thanks_yes_button_text">Evet, neden olmasın</string>
-  <string name="review_thanks_no_button_text">Sonraki resim</string>
+  <string name="review_thanks_yes_button_text">Sonraki resim</string>
+  <string name="review_thanks_no_button_text">Evet, neden olmasın</string>
   <string name="skip_image_explanation">Bu butona tıkladığınızda Wikimedia Commons\'tan yeni yüklediğiniz başka bir resim elde edersiniz</string>
   <string name="review_image_explanation">Görüntüleri inceleyebilir ve Wikimedia Commons\'un kalitesini iyileştirebilirsiniz.\n  İncelemenin dört parametresi:\n  - Bu görüntü kapsam dahilinde mi?\n  - Bu resim telif hakkı kurallarına uyuyor mu?\n  - Bu resim doğru sınıflandırılmış mı?\n  - Her şey yolunda giderse katılımcıya da teşekkür edebilirsiniz.</string>
   <string name="no_image">Hiç resim kullanılmadı</string>
@@ -458,7 +453,8 @@
   <string name="images_featured_explanation">Seçkin resimler, Wikimedia Commons topluluğunun sitedeki en yüksek kaliteden bazıları olarak seçtiği son derece yetenekli fotoğrafçıların ve illüstratörlerin görüntüleridir.</string>
   <string name="images_via_nearby_explanation">Yakındaki yerler üzerinden yüklenen resimler, haritadaki yerleri keşfederek yüklenen resimlerdir.</string>
   <string name="thanks_received_explanation">Bu özellik, editörlerin, geçmiş sayfasında veya fark sayfasında küçük bir teşekkür bağlantısı kullanarak faydalı düzenlemeler yapan kullanıcılara bir Teşekkür bildirimi göndermesine olanak tanır.</string>
-  <string name="previous_image_caption_description">Önceki altyazıları ve açıklamaları kopyala</string>
+  <string name="copy_image_caption_description">Sonraki medyaya kopyala</string>
+  <string name="copied_successfully">Kopyalandı</string>
   <string name="welcome_do_upload_content_description">Commons\'a yüklenecek iyi resim örnekleri</string>
   <string name="welcome_dont_upload_content_description">Yüklenmeyecek resim örnekleri</string>
   <string name="skip_image">Bu resmi atla</string>
@@ -597,4 +593,5 @@
   <string name="media_detail_step_title">Medya Ayrıntılar</string>
   <string name="menu_view_category_page">Kategori sayfasını görüntüle</string>
   <string name="menu_view_item_page">Öge sayfasını görüntüle</string>
+  <string name="read_help_link">Devamını oku</string>
 </resources>

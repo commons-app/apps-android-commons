@@ -4,28 +4,32 @@
 * Mahadevaiah Siddaiah
 * Omshivaprakash
 * VASANTH S.N.
+* ಮಲ್ನಾಡಾಚ್ ಕೊಂಕ್ಣೊ
 -->
 <resources>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d ಕಡತ ಅಪ್ಲೋಡ್ ಅಗುತ್ತಿದೆ</item>
     <item quantity="other">%1$d ಕಡತಗಳು ಅಪ್ಲೋಡ್ ಅಗುತ್ತಿದೆ</item>
   </plurals>
+  <string name="preference_category_privacy">ಗೋಪ್ಯತೆ</string>
   <string name="app_name">ಕಾಮನ್ಸ್</string>
   <string name="menu_settings">ವ್ಯವಸ್ಥೆಗಳು</string>
+  <string name="intent_share_upload_label">ಕಾಮನ್ಸ್‌ಗೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ</string>
   <string name="username">ಬಳಕೆದಾರ ಹೆಸರು</string>
   <string name="password">ಪ್ರವೇಶಪದ</string>
   <string name="login">ಲಾಗ್ ಇನ್</string>
+  <string name="forgot_password">ಪ್ರವೇಶಪದ ಮರೆತಿರಾ?</string>
   <string name="signup">ಸೈನ್ ಅಪ್</string>
   <string name="logging_in_title">ಲಾಗಿನ್ ಆಗುತ್ತಿದ್ದೀರಿ</string>
   <string name="logging_in_message">ದಯವಿಟ್ಟು ನಿರೀಕ್ಷಿಸಿ…</string>
   <string name="login_success">ಲಾಗಿನ್ ಯಶಸ್ವಿ!</string>
   <string name="login_failed">ಲಾಗಿನ್ ಸಾಧ್ಯವಾಗಿಲ್ಲ!</string>
   <string name="upload_failed">ಈ ಕಡತ ಕಂಡುಬಂದಿಲ್ಲ. ದಯವಿಟ್ಟು ಇನ್ನೊಂದು ಕಡತ ಪ್ರಯತ್ನಿಸಿ.</string>
-  <string name="authentication_failed" fuzzy="true">ದೃಢೀಕರಣ ವಿಫಲ!</string>
+  <string name="authentication_failed">ದೃಢೀಕರಣ ವಿಫಲ, ದಯವಿಟ್ಟು ಮತ್ತೊಮ್ಮೆ ಲಾಗ್ ಇನ್ ಆಗಿ</string>
   <string name="uploading_started">ಅಪ್ಲೋಡ್ ಪ್ರಾರಂಭವಾಗಿದೆ!</string>
   <string name="upload_completed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಆಗಿದೆ!</string>
   <string name="upload_completed_notification_text">ನಿಮ್ಮ ನಕಲೇರಿಕೆಯನ್ನು ನೋಡಲು ಮೆಲ್ಲಗೆ ತಟ್ಟಿ</string>
-  <string name="upload_progress_notification_title_start">ನಕಲೇರಿಕೆಯ%1$s ಪ್ರಾರಂಭ</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">ನಕಲೇರಿಕೆಯ%1$s ಪ್ರಾರಂಭ</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ನಕಲೇರಿಕೆ  ಆಗಿದೆ!</string>
   <string name="upload_progress_notification_title_finishing">%1$s ಅಪ್ಲೋಡ್ ಮಾಡುವಿಕೆಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಲಾಗುತ್ತಿದೆ</string>
   <string name="upload_failed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಮಾಡುವಿಕೆ ವಿಫಲವಾಗಿದೆ</string>
@@ -40,8 +44,9 @@
   <string name="menu_nearby">ಹತ್ತಿರದ</string>
   <string name="provider_contributions">ನನ್ನ ನಕಲೇರಿಕೆಗಳು</string>
   <string name="menu_share">ಹಂಚು</string>
-  <string name="share_title_hint" fuzzy="true">ಶೀರ್ಷಿಕೆ</string>
+  <string name="share_title_hint">ತಲೆಬರಹ (ಕಡ್ಡಾಯ)</string>
   <string name="share_description_hint">ವಿವರ</string>
+  <string name="share_caption_hint">ತಲೆಬರಹ</string>
   <string name="login_failed_network">ಲಾಗಿನ್ ಮಾಡಲಾಗಲಿಲ್ಲ - ನೆಟ್ವರ್ಕ್ ವೈಫಲ್ಯ</string>
   <string name="login_failed_throttled">ಹಲವಾರು ವಿಫಲ ಪ್ರಯತ್ನಗಳು. ದಯವಿಟ್ಟು ಕೆಲವು ನಿಮಿಷಗಳಲ್ಲಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.</string>
   <string name="login_failed_blocked">ಕ್ಷಮಿಸಿ, ಈ ಬಳಕೆದಾರರನ್ನು ಕಾಮನ್ಸ್ನಲ್ಲಿ ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ</string>
@@ -54,17 +59,108 @@
   <string name="categories_search_text_hint">ವರ್ಗಗಳಲ್ಲಿ ಹುಡುಕು</string>
   <string name="menu_save_categories">ಉಳಿಸಿ</string>
   <string name="refresh_button">ಪುನಶ್ಚೇತನಗೊಳಿಸು</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">ಇನ್ನೂ ಯಾವುದೆ ಅಪ್ಲೋಡ್ಗಳಿಲ್ಲ</string>
+  <string name="display_list_button">ಪಟ್ಟಿ</string>
+  <string name="contributions_subtitle_zero">(ಇನ್ನೂ ಯಾವುದೇ ಅಪ್‌ಲೋಡ್‌ಗಳಿಲ್ಲ)</string>
   <string name="categories_activity_title">ವರ್ಗಗಳು</string>
   <string name="title_activity_settings">ವ್ಯವಸ್ಥೆಗಳು</string>
+  <string name="title_activity_category_details">ವರ್ಗ</string>
   <string name="menu_about">ಕುರಿತು</string>
+  <string name="about_privacy_policy">ಗೌಪ್ಯತಾ ನೀತಿ</string>
+  <string name="about_credits">ಮನ್ನಣೆಗಳು</string>
   <string name="title_activity_about">ಕುರಿತು</string>
   <string name="menu_retry_upload">ಪುನಃ ಪ್ರಯತ್ನಿಸಿ</string>
   <string name="menu_cancel_upload">ರದ್ದುಮಾಡಿ</string>
   <string name="menu_download">ನಕಲಿಳಿಸಿ</string>
-  <string name="preference_license" fuzzy="true">ಪರವಾನಗಿ</string>
+  <string name="preference_license">ಪೂರ್ವನಿಯೋಜಿತ ಪರವಾನಗಿ</string>
+  <string name="use_previous">ಹಿಂದಿನ ಶೀರ್ಷಿಕೆ ಹಾಗೂ ವರ್ಣನೆಯನ್ನು ಬಳಸಿ</string>
+  <string name="preference_theme">ಥೀಮ್</string>
+  <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four">Attribution 4.0</string>
+  <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by">Attribution 3.0</string>
+  <string name="tutorial_3_text">ದಯವಿಟ್ಟು ಅಪ್‌ಲೋಡ್ ಮಾಡಬೇಡಿ:</string>
+  <string name="tutorial_3_subtext_1">ಸೆಲ್ಫಿ ಅಥವಾ ನಿಮ್ಮ ಗೆಳೆಯರ ಚಿತ್ರಗಳು</string>
+  <string name="tutorial_3_subtext_2">ನೀವು ಅಂತರ್ಜಾಲದಿಂದ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿದ ಚಿತ್ರಗಳು</string>
+  <string name="tutorial_4_text">ಅಪ್‌ಲೋಡ್ ಉದಾಹರಣೆ:</string>
+  <string name="tutorial_4_subtext_1">ಶೀರ್ಷಿಕೆ: ಸಿಡ್ನಿ ಒಪೆರಾ ಹೌಸ್</string>
   <string name="welcome_final_button_text">ಹೌದು!</string>
+  <string name="welcome_help_button_text">ಹೆಚ್ಚಿನ ಮಾಹಿತಿ</string>
   <string name="detail_panel_cats_label">ವರ್ಗಗಳು</string>
   <string name="detail_panel_cats_loading">ತುಂಬಿಸಲಾಗುತ್ತಿದೆ….</string>
+  <string name="detail_caption_empty">ತಲೆಬರಹ ಇಲ್ಲ</string>
+  <string name="detail_description_empty">ವಿವರ ಇಲ್ಲ</string>
+  <string name="detail_license_empty">ಗೊತ್ತಿಲ್ಲದ ಪರವಾನಗಿ</string>
+  <string name="ok">ಸರಿ</string>
+  <string name="warning">ಎಚ್ಚರಿಕೆ</string>
+  <string name="upload">ಅಪ್‌ಲೋಡ್</string>
+  <string name="yes">ಹೌದು</string>
+  <string name="no">ಇಲ್ಲ</string>
+  <string name="media_detail_caption">ತಲೆಬರಹ</string>
+  <string name="media_detail_title">ಶೀರ್ಷಿಕೆ</string>
+  <string name="media_detail_author">ಕರ್ತೃ</string>
+  <string name="media_detail_license">ಪರವಾನಗಿ</string>
+  <string name="commons_website">ಕಾಮನ್ಸ್ ಜಾಲತಾಣ</string>
+  <string name="commons_facebook">ಕಾಮನ್ಸ್ ಫೇಸ್ಬುಕ್ ಪುಟ</string>
+  <string name="welcome_image_tulip">ಟ್ಯೂಲಿಪ್</string>
+  <string name="welcome_image_sydney_opera_house">ಸಿಡ್ನಿ ಒಪೆರಾ ಹೌಸ್</string>
+  <string name="cancel">ರದ್ದುಮಾಡಿ</string>
+  <string name="navigation_drawer_open">ತೆರೆ</string>
+  <string name="navigation_drawer_close">ಮುಚ್ಚು</string>
+  <string name="navigation_item_home">ಮುಖ್ಯಪುಟ</string>
+  <string name="navigation_item_upload">ಅಪ್ಲೋಡ್</string>
+  <string name="navigation_item_nearby">ಹತ್ತಿರದ</string>
+  <string name="navigation_item_about">ಕುರಿತು</string>
+  <string name="navigation_item_settings">ವ್ಯವಸ್ಥೆಗಳು</string>
+  <string name="navigation_item_logout">ಲಾಗ್ ಔಟ್</string>
+  <string name="navigation_item_notification">ಅಧಿಸೂಚನೆಗಳು</string>
+  <string name="no_description_found">ಯಾವುದೇ ವಿವರಣೆ ಸಿಗಲಿಲ್ಲ</string>
+  <string name="nearby_info_menu_wikidata_article">ವಿಕಿಡೇಟಾ ವಸ್ತು</string>
+  <string name="nearby_info_menu_wikipedia_article">ವಿಕಿಪೀಡಿಯ ಲೇಖನ</string>
+  <string name="upload_problem_image_dark">ಚಿತ್ರವು ಬಹಳ ಕಪ್ಪಾಗಿದೆ.</string>
+  <string name="upload_problem_image_duplicate">ಚಿತ್ರವು ಆಗಲೇ ಕಾಮನ್ಸ್‌ನಲ್ಲಿದೆ.</string>
+  <string name="upload_problem_different_geolocation">ಈ ಚಿತ್ರವನ್ನು ಬೇರೆ ಸ್ಥಳದಲ್ಲಿ ತೆಗೆಯಲಾಗಿದೆ.</string>
   <string name="use_external_storage_summary">ಸಂಗ್ರಹಣೆ</string>
+  <string name="login_to_your_account">ನಿಮ್ಮ ಖಾತೆಗೆ ಲಾಗ್ ಇನ್ ಆಗಿ</string>
+  <string name="null_url">ದೋಷ! ಯುಆರ್‌ಎಲ್ ಸಿಗಲಿಲ್ಲ</string>
+  <string name="nominate_deletion">ಅಳಿಸುವಿಕೆಗೆ ನಾಮನಿರ್ದೇಶನ ಮಾಡಿ</string>
+  <string name="nominated_for_deletion">ಈ ಚಿತ್ರವನ್ನು ಅಳಿಸುವಿಕೆಗೆ ನಾಮನಿರ್ದೇಶನ ಮಾಡಲಾಗಿದೆ.</string>
+  <string name="navigation_item_login">ಲಾಗ್ ಇನ್</string>
+  <string name="nearby_wikidata">ವಿಕಿಡೇಟಾ</string>
+  <string name="nearby_wikipedia">ವಿಕಿಪೀಡಿಯ</string>
+  <string name="nearby_commons">ಕಾಮನ್ಸ್</string>
+  <string name="about_translate">ಭಾಷಾಂತರಿಸಿ</string>
+  <string name="about_translate_title">ಭಾಷೆಗಳು</string>
+  <string name="about_translate_cancel">ರದ್ದುಮಾಡಿ</string>
+  <string name="retry">ಪುನಃ ಪ್ರಯತ್ನಿಸಿ</string>
+  <string name="no_images_found">ಯಾವುದೇ ಚಿತ್ರಗಳು ಸಿಗಲಿಲ್ಲ!</string>
+  <string name="block_notification_title">ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ</string>
+  <string name="menu_search_button">ಹುಡುಕು</string>
+  <string name="title_activity_search">ಹುಡುಕು</string>
+  <string name="search_recent_header">ಇತ್ತೀಚೆಗಿನ ಹುಡುಕಾಟಗಳು:</string>
+  <string name="search_tab_title_categories">ವರ್ಗಗಳು</string>
+  <string name="search_tab_title_depictions">ವಸ್ತುಗಳು</string>
+  <string name="question">ಪ್ರಶ್ನೆ</string>
+  <string name="result">ಫಲಿತಾಂಶ</string>
+  <string name="correct">ಸರಿಯಾದ ಉತ್ತರ</string>
+  <string name="wrong">ತಪ್ಪಾದ ಉತ್ತರ</string>
+  <string name="delete">ಅಳಿಸು</string>
+  <string name="Achievements">ಸಾಧನೆಗಳು</string>
+  <string name="statistics">ಅಂಕಿ ಅಂಶಗಳು</string>
+  <string name="error_occurred">ದೋಷ ಉಂಟಾಯಿತು!</string>
+  <string name="notifications_channel_name_all">ಕಾಮನ್ಸ್ ಅಧಿಸೂಚನೆ</string>
+  <string name="contributions_fragment">ಕಾಣಿಕೆಗಳು</string>
+  <string name="nearby_fragment">ಹತ್ತಿರದ</string>
+  <string name="notifications">ಅಧಿಸೂಚನೆಗಳು</string>
+  <string name="read_notifications">ಅಧಿಸೂಚನೆಗಳು (ಓದಲಾದ)</string>
+  <string name="list_sheet">ಪಟ್ಟಿ</string>
+  <string name="submit">ಸಲ್ಲಿಸಿ</string>
+  <string name="title_page_bookmarks_pictures">ಚಿತ್ರಗಳು</string>
+  <string name="review_thanks_yes_button_text">ಮುಂದಿನ ಚಿತ್ರ</string>
+  <string name="please_wait">ದಯವಿಟ್ಟು ನಿರೀಕ್ಷಿಸಿ…</string>
+  <string name="exif_tag_name_author">ಕರ್ತೃ</string>
+  <string name="exif_tag_name_copyright">ಕಾಯ್ದಿರಿಸಿದ ಹಕ್ಕುಗಳು</string>
+  <string name="exif_tag_name_location">ಸ್ಥಳ</string>
+  <string name="no_categories_found">ಯಾವುದೇ ವರ್ಗಗಳು ಸಿಗಲಿಲ್ಲ</string>
+  <string name="delete_helper_show_deletion_title_success">ಯಶಸ್ವಿ</string>
+  <string name="read_help_link">ಇನ್ನೂ ಓದಿ</string>
 </resources>

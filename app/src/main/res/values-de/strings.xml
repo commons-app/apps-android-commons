@@ -5,6 +5,7 @@
 * Bxalber
 * Elliot
 * Envlh
+* FF-11
 * FF11
 * Ferdinand0101
 * Inkowik
@@ -26,16 +27,15 @@
     <item quantity="one">Eine Datei wird hochgeladen</item>
     <item quantity="other">%1$d Dateien werden hochgeladen</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">Eine hochgeladene Datei</item>
-    <item quantity="other">%1$d hochgeladene Dateien</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Starte einen Upload</item>
     <item quantity="other">Starte %1$d Uploads</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">Eine hochgeladene Datei</item>
     <item quantity="other">%1$d hochgeladene Dateien</item>
   </plurals>
@@ -73,12 +73,14 @@
   <string name="upload_failed">Datei nicht gefunden. Bitte versuche es mit einer anderen Datei.</string>
   <string name="authentication_failed">Authentifizierung fehlgeschlagen. Bitte erneut anmelden.</string>
   <string name="uploading_started">Hochladen gestartet!</string>
+  <string name="uploading_queued">Hochladen in Warteschlange (eingeschränkter Verbindungsmodus aktiviert)</string>
   <string name="upload_completed_notification_title">„%1$s“ hochgeladen!</string>
   <string name="upload_completed_notification_text">Tippe, um deinen Upload anzusehen</string>
-  <string name="upload_progress_notification_title_start">Hochladen von „%1$s“ starten</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Hochladen von „%1$s“ starten</string>
   <string name="upload_progress_notification_title_in_progress">„%1$s“ wird hochgeladen</string>
   <string name="upload_progress_notification_title_finishing">Hochladen von „%1$s“ abschließen</string>
   <string name="upload_failed_notification_title">Hochladen von „%1$s“ fehlgeschlagen</string>
+  <string name="upload_paused_notification_title">Hochladen von %1$s pausiert</string>
   <string name="upload_failed_notification_subtitle">Tippen zum Betrachten</string>
   <string name="upload_paused_notification_subtitle">Tippen zum Ansehen</string>
   <string name="title_activity_contributions">Meine kürzlich hochgeladenen Dateien</string>
@@ -106,6 +108,7 @@
   <string name="provider_modifications">Anpassungen</string>
   <string name="menu_upload_single">Hochladen</string>
   <string name="categories_search_text_hint">Kategorien durchsuchen</string>
+  <string name="depicts_search_text_hint">Suche nach Objekten, die dein Medium abbildet (Berg, Taj Mahal, etc.)</string>
   <string name="menu_save_categories">Speichern</string>
   <string name="refresh_button">Aktualisieren</string>
   <string name="display_list_button">Liste</string>
@@ -236,8 +239,8 @@
   <string name="upload_problem_fbmd">Lade bitte nur Bilder hoch, die du selber erstellt hast. Lade keine Bilder hoch, die du auf Facebook-Konten anderer Personen gefunden hast.</string>
   <string name="upload_problem_do_you_continue">Möchtest du immer noch dieses Bild hochladen?</string>
   <string name="internet_downloaded">Lade bitte nur Bilder hoch, die du selber aufgenommen hast. Lade keine Bilder hoch, die du aus dem Internet heruntergeladen hast.</string>
-  <string name="use_external_storage" fuzzy="true">Externen Speicher verwenden</string>
-  <string name="use_external_storage_summary" fuzzy="true">Mit der In-App-Kamera aufgenommene Bilder auf deinem Gerät speichern</string>
+  <string name="use_external_storage">Speichern von In-App-Aufnahmen</string>
+  <string name="use_external_storage_summary">Mit der In-App-Kamera aufgenommene Bilder auf deinem Gerät speichern</string>
   <string name="login_to_your_account">Bei deinem Benutzerkonto anmelden</string>
   <string name="send_log_file">Logdatei senden</string>
   <string name="send_log_file_description">Logdatei an die Entwickler per E-Mail senden, um Probleme mit der App zu beheben. Hinweis: Die Protokolle können potentiell Informationen zur Identifizierung enthalten.</string>
@@ -350,16 +353,16 @@
   <string name="notifications">Benachrichtigungen</string>
   <string name="read_notifications">Benachrichtigungen (gelesen)</string>
   <string name="display_nearby_notification">Benachrichtigungen in der Nähe anzeigen</string>
-  <string name="display_nearby_notification_summary" fuzzy="true">Hier tippen, um Orte in der Nähe anzusehen, die Bilder benötigen.</string>
+  <string name="display_nearby_notification_summary">In-App-Benachrichtigung für den nächstgelegenen Ort anzeigen, der Bilder benötigt</string>
   <string name="list_sheet">Liste</string>
   <string name="storage_permission">Speicherberechtigung</string>
   <string name="write_storage_permission_rationale_for_image_share">Wir benötigen deine Berechtigung für den Zugriff auf den externen Speicher deines Geräts, um Bilder hochzuladen.</string>
   <string name="nearby_notification_dismiss_message">Du wirst nicht mehr den nähersten Ort sehen, der noch Bilder braucht. Du kannst jedoch diese Benachrichtigung in den Einstellungen erneut aktivieren, falls du das zu wünschen tust.</string>
-  <string name="step_count" fuzzy="true">Schritt %1$d von %2$d</string>
+  <string name="step_count">Schritt %1$d von %2$d: %3$s</string>
   <string name="next">Nächste</string>
   <string name="previous">Vorherige</string>
   <string name="submit">Einreichen</string>
-  <string name="upload_title_duplicate" fuzzy="true">Eine Datei mit dem Namen %1$s ist bereits vorhanden. Bist du sicher, dass du fortfahren möchtest?</string>
+  <string name="upload_title_duplicate">Eine Datei mit dem Namen %1$s ist bereits vorhanden. Bist du sicher, dass du fortfahren möchtest?\n\nHinweis: Dem Dateinamen wird automatisch ein passendes Suffix hinzugefügt.</string>
   <string name="map_application_missing">Auf deinem Gerät konnte keine kompatible Karten-App gefunden werden. Bitte installiere eine Karten-App, um diese Funktion nutzen zu können.</string>
   <string name="title_page_bookmarks_pictures">Bilder</string>
   <string name="title_page_bookmarks_locations">Standorte</string>
@@ -377,7 +380,7 @@
   <string name="no_uploads">Willkommen bei Commons!\n\nLade deine erste Datei hoch, indem du auf die Hinzufügen-Schaltfläche tippst.</string>
   <string name="no_categories_selected">Keine Kategorien ausgewählt</string>
   <string name="no_categories_selected_warning_desc">Bilder ohne Kategorien sind selten nutzbar. Bist du sicher, dass du ohne die Auswahl von Kategorien hochladen möchtest?</string>
-  <string name="upload_flow_all_images_in_set" fuzzy="true">(für alle Bilder im Satz)</string>
+  <string name="upload_flow_all_images_in_set">(für alle Bilder im Satz)</string>
   <string name="search_this_area">Diesen Bereich durchsuchen</string>
   <string name="nearby_card_permission_title">Berechtigungsanfrage</string>
   <string name="nearby_card_permission_explanation">Dürfen wir deinen aktuellen Standort verwenden, um den nächsten Ort anzuzeigen, der Bilder benötigt?</string>
@@ -418,14 +421,8 @@
   <string name="review_category_explanation">Dieses Bild ist unter %1$s Kategorien.</string>
   <string name="review_spam_report_question">Sie ist außerhalb des Geltungsbereichs, da sie</string>
   <string name="review_c_violation_report_question">Sie ist eine Urheberrechtsverletzung, da sie</string>
-  <string name="review_category_yes_button_text">Nein, falsch kategorisiert</string>
-  <string name="review_category_no_button_text">Sieht gut aus</string>
-  <string name="review_spam_yes_button_text">Nein, außerhalb des Geltungsbereichs</string>
-  <string name="review_spam_no_button_text">Sieht gut aus</string>
-  <string name="review_copyright_yes_button_text">Nein, Urheberrechtsverletzung</string>
-  <string name="review_copyright_no_button_text">Sieht gut aus</string>
-  <string name="review_thanks_yes_button_text">Ja, warum nicht</string>
-  <string name="review_thanks_no_button_text">Nächstes Bild</string>
+  <string name="review_thanks_yes_button_text">Nächstes Bild</string>
+  <string name="review_thanks_no_button_text">Ja, warum nicht</string>
   <string name="skip_image_explanation">Das Anklicken dieser Schaltfläche gibt dir ein anderes kürzlich hochgeladenes Bild von Wikimedia Commons</string>
   <string name="review_image_explanation">Du kannst Bilder überprüfen und die Qualität von Wikimedia Commons verbessern.\nDie vier Parameter der Überprüfung sind: \n- Ist dieses Bild im Geltungsbereich? \n- Folgt dieses Bild den Regeln des Urheberrechts? \n- Ist dieses Bild korrekt kategorisiert? \n- Falls alles gut geht, kannst du auch dem Beitrager danken.</string>
   <string name="no_image">Keine Bilder verwendet</string>
@@ -441,6 +438,7 @@
   <string name="images_featured_explanation">Vorgestellte Bilder sind Bilder von professionellen Fotografen und Zeichnern, die die Gemeinschaft von Wikimedia Commons als diejenigen mit der höchsten Qualität auf der Website ausgewählt hat.</string>
   <string name="images_via_nearby_explanation">Über Orte in der Nähe hochgeladene Bilder sind die Bilder, die von entdeckten Orten auf der Karte hochgeladen wurden.</string>
   <string name="thanks_received_explanation">Diese Funktion erlaubt es Autoren, eine Dankeschön-Benachrichtigung an Benutzer zu senden, die nützliche Bearbeitungen durchgeführt haben – durch die Benutzung eines kleinen Dankeschön-Links in der Versionsgeschichte oder Unterschiedsseite.</string>
+  <string name="copied_successfully">Kopiert</string>
   <string name="welcome_do_upload_content_description">Beispiele guter Bilder zum Hochladen auf Commons</string>
   <string name="welcome_dont_upload_content_description">Beispiele von Bildern, die nicht hochgeladen werden sollen.</string>
   <string name="skip_image">Dieses bild überspringen</string>
@@ -498,4 +496,5 @@
   <string name="leaderboard_column_user">Benutzer</string>
   <string name="leaderboard_weekly">Wöchentlich</string>
   <string name="leaderboard_my_rank_button_text">Mein Rang</string>
+  <string name="menu_view_category_page">Kategorieseite anzeigen</string>
 </resources>

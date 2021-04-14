@@ -17,11 +17,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Komencante %1$d alŝuton</item>
     <item quantity="other">Komencante %1$d alŝutojn</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d alŝuto</item>
     <item quantity="other">%1$d alŝutoj</item>
   </plurals>
@@ -61,7 +61,7 @@
   <string name="uploading_started">La alŝutado komenciĝis!</string>
   <string name="upload_completed_notification_title">%1$s alŝutita!</string>
   <string name="upload_completed_notification_text">Tuŝetu por vidi vian alŝutadon</string>
-  <string name="upload_progress_notification_title_start">Komenciĝas la alŝutado de %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Komenciĝas la alŝutado de %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Alŝutante %1$s</string>
   <string name="upload_progress_notification_title_finishing">Finiĝis la alŝutado de %1$s</string>
   <string name="upload_failed_notification_title">La alŝutado de %1$s malsukcesis</string>
@@ -392,14 +392,8 @@
   <string name="review_category_explanation">Ĉi tiu kategorio estas en %1$s kategorioj.</string>
   <string name="review_spam_report_question">Ĝi estas netaŭga ĉar ĝi estas</string>
   <string name="review_c_violation_report_question">Ĝi malobservas aŭtorrajtojn ĉar ĝi estas</string>
-  <string name="review_category_yes_button_text">Ne, mise enkategoriigita</string>
-  <string name="review_category_no_button_text">Ŝajne estas bona</string>
-  <string name="review_spam_yes_button_text">Ne, netaŭga</string>
-  <string name="review_spam_no_button_text">Ŝajne estas bona</string>
-  <string name="review_copyright_yes_button_text">Ne, malobservo de aŭtorrajtoj</string>
-  <string name="review_copyright_no_button_text">Ŝajne estas bona</string>
-  <string name="review_thanks_yes_button_text">Jes, kial ne</string>
-  <string name="review_thanks_no_button_text">Sekva bildo</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">Jes, kial ne</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">Sekva bildo</string>
   <string name="skip_image_explanation">Alklakado de ĉi tiu butono donos vin alia ĵus alŝutita bildo en Vikimedia Komunejo</string>
   <string name="review_image_explanation">Vi povas revizii bildojn kaj plibonigi la kvaliton de Vikimedia Komunejo.\n Jen la kvar reviziaj parametroj: \n - Ĉu la bildo estas taŭga? \n - Ĉu la bildo observas la regulojn pri aŭtorrajtoj? \n - Ĉu la bildo estis ĝuste enkategoriigita? \n - Se ĉio estas bona, vi povas danki la kontribuinton.</string>
   <string name="no_image">Neniu uzita bildo</string>
