@@ -185,8 +185,10 @@ public class SearchActivity extends BaseActivity
 
     @Override
     public void refreshNominatedMedia(int index) {
-        onBackPressed();
-        onMediaClicked(index);
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            onBackPressed();
+            onMediaClicked(index);
+        }
     }
 
     /**

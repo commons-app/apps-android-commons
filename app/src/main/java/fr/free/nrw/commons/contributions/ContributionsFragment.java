@@ -616,7 +616,7 @@ public class ContributionsFragment
 
     @Override
     public void refreshNominatedMedia(int index) {
-        if(mediaDetailPagerFragment != null) {
+        if(mediaDetailPagerFragment != null && !contributionsListFragment.isVisible()) {
             removeFragment(mediaDetailPagerFragment);
             mediaDetailPagerFragment = new MediaDetailPagerFragment(false, true);
             mediaDetailPagerFragment.showImage(index);

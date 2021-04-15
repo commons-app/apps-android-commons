@@ -171,7 +171,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
 
   @Override
   public void refreshNominatedMedia(int index) {
-    if(mediaDetails != null) {
+    if(mediaDetails != null && !listFragment.isVisible()) {
       removeFragment(mediaDetails);
       mediaDetails = new MediaDetailPagerFragment(false, true);
       ((BookmarkFragment) getParentFragment()).setScroll(false);
