@@ -1030,7 +1030,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     /**
-     * Generate the caption with lanuage
+     * Generate the caption with language
      */
     private List<Caption> getCaptions() {
         List<Caption> captionList = new ArrayList<>();
@@ -1048,10 +1048,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         return captionList;
     }
 
-
-    /**
-     * fetch the image page in html
-     */
     private void getDescription() {
         compositeDisposable.add(mediaDataExtractor.getHtmlOfPage(media.getFilename())
             .subscribeOn(Schedulers.io())

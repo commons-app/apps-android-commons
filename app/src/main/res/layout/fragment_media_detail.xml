@@ -208,9 +208,10 @@
                   android:id="@+id/show_caption_description_textview"
                   style="@style/MediaDetailTextLabelGeneric"
                   android:layout_width="match_parent"
+                  android:gravity="center"
                   android:layout_height="wrap_content"
                   android:layout_marginBottom="@dimen/dimen_10"
-                  android:text="Show Caption And Description in more Language" />
+                  android:text="In all languages" />
 
                 <View
                   android:background="?attr/mediaDetailSpacerColor"
