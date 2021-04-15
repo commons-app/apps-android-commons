@@ -516,6 +516,7 @@
   <string name="wallpaper_set_unsuccessfully">出错了。无法设置壁纸</string>
   <string name="setting_wallpaper_dialog_title">设为壁纸</string>
   <string name="setting_wallpaper_dialog_message">正在设置壁纸。请稍等…</string>
+  <string name="theme_default_name">跟随系统</string>
   <string name="theme_dark_name">暗黑</string>
   <string name="theme_light_name">明亮</string>
   <string name="ask_to_turn_location_on">打开位置？</string>
@@ -529,6 +530,8 @@
   <string name="paused">已暂停</string>
   <string name="more">更多</string>
   <string name="leaderboard_tab_title">排行榜</string>
+  <string name="rank_prefix">排名：</string>
+  <string name="leaderboard_column_rank">排名</string>
   <string name="leaderboard_column_user">用户</string>
   <string name="leaderboard_column_count">计数</string>
   <string name="leaderboard_all_time">所有时间</string>
@@ -538,6 +541,7 @@
   <string name="limited_connection_mode">限制连接模式</string>
   <string name="resuming_upload">正在恢复上传...</string>
   <string name="pausing_upload">暂停上传...</string>
+  <string name="depicts_step_title">描述</string>
   <string name="media_detail_step_title">媒体详情</string>
   <string name="menu_view_category_page">查看分类页面</string>
   <string name="menu_view_item_page">查看项目页面</string>

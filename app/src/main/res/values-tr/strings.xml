@@ -34,13 +34,13 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Yüklemeye Başlıyor</string>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">%1$d yüklenmeye başlanıyor</item>
-    <item quantity="other">%1$d yüklenmeye başlanıyor</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%d yüklenmeyi işleniyor</item>
+    <item quantity="other">%d yüklenmeyi işleniyor</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d yükleme</item>
-    <item quantity="other">%1$d yükleme</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d yükleme</item>
+    <item quantity="other">%d yükleme</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Bu görüntü, %1$s lisansı altında olacak</item>
@@ -79,7 +79,7 @@
   <string name="uploading_queued">Yükleme kuyruğunda (sınırlı bağlantı modu etkin)</string>
   <string name="upload_completed_notification_title">%1$s yüklendi!</string>
   <string name="upload_completed_notification_text">Yüklemenizi görüntülemek için hafifçe tıklayın</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s yüklemesine başlanıyor</string>
+  <string name="upload_progress_notification_title_start">Dosya yükleniyor: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s yükleniyor</string>
   <string name="upload_progress_notification_title_finishing">%1$s yüklemesi bitiriliyor</string>
   <string name="upload_failed_notification_title">%1$s dosyasının yüklemesi başarısız oldu</string>
