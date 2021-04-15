@@ -139,4 +139,5 @@
   <string name="no">Nae</string>
   <string name="media_detail_title">Titel</string>
   <string name="media_detail_description">Besjrieving</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

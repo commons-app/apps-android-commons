@@ -167,4 +167,5 @@
   <string name="send_log_file_description" fuzzy="true">Azen afaylu n uɣmis i yinermisen s yimayl</string>
   <string name="nearby_location_not_available" fuzzy="true">Ulac adeg</string>
   <string name="location_permission_rationale_nearby">Ilaq usireg i uskan tabdart n wadigen iqerben</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

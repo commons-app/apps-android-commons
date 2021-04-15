@@ -373,4 +373,5 @@
   <string name="load_more">โหลดเพิ่มเติม</string>
   <string name="wikipedia_instructions_step_1">1. ใช้ข้อความวิกิดังต่อไปนี้:</string>
   <string name="leaderboard_nearby">สถานที่ใกล้เคียง</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

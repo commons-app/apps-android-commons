@@ -359,4 +359,5 @@
   <string name="leaderboard_upload">Ανέβασμα</string>
   <string name="leaderboard_nearby">Γειτονικά</string>
   <string name="leaderboard_used">Σε χρήση</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

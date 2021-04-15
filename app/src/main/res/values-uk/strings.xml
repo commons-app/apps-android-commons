@@ -596,4 +596,5 @@
   <string name="media_detail_step_title">Деталі медіа</string>
   <string name="menu_view_category_page">Переглянути сторінку категорії</string>
   <string name="menu_view_item_page">Переглянути сторінку елемента</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

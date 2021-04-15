@@ -452,4 +452,5 @@
   <string name="wikipedia_instructions_step_7">7. Julkaise artikkeli</string>
   <string name="copy_wikicode_to_clipboard">Kopioi wikikoodi leikepöydälle</string>
   <string name="paused">Pysäytetty</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

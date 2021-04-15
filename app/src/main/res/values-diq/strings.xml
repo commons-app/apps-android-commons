@@ -329,4 +329,5 @@
   <string name="mapbox_telemetry" fuzzy="true">Telemetreyi Devre ra vece</string>
   <string name="license_step_title">Lisansê Medya</string>
   <string name="media_detail_step_title">Teferuatê medya</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

@@ -191,4 +191,5 @@
   <string name="about_rate_us" fuzzy="true"/>
   <string name="about_faq" fuzzy="true">सतत विचारले जाणारे प्रश्न</string>
   <string name="welcome_skip_button">ट्यूटोरियल वगळा</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

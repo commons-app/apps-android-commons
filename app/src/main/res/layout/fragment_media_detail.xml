@@ -211,7 +211,7 @@
                   android:gravity="center"
                   android:layout_height="wrap_content"
                   android:layout_marginBottom="@dimen/dimen_10"
-                  android:text="In all languages" />
+                  android:text="@string/media_detail_in_all_languages" />
 
                 <View
                   android:background="?attr/mediaDetailSpacerColor"

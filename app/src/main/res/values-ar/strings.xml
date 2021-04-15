@@ -543,4 +543,5 @@
   <string name="confirm">تأكيد</string>
   <string name="instructions_title">التعليمات</string>
   <string name="limited_connection_mode" fuzzy="true">اتصال محدود</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

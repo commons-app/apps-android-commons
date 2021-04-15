@@ -291,4 +291,5 @@
   <string name="search_this_area">여기를 검색</string>
   <string name="nearby_card_permission_title">권한 요청</string>
   <string name="never_ask_again">다시는 묻지 않음</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

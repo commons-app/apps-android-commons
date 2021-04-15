@@ -497,4 +497,5 @@
   <string name="leaderboard_weekly">Wöchentlich</string>
   <string name="leaderboard_my_rank_button_text">Mein Rang</string>
   <string name="menu_view_category_page">Kategorieseite anzeigen</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

@@ -450,4 +450,5 @@
   <string name="leaderboard_weekly">هفتگی</string>
   <string name="leaderboard_all_time">تمام وقت</string>
   <string name="leaderboard_upload">بارگذاری</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

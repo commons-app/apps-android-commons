@@ -97,4 +97,5 @@
   <string name="nominate_for_deletion_done">Гьазир</string>
   <string name="review_thanks_yes_button_text" fuzzy="true">ДЮР, НЕГЕ ТЮГЮЛ</string>
   <string name="review_thanks_no_button_text" fuzzy="true">ГЕЛЕГЕН СУРАТ</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

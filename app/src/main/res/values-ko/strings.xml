@@ -504,4 +504,5 @@
   <string name="menu_view_category_page">분류 문서 보기</string>
   <string name="menu_view_item_page">항목 문서 보기</string>
   <string name="read_help_link">더 읽어보기</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

@@ -586,4 +586,5 @@
   <string name="menu_view_category_page">檢視分類頁面</string>
   <string name="menu_view_item_page">檢視項目頁面</string>
   <string name="read_help_link">延伸閱讀</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

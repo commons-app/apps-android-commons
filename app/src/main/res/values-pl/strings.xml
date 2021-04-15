@@ -597,4 +597,5 @@
   <string name="license_step_title">Licencja dla mediów</string>
   <string name="media_detail_step_title">Szczegóły mediów</string>
   <string name="menu_view_category_page">Zobacz stronę kategorii</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

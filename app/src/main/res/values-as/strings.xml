@@ -131,4 +131,5 @@
   <string name="delete_helper_ask_spam_nonsense">অৰ্থহীন</string>
   <string name="delete_helper_ask_reason_copyright_logo">ল\'গ\'</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">কাৰণ এয়া</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

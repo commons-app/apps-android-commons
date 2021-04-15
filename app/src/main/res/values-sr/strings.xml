@@ -451,4 +451,5 @@
   <string name="leaderboard_yearly">Годишње</string>
   <string name="leaderboard_weekly">Недељно</string>
   <string name="leaderboard_nearby">У близини</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

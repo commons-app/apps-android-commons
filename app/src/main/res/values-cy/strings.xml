@@ -261,4 +261,5 @@
   <string name="question">Cwestiwn</string>
   <string name="result">Canlyniad</string>
   <string name="quiz_back_button">Os ydych yn parhau i uwchlwytho lluniau sy\'n cael eu dileu, fe gaiffeich cyfri ei flocio. Gorffen y cwis?</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

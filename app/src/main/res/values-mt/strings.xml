@@ -62,4 +62,5 @@
   <string name="welcome_copyright_subtext">Evita materjal protett bil-copyright li ssib fuq l-internet kif ukoll stampi ta\' kartelluni, uċuħ ta\' kotba, etċ.</string>
   <string name="welcome_final_text">Taħseb li fhimt kollox?</string>
   <string name="welcome_final_button_text">Iva!</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

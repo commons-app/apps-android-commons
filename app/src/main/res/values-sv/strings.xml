@@ -579,4 +579,5 @@
   <string name="menu_view_category_page">Visa kategorisida</string>
   <string name="menu_view_item_page">Visa objektsida</string>
   <string name="read_help_link">Läs mer</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

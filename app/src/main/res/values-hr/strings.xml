@@ -305,4 +305,5 @@
   <string name="leaderboard_column_rank">Mjesto</string>
   <string name="leaderboard_column_user">Suradnica/suradnik</string>
   <string name="avatar_set_unsuccessfully">Pogrješka pri postavljanju novoga avatara, molimo Vas, pokušajte ponovno.</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

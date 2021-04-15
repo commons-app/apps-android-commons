@@ -542,4 +542,5 @@
   <string name="menu_view_category_page">查看分类页面</string>
   <string name="menu_view_item_page">查看项目页面</string>
   <string name="read_help_link">阅读更多</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>
