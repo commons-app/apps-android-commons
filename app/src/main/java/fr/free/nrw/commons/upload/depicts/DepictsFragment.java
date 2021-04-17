@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload.depicts;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
@@ -149,7 +151,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     @OnClick(R.id.depicts_next)
     public void onNextButtonClicked() {
-        presenter.verifyDepictions();
+        presenter.verifyDepictions(getActivity().getApplication());
     }
 
     @OnClick(R.id.depicts_previous)
@@ -174,8 +176,30 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      *
      * @param query query string
      */
-    private void searchForDepictions(String query) {
+    private void searchForDepictions(final String query) {
+        // set  recent depictsItem  of DepictsRoomDotaBase to recyclerview when query is emapty
+        if (query.isEmpty()) {
+            adapter.clear();
+            adapter.setItems(getRecentDepictesItem(getActivity().getApplication()));
+            return;
+        } else {
+            presenter.searchForDepictions(query);
+            adapter.clear();
+        }
         presenter.searchForDepictions(query);
     }
 
+    /**
+     * Get the depictesItem form DepictsRoomdataBase
+     */
+    List<DepictedItem> getRecentDepictesItem(final Application application) {
+        final List<DepictedItem> depictedItemList = new ArrayList<>();
+        final handleDepictsDoa modelDepicts = new handleDepictsDoa(application);
+        for (int i = 0; i < modelDepicts.allDepicts.size(); i++) {
+            final DepictedItem depictedItem = modelDepicts.allDepicts.get(i).getItem();
+            depictedItem.setSelected(false);
+            depictedItemList.add(depictedItem);
+        }
+        return depictedItemList;
+    }
 }

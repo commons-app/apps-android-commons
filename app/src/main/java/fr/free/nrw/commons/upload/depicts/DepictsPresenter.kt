@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload.depicts
 
+import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import fr.free.nrw.commons.di.CommonsApplicationModule
@@ -12,6 +13,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.PublishProcessor
 import timber.log.Timber
 import java.lang.reflect.Proxy
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -100,12 +102,42 @@ class DepictsPresenter @Inject constructor(
      * Check if depictions were selected
      * from the depiction list
      */
-    override fun verifyDepictions() {
+    override fun verifyDepictions(application: Application) {
         if (repository.selectedDepictions.isNotEmpty()) {
+            if (application.applicationContext != null) {
+                savingDepictsInRoomDataBase(application, repository.selectedDepictions)
+            }
             view.goToNextScreen()
         } else {
             view.noDepictionSelected()
         }
+    }
+}
+/**
+ * save selected depictedItem in Room DataBase
+ *
+ */
+fun savingDepictsInRoomDataBase(application: Application, listDepictedItem: List<DepictedItem>) {
+    var model = handleDepictsDoa(application)
+    var numberofItemInRoomDataBase: Int
+    val numberOfDepictedItem = listDepictedItem.size
+    val maxNumberOfItemSaveInRoom = 10
+
+    for (depictsItem in listDepictedItem) {
+        depictsItem.isSelected = false
+        model.insert(Depicts(depictsItem, Date()))
+    }
+
+    model = handleDepictsDoa(application)
+    numberofItemInRoomDataBase = model.allDepicts.size
+    // delete the depicts for depictsroomdataBase when number of element in depictsroomdataBase is greater than 10
+    if (numberofItemInRoomDataBase > maxNumberOfItemSaveInRoom) {
+
+        val listOfDepictsToDelete: List<Depicts> = model.getItemTodelete(numberofItemInRoomDataBase)
+        for (i in listOfDepictsToDelete) {
+            model.deleteDepicts(i)
+        }
+
     }
 }
 
