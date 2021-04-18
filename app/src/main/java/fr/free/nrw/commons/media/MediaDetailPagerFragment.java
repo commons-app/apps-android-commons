@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -374,6 +375,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         }
     }
 
+    public boolean backButtonClicked(){
+        return ((MediaDetailFragment)(adapter.getCurrentFragment())).hideCategoryEditContainerIfOpen();
+    }
+
+
+
     public interface MediaDetailProvider {
         Media getMediaAtPosition(int i);
 
@@ -384,6 +391,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)
     private class MediaDetailAdapter extends FragmentStatePagerAdapter {
+
+        // Keeps track of the current displayed fragment.
+        private Fragment mCurrentFragment;
 
         public MediaDetailAdapter(FragmentManager fm) {
             super(fm);
@@ -413,6 +423,31 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 return 0;
             }
             return provider.getTotalMediaCount();
+        }
+
+        /**
+         * getter for mCurrentFragment
+         * @return
+         */
+        public Fragment getCurrentFragment() {
+            return mCurrentFragment;
+        }
+
+        /**
+         * Called to inform the adapter of which item is currently considered to be the "primary",
+         * that is the one show to the user as the current page.
+         * @param container
+         * @param position
+         * @param object
+         */
+        @Override
+        public void setPrimaryItem(@NonNull final ViewGroup container, final int position,
+            @NonNull final Object object) {
+            // Update the current fragment if changed
+            if(getCurrentFragment() != object) {
+                mCurrentFragment = ((Fragment)object);
+            }
+            super.setPrimaryItem(container, position, object);
         }
     }
 }

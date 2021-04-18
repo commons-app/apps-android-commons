@@ -93,10 +93,17 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
 
     public void onBackPressed() {
         if (tabLayout.getSelectedTabPosition() == 0) {
-            featuredRootFragment.backPressed();
+            if(featuredRootFragment.backPressed()){
+                // Event is handled by the Fragment we need not do anything.
+                return;
+            }
         } else {
-            mobileRootFragment.backPressed();
+            if(mobileRootFragment.backPressed()){
+                // Event is handled by the Fragment we need not do anything.
+                return;
+            }
         }
+        // Event is not handled by the fragment ( i.e performed back action ) therefore change action bar.
         ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
