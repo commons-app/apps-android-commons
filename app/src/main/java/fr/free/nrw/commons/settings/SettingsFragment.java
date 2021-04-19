@@ -40,6 +40,7 @@ import java.util.Locale;
 import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.wikipedia.language.AppLanguageLookUpTable;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
@@ -152,17 +153,16 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      * to remember later and recall MainActivity to reflect language changes
      */
     private void prepareAppLanguages() {
-        final List<String> languageNamesList = new ArrayList<>();
-        final List<String> languageCodesList = new ArrayList<>();
-        final List<Language> languages = getLanguagesSupportedByDevice();
+        final List<String> languageNamesList;
+        final List<String> languageCodesList;
+        final AppLanguageLookUpTable appLanguageLookUpTable = new AppLanguageLookUpTable(
+            Objects.requireNonNull(getContext()));
+        languageNamesList = appLanguageLookUpTable.getLocalizedNames();
+        languageCodesList = appLanguageLookUpTable.getCodes();
+        List<String> languageNameWithCodeList = new ArrayList<>();
 
-        for(final Language language: languages) {
-            // Go through all languages and add them to lists
-            if(!languageCodesList.contains(language.getLocale().getLanguage())) {
-                // This if prevents us from adding same language twice
-                languageNamesList.add(language.getLocale().getDisplayName());
-                languageCodesList.add(language.getLocale().getLanguage());
-            }
+        for (int i = 0; i < languageNamesList.size(); i++) {
+            languageNameWithCodeList.add(languageNamesList.get(i) + "[" + languageCodesList.get(i) + "]");
         }
 
         final CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[0]);
@@ -199,17 +199,16 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      * to remember later
      */
     private void prepareDescriptionLanguages() {
-        List<String> languageNamesList = new ArrayList<>();
-        List<String> languageCodesList = new ArrayList<>();
-        List<Language> languages = getLanguagesSupportedByDevice();
+        final List<String> languageNamesList;
+        final List<String> languageCodesList;
+        final AppLanguageLookUpTable appLanguageLookUpTable = new AppLanguageLookUpTable(
+            Objects.requireNonNull(getContext()));
+        languageNamesList = appLanguageLookUpTable.getLocalizedNames();
+        languageCodesList = appLanguageLookUpTable.getCodes();
+        List<String> languageNameWithCodeList = new ArrayList<>();
 
-        for(Language language: languages) {
-            // Go through all languages and add them to lists
-            if(!languageCodesList.contains(language.getLocale().getLanguage())) {
-                // This if prevents us from adding same language twice
-                languageNamesList.add(language.getLocale().getDisplayName());
-                languageCodesList.add(language.getLocale().getLanguage());
-            }
+        for (int i = 0; i < languageNamesList.size(); i++) {
+            languageNameWithCodeList.add(languageNamesList.get(i) + "[" + languageCodesList.get(i) + "]");
         }
 
         CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[0]);
