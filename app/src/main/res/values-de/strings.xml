@@ -31,13 +31,13 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Starte einen Upload</item>
-    <item quantity="other">Starte %1$d Uploads</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Verarbeitung eines Uploads</item>
+    <item quantity="other">Verarbeitung von %1$d Uploads</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">Eine hochgeladene Datei</item>
-    <item quantity="other">%1$d hochgeladene Dateien</item>
+    <item quantity="other">%d hochgeladene Dateien</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Dieses Bild wird unter %1$s lizenziert</item>
@@ -76,7 +76,7 @@
   <string name="uploading_queued">Hochladen in Warteschlange (eingeschränkter Verbindungsmodus aktiviert)</string>
   <string name="upload_completed_notification_title">„%1$s“ hochgeladen!</string>
   <string name="upload_completed_notification_text">Tippe, um deinen Upload anzusehen</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Hochladen von „%1$s“ starten</string>
+  <string name="upload_progress_notification_title_start">Hochlade von Datei: %s</string>
   <string name="upload_progress_notification_title_in_progress">„%1$s“ wird hochgeladen</string>
   <string name="upload_progress_notification_title_finishing">Hochladen von „%1$s“ abschließen</string>
   <string name="upload_failed_notification_title">Hochladen von „%1$s“ fehlgeschlagen</string>
@@ -115,6 +115,8 @@
   <string name="contributions_subtitle_zero">(Noch keine hochgeladenen Dateien)</string>
   <string name="categories_not_found">Die Kategorie „%1$s“ wurde nicht gefunden</string>
   <string name="depictions_not_found">Keine Wikidata Gegenstände gefunden für %1$s</string>
+  <string name="no_child_classes">%1$s hat keine child-Klasse</string>
+  <string name="no_parent_classes">%1$s hat keine parent-Klasse</string>
   <string name="categories_skip_explanation">Füge Kategorien hinzu, um deine Bilder auf Wikimedia Commons auffindbarer zu machen.\nBeginne mit der Eingabe, um Kategorien hinzuzufügen.</string>
   <string name="categories_activity_title">Kategorien</string>
   <string name="title_activity_settings">Einstellungen</string>
@@ -181,13 +183,16 @@
   <string name="storage_permission_title">Anforderung einer Speicherberechtigung</string>
   <string name="read_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher lesen. Die App kann ohne diese Berechtigung nicht auf deine Galerie zugreifen.</string>
   <string name="write_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher beschreiben. Die App kann ohne diese Berechtigung nicht auf deine Kamera oder Galerie zugreifen.</string>
+  <string name="location_permission_title">Anfordern der Standortfreigabe</string>
   <string name="ok">Okay</string>
   <string name="warning">Warnung</string>
+  <string name="duplicate_image_found">Doppeltes Bild gefunden</string>
   <string name="upload">Hochladen</string>
   <string name="yes">Ja</string>
   <string name="no">Nein</string>
   <string name="media_detail_caption">Beschriftung</string>
   <string name="media_detail_title">Titel</string>
+  <string name="media_detail_depiction">Motive</string>
   <string name="media_detail_description">Beschreibung</string>
   <string name="media_detail_discussion">Diskussion</string>
   <string name="media_detail_author">Autor</string>
@@ -231,6 +236,7 @@
   <string name="nearby_info_menu_wikidata_article">Wikidata-Objekt</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipedia-Artikel</string>
   <string name="description_info">Bitte beschreibe das Medium so gut wie möglich: Wo wurde es aufgenommen? Was zeigt es? Was ist der Kontext? Bitte beschreibe die Objekte oder Personen. Zeige Informationen auf, die nicht einfach erraten werden können, zum Beispiel die Tageszeit, falls es eine Landschaft ist. Falls das Medium etwas Ungewöhnliches zeigt, erkläre bitte, was es ungewöhnlich macht.</string>
+  <string name="caption_info">Bitte formuliere eine kurze Beschreibung des Bildes. Die erste Beschriftung würde als Titel für das Bild verwendet werden. Limit: 255 Zeichen.</string>
   <string name="upload_problem_exist">Potentielle Probleme mit diesem Bild:</string>
   <string name="upload_problem_image_dark">Das Bild ist zu dunkel.</string>
   <string name="upload_problem_image_blurry">Das Bild ist unscharf.</string>
@@ -238,6 +244,7 @@
   <string name="upload_problem_different_geolocation">Dieses Bild wurde an einem anderen Ort aufgenommen.</string>
   <string name="upload_problem_fbmd">Lade bitte nur Bilder hoch, die du selber erstellt hast. Lade keine Bilder hoch, die du auf Facebook-Konten anderer Personen gefunden hast.</string>
   <string name="upload_problem_do_you_continue">Möchtest du immer noch dieses Bild hochladen?</string>
+  <string name="upload_problem_image">Im Bild gefundene Probleme</string>
   <string name="internet_downloaded">Lade bitte nur Bilder hoch, die du selber aufgenommen hast. Lade keine Bilder hoch, die du aus dem Internet heruntergeladen hast.</string>
   <string name="use_external_storage">Speichern von In-App-Aufnahmen</string>
   <string name="use_external_storage_summary">Mit der In-App-Kamera aufgenommene Bilder auf deinem Gerät speichern</string>
@@ -292,8 +299,10 @@
   <string name="search_recent_header">Letzte Suchanfragen:</string>
   <string name="provider_searches">Letzte Suchanfragen</string>
   <string name="error_loading_categories">Beim Laden der Kategorien ist ein Fehler aufgetreten.</string>
+  <string name="error_loading_depictions">Beim Laden von Darstellungen ist ein Fehler aufgetreten.</string>
   <string name="search_tab_title_media">Medien</string>
   <string name="search_tab_title_categories">Kategorien</string>
+  <string name="search_tab_title_depictions">Einträge</string>
   <string name="explore_tab_title_featured">Vorgestellt</string>
   <string name="explore_tab_title_mobile">Über mobil hochgeladen</string>
   <string name="successful_wikidata_edit">Bild zu %1$s auf Wikidata hinzugefügt!</string>
@@ -494,7 +503,21 @@
   <string name="leaderboard_tab_title">Bestenliste</string>
   <string name="rank_prefix">Rang:</string>
   <string name="leaderboard_column_user">Benutzer</string>
+  <string name="avatar_set_successfully">Avatar setzen</string>
+  <string name="avatar_set_unsuccessfully">Fehler beim Setzen eines neuen Avatars, bitte versuche es erneut</string>
+  <string name="menu_set_avatar">Als Avatar einstellen</string>
+  <string name="leaderboard_yearly">Jährlich</string>
   <string name="leaderboard_weekly">Wöchentlich</string>
+  <string name="leaderboard_all_time">Gesamte Zeit</string>
+  <string name="leaderboard_upload">Hochladen</string>
+  <string name="leaderboard_nearby">In der Nähe</string>
+  <string name="leaderboard_used">Verwendet</string>
   <string name="leaderboard_my_rank_button_text">Mein Rang</string>
+  <string name="mapbox_telemetry">Mapbox-Telemetrie</string>
+  <string name="telemetry_opt_out_summary">Senden von anonymisierten Standort- und Nutzungsdaten an Mapbox bei Verwendung der In-der-Nähe-Funktion</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Verbessere diese Karte&lt;/a&gt;</string>
+  <string name="limited_connection_enabled">Begrenzter Verbindungsmodus aktiviert!</string>
+  <string name="limited_connection_disabled">Eingeschränkter Verbindungsmodus deaktiviert. Ausstehende Uploads werden jetzt fortgesetzt.</string>
+  <string name="limited_connection_mode">Eingeschränkter Verbindungsmodus</string>
   <string name="menu_view_category_page">Kategorieseite anzeigen</string>
 </resources>
