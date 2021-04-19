@@ -27,6 +27,12 @@
           android:title="@string/use_external_storage" />
 
         <ListPreference
+          android:key="appDefaultLanguagePref"
+          app:useSimpleSummaryProvider="true"
+          app:singleLineTitle="false"
+          android:title="@string/default_app_language" />
+
+        <ListPreference
           android:key="descriptionDefaultLanguagePref"
           app:useSimpleSummaryProvider="true"
           app:singleLineTitle="false"

@@ -1,17 +1,18 @@
 package fr.free.nrw.commons.settings;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.Manifest;
+import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.InputFilter;
-import android.text.InputType;
-import androidx.preference.EditTextPreference;
 import android.view.View;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import com.google.android.material.snackbar.Snackbar;
 import androidx.preference.PreferenceGroupAdapter;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
@@ -47,7 +48,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     CommonsLogSender commonsLogSender;
 
     private ListPreference themeListPreference;
-    private ListPreference langListPreference;
+    private ListPreference descriptionLangListPreference;
+    private ListPreference appLangListPreference;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -72,8 +74,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             });
         }
 
-        langListPreference = findPreference("descriptionDefaultLanguagePref");
-        prepareLanguages();
+        appLangListPreference = findPreference("appDefaultLanguagePref");
+        prepareAppLanguages();
+
+        descriptionLangListPreference = findPreference("descriptionDefaultLanguagePref");
+        prepareDescriptionLanguages();
         Preference betaTesterPreference = findPreference("becomeBetaTester");
         betaTesterPreference.setOnPreferenceClickListener(preference -> {
             Utils.handleWebUrl(getActivity(), Uri.parse(getResources().getString(R.string.beta_opt_in_link)));
@@ -143,7 +148,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      * Adds preference changed listener and saves value chosen by user to shared preferences
      * to remember later
      */
-    private void prepareLanguages() {
+    private void prepareAppLanguages() {
         List<String> languageNamesList = new ArrayList<>();
         List<String> languageCodesList = new ArrayList<>();
         List<Language> languages = getLanguagesSupportedByDevice();
@@ -160,24 +165,86 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[0]);
         CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[0]);
         // Add all languages and languages codes to lists preference as pair
-        langListPreference.setEntries(languageNames);
-        langListPreference.setEntryValues(languageCodes);
+        appLangListPreference.setEntries(languageNames);
+        appLangListPreference.setEntryValues(languageCodes);
 
         // Gets current language code from shared preferences
         String languageCode = getCurrentLanguageCode();
         if (languageCode.equals("")){
             // If current language code is empty, means none selected by user yet so use phone local
-            langListPreference.setValue(Locale.getDefault().getLanguage());
+            appLangListPreference.setValue(Locale.getDefault().getLanguage());
         } else {
             // If any language is selected by user previously, use it
-            langListPreference.setValue(languageCode);
+            appLangListPreference.setValue(languageCode);
         }
 
-        langListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+        appLangListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+            String userSelectedValue = (String) newValue;
+            setLocale(getActivity(),userSelectedValue);
+            saveLanguageValue(userSelectedValue);
+            return true;
+        });
+    }
+
+    /**
+     * Prepares language summary and language codes list and adds them to list preference as pairs.
+     * Uses previously saved language if there is any, if not uses phone local as initial language.
+     * Adds preference changed listener and saves value chosen by user to shared preferences
+     * to remember later
+     */
+    private void prepareDescriptionLanguages() {
+        List<String> languageNamesList = new ArrayList<>();
+        List<String> languageCodesList = new ArrayList<>();
+        List<Language> languages = getLanguagesSupportedByDevice();
+
+        for(Language language: languages) {
+            // Go through all languages and add them to lists
+            if(!languageCodesList.contains(language.getLocale().getLanguage())) {
+                // This if prevents us from adding same language twice
+                languageNamesList.add(language.getLocale().getDisplayName());
+                languageCodesList.add(language.getLocale().getLanguage());
+            }
+        }
+
+        CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[0]);
+        CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[0]);
+        // Add all languages and languages codes to lists preference as pair
+        descriptionLangListPreference.setEntries(languageNames);
+        descriptionLangListPreference.setEntryValues(languageCodes);
+
+        // Gets current language code from shared preferences
+        String languageCode = getCurrentLanguageCode();
+        if (languageCode.equals("")){
+            // If current language code is empty, means none selected by user yet so use phone local
+            descriptionLangListPreference.setValue(Locale.getDefault().getLanguage());
+        } else {
+            // If any language is selected by user previously, use it
+            descriptionLangListPreference.setValue(languageCode);
+        }
+
+        descriptionLangListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
             String userSelectedValue = (String) newValue;
             saveLanguageValue(userSelectedValue);
             return true;
         });
+    }
+
+    /**
+     *
+     * @param activity
+     * @param userSelectedValue
+     */
+    public void setLocale(Activity activity, String userSelectedValue) {
+        Locale locale = new Locale(userSelectedValue);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        activity.getBaseContext().getResources().updateConfiguration(configuration,
+            activity.getBaseContext().getResources().getDisplayMetrics());
+
+        SharedPreferences.Editor editor = activity.getSharedPreferences("Settings", MODE_PRIVATE).edit();
+        editor.putString("string",userSelectedValue);
+        editor.apply();
     }
 
     private void saveLanguageValue(String userSelectedValue) {
