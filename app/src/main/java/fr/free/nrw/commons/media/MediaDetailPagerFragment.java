@@ -385,8 +385,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         return ((MediaDetailFragment)(adapter.getCurrentFragment())).hideCategoryEditContainerIfOpen();
     }
 
-
-
     public interface MediaDetailProvider {
         Media getMediaAtPosition(int i);
 
