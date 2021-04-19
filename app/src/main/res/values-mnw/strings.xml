@@ -13,11 +13,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">စဒၟံင် %1$d ပတိုန်ပၠုပ်</item>
     <item quantity="other">စဒၟံင် %1$d ပတိုန်ပၠုပ်</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d ပတိုန်ပၠုပ်</item>
     <item quantity="other">%1$d ပတိုန်ပၠုပ်</item>
   </plurals>
@@ -49,7 +49,7 @@
   <string name="uploading_started">ပတိုန်ဝှာင် စဒၟံင်ရ!</string>
   <string name="upload_completed_notification_title">%1$s ပတိုန်ပၠုပ်တုဲ!</string>
   <string name="upload_completed_notification_text">ဒၞာဲမကလေင်ရံင် ဝှာင်ပတိုန်ပၠုပ် မၞး</string>
-  <string name="upload_progress_notification_title_start">စဒၟံင် %1$s ပတိုန်ပၠုပ်။</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">စဒၟံင် %1$s ပတိုန်ပၠုပ်။</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ပတိုန်ပၠုပ်ဒၟံၚ်</string>
   <string name="upload_progress_notification_title_finishing">ပတုဲဒၟံင် ပတိုန်ပၠုပ် %1$s</string>
   <string name="upload_failed_notification_title">ပတိုန်ပၠုပ် %1$s ဟွံအံင်ဇၞး</string>

@@ -48,7 +48,7 @@
   <string name="uploading_started">Įkėlimas prasidėjo!</string>
   <string name="upload_completed_notification_title">%1$s įkelta!</string>
   <string name="upload_completed_notification_text">Bakstelėkite norėdami peržiūrėti jūsų įkėlimą</string>
-  <string name="upload_progress_notification_title_start">Pradedamas įkėlimas %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Pradedamas įkėlimas %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s įkeliamas</string>
   <string name="upload_progress_notification_title_finishing">Baigiamas įkelti %1$s</string>
   <string name="upload_failed_notification_title">Įkelti %1$s nepavyko</string>

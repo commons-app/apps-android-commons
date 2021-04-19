@@ -14,11 +14,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Почеток на подигањата</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Започнувам %1$d подигање</item>
     <item quantity="other">Започнувам %1$d подигања</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d подигање</item>
     <item quantity="other">%1$d подигања</item>
   </plurals>
@@ -59,7 +59,7 @@
   <string name="uploading_queued">Подигањето е во редица (овозможен режимот на ограничена врска)</string>
   <string name="upload_completed_notification_title">Податотеката „%1$s“ е подигната!</string>
   <string name="upload_completed_notification_text">Допрете за да го погледате подигањето</string>
-  <string name="upload_progress_notification_title_start">Почнувам со подигањето на „%1$s“</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Почнувам со подигањето на „%1$s“</string>
   <string name="upload_progress_notification_title_in_progress">Подигање на „%1$s“</string>
   <string name="upload_progress_notification_title_finishing">Завршувам со подигање на „%1$s“</string>
   <string name="upload_failed_notification_title">Подигањето на „%1$s“ не успеа</string>
@@ -433,7 +433,8 @@
   <string name="images_featured_explanation">Избраните слики се дела на високообучени фотографи и илустратори кои заедницата ги избрала за да бидат истакнати како едни од најдобрите слики на Ризницата.</string>
   <string name="images_via_nearby_explanation">Сликите подигнати преку „Околни места“ се оние подигнати при откривање на места на картата.</string>
   <string name="thanks_received_explanation">Ова им дава можност на уредниците да им испраќаат благодарници на корисниците што вршат полезни уредувања. Ова се прави стискајќи на малата врска за заблагодарување во страницата за историја или разлики.</string>
-  <string name="previous_image_caption_description">Прекопирај претходни описи и текст</string>
+  <string name="copy_image_caption_description">Копирај во нареден носач</string>
+  <string name="copied_successfully">Ископирано</string>
   <string name="welcome_do_upload_content_description">Примери — Добри слики за подигање</string>
   <string name="welcome_dont_upload_content_description">Примери — Слики што не се за подигање</string>
   <string name="skip_image">Прескокни ја сликава</string>
@@ -572,4 +573,5 @@
   <string name="media_detail_step_title">Поединости за творбата</string>
   <string name="menu_view_category_page">Погл. категориска страница</string>
   <string name="menu_view_item_page">Погл. страница на предметот</string>
+  <string name="read_help_link">Прочитајте повеќе</string>
 </resources>

@@ -98,6 +98,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             findPreference("useExternalStorage").setEnabled(false);
             findPreference("useAuthorName").setEnabled(false);
             findPreference("displayNearbyCardView").setEnabled(false);
+            findPreference("descriptionDefaultLanguagePref").setEnabled(false);
             findPreference("displayLocationPermissionForCardView").setEnabled(false);
             findPreference("displayCampaignsCardView").setEnabled(false);
         }
@@ -203,6 +204,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         final List<String> languageCodesList;
         final AppLanguageLookUpTable appLanguageLookUpTable = new AppLanguageLookUpTable(
             Objects.requireNonNull(getContext()));
+
         languageNamesList = appLanguageLookUpTable.getLocalizedNames();
         languageCodesList = appLanguageLookUpTable.getCodes();
         List<String> languageNameWithCodeList = new ArrayList<>();
@@ -211,7 +213,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             languageNameWithCodeList.add(languageNamesList.get(i) + "[" + languageCodesList.get(i) + "]");
         }
 
-        CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[0]);
+        CharSequence[] languageNames = languageNameWithCodeList.toArray(new CharSequence[0]);
         CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[0]);
         // Add all languages and languages codes to lists preference as pair
         descriptionLangListPreference.setEntries(languageNames);
@@ -220,6 +222,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         // Gets current language code from shared preferences
         String languageCode = getCurrentDescriptionLanguageCode();
         if (languageCode.equals("")){
+
             // If current language code is empty, means none selected by user yet so use phone local
             descriptionLangListPreference.setValue(Locale.getDefault().getLanguage());
         } else {
@@ -264,18 +267,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     private String getCurrentAppLanguageCode() {
         return defaultKvStore.getString(Prefs.KEY_APP_LANGUAGE_VALUE, "");
-    }
-
-    private List<Language> getLanguagesSupportedByDevice() {
-        List<Language> languages = new ArrayList<>();
-        Locale[] localesArray = Locale.getAvailableLocales();
-        for (Locale locale : localesArray) {
-            languages.add(new Language(locale));
-        }
-
-        Collections.sort(languages, (language, t1) -> language.getLocale().getDisplayName()
-                .compareTo(t1.getLocale().getDisplayName()));
-        return languages;
     }
 
     /**

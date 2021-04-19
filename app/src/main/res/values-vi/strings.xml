@@ -24,8 +24,8 @@
     <item quantity="one">%1$d tập tin đã tải lên</item>
     <item quantity="other">%1$d tập tin đã tải lên</item>
   </plurals>
-  <string name="starting_multiple_uploads">Đang bắt đầu tải lên %1$d tập tin</string>
-  <plurals name="multiple_uploads_title">
+  <string name="starting_multiple_uploads" fuzzy="true">Đang bắt đầu tải lên %1$d tập tin</string>
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d tập tin đã tải lên</item>
     <item quantity="other">%1$d tập tin đã tải lên</item>
   </plurals>
@@ -57,7 +57,7 @@
   <string name="uploading_started">Đã bắt đầu tải lên!</string>
   <string name="upload_completed_notification_title">Đã tải lên %1$s!</string>
   <string name="upload_completed_notification_text">Chạm để xem những tập tin tải lên của bạn</string>
-  <string name="upload_progress_notification_title_start">Đang bắt đầu tải lên tập tin %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Đang bắt đầu tải lên tập tin %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Đang tải lên tập tin %1$s</string>
   <string name="upload_progress_notification_title_finishing">Đang hoàn thành việc tải lên tập tin %1$s</string>
   <string name="upload_failed_notification_title">Tải lên tập tin %1$s thất bại</string>

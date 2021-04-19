@@ -45,7 +45,9 @@ public interface UploadMediaDetailsContract {
 
         void verifyImageQuality(int uploadItemIndex);
 
-        void fetchPreviousTitleAndDescription(int indexInViewFlipper);
+        void copyTitleAndDescriptionToSubsequentMedia(int indexInViewFlipper);
+
+        void fetchTitleAndDescription(int indexInViewFlipper);
 
         void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex);
 

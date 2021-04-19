@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.ViewPagerAdapter;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.ActivityUtils;
@@ -87,16 +88,26 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         fragmentList.add(mobileRootFragment);
         titleList.add(getString(R.string.explore_tab_title_mobile).toUpperCase());
 
+        ((MainActivity)getActivity()).showTabs();
+        ((BaseActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
     }
 
     public void onBackPressed() {
         if (tabLayout.getSelectedTabPosition() == 0) {
-            featuredRootFragment.backPressed();
+            if(featuredRootFragment.backPressed()){
+                // Event is handled by the Fragment we need not do anything.
+                return;
+            }
         } else {
-            mobileRootFragment.backPressed();
+            if(mobileRootFragment.backPressed()){
+                // Event is handled by the Fragment we need not do anything.
+                return;
+            }
         }
+        // Event is not handled by the fragment ( i.e performed back action ) therefore change action bar.
         ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 

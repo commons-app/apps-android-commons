@@ -26,11 +26,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">A iniciar carregamentos</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">A iniciar %1$d carregamento</item>
     <item quantity="other">A iniciar %1$d carregamentos</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d carregamento</item>
     <item quantity="other">%1$d carregamentos</item>
   </plurals>
@@ -71,7 +71,7 @@
   <string name="uploading_queued">Fila de carregamento (modo de ligação limitada ativado)</string>
   <string name="upload_completed_notification_title">%1$s carregado!</string>
   <string name="upload_completed_notification_text">Toque para ver o seu carregamento</string>
-  <string name="upload_progress_notification_title_start">A iniciar o carregamento de %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">A iniciar o carregamento de %1$s</string>
   <string name="upload_progress_notification_title_in_progress">A carregar %1$s</string>
   <string name="upload_progress_notification_title_finishing">A terminar o carregamento de %1$s</string>
   <string name="upload_failed_notification_title">O carregamento de %1$s falhou</string>
@@ -445,7 +445,6 @@
   <string name="images_featured_explanation">As fotografias destacadas são imagens de fotógrafos e ilustradores altamente qualificados, que a comunidade da wiki Wikimedia Commons escolheu como as de melhor qualidade do \'\'site\'\'.</string>
   <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo locais do mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidade permite que os editores enviem uma notificação de agradecimento aos utilizadores que fizerem edições úteis - usando uma pequena hiperligação de agradecimento na página do historial ou na de diferenças.</string>
-  <string name="previous_image_caption_description">Copiar legendas e descrição anteriores</string>
   <string name="welcome_do_upload_content_description">Exemplos de imagens que podem ser carregadas na wiki Commons</string>
   <string name="welcome_dont_upload_content_description">Exemplos de imagens que não devem ser carregadas</string>
   <string name="skip_image">Saltar esta imagem</string>

@@ -6,20 +6,14 @@ import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -27,28 +21,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
-
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.MediaDataExtractor;
-import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.notification.Notification;
-import fr.free.nrw.commons.notification.NotificationController;
-import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.upload.UploadService.ServiceCallback;
-import io.reactivex.disposables.Disposable;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.campaigns.Campaign;
 import fr.free.nrw.commons.campaigns.CampaignView;
 import fr.free.nrw.commons.campaigns.CampaignsPresenter;
@@ -66,8 +47,10 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
-import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.notification.NotificationController;
+import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -77,6 +60,9 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
 
 public class ContributionsFragment
@@ -85,7 +71,7 @@ public class ContributionsFragment
         OnBackStackChangedListener,
         LocationUpdateListener,
     MediaDetailProvider,
-    ICampaignsView, ContributionsContract.View, Callback , ServiceCallback {
+    ICampaignsView, ContributionsContract.View, Callback{
     @Inject @Named("default_preferences") JsonKvStore store;
     @Inject NearbyController nearbyController;
     @Inject OkHttpJsonApiClient okHttpJsonApiClient;
@@ -93,8 +79,6 @@ public class ContributionsFragment
     @Inject LocationServiceManager locationManager;
     @Inject NotificationController notificationController;
 
-    private UploadService uploadService;
-    private boolean isUploadServiceConnected;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private ContributionsListFragment contributionsListFragment;
@@ -127,33 +111,7 @@ public class ContributionsFragment
         return fragment;
     }
 
-    /**
-     * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
-     * fragment to be attached. Latch will be responsible for this sync.
-     */
-    private ServiceConnection uploadServiceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder binder) {
-            uploadService = (UploadService) ((UploadService.UploadServiceLocalBinder) binder)
-                    .getService();
-            uploadService.setServiceCallback(ContributionsFragment.this);
-            isUploadServiceConnected = true;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName) {
-            // this should never happen
-            Timber.e(new RuntimeException("UploadService died but the rest of the process did not!"));
-            isUploadServiceConnected = false;
-        }
-
-        @Override
-        public void onBindingDied(final ComponentName name) {
-            isUploadServiceConnected = false;
-        }
-    };
     private boolean shouldShowMediaDetailsFragment;
-    private boolean isAuthCookieAcquired;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -190,6 +148,9 @@ public class ContributionsFragment
         if(shouldShowMediaDetailsFragment){
             showMediaDetailPagerFragment();
         }else{
+            if (mediaDetailPagerFragment != null) {
+                removeFragment(mediaDetailPagerFragment);
+            }
             showContributionsListFragment();
         }
 
@@ -272,7 +233,6 @@ public class ContributionsFragment
         until fragment life time ends.
          */
         if (!isFragmentAttachedBefore && getActivity() != null) {
-            onAuthCookieAcquired();
             isFragmentAttachedBefore = true;
         }
     }
@@ -310,19 +270,6 @@ public class ContributionsFragment
     @Override
     public void onBackStackChanged() {
         fetchCampaigns();
-    }
-
-    /**
-     * Called when onAuthCookieAcquired is called on authenticated parent activity
-     */
-    void onAuthCookieAcquired() {
-        // Since we call onAuthCookieAcquired method from onAttach, isAdded is still false. So don't use it
-        isAuthCookieAcquired=true;
-        if (getActivity() != null) { // If fragment is attached to parent activity
-            getActivity().bindService(getUploadServiceIntent(), uploadServiceConnection, Context.BIND_AUTO_CREATE);
-            isUploadServiceConnected = true;
-        }
-
     }
 
     private void initFragments() {
@@ -379,13 +326,6 @@ public class ContributionsFragment
             .remove(fragment)
             .commit();
         getChildFragmentManager().executePendingTransactions();
-    }
-
-
-    public Intent getUploadServiceIntent(){
-        Intent intent = new Intent(getActivity(), UploadService.class);
-        intent.setAction(UploadService.ACTION_START_SERVICE);
-        return intent;
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -524,14 +464,6 @@ public class ContributionsFragment
             locationManager.unregisterLocationManager();
             locationManager.removeLocationListener(this);
             super.onDestroy();
-
-            if (isUploadServiceConnected) {
-                if (getActivity() != null) {
-                    uploadService.setServiceCallback(null);
-                    getActivity().unbindService(uploadServiceConnection);
-                    isUploadServiceConnected = false;
-                }
-            }
         } catch (IllegalArgumentException | IllegalStateException exception) {
             Timber.e(exception);
         }
@@ -594,7 +526,6 @@ public class ContributionsFragment
 
     @Override public void onDestroyView() {
         super.onDestroyView();
-        isUploadServiceConnected = false;
         presenter.onDetachView();
     }
 
@@ -606,8 +537,9 @@ public class ContributionsFragment
     @Override
     public void retryUpload(Contribution contribution) {
         if (NetworkUtils.isInternetConnectionEstablished(getContext())) {
-            if (contribution.getState() == STATE_FAILED || contribution.getState() == STATE_PAUSED || contribution.getState()==Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE && null != uploadService) {
-                uploadService.queue(contribution);
+            if (contribution.getState() == STATE_FAILED || contribution.getState() == STATE_PAUSED || contribution.getState()==Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE) {
+                contribution.setState(Contribution.STATE_QUEUED);
+                contributionsPresenter.saveContribution(contribution);
                 Timber.d("Restarting for %s", contribution.toString());
             } else {
                 Timber.d("Skipping re-upload for non-failed %s", contribution.toString());
@@ -624,7 +556,11 @@ public class ContributionsFragment
      */
     @Override
     public void pauseUpload(Contribution contribution) {
-        uploadService.pauseUpload(contribution);
+        //Pause the upload in the global singleton
+        CommonsApplication.pauseUploads.put(contribution.getPageId(), true);
+        //Retain the paused state in DB
+        contribution.setState(STATE_PAUSED);
+        contributionsPresenter.saveContribution(contribution);
     }
 
     /**
@@ -658,6 +594,10 @@ public class ContributionsFragment
 
     public void backButtonClicked() {
         if (mediaDetailPagerFragment.isVisible()) {
+            if(mediaDetailPagerFragment.backButtonClicked()) {
+                // MediaDetailed handled the backPressed no further action required.
+                return;
+            }
             if (store.getBoolean("displayNearbyCardView", true)) {
                 if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
                     nearbyNotificationCardView.setVisibility(View.VISIBLE);
@@ -676,11 +616,6 @@ public class ContributionsFragment
     // Getter for mediaDetailPagerFragment
     public MediaDetailPagerFragment getMediaDetailPagerFragment() {
         return mediaDetailPagerFragment;
-    }
-
-    @Override
-    public void updateUploadCount() {
-        setUploadCount();
     }
 }
 

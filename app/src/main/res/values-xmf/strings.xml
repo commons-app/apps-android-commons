@@ -11,12 +11,12 @@
     <item quantity="few">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">იჭყაფუ %1$d ეხარგუა</item>
     <item quantity="few">იჭყაფუ %1$d ეხარგუა</item>
     <item quantity="other">იჭყაფუ %1$d ეხარგუა</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d ეხარგუა</item>
     <item quantity="few">%1$d ეხარგუა</item>
     <item quantity="other">%1$d ეხარგუა</item>
@@ -48,7 +48,7 @@
   <string name="uploading_started">ეხარგუაქ ქჷდიჭყუ!</string>
   <string name="upload_completed_notification_title">%1$ ეხარგილი რე!</string>
   <string name="upload_completed_notification_text">ქეგუწკანტეთ თქვანი ეხარგუაშ ოძირაფალო</string>
-  <string name="upload_progress_notification_title_start">ქჷდიჭყუ %1$ ეხარგუაქ</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">ქჷდიჭყუ %1$ ეხარგუაქ</string>
   <string name="upload_progress_notification_title_in_progress">%1$ იხარგუ</string>
   <string name="upload_progress_notification_title_finishing">ეხარგუაშ თება %1$</string>
   <string name="upload_failed_notification_title">%1$ ეხარგუაქ ვემიხუჯინუ</string>

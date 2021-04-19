@@ -35,7 +35,7 @@
     <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="zero">جارٍ بدء %1$d رفع</item>
     <item quantity="one">جارٍ بدء %1$d رفع</item>
     <item quantity="two">جارٍ بدء %1$d رفع</item>
@@ -43,7 +43,7 @@
     <item quantity="many">جارٍ بدء %1$d رفع</item>
     <item quantity="other">جارٍ بدء %1$d مرفوعات</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="zero">%1$d رفع</item>
     <item quantity="one">%1$d رفع</item>
     <item quantity="two">%1$d رفع</item>
@@ -99,7 +99,7 @@
   <string name="uploading_started">بدأ الرفع!</string>
   <string name="upload_completed_notification_title">رُفع %1$s!</string>
   <string name="upload_completed_notification_text">انقر لعرض ملفك المرفوع</string>
-  <string name="upload_progress_notification_title_start">بدء رفع %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">بدء رفع %1$s</string>
   <string name="upload_progress_notification_title_in_progress">يجري رفع %1$s</string>
   <string name="upload_progress_notification_title_finishing">اكتمال رفع %1$s</string>
   <string name="upload_failed_notification_title">فشل رفع %1$s</string>
@@ -468,7 +468,6 @@
   <string name="images_featured_explanation">الصور المختارة هي صور من مصورين ورسامين ذوي مهارات عالية اختارها مجتمع ويكيميديا ​​كومنز كبعض الأفضل جودة على الموقع.</string>
   <string name="images_via_nearby_explanation">الصور المرفوعة عبر الأماكن القريبة هي الصور المرفوعة عن طريق اكتشاف الأماكن على الخريطة.</string>
   <string name="thanks_received_explanation">تتيح هذه الميزة للمحررين إرسال إشعار شكر للمستخدمين الذين يقومون بتعديلات مفيدة - باستخدام رابط شكر صغير في صفحة التاريخ أو صفحة الفرق.</string>
-  <string name="previous_image_caption_description">نسخ العنوان/الوصف السابق</string>
   <string name="welcome_do_upload_content_description">أمثلة على صور جيدة لرفعها إلى كومنز</string>
   <string name="welcome_dont_upload_content_description">أمثلة على صور لعدم رفعها</string>
   <string name="skip_image">تخطي هذه الصورة</string>

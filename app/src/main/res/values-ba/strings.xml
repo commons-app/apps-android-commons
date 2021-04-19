@@ -14,12 +14,12 @@
     <item quantity="one">%1$d тейәү</item>
     <item quantity="other">%1$d тейәүҙәр</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d тейәү башлана</item>
     <item quantity="few">%1$d тейәү башлана</item>
     <item quantity="other">%1$d тейәүҙәр башлана</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d тейәү</item>
     <item quantity="few">%1$d тейәүҙәр</item>
     <item quantity="other">%1$d тейәүҙәре</item>
@@ -46,7 +46,7 @@
   <string name="uploading_started">Тейәү башланды!</string>
   <string name="upload_completed_notification_title">%1$s тейәлде!</string>
   <string name="upload_completed_notification_text">Ошонда баҫып тейәлгән файлды ҡара</string>
-  <string name="upload_progress_notification_title_start">%1$s тейәү башланды</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s тейәү башланды</string>
   <string name="upload_progress_notification_title_in_progress">%1$s тейәлә</string>
   <string name="upload_progress_notification_title_finishing">Тейәү %1$s тамамланды</string>
   <string name="upload_failed_notification_title">Тейәү %1$s килеп сыҡманы</string>

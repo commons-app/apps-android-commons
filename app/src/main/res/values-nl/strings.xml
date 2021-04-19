@@ -32,7 +32,7 @@
     <item quantity="one">Bezig met 1 upload</item>
     <item quantity="other">Bezig met %1$d uploads</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
   </plurals>
@@ -61,7 +61,7 @@
   <string name="uploading_started">Uploaden is begonnen</string>
   <string name="upload_completed_notification_title">%1$s geüpload</string>
   <string name="upload_completed_notification_text">Wijs aan om uw upload te bekijken</string>
-  <string name="upload_progress_notification_title_start">Het uploaden van %1$s begint</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Het uploaden van %1$s begint</string>
   <string name="upload_progress_notification_title_in_progress">Bezig met het uploaden van %1$s</string>
   <string name="upload_progress_notification_title_finishing">Het uploaden van %1$s is afgerond</string>
   <string name="upload_failed_notification_title">Het uploaden van %1$s is mislukt</string>

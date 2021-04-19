@@ -19,12 +19,12 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Se pornește 1 încărcare</item>
     <item quantity="few">Se pornesc %1$d încărcări</item>
     <item quantity="other">Se pornesc %1$d de încărcări</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 încărcare</item>
     <item quantity="few">%1$d încărcări</item>
     <item quantity="other">%1$d de încărcări</item>
@@ -68,7 +68,7 @@
   <string name="uploading_started">Încărcarea a început!</string>
   <string name="upload_completed_notification_title">%1$s s-a încărcat!</string>
   <string name="upload_completed_notification_text">Atingeți pentru a vizualiza elementul încărcat</string>
-  <string name="upload_progress_notification_title_start">Se pornește încărcarea fișierului %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Se pornește încărcarea fișierului %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s se încarcă</string>
   <string name="upload_progress_notification_title_finishing">Se finalizează încărcarea fișierului %1$s</string>
   <string name="upload_failed_notification_title">Încărcarea fișierului %1$s nu a reușit</string>
@@ -435,7 +435,6 @@
   <string name="images_featured_explanation">Imaginile de Calitate sunt imagini ale unor fotografi și ilustratori de înaltă calificare, pe care comunitatea Wikimedia Commons a ales-o ca fiind de cea mai înaltă calitate pe site.</string>
   <string name="images_via_nearby_explanation">Imaginile Încărcate prin Locurile din Apropiere sunt imaginile care sunt încărcate prin descoperirea locurilor de pe hartă.</string>
   <string name="thanks_received_explanation">Această caracteristică permite editorilor să trimită o notificare de Mulțumire utilizatorilor care fac modificări utile - folosind un mic link de mulțumire pe pagina istoric sau pe pagina dif.</string>
-  <string name="previous_image_caption_description">Copiați legendele și descrierea anterioară</string>
   <string name="welcome_do_upload_content_description">Exemple de imagini bune de încărcat pe Commons</string>
   <string name="welcome_dont_upload_content_description">Exemple de imagini care nu trebuie încărcate</string>
   <string name="skip_image">Săriți această imagine</string>

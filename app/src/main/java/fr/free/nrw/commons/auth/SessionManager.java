@@ -136,4 +136,14 @@ public class SessionManager {
                     currentAccount = null;
                 });
     }
+
+    /**
+     * Return a corresponding boolean preference
+     *
+     * @param key
+     * @return
+     */
+    public boolean getPreference(String key) {
+        return defaultKvStore.getBoolean(key);
+    }
 }

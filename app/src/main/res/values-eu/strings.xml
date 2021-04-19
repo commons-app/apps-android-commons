@@ -21,11 +21,11 @@
     <item quantity="one">igoera (%1$d)</item>
     <item quantity="other">(%1$d) igoera</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Karga %1$d hasten</item>
     <item quantity="other">%1$d karga hasten</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">karga %1$d</item>
     <item quantity="other">%1$d karga</item>
   </plurals>
@@ -56,7 +56,7 @@
   <string name="uploading_started">Igoera hasi da!</string>
   <string name="upload_completed_notification_title">%1$s igotzen!</string>
   <string name="upload_completed_notification_text">Ukitu igotakoa ikusteko</string>
-  <string name="upload_progress_notification_title_start">%1$s igotzen hasten</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s igotzen hasten</string>
   <string name="upload_progress_notification_title_in_progress">%1$s igotzen</string>
   <string name="upload_progress_notification_title_finishing">%1$s igotzen bukatzen</string>
   <string name="upload_failed_notification_title">%1$s igotzean akatsa</string>
@@ -71,7 +71,7 @@
   <string name="menu_nearby">Gertukoak</string>
   <string name="provider_contributions">Nire igoerak</string>
   <string name="menu_share">Partekatu</string>
-  <string name="share_title_hint" fuzzy="true">Izenburua (beharrezkoa)</string>
+  <string name="share_title_hint">Testua (beharrezkoa)</string>
   <string name="share_description_hint">Deskribapena</string>
   <string name="login_failed_network">Ezin izan da sartu - sarean akatsa</string>
   <string name="login_failed_throttled">Sartzeko saiakera txar gehiegi. Mesedez saiatu zaitez minutu batzuk barru.</string>
@@ -86,7 +86,7 @@
   <string name="menu_save_categories">Gorde</string>
   <string name="refresh_button">Eguneratu</string>
   <string name="display_list_button">Zerrenda</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Oraindik ez da ezer igo</string>
+  <string name="contributions_subtitle_zero">(Oraindik ez da ezer igo)</string>
   <string name="categories_not_found">Ez da kategoriak aukritu %1$s izenarekin</string>
   <string name="categories_skip_explanation">Gehitu kategoriak zure argazkiak Wikimedia Commonsen aurkitzen errazagoak izan daitezen.\nHasi idazten kategoriak gehitzeko.</string>
   <string name="categories_activity_title">Kategoriak</string>
@@ -97,8 +97,8 @@
   <string name="menu_about">Honi buruz</string>
   <string name="about_license">Wikimedia Commons iturri-irekiko aplikazioa da Wikimedia komunitateko bolondresek sortu eta mantendutakoa. Wikimedia Fundazioa ez dago aplikazioaren sorreran, garapenean, edota mantenuan ibili.</string>
   <string name="about_improve">&lt;a href=\"%1$s\"&gt;GitHub-eko gai&lt;/a&gt; berria sortu errore eta iradokizunen berri emateko.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Pribatutasun politika&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;Kredituak&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Pribatutasun politika</string>
+  <string name="about_credits">Kredituak</string>
   <string name="title_activity_about">Honi buruz</string>
   <string name="menu_feedback">Bidali zure iritzia (e-posta bidez)</string>
   <string name="no_email_client">Posta bezerorik ez da instalatu</string>
@@ -110,8 +110,8 @@
   <string name="media_upload_policy">Irudi hau bidaltzen, nire lan propioa dela aitortzen dut, copyrighta duten materiala edo selfiak ez duela, eta beste motatakoak &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Ohikoaren arauak&lt;/a&gt;</string>
   <string name="menu_download">Jaitsi</string>
   <string name="preference_license">Berezko lizentzia</string>
-  <string name="use_previous" fuzzy="true">Aurreko izenburu/deskribapena erabili</string>
-  <string name="preference_theme" fuzzy="true">Gau modua</string>
+  <string name="use_previous">Aurreko izenburu eta deskribapena erabili</string>
+  <string name="preference_theme">Gaia</string>
   <string name="license_name_cc_by_sa_four"> Aitortu-PartekatuBerdin 4.0</string>
   <string name="license_name_cc_by_four">Aitortu 4.0</string>
   <string name="license_name_cc_by_sa"> Aitortu-PartekatuBerdin 3.0</string>
@@ -140,7 +140,7 @@
   <string name="welcome_copyright_subtext">Saihestu copyright-a daukaten materialak, Interneten aurkitutakoak edo posterretakoak, liburuen azalak, etab.</string>
   <string name="welcome_final_text">Lortu duzula uste duzu?</string>
   <string name="welcome_final_button_text">Bai!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Informazio gehiago&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Informazio gehiago</string>
   <string name="detail_panel_cats_label">Kategoriak</string>
   <string name="detail_panel_cats_loading">Kargatzen…</string>
   <string name="detail_panel_cats_none">Bat ere ez da aukeratu</string>
@@ -208,19 +208,19 @@
   <string name="skip_login_title">Benetan saioa hastea jauzi nahi duzula?</string>
   <string name="skip_login_message">Argazkiak igotzeko saioa hasi beharko duzu.</string>
   <string name="login_alert_message">Mesedez, hasi saioa funtzio hau erabili ahal izateko</string>
-  <string name="nearby_location_not_available" fuzzy="true">Kokapena ez dago erabilgarri.</string>
+  <string name="nearby_location_not_available">Kokapena ez dago erabilgarri.</string>
   <string name="location_permission_rationale_nearby">Baimena beharrezkoa da hurbil dauden lekuen zerrende ikusteko</string>
   <string name="nearby_directions">Nola iritsi</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Baloratu gaitzazu&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;Maiz egindako galderak&lt;/u&gt;</string>
+  <string name="about_rate_us">Baloratu gaitzazu</string>
+  <string name="about_faq">Maiz egindako galderak</string>
   <string name="welcome_skip_button">Tutoriala jauzi</string>
   <string name="no_internet">Interneta ez dago erabilgarri</string>
   <string name="error_notifications">Errorea jakinarazpenak ekartzean</string>
   <string name="no_notifications">Ez da jakinarazpenik aurkitu</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;Itzuli&lt;/u&gt;</string>
+  <string name="about_translate">Itzuli</string>
   <string name="about_translate_title">Hizkuntzak</string>
   <string name="about_translate_message">Aukeratu itzulpenak zein hizkuntzatarako bidali nahi dituzun</string>
   <string name="about_translate_proceed">Jarraitu</string>

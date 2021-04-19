@@ -20,11 +20,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Iniciando %1$d carga</item>
     <item quantity="other">Iniciando %1$d cargas</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d carga</item>
     <item quantity="other">%1$d cargas</item>
   </plurals>
@@ -64,7 +64,7 @@
   <string name="uploading_started">A carga comezou!</string>
   <string name="upload_completed_notification_title">Cargouse \"%1$s\"!</string>
   <string name="upload_completed_notification_text">Prema para ollar a súa carga</string>
-  <string name="upload_progress_notification_title_start">Comezando a carga de \"%1$s\"</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Comezando a carga de \"%1$s\"</string>
   <string name="upload_progress_notification_title_in_progress">Cargando \"%1$s\"</string>
   <string name="upload_progress_notification_title_finishing">Rematando a carga de \"%1$s\"</string>
   <string name="upload_failed_notification_title">Erro ao cargar \"%1$s\"</string>

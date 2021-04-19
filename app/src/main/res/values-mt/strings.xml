@@ -16,7 +16,7 @@
   <string name="uploading_started">Beda t-tlugħ!</string>
   <string name="upload_completed_notification_title">%1$s tela\'!</string>
   <string name="upload_completed_notification_text">Agħfas sabiex tara t-tlugħ tiegħek</string>
-  <string name="upload_progress_notification_title_start">Se jibda t-tlugħ ta\' %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Se jibda t-tlugħ ta\' %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Tiela\' %1$s</string>
   <string name="upload_progress_notification_title_finishing">It-tlugħ ta\' %1$s spiċċa</string>
   <string name="upload_failed_notification_title">It-tlugħ ta\' %1$s ma rnexxiex</string>
