@@ -375,6 +375,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         }
     }
 
+    /**
+     * backButtonClicked is called on a back event in the media details pager.
+     * returns true after closing the categoryEditContainer if open, implying that event was handled.
+     * else returns false
+     * @return
+     */
     public boolean backButtonClicked(){
         return ((MediaDetailFragment)(adapter.getCurrentFragment())).hideCategoryEditContainerIfOpen();
     }
@@ -392,7 +398,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)
     private class MediaDetailAdapter extends FragmentStatePagerAdapter {
 
-        // Keeps track of the current displayed fragment.
+        /**
+         * Keeps track of the current displayed fragment.
+         */
         private Fragment mCurrentFragment;
 
         public MediaDetailAdapter(FragmentManager fm) {
@@ -426,7 +434,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         }
 
         /**
-         * getter for mCurrentFragment
+         * Get the currently displayed fragment.
          * @return
          */
         public Fragment getCurrentFragment() {
