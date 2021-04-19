@@ -533,5 +533,4 @@
   <string name="limited_connection_enabled">Se activó el modo de conexión limitada.</string>
   <string name="limited_connection_disabled">Se desactivó el modo de conexión limitada. Las cargas pendientes se reanudarán ahora.</string>
   <string name="limited_connection_mode" fuzzy="true">Conexión limitada</string>
-  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

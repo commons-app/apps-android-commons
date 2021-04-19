@@ -169,5 +169,4 @@
   <string name="login_to_your_account">Шәхси теркәү яҙмаһына ин</string>
   <string name="send_log_file">Теркәлеү файлын ебәр</string>
   <string name="send_log_file_description" fuzzy="true">Теркәлеү файлын эл-почта аша ҡораусыларға ебәр</string>
-  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

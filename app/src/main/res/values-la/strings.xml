@@ -62,5 +62,4 @@
   <string name="detail_panel_cats_label">Categoriae</string>
   <string name="detail_panel_cats_loading" fuzzy="true">Depromens…</string>
   <string name="detail_panel_cats_none">Nulla selecta</string>
-  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>

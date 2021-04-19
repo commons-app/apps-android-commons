@@ -462,5 +462,4 @@
   <string name="limited_connection_enabled">Korlátozott kapcsolat-mód bekapcsolva!</string>
   <string name="limited_connection_disabled">Korlátozott kapcsolat-mód kikapcsolva. Függőben lévő feltöltések folytatása.</string>
   <string name="limited_connection_mode" fuzzy="true">Korlátozott kapcsolat</string>
-  <string name="media_detail_in_all_languages">In all languages</string>
 </resources>
