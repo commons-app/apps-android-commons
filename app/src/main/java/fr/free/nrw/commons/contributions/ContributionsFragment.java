@@ -594,6 +594,10 @@ public class ContributionsFragment
 
     public void backButtonClicked() {
         if (mediaDetailPagerFragment.isVisible()) {
+            if(mediaDetailPagerFragment.backButtonClicked()) {
+                // MediaDetailed handled the backPressed no further action required.
+                return;
+            }
             if (store.getBoolean("displayNearbyCardView", true)) {
                 if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
                     nearbyNotificationCardView.setVisibility(View.VISIBLE);

@@ -164,9 +164,18 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
     }
   }
 
-  public void backPressed() {
+  /**
+   * Performs back pressed action on the fragment.
+   * Return true if the event was handled by the mediaDetails otherwise returns false.
+   * @return
+   */
+  public boolean backPressed() {
     if (null!=mediaDetails && mediaDetails.isVisible()) {
       // todo add get list fragment
+      if(mediaDetails.backButtonClicked()) {
+        // MediaDetails handled the event no further action required.
+        return true;
+      }
       ((ExploreFragment)getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
       removeFragment(mediaDetails);
       ((ExploreFragment) getParentFragment()).setScroll(true);
@@ -175,5 +184,6 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
       ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
     }
     ((MainActivity)getActivity()).showTabs();
+    return false;
   }
 }
