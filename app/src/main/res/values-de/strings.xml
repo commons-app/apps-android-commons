@@ -31,6 +31,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">Hochladen starten</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Verarbeitung eines Uploads</item>
     <item quantity="other">Verarbeitung von %1$d Uploads</item>
@@ -389,6 +390,8 @@
   <string name="no_uploads">Willkommen bei Commons!\n\nLade deine erste Datei hoch, indem du auf die Hinzufügen-Schaltfläche tippst.</string>
   <string name="no_categories_selected">Keine Kategorien ausgewählt</string>
   <string name="no_categories_selected_warning_desc">Bilder ohne Kategorien sind selten nutzbar. Bist du sicher, dass du ohne die Auswahl von Kategorien hochladen möchtest?</string>
+  <string name="no_depictions_selected">Keine Motive ausgewählt</string>
+  <string name="no_depictions_selected_warning_desc">Bilder mit Motive sind leichter zu finden und werden eher verwendet. Bist dusicher, dass du ohne Auswahl von Motiven fortfahren möchtest?</string>
   <string name="upload_flow_all_images_in_set">(für alle Bilder im Satz)</string>
   <string name="search_this_area">Diesen Bereich durchsuchen</string>
   <string name="nearby_card_permission_title">Berechtigungsanfrage</string>
@@ -398,6 +401,7 @@
   <string name="display_location_permission_title">Standortberechtigung anfragen</string>
   <string name="display_location_permission_explanation">Anfrage für eine Standortberechtigung, die für die Nachbarbenachrichtigungskartenansichtsfunktion erforderlich ist.</string>
   <string name="achievements_fetch_failed">Etwas ist schief gelaufen. Wir konnten deine Errungenschaften nicht abrufen.</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">Du hast so viele Beiträge geleistet, dass unser Leistungsberechnungssystem damit nicht zurechtkommt. Dies ist die ultimative Leistung.</string>
   <string name="ends_on">Endet am:</string>
   <string name="display_campaigns">Kampagnen anzeigen</string>
   <string name="display_campaigns_explanation">Die laufenden Kampagnen ansehen</string>
@@ -447,6 +451,7 @@
   <string name="images_featured_explanation">Vorgestellte Bilder sind Bilder von professionellen Fotografen und Zeichnern, die die Gemeinschaft von Wikimedia Commons als diejenigen mit der höchsten Qualität auf der Website ausgewählt hat.</string>
   <string name="images_via_nearby_explanation">Über Orte in der Nähe hochgeladene Bilder sind die Bilder, die von entdeckten Orten auf der Karte hochgeladen wurden.</string>
   <string name="thanks_received_explanation">Diese Funktion erlaubt es Autoren, eine Dankeschön-Benachrichtigung an Benutzer zu senden, die nützliche Bearbeitungen durchgeführt haben – durch die Benutzung eines kleinen Dankeschön-Links in der Versionsgeschichte oder Unterschiedsseite.</string>
+  <string name="copy_image_caption_description">Auf Folgemedien kopieren</string>
   <string name="copied_successfully">Kopiert</string>
   <string name="welcome_do_upload_content_description">Beispiele guter Bilder zum Hochladen auf Commons</string>
   <string name="welcome_dont_upload_content_description">Beispiele von Bildern, die nicht hochgeladen werden sollen.</string>
@@ -465,28 +470,44 @@
   <string name="share_via">App teilen über …</string>
   <string name="image_info">Bildinformationen</string>
   <string name="no_categories_found">Keine Kategorien gefunden</string>
+  <string name="no_depiction_found">Keine Motive gefunden</string>
   <string name="upload_cancelled">Hochladen abbrechen</string>
+  <string name="previous_image_title_description_not_found">Es sind keine Daten für den Titel oder die Beschreibung des vorherigen Bildes vorhanden</string>
+  <string name="dialog_box_text_nomination">Warum soll %1$s gelöscht werden?</string>
+  <string name="review_is_uploaded_by">%1$s wird hochgeladen von: %2$s</string>
+  <string name="default_description_language">Standard-Beschreibungssprache</string>
   <string name="delete_helper_show_deletion_title">Zur Löschung vorschlagen</string>
   <string name="delete_helper_show_deletion_title_success">Erfolgreich</string>
+  <string name="delete_helper_show_deletion_message_if">%1$s zur Löschung nominiert.</string>
   <string name="delete_helper_show_deletion_title_failed">Fehlgeschlagen</string>
+  <string name="delete_helper_show_deletion_message_else">Konnte keine Löschung anfordern.</string>
   <string name="delete_helper_ask_spam_selfie">Ein Selfie</string>
   <string name="delete_helper_ask_spam_blurry">Unscharf</string>
   <string name="delete_helper_ask_spam_nonsense">Unsinn</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Pressefoto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Bild aus dem Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">Denn es ist</string>
+  <string name="category_edit_helper_make_edit_toast">Versuche, Kategorien zu aktualisieren.</string>
+  <string name="category_edit_helper_show_edit_title">Kategorie-Update</string>
   <string name="category_edit_helper_show_edit_title_success">Erfolg</string>
   <string name="category_edit_button_text">Kategorien aktualisieren</string>
+  <string name="share_image_via">Bild teilen via</string>
+  <string name="no_achievements_yet">Du hast noch keine Beiträge geleistet</string>
   <string name="account_created">Benutzerkonto erstellt!</string>
   <string name="text_copy">Text in die Zwischenablage kopiert</string>
   <string name="notification_mark_read">Benachrichtigung als gelesen markieren</string>
+  <string name="some_error">Ein Fehler ist aufgetreten!</string>
   <string name="place_state_exists">Existiert</string>
   <string name="place_state_needs_photo">Benötigt Foto</string>
   <string name="nearby_search_hint">Brücke, Museum, Hotel etc.</string>
+  <string name="you_must_reset_your_passsword">Bei der Anmeldung ist etwas schief gelaufen, du musst dein Passwort zurücksetzen!</string>
+  <string name="upload_nearby_place_found_description">Ist dies ein Foto vom Ort %1$s?</string>
   <string name="title_app_shortcut_bookmark">Lesezeichen</string>
   <string name="title_app_shortcut_setting">Einstellungen</string>
   <string name="remove_bookmark">aus den Lesezeichen entfernt</string>
   <string name="add_bookmark">zu den Lesezeichen hinzugefügt</string>
+  <string name="wallpaper_set_unsuccessfully">Etwas ist schief gelaufen. Konnte das Hintergrundbild nicht einstellen</string>
   <string name="setting_wallpaper_dialog_title">Als Hintergrundbild festlegen</string>
   <string name="setting_wallpaper_dialog_message">Hintergrundbild wird festgelegt. Bitte warten...</string>
   <string name="theme_dark_name">Dunkel</string>
@@ -519,5 +540,8 @@
   <string name="limited_connection_enabled">Begrenzter Verbindungsmodus aktiviert!</string>
   <string name="limited_connection_disabled">Eingeschränkter Verbindungsmodus deaktiviert. Ausstehende Uploads werden jetzt fortgesetzt.</string>
   <string name="limited_connection_mode">Eingeschränkter Verbindungsmodus</string>
+  <string name="license_step_title">Medienlizenz</string>
+  <string name="media_detail_step_title">Mediendetails</string>
   <string name="menu_view_category_page">Kategorieseite anzeigen</string>
+  <string name="read_help_link">Mehr lesen</string>
 </resources>
