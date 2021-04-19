@@ -38,8 +38,6 @@ import fr.free.nrw.commons.upload.UploadItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
@@ -168,7 +166,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * init the description recycler veiw and caption recyclerview
      */
     private void initRecyclerView() {
-        uploadMediaDetailAdapter = new UploadMediaDetailAdapter(defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE, ""));
+        uploadMediaDetailAdapter = new UploadMediaDetailAdapter(defaultKvStore.getString(Prefs.KEY_DESCRIPTION_LANGUAGE_VALUE, ""));
         uploadMediaDetailAdapter.setCallback(this::showInfoAlert);
         uploadMediaDetailAdapter.setEventListener(this);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));

@@ -4,6 +4,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -24,6 +25,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.TelemetryDefinition;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
@@ -169,7 +171,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         appLangListPreference.setEntryValues(languageCodes);
 
         // Gets current language code from shared preferences
-        String languageCode = getCurrentLanguageCode();
+        String languageCode = getCurrentAppLanguageCode();
         if (languageCode.equals("")){
             // If current language code is empty, means none selected by user yet so use phone local
             appLangListPreference.setValue(Locale.getDefault().getLanguage());
@@ -181,7 +183,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         appLangListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
             String userSelectedValue = (String) newValue;
             setLocale(getActivity(),userSelectedValue);
-            saveLanguageValue(userSelectedValue);
+            saveAppLanguageValue(userSelectedValue);
+            getActivity().recreate();
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
             return true;
         });
     }
@@ -213,7 +218,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         descriptionLangListPreference.setEntryValues(languageCodes);
 
         // Gets current language code from shared preferences
-        String languageCode = getCurrentLanguageCode();
+        String languageCode = getCurrentDescriptionLanguageCode();
         if (languageCode.equals("")){
             // If current language code is empty, means none selected by user yet so use phone local
             descriptionLangListPreference.setValue(Locale.getDefault().getLanguage());
@@ -224,7 +229,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         descriptionLangListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
             String userSelectedValue = (String) newValue;
-            saveLanguageValue(userSelectedValue);
+            saveDescriptionLanguageValue(userSelectedValue);
             return true;
         });
     }
@@ -247,12 +252,20 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         editor.apply();
     }
 
-    private void saveLanguageValue(String userSelectedValue) {
-        defaultKvStore.putString(Prefs.KEY_LANGUAGE_VALUE, userSelectedValue);
+    private void saveDescriptionLanguageValue(String userSelectedValue) {
+        defaultKvStore.putString(Prefs.KEY_DESCRIPTION_LANGUAGE_VALUE, userSelectedValue);
     }
 
-    private String getCurrentLanguageCode() {
-        return defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE, "");
+    private String getCurrentDescriptionLanguageCode() {
+        return defaultKvStore.getString(Prefs.KEY_DESCRIPTION_LANGUAGE_VALUE, "");
+    }
+
+    private void saveAppLanguageValue(String userSelectedValue) {
+        defaultKvStore.putString(Prefs.KEY_APP_LANGUAGE_VALUE, userSelectedValue);
+    }
+
+    private String getCurrentAppLanguageCode() {
+        return defaultKvStore.getString(Prefs.KEY_APP_LANGUAGE_VALUE, "");
     }
 
     private List<Language> getLanguagesSupportedByDevice() {
