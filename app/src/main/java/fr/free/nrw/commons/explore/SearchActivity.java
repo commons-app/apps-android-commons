@@ -213,7 +213,6 @@ public class SearchActivity extends BaseActivity
                     .beginTransaction()
                     .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
                     .add(R.id.mediaContainer, mediaDetails)
-                    .addToBackStack(null)
                     .commit();
             // Reason for using hide, add instead of replace is to maintain scroll position after
             // coming back to the search activity. See https://github.com/commons-app/apps-android-commons/issues/1631
@@ -224,38 +223,22 @@ public class SearchActivity extends BaseActivity
     }
 
     /**
-     * This method is called on Screen Rotation
-     */
-    @Override
-    protected void onResume() {
-        if (supportFragmentManager.getBackStackEntryCount()==1){
-            //FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.
-            //FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894
-            // This is called on screen rotation when user is inside media details. Ideally it should show Media Details but since we are not saving the state now. We are throwing the user to search screen otherwise the app was crashing.
-            //
-            onBackPressed();
-        }
-        super.onResume();
-    }
-
-    /**
      * This method is called on backPressed of anyFragment in the activity.
      * If condition is called when mediaDetailFragment is opened.
      */
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() == 1){
-            // back to search so show search toolbar and hide navigation toolbar
+        //according to first condition mediaDetailFragemnt is opened and then backButton is pressed then open the ViewPager
+        //according to second condtion Viewpager is open and then backButton is pressed then open the exploreActivity
+        if (mediaContainer.isShown() && viewPager.isShown() == false) {
             searchView.setVisibility(View.VISIBLE);//set the searchview
             tabLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.VISIBLE);
             mediaContainer.setVisibility(View.GONE);
-        }else {
-            toolbar.setVisibility(View.GONE);
+        }  else {
+            super.onBackPressed();
         }
-        super.onBackPressed();
     }
-
     /**
      * This method is called on click of a recent search to update query in SearchView.
      * @param query Recent Search Query
