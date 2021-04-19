@@ -56,6 +56,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     DepictsContract.UserActionListener presenter;
     private UploadDepictsAdapter adapter;
     private Disposable subscribe;
+    public static ArrayList<DepictedItem>selectedDepictedItem;
 
     @Nullable
     @Override
@@ -68,6 +69,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     public void onViewCreated(@NonNull android.view.View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        selectedDepictedItem=new ArrayList<DepictedItem>();
         init();
         presenter.getDepictedItems().observe(getViewLifecycleOwner(), this::setDepictsList);
     }
@@ -195,6 +197,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     List<DepictedItem> getRecentDepictesItem(final Application application) {
         final List<DepictedItem> depictedItemList = new ArrayList<>();
         final handleDepictsDoa modelDepicts = new handleDepictsDoa(application);
+        depictedItemList.addAll(selectedDepictedItem);
         for (int i = 0; i < modelDepicts.allDepicts.size(); i++) {
             final DepictedItem depictedItem = modelDepicts.allDepicts.get(i).getItem();
             depictedItem.setSelected(false);
