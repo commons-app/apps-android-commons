@@ -37,6 +37,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -148,14 +149,14 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      * Prepares language summary and language codes list and adds them to list preference as pairs.
      * Uses previously saved language if there is any, if not uses phone local as initial language.
      * Adds preference changed listener and saves value chosen by user to shared preferences
-     * to remember later
+     * to remember later and recall MainActivity to reflect language changes
      */
     private void prepareAppLanguages() {
-        List<String> languageNamesList = new ArrayList<>();
-        List<String> languageCodesList = new ArrayList<>();
-        List<Language> languages = getLanguagesSupportedByDevice();
+        final List<String> languageNamesList = new ArrayList<>();
+        final List<String> languageCodesList = new ArrayList<>();
+        final List<Language> languages = getLanguagesSupportedByDevice();
 
-        for(Language language: languages) {
+        for(final Language language: languages) {
             // Go through all languages and add them to lists
             if(!languageCodesList.contains(language.getLocale().getLanguage())) {
                 // This if prevents us from adding same language twice
@@ -164,14 +165,14 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             }
         }
 
-        CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[0]);
-        CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[0]);
+        final CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[0]);
+        final CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[0]);
         // Add all languages and languages codes to lists preference as pair
         appLangListPreference.setEntries(languageNames);
         appLangListPreference.setEntryValues(languageCodes);
 
         // Gets current language code from shared preferences
-        String languageCode = getCurrentAppLanguageCode();
+        final String languageCode = getCurrentAppLanguageCode();
         if (languageCode.equals("")){
             // If current language code is empty, means none selected by user yet so use phone local
             appLangListPreference.setValue(Locale.getDefault().getLanguage());
@@ -181,11 +182,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         }
 
         appLangListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
-            String userSelectedValue = (String) newValue;
-            setLocale(getActivity(),userSelectedValue);
+            final String userSelectedValue = (String) newValue;
+            setLocale(Objects.requireNonNull(getActivity()),userSelectedValue);
             saveAppLanguageValue(userSelectedValue);
             getActivity().recreate();
-            Intent intent = new Intent(getActivity(), MainActivity.class);
+            final Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
             return true;
         });
@@ -235,20 +236,18 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     /**
-     *
-     * @param activity
-     * @param userSelectedValue
+     * Changing the default app language with selected one and save it to SharedPreferences
      */
-    public void setLocale(Activity activity, String userSelectedValue) {
-        Locale locale = new Locale(userSelectedValue);
+    public void setLocale(final Activity activity, final String userSelectedValue) {
+        final Locale locale = new Locale(userSelectedValue);
         Locale.setDefault(locale);
-        Configuration configuration = new Configuration();
+        final Configuration configuration = new Configuration();
         configuration.locale = locale;
         activity.getBaseContext().getResources().updateConfiguration(configuration,
             activity.getBaseContext().getResources().getDisplayMetrics());
 
-        SharedPreferences.Editor editor = activity.getSharedPreferences("Settings", MODE_PRIVATE).edit();
-        editor.putString("string",userSelectedValue);
+        final SharedPreferences.Editor editor = activity.getSharedPreferences("Settings", MODE_PRIVATE).edit();
+        editor.putString("language",userSelectedValue);
         editor.apply();
     }
 
@@ -260,7 +259,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         return defaultKvStore.getString(Prefs.KEY_DESCRIPTION_LANGUAGE_VALUE, "");
     }
 
-    private void saveAppLanguageValue(String userSelectedValue) {
+    private void saveAppLanguageValue(final String userSelectedValue) {
         defaultKvStore.putString(Prefs.KEY_APP_LANGUAGE_VALUE, userSelectedValue);
     }
 
