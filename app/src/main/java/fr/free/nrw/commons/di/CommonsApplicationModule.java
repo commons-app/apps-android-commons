@@ -23,6 +23,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadController;
+import fr.free.nrw.commons.upload.depicts.DepictsDao;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
@@ -240,6 +241,11 @@ public class CommonsApplicationModule {
     @Provides
     public ContributionDao providesContributionsDao(AppDatabase appDatabase) {
         return appDatabase.contributionDao();
+    }
+
+    @Provides
+    public DepictsDao providesDepictDao(AppDatabase appDatabase) {
+        return appDatabase.DepictsDao();
     }
 
     @Provides

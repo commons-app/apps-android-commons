@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload.depicts;
 
-import android.app.Application;
 import androidx.lifecycle.LiveData;
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
@@ -64,9 +63,8 @@ public interface DepictsContract {
         /**
          * Check if depictions were selected
          * from the depiction list
-         * @param application
          */
-        void verifyDepictions(Application application);
+        void verifyDepictions();
 
         LiveData<List<DepictedItem>> getDepictedItems();
     }

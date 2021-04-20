@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload.depicts;
 
-import android.app.Application;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +21,7 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
+import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -57,6 +57,8 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     private UploadDepictsAdapter adapter;
     private Disposable subscribe;
     public static ArrayList<DepictedItem>selectedDepictedItem;
+    @Inject
+    DepictsDao depictsDao;
 
     @Nullable
     @Override
@@ -153,7 +155,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     @OnClick(R.id.depicts_next)
     public void onNextButtonClicked() {
-        presenter.verifyDepictions(getActivity().getApplication());
+        presenter.verifyDepictions();
     }
 
     @OnClick(R.id.depicts_previous)
@@ -179,10 +181,10 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      * @param query query string
      */
     private void searchForDepictions(final String query) {
-        // set  recent depictsItem  of DepictsRoomDotaBase to recyclerview when query is emapty
+        // set  recent depictsItem  of Database to recyclerview when query is empty
         if (query.isEmpty()) {
             adapter.clear();
-            adapter.setItems(getRecentDepictesItem(getActivity().getApplication()));
+            adapter.setItems(getRecentDepictedItems());
             return;
         } else {
             presenter.searchForDepictions(query);
@@ -194,14 +196,16 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     /**
      * Get the depictesItem form DepictsRoomdataBase
      */
-    List<DepictedItem> getRecentDepictesItem(final Application application) {
-        final List<DepictedItem> depictedItemList = new ArrayList<>();
-        final handleDepictsDoa modelDepicts = new handleDepictsDoa(application);
+    List<DepictedItem> getRecentDepictedItems() {
+        List<DepictedItem> depictedItemList = new ArrayList<>();
+        List<Depicts>depictsList=depictsDao.depictsList();
         depictedItemList.addAll(selectedDepictedItem);
-        for (int i = 0; i < modelDepicts.allDepicts.size(); i++) {
-            final DepictedItem depictedItem = modelDepicts.allDepicts.get(i).getItem();
-            depictedItem.setSelected(false);
-            depictedItemList.add(depictedItem);
+        for (int i = 0; i < depictsList.size(); i++) {
+            final DepictedItem depictedItem = depictsList.get(i).getItem();
+            if (!depictedItemList.contains(depictedItem)) {
+                depictedItem.setSelected(false);
+                depictedItemList.add(depictedItem);
+            }
         }
         return depictedItemList;
     }

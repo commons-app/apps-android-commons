@@ -24,6 +24,17 @@ public class Converters {
     }
 
     @TypeConverter
+    public static String depictsItemToString(DepictedItem objects) {
+        return writeObjectToString(objects);
+    }
+
+    @TypeConverter
+    public static DepictedItem stringToDepicts(String objectList) {
+        return readObjectWithTypeToken(objectList, new TypeToken<DepictedItem>() {
+        });
+    }
+
+    @TypeConverter
     public static Date fromTimestamp(Long value) {
         return value == null ? null : new Date(value);
     }

@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload
 
-import android.app.Application
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.jraska.livedata.test
 import com.nhaarman.mockitokotlin2.verify
@@ -129,14 +128,14 @@ class DepictsPresenterTest {
     @Test
     fun `verifyDepictions with non empty selectedDepictions goes to next screen`() {
         whenever(repository.selectedDepictions).thenReturn(listOf(depictedItem()))
-        depictsPresenter.verifyDepictions(Application());
+        depictsPresenter.verifyDepictions();
         verify(view).goToNextScreen()
     }
 
     @Test
     fun `verifyDepictions with empty selectedDepictions goes to noDepictionSelected`() {
         whenever(repository.selectedDepictions).thenReturn(emptyList())
-        depictsPresenter.verifyDepictions(Application());
+        depictsPresenter.verifyDepictions();
         verify(view).noDepictionSelected()
     }
 }
