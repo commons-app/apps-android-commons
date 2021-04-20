@@ -39,7 +39,7 @@ public class ImageInfo implements Serializable {
     /**
      * thresholdHeight, The minimum height of the image in px.
      */
-    final private int thresholdHeight = 220;
+    final private static int thresholdHeight = 220;
 
     @NonNull
     public String getSource() {
@@ -62,8 +62,16 @@ public class ImageInfo implements Serializable {
         return height;
     }
 
+    /**
+     * Get the thumbnail width.
+     * @return
+     */
     public int getThumbWidth() { return thumbWidth; }
 
+    /**
+     * Get the thumbnail height.
+     * @return
+     */
     public int getThumbHeight() { return thumbHeight; }
 
     @NonNull public String getMimeType() {
@@ -93,6 +101,8 @@ public class ImageInfo implements Serializable {
 
     /**
      * Updates the ThumbUrl if image dimensions are not sufficient.
+     * Specifically, in panoramic images the height retrieved is less than required due to large width to height ratio,
+     * so we update the thumb url keeping a minimum height threshold.
      */
     private void updateThumbUrl() {
         // If thumbHeight retrieved from API is less than thresholdHeight
@@ -105,10 +115,9 @@ public class ImageInfo implements Serializable {
                 thumbWidth = finalWidth;
                 final String toReplace = "/" + queryWidth + "px";
                 final int position = thumbUrl.lastIndexOf(toReplace);
-                thumbUrl = (new StringBuilder(thumbUrl)).replace(position,position+toReplace.length(),"/"+thumbWidth+"px").toString();
+                thumbUrl = (new StringBuilder(thumbUrl)).replace(position, position + toReplace.length(), "/" + thumbWidth + "px").toString();
             }
         }
-
     }
 
 }
