@@ -179,13 +179,12 @@ public class WikidataEditService {
     }
   }
 
-  public Disposable addDepictionsAndCaptions(UploadResult uploadResult, Contribution contribution) {
+  public Observable addDepictionsAndCaptions(final UploadResult uploadResult, final Contribution contribution) {
     return wikiBaseClient.getFileEntityId(uploadResult)
         .doOnError(throwable -> {
           Timber.e(throwable, "Error occurred while getting EntityID to set DEPICTS property");
           ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
         })
-        .subscribeOn(Schedulers.io())
         .switchMap(fileEntityId -> {
               if (fileEntityId != null) {
                 Timber.d("EntityId for image was received successfully: %s", fileEntityId);
@@ -198,9 +197,6 @@ public class WikidataEditService {
                 return Observable.empty();
               }
             }
-        ).subscribe(
-            success -> Timber.d("edit response: %s", success),
-            throwable -> Timber.e(throwable, "posting edits failed")
         );
   }
 

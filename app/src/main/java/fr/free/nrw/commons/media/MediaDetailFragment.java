@@ -319,6 +319,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 updateAspectRatio(scrollView.getWidth());
             }
         });
+
         return view;
     }
 
@@ -721,6 +722,22 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @OnClick(R.id.categoryEditButton)
     public void onCategoryEditButtonClicked(){
         displayHideCategorySearch();
+    }
+
+    /**
+     * Hides the categoryEditContainer.
+     * returns true after closing the categoryEditContainer if open, implying that event was handled.
+     * else returns false
+     * @return
+     */
+    public boolean hideCategoryEditContainerIfOpen(){
+        if (dummyCategoryEditContainer.getVisibility() == VISIBLE) {
+            // editCategory is open, close it and return true as the event was handled.
+            dummyCategoryEditContainer.setVisibility(GONE);
+            return true;
+        }
+        // Event was not handled.
+        return false;
     }
 
     public void displayHideCategorySearch() {
