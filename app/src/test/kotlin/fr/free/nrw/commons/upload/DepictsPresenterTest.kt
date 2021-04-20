@@ -128,14 +128,14 @@ class DepictsPresenterTest {
     @Test
     fun `verifyDepictions with non empty selectedDepictions goes to next screen`() {
         whenever(repository.selectedDepictions).thenReturn(listOf(depictedItem()))
-        depictsPresenter.verifyDepictions();
+        depictsPresenter.verifyDepictions()
         verify(view).goToNextScreen()
     }
 
     @Test
     fun `verifyDepictions with empty selectedDepictions goes to noDepictionSelected`() {
         whenever(repository.selectedDepictions).thenReturn(emptyList())
-        depictsPresenter.verifyDepictions();
+        depictsPresenter.verifyDepictions()
         verify(view).noDepictionSelected()
     }
 }

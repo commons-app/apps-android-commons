@@ -11,27 +11,27 @@ import java.util.*
 abstract class DepictsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insert(depictedItem: Depicts);
+    abstract suspend fun insert(depictedItem: Depicts)
 
     @Query("Select * From depicts_table order by lastUsed DESC")
-    abstract suspend fun getAllDepict(): List<Depicts>;
+    abstract suspend fun getAllDepict(): List<Depicts>
 
     @Query("Select * From depicts_table order by lastUsed DESC LIMIT :n OFFSET 10")
-    abstract suspend fun getItemToDelete(n: Int): List<Depicts>;
+    abstract suspend fun getItemToDelete(n: Int): List<Depicts>
 
     @Delete
-    abstract suspend fun delete(depicts: Depicts);
+    abstract suspend fun delete(depicts: Depicts)
 
-    lateinit var allDepict: List<Depicts>;
-    lateinit var listOfDelete: List<Depicts>;
+    lateinit var allDepict: List<Depicts>
+    lateinit var listOfDelete: List<Depicts>
 
     fun depictsList(): List<Depicts> {
         runBlocking {
             launch(Dispatchers.IO) {
-                allDepict = getAllDepict();
+                allDepict = getAllDepict()
             }
         }
-        return allDepict;
+        return allDepict
     }
 
     /**
@@ -40,7 +40,7 @@ abstract class DepictsDao {
     fun insertDepict(depictes: Depicts) {
         runBlocking {
             launch(Dispatchers.IO) {
-                insert(depictes);
+                insert(depictes)
             }
         }
     }
@@ -51,10 +51,10 @@ abstract class DepictsDao {
     fun getItemTodelete(number: Int): List<Depicts> {
         runBlocking {
             launch(Dispatchers.IO) {
-                listOfDelete = getItemToDelete(number);
+                listOfDelete = getItemToDelete(number)
             }
         }
-        return listOfDelete;
+        return listOfDelete
     }
 
     /**
@@ -63,7 +63,7 @@ abstract class DepictsDao {
     fun deleteDepicts(depictes: Depicts) {
         runBlocking {
             launch(Dispatchers.IO) {
-                delete(depictes);
+                delete(depictes)
             }
         }
     }
@@ -80,7 +80,7 @@ abstract class DepictsDao {
             insertDepict(Depicts(depictsItem, Date()))
         }
 
-        numberofItemInRoomDataBase = depictsList().size;
+        numberofItemInRoomDataBase = depictsList().size
         // delete the depicts for depictsroomdataBase when number of element in depictsroomdataBase is greater than 10
         if (numberofItemInRoomDataBase > maxNumberOfItemSaveInRoom) {
 

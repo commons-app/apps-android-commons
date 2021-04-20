@@ -105,7 +105,7 @@ class DepictsPresenter @Inject constructor(
     override fun verifyDepictions() {
         if (repository.selectedDepictions.isNotEmpty()) {
             if (::depictsDao.isInitialized) {
-                depictsDao.savingDepictsInRoomDataBase(repository.selectedDepictions);
+                depictsDao.savingDepictsInRoomDataBase(repository.selectedDepictions)
             }
             view.goToNextScreen()
         } else {
@@ -113,7 +113,6 @@ class DepictsPresenter @Inject constructor(
         }
     }
 }
-
 
 /**
  * This creates a dynamic proxy instance of the class,
