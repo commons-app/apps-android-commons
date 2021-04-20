@@ -609,5 +609,6 @@ Upload your first media by tapping on the add button.</string>
   <string name="media_detail_step_title">Media Details</string>
   <string name="menu_view_category_page">View category page</string>
   <string name="menu_view_item_page">View item page</string>
+  <string name="remove">Removes a caption and description</string>
 
 </resources>
