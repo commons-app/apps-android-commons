@@ -5,18 +5,17 @@
 -->
 <resources>
   <string name="uploads_pending_notification_indicator">%1$d {{PLURAL:%1$d|one=ფაილი იხარგუ|few=ფაილი იხარგუ}}</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
-    <item quantity="few">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">იჭყაფუ %1$d ეხარგუა</item>
-    <item quantity="few">იჭყაფუ %1$d ეხარგუა</item>
-    <item quantity="other">იჭყაფუ %1$d ეხარგუა</item>
+  <string name="starting_uploads">ეხარგუაშ დოჭყაფა</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">იმუშებუ %1$d ეხარგუა</item>
+    <item quantity="few">იმუშებუ %1$d ეხარგუა</item>
+    <item quantity="other">იმუშებუ %1$d ეხარგუა</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d ეხარგუა</item>
     <item quantity="few">%1$d ეხარგუა</item>
     <item quantity="other">%1$d ეხარგუა</item>
@@ -24,6 +23,10 @@
   <plurals name="share_license_summary">
     <item quantity="one">თე სურათი გიბჟინუ %1$s ლიცენზიათ</item>
     <item quantity="other">თე სურათეფი გიბჟინუ %1$s ლიცენზიათ</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d ეხარგუა</item>
+    <item quantity="other">%1$d ეხარგუა</item>
   </plurals>
   <string name="navigation_item_explore">გჷნოჯინა</string>
   <string name="preference_category_appearance">მიოჯინი</string>
@@ -48,7 +51,7 @@
   <string name="uploading_started">ეხარგუაქ ქჷდიჭყუ!</string>
   <string name="upload_completed_notification_title">%1$ ეხარგილი რე!</string>
   <string name="upload_completed_notification_text">ქეგუწკანტეთ თქვანი ეხარგუაშ ოძირაფალო</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">ქჷდიჭყუ %1$ ეხარგუაქ</string>
+  <string name="upload_progress_notification_title_start">ეთმიხარგუ ფაილი: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$ იხარგუ</string>
   <string name="upload_progress_notification_title_finishing">ეხარგუაშ თება %1$</string>
   <string name="upload_failed_notification_title">%1$ ეხარგუაქ ვემიხუჯინუ</string>
@@ -64,8 +67,10 @@
   <string name="menu_nearby">გოხოლუას</string>
   <string name="provider_contributions">ჩქიმი ეხარგუეფი</string>
   <string name="menu_share">გობჟინაფა</string>
-  <string name="share_title_hint" fuzzy="true">დუდჯოხო (უციო)</string>
+  <string name="menu_view_file_page">ფაილიშ ხასჷლაშ ძირაფა</string>
+  <string name="share_title_hint">მუკნაჭარა (უციო)</string>
   <string name="share_description_hint">ეჭარუა</string>
+  <string name="share_caption_hint">მუკნაჭარა</string>
   <string name="login_failed_network">მიშულაქ ვემიხუჯინუ - რშვილიშ ჩილათა</string>
   <string name="login_failed_throttled">ძალამ მიარე უმწუძინუ ცადება. ქორთხინ, მუხირენ წუთშა ხოლო ქოცადით.</string>
   <string name="login_failed_blocked">მორდება, თე მახვარებუ ბლოკირი რე ვიკიოწკარუეს</string>
@@ -79,7 +84,7 @@
   <string name="menu_save_categories">ჩუალა</string>
   <string name="refresh_button">გოახალაფა</string>
   <string name="display_list_button">ერკებული</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">ეხარგუეფი ვა რე</string>
+  <string name="contributions_subtitle_zero">(ეხარგუეფი ვა რე)</string>
   <string name="categories_not_found">ვეგორინჷ კატეგორიეფქ, ნამუეფით მოგენა %1$s</string>
   <string name="categories_skip_explanation">ქეგუძინით კატეგორიეფი, თქვანი სურათეფი უმოს მოხუჯურ მიოგორალქ იჸუას ვიკიოწკარუესჷნ.\nგემშეჸონით ჯოხო კატეგორიეფიშ გიოძინალო.</string>
   <string name="categories_activity_title">კატეგორიეფი</string>
@@ -91,7 +96,7 @@
   <string name="menu_about">პროგრამაშ გეშა</string>
   <string name="about_license">ღილე კოდიშ მოღვენი აპლიკაცია, იფაჩუ ლიცენზიათ &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. ვიკიოწკარუე დო თიში ლოგო ფონდი ვიკიმედიაშ ოვაჭარე შანეფი რე დო ფონდი ვიკიმედიაშ ოჸიათ გიმირინუაფუ. ჩქი ფონდ ვიკიმედიაწკჷმა მერსხილი ვავორეთ.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;წყუ&lt;/a&gt; და &lt;a href=\"https://commons-app.gოthub.io/\"&gt;ვებ-ხასჷლა&lt;/a&gt; GitHub-ის. ჩილათაშ ოგინაფალო ვარ-და ზიტყვასქვილშო გაჭყით ახალი &lt;a href=\"%1$s\"&gt;მოთხირი GitHub-ის&lt;/a&gt;.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;კონფიდენციალურობაშ პოლიტიკა&lt;/a&gt;</string>
+  <string name="about_privacy_policy">კონფიდენციალურალაშ პოლიტიკა</string>
   <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;მარდეფი&lt;/a&gt;</string>
   <string name="title_activity_about">პრგრამაშ გეშა</string>
   <string name="menu_feedback">წჷმიხონარეფიშ ჯღონუა (ელ.ფოსტათ)</string>
@@ -105,7 +110,7 @@
   <string name="menu_download">გჷნოჭარუა</string>
   <string name="preference_license">გურგოჩამილი ლიცენზია</string>
   <string name="use_previous">წჷმი დუდჯოხოშ/ეჭარუაშ გჷმორინაფა</string>
-  <string name="preference_theme" fuzzy="true">სერიშ რეჟიმი</string>
+  <string name="preference_theme">ფონიშ რეჟიმი</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -135,10 +140,11 @@
   <string name="welcome_copyright_subtext">მუკიჩილითეთ ოავტორე ნებეფით თხილერი მასალეფიშ ეხარგუას, ნამუეფით თქვა გორით ინტერნეტის, თაშნეშე პლაკატეფიშ, წინგეფიშ გალეგადვალუეფიშ დო თ.უ.</string>
   <string name="welcome_final_text">თქვა ფირქენთო, ნამჷ-და თენა ქიგეგითჷნ?</string>
   <string name="welcome_final_button_text">ქოǃ</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;უმოსი ინფორმაცია&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">უმოსი ინფორმაცია</string>
   <string name="detail_panel_cats_label">კატეგორიეფი</string>
   <string name="detail_panel_cats_loading">იხარგუ...</string>
   <string name="detail_panel_cats_none">მუთუნ ვა რე გიშაგორილი</string>
+  <string name="detail_caption_empty">მუკნაჭარა ვა რე</string>
   <string name="detail_description_empty">ვა რე ეჭარუა</string>
   <string name="detail_discussion_empty">სხუნუა ვა რე</string>
   <string name="detail_license_empty">უჩინებუ ლიცენზია</string>
@@ -149,10 +155,13 @@
   <string name="location_permission_title">ორენიშ გჷმორინაფაშ მოთხირი</string>
   <string name="ok">ჯგირი</string>
   <string name="warning">ხვილაფა</string>
+  <string name="duplicate_image_found">ძირაფილი რე სურათიშ ანგი</string>
   <string name="upload">ეხარგუა</string>
   <string name="yes">ქო</string>
   <string name="no">ვარი</string>
+  <string name="media_detail_caption">მუკნაჭარა</string>
   <string name="media_detail_title">დუდჯოხო</string>
+  <string name="media_detail_depiction">გჷმოხანტუეფი</string>
   <string name="media_detail_description">ეჭარუა</string>
   <string name="media_detail_discussion">სხუნუა</string>
   <string name="media_detail_author">ავტორი</string>
@@ -195,31 +204,36 @@
   <string name="nearby_info_menu_wikidata_article">ვიკიმუნაჩემეფიშ ელემენტი</string>
   <string name="nearby_info_menu_wikipedia_article">ვიკიპედიაშ სტატია</string>
   <string name="description_info">ქორთხინთ, კილიშკილშა გეჭარით ეიოხარგალი ფაილი: სო რდჷ გინოღალირი? მუ რე თექ ეხანტილი? მუ კონტექსტიში რე? ქორთხინთ გეჭარით ეხანტილი პერსონეფი ვარდა ობიექტეფი. ქეგუძინით ინფორმაცია, ნამუშეთ ვემიხუჯინე ლექინას ქუგოხვადენ, სამანგათ, დღა დო სერიშ ბორჯი,მუჟამსჷთ გინიღით სურათინ. მუთუნ ვარჩქვანელობურ ქორე გინოღალირი-და, ქეშეცადით გოსხუნათ, მუ რე თექ ვარჩქვანელობურინ.</string>
+  <string name="caption_info">ქორთხინთ, დოჭარით სურათიშ კუნტა ეჭარუა. მაართა მუკნაჭარა სურათიშ დუდჯოხოთ იჸი გჷმორინაფილი. გოხურგელი რე 255 ასო-შანით.</string>
   <string name="upload_problem_exist">პოტენციური პრობლემეფი თე სურათწკჷმაː</string>
   <string name="upload_problem_image_dark">სურათი ძალამი რუმე რე.</string>
   <string name="upload_problem_image_blurry">სურათი ბონდღილი რე.</string>
   <string name="upload_problem_image_duplicate">თე სურათი უკვე ვიკიოწკარუეს რე,</string>
   <string name="upload_problem_different_geolocation">თე სურათი შხვა აბანს რე გინოღალირი.</string>
+  <string name="upload_problem_fbmd">ქორთხინთ, გეხარგეთ ხვალე თქვანი გინნაღელი სურათეფი. ვეხარგათ თი სურათეფი, ნამუთ შხვა კათაშ ფეისბუქიშ ანგარიშის ძირითინ.</string>
   <string name="upload_problem_do_you_continue">იშენ გოკონანო თე სურათიშ ეხარგუა?</string>
-  <string name="use_external_storage" fuzzy="true">გალენური შვენაშ გჷმორინაფა</string>
+  <string name="upload_problem_image">სურათის პრობლემეფს ქიმუოგორეთ</string>
+  <string name="internet_downloaded">ქორთხინთ, გეხარგეთ ხვალე თქვანი გინნაღელი სურათეფი. ვეხარგათ თი სურათეფი, ნამუეფჷთ ინტერნეტშე გჷმოხარგელი გაფჷნან.</string>
+  <string name="use_external_storage">აპლიკაციაშ გინნაღელი სურათეფიშ ჩუალა</string>
+  <string name="use_external_storage_summary">აპლიკაციაშ კამერათ გინნაღელო სურათეფიშ ჩუალა თქვან მონწყილობაშ შვენას</string>
   <string name="login_to_your_account">გემშართით თქვან პროფილშა</string>
   <string name="send_log_file">ლოგ-ფაილიშ ჯღონუა</string>
   <string name="null_url">ჩილათა! URL ვეგორუ</string>
   <string name="nominate_deletion">ლასუაშ ნომინანტი</string>
   <string name="nominated_for_deletion">თე სურათი ოლასარო რე წჷმორინაფილი</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;დეტალეფშო ვებ-ხასჷლაშ ძირაფა&lt;/u&gt;</string>
+  <string name="nominated_see_more">დეტალეფიშ გეშა ვებ-ხასჷლაშ ძირაფა</string>
   <string name="skip_login">გიშატება</string>
   <string name="navigation_item_login">მიშულა</string>
   <string name="skip_login_title">ნანდულო გოკონანო მიშულაშ გიშატება?</string>
   <string name="nearby_wikidata">ვიკიმუნაჩემეფი</string>
   <string name="nearby_wikipedia">ვიკიპედია</string>
   <string name="nearby_commons">ვიკიოწკარუე</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;ქეშმაფასით&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;შხკ&lt;/u&gt;</string>
+  <string name="about_rate_us">ქეშმაფასით</string>
+  <string name="about_faq">შხკ</string>
   <string name="welcome_skip_button">ოხემანჯღვერეშ გიშატება</string>
   <string name="no_internet">ინტერნეტი ვა რე</string>
   <string name="no_notifications">გინაფეფქ ვეგორუ</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;თანგუა&lt;/u&gt;</string>
+  <string name="about_translate">თანგუა</string>
   <string name="about_translate_title">ნინეფი</string>
   <string name="about_translate_proceed">გაგჷნძორება</string>
   <string name="about_translate_cancel">გოუქვაფა</string>
@@ -242,8 +256,11 @@
   <string name="menu_set_wallpaper">ფონო გერინაფა</string>
   <string name="wallpaper_set_successfully">ფონქ წუმორინელო ქეგედირთჷ!</string>
   <string name="quiz">გითოკითხირი</string>
+  <string name="quiz_question_string">თე სურათი ეიოხარგალო ჯგირი ქორენო?</string>
   <string name="question">კითხირი</string>
   <string name="result">შედეგი</string>
+  <string name="selfie_answer">სელფეფს მუთუნნერი ენციკლოპედიური ღება ვა უღუ. ქორთხინთ, ვეხარგათ თქვანი სურათეფი, ხველე შილებე მუჟამსჷთ თქვან გეშა ვიკიპედიას სტატია ქორენ-და</string>
+  <string name="congratulatory_message_quiz">თქვა %1$s თინი გამა გიღჷნა. მეგახვამანთ!</string>
   <string name="continue_message">გოგჷნძარაფა</string>
   <string name="correct">თინი გამა</string>
   <string name="wrong">გამა ჩილათირი რე</string>
@@ -252,6 +269,7 @@
   <string name="search_history_deleted">გორუაშ ისტორია ლასირი რე</string>
   <string name="delete">ლასუა</string>
   <string name="Achievements">მენაჭირინუეფი</string>
+  <string name="Profile">პროფილი</string>
   <string name="statistics">სტატისტიკა</string>
   <string name="statistics_thanks">მარდი მეღებული რე</string>
   <string name="statistics_featured">გიშნაგორა სურათეფი</string>
@@ -262,6 +280,11 @@
   <string name="achievements_revert_limit_message">მინიმალური მოთხირი:</string>
   <string name="notifications_channel_name_all">ვიკიოწკარუეშ გინაფა</string>
   <string name="preference_author_name_toggle">ავტორიშ შხვა ჯოხოშ გჷმორინაფა</string>
+  <string name="contributions_fragment">მიშნაღელი თია</string>
+  <string name="nearby_fragment">გოხოლუას</string>
+  <string name="notifications">გინაფეფი</string>
+  <string name="list_sheet">ერკებული</string>
+  <string name="storage_permission">შვენაშ ალობა</string>
   <string name="error_occurred_in_picking_images">სურათიშ ეხარგუაშ ბორჯის ჩილათაქ მოხვადჷ</string>
   <string name="please_wait">ქორთხინთ ქჷმიცადით …</string>
 </resources>
