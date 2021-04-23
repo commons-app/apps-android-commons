@@ -48,6 +48,7 @@
     <attr name="contributionsListTextPrimary" format="reference"/>
     <attr name="menu_item_tint" format="reference"/>
     <attr name="search_icon" format="reference"/>
+    <attr name="share_icon" format="reference"/>
 
     <declare-styleable name="Badge">
         <attr name="boundary" format="color"/>

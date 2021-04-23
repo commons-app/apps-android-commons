@@ -56,6 +56,7 @@
         <item name="search_icon">@drawable/ic_search_white_24dp</item>
         <item name="android:windowEnableSplitTouch">false</item>
         <item name="android:splitMotionEvents">false</item>
+        <item name="share_icon">@drawable/ic_share_white_24dp</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -113,6 +114,7 @@
         <item name="search_icon">@drawable/ic_search_blue_24dp</item>
         <item name="android:windowEnableSplitTouch">false</item>
         <item name="android:splitMotionEvents">false</item>
+        <item name="share_icon">@drawable/ic_share_blue_24dp</item>
     </style>
 
     <style name="LightMoreBottomSheetStyle" parent="LightAppTheme">
