@@ -491,6 +491,11 @@
   <string name="category_edit_helper_make_edit_toast">Versuche, Kategorien zu aktualisieren.</string>
   <string name="category_edit_helper_show_edit_title">Kategorie-Update</string>
   <string name="category_edit_helper_show_edit_title_success">Erfolg</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">Kategorie %1$s hinzugügen.</item>
+    <item quantity="other">Kategorien %1$s hinzugügen.</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">Konnte keine Kategorien hinzufügen.</string>
   <string name="category_edit_button_text">Kategorien aktualisieren</string>
   <string name="share_image_via">Bild teilen via</string>
   <string name="no_achievements_yet">Du hast noch keine Beiträge geleistet</string>
@@ -502,6 +507,7 @@
   <string name="place_state_needs_photo">Benötigt Foto</string>
   <string name="nearby_search_hint">Brücke, Museum, Hotel etc.</string>
   <string name="you_must_reset_your_passsword">Bei der Anmeldung ist etwas schief gelaufen, du musst dein Passwort zurücksetzen!</string>
+  <string name="upload_nearby_place_found_title">Ort in der Nähe gefunden</string>
   <string name="upload_nearby_place_found_description">Ist dies ein Foto vom Ort %1$s?</string>
   <string name="title_app_shortcut_bookmark">Lesezeichen</string>
   <string name="title_app_shortcut_setting">Einstellungen</string>
@@ -520,10 +526,17 @@
   <string name="pause">pausieren</string>
   <string name="resume">fortfahren</string>
   <string name="paused">Pausiert</string>
+  <string name="more">Weitere</string>
+  <string name="favorites">Favoriten</string>
   <string name="achievements_tab_title">Errungenschaften</string>
   <string name="leaderboard_tab_title">Bestenliste</string>
   <string name="rank_prefix">Rang:</string>
+  <string name="count_prefix">Anzahl:</string>
+  <string name="leaderboard_column_rank">Rang</string>
   <string name="leaderboard_column_user">Benutzer</string>
+  <string name="leaderboard_column_count">Anzahl</string>
+  <string name="setting_avatar_dialog_title">Als Ranglisten-Avatar festlegen</string>
+  <string name="setting_avatar_dialog_message">Einstellen als Avatar, bitte warten</string>
   <string name="avatar_set_successfully">Avatar setzen</string>
   <string name="avatar_set_unsuccessfully">Fehler beim Setzen eines neuen Avatars, bitte versuche es erneut</string>
   <string name="menu_set_avatar">Als Avatar einstellen</string>
@@ -540,6 +553,10 @@
   <string name="limited_connection_enabled">Begrenzter Verbindungsmodus aktiviert!</string>
   <string name="limited_connection_disabled">Eingeschränkter Verbindungsmodus deaktiviert. Ausstehende Uploads werden jetzt fortgesetzt.</string>
   <string name="limited_connection_mode">Eingeschränkter Verbindungsmodus</string>
+  <string name="statistics_quality">Qualitätsbilder</string>
+  <string name="quality_images_info">Qualitätsbilder sind Diagramme oder Fotografien, die bestimmte Qualitätsstandards erfüllen (die meist technischer Natur sind) und für Wikimedia-Projekte wertvoll sind</string>
+  <string name="resuming_upload">Hochladen fortsetzen …</string>
+  <string name="pausing_upload">Hochladen pausieren …</string>
   <string name="license_step_title">Medienlizenz</string>
   <string name="media_detail_step_title">Mediendetails</string>
   <string name="menu_view_category_page">Kategorieseite anzeigen</string>
