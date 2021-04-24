@@ -29,11 +29,9 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
-import fr.free.nrw.commons.upload.Language;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -149,7 +147,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     /**
      * Prepares language summary and language codes list and adds them to list preference as pairs.
-     * Uses previously saved language if there is any, if not uses phone local as initial language.
+     * Uses previously saved language if there is any, if not uses phone locale as initial language.
      * Adds preference changed listener and saves value chosen by user to shared preferences
      * to remember later and recall MainActivity to reflect language changes
      */
@@ -195,7 +193,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     /**
      * Prepares language summary and language codes list and adds them to list preference as pairs.
-     * Uses previously saved language if there is any, if not uses phone local as initial language.
+     * Uses previously saved language if there is any, if not uses phone locale as initial language.
      * Adds preference changed listener and saves value chosen by user to shared preferences
      * to remember later
      */
@@ -262,11 +260,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void saveAppLanguageValue(final String userSelectedValue) {
-        defaultKvStore.putString(Prefs.KEY_APP_LANGUAGE_VALUE, userSelectedValue);
+        defaultKvStore.putString(Prefs.KEY_APP_UI_LANGUAGE, userSelectedValue);
     }
 
     private String getCurrentAppLanguageCode() {
-        return defaultKvStore.getString(Prefs.KEY_APP_LANGUAGE_VALUE, "");
+        return defaultKvStore.getString(Prefs.KEY_APP_UI_LANGUAGE, "");
     }
 
     /**

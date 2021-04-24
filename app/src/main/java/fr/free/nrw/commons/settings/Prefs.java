@@ -8,7 +8,7 @@ public class Prefs {
     public static final String UPLOADS_SHOWING = "uploadsshowing";
     public static final String MANAGED_EXIF_TAGS = "managed_exif_tags";
     public static final String KEY_DESCRIPTION_LANGUAGE_VALUE = "languageDescription";
-    public static final String KEY_APP_LANGUAGE_VALUE = "languageApp";
+    public static final String KEY_APP_UI_LANGUAGE = "appUiLanguage";
     public static final String KEY_THEME_VALUE = "appThemePref";
     public static final String TELEMETRY_PREFERENCE = "telemetryPref";
 
