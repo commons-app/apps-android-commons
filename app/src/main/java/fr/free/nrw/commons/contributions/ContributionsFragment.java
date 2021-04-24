@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -89,6 +90,7 @@ public class ContributionsFragment
     @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
     @BindView(R.id.campaigns_view) CampaignView campaignView;
     @BindView(R.id.limited_connection_enabled_layout) LinearLayout limitedConnectionEnabledLayout;
+    @BindView(R.id.limited_connection_description_tv) TextView limitedConnectionDescriptionTv;
 
     @Inject ContributionsPresenter contributionsPresenter;
 
@@ -158,6 +160,7 @@ public class ContributionsFragment
             && sessionManager.getCurrentAccount() != null) {
             setUploadCount();
         }
+        limitedConnectionEnabledLayout.setOnClickListener(toggleDescriptionListener);
         setHasOptionsMenu(true);
         return view;
     }
@@ -617,5 +620,12 @@ public class ContributionsFragment
     public MediaDetailPagerFragment getMediaDetailPagerFragment() {
         return mediaDetailPagerFragment;
     }
+
+    // click listener to toggle description
+    private OnClickListener toggleDescriptionListener = view -> {
+      if(view.getVisibility() == View.GONE) {
+        view.setVisibility(View.VISIBLE);
+      } else {view.setVisibility(View.GONE); }
+    };
 }
 
