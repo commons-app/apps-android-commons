@@ -131,6 +131,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private void init() {
         tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
             callback.getTotalNumberOfSteps(), getString(R.string.media_detail_step_title)));
+        showInfoAlert(R.string.warning, R.string.this_function_needs_network_connection);
         tooltip.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
