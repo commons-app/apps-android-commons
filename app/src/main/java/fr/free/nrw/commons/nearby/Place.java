@@ -35,7 +35,7 @@ public class Place implements Parcelable {
 
     public Place(String language,String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, Boolean exists) {
         this.language = language;
-        this.name = name;
+        this.name = name.trim();
         this.label = label;
         this.longDescription = longDescription;
         this.location = location;
@@ -46,7 +46,7 @@ public class Place implements Parcelable {
     }
     public Place(Parcel in) {
         this.language = in.readString();
-        this.name = in.readString();
+        this.name = in.readString().trim();
         this.label = (Label) in.readSerializable();
         this.longDescription = in.readString();
         this.location = in.readParcelable(LatLng.class.getClassLoader());
@@ -92,7 +92,7 @@ public class Place implements Parcelable {
      * Gets the name of the place
      * @return name
      */
-    public String getName() { return name; }
+    public String getName() { return name.trim(); }
 
     /** Gets the label of the place
      * e.g. "building", "city", etc
@@ -188,7 +188,7 @@ public class Place implements Parcelable {
     @Override
     public String toString() {
         return "Place{" +
-                "name='" + name + '\'' +
+                "name='" + name.trim() + '\'' +
                 ", lang='" + language + '\'' +
                 ", label='" + label + '\'' +
                 ", longDescription='" + longDescription + '\'' +
@@ -209,7 +209,7 @@ public class Place implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(language);
-        dest.writeString(name);
+        dest.writeString(name.trim());
         dest.writeSerializable(label);
         dest.writeString(longDescription);
         dest.writeParcelable(location, 0);

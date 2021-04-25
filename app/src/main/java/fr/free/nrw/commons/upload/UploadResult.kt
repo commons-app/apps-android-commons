@@ -11,13 +11,13 @@ data class UploadResult(
     val result: String,
     val filekey: String,
     val offset: Int,
-    val filename: String
+    var filename: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString()?:"",
-        parcel.readString()?:"",
-        parcel.readInt()?:0,
-        parcel.readString()?:""
+        result = parcel.readString() ?: "",
+        filekey = parcel.readString() ?: "",
+        offset = parcel.readInt() ?: 0,
+        filename = parcel.readString() ?: "".trim()
     ) {
     }
 
@@ -28,7 +28,7 @@ data class UploadResult(
         parcel.writeString(result)
         parcel.writeString(filekey)
         parcel.writeInt(offset)
-        parcel.writeString(filename)
+        parcel.writeString(filename.trim())
     }
 
     override fun describeContents(): Int {

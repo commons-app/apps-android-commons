@@ -97,7 +97,7 @@ public class UploadItem {
    * languages have been entered, the first language is used.
    */
   public String getFileName() {
-    return Utils.fixExtension(uploadMediaDetails.get(0).getCaptionText(),
+    return Utils.fixExtension(uploadMediaDetails.get(0).getCaptionText().trim(),
         MimeTypeMapWrapper.getExtensionFromMimeType(mimeType));
   }
 

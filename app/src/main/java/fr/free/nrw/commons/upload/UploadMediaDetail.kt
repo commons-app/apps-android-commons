@@ -21,7 +21,7 @@ data class UploadMediaDetail constructor(
     constructor(place: Place) : this(
         place.language,
         place.longDescription,
-        place.name
+        place.name.trim()
     )
     /**
      * @return the index of the  language selected in a spinner with [SpinnerLanguagesAdapter]
