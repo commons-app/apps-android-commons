@@ -32,8 +32,6 @@ public class QuizActivity extends AppCompatActivity {
     @BindView(R.id.quiz_positive_answer) RadioButton positiveAnswer;
     @BindView(R.id.quiz_negative_answer) RadioButton negativeAnswer;
     @BindView(R.id.toolbar) Toolbar toolbar;
-    RadioButton positive;
-    RadioButton negative;
 
     private QuizController quizController = new QuizController();
     private ArrayList<QuizQuestion> quiz = new ArrayList<>();
@@ -48,8 +46,8 @@ public class QuizActivity extends AppCompatActivity {
         quizController.initialize(this);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        positive = (RadioButton) findViewById(R.id.quiz_positive_answer);
-        negative = (RadioButton) findViewById(R.id.quiz_negative_answer);
+        positiveAnswer = (RadioButton) findViewById(R.id.quiz_positive_answer);
+        negativeAnswer = (RadioButton) findViewById(R.id.quiz_negative_answer);
         displayQuestion();
     }
 
@@ -107,18 +105,8 @@ public class QuizActivity extends AppCompatActivity {
         new RadioGroupHelper(this, R.id.quiz_positive_answer, R.id.quiz_negative_answer);
         positiveAnswer.setChecked(false);
         negativeAnswer.setChecked(false);
-        positive.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setNextQuestion();
-            }
-        });
-        negative.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setNextQuestion();
-            }
-        });
+        positiveAnswer.setOnClickListener(view -> setNextQuestion());
+        negativeAnswer.setOnClickListener(view -> setNextQuestion());
     }
 
     /**
