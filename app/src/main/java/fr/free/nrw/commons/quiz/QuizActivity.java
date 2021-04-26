@@ -56,7 +56,6 @@ public class QuizActivity extends AppCompatActivity {
     /**
      * to move to next question and check whether answer is selected or not
      */
-//    @OnClick(R.id.next_button)
     public void setNextQuestion(){
         if ( questionIndex <= quiz.size() && (positiveAnswer.isChecked() || negativeAnswer.isChecked())) {
             evaluateScore();
