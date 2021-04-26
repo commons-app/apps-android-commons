@@ -191,10 +191,14 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
     }
   }
 
-  public void backPressed() {
+  public boolean backPressed() {
     //check mediaDetailPage fragment is not null then we check mediaDetail.is Visible or not to avoid NullPointerException
     if(mediaDetails!=null) {
       if (mediaDetails.isVisible()) {
+        if(mediaDetails.backButtonClicked()) {
+          // mediaDetails handled the back clicked , no further action required.
+          return true;
+        }
         // todo add get list fragment
         ((BookmarkFragment) getParentFragment()).setupTabLayout();
         ArrayList<Integer> removed=mediaDetails.getRemovedItems();
@@ -217,6 +221,8 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
     } else {
       moveToContributionsFragment();
     }
+    // notify mediaDetails did not handled the backPressed further actions required.
+    return false;
   }
 
   void moveToContributionsFragment(){

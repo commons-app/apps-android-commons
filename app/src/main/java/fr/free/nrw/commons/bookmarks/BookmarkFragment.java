@@ -100,8 +100,11 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment {
 
 
   public void onBackPressed() {
-    ((BookmarkListRootFragment) (adapter.getItem(tabLayout.getSelectedTabPosition())))
-        .backPressed();
+    if(((BookmarkListRootFragment)(adapter.getItem(tabLayout.getSelectedTabPosition()))).backPressed()) {
+      // The event is handled internally by the adapter , no further action required.
+      return;
+    }
+    // Event is not handled by the adapter ( performed back action ) change action bar.
     ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
   }
 }

@@ -76,7 +76,7 @@
   <string name="uploading_started">Nahrávání začalo!</string>
   <string name="upload_completed_notification_title">%1$s nahráno!</string>
   <string name="upload_completed_notification_text">Klepnutím zobrazíte upload</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Spouští se načítání souboru %1$s</string>
+  <string name="upload_progress_notification_title_start">Načítání souboru: %s</string>
   <string name="upload_progress_notification_title_in_progress">Nahrává se soubor %1$s</string>
   <string name="upload_progress_notification_title_finishing">Dokončení nahrávání souboru %1$s</string>
   <string name="upload_failed_notification_title">Načítání souboru %1$s se nezdařilo</string>

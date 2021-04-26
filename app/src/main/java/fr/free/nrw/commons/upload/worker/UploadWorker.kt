@@ -280,6 +280,8 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                                 "Stash Upload success..proceeding to make wikidata edit"
                             )
 
+                            wikidataEditService.addDepictionsAndCaptions(uploadResult, contribution)
+                                .blockingSubscribe();
                             if(contribution.wikidataPlace==null){
                                 Timber.d(
                                     "WikiDataEdit not required, upload success"
@@ -339,7 +341,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
      * Make the WikiData Edit, if applicable
      */
     private suspend fun makeWikiDataEdit(uploadResult: UploadResult, contribution: Contribution) {
-        wikidataEditService.addDepictionsAndCaptions(uploadResult, contribution)
         val wikiDataPlace = contribution.wikidataPlace
         if (wikiDataPlace != null && wikiDataPlace.imageValue == null) {
             if (!contribution.hasInvalidLocation()) {

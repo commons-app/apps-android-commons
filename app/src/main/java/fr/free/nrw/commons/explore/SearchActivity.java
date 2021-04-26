@@ -253,6 +253,12 @@ public class SearchActivity extends BaseActivity
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() == 1){
+
+            // the back press is handled by the mediaDetails , no further action required.
+            if(mediaDetails.backButtonClicked()){
+                return;
+            }
+
             // back to search so show search toolbar and hide navigation toolbar
             searchView.setVisibility(View.VISIBLE);//set the searchview
             tabLayout.setVisibility(View.VISIBLE);
