@@ -2,6 +2,9 @@ package fr.free.nrw.commons.quiz;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -29,6 +32,8 @@ public class QuizActivity extends AppCompatActivity {
     @BindView(R.id.quiz_positive_answer) RadioButton positiveAnswer;
     @BindView(R.id.quiz_negative_answer) RadioButton negativeAnswer;
     @BindView(R.id.toolbar) Toolbar toolbar;
+    RadioButton positive;
+    RadioButton negative;
 
     private QuizController quizController = new QuizController();
     private ArrayList<QuizQuestion> quiz = new ArrayList<>();
@@ -43,13 +48,15 @@ public class QuizActivity extends AppCompatActivity {
         quizController.initialize(this);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        positive = (RadioButton) findViewById(R.id.quiz_positive_answer);
+        negative = (RadioButton) findViewById(R.id.quiz_negative_answer);
         displayQuestion();
     }
 
     /**
      * to move to next question and check whether answer is selected or not
      */
-    @OnClick(R.id.next_button)
+//    @OnClick(R.id.next_button)
     public void setNextQuestion(){
         if ( questionIndex <= quiz.size() && (positiveAnswer.isChecked() || negativeAnswer.isChecked())) {
             evaluateScore();
@@ -101,6 +108,18 @@ public class QuizActivity extends AppCompatActivity {
         new RadioGroupHelper(this, R.id.quiz_positive_answer, R.id.quiz_negative_answer);
         positiveAnswer.setChecked(false);
         negativeAnswer.setChecked(false);
+        positive.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setNextQuestion();
+            }
+        });
+        negative.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setNextQuestion();
+            }
+        });
     }
 
     /**
