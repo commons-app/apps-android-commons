@@ -342,7 +342,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         media = detailProvider.getMediaAtPosition(index);
 
-        if(applicationKvStore.getBoolean("Nominating " + media.getDisplayTitle(), false)) {
+        if(media != null && applicationKvStore.getBoolean("Nominating " + media.getDisplayTitle(), false)) {
             enableProgressBar();
         }
 
@@ -355,7 +355,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                     }
                     scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     oldWidthOfImageView = scrollView.getWidth();
-                    displayMediaDetails();
+                    if(media != null) {
+                        displayMediaDetails();
+                    }
                 }
             }
         );

@@ -563,6 +563,13 @@ public class ContributionsFragment
         contributionsPresenter.saveContribution(contribution);
     }
 
+    @Override
+    public void viewPagerNotifyDataSetChanged() {
+        if (mediaDetailPagerFragment != null) {
+            mediaDetailPagerFragment.notifyDataSetChanged();
+        }
+    }
+
     /**
      * Replace whatever is in the current contributionsFragmentContainer view with
      * mediaDetailPagerFragment, and preserve previous state in back stack. Called when user selects a
