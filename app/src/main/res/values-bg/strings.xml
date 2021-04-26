@@ -3,6 +3,7 @@
 * DCLXVI
 * Datawiki30
 * MegaAlex
+* Spiritia
 * StanProg
 * Vlad5250
 * Vodnokon4e
@@ -64,6 +65,7 @@
   <string name="share_title_hint">Описание (задълж.)</string>
   <string name="share_description_hint">Описание</string>
   <string name="login_failed_network">Неуспешно влизане – проблем в мрежата</string>
+  <string name="login_failed_throttled">Твърде много неуспешни опити. Моля, опитайте пак след няколко минути.</string>
   <string name="login_failed_blocked">За съжаление, потребителят е блокиран на Общомедия</string>
   <string name="login_failed_generic">Грешка при влизане</string>
   <string name="share_upload_button">Качване</string>
@@ -74,8 +76,11 @@
   <string name="menu_save_categories">Съхраняване</string>
   <string name="refresh_button">Обновяване</string>
   <string name="display_list_button">Списък</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Все още няма качени файлове</string>
+  <string name="contributions_subtitle_zero">(Все още няма качени файлове)</string>
   <string name="categories_not_found">Няма категории, отговарящи на %1$s</string>
+  <string name="depictions_not_found">В Уикиданни няма обекти, които отговарят на търсенето.</string>
+  <string name="no_child_classes">%1$s няма подкласове</string>
+  <string name="no_parent_classes">%1$s няма надкласове</string>
   <string name="categories_skip_explanation">Поставете категории на изображения, за да могат потребителите по-лесно да ги намерят на Общомедия.\n\nЗа да поставите категория, почнете с писане на нейното име.</string>
   <string name="categories_activity_title">Категории</string>
   <string name="title_activity_settings">Настройки</string>
@@ -85,16 +90,21 @@
   <string name="menu_about">За приложението</string>
   <string name="about_license">Приложението на Commons е с отворен код. Неговите създатели и поддръжници са получателите на ресурсите на общността на Уикимедия, както и на членовете на общността. Фондация Уикимедия не участва в създаването, развитието и поддръжката.</string>
   <string name="about_improve">Създайте нов &lt;a href=\"%1$s\"&gt;проблем на GitHub&lt;/a&gt; за заявяване на грешки и даване предложения.</string>
+  <string name="about_privacy_policy">Политика за защита на личните данни</string>
   <string name="title_activity_about">За приложението</string>
+  <string name="menu_feedback">Изпратете обратна връзка (по имейл)</string>
   <string name="no_email_client">Не е инсталирана програма за електронна поща</string>
   <string name="provider_categories">Последно използвани категории</string>
+  <string name="no_uploads_yet">Все още не сте качили никакви снимки.</string>
   <string name="menu_retry_upload">Повторен опит</string>
   <string name="menu_cancel_upload">Отказ</string>
   <string name="menu_download">Изтегляне</string>
   <string name="preference_license">Лиценз по подразбиране</string>
   <string name="preference_theme">Облик</string>
   <string name="license_name_cc_by_sa_four">Признание-Споделяне на Споделеното 4.0</string>
+  <string name="license_name_cc_by_four">Признание 4.0</string>
   <string name="license_name_cc_by_sa">Признание-Споделяне на Споделеното 3.0</string>
+  <string name="license_name_cc_by"> Признание 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -102,6 +112,8 @@
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="tutorial_1_text">В Общомедия се намират повечето изображения, използвани в Уикипедия.</string>
   <string name="tutorial_1_subtext">Вашите изображения помагат за образоването на хората по целия свят!</string>
+  <string name="tutorial_2_text">Моля, качвайте само изображения, които са изцяло направени или заснети от Вас.</string>
+  <string name="tutorial_2_subtext_1">Природни обекти (цветя, животни, планини)</string>
   <string name="tutorial_3_text">Моля, НЕ качвайте:</string>
   <string name="welcome_final_button_text">Да!</string>
   <string name="detail_panel_cats_label">Категории</string>
