@@ -180,7 +180,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * init the description recycler veiw and caption recyclerview
      */
     private void initRecyclerView() {
-        uploadMediaDetailAdapter = new UploadMediaDetailAdapter(defaultKvStore.getString(Prefs.KEY_DESCRIPTION_LANGUAGE_VALUE, ""));
+        uploadMediaDetailAdapter = new UploadMediaDetailAdapter(defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, ""));
         uploadMediaDetailAdapter.setCallback(this::showInfoAlert);
         uploadMediaDetailAdapter.setEventListener(this);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));

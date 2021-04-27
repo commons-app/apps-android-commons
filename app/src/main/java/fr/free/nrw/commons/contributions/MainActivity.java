@@ -375,8 +375,8 @@ public class MainActivity  extends BaseActivity
      */
     private void loadLocale(){
         final SharedPreferences preferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
-        final String lang = preferences.getString("language","");
+        final String language = preferences.getString("language", "");
         final SettingsFragment settingsFragment = new SettingsFragment();
-        settingsFragment.setLocale(this, lang);
+        settingsFragment.setLocale(this, language);
     }
 }
