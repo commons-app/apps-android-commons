@@ -61,7 +61,6 @@ public class WelcomeActivity extends BaseActivity {
      */
     @Override
     public void onDestroy() {
-        isQuiz = true;
         if (isQuiz) {
             Intent i = new Intent(WelcomeActivity.this, QuizActivity.class);
             startActivity(i);

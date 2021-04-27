@@ -46,8 +46,8 @@ public class QuizActivity extends AppCompatActivity {
         quizController.initialize(this);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        positiveAnswer = (RadioButton) findViewById(R.id.quiz_positive_answer);
-        negativeAnswer = (RadioButton) findViewById(R.id.quiz_negative_answer);
+        positiveAnswer = findViewById(R.id.quiz_positive_answer);
+        negativeAnswer = findViewById(R.id.quiz_negative_answer);
         displayQuestion();
     }
 
