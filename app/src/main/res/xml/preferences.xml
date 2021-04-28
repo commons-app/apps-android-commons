@@ -30,7 +30,7 @@
           android:key="appUiDefaultLanguagePref"
           app:useSimpleSummaryProvider="true"
           app:singleLineTitle="false"
-          android:title="@string/app_user_interface_language" />
+          android:title="@string/app_ui_language" />
 
         <ListPreference
           android:key="descriptionDefaultLanguagePref"
