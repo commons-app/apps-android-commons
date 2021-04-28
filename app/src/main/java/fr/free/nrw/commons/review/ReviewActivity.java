@@ -258,7 +258,7 @@ public class ReviewActivity extends BaseActivity {
     /**
      * set up the media detail fragment when click on the review image
      */
-    private void setUpMediaDetailFragment() {
+    public void setUpMediaDetailFragment() {
         if (mediaDetailContainer.getVisibility() == View.GONE && media != null) {
             mediaDetailContainer.setVisibility(View.VISIBLE);
             reviewContainer.setVisibility(View.INVISIBLE);
@@ -288,7 +288,7 @@ public class ReviewActivity extends BaseActivity {
     /**
      * set up media detail fragment after orientation change
      */
-    private void setUpMediaDetailOnOrientation() {
+    public void setUpMediaDetailOnOrientation() {
         Fragment mediaDetailFragment = getSupportFragmentManager()
             .findFragmentById(R.id.mediaDetailContainer);
         if (mediaDetailFragment != null) {

@@ -101,4 +101,22 @@ class ReviewActivityTest {
         activity.onOptionsItemSelected(menuItem)
     }
 
+    @Test
+    @Throws(Exception::class)
+    fun testSetUpMediaDetailFragment() {
+        activity.setUpMediaDetailFragment()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testSetUpMediaDetailOnOrientation() {
+        activity.setUpMediaDetailOnOrientation()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnBackPressed() {
+        activity.onBackPressed()
+    }
+
 }
