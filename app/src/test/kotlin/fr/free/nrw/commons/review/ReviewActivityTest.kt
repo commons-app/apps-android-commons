@@ -19,6 +19,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
 import org.wikipedia.AppAdapter
+import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -104,13 +105,19 @@ class ReviewActivityTest {
     @Test
     @Throws(Exception::class)
     fun testSetUpMediaDetailFragment() {
-        activity.setUpMediaDetailFragment()
+        var setUpMediaDetailFragment: Method =
+            ReviewActivity::class.java.getDeclaredMethod("setUpMediaDetailFragment")
+        setUpMediaDetailFragment.isAccessible = true
+        setUpMediaDetailFragment.invoke(activity)
     }
 
     @Test
     @Throws(Exception::class)
     fun testSetUpMediaDetailOnOrientation() {
-        activity.setUpMediaDetailOnOrientation()
+        var setUpMediaDetailFragment: Method =
+            ReviewActivity::class.java.getDeclaredMethod("setUpMediaDetailOnOrientation")
+        setUpMediaDetailFragment.isAccessible = true
+        setUpMediaDetailFragment.invoke(activity)
     }
 
     @Test
