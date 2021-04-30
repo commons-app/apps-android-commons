@@ -11,6 +11,7 @@
 * Inkowik
 * Kghbln
 * Killarnee
+* ManuelFranz
 * Metalhead64
 * Pyscowicz
 * Sujan
@@ -519,9 +520,11 @@
   <string name="theme_dark_name">Dunkel</string>
   <string name="theme_light_name">Hell</string>
   <string name="load_more">Mehr laden</string>
+  <string name="todo_improve">Empfohlene Verbesserungen:</string>
   <string name="add_picture_to_wikipedia_article_title">Bild zu Wikipedia hinzufügen</string>
   <string name="confirm">Bestätigen</string>
   <string name="instructions_title">Anweisungen</string>
+  <string name="wikipedia_instructions_step_7">7. Veröffentliche den Artikel</string>
   <string name="copy_wikicode_to_clipboard">wikicode in die Zwischenablage kopieren</string>
   <string name="pause">pausieren</string>
   <string name="resume">fortfahren</string>
