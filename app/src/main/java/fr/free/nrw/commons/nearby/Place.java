@@ -60,10 +60,14 @@ public class Place implements Parcelable {
         if(!StringUtils.isBlank(itemClass)) {
             classEntityId = itemClass.replace("http://www.wikidata.org/entity/", "");
         }
+        String description = (item.getDescription().getValue() != null && !item.getDescription().getValue().isEmpty())
+            ? StringUtils.capitalize(item.getDescription().getValue()) : "";
+        description += ((item.getLabel().getValue() != null && !item.getLabel().getValue().isEmpty())
+            ? ", (" + item.getLabel().getValue() + ")" : "");
         return new Place(
                 item.getLabel().getValue(),
                 Label.fromText(classEntityId), // list
-                item.getClassLabel().getValue(), // details
+                description, // description and label of Wikidata item
                 PlaceUtils.latLngFromPointString(item.getLocation().getValue()),
                 item.getCommonsCategory().getValue(),
                 new Sitelinks.Builder()
