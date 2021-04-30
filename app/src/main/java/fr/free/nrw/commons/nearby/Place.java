@@ -60,10 +60,20 @@ public class Place implements Parcelable {
         if(!StringUtils.isBlank(itemClass)) {
             classEntityId = itemClass.replace("http://www.wikidata.org/entity/", "");
         }
+        // Capitalize first letter of description when not null and not empty
         String description = (item.getDescription().getValue() != null && !item.getDescription().getValue().isEmpty())
             ? StringUtils.capitalize(item.getDescription().getValue()) : "";
+        // When description is "?" but we have a valid label, just use the label. So replace "?" by "" in description
+        description = (description.equals("?")
+            && (item.getLabel().getValue() != null
+            && !item.getLabel().getValue().isEmpty()) ? "" : description);
+        /** If we have a valid label
+         *     - If have a valid description add the label at the end of the string with parenthesis
+         *     - If we don't have a valid description, string will include only the label. So add it without paranthesis
+         */
         description += ((item.getLabel().getValue() != null && !item.getLabel().getValue().isEmpty())
-            ? ", (" + item.getLabel().getValue() + ")" : "");
+            ? ((description != null && !description.isEmpty())
+                ? ", (" + item.getLabel().getValue() + ")" : item.getLabel().getValue()) : "");
         return new Place(
                 item.getLabel().getValue(),
                 Label.fromText(classEntityId), // list
