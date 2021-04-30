@@ -33,7 +33,7 @@ import retrofit2.Response;
 public class LoginClient {
     @Nullable private Call<MwQueryResponse> tokenCall;
     @Nullable private Call<LoginResponse> loginCall;
-
+    @NonNull private String userLang;
     public interface LoginCallback {
         void success(@NonNull LoginResult result);
         void twoFactorPrompt(@NonNull Throwable caught, @Nullable String token);
@@ -49,7 +49,8 @@ public class LoginClient {
         tokenCall.enqueue(new Callback<MwQueryResponse>() {
             @Override public void onResponse(@NonNull Call<MwQueryResponse> call,
                                              @NonNull Response<MwQueryResponse> response) {
-                login(wiki, userName, password, null, null, response.body().query().loginToken(), cb);
+                login(wiki, userName, password, null, null, response.body().query().loginToken(),
+                    userLang , cb);
             }
 
             @Override
@@ -64,10 +65,11 @@ public class LoginClient {
 
     public void login(@NonNull final WikiSite wiki, @NonNull final String userName, @NonNull final String password,
                @Nullable final String retypedPassword, @Nullable final String twoFactorCode,
-               @Nullable final String loginToken, @NonNull final LoginCallback cb) {
+               @Nullable final String loginToken, @NonNull final String userLang, @NonNull final LoginCallback cb) {
+        this.userLang=userLang;
         loginCall = TextUtils.isEmpty(twoFactorCode) && TextUtils.isEmpty(retypedPassword)
-                ? ServiceFactory.get(wiki).postLogIn(userName, password, loginToken, Service.WIKIPEDIA_URL)
-                : ServiceFactory.get(wiki).postLogIn(userName, password, retypedPassword, twoFactorCode, loginToken, true);
+                ? ServiceFactory.get(wiki).postLogIn(userName, password, loginToken, userLang, Service.WIKIPEDIA_URL)
+                : ServiceFactory.get(wiki).postLogIn(userName, password, retypedPassword, twoFactorCode, loginToken, userLang, true);
         loginCall.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
@@ -114,8 +116,8 @@ public class LoginClient {
         String loginToken = tokenResponse.body().query().loginToken();
 
         Call<LoginResponse> tempLoginCall = StringUtils.defaultIfEmpty(twoFactorCode, "").isEmpty()
-                ? ServiceFactory.get(wiki).postLogIn(userName, password, loginToken, Service.WIKIPEDIA_URL)
-                : ServiceFactory.get(wiki).postLogIn(userName, password, null, twoFactorCode, loginToken, true);
+                ? ServiceFactory.get(wiki).postLogIn(userName, password, loginToken, userLang, Service.WIKIPEDIA_URL)
+                : ServiceFactory.get(wiki).postLogIn(userName, password, null, twoFactorCode, loginToken, userLang, true);
         Response<LoginResponse> response = tempLoginCall.execute();
         LoginResponse loginResponse = response.body();
         if (loginResponse == null) {

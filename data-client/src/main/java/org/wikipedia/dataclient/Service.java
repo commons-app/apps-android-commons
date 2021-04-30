@@ -229,14 +229,14 @@ public interface Service {
     @FormUrlEncoded
     @POST(MW_API_PREFIX + "action=clientlogin&rememberMe=")
     @NonNull Call<LoginClient.LoginResponse> postLogIn(@Field("username") String user, @Field("password") String pass,
-                                                       @Field("logintoken") String token, @Field("loginreturnurl") String url);
+                                                       @Field("logintoken") String token, @Field("uselang") String userLang, @Field("loginreturnurl") String url);
 
     @Headers("Cache-Control: no-cache")
     @FormUrlEncoded
     @POST(MW_API_PREFIX + "action=clientlogin&rememberMe=")
     @NonNull Call<LoginClient.LoginResponse> postLogIn(@Field("username") String user, @Field("password") String pass,
                                                        @Field("retype") String retypedPass, @Field("OATHToken") String twoFactorCode,
-                                                       @Field("logintoken") String token,
+                                                       @Field("logintoken") String token, @Field("uselang") String userLang,
                                                        @Field("logincontinue") boolean loginContinue);
 
     @Headers("Cache-Control: no-cache")
