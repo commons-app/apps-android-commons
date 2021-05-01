@@ -90,6 +90,9 @@ class AchievementsFragmentUnitTests {
     @Mock
     private lateinit var sessionManager: SessionManager
 
+    @Mock
+    private lateinit var sessionManager: SessionManager
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)

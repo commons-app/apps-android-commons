@@ -27,9 +27,6 @@ class ContributionBoundaryCallbackTest {
     internal lateinit var repository: ContributionsRepository
 
     @Mock
-    internal lateinit var sessionManager: SessionManager
-
-    @Mock
     internal lateinit var mediaClient: MediaClient
 
     private lateinit var contributionBoundaryCallback: ContributionBoundaryCallback
@@ -49,14 +46,14 @@ class ContributionBoundaryCallbackTest {
         MockitoAnnotations.initMocks(this)
         scheduler = Schedulers.trampoline()
         contributionBoundaryCallback =
-            ContributionBoundaryCallback(repository, mediaClient, scheduler);
+            ContributionBoundaryCallback(repository, mediaClient, scheduler)
+        contributionBoundaryCallback.userName = "Test"
     }
 
     @Test
     fun testOnZeroItemsLoaded() {
         whenever(repository.save(anyList<Contribution>()))
             .thenReturn(Single.just(listOf(1L, 2L)))
-        whenever(sessionManager.userName).thenReturn("Test")
         whenever(mediaClient.getMediaListForUser(anyString()))
             .thenReturn(Single.just(listOf(media())))
         contributionBoundaryCallback.onZeroItemsLoaded()
@@ -68,7 +65,6 @@ class ContributionBoundaryCallbackTest {
     fun testOnLastItemLoaded() {
         whenever(repository.save(anyList<Contribution>()))
             .thenReturn(Single.just(listOf(1L, 2L)))
-        whenever(sessionManager.userName).thenReturn("Test")
         whenever(mediaClient.getMediaListForUser(anyString()))
             .thenReturn(Single.just(listOf(media())))
         contributionBoundaryCallback.onItemAtEndLoaded(mock(Contribution::class.java))
@@ -80,7 +76,6 @@ class ContributionBoundaryCallbackTest {
     fun testOnFrontItemLoaded() {
         whenever(repository.save(anyList<Contribution>()))
             .thenReturn(Single.just(listOf(1L, 2L)))
-        whenever(sessionManager.userName).thenReturn("Test")
         whenever(mediaClient.getMediaListForUser(anyString()))
             .thenReturn(Single.just(listOf(media())))
         contributionBoundaryCallback.onItemAtFrontLoaded(mock(Contribution::class.java))
@@ -92,7 +87,6 @@ class ContributionBoundaryCallbackTest {
     fun testFetchContributions() {
         whenever(repository.save(anyList<Contribution>()))
             .thenReturn(Single.just(listOf(1L, 2L)))
-        whenever(sessionManager.userName).thenReturn("Test")
         whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(
             Single.just(listOf(media()))
         )
@@ -103,7 +97,6 @@ class ContributionBoundaryCallbackTest {
 
     @Test
     fun testFetchContributionsFailed() {
-        whenever(sessionManager.userName).thenReturn("Test")
         whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(Single.error(Exception("Error")))
         contributionBoundaryCallback.fetchContributions()
         verifyZeroInteractions(repository);

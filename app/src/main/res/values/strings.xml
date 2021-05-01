@@ -660,4 +660,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="achievements_of_user">Achievements of User: %s</string>
   <string name="contributions_of_user">Contributions of User: %s</string>
   <string name="view_user_page">View user page</string>
+  <string name="achievements_of_user">Achievements of user: %s</string>
+  <string name="contributions_of_user">Contributions of user: %s</string>
+
 </resources>
