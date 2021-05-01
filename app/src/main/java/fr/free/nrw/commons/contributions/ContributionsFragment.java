@@ -621,11 +621,19 @@ public class ContributionsFragment
         return mediaDetailPagerFragment;
     }
 
-    // click listener to toggle description
-    private OnClickListener toggleDescriptionListener = view -> {
-      if(view.getVisibility() == View.GONE) {
-        view.setVisibility(View.VISIBLE);
-      } else {view.setVisibility(View.GONE); }
-    };
+  // click listener to toggle description
+  private View.OnClickListener toggleDescriptionListener = new View.OnClickListener() {
+
+      @Override
+      public void onClick(View view) {
+          View view2 = limitedConnectionDescriptionTv;
+          if (view2.getVisibility() == View.GONE) {
+              view2.setVisibility(View.VISIBLE);
+          } else {
+              view2.setVisibility(View.GONE);
+          }
+      }
+  };
+
 }
 
