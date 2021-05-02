@@ -33,7 +33,14 @@ import retrofit2.Response;
 public class LoginClient {
     @Nullable private Call<MwQueryResponse> tokenCall;
     @Nullable private Call<LoginResponse> loginCall;
-    @NonNull private String userLang;
+    /**
+     * userLanguage
+     * It holds the value of the user's device language code.
+     * For example, if user's device language is English it will hold En
+     * The value will be fetched when the user clicks Login Button in the LoginActivity
+     */
+    @NonNull private String userLanguage;
+    
     public interface LoginCallback {
         void success(@NonNull LoginResult result);
         void twoFactorPrompt(@NonNull Throwable caught, @Nullable String token);
@@ -50,7 +57,7 @@ public class LoginClient {
             @Override public void onResponse(@NonNull Call<MwQueryResponse> call,
                                              @NonNull Response<MwQueryResponse> response) {
                 login(wiki, userName, password, null, null, response.body().query().loginToken(),
-                    userLang , cb);
+                    userLanguage, cb);
             }
 
             @Override
@@ -65,11 +72,12 @@ public class LoginClient {
 
     public void login(@NonNull final WikiSite wiki, @NonNull final String userName, @NonNull final String password,
                @Nullable final String retypedPassword, @Nullable final String twoFactorCode,
-               @Nullable final String loginToken, @NonNull final String userLang, @NonNull final LoginCallback cb) {
-        this.userLang=userLang;
+               @Nullable final String loginToken, @NonNull final String userLanguage, @NonNull final LoginCallback cb) {
+        this.userLanguage = userLanguage;
         loginCall = TextUtils.isEmpty(twoFactorCode) && TextUtils.isEmpty(retypedPassword)
-                ? ServiceFactory.get(wiki).postLogIn(userName, password, loginToken, userLang, Service.WIKIPEDIA_URL)
-                : ServiceFactory.get(wiki).postLogIn(userName, password, retypedPassword, twoFactorCode, loginToken, userLang, true);
+                ? ServiceFactory.get(wiki).postLogIn(userName, password, loginToken, userLanguage, Service.WIKIPEDIA_URL)
+                : ServiceFactory.get(wiki).postLogIn(userName, password, retypedPassword, twoFactorCode, loginToken,
+                    userLanguage, true);
         loginCall.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
@@ -116,8 +124,9 @@ public class LoginClient {
         String loginToken = tokenResponse.body().query().loginToken();
 
         Call<LoginResponse> tempLoginCall = StringUtils.defaultIfEmpty(twoFactorCode, "").isEmpty()
-                ? ServiceFactory.get(wiki).postLogIn(userName, password, loginToken, userLang, Service.WIKIPEDIA_URL)
-                : ServiceFactory.get(wiki).postLogIn(userName, password, null, twoFactorCode, loginToken, userLang, true);
+                ? ServiceFactory.get(wiki).postLogIn(userName, password, loginToken, userLanguage, Service.WIKIPEDIA_URL)
+                : ServiceFactory.get(wiki).postLogIn(userName, password, null, twoFactorCode, loginToken,
+                    userLanguage, true);
         Response<LoginResponse> response = tempLoginCall.execute();
         LoginResponse loginResponse = response.body();
         if (loginResponse == null) {
