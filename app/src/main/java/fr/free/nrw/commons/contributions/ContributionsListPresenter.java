@@ -103,5 +103,4 @@ public class ContributionsListPresenter implements UserActionListener {
         .subscribeOn(ioThreadScheduler)
         .subscribe());
   }
-
 }

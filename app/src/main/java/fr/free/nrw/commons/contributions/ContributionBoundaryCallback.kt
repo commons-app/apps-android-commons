@@ -16,21 +16,17 @@ import javax.inject.Named
  */
 class ContributionBoundaryCallback @Inject constructor(
     private val repository: ContributionsRepository,
-    private val sessionManager: SessionManager,
     private val mediaClient: MediaClient,
     @param:Named(CommonsApplicationModule.IO_THREAD) private val ioThreadScheduler: Scheduler
 ) : BoundaryCallback<Contribution>() {
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
-    var userName: String? = null
+    var userName: String?=null
 
     /**
      * It is triggered when the list has no items User's Contributions are then fetched from the
      * network
      */
     override fun onZeroItemsLoaded() {
-        if (sessionManager.userName != null) {
-            mediaClient.resetUserNameContinuation(sessionManager.userName!!)
-        }
         fetchContributions()
     }
 

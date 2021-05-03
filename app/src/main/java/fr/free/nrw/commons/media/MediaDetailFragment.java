@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.media;
 
-import static android.app.Activity.RESULT_CANCELED;
-import static android.app.Activity.RESULT_OK;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_NEEDING_CATEGORIES;
@@ -21,7 +19,6 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -1253,5 +1250,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     public interface Callback {
         void nominatingForDeletion(int index);
+    }
+
+
+    @OnClick(R.id.mediaDetailAuthor)
+    public void onAuthorViewClicked(){
+        if(media==null || media.getUser()==null){
+            return;
+        }
+
+        ProfileActivity.startYourself(getActivity(), media.getUser(), true);
     }
 }

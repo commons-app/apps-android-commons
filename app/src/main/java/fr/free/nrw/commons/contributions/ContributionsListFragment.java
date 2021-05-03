@@ -38,6 +38,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -50,7 +51,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.dataclient.WikiSite;
-import timber.log.Timber;
 
 /**
  * Created by root on 01.06.2018.

@@ -31,7 +31,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
   @BindView(R.id.contributionTitle)
   TextView titleView;
   @BindView(R.id.authorView)
-  TextView authorView;
+  HtmlTextView authorView;
   @BindView(R.id.contributionState)
   TextView stateView;
   @BindView(R.id.contributionSequenceNumber)
