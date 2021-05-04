@@ -68,7 +68,8 @@ import timber.log.Timber;
 )
 
 @AcraMailSender(
-        mailTo = "commons-app-android-private@googlegroups.com"
+        mailTo = "commons-app-android-private@googlegroups.com",
+        reportAsFile = false
 )
 
 @AcraDialog(
