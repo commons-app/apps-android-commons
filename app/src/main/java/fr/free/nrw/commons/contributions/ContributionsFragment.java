@@ -8,6 +8,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +25,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.work.WorkInfo;
+import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
@@ -51,6 +54,7 @@ import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.upload.worker.UploadWorker;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -144,7 +148,7 @@ public class ContributionsFragment
         }
 
         initFragments();
-
+        upDateUploadCount();
         if(shouldShowMediaDetailsFragment){
             showMediaDetailPagerFragment();
         }else{
@@ -616,6 +620,19 @@ public class ContributionsFragment
     // Getter for mediaDetailPagerFragment
     public MediaDetailPagerFragment getMediaDetailPagerFragment() {
         return mediaDetailPagerFragment;
+    }
+
+    /**
+     * this function updated the number of contributions
+     */
+    void upDateUploadCount() {
+        WorkManager.getInstance(getContext())
+            .getWorkInfosForUniqueWorkLiveData(UploadWorker.class.getSimpleName()).observe(
+            getViewLifecycleOwner(), workInfos -> {
+                if (workInfos.size() > 0) {
+                    setUploadCount();
+                }
+            });
     }
 }
 
