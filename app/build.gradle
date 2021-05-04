@@ -57,8 +57,8 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp-ws:$OKHTTP_VERSION"
 
     // Logging
-    implementation 'ch.acra:acra-dialog:5.3.0'
-    implementation 'ch.acra:acra-mail:5.3.0'
+    implementation 'ch.acra:acra-dialog:5.8.1-beta11'
+    implementation 'ch.acra:acra-mail:5.8.1-beta11'
     implementation 'org.slf4j:slf4j-api:1.7.25'
     api('com.github.tony19:logback-android-classic:1.1.1-6') {
         exclude group: 'com.google.android', module: 'android'
