@@ -48,6 +48,13 @@ abstract class BasePagingFragment<T> : CommonsDaggerSupportFragment(),
         )
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        paginatedSearchResultsList.apply {
+            layoutManager = GridLayoutManager(context, if (isPortrait) 1 else 2)
+        }
+    }
+
     override fun observePagingResults(searchResults: LiveData<PagedList<T>>) {
         this.searchResults?.removeObservers(viewLifecycleOwner)
         this.searchResults = searchResults
