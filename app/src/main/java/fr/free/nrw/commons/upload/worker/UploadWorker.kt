@@ -142,7 +142,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     }
 
     override suspend fun doWork(): Result {
-        var countUpload=0
+        var countUpload = 0
         notificationManager = NotificationManagerCompat.from(appContext)
         val processingUploads = getNotificationBuilder(
             CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL
@@ -183,13 +183,14 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                             contribution.state = Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE
                             contributionDao.save(contribution)
                         } else {
-                            //To Nothing
+                            //Else statement fix:'if' must have both main and 'else' branches if used as an expression
                         }
                     } else {
                         contribution.transferred = 0
                         contribution.state = Contribution.STATE_IN_PROGRESS
                         contributionDao.save(contribution)
                         uploadContribution(contribution = contribution)
+                        //This function updates the liveData when one media is uploaded
                         setProgressAsync(Data.Builder().putInt("progress", countUpload).build())
                         countUpload++
                     }

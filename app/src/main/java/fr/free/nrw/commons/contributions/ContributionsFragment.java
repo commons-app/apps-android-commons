@@ -623,7 +623,7 @@ public class ContributionsFragment
     }
 
     /**
-     * this function updated the number of contributions
+     * this function updates the number of contributions
      */
     void upDateUploadCount() {
         WorkManager.getInstance(getContext())
