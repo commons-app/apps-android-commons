@@ -11,13 +11,13 @@
 * АдмиралАнимЕ
 -->
 <resources>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Започвам %1$d качване</item>
-    <item quantity="other">Започвам %1$d качвания</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Обработване на %d качване</item>
+    <item quantity="other">Обработване на %d качвания</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d качване</item>
-    <item quantity="other">%1$d качвания</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d качване</item>
+    <item quantity="other">%d качвания</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Изображението ще бъде лицензирано под условията на лиценза %1$s</item>
@@ -55,7 +55,7 @@
   <string name="uploading_started">Качването започна!</string>
   <string name="upload_completed_notification_title">Файл %1$s е качен!</string>
   <string name="upload_completed_notification_text">Докоснете, за да видите качения файл</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Започвам с качването на „%1$s“</string>
+  <string name="upload_progress_notification_title_start">Качване на файл: %s</string>
   <string name="upload_progress_notification_title_in_progress">„%1$s“ е в процес на качване</string>
   <string name="upload_progress_notification_title_finishing">Завършвам с качване на „%1$s“</string>
   <string name="upload_failed_notification_title">Качването на „%1$s“ е неуспешно</string>
@@ -115,7 +115,7 @@
   <string name="license_name_cc_by_sa_four">Признание-Споделяне на споделеното 4.0</string>
   <string name="license_name_cc_by_four">Признание 4.0</string>
   <string name="license_name_cc_by_sa">Признание-Споделяне на споделеното 3.0</string>
-  <string name="license_name_cc_by">Признание 3.0</string>
+  <string name="license_name_cc_by"> Признание 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -283,7 +283,7 @@
   <string name="nearby_card_permission_explanation">Искате ли да използвате текущото си местоположение за показване на близките места, които се нуждаят от снимки?</string>
   <string name="unable_to_display_nearest_place">Не мога да покажа най-близкото място, където имам нужда от изображения, без да давам разрешение за местоположение</string>
   <string name="never_ask_again">Не питай повече</string>
-  <string name="display_location_permission_title" fuzzy="true">Разрешение за показване на местоположение</string>
+  <string name="display_location_permission_title">Поискайте права за местоположение</string>
   <string name="display_location_permission_explanation">Потърсете разрешение за местоположение, когато трябва да уведомите за местоположението.</string>
   <string name="ends_on">Завършва:</string>
   <string name="display_campaigns">Показване на кампании</string>

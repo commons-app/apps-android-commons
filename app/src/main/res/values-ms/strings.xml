@@ -132,6 +132,8 @@
   <string name="mediaimage_failed">Imej Media Gagal</string>
   <string name="no_subcategory_found">Tiada subkategori dijumpai</string>
   <string name="cancel">Batalkan</string>
+  <string name="navigation_drawer_open">Buka</string>
+  <string name="navigation_drawer_close">Tutup</string>
   <string name="navigation_item_upload">Muat naik</string>
   <string name="navigation_item_nearby">Berdekatan</string>
   <string name="navigation_item_about">Perihal</string>
@@ -141,6 +143,7 @@
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Pemberitahuan</string>
   <string name="no_description_found">tiada huraian dijumpai</string>
+  <string name="nearby_info_menu_commons_article">Laman fail Commons</string>
   <string name="nearby_info_menu_wikidata_article">Butir Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Rencana Wikipedia</string>
   <string name="upload_problem_image_dark">Imej terlalu gelap.</string>
@@ -168,6 +171,7 @@
   <string name="no_images_found">Tiada imej dijumpai!</string>
   <string name="block_notification_title">Disekat</string>
   <string name="block_notification">Anda disekat daripada menyunting Commons</string>
+  <string name="menu_search_button">Cari</string>
   <string name="search_tab_title_media">Media</string>
   <string name="search_tab_title_categories">Kategori</string>
   <string name="search_tab_title_depictions">Butir</string>
