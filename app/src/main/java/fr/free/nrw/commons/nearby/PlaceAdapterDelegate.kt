@@ -51,7 +51,7 @@ fun placeAdapterDelegate(
                 tvDesc.setText(R.string.no_description_found)
                 tvDesc.visibility = INVISIBLE
             } else {
-                tvDesc.text = descriptionText
+                tvDesc.text = descriptionText.replace("\\(.*?\\)","");
             }
             distance.text = item.distance
             icon.setImageResource(item.label.icon)
