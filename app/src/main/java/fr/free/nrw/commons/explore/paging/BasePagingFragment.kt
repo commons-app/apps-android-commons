@@ -48,6 +48,9 @@ abstract class BasePagingFragment<T> : CommonsDaggerSupportFragment(),
         )
     }
 
+    /**
+     * Called on configuration change, update the spanCount according to the orientation state.
+     */
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         paginatedSearchResultsList.apply {
