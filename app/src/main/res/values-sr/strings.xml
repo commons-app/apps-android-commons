@@ -62,7 +62,7 @@
   <string name="uploading_started">Отпремање је започето.</string>
   <string name="upload_completed_notification_title">Датотека „%1$s” је отпремљена.</string>
   <string name="upload_completed_notification_text">Додирните да бисте видели отпремање</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Почиње отпремање датотеке „%1$s”</string>
+  <string name="upload_progress_notification_title_start">Отпремање датотеке „%s”</string>
   <string name="upload_progress_notification_title_in_progress">Отпремање датотеке „%1$s”</string>
   <string name="upload_progress_notification_title_finishing">Завршавање отпремања датотеке „%1$s”</string>
   <string name="upload_failed_notification_title">Отпремање датотеке „%1$s” није успело</string>
