@@ -40,7 +40,7 @@
       app:drawableTint="@color/white"
       app:drawableStartCompat="@drawable/ic_baseline_cloud_off_24"/>
     <TextView
-      android:id="@+id/limited_connection_description_tv"
+      android:id="@+id/limited_connection_description_text_view"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:textColor="@android:color/white"
