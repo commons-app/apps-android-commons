@@ -2,8 +2,6 @@ package fr.free.nrw.commons.contributions;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -281,7 +279,11 @@ public class MainActivity  extends BaseActivity
             }
         } else if (exploreFragment != null && activeFragment == ActiveFragment.EXPLORE) {
             // Means that explore fragment is visible
-            exploreFragment.onBackPressed();
+            if (!exploreFragment.onBackPressed()) {
+                if (applicationKvStore.getBoolean("login_skipped")) {
+                    super.onBackPressed();
+                }
+            }
         } else if (bookmarkFragment != null && activeFragment == ActiveFragment.BOOKMARK) {
             // Means that bookmark fragment is visible
             bookmarkFragment.onBackPressed();
