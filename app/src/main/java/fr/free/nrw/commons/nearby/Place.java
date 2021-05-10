@@ -73,8 +73,8 @@ public class Place implements Parcelable {
         description = ((item.getLabel().getValue() != null && !item.getLabel().getValue().isEmpty())
             ? item.getLabel().getValue()
                 + ((description != null && !description.isEmpty())
-                ? " (" + item.getLabel().getValue() + ")" : "")
-            : "" + description);
+                ? " (" + description + ")" : "")
+            : description);
         return new Place(
                 item.getLabel().getValue(),
                 Label.fromText(classEntityId), // list
