@@ -149,6 +149,14 @@ class MediaClient @Inject constructor(
         resetContinuation(CATEGORY_CONTINUATION_PREFIX, category)
     }
 
+    /**
+     * Call the resetUserContinuation method
+     *
+     * @param userName the username
+     */
+    fun resetUserNameContinuation(userName: String) =
+        resetUserContinuation("user_", userName)
+
     override fun responseMapper(
         networkResult: Single<MwQueryResponse>,
         key: String?

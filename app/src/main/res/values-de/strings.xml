@@ -11,6 +11,7 @@
 * Inkowik
 * Kghbln
 * Killarnee
+* ManuelFranz
 * Metalhead64
 * Pyscowicz
 * Sujan
@@ -518,10 +519,25 @@
   <string name="setting_wallpaper_dialog_message">Hintergrundbild wird festgelegt. Bitte warten...</string>
   <string name="theme_dark_name">Dunkel</string>
   <string name="theme_light_name">Hell</string>
+  <string name="recommend_high_accuracy_mode">Die besten Ergebnisse erzielst du, wenn du den Modus „Hohe Genauigkeit“ wählst.</string>
+  <string name="ask_to_turn_location_on">Standort einschalten?</string>
+  <string name="nearby_needs_location">Für die Funktion „in der Nähe“ muss der Standort aktiviert sein, um richtig zu funktionieren</string>
+  <string name="use_location_from_similar_image">Hast du diese beiden Bilder am selben Ort aufgenommen? Möchtest du den Breiten- und Längengrad des rechten Bildes verwenden?</string>
   <string name="load_more">Mehr laden</string>
+  <string name="nearby_no_results">Keine Orte gefunden, versuche, deine Suchkriterien zu ändern.</string>
+  <string name="todo_improve">Empfohlene Verbesserungen:</string>
+  <string name="missing_category">- Füge Kategorien zu diesem Bild hinzu, um die Benutzerfreundlichkeit zu verbessern.</string>
+  <string name="missing_article">- Füge dieses Bild zu dem zugehörigen Wikipedia-Artikel hinzu, der keine Bilder hat.</string>
   <string name="add_picture_to_wikipedia_article_title">Bild zu Wikipedia hinzufügen</string>
+  <string name="add_picture_to_wikipedia_article_desc">Möchtest du dieses Bild zum Wikipedia-Artikel in der Sprache %1$s hinzufügen?</string>
   <string name="confirm">Bestätigen</string>
   <string name="instructions_title">Anweisungen</string>
+  <string name="wikipedia_instructions_step_1">1. Verwende den folgenden Wikitext:</string>
+  <string name="wikipedia_instructions_step_2">2. Mit einem Klick auf Bestätigen wird der Wikipedia-Artikel geöffnet</string>
+  <string name="wikipedia_instructions_step_3">3. Suche einen geeigneten Abschnitt im Artikel für dein Bild</string>
+  <string name="wikipedia_instructions_step_4">4. Klicken Sie auf das Symbol „Bearbeiten“ (das einem Stift ähnelt) für diesen Abschnitt.</string>
+  <string name="wikipedia_instructions_step_5">5. Füge den wikitext an der entsprechenden Stelle ein.</string>
+  <string name="wikipedia_instructions_step_7">7. Veröffentliche den Artikel</string>
   <string name="copy_wikicode_to_clipboard">wikicode in die Zwischenablage kopieren</string>
   <string name="pause">pausieren</string>
   <string name="resume">fortfahren</string>
