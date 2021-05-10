@@ -6,7 +6,7 @@
   android:layout_marginHorizontal="8dp"
   android:layout_marginVertical="8dp"
   app:elevation="6dp">
-<!--TODO: make it as master-->
+
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
@@ -66,5 +66,4 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.cardview.widget.CardView>

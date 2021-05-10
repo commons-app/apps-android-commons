@@ -75,7 +75,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         notifyItemInserted(uploadMediaDetails.size());
     }
 
-    public void removeDescription(UploadMediaDetail uploadMediaDetail, int position) {
+    public void removeDescription(final UploadMediaDetail uploadMediaDetail, final int position) {
         this.uploadMediaDetails.remove(uploadMediaDetail);
         notifyItemRemoved(position);
     }
@@ -192,20 +192,24 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
 
             if (description.getSelectedLanguageIndex() == -1) {
                 if (!TextUtils.isEmpty(savedLanguageValue)) {
-                    // If user has chosen a default language from settings activity savedLanguageValue is not null
+                    // If user has chosen a default language from settings activity
+                    // savedLanguageValue is not null
                     spinnerDescriptionLanguages
                         .setSelection(languagesAdapter.getIndexOfLanguageCode(savedLanguageValue));
                 } else {
                     //Checking whether Language Code attribute is null or not.
                     if (uploadMediaDetails.get(position).getLanguageCode() != null) {
-                        //If it is not null that means it is fetching details from the previous upload (i.e. when user has pressed copy previous caption & description)
+                        //If it is not null that means it is fetching details from the previous
+                        // upload (i.e. when user has pressed copy previous caption & description)
                         //hence providing same language code for the current upload.
                         spinnerDescriptionLanguages.setSelection(languagesAdapter
-                            .getIndexOfLanguageCode(uploadMediaDetails.get(position).getLanguageCode()), true);
+                            .getIndexOfLanguageCode(uploadMediaDetails.get(position)
+                            .getLanguageCode()), true);
                     } else {
                         if (position == 0) {
-                            int defaultLocaleIndex = languagesAdapter
-                                .getIndexOfUserDefaultLocale(spinnerDescriptionLanguages.getContext());
+                            final int defaultLocaleIndex = languagesAdapter
+                                .getIndexOfUserDefaultLocale(spinnerDescriptionLanguages
+                                .getContext());
                             spinnerDescriptionLanguages.setSelection(defaultLocaleIndex, true);
                         } else {
                             spinnerDescriptionLanguages.setSelection(0, true);
