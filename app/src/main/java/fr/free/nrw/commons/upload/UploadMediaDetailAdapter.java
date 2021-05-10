@@ -194,8 +194,8 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                 if (!TextUtils.isEmpty(savedLanguageValue)) {
                     // If user has chosen a default language from settings activity
                     // savedLanguageValue is not null
-                    spinnerDescriptionLanguages
-                        .setSelection(languagesAdapter.getIndexOfLanguageCode(savedLanguageValue));
+                    spinnerDescriptionLanguages.setSelection(languagesAdapter
+                        .getIndexOfLanguageCode(savedLanguageValue));
                 } else {
                     //Checking whether Language Code attribute is null or not.
                     if (uploadMediaDetails.get(position).getLanguageCode() != null) {
