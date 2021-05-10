@@ -2,6 +2,7 @@ package fr.free.nrw.commons.media
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Looper
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -23,13 +24,16 @@ import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
+import org.robolectric.Shadows
 import org.robolectric.annotation.Config
+import org.robolectric.annotation.LooperMode
 import org.wikipedia.AppAdapter
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
+@LooperMode(LooperMode.Mode.PAUSED)
 class MediaDetailPagerFragmentUnitTests {
 
     private lateinit var fragment: MediaDetailPagerFragment
@@ -98,6 +102,7 @@ class MediaDetailPagerFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnCreateSaveInstanceNotNull() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onCreate(outState)
     }
 
@@ -121,6 +126,7 @@ class MediaDetailPagerFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSetWallpaperCaseNonNull() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(media.imageUrl).thenReturn("url")
         val method: Method = MediaDetailPagerFragment::class.java.getDeclaredMethod(
             "setWallpaper",
