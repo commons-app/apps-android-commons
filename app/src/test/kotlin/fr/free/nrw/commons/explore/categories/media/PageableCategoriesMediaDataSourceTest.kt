@@ -42,7 +42,7 @@ class PageableCategoriesMediaDataSourceTest {
         dataSource.onQueryUpdated("test")
         whenever(mediaClient.getMediaListFromCategory("test"))
             .thenReturn(Single.just(emptyList()))
-        Assert.assertEquals(dataSource.loadFunction(-1, 1),  emptyList<String>())
+        Assert.assertEquals(dataSource.loadFunction(-1, 1), emptyList<String>())
         verify(mediaClient, never()).resetCategoryContinuation("test")
     }
 }

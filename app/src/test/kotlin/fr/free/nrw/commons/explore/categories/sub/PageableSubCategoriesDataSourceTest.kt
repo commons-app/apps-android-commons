@@ -41,7 +41,7 @@ class PageableSubCategoriesDataSourceTest{
         dataSource.onQueryUpdated("test")
         whenever(categoryClient.getSubCategoryList("test"))
             .thenReturn(Single.just(emptyList()))
-        Assert.assertEquals(dataSource.loadFunction(-1, 1),  emptyList<String>())
+        Assert.assertEquals(dataSource.loadFunction(-1, 1), emptyList<String>())
         verify(categoryClient, never()).resetSubCategoryContinuation("test")
     }
 }
