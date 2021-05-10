@@ -4,6 +4,7 @@ import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.CommonsApplication
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers
@@ -45,6 +46,7 @@ class ThanksClientTest {
      * Test thanks
      */
     @Test
+    @Ignore()
     fun testThanks() {
         Mockito.`when`(csrfTokenClient.tokenBlocking).thenReturn("test")
         Mockito.`when`(commonsApplication.userAgent).thenReturn("test")

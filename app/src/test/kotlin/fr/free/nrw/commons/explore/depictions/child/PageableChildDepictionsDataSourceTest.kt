@@ -6,7 +6,7 @@ import fr.free.nrw.commons.explore.paging.LiveDataConverter
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import io.reactivex.Single
 import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.MatcherAssert.assertThat
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -30,6 +30,6 @@ class PageableChildDepictionsDataSourceTest {
         dataSource.onQueryUpdated("test")
         whenever(okHttpJsonApiClient.getChildDepictions("test", 0, 1))
             .thenReturn(Single.just(listOf(depictedItem())))
-        assertThat(dataSource.loadFunction(1, 0), `is`(listOf(depictedItem())))
+        Assert.assertEquals(dataSource.loadFunction(1, 0), `is`(listOf(depictedItem())))
     }
 }
