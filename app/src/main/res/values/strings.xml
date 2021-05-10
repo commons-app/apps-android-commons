@@ -10,12 +10,12 @@
   </plurals>
   <string name="starting_uploads"> Starting Uploads</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Starting %1$d upload</item>
-    <item quantity="other">Starting %1$d uploads</item>
+    <item quantity="one">Processing %d upload</item>
+    <item quantity="other">Processing %d uploads</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d upload</item>
-    <item quantity="other">%1$d uploads</item>
+    <item quantity="one">%d upload</item>
+    <item quantity="other">%d uploads</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">This image will be licensed under %1$s</item>
@@ -54,7 +54,7 @@
   <string name="uploading_queued">Upload queued (limited connection mode enabled)</string>
   <string name="upload_completed_notification_title">%1$s uploaded!</string>
   <string name="upload_completed_notification_text">Tap to view your upload</string>
-  <string name="upload_progress_notification_title_start">Starting %1$s upload</string>
+  <string name="upload_progress_notification_title_start">Uploading file: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s uploading</string>
   <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
   <string name="upload_failed_notification_title">Uploading %1$s failed</string>
@@ -460,7 +460,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="images_featured_explanation">Featured pictures are images from highly skilled photographers and illustrators that the Wikimedia Commons community has chosen as some of the highest quality on the site.</string>
   <string name="images_via_nearby_explanation">Images Uploaded via Nearby places are the images which are uploaded by discovering places on the map.</string>
   <string name="thanks_received_explanation">This feature allows editors to send a Thank you notification to users who make useful edits – by using a small thank link on the history page or diff page.</string>
-  <string name="previous_image_caption_description">Copy previous captions &amp; description</string>
+  <string name="copy_image_caption_description">Copy to subsequent media</string>
+  <string name="copied_successfully">Copied</string>
   <string name="welcome_do_upload_content_description">Examples of good images to upload to Commons</string>
   <string name="welcome_dont_upload_content_description">Examples of images not to upload</string>
   <string name="skip_image">Skip this image</string>
@@ -610,5 +611,6 @@ Upload your first media by tapping on the add button.</string>
   <string name="menu_view_category_page">View category page</string>
   <string name="menu_view_item_page">View item page</string>
   <string name="remove">Removes a caption and description</string>
+  <string name="read_help_link">Read more</string>
 
 </resources>

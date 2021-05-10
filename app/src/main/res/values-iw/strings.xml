@@ -16,6 +16,7 @@
 * Strayblues
 * Uziel302
 * YaronSh
+* דגש
 * דגש חזק
 * חיים
 -->
@@ -34,16 +35,16 @@
   </plurals>
   <string name="starting_uploads">ההעלאות מתחילות</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">התחלת העלאה</item>
-    <item quantity="two">התחלת 1$d% העלאות</item>
-    <item quantity="many">התחלת 1$d% העלאות</item>
-    <item quantity="other">התחלת 1$d% העלאות</item>
+    <item quantity="one">עיבוד העלאה</item>
+    <item quantity="two">עיבוד d% העלאות</item>
+    <item quantity="many">עיבוד d% העלאות</item>
+    <item quantity="other">עיבוד d% העלאות</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">העלאה אחת</item>
-    <item quantity="two">%1$d העלאות</item>
-    <item quantity="many">%1$d העלאות</item>
-    <item quantity="other">%1$d העלאות</item>
+    <item quantity="two">%d העלאות</item>
+    <item quantity="many">%d העלאות</item>
+    <item quantity="other">%d העלאות</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">התמונה הזאת תפורסם ברישיון %1$s</item>
@@ -88,7 +89,7 @@
   <string name="uploading_queued">ההעלאות בתור (מופעל מצב חיבור מוגבל)</string>
   <string name="upload_completed_notification_title">הקובץ %1$s הועלה!</string>
   <string name="upload_completed_notification_text">ללחוץ כאן כדי לצפות בהעלאה שלך</string>
-  <string name="upload_progress_notification_title_start">התחלת העלאת %1$s</string>
+  <string name="upload_progress_notification_title_start">העלאת קובץ: %s</string>
   <string name="upload_progress_notification_title_in_progress">מתבצעת העלאת %1$s</string>
   <string name="upload_progress_notification_title_finishing">העלאת %1$s מסתיימת</string>
   <string name="upload_failed_notification_title">העלאת %1$s נכשלה</string>
@@ -462,7 +463,8 @@
   <string name="images_featured_explanation">תמונות מובילות הן תמונות של צלמים ומאיירים מיומנים אותם בחרה קהילת ויקישיתוף בזכות איכות התוצר שהם תורמים לאתר.</string>
   <string name="images_via_nearby_explanation">תמונות שהועלו דרך מקומות בסביבה הן התמונות שנשלחות על ידי גילוי מקומות במפה.</string>
   <string name="thanks_received_explanation">תכונה זו מאפשרת לעורכים לשלוח מסרי תודה למשתמשים שביצעו עריכות מועילות - על ידי שימוש בקישור תודה בעמוד ההיסטוריה או עמוד ההבדלים.</string>
-  <string name="previous_image_caption_description">העתקת כיתבוים ותיאורים קודמים</string>
+  <string name="copy_image_caption_description">העתקה למדיה הלאה</string>
+  <string name="copied_successfully">הועתק</string>
   <string name="welcome_do_upload_content_description">דוגמאות של תמונות טובות להעלאה לוויקישיתוף</string>
   <string name="welcome_dont_upload_content_description">דוגמאות של תמונות שאין להעלות</string>
   <string name="skip_image">דילוג על התמונה הזאת</string>
@@ -603,4 +605,5 @@
   <string name="media_detail_step_title">פרטי מדיה</string>
   <string name="menu_view_category_page">הצגת דף הקטגוריה</string>
   <string name="menu_view_item_page">הצגת דף הפריט</string>
+  <string name="read_help_link">מידע נוסף</string>
 </resources>

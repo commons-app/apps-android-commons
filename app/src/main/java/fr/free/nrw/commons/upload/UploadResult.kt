@@ -14,10 +14,10 @@ data class UploadResult(
     val filename: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readInt(),
-        parcel.readString()
+        parcel.readString()?:"",
+        parcel.readString()?:"",
+        parcel.readInt()?:0,
+        parcel.readString()?:""
     ) {
     }
 

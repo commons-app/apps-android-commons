@@ -19,11 +19,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Startar uppladdningar</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Startar %1$d uppladdning</item>
     <item quantity="other">Startar %1$d uppladdningar</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d uppladdning</item>
     <item quantity="other">%1$d uppladdningar</item>
   </plurals>
@@ -64,7 +64,7 @@
   <string name="uploading_queued">Kölagd uppladdning (begränsat anslutningsläge har aktiverats)</string>
   <string name="upload_completed_notification_title">%1$s överförd!</string>
   <string name="upload_completed_notification_text">Tryck för att visa din uppladdning</string>
-  <string name="upload_progress_notification_title_start">Påbörjar uppladdning av %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Påbörjar uppladdning av %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s laddas upp</string>
   <string name="upload_progress_notification_title_finishing">Avslutar uppladdning av %1$s</string>
   <string name="upload_failed_notification_title">Uppladdning av %1$s misslyckades</string>
@@ -421,8 +421,8 @@
   <string name="review_category_explanation">Denna bild finns i %1$s kategorier.</string>
   <string name="review_spam_report_question">Det är irrelevant eftersom det är</string>
   <string name="review_c_violation_report_question">Den bryter mot upphovsrätten eftersom den är</string>
-  <string name="review_thanks_yes_button_text" fuzzy="true">Visst, varför inte</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">Nästa bild</string>
+  <string name="review_thanks_yes_button_text">Nästa bild</string>
+  <string name="review_thanks_no_button_text">Visst, varför inte</string>
   <string name="skip_image_explanation">När du klickar på knappen får du en annan bild som laddades upp nyligen från Wikimedia Commons</string>
   <string name="review_image_explanation">Du kan granska bilder och förbättra kvaliteten för Wikimedia Commons.\n De fyra granskningsparametrarna är: \n - Är denna bild relevant \n - Följer denna bild upphovsrättsreglerna? \n - Är denna bild riktigt kategoriserad? \n - Om allting får bra kan du också tacka bidragsgivaren.</string>
   <string name="no_image">Inga bilder används</string>
@@ -438,7 +438,8 @@
   <string name="images_featured_explanation">Utmärkta bilder är bilder från skickliga fotografer och illustratörer som gemenskapen på Wikimedia Commons har valt ut som bilder med den högsta kvalitetet på webbplatsen.</string>
   <string name="images_via_nearby_explanation">Bilder som har laddats upp via \"Platser i närheten\" är bilderna som laddas upp genom att upptäcka platser på kartan.</string>
   <string name="thanks_received_explanation">Denna funktion låter redigerare skicka en tackavisering till användare som gör användbara redigeringar – genom att använda en liten tacklänk på historik- eller diff-sidor.</string>
-  <string name="previous_image_caption_description">Kopiera föregående bildtexter och beskrivning</string>
+  <string name="copy_image_caption_description">Kopiera till efterföljande media</string>
+  <string name="copied_successfully">Kopierad</string>
   <string name="welcome_do_upload_content_description">Exempel på bra bilder att ladda upp på Commons</string>
   <string name="welcome_dont_upload_content_description">Exempel på bilder att inte ladda upp</string>
   <string name="skip_image">Hoppa över denna bild</string>
@@ -577,4 +578,5 @@
   <string name="media_detail_step_title">Mediedetaljer</string>
   <string name="menu_view_category_page">Visa kategorisida</string>
   <string name="menu_view_item_page">Visa objektsida</string>
+  <string name="read_help_link">Läs mer</string>
 </resources>

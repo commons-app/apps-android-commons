@@ -30,11 +30,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d अपलोड शुरू</item>
     <item quantity="other">%1$d अपलोड शुरू</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d अपलोड</item>
     <item quantity="other">%1$d अपलोड</item>
   </plurals>
@@ -65,7 +65,7 @@
   <string name="uploading_started">अपलोड आरंभ!</string>
   <string name="upload_completed_notification_title">%1$s अपलोड हुआ!</string>
   <string name="upload_completed_notification_text">अपना अपलोड देखने के लिए टैप करें</string>
-  <string name="upload_progress_notification_title_start">%1$s का अपलोड शुरू हुआ</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s का अपलोड शुरू हुआ</string>
   <string name="upload_progress_notification_title_in_progress">%1$s अपलोड हो रहा</string>
   <string name="upload_progress_notification_title_finishing">%1$s का अपलोड पूरा हुआ</string>
   <string name="upload_failed_notification_title">%1$s का अपलोड विफल हुआ</string>

@@ -9,12 +9,14 @@
 * D41D8CD98F
 * Deathkon
 * Hydra
+* Ken418
 * Kuailong
 * Liuxinyu970226
 * Looong
 * Qiyue2001
 * Shizhao
 * Shuiwater
+* Si109
 * SomeyaMako
 * Vikarna
 * VulpesVulpes825
@@ -25,6 +27,7 @@
 * 予弦
 * 佛壁灯
 * 列维劳德
+* 坑触可
 * 夢蝶葬花
 * 沈澄心
 * 神樂坂秀吉
@@ -41,11 +44,11 @@
     <item quantity="other">%1$d次上传</item>
   </plurals>
   <string name="starting_uploads">开始上传</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">开始%1$d次上传</item>
     <item quantity="other">开始%1$d次上传</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d次上传</item>
     <item quantity="other">%1$d次上传</item>
   </plurals>
@@ -85,7 +88,7 @@
   <string name="uploading_queued">上传排队中（已启用连接受限模式）</string>
   <string name="upload_completed_notification_title">%1$s已上传！</string>
   <string name="upload_completed_notification_text">点击查看您的上传</string>
-  <string name="upload_progress_notification_title_start">开始%1$s的上传</string>
+  <string name="upload_progress_notification_title_start">开始%s的上传</string>
   <string name="upload_progress_notification_title_in_progress">%1$s正在上传</string>
   <string name="upload_progress_notification_title_finishing">正在完成上传%1$s</string>
   <string name="upload_failed_notification_title">上传%1$s失败</string>
@@ -249,6 +252,7 @@
   <string name="upload_problem_different_geolocation">这张图片是在不同的地点拍摄的。</string>
   <string name="upload_problem_fbmd">请仅上传由您自己拍摄的图像。请勿上传您在他人的Facebook账户上所发现的图像。</string>
   <string name="upload_problem_do_you_continue">仍然上传这张图片？</string>
+  <string name="upload_problem_image">在图片中发现的问题</string>
   <string name="internet_downloaded">请仅上传由您自己拍摄的图像。请勿上传您从互联网下载的图像。</string>
   <string name="use_external_storage" fuzzy="true">使用外部存储</string>
   <string name="use_external_storage_summary">将您设备内部照相机应用拍摄的照片保存至您的设备存储中</string>
@@ -393,7 +397,7 @@
   <string name="no_categories_selected">未提交分类</string>
   <string name="no_categories_selected_warning_desc">没有类别的图像很少可用。确实要继续而不选择类别吗？</string>
   <string name="no_depictions_selected">没有选择描写</string>
-  <string name="upload_flow_all_images_in_set" fuzzy="true">（对于集合中的所有图像）</string>
+  <string name="upload_flow_all_images_in_set">（对于设置中的所有图像）</string>
   <string name="search_this_area">搜索这个区域</string>
   <string name="nearby_card_permission_title">需要许可</string>
   <string name="nearby_card_permission_explanation">您希望我们获取您当前的位置来显示最近的需要图片的地方吗？</string>
@@ -435,8 +439,8 @@
   <string name="review_category_explanation">该图片是在%1类别下</string>
   <string name="review_spam_report_question">该文件不在收录范围内，原因是</string>
   <string name="review_c_violation_report_question">该文件侵犯版权，原因是</string>
-  <string name="review_thanks_yes_button_text" fuzzy="true">是，为什么不呢</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">下一张图片</string>
+  <string name="review_thanks_yes_button_text">下一张图片</string>
+  <string name="review_thanks_no_button_text">是的，为什么不</string>
   <string name="skip_image_explanation">点击这个按钮会给你另外一个来自于Wikimedia Common上传的图片</string>
   <string name="review_image_explanation">你可以审查图片并提高Wikimedia Commoms的质量。\n审查的四个参数是：\n-图片尺寸是否在规定的范围\n-图片是否遵循版权规则\n-图片是否正确分类\n-如果一切正常你是否也可以感谢贡献者</string>
   <string name="no_image">没有被使用的图片</string>
@@ -452,7 +456,6 @@
   <string name="images_featured_explanation">特征图片是Wikimedia Commons社区选出的网站上的最高质量的图片中的一部分，是来自于技术高超的摄影师和绘画师。</string>
   <string name="images_via_nearby_explanation">通过附近位置上传的图片是指那些使用地图上发现位置功能上传的图片</string>
   <string name="thanks_received_explanation">这些功能允许编辑人员给那些做出了有用编辑的用户发送感谢通知-感谢通知通过使用在历史页面或差分页面上的一个小的感谢链接实现的。</string>
-  <string name="previous_image_caption_description">复制先前的标题及描述</string>
   <string name="welcome_do_upload_content_description">上传好图片到Commons的例子</string>
   <string name="welcome_dont_upload_content_description">不能上传图片的例子</string>
   <string name="skip_image">跳过该图片</string>
@@ -488,6 +491,7 @@
   <string name="delete_helper_ask_reason_copyright_internet_photo">来自网络的随机图片</string>
   <string name="delete_helper_ask_reason_copyright_logo">标志</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">由于他是</string>
+  <string name="category_edit_helper_make_edit_toast">正在尝试更新分类。</string>
   <string name="category_edit_helper_show_edit_title_success">成功</string>
   <string name="share_image_via">分享图片透过</string>
   <string name="no_achievements_yet">您目前还没有作出任何贡献</string>
@@ -509,20 +513,38 @@
   <string name="title_app_shortcut_bookmark">书签</string>
   <string name="title_app_shortcut_setting">设置</string>
   <string name="remove_bookmark">已从书签中移除</string>
+  <string name="add_bookmark">已添加至书签</string>
   <string name="wallpaper_set_unsuccessfully">出错了。无法设置壁纸</string>
   <string name="setting_wallpaper_dialog_title">设为壁纸</string>
   <string name="setting_wallpaper_dialog_message">正在设置壁纸。请稍等…</string>
+  <string name="theme_default_name">跟随系统</string>
   <string name="theme_dark_name">暗黑</string>
   <string name="theme_light_name">明亮</string>
   <string name="ask_to_turn_location_on">打开位置？</string>
   <string name="load_more">加载更多</string>
+  <string name="add_picture_to_wikipedia_article_title">将图片添加到维基百科</string>
   <string name="confirm">确认</string>
   <string name="instructions_title">说明</string>
   <string name="copy_wikicode_to_clipboard">复制维基代码到剪贴板</string>
   <string name="pause">暂停</string>
   <string name="resume">继续</string>
   <string name="paused">已暂停</string>
+  <string name="more">更多</string>
+  <string name="leaderboard_tab_title">排行榜</string>
+  <string name="rank_prefix">排名：</string>
+  <string name="leaderboard_column_rank">排名</string>
   <string name="leaderboard_column_user">用户</string>
+  <string name="leaderboard_column_count">计数</string>
+  <string name="leaderboard_all_time">所有时间</string>
   <string name="leaderboard_upload">上传</string>
-  <string name="limited_connection_mode" fuzzy="true">限制连接</string>
+  <string name="leaderboard_nearby">附近</string>
+  <string name="leaderboard_my_rank_button_text">我的排名</string>
+  <string name="limited_connection_mode">限制连接模式</string>
+  <string name="resuming_upload">正在恢复上传...</string>
+  <string name="pausing_upload">暂停上传...</string>
+  <string name="depicts_step_title">描述</string>
+  <string name="media_detail_step_title">媒体详情</string>
+  <string name="menu_view_category_page">查看分类页面</string>
+  <string name="menu_view_item_page">查看项目页面</string>
+  <string name="read_help_link">阅读更多</string>
 </resources>

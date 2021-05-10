@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.ParentViewPager;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -78,6 +79,10 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment {
                                         applicationKvStore.getBoolean("login_skipped"));
     viewPager.setAdapter(adapter);
     tabLayout.setupWithViewPager(viewPager);
+
+    ((MainActivity)getActivity()).showTabs();
+    ((BaseActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
     setupTabLayout();
     return view;
   }
@@ -95,8 +100,11 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment {
 
 
   public void onBackPressed() {
-    ((BookmarkListRootFragment) (adapter.getItem(tabLayout.getSelectedTabPosition())))
-        .backPressed();
+    if(((BookmarkListRootFragment)(adapter.getItem(tabLayout.getSelectedTabPosition()))).backPressed()) {
+      // The event is handled internally by the adapter , no further action required.
+      return;
+    }
+    // Event is not handled by the adapter ( performed back action ) change action bar.
     ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
   }
 }

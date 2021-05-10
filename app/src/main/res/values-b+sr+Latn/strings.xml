@@ -15,7 +15,7 @@
     <item quantity="one">%1$d otpremanje</item>
     <item quantity="other">%1$d otpremanja</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Počinje %1$d otpremanje</item>
     <item quantity="other">Počinju %1$d otpremanja</item>
   </plurals>
@@ -47,7 +47,7 @@
   <string name="uploading_started">Otpremanje je započeto.</string>
   <string name="upload_completed_notification_title">Datoteka „%1$s” je otpremljena.</string>
   <string name="upload_completed_notification_text">Dodirnite da biste videli otpremanje</string>
-  <string name="upload_progress_notification_title_start">Počinje otpremanje datoteke „%1$s”</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Počinje otpremanje datoteke „%1$s”</string>
   <string name="upload_progress_notification_title_in_progress">Otpremanje datoteke „%1$s”</string>
   <string name="upload_progress_notification_title_finishing">Završavanje otpremanja datoteke „%1$s”</string>
   <string name="upload_failed_notification_title">Otpremanje datoteke „%1$s” nije uspelo</string>

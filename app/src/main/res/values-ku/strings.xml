@@ -12,11 +12,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Hilbarkirinan bide dest pê kirin</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d barkirinê dide destpêkirin</item>
     <item quantity="other">%1$d barkirinan dide destpêkirin</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d barkirin</item>
     <item quantity="other">%1$d barkirin</item>
   </plurals>

@@ -9,12 +9,11 @@ import com.google.gson.Gson;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.contributions.ChunkInfo;
 import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.upload.UploadService.NotificationUpdateProgressListener;
+import fr.free.nrw.commons.upload.worker.UploadWorker.NotificationUpdateProgressListener;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
@@ -48,8 +47,6 @@ public class UploadClient {
   private final FileUtilsWrapper fileUtilsWrapper;
   private final Gson gson;
 
-  private Map<String, Boolean> pauseUploads;
-
   private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
   @Inject
@@ -62,14 +59,13 @@ public class UploadClient {
     this.pageContentsCreator = pageContentsCreator;
     this.fileUtilsWrapper = fileUtilsWrapper;
     this.gson = gson;
-    this.pauseUploads = new HashMap<>();
   }
 
   /**
    * Upload file to stash in chunks of specified size. Uploading files in chunks will make handling
    * of large files easier. Also, it will be useful in supporting pause/resume of uploads
    */
-  Observable<StashUploadResult> uploadFileToStash(
+  public Observable<StashUploadResult> uploadFileToStash(
       final Context context, final String filename, final Contribution contribution,
       final NotificationUpdateProgressListener notificationUpdater) throws IOException {
     if (contribution.getChunkInfo() != null
@@ -79,7 +75,7 @@ public class UploadClient {
           contribution.getChunkInfo().getUploadResult().getFilekey()));
     }
 
-    pauseUploads.put(contribution.getPageId(), false);
+    CommonsApplication.pauseUploads.put(contribution.getPageId(), false);
 
     final File file = new File(contribution.getLocalUri().getPath());
     final List<File> fileChunks = fileUtilsWrapper.getFileChunks(context, file, CHUNK_SIZE);
@@ -102,7 +98,7 @@ public class UploadClient {
     final AtomicBoolean failures = new AtomicBoolean();
 
     compositeDisposable.add(Observable.fromIterable(fileChunks).forEach(chunkFile -> {
-      if (pauseUploads.get(contribution.getPageId()) || failures.get()) {
+      if (CommonsApplication.pauseUploads.get(contribution.getPageId()) || failures.get()) {
         return;
       }
 
@@ -141,7 +137,7 @@ public class UploadClient {
       }));
     }));
 
-    if (pauseUploads.get(contribution.getPageId())) {
+    if (CommonsApplication.pauseUploads.get(contribution.getPageId())) {
       Timber.d("Upload stash paused %s", contribution.getPageId());
       return Observable.just(new StashUploadResult(StashUploadState.PAUSED, null));
     } else if (failures.get()) {
@@ -202,18 +198,6 @@ public class UploadClient {
   }
 
   /**
-   * Dispose the active disposable and sets the pause variable
-   * @param pageId
-   */
-  public void pauseUpload(String pageId) {
-    pauseUploads.put(pageId, true);
-    if (!compositeDisposable.isDisposed()) {
-      compositeDisposable.dispose();
-    }
-    compositeDisposable.clear();
-  }
-
-  /**
    * Converts string value to request body
    */
   @Nullable
@@ -222,7 +206,7 @@ public class UploadClient {
   }
 
 
-  Observable<UploadResult> uploadFileFromStash(final Context context,
+  public Observable<UploadResult> uploadFileFromStash(
       final Contribution contribution,
       final String uniqueFileName,
       final String fileKey) {

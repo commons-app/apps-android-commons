@@ -12,6 +12,7 @@
 * Rasal Lia
 * Sankarshan
 * Sibabrata Banerjee
+* Tahmid
 * Tahmid02016
 * Tauhid16
 * Titodutta
@@ -30,11 +31,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">আপলোড শুরু হচ্ছে</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$dটি আপলোড শুরু হয়েছে</item>
     <item quantity="other">%1$dটি আপলোড শুরু হয়েছে</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$dটি আপলোড</item>
     <item quantity="other">%1$dটি আপলোড</item>
   </plurals>
@@ -70,7 +71,7 @@
   <string name="uploading_started">আপলোড আরম্ভ হয়েছে!</string>
   <string name="upload_completed_notification_title">%1$ আপলোড হয়েছে!</string>
   <string name="upload_completed_notification_text">আপনার আপলোড দেখতে টোকা দিন</string>
-  <string name="upload_progress_notification_title_start">%1$s আপলোড শুরু হচ্ছে</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s আপলোড শুরু হচ্ছে</string>
   <string name="upload_progress_notification_title_in_progress">%1$s আপলোড হচ্ছে</string>
   <string name="upload_progress_notification_title_finishing">%1$s আপলোড শেষ হয়েছে</string>
   <string name="upload_failed_notification_title">%1$s আপলোড ব্যর্থ</string>

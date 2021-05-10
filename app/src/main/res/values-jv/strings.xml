@@ -16,11 +16,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Miwiti %1$d unggahan</item>
     <item quantity="other">Miwiti %1$d unggahan</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d unggahan</item>
     <item quantity="other">%1$d unggahan</item>
   </plurals>
@@ -48,7 +48,7 @@
   <string name="uploading_started">Wiwit ngunggah!</string>
   <string name="upload_completed_notification_title">%1$s kaunggah!</string>
   <string name="upload_completed_notification_text">Dudul saperlu ndeleng unggahané panjenengan</string>
-  <string name="upload_progress_notification_title_start">Wiwit nguggah %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Wiwit nguggah %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Ngunggah %1$s</string>
   <string name="upload_progress_notification_title_finishing">Rampung ngunggah %1$s</string>
   <string name="upload_failed_notification_title">Wurung ngunggah %1$s</string>
@@ -152,7 +152,7 @@
   <string name="cancel">Wurung</string>
   <string name="navigation_drawer_open">Bukak</string>
   <string name="navigation_drawer_close">Tutup</string>
-  <string name="navigation_item_home">Tepas</string>
+  <string name="navigation_item_home">Pendhapa</string>
   <string name="navigation_item_upload">Unggah</string>
   <string name="navigation_item_nearby">Cedhak kéné</string>
   <string name="navigation_item_about">Ngenani</string>

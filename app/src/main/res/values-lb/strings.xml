@@ -14,11 +14,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Ugefaang 1 Fichier eropzelueden</item>
     <item quantity="other">Ugefaang %1$d Fichieren eropzelueden</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">Ee Fichier eropgelueden</item>
     <item quantity="other">%1$d Fichieren eropgelueden</item>
   </plurals>
@@ -50,7 +50,7 @@
   <string name="uploading_started">D\'Eroplueden huet ugefaang!</string>
   <string name="upload_completed_notification_title">%1$s eropgelueden!</string>
   <string name="upload_completed_notification_text">Dréckt fir de Fichier ze gesinn deen Dir eropgelueden hutt</string>
-  <string name="upload_progress_notification_title_start">D\'Eropluede vu(n) %1$s ufänken</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">D\'Eropluede vu(n) %1$s ufänken</string>
   <string name="upload_progress_notification_title_in_progress">%1$s gëtt eropgelueden</string>
   <string name="upload_progress_notification_title_finishing">Eroplueden vu(n) %1$s ofschléissen</string>
   <string name="upload_failed_notification_title">D\'Eropluede vu(n) %1$s huet net funktionéiert</string>
@@ -89,7 +89,7 @@
   <string name="title_activity_category_details">Kategorie</string>
   <string name="menu_about">Iwwer</string>
   <string name="about_license">D\'App Wikimedia Commons ass eng \'Open-Source-App\' déi vu Fräiwëllege vun der Wikimedia Foundation entwéckelt gouf an och vun hinnen ënnerhal gëtt. D\'Wikimedia Foundation ass net an d\'Entwécklung oder den Ënnerhalt vun der App implizéiert.</string>
-  <string name="about_improve">Leet wgl. &lt;a href=\"%1$s\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
+  <string name="about_improve">Leet wgl. &lt;a href=\"%1$s\"&gt; e GitHub Probleem&lt;/a&gt; fir Probleemer ze mellen a Proposen ze maachen.</string>
   <string name="about_privacy_policy">Dateschutz</string>
   <string name="about_credits">Merci</string>
   <string name="title_activity_about">Iwwer</string>
@@ -196,7 +196,7 @@
   <string name="use_external_storage_summary">Biller späicheren déi mat der in-app Kamera vun Ärem Apparat gemaach goufen</string>
   <string name="login_to_your_account">An Äre Benotzerkont aloggen</string>
   <string name="send_log_file">Log-Fichier schécken</string>
-  <string name="send_log_file_description">Log-Fichier per E-Mail un d\'Entwéckler schécke fir ze hëllefen fir Problemer mat der App z\'analyséieren. Notiz:A Logge kënne potenziell Informatiounen dra sinn déi Iech identifizéieren</string>
+  <string name="send_log_file_description">Log-Fichier per E-Mail un d\'Entwéckler schécke fir ze hëllefe fir Probleemer mat der App z\'analyséieren. Notiz: A Logge kënne potenziell Informatiounen dra sinn déi Iech identifizéieren</string>
   <string name="null_url">Feeler! URL net fonnt</string>
   <string name="nominate_deletion">Nominéiere fir ze Läschen</string>
   <string name="nominated_for_deletion">Dëst Bild gouf virgeschloe fir geläscht ze ginn.</string>
@@ -278,7 +278,7 @@
   <string name="achievements_fetch_failed_ultimate_achievement">Dir hutt esou vill Kontributioune gemaach datt eise Berechnungssystem iwwerfuerdert ass. Dëst ass déi bescht Leeschtung.</string>
   <string name="nominate_for_deletion_done">Fäerdeg</string>
   <string name="review_category">Ass dëst richteg kategoriséiert?</string>
-  <string name="review_thanks_yes_button_text" fuzzy="true">Jo, firwat net</string>
+  <string name="review_thanks_yes_button_text">Nächst Bild</string>
   <string name="review_thanks_no_button_text" fuzzy="true">Nächst BILD</string>
   <string name="no_image">Keng Biller benotzt</string>
   <string name="no_image_uploaded">Keng Biller eropgelueden</string>
@@ -347,4 +347,5 @@
   <string name="leaderboard_nearby">Nobäi</string>
   <string name="leaderboard_used">Benotzt</string>
   <string name="limited_connection_mode">Limitéierte Verbindungsmodus</string>
+  <string name="read_help_link">Liest méi</string>
 </resources>

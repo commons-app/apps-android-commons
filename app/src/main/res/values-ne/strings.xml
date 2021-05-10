@@ -34,7 +34,7 @@
   <string name="uploading_started">उर्ध्वभरण सुरू भयो!</string>
   <string name="upload_completed_notification_title">%1$s उर्ध्वभरण गरियो !</string>
   <string name="upload_completed_notification_text">तपाईको उर्ध्वभरण हेर्नको लागि ट्याप गर्नुहोस्</string>
-  <string name="upload_progress_notification_title_start"> %1$s उर्ध्वभरण सुरू गर्दैै</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true"> %1$s उर्ध्वभरण सुरू गर्दैै</string>
   <string name="upload_progress_notification_title_in_progress">%1$s उर्ध्वभरण गरिँदै</string>
   <string name="upload_progress_notification_title_finishing"> %1$s उर्ध्वभरण सकाउँदै</string>
   <string name="upload_failed_notification_title"> %1$s उर्ध्वभरण असफल भयो</string>

@@ -35,7 +35,7 @@
   <string name="uploading_started">Жүктөө башталды!</string>
   <string name="upload_completed_notification_title">%1$s жүктөлүүдө</string>
   <string name="upload_completed_notification_text">Жүктөлгөн файлды көрүү үчүн басыңыз</string>
-  <string name="upload_progress_notification_title_start">Жүктөө %1$s башталды</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Жүктөө %1$s башталды</string>
   <string name="upload_progress_notification_title_in_progress">%1$s жүктөлүүдө</string>
   <string name="upload_progress_notification_title_finishing">Жүктөө соңуна жетти %1$s</string>
   <string name="upload_failed_notification_title">Жүктөө %1$s иш жүзүнө ашкан жок</string>

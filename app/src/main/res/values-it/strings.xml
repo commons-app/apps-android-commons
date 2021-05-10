@@ -24,12 +24,12 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Iniziato %1$d caricamento</item>
-    <item quantity="other">Iniziati %1$d caricamenti</item>
+    <item quantity="one">Elaborando %d caricamento</item>
+    <item quantity="other">Elaborando %d caricamenti</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d caricamento</item>
-    <item quantity="other">%1$d caricamenti</item>
+    <item quantity="one">%d caricamento</item>
+    <item quantity="other">%d caricamenti</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Questa immagine sarà rilasciata in base alla licenza %1$s</item>
@@ -67,7 +67,7 @@
   <string name="uploading_started">Caricamento iniziato!</string>
   <string name="upload_completed_notification_title">%1$s caricato!</string>
   <string name="upload_completed_notification_text">Premi per vedere i tuoi caricamenti</string>
-  <string name="upload_progress_notification_title_start">Inizio caricamento di %1$s</string>
+  <string name="upload_progress_notification_title_start">Caricamento file: %s</string>
   <string name="upload_progress_notification_title_in_progress">Sto caricando %1$s</string>
   <string name="upload_progress_notification_title_finishing">Terminato il caricamento di %1$s</string>
   <string name="upload_failed_notification_title">Caricamento di %1$s non riuscito</string>
@@ -398,6 +398,7 @@
   <string name="menu_option_unread">Vedi non lette</string>
   <string name="error_occurred_in_picking_images">Si è verificato un errore durante la selezione delle immagini</string>
   <string name="please_wait">Attendi per favore…</string>
+  <string name="copied_successfully">Copiato</string>
   <string name="skip_image">Salta questa immagine</string>
   <string name="exif_tag_name_author">Autore</string>
   <string name="exif_tag_name_copyright">Copyright</string>

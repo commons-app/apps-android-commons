@@ -3,6 +3,7 @@ package fr.free.nrw.commons.repository;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
@@ -36,18 +37,21 @@ public class UploadRepository {
     private final DepictModel depictModel;
 
     private static final double NEARBY_RADIUS_IN_KILO_METERS = 0.1; //100 meters
+    private final ContributionDao contributionDao;
 
     @Inject
     public UploadRepository(UploadModel uploadModel,
         UploadController uploadController,
         CategoriesModel categoriesModel,
         NearbyPlaces nearbyPlaces,
-        DepictModel depictModel) {
+        DepictModel depictModel,
+        ContributionDao contributionDao) {
         this.uploadModel = uploadModel;
         this.uploadController = uploadController;
         this.categoriesModel = categoriesModel;
         this.nearbyPlaces = nearbyPlaces;
         this.depictModel = depictModel;
+        this.contributionDao=contributionDao;
     }
 
     /**
@@ -64,8 +68,14 @@ public class UploadRepository {
      *
      * @param contribution
      */
-    public void startUpload(Contribution contribution) {
-        uploadController.startUpload(contribution);
+
+    public void prepareMedia(Contribution contribution) {
+        uploadController.prepareMedia(contribution);
+    }
+
+
+    public void saveContribution(Contribution contribution) {
+        contributionDao.save(contribution).blockingAwait();
     }
 
     /**
@@ -75,13 +85,6 @@ public class UploadRepository {
      */
     public List<UploadItem> getUploads() {
         return uploadModel.getUploads();
-    }
-
-    /**
-     * asks the RemoteDataSource to prepare the Upload Service
-     */
-    public void prepareService() {
-        uploadController.prepareService();
     }
 
     /**
@@ -205,16 +208,16 @@ public class UploadRepository {
     }
 
     /**
-     * fetches and returns the previous upload item
+     * fetches and returns the upload item
      *
      * @param index
      * @return
      */
-    public UploadItem getPreviousUploadItem(int index) {
-        if (index - 1 >= 0) {
-            return uploadModel.getItems().get(index - 1);
+    public UploadItem getUploadItem(int index) {
+        if (index >= 0) {
+            return uploadModel.getItems().get(index);
         }
-        return null; //There is no previous item to copy details
+        return null; //There is no item to copy details
     }
 
     /**

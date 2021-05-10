@@ -37,7 +37,7 @@
   <string name="uploading_started">Huuchschüüren hää begand!</string>
   <string name="upload_completed_notification_title">%1$s huuchschüürd!</string>
   <string name="upload_completed_notification_text">Tipe, am din huuchschüürd bil uuntulukin</string>
-  <string name="upload_progress_notification_title_start">Huuchschüüren faan „%1$s“ began</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Huuchschüüren faan „%1$s“ began</string>
   <string name="upload_progress_notification_title_in_progress">%1$s huuchschüür</string>
   <string name="upload_progress_notification_title_finishing">Huuchschüüren faan „%1$s“ klaar fu</string>
   <string name="upload_failed_notification_title">Huuchschüüren faan „%1$s“ skiaf gingen</string>
