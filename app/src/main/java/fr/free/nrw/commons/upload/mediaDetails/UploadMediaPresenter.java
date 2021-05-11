@@ -92,7 +92,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                           gpsCoords != null && gpsCoords.getImageCoordsExists();
                         view.showMapWithImageCoordinates(hasImageCoordinates);
                         view.showProgress(false);
-                        if (hasImageCoordinates) {
+                        if (hasImageCoordinates && place == null) {
                             checkNearbyPlaces(uploadItem);
                         }
                     },
@@ -194,6 +194,9 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     final List<UploadMediaDetail> uploadMediaDetails = repository.getUploads()
         .get(uploadItemPosition)
         .getUploadMediaDetails();
+    UploadItem uploadItem = repository.getUploads()
+        .get(uploadItemPosition);
+    uploadItem.setPlace(place);
     uploadMediaDetails.set(0, new UploadMediaDetail(place));
     view.updateMediaDetails(uploadMediaDetails);
   }
