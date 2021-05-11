@@ -56,10 +56,6 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     DepictsContract.UserActionListener presenter;
     private UploadDepictsAdapter adapter;
     private Disposable subscribe;
-    public static ArrayList<DepictedItem>selectedDepictedItem;
-    @Inject
-    DepictsDao depictsDao;
-
     @Nullable
     @Override
     public android.view.View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -71,7 +67,6 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     public void onViewCreated(@NonNull android.view.View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        selectedDepictedItem=new ArrayList<DepictedItem>();
         init();
         presenter.getDepictedItems().observe(getViewLifecycleOwner(), this::setDepictsList);
     }
@@ -181,32 +176,6 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      * @param query query string
      */
     private void searchForDepictions(final String query) {
-        // set  recent depictsItem  of Database to recyclerview when query is empty
-        if (query.isEmpty()) {
-            adapter.clear();
-            adapter.setItems(getRecentDepictedItems());
-            return;
-        } else {
-            presenter.searchForDepictions(query);
-            adapter.clear();
-        }
         presenter.searchForDepictions(query);
-    }
-
-    /**
-     * Get the depictesItem form DepictsRoomdataBase
-     */
-    List<DepictedItem> getRecentDepictedItems() {
-        List<DepictedItem> depictedItemList = new ArrayList<>();
-        List<Depicts>depictsList=depictsDao.depictsList();
-        depictedItemList.addAll(selectedDepictedItem);
-        for (int i = 0; i < depictsList.size(); i++) {
-            final DepictedItem depictedItem = depictsList.get(i).getItem();
-            if (!depictedItemList.contains(depictedItem)) {
-                depictedItem.setSelected(false);
-                depictedItemList.add(depictedItem);
-            }
-        }
-        return depictedItemList;
     }
 }

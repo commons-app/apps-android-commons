@@ -178,10 +178,8 @@ public class UploadModel {
     public void onDepictItemClicked(DepictedItem depictedItem) {
         if (depictedItem.isSelected()) {
             selectedDepictions.add(depictedItem);
-            DepictsFragment.selectedDepictedItem.add(depictedItem);
         } else {
             selectedDepictions.remove(depictedItem);
-            DepictsFragment.selectedDepictedItem.remove(depictedItem);
         }
     }
 

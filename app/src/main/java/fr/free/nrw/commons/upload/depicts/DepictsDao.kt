@@ -81,7 +81,7 @@ abstract class DepictsDao {
         }
 
         numberofItemInRoomDataBase = depictsList().size
-        // delete the depicts for depictsroomdataBase when number of element in depictsroomdataBase is greater than 10
+        // delete the depictItem from depictsroomdataBase when number of element in depictsroomdataBase is greater than 10
         if (numberofItemInRoomDataBase > maxNumberOfItemSaveInRoom) {
 
             val listOfDepictsToDelete: List<Depicts> =
