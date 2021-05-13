@@ -70,6 +70,10 @@ public class UploadItem {
     this.imageQuality.onNext(imageQuality);
   }
 
+  /**
+   * Sets the corresponding place to the uploadItem
+   * @param place geolocated Wikidata item
+   */
   public void setPlace(Place place) {
     this.place = place;
   }
