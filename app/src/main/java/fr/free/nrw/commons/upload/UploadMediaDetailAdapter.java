@@ -75,6 +75,12 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         notifyItemInserted(uploadMediaDetails.size());
     }
 
+    /**
+     * Remove description based on position from the list and notifies the RecyclerView Adapter that
+     * data in adapter has been removed at that particular position.
+     * @param uploadMediaDetail
+     * @param position
+     */
     public void removeDescription(final UploadMediaDetail uploadMediaDetail, final int position) {
         this.uploadMediaDetails.remove(uploadMediaDetail);
         notifyItemRemoved(position);
