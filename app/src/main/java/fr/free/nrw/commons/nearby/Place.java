@@ -66,7 +66,8 @@ public class Place implements Parcelable {
         description = (description.equals("?")
             && (item.getLabel().getValue() != null
             && !item.getLabel().getValue().isEmpty()) ? "" : description);
-        /** If we have a valid label
+        /*
+         * If we have a valid label
          *     - If have a valid label add the description at the end of the string with parenthesis
          *     - If we don't have a valid label, string will include only the description. So add it without paranthesis
          */
