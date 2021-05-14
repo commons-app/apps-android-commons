@@ -35,8 +35,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:targetApi="m" />
+        app:layout_constraintTop_toTopOf="parent" />
       
       <fr.free.nrw.commons.review.ReviewViewPager
         android:id="@+id/view_pager_review"
@@ -59,9 +58,8 @@
         android:padding="@dimen/medium_height"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        tools:targetApi="lollipop">
-        
+        app:layout_constraintStart_toStartOf="@+id/guideline">
+
         <com.viewpagerindicator.CirclePageIndicator
           android:id="@+id/pager_indicator_review"
           android:layout_width="match_parent"
