@@ -6,19 +6,18 @@
   android:id="@+id/drawer_layout"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
-
+  
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
+    
     <include layout="@layout/toolbar" />
-
+    
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      >
-
+      android:layout_height="match_parent">
+      
       <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/skip_image"
         style="@style/Widget.AppCompat.Button.Borderless"
@@ -36,12 +35,13 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="m" />
+      
       <fr.free.nrw.commons.review.ReviewViewPager
         android:id="@+id/view_pager_review"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/dimen_0"
+        android:layout_height="@dimen/dimen_0"
         android:layout_weight="1"
         android:fadingEdge="none"
         app:layout_constraintBottom_toTopOf="@+id/rl_container_bottom_view"
@@ -51,7 +51,7 @@
 
       <RelativeLayout
         android:id="@+id/rl_container_bottom_view"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/dimen_0"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="?attr/colorPrimaryDark"
@@ -60,9 +60,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-
-        >
-
+        tools:targetApi="lollipop">
+        
         <com.viewpagerindicator.CirclePageIndicator
           android:id="@+id/pager_indicator_review"
           android:layout_width="match_parent"
@@ -70,17 +69,18 @@
           android:layout_gravity="center"
           android:background="?attr/colorPrimaryDark"
           android:foregroundGravity="center_vertical" />
+        
       </RelativeLayout>
-
+      
       <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/dimen_0"
+        android:layout_height="@dimen/dimen_0"
         android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/view_pager_review"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
+        
         <com.facebook.drawee.view.SimpleDraweeView
           android:id="@+id/review_image_view"
           android:layout_width="match_parent"
@@ -88,7 +88,7 @@
           android:layout_alignParentTop="true"
           android:layout_marginTop="@dimen/dimen_0"
           app:srcCompat="@drawable/commons_logo" />
-
+        
         <RelativeLayout
           android:id="@+id/rl_container_upload_overlay"
           android:layout_width="match_parent"
@@ -98,7 +98,7 @@
           android:background="#77000000"
           android:gravity="center"
           android:padding="@dimen/tiny_gap">
-
+          
           <TextView
             android:id="@+id/tv_image_caption"
             style="?android:textAppearanceMedium"
@@ -107,7 +107,7 @@
             android:textColor="#FFFFFFFF" />
 
         </RelativeLayout>
-
+        
         <ProgressBar
           android:id="@+id/pb_review_image"
           android:layout_width="wrap_content"
@@ -115,18 +115,18 @@
           android:layout_centerInParent="true"
           android:visibility="gone"
           tools:visibility="visible" />
-
+        
       </RelativeLayout>
-
+      
       <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5"
-        />
+        app:layout_constraintGuide_percent="0.5" />
+      
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    
   </LinearLayout>
-
+  
 </androidx.drawerlayout.widget.DrawerLayout>
