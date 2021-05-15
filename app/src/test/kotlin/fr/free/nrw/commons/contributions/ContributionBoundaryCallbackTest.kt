@@ -29,6 +29,9 @@ class ContributionBoundaryCallbackTest {
     @Mock
     internal lateinit var mediaClient: MediaClient
 
+    @Mock
+    internal lateinit var sessionManager: SessionManager
+
     private lateinit var contributionBoundaryCallback: ContributionBoundaryCallback
 
     @Rule
@@ -46,7 +49,7 @@ class ContributionBoundaryCallbackTest {
         MockitoAnnotations.initMocks(this)
         scheduler = Schedulers.trampoline()
         contributionBoundaryCallback =
-            ContributionBoundaryCallback(repository, mediaClient, scheduler)
+            ContributionBoundaryCallback(repository, sessionManager, mediaClient, scheduler)
         contributionBoundaryCallback.userName = "Test"
     }
 
