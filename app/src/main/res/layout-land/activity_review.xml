@@ -6,11 +6,19 @@
   android:id="@+id/drawer_layout"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
-  
-  <LinearLayout
+
+  <FrameLayout
+    android:id="@+id/mediaDetailContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:visibility="gone" />
+
+  <LinearLayout
+    android:id="@+id/reviewActivityContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="visible">
     
     <include layout="@layout/toolbar" />
     
