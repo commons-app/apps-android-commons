@@ -111,11 +111,13 @@
         <activity
             android:name=".category.CategoryDetailsActivity"
             android:label="@string/title_activity_featured_images"
+            android:configChanges="screenSize|keyboard|orientation"
             android:parentActivityName=".contributions.MainActivity" />
 
         <activity
             android:name=".explore.depictions.WikidataItemDetailsActivity"
             android:label="@string/title_activity_featured_images"
+            android:configChanges="screenSize|keyboard|orientation"
             android:parentActivityName=".contributions.MainActivity" />
 
         <activity

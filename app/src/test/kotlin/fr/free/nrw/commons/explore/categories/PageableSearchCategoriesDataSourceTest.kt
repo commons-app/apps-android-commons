@@ -1,12 +1,11 @@
-package fr.free.nrw.commons.explore.categroies
+package fr.free.nrw.commons.explore.categories
 
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.category.CategoryClient
 import fr.free.nrw.commons.explore.categories.search.PageableSearchCategoriesDataSource
 import io.reactivex.Single
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers
+import org.junit.Assert
 import org.junit.Test
 
 class PageableSearchCategoriesDataSourceTest {
@@ -18,6 +17,6 @@ class PageableSearchCategoriesDataSourceTest {
         val pageableCategoriesDataSource =
             PageableSearchCategoriesDataSource(mock(), categoryClient)
         pageableCategoriesDataSource.onQueryUpdated("test")
-        assertThat(pageableCategoriesDataSource.loadFunction(0, 1), Matchers.`is`(emptyList()))
+        Assert.assertEquals(pageableCategoriesDataSource.loadFunction(0, 1), emptyList<String>())
     }
 }
