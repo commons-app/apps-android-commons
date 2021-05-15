@@ -50,6 +50,7 @@ public class DBOpenHelper  extends SQLiteOpenHelper {
     public void deleteTable(SQLiteDatabase db, String tableName) {
         try {
             db.execSQL(String.format(DROP_TABLE_STATEMENT, tableName));
+            onCreate(db);
         } catch (SQLiteException e) {
             e.printStackTrace();
         }
