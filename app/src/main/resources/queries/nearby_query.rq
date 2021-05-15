@@ -2,6 +2,7 @@ SELECT
      (SAMPLE(?location) as ?location)
      ?item
      (SAMPLE(COALESCE(?itemLabelPreferredLanguage, ?itemLabelAnyLanguage)) as ?label)
+     (SAMPLE(COALESCE(?itemDescriptionPreferredLanguage, ?itemDescriptionAnyLanguage, "?")) as ?description)
      (SAMPLE(?classId) as ?class)
      (SAMPLE(COALESCE(?classLabelPreferredLanguage, ?classLabelAnyLanguage, "?")) as ?classLabel)
      (SAMPLE(COALESCE(?icon0, ?icon1)) as ?icon)
@@ -21,6 +22,10 @@ SELECT
      # Get the label in the preferred language of the user, or any other language if no label is available in that language.
      OPTIONAL {?item rdfs:label ?itemLabelPreferredLanguage. FILTER (lang(?itemLabelPreferredLanguage) = "${LANG}")}
      OPTIONAL {?item rdfs:label ?itemLabelAnyLanguage}
+
+     # Get the description in the preferred language of the user, or any other language if no description is available in that language.
+     OPTIONAL {?item schema:description ?itemDescriptionPreferredLanguage. FILTER (lang(?itemDescriptionPreferredLanguage) = "${LANG}")}
+     OPTIONAL {?item schema:description ?itemDescriptionAnyLanguage }
 
      # Get Commons category (P373)
      OPTIONAL { ?item wdt:P373 ?commonsCategory. }
