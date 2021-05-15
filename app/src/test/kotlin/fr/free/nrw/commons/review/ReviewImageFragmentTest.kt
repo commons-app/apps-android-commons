@@ -2,6 +2,7 @@ package fr.free.nrw.commons.review
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -23,12 +24,15 @@ import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
+import org.robolectric.annotation.LooperMode
 import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
+@LooperMode(LooperMode.Mode.PAUSED)
 class ReviewImageFragmentTest {
     private lateinit var fragment: ReviewImageFragment
 
@@ -109,6 +113,7 @@ class ReviewImageFragmentTest {
         val method: Method =
             ReviewImageFragment::class.java.getDeclaredMethod("updateCategoriesQuestion")
         method.isAccessible = true
+        shadowOf(Looper.getMainLooper()).idle()
         method.invoke(fragment)
     }
 
@@ -121,6 +126,7 @@ class ReviewImageFragmentTest {
     @Test
     @Throws(Exception::class)
     fun testOnYesButtonClicked() {
+        shadowOf(Looper.getMainLooper()).idle()
         fragment.onYesButtonClicked()
     }
 
@@ -138,6 +144,7 @@ class ReviewImageFragmentTest {
         val method: Method =
             ReviewImageFragment::class.java.getDeclaredMethod("getReviewActivity")
         method.isAccessible = true
+        shadowOf(Looper.getMainLooper()).idle()
         Assert.assertNotNull(method.invoke(fragment))
     }
 }
