@@ -57,7 +57,7 @@
                             android:layout_marginTop="@dimen/activity_margin_vertical"
                             android:layout_marginBottom="@dimen/activity_margin_vertical"
                             android:layout_height="wrap_content"
-                            android:layout_width="wrap_content" />
+                            android:layout_width="match_parent" />
 
                         <Button
                           android:layout_width="match_parent"

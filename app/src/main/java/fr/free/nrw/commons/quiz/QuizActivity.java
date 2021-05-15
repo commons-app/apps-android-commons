@@ -68,6 +68,10 @@ public class QuizActivity extends AppCompatActivity {
 
     }
 
+    @OnClick(R.id.next_button)
+    public void notKnowAnswer(){
+        customAlert("Information", quiz.get(questionIndex).getAnswerMessage());
+    }
     /**
      * to give warning before ending quiz
      */
