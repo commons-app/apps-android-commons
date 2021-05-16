@@ -341,12 +341,13 @@
                 app:layout_constraintLeft_toRightOf="@id/wikidata_edits_icon"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/images_nearby_info"
+                app:layout_constraintRight_toLeftOf="@id/images_nearby_infoIcon"
                 android:text="@string/statistics_wikidata_edits"  />
 
               <ImageView
                 android:layout_width="@dimen/medium_width"
                 android:layout_height="@dimen/medium_height"
+                android:id="@+id/images_nearby_infoIcon"
                 android:layout_marginTop="@dimen/activity_margin_horizontal"
                 android:layout_marginRight="@dimen/activity_margin_horizontal"
                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
@@ -419,12 +420,13 @@
                 app:layout_constraintLeft_toRightOf="@id/featured_image_icon"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/images_featured_info"
+                app:layout_constraintRight_toLeftOf="@id/images_featured_infoIcon"
                 android:text="@string/statistics_featured"  />
 
               <ImageView
                 android:layout_width="@dimen/medium_width"
                 android:layout_height="@dimen/medium_height"
+                android:id="@+id/images_featured_infoIcon"
                 android:layout_marginTop="@dimen/activity_margin_horizontal"
                 android:layout_marginRight="@dimen/activity_margin_horizontal"
                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
@@ -496,12 +498,13 @@
                 app:layout_constraintLeft_toRightOf="@id/quality_image_icon"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/quality_images_info"
+                app:layout_constraintRight_toLeftOf="@id/quality_images_infoIcon"
                 android:text="@string/statistics_quality"  />
 
               <ImageView
                 android:layout_width="@dimen/medium_width"
                 android:layout_height="@dimen/medium_height"
+                android:id="@+id/quality_images_infoIcon"
                 android:layout_marginTop="@dimen/activity_margin_horizontal"
                 android:layout_marginRight="@dimen/activity_margin_horizontal"
                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
@@ -574,12 +577,13 @@
                 app:layout_constraintLeft_toRightOf="@id/thanks_image_icon"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/thanks_received_info"
+                app:layout_constraintRight_toLeftOf="@id/thanks_received_infoIcon"
                 android:text="@string/statistics_thanks"  />
 
               <ImageView
                 android:layout_width="@dimen/medium_width"
                 android:layout_height="@dimen/medium_height"
+                android:id="@+id/thanks_received_infoIcon"
                 android:layout_marginTop="@dimen/activity_margin_horizontal"
                 android:layout_marginRight="@dimen/activity_margin_horizontal"
                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
