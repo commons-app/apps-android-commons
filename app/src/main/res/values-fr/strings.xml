@@ -598,5 +598,7 @@
   <string name="media_detail_step_title">Détails du média</string>
   <string name="menu_view_category_page">Voir la page de catégorie</string>
   <string name="menu_view_item_page">Voir la page de l’élément</string>
+  <string name="app_ui_language">Langue d’interface utilisateur de l’application</string>
+  <string name="remove">Supprime une légende et une description</string>
   <string name="read_help_link">En savoir plus</string>
 </resources>
