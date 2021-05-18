@@ -16,11 +16,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -50,6 +47,7 @@ import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
+import fr.free.nrw.commons.Description.DescriptionEditHelper;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
@@ -62,6 +60,7 @@ import fr.free.nrw.commons.category.CategoryEditHelper;
 import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter;
 import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter.Callback;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
+import fr.free.nrw.commons.coordinates.CoordinateEditHelper;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
@@ -86,7 +85,7 @@ import org.wikipedia.util.DateUtil;
 import timber.log.Timber;
 
 public class MediaDetailFragment extends CommonsDaggerSupportFragment implements Callback,
-    CategoryEditHelper.Callback {
+    CategoryEditHelper.Callback, CoordinateEditHelper.Callback, DescriptionEditHelper.Callback {
 
     private boolean editable;
     private boolean isCategoryImage;
@@ -123,6 +122,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     DeleteHelper deleteHelper;
     @Inject
     CategoryEditHelper categoryEditHelper;
+    @Inject
+    CoordinateEditHelper coordinateEditHelper;
+    @Inject
+    DescriptionEditHelper descriptionEditHelper;
     @Inject
     ViewUtilWrapper viewUtil;
     @Inject
@@ -735,6 +738,19 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         }
     }
 
+    @OnClick(R.id.coordinate_edit)
+    public void onUpdateCoordinatesClicked(){
+        Toast.makeText(getContext(),"Testing",Toast.LENGTH_LONG).show();
+        updateLatitude("41°24'12.2\"N");
+        updateLogtitute("2°10'26.5\"E");
+    }
+
+    @OnClick(R.id.edit_description)
+    public void onUpdateDescriptionClicked(){
+        Toast.makeText(getContext(),"Testing",Toast.LENGTH_LONG).show();
+        updateDescription("This is for testing");
+    }
+
     @OnClick(R.id.update_categories_button)
     public void onUpdateCategoriesClicked() {
         updateCategories(categoryEditSearchRecyclerViewAdapter.getNewCategories());
@@ -754,6 +770,45 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 Timber.d("Categories are added.");
                 onOutsideOfCategoryEditClicked();
                 media.setAddedCategories(selectedCategories);
+                updateCategoryList();
+            }));
+    }
+
+    public void updateDescription(String description) {
+        compositeDisposable.add(descriptionEditHelper.makeDescriptionEdit(getContext(), media,
+            description, this)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(s -> {
+                Timber.d("Description added.");
+                onOutsideOfCategoryEditClicked();
+//                media.setAddedCategories(selectedCategories);
+                updateCategoryList();
+            }));
+    }
+
+    public void updateLatitude(String Latitude) {
+        compositeDisposable.add(coordinateEditHelper.makeLatitudeEdit(getContext(), media,
+            Latitude, this)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(s -> {
+                Timber.d("Coordinates are added.");
+                onOutsideOfCategoryEditClicked();
+//                media.setAddedCategories(selectedCategories);
+                updateCategoryList();
+            }));
+    }
+
+    public void updateLogtitute(String Longitude) {
+        compositeDisposable.add(coordinateEditHelper.makeLongitudeEdit(getContext(), media,
+            Longitude, this)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(s -> {
+                Timber.d("Coordinates are added.");
+                onOutsideOfCategoryEditClicked();
+//                media.setAddedCategories(selectedCategories);
                 updateCategoryList();
             }));
     }

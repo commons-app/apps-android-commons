@@ -188,6 +188,13 @@
                       android:textColor="?attr/mediaDetailsText"
                       android:textSize="@dimen/description_text_size"
                       tools:text="Description of the media goes here. This can potentially be fairly long, and will need to wrap across multiple lines. We hope it looks nice though." />
+                    <Button
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Des"
+                      android:textColor="@color/white"
+                      android:id="@+id/edit_description"
+                      />
                 </LinearLayout>
 
                 <View
@@ -249,6 +256,14 @@
                       android:drawablePadding="@dimen/tiny_gap"
                       android:drawableStart="?attr/iconMap24"
                       tools:text="Coordinates link" />
+
+                    <Button
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="GPS"
+                      android:textColor="@color/white"
+                      android:id="@+id/coordinate_edit"
+                      />
                 </LinearLayout>
 
                 <LinearLayout
