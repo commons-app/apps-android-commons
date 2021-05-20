@@ -254,10 +254,12 @@
                       android:id="@+id/coordinate_edit"
                       android:layout_width="24dp"
                       android:layout_height="24dp"
-                      android:layout_gravity="right"
-                      android:layout_marginLeft="@dimen/standard_gap"
+                      android:layout_marginStart="@dimen/standard_gap"
+                      android:layout_marginTop="@dimen/standard_gap"
                       android:layout_marginBottom="@dimen/standard_gap"
+                      android:layout_gravity="end"
                       android:background="@drawable/ic_baseline_edit_24" />
+
                 </LinearLayout>
 
                 <LinearLayout

@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.media;
 
-import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -18,6 +17,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +50,7 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
 import com.mapbox.api.geocoding.v5.models.CarmenFeature;
-import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.plugins.places.picker.PlacePicker;
@@ -773,7 +773,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             // also be parsed through to grab and display certain information such as
             // its placeName, text, or coordinates.
             if (carmenFeature != null) {
-                updateCoordinates("19.075984","72.877656", "2");
+                Point location = (Point) carmenFeature.geometry();
+
+                if(location != null){
+                    String latitude = String.valueOf(location.latitude());
+                    String longitude = String.valueOf(location.longitude());
+                    String accuracy = carmenFeature.relevance().toString();
+                    updateCoordinates(latitude,longitude, accuracy);
+                }
             }
         }
     }
