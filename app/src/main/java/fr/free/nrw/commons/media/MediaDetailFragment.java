@@ -332,8 +332,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 Label.valuesAsList()), categoryRecyclerView, categoryClient, this);
         categoryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         categoryRecyclerView.setAdapter(categoryEditSearchRecyclerViewAdapter);
+        // detail provider is null when fragment is shown in review activity
+        if (detailProvider != null) {
+            media = detailProvider.getMediaAtPosition(index);
+        } else {
+            media = getArguments().getParcelable("media");
+        }
 
-        media = detailProvider.getMediaAtPosition(index);
         scrollView.getViewTreeObserver().addOnGlobalLayoutListener(
             new OnGlobalLayoutListener() {
                 @Override

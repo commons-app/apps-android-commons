@@ -14,13 +14,13 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Почеток на подигањата</string>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Започнувам %1$d подигање</item>
-    <item quantity="other">Започнувам %1$d подигања</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Обработувам %1$d подигање</item>
+    <item quantity="other">Обработувам %1$d подигања</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d подигање</item>
-    <item quantity="other">%1$d подигања</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d подигање</item>
+    <item quantity="other">%d подигања</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Сликава ќе се води под лиценцата %1$s</item>
@@ -59,7 +59,7 @@
   <string name="uploading_queued">Подигањето е во редица (овозможен режимот на ограничена врска)</string>
   <string name="upload_completed_notification_title">Податотеката „%1$s“ е подигната!</string>
   <string name="upload_completed_notification_text">Допрете за да го погледате подигањето</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Почнувам со подигањето на „%1$s“</string>
+  <string name="upload_progress_notification_title_start">Подигање на податотеката: %s</string>
   <string name="upload_progress_notification_title_in_progress">Подигање на „%1$s“</string>
   <string name="upload_progress_notification_title_finishing">Завршувам со подигање на „%1$s“</string>
   <string name="upload_failed_notification_title">Подигањето на „%1$s“ не успеа</string>
@@ -573,5 +573,6 @@
   <string name="media_detail_step_title">Поединости за творбата</string>
   <string name="menu_view_category_page">Погл. категориска страница</string>
   <string name="menu_view_item_page">Погл. страница на предметот</string>
+  <string name="remove">Острани толкување и опис</string>
   <string name="read_help_link">Прочитајте повеќе</string>
 </resources>

@@ -89,6 +89,7 @@ public class ContributionsFragment
     @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
     @BindView(R.id.campaigns_view) CampaignView campaignView;
     @BindView(R.id.limited_connection_enabled_layout) LinearLayout limitedConnectionEnabledLayout;
+    @BindView(R.id.limited_connection_description_text_view) TextView limitedConnectionDescriptionTextView;
 
     @Inject ContributionsPresenter contributionsPresenter;
 
@@ -158,6 +159,7 @@ public class ContributionsFragment
             && sessionManager.getCurrentAccount() != null) {
             setUploadCount();
         }
+        limitedConnectionEnabledLayout.setOnClickListener(toggleDescriptionListener);
         setHasOptionsMenu(true);
         return view;
     }
@@ -617,5 +619,21 @@ public class ContributionsFragment
     public MediaDetailPagerFragment getMediaDetailPagerFragment() {
         return mediaDetailPagerFragment;
     }
+
+  // click listener to toggle description that means uses can press the limited connection
+  // banner and description will hide. Tap again to show description.
+  private View.OnClickListener toggleDescriptionListener = new View.OnClickListener() {
+
+      @Override
+      public void onClick(View view) {
+          View view2 = limitedConnectionDescriptionTextView;
+          if (view2.getVisibility() == View.GONE) {
+              view2.setVisibility(View.VISIBLE);
+          } else {
+              view2.setVisibility(View.GONE);
+          }
+      }
+  };
+
 }
 

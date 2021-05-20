@@ -1,7 +1,9 @@
 package fr.free.nrw.commons.contributions;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -37,6 +39,7 @@ import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.NearbyParentFra
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
+import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.worker.UploadWorker;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
@@ -107,6 +110,7 @@ public class MainActivity  extends BaseActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadLocale();
         setContentView(R.layout.main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
@@ -364,5 +368,15 @@ public class MainActivity  extends BaseActivity
         EXPLORE,
         BOOKMARK,
         MORE
+    }
+
+    /**
+     * Load default language in onCreate from SharedPreferences
+     */
+    private void loadLocale(){
+        final SharedPreferences preferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        final String language = preferences.getString("language", "");
+        final SettingsFragment settingsFragment = new SettingsFragment();
+        settingsFragment.setLocale(this, language);
     }
 }

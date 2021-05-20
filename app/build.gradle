@@ -79,29 +79,20 @@ dependencies {
     //Mocking
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
     testImplementation 'org.mockito:mockito-inline:2.13.0'
-    testImplementation 'org.mockito:mockito-core:2.23.0'
-    testImplementation "org.powermock:powermock-module-junit4:2.0.0-beta.5"
-    testImplementation "org.powermock:powermock-api-mockito2:2.0.0-beta.5"
+    testImplementation 'org.mockito:mockito-core:2.25.1'
+    testImplementation "org.powermock:powermock-module-junit4:2.0.2"
+    testImplementation "org.powermock:powermock-api-mockito2:2.0.2"
 
     // Unit testing
-    testImplementation 'junit:junit:4.13.1'
-    testImplementation 'org.robolectric:robolectric:4.3'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.robolectric:robolectric:4.5.1'
     testImplementation 'androidx.test:core:1.3.0'
     testImplementation "com.squareup.okhttp3:mockwebserver:$OKHTTP_VERSION"
-    testImplementation "org.powermock:powermock-module-junit4:2.0.0-beta.5"
-    testImplementation "org.powermock:powermock-api-mockito2:2.0.0-beta.5"
-    testImplementation 'org.mockito:mockito-core:2.23.0'
     testImplementation "com.jraska.livedata:testing-ktx:1.1.2"
     testImplementation "androidx.arch.core:core-testing:2.1.0"
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.3.1"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.3.1"
     testImplementation 'com.facebook.soloader:soloader:0.9.0'
-
-    // Mockito and PowerMock
-    androidTestCompile ('org.powermock:powermock-mockito-release-full:1.6.0') {
-        exclude module: 'hamcrest-core'
-        exclude module: 'objenesis'
-    }
 
     // Android testing
     androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
