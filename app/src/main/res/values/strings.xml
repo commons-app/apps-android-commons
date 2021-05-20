@@ -613,5 +613,6 @@ Upload your first media by tapping on the add button.</string>
   <string name="app_ui_language">App user interface language</string>
   <string name="remove">Removes a caption and description</string>
   <string name="read_help_link">Read more</string>
+  <string name="access_token">pk.eyJ1IjoiYXlhbi0xMCIsImEiOiJja293aGVucnAwMDZhMndwbm90cXV1MmR2In0.vRXyhsZPxsZNEyRU8gbDDw</string>
 
 </resources>

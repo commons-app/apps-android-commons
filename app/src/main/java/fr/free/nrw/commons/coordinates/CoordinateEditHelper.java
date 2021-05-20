@@ -40,17 +40,13 @@ public class CoordinateEditHelper {
      * Public interface to edit coordinates
      * @param context
      * @param media
+     * @param Accuracy
      * @return
      */
-    public Single<Boolean> makeLatitudeEdit(Context context, Media media, String Latitude, Callback callback) {
-        viewUtil.showShortToast(context, context.getString(R.string.category_edit_helper_make_edit_toast));
-        return addLatitude(media, Latitude)
-            .flatMapSingle(result -> Single.just(showCoordinatesEditNotification(context, media, result)))
-            .firstOrError();
-    }
-    public Single<Boolean> makeLongitudeEdit(Context context, Media media, String Longitude, Callback callback) {
-        viewUtil.showShortToast(context, context.getString(R.string.category_edit_helper_make_edit_toast));
-        return addLongitude(media, Longitude)
+    public Single<Boolean> makeCoordinatesEdit(Context context, Media media, String Latitude,
+        String Longitude, String Accuracy, Callback callback) {
+        viewUtil.showShortToast(context, "Trying to update coordinates");
+        return addCoordinates(media, Latitude, Longitude, Accuracy)
             .flatMapSingle(result -> Single.just(showCoordinatesEditNotification(context, media, result)))
             .firstOrError();
     }
@@ -59,50 +55,33 @@ public class CoordinateEditHelper {
      * Appends new Latitude
      * @param media
      * @param Latitude to be added
+     * @param Longitude
+     * @param Accuracy
      * @return
      */
-    private Observable<Boolean> addLatitude(Media media, String Latitude) {
-        Timber.d("thread is category adding %s", Thread.currentThread().getName());
-        String summary = "Adding Latitude";
+    private Observable<Boolean> addCoordinates(Media media, String Latitude,
+        String Longitude, String Accuracy) {
+        Timber.d("thread is coordinates adding %s", Thread.currentThread().getName());
+        String summary = "Adding Coordinates";
 
         StringBuilder buffer = new StringBuilder();
 
         if (Latitude != null) {
 
-            buffer.append("\n[[Latitude:").append(Latitude).append("]]");
+            // {{Location|55.755826|37.6173}}
+            buffer.append("\n{{Location|").append(Latitude).append("|").append(Longitude)
+                .append("|").append(Accuracy).append("}}");
 
         } else {
             buffer.append("{{subst:unc}}");
         }
         String appendText = buffer.toString();
-        return pageEditClient.edit(media.getFilename(), appendText + "\n", summary);
-    }
-    /**
-     * Appends new Longitude
-     * @param media
-     * @param Longitude to be added
-     * @return
-     */
-    private Observable<Boolean> addLongitude(Media media, String Longitude) {
-        Timber.d("thread is category adding %s", Thread.currentThread().getName());
-        String summary = "Adding Longitude";
-
-        StringBuilder buffer = new StringBuilder();
-
-        if (Longitude != null) {
-
-            buffer.append("\n[[Longitude:").append(Longitude).append("]]");
-
-        } else {
-            buffer.append("{{subst:unc}}");
-        }
-        String appendText = buffer.toString();
-        return pageEditClient.edit(media.getFilename(), appendText + "\n", summary);
+        return pageEditClient.edit(media.getFilename(), appendText , summary);
     }
 
     private boolean showCoordinatesEditNotification(Context context, Media media, boolean result) {
         String message;
-        String title = context.getString(R.string.category_edit_helper_show_edit_title);
+        String title = "Coordinates Update";
 
         if (result) {
             title += ": " + context.getString(R.string.category_edit_helper_show_edit_title_success);
@@ -113,8 +92,8 @@ public class CoordinateEditHelper {
 
             message = categoriesInMessage.toString();
         } else {
-            title += ": " + context.getString(R.string.category_edit_helper_show_edit_title);
-            message = context.getString(R.string.category_edit_helper_edit_message_else) ;
+            title += ": " + "Coordinates Update";
+            message = "Could not update coordinates" ;
         }
 
         String urlForFile = BuildConfig.COMMONS_URL + "/wiki/" + media.getFilename();

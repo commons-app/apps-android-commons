@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.media;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_NEEDING_CATEGORIES;
@@ -47,7 +49,12 @@ import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
-import fr.free.nrw.commons.Description.DescriptionEditHelper;
+import com.mapbox.api.geocoding.v5.models.CarmenFeature;
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.plugins.places.picker.PlacePicker;
+import com.mapbox.mapboxsdk.plugins.places.picker.model.PlacePickerOptions;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
@@ -63,8 +70,8 @@ import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
-import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
@@ -76,8 +83,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
@@ -85,8 +92,9 @@ import org.wikipedia.util.DateUtil;
 import timber.log.Timber;
 
 public class MediaDetailFragment extends CommonsDaggerSupportFragment implements Callback,
-    CategoryEditHelper.Callback, CoordinateEditHelper.Callback, DescriptionEditHelper.Callback {
+    CategoryEditHelper.Callback, CoordinateEditHelper.Callback {
 
+    private static final int REQUEST_CODE = 5678 ;
     private boolean editable;
     private boolean isCategoryImage;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
@@ -124,8 +132,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     CategoryEditHelper categoryEditHelper;
     @Inject
     CoordinateEditHelper coordinateEditHelper;
-    @Inject
-    DescriptionEditHelper descriptionEditHelper;
     @Inject
     ViewUtilWrapper viewUtil;
     @Inject
@@ -740,15 +746,36 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @OnClick(R.id.coordinate_edit)
     public void onUpdateCoordinatesClicked(){
-        Toast.makeText(getContext(),"Testing",Toast.LENGTH_LONG).show();
-        updateLatitude("41°24'12.2\"N");
-        updateLogtitute("2°10'26.5\"E");
+        goToPickerActivity();
     }
 
-    @OnClick(R.id.edit_description)
-    public void onUpdateDescriptionClicked(){
-        Toast.makeText(getContext(),"Testing",Toast.LENGTH_LONG).show();
-        updateDescription("This is for testing");
+    private void goToPickerActivity() {
+        startActivityForResult(new PlacePicker.IntentBuilder()
+            .accessToken(getString(R.string.access_token))
+            .placeOptions(PlacePickerOptions.builder().toolbarColor(getResources()
+                .getColor(R.color.primaryColor))
+                .statingCameraPosition(new CameraPosition
+                .Builder()
+                .target(new LatLng(media.getCoordinates().getLatitude(),
+                    media.getCoordinates().getLongitude()))
+                .zoom(16).build()).build()).build(getActivity()),REQUEST_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            // Retrieve the information from the selected location's CarmenFeature
+            CarmenFeature carmenFeature = PlacePicker.getPlace(data);
+
+            // Set the TextView text to the entire CarmenFeature. The CarmenFeature
+            // also be parsed through to grab and display certain information such as
+            // its placeName, text, or coordinates.
+            if (carmenFeature != null) {
+                updateCoordinates("19.075984","72.877656", "2");
+            }
+        }
     }
 
     @OnClick(R.id.update_categories_button)
@@ -774,41 +801,17 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             }));
     }
 
-    public void updateDescription(String description) {
-        compositeDisposable.add(descriptionEditHelper.makeDescriptionEdit(getContext(), media,
-            description, this)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(s -> {
-                Timber.d("Description added.");
-                onOutsideOfCategoryEditClicked();
-//                media.setAddedCategories(selectedCategories);
-                updateCategoryList();
-            }));
-    }
-
-    public void updateLatitude(String Latitude) {
-        compositeDisposable.add(coordinateEditHelper.makeLatitudeEdit(getContext(), media,
-            Latitude, this)
+    public void updateCoordinates(String Latitude, String Longitude, String Accuracy) {
+        compositeDisposable.add(coordinateEditHelper.makeCoordinatesEdit(getContext(), media,
+            Latitude, Longitude, Accuracy, this)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(s -> {
                 Timber.d("Coordinates are added.");
                 onOutsideOfCategoryEditClicked();
-//                media.setAddedCategories(selectedCategories);
-                updateCategoryList();
-            }));
-    }
-
-    public void updateLogtitute(String Longitude) {
-        compositeDisposable.add(coordinateEditHelper.makeLongitudeEdit(getContext(), media,
-            Longitude, this)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(s -> {
-                Timber.d("Coordinates are added.");
-                onOutsideOfCategoryEditClicked();
-//                media.setAddedCategories(selectedCategories);
+                media.setCoordinates(new fr.free.nrw.commons.location.LatLng(Double.parseDouble(Latitude),Double.parseDouble(Longitude),
+                    Float.parseFloat(Accuracy)));
+                coordinates.setText(prettyCoordinates(media));
                 updateCategoryList();
             }));
     }
