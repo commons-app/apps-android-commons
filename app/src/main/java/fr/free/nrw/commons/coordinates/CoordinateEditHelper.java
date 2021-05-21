@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.coordinates;
 
-import static fr.free.nrw.commons.notification.NotificationHelper.NOTIFICATION_EDIT_CATEGORY;
+import static fr.free.nrw.commons.notification.NotificationHelper.NOTIFICATION_EDIT_COORDINATES;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import fr.free.nrw.commons.notification.NotificationHelper;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import java.util.List;
+import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
@@ -22,87 +22,93 @@ public class CoordinateEditHelper {
     private final NotificationHelper notificationHelper;
     public final PageEditClient pageEditClient;
     private final ViewUtilWrapper viewUtil;
-    private final String username;
-    private Callback callback;
 
     @Inject
-    public CoordinateEditHelper(NotificationHelper notificationHelper,
-        @Named("commons-page-edit") PageEditClient pageEditClient,
-        ViewUtilWrapper viewUtil,
-        @Named("username") String username) {
+    public CoordinateEditHelper(final NotificationHelper notificationHelper,
+        @Named("commons-page-edit") final PageEditClient pageEditClient,
+        final ViewUtilWrapper viewUtil) {
         this.notificationHelper = notificationHelper;
         this.pageEditClient = pageEditClient;
         this.viewUtil = viewUtil;
-        this.username = username;
     }
 
     /**
      * Public interface to edit coordinates
-     * @param context
-     * @param media
-     * @param Accuracy
-     * @return
+     * @param context to be added
+     * @param media to be added
+     * @param Accuracy to be added
+     * @return Single<Boolean>
      */
-    public Single<Boolean> makeCoordinatesEdit(Context context, Media media, String Latitude,
-        String Longitude, String Accuracy, Callback callback) {
-        viewUtil.showShortToast(context, "Trying to update coordinates");
+    public Single<Boolean> makeCoordinatesEdit(final Context context, final Media media,
+        final String Latitude,
+        final String Longitude, final String Accuracy) {
+        viewUtil.showShortToast(context,
+            context.getString(R.string.coordinates_edit_helper_make_edit_toast));
         return addCoordinates(media, Latitude, Longitude, Accuracy)
-            .flatMapSingle(result -> Single.just(showCoordinatesEditNotification(context, media, result)))
+            .flatMapSingle(result -> Single.just(showCoordinatesEditNotification(context, media,
+                result)))
             .firstOrError();
     }
 
     /**
-     * Appends new Latitude
-     * @param media
+     * Replaces new coordinates
+     * @param media to be added
      * @param Latitude to be added
-     * @param Longitude
-     * @param Accuracy
-     * @return
+     * @param Longitude to be added
+     * @param Accuracy to be added
+     * @return Observable<Boolean>
      */
-    private Observable<Boolean> addCoordinates(Media media, String Latitude,
-        String Longitude, String Accuracy) {
+    private Observable<Boolean> addCoordinates(final Media media, final String Latitude,
+        final String Longitude, final String Accuracy) {
         Timber.d("thread is coordinates adding %s", Thread.currentThread().getName());
-        String summary = "Adding Coordinates";
+        final String summary = "Adding Coordinates";
 
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buffer = new StringBuilder();
 
         if (Latitude != null) {
-
-            // {{Location|55.755826|37.6173}}
             buffer.append("\n{{Location|").append(Latitude).append("|").append(Longitude)
                 .append("|").append(Accuracy).append("}}");
-
         } else {
             buffer.append("{{subst:unc}}");
         }
-        String appendText = buffer.toString();
-        return pageEditClient.edit(media.getFilename(), appendText , summary);
+        final String appendText = buffer.toString();
+        return pageEditClient.edit(Objects.requireNonNull(media.getFilename())
+               , appendText, summary);
     }
 
-    private boolean showCoordinatesEditNotification(Context context, Media media, boolean result) {
-        String message;
-        String title = "Coordinates Update";
+    /**
+     * Shows notification about coordinate update
+     * @param context to be added
+     * @param media to be added
+     * @param result to be added
+     * @return boolean
+     */
+    private boolean showCoordinatesEditNotification(final Context context, final Media media,
+        final boolean result) {
+        final String message;
+        String title = context.getString(R.string.coordinates_edit_helper_show_edit_title);
 
         if (result) {
-            title += ": " + context.getString(R.string.category_edit_helper_show_edit_title_success);
-            StringBuilder categoriesInMessage = new StringBuilder();
-            String mediaCoordinate = String.valueOf(media.getCoordinates());
-
-                categoriesInMessage.append(mediaCoordinate);
-
-            message = categoriesInMessage.toString();
+            title += ": " + context
+                .getString(R.string.coordinates_edit_helper_show_edit_title_success);
+            final StringBuilder coordinatesInMessage = new StringBuilder();
+            final String mediaCoordinate = String.valueOf(media.getCoordinates());
+            coordinatesInMessage.append(mediaCoordinate);
+            message = context.getString(R.string.coordinates_edit_helper_show_edit_message,
+                coordinatesInMessage.toString());
         } else {
-            title += ": " + "Coordinates Update";
-            message = "Could not update coordinates" ;
+            title += ": " + context.getString(R.string.coordinates_edit_helper_show_edit_title);
+            message = context.getString(R.string.coordinates_edit_helper_edit_message_else) ;
         }
 
-        String urlForFile = BuildConfig.COMMONS_URL + "/wiki/" + media.getFilename();
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlForFile));
-        notificationHelper.showNotification(context, title, message, NOTIFICATION_EDIT_CATEGORY, browserIntent);
+        final String urlForFile = BuildConfig.COMMONS_URL + "/wiki/" + media.getFilename();
+        final Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlForFile));
+        notificationHelper.showNotification(context, title, message, NOTIFICATION_EDIT_COORDINATES,
+            browserIntent);
         return result;
     }
 
     public interface  Callback {
-        boolean updateCategoryDisplay(List<String> categories);
+
     }
 }

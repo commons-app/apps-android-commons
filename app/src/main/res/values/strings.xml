@@ -511,6 +511,12 @@ Upload your first media by tapping on the add button.</string>
   <string name="category_edit_helper_edit_message_else">Could not add categories.</string>
   <string name="category_edit_button_text">Update categories</string>
 
+  <string name="coordinates_edit_helper_make_edit_toast">Trying to update coordinates.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Coordinates update</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Success</string>
+  <string name="coordinates_edit_helper_show_edit_message">Coordinates %1$s are added.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Could not add coordinates.</string>
+
   <string name="share_image_via">Share image via</string>
   <string name="no_achievements_yet">You haven\'t made any contributions yet</string>
   <string name="account_created">Account created!</string>

@@ -17,7 +17,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,7 +93,7 @@ import timber.log.Timber;
 public class MediaDetailFragment extends CommonsDaggerSupportFragment implements Callback,
     CategoryEditHelper.Callback, CoordinateEditHelper.Callback {
 
-    private static final int REQUEST_CODE = 5678 ;
+    private static final int REQUEST_CODE = 1001 ;
     private boolean editable;
     private boolean isCategoryImage;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
@@ -750,36 +749,50 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     private void goToPickerActivity() {
+        double latitude = 37.773972;
+        double longitude = -122.431297;
+        if (media.getCoordinates() != null) {
+            latitude = media.getCoordinates().getLatitude();
+            longitude = media.getCoordinates().getLongitude();
+        }
         startActivityForResult(new PlacePicker.IntentBuilder()
             .accessToken(getString(R.string.access_token))
             .placeOptions(PlacePickerOptions.builder().toolbarColor(getResources()
                 .getColor(R.color.primaryColor))
-                .statingCameraPosition(new CameraPosition
-                .Builder()
-                .target(new LatLng(media.getCoordinates().getLatitude(),
-                    media.getCoordinates().getLongitude()))
+                .statingCameraPosition(new CameraPosition.Builder()
+                .target(new LatLng(latitude, longitude))
                 .zoom(16).build()).build()).build(getActivity()),REQUEST_CODE);
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             // Retrieve the information from the selected location's CarmenFeature
-            CarmenFeature carmenFeature = PlacePicker.getPlace(data);
+            final CarmenFeature carmenFeature = PlacePicker.getPlace(data);
 
             // Set the TextView text to the entire CarmenFeature. The CarmenFeature
             // also be parsed through to grab and display certain information such as
             // its placeName, text, or coordinates.
             if (carmenFeature != null) {
-                Point location = (Point) carmenFeature.geometry();
+                final Point location = (Point) carmenFeature.geometry();
 
-                if(location != null){
-                    String latitude = String.valueOf(location.latitude());
-                    String longitude = String.valueOf(location.longitude());
-                    String accuracy = carmenFeature.relevance().toString();
-                    updateCoordinates(latitude,longitude, accuracy);
+                if (location != null) {
+                    final String latitude = String.valueOf(location.latitude());
+                    final String longitude = String.valueOf(location.longitude());
+                    final String accuracy = carmenFeature.relevance().toString();
+                    String currentLatitude = null;
+                    String currentLongitude = null;
+                    if (media.getCoordinates() != null){
+                        currentLatitude = String.valueOf(media.getCoordinates().getLatitude());
+                        currentLongitude = String.valueOf(media.getCoordinates().getLongitude());
+                    }
+                    if (!latitude.equals(currentLatitude) || !longitude.equals(currentLongitude)) {
+                        updateCoordinates(latitude, longitude, accuracy);
+                    } else if (media.getCoordinates() == null) {
+                        updateCoordinates(latitude, longitude, accuracy);
+                    }
                 }
             }
         }
@@ -808,18 +821,20 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             }));
     }
 
-    public void updateCoordinates(String Latitude, String Longitude, String Accuracy) {
+    public void updateCoordinates(final String Latitude, final String Longitude,
+        final String Accuracy) {
         compositeDisposable.add(coordinateEditHelper.makeCoordinatesEdit(getContext(), media,
-            Latitude, Longitude, Accuracy, this)
+            Latitude, Longitude, Accuracy)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(s -> {
                 Timber.d("Coordinates are added.");
                 onOutsideOfCategoryEditClicked();
-                media.setCoordinates(new fr.free.nrw.commons.location.LatLng(Double.parseDouble(Latitude),Double.parseDouble(Longitude),
-                    Float.parseFloat(Accuracy)));
+                media.setCoordinates(
+                    new fr.free.nrw.commons.location.LatLng(Double.parseDouble(Latitude),
+                        Double.parseDouble(Longitude),
+                        Float.parseFloat(Accuracy)));
                 coordinates.setText(prettyCoordinates(media));
-                updateCategoryList();
             }));
     }
 
