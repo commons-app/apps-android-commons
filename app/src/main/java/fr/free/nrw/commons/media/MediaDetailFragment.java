@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.media;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -83,6 +84,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -745,12 +747,16 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @OnClick(R.id.coordinate_edit)
     public void onUpdateCoordinatesClicked(){
-        goToPickerActivity();
+        goToLocationPickerActivity();
     }
 
-    private void goToPickerActivity() {
+    /**
+     * Start location picker activity with a request code and get the coordinates from the activity.
+     */
+    private void goToLocationPickerActivity() {
         double latitude = 37.773972;
         double longitude = -122.431297;
+
         if (media.getCoordinates() != null) {
             latitude = media.getCoordinates().getLatitude();
             longitude = media.getCoordinates().getLongitude();
@@ -764,30 +770,38 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 .zoom(16).build()).build()).build(getActivity()),REQUEST_CODE);
     }
 
+    /**
+     * Get the coordinates and update the existing coordinates.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
-    public void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
+    public void onActivityResult(final int requestCode, final int resultCode,
+        @Nullable final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-            // Retrieve the information from the selected location's CarmenFeature
+
+            assert data != null;
             final CarmenFeature carmenFeature = PlacePicker.getPlace(data);
 
-            // Set the TextView text to the entire CarmenFeature. The CarmenFeature
-            // also be parsed through to grab and display certain information such as
-            // its placeName, text, or coordinates.
             if (carmenFeature != null) {
                 final Point location = (Point) carmenFeature.geometry();
 
                 if (location != null) {
                     final String latitude = String.valueOf(location.latitude());
                     final String longitude = String.valueOf(location.longitude());
-                    final String accuracy = carmenFeature.relevance().toString();
+                    final String accuracy = Objects.requireNonNull(
+                        carmenFeature.relevance()).toString();
                     String currentLatitude = null;
                     String currentLongitude = null;
-                    if (media.getCoordinates() != null){
+
+                    if (media.getCoordinates() != null) {
                         currentLatitude = String.valueOf(media.getCoordinates().getLatitude());
                         currentLongitude = String.valueOf(media.getCoordinates().getLongitude());
                     }
+
                     if (!latitude.equals(currentLatitude) || !longitude.equals(currentLongitude)) {
                         updateCoordinates(latitude, longitude, accuracy);
                     } else if (media.getCoordinates() == null) {
@@ -795,6 +809,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                     }
                 }
             }
+        } else if (resultCode == RESULT_CANCELED) {
+            viewUtil.showShortToast(getContext(),
+                Objects.requireNonNull(getContext())
+                    .getString(R.string.coordinates_picking_unsuccessful));
         }
     }
 
@@ -821,6 +839,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             }));
     }
 
+    /**
+     * Fetched coordinates are replaced with existing coordinates by a POST API call.
+     * @param Latitude to be added
+     * @param Longitude to be added
+     * @param Accuracy to be added
+     */
     public void updateCoordinates(final String Latitude, final String Longitude,
         final String Accuracy) {
         compositeDisposable.add(coordinateEditHelper.makeCoordinatesEdit(getContext(), media,

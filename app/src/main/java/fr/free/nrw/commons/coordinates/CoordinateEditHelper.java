@@ -40,8 +40,7 @@ public class CoordinateEditHelper {
      * @return Single<Boolean>
      */
     public Single<Boolean> makeCoordinatesEdit(final Context context, final Media media,
-        final String Latitude,
-        final String Longitude, final String Accuracy) {
+        final String Latitude, final String Longitude, final String Accuracy) {
         viewUtil.showShortToast(context,
             context.getString(R.string.coordinates_edit_helper_make_edit_toast));
         return addCoordinates(media, Latitude, Longitude, Accuracy)
