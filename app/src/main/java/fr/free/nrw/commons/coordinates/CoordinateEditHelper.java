@@ -106,8 +106,4 @@ public class CoordinateEditHelper {
             browserIntent);
         return result;
     }
-
-    public interface  Callback {
-
-    }
 }

@@ -93,7 +93,7 @@ import org.wikipedia.util.DateUtil;
 import timber.log.Timber;
 
 public class MediaDetailFragment extends CommonsDaggerSupportFragment implements Callback,
-    CategoryEditHelper.Callback, CoordinateEditHelper.Callback {
+    CategoryEditHelper.Callback {
 
     private static final int REQUEST_CODE = 1001 ;
     private boolean editable;
