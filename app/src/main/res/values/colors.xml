@@ -75,7 +75,8 @@
     <color name="current_marker_stroke">#55000000</color>
     <color name="current_marker_fill">#11000000</color>
 
-    <color name="nav_tab_icon_unselected_color">#61000000</color>
+    <color name="nav_tab_icon_unselected_color_light">#61000000</color>
+    <color name="nav_tab_icon_unselected_color_dark">#B0B0B0</color>
     <color name="card_light_grey">#EDEDED</color>
 
     <color name="wikimedia_green">#339966</color>
