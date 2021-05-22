@@ -87,7 +87,7 @@ class Media constructor(
         fallbackDescription: String?,
         author: String?, user:String?
     ) : this(
-        filename = filename?.trim(),
+        filename = filename,
         fallbackDescription = fallbackDescription,
         dateUploaded = Date(),
         author = author,
@@ -103,7 +103,7 @@ class Media constructor(
     val displayTitle: String
         get() =
             if (filename != null)
-                pageTitle.displayTextWithoutNamespace.replaceFirst("[.][^.]+$".toRegex(), "").trim()
+                pageTitle.displayTextWithoutNamespace.replaceFirst("[.][^.]+$".toRegex(), "")
             else
                 ""
 
@@ -118,10 +118,10 @@ class Media constructor(
      * @return
      */
     val wikiCode: String
-        get() = String.format("[[%s|thumb|%s]]", filename?.trim(), mostRelevantCaption)
+        get() = String.format("[[%s|thumb|%s]]", filename, mostRelevantCaption)
 
     val mostRelevantCaption: String
-        get() = captions[Locale.getDefault().language]?.trim()
+        get() = captions[Locale.getDefault().language]
             ?: captions.values.firstOrNull()
             ?: displayTitle
 

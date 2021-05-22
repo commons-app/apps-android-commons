@@ -44,10 +44,8 @@ class Description {
             val descListString = StringBuilder()
             for (description in descriptions) {
                 if (!description.isEmpty) {
-                    val individualDescription = String.format(
-                        "{{%s|1=%s}}", description.languageCode,
-                        description.descriptionText
-                    )
+                    val individualDescription = String.format("{{%s|1=%s}}", description.languageCode,
+                            description.descriptionText)
                     descListString.append(individualDescription)
                 }
             }

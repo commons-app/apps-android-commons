@@ -28,7 +28,7 @@ public class Caption {
     public Caption(String language, String value) {
         super();
         this.language = language;
-        this.value = value.trim();
+        this.value = value;
     }
 
     @SerializedName("language")
@@ -38,6 +38,6 @@ public class Caption {
 
     @SerializedName("value")
     public String  getValue() {
-        return value.trim();
+        return value;
     }
 }

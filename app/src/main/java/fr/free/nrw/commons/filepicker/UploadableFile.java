@@ -56,7 +56,7 @@ public class UploadableFile implements Parcelable {
     }
 
     public String getFilePath() {
-        return file.getPath().trim();
+        return file.getPath();
     }
 
     public Uri getMediaUri() {
@@ -153,12 +153,12 @@ public class UploadableFile implements Parcelable {
 
         public DateTimeWithSource(long epochDate, String source) {
             this.epochDate = epochDate;
-            this.source = source.trim();
+            this.source = source;
         }
 
         public DateTimeWithSource(Date date, String source) {
             this.epochDate = date.getTime();
-            this.source = source.trim();
+            this.source = source;
         }
 
         public long getEpochDate() {
@@ -166,7 +166,7 @@ public class UploadableFile implements Parcelable {
         }
 
         public String getSource() {
-            return source.trim();
+            return source;
         }
     }
 }
