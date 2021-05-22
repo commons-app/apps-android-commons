@@ -8,7 +8,7 @@
     <item
         android:id="@+id/share_app_icon"
         android:title="@string/share_app_title"
-        android:icon="@drawable/ic_share_24dp"
+        android:icon="@drawable/ic_share_black_24dp"
         android:orderInCategory="1"
         app:showAsAction="ifRoom"
         />
