@@ -339,6 +339,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             // no longer attached to activity!
             return;
         }
+        compositeDisposable.clear();
         sessionManager.setUserLoggedIn(true);
         AppAdapter.get().updateAccount(loginResult);
         progressDialog.dismiss();
