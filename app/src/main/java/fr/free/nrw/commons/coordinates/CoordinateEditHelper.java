@@ -87,8 +87,8 @@ public class CoordinateEditHelper {
         }
 
         final String editedLocation = buffer.toString();
-
         final String appendText = getFormattedWikiText(wikiText, editedLocation);
+
         return pageEditClient.edit(Objects.requireNonNull(media.getFilename())
                , appendText, summary);
     }

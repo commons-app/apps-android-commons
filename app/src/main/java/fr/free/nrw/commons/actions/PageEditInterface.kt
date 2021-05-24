@@ -5,9 +5,7 @@ import io.reactivex.Single
 import org.wikipedia.dataclient.Service
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import org.wikipedia.edit.Edit
-import retrofit2.Call
 import retrofit2.http.*
-import javax.inject.Singleton
 
 /**
  * This interface facilitates wiki commons page editing services to the Networking module
