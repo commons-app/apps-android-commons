@@ -519,6 +519,7 @@
   <string name="setting_wallpaper_dialog_message">Hintergrundbild wird festgelegt. Bitte warten...</string>
   <string name="theme_dark_name">Dunkel</string>
   <string name="theme_light_name">Hell</string>
+  <string name="cannot_open_location_settings">Die Standorteinstellungen konnten nicht geöffnet werden. Bitte schalte den Standort manuell ein</string>
   <string name="recommend_high_accuracy_mode">Die besten Ergebnisse erzielst du, wenn du den Modus „Hohe Genauigkeit“ wählst.</string>
   <string name="ask_to_turn_location_on">Standort einschalten?</string>
   <string name="nearby_needs_location">Für die Funktion „in der Nähe“ muss der Standort aktiviert sein, um richtig zu funktionieren</string>

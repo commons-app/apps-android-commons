@@ -593,5 +593,7 @@
   <string name="media_detail_step_title">Medya Ayrıntılar</string>
   <string name="menu_view_category_page">Kategori sayfasını görüntüle</string>
   <string name="menu_view_item_page">Öge sayfasını görüntüle</string>
+  <string name="app_ui_language">Uygulama kullanıcı arayüzü dili</string>
+  <string name="remove">Bir başlığı ve açıklamayı kaldırır</string>
   <string name="read_help_link">Devamını oku</string>
 </resources>

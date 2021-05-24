@@ -197,6 +197,7 @@
   <string name="location_permission_title">请求位置权限</string>
   <string name="ok">确定</string>
   <string name="warning">警告</string>
+  <string name="duplicate_image_found">找到重复的图像</string>
   <string name="upload">上传</string>
   <string name="yes">是</string>
   <string name="no">否</string>

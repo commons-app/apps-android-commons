@@ -504,5 +504,6 @@
   <string name="menu_view_category_page">분류 문서 보기</string>
   <string name="menu_view_item_page">항목 문서 보기</string>
   <string name="app_ui_language">앱 사용자 인터페이스 언어</string>
+  <string name="remove">캡션과 설명을 제거합니다</string>
   <string name="read_help_link">더 읽어보기</string>
 </resources>
