@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.LocationPicker;
 
-import static com.google.android.material.snackbar.Snackbar.LENGTH_LONG;
-
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -17,12 +15,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonObject;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.api.geocoding.v5.models.CarmenFeature;
-import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -55,14 +51,11 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
   private PermissionsManager permissionsManager;
   CurrentPlaceSelectionBottomSheet bottomSheet;
   CarmenFeature carmenFeature;
-  private PlacePickerViewModel viewModel;
   private PlacePickerOptions options;
   private ImageView markerImage;
   private MapboxMap mapboxMap;
-  private String accessToken;
   private MapView mapView;
   private FloatingActionButton userLocationButton;
-  private boolean includeReverseGeocode;
 
   @Override
   protected void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -76,12 +69,11 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
     setContentView(R.layout.mapbox_activity_place_picker);
 
     if (savedInstanceState == null) {
-      accessToken = getIntent().getStringExtra(PlaceConstants.ACCESS_TOKEN);
       options = getIntent().getParcelableExtra(PlaceConstants.PLACE_OPTIONS);
-      includeReverseGeocode = options.includeReverseGeocode();
     }
 
-    viewModel = new ViewModelProvider(this).get(PlacePickerViewModel.class);
+    final PlacePickerViewModel viewModel = new ViewModelProvider(this)
+        .get(PlacePickerViewModel.class);
     viewModel.getResults().observe(this, this);
 
     bindViews();
@@ -127,9 +119,6 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
     this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
       adjustCameraBasedOnOptions();
-      if (includeReverseGeocode) {
-        makeReverseGeocodingSearch();
-      }
       bindListeners();
 
       if (options != null && options.includeDeviceLocationButton()) {
@@ -208,11 +197,6 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
     if (markerImage.getTranslationY() == 0) {
       markerImage.animate().translationY(-75)
           .setInterpolator(new OvershootInterpolator()).setDuration(250).start();
-      if (includeReverseGeocode) {
-        if (bottomSheet.isShowing()) {
-          bottomSheet.dismissPlaceDetails();
-        }
-      }
     }
   }
 
@@ -221,11 +205,6 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
     Timber.v("Map camera is now idling.");
     markerImage.animate().translationY(0)
         .setInterpolator(new OvershootInterpolator()).setDuration(250).start();
-    if (includeReverseGeocode) {
-      bottomSheet.setPlaceDetails(null);
-      // Initialize with the markers current location information.
-      makeReverseGeocodingSearch();
-    }
   }
 
   @Override
@@ -241,27 +220,9 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
     bottomSheet.setPlaceDetails(carmenFeature);
   }
 
-  private void makeReverseGeocodingSearch() {
-    final LatLng latLng = mapboxMap.getCameraPosition().target;
-    if (latLng != null) {
-      viewModel.reverseGeocode(
-          Point.fromLngLat(latLng.getLongitude(), latLng.getLatitude()),
-          accessToken, options
-      );
-    }
-  }
-
   private void addPlaceSelectedButton() {
     final FloatingActionButton placeSelectedButton = findViewById(R.id.place_chosen_button);
-    placeSelectedButton.setOnClickListener(view -> {
-      if (carmenFeature == null && includeReverseGeocode) {
-        Snackbar.make(bottomSheet,
-            getString(R.string.mapbox_plugins_place_picker_not_valid_selection),
-            LENGTH_LONG).show();
-        return;
-      }
-      placeSelected();
-    });
+    placeSelectedButton.setOnClickListener(view -> placeSelected());
   }
 
   /**
