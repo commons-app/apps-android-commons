@@ -49,12 +49,10 @@ import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
-import com.mapbox.api.geocoding.v5.models.CarmenFeature;
-import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.plugins.places.picker.PlacePicker;
 import com.mapbox.mapboxsdk.plugins.places.picker.model.PlacePickerOptions;
+import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
@@ -761,7 +759,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             latitude = media.getCoordinates().getLatitude();
             longitude = media.getCoordinates().getLongitude();
         }
-        startActivityForResult(new PlacePicker.IntentBuilder()
+        startActivityForResult(new LocationPicker.IntentBuilder()
             .accessToken(getString(R.string.access_token))
             .placeOptions(PlacePickerOptions.builder().toolbarColor(getResources()
                 .getColor(R.color.primaryColor))
@@ -784,29 +782,25 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
 
             assert data != null;
-            final CarmenFeature carmenFeature = PlacePicker.getPlace(data);
+            final CameraPosition cameraPosition = LocationPicker.getCameraPosition(data);
 
-            if (carmenFeature != null) {
-                final Point location = (Point) carmenFeature.geometry();
+            if (cameraPosition != null) {
 
-                if (location != null) {
-                    final String latitude = String.valueOf(location.latitude());
-                    final String longitude = String.valueOf(location.longitude());
-                    final String accuracy = Objects.requireNonNull(
-                        carmenFeature.relevance()).toString();
-                    String currentLatitude = null;
-                    String currentLongitude = null;
+                final String latitude = String.valueOf(cameraPosition.target.getLatitude());
+                final String longitude = String.valueOf(cameraPosition.target.getLongitude());
+                final String accuracy = String.valueOf(cameraPosition.target.getAltitude());
+                String currentLatitude = null;
+                String currentLongitude = null;
 
-                    if (media.getCoordinates() != null) {
-                        currentLatitude = String.valueOf(media.getCoordinates().getLatitude());
-                        currentLongitude = String.valueOf(media.getCoordinates().getLongitude());
-                    }
+                if (media.getCoordinates() != null) {
+                    currentLatitude = String.valueOf(media.getCoordinates().getLatitude());
+                    currentLongitude = String.valueOf(media.getCoordinates().getLongitude());
+                }
 
-                    if (!latitude.equals(currentLatitude) || !longitude.equals(currentLongitude)) {
-                        updateCoordinates(latitude, longitude, accuracy);
-                    } else if (media.getCoordinates() == null) {
-                        updateCoordinates(latitude, longitude, accuracy);
-                    }
+                if (!latitude.equals(currentLatitude) || !longitude.equals(currentLongitude)) {
+                    updateCoordinates(latitude, longitude, accuracy);
+                } else if (media.getCoordinates() == null) {
+                    updateCoordinates(latitude, longitude, accuracy);
                 }
             }
         } else if (resultCode == RESULT_CANCELED) {
@@ -853,11 +847,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(s -> {
                 Timber.d("Coordinates are added.");
-                onOutsideOfCategoryEditClicked();
-                media.setCoordinates(
-                    new fr.free.nrw.commons.location.LatLng(Double.parseDouble(Latitude),
-                        Double.parseDouble(Longitude),
-                        Float.parseFloat(Accuracy)));
                 coordinates.setText(prettyCoordinates(media));
             }));
     }
