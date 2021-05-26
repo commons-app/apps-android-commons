@@ -51,7 +51,6 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.plugins.places.picker.model.PlacePickerOptions;
 import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
@@ -752,20 +751,22 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
      * Start location picker activity with a request code and get the coordinates from the activity.
      */
     private void goToLocationPickerActivity() {
-        double latitude = 37.773972;
-        double longitude = -122.431297;
+        /*
+        If location is not provided in media this coordinates will act as a placeholder in
+        location picker activity
+         */
+        double defaultLatitude = 37.773972;
+        double defaultLongitude = -122.431297;
 
         if (media.getCoordinates() != null) {
-            latitude = media.getCoordinates().getLatitude();
-            longitude = media.getCoordinates().getLongitude();
+            defaultLatitude = media.getCoordinates().getLatitude();
+            defaultLongitude = media.getCoordinates().getLongitude();
         }
         startActivityForResult(new LocationPicker.IntentBuilder()
-            .accessToken(getString(R.string.access_token))
-            .placeOptions(PlacePickerOptions.builder().toolbarColor(getResources()
-                .getColor(R.color.primaryColor))
-                .statingCameraPosition(new CameraPosition.Builder()
-                .target(new LatLng(latitude, longitude))
-                .zoom(16).build()).build()).build(getActivity()),REQUEST_CODE);
+            .defaultLocation(new CameraPosition.Builder()
+                .target(new LatLng(defaultLatitude, defaultLongitude))
+                .zoom(16).build())
+            .build(getActivity()),REQUEST_CODE);
     }
 
     /**

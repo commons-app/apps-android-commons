@@ -27,13 +27,17 @@ import timber.log.Timber;
 public class CoordinateEditHelper {
 
     /**
-     * notificationHelper: helps creating notification.
-     * pageEditClient: methods provided by this member posts the edited coordinates
-     * to the Media wiki api.
-     * viewUtil: helps to show Toast
+     * notificationHelper: helps creating notification
      */
     private final NotificationHelper notificationHelper;
+    /**
+     * * pageEditClient: methods provided by this member posts the edited coordinates
+     * to the Media wiki api
+     */
     public final PageEditClient pageEditClient;
+    /**
+     * viewUtil: helps to show Toast
+     */
     private final ViewUtilWrapper viewUtil;
 
     @Inject
@@ -83,7 +87,7 @@ public class CoordinateEditHelper {
 
         if (Latitude != null) {
             buffer.append("\n{{Location|").append(Latitude).append("|").append(Longitude)
-                .append("|").append(Accuracy).append("}}\n");
+                .append("|").append(Accuracy).append("}}");
         }
 
         final String editedLocation = buffer.toString();
@@ -113,24 +117,24 @@ public class CoordinateEditHelper {
         }
         if(wikiText.contains("filedesc") && !wikiText.contains("Location")){
 
-            final int startOfSecondSec = StringUtils.ordinalIndexOf(wikiText,
+            final int startOfSecondSection = StringUtils.ordinalIndexOf(wikiText,
                 "==", 3);
 
-            if(startOfSecondSec != -1) {
-                final String firstHalf = wikiText.substring(0, startOfSecondSec);
-                final String lastHalf = wikiText.substring(startOfSecondSec);
+            if(startOfSecondSection != -1) {
+                final String firstHalf = wikiText.substring(0, startOfSecondSection);
+                final String lastHalf = wikiText.substring(startOfSecondSection);
                 return firstHalf + editedLocation + lastHalf;
             }
             return wikiText + editedLocation;
         }
         if(!wikiText.contains("filedesc") && !wikiText.contains("Location")){
 
-            return "== {{int:filedesc}} ==" +editedLocation+wikiText;
+            return "== {{int:filedesc}} ==" + editedLocation+wikiText;
 
         }
         if(!wikiText.contains("filedesc") && wikiText.contains("Location")){
 
-            return "== {{int:filedesc}} ==" +editedLocation+wikiText;
+            return "== {{int:filedesc}} ==" + editedLocation+wikiText;
 
         }
         return null;

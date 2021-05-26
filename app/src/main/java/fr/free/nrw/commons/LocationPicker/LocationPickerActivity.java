@@ -1,12 +1,10 @@
 package fr.free.nrw.commons.LocationPicker;
 
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -15,11 +13,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.JsonObject;
-import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
-import com.mapbox.api.geocoding.v5.models.CarmenFeature;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraPosition.Builder;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationComponent;
@@ -28,16 +24,11 @@ import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.MapboxMap.OnCameraIdleListener;
+import com.mapbox.mapboxsdk.maps.MapboxMap.OnCameraMoveStartedListener;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
-import com.mapbox.mapboxsdk.plugins.places.common.PlaceConstants;
-import com.mapbox.mapboxsdk.plugins.places.common.utils.ColorUtils;
-import com.mapbox.mapboxsdk.plugins.places.picker.model.PlacePickerOptions;
-import com.mapbox.mapboxsdk.plugins.places.picker.ui.CurrentPlaceSelectionBottomSheet;
-import com.mapbox.mapboxsdk.plugins.places.picker.viewmodel.PlacePickerViewModel;
 import fr.free.nrw.commons.R;
-import java.util.List;
-import java.util.Locale;
 import org.jetbrains.annotations.NotNull;
 import timber.log.Timber;
 
@@ -45,17 +36,24 @@ import timber.log.Timber;
  * Helps to pick location and return the result with an intent
  */
 public class LocationPickerActivity extends AppCompatActivity implements OnMapReadyCallback,
-    MapboxMap.OnCameraMoveStartedListener, MapboxMap.OnCameraIdleListener, Observer<CarmenFeature>,
-    PermissionsListener {
+    OnCameraMoveStartedListener, OnCameraIdleListener, Observer<CameraPosition> {
 
-  private PermissionsManager permissionsManager;
-  CurrentPlaceSelectionBottomSheet bottomSheet;
-  CarmenFeature carmenFeature;
-  private PlacePickerOptions options;
+  /**
+   * cameraPosition : position of picker
+   */
+  private CameraPosition cameraPosition;
+  /**
+   * markerImage : picker image
+   */
   private ImageView markerImage;
+  /**
+   * mapboxMap : map
+   */
   private MapboxMap mapboxMap;
+  /**
+   * mapView : view of the map
+   */
   private MapView mapView;
-  private FloatingActionButton userLocationButton;
 
   @Override
   protected void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -66,37 +64,44 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
     if (actionBar != null) {
       actionBar.hide();
     }
-    setContentView(R.layout.mapbox_activity_place_picker);
+    setContentView(R.layout.activity_location_picker);
 
     if (savedInstanceState == null) {
-      options = getIntent().getParcelableExtra(PlaceConstants.PLACE_OPTIONS);
+      cameraPosition = getIntent().getParcelableExtra(LocationPickerConstants.MAP_CAMERA_POSITION);
     }
 
-    final PlacePickerViewModel viewModel = new ViewModelProvider(this)
-        .get(PlacePickerViewModel.class);
-    viewModel.getResults().observe(this, this);
+    final LocationPickerViewModel viewModel = new ViewModelProvider(this)
+        .get(LocationPickerViewModel.class);
+    viewModel.getResult().observe(this, this);
 
     bindViews();
     addBackButtonListener();
     addPlaceSelectedButton();
-    customizeViews();
+    getToolbarUI();
 
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
 
+  /**
+   * Clicking back button destroy locationPickerActivity
+   */
   private void addBackButtonListener() {
     final ImageView backButton = findViewById(R.id.mapbox_place_picker_toolbar_back_button);
     backButton.setOnClickListener(view -> finish());
   }
 
+  /**
+   * Binds mapView and location picker icon
+   */
   private void bindViews() {
     mapView = findViewById(R.id.map_view);
-    bottomSheet = findViewById(R.id.mapbox_plugins_picker_bottom_sheet);
-    markerImage = findViewById(R.id.mapbox_plugins_image_view_marker);
-    userLocationButton = findViewById(R.id.user_location_button);
+    markerImage = findViewById(R.id.location_picker_image_view_marker);
   }
 
+  /**
+   * Binds the listeners
+   */
   private void bindListeners() {
     mapboxMap.addOnCameraMoveStartedListener(
         this);
@@ -104,42 +109,39 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
         this);
   }
 
-  private void customizeViews() {
-    final ConstraintLayout toolbar = findViewById(R.id.place_picker_toolbar);
-    if (options != null && options.toolbarColor() != null) {
-      toolbar.setBackgroundColor(options.toolbarColor());
-    } else {
-      final int color = ColorUtils.getMaterialColor(this, R.attr.colorPrimary);
-      toolbar.setBackgroundColor(color);
-    }
+  /**
+   * Gets toolbar color
+   */
+  private void getToolbarUI() {
+    final ConstraintLayout toolbar = findViewById(R.id.location_picker_toolbar);
+      toolbar.setBackgroundColor(getResources().getColor(R.color.primaryColor));
   }
 
+  /**
+   * Takes action when map is ready to show
+   * @param mapboxMap map
+   */
   @Override
   public void onMapReady(final MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
       adjustCameraBasedOnOptions();
       bindListeners();
-
-      if (options != null && options.includeDeviceLocationButton()) {
-        enableLocationComponent(style);
-      } else {
-        userLocationButton.hide();
-      }
+      enableLocationComponent(style);
     });
   }
 
+  /**
+   * move the location to the current media coordinates
+   */
   private void adjustCameraBasedOnOptions() {
-    if (options != null) {
-      if (options.startingBounds() != null) {
-        mapboxMap.moveCamera(CameraUpdateFactory.newLatLngBounds(options.startingBounds(), 0));
-      } else if (options.statingCameraPosition() != null) {
-        mapboxMap
-            .moveCamera(CameraUpdateFactory.newCameraPosition(options.statingCameraPosition()));
-      }
-    }
+    mapboxMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
   }
 
+  /**
+   * Enables location components
+   * @param loadedMapStyle Style
+   */
   @SuppressWarnings( {"MissingPermission"})
   private void enableLocationComponent(@NonNull final Style loadedMapStyle) {
     // Check if permissions are enabled and if not request
@@ -161,36 +163,13 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
       // Set the component's render mode
       locationComponent.setRenderMode(RenderMode.NORMAL);
 
-      addUserLocationButton();
-    } else {
-      permissionsManager = new PermissionsManager(this);
-      permissionsManager.requestLocationPermissions(this);
     }
   }
 
-  @Override
-  public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions,
-      @NonNull final int[] grantResults) {
-    permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
-  }
-
-  @Override
-  public void onExplanationNeeded(final List<String> permissionsToExplain) {
-    Toast.makeText(this, R.string.mapbox_plugins_place_picker_user_location_permission_explanation,
-        Toast.LENGTH_LONG).show();
-  }
-
-  @Override
-  public void onPermissionResult(final boolean granted) {
-    if (granted) {
-      mapboxMap.getStyle(style -> {
-        if (options != null && options.includeDeviceLocationButton()) {
-          enableLocationComponent(style);
-        }
-      });
-    }
-  }
-
+  /**
+   * Acts on camera moving
+   * @param reason int
+   */
   @Override
   public void onCameraMoveStarted(final int reason) {
     Timber.v("Map camera has begun moving.");
@@ -200,6 +179,9 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
     }
   }
 
+  /**
+   * Acts on camera idle
+   */
   @Override
   public void onCameraIdle() {
     Timber.v("Map camera is now idling.");
@@ -207,54 +189,36 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
         .setInterpolator(new OvershootInterpolator()).setDuration(250).start();
   }
 
+  /**
+   * Takes action on camera position
+   * @param position position of picker
+   */
   @Override
-  public void onChanged(@Nullable CarmenFeature carmenFeature) {
-    if (carmenFeature == null) {
-      carmenFeature = CarmenFeature.builder().placeName(
-          String.format(Locale.US, "[%f, %f]",
-              mapboxMap.getCameraPosition().target.getLatitude(),
-              mapboxMap.getCameraPosition().target.getLongitude())
-      ).text("No address found").properties(new JsonObject()).build();
+  public void onChanged(@Nullable CameraPosition position) {
+    if (position == null) {
+      position = new Builder()
+          .target(new LatLng(mapboxMap.getCameraPosition().target.getLatitude(),
+              mapboxMap.getCameraPosition().target.getLongitude()))
+          .zoom(16).build();
     }
-    this.carmenFeature = carmenFeature;
-    bottomSheet.setPlaceDetails(carmenFeature);
+    cameraPosition = position;
   }
 
+  /**
+   * Select the preferable location
+   */
   private void addPlaceSelectedButton() {
-    final FloatingActionButton placeSelectedButton = findViewById(R.id.place_chosen_button);
+    final FloatingActionButton placeSelectedButton = findViewById(R.id.location_chosen_button);
     placeSelectedButton.setOnClickListener(view -> placeSelected());
   }
 
   /**
-   * Bind the device location Floating Action Button to this activity's UI and move the
-   * map camera if the button's clicked.
-   */
-  private void addUserLocationButton() {
-    userLocationButton.show();
-    userLocationButton.setOnClickListener(view -> {
-      if (mapboxMap.getLocationComponent().getLastKnownLocation() != null) {
-        final Location lastKnownLocation = mapboxMap.getLocationComponent().getLastKnownLocation();
-        mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(
-            new CameraPosition.Builder()
-                .target(new LatLng(lastKnownLocation.getLatitude(),
-                    lastKnownLocation.getLongitude()))
-                .zoom(17.5)
-                .build()
-        ),1400);
-      } else {
-        Toast.makeText(this,
-            getString(R.string.mapbox_plugins_place_picker_user_location_not_found),
-            Toast.LENGTH_SHORT).show();
-      }
-    });
-  }
-
-  /**
-   * Returning the intent with required data
+   * Return the intent with required data
    */
   void placeSelected() {
     final Intent returningIntent = new Intent();
-    returningIntent.putExtra(PlaceConstants.MAP_CAMERA_POSITION, mapboxMap.getCameraPosition());
+    returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION,
+        mapboxMap.getCameraPosition());
     setResult(AppCompatActivity.RESULT_OK, returningIntent);
     finish();
   }

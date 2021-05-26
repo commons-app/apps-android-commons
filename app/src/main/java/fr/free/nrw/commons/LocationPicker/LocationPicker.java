@@ -4,16 +4,19 @@ import android.app.Activity;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
-import com.mapbox.mapboxsdk.plugins.places.common.PlaceConstants;
-import com.mapbox.mapboxsdk.plugins.places.picker.model.PlacePickerOptions;
 
 /**
  * Helper class for starting the activity
  */
 public final class LocationPicker {
 
+  /**
+   * Getting camera position from the intent using constants
+   * @param data intent
+   * @return CameraPosition
+   */
   public static CameraPosition getCameraPosition(final Intent data) {
-    return data.getParcelableExtra(PlaceConstants.MAP_CAMERA_POSITION);
+    return data.getParcelableExtra(LocationPickerConstants.MAP_CAMERA_POSITION);
   }
 
   public static class IntentBuilder {
@@ -27,17 +30,22 @@ public final class LocationPicker {
       intent = new Intent();
     }
 
-    public LocationPicker.IntentBuilder accessToken(@NonNull final String accessToken) {
-      intent.putExtra(PlaceConstants.ACCESS_TOKEN, accessToken);
+    /**
+     * Gets and puts location in intent
+     * @param position CameraPosition
+     * @return LocationPicker.IntentBuilder
+     */
+    public LocationPicker.IntentBuilder defaultLocation(
+        final CameraPosition position) {
+      intent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION, position);
       return this;
     }
 
-    public LocationPicker.IntentBuilder placeOptions(
-        final PlacePickerOptions placeOptions) {
-      intent.putExtra(PlaceConstants.PLACE_OPTIONS, placeOptions);
-      return this;
-    }
-
+    /**
+     * Gets and sets the activity
+     * @param activity Activity
+     * @return Intent
+     */
     public Intent build(final Activity activity) {
       intent.setClass(activity, LocationPickerActivity.class);
       return intent;
