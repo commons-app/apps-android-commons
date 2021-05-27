@@ -571,5 +571,7 @@
   <string name="media_detail_step_title">Detaj dël mojen</string>
   <string name="menu_view_category_page">Vëdde la pàgina ëd categorìa</string>
   <string name="menu_view_item_page">Vëdde la pàgina ëd l\'element</string>
+  <string name="app_ui_language">Lenga d\'antërfassa utent ëd l\'aplicassion</string>
+  <string name="remove">A gava na legenda e na descrission</string>
   <string name="read_help_link">Lese ëd pi</string>
 </resources>
