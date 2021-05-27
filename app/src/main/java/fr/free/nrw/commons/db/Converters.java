@@ -23,11 +23,17 @@ public class Converters {
         return ApplicationlessInjection.getInstance(CommonsApplication.getInstance()).getCommonsApplicationComponent().gson();
     }
 
+    /**
+     * convert DepictedItem object to string
+     */
     @TypeConverter
     public static String depictsItemToString(DepictedItem objects) {
         return writeObjectToString(objects);
     }
 
+    /**
+     * convert string to DepictedItem object
+     */
     @TypeConverter
     public static DepictedItem stringToDepicts(String objectList) {
         return readObjectWithTypeToken(objectList, new TypeToken<DepictedItem>() {

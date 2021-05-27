@@ -121,7 +121,7 @@ class DepictsPresenter @Inject constructor(
     }
 
     /**
-     * Get the depictesItem form DepictsRoomdataBase
+     * Get the depicts from DepictsRoomdataBase
      */
     fun getRecentDepictedItems(): MutableList<DepictedItem> {
         val depictedItemList: MutableList<DepictedItem> = ArrayList()

@@ -7,24 +7,42 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.util.*
 
+/**
+ *  Dao class for DepictsRoomDataBase
+ */
 @Dao
 abstract class DepictsDao {
 
+    /**
+     *  insert Depicts in DepictsRoomDataBase
+     */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insert(depictedItem: Depicts)
 
+    /**
+     * get all Depicts from roomdatabase
+     */
     @Query("Select * From depicts_table order by lastUsed DESC")
     abstract suspend fun getAllDepict(): List<Depicts>
 
+    /**
+     *  get all Depicts which need to delete  from roomdatabase
+     */
     @Query("Select * From depicts_table order by lastUsed DESC LIMIT :n OFFSET 10")
     abstract suspend fun getItemToDelete(n: Int): List<Depicts>
 
+    /**
+     *  Delete Depicts from roomdatabase
+     */
     @Delete
     abstract suspend fun delete(depicts: Depicts)
 
     lateinit var allDepict: List<Depicts>
     lateinit var listOfDelete: List<Depicts>
 
+    /**
+     * get all depicts from DepictsRoomDatabase
+     */
     fun depictsList(): List<Depicts> {
         runBlocking {
             launch(Dispatchers.IO) {

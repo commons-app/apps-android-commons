@@ -243,6 +243,9 @@ public class CommonsApplicationModule {
         return appDatabase.contributionDao();
     }
 
+    /**
+     * Get the reference of DepictsDao class
+     */
     @Provides
     public DepictsDao providesDepictDao(AppDatabase appDatabase) {
         return appDatabase.DepictsDao();
