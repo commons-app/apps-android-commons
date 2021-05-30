@@ -30,6 +30,9 @@ class ContributionsListPresenterTest {
     internal lateinit var contributionBoundaryCallback: ContributionBoundaryCallback
 
     @Mock
+    internal lateinit var contributionsRemoteDataSource: ContributionsRemoteDataSource
+
+    @Mock
     internal lateinit var repository: ContributionsRepository
 
     @Rule
@@ -49,7 +52,12 @@ class ContributionsListPresenterTest {
         MockitoAnnotations.initMocks(this)
         scheduler = Schedulers.trampoline()
         contributionsListPresenter =
-            ContributionsListPresenter(contributionBoundaryCallback, repository, scheduler);
+            ContributionsListPresenter(
+                contributionBoundaryCallback,
+                contributionsRemoteDataSource,
+                repository,
+                scheduler
+            );
     }
 
     @Test

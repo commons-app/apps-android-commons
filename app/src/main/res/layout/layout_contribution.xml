@@ -80,7 +80,7 @@
           android:scaleType="centerInside"
           app:srcCompat="@drawable/ic_baseline_person_14"/>
 
-        <TextView
+        <fr.free.nrw.commons.ui.widget.HtmlTextView
           android:id="@+id/authorView"
           android:textStyle="normal"
           android:textSize="14sp"

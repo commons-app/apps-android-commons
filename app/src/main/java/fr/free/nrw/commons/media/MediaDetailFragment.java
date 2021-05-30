@@ -16,11 +16,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -64,10 +61,11 @@ import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter.Callba
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
-import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Label;
+import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
@@ -77,8 +75,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
@@ -1004,5 +1002,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             rebuildCatList(categories);
             return true;
         }
+    }
+
+
+    @OnClick(R.id.mediaDetailAuthor)
+    public void onAuthorViewClicked(){
+        if(media==null || media.getUser()==null){
+            return;
+        }
+
+        ProfileActivity.startYourself(getActivity(), media.getUser(), true);
     }
 }

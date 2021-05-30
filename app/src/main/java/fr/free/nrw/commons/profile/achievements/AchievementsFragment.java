@@ -19,12 +19,15 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.FileProvider;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
+import fr.free.nrw.commons.profile.ProfileActivity;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -126,6 +129,9 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.wikidata_edits)
     TextView wikidataEditsText;
 
+    @BindView(R.id.tv_achievements_of_user)
+    AppCompatTextView tvAchievementsOfUser;
+
     @Inject
     SessionManager sessionManager;
 
@@ -139,6 +145,16 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
     // menu item for action bar
     private MenuItem item;
+
+    private String userName;
+
+    @Override
+    public void onCreate(@Nullable final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            userName = getArguments().getString(ProfileActivity.KEY_USERNAME);
+        }
+    }
 
     /**
      * This method helps in the creation Achievement screen and
@@ -169,6 +185,12 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
         // Set the initial value of WikiData edits to 0
         wikidataEditsText.setText("0");
+        if(sessionManager.getUserName().equals(userName)){
+            tvAchievementsOfUser.setVisibility(View.GONE);
+        }else{
+            tvAchievementsOfUser.setVisibility(View.VISIBLE);
+            tvAchievementsOfUser.setText(getString(R.string.achievements_of_user,userName));
+        }
         setWikidataEditCount();
         setAchievements();
         return rootView;
@@ -262,7 +284,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
             try{
 
                 compositeDisposable.add(okHttpJsonApiClient
-                        .getAchievements(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
+                        .getAchievements(Objects.requireNonNull(userName))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -305,7 +327,6 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      *  in the form of JavaRx Single object<JSONobject>
      */
     private void setWikidataEditCount() {
-        String userName = sessionManager.getUserName();
         if (StringUtils.isBlank(userName)) {
             return;
         }
@@ -354,7 +375,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     private void setUploadCount(Achievements achievements) {
         if (checkAccount()) {
             compositeDisposable.add(okHttpJsonApiClient
-                    .getUploadCount(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
+                    .getUploadCount(Objects.requireNonNull(userName))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
@@ -394,10 +415,14 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     }
 
     private void setZeroAchievements() {
-        AlertDialog.Builder builder=new AlertDialog.Builder(getActivity())
-                .setMessage(getString(R.string.no_achievements_yet))
-                .setPositiveButton(getString(R.string.ok), (dialog, which) -> {
-                });
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+            .setMessage(
+                !sessionManager.getUserName().equals(userName) ?
+                    getString(R.string.no_achievements_yet, userName) :
+                    getString(R.string.you_have_no_achievements_yet)
+            )
+            .setPositiveButton(getString(R.string.ok), (dialog, which) -> {
+            });
         AlertDialog dialog = builder.create();
         dialog.show();
         imagesUploadedProgressbar.setVisibility(View.INVISIBLE);

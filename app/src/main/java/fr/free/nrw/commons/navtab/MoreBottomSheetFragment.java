@@ -74,11 +74,16 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
      * Set the username in navigationHeader.
      */
     private void setUserName() {
+        moreProfile.setText(getUserName());
+    }
+
+    private String getUserName(){
         AccountManager accountManager = AccountManager.get(getActivity());
         Account[] allAccounts = accountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE);
         if (allAccounts.length != 0) {
-            moreProfile.setText(allAccounts[0].name);
+            return allAccounts[0].name;
         }
+        return "";
     }
 
     @OnClick(R.id.more_logout)
@@ -136,9 +141,7 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
 
     @OnClick(R.id.more_profile)
     public void onProfileClicked() {
-        final Intent intent = new Intent(getActivity(), ProfileActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        getActivity().startActivity(intent);
+        ProfileActivity.startYourself(getActivity(), getUserName(), false);
     }
 
     @OnClick(R.id.more_peer_review)

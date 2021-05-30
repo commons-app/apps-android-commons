@@ -18,6 +18,7 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
 import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -30,7 +31,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
   @BindView(R.id.contributionTitle)
   TextView titleView;
   @BindView(R.id.authorView)
-  TextView authorView;
+  HtmlTextView authorView;
   @BindView(R.id.contributionState)
   TextView stateView;
   @BindView(R.id.contributionSequenceNumber)

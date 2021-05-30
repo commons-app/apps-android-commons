@@ -8,13 +8,14 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryImagesCallback
 import fr.free.nrw.commons.explore.paging.BasePagingFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider
+import fr.free.nrw.commons.profile.ProfileActivity
 import kotlinx.android.synthetic.main.fragment_search_paginated.*
 
 
 abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailProvider {
 
     override val pagedListAdapter by lazy {
-        PagedMediaAdapter(categoryImagesCallback::onMediaClicked)
+        PagedMediaAdapter({ categoryImagesCallback.onMediaClicked(it) })
     }
 
     override val errorTextId: Int = R.string.error_loading_images

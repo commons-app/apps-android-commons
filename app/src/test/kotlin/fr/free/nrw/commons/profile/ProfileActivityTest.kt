@@ -6,6 +6,7 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mockito.mock
 import org.powermock.api.mockito.PowerMockito
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
@@ -42,7 +43,7 @@ class ProfileActivityTest {
     @Test
     @Throws(Exception::class)
     fun testStartYourself() {
-        ProfileActivity.startYourself(mockContext)
+        ProfileActivity.startYourself(mockContext, "test", false)
     }
 
 }
