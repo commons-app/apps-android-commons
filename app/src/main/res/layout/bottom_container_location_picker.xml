@@ -20,14 +20,18 @@
     app:srcCompat="@drawable/ic_check_black_24dp"
     android:contentDescription="@string/select_location_location_picker" />
 
-  <ImageView
+  <androidx.appcompat.widget.AppCompatTextView
+    android:id="@+id/tv_attribution"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="start"
-    android:paddingBottom="4dp"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentBottom="true"
+    android:layout_margin="8dp"
+    android:text="@string/map_attribution"
+    android:textAlignment="center"
+    android:textSize="10sp"
+    android:textStyle="bold"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:srcCompat="@drawable/mapbox_logo_icon"
-    android:contentDescription="@string/copyright_mapbox" />
+    app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

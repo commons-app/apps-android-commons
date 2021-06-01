@@ -2,6 +2,8 @@ package fr.free.nrw.commons.LocationPicker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.Window;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
@@ -9,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -28,6 +31,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap.OnCameraIdleListener;
 import com.mapbox.mapboxsdk.maps.MapboxMap.OnCameraMoveStartedListener;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.maps.UiSettings;
 import fr.free.nrw.commons.R;
 import org.jetbrains.annotations.NotNull;
 import timber.log.Timber;
@@ -54,6 +58,10 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
    * mapView : view of the map
    */
   private MapView mapView;
+  /**
+   * tvAttribution : credit
+   */
+  private AppCompatTextView tvAttribution;
 
   @Override
   protected void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -77,10 +85,19 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
     bindViews();
     addBackButtonListener();
     addPlaceSelectedButton();
+    addCredits();
     getToolbarUI();
 
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
+  }
+
+  /**
+   * For showing credits
+   */
+  private void addCredits() {
+    tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
+    tvAttribution.setMovementMethod(LinkMovementMethod.getInstance());
   }
 
   /**
@@ -97,6 +114,7 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
   private void bindViews() {
     mapView = findViewById(R.id.map_view);
     markerImage = findViewById(R.id.location_picker_image_view_marker);
+    tvAttribution = findViewById(R.id.tv_attribution);
   }
 
   /**
@@ -144,6 +162,9 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
    */
   @SuppressWarnings( {"MissingPermission"})
   private void enableLocationComponent(@NonNull final Style loadedMapStyle) {
+    final UiSettings uiSettings = mapboxMap.getUiSettings();
+    uiSettings.setAttributionEnabled(false);
+
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
