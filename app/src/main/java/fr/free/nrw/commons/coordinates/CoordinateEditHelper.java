@@ -129,12 +129,12 @@ public class CoordinateEditHelper {
         }
         if(!wikiText.contains("filedesc") && !wikiText.contains("Location")){
 
-            return "== {{int:filedesc}} ==" + editedLocation+wikiText;
+            return "== {{int:filedesc}} ==" + editedLocation + wikiText;
 
         }
         if(!wikiText.contains("filedesc") && wikiText.contains("Location")){
 
-            return "== {{int:filedesc}} ==" + editedLocation+wikiText;
+            return "== {{int:filedesc}} ==" + editedLocation + wikiText;
 
         }
         return null;
