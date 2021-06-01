@@ -105,34 +105,49 @@ public class CoordinateEditHelper {
      */
     private String getFormattedWikiText(final String wikiText, final String editedLocation){
 
-        if(wikiText.contains("filedesc") && wikiText.contains("Location")) {
+        if (wikiText.contains("filedesc") && wikiText.contains("Location")) {
 
             final String fromLocationToEnd = wikiText.substring(wikiText.indexOf("{{Location"));
             final String firstHalf = wikiText.substring(0, wikiText.indexOf("{{Location"));
             final String lastHalf = fromLocationToEnd.substring(
                 fromLocationToEnd.indexOf("}}") + 2);
 
-            return firstHalf + editedLocation + lastHalf;
+            final int startOfSecondSection = StringUtils.ordinalIndexOf(wikiText,
+                "==", 3);
+            final StringBuilder buffer = new StringBuilder();
+            if (wikiText.charAt(wikiText.indexOf("{{Location")-1) == '\n') {
+                buffer.append(editedLocation.substring(1));
+            } else {
+                buffer.append(editedLocation);
+            }
+            if (startOfSecondSection != -1 && wikiText.charAt(startOfSecondSection-1)!= '\n') {
+                buffer.append("\n");
+            }
+
+            return firstHalf + buffer + lastHalf;
 
         }
-        if(wikiText.contains("filedesc") && !wikiText.contains("Location")){
+        if (wikiText.contains("filedesc") && !wikiText.contains("Location")) {
 
             final int startOfSecondSection = StringUtils.ordinalIndexOf(wikiText,
                 "==", 3);
 
-            if(startOfSecondSection != -1) {
+            if (startOfSecondSection != -1) {
                 final String firstHalf = wikiText.substring(0, startOfSecondSection);
                 final String lastHalf = wikiText.substring(startOfSecondSection);
-                return firstHalf + editedLocation + lastHalf;
+                final String buffer = editedLocation.substring(1)
+                    + "\n";
+                return firstHalf + buffer + lastHalf;
             }
+
             return wikiText + editedLocation;
         }
-        if(!wikiText.contains("filedesc") && !wikiText.contains("Location")){
+        if (!wikiText.contains("filedesc") && !wikiText.contains("Location")) {
 
             return "== {{int:filedesc}} ==" + editedLocation + wikiText;
 
         }
-        if(!wikiText.contains("filedesc") && wikiText.contains("Location")){
+        if (!wikiText.contains("filedesc") && wikiText.contains("Location")) {
 
             return "== {{int:filedesc}} ==" + editedLocation + wikiText;
 
