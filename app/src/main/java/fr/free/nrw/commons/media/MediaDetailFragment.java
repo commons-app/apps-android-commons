@@ -766,7 +766,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             .defaultLocation(new CameraPosition.Builder()
                 .target(new LatLng(defaultLatitude, defaultLongitude))
                 .zoom(16).build())
-            .build(getActivity()),REQUEST_CODE);
+            .build(getActivity()), REQUEST_CODE);
     }
 
     /**

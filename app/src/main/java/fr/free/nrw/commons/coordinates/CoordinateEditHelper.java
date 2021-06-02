@@ -98,7 +98,7 @@ public class CoordinateEditHelper {
     }
 
     /**
-     * Helps to get formatted wikidata with upgraded location
+     * Helps to get formatted wikitext with upgraded location
      * @param wikiText current wikitext
      * @param editedLocation new location
      * @return String
