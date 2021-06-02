@@ -565,6 +565,9 @@ public class ContributionsFragment
         contributionsPresenter.saveContribution(contribution);
     }
 
+    /**
+     * Notify the viewpager that number of items have changed.
+     */
     @Override
     public void viewPagerNotifyDataSetChanged() {
         if (mediaDetailPagerFragment != null) {
@@ -627,6 +630,11 @@ public class ContributionsFragment
         return mediaDetailPagerFragment;
     }
 
+    /**
+     * Reload media detail fragment once media is nominated
+     *
+     * @param index item position that has been nominated
+     */
     @Override
     public void refreshNominatedMedia(int index) {
         if(mediaDetailPagerFragment != null && !contributionsListFragment.isVisible()) {

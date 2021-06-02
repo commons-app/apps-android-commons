@@ -153,6 +153,11 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
     return null;
   }
 
+  /**
+   * Reload media detail fragment once media is nominated
+   *
+   * @param index item position that has been nominated
+   */
   @Override
   public void refreshNominatedMedia(int index) {
     if(mediaDetails != null && !listFragment.isVisible()) {

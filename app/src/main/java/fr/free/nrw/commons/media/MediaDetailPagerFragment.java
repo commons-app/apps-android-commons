@@ -382,6 +382,11 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         }
     }
 
+    /**
+     * Called after the media is nominated for deletion
+     *
+     * @param index item position that has been nominated
+     */
     @Override
     public void nominatingForDeletion(int index) {
       provider.refreshNominatedMedia(index);
@@ -404,6 +409,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
         Integer getContributionStateAt(int position);
 
+        // Reload media detail fragment once media is nominated
         void refreshNominatedMedia(int index);
     }
 

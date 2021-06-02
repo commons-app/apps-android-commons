@@ -165,6 +165,11 @@ public class CategoryDetailsActivity extends BaseActivity
         return null;
     }
 
+    /**
+     * Reload media detail fragment once media is nominated
+     *
+     * @param index item position that has been nominated
+     */
     @Override
     public void refreshNominatedMedia(int index) {
         if (getSupportFragmentManager().getBackStackEntryCount() == 1) {

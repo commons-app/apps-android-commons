@@ -158,6 +158,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         }
       }
 
+      /**
+       * Called whenever items in the list have changed
+       * Calls viewPagerNotifyDataSetChanged() that will notify the viewpager
+       */
       @Override
       public void onItemRangeChanged(final int positionStart, final int itemCount) {
         super.onItemRangeChanged(positionStart, itemCount);
@@ -419,6 +423,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
     void pauseUpload(Contribution contribution);
 
+    // Notify the viewpager that number of items have changed.
     void viewPagerNotifyDataSetChanged();
   }
 }
