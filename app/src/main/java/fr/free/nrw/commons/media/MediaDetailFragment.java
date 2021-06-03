@@ -231,7 +231,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
      */
     private int minimumHeightOfMetadata = 200;
 
-    final static String NOMINATING_MEDIA = "Nominating %s";
+    final static String NOMINATING_FOR_DELETION_MEDIA = "Nominating for deletion %s";
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -354,7 +354,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         media = detailProvider.getMediaAtPosition(index);
 
-        if(media != null && applicationKvStore.getBoolean(String.format(NOMINATING_MEDIA, media.getImageUrl()), false)) {
+        if(media != null && applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
             enableProgressBar();
         }
 
@@ -452,8 +452,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     private void onDeletionPageExists(Boolean deletionPageExists) {
         if (deletionPageExists){
-            if(applicationKvStore.getBoolean(String.format(NOMINATING_MEDIA, media.getImageUrl()), false)) {
-                applicationKvStore.remove(String.format(NOMINATING_MEDIA, media.getImageUrl()));
+            if(applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
+                applicationKvStore.remove(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()));
                 progressBarDeletion.setVisibility(GONE);
             }
             delete.setVisibility(GONE);
@@ -856,7 +856,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @SuppressLint("CheckResult")
     private void onDeleteClicked(Spinner spinner) {
-        applicationKvStore.putBoolean(String.format(NOMINATING_MEDIA, media.getImageUrl()), true);
+        applicationKvStore.putBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), true);
         enableProgressBar();
         String reason = spinner.getSelectedItem().toString();
         Single<Boolean> resultSingle = reasonBuilder.getReason(media, reason)
@@ -865,8 +865,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(s -> {
-                if(applicationKvStore.getBoolean(String.format(NOMINATING_MEDIA, media.getImageUrl()), false)) {
-                    applicationKvStore.remove(String.format(NOMINATING_MEDIA, media.getImageUrl()));
+                if(applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
+                    applicationKvStore.remove(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()));
                     callback.nominatingForDeletion(index);
                 }
             });
@@ -874,7 +874,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @SuppressLint("CheckResult")
     private void onDeleteClickeddialogtext(String reason) {
-        applicationKvStore.putBoolean(String.format(NOMINATING_MEDIA, media.getImageUrl()), true);
+        applicationKvStore.putBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), true);
         enableProgressBar();
         Single<Boolean> resultSingletext = reasonBuilder.getReason(media, reason)
                 .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
@@ -882,8 +882,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(s -> {
-                if(applicationKvStore.getBoolean(String.format(NOMINATING_MEDIA, media.getImageUrl()), false)) {
-                    applicationKvStore.remove(String.format(NOMINATING_MEDIA, media.getImageUrl()));
+                if(applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
+                    applicationKvStore.remove(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()));
                     callback.nominatingForDeletion(index);
                 }
             });
