@@ -46,17 +46,17 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Начало загрузки</string>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Начинается %1$d загрузка</item>
-    <item quantity="few">Начинается %1$d загрузки</item>
-    <item quantity="many">Начинается %1$d загрузок</item>
-    <item quantity="other">Начинается %1$d загрузок</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Обработка %d загрузки</item>
+    <item quantity="few">Обработка %d загрузок</item>
+    <item quantity="many">Обработка %d загрузок</item>
+    <item quantity="other">Обработка %d загрузок</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d загрузка</item>
-    <item quantity="few">%1$d загрузки</item>
-    <item quantity="many">%1$d загрузок</item>
-    <item quantity="other">%1$d загрузок</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d загрузка</item>
+    <item quantity="few">%d загрузки</item>
+    <item quantity="many">%d загрузок</item>
+    <item quantity="other">%d загрузок</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Это изображение будет лицензировано под %1$s</item>
@@ -101,7 +101,7 @@
   <string name="uploading_queued">Загрузка в очереди (включен режим ограниченного подключения)</string>
   <string name="upload_completed_notification_title">%1$s загружен!</string>
   <string name="upload_completed_notification_text">Нажмите для просмотра загруженного файла</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Загрузка %1$s начата</string>
+  <string name="upload_progress_notification_title_start">Загрузка файла: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s загружается</string>
   <string name="upload_progress_notification_title_finishing">Завершение загрузки %1$s</string>
   <string name="upload_failed_notification_title">Загрузка %1$s не удалась</string>
@@ -617,5 +617,7 @@
   <string name="media_detail_step_title">Детали файла</string>
   <string name="menu_view_category_page">Просмотреть страницу категории</string>
   <string name="menu_view_item_page">Просмотреть страницу элемента</string>
+  <string name="app_ui_language">Язык пользовательского интерфейса приложения</string>
+  <string name="remove">Удаляет подпись и описание</string>
   <string name="read_help_link">Подробнее</string>
 </resources>

@@ -319,7 +319,10 @@
   <string name="exif_tag_name_copyright">Egile-eskubideak</string>
   <string name="exif_tag_name_location">Kokapena</string>
   <string name="exif_tag_name_software">Softwarea</string>
+  <string name="delete_helper_show_deletion_title_success">Arrakasta</string>
   <string name="delete_helper_show_deletion_title_failed">Hutsegitea</string>
+  <string name="delete_helper_ask_spam_selfie">Selfiea</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Prentsarako argazkia</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="category_edit_helper_show_edit_title_success">Arrakasta</string>
   <string name="title_app_shortcut_setting">Hobespenak</string>
@@ -335,4 +338,6 @@
   <string name="achievements_tab_title">Lorpenak</string>
   <string name="leaderboard_column_user">Erabiltzailea</string>
   <string name="leaderboard_column_count">Zenbaketa</string>
+  <string name="leaderboard_upload">Igo</string>
+  <string name="leaderboard_nearby">Gertukoak</string>
 </resources>
