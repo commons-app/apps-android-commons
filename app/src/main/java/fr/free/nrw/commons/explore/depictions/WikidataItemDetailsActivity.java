@@ -192,6 +192,19 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     }
 
     /**
+     * Reload media detail fragment once media is nominated
+     *
+     * @param index item position that has been nominated
+     */
+    @Override
+    public void refreshNominatedMedia(int index) {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            onBackPressed();
+            onMediaClicked(index);
+        }
+    }
+
+    /**
      * Consumers should be simply using this method to use this activity.
      *
      * @param context      A Context of the application package implementing this class.

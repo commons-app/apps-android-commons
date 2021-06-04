@@ -42,7 +42,7 @@ import java.util.Objects;
 import javax.inject.Inject;
 import timber.log.Timber;
 
-public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
+public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener, MediaDetailFragment.Callback {
 
     @Inject BookmarkPicturesDao bookmarkDao;
 
@@ -383,6 +383,16 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     }
 
     /**
+     * Called after the media is nominated for deletion
+     *
+     * @param index item position that has been nominated
+     */
+    @Override
+    public void nominatingForDeletion(int index) {
+      provider.refreshNominatedMedia(index);
+    }
+  
+    /**
      * backButtonClicked is called on a back event in the media details pager.
      * returns true after closing the categoryEditContainer if open, implying that event was handled.
      * else returns false
@@ -398,6 +408,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         int getTotalMediaCount();
 
         Integer getContributionStateAt(int position);
+
+        // Reload media detail fragment once media is nominated
+        void refreshNominatedMedia(int index);
     }
 
     //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)

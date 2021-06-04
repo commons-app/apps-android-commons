@@ -154,6 +154,19 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
   }
 
   /**
+   * Reload media detail fragment once media is nominated
+   *
+   * @param index item position that has been nominated
+   */
+  @Override
+  public void refreshNominatedMedia(int index) {
+    if(mediaDetails != null && !listFragment.isVisible()) {
+      removeFragment(mediaDetails);
+      onMediaClicked(index);
+    }
+  }
+
+  /**
    * This method is called on success of API call for featured images or mobile uploads. The
    * viewpager will notified that number of items have changed.
    */

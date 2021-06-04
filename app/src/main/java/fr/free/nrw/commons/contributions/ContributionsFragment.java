@@ -566,6 +566,16 @@ public class ContributionsFragment
     }
 
     /**
+     * Notify the viewpager that number of items have changed.
+     */
+    @Override
+    public void viewPagerNotifyDataSetChanged() {
+        if (mediaDetailPagerFragment != null) {
+            mediaDetailPagerFragment.notifyDataSetChanged();
+        }
+    }
+
+    /**
      * Replace whatever is in the current contributionsFragmentContainer view with
      * mediaDetailPagerFragment, and preserve previous state in back stack. Called when user selects a
      * contribution.
@@ -620,6 +630,21 @@ public class ContributionsFragment
         return mediaDetailPagerFragment;
     }
 
+    /**
+     * Reload media detail fragment once media is nominated
+     *
+     * @param index item position that has been nominated
+     */
+    @Override
+    public void refreshNominatedMedia(int index) {
+        if(mediaDetailPagerFragment != null && !contributionsListFragment.isVisible()) {
+            removeFragment(mediaDetailPagerFragment);
+            mediaDetailPagerFragment = new MediaDetailPagerFragment(false, true);
+            mediaDetailPagerFragment.showImage(index);
+            showMediaDetailPagerFragment();
+        }
+    }
+      
   // click listener to toggle description that means uses can press the limited connection
   // banner and description will hide. Tap again to show description.
   private View.OnClickListener toggleDescriptionListener = new View.OnClickListener() {

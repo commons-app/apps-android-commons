@@ -157,6 +157,16 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
           }
         }
       }
+
+      /**
+       * Called whenever items in the list have changed
+       * Calls viewPagerNotifyDataSetChanged() that will notify the viewpager
+       */
+      @Override
+      public void onItemRangeChanged(final int positionStart, final int itemCount) {
+        super.onItemRangeChanged(positionStart, itemCount);
+        callback.viewPagerNotifyDataSetChanged();
+      }
     });
 
     //Fab close on touch outside (Scrolling or taping on item triggers this action).
@@ -370,11 +380,17 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
 
   public Media getMediaAtPosition(final int i) {
-    return adapter.getContributionForPosition(i).getMedia();
+    if(adapter.getContributionForPosition(i) != null) {
+      return adapter.getContributionForPosition(i).getMedia();
+    }
+    return null;
   }
 
   public int getTotalMediaCount() {
-    return adapter.getItemCount();
+    if(adapter != null) {
+      return adapter.getItemCount();
+    }
+    return 0;
   }
 
   /**
@@ -406,5 +422,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     void showDetail(int position, boolean isWikipediaButtonDisplayed);
 
     void pauseUpload(Contribution contribution);
+
+    // Notify the viewpager that number of items have changed.
+    void viewPagerNotifyDataSetChanged();
   }
 }

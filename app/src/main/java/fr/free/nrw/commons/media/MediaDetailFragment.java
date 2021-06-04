@@ -94,6 +94,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     private int index;
     private boolean isDeleted = false;
     private boolean isWikipediaButtonDisplayed;
+    private Callback callback;
 
 
     public static MediaDetailFragment forMedia(int index, boolean editable, boolean isCategoryImage, boolean isWikipediaButtonDisplayed) {
@@ -195,6 +196,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     TextView existingCategories;
     @BindView(R.id.no_results_found)
     TextView noResultsFound;
+    @BindView(R.id.progressBarDeletion)
+    ProgressBar progressBarDeletion;
 
     private ArrayList<String> categoryNames = new ArrayList<>();
     private String categorySearchQuery;
@@ -227,6 +230,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
      * Images with a very narrow aspect ratio will be reduced so that the metadata information panel always has at least this height.
      */
     private int minimumHeightOfMetadata = 200;
+
+    final static String NOMINATING_FOR_DELETION_MEDIA = "Nominating for deletion %s";
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -305,6 +310,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         return view;
     }
 
+    @Override
+    public void onAttach(final Context context) {
+        super.onAttach(context);
+        if (getParentFragment() != null) {
+            callback = (Callback) getParentFragment();
+        }
+    }
+
     @OnClick(R.id.mediaDetailImageViewSpacer)
     public void launchZoomActivity(View view) {
         if (media.getImageUrl() != null) {
@@ -339,6 +352,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             media = getArguments().getParcelable("media");
         }
 
+        media = detailProvider.getMediaAtPosition(index);
+
+        if(media != null && applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
+            enableProgressBar();
+        }
+
         scrollView.getViewTreeObserver().addOnGlobalLayoutListener(
             new OnGlobalLayoutListener() {
                 @Override
@@ -348,7 +367,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                     }
                     scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     oldWidthOfImageView = scrollView.getWidth();
-                    displayMediaDetails();
+                    if(media != null) {
+                        displayMediaDetails();
+                    }
                 }
             }
         );
@@ -431,6 +452,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     private void onDeletionPageExists(Boolean deletionPageExists) {
         if (deletionPageExists){
+            if(applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
+                applicationKvStore.remove(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()));
+                progressBarDeletion.setVisibility(GONE);
+            }
             delete.setVisibility(GONE);
             nominatedForDeletion.setVisibility(VISIBLE);
         } else if (!isCategoryImage) {
@@ -804,7 +829,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 input.addTextChangedListener(new TextWatcher() {
                     private void handleText() {
                         final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
-                        if (input.getText().length() == 0) {
+                        if (input.getText().length() == 0 || isDeleted) {
                             okButton.setEnabled(false);
                         } else {
                             okButton.setEnabled(true);
@@ -831,35 +856,37 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @SuppressLint("CheckResult")
     private void onDeleteClicked(Spinner spinner) {
+        applicationKvStore.putBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), true);
+        enableProgressBar();
         String reason = spinner.getSelectedItem().toString();
         Single<Boolean> resultSingle = reasonBuilder.getReason(media, reason)
                 .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
-        compositeDisposable.add(resultSingle
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(s -> {
-                    if (getActivity() != null) {
-                        isDeleted = true;
-                        enableDeleteButton(false);
-                    }
-                }));
-
+        resultSingle
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(s -> {
+                if(applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
+                    applicationKvStore.remove(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()));
+                    callback.nominatingForDeletion(index);
+                }
+            });
     }
 
     @SuppressLint("CheckResult")
     private void onDeleteClickeddialogtext(String reason) {
+        applicationKvStore.putBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), true);
+        enableProgressBar();
         Single<Boolean> resultSingletext = reasonBuilder.getReason(media, reason)
                 .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
-        compositeDisposable.add(resultSingletext
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(s -> {
-                    if (getActivity() != null) {
-                        isDeleted = true;
-                        enableDeleteButton(false);
-                    }
-                }));
-
+        resultSingletext
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(s -> {
+                if(applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
+                    applicationKvStore.remove(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()));
+                    callback.nominatingForDeletion(index);
+                }
+            });
     }
 
     @OnClick(R.id.seeMore)
@@ -869,13 +896,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         }
     }
 
-    private void enableDeleteButton(boolean visibility) {
-        delete.setEnabled(visibility);
-        if (visibility) {
-            delete.setTextColor(getResources().getColor(R.color.primaryTextColor));
-        } else {
-            delete.setTextColor(getResources().getColor(R.color.deleteButtonLight));
-        }
+    /**
+     * Enable Progress Bar and Update delete button text.
+     */
+    private void enableProgressBar() {
+        progressBarDeletion.setVisibility(VISIBLE);
+        delete.setText("Nominating for Deletion");
+        isDeleted = true;
     }
 
     private void rebuildCatList(List<String> categories) {
@@ -1004,5 +1031,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             rebuildCatList(categories);
             return true;
         }
+    }
+
+    public interface Callback {
+        void nominatingForDeletion(int index);
     }
 }
