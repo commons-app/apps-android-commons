@@ -8,8 +8,8 @@
   <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    app:cardCornerRadius="5dp"
-    app:cardElevation="2dp"
+    app:cardCornerRadius="@dimen/dimen_6"
+    app:cardElevation="@dimen/dimen_2"
     android:id="@+id/view"
     app:cardUseCompatPadding="true"
     app:layout_constraintDimensionRatio="H,1:1"
@@ -35,11 +35,10 @@
 
       <TextView
         android:id="@+id/selected_count"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="@dimen/dimen_20"
+        android:layout_height="@dimen/dimen_20"
         app:layout_constraintDimensionRatio="H,1:1"
-        android:layout_margin="4dp"
-        android:textSize="11sp"
+        android:layout_margin="@dimen/dimen_10"
         android:gravity="center|center_vertical"
         android:includeFontPadding="false"
         android:textStyle="bold"
@@ -67,8 +66,8 @@
 
       <ImageView
         android:id="@+id/uploaded_overlay_icon"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="@dimen/dimen_140"
+        android:layout_height="@dimen/dimen_140"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:srcCompat="@drawable/commons"
