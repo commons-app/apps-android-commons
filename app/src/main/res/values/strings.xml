@@ -646,5 +646,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="learn_more">LEARN MORE</string>
   <string name="wlm_campaign_title">Wiki Loves Monuments</string>
   <string name="wlm_campaign_description">Wiki Loves Monuments is an international photo contest for monuments organised by Wikimedia</string>
+  <string name="custom_selector_title">Custom Selector</string>
+  <string name="custom_selector_empty_text">No Images</string>
 
 </resources>
