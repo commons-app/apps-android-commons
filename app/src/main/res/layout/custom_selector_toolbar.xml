@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-  xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-  android:layout_height="match_parent">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+  <ImageView
+    android:id="@+id/back"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_centerVertical="true"
+    android:background="?attr/selectableItemBackgroundBorderless"
+    android:padding="@dimen/standard_gap"
+    app:srcCompat="?attr/custom_selector_back" />
+
+
+  <TextView
+    android:id="@+id/title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintStart_toEndOf="@id/back"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_marginHorizontal="@dimen/standard_gap"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:text="@string/custom_selector_title"
+    style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title" />
+
+  <ImageView
+    android:id="@+id/done"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_centerVertical="true"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="@dimen/standard_gap"
+    app:srcCompat="?attr/custom_selector_done"/>
+
+</merge>
