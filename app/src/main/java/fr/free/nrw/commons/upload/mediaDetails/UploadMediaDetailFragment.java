@@ -365,6 +365,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         //If the error message is null, we will probably not show anything
     }
 
+    @Override
+    public void showConnectionErrorPopup() {
+        DialogUtil.showAlertDialog(getActivity(),
+            getString(R.string.upload_connection_error_alert_title),
+            getString(R.string.upload_connection_error_alert_detail), getString(R.string.ok),
+            () -> {}, true);
+    }
+
     @Override public void showMapWithImageCoordinates(boolean shouldShow) {
         ibMap.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
     }
