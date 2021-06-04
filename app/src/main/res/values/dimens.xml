@@ -58,6 +58,7 @@
 
     <!-- Commonly used dimensions -->
     <dimen name="dimen_0">0dp</dimen>
+    <dimen name="dimen_2">2dp</dimen>
     <dimen name="dimen_6">6dp</dimen>
     <dimen name="dimen_10">10dp</dimen>
     <dimen name="dimen_20">20dp</dimen>

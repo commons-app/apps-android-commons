@@ -6,20 +6,19 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/custom_selector_recycler_view"
+    android:id="@+id/selector_rv"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="gone"
-    tools:visibility="visible" />
+    />
 
   <TextView
+    android:id="@+id/empty_text"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
     android:textSize="@dimen/normal_text"
-    android:padding="10dp"
-    android:text="No Images"
+    android:padding="@dimen/standard_gap"
+    android:text="@string/custom_selector_empty_text"
     android:visibility="gone"
-    tools:visibility="visible"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
@@ -31,8 +30,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:visibility="gone"
-    tools:visibility="visible"
+    android:visibility="visible"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
