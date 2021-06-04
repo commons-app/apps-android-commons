@@ -1023,11 +1023,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @OnClick(R.id.show_caption_description_textview)
     void showCaptionAndDescription() {
         dummyCategoryEditContainer.setVisibility(GONE);
-        if (showCaptionAndDescriptionContainer.getVisibility() == View.INVISIBLE) {
+        if (showCaptionAndDescriptionContainer.getVisibility() == GONE) {
             showCaptionAndDescriptionContainer.setVisibility(VISIBLE);
             setUpCaptionAndDescriptionLayout();
         } else {
-            showCaptionAndDescriptionContainer.setVisibility(View.INVISIBLE);
+            showCaptionAndDescriptionContainer.setVisibility(GONE);
         }
     }
 
@@ -1100,7 +1100,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             public boolean onKey(View view, int keycode, KeyEvent keyEvent) {
                 if (keycode == KeyEvent.KEYCODE_BACK) {
                     if (showCaptionAndDescriptionContainer.getVisibility() == VISIBLE) {
-                        showCaptionAndDescriptionContainer.setVisibility(View.INVISIBLE);
+                        showCaptionAndDescriptionContainer.setVisibility(GONE);
                         return true;
                     }
                 }
