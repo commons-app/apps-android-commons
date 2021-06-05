@@ -31,7 +31,7 @@
         android:layout_height="match_parent"
         android:id="@+id/album_overlay"
         android:alpha="0.05"
-        android:background=""/>
+        />
 
       <LinearLayout
         android:id="@+id/folder_details"
