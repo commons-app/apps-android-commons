@@ -5,6 +5,7 @@ import static android.view.View.VISIBLE;
 import static fr.free.nrw.commons.di.NetworkingModule.NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.media.MediaClient;
@@ -67,6 +69,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   TextView noContributionsYet;
   @BindView(R.id.fab_layout)
   LinearLayout fab_layout;
+  @BindView(R.id.fab_custom_gallery)
+  FloatingActionButton fabCustomGallery;
 
   @Inject
   ContributionController controller;
@@ -252,6 +256,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
       controller.initiateGalleryPick(getActivity(), true);
       animateFAB(isFabOpen);
     });
+
+    fabCustomGallery.setOnClickListener(v -> {
+      Intent intent = new Intent(getActivity(),CustomSelectorActivity.class);
+      startActivity(intent);
+    });
   }
 
   private void animateFAB(final boolean isFabOpen) {
@@ -261,14 +270,18 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         fabPlus.startAnimation(rotate_backward);
         fabCamera.startAnimation(fab_close);
         fabGallery.startAnimation(fab_close);
+        fabCustomGallery.startAnimation(fab_close);
         fabCamera.hide();
         fabGallery.hide();
+        fabCustomGallery.hide();
       } else {
         fabPlus.startAnimation(rotate_forward);
         fabCamera.startAnimation(fab_open);
         fabGallery.startAnimation(fab_open);
+        fabCustomGallery.startAnimation(fab_open);
         fabCamera.show();
         fabGallery.show();
+        fabCustomGallery.show();
       }
       this.isFabOpen = !isFabOpen;
     }

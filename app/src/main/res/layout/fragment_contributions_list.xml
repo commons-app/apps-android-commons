@@ -70,6 +70,19 @@
             app:srcCompat="@drawable/ic_photo_white_24dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+          android:id="@+id/fab_custom_gallery"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:tint="@color/button_blue"
+          android:visibility="gone"
+          app:backgroundTint="@color/main_background_light"
+          app:useCompatPadding="true"
+          app:elevation="@dimen/tiny_margin"
+          app:fabSize="mini"
+          app:srcCompat="@drawable/commons_logo"
+          android:background="@drawable/commons"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_plus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
