@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="wrap_content">
@@ -24,49 +23,47 @@
         android:id="@+id/folder_thumbnail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"/>
+        android:background="@color/black"
+        android:alpha="0.15"
+        android:scaleType="centerCrop" />
 
       <View
+        android:id="@+id/album_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/album_overlay"
-        android:alpha="0.05"
-        />
+        android:alpha="0.05" />
 
       <LinearLayout
         android:id="@+id/folder_details"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        >
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
-          android:id="@+id/album_name"
+          android:id="@+id/folder_name"
+          style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          app:layout_constraintLeft_toLeftOf="parent"
-          app:layout_constraintBottom_toBottomOf="parent"
           android:layout_margin="@dimen/dimen_6"
-          android:padding="@dimen/dimen_6"
-          style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
           android:layout_weight="1"
-          android:textSize="16sp"
+          android:ellipsize="end"
+          android:padding="@dimen/dimen_6"
           android:singleLine="true"
-          android:ellipsize="end"/>
+          android:textSize="16sp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintLeft_toLeftOf="parent" />
 
         <TextView
-          android:id="@+id/album_count"
+          android:id="@+id/folder_count"
+          style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          app:layout_constraintRight_toRightOf="parent"
-          app:layout_constraintBottom_toBottomOf="parent"
           android:layout_margin="5dp"
-          android:padding="5dp"
-          android:textColor="@color/white"
-          android:textStyle="bold"
           android:textSize="16sp"
-          />
+          android:textStyle="bold"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintRight_toRightOf="parent" />
 
       </LinearLayout>
 
@@ -75,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        app:constraint_referenced_ids="folder_details,album_overlay"/>
+        app:constraint_referenced_ids="folder_details,album_overlay" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
