@@ -94,22 +94,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         adapter = new MediaDetailAdapter(getChildFragmentManager());
         ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        pager.setAdapter(adapter);
         if (savedInstanceState != null) {
             final int pageNumber = savedInstanceState.getInt("current-page");
-            // Adapter doesn't seem to be loading immediately.
-            // Dear God, please forgive us for our sins
-            view.postDelayed(() -> {
-                pager.setAdapter(adapter);
-                pager.setCurrentItem(pageNumber, false);
-
-                if (getActivity() == null) {
-                    Timber.d("Returning as activity is destroyed!");
-                    return;
-                }
-
-                getActivity().supportInvalidateOptionsMenu();
-                adapter.notifyDataSetChanged();
-            }, 100);
+            pager.setCurrentItem(pageNumber, false);
+            getActivity().invalidateOptionsMenu();
+            adapter.notifyDataSetChanged();
         } else {
             pager.setAdapter(adapter);
             adapter.notifyDataSetChanged();
@@ -307,13 +297,31 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     public void showImage(int i, boolean isWikipediaButtonDisplayed) {
         this.isWikipediaButtonDisplayed = isWikipediaButtonDisplayed;
-        Handler handler =  new Handler();
-        handler.postDelayed(() -> pager.setCurrentItem(i), 5);
+        setViewPagerCurrentItem(i);
     }
 
     public void showImage(int i) {
-        Handler handler =  new Handler();
-        handler.postDelayed(() -> pager.setCurrentItem(i), 5);
+        setViewPagerCurrentItem(i);
+    }
+
+    /**
+     * This function waits for the item to load then sets the item to current item
+     * @param position current item that to be shown
+     */
+    private void setViewPagerCurrentItem(int position) {
+        final Boolean[] currentItemNotShown = {true};
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                while(currentItemNotShown[0]){
+                    if(adapter.getCount() > position){
+                        pager.setCurrentItem(position, false);
+                        currentItemNotShown[0] = false;
+                    }
+                }
+            }
+        };
+        new Thread(runnable).start();
     }
 
     /**
