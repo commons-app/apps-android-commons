@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -38,6 +39,7 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.disposables.CompositeDisposable;
 import java.util.Objects;
 import javax.inject.Inject;
+import org.jetbrains.annotations.NotNull;
 import timber.log.Timber;
 
 public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
@@ -110,6 +112,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             }, 100);
         } else {
             pager.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
         }
         if (getActivity() instanceof MainActivity) {
             ((MainActivity)getActivity()).hideTabs();
@@ -359,6 +362,11 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
         public MediaDetailAdapter(FragmentManager fm) {
             super(fm);
+        }
+
+        @Override
+        public int getItemPosition(@NonNull @NotNull Object object) {
+            return POSITION_NONE;
         }
 
         @Override
