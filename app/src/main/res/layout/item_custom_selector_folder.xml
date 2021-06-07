@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
+  android:padding="@dimen/dimen_2"
   android:layout_height="wrap_content">
 
   <androidx.cardview.widget.CardView
@@ -10,7 +11,6 @@
     app:cardCornerRadius="@dimen/dimen_6"
     app:cardElevation="@dimen/dimen_2"
     android:id="@+id/view"
-    app:cardUseCompatPadding="true"
     app:layout_constraintDimensionRatio="H,1:1"
     app:layout_constraintTop_toTopOf="parent">
 
