@@ -582,6 +582,13 @@ public class ContributionsFragment
         presenter.onDetachView();
     }
 
+    @Override
+    public void notifyDataSetChanged() {
+        if (mediaDetailPagerFragment != null) {
+            mediaDetailPagerFragment.notifyDataSetChanged();
+        }
+    }
+
     /**
      * Retry upload when it is failed
      *

@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -97,9 +96,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             final int pageNumber = savedInstanceState.getInt("current-page");
             pager.setCurrentItem(pageNumber, false);
             getActivity().invalidateOptionsMenu();
-            adapter.notifyDataSetChanged();
-
         }
+        adapter.notifyDataSetChanged();
         if (getActivity() instanceof MainActivity) {
             ((MainActivity)getActivity()).hideTabs();
         }
