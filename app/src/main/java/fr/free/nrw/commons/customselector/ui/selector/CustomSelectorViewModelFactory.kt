@@ -4,9 +4,12 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
+/**
+ * View Model Factory.
+ */
 class CustomSelectorViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
 
-    override fun<CustomSelectorViewModel: ViewModel?> create(modelClass: Class<CustomSelectorViewModel>):CustomSelectorViewModel {
+    override fun<CustomSelectorViewModel: ViewModel?> create(modelClass: Class<CustomSelectorViewModel>) : CustomSelectorViewModel {
         return CustomSelectorViewModel(application) as CustomSelectorViewModel
     }
 

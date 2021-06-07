@@ -18,16 +18,37 @@ import kotlinx.android.synthetic.main.fragment_custom_selector.view.*
 
 class ImageFragment: Fragment() {
 
+    /**
+     * Current bucketId.
+     */
     private var bucketId: Long? = null
+
+    /**
+     * View model for images.
+     */
     private lateinit var  viewModel: CustomSelectorViewModel
+
+    /**
+     * Image Adapter for recycle view.
+     */
     private lateinit var imageAdapter: ImageAdapter
+
+    /**
+     * GridLayoutManager for recycler view.
+     */
     private lateinit var gridLayoutManager: GridLayoutManager
 
 
     companion object {
 
+        /**
+         * BucketId args name
+         */
         const val BUCKET_ID = "BucketId"
 
+        /**
+         * newInstance from bucketId.
+         */
         fun newInstance(bucketId: Long): ImageFragment {
             val fragment = ImageFragment()
             val args = Bundle()
@@ -35,25 +56,30 @@ class ImageFragment: Fragment() {
             fragment.arguments = args
             return fragment
         }
-
     }
 
+    /**
+     * OnCreate
+     * Get BucketId, view Model.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bucketId = arguments?.getLong(BUCKET_ID)
         viewModel = activity!!.run{
-            ViewModelProvider(this,CustomSelectorViewModelFactory(activity!!.application)).get(
+            ViewModelProvider(this, CustomSelectorViewModelFactory(activity!!.application)).get(
                 CustomSelectorViewModel::class.java
             )
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val root = inflater.inflate(R.layout.fragment_custom_selector, container,false)
+    /**
+     * OnCreateView
+     * Init imageAdapter, gridLayoutManger.
+     * SetUp recycler view.
+     */
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        val root = inflater.inflate(R.layout.fragment_custom_selector, container, false)
         imageAdapter = ImageAdapter(activity!!, activity as ImageSelectListener)
         gridLayoutManager = GridLayoutManager(context,getSpanCount())
         with(root.selector_rv){
@@ -66,17 +92,18 @@ class ImageFragment: Fragment() {
             handleResult(it)
         })
 
-        //todo selected image observer
-
         return root
     }
 
+    /**
+     * Handle view model result.
+     */
     private fun handleResult(result:Result){
         if(result.status is CallbackStatus.SUCCESS){
-            val images= result.images
-            if(images.isNotEmpty()){
+            val images = result.images
+            if(images.isNotEmpty()) {
                 imageAdapter.init(images)
-                selector_rv.visibility= View.VISIBLE
+                selector_rv.visibility = View.VISIBLE
             }
             else{
                 selector_rv.visibility = View.GONE
@@ -85,10 +112,11 @@ class ImageFragment: Fragment() {
         loader.visibility = if (result.status is CallbackStatus.FETCHING) View.VISIBLE else View.GONE
     }
 
-    private fun getSpanCount(): Int{
+    /**
+     * getSpanCount for GridViewManager.
+     */
+    private fun getSpanCount(): Int {
         return 3
+        // todo change span count depending on the device orientation and other factos.
     }
-
-
-
 }
