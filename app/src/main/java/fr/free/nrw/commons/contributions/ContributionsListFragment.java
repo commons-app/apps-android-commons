@@ -38,6 +38,7 @@ import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.Locale;
 import javax.inject.Inject;
@@ -71,6 +72,9 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   LinearLayout fab_layout;
   @BindView(R.id.fab_custom_gallery)
   FloatingActionButton fabCustomGallery;
+
+  @Inject
+  SystemThemeUtils systemThemeUtils;
 
   @Inject
   ContributionController controller;
@@ -243,6 +247,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
     fabCustomGallery.setOnClickListener(v -> {
       Intent intent = new Intent(getActivity(),CustomSelectorActivity.class);
+      intent.putExtra("DarkTheme",systemThemeUtils.isDeviceInNightMode());
       startActivity(intent);
     });
   }

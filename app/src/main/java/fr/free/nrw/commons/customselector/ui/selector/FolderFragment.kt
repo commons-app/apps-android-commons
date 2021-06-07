@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.model.Result
-import fr.free.nrw.commons.category.GridViewAdapter
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Folder
@@ -52,12 +50,12 @@ class FolderFragment : Fragment() {
             this.adapter = folderAdapter
         }
         viewModel?.result?.observe(viewLifecycleOwner, Observer {
-            setupView(it)
+            handleResult(it)
         })
         return root
     }
 
-    private fun setupView(result: Result){
+    private fun handleResult(result: Result){
         if(result.status is CallbackStatus.SUCCESS){
             val folders = arrayListOf<Folder>()
             for( i in 1..12){
