@@ -10,24 +10,37 @@ import fr.free.nrw.commons.customselector.model.Result
 
 class CustomSelectorViewModel(application: Application) : AndroidViewModel(application) {
 
+    /**
+     * Application Context.
+     */
     private val context = application.applicationContext
+
+    /**
+     * Image file loader: Load all device images.
+     */
     private val imageFileLoader : ImageFileLoader = ImageFileLoader(context)
 
-    var selectedImages: MutableLiveData<ArrayList<Image>> = MutableLiveData()
+    /**
+     * Result Live Data
+     */
     val result = MutableLiveData(Result(CallbackStatus.IDLE, arrayListOf()))
 
-    fun fetchImages(){
+    /**
+     * Fetch Images and supply to result.
+     */
+    fun fetchImages() {
         result.postValue(Result(CallbackStatus.FETCHING, arrayListOf()))
         imageFileLoader.abortLoadImage()
         imageFileLoader.loadDeviceImages(object: ImageLoaderListener {
+
             override fun onImageLoaded(images: ArrayList<Image>) {
-                result.postValue(Result(CallbackStatus.SUCCESS,images))
+                result.postValue(Result(CallbackStatus.SUCCESS, images))
             }
 
             override fun onFailed(throwable: Throwable) {
                 result.postValue(Result(CallbackStatus.SUCCESS, arrayListOf()))
             }
+
         })
     }
-
 }

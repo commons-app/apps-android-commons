@@ -11,39 +11,67 @@ import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 
-class ImageAdapter(context: Context, private val imageSelectListener: ImageSelectListener ):
+class ImageAdapter(
+    /**
+     * Application Context.
+     */
+    context: Context,
+
+    /**
+     * Image select listener for click events on image.
+     */
+    private val imageSelectListener: ImageSelectListener ):
+
     RecyclerViewAdapter<ImageAdapter.ImageViewHolder>(context) {
+
+    /**
+     * Currently selected images.
+     */
     private val selectedImages = arrayListOf<Image>()
+
+    /**
+     * List of all images in adapter.
+     */
     private val images: ArrayList<Image> = ArrayList()
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ImageAdapter.ImageViewHolder {
-        val itemView = inflater.inflate(R.layout.item_custom_selector_image,parent,false)
+    /**
+     * create View holder.
+     */
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
+        val itemView = inflater.inflate(R.layout.item_custom_selector_image,parent, false)
         return ImageViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: ImageAdapter.ImageViewHolder, position: Int) {
+    /**
+     * Bind View holder, load image, selected view, click listeners.
+     */
+    override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val image=images[position]
-        val selectedIndex = 1 // todo get selected index of the image in selected images
-        val isSelected = selectedIndex !=-1
-        // todo load image thumbnail
+        // todo load image thumbnail, set selected view.
         holder.itemView.setOnClickListener {
             selectOrRemoveImage(image, position)
         }
     }
 
+    /**
+     * Handle click event on an image, update counter on images.
+     */
     private fun selectOrRemoveImage(image:Image, position:Int){
-        //todo select the image if not selected and remove it if already selected
+        // todo select the image if not selected and remove it if already selected
     }
 
-    fun init(images:List<Image>){
+    /**
+     * Initialize the data set.
+     */
+    fun init(images:List<Image>) {
         this.images.clear()
         this.images.addAll(images)
         notifyDataSetChanged()
     }
 
+    /**
+     * Image view holder.
+     */
     class ImageViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.image_thumbnail)
         val selectedNumber: TextView = itemView.findViewById(R.id.selected_count)
