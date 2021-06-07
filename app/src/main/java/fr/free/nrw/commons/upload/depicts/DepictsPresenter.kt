@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload.depicts
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import fr.free.nrw.commons.di.CommonsApplicationModule
+import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.WikidataDisambiguationItems
@@ -82,6 +83,26 @@ class DepictsPresenter @Inject constructor(
     override fun onDetachView() {
         view = DUMMY
         compositeDisposable.clear()
+    }
+
+    /**
+     * Auto-selects the depiction for a place as if it were clicked by the user when the fragment is
+     * made aware of an associated place
+     *
+     * Given a [Place], retrieves the corresponding [DepictedItem] from the repository and calls
+     * [onDepictItemClicked]
+     *
+     * @param place the place to be selected
+     */
+    override fun onNewPlace(place: Place?) {
+        place?.let { it ->
+            repository.getPlaceDepiction(it)
+                .subscribeOn(ioScheduler)
+                .observeOn(mainThreadScheduler)
+                .subscribe { depictedItem ->
+                    onDepictItemClicked(depictedItem)
+                }
+        }
     }
 
     override fun onPreviousButtonClicked() {

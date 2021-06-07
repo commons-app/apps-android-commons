@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload.structure.depictions
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.nearby.Place
 import io.reactivex.Flowable
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.processors.BehaviorProcessor
 import timber.log.Timber
@@ -38,6 +39,25 @@ class DepictModel @Inject constructor(private val depictsClient: DepictsClient) 
             }
         else
             networkItems(query)
+    }
+
+    /**
+     * Obtains a [DepictedItem] for a given [Place]
+     */
+    fun getPlaceDepiction(place: Place): Observable<DepictedItem> {
+        val placeId = place.wikiDataEntityId
+
+        return if (placeId == null) {
+            Observable.empty()
+        } else {
+            depictsClient.getEntities(placeId)
+                .flatMapObservable { Observable.fromIterable(it.entities().values) }
+                .map {
+                    val depictedItem = DepictedItem(it, place)
+                    depictedItem.isSelected = true
+                    depictedItem
+                }
+        }
     }
 
     private fun networkItems(query: String): Flowable<List<DepictedItem>> {

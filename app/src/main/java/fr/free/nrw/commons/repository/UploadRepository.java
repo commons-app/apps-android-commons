@@ -254,6 +254,10 @@ public class UploadRepository {
         return depictModel.searchAllEntities(query);
     }
 
+    public Observable<DepictedItem> getPlaceDepiction(final Place place) {
+        return depictModel.getPlaceDepiction(place);
+    }
+
     /**
      * Returns nearest place matching the passed latitude and longitude
      * @param decLatitude
