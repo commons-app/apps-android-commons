@@ -3,7 +3,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   >
 
-  <ImageView
+  <ImageButton
     android:id="@+id/back"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
@@ -13,6 +13,8 @@
     android:layout_centerVertical="true"
     android:background="?attr/selectableItemBackgroundBorderless"
     android:padding="@dimen/standard_gap"
+    android:clickable="true"
+    android:focusable="true"
     app:srcCompat="?attr/custom_selector_back" />
 
 
@@ -29,7 +31,7 @@
     android:text="@string/custom_selector_title"
     style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title" />
 
-  <ImageView
+  <ImageButton
     android:id="@+id/done"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"
@@ -37,6 +39,7 @@
     android:layout_height="match_parent"
     android:layout_centerVertical="true"
     android:clickable="true"
+    android:background="?attr/selectableItemBackgroundBorderless"
     android:focusable="true"
     android:padding="@dimen/standard_gap"
     app:srcCompat="?attr/custom_selector_done"/>
