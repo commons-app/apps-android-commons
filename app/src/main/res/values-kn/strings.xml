@@ -29,7 +29,7 @@
   <string name="uploading_started">ಅಪ್ಲೋಡ್ ಪ್ರಾರಂಭವಾಗಿದೆ!</string>
   <string name="upload_completed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಆಗಿದೆ!</string>
   <string name="upload_completed_notification_text">ನಿಮ್ಮ ನಕಲೇರಿಕೆಯನ್ನು ನೋಡಲು ಮೆಲ್ಲಗೆ ತಟ್ಟಿ</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">ನಕಲೇರಿಕೆಯ%1$s ಪ್ರಾರಂಭ</string>
+  <string name="upload_progress_notification_title_start">ಕಡತ ಅಪ್‌ಲೋಡ್ ಆಗುತ್ತಿದೆ: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ನಕಲೇರಿಕೆ  ಆಗಿದೆ!</string>
   <string name="upload_progress_notification_title_finishing">%1$s ಅಪ್ಲೋಡ್ ಮಾಡುವಿಕೆಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಲಾಗುತ್ತಿದೆ</string>
   <string name="upload_failed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಮಾಡುವಿಕೆ ವಿಫಲವಾಗಿದೆ</string>
@@ -44,6 +44,7 @@
   <string name="menu_nearby">ಹತ್ತಿರದ</string>
   <string name="provider_contributions">ನನ್ನ ನಕಲೇರಿಕೆಗಳು</string>
   <string name="menu_share">ಹಂಚು</string>
+  <string name="menu_view_file_page">ಕಡತದ ಪುಟ ವೀಕ್ಷಿಸಿ</string>
   <string name="share_title_hint">ತಲೆಬರಹ (ಕಡ್ಡಾಯ)</string>
   <string name="share_description_hint">ವಿವರ</string>
   <string name="share_caption_hint">ತಲೆಬರಹ</string>
@@ -63,11 +64,13 @@
   <string name="contributions_subtitle_zero">(ಇನ್ನೂ ಯಾವುದೇ ಅಪ್‌ಲೋಡ್‌ಗಳಿಲ್ಲ)</string>
   <string name="categories_activity_title">ವರ್ಗಗಳು</string>
   <string name="title_activity_settings">ವ್ಯವಸ್ಥೆಗಳು</string>
+  <string name="title_activity_signup">ಸೈನ್ ಅಪ್</string>
   <string name="title_activity_category_details">ವರ್ಗ</string>
   <string name="menu_about">ಕುರಿತು</string>
   <string name="about_privacy_policy">ಗೌಪ್ಯತಾ ನೀತಿ</string>
   <string name="about_credits">ಮನ್ನಣೆಗಳು</string>
   <string name="title_activity_about">ಕುರಿತು</string>
+  <string name="provider_categories">ಇತ್ತೀಚೆಗೆ ಬಳಸಲಾದ ವರ್ಗಗಳು</string>
   <string name="menu_retry_upload">ಪುನಃ ಪ್ರಯತ್ನಿಸಿ</string>
   <string name="menu_cancel_upload">ರದ್ದುಮಾಡಿ</string>
   <string name="menu_download">ನಕಲಿಳಿಸಿ</string>
@@ -89,7 +92,9 @@
   <string name="detail_panel_cats_loading">ತುಂಬಿಸಲಾಗುತ್ತಿದೆ….</string>
   <string name="detail_caption_empty">ತಲೆಬರಹ ಇಲ್ಲ</string>
   <string name="detail_description_empty">ವಿವರ ಇಲ್ಲ</string>
+  <string name="detail_discussion_empty">ಯಾವುದೇ ಚರ್ಚೆ ಇಲ್ಲ</string>
   <string name="detail_license_empty">ಗೊತ್ತಿಲ್ಲದ ಪರವಾನಗಿ</string>
+  <string name="menu_refresh">ಪುನಶ್ಚೇತನಗೊಳಿಸು</string>
   <string name="ok">ಸರಿ</string>
   <string name="warning">ಎಚ್ಚರಿಕೆ</string>
   <string name="upload">ಅಪ್‌ಲೋಡ್</string>
@@ -97,10 +102,13 @@
   <string name="no">ಇಲ್ಲ</string>
   <string name="media_detail_caption">ತಲೆಬರಹ</string>
   <string name="media_detail_title">ಶೀರ್ಷಿಕೆ</string>
+  <string name="media_detail_discussion">ಚರ್ಚೆ</string>
   <string name="media_detail_author">ಕರ್ತೃ</string>
   <string name="media_detail_license">ಪರವಾನಗಿ</string>
   <string name="commons_website">ಕಾಮನ್ಸ್ ಜಾಲತಾಣ</string>
   <string name="commons_facebook">ಕಾಮನ್ಸ್ ಫೇಸ್ಬುಕ್ ಪುಟ</string>
+  <string name="welcome_image_mount_zao">ಮೌಂಟ್ ಜಾವ್</string>
+  <string name="welcome_image_llamas">ಲಾಮಾಗಳು</string>
   <string name="welcome_image_tulip">ಟ್ಯೂಲಿಪ್</string>
   <string name="welcome_image_sydney_opera_house">ಸಿಡ್ನಿ ಒಪೆರಾ ಹೌಸ್</string>
   <string name="cancel">ರದ್ದುಮಾಡಿ</string>
@@ -114,6 +122,7 @@
   <string name="navigation_item_logout">ಲಾಗ್ ಔಟ್</string>
   <string name="navigation_item_notification">ಅಧಿಸೂಚನೆಗಳು</string>
   <string name="no_description_found">ಯಾವುದೇ ವಿವರಣೆ ಸಿಗಲಿಲ್ಲ</string>
+  <string name="nearby_info_menu_commons_article">ಕಾಮನ್ಸ್ ಕಡತದ ಪುಟ</string>
   <string name="nearby_info_menu_wikidata_article">ವಿಕಿಡೇಟಾ ವಸ್ತು</string>
   <string name="nearby_info_menu_wikipedia_article">ವಿಕಿಪೀಡಿಯ ಲೇಖನ</string>
   <string name="upload_problem_image_dark">ಚಿತ್ರವು ಬಹಳ ಕಪ್ಪಾಗಿದೆ.</string>
@@ -134,9 +143,13 @@
   <string name="retry">ಪುನಃ ಪ್ರಯತ್ನಿಸಿ</string>
   <string name="no_images_found">ಯಾವುದೇ ಚಿತ್ರಗಳು ಸಿಗಲಿಲ್ಲ!</string>
   <string name="block_notification_title">ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ</string>
+  <string name="appwidget_img">ದಿನದ ಚಿತ್ರ</string>
+  <string name="app_widget_heading">ದಿನದ ಚಿತ್ರ</string>
   <string name="menu_search_button">ಹುಡುಕು</string>
+  <string name="search_commons">ಕಾಮನ್ಸ್ ಹುಡುಕಿ</string>
   <string name="title_activity_search">ಹುಡುಕು</string>
   <string name="search_recent_header">ಇತ್ತೀಚೆಗಿನ ಹುಡುಕಾಟಗಳು:</string>
+  <string name="search_tab_title_media">ಮೀಡಿಯಾ</string>
   <string name="search_tab_title_categories">ವರ್ಗಗಳು</string>
   <string name="search_tab_title_depictions">ವಸ್ತುಗಳು</string>
   <string name="question">ಪ್ರಶ್ನೆ</string>

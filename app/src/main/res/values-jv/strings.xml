@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Bennylin
 * Diki Ananta
 * N219
 * NoiX180
@@ -81,7 +82,7 @@
   <string name="contributions_subtitle_zero" fuzzy="true">Durung ana unggahan</string>
   <string name="categories_not_found">Ora ana kategori kang cocog karo %1$s</string>
   <string name="categories_skip_explanation">Wuwuh kategori supaya gambar-gambaré panjenengan gampang tinemu ing Wikimedia Commons.\nWiwit nulis saperlu muwuhi kategori.</string>
-  <string name="categories_activity_title">Kategori</string>
+  <string name="categories_activity_title">Katégori</string>
   <string name="title_activity_settings">Setèlan</string>
   <string name="title_activity_signup">Ndhaftar</string>
   <string name="title_activity_featured_images">Gambar Pilihan</string>
@@ -115,7 +116,7 @@
   <string name="tutorial_4_text">Contoné unggahan:</string>
   <string name="welcome_final_text">Panjenengan sumerep, ta?</string>
   <string name="welcome_final_button_text">Iya!</string>
-  <string name="detail_panel_cats_label">Kategori</string>
+  <string name="detail_panel_cats_label">Katégori</string>
   <string name="detail_panel_cats_loading">Ngamot…</string>
   <string name="detail_panel_cats_none">Ora ana sing dipilih</string>
   <string name="detail_description_empty">Tanpa katerangan</string>

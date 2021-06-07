@@ -225,6 +225,8 @@
   <string name="upload_problem_different_geolocation">Sa fòto a l\'é stàita fàita ant un pòst diferent.</string>
   <string name="upload_problem_fbmd">Për piasì, ch\'a caria mach dle fòto che a l\'ha fàit chiel-midem. Ch\'a caria pa dle fòto che a l\'ha trovà an sij cont Facebook d\'àutra gent.</string>
   <string name="upload_problem_do_you_continue">Veul-lo istess carié sta plancia?</string>
+  <string name="upload_connection_error_alert_title">Eror ëd conession</string>
+  <string name="upload_connection_error_alert_detail">Ël process ëd cariament a l\'ha damanca ëd n\'acess ativ a l\'aragnà. Për piasì, ch\'a verìfica sò colegament a la rej.</string>
   <string name="upload_problem_image">Trovà un problema con la plancia</string>
   <string name="internet_downloaded">Për piasì, ch\'a caria mach dle fòto ch\'a l\'ha fàit chiel-midem. Ch\'a caria pa dle fòto che a l\'ha dëscarià da \'ns l\'aragnà.</string>
   <string name="use_external_storage">Argistré le plance d\'aplicassion</string>
