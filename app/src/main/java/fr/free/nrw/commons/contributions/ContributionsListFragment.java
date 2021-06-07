@@ -246,8 +246,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     });
 
     fabCustomGallery.setOnClickListener(v -> {
-      Intent intent = new Intent(getActivity(),CustomSelectorActivity.class);
-      intent.putExtra("DarkTheme",systemThemeUtils.isDeviceInNightMode());
+      Intent intent = new Intent(getActivity(), CustomSelectorActivity.class);
+      intent.putExtra("DarkTheme", systemThemeUtils.isDeviceInNightMode());
       startActivity(intent);
     });
   }
