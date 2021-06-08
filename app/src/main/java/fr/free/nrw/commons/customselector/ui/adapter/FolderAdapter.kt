@@ -5,13 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.model.Folder
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
 
-class FolderAdapter(
+class   FolderAdapter(
     /**
      * Application context.
      */
@@ -31,7 +32,7 @@ class FolderAdapter(
     /**
      * List of folders.
      */
-    private val folders: MutableList<Folder> = mutableListOf()
+    private var folders: MutableList<Folder> = mutableListOf()
 
     /**
      * Create view holder, returns View holder item.
@@ -60,10 +61,14 @@ class FolderAdapter(
     /**
      * Initialise the data set.
      */
-    fun init(folders: List<Folder>) {
-        this.folders.clear()
-        this.folders.addAll(folders)
-        notifyDataSetChanged()
+    fun init(newFolders: List<Folder>) {
+        val oldFolderList: MutableList<Folder> = folders
+        val newFolderList = newFolders.toMutableList()
+        val diffResult = DiffUtil.calculateDiff(
+            FoldersDiffCallback(oldFolderList, newFolderList)
+        )
+        folders = newFolderList
+        diffResult.dispatchUpdatesTo(this)
     }
 
 
@@ -93,6 +98,44 @@ class FolderAdapter(
          * Item count in Folder/Item
          */
         val count: TextView = itemView.findViewById(R.id.folder_count)
+    }
+
+    /**
+     * DiffUtilCallback.
+     */
+    class FoldersDiffCallback(
+        var oldFolders: MutableList<Folder>,
+        var newFolders: MutableList<Folder>
+    ) : DiffUtil.Callback() {
+        /**
+         * Returns the size of the old list.
+         */
+        override fun getOldListSize(): Int {
+            return oldFolders.size
+        }
+
+        /**
+         * Returns the size of the new list.
+         */
+        override fun getNewListSize(): Int {
+            return newFolders.size
+        }
+
+        /**
+         * Called by the DiffUtil to decide whether two object represent the same Item.
+         */
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldFolders.get(oldItemPosition).bucketId == newFolders.get(newItemPosition).bucketId
+        }
+
+        /**
+         * Called by the DiffUtil when it wants to check whether two items have the same data.
+         * DiffUtil uses this information to detect if the contents of an item has changed.
+         */
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldFolders.get(oldItemPosition).equals(newFolders.get(newItemPosition))
+        }
+
     }
 
 }
