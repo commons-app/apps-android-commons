@@ -30,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -244,12 +245,13 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
       controller.initiateGalleryPick(getActivity(), true);
       animateFAB(isFabOpen);
     });
+  }
 
-    fabCustomGallery.setOnClickListener(v -> {
-      Intent intent = new Intent(getActivity(), CustomSelectorActivity.class);
-      intent.putExtra("DarkTheme", systemThemeUtils.isDeviceInNightMode());
-      startActivity(intent);
-    });
+  @OnClick(R.id.fab_custom_gallery)
+  void launchCustomSelector(){
+    Intent intent = new Intent(getActivity(), CustomSelectorActivity.class);
+    intent.putExtra("DarkTheme", systemThemeUtils.isDeviceInNightMode());
+    startActivity(intent);
   }
 
   private void animateFAB(final boolean isFabOpen) {
