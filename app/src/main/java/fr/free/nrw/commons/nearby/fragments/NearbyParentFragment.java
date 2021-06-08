@@ -222,6 +222,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private PlaceAdapter adapter;
     private NearbyParentFragmentInstanceReadyCallback nearbyParentFragmentInstanceReadyCallback;
 
+    /**
+     * Holds filtered markers that are to be shown
+     */
+    private List<NearbyBaseMarker> filteredMarkers;
+    /**
+     * Holds all the markers
+     */
+    private List<NearbyBaseMarker> allMarkers;
+
     @NonNull
     public static NearbyParentFragment newInstance() {
         NearbyParentFragment fragment = new NearbyParentFragment();
@@ -1241,6 +1250,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         // Remove the previous markers before updating them
         hideAllMarkers();
 
+        filteredMarkers = new ArrayList<>();
+
         for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
             final Place place = markerPlaceGroup.getPlace();
 
@@ -1272,6 +1283,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 updateMarker(markerPlaceGroup.getIsBookmarked(), place, NearbyController.currentLocation);
             }
         }
+
+        mapBox.clear();
+        mapBox.addMarkers(filteredMarkers);
     }
 
     @Override
@@ -1289,25 +1303,35 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         VectorDrawableCompat vectorDrawable = VectorDrawableCompat.create(
             getContext().getResources(), getIconFor(place, isBookmarked), getContext().getTheme());
 
-        for (Marker marker : mapBox.getMarkers()) {
-            if (marker.getTitle() != null && marker.getTitle().equals(place.getName())) {
+        if(curLatLng != null) {
+            for (NearbyBaseMarker nearbyMarker : allMarkers) {
+                if (nearbyMarker.getMarker().getTitle() != null && nearbyMarker.getMarker().getTitle().equals(place.getName())) {
 
-                final Bitmap icon = UiUtils.getBitmap(vectorDrawable);
-                if (curLatLng != null) {
+                    final Bitmap icon = UiUtils.getBitmap(vectorDrawable);
+
                     final String distance = formatDistanceBetween(curLatLng, place.location);
                     place.setDistance(distance);
-                }
 
-                final NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
-                nearbyBaseMarker.title(place.name);
-                nearbyBaseMarker.position(
+                    final NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
+                    nearbyBaseMarker.title(place.name);
+                    nearbyBaseMarker.position(
                         new com.mapbox.mapboxsdk.geometry.LatLng(
-                                place.location.getLatitude(),
-                                place.location.getLongitude()));
-                nearbyBaseMarker.place(place);
-                nearbyBaseMarker.icon(IconFactory.getInstance(getContext())
+                            place.location.getLatitude(),
+                            place.location.getLongitude()));
+                    nearbyBaseMarker.place(place);
+                    nearbyBaseMarker.icon(IconFactory.getInstance(getContext())
                         .fromBitmap(icon));
-                marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
+                    nearbyMarker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
+                    filteredMarkers.add(nearbyBaseMarker);
+                }
+            }
+        } else {
+            for (Marker marker : mapBox.getMarkers()) {
+                if (marker.getTitle() != null && marker.getTitle().equals(place.getName())) {
+
+                    final Bitmap icon = UiUtils.getBitmap(vectorDrawable);
+                    marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
+                }
             }
         }
     }
@@ -1348,6 +1372,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void addNearbyMarkersToMapBoxMap(final List<NearbyBaseMarker> nearbyBaseMarkers, final Marker selectedMarker) {
         if (isMapBoxReady && mapBox != null) {
+            allMarkers = new ArrayList<>(nearbyBaseMarkers);
             mapBox.addMarkers(nearbyBaseMarkers);
             setMapMarkerActions(selectedMarker);
             presenter.updateMapMarkersToController(nearbyBaseMarkers);
