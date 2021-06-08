@@ -75,6 +75,42 @@ data class Image(
     }
 
     /**
+     * Indicates whether some other object is "equal to" this one.
+     */
+    override fun equals(other: Any?): Boolean {
+
+        if(javaClass != other?.javaClass) {
+            return false
+        }
+
+        other as Image
+
+        if(id != other.id) {
+            return false;
+        }
+        if(name != other.name) {
+            return false;
+        }
+        if(uri != other.uri) {
+            return false;
+        }
+        if(path != other.path) {
+            return false;
+        }
+        if(bucketId != other.bucketId) {
+            return false;
+        }
+        if(bucketName != other.bucketName) {
+            return false;
+        }
+        if(sha1 != other.sha1) {
+            return false;
+        }
+
+        return true
+    }
+
+    /**
      * Parcelable companion object
      */
     companion object CREATOR : Parcelable.Creator<Image> {

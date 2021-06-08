@@ -15,4 +15,30 @@ data class Folder(
     images : folder images.
      */
     var images: ArrayList<Image> = arrayListOf<Image>()
-)
+
+
+) {
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     */
+    override fun equals(other: Any?): Boolean {
+
+        if (javaClass != other?.javaClass) {
+            return false
+        }
+
+        other as Folder
+
+        if (bucketId != other.bucketId) {
+            return false
+        }
+        if (name != other.name) {
+            return false
+        }
+        if (images != other.images) {
+            return false
+        }
+
+        return true
+    }
+}

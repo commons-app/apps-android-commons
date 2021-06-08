@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.Group
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
@@ -20,19 +21,19 @@ class ImageAdapter(
     /**
      * Image select listener for click events on image.
      */
-    private val imageSelectListener: ImageSelectListener ):
+    private var imageSelectListener: ImageSelectListener ):
 
     RecyclerViewAdapter<ImageAdapter.ImageViewHolder>(context) {
 
     /**
      * Currently selected images.
      */
-    private val selectedImages = arrayListOf<Image>()
+    private var selectedImages = arrayListOf<Image>()
 
     /**
      * List of all images in adapter.
      */
-    private val images: ArrayList<Image> = ArrayList()
+    private var images: ArrayList<Image> = ArrayList()
 
     /**
      * create View holder.
@@ -63,10 +64,23 @@ class ImageAdapter(
     /**
      * Initialize the data set.
      */
-    fun init(images:List<Image>) {
-        this.images.clear()
-        this.images.addAll(images)
-        notifyDataSetChanged()
+    fun init(newImages:List<Image>) {
+        val oldImageList:ArrayList<Image> = images
+        val newImageList:ArrayList<Image> = ArrayList(newImages)
+        val diffResult = DiffUtil.calculateDiff(
+            ImagesDiffCallback(oldImageList, newImageList)
+        )
+        images = newImageList
+        diffResult.dispatchUpdatesTo(this)
+    }
+
+    /**
+     * Returns the total number of items in the data set held by the adapter.
+     *
+     * @return The total number of items in this adapter.
+     */
+    override fun getItemCount(): Int {
+        return images.size
     }
 
     /**
@@ -80,12 +94,42 @@ class ImageAdapter(
     }
 
     /**
-     * Returns the total number of items in the data set held by the adapter.
-     *
-     * @return The total number of items in this adapter.
+     * DiffUtilCallback.
      */
-    override fun getItemCount(): Int {
-        return images.size
+    class ImagesDiffCallback(
+        var oldImageList: ArrayList<Image>,
+        var newImageList: ArrayList<Image>
+    ) : DiffUtil.Callback(){
+
+        /**
+         * Returns the size of the old list.
+         */
+        override fun getOldListSize(): Int {
+            return oldImageList.size
+        }
+
+        /**
+         * Returns the size of the new list.
+         */
+        override fun getNewListSize(): Int {
+            return newImageList.size
+        }
+
+        /**
+         * Called by the DiffUtil to decide whether two object represent the same Item.
+         */
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return newImageList[newItemPosition].id == oldImageList[oldItemPosition].id
+        }
+
+        /**
+         * Called by the DiffUtil when it wants to check whether two items have the same data.
+         * DiffUtil uses this information to detect if the contents of an item has changed.
+         */
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldImageList[oldItemPosition].equals(newImageList[newItemPosition])
+        }
+
     }
 
 }
