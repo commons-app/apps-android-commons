@@ -254,7 +254,11 @@ public class UploadRepository {
         return depictModel.searchAllEntities(query);
     }
 
-    public Observable<DepictedItem> getPlaceDepiction(final Place place) {
+    public Observable<DepictedItem> getPlaceDepiction() {
+        Place place = null;
+        if (getUploads().size() == 1) {
+            place = getUploadItem(0).getPlace();
+        }
         return depictModel.getPlaceDepiction(place);
     }
 

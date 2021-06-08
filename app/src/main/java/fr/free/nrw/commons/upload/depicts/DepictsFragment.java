@@ -10,7 +10,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -21,7 +20,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
@@ -58,9 +56,6 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     DepictsContract.UserActionListener presenter;
     private UploadDepictsAdapter adapter;
     private Disposable subscribe;
-
-    private final MutableLiveData<Place> place = new MutableLiveData<>();
-
     @Nullable
     @Override
     public android.view.View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -89,7 +84,6 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
             }
         });
         presenter.onAttachView(this);
-        place.observe(getViewLifecycleOwner(), presenter::onNewPlace);
         initRecyclerView();
         addTextChangeListenerToSearchBox();
     }
@@ -162,14 +156,6 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     @OnClick(R.id.depicts_previous)
     public void onPreviousButtonClicked() {
         callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
-    }
-
-    /**
-     * Sets the {@link Place} whose corresponding depiction will be pre-selected
-     * @param place
-     */
-    public void setPlace(final Place place) {
-        this.place.setValue(place);
     }
 
     /**

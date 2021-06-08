@@ -3,7 +3,6 @@ package fr.free.nrw.commons.upload.depicts
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import fr.free.nrw.commons.di.CommonsApplicationModule
-import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.WikidataDisambiguationItems
@@ -60,6 +59,7 @@ class DepictsPresenter @Inject constructor(
                     }
                 )
         )
+        selectPlaceDepiction()
     }
 
     private fun searchResultsWithTerm(term: String): Flowable<Pair<List<DepictedItem>, String>> {
@@ -86,23 +86,20 @@ class DepictsPresenter @Inject constructor(
     }
 
     /**
-     * Auto-selects the depiction for a place as if it were clicked by the user when the fragment is
-     * made aware of an associated place
+     * Auto-selects the depiction retrieved by the repository for an associated place as if it were
+     * clicked by the user
      *
-     * Given a [Place], retrieves the corresponding [DepictedItem] from the repository and calls
-     * [onDepictItemClicked]
-     *
-     * @param place the place to be selected
+     * Retrieves the [DepictedItem] from the repository and calls [onDepictItemClicked]
      */
-    override fun onNewPlace(place: Place?) {
-        place?.let { it ->
-            repository.getPlaceDepiction(it)
-                .subscribeOn(ioScheduler)
-                .observeOn(mainThreadScheduler)
-                .subscribe { depictedItem ->
-                    onDepictItemClicked(depictedItem)
-                }
-        }
+    private fun selectPlaceDepiction() {
+        compositeDisposable.add(repository.placeDepiction
+            .subscribeOn(ioScheduler)
+            .observeOn(mainThreadScheduler)
+            .subscribe { depictedItem ->
+                depictedItem.isSelected = true
+                onDepictItemClicked(depictedItem)
+            }
+        )
     }
 
     override fun onPreviousButtonClicked() {

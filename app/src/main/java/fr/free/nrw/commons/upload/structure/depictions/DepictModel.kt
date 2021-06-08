@@ -42,22 +42,15 @@ class DepictModel @Inject constructor(private val depictsClient: DepictsClient) 
     }
 
     /**
-     * Obtains a [DepictedItem] for a given [Place]
+     * Provides a [DepictedItem] for a given [Place] via an [Observable], returning an empty
+     * observable if the given place is null or has no entity id
      */
-    fun getPlaceDepiction(place: Place): Observable<DepictedItem> {
-        val placeId = place.wikiDataEntityId
-
-        return if (placeId == null) {
-            Observable.empty()
-        } else {
-            depictsClient.getEntities(placeId)
-                .flatMapObservable { Observable.fromIterable(it.entities().values) }
-                .map {
-                    val depictedItem = DepictedItem(it, place)
-                    depictedItem.isSelected = true
-                    depictedItem
-                }
-        }
+    fun getPlaceDepiction(place: Place?): Observable<DepictedItem> {
+        return place?.wikiDataEntityId?.let { id ->
+                depictsClient.getEntities(id)
+                    .flatMapObservable { Observable.fromIterable(it.entities().values) }
+                    .map { DepictedItem(it, place) }
+            } ?: Observable.empty()
     }
 
     private fun networkItems(query: String): Flowable<List<DepictedItem>> {

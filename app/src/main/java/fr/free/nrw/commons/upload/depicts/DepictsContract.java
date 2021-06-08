@@ -2,7 +2,6 @@ package fr.free.nrw.commons.upload.depicts;
 
 import androidx.lifecycle.LiveData;
 import fr.free.nrw.commons.BasePresenter;
-import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import java.util.List;
 
@@ -66,15 +65,6 @@ public interface DepictsContract {
          * from the depiction list
          */
         void verifyDepictions();
-
-        /**
-         * Listener for {@link Place} attachment, which may be called:
-         * 1) on Fragment attach, if the upload process is initiated from the Nearby map, or
-         * 2) upon confirmation of a Nearby place dialog
-         *
-         * @param place the place to be attached
-         */
-        void onNewPlace(Place place);
 
         LiveData<List<DepictedItem>> getDepictedItems();
     }
