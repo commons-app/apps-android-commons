@@ -6,32 +6,32 @@ import android.os.Parcelable
 
 data class Image(
     /**
-    id : Unique image id
+    id : Unique image id, primary key of image in device, eg 104950
      */
     var id: Long,
 
     /**
-    name : Name of the image
+    name : Name of the image with extension, eg CommonsLogo.jpeg
      */
     var name: String,
 
     /**
-    uri : Uri of the image
+    uri : Uri of the image, points to image location or name, eg content://media/external/images/camera/10495 (Android 10)
      */
     var uri: Uri,
 
     /**
-    path : System path of the image
+    path : System path of the image, eg storage/emulated/0/camera/CommonsLogo.jpeg
      */
     var path: String,
 
     /**
-    bucketId : bucketId of folder
+    bucketId : bucketId of folder, eg 540528482
      */
     var bucketId: Long = 0,
 
     /**
-    bucketName : name of folder
+    bucketName : name of folder, eg Camera
      */
     var bucketName: String = "",
 

@@ -2,17 +2,17 @@ package fr.free.nrw.commons.customselector.model
 
 data class Folder(
     /**
-    bucketId : Unique directory id.
+    bucketId : Unique directory id, eg 540528482
      */
     var bucketId: Long,
 
     /**
-    name : bucket/folder name.
+    name : bucket/folder name, eg Camera
      */
     var name: String,
 
     /**
-    images : folder images.
+    images : folder images, list of all images under this folder.
      */
     var images: ArrayList<Image> = arrayListOf<Image>()
 
