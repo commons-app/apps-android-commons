@@ -59,7 +59,6 @@ class DepictsPresenter @Inject constructor(
                     }
                 )
         )
-        selectPlaceDepiction()
     }
 
     private fun searchResultsWithTerm(term: String): Flowable<Pair<List<DepictedItem>, String>> {
@@ -86,20 +85,31 @@ class DepictsPresenter @Inject constructor(
     }
 
     /**
-     * Auto-selects the depiction retrieved by the repository for an associated place as if it were
+     * Selects the depiction retrieved by the repository for an associated place as if it were
      * clicked by the user
      *
      * Retrieves the [DepictedItem] from the repository and calls [onDepictItemClicked]
      */
-    private fun selectPlaceDepiction() {
+    override fun selectPlaceDepiction() {
         compositeDisposable.add(repository.placeDepiction
             .subscribeOn(ioScheduler)
             .observeOn(mainThreadScheduler)
             .subscribe { depictedItem ->
                 depictedItem.isSelected = true
-                onDepictItemClicked(depictedItem)
+                selectNewDepiction(depictedItem)
             }
         )
+    }
+
+    private fun selectNewDepiction(depictedItem: DepictedItem) {
+        repository.onDepictItemClicked(depictedItem)
+
+        // Add the new selection to the list of depicted items so that the selection appears
+        // immediately (i.e. without any search term queries)
+        depictedItems.value?.toMutableList()
+            ?.let { listOf(depictedItem) + it }
+            ?.distinctBy(DepictedItem::id)
+            ?.let { depictedItems.value = it }
     }
 
     override fun onPreviousButtonClicked() {

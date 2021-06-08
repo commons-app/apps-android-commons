@@ -101,6 +101,14 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     }
 
     @Override
+    protected void onBecameVisible() {
+        super.onBecameVisible();
+        // Select Place depiction as the fragment becomes visible to ensure that the most up to date
+        // Place is used (i.e. if the user accepts a nearby place dialog)
+        presenter.selectPlaceDepiction();
+    }
+
+    @Override
     public void goToNextScreen() {
         callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
     }
