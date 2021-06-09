@@ -6,6 +6,7 @@ import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,6 +25,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.notification.Notification;
+import fr.free.nrw.commons.notification.NotificationController;
+import fr.free.nrw.commons.theme.BaseActivity;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
@@ -330,6 +339,12 @@ public class ContributionsFragment
         getChildFragmentManager().executePendingTransactions();
     }
 
+    public Intent getUploadServiceIntent(){
+        Intent intent = new Intent(getActivity(), UploadService.class);
+        intent.setAction(UploadService.ACTION_START_SERVICE);
+        return intent;
+    }
+
     @SuppressWarnings("ConstantConditions")
     private void setUploadCount() {
         compositeDisposable.add(okHttpJsonApiClient
@@ -531,6 +546,13 @@ public class ContributionsFragment
         presenter.onDetachView();
     }
 
+    @Override
+    public void notifyDataSetChanged() {
+        if (mediaDetailPagerFragment != null) {
+            mediaDetailPagerFragment.notifyDataSetChanged();
+        }
+    }
+
     /**
      * Retry upload when it is failed
      *
@@ -604,12 +626,8 @@ public class ContributionsFragment
         return contributionsListFragment.getContributionStateAt(position);
     }
 
-    public void backButtonClicked() {
-        if (mediaDetailPagerFragment.isVisible()) {
-            if(mediaDetailPagerFragment.backButtonClicked()) {
-                // MediaDetailed handled the backPressed no further action required.
-                return;
-            }
+    public boolean backButtonClicked() {
+        if (null != mediaDetailPagerFragment && mediaDetailPagerFragment.isVisible()) {
             if (store.getBoolean("displayNearbyCardView", true)) {
                 if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
                     nearbyNotificationCardView.setVisibility(View.VISIBLE);
@@ -622,7 +640,9 @@ public class ContributionsFragment
             ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             ((MainActivity)getActivity()).showTabs();
             fetchCampaigns();
+            return true;
         }
+        return false;
     }
 
     // Getter for mediaDetailPagerFragment

@@ -95,6 +95,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   private final int SPAN_COUNT_LANDSCAPE = 3;
   private final int SPAN_COUNT_PORTRAIT = 1;
 
+  private int contributionsSize;
+
 
   @Override
   public View onCreateView(
@@ -145,7 +147,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     }
 
     contributionsListPresenter.setup();
-    contributionsListPresenter.contributionList.observe(this.getViewLifecycleOwner(), adapter::submitList);
+    contributionsListPresenter.contributionList.observe(this.getViewLifecycleOwner(), list -> {
+      contributionsSize = list.size();
+      adapter.submitList(list);
+      callback.notifyDataSetChanged();
+    });
     rvContributionsList.setAdapter(adapter);
     adapter.registerAdapterDataObserver(new AdapterDataObserver() {
       @Override
@@ -387,10 +393,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   }
 
   public int getTotalMediaCount() {
-    if(adapter != null) {
-      return adapter.getItemCount();
-    }
-    return 0;
+    return contributionsSize;
   }
 
   /**
@@ -416,6 +419,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   }
 
   public interface Callback {
+
+    void notifyDataSetChanged();
 
     void retryUpload(Contribution contribution);
 

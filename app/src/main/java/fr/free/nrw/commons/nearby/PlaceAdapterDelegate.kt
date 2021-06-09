@@ -51,7 +51,8 @@ fun placeAdapterDelegate(
                 tvDesc.setText(R.string.no_description_found)
                 tvDesc.visibility = INVISIBLE
             } else {
-                tvDesc.text = descriptionText
+                // Remove the label and display only texts inside pharentheses (description) since too long
+                tvDesc.text = descriptionText.substringAfter(tvName.text.toString() + " (").substringBeforeLast(")");
             }
             distance.text = item.distance
             icon.setImageResource(item.label.icon)

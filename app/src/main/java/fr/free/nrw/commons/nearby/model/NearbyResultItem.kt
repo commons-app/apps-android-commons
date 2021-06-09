@@ -12,6 +12,7 @@ class NearbyResultItem(private val item: ResultTuple?,
                        @field:SerializedName("commonsCategory") private val commonsCategory: ResultTuple?,
                        @field:SerializedName("pic") private val pic: ResultTuple?,
                        @field:SerializedName("destroyed") private val destroyed: ResultTuple?,
+                       @field:SerializedName("description") private val description: ResultTuple?,
                        @field:SerializedName("endTime") private val endTime: ResultTuple?) {
 
     fun getItem(): ResultTuple {
@@ -57,6 +58,9 @@ class NearbyResultItem(private val item: ResultTuple?,
     fun getDestroyed(): ResultTuple {
         return destroyed ?: ResultTuple()
     }
+
+    fun getDescription(): ResultTuple {
+        return description ?: ResultTuple()
 
     fun getEndTime(): ResultTuple {
         return endTime ?: ResultTuple()
