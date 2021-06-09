@@ -8,10 +8,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,21 +25,20 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
-
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.theme.BaseActivity;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.campaigns.Campaign;
 import fr.free.nrw.commons.campaigns.CampaignView;
 import fr.free.nrw.commons.campaigns.CampaignsPresenter;
@@ -60,8 +56,10 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
-import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.notification.NotificationController;
+import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -71,6 +69,9 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
 
 public class ContributionsFragment
@@ -79,7 +80,7 @@ public class ContributionsFragment
         OnBackStackChangedListener,
         LocationUpdateListener,
     MediaDetailProvider,
-    ICampaignsView, ContributionsContract.View, Callback {
+    ICampaignsView, ContributionsContract.View, Callback{
     @Inject @Named("default_preferences") JsonKvStore store;
     @Inject NearbyController nearbyController;
     @Inject OkHttpJsonApiClient okHttpJsonApiClient;
@@ -87,8 +88,6 @@ public class ContributionsFragment
     @Inject LocationServiceManager locationManager;
     @Inject NotificationController notificationController;
 
-    private UploadService uploadService;
-    private boolean isUploadServiceConnected;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private ContributionsListFragment contributionsListFragment;
@@ -99,6 +98,7 @@ public class ContributionsFragment
     @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
     @BindView(R.id.campaigns_view) CampaignView campaignView;
     @BindView(R.id.limited_connection_enabled_layout) LinearLayout limitedConnectionEnabledLayout;
+    @BindView(R.id.limited_connection_description_text_view) TextView limitedConnectionDescriptionTextView;
 
     @Inject ContributionsPresenter contributionsPresenter;
 
@@ -121,32 +121,7 @@ public class ContributionsFragment
         return fragment;
     }
 
-    /**
-     * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
-     * fragment to be attached. Latch will be responsible for this sync.
-     */
-    private ServiceConnection uploadServiceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder binder) {
-            uploadService = (UploadService) ((UploadService.UploadServiceLocalBinder) binder)
-                    .getService();
-            isUploadServiceConnected = true;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName) {
-            // this should never happen
-            Timber.e(new RuntimeException("UploadService died but the rest of the process did not!"));
-            isUploadServiceConnected = false;
-        }
-
-        @Override
-        public void onBindingDied(final ComponentName name) {
-            isUploadServiceConnected = false;
-        }
-    };
     private boolean shouldShowMediaDetailsFragment;
-    private boolean isAuthCookieAcquired;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -183,6 +158,9 @@ public class ContributionsFragment
         if(shouldShowMediaDetailsFragment){
             showMediaDetailPagerFragment();
         }else{
+            if (mediaDetailPagerFragment != null) {
+                removeFragment(mediaDetailPagerFragment);
+            }
             showContributionsListFragment();
         }
 
@@ -190,6 +168,7 @@ public class ContributionsFragment
             && sessionManager.getCurrentAccount() != null) {
             setUploadCount();
         }
+        limitedConnectionEnabledLayout.setOnClickListener(toggleDescriptionListener);
         setHasOptionsMenu(true);
         return view;
     }
@@ -265,7 +244,6 @@ public class ContributionsFragment
         until fragment life time ends.
          */
         if (!isFragmentAttachedBefore && getActivity() != null) {
-            onAuthCookieAcquired();
             isFragmentAttachedBefore = true;
         }
     }
@@ -303,19 +281,6 @@ public class ContributionsFragment
     @Override
     public void onBackStackChanged() {
         fetchCampaigns();
-    }
-
-    /**
-     * Called when onAuthCookieAcquired is called on authenticated parent activity
-     */
-    void onAuthCookieAcquired() {
-        // Since we call onAuthCookieAcquired method from onAttach, isAdded is still false. So don't use it
-        isAuthCookieAcquired=true;
-        if (getActivity() != null) { // If fragment is attached to parent activity
-            getActivity().bindService(getUploadServiceIntent(), uploadServiceConnection, Context.BIND_AUTO_CREATE);
-            isUploadServiceConnected = true;
-        }
-
     }
 
     private void initFragments() {
@@ -374,7 +339,6 @@ public class ContributionsFragment
         getChildFragmentManager().executePendingTransactions();
     }
 
-
     public Intent getUploadServiceIntent(){
         Intent intent = new Intent(getActivity(), UploadService.class);
         intent.setAction(UploadService.ACTION_START_SERVICE);
@@ -424,19 +388,22 @@ public class ContributionsFragment
             showNearbyCardPermissionRationale();
         });
 
-        if (store.getBoolean("displayNearbyCardView", true)) {
-            checkPermissionsAndShowNearbyCardView();
-            if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
-                nearbyNotificationCardView.setVisibility(View.VISIBLE);
+        // Notification cards should only be seen on contributions list, not in media details
+        if (mediaDetailPagerFragment == null) {
+            if (store.getBoolean("displayNearbyCardView", true)) {
+                checkPermissionsAndShowNearbyCardView();
+                if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+                    nearbyNotificationCardView.setVisibility(View.VISIBLE);
+                }
+
+            } else {
+                // Hide nearby notification card view if related shared preferences is false
+                nearbyNotificationCardView.setVisibility(View.GONE);
             }
 
-        } else {
-            // Hide nearby notification card view if related shared preferences is false
-            nearbyNotificationCardView.setVisibility(View.GONE);
+            setNotificationCount();
+            fetchCampaigns();
         }
-
-        setNotificationCount();
-        fetchCampaigns();
     }
 
     private void checkPermissionsAndShowNearbyCardView() {
@@ -444,6 +411,7 @@ public class ContributionsFragment
             onLocationPermissionGranted();
         } else if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
                 && store.getBoolean("displayLocationPermissionForCardView", true)
+                && !store.getBoolean("doNotAskForLocationPermission", false)
                 && (((MainActivity) getActivity()).activeFragment == ActiveFragment.CONTRIBUTIONS)) {
             nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
             showNearbyCardPermissionRationale();
@@ -476,6 +444,7 @@ public class ContributionsFragment
 
     private void displayYouWontSeeNearbyMessage() {
         ViewUtil.showLongToast(getActivity(), getResources().getString(R.string.unable_to_display_nearest_place));
+        store.putBoolean("doNotAskForLocationPermission", true);
     }
 
 
@@ -512,13 +481,6 @@ public class ContributionsFragment
             locationManager.unregisterLocationManager();
             locationManager.removeLocationListener(this);
             super.onDestroy();
-
-            if (isUploadServiceConnected) {
-                if (getActivity() != null) {
-                    getActivity().unbindService(uploadServiceConnection);
-                    isUploadServiceConnected = false;
-                }
-            }
         } catch (IllegalArgumentException | IllegalStateException exception) {
             Timber.e(exception);
         }
@@ -564,6 +526,9 @@ public class ContributionsFragment
         if (store.getBoolean("displayCampaignsCardView", true)) {
             presenter.getCampaigns();
         }
+        else{
+            campaignView.setVisibility(View.GONE);
+        }
     }
 
     @Override public void showMessage(String message) {
@@ -578,7 +543,6 @@ public class ContributionsFragment
 
     @Override public void onDestroyView() {
         super.onDestroyView();
-        isUploadServiceConnected = false;
         presenter.onDetachView();
     }
 
@@ -597,8 +561,9 @@ public class ContributionsFragment
     @Override
     public void retryUpload(Contribution contribution) {
         if (NetworkUtils.isInternetConnectionEstablished(getContext())) {
-            if (contribution.getState() == STATE_FAILED || contribution.getState() == STATE_PAUSED || contribution.getState()==Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE && null != uploadService) {
-                uploadService.queue(contribution);
+            if (contribution.getState() == STATE_FAILED || contribution.getState() == STATE_PAUSED || contribution.getState()==Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE) {
+                contribution.setState(Contribution.STATE_QUEUED);
+                contributionsPresenter.saveContribution(contribution);
                 Timber.d("Restarting for %s", contribution.toString());
             } else {
                 Timber.d("Skipping re-upload for non-failed %s", contribution.toString());
@@ -615,7 +580,21 @@ public class ContributionsFragment
      */
     @Override
     public void pauseUpload(Contribution contribution) {
-        uploadService.pauseUpload(contribution);
+        //Pause the upload in the global singleton
+        CommonsApplication.pauseUploads.put(contribution.getPageId(), true);
+        //Retain the paused state in DB
+        contribution.setState(STATE_PAUSED);
+        contributionsPresenter.saveContribution(contribution);
+    }
+
+    /**
+     * Notify the viewpager that number of items have changed.
+     */
+    @Override
+    public void viewPagerNotifyDataSetChanged() {
+        if (mediaDetailPagerFragment != null) {
+            mediaDetailPagerFragment.notifyDataSetChanged();
+        }
     }
 
     /**
@@ -665,5 +644,41 @@ public class ContributionsFragment
         }
         return false;
     }
+
+    // Getter for mediaDetailPagerFragment
+    public MediaDetailPagerFragment getMediaDetailPagerFragment() {
+        return mediaDetailPagerFragment;
+    }
+
+    /**
+     * Reload media detail fragment once media is nominated
+     *
+     * @param index item position that has been nominated
+     */
+    @Override
+    public void refreshNominatedMedia(int index) {
+        if(mediaDetailPagerFragment != null && !contributionsListFragment.isVisible()) {
+            removeFragment(mediaDetailPagerFragment);
+            mediaDetailPagerFragment = new MediaDetailPagerFragment(false, true);
+            mediaDetailPagerFragment.showImage(index);
+            showMediaDetailPagerFragment();
+        }
+    }
+      
+  // click listener to toggle description that means uses can press the limited connection
+  // banner and description will hide. Tap again to show description.
+  private View.OnClickListener toggleDescriptionListener = new View.OnClickListener() {
+
+      @Override
+      public void onClick(View view) {
+          View view2 = limitedConnectionDescriptionTextView;
+          if (view2.getVisibility() == View.GONE) {
+              view2.setVisibility(View.VISIBLE);
+          } else {
+              view2.setVisibility(View.GONE);
+          }
+      }
+  };
+
 }
 

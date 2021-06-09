@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.bookmarks.BookmarkFragment;
 import fr.free.nrw.commons.explore.ExploreFragment;
 import org.wikipedia.model.EnumCode;
 import org.wikipedia.model.EnumCodeMap;
@@ -17,6 +18,13 @@ public enum NavTabLoggedOut implements EnumCode {
     @Override
     public Fragment newInstance() {
       return ExploreFragment.newInstance();
+    }
+  },
+  FAVORITES(R.string.favorites, R.drawable.ic_round_star_border_24px) {
+    @NonNull
+    @Override
+    public Fragment newInstance() {
+      return BookmarkFragment.newInstance();
     }
   },
   MORE(R.string.more, R.drawable.ic_menu_black_24dp) {

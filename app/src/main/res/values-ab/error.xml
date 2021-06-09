@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Pupsik-ipa
 * Андрей
 -->
 <resources>
-  <string name="crash_dialog_title">Аиҧҟьара</string>
+  <string name="crash_dialog_title">Аиԥҟьара</string>
   <string name="crash_dialog_ok_toast">Иҭабуп!</string>
 </resources>

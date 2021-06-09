@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -35,11 +36,12 @@ import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.disposables.CompositeDisposable;
+import java.util.ArrayList;
 import java.util.Objects;
 import javax.inject.Inject;
 import timber.log.Timber;
 
-public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
+public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener, MediaDetailFragment.Callback {
 
     @Inject BookmarkPicturesDao bookmarkDao;
 
@@ -60,6 +62,15 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     private MediaDetailProvider provider;
     private boolean isFromFeaturedRootFragment;
     private int position;
+
+    private ArrayList<Integer> removedItems=new ArrayList<Integer>();
+
+    public void clearRemoved(){
+        removedItems.clear();
+    }
+    public ArrayList<Integer> getRemovedItems() {
+        return removedItems;
+    }
 
     public MediaDetailPagerFragment() {
         this(false, false);
@@ -89,8 +100,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         pager.addOnPageChangeListener(this);
 
         adapter = new MediaDetailAdapter(getChildFragmentManager());
-        ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         pager.setAdapter(adapter);
         if (savedInstanceState != null) {
             final int pageNumber = savedInstanceState.getInt("current-page");
@@ -279,12 +288,27 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(false)
                             .setVisible(false);
                 }
+
+                if (!sessionManager.isUserLoggedIn()) {
+                    menu.findItem(R.id.menu_set_as_avatar).setVisible(false);
+                }
+
             }
         }
     }
 
     private void updateBookmarkState(MenuItem item) {
         boolean isBookmarked = bookmarkDao.findBookmark(bookmark);
+        if(isBookmarked) {
+            if(removedItems.contains(pager.getCurrentItem())) {
+                removedItems.remove(new Integer(pager.getCurrentItem()));
+            }
+        }
+        else {
+            if(!removedItems.contains(pager.getCurrentItem())) {
+                removedItems.add(pager.getCurrentItem());
+            }
+        }
         int icon = isBookmarked ? R.drawable.menu_ic_round_star_filled_24px : R.drawable.menu_ic_round_star_border_24px;
         item.setIcon(icon);
     }
@@ -351,16 +375,44 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         }
     }
 
+    /**
+     * Called after the media is nominated for deletion
+     *
+     * @param index item position that has been nominated
+     */
+    @Override
+    public void nominatingForDeletion(int index) {
+      provider.refreshNominatedMedia(index);
+    }
+  
+    /**
+     * backButtonClicked is called on a back event in the media details pager.
+     * returns true after closing the categoryEditContainer if open, implying that event was handled.
+     * else returns false
+     * @return
+     */
+    public boolean backButtonClicked(){
+        return ((MediaDetailFragment)(adapter.getCurrentFragment())).hideCategoryEditContainerIfOpen();
+    }
+
     public interface MediaDetailProvider {
         Media getMediaAtPosition(int i);
 
         int getTotalMediaCount();
 
         Integer getContributionStateAt(int position);
+
+        // Reload media detail fragment once media is nominated
+        void refreshNominatedMedia(int index);
     }
 
     //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)
     private class MediaDetailAdapter extends FragmentStatePagerAdapter {
+
+        /**
+         * Keeps track of the current displayed fragment.
+         */
+        private Fragment mCurrentFragment;
 
         public MediaDetailAdapter(FragmentManager fm) {
             super(fm);
@@ -390,6 +442,31 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 return 0;
             }
             return provider.getTotalMediaCount();
+        }
+
+        /**
+         * Get the currently displayed fragment.
+         * @return
+         */
+        public Fragment getCurrentFragment() {
+            return mCurrentFragment;
+        }
+
+        /**
+         * Called to inform the adapter of which item is currently considered to be the "primary",
+         * that is the one show to the user as the current page.
+         * @param container
+         * @param position
+         * @param object
+         */
+        @Override
+        public void setPrimaryItem(@NonNull final ViewGroup container, final int position,
+            @NonNull final Object object) {
+            // Update the current fragment if changed
+            if(getCurrentFragment() != object) {
+                mCurrentFragment = ((Fragment)object);
+            }
+            super.setPrimaryItem(container, position, object);
         }
     }
 }

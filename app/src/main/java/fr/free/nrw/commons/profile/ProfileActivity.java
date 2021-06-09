@@ -10,6 +10,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.profile.achievements.AchievementsFragment;
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment;
 import fr.free.nrw.commons.theme.BaseActivity;

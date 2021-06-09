@@ -12,10 +12,14 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -23,6 +27,7 @@ import com.viewpagerindicator.CirclePageIndicator;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.delete.DeleteHelper;
+import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -49,12 +54,22 @@ public class ReviewActivity extends BaseActivity {
     ProgressBar progressBar;
     @BindView(R.id.tv_image_caption)
     TextView imageCaption;
+    @BindView(R.id.mediaDetailContainer)
+    FrameLayout mediaDetailContainer;
+    MediaDetailFragment mediaDetailFragment;
+    @BindView(R.id.reviewActivityContainer)
+    LinearLayout reviewContainer;
     public ReviewPagerAdapter reviewPagerAdapter;
     public ReviewController reviewController;
     @Inject
     ReviewHelper reviewHelper;
     @Inject
     DeleteHelper deleteHelper;
+    /**
+     * Represent fragment for ReviewImage
+     * Use to call some methods of ReviewImage fragment
+     */
+     private ReviewImageFragment reviewImageFragment;
 
     final String SAVED_MEDIA = "saved_media";
     private Media media;
@@ -98,24 +113,26 @@ public class ReviewActivity extends BaseActivity {
 
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
         reviewPager.setAdapter(reviewPagerAdapter);
-        reviewPagerAdapter.getItem(0);
         pagerIndicator.setViewPager(reviewPager);
         progressBar.setVisibility(View.VISIBLE);
 
         Drawable d[]=btnSkipImage.getCompoundDrawablesRelative();
         d[2].setColorFilter(getApplicationContext().getResources().getColor(R.color.button_blue), PorterDuff.Mode.SRC_IN);
 
-
-        if (savedInstanceState != null && savedInstanceState.getParcelable(SAVED_MEDIA)!=null) {
+        if (savedInstanceState != null && savedInstanceState.getParcelable(SAVED_MEDIA) != null) {
             updateImage(savedInstanceState.getParcelable(SAVED_MEDIA)); // Use existing media if we have one
+            setUpMediaDetailOnOrientation();
         } else {
             runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
         }
 
         btnSkipImage.setOnClickListener(view -> {
-            reviewPagerAdapter.disableButtons();
+            reviewImageFragment = getInstanceOfReviewImageFragment();
+            reviewImageFragment.disableButtons();
             runRandomizer();
         });
+
+        simpleDraweeView.setOnClickListener(view ->setUpMediaDetailFragment());
 
         btnSkipImage.setOnTouchListener((view, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP && event.getRawX() >= (
@@ -142,7 +159,8 @@ public class ReviewActivity extends BaseActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(media -> {
-                    reviewPagerAdapter.disableButtons();
+                    reviewImageFragment = getInstanceOfReviewImageFragment();
+                    reviewImageFragment.disableButtons();
                     updateImage(media);
                 }));
         return true;
@@ -169,7 +187,8 @@ public class ReviewActivity extends BaseActivity {
                     String caption = String.format(getString(R.string.review_is_uploaded_by), fileName, revision.getUser());
                     imageCaption.setText(caption);
                     progressBar.setVisibility(View.GONE);
-                    reviewPagerAdapter.enableButtons();
+                    reviewImageFragment = getInstanceOfReviewImageFragment();
+                    reviewImageFragment.enableButtons();
                 }));
         reviewPager.setCurrentItem(0);
     }
@@ -225,5 +244,58 @@ public class ReviewActivity extends BaseActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * this function return the instance of  reviewImageFragment
+     */
+    public ReviewImageFragment getInstanceOfReviewImageFragment(){
+        int currentItemOfReviewPager = reviewPager.getCurrentItem();
+        reviewImageFragment = (ReviewImageFragment) reviewPagerAdapter.instantiateItem(reviewPager, currentItemOfReviewPager);
+        return reviewImageFragment;
+    }
+
+    /**
+     * set up the media detail fragment when click on the review image
+     */
+    private void setUpMediaDetailFragment() {
+        if (mediaDetailContainer.getVisibility() == View.GONE && media != null) {
+            mediaDetailContainer.setVisibility(View.VISIBLE);
+            reviewContainer.setVisibility(View.INVISIBLE);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            mediaDetailFragment = new MediaDetailFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("media", media);
+            mediaDetailFragment.setArguments(bundle);
+            fragmentManager.beginTransaction().add(R.id.mediaDetailContainer, mediaDetailFragment).
+                addToBackStack("MediaDetail").commit();
+        }
+    }
+
+    /**
+     * handle the back pressed event of this activity
+     * this function call every time when back button is pressed
+     */
+    @Override
+    public void onBackPressed() {
+        if (mediaDetailContainer.getVisibility() == View.VISIBLE) {
+            mediaDetailContainer.setVisibility(View.GONE);
+            reviewContainer.setVisibility(View.VISIBLE);
+        }
+        super.onBackPressed();
+    }
+
+    /**
+     * set up media detail fragment after orientation change
+     */
+    private void setUpMediaDetailOnOrientation() {
+        Fragment mediaDetailFragment = getSupportFragmentManager()
+            .findFragmentById(R.id.mediaDetailContainer);
+        if (mediaDetailFragment != null) {
+            mediaDetailContainer.setVisibility(View.VISIBLE);
+            reviewContainer.setVisibility(View.INVISIBLE);
+            getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mediaDetailContainer, mediaDetailFragment).commit();
+        }
     }
 }

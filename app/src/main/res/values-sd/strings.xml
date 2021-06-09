@@ -16,11 +16,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">چاڙھ %1$d شروع ڪندي</item>
     <item quantity="other">چاڙھَ %d$1 شروع ڪندي</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d چاڙھ</item>
     <item quantity="other">%1$d چاڙھَ</item>
   </plurals>
@@ -28,13 +28,11 @@
     <item quantity="one">ھن عڪس کي %1$s ھيٺ اجازتنامو ڏنو ويندو</item>
     <item quantity="other">ھنن عڪسن کي %1$s ھيٺ اجازتنامو ڏنو ويندو</item>
   </plurals>
-  <string name="title_activity_explore">تلاش ڪريو</string>
   <string name="navigation_item_explore">تلاش ڪريو</string>
   <string name="preference_category_appearance">حليو</string>
   <string name="preference_category_general">عام</string>
   <string name="preference_category_feedback">پذيرائي</string>
   <string name="preference_category_privacy">ذاتيات</string>
-  <string name="preference_category_location">مڪانيت</string>
   <string name="app_name">العام</string>
   <string name="bullet">•</string>
   <string name="menu_settings">ترتيبون</string>
@@ -54,7 +52,7 @@
   <string name="uploading_started">چاڙھ شروع!</string>
   <string name="upload_completed_notification_title">%1$s چڙھي چڪا!</string>
   <string name="upload_completed_notification_text">پنھنجو چاڙھ ڏسڻ لاءِ ٺونگو ھڻو</string>
-  <string name="upload_progress_notification_title_start">%1$s جو چاڙھ شروع ڪندي</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s جو چاڙھ شروع ڪندي</string>
   <string name="upload_progress_notification_title_in_progress">%1$s چاڙھيندي</string>
   <string name="upload_progress_notification_title_finishing">%1$s جو چاڙھ مڪمل ٿيندي</string>
   <string name="upload_failed_notification_title">%1$s جو چاڙھڻ ناڪام ويو</string>
@@ -69,26 +67,21 @@
   <string name="menu_nearby">ويجھڙائيءَ ۾</string>
   <string name="provider_contributions">منھنجا چاڙھ</string>
   <string name="menu_share">ونڊيو</string>
-  <string name="menu_open_in_browser">جھانگوءَ ۾ ڏسو</string>
   <string name="share_title_hint">عنوان (گھربل)</string>
   <string name="share_description_hint">تشريح</string>
   <string name="login_failed_network">ناقابلِ داخل ٿيڻ - باھمڄار ناڪامي</string>
-  <string name="login_failed_wrong_credentials">داخل نه ٿيا آهيو - مهرباني ڪري پاسورڊ ۽ کاتي جو نالو چيڪ ڪيو</string>
   <string name="login_failed_throttled">ھيڪانديون ناڪام ڪوششون. مھرباني ڪري ڪجھ منٽن کانپوءِ ٻيھر ڪوشش ڪريو.</string>
   <string name="login_failed_blocked">افسوس، ھي واپرائيندڙ العام تي بندشيل آھي</string>
   <string name="login_failed_2fa_needed">اوهان کي لازمي پنھنجو ٻن عنصرن وارو تصديقي ڪوڊ ڏيو.</string>
   <string name="login_failed_generic">داخل ٿيڻ ناڪام</string>
   <string name="share_upload_button">چاڙھيو</string>
   <string name="multiple_share_base_title">ھن سيٽ کي نالو ڏيو</string>
-  <string name="add_set_name_toast">هن سيٽ لاءِ ڪو نالو ڏيو</string>
   <string name="provider_modifications">ردوبدل</string>
   <string name="menu_upload_single">چاڙھيو</string>
   <string name="categories_search_text_hint">زمرا ڳوليو</string>
   <string name="menu_save_categories">سانڍيو</string>
   <string name="refresh_button">تازو ڪيو</string>
   <string name="display_list_button">فھرست</string>
-  <string name="gps_disabled">اوهان جي ڊوائيس ۾ جي پي ايس بند آهي. ڇا اوهان ان کي کولڻ چاهيو ٿا؟</string>
-  <string name="enable_gps">جي پي ايس چالو ڪيو (اين ايبل جي پي ايس)</string>
   <string name="contributions_subtitle_zero" fuzzy="true">اڃا تائين ڪوبہ چاڙھ ناھي</string>
   <string name="categories_not_found">%1$s سان ملندڙ ڪوبہ زمرو نہ لڌو</string>
   <string name="categories_skip_explanation">پنھنجي عڪسن ۾ زمرا وجھو تہ جيئن وڪيميڊيا العام تي وڌيڪ ڳولا لائق ٿي سگھن.\n\nزمرا وجھڻ لاءِ لکڻ شروع ڪريو.</string>
@@ -111,8 +104,6 @@
   <string name="menu_download">لاھيو</string>
   <string name="preference_license">ڏنل اجازتنامو</string>
   <string name="use_previous" fuzzy="true">گذريل عنوان/تشريح استعمال ڪريو</string>
-  <string name="allow_gps">خوبخود ھاڻوڪي مڪانيت وٺو</string>
-  <string name="allow_gps_summary">ھاڻوڪي مڪانيت ڏئي ٿو جيڪڏھن عڪس جيوٽيگ ناھي ٿيل، ۽ عڪس کي ان سان جيوٽيگ ڪري ٿو. چتاءُ: ھي توھان جي ھاڻوڪي مڪانيت ظاھر ڪندو.</string>
   <string name="preference_theme" fuzzy="true">رات جو ڏيک</string>
   <string name="license_name_cc_by_sa_four">انتساب-ھجھڙي ڀاڱيداري 4.0</string>
   <string name="license_name_cc_by_four">وصف 4.0</string>
@@ -120,20 +111,9 @@
   <string name="license_name_cc_by">ڪڪ انتساب 3.0</string>
   <string name="license_name_cc0">ڪڪ0</string>
   <string name="license_name_cc_by_sa_3_0">ڪڪ BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">ڪڪ BY-SA 3.0 (آسٽريا)</string>
-  <string name="license_name_cc_by_sa_3_0_de">ڪڪ BY-SA 3.0 (جرمني)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">ڪڪ BY-SA 3.0 (اسٽونيا)</string>
-  <string name="license_name_cc_by_sa_3_0_es">ڪڪ BY-SA 3.0 (اسپين)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">ڪڪ BY-SA 3.0 (ڪروشيا)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">ڪڪ BY-SA 3.0 (لڪسمبرگ)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">ڪڪ BY-SA 3.0 (نيدرلينڊز)</string>
-  <string name="license_name_cc_by_sa_3_0_no">ڪڪ BY-SA 3.0 (ناروي)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">ڪڪ BY-SA 3.0 (پولينڊ)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">ڪڪ BY-SA 3.0 (رومانيا)</string>
   <string name="license_name_cc_by_3_0">ڪڪ BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">ڪڪ BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">ڪڪ BY 4.0</string>
-  <string name="license_name_cc_zero">ڪڪ ٻڙي</string>
   <string name="tutorial_1_text">وڪيپيڊيا تي استعمال ٿيندڙ گھڻن عڪسن جي وڪيميڊيا العام ميزباني ڪري ٿو.</string>
   <string name="tutorial_1_subtext">توھان جا عڪس سڄي دنيا جي ماڻھن کي تعليم يافتا ڪرڻ ۾ مدد ڪن ٿا</string>
   <string name="tutorial_2_text">مھرباني ڪري اھي تصويرون چاڙھيو جيڪي مڪمل طور تي توھان پاران ڪڍيل يا سرجيل آھن:</string>
@@ -160,10 +140,7 @@
   <string name="detail_license_empty">اڻڄاتل اجازتنامو</string>
   <string name="menu_refresh">تازو ڪريو</string>
   <string name="read_storage_permission_rationale">گھربل اجازت: خارجي اسٽوريج پڙهو. ايپ ھن کانسواءِ تصوير گيليري نٿو ڏسي سگھي.</string>
-  <string name="location_permission_rationale">چونڊ اجازت: زمرن جي تجويزن لاءِ ھاڻوڪي مڪانيت وٺو</string>
   <string name="ok">ٺيڪ</string>
-  <string name="title_activity_nearby">ويجھڙائيءَ ۾ جڳھون</string>
-  <string name="no_nearby">ڪي بہ ويجھيون جڳھون نہ لڌيون</string>
   <string name="warning">چتاءُ</string>
   <string name="yes">ها</string>
   <string name="no">نہ</string>
@@ -175,20 +152,12 @@
   <string name="media_detail_license">اجازتنامو</string>
   <string name="media_detail_coordinates">مڪانيت</string>
   <string name="become_a_tester_title">آزمائشي آزمائيندڙ ٿيو</string>
-  <string name="number_of_uploads">منھنجي تازي چاڙھ حد</string>
-  <string name="maximum_limit">وڌ ۾ وڌ حد (ميگزيمم لِمٽ)</string>
-  <string name="maximum_limit_alert">500 کان ٿي ڏيکارڻ کان قاصر آھي</string>
   <string name="logout_verification">ڇا توھان سچ ۾ خارج ٿيڻ ٿا چاھيو؟</string>
   <string name="commons_logo">العام جي سڃاڻپ جو نشان (Commons Logo)</string>
   <string name="commons_website">العام ويب-سرزمين</string>
   <string name="commons_facebook">العام فيسبڪ صفحو</string>
-  <string name="background_image">پسمنظر جي تصوير</string>
-  <string name="no_image_found">ڪوبہ عڪس نہ لڌو</string>
-  <string name="upload_image">عڪس چاڙهيو</string>
   <string name="welcome_image_rainbow_bridge">انڊلٺ پل</string>
   <string name="welcome_image_tulip">گل لالا (ٽيولپ)</string>
-  <string name="welcome_image_no_selfies">سيلفيون نہ ھجن</string>
-  <string name="welcome_image_proprietary">سڃاڻپ واري تصوير (پروپرائٽري اميج)</string>
   <string name="welcome_image_welcome_wikipedia">وڪيپيڊيا تي ڀليڪار</string>
   <string name="welcome_image_welcome_copyright">حقن ۽ واسطن جي آجيان (ويلڪم ڪاپي رائيٽ)</string>
   <string name="welcome_image_sydney_opera_house">سڊني اوپيرا هائوس</string>
@@ -204,14 +173,11 @@
   <string name="navigation_item_logout">ٻاهر نڪرو</string>
   <string name="navigation_item_info">سکيا (ٽيوٽوريل)</string>
   <string name="navigation_item_notification">نوٽيفيڪيشنس</string>
-  <string name="navigation_item_featured_images">چونڊ ڪيل</string>
   <string name="navigation_item_review">جائزو</string>
-  <string name="nearby_needs_permissions">ويجھيو جڳھون بغير مڪانيت اجازت جي نٿيون ڏيکاري سگھجن</string>
   <string name="no_description_found">ڪابہ تشريح نہ لڌي</string>
   <string name="nearby_info_menu_commons_article">ڪامن فائيل جو ورق</string>
   <string name="nearby_info_menu_wikidata_article">وڪيڊيٽا آئٽم</string>
   <string name="nearby_info_menu_wikipedia_article">وڪيپيڊيا مضمون</string>
-  <string name="give_permission">اجازت ڏيو</string>
   <string name="use_external_storage" fuzzy="true">ٻاھري سنڀار استعمال ڪريو</string>
   <string name="use_external_storage_summary" fuzzy="true">ايپ ۾ ڪئمرا سان ڪڍيل تصويرون پنھنجي ڊوائيس تي سانڍيو</string>
   <string name="login_to_your_account">پنھنجي کاتي ۾ داخل ٿيو</string>
@@ -221,23 +187,13 @@
   <string name="nominate_deletion">ڊاھ لاءِ اميدوار ڪريو</string>
   <string name="nominated_for_deletion">هن تصوير کي ڊاهڻ لاءِ مقرر ڪيو ويو آهي.</string>
   <string name="nominated_see_more" fuzzy="true">&lt;u&gt;تفصيلن لاءِ ويب-صفحو ڏسو&lt;/u&gt;</string>
-  <string name="nominating_file_for_deletion">%1$s کي ڊاھ لاءِ اميدوار ڪندي.</string>
-  <string name="nominating_for_deletion_status">فائيل کي ڊاھ لاءِ اميدوار ڪندي: %1$s</string>
-  <string name="view_browser">برائوزر ۾ ڏسو</string>
   <string name="skip_login">ڇڏيو</string>
   <string name="navigation_item_login">داخل ٿيو</string>
   <string name="skip_login_title">ڇا توھان سچ ۾ داخل-ٿيڻ ڇڏڻ چاھيو ٿا؟</string>
   <string name="skip_login_message">توھان کي تصويرون چاڙھڻ لاءِ مستقبل ۾ داخل ٿيڻو پوندو.</string>
   <string name="login_alert_message">هن خصوصيت جي استعمال لاءِ داخل ٿيو</string>
-  <string name="nearby_location_has_not_changed">مڪانيت ناھي بدلي.</string>
   <string name="nearby_location_not_available" fuzzy="true">مڪانيت موجود ناھي.</string>
   <string name="location_permission_rationale_nearby">ويجھين جڳھن جي فھرست ڏيکارڻ لاءِ اجازت گھربل آھي</string>
-  <string name="get_directions">ھدايتون وٺو</string>
-  <string name="read_article">مضمون پڙھو</string>
-  <string name="notifications_welcome">وڪيپيڊيا ڪامنز ۾ ڀليڪار، %1$s! اسان کي خوشي آهي ته اوهان هتي آهيو</string>
-  <string name="notifications_talk_page_message">%1$s اوهان جي بحث واري صفحي تي پيغام ڇڏيو آهي.</string>
-  <string name="notifications_thank_you_edit">سنوارڻ لاءِ مهرباني</string>
-  <string name="notifications_mention">%1$s اوهان جو %2$s تي ذڪر ڪيو آهي.</string>
   <string name="nearby_directions">طرف</string>
   <string name="nearby_wikidata">وڪيڊيٽا</string>
   <string name="nearby_wikipedia">وڪيپيڊيا</string>
@@ -246,14 +202,12 @@
   <string name="about_faq" fuzzy="true">&lt;u&gt;عام سوال&lt;/u&gt;</string>
   <string name="welcome_skip_button">سبق کي ڇڏيو</string>
   <string name="no_internet">انٽرنيٽ ناهي</string>
-  <string name="internet_established">انٽرنيٽ آهي</string>
   <string name="no_notifications">اطلاع نہ لڌا</string>
   <string name="about_translate" fuzzy="true">&lt;u&gt;ترجمو&lt;/u&gt;</string>
   <string name="about_translate_title">ٻوليون</string>
   <string name="about_translate_proceed">وڌو</string>
   <string name="about_translate_cancel">رد</string>
   <string name="retry">ٻيهر ڪوشش ڪريو</string>
-  <string name="showcase_view_got_it_button">سمجھي ويس!</string>
   <string name="no_images_found">ڪوبہ عڪس نہ لڌو!</string>
   <string name="error_loading_images">تصويرون لوڊ ڪرڻ دوران چُڪ ٿي آهي.</string>
   <string name="image_uploaded_by">پاران چاڙهيل: %1$s</string>
@@ -277,7 +231,6 @@
   <string name="correct">درست جواب</string>
   <string name="wrong">غلط جواب</string>
   <string name="share_app_title">ايپ ونڊيو</string>
-  <string name="add_description">+ تشريح وجھو</string>
   <string name="no_recent_searches">تازيون ڳولائون ڪونھن</string>
   <string name="search_history_deleted">ڳولا سوانح ڊاٿي وئي</string>
   <string name="nominate_delete">ڊاھ لاءِ اميدوار ڪريو</string>
@@ -302,28 +255,17 @@
   <string name="submit">اماڻيو</string>
   <string name="title_page_bookmarks_pictures">تصويرون</string>
   <string name="title_page_bookmarks_locations">مڪانيتون</string>
-  <string name="desc_language_Worldwide">دنياڀر</string>
-  <string name="desc_language_America">آمريڪا</string>
-  <string name="desc_language_Europe">يُورپ</string>
-  <string name="desc_language_Middle_East">وچ اوڀر</string>
-  <string name="desc_language_Africa">آفريڪا</string>
-  <string name="desc_language_Asia">ايشيا</string>
-  <string name="desc_language_Pacific">پئسفڪ</string>
   <string name="no_categories_selected">زمرا چونڊيل ناھن</string>
   <string name="search_this_area">ھي علائقو ڳوليو</string>
   <string name="nearby_card_permission_title">اجازت جي درخواست</string>
   <string name="never_ask_again">ھي ٻيھر ڪڏھن نہ پڇو</string>
-  <string name="display_location_permission_title" fuzzy="true">مڪانيت جي اجازت ڏيکاريو</string>
+  <string name="display_location_permission_title">مڪانيت جي اجازت وٺو</string>
   <string name="ends_on">تي ختم:</string>
   <string name="nominate_for_deletion_done">ٿي-ويو</string>
-  <string name="nominate_for_deletion_notify_user">واپرائيندڙ کي بحث صفحي تي اطلاع ڏيندي</string>
-  <string name="notsure">پڪ ناھي</string>
   <string name="send_thank_success_title">مھربانيون موڪلڻ: ڪاميابي</string>
   <string name="send_thank_success_message">%1$s ڏانھن ڪاميابيءَ سان مھربانيون موڪلجي ويون</string>
   <string name="send_thank_failure_message">%1$s ڏانھن مھربانيون موڪلڻ ۾ ناڪام</string>
   <string name="send_thank_failure_title">مھربانيون موڪلڻ: ناڪامي</string>
-  <string name="send_thank_send">مھربانيون موڪلڻ</string>
-  <string name="send_thank_notification_title">مھربانيون موڪلڻ</string>
   <string name="send_thank_toast">%1$s لاءِ مھربانيون موڪلڻ</string>
   <string name="skip_image">ھي عڪس ڇڏيو</string>
   <string name="exif_tag_name_author">مصنف</string>
@@ -339,17 +281,14 @@
   <string name="dialog_box_text_nomination">%1$s ڇو ڊاھيو وڃڻ گھرجي؟</string>
   <string name="review_is_uploaded_by">%1$s چاڙھيو آھي: %2$s</string>
   <string name="default_description_language">تشريح جي ڏنل ٻولي</string>
-  <string name="delete_helper_make_deletion_toast">%1$s کي ڊاھ لاءِ اميدوار ڪرڻ جي جي ڪوشش ڪندي</string>
   <string name="delete_helper_show_deletion_title">ڊاھ لاءِ اميدوار ڪندي</string>
   <string name="delete_helper_show_deletion_title_success">ڪاميابي</string>
   <string name="delete_helper_show_deletion_message_if">%1$s ڊاھ لاءِ اميدوار ڪيو ويو.</string>
   <string name="delete_helper_show_deletion_title_failed">ناڪام</string>
   <string name="delete_helper_show_deletion_message_else">ڊاھ جي درخواست نہ ٿي سگھي.</string>
   <string name="delete_helper_ask_spam_selfie">ھڪ سيلفي</string>
-  <string name="delete_helper_ask_spam_other">ٻيو</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">انٽرنيٽ مان بلاترتيب ڦوٽو</string>
   <string name="delete_helper_ask_reason_copyright_logo">لوگو</string>
-  <string name="delete_helper_ask_reason_copyright_other">ٻيو</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">ڇاڪاڻ تہ اھو آھي</string>
   <string name="title_for_media">ميڊيا</string>
 </resources>

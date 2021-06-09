@@ -13,21 +13,19 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d장의 올리적재를 시작합니다</item>
     <item quantity="other">%1$d장의 올리적재를 시작합니다</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d개 올리적재</item>
     <item quantity="other">%1$d개 올리적재</item>
   </plurals>
   <string name="share_license_summary">이 그림은 %1$s에 따라 사용이 허가됩니다</string>
-  <string name="title_activity_explore">찾아보기</string>
   <string name="navigation_item_explore">찾아보기</string>
   <string name="preference_category_appearance">보이기</string>
   <string name="preference_category_general">일반</string>
   <string name="preference_category_feedback">반결합</string>
-  <string name="preference_category_location">위치</string>
   <string name="app_name">공용</string>
   <string name="bullet">•</string>
   <string name="menu_settings">설정</string>
@@ -47,7 +45,7 @@
   <string name="uploading_started">올리적재를 시작했습니다!</string>
   <string name="upload_completed_notification_title">%1$s 서류를 올리적재하였습니다!</string>
   <string name="upload_completed_notification_text">당신의 올리적재를 보려면 두드리세요</string>
-  <string name="upload_progress_notification_title_start">%1$s 서류 올리적재를 시작하는중</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s 서류 올리적재를 시작하는중</string>
   <string name="upload_progress_notification_title_in_progress">%1$s 서류를 올리적재하는중</string>
   <string name="upload_progress_notification_title_finishing">%1$s 서류 올리적재를 완료하는중</string>
   <string name="upload_failed_notification_title">%1$s 서류 올리적재 실패</string>
@@ -62,26 +60,21 @@
   <string name="menu_nearby">근처</string>
   <string name="provider_contributions">내 올리적재</string>
   <string name="menu_share">공유</string>
-  <string name="menu_open_in_browser">열람기로 보기</string>
   <string name="share_title_hint" fuzzy="true">제목 (필수)</string>
   <string name="share_description_hint">설명</string>
   <string name="login_failed_network">가입할수 없습니다 - 망 오유입니다</string>
-  <string name="login_failed_wrong_credentials">가입할수 없습니다 - 사용자 이름과 통행암호를 확인해주십시오</string>
   <string name="login_failed_throttled">실패한 시도가 너무 많습니다. 몇분후에 다시 시도하세요.</string>
   <string name="login_failed_blocked">죄송합니다, 이 사용자는 공용에서 차단되였습니다</string>
   <string name="login_failed_2fa_needed">두인자검증부호를 제공해야 합니다.</string>
   <string name="login_failed_generic">가입 실패</string>
   <string name="share_upload_button">올리적재</string>
   <string name="multiple_share_base_title">이 모임에 이름짓기</string>
-  <string name="add_set_name_toast">이 집합의 이름을 지정해주십시오</string>
   <string name="provider_modifications">바뀜</string>
   <string name="menu_upload_single">올리적재</string>
   <string name="categories_search_text_hint">분류 검색</string>
   <string name="menu_save_categories">보관</string>
   <string name="refresh_button">재생</string>
   <string name="display_list_button">목록</string>
-  <string name="gps_disabled">장치에서 GPS가 금지되여있습니다. 허가하시겠습니까?</string>
-  <string name="enable_gps">GPS 허가</string>
   <string name="contributions_subtitle_zero" fuzzy="true">아직 올리적재가 없습니다</string>
   <string name="categories_not_found">%1$s와(과) 일치하는 분류를 찾을수 없습니다</string>
   <string name="categories_skip_explanation">위키매체 공용에서 그림을 더 찾기 쉽게 만들기 위해 분류를 추가합니다.\n분류를 추가하려면 입력을 시작하세요.</string>
@@ -107,8 +100,6 @@
   <string name="menu_download">내리적재</string>
   <string name="preference_license">기본 허가권</string>
   <string name="use_previous" fuzzy="true">이전의 제목/설명을 사용하기</string>
-  <string name="allow_gps">자동으로 현재 위치 얻기</string>
-  <string name="allow_gps_summary">영상의 지리정보 꼬리표가 보관되지 않은 경우 현재 위치를 검색하여 영상에 현재 위치로 지리정보 꼬리표를 보관하십시오. 경고: 당신의 현재 위치가 로출됩니다.</string>
   <string name="preference_theme" fuzzy="true">야간방식</string>
   <string name="license_name_cc_by_sa_four">저작자표시-동일조건변경허락 4.0</string>
   <string name="license_name_cc_by_four">저작자표시 4.0</string>
@@ -116,20 +107,9 @@
   <string name="license_name_cc_by">저작자표시 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">크리에이티브코먼즈 저작자표시-동일조건변경허락 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">크리에이티브코먼즈 저작자표시-동일조건변경허락 3.0 (오스트리아)</string>
-  <string name="license_name_cc_by_sa_3_0_de">크리에이티브코먼즈 저작자표시-동일조건변경허락 3.0 (도이췰란드)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">크리에이티브코먼즈 저작자표시-동일조건변경허락 3.0 (에스또니야)</string>
-  <string name="license_name_cc_by_sa_3_0_es">크리에이티브코먼즈 저작자표시-동일조건변경허락 3.0 (에스빠냐)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">크리에이티브코먼즈 저작자표시-동일조건변경허락 3.0 (흐르바쯔까)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">크리에이티브코먼즈 저작자표시-동일조건변경허락 3.0 (룩셈부르그)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">크리에이티브코먼즈 저작자표시-동일조건변경허락 3.0 (네데를란드)</string>
-  <string name="license_name_cc_by_sa_3_0_no">크리에이티브코먼즈 저작자표시-동일조건변경허락 3.0 (노르웨이)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">크리에이티브코먼즈 저작자표시-동일조건변경허락 3.0 (뽈스까)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">크리에이티브코먼즈 저작자표시-동일조건변경허락 3.0 (로므니아)</string>
   <string name="license_name_cc_by_3_0">크리에이티브코먼즈 저작자표시 3.0</string>
   <string name="license_name_cc_by_sa_4_0">크리에이티브코먼즈 저작자표시-동일조건변경허락 4.0</string>
   <string name="license_name_cc_by_4_0">크리에이티브코먼즈 저작자표시 4.0</string>
-  <string name="license_name_cc_zero">CC 령</string>
   <string name="tutorial_1_text">위키매체공용은 위키백과에 쓰이는 대부분의 화상을 주관합니다.</string>
   <string name="tutorial_1_subtext">당신의 화상은 전전세계 사람들을 교육하는데 도움이 됩니다!</string>
   <string name="tutorial_2_text">전적으로 자신이 찍거나 만든 화상만 올리적재해주십시오:</string>
@@ -160,12 +140,8 @@
   <string name="menu_refresh">재생</string>
   <string name="read_storage_permission_rationale">권한 필요: 외부 저장고 읽기. 이것이 없으면 응용프로그람은 화랑에 접속할수 없습니다.</string>
   <string name="write_storage_permission_rationale" fuzzy="true">권한 필요: 외부 저장고 쓰기. 이것이 없으면 응용프로그람은 촬영장치에 접속할수 없습니다.</string>
-  <string name="location_permission_rationale">선택적 허가: 분류 추천을 위해 현재 위치를 가져옵니다.</string>
   <string name="ok">확인</string>
-  <string name="title_activity_nearby">근처의 장소</string>
-  <string name="no_nearby">근처에 장소가 없습니다</string>
   <string name="warning">경고</string>
-  <string name="upload_image_duplicate">이 서류는 이미 공용에 존재합니다. 계속하시겠습니까?</string>
   <string name="yes">예</string>
   <string name="no">아니</string>
   <string name="media_detail_title">제목</string>
@@ -177,26 +153,17 @@
   <string name="media_detail_coordinates_empty">제공되지 않음</string>
   <string name="become_a_tester_title">베타 시험자가 되세요</string>
   <string name="_2fa_code">2FA부호</string>
-  <string name="number_of_uploads">내 최근 올리적재 제한</string>
-  <string name="maximum_limit">최대한</string>
-  <string name="maximum_limit_alert">500개를 초과하여 표시할수 없습니다</string>
-  <string name="set_limit" fuzzy="true">최근 올리적재 제한 설정</string>
-  <string name="login_failed_2fa_not_supported">2요소인증은 현재 지원하지 않습니다.</string>
   <string name="logout_verification">정말 탈퇴하시겠습니까?</string>
   <string name="commons_logo">공용 로고</string>
   <string name="commons_website">공용 웨브싸이트</string>
   <string name="commons_facebook">공용 페이스부크 페지</string>
   <string name="commons_github">공용 GitHub 원천코드</string>
-  <string name="background_image">배경그림</string>
   <string name="mediaimage_failed">매체 그림 실패</string>
-  <string name="no_image_found">그림이 없습니다</string>
   <string name="no_subcategory_found">하위 분류가 없습니다</string>
   <string name="no_parentcategory_found">부모 분류가 없습니다</string>
-  <string name="upload_image">그림 올리적재</string>
   <string name="welcome_image_mount_zao">자오련봉</string>
   <string name="welcome_image_rainbow_bridge">레인보우브리즈</string>
   <string name="welcome_image_tulip">울금향</string>
-  <string name="welcome_image_proprietary">저작권있는 그림</string>
   <string name="welcome_image_welcome_wikipedia">위키백과에 오신것을 환영합니다</string>
   <string name="cancel">취소</string>
   <string name="navigation_drawer_open">열기</string>
@@ -210,21 +177,14 @@
   <string name="navigation_item_logout">탈퇴</string>
   <string name="navigation_item_info">강좌</string>
   <string name="navigation_item_notification">알림</string>
-  <string name="navigation_item_featured_images">알참</string>
-  <string name="nearby_needs_permissions">위치 허가가 없으면 주변 장소를 표시할수 없습니다</string>
   <string name="no_description_found">설명이 없습니다</string>
   <string name="nearby_info_menu_commons_article">공용 서류 문서</string>
   <string name="nearby_info_menu_wikidata_article">위키자료 항목</string>
   <string name="nearby_info_menu_wikipedia_article">위키백과 문서</string>
-  <string name="error_while_cache">그림 캐쉬처리 오유</string>
-  <string name="title_info">이 서류를 설명할수 있는 제목으로, 서류 이름으로 사용됩니다. 띄여쓰기를 포함한 일반적인 단어를 사용할수 있습니다. 서류 확장자는 포함하지 마세요</string>
   <string name="description_info">매체에 대해 가능한 많이 설명하십시오: 어디서 촬영한 것인가? 무엇을 보여주는가? 무슨 문맥을 가지는가? 물건이나 사람에 대해 설명하십시오. 풍경에서 시간을 알려주는것처럼 쉽게 추측할수 없는 정보를 제공합니다. 매체가 평범하지 않다면 무엇이 이를 평범하지 않게 만들었는지 설명하십시오.</string>
-  <string name="upload_image_too_dark">이 화상은 너무 어둡습니다. 정말 올리적재하시겠습니까? 위키매체 공용은 백과사전적인 가치가 있는 화상을 위한 공간입니다.</string>
-  <string name="upload_image_blurry">이 화상은 흐릿합니다. 정말 올리적재하시겠습니까? 위키매체 공용은 백과사전적인 가치가 있는 화상을 위한 공간입니다.</string>
   <string name="upload_problem_image_dark">그림이 너무 어둡습니다.</string>
   <string name="upload_problem_image_blurry">그림이 흐릿합니다.</string>
   <string name="upload_problem_image_duplicate">그림이 이미 공용에 있습니다.</string>
-  <string name="give_permission">권한 주기</string>
   <string name="use_external_storage" fuzzy="true">외부기억기 사용하기</string>
   <string name="use_external_storage_summary" fuzzy="true">장치의 프로그람안 촬영기로 찍은 화상 보관하기</string>
   <string name="login_to_your_account">자신의 계산자리로 가입</string>
@@ -235,7 +195,6 @@
   <string name="nominate_deletion">지우기 신청</string>
   <string name="nominated_for_deletion">이 그림은 지우도록 신청되였습니다.</string>
   <string name="nominated_see_more" fuzzy="true">&lt;u&gt;상세 내용은 웨브페지를 참고하십시오&lt;/u&gt;</string>
-  <string name="view_browser">열람기에서 보기</string>
   <string name="skip_login">건너뛰기</string>
   <string name="navigation_item_login">가입</string>
   <string name="skip_login_title">가입을 정말로 건너뛰시겠습니까?</string>
@@ -243,14 +202,6 @@
   <string name="login_alert_message">이 기능을 사용하려면 가입해주십시오</string>
   <string name="copy_wikicode">위키본문을 오려둠판에 복사</string>
   <string name="wikicode_copied">위키본문을 오려둠판에 복사하였습니다</string>
-  <string name="nearby_location_has_not_changed">위치가 변경되지 않았습니다.</string>
-  <string name="get_directions" fuzzy="true">방향 잡기</string>
-  <string name="read_article" fuzzy="true">문서를 읽으세요</string>
-  <string name="notifications_welcome">%1$s님, 위키매체공용에 오신것을 환영합니다! 반갑습니다.</string>
-  <string name="notifications_talk_page_message">%1$s님이 당신의 사용자 토론 문서에 글을 남겼습니다</string>
-  <string name="notifications_thank_you_edit">편집해 주셔서 감사합니다</string>
-  <string name="notifications_mention">%1$s님이 %2$s에서 나를 언급했습니다.</string>
-  <string name="toggle_view_button">보기 전환</string>
   <string name="nearby_directions" fuzzy="true">방향</string>
   <string name="nearby_wikidata" fuzzy="true">위키자료</string>
   <string name="nearby_wikipedia" fuzzy="true">위키백과</string>
@@ -259,7 +210,6 @@
   <string name="about_faq" fuzzy="true">&lt;u&gt;자주하는 질문&lt;/u&gt;</string>
   <string name="welcome_skip_button">강좌 건너뛰기</string>
   <string name="no_internet">인터네트 사용 불가</string>
-  <string name="internet_established">인터네트 사용 가능</string>
   <string name="error_notifications">알림 가져오기 오유</string>
   <string name="no_notifications">알림이 없습니다</string>
   <string name="about_translate" fuzzy="true">&lt;u&gt;번역&lt;/u&gt;</string>
@@ -268,7 +218,6 @@
   <string name="about_translate_proceed">진행</string>
   <string name="about_translate_cancel">취소</string>
   <string name="retry">다시 시도</string>
-  <string name="showcase_view_got_it_button">알겠습니다!</string>
   <string name="showcase_view_whole_nearby_activity" fuzzy="true">이들은 위키백과 글에 화상을 넣을 필요가 있는 당신 주위의 장소들입니다</string>
   <string name="no_images_found">그림이 없습니다!</string>
   <string name="error_loading_images">그림을 불러오는 동안 오유가 생겼습니다.</string>
@@ -278,12 +227,10 @@
   <string name="app_widget_heading">오늘의 화상</string>
   <string name="menu_search_button">검색</string>
   <string name="search_commons">공용 검색</string>
-  <string name="images_not_found">%1$s와(과) 일치하는 그림이 없습니다</string>
   <string name="title_activity_search">검색</string>
   <string name="search_recent_header">최근 검색:</string>
   <string name="provider_searches">최근 검색된 질문</string>
   <string name="error_loading_categories">분류를 불러오는 동안 오유가 생겼습니다.</string>
-  <string name="error_loading_subcategories">하위 분류를 불러오는 동안 오유가 생겼습니다.</string>
   <string name="search_tab_title_media" fuzzy="true">매체</string>
   <string name="search_tab_title_categories" fuzzy="true">분류</string>
   <string name="successful_wikidata_edit" fuzzy="true">위키자료의 %1$s에 그림을 성공적으로 추가했습니다!</string>
@@ -298,7 +245,6 @@
   <string name="screenshot_answer">웨브싸이트의 화면속사는 파생작품으로 간주되며 웨브싸이트자체의 모든 저작권에 종속됩니다. 이들은 저자로부터 허락을 받은 뒤 사용할수 있습니다. 이러한 허락이 없으면 해당 웨브싸이트의 작품에 기반을 두고 만든 모든 예술작품은 법적으로 원저작자가 소유한 무허가 사본으로 간주됩니다.</string>
   <string name="blurry_image_answer">공용의 목표 중 하나는 질좋은 그림을 모으는것입니다. 그러므로 흐릿한 그림은 올리적재하지 않는것이 좋습니다. 조명 상태가 좋은 멋진 사진을 늘 찍어주십시오.</string>
   <string name="construction_event_answer">기술이나 문화를 보여주는 사진은 공용에서 기꺼이 환영합니다.</string>
-  <string name="warning_for_image_reverts">경고: 올리적재한 그림 중 %1$s개 이상이 지워졌습니다. 지우기가 필요한 그림을 계속 올리적재하시면 계산자리가 막겨질수 있습니다.</string>
   <string name="congratulatory_message_quiz">정답 %1$s개를 맞추셨습니다. 축하드립니다!</string>
   <string name="quiz_result_share_message">동무들과 문제를 공유하세요!</string>
   <string name="continue_message">계속</string>
@@ -306,9 +252,7 @@
   <string name="wrong">오답</string>
   <string name="quiz_screenshot_question">이 화면속사를 올리적재하시겠습니까?</string>
   <string name="share_app_title">프로그람 공유</string>
-  <string name="share_coordinates_not_present">그림 선택중에 좌표가 보관되지 않았습니다</string>
   <string name="error_fetching_nearby_places">주변 장소를 가져오는데 오유가 있습니다.</string>
-  <string name="add_description">+ 설명 추가</string>
   <string name="no_recent_searches">최근 검색 없음</string>
   <string name="delete_recent_searches_dialog">검색 리력을 지우겠습니까?</string>
   <string name="search_history_deleted">검색 리력이 지워짐</string>
@@ -330,7 +274,6 @@
   <string name="notifications">알림</string>
   <string name="display_nearby_notification">주변 알림 표시</string>
   <string name="display_nearby_notification_summary" fuzzy="true">화상이 필요한 주변 장소를 보려면 여기를 두드리세요</string>
-  <string name="no_close_nearby">당신에게 가까운 주변 장소를 찾지 못했습니다</string>
   <string name="list_sheet">목록</string>
   <string name="step_count" fuzzy="true">단계 %2$d 중 %1$d</string>
   <string name="next">다음</string>
@@ -343,10 +286,6 @@
   <string name="deletion_reason_no_longer_want_public">생각이 바뀌여서 더이상 공개하고싶지 않습니다</string>
   <string name="deletion_reason_not_interesting">죄송합니다. 이 화상은 백과사전의 관심 대상이 아닙니다</string>
   <string name="uploaded_by_myself" fuzzy="true">나자신이 올리적재하였음</string>
-  <string name="desc_language_Worldwide">전세계</string>
-  <string name="desc_language_Europe">구주</string>
-  <string name="desc_language_Asia">아시아</string>
-  <string name="desc_language_Pacific">태평양</string>
   <string name="no_categories_selected">선택된 분류 없음</string>
   <string name="no_categories_selected_warning_desc" fuzzy="true">분류가 없는 그림은 거의 유용하지 않습니다. 분류를 선택하지 않고 제출하시겠습니까?</string>
   <string name="search_this_area">여기를 검색</string>

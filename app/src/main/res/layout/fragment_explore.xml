@@ -30,9 +30,10 @@
         android:orientation="horizontal"
         android:visibility="gone" />
 
-    <androidx.viewpager.widget.ViewPager
+    <fr.free.nrw.commons.explore.ParentViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar_layout" />
+        android:layout_below="@id/toolbar_layout"
+        android:background="?attr/mainBackground"/>
 </RelativeLayout>

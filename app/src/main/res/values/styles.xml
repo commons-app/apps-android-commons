@@ -54,6 +54,8 @@
         <item name="contributionsListTextSecondary">@color/white</item>
         <item name="menu_item_tint">@color/white</item>
         <item name="search_icon">@drawable/ic_search_white_24dp</item>
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -109,6 +111,8 @@
         <item name="contributionsListTextSecondary">@color/disabled_button_text_color_dark</item>
         <item name="menu_item_tint">@color/primaryDarkColor</item>
         <item name="search_icon">@drawable/ic_search_blue_24dp</item>
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <style name="LightMoreBottomSheetStyle" parent="LightAppTheme">

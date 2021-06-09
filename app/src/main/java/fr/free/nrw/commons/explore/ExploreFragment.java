@@ -10,11 +10,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.ViewPagerAdapter;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.ActivityUtils;
@@ -30,10 +31,14 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
     @BindView(R.id.viewPager)
-    ViewPager viewPager;
+    ParentViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
     private ExploreListRootFragment featuredRootFragment;
     private ExploreListRootFragment mobileRootFragment;
+
+    public void setScroll(boolean canScroll){
+        viewPager.setCanScroll(canScroll);
+    }
 
     @NonNull
     public static ExploreFragment newInstance() {
@@ -83,16 +88,26 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         fragmentList.add(mobileRootFragment);
         titleList.add(getString(R.string.explore_tab_title_mobile).toUpperCase());
 
+        ((MainActivity)getActivity()).showTabs();
+        ((BaseActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
     }
 
     public void onBackPressed() {
         if (tabLayout.getSelectedTabPosition() == 0) {
-            featuredRootFragment.backPressed();
+            if(featuredRootFragment.backPressed()){
+                // Event is handled by the Fragment we need not do anything.
+                return;
+            }
         } else {
-            mobileRootFragment.backPressed();
+            if(mobileRootFragment.backPressed()){
+                // Event is handled by the Fragment we need not do anything.
+                return;
+            }
         }
+        // Event is not handled by the fragment ( i.e performed back action ) therefore change action bar.
         ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 

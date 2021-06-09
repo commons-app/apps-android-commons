@@ -2,9 +2,14 @@ package fr.free.nrw.commons.explore.depictions;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -13,11 +18,12 @@ import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.depictions.child.ChildDepictionsFragment;
 import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment;
 import fr.free.nrw.commons.explore.depictions.parent.ParentDepictionsFragment;
-import fr.free.nrw.commons.explore.ViewPagerAdapter;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
@@ -43,6 +49,8 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     TabLayout tabLayout;
     @BindView(R.id.viewPager)
     ViewPager viewPager;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     ViewPagerAdapter viewPagerAdapter;
 
@@ -56,6 +64,8 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setOffscreenPageLimit(2);
         tabLayout.setupWithViewPager(viewPager);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTabs();
         setPageTitle();
     }
@@ -153,7 +163,12 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     @Override
     public void onBackPressed() {
         if (supportFragmentManager.getBackStackEntryCount() == 1){
-            // back to search so show search toolbar and hide navigation toolbar
+
+            // back pressed is handled by the mediaDetails , no further action required.
+            if(mediaDetailPagerFragment.backButtonClicked()){
+                return;
+            }
+
             tabLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.VISIBLE);
             mediaContainer.setVisibility(View.GONE);
@@ -177,6 +192,19 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     }
 
     /**
+     * Reload media detail fragment once media is nominated
+     *
+     * @param index item position that has been nominated
+     */
+    @Override
+    public void refreshNominatedMedia(int index) {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            onBackPressed();
+            onMediaClicked(index);
+        }
+    }
+
+    /**
      * Consumers should be simply using this method to use this activity.
      *
      * @param context      A Context of the application package implementing this class.
@@ -187,5 +215,35 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         intent.putExtra("wikidataItemName", depictedItem.getName());
         intent.putExtra("entityId", depictedItem.getId());
         context.startActivity(intent);
+    }
+
+    /**
+     * This function inflates the menu
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater=getMenuInflater();
+        menuInflater.inflate(R.menu.menu_wikidata_item,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    /**
+     * This method handles the logic on item select in toolbar menu
+     * Currently only 1 choice is available to open Wikidata item details page in browser
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.browser_actions_menu_items:
+                String entityId=getIntent().getStringExtra("entityId");
+                Uri uri = Uri.parse("https://www.wikidata.org/wiki/" + entityId);
+                Utils.handleWebUrl(this, uri);
+                return true;
+            case  android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

@@ -1,15 +1,16 @@
-package fr.free.nrw.commons.profile;
+package fr.free.nrw.commons;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This View Pager Adapter will set the fragments for profile activity
+ * This adapter will be used to display fragments in a ViewPager
  */
-public class ViewPagerAdapter  extends FragmentPagerAdapter {
+public class ViewPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragmentList = new ArrayList<>();
     private List<String> fragmentTitleList = new ArrayList<>();
 
@@ -54,4 +55,3 @@ public class ViewPagerAdapter  extends FragmentPagerAdapter {
         return fragmentTitleList.get(position);
     }
 }
-

@@ -21,10 +21,12 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
+import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
@@ -54,7 +56,6 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     DepictsContract.UserActionListener presenter;
     private UploadDepictsAdapter adapter;
     private Disposable subscribe;
-
     @Nullable
     @Override
     public android.view.View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -174,8 +175,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      *
      * @param query query string
      */
-    private void searchForDepictions(String query) {
+    private void searchForDepictions(final String query) {
         presenter.searchForDepictions(query);
     }
-
 }

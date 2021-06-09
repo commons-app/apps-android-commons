@@ -13,11 +13,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">စဒၟံင် %1$d ပတိုန်ပၠုပ်</item>
     <item quantity="other">စဒၟံင် %1$d ပတိုန်ပၠုပ်</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d ပတိုန်ပၠုပ်</item>
     <item quantity="other">%1$d ပတိုန်ပၠုပ်</item>
   </plurals>
@@ -25,13 +25,11 @@
     <item quantity="one">ဗီုရုပ်ဏအ်ဂှ် မကဵုလဝ် အခေါင်လာင်ဇြေန် နကဵုသၟဝ် %1$s</item>
     <item quantity="other">ဗီုရုပ်တအ်ဝွံ မကဵုလဝ် အခေါင်လာင်ဇြေန် နကဵု သၟဝ် %1$s</item>
   </plurals>
-  <string name="title_activity_explore">စဳစောတ်</string>
   <string name="navigation_item_explore">စဳစောတ်</string>
   <string name="preference_category_appearance">မံက်ပြာကတ်</string>
   <string name="preference_category_general">နာနာ</string>
   <string name="preference_category_feedback">ကဵုကသပ်</string>
   <string name="preference_category_privacy">မဒှ်ဒြပ်ပူဂဵု</string>
-  <string name="preference_category_location">ဒၞာဲဌာန်ဒတန်</string>
   <string name="app_name">ကောမ္မောန်</string>
   <string name="bullet">•</string>
   <string name="menu_settings">ဖျေဟ်ဒၞာဲ</string>
@@ -51,7 +49,7 @@
   <string name="uploading_started">ပတိုန်ဝှာင် စဒၟံင်ရ!</string>
   <string name="upload_completed_notification_title">%1$s ပတိုန်ပၠုပ်တုဲ!</string>
   <string name="upload_completed_notification_text">ဒၞာဲမကလေင်ရံင် ဝှာင်ပတိုန်ပၠုပ် မၞး</string>
-  <string name="upload_progress_notification_title_start">စဒၟံင် %1$s ပတိုန်ပၠုပ်။</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">စဒၟံင် %1$s ပတိုန်ပၠုပ်။</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ပတိုန်ပၠုပ်ဒၟံၚ်</string>
   <string name="upload_progress_notification_title_finishing">ပတုဲဒၟံင် ပတိုန်ပၠုပ် %1$s</string>
   <string name="upload_failed_notification_title">ပတိုန်ပၠုပ် %1$s ဟွံအံင်ဇၞး</string>
@@ -66,20 +64,17 @@
   <string name="menu_nearby">ဗဒဲါဒၞာဲဏအ်</string>
   <string name="provider_contributions">ပတိုန်ပၠုပ် ဇကုဂမၠိုင်</string>
   <string name="menu_share">ပါ်ပရအ်</string>
-  <string name="menu_open_in_browser">ရံင် ပ္ဍဲဗရောက်သာ</string>
   <string name="share_title_hint">က္ဍိုပ်လိက် (အာတ်မိက်ဒၟံင်)</string>
   <string name="add_caption_toast">ပဂုန်တုဲ ကဵု က္ဍိုပ်လိက် ဝှာင်ဏအ်ညိ</string>
   <string name="share_description_hint">မဗမံက်ထ္ၜး</string>
-  <string name="share_caption_hint">က္ဍိုပ်လိက် (ပိုင်ခြာလဝ် လၟိဟ်မလိက် ၂၅၅)</string>
+  <string name="share_caption_hint" fuzzy="true">က္ဍိုပ်လိက် (ပိုင်ခြာလဝ် လၟိဟ်မလိက် ၂၅၅)</string>
   <string name="login_failed_network">လုပ်လံက်အေန် ဟွံဂွံ - ဇာဇၞိက် ဗၠေတ်</string>
-  <string name="login_failed_wrong_credentials">လုပ်လံက်အေန် ဟွံဂွံ - ပဂုန်တုဲ ကလေင်ရံင် ယၟုလွပ် ကေုာံ မလိက်ပၞုက် မၞးညိ</string>
   <string name="login_failed_throttled">ပရေင်ဂိုတ်ဂစာန် ဟွံအံင်ဇၞး ဂၠိုင်လောန်အာရ။ ပဂုန်တုဲ မိနေတ်ညိညပၠန် ကလေင်စမ်ပၠန်။</string>
   <string name="login_failed_blocked">သၠးအခေါင်၊ ညးလွပ်ဏအ် ဒးဒုင်ကၟာတ်လဒဵုလဝ် ပ္ဍဲ ကောမ်မောန်</string>
   <string name="login_failed_2fa_needed">ကုစၟဳစၟတ်မၞးၜါဂှ် သ္ဒးပါ်လဝ် ဗွဲတၞဟ်ခြာရောင်။</string>
   <string name="login_failed_generic">လံက်အေန် လီု</string>
   <string name="share_upload_button">ပတိုန်</string>
   <string name="multiple_share_base_title">ကဵုယၟု လိက်ဏအ်ညိ</string>
-  <string name="add_set_name_toast">ပဂုန်တုဲ ပါ်ခြာ ယၟု လိက်ဏအ်ညိ</string>
   <string name="provider_modifications">တင်မပခိုဟ်ပတိုန်ဂမၠိုၚ်</string>
   <string name="menu_upload_single">ပတိုန်</string>
   <string name="categories_search_text_hint">ဂၠာဲ ကဏ္ဍဂမၠိုၚ်</string>
@@ -87,14 +82,11 @@
   <string name="menu_save_categories">ဂိုင်သိပ်</string>
   <string name="refresh_button">ကလေင်မၚုဟ်</string>
   <string name="display_list_button">စရၚ်</string>
-  <string name="gps_disabled">ပ္ဍဲကဵု စက်မၞးဂှ် ဂျဳပဳအေသ် ကၟာတ်လဝ်။ မိက်ဂွံ ပံက်ဍေဟ်ဟာ?</string>
-  <string name="enable_gps">ပံက် GPS</string>
   <string name="contributions_subtitle_zero" fuzzy="true">ဟွံဂွံ ပတိုန်ပၠုပ်ဏီ</string>
   <string name="categories_not_found">ကဏ္ဍ မကိတ်ညဳ ကု %1$s ဟွံဆဵု</string>
   <string name="depictions_not_found">တင်ဂၞင် ဝဳကဳဒေတာ မကိတ်ညဳ ကု%1$s ဟွံဆဵု</string>
   <string name="no_child_classes">%1$s ဂှ် ဟွံမဲ ကုတန်ဗတောန် ကောန်ၚာ်</string>
   <string name="no_parent_classes">%1$s ဂှ် ဟွံမဲ ကုတန်ဗတောန် မိမ</string>
-  <string name="depictions_image_not_found">ရုပ် သွက်မဗၟံက်လဝ်ဂှ် ဟွံမဲ</string>
   <string name="categories_skip_explanation">စုတ် ကဏ္ဍ သွက်ဗီုရုပ်မၞး ဂွံဂၠာဲဆဵုလောဲ ပ္ဍဲကဵု ဝဳကဳမဳဒဳယာ ကောမ်မောန်။ စတက်စုတ်လိက် သွက်ဂွံစုတ် ကဏ္ဍ။</string>
   <string name="categories_activity_title">ကဏ္ဍဂမၠိုၚ်</string>
   <string name="title_activity_settings">ဒၞဲမဖျေဟ်ဒၞာဲ</string>
@@ -111,7 +103,6 @@
   <string name="menu_feedback">ပလံင် တင်ကဵုကသပ် (နကဵု အဳမေလ်)</string>
   <string name="no_email_client">ဟွံဂွံစုတ်လဝ် အဳမေလ်</string>
   <string name="provider_categories">ကဏ္ဍ မသုၚ်စောဲဒၟံင် လၟုဟ်ဂမၠိုင်</string>
-  <string name="provider_depictions">ဗမံက်ရုပ်ရဴ မသုင်စောဲဒၟံင် လၟုဟ်ဂမၠိုင်</string>
   <string name="waiting_first_sync">မၚ်မံၚ် သွက်ပံၚ်ပံၚ်စပ်အလန်ပထမ</string>
   <string name="no_uploads_yet">မၞးဟွံဂွံ ပတိုန်ပၠုပ်လဝ် ဗီုရုပ် မွဲမွဲ ဏီရ။</string>
   <string name="menu_retry_upload">ကလေင်ကၠောန်</string>
@@ -120,8 +111,6 @@
   <string name="menu_download">တံင်လုပ်</string>
   <string name="preference_license">လာင်ဇြေန် နူတမ်</string>
   <string name="use_previous">စုတ် က္ဍိုပ်လိက် ကေုာံ ဗမံက်ထ္ၜး တၞဟ်ခြာညိ</string>
-  <string name="allow_gps">ဖျေဟ် ဒတန်ဒၞာဲ ဍာံဍာံ အလဵုအလဵု</string>
-  <string name="allow_gps_summary">ကလေင်ဖျေဟ် ဒတန်ဒၞာဲ မနွံဒၟံင်လၟုဟ် ယဝ်ရ ဗီုရုပ်ဂှ် ဟွံစာမ်ဖျေဟ်လဝ် ဒတန်ဒၞာဲ၊ တုဲပၠန် စာမ်ဖျေဟ်ဒၞာဲ ဗီုရုပ်ဂှ်ညိ။ သတိ - ဒၞာဲမၞး မနွံဒၟံင်လၟုဟ်ဂှ် ပံက်ထ္ၜးရောင်။</string>
   <string name="preference_theme">ပရူပရာ</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
@@ -129,20 +118,9 @@
   <string name="license_name_cc_by"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (သြသတြဳယျ))</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (ဂျာမနဳ)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (အဳသတဝ်နဳယျာ)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (သပိန်)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (ခရဝ်အေရှာ)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (လူဇြေမ်ဗုက်)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (နေတာလာန်)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (နဝ်ဝေ)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (ပဝ်လာန်)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (ရိုမေနဳယာ)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">ဝဳကဳမဳဒဳယာ ကောမ်မောန် ဂိုင်ဒေပ်လဝ် ဗီုရုပ်တအ် ဗွဲဂမၠိုင် သွက်ဂွံ သုင်စောဲ ပ္ဍဲဝဳကဳပဳဒဳယာ။</string>
   <string name="tutorial_1_subtext">ဗီုရုပ်မၞး ရီု ပရေင်ပညာ ညးဂၠးကဝ်!</string>
   <string name="tutorial_2_text">ပဂုန်တုဲ ပတိုန်ပၠုပ် ဗီုရုပ် မတက်လဝ် ဟွံသေင်မ္ဂး မကၠောန်ဗဒှ် နကဵု အလဵုဇကု မၞးဟေင်ညိ။:</string>
@@ -168,7 +146,6 @@
   <string name="detail_panel_cats_loading">ပတိုန်ဒၟံၚ်...</string>
   <string name="detail_panel_cats_none">ဟွံမဲကဵု ပရေၚ်ရုဲစှ်</string>
   <string name="detail_caption_empty">ဟွံမဲကဵု က္ဍိုပ်လိက်</string>
-  <string name="detail_depiction_empty">ဟွံမဲကဵု ဗမံက်ရုပ်ရဴ</string>
   <string name="detail_description_empty">ဟွံမဲကဵု ဗမံက်ထ္ၜး</string>
   <string name="detail_discussion_empty">ဟွံမဲကဵု တင်ပတိုန်ထ္ၜး</string>
   <string name="detail_license_empty">လာင်ဇြေန် မဟွံတီ</string>
@@ -177,12 +154,8 @@
   <string name="read_storage_permission_rationale">အာတ်မိက်ဒၟံင် အခေါင်: ဗှ်ပရူ ဒၞာဲဂိုင်ဒေပ် ဂလိုင်။ သက်ကုအခေါင်ဏအ် အာပ်လုပ် ပ္ဍဲဂါလာရဳဗီုမၞး ဟွံဂွံ။</string>
   <string name="write_storage_permission_rationale">အာတ်မိက်ဒၟံင် အခေါင်: ချူ ဒၞာဲဂိုင်ဒေပ် ဂလိုင်။ သက်ကုအခေါင်မၞး အာပ်လုပ် ပ္ဍဲကေမ်မရာ/ဂါလာရဳဗီုမၞး ဟွံဂွံ။</string>
   <string name="location_permission_title">အာတ်မိက်ဒၟံင် အခေါင်ဒတန်ဒၞာဲ</string>
-  <string name="location_permission_rationale">အခေါင်မပိုင်ပြဳ: ကေတ် ဒတန်ဒၞာဲ မနွံဒၟံင်လၟုဟ် သွက်ဂွံစုတ် ပ္ဍဲကဏ္ဍ</string>
   <string name="ok">ခိုဟ်</string>
-  <string name="title_activity_nearby">ဒၞဲါ မနွံဗဒါဲ</string>
-  <string name="no_nearby">ပရူဒၞာဲ မနွံဗဒါဲ ဟွံဆဵု</string>
   <string name="warning">ကဵုသတိ</string>
-  <string name="upload_image_duplicate">ဝှာင်ဏအ်ဂှ် ပလီုထောအ်လဝ်တုဲတုဲ ပ္ဍဲကဵု ကောမ်မောန်။ မၞးမိက်ဂွံ ဆက်ကၠောန်ဂှ် ဒှ်ကွေဟ်ရဟာ?</string>
   <string name="upload">ပတိုန်</string>
   <string name="yes">ယွံ</string>
   <string name="no">ဟအှ်ေ</string>
@@ -200,7 +173,6 @@
   <string name="commons_logo">သၚ်္ကေတ Commons</string>
   <string name="commons_facebook">Commons Facebook Page</string>
   <string name="no_subcategory_found">ဟွံဆဵုကေတ် ကဏ္ဍလပါ်ဂမၠိုၚ်</string>
-  <string name="upload_image">ပတိုန် ဗီုရုပ်</string>
   <string name="welcome_image_mount_zao">Mount Zao</string>
   <string name="welcome_image_llamas">Llamas</string>
   <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
@@ -223,10 +195,6 @@
   <string name="nominated_for_deletion">ဗီုရုပ်ဏအ် ဒးဒုၚ်ရုဲပတိုန်သမ္တီလတ် သ္ဂောအ် ပလီုရ.</string>
   <string name="skip_login">သလာ်</string>
   <string name="navigation_item_login">လုပ်လံက်အေန်</string>
-  <string name="read_article" fuzzy="true">ဗှ် လိက်ပရေၚ်</string>
-  <string name="notifications_welcome">ဒုၚ်တၠုၚ်နူ ဝဳကဳမဳဒဳယာ Commons, %1$s! ပိုယ်တအ် မိပ်စိုပ် ဂွံဆဵုကေတ်မၞး ဒၞာဲဏအ်.</string>
-  <string name="notifications_talk_page_message">%1$s စွံဏာ ပိုဒ်လိက် ပ္ဍဲမုက်လိက်ဓရီုကျာမၞး မွဲ</string>
-  <string name="notifications_thank_you_edit">တၚ်ဂုဏ် ကုမၞး မသ္ပပလေဝ်ဒါန်</string>
   <string name="nearby_wikidata" fuzzy="true">ဝဳကဳဒေတ</string>
   <string name="nearby_wikipedia" fuzzy="true">ဝဳကဳပဳဒဳယာ</string>
   <string name="nearby_commons" fuzzy="true">COMMONS</string>
@@ -235,7 +203,6 @@
   <string name="about_translate_title">အရေဝ်ဘာသာဂမၠိုင်</string>
   <string name="about_translate_cancel">တးပဲါ</string>
   <string name="retry">ကလေင်ကၠောန်</string>
-  <string name="showcase_view_got_it_button">ကလိဂွံရ!</string>
   <string name="image_uploaded_by">ပတိုန်လဝ် နကဵု: %1$s</string>
   <string name="appwidget_img">ဗီုရုပ် တၟေင် သွက်တ္ၚဲဏအ်</string>
   <string name="app_widget_heading">ဗီုရုပ်တၟေင် သွက်တ္ၚဲဏအ်</string>
@@ -247,7 +214,6 @@
   <string name="continue_message">ဆက်</string>
   <string name="correct">သွဟ်မဍာံ</string>
   <string name="wrong">သွဟ် မဗၠေတ်</string>
-  <string name="add_description">+ ထပ် မဗၟံက်ထ္ၜး</string>
   <string name="level" fuzzy="true">ကဆံၚ်</string>
   <string name="images_uploaded">ဗီုရုပ် မတိုန်လဝ်</string>
 </resources>

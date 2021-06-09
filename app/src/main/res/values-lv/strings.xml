@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Admresdeserv.
 * Papuass
 * Silraks
@@ -8,7 +7,6 @@
 <resources>
   <string name="preference_category_feedback">Atsauksmes</string>
   <string name="preference_category_privacy">Konfidencialitāte</string>
-  <string name="preference_category_location">Atrašanās vieta</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Iestatījumi</string>
@@ -25,7 +23,7 @@
   <string name="authentication_failed" fuzzy="true">Autentifikācija neizdevās!</string>
   <string name="uploading_started">Augšupielāde sākās!</string>
   <string name="upload_completed_notification_title">%1$s augšupielādēti!</string>
-  <string name="upload_progress_notification_title_start">Uzsāk %1$s augšupielādi</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Uzsāk %1$s augšupielādi</string>
   <string name="upload_progress_notification_title_in_progress">%1$s augšupielādēti</string>
   <string name="upload_progress_notification_title_finishing">Pabeidz %1$s augšupielādi</string>
   <string name="upload_failed_notification_title">Neizdevās augšupielādēt %1$s</string>
@@ -40,7 +38,6 @@
   <string name="menu_nearby">Tuvumā</string>
   <string name="provider_contributions">Manas augsupielades</string>
   <string name="menu_share">Dalīties</string>
-  <string name="menu_open_in_browser">Skatīt pārlūkprogrammā</string>
   <string name="share_title_hint" fuzzy="true">Nosaukums (obligāts)</string>
   <string name="share_description_hint">Apraksts</string>
   <string name="login_failed_blocked">Atvainojiet, šis lietotājs tika bloķēts uz Commons</string>
@@ -52,7 +49,6 @@
   <string name="menu_save_categories">Saglabāt</string>
   <string name="refresh_button">Atjaunināt</string>
   <string name="display_list_button">Saraksts</string>
-  <string name="enable_gps">Iespējot GPS</string>
   <string name="categories_activity_title">Kategorijas</string>
   <string name="title_activity_settings">Iestatījumi</string>
   <string name="title_activity_signup">Reģistrēties</string>
@@ -75,7 +71,6 @@
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="welcome_final_text">Jums šķiet, ka sapratāt?</string>
   <string name="welcome_final_button_text">Jā!</string>
   <string name="welcome_help_button_text">Vairāk informācijas</string>
@@ -97,14 +92,11 @@
   <string name="media_detail_coordinates">Koordinātas</string>
   <string name="media_detail_coordinates_empty">Nav norādītas</string>
   <string name="_2fa_code">2FA kods</string>
-  <string name="maximum_limit">Maksimālais limits</string>
   <string name="commons_logo">Commons logo</string>
   <string name="commons_website">Commons mājaslapa</string>
-  <string name="upload_image">Augšupielādēt attēlu</string>
   <string name="welcome_image_llamas">Lama</string>
   <string name="welcome_image_rainbow_bridge">Varavīksnes tilts</string>
   <string name="welcome_image_tulip">Tulpe</string>
-  <string name="welcome_image_no_selfies">Nekādu pašbilžu</string>
   <string name="welcome_image_sydney_opera_house">Sidnejas operteātris</string>
   <string name="cancel">Atcelt</string>
   <string name="navigation_drawer_open">Atvērt</string>
@@ -121,16 +113,10 @@
   <string name="upload_problem_image_dark">Attēls ir pārāk tumšs.</string>
   <string name="upload_problem_image_blurry">Attēls ir izplūdis.</string>
   <string name="upload_problem_different_geolocation">Šis attēls tika uzņemts citur.</string>
-  <string name="give_permission">Atļaut</string>
   <string name="use_external_storage" fuzzy="true">Izmantot ārējo krātuvi</string>
-  <string name="view_browser">Skatīt pārlūkā</string>
   <string name="skip_login">Izlaist</string>
   <string name="navigation_item_login">Pieslēgties</string>
   <string name="nearby_location_not_available" fuzzy="true">Atrašanās vieta nav pieejama.</string>
-  <string name="get_directions">Saņemt norādes</string>
-  <string name="read_article">Lasīt rakstu</string>
-  <string name="notifications_thank_you_edit">Paldies par labojumu</string>
-  <string name="toggle_view_button">Pārslēgt skatu</string>
   <string name="nearby_directions">Norādes</string>
   <string name="nearby_wikidata">Vikidati</string>
   <string name="nearby_wikipedia">Vikipēdija</string>
@@ -142,7 +128,6 @@
   <string name="about_translate_proceed">Turpināt</string>
   <string name="about_translate_cancel">Atcelt</string>
   <string name="retry">Mēģināt vēlreiz</string>
-  <string name="showcase_view_got_it_button">Sapratu!</string>
   <string name="block_notification_title">Bloķēts</string>
   <string name="appwidget_img">Dienas attēls</string>
   <string name="app_widget_heading">Dienas attēls</string>
@@ -155,7 +140,6 @@
   <string name="correct">Pareiza atbilde</string>
   <string name="wrong">Nepareiza atbilde</string>
   <string name="share_app_title">Dalīties ar lietotni</string>
-  <string name="add_description">+ Pievienot aprakstu</string>
   <string name="search_history_deleted">Meklējumu vēsture izdzēsta</string>
   <string name="delete">Dzēst</string>
   <string name="Profile">Profils</string>
@@ -166,27 +150,17 @@
   <string name="next">Nākamais</string>
   <string name="previous">Iepriekšējais</string>
   <string name="submit">Iesniegt</string>
-  <string name="navigation_item_bookmarks">Grāmatzīmes</string>
-  <string name="title_activity_bookmarks">Grāmatzīmes</string>
   <string name="title_page_bookmarks_pictures">Attēli</string>
   <string name="title_page_bookmarks_locations">Atrašanās vietas</string>
   <string name="menu_bookmark">Pievienot/noņemt no grāmatzīmēm</string>
   <string name="provider_bookmarks">Grāmatzīmes</string>
   <string name="provider_bookmarks_location">Grāmatzīmes</string>
   <string name="deletion_reason_uploaded_by_mistake">Es augšupielādēju kļūdas dēļ</string>
-  <string name="desc_language_America">Amerika</string>
-  <string name="desc_language_Europe">Eiropa</string>
-  <string name="desc_language_Middle_East">Vidējie Austrumi</string>
-  <string name="desc_language_Africa">Āfrika</string>
-  <string name="desc_language_Asia">Āzija</string>
   <string name="search_this_area">Meklēt šajā apgabalā</string>
   <string name="nearby_card_permission_title">Atļaujas pieprasījums</string>
   <string name="never_ask_again">Nekad vairs šo nejautāt</string>
   <string name="nominate_for_deletion_done">Pabeigts</string>
-  <string name="notsure">Neesmu pārliecināts</string>
-  <string name="send_thank_send">Sūta pateicību</string>
-  <string name="send_thank_notification_title">Sūta pateicību</string>
-  <string name="review_thanks_no_button_text">Nākamais attēls</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">Nākamais attēls</string>
   <string name="menu_option_read" fuzzy="true">Skatīt arhivētos</string>
   <string name="menu_option_unread">Skatīt nelasītos</string>
   <string name="please_wait">Lūdzu, uzgaidiet...</string>
@@ -201,10 +175,8 @@
   <string name="delete_helper_show_deletion_title_failed">Neizdevās</string>
   <string name="delete_helper_ask_spam_selfie">Pašbilde</string>
   <string name="delete_helper_ask_spam_blurry">Miglains</string>
-  <string name="delete_helper_ask_spam_other">Cits</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Nejaušs foto no interneta</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logotips</string>
-  <string name="delete_helper_ask_reason_copyright_other">Cits</string>
   <string name="account_created">Konts izveidots!</string>
   <string name="achievements_tab_title">Sasniegumi</string>
   <string name="count_prefix">Skaits:</string>

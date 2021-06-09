@@ -26,6 +26,7 @@ import org.robolectric.annotation.Config
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class BookMarkLocationDaoTest {
     private val columns = arrayOf(COLUMN_NAME,
+            COLUMN_LANGUAGE,
             COLUMN_DESCRIPTION,
             COLUMN_CATEGORY,
             COLUMN_LABEL_TEXT,
@@ -37,7 +38,7 @@ class BookMarkLocationDaoTest {
             COLUMN_LAT,
             COLUMN_LONG,
             COLUMN_PIC,
-            COLUMN_DESTROYED)
+            COLUMN_EXISTS)
     private val client: ContentProviderClient = mock()
     private val database: SQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
@@ -61,8 +62,8 @@ class BookMarkLocationDaoTest {
         builder.setCommonsLink("commonsLink")
 
 
-        examplePlaceBookmark = Place("placeName", exampleLabel, "placeDescription"
-                , exampleLocation, "placeCategory", builder.build(),"picName","placeDestroyed")
+        examplePlaceBookmark = Place("en", "placeName", exampleLabel, "placeDescription"
+                , exampleLocation, "placeCategory", builder.build(),"picName",false)
         testObject = BookmarkLocationsDao { client }
     }
 
@@ -86,6 +87,7 @@ class BookMarkLocationDaoTest {
         createCursor(1).let { cursor ->
             cursor.moveToFirst()
             testObject.fromCursor(cursor).let {
+                assertEquals("en", it.language)
                 assertEquals("placeName", it.name)
                 assertEquals(Label.FOREST, it.label)
                 assertEquals("placeDescription", it.longDescription)
@@ -96,7 +98,7 @@ class BookMarkLocationDaoTest {
                 assertEquals(builder.build().wikidataLink, it.siteLinks.wikidataLink)
                 assertEquals(builder.build().commonsLink, it.siteLinks.commonsLink)
                 assertEquals("picName",it.pic)
-                assertEquals("placeDestroyed", it.destroyed)
+                assertEquals(false, it.exists)
             }
         }
     }
@@ -149,8 +151,9 @@ class BookMarkLocationDaoTest {
         assertTrue(testObject.updateBookmarkLocation(examplePlaceBookmark))
         verify(client).insert(eq(BASE_URI), captor.capture())
         captor.firstValue.let { cv ->
-            assertEquals(12, cv.size())
+            assertEquals(13, cv.size())
             assertEquals(examplePlaceBookmark.name, cv.getAsString(COLUMN_NAME))
+            assertEquals(examplePlaceBookmark.language, cv.getAsString(COLUMN_LANGUAGE))
             assertEquals(examplePlaceBookmark.longDescription, cv.getAsString(COLUMN_DESCRIPTION))
             assertEquals(examplePlaceBookmark.label.text, cv.getAsString(COLUMN_LABEL_TEXT))
             assertEquals(examplePlaceBookmark.category, cv.getAsString(COLUMN_CATEGORY))
@@ -160,7 +163,7 @@ class BookMarkLocationDaoTest {
             assertEquals(examplePlaceBookmark.siteLinks.wikidataLink.toString(), cv.getAsString(COLUMN_WIKIDATA_LINK))
             assertEquals(examplePlaceBookmark.siteLinks.commonsLink.toString(), cv.getAsString(COLUMN_COMMONS_LINK))
             assertEquals(examplePlaceBookmark.pic.toString(), cv.getAsString(COLUMN_PIC))
-            assertEquals(examplePlaceBookmark.destroyed.toString(), cv.getAsString(COLUMN_DESTROYED))
+            assertEquals(examplePlaceBookmark.exists.toString(), cv.getAsString(COLUMN_EXISTS))
         }
     }
 
@@ -262,12 +265,25 @@ class BookMarkLocationDaoTest {
         verify(database).execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_destroyed STRING;")
     }
 
+    @Test
+    fun migrateTableVersionFrom_v13_to_v14() {
+        onUpdate(database, 13, 14)
+        verify(database).execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_language STRING;")
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v14_to_v15() {
+        onUpdate(database, 14, 15)
+        verify(database).execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_exists STRING;")
+    }
+
+
     private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
 
         for (i in 0 until rowCount) {
-            addRow(listOf("placeName", "placeDescription","placeCategory", exampleLabel.text, exampleLabel.icon,
+            addRow(listOf("placeName", "en", "placeDescription", "placeCategory", exampleLabel.text, exampleLabel.icon,
                     exampleUri, builder.build().wikipediaLink, builder.build().wikidataLink, builder.build().commonsLink,
-                    exampleLocation.latitude, exampleLocation.longitude, "picName", "placeDestroyed"))
+                    exampleLocation.latitude, exampleLocation.longitude, "picName", "placeExists"))
         }
     }
 }

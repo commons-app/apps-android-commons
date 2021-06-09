@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Dishual
 * Fohanno
 * Fulup
@@ -30,12 +29,10 @@
     <item quantity="one">gant an aotre-implijout %1$s e vo ar skeudenn-mañ</item>
     <item quantity="other">gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
   </plurals>
-  <string name="title_activity_explore">Ergerzhout</string>
   <string name="navigation_item_explore">Ergerzhout</string>
   <string name="preference_category_appearance">Neuz</string>
   <string name="preference_category_general">Hollek</string>
   <string name="preference_category_feedback">Sonjoù</string>
-  <string name="preference_category_location">Lec\'hiadur</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Arventennoù</string>
@@ -54,7 +51,7 @@
   <string name="uploading_started">Kroget da enporzhiañ!</string>
   <string name="upload_completed_notification_title">%1$s bet enporzhiet !</string>
   <string name="upload_completed_notification_text">Pouezit evit gwelet hoc\'h enporzhiadenn</string>
-  <string name="upload_progress_notification_title_start">O kregiñ da enporzhiañ %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">O kregiñ da enporzhiañ %1$s</string>
   <string name="upload_progress_notification_title_in_progress">O enporzhiañ %1$s !</string>
   <string name="upload_progress_notification_title_finishing">Oc\'h echuiñ enporzhiadenn %1$s</string>
   <string name="upload_failed_notification_title">C\'hwitet en deus enporzhiañ %1$s</string>
@@ -69,33 +66,27 @@
   <string name="menu_nearby">Tostik</string>
   <string name="provider_contributions">Ma enporzhiadennoù</string>
   <string name="menu_share">Rannañ</string>
-  <string name="menu_open_in_browser">Diskwel er meerder</string>
   <string name="share_title_hint">Alc\'hwez (ret)</string>
   <string name="share_description_hint">Deskrivadur</string>
-  <string name="share_caption_hint">Alc\'hwez (bevennet da 255 arouezenn)</string>
+  <string name="share_caption_hint" fuzzy="true">Alc\'hwez (bevennet da 255 arouezenn)</string>
   <string name="login_failed_network">Ne c\'haller ket kevreañ - rouedad sac\'het</string>
-  <string name="login_failed_wrong_credentials">Ne c\'haller ket kevreañ - gwiriit hoc\'h anv implijer hag ho ker-tremen mar plij</string>
   <string name="login_failed_throttled">Re a daolioù-esae. Klaskit en-dro a-benn ur pennadig amzer.</string>
   <string name="login_failed_blocked">Hon digarezit, prennet eo bet an implijer-mañ e Commons</string>
   <string name="login_failed_2fa_needed">Rankout a rit reiñ ho kod dilesa gant daou faktor.</string>
   <string name="login_failed_generic">C\'hwitet eo ar c\'hevreañ</string>
   <string name="share_upload_button">Pellgargañ</string>
   <string name="multiple_share_base_title">Envel ar rikoù-mañ</string>
-  <string name="add_set_name_toast">Roit un titl d\'an hollad-mañ, mar plij</string>
   <string name="provider_modifications">Kemmoù</string>
   <string name="menu_upload_single">Enporzhiañ</string>
   <string name="categories_search_text_hint">Klask rummadoù</string>
   <string name="menu_save_categories">Enrollañ</string>
   <string name="refresh_button">Freskaat</string>
   <string name="display_list_button">Roll</string>
-  <string name="gps_disabled">Diwerededkaet eo ar GPS war hoc\'h ardivink.\nHa c\'hoant ho peus da weredekaat anezhañ ?</string>
-  <string name="enable_gps">Gweredekaat ar GPS</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Enporzhiadenn ebet c\'hoazh !</string>
   <string name="categories_not_found">N\'eus bet kavet rummad ebet o klotañ gant %1$s</string>
   <string name="depictions_not_found">N\'eus bet kavet elfenn Wikidata ebet o klotañ gant %1$s</string>
   <string name="no_child_classes">N\'eus ket a glasoù bugale e %1$s</string>
   <string name="no_parent_classes">N\'eus ket a glasoù kerent e %1$s</string>
-  <string name="depictions_image_not_found">Skeudenn ebet da zeskrivañ</string>
   <string name="categories_skip_explanation">Ouzhpennit rummadoù evit ma vo aesoc\'h kavout ho skeudennoù war Wikimedia Commons.\n\nKrogit da skrivañ evit ouzhpennañ rummadoù.</string>
   <string name="categories_activity_title">Rummadoù</string>
   <string name="title_activity_settings">Arventennoù</string>
@@ -111,7 +102,6 @@
   <string name="menu_feedback">Kas ho soñj (dre bostel)</string>
   <string name="no_email_client">N\'eus bet staliet arval postel ebet</string>
   <string name="provider_categories">Rummadoù bet implijet n\'eus ket pell</string>
-  <string name="provider_depictions">Deskrivadurioù implijet nevez zo</string>
   <string name="waiting_first_sync">O c\'hortoz ar sinkroneladur kentañ…</string>
   <string name="no_uploads_yet">N\'ho peus ket enporzhiet skeudennoù c\'hoazh.</string>
   <string name="menu_retry_upload">Klask en-dro</string>
@@ -120,8 +110,6 @@
   <string name="menu_download">Pellgargañ</string>
   <string name="preference_license">Aotre-implijout dre ziouer</string>
   <string name="use_previous" fuzzy="true">Ober gant an titl/deskrivadur kent</string>
-  <string name="allow_gps">Tapout al lec\'hiadur red ent emgefre</string>
-  <string name="allow_gps_summary" fuzzy="true">Kavout al lec\'hiadur red evit pourchas kinnigoù rummadoù ma n\'eo ket douarlec\'hiet ar skeudenn.</string>
   <string name="preference_theme" fuzzy="true">Mod noz</string>
   <string name="license_name_cc_by_sa_four">Deroadur-RannañHeñvel 4.0</string>
   <string name="license_name_cc_by_four">Deroadur 4.0</string>
@@ -129,20 +117,9 @@
   <string name="license_name_cc_by">Deroadur 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Aostria)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Alamagn)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Bro Spagn)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luksembourg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Izelvroioù)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norvegia)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polonia)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Roumania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">Herberc\'hiañ a ra Wikipedia Commons ar pep brasañ eus ar skeudennoù implijet e Wikipedia.</string>
   <string name="tutorial_1_subtext">Sikour a ra ho skeudennoù da ledañ deskamant er bed a-bezh !</string>
   <string name="tutorial_2_text">Enporzhiañ hepken skeudennoù bet tapet pe krouet ganeoc\'h penn-da-benn :</string>
@@ -165,19 +142,14 @@
   <string name="detail_panel_cats_label">Rummadoù</string>
   <string name="detail_panel_cats_loading">O kargañ…</string>
   <string name="detail_panel_cats_none">Hini ebet diuzet</string>
-  <string name="detail_depiction_empty">Deskrivadur ebet</string>
   <string name="detail_description_empty">Deskrivadur ebet</string>
   <string name="detail_license_empty">Aotre-implijout dianav</string>
   <string name="menu_refresh">Freskaat</string>
   <string name="read_storage_permission_rationale">Aotre rekis : lenn ur stokañ diavaez. N\'hall ket an arload tizhout ho palier hep an dra-se.</string>
   <string name="write_storage_permission_rationale" fuzzy="true">Aotre ret ; skrivañ war al lec\'h stokañ diavaez. Ne c\'hall ket an arload tizhout ho kamera hep an dra-se.</string>
-  <string name="location_permission_rationale">Aotre diret : kaout al lec\'hiadur red evit kinnig rummadoù</string>
   <string name="ok">Mat eo</string>
-  <string name="title_activity_nearby">Lec\'hioù nes</string>
-  <string name="no_nearby">N\'eus bet kavet netra tostik</string>
   <string name="warning">Diwallit</string>
   <string name="duplicate_image_found">Kavet ez eus bet ur skeudenn e doubl</string>
-  <string name="upload_image_duplicate">Ar restr zo anezhi e Commons dija. Ha sur eo hoc\'h eus c\'hoant da genderc\'hel ?</string>
   <string name="upload">Enporzhiañ</string>
   <string name="yes">Ya</string>
   <string name="no">Ket</string>
@@ -192,30 +164,18 @@
   <string name="become_a_tester_title">Deuit da vezañ un amprouer beta</string>
   <string name="become_a_tester_description">En em enskrivañ en hor c\'hanol beta war Google Play ha kaout ur rakmoned d\'an arc\'hwelioù nevez d\'an drein difaziet</string>
   <string name="_2fa_code">Kod 2FA</string>
-  <string name="number_of_uploads">Ma bevenn pellgargadurioù nevez</string>
-  <string name="maximum_limit">Bevenn uc\'hek</string>
-  <string name="invalid_zero">Zero n\'eo ket un talvoud reizh</string>
-  <string name="maximum_limit_alert">Ne c\'haller ket diskwel ouzhpenn 500</string>
-  <string name="enter_valid">Ebarzhiñ un niver reizh</string>
-  <string name="set_limit" fuzzy="true">Lakaat ar vevenn bellgargañ nevez</string>
-  <string name="login_failed_2fa_not_supported">Ne vez ket embreget an dilesadur gant daou faktor evit ar mare.</string>
   <string name="logout_verification">Sur oc\'h e fell deoc\'h digevreañ ?</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="commons_website">Lec\'hienn web Commons</string>
   <string name="commons_facebook">Pajenn Facebook Commons</string>
   <string name="commons_github">Kod mammenn Github Commons</string>
-  <string name="background_image">Skeudenn drekleur</string>
   <string name="mediaimage_failed">C\'hwitadenn war skeudenn ar media</string>
-  <string name="no_image_found">N\'eus bet kavet skeudenn ebet</string>
   <string name="no_subcategory_found">Isrummad ebet kavet</string>
   <string name="no_parentcategory_found">Rummad tad ebet kavet</string>
-  <string name="upload_image">Kargañ ur skeudenn</string>
   <string name="welcome_image_mount_zao">Menez Zao</string>
   <string name="welcome_image_llamas">Lamaed</string>
   <string name="welcome_image_rainbow_bridge">Pont Gwareg-ar-glav</string>
   <string name="welcome_image_tulip">Tulipez</string>
-  <string name="welcome_image_no_selfies">Emboltred ebet</string>
-  <string name="welcome_image_proprietary">Skeudenn brevez</string>
   <string name="welcome_image_welcome_wikipedia">Donemat e Wikipedia</string>
   <string name="welcome_image_welcome_copyright">Gwirioù oberour donemat</string>
   <string name="welcome_image_sydney_opera_house">Ti Opera Sydney</string>
@@ -231,21 +191,16 @@
   <string name="navigation_item_logout">Digevreañ</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Kemennoù</string>
-  <string name="navigation_item_featured_images">Lakaet a-wel</string>
-  <string name="nearby_needs_permissions">Ne c\'haller ket diskwel al lec\'hioù tost ma ne rannit ket ho lec\'hiadur</string>
   <string name="no_description_found">N\'eus bet kavet deskrivadur ebet</string>
   <string name="nearby_info_menu_commons_article">Pajennad restroù Commons</string>
   <string name="nearby_info_menu_wikidata_article">Elfenn Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Pennad Wikipedia</string>
-  <string name="error_while_cache">Fazi en ur grubuilhañ ar skeudennoù</string>
-  <string name="title_info">Un anv deskrivañ dibar evit ar restr, a dalvezo da anv restr. Gallout a rit implijout ur yezh eeun gant esaouennoù. Arabat eo lakaat astenn anv ar restr e-barzh</string>
   <string name="description_info">Deskrivit ar media kement ha ma c\'hallit en ober : pelec\'h eo bet enrollet ? Petra a laka war wel ? Petra eo an degouezh ? Deskrivit an traezoù pe an dud. Lakait war wel an titouroù na c\'haller ket divinout aes, da skouer eur an deiz ma\'z eo ur gweledva. Ma tiskouez ar media un dra bennak divoas, displegit perak eo deuet da vezañ un dra dreistordinal anezhañ.</string>
   <string name="upload_problem_image_dark">Re deñval eo ar skeudenn.</string>
   <string name="upload_problem_image_blurry">Dispis eo ar skeudenn.</string>
   <string name="upload_problem_image_duplicate">War Commons eo ar skeudenn dija.</string>
   <string name="upload_problem_different_geolocation">Tennet eo bet ar skeudenn en ul lec\'h disheñvel.</string>
   <string name="upload_problem_image">Kudennoù stag ouzh ar bajenn-mañ</string>
-  <string name="give_permission">Reiñ ar gwir</string>
   <string name="use_external_storage" fuzzy="true">Implijout ar stokañ diavaez</string>
   <string name="use_external_storage_summary" fuzzy="true">Enrollit ar skeudennoù tennet gant luc\'hskeudennerez ho penveg</string>
   <string name="login_to_your_account">Kevreit ouzh ho kont</string>
@@ -255,7 +210,6 @@
   <string name="null_url">Fazi ! N\'eo ket bet kavet an URL</string>
   <string name="nominate_deletion">Kinnig evit lemel</string>
   <string name="nominated_for_deletion">Meneget eo bet ar skeudenn evit lemel.</string>
-  <string name="view_browser">Diskwel er merdeer</string>
   <string name="skip_login">Lezel a-gostez</string>
   <string name="navigation_item_login">Kevreañ</string>
   <string name="skip_login_title">Ha c\'hoant ho peus, evit gwir, da gevreañ ?</string>
@@ -263,13 +217,6 @@
   <string name="login_alert_message">Kevreit, mar plij, evit implijout an arc\'hwel-mañ</string>
   <string name="copy_wikicode">Eilañ an destenn wiki er golver</string>
   <string name="wikicode_copied">Testenn wiki eilet er golver</string>
-  <string name="nearby_location_has_not_changed">N\'eo ket cheñchet al lec\'hiadur.</string>
-  <string name="get_directions" fuzzy="true">Kaout urzhioù</string>
-  <string name="read_article" fuzzy="true">Lenn ar pennad</string>
-  <string name="notifications_welcome">Degemer mat deoc\'h, %1$, e Wikimedia Commons ! Laouen omp oc\'h deuet amañ.</string>
-  <string name="notifications_talk_page_message">%1$s en deus lezet ur gemennadenn war ho pajenn gaozeal</string>
-  <string name="notifications_thank_you_edit">Grit ur c\'hemm, mar plij</string>
-  <string name="notifications_mention">%1$s en deus meneget ac\'hanoc\'h e %2$s</string>
   <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
   <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
   <string name="nearby_commons" fuzzy="true">BOUTIN</string>
@@ -277,7 +224,6 @@
   <string name="about_faq" fuzzy="true">&lt;u&gt;FAG&lt;/u&gt;</string>
   <string name="welcome_skip_button">Lezel an tutorial a-gostez</string>
   <string name="no_internet">Kenrouedad dihegerz</string>
-  <string name="internet_established">Kenrouedad hegerz</string>
   <string name="error_notifications">Fazi war enklask kemennoù</string>
   <string name="no_notifications">Kemenn ebet kavet</string>
   <string name="about_translate" fuzzy="true">&lt;u&gt;Treiñ&lt;/u&gt;</string>
@@ -286,10 +232,7 @@
   <string name="about_translate_proceed">Kenderc\'hel</string>
   <string name="about_translate_cancel">Nullañ</string>
   <string name="retry">Klask en-dro</string>
-  <string name="showcase_view_got_it_button">Mat eo !</string>
   <string name="showcase_view_whole_nearby_activity" fuzzy="true">Lec\'hioù zo en-dro deoc\'h zo ezhomm skeudennoù anezho evit skeudennaouiñ pennadoù Wikipedia</string>
-  <string name="showcase_view_list_icon">En ur glikañ war ar bouton-se e tiskwelot ur roll eus al lec\'hioù-se</string>
-  <string name="showcase_view_plus_fab">Gallout a reot ezporzhiañ ur skeudenn eus n\'eus forzh lec\'h eus ho palier pe eus ho luc\'hskeudennerez</string>
   <string name="no_images_found">N\'eus bet kavet skeudenn ebet !</string>
   <string name="error_loading_images">Ur fazi zo c\'hoarvezet p\'eo bet karget ar skeudennoù.</string>
   <string name="image_uploaded_by">Enporzhiet gant:%1$s</string>
@@ -298,7 +241,6 @@
   <string name="app_widget_heading">Skeudenn an deiz</string>
   <string name="menu_search_button">Klask</string>
   <string name="search_commons">Klask e Commons</string>
-  <string name="images_not_found">N\'eus bet kavet skeudenn ebet hag a sell ouzh 1$s</string>
   <string name="title_activity_search">Klask</string>
   <string name="search_recent_header">Enklaskoù nevez :</string>
   <string name="provider_searches">Rekedoù enklask diwezhañ</string>
@@ -317,7 +259,6 @@
   <string name="correct">Respont reizh</string>
   <string name="wrong">Respont fall</string>
   <string name="share_app_title">Rannañ an arloadoù</string>
-  <string name="add_description">+ Ouzhpennañ un deskrivadur</string>
   <string name="no_recent_searches">Klask nevez ebet</string>
   <string name="search_history_deleted">Istor klask diverket</string>
   <string name="statistics" fuzzy="true">STADEGOÙ</string>
@@ -336,23 +277,14 @@
   <string name="previous">Kent</string>
   <string name="submit">Kas</string>
   <string name="upload_title_duplicate" fuzzy="true">Ur restr gant an anv %1$s zo anezhi. Ha sur eo hoc\'h eus c\'hoant da genderc\'hel ?</string>
-  <string name="navigation_item_bookmarks">Sinedoù</string>
-  <string name="title_activity_bookmarks">Sinedoù</string>
   <string name="title_page_bookmarks_pictures">Skeudennoù</string>
   <string name="title_page_bookmarks_locations">Lec\'hiadurioù</string>
   <string name="menu_bookmark">Ouzhpennañ/Dilemel sinedoù</string>
   <string name="provider_bookmarks">Sinedoù</string>
   <string name="provider_bookmarks_location">Sinedoù</string>
-  <string name="desc_language_Worldwide">Bed a-bezh</string>
-  <string name="desc_language_America">Amerika</string>
-  <string name="desc_language_Europe">Europa</string>
-  <string name="desc_language_Middle_East">Reter-Kreiz</string>
-  <string name="desc_language_Africa">Afrika</string>
-  <string name="desc_language_Asia">Azia</string>
-  <string name="desc_language_Pacific">Habask</string>
   <string name="no_categories_selected">Rummad ebet diuzet</string>
   <string name="no_depictions_selected">Deskrivadur ebet diuzet</string>
-  <string name="upload_flow_all_images_in_set">(Evit holl skeudennoù an  hollad)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(Evit holl skeudennoù an  hollad)</string>
   <string name="nearby_card_permission_title">Goulenn aotre</string>
   <string name="no_depiction_found">Deskrivadur ebet kavet</string>
   <string name="title_for_media">MEDIA</string>

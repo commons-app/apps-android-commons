@@ -22,7 +22,7 @@ public interface NearbyParentFragmentContract {
         void listOptionMenuItemClicked();
         void populatePlaces(LatLng curlatLng);
         boolean isListBottomSheetExpanded();
-        void checkPermissionsAndPerformAction(Runnable runnable);
+        void checkPermissionsAndPerformAction();
         void displayLoginSkippedWarning();
         void setFABPlusAction(android.view.View.OnClickListener onClickListener);
         void setFABRecenterAction(android.view.View.OnClickListener onClickListener);
@@ -89,6 +89,7 @@ public interface NearbyParentFragmentContract {
         void detachView();
 
         void setActionListeners(JsonKvStore applicationKvStore);
+        void removeNearbyPreferences(JsonKvStore applicationKvStore);
         boolean backButtonClicked();
         void onCameraMove(com.mapbox.mapboxsdk.geometry.LatLng latLng);
         void filterByMarkerType(List<Label> selectedLabels, int state, boolean filterForPlaceState, boolean filterForAllNoneType);

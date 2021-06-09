@@ -33,8 +33,8 @@ class BookmarkLocationControllerTest {
     private val mockBookmarkList: List<Place>
         private get() {
             val list = ArrayList<Place>()
-            list.add(Place("a place",null,"a description",null,"a cat",null,null,null))
-            list.add(Place("another place",null,"another description",null,"another cat",null,null,null))
+            list.add(Place("en","a place",null,"a description",null,"a cat",null,null,true))
+            list.add(Place("en","another place",null,"another description",null,"another cat",null,null,true))
             return list
         }
 

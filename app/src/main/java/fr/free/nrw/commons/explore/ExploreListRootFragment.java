@@ -2,7 +2,7 @@ package fr.free.nrw.commons.explore;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,20 +10,16 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
-import fr.free.nrw.commons.contributions.ContributionsListFragment;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.navtab.NavTab;
-import fr.free.nrw.commons.settings.SettingsFragment;
 
 public class ExploreListRootFragment extends CommonsDaggerSupportFragment implements
     MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
@@ -80,7 +76,7 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
           .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
           .commit();
       getChildFragmentManager().executePendingTransactions();
-    }else if (!fragment.isAdded() && otherFragment != null ) {
+    } else if (!fragment.isAdded() && otherFragment != null ) {
       getChildFragmentManager()
           .beginTransaction()
           .hide(otherFragment)
@@ -113,7 +109,6 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
 
   @Override
   public void onMediaClicked(int position) {
-    Log.d("deneme8","on media clicked");
     container.setVisibility(View.VISIBLE);
     ((ExploreFragment)getParentFragment()).tabLayout.setVisibility(View.GONE);
     mediaDetails = new MediaDetailPagerFragment(false, true);
@@ -158,6 +153,19 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
   }
 
   /**
+   * Reload media detail fragment once media is nominated
+   *
+   * @param index item position that has been nominated
+   */
+  @Override
+  public void refreshNominatedMedia(int index) {
+    if(mediaDetails != null && !listFragment.isVisible()) {
+      removeFragment(mediaDetails);
+      onMediaClicked(index);
+    }
+  }
+
+  /**
    * This method is called on success of API call for featured images or mobile uploads. The
    * viewpager will notified that number of items have changed.
    */
@@ -168,15 +176,26 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
     }
   }
 
-  public void backPressed() {
+  /**
+   * Performs back pressed action on the fragment.
+   * Return true if the event was handled by the mediaDetails otherwise returns false.
+   * @return
+   */
+  public boolean backPressed() {
     if (null!=mediaDetails && mediaDetails.isVisible()) {
       // todo add get list fragment
+      if(mediaDetails.backButtonClicked()) {
+        // MediaDetails handled the event no further action required.
+        return true;
+      }
       ((ExploreFragment)getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
       removeFragment(mediaDetails);
+      ((ExploreFragment) getParentFragment()).setScroll(true);
       setFragment(listFragment, mediaDetails);
     } else {
       ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
     }
     ((MainActivity)getActivity()).showTabs();
+    return false;
   }
 }

@@ -5,7 +5,7 @@ import android.os.Parcelable
 import fr.free.nrw.commons.upload.UploadResult
 
 data class ChunkInfo(
-    val uploadResult: UploadResult,
+    val uploadResult: UploadResult?,
     val indexOfNextChunkToUpload: Int,
     val totalChunks: Int
 ) : Parcelable {

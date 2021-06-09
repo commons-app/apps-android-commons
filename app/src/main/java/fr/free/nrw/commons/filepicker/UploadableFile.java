@@ -124,8 +124,8 @@ public class UploadableFile implements Parcelable {
     private DateTimeWithSource getDateTimeFromExif() {
         try {
             ExifInterface exif = new ExifInterface(file.getAbsolutePath());
-            @SuppressLint("RestrictedApi") long dateTime = exif.getDateTime();
-            if (dateTime != -1) {
+            @SuppressLint("RestrictedApi") Long dateTime = exif.getDateTime();
+            if(dateTime != null){
                 Date date = new Date(dateTime);
                 return new DateTimeWithSource(date, DateTimeWithSource.EXIF_SOURCE);
             }

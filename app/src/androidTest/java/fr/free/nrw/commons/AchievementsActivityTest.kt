@@ -29,7 +29,6 @@ class AchievementsActivityTest {
     @Test
     fun testAchievements() {
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open())
-        onView(withId(R.id.user_icon)).perform(click())
 
         Intents.intended(hasComponent(ProfileActivity::class.java.name))
     }
