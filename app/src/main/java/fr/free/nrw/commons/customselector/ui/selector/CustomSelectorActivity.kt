@@ -10,8 +10,9 @@ import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Folder
 import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.theme.BaseActivity
 
-class CustomSelectorActivity : AppCompatActivity(), FolderClickListener, ImageSelectListener {
+class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectListener {
 
     /**
      * View model.
@@ -23,12 +24,6 @@ class CustomSelectorActivity : AppCompatActivity(), FolderClickListener, ImageSe
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(intent.getBooleanExtra("DarkTheme", false)){
-            setTheme(R.style.DarkAppTheme)
-        }
-        else{
-            setTheme(R.style.LightAppTheme)
-        }
         setContentView(R.layout.activity_custom_selector)
 
         viewModel = ViewModelProvider(this, CustomSelectorViewModelFactory(this.application)).get(
