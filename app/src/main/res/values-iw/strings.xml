@@ -258,6 +258,7 @@
   <string name="upload_problem_fbmd">נא להעלות רק תמונות שהעלית בעצמך. לא להעלות תמונות שמצאת בחשבונות של כל מיני אנשים בפייסבוק.</string>
   <string name="upload_problem_do_you_continue">האם ברצונך עדיין להעלות את התמונה הזאת?</string>
   <string name="upload_connection_error_alert_title">שגיאת חיבור</string>
+  <string name="upload_connection_error_alert_detail">תהליך ההעלאה דורש גישה פעילה לאינטרנט. נא לבדוק את חיבור הרשת שלך.</string>
   <string name="upload_problem_image">נמצאו בעיות בתמונה</string>
   <string name="internet_downloaded">נא להעלות רק תמונות שצילמת בעצמך. לא להעלות תמונות שהורדת מהאינטרנט.</string>
   <string name="use_external_storage">שמירת צילומים מתוך היישומון</string>
