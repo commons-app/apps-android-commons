@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Result
@@ -106,7 +107,7 @@ class ImageFragment: CommonsDaggerSupportFragment() {
         if(result.status is CallbackStatus.SUCCESS){
             val images = result.images
             if(images.isNotEmpty()) {
-                imageAdapter.init(images)
+                imageAdapter.init(ImageHelper.filterImages(images,bucketId))
                 selector_rv.visibility = View.VISIBLE
             }
             else{

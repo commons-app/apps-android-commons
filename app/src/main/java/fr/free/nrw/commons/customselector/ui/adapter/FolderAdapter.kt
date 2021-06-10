@@ -48,7 +48,7 @@ class   FolderAdapter(
     override fun onBindViewHolder(holder: FolderViewHolder, position: Int) {
         val folder = folders[position]
         val count = folder.images.size
-        val previewImage = folder.images[0]
+//        val previewImage = folder.images[0]
         holder.name.text = folder.name
         holder.count.text= count.toString()
         holder.itemView.setOnClickListener{

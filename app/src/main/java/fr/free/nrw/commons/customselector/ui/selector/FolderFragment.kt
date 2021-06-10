@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
@@ -87,10 +88,7 @@ class FolderFragment : CommonsDaggerSupportFragment() {
      */
     private fun handleResult(result: Result) {
         if(result.status is CallbackStatus.SUCCESS){
-            val folders = arrayListOf<Folder>()
-            for( i in 1..12) {
-                folders.add(Folder(i.toLong(), "Folder$i",result.images))
-            }
+            val folders = ImageHelper.folderListFromImages(result.images)
             folderAdapter.init(folders)
             folderAdapter.notifyDataSetChanged()
             selector_rv.visibility = View.VISIBLE
