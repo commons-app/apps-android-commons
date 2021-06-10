@@ -5,6 +5,7 @@ import static android.view.View.VISIBLE;
 import static fr.free.nrw.commons.di.NetworkingModule.NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,13 +30,16 @@ import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.Locale;
 import javax.inject.Inject;
@@ -53,20 +57,25 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
     private static final String RV_STATE = "rv_scroll_state";
 
-    @BindView(R.id.contributionsList)
-    RecyclerView rvContributionsList;
-    @BindView(R.id.loadingContributionsProgressBar)
-    ProgressBar progressBar;
-    @BindView(R.id.fab_plus)
-    FloatingActionButton fabPlus;
-    @BindView(R.id.fab_camera)
-    FloatingActionButton fabCamera;
-    @BindView(R.id.fab_gallery)
-    FloatingActionButton fabGallery;
-    @BindView(R.id.noContributionsYet)
-    TextView noContributionsYet;
-    @BindView(R.id.fab_layout)
-    LinearLayout fab_layout;
+  @BindView(R.id.contributionsList)
+  RecyclerView rvContributionsList;
+  @BindView(R.id.loadingContributionsProgressBar)
+  ProgressBar progressBar;
+  @BindView(R.id.fab_plus)
+  FloatingActionButton fabPlus;
+  @BindView(R.id.fab_camera)
+  FloatingActionButton fabCamera;
+  @BindView(R.id.fab_gallery)
+  FloatingActionButton fabGallery;
+  @BindView(R.id.noContributionsYet)
+  TextView noContributionsYet;
+  @BindView(R.id.fab_layout)
+  LinearLayout fab_layout;
+  @BindView(R.id.fab_custom_gallery)
+  FloatingActionButton fabCustomGallery;
+
+  @Inject
+  SystemThemeUtils systemThemeUtils;
 
     @Inject
     ContributionController controller;
@@ -256,25 +265,35 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         });
     }
 
-    private void animateFAB(final boolean isFabOpen) {
-        this.isFabOpen = !isFabOpen;
-        if (fabPlus.isShown()) {
-            if (isFabOpen) {
-                fabPlus.startAnimation(rotate_backward);
-                fabCamera.startAnimation(fab_close);
-                fabGallery.startAnimation(fab_close);
-                fabCamera.hide();
-                fabGallery.hide();
-            } else {
-                fabPlus.startAnimation(rotate_forward);
-                fabCamera.startAnimation(fab_open);
-                fabGallery.startAnimation(fab_open);
-                fabCamera.show();
-                fabGallery.show();
-            }
-            this.isFabOpen = !isFabOpen;
-        }
+  @OnClick(R.id.fab_custom_gallery)
+  void launchCustomSelector(){
+    Intent intent = new Intent(getActivity(), CustomSelectorActivity.class);
+    startActivity(intent);
+  }
+
+  private void animateFAB(final boolean isFabOpen) {
+    this.isFabOpen = !isFabOpen;
+    if (fabPlus.isShown()) {
+      if (isFabOpen) {
+        fabPlus.startAnimation(rotate_backward);
+        fabCamera.startAnimation(fab_close);
+        fabGallery.startAnimation(fab_close);
+        fabCustomGallery.startAnimation(fab_close);
+        fabCamera.hide();
+        fabGallery.hide();
+        fabCustomGallery.hide();
+      } else {
+        fabPlus.startAnimation(rotate_forward);
+        fabCamera.startAnimation(fab_open);
+        fabGallery.startAnimation(fab_open);
+        fabCustomGallery.startAnimation(fab_open);
+        fabCamera.show();
+        fabGallery.show();
+        fabCustomGallery.show();
+      }
+      this.isFabOpen = !isFabOpen;
     }
+  }
 
     /**
      * Shows welcome message if user has no contributions yet i.e. new user.

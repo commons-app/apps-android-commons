@@ -110,6 +110,9 @@
         <activity android:name=".quiz.QuizResultActivity"
             android:label="@string/result"/>
 
+        <activity android:name=".customselector.ui.selector.CustomSelectorActivity"
+          android:label="CustomSelector"/>
+
         <activity
             android:name=".category.CategoryDetailsActivity"
             android:label="@string/title_activity_featured_images"
