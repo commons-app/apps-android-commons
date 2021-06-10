@@ -8,6 +8,7 @@ import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SignupActivity;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.notification.NotificationActivity;
@@ -33,6 +34,9 @@ public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract MainActivity bindContributionsActivity();
+
+    @ContributesAndroidInjector
+    abstract CustomSelectorActivity bindCustomSelectorActivity();
 
     @ContributesAndroidInjector
     abstract SettingsActivity bindSettingsActivity();
