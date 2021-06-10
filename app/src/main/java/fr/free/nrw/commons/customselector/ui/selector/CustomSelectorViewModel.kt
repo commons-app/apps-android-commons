@@ -1,24 +1,14 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import fr.free.nrw.commons.customselector.listeners.ImageLoaderListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.model.Result
 
-class CustomSelectorViewModel(application: Application) : AndroidViewModel(application) {
-
-    /**
-     * Application Context.
-     */
-    private val context = application.applicationContext
-
-    /**
-     * Image file loader: Load all device images.
-     */
-    private val imageFileLoader : ImageFileLoader = ImageFileLoader(context)
+class CustomSelectorViewModel(val context: Context,var imageFileLoader: ImageFileLoader) : ViewModel() {
 
     /**
      * Result Live Data

@@ -13,10 +13,12 @@ import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import kotlinx.android.synthetic.main.fragment_custom_selector.*
 import kotlinx.android.synthetic.main.fragment_custom_selector.view.*
+import javax.inject.Inject
 
-class ImageFragment: Fragment() {
+class ImageFragment: CommonsDaggerSupportFragment() {
 
     /**
      * Current bucketId.
@@ -27,6 +29,12 @@ class ImageFragment: Fragment() {
      * View model for images.
      */
     private lateinit var  viewModel: CustomSelectorViewModel
+
+    /**
+     * View model Factory.
+     */
+    lateinit var customSelectorViewModelFactory: CustomSelectorViewModelFactory
+    @Inject set
 
     /**
      * Image Adapter for recycle view.
@@ -65,11 +73,7 @@ class ImageFragment: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bucketId = arguments?.getLong(BUCKET_ID)
-        viewModel = activity!!.run{
-            ViewModelProvider(this, CustomSelectorViewModelFactory(activity!!.application)).get(
-                CustomSelectorViewModel::class.java
-            )
-        }
+        viewModel = ViewModelProvider(requireActivity(),customSelectorViewModelFactory).get(CustomSelectorViewModel::class.java)
     }
 
     /**
@@ -80,7 +84,7 @@ class ImageFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val root = inflater.inflate(R.layout.fragment_custom_selector, container, false)
-        imageAdapter = ImageAdapter(activity!!, activity as ImageSelectListener)
+        imageAdapter = ImageAdapter(requireActivity(), activity as ImageSelectListener)
         gridLayoutManager = GridLayoutManager(context,getSpanCount())
         with(root.selector_rv){
             this.layoutManager = gridLayoutManager

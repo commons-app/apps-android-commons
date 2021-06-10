@@ -3,7 +3,6 @@ package fr.free.nrw.commons.customselector.ui.selector
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
@@ -11,13 +10,19 @@ import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Folder
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.theme.BaseActivity
+import javax.inject.Inject
 
 class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectListener {
 
     /**
      * View model.
      */
-    private lateinit var viewModel: CustomSelectorViewModel
+     private lateinit var viewModel: CustomSelectorViewModel
+
+    /**
+     * View Model Factory.
+     */
+    @Inject lateinit var customSelectorViewModelFactory: CustomSelectorViewModelFactory
 
     /**
      * onCreate Activity, sets theme, initialises the view model, setup view.
@@ -26,9 +31,8 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_custom_selector)
 
-        viewModel = ViewModelProvider(this, CustomSelectorViewModelFactory(this.application)).get(
-            CustomSelectorViewModel::class.java
-        )
+        viewModel = ViewModelProvider(this,customSelectorViewModelFactory).get(CustomSelectorViewModel::class.java)
+
         setupViews()
     }
 
