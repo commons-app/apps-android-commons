@@ -5,7 +5,7 @@ import android.net.Uri
 import fr.free.nrw.commons.customselector.listeners.ImageLoaderListener
 import fr.free.nrw.commons.customselector.model.Image
 
-class ImageFileLoader(private val context: Context) {
+class ImageFileLoader(val context: Context) {
 
     /**
      * Load Device Images.

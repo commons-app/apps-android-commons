@@ -250,7 +250,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   @OnClick(R.id.fab_custom_gallery)
   void launchCustomSelector(){
     Intent intent = new Intent(getActivity(), CustomSelectorActivity.class);
-    intent.putExtra("DarkTheme", systemThemeUtils.isDeviceInNightMode());
     startActivity(intent);
   }
 

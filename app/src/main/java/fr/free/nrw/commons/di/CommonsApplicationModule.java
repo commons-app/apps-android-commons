@@ -17,6 +17,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionDao;
+import fr.free.nrw.commons.customselector.ui.selector.ImageFileLoader;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -63,6 +64,11 @@ public class CommonsApplicationModule {
 
     public CommonsApplicationModule(Context applicationContext) {
         this.applicationContext = applicationContext;
+    }
+
+    @Provides
+    public ImageFileLoader providesImageFileLoader() {
+        return new ImageFileLoader(this.applicationContext);
     }
 
     @Provides
