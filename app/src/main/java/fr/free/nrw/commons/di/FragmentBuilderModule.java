@@ -8,6 +8,8 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.contributions.ContributionsListFragment;
+import fr.free.nrw.commons.customselector.ui.selector.FolderFragment;
+import fr.free.nrw.commons.customselector.ui.selector.ImageFragment;
 import fr.free.nrw.commons.explore.ExploreFragment;
 import fr.free.nrw.commons.explore.ExploreListRootFragment;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
@@ -48,6 +50,12 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract MediaDetailFragment bindMediaDetailFragment();
+
+    @ContributesAndroidInjector
+    abstract FolderFragment bindFolderFragment();
+
+    @ContributesAndroidInjector
+    abstract ImageFragment bindImageFragment();
 
     @ContributesAndroidInjector
     abstract MediaDetailPagerFragment bindMediaDetailPagerFragment();
