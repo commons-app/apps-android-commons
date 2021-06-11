@@ -50,7 +50,7 @@ class   FolderAdapter(
         val count = folder.images.size
 //        val previewImage = folder.images[0]
         holder.name.text = folder.name
-        holder.count.text= count.toString()
+        holder.count.text = count.toString()
         holder.itemView.setOnClickListener{
             itemClickListener.onFolderClick(folder)
         }
