@@ -339,12 +339,6 @@ public class ContributionsFragment
         getChildFragmentManager().executePendingTransactions();
     }
 
-    public Intent getUploadServiceIntent(){
-        Intent intent = new Intent(getActivity(), UploadService.class);
-        intent.setAction(UploadService.ACTION_START_SERVICE);
-        return intent;
-    }
-
     @SuppressWarnings("ConstantConditions")
     private void setUploadCount() {
         compositeDisposable.add(okHttpJsonApiClient
