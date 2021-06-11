@@ -105,7 +105,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         super.onBecameVisible();
         // Select Place depiction as the fragment becomes visible to ensure that the most up to date
         // Place is used (i.e. if the user accepts a nearby place dialog)
-        presenter.selectPlaceDepiction();
+        presenter.selectPlaceDepictions();
     }
 
     @Override

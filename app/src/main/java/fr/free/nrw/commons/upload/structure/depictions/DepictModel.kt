@@ -28,30 +28,28 @@ class DepictModel @Inject constructor(private val depictsClient: DepictsClient) 
     fun searchAllEntities(query: String): Flowable<List<DepictedItem>> {
         return if (query.isBlank())
             nearbyPlaces.switchMap { places: List<Place> ->
-                depictsClient.getEntities(places.toIds())
-                    .map {
-                        it.entities()
-                            .values
-                            .mapIndexed { index, entity -> DepictedItem(entity, places[index]) }
-                    }
-                    .onErrorResumeWithEmptyList()
-                    .toFlowable()
+                getPlaceDepictions(places).toFlowable()
             }
         else
             networkItems(query)
     }
 
     /**
-     * Provides a [DepictedItem] for a given [Place] via an [Observable], returning an empty
-     * observable if the given place is null or has no entity id
+     * Provides [DepictedItem] instances via a [Single] for a given list of [Place], providing an
+     * empty list if no places are provided or if there is an error
      */
-    fun getPlaceDepiction(place: Place?): Observable<DepictedItem> {
-        return place?.wikiDataEntityId?.let { id ->
-                depictsClient.getEntities(id)
-                    .flatMapObservable { Observable.fromIterable(it.entities().values) }
-                    .map { DepictedItem(it, place) }
-            } ?: Observable.empty()
-    }
+    fun getPlaceDepictions(places: List<Place>): Single<List<DepictedItem>> =
+        places.toIds().let { ids ->
+            if (ids.isNotEmpty())
+                depictsClient.getEntities(ids)
+                    .map{
+                        it.entities()
+                            .values
+                            .mapIndexed { index, entity ->  DepictedItem(entity, places[index])}
+                    }
+                    .onErrorResumeWithEmptyList()
+            else Single.just(emptyList())
+        }
 
     private fun networkItems(query: String): Flowable<List<DepictedItem>> {
         return depictsClient.searchForDepictions(query, SEARCH_DEPICTS_LIMIT, 0)

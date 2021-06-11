@@ -61,9 +61,9 @@ public interface DepictsContract {
         void searchForDepictions(String query);
 
         /**
-         * Selects an associated place (if any) as a depiction
+         * Selects all associated places (if any) as depictions
          */
-        void selectPlaceDepiction();
+        void selectPlaceDepictions();
 
         /**
          * Check if depictions were selected

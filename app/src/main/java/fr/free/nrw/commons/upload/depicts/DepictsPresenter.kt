@@ -85,29 +85,30 @@ class DepictsPresenter @Inject constructor(
     }
 
     /**
-     * Selects the depiction retrieved by the repository for an associated place as if it were
-     * clicked by the user
-     *
-     * Retrieves the [DepictedItem] from the repository and calls [onDepictItemClicked]
+     * Selects the place depictions retrieved by the repository
      */
-    override fun selectPlaceDepiction() {
-        compositeDisposable.add(repository.placeDepiction
+    override fun selectPlaceDepictions() {
+        compositeDisposable.add(repository.placeDepictions
             .subscribeOn(ioScheduler)
             .observeOn(mainThreadScheduler)
-            .subscribe { depictedItem ->
-                depictedItem.isSelected = true
-                selectNewDepiction(depictedItem)
-            }
+            .subscribe(::selectNewDepictions)
         )
     }
 
-    private fun selectNewDepiction(depictedItem: DepictedItem) {
-        repository.onDepictItemClicked(depictedItem)
+    /**
+     * Selects each [DepictedItem] in a given list as if they were clicked by the user by calling
+     * [onDepictItemClicked] for each depiction and adding the depictions to [depictedItems]
+     */
+    private fun selectNewDepictions(toSelect: List<DepictedItem>) {
+        toSelect.forEach {
+            it.isSelected = true
+            repository.onDepictItemClicked(it)
+        }
 
-        // Add the new selection to the list of depicted items so that the selection appears
+        // Add the new selections to the list of depicted items so that the selections appear
         // immediately (i.e. without any search term queries)
         depictedItems.value?.toMutableList()
-            ?.let { listOf(depictedItem) + it }
+            ?.let { toSelect + it }
             ?.distinctBy(DepictedItem::id)
             ?.let { depictedItems.value = it }
     }
