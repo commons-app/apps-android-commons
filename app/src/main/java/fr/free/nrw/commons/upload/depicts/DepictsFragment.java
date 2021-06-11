@@ -154,6 +154,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     @Override
     public void setDepictsList(List<DepictedItem> depictedItemList) {
         adapter.setItems(depictedItemList);
+        depictsRecyclerView.smoothScrollToPosition(0);
     }
 
     @OnClick(R.id.depicts_next)
