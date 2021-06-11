@@ -19,30 +19,30 @@
       android:background="@color/white"
       android:layout_height="match_parent">
 
-      <ImageView
+      <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/folder_thumbnail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
-        android:alpha="0.15"
         android:scaleType="centerCrop" />
 
       <View
         android:id="@+id/album_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.05" />
+        android:background="@color/black"
+        android:alpha="0.15" />
 
       <LinearLayout
         android:id="@+id/folder_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#4D000000"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
           android:id="@+id/folder_name"
-          style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+          android:textColor="@color/white"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_margin="@dimen/dimen_6"
@@ -50,18 +50,17 @@
           android:ellipsize="end"
           android:padding="@dimen/dimen_6"
           android:singleLine="true"
-          android:textSize="16sp"
+          android:textSize="15sp"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintLeft_toLeftOf="parent" />
 
         <TextView
           android:id="@+id/folder_count"
-          style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+          android:textColor="@color/white"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_margin="5dp"
-          android:textSize="16sp"
-          android:textStyle="bold"
+          android:textSize="14sp"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintRight_toRightOf="parent" />
 

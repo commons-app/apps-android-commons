@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.model.Folder
@@ -48,7 +49,8 @@ class   FolderAdapter(
     override fun onBindViewHolder(holder: FolderViewHolder, position: Int) {
         val folder = folders[position]
         val count = folder.images.size
-//        val previewImage = folder.images[0]
+        val previewImage = folder.images[0]
+        Glide.with(context).load(previewImage.uri).into(holder.image)
         holder.name.text = folder.name
         holder.count.text = count.toString()
         holder.itemView.setOnClickListener{
