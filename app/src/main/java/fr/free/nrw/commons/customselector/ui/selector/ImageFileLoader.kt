@@ -82,7 +82,6 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
         listener.onImageLoaded(images)
     }
 
-
     /**
      * Abort loading images.
      */
