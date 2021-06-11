@@ -15,6 +15,7 @@ object ImageHelper {
                 folder = Folder(bucketId, bucketName)
                 folderMap[bucketId] = folder
             }
+            folder.images.add(image)
         }
         return ArrayList(folderMap.values)
     }
