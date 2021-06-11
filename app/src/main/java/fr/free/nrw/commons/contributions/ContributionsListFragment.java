@@ -259,8 +259,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
   @OnClick(R.id.fab_custom_gallery)
   void launchCustomSelector(){
-    Intent intent = new Intent(getActivity(), CustomSelectorActivity.class);
-    startActivity(intent);
+    controller.initiateCustomGalleryPickWithPermission(getActivity());
   }
 
   private void animateFAB(final boolean isFabOpen) {
