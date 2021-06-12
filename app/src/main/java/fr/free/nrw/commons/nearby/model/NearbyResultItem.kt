@@ -61,6 +61,7 @@ class NearbyResultItem(private val item: ResultTuple?,
 
     fun getDescription(): ResultTuple {
         return description ?: ResultTuple()
+    }
 
     fun getEndTime(): ResultTuple {
         return endTime ?: ResultTuple()
