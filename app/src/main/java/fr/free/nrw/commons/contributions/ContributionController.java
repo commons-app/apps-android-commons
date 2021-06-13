@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity;
 import fr.free.nrw.commons.filepicker.DefaultCallback;
 import fr.free.nrw.commons.filepicker.FilePicker;
 import fr.free.nrw.commons.filepicker.FilePicker.ImageSource;
@@ -57,6 +58,25 @@ public class ContributionController {
     public void initiateGalleryPick(final Activity activity, final boolean allowMultipleUploads) {
         initiateGalleryUpload(activity, allowMultipleUploads);
     }
+
+    /**
+     * Initiate gallery picker with permission
+     */
+    public void initiateCustomGalleryPickWithPermission(final Activity activity) {
+        boolean useExtStorage = defaultKvStore.getBoolean("useExternalStorage", true);
+        Intent intent = new Intent(activity,CustomSelectorActivity.class);
+        if (!useExtStorage) {
+            activity.startActivity(intent);
+            return;
+        }
+
+        PermissionUtils.checkPermissionsAndPerformAction(activity,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            () -> activity.startActivity(intent),
+            R.string.storage_permission_title,
+            R.string.write_storage_permission_rationale);
+    }
+
 
     /**
      * Open chooser for gallery uploads
