@@ -11,8 +11,14 @@ import kotlin.coroutines.CoroutineContext
 
 class ImageFileLoader(val context: Context) : CoroutineScope{
 
+    /**
+     * Coroutine context for fetching images.
+     */
     override val coroutineContext: CoroutineContext = Dispatchers.Main
 
+    /**
+     * Media paramerters required.
+     */
     private val projection = arrayOf(
         MediaStore.Images.Media._ID,
         MediaStore.Images.Media.DISPLAY_NAME,
@@ -21,7 +27,7 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
         MediaStore.Images.Media.BUCKET_DISPLAY_NAME)
 
     /**
-     * Load Device Images.
+     * Load Device Images under coroutine.
      */
     fun loadDeviceImages(listener: ImageLoaderListener, scope: CoroutineScope) {
         launch(Dispatchers.Main) {
@@ -32,6 +38,9 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
     }
 
 
+    /**
+     * Load the device images using cursor
+     */
     private fun getImages(listener:ImageLoaderListener) {
         val cursor = context.contentResolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null, null, MediaStore.Images.Media.DATE_ADDED + " DESC")
         if (cursor == null) {

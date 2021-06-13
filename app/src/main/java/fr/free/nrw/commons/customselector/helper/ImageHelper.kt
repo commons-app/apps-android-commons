@@ -10,8 +10,15 @@ import java.security.NoSuchAlgorithmException
 import kotlin.collections.ArrayList
 import kotlin.collections.LinkedHashMap
 
+/**
+ * Image Helper object, includes all the static functions required by custom selector
+ */
+
 object ImageHelper {
 
+    /**
+     * Returns the list of folders from given image list.
+     */
     fun folderListFromImages(images: List<Image>): List<Folder> {
         val folderMap: MutableMap<Long, Folder> = LinkedHashMap()
         for (image in images) {
@@ -27,6 +34,9 @@ object ImageHelper {
         return ArrayList(folderMap.values)
     }
 
+    /**
+     * Filters the images based on the given bucketId (folder)
+     */
     fun filterImages(images: ArrayList<Image>, bukketId: Long?): ArrayList<Image> {
         if (bukketId == null) return images
 
@@ -39,6 +49,9 @@ object ImageHelper {
         return filteredImages
     }
 
+    /**
+     * Generates the file sha1 from file input stream.
+     */
     fun generateSHA1(`is`: InputStream): String {
         val digest: MessageDigest = try {
             MessageDigest.getInstance("SHA1")
@@ -70,6 +83,9 @@ object ImageHelper {
         }
     }
 
+    /**
+     * Gets the file input stream from the file path.
+     */
     @Throws(FileNotFoundException::class)
     fun getFileInputStream(filePath: String?): InputStream {
         return FileInputStream(filePath)
