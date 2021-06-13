@@ -249,6 +249,16 @@
                       android:drawablePadding="@dimen/tiny_gap"
                       android:drawableStart="?attr/iconMap24"
                       tools:text="Coordinates link" />
+
+                    <Button
+                      android:id="@+id/coordinate_edit"
+                      android:layout_width="24dp"
+                      android:layout_height="24dp"
+                      android:layout_marginTop="@dimen/standard_gap"
+                      android:layout_marginBottom="@dimen/standard_gap"
+                      android:layout_gravity="end"
+                      android:background="@drawable/ic_baseline_edit_24" />
+
                 </LinearLayout>
 
                 <LinearLayout
