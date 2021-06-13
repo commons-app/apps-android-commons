@@ -38,6 +38,9 @@ class CustomSelectorViewModel(var context: Context,var imageFileLoader: ImageFil
         },scope)
     }
 
+    /**
+     * Clear the coroutine task linked with context.
+     */
     override fun onCleared() {
         scope.cancel()
         super.onCleared()
