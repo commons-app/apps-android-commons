@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 
@@ -49,6 +50,7 @@ class ImageAdapter(
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val image=images[position]
         // todo load image thumbnail, set selected view.
+        Glide.with(context).load(image.uri).into(holder.image)
         holder.itemView.setOnClickListener {
             selectOrRemoveImage(image, position)
         }

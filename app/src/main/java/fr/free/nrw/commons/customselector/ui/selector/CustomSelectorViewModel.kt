@@ -1,14 +1,20 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import fr.free.nrw.commons.customselector.listeners.ImageLoaderListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.model.Result
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 
-class CustomSelectorViewModel(val context: Context,var imageFileLoader: ImageFileLoader) : ViewModel() {
+class CustomSelectorViewModel(var context: Context,var imageFileLoader: ImageFileLoader) : ViewModel() {
+
+    private val scope = CoroutineScope(Dispatchers.Main)
 
     /**
      * Result Live Data
@@ -20,9 +26,8 @@ class CustomSelectorViewModel(val context: Context,var imageFileLoader: ImageFil
      */
     fun fetchImages() {
         result.postValue(Result(CallbackStatus.FETCHING, arrayListOf()))
-        imageFileLoader.abortLoadImage()
+        scope.cancel()
         imageFileLoader.loadDeviceImages(object: ImageLoaderListener {
-
             override fun onImageLoaded(images: ArrayList<Image>) {
                 result.postValue(Result(CallbackStatus.SUCCESS, images))
             }
@@ -30,7 +35,14 @@ class CustomSelectorViewModel(val context: Context,var imageFileLoader: ImageFil
             override fun onFailed(throwable: Throwable) {
                 result.postValue(Result(CallbackStatus.SUCCESS, arrayListOf()))
             }
+        },scope)
+    }
 
-        })
+    /**
+     * Clear the coroutine task linked with context.
+     */
+    override fun onCleared() {
+        scope.cancel()
+        super.onCleared()
     }
 }
