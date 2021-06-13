@@ -167,6 +167,15 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 processingUploads.build()
             )
 
+            /**
+             * To avoid race condition when multiple of these workers are working, assign this state
+            so that the next one does not process these contribution again
+             */
+            queuedContributions.forEach {
+                it.state=Contribution.STATE_IN_PROGRESS
+                contributionDao.saveSynchronous(it)
+            }
+
             queuedContributions.asFlow().map { contribution ->
                 /**
                  * If the limited connection mode is on, lets iterate through the queued
@@ -177,12 +186,12 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 if (isLimitedConnectionModeEnabled()) {
                     if (contribution.state == Contribution.STATE_QUEUED) {
                         contribution.state = Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE
-                        contributionDao.save(contribution)
+                        contributionDao.saveSynchronous(contribution)
                     }
                 } else {
                     contribution.transferred = 0
                     contribution.state = Contribution.STATE_IN_PROGRESS
-                    contributionDao.save(contribution)
+                    contributionDao.saveSynchronous(contribution)
                     uploadContribution(contribution = contribution)
                 }
             }.collect()
@@ -298,6 +307,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                         Timber.e(exception)
                         Timber.e("Upload from stash failed for contribution : $filename")
                         showFailedNotification(contribution)
+                        contribution.state=Contribution.STATE_FAILED
                         if (STASH_ERROR_CODES.contains(exception.message)) {
                             clearChunks(contribution)
                         }
@@ -306,26 +316,28 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 StashUploadState.PAUSED -> {
                     showPausedNotification(contribution)
                     contribution.state = Contribution.STATE_PAUSED
-                    contributionDao.save(contribution).blockingGet()
+                    contributionDao.saveSynchronous(contribution)
                 }
                 else -> {
                     Timber.e("""upload file to stash failed with status: ${stashUploadResult.state}""")
                     showFailedNotification(contribution)
                     contribution.state = Contribution.STATE_FAILED
                     contribution.chunkInfo = null
-                    contributionDao.save(contribution).blockingAwait()
+                    contributionDao.saveSynchronous(contribution)
                 }
             }
         }catch (exception: Exception){
             Timber.e(exception)
             Timber.e("Stash upload failed for contribution: $filename")
             showFailedNotification(contribution)
+            contribution.state=Contribution.STATE_FAILED
+            clearChunks(contribution)
         }
     }
 
     private fun clearChunks(contribution: Contribution) {
         contribution.chunkInfo=null
-        contributionDao.save(contribution).blockingAwait()
+        contributionDao.saveSynchronous(contribution)
     }
 
     /**
