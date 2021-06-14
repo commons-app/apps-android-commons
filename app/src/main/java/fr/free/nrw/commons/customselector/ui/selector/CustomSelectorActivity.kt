@@ -91,6 +91,7 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
      * override Selected Images Change, update view model selected images.
      */
     override fun onSelectedImagesChanged(selectedImages: ArrayList<Image>) {
+        viewModel.selectedImages.value = selectedImages
         // todo update selected images in view model.
     }
 
