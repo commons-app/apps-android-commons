@@ -66,5 +66,4 @@ class NearbyResultItem(private val item: ResultTuple?,
     fun getEndTime(): ResultTuple {
         return endTime ?: ResultTuple()
     }
-
 }

@@ -74,7 +74,7 @@ class Media constructor(
      * Gets the coordinates of where the file was created.
      * @return file coordinates as a LatLng
      */
-    val coordinates: LatLng? = null,
+    var coordinates: LatLng? = null,
     val captions: Map<String, String> = emptyMap(),
     val descriptions: Map<String, String> = emptyMap(),
     val depictionIds: List<String> = emptyList()

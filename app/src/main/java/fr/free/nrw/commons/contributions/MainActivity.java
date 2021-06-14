@@ -318,7 +318,7 @@ public class MainActivity  extends BaseActivity
         } else {
             WorkManager.getInstance(getApplicationContext()).enqueueUniqueWork(
                 UploadWorker.class.getSimpleName(),
-                ExistingWorkPolicy.KEEP, OneTimeWorkRequest.from(UploadWorker.class));
+                ExistingWorkPolicy.APPEND_OR_REPLACE, OneTimeWorkRequest.from(UploadWorker.class));
 
             viewUtilWrapper
                 .showShortToast(getBaseContext(), getString(R.string.limited_connection_disabled));

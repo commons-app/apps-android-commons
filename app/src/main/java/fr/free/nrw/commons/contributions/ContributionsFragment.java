@@ -340,7 +340,6 @@ public class ContributionsFragment
     }
 
 
-
     @SuppressWarnings("ConstantConditions")
     private void setUploadCount() {
         compositeDisposable.add(okHttpJsonApiClient
