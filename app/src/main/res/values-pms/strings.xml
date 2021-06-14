@@ -479,6 +479,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Impossìbil gionté dle categorìe.</string>
   <string name="category_edit_button_text">Agiorné le categorìe</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Tentativ d\'agiorné le coordinà.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Agiornament ëd le coordinà</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Sucess</string>
+  <string name="coordinates_edit_helper_show_edit_message">Giontà la coordinà %1$s.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Impossìbil gionté lé coordinà.</string>
+  <string name="coordinates_picking_unsuccessful">Impossìbil oten-e le coordinà.</string>
   <string name="share_image_via">Partagé la plancia via</string>
   <string name="no_achievements_yet">A l\'ha pa ancor fàit ëd contribussion</string>
   <string name="account_created">Cont creà!</string>
@@ -576,4 +582,10 @@
   <string name="app_ui_language">Lenga d\'antërfassa utent ëd l\'aplicassion</string>
   <string name="remove">A gava na legenda e na descrission</string>
   <string name="read_help_link">Lese ëd pi</string>
+  <string name="choose_a_location">Serne na locassion</string>
+  <string name="pan_and_zoom_to_adjust">Slarghé e strenze për buté bin</string>
+  <string name="exit_location_picker">Seurte dal selessionador ëd locassion</string>
+  <string name="select_location_location_picker">Selessioné na locassion</string>
+  <string name="location_picker_image_view">Vista dla plancia dël selessionador ëd locassion</string>
+  <string name="location_picker_image_view_shadow">Locassion ëd picker_image_view_shadow</string>
 </resources>
