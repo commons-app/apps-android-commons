@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
@@ -10,6 +12,7 @@ import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Folder
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.theme.BaseActivity
+import java.io.File
 import javax.inject.Inject
 
 class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectListener {
@@ -73,7 +76,8 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
         val back : ImageButton = findViewById(R.id.back)
         back.setOnClickListener { onBackPressed() }
 
-        // todo done listener.
+        val done : ImageButton = findViewById(R.id.done)
+        done.setOnClickListener { onDone() }
     }
 
     /**
@@ -93,6 +97,32 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
     override fun onSelectedImagesChanged(selectedImages: ArrayList<Image>) {
         viewModel.selectedImages.value = selectedImages
         // todo update selected images in view model.
+    }
+
+    fun onDone() {
+        val selectedImages = viewModel.selectedImages.value
+        if(selectedImages.isNullOrEmpty()) {
+           finishPickImages(arrayListOf())
+            return
+        }
+        var i = 0
+        while (i < selectedImages.size) {
+            val path = selectedImages[i].path
+            val file = File(path)
+            if (!file.exists()) {
+                selectedImages.removeAt(i)
+                i--
+            }
+            i++
+        }
+        finishPickImages(selectedImages)
+    }
+
+    private fun finishPickImages(images: ArrayList<Image>) {
+        val data = Intent()
+        data.putParcelableArrayListExtra("Images", images)
+        setResult(Activity.RESULT_OK, data)
+        finish()
     }
 
     /**

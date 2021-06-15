@@ -63,16 +63,11 @@ public class ContributionController {
      * Initiate gallery picker with permission
      */
     public void initiateCustomGalleryPickWithPermission(final Activity activity) {
-        boolean useExtStorage = defaultKvStore.getBoolean("useExternalStorage", true);
-        Intent intent = new Intent(activity,CustomSelectorActivity.class);
-        if (!useExtStorage) {
-            activity.startActivity(intent);
-            return;
-        }
+        setPickerConfiguration(activity,true);
 
         PermissionUtils.checkPermissionsAndPerformAction(activity,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            () -> activity.startActivity(intent),
+            () -> FilePicker.openCustomSelector(activity, 0),
             R.string.storage_permission_title,
             R.string.write_storage_permission_rationale);
     }
