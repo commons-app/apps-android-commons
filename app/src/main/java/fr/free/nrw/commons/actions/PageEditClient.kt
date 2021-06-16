@@ -6,7 +6,7 @@ import org.wikipedia.csrf.CsrfTokenClient
 
 /**
  * This class acts as a Client to facilitate wiki page editing
- * services to various dependency providing modules such as the Network module, the Review Controller ,etc
+ * services to various dependency providing modules such as the Network module, the Review Controller, etc.
  *
  * The methods provided by this class will post to the Media wiki api
  * documented at: https://commons.wikimedia.org/w/api.php?action=help&modules=edit
