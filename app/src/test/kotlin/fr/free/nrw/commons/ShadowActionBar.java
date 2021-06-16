@@ -8,14 +8,14 @@ import org.robolectric.annotation.Implements;
 @Implements(ActionBar.class)
 public class ShadowActionBar {
 
-  private boolean showHomeAsUp;
+    private boolean showHomeAsUp;
 
-  public boolean getShowHomeAsUp() {
-    return showHomeAsUp;
-  }
+    public boolean getShowHomeAsUp() {
+        return showHomeAsUp;
+    }
 
-  @Implementation
-  void setDisplayHomeAsUpEnabled(final boolean showHomeAsUp) {
-    this.showHomeAsUp = showHomeAsUp;
-  }
+    @Implementation
+    void setDisplayHomeAsUpEnabled(final boolean showHomeAsUp) {
+        this.showHomeAsUp = showHomeAsUp;
+    }
 }

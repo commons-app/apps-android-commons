@@ -9,22 +9,22 @@ import javax.inject.Singleton;
 @Singleton
 public class ImageUtilsWrapper {
 
-  @Inject
-  public ImageUtilsWrapper() {
+    @Inject
+    public ImageUtilsWrapper() {
 
-  }
+    }
 
-  public Single<Integer> checkIfImageIsTooDark(String bitmapPath) {
-    return Single.fromCallable(() -> ImageUtils.checkIfImageIsTooDark(bitmapPath))
-        .subscribeOn(Schedulers.computation());
-  }
+    public Single<Integer> checkIfImageIsTooDark(String bitmapPath) {
+        return Single.fromCallable(() -> ImageUtils.checkIfImageIsTooDark(bitmapPath))
+            .subscribeOn(Schedulers.computation());
+    }
 
-  public Single<Integer> checkImageGeolocationIsDifferent(String geolocationOfFileString,
-      LatLng latLng) {
-    return Single.fromCallable(
-        () -> ImageUtils.checkImageGeolocationIsDifferent(geolocationOfFileString, latLng))
-        .subscribeOn(Schedulers.computation())
-        .map(isDifferent -> isDifferent ? ImageUtils.IMAGE_GEOLOCATION_DIFFERENT
-            : ImageUtils.IMAGE_OK);
-  }
+    public Single<Integer> checkImageGeolocationIsDifferent(String geolocationOfFileString,
+        LatLng latLng) {
+        return Single.fromCallable(
+            () -> ImageUtils.checkImageGeolocationIsDifferent(geolocationOfFileString, latLng))
+            .subscribeOn(Schedulers.computation())
+            .map(isDifferent -> isDifferent ? ImageUtils.IMAGE_GEOLOCATION_DIFFERENT
+                : ImageUtils.IMAGE_OK);
+    }
 }
