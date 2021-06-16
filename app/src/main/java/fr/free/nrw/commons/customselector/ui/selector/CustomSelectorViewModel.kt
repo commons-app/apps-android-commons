@@ -13,12 +13,18 @@ import kotlinx.coroutines.cancel
 
 class CustomSelectorViewModel(var context: Context,var imageFileLoader: ImageFileLoader) : ViewModel() {
 
+    /**
+     * Scope for coroutine task (image fetch).
+     */
     private val scope = CoroutineScope(Dispatchers.Main)
 
+    /**
+     * Stores selected images.
+     */
     var selectedImages: MutableLiveData<ArrayList<Image>> = MutableLiveData()
 
     /**
-     * Result Live Data
+     * Result Live Data.
      */
     val result = MutableLiveData(Result(CallbackStatus.IDLE, arrayListOf()))
 

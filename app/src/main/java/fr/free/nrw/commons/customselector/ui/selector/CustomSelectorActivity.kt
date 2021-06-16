@@ -99,6 +99,10 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
         // todo update selected images in view model.
     }
 
+    /**
+     * OnDone clicked.
+     * Get the selected images. Remove any non existent file, forward the data to finish selector.
+     */
     fun onDone() {
         val selectedImages = viewModel.selectedImages.value
         if(selectedImages.isNullOrEmpty()) {
@@ -118,6 +122,10 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
         finishPickImages(selectedImages)
     }
 
+    /**
+     * finishPickImages, Load the data to the intent and set result.
+     * Finish the activity.
+     */
     private fun finishPickImages(images: ArrayList<Image>) {
         val data = Intent()
         data.putParcelableArrayListExtra("Images", images)
@@ -136,17 +144,5 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
             changeTitle(getString(R.string.custom_selector_title))
         }
     }
-
-
-    /**
-     *
-     * TODO
-     * Permission check.
-     * OnDone
-     * Activity Result.
-     *
-     *
-     */
-
 
 }

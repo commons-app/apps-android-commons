@@ -27,11 +27,15 @@ class ImageAdapter(
 
     RecyclerViewAdapter<ImageAdapter.ImageViewHolder>(context) {
 
-
+    /**
+     * ImageSelectedOrUpdated payload class.
+     */
     class ImageSelectedOrUpdated
 
+    /**
+     * ImageUnselected payload class.
+     */
     class ImageUnselected
-
 
     /**
      * Currently selected images.
@@ -124,19 +128,31 @@ class ImageAdapter(
         private val uploadedGroup: Group = itemView.findViewById(R.id.uploaded_group)
         private val selectedGroup: Group = itemView.findViewById(R.id.selected_group)
 
+        /**
+         * Item selected view.
+         */
         fun itemSelected(index: Int) {
             selectedGroup.visibility = View.VISIBLE
             selectedNumber.text = index.toString()
         }
 
+        /**
+         * Item Unselected view.
+         */
         fun itemUnselected() {
             selectedGroup.visibility = View.GONE
         }
 
+        /**
+         * Item Uploaded view.
+         */
         fun itemUploaded() {
             uploadedGroup.visibility = View.VISIBLE
         }
 
+        /**
+         * Item Not Uploaded view.
+         */
         fun itemNotUploaded() {
             uploadedGroup.visibility = View.GONE
         }
