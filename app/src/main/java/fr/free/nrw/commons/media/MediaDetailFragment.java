@@ -21,6 +21,7 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -336,15 +337,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         });
 
         return view;
-    }
-
-  @OnClick(R.id.mediaDetailImageViewSpacer)
-    @Override
-    public void onAttach(final Context context) {
-        super.onAttach(context);
-        if (getParentFragment() != null) {
-            callback = (Callback) getParentFragment();
-        }
     }
 
     @OnClick(R.id.mediaDetailImageViewSpacer)
