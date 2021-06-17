@@ -265,34 +265,34 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         });
     }
 
-  @OnClick(R.id.fab_custom_gallery)
-  void launchCustomSelector(){
-    controller.initiateCustomGalleryPickWithPermission(getActivity());
-  }
-
-  private void animateFAB(final boolean isFabOpen) {
-    this.isFabOpen = !isFabOpen;
-    if (fabPlus.isShown()) {
-      if (isFabOpen) {
-        fabPlus.startAnimation(rotate_backward);
-        fabCamera.startAnimation(fab_close);
-        fabGallery.startAnimation(fab_close);
-        fabCustomGallery.startAnimation(fab_close);
-        fabCamera.hide();
-        fabGallery.hide();
-        fabCustomGallery.hide();
-      } else {
-        fabPlus.startAnimation(rotate_forward);
-        fabCamera.startAnimation(fab_open);
-        fabGallery.startAnimation(fab_open);
-        fabCustomGallery.startAnimation(fab_open);
-        fabCamera.show();
-        fabGallery.show();
-        fabCustomGallery.show();
-      }
-      this.isFabOpen = !isFabOpen;
+    @OnClick(R.id.fab_custom_gallery)
+    void launchCustomSelector(){
+        controller.initiateCustomGalleryPickWithPermission(getActivity());
     }
-  }
+
+    private void animateFAB(final boolean isFabOpen) {
+        this.isFabOpen = !isFabOpen;
+        if (fabPlus.isShown()) {
+        if (isFabOpen) {
+            fabPlus.startAnimation(rotate_backward);
+            fabCamera.startAnimation(fab_close);
+            fabGallery.startAnimation(fab_close);
+            fabCustomGallery.startAnimation(fab_close);
+            fabCamera.hide();
+            fabGallery.hide();
+            fabCustomGallery.hide();
+        } else {
+            fabPlus.startAnimation(rotate_forward);
+            fabCamera.startAnimation(fab_open);
+            fabGallery.startAnimation(fab_open);
+            fabCustomGallery.startAnimation(fab_open);
+            fabCamera.show();
+            fabGallery.show();
+            fabCustomGallery.show();
+        }
+        this.isFabOpen = !isFabOpen;
+        }
+    }
 
     /**
      * Shows welcome message if user has no contributions yet i.e. new user.

@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import fr.free.nrw.commons.customselector.listeners.ImageLoaderListener
@@ -14,10 +13,18 @@ import kotlinx.coroutines.cancel
 
 class CustomSelectorViewModel(var context: Context,var imageFileLoader: ImageFileLoader) : ViewModel() {
 
+    /**
+     * Scope for coroutine task (image fetch).
+     */
     private val scope = CoroutineScope(Dispatchers.Main)
 
     /**
-     * Result Live Data
+     * Stores selected images.
+     */
+    var selectedImages: MutableLiveData<ArrayList<Image>> = MutableLiveData()
+
+    /**
+     * Result Live Data.
      */
     val result = MutableLiveData(Result(CallbackStatus.IDLE, arrayListOf()))
 
