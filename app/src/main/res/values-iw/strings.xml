@@ -257,6 +257,8 @@
   <string name="upload_problem_different_geolocation">התמונה צולמה במקום אחר.</string>
   <string name="upload_problem_fbmd">נא להעלות רק תמונות שהעלית בעצמך. לא להעלות תמונות שמצאת בחשבונות של כל מיני אנשים בפייסבוק.</string>
   <string name="upload_problem_do_you_continue">האם ברצונך עדיין להעלות את התמונה הזאת?</string>
+  <string name="upload_connection_error_alert_title">שגיאת חיבור</string>
+  <string name="upload_connection_error_alert_detail">תהליך ההעלאה דורש גישה פעילה לאינטרנט. נא לבדוק את חיבור הרשת שלך.</string>
   <string name="upload_problem_image">נמצאו בעיות בתמונה</string>
   <string name="internet_downloaded">נא להעלות רק תמונות שצילמת בעצמך. לא להעלות תמונות שהורדת מהאינטרנט.</string>
   <string name="use_external_storage">שמירת צילומים מתוך היישומון</string>
@@ -511,6 +513,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">לא ניתן להוסיף קטגוריות.</string>
   <string name="category_edit_button_text">עדכון קטגוריות</string>
+  <string name="coordinates_edit_helper_make_edit_toast">מנסים לעדכן נקודות ציון.</string>
+  <string name="coordinates_edit_helper_show_edit_title">עדכון נקודות ציון</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">זה עבד</string>
+  <string name="coordinates_edit_helper_show_edit_message">נקודות הציון %1$s נוספות.</string>
+  <string name="coordinates_edit_helper_edit_message_else">לא היה אפשר להוסיף נקודות ציון.</string>
+  <string name="coordinates_picking_unsuccessful">לא ניתן לעדכן נקודות ציון.</string>
   <string name="share_image_via">שיתוף תמונה דרך</string>
   <string name="no_achievements_yet">לא תרמת שום דבר עדיין</string>
   <string name="account_created">חשבון נוצר!</string>
@@ -608,4 +616,9 @@
   <string name="app_ui_language">שפת ממשק המשתמש של היישום</string>
   <string name="remove">הסרת כיתוב ותיאור</string>
   <string name="read_help_link">מידע נוסף</string>
+  <string name="choose_a_location">נא לבחור מיקום</string>
+  <string name="pan_and_zoom_to_adjust">לצדד וקרב כדי לכוונן</string>
+  <string name="exit_location_picker">יציאה מבורר המיקום</string>
+  <string name="select_location_location_picker">נא לבחור מיקום</string>
+  <string name="location_picker_image_view">תצוגת תמונה של בורר המיקום</string>
 </resources>

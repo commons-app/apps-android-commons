@@ -241,6 +241,8 @@
   <string name="upload_problem_different_geolocation">Esta foto foi tirada em um local diferente.</string>
   <string name="upload_problem_fbmd">Por favor, apenas envie fotos que você tirou sozinho. Não faça upload de fotos que você encontrou nas contas do Facebook de outras pessoas.</string>
   <string name="upload_problem_do_you_continue">Você ainda quer enviar esta foto?</string>
+  <string name="upload_connection_error_alert_title">Erro de conexão</string>
+  <string name="upload_connection_error_alert_detail">O processo de carregamento requer acesso a internet\n     ativa. Verifique sua conexão de rede.</string>
   <string name="upload_problem_image">Problemas encontrados na imagem</string>
   <string name="internet_downloaded">Por favor, só envie fotos que você tirou. Não faça upload de fotos baixadas da Internet.</string>
   <string name="use_external_storage">Salvar fotos no aplicativo</string>

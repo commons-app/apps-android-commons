@@ -1,5 +1,10 @@
 # Wikimedia Commons for Android
 
+## v3.0.1
+- Pre-fill desc in Nearby uploads with Wikidata item's label + description
+- Improved ACRA crash reporting
+- Fixed various crashes
+
 ## v3.0.0
 - Added Structured Data to upload workflow, users can now add depicts
 - Added Leaderboard in Achievements screen

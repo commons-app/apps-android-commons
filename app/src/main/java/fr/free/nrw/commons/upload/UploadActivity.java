@@ -289,7 +289,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     public void makeUploadRequest() {
         WorkManager.getInstance(getApplicationContext()).enqueueUniqueWork(
             UploadWorker.class.getSimpleName(),
-            ExistingWorkPolicy.KEEP, OneTimeWorkRequest.from(UploadWorker.class));
+            ExistingWorkPolicy.APPEND_OR_REPLACE, OneTimeWorkRequest.from(UploadWorker.class));
     }
 
     @Override

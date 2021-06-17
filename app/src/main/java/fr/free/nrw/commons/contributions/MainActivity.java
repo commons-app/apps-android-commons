@@ -99,7 +99,9 @@ public class MainActivity  extends BaseActivity
     @Override
     public boolean onSupportNavigateUp() {
         if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
-            contributionsFragment.backButtonClicked();
+            if (!contributionsFragment.backButtonClicked()) {
+                return false;
+            }
         } else {
             onBackPressed();
             showTabs();
@@ -264,16 +266,10 @@ public class MainActivity  extends BaseActivity
     @Override
     public void onBackPressed() {
         if (contributionsFragment != null && activeFragment == ActiveFragment.CONTRIBUTIONS) {
-            // Meas that contribution fragment is visible
-            mediaDetailPagerFragment=contributionsFragment.getMediaDetailPagerFragment();
-            if (mediaDetailPagerFragment ==null) { //means you open the app currently and not open mediaDetailPage fragment
+            // Means that contribution fragment is visible
+            if (!contributionsFragment.backButtonClicked()) {//If this one does not wan't to handle
+                // the back press, let the activity do so
                 super.onBackPressed();
-            } else if (mediaDetailPagerFragment!=null) {
-                if(!mediaDetailPagerFragment.isVisible()){  //means you are at contributions fragement
-                    super.onBackPressed();
-                } else {  //mean you are at mediaDetailPager Fragment
-                    contributionsFragment.backButtonClicked();
-                }
             }
         } else if (nearbyParentFragment != null && activeFragment == ActiveFragment.NEARBY) {
             // Means that nearby fragment is visible
@@ -322,7 +318,7 @@ public class MainActivity  extends BaseActivity
         } else {
             WorkManager.getInstance(getApplicationContext()).enqueueUniqueWork(
                 UploadWorker.class.getSimpleName(),
-                ExistingWorkPolicy.KEEP, OneTimeWorkRequest.from(UploadWorker.class));
+                ExistingWorkPolicy.APPEND_OR_REPLACE, OneTimeWorkRequest.from(UploadWorker.class));
 
             viewUtilWrapper
                 .showShortToast(getBaseContext(), getString(R.string.limited_connection_disabled));

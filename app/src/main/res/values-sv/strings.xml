@@ -232,6 +232,8 @@
   <string name="upload_problem_different_geolocation">Bilden togs på en annan plats.</string>
   <string name="upload_problem_fbmd">Var god ladda bara upp bilder som du själv har tagit. Ladda inte upp bilder som du har hittat på andra personers Facebook-konton.</string>
   <string name="upload_problem_do_you_continue">Vill du fortfarande ladda upp denna bild?</string>
+  <string name="upload_connection_error_alert_title">Anslutningsfel</string>
+  <string name="upload_connection_error_alert_detail">Uppladdningsprocessen kräver aktiv internetåtkomst. Kontrollera din nätverksanslutning.</string>
   <string name="upload_problem_image">Problem hittades i bilden</string>
   <string name="internet_downloaded">Var god ladda bara upp bilder som du själv har tagit. Ladda inte upp bilder som du har laddat ned från Internet.</string>
   <string name="use_external_storage">Spara bilder i appen</string>

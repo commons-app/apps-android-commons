@@ -35,6 +35,8 @@
   <string name="provider_contributions">Mi incargamentos</string>
   <string name="menu_share">Divider</string>
   <string name="write_storage_permission_rationale">Permission necessari: Scriber sur immagazinage externe. Le app non pote acceder a tu camera/galeria sin isto.</string>
+  <string name="upload_connection_error_alert_title">Error de connexion</string>
+  <string name="upload_connection_error_alert_detail">Le processo de incargamento require un accesso a internet active. Per favor verifica tu connexion al rete.</string>
   <string name="use_external_storage">Salveguardar photos prendite in app</string>
   <string name="use_external_storage_summary">Salveguardar le photos prendite con le camera del application sur le immagazinage de tu apparato</string>
   <string name="nearby_location_not_available">\"A proximitate\" poterea non functionar, perque le position geographic non es disponibile.</string>

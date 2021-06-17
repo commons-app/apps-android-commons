@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.media;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_NEEDING_CATEGORIES;
@@ -16,11 +18,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -50,6 +49,9 @@ import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
@@ -62,10 +64,11 @@ import fr.free.nrw.commons.category.CategoryEditHelper;
 import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter;
 import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter.Callback;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
+import fr.free.nrw.commons.coordinates.CoordinateEditHelper;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
-import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
@@ -77,8 +80,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
@@ -88,6 +92,7 @@ import timber.log.Timber;
 public class MediaDetailFragment extends CommonsDaggerSupportFragment implements Callback,
     CategoryEditHelper.Callback {
 
+    private static final int REQUEST_CODE = 1001 ;
     private boolean editable;
     private boolean isCategoryImage;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
@@ -124,6 +129,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     DeleteHelper deleteHelper;
     @Inject
     CategoryEditHelper categoryEditHelper;
+    @Inject
+    CoordinateEditHelper coordinateEditHelper;
     @Inject
     ViewUtilWrapper viewUtil;
     @Inject
@@ -760,6 +767,75 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         }
     }
 
+    @OnClick(R.id.coordinate_edit)
+    public void onUpdateCoordinatesClicked(){
+        goToLocationPickerActivity();
+    }
+
+    /**
+     * Start location picker activity with a request code and get the coordinates from the activity.
+     */
+    private void goToLocationPickerActivity() {
+        /*
+        If location is not provided in media this coordinates will act as a placeholder in
+        location picker activity
+         */
+        double defaultLatitude = 37.773972;
+        double defaultLongitude = -122.431297;
+
+        if (media.getCoordinates() != null) {
+            defaultLatitude = media.getCoordinates().getLatitude();
+            defaultLongitude = media.getCoordinates().getLongitude();
+        }
+        startActivityForResult(new LocationPicker.IntentBuilder()
+            .defaultLocation(new CameraPosition.Builder()
+                .target(new LatLng(defaultLatitude, defaultLongitude))
+                .zoom(16).build())
+            .build(getActivity()), REQUEST_CODE);
+    }
+
+    /**
+     * Get the coordinates and update the existing coordinates.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode,
+        @Nullable final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+
+            assert data != null;
+            final CameraPosition cameraPosition = LocationPicker.getCameraPosition(data);
+
+            if (cameraPosition != null) {
+
+                final String latitude = String.valueOf(cameraPosition.target.getLatitude());
+                final String longitude = String.valueOf(cameraPosition.target.getLongitude());
+                final String accuracy = String.valueOf(cameraPosition.target.getAltitude());
+                String currentLatitude = null;
+                String currentLongitude = null;
+
+                if (media.getCoordinates() != null) {
+                    currentLatitude = String.valueOf(media.getCoordinates().getLatitude());
+                    currentLongitude = String.valueOf(media.getCoordinates().getLongitude());
+                }
+
+                if (!latitude.equals(currentLatitude) || !longitude.equals(currentLongitude)) {
+                    updateCoordinates(latitude, longitude, accuracy);
+                } else if (media.getCoordinates() == null) {
+                    updateCoordinates(latitude, longitude, accuracy);
+                }
+            }
+        } else if (resultCode == RESULT_CANCELED) {
+            viewUtil.showShortToast(getContext(),
+                Objects.requireNonNull(getContext())
+                    .getString(R.string.coordinates_picking_unsuccessful));
+        }
+    }
+
     @OnClick(R.id.update_categories_button)
     public void onUpdateCategoriesClicked() {
         updateCategories(categoryEditSearchRecyclerViewAdapter.getNewCategories());
@@ -780,6 +856,24 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 onOutsideOfCategoryEditClicked();
                 media.setAddedCategories(selectedCategories);
                 updateCategoryList();
+            }));
+    }
+
+    /**
+     * Fetched coordinates are replaced with existing coordinates by a POST API call.
+     * @param Latitude to be added
+     * @param Longitude to be added
+     * @param Accuracy to be added
+     */
+    public void updateCoordinates(final String Latitude, final String Longitude,
+        final String Accuracy) {
+        compositeDisposable.add(coordinateEditHelper.makeCoordinatesEdit(getContext(), media,
+            Latitude, Longitude, Accuracy)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(s -> {
+                Timber.d("Coordinates are added.");
+                coordinates.setText(prettyCoordinates(media));
             }));
     }
 

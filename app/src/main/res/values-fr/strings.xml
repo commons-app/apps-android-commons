@@ -10,6 +10,7 @@
 * Gomoko
 * Happy13241
 * Jean-Frédéric
+* JenyxGym
 * KATRINE1992
 * Melissadeba95
 * Metroitendo
@@ -252,6 +253,8 @@
   <string name="upload_problem_different_geolocation">Cette image a été prise à un emplacement différent.</string>
   <string name="upload_problem_fbmd">Veuillez ne téléverser que des images que vous avez prises vous-même. Ne téléversez aucune image prise sur les comptes Facebook d’autres personnes.</string>
   <string name="upload_problem_do_you_continue">Voulez-vous tout de même téléverser cette image ?</string>
+  <string name="upload_connection_error_alert_title">Erreur de connexion</string>
+  <string name="upload_connection_error_alert_detail">Le processus de téléchargement nécessite un accès internet\n    actif. Veuillez vérifier votre connexion internet.</string>
   <string name="upload_problem_image">Problèmes trouvés dans l’image</string>
   <string name="internet_downloaded">Veuillez ne téléverser que des images que vous avez prises vous-même. Ne téléversez aucune image que vous avez téléchargée depuis Internet.</string>
   <string name="use_external_storage">Enregistrer les prises de vue dans l’application</string>

@@ -140,7 +140,11 @@
             android:name=".review.ReviewActivity"
             android:label="@string/title_activity_review" />
 
-      <service
+        <activity
+          android:name=".LocationPicker.LocationPickerActivity"
+          android:label="Location Picker" />
+
+        <service
             android:name=".auth.WikiAccountAuthenticatorService"
             android:exported="true"
             android:process=":auth">

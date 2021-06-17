@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.actions
 
 import io.reactivex.Observable
+import io.reactivex.Single
 import org.wikipedia.csrf.CsrfTokenClient
 
 /**
@@ -60,6 +61,17 @@ class PageEditClient(
                 .map { editResponse -> editResponse.edit()!!.editSucceeded() }
         } catch (throwable: Throwable) {
             Observable.just(false)
+        }
+    }
+
+    /**
+     * Get whole WikiText of required file
+     * @param title : Name of the file
+     * @return Observable<MwQueryResult>
+     */
+    fun getCurrentWikiText(title: String): Single<String?> {
+        return pageEditInterface.getWikiText(title).map {
+            it.query()?.pages()?.get(0)?.revisions()?.get(0)?.content()
         }
     }
 }

@@ -246,6 +246,8 @@
   <string name="upload_problem_different_geolocation">Tento obrázok bol zhotovený na inom mieste.</string>
   <string name="upload_problem_fbmd">Nahrávajte, prosím, len obrázky, ktoré ste sami zhotovili. Nenahrávajte obrázky, ktoré ste našli na Facebookovom profile niekoho iného.</string>
   <string name="upload_problem_do_you_continue">Naozaj chcete nahrať tento obrázok?</string>
+  <string name="upload_connection_error_alert_title">Chyba pripojenia</string>
+  <string name="upload_connection_error_alert_detail">Proces nahrávania vyžaduje aktívny internetový prístup. Prosím skontrolujte svoje internetové pripojenie.</string>
   <string name="upload_problem_image">Na obrázku boli nájdené nejaké problémy</string>
   <string name="internet_downloaded">Nahrávajte, prosím, len obrázky, ktoré ste sami zhotovili. Nenahrávajte obrázky, ktoré ste stiahli z internetu.</string>
   <string name="use_external_storage">Použiť externé úložisko</string>

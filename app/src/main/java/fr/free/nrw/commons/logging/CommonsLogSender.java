@@ -2,12 +2,16 @@ package fr.free.nrw.commons.logging;
 
 import android.content.Context;
 
+import android.os.Bundle;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DeviceInfoUtil;
+import org.acra.data.CrashReportData;
+import org.acra.sender.ReportSenderException;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Class responsible for sending logs to developers
@@ -86,5 +90,16 @@ public class CommonsLogSender extends LogsSender {
 
 
         return builder.toString();
+    }
+
+    @Override
+    public boolean requiresForeground() {
+        return false;
+    }
+
+    @Override
+    public void send(@NotNull Context context, @NotNull CrashReportData crashReportData,
+        @NotNull Bundle bundle) throws ReportSenderException {
+
     }
 }
