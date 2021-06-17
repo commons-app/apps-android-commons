@@ -15,6 +15,6 @@ import fr.free.nrw.commons.upload.depicts.DepictsDao
 @Database(entities = [Contribution::class, Depicts::class], version = 8, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
-  abstract fun contributionDao(): ContributionDao
-  abstract fun DepictsDao (): DepictsDao;
+    abstract fun contributionDao(): ContributionDao
+    abstract fun DepictsDao(): DepictsDao;
 }

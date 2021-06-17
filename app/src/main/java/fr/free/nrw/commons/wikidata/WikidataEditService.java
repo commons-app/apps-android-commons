@@ -138,8 +138,7 @@ public class WikidataEditService {
     }
 
     public Long createClaim(@Nullable final WikidataPlace wikidataPlace, final String fileName,
-        final
-        Map<String, String> captions) {
+        final Map<String, String> captions) {
         if (!(directKvStore.getBoolean("Picture_Has_Correct_Location", true))) {
             Timber
                 .d("Image location and nearby place location mismatched, so Wikidata item won't be edited");
