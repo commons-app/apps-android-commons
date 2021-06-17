@@ -27,13 +27,13 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">%1$d장의 업로드를 시작합니다</item>
-    <item quantity="other">%1$d장의 업로드를 시작합니다</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%1$d장의 업로드를 처리하는 중입니다</item>
+    <item quantity="other">%1$d장의 업로드를 처리하는 중입니다</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d개 업로드</item>
-    <item quantity="other">%1$d개 업로드</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d개 업로드</item>
+    <item quantity="other">%d개 업로드</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">이 그림은 %1$s에 따라 사용이 허가됩니다</item>
@@ -71,6 +71,7 @@
   <string name="upload_progress_notification_title_in_progress">%1$s 파일을 올리는 중</string>
   <string name="upload_progress_notification_title_finishing">%1$s 파일 올리기를 끝내는 중</string>
   <string name="upload_failed_notification_title">%1$s 파일 올리기 실패</string>
+  <string name="upload_paused_notification_title">%1$s 업로드 멈춤</string>
   <string name="upload_failed_notification_subtitle">보려면 탭하세요</string>
   <string name="upload_paused_notification_subtitle">보려면 탭하세요</string>
   <string name="title_activity_contributions">내 최근 업로드</string>
@@ -503,5 +504,7 @@
   <string name="media_detail_step_title">미디어 상세 정보</string>
   <string name="menu_view_category_page">분류 문서 보기</string>
   <string name="menu_view_item_page">항목 문서 보기</string>
+  <string name="app_ui_language">앱 사용자 인터페이스 언어</string>
+  <string name="remove">캡션과 설명을 제거합니다</string>
   <string name="read_help_link">더 읽어보기</string>
 </resources>

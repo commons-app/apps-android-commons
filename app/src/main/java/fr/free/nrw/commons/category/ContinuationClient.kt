@@ -38,4 +38,15 @@ abstract class ContinuationClient<Network, Domain> {
         continuationStore.remove("$prefix$category")
     }
 
+    /**
+     * Remove the existing the key from continuationExists and continuationStore
+     *
+     * @param prefix
+     * @param userName the username
+     */
+    protected fun resetUserContinuation(prefix: String, userName: String) {
+        continuationExists.remove("$prefix$userName")
+        continuationStore.remove("$prefix$userName")
+    }
+
 }

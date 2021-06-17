@@ -272,6 +272,16 @@
                       android:drawablePadding="@dimen/tiny_gap"
                       android:drawableStart="?attr/iconMap24"
                       tools:text="Coordinates link" />
+
+                    <Button
+                      android:id="@+id/coordinate_edit"
+                      android:layout_width="24dp"
+                      android:layout_height="24dp"
+                      android:layout_marginTop="@dimen/standard_gap"
+                      android:layout_marginBottom="@dimen/standard_gap"
+                      android:layout_gravity="end"
+                      android:background="@drawable/ic_baseline_edit_24" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -404,14 +414,34 @@
                   android:text="@string/copy_wikicode"
                   android:textColor="@color/primaryTextColor" />
 
-                <Button
-                  android:id="@+id/nominateDeletion"
-                  android:background="@drawable/bg_delete_button"
-                  android:textColor="@color/primaryTextColor"
-                  android:layout_margin="@dimen/standard_gap"
+                <FrameLayout
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:text="@string/nominate_deletion"/>
+                  android:orientation="horizontal"
+                  android:layout_margin="@dimen/standard_gap">
+
+                    <Button
+                      android:id="@+id/nominateDeletion"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:background="@drawable/bg_delete_button"
+                      android:text="@string/nominate_deletion"
+                      android:textColor="@color/primaryTextColor" />
+
+                    <ProgressBar
+                      android:id="@+id/progressBarDeletion"
+                      style="?android:attr/progressBarStyle"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="right|center_horizontal|center_vertical"
+                      android:elevation="4dp"
+                      android:indeterminate="true"
+                      android:indeterminateTint="@color/primaryTextColor"
+                      android:indeterminateTintMode="src_atop"
+                      android:visibility="gone"/>
+
+                </FrameLayout>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

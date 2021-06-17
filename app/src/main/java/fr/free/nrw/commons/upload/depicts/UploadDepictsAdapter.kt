@@ -6,5 +6,6 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 class UploadDepictsAdapter(onDepictsClicked: (DepictedItem) -> Unit) :
     BaseDelegateAdapter<DepictedItem>(
         uploadDepictsDelegate(onDepictsClicked),
-        areItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id }
+        areItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
+        areContentsTheSame = { itemA, itemB -> itemA.isSelected == itemB.isSelected}
     )

@@ -1521,7 +1521,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         title.setText(selectedPlace.name);
         distance.setText(selectedPlace.distance);
-        description.setText(selectedPlace.getLongDescription());
+        // Remove label since it is double information
+        String descriptionText = selectedPlace.getLongDescription()
+            .replace(selectedPlace.getName() + " (","");
+        descriptionText = (descriptionText.equals(selectedPlace.getLongDescription()) ? descriptionText : descriptionText.replaceFirst(".$",""));
+        // Set the short description after we remove place name from long description
+        description.setText(descriptionText);
 
         fabCamera.setOnClickListener(view -> {
             if (fabCamera.isShown()) {

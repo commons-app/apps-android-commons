@@ -269,7 +269,7 @@ public class BookmarkLocationsDao {
                 onUpdate(db, from, to);
                 return;
             }
-            if (from == 8) {
+            if (from < 10) {
                 from++;
                 onUpdate(db, from, to);
                 return;

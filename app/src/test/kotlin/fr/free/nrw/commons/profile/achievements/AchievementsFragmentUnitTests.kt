@@ -2,6 +2,7 @@ package fr.free.nrw.commons.profile.achievements
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.os.Looper
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -22,7 +23,9 @@ import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
+import org.robolectric.Shadows
 import org.robolectric.annotation.Config
+import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenuItem
 import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
@@ -30,6 +33,7 @@ import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
+@LooperMode(LooperMode.Mode.PAUSED)
 class AchievementsFragmentUnitTests {
 
     private lateinit var fragment: AchievementsFragment
@@ -142,6 +146,7 @@ class AchievementsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testShowAlert() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.showAlert(bitmap)
     }
 
@@ -149,60 +154,70 @@ class AchievementsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testShowInfoDialog() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.showInfoDialog()
     }
 
     @Test
     @Throws(Exception::class)
     fun testShowUploadInfo() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.showUploadInfo()
     }
 
     @Test
     @Throws(Exception::class)
     fun testShowRevertedInfo() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.showRevertedInfo()
     }
 
     @Test
     @Throws(Exception::class)
     fun testShowUsedByWikiInfo() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.showUsedByWikiInfo()
     }
 
     @Test
     @Throws(Exception::class)
     fun testShowImagesViaNearbyInfo() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.showImagesViaNearbyInfo()
     }
 
     @Test
     @Throws(Exception::class)
     fun testShowFeaturedImagesInfo() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.showFeaturedImagesInfo()
     }
 
     @Test
     @Throws(Exception::class)
     fun testShowThanksReceivedInfo() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.showThanksReceivedInfo()
     }
 
     @Test
     @Throws(Exception::class)
     fun testShowQualityImagesInfo() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.showQualityImagesInfo()
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnOptionsItemSelected() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onOptionsItemSelected(menuItem)
     }
 
     @Test
     @Throws(Exception::class)
     fun testLaunchAlert() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
             "launchAlert",
             String::class.java,
@@ -215,6 +230,7 @@ class AchievementsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testHideProgressBar() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
             "hideProgressBar",
             Achievements::class.java
@@ -226,6 +242,7 @@ class AchievementsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSetAchievementsUploadCount() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
             "setAchievementsUploadCount",
             Achievements::class.java,
@@ -238,6 +255,7 @@ class AchievementsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testCheckAccount() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
             "checkAccount"
         )
@@ -248,6 +266,7 @@ class AchievementsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSetUploadCount() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
             "setUploadCount",
             Achievements::class.java
@@ -259,6 +278,7 @@ class AchievementsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnError() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
             "onError"
         )
@@ -269,6 +289,7 @@ class AchievementsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testShowSnackBarWithRetryTrue() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
             "showSnackBarWithRetry", Boolean::class.java
         )
@@ -279,6 +300,7 @@ class AchievementsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testShowSnackBarWithRetryFalse() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
             "showSnackBarWithRetry", Boolean::class.java
         )
@@ -289,6 +311,7 @@ class AchievementsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSetWikidataEditCount() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
             "setWikidataEditCount"
         )
@@ -299,6 +322,7 @@ class AchievementsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSetAchievements() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
             "setAchievements"
         )
@@ -309,6 +333,7 @@ class AchievementsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testShareScreen() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
             "shareScreen", Bitmap::class.java
         )

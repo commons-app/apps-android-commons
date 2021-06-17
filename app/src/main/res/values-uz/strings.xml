@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Malikxan
+* Zafar Shamsiddinov
 -->
 <resources>
+  <string name="starting_uploads">Yuklashni boshlash</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%d yuklandi</item>
+    <item quantity="other">%d yuklandi</item>
+  </plurals>
   <string name="preference_category_privacy">Konfidensiallik</string>
   <string name="app_name">Vikiombor</string>
   <string name="menu_settings">Sozlamalar</string>
@@ -50,6 +56,7 @@
   <string name="about_privacy_policy">Maxfiylik siyosati</string>
   <string name="title_activity_about">Haqida</string>
   <string name="menu_feedback">Fikr-mulohazalar yuborish (email orqali)</string>
+  <string name="no_uploads_yet">Siz hali hech qanaqa rasm joylamagansiz.</string>
   <string name="menu_retry_upload">Qayta urinish</string>
   <string name="menu_cancel_upload">Bekor qilish</string>
   <string name="menu_download">Yuklash</string>
@@ -105,6 +112,8 @@
   <string name="nearby_info_menu_commons_article">Vikiombor fayl sahifasi</string>
   <string name="nearby_info_menu_wikidata_article">Vikimaʼlumotla elementi</string>
   <string name="nearby_info_menu_wikipedia_article">Vikipediya maqolasi</string>
+  <string name="upload_problem_image_dark">Rasm juda qorongʻu.</string>
+  <string name="null_url">Xatolik! Havola topilmadi</string>
   <string name="skip_login">Oʻtkazib yuborish</string>
   <string name="navigation_item_login">Kirish</string>
   <string name="nearby_directions">Tomon</string>
@@ -114,11 +123,15 @@
   <string name="about_rate_us">Bizni baholang</string>
   <string name="about_faq">TSS</string>
   <string name="welcome_skip_button">Qoʻllanmani oʻtkazib yuborish</string>
+  <string name="no_internet">Internet mavjud emas</string>
   <string name="about_translate">Tarjima qilish</string>
   <string name="about_translate_title">Tillar</string>
   <string name="about_translate_proceed">Himoyalash</string>
   <string name="about_translate_cancel">Bekor qilish</string>
   <string name="retry">Qayta urinish</string>
+  <string name="no_images_found">Rasm topilmadi!</string>
+  <string name="error_loading_images">Rasmlarni joylashda xatolik yuz berdi.</string>
+  <string name="image_uploaded_by">%1$s tomonidan joylangan</string>
   <string name="block_notification_title">Bloklangan</string>
   <string name="appwidget_img">Kun tasviri</string>
   <string name="app_widget_heading">Kun tasviri</string>
@@ -131,6 +144,7 @@
   <string name="search_tab_title_depictions">Elementlar</string>
   <string name="explore_tab_title_featured">Tanlangan</string>
   <string name="explore_tab_title_mobile">Mobil telefon orqali yuklangan</string>
+  <string name="quiz_question_string">Ushbu rasmni joylasa boʻladimi?</string>
   <string name="question">Savol</string>
   <string name="result">Natija</string>
   <string name="continue_message">Davom etish</string>

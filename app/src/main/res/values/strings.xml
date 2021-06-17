@@ -227,6 +227,8 @@
   <string name="upload_problem_fbmd">Please only upload pictures that you have taken by yourself. Don\'t upload pictures that you have found on other people\'s Facebook accounts.</string>
   <string name="upload_problem_do_you_continue">Do you still want to upload this picture?</string>
 
+  <string name="upload_connection_error_alert_title">Connection Error</string>
+  <string name="upload_connection_error_alert_detail">The upload process requires active internet access. Please check your network connection.</string>
 
   <string name="upload_problem_image">Problems found in image</string>
   <string name="internet_downloaded">Please only upload pictures that you have taken by yourself. Don\'t upload pictures that you have downloaded from the Internet.</string>
@@ -511,6 +513,13 @@ Upload your first media by tapping on the add button.</string>
   <string name="category_edit_helper_edit_message_else">Could not add categories.</string>
   <string name="category_edit_button_text">Update categories</string>
 
+  <string name="coordinates_edit_helper_make_edit_toast">Trying to update coordinates.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Coordinates update</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Success</string>
+  <string name="coordinates_edit_helper_show_edit_message">Coordinates %1$s are added.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Could not add coordinates.</string>
+  <string name="coordinates_picking_unsuccessful">Unable to get coordinates.</string>
+
   <string name="share_image_via">Share image via</string>
   <string name="no_achievements_yet">You haven\'t made any contributions yet</string>
   <string name="account_created">Account created!</string>
@@ -610,7 +619,15 @@ Upload your first media by tapping on the add button.</string>
   <string name="media_detail_step_title">Media Details</string>
   <string name="menu_view_category_page">View category page</string>
   <string name="menu_view_item_page">View item page</string>
+  <string name="app_ui_language">App user interface language</string>
+  <string name="remove">Removes a caption and description</string>
   <string name="read_help_link">Read more</string>
   <string name="media_detail_in_all_languages">In all languages</string>
+  <string name="choose_a_location">Choose a location</string>
+  <string name="pan_and_zoom_to_adjust">Pan and zoom to adjust</string>
+  <string name="exit_location_picker">Exit location picker</string>
+  <string name="select_location_location_picker">Select location</string>
+  <string name="location_picker_image_view">Location picker image view</string>
+  <string name="location_picker_image_view_shadow">Location picker_image_view_shadow</string>
 
 </resources>

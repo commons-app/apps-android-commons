@@ -110,9 +110,8 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
   @Override
   public void onMediaClicked(int position) {
     container.setVisibility(View.VISIBLE);
-    ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.GONE);
+    ((ExploreFragment)getParentFragment()).tabLayout.setVisibility(View.GONE);
     mediaDetails = new MediaDetailPagerFragment(false, true);
-    ((ExploreFragment) getParentFragment()).setScroll(false);
     setFragment(mediaDetails, listFragment);
     mediaDetails.showImage(position);
   }
@@ -151,6 +150,19 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
   @Override
   public Integer getContributionStateAt(int position) {
     return null;
+  }
+
+  /**
+   * Reload media detail fragment once media is nominated
+   *
+   * @param index item position that has been nominated
+   */
+  @Override
+  public void refreshNominatedMedia(int index) {
+    if(mediaDetails != null && !listFragment.isVisible()) {
+      removeFragment(mediaDetails);
+      onMediaClicked(index);
+    }
   }
 
   /**

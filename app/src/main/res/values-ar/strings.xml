@@ -265,6 +265,7 @@
   <string name="upload_problem_different_geolocation">تم التقاط هذه الصورة في موقع مختلف.</string>
   <string name="upload_problem_fbmd">من فضلك فقط ارفع الصور التي التقطها بنفسك. لا ترفع الصور التي وجدتها على حسابات الآخرين في فيسبوك.</string>
   <string name="upload_problem_do_you_continue">هل ما زلت تريد رفع هذه الصورة؟</string>
+  <string name="upload_connection_error_alert_title">خطأ في الاتصال</string>
   <string name="upload_problem_image">تم العثور على مشاكل في الصورة</string>
   <string name="internet_downloaded">يُرجَى فقط رفع الصور التي التقطتها بنفسك، لا ترفع الصور التي قمت بتنزيلها من الإنترنت.</string>
   <string name="use_external_storage" fuzzy="true">استخدم تخزينا خارجيا</string>

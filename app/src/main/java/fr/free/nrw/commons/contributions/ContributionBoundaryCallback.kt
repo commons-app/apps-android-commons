@@ -27,6 +27,9 @@ class ContributionBoundaryCallback @Inject constructor(
      * network
      */
     override fun onZeroItemsLoaded() {
+        if (sessionManager.userName != null) {
+            mediaClient.resetUserNameContinuation(sessionManager.userName!!)
+        }
         fetchContributions()
     }
 
@@ -66,6 +69,8 @@ class ContributionBoundaryCallback @Inject constructor(
                         )
                     }
             )
+        }else {
+            compositeDisposable.clear()
         }
     }
 

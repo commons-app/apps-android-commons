@@ -95,6 +95,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   private final int SPAN_COUNT_LANDSCAPE = 3;
   private final int SPAN_COUNT_PORTRAIT = 1;
 
+  private int contributionsSize;
+
 
   @Override
   public View onCreateView(
@@ -145,7 +147,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     }
 
     contributionsListPresenter.setup();
-    contributionsListPresenter.contributionList.observe(this.getViewLifecycleOwner(), adapter::submitList);
+    contributionsListPresenter.contributionList.observe(this.getViewLifecycleOwner(), list -> {
+      contributionsSize = list.size();
+      adapter.submitList(list);
+      callback.notifyDataSetChanged();
+    });
     rvContributionsList.setAdapter(adapter);
     adapter.registerAdapterDataObserver(new AdapterDataObserver() {
       @Override
@@ -156,6 +162,16 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
             rvContributionsList.scrollToPosition(0);//Newly upload items are always added to the top
           }
         }
+      }
+
+      /**
+       * Called whenever items in the list have changed
+       * Calls viewPagerNotifyDataSetChanged() that will notify the viewpager
+       */
+      @Override
+      public void onItemRangeChanged(final int positionStart, final int itemCount) {
+        super.onItemRangeChanged(positionStart, itemCount);
+        callback.viewPagerNotifyDataSetChanged();
       }
     });
 
@@ -370,11 +386,14 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
 
   public Media getMediaAtPosition(final int i) {
-    return adapter.getContributionForPosition(i).getMedia();
+    if(adapter.getContributionForPosition(i) != null) {
+      return adapter.getContributionForPosition(i).getMedia();
+    }
+    return null;
   }
 
   public int getTotalMediaCount() {
-    return adapter.getItemCount();
+    return contributionsSize;
   }
 
   /**
@@ -401,10 +420,15 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
   public interface Callback {
 
+    void notifyDataSetChanged();
+
     void retryUpload(Contribution contribution);
 
     void showDetail(int position, boolean isWikipediaButtonDisplayed);
 
     void pauseUpload(Contribution contribution);
+
+    // Notify the viewpager that number of items have changed.
+    void viewPagerNotifyDataSetChanged();
   }
 }

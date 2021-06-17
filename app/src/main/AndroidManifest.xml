@@ -111,11 +111,13 @@
         <activity
             android:name=".category.CategoryDetailsActivity"
             android:label="@string/title_activity_featured_images"
+            android:configChanges="screenSize|keyboard|orientation"
             android:parentActivityName=".contributions.MainActivity" />
 
         <activity
             android:name=".explore.depictions.WikidataItemDetailsActivity"
             android:label="@string/title_activity_featured_images"
+            android:configChanges="screenSize|keyboard|orientation"
             android:parentActivityName=".contributions.MainActivity" />
 
         <activity
@@ -135,7 +137,11 @@
             android:name=".review.ReviewActivity"
             android:label="@string/title_activity_review" />
 
-      <service
+        <activity
+          android:name=".LocationPicker.LocationPickerActivity"
+          android:label="Location Picker" />
+
+        <service
             android:name=".auth.WikiAccountAuthenticatorService"
             android:exported="true"
             android:process=":auth">

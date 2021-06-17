@@ -72,10 +72,7 @@ class DepictsPresenterTest {
         depictsPresenter.searchForDepictions("")
         testScheduler.triggerActions()
         verify(view).showProgress(false)
-        verify(view).showError(false)
-        depictsPresenter.depictedItems
-            .test()
-            .assertValue(listOf(selectedItem, depictedItem(id="nonUnique")))
+        verify(view).showError(true)
     }
 
 
@@ -85,10 +82,7 @@ class DepictsPresenterTest {
         depictsPresenter.searchForDepictions("")
         testScheduler.triggerActions()
         verify(view).showProgress(false)
-        verify(view).showError(false)
-        depictsPresenter.depictedItems
-            .test()
-            .assertValue(emptyList())
+        verify(view).showError(true)
     }
 
     @Test

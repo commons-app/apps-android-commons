@@ -6,6 +6,7 @@
 * Kyouko
 * MSClaudiu
 * Minisarm
+* Popetedenis
 * Strainu
 -->
 <resources>
@@ -19,12 +20,12 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
+  <plurals name="starting_multiple_uploads">
     <item quantity="one">Se pornește 1 încărcare</item>
     <item quantity="few">Se pornesc %1$d încărcări</item>
     <item quantity="other">Se pornesc %1$d de încărcări</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">1 încărcare</item>
     <item quantity="few">%1$d încărcări</item>
     <item quantity="other">%1$d de încărcări</item>
@@ -68,7 +69,7 @@
   <string name="uploading_started">Încărcarea a început!</string>
   <string name="upload_completed_notification_title">%1$s s-a încărcat!</string>
   <string name="upload_completed_notification_text">Atingeți pentru a vizualiza elementul încărcat</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Se pornește încărcarea fișierului %1$s</string>
+  <string name="upload_progress_notification_title_start">Se încarcă fișierul %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s se încarcă</string>
   <string name="upload_progress_notification_title_finishing">Se finalizează încărcarea fișierului %1$s</string>
   <string name="upload_failed_notification_title">Încărcarea fișierului %1$s nu a reușit</string>

@@ -196,7 +196,7 @@
   <string name="use_external_storage_summary">Biller späicheren déi mat der in-app Kamera vun Ärem Apparat gemaach goufen</string>
   <string name="login_to_your_account">An Äre Benotzerkont aloggen</string>
   <string name="send_log_file">Log-Fichier schécken</string>
-  <string name="send_log_file_description">Log-Fichier per E-Mail un d\'Entwéckler schécke fir ze hëllefe fir Probleemer mat der App z\'analyséieren. Notiz:A Logge kënne potenziell Informatiounen dra sinn déi Iech identifizéieren</string>
+  <string name="send_log_file_description">Log-Fichier per E-Mail un d\'Entwéckler schécke fir ze hëllefe fir Probleemer mat der App z\'analyséieren. Notiz: A Logge kënne potenziell Informatiounen dra sinn déi Iech identifizéieren</string>
   <string name="null_url">Feeler! URL net fonnt</string>
   <string name="nominate_deletion">Nominéiere fir ze Läschen</string>
   <string name="nominated_for_deletion">Dëst Bild gouf virgeschloe fir geläscht ze ginn.</string>
@@ -347,6 +347,7 @@
   <string name="leaderboard_nearby">Nobäi</string>
   <string name="leaderboard_used">Benotzt</string>
   <string name="limited_connection_mode">Limitéierte Verbindungsmodus</string>
+  <string name="app_ui_language">Sprooch vum Interface vum Benotzer vun der App</string>
   <string name="media_detail_in_all_languages">In all languages</string>
   <string name="read_help_link">Liest méi</string>
 </resources>

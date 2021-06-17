@@ -3,8 +3,11 @@
 * McDutchie
 -->
 <resources>
-  <string name="uploads_pending_notification_indicator" fuzzy="true">%d files in incargamento</string>
-  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d file in incargamento</item>
+    <item quantity="other">%1$d files in incargamento</item>
+  </plurals>
+  <string name="app_name">Commons</string>
   <string name="menu_settings">Configuration</string>
   <string name="username">Nomine de usator</string>
   <string name="password">Contrasigno</string>
@@ -13,7 +16,7 @@
   <string name="logging_in_message">Un momento…</string>
   <string name="login_success">Session aperite!</string>
   <string name="login_failed">Session fallite!</string>
-  <string name="authentication_failed" fuzzy="true">Authentication fallite!</string>
+  <string name="authentication_failed">Authentication fallite, per favor reaperi session</string>
   <string name="uploading_started">Incargamento comenciate!</string>
   <string name="upload_completed_notification_title">%1$s incargate!</string>
   <string name="upload_completed_notification_text">Tocca pro vider tu incargamento</string>
@@ -22,7 +25,7 @@
   <string name="upload_progress_notification_title_finishing">Termina incargar %1$s</string>
   <string name="upload_failed_notification_title">Incargamento de %1$s fallite</string>
   <string name="upload_failed_notification_subtitle">Tocca pro vider</string>
-  <string name="title_activity_contributions" fuzzy="true">Mi incargamentos</string>
+  <string name="title_activity_contributions">Mi incargamentos recente</string>
   <string name="contribution_state_queued">In cauda</string>
   <string name="contribution_state_failed">Fallite</string>
   <string name="contribution_state_in_progress">%1$d%% complete</string>
@@ -32,8 +35,10 @@
   <string name="provider_contributions">Mi incargamentos</string>
   <string name="menu_share">Divider</string>
   <string name="write_storage_permission_rationale">Permission necessari: Scriber sur immagazinage externe. Le app non pote acceder a tu camera/galeria sin isto.</string>
-  <string name="use_external_storage" fuzzy="true">Usar immagazinage externe</string>
-  <string name="use_external_storage_summary" fuzzy="true">Immagazinar photos prendite con le camera de tu dispositivo</string>
+  <string name="upload_connection_error_alert_title">Error de connexion</string>
+  <string name="upload_connection_error_alert_detail">Le processo de incargamento require un accesso a internet active. Per favor verifica tu connexion al rete.</string>
+  <string name="use_external_storage">Salveguardar photos prendite in app</string>
+  <string name="use_external_storage_summary">Salveguardar le photos prendite con le camera del application sur le immagazinage de tu apparato</string>
   <string name="nearby_location_not_available">\"A proximitate\" poterea non functionar, perque le position geographic non es disponibile.</string>
   <string name="nearby_directions">Itinerario</string>
   <string name="nearby_wikidata">Wikidata</string>
@@ -47,7 +52,7 @@
   <string name="delete">Deler</string>
   <string name="statistics">Statisticas</string>
   <string name="level">Nivello</string>
-  <string name="no_uploads" fuzzy="true">Benvenite a Commons!\n\nPro incargar tu prime file multimedia, tocca le icone de camera o galeria hic supra.</string>
+  <string name="no_uploads">Benvenite a Commons!\n\nPro incargar tu prime file multimedial, tocca le button Adder.</string>
   <string name="skip_image">Saltar iste imagine</string>
   <string name="review_is_uploaded_by">%1$s es incargate per: %2$s</string>
   <string name="you_must_reset_your_passsword">Un error ha occurrite durante le apertura de session. Es necessari reinitialisar tu contrasigno.</string>
