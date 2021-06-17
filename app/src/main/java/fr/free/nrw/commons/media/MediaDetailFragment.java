@@ -626,6 +626,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         categoryEditSearchRecyclerViewAdapter.addToCategories(media.getCategories());
         updateSelectedCategoriesTextView(categoryEditSearchRecyclerViewAdapter.getCategories());
 
+        categoryRecyclerView.setVisibility(GONE);
         updateCategoryList();
 
         if (media.getAuthor() == null || media.getAuthor().equals("")) {
@@ -661,20 +662,28 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     public void updateSelectedCategoriesTextView(List<String> selectedCategories) {
         if (selectedCategories == null || selectedCategories.size() == 0) {
             updateCategoriesButton.setClickable(false);
-        }
-        if (selectedCategories != null) {
+            updateCategoriesButton.setAlpha(.5f);
+        } else {
             existingCategories.setText(StringUtils.join(selectedCategories,", "));
-            updateCategoriesButton.setClickable(true);
+            if (selectedCategories.equals(media.getCategories())) {
+                updateCategoriesButton.setClickable(false);
+                updateCategoriesButton.setAlpha(.5f);
+            } else {
+                updateCategoriesButton.setClickable(true);
+                updateCategoriesButton.setAlpha(1f);
+            }
         }
     }
 
     @Override
     public void noResultsFound() {
+        categoryRecyclerView.setVisibility(GONE);
         noResultsFound.setVisibility(VISIBLE);
     }
 
     @Override
     public void someResultsFound() {
+        categoryRecyclerView.setVisibility(VISIBLE);
         noResultsFound.setVisibility(GONE);
     }
 
