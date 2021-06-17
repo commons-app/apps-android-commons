@@ -10,6 +10,7 @@ import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 
@@ -25,6 +26,16 @@ class ImageAdapter(
     private var imageSelectListener: ImageSelectListener ):
 
     RecyclerViewAdapter<ImageAdapter.ImageViewHolder>(context) {
+
+    /**
+     * ImageSelectedOrUpdated payload class.
+     */
+    class ImageSelectedOrUpdated
+
+    /**
+     * ImageUnselected payload class.
+     */
+    class ImageUnselected
 
     /**
      * Currently selected images.
@@ -49,18 +60,41 @@ class ImageAdapter(
      */
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val image=images[position]
-        // todo load image thumbnail, set selected view.
+        val selectedIndex = ImageHelper.getIndex(selectedImages,image)
+        val isSelected = selectedIndex != -1
+        if(isSelected){
+            holder.itemSelected(selectedIndex+1)
+        }
+        else {
+            holder.itemUnselected();
+        }
         Glide.with(context).load(image.uri).into(holder.image)
         holder.itemView.setOnClickListener {
-            selectOrRemoveImage(image, position)
+            selectOrRemoveImage(holder, position)
         }
     }
 
     /**
      * Handle click event on an image, update counter on images.
      */
-    private fun selectOrRemoveImage(image:Image, position:Int){
-        // todo select the image if not selected and remove it if already selected
+    private fun selectOrRemoveImage(holder:ImageViewHolder, position:Int){
+        val clickedIndex = ImageHelper.getIndex(selectedImages,images[position])
+        if (clickedIndex != -1) {
+            selectedImages.removeAt(clickedIndex)
+            notifyItemChanged(position,ImageUnselected())
+            val indexes = ImageHelper.getIndexList(selectedImages, images)
+            for (index in indexes) {
+                notifyItemChanged(index, ImageSelectedOrUpdated())
+            }
+        } else {
+            /**
+             * TODO
+             * Show toast on tapping an uploaded item.
+             */
+            selectedImages.add(images[position])
+            notifyItemChanged(position, ImageSelectedOrUpdated())
+        }
+        imageSelectListener.onSelectedImagesChanged(selectedImages)
     }
 
     /**
@@ -90,9 +124,39 @@ class ImageAdapter(
      */
     class ImageViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.image_thumbnail)
-        val selectedNumber: TextView = itemView.findViewById(R.id.selected_count)
-        val uploadedGroup: Group = itemView.findViewById(R.id.uploaded_group)
-        val selectedGroup: Group = itemView.findViewById(R.id.selected_group)
+        private val selectedNumber: TextView = itemView.findViewById(R.id.selected_count)
+        private val uploadedGroup: Group = itemView.findViewById(R.id.uploaded_group)
+        private val selectedGroup: Group = itemView.findViewById(R.id.selected_group)
+
+        /**
+         * Item selected view.
+         */
+        fun itemSelected(index: Int) {
+            selectedGroup.visibility = View.VISIBLE
+            selectedNumber.text = index.toString()
+        }
+
+        /**
+         * Item Unselected view.
+         */
+        fun itemUnselected() {
+            selectedGroup.visibility = View.GONE
+        }
+
+        /**
+         * Item Uploaded view.
+         */
+        fun itemUploaded() {
+            uploadedGroup.visibility = View.VISIBLE
+        }
+
+        /**
+         * Item Not Uploaded view.
+         */
+        fun itemNotUploaded() {
+            uploadedGroup.visibility = View.GONE
+        }
+
     }
 
     /**

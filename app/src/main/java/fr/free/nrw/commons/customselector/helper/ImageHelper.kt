@@ -11,7 +11,7 @@ import kotlin.collections.ArrayList
 import kotlin.collections.LinkedHashMap
 
 /**
- * Image Helper object, includes all the static functions required by custom selector
+ * Image Helper object, includes all the static functions required by custom selector.
  */
 
 object ImageHelper {
@@ -47,6 +47,34 @@ object ImageHelper {
             }
         }
         return filteredImages
+    }
+
+    /**
+     * getIndex: Returns the index of image in given list.
+     */
+    fun getIndex(list: ArrayList<Image>, image: Image): Int {
+        return list.indexOf(image)
+    }
+
+    /**
+     * Gets the list of indices from the master list.
+     */
+    fun getIndexList(list: ArrayList<Image>, masterList: ArrayList<Image>): ArrayList<Int> {
+
+        /**
+         * TODO
+         * Can be optimised as masterList is sorted by time.
+         */
+
+        val indexes = arrayListOf<Int>()
+        for(image in list) {
+            val index = getIndex(masterList,image)
+            if (index == -1) {
+                continue
+            }
+            indexes.add(index)
+        }
+        return indexes
     }
 
     /**
