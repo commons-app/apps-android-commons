@@ -9,10 +9,12 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
+import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.upload.FileProcessor
 
 class ImageAdapter(
     /**
@@ -23,7 +25,10 @@ class ImageAdapter(
     /**
      * Image select listener for click events on image.
      */
-    private var imageSelectListener: ImageSelectListener ):
+    private var imageSelectListener: ImageSelectListener,
+    var fileProcessor: FileProcessor,
+    mediaClient: MediaClient
+):
 
     RecyclerViewAdapter<ImageAdapter.ImageViewHolder>(context) {
 
@@ -47,6 +52,7 @@ class ImageAdapter(
      */
     private var images: ArrayList<Image> = ArrayList()
 
+    private var imageLoader = ImageLoader(mediaClient,fileProcessor,context)
     /**
      * create View holder.
      */
@@ -68,7 +74,8 @@ class ImageAdapter(
         else {
             holder.itemUnselected();
         }
-        Glide.with(context).load(image.uri).into(holder.image)
+        imageLoader.loadImageIntoImageView(holder,image)
+//        Glide.with(context).load(image.uri).into(holder.image)
         holder.itemView.setOnClickListener {
             selectOrRemoveImage(holder, position)
         }

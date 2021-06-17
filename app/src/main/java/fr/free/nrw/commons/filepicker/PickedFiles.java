@@ -25,7 +25,7 @@ import java.util.UUID;
 import timber.log.Timber;
 
 
-class PickedFiles implements Constants {
+public class PickedFiles implements Constants {
 
     private static String getFolderName(@NonNull Context context) {
         return FilePicker.configuration(context).getFolderName();
@@ -104,7 +104,7 @@ class PickedFiles implements Constants {
                 });
     }
 
-    static UploadableFile pickedExistingPicture(@NonNull Context context, Uri photoUri) throws IOException, SecurityException {// SecurityException for those file providers who share URI but forget to grant necessary permissions
+    public static UploadableFile pickedExistingPicture(@NonNull Context context, Uri photoUri) throws IOException, SecurityException {// SecurityException for those file providers who share URI but forget to grant necessary permissions
         InputStream pictureInputStream = context.getContentResolver().openInputStream(photoUri);
         File directory = tempImageDirectory(context);
         File photoFile = new File(directory, UUID.randomUUID().toString() + "." + getMimeType(context, photoUri));

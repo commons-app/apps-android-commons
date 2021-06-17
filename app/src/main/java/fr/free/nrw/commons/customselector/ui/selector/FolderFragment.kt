@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +13,10 @@ import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
-import fr.free.nrw.commons.customselector.model.Folder
 import fr.free.nrw.commons.customselector.ui.adapter.FolderAdapter
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
+import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.upload.FileProcessor
 import kotlinx.android.synthetic.main.fragment_custom_selector.*
 import kotlinx.android.synthetic.main.fragment_custom_selector.view.*
 import javax.inject.Inject
@@ -32,7 +34,11 @@ class FolderFragment : CommonsDaggerSupportFragment() {
     var customSelectorViewModelFactory: CustomSelectorViewModelFactory? = null
         @Inject set
 
+    var fileProcessor: FileProcessor? = null
+        @Inject set
 
+    var mediaClient: MediaClient? = null
+        @Inject set
     /**
      * Folder Adapter.
      */
@@ -68,7 +74,8 @@ class FolderFragment : CommonsDaggerSupportFragment() {
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_custom_selector, container, false)
-        folderAdapter = FolderAdapter(activity!!, activity as FolderClickListener)
+        Log.i("Aditya","fileProcessor "+fileProcessor.toString())
+        folderAdapter = FolderAdapter(activity!!, activity as FolderClickListener,fileProcessor!!,mediaClient!!)
         gridLayoutManager = GridLayoutManager(context, columnCount())
         with(root.selector_rv){
             this.layoutManager = gridLayoutManager

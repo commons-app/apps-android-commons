@@ -14,6 +14,8 @@ import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
+import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.upload.FileProcessor
 import kotlinx.android.synthetic.main.fragment_custom_selector.*
 import kotlinx.android.synthetic.main.fragment_custom_selector.view.*
 import javax.inject.Inject
@@ -34,6 +36,12 @@ class ImageFragment: CommonsDaggerSupportFragment() {
      * View model Factory.
      */
     lateinit var customSelectorViewModelFactory: CustomSelectorViewModelFactory
+        @Inject set
+
+    var fileProcessor: FileProcessor? = null
+        @Inject set
+
+    var mediaClient: MediaClient? = null
         @Inject set
 
     /**
@@ -84,7 +92,7 @@ class ImageFragment: CommonsDaggerSupportFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val root = inflater.inflate(R.layout.fragment_custom_selector, container, false)
-        imageAdapter = ImageAdapter(requireActivity(), activity as ImageSelectListener)
+        imageAdapter = ImageAdapter(requireActivity(), activity as ImageSelectListener, fileProcessor!!,mediaClient!!)
         gridLayoutManager = GridLayoutManager(context,getSpanCount())
         with(root.selector_rv){
             this.layoutManager = gridLayoutManager
