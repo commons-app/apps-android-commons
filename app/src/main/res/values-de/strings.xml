@@ -246,6 +246,8 @@
   <string name="upload_problem_different_geolocation">Dieses Bild wurde an einem anderen Ort aufgenommen.</string>
   <string name="upload_problem_fbmd">Lade bitte nur Bilder hoch, die du selber erstellt hast. Lade keine Bilder hoch, die du auf Facebook-Konten anderer Personen gefunden hast.</string>
   <string name="upload_problem_do_you_continue">Möchtest du immer noch dieses Bild hochladen?</string>
+  <string name="upload_connection_error_alert_title">Verbindungsfehler</string>
+  <string name="upload_connection_error_alert_detail">Der Hochlade-Vorgang erfordert einen aktiven Internetzugang. Bitte prüfe deine Netzwerkverbindung.</string>
   <string name="upload_problem_image">Im Bild gefundene Probleme</string>
   <string name="internet_downloaded">Lade bitte nur Bilder hoch, die du selber aufgenommen hast. Lade keine Bilder hoch, die du aus dem Internet heruntergeladen hast.</string>
   <string name="use_external_storage">Speichern von In-App-Aufnahmen</string>
@@ -498,6 +500,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Konnte keine Kategorien hinzufügen.</string>
   <string name="category_edit_button_text">Kategorien aktualisieren</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Versuche, die Koordinaten zu aktualisieren.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Koordinaten aktualisieren</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Erfolgreich</string>
+  <string name="coordinates_edit_helper_show_edit_message">Koordinaten %1$s werden hinzugefügt.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Koordinaten konnten nicht hinzugefügt werden.</string>
+  <string name="coordinates_picking_unsuccessful">Es können keine Koordinaten abgerufen werden.</string>
   <string name="share_image_via">Bild teilen via</string>
   <string name="no_achievements_yet">Du hast noch keine Beiträge geleistet</string>
   <string name="account_created">Benutzerkonto erstellt!</string>
@@ -519,6 +527,7 @@
   <string name="setting_wallpaper_dialog_message">Hintergrundbild wird festgelegt. Bitte warten...</string>
   <string name="theme_dark_name">Dunkel</string>
   <string name="theme_light_name">Hell</string>
+  <string name="cannot_open_location_settings">Die Standorteinstellungen konnten nicht geöffnet werden. Bitte schalte den Standort manuell ein</string>
   <string name="recommend_high_accuracy_mode">Die besten Ergebnisse erzielst du, wenn du den Modus „Hohe Genauigkeit“ wählst.</string>
   <string name="ask_to_turn_location_on">Standort einschalten?</string>
   <string name="nearby_needs_location">Für die Funktion „in der Nähe“ muss der Standort aktiviert sein, um richtig zu funktionieren</string>
@@ -573,8 +582,21 @@
   <string name="quality_images_info">Qualitätsbilder sind Diagramme oder Fotografien, die bestimmte Qualitätsstandards erfüllen (die meist technischer Natur sind) und für Wikimedia-Projekte wertvoll sind</string>
   <string name="resuming_upload">Hochladen fortsetzen …</string>
   <string name="pausing_upload">Hochladen pausieren …</string>
+  <string name="limited_connection_explanation">Du hast den eingeschränkten Verbindungsmodus aktiviert. Alle Uploads sind angehalten und werden fortgesetzt, sobald du diesen Modus deaktivierst.</string>
+  <string name="limited_connection_is_on">Der begrenzte Verbindungsmodus ist aktiv.</string>
+  <string name="media_details_tooltip">Bitte schreibe eine kurze Bildunterschrift, die sagt, was dein Bild zeigt. Sage in der Beschreibung, was das Bild interessant oder typisch oder selten macht, und erkläree den Kontext, sichtbar oder nicht. Verwende möglichst genaue Begriffe.</string>
+  <string name="depicts_tooltip">Bitte finde und wähle alle Benennungen, die dieses Bild darstellt. Sei so spezifisch wie möglich. Wenn das Bild mehrere Begriffe darstellt, wähle sie alle in angemessener Weise aus. Wähle keine generischen Begriffe, wenn spezifischere Begriffe verfügbar sind.</string>
+  <string name="categories_tooltip">Bitte wähle die entsprechenden Kategorien aus. Im Gegensatz zu den Darstellungen sind die Kategorien nur in Englisch.</string>
+  <string name="license_tooltip">Commons macht deine Bilder wiederverwendbar und von jedem adaptierbar. Möchtest du auf alle Rechte verzichten? Möchtest du als Urheber genannt werden? Möchtest du, dass Bearbeitungen die gleiche Lizenz verwenden?</string>
+  <string name="depicts_step_title">Stellt dar</string>
   <string name="license_step_title">Medienlizenz</string>
   <string name="media_detail_step_title">Mediendetails</string>
   <string name="menu_view_category_page">Kategorieseite anzeigen</string>
+  <string name="app_ui_language">Benutzeroberflächensprache</string>
   <string name="read_help_link">Mehr lesen</string>
+  <string name="choose_a_location">Wähle einen Ort</string>
+  <string name="pan_and_zoom_to_adjust">Schwenken und Zoomen zum Einstellen</string>
+  <string name="exit_location_picker">Beenden der Ortswahl</string>
+  <string name="select_location_location_picker">Ort auswählen</string>
+  <string name="location_picker_image_view">Ortauswahl Bildansicht</string>
 </resources>

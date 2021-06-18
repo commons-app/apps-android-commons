@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:layout_gravity="bottom">
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/location_chosen_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:tint="@color/white"
+    app:backgroundTint="@color/wikimedia_green"
+    app:elevation="3dp"
+    app:layout_anchorGravity="top|end"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:srcCompat="@drawable/ic_check_black_24dp"
+    android:contentDescription="@string/select_location_location_picker" />
+
+  <androidx.appcompat.widget.AppCompatTextView
+    android:id="@+id/tv_attribution"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:text="@string/map_attribution"
+    android:textAlignment="center"
+    android:textSize="10sp"
+    android:textStyle="bold"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

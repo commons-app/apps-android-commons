@@ -206,12 +206,7 @@ public class WikidataEditService {
   }
 
   private Observable<Boolean> depictionEdits(Contribution contribution, Long fileEntityId) {
-    final ArrayList<WikidataItem> depictedItems = new ArrayList<>(contribution.getDepictedItems());
-    final WikidataPlace wikidataPlace = contribution.getWikidataPlace();
-    if (wikidataPlace != null) {
-      depictedItems.add(wikidataPlace);
-    }
-    return Observable.fromIterable(depictedItems)
+    return Observable.fromIterable(contribution.getDepictedItems())
         .concatMap(wikidataItem -> addDepictsProperty(fileEntityId.toString(), wikidataItem));
   }
 }

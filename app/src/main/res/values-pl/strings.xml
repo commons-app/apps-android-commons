@@ -5,6 +5,7 @@
 * CiaPan
 * DeRudySoulStorm
 * InternerowyGołąb
+* Kareyac
 * Krottyianock
 * Matma Rex
 * Mazab IZW
@@ -505,6 +506,7 @@
   <string name="category_edit_helper_show_edit_title_success">Powodzenie</string>
   <string name="category_edit_helper_edit_message_else">Nie udało się dodać kategorii.</string>
   <string name="category_edit_button_text">Aktualizuj kategorie</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Powodzenie</string>
   <string name="share_image_via">Udostępnij obraz przez</string>
   <string name="no_achievements_yet">Nie wykonałeś jeszcze żadnej edycji</string>
   <string name="account_created">Konto zostało utworzone!</string>

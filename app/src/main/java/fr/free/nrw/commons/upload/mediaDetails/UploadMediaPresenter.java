@@ -23,6 +23,7 @@ import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import java.lang.reflect.Proxy;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -92,7 +93,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                           gpsCoords != null && gpsCoords.getImageCoordsExists();
                         view.showMapWithImageCoordinates(hasImageCoordinates);
                         view.showProgress(false);
-                        if (hasImageCoordinates) {
+                        if (hasImageCoordinates && place == null) {
                             checkNearbyPlaces(uploadItem);
                         }
                     },
@@ -138,8 +139,12 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                         },
                         throwable -> {
                             view.showProgress(false);
-                            view.showMessage("" + throwable.getLocalizedMessage(),
-                                    R.color.color_error);
+                            if (throwable instanceof UnknownHostException) {
+                              view.showConnectionErrorPopup();
+                            } else {
+                              view.showMessage("" + throwable.getLocalizedMessage(),
+                                  R.color.color_error);
+                            }
                             Timber.e(throwable, "Error occurred while handling image");
                         })
         );
@@ -194,6 +199,9 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     final List<UploadMediaDetail> uploadMediaDetails = repository.getUploads()
         .get(uploadItemPosition)
         .getUploadMediaDetails();
+    UploadItem uploadItem = repository.getUploads()
+        .get(uploadItemPosition);
+    uploadItem.setPlace(place);
     uploadMediaDetails.set(0, new UploadMediaDetail(place));
     view.updateMediaDetails(uploadMediaDetails);
   }

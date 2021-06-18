@@ -6,6 +6,7 @@ import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,6 +25,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.notification.Notification;
+import fr.free.nrw.commons.notification.NotificationController;
+import fr.free.nrw.commons.theme.BaseActivity;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
@@ -531,6 +540,13 @@ public class ContributionsFragment
         presenter.onDetachView();
     }
 
+    @Override
+    public void notifyDataSetChanged() {
+        if (mediaDetailPagerFragment != null) {
+            mediaDetailPagerFragment.notifyDataSetChanged();
+        }
+    }
+
     /**
      * Retry upload when it is failed
      *
@@ -566,6 +582,16 @@ public class ContributionsFragment
     }
 
     /**
+     * Notify the viewpager that number of items have changed.
+     */
+    @Override
+    public void viewPagerNotifyDataSetChanged() {
+        if (mediaDetailPagerFragment != null) {
+            mediaDetailPagerFragment.notifyDataSetChanged();
+        }
+    }
+
+    /**
      * Replace whatever is in the current contributionsFragmentContainer view with
      * mediaDetailPagerFragment, and preserve previous state in back stack. Called when user selects a
      * contribution.
@@ -594,12 +620,8 @@ public class ContributionsFragment
         return contributionsListFragment.getContributionStateAt(position);
     }
 
-    public void backButtonClicked() {
-        if (mediaDetailPagerFragment.isVisible()) {
-            if(mediaDetailPagerFragment.backButtonClicked()) {
-                // MediaDetailed handled the backPressed no further action required.
-                return;
-            }
+    public boolean backButtonClicked() {
+        if (null != mediaDetailPagerFragment && mediaDetailPagerFragment.isVisible()) {
             if (store.getBoolean("displayNearbyCardView", true)) {
                 if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
                     nearbyNotificationCardView.setVisibility(View.VISIBLE);
@@ -612,7 +634,9 @@ public class ContributionsFragment
             ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             ((MainActivity)getActivity()).showTabs();
             fetchCampaigns();
+            return true;
         }
+        return false;
     }
 
     // Getter for mediaDetailPagerFragment
@@ -620,6 +644,21 @@ public class ContributionsFragment
         return mediaDetailPagerFragment;
     }
 
+    /**
+     * Reload media detail fragment once media is nominated
+     *
+     * @param index item position that has been nominated
+     */
+    @Override
+    public void refreshNominatedMedia(int index) {
+        if(mediaDetailPagerFragment != null && !contributionsListFragment.isVisible()) {
+            removeFragment(mediaDetailPagerFragment);
+            mediaDetailPagerFragment = new MediaDetailPagerFragment(false, true);
+            mediaDetailPagerFragment.showImage(index);
+            showMediaDetailPagerFragment();
+        }
+    }
+      
   // click listener to toggle description that means uses can press the limited connection
   // banner and description will hide. Tap again to show description.
   private View.OnClickListener toggleDescriptionListener = new View.OnClickListener() {

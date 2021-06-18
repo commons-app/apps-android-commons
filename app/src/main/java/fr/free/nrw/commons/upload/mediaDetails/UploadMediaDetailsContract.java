@@ -32,6 +32,8 @@ public interface UploadMediaDetailsContract {
 
         void showBadImagePopup(Integer errorCode, UploadItem uploadItem);
 
+        void showConnectionErrorPopup();
+
         void showMapWithImageCoordinates(boolean shouldShow);
 
         void showExternalMap(UploadItem uploadItem);

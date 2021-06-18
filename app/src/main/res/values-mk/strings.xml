@@ -14,13 +14,13 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Почеток на подигањата</string>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Започнувам %1$d подигање</item>
-    <item quantity="other">Започнувам %1$d подигања</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Обработувам %1$d подигање</item>
+    <item quantity="other">Обработувам %1$d подигања</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d подигање</item>
-    <item quantity="other">%1$d подигања</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d подигање</item>
+    <item quantity="other">%d подигања</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Сликава ќе се води под лиценцата %1$s</item>
@@ -59,7 +59,7 @@
   <string name="uploading_queued">Подигањето е во редица (овозможен режимот на ограничена врска)</string>
   <string name="upload_completed_notification_title">Податотеката „%1$s“ е подигната!</string>
   <string name="upload_completed_notification_text">Допрете за да го погледате подигањето</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Почнувам со подигањето на „%1$s“</string>
+  <string name="upload_progress_notification_title_start">Подигање на податотеката: %s</string>
   <string name="upload_progress_notification_title_in_progress">Подигање на „%1$s“</string>
   <string name="upload_progress_notification_title_finishing">Завршувам со подигање на „%1$s“</string>
   <string name="upload_failed_notification_title">Подигањето на „%1$s“ не успеа</string>
@@ -227,6 +227,8 @@
   <string name="upload_problem_different_geolocation">Оваа слика е направена на друго место.</string>
   <string name="upload_problem_fbmd">Подигајте само слики кои самите сте ги направиле. Не подигајте слики пронајдени на туѓи профили на Фејсбук.</string>
   <string name="upload_problem_do_you_continue">Дали сепак сакате да ја подигнете?</string>
+  <string name="upload_connection_error_alert_title">Грешка при поврзувањето</string>
+  <string name="upload_connection_error_alert_detail">Постапката за подигање бара да сте поврзани\n    со семрежјето. Проверете си ја врската.</string>
   <string name="upload_problem_image">Пронајдени проблеми во сликата</string>
   <string name="internet_downloaded">Подигајте само слики кои самите сте ги направиле. Не подигајте слики што сте ги нашле некаде на семрежјето.</string>
   <string name="use_external_storage">Зачувај слики направени во прилогот</string>
@@ -479,6 +481,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Не можев да ги додадам категориите.</string>
   <string name="category_edit_button_text">Поднови категории</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Се обидувам да ги подоновам координатите.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Поднова на координати</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Успеа</string>
+  <string name="coordinates_edit_helper_show_edit_message">Координатите %1$s се додадени.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Не можев да додадам координати.</string>
+  <string name="coordinates_picking_unsuccessful">Не можев да добијам координати.</string>
   <string name="share_image_via">Сподели ја сликата преку</string>
   <string name="no_achievements_yet">Засега немате придонеси</string>
   <string name="account_created">Сметката е создадена!</string>
@@ -573,5 +581,13 @@
   <string name="media_detail_step_title">Поединости за творбата</string>
   <string name="menu_view_category_page">Погл. категориска страница</string>
   <string name="menu_view_item_page">Погл. страница на предметот</string>
+  <string name="app_ui_language">Јазик на прилогот</string>
+  <string name="remove">Острани толкување и опис</string>
   <string name="read_help_link">Прочитајте повеќе</string>
+  <string name="choose_a_location">Изберете местоположба</string>
+  <string name="pan_and_zoom_to_adjust">Доведете го местото на картата и приближете го за да прилагодите</string>
+  <string name="exit_location_picker">Излези од избирачот на местоположба</string>
+  <string name="select_location_location_picker">Изберете местоположба</string>
+  <string name="location_picker_image_view">Поглед на слика за избирање местоположба</string>
+  <string name="location_picker_image_view_shadow">Сенчест поглед на слика за избирање местоположба</string>
 </resources>
