@@ -10,6 +10,7 @@
 * FarsiNevis
 * Fatemi127
 * Freshman404
+* Jeeputer
 * Ladsgroup
 * Mardetanha
 * Mehdi
@@ -36,13 +37,13 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">شروع %1$d بارگذاری پرونده</item>
-    <item quantity="other">شروع بارگذاری %1$d پرونده</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">پردازش %1$d بارگذاری پرونده</item>
+    <item quantity="other">پردازش بارگذاری %1$d پرونده</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d بارگذاری</item>
-    <item quantity="other">%1$d بارگذاری</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d بارگذاری</item>
+    <item quantity="other">%d بارگذاری</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">این نگاره تحت مجوز %1$s است</item>
@@ -76,7 +77,7 @@
   <string name="uploading_started">بارگذاری آغاز شد!</string>
   <string name="upload_completed_notification_title">%1$s بارگذاری شد!</string>
   <string name="upload_completed_notification_text">برای دیدن بارگذاریتان بر روی صفحه انگشت بزنید</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">شروع بارگذاری %1$s</string>
+  <string name="upload_progress_notification_title_start">بارگذاری پرونده: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">بارگذاری %1$s</string>
   <string name="upload_progress_notification_title_finishing">اتمام بارگذاری %1$s</string>
   <string name="upload_failed_notification_title">%1$s بارگذاری نشد</string>

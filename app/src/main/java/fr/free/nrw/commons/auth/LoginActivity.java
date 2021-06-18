@@ -339,6 +339,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             // no longer attached to activity!
             return;
         }
+        compositeDisposable.clear();
         sessionManager.setUserLoggedIn(true);
         AppAdapter.get().updateAccount(loginResult);
         progressDialog.dismiss();
@@ -463,7 +464,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         // if progressDialog is visible during the configuration change  then store state as  true else false so that
-        // we maintain visiblity of progressDailog after configuration change
+        // we maintain visibility of progressDailog after configuration change
         if(progressDialog!=null&&progressDialog.isShowing()) {
             outState.putBoolean(saveProgressDailog,true);
         } else {
@@ -471,7 +472,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
         outState.putString(saveErrorMessage,errorMessage.getText().toString()); //Save the errorMessage
         outState.putString(saveUsername,getUsername()); // Save the username
-        outState.putString(savePassword,getPassword()); // Save thte password
+        outState.putString(savePassword,getPassword()); // Save the password
     }
     private String getUsername() {
         return usernameEdit.getText().toString();

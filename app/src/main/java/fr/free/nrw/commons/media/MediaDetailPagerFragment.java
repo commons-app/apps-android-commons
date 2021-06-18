@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,7 +41,7 @@ import java.util.Objects;
 import javax.inject.Inject;
 import timber.log.Timber;
 
-public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
+public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener, MediaDetailFragment.Callback {
 
     @Inject BookmarkPicturesDao bookmarkDao;
 
@@ -101,19 +100,13 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         pager.addOnPageChangeListener(this);
 
         adapter = new MediaDetailAdapter(getChildFragmentManager());
-
-        if (((BaseActivity) getActivity()).getSupportActionBar() != null) {
-            ((BaseActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
         pager.setAdapter(adapter);
         if (savedInstanceState != null) {
             final int pageNumber = savedInstanceState.getInt("current-page");
             pager.setCurrentItem(pageNumber, false);
             getActivity().invalidateOptionsMenu();
-            adapter.notifyDataSetChanged();
-
         }
+        adapter.notifyDataSetChanged();
         if (getActivity() instanceof MainActivity) {
             ((MainActivity)getActivity()).hideTabs();
         }
@@ -383,6 +376,16 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     }
 
     /**
+     * Called after the media is nominated for deletion
+     *
+     * @param index item position that has been nominated
+     */
+    @Override
+    public void nominatingForDeletion(int index) {
+      provider.refreshNominatedMedia(index);
+    }
+  
+    /**
      * backButtonClicked is called on a back event in the media details pager.
      * returns true after closing the categoryEditContainer if open, implying that event was handled.
      * else returns false
@@ -398,6 +401,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         int getTotalMediaCount();
 
         Integer getContributionStateAt(int position);
+
+        // Reload media detail fragment once media is nominated
+        void refreshNominatedMedia(int index);
     }
 
     //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)

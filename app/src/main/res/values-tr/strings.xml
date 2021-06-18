@@ -247,6 +247,8 @@
   <string name="upload_problem_different_geolocation">Bu resim farklı bir yerde çekilmiş.</string>
   <string name="upload_problem_fbmd">Lütfen yalnızca kendi çektiğiniz resimleri yükleyin. Başkalarının Facebook hesaplarında bulduğunuz resimleri yüklemeyin.</string>
   <string name="upload_problem_do_you_continue">Hâlâ bu resmi yüklemek istiyor musunuz?</string>
+  <string name="upload_connection_error_alert_title">Bağlantı Hatası</string>
+  <string name="upload_connection_error_alert_detail">Yükleme işlemi etkin internet erişimine ihtiyaç duyar.\n    Lütfen ağ bağlantınızı kontrol edin.</string>
   <string name="upload_problem_image">Resimde bulunan sorunlar</string>
   <string name="internet_downloaded">Lütfen yalnızca kendi çektiğiniz resimleri yükleyin. İnternetten indirdiğiniz resimleri yüklemeyin.</string>
   <string name="use_external_storage">Uygulama içi çekimleri kaydedin</string>
@@ -593,5 +595,7 @@
   <string name="media_detail_step_title">Medya Ayrıntılar</string>
   <string name="menu_view_category_page">Kategori sayfasını görüntüle</string>
   <string name="menu_view_item_page">Öge sayfasını görüntüle</string>
+  <string name="app_ui_language">Uygulama kullanıcı arayüzü dili</string>
+  <string name="remove">Bir başlığı ve açıklamayı kaldırır</string>
   <string name="read_help_link">Devamını oku</string>
 </resources>

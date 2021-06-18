@@ -27,6 +27,7 @@
 * 予弦
 * 佛壁灯
 * 列维劳德
+* 坑触可
 * 夢蝶葬花
 * 沈澄心
 * 神樂坂秀吉
@@ -87,7 +88,7 @@
   <string name="uploading_queued">上传排队中（已启用连接受限模式）</string>
   <string name="upload_completed_notification_title">%1$s已上传！</string>
   <string name="upload_completed_notification_text">点击查看您的上传</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">开始%1$s的上传</string>
+  <string name="upload_progress_notification_title_start">开始%s的上传</string>
   <string name="upload_progress_notification_title_in_progress">%1$s正在上传</string>
   <string name="upload_progress_notification_title_finishing">正在完成上传%1$s</string>
   <string name="upload_failed_notification_title">上传%1$s失败</string>
@@ -196,6 +197,7 @@
   <string name="location_permission_title">请求位置权限</string>
   <string name="ok">确定</string>
   <string name="warning">警告</string>
+  <string name="duplicate_image_found">找到重复的图像</string>
   <string name="upload">上传</string>
   <string name="yes">是</string>
   <string name="no">否</string>

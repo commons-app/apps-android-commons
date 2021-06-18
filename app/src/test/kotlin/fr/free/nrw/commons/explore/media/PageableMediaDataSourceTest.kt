@@ -4,8 +4,7 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Single
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.`is`
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -28,6 +27,6 @@ class PageableMediaDataSourceTest {
             .thenReturn(Single.just(emptyList()))
         val pageableMediaDataSource = PageableMediaDataSource(mock(), mediaClient)
         pageableMediaDataSource.onQueryUpdated("test")
-        assertThat(pageableMediaDataSource.loadFunction(0,1), `is`(emptyList()))
+        Assert.assertEquals(pageableMediaDataSource.loadFunction(0,1), emptyList<String>())
     }
 }

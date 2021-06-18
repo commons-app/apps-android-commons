@@ -3,6 +3,7 @@ package fr.free.nrw.commons.bookmarks.pictures
 import android.content.ContentProviderClient
 import android.content.Context
 import android.os.Bundle
+import android.os.Looper.getMainLooper
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.GridView
@@ -28,13 +29,16 @@ import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
+import org.robolectric.annotation.LooperMode
 import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
+@LooperMode(LooperMode.Mode.PAUSED)
 class BookmarkPicturesFragmentUnitTests {
 
     private lateinit var fragment: BookmarkPicturesFragment
@@ -134,6 +138,7 @@ class BookmarkPicturesFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSetAdapter() {
+        shadowOf(getMainLooper()).idle()
         val method: Method =
             BookmarkPicturesFragment::class.java.getDeclaredMethod("setAdapter", List::class.java)
         method.isAccessible = true

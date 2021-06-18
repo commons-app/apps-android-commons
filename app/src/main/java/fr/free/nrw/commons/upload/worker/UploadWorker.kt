@@ -8,6 +8,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.work.CoroutineWorker
 import androidx.work.Data
 import androidx.work.WorkerParameters
+import com.google.gson.Gson
 import com.mapbox.mapboxsdk.plugins.localization.BuildConfig
 import dagger.android.ContributesAndroidInjector
 import fr.free.nrw.commons.CommonsApplication
@@ -148,66 +149,60 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL
         )!!
         withContext(Dispatchers.IO) {
-            //Doing this so that retry requests do not create new work requests and while a work is
-            // already running, all the requests should go through this, so kind of a queue
-            while (contributionDao.getContribution(statesToProcess)
-                    .blockingGet().isNotEmpty()
-            ) {
-                val queuedContributions = contributionDao.getContribution(statesToProcess)
-                    .blockingGet()
-                //Showing initial notification for the number of uploads being processed
+            val queuedContributions = contributionDao.getContribution(statesToProcess)
+                .blockingGet()
+            //Showing initial notification for the number of uploads being processed
 
-                processingUploads.setContentTitle(appContext.getString(R.string.starting_uploads))
-                processingUploads.setContentText(
-                    appContext.resources.getQuantityString(
-                        R.plurals.starting_multiple_uploads,
-                        queuedContributions.size,
-                        queuedContributions.size
-                    )
+            Timber.e("Queued Contributions: "+ queuedContributions.size)
+
+            processingUploads.setContentTitle(appContext.getString(R.string.starting_uploads))
+            processingUploads.setContentText(
+                appContext.resources.getQuantityString(
+                    R.plurals.starting_multiple_uploads,
+                    queuedContributions.size,
+                    queuedContributions.size
                 )
-                notificationManager?.notify(
-                    PROCESSING_UPLOADS_NOTIFICATION_TAG,
-                    PROCESSING_UPLOADS_NOTIFICATION_ID,
-                    processingUploads.build()
-                )
+            )
+            notificationManager?.notify(
+                PROCESSING_UPLOADS_NOTIFICATION_TAG,
+                PROCESSING_UPLOADS_NOTIFICATION_ID,
+                processingUploads.build()
+            )
 
-                queuedContributions.asFlow().map { contribution ->
-                    /**
-                     * If the limited connection mode is on, lets iterate through the queued
-                     * contributions
-                     * and set the state as STATE_QUEUED_LIMITED_CONNECTION_MODE ,
-                     * otherwise proceed with the upload
-                     */
-                    if(isLimitedConnectionModeEnabled()){
-                        if (contribution.state == Contribution.STATE_QUEUED) {
-                            contribution.state = Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE
-                            contributionDao.save(contribution)
-                        } else {
-                            //Else statement fix:'if' must have both main and 'else' branches if used as an expression
-                        }
-                    } else {
-                        contribution.transferred = 0
-                        contribution.state = Contribution.STATE_IN_PROGRESS
-                        contributionDao.save(contribution)
-                        uploadContribution(contribution = contribution)
-                        //This function updates the liveData when one media is uploaded
-                        setProgressAsync(Data.Builder().putInt("progress", countUpload).build())
-                        countUpload++
-                    }
-                }.collect()
-
-                //Dismiss the global notification
-                notificationManager?.cancel(
-                    PROCESSING_UPLOADS_NOTIFICATION_TAG,
-                    PROCESSING_UPLOADS_NOTIFICATION_ID
-                )
-
-                //No need to keep looking if the limited connection mode is on,
-                //If the user toggles it, the work manager will be started again
-                if(isLimitedConnectionModeEnabled()){
-                    break;
-                }
+            /**
+             * To avoid race condition when multiple of these workers are working, assign this state
+            so that the next one does not process these contribution again
+             */
+            queuedContributions.forEach {
+                it.state=Contribution.STATE_IN_PROGRESS
+                contributionDao.saveSynchronous(it)
             }
+
+            queuedContributions.asFlow().map { contribution ->
+                /**
+                 * If the limited connection mode is on, lets iterate through the queued
+                 * contributions
+                 * and set the state as STATE_QUEUED_LIMITED_CONNECTION_MODE ,
+                 * otherwise proceed with the upload
+                 */
+                if (isLimitedConnectionModeEnabled()) {
+                    if (contribution.state == Contribution.STATE_QUEUED) {
+                        contribution.state = Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE
+                        contributionDao.saveSynchronous(contribution)
+                    }
+                } else {
+                    contribution.transferred = 0
+                    contribution.state = Contribution.STATE_IN_PROGRESS
+                    contributionDao.saveSynchronous(contribution)
+                    uploadContribution(contribution = contribution)
+                }
+            }.collect()
+
+            //Dismiss the global notification
+            notificationManager?.cancel(
+                PROCESSING_UPLOADS_NOTIFICATION_TAG,
+                PROCESSING_UPLOADS_NOTIFICATION_ID
+            )
         }
         //TODO make this smart, think of handling retries in the future
         return Result.success()
@@ -314,6 +309,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                         Timber.e(exception)
                         Timber.e("Upload from stash failed for contribution : $filename")
                         showFailedNotification(contribution)
+                        contribution.state=Contribution.STATE_FAILED
                         if (STASH_ERROR_CODES.contains(exception.message)) {
                             clearChunks(contribution)
                         }
@@ -322,26 +318,28 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 StashUploadState.PAUSED -> {
                     showPausedNotification(contribution)
                     contribution.state = Contribution.STATE_PAUSED
-                    contributionDao.save(contribution).blockingGet()
+                    contributionDao.saveSynchronous(contribution)
                 }
                 else -> {
                     Timber.e("""upload file to stash failed with status: ${stashUploadResult.state}""")
                     showFailedNotification(contribution)
                     contribution.state = Contribution.STATE_FAILED
                     contribution.chunkInfo = null
-                    contributionDao.save(contribution).blockingAwait()
+                    contributionDao.saveSynchronous(contribution)
                 }
             }
         }catch (exception: Exception){
             Timber.e(exception)
             Timber.e("Stash upload failed for contribution: $filename")
             showFailedNotification(contribution)
+            contribution.state=Contribution.STATE_FAILED
+            clearChunks(contribution)
         }
     }
 
     private fun clearChunks(contribution: Contribution) {
         contribution.chunkInfo=null
-        contributionDao.save(contribution).blockingAwait()
+        contributionDao.saveSynchronous(contribution)
     }
 
     /**

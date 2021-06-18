@@ -39,8 +39,6 @@ import fr.free.nrw.commons.upload.UploadItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
@@ -182,7 +180,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * init the description recycler veiw and caption recyclerview
      */
     private void initRecyclerView() {
-        uploadMediaDetailAdapter = new UploadMediaDetailAdapter(defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE, ""));
+        uploadMediaDetailAdapter = new UploadMediaDetailAdapter(defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, ""));
         uploadMediaDetailAdapter.setCallback(this::showInfoAlert);
         uploadMediaDetailAdapter.setEventListener(this);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -213,7 +211,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         UploadMediaDetail uploadMediaDetail = new UploadMediaDetail();
         uploadMediaDetail.setManuallyAdded(true);//This was manually added by the user
         uploadMediaDetailAdapter.addDescription(uploadMediaDetail);
-        rvDescriptions.scrollToPosition(uploadMediaDetailAdapter.getItemCount()-1);
+        rvDescriptions.smoothScrollToPosition(uploadMediaDetailAdapter.getItemCount()-1);
     }
 
     @Override
@@ -365,6 +363,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             );
         }
         //If the error message is null, we will probably not show anything
+    }
+
+    @Override
+    public void showConnectionErrorPopup() {
+        DialogUtil.showAlertDialog(getActivity(),
+            getString(R.string.upload_connection_error_alert_title),
+            getString(R.string.upload_connection_error_alert_detail), getString(R.string.ok),
+            () -> {}, true);
     }
 
     @Override public void showMapWithImageCoordinates(boolean shouldShow) {
