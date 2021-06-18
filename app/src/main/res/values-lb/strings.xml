@@ -348,5 +348,6 @@
   <string name="leaderboard_used">Benotzt</string>
   <string name="limited_connection_mode">Limitéierte Verbindungsmodus</string>
   <string name="app_ui_language">Sprooch vum Interface vum Benotzer vun der App</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
   <string name="read_help_link">Liest méi</string>
 </resources>
