@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.customselector.helper
 
 import android.content.Context
+import com.mapbox.android.core.FileUtils
 import fr.free.nrw.commons.customselector.model.Folder
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.filepicker.Constants
@@ -132,7 +133,7 @@ object ImageHelper {
         }
         if(files.isNullOrEmpty())
             return
-        files.sortedWith(compareBy { map.get(it) })
+        files.sortedWith(FileUtils.LastModifiedComparator())
         files.reverse()
         for (file in files) {
             bytesDeleted += file.length()
@@ -141,6 +142,10 @@ object ImageHelper {
                 break
             }
         }
+    }
+
+    fun getCacheSize(context: Context): Long{
+        return getDirSize(tempImageDirectory(context))
     }
 
     private fun getDirSize(dir: File): Long {
@@ -152,28 +157,16 @@ object ImageHelper {
                     size += file.length()
                 }
             }
-        if (size > 524288000L) {
-            return size - 524288000L
-        }
-        return 0
+        return size
     }
 
-    fun emptyDir(context: Context){
-        cleanDir(
-            File(context.cacheDir, Constants.DEFAULT_FOLDER_NAME), getDirSize(
-                File(
-                    context.cacheDir,
-                    Constants.DEFAULT_FOLDER_NAME
-                )
-            )
-        )
+    fun cleanDir(context: Context){
+        val privateTempDir = tempImageDirectory(context)
+        cleanDir(privateTempDir, getDirSize(privateTempDir))
     }
 
-    fun tempImageDirectory(context: Context): File? {
+    fun tempImageDirectory(context: Context): File {
         val privateTempDir = File(context.cacheDir, Constants.DEFAULT_FOLDER_NAME)
-        val size: Long = getDirSize(privateTempDir)
-
-
         if (!privateTempDir.exists()) privateTempDir.mkdirs()
         return privateTempDir
     }

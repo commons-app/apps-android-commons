@@ -1,11 +1,8 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
 import android.content.Context
-import android.util.Log
 import androidx.exifinterface.media.ExifInterface
 import com.bumptech.glide.Glide
-import fr.free.nrw.commons.BuildConfig
-import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.adapter.FolderAdapter.FolderViewHolder
@@ -19,45 +16,55 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.IOException
+import java.util.*
+import kotlin.collections.HashMap
 
 /**
  * Image Loader class, loads images, depending on API results.
  */
-class ImageLoader constructor(var mediaClient: MediaClient,var fileProcessor: FileProcessor, val context: Context) {
+class ImageLoader constructor(
+
+    /**
+     * MediaClient for query sha1
+     */
+    var mediaClient: MediaClient,
+
+    /**
+     * FileProcessor to pre-process the file
+     */
+    var fileProcessor: FileProcessor,
+
+    /**
+     * Context for coroutine.
+     */
+    val context: Context) {
 
 
-
-    private var mapped: HashMap<Image,String> = HashMap()
-    private var mapping2 : HashMap<ImageViewHolder,Image> = HashMap()
+    private var mapImageSha1: HashMap<Image,String> = HashMap()
+    private var mapHolderImage : HashMap<ImageViewHolder,Image> = HashMap()
     private var mapResult: HashMap<String,Boolean> = HashMap()
 
-    var load=false
-
     fun loadImageIntoImageView(holder : ImageViewHolder, image: Image){
-        mapping2.put(holder,image)
-        Glide.with(holder.itemView.context)
-            .load(R.drawable.image_placeholder)
-            .into(holder.image)
+        mapHolderImage.put(holder,image)
         holder.itemNotUploaded()
         CoroutineScope(Dispatchers.Main).launch {
             var value = false
-            withContext(Dispatchers.IO) {
-                if(mapping2.get(holder)!=image)
+            withContext(Dispatchers.Default) {
+                if(mapHolderImage.get(holder)!=image) {
                     return@withContext
-                var sha1=getSha1(image)
-                mapped.put(image,sha1)
-                if(mapping2.get(holder)!=image)
+                }
+                val sha1=getSha1(image)
+                mapImageSha1.put(image,sha1)
+                if(mapHolderImage.get(holder)!=image) {
                     return@withContext
+                }
                 value = querySha1(sha1)
                 mapResult.put(sha1,value)
             }
-            if(mapping2.get(holder)==image) {
+            if(mapHolderImage.get(holder)==image) {
                 if (value == true) {
                     holder.itemUploaded()
                 } else {
-                        Glide.with(holder.itemView.context)
-                            .load(image.uri)
-                            .into(holder.image)
                     holder.itemNotUploaded()
                 }
             }
@@ -78,8 +85,8 @@ class ImageLoader constructor(var mediaClient: MediaClient,var fileProcessor: Fi
     }
 
     fun getSha1(image: Image): String{
-        if(mapped.get(image)!=null){
-            return mapped.get(image)!!
+        if(mapImageSha1.get(image)!=null){
+            return mapImageSha1.get(image)!!
         }
         else{
             return generateModifiedSha1(image)
@@ -95,7 +102,7 @@ class ImageLoader constructor(var mediaClient: MediaClient,var fileProcessor: Fi
             null
         }
         fileProcessor.redactExifTags(exifInterface,fileProcessor.getExifTagsToRedact())
-        var sha1=ImageHelper.generateSHA1(ImageHelper.getFileInputStream(uploadableFile.filePath))
+        val sha1=ImageHelper.generateSHA1(ImageHelper.getFileInputStream(uploadableFile.filePath))
         uploadableFile.file.delete()
         return sha1
     }

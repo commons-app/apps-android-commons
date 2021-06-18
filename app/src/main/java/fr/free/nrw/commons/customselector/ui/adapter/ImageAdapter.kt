@@ -6,9 +6,11 @@ import fr.free.nrw.commons.R
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
@@ -74,8 +76,8 @@ class ImageAdapter(
         else {
             holder.itemUnselected();
         }
+        Glide.with(context).load(image.uri).into(holder.image)
         imageLoader.loadImageIntoImageView(holder,image)
-//        Glide.with(context).load(image.uri).into(holder.image)
         holder.itemView.setOnClickListener {
             selectOrRemoveImage(holder, position)
         }
@@ -94,12 +96,12 @@ class ImageAdapter(
                 notifyItemChanged(index, ImageSelectedOrUpdated())
             }
         } else {
-            /**
-             * TODO
-             * Show toast on tapping an uploaded item.
-             */
+            if(holder.isItemUploaded()){
+                Toast.makeText(context,"Already Uploaded image", Toast.LENGTH_SHORT).show()
+            } else {
             selectedImages.add(images[position])
             notifyItemChanged(position, ImageSelectedOrUpdated())
+            }
         }
         imageSelectListener.onSelectedImagesChanged(selectedImages)
     }
@@ -157,6 +159,9 @@ class ImageAdapter(
             uploadedGroup.visibility = View.VISIBLE
         }
 
+        fun isItemUploaded():Boolean {
+            return uploadedGroup.visibility == View.VISIBLE
+        }
         /**
          * Item Not Uploaded view.
          */
