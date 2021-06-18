@@ -1,9 +1,13 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +27,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.filepicker.UploadableFile;
@@ -49,6 +55,7 @@ import timber.log.Timber;
 public class UploadMediaDetailFragment extends UploadBaseFragment implements
     UploadMediaDetailsContract.View, UploadMediaDetailAdapter.EventListener {
 
+    private static final int REQUEST_CODE = 1211;
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.ib_map)
@@ -379,6 +386,67 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @Override
     public void showExternalMap(UploadItem uploadItem) {
+
+        DialogUtil.showAlertDialog(getActivity(),
+            getString(R.string.upload_problem_image),
+            "Choose as your requirement",
+            "Show in map",
+            "Edit location",
+            this::showInMap,
+            ()-> goToLocationPickerActivity(uploadItem)
+        );
+
+    }
+
+    private void goToLocationPickerActivity(UploadItem uploadItem) {
+
+        startActivityForResult(new LocationPicker.IntentBuilder()
+            .defaultLocation(new CameraPosition.Builder()
+                .target(new com.mapbox.mapboxsdk.geometry.LatLng(uploadItem.getGpsCoords().getDecLatitude(),
+                    uploadItem.getGpsCoords().getDecLongitude()))
+                .zoom(16).build())
+            .build(getActivity()),REQUEST_CODE);
+    }
+
+    /**
+     * Get the coordinates and update the existing coordinates.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode,
+        @Nullable final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+
+            assert data != null;
+            final CameraPosition cameraPosition = LocationPicker.getCameraPosition(data);
+
+            if (cameraPosition != null) {
+
+                final String latitude = String.valueOf(cameraPosition.target.getLatitude());
+                final String longitude = String.valueOf(cameraPosition.target.getLongitude());
+
+                editLocation(latitude, longitude);
+
+            }
+        } else if (resultCode == RESULT_CANCELED) {
+            Toast.makeText(getContext(),"Unable to get coords",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void editLocation(String latitude, String longitude){
+
+        uploadItem.getGpsCoords().setDecLatitude(Double.parseDouble(latitude));
+        uploadItem.getGpsCoords().setDecLongitude(Double.parseDouble(longitude));
+        uploadItem.getGpsCoords().setDecimalCoords(latitude+"|"+longitude);
+        uploadItem.getGpsCoords().setImageCoordsExists(true);
+        Log.d("abba","1st am I"+uploadItem.getGpsCoords().getDecLatitude());
+    }
+
+    public void showInMap(){
         Utils.handleGeoCoordinates(getContext(),
             new LatLng(uploadItem.getGpsCoords().getDecLatitude(),
                 uploadItem.getGpsCoords().getDecLongitude(), 0.0f));
