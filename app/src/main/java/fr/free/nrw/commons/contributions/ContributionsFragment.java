@@ -648,6 +648,7 @@ public class ContributionsFragment
         return mediaDetailPagerFragment;
     }
 
+
     /**
      * this function updates the number of contributions
      */
@@ -660,6 +661,7 @@ public class ContributionsFragment
                 }
             });
     }
+
 
     /**
      * Reload media detail fragment once media is nominated
@@ -690,6 +692,7 @@ public class ContributionsFragment
           }
       }
   };
+
 
 }
 
