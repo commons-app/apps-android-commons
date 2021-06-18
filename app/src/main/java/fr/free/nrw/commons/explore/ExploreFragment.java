@@ -17,10 +17,13 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.ActivityUtils;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 public class ExploreFragment extends CommonsDaggerSupportFragment {
 
@@ -35,6 +38,9 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     ViewPagerAdapter viewPagerAdapter;
     private ExploreListRootFragment featuredRootFragment;
     private ExploreListRootFragment mobileRootFragment;
+    @Inject
+    @Named("default_preferences")
+    public JsonKvStore applicationKvStore;
 
     public void setScroll(boolean canScroll){
         viewPager.setCanScroll(canScroll);
@@ -95,20 +101,21 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         viewPagerAdapter.notifyDataSetChanged();
     }
 
-    public void onBackPressed() {
+    public boolean onBackPressed() {
         if (tabLayout.getSelectedTabPosition() == 0) {
-            if(featuredRootFragment.backPressed()){
-                // Event is handled by the Fragment we need not do anything.
-                return;
+            if (featuredRootFragment.backPressed()) {
+                ((BaseActivity) getActivity()).getSupportActionBar()
+                    .setDisplayHomeAsUpEnabled(false);
+                return true;
             }
         } else {
-            if(mobileRootFragment.backPressed()){
-                // Event is handled by the Fragment we need not do anything.
-                return;
+            if (mobileRootFragment.backPressed()) {
+                ((BaseActivity) getActivity()).getSupportActionBar()
+                    .setDisplayHomeAsUpEnabled(false);
+                return true;
             }
         }
-        // Event is not handled by the fragment ( i.e performed back action ) therefore change action bar.
-        ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        return false;
     }
 
     /**

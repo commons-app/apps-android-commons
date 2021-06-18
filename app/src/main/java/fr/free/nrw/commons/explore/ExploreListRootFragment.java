@@ -2,7 +2,6 @@ package fr.free.nrw.commons.explore;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -182,20 +181,23 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
    * @return
    */
   public boolean backPressed() {
-    if (null!=mediaDetails && mediaDetails.isVisible()) {
+    if (null != mediaDetails && mediaDetails.isVisible()) {
       // todo add get list fragment
-      if(mediaDetails.backButtonClicked()) {
+      if (mediaDetails.backButtonClicked()) {
         // MediaDetails handled the event no further action required.
         return true;
+      } else {
+        ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
+        removeFragment(mediaDetails);
+        ((ExploreFragment) getParentFragment()).setScroll(true);
+        setFragment(listFragment, mediaDetails);
+        ((MainActivity) getActivity()).showTabs();
+        return true;
       }
-      ((ExploreFragment)getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
-      removeFragment(mediaDetails);
-      ((ExploreFragment) getParentFragment()).setScroll(true);
-      setFragment(listFragment, mediaDetails);
     } else {
       ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
     }
-    ((MainActivity)getActivity()).showTabs();
+    ((MainActivity) getActivity()).showTabs();
     return false;
   }
 }
