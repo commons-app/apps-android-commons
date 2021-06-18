@@ -622,6 +622,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="app_ui_language">App user interface language</string>
   <string name="remove">Removes a caption and description</string>
   <string name="read_help_link">Read more</string>
+  <string name="media_detail_in_all_languages">In all languages</string>
   <string name="choose_a_location">Choose a location</string>
   <string name="pan_and_zoom_to_adjust">Pan and zoom to adjust</string>
   <string name="exit_location_picker">Exit location picker</string>
