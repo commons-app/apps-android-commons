@@ -194,6 +194,8 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     contribution.transferred = 0
                     contribution.state = Contribution.STATE_IN_PROGRESS
                     contributionDao.saveSynchronous(contribution)
+                    setProgressAsync(Data.Builder().putInt("progress", countUpload).build())
+                    countUpload++
                     uploadContribution(contribution = contribution)
                 }
             }.collect()
