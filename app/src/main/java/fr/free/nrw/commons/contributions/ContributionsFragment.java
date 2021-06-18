@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,6 +34,8 @@ import fr.free.nrw.commons.theme.BaseActivity;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
+import androidx.work.WorkInfo;
+import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
@@ -60,6 +63,7 @@ import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.upload.worker.UploadWorker;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -154,7 +158,7 @@ public class ContributionsFragment
         }
 
         initFragments();
-
+        upDateUploadCount();
         if(shouldShowMediaDetailsFragment){
             showMediaDetailPagerFragment();
         }else{
@@ -644,6 +648,21 @@ public class ContributionsFragment
         return mediaDetailPagerFragment;
     }
 
+
+    /**
+     * this function updates the number of contributions
+     */
+    void upDateUploadCount() {
+        WorkManager.getInstance(getContext())
+            .getWorkInfosForUniqueWorkLiveData(UploadWorker.class.getSimpleName()).observe(
+            getViewLifecycleOwner(), workInfos -> {
+                if (workInfos.size() > 0) {
+                    setUploadCount();
+                }
+            });
+    }
+
+
     /**
      * Reload media detail fragment once media is nominated
      *
@@ -658,7 +677,7 @@ public class ContributionsFragment
             showMediaDetailPagerFragment();
         }
     }
-      
+
   // click listener to toggle description that means uses can press the limited connection
   // banner and description will hide. Tap again to show description.
   private View.OnClickListener toggleDescriptionListener = new View.OnClickListener() {
@@ -673,6 +692,7 @@ public class ContributionsFragment
           }
       }
   };
+
 
 }
 
