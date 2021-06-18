@@ -29,17 +29,15 @@ public class ImageInfo implements Serializable {
     @Nullable private String user;
     @Nullable private String timestamp;
 
+    /**
+     * Query width, default width parameter of the API query in pixels.
+     */
+    final private static int QUERY_WIDTH = 640;
 
     /**
-     * queryWidth, Width parameter of API query in px.
+     * Threshold height, the minimum height of the image in pixels.
      */
-    final private int queryWidth = 640;
-
-
-    /**
-     * thresholdHeight, The minimum height of the image in px.
-     */
-    final private static int thresholdHeight = 220;
+    final private static int THRESHOLD_HEIGHT = 220;
 
     @NonNull
     public String getSource() {
@@ -105,15 +103,15 @@ public class ImageInfo implements Serializable {
      * so we update the thumb url keeping a minimum height threshold.
      */
     private void updateThumbUrl() {
-        // If thumbHeight retrieved from API is less than thresholdHeight
-        if(getThumbHeight() < thresholdHeight){
+        // If thumbHeight retrieved from API is less than THRESHOLD_HEIGHT
+        if(getThumbHeight() < THRESHOLD_HEIGHT){
             // If thumbWidthRetrieved is same as queried width ( If not tells us that the image has no larger dimensions. )
-            if(getThumbWidth() == queryWidth){
-                // Calculate new Width depending on the aspect ratio.
-                final int finalWidth = (int)(thresholdHeight * getThumbWidth() * 1.0 / getThumbHeight());
-                thumbHeight = thresholdHeight;
+            if(getThumbWidth() == QUERY_WIDTH){
+                // Calculate new width depending on the aspect ratio.
+                final int finalWidth = (int)(THRESHOLD_HEIGHT * getThumbWidth() * 1.0 / getThumbHeight());
+                thumbHeight = THRESHOLD_HEIGHT;
                 thumbWidth = finalWidth;
-                final String toReplace = "/" + queryWidth + "px";
+                final String toReplace = "/" + QUERY_WIDTH + "px";
                 final int position = thumbUrl.lastIndexOf(toReplace);
                 thumbUrl = (new StringBuilder(thumbUrl)).replace(position, position + toReplace.length(), "/" + thumbWidth + "px").toString();
             }
