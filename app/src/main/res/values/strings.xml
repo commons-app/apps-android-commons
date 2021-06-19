@@ -65,7 +65,7 @@
   <string name="upload_paused_notification_subtitle">Tap to view</string>
   <string name="title_activity_contributions">My Recent Uploads</string>
   <string name="contribution_state_queued">Queued</string>
-  <string name="contribution_state_failed">Error detected</string>
+  <string name="contribution_state_failed">Failed</string>
   <string name="contribution_state_in_progress">%1$d%% complete</string>
   <string name="contribution_state_starting">Uploading</string>
   <string name="menu_from_gallery">From Gallery</string>
@@ -83,7 +83,7 @@
   <string name="login_failed_throttled">Too many invalid attempts. Please try again in a few minutes.</string>
   <string name="login_failed_blocked">Sorry, this user has been blocked on Commons</string>
   <string name="login_failed_2fa_needed">You must provide your two factor authentication code.</string>
-  <string name="login_failed_generic">Error logging in</string>
+  <string name="login_failed_generic">Login Failed</string>
   <string name="share_upload_button">Upload</string>
   <string name="multiple_share_base_title">Name this set</string>
   <string name="add_set_name_toast">Please provide a name for this set</string>
@@ -588,7 +588,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="delete_helper_show_deletion_title">Nominating for deletion</string>
   <string name="delete_helper_show_deletion_title_success">Deleted</string>
   <string name="delete_helper_show_deletion_message_if">Nominated %1$s for deletion.</string>
-  <string name="delete_helper_show_deletion_title_failed">Title could not be deleted</string>
+  <string name="delete_helper_show_deletion_title_failed">Could not be deleted</string>
   <string name="delete_helper_show_deletion_message_else">Could not request deletion.</string>
   <string name="delete_helper_ask_spam_selfie">A selfie</string>
   <string name="delete_helper_ask_spam_blurry">Blurry</string>
