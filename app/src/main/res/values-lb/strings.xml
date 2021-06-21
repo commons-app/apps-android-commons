@@ -301,6 +301,8 @@
   <string name="category_edit_helper_show_edit_title_success">Succès</string>
   <string name="category_edit_helper_edit_message_else">Kategorie konnten net derbäigesat ginn.</string>
   <string name="category_edit_button_text">Kategorien aktualiséieren</string>
+  <string name="coordinates_edit_helper_show_edit_title">Aktualiséierung vun de Koordinaten</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Succès</string>
   <string name="account_created">Benotzerkont ugeluecht!</string>
   <string name="place_state_needs_photo">Brauch eng Foto</string>
   <string name="upload_nearby_place_found_title">Plaz nobäi fonnt</string>
@@ -348,6 +350,8 @@
   <string name="leaderboard_used">Benotzt</string>
   <string name="limited_connection_mode">Limitéierte Verbindungsmodus</string>
   <string name="app_ui_language">Sprooch vum Interface vum Benotzer vun der App</string>
-  <string name="media_detail_in_all_languages">In all languages</string>
   <string name="read_help_link">Liest méi</string>
+  <string name="media_detail_in_all_languages">An alle Sproochen</string>
+  <string name="choose_a_location">Eng Plaz eraussichen</string>
+  <string name="select_location_location_picker">Plaz eraussichen</string>
 </resources>

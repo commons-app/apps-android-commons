@@ -7,6 +7,7 @@
 * FinlandMan
 * Joquliina
 * Kyykaarme
+* MITO
 * Maantietäjä
 * Nike
 * Olli
@@ -548,4 +549,5 @@
   <string name="depicts_step_title">Esittää</string>
   <string name="menu_view_category_page">Näytä luokkasivu</string>
   <string name="read_help_link">Lue lisää</string>
+  <string name="media_detail_in_all_languages">Kaikilla kielillä</string>
 </resources>
