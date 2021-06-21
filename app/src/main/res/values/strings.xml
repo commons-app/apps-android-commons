@@ -488,7 +488,6 @@ Upload your first media by tapping on the add button.</string>
 
   <string name="nearby_campaign_dismiss_message">You won\'t see the campaigns anymore. However, you can re-enable this notification in Settings if you wish.</string>
   <string name="this_function_needs_network_connection">This function requires network connection, please check your connection settings.</string>
-  <string name="bad_token_error_proposed_solution">Cannot upload due to issues with edit token. Please log out and log in again.</string>
   <string name="error_processing_image">Error occurred while processing the image. Please try again!</string>
   <string name="getting_edit_token">Getting token for editing</string>
   <string name="check_category_adding_template">Adding template for category check</string>
@@ -501,17 +500,10 @@ Upload your first media by tapping on the add button.</string>
   <string name="check_category_toast">Requesting category check for %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Adding delete message to file</string>
   <string name="nominate_for_deletion_done">Done</string>
-  <string name="nominate_for_deletion_notify_user">Notifying User on Talk page</string>
-  <string name="nominate_for_deletion_edit_deletion_request_log">Adding file to Delete requests log</string>
-  <string name="nominate_for_deletion_create_deletion_request">Creating Delete requests subpage</string>
-  <string name="notsure">Not sure</string>
-  <string name="send_thank_success_title">Thanks sent!</string>
-  <string name="send_thank_success_message">Thanks sent to %1$s</string>
-  <string name="send_thank_failure_message">Cannot send thanks to %1$s</string>
-  <string name="send_thank_failure_title">Cannot send Thanks</string>
-  <string name="send_thank_send">Sending thanks</string>
-  <string name="send_thank_notification_title">Sending thanks</string>
-
+  <string name="send_thank_success_title">Sending Thanks: Success</string>
+  <string name="send_thank_success_message">Successfully sent thanks to %1$s</string>
+  <string name="send_thank_failure_message">Failed to send thanks %1$s</string>
+  <string name="send_thank_failure_title">Sending Thanks: Failure</string>
   <string name="send_thank_toast">Sending Thanks for %1$s</string>
   <string name="review_copyright">Does this follow the rules of copyright?</string>
   <string name="review_category">Is this correctly categorized?</string>
