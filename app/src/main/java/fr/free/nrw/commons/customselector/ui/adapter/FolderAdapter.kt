@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.model.Folder
-import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
 
 class   FolderAdapter(
     /**
@@ -23,12 +22,8 @@ class   FolderAdapter(
      * Folder Click listener for click events.
      */
     private val itemClickListener: FolderClickListener
-) : RecyclerViewAdapter<FolderAdapter.FolderViewHolder?>(context) {
 
-    /**
-     * Image Loader for loading images.
-     */
-    private val imageLoader = ImageLoader()
+) : RecyclerViewAdapter<FolderAdapter.FolderViewHolder?>(context) {
 
     /**
      * List of folders.
