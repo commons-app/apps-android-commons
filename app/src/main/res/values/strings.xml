@@ -46,10 +46,10 @@
   <string name="signup">Sign up</string>
   <string name="logging_in_title">Logging in</string>
   <string name="logging_in_message">Please wait…</string>
-  <string name="login_success">Login success!</string>
+  <string name="login_success">Logged in!</string>
   <string name="login_failed">Login failed!</string>
   <string name="upload_failed">File not found. Please try another file.</string>
-  <string name="authentication_failed">Authentication failed, please login again</string>
+  <string name="authentication_failed">Error in authentication, please login again</string>
   <string name="uploading_started">Upload started!</string>
   <string name="uploading_queued">Upload queued (limited connection mode enabled)</string>
   <string name="upload_completed_notification_title">%1$s uploaded!</string>
@@ -57,7 +57,7 @@
   <string name="upload_progress_notification_title_start">Uploading file: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s uploading</string>
   <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
-  <string name="upload_failed_notification_title">Uploading %1$s failed</string>
+  <string name="upload_failed_notification_title">Cannot upload %1$s</string>
   <string name="upload_paused_notification_title">Uploading %1$s paused</string>
   <string name="upload_failed_notification_subtitle">Tap to view</string>
   <string name="upload_paused_notification_subtitle">Tap to view</string>
@@ -298,9 +298,9 @@
   <string name="explore_tab_title_featured">Featured</string>
   <string name="explore_tab_title_mobile">Uploaded via mobile</string>
   <string name="successful_wikidata_edit">Image added to %1$s on Wikidata!</string>
-  <string name="wikidata_edit_failure">Failed to update corresponding Wikidata entity!</string>
+  <string name="wikidata_edit_failure">Cannot update corresponding Wikidata entity!</string>
   <string name="menu_set_wallpaper">Set as wallpaper</string>
-  <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>
+  <string name="wallpaper_set_successfully">Wallpaper set!</string>
   <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Is this picture OK to upload?</string>
   <string name="question">Question</string>
@@ -467,7 +467,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="welcome_do_upload_content_description">Examples of good images to upload to Commons</string>
   <string name="welcome_dont_upload_content_description">Examples of images not to upload</string>
   <string name="skip_image">Skip this image</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download Failed!!. We cannot download the file without external storage permission.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Cannot download the file without external storage permission.</string>
 
   <string name="manage_exif_tags">Manage EXIF Tags</string>
   <string name="manage_exif_tags_summary">Select which EXIF tags to keep in uploads</string>
@@ -491,9 +491,9 @@ Upload your first media by tapping on the add button.</string>
   <string name="review_is_uploaded_by">%1$s is uploaded by: %2$s</string>
   <string name="default_description_language">Default description language</string>
   <string name="delete_helper_show_deletion_title">Nominating for deletion</string>
-  <string name="delete_helper_show_deletion_title_success">Success</string>
+  <string name="delete_helper_show_deletion_title_success">Deleted</string>
   <string name="delete_helper_show_deletion_message_if">Nominated %1$s for deletion.</string>
-  <string name="delete_helper_show_deletion_title_failed">Failed</string>
+  <string name="delete_helper_show_deletion_title_failed">Could not be deleted</string>
   <string name="delete_helper_show_deletion_message_else">Could not request deletion.</string>
   <string name="delete_helper_ask_spam_selfie">A selfie</string>
   <string name="delete_helper_ask_spam_blurry">Blurry</string>
@@ -505,7 +505,7 @@ Upload your first media by tapping on the add button.</string>
 
   <string name="category_edit_helper_make_edit_toast">Trying to update categories.</string>
   <string name="category_edit_helper_show_edit_title">Category update</string>
-  <string name="category_edit_helper_show_edit_title_success">Success</string>
+  <string name="category_edit_helper_show_edit_title_success">Edited</string>
   <plurals name="category_edit_helper_show_edit_message_if">
     <item quantity="one">Category %1$s is added.</item>
     <item quantity="other">Categories %1$s are added.</item>
@@ -549,7 +549,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="theme_dark_name">Dark</string>
   <string name="theme_light_name">Light</string>
 
-  <string name="cannot_open_location_settings">Failed to open location settings. Please turn on location manually</string>
+  <string name="cannot_open_location_settings">Cannot open location settings. Please turn on location manually</string>
   <string name="recommend_high_accuracy_mode">For best results, choose the High Accuracy mode.</string>
   <string name="ask_to_turn_location_on">Turn on location?</string>
   <string name="nearby_needs_location">Nearby needs location enabled to work properly</string>
