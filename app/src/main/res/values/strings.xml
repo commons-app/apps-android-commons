@@ -458,14 +458,7 @@
 
   <string name="no_uploads">Welcome to Commons!\n
 Upload your first media by tapping on the add button.</string>
-  <string name="desc_language_Worldwide">Worldwide</string>
-  <string name="desc_language_America">America</string>
-  <string name="desc_language_Europe">Europe</string>
-  <string name="desc_language_Middle_East">Middle East</string>
-  <string name="desc_language_Africa">Africa</string>
-  <string name="desc_language_Asia">Asia</string>
-
-  <string name="desc_language_Pacific">Pacific</string>
+  
   <string name="no_categories_selected">No Categories Selected</string>
 
   <string name="no_categories_selected_warning_desc">Images without categories are rarely usable. Are you sure you want to continue without selecting categories?</string>
