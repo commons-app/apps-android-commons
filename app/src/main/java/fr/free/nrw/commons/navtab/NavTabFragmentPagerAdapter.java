@@ -8,28 +8,31 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 public class NavTabFragmentPagerAdapter extends FragmentPagerAdapter {
-  private Fragment currentFragment;
 
-  public NavTabFragmentPagerAdapter(FragmentManager mgr) {
-    super(mgr);
-  }
+    private Fragment currentFragment;
 
-  @Nullable
-  public Fragment getCurrentFragment() {
-    return currentFragment;
-  }
+    public NavTabFragmentPagerAdapter(FragmentManager mgr) {
+        super(mgr);
+    }
 
-  @Override public Fragment getItem(int pos) {
-    return NavTab.of(pos).newInstance();
-  }
+    @Nullable
+    public Fragment getCurrentFragment() {
+        return currentFragment;
+    }
 
-  @Override public int getCount() {
-    return NavTab.size();
-  }
+    @Override
+    public Fragment getItem(int pos) {
+        return NavTab.of(pos).newInstance();
+    }
 
-  @Override
-  public void setPrimaryItem(ViewGroup container, int position, Object object) {
-    currentFragment = ((Fragment) object);
-    super.setPrimaryItem(container, position, object);
-  }
+    @Override
+    public int getCount() {
+        return NavTab.size();
+    }
+
+    @Override
+    public void setPrimaryItem(ViewGroup container, int position, Object object) {
+        currentFragment = ((Fragment) object);
+        super.setPrimaryItem(container, position, object);
+    }
 }

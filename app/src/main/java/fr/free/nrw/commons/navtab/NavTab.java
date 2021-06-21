@@ -16,82 +16,81 @@ import org.wikipedia.model.EnumCodeMap;
 import fr.free.nrw.commons.R;
 
 
-
 public enum NavTab implements EnumCode {
-  CONTRIBUTIONS(R.string.contributions_fragment, R.drawable.ic_baseline_person_24) {
+    CONTRIBUTIONS(R.string.contributions_fragment, R.drawable.ic_baseline_person_24) {
+        @NonNull
+        @Override
+        public Fragment newInstance() {
+            return ContributionsFragment.newInstance();
+        }
+    },
+    NEARBY(R.string.nearby_fragment, R.drawable.ic_location_on_black_24dp) {
+        @NonNull
+        @Override
+        public Fragment newInstance() {
+            return NearbyParentFragment.newInstance();
+        }
+    },
+    EXPLORE(R.string.navigation_item_explore, R.drawable.ic_globe) {
+        @NonNull
+        @Override
+        public Fragment newInstance() {
+            return ExploreFragment.newInstance();
+        }
+    },
+    FAVORITES(R.string.favorites, R.drawable.ic_round_star_border_24px) {
+        @NonNull
+        @Override
+        public Fragment newInstance() {
+            return BookmarkFragment.newInstance();
+        }
+    },
+    MORE(R.string.more, R.drawable.ic_menu_black_24dp) {
+        @NonNull
+        @Override
+        public Fragment newInstance() {
+            return null;
+        }
+    };
+
+    private static final EnumCodeMap<NavTab> MAP = new EnumCodeMap<>(NavTab.class);
+
+    @StringRes
+    private final int text;
+    @DrawableRes
+    private final int icon;
+
     @NonNull
-    @Override
-    public Fragment newInstance() {
-      return ContributionsFragment.newInstance();
+    public static NavTab of(int code) {
+        return MAP.get(code);
     }
-  },
-  NEARBY(R.string.nearby_fragment, R.drawable.ic_location_on_black_24dp){
+
+    public static int size() {
+        return MAP.size();
+    }
+
+    @StringRes
+    public int text() {
+        return text;
+    }
+
+    @DrawableRes
+    public int icon() {
+        return icon;
+    }
+
     @NonNull
+    public abstract Fragment newInstance();
+
     @Override
-    public Fragment newInstance() {
-      return NearbyParentFragment.newInstance();
+    public int code() {
+        // This enumeration is not marshalled so tying declaration order to presentation order is
+        // convenient and consistent.
+        return ordinal();
     }
-  },
-  EXPLORE(R.string.navigation_item_explore, R.drawable.ic_globe) {
-    @NonNull
-    @Override
-    public Fragment newInstance() {
-      return ExploreFragment.newInstance();
+
+    NavTab(@StringRes int text, @DrawableRes int icon) {
+        this.text = text;
+        this.icon = icon;
     }
-  },
-  FAVORITES(R.string.favorites, R.drawable.ic_round_star_border_24px) {
-    @NonNull
-    @Override
-    public Fragment newInstance() {
-      return BookmarkFragment.newInstance();
-    }
-  },
-  MORE(R.string.more, R.drawable.ic_menu_black_24dp) {
-    @NonNull
-    @Override
-    public Fragment newInstance() {
-      return null;
-    }
-  };
-
-  private static final EnumCodeMap<NavTab> MAP = new EnumCodeMap<>(NavTab.class);
-
-  @StringRes
-  private final int text;
-  @DrawableRes
-  private final int icon;
-
-  @NonNull
-  public static NavTab of(int code) {
-    return MAP.get(code);
-  }
-
-  public static int size() {
-    return MAP.size();
-  }
-
-  @StringRes
-  public int text() {
-    return text;
-  }
-
-  @DrawableRes
-  public int icon() {
-    return icon;
-  }
-
-  @NonNull
-  public abstract Fragment newInstance();
-
-  @Override
-  public int code() {
-    // This enumeration is not marshalled so tying declaration order to presentation order is
-    // convenient and consistent.
-    return ordinal();
-  }
-
-  NavTab(@StringRes int text, @DrawableRes int icon) {
-    this.text = text;
-    this.icon = icon;
-  }
 }

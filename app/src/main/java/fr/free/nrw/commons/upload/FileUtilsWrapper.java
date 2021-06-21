@@ -20,65 +20,65 @@ import timber.log.Timber;
 @Singleton
 public class FileUtilsWrapper {
 
-  @Inject
-  public FileUtilsWrapper() {
+    @Inject
+    public FileUtilsWrapper() {
 
-  }
-
-  public String getFileExt(String fileName) {
-    return FileUtils.getFileExt(fileName);
-  }
-
-  public String getSHA1(InputStream is) {
-    return FileUtils.getSHA1(is);
-  }
-
-  public FileInputStream getFileInputStream(String filePath) throws FileNotFoundException {
-    return FileUtils.getFileInputStream(filePath);
-  }
-
-  public String getGeolocationOfFile(String filePath) {
-    return FileUtils.getGeolocationOfFile(filePath);
-  }
-
-
-  /**
-   * Takes a file as input and returns an Observable of files with the specified chunk size
-   */
-  public List<File> getFileChunks(Context context, File file, final int chunkSize)
-      throws IOException {
-    final byte[] buffer = new byte[chunkSize];
-
-    //try-with-resources to ensure closing stream
-    try (final FileInputStream fis = new FileInputStream(file);
-        final BufferedInputStream bis = new BufferedInputStream(fis)) {
-      final List<File> buffers = new ArrayList<>();
-      int size;
-      while ((size = bis.read(buffer)) > 0) {
-        buffers.add(writeToFile(context, Arrays.copyOf(buffer, size), file.getName(),
-            getFileExt(file.getName())));
-      }
-      return buffers;
     }
-  }
 
-  /**
-   * Create a temp file containing the passed byte data.
-   */
-  private File writeToFile(Context context, final byte[] data, final String fileName,
-      String fileExtension)
-      throws IOException {
-    final File file = File.createTempFile(fileName, fileExtension, context.getCacheDir());
-    try {
-      if (!file.exists()) {
-        file.createNewFile();
-      }
-      final FileOutputStream fos = new FileOutputStream(file);
-      fos.write(data);
-      fos.close();
-    } catch (final Exception throwable) {
-      Timber.e(throwable, "Failed to create file");
+    public String getFileExt(String fileName) {
+        return FileUtils.getFileExt(fileName);
     }
-    return file;
-  }
+
+    public String getSHA1(InputStream is) {
+        return FileUtils.getSHA1(is);
+    }
+
+    public FileInputStream getFileInputStream(String filePath) throws FileNotFoundException {
+        return FileUtils.getFileInputStream(filePath);
+    }
+
+    public String getGeolocationOfFile(String filePath) {
+        return FileUtils.getGeolocationOfFile(filePath);
+    }
+
+
+    /**
+     * Takes a file as input and returns an Observable of files with the specified chunk size
+     */
+    public List<File> getFileChunks(Context context, File file, final int chunkSize)
+        throws IOException {
+        final byte[] buffer = new byte[chunkSize];
+
+        //try-with-resources to ensure closing stream
+        try (final FileInputStream fis = new FileInputStream(file);
+            final BufferedInputStream bis = new BufferedInputStream(fis)) {
+            final List<File> buffers = new ArrayList<>();
+            int size;
+            while ((size = bis.read(buffer)) > 0) {
+                buffers.add(writeToFile(context, Arrays.copyOf(buffer, size), file.getName(),
+                    getFileExt(file.getName())));
+            }
+            return buffers;
+        }
+    }
+
+    /**
+     * Create a temp file containing the passed byte data.
+     */
+    private File writeToFile(Context context, final byte[] data, final String fileName,
+        String fileExtension)
+        throws IOException {
+        final File file = File.createTempFile(fileName, fileExtension, context.getCacheDir());
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            final FileOutputStream fos = new FileOutputStream(file);
+            fos.write(data);
+            fos.close();
+        } catch (final Exception throwable) {
+            Timber.e(throwable, "Failed to create file");
+        }
+        return file;
+    }
 }

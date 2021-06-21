@@ -13,66 +13,67 @@ import org.wikipedia.model.EnumCodeMap;
 
 public enum NavTabLoggedOut implements EnumCode {
 
-  EXPLORE(R.string.navigation_item_explore, R.drawable.ic_globe) {
+    EXPLORE(R.string.navigation_item_explore, R.drawable.ic_globe) {
+        @NonNull
+        @Override
+        public Fragment newInstance() {
+            return ExploreFragment.newInstance();
+        }
+    },
+    FAVORITES(R.string.favorites, R.drawable.ic_round_star_border_24px) {
+        @NonNull
+        @Override
+        public Fragment newInstance() {
+            return BookmarkFragment.newInstance();
+        }
+    },
+    MORE(R.string.more, R.drawable.ic_menu_black_24dp) {
+        @NonNull
+        @Override
+        public Fragment newInstance() {
+            return null;
+        }
+    };
+
+    private static final EnumCodeMap<NavTabLoggedOut> MAP = new EnumCodeMap<>(
+        NavTabLoggedOut.class);
+
+    @StringRes
+    private final int text;
+    @DrawableRes
+    private final int icon;
+
     @NonNull
-    @Override
-    public Fragment newInstance() {
-      return ExploreFragment.newInstance();
+    public static NavTabLoggedOut of(int code) {
+        return MAP.get(code);
     }
-  },
-  FAVORITES(R.string.favorites, R.drawable.ic_round_star_border_24px) {
+
+    public static int size() {
+        return MAP.size();
+    }
+
+    @StringRes
+    public int text() {
+        return text;
+    }
+
+    @DrawableRes
+    public int icon() {
+        return icon;
+    }
+
     @NonNull
+    public abstract Fragment newInstance();
+
     @Override
-    public Fragment newInstance() {
-      return BookmarkFragment.newInstance();
+    public int code() {
+        // This enumeration is not marshalled so tying declaration order to presentation order is
+        // convenient and consistent.
+        return ordinal();
     }
-  },
-  MORE(R.string.more, R.drawable.ic_menu_black_24dp) {
-    @NonNull
-    @Override
-    public Fragment newInstance() {
-      return null;
+
+    NavTabLoggedOut(@StringRes int text, @DrawableRes int icon) {
+        this.text = text;
+        this.icon = icon;
     }
-  };
-
-  private static final EnumCodeMap<NavTabLoggedOut> MAP = new EnumCodeMap<>(NavTabLoggedOut.class);
-
-  @StringRes
-  private final int text;
-  @DrawableRes
-  private final int icon;
-
-  @NonNull
-  public static NavTabLoggedOut of(int code) {
-    return MAP.get(code);
-  }
-
-  public static int size() {
-    return MAP.size();
-  }
-
-  @StringRes
-  public int text() {
-    return text;
-  }
-
-  @DrawableRes
-  public int icon() {
-    return icon;
-  }
-
-  @NonNull
-  public abstract Fragment newInstance();
-
-  @Override
-  public int code() {
-    // This enumeration is not marshalled so tying declaration order to presentation order is
-    // convenient and consistent.
-    return ordinal();
-  }
-
-  NavTabLoggedOut(@StringRes int text, @DrawableRes int icon) {
-    this.text = text;
-    this.icon = icon;
-  }
 }
