@@ -225,7 +225,7 @@
   <string name="commons_website">Commons Website</string>
   <string name="commons_facebook">Commons Facebook Page</string>
   <string name="commons_github">Commons Github Source Code</string>
-  <string name="mediaimage_failed">Unable to load image</string>
+  <string name="mediaimage_failed">Media Image Failed</string>
   <string name="no_subcategory_found">No subcategories found</string>
   <string name="no_parentcategory_found">No parent categories found</string>
   <string name="upload_image">Upload Image</string>
