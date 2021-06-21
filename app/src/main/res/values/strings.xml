@@ -627,7 +627,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="pan_and_zoom_to_adjust">Pan and zoom to adjust</string>
   <string name="exit_location_picker">Exit location picker</string>
   <string name="select_location_location_picker">Select location</string>
-  <string name="location_picker_image_view">Location picker image view</string>
-  <string name="location_picker_image_view_shadow">Location picker image view shadow</string>
+  <string name="location_picker_image_view">The image view of the location picker</string>
+  <string name="location_picker_image_view_shadow">The shadow of the image view of the location picker</string>
 
 </resources>
