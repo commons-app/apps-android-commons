@@ -78,9 +78,8 @@
   <string name="add_caption_toast">Please provide a caption for this file</string>
   <string name="share_description_hint">Description</string>
   <string name="share_caption_hint">Caption</string>
-  <string name="login_failed_network">Unable to login - network connection lost</string>
-  <string name="login_failed_wrong_credentials">Unable to login - please check your username and password</string>
-  <string name="login_failed_throttled">Too many invalid attempts. Please try again in a few minutes.</string>
+  <string name="login_failed_network">Unable to login - network failure</string>
+  <string name="login_failed_throttled">Too many unsuccessful attempts. Please try again in a few minutes.</string>
   <string name="login_failed_blocked">Sorry, this user has been blocked on Commons</string>
   <string name="login_failed_2fa_needed">You must provide your two factor authentication code.</string>
   <string name="login_failed_generic">Login Failed</string>
