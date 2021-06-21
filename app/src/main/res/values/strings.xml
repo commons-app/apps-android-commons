@@ -10,12 +10,12 @@
   </plurals>
   <string name="starting_uploads"> Starting Uploads</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Starting %1$d upload</item>
-    <item quantity="other">Starting %1$d uploads</item>
+    <item quantity="one">Processing %d upload</item>
+    <item quantity="other">Processing %d uploads</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d upload</item>
-    <item quantity="other">%1$d uploads</item>
+    <item quantity="one">%d upload</item>
+    <item quantity="other">%d uploads</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">This image will be licensed under %1$s</item>
@@ -35,7 +35,7 @@
   <string name="preference_category_feedback">Feedback</string>
   <string name="preference_category_privacy">Privacy</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">&#8226;  </string>
+  <string name="bullet">&#8226;</string>
   <string name="menu_settings">Settings</string>
   <string name="intent_share_upload_label">Upload to Commons</string>
   <string name="username">Username</string>
@@ -47,14 +47,14 @@
   <string name="logging_in_title">Logging in</string>
   <string name="logging_in_message">Please wait…</string>
   <string name="login_success">Logged in!</string>
-  <string name="login_failed">Cannot Login!</string>
+  <string name="login_failed">Login failed!</string>
   <string name="upload_failed">File not found. Please try another file.</string>
   <string name="authentication_failed">Error in authentication, please login again</string>
   <string name="uploading_started">Upload started!</string>
   <string name="uploading_queued">Upload queued (limited connection mode enabled)</string>
   <string name="upload_completed_notification_title">%1$s uploaded!</string>
   <string name="upload_completed_notification_text">Tap to view your upload</string>
-  <string name="upload_progress_notification_title_start">Starting %1$s upload</string>
+  <string name="upload_progress_notification_title_start">Uploading file: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s uploading</string>
   <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
   <string name="upload_failed_notification_title">Cannot upload %1$s</string>
@@ -71,7 +71,7 @@
   <string name="menu_nearby">Nearby</string>
   <string name="provider_contributions">My uploads</string>
   <string name="menu_share">Share</string>
-  <string name="menu_open_in_browser">View in Browser</string>
+  <string name="menu_view_file_page">View file page</string>
   <string name="share_title_hint">Caption (Required)</string>
   <string name="add_caption_toast">Please provide a caption for this file</string>
   <string name="share_description_hint">Description</string>
@@ -80,7 +80,7 @@
   <string name="login_failed_throttled">Too many unsuccessful attempts. Please try again in a few minutes.</string>
   <string name="login_failed_blocked">Sorry, this user has been blocked on Commons</string>
   <string name="login_failed_2fa_needed">You must provide your two factor authentication code.</string>
-  <string name="login_failed_generic">Login Failed</string>
+  <string name="login_failed_generic">Login failed</string>
   <string name="share_upload_button">Upload</string>
   <string name="multiple_share_base_title">Name this set</string>
   <string name="provider_modifications">Modifications</string>
@@ -103,7 +103,7 @@
   <string name="title_activity_category_details">Category</string>
   <string name="title_activity_review">Peer Review</string>
   <string name="menu_about">About</string>
-  <string name="about_license">The Wikimedia Commons app is an open-source app created and maintained by grantees and volunteers of the Wikimedia community. The Wikimedia Foundation is not involved in the creation, development, or maintenance of the app. </string>
+  <string name="about_license">The Wikimedia Commons app is an open-source app created and maintained by grantees and volunteers of the Wikimedia community. The Wikimedia Foundation is not involved in the creation, development, or maintenance of the app.</string>
   <string name="trademarked_name" translatable="false">Wikimedia Commons</string>
   <string name="about_improve">Create a new &lt;a href=\"%1$s\"&gt;GitHub issue&lt;/a&gt; for bug reports and suggestions.</string>
   <string name="about_privacy_policy">Privacy policy</string>
@@ -229,7 +229,7 @@
 
   <string name="upload_connection_error_alert_title">Connection Error</string>
   <string name="upload_connection_error_alert_detail">The upload process requires active internet access. Please check your network connection.</string>
-  
+
   <string name="upload_problem_image">Problems found in image</string>
   <string name="internet_downloaded">Please only upload pictures that you have taken by yourself. Don\'t upload pictures that you have downloaded from the Internet.</string>
   <string name="use_external_storage">Save In-app shots</string>
@@ -290,7 +290,7 @@
   <string name="search_recent_header">Recent searches:</string>
   <string name="provider_searches">Recently searched queries</string>
   <string name="error_loading_categories">Error occurred while loading categories.</string>
-  <string name="error_loading_subcategories">Error occurred while loading subcategories.</string>
+  <string name="error_loading_depictions">Error occurred while loading depictions.</string>
   <string name="search_tab_title_media">Media</string>
   <string name="search_tab_title_categories">Categories</string>
   <string name="search_tab_title_depictions">Items</string>
@@ -303,7 +303,7 @@
   <string name="wallpaper_set_successfully">Wallpaper set!</string>
   <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Is this picture OK to upload?</string>
-  <string name="question">Question </string>
+  <string name="question">Question</string>
   <string name="result">Result</string>
   <string name="quiz_back_button">If you carry on uploading images that require deletion, your account will likely be banned. Are you sure you want to end the quiz?</string>
   <string name="quiz_alert_message">More than %1$s of the images you uploaded have been deleted. If you carry on uploading images that require deletion, your account will likely be banned.\n\nWould you like to view the tutorial again and then take a quiz to help you learn what type of images you should or shouldn\'t upload?</string>
@@ -321,7 +321,7 @@
   <string name="wrong">Wrong Answer</string>
   <string name="quiz_screenshot_question">Is this screenshot OK to upload?</string>
   <string name="share_app_title">Share App</string>
-  
+
   <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
   <string name="no_recent_searches">No recent searches</string>
   <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
@@ -342,7 +342,7 @@
   <string name="images_used_by_wiki">Images Used</string>
   <string name="achievements_share_message">Share your achievements with your friends!</string>
   <string name="achievements_info_message">Your level increases as you meet these requirements. Items in the "statistics" section do not count towards your level.</string>
-  <string name="achievements_revert_limit_message">minimum required: </string>
+  <string name="achievements_revert_limit_message">minimum required:</string>
   <string name="images_uploaded_explanation">The number of images you have uploaded to Commons, via any upload software</string>
 
   <string name="images_reverted_explanation">The percentage of images you have uploaded to Commons that were not deleted</string>
@@ -389,14 +389,14 @@
 
   <string name="no_uploads">Welcome to Commons!\n
 Upload your first media by tapping on the add button.</string>
-  
+
   <string name="no_categories_selected">No Categories Selected</string>
 
   <string name="no_categories_selected_warning_desc">Images without categories are rarely usable. Are you sure you want to continue without selecting categories?</string>
   <string name="no_depictions_selected">No Depictions Selected</string>
 
   <string name="no_depictions_selected_warning_desc">Images with depictions are more easily found and more likely to be used. Are you sure you want to continue without selecting depictions?</string>
-  <string name="upload_flow_all_images_in_set">(For all images in set)</string>
+  <string name="upload_flow_all_images_in_set">(For all image(s) in set)</string>
   <string name="search_this_area">Search this area</string>
   <string name="nearby_card_permission_title">Permission Request</string>
   <string name="nearby_card_permission_explanation">Would you like us to use your current location to display the nearest place that needs pictures?</string>
@@ -427,7 +427,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="send_thank_success_message">Successfully sent thanks to %1$s</string>
   <string name="send_thank_failure_message">Failed to send thanks %1$s</string>
   <string name="send_thank_failure_title">Sending Thanks: Failure</string>
-  
+
   <string name="send_thank_toast">Sending Thanks for %1$s</string>
   <string name="review_copyright">Does this follow the rules of copyright?</string>
   <string name="review_category">Is this correctly categorized?</string>
@@ -439,9 +439,9 @@ Upload your first media by tapping on the add button.</string>
   <string name="review_no_category">Oh, this is not even categorized!</string>
   <string name="review_category_explanation">This image is under %1$s categories.</string>
   <string name="review_spam_report_question">It is out of scope because it is</string>
-  <string name="review_c_violation_report_question">It is copyright violation because it is </string>
-  <string name="review_thanks_yes_button_text">Yes, why not</string>
-  <string name="review_thanks_no_button_text">Next image</string>
+  <string name="review_c_violation_report_question">It is copyright violation because it is</string>
+  <string name="review_thanks_yes_button_text">Next image</string>
+  <string name="review_thanks_no_button_text">Yes, why not</string>
   <string name="skip_image_explanation">Clicking this button will give you another recently uploaded image from Wikimedia Commons</string>
 
   <string name="review_image_explanation">You can review images and improve the quality of Wikimedia Commons.\n The four parameters of review are: \n - Is this image in-scope? \n - Does this image follow the rules of copyright? \n - Is this image correctly categorized? \n - If all goes well you can also thank the contributor.</string>
@@ -457,17 +457,17 @@ Upload your first media by tapping on the add button.</string>
   <string name="menu_option_unread">View unread</string>
 
   <string name="error_occurred_in_picking_images">Error occurred while picking images</string>
-  
+
   <string name="please_wait">Please wait…</string>
   <string name="images_featured_explanation">Featured pictures are images from highly skilled photographers and illustrators that the Wikimedia Commons community has chosen as some of the highest quality on the site.</string>
   <string name="images_via_nearby_explanation">Images Uploaded via Nearby places are the images which are uploaded by discovering places on the map.</string>
   <string name="thanks_received_explanation">This feature allows editors to send a Thank you notification to users who make useful edits – by using a small thank link on the history page or diff page.</string>
-  <string name="previous_image_caption_description">Copy previous captions &amp; description</string>
-  <string name="previous_button_tooltip_message">Click to reuse the title and description you entered in your previous picture and modify it to fit your current one</string>
+  <string name="copy_image_caption_description">Copy to subsequent media</string>
+  <string name="copied_successfully">Copied</string>
   <string name="welcome_do_upload_content_description">Examples of good images to upload to Commons</string>
   <string name="welcome_dont_upload_content_description">Examples of images not to upload</string>
   <string name="skip_image">Skip this image</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Cannot download the file without external storage permission.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission"> Cannot download the file without external storage permission.</string>
 
   <string name="manage_exif_tags">Manage EXIF Tags</string>
   <string name="manage_exif_tags_summary">Select which EXIF tags to keep in uploads</string>
@@ -519,7 +519,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="coordinates_edit_helper_show_edit_message">Coordinates %1$s are added.</string>
   <string name="coordinates_edit_helper_edit_message_else">Could not add coordinates.</string>
   <string name="coordinates_picking_unsuccessful">Unable to get coordinates.</string>
-  
+
   <string name="share_image_via">Share image via</string>
   <string name="no_achievements_yet">You haven\'t made any contributions yet</string>
   <string name="account_created">Account created!</string>
@@ -602,7 +602,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="map_attribution" translatable="false"><![CDATA[&#169; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &#169; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/">Improve this map</a>]]></string>
   <string name="limited_connection_enabled">Limited connection mode enabled!</string>
   <string name="limited_connection_disabled">Limited connection mode disabled. Pending uploads will resume now.</string>
-  <string name="limited_connection">Limited Connection</string>
+  <string name="limited_connection_mode">Limited Connection Mode</string>
   <string name="statistics_quality">Quality Images</string>
   <string name="quality_images_info">Quality images are diagrams or photographs that meet certain quality standards (which are mostly technical in nature) and are valuable for Wikimedia projects</string>
   <string name="resuming_upload">Resuming upload…</string>
