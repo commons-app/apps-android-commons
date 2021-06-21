@@ -7,12 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.model.Folder
-import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
-import fr.free.nrw.commons.media.MediaClient
-import fr.free.nrw.commons.upload.FileProcessor
 
 class   FolderAdapter(
     /**
@@ -23,15 +21,9 @@ class   FolderAdapter(
     /**
      * Folder Click listener for click events.
      */
-    private val itemClickListener: FolderClickListener,
-    val fileProcessor: FileProcessor,
-    mediaClient: MediaClient
-) : RecyclerViewAdapter<FolderAdapter.FolderViewHolder?>(context) {
+    private val itemClickListener: FolderClickListener
 
-    /**
-     * Image Loader for loading images.
-     */
-    private val imageLoader = ImageLoader(mediaClient,fileProcessor,context)
+) : RecyclerViewAdapter<FolderAdapter.FolderViewHolder?>(context) {
 
     /**
      * List of folders.
@@ -53,8 +45,7 @@ class   FolderAdapter(
         val folder = folders[position]
         val count = folder.images.size
         val previewImage = folder.images[0]
-        imageLoader.loadImageIntoFolderView(holder, previewImage)
-//        Glide.with(context).load(previewImage.uri).into(holder.image)
+        Glide.with(context).load(previewImage.uri).into(holder.image)
         holder.name.text = folder.name
         holder.count.text = count.toString()
         holder.itemView.setOnClickListener{

@@ -24,7 +24,6 @@
     <uses-feature android:name="android.hardware.location.gps" />
 
     <application
-        android:requestLegacyExternalStorage="true"
         android:name=".CommonsApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

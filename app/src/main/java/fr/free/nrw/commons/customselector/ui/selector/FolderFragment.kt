@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,8 +73,7 @@ class FolderFragment : CommonsDaggerSupportFragment() {
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_custom_selector, container, false)
-        Log.i("Aditya","fileProcessor "+fileProcessor.toString())
-        folderAdapter = FolderAdapter(activity!!, activity as FolderClickListener,fileProcessor!!,mediaClient!!)
+        folderAdapter = FolderAdapter(activity!!, activity as FolderClickListener)
         gridLayoutManager = GridLayoutManager(context, columnCount())
         with(root.selector_rv){
             this.layoutManager = gridLayoutManager

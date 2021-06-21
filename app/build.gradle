@@ -149,7 +149,7 @@ dependencies {
 }
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 28
 
     defaultConfig {
         //applicationId 'fr.free.nrw.commons'
