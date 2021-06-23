@@ -130,7 +130,7 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
     addBackButtonListener();
     addPlaceSelectedButton();
 
-    if(activity.equals("UploadActivity")){
+    if (activity.equals("UploadActivity")) {
       placeSelectedButton.setVisibility(View.GONE);
       modifyLocationButton.setVisibility(View.VISIBLE);
       showInMapButton.setVisibility(View.VISIBLE);
@@ -197,7 +197,7 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
     this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
 
-      if(modifyLocationButton.getVisibility() == View.VISIBLE){
+      if (modifyLocationButton.getVisibility() == View.VISIBLE) {
         initDroppedMarker(style);
         adjustCameraBasedOnOptions();
         enableLocationComponent(style);
