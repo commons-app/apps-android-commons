@@ -448,6 +448,8 @@
   <string name="category_edit_helper_show_edit_title">Aggiorna la categoria</string>
   <string name="category_edit_helper_show_edit_title_success">Successo</string>
   <string name="category_edit_button_text">Aggiorna le categorie</string>
+  <string name="coordinates_edit_helper_show_edit_title">Coordinate aggiornate</string>
+  <string name="coordinates_edit_helper_show_edit_message">Le coordinate %1$s sono state aggiunte.</string>
   <string name="share_image_via">Condividi immagine tramite</string>
   <string name="no_achievements_yet">Non hai fatto alcun contributo ancora</string>
   <string name="account_created">Utenza creata!</string>

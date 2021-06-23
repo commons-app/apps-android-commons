@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Adehertogh
 * Alno
 * BaRaN6161 TURK
 * Cyclicus
@@ -507,6 +508,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Impossible d’ajouter des catégories.</string>
   <string name="category_edit_button_text">Mettre à jour les catégories</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Essai de mise à jour des coordonnées.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Mise à jour des coordonnées</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Succès</string>
+  <string name="coordinates_edit_helper_show_edit_message">Les coordonnées %1$s sont ajoutées.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Impossible d’ajouter des coordonnées.</string>
+  <string name="coordinates_picking_unsuccessful">Impossible d’obtenir les coordonnées.</string>
   <string name="share_image_via">Partager l’image via</string>
   <string name="no_achievements_yet">Vous n’avez encore fait aucune contribution</string>
   <string name="account_created">Compte créé !</string>
@@ -604,4 +611,11 @@
   <string name="app_ui_language">Langue d’interface utilisateur de l’application</string>
   <string name="remove">Supprime une légende et une description</string>
   <string name="read_help_link">En savoir plus</string>
+  <string name="media_detail_in_all_languages">Dans toutes les langues</string>
+  <string name="choose_a_location">Choisir un emplacement</string>
+  <string name="pan_and_zoom_to_adjust">Descendre et zoomer pour ajuster</string>
+  <string name="exit_location_picker">Sortir du sélecteur d’emplacement</string>
+  <string name="select_location_location_picker">Sélectionner un emplacement</string>
+  <string name="location_picker_image_view" fuzzy="true">Affichage de l’image du sélecteur d’emplacement</string>
+  <string name="location_picker_image_view_shadow" fuzzy="true">Ombre de l’affichage de l’image du sélecteur d’emplacement</string>
 </resources>

@@ -8,6 +8,7 @@
 * Angrydog001
 * D41D8CD98F
 * Deathkon
+* GuoPC
 * Hydra
 * Ken418
 * Kuailong
@@ -253,6 +254,7 @@
   <string name="upload_problem_different_geolocation">这张图片是在不同的地点拍摄的。</string>
   <string name="upload_problem_fbmd">请仅上传由您自己拍摄的图像。请勿上传您在他人的Facebook账户上所发现的图像。</string>
   <string name="upload_problem_do_you_continue">仍然上传这张图片？</string>
+  <string name="upload_connection_error_alert_detail">上传过程需要有效的互联网访问。请检查您的网络连接。</string>
   <string name="upload_problem_image">在图片中发现的问题</string>
   <string name="internet_downloaded">请仅上传由您自己拍摄的图像。请勿上传您从互联网下载的图像。</string>
   <string name="use_external_storage" fuzzy="true">使用外部存储</string>

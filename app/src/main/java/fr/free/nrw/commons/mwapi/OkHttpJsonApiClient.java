@@ -42,319 +42,325 @@ import timber.log.Timber;
 @Singleton
 public class OkHttpJsonApiClient {
 
-  private final OkHttpClient okHttpClient;
-  private final DepictsClient depictsClient;
-  private final HttpUrl wikiMediaToolforgeUrl;
-  private final HttpUrl wikiMediaTestToolforgeUrl;
-  private final String sparqlQueryUrl;
-  private final String campaignsUrl;
-  private final Gson gson;
+    private final OkHttpClient okHttpClient;
+    private final DepictsClient depictsClient;
+    private final HttpUrl wikiMediaToolforgeUrl;
+    private final HttpUrl wikiMediaTestToolforgeUrl;
+    private final String sparqlQueryUrl;
+    private final String campaignsUrl;
+    private final Gson gson;
 
 
-  @Inject
-  public OkHttpJsonApiClient(OkHttpClient okHttpClient,
-      DepictsClient depictsClient,
-      HttpUrl wikiMediaToolforgeUrl,
-      HttpUrl wikiMediaTestToolforgeUrl,
-      String sparqlQueryUrl,
-      String campaignsUrl,
-      Gson gson) {
-    this.okHttpClient = okHttpClient;
-    this.depictsClient = depictsClient;
-    this.wikiMediaToolforgeUrl = wikiMediaToolforgeUrl;
-    this.wikiMediaTestToolforgeUrl = wikiMediaTestToolforgeUrl;
-    this.sparqlQueryUrl = sparqlQueryUrl;
-    this.campaignsUrl = campaignsUrl;
-    this.gson = gson;
-  }
-
-  /**
-   * The method will gradually calls the leaderboard API and fetches the leaderboard
-   * @param userName username of leaderboard user
-   * @param duration duration for leaderboard
-   * @param category category for leaderboard
-   * @param limit page size limit for list
-   * @param offset offset for the list
-   * @return LeaderboardResponse object
-   */
-  @NonNull
-  public Observable<LeaderboardResponse> getLeaderboard(String userName, String duration, String category, String limit, String offset) {
-    final String fetchLeaderboardUrlTemplate = wikiMediaTestToolforgeUrl
-        + LEADERBOARD_END_POINT;
-    String url = String.format(Locale.ENGLISH,
-        fetchLeaderboardUrlTemplate,
-        userName,
-        duration,
-        category,
-        limit,
-        offset);
-    HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-    urlBuilder.addQueryParameter("user", userName);
-    urlBuilder.addQueryParameter("duration", duration);
-    urlBuilder.addQueryParameter("category", category);
-    urlBuilder.addQueryParameter("limit", limit);
-    urlBuilder.addQueryParameter("offset", offset);
-    Timber.i("Url %s", urlBuilder.toString());
-    Request request = new Request.Builder()
-        .url(urlBuilder.toString())
-        .build();
-    return Observable.fromCallable(() -> {
-      Response response = okHttpClient.newCall(request).execute();
-      if (response != null && response.body() != null && response.isSuccessful()) {
-        String json = response.body().string();
-        if (json == null) {
-          return new LeaderboardResponse();
-        }
-        Timber.d("Response for leaderboard is %s", json);
-        try {
-          return gson.fromJson(json, LeaderboardResponse.class);
-        } catch (Exception e) {
-          return new LeaderboardResponse();
-        }
-      }
-      return new LeaderboardResponse();
-    });
-  }
-
-  /**
-   * This method will update the leaderboard user avatar
-   * @param username username to update
-   * @param avatar url of the new avatar
-   * @return UpdateAvatarResponse object
-   */
-  @NonNull
-  public Single<UpdateAvatarResponse> setAvatar(String username, String avatar) {
-    final String urlTemplate = wikiMediaTestToolforgeUrl
-        + UPDATE_AVATAR_END_POINT;
-    return Single.fromCallable(() -> {
-      String url = String.format(Locale.ENGLISH,
-          urlTemplate,
-          username,
-          avatar);
-      HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-      urlBuilder.addQueryParameter("user", username);
-      urlBuilder.addQueryParameter("avatar", avatar);
-      Timber.i("Url %s", urlBuilder.toString());
-      Request request = new Request.Builder()
-          .url(urlBuilder.toString())
-          .build();
-      Response response = okHttpClient.newCall(request).execute();
-      if (response != null && response.body() != null && response.isSuccessful()) {
-        String json = response.body().string();
-        if (json == null) {
-          return null;
-        }
-        try {
-          return gson.fromJson(json, UpdateAvatarResponse.class);
-        } catch (Exception e) {
-          return new UpdateAvatarResponse();
-        }
-      }
-      return null;
-    });
-  }
-
-  @NonNull
-  public Single<Integer> getUploadCount(String userName) {
-    HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
-    urlBuilder
-        .addPathSegments("uploadsbyuser.py")
-        .addQueryParameter("user", userName);
-
-    if (ConfigUtils.isBetaFlavour()) {
-      urlBuilder.addQueryParameter("labs", "commonswiki");
+    @Inject
+    public OkHttpJsonApiClient(OkHttpClient okHttpClient,
+        DepictsClient depictsClient,
+        HttpUrl wikiMediaToolforgeUrl,
+        HttpUrl wikiMediaTestToolforgeUrl,
+        String sparqlQueryUrl,
+        String campaignsUrl,
+        Gson gson) {
+        this.okHttpClient = okHttpClient;
+        this.depictsClient = depictsClient;
+        this.wikiMediaToolforgeUrl = wikiMediaToolforgeUrl;
+        this.wikiMediaTestToolforgeUrl = wikiMediaTestToolforgeUrl;
+        this.sparqlQueryUrl = sparqlQueryUrl;
+        this.campaignsUrl = campaignsUrl;
+        this.gson = gson;
     }
 
-    Request request = new Request.Builder()
-        .url(urlBuilder.build())
-        .build();
-
-    return Single.fromCallable(() -> {
-      Response response = okHttpClient.newCall(request).execute();
-      if (response != null && response.isSuccessful()) {
-        ResponseBody responseBody = response.body();
-        if (null != responseBody) {
-          String responseBodyString = responseBody.string().trim();
-          if (!TextUtils.isEmpty(responseBodyString)) {
-            try {
-              return Integer.parseInt(responseBodyString);
-            } catch (NumberFormatException e) {
-              Timber.e(e);
+    /**
+     * The method will gradually calls the leaderboard API and fetches the leaderboard
+     *
+     * @param userName username of leaderboard user
+     * @param duration duration for leaderboard
+     * @param category category for leaderboard
+     * @param limit    page size limit for list
+     * @param offset   offset for the list
+     * @return LeaderboardResponse object
+     */
+    @NonNull
+    public Observable<LeaderboardResponse> getLeaderboard(String userName, String duration,
+        String category, String limit, String offset) {
+        final String fetchLeaderboardUrlTemplate = wikiMediaTestToolforgeUrl
+            + LEADERBOARD_END_POINT;
+        String url = String.format(Locale.ENGLISH,
+            fetchLeaderboardUrlTemplate,
+            userName,
+            duration,
+            category,
+            limit,
+            offset);
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+        urlBuilder.addQueryParameter("user", userName);
+        urlBuilder.addQueryParameter("duration", duration);
+        urlBuilder.addQueryParameter("category", category);
+        urlBuilder.addQueryParameter("limit", limit);
+        urlBuilder.addQueryParameter("offset", offset);
+        Timber.i("Url %s", urlBuilder.toString());
+        Request request = new Request.Builder()
+            .url(urlBuilder.toString())
+            .build();
+        return Observable.fromCallable(() -> {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response != null && response.body() != null && response.isSuccessful()) {
+                String json = response.body().string();
+                if (json == null) {
+                    return new LeaderboardResponse();
+                }
+                Timber.d("Response for leaderboard is %s", json);
+                try {
+                    return gson.fromJson(json, LeaderboardResponse.class);
+                } catch (Exception e) {
+                    return new LeaderboardResponse();
+                }
             }
-          }
-        }
-      }
-      return 0;
-    });
-  }
-
-  @NonNull
-  public Single<Integer> getWikidataEdits(String userName) {
-    HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
-    urlBuilder
-        .addPathSegments("wikidataedits.py")
-        .addQueryParameter("user", userName);
-
-    if (ConfigUtils.isBetaFlavour()) {
-      urlBuilder.addQueryParameter("labs", "commonswiki");
+            return new LeaderboardResponse();
+        });
     }
 
-    Request request = new Request.Builder()
-        .url(urlBuilder.build())
-        .build();
+    /**
+     * This method will update the leaderboard user avatar
+     *
+     * @param username username to update
+     * @param avatar   url of the new avatar
+     * @return UpdateAvatarResponse object
+     */
+    @NonNull
+    public Single<UpdateAvatarResponse> setAvatar(String username, String avatar) {
+        final String urlTemplate = wikiMediaTestToolforgeUrl
+            + UPDATE_AVATAR_END_POINT;
+        return Single.fromCallable(() -> {
+            String url = String.format(Locale.ENGLISH,
+                urlTemplate,
+                username,
+                avatar);
+            HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+            urlBuilder.addQueryParameter("user", username);
+            urlBuilder.addQueryParameter("avatar", avatar);
+            Timber.i("Url %s", urlBuilder.toString());
+            Request request = new Request.Builder()
+                .url(urlBuilder.toString())
+                .build();
+            Response response = okHttpClient.newCall(request).execute();
+            if (response != null && response.body() != null && response.isSuccessful()) {
+                String json = response.body().string();
+                if (json == null) {
+                    return null;
+                }
+                try {
+                    return gson.fromJson(json, UpdateAvatarResponse.class);
+                } catch (Exception e) {
+                    return new UpdateAvatarResponse();
+                }
+            }
+            return null;
+        });
+    }
 
-    return Single.fromCallable(() -> {
-      Response response = okHttpClient.newCall(request).execute();
-      if (response != null &&
-          response.isSuccessful() && response.body() != null) {
-        String json = response.body().string();
-        if (json == null) {
-          return 0;
-        }
-        GetWikidataEditCountResponse countResponse = gson
-            .fromJson(json, GetWikidataEditCountResponse.class);
-        if (null != countResponse) {
-          return countResponse.getWikidataEditCount();
-        }
-      }
-      return 0;
-    });
-  }
+    @NonNull
+    public Single<Integer> getUploadCount(String userName) {
+        HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
+        urlBuilder
+            .addPathSegments("uploadsbyuser.py")
+            .addQueryParameter("user", userName);
 
-  /**
-   * This takes userName as input, which is then used to fetch the feedback/achievements statistics
-   * using OkHttp and JavaRx. This function return JSONObject
-   *
-   * @param userName MediaWiki user name
-   * @return
-   */
-  public Single<FeedbackResponse> getAchievements(String userName) {
-    final String fetchAchievementUrlTemplate =
-        wikiMediaToolforgeUrl + (ConfigUtils.isBetaFlavour() ? "/feedback.py?labs=commonswiki"
-            : "/feedback.py");
-    return Single.fromCallable(() -> {
-      String url = String.format(
-          Locale.ENGLISH,
-          fetchAchievementUrlTemplate,
-          userName);
-      HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-      urlBuilder.addQueryParameter("user", userName);
-      Request request = new Request.Builder()
-          .url(urlBuilder.toString())
-          .build();
-      Response response = okHttpClient.newCall(request).execute();
-      if (response != null && response.body() != null && response.isSuccessful()) {
-        String json = response.body().string();
-        if (json == null) {
-          return null;
-        }
-        Timber.d("Response for achievements is %s", json);
-        try {
-          return gson.fromJson(json, FeedbackResponse.class);
-        } catch (Exception e) {
-          return new FeedbackResponse(0, 0, 0, new FeaturedImages(0, 0), 0, "");
+        if (ConfigUtils.isBetaFlavour()) {
+            urlBuilder.addQueryParameter("labs", "commonswiki");
         }
 
+        Request request = new Request.Builder()
+            .url(urlBuilder.build())
+            .build();
 
-      }
-      return null;
-    });
-  }
+        return Single.fromCallable(() -> {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response != null && response.isSuccessful()) {
+                ResponseBody responseBody = response.body();
+                if (null != responseBody) {
+                    String responseBodyString = responseBody.string().trim();
+                    if (!TextUtils.isEmpty(responseBodyString)) {
+                        try {
+                            return Integer.parseInt(responseBodyString);
+                        } catch (NumberFormatException e) {
+                            Timber.e(e);
+                        }
+                    }
+                }
+            }
+            return 0;
+        });
+    }
 
-    public Observable<List<Place>> getNearbyPlaces(LatLng cur, String language, double radius) throws IOException {
+    @NonNull
+    public Single<Integer> getWikidataEdits(String userName) {
+        HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
+        urlBuilder
+            .addPathSegments("wikidataedits.py")
+            .addQueryParameter("user", userName);
+
+        if (ConfigUtils.isBetaFlavour()) {
+            urlBuilder.addQueryParameter("labs", "commonswiki");
+        }
+
+        Request request = new Request.Builder()
+            .url(urlBuilder.build())
+            .build();
+
+        return Single.fromCallable(() -> {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response != null &&
+                response.isSuccessful() && response.body() != null) {
+                String json = response.body().string();
+                if (json == null) {
+                    return 0;
+                }
+                GetWikidataEditCountResponse countResponse = gson
+                    .fromJson(json, GetWikidataEditCountResponse.class);
+                if (null != countResponse) {
+                    return countResponse.getWikidataEditCount();
+                }
+            }
+            return 0;
+        });
+    }
+
+    /**
+     * This takes userName as input, which is then used to fetch the feedback/achievements
+     * statistics using OkHttp and JavaRx. This function return JSONObject
+     *
+     * @param userName MediaWiki user name
+     * @return
+     */
+    public Single<FeedbackResponse> getAchievements(String userName) {
+        final String fetchAchievementUrlTemplate =
+            wikiMediaToolforgeUrl + (ConfigUtils.isBetaFlavour() ? "/feedback.py?labs=commonswiki"
+                : "/feedback.py");
+        return Single.fromCallable(() -> {
+            String url = String.format(
+                Locale.ENGLISH,
+                fetchAchievementUrlTemplate,
+                userName);
+            HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+            urlBuilder.addQueryParameter("user", userName);
+            Request request = new Request.Builder()
+                .url(urlBuilder.toString())
+                .build();
+            Response response = okHttpClient.newCall(request).execute();
+            if (response != null && response.body() != null && response.isSuccessful()) {
+                String json = response.body().string();
+                if (json == null) {
+                    return null;
+                }
+                Timber.d("Response for achievements is %s", json);
+                try {
+                    return gson.fromJson(json, FeedbackResponse.class);
+                } catch (Exception e) {
+                    return new FeedbackResponse(0, 0, 0, new FeaturedImages(0, 0), 0, "");
+                }
+
+
+            }
+            return null;
+        });
+    }
+
+    public Observable<List<Place>> getNearbyPlaces(LatLng cur, String language, double radius)
+        throws IOException {
         String wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
         String query = wikidataQuery
-                .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
-                .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.getLatitude()))
-                .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.getLongitude()))
-                .replace("${LANG}", language);
+            .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
+            .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.getLatitude()))
+            .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.getLongitude()))
+            .replace("${LANG}", language);
 
-    HttpUrl.Builder urlBuilder = HttpUrl
-        .parse(sparqlQueryUrl)
-        .newBuilder()
-        .addQueryParameter("query", query)
-        .addQueryParameter("format", "json");
+        HttpUrl.Builder urlBuilder = HttpUrl
+            .parse(sparqlQueryUrl)
+            .newBuilder()
+            .addQueryParameter("query", query)
+            .addQueryParameter("format", "json");
 
-    Request request = new Request.Builder()
-        .url(urlBuilder.build())
-        .build();
+        Request request = new Request.Builder()
+            .url(urlBuilder.build())
+            .build();
 
-    return Observable.fromCallable(() -> {
-      Response response = okHttpClient.newCall(request).execute();
-      if (response != null && response.body() != null && response.isSuccessful()) {
-        String json = response.body().string();
-        if (json == null) {
-          return new ArrayList<>();
-        }
-        NearbyResponse nearbyResponse = gson.fromJson(json, NearbyResponse.class);
-        List<NearbyResultItem> bindings = nearbyResponse.getResults().getBindings();
-        List<Place> places = new ArrayList<>();
-        for (NearbyResultItem item : bindings) {
-          places.add(Place.from(item));
-        }
-        return places;
-      }
-      return new ArrayList<>();
-    });
-  }
+        return Observable.fromCallable(() -> {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response != null && response.body() != null && response.isSuccessful()) {
+                String json = response.body().string();
+                if (json == null) {
+                    return new ArrayList<>();
+                }
+                NearbyResponse nearbyResponse = gson.fromJson(json, NearbyResponse.class);
+                List<NearbyResultItem> bindings = nearbyResponse.getResults().getBindings();
+                List<Place> places = new ArrayList<>();
+                for (NearbyResultItem item : bindings) {
+                    places.add(Place.from(item));
+                }
+                return places;
+            }
+            return new ArrayList<>();
+        });
+    }
 
-  /**
-   * Get the QIDs of all Wikidata items that are subclasses of the given Wikidata item. Example:
-   * bridge -> suspended bridge, aqueduct, etc
-   */
-  public Single<List<DepictedItem>> getChildDepictions(String qid, int startPosition,
-      int limit) throws IOException {
-    return depictedItemsFrom(sparqlQuery(qid, startPosition, limit,"/queries/subclasses_query.rq"));
-  }
+    /**
+     * Get the QIDs of all Wikidata items that are subclasses of the given Wikidata item. Example:
+     * bridge -> suspended bridge, aqueduct, etc
+     */
+    public Single<List<DepictedItem>> getChildDepictions(String qid, int startPosition,
+        int limit) throws IOException {
+        return depictedItemsFrom(
+            sparqlQuery(qid, startPosition, limit, "/queries/subclasses_query.rq"));
+    }
 
-  /**
-   * Get the QIDs of all Wikidata items that are subclasses of the given Wikidata item. Example:
-   * bridge -> suspended bridge, aqueduct, etc
-   */
-  public Single<List<DepictedItem>> getParentDepictions(String qid, int startPosition,
-      int limit) throws IOException {
-    return depictedItemsFrom(sparqlQuery(qid, startPosition, limit,
-        "/queries/parentclasses_query.rq"));
-  }
+    /**
+     * Get the QIDs of all Wikidata items that are subclasses of the given Wikidata item. Example:
+     * bridge -> suspended bridge, aqueduct, etc
+     */
+    public Single<List<DepictedItem>> getParentDepictions(String qid, int startPosition,
+        int limit) throws IOException {
+        return depictedItemsFrom(sparqlQuery(qid, startPosition, limit,
+            "/queries/parentclasses_query.rq"));
+    }
 
-  private Single<List<DepictedItem>> depictedItemsFrom(Request request) {
-    return depictsClient.toDepictions(Single.fromCallable(() -> {
-      try (ResponseBody body = okHttpClient.newCall(request).execute().body()) {
-        return gson.fromJson(body.string(), SparqlResponse.class);
-      }
-    }).doOnError(Timber::e));
-  }
+    private Single<List<DepictedItem>> depictedItemsFrom(Request request) {
+        return depictsClient.toDepictions(Single.fromCallable(() -> {
+            try (ResponseBody body = okHttpClient.newCall(request).execute().body()) {
+                return gson.fromJson(body.string(), SparqlResponse.class);
+            }
+        }).doOnError(Timber::e));
+    }
 
-  @NotNull
-  private Request sparqlQuery(String qid, int startPosition, int limit, String fileName) throws IOException {
-    String query = FileUtils.readFromResource(fileName)
-        .replace("${QID}", qid)
-        .replace("${LANG}", "\"" + Locale.getDefault().getLanguage() + "\"")
-        .replace("${LIMIT}",""+ limit)
-        .replace("${OFFSET}",""+ startPosition);
-    HttpUrl.Builder urlBuilder = HttpUrl
-        .parse(sparqlQueryUrl)
-        .newBuilder()
-        .addQueryParameter("query", query)
-        .addQueryParameter("format", "json");
-    return new Request.Builder()
-        .url(urlBuilder.build())
-        .build();
-  }
+    @NotNull
+    private Request sparqlQuery(String qid, int startPosition, int limit, String fileName)
+        throws IOException {
+        String query = FileUtils.readFromResource(fileName)
+            .replace("${QID}", qid)
+            .replace("${LANG}", "\"" + Locale.getDefault().getLanguage() + "\"")
+            .replace("${LIMIT}", "" + limit)
+            .replace("${OFFSET}", "" + startPosition);
+        HttpUrl.Builder urlBuilder = HttpUrl
+            .parse(sparqlQueryUrl)
+            .newBuilder()
+            .addQueryParameter("query", query)
+            .addQueryParameter("format", "json");
+        return new Request.Builder()
+            .url(urlBuilder.build())
+            .build();
+    }
 
-  public Single<CampaignResponseDTO> getCampaigns() {
-    return Single.fromCallable(() -> {
-      Request request = new Request.Builder().url(campaignsUrl)
-          .build();
-      Response response = okHttpClient.newCall(request).execute();
-      if (response != null && response.body() != null && response.isSuccessful()) {
-        String json = response.body().string();
-        if (json == null) {
-          return null;
-        }
-        return gson.fromJson(json, CampaignResponseDTO.class);
-      }
-      return null;
-    });
-  }
+    public Single<CampaignResponseDTO> getCampaigns() {
+        return Single.fromCallable(() -> {
+            Request request = new Request.Builder().url(campaignsUrl)
+                .build();
+            Response response = okHttpClient.newCall(request).execute();
+            if (response != null && response.body() != null && response.isSuccessful()) {
+                String json = response.body().string();
+                if (json == null) {
+                    return null;
+                }
+                return gson.fromJson(json, CampaignResponseDTO.class);
+            }
+            return null;
+        });
+    }
 }
