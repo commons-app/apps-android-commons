@@ -501,6 +501,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Kategoriler eklenemedi.</string>
   <string name="category_edit_button_text">Kategorileri güncelle</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Koordinatlar güncellenmeye çalışılıyor.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Koordinat güncellemesi</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Başarılı</string>
+  <string name="coordinates_edit_helper_show_edit_message">%1$s koordinatları eklendi.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Koordinatlar eklenemedi.</string>
+  <string name="coordinates_picking_unsuccessful">Koordinatlar alınamadı.</string>
   <string name="share_image_via">Resmi şununla paylaş</string>
   <string name="no_achievements_yet">Henüz bir katkı yapmadınız</string>
   <string name="account_created">Hesap oluşturuldu!</string>
@@ -598,4 +604,10 @@
   <string name="app_ui_language">Uygulama kullanıcı arayüzü dili</string>
   <string name="remove">Bir başlığı ve açıklamayı kaldırır</string>
   <string name="read_help_link">Devamını oku</string>
+  <string name="choose_a_location">Bir konum seçin</string>
+  <string name="pan_and_zoom_to_adjust">Ayarlamak için kaydırma ve yakınlaştırma</string>
+  <string name="exit_location_picker">Konum seçiciden çık</string>
+  <string name="select_location_location_picker">Konum seçin</string>
+  <string name="location_picker_image_view" fuzzy="true">Konum seçici resim görünümü</string>
+  <string name="location_picker_image_view_shadow" fuzzy="true">Konum seçici resim görünümü gölgesi</string>
 </resources>

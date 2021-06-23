@@ -495,6 +495,8 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Não foi possível adicionar categorias.</string>
   <string name="category_edit_button_text">Atualizar categorias</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Sucesso</string>
+  <string name="coordinates_picking_unsuccessful">Incapaz de obter coordenadas.</string>
   <string name="share_image_via">Compartilhar imagem via</string>
   <string name="no_achievements_yet">Você ainda não fez nenhuma contribuição</string>
   <string name="account_created">Conta criada!</string>

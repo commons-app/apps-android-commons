@@ -2,6 +2,7 @@
 <!-- Authors:
 * 2axterix2
 * Adjen
+* Agent
 * Astroemi
 * Benfutbol10
 * Carlosmg.dg
@@ -500,6 +501,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">No se pudieron añadir las categorías.</string>
   <string name="category_edit_button_text">Actualizar categorías</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Intentando actualizar coordenadas.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Actualización de coordenadas</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Éxito</string>
+  <string name="coordinates_edit_helper_show_edit_message">Coordenadas %1$s añadidas.</string>
+  <string name="coordinates_edit_helper_edit_message_else">No se pudo añadir coordenadas.</string>
+  <string name="coordinates_picking_unsuccessful">No se pudo conseguir las coordenadas.</string>
   <string name="share_image_via">Compartir imagen via</string>
   <string name="no_achievements_yet">No ha realizado ninguna contribución aún</string>
   <string name="account_created">Cuenta creada</string>
@@ -533,4 +540,8 @@
   <string name="limited_connection_enabled">Se activó el modo de conexión limitada.</string>
   <string name="limited_connection_disabled">Se desactivó el modo de conexión limitada. Las cargas pendientes se reanudarán ahora.</string>
   <string name="limited_connection_mode" fuzzy="true">Conexión limitada</string>
+  <string name="choose_a_location">Escoge una ubicación</string>
+  <string name="pan_and_zoom_to_adjust">Haz una panorámica y acércate para ajustar</string>
+  <string name="exit_location_picker">Salir del seleccionador de ubicación</string>
+  <string name="select_location_location_picker">Seleccionar ubicación</string>
 </resources>

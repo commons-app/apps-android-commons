@@ -3,6 +3,7 @@ package fr.free.nrw.commons.media;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import org.wikipedia.wikidata.Entities;
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
