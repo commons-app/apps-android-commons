@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
-import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
@@ -400,7 +399,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                     uploadItem.getGpsCoords().getDecLongitude()))
                 .zoom(16).build())
             .activityKey("UploadActivity")
-            .build(getActivity()),REQUEST_CODE);
+            .build(getActivity()), REQUEST_CODE);
     }
 
     /**
@@ -425,10 +424,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 final String longitude = String.valueOf(cameraPosition.target.getLongitude());
 
                 editLocation(latitude, longitude);
-
             }
-        } else if (resultCode == RESULT_CANCELED) {
-            Toast.makeText(getContext(),"Unable to get coordinates",Toast.LENGTH_LONG).show();
         }
     }
 
