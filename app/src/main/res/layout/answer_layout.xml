@@ -1,65 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_marginTop="@dimen/activity_margin_vertical"
-    android:layout_marginBottom="@dimen/activity_margin_vertical">
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:orientation="vertical"
+  android:layout_marginTop="@dimen/activity_margin_vertical"
+  android:layout_marginBottom="@dimen/activity_margin_vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:background="#7AD9F970"
+      >
 
         <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/quiz_positive_answer"
-            android:textIsSelectable="false"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="YES"
-            style="?android:textAppearanceMedium"
-            android:textColor="@color/secondaryTextColor" />
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:id="@+id/quiz_positive_answer"
+          android:textIsSelectable="false"
+          android:layout_marginLeft="@dimen/activity_margin_horizontal"
+          android:layout_marginRight="@dimen/activity_margin_horizontal"
+          />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_done_black_24dp"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal" />
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:srcCompat="@drawable/ic_done_black_24dp"
+          android:layout_marginLeft="@dimen/activity_margin_horizontal" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_margin_vertical"
-        android:orientation="horizontal">
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/activity_margin_vertical"
+      android:orientation="horizontal"
+      android:background="#4AFF7673">
 
         <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textIsSelectable="false"
-            android:id="@+id/quiz_negative_answer"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"/>
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:textIsSelectable="false"
+          android:id="@+id/quiz_negative_answer"
+          android:layout_marginLeft="@dimen/activity_margin_horizontal"
+          android:layout_marginRight="@dimen/activity_margin_horizontal"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="NO"
-            style="?android:textAppearanceMedium"
-            android:textColor="@color/secondaryTextColor" />
+
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_clear_black_24dp"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal" />
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:srcCompat="@drawable/ic_clear_black_24dp"
+          android:layout_marginLeft="@dimen/activity_margin_horizontal" />
     </LinearLayout>
 </LinearLayout>
