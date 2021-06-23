@@ -439,6 +439,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         uploadItem.getGpsCoords().setDecLongitude(Double.parseDouble(longitude));
         uploadItem.getGpsCoords().setDecimalCoords(latitude+"|"+longitude);
         uploadItem.getGpsCoords().setImageCoordsExists(true);
+        Toast.makeText(getContext(), "Location Updated", Toast.LENGTH_LONG).show();
 
     }
 

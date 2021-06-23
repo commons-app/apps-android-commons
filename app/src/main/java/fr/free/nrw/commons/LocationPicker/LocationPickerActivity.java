@@ -138,7 +138,7 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
 
         bindViews();
         addBackButtonListener();
-        placeSelectedButton.setOnClickListener(view -> placeSelected());
+        addPlaceSelectedButton();
         addCredits();
         getToolbarUI();
 
@@ -179,7 +179,6 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
         markerImage = findViewById(R.id.location_picker_image_view_marker);
         tvAttribution = findViewById(R.id.tv_attribution);
         modifyLocationButton = findViewById(R.id.modify_location);
-        placeSelectedButton = findViewById(R.id.location_chosen_button);
         showInMapButton = findViewById(R.id.show_in_map);
         shadow = findViewById(R.id.location_picker_image_view_shadow);
     }
@@ -351,6 +350,14 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
                 .zoom(16).build();
         }
         cameraPosition = position;
+    }
+
+    /**
+     * Select the preferable location
+     */
+    private void addPlaceSelectedButton() {
+        placeSelectedButton = findViewById(R.id.location_chosen_button);
+        placeSelectedButton.setOnClickListener(view -> placeSelected());
     }
 
     /**
