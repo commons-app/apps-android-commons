@@ -56,7 +56,7 @@ import timber.log.Timber;
  */
 public class LocationPickerActivity extends AppCompatActivity implements OnMapReadyCallback,
     OnCameraMoveStartedListener, OnCameraIdleListener, Observer<CameraPosition> {
-      
+
   /**
    * DROPPED_MARKER_LAYER_ID : id for layer
    */
@@ -115,6 +115,8 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
     if (actionBar != null) {
       actionBar.hide();
     }
+    setContentView(R.layout.activity_location_picker);
+
     if (savedInstanceState == null) {
       cameraPosition = getIntent().getParcelableExtra(LocationPickerConstants.MAP_CAMERA_POSITION);
       activity = getIntent().getStringExtra(LocationPickerConstants.ACTIVITY_KEY);
@@ -292,43 +294,44 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
       // Set the component's render mode
       locationComponent.setRenderMode(RenderMode.NORMAL);
 
-    /**
-     * Acts on camera moving
-     *
-     * @param reason int
-     */
-    @Override
-    public void onCameraMoveStarted(final int reason) {
-        Timber.v("Map camera has begun moving.");
-        if (markerImage.getTranslationY() == 0) {
-            markerImage.animate().translationY(-75)
-                .setInterpolator(new OvershootInterpolator()).setDuration(250).start();
-        }
     }
+  }
 
-    /**
-     * Acts on camera idle
-     */
-    @Override
-    public void onCameraIdle() {
-        Timber.v("Map camera is now idling.");
-        markerImage.animate().translationY(0)
-            .setInterpolator(new OvershootInterpolator()).setDuration(250).start();
+  /**
+   * Acts on camera moving
+   * @param reason int
+   */
+  @Override
+  public void onCameraMoveStarted(final int reason) {
+    Timber.v("Map camera has begun moving.");
+    if (markerImage.getTranslationY() == 0) {
+      markerImage.animate().translationY(-75)
+          .setInterpolator(new OvershootInterpolator()).setDuration(250).start();
     }
+  }
 
-    /**
-     * Takes action on camera position
-     *
-     * @param position position of picker
-     */
-    @Override
-    public void onChanged(@Nullable CameraPosition position) {
-        if (position == null) {
-            position = new Builder()
-                .target(new LatLng(mapboxMap.getCameraPosition().target.getLatitude(),
-                    mapboxMap.getCameraPosition().target.getLongitude()))
-                .zoom(16).build();
-        }
+  /**
+   * Acts on camera idle
+   */
+  @Override
+  public void onCameraIdle() {
+    Timber.v("Map camera is now idling.");
+    markerImage.animate().translationY(0)
+        .setInterpolator(new OvershootInterpolator()).setDuration(250).start();
+  }
+
+  /**
+   * Takes action on camera position
+   * @param position position of picker
+   */
+  @Override
+  public void onChanged(@Nullable CameraPosition position) {
+    if (position == null) {
+      position = new Builder()
+          .target(new LatLng(mapboxMap.getCameraPosition().target.getLatitude(),
+              mapboxMap.getCameraPosition().target.getLongitude()))
+          .zoom(16).build();
+    }
     cameraPosition = position;
   }
 
