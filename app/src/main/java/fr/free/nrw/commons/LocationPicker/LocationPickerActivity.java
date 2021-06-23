@@ -1,11 +1,21 @@
 package fr.free.nrw.commons.LocationPicker;
 
+import static com.mapbox.mapboxsdk.style.layers.Property.NONE;
+import static com.mapbox.mapboxsdk.style.layers.Property.VISIBLE;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
+
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.view.View;
 import android.view.Window;
 import android.view.animation.OvershootInterpolator;
+import android.widget.Button;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +27,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.android.core.permissions.PermissionsManager;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraPosition.Builder;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -32,7 +43,11 @@ import com.mapbox.mapboxsdk.maps.MapboxMap.OnCameraMoveStartedListener;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.maps.UiSettings;
+import com.mapbox.mapboxsdk.style.layers.Layer;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import org.jetbrains.annotations.NotNull;
 import timber.log.Timber;
 
@@ -42,6 +57,10 @@ import timber.log.Timber;
 public class LocationPickerActivity extends AppCompatActivity implements OnMapReadyCallback,
     OnCameraMoveStartedListener, OnCameraIdleListener, Observer<CameraPosition> {
 
+  /**
+   * DROPPED_MARKER_LAYER_ID : id for layer
+   */
+  private static final String DROPPED_MARKER_LAYER_ID = "DROPPED_MARKER_LAYER_ID";
   /**
    * cameraPosition : position of picker
    */
@@ -62,6 +81,30 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
    * tvAttribution : credit
    */
   private AppCompatTextView tvAttribution;
+  /**
+   * activity : activity key
+   */
+  private String activity;
+  /**
+   * modifyLocationButton : button for start editing location
+   */
+  Button modifyLocationButton;
+  /**
+   * showInMapButton : button for showing in map
+   */
+  Button showInMapButton;
+  /**
+   * placeSelectedButton : fab for selecting location
+   */
+  FloatingActionButton placeSelectedButton;
+  /**
+   * droppedMarkerLayer : Layer for static screen
+   */
+  private Layer droppedMarkerLayer;
+  /**
+   * shadow : imageview of shadow
+   */
+  private ImageView shadow;
 
   @Override
   protected void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -76,6 +119,7 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
 
     if (savedInstanceState == null) {
       cameraPosition = getIntent().getParcelableExtra(LocationPickerConstants.MAP_CAMERA_POSITION);
+      activity = getIntent().getStringExtra(LocationPickerConstants.ACTIVITY_KEY);
     }
 
     final LocationPickerViewModel viewModel = new ViewModelProvider(this)
@@ -85,6 +129,12 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
     bindViews();
     addBackButtonListener();
     addPlaceSelectedButton();
+
+    if(activity.equals("UploadActivity")){
+      placeSelectedButton.setVisibility(View.GONE);
+      modifyLocationButton.setVisibility(View.VISIBLE);
+      showInMapButton.setVisibility(View.VISIBLE);
+    }
     addCredits();
     getToolbarUI();
 
@@ -115,6 +165,9 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
     mapView = findViewById(R.id.map_view);
     markerImage = findViewById(R.id.location_picker_image_view_marker);
     tvAttribution = findViewById(R.id.tv_attribution);
+    modifyLocationButton = findViewById(R.id.modify_location);
+    showInMapButton = findViewById(R.id.show_in_map);
+    shadow = findViewById(R.id.location_picker_image_view_shadow);
   }
 
   /**
@@ -143,12 +196,69 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
   public void onMapReady(final MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
-      adjustCameraBasedOnOptions();
-      bindListeners();
-      enableLocationComponent(style);
+
+      if(modifyLocationButton.getVisibility() == View.VISIBLE){
+        initDroppedMarker(style);
+        adjustCameraBasedOnOptions();
+        enableLocationComponent(style);
+        if (style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
+          final GeoJsonSource source = style.getSourceAs("dropped-marker-source-id");
+          if (source != null) {
+            source.setGeoJson(Point.fromLngLat(cameraPosition.target.getLongitude(),
+                cameraPosition.target.getLatitude()));
+          }
+          droppedMarkerLayer = style.getLayer(DROPPED_MARKER_LAYER_ID);
+          if (droppedMarkerLayer != null) {
+            droppedMarkerLayer.setProperties(visibility(VISIBLE));
+            markerImage.setVisibility(View.GONE);
+            shadow.setVisibility(View.GONE);
+          }
+        }
+      } else {
+        adjustCameraBasedOnOptions();
+        enableLocationComponent(style);
+        bindListeners();
+      }
+      modifyLocationButton.setOnClickListener(v -> {
+        placeSelectedButton.setVisibility(View.VISIBLE);
+        modifyLocationButton.setVisibility(View.GONE);
+        showInMapButton.setVisibility(View.GONE);
+        droppedMarkerLayer.setProperties(visibility(NONE));
+        markerImage.setVisibility(View.VISIBLE);
+        shadow.setVisibility(View.VISIBLE);
+        bindListeners();
+      });
+
+      showInMapButton.setOnClickListener(v -> showInMap());
     });
   }
 
+  /**
+   * Show the location in map app
+   */
+  public void showInMap(){
+    Utils.handleGeoCoordinates(this,
+        new fr.free.nrw.commons.location.LatLng(cameraPosition.target.getLatitude(),
+            cameraPosition.target.getLongitude(), 0.0f));
+  }
+
+  /**
+   * Initialize Dropped Marker and layer without showing
+   * @param loadedMapStyle style
+   */
+  private void initDroppedMarker(@NonNull final Style loadedMapStyle) {
+    // Add the marker image to map
+    loadedMapStyle.addImage("dropped-icon-image", BitmapFactory.decodeResource(
+        getResources(), R.drawable.map_default_map_marker));
+    loadedMapStyle.addSource(new GeoJsonSource("dropped-marker-source-id"));
+    loadedMapStyle.addLayer(new SymbolLayer(DROPPED_MARKER_LAYER_ID,
+        "dropped-marker-source-id").withProperties(
+        iconImage("dropped-icon-image"),
+        visibility(NONE),
+        iconAllowOverlap(true),
+        iconIgnorePlacement(true)
+    ));
+  }
   /**
    * move the location to the current media coordinates
    */
@@ -229,7 +339,7 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
    * Select the preferable location
    */
   private void addPlaceSelectedButton() {
-    final FloatingActionButton placeSelectedButton = findViewById(R.id.location_chosen_button);
+    placeSelectedButton = findViewById(R.id.location_chosen_button);
     placeSelectedButton.setOnClickListener(view -> placeSelected());
   }
 

@@ -2,7 +2,6 @@ package fr.free.nrw.commons.LocationPicker;
 
 import android.app.Activity;
 import android.content.Intent;
-import androidx.annotation.NonNull;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 
 /**
@@ -38,6 +37,17 @@ public final class LocationPicker {
     public LocationPicker.IntentBuilder defaultLocation(
         final CameraPosition position) {
       intent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION, position);
+      return this;
+    }
+
+    /**
+     * Gets and puts activity name in intent
+     * @param activity activity key
+     * @return LocationPicker.IntentBuilder
+     */
+    public LocationPicker.IntentBuilder activityKey(
+        final String activity) {
+      intent.putExtra(LocationPickerConstants.ACTIVITY_KEY, activity);
       return this;
     }
 
