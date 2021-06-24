@@ -16,6 +16,7 @@
 * Megakott
 * Monirec
 * Movses
+* Nastua Buldakova
 * Nitch
 * Okras
 * Pacha Tchernof
@@ -46,16 +47,16 @@
   </plurals>
   <string name="starting_uploads">Начало загрузки</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Начинается %1$d загрузка</item>
-    <item quantity="few">Начинается %1$d загрузки</item>
-    <item quantity="many">Начинается %1$d загрузок</item>
-    <item quantity="other">Начинается %1$d загрузок</item>
+    <item quantity="one">Обработка %d загрузки</item>
+    <item quantity="few">Обработка %d загрузок</item>
+    <item quantity="many">Обработка %d загрузок</item>
+    <item quantity="other">Обработка %d загрузок</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d загрузка</item>
-    <item quantity="few">%1$d загрузки</item>
-    <item quantity="many">%1$d загрузок</item>
-    <item quantity="other">%1$d загрузок</item>
+    <item quantity="one">%d загрузка</item>
+    <item quantity="few">%d загрузки</item>
+    <item quantity="many">%d загрузок</item>
+    <item quantity="other">%d загрузок</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Это изображение будет лицензировано под %1$s</item>
@@ -100,7 +101,7 @@
   <string name="uploading_queued">Загрузка в очереди (включен режим ограниченного подключения)</string>
   <string name="upload_completed_notification_title">%1$s загружен!</string>
   <string name="upload_completed_notification_text">Нажмите для просмотра загруженного файла</string>
-  <string name="upload_progress_notification_title_start">Загрузка %1$s начата</string>
+  <string name="upload_progress_notification_title_start">Загрузка файла: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s загружается</string>
   <string name="upload_progress_notification_title_finishing">Завершение загрузки %1$s</string>
   <string name="upload_failed_notification_title">Загрузка %1$s не удалась</string>
@@ -268,6 +269,8 @@
   <string name="upload_problem_different_geolocation">Это изображение было сделано в другом месте.</string>
   <string name="upload_problem_fbmd">Пожалуйста, загружайте только те изображения, которые были сделаны вами. Не загружайте изображений, которые вы нашли в Фейсбуке.</string>
   <string name="upload_problem_do_you_continue">Всё равно желаете загрузить это изображение?</string>
+  <string name="upload_connection_error_alert_title">Ошибка соединения</string>
+  <string name="upload_connection_error_alert_detail">Для загрузки требуется доступ в Интернет. Пожалуйста, проверьте ваше сетевое соединение.</string>
   <string name="upload_problem_image">Проблемы, найденные в изображении</string>
   <string name="internet_downloaded">Пожалуйста, загружайте только те изображения, которые были сделаны вами. Не загружайте изображений, которые вы скачали из Интернета.</string>
   <string name="use_external_storage">Сохранять сделанные в приложении снимки</string>
@@ -474,7 +477,8 @@
   <string name="images_featured_explanation">Избранные изображения обычно сделаны профессиональными фотографами и иллюстраторами. Такие изображения отмечены сообществом участников Викисклада как имеющие высшее качество на этом вебсайте.</string>
   <string name="images_via_nearby_explanation">Изображения, загруженные участниками, которые находили места с помощью функционала \"Места поблизости\".</string>
   <string name="thanks_received_explanation">Это функция позволяет участникам послать благодарность другим участникам за их полезные правки с помощью маленькой ссылки на странице истории страницы или странице разницы версий.</string>
-  <string name="previous_image_caption_description">Скопировать предыдущие название и описание</string>
+  <string name="copy_image_caption_description">Копирование на последующие носители</string>
+  <string name="copied_successfully">Скопировано</string>
   <string name="welcome_do_upload_content_description">Примеры изображений, подходящих для загрузки на Викисклад</string>
   <string name="welcome_dont_upload_content_description">Примеры изображений, которые не следует загружать на Викисклад</string>
   <string name="skip_image">Пропустить это изображение</string>
@@ -521,6 +525,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Не удалось добавить категории.</string>
   <string name="category_edit_button_text">Обновить категории</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Попытка обновить координаты.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Обновление координат</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Успешно</string>
+  <string name="coordinates_edit_helper_show_edit_message">Координаты %1$s добавлены.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Не удалось добавить координаты.</string>
+  <string name="coordinates_picking_unsuccessful">Не удалось получить координаты.</string>
   <string name="share_image_via">Поделиться изображением с помощью</string>
   <string name="no_achievements_yet">Пока что от вас нет вклада</string>
   <string name="account_created">Учётная запись создана!</string>
@@ -615,4 +625,12 @@
   <string name="media_detail_step_title">Детали файла</string>
   <string name="menu_view_category_page">Просмотреть страницу категории</string>
   <string name="menu_view_item_page">Просмотреть страницу элемента</string>
+  <string name="app_ui_language">Язык пользовательского интерфейса приложения</string>
+  <string name="remove">Удаляет подпись и описание</string>
+  <string name="read_help_link">Подробнее</string>
+  <string name="media_detail_in_all_languages">На всех языках</string>
+  <string name="choose_a_location">Выберите местоположение</string>
+  <string name="pan_and_zoom_to_adjust">Панорамируйте и масштабируйте для настройки</string>
+  <string name="exit_location_picker">Выйти из окна выбора местоположения</string>
+  <string name="select_location_location_picker">Выберите местоположение</string>
 </resources>

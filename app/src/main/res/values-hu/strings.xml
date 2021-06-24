@@ -27,12 +27,12 @@
   </plurals>
   <string name="starting_uploads">Feltöltések indítása</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%1$d feltöltés kezdése</item>
-    <item quantity="other">%1$d feltöltés kezdése</item>
+    <item quantity="one">%d feltöltés feldolgozása</item>
+    <item quantity="other">%d feltöltés feldolgozás</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d feltöltés</item>
-    <item quantity="other">%1$d feltöltés</item>
+    <item quantity="one">%d feltöltés</item>
+    <item quantity="other">%d feltöltés</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Ez a kép %1$s licenc alatt lesz feltöltve</item>
@@ -71,7 +71,7 @@
   <string name="uploading_queued">Feltöltések késleltetése (korlátozott kapcsolat-mód bekapcsolva)</string>
   <string name="upload_completed_notification_title">%1$s feltöltve.</string>
   <string name="upload_completed_notification_text">Feltöltés megtekintése</string>
-  <string name="upload_progress_notification_title_start">Feltöltés indul: %1$s</string>
+  <string name="upload_progress_notification_title_start">Fájl feltöltése: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s feltöltése</string>
   <string name="upload_progress_notification_title_finishing">%1$s feltöltése befejezve</string>
   <string name="upload_failed_notification_title">%1$s feltöltése sikertelen</string>
@@ -101,7 +101,7 @@
   <string name="menu_save_categories">Mentés</string>
   <string name="refresh_button">Frissítés</string>
   <string name="display_list_button">Lista</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Még nincsenek feltöltések</string>
+  <string name="contributions_subtitle_zero">(Még nincsenek feltöltések)</string>
   <string name="categories_not_found">Nincs a(z) „%1$s” keresési kifejezésnek megfelelő kategória</string>
   <string name="categories_skip_explanation">Adj kategóriákat a képekhez, hogy könnyebben meg lehessen találni őket a Commonson.\nKezdd el beírni a kategória nevét, hogy hozzáadd.\nBökj erre az üzenetre (vagy a vissza gombra) a lépés kihagyásához</string>
   <string name="categories_activity_title">Kategóriák</string>
@@ -334,7 +334,7 @@
   <string name="storage_permission">Tárolási engedély</string>
   <string name="write_storage_permission_rationale_for_image_share">Szükséges az engedélyed a külső tárolóhoz való hozzáféréshez. Ez a képek feltöltéséhez kell.</string>
   <string name="nearby_notification_dismiss_message">Nem lesznek láthatók a képet igénylő közeli helyek. Az értesítés visszakapcsolható a Beállításoknál.</string>
-  <string name="step_count" fuzzy="true">%1$d. lépés, összesen: %2$d</string>
+  <string name="step_count">%1$d. lépés, összesen: %2$d: %3$s</string>
   <string name="next">Következő</string>
   <string name="previous">Előző</string>
   <string name="submit">Küldés</string>
@@ -356,7 +356,7 @@
   <string name="no_uploads">Üdvözlünk a Commons-ban. \n\nA hozzáadás gombra koppintva feltöltheted első képedet.</string>
   <string name="no_categories_selected">Nincs kiválasztott kategória</string>
   <string name="no_categories_selected_warning_desc">A kategória nélküli képek ritkán használhatóak. Biztos, hogy kategória kiválasztása nélkül akarsz továbblépni?</string>
-  <string name="upload_flow_all_images_in_set" fuzzy="true">(az összes képre)</string>
+  <string name="upload_flow_all_images_in_set">(az összes képre)</string>
   <string name="search_this_area">Keresés ezen a helyen</string>
   <string name="nearby_card_permission_title">Engedély kérése</string>
   <string name="nearby_card_permission_explanation">A földrajzi hely ismerete szükséges a közeli hely meghatározásához, ami képet igényel.</string>
@@ -394,8 +394,8 @@
   <string name="review_category_explanation">Ez a kép a következő kategóriában van: %1$s.</string>
   <string name="review_spam_report_question">A kép nem megfelelő, mivel</string>
   <string name="review_c_violation_report_question">Megsérti a szerzői jogokat, mivel</string>
-  <string name="review_thanks_yes_button_text" fuzzy="true">Miért ne?</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">Következő kép</string>
+  <string name="review_thanks_yes_button_text">Következő kép</string>
+  <string name="review_thanks_no_button_text">Miért ne?</string>
   <string name="skip_image_explanation">Erre a gombra kattintva egy másik mostanában feltöltött képet kaphatsz a Wikimedia Commonsból.</string>
   <string name="review_image_explanation">Átnézheted a képeket, ezzel növelve a Wikimedia Commons minőségét.\nAz átnézés négy szempontja a következő:\n- Megfelelő a kép?\n- Megfelel a szerzői jogvédelmi szabályoknak?\n- Helyesen van kategorizálva?\n- Ha minden jól megy, meg is köszönheted a közreműködőnek.</string>
   <string name="no_image">Nincs felhasznált kép</string>

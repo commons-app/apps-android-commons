@@ -1,25 +1,28 @@
 package fr.free.nrw.commons.contributions;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.BookmarkFragment;
-import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.ExploreFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -29,15 +32,15 @@ import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment;
 import fr.free.nrw.commons.navtab.NavTab;
 import fr.free.nrw.commons.navtab.NavTabLayout;
 import fr.free.nrw.commons.navtab.NavTabLoggedOut;
-import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
+import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.upload.worker.UploadWorker;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -95,7 +98,9 @@ public class MainActivity  extends BaseActivity
     @Override
     public boolean onSupportNavigateUp() {
         if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
-            contributionsFragment.backButtonClicked();
+            if (!contributionsFragment.backButtonClicked()) {
+                return false;
+            }
         } else {
             onBackPressed();
             showTabs();
@@ -106,6 +111,7 @@ public class MainActivity  extends BaseActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadLocale();
         setContentView(R.layout.main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
@@ -122,7 +128,6 @@ public class MainActivity  extends BaseActivity
                 loadFragment(ContributionsFragment.newInstance(),false);
             }
             setUpPager();
-            initMain();
         }
     }
 
@@ -241,42 +246,35 @@ public class MainActivity  extends BaseActivity
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        String currentFragmentName = savedInstanceState.getString("activeFragment");
-        if(currentFragmentName == ActiveFragment.CONTRIBUTIONS.name()) {
+        String activeFragmentName = savedInstanceState.getString("activeFragment");
+        if(activeFragmentName != null) {
+            restoreActiveFragment(activeFragmentName);
+        }
+    }
+
+    private void restoreActiveFragment(@NonNull String fragmentName) {
+        if(fragmentName.equals(ActiveFragment.CONTRIBUTIONS.name())) {
             setTitle(getString(R.string.contributions_fragment));
             loadFragment(ContributionsFragment.newInstance(),false);
-        }else if(currentFragmentName == ActiveFragment.NEARBY.name()) {
+        }else if(fragmentName.equals(ActiveFragment.NEARBY.name())) {
             setTitle(getString(R.string.nearby_fragment));
             loadFragment(NearbyParentFragment.newInstance(),false);
-        }else if(currentFragmentName == ActiveFragment.EXPLORE.name()) {
+        }else if(fragmentName.equals(ActiveFragment.EXPLORE.name())) {
             setTitle(getString(R.string.navigation_item_explore));
             loadFragment(ExploreFragment.newInstance(),false);
-        }else if(currentFragmentName == ActiveFragment.BOOKMARK.name()) {
+        }else if(fragmentName.equals(ActiveFragment.BOOKMARK.name())) {
             setTitle(getString(R.string.favorites));
             loadFragment(BookmarkFragment.newInstance(),false);
         }
     }
 
-    private void initMain() {
-        //Do not remove this, this triggers the sync service
-        Intent uploadServiceIntent = new Intent(this, UploadService.class);
-        uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
-        startService(uploadServiceIntent);
-    }
-
     @Override
     public void onBackPressed() {
         if (contributionsFragment != null && activeFragment == ActiveFragment.CONTRIBUTIONS) {
-            // Meas that contribution fragment is visible
-            mediaDetailPagerFragment=contributionsFragment.getMediaDetailPagerFragment();
-            if (mediaDetailPagerFragment ==null) { //means you open the app currently and not open mediaDetailPage fragment
+            // Means that contribution fragment is visible
+            if (!contributionsFragment.backButtonClicked()) {//If this one does not wan't to handle
+                // the back press, let the activity do so
                 super.onBackPressed();
-            } else if (mediaDetailPagerFragment!=null) {
-                if(!mediaDetailPagerFragment.isVisible()){  //means you are at contributions fragement
-                    super.onBackPressed();
-                } else {  //mean you are at mediaDetailPager Fragment
-                    contributionsFragment.backButtonClicked();
-                }
             }
         } else if (nearbyParentFragment != null && activeFragment == ActiveFragment.NEARBY) {
             // Means that nearby fragment is visible
@@ -288,7 +286,11 @@ public class MainActivity  extends BaseActivity
             }
         } else if (exploreFragment != null && activeFragment == ActiveFragment.EXPLORE) {
             // Means that explore fragment is visible
-            exploreFragment.onBackPressed();
+            if (!exploreFragment.onBackPressed()) {
+                if (applicationKvStore.getBoolean("login_skipped")) {
+                    super.onBackPressed();
+                }
+            }
         } else if (bookmarkFragment != null && activeFragment == ActiveFragment.BOOKMARK) {
             // Means that bookmark fragment is visible
             bookmarkFragment.onBackPressed();
@@ -323,13 +325,10 @@ public class MainActivity  extends BaseActivity
             viewUtilWrapper
                 .showShortToast(getBaseContext(), getString(R.string.limited_connection_enabled));
         } else {
-            Intent intent = new Intent(this, UploadService.class);
-            intent.setAction(UploadService.PROCESS_PENDING_LIMITED_CONNECTION_MODE_UPLOADS);
-            if (VERSION.SDK_INT >= VERSION_CODES.O) {
-                startForegroundService(intent);
-            } else {
-                startService(intent);
-            }
+            WorkManager.getInstance(getApplicationContext()).enqueueUniqueWork(
+                UploadWorker.class.getSimpleName(),
+                ExistingWorkPolicy.APPEND_OR_REPLACE, OneTimeWorkRequest.from(UploadWorker.class));
+
             viewUtilWrapper
                 .showShortToast(getBaseContext(), getString(R.string.limited_connection_disabled));
         }
@@ -374,5 +373,15 @@ public class MainActivity  extends BaseActivity
         EXPLORE,
         BOOKMARK,
         MORE
+    }
+
+    /**
+     * Load default language in onCreate from SharedPreferences
+     */
+    private void loadLocale(){
+        final SharedPreferences preferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        final String language = preferences.getString("language", "");
+        final SettingsFragment settingsFragment = new SettingsFragment();
+        settingsFragment.setLocale(this, language);
     }
 }

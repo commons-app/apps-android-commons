@@ -14,6 +14,7 @@
 * Mansil alfalb
 * Mirzali
 * Sarilho1
+* Unamane
 * Vitorvicentevalente
 -->
 <resources>
@@ -27,12 +28,12 @@
   </plurals>
   <string name="starting_uploads">A iniciar carregamentos</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">A iniciar %1$d carregamento</item>
-    <item quantity="other">A iniciar %1$d carregamentos</item>
+    <item quantity="one">A processar %d carregamento</item>
+    <item quantity="other">A processar %d carregamentos</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d carregamento</item>
-    <item quantity="other">%1$d carregamentos</item>
+    <item quantity="one">%d carregamento</item>
+    <item quantity="other">%d carregamentos</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Esta imagem será licenciada com a %1$s</item>
@@ -71,7 +72,7 @@
   <string name="uploading_queued">Fila de carregamento (modo de ligação limitada ativado)</string>
   <string name="upload_completed_notification_title">%1$s carregado!</string>
   <string name="upload_completed_notification_text">Toque para ver o seu carregamento</string>
-  <string name="upload_progress_notification_title_start">A iniciar o carregamento de %1$s</string>
+  <string name="upload_progress_notification_title_start">A carregar o ficheiro %s</string>
   <string name="upload_progress_notification_title_in_progress">A carregar %1$s</string>
   <string name="upload_progress_notification_title_finishing">A terminar o carregamento de %1$s</string>
   <string name="upload_failed_notification_title">O carregamento de %1$s falhou</string>
@@ -428,8 +429,8 @@
   <string name="review_category_explanation">Esta imagem está em %1$s categorias.</string>
   <string name="review_spam_report_question">Está fora do âmbito porque é</string>
   <string name="review_c_violation_report_question">Constitui uma infringência de direitos de autor porque é</string>
-  <string name="review_thanks_yes_button_text" fuzzy="true">Sim, porque não?</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">Imagem seguinte</string>
+  <string name="review_thanks_yes_button_text">Imagem seguinte</string>
+  <string name="review_thanks_no_button_text">Sim, por que não</string>
   <string name="skip_image_explanation">Clicar este botão dá-lhe outra imagem carregada recentemente da wiki Wikimedia Commons</string>
   <string name="review_image_explanation">Pode rever imagens e melhorar a qualidade da wiki Wikimedia Commons.\n Os quatro parâmetros de revisão são:\n- Esta imagem está enquadrada no nosso âmbito?\n- Esta imagem respeita as regras dos direitos de autor?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, também poderá agradecer ao contribuidor.</string>
   <string name="no_image">Não foi usada nenhuma imagem</string>
@@ -445,7 +446,8 @@
   <string name="images_featured_explanation">As fotografias destacadas são imagens de fotógrafos e ilustradores altamente qualificados, que a comunidade da wiki Wikimedia Commons escolheu como as de melhor qualidade do \'\'site\'\'.</string>
   <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo locais do mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidade permite que os editores enviem uma notificação de agradecimento aos utilizadores que fizerem edições úteis - usando uma pequena hiperligação de agradecimento na página do historial ou na de diferenças.</string>
-  <string name="previous_image_caption_description">Copiar legendas e descrição anteriores</string>
+  <string name="copy_image_caption_description">Copiar para a mídia subsequente</string>
+  <string name="copied_successfully">Copiado</string>
   <string name="welcome_do_upload_content_description">Exemplos de imagens que podem ser carregadas na wiki Commons</string>
   <string name="welcome_dont_upload_content_description">Exemplos de imagens que não devem ser carregadas</string>
   <string name="skip_image">Saltar esta imagem</string>
@@ -584,4 +586,5 @@
   <string name="media_detail_step_title">Detalhes de multimédia</string>
   <string name="menu_view_category_page">Ver página de categoria</string>
   <string name="menu_view_item_page">Ver página do elemento</string>
+  <string name="read_help_link">Ler mais</string>
 </resources>

@@ -18,7 +18,7 @@
   <string name="uploading_started">Nahraće je so započało!</string>
   <string name="upload_completed_notification_title">%1$s nahraty!</string>
   <string name="upload_completed_notification_text">Dótkń so, zo by swoje nahraće widźał</string>
-  <string name="upload_progress_notification_title_start">Nahraće %1$S startować</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Nahraće %1$S startować</string>
   <string name="upload_progress_notification_title_in_progress">%1$s so nahrawa</string>
   <string name="upload_progress_notification_title_finishing">Nahraće %1$s so kónči</string>
   <string name="upload_failed_notification_title">Nahraće %1$s je so njeporadźiło</string>

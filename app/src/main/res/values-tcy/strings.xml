@@ -16,11 +16,11 @@
     <item quantity="one">%1$d ಮಿತೆರಾಯಿನ</item>
     <item quantity="other">%1$d ಮಿತೆರಾಯಿನವು</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Starting %1$d upload</item>
     <item quantity="other">Starting %1$d uploads</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
   </plurals>
@@ -54,7 +54,7 @@
   <string name="uploading_started">ದಿಂಜಪುನಾ ಸುರು ಅಂಡ್!</string>
   <string name="upload_completed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಆಂಡ್!</string>
   <string name="upload_completed_notification_text">ಇರೆನ ಅಪ್ಲೋಡ್ ತೂಯೆರೆ ಒತ್ತುಲೆ</string>
-  <string name="upload_progress_notification_title_start">%1$s ಅಪ್ಲೋಡ್ ಸುರು ಆವೊಂದುಂಡು</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s ಅಪ್ಲೋಡ್ ಸುರು ಆವೊಂದುಂಡು</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ಅಪ್ಲೋಡ್ ಆವೊಂದುಂಡು</string>
   <string name="upload_progress_notification_title_finishing">%1$s ಅಪ್ಲೋಡ್ ಕೈದ್ ಆವೊಂದುಂಡು.</string>
   <string name="upload_failed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಸರಿ ಆತಿಜಿ</string>

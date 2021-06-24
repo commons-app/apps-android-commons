@@ -9,7 +9,7 @@
     <item quantity="one">ဖိုင် %1$d ခု တင်နေသည်</item>
     <item quantity="other">ဖိုင် %1$d ခု တင်နေသည်</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d ခု တင်ထားသည်</item>
     <item quantity="other">%1$d ခု တင်ထားသည်</item>
   </plurals>
@@ -44,7 +44,7 @@
   <string name="authentication_failed">စစ်ဆေးခြင်း မအောင်မြင်ပါ၊ ထပ်မံ၍ လော့အင်ဝင်ပါ။</string>
   <string name="uploading_started">Upload စတင်ပါပြီ</string>
   <string name="upload_completed_notification_title">%1$s တင်ပြီးပြီ</string>
-  <string name="upload_progress_notification_title_start">ဖိုင်တင်မှု %1$s စတင်နေသည်</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">ဖိုင်တင်မှု %1$s စတင်နေသည်</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ဖိုင်တင်နေသည်</string>
   <string name="upload_progress_notification_title_finishing">ဖိုင်တင်ခြင်း ပြီးဆုံးမှု %1$s</string>
   <string name="upload_failed_notification_title">ဖိုင်တင်ခြင်း %1$s မအောင်မြင်ပါ</string>
@@ -311,4 +311,5 @@
   <string name="pause">ခေတ္တရပ်</string>
   <string name="resume">ခေတ္တရပ်နားရာမှ ပြန်လုပ်ရန်</string>
   <string name="paused">ခေတ္တရပ်ပြီး</string>
+  <string name="read_help_link">ပိုမို ဖတ်ရန်</string>
 </resources>

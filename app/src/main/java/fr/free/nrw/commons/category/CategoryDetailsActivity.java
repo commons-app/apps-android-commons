@@ -166,6 +166,19 @@ public class CategoryDetailsActivity extends BaseActivity
     }
 
     /**
+     * Reload media detail fragment once media is nominated
+     *
+     * @param index item position that has been nominated
+     */
+    @Override
+    public void refreshNominatedMedia(int index) {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            onBackPressed();
+            onMediaClicked(index);
+        }
+    }
+
+    /**
      * This method inflates the menu in the toolbar
      */
     @Override
@@ -203,7 +216,12 @@ public class CategoryDetailsActivity extends BaseActivity
     @Override
     public void onBackPressed() {
         if (supportFragmentManager.getBackStackEntryCount() == 1){
-            // back to search so show search toolbar and hide navigation toolbar
+
+            // the back press is handled by the mediaDetails , no further action required.
+            if(mediaDetails.backButtonClicked()){
+                return;
+            }
+
             tabLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.VISIBLE);
             mediaContainer.setVisibility(View.GONE);

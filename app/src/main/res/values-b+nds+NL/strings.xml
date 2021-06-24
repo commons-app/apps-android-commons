@@ -17,7 +17,7 @@
   <string name="uploading_started">t Oplaojen van bestaanden hef an-evöngen</string>
   <string name="upload_completed_notification_title">%1$s in-elaojen!</string>
   <string name="upload_completed_notification_text">Wies an um t bestaand te bekieken</string>
-  <string name="upload_progress_notification_title_start">t Opsturen van bestaand %1$s vangt an</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">t Opsturen van bestaand %1$s vangt an</string>
   <string name="upload_progress_notification_title_in_progress">%1$s wörden in-elaojen</string>
   <string name="upload_progress_notification_title_finishing">t Oplaojen van %1$s is klaor</string>
   <string name="upload_failed_notification_title">t Oplaojen van %1$s is mislokt</string>

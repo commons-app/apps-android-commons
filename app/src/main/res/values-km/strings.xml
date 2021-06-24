@@ -16,11 +16,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">ចាប់ផ្ដើមផ្ទុកឡើង</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">ចាប់ផ្ដើមផ្ទុកឡើង %1$d </item>
     <item quantity="other">ចាប់ផ្ដើមផ្ទុកឡើង %1$d</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d ផ្ទុកឡើង</item>
     <item quantity="other">%1$d បានផ្ទុកឡើង</item>
   </plurals>
@@ -55,7 +55,7 @@
   <string name="uploading_queued">ជួរផ្ទុកឡើង (បានបើកម៉ូតដែនកំហិតតភ្ជាប់)</string>
   <string name="upload_completed_notification_title">បានផ្ទុកឡើង %1$s ហើយ!</string>
   <string name="upload_completed_notification_text">ចុចដើម្បីមើលអ្វីដែលអ្នកផ្ទុកឡើង</string>
-  <string name="upload_progress_notification_title_start">កំពុងចាប់ផ្តើមផ្ទុកឡើង %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">កំពុងចាប់ផ្តើមផ្ទុកឡើង %1$s</string>
   <string name="upload_progress_notification_title_in_progress">កំពុងផ្ទុកឡើង %1$s</string>
   <string name="upload_progress_notification_title_finishing">កំពុងបញ្ចប់ការផ្ទុកឡើង  %1$s</string>
   <string name="upload_failed_notification_title">ការផ្ទុកឡើង %1$s មិនបានសម្រេច</string>

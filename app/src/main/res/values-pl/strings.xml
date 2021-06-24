@@ -5,6 +5,7 @@
 * CiaPan
 * DeRudySoulStorm
 * InternerowyGołąb
+* Kareyac
 * Krottyianock
 * Matma Rex
 * Mazab IZW
@@ -36,13 +37,13 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Rozpoczynanie przesyłania</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Rozpoczęto %1$d przesyłanie</item>
     <item quantity="few">Rozpoczęto %1$d przesyłania</item>
     <item quantity="many">Rozpoczęto %1$d przesyłania</item>
     <item quantity="other">Rozpoczęto %1$d przesyłania</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d przesłanie</item>
     <item quantity="few">%1$d przesłania</item>
     <item quantity="many">%1$d przesłania</item>
@@ -91,7 +92,7 @@
   <string name="uploading_queued">Prześlij w kolejce (włączony tryb ograniczonego połączenia)</string>
   <string name="upload_completed_notification_title">Przesłano %1$s!</string>
   <string name="upload_completed_notification_text">Dotknij, aby zobaczyć przesłany plik</string>
-  <string name="upload_progress_notification_title_start">Rozpoczęto przesyłanie pliku %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Rozpoczęto przesyłanie pliku %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Wysyłanie %1$s</string>
   <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$s</string>
   <string name="upload_failed_notification_title">Wysyłanie %1$s nieudane</string>
@@ -465,7 +466,6 @@
   <string name="images_featured_explanation">Polecane zdjęcia to zdjęcia wysoko wykwalifikowanych fotografów i ilustratorów, które społeczność Wikimedia Commons wybrała jako jedne z najwyższych jakości na stronie.</string>
   <string name="images_via_nearby_explanation">Obrazy przesłane przez Pobliskie miejsca to obrazy, które są przesyłane przez odkrywanie miejsc na mapie.</string>
   <string name="thanks_received_explanation">Ta funkcja umożliwia redaktorom wysyłanie powiadomień z podziękowaniem do użytkowników, którzy dokonują przydatnych zmian - za pomocą małego linku z podziękowaniem na stronie historii lub na stronie diff.</string>
-  <string name="previous_image_caption_description">Skopiuj poprzednie podpisy i opis</string>
   <string name="welcome_do_upload_content_description">Przykłady dobrych zdjęć do przesłania na Commons</string>
   <string name="welcome_dont_upload_content_description">Przykłady obrazów, których nie można przesyłać</string>
   <string name="skip_image">Pomiń ten obraz</string>
@@ -506,6 +506,7 @@
   <string name="category_edit_helper_show_edit_title_success">Powodzenie</string>
   <string name="category_edit_helper_edit_message_else">Nie udało się dodać kategorii.</string>
   <string name="category_edit_button_text">Aktualizuj kategorie</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Powodzenie</string>
   <string name="share_image_via">Udostępnij obraz przez</string>
   <string name="no_achievements_yet">Nie wykonałeś jeszcze żadnej edycji</string>
   <string name="account_created">Konto zostało utworzone!</string>

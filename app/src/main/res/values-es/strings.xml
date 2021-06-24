@@ -2,6 +2,7 @@
 <!-- Authors:
 * 2axterix2
 * Adjen
+* Agent
 * Astroemi
 * Benfutbol10
 * Carlosmg.dg
@@ -39,11 +40,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Comenzando las subidas</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Iniciando %1$d carga</item>
     <item quantity="other">Iniciando %1$d cargas</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d carga</item>
     <item quantity="other">%1$d cargas</item>
   </plurals>
@@ -84,7 +85,7 @@
   <string name="uploading_queued">Carga en cola (modo de conexión limitada activado)</string>
   <string name="upload_completed_notification_title">¡Se ha subido %1$s!</string>
   <string name="upload_completed_notification_text">Pulsa para ver tu subida</string>
-  <string name="upload_progress_notification_title_start">Empezando la subida de %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Empezando la subida de %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Subiendo %1$s</string>
   <string name="upload_progress_notification_title_finishing">Finalizando la subida de %1$s</string>
   <string name="upload_failed_notification_title">Falló la carga de %1$s</string>
@@ -456,7 +457,6 @@
   <string name="images_featured_explanation">Las imágenes destacadas son creaciones de talentosos fotógrafos e ilustradores que la comunidad de Wikimedia Commons ha reconocido como las de mayor calidad del sitio.</string>
   <string name="images_via_nearby_explanation">Las imágenes subidas via Lugares Cercanos son las imágenes que han sido cargadas al descubrir lugares en el mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidad permite a los editores enviar una notificación de agradecimiento a aquellos usuarios que realicen ediciones útiles mediante un pequeño enlace en la página de historial o de diferencias.</string>
-  <string name="previous_image_caption_description">Copiar leyendas y descripción anteriores</string>
   <string name="welcome_do_upload_content_description">Ejemplos de imágenes adecuadas para Commons</string>
   <string name="welcome_dont_upload_content_description">Ejemplos de imágenes que no deben cargarse</string>
   <string name="skip_image">Omitir esta imagen</string>
@@ -501,6 +501,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">No se pudieron añadir las categorías.</string>
   <string name="category_edit_button_text">Actualizar categorías</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Intentando actualizar coordenadas.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Actualización de coordenadas</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Éxito</string>
+  <string name="coordinates_edit_helper_show_edit_message">Coordenadas %1$s añadidas.</string>
+  <string name="coordinates_edit_helper_edit_message_else">No se pudo añadir coordenadas.</string>
+  <string name="coordinates_picking_unsuccessful">No se pudo conseguir las coordenadas.</string>
   <string name="share_image_via">Compartir imagen via</string>
   <string name="no_achievements_yet">No ha realizado ninguna contribución aún</string>
   <string name="account_created">Cuenta creada</string>
@@ -534,4 +540,8 @@
   <string name="limited_connection_enabled">Se activó el modo de conexión limitada.</string>
   <string name="limited_connection_disabled">Se desactivó el modo de conexión limitada. Las cargas pendientes se reanudarán ahora.</string>
   <string name="limited_connection_mode" fuzzy="true">Conexión limitada</string>
+  <string name="choose_a_location">Escoge una ubicación</string>
+  <string name="pan_and_zoom_to_adjust">Haz una panorámica y acércate para ajustar</string>
+  <string name="exit_location_picker">Salir del seleccionador de ubicación</string>
+  <string name="select_location_location_picker">Seleccionar ubicación</string>
 </resources>

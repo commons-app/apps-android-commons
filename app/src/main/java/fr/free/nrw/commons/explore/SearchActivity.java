@@ -184,6 +184,19 @@ public class SearchActivity extends BaseActivity
     }
 
     /**
+     * Reload media detail fragment once media is nominated
+     *
+     * @param index item position that has been nominated
+     */
+    @Override
+    public void refreshNominatedMedia(int index) {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            onBackPressed();
+            onMediaClicked(index);
+        }
+    }
+
+    /**
      * This method is called on success of API call for image Search.
      * The viewpager will notified that number of items have changed.
      */
@@ -245,6 +258,12 @@ public class SearchActivity extends BaseActivity
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() == 1){
+
+            // the back press is handled by the mediaDetails , no further action required.
+            if(mediaDetails.backButtonClicked()){
+                return;
+            }
+
             // back to search so show search toolbar and hide navigation toolbar
             searchView.setVisibility(View.VISIBLE);//set the searchview
             tabLayout.setVisibility(View.VISIBLE);

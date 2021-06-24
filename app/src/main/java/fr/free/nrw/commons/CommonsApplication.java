@@ -47,7 +47,9 @@ import io.reactivex.internal.functions.Functions;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 import java.io.File;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -61,37 +63,39 @@ import org.wikipedia.language.AppLanguageLookUpTable;
 import timber.log.Timber;
 
 @AcraCore(
-        buildConfigClass = BuildConfig.class,
-        resReportSendSuccessToast = R.string.crash_dialog_ok_toast,
-        reportFormat = StringFormat.KEY_VALUE_LIST,
-        reportContent = {USER_COMMENT, APP_VERSION_CODE, APP_VERSION_NAME, ANDROID_VERSION, PHONE_MODEL, STACK_TRACE}
+    buildConfigClass = BuildConfig.class,
+    resReportSendSuccessToast = R.string.crash_dialog_ok_toast,
+    reportFormat = StringFormat.KEY_VALUE_LIST,
+    reportContent = {USER_COMMENT, APP_VERSION_CODE, APP_VERSION_NAME, ANDROID_VERSION, PHONE_MODEL,
+        STACK_TRACE}
 )
 
 @AcraMailSender(
-        mailTo = "commons-app-android-private@googlegroups.com"
+    mailTo = "commons-app-android-private@googlegroups.com",
+    reportAsFile = false
 )
 
 @AcraDialog(
-        resTheme = R.style.Theme_AppCompat_Dialog,
-        resText = R.string.crash_dialog_text,
-        resTitle = R.string.crash_dialog_title,
-        resCommentPrompt = R.string.crash_dialog_comment_prompt
+    resTheme = R.style.Theme_AppCompat_Dialog,
+    resText = R.string.crash_dialog_text,
+    resTitle = R.string.crash_dialog_title,
+    resCommentPrompt = R.string.crash_dialog_comment_prompt
 )
 
 public class CommonsApplication extends MultiDexApplication {
 
-  public static final String IS_LIMITED_CONNECTION_MODE_ENABLED = "is_limited_connection_mode_enabled";
-  @Inject
-  SessionManager sessionManager;
-  @Inject
-  DBOpenHelper dbOpenHelper;
+    public static final String IS_LIMITED_CONNECTION_MODE_ENABLED = "is_limited_connection_mode_enabled";
+    @Inject
+    SessionManager sessionManager;
+    @Inject
+    DBOpenHelper dbOpenHelper;
 
-  @Inject
-  @Named("default_preferences")
-  JsonKvStore defaultPrefs;
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore defaultPrefs;
 
-  @Inject
-  CustomOkHttpNetworkFetcher customOkHttpNetworkFetcher;
+    @Inject
+    CustomOkHttpNetworkFetcher customOkHttpNetworkFetcher;
 
     /**
      * Constants begin
@@ -115,16 +119,24 @@ public class CommonsApplication extends MultiDexApplication {
     private RefWatcher refWatcher;
 
     private static CommonsApplication INSTANCE;
+
     public static CommonsApplication getInstance() {
         return INSTANCE;
     }
 
     private AppLanguageLookUpTable languageLookUpTable;
+
     public AppLanguageLookUpTable getLanguageLookUpTable() {
         return languageLookUpTable;
     }
 
-    @Inject ContributionDao contributionDao;
+    @Inject
+    ContributionDao contributionDao;
+
+    /**
+     * In memory list of contributios whose uploads ahve been paused by the user
+     */
+    public static Map<String, Boolean> pauseUploads = new HashMap<>();
 
     /**
      * Used to declare and initialize various components and dependencies
@@ -138,14 +150,13 @@ public class CommonsApplication extends MultiDexApplication {
         Mapbox.getInstance(this, getString(R.string.mapbox_commons_app_token));
 
         ApplicationlessInjection
-                .getInstance(this)
-                .getCommonsApplicationComponent()
-                .inject(this);
+            .getInstance(this)
+            .getCommonsApplicationComponent()
+            .inject(this);
 
         AppAdapter.set(new CommonsAppAdapter(sessionManager, defaultPrefs));
 
         initTimber();
-
 
         if (!defaultPrefs.getBoolean("has_user_manually_removed_location")) {
             Set<String> defaultExifTagsSet = defaultPrefs.getStringSet(Prefs.MANAGED_EXIF_TAGS);
@@ -158,9 +169,9 @@ public class CommonsApplication extends MultiDexApplication {
 
 //        Set DownsampleEnabled to True to downsample the image in case it's heavy
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
-                .setNetworkFetcher(customOkHttpNetworkFetcher)
-                .setDownsampleEnabled(true)
-                .build();
+            .setNetworkFetcher(customOkHttpNetworkFetcher)
+            .setDownsampleEnabled(true)
+            .build();
         try {
             Fresco.initialize(this, config);
         } catch (Exception e) {
@@ -184,46 +195,44 @@ public class CommonsApplication extends MultiDexApplication {
     }
 
     /**
-     * Plants debug and file logging tree.
-     * Timber lets you plant your own logging trees.
-     *
+     * Plants debug and file logging tree. Timber lets you plant your own logging trees.
      */
     private void initTimber() {
-      boolean isBeta = ConfigUtils.isBetaFlavour();
-      String logFileName =
-          isBeta ? "CommonsBetaAppLogs" : "CommonsAppLogs";
-      String logDirectory = LogUtils.getLogDirectory();
-      //Delete stale logs if they have exceeded the specified size
-      deleteStaleLogs(logFileName, logDirectory);
+        boolean isBeta = ConfigUtils.isBetaFlavour();
+        String logFileName =
+            isBeta ? "CommonsBetaAppLogs" : "CommonsAppLogs";
+        String logDirectory = LogUtils.getLogDirectory();
+        //Delete stale logs if they have exceeded the specified size
+        deleteStaleLogs(logFileName, logDirectory);
 
-      FileLoggingTree tree = new FileLoggingTree(
-          Log.VERBOSE,
-          logFileName,
-          logDirectory,
-          1000,
-          getFileLoggingThreadPool());
+        FileLoggingTree tree = new FileLoggingTree(
+            Log.VERBOSE,
+            logFileName,
+            logDirectory,
+            1000,
+            getFileLoggingThreadPool());
 
-      Timber.plant(tree);
-      Timber.plant(new Timber.DebugTree());
+        Timber.plant(tree);
+        Timber.plant(new Timber.DebugTree());
     }
 
-  /**
-   * Deletes the logs zip file at the specified directory and file locations specified in the
-   * params
-   *
-   * @param logFileName
-   * @param logDirectory
-   */
-  private void deleteStaleLogs(String logFileName, String logDirectory) {
-    try {
-      File file = new File(logDirectory + "/zip/" + logFileName + ".zip");
-      if (file.exists() && file.getTotalSpace() > 1000000) {// In Kbs
-        file.delete();
-      }
-    } catch (Exception e) {
-      Timber.e(e);
+    /**
+     * Deletes the logs zip file at the specified directory and file locations specified in the
+     * params
+     *
+     * @param logFileName
+     * @param logDirectory
+     */
+    private void deleteStaleLogs(String logFileName, String logDirectory) {
+        try {
+            File file = new File(logDirectory + "/zip/" + logFileName + ".zip");
+            if (file.exists() && file.getTotalSpace() > 1000000) {// In Kbs
+                file.delete();
+            }
+        } catch (Exception e) {
+            Timber.e(e);
+        }
     }
-  }
 
     public static boolean isRoboUnitTest() {
         return "robolectric".equals(Build.FINGERPRINT);
@@ -231,30 +240,35 @@ public class CommonsApplication extends MultiDexApplication {
 
     private ThreadPoolService getFileLoggingThreadPool() {
         return new ThreadPoolService.Builder("file-logging-thread")
-                .setPriority(Process.THREAD_PRIORITY_LOWEST)
-                .setPoolSize(1)
-                .setExceptionHandler(new BackgroundPoolExceptionHandler())
-                .build();
+            .setPriority(Process.THREAD_PRIORITY_LOWEST)
+            .setPoolSize(1)
+            .setExceptionHandler(new BackgroundPoolExceptionHandler())
+            .build();
     }
 
     public static void createNotificationChannel(@NonNull Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            NotificationChannel channel = manager.getNotificationChannel(NOTIFICATION_CHANNEL_ID_ALL);
+            NotificationManager manager = (NotificationManager) context
+                .getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationChannel channel = manager
+                .getNotificationChannel(NOTIFICATION_CHANNEL_ID_ALL);
             if (channel == null) {
                 channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID_ALL,
-                        context.getString(R.string.notifications_channel_name_all), NotificationManager.IMPORTANCE_DEFAULT);
+                    context.getString(R.string.notifications_channel_name_all),
+                    NotificationManager.IMPORTANCE_DEFAULT);
                 manager.createNotificationChannel(channel);
             }
         }
     }
 
     public String getUserAgent() {
-        return "Commons/" + ConfigUtils.getVersionNameWithSha(this) + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE;
+        return "Commons/" + ConfigUtils.getVersionNameWithSha(this)
+            + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE;
     }
 
     /**
      * Helps in setting up LeakCanary library
+     *
      * @return instance of LeakCanary
      */
     protected RefWatcher setupLeakCanary() {
@@ -264,7 +278,7 @@ public class CommonsApplication extends MultiDexApplication {
         return LeakCanary.install(this);
     }
 
-  /**
+    /**
      * Provides a way to get member refWatcher
      *
      * @param context Application context
@@ -277,7 +291,8 @@ public class CommonsApplication extends MultiDexApplication {
 
     /**
      * clears data of current application
-     * @param context Application context
+     *
+     * @param context        Application context
      * @param logoutListener Implementation of interface LogoutListener
      */
     @SuppressLint("CheckResult")
@@ -294,13 +309,13 @@ public class CommonsApplication extends MultiDexApplication {
         }
 
         sessionManager.logout()
-            .andThen(Completable.fromAction(() ->{
-                Timber.d("All accounts have been removed");
-                clearImageCache();
-                //TODO: fix preference manager
-                defaultPrefs.clearAll();
-                defaultPrefs.putBoolean("firstrun", false);
-                updateAllDatabases();
+            .andThen(Completable.fromAction(() -> {
+                    Timber.d("All accounts have been removed");
+                    clearImageCache();
+                    //TODO: fix preference manager
+                    defaultPrefs.clearAll();
+                    defaultPrefs.putBoolean("firstrun", false);
+                    updateAllDatabases();
                 }
             ))
             .subscribeOn(Schedulers.io())
@@ -324,12 +339,13 @@ public class CommonsApplication extends MultiDexApplication {
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 
         CategoryDao.Table.onDelete(db);
-        dbOpenHelper.deleteTable(db,CONTRIBUTIONS_TABLE);//Delete the contributions table in the existing db on older versions
+        dbOpenHelper.deleteTable(db,
+            CONTRIBUTIONS_TABLE);//Delete the contributions table in the existing db on older versions
 
         try {
-          contributionDao.deleteAll();
+            contributionDao.deleteAll();
         } catch (SQLiteException e) {
-          Timber.e(e);
+            Timber.e(e);
         }
         BookmarkPicturesDao.Table.onDelete(db);
         BookmarkLocationsDao.Table.onDelete(db);
@@ -340,6 +356,7 @@ public class CommonsApplication extends MultiDexApplication {
      * Interface used to get log-out events
      */
     public interface LogoutListener {
+
         void onLogoutComplete();
     }
 }

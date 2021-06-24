@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.media;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_NEEDING_CATEGORIES;
@@ -16,16 +18,20 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.SearchView;
@@ -47,6 +53,9 @@ import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
@@ -59,10 +68,11 @@ import fr.free.nrw.commons.category.CategoryEditHelper;
 import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter;
 import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter.Callback;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
+import fr.free.nrw.commons.coordinates.CoordinateEditHelper;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
-import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
@@ -74,23 +84,27 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.language.AppLanguageLookUpTable;
 import org.wikipedia.util.DateUtil;
 import timber.log.Timber;
 
 public class MediaDetailFragment extends CommonsDaggerSupportFragment implements Callback,
     CategoryEditHelper.Callback {
 
+    private static final int REQUEST_CODE = 1001 ;
     private boolean editable;
     private boolean isCategoryImage;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
     private int index;
     private boolean isDeleted = false;
     private boolean isWikipediaButtonDisplayed;
+    private Callback callback;
 
 
     public static MediaDetailFragment forMedia(int index, boolean editable, boolean isCategoryImage, boolean isWikipediaButtonDisplayed) {
@@ -121,6 +135,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @Inject
     CategoryEditHelper categoryEditHelper;
     @Inject
+    CoordinateEditHelper coordinateEditHelper;
+    @Inject
     ViewUtilWrapper viewUtil;
     @Inject
     CategoryClient categoryClient;
@@ -129,7 +145,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     JsonKvStore applicationKvStore;
 
     private int initialListTop = 0;
-
+    @BindView(R.id.description_webview)
+    WebView descriptionWebView;
     @BindView(R.id.mediaDetailFrameLayout)
     FrameLayout frameLayout;
     @BindView(R.id.mediaDetailImageView)
@@ -192,6 +209,21 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     TextView existingCategories;
     @BindView(R.id.no_results_found)
     TextView noResultsFound;
+    @BindView(R.id.dummy_caption_description_container)
+    LinearLayout showCaptionAndDescriptionContainer;
+    @BindView(R.id.show_caption_description_textview)
+    TextView showCaptionDescriptionTextView;
+    @BindView(R.id.caption_listview)
+    ListView captionsListView;
+    @BindView(R.id.caption_label)
+    TextView captionLabel;
+    @BindView(R.id.description_label)
+    TextView descriptionLabel;
+    @BindView(R.id.pb_circular)
+     ProgressBar progressBar;
+    String descriptionHtmlCode;
+    @BindView(R.id.progressBarDeletion)
+    ProgressBar progressBarDeletion;
 
     private ArrayList<String> categoryNames = new ArrayList<>();
     private String categorySearchQuery;
@@ -224,6 +256,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
      * Images with a very narrow aspect ratio will be reduced so that the metadata information panel always has at least this height.
      */
     private int minimumHeightOfMetadata = 200;
+
+    final static String NOMINATING_FOR_DELETION_MEDIA = "Nominating for deletion %s";
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -287,6 +321,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         if(applicationKvStore.getBoolean("login_skipped")){
             delete.setVisibility(GONE);
         }
+
+        handleBackEvent(view);
+
         /**
          * Gets the height of the frame layout as soon as the view is ready and updates aspect ratio
          * of the picture.
@@ -298,6 +335,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 updateAspectRatio(scrollView.getWidth());
             }
         });
+
         return view;
     }
 
@@ -328,8 +366,19 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 Label.valuesAsList()), categoryRecyclerView, categoryClient, this);
         categoryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         categoryRecyclerView.setAdapter(categoryEditSearchRecyclerViewAdapter);
+        // detail provider is null when fragment is shown in review activity
+        if (detailProvider != null) {
+            media = detailProvider.getMediaAtPosition(index);
+        } else {
+            media = getArguments().getParcelable("media");
+        }
 
         media = detailProvider.getMediaAtPosition(index);
+
+        if(media != null && applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
+            enableProgressBar();
+        }
+
         scrollView.getViewTreeObserver().addOnGlobalLayoutListener(
             new OnGlobalLayoutListener() {
                 @Override
@@ -339,7 +388,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                     }
                     scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     oldWidthOfImageView = scrollView.getWidth();
-                    displayMediaDetails();
+                    if(media != null) {
+                        displayMediaDetails();
+                    }
                 }
             }
         );
@@ -422,6 +473,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     private void onDeletionPageExists(Boolean deletionPageExists) {
         if (deletionPageExists){
+            if(applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
+                applicationKvStore.remove(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()));
+                progressBarDeletion.setVisibility(GONE);
+            }
             delete.setVisibility(GONE);
             nominatedForDeletion.setVisibility(VISIBLE);
         } else if (!isCategoryImage) {
@@ -585,6 +640,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         categoryEditSearchRecyclerViewAdapter.addToCategories(media.getCategories());
         updateSelectedCategoriesTextView(categoryEditSearchRecyclerViewAdapter.getCategories());
 
+        categoryRecyclerView.setVisibility(GONE);
         updateCategoryList();
 
         if (media.getAuthor() == null || media.getAuthor().equals("")) {
@@ -620,20 +676,28 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     public void updateSelectedCategoriesTextView(List<String> selectedCategories) {
         if (selectedCategories == null || selectedCategories.size() == 0) {
             updateCategoriesButton.setClickable(false);
-        }
-        if (selectedCategories != null) {
+            updateCategoriesButton.setAlpha(.5f);
+        } else {
             existingCategories.setText(StringUtils.join(selectedCategories,", "));
-            updateCategoriesButton.setClickable(true);
+            if (selectedCategories.equals(media.getCategories())) {
+                updateCategoriesButton.setClickable(false);
+                updateCategoriesButton.setAlpha(.5f);
+            } else {
+                updateCategoriesButton.setClickable(true);
+                updateCategoriesButton.setAlpha(1f);
+            }
         }
     }
 
     @Override
     public void noResultsFound() {
+        categoryRecyclerView.setVisibility(GONE);
         noResultsFound.setVisibility(VISIBLE);
     }
 
     @Override
     public void someResultsFound() {
+        categoryRecyclerView.setVisibility(VISIBLE);
         noResultsFound.setVisibility(GONE);
     }
 
@@ -702,11 +766,97 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         displayHideCategorySearch();
     }
 
+    /**
+     * Hides the categoryEditContainer.
+     * returns true after closing the categoryEditContainer if open, implying that event was handled.
+     * else returns false
+     * @return
+     */
+    public boolean hideCategoryEditContainerIfOpen(){
+        if (dummyCategoryEditContainer.getVisibility() == VISIBLE) {
+            // editCategory is open, close it and return true as the event was handled.
+            dummyCategoryEditContainer.setVisibility(GONE);
+            return true;
+        }
+        // Event was not handled.
+        return false;
+    }
+
     public void displayHideCategorySearch() {
+        showCaptionAndDescriptionContainer.setVisibility(GONE);
         if (dummyCategoryEditContainer.getVisibility() != VISIBLE) {
             dummyCategoryEditContainer.setVisibility(VISIBLE);
         } else {
             dummyCategoryEditContainer.setVisibility(GONE);
+        }
+    }
+
+    @OnClick(R.id.coordinate_edit)
+    public void onUpdateCoordinatesClicked(){
+        goToLocationPickerActivity();
+    }
+
+    /**
+     * Start location picker activity with a request code and get the coordinates from the activity.
+     */
+    private void goToLocationPickerActivity() {
+        /*
+        If location is not provided in media this coordinates will act as a placeholder in
+        location picker activity
+         */
+        double defaultLatitude = 37.773972;
+        double defaultLongitude = -122.431297;
+
+        if (media.getCoordinates() != null) {
+            defaultLatitude = media.getCoordinates().getLatitude();
+            defaultLongitude = media.getCoordinates().getLongitude();
+        }
+        startActivityForResult(new LocationPicker.IntentBuilder()
+            .defaultLocation(new CameraPosition.Builder()
+                .target(new LatLng(defaultLatitude, defaultLongitude))
+                .zoom(16).build())
+            .build(getActivity()), REQUEST_CODE);
+    }
+
+    /**
+     * Get the coordinates and update the existing coordinates.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode,
+        @Nullable final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+
+            assert data != null;
+            final CameraPosition cameraPosition = LocationPicker.getCameraPosition(data);
+
+            if (cameraPosition != null) {
+
+                final String latitude = String.valueOf(cameraPosition.target.getLatitude());
+                final String longitude = String.valueOf(cameraPosition.target.getLongitude());
+                final String accuracy = String.valueOf(cameraPosition.target.getAltitude());
+                String currentLatitude = null;
+                String currentLongitude = null;
+
+                if (media.getCoordinates() != null) {
+                    currentLatitude = String.valueOf(media.getCoordinates().getLatitude());
+                    currentLongitude = String.valueOf(media.getCoordinates().getLongitude());
+                }
+
+                if (!latitude.equals(currentLatitude) || !longitude.equals(currentLongitude)) {
+                    updateCoordinates(latitude, longitude, accuracy);
+                } else if (media.getCoordinates() == null) {
+                    updateCoordinates(latitude, longitude, accuracy);
+                }
+            }
+        } else if (resultCode == RESULT_CANCELED) {
+            viewUtil.showShortToast(getContext(),
+                Objects.requireNonNull(getContext())
+                    .getString(R.string.coordinates_picking_unsuccessful));
         }
     }
 
@@ -730,6 +880,24 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 onOutsideOfCategoryEditClicked();
                 media.setAddedCategories(selectedCategories);
                 updateCategoryList();
+            }));
+    }
+
+    /**
+     * Fetched coordinates are replaced with existing coordinates by a POST API call.
+     * @param Latitude to be added
+     * @param Longitude to be added
+     * @param Accuracy to be added
+     */
+    public void updateCoordinates(final String Latitude, final String Longitude,
+        final String Accuracy) {
+        compositeDisposable.add(coordinateEditHelper.makeCoordinatesEdit(getContext(), media,
+            Latitude, Longitude, Accuracy)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(s -> {
+                Timber.d("Coordinates are added.");
+                coordinates.setText(prettyCoordinates(media));
             }));
     }
 
@@ -779,7 +947,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 input.addTextChangedListener(new TextWatcher() {
                     private void handleText() {
                         final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
-                        if (input.getText().length() == 0) {
+                        if (input.getText().length() == 0 || isDeleted) {
                             okButton.setEnabled(false);
                         } else {
                             okButton.setEnabled(true);
@@ -806,35 +974,37 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @SuppressLint("CheckResult")
     private void onDeleteClicked(Spinner spinner) {
+        applicationKvStore.putBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), true);
+        enableProgressBar();
         String reason = spinner.getSelectedItem().toString();
         Single<Boolean> resultSingle = reasonBuilder.getReason(media, reason)
                 .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
-        compositeDisposable.add(resultSingle
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(s -> {
-                    if (getActivity() != null) {
-                        isDeleted = true;
-                        enableDeleteButton(false);
-                    }
-                }));
-
+        resultSingle
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(s -> {
+                if(applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
+                    applicationKvStore.remove(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()));
+                    callback.nominatingForDeletion(index);
+                }
+            });
     }
 
     @SuppressLint("CheckResult")
     private void onDeleteClickeddialogtext(String reason) {
+        applicationKvStore.putBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), true);
+        enableProgressBar();
         Single<Boolean> resultSingletext = reasonBuilder.getReason(media, reason)
                 .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
-        compositeDisposable.add(resultSingletext
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(s -> {
-                    if (getActivity() != null) {
-                        isDeleted = true;
-                        enableDeleteButton(false);
-                    }
-                }));
-
+        resultSingletext
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(s -> {
+                if(applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
+                    applicationKvStore.remove(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()));
+                    callback.nominatingForDeletion(index);
+                }
+            });
     }
 
     @OnClick(R.id.seeMore)
@@ -844,13 +1014,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         }
     }
 
-    private void enableDeleteButton(boolean visibility) {
-        delete.setEnabled(visibility);
-        if (visibility) {
-            delete.setTextColor(getResources().getColor(R.color.primaryTextColor));
-        } else {
-            delete.setTextColor(getResources().getColor(R.color.deleteButtonLight));
-        }
+    /**
+     * Enable Progress Bar and Update delete button text.
+     */
+    private void enableProgressBar() {
+        progressBarDeletion.setVisibility(VISIBLE);
+        delete.setText("Nominating for Deletion");
+        isDeleted = true;
     }
 
     private void rebuildCatList(List<String> categories) {
@@ -979,5 +1149,100 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             rebuildCatList(categories);
             return true;
         }
+    }
+
+    @OnClick(R.id.show_caption_description_textview)
+    void showCaptionAndDescription() {
+        dummyCategoryEditContainer.setVisibility(GONE);
+        if (showCaptionAndDescriptionContainer.getVisibility() == GONE) {
+            showCaptionAndDescriptionContainer.setVisibility(VISIBLE);
+            setUpCaptionAndDescriptionLayout();
+        } else {
+            showCaptionAndDescriptionContainer.setVisibility(GONE);
+        }
+    }
+
+    /**
+     * setUp Caption And Description Layout
+     */
+    private void setUpCaptionAndDescriptionLayout() {
+        List<Caption> captions = getCaptions();
+
+        if (descriptionHtmlCode == null) {
+            progressBar.setVisibility(VISIBLE);
+        }
+
+        getDescription();
+        CaptionListViewAdapter adapter = new CaptionListViewAdapter(captions);
+        captionsListView.setAdapter(adapter);
+    }
+
+    /**
+     * Generate the caption with language
+     */
+    private List<Caption> getCaptions() {
+        List<Caption> captionList = new ArrayList<>();
+        Map<String, String> captions = media.getCaptions();
+        AppLanguageLookUpTable appLanguageLookUpTable = new AppLanguageLookUpTable(getContext());
+        for (Map.Entry<String, String> map : captions.entrySet()) {
+            String language = appLanguageLookUpTable.getLocalizedName(map.getKey());
+            String languageCaption = map.getValue();
+            captionList.add(new Caption(language, languageCaption));
+        }
+
+        if (captionList.size() == 0) {
+            captionList.add(new Caption("", "No Caption"));
+        }
+        return captionList;
+    }
+
+    private void getDescription() {
+        compositeDisposable.add(mediaDataExtractor.getHtmlOfPage(media.getFilename())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(this::extractDescription, Timber::e));
+    }
+
+    /**
+     * extract the description from html of imagepage
+     */
+    private void extractDescription(String s) {
+        String descriptionClassName = "<td class=\"description\">";
+        int start = s.indexOf(descriptionClassName) + descriptionClassName.length();
+        int end = s.indexOf("</td>", start);
+        descriptionHtmlCode = "";
+        for (int i = start; i < end; i++) {
+            descriptionHtmlCode = descriptionHtmlCode + s.toCharArray()[i];
+        }
+
+        descriptionWebView
+            .loadDataWithBaseURL(null, descriptionHtmlCode, "text/html", "utf-8", null);
+        progressBar.setVisibility(GONE);
+    }
+
+    /**
+     * Handle back event when fragment when showCaptionAndDescriptionContainer is visible
+     */
+    private void handleBackEvent(View view) {
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keycode, KeyEvent keyEvent) {
+                if (keycode == KeyEvent.KEYCODE_BACK) {
+                    if (showCaptionAndDescriptionContainer.getVisibility() == VISIBLE) {
+                        showCaptionAndDescriptionContainer.setVisibility(GONE);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
+    }
+
+
+    public interface Callback {
+        void nominatingForDeletion(int index);
     }
 }

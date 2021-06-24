@@ -51,7 +51,7 @@
   <string name="uploading_started">Dechreuodd yr uwchlwytho!</string>
   <string name="upload_completed_notification_title">Uwchlwythwyd %1$s!</string>
   <string name="upload_completed_notification_text">Tapiwch i weld eich uwchlwythiad</string>
-  <string name="upload_progress_notification_title_start">Yn dechrau uwchlwytho %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Yn dechrau uwchlwytho %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Wrthi\'n uwchlwytho %1$s</string>
   <string name="upload_progress_notification_title_finishing">Yn gorffen uwchlwytho %1$s</string>
   <string name="upload_failed_notification_title">Methwyd uwchlwytho %1$s</string>

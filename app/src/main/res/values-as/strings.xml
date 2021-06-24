@@ -34,7 +34,7 @@
   <string name="uploading_started">আপল\'ড আৰম্ভ হৈছে!</string>
   <string name="upload_completed_notification_title">%1$s আপল\'ড কৰা হ\'ল!</string>
   <string name="upload_completed_notification_text">আপোনাৰ আপল\'ড চাবলৈ টেপ্‌ কৰক</string>
-  <string name="upload_progress_notification_title_start">%1$s আপল\'ড আৰম্ভ হৈছে</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s আপল\'ড আৰম্ভ হৈছে</string>
   <string name="upload_progress_notification_title_in_progress">%1$s আপল\'ড হৈছে</string>
   <string name="upload_progress_notification_title_finishing">%1$s আপল\'ড শেষ হৈছে</string>
   <string name="upload_failed_notification_title">%1$s আপল\'ড ব্যৰ্থ হৈছে</string>
@@ -113,6 +113,7 @@
   <string name="upload_problem_image_blurry">ছবিখন ধোঁৱা-ধোঁৱা।</string>
   <string name="null_url">ত্ৰুটি! URL পোৱা নাই</string>
   <string name="skip_login">বাদ দিয়ক</string>
+  <string name="nearby_wikipedia">ৱিকিপিডিয়া</string>
   <string name="nearby_commons">ক\'ম\'ঞ্চ</string>
   <string name="appwidget_img">দিনটোৰ ছবিখন</string>
   <string name="app_widget_heading">দিনটোৰ ছবিখন</string>

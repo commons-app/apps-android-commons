@@ -24,15 +24,15 @@
   </plurals>
   <string name="starting_uploads">Začatie nahrávania</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Začínam nahrávať %1$d</item>
-    <item quantity="few">Začínam nahrávanie Starting %1$d</item>
-    <item quantity="many">Začínam nahrávanie %1$d</item>
+    <item quantity="one">Začínam nahrávať %d</item>
+    <item quantity="few">Začínam nahrávanie  %d</item>
+    <item quantity="many">Začínam nahrávanie %d</item>
     <item quantity="other"/>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d nahranie</item>
-    <item quantity="few">%1$d nahrania</item>
-    <item quantity="many">%1$d nahraní</item>
+    <item quantity="one">%d nahranie</item>
+    <item quantity="few">%d nahrania</item>
+    <item quantity="many">%d nahraní</item>
     <item quantity="other"/>
   </plurals>
   <plurals name="share_license_summary">
@@ -78,7 +78,7 @@
   <string name="uploading_queued">Nahrávanie v poradí (je zapnuté limitované pripojenie)</string>
   <string name="upload_completed_notification_title">%1$s je nahraný!</string>
   <string name="upload_completed_notification_text">Kliknutím zobrazíte váš upload</string>
-  <string name="upload_progress_notification_title_start">Spúšťa sa nahrávanie súboru %1$s</string>
+  <string name="upload_progress_notification_title_start">Nahrávanie súboru): %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s nahrávanie</string>
   <string name="upload_progress_notification_title_finishing">Dokončenie nahrávania %1$s</string>
   <string name="upload_failed_notification_title">Nahrávanie %1$s zlyhalo</string>
@@ -246,6 +246,8 @@
   <string name="upload_problem_different_geolocation">Tento obrázok bol zhotovený na inom mieste.</string>
   <string name="upload_problem_fbmd">Nahrávajte, prosím, len obrázky, ktoré ste sami zhotovili. Nenahrávajte obrázky, ktoré ste našli na Facebookovom profile niekoho iného.</string>
   <string name="upload_problem_do_you_continue">Naozaj chcete nahrať tento obrázok?</string>
+  <string name="upload_connection_error_alert_title">Chyba pripojenia</string>
+  <string name="upload_connection_error_alert_detail">Proces nahrávania vyžaduje aktívny internetový prístup. Prosím skontrolujte svoje internetové pripojenie.</string>
   <string name="upload_problem_image">Na obrázku boli nájdené nejaké problémy</string>
   <string name="internet_downloaded">Nahrávajte, prosím, len obrázky, ktoré ste sami zhotovili. Nenahrávajte obrázky, ktoré ste stiahli z internetu.</string>
   <string name="use_external_storage">Použiť externé úložisko</string>
@@ -452,7 +454,8 @@
   <string name="images_featured_explanation">Najlepšie obrázky sú fotografie od vysoko skúsených fotografov a ilustrátorov, ktoré vybrala komunita Wikimedie Commons ako jedny z najkvalitnejších na stránke.</string>
   <string name="images_via_nearby_explanation">Obrázky nahrané cez Miesta v okolí sú obrázky, ktoré sú nahrané vďaka objavovaniu miest na mape.</string>
   <string name="thanks_received_explanation">Táto funkcia umožňuje poslať poďakovanie za užitočné úpravy používateľom – použitím malého odkazu poďakovať v histórií stránky alebo na stránke rozdielu medzi revíziami.</string>
-  <string name="previous_image_caption_description">Kopírovať predchádzajúce titulky a popis</string>
+  <string name="copy_image_caption_description">Kopírovať do nasledovného média</string>
+  <string name="copied_successfully">Skopírované</string>
   <string name="welcome_do_upload_content_description">Príklady dobrých obrázkov na nahranie na Commons</string>
   <string name="welcome_dont_upload_content_description">Príklady obrázkov, ktoré by ste nemali nahrávať</string>
   <string name="skip_image">Preskočiť obrázok</string>
@@ -499,6 +502,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Nepodarilo sa pridať kategórie.</string>
   <string name="category_edit_button_text">Aktualizovať kategórie</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Pokus o aktualizáciu súradníc.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Aktualizácia súradníc</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Úspech</string>
+  <string name="coordinates_edit_helper_show_edit_message">Súradnice %1$s sú pridané.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Nepodarilo sa pridať súradnice.</string>
+  <string name="coordinates_picking_unsuccessful">Nepodarilo sa získať súradnice.</string>
   <string name="share_image_via">Zdieľať obrázok cez</string>
   <string name="no_achievements_yet">Nemáte zatiaľ žiadne príspevky</string>
   <string name="account_created">Účet bol vytvorený!</string>
@@ -593,4 +602,14 @@
   <string name="media_detail_step_title">Detaily média</string>
   <string name="menu_view_category_page">Zobraziť stránku kategórie</string>
   <string name="menu_view_item_page">Zobraziť stránku položky</string>
+  <string name="app_ui_language">Jazyk používateľského rozhrania aplikácie</string>
+  <string name="remove">Odstráni titulky a popis</string>
+  <string name="read_help_link">Čítať viac</string>
+  <string name="media_detail_in_all_languages">Pre všetky jazyky</string>
+  <string name="choose_a_location">Vybrať polohu</string>
+  <string name="pan_and_zoom_to_adjust">Posúvať a zväčšovať pre nastavenie</string>
+  <string name="exit_location_picker">Odísť z výberu polohy</string>
+  <string name="select_location_location_picker">Vybrať lokalizáciu</string>
+  <string name="location_picker_image_view">Obrázok výberu polohy</string>
+  <string name="location_picker_image_view_shadow">Tieň obrázka pre výber polohy</string>
 </resources>

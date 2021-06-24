@@ -26,7 +26,7 @@
   <string name="uploading_started">தரவேற்றம் துவங்கியது!</string>
   <string name="upload_completed_notification_title">%1$s பதிவேற்றப்பட்டது!</string>
   <string name="upload_completed_notification_text">உங்களது தரவேற்றதை காண தட்டவும்</string>
-  <string name="upload_progress_notification_title_start">%1$s தரவேற்றம் ஆரம்பமாகிறது</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s தரவேற்றம் ஆரம்பமாகிறது</string>
   <string name="upload_progress_notification_title_in_progress">%1$s தரவேற்றப்படுகிறது</string>
   <string name="upload_progress_notification_title_finishing">%1$s தரவேற்றம் முடிக்கப்படுகிறது</string>
   <string name="upload_failed_notification_subtitle">காண்பதற்கு தட்டுக</string>

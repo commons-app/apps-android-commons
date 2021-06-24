@@ -13,12 +13,12 @@
   </plurals>
   <string name="starting_uploads">Ancamin dij cariament</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%1$d cariament ancaminà</item>
-    <item quantity="other">%1$d cariament ancaminà</item>
+    <item quantity="one">%1$d cariament an cors</item>
+    <item quantity="other">%1$d cariament an cors</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d cariament</item>
-    <item quantity="other">%1$d cariament</item>
+    <item quantity="one">%d cariament</item>
+    <item quantity="other">%d cariament</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Costa plancia a sarà sota la licensa %1$s</item>
@@ -57,7 +57,7 @@
   <string name="uploading_queued">Carié an coa (manera ëd conession limità abilità)</string>
   <string name="upload_completed_notification_title">%1$s carià!</string>
   <string name="upload_completed_notification_text">Sgnaché për vëdde sò cariament</string>
-  <string name="upload_progress_notification_title_start">Inissi dël cariament %1$s</string>
+  <string name="upload_progress_notification_title_start">Inissi dël cariament %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s carià</string>
   <string name="upload_progress_notification_title_finishing">Fin dël cariament %1$s</string>
   <string name="upload_failed_notification_title">Cariament falì a %1$s</string>
@@ -225,6 +225,8 @@
   <string name="upload_problem_different_geolocation">Sa fòto a l\'é stàita fàita ant un pòst diferent.</string>
   <string name="upload_problem_fbmd">Për piasì, ch\'a caria mach dle fòto che a l\'ha fàit chiel-midem. Ch\'a caria pa dle fòto che a l\'ha trovà an sij cont Facebook d\'àutra gent.</string>
   <string name="upload_problem_do_you_continue">Veul-lo istess carié sta plancia?</string>
+  <string name="upload_connection_error_alert_title">Eror ëd conession</string>
+  <string name="upload_connection_error_alert_detail">Ël process ëd cariament a l\'ha damanca ëd n\'acess ativ a l\'aragnà. Për piasì, ch\'a verìfica sò colegament a la rej.</string>
   <string name="upload_problem_image">Trovà un problema con la plancia</string>
   <string name="internet_downloaded">Për piasì, ch\'a caria mach dle fòto ch\'a l\'ha fàit chiel-midem. Ch\'a caria pa dle fòto che a l\'ha dëscarià da \'ns l\'aragnà.</string>
   <string name="use_external_storage">Argistré le plance d\'aplicassion</string>
@@ -431,7 +433,8 @@
   <string name="images_featured_explanation">Le fòto an evidensa a son ëd plance fàite da dij fotògraf e ilustrator motobin àbij che la comunità ëd Wikipedia Commons a l\'ha sernù tra cole ëd qualità pi àuta an sël sit.</string>
   <string name="images_via_nearby_explanation">Le plance carià dai pòst ëd prossimità a son le plance carià con la dëscuverta dij pòst an sla carta.</string>
   <string name="thanks_received_explanation">Costa fonsionalità a përmet ai contributor ëd mandé na notìfica d\'aringrassiament a j\'utent ch\'a fan dle modìfiche ùtij -  an dovrand na cita liura d\'aringrassiament an sla pàgina dla stòria o cola dle diferense.</string>
-  <string name="previous_image_caption_description">Copié le legende e descrission precedente</string>
+  <string name="copy_image_caption_description">Copié al mojen apress</string>
+  <string name="copied_successfully">Copià</string>
   <string name="welcome_do_upload_content_description">Esempi ëd plance bon-e da carié su Commons</string>
   <string name="welcome_dont_upload_content_description">Esempi ëd plance da nen carié</string>
   <string name="skip_image">Sauté costa plancia</string>
@@ -476,6 +479,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Impossìbil gionté dle categorìe.</string>
   <string name="category_edit_button_text">Agiorné le categorìe</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Tentativ d\'agiorné le coordinà.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Agiornament ëd le coordinà</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Sucess</string>
+  <string name="coordinates_edit_helper_show_edit_message">Giontà la coordinà %1$s.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Impossìbil gionté lé coordinà.</string>
+  <string name="coordinates_picking_unsuccessful">Impossìbil oten-e le coordinà.</string>
   <string name="share_image_via">Partagé la plancia via</string>
   <string name="no_achievements_yet">A l\'ha pa ancor fàit ëd contribussion</string>
   <string name="account_created">Cont creà!</string>
@@ -570,4 +579,14 @@
   <string name="media_detail_step_title">Detaj dël mojen</string>
   <string name="menu_view_category_page">Vëdde la pàgina ëd categorìa</string>
   <string name="menu_view_item_page">Vëdde la pàgina ëd l\'element</string>
+  <string name="app_ui_language">Lenga d\'antërfassa utent ëd l\'aplicassion</string>
+  <string name="remove">A gava na legenda e na descrission</string>
+  <string name="read_help_link">Lese ëd pi</string>
+  <string name="media_detail_in_all_languages">An tute le lenghe</string>
+  <string name="choose_a_location">Serne na locassion</string>
+  <string name="pan_and_zoom_to_adjust">Slarghé e strenze për buté bin</string>
+  <string name="exit_location_picker">Seurte dal selessionador ëd locassion</string>
+  <string name="select_location_location_picker">Selessioné na locassion</string>
+  <string name="location_picker_image_view" fuzzy="true">Vista dla plancia dël selessionador ëd locassion</string>
+  <string name="location_picker_image_view_shadow" fuzzy="true">Locassion ëd l\'ombra dël selessionator ëd visualisassion ëd plance</string>
 </resources>

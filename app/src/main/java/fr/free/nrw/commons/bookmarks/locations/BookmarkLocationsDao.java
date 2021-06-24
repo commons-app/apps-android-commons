@@ -269,7 +269,7 @@ public class BookmarkLocationsDao {
                 onUpdate(db, from, to);
                 return;
             }
-            if (from == 8) {
+            if (from < 10) {
                 from++;
                 onUpdate(db, from, to);
                 return;
@@ -284,7 +284,7 @@ public class BookmarkLocationsDao {
                 }
                 return;
             }
-            if (from == 12) {
+            if (from >= 12) {
                 try {
                     db.execSQL(
                         "ALTER TABLE bookmarksLocations ADD COLUMN location_destroyed STRING;");
@@ -292,14 +292,14 @@ public class BookmarkLocationsDao {
                     Timber.e(exception);
                 }
             }
-            if (from == 13){
+            if (from >= 13){
                 try {
                     db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_language STRING;");
                 } catch (SQLiteException exception){
                     Timber.e(exception);
                 }
             }
-            if (from == 14){
+            if (from >= 14){
                 try {
                     db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_exists STRING;");
                 } catch (SQLiteException exception){

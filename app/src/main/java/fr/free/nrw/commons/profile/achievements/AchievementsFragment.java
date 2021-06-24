@@ -2,6 +2,7 @@ package fr.free.nrw.commons.profile.achievements;
 
 import android.accounts.Account;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -36,7 +37,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.dinuscxj.progressbar.CircleProgressBar;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -46,12 +46,6 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Objects;
-import javax.inject.Inject;
-import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
 
 /**
@@ -61,6 +55,17 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
     private static final double BADGE_IMAGE_WIDTH_RATIO = 0.4;
     private static final double BADGE_IMAGE_HEIGHT_RATIO = 0.3;
+
+    /**
+     * Help link URLs
+     */
+    private static final String IMAGES_UPLOADED_URL = "https://commons.wikimedia.org/wiki/Commons:Project_scope";
+    private static final String IMAGES_REVERT_URL = "https://commons.wikimedia.org/wiki/Commons:Deletion_policy#Reasons_for_deletion";
+    private static final String IMAGES_USED_URL = "https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images";
+    private static final String IMAGES_NEARBY_PLACES_URL = "https://www.wikidata.org/wiki/Property:P18";
+    private static final String IMAGES_FEATURED_URL = "https://commons.wikimedia.org/wiki/Commons:Featured_pictures";
+    private static final String QUALITY_IMAGE_URL = "https://commons.wikimedia.org/wiki/Commons:Quality_images";
+    private static final String THANKS_URL = "https://www.mediawiki.org/wiki/Extension:Thanks";
 
     private LevelController.LevelInfo levelInfo;
 
@@ -242,8 +247,9 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      */
     @OnClick(R.id.achievement_info)
     public void showInfoDialog(){
-        launchAlert(getResources().getString(R.string.Achievements)
-                ,getResources().getString(R.string.achievements_info_message));
+        launchAlert(
+            getResources().getString(R.string.Achievements),
+            getResources().getString(R.string.achievements_info_message));
     }
 
     /**
@@ -456,44 +462,58 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.images_upload_info)
     public void showUploadInfo(){
-        launchAlert(getResources().getString(R.string.images_uploaded)
-                ,getResources().getString(R.string.images_uploaded_explanation));
+        launchAlertWithHelpLink(
+            getResources().getString(R.string.images_uploaded),
+            getResources().getString(R.string.images_uploaded_explanation),
+            IMAGES_UPLOADED_URL);
     }
 
     @OnClick(R.id.images_reverted_info)
     public void showRevertedInfo(){
-        launchAlert(getResources().getString(R.string.image_reverts)
-                ,getResources().getString(R.string.images_reverted_explanation));
+        launchAlertWithHelpLink(
+            getResources().getString(R.string.image_reverts),
+            getResources().getString(R.string.images_reverted_explanation),
+            IMAGES_REVERT_URL);
     }
 
     @OnClick(R.id.images_used_by_wiki_info)
     public void showUsedByWikiInfo(){
-        launchAlert(getResources().getString(R.string.images_used_by_wiki)
-                ,getResources().getString(R.string.images_used_explanation));
+        launchAlertWithHelpLink(
+            getResources().getString(R.string.images_used_by_wiki),
+            getResources().getString(R.string.images_used_explanation),
+            IMAGES_USED_URL);
     }
 
     @OnClick(R.id.images_nearby_info)
     public void showImagesViaNearbyInfo(){
-        launchAlert(getResources().getString(R.string.statistics_wikidata_edits)
-                ,getResources().getString(R.string.images_via_nearby_explanation));
+        launchAlertWithHelpLink(
+            getResources().getString(R.string.statistics_wikidata_edits),
+            getResources().getString(R.string.images_via_nearby_explanation),
+            IMAGES_NEARBY_PLACES_URL);
     }
 
     @OnClick(R.id.images_featured_info)
     public void showFeaturedImagesInfo(){
-        launchAlert(getResources().getString(R.string.statistics_featured)
-                ,getResources().getString(R.string.images_featured_explanation));
+        launchAlertWithHelpLink(
+            getResources().getString(R.string.statistics_featured),
+            getResources().getString(R.string.images_featured_explanation),
+            IMAGES_FEATURED_URL);
     }
 
     @OnClick(R.id.thanks_received_info)
     public void showThanksReceivedInfo(){
-        launchAlert(getResources().getString(R.string.statistics_thanks)
-                ,getResources().getString(R.string.thanks_received_explanation));
+        launchAlertWithHelpLink(
+            getResources().getString(R.string.statistics_thanks),
+            getResources().getString(R.string.thanks_received_explanation),
+            THANKS_URL);
     }
 
     @OnClick(R.id.quality_images_info)
     public void showQualityImagesInfo() {
-        launchAlert(getResources().getString(R.string.statistics_quality)
-            , getResources().getString(R.string.quality_images_info));
+        launchAlertWithHelpLink(
+            getResources().getString(R.string.statistics_quality),
+            getResources().getString(R.string.quality_images_info),
+            QUALITY_IMAGE_URL);
     }
 
     /**
@@ -509,6 +529,22 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
                 .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
                 .create()
                 .show();
+    }
+
+    /**
+     *  Launch Alert with a READ MORE button and clicking it open a custom webpage
+     */
+    private void launchAlertWithHelpLink(String title, String message, String helpLinkUrl){
+        new Builder(getActivity())
+            .setTitle(title)
+            .setMessage(message)
+            .setCancelable(true)
+            .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+            .setNegativeButton(R.string.read_help_link, (dialog ,id) ->{
+                Utils.handleWebUrl(requireContext(), Uri.parse(helpLinkUrl));;
+            })
+            .create()
+            .show();
     }
 
     /**

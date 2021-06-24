@@ -152,7 +152,7 @@ class RecentSearchesDaoTest {
 
             testObject.save(recentSearch)
 
-            verify(client).update(eq(recentSearch.contentUri), captor.capture(), isNull(), isNull())
+            verify(client).update(eq(recentSearch.contentUri!!), captor.capture(), isNull(), isNull())
             captor.firstValue.let { cv ->
                 assertEquals(2, cv.size())
                 assertEquals(recentSearch.query, cv.getAsString(COLUMN_NAME))

@@ -14,102 +14,111 @@ import java.util.List;
 
 public class UploadItem {
 
-  private final Uri mediaUri;
-  private final String mimeType;
-  private ImageCoordinates gpsCoords;
-  private List<UploadMediaDetail> uploadMediaDetails;
-  private final Place place;
-  private final long createdTimestamp;
-  private final String createdTimestampSource;
-  private final BehaviorSubject<Integer> imageQuality;
-  private boolean hasInvalidLocation;
+    private final Uri mediaUri;
+    private final String mimeType;
+    private ImageCoordinates gpsCoords;
+    private List<UploadMediaDetail> uploadMediaDetails;
+    private Place place;
+    private final long createdTimestamp;
+    private final String createdTimestampSource;
+    private final BehaviorSubject<Integer> imageQuality;
+    private boolean hasInvalidLocation;
 
 
-  @SuppressLint("CheckResult")
-  UploadItem(final Uri mediaUri,
-      final String mimeType,
-      final ImageCoordinates gpsCoords,
-      final Place place,
-      final long createdTimestamp,
-      final String createdTimestampSource) {
-    this.createdTimestampSource = createdTimestampSource;
-    uploadMediaDetails = new ArrayList<>(Collections.singletonList(new UploadMediaDetail()));
-    this.place = place;
-    this.mediaUri = mediaUri;
-    this.mimeType = mimeType;
-    this.gpsCoords = gpsCoords;
-    this.createdTimestamp = createdTimestamp;
-    imageQuality = BehaviorSubject.createDefault(ImageUtils.IMAGE_WAIT);
-  }
-
-  public String getCreatedTimestampSource() {
-    return createdTimestampSource;
-  }
-
-  public ImageCoordinates getGpsCoords() {
-    return gpsCoords;
-  }
-
-  public List<UploadMediaDetail> getUploadMediaDetails() {
-    return uploadMediaDetails;
-  }
-
-  public long getCreatedTimestamp() {
-    return createdTimestamp;
-  }
-
-  public Uri getMediaUri() {
-    return mediaUri;
-  }
-
-  public int getImageQuality() {
-    return imageQuality.getValue();
-  }
-
-  public void setImageQuality(final int imageQuality) {
-    this.imageQuality.onNext(imageQuality);
-  }
-
-  public Place getPlace() {
-    return place;
-  }
-
-  public void setMediaDetails(final List<UploadMediaDetail> uploadMediaDetails) {
-    this.uploadMediaDetails = uploadMediaDetails;
-  }
-
-  @Override
-  public boolean equals(@Nullable final Object obj) {
-    if (!(obj instanceof UploadItem)) {
-      return false;
+    @SuppressLint("CheckResult")
+    UploadItem(final Uri mediaUri,
+        final String mimeType,
+        final ImageCoordinates gpsCoords,
+        final Place place,
+        final long createdTimestamp,
+        final String createdTimestampSource) {
+        this.createdTimestampSource = createdTimestampSource;
+        uploadMediaDetails = new ArrayList<>(Collections.singletonList(new UploadMediaDetail()));
+        this.place = place;
+        this.mediaUri = mediaUri;
+        this.mimeType = mimeType;
+        this.gpsCoords = gpsCoords;
+        this.createdTimestamp = createdTimestamp;
+        imageQuality = BehaviorSubject.createDefault(ImageUtils.IMAGE_WAIT);
     }
-    return mediaUri.toString().contains(((UploadItem) (obj)).mediaUri.toString());
 
-  }
+    public String getCreatedTimestampSource() {
+        return createdTimestampSource;
+    }
 
-  @Override
-  public int hashCode() {
-    return mediaUri.hashCode();
-  }
+    public ImageCoordinates getGpsCoords() {
+        return gpsCoords;
+    }
 
-  /**
-   * Choose a filename for the media. Currently, the caption is used as a filename. If several
-   * languages have been entered, the first language is used.
-   */
-  public String getFileName() {
-    return Utils.fixExtension(uploadMediaDetails.get(0).getCaptionText(),
-        MimeTypeMapWrapper.getExtensionFromMimeType(mimeType));
-  }
+    public List<UploadMediaDetail> getUploadMediaDetails() {
+        return uploadMediaDetails;
+    }
 
-  public void setGpsCoords(final ImageCoordinates gpsCoords) {
-    this.gpsCoords = gpsCoords;
-  }
+    public long getCreatedTimestamp() {
+        return createdTimestamp;
+    }
 
-  public void setHasInvalidLocation(boolean hasInvalidLocation) {
-    this.hasInvalidLocation=hasInvalidLocation;
-  }
+    public Uri getMediaUri() {
+        return mediaUri;
+    }
 
-  public boolean hasInvalidLocation() {
-    return hasInvalidLocation;
-  }
+    public int getImageQuality() {
+        return imageQuality.getValue();
+    }
+
+    public void setImageQuality(final int imageQuality) {
+        this.imageQuality.onNext(imageQuality);
+    }
+
+    /**
+     * Sets the corresponding place to the uploadItem
+     *
+     * @param place geolocated Wikidata item
+     */
+    public void setPlace(Place place) {
+        this.place = place;
+    }
+
+    public Place getPlace() {
+        return place;
+    }
+
+    public void setMediaDetails(final List<UploadMediaDetail> uploadMediaDetails) {
+        this.uploadMediaDetails = uploadMediaDetails;
+    }
+
+    @Override
+    public boolean equals(@Nullable final Object obj) {
+        if (!(obj instanceof UploadItem)) {
+            return false;
+        }
+        return mediaUri.toString().contains(((UploadItem) (obj)).mediaUri.toString());
+
+    }
+
+    @Override
+    public int hashCode() {
+        return mediaUri.hashCode();
+    }
+
+    /**
+     * Choose a filename for the media. Currently, the caption is used as a filename. If several
+     * languages have been entered, the first language is used.
+     */
+    public String getFileName() {
+        return Utils.fixExtension(uploadMediaDetails.get(0).getCaptionText(),
+            MimeTypeMapWrapper.getExtensionFromMimeType(mimeType));
+    }
+
+    public void setGpsCoords(final ImageCoordinates gpsCoords) {
+        this.gpsCoords = gpsCoords;
+    }
+
+    public void setHasInvalidLocation(boolean hasInvalidLocation) {
+        this.hasInvalidLocation = hasInvalidLocation;
+    }
+
+    public boolean hasInvalidLocation() {
+        return hasInvalidLocation;
+    }
 }

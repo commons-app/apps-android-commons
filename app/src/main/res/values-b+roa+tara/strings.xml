@@ -13,12 +13,16 @@
   </plurals>
   <string name="starting_uploads">Stoche accumenze le carecaminde</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Ste accumenze %1$d carecamende</item>
-    <item quantity="other">Stonne accumenzane %1$d carecaminde</item>
+    <item quantity="one">Ste processe %d carecamende</item>
+    <item quantity="other">Ste processe %d carecaminde</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d carecamende</item>
-    <item quantity="other">%1$d carecaminde</item>
+    <item quantity="one">%d carecamende</item>
+    <item quantity="other">%d carecaminde</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d Carecamende</item>
+    <item quantity="other">%1$d Carecaminde</item>
   </plurals>
   <string name="navigation_item_explore">Esplore</string>
   <string name="preference_category_appearance">Aspette</string>

@@ -163,7 +163,12 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     @Override
     public void onBackPressed() {
         if (supportFragmentManager.getBackStackEntryCount() == 1){
-            // back to search so show search toolbar and hide navigation toolbar
+
+            // back pressed is handled by the mediaDetails , no further action required.
+            if(mediaDetailPagerFragment.backButtonClicked()){
+                return;
+            }
+
             tabLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.VISIBLE);
             mediaContainer.setVisibility(View.GONE);
@@ -184,6 +189,19 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     @Override
     public Integer getContributionStateAt(int position) {
         return null;
+    }
+
+    /**
+     * Reload media detail fragment once media is nominated
+     *
+     * @param index item position that has been nominated
+     */
+    @Override
+    public void refreshNominatedMedia(int index) {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            onBackPressed();
+            onMediaClicked(index);
+        }
     }
 
     /**

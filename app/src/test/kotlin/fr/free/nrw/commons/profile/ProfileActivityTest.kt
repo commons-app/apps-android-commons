@@ -6,12 +6,9 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.MockitoAnnotations
-import org.powermock.api.mockito.PowerMockito.mockStatic
+import org.powermock.api.mockito.PowerMockito
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 
@@ -20,17 +17,14 @@ import org.robolectric.annotation.Config
 class ProfileActivityTest {
 
     private lateinit var activity: ProfileActivity
-
-    @Mock
-    private lateinit var context: Context
+    private lateinit var profileActivity: ProfileActivity
+    private lateinit var mockContext: Context
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
-
         activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
-
-        context = RuntimeEnvironment.application.applicationContext
+        mockContext = PowerMockito.mock(Context::class.java)
+        profileActivity = PowerMockito.mock(ProfileActivity::class.java)
     }
 
     @Test
@@ -43,6 +37,12 @@ class ProfileActivityTest {
     @Throws(Exception::class)
     fun testOnDestroy() {
         activity.onDestroy()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testStartYourself() {
+        ProfileActivity.startYourself(mockContext)
     }
 
 }

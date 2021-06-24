@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Jakub Fabijan
 * Javiero
+* KuboF
 * Metraduk
 * Mirin
 * Robin van der Vliet
@@ -17,13 +19,13 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Komencante %1$d alŝuton</item>
     <item quantity="other">Komencante %1$d alŝutojn</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d alŝuto</item>
-    <item quantity="other">%1$d alŝutoj</item>
+    <item quantity="one">%d alŝuto</item>
+    <item quantity="other">%d alŝutoj</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Ĉi tiu bildo estos sub permesilo %1$s</item>
@@ -61,7 +63,7 @@
   <string name="uploading_started">La alŝutado komenciĝis!</string>
   <string name="upload_completed_notification_title">%1$s alŝutita!</string>
   <string name="upload_completed_notification_text">Tuŝetu por vidi vian alŝutadon</string>
-  <string name="upload_progress_notification_title_start">Komenciĝas la alŝutado de %1$s</string>
+  <string name="upload_progress_notification_title_start">Alŝutas dosieron: %s</string>
   <string name="upload_progress_notification_title_in_progress">Alŝutante %1$s</string>
   <string name="upload_progress_notification_title_finishing">Finiĝis la alŝutado de %1$s</string>
   <string name="upload_failed_notification_title">La alŝutado de %1$s malsukcesis</string>

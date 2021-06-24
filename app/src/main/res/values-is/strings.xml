@@ -12,11 +12,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Byrja %1$d innsendingu</item>
     <item quantity="other">Byrja %1$d innsendingar</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d innsending</item>
     <item quantity="other">%1$d innsendingar</item>
   </plurals>
@@ -52,7 +52,7 @@
   <string name="uploading_started">Innsending í gangi!</string>
   <string name="upload_completed_notification_title">%1$s var sent inn!</string>
   <string name="upload_completed_notification_text">Bankaðu til að skoða sem þú ert að senda inn</string>
-  <string name="upload_progress_notification_title_start">Hef innsendingu á %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Hef innsendingu á %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Verið er að senda %1$s inn</string>
   <string name="upload_progress_notification_title_finishing">Lýk innsendingu á %1$s</string>
   <string name="upload_failed_notification_title">Innsending á %1$s mistókst</string>

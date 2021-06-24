@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
@@ -38,8 +39,6 @@ import fr.free.nrw.commons.upload.UploadItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
@@ -69,8 +68,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @BindView(R.id.tooltip)
     ImageView tooltip;
     private UploadMediaDetailAdapter uploadMediaDetailAdapter;
-    @BindView(R.id.btn_copy_prev_title_desc)
-    AppCompatButton btnCopyPreviousTitleDesc;
+    @BindView(R.id.btn_copy_subsequent_media)
+    AppCompatButton btnCopyToSubsequentMedia;
 
     @Inject
     UploadMediaDetailsContract.UserActionListener presenter;
@@ -83,6 +82,19 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private Place place;
 
     private boolean isExpanded = true;
+
+    /**
+     * showNearbyFound will be true, if any nearby location found that needs pictures and the nearby popup is yet to be shown
+     * Used to show and check if the nearby found popup is already shown
+     */
+    private boolean showNearbyFound;
+
+    /**
+     * nearbyPlace holds the detail of nearby place that need pictures, if any found
+     */
+    private Place nearbyPlace;
+    private UploadItem uploadItem;
+
 
     private UploadMediaDetailFragmentCallback callback;
 
@@ -123,9 +135,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 showInfoAlert(R.string.media_detail_step_title, R.string.media_details_tooltip);
             }
         });
-        initRecyclerView();
         initPresenter();
         presenter.receiveImage(uploadableFile, place);
+        initRecyclerView();
 
         if (callback.getIndexInViewFlipper(this) == 0) {
             btnPrevious.setEnabled(false);
@@ -135,11 +147,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             btnPrevious.setAlpha(1.0f);
         }
 
-        //If this is the first media, we have nothing to copy, lets not show the button
-        if (callback.getIndexInViewFlipper(this) == 0) {
-            btnCopyPreviousTitleDesc.setVisibility(View.GONE);
+        //If this is the last media, we have nothing to copy, lets not show the button
+        if (callback.getIndexInViewFlipper(this) == callback.getTotalNumberOfSteps()-4) {
+            btnCopyToSubsequentMedia.setVisibility(View.GONE);
         } else {
-            btnCopyPreviousTitleDesc.setVisibility(View.VISIBLE);
+            btnCopyToSubsequentMedia.setVisibility(View.VISIBLE);
         }
 
         attachImageViewScaleChangeListener();
@@ -168,7 +180,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * init the description recycler veiw and caption recyclerview
      */
     private void initRecyclerView() {
-        uploadMediaDetailAdapter = new UploadMediaDetailAdapter(defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE, ""));
+        uploadMediaDetailAdapter = new UploadMediaDetailAdapter(defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, ""));
         uploadMediaDetailAdapter.setCallback(this::showInfoAlert);
         uploadMediaDetailAdapter.setEventListener(this);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -199,7 +211,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         UploadMediaDetail uploadMediaDetail = new UploadMediaDetail();
         uploadMediaDetail.setManuallyAdded(true);//This was manually added by the user
         uploadMediaDetailAdapter.addDescription(uploadMediaDetail);
-        rvDescriptions.scrollToPosition(uploadMediaDetailAdapter.getItemCount()-1);
+        rvDescriptions.smoothScrollToPosition(uploadMediaDetailAdapter.getItemCount()-1);
     }
 
     @Override
@@ -231,13 +243,30 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     /**
-     * Shows popup if any nearby location needing pictures matches uploadable picture's GPS location
+     * Sets variables to Show popup if any nearby location needing pictures matches uploadable picture's GPS location
      * @param uploadItem
      * @param place
      */
-    @SuppressLint("StringFormatInvalid")
     @Override
     public void onNearbyPlaceFound(UploadItem uploadItem, Place place) {
+        nearbyPlace = place;
+        this.uploadItem = uploadItem;
+        showNearbyFound = true;
+        if(callback.getIndexInViewFlipper(this) == 0) {
+            showNearbyPlaceFound(nearbyPlace);
+            showNearbyFound = false;
+        }
+    }
+
+    /**
+     * Shows nearby place found popup
+     * @param place
+     */
+    @SuppressLint("StringFormatInvalid") // To avoid the unwanted lint warning that string 'upload_nearby_place_found_description' is not of a valid format
+    private void showNearbyPlaceFound(Place place) {
+        final View customLayout = getLayoutInflater().inflate(R.layout.custom_nearby_found, null);
+        ImageView nearbyFoundImage = customLayout.findViewById(R.id.nearbyItemImage);
+        nearbyFoundImage.setImageURI(uploadItem.getMediaUri());
         DialogUtil.showAlertDialog(getActivity(),
             getString(R.string.upload_nearby_place_found_title),
             String.format(Locale.getDefault(),
@@ -248,7 +277,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             },
             () -> {
 
-            });
+            },
+            customLayout, true);
     }
 
     @Override
@@ -259,6 +289,19 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void onImageValidationSuccess() {
         callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
+    }
+
+    /**
+     * This method gets called whenever the next/previous button is pressed
+     */
+    @Override
+    protected void onBecameVisible() {
+        super.onBecameVisible();
+        presenter.fetchTitleAndDescription(callback.getIndexInViewFlipper(this));
+        if(showNearbyFound) {
+            showNearbyPlaceFound(nearbyPlace);
+            showNearbyFound = false;
+        }
     }
 
     @Override
@@ -322,6 +365,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         //If the error message is null, we will probably not show anything
     }
 
+    @Override
+    public void showConnectionErrorPopup() {
+        DialogUtil.showAlertDialog(getActivity(),
+            getString(R.string.upload_connection_error_alert_title),
+            getString(R.string.upload_connection_error_alert_detail), getString(R.string.ok),
+            () -> {}, true);
+    }
+
     @Override public void showMapWithImageCoordinates(boolean shouldShow) {
         ibMap.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
     }
@@ -369,6 +420,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @Override
     public void onPrimaryCaptionTextChange(boolean isNotEmpty) {
+        btnCopyToSubsequentMedia.setEnabled(isNotEmpty);
+        btnCopyToSubsequentMedia.setClickable(isNotEmpty);
+        btnCopyToSubsequentMedia.setAlpha(isNotEmpty ? 1.0f: 0.5f);
         btnNext.setEnabled(isNotEmpty);
         btnNext.setClickable(isNotEmpty);
         btnNext.setAlpha(isNotEmpty ? 1.0f: 0.5f);
@@ -380,9 +434,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
 
-    @OnClick(R.id.btn_copy_prev_title_desc)
-    public void onButtonCopyPreviousTitleDesc(){
-        presenter.fetchPreviousTitleAndDescription(callback.getIndexInViewFlipper(this));
+    @OnClick(R.id.btn_copy_subsequent_media)
+    public void onButtonCopyTitleDescToSubsequentMedia(){
+        presenter.copyTitleAndDescriptionToSubsequentMedia(callback.getIndexInViewFlipper(this));
+        Toast.makeText(getContext(), getResources().getString(R.string.copied_successfully), Toast.LENGTH_SHORT).show();
     }
 
 }

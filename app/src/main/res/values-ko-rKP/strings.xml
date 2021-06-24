@@ -13,11 +13,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d장의 올리적재를 시작합니다</item>
     <item quantity="other">%1$d장의 올리적재를 시작합니다</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d개 올리적재</item>
     <item quantity="other">%1$d개 올리적재</item>
   </plurals>
@@ -45,7 +45,7 @@
   <string name="uploading_started">올리적재를 시작했습니다!</string>
   <string name="upload_completed_notification_title">%1$s 서류를 올리적재하였습니다!</string>
   <string name="upload_completed_notification_text">당신의 올리적재를 보려면 두드리세요</string>
-  <string name="upload_progress_notification_title_start">%1$s 서류 올리적재를 시작하는중</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s 서류 올리적재를 시작하는중</string>
   <string name="upload_progress_notification_title_in_progress">%1$s 서류를 올리적재하는중</string>
   <string name="upload_progress_notification_title_finishing">%1$s 서류 올리적재를 완료하는중</string>
   <string name="upload_failed_notification_title">%1$s 서류 올리적재 실패</string>

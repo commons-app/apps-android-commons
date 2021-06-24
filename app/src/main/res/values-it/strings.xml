@@ -23,13 +23,14 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">Avvio del caricamento</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Iniziato %1$d caricamento</item>
-    <item quantity="other">Iniziati %1$d caricamenti</item>
+    <item quantity="one">Elaborando %d caricamento</item>
+    <item quantity="other">Elaborando %d caricamenti</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d caricamento</item>
-    <item quantity="other">%1$d caricamenti</item>
+    <item quantity="one">%d caricamento</item>
+    <item quantity="other">%d caricamenti</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Questa immagine sarà rilasciata in base alla licenza %1$s</item>
@@ -65,9 +66,10 @@
   <string name="upload_failed">File non trovato. Prova con un altro file.</string>
   <string name="authentication_failed">Autenticazione non riuscita, si prega di riprovare</string>
   <string name="uploading_started">Caricamento iniziato!</string>
+  <string name="uploading_queued">Caricamento in coda (attivata modalità di connessione limitata)</string>
   <string name="upload_completed_notification_title">%1$s caricato!</string>
   <string name="upload_completed_notification_text">Premi per vedere i tuoi caricamenti</string>
-  <string name="upload_progress_notification_title_start">Inizio caricamento di %1$s</string>
+  <string name="upload_progress_notification_title_start">Caricamento file: %s</string>
   <string name="upload_progress_notification_title_in_progress">Sto caricando %1$s</string>
   <string name="upload_progress_notification_title_finishing">Terminato il caricamento di %1$s</string>
   <string name="upload_failed_notification_title">Caricamento di %1$s non riuscito</string>
@@ -84,6 +86,7 @@
   <string name="menu_nearby">Nelle vicinanze</string>
   <string name="provider_contributions">I miei caricamenti</string>
   <string name="menu_share">Condividi</string>
+  <string name="menu_view_file_page">Vedi la pagina del file</string>
   <string name="share_title_hint">Didascalia (obbligatoria)</string>
   <string name="add_caption_toast">Per favore, fornisci una didascalia per questo file</string>
   <string name="share_description_hint">Descrizione</string>
@@ -98,11 +101,15 @@
   <string name="provider_modifications">Modifiche</string>
   <string name="menu_upload_single">Carica</string>
   <string name="categories_search_text_hint">Cerca categorie</string>
+  <string name="depicts_search_text_hint">Cerca elementi che il tuo file rappresenta (montagna, Taj Mahal, ecc.)</string>
   <string name="menu_save_categories">Salva</string>
   <string name="refresh_button">Aggiorna</string>
   <string name="display_list_button">Elenco</string>
   <string name="contributions_subtitle_zero">(Non è stato ancora caricato niente)</string>
   <string name="categories_not_found">Non è stata trovata alcuna categoria che contiene %1$s</string>
+  <string name="depictions_not_found">Non sono stati trovati elementi Wikidata corrispondenti a %1$s</string>
+  <string name="no_child_classes">%1$s non ha classi figlie</string>
+  <string name="no_parent_classes">%1$s non ha classi superiori</string>
   <string name="categories_skip_explanation">Aggiungi categorie per rendere le tue immagini più facilmente individuabili su Wikimedia Commons.\nInizia a digitare per aggiungere categorie.</string>
   <string name="categories_activity_title">Categorie</string>
   <string name="title_activity_settings">Impostazioni</string>
@@ -161,6 +168,7 @@
   <string name="detail_panel_cats_label">Categorie</string>
   <string name="detail_panel_cats_loading">Caricamento…</string>
   <string name="detail_panel_cats_none">Nessuna selezione</string>
+  <string name="detail_caption_empty">Senza didascalia</string>
   <string name="detail_description_empty">Nessuna descrizione</string>
   <string name="detail_discussion_empty">Nessuna discussione</string>
   <string name="detail_license_empty">Licenza sconosciuta</string>
@@ -171,11 +179,13 @@
   <string name="location_permission_title">Richiesta dell\'autorizzazione di posizione</string>
   <string name="ok">OK</string>
   <string name="warning">Attenzione</string>
+  <string name="duplicate_image_found">Trovata un\'immagine duplicata</string>
   <string name="upload">Carica</string>
   <string name="yes">Sì</string>
   <string name="no">No</string>
   <string name="media_detail_caption">Didascalia</string>
   <string name="media_detail_title">Titolo</string>
+  <string name="media_detail_depiction">Elementi rappresentati</string>
   <string name="media_detail_description">Descrizione</string>
   <string name="media_detail_discussion">Discussione</string>
   <string name="media_detail_author">Autore</string>
@@ -219,6 +229,7 @@
   <string name="nearby_info_menu_wikidata_article">Elemento Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Voce Wikipedia</string>
   <string name="description_info">Descrivi il più possibile il file multimediale: dove è stato scattato? Cosa mostra? Qual è il contesto? Descrivi gli oggetti o le persone. Rivela le informazioni che non possono essere facilmente indovinate, ad esempio l\'ora del giorno se si tratta di un paesaggio. Se i file mostrano qualcosa di inconsueto, spiega cosa lo rende insolito.</string>
+  <string name="caption_info">Per favore scrivi una breve descrizione dell\'immagine. La prima legenda sarà utilizzata come Titolo dell\'immagine. Limite di 255 caratteri.</string>
   <string name="upload_problem_exist">Potenziali problemi con questa immagine:</string>
   <string name="upload_problem_image_dark">L\'immagine è troppo scura.</string>
   <string name="upload_problem_image_blurry">L\'immagine è sfocata.</string>
@@ -226,6 +237,7 @@
   <string name="upload_problem_different_geolocation">Questa foto è stata scattata in una posizione diversa.</string>
   <string name="upload_problem_fbmd">Carica solo le foto che hai scattato tu stesso. Non caricare immagini che hai trovato negli account Facebook di altre persone.</string>
   <string name="upload_problem_do_you_continue">Vuoi caricare lo stesso questa immagine?</string>
+  <string name="upload_problem_image">Problemi trovati nell\'immagine</string>
   <string name="internet_downloaded">Carica solo le foto che hai scattato da solo. Non caricare immagini scaricate da Internet.</string>
   <string name="use_external_storage">Salva scatti in-app</string>
   <string name="use_external_storage_summary">Salva le foto scattate con la fotocamera in-app nella memoria del tuo dispositivo</string>
@@ -255,6 +267,7 @@
   <string name="welcome_skip_button">Salta Tutorial</string>
   <string name="no_internet">Internet non disponibile</string>
   <string name="error_notifications">Errore durante il recupero delle notifiche</string>
+  <string name="error_review">Errore nel rintraccio dell\'immagine per la verifica. Aggiorna la pagina per provare di nuovo.</string>
   <string name="no_notifications">Nessuna notifica trovata</string>
   <string name="about_translate">Traduci</string>
   <string name="about_translate_title">Lingue</string>
@@ -279,6 +292,7 @@
   <string name="search_recent_header">Ricerche recenti:</string>
   <string name="provider_searches">Query effettuate di recente</string>
   <string name="error_loading_categories">Si è verificato un errore durante il caricamento delle categorie.</string>
+  <string name="error_loading_depictions">Si è verificato un errore durante il caricamento degli elementi raffigurati.</string>
   <string name="search_tab_title_media">Media</string>
   <string name="search_tab_title_categories">Categorie</string>
   <string name="search_tab_title_depictions">Elementi</string>
@@ -368,6 +382,8 @@
   <string name="no_uploads">Benvenuto su Commons!\n\nCarica il tuo primo file multimediale toccando il pulsante aggiungi.</string>
   <string name="no_categories_selected">Nessuna categoria selezionata</string>
   <string name="no_categories_selected_warning_desc">Le immagini senza categorie sono raramente utilizzabili. Sei sicuro di voler continuare senza selezionare le categorie?</string>
+  <string name="no_depictions_selected">Non sono stati selezionati elementi</string>
+  <string name="no_depictions_selected_warning_desc">Le immagini con descrizioni possono essere trovate più facilmente ed è più probabile il loro utilizzo. Davvero vuoi continuare senza selezionare elementi raffigurati?</string>
   <string name="upload_flow_all_images_in_set">(Per tutte le immagini nell\'insieme)</string>
   <string name="search_this_area">Cerca in questa area</string>
   <string name="nearby_card_permission_title">Richiesta di permesso</string>
@@ -383,6 +399,7 @@
   <string name="nearby_campaign_dismiss_message">Non vedrai più le campagne. Tuttavia, puoi riattivare questa notifica in Impostazioni, se lo desideri.</string>
   <string name="this_function_needs_network_connection">Questa funzione richiede una connessione di rete, controlla le impostazioni di connessione.</string>
   <string name="error_processing_image">Si è verificato un errore durante l\'elaborazione dell\'immagine. Per favore riprova!</string>
+  <string name="check_category_adding_template">Aggiunta del template per la verifica della categoria</string>
   <string name="nominate_for_deletion_done">Fatto</string>
   <string name="send_thank_toast">Inviando ringraziamento per %1$s</string>
   <string name="review_copyright_explanation">I loghi, gli screenshot e le locandine di film sono solitamente violazioni del copyright.\nClicca NO per proporre l\'eliminazione di questa immagine</string>
@@ -398,6 +415,7 @@
   <string name="menu_option_unread">Vedi non lette</string>
   <string name="error_occurred_in_picking_images">Si è verificato un errore durante la selezione delle immagini</string>
   <string name="please_wait">Attendi per favore…</string>
+  <string name="copied_successfully">Copiato</string>
   <string name="skip_image">Salta questa immagine</string>
   <string name="exif_tag_name_author">Autore</string>
   <string name="exif_tag_name_copyright">Copyright</string>
@@ -430,6 +448,8 @@
   <string name="category_edit_helper_show_edit_title">Aggiorna la categoria</string>
   <string name="category_edit_helper_show_edit_title_success">Successo</string>
   <string name="category_edit_button_text">Aggiorna le categorie</string>
+  <string name="coordinates_edit_helper_show_edit_title">Coordinate aggiornate</string>
+  <string name="coordinates_edit_helper_show_edit_message">Le coordinate %1$s sono state aggiunte.</string>
   <string name="share_image_via">Condividi immagine tramite</string>
   <string name="no_achievements_yet">Non hai fatto alcun contributo ancora</string>
   <string name="account_created">Utenza creata!</string>

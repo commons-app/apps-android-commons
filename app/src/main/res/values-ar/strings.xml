@@ -35,7 +35,7 @@
     <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="zero">جارٍ بدء %1$d رفع</item>
     <item quantity="one">جارٍ بدء %1$d رفع</item>
     <item quantity="two">جارٍ بدء %1$d رفع</item>
@@ -43,7 +43,7 @@
     <item quantity="many">جارٍ بدء %1$d رفع</item>
     <item quantity="other">جارٍ بدء %1$d مرفوعات</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="zero">%1$d رفع</item>
     <item quantity="one">%1$d رفع</item>
     <item quantity="two">%1$d رفع</item>
@@ -99,7 +99,7 @@
   <string name="uploading_started">بدأ الرفع!</string>
   <string name="upload_completed_notification_title">رُفع %1$s!</string>
   <string name="upload_completed_notification_text">انقر لعرض ملفك المرفوع</string>
-  <string name="upload_progress_notification_title_start">بدء رفع %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">بدء رفع %1$s</string>
   <string name="upload_progress_notification_title_in_progress">يجري رفع %1$s</string>
   <string name="upload_progress_notification_title_finishing">اكتمال رفع %1$s</string>
   <string name="upload_failed_notification_title">فشل رفع %1$s</string>
@@ -265,6 +265,7 @@
   <string name="upload_problem_different_geolocation">تم التقاط هذه الصورة في موقع مختلف.</string>
   <string name="upload_problem_fbmd">من فضلك فقط ارفع الصور التي التقطها بنفسك. لا ترفع الصور التي وجدتها على حسابات الآخرين في فيسبوك.</string>
   <string name="upload_problem_do_you_continue">هل ما زلت تريد رفع هذه الصورة؟</string>
+  <string name="upload_connection_error_alert_title">خطأ في الاتصال</string>
   <string name="upload_problem_image">تم العثور على مشاكل في الصورة</string>
   <string name="internet_downloaded">يُرجَى فقط رفع الصور التي التقطتها بنفسك، لا ترفع الصور التي قمت بتنزيلها من الإنترنت.</string>
   <string name="use_external_storage" fuzzy="true">استخدم تخزينا خارجيا</string>
@@ -468,7 +469,6 @@
   <string name="images_featured_explanation">الصور المختارة هي صور من مصورين ورسامين ذوي مهارات عالية اختارها مجتمع ويكيميديا ​​كومنز كبعض الأفضل جودة على الموقع.</string>
   <string name="images_via_nearby_explanation">الصور المرفوعة عبر الأماكن القريبة هي الصور المرفوعة عن طريق اكتشاف الأماكن على الخريطة.</string>
   <string name="thanks_received_explanation">تتيح هذه الميزة للمحررين إرسال إشعار شكر للمستخدمين الذين يقومون بتعديلات مفيدة - باستخدام رابط شكر صغير في صفحة التاريخ أو صفحة الفرق.</string>
-  <string name="previous_image_caption_description">نسخ العنوان/الوصف السابق</string>
   <string name="welcome_do_upload_content_description">أمثلة على صور جيدة لرفعها إلى كومنز</string>
   <string name="welcome_dont_upload_content_description">أمثلة على صور لعدم رفعها</string>
   <string name="skip_image">تخطي هذه الصورة</string>
@@ -506,6 +506,7 @@
   <string name="delete_helper_ask_alert_set_positive_button_reason">لأنها</string>
   <string name="category_edit_helper_show_edit_title">تحديث التصنيف</string>
   <string name="category_edit_button_text">تحديث التصنيفات</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">نجاح</string>
   <string name="share_image_via">مشاركة الصور عبر</string>
   <string name="no_achievements_yet">أنت لم تقدم أية مساهمات حتى الآن</string>
   <string name="account_created">تم إنشاء الحساب!</string>
@@ -544,4 +545,6 @@
   <string name="confirm">تأكيد</string>
   <string name="instructions_title">التعليمات</string>
   <string name="limited_connection_mode" fuzzy="true">اتصال محدود</string>
+  <string name="choose_a_location">اختر موقعًا</string>
+  <string name="select_location_location_picker">حدد موقعًا</string>
 </resources>

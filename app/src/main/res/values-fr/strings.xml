@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Adehertogh
 * Alno
 * BaRaN6161 TURK
 * Cyclicus
@@ -10,6 +11,7 @@
 * Gomoko
 * Happy13241
 * Jean-Frédéric
+* JenyxGym
 * KATRINE1992
 * Melissadeba95
 * Metroitendo
@@ -40,12 +42,12 @@
   </plurals>
   <string name="starting_uploads">Démarrage des téléversements</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%1$d téléversement démarré</item>
-    <item quantity="other">%1$d téléversements démarrés</item>
+    <item quantity="one">%d téléversement en cours</item>
+    <item quantity="other">%d téléversements en cours</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d téléversement</item>
-    <item quantity="other">%1$d téléversements</item>
+    <item quantity="one">%d téléversement</item>
+    <item quantity="other">%d téléversements</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Cette image sera sous licence %1$s.</item>
@@ -84,7 +86,7 @@
   <string name="uploading_queued">Téléversement mis en file d’attente (mode de connexion limitée activé)</string>
   <string name="upload_completed_notification_title">%1$s téléversé !</string>
   <string name="upload_completed_notification_text">Appuyer pour voir votre téléversement</string>
-  <string name="upload_progress_notification_title_start">Début de téléversement de %1$s</string>
+  <string name="upload_progress_notification_title_start">Téléversement du fichier : %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s en cours de téléversement</string>
   <string name="upload_progress_notification_title_finishing">Fin du téléversement de %1$s</string>
   <string name="upload_failed_notification_title">Le téléversement de %1$s a échoué</string>
@@ -252,6 +254,8 @@
   <string name="upload_problem_different_geolocation">Cette image a été prise à un emplacement différent.</string>
   <string name="upload_problem_fbmd">Veuillez ne téléverser que des images que vous avez prises vous-même. Ne téléversez aucune image prise sur les comptes Facebook d’autres personnes.</string>
   <string name="upload_problem_do_you_continue">Voulez-vous tout de même téléverser cette image ?</string>
+  <string name="upload_connection_error_alert_title">Erreur de connexion</string>
+  <string name="upload_connection_error_alert_detail">Le processus de téléchargement nécessite un accès internet\n    actif. Veuillez vérifier votre connexion internet.</string>
   <string name="upload_problem_image">Problèmes trouvés dans l’image</string>
   <string name="internet_downloaded">Veuillez ne téléverser que des images que vous avez prises vous-même. Ne téléversez aucune image que vous avez téléchargée depuis Internet.</string>
   <string name="use_external_storage">Enregistrer les prises de vue dans l’application</string>
@@ -458,7 +462,8 @@
   <string name="images_featured_explanation">Les images en vedette sont des images de photographes et d’illustrateurs très doués que la communauté de Wikimédia Commons a choisies comme étant de la meilleure qualité pour le site.</string>
   <string name="images_via_nearby_explanation">Les images téléversées par « Lieux à proximité » sont les images téléversées lors de la découverte de lieux sur la carte.</string>
   <string name="thanks_received_explanation">Cette fonctionnalité permet aux contributeurs d’envoyer une notification de remerciement aux utilisateurs qui font des modifications utiles ― en utilisant un petit lien de remerciement sur la page historique ou sur celle du diff.</string>
-  <string name="previous_image_caption_description">Copier les légendes et la description précédentes</string>
+  <string name="copy_image_caption_description">Copier vers le média subséquent</string>
+  <string name="copied_successfully">Copié</string>
   <string name="welcome_do_upload_content_description">Exemples de bonnes images à téléverser sur Commons</string>
   <string name="welcome_dont_upload_content_description">Exemples d’images à ne pas téléverser</string>
   <string name="skip_image">Sauter cette image</string>
@@ -503,6 +508,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Impossible d’ajouter des catégories.</string>
   <string name="category_edit_button_text">Mettre à jour les catégories</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Essai de mise à jour des coordonnées.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Mise à jour des coordonnées</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Succès</string>
+  <string name="coordinates_edit_helper_show_edit_message">Les coordonnées %1$s sont ajoutées.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Impossible d’ajouter des coordonnées.</string>
+  <string name="coordinates_picking_unsuccessful">Impossible d’obtenir les coordonnées.</string>
   <string name="share_image_via">Partager l’image via</string>
   <string name="no_achievements_yet">Vous n’avez encore fait aucune contribution</string>
   <string name="account_created">Compte créé !</string>
@@ -597,4 +608,14 @@
   <string name="media_detail_step_title">Détails du média</string>
   <string name="menu_view_category_page">Voir la page de catégorie</string>
   <string name="menu_view_item_page">Voir la page de l’élément</string>
+  <string name="app_ui_language">Langue d’interface utilisateur de l’application</string>
+  <string name="remove">Supprime une légende et une description</string>
+  <string name="read_help_link">En savoir plus</string>
+  <string name="media_detail_in_all_languages">Dans toutes les langues</string>
+  <string name="choose_a_location">Choisir un emplacement</string>
+  <string name="pan_and_zoom_to_adjust">Descendre et zoomer pour ajuster</string>
+  <string name="exit_location_picker">Sortir du sélecteur d’emplacement</string>
+  <string name="select_location_location_picker">Sélectionner un emplacement</string>
+  <string name="location_picker_image_view" fuzzy="true">Affichage de l’image du sélecteur d’emplacement</string>
+  <string name="location_picker_image_view_shadow" fuzzy="true">Ombre de l’affichage de l’image du sélecteur d’emplacement</string>
 </resources>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="@dimen/dimen_20"
+  android:background="?attr/mainBackground"
+  android:elevation="30dp"
+  android:padding="@dimen/dimen_10">
+
+  <TextView
+    android:id="@+id/caption_label"
+    style="@style/MediaDetailTextLabel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Captions"
+    android:textColor="?attr/caption_description_text_color" />
+
+  <ListView
+    android:id="@+id/caption_listview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/caption_label" />
+
+  <TextView
+    android:id="@+id/description_label"
+    style="@style/MediaDetailTextLabel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/caption_listview"
+    android:layout_marginTop="@dimen/dimen_10"
+    android:text="Descriptions"
+    android:textColor="?attr/caption_description_text_color" />
+
+  <ProgressBar
+    android:id="@+id/pb_circular"
+    style="?android:attr/progressBarStyleSmall"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:background="?attr/mainBackground"
+    android:indeterminate="true"
+    android:indeterminateOnly="true"
+    android:visibility="gone" />
+
+  <WebView
+    android:id="@+id/description_webview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/description_label"
+    android:layout_marginTop="@dimen/dimen_10"
+    android:layout_marginBottom="@dimen/dimen_20"
+    android:background="?attr/mainBackground"
+    tools:ignore="WebViewLayout" />
+</RelativeLayout>

@@ -15,11 +15,15 @@ import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.ViewPagerAdapter;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.ActivityUtils;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 public class ExploreFragment extends CommonsDaggerSupportFragment {
 
@@ -34,6 +38,9 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     ViewPagerAdapter viewPagerAdapter;
     private ExploreListRootFragment featuredRootFragment;
     private ExploreListRootFragment mobileRootFragment;
+    @Inject
+    @Named("default_preferences")
+    public JsonKvStore applicationKvStore;
 
     public void setScroll(boolean canScroll){
         viewPager.setCanScroll(canScroll);
@@ -87,17 +94,28 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         fragmentList.add(mobileRootFragment);
         titleList.add(getString(R.string.explore_tab_title_mobile).toUpperCase());
 
+        ((MainActivity)getActivity()).showTabs();
+        ((BaseActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
     }
 
-    public void onBackPressed() {
+    public boolean onBackPressed() {
         if (tabLayout.getSelectedTabPosition() == 0) {
-            featuredRootFragment.backPressed();
+            if (featuredRootFragment.backPressed()) {
+                ((BaseActivity) getActivity()).getSupportActionBar()
+                    .setDisplayHomeAsUpEnabled(false);
+                return true;
+            }
         } else {
-            mobileRootFragment.backPressed();
+            if (mobileRootFragment.backPressed()) {
+                ((BaseActivity) getActivity()).getSupportActionBar()
+                    .setDisplayHomeAsUpEnabled(false);
+                return true;
+            }
         }
-        ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        return false;
     }
 
     /**

@@ -30,6 +30,7 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.textfield.TextInputLayout;
 
 import fr.free.nrw.commons.utils.ActivityUtils;
+import java.util.Locale;
 import org.wikipedia.AppAdapter;
 import org.wikipedia.dataclient.ServiceFactory;
 import org.wikipedia.dataclient.WikiSite;
@@ -265,7 +266,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                     public void onResponse(Call<MwQueryResponse> call,
                                            Response<MwQueryResponse> response) {
                         loginClient.login(commonsWikiSite, username, password, null, twoFactorCode,
-                                response.body().query().loginToken(), new LoginCallback() {
+                                response.body().query().loginToken(), Locale.getDefault().getLanguage(), new LoginCallback() {
                                     @Override
                                     public void success(@NonNull LoginResult result) {
                                         Timber.d("Login Success");
@@ -338,6 +339,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             // no longer attached to activity!
             return;
         }
+        compositeDisposable.clear();
         sessionManager.setUserLoggedIn(true);
         AppAdapter.get().updateAccount(loginResult);
         progressDialog.dismiss();
@@ -462,7 +464,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         // if progressDialog is visible during the configuration change  then store state as  true else false so that
-        // we maintain visiblity of progressDailog after configuration change
+        // we maintain visibility of progressDailog after configuration change
         if(progressDialog!=null&&progressDialog.isShowing()) {
             outState.putBoolean(saveProgressDailog,true);
         } else {
@@ -470,7 +472,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
         outState.putString(saveErrorMessage,errorMessage.getText().toString()); //Save the errorMessage
         outState.putString(saveUsername,getUsername()); // Save the username
-        outState.putString(savePassword,getPassword()); // Save thte password
+        outState.putString(savePassword,getPassword()); // Save the password
     }
     private String getUsername() {
         return usernameEdit.getText().toString();

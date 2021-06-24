@@ -16,11 +16,11 @@
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d ਅੱਪਲੋਡ</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d ਅੱਪਲੋਡ ਸ਼ੁਰੂ ਹੋ ਰਹੀ ਹੈ</item>
     <item quantity="other">%1$d ਸ਼ੁਰੂ ਹੋ ਰਹੇ ਹਨ</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">&amp;d ਅੱਪਲੋਡ</item>
     <item quantity="other">%1$d ਅੱਪਲੋਡਾਂ</item>
   </plurals>
@@ -39,7 +39,7 @@
   <string name="uploading_started">ਅੱਪਲੋਡ ਸ਼ੁਰੂ ਹੋਇਆ!</string>
   <string name="upload_completed_notification_title">%1$s ਅੱਪਲੋਡ ਹੋ ਗਏ!</string>
   <string name="upload_completed_notification_text">ਆਪਣਾ ਅੱਪਲੋਡ ਵੇਖਣ ਲਈ ਥਪੇੜੋ</string>
-  <string name="upload_progress_notification_title_start">%1$s ਅੱਪਲੋਡ ਸ਼ੁਰੂ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s ਅੱਪਲੋਡ ਸ਼ੁਰੂ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ਅੱਪਲੋਡ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ</string>
   <string name="upload_progress_notification_title_finishing">%1$s ਦਾ ਅੱਪਲੋਡ ਖ਼ਤਮ ਹੋ ਰਿਹਾ ਹੈ</string>
   <string name="upload_failed_notification_title">%1$s ਦਾ ਅੱਪਲੋਡ ਫੇਲ੍ਹ ਹੋਇਆ</string>

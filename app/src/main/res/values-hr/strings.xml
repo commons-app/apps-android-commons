@@ -49,7 +49,7 @@
   <string name="uploading_started">Postavljanje započeto!</string>
   <string name="upload_completed_notification_title">%1$s postavljeno!</string>
   <string name="upload_completed_notification_text">Dodirnite da biste vidjeli datoteku</string>
-  <string name="upload_progress_notification_title_start">Počinje postavljanje %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Počinje postavljanje %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Postavljanje %1$s</string>
   <string name="upload_progress_notification_title_finishing">Završeno postavljanje %1$s</string>
   <string name="upload_failed_notification_title">Postavljanje %1$s neuspješno</string>
@@ -70,7 +70,7 @@
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Prijava nije moguća - mrežna pogrješka</string>
   <string name="login_failed_throttled">Previše neuspješnih pokušaja, molimo probajte opet za par minuta.</string>
-  <string name="login_failed_blocked">Ispričavamo se, ovaj je suradnik blokiran na Zajendičkom poslužitelju</string>
+  <string name="login_failed_blocked">Ispričavamo se, ovaj je suradnik blokiran na Zajedničkom poslužitelju</string>
   <string name="login_failed_2fa_needed">Morate upisati autetifikacijski kôd od dva faktora</string>
   <string name="login_failed_generic">Prijava neuspješna</string>
   <string name="share_upload_button">Postavljanje</string>

@@ -27,12 +27,12 @@
   </plurals>
   <string name="starting_uploads">開始上傳</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">開始 %1$d 次上傳</item>
-    <item quantity="other">開始 %1$d 次上傳</item>
+    <item quantity="one">正在處理 $d 個上傳</item>
+    <item quantity="other">正在處理 $d 個上傳</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d 次上傳</item>
-    <item quantity="other">%1$d 次上傳</item>
+    <item quantity="one">$d 個上傳</item>
+    <item quantity="other">$d 個上傳</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">此圖片會按 %1$s 協議授權上載</item>
@@ -71,7 +71,7 @@
   <string name="uploading_queued">上傳已排定（限制連線模式已啟用）</string>
   <string name="upload_completed_notification_title">已上傳%1$s！</string>
   <string name="upload_completed_notification_text">輕觸來檢視您上傳的項目</string>
-  <string name="upload_progress_notification_title_start">開始上傳%1$s</string>
+  <string name="upload_progress_notification_title_start">開始上傳檔案：$s</string>
   <string name="upload_progress_notification_title_in_progress">正在上傳%1$s</string>
   <string name="upload_progress_notification_title_finishing">即將完成上傳%1$s</string>
   <string name="upload_failed_notification_title">上傳%1$s失敗</string>
@@ -239,6 +239,8 @@
   <string name="upload_problem_different_geolocation">此圖片是在不同的地點拍攝。</string>
   <string name="upload_problem_fbmd">請僅上傳您自己拍攝的圖片。不要上傳您從別人臉書帳號裡所找到的圖片。</string>
   <string name="upload_problem_do_you_continue">您仍要上傳此圖片嗎？</string>
+  <string name="upload_connection_error_alert_title">連接錯誤</string>
+  <string name="upload_connection_error_alert_detail">更新處理需要有效的網際網路存取。請檢查您的網路連線。</string>
   <string name="upload_problem_image">在圖片裡發現問題</string>
   <string name="internet_downloaded">請僅上傳您自己拍攝的圖片。不要上傳您從網路下載來的圖片。</string>
   <string name="use_external_storage">儲存應用程式所提供的快照</string>
@@ -445,7 +447,8 @@
   <string name="images_featured_explanation">特色圖片是出自於高水準技巧的攝影師或繪圖師，且被維基共享資源社群挑選為在站台上的最高品質圖片。</string>
   <string name="images_via_nearby_explanation">以「附近地點」所上傳的圖片，是透過找出在地圖上地點來上傳的。</string>
   <string name="thanks_received_explanation">此功能允許編輯者透過利用在歷史頁面或是差異頁面上的感謝連結，來發送感謝通知給做出有用編輯的使用者。</string>
-  <string name="previous_image_caption_description">複製先前說明與描述</string>
+  <string name="copy_image_caption_description">複製到後續媒體</string>
+  <string name="copied_successfully">已複製</string>
   <string name="welcome_do_upload_content_description">上傳到維基共享資源的優良圖片範例</string>
   <string name="welcome_dont_upload_content_description">未上傳範例圖片</string>
   <string name="skip_image">略過此圖片</string>
@@ -490,6 +493,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">無法添加分類。</string>
   <string name="category_edit_button_text">更新分類</string>
+  <string name="coordinates_edit_helper_make_edit_toast">嘗試更新座標。</string>
+  <string name="coordinates_edit_helper_show_edit_title">座標更新</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">成功</string>
+  <string name="coordinates_edit_helper_show_edit_message">座標 %1$s 已添加。</string>
+  <string name="coordinates_edit_helper_edit_message_else">無法添加座標。</string>
+  <string name="coordinates_picking_unsuccessful">無法取得座標。</string>
   <string name="share_image_via">分享圖片透過</string>
   <string name="no_achievements_yet">您還沒有做出任何貢獻</string>
   <string name="account_created">已建立帳號！</string>
@@ -584,4 +593,13 @@
   <string name="media_detail_step_title">媒體詳細資料</string>
   <string name="menu_view_category_page">檢視分類頁面</string>
   <string name="menu_view_item_page">檢視項目頁面</string>
+  <string name="app_ui_language">應用程式使用者介面語言</string>
+  <string name="remove">移除說明和描述</string>
+  <string name="read_help_link">延伸閱讀</string>
+  <string name="choose_a_location">挑選一個位置</string>
+  <string name="pan_and_zoom_to_adjust">平移和縮放來進行調整</string>
+  <string name="exit_location_picker">離開位置點選器</string>
+  <string name="select_location_location_picker">選擇位置</string>
+  <string name="location_picker_image_view" fuzzy="true">位置點選器圖片查看</string>
+  <string name="location_picker_image_view_shadow" fuzzy="true">位置picker_image_view_shadow</string>
 </resources>

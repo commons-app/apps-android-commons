@@ -1,12 +1,11 @@
 package fr.free.nrw.commons.actions
 
 import io.reactivex.Observable
+import io.reactivex.Single
 import org.wikipedia.dataclient.Service
+import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import org.wikipedia.edit.Edit
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
 
 /**
  * This interface facilitates wiki commons page editing services to the Networking module
@@ -73,4 +72,17 @@ interface PageEditInterface {
         @Field("prependtext") prependText: String,
         @Field("token") token: String
     ): Observable<Edit>
+
+    /**
+     * Get wiki text for provided file names
+     * @param titles : Name of the file
+     * @return Single<MwQueryResult>
+     */
+    @GET(
+        Service.MW_API_PREFIX +
+                "action=query&prop=revisions&rvprop=content|timestamp&rvlimit=1&converttitles="
+    )
+    fun getWikiText(
+        @Query("titles") title: String
+    ): Single<MwQueryResponse?>
 }

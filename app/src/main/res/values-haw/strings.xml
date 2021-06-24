@@ -17,7 +17,7 @@
   <string name="uploading_started">Ua hoʻomaka ka hoʻouka!</string>
   <string name="upload_completed_notification_title">Ua hoʻouka ʻia ʻo %1$s</string>
   <string name="upload_completed_notification_text">Kīkē no ka ʻike ʻana o kāu hoʻouka</string>
-  <string name="upload_progress_notification_title_start">Hoʻomaka nei i ka hoʻouka ʻana o %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Hoʻomaka nei i ka hoʻouka ʻana o %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Hoʻouka nei ʻo %1$s</string>
   <string name="upload_progress_notification_title_finishing">Hele a pau ka hoʻouka ʻana o %1$s</string>
   <string name="upload_failed_notification_title">Ua hāʻule ʻo %1$s i ka hoʻouka ʻana</string>

@@ -4,8 +4,7 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.explore.depictions.search.PageableDepictionsDataSource
 import io.reactivex.Single
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers
+import org.junit.Assert
 import org.junit.Test
 
 class PageableDepictionsDataSourceTest {
@@ -17,9 +16,9 @@ class PageableDepictionsDataSourceTest {
             .thenReturn(Single.just(emptyList()))
         val pageableDepictionsDataSource = PageableDepictionsDataSource(mock(), depictsClient)
         pageableDepictionsDataSource.onQueryUpdated("test")
-        assertThat(
+        Assert.assertEquals(
             pageableDepictionsDataSource.loadFunction.invoke(0, 1),
-            Matchers.`is`(emptyList())
+            emptyList<String>()
         )
     }
 }

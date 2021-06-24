@@ -39,13 +39,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -60,7 +60,7 @@ import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.jakewharton.rxbinding2.view.RxView;
-import com.jakewharton.rxbinding2.widget.RxSearchView;
+import com.jakewharton.rxbinding3.appcompat.RxSearchView;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
@@ -221,6 +221,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private LatLngBounds latLngBounds;
     private PlaceAdapter adapter;
     private NearbyParentFragmentInstanceReadyCallback nearbyParentFragmentInstanceReadyCallback;
+
+    /**
+     * Holds filtered markers that are to be shown
+     */
+    private List<NearbyBaseMarker> filteredMarkers;
+    /**
+     * Holds all the markers
+     */
+    private List<NearbyBaseMarker> allMarkers;
 
     @NonNull
     public static NearbyParentFragment newInstance() {
@@ -1241,6 +1250,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         // Remove the previous markers before updating them
         hideAllMarkers();
 
+        filteredMarkers = new ArrayList<>();
+
         for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
             final Place place = markerPlaceGroup.getPlace();
 
@@ -1272,6 +1283,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 updateMarker(markerPlaceGroup.getIsBookmarked(), place, NearbyController.currentLocation);
             }
         }
+
+        mapBox.clear();
+        mapBox.addMarkers(filteredMarkers);
     }
 
     @Override
@@ -1289,25 +1303,35 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         VectorDrawableCompat vectorDrawable = VectorDrawableCompat.create(
             getContext().getResources(), getIconFor(place, isBookmarked), getContext().getTheme());
 
-        for (Marker marker : mapBox.getMarkers()) {
-            if (marker.getTitle() != null && marker.getTitle().equals(place.getName())) {
+        if(curLatLng != null) {
+            for (NearbyBaseMarker nearbyMarker : allMarkers) {
+                if (nearbyMarker.getMarker().getTitle() != null && nearbyMarker.getMarker().getTitle().equals(place.getName())) {
 
-                final Bitmap icon = UiUtils.getBitmap(vectorDrawable);
-                if (curLatLng != null) {
+                    final Bitmap icon = UiUtils.getBitmap(vectorDrawable);
+
                     final String distance = formatDistanceBetween(curLatLng, place.location);
                     place.setDistance(distance);
-                }
 
-                final NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
-                nearbyBaseMarker.title(place.name);
-                nearbyBaseMarker.position(
+                    final NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
+                    nearbyBaseMarker.title(place.name);
+                    nearbyBaseMarker.position(
                         new com.mapbox.mapboxsdk.geometry.LatLng(
-                                place.location.getLatitude(),
-                                place.location.getLongitude()));
-                nearbyBaseMarker.place(place);
-                nearbyBaseMarker.icon(IconFactory.getInstance(getContext())
+                            place.location.getLatitude(),
+                            place.location.getLongitude()));
+                    nearbyBaseMarker.place(place);
+                    nearbyBaseMarker.icon(IconFactory.getInstance(getContext())
                         .fromBitmap(icon));
-                marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
+                    nearbyMarker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
+                    filteredMarkers.add(nearbyBaseMarker);
+                }
+            }
+        } else {
+            for (Marker marker : mapBox.getMarkers()) {
+                if (marker.getTitle() != null && marker.getTitle().equals(place.getName())) {
+
+                    final Bitmap icon = UiUtils.getBitmap(vectorDrawable);
+                    marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
+                }
             }
         }
     }
@@ -1348,6 +1372,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void addNearbyMarkersToMapBoxMap(final List<NearbyBaseMarker> nearbyBaseMarkers, final Marker selectedMarker) {
         if (isMapBoxReady && mapBox != null) {
+            allMarkers = new ArrayList<>(nearbyBaseMarkers);
             mapBox.addMarkers(nearbyBaseMarkers);
             setMapMarkerActions(selectedMarker);
             presenter.updateMapMarkersToController(nearbyBaseMarkers);
@@ -1521,7 +1546,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         title.setText(selectedPlace.name);
         distance.setText(selectedPlace.distance);
-        description.setText(selectedPlace.getLongDescription());
+        // Remove label since it is double information
+        String descriptionText = selectedPlace.getLongDescription()
+            .replace(selectedPlace.getName() + " (","");
+        descriptionText = (descriptionText.equals(selectedPlace.getLongDescription()) ? descriptionText : descriptionText.replaceFirst(".$",""));
+        // Set the short description after we remove place name from long description
+        description.setText(descriptionText);
 
         fabCamera.setOnClickListener(view -> {
             if (fabCamera.isShown()) {
