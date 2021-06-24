@@ -502,6 +502,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Nepodarilo sa pridať kategórie.</string>
   <string name="category_edit_button_text">Aktualizovať kategórie</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Pokus o aktualizáciu súradníc.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Aktualizácia súradníc</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Úspech</string>
+  <string name="coordinates_edit_helper_show_edit_message">Súradnice %1$s sú pridané.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Nepodarilo sa pridať súradnice.</string>
+  <string name="coordinates_picking_unsuccessful">Nepodarilo sa získať súradnice.</string>
   <string name="share_image_via">Zdieľať obrázok cez</string>
   <string name="no_achievements_yet">Nemáte zatiaľ žiadne príspevky</string>
   <string name="account_created">Účet bol vytvorený!</string>
@@ -599,4 +605,11 @@
   <string name="app_ui_language">Jazyk používateľského rozhrania aplikácie</string>
   <string name="remove">Odstráni titulky a popis</string>
   <string name="read_help_link">Čítať viac</string>
+  <string name="media_detail_in_all_languages">Pre všetky jazyky</string>
+  <string name="choose_a_location">Vybrať polohu</string>
+  <string name="pan_and_zoom_to_adjust">Posúvať a zväčšovať pre nastavenie</string>
+  <string name="exit_location_picker">Odísť z výberu polohy</string>
+  <string name="select_location_location_picker">Vybrať lokalizáciu</string>
+  <string name="location_picker_image_view">Obrázok výberu polohy</string>
+  <string name="location_picker_image_view_shadow">Tieň obrázka pre výber polohy</string>
 </resources>
