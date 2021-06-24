@@ -594,4 +594,5 @@
   <string name="app_ui_language">Idioma da interface do usuário do aplicativo</string>
   <string name="remove">Remove uma legenda e descrição</string>
   <string name="read_help_link">Leia mais</string>
+  <string name="media_detail_in_all_languages">Em todas os idiomas</string>
 </resources>

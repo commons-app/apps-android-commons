@@ -254,6 +254,7 @@
   <string name="upload_problem_different_geolocation">这张图片是在不同的地点拍摄的。</string>
   <string name="upload_problem_fbmd">请仅上传由您自己拍摄的图像。请勿上传您在他人的Facebook账户上所发现的图像。</string>
   <string name="upload_problem_do_you_continue">仍然上传这张图片？</string>
+  <string name="upload_connection_error_alert_title">连接错误</string>
   <string name="upload_connection_error_alert_detail">上传过程需要有效的互联网访问。请检查您的网络连接。</string>
   <string name="upload_problem_image">在图片中发现的问题</string>
   <string name="internet_downloaded">请仅上传由您自己拍摄的图像。请勿上传您从互联网下载的图像。</string>
@@ -496,6 +497,12 @@
   <string name="delete_helper_ask_alert_set_positive_button_reason">由于他是</string>
   <string name="category_edit_helper_make_edit_toast">正在尝试更新分类。</string>
   <string name="category_edit_helper_show_edit_title_success">成功</string>
+  <string name="coordinates_edit_helper_make_edit_toast">尝试更新坐标。</string>
+  <string name="coordinates_edit_helper_show_edit_title">坐标更新</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">完成</string>
+  <string name="coordinates_edit_helper_show_edit_message">坐标 %1$s 已被添加。</string>
+  <string name="coordinates_edit_helper_edit_message_else">无法添加坐标。</string>
+  <string name="coordinates_picking_unsuccessful">无法获取坐标。</string>
   <string name="share_image_via">分享图片透过</string>
   <string name="no_achievements_yet">您目前还没有作出任何贡献</string>
   <string name="account_created">账户已创建！</string>
@@ -550,4 +557,11 @@
   <string name="menu_view_category_page">查看分类页面</string>
   <string name="menu_view_item_page">查看项目页面</string>
   <string name="read_help_link">阅读更多</string>
+  <string name="media_detail_in_all_languages">在所有语言中</string>
+  <string name="choose_a_location">选择一个地点</string>
+  <string name="pan_and_zoom_to_adjust">放大和做小来调整</string>
+  <string name="exit_location_picker">退出位置拾取器</string>
+  <string name="select_location_location_picker">选择地点</string>
+  <string name="location_picker_image_view">位置拾取器的图像视图</string>
+  <string name="location_picker_image_view_shadow">地点拾取器的照片观测视野的阴影。</string>
 </resources>
