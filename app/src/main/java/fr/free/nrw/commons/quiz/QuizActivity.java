@@ -2,11 +2,7 @@ package fr.free.nrw.commons.quiz;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -39,13 +35,13 @@ public class QuizActivity extends AppCompatActivity {
     private int questionIndex = 0;
     private int score;
     /**
-     * positiveAnswerIsChecked : represents yes click event
+     * isPositiveAnswerChecked : represents yes click event
      */
-    private boolean positiveAnswerIsChecked;
+    private boolean isPositiveAnswerChecked;
     /**
-     * negativeAnswerIsChecked : represents no click event
+     * isNegativeAnswerChecked : represents no click event
      */
-    private boolean negativeAnswerIsChecked;
+    private boolean isNegativeAnswerChecked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +60,7 @@ public class QuizActivity extends AppCompatActivity {
      * to move to next question and check whether answer is selected or not
      */
     public void setNextQuestion(){
-        if ( questionIndex <= quiz.size() && (positiveAnswerIsChecked || negativeAnswerIsChecked)) {
+        if ( questionIndex <= quiz.size() && (isPositiveAnswerChecked || isNegativeAnswerChecked)) {
             evaluateScore();
         }
     }
@@ -108,14 +104,14 @@ public class QuizActivity extends AppCompatActivity {
                 .build());
 
         imageView.setImageURI(quiz.get(questionIndex).getUrl());
-        positiveAnswerIsChecked = false;
-        negativeAnswerIsChecked = false;
+        isPositiveAnswerChecked = false;
+        isNegativeAnswerChecked = false;
         positiveAnswer.setOnClickListener(view -> {
-            positiveAnswerIsChecked = true;
+            isPositiveAnswerChecked = true;
             setNextQuestion();
         });
         negativeAnswer.setOnClickListener(view -> {
-            negativeAnswerIsChecked = true;
+            isNegativeAnswerChecked = true;
             setNextQuestion();
         });
     }
@@ -124,8 +120,8 @@ public class QuizActivity extends AppCompatActivity {
      * to evaluate score and check whether answer is correct or wrong
      */
     public void evaluateScore() {
-        if ((quiz.get(questionIndex).isAnswer() && positiveAnswerIsChecked) ||
-                (!quiz.get(questionIndex).isAnswer() && negativeAnswerIsChecked) ){
+        if ((quiz.get(questionIndex).isAnswer() && isPositiveAnswerChecked) ||
+                (!quiz.get(questionIndex).isAnswer() && isNegativeAnswerChecked) ){
             customAlert(getResources().getString(R.string.correct),quiz.get(questionIndex).getAnswerMessage() );
             score++;
         } else {
