@@ -8,74 +8,36 @@
   android:layout_marginBottom="@dimen/activity_margin_vertical"
   android:orientation="horizontal">
 
-    <LinearLayout
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toStartOf="@+id/guideline"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent">
-
-        <RadioButton
-          android:id="@+id/quiz_positive_answer"
-          android:layout_width="wrap_content"
-          android:layout_height="match_parent"
-          android:layout_marginLeft="@dimen/activity_margin_horizontal"
-          android:layout_marginRight="@dimen/activity_margin_horizontal"
-          android:textIsSelectable="false" />
-
-        <TextView
-          style="?android:textAppearanceMedium"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="YES"
-          android:textColor="@color/secondaryTextColor" />
-
-        <ImageView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="@dimen/activity_margin_horizontal"
-          app:srcCompat="@drawable/ic_done_black_24dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-      android:id="@+id/linearLayout"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="@+id/guideline"
-      app:layout_constraintTop_toTopOf="parent">
-
-        <RadioButton
-          android:id="@+id/quiz_negative_answer"
-          android:layout_width="wrap_content"
-          android:layout_height="match_parent"
-          android:layout_marginLeft="@dimen/activity_margin_horizontal"
-          android:layout_marginRight="@dimen/activity_margin_horizontal"
-          android:textIsSelectable="false" />
-
-        <TextView
-          style="?android:textAppearanceMedium"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="NO"
-          android:textColor="@color/secondaryTextColor" />
-
-        <ImageView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="@dimen/activity_margin_horizontal"
-          app:srcCompat="@drawable/ic_clear_black_24dp" />
-    </LinearLayout>
-
     <androidx.constraintlayout.widget.Guideline
       android:id="@+id/guideline"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="vertical"
       app:layout_constraintGuide_percent="0.5" />
+
+    <RadioButton
+      android:id="@+id/quiz_positive_answer"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:text="YES"
+      android:textColor="@color/white"
+      android:layout_marginLeft="@dimen/activity_margin_horizontal"
+      android:layout_marginRight="@dimen/activity_margin_horizontal"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@+id/guideline"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioButton
+      android:id="@+id/quiz_negative_answer"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:text="NO"
+      android:textColor="@color/white"
+      android:layout_marginLeft="@dimen/activity_margin_horizontal"
+      android:layout_marginRight="@dimen/activity_margin_horizontal"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="@+id/guideline"
+      app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
