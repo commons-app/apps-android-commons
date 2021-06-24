@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -29,14 +30,22 @@ public class QuizActivity extends AppCompatActivity {
     @BindView(R.id.question_image) SimpleDraweeView imageView;
     @BindView(R.id.question_text) TextView questionText;
     @BindView(R.id.question_title) TextView questionTitle;
-    @BindView(R.id.quiz_positive_answer) RadioButton positiveAnswer;
-    @BindView(R.id.quiz_negative_answer) RadioButton negativeAnswer;
+    @BindView(R.id.quiz_positive_answer) Button positiveAnswer;
+    @BindView(R.id.quiz_negative_answer) Button negativeAnswer;
     @BindView(R.id.toolbar) Toolbar toolbar;
 
     private QuizController quizController = new QuizController();
     private ArrayList<QuizQuestion> quiz = new ArrayList<>();
     private int questionIndex = 0;
     private int score;
+    /**
+     * positiveAnswerIsChecked : represents yes click event
+     */
+    private boolean positiveAnswerIsChecked;
+    /**
+     * negativeAnswerIsChecked : represents no click event
+     */
+    private boolean negativeAnswerIsChecked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,23 +64,16 @@ public class QuizActivity extends AppCompatActivity {
      * to move to next question and check whether answer is selected or not
      */
     public void setNextQuestion(){
-        if ( questionIndex <= quiz.size() && (positiveAnswer.isChecked() || negativeAnswer.isChecked())) {
+        if ( questionIndex <= quiz.size() && (positiveAnswerIsChecked || negativeAnswerIsChecked)) {
             evaluateScore();
-        } else if ( !positiveAnswer.isChecked() && !negativeAnswer.isChecked()){
-            AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.setTitle(getResources().getString(R.string.warning));
-            alert.setMessage(getResources().getString(R.string.warning_for_no_answer));
-            alert.setPositiveButton(R.string.continue_message, (dialog, which) -> dialog.dismiss());
-            AlertDialog dialog = alert.create();
-            dialog.show();
         }
-
     }
 
     @OnClick(R.id.next_button)
     public void notKnowAnswer(){
         customAlert("Information", quiz.get(questionIndex).getAnswerMessage());
     }
+
     /**
      * to give warning before ending quiz
      */
@@ -106,19 +108,24 @@ public class QuizActivity extends AppCompatActivity {
                 .build());
 
         imageView.setImageURI(quiz.get(questionIndex).getUrl());
-        new RadioGroupHelper(this, R.id.quiz_positive_answer, R.id.quiz_negative_answer);
-        positiveAnswer.setChecked(false);
-        negativeAnswer.setChecked(false);
-        positiveAnswer.setOnClickListener(view -> setNextQuestion());
-        negativeAnswer.setOnClickListener(view -> setNextQuestion());
+        positiveAnswerIsChecked = false;
+        negativeAnswerIsChecked = false;
+        positiveAnswer.setOnClickListener(view -> {
+            positiveAnswerIsChecked = true;
+            setNextQuestion();
+        });
+        negativeAnswer.setOnClickListener(view -> {
+            negativeAnswerIsChecked = true;
+            setNextQuestion();
+        });
     }
 
     /**
      * to evaluate score and check whether answer is correct or wrong
      */
     public void evaluateScore() {
-        if ((quiz.get(questionIndex).isAnswer() && positiveAnswer.isChecked()) ||
-                (!quiz.get(questionIndex).isAnswer() && negativeAnswer.isChecked()) ){
+        if ((quiz.get(questionIndex).isAnswer() && positiveAnswerIsChecked) ||
+                (!quiz.get(questionIndex).isAnswer() && negativeAnswerIsChecked) ){
             customAlert(getResources().getString(R.string.correct),quiz.get(questionIndex).getAnswerMessage() );
             score++;
         } else {
