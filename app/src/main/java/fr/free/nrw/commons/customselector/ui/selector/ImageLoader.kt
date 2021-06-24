@@ -2,6 +2,8 @@ package fr.free.nrw.commons.customselector.ui.selector
 
 import android.content.Context
 import androidx.exifinterface.media.ExifInterface
+import fr.free.nrw.commons.customselector.database.UploadedStatus
+import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter.ImageViewHolder
 import fr.free.nrw.commons.filepicker.PickedFiles
@@ -39,6 +41,11 @@ class ImageLoader @Inject constructor(
     var fileUtilsWrapper: FileUtilsWrapper,
 
     /**
+     * UploadedStatusDao for cache query.
+     */
+    var uploadedStatusDao: UploadedStatusDao,
+
+    /**
      * Context for coroutine.
      */
     val context: Context) {
@@ -62,22 +69,54 @@ class ImageLoader @Inject constructor(
         holder.itemNotUploaded()
 
         CoroutineScope(Dispatchers.Main).launch {
-            var value = false
+
+            var result : Boolean? = null
             withContext(Dispatchers.Default) {
+
                 if(mapHolderImage[holder] != image) {
                     // View holder has a new query image, terminate this query.
                     return@withContext
                 }
-                val sha1 = getSHA1(image)
+
+                val imageSHA1 = fileUtilsWrapper.getSHA1(context.contentResolver.openInputStream(image.uri))
+                var uploadedStatus = uploadedStatusDao.getUploadedFromImageSHA1(imageSHA1)
+                var sha1 = ""
+
+                if(uploadedStatus != null) {
+                    // returned from database.
+
+                    sha1 = uploadedStatus.modifiedImageSHA1
+                    if(mapHolderImage[holder] != image) {
+                        // View holder has a new query image, terminate this query.
+                        return@withContext
+                    }
+                    else if(uploadedStatus.imageResult || uploadedStatus.modifiedImageResult) {
+                        // already uploaded image.
+                        result = true
+                    }
+                    else if(uploadedStatus.lastUpdated!!.date >=
+                                        Calendar.getInstance().time.date - invalidateDayCount) {
+                        // database entry valid.
+                        result = false
+                    }
+                }
+                else {
+                    sha1 = getSHA1(image)
+                }
                 if(mapHolderImage[holder] != image) {
                     // View holder has a new query image, terminate this query.
                     return@withContext
                 }
-                value = querySHA1(sha1)
+                if(result == null) {
+                    // not found in database or database result invalid.
+                    result = querySHA1(sha1)
+                    uploadedStatus = UploadedStatus(imageSHA1, sha1, false, result!!)
+                    uploadedStatusDao.insertUploaded(uploadedStatus)
+                }
             }
             if(mapHolderImage[holder] == image) {
                 // View holder and latest query image match, setup the view.
-                if (value) {
+                if (result!!) {
                     holder.itemUploaded()
                 } else {
                     holder.itemNotUploaded()
@@ -131,6 +170,13 @@ class ImageLoader @Inject constructor(
         val sha1 = fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(uploadableFile.filePath))
         uploadableFile.file.delete()
         return sha1
+    }
+
+    companion object {
+        /**
+         * Invalidate day count.
+         */
+        const val invalidateDayCount: Int = 7
     }
 
 }

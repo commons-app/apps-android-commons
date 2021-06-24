@@ -17,6 +17,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionDao;
+import fr.free.nrw.commons.customselector.database.UploadedStatusDao;
 import fr.free.nrw.commons.customselector.ui.selector.ImageFileLoader;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.db.AppDatabase;
@@ -68,8 +69,8 @@ public class CommonsApplicationModule {
     }
 
     @Provides
-    public ImageFileLoader providesImageFileLoader() {
-        return new ImageFileLoader(this.applicationContext);
+    public ImageFileLoader providesImageFileLoader(Context context) {
+        return new ImageFileLoader(context);
     }
 
     @Provides
@@ -250,11 +251,19 @@ public class CommonsApplicationModule {
     }
 
     /**
-     * Get the reference of DepictsDao class
+     * Get the reference of DepictsDao class.
      */
     @Provides
     public DepictsDao providesDepictDao(AppDatabase appDatabase) {
         return appDatabase.DepictsDao();
+    }
+
+    /**
+     * Get the reference of UploadedStatus class.
+     */
+    @Provides
+    public UploadedStatusDao providesUploadedStatusDao(AppDatabase appDatabase) {
+        return appDatabase.UploadedStatusDao();
     }
 
     @Provides
