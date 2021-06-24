@@ -8,7 +8,7 @@ import java.util.*
 /**
  * Entity class for Uploaded Status.
  */
-@Entity(tableName = "uploaded_table", indices = [Index(value = ["modifiedImageSHA1"])])
+@Entity(tableName = "uploaded_table", indices = [Index(value = ["modifiedImageSHA1"], unique = true)])
 data class UploadedStatus(
 
     /**

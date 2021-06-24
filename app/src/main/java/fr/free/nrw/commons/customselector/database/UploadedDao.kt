@@ -45,8 +45,8 @@ abstract class UploadedStatusDao {
     /**
      * Query uploaded status with modified image sha1.
      */
-    @Query("SELECT * FROM uploaded_table WHERE modifiedImageSHA1 = (:imageSHA1) ")
-    abstract suspend fun getFromModifiedImageSHA1(imageSHA1 : String) : UploadedStatus
+    @Query("SELECT * FROM uploaded_table WHERE modifiedImageSHA1 = (:modifiedImageSHA1) ")
+    abstract suspend fun getFromModifiedImageSHA1(modifiedImageSHA1 : String) : UploadedStatus
 
     /**
      * Asynchronous insert into uploaded status table.
@@ -99,11 +99,11 @@ abstract class UploadedStatusDao {
     /**
      * Asynchronous modified image sha1 query.
      */
-    fun getUploadedFromModifiedImageSHA1(imageSHA1: String) : UploadedStatus? {
+    fun getUploadedFromModifiedImageSHA1(modifiedImageSHA1: String) : UploadedStatus? {
         var queryResult : UploadedStatus? = null
         runBlocking {
             launch(Dispatchers.IO) {
-                queryResult = getFromModifiedImageSHA1(imageSHA1)
+                queryResult = getFromModifiedImageSHA1(modifiedImageSHA1)
             }
         }
         return queryResult
