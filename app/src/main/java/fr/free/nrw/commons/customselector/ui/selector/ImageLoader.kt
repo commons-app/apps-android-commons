@@ -11,14 +11,12 @@ import fr.free.nrw.commons.filepicker.PickedFiles
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
-import fr.free.nrw.commons.upload.ImageProcessingService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.IOException
-import java.net.URI
 import java.net.UnknownHostException
 import java.util.*
 import javax.inject.Inject
@@ -60,12 +58,12 @@ class ImageLoader @Inject constructor(
      */
     private var mapImageSHA1: HashMap<Image, String> = HashMap()
     private var mapHolderImage : HashMap<ImageViewHolder, Image> = HashMap()
-    private var mapResult: HashMap<String, Boolean> = HashMap()
+    private var mapResult: HashMap<String, Int> = HashMap()
 
     /**
      * Query image and setUp the view.
      */
-    fun queryAndSetView(holder: ImageViewHolder, image: Image){
+    fun queryAndSetView(holder: ImageViewHolder, image: Image) {
 
         /**
          * Recycler view uses same view holder, so we can identify the latest query image from holder.
@@ -75,29 +73,34 @@ class ImageLoader @Inject constructor(
 
         CoroutineScope(Dispatchers.Main).launch {
 
-            var result : Boolean? = null
+            var result : Int = NOT_FOUND
             withContext(Dispatchers.Default) {
 
                 if (mapHolderImage[holder] == image) {
                     val imageSHA1 = getImageSHA1(image.uri)
                     val uploadedStatus = uploadedStatusDao.getUploadedFromImageSHA1(imageSHA1)
-                    var sha1 = ""
 
-                    if (uploadedStatus != null) {
-                        sha1 = uploadedStatus.modifiedImageSHA1
+                    val sha1 = uploadedStatus?.let {
                         result = getResultFromUploadedStatus(uploadedStatus)
-                    } else if (mapHolderImage[holder] == image) {
-                            sha1 = getSHA1(image)
-                    }
+                        uploadedStatus.modifiedImageSHA1
+                        } ?: run {
+                            if(mapHolderImage[holder] == image) {
+                                getSHA1(image)
+                            } else {
+                                ""
+                            }
+                        }
 
-                    if (mapHolderImage[holder] == image && result == null) {
+                    if (mapHolderImage[holder] == image &&
+                        result in arrayOf(NOT_FOUND, RESULT_INVALID) &&
+                        sha1.isNotEmpty()) {
                             result = querySHA1(sha1)
-                            result?.let { uploadedStatusDao.insertUploaded(UploadedStatus(imageSHA1, sha1, false, it)) }
+                            insertIntoUploaded(imageSHA1, sha1, false, result == RESULT_TRUE)
                     }
                 }
             }
             if(mapHolderImage[holder] == image) {
-                result?.let { if (it) holder.itemUploaded() else holder.itemNotUploaded() }
+                if (result == RESULT_TRUE) holder.itemUploaded() else holder.itemNotUploaded()
             }
         }
     }
@@ -107,14 +110,16 @@ class ImageLoader @Inject constructor(
      *
      * @return Query result.
      */
-    private fun querySHA1(SHA1: String): Boolean? {
-        if(mapResult[SHA1] != null) {
-            return mapResult[SHA1]!!
+    private fun querySHA1(SHA1: String): Int {
+        mapResult[SHA1]?.let{
+            return it
         }
-        var isUploaded: Boolean? = null
+        var apiResult = RESULT_FALSE
         try {
-            isUploaded = mediaClient.checkFileExistsUsingSha(SHA1).blockingGet()
-            mapResult[SHA1] = isUploaded
+            if (mediaClient.checkFileExistsUsingSha(SHA1).blockingGet()) {
+                apiResult = RESULT_TRUE
+                mapResult[SHA1] = RESULT_TRUE
+            }
         } catch (e: Exception) {
             if (e is UnknownHostException) {
                 // Handle no network connection.
@@ -122,7 +127,7 @@ class ImageLoader @Inject constructor(
             }
             e.printStackTrace()
         } finally {
-            return isUploaded
+            return apiResult
         }
     }
 
@@ -131,30 +136,34 @@ class ImageLoader @Inject constructor(
      *
      * @return sha1 of the image
      */
-    private fun getSHA1(image: Image): String{
-        if(mapImageSHA1[image] != null) {
-            return mapImageSHA1[image]!!
+    private fun getSHA1(image: Image): String {
+        mapImageSHA1[image]?.let{
+            return it
         }
         val sha1 = generateModifiedSHA1(image);
         mapImageSHA1[image] = sha1;
         return sha1;
     }
 
+    private fun insertIntoUploaded(imageSha1:String, modifiedImageSha1:String, imageResult:Boolean, modifiedImageResult: Boolean){
+        uploadedStatusDao.insertUploaded(UploadedStatus(imageSha1, modifiedImageSha1, imageResult, modifiedImageResult))
+    }
+
     private fun getImageSHA1(uri: Uri): String {
         return fileUtilsWrapper.getSHA1(context.contentResolver.openInputStream(uri))
     }
 
-    private fun getResultFromUploadedStatus(uploadedStatus: UploadedStatus): Boolean? {
+    private fun getResultFromUploadedStatus(uploadedStatus: UploadedStatus): Int {
         if (uploadedStatus.imageResult || uploadedStatus.modifiedImageResult) {
-            return true
+            return RESULT_TRUE
         } else {
             uploadedStatus.lastUpdated?.let {
-                if (it.date >= Calendar.getInstance().time.date - invalidateDayCount) {
-                    return false
+                if (it.date >= Calendar.getInstance().time.date - INVALIDATE_DAY_COUNT) {
+                    return RESULT_FALSE
                 }
             }
         }
-        return null
+        return RESULT_INVALID
     }
     /**
      * Generate Modified SHA1 using present Exif settings.
@@ -176,10 +185,11 @@ class ImageLoader @Inject constructor(
     }
 
     companion object {
-        /**
-         * Invalidate day count.
-         */
-        const val invalidateDayCount: Int = 7
+        const val INVALIDATE_DAY_COUNT: Int = 7
+        const val RESULT_TRUE: Int = 1
+        const val RESULT_FALSE: Int = 0
+        const val RESULT_INVALID: Int = -1
+        const val NOT_FOUND: Int = -2
     }
 
 }
