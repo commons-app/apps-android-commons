@@ -58,7 +58,7 @@ class ImageLoader @Inject constructor(
      */
     private var mapImageSHA1: HashMap<Image, String> = HashMap()
     private var mapHolderImage : HashMap<ImageViewHolder, Image> = HashMap()
-    private var mapResult: HashMap<String, Int> = HashMap()
+    private var mapResult: HashMap<String, Result> = HashMap()
 
     /**
      * Query image and setUp the view.
@@ -73,7 +73,7 @@ class ImageLoader @Inject constructor(
 
         CoroutineScope(Dispatchers.Main).launch {
 
-            var result : Int = NOT_FOUND
+            var result : Result = Result.NOTFOUND
             withContext(Dispatchers.Default) {
 
                 if (mapHolderImage[holder] == image) {
@@ -92,15 +92,15 @@ class ImageLoader @Inject constructor(
                         }
 
                     if (mapHolderImage[holder] == image &&
-                        result in arrayOf(NOT_FOUND, RESULT_INVALID) &&
+                        result in arrayOf(Result.NOTFOUND, Result.INVALID) &&
                         sha1.isNotEmpty()) {
                             result = querySHA1(sha1)
-                            insertIntoUploaded(imageSHA1, sha1, false, result == RESULT_TRUE)
+                            insertIntoUploaded(imageSHA1, sha1, false, result is Result.TRUE)
                     }
                 }
             }
             if(mapHolderImage[holder] == image) {
-                if (result == RESULT_TRUE) holder.itemUploaded() else holder.itemNotUploaded()
+                if (result is Result.TRUE) holder.itemUploaded() else holder.itemNotUploaded()
             }
         }
     }
@@ -110,15 +110,14 @@ class ImageLoader @Inject constructor(
      *
      * @return Query result.
      */
-    private fun querySHA1(SHA1: String): Int {
+    private fun querySHA1(SHA1: String): Result {
         mapResult[SHA1]?.let{
             return it
         }
-        var apiResult = RESULT_FALSE
         try {
             if (mediaClient.checkFileExistsUsingSha(SHA1).blockingGet()) {
-                apiResult = RESULT_TRUE
-                mapResult[SHA1] = RESULT_TRUE
+                mapResult[SHA1] = Result.TRUE
+                return Result.TRUE
             }
         } catch (e: Exception) {
             if (e is UnknownHostException) {
@@ -126,9 +125,8 @@ class ImageLoader @Inject constructor(
                 Timber.e(e, "Network Connection Error")
             }
             e.printStackTrace()
-        } finally {
-            return apiResult
         }
+        return Result.FALSE
     }
 
     /**
@@ -153,17 +151,17 @@ class ImageLoader @Inject constructor(
         return fileUtilsWrapper.getSHA1(context.contentResolver.openInputStream(uri))
     }
 
-    private fun getResultFromUploadedStatus(uploadedStatus: UploadedStatus): Int {
+    private fun getResultFromUploadedStatus(uploadedStatus: UploadedStatus): Result {
         if (uploadedStatus.imageResult || uploadedStatus.modifiedImageResult) {
-            return RESULT_TRUE
+            return Result.TRUE
         } else {
             uploadedStatus.lastUpdated?.let {
                 if (it.date >= Calendar.getInstance().time.date - INVALIDATE_DAY_COUNT) {
-                    return RESULT_FALSE
+                    return Result.FALSE
                 }
             }
         }
-        return RESULT_INVALID
+        return Result.INVALID
     }
     /**
      * Generate Modified SHA1 using present Exif settings.
@@ -184,12 +182,15 @@ class ImageLoader @Inject constructor(
         return sha1
     }
 
+    sealed class Result {
+        object TRUE : Result()
+        object FALSE : Result()
+        object INVALID : Result()
+        object NOTFOUND : Result()
+    }
+
     companion object {
         const val INVALIDATE_DAY_COUNT: Int = 7
-        const val RESULT_TRUE: Int = 1
-        const val RESULT_FALSE: Int = 0
-        const val RESULT_INVALID: Int = -1
-        const val NOT_FOUND: Int = -2
     }
 
 }
