@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
 import android.content.Context
+import android.net.Uri
 import androidx.exifinterface.media.ExifInterface
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
@@ -10,12 +11,15 @@ import fr.free.nrw.commons.filepicker.PickedFiles
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
+import fr.free.nrw.commons.upload.ImageProcessingService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.IOException
+import java.net.URI
+import java.net.UnknownHostException
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.HashMap
@@ -48,14 +52,15 @@ class ImageLoader @Inject constructor(
     /**
      * Context for coroutine.
      */
-    val context: Context) {
+    val context: Context
+) {
 
     /**
      * Maps to facilitate image query.
      */
-    private var mapImageSHA1: HashMap<Image,String> = HashMap()
-    private var mapHolderImage : HashMap<ImageViewHolder,Image> = HashMap()
-    private var mapResult: HashMap<String,Boolean> = HashMap()
+    private var mapImageSHA1: HashMap<Image, String> = HashMap()
+    private var mapHolderImage : HashMap<ImageViewHolder, Image> = HashMap()
+    private var mapResult: HashMap<String, Boolean> = HashMap()
 
     /**
      * Query image and setUp the view.
@@ -73,54 +78,26 @@ class ImageLoader @Inject constructor(
             var result : Boolean? = null
             withContext(Dispatchers.Default) {
 
-                if(mapHolderImage[holder] != image) {
-                    // View holder has a new query image, terminate this query.
-                    return@withContext
-                }
+                if (mapHolderImage[holder] == image) {
+                    val imageSHA1 = getImageSHA1(image.uri)
+                    val uploadedStatus = uploadedStatusDao.getUploadedFromImageSHA1(imageSHA1)
+                    var sha1 = ""
 
-                val imageSHA1 = fileUtilsWrapper.getSHA1(context.contentResolver.openInputStream(image.uri))
-                var uploadedStatus = uploadedStatusDao.getUploadedFromImageSHA1(imageSHA1)
-                var sha1 = ""
+                    if (uploadedStatus != null) {
+                        sha1 = uploadedStatus.modifiedImageSHA1
+                        result = getResultFromUploadedStatus(uploadedStatus)
+                    } else if (mapHolderImage[holder] == image) {
+                            sha1 = getSHA1(image)
+                    }
 
-                if(uploadedStatus != null) {
-                    // returned from database.
-
-                    sha1 = uploadedStatus.modifiedImageSHA1
-                    if(mapHolderImage[holder] != image) {
-                        // View holder has a new query image, terminate this query.
-                        return@withContext
+                    if (mapHolderImage[holder] == image && result == null) {
+                            result = querySHA1(sha1)
+                            result?.let { uploadedStatusDao.insertUploaded(UploadedStatus(imageSHA1, sha1, false, it)) }
                     }
-                    else if(uploadedStatus.imageResult || uploadedStatus.modifiedImageResult) {
-                        // already uploaded image.
-                        result = true
-                    }
-                    else if(uploadedStatus.lastUpdated!!.date >=
-                                        Calendar.getInstance().time.date - invalidateDayCount) {
-                        // database entry valid.
-                        result = false
-                    }
-                }
-                else {
-                    sha1 = getSHA1(image)
-                }
-                if(mapHolderImage[holder] != image) {
-                    // View holder has a new query image, terminate this query.
-                    return@withContext
-                }
-                if(result == null) {
-                    // not found in database or database result invalid.
-                    result = querySHA1(sha1)
-                    uploadedStatus = UploadedStatus(imageSHA1, sha1, false, result!!)
-                    uploadedStatusDao.insertUploaded(uploadedStatus)
                 }
             }
-            if(mapHolderImage[holder] == image && result!=null) {
-                // View holder and latest query image match, setup the view.
-                if (result!!) {
-                    holder.itemUploaded()
-                } else {
-                    holder.itemNotUploaded()
-                }
+            if(mapHolderImage[holder] == image) {
+                result?.let { if (it) holder.itemUploaded() else holder.itemNotUploaded() }
             }
         }
     }
@@ -130,13 +107,23 @@ class ImageLoader @Inject constructor(
      *
      * @return Query result.
      */
-    private fun querySHA1(SHA1: String): Boolean {
+    private fun querySHA1(SHA1: String): Boolean? {
         if(mapResult[SHA1] != null) {
             return mapResult[SHA1]!!
         }
-        val isUploaded = mediaClient.checkFileExistsUsingSha(SHA1).blockingGet()
-        mapResult[SHA1] = isUploaded
-        return isUploaded
+        var isUploaded: Boolean? = null
+        try {
+            isUploaded = mediaClient.checkFileExistsUsingSha(SHA1).blockingGet()
+            mapResult[SHA1] = isUploaded
+        } catch (e: Exception) {
+            if (e is UnknownHostException) {
+                // Handle no network connection.
+                Timber.e(e, "Network Connection Error")
+            }
+            e.printStackTrace()
+        } finally {
+            return isUploaded
+        }
     }
 
     /**
@@ -153,6 +140,22 @@ class ImageLoader @Inject constructor(
         return sha1;
     }
 
+    private fun getImageSHA1(uri: Uri): String {
+        return fileUtilsWrapper.getSHA1(context.contentResolver.openInputStream(uri))
+    }
+
+    private fun getResultFromUploadedStatus(uploadedStatus: UploadedStatus): Boolean? {
+        if (uploadedStatus.imageResult || uploadedStatus.modifiedImageResult) {
+            return true
+        } else {
+            uploadedStatus.lastUpdated?.let {
+                if (it.date >= Calendar.getInstance().time.date - invalidateDayCount) {
+                    return false
+                }
+            }
+        }
+        return null
+    }
     /**
      * Generate Modified SHA1 using present Exif settings.
      *

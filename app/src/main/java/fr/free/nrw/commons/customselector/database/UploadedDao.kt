@@ -1,10 +1,9 @@
 package fr.free.nrw.commons.customselector.database
 
 import androidx.room.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.util.*
+import kotlinx.coroutines.*
 
 /**
  * UploadedStatusDao for Custom Selector.
@@ -51,62 +50,39 @@ abstract class UploadedStatusDao {
     /**
      * Asynchronous insert into uploaded status table.
      */
-    fun insertUploaded(uploadedStatus: UploadedStatus) {
-        runBlocking {
-            launch(Dispatchers.IO) {
+    fun insertUploaded(uploadedStatus: UploadedStatus) = runBlocking {
+        async {
                 uploadedStatus.lastUpdated = Calendar.getInstance().time as Date?
                 insert(uploadedStatus)
-            }
-        }
+            }.await()
     }
 
     /**
      * Asynchronous delete from uploaded status table.
      */
-    fun deleteUploaded(uploadedStatus: UploadedStatus) {
-        runBlocking {
-            launch(Dispatchers.IO) {
-                delete(uploadedStatus)
-            }
-        }
+    fun deleteUploaded(uploadedStatus: UploadedStatus) = runBlocking {
+        async { delete(uploadedStatus) }
     }
 
     /**
      * Asynchronous update entry in uploaded status table.
      */
-    fun updateUploaded(uploadedStatus: UploadedStatus) {
-        runBlocking {
-            launch(Dispatchers.IO) {
-                uploadedStatus.lastUpdated = Calendar.getInstance().time as Date?
-                update(uploadedStatus)
-            }
-        }
+    fun updateUploaded(uploadedStatus: UploadedStatus) = runBlocking {
+        async { update(uploadedStatus) }
     }
 
     /**
      * Asynchronous image sha1 query.
      */
-    fun getUploadedFromImageSHA1(imageSHA1: String) : UploadedStatus? {
-        var queryResult : UploadedStatus? = null
-        runBlocking {
-            launch(Dispatchers.IO) {
-               queryResult = getFromImageSHA1(imageSHA1)
-            }
-        }
-        return queryResult
+    fun getUploadedFromImageSHA1(imageSHA1: String) = runBlocking<UploadedStatus?> {
+        async { getFromImageSHA1(imageSHA1) }.await()
     }
 
     /**
      * Asynchronous modified image sha1 query.
      */
-    fun getUploadedFromModifiedImageSHA1(modifiedImageSHA1: String) : UploadedStatus? {
-        var queryResult : UploadedStatus? = null
-        runBlocking {
-            launch(Dispatchers.IO) {
-                queryResult = getFromModifiedImageSHA1(modifiedImageSHA1)
-            }
-        }
-        return queryResult
+    fun getUploadedFromModifiedImageSHA1(modifiedImageSHA1: String) = runBlocking<UploadedStatus?> {
+        async { getFromModifiedImageSHA1(modifiedImageSHA1) }.await()
     }
 
 }
