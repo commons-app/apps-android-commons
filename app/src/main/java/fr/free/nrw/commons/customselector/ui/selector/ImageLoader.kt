@@ -95,7 +95,9 @@ class ImageLoader @Inject constructor(
                         result in arrayOf(Result.NOTFOUND, Result.INVALID) &&
                         sha1.isNotEmpty()) {
                             result = querySHA1(sha1)
-                            insertIntoUploaded(imageSHA1, sha1, false, result is Result.TRUE)
+                            if(result != Result.ERROR ) {
+                                insertIntoUploaded(imageSHA1, sha1, false, result is Result.TRUE)
+                            }
                     }
                 }
             }
@@ -114,19 +116,22 @@ class ImageLoader @Inject constructor(
         mapResult[SHA1]?.let{
             return it
         }
+        var result : Result = Result.FALSE
         try {
             if (mediaClient.checkFileExistsUsingSha(SHA1).blockingGet()) {
                 mapResult[SHA1] = Result.TRUE
-                return Result.TRUE
+                result = Result.TRUE
             }
         } catch (e: Exception) {
             if (e is UnknownHostException) {
                 // Handle no network connection.
                 Timber.e(e, "Network Connection Error")
             }
+            result = Result.ERROR
             e.printStackTrace()
+        } finally {
+               return result
         }
-        return Result.FALSE
     }
 
     /**
@@ -187,6 +192,7 @@ class ImageLoader @Inject constructor(
         object FALSE : Result()
         object INVALID : Result()
         object NOTFOUND : Result()
+        object ERROR : Result()
     }
 
     companion object {
