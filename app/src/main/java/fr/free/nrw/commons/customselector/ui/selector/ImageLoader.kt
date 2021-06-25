@@ -114,7 +114,7 @@ class ImageLoader @Inject constructor(
                     uploadedStatusDao.insertUploaded(uploadedStatus)
                 }
             }
-            if(mapHolderImage[holder] == image) {
+            if(mapHolderImage[holder] == image && result!=null) {
                 // View holder and latest query image match, setup the view.
                 if (result!!) {
                     holder.itemUploaded()
