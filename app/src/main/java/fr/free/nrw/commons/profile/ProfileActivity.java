@@ -3,6 +3,7 @@ package fr.free.nrw.commons.profile;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -11,11 +12,13 @@ import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.ViewPagerAdapter;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.profile.achievements.AchievementsFragment;
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 
 /**
  * This activity will set two tabs, achievements and
@@ -30,6 +33,10 @@ public class ProfileActivity extends BaseActivity {
 
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @Inject
+    SessionManager sessionManager;
 
     private ViewPagerAdapter viewPagerAdapter;
     private AchievementsFragment achievementsFragment;
@@ -40,13 +47,21 @@ public class ProfileActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
-        setTitle(R.string.Profile);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle(sessionManager.getUserName());
 
         supportFragmentManager = getSupportFragmentManager();
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         setTabs();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     /**
