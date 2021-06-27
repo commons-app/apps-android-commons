@@ -21,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.BookmarkFragment;
 import fr.free.nrw.commons.explore.ExploreFragment;
@@ -356,6 +357,11 @@ public class MainActivity  extends BaseActivity
     @Override
     protected void onResume() {
         super.onResume();
+
+        if ((applicationKvStore.getBoolean("firstrun", true)) &&
+            (!applicationKvStore.getBoolean("login_skipped"))) {
+            WelcomeActivity.startYourself(this);
+        }
     }
 
     @Override
