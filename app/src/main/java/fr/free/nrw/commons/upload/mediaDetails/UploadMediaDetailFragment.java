@@ -97,7 +97,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     private Place nearbyPlace;
     private UploadItem uploadItem;
-
+    /**
+     * editableUploadItem : Storing the upload item before going to update the coordinates
+     */
+    private UploadItem editableUploadItem;
 
     private UploadMediaDetailFragmentCallback callback;
 
@@ -392,6 +395,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     private void goToLocationPickerActivity(final UploadItem uploadItem) {
 
+        editableUploadItem = uploadItem;
         startActivityForResult(new LocationPicker.IntentBuilder()
             .defaultLocation(new CameraPosition.Builder()
                 .target(new com.mapbox.mapboxsdk.geometry.LatLng(uploadItem.getGpsCoords()
@@ -435,10 +439,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     public void editLocation(final String latitude, final String longitude){
 
-        uploadItem.getGpsCoords().setDecLatitude(Double.parseDouble(latitude));
-        uploadItem.getGpsCoords().setDecLongitude(Double.parseDouble(longitude));
-        uploadItem.getGpsCoords().setDecimalCoords(latitude+"|"+longitude);
-        uploadItem.getGpsCoords().setImageCoordsExists(true);
+        editableUploadItem.getGpsCoords().setDecLatitude(Double.parseDouble(latitude));
+        editableUploadItem.getGpsCoords().setDecLongitude(Double.parseDouble(longitude));
+        editableUploadItem.getGpsCoords().setDecimalCoords(latitude+"|"+longitude);
+        editableUploadItem.getGpsCoords().setImageCoordsExists(true);
         Toast.makeText(getContext(), "Location Updated", Toast.LENGTH_LONG).show();
 
     }
