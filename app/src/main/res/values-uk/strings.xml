@@ -250,6 +250,8 @@
   <string name="upload_problem_different_geolocation">Зображення виконано в іншому місці.</string>
   <string name="upload_problem_fbmd">Будь ласка, завантажуйте тільки ті зображення, які були зроблені вами. Не завантажуйте зображень, які ви знайшли у Фейсбуці.</string>
   <string name="upload_problem_do_you_continue">Ви все одно хочете завантажити це зображення?</string>
+  <string name="upload_connection_error_alert_title">Помилка з\'єднання</string>
+  <string name="upload_connection_error_alert_detail">Процес вивантаження вимагає активного інтернет-з\'єднання. Будь ласка, перевірте своє підключення до мережі.</string>
   <string name="upload_problem_image">Виявлено проблеми із зображенням</string>
   <string name="internet_downloaded">Будь ласка, завантажуйте тільки ті зображення, які були зроблені вами. Не завантажуйте зображень, які ви знайшли в інтернеті.</string>
   <string name="use_external_storage">Зберігати зроблені в програмці знімки</string>
@@ -504,6 +506,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Неможливо додати категорії</string>
   <string name="category_edit_button_text">Оновити категорії</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Спроба оновити координати.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Оновлення координат</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Успіх</string>
+  <string name="coordinates_edit_helper_show_edit_message">Координати %1$s додані.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Не вдалося додати координати.</string>
+  <string name="coordinates_picking_unsuccessful">Не вдалося отримати координати.</string>
   <string name="share_image_via">Поширити зображення через</string>
   <string name="no_achievements_yet">Поки що від вас немає вкладу</string>
   <string name="account_created">Обліковий запис створено!</string>
@@ -601,4 +609,11 @@
   <string name="app_ui_language">Мова інтерфейсу</string>
   <string name="remove">Вилучає опис і підпис</string>
   <string name="read_help_link">Читати більше</string>
+  <string name="media_detail_in_all_languages">Усіма мовами</string>
+  <string name="choose_a_location">Вибрати розташування</string>
+  <string name="pan_and_zoom_to_adjust">Панорамуйте і збільшуйте, щоб підлаштувати</string>
+  <string name="exit_location_picker">Вийти з вікна вибору розташування</string>
+  <string name="select_location_location_picker">Вибрати розташування</string>
+  <string name="location_picker_image_view">Вигляд вибору розташування як зображення</string>
+  <string name="location_picker_image_view_shadow">Вигляд вибору розташування як тіні зображення</string>
 </resources>

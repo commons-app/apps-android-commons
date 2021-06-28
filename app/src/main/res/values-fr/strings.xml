@@ -616,6 +616,6 @@
   <string name="pan_and_zoom_to_adjust">Descendre et zoomer pour ajuster</string>
   <string name="exit_location_picker">Sortir du sélecteur d’emplacement</string>
   <string name="select_location_location_picker">Sélectionner un emplacement</string>
-  <string name="location_picker_image_view" fuzzy="true">Affichage de l’image du sélecteur d’emplacement</string>
-  <string name="location_picker_image_view_shadow" fuzzy="true">Ombre de l’affichage de l’image du sélecteur d’emplacement</string>
+  <string name="location_picker_image_view">L’affichage d’image du sélecteur d’emplacement</string>
+  <string name="location_picker_image_view_shadow">L’ombre de l’affichage d’image du sélecteur d’événement</string>
 </resources>
