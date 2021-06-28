@@ -57,6 +57,7 @@
         <activity android:name=".WelcomeActivity" />
 
         <activity
+            android:hardwareAccelerated="false"
             android:name=".upload.UploadActivity"
             android:configChanges="orientation|screenSize|keyboard"
             android:icon="@mipmap/ic_launcher"
