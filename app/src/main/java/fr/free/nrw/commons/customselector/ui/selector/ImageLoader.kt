@@ -157,14 +157,23 @@ class ImageLoader @Inject constructor(
         return sha1;
     }
 
+    /**
+     * Insert into uploaded status table.
+     */
     private fun insertIntoUploaded(imageSha1:String, modifiedImageSha1:String, imageResult:Boolean, modifiedImageResult: Boolean){
         uploadedStatusDao.insertUploaded(UploadedStatus(imageSha1, modifiedImageSha1, imageResult, modifiedImageResult))
     }
 
+    /**
+     * Get image sha1 from uri, used to retrieve the original image sha1.
+     */
     private fun getImageSHA1(uri: Uri): String {
         return fileUtilsWrapper.getSHA1(context.contentResolver.openInputStream(uri))
     }
 
+    /**
+     * Get result data from database.
+     */
     private fun getResultFromUploadedStatus(uploadedStatus: UploadedStatus): Result {
         if (uploadedStatus.imageResult || uploadedStatus.modifiedImageResult) {
             return Result.TRUE
@@ -177,6 +186,7 @@ class ImageLoader @Inject constructor(
         }
         return Result.INVALID
     }
+
     /**
      * Generate Modified SHA1 using present Exif settings.
      *
@@ -196,6 +206,9 @@ class ImageLoader @Inject constructor(
         return sha1
     }
 
+    /**
+     * Sealed Result class.
+     */
     sealed class Result {
         object TRUE : Result()
         object FALSE : Result()
