@@ -94,9 +94,18 @@ class ImageLoader @Inject constructor(
                     if (mapHolderImage[holder] == image &&
                         result in arrayOf(Result.NOTFOUND, Result.INVALID) &&
                         sha1.isNotEmpty()) {
-                            result = querySHA1(sha1)
-                            if(result != Result.ERROR ) {
-                                insertIntoUploaded(imageSHA1, sha1, false, result is Result.TRUE)
+                            // Query original image.
+                            result = querySHA1(imageSHA1)
+                            if( result is Result.TRUE ) {
+                                // Original image found.
+                                insertIntoUploaded(imageSHA1, sha1, result is Result.TRUE, false)
+                            }
+                            else {
+                                // Original image not found, query modified image.
+                                result = querySHA1(sha1)
+                                if (result != Result.ERROR) {
+                                    insertIntoUploaded(imageSHA1, sha1, false, result is Result.TRUE)
+                                }
                             }
                     }
                 }
