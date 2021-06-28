@@ -76,6 +76,8 @@
         <ImageView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:padding="12dp"
+          android:scaleType="centerInside"
           app:srcCompat="@drawable/ic_baseline_person_14"/>
 
         <TextView
@@ -114,8 +116,8 @@
 
       <ImageButton
         android:id="@+id/cancelButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="@dimen/tiny_padding"
         android:layout_toStartOf="@id/retryButton"
         android:background="@android:color/transparent"
@@ -126,8 +128,8 @@
 
       <ImageButton
         android:id="@+id/retryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="@dimen/tiny_padding"
         android:layout_toStartOf="@id/wikipediaButton"
         android:background="@android:color/transparent"
@@ -138,8 +140,8 @@
 
       <ImageButton
         android:id="@+id/wikipediaButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/tiny_padding"
         android:background="@android:color/transparent"

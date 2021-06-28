@@ -19,10 +19,13 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
+import fr.free.nrw.commons.category.GridViewAdapter;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.navtab.NavTab;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class BookmarkListRootFragment extends CommonsDaggerSupportFragment implements
     FragmentManager.OnBackStackChangedListener,
@@ -167,6 +170,22 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
   }
 
   /**
+   * Reload media detail fragment once media is nominated
+   *
+   * @param index item position that has been nominated
+   */
+  @Override
+  public void refreshNominatedMedia(int index) {
+    if(mediaDetails != null && !listFragment.isVisible()) {
+      removeFragment(mediaDetails);
+      mediaDetails = new MediaDetailPagerFragment(false, true);
+      ((BookmarkFragment) getParentFragment()).setScroll(false);
+      setFragment(mediaDetails, listFragment);
+      mediaDetails.showImage(index);
+    }
+  }
+
+  /**
    * This method is called on success of API call for featured images or mobile uploads. The
    * viewpager will notified that number of items have changed.
    */
@@ -189,12 +208,17 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
     ((MainActivity) getActivity()).showTabs();
   }
 
+  void moveToContributionsFragment(){
+    ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
+    ((MainActivity) getActivity()).showTabs();
+  }
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
     Log.d("deneme8","on media clicked");
     container.setVisibility(View.VISIBLE);
     ((BookmarkFragment)getParentFragment()).tabLayout.setVisibility(View.GONE);
     mediaDetails = new MediaDetailPagerFragment(false, true);
+    ((BookmarkFragment) getParentFragment()).setScroll(false);
     setFragment(mediaDetails, listFragment);
     mediaDetails.showImage(position);
   }

@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -20,7 +21,7 @@ import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.explore.ViewPagerAdapter;
+import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment;
 import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment;
@@ -47,7 +48,7 @@ public class CategoryDetailsActivity extends BaseActivity
     @BindView(R.id.mediaContainer) FrameLayout mediaContainer;
     @BindView(R.id.tab_layout) TabLayout tabLayout;
     @BindView(R.id.viewPager) ViewPager viewPager;
-
+    @BindView(R.id.toolbar) Toolbar toolbar;
     ViewPagerAdapter viewPagerAdapter;
 
     @Override
@@ -60,6 +61,8 @@ public class CategoryDetailsActivity extends BaseActivity
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setOffscreenPageLimit(2);
         tabLayout.setupWithViewPager(viewPager);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTabs();
         setPageTitle();
     }
@@ -163,6 +166,19 @@ public class CategoryDetailsActivity extends BaseActivity
     }
 
     /**
+     * Reload media detail fragment once media is nominated
+     *
+     * @param index item position that has been nominated
+     */
+    @Override
+    public void refreshNominatedMedia(int index) {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            onBackPressed();
+            onMediaClicked(index);
+        }
+    }
+
+    /**
      * This method inflates the menu in the toolbar
      */
     @Override
@@ -185,6 +201,9 @@ public class CategoryDetailsActivity extends BaseActivity
                 PageTitle title = Utils.getPageTitle(CATEGORY_PREFIX + categoryName);
                 Utils.handleWebUrl(this, Uri.parse(title.getCanonicalUri()));
                 return true;
+            case android.R.id.home:
+                onBackPressed();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -197,7 +216,12 @@ public class CategoryDetailsActivity extends BaseActivity
     @Override
     public void onBackPressed() {
         if (supportFragmentManager.getBackStackEntryCount() == 1){
-            // back to search so show search toolbar and hide navigation toolbar
+
+            // the back press is handled by the mediaDetails , no further action required.
+            if(mediaDetails.backButtonClicked()){
+                return;
+            }
+
             tabLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.VISIBLE);
             mediaContainer.setVisibility(View.GONE);

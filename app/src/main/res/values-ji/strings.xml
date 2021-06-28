@@ -4,9 +4,25 @@
 * פוילישער
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d טעקע לאדט אן</item>
+    <item quantity="other">%1$d טעקעס לאדן אן</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">אנהייבן %1$d ארויפֿלאד</item>
+    <item quantity="other"> אנהייבן %1$d ארויפֿלאדן</item>
+  </plurals>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d ארויפֿלאד</item>
+    <item quantity="other">%1$d ארויפֿלאדן</item>
+  </plurals>
   <string name="preference_category_general">אַלגעמיין</string>
   <string name="preference_category_feedback">פֿידבעק</string>
-  <string name="preference_category_location">לאקאציע</string>
   <string name="app_name">קאמאנס</string>
   <string name="bullet">•</string>
   <string name="menu_settings">איינשטעלונגען</string>
@@ -23,15 +39,11 @@
   <string name="uploading_started">ארויפלאדן אנגעהויבן!</string>
   <string name="upload_completed_notification_title">%1$s ארויפגעלאדן!!</string>
   <string name="upload_completed_notification_text">דרוקט צו זען אײַער ארויפֿלאד</string>
-  <string name="upload_progress_notification_title_start">אנהייבן %1$s ארויפלאד</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">אנהייבן %1$s ארויפלאד</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ארויפֿלאדן!!</string>
   <string name="upload_progress_notification_title_finishing">געענדיקט ארויפֿלאדן %1$s</string>
   <string name="upload_failed_notification_title">ארויפֿלאדן %1$s דורכגעפֿאלן</string>
   <string name="upload_failed_notification_subtitle">דרוקט צו באקוקן</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d טעקע לאדט אן</item>
-    <item quantity="other">%1$d טעקעס לאדן אן</item>
-  </plurals>
   <string name="title_activity_contributions">מײַנע לעצטיקע ארויפֿלאדן</string>
   <string name="contribution_state_queued">אין ריי</string>
   <string name="contribution_state_failed">דורכגעפֿאַלן</string>
@@ -42,9 +54,7 @@
   <string name="menu_nearby">דערבײ</string>
   <string name="provider_contributions">מײַנע ארויפלאדן</string>
   <string name="menu_share">טיילן</string>
-  <string name="menu_open_in_browser">באקוקן אין בלעטערער</string>
-  <string name="share_title_hint">טיטל (געפֿאדערט)</string>
-  <string name="add_title_toast">זייט אזוי גוט און פארזארג א טיטל פאר דער טעקע</string>
+  <string name="share_title_hint" fuzzy="true">טיטל (געפֿאדערט)</string>
   <string name="share_description_hint">באַשרײַבונג</string>
   <string name="login_failed_network">נישט מעגלעך אריינלאגירן – נעצווערק פֿעלער</string>
   <string name="login_failed_generic">ארײַנלאגירן אדורכגעפאלן!</string>
@@ -55,19 +65,6 @@
   <string name="menu_save_categories">אויפֿהיטן</string>
   <string name="refresh_button">דערפֿרישן</string>
   <string name="display_list_button">ליסטע</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">אנהייבן %1$d ארויפֿלאד</item>
-    <item quantity="other"> אנהייבן %1$d ארויפֿלאדן</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d ארויפֿלאד</item>
-    <item quantity="other">%1$d ארויפֿלאדן</item>
-  </plurals>
   <string name="categories_not_found">קיין קאטעגאריעס צוגעפאסט צו %1$s נישט געפֿונען</string>
   <string name="categories_activity_title">קאַטעגאריעס</string>
   <string name="title_activity_settings">איינשטעלונגען</string>
@@ -85,20 +82,9 @@
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (עסטרייך)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (דייטשלאנד)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (עסטלאנד)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (שפאניע)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (קראאטיע)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (לוקסעמבורג)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (האלאנד)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (נארוועגיע)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (פוילן)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (רומעניע)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="welcome_final_button_text">יא!</string>
   <string name="detail_panel_cats_label">קאַטעגאריעס</string>
   <string name="detail_panel_cats_loading">לאָדט…</string>
@@ -127,11 +113,10 @@
   <string name="navigation_item_settings">איינשטעלונגען</string>
   <string name="navigation_item_feedback">פֿידבעק</string>
   <string name="navigation_item_logout">אַרויסלאָגירן</string>
-  <string name="navigation_item_featured_images">רעקאמנדירט</string>
   <string name="upload_problem_image_dark">בילד איז צו טונקל</string>
   <string name="appwidget_img">בילד פונעם טאָג</string>
   <string name="app_widget_heading">בילד פונעם טאָג</string>
-  <string name="search_tab_title_media">מעדיע</string>
-  <string name="search_tab_title_categories">קאַטעגאריעס</string>
+  <string name="search_tab_title_media" fuzzy="true">מעדיע</string>
+  <string name="search_tab_title_categories" fuzzy="true">קאַטעגאריעס</string>
   <string name="wikidata_edit_failure">ס׳איז ניט געלונגען צו דערהיינטיקן דעם אַנטשפּרעכנדיקן בלאַט אין וויקידאַטן.</string>
 </resources>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Abdulq
-* Abijeet Patro
 * BukhariSaeed
 * Muhammad Shuaib
 * Noor2020
@@ -9,12 +8,28 @@
 * Sayam Asjad
 -->
 <resources>
-  <string name="title_activity_explore">ایکسپلور</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d فائل اپلوڈ ہورہی ہے</item>
+    <item quantity="other">%1$d فائلیں اپلوڈ ہورہی ہے</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d اپلوڈ</item>
+    <item quantity="other">%1$d اپلوڈ</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">شروع %1$d اپلوڈ</item>
+    <item quantity="other">شروع %d$1 اپلوڈ</item>
+  </plurals>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d اپلوڈ</item>
+    <item quantity="other">%1$d اپلوڈز</item>
+  </plurals>
+  <string name="share_license_summary" fuzzy="true">%1$s تلے یہ تصویر لائسنس یافتہ ہو گی</string>
   <string name="navigation_item_explore">ایکسپلور</string>
   <string name="preference_category_appearance">ظاہریت</string>
   <string name="preference_category_general">عمومی</string>
   <string name="preference_category_feedback">آپ کی رائے</string>
-  <string name="preference_category_location">محل وقوع</string>
   <string name="app_name">کامنز</string>
   <string name="menu_settings">ترتیبات</string>
   <string name="username">صارف نام</string>
@@ -30,15 +45,11 @@
   <string name="uploading_started">اپلوڈ شروع!</string>
   <string name="upload_completed_notification_title">%1$s اپلوڈ شد!</string>
   <string name="upload_completed_notification_text">اپنی اپلوڈ دیکھنے کے لیے ٹیپ کریں۔</string>
-  <string name="upload_progress_notification_title_start">%1$s کی اپلوڈنگ شروع ہو رہی ہے</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s کی اپلوڈنگ شروع ہو رہی ہے</string>
   <string name="upload_progress_notification_title_in_progress">%1$s اپلوڈ جاری</string>
   <string name="upload_progress_notification_title_finishing">%1$s کی اپلوڈنگ مکمل ہو رہی ہے</string>
   <string name="upload_failed_notification_title">اپلوڈ %1$s ہونے میں ناکام</string>
   <string name="upload_failed_notification_subtitle">دیکھنے کے لیے ٹیپ کریں</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d فائل اپلوڈ ہورہی ہے</item>
-    <item quantity="other">%1$d فائلیں اپلوڈ ہورہی ہے</item>
-  </plurals>
   <string name="title_activity_contributions">میں حالیہ اپلوڈ</string>
   <string name="contribution_state_queued">قطار</string>
   <string name="contribution_state_failed">ناکام</string>
@@ -49,7 +60,6 @@
   <string name="menu_nearby">قریبی</string>
   <string name="provider_contributions">میرے اپلوڈ کردہ</string>
   <string name="menu_share">شیئر</string>
-  <string name="menu_open_in_browser">براؤزر میں کھولیں</string>
   <string name="share_title_hint" fuzzy="true">عنوان</string>
   <string name="share_description_hint">وضاحت</string>
   <string name="login_failed_network">لاگ ان ہونے میں ناکام - نیٹ ورک ناکامی</string>
@@ -65,22 +75,7 @@
   <string name="menu_save_categories">محفوظ کریں</string>
   <string name="refresh_button">تازہ کریں</string>
   <string name="display_list_button">فہرست</string>
-  <string name="gps_disabled">جی پی ایس آپ کے آلے میں غیر فعال ہے۔ آپ اس کو فعال کرنا چاہینگے؟</string>
-  <string name="enable_gps">جی پی ایس فعال کریں</string>
-  <string name="contributions_subtitle_zero">ابھی تک کوئی اپلوڈ نہیں</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d اپلوڈ</item>
-    <item quantity="other">%1$d اپلوڈ</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">شروع %1$d اپلوڈ</item>
-    <item quantity="other">شروع %d$1 اپلوڈ</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d اپلوڈ</item>
-    <item quantity="other">%1$d اپلوڈز</item>
-  </plurals>
+  <string name="contributions_subtitle_zero" fuzzy="true">ابھی تک کوئی اپلوڈ نہیں</string>
   <string name="categories_not_found">%1$s سے کوئی زمرہ جات میل نہیں کھاتے</string>
   <string name="categories_skip_explanation">ویکیمیڈیا کامنز پر اپنی تصاویر کو قابل دریافت بنانے کے لیے زمرے شامل کریں۔\n\nزمرے شامل کرنے کے لیے لکھنا شروع کریں۔\n\nاس مرحلے کو نظر انداز کرنے کے لیے اس پیغام یا (یا پیچھے) پر ٹیپ کریں۔</string>
   <string name="categories_activity_title">زمرہ جات</string>
@@ -100,26 +95,16 @@
   <string name="no_uploads_yet">آپ نے ابھی تک کوئی تصاویر اپلوڈ نہیں کی ہے۔</string>
   <string name="menu_retry_upload">دوبارہ کوشش کریں</string>
   <string name="menu_cancel_upload">منسوخ</string>
-  <string name="share_license_summary" fuzzy="true">%1$s تلے یہ تصویر لائسنس یافتہ ہو گی</string>
   <string name="media_upload_policy">اس تصویر کو درج کر کے، میں اقرار کرتا ہوں کہ یہ میرا اپنا کام ہے، اس ميں کاپی رائٹ مواد یا سیلفیاں نہیں ہیں، اور بصورت دیگر میں &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;ویکیمیڈیا کامنز پالیسیوں&lt;/a&gt; کا پابند ہوں۔</string>
   <string name="menu_download">ڈاؤنلوڈ</string>
   <string name="preference_license" fuzzy="true">اجازت نامہ</string>
-  <string name="use_previous">گزشتہ عنوان/وضاحت استعمال کریں</string>
-  <string name="allow_gps">خودکارانہ طریقے سے حالیہ جگہ حاصل کریں</string>
-  <string name="allow_gps_summary" fuzzy="true">اگر تصویر جغرافیائی نہیں ہے تو قسم کے تجاویز پیش کرنے کیلئے موجودہ مقام کو دوبارہ حاصل کریں</string>
-  <string name="preference_theme">نائٹ موڈ</string>
-  <string name="preference_theme_summary">کالا تھیم استعمال کریں</string>
+  <string name="use_previous" fuzzy="true">گزشتہ عنوان/وضاحت استعمال کریں</string>
+  <string name="preference_theme" fuzzy="true">نائٹ موڈ</string>
   <string name="license_name_cc_by_sa_four">انتباہ-شراکت 4.0</string>
   <string name="license_name_cc_by_four">انتباہ 4.0</string>
   <string name="license_name_cc_by_sa">انتباہ-شراکت 3.0</string>
   <string name="license_name_cc_by">انتباہ 3.0</string>
   <string name="license_name_cc0">CC0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (آسٹریا)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (جرمنی)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (اسٹونیا)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (اسپین)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (کرویئشا)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (لکسمبرگ)</string>
   <string name="welcome_final_button_text">ہاں!</string>
   <string name="detail_panel_cats_label">زمرہ جات</string>
   <string name="detail_panel_cats_loading">لوڈ ہو رہا ہے۔۔۔</string>
@@ -136,7 +121,6 @@
   <string name="media_detail_license">اجازت نامہ</string>
   <string name="media_detail_coordinates">متناسقات</string>
   <string name="commons_logo">کامنز لوگو</string>
-  <string name="welcome_image_no_selfies">کوئی سیلفی نہیں</string>
   <string name="cancel">منسوخ</string>
   <string name="navigation_drawer_open">کھولیں</string>
   <string name="navigation_drawer_close">بند</string>
@@ -149,16 +133,11 @@
   <string name="navigation_item_logout">لاگ آوٹ</string>
   <string name="navigation_item_info">معلمی</string>
   <string name="navigation_item_notification">اطلاعات</string>
-  <string name="navigation_item_featured_images">نمایاں</string>
   <string name="skip_login">چھوڑیں</string>
   <string name="navigation_item_login">داخل ہوں</string>
-  <string name="notifications_welcome">%1$s، ویکیمیڈیا کامنز میں خوش آمدید! آپ کو یہاں پا کر ہمیں خوشی ہوئی۔</string>
   <string name="nearby_directions" fuzzy="true">ہدایات</string>
   <string name="nearby_commons" fuzzy="true">عام</string>
   <string name="no_internet">انٹرنیٹ دستیاب نہیں</string>
-  <string name="internet_established">انٹرنیٹ دستیاب</string>
   <string name="retry">دوبارہ کوشش کریں</string>
   <string name="list_sheet">فہرست</string>
-  <string name="desc_language_Middle_East">مشرق وسطی</string>
-  <string name="desc_language_Africa">افریقا</string>
 </resources>

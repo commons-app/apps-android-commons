@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -24,6 +25,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
 import androidx.recyclerview.widget.RecyclerView.ItemAnimator;
+import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -93,6 +95,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
   private final int SPAN_COUNT_LANDSCAPE = 3;
   private final int SPAN_COUNT_PORTRAIT = 1;
 
+  private int contributionsSize;
+
 
   @Override
   public View onCreateView(
@@ -143,7 +147,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     }
 
     contributionsListPresenter.setup();
-    contributionsListPresenter.contributionList.observe(this.getViewLifecycleOwner(), adapter::submitList);
+    contributionsListPresenter.contributionList.observe(this.getViewLifecycleOwner(), list -> {
+      contributionsSize = list.size();
+      adapter.submitList(list);
+      callback.notifyDataSetChanged();
+    });
     rvContributionsList.setAdapter(adapter);
     adapter.registerAdapterDataObserver(new AdapterDataObserver() {
       @Override
@@ -155,6 +163,60 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
           }
         }
       }
+
+      /**
+       * Called whenever items in the list have changed
+       * Calls viewPagerNotifyDataSetChanged() that will notify the viewpager
+       */
+      @Override
+      public void onItemRangeChanged(final int positionStart, final int itemCount) {
+        super.onItemRangeChanged(positionStart, itemCount);
+        callback.viewPagerNotifyDataSetChanged();
+      }
+    });
+
+    //Fab close on touch outside (Scrolling or taping on item triggers this action).
+    rvContributionsList.addOnItemTouchListener(new OnItemTouchListener() {
+
+      /**
+       * Silently observe and/or take over touch events sent to the RecyclerView before
+       * they are handled by either the RecyclerView itself or its child views.
+       */
+      @Override
+      public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+        if (e.getAction() == MotionEvent.ACTION_DOWN) {
+          if (isFabOpen) {
+            animateFAB(isFabOpen);
+          }
+        }
+        return false;
+      }
+
+      /**
+       * Process a touch event as part of a gesture that was claimed by returning true
+       * from a previous call to {@link #onInterceptTouchEvent}.
+       *
+       * @param rv
+       * @param e  MotionEvent describing the touch event. All coordinates are in the
+       *           RecyclerView's coordinate system.
+       */
+      @Override
+      public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+        //required abstract method DO NOT DELETE
+      }
+
+      /**
+       * Called when a child of RecyclerView does not want RecyclerView and its ancestors
+       * to intercept touch events with {@link ViewGroup#onInterceptTouchEvent(MotionEvent)}.
+       *
+       * @param disallowIntercept True if the child does not want the parent to intercept
+       *                          touch events.
+       */
+      @Override
+      public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+        //required abstract method DO NOT DELETE
+      }
+
     });
   }
 
@@ -324,11 +386,14 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
 
   public Media getMediaAtPosition(final int i) {
-    return adapter.getContributionForPosition(i).getMedia();
+    if(adapter.getContributionForPosition(i) != null) {
+      return adapter.getContributionForPosition(i).getMedia();
+    }
+    return null;
   }
 
   public int getTotalMediaCount() {
-    return adapter.getItemCount();
+    return contributionsSize;
   }
 
   /**
@@ -355,10 +420,15 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
   public interface Callback {
 
+    void notifyDataSetChanged();
+
     void retryUpload(Contribution contribution);
 
     void showDetail(int position, boolean isWikipediaButtonDisplayed);
 
     void pauseUpload(Contribution contribution);
+
+    // Notify the viewpager that number of items have changed.
+    void viewPagerNotifyDataSetChanged();
   }
 }

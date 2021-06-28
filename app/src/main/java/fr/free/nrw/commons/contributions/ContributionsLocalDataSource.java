@@ -3,7 +3,6 @@ package fr.free.nrw.commons.contributions;
 import androidx.paging.DataSource.Factory;
 import io.reactivex.Completable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,8 +21,8 @@ class ContributionsLocalDataSource {
 
     @Inject
     public ContributionsLocalDataSource(
-            @Named("default_preferences") JsonKvStore defaultKVStore,
-            ContributionDao contributionDao) {
+            @Named("default_preferences") final JsonKvStore defaultKVStore,
+            final ContributionDao contributionDao) {
         this.defaultKVStore = defaultKVStore;
         this.contributionDao = contributionDao;
     }
@@ -31,14 +30,14 @@ class ContributionsLocalDataSource {
     /**
      * Fetch default number of contributions to be show, based on user preferences
      */
-    public String getString(String key) {
+    public String getString(final String key) {
         return defaultKVStore.getString(key);
     }
 
     /**
      * Fetch default number of contributions to be show, based on user preferences
      */
-    public long getLong(String key) {
+    public long getLong(final String key) {
        return defaultKVStore.getLong(key);
     }
 
@@ -47,8 +46,8 @@ class ContributionsLocalDataSource {
      * @param uri
      * @return
      */
-    public Contribution getContributionWithFileName(String uri) {
-        List<Contribution> contributionWithUri = contributionDao.getContributionWithTitle(uri);
+    public Contribution getContributionWithFileName(final String uri) {
+        final List<Contribution> contributionWithUri = contributionDao.getContributionWithTitle(uri);
         if(!contributionWithUri.isEmpty()){
             return contributionWithUri.get(0);
         }
@@ -60,7 +59,7 @@ class ContributionsLocalDataSource {
      * @param contribution
      * @return
      */
-    public Completable deleteContribution(Contribution contribution) {
+    public Completable deleteContribution(final Contribution contribution) {
         return contributionDao.delete(contribution);
     }
 
@@ -68,10 +67,10 @@ class ContributionsLocalDataSource {
         return contributionDao.fetchContributions();
     }
 
-    public Single<List<Long>> saveContributions(List<Contribution> contributions) {
-        List<Contribution> contributionList = new ArrayList<>();
-        for(Contribution contribution: contributions) {
-            Contribution oldContribution = contributionDao.getContribution(contribution.getPageId());
+    public Single<List<Long>> saveContributions(final List<Contribution> contributions) {
+        final List<Contribution> contributionList = new ArrayList<>();
+        for(final Contribution contribution: contributions) {
+            final Contribution oldContribution = contributionDao.getContribution(contribution.getPageId());
             if(oldContribution != null) {
                 contribution.setWikidataPlace(oldContribution.getWikidataPlace());
             }
@@ -80,11 +79,15 @@ class ContributionsLocalDataSource {
         return contributionDao.save(contributionList);
     }
 
-    public void set(String key, long value) {
+    public Completable saveContributions(Contribution contribution) {
+        return contributionDao.save(contribution);
+    }
+
+    public void set(final String key, final long value) {
         defaultKVStore.putLong(key,value);
     }
 
-    public Completable updateContribution(Contribution contribution) {
+    public Completable updateContribution(final Contribution contribution) {
         return contributionDao.update(contribution);
     }
 }

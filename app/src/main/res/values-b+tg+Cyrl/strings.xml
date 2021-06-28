@@ -5,13 +5,11 @@
 * Vashgird
 -->
 <resources>
-  <string name="title_activity_explore">Омӯзиш</string>
   <string name="navigation_item_explore">Омӯзиш</string>
   <string name="preference_category_appearance">Намуд</string>
   <string name="preference_category_general">Умумӣ</string>
   <string name="preference_category_feedback">Пешниҳод</string>
   <string name="preference_category_privacy">Ҳарими хусусӣ</string>
-  <string name="preference_category_location">Мавқеъ</string>
   <string name="app_name">Викианбор</string>
   <string name="menu_settings">Танзимот</string>
   <string name="intent_share_upload_label">Ирсолнамоӣ ба Викианбор</string>
@@ -38,7 +36,6 @@
   <string name="menu_nearby">Наздикӣ</string>
   <string name="provider_contributions">Боргузориҳои ман</string>
   <string name="menu_share">Бо ҳам дидан</string>
-  <string name="menu_open_in_browser">Дидан дар Мурургар</string>
   <string name="share_title_hint" fuzzy="true">Унвон</string>
   <string name="share_description_hint">Тавзеҳот</string>
   <string name="login_failed_generic">Вуруд номуваффақ шуд</string>
@@ -63,18 +60,7 @@
   <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Утриш)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Олмон)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Эстония)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Испания)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Хорватия)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Люксембург)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Нидерланд)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Норвеж)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Лаҳистон)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Руминия)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">Викианбор дорои бисёр парвандаҳое аст, ки тарафи Википедия истифода мешаванд.</string>
   <string name="welcome_copyright_text">Аксҳои шумо барои таълими одамон аз тамоми ҷаҳон кӯмак мерасонанд.</string>
   <string name="welcome_final_text">Фикр мекунед дарк кардед?</string>
@@ -101,7 +87,6 @@
   <string name="commons_logo">Логотипи Викианбор</string>
   <string name="commons_website">Сомонаи Викианбор</string>
   <string name="commons_facebook">Викианбор дар Фейсбук</string>
-  <string name="no_image_found">Аксе пайдо нашуд</string>
   <string name="no_subcategory_found">Ягон зергурӯҳе пайдо нашуд</string>
   <string name="welcome_image_welcome_wikipedia">Ба Википедиа хуш омадед.</string>
   <string name="cancel">Пӯшидан</string>
@@ -115,12 +100,9 @@
   <string name="navigation_item_feedback">Пешниҳод</string>
   <string name="navigation_item_logout">Баромад</string>
   <string name="navigation_item_notification">Огоҳиҳо</string>
-  <string name="navigation_item_featured_images">Баргузида</string>
   <string name="navigation_item_review">Тафтиш</string>
   <string name="nearby_info_menu_wikidata_article">Унсури Викидода</string>
-  <string name="error_while_cache">Хатогӣ ҳангоми кэшкунии тасвир</string>
   <string name="navigation_item_login">Вуруд</string>
-  <string name="read_article">Хондани мақола</string>
   <string name="nearby_directions">Ҷиҳат</string>
   <string name="nearby_wikidata">Викидода</string>
   <string name="nearby_wikipedia">Википедиа</string>
@@ -128,7 +110,6 @@
   <string name="about_translate_title">Забонҳо</string>
   <string name="about_translate_cancel">Лағв</string>
   <string name="retry">Дубора саъй кунед</string>
-  <string name="showcase_view_got_it_button">Гирифтан!</string>
   <string name="menu_search_button">Ҷустуҷӯ</string>
   <string name="search_commons">Ҷустуҷӯи Викианбор</string>
   <string name="title_activity_search">Ҷустуҷӯ</string>
@@ -142,7 +123,6 @@
   <string name="continue_message">Идома</string>
   <string name="correct">Ҷавоби дуруст</string>
   <string name="wrong">Ҷавоби хато</string>
-  <string name="add_description">+ Иловаи тавзеҳот</string>
   <string name="no_recent_searches">Ҷустаниҳои охире нест</string>
   <string name="delete_search_dialog">Шумо аниқ мехоҳед ин ҷустаниро ҳазф кунед?</string>
   <string name="search_history_deleted">Таърихи ҷустуҷӯҳо ҳазф шуд</string>
@@ -154,20 +134,11 @@
   <string name="next">Баъдӣ</string>
   <string name="previous">Пешина</string>
   <string name="submit">Ирсол</string>
-  <string name="navigation_item_bookmarks">Маркаҳои китоб</string>
-  <string name="title_activity_bookmarks">Маркаҳои китоб</string>
   <string name="title_page_bookmarks_pictures">Расмҳо</string>
   <string name="title_page_bookmarks_locations">Ҷойҳо</string>
   <string name="menu_bookmark">Илова/Ҳазв намудани маркаҳои китоб</string>
   <string name="provider_bookmarks">Маркаҳои китоб</string>
   <string name="provider_bookmarks_location">Маркаҳои китоб</string>
-  <string name="desc_language_Worldwide">Шабакаи дунявӣ</string>
-  <string name="desc_language_America">Амрико</string>
-  <string name="desc_language_Europe">Урупо</string>
-  <string name="desc_language_Middle_East">Шарқи наздик</string>
-  <string name="desc_language_Africa">Африқо</string>
-  <string name="desc_language_Asia">Осиё</string>
-  <string name="desc_language_Pacific">Баҳри Ором</string>
   <string name="no_categories_selected">Ягон гурӯҳе интихоб нашуд</string>
   <string name="nominate_for_deletion_done">Анҷом шуд</string>
   <string name="skip_image">Гузаштани ин акс</string>

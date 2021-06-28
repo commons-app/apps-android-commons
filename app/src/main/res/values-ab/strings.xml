@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Envlh
+* Pupsik-ipa
 * Андрей
 -->
 <resources>
@@ -10,37 +11,35 @@
   <string name="login">Аҭаларҭа</string>
   <string name="signup">Иҟаҵатәуп арегистрациа</string>
   <string name="logging_in_title">Асистемахь аҭаларҭа</string>
-  <string name="logging_in_message">Шәааҧшы ҧыҭрак...</string>
-  <string name="login_success">Аҭалара қәҿиарала имҩаҧысит!</string>
+  <string name="logging_in_message">Шәааԥшы ԥыҭрак...</string>
+  <string name="login_success">Аҭалара қәҿиарала имҩаԥысит!</string>
   <string name="login_failed">Асистемахь аҭалараан агха!</string>
-  <string name="upload_failed">Афаил ҧшаам. Даҽа фаилк шәахәаҧш.</string>
+  <string name="upload_failed">Афаил ԥшаам. Даҽа фаилк шәахәаԥш.</string>
   <string name="authentication_failed" fuzzy="true">Аутентификациа агха!</string>
   <string name="uploading_started">Аҭагалара иалагоуп!</string>
   <string name="upload_completed_notification_title">%1$s иҭагалоуп!</string>
-  <string name="upload_completed_notification_text">Шәақәыӷәӷәа иҭагалоу афаил ахәаҧшраз</string>
-  <string name="upload_progress_notification_title_start">Аҭагалара %1$s иалагоуп</string>
+  <string name="upload_completed_notification_text">Шәақәыӷәӷәа иҭагалоу афаил ахәаԥшраз</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Аҭагалара %1$s иалагоуп</string>
   <string name="upload_progress_notification_title_in_progress">%1$s иаҿуп аҭагалара</string>
   <string name="upload_progress_notification_title_finishing">Аҭагалара ахыркәшамҭа %1$s</string>
   <string name="upload_failed_notification_title">Аҭагалара %1$s амуӡеит</string>
-  <string name="upload_failed_notification_subtitle">Шәақәыӷәӷәа ахәаҧшразы</string>
+  <string name="upload_failed_notification_subtitle">Шәақәыӷәӷәа ахәаԥшразы</string>
   <string name="contribution_state_failed">Аҭагалара агха.</string>
   <string name="contribution_state_in_progress">Инагӡоуп %1$d%%</string>
   <string name="contribution_state_starting">Аҭагалара</string>
   <string name="menu_from_gallery">Агалереиа аҟынтәи</string>
   <string name="menu_from_camera">Афото ҭыхтәуп</string>
   <string name="provider_contributions">Сара сҭагаламҭақәа</string>
-  <string name="menu_open_in_browser">Иаарттәуп абраузер аҟны</string>
   <string name="share_title_hint" fuzzy="true">Ахьӡ</string>
   <string name="share_description_hint">Ахҳәаа</string>
   <string name="login_failed_generic">Асистемахь аҭалара агха!</string>
   <string name="share_upload_button">Аҭагалара</string>
-  <string name="provider_modifications">Аҧсахрақәа</string>
+  <string name="provider_modifications">Аԥсахрақәа</string>
   <string name="menu_upload_single">Аҭагалара</string>
   <string name="categories_search_text_hint">Актегориа алхра</string>
   <string name="menu_save_categories">Еиқәырхатәуп</string>
   <string name="refresh_button">Ирҿыцтәуп</string>
-  <string name="gps_disabled">GPS аҿыхуп шәара шәҟны. Ишәҭахума иаҿашәкыр?</string>
-  <string name="enable_gps">Иаҿактәуп GPS</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">Аҭагаламҭақәа макьана иҟам</string>
   <string name="categories_activity_title">Акатегориақәа</string>
   <string name="title_activity_settings">Архиарақәа</string>
   <string name="title_activity_signup">Арегистрациа ҟаҵатәуп</string>
@@ -48,29 +47,17 @@
   <string name="menu_cancel_upload">Аҟәыхра</string>
   <string name="menu_download">Иҭыгатәуп</string>
   <string name="preference_license" fuzzy="true">Алицензиа</string>
-  <string name="preference_theme">Уахынлатәи арежим</string>
-  <string name="preference_theme_summary">Ихархәатәуп еиқәаҵәоу атема</string>
+  <string name="preference_theme" fuzzy="true">Уахынлатәи арежим</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four">Attribution 4.0</string>
   <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Австриа)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Германиа)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Естониа)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Испаниа)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Хорватиа)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Лиуксембург)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Нидерланды)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Норвегиа)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Польша)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Румыниа)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_4_text">Аҭагалара аҿырҧштәы:</string>
+  <string name="tutorial_4_text">Аҭагалара аҿырԥштәы:</string>
   <string name="welcome_final_text">Ари шәара еилышәкаама?</string>
   <string name="welcome_final_button_text">Ааи!</string>
   <string name="detail_panel_cats_label">Акатегориақәа</string>
@@ -88,14 +75,8 @@
   <string name="media_detail_license">Алицензиа</string>
   <string name="media_detail_coordinates">Акоординатқәа</string>
   <string name="_2fa_code">2ФА Акод</string>
-  <string name="maximum_limit">Имаксималу алимит</string>
-  <string name="maximum_limit_alert">Иауам 500 иреиҳаны раарҧшра</string>
-  <string name="background_image">Аҿаҧшыратә сахьа</string>
-  <string name="no_image_found">Асахьа ҧшаам</string>
-  <string name="upload_image">Иҭагалатәуп асахьа</string>
   <string name="welcome_image_mount_zao">Ашьха Зао</string>
   <string name="welcome_image_tulip">Атиульпан</string>
-  <string name="welcome_image_no_selfies">Аселфи ыҟаӡам</string>
   <string name="welcome_image_welcome_wikipedia">Бзиала шәаабеит Википедиа ахь</string>
   <string name="welcome_image_sydney_opera_house">Сиднеи аопера атеатр</string>
   <string name="cancel">Аҟәыхра</string>
@@ -104,5 +85,5 @@
   <string name="navigation_item_upload">Иҭагалатәуп</string>
   <string name="navigation_item_settings">Архиарақәа</string>
   <string name="navigation_item_logout">Иҭыҵтәуп</string>
-  <string name="no_description_found">ахҳаа ҧшаам</string>
+  <string name="no_description_found">ахҳаа ԥшаам</string>
 </resources>

@@ -87,29 +87,40 @@
             android:layout_marginRight="@dimen/activity_margin_horizontal"
             android:layout_marginStart="@dimen/activity_margin_horizontal">
 
-            <TextView
-              style="?android:textAppearanceMedium"
+
+            <LinearLayout
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginLeft="@dimen/activity_margin_horizontal"
-              android:layout_marginStart="@dimen/activity_margin_horizontal"
-              android:id="@+id/images_upload_text_param"
-              android:layout_marginTop="@dimen/achievements_activity_margin_vertical"
-              android:text="@string/images_uploaded" />
-
-            <ImageView
-              android:layout_width="@dimen/quarter_standard_height"
-              android:layout_height="@dimen/quarter_standard_height"
               android:id="@+id/images_upload_info"
-              android:layout_marginTop="@dimen/activity_margin_horizontal"
-              android:layout_marginRight="@dimen/activity_margin_horizontal"
-              android:layout_marginEnd="@dimen/activity_margin_horizontal"
-              android:layout_toRightOf="@+id/images_upload_text_param"
-              android:layout_toEndOf="@+id/images_upload_text_param"
-              app:srcCompat="@drawable/ic_info_outline_24dp"
-              android:tint="@color/primaryDarkColor"
-              android:layout_marginLeft="@dimen/activity_margin_horizontal"
-              android:layout_marginStart="@dimen/activity_margin_horizontal"/>
+              android:orientation="horizontal"
+              >
+
+              <TextView
+                style="?android:textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                android:layout_marginStart="@dimen/activity_margin_horizontal"
+                android:id="@+id/images_upload_text_param"
+                android:layout_marginTop="@dimen/achievements_activity_margin_vertical"
+                android:text="@string/images_uploaded" />
+
+              <ImageView
+                android:layout_width="@dimen/quarter_standard_height"
+                android:layout_height="@dimen/quarter_standard_height"
+                android:layout_marginTop="@dimen/activity_margin_horizontal"
+                android:layout_marginRight="@dimen/activity_margin_horizontal"
+                android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                android:layout_toRightOf="@+id/images_upload_text_param"
+                android:layout_toEndOf="@+id/images_upload_text_param"
+                app:srcCompat="@drawable/ic_info_outline_24dp"
+                android:tint="@color/primaryDarkColor"
+                android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                android:layout_marginStart="@dimen/activity_margin_horizontal"/>
+
+            </LinearLayout>
+
+
 
             <com.dinuscxj.progressbar.CircleProgressBar
               android:layout_width="@dimen/dimen_40"
@@ -141,28 +152,38 @@
             android:layout_marginRight="@dimen/activity_margin_horizontal"
             android:layout_marginStart="@dimen/activity_margin_horizontal">
 
-            <TextView
-              style="?android:textAppearanceMedium"
+            <LinearLayout
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginLeft="@dimen/activity_margin_horizontal"
-              android:id="@+id/images_reverted_text"
-              android:layout_marginStart="@dimen/activity_margin_horizontal"
-              android:text="@string/image_reverts" />
-
-            <ImageView
-              android:layout_width="@dimen/medium_width"
-              android:layout_height="@dimen/medium_height"
-              android:layout_marginTop="@dimen/activity_margin_horizontal"
-              android:layout_marginRight="@dimen/activity_margin_horizontal"
-              android:layout_marginEnd="@dimen/activity_margin_horizontal"
               android:id="@+id/images_reverted_info"
-              android:layout_toRightOf="@+id/images_reverted_text"
-              android:layout_toEndOf="@+id/images_reverted_text"
-              app:srcCompat="@drawable/ic_info_outline_24dp"
-              android:tint="@color/primaryDarkColor"
-              android:layout_marginLeft="@dimen/activity_margin_horizontal"
-              android:layout_marginStart="@dimen/activity_margin_horizontal"/>
+              android:orientation="horizontal"
+              >
+
+              <TextView
+                style="?android:textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                android:id="@+id/images_reverted_text"
+                android:layout_marginStart="@dimen/activity_margin_horizontal"
+                android:text="@string/image_reverts" />
+
+              <ImageView
+                android:layout_width="@dimen/medium_width"
+                android:layout_height="@dimen/medium_height"
+                android:layout_marginTop="@dimen/activity_margin_horizontal"
+                android:layout_marginRight="@dimen/activity_margin_horizontal"
+                android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                android:layout_toRightOf="@+id/images_reverted_text"
+                android:layout_toEndOf="@+id/images_reverted_text"
+                app:srcCompat="@drawable/ic_info_outline_24dp"
+                android:tint="@color/primaryDarkColor"
+                android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                android:layout_marginStart="@dimen/activity_margin_horizontal"/>
+
+            </LinearLayout>
+
+
 
             <TextView
               android:layout_width="wrap_content"
@@ -172,7 +193,7 @@
               android:id="@+id/images_revert_limit_text"
               android:layout_marginLeft="@dimen/activity_margin_horizontal"
               android:layout_marginStart="@dimen/activity_margin_horizontal"
-              android:layout_below="@+id/images_reverted_text"/>
+              android:layout_below="@id/images_reverted_info"/>
 
             <com.dinuscxj.progressbar.CircleProgressBar
               android:layout_width="@dimen/dimen_40"
@@ -205,29 +226,36 @@
             android:layout_marginRight="@dimen/activity_margin_horizontal"
             android:layout_marginStart="@dimen/activity_margin_horizontal">
 
-            <TextView
-              style="?android:textAppearanceMedium"
+            <LinearLayout
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:id="@+id/images_used_by_wiki_text"
-              android:layout_marginLeft="@dimen/activity_margin_horizontal"
-              android:layout_marginStart="@dimen/activity_margin_horizontal"
-              android:layout_marginTop="@dimen/achievements_activity_margin_vertical"
-              android:text="@string/images_used_by_wiki" />
-
-            <ImageView
-              android:layout_width="@dimen/medium_width"
-              android:layout_height="@dimen/medium_height"
               android:id="@+id/images_used_by_wiki_info"
-              android:layout_marginTop="@dimen/activity_margin_horizontal"
-              android:layout_marginRight="@dimen/activity_margin_horizontal"
-              android:layout_marginEnd="@dimen/activity_margin_horizontal"
-              android:layout_toRightOf="@+id/images_used_by_wiki_text"
-              android:layout_toEndOf="@+id/images_used_by_wiki_text"
-              app:srcCompat="@drawable/ic_info_outline_24dp"
-              android:tint="@color/primaryDarkColor"
-              android:layout_marginLeft="@dimen/activity_margin_horizontal"
-              android:layout_marginStart="@dimen/activity_margin_horizontal"/>
+              android:orientation="horizontal">
+
+              <TextView
+                style="?android:textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/images_used_by_wiki_text"
+                android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                android:layout_marginStart="@dimen/activity_margin_horizontal"
+                android:layout_marginTop="@dimen/achievements_activity_margin_vertical"
+                android:text="@string/images_used_by_wiki" />
+
+              <ImageView
+                android:layout_width="@dimen/medium_width"
+                android:layout_height="@dimen/medium_height"
+                android:layout_marginTop="@dimen/activity_margin_horizontal"
+                android:layout_marginRight="@dimen/activity_margin_horizontal"
+                android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                android:layout_toRightOf="@+id/images_used_by_wiki_text"
+                android:layout_toEndOf="@+id/images_used_by_wiki_text"
+                app:srcCompat="@drawable/ic_info_outline_24dp"
+                android:tint="@color/primaryDarkColor"
+                android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                android:layout_marginStart="@dimen/activity_margin_horizontal"/>
+
+            </LinearLayout>
 
             <com.dinuscxj.progressbar.CircleProgressBar
               android:layout_width="@dimen/dimen_40"
@@ -281,9 +309,10 @@
             android:layout_marginStart="@dimen/activity_margin_horizontal"
             android:layout_marginTop="@dimen/activity_margin_horizontal">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              android:id="@+id/images_nearby_info"
               android:layout_centerVertical="true"
               android:layout_alignParentStart="true"
               android:layout_alignParentLeft="true"
@@ -293,33 +322,43 @@
               android:gravity="center_vertical">
 
               <ImageView
+                android:id="@+id/wikidata_edits_icon"
                 android:layout_width="@dimen/overflow_icon_dimen"
                 android:layout_height="@dimen/overflow_icon_dimen"
-                android:id="@+id/wikidata_edits_icon"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_custom_map_marker" />
 
               <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/images_nearby_data"
                 style="?android:textAppearanceMedium"
                 android:layout_marginStart="@dimen/activity_margin_horizontal"
                 android:layout_marginLeft="@dimen/activity_margin_horizontal"
                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
                 android:layout_marginRight="@dimen/activity_margin_horizontal"
+                app:layout_constraintLeft_toRightOf="@id/wikidata_edits_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/images_nearby_info_icon"
                 android:text="@string/statistics_wikidata_edits"  />
 
               <ImageView
                 android:layout_width="@dimen/medium_width"
                 android:layout_height="@dimen/medium_height"
-                android:id="@+id/images_nearby_info"
+                android:id="@+id/images_nearby_info_icon"
                 android:layout_marginTop="@dimen/activity_margin_horizontal"
                 android:layout_marginRight="@dimen/activity_margin_horizontal"
                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
                 android:layout_gravity="top"
+                app:layout_constraintLeft_toRightOf="@id/images_nearby_data"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
                 android:tint="@color/primaryDarkColor" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <TextView
@@ -348,9 +387,10 @@
             android:layout_marginStart="@dimen/activity_margin_horizontal"
             android:layout_marginTop="@dimen/activity_margin_horizontal">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              android:id="@+id/images_featured_info"
               android:layout_centerVertical="true"
               android:layout_alignParentStart="true"
               android:layout_alignParentLeft="true"
@@ -363,31 +403,41 @@
                 android:layout_width="@dimen/overflow_icon_dimen"
                 android:layout_height="@dimen/overflow_icon_dimen"
                 android:id="@+id/featured_image_icon"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/featured"
                 android:scaleType="centerCrop" />
 
               <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 style="?android:textAppearanceMedium"
+                android:id="@+id/images_featured_data"
                 android:layout_marginStart="@dimen/activity_margin_horizontal"
                 android:layout_marginLeft="@dimen/activity_margin_horizontal"
                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
                 android:layout_marginRight="@dimen/activity_margin_horizontal"
+                app:layout_constraintLeft_toRightOf="@id/featured_image_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/images_featured_info_icon"
                 android:text="@string/statistics_featured"  />
 
               <ImageView
                 android:layout_width="@dimen/medium_width"
                 android:layout_height="@dimen/medium_height"
-                android:id="@+id/images_featured_info"
+                android:id="@+id/images_featured_info_icon"
                 android:layout_marginTop="@dimen/activity_margin_horizontal"
                 android:layout_marginRight="@dimen/activity_margin_horizontal"
                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                app:layout_constraintLeft_toRightOf="@id/images_featured_data"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 android:layout_gravity="top"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
                 android:tint="@color/primaryDarkColor" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
               android:layout_width="wrap_content"
@@ -415,9 +465,10 @@
             android:layout_marginStart="@dimen/activity_margin_horizontal"
             android:layout_marginTop="@dimen/activity_margin_horizontal">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              android:id="@+id/quality_images_info"
               android:layout_centerVertical="true"
               android:layout_alignParentStart="true"
               android:layout_alignParentLeft="true"
@@ -430,31 +481,41 @@
                 android:layout_width="@dimen/overflow_icon_dimen"
                 android:layout_height="@dimen/overflow_icon_dimen"
                 android:id="@+id/quality_image_icon"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_quality_images_logo"
                 android:scaleType="centerInside" />
 
               <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 style="?android:textAppearanceMedium"
+                android:id="@+id/quality_images_data"
                 android:layout_marginStart="@dimen/activity_margin_horizontal"
                 android:layout_marginLeft="@dimen/activity_margin_horizontal"
                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
                 android:layout_marginRight="@dimen/activity_margin_horizontal"
+                app:layout_constraintLeft_toRightOf="@id/quality_image_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/quality_images_info_icon"
                 android:text="@string/statistics_quality"  />
 
               <ImageView
                 android:layout_width="@dimen/medium_width"
                 android:layout_height="@dimen/medium_height"
-                android:id="@+id/quality_images_info"
+                android:id="@+id/quality_images_info_icon"
                 android:layout_marginTop="@dimen/activity_margin_horizontal"
                 android:layout_marginRight="@dimen/activity_margin_horizontal"
                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                app:layout_constraintLeft_toRightOf="@id/quality_images_data"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 android:layout_gravity="top"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
                 android:tint="@color/primaryDarkColor" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
               android:layout_width="wrap_content"
@@ -483,9 +544,10 @@
             android:layout_marginTop="@dimen/activity_margin_horizontal"
             android:layout_marginEnd="@dimen/activity_margin_horizontal">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              android:id="@+id/thanks_received_info"
               android:layout_centerVertical="true"
               android:layout_alignParentStart="true"
               android:layout_alignParentLeft="true"
@@ -498,31 +560,41 @@
                 android:layout_width="@dimen/overflow_icon_dimen"
                 android:layout_height="@dimen/overflow_icon_dimen"
                 android:id="@+id/thanks_image_icon"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_thanks"
                 android:scaleType="centerCrop" />
 
               <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 style="?android:textAppearanceMedium"
+                android:id="@+id/thanks_received_data"
                 android:layout_marginStart="@dimen/activity_margin_horizontal"
                 android:layout_marginLeft="@dimen/activity_margin_horizontal"
                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
                 android:layout_marginRight="@dimen/activity_margin_horizontal"
+                app:layout_constraintLeft_toRightOf="@id/thanks_image_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/thanks_received_info_icon"
                 android:text="@string/statistics_thanks"  />
 
               <ImageView
                 android:layout_width="@dimen/medium_width"
                 android:layout_height="@dimen/medium_height"
-                android:id="@+id/thanks_received_info"
+                android:id="@+id/thanks_received_info_icon"
                 android:layout_marginTop="@dimen/activity_margin_horizontal"
                 android:layout_marginRight="@dimen/activity_margin_horizontal"
                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                app:layout_constraintLeft_toRightOf="@id/thanks_received_data"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 android:layout_gravity="top"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
                 android:tint="@color/primaryDarkColor" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
               android:layout_width="wrap_content"

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Lizalizaufa
 * Sagan
 * Рустам Нурыев
@@ -15,12 +14,12 @@
     <item quantity="one">%1$d тейәү</item>
     <item quantity="other">%1$d тейәүҙәр</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d тейәү башлана</item>
     <item quantity="few">%1$d тейәү башлана</item>
     <item quantity="other">%1$d тейәүҙәр башлана</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d тейәү</item>
     <item quantity="few">%1$d тейәүҙәр</item>
     <item quantity="other">%1$d тейәүҙәре</item>
@@ -29,7 +28,6 @@
   <string name="preference_category_appearance">Тышҡы күренеш</string>
   <string name="preference_category_general">Ғәҙәти</string>
   <string name="preference_category_feedback">Яуап алыу</string>
-  <string name="preference_category_location">Туҡтаған урын</string>
   <string name="app_name">Викимилек</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Көйләүҙәр</string>
@@ -48,7 +46,7 @@
   <string name="uploading_started">Тейәү башланды!</string>
   <string name="upload_completed_notification_title">%1$s тейәлде!</string>
   <string name="upload_completed_notification_text">Ошонда баҫып тейәлгән файлды ҡара</string>
-  <string name="upload_progress_notification_title_start">%1$s тейәү башланды</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s тейәү башланды</string>
   <string name="upload_progress_notification_title_in_progress">%1$s тейәлә</string>
   <string name="upload_progress_notification_title_finishing">Тейәү %1$s тамамланды</string>
   <string name="upload_failed_notification_title">Тейәү %1$s килеп сыҡманы</string>
@@ -62,7 +60,6 @@
   <string name="menu_from_camera">Фотоға төшөрөргә</string>
   <string name="provider_contributions">Минең тейәүҙәрем</string>
   <string name="menu_share">Уртаҡлашырға</string>
-  <string name="menu_open_in_browser">Браузерҙа асырға</string>
   <string name="share_title_hint" fuzzy="true">Исем</string>
   <string name="share_description_hint">Тасуирлама</string>
   <string name="login_failed_network">Инеп булмай - интернет хатаһы</string>
@@ -75,8 +72,6 @@
   <string name="provider_modifications">Үҙгәрештәр</string>
   <string name="categories_search_text_hint">Категория буйынса эҙләү</string>
   <string name="menu_save_categories">Һаҡларға</string>
-  <string name="gps_disabled">Ҡоролмағыҙҙа GPS һүнгән. Тоҡандырырғамы?</string>
-  <string name="enable_gps">GPS-ты тоҡандырыу</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Тейәүҙәр әлегә юҡ</string>
   <string name="categories_not_found">%1$s тап килгән категориялар табылманы</string>
   <string name="categories_skip_explanation">Викискладта һәрәтегеҙҙе тиҙерәк табыу өсөн категоиялар өҫтәгеҙ.\nКатегория өҫтәү өсөн атама яҙа башлағыҙ.</string>
@@ -99,8 +94,6 @@
   <string name="menu_download">Тейәргә</string>
   <string name="preference_license">Нығытылған рөхсәтнамә</string>
   <string name="use_previous" fuzzy="true">Алдағы атама/һәрәтләмәне ҡулланыу</string>
-  <string name="allow_gps">Автомат рәүешендә сираттағы урынды алыу</string>
-  <string name="allow_gps_summary" fuzzy="true">Әгәр рәсемдең геотегтары булмаһа, категориялар үҙенән-үҙе тәҡдим ителһен өсөн сираттағы урынды алырға</string>
   <string name="preference_theme" fuzzy="true">Төнгө режим</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
@@ -108,20 +101,9 @@
   <string name="license_name_cc_by"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Австрия)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Германия)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Эстония)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Испания)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Хорватия)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Люксембург)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Нидерландтар)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Норвегия)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Польша)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Румыния)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC-BY-SA 3.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CCНуль</string>
   <string name="tutorial_1_text">Викисклад Википедияла ҡулланылғандан күберәк рәсемде һаҡлай.</string>
   <string name="tutorial_1_subtext">Һеҙ ҡуйған рәсемдәр ер шары халҡын мәғрифәтлерәк итә!</string>
   <string name="tutorial_2_text">Зинһар, тик үҙегеҙ төшөргән йәки үҙегеҙ эшләгән фотографияларҙы ғына тейәгеҙ:</string>
@@ -150,9 +132,6 @@
   <string name="menu_refresh">Яңыртып алыу</string>
   <string name="read_storage_permission_rationale" fuzzy="true">Кәрәкле рөхсәт: тышҡы һаҡлағыстан алып уҡыу. Ҡушымта шунһыҙ эшләмәйәсәк.</string>
   <string name="write_storage_permission_rationale" fuzzy="true">Кәрәкле рөхсәт: тышҡы һаҡлағысҡа яҙыу. Ҡушымта шунһыҙ эшләмәйәсәк.</string>
-  <string name="location_permission_rationale">Мотлаҡ булмаған рөхсәт: категория тәҡдиме өсөн ошо урынды алыу</string>
-  <string name="title_activity_nearby">Яҡындағы урындар</string>
-  <string name="no_nearby">Яҡындағы урындар табылманы</string>
   <string name="media_detail_title">Атама</string>
   <string name="media_detail_uploaded_date">Тейәү датаһы</string>
   <string name="media_detail_coordinates">Координаттар</string>
@@ -160,25 +139,16 @@
   <string name="become_a_tester_title">Бета-тестер булыу</string>
   <string name="become_a_tester_description">Google Play аша беҙҙең бета-версия каналына яҙыл һәм иң тәүгеләрҙән булып яңы көйләүҙәр,хата төҙәтеүҙәрҙе бел</string>
   <string name="_2fa_code">2ФА Коды</string>
-  <string name="number_of_uploads">Һуңғы тейәүҙәремдең лимиты</string>
-  <string name="maximum_limit">Максималь лимит</string>
-  <string name="maximum_limit_alert">500-ҙән артығын күрһәтеп булмай</string>
-  <string name="login_failed_2fa_not_supported">Ике ҡат тоғролау бөгөн кәрәкмәй</string>
   <string name="logout_verification">Ысынлап та сыҡҡың киләме?</string>
   <string name="commons_logo">Викисклад логотибы</string>
   <string name="commons_website">Commons веб-сайты</string>
   <string name="commons_facebook">Commons Facebook-бите</string>
   <string name="commons_github">Гитхабтағы Commons сығанаҡ кодтары</string>
-  <string name="background_image">Арттағы дөйөм һүрәт</string>
   <string name="mediaimage_failed">Медиарәсем хатаһы</string>
-  <string name="no_image_found">Рәсем табылманы</string>
-  <string name="upload_image">Рәсемде тейәргә</string>
   <string name="welcome_image_mount_zao">Зао тауы</string>
   <string name="welcome_image_llamas">Ламалар</string>
   <string name="welcome_image_rainbow_bridge">Йәйғорло күпер</string>
   <string name="welcome_image_tulip">Ләлә</string>
-  <string name="welcome_image_no_selfies">Сэлфи юҡ</string>
-  <string name="welcome_image_proprietary">Сикләнгән рәсем</string>
   <string name="welcome_image_welcome_wikipedia">Википедияға рәхим итегеҙ</string>
   <string name="welcome_image_welcome_copyright">Рәхим итегеҙ - автор хоҡуҡтары</string>
   <string name="welcome_image_sydney_opera_house">Сидней опера театры</string>
@@ -190,14 +160,10 @@
   <string name="navigation_item_feedback">Яуап кәрәк</string>
   <string name="navigation_item_logout">Сығам</string>
   <string name="navigation_item_info">Өйрәтмә</string>
-  <string name="nearby_needs_permissions">Геолокацияға рөхсәт булмайынса яҡындағы урындар күренмәйәсәк</string>
   <string name="no_description_found">һүрәтләү табылманы</string>
   <string name="nearby_info_menu_commons_article">Викискладтағы файл бите</string>
   <string name="nearby_info_menu_wikidata_article">Викимәғлүмәт өлөшө</string>
-  <string name="error_while_cache">Рәсемде кэшлағандағы хата</string>
-  <string name="title_info">Файлдың исеме булараҡ һаҡланасаҡ үҙенсәлекле һәртәләү. Тәбиғи телегеҙҙе, һүҙҙәр араһын айырып, ҡулланырға була. Зинһар, файл киңәйтеүҙәрен күрһәтмәгеҙ.</string>
   <string name="description_info">Зинһар, тейәләсәк файлды тәфсирләп һүрәтлә:ҡайҙа төшөрөлгән? нимә һәрәтләнә? һүрәт нимәне аңлата? Рәсемдәге кешеләр йәки объекттарҙы ла һүрәтлә. Һүрәткә ҡарап ҡына белеп булмаған мәғлүмәттәрҙе өҫтә: мәҫәлән, тәүлектең ниндәй мәлендә, ҡасан төшөрөлгән был файл. Әгәр ғәҙәти булмаған әйбер төшөрөлһә, уның нимәһе шаҡ ҡатырғанын аңлат.</string>
-  <string name="give_permission">Рөхсәт бирәм</string>
   <string name="use_external_storage" fuzzy="true">Тышҡы һаҡлағысты ҡуллан</string>
   <string name="use_external_storage_summary" fuzzy="true">Ҡулайламаның камераһы ярҙамында төшөрөлгән һүрәттәрҙе һаҡлау</string>
   <string name="login_to_your_account">Шәхси теркәү яҙмаһына ин</string>

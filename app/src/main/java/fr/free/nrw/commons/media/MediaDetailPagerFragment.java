@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -38,11 +38,12 @@ import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.disposables.CompositeDisposable;
+import java.util.ArrayList;
 import java.util.Objects;
 import javax.inject.Inject;
 import timber.log.Timber;
 
-public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
+public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener, MediaDetailFragment.Callback {
 
     @Inject BookmarkPicturesDao bookmarkDao;
 
@@ -63,6 +64,15 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     private MediaDetailProvider provider;
     private boolean isFromFeaturedRootFragment;
     private int position;
+
+    private ArrayList<Integer> removedItems=new ArrayList<Integer>();
+
+    public void clearRemoved(){
+        removedItems.clear();
+    }
+    public ArrayList<Integer> getRemovedItems() {
+        return removedItems;
+    }
 
     public MediaDetailPagerFragment() {
         this(false, false);
@@ -93,6 +103,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
         adapter = new MediaDetailAdapter(getChildFragmentManager());
 
+
         if (getActivity() != null) {
             final ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
             if (actionBar != null) {
@@ -100,25 +111,15 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             }
         }
 
+
+        pager.setAdapter(adapter);
+
         if (savedInstanceState != null) {
             final int pageNumber = savedInstanceState.getInt("current-page");
-            // Adapter doesn't seem to be loading immediately.
-            // Dear God, please forgive us for our sins
-            view.postDelayed(() -> {
-                pager.setAdapter(adapter);
-                pager.setCurrentItem(pageNumber, false);
-
-                if (getActivity() == null) {
-                    Timber.d("Returning as activity is destroyed!");
-                    return;
-                }
-
-                getActivity().supportInvalidateOptionsMenu();
-                adapter.notifyDataSetChanged();
-            }, 100);
-        } else {
-            pager.setAdapter(adapter);
+            pager.setCurrentItem(pageNumber, false);
+            getActivity().invalidateOptionsMenu();
         }
+        adapter.notifyDataSetChanged();
         if (getActivity() instanceof MainActivity) {
             ((MainActivity)getActivity()).hideTabs();
         }
@@ -300,25 +301,58 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(false)
                             .setVisible(false);
                 }
+
+                if (!sessionManager.isUserLoggedIn()) {
+                    menu.findItem(R.id.menu_set_as_avatar).setVisible(false);
+                }
+
             }
         }
     }
 
     private void updateBookmarkState(MenuItem item) {
         boolean isBookmarked = bookmarkDao.findBookmark(bookmark);
+        if(isBookmarked) {
+            if(removedItems.contains(pager.getCurrentItem())) {
+                removedItems.remove(new Integer(pager.getCurrentItem()));
+            }
+        }
+        else {
+            if(!removedItems.contains(pager.getCurrentItem())) {
+                removedItems.add(pager.getCurrentItem());
+            }
+        }
         int icon = isBookmarked ? R.drawable.menu_ic_round_star_filled_24px : R.drawable.menu_ic_round_star_border_24px;
         item.setIcon(icon);
     }
 
     public void showImage(int i, boolean isWikipediaButtonDisplayed) {
         this.isWikipediaButtonDisplayed = isWikipediaButtonDisplayed;
-        Handler handler =  new Handler();
-        handler.postDelayed(() -> pager.setCurrentItem(i), 5);
+        setViewPagerCurrentItem(i);
     }
 
     public void showImage(int i) {
-        Handler handler =  new Handler();
-        handler.postDelayed(() -> pager.setCurrentItem(i), 5);
+        setViewPagerCurrentItem(i);
+    }
+
+    /**
+     * This function waits for the item to load then sets the item to current item
+     * @param position current item that to be shown
+     */
+    private void setViewPagerCurrentItem(int position) {
+        final Boolean[] currentItemNotShown = {true};
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                while(currentItemNotShown[0]){
+                    if(adapter.getCount() > position){
+                        pager.setCurrentItem(position, false);
+                        currentItemNotShown[0] = false;
+                    }
+                }
+            }
+        };
+        new Thread(runnable).start();
     }
 
     /**
@@ -354,16 +388,44 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         }
     }
 
+    /**
+     * Called after the media is nominated for deletion
+     *
+     * @param index item position that has been nominated
+     */
+    @Override
+    public void nominatingForDeletion(int index) {
+      provider.refreshNominatedMedia(index);
+    }
+  
+    /**
+     * backButtonClicked is called on a back event in the media details pager.
+     * returns true after closing the categoryEditContainer if open, implying that event was handled.
+     * else returns false
+     * @return
+     */
+    public boolean backButtonClicked(){
+        return ((MediaDetailFragment)(adapter.getCurrentFragment())).hideCategoryEditContainerIfOpen();
+    }
+
     public interface MediaDetailProvider {
         Media getMediaAtPosition(int i);
 
         int getTotalMediaCount();
 
         Integer getContributionStateAt(int position);
+
+        // Reload media detail fragment once media is nominated
+        void refreshNominatedMedia(int index);
     }
 
     //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)
     private class MediaDetailAdapter extends FragmentStatePagerAdapter {
+
+        /**
+         * Keeps track of the current displayed fragment.
+         */
+        private Fragment mCurrentFragment;
 
         public MediaDetailAdapter(FragmentManager fm) {
             super(fm);
@@ -393,6 +455,31 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 return 0;
             }
             return provider.getTotalMediaCount();
+        }
+
+        /**
+         * Get the currently displayed fragment.
+         * @return
+         */
+        public Fragment getCurrentFragment() {
+            return mCurrentFragment;
+        }
+
+        /**
+         * Called to inform the adapter of which item is currently considered to be the "primary",
+         * that is the one show to the user as the current page.
+         * @param container
+         * @param position
+         * @param object
+         */
+        @Override
+        public void setPrimaryItem(@NonNull final ViewGroup container, final int position,
+            @NonNull final Object object) {
+            // Update the current fragment if changed
+            if(getCurrentFragment() != object) {
+                mCurrentFragment = ((Fragment)object);
+            }
+            super.setPrimaryItem(container, position, object);
         }
     }
 }

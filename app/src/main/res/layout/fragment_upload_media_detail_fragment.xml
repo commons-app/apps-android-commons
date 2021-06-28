@@ -99,11 +99,11 @@
 
 
                 <androidx.appcompat.widget.AppCompatButton
-                  android:id="@+id/btn_copy_prev_title_desc"
+                  android:id="@+id/btn_copy_subsequent_media"
                   style="@style/Widget.AppCompat.Button.Borderless"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:text="@string/previous_image_caption_description"
+                  android:text="@string/copy_image_caption_description"
                   android:padding="@dimen/miniscule_margin"
                   android:textAlignment="textEnd"
                   android:textColor="@color/button_blue"

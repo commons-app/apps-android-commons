@@ -6,13 +6,15 @@
 * Simbu123
 -->
 <resources>
-  <string name="title_activity_explore">অন্বেষণ কৰক</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$dটা ফাইল আপল\'ড হৈছে</item>
+    <item quantity="other">%1$dটা ফাইল আপল\'ড হৈছে</item>
+  </plurals>
   <string name="navigation_item_explore">অন্বেষণ কৰক</string>
   <string name="preference_category_appearance">ৰূপ</string>
   <string name="preference_category_general">সাধাৰণ</string>
   <string name="preference_category_feedback">প্ৰতিক্ৰিয়া</string>
   <string name="preference_category_privacy">গোপনিয়তা</string>
-  <string name="preference_category_location">অৱস্থান</string>
   <string name="app_name">ক\'ম\'ঞ্চ</string>
   <string name="bullet">•</string>
   <string name="menu_settings">ছেটিংছ</string>
@@ -32,15 +34,12 @@
   <string name="uploading_started">আপল\'ড আৰম্ভ হৈছে!</string>
   <string name="upload_completed_notification_title">%1$s আপল\'ড কৰা হ\'ল!</string>
   <string name="upload_completed_notification_text">আপোনাৰ আপল\'ড চাবলৈ টেপ্‌ কৰক</string>
-  <string name="upload_progress_notification_title_start">%1$s আপল\'ড আৰম্ভ হৈছে</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s আপল\'ড আৰম্ভ হৈছে</string>
   <string name="upload_progress_notification_title_in_progress">%1$s আপল\'ড হৈছে</string>
   <string name="upload_progress_notification_title_finishing">%1$s আপল\'ড শেষ হৈছে</string>
   <string name="upload_failed_notification_title">%1$s আপল\'ড ব্যৰ্থ হৈছে</string>
   <string name="upload_failed_notification_subtitle">চাবৰ বাবে স্পৰ্শ কৰক</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$dটা ফাইল আপল\'ড হৈছে</item>
-    <item quantity="other">%1$dটা ফাইল আপল\'ড হৈছে</item>
-  </plurals>
+  <string name="upload_paused_notification_subtitle">চাবৰ বাবে স্পৰ্শ কৰক</string>
   <string name="title_activity_contributions">মোৰ শেহতীয়া আপল\'ড</string>
   <string name="contribution_state_queued">অপে‌ক্ষাৰত</string>
   <string name="contribution_state_failed">ব্যৰ্থ হৈছে</string>
@@ -51,12 +50,9 @@
   <string name="menu_nearby">কাষৰীয়া</string>
   <string name="provider_contributions">মোৰ আপল\'ডসমূহ</string>
   <string name="menu_share">শ্বেয়াৰ কৰক</string>
-  <string name="menu_open_in_browser">ব্ৰাউজাৰত চাওক</string>
-  <string name="share_title_hint">শীৰ্ষক (প্ৰয়োজনীয়)</string>
-  <string name="add_title_toast">অনুগ্ৰহ কৰি এই ফাই‍লটোৰ এটা শিৰোনাম দিয়ক</string>
+  <string name="share_title_hint" fuzzy="true">শীৰ্ষক (প্ৰয়োজনীয়)</string>
   <string name="share_description_hint">বিৱৰণ</string>
   <string name="login_failed_network">প্ৰৱেশ ব্যৰ্থ হৈছে - নে\'টৱৰ্ক সমস্যা</string>
-  <string name="login_failed_wrong_credentials">প্ৰৱেশ ব্যৰ্থ হৈছে - অনুগ্ৰহ কৰি আপোনাৰ সদস্যনাম আৰু গুপ্তশব্দ পৰীক্ষা কৰক</string>
   <string name="login_failed_throttled">অত্যাধিক অসফল প্ৰচেষ্টা। অনুগ্ৰহ কৰি অলপ সময়ৰ পাছত পুনৰ চেষ্টা কৰক।</string>
   <string name="login_failed_blocked">ক্ষমা কৰিব, এই ব্যৱহাৰকাৰী গৰাকীক ক\'ম\'ঞ্চত বাৰণ কৰা হৈছে</string>
   <string name="login_failed_generic">প্ৰৱেশ ব্যৰ্থ হৈছে</string>
@@ -67,9 +63,7 @@
   <string name="menu_save_categories">সাঁচি থওক</string>
   <string name="refresh_button">ৰিফ্ৰেচ</string>
   <string name="display_list_button">তালিকা</string>
-  <string name="gps_disabled">আপোনাৰ সঁজুলিত GPS নিষ্ক্ৰিয় হৈ আছে। আপুনি ইয়াক সক্ৰিয় কৰিব খুজিছে নেকি?</string>
-  <string name="enable_gps">GPS সক্ৰিয় কৰক</string>
-  <string name="contributions_subtitle_zero">এতিয়ালৈকে কোনো আপল\'ড নাই</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">এতিয়ালৈকে কোনো আপল\'ড নাই</string>
   <string name="categories_activity_title">শ্ৰেণী</string>
   <string name="title_activity_settings">ছেটিংছ</string>
   <string name="title_activity_signup">পঞ্জীয়ন কৰক</string>
@@ -99,8 +93,6 @@
   <string name="detail_license_empty">অজ্ঞাত লাইচেঞ্চ</string>
   <string name="menu_refresh">সতেজ কৰক</string>
   <string name="ok">ঠিক আছে</string>
-  <string name="title_activity_nearby">নিকটৱৰ্তী ঠাইসমূহ</string>
-  <string name="no_nearby">কোনো নিকটৱৰ্তী ঠাই পোৱা নাই</string>
   <string name="warning">সকীয়নি</string>
   <string name="yes">হয়</string>
   <string name="no">নহয়</string>
@@ -111,14 +103,7 @@
   <string name="media_detail_coordinates">স্থানাংকসমূহ</string>
   <string name="media_detail_coordinates_empty">একো প্ৰদান কৰা নাই</string>
   <string name="become_a_tester_title">এগৰাকী বিটা টেষ্টাৰ হওঁক</string>
-  <string name="invalid_zero">শূণ্য বৈধ নহয়</string>
-  <string name="invalid_input">অবৈধ ইনপুট</string>
-  <string name="enter_valid">এটা বৈধ সংখ্যা প্ৰবিষ্ট কৰক</string>
-  <string name="cannot_be_zero">আপল\'ডৰ সীমা ০ হ\'ব নোৱাৰে</string>
-  <string name="set_limit">শেহতীয়া আপল\'ডৰ সীমা</string>
-  <string name="background_image">পটভূমিৰ ছবি</string>
   <string name="mediaimage_failed">মিডিয়াৰ ছবি বিফল হ\'ল</string>
-  <string name="no_image_found">কোনো ছবি পোৱা নাই</string>
   <string name="navigation_drawer_open">খোলক</string>
   <string name="navigation_drawer_close">বন্ধ কৰক</string>
   <string name="navigation_item_nearby">নিকটৱৰ্তী</string>
@@ -126,9 +111,9 @@
   <string name="navigation_item_feedback">প্ৰতিক্ৰিয়া</string>
   <string name="navigation_item_notification">জাননী</string>
   <string name="upload_problem_image_blurry">ছবিখন ধোঁৱা-ধোঁৱা।</string>
-  <string name="give_permission">অনুমতি দিয়ক</string>
   <string name="null_url">ত্ৰুটি! URL পোৱা নাই</string>
   <string name="skip_login">বাদ দিয়ক</string>
+  <string name="nearby_wikipedia">ৱিকিপিডিয়া</string>
   <string name="nearby_commons">ক\'ম\'ঞ্চ</string>
   <string name="appwidget_img">দিনটোৰ ছবিখন</string>
   <string name="app_widget_heading">দিনটোৰ ছবিখন</string>
@@ -139,15 +124,12 @@
   <string name="error_occurred">ত্ৰুটি সংঘটিত হ\'ল!</string>
   <string name="notifications">জাননী</string>
   <string name="submit">দাখিল কৰক</string>
-  <string name="yes_submit">হয়, দাখিল কৰক</string>
   <string name="dialog_box_text_nomination">%1$s কিয় বিলোপ কৰা হ\'ব লাগে?</string>
   <string name="delete_helper_show_deletion_title_success">সফল</string>
   <string name="delete_helper_show_deletion_title_failed">বিফল হ\'ল</string>
   <string name="delete_helper_ask_spam_selfie">এটা ছেল্ফি</string>
   <string name="delete_helper_ask_spam_blurry">ধোঁৱা-ধোঁৱা</string>
   <string name="delete_helper_ask_spam_nonsense">অৰ্থহীন</string>
-  <string name="delete_helper_ask_spam_other">অনান্য</string>
   <string name="delete_helper_ask_reason_copyright_logo">ল\'গ\'</string>
-  <string name="delete_helper_ask_reason_copyright_other">অন্য</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">কাৰণ এয়া</string>
 </resources>

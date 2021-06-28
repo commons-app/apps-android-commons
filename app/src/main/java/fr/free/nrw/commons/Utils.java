@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.browser.customtabs.CustomTabColorSchemeParams;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 
@@ -139,9 +140,13 @@ public class Utils {
             return;
         }
 
+        final CustomTabColorSchemeParams color = new CustomTabColorSchemeParams.Builder()
+            .setToolbarColor(ContextCompat.getColor(context, R.color.primaryColor))
+            .setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.primaryDarkColor))
+            .build();
+
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-        builder.setToolbarColor(ContextCompat.getColor(context, R.color.primaryColor));
-        builder.setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.primaryDarkColor));
+        builder.setDefaultColorSchemeParams(color);
         builder.setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         CustomTabsIntent customTabsIntent = builder.build();
         // Clear previous browser tasks, so that back/exit buttons work as intended.

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Servien
+-->
 <resources>
+  <string name="share_license_summary" fuzzy="true">Disse aofbeelding völt onder de lisensie %1$s</string>
   <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Veurkeuren</string>
   <string name="username">Gebrukersnaam</string>
@@ -9,11 +13,11 @@
   <string name="logging_in_message">Effen wachten heur…</string>
   <string name="login_success">Suksesvol an-emeld</string>
   <string name="login_failed">Anmelden mislokt</string>
-  <string name="authentication_failed">Verifikasie is mislokt</string>
+  <string name="authentication_failed" fuzzy="true">Verifikasie is mislokt</string>
   <string name="uploading_started">t Oplaojen van bestaanden hef an-evöngen</string>
   <string name="upload_completed_notification_title">%1$s in-elaojen!</string>
   <string name="upload_completed_notification_text">Wies an um t bestaand te bekieken</string>
-  <string name="upload_progress_notification_title_start">t Opsturen van bestaand %1$s vangt an</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">t Opsturen van bestaand %1$s vangt an</string>
   <string name="upload_progress_notification_title_in_progress">%1$s wörden in-elaojen</string>
   <string name="upload_progress_notification_title_finishing">t Oplaojen van %1$s is klaor</string>
   <string name="upload_failed_notification_title">t Oplaojen van %1$s is mislokt</string>
@@ -27,12 +31,9 @@
   <string name="menu_from_camera">Foto maken</string>
   <string name="provider_contributions">De bestaanden die\'k op-estuurd hebbe</string>
   <string name="menu_share">Delen</string>
-  <string name="menu_open_in_browser">In webkieker bekieken</string>
-  <string name="share_title_hint">Titel</string>
+  <string name="share_title_hint" fuzzy="true">Titel</string>
   <string name="share_description_hint">Beschrieving</string>
   <string name="login_failed_network">Kon niet anmelden. Der is n probleem mit t netwark</string>
-  <string name="login_failed_username">Kon niet anmelden - kiek joew gebrukersnaam nao</string>
-  <string name="login_failed_password">Kon niet anmelden - kiek joew wachtwoord nao</string>
   <string name="login_failed_throttled" fuzzy="true">Je hebben te vake eprobeerd um je eigen an te melden. Probeer t over n paor minuten weer</string>
   <string name="login_failed_blocked">Disse gebruker is eblokkeerd op Wikimedia Commons</string>
   <string name="login_failed_generic">Anmelden mislokt</string>
@@ -55,9 +56,8 @@
   <string name="provider_categories">Kortens gebruukten kategorieën</string>
   <string name="waiting_first_sync">Wachten op de eerste synchronisasie…</string>
   <string name="no_uploads_yet">Je hebben nog gien aofbeeldingen op-estuurd.</string>
-  <string name="share_license_summary">Disse aofbeelding völt onder de lisensie %1$s</string>
   <string name="menu_download">Neerlaojen</string>
-  <string name="preference_license" fuzzy="true">Lisensie</string>
+  <string name="preference_license">Standardlicensy</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Naamsvermelding-Gelieke Delen</string>
   <string name="license_name_cc_by" fuzzy="true">CC Naamsvermelding</string>
   <string name="license_name_cc0">CC0</string>

@@ -1,7 +1,9 @@
 package fr.free.nrw.commons.contributions;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -13,13 +15,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.BookmarkFragment;
-import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.ExploreFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -29,15 +33,15 @@ import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment;
 import fr.free.nrw.commons.navtab.NavTab;
 import fr.free.nrw.commons.navtab.NavTabLayout;
 import fr.free.nrw.commons.navtab.NavTabLoggedOut;
-import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
+import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.upload.worker.UploadWorker;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -64,6 +68,7 @@ public class MainActivity  extends BaseActivity
     private ExploreFragment exploreFragment;
     private BookmarkFragment bookmarkFragment;
     public ActiveFragment activeFragment;
+    private MediaDetailPagerFragment mediaDetailPagerFragment;
 
     @Inject
     public LocationServiceManager locationManager;
@@ -107,6 +112,7 @@ public class MainActivity  extends BaseActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadLocale();
         setContentView(R.layout.main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
@@ -114,7 +120,7 @@ public class MainActivity  extends BaseActivity
             onSupportNavigateUp();
         });
         if (applicationKvStore.getBoolean("login_skipped") == true) {
-            setTitle(getString(R.string.explore_tab_title_mobile));
+            setTitle(getString(R.string.navigation_item_explore));
             setUpLoggedOutPager();
         } else {
             if(savedInstanceState == null){
@@ -123,7 +129,6 @@ public class MainActivity  extends BaseActivity
                 loadFragment(ContributionsFragment.newInstance(),false);
             }
             setUpPager();
-            initMain();
         }
     }
 
@@ -236,13 +241,26 @@ public class MainActivity  extends BaseActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("viewPagerCurrentItem", viewPager.getCurrentItem());
+        outState.putString("activeFragment", activeFragment.name());
     }
 
-    private void initMain() {
-        //Do not remove this, this triggers the sync service
-        Intent uploadServiceIntent = new Intent(this, UploadService.class);
-        uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
-        startService(uploadServiceIntent);
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        String currentFragmentName = savedInstanceState.getString("activeFragment");
+        if(currentFragmentName == ActiveFragment.CONTRIBUTIONS.name()) {
+            setTitle(getString(R.string.contributions_fragment));
+            loadFragment(ContributionsFragment.newInstance(),false);
+        }else if(currentFragmentName == ActiveFragment.NEARBY.name()) {
+            setTitle(getString(R.string.nearby_fragment));
+            loadFragment(NearbyParentFragment.newInstance(),false);
+        }else if(currentFragmentName == ActiveFragment.EXPLORE.name()) {
+            setTitle(getString(R.string.navigation_item_explore));
+            loadFragment(ExploreFragment.newInstance(),false);
+        }else if(currentFragmentName == ActiveFragment.BOOKMARK.name()) {
+            setTitle(getString(R.string.favorites));
+            loadFragment(BookmarkFragment.newInstance(),false);
+        }
     }
 
     @Override
@@ -298,13 +316,10 @@ public class MainActivity  extends BaseActivity
             viewUtilWrapper
                 .showShortToast(getBaseContext(), getString(R.string.limited_connection_enabled));
         } else {
-            Intent intent = new Intent(this, UploadService.class);
-            intent.setAction(UploadService.PROCESS_PENDING_LIMITED_CONNECTION_MODE_UPLOADS);
-            if (VERSION.SDK_INT >= VERSION_CODES.O) {
-                startForegroundService(intent);
-            } else {
-                startService(intent);
-            }
+            WorkManager.getInstance(getApplicationContext()).enqueueUniqueWork(
+                UploadWorker.class.getSimpleName(),
+                ExistingWorkPolicy.KEEP, OneTimeWorkRequest.from(UploadWorker.class));
+
             viewUtilWrapper
                 .showShortToast(getBaseContext(), getString(R.string.limited_connection_disabled));
         }
@@ -349,5 +364,15 @@ public class MainActivity  extends BaseActivity
         EXPLORE,
         BOOKMARK,
         MORE
+    }
+
+    /**
+     * Load default language in onCreate from SharedPreferences
+     */
+    private void loadLocale(){
+        final SharedPreferences preferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        final String language = preferences.getString("language", "");
+        final SettingsFragment settingsFragment = new SettingsFragment();
+        settingsFragment.setLocale(this, language);
     }
 }

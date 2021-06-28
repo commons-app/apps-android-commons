@@ -3,12 +3,32 @@
 * Joetaras
 -->
 <resources>
-  <string name="title_activity_explore">Esplore</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d fail in caricamende</item>
+    <item quantity="other">%1$d fail in caricamende</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <string name="starting_uploads">Stoche accumenze le carecaminde</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Ste processe %d carecamende</item>
+    <item quantity="other">Ste processe %d carecaminde</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d carecamende</item>
+    <item quantity="other">%d carecaminde</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d Carecamende</item>
+    <item quantity="other">%1$d Carecaminde</item>
+  </plurals>
   <string name="navigation_item_explore">Esplore</string>
   <string name="preference_category_appearance">Aspette</string>
   <string name="preference_category_general">Generale</string>
   <string name="preference_category_feedback">Segnalazione</string>
-  <string name="preference_category_location">Luèche</string>
+  <string name="preference_category_privacy">Privacy</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">\'Mbostaziune</string>
@@ -28,12 +48,14 @@
   <string name="uploading_started">Carecamende accumenzate!</string>
   <string name="upload_completed_notification_title">%1$s carecate!</string>
   <string name="menu_share">Condivide</string>
-  <string name="share_title_hint">Titole (Cercate)</string>
+  <string name="share_title_hint">Titole (Obbligatorie)</string>
   <string name="share_upload_button">Careche</string>
   <string name="menu_upload_single">Careche</string>
   <string name="menu_save_categories">Reggìstre</string>
   <string name="refresh_button">Aggiorne</string>
   <string name="display_list_button">Elenghe</string>
+  <string name="no_child_classes">%1$s non ge tène classe figghie</string>
+  <string name="no_parent_classes">%1$s non ge tène classe attane</string>
   <string name="categories_activity_title">Categorije</string>
   <string name="title_activity_settings">\'Mbostaziune</string>
   <string name="title_activity_signup">Reggistrate</string>
@@ -48,20 +70,9 @@
   <string name="license_name_cc_by"> Attribbuzione 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austrie)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Germanie)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonie)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spagne)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croazie)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Lussemburghe)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Olande)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norveggie)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Pulonie)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romanie)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="ok">OK</string>
   <string name="yes">Sìne</string>
   <string name="no">None</string>
@@ -76,41 +87,48 @@
   <string name="upload_problem_image_blurry">L\'immaggine jè sfocate.</string>
   <string name="upload_problem_different_geolocation">Sta fote ha state pigghiate da \'nu luèche diverse.</string>
   <string name="navigation_item_login">Tràse</string>
-  <string name="search_tab_title_media">MEDIA</string>
-  <string name="search_tab_title_categories">CATEGORIJE</string>
+  <string name="nearby_directions">Direziune</string>
+  <string name="nearby_wikidata">Uicchidata</string>
+  <string name="nearby_wikipedia">Uicchipèdie</string>
+  <string name="nearby_commons">Commons</string>
+  <string name="block_notification_title">Bloccate</string>
+  <string name="search_tab_title_media">Media</string>
+  <string name="search_tab_title_categories">Categorije</string>
+  <string name="search_tab_title_depictions">Vôsce</string>
+  <string name="explore_tab_title_featured">Dettagliate</string>
+  <string name="explore_tab_title_mobile">Aggiornate da mobbile</string>
   <string name="no_recent_searches">Nisciuna recerche recende</string>
+  <string name="delete">Scangìlle</string>
+  <string name="statistics">Statisteche</string>
+  <string name="level">Levèlle</string>
   <string name="contributions_fragment">Condrebbute</string>
   <string name="nearby_fragment">Vicine a</string>
   <string name="notifications">Notifeche</string>
   <string name="list_sheet">Elenghe</string>
-  <string name="step_count">Passe %1$d de %2$d</string>
-  <string name="image_in_set_label">Immaggine %1$d jndr\'à \'u \'nzieme</string>
+  <string name="step_count">Passe %1$d de %2$d: %3$s</string>
   <string name="next">Prossime</string>
   <string name="previous">Precedende</string>
   <string name="submit">Conferme</string>
-  <string name="navigation_item_bookmarks">Signalibbre</string>
-  <string name="title_activity_bookmarks">Signalibbre</string>
   <string name="title_page_bookmarks_pictures">Fote</string>
   <string name="title_page_bookmarks_locations">Luèche</string>
   <string name="menu_bookmark">Aggiungi/Live le signalibbre</string>
   <string name="provider_bookmarks">Signalibbre</string>
   <string name="provider_bookmarks_location">Signalibbre</string>
-  <string name="no_uploads" fuzzy="true">Bovègne jndr\'à Commons!\n\nCareche \'u prime media cazzanne l\'icone d\'a maghena fotografeche o d\'a gallerie, aqquà sus.</string>
-  <string name="desc_language_Worldwide">Tutte \'u munne</string>
-  <string name="desc_language_America">Americhe</string>
-  <string name="desc_language_Europe">Europe</string>
-  <string name="desc_language_Middle_East">Medie oriende</string>
-  <string name="desc_language_Africa">Afriche</string>
-  <string name="desc_language_Asia">Asie</string>
-  <string name="desc_language_Pacific">Pacifeche</string>
+  <string name="no_uploads">Bovègne jndr\'à Commons!\n\nCareche \'u prime media tune cazzanne sus a \'u buttone ca aggiunge.</string>
   <string name="no_categories_selected">Nisicuna categorije scacchiate</string>
-  <string name="yes_submit">Sìne, conferme</string>
-  <string name="no_go_back">No, tuèrne rrete</string>
   <string name="upload_flow_all_images_in_set">(Pe tutte le immaggine jndr\'à \'u \'nzieme)</string>
   <string name="search_this_area">Cirche jndr\'à sta arèe</string>
   <string name="nearby_card_permission_title">Permesse richieste</string>
-  <string name="no_notification" fuzzy="true">Non ge tìne notifeche non lette</string>
+  <string name="no_notification">Non ge tìne notifeche non lette</string>
   <string name="error_occurred_in_picking_images">Errore assute mendre ca ste pigghiave le immaggine</string>
-  <string name="image_chooser_title">Scacchie le immaggine da carecà</string>
   <string name="please_wait">Aspitte...</string>
+  <string name="skip_image">Zumbe ste immaggine</string>
+  <string name="exif_tag_name_author">Autore</string>
+  <string name="default_description_language">Lènghe d\'a descrizione predefinite</string>
+  <string name="delete_helper_show_deletion_title_failed">Fallite</string>
+  <string name="share_image_via">Condivide l\'immaggine cu</string>
+  <string name="account_created">Cunde ccrejate!</string>
+  <string name="title_for_media">MEDIA</string>
+  <string name="title_for_child_classes">CLASSE FIGGHIE</string>
+  <string name="title_for_parent_classes">CLASSE ATTANE</string>
 </resources>

@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
@@ -13,6 +15,7 @@ import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.AbstractTextWatcher;
@@ -72,23 +75,37 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         notifyItemInserted(uploadMediaDetails.size());
     }
 
+    /**
+     * Remove description based on position from the list and notifies the RecyclerView Adapter that
+     * data in adapter has been removed at that particular position.
+     * @param uploadMediaDetail
+     * @param position
+     */
+    public void removeDescription(final UploadMediaDetail uploadMediaDetail, final int position) {
+        this.uploadMediaDetails.remove(uploadMediaDetail);
+        notifyItemRemoved(position);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         @Nullable
         @BindView(R.id.spinner_description_languages)
-        AppCompatSpinner spinnerDescriptionLanguages;
+        Spinner spinnerDescriptionLanguages;
 
         @BindView(R.id.description_item_edit_text)
-        AppCompatEditText descItemEditText;
+        TextInputEditText descItemEditText;
 
         @BindView(R.id.description_item_edit_text_input_layout)
         TextInputLayout descInputLayout;
 
         @BindView(R.id.caption_item_edit_text)
-        AppCompatEditText captionItemEditText;
+        TextInputEditText captionItemEditText;
 
         @BindView(R.id.caption_item_edit_text_input_layout)
         TextInputLayout captionInputLayout;
+
+        @BindView(R.id.btn_remove)
+        ImageView removeButton;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -110,6 +127,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
             descItemEditText.setText(uploadMediaDetail.getDescriptionText());
 
             if (position == 0) {
+                removeButton.setVisibility(View.GONE);
                 captionInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
                 captionInputLayout.setEndIconDrawable(R.drawable.mapbox_info_icon_default);
                 captionInputLayout.setEndIconOnClickListener(v ->
@@ -121,9 +139,12 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                     callback.showAlert(R.string.media_detail_description, R.string.description_info));
 
             } else {
+                removeButton.setVisibility(View.VISIBLE);
                 captionInputLayout.setEndIconDrawable(null);
                 descInputLayout.setEndIconDrawable(null);
             }
+
+            removeButton.setOnClickListener(v -> removeDescription(uploadMediaDetail, position));
 
             captionItemEditText.addTextChangedListener(new AbstractTextWatcher(
                     captionText -> uploadMediaDetails.get(position).setCaptionText(captionText)));
@@ -174,24 +195,30 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                 }
             });
 
+
             if (description.getSelectedLanguageIndex() == -1) {
                 if (!TextUtils.isEmpty(savedLanguageValue)) {
-                    // If user has chosen a default language from settings activity savedLanguageValue is not null
-                    spinnerDescriptionLanguages.setSelection(languagesAdapter.getIndexOfLanguageCode(savedLanguageValue));
+                    // If user has chosen a default language from settings activity
+                    // savedLanguageValue is not null
+                    spinnerDescriptionLanguages.setSelection(languagesAdapter
+                        .getIndexOfLanguageCode(savedLanguageValue));
                 } else {
                     //Checking whether Language Code attribute is null or not.
-                    if(uploadMediaDetails.get(position).getLanguageCode() != null){
-                        //If it is not null that means it is fetching details from the previous upload (i.e. when user has pressed copy previous caption & description)
+                    if (uploadMediaDetails.get(position).getLanguageCode() != null) {
+                        //If it is not null that means it is fetching details from the previous
+                        // upload (i.e. when user has pressed copy previous caption & description)
                         //hence providing same language code for the current upload.
                         spinnerDescriptionLanguages.setSelection(languagesAdapter
-                            .getIndexOfLanguageCode(uploadMediaDetails.get(position).getLanguageCode()), true);
+                            .getIndexOfLanguageCode(uploadMediaDetails.get(position)
+                            .getLanguageCode()), true);
                     } else {
                         if (position == 0) {
-                            int defaultLocaleIndex = languagesAdapter
-                                .getIndexOfUserDefaultLocale(spinnerDescriptionLanguages.getContext());
+                            final int defaultLocaleIndex = languagesAdapter
+                                .getIndexOfUserDefaultLocale(spinnerDescriptionLanguages
+                                .getContext());
                             spinnerDescriptionLanguages.setSelection(defaultLocaleIndex, true);
                         } else {
-                            spinnerDescriptionLanguages.setSelection(0,true);
+                            spinnerDescriptionLanguages.setSelection(0, true);
                         }
                     }
                 }

@@ -1,40 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Nirajan pant
+* हिमाल सुबेदी
+-->
 <resources>
   <string name="app_name">कमन्स</string>
   <string name="menu_settings">मिलानअन</string>
   <string name="username">प्रयोगकर्ता नाउँ</string>
   <string name="password">गोप्य आँखर</string>
   <string name="login">लग इन</string>
-  <string name="signup">साइन अप</string>
+  <string name="signup">खाता खाेल्नुहाेस्</string>
   <string name="logging_in_title">भितरीन्‍नाछ़</string>
   <string name="logging_in_message">थोक्काइ पखऽ …</string>
   <string name="login_success">लग इन सफल!</string>
   <string name="login_failed">लगइन असफल!</string>
   <string name="upload_failed">फाइल नाइपायियो। कृपया दोसरो फाइल प्रयास अरऽ।</string>
-  <string name="authentication_failed">प्रमाणीकरण असफल!</string>
+  <string name="authentication_failed" fuzzy="true">प्रमाणीकरण असफल!</string>
   <string name="uploading_started">अपलोड शुरू होइग्यो!</string>
   <string name="upload_completed_notification_text">तमले अर्याऽ अपलोड तक्दाइ ट्याप अरऽ</string>
-  <string name="upload_progress_notification_title_start">%1$s अपलोड पैटौन्‍नाछ़</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s अपलोड पैटौन्‍नाछ़</string>
   <string name="upload_progress_notification_title_in_progress">%1$s अपलोड अद्दाछ़</string>
   <string name="upload_progress_notification_title_finishing"> %1$s अपलोड सक्दाछ़</string>
   <string name="upload_failed_notification_title">%1$s अपलोड असफल</string>
   <string name="upload_failed_notification_subtitle">तक्दाइ ट्याप अरऽ</string>
   <string name="provider_contributions">मेरा अपलोडअन</string>
   <string name="menu_share">बाँँणऽ</string>
-  <string name="menu_open_in_browser">ब्राउजर मी तकऽ</string>
-  <string name="share_title_hint">शीर्षक</string>
+  <string name="share_title_hint" fuzzy="true">शीर्षक</string>
   <string name="share_description_hint">बेलिविस्तार</string>
   <string name="login_failed_network">लगइन अद्दाइ असमर्थ - नेटवर्क असफलता</string>
-  <string name="login_failed_username">लगइन अद्दाइ असमर्थ - कृपया तमरो प्रयोगकर्ता नाउँ हेरऽ</string>
-  <string name="login_failed_password">लगइन अद्दाइ असमर्थ - कृपया तमरो पासवर्ड जाँचऽ</string>
   <string name="categories_activity_title">श्रेणीइन</string>
   <string name="title_activity_settings">मिलानअन</string>
   <string name="menu_about">बारेमी</string>
   <string name="title_activity_about">बारेमी</string>
   <string name="menu_cancel_upload">खारेजी</string>
   <string name="menu_download">डाउनलोड</string>
-  <string name="preference_license">इजाजतपत्र</string>
-  <string name="use_previous">पैलीको शीर्षक/बेलिविस्तार प्रयोग अरऽ</string>
+  <string name="preference_license" fuzzy="true">इजाजतपत्र</string>
+  <string name="use_previous" fuzzy="true">पैलीको शीर्षक/बेलिविस्तार प्रयोग अरऽ</string>
   <string name="tutorial_4_text">अपलोड उदाहरणः</string>
   <string name="welcome_final_button_text">हो!</string>
   <string name="detail_panel_cats_label">श्रेणीइन</string>
@@ -44,14 +45,12 @@
   <string name="detail_license_empty">अपछ्याणो इजाजतपत्र</string>
   <string name="menu_refresh">ताजागद्य्या</string>
   <string name="ok">हुन्छ</string>
-  <string name="title_activity_nearby">नज्यूकाऽ ठउरअन</string>
   <string name="warning">चेतावनी</string>
-  <string name="upload_image_problem_duplicate">यो फाइल कमन्स मी पैली बठेइ छ। तम पक्का छऽ कि तम ऐतिर जान चाहन्छऽ?</string>
   <string name="yes">हो</string>
   <string name="no">नाइँ</string>
   <string name="media_detail_title">शीर्षक</string>
-  <string name="media_detail_media_title">मिडियाऽ शीर्षक</string>
   <string name="media_detail_description">बेलिविस्तार</string>
+  <string name="media_detail_author">लेखक</string>
   <string name="become_a_tester_title">बिटा परीक्षक बनऽ</string>
-  <string name="nearby_location_not_available">स्थान उपलब्ध आथिन।</string>
+  <string name="nearby_location_not_available" fuzzy="true">स्थान उपलब्ध आथिन।</string>
 </resources>

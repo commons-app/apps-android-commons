@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* ElangoRamanujam
+* Kaartic
+* Sank
+* Yuvipanda
+-->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d கோப்பு தரவேற்றப்படுகிறது</item>
+    <item quantity="other">%1$d கோப்புகள்  தரவேற்றப்படுகின்றன</item>
+  </plurals>
+  <string name="navigation_item_explore">சுற்றிப்பார்</string>
+  <string name="preference_category_appearance">தோற்றம்</string>
+  <string name="preference_category_general">பொது</string>
+  <string name="preference_category_feedback">பின்னூட்டம்</string>
   <string name="app_name">காமன்சு</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">அமைப்புகள்</string>
   <string name="username">பயனர் பெயர்</string>
   <string name="password">கடவுச்சொல்</string>
@@ -8,17 +23,22 @@
   <string name="logging_in_message">தயவுசெய்து காத்திருங்கள்…</string>
   <string name="login_success">புகுபதிகை வெற்றி</string>
   <string name="login_failed">புகுபதிகை தோல்வியடைந்தது</string>
+  <string name="uploading_started">தரவேற்றம் துவங்கியது!</string>
   <string name="upload_completed_notification_title">%1$s பதிவேற்றப்பட்டது!</string>
+  <string name="upload_completed_notification_text">உங்களது தரவேற்றதை காண தட்டவும்</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s தரவேற்றம் ஆரம்பமாகிறது</string>
+  <string name="upload_progress_notification_title_in_progress">%1$s தரவேற்றப்படுகிறது</string>
+  <string name="upload_progress_notification_title_finishing">%1$s தரவேற்றம் முடிக்கப்படுகிறது</string>
   <string name="upload_failed_notification_subtitle">காண்பதற்கு தட்டுக</string>
-  <string name="title_activity_contributions">எனது பதிவேற்றங்கள்</string>
+  <string name="title_activity_contributions">எனது தற்போதய பதிவேற்றங்கள்</string>
   <string name="contribution_state_in_progress">%1$d%% முடின்துள்ளத்து</string>
   <string name="contribution_state_starting">பதிவேற்றப்படுகிறது</string>
   <string name="menu_from_gallery">காட்சியகத்திலிருந்து</string>
   <string name="menu_from_camera">புகைப்படம் எடு</string>
+  <string name="menu_nearby">அருகிலுள்ள</string>
   <string name="provider_contributions">எனது பதிவேற்றங்கள்</string>
   <string name="menu_share">பகிர்</string>
-  <string name="menu_open_in_browser">உலாவியில் திற</string>
-  <string name="share_title_hint">தலைப்பு</string>
+  <string name="share_title_hint" fuzzy="true">தலைப்பு (தேவை)</string>
   <string name="share_description_hint">விளக்கம்</string>
   <string name="login_failed_generic">புகுபதிகை தோல்வியடைந்தது</string>
   <string name="share_upload_button">பதிவேற்று</string>
@@ -26,4 +46,20 @@
   <string name="menu_save_categories">சேமி</string>
   <string name="categories_activity_title">பகுப்புகள்</string>
   <string name="title_activity_settings">அமைப்புகள்</string>
+  <string name="menu_download">பதிவிறக்கு</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="tutorial_3_text">அருள்கூர்ந்து பதிவேற்றவேண்டாம்:</string>
+  <string name="tutorial_4_text">எடுத்துக்காட்டு பதிவேற்றம்:</string>
+  <string name="welcome_final_button_text">ஆம்!</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;மேலதிக விவரம்&lt;/u&gt;</string>
+  <string name="detail_panel_cats_label">பகுப்புகள்</string>
+  <string name="ok">சரி</string>
+  <string name="warning">எச்சரிக்கை</string>
+  <string name="yes">ஆம்</string>
+  <string name="no">இல்லை</string>
+  <string name="media_detail_title">தலைப்பு</string>
+  <string name="media_detail_license">உரிமம்</string>
 </resources>

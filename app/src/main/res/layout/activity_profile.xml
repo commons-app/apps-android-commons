@@ -13,7 +13,7 @@
           android:id="@+id/toolbar_layout"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:background="@color/primaryDarkColor">
+          android:background="?attr/mainBackground">
 
             <include layout="@layout/toolbar"/>
 

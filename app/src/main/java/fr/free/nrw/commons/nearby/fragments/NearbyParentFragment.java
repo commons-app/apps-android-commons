@@ -8,6 +8,7 @@ import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.VectorDrawable;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Html;
@@ -27,6 +29,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -36,13 +39,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -57,7 +60,7 @@ import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.jakewharton.rxbinding2.view.RxView;
-import com.jakewharton.rxbinding2.widget.RxSearchView;
+import com.jakewharton.rxbinding3.appcompat.RxSearchView;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
@@ -188,6 +191,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private Animation rotate_forward;
 
     private static final float ZOOM_LEVEL = 14f;
+    private static final float ZOOM_OUT = 0f;
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
     private boolean isNetworkErrorOccurred;
@@ -203,6 +207,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004;
 
     private boolean isMapBoxReady;
+    private boolean isPermissionDenied;
+    private boolean recenterToUserLocation;
     private MapboxMap mapBox;
     IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
     private Marker currentLocationMarker;
@@ -256,6 +262,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         cameraMoveListener= () -> presenter.onCameraMove(mapBox.getCameraPosition().target);
         addCheckBoxCallback();
         presenter.attachView(this);
+        isPermissionDenied = false;
+        recenterToUserLocation = false;
         initRvNearbyList();
         initThemePreferences();
         mapView.onCreate(savedInstanceState);
@@ -278,7 +286,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 performMapReadyActions();
                 final CameraPosition cameraPosition = new CameraPosition.Builder()
                         .target(new LatLng(51.50550, -0.07520))
-                        .zoom(ZOOM_LEVEL)
+                        .zoom(ZOOM_OUT)
                         .build();
                 mapBoxMap.setCameraPosition(cameraPosition);
 
@@ -339,26 +347,43 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void performMapReadyActions() {
         if (((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY && isMapBoxReady) {
-            checkPermissionsAndPerformAction(() -> {
-                lastKnownLocation = locationManager.getLastLocation();
-                fr.free.nrw.commons.location.LatLng target=lastFocusLocation;
-                if(null==lastFocusLocation){
-                    target=lastKnownLocation;
-                }
-                if (lastKnownLocation != null) {
-                    final CameraPosition position = new CameraPosition.Builder()
-                            .target(LocationUtils.commonsLatLngToMapBoxLatLng(target)) // Sets the new camera position
-                            .zoom(ZOOM_LEVEL) // Same zoom level
-                            .build();
-                    mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
-                } else {
-                    Toast.makeText(getContext(), getString(R.string.nearby_location_not_available), Toast.LENGTH_LONG).show();
-                }
-                presenter.onMapReady();
-                registerUnregisterLocationListener(false);
+            if(!applicationKvStore.getBoolean("doNotAskForLocationPermission", false) ||
+                PermissionUtils.hasPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)){
+                checkPermissionsAndPerformAction();
+            }else{
+                isPermissionDenied = true;
                 addOnCameraMoveListener();
-            });
+            }
         }
+    }
+
+    private void locationPermissionGranted() {
+        isPermissionDenied = false;
+
+        applicationKvStore.putBoolean("doNotAskForLocationPermission", false);
+        lastKnownLocation = locationManager.getLastLocation();
+        fr.free.nrw.commons.location.LatLng target=lastFocusLocation;
+        if(null==lastFocusLocation){
+            target=lastKnownLocation;
+        }
+        if (lastKnownLocation != null) {
+            final CameraPosition position = new CameraPosition.Builder()
+                .target(LocationUtils.commonsLatLngToMapBoxLatLng(target)) // Sets the new camera position
+                .zoom(ZOOM_LEVEL) // Same zoom level
+                .build();
+            mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
+        }
+        else if(locationManager.isGPSProviderEnabled()||locationManager.isNetworkProviderEnabled()){
+            locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
+            locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
+            setProgressBarVisibility(true);
+        }
+        else {
+            Toast.makeText(getContext(), getString(R.string.nearby_location_not_available), Toast.LENGTH_LONG).show();
+        }
+        presenter.onMapReady();
+        registerUnregisterLocationListener(false);
+        addOnCameraMoveListener();
     }
 
     @Override
@@ -368,8 +393,29 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         presenter.attachView(this);
         registerNetworkReceiver();
         if (isResumed() && ((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY) {
-            startTheMap();
+            if(!isPermissionDenied && !applicationKvStore.getBoolean("doNotAskForLocationPermission", false)){
+                startTheMap();
+            }else{
+                startMapWithoutPermission();
+            }
         }
+    }
+
+    private void startMapWithoutPermission() {
+        mapView.onStart();
+
+        applicationKvStore.putBoolean("doNotAskForLocationPermission", true);
+        lastKnownLocation = new fr.free.nrw.commons.location.LatLng(51.50550,-0.07520,1f);
+        final CameraPosition position = new CameraPosition.Builder()
+            .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation))
+            .zoom(ZOOM_OUT)
+            .build();
+        if(mapBox != null){
+            mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
+            addOnCameraMoveListener();
+        }
+        presenter.onMapReady();
+        removeCurrentLocationMarker();
     }
 
     private void registerNetworkReceiver() {
@@ -426,6 +472,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onDestroyView() {
         super.onDestroyView();
         mapView.onDestroy();
+        presenter.removeNearbyPreferences(applicationKvStore);
     }
 
     private void initViews() {
@@ -438,14 +485,41 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Creates bottom sheet behaviours from bottom sheets, sets initial states and visibility
+     * a) Creates bottom sheet behaviours from bottom sheets, sets initial states and visibility
+     * b) Gets the touch event on the map to perform following actions:
+     *      if fab is open then close fab.
+     *      if bottom sheet details are expanded then collapse bottom sheet details.
+     *      if bottom sheet details are collapsed then hide the bottom sheet details.
+     *      if listBottomSheet is open then hide the list bottom sheet.
      */
+    @SuppressLint("ClickableViewAccessibility")
     private void initBottomSheets() {
         bottomSheetListBehavior = BottomSheetBehavior.from(rlBottomSheet);
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         bottomSheetDetails.setVisibility(View.VISIBLE);
         bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        mapView.setOnTouchListener((v, event) -> {
+
+            // Motion event is triggered two times on a touch event, one as ACTION_UP
+            // and other as ACTION_DOWN, we only want one trigger per touch event.
+
+            if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (isFABsExpanded) {
+                    collapseFABs(true);
+                } else if (bottomSheetDetailsBehavior.getState()
+                    == BottomSheetBehavior.STATE_EXPANDED) {
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                } else if (bottomSheetDetailsBehavior.getState()
+                    == BottomSheetBehavior.STATE_COLLAPSED) {
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                } else if (isListBottomSheetExpanded()) {
+                    bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                }
+            }
+            return false;
+        });
     }
 
     public void initNearbyFilter() {
@@ -758,10 +832,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void populatePlaces(final fr.free.nrw.commons.location.LatLng curlatLng) {
-        if (curlatLng.equals(lastFocusLocation)|| lastFocusLocation==null) { // Means we are checking around current location
+        if (curlatLng.equals(lastFocusLocation) || lastFocusLocation == null || recenterToUserLocation) { // Means we are checking around current location
             populatePlacesForCurrentLocation(lastKnownLocation, curlatLng);
         } else {
             populatePlacesForAnotherLocation(lastKnownLocation, curlatLng);
+        }
+        if(recenterToUserLocation) {
+            recenterToUserLocation = false;
         }
     }
 
@@ -881,12 +958,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void checkPermissionsAndPerformAction(final Runnable runnable) {
+    public void checkPermissionsAndPerformAction() {
         Timber.d("Checking permission and perfoming action");
         PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION,
-                runnable,
-                () -> ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code()),
+                () -> locationPermissionGranted(),
+                () -> isPermissionDenied = true,
                 R.string.location_permission_title,
                 R.string.location_permission_rationale_nearby);
     }
@@ -1058,7 +1135,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     @Override
     public void addCurrentLocationMarker(final fr.free.nrw.commons.location.LatLng curLatLng) {
-        if (null != curLatLng) {
+        if (null != curLatLng && !isPermissionDenied) {
             ExecutorUtils.get().submit(() -> {
                 mapView.post(() -> removeCurrentLocationMarker());
                 Timber.d("Adds current location marker");
@@ -1104,8 +1181,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void updateMapToTrackPosition(final fr.free.nrw.commons.location.LatLng curLatLng) {
         Timber.d("Updates map camera to track user position");
-        final CameraPosition cameraPosition = new CameraPosition.Builder().target
+        final CameraPosition cameraPosition;
+        if(isPermissionDenied){
+            cameraPosition = new CameraPosition.Builder().target
                 (LocationUtils.commonsLatLngToMapBoxLatLng(curLatLng)).build();
+        }else{
+            cameraPosition = new CameraPosition.Builder().target
+                (LocationUtils.commonsLatLngToMapBoxLatLng(curLatLng))
+                .zoom(ZOOM_LEVEL).build();
+        }
         if(null!=mapBox) {
             mapBox.setCameraPosition(cameraPosition);
             mapBox.animateCamera(CameraUpdateFactory
@@ -1170,12 +1254,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
             if (displayExists && displayNeedsPhoto) {
                 // Exists and needs photo
-                if (place.destroyed.trim().isEmpty() && place.pic.trim().isEmpty()) {
+                if (place.exists && place.pic.trim().isEmpty()) {
                     updateMarker(markerPlaceGroup.getIsBookmarked(), place, NearbyController.currentLocation);
                 }
             } else if (displayExists && !displayNeedsPhoto) {
                 // Exists and all included needs and doesn't needs photo
-                if (place.destroyed.trim().isEmpty()) {
+                if (place.exists) {
                     updateMarker(markerPlaceGroup.getIsBookmarked(), place, NearbyController.currentLocation);
                 }
             } else if (!displayExists && displayNeedsPhoto) {
@@ -1233,7 +1317,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_green_bookmarked :
                 R.drawable.ic_custom_map_marker_green);
-        } else if (!place.destroyed.trim().isEmpty()) { // Means place is destroyed
+        } else if (!place.exists) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_grey_bookmarked :
                 R.drawable.ic_custom_map_marker_grey);
@@ -1289,8 +1373,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void recenterMap(final fr.free.nrw.commons.location.LatLng curLatLng) {
-        if (curLatLng == null) {
-            if (!(locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled())) {
+        if (isPermissionDenied || curLatLng == null) {
+            recenterToUserLocation = true;
+            checkPermissionsAndPerformAction();
+            if (!isPermissionDenied && !(locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled())) {
                 showLocationOffDialog();
             }
             return;
@@ -1548,4 +1634,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void setNearbyParentFragmentInstanceReadyCallback(NearbyParentFragmentInstanceReadyCallback nearbyParentFragmentInstanceReadyCallback) {
         this.nearbyParentFragmentInstanceReadyCallback = nearbyParentFragmentInstanceReadyCallback;
     }
+
+    @Override
+    public void onConfigurationChanged(@NonNull final Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        ViewGroup.LayoutParams rlBottomSheetLayoutParams = rlBottomSheet.getLayoutParams();
+        rlBottomSheetLayoutParams.height = getActivity().getWindowManager().getDefaultDisplay().getHeight() / 16 * 9;
+        rlBottomSheet.setLayoutParams(rlBottomSheetLayoutParams);
+        }
 }
