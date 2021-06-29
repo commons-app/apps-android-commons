@@ -39,7 +39,8 @@ data class Contribution constructor(
     var dataLength: Long = 0,
     var dateCreated: Date? = null,
     var dateModified: Date? = null,
-    var hasInvalidLocation : Int =  0
+    var hasInvalidLocation : Int =  0,
+    var contentUri: Uri? = null
 ) : Parcelable {
 
     fun completeWith(media: Media): Contribution {
@@ -64,7 +65,8 @@ data class Contribution constructor(
         decimalCoords = item.gpsCoords.decimalCoords,
         dateCreatedSource = "",
         depictedItems = depictedItems,
-        wikidataPlace = from(item.place)
+        wikidataPlace = from(item.place),
+        contentUri = item.contentUri
     )
 
     /**
