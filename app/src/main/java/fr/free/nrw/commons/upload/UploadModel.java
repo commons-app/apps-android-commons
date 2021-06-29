@@ -106,7 +106,8 @@ public class UploadModel {
         final UploadItem uploadItem = new UploadItem(
             Uri.parse(uploadableFile.getFilePath()),
                 uploadableFile.getMimeType(context), imageCoordinates, place, fileCreatedDate,
-                createdTimestampSource);
+                createdTimestampSource,
+                uploadableFile.getContentUri());
         if (place != null) {
             uploadItem.getUploadMediaDetails().set(0, new UploadMediaDetail(place));
         }
