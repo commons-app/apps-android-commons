@@ -180,6 +180,7 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
         tvAttribution = findViewById(R.id.tv_attribution);
         modifyLocationButton = findViewById(R.id.modify_location);
         showInMapButton = findViewById(R.id.show_in_map);
+        showInMapButton.setText(getResources().getString(R.string.show_in_map_app).toUpperCase());
         shadow = findViewById(R.id.location_picker_image_view_shadow);
     }
 
