@@ -89,11 +89,6 @@ public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment 
         getActivity().startActivity(intent);
     }
 
-    @OnClick(R.id.more_tutorial)
-    public void onTutorialClicked() {
-        WelcomeActivity.startYourself(getActivity());
-    }
-
     @OnClick(R.id.more_settings)
     public void onSettingsClicked() {
         final Intent intent = new Intent(getActivity(), SettingsActivity.class);
