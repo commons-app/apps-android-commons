@@ -18,9 +18,12 @@ import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
+import fr.free.nrw.commons.customselector.database.UploadedStatus
+import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.upload.StashUploadState
 import fr.free.nrw.commons.upload.UploadClient
 import fr.free.nrw.commons.upload.UploadResult
@@ -52,10 +55,16 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     lateinit var contributionDao: ContributionDao
 
     @Inject
+    lateinit var uploadedStatusDao: UploadedStatusDao
+
+    @Inject
     lateinit var uploadClient: UploadClient
 
     @Inject
     lateinit var mediaClient: MediaClient
+
+    @Inject
+    lateinit var fileUtilsWrapper: FileUtilsWrapper
 
     private val PROCESSING_UPLOADS_NOTIFICATION_TAG = BuildConfig.APPLICATION_ID + " : upload_tag"
 
@@ -417,6 +426,20 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             .blockingGet()
         contributionFromUpload.dateModified=Date()
         contributionDao.deleteAndSaveContribution(contribution, contributionFromUpload)
+
+        // Upload success, save to uploaded status.
+        saveIntoUploadedStatus(contribution)
+    }
+
+    /**
+     * Save to uploadedStatusDao.
+     */
+    private fun saveIntoUploadedStatus(contribution: Contribution) {
+        contribution.contentUri?.let {
+            val imageSha1 = fileUtilsWrapper.getSHA1(appContext.contentResolver.openInputStream(it))
+            val modifiedSha1 = fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(contribution.localUri?.path))
+            uploadedStatusDao.insertUploaded(UploadedStatus(imageSha1, modifiedSha1, imageSha1 == modifiedSha1, true));
+        }
     }
 
     private fun findUniqueFileName(fileName: String): String {
