@@ -54,4 +54,14 @@ class FilePickerTest {
         verify(activity).startActivityForResult(ArgumentMatchers.anyObject(), requestCodeCaptor?.capture()?.toInt()!!)
         assertEquals(requestCodeCaptor?.value, RequestCodes.TAKE_PICTURE)
     }
+
+    @Test
+    fun testOpenCustomSelectorRequestCode() {
+        `when`(PreferenceManager.getDefaultSharedPreferences(activity)).thenReturn(sharedPref)
+        `when`(sharedPref.edit()).thenReturn(sharedPreferencesEditor)
+        `when`(sharedPref.edit().putInt("type", 0)).thenReturn(sharedPreferencesEditor)
+        FilePicker.openCustomSelector(activity, 0)
+        verify(activity).startActivityForResult(ArgumentMatchers.anyObject(), requestCodeCaptor?.capture()?.toInt()!!)
+        assertEquals(requestCodeCaptor?.value, RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR)
+    }
 }
