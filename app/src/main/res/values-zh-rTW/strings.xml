@@ -596,10 +596,15 @@
   <string name="app_ui_language">應用程式使用者介面語言</string>
   <string name="remove">移除說明和描述</string>
   <string name="read_help_link">延伸閱讀</string>
+  <string name="media_detail_in_all_languages">在所有語言</string>
   <string name="choose_a_location">挑選一個位置</string>
   <string name="pan_and_zoom_to_adjust">平移和縮放來進行調整</string>
   <string name="exit_location_picker">離開位置點選器</string>
   <string name="select_location_location_picker">選擇位置</string>
-  <string name="location_picker_image_view" fuzzy="true">位置點選器圖片查看</string>
-  <string name="location_picker_image_view_shadow" fuzzy="true">位置picker_image_view_shadow</string>
+  <string name="show_in_map_app">顯示在地圖應用程式</string>
+  <string name="modify_location">編輯位置</string>
+  <string name="location_picker_image_view">位置點選器的圖片檢視</string>
+  <string name="location_picker_image_view_shadow">位置點選器的圖片檢視陰影</string>
+  <string name="image_location">圖片位置</string>
+  <string name="check_whether_location_is_correct">檢查位置是否正確</string>
 </resources>

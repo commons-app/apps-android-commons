@@ -7,6 +7,7 @@
 * Davio
 * Gianfranco
 * Lorelai87
+* Lorem Ipsum
 * Nemo bis
 * S4b1nuz E.656
 * Sarah Bernabei
@@ -449,7 +450,9 @@
   <string name="category_edit_helper_show_edit_title_success">Successo</string>
   <string name="category_edit_button_text">Aggiorna le categorie</string>
   <string name="coordinates_edit_helper_show_edit_title">Coordinate aggiornate</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Successo</string>
   <string name="coordinates_edit_helper_show_edit_message">Le coordinate %1$s sono state aggiunte.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Impossibile aggiungere le coordinate.</string>
   <string name="share_image_via">Condividi immagine tramite</string>
   <string name="no_achievements_yet">Non hai fatto alcun contributo ancora</string>
   <string name="account_created">Utenza creata!</string>
@@ -503,4 +506,6 @@
   <string name="leaderboard_nearby">Nelle vicinanze</string>
   <string name="leaderboard_used">Usa</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Migliora questa mappa&lt;/a&gt;</string>
+  <string name="media_detail_in_all_languages">In tutte le lingue</string>
+  <string name="select_location_location_picker">Seleziona una posizione</string>
 </resources>

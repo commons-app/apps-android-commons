@@ -236,8 +236,8 @@
   <string name="contributions_fragment">Pituut</string>
   <string name="nearby_fragment">Nampek</string>
   <string name="list_sheet">Lis</string>
-  <string name="step_count">Langkat %1$d dari %2$d: %3$s</string>
-  <string name="next">Selanturné</string>
+  <string name="step_count">Langkat %1$d saking %2$d: %3$s</string>
+  <string name="next">Salanturné</string>
   <string name="previous">Sadurungné</string>
   <string name="submit">Kumpulang</string>
   <string name="title_page_bookmarks_pictures">Gambar</string>

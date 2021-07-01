@@ -589,6 +589,10 @@
   <string name="pan_and_zoom_to_adjust">Доведете го местото на картата и приближете го за да прилагодите</string>
   <string name="exit_location_picker">Излези од избирачот на местоположба</string>
   <string name="select_location_location_picker">Изберете местоположба</string>
-  <string name="location_picker_image_view" fuzzy="true">Поглед на слика за избирање местоположба</string>
-  <string name="location_picker_image_view_shadow" fuzzy="true">Сенчест поглед на слика за избирање местоположба</string>
+  <string name="show_in_map_app">Прикажи во прилог за карти</string>
+  <string name="modify_location">Уреди местоположба</string>
+  <string name="location_picker_image_view">Сликовен поглед на избирачот на местоположба</string>
+  <string name="location_picker_image_view_shadow">Сенка на сликата за избирање местоположба</string>
+  <string name="image_location">Местоположба на сликата</string>
+  <string name="check_whether_location_is_correct">Проверете дали местоположбата е точна</string>
 </resources>

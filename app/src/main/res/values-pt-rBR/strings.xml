@@ -495,7 +495,11 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Não foi possível adicionar categorias.</string>
   <string name="category_edit_button_text">Atualizar categorias</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Tentando atualizar as coordenadas.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Atualização de coordenadas</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Sucesso</string>
+  <string name="coordinates_edit_helper_show_edit_message">Coordenadas %1$s adicionadas.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Não foi possível adicionar coordenadas.</string>
   <string name="coordinates_picking_unsuccessful">Incapaz de obter coordenadas.</string>
   <string name="share_image_via">Compartilhar imagem via</string>
   <string name="no_achievements_yet">Você ainda não fez nenhuma contribuição</string>
@@ -595,4 +599,10 @@
   <string name="remove">Remove uma legenda e descrição</string>
   <string name="read_help_link">Leia mais</string>
   <string name="media_detail_in_all_languages">Em todas os idiomas</string>
+  <string name="choose_a_location">Escolha uma localização</string>
+  <string name="select_location_location_picker">Selecionar localização</string>
+  <string name="show_in_map_app">Mostrar no aplicativo de mapa</string>
+  <string name="modify_location">Editar localização</string>
+  <string name="image_location">Localização da imagem</string>
+  <string name="check_whether_location_is_correct">Verifique se a localização está correta</string>
 </resources>
