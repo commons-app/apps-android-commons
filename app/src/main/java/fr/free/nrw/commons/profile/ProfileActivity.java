@@ -75,6 +75,10 @@ public class ProfileActivity extends BaseActivity {
         setTabs();
     }
 
+    /**
+     * Navigate up event
+     * @return boolean
+     */
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
