@@ -1,7 +1,9 @@
 package fr.free.nrw.commons.profile.achievements
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Looper
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -24,6 +26,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.robolectric.fakes.RoboMenuItem
 import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
@@ -36,6 +39,8 @@ class AchievementsFragmentUnitTests {
     private lateinit var fragment: AchievementsFragment
 
     private lateinit var context: Context
+
+    private lateinit var menuItem: MenuItem
 
     private lateinit var achievements: Achievements
 
@@ -85,6 +90,7 @@ class AchievementsFragmentUnitTests {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         context = RuntimeEnvironment.application.applicationContext
+        menuItem = RoboMenuItem(context)
         AppAdapter.set(TestAppAdapter())
         val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         fragment = AchievementsFragment()
@@ -125,6 +131,7 @@ class AchievementsFragmentUnitTests {
         Whitebox.setInternalState(fragment, "imageView", imageView)
         Whitebox.setInternalState(fragment, "progressBar", progressBar)
         Whitebox.setInternalState(fragment, "imagesRevertLimitText", imagesRevertLimitText)
+        Whitebox.setInternalState(fragment, "item", menuItem)
     }
 
     @Test
@@ -187,6 +194,13 @@ class AchievementsFragmentUnitTests {
     fun testShowQualityImagesInfo() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.showQualityImagesInfo()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnOptionsItemSelected() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.onOptionsItemSelected(menuItem)
     }
 
     @Test
