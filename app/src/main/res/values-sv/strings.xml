@@ -594,6 +594,10 @@
   <string name="pan_and_zoom_to_adjust">Panorera och zooma för att justera</string>
   <string name="exit_location_picker">Avsluta platsväljaren</string>
   <string name="select_location_location_picker">Välj plats</string>
+  <string name="show_in_map_app">Visa i kartappen</string>
+  <string name="modify_location">Redigera plats</string>
   <string name="location_picker_image_view">Platsväljarens bildvisare</string>
   <string name="location_picker_image_view_shadow">Skuggan för platsväljarens bildvisare</string>
+  <string name="image_location">Bildplats</string>
+  <string name="check_whether_location_is_correct">Kontrollera om platsen är korrekt</string>
 </resources>

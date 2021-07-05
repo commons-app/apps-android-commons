@@ -238,6 +238,7 @@
   <string name="upload_problem_different_geolocation">Questa foto è stata scattata in una posizione diversa.</string>
   <string name="upload_problem_fbmd">Carica solo le foto che hai scattato tu stesso. Non caricare immagini che hai trovato negli account Facebook di altre persone.</string>
   <string name="upload_problem_do_you_continue">Vuoi caricare lo stesso questa immagine?</string>
+  <string name="upload_connection_error_alert_title">Errore di connessione</string>
   <string name="upload_problem_image">Problemi trovati nell\'immagine</string>
   <string name="internet_downloaded">Carica solo le foto che hai scattato da solo. Non caricare immagini scaricate da Internet.</string>
   <string name="use_external_storage">Salva scatti in-app</string>
@@ -507,5 +508,7 @@
   <string name="leaderboard_used">Usa</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Migliora questa mappa&lt;/a&gt;</string>
   <string name="media_detail_in_all_languages">In tutte le lingue</string>
+  <string name="choose_a_location">Scegli una posizione</string>
   <string name="select_location_location_picker">Seleziona una posizione</string>
+  <string name="modify_location">Modifica posizione</string>
 </resources>
