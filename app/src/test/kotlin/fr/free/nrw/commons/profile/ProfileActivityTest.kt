@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import org.junit.Assert
 import org.junit.Before
@@ -28,8 +29,6 @@ class ProfileActivityTest {
     private lateinit var activity: ProfileActivity
     private lateinit var profileActivity: ProfileActivity
     private lateinit var mockContext: Context
-    private lateinit var menuItem: MenuItem
-    private lateinit var menu: Menu
 
     @Mock
     private lateinit var bitmap: Bitmap
@@ -39,8 +38,6 @@ class ProfileActivityTest {
         activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         mockContext = PowerMockito.mock(Context::class.java)
         profileActivity = PowerMockito.mock(ProfileActivity::class.java)
-        menuItem = RoboMenuItem(null)
-        menu = RoboMenu(mockContext)
     }
 
     @Test
@@ -58,13 +55,17 @@ class ProfileActivityTest {
     @Test
     @Throws(Exception::class)
     fun testOnCreateOptionsMenu() {
+        val menu: Menu = RoboMenu(mockContext)
         activity.onCreateOptionsMenu(menu)
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnOptionsItemSelected() {
+        val menuItem: MenuItem = RoboMenuItem(R.menu.menu_about)
         activity.onOptionsItemSelected(menuItem)
+        val shadowActivity = Shadows.shadowOf(activity)
+        shadowActivity.clickMenuItem(R.id.share_app_icon)
     }
 
     @Test

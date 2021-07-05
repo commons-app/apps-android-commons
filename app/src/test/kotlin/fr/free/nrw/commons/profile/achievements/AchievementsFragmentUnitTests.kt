@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.profile.achievements
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.os.Looper
 import android.view.MenuItem
 import android.widget.ImageView
