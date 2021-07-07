@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload.depicts;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
@@ -41,6 +43,8 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     @BindView(R.id.depicts_title)
     TextView depictsTitle;
+    @BindView(R.id.depicts_subtitle)
+    TextView depictsSubTitle;
     @BindView(R.id.depicts_search_container)
     TextInputLayout depictsSearchContainer;
     @BindView(R.id.depicts_search)
@@ -76,7 +80,8 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      */
     private void init() {
         depictsTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
-                callback.getTotalNumberOfSteps(), getString(R.string.depicts_step_title)));
+            callback.getTotalNumberOfSteps(), getString(R.string.depicts_step_title)));
+        setDepictsSubTitle();
         tooltip.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +91,20 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         presenter.onAttachView(this);
         initRecyclerView();
         addTextChangeListenerToSearchBox();
+    }
+
+    /**
+     * Removes the depicts subtitle If the activity is the instance of [UploadActivity] and
+     * if multiple files aren't selected.
+     */
+    private void setDepictsSubTitle() {
+        final Activity activity = getActivity();
+        if (activity instanceof UploadActivity) {
+            final boolean isMultipleFileSelected = ((UploadActivity) activity).getIsMultipleFilesSelected();
+            if (!isMultipleFileSelected) {
+                depictsSubTitle.setVisibility(View.GONE);
+            }
+        }
     }
 
     /**
