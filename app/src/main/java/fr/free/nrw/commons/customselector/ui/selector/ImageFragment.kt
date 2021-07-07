@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
@@ -28,7 +30,13 @@ class ImageFragment: CommonsDaggerSupportFragment() {
     /**
      * View model for images.
      */
-    private lateinit var  viewModel: CustomSelectorViewModel
+    private var  viewModel: CustomSelectorViewModel? = null
+
+    /**
+     * View Elements
+     */
+    private var selectorRV: RecyclerView? = null
+    private var loader: ProgressBar? = null
 
     /**
      * View model Factory.
@@ -98,9 +106,12 @@ class ImageFragment: CommonsDaggerSupportFragment() {
             this.adapter = imageAdapter
         }
 
-        viewModel.result.observe(viewLifecycleOwner, Observer{
+        viewModel?.result?.observe(viewLifecycleOwner, Observer{
             handleResult(it)
         })
+
+        selectorRV = root.selector_rv
+        loader = root.loader
 
         return root
     }
@@ -113,13 +124,19 @@ class ImageFragment: CommonsDaggerSupportFragment() {
             val images = result.images
             if(images.isNotEmpty()) {
                 imageAdapter.init(ImageHelper.filterImages(images,bucketId))
-                selector_rv.visibility = View.VISIBLE
+                selectorRV?.let{
+                    it.visibility = View.VISIBLE
+                }
             }
             else{
-                selector_rv.visibility = View.GONE
+                selectorRV?.let{
+                    it.visibility = View.GONE
+                }
             }
         }
-        loader.visibility = if (result.status is CallbackStatus.FETCHING) View.VISIBLE else View.GONE
+        loader?.let {
+            it.visibility = if (result.status is CallbackStatus.FETCHING) View.VISIBLE else View.GONE
+        }
     }
 
     /**
