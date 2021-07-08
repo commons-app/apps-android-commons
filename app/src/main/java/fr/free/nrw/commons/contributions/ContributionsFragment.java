@@ -343,6 +343,7 @@ public class ContributionsFragment
         getChildFragmentManager().executePendingTransactions();
     }
 
+
     @SuppressWarnings("ConstantConditions")
     private void setUploadCount() {
         compositeDisposable.add(okHttpJsonApiClient
