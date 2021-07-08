@@ -13,6 +13,7 @@
 * Hasley
 * Ihojose
 * JO777
+* Jackiezelaya
 * Jduranboger
 * Jelou
 * Johnny243
@@ -253,6 +254,7 @@
   <string name="upload_problem_different_geolocation">Esta imagen fue tomada en una ubicación diferente.</string>
   <string name="upload_problem_fbmd">Por favor sube solo fotografías que tu mismo hayas tomado. No subas imágenes o fotografías que hayas encontrado en las cuentas de Facebook de otros.</string>
   <string name="upload_problem_do_you_continue">¿Todavía quieres cargar esta imagen?</string>
+  <string name="upload_connection_error_alert_detail">El cargar el proceso requiere acceso de internet activo. Complacer comprobar vuestra conexión de red.</string>
   <string name="upload_problem_image">Problemas encontrados en la imagen</string>
   <string name="internet_downloaded">Carga únicamente fotografías que hayas creado tú. No cargues imágenes o fotografías que hayas descargado de Internet.</string>
   <string name="use_external_storage">Guardar tomas en la aplicación</string>
@@ -540,8 +542,15 @@
   <string name="limited_connection_enabled">Se activó el modo de conexión limitada.</string>
   <string name="limited_connection_disabled">Se desactivó el modo de conexión limitada. Las cargas pendientes se reanudarán ahora.</string>
   <string name="limited_connection_mode" fuzzy="true">Conexión limitada</string>
+  <string name="media_detail_in_all_languages">En más idiomas</string>
   <string name="choose_a_location">Escoge una ubicación</string>
   <string name="pan_and_zoom_to_adjust">Haz una panorámica y acércate para ajustar</string>
   <string name="exit_location_picker">Salir del seleccionador de ubicación</string>
   <string name="select_location_location_picker">Seleccionar ubicación</string>
+  <string name="show_in_map_app">Mostrar en la aplicación de mapa</string>
+  <string name="modify_location">Editar ubicación</string>
+  <string name="location_picker_image_view">La vista de imagen de la ubicación picker</string>
+  <string name="location_picker_image_view_shadow">La sombra de la vista de imagen de la ubicación picker</string>
+  <string name="image_location">Posición de imagen</string>
+  <string name="check_whether_location_is_correct">Compruebe si la ubicación es correcta</string>
 </resources>
