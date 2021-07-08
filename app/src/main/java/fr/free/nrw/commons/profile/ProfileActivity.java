@@ -77,6 +77,7 @@ public class ProfileActivity extends BaseActivity {
 
     /**
      * Navigate up event
+     *
      * @return boolean
      */
     @Override
@@ -87,6 +88,7 @@ public class ProfileActivity extends BaseActivity {
 
     /**
      * Creates a way to change current activity to AchievementActivity
+     *
      * @param context
      */
     public static void startYourself(Context context) {
@@ -111,6 +113,7 @@ public class ProfileActivity extends BaseActivity {
         viewPagerAdapter.notifyDataSetChanged();
 
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -119,6 +122,7 @@ public class ProfileActivity extends BaseActivity {
 
     /**
      * To inflate menu
+     *
      * @param menu Menu
      * @return boolean
      */
@@ -131,27 +135,28 @@ public class ProfileActivity extends BaseActivity {
 
     /**
      * To receive the id of selected item and handle further logic for that selected item
+     *
      * @param item MenuItem
      * @return boolean
      */
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        final int id = item.getItemId();
         // take screenshot in form of bitmap and show it in Alert Dialog
-        if (id == R.id.share_app_icon) {
+        if (item.getItemId() == R.id.share_app_icon) {
             final View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
             final Bitmap screenShot = Utils.getScreenShot(rootView);
             showAlert(screenShot);
+            return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     /**
      * It displays the alertDialog with Image of screenshot
+     *
      * @param screenshot screenshot of the present screen
      */
-    public void showAlert(final Bitmap screenshot){
+    public void showAlert(final Bitmap screenshot) {
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
         final LayoutInflater factory = LayoutInflater.from(this);
         final View view = factory.inflate(R.layout.image_alert_layout, null);
@@ -167,6 +172,7 @@ public class ProfileActivity extends BaseActivity {
 
     /**
      * To take bitmap and store it temporary storage and share it
+     *
      * @param bitmap bitmap of screenshot
      */
     void shareScreen(final Bitmap bitmap) {
@@ -179,7 +185,7 @@ public class ProfileActivity extends BaseActivity {
             file.setReadable(true, false);
 
             final Uri fileUri = FileProvider
-                .getUriForFile(getApplicationContext(), getPackageName()+".provider", file);
+                .getUriForFile(getApplicationContext(), getPackageName() + ".provider", file);
             grantUriPermission(getPackageName(), fileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
             final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
