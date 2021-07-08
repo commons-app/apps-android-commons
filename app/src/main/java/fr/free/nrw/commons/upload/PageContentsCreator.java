@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
+import timber.log.Timber;
 
 class PageContentsCreator {
 
@@ -29,7 +30,7 @@ class PageContentsCreator {
         this.context = context;
     }
 
-    public String createFrom(Contribution contribution) {
+    public String createFrom(Contribution contribution, String countryCode) {
         StringBuilder buffer = new StringBuilder();
         final Media media = contribution.getMedia();
         buffer
@@ -48,6 +49,29 @@ class PageContentsCreator {
 
         buffer.append("}}").append("\n");
 
+        if (contribution.getWikidataPlace()!=null && contribution.getWikidataPlace().isMonumentUpload()) {
+            WikidataPlace wikidataPlace = contribution.getWikidataPlace();
+            buffer.append("{{Wiki Loves Monuments 2021\n|1= ")
+                .append(countryCode)
+                .append("|id =").append(wikidataPlace.getId())
+                .append("|title").append(wikidataPlace.getName())
+                .append("|place").append(wikidataPlace.getAddress())
+                .append("}}").append("\n");
+        }
+
+        final List<String> categories = media.getCategories();
+        if (categories != null && categories.size() != 0) {
+            for (int i = 0; i < categories.size(); i++) {
+                buffer.append("\n[[Category:").append(categories.get(i)).append("]]");
+            }
+        } else {
+            buffer.append("{{subst:unc}}");
+        }
+
+        buffer.append("}}").append("\n");
+
+
+
         //Only add Location template (e.g. {{Location|37.51136|-77.602615}} ) if coords is not null
         final String decimalCoords = contribution.getDecimalCoords();
         if (decimalCoords != null) {
@@ -58,7 +82,6 @@ class PageContentsCreator {
             .append(licenseTemplateFor(media.getLicense())).append("\n\n")
             .append("{{Uploaded from Mobile|platform=Android|version=")
             .append(ConfigUtils.getVersionNameWithSha(context)).append("}}\n");
-        final List<String> categories = media.getCategories();
         if (categories != null && categories.size() != 0) {
             for (int i = 0; i < categories.size(); i++) {
                 buffer.append("\n[[Category:").append(categories.get(i)).append("]]");
@@ -66,6 +89,7 @@ class PageContentsCreator {
         } else {
             buffer.append("{{subst:unc}}");
         }
+        Timber.d("Template: %s", buffer.toString());
         return buffer.toString();
     }
 

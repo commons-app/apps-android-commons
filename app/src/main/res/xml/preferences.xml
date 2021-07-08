@@ -71,6 +71,12 @@
           android:summary="@string/display_campaigns_explanation"
           android:title="@string/display_campaigns" />
 
+        <SwitchPreference
+          android:defaultValue="true"
+          android:key="displayWLMCardView"
+          app:singleLineTitle="false"
+          android:title="@string/display_monuments" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

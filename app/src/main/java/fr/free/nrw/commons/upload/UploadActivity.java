@@ -257,6 +257,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     @Override
+    public boolean isWLMUpload() {
+        return place!=null && place.isMonument();
+    }
+
+    @Override
     public void showMessage(int messageResourceId) {
         ViewUtil.showLongToast(this, messageResourceId);
     }
@@ -366,6 +371,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                     @Override
                     public int getTotalNumberOfSteps() {
                         return fragments.size();
+                    }
+
+                    @Override
+                    public boolean isWLMUpload() {
+                        return place!=null && place.isMonument();
                     }
                 });
                 fragments.add(uploadMediaDetailFragment);

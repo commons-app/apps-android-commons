@@ -17,6 +17,9 @@ import androidx.browser.customtabs.CustomTabColorSchemeParams;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 
+import fr.free.nrw.commons.campaigns.CampaignView;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import java.util.Date;
 import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.page.PageTitle;
 
@@ -29,6 +32,7 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 import static android.widget.Toast.LENGTH_SHORT;
+import static fr.free.nrw.commons.campaigns.CampaignView.WLM_CARD_PREFERENCE;
 
 public class Utils {
 
@@ -204,6 +208,44 @@ public class Utils {
         SpannableString content = new SpannableString(context.getString(stringResourceName));
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         textView.setText(content);
+    }
+
+    /**
+     * For now we are enabling the monuments only when the date lies between 1 Sept & 31 OCt
+     * @param date
+     * @return
+     */
+    public static boolean isMonumentsEnabled(final Date date, final JsonKvStore store){
+        if(date.getDay()>=1 && date.getMonth()>=9 && date.getDay()<=31 && date.getMonth()<=10 ){
+            return true;
+        }
+        //In debug flavours, to help testing we are providing an additional switch in the Settings,
+        // if this switch is on, WLM will be enabled even beyond the dates its expected to show up
+        return store.getBoolean(WLM_CARD_PREFERENCE);
+    }
+
+    /**
+     * Util function to get the start date of wlm monument
+     * For this release we are hardcoding it to be 1st September
+     * @return
+     */
+    public static Date getWLMStartDate(){
+        Date date =new Date();
+        date.setDate(1);
+        date.setMonth(9);
+        return date;
+    }
+
+    /***
+     * Util function to get the end date of wlm monument
+     * For this release we are hardcoding it to be 31st October
+     * @return
+     */
+    public static Date getWLMEndDate(){
+        Date date =new Date();
+        date.setDate(31);
+        date.setMonth(10);
+        return date;
     }
 
 }
