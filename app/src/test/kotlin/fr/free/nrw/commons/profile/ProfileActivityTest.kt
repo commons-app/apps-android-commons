@@ -12,9 +12,11 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.MockitoAnnotations
 import org.powermock.api.mockito.PowerMockito
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenu
@@ -27,7 +29,6 @@ import java.lang.reflect.Method
 class ProfileActivityTest {
 
     private lateinit var activity: ProfileActivity
-    private lateinit var profileActivity: ProfileActivity
     private lateinit var mockContext: Context
 
     @Mock
@@ -35,9 +36,9 @@ class ProfileActivityTest {
 
     @Before
     fun setUp() {
+        MockitoAnnotations.initMocks(this)
         activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
-        mockContext = PowerMockito.mock(Context::class.java)
-        profileActivity = PowerMockito.mock(ProfileActivity::class.java)
+        mockContext = RuntimeEnvironment.application.applicationContext
     }
 
     @Test
@@ -63,15 +64,14 @@ class ProfileActivityTest {
     @Throws(Exception::class)
     fun testOnOptionsItemSelected() {
         val menuItem: MenuItem = RoboMenuItem(R.menu.menu_about)
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         activity.onOptionsItemSelected(menuItem)
-        val shadowActivity = Shadows.shadowOf(activity)
-        shadowActivity.clickMenuItem(R.id.share_app_icon)
     }
 
     @Test
     @Throws(Exception::class)
     fun testStartYourself() {
-        ProfileActivity.startYourself(mockContext)
+        ProfileActivity.startYourself(activity)
     }
 
     @Test
