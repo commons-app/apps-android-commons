@@ -77,7 +77,6 @@ public class ProfileActivity extends BaseActivity {
 
     /**
      * Navigate up event
-     *
      * @return boolean
      */
     @Override
@@ -88,7 +87,6 @@ public class ProfileActivity extends BaseActivity {
 
     /**
      * Creates a way to change current activity to AchievementActivity
-     *
      * @param context
      */
     public static void startYourself(Context context) {
@@ -122,7 +120,6 @@ public class ProfileActivity extends BaseActivity {
 
     /**
      * To inflate menu
-     *
      * @param menu Menu
      * @return boolean
      */
@@ -135,7 +132,6 @@ public class ProfileActivity extends BaseActivity {
 
     /**
      * To receive the id of selected item and handle further logic for that selected item
-     *
      * @param item MenuItem
      * @return boolean
      */
@@ -153,7 +149,6 @@ public class ProfileActivity extends BaseActivity {
 
     /**
      * It displays the alertDialog with Image of screenshot
-     *
      * @param screenshot screenshot of the present screen
      */
     public void showAlert(final Bitmap screenshot) {
@@ -172,7 +167,6 @@ public class ProfileActivity extends BaseActivity {
 
     /**
      * To take bitmap and store it temporary storage and share it
-     *
      * @param bitmap bitmap of screenshot
      */
     void shareScreen(final Bitmap bitmap) {
