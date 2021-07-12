@@ -32,7 +32,7 @@
   <string name="preference_category_appearance">მიოჯინი</string>
   <string name="preference_category_general">თარი</string>
   <string name="preference_category_feedback">წიმოხრსხუ</string>
-  <string name="preference_category_privacy">კონფიდენციალურობა</string>
+  <string name="preference_category_privacy">კონფიდენციალურალა</string>
   <string name="app_name">ვიკიოწკარუე</string>
   <string name="menu_settings">პარამეტრეფი</string>
   <string name="intent_share_upload_label">ვიკიოწკარუეშა ეხარგუა</string>
@@ -69,6 +69,7 @@
   <string name="menu_share">გობჟინაფა</string>
   <string name="menu_view_file_page">ფაილიშ ხასჷლაშ ძირაფა</string>
   <string name="share_title_hint">მუკნაჭარა (უციო)</string>
+  <string name="add_caption_toast">ქორთხინთ, ქემიოწურეთ თე ფაილიშ ეჭარუა</string>
   <string name="share_description_hint">ეჭარუა</string>
   <string name="share_caption_hint">მუკნაჭარა</string>
   <string name="login_failed_network">მიშულაქ ვემიხუჯინუ - რშვილიშ ჩილათა</string>
@@ -98,7 +99,7 @@
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;წყუ&lt;/a&gt; და &lt;a href=\"https://commons-app.gოthub.io/\"&gt;ვებ-ხასჷლა&lt;/a&gt; GitHub-ის. ჩილათაშ ოგინაფალო ვარ-და ზიტყვასქვილშო გაჭყით ახალი &lt;a href=\"%1$s\"&gt;მოთხირი GitHub-ის&lt;/a&gt;.</string>
   <string name="about_privacy_policy">კონფიდენციალურალაშ პოლიტიკა</string>
   <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;მარდეფი&lt;/a&gt;</string>
-  <string name="title_activity_about">პრგრამაშ გეშა</string>
+  <string name="title_activity_about">პროგრამაშ გეშა</string>
   <string name="menu_feedback">წჷმიხონარეფიშ ჯღონუა (ელ.ფოსტათ)</string>
   <string name="no_email_client">ელ-ფოსტაშ კლიენტი ვა რე გერინაფილი</string>
   <string name="provider_categories">ასერდე გჷმორინაფილი კატეგორიეფი</string>
