@@ -178,9 +178,13 @@ public class Utils {
     public static Bitmap getScreenShot(View view) {
         View screenView = view.getRootView();
         screenView.setDrawingCacheEnabled(true);
-        Bitmap bitmap = Bitmap.createBitmap(screenView.getDrawingCache());
-        screenView.setDrawingCacheEnabled(false);
-        return bitmap;
+        Bitmap drawingCache = screenView.getDrawingCache();
+        if (drawingCache != null) {
+            Bitmap bitmap = Bitmap.createBitmap(drawingCache);
+            screenView.setDrawingCacheEnabled(false);
+            return bitmap;
+        }
+        return null;
     }
 
     /*

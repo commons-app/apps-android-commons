@@ -20,7 +20,6 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
-import java.io.IOException
 import java.lang.reflect.Method
 
 
@@ -63,8 +62,11 @@ class ProfileActivityTest {
     @Test
     @Throws(Exception::class)
     fun testOnOptionsItemSelected() {
+        val menuItem: MenuItem = RoboMenuItem(R.menu.menu_about)
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         activity.onOptionsItemSelected(menuItem)
+        val menuItemShare: MenuItem = RoboMenuItem(R.id.share_app_icon)
+        activity.onOptionsItemSelected(menuItemShare)
     }
 
     @Test
