@@ -270,11 +270,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     controller.initiateCustomGalleryPickWithPermission(getActivity());
   }
 
-  @OnClick(R.id.fab_custom_gallery)
-  void launchCustomSelector(){
-    controller.initiateCustomGalleryPickWithPermission(getActivity());
-  }
-
   private void animateFAB(final boolean isFabOpen) {
     this.isFabOpen = !isFabOpen;
     if (fabPlus.isShown()) {

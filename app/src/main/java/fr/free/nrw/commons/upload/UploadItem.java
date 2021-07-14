@@ -71,8 +71,6 @@ public class UploadItem {
 
   public Uri getContentUri() { return contentUri; }
 
-  public Uri getContentUri() { return contentUri; }
-
   public void setImageQuality(final int imageQuality) {
     this.imageQuality.onNext(imageQuality);
   }
