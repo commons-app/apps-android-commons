@@ -19,5 +19,5 @@ import fr.free.nrw.commons.upload.depicts.DepictsDao
 abstract class AppDatabase : RoomDatabase() {
     abstract fun contributionDao(): ContributionDao
     abstract fun DepictsDao(): DepictsDao;
-  abstract fun UploadedStatusDao(): UploadedStatusDao;
+    abstract fun UploadedStatusDao(): UploadedStatusDao;
 }

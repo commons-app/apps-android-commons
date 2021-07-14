@@ -71,8 +71,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     TextView noContributionsYet;
     @BindView(R.id.fab_layout)
     LinearLayout fab_layout;
-  @BindView(R.id.fab_custom_gallery)
-  FloatingActionButton fabCustomGallery;
+    @BindView(R.id.fab_custom_gallery)
+    FloatingActionButton fabCustomGallery;
 
   @Inject
   SystemThemeUtils systemThemeUtils;
@@ -264,6 +264,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
             animateFAB(isFabOpen);
         });
     }
+
+  @OnClick(R.id.fab_custom_gallery)
+  void launchCustomSelector(){
+    controller.initiateCustomGalleryPickWithPermission(getActivity());
+  }
 
   @OnClick(R.id.fab_custom_gallery)
   void launchCustomSelector(){
