@@ -456,7 +456,9 @@
   <string name="category_edit_helper_show_edit_title_success">성공</string>
   <string name="category_edit_helper_edit_message_else">분류를 추가하지 못했습니다.</string>
   <string name="category_edit_button_text">분류 업데이트</string>
+  <string name="coordinates_edit_helper_show_edit_title">좌표 업데이트</string>
   <string name="coordinates_edit_helper_show_edit_title_success">성공</string>
+  <string name="coordinates_picking_unsuccessful">좌표를 가져올 수 없습니다.</string>
   <string name="share_image_via">다음을 통해 이미지 공유</string>
   <string name="no_achievements_yet">아직 기여가 없습니다</string>
   <string name="account_created">계정을 만들었습니다!</string>
@@ -519,6 +521,7 @@
   <string name="app_ui_language">앱 사용자 인터페이스 언어</string>
   <string name="remove">캡션과 설명을 제거합니다</string>
   <string name="read_help_link">더 읽어보기</string>
+  <string name="media_detail_in_all_languages">모든 언어</string>
   <string name="choose_a_location">장소 선택하기</string>
   <string name="select_location_location_picker">장소 선택</string>
 </resources>

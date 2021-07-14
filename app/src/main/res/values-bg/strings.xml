@@ -236,7 +236,10 @@
   <string name="showcase_view_no_longer_exists">Това място вече не съществува.</string>
   <string name="no_images_found">Не са открити изображения!</string>
   <string name="menu_search_button">Търсене</string>
+  <string name="search_commons">Търсене в Общомедия</string>
   <string name="title_activity_search">Търсене</string>
+  <string name="search_recent_header">Скорошни търсения:</string>
+  <string name="provider_searches">Скорошни заявки за търсене</string>
   <string name="error_loading_categories">Грешка при зареждането на категориите.</string>
   <string name="error_loading_depictions">Грешка при зареждането на описанията.</string>
   <string name="search_tab_title_media">Мултимедия</string>

@@ -57,22 +57,22 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
     private static final String RV_STATE = "rv_scroll_state";
 
-  @BindView(R.id.contributionsList)
-  RecyclerView rvContributionsList;
-  @BindView(R.id.loadingContributionsProgressBar)
-  ProgressBar progressBar;
-  @BindView(R.id.fab_plus)
-  FloatingActionButton fabPlus;
-  @BindView(R.id.fab_camera)
-  FloatingActionButton fabCamera;
-  @BindView(R.id.fab_gallery)
-  FloatingActionButton fabGallery;
-  @BindView(R.id.noContributionsYet)
-  TextView noContributionsYet;
-  @BindView(R.id.fab_layout)
-  LinearLayout fab_layout;
-  @BindView(R.id.fab_custom_gallery)
-  FloatingActionButton fabCustomGallery;
+    @BindView(R.id.contributionsList)
+    RecyclerView rvContributionsList;
+    @BindView(R.id.loadingContributionsProgressBar)
+    ProgressBar progressBar;
+    @BindView(R.id.fab_plus)
+    FloatingActionButton fabPlus;
+    @BindView(R.id.fab_camera)
+    FloatingActionButton fabCamera;
+    @BindView(R.id.fab_gallery)
+    FloatingActionButton fabGallery;
+    @BindView(R.id.noContributionsYet)
+    TextView noContributionsYet;
+    @BindView(R.id.fab_layout)
+    LinearLayout fab_layout;
+    @BindView(R.id.fab_custom_gallery)
+    FloatingActionButton fabCustomGallery;
 
   @Inject
   SystemThemeUtils systemThemeUtils;

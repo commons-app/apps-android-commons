@@ -13,17 +13,17 @@ import java.util.Collections;
 import java.util.List;
 
 public class UploadItem {
-
-  private final Uri mediaUri;
-  private final String mimeType;
-  private ImageCoordinates gpsCoords;
-  private List<UploadMediaDetail> uploadMediaDetails;
-  private Place place;
-  private final long createdTimestamp;
-  private final String createdTimestampSource;
-  private final BehaviorSubject<Integer> imageQuality;
-  private boolean hasInvalidLocation;
-  private final Uri contentUri;
+  
+    private final Uri mediaUri;
+    private final String mimeType;
+    private ImageCoordinates gpsCoords;
+    private List<UploadMediaDetail> uploadMediaDetails;
+    private Place place;
+    private final long createdTimestamp;
+    private final String createdTimestampSource;
+    private final BehaviorSubject<Integer> imageQuality;
+    private boolean hasInvalidLocation;
+    private final Uri contentUri;
 
 
   @SuppressLint("CheckResult")
