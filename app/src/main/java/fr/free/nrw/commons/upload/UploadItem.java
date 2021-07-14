@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class UploadItem {
-
+  
     private final Uri mediaUri;
     private final String mimeType;
     private ImageCoordinates gpsCoords;
@@ -68,6 +68,8 @@ public class UploadItem {
     public int getImageQuality() {
         return imageQuality.getValue();
     }
+
+  public Uri getContentUri() { return contentUri; }
 
   public Uri getContentUri() { return contentUri; }
 

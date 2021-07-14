@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -111,7 +110,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
         }
-
         pager.setAdapter(adapter);
 
         if (savedInstanceState != null) {
