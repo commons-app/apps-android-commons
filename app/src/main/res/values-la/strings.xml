@@ -2,6 +2,7 @@
 <!-- Authors:
 * Autokrator
 * Laurentianus
+* Lorem Ipsum
 * UV
 -->
 <resources>
@@ -62,4 +63,6 @@
   <string name="detail_panel_cats_label">Categoriae</string>
   <string name="detail_panel_cats_loading" fuzzy="true">Depromens…</string>
   <string name="detail_panel_cats_none">Nulla selecta</string>
+  <string name="modify_location">Mutare locus</string>
+  <string name="image_location">Locus imaginis</string>
 </resources>

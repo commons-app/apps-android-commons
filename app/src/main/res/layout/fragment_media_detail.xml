@@ -23,6 +23,20 @@
           layout="@layout/layout_edit_categories" />
     </LinearLayout>
 
+    <LinearLayout
+      android:id="@+id/dummy_caption_description_container"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_gravity="bottom"
+      android:elevation="35dp"
+      android:orientation="vertical"
+      android:visibility="gone"
+      android:weightSum="10">
+
+        <include
+          layout="@layout/show_captions_descriptions" />
+    </LinearLayout>
+
     <ImageView
       android:id="@+id/mediaDetailImageFailed"
       android:layout_height="wrap_content"
@@ -163,6 +177,7 @@
                       android:layout_width="@dimen/widget_margin"
                       android:layout_height="match_parent"
                       style="@style/MediaDetailTextBody"
+                      android:textIsSelectable="true"
                       tools:text="Captions of the media" />
                 </LinearLayout>
 
@@ -187,8 +202,18 @@
                       android:padding="@dimen/small_gap"
                       android:textColor="?attr/mediaDetailsText"
                       android:textSize="@dimen/description_text_size"
+                      android:textIsSelectable="true"
                       tools:text="Description of the media goes here. This can potentially be fairly long, and will need to wrap across multiple lines. We hope it looks nice though." />
                 </LinearLayout>
+
+                <TextView
+                  android:id="@+id/show_caption_description_textview"
+                  style="@style/MediaDetailTextLabelGeneric"
+                  android:layout_width="match_parent"
+                  android:gravity="center"
+                  android:layout_height="wrap_content"
+                  android:layout_marginBottom="@dimen/dimen_10"
+                  android:text="@string/media_detail_in_all_languages" />
 
                 <View
                   android:background="?attr/mediaDetailSpacerColor"

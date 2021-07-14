@@ -4,6 +4,7 @@
 * Alexander Yukal
 * Andriykopanytsia
 * Base
+* DDPAT
 * Movses
 * Mykola Swarnyk
 * Piramidion
@@ -148,7 +149,7 @@
   <string name="preference_license">Усталена ліцензія</string>
   <string name="use_previous">Використати попередні назву й опис</string>
   <string name="preference_theme">Тема</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by">CC Attribution 3.0</string>
@@ -193,7 +194,7 @@
   <string name="ok">Гаразд</string>
   <string name="warning">Попередження</string>
   <string name="duplicate_image_found">Виявлено дублікат зображення</string>
-  <string name="upload">Вивантажити</string>
+  <string name="upload">Завантажити</string>
   <string name="yes">Так</string>
   <string name="no">Ні</string>
   <string name="media_detail_caption">Підпис</string>
@@ -207,7 +208,7 @@
   <string name="media_detail_coordinates">Координати</string>
   <string name="media_detail_coordinates_empty">Не передбачено</string>
   <string name="become_a_tester_title">Станьте бета-тестером</string>
-  <string name="become_a_tester_description">Підпишіться на наш бета-канал на Google Play і отримайте ранній доступ до нових функцій та виправлень багів</string>
+  <string name="become_a_tester_description">Підпишіться на наш бета-канал на Google Play і отримайте ранній доступ до нових функцій та виправлень баґів</string>
   <string name="_2fa_code">Код 2FA</string>
   <string name="logout_verification">Ви справді хочете вийти із системи?</string>
   <string name="commons_logo">Логотип Вікісховища</string>
@@ -234,7 +235,7 @@
   <string name="navigation_item_settings">Налаштування</string>
   <string name="navigation_item_feedback">Зворотний зв\'язок</string>
   <string name="navigation_item_logout">Вийти</string>
-  <string name="navigation_item_info">Посібник</string>
+  <string name="navigation_item_info">Керівництво</string>
   <string name="navigation_item_notification">Сповіщення</string>
   <string name="navigation_item_review">Перевірка</string>
   <string name="no_description_found">опис не знайдено</string>
@@ -250,6 +251,8 @@
   <string name="upload_problem_different_geolocation">Зображення виконано в іншому місці.</string>
   <string name="upload_problem_fbmd">Будь ласка, завантажуйте тільки ті зображення, які були зроблені вами. Не завантажуйте зображень, які ви знайшли у Фейсбуці.</string>
   <string name="upload_problem_do_you_continue">Ви все одно хочете завантажити це зображення?</string>
+  <string name="upload_connection_error_alert_title">Помилка з\'єднання</string>
+  <string name="upload_connection_error_alert_detail">Процес вивантаження вимагає активного інтернет-з\'єднання. Будь ласка, перевірте своє підключення до мережі.</string>
   <string name="upload_problem_image">Виявлено проблеми із зображенням</string>
   <string name="internet_downloaded">Будь ласка, завантажуйте тільки ті зображення, які були зроблені вами. Не завантажуйте зображень, які ви знайшли в інтернеті.</string>
   <string name="use_external_storage">Зберігати зроблені в програмці знімки</string>
@@ -267,8 +270,8 @@
   <string name="skip_login_title">Ви дійсно бажаєте пропустити автентифікацію?</string>
   <string name="skip_login_message">Вам треба буде увійти в систему для завантаження зображень у майбутньому.</string>
   <string name="login_alert_message">Увійдіть, щоб використати цю функцію</string>
-  <string name="copy_wikicode">Скопіювати вікітекст у буфер обміну</string>
-  <string name="wikicode_copied">Вікітекст скопійовано у буфер обміну</string>
+  <string name="copy_wikicode">Скопіювати вікі-текст у буфер обміну</string>
+  <string name="wikicode_copied">Вікі-текст скопійовано у буфер обміну</string>
   <string name="nearby_location_not_available">Функція «Поблизу» може працювати некоректно, «Розташування» недоступне.</string>
   <string name="location_permission_rationale_nearby">Потрібний дозвіл для показу списку місць поблизу</string>
   <string name="nearby_directions">Напрямки</string>
@@ -319,10 +322,10 @@
   <string name="quiz_question_string">Чи можна завантажувати це зображення?</string>
   <string name="question">Запитання</string>
   <string name="result">Результат</string>
-  <string name="quiz_back_button">Якщо ви продовжите завантажувати зображення, які підлягають вилученню, ваш обліковий запис можуть забанити. Ви впевнені, що хочете закінчити тест?</string>
-  <string name="quiz_alert_message">Понад %1$s завантажених вами зображень було вилучено. Якщо ви продовжите завантажувати зображення, які підлягають вилучення, ваш обліковий запис можуть забанити. \n\nХочете переглянути посібник ще раз і тоді пройти тест, що допоможе дізнатися, які зображення можна, а які не можна завантажувати?</string>
-  <string name="selfie_answer">Селфі не мають значної енциклопедичної цінності. Будь ласка, не завантажуйте фото самих себе, якщо про вас нема статті у Вікіпедії.</string>
-  <string name="taj_mahal_answer">Зображення пам\'яток і пейзажів можна завантажувати у більшості країн. Зважте, будь ласка, що сучасні мистецькі інсталяції на вулиці часто захищені авторськими правами і їх НЕ можна завантажувати.</string>
+  <string name="quiz_back_button">Якщо ви продовжите завантажувати зображення, які підлягають вилученню, ваш обліковий запис можуть заблокувати. Ви впевнені, що хочете закінчити тест?</string>
+  <string name="quiz_alert_message">Понад %1$s завантажених вами зображень було вилучено. Якщо ви продовжите завантажувати зображення, які підлягають вилучення, ваш обліковий запис можуть заблокувати. \n\nХочете переглянути посібник ще раз і тоді пройти тест, що допоможе дізнатися, які зображення можна, а які не можна завантажувати?</string>
+  <string name="selfie_answer">Селфі не мають значної енциклопедичної цінності. Будь ласка, не завантажуйте фото самих себе, якщо про вас немає статті у Вікіпедії.</string>
+  <string name="taj_mahal_answer">Зображення пам\'яток і пейзажів можна завантажувати у більшості країн. Зауважте, будь ласка, що сучасні мистецькі інсталяції на вулиці часто захищені авторськими правами і їх НЕ можна завантажувати.</string>
   <string name="screenshot_answer">Знімки екрану веб-сайтів вважаються похідними роботами і є таким же об\'єктом авторських прав, як і сам веб-сайт. Їх можна використовувати з дозволу авторів сайту. Без такого дозволу, будь-який твір, який ви створите на основі їхньої роботи, юридично вважається неліцензованою копією, яка належить оригінальному автору.</string>
   <string name="blurry_image_answer">Одна з цілей Вікісховища — зібрати якісні зображення. Тому розмиті зображення завантажувати не треба. Завжди старайтеся зробити гарні знімки при хорошому освітленні.</string>
   <string name="construction_event_answer">Зображення технологій чи культури дуже бажані для Вікісховища.</string>
@@ -333,7 +336,7 @@
   <string name="continue_message">Продовжити</string>
   <string name="correct">Правильна відповідь</string>
   <string name="wrong">Хибна відповідь</string>
-  <string name="quiz_screenshot_question">Чи можна завантажувати цей скріншот?</string>
+  <string name="quiz_screenshot_question">Чи можна завантажувати цей знімок?</string>
   <string name="share_app_title">Поширити програму</string>
   <string name="error_fetching_nearby_places">Помилка отримання місць поблизу.</string>
   <string name="no_recent_searches">Історія пошуку порожня</string>
@@ -358,7 +361,7 @@
   <string name="images_uploaded_explanation">Кількість зображень, які ви завантажили у Вікісховище будь-яким методом</string>
   <string name="images_reverted_explanation">Відсоток завантажених вами у Вікісховище зображень, що не були вилучені</string>
   <string name="images_used_explanation">Кількість завантажених вами у Вікісховище зображень, що використані у статтях Вікімедіа</string>
-  <string name="error_occurred">Відбулася помилка!</string>
+  <string name="error_occurred">Сталася помилка!</string>
   <string name="notifications_channel_name_all">Сповіщення Вікісховища</string>
   <string name="preference_author_name_toggle">Використати альтернативне ім\'я автора</string>
   <string name="preference_author_name_toggle_summary">При завантаженні фото використовувати альтернативне ім\'я для зазначення авторства замість власного імені користувача</string>
@@ -409,7 +412,7 @@
   <string name="achievements_fetch_failed_ultimate_achievement">Ви зробили так багато, що наша система підрахунку досягнень не може впоратись зі своїм завданням. Це — абсолютне досягнення.</string>
   <string name="ends_on">Завершується:</string>
   <string name="display_campaigns">Показати кампанії</string>
-  <string name="display_campaigns_explanation">Чинні кампанії</string>
+  <string name="display_campaigns_explanation">Чинні компанії</string>
   <string name="nearby_campaign_dismiss_message">Ви більше не бачитимете кампаній. Однак Ви можете увімкнути це сповіщення повторно в своїх налаштуваннях, якщо забажаєте.</string>
   <string name="this_function_needs_network_connection">Ця функція вимагає доступу до інтернету. Будь ласка, перевірте своє з\'єднання.</string>
   <string name="error_processing_image">Сталася помилка при обробці зображення. Будь ласка, спробуйте ще раз!</string>
@@ -454,7 +457,7 @@
   <string name="error_occurred_in_picking_images">Сталася помилка при завантаженні зображень</string>
   <string name="please_wait">Будь ласка, зачекайте…</string>
   <string name="images_featured_explanation">Вибрані зображення — це зображення від вправних фотографів та ілюстраторів, які спільнота Вікісховища визначила як такі, що мають найкращу якість на сайті.</string>
-  <string name="images_via_nearby_explanation">Зображення, завантажені через «Поблизу», — це зображення, завантажені через дослідження місць на карті.</string>
+  <string name="images_via_nearby_explanation">Зображення, завантажені через «Поблизу», — це зображення, завантажені через дослідження місць на мапі.</string>
   <string name="thanks_received_explanation">Ця функція дозволяє редакторам надіслати «дякую» користувачам, які роблять корисні редагування, — скориставшись невеличким посиланням на сторінці історії або порівняння версій.</string>
   <string name="copy_image_caption_description">Копіювати до наступних медіафайлів</string>
   <string name="copied_successfully">Скопійовано</string>
@@ -504,8 +507,14 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Неможливо додати категорії</string>
   <string name="category_edit_button_text">Оновити категорії</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Спроба оновити координати.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Оновлення координат</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Успіх</string>
+  <string name="coordinates_edit_helper_show_edit_message">Координати %1$s додані.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Не вдалося додати координати.</string>
+  <string name="coordinates_picking_unsuccessful">Не вдалося отримати координати.</string>
   <string name="share_image_via">Поширити зображення через</string>
-  <string name="no_achievements_yet">Поки що від вас немає вкладу</string>
+  <string name="no_achievements_yet">Ви ще не зробили жодного внеску</string>
   <string name="account_created">Обліковий запис створено!</string>
   <string name="text_copy">Текст скопійовано до буферу обміну</string>
   <string name="notification_mark_read">Сповіщення позначено прочитаним</string>
@@ -545,12 +554,12 @@
   <string name="add_picture_to_wikipedia_article_desc">Ви хочете додати це зображення у статтю Вікіпедії мовою %1$s?</string>
   <string name="confirm">Підтвердити</string>
   <string name="instructions_title">Інструкції</string>
-  <string name="wikipedia_instructions_step_1">1. Використовуйте такий вікітекст:</string>
+  <string name="wikipedia_instructions_step_1">1. Використовуйте такий вікі-текст:</string>
   <string name="wikipedia_instructions_step_2">2. Натискання на «Підтвердити» відкриє статтю Вікіпедії</string>
   <string name="wikipedia_instructions_step_3">3. Знайдіть розділ статті, до якого пасуватиме ваше зображення</string>
   <string name="wikipedia_instructions_step_4">4. Натисніть на іконку «Редагувати» (у вигляді олівця) біля цього розділу.</string>
-  <string name="wikipedia_instructions_step_5">5. Вставте вікітекст у підхожому місці.</string>
-  <string name="wikipedia_instructions_step_6">6. Відредагуйте вікітекст за потреби, вказавши потрібне розміщення. Детальнішу інформацію знайдете &lt;a href=\"https://uk.wikipedia.org/wiki/Довідка:Розширений_синтаксис_зображень\"&gt;тут&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_5">5. Вставте вікі-текст у відповідне місце.</string>
+  <string name="wikipedia_instructions_step_6">6. Відредагуйте вікі-текст за потреби, вказавши потрібне розміщення. Детальну інформацію знайдете &lt;a href=\"https://uk.wikipedia.org/wiki/Довідка:Розширений_синтаксис_зображень\"&gt;тут&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Опублікуйте статтю</string>
   <string name="copy_wikicode_to_clipboard">Скопіювати вікікод у буфер обміну</string>
   <string name="pause">пауза</string>
@@ -579,16 +588,16 @@
   <string name="leaderboard_my_rank_button_text">Мій ранг</string>
   <string name="mapbox_telemetry">Телеметрія Mapbox</string>
   <string name="telemetry_opt_out_summary">Надсилати анонімізоване розташування та дані щодо користування до Mapbox при використанні функції Поблизу</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Покращити цю карту&lt;/a&gt;</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Покращити цю мапу&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Увімкнено режим обмеженого з\'єднання!</string>
   <string name="limited_connection_disabled">Вимкнено режим обмеженого з\'єднання. Завантаження в процесі очікування тепер відновляться.</string>
   <string name="limited_connection_mode">Режим обмеженого з\'єднання</string>
   <string name="statistics_quality">Якісні зображення</string>
-  <string name="quality_images_info">Якісні зображення — це діаграми чи фотографії, що відповідають певним стандартам якості (переважно технічним за природою) та цінні для проектів Вікімедіа</string>
+  <string name="quality_images_info">Якісні зображення — це діаграми чи фотографії, що відповідають певним стандартам якості (переважно технічним за природою) та цінні для проєктів Вікімедіа</string>
   <string name="resuming_upload">Продовження завантаження…</string>
   <string name="pausing_upload">Призупинення завантаження…</string>
-  <string name="limited_connection_explanation">Ви ввімкнули режим обмеженого з\'єднання. Усі завантаження призупинено та буде відновлено коли Ви вимкнете цей режим.</string>
-  <string name="limited_connection_is_on">Режим обмеженого з\'єднання ввімкнено.</string>
+  <string name="limited_connection_explanation">Ви увімкнули режим обмеженого з\'єднання. Усі завантаження призупинено та буде відновлено коли Ви вимкнете цей режим.</string>
+  <string name="limited_connection_is_on">Режим обмеженого з\'єднання увімкнено.</string>
   <string name="media_details_tooltip">Будь ласка, напишіть короткий опис, що розповідає що представлено на зображенні. В описі розкажіть що робить це зображення цікавим, типовим або рідкісним, опишіть контекст — видимий чи ні. Старайтесь максимально використовувати точну термінологію.</string>
   <string name="depicts_tooltip">Будь ласка, знайдіть та оберіть всі концепти, що це зображення показує. Будьте настільки точними, наскільки можливо. Якщо зображення зображує декілька речей, у межах здорового глузду оберіть їх всі. Не обирайте загальніші теґи, коли є доступні точніші.</string>
   <string name="categories_tooltip">Будь ласка, оберіть відповідні категорії. На відміну від описів, назви категорій лише англійською.</string>
@@ -601,4 +610,15 @@
   <string name="app_ui_language">Мова інтерфейсу</string>
   <string name="remove">Вилучає опис і підпис</string>
   <string name="read_help_link">Читати більше</string>
+  <string name="media_detail_in_all_languages">Усіма мовами</string>
+  <string name="choose_a_location">Вибрати розташування</string>
+  <string name="pan_and_zoom_to_adjust">Панорамуйте і збільшуйте, щоб підлаштувати</string>
+  <string name="exit_location_picker">Вийти з вікна вибору розташування</string>
+  <string name="select_location_location_picker">Вибрати розташування</string>
+  <string name="show_in_map_app">Показати в додатку на мапі</string>
+  <string name="modify_location">Редагувати підпис</string>
+  <string name="location_picker_image_view">Вигляд вибору розташування як зображення</string>
+  <string name="location_picker_image_view_shadow">Вигляд вибору розташування як тіні зображення</string>
+  <string name="image_location">Підпис зображення</string>
+  <string name="check_whether_location_is_correct">Перевірте правильність розташування</string>
 </resources>

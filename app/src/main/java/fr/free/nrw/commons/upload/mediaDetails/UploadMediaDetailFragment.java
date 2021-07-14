@@ -1,8 +1,10 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
+import static android.app.Activity.RESULT_OK;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,19 +25,19 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageDialogFragment;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
+import fr.free.nrw.commons.upload.UploadItem;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
-import fr.free.nrw.commons.upload.UploadItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -49,6 +51,7 @@ import timber.log.Timber;
 public class UploadMediaDetailFragment extends UploadBaseFragment implements
     UploadMediaDetailsContract.View, UploadMediaDetailAdapter.EventListener {
 
+    private static final int REQUEST_CODE = 1211;
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.ib_map)
@@ -94,7 +97,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     private Place nearbyPlace;
     private UploadItem uploadItem;
-
+    /**
+     * editableUploadItem : Storing the upload item before going to update the coordinates
+     */
+    private UploadItem editableUploadItem;
 
     private UploadMediaDetailFragmentCallback callback;
 
@@ -378,10 +384,67 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void showExternalMap(UploadItem uploadItem) {
-        Utils.handleGeoCoordinates(getContext(),
-            new LatLng(uploadItem.getGpsCoords().getDecLatitude(),
-                uploadItem.getGpsCoords().getDecLongitude(), 0.0f));
+    public void showExternalMap(final UploadItem uploadItem) {
+        goToLocationPickerActivity(uploadItem);
+    }
+
+    /**
+     * Start Location picker activity. Show the location first then user can modify it by clicking
+     * modify location button.
+     * @param uploadItem current upload item
+     */
+    private void goToLocationPickerActivity(final UploadItem uploadItem) {
+
+        editableUploadItem = uploadItem;
+        startActivityForResult(new LocationPicker.IntentBuilder()
+            .defaultLocation(new CameraPosition.Builder()
+                .target(new com.mapbox.mapboxsdk.geometry.LatLng(uploadItem.getGpsCoords()
+                    .getDecLatitude(),
+                    uploadItem.getGpsCoords().getDecLongitude()))
+                .zoom(16).build())
+            .activityKey("UploadActivity")
+            .build(getActivity()), REQUEST_CODE);
+    }
+
+    /**
+     * Get the coordinates and update the existing coordinates.
+     * @param requestCode code of request
+     * @param resultCode code of result
+     * @param data intent
+     */
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode,
+        @Nullable final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+
+            assert data != null;
+            final CameraPosition cameraPosition = LocationPicker.getCameraPosition(data);
+
+            if (cameraPosition != null) {
+
+                final String latitude = String.valueOf(cameraPosition.target.getLatitude());
+                final String longitude = String.valueOf(cameraPosition.target.getLongitude());
+
+                editLocation(latitude, longitude);
+            }
+        }
+    }
+
+    /**
+     * Update the old coordinates with new one
+     * @param latitude new latitude
+     * @param longitude new longitude
+     */
+    public void editLocation(final String latitude, final String longitude){
+
+        editableUploadItem.getGpsCoords().setDecLatitude(Double.parseDouble(latitude));
+        editableUploadItem.getGpsCoords().setDecLongitude(Double.parseDouble(longitude));
+        editableUploadItem.getGpsCoords().setDecimalCoords(latitude+"|"+longitude);
+        editableUploadItem.getGpsCoords().setImageCoordsExists(true);
+        Toast.makeText(getContext(), "Location Updated", Toast.LENGTH_LONG).show();
+
     }
 
     @Override

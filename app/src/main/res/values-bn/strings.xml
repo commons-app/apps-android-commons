@@ -312,6 +312,7 @@
   <string name="category_edit_helper_show_edit_title_success">সফল</string>
   <string name="category_edit_helper_edit_message_else">বিষয়শ্রেণী হালনাগাদ করা সম্ভব হয়নি।</string>
   <string name="category_edit_button_text">বিষয়শ্রেণীগুলি হালনাগাদ করুন</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">সফল</string>
   <string name="account_created">অ্যাকাউন্ট তৈরি করা হয়েছে!</string>
   <string name="remove_bookmark">বুকমার্ক থেকে সরানো হয়েছে</string>
   <string name="add_bookmark">বুকমার্কে যোগ করা হয়েছে</string>

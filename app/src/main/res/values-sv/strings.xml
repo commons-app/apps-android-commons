@@ -486,6 +486,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Kunde inte lägga till kategorier.</string>
   <string name="category_edit_button_text">Uppdatera kategorier</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Försöker uppdatera koordinater.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Koordinater uppdaterades</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Genomfördes</string>
+  <string name="coordinates_edit_helper_show_edit_message">Koordinaterna %1$s lades till.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Kunde inte lägga till koordinater.</string>
+  <string name="coordinates_picking_unsuccessful">Kunde inte hämta koordinater.</string>
   <string name="share_image_via">Dela bild via</string>
   <string name="no_achievements_yet">Du har ännu inte gjort några bidrag</string>
   <string name="account_created">Konto har skapats!</string>
@@ -583,4 +589,15 @@
   <string name="app_ui_language">Appens användargränssnittspråk</string>
   <string name="remove">Ta bort en bildtext och beskrivning</string>
   <string name="read_help_link">Läs mer</string>
+  <string name="media_detail_in_all_languages">På alla språk</string>
+  <string name="choose_a_location">Välj en plats</string>
+  <string name="pan_and_zoom_to_adjust">Panorera och zooma för att justera</string>
+  <string name="exit_location_picker">Avsluta platsväljaren</string>
+  <string name="select_location_location_picker">Välj plats</string>
+  <string name="show_in_map_app">Visa i kartappen</string>
+  <string name="modify_location">Redigera plats</string>
+  <string name="location_picker_image_view">Platsväljarens bildvisare</string>
+  <string name="location_picker_image_view_shadow">Skuggan för platsväljarens bildvisare</string>
+  <string name="image_location">Bildplats</string>
+  <string name="check_whether_location_is_correct">Kontrollera om platsen är korrekt</string>
 </resources>

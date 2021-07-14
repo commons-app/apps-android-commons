@@ -84,6 +84,35 @@ class DepictsPresenter @Inject constructor(
         compositeDisposable.clear()
     }
 
+    /**
+     * Selects the place depictions retrieved by the repository
+     */
+    override fun selectPlaceDepictions() {
+        compositeDisposable.add(repository.placeDepictions
+            .subscribeOn(ioScheduler)
+            .observeOn(mainThreadScheduler)
+            .subscribe(::selectNewDepictions)
+        )
+    }
+
+    /**
+     * Selects each [DepictedItem] in a given list as if they were clicked by the user by calling
+     * [onDepictItemClicked] for each depiction and adding the depictions to [depictedItems]
+     */
+    private fun selectNewDepictions(toSelect: List<DepictedItem>) {
+        toSelect.forEach {
+            it.isSelected = true
+            repository.onDepictItemClicked(it)
+        }
+
+        // Add the new selections to the list of depicted items so that the selections appear
+        // immediately (i.e. without any search term queries)
+        depictedItems.value?.toMutableList()
+            ?.let { toSelect + it }
+            ?.distinctBy(DepictedItem::id)
+            ?.let { depictedItems.value = it }
+    }
+
     override fun onPreviousButtonClicked() {
         view.goToPreviousScreen()
     }

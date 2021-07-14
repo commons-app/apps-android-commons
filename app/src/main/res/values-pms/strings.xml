@@ -582,10 +582,15 @@
   <string name="app_ui_language">Lenga d\'antërfassa utent ëd l\'aplicassion</string>
   <string name="remove">A gava na legenda e na descrission</string>
   <string name="read_help_link">Lese ëd pi</string>
+  <string name="media_detail_in_all_languages">An tute le lenghe</string>
   <string name="choose_a_location">Serne na locassion</string>
   <string name="pan_and_zoom_to_adjust">Slarghé e strenze për buté bin</string>
   <string name="exit_location_picker">Seurte dal selessionador ëd locassion</string>
   <string name="select_location_location_picker">Selessioné na locassion</string>
-  <string name="location_picker_image_view">Vista dla plancia dël selessionador ëd locassion</string>
-  <string name="location_picker_image_view_shadow">Locassion ëd picker_image_view_shadow</string>
+  <string name="show_in_map_app">Smon-e andrinta a l\'aplicassion carta</string>
+  <string name="modify_location">Modifiché ël pòst</string>
+  <string name="location_picker_image_view">La vista dla plancia dël selessionador ëd locassion</string>
+  <string name="location_picker_image_view_shadow">L\'ombra dla vista dla plancia dël selessionator ëd pòst</string>
+  <string name="image_location">Pòst ëd la plancia</string>
+  <string name="check_whether_location_is_correct">Controlé si ël pòst a l\'é giust</string>
 </resources>

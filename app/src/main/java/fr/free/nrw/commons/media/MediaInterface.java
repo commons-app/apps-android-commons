@@ -3,6 +3,7 @@ package fr.free.nrw.commons.media;
 import io.reactivex.Single;
 import java.util.Map;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;

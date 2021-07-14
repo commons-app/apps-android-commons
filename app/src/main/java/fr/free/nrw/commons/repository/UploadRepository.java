@@ -19,8 +19,11 @@ import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -252,6 +255,23 @@ public class UploadRepository {
 
     public Flowable<List<DepictedItem>> searchAllEntities(String query) {
         return depictModel.searchAllEntities(query);
+    }
+
+    /**
+     * Gets the depiction for each unique {@link Place} associated with an {@link UploadItem}
+     * from {@link #getUploads()}
+     *
+     * @return a single that provides the depictions
+     */
+    public Single<List<DepictedItem>> getPlaceDepictions() {
+        final Set<Place> places = new HashSet<>();
+        for (final UploadItem item : getUploads()) {
+            final Place place = item.getPlace();
+            if (place != null) {
+                places.add(place);
+            }
+        }
+        return depictModel.getPlaceDepictions(new ArrayList<>(places));
     }
 
     /**

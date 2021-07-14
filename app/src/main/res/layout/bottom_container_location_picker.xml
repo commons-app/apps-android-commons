@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
@@ -11,25 +10,71 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
+    android:contentDescription="@string/select_location_location_picker"
     android:tint="@color/white"
     app:backgroundTint="@color/wikimedia_green"
     app:elevation="3dp"
     app:layout_anchorGravity="top|end"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:srcCompat="@drawable/ic_check_black_24dp"
-    android:contentDescription="@string/select_location_location_picker" />
+    app:srcCompat="@drawable/ic_check_black_24dp" />
 
   <androidx.appcompat.widget.AppCompatTextView
     android:id="@+id/tv_attribution"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
     android:text="@string/map_attribution"
     android:textAlignment="center"
+    android:layout_margin="8dp"
     android:textSize="10sp"
     android:textStyle="bold"
-    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintBottom_toTopOf="@+id/map_bottom_layout"
     app:layout_constraintStart_toStartOf="parent" />
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/map_bottom_layout"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
+
+    <Button
+      android:id="@+id/modify_location"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:text="@string/modify_location"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      android:layout_margin="5dp"
+      app:layout_constraintBottom_toBottomOf="@id/map_bottom_layout"
+      app:layout_constraintEnd_toStartOf="@+id/guideline3"
+      app:layout_constraintStart_toStartOf="@id/map_bottom_layout"
+      app:layout_constraintTop_toTopOf="@id/map_bottom_layout" />
+
+    <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline3"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+      android:id="@+id/show_in_map"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:text="@string/show_in_map_app"
+      android:textAlignment="center"
+      android:textColor="@color/primaryColor"
+      android:textSize="14sp"
+      android:visibility="gone"
+      android:layout_margin="5dp"
+      app:layout_constraintBottom_toBottomOf="@id/map_bottom_layout"
+      app:layout_constraintEnd_toEndOf="@id/map_bottom_layout"
+      app:layout_constraintStart_toStartOf="@+id/guideline3"
+      app:layout_constraintTop_toTopOf="@id/map_bottom_layout" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

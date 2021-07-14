@@ -48,13 +48,6 @@ class MoreBottomSheetLoggedOutFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnTutorialClicked() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.onTutorialClicked()
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testOnSettingsClicked() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onSettingsClicked()

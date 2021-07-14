@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Chinamoonroll
+-->
+<resources>
+  <string name="crash_dialog_title">Commons kantun usak</string>
+  <string name="crash_dialog_text">Mimih. Wénten sané iwang!</string>
+  <string name="crash_dialog_comment_prompt">Bangyang iraga nawang napi sané ragané margiang, lantas wedar saking rerepél majeng iraga. Pacang ngawantu iraga ngabecikin!</string>
+  <string name="crash_dialog_ok_toast">Matur suksma!</string>
+</resources>

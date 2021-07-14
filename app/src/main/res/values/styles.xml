@@ -19,6 +19,7 @@
         <item name="rowButtonColor">@color/button_blue_dark</item>
         <item name="reviewHeading">@color/white</item>
         <item name="aboutIconsColor">@color/white</item>
+        <item name="caption_description_text_color">@color/white</item>
 
         <item name="semitransparentText">@color/commons_app_blue_dark</item>
         <item name="subBackground">@color/sub_background_dark</item>
@@ -78,6 +79,7 @@
         <item name="rowButtonColor">@color/button_blue</item>
         <item name="reviewHeading">@color/black</item>
         <item name="aboutIconsColor">@color/black</item>
+        <item name="caption_description_text_color">@color/black</item>
 
         <item name="semitransparentText">@color/commons_app_blue_light</item>
         <item name="subBackground">@color/sub_background_light</item>
@@ -208,6 +210,12 @@
         <item name="android:paddingLeft">@dimen/tiny_gap</item>
         <item name="android:textSize">@dimen/normal_text</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CaptionTextLabel">
+        <item name="android:paddingTop">@dimen/dimen_6</item>
+        <item name="android:paddingLeft">@dimen/tiny_gap</item>
+        <item name="android:textSize">@dimen/normal_text</item>
     </style>
 
     <style name="MediaDetailTextLabelTitle" parent="@style/MediaDetailTextLabel">

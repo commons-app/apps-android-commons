@@ -57,22 +57,21 @@
                             android:layout_marginTop="@dimen/activity_margin_vertical"
                             android:layout_marginBottom="@dimen/activity_margin_vertical"
                             android:layout_height="wrap_content"
-                            android:layout_width="wrap_content" />
+                            android:layout_width="match_parent" />
 
-
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/next_button"
-                        android:layout_gravity="right"
-                        style="?android:textAppearanceMedium"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                        android:layout_marginRight="@dimen/activity_margin_horizontal"
-                        android:text="NEXT"
-                        android:backgroundTint="#D6DCE0"
-                        android:layout_marginBottom="@dimen/activity_margin_vertical" />
+                        <Button
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:id="@+id/next_button"
+                          android:layout_gravity="right"
+                          style="?android:textAppearanceMedium"
+                          android:layout_alignParentBottom="true"
+                          android:layout_alignParentRight="true"
+                          android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                          android:layout_marginRight="@dimen/activity_margin_horizontal"
+                          android:text="I am not sure"
+                          android:backgroundTint="#D6DCE0"
+                          android:layout_marginBottom="@dimen/activity_margin_vertical" />
 
                     </LinearLayout>
                 </ScrollView>

@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.CoroutineWorker
+import androidx.work.Data
 import androidx.work.WorkerParameters
 import com.google.gson.Gson
 import com.mapbox.mapboxsdk.plugins.localization.BuildConfig
@@ -151,6 +152,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     }
 
     override suspend fun doWork(): Result {
+        var countUpload = 0
         notificationManager = NotificationManagerCompat.from(appContext)
         val processingUploads = getNotificationBuilder(
             CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL
@@ -201,6 +203,8 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     contribution.transferred = 0
                     contribution.state = Contribution.STATE_IN_PROGRESS
                     contributionDao.saveSynchronous(contribution)
+                    setProgressAsync(Data.Builder().putInt("progress", countUpload).build())
+                    countUpload++
                     uploadContribution(contribution = contribution)
                 }
             }.collect()

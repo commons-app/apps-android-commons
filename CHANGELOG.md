@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+## v3.0.2
+- Fixed crash when uploading high res image
+- Fixed crash when viewing images in Explore
+
 ## v3.0.1
 - Pre-fill desc in Nearby uploads with Wikidata item's label + description
 - Improved ACRA crash reporting

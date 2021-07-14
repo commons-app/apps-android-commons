@@ -50,6 +50,7 @@
     <attr name="search_icon" format="reference"/>
     <attr name="custom_selector_done" format="reference"/>
     <attr name="custom_selector_back" format="reference"/>
+    <attr name="caption_description_text_color" format="reference" />
 
     <declare-styleable name="Badge">
         <attr name="boundary" format="color"/>

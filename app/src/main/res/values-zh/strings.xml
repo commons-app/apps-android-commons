@@ -8,6 +8,7 @@
 * Angrydog001
 * D41D8CD98F
 * Deathkon
+* GuoPC
 * Hydra
 * Ken418
 * Kuailong
@@ -44,13 +45,13 @@
     <item quantity="other">%1$d次上传</item>
   </plurals>
   <string name="starting_uploads">开始上传</string>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">开始%1$d次上传</item>
-    <item quantity="other">开始%1$d次上传</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">正在处理%d个上传</item>
+    <item quantity="other">正在处理%d个上传</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d次上传</item>
-    <item quantity="other">%1$d次上传</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d个上传</item>
+    <item quantity="other">%d个上传</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">该图像的授权协议是 %1$s</item>
@@ -120,6 +121,7 @@
   <string name="provider_modifications">修改</string>
   <string name="menu_upload_single">上传</string>
   <string name="categories_search_text_hint">搜索分类</string>
+  <string name="depicts_search_text_hint">搜索您的媒体描述的项目（如山、泰姬陵等）</string>
   <string name="menu_save_categories">保存</string>
   <string name="refresh_button">刷新</string>
   <string name="display_list_button">列表</string>
@@ -203,6 +205,7 @@
   <string name="no">否</string>
   <string name="media_detail_caption">说明</string>
   <string name="media_detail_title">标题</string>
+  <string name="media_detail_depiction">描述</string>
   <string name="media_detail_description">描述</string>
   <string name="media_detail_discussion">讨论</string>
   <string name="media_detail_author">作者</string>
@@ -246,6 +249,7 @@
   <string name="nearby_info_menu_wikidata_article">维基数据项</string>
   <string name="nearby_info_menu_wikipedia_article">维基百科条目</string>
   <string name="description_info">请尽可能详细地描述媒体：拍摄在何地？显示什么？例文是什么？请描述对象或个人。透露一些不易猜想到的信息，例如这幅风景画的具体日期时间。如果媒体显示了一些不寻常的事物，请说明为什么它显得不寻常。</string>
+  <string name="caption_info">请编写图像的简要说明。第一个标题将作为图片的题目。不能超过255个字符。</string>
   <string name="upload_problem_exist">这个图片可能的问题：</string>
   <string name="upload_problem_image_dark">图片太暗。</string>
   <string name="upload_problem_image_blurry">图片模糊。</string>
@@ -253,9 +257,11 @@
   <string name="upload_problem_different_geolocation">这张图片是在不同的地点拍摄的。</string>
   <string name="upload_problem_fbmd">请仅上传由您自己拍摄的图像。请勿上传您在他人的Facebook账户上所发现的图像。</string>
   <string name="upload_problem_do_you_continue">仍然上传这张图片？</string>
+  <string name="upload_connection_error_alert_title">连接错误</string>
+  <string name="upload_connection_error_alert_detail">上传过程需要有效的互联网访问。请检查您的网络连接。</string>
   <string name="upload_problem_image">在图片中发现的问题</string>
   <string name="internet_downloaded">请仅上传由您自己拍摄的图像。请勿上传您从互联网下载的图像。</string>
-  <string name="use_external_storage" fuzzy="true">使用外部存储</string>
+  <string name="use_external_storage">保存应用程序内截图</string>
   <string name="use_external_storage_summary">将您设备内部照相机应用拍摄的照片保存至您的设备存储中</string>
   <string name="login_to_your_account">登录您的账户</string>
   <string name="send_log_file">发送日志文件</string>
@@ -272,7 +278,7 @@
   <string name="login_alert_message">请登录后使用这个功能</string>
   <string name="copy_wikicode">复制维基文本到剪贴板</string>
   <string name="wikicode_copied">维基文本已经复制到剪贴板</string>
-  <string name="nearby_location_not_available" fuzzy="true">位置不可用。</string>
+  <string name="nearby_location_not_available">附近可能无法正常工作，位置不可用。</string>
   <string name="location_permission_rationale_nearby">需要权限以显示附近地点列表</string>
   <string name="nearby_directions">方向</string>
   <string name="nearby_wikidata">维基数据</string>
@@ -308,6 +314,7 @@
   <string name="search_recent_header">最近搜索：</string>
   <string name="provider_searches">最近的搜索查询</string>
   <string name="error_loading_categories">载入分类时发生错误。</string>
+  <string name="error_loading_depictions">加载描述时出错。</string>
   <string name="search_tab_title_media">媒体</string>
   <string name="search_tab_title_categories">分类</string>
   <string name="search_tab_title_depictions">项目</string>
@@ -370,7 +377,7 @@
   <string name="notifications">通知</string>
   <string name="read_notifications">通知（已读）</string>
   <string name="display_nearby_notification">显示附近通知</string>
-  <string name="display_nearby_notification_summary" fuzzy="true">点击此处查看最近需要图片的地方</string>
+  <string name="display_nearby_notification_summary">显示有关需要图片的最近地点的应用程序内通知</string>
   <string name="list_sheet">列表</string>
   <string name="storage_permission">存储权限</string>
   <string name="write_storage_permission_rationale_for_image_share">我们需要您的许可才能访问设备的外部存储空间以上传图片。</string>
@@ -398,6 +405,7 @@
   <string name="no_categories_selected">未提交分类</string>
   <string name="no_categories_selected_warning_desc">没有类别的图像很少可用。确实要继续而不选择类别吗？</string>
   <string name="no_depictions_selected">没有选择描写</string>
+  <string name="no_depictions_selected_warning_desc">带有描述的图像更容易被发现并且更可能被使用。您确定不选择描述继续吗？</string>
   <string name="upload_flow_all_images_in_set">（对于设置中的所有图像）</string>
   <string name="search_this_area">搜索这个区域</string>
   <string name="nearby_card_permission_title">需要许可</string>
@@ -457,6 +465,8 @@
   <string name="images_featured_explanation">特征图片是Wikimedia Commons社区选出的网站上的最高质量的图片中的一部分，是来自于技术高超的摄影师和绘画师。</string>
   <string name="images_via_nearby_explanation">通过附近位置上传的图片是指那些使用地图上发现位置功能上传的图片</string>
   <string name="thanks_received_explanation">这些功能允许编辑人员给那些做出了有用编辑的用户发送感谢通知-感谢通知通过使用在历史页面或差分页面上的一个小的感谢链接实现的。</string>
+  <string name="copy_image_caption_description">复制到后续媒体</string>
+  <string name="copied_successfully">已复制</string>
   <string name="welcome_do_upload_content_description">上传好图片到Commons的例子</string>
   <string name="welcome_dont_upload_content_description">不能上传图片的例子</string>
   <string name="skip_image">跳过该图片</string>
@@ -493,7 +503,20 @@
   <string name="delete_helper_ask_reason_copyright_logo">标志</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">由于他是</string>
   <string name="category_edit_helper_make_edit_toast">正在尝试更新分类。</string>
+  <string name="category_edit_helper_show_edit_title">分类更新</string>
   <string name="category_edit_helper_show_edit_title_success">成功</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">分类%1$s已添加。</item>
+    <item quantity="other">分类%1$s已添加。</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">无法添加分类。</string>
+  <string name="category_edit_button_text">更新分类</string>
+  <string name="coordinates_edit_helper_make_edit_toast">尝试更新坐标。</string>
+  <string name="coordinates_edit_helper_show_edit_title">坐标更新</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">完成</string>
+  <string name="coordinates_edit_helper_show_edit_message">坐标 %1$s 已被添加。</string>
+  <string name="coordinates_edit_helper_edit_message_else">无法添加坐标。</string>
+  <string name="coordinates_picking_unsuccessful">无法获取坐标。</string>
   <string name="share_image_via">分享图片透过</string>
   <string name="no_achievements_yet">您目前还没有作出任何贡献</string>
   <string name="account_created">账户已创建！</string>
@@ -521,31 +544,81 @@
   <string name="theme_default_name">跟随系统</string>
   <string name="theme_dark_name">暗黑</string>
   <string name="theme_light_name">明亮</string>
+  <string name="cannot_open_location_settings">无法打开位置设置。请手动打开位置</string>
+  <string name="recommend_high_accuracy_mode">选择高精确度模式以获得最佳结果。</string>
   <string name="ask_to_turn_location_on">打开位置？</string>
+  <string name="nearby_needs_location">附近需要启用位置才能正常工作</string>
+  <string name="use_location_from_similar_image">您是在同一地点拍摄这两张图片的吗？您想要使用右侧图片的纬度/经度吗？</string>
   <string name="load_more">加载更多</string>
+  <string name="nearby_no_results">未找到位置，请尝试更改您的搜索条件。</string>
+  <string name="todo_improve">建议的改进措施：</string>
+  <string name="missing_category">- 为此图像添加分类以提升可用性。</string>
+  <string name="missing_article">- 将此图像添加至相关的无图像的维基百科条目中。</string>
   <string name="add_picture_to_wikipedia_article_title">将图片添加到维基百科</string>
+  <string name="add_picture_to_wikipedia_article_desc">您想将此图像添加至$1s维基百科条目中吗？</string>
   <string name="confirm">确认</string>
   <string name="instructions_title">说明</string>
+  <string name="wikipedia_instructions_step_1">1. 使用下列维基文本：</string>
+  <string name="wikipedia_instructions_step_2">2. 点击确认将会打开维基百科条目</string>
+  <string name="wikipedia_instructions_step_3">3. 寻找条目中适合您的图像的章节</string>
+  <string name="wikipedia_instructions_step_4">4. 点击该章节的编辑图标（类似铅笔形状的图标）。</string>
+  <string name="wikipedia_instructions_step_5">5. 将维基文本粘贴到合适的位置。</string>
+  <string name="wikipedia_instructions_step_6">6. 如果必要，在合适的位置编辑维基文本。参阅&lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;此处&lt;/a&gt;以获得更多信息。</string>
+  <string name="wikipedia_instructions_step_7">7. 发布条目</string>
   <string name="copy_wikicode_to_clipboard">复制维基代码到剪贴板</string>
   <string name="pause">暂停</string>
   <string name="resume">继续</string>
   <string name="paused">已暂停</string>
   <string name="more">更多</string>
+  <string name="favorites">我的收藏</string>
+  <string name="achievements_tab_title">成就</string>
   <string name="leaderboard_tab_title">排行榜</string>
   <string name="rank_prefix">排名：</string>
+  <string name="count_prefix">数量：</string>
   <string name="leaderboard_column_rank">排名</string>
   <string name="leaderboard_column_user">用户</string>
   <string name="leaderboard_column_count">计数</string>
+  <string name="setting_avatar_dialog_title">设为排行榜头像</string>
+  <string name="setting_avatar_dialog_message">正在设为头像，请稍候</string>
+  <string name="avatar_set_successfully">头像已设定</string>
+  <string name="avatar_set_unsuccessfully">设定新头像出错，请重试</string>
+  <string name="menu_set_avatar">设为头像</string>
+  <string name="leaderboard_yearly">每年</string>
+  <string name="leaderboard_weekly">每周</string>
   <string name="leaderboard_all_time">所有时间</string>
   <string name="leaderboard_upload">上传</string>
   <string name="leaderboard_nearby">附近</string>
+  <string name="leaderboard_used">已使用</string>
   <string name="leaderboard_my_rank_button_text">我的排名</string>
+  <string name="mapbox_telemetry">Mapbox Telemetry</string>
+  <string name="telemetry_opt_out_summary">使用附近功能时向Mapbox发送匿名位置和使用数据</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;改进此地图&lt;/a&gt;</string>
+  <string name="limited_connection_enabled">限制连接模式已启用！</string>
+  <string name="limited_connection_disabled">限制连接模式已禁用。挂起的上传将会立即恢复。</string>
   <string name="limited_connection_mode">限制连接模式</string>
+  <string name="statistics_quality">品质图像</string>
+  <string name="quality_images_info">品质图像是符合一定质量标准（本质上大多是技术性的）的图表或照片，它们对维基媒体计划很有价值</string>
   <string name="resuming_upload">正在恢复上传...</string>
   <string name="pausing_upload">暂停上传...</string>
+  <string name="limited_connection_explanation">您已启用限制连接模式。所有的上传已暂停并将在您禁用此模式后立刻恢复。</string>
+  <string name="limited_connection_is_on">限制连接模式启用中。</string>
+  <string name="media_details_tooltip">请编写一个简短的标题来介绍您的图片展示了什么。请介绍该图片是如何有趣、典型或罕见，并说明背景以及是否可见。请尽可能使用准确的术语。</string>
+  <string name="depicts_tooltip">请寻找和选择此图像描绘的所有概念。越精确越好。如果图像描绘了多个项目，请在合理范围内全部选择。如果有更精确的标签可用，就不要选择通用标签。</string>
+  <string name="categories_tooltip">请选择合适的分类。与描述不同，分类仅使用英文。</string>
+  <string name="license_tooltip">维基共享资源让您的图片能够重复使用并且供任何人修改。您想放弃所有使用权吗？您希望被标示出吗？您想依据相同的授权条款来修改内容吗？</string>
   <string name="depicts_step_title">描述</string>
+  <string name="license_step_title">媒体授权条款</string>
   <string name="media_detail_step_title">媒体详情</string>
   <string name="menu_view_category_page">查看分类页面</string>
   <string name="menu_view_item_page">查看项目页面</string>
+  <string name="app_ui_language">应用程序用户界面语言</string>
+  <string name="remove">移除标题和描述</string>
   <string name="read_help_link">阅读更多</string>
+  <string name="media_detail_in_all_languages">在所有语言中</string>
+  <string name="choose_a_location">选择一个地点</string>
+  <string name="pan_and_zoom_to_adjust">放大和做小来调整</string>
+  <string name="exit_location_picker">退出位置拾取器</string>
+  <string name="select_location_location_picker">选择地点</string>
+  <string name="location_picker_image_view">位置拾取器的图像视图</string>
+  <string name="location_picker_image_view_shadow">地点拾取器的照片观测视野的阴影。</string>
 </resources>

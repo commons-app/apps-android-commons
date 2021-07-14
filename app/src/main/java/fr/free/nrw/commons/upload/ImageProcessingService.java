@@ -22,6 +22,7 @@ import timber.log.Timber;
  */
 @Singleton
 public class ImageProcessingService {
+
     private final FileUtilsWrapper fileUtilsWrapper;
     private final ImageUtilsWrapper imageUtilsWrapper;
     private final ReadFBMD readFBMD;
@@ -30,9 +31,9 @@ public class ImageProcessingService {
 
     @Inject
     public ImageProcessingService(FileUtilsWrapper fileUtilsWrapper,
-                                  ImageUtilsWrapper imageUtilsWrapper,
-                                  ReadFBMD readFBMD, EXIFReader EXIFReader,
-                                  MediaClient mediaClient, Context context) {
+        ImageUtilsWrapper imageUtilsWrapper,
+        ReadFBMD readFBMD, EXIFReader EXIFReader,
+        MediaClient mediaClient, Context context) {
         this.fileUtilsWrapper = fileUtilsWrapper;
         this.imageUtilsWrapper = imageUtilsWrapper;
         this.readFBMD = readFBMD;
@@ -41,33 +42,34 @@ public class ImageProcessingService {
     }
 
 
-  /**
-   * Check image quality before upload - checks duplicate image - checks dark image - checks
-   * geolocation for image - check for valid title
-   */
-  Single<Integer> validateImage(UploadItem uploadItem) {
-    int currentImageQuality = uploadItem.getImageQuality();
-    Timber.d("Current image quality is %d", currentImageQuality);
-    if (currentImageQuality == ImageUtils.IMAGE_KEEP) {
-      return Single.just(ImageUtils.IMAGE_OK);
-    }
-    Timber.d("Checking the validity of image");
-    String filePath = uploadItem.getMediaUri().getPath();
-
-    return Single.zip(
-        checkDuplicateImage(filePath),
-        checkImageGeoLocation(uploadItem.getPlace(), filePath),
-        checkDarkImage(filePath),
-        validateItemTitle(uploadItem),
-        checkFBMD(filePath),
-        checkEXIF(filePath),
-        (duplicateImage, wrongGeoLocation, darkImage, itemTitle, fbmd, exif) -> {
-          Timber.d("duplicate: %d, geo: %d, dark: %d, title: %d" + "fbmd:" + fbmd + "exif:" + exif,
-              duplicateImage, wrongGeoLocation, darkImage, itemTitle);
-          return duplicateImage | wrongGeoLocation | darkImage | itemTitle | fbmd | exif;
+    /**
+     * Check image quality before upload - checks duplicate image - checks dark image - checks
+     * geolocation for image - check for valid title
+     */
+    Single<Integer> validateImage(UploadItem uploadItem) {
+        int currentImageQuality = uploadItem.getImageQuality();
+        Timber.d("Current image quality is %d", currentImageQuality);
+        if (currentImageQuality == ImageUtils.IMAGE_KEEP) {
+            return Single.just(ImageUtils.IMAGE_OK);
         }
-    );
-  }
+        Timber.d("Checking the validity of image");
+        String filePath = uploadItem.getMediaUri().getPath();
+
+        return Single.zip(
+            checkDuplicateImage(filePath),
+            checkImageGeoLocation(uploadItem.getPlace(), filePath),
+            checkDarkImage(filePath),
+            validateItemTitle(uploadItem),
+            checkFBMD(filePath),
+            checkEXIF(filePath),
+            (duplicateImage, wrongGeoLocation, darkImage, itemTitle, fbmd, exif) -> {
+                Timber.d("duplicate: %d, geo: %d, dark: %d, title: %d" + "fbmd:" + fbmd + "exif:"
+                        + exif,
+                    duplicateImage, wrongGeoLocation, darkImage, itemTitle);
+                return duplicateImage | wrongGeoLocation | darkImage | itemTitle | fbmd | exif;
+            }
+        );
+    }
 
     /**
      * We want to discourage users from uploading images to Commons that were taken from Facebook.
@@ -79,10 +81,10 @@ public class ImageProcessingService {
     }
 
     /**
-     * We try to minimize uploads from the Commons app that might be copyright violations.
-     * If an image does not have any Exif metadata, then it was likely downloaded from the internet,
-     * and is probably not an original work by the user. We detect these kinds of images by looking
-     * for the presence of some basic Exif metadata.
+     * We try to minimize uploads from the Commons app that might be copyright violations. If an
+     * image does not have any Exif metadata, then it was likely downloaded from the internet, and
+     * is probably not an original work by the user. We detect these kinds of images by looking for
+     * the presence of some basic Exif metadata.
      */
     private Single<Integer> checkEXIF(String filepath) {
         return EXIFReader.processMetadata(filepath);
@@ -90,9 +92,7 @@ public class ImageProcessingService {
 
 
     /**
-     * Checks item caption
-     * - empty caption
-     * - existing caption
+     * Checks item caption - empty caption - existing caption
      *
      * @param uploadItem
      * @return
@@ -105,11 +105,11 @@ public class ImageProcessingService {
         }
 
         return mediaClient.checkPageExistsUsingTitle("File:" + uploadItem.getFileName())
-                .map(doesFileExist -> {
-                    Timber.d("Result for valid title is %s", doesFileExist);
-                    return doesFileExist ? FILE_NAME_EXISTS : IMAGE_OK;
-                })
-                .subscribeOn(Schedulers.io());
+            .map(doesFileExist -> {
+                Timber.d("Result for valid title is %s", doesFileExist);
+                return doesFileExist ? FILE_NAME_EXISTS : IMAGE_OK;
+            })
+            .subscribeOn(Schedulers.io());
     }
 
     /**
@@ -121,13 +121,13 @@ public class ImageProcessingService {
     private Single<Integer> checkDuplicateImage(String filePath) {
         Timber.d("Checking for duplicate image %s", filePath);
         return Single.fromCallable(() -> fileUtilsWrapper.getFileInputStream(filePath))
-                .map(fileUtilsWrapper::getSHA1)
-                .flatMap(mediaClient::checkFileExistsUsingSha)
-                .map(b -> {
-                    Timber.d("Result for duplicate image %s", b);
-                    return b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK;
-                })
-                .subscribeOn(Schedulers.io());
+            .map(fileUtilsWrapper::getSHA1)
+            .flatMap(mediaClient::checkFileExistsUsingSha)
+            .map(b -> {
+                Timber.d("Result for duplicate image %s", b);
+                return b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK;
+            })
+            .subscribeOn(Schedulers.io());
     }
 
     /**
@@ -142,8 +142,8 @@ public class ImageProcessingService {
     }
 
     /**
-     * Checks for image geolocation
-     * returns IMAGE_OK if the place is null or if the file doesn't contain a geolocation
+     * Checks for image geolocation returns IMAGE_OK if the place is null or if the file doesn't
+     * contain a geolocation
      *
      * @param filePath file to be checked
      * @return IMAGE_GEOLOCATION_DIFFERENT or IMAGE_OK
@@ -154,14 +154,15 @@ public class ImageProcessingService {
             return Single.just(ImageUtils.IMAGE_OK);
         }
         return Single.fromCallable(() -> filePath)
-                .map(fileUtilsWrapper::getGeolocationOfFile)
-                .flatMap(geoLocation -> {
-                    if (StringUtils.isBlank(geoLocation)) {
-                        return Single.just(ImageUtils.IMAGE_OK);
-                    }
-                    return imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation, place.getLocation());
-                })
-                .subscribeOn(Schedulers.io());
+            .map(fileUtilsWrapper::getGeolocationOfFile)
+            .flatMap(geoLocation -> {
+                if (StringUtils.isBlank(geoLocation)) {
+                    return Single.just(ImageUtils.IMAGE_OK);
+                }
+                return imageUtilsWrapper
+                    .checkImageGeolocationIsDifferent(geoLocation, place.getLocation());
+            })
+            .subscribeOn(Schedulers.io());
     }
 }
 

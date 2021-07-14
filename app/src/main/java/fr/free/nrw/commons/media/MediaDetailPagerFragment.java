@@ -12,6 +12,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -100,7 +102,16 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         pager.addOnPageChangeListener(this);
 
         adapter = new MediaDetailAdapter(getChildFragmentManager());
+        ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (getActivity() != null) {
+            final ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
+            }
+        }
         pager.setAdapter(adapter);
+
         if (savedInstanceState != null) {
             final int pageNumber = savedInstanceState.getInt("current-page");
             pager.setCurrentItem(pageNumber, false);
