@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+## v3.0.3
+- Fixed crash when viewing images in Explore, again
+
 ## v3.0.2
 - Fixed crash when uploading high res image
 - Fixed crash when viewing images in Explore
