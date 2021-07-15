@@ -12,7 +12,10 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
+import org.mockito.internal.util.MockUtil.createMock
+import org.mockito.junit.MockitoJUnitRunner
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
@@ -20,6 +23,7 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
+import java.io.*
 import java.lang.reflect.Method
 
 
@@ -27,17 +31,24 @@ import java.lang.reflect.Method
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class ProfileActivityTest {
 
+    @Mock
     private lateinit var activity: ProfileActivity
+
+    @Mock
     private lateinit var mockContext: Context
 
     @Mock
     private lateinit var bitmap: Bitmap
+
+    @Mock
+    private lateinit var fileOutputStream: FileOutputStream
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         mockContext = RuntimeEnvironment.application.applicationContext
+        fileOutputStream = FileOutputStream("Test")
     }
 
     @Test
@@ -71,8 +82,27 @@ class ProfileActivityTest {
 
     @Test
     @Throws(Exception::class)
+    fun testOnOptionsShareItemSelected() {
+        val menuItemShare: MenuItem = RoboMenuItem(R.id.share_app_icon)
+        activity.onOptionsItemSelected(menuItemShare)
+    }
+
+    @Test
+    @Throws(Exception::class)
     fun testStartYourself() {
         ProfileActivity.startYourself(activity)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testShareScreenException() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        `when`(fileOutputStream.flush()).thenThrow(IOException("IOException"))
+        val method: Method = ProfileActivity::class.java.getDeclaredMethod(
+            "shareScreen"
+        )
+        method.isAccessible = true
+        method.invoke(activity, bitmap)
     }
 
     @Test
