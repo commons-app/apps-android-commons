@@ -9,6 +9,7 @@
 * Hinaloe
 * Kkairri
 * LaMagiaaa
+* MathXplore
 * Nicolas Raoul
 * Omotecho
 * Otokoume
@@ -583,4 +584,8 @@
   <string name="license_step_title">メディアのライセンス</string>
   <string name="media_detail_step_title">メディアの詳細</string>
   <string name="menu_view_category_page">カテゴリのページを表示</string>
+  <string name="media_detail_in_all_languages">すべての言語</string>
+  <string name="show_in_map_app">地図アプリに表示</string>
+  <string name="modify_location">位置を編集</string>
+  <string name="check_whether_location_is_correct">場所が正しいかどうかを確認する</string>
 </resources>
