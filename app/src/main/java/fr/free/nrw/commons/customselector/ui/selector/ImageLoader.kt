@@ -19,6 +19,7 @@ import timber.log.Timber
 import java.io.IOException
 import java.net.UnknownHostException
 import java.util.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.collections.HashMap
 
@@ -179,7 +180,8 @@ class ImageLoader @Inject constructor(
             return Result.TRUE
         } else {
             uploadedStatus.lastUpdated?.let {
-                if (it.date >= Calendar.getInstance().time.date - INVALIDATE_DAY_COUNT) {
+                val duration = Calendar.getInstance().time.time - it.time
+                if (TimeUnit.MILLISECONDS.toDays(duration) < INVALIDATE_DAY_COUNT) {
                     return Result.FALSE
                 }
             }
@@ -218,7 +220,7 @@ class ImageLoader @Inject constructor(
     }
 
     companion object {
-        const val INVALIDATE_DAY_COUNT: Int = 7
+        const val INVALIDATE_DAY_COUNT: Long = 7
     }
 
 }
