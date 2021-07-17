@@ -179,7 +179,8 @@ public class ProfileActivity extends BaseActivity {
             file.setReadable(true, false);
 
             final Uri fileUri = FileProvider
-                .getUriForFile(getApplicationContext(), getPackageName() + ".provider", file);
+                .getUriForFile(getApplicationContext(),
+                    getPackageName() + ".provider", file);
             grantUriPermission(getPackageName(), fileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
             final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
