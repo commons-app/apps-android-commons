@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -211,6 +213,8 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
      * @param depictedItem Name of the depicts for displaying its details
      */
     public static void startYourself(Context context, DepictedItem depictedItem) {
+        Log.d("assa", "Herererererere");
+
         Intent intent = new Intent(context, WikidataItemDetailsActivity.class);
         intent.putExtra("wikidataItemName", depictedItem.getName());
         intent.putExtra("entityId", depictedItem.getId());
@@ -239,11 +243,24 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
                 Uri uri = Uri.parse("https://www.wikidata.org/wiki/" + entityId);
                 Utils.handleWebUrl(this, uri);
                 return true;
+            case R.id.menu_bookmark_current_image:
+                boolean bookmarkExists = false;
+                Snackbar snackbar = bookmarkExists ? Snackbar.make(findViewById(R.id.toolbar_layout), R.string.add_bookmark, Snackbar.LENGTH_LONG) : Snackbar.make(findViewById(R.id.toolbar_layout), R.string.remove_bookmark, Snackbar.LENGTH_LONG);
+                snackbar.show();
+                updateBookmarkState(item);
+                return true;
             case  android.R.id.home:
                 onBackPressed();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void updateBookmarkState(MenuItem item) {
+        boolean isBookmarked = true;
+        int icon = isBookmarked ? R.drawable.menu_ic_round_star_filled_24px : R.drawable.menu_ic_round_star_border_24px;
+        isBookmarked = false;
+        item.setIcon(icon);
     }
 }
