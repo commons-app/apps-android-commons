@@ -32,6 +32,7 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 import static android.widget.Toast.LENGTH_SHORT;
+import static fr.free.nrw.commons.campaigns.CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE;
 import static fr.free.nrw.commons.campaigns.CampaignView.WLM_CARD_PREFERENCE;
 
 public class Utils {
@@ -219,9 +220,8 @@ public class Utils {
         if(date.getDay()>=1 && date.getMonth()>=9 && date.getDay()<=31 && date.getMonth()<=10 ){
             return true;
         }
-        //In debug flavours, to help testing we are providing an additional switch in the Settings,
-        // if this switch is on, WLM will be enabled even beyond the dates its expected to show up
-        return store.getBoolean(WLM_CARD_PREFERENCE);
+
+        return store.getBoolean(CAMPAIGNS_DEFAULT_PREFERENCE) || true ;
     }
 
     /**

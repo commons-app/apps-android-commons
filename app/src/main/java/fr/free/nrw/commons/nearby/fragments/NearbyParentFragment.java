@@ -44,6 +44,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -172,6 +173,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     RelativeLayout rlContainerWLMMonthMessage;
     @BindView(R.id.tv_learn_more)
     AppCompatTextView tvLearnMore;
+    @BindView(R.id.iv_toggle_chips)
+    AppCompatImageView ivToggleChips;
+    @BindView(R.id.chip_view)
+    View llContainerChips;
 
     @Inject LocationServiceManager locationManager;
     @Inject NearbyController nearbyController;
@@ -233,7 +238,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     /**
      * Holds all the markers
      */
-    private List<NearbyBaseMarker> allMarkers;
+    private List<NearbyBaseMarker> allMarkers =new ArrayList<>();
 
     /**
      * WLM URL
@@ -891,7 +896,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         compositeDisposable.add(Observable.zip(nearbyPlacesInfoObservable, observableWikidataMonuments,
             (nearbyPlacesInfo, monuments) -> {
-                nearbyPlacesInfo.placeList.addAll(monuments);
+                List<Place> places = mergeNearbyPlacesAndMonuments(nearbyPlacesInfo.placeList,
+                    monuments);
+                nearbyPlacesInfo.placeList.clear();
+                nearbyPlacesInfo.placeList.addAll(places);
                 return nearbyPlacesInfo;
             }).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -927,7 +935,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         compositeDisposable.add(Observable.zip(nearbyPlacesInfoObservable, observableWikidataMonuments,
             (nearbyPlacesInfo, monuments) -> {
-                nearbyPlacesInfo.placeList.addAll(monuments);
+                List<Place> places = mergeNearbyPlacesAndMonuments(nearbyPlacesInfo.placeList,
+                    monuments);
+                nearbyPlacesInfo.placeList.clear();
+                nearbyPlacesInfo.placeList.addAll(places);
                 return nearbyPlacesInfo;
             }).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -942,6 +953,25 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     presenter.lockUnlockNearby(false);
                     setFilterState();
                 }));
+    }
+
+    /**
+     * If a nearby place happens to be a monument as well, don't make the Pin's overlap, instead
+     * show it as a monument
+     *
+     * @param nearbyPlaces
+     * @param monuments
+     * @return
+     */
+    private List<Place> mergeNearbyPlacesAndMonuments(List<Place> nearbyPlaces, List<Place> monuments){
+        List<Place> allPlaces= new ArrayList<>();
+        allPlaces.addAll(monuments);
+        for (Place place : nearbyPlaces){
+            if(!allPlaces.contains(place)){
+                allPlaces.add(place);
+            }
+        }
+        return allPlaces;
     }
 
     /**
@@ -1746,5 +1776,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(WLM_URL));
         startActivity(intent);
+    }
+
+    @OnClick(R.id.iv_toggle_chips)
+    public void onToggleChipsClicked() {
+        if (llContainerChips.getVisibility() == View.VISIBLE) {
+            llContainerChips.setVisibility(View.GONE);
+        } else {
+            llContainerChips.setVisibility(View.VISIBLE);
+        }
+        ivToggleChips.setRotation(ivToggleChips.getRotation() + 180);
     }
 }

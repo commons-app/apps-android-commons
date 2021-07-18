@@ -25,7 +25,6 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.TelemetryDefinition;
-import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.campaigns.CampaignView;
@@ -117,17 +116,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 defaultKvStore.putBoolean(Prefs.TELEMETRY_PREFERENCE,(boolean)newValue);
                 return true;
             });
-
-        //Enabling the switch for monuments preference only for debug builds
-        Preference displayMonumentsPreference = findPreference("displayWLMCardView");
-        if (displayMonumentsPreference != null) {
-            displayMonumentsPreference.setVisible(BuildConfig.DEBUG);
-            displayMonumentsPreference.setOnPreferenceChangeListener(
-                (preference, newValue) -> {
-                    defaultKvStore.putBoolean(CampaignView.WLM_CARD_PREFERENCE, (boolean) newValue);
-                    return true;
-                });
-        }
     }
 
     /**

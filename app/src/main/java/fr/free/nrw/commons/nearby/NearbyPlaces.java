@@ -100,6 +100,6 @@ public class NearbyPlaces {
         LatLng latLng, String language)
         throws IOException {
         return okHttpJsonApiClient
-            .getNearbyMonuments(latLng, language, NearbyController.latestSearchRadius);
+            .getNearbyMonuments(latLng, language, radius);
     }
 }

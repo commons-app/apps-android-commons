@@ -99,7 +99,8 @@
             android:textColor="@color/status_bar_blue"
             android:visibility="gone"
             app:elevation="@dimen/dimen_6"
-            android:layout_below="@id/nearby_filter"/>
+            android:layout_below="@id/rl_container_wlm_month_message"
+            />
 
         <View
             android:id="@+id/transparentView"

@@ -333,6 +333,8 @@ public class OkHttpJsonApiClient {
         .url(urlBuilder.build())
         .build();
 
+    Timber.e("Monuments URL: %s", request.url().toString());
+
     return Observable.fromCallable(() -> {
       Response response = okHttpClient.newCall(request).execute();
       if (response != null && response.body() != null && response.isSuccessful()) {
