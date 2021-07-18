@@ -37,6 +37,14 @@
             app:chipBackgroundColor="@color/bg_chip_state"
             android:text="@string/place_state_needs_photo"/>
 
+        <com.google.android.material.chip.Chip
+          android:id="@+id/choice_chip_wlm"
+          style="@style/Widget.MaterialComponents.Chip.Filter"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:chipBackgroundColor="@color/bg_chip_state"
+          android:text="@string/place_state_wlm"/>
+
     </com.google.android.material.chip.ChipGroup>
 
 </LinearLayout>

@@ -302,6 +302,59 @@ public class OkHttpJsonApiClient {
         });
     }
 
+  /**
+   * Wikidata query to fetch monuments
+   *
+   * @param cur      :  The current location coordinates
+   * @param language : The language
+   * @param radius   : The radius around the current location within which we expect the results
+   * @return
+   * @throws IOException
+   */
+  public Observable<List<Place>> getNearbyMonuments(LatLng cur, String language, final double radius)
+      throws IOException {
+    final String wikidataQuery = FileUtils.readFromResource("/queries/monuments_query.rq");
+    if (TextUtils.isEmpty(language)) {
+        language="en";
+    }
+    String query = wikidataQuery
+        .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
+        .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.getLatitude()))
+        .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.getLongitude()))
+        .replace("${LANG}", language);
+
+    HttpUrl.Builder urlBuilder = HttpUrl
+        .parse(sparqlQueryUrl)
+        .newBuilder()
+        .addQueryParameter("query", query)
+        .addQueryParameter("format", "json");
+
+    Request request = new Request.Builder()
+        .url(urlBuilder.build())
+        .build();
+
+    return Observable.fromCallable(() -> {
+      Response response = okHttpClient.newCall(request).execute();
+      if (response != null && response.body() != null && response.isSuccessful()) {
+        String json = response.body().string();
+        if (json == null) {
+          return new ArrayList<>();
+        }
+
+        NearbyResponse nearbyResponse = gson.fromJson(json, NearbyResponse.class);
+        List<NearbyResultItem> bindings = nearbyResponse.getResults().getBindings();
+        List<Place> places = new ArrayList<>();
+        for (NearbyResultItem item : bindings) {
+          Place place = Place.from(item);
+          place.setMonument(true);
+          places.add(place);
+        }
+        return places;
+      }
+      return new ArrayList<>();
+    });
+  }
+
     /**
      * Get the QIDs of all Wikidata items that are subclasses of the given Wikidata item. Example:
      * bridge -> suspended bridge, aqueduct, etc

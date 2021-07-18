@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
+import io.reactivex.Observable;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.util.Collections;
@@ -93,5 +94,12 @@ public class NearbyPlaces {
      */
     public List<Place> getFromWikidataQuery(LatLng cur, String lang, double radius) throws IOException {
         return okHttpJsonApiClient.getNearbyPlaces(cur, lang, radius).blockingSingle();
+    }
+
+    public Observable<List<Place>> queryWikiDataForMonuments(
+        LatLng latLng, String language)
+        throws IOException {
+        return okHttpJsonApiClient
+            .getNearbyMonuments(latLng, language, NearbyController.latestSearchRadius);
     }
 }

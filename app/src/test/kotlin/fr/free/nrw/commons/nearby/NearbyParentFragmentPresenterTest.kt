@@ -265,7 +265,14 @@ class NearbyParentFragmentPresenterTest {
     fun testFilterByMarkerTypeMultiSelectCHECKED() {
         val state = CheckBoxTriStates.CHECKED
         nearbyPresenter.filterByMarkerType(selectedLabels, state, false,true)
-        verify(nearbyParentFragmentView).filterMarkersByLabels(ArgumentMatchers.anyList(),ArgumentMatchers.anyBoolean(),ArgumentMatchers.anyBoolean(),ArgumentMatchers.anyBoolean(),ArgumentMatchers.anyBoolean());
+        verify(nearbyParentFragmentView).filterMarkersByLabels(
+            ArgumentMatchers.anyList(),
+            ArgumentMatchers.anyBoolean(),
+            ArgumentMatchers.anyBoolean(),
+            ArgumentMatchers.anyBoolean(),
+            ArgumentMatchers.anyBoolean(),
+            ArgumentMatchers.anyBoolean()
+        );
         verify(nearbyParentFragmentView).setRecyclerViewAdapterAllSelected()
         verifyNoMoreInteractions(nearbyParentFragmentView)
     }
@@ -276,7 +283,14 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun testFilterByMarkerTypeSingleSelect() {
         nearbyPresenter.filterByMarkerType(selectedLabels, 0, true,false)
-        verify(nearbyParentFragmentView).filterMarkersByLabels(any(), any(), any(), any(), any());
+        verify(nearbyParentFragmentView).filterMarkersByLabels(
+            any(),
+            any(),
+            any(),
+            any(),
+            any(),
+            any()
+        );
         verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 

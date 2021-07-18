@@ -37,5 +37,6 @@ public class UploadBaseFragment extends CommonsDaggerSupportFragment {
 
         int getTotalNumberOfSteps();
 
+        boolean isWLMUpload();
     }
 }

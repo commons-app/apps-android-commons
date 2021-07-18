@@ -147,25 +147,27 @@ public class BookmarkLocationsDao {
     }
 
     @NonNull
-    Place fromCursor(Cursor cursor) {
-        LatLng location = new LatLng(cursor.getDouble(cursor.getColumnIndex(Table.COLUMN_LAT)),
+    Place fromCursor(final Cursor cursor) {
+        final LatLng location = new LatLng(cursor.getDouble(cursor.getColumnIndex(Table.COLUMN_LAT)),
                 cursor.getDouble(cursor.getColumnIndex(Table.COLUMN_LONG)), 1F);
 
-        Sitelinks.Builder builder = new Sitelinks.Builder();
+        final Sitelinks.Builder builder = new Sitelinks.Builder();
         builder.setWikipediaLink(cursor.getString(cursor.getColumnIndex(Table.COLUMN_WIKIPEDIA_LINK)));
         builder.setWikidataLink(cursor.getString(cursor.getColumnIndex(Table.COLUMN_WIKIDATA_LINK)));
         builder.setCommonsLink(cursor.getString(cursor.getColumnIndex(Table.COLUMN_COMMONS_LINK)));
 
         return new Place(
-                cursor.getString(cursor.getColumnIndex(Table.COLUMN_LANGUAGE)),
-                cursor.getString(cursor.getColumnIndex(Table.COLUMN_NAME)),
-                Label.fromText((cursor.getString(cursor.getColumnIndex(Table.COLUMN_LABEL_TEXT)))),
-                cursor.getString(cursor.getColumnIndex(Table.COLUMN_DESCRIPTION)),
-                location,
-                cursor.getString(cursor.getColumnIndex(Table.COLUMN_CATEGORY)),
-                builder.build(),
-                cursor.getString(cursor.getColumnIndex(Table.COLUMN_PIC)),
-                Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex(Table.COLUMN_EXISTS)))
+            cursor.getString(cursor.getColumnIndex(Table.COLUMN_LANGUAGE)),
+            cursor.getString(cursor.getColumnIndex(Table.COLUMN_NAME)),
+            Label.fromText((cursor.getString(cursor.getColumnIndex(Table.COLUMN_LABEL_TEXT)))),
+            cursor.getString(cursor.getColumnIndex(Table.COLUMN_DESCRIPTION)),
+            location,
+            cursor.getString(cursor.getColumnIndex(Table.COLUMN_CATEGORY)),
+            builder.build(),
+            cursor.getString(cursor.getColumnIndex(Table.COLUMN_PIC)),
+            Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex(Table.COLUMN_EXISTS))),
+            null
+
         );
     }
 

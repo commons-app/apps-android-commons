@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.nearby.presenter;
 
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.MainThread;
@@ -297,6 +296,7 @@ public class NearbyParentFragmentPresenter
                     nearbyParentFragmentView.filterMarkersByLabels(selectedLabels,
                         NearbyFilterState.getInstance().isExistsSelected(),
                         NearbyFilterState.getInstance().isNeedPhotoSelected(),
+                        NearbyFilterState.getInstance().isWlmSelected(),
                         filterForPlaceState, false);
                     nearbyParentFragmentView.setRecyclerViewAdapterAllSelected();
                     break;
@@ -305,6 +305,7 @@ public class NearbyParentFragmentPresenter
             nearbyParentFragmentView.filterMarkersByLabels(selectedLabels,
                     NearbyFilterState.getInstance().isExistsSelected(),
                     NearbyFilterState.getInstance().isNeedPhotoSelected(),
+                    NearbyFilterState.getInstance().isWlmSelected(),
                     filterForPlaceState, false);
         }
     }

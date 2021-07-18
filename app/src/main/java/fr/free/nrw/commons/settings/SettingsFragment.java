@@ -8,11 +8,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceGroupAdapter;
 import androidx.preference.PreferenceScreen;
@@ -23,8 +25,10 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.TelemetryDefinition;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.campaigns.CampaignView;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -104,7 +108,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             findPreference("displayNearbyCardView").setEnabled(false);
             findPreference("descriptionDefaultLanguagePref").setEnabled(false);
             findPreference("displayLocationPermissionForCardView").setEnabled(false);
-            findPreference("displayCampaignsCardView").setEnabled(false);
+            findPreference(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE).setEnabled(false);
         }
 
         findPreference("telemetryOptOut").setOnPreferenceChangeListener(
@@ -113,6 +117,17 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 defaultKvStore.putBoolean(Prefs.TELEMETRY_PREFERENCE,(boolean)newValue);
                 return true;
             });
+
+        //Enabling the switch for monuments preference only for debug builds
+        Preference displayMonumentsPreference = findPreference("displayWLMCardView");
+        if (displayMonumentsPreference != null) {
+            displayMonumentsPreference.setVisible(BuildConfig.DEBUG);
+            displayMonumentsPreference.setOnPreferenceChangeListener(
+                (preference, newValue) -> {
+                    defaultKvStore.putBoolean(CampaignView.WLM_CARD_PREFERENCE, (boolean) newValue);
+                    return true;
+                });
+        }
     }
 
     /**
@@ -127,7 +142,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     @Override
-    protected Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
+    protected Adapter onCreateAdapter(final PreferenceScreen preferenceScreen) {
         return new PreferenceGroupAdapter(preferenceScreen) {
             @Override
             public void onBindViewHolder(PreferenceViewHolder holder, int position) {
