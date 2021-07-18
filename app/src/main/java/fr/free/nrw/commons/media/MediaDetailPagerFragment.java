@@ -110,6 +110,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
         }
+
         pager.setAdapter(adapter);
 
         if (savedInstanceState != null) {
