@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.model.Result
@@ -16,7 +18,6 @@ import fr.free.nrw.commons.customselector.ui.adapter.FolderAdapter
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.FileProcessor
-import kotlinx.android.synthetic.main.fragment_custom_selector.*
 import kotlinx.android.synthetic.main.fragment_custom_selector.view.*
 import javax.inject.Inject
 
@@ -26,6 +27,12 @@ class FolderFragment : CommonsDaggerSupportFragment() {
      * View Model for images.
      */
     private var viewModel: CustomSelectorViewModel? = null
+
+    /**
+     * View Elements
+     */
+    private var selectorRV: RecyclerView? = null
+    private var loader: ProgressBar? = null
 
     /**
      * View Model Factory.
@@ -75,6 +82,8 @@ class FolderFragment : CommonsDaggerSupportFragment() {
         val root = inflater.inflate(R.layout.fragment_custom_selector, container, false)
         folderAdapter = FolderAdapter(activity!!, activity as FolderClickListener)
         gridLayoutManager = GridLayoutManager(context, columnCount())
+        selectorRV = root.selector_rv
+        loader = root.loader
         with(root.selector_rv){
             this.layoutManager = gridLayoutManager
             setHasFixedSize(true)
@@ -96,9 +105,13 @@ class FolderFragment : CommonsDaggerSupportFragment() {
             val folders = ImageHelper.folderListFromImages(result.images)
             folderAdapter.init(folders)
             folderAdapter.notifyDataSetChanged()
-            selector_rv.visibility = View.VISIBLE
+            selectorRV?.let {
+                it.visibility = View.VISIBLE
+            }
         }
-        loader.visibility = if (result.status is CallbackStatus.FETCHING) View.VISIBLE else View.GONE
+        loader?.let {
+            it.visibility = if (result.status is CallbackStatus.FETCHING) View.VISIBLE else View.GONE
+        }
     }
 
     /**
