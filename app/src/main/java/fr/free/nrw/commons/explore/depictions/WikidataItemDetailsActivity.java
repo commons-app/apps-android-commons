@@ -18,10 +18,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
+import fr.free.nrw.commons.LocationPicker.LocationPickerConstants;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.ViewPagerAdapter;
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.depictions.child.ChildDepictionsFragment;
 import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment;
@@ -31,6 +34,7 @@ import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 
 /**
  * Activity to show depiction media, parent classes and child classes of depicted items in Explore
@@ -218,6 +222,7 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         Intent intent = new Intent(context, WikidataItemDetailsActivity.class);
         intent.putExtra("wikidataItemName", depictedItem.getName());
         intent.putExtra("entityId", depictedItem.getId());
+        intent.putExtra(LocationPickerConstants.POSITION, depictedItem);
         context.startActivity(intent);
     }
 
@@ -244,6 +249,8 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
                 Utils.handleWebUrl(this, uri);
                 return true;
             case R.id.menu_bookmark_current_image:
+                final DepictedItem depictedItem = getIntent()
+                    .getParcelableExtra(LocationPickerConstants.POSITION);
                 boolean bookmarkExists = false;
                 Snackbar snackbar = bookmarkExists ? Snackbar.make(findViewById(R.id.toolbar_layout), R.string.add_bookmark, Snackbar.LENGTH_LONG) : Snackbar.make(findViewById(R.id.toolbar_layout), R.string.remove_bookmark, Snackbar.LENGTH_LONG);
                 snackbar.show();

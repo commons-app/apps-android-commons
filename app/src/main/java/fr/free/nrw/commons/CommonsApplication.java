@@ -26,6 +26,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryDao;
@@ -349,6 +350,7 @@ public class CommonsApplication extends MultiDexApplication {
         }
         BookmarkPicturesDao.Table.onDelete(db);
         BookmarkLocationsDao.Table.onDelete(db);
+        Table.INSTANCE.onDelete(db);
     }
 
 

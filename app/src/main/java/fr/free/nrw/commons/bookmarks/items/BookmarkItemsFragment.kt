@@ -1,60 +1,78 @@
 package fr.free.nrw.commons.bookmarks.items
 
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.RelativeLayout
+import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import butterknife.BindView
+import butterknife.ButterKnife
+import dagger.android.support.DaggerFragment
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [BookmarkItemsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class BookmarkItemsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class BookmarkItemsFragment : DaggerFragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    @BindView(R.id.status_message)
+    lateinit var statusTextView: TextView
+
+    @BindView(R.id.loading_images_progress_bar)
+    lateinit var progressBar: ProgressBar
+
+    @BindView(R.id.list_view)
+    lateinit var recyclerView: RecyclerView
+
+    @BindView(R.id.parent_layout)
+    lateinit var parentLayout: RelativeLayout
+
+    @Inject
+    lateinit var controller: BookmarkItemsController
+
+    private lateinit var adapter: BookmarkItemsAdapter
+
+    fun newInstance(): BookmarkItemsFragment {
+        return BookmarkItemsFragment()
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bookmarks_items, container, false)
+        val v = inflater.inflate(R.layout.fragment_bookmarks_items, container, false)
+        ButterKnife.bind(this, v)
+        return v
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BookmarkItemsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BookmarkItemsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        progressBar.visibility = View.VISIBLE
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        initList(requireContext())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initList(requireContext())
+    }
+
+    private fun initList(context: Context) {
+        val depictItems: List<DepictedItem> = controller.loadFavoritesItems()
+        adapter = BookmarkItemsAdapter(depictItems, context)
+        recyclerView.adapter = adapter
+        progressBar.visibility = View.GONE
+        if (depictItems.isEmpty()) {
+            statusTextView.setText(R.string.bookmark_empty)
+            statusTextView.visibility = View.VISIBLE
+        } else {
+            statusTextView.visibility = View.GONE
+        }
     }
 }

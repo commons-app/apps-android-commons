@@ -151,6 +151,12 @@ public class CommonsApplicationModule {
         return context.getContentResolver().acquireContentProviderClient(BuildConfig.BOOKMARK_LOCATIONS_AUTHORITY);
     }
 
+    @Provides
+    @Named("bookmarksItem")
+    public ContentProviderClient provideBookmarkItemContentProviderClient(Context context) {
+        return context.getContentResolver().acquireContentProviderClient(BuildConfig.BOOKMARK_ITEMS_AUTHORITY);
+    }
+
     /**
      * Provides a Json store instance(JsonKvStore) which keeps
      * the provided Gson in it's instance
