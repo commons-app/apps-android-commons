@@ -23,6 +23,7 @@
 * Patriccck
 * Redredsonia
 * Rubin16
+* Thothsum
 * Vlad5250
 * VoxelJ
 * Wikisaurus
@@ -634,5 +635,7 @@
   <string name="exit_location_picker">Выйти из окна выбора местоположения</string>
   <string name="select_location_location_picker">Выберите местоположение</string>
   <string name="show_in_map_app">Показать в приложении карты</string>
+  <string name="modify_location">Изменить местоположение</string>
+  <string name="image_location">Расположение изображения</string>
   <string name="check_whether_location_is_correct">Проверьте правильность местоположения</string>
 </resources>

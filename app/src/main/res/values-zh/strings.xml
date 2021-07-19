@@ -6,6 +6,7 @@
 * A Retired User
 * Aefgh39622
 * Angrydog001
+* Crowley666
 * D41D8CD98F
 * Deathkon
 * GuoPC
@@ -619,6 +620,10 @@
   <string name="pan_and_zoom_to_adjust">放大和做小来调整</string>
   <string name="exit_location_picker">退出位置拾取器</string>
   <string name="select_location_location_picker">选择地点</string>
+  <string name="show_in_map_app">在地图应用中显示</string>
+  <string name="modify_location">编辑位置</string>
   <string name="location_picker_image_view">位置拾取器的图像视图</string>
   <string name="location_picker_image_view_shadow">地点拾取器的照片观测视野的阴影。</string>
+  <string name="image_location">图像位置</string>
+  <string name="check_whether_location_is_correct">检查位置是否正确</string>
 </resources>
