@@ -14,8 +14,8 @@ class BookmarkItemsController {
     fun BookmarkItemsController() {}
 
     /**
-     * Load from DB the bookmarked locations
-     * @return a list of Place objects.
+     * Load from DB the bookmarked items
+     * @return a list of DepictedItem objects.
      */
     fun loadFavoritesItems(): List<DepictedItem> {
         return bookmarkItemsDao.getAllBookmarksItems()

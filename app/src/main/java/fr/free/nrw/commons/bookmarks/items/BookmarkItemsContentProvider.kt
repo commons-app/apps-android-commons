@@ -18,7 +18,7 @@ class BookmarkItemsContentProvider : CommonsDaggerContentProvider() {
         Uri.parse("content://" + BuildConfig.BOOKMARK_ITEMS_AUTHORITY + "/" + BASE_PATH)
 
     /**
-     * Append bookmark locations name to the base uri
+     * Append bookmark items name to the base uri
      */
     fun uriForName(name: String): Uri? {
         return Uri.parse("$BASE_URI/$name")
@@ -32,8 +32,8 @@ class BookmarkItemsContentProvider : CommonsDaggerContentProvider() {
     }
 
     /**
-     * Queries the SQLite database for the bookmark locations
-     * @param uri : contains the uri for bookmark locations
+     * Queries the SQLite database for the bookmark items
+     * @param uri : contains the uri for bookmark items
      * @param projection
      * @param selection : handles Where
      * @param selectionArgs : the condition of Where clause
@@ -55,7 +55,7 @@ class BookmarkItemsContentProvider : CommonsDaggerContentProvider() {
 
     /**
      * Handles the update query of local SQLite Database
-     * @param uri : contains the uri for bookmark locations
+     * @param uri : contains the uri for bookmark items
      * @param contentValues : new values to be entered to db
      * @param selection : handles Where
      * @param selectionArgs : the condition of Where clause
@@ -82,7 +82,7 @@ class BookmarkItemsContentProvider : CommonsDaggerContentProvider() {
     }
 
     /**
-     * Handles the insertion of new bookmark locations record to local SQLite Database
+     * Handles the insertion of new bookmark items record to local SQLite Database
      */
     override fun insert(uri: Uri, contentValues: ContentValues?): Uri? {
         val sqlDB = dbOpenHelper.writableDatabase
@@ -97,7 +97,7 @@ class BookmarkItemsContentProvider : CommonsDaggerContentProvider() {
         Timber.d("Deleting bookmark name %s", uri.lastPathSegment)
         rows = db.delete(
             BookmarkItemsDao.Table.TABLE_NAME,
-            "location_name = ?", arrayOf(uri.lastPathSegment)
+            "item_name = ?", arrayOf(uri.lastPathSegment)
         )
         context.contentResolver.notifyChange(uri, null)
         return rows

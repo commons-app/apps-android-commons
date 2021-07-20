@@ -10,6 +10,7 @@ import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Provider
 import javax.inject.Singleton
+import kotlin.collections.ArrayList
 
 @Singleton
 class BookmarkItemsDao {
@@ -23,7 +24,7 @@ class BookmarkItemsDao {
 
 
     /**
-     * Find all persisted pictures bookmarks on database
+     * Find all persisted items bookmarks on database
      *
      * @return list of bookmarks
      */
@@ -140,10 +141,14 @@ class BookmarkItemsDao {
             cursor.getString(cursor.getColumnIndex(Table.COLUMN_NAME))
         val description = cursor.getString(cursor.getColumnIndex(Table.COLUMN_DESCRIPTION))
         val imageUrl = cursor.getString(cursor.getColumnIndex(Table.COLUMN_IMAGE))
-        val instanceList = ArrayList<String>()
-        val categoryList = ArrayList<String>()
-        val isSelected = java.lang.Boolean.parseBoolean(cursor
-            .getString(cursor.getColumnIndex(Table.COLUMN_IS_SELECTED)))
+        val instanceListString = cursor.getString(cursor.getColumnIndex(Table.COLUMN_INSTANCE_LIST))
+        val instanceList = StringToArray(instanceListString)
+        val categoryListString = cursor.getString(cursor.getColumnIndex(Table.COLUMN_CATEGORIES_LIST))
+        val categoryList = StringToArray(categoryListString)
+        val isSelected = java.lang.Boolean.parseBoolean(
+            cursor
+                .getString(cursor.getColumnIndex(Table.COLUMN_IS_SELECTED))
+        )
         val id = cursor.getString(cursor.getColumnIndex(Table.COLUMN_ID))
 
         return DepictedItem(
@@ -157,13 +162,24 @@ class BookmarkItemsDao {
         )
     }
 
+    private fun StringToArray(listString: String?): List<String> {
+        return listString!!.split(",")
+    }
+
+    private fun ArrayToString(list: List<String>?): String? {
+        if (list != null) {
+            return list.joinToString()
+        }
+        return null
+    }
+
     private fun toContentValues(depictedItem: DepictedItem): ContentValues {
         val cv = ContentValues()
         cv.put(Table.COLUMN_NAME, depictedItem.name)
         cv.put(Table.COLUMN_DESCRIPTION, depictedItem.description)
         cv.put(Table.COLUMN_IMAGE, depictedItem.imageUrl)
-        cv.put(Table.COLUMN_INSTANCE_LIST, depictedItem.instanceOfs.toString())
-        cv.put(Table.COLUMN_CATEGORIES_LIST, depictedItem.commonsCategories.toString())
+        cv.put(Table.COLUMN_INSTANCE_LIST, ArrayToString(depictedItem.instanceOfs))
+        cv.put(Table.COLUMN_CATEGORIES_LIST, ArrayToString(depictedItem.commonsCategories))
         cv.put(Table.COLUMN_IS_SELECTED, depictedItem.isSelected)
         cv.put(Table.COLUMN_ID, depictedItem.id)
         return cv
@@ -180,7 +196,6 @@ class BookmarkItemsDao {
         internal const val COLUMN_ID = "item_id"
 
 
-        // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
         val ALL_FIELDS = arrayOf(
             COLUMN_NAME,
             COLUMN_DESCRIPTION,

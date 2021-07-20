@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.drawee.view.SimpleDraweeView
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 
 class BookmarkItemsAdapter (val list: List<DepictedItem>, val context: Context) :
@@ -35,6 +36,9 @@ class BookmarkItemsAdapter (val list: List<DepictedItem>, val context: Context) 
             holder.depictsImage.setImageURI(depictedItem.imageUrl)
         } else {
             holder.depictsImage.setActualImageResource(R.drawable.ic_wikidata_logo_24dp)
+        }
+        holder.depictsLabel.setOnClickListener {
+            WikidataItemDetailsActivity.startYourself(context, depictedItem)
         }
     }
 

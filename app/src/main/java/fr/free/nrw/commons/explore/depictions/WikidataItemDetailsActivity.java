@@ -48,6 +48,8 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
      * Name of the depicted item
      * Ex: Rabbit
      */
+
+    @Inject BookmarkItemsDao bookmarkItemsDao;
     private String wikidataItemName;
     @BindView(R.id.mediaContainer)
     FrameLayout mediaContainer;
@@ -242,16 +244,15 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        DepictedItem depictedItem = getIntent().getParcelableExtra(LocationPickerConstants.POSITION);
         switch (item.getItemId()){
             case R.id.browser_actions_menu_items:
-                String entityId=getIntent().getStringExtra("entityId");
+                String entityId=depictedItem.getId();
                 Uri uri = Uri.parse("https://www.wikidata.org/wiki/" + entityId);
                 Utils.handleWebUrl(this, uri);
                 return true;
             case R.id.menu_bookmark_current_image:
-                final DepictedItem depictedItem = getIntent()
-                    .getParcelableExtra(LocationPickerConstants.POSITION);
-                boolean bookmarkExists = false;
+                boolean bookmarkExists = bookmarkItemsDao.updateBookmarkItem(depictedItem);
                 Snackbar snackbar = bookmarkExists ? Snackbar.make(findViewById(R.id.toolbar_layout), R.string.add_bookmark, Snackbar.LENGTH_LONG) : Snackbar.make(findViewById(R.id.toolbar_layout), R.string.remove_bookmark, Snackbar.LENGTH_LONG);
                 snackbar.show();
                 updateBookmarkState(item);
@@ -265,9 +266,9 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     }
 
     private void updateBookmarkState(MenuItem item) {
-        boolean isBookmarked = true;
+        DepictedItem depictedItem = getIntent().getParcelableExtra(LocationPickerConstants.POSITION);
+        boolean isBookmarked = bookmarkItemsDao.findBookmarkItem(depictedItem);
         int icon = isBookmarked ? R.drawable.menu_ic_round_star_filled_24px : R.drawable.menu_ic_round_star_border_24px;
-        isBookmarked = false;
         item.setIcon(icon);
     }
 }
