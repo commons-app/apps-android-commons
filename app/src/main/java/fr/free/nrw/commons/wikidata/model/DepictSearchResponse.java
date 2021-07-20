@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.wikidata.model;
 
-import android.util.Log;
 import java.util.List;
 
 /**
@@ -20,7 +19,6 @@ public class DepictSearchResponse {
      * @return List<DepictSearchItem> for the DepictSearchResponse
      */
     public List<DepictSearchItem> getSearch() {
-        Log.d("adda","hee it comes");
         return search;
     }
 }

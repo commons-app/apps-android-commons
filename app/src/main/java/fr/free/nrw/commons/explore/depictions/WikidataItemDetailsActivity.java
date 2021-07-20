@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,7 +23,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao;
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.depictions.child.ChildDepictionsFragment;
 import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment;
@@ -44,6 +42,9 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     private FragmentManager supportFragmentManager;
     private DepictedImagesFragment depictionImagesListFragment;
     private MediaDetailPagerFragment mediaDetailPagerFragment;
+
+    public static final String BOOKMARKS_ITEMS = "bookmarks.items";
+
     /**
      * Name of the depicted item
      * Ex: Rabbit
@@ -219,12 +220,10 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
      * @param depictedItem Name of the depicts for displaying its details
      */
     public static void startYourself(Context context, DepictedItem depictedItem) {
-        Log.d("assa", "Herererererere");
-
         Intent intent = new Intent(context, WikidataItemDetailsActivity.class);
         intent.putExtra("wikidataItemName", depictedItem.getName());
         intent.putExtra("entityId", depictedItem.getId());
-        intent.putExtra(LocationPickerConstants.POSITION, depictedItem);
+        intent.putExtra(BOOKMARKS_ITEMS, depictedItem);
         context.startActivity(intent);
     }
 
@@ -244,7 +243,7 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        DepictedItem depictedItem = getIntent().getParcelableExtra(LocationPickerConstants.POSITION);
+        DepictedItem depictedItem = getIntent().getParcelableExtra(BOOKMARKS_ITEMS);
         switch (item.getItemId()){
             case R.id.browser_actions_menu_items:
                 String entityId=depictedItem.getId();
@@ -266,7 +265,7 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     }
 
     private void updateBookmarkState(MenuItem item) {
-        DepictedItem depictedItem = getIntent().getParcelableExtra(LocationPickerConstants.POSITION);
+        DepictedItem depictedItem = getIntent().getParcelableExtra(BOOKMARKS_ITEMS);
         boolean isBookmarked = bookmarkItemsDao.findBookmarkItem(depictedItem);
         int icon = isBookmarked ? R.drawable.menu_ic_round_star_filled_24px : R.drawable.menu_ic_round_star_border_24px;
         item.setIcon(icon);
