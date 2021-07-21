@@ -76,7 +76,7 @@ class ImageAdapter(
         else {
             holder.itemUnselected();
         }
-        Glide.with(context).load(image.uri).into(holder.image)
+        Glide.with(context).load(image.uri).thumbnail(0.3f).into(holder.image)
         imageLoader.queryAndSetView(holder,image)
         holder.itemView.setOnClickListener {
             selectOrRemoveImage(holder, position)
@@ -99,8 +99,8 @@ class ImageAdapter(
             if(holder.isItemUploaded()){
                 Toast.makeText(context,"Already Uploaded image", Toast.LENGTH_SHORT).show()
             } else {
-            selectedImages.add(images[position])
-            notifyItemChanged(position, ImageSelectedOrUpdated())
+                selectedImages.add(images[position])
+                notifyItemChanged(position, ImageSelectedOrUpdated())
             }
         }
         imageSelectListener.onSelectedImagesChanged(selectedImages)

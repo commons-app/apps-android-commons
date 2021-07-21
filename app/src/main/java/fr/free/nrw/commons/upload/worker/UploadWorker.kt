@@ -28,9 +28,11 @@ import fr.free.nrw.commons.upload.UploadClient
 import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.wikidata.WikidataEditService
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.*
@@ -408,7 +410,16 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         contribution.contentUri?.let {
             val imageSha1 = fileUtilsWrapper.getSHA1(appContext.contentResolver.openInputStream(it))
             val modifiedSha1 = fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(contribution.localUri?.path))
-            uploadedStatusDao.insertUploaded(UploadedStatus(imageSha1, modifiedSha1, imageSha1 == modifiedSha1, true));
+            MainScope().launch {
+                uploadedStatusDao.insertUploaded(
+                    UploadedStatus(
+                        imageSha1,
+                        modifiedSha1,
+                        imageSha1 == modifiedSha1,
+                        true
+                    )
+                );
+            }
         }
     }
 

@@ -148,4 +148,12 @@ class ImageFragment: CommonsDaggerSupportFragment() {
         return 3
         // todo change span count depending on the device orientation and other factos.
     }
+
+    /**
+     * OnDestroy Cleanup the imageLoader coroutine.
+     */
+    override fun onDestroy() {
+        imageLoader?.cleanUP()
+        super.onDestroy()
+    }
 }
