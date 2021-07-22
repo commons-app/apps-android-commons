@@ -62,9 +62,9 @@ class ImageLoader @Inject constructor(
     /**
      * Coroutine Dispatchers and Scope.
      */
-    private var defaultDispatcher = Dispatchers.Default
-    private var ioDispatcher = Dispatchers.IO
-    private val scope = MainScope()
+    private var defaultDispatcher : CoroutineDispatcher = Dispatchers.Default
+    private var ioDispatcher : CoroutineDispatcher = Dispatchers.IO
+    private val scope : CoroutineScope = MainScope()
 
     /**
      * Query image and setUp the view.
@@ -129,7 +129,7 @@ class ImageLoader @Inject constructor(
      * @return Query result.
      */
 
-    private suspend fun querySHA1(SHA1: String): Result {
+    suspend fun querySHA1(SHA1: String): Result {
         return withContext(ioDispatcher) {
             mapResult[SHA1]?.let {
                 return@withContext it
@@ -157,7 +157,7 @@ class ImageLoader @Inject constructor(
      *
      * @return sha1 of the image
      */
-    private suspend fun getSHA1(image: Image): String {
+    suspend fun getSHA1(image: Image): String {
         mapModifiedImageSHA1[image]?.let{
             return it
         }
@@ -169,14 +169,14 @@ class ImageLoader @Inject constructor(
     /**
      * Get the uploaded status entry from the database.
      */
-    private suspend fun getFromUploaded(imageSha1:String): UploadedStatus?{
+    suspend fun getFromUploaded(imageSha1:String): UploadedStatus? {
         return uploadedStatusDao.getUploadedFromImageSHA1(imageSha1)
     }
 
     /**
      * Insert into uploaded status table.
      */
-    private suspend fun insertIntoUploaded(imageSha1:String, modifiedImageSha1:String, imageResult:Boolean, modifiedImageResult: Boolean){
+    suspend fun insertIntoUploaded(imageSha1:String, modifiedImageSha1:String, imageResult:Boolean, modifiedImageResult: Boolean){
         uploadedStatusDao.insertUploaded(
             UploadedStatus(
                 imageSha1,
@@ -190,7 +190,7 @@ class ImageLoader @Inject constructor(
     /**
      * Get image sha1 from uri, used to retrieve the original image sha1.
      */
-    private suspend fun getImageSHA1(uri: Uri): String {
+    suspend fun getImageSHA1(uri: Uri): String {
         return withContext(ioDispatcher) {
             mapImageSHA1[uri]?.let{
                 return@withContext it
@@ -204,7 +204,7 @@ class ImageLoader @Inject constructor(
     /**
      * Get result data from database.
      */
-    private fun getResultFromUploadedStatus(uploadedStatus: UploadedStatus): Result {
+    fun getResultFromUploadedStatus(uploadedStatus: UploadedStatus): Result {
         if (uploadedStatus.imageResult || uploadedStatus.modifiedImageResult) {
             return Result.TRUE
         } else {
