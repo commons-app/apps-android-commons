@@ -6,6 +6,7 @@ import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -45,6 +46,7 @@ import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
 import fr.free.nrw.commons.upload.worker.UploadWorker;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -502,4 +504,20 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             uploadCategoriesFragment.setCallback(null);
         }
     }
+
+    /**
+     * Overrides the back button to make sure the user is prepared to lose their progress
+     */
+    @Override
+    public void onBackPressed() {
+        DialogUtil.showAlertDialog(this,
+            getString(R.string.back_button_warning),
+            getString(R.string.back_button_warning_desc),
+            getString(R.string.back_button_continue),
+            getString(R.string.back_button_warning),
+            null,
+            this::finish
+        );
+    }
+
 }
