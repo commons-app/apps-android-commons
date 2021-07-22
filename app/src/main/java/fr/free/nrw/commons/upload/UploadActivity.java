@@ -6,7 +6,6 @@ import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
