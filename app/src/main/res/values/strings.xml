@@ -391,11 +391,15 @@
 Upload your first media by tapping on the add button.</string>
 
   <string name="no_categories_selected">No Categories Selected</string>
-
   <string name="no_categories_selected_warning_desc">Images without categories are rarely usable. Are you sure you want to continue without selecting categories?</string>
-  <string name="no_depictions_selected">No Depictions Selected</string>
 
+  <string name="no_depictions_selected">No Depictions Selected</string>
   <string name="no_depictions_selected_warning_desc">Images with depictions are more easily found and more likely to be used. Are you sure you want to continue without selecting depictions?</string>
+
+  <string name="back_button_warning">Cancel Upload</string>
+  <string name="back_button_warning_desc">Using the back button will cancel this upload and you will lose your progress</string>
+  <string name="back_button_continue">Continue Upload</string>
+
   <string name="upload_flow_all_images_in_set">(For all image(s) in set)</string>
   <string name="search_this_area">Search this area</string>
   <string name="nearby_card_permission_title">Permission Request</string>
