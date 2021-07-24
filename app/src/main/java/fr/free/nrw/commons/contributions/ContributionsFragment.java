@@ -31,6 +31,7 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.theme.BaseActivity;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;

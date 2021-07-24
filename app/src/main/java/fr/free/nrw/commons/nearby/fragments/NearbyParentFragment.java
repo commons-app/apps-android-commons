@@ -1264,7 +1264,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void removeCurrentLocationMarker() {
         if (currentLocationMarker != null && mapBox!=null) {
             mapBox.removeMarker(currentLocationMarker);
-            mapBox.removePolygon(currentLocationPolygon);
+            if (currentLocationPolygon != null) {
+                mapBox.removePolygon(currentLocationPolygon);
+            }
         }
     }
 

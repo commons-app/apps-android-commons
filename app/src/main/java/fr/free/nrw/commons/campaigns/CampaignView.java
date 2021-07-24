@@ -58,7 +58,7 @@ public class CampaignView extends SwipableCardView {
             if (campaign.isWLMCampaign()) {
                 campaignPreference = WLM_CARD_PREFERENCE;
             }
-            this.setVisibility(View.VISIBLE);
+            setVisibility(View.VISIBLE);
             viewHolder.init();
         } else {
             this.setVisibility(View.GONE);
@@ -79,7 +79,11 @@ public class CampaignView extends SwipableCardView {
         viewHolder = new ViewHolder(rootView);
         setOnClickListener(view -> {
             if (campaign != null) {
-                Utils.handleWebUrl(getContext(), Uri.parse(campaign.getLink()));
+                if (campaign.isWLMCampaign()) {
+                    ((MainActivity)(getContext())).showNearby();
+                } else {
+                    Utils.handleWebUrl(getContext(), Uri.parse(campaign.getLink()));
+                }
             }
         });
     }
@@ -106,11 +110,20 @@ public class CampaignView extends SwipableCardView {
                 tvTitle.setText(campaign.getTitle());
                 tvDescription.setText(campaign.getDescription());
                 try {
-                    final Date startDate = CommonsDateUtil.getIso8601DateFormatShort().parse(campaign.getStartDate());
-                    final Date endDate = CommonsDateUtil.getIso8601DateFormatShort().parse(campaign.getEndDate());
-                    tvDates.setText(String.format("%1s - %2s", DateUtil.getExtraShortDateString(startDate),
-                            DateUtil.getExtraShortDateString(endDate)));
-                } catch (ParseException e) {
+                    if (campaign.isWLMCampaign()) {
+                        tvDates.setText(
+                            String.format("%1s - %2s", campaign.getStartDate(),
+                                campaign.getEndDate()));
+                    } else {
+                        final Date startDate = CommonsDateUtil.getIso8601DateFormatShort()
+                            .parse(campaign.getStartDate());
+                        final Date endDate = CommonsDateUtil.getIso8601DateFormatShort()
+                            .parse(campaign.getEndDate());
+                        tvDates.setText(
+                            String.format("%1s - %2s", startDate,
+                                endDate));
+                    }
+                } catch (final ParseException e) {
                     e.printStackTrace();
                 }
             }

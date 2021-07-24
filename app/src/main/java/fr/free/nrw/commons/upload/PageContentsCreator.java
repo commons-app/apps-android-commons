@@ -56,7 +56,7 @@ class PageContentsCreator {
                 .append("|id =").append(wikidataPlace.getId())
                 .append("|title").append(wikidataPlace.getName())
                 .append("|place").append(wikidataPlace.getAddress())
-                .append("}}").append("\n");
+                .append("\n");
         }
 
         final List<String> categories = media.getCategories();

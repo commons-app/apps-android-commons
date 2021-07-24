@@ -17,7 +17,6 @@ import androidx.browser.customtabs.CustomTabColorSchemeParams;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 
-import fr.free.nrw.commons.campaigns.CampaignView;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import java.util.Date;
 import org.wikipedia.dataclient.WikiSite;
@@ -33,7 +32,6 @@ import timber.log.Timber;
 
 import static android.widget.Toast.LENGTH_SHORT;
 import static fr.free.nrw.commons.campaigns.CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE;
-import static fr.free.nrw.commons.campaigns.CampaignView.WLM_CARD_PREFERENCE;
 
 public class Utils {
 
@@ -229,11 +227,8 @@ public class Utils {
      * For this release we are hardcoding it to be 1st September
      * @return
      */
-    public static Date getWLMStartDate(){
-        Date date =new Date();
-        date.setDate(1);
-        date.setMonth(9);
-        return date;
+    public static String getWLMStartDate() {
+        return "1 Sep";
     }
 
     /***
@@ -241,11 +236,8 @@ public class Utils {
      * For this release we are hardcoding it to be 31st October
      * @return
      */
-    public static Date getWLMEndDate(){
-        Date date =new Date();
-        date.setDate(31);
-        date.setMonth(10);
-        return date;
+    public static String getWLMEndDate() {
+        return "31 Oct";
     }
 
 }

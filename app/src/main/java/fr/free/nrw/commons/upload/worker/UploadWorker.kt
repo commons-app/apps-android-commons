@@ -360,7 +360,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
             for (address in addresses) {
                 if (address != null && address.locale.isO3Country != null) {
-                    return address.locale.isO3Country
+                    return address.locale.country
                 }
             }
         } catch (e: IOException) {
