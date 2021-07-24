@@ -204,7 +204,7 @@
           android:label="@string/provider_bookmarks_location"
           android:syncable="false" />
 
-        <receiver android:name=".widget.PicOfDayAppWidget">
+      <receiver android:name=".widget.PicOfDayAppWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

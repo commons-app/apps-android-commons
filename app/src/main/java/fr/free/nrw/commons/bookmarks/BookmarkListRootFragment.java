@@ -49,12 +49,12 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
     public BookmarkListRootFragment(Bundle bundle, BookmarksPagerAdapter bookmarksPagerAdapter) {
         String title = bundle.getString("categoryName");
         int order = bundle.getInt("order");
-        int order2 = bundle.getInt("order2");
+        final int orderItem = bundle.getInt("orderItem");
         if (order == 0) {
             listFragment = new BookmarkPicturesFragment();
         } else {
             listFragment = new BookmarkLocationsFragment();
-            if(order2 == 2) {
+            if(orderItem == 2) {
                 listFragment = new BookmarkItemsFragment();
             }
         }

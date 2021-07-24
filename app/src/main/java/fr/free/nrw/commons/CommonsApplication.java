@@ -350,7 +350,7 @@ public class CommonsApplication extends MultiDexApplication {
         }
         BookmarkPicturesDao.Table.onDelete(db);
         BookmarkLocationsDao.Table.onDelete(db);
-        Table.INSTANCE.onDelete(db);
+        Table.onDelete(db);
     }
 
 

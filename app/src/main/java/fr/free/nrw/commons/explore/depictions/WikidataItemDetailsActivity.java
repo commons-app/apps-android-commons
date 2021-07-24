@@ -17,7 +17,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
-import fr.free.nrw.commons.LocationPicker.LocationPickerConstants;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -62,6 +61,7 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     Toolbar toolbar;
 
     ViewPagerAdapter viewPagerAdapter;
+    private DepictedItem wikidataItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +73,9 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setOffscreenPageLimit(2);
         tabLayout.setupWithViewPager(viewPager);
+
+        final DepictedItem depictedItem = getIntent().getParcelableExtra(BOOKMARKS_ITEMS);
+        wikidataItem = depictedItem;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTabs();
@@ -83,8 +86,8 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
      * Gets the passed wikidataItemName from the intents and displays it as the page title
      */
     private void setPageTitle() {
-        if (getIntent() != null && getIntent().getStringExtra("wikidataItemName") != null) {
-            setTitle(getIntent().getStringExtra("wikidataItemName"));
+        if (wikidataItem != null) {
+            setTitle(wikidataItem.getName());
         }
     }
 
@@ -109,8 +112,8 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         depictionImagesListFragment = new DepictedImagesFragment();
         ChildDepictionsFragment childDepictionsFragment = new ChildDepictionsFragment();
         ParentDepictionsFragment parentDepictionsFragment = new ParentDepictionsFragment();
-        wikidataItemName = getIntent().getStringExtra("wikidataItemName");
-        String entityId = getIntent().getStringExtra("entityId");
+        wikidataItemName = wikidataItem.getName();
+        String entityId = wikidataItem.getId();
         if (getIntent() != null && wikidataItemName != null) {
             Bundle arguments = new Bundle();
             arguments.putString("wikidataItemName", wikidataItemName);
@@ -234,6 +237,7 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater=getMenuInflater();
         menuInflater.inflate(R.menu.menu_wikidata_item,menu);
+        updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -243,16 +247,20 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        DepictedItem depictedItem = getIntent().getParcelableExtra(BOOKMARKS_ITEMS);
+
         switch (item.getItemId()){
             case R.id.browser_actions_menu_items:
-                String entityId=depictedItem.getId();
+                String entityId = wikidataItem.getId();
                 Uri uri = Uri.parse("https://www.wikidata.org/wiki/" + entityId);
                 Utils.handleWebUrl(this, uri);
                 return true;
             case R.id.menu_bookmark_current_image:
-                boolean bookmarkExists = bookmarkItemsDao.updateBookmarkItem(depictedItem);
-                Snackbar snackbar = bookmarkExists ? Snackbar.make(findViewById(R.id.toolbar_layout), R.string.add_bookmark, Snackbar.LENGTH_LONG) : Snackbar.make(findViewById(R.id.toolbar_layout), R.string.remove_bookmark, Snackbar.LENGTH_LONG);
+                final boolean bookmarkExists = bookmarkItemsDao.updateBookmarkItem(wikidataItem);
+                final Snackbar snackbar = bookmarkExists ?
+                    Snackbar.make(findViewById(R.id.toolbar_layout), R.string.add_bookmark,
+                        Snackbar.LENGTH_LONG) : Snackbar.make(findViewById(R.id.toolbar_layout),
+                        R.string.remove_bookmark, Snackbar.LENGTH_LONG);
+
                 snackbar.show();
                 updateBookmarkState(item);
                 return true;
@@ -264,10 +272,10 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         }
     }
 
-    private void updateBookmarkState(MenuItem item) {
-        DepictedItem depictedItem = getIntent().getParcelableExtra(BOOKMARKS_ITEMS);
-        boolean isBookmarked = bookmarkItemsDao.findBookmarkItem(depictedItem);
-        int icon = isBookmarked ? R.drawable.menu_ic_round_star_filled_24px : R.drawable.menu_ic_round_star_border_24px;
+    private void updateBookmarkState(final MenuItem item) {
+        final boolean isBookmarked = bookmarkItemsDao.findBookmarkItem(wikidataItem);
+        final int icon = isBookmarked ? R.drawable.menu_ic_round_star_filled_24px :
+            R.drawable.menu_ic_round_star_border_24px;
         item.setIcon(icon);
     }
 }
