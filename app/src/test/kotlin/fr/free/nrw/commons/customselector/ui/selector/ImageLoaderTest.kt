@@ -3,8 +3,7 @@ package fr.free.nrw.commons.customselector.ui.selector
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.whenever
+import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
@@ -17,6 +16,10 @@ import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import io.reactivex.Single
 import junit.framework.Assert
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.*
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,7 +31,6 @@ import org.powermock.reflect.Whitebox
 import org.robolectric.annotation.Config
 import java.io.File
 import java.io.FileInputStream
-import java.lang.Exception
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -38,6 +40,7 @@ import kotlin.collections.HashMap
 @RunWith(PowerMockRunner::class)
 @PrepareForTest(PickedFiles::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
+@ExperimentalCoroutinesApi
 class ImageLoaderTest {
 
     @Mock
@@ -73,146 +76,145 @@ class ImageLoaderTest {
     @Mock
     private lateinit var contentResolver: ContentResolver
 
-    @Mock
-    private lateinit var image: Image;
+    @ExperimentalCoroutinesApi
+    private val testDispacher = TestCoroutineDispatcher()
 
     private lateinit var imageLoader: ImageLoader;
-    private var mapImageSHA1: HashMap<Image, String> = HashMap()
+    private var mapImageSHA1: HashMap<Uri, String> = HashMap()
     private var mapHolderImage : HashMap<ImageAdapter.ImageViewHolder, Image> = HashMap()
     private var mapResult: HashMap<String, ImageLoader.Result> = HashMap()
+    private var mapModifiedImageSHA1: HashMap<Image, String> = HashMap()
+    private lateinit var image: Image;
+    private lateinit var uploadedStatus: UploadedStatus;
 
     /**
      * Setup before test.
      */
     @Before
+    @ExperimentalCoroutinesApi
     fun setup() {
+        Dispatchers.setMain(testDispacher)
         MockitoAnnotations.initMocks(this)
+
         imageLoader =
             ImageLoader(mediaClient, fileProcessor, fileUtilsWrapper, uploadedStatusDao, context)
+        uploadedStatus= UploadedStatus(
+            "testSha1",
+            "testSha1",
+            false,
+            false,
+            Calendar.getInstance().time
+        )
+        image = Image(1, "test", uri, "test", 0, "test")
 
         Whitebox.setInternalState(imageLoader, "mapImageSHA1", mapImageSHA1);
         Whitebox.setInternalState(imageLoader, "mapHolderImage", mapHolderImage);
+        Whitebox.setInternalState(imageLoader, "mapModifiedImageSHA1", mapModifiedImageSHA1);
         Whitebox.setInternalState(imageLoader, "mapResult", mapResult);
         Whitebox.setInternalState(imageLoader, "context", context)
+        Whitebox.setInternalState(imageLoader, "ioDispatcher", testDispacher)
+        Whitebox.setInternalState(imageLoader, "defaultDispatcher", testDispacher)
+
+        whenever(contentResolver.openInputStream(uri)).thenReturn(inputStream)
+        whenever(context.contentResolver).thenReturn(contentResolver)
+        whenever(fileUtilsWrapper.getSHA1(inputStream)).thenReturn("testSha1")
     }
 
     /**
-     * Test queryAndSetView.
+     * Reset Dispatchers.
+     */
+    @After
+    @ExperimentalCoroutinesApi
+    fun tearDown() {
+        Dispatchers.resetMain()
+        testDispacher.cleanupTestCoroutines()
+    }
+
+    /**
+     * Test queryAndSetView with upload Status as null.
      */
     @Test
-    fun testQueryAndSetView(){
-        // TODO
-        imageLoader.queryAndSetView(holder,image)
+    fun testQueryAndSetViewUploadedStatusNull() = testDispacher.runBlockingTest {
+        whenever(uploadedStatusDao.getUploadedFromImageSHA1(any())).thenReturn(null)
+        mapModifiedImageSHA1[image] = "testSha1"
+        mapImageSHA1[uri] = "testSha1"
+
+        mapResult["testSha1"] = ImageLoader.Result.TRUE
+        imageLoader.queryAndSetView(holder, image)
+
+        mapResult["testSha1"] = ImageLoader.Result.FALSE
+        imageLoader.queryAndSetView(holder, image)
+    }
+
+    /**
+     * Test queryAndSetView with upload Status not null (ie retrieved from table)
+     */
+    @Test
+    fun testQueryAndSetViewUploadedStatusNotNull() = testDispacher.runBlockingTest {
+        whenever(uploadedStatusDao.getUploadedFromImageSHA1(any())).thenReturn(uploadedStatus)
+        imageLoader.queryAndSetView(holder, image)
     }
 
     /**
      * Test querySha1
      */
     @Test
-    fun testQuerySha1() {
-        val func = imageLoader.javaClass.getDeclaredMethod(
-            "querySHA1",
-            String::class.java
-        )
-        func.isAccessible = true
+    fun testQuerySha1() = testDispacher.runBlockingTest {
 
-        Mockito.`when`(single.blockingGet()).thenReturn(true)
-        Mockito.`when`(mediaClient.checkFileExistsUsingSha("testSha1")).thenReturn(single)
-        Mockito.`when`(fileUtilsWrapper.getSHA1(any())).thenReturn("testSha1")
+        whenever(single.blockingGet()).thenReturn(true)
+        whenever(mediaClient.checkFileExistsUsingSha("testSha1")).thenReturn(single)
+        whenever(fileUtilsWrapper.getSHA1(any())).thenReturn("testSha1")
 
-        // test without saving in map.
-        func.invoke(imageLoader, "testSha1");
-
-        // test with map save.
-        mapResult["testSha1"] = ImageLoader.Result.FALSE
-        func.invoke(imageLoader, "testSha1");
+        imageLoader.querySHA1("testSha1")
     }
 
     /**
      * Test getSha1
      */
     @Test
-    @Throws (Exception::class)
-    fun testGetSha1() {
-        val func = imageLoader.javaClass.getDeclaredMethod(
-            "getSHA1",
-            Image::class.java
-        )
-        func.isAccessible = true
+    @ExperimentalCoroutinesApi
+    fun testGetSha1() = testDispacher.runBlockingTest {
 
-        PowerMockito.mockStatic(PickedFiles::class.java);
+        PowerMockito.mockStatic(PickedFiles::class.java)
         BDDMockito.given(PickedFiles.pickedExistingPicture(context, image.uri))
-            .willReturn(UploadableFile(uri, File("ABC")));
+            .willReturn(UploadableFile(uri, File("ABC")))
+
 
         whenever(fileUtilsWrapper.getFileInputStream("ABC")).thenReturn(inputStream)
         whenever(fileUtilsWrapper.getSHA1(inputStream)).thenReturn("testSha1")
 
-        Assert.assertEquals("testSha1", func.invoke(imageLoader, image));
-        whenever(PickedFiles.pickedExistingPicture(context,Uri.parse("test"))).thenReturn(uploadableFile)
+        Assert.assertEquals("testSha1", imageLoader.getSHA1(image));
+        whenever(PickedFiles.pickedExistingPicture(context, Uri.parse("test"))).thenReturn(
+            uploadableFile
+        )
 
-        mapImageSHA1[image] = "testSha2"
-        Assert.assertEquals("testSha2", func.invoke(imageLoader, image));
-    }
-
-    /**
-     * Test insertIntoUploaded Function.
-     */
-    @Test
-    @Throws (Exception::class)
-    fun testInsertIntoUploaded() {
-        val func = imageLoader.javaClass.getDeclaredMethod(
-            "insertIntoUploaded",
-            String::class.java,
-            String::class.java,
-            Boolean::class.java,
-            Boolean::class.java)
-        func.isAccessible = true
-
-        func.invoke(imageLoader, "", "", true, true)
-    }
-
-    /**
-     * Test getImageSha1.
-     */
-    @Test
-    @Throws (Exception::class)
-    fun testGetImageSHA1() {
-        val func = imageLoader.javaClass.getDeclaredMethod(
-            "getImageSHA1",
-            Uri::class.java)
-        func.isAccessible = true
-
-        whenever(contentResolver.openInputStream(uri)).thenReturn(inputStream)
-        whenever(context.contentResolver).thenReturn(contentResolver)
-        whenever(fileUtilsWrapper.getSHA1(inputStream)).thenReturn("testSha1")
-
-        Assert.assertEquals("testSha1", func.invoke(imageLoader,uri))
+        mapModifiedImageSHA1[image] = "testSha2"
+        Assert.assertEquals("testSha2", imageLoader.getSHA1(image));
     }
 
     /**
      * Test getResultFromUploadedStatus.
      */
     @Test
-    @Throws (Exception::class)
     fun testGetResultFromUploadedStatus() {
         val func = imageLoader.javaClass.getDeclaredMethod(
             "getResultFromUploadedStatus",
             UploadedStatus::class.java)
         func.isAccessible = true
 
-        // test Result.TRUE
-        Assert.assertEquals(ImageLoader.Result.TRUE,
-            func.invoke(imageLoader,
-                UploadedStatus("", "", true, true)))
-
-        // test Result.FALSE
-        Assert.assertEquals(ImageLoader.Result.FALSE,
-            func.invoke(imageLoader,
-                UploadedStatus("", "", false, false, Calendar.getInstance().time)))
-
         // test Result.INVALID
+        uploadedStatus.lastUpdated = Date(0);
         Assert.assertEquals(ImageLoader.Result.INVALID,
-            func.invoke(imageLoader, UploadedStatus("", "", false, false, Date(0))))
+            imageLoader.getResultFromUploadedStatus(uploadedStatus))
 
+        // test Result.TRUE
+        uploadedStatus.imageResult = true;
+        Assert.assertEquals(ImageLoader.Result.TRUE,
+            imageLoader.getResultFromUploadedStatus(uploadedStatus))
+    }
+
+    @Test
+    fun testCleanUP() {
+        imageLoader.cleanUP()
     }
 }
