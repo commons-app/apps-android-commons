@@ -58,7 +58,7 @@ public class BookmarkItemsDao {
     /**
      * Look for a bookmark in database and in order to insert or delete it
      * @param depictedItem : Bookmark object
-     * @return boolean : is bookmark now fav ?
+     * @return boolean : is bookmark now favorite ?
      */
     public boolean updateBookmarkItem(final DepictedItem depictedItem) {
         final boolean bookmarkExists = findBookmarkItem(depictedItem);
@@ -135,19 +135,18 @@ public class BookmarkItemsDao {
      */
     DepictedItem fromCursor(final Cursor cursor) {
         final String fileName = cursor.getString(cursor.getColumnIndex(Table.COLUMN_NAME));
-        final String description = cursor.getString(cursor
-            .getColumnIndex(Table.COLUMN_DESCRIPTION));
+        final String description
+            = cursor.getString(cursor.getColumnIndex(Table.COLUMN_DESCRIPTION));
         final String imageUrl = cursor.getString(cursor.getColumnIndex(Table.COLUMN_IMAGE));
-        final String instanceListString = cursor.getString(cursor
-            .getColumnIndex(Table.COLUMN_INSTANCE_LIST));
+        final String instanceListString
+            = cursor.getString(cursor.getColumnIndex(Table.COLUMN_INSTANCE_LIST));
         final List<String> instanceList = StringToArray(instanceListString);
         final String categoryListString = cursor.getString(cursor
             .getColumnIndex(Table.COLUMN_CATEGORIES_LIST));
         final List<String> categoryList = StringToArray(categoryListString);
-        final boolean isSelected = Boolean.parseBoolean(
-            cursor
-                .getString(cursor.getColumnIndex(Table.COLUMN_IS_SELECTED))
-        );
+        final boolean isSelected
+            = Boolean.parseBoolean(cursor.getString(cursor
+            .getColumnIndex(Table.COLUMN_IS_SELECTED)));
         final String id = cursor.getString(cursor.getColumnIndex(Table.COLUMN_ID));
 
         return new DepictedItem(

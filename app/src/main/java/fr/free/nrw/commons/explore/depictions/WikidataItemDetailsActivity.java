@@ -256,10 +256,11 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
                 return true;
             case R.id.menu_bookmark_current_image:
                 final boolean bookmarkExists = bookmarkItemsDao.updateBookmarkItem(wikidataItem);
-                final Snackbar snackbar = bookmarkExists ?
-                    Snackbar.make(findViewById(R.id.toolbar_layout), R.string.add_bookmark,
-                        Snackbar.LENGTH_LONG) : Snackbar.make(findViewById(R.id.toolbar_layout),
-                        R.string.remove_bookmark, Snackbar.LENGTH_LONG);
+                final Snackbar snackbar
+                    = bookmarkExists ? Snackbar.make(findViewById(R.id.toolbar_layout),
+                    R.string.add_bookmark, Snackbar.LENGTH_LONG)
+                    : Snackbar.make(findViewById(R.id.toolbar_layout), R.string.remove_bookmark,
+                        Snackbar.LENGTH_LONG);
 
                 snackbar.show();
                 updateBookmarkState(item);
@@ -274,8 +275,9 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
 
     private void updateBookmarkState(final MenuItem item) {
         final boolean isBookmarked = bookmarkItemsDao.findBookmarkItem(wikidataItem);
-        final int icon = isBookmarked ? R.drawable.menu_ic_round_star_filled_24px :
-            R.drawable.menu_ic_round_star_border_24px;
+        final int icon
+            = isBookmarked ? R.drawable.menu_ic_round_star_filled_24px
+            : R.drawable.menu_ic_round_star_border_24px;
         item.setIcon(icon);
     }
 }

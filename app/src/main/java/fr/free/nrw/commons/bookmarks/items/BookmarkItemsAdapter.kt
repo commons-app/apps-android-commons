@@ -37,6 +37,7 @@ class BookmarkItemsAdapter (val list: List<DepictedItem>, val context: Context) 
         val depictedItem = list[position]
         holder.depictsLabel.text = depictedItem.name
         holder.description.text = depictedItem.description
+
         if (depictedItem.imageUrl?.isNotBlank() == true) {
             holder.depictsImage.setImageURI(depictedItem.imageUrl)
         } else {
