@@ -634,8 +634,6 @@ Upload your first media by tapping on the add button.</string>
     The shadow of the image view of the location picker</string>
   <string name="image_location">Image Location</string>
   <string name="check_whether_location_is_correct">Check whether location is correct</string>
-  <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="title_page_bookmarks_items">Items</string>
 
 </resources>
