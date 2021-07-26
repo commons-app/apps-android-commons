@@ -382,6 +382,8 @@
   <string name="no_categories_selected">선택된 분류 없음</string>
   <string name="no_categories_selected_warning_desc">분류가 없는 그림은 거의 유용하지 않습니다. 분류를 선택하지 않고 제출하시겠습니까?</string>
   <string name="no_depictions_selected">선택된 서술 없음</string>
+  <string name="back_button_warning">올리기 취소</string>
+  <string name="back_button_continue">계속 올리기</string>
   <string name="search_this_area">이 지역을 검색</string>
   <string name="nearby_card_permission_title">권한 요청</string>
   <string name="nearby_card_permission_explanation">사진이 필요한 주변 장소를 표시하기 위해 현재 위치를 사용하시겠습니까?</string>

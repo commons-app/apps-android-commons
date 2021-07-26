@@ -400,6 +400,9 @@
   <string name="no_categories_selected_warning_desc">Зображення без категорій рідко використовуються. Ви впевнені, що хочете продовжити без вказаних категорій?</string>
   <string name="no_depictions_selected">Описів зображеного не вибрано</string>
   <string name="no_depictions_selected_warning_desc">Медіа, у яких вказані зображувані об\'єкти, можуть бути легше знайдені та використані надалі. Ви впевнені, що хочете продовжити не вказавши що саме тут зображено?</string>
+  <string name="back_button_warning">Скасувати завантаження</string>
+  <string name="back_button_warning_desc">Використання кнопки \"Назад\" скасує це завантаження</string>
+  <string name="back_button_continue">Продовжити завантаження</string>
   <string name="upload_flow_all_images_in_set">(Для всіх зображень у наборі)</string>
   <string name="search_this_area">Шукати в цій зоні</string>
   <string name="nearby_card_permission_title">Запит на дозвіл</string>
