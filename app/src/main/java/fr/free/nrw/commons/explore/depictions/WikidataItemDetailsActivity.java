@@ -29,6 +29,7 @@ import fr.free.nrw.commons.explore.depictions.parent.ParentDepictionsFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
+import fr.free.nrw.commons.wikidata.WikidataConstants;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -41,8 +42,6 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     private FragmentManager supportFragmentManager;
     private DepictedImagesFragment depictionImagesListFragment;
     private MediaDetailPagerFragment mediaDetailPagerFragment;
-
-    public static final String BOOKMARKS_ITEMS = "bookmarks.items";
 
     /**
      * Name of the depicted item
@@ -74,7 +73,8 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         viewPager.setOffscreenPageLimit(2);
         tabLayout.setupWithViewPager(viewPager);
 
-        final DepictedItem depictedItem = getIntent().getParcelableExtra(BOOKMARKS_ITEMS);
+        final DepictedItem depictedItem = getIntent().getParcelableExtra(
+            WikidataConstants.BOOKMARKS_ITEMS);
         wikidataItem = depictedItem;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -86,8 +86,8 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
      * Gets the passed wikidataItemName from the intents and displays it as the page title
      */
     private void setPageTitle() {
-        if (wikidataItem != null) {
-            setTitle(wikidataItem.getName());
+        if (getIntent() != null && getIntent().getStringExtra("wikidataItemName") != null) {
+            setTitle(getIntent().getStringExtra("wikidataItemName"));
         }
     }
 
@@ -112,8 +112,8 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         depictionImagesListFragment = new DepictedImagesFragment();
         ChildDepictionsFragment childDepictionsFragment = new ChildDepictionsFragment();
         ParentDepictionsFragment parentDepictionsFragment = new ParentDepictionsFragment();
-        wikidataItemName = wikidataItem.getName();
-        String entityId = wikidataItem.getId();
+        wikidataItemName = getIntent().getStringExtra("wikidataItemName");
+        String entityId = getIntent().getStringExtra("entityId");
         if (getIntent() != null && wikidataItemName != null) {
             Bundle arguments = new Bundle();
             arguments.putString("wikidataItemName", wikidataItemName);
@@ -226,7 +226,7 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         Intent intent = new Intent(context, WikidataItemDetailsActivity.class);
         intent.putExtra("wikidataItemName", depictedItem.getName());
         intent.putExtra("entityId", depictedItem.getId());
-        intent.putExtra(BOOKMARKS_ITEMS, depictedItem);
+        intent.putExtra(WikidataConstants.BOOKMARKS_ITEMS, depictedItem);
         context.startActivity(intent);
     }
 
@@ -250,7 +250,7 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
 
         switch (item.getItemId()){
             case R.id.browser_actions_menu_items:
-                String entityId = wikidataItem.getId();
+                String entityId=getIntent().getStringExtra("entityId");
                 Uri uri = Uri.parse("https://www.wikidata.org/wiki/" + entityId);
                 Utils.handleWebUrl(this, uri);
                 return true;
