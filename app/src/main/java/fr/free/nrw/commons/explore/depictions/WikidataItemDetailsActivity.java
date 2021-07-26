@@ -237,7 +237,13 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater=getMenuInflater();
         menuInflater.inflate(R.menu.menu_wikidata_item,menu);
-        updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
+
+        if(getIntent().getStringExtra("fragment") != null) {
+            MenuItem item = menu.findItem(R.id.menu_bookmark_current_image);
+            item.setVisible(false);
+        } else {
+            updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
