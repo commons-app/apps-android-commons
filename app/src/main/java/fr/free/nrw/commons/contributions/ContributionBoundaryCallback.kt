@@ -70,7 +70,9 @@ class ContributionBoundaryCallback @Inject constructor(
                     }
             )
         }else {
-            compositeDisposable.clear()
+            if (compositeDisposable != null){
+                compositeDisposable.clear()
+            }
         }
     }
 
