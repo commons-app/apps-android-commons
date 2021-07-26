@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload.categories
 
+import android.util.Log
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryItem
@@ -14,6 +15,7 @@ fun uploadCategoryDelegate(onCategoryClicked: (CategoryItem) -> Unit) =
         }
         bind {
             uploadCategoryCheckbox.isChecked = item.isSelected
+            Log.d("abcde","call "+item.name);
             uploadCategoryCheckbox.text = item.name
         }
     }
