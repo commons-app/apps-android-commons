@@ -4,16 +4,10 @@
   android:layout_height="match_parent"
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-      android:id="@+id/toolbar_layout"
-      android:layout_width="match_parent"
-      android:layout_height="?attr/actionBarSize"
-      app:layout_constraintTop_toTopOf="parent">
-        <include
-            layout="@layout/custom_selector_toolbar"
-            android:id="@+id/toolbar"
-            app:layout_constraintTop_toTopOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+      layout="@layout/custom_selector_toolbar"
+      android:id="@+id/toolbar"
+      />
 
     <androidx.fragment.app.FragmentContainerView
       android:id="@+id/fragment_container"

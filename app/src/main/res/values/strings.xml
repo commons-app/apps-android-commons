@@ -640,5 +640,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="check_whether_location_is_correct">Check whether location is correct</string>
   <string name="custom_selector_title">Custom Selector</string>
   <string name="custom_selector_empty_text">No Images</string>
+  <string name="done">Done</string>
+  <string name="back">Back</string>
 
 </resources>
