@@ -3,6 +3,7 @@ package fr.free.nrw.commons.customselector.ui.selector
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
@@ -96,7 +97,9 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
      */
     override fun onSelectedImagesChanged(selectedImages: ArrayList<Image>) {
         viewModel.selectedImages.value = selectedImages
-        // todo update selected images in view model.
+
+        val done : ImageButton = findViewById(R.id.done)
+        done.visibility = if (selectedImages.isEmpty()) View.INVISIBLE else View.VISIBLE
     }
 
     /**
