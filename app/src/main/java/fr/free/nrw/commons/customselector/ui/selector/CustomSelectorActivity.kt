@@ -2,26 +2,43 @@ package fr.free.nrw.commons.customselector.ui.selector
 
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
-import fr.free.nrw.commons.customselector.model.Folder
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.theme.BaseActivity
 import java.io.File
 import javax.inject.Inject
 
-class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectListener {
+class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectListener, FragmentManager.OnBackStackChangedListener {
 
     /**
      * View model.
      */
-     private lateinit var viewModel: CustomSelectorViewModel
+    private lateinit var viewModel: CustomSelectorViewModel
+
+    /**
+     * isImageFragmentOpen is true when the image fragment is in view.
+     */
+    private var isImageFragmentOpen = false
+
+    /**
+     * Current ImageFragment attributes.
+     */
+    private var bucketId: Long = 0L
+    private lateinit var bucketName: String
+
+    /**
+     * Pref for saving selector state.
+     */
+    private lateinit var prefs: SharedPreferences
 
     /**
      * View Model Factory.
@@ -35,9 +52,17 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_custom_selector)
 
-        viewModel = ViewModelProvider(this,customSelectorViewModelFactory).get(CustomSelectorViewModel::class.java)
+        prefs =  applicationContext.getSharedPreferences("CustomSelector", MODE_PRIVATE)
+        viewModel = ViewModelProvider(this, customSelectorViewModelFactory).get(CustomSelectorViewModel::class.java)
 
         setupViews()
+
+        // Open folder if saved in prefs.
+        if(prefs.contains("FolderId")){
+            val lastOpenFolderId: Long = prefs.getLong("FolderId", 0L)
+            val lastOpenFolderName: String? = prefs.getString("FolderName", null)
+            lastOpenFolderName?.let { onFolderClick(lastOpenFolderId, it) }
+        }
     }
 
     /**
@@ -49,8 +74,6 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
             .commit()
         fetchData()
         setUpToolbar()
-
-        // todo : open image fragment depending on the last user visit.
     }
 
     /**
@@ -63,7 +86,7 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
     /**
      * Change the title of the toolbar.
      */
-    private fun changeTitle(title:String) {
+    private fun changeTitle(title: String) {
         val titleText =  findViewById<TextView>(R.id.title)
         if(titleText != null) {
             titleText.text = title
@@ -84,12 +107,17 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
     /**
      * override on folder click, change the toolbar title on folder click.
      */
-    override fun onFolderClick(folder: Folder) {
+    override fun onFolderClick(folderId: Long, folderName: String) {
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container, ImageFragment.newInstance(folder.bucketId))
+            .add(R.id.fragment_container, ImageFragment.newInstance(folderId))
             .addToBackStack(null)
             .commit()
-        changeTitle(folder.name)
+
+        changeTitle(folderName)
+
+        bucketId = folderId
+        bucketName = folderName
+        isImageFragmentOpen = true
     }
 
     /**
@@ -148,4 +176,21 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
         }
     }
 
+    override fun onDestroy() {
+        if(isImageFragmentOpen){
+            prefs.edit().putLong("FolderId", bucketId).putString("FolderName", bucketName).apply()
+        } else {
+            prefs.edit().remove("FolderId").remove("FolderName").apply()
+        }
+        super.onDestroy()
+    }
+
+    /**
+     * Called whenever the contents of the back stack change.
+     */
+    override fun onBackStackChanged() {
+        if(supportFragmentManager.backStackEntryCount == 0) {
+            isImageFragmentOpen = false
+        }
+    }
 }
