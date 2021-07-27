@@ -49,7 +49,7 @@ class   FolderAdapter(
         holder.name.text = folder.name
         holder.count.text = count.toString()
         holder.itemView.setOnClickListener{
-            itemClickListener.onFolderClick(folder)
+            itemClickListener.onFolderClick(folder.bucketId, folder.name)
         }
 
         //todo load image thumbnail.
