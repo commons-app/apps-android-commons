@@ -48,6 +48,13 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
         )
     }
 
+    fun getCategoryThumbnail(category: String):
+            Single<String> {
+        return categoryInterface.getCategoryThumbnail(category).map {
+            it.query()?.pages()?.get(0)?.thumbUrl()
+        }
+    }
+
     /**
      * The method takes categoryName as input and returns a List of Subcategories
      * It uses the generator query API to get the subcategories in a category, 500 at a time.

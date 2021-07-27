@@ -1,9 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/uploadCategoryCheckbox"
+<androidx.constraintlayout.widget.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/category_layout"
+android:layout_width="match_parent"
+android:layout_height="wrap_content">
+
+<CheckBox
+  android:id="@+id/upload_category_checkbox"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:checkMark="?android:attr/textCheckMark"
+  android:checked="false"
+  android:gravity="center_vertical"
+  android:padding="@dimen/tiny_gap"
+  app:layout_constraintBottom_toBottomOf="parent"
+  app:layout_constraintEnd_toStartOf="@+id/category_image"
+  app:layout_constraintLeft_toLeftOf="parent"
+  app:layout_constraintTop_toTopOf="parent" />
+
+<com.facebook.drawee.view.SimpleDraweeView
+  android:id="@+id/category_image"
+  android:layout_width="50dp"
+  android:layout_height="50dp"
+  android:paddingEnd="@dimen/tiny_gap"
+  app:layout_constraintBottom_toBottomOf="parent"
+  app:layout_constraintLeft_toRightOf="@+id/upload_category_checkbox"
+  app:layout_constraintTop_toTopOf="parent"
+  app:placeholderImage="@drawable/ic_wikidata_logo_24dp" />
+
+<LinearLayout
+  android:layout_width="0dp"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  app:layout_constraintBottom_toBottomOf="parent"
+  app:layout_constraintEnd_toEndOf="parent"
+  app:layout_constraintStart_toEndOf="@+id/category_image"
+  app:layout_constraintTop_toTopOf="parent">
+
+  <TextView
+    android:id="@+id/category_label"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:checkMark="?android:attr/textCheckMark"
-    android:checked="false"
-    android:gravity="center_vertical"
-    android:padding="@dimen/tiny_gap"/>
+    android:text="@string/label"
+    android:textStyle="bold" />
+
+  <TextView
+    android:id="@+id/description"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/description" />
+</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

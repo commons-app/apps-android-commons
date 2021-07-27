@@ -49,6 +49,6 @@ public interface CategoryInterface {
 
     @GET("w/api.php?action=query&format=json&formatversion=2"
         + "&prop=pageimages&piprop=thumbnail&pithumbsize=70")
-    Single<String> getCategoryThumbnail(@Query("titles") String categoryName);
+    Single<MwQueryResponse> getCategoryThumbnail(@Query("titles") String categoryName);
 
 }
