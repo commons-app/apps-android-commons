@@ -128,6 +128,10 @@ class ImageAdapter(
         return images.size
     }
 
+    fun getImageIdAt(position: Int): Long {
+        return images.get(position).id
+    }
+
     /**
      * Image view holder.
      */

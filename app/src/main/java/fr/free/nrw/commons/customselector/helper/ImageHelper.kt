@@ -62,6 +62,17 @@ object ImageHelper {
     }
 
     /**
+     * getIndex: Returns the index of image in given list.
+     */
+    fun getIndexFromId(list: ArrayList<Image>, imageId: Long): Int {
+        for(i in list){
+            if(i.id == imageId)
+                return list.indexOf(i)
+        }
+        return 0;
+    }
+
+    /**
      * Gets the list of indices from the master list.
      */
     fun getIndexList(list: ArrayList<Image>, masterList: ArrayList<Image>): ArrayList<Int> {

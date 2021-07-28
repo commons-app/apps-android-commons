@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
@@ -17,7 +16,7 @@ import fr.free.nrw.commons.theme.BaseActivity
 import java.io.File
 import javax.inject.Inject
 
-class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectListener, FragmentManager.OnBackStackChangedListener {
+class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectListener {
 
     /**
      * View model.
@@ -58,10 +57,11 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
         setupViews()
 
         // Open folder if saved in prefs.
-        if(prefs.contains("FolderId")){
-            val lastOpenFolderId: Long = prefs.getLong("FolderId", 0L)
-            val lastOpenFolderName: String? = prefs.getString("FolderName", null)
-            lastOpenFolderName?.let { onFolderClick(lastOpenFolderId, it) }
+        if(prefs.contains(FOLDER_ID)){
+            val lastOpenFolderId: Long = prefs.getLong(FOLDER_ID, 0L)
+            val lastOpenFolderName: String? = prefs.getString(FOLDER_NAME, null)
+            val lastItemId: Long = prefs.getLong(ITEM_ID, 0)
+            lastOpenFolderName?.let { onFolderClick(lastOpenFolderId, it, lastItemId) }
         }
     }
 
@@ -107,9 +107,9 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     /**
      * override on folder click, change the toolbar title on folder click.
      */
-    override fun onFolderClick(folderId: Long, folderName: String) {
+    override fun onFolderClick(folderId: Long, folderName: String, lastItemId: Long) {
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container, ImageFragment.newInstance(folderId))
+            .add(R.id.fragment_container, ImageFragment.newInstance(folderId, lastItemId))
             .addToBackStack(null)
             .commit()
 
@@ -172,25 +172,27 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
         super.onBackPressed()
         val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if(fragment != null && fragment is FolderFragment){
+            isImageFragmentOpen = false
             changeTitle(getString(R.string.custom_selector_title))
         }
     }
 
+    /**
+     * On activity destroy
+     * If image fragment is open, overwrite its attributes otherwise discard the values.
+     */
     override fun onDestroy() {
         if(isImageFragmentOpen){
-            prefs.edit().putLong("FolderId", bucketId).putString("FolderName", bucketName).apply()
+            prefs.edit().putLong(FOLDER_ID, bucketId).putString(FOLDER_NAME, bucketName).apply()
         } else {
-            prefs.edit().remove("FolderId").remove("FolderName").apply()
+            prefs.edit().remove(FOLDER_ID).remove(FOLDER_NAME).apply()
         }
         super.onDestroy()
     }
 
-    /**
-     * Called whenever the contents of the back stack change.
-     */
-    override fun onBackStackChanged() {
-        if(supportFragmentManager.backStackEntryCount == 0) {
-            isImageFragmentOpen = false
-        }
+    companion object {
+        const val FOLDER_ID : String = "FolderId"
+        const val FOLDER_NAME : String = "FolderName"
+        const val ITEM_ID : String = "ItemId"
     }
 }
