@@ -389,6 +389,8 @@
   <string name="no_categories_selected_warning_desc">カテゴリを指定しない画像は使用されることがほとんどありません。ほんとうにカテゴリを選択しないまま作業を続けますか？</string>
   <string name="no_depictions_selected">描写を選択していません</string>
   <string name="no_depictions_selected_warning_desc">描写を添えた画像はないものよりも探しやすく利用されやすくなります。描写を選ばないまま、先に進んでよいですか？</string>
+  <string name="back_button_warning">アップロードをキャンセル</string>
+  <string name="back_button_continue">アップロードを続ける</string>
   <string name="upload_flow_all_images_in_set" fuzzy="true">（画像全点を組み写真にする場合）</string>
   <string name="search_this_area">この地域を検索</string>
   <string name="nearby_card_permission_title">許可を申請</string>
