@@ -47,8 +47,4 @@ public interface CategoryInterface {
     Single<MwQueryResponse> getParentCategoryList(@Query("titles") String categoryName,
         @QueryMap(encoded = true) Map<String, String> continuation);
 
-    @GET("w/api.php?action=query&format=json&formatversion=2"
-        + "&prop=pageimages&piprop=thumbnail&pithumbsize=70")
-    Single<MwQueryResponse> getCategoryThumbnail(@Query("titles") String categoryName);
-
 }

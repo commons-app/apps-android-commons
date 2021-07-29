@@ -21,8 +21,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.category.CategoryClient;
 import fr.free.nrw.commons.category.CategoryItem;
+import fr.free.nrw.commons.category.ExtendedCategoryClient;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -51,7 +51,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     @Inject
     CategoriesContract.UserActionListener presenter;
     @Inject
-    CategoryClient categoryClient;
+    ExtendedCategoryClient extendedCategoryClient;
     private UploadCategoryAdapter adapter;
     private Disposable subscribe;
 
@@ -100,7 +100,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         adapter = new UploadCategoryAdapter(categoryItem -> {
             presenter.onCategoryItemClicked(categoryItem);
             return Unit.INSTANCE;
-        }, categoryClient);
+        }, extendedCategoryClient);
         rvCategories.setLayoutManager(new LinearLayoutManager(getContext()));
         rvCategories.setAdapter(adapter);
     }
