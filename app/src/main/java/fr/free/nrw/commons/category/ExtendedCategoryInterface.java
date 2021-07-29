@@ -12,6 +12,11 @@ import retrofit2.http.QueryMap;
  */
 public interface ExtendedCategoryInterface {
 
+    /**
+     * API call for getting thumbnail of a category
+     * @param categoryName title
+     * @return Single<MwQueryResponse>
+     */
     @GET("w/api.php?action=query&format=json&formatversion=2"
         + "&prop=pageimages&piprop=thumbnail&pithumbsize=70")
     Single<MwQueryResponse> getCategoryThumbnail(@Query("titles") String categoryName);

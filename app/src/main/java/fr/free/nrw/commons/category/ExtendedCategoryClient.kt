@@ -8,13 +8,18 @@ import javax.inject.Singleton
 
 
 /**
- * Category Client to handle custom calls to Commons MediaWiki APIs
+ * Extended Category Client to handle custom calls to Commons APIs
  */
 @Singleton
 class ExtendedCategoryClient
 @Inject constructor(private val extendedCategoryInterface : ExtendedCategoryInterface) :
     ContinuationClient<MwQueryResponse, String>() {
 
+    /**
+     * handles getting thumbnail from getCategoryThumbnail API call
+     * @param category title
+     * @return Single<MwQueryPage?>
+     */
     fun getCategoryThumbnail(category: String):
             Single<MwQueryPage?> {
         return extendedCategoryInterface.getCategoryThumbnail(category).map {

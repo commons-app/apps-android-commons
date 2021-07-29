@@ -239,10 +239,15 @@ public class NetworkingModule {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, CategoryInterface.class);
     }
 
+    /**
+     * Add provider for ExtendedCategoryInterface. It creates a retrofit service for the wiki site
+     * @param commonsWikiSite wiki site
+     * @return ExtendedCategoryInterface
+     */
     @Provides
     @Singleton
     public ExtendedCategoryInterface provideCategoryExtendedInterface(
-        @Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        @Named(NAMED_COMMONS_WIKI_SITE) final WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite,
             Service.COMMONS_URL, ExtendedCategoryInterface.class);
     }

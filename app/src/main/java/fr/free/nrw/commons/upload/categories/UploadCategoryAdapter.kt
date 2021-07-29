@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload.categories
 
-import fr.free.nrw.commons.category.CategoryClient
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.category.ExtendedCategoryClient
 import org.jetbrains.annotations.NotNull
