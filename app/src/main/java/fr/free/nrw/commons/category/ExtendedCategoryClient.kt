@@ -16,13 +16,13 @@ class ExtendedCategoryClient
     ContinuationClient<MwQueryResponse, String>() {
 
     /**
-     * handles getting thumbnail from getCategoryThumbnail API call
+     * handles getting thumbnail and description from getCategoryInfo API call
      * @param category title
      * @return Single<MwQueryPage?>
      */
-    fun getCategoryThumbnail(category: String):
+    fun getCategoryInfo(category: String):
             Single<MwQueryPage?> {
-        return extendedCategoryInterface.getCategoryThumbnail(category).map {
+        return extendedCategoryInterface.getCategoryInfo(category).map {
             it.query()?.pages()?.get(0)
         }
     }

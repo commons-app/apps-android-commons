@@ -29,13 +29,14 @@ fun uploadCategoryDelegate(
             category_label.text = item.name
 
             compositeDisposable.add(
-                extendedCategoryClient.getCategoryThumbnail(
+                extendedCategoryClient.getCategoryInfo(
                     "Category:" + item.name
                 )
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe { s: MwQueryPage? ->
                         category_image.setImageURI(s?.thumbUrl())
+                        category_description.text = s?.description()
                     }
             )
         }
