@@ -103,9 +103,7 @@ public class CampaignView extends SwipableCardView {
         public void init() {
             if (campaign != null) {
                 ivCampaign.setImageDrawable(
-                    getResources().getDrawable(
-                        campaign.isWLMCampaign() ? R.drawable.wlm_banner
-                            : R.drawable.ic_campaign));
+                    getResources().getDrawable(R.drawable.ic_campaign));
 
                 tvTitle.setText(campaign.getTitle());
                 tvDescription.setText(campaign.getDescription());

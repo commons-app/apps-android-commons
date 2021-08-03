@@ -281,7 +281,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                             with(contribution.wikidataPlace?.location){
                                 if(contribution.wikidataPlace?.isMonumentUpload!!) {
                                     countryCode =
-                                        reverseGeoCode(contribution.wikidataPlace?.location!!).toLowerCase()
+                                        reverseGeoCode(contribution.wikidataPlace?.location!!)?.toLowerCase()
                                 }
 
                             }
