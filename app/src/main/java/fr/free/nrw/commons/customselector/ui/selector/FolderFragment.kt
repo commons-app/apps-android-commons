@@ -14,6 +14,7 @@ import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
+import fr.free.nrw.commons.customselector.model.Folder
 import fr.free.nrw.commons.customselector.ui.adapter.FolderAdapter
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.media.MediaClient
@@ -54,6 +55,11 @@ class FolderFragment : CommonsDaggerSupportFragment() {
      * Grid Layout Manager for recycler view.
      */
     private lateinit var gridLayoutManager: GridLayoutManager
+
+    /**
+     * Folder List.
+     */
+    private lateinit var folders : List<Folder>
 
     /**
      * Companion newInstance.
@@ -102,7 +108,7 @@ class FolderFragment : CommonsDaggerSupportFragment() {
      */
     private fun handleResult(result: Result) {
         if(result.status is CallbackStatus.SUCCESS){
-            val folders = ImageHelper.folderListFromImages(result.images)
+            folders = ImageHelper.folderListFromImages(result.images)
             folderAdapter.init(folders)
             folderAdapter.notifyDataSetChanged()
             selectorRV?.let {
@@ -112,6 +118,15 @@ class FolderFragment : CommonsDaggerSupportFragment() {
         loader?.let {
             it.visibility = if (result.status is CallbackStatus.FETCHING) View.VISIBLE else View.GONE
         }
+    }
+
+    override fun onResume() {
+        if(this::folders.isInitialized){
+            ImageHelper.cleanFolders(folders)
+            folderAdapter.init(folders)
+            folderAdapter.notifyDataSetChanged()
+        }
+        super.onResume()
     }
 
     /**

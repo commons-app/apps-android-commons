@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +15,15 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
+import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.theme.BaseActivity
 import kotlinx.android.synthetic.main.fragment_custom_selector.view.*
+import java.io.File
+import java.io.FileInputStream
+import java.net.URI
 import javax.inject.Inject
 
 class ImageFragment: CommonsDaggerSupportFragment() {
@@ -124,6 +130,8 @@ class ImageFragment: CommonsDaggerSupportFragment() {
         return root
     }
 
+    lateinit var filteredImages: ArrayList<Image>;
+
     /**
      * Handle view model result.
      */
@@ -131,7 +139,7 @@ class ImageFragment: CommonsDaggerSupportFragment() {
         if(result.status is CallbackStatus.SUCCESS){
             val images = result.images
             if(images.isNotEmpty()) {
-                val filteredImages = ImageHelper.filterImages(images, bucketId)
+                filteredImages = ImageHelper.filterImages(images, bucketId)
                 imageAdapter.init(filteredImages)
                 selectorRV?.let {
                     it.visibility = View.VISIBLE
@@ -160,6 +168,14 @@ class ImageFragment: CommonsDaggerSupportFragment() {
     private fun getSpanCount(): Int {
         return 3
         // todo change span count depending on the device orientation and other factos.
+    }
+
+    override fun onResume() {
+        if(::filteredImages.isInitialized) {
+            ImageHelper.cleanImages(filteredImages)
+            imageAdapter.init(filteredImages)
+        }
+        super.onResume()
     }
 
     /**

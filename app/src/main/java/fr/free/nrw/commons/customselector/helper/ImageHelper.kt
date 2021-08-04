@@ -72,6 +72,23 @@ object ImageHelper {
         return 0;
     }
 
+    fun cleanImages(list: ArrayList<Image>) {
+        val toBeRemoved:ArrayList<Int> = ArrayList()
+        for(image in list){
+            val imageExist = File(image.path).exists()
+            if(!imageExist){
+                toBeRemoved.add(list.indexOf(image))
+            }
+        }
+        list.removeAll(toBeRemoved.map { list[it] })
+    }
+
+    fun cleanFolders(list :List<Folder>) {
+        for(folder in list){
+            cleanImages(folder.images)
+        }
+    }
+
     /**
      * Gets the list of indices from the master list.
      */
