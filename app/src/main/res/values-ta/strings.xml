@@ -99,8 +99,19 @@
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="tutorial_1_text">விக்கிபீடியாவில் பயன்படுத்தப்படும் பெரும்பாலான படங்களை விக்கிமீடியா காமன்ஸ் வழங்குகிறது.</string>
+  <string name="tutorial_1_subtext">உலகெங்கிலும் உள்ள மக்களுக்கு கல்வி கற்பதற்கு உங்கள் படங்கள் உதவுகின்றன!</string>
+  <string name="tutorial_2_text">தயவுசெய்து நீங்களே எடுத்த அல்லது முழுமையாக உருவாக்கிய படங்களை பதிவேற்றவும்:</string>
+  <string name="tutorial_2_subtext_1">இயற்கை பொருட்கள் (மலர்கள், விலங்குகள், மலைகள்)</string>
+  <string name="tutorial_2_subtext_2">பயனுள்ள பொருட்கள் (மிதிவண்டிகள், ரயில் நிலையங்கள்)</string>
+  <string name="tutorial_2_subtext_3">பிரபலமான நபர்கள் (உங்கள் நகரத்தலைவர், நீங்கள் சந்தித்த ஒலிம்பிக் விளையாட்டு வீரர்கள்)</string>
   <string name="tutorial_3_text">அருள்கூர்ந்து பதிவேற்றவேண்டாம்:</string>
+  <string name="tutorial_3_subtext_1">உங்கள் நண்பர்களின் சுயபடங்கள் அல்லது படங்கள்</string>
+  <string name="tutorial_3_subtext_2">நீங்கள் இணையத்திலிருந்து பதிவிறக்கம் செய்த படங்கள்</string>
+  <string name="tutorial_3_subtext_3">தனியுடைமையுடைய மென்பொருட்களின் திரைக்காட்சிகள்</string>
   <string name="tutorial_4_text">எடுத்துக்காட்டு பதிவேற்றம்:</string>
+  <string name="tutorial_4_subtext_1">தலைப்பு: சிட்னி ஒப்பேரா மாளிகை</string>
+  <string name="tutorial_4_subtext_2">விளக்கம்: விரிகுடாவின் குறுக்கே சிட்னி ஒப்பேரா மாளிகை பார்க்கப்படுகிறது</string>
   <string name="welcome_final_button_text">ஆம்!</string>
   <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;மேலதிக விவரம்&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">பகுப்புகள்</string>
