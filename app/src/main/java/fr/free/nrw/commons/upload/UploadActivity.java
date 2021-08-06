@@ -56,8 +56,6 @@ import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
-import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType.Object;
-import kotlin.reflect.jvm.internal.impl.util.Checks;
 import timber.log.Timber;
 
 public class UploadActivity extends BaseActivity implements UploadContract.View, UploadBaseFragment.Callback {
