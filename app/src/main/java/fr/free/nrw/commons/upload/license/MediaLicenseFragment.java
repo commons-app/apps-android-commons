@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload.license;
 
+import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
 import java.util.List;
 
@@ -38,6 +40,8 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.tv_subtitle)
+    TextView tvSubTitle;
     @BindView(R.id.spinner_license_list)
     Spinner spinnerLicenseList;
     @BindView(R.id.tv_share_license_summary)
@@ -72,7 +76,8 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
 
     private void init() {
         tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
-                callback.getTotalNumberOfSteps(), getString(R.string.license_step_title)));
+            callback.getTotalNumberOfSteps(), getString(R.string.license_step_title)));
+        setTvSubTitle();
         tooltip.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +87,20 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
         initPresenter();
         initLicenseSpinner();
         presenter.getLicenses();
+    }
+
+    /**
+     * Removes the tv Subtitle If the activity is the instance of [UploadActivity] and
+     * if multiple files aren't selected.
+     */
+    private void setTvSubTitle() {
+        final Activity activity = getActivity();
+        if (activity instanceof  UploadActivity) {
+            final boolean isMultipleFileSelected = ((UploadActivity) activity).getIsMultipleFilesSelected();
+            if (!isMultipleFileSelected) {
+                tvSubTitle.setVisibility(View.GONE);
+            }
+        }
     }
 
     private void initPresenter() {
