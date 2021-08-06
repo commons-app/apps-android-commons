@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.model.Folder
+import fr.free.nrw.commons.customselector.model.Image
 
 class   FolderAdapter(
     /**
@@ -43,16 +44,38 @@ class   FolderAdapter(
      */
     override fun onBindViewHolder(holder: FolderViewHolder, position: Int) {
         val folder = folders[position]
-        val count = folder.images.size
-        val previewImage = folder.images[0]
-        Glide.with(context).load(previewImage.uri).into(holder.image)
-        holder.name.text = folder.name
-        holder.count.text = count.toString()
-        holder.itemView.setOnClickListener{
-            itemClickListener.onFolderClick(folder.bucketId, folder.name, 0)
-        }
+        val toBeRemoved = ArrayList<Image>()
 
-        //todo load image thumbnail.
+        for(image in folder.images) {
+            // Remove all the top images that do not exist anymore
+            if(context.contentResolver.getType(image.uri) == null){
+                // File not found
+                toBeRemoved.add(image)
+            } else {
+                break
+            }
+        }
+        holder.image.setImageDrawable (null)
+        folder.images.removeAll(toBeRemoved)
+        val count = folder.images.size
+
+        if(count == 0) {
+            // Folder is empty, remove folder from the adapter.
+            holder.itemView.post{
+                val updatePosition = folders.indexOf(folder)
+                folders.removeAt(updatePosition)
+                notifyItemRemoved(updatePosition)
+                notifyItemRangeChanged(updatePosition, folders.size)
+            }
+        } else {
+            val previewImage = folder.images[0]
+            Glide.with(context).load(previewImage.uri).into(holder.image)
+            holder.name.text = folder.name
+            holder.count.text = count.toString()
+            holder.itemView.setOnClickListener {
+                itemClickListener.onFolderClick(folder.bucketId, folder.name, 0)
+            }
+        }
     }
 
     /**

@@ -59,7 +59,7 @@ class FolderFragment : CommonsDaggerSupportFragment() {
     /**
      * Folder List.
      */
-    private lateinit var folders : List<Folder>
+    private lateinit var folders : ArrayList<Folder>
 
     /**
      * Companion newInstance.
@@ -121,11 +121,7 @@ class FolderFragment : CommonsDaggerSupportFragment() {
     }
 
     override fun onResume() {
-        if(this::folders.isInitialized){
-            ImageHelper.cleanFolders(folders)
-            folderAdapter.init(folders)
-            folderAdapter.notifyDataSetChanged()
-        }
+        folderAdapter.notifyDataSetChanged()
         super.onResume()
     }
 

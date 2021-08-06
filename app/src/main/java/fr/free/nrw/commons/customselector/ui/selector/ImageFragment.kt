@@ -171,10 +171,7 @@ class ImageFragment: CommonsDaggerSupportFragment() {
     }
 
     override fun onResume() {
-        if(::filteredImages.isInitialized) {
-            ImageHelper.cleanImages(filteredImages)
-            imageAdapter.init(filteredImages)
-        }
+        imageAdapter.notifyDataSetChanged()
         super.onResume()
     }
 
@@ -189,13 +186,16 @@ class ImageFragment: CommonsDaggerSupportFragment() {
         val position = (selectorRV?.layoutManager as GridLayoutManager)
             .findFirstVisibleItemPosition()
 
-        context?.let { context ->
-            context.getSharedPreferences(
-                "CustomSelector",
-                BaseActivity.MODE_PRIVATE
-            )?.let { prefs ->
-                prefs.edit()?.let { editor ->
-                    editor.putLong("ItemId", imageAdapter.getImageIdAt(position))?.apply()
+        // Check for empty RecyclerView.
+        if (position != -1) {
+            context?.let { context ->
+                context.getSharedPreferences(
+                    "CustomSelector",
+                    BaseActivity.MODE_PRIVATE
+                )?.let { prefs ->
+                    prefs.edit()?.let { editor ->
+                        editor.putLong("ItemId", imageAdapter.getImageIdAt(position))?.apply()
+                    }
                 }
             }
         }

@@ -1,9 +1,8 @@
 package fr.free.nrw.commons.customselector.ui.adapter
 
 import android.content.Context
-import android.view.ViewGroup
-import fr.free.nrw.commons.R
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -11,6 +10,7 @@ import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
@@ -59,7 +59,7 @@ class ImageAdapter(
      * Create View holder.
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
-        val itemView = inflater.inflate(R.layout.item_custom_selector_image,parent, false)
+        val itemView = inflater.inflate(R.layout.item_custom_selector_image, parent, false)
         return ImageViewHolder(itemView)
     }
 
@@ -68,36 +68,46 @@ class ImageAdapter(
      */
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val image=images[position]
-        val selectedIndex = ImageHelper.getIndex(selectedImages,image)
-        val isSelected = selectedIndex != -1
-        if(isSelected){
-            holder.itemSelected(selectedIndex+1)
-        }
-        else {
-            holder.itemUnselected();
-        }
-        Glide.with(context).load(image.uri).thumbnail(0.3f).into(holder.image)
-        imageLoader.queryAndSetView(holder,image)
-        holder.itemView.setOnClickListener {
-            selectOrRemoveImage(holder, position)
+        holder.image.setImageDrawable (null)
+        if (context.contentResolver.getType(image.uri) == null) {
+            // Image does not exist anymore, update adapter.
+            holder.itemView.post {
+                val updatedPosition = images.indexOf(image)
+                images.remove(image)
+                notifyItemRemoved(updatedPosition)
+                notifyItemRangeChanged(updatedPosition, images.size)
+            }
+        } else {
+            val selectedIndex = ImageHelper.getIndex(selectedImages, image)
+            val isSelected = selectedIndex != -1
+            if (isSelected) {
+                holder.itemSelected(selectedIndex + 1)
+            } else {
+                holder.itemUnselected();
+            }
+            Glide.with(context).load(image.uri).thumbnail(0.3f).into(holder.image)
+            imageLoader.queryAndSetView(holder, image)
+            holder.itemView.setOnClickListener {
+                selectOrRemoveImage(holder, position)
+            }
         }
     }
 
     /**
      * Handle click event on an image, update counter on images.
      */
-    private fun selectOrRemoveImage(holder:ImageViewHolder, position:Int){
-        val clickedIndex = ImageHelper.getIndex(selectedImages,images[position])
+    private fun selectOrRemoveImage(holder: ImageViewHolder, position: Int){
+        val clickedIndex = ImageHelper.getIndex(selectedImages, images[position])
         if (clickedIndex != -1) {
             selectedImages.removeAt(clickedIndex)
-            notifyItemChanged(position,ImageUnselected())
+            notifyItemChanged(position, ImageUnselected())
             val indexes = ImageHelper.getIndexList(selectedImages, images)
             for (index in indexes) {
                 notifyItemChanged(index, ImageSelectedOrUpdated())
             }
         } else {
             if(holder.isItemUploaded()){
-                Toast.makeText(context,"Already Uploaded image", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Already Uploaded image", Toast.LENGTH_SHORT).show()
             } else {
                 selectedImages.add(images[position])
                 notifyItemChanged(position, ImageSelectedOrUpdated())
@@ -109,7 +119,7 @@ class ImageAdapter(
     /**
      * Initialize the data set.
      */
-    fun init(newImages:List<Image>) {
+    fun init(newImages: List<Image>) {
         val oldImageList:ArrayList<Image> = images
         val newImageList:ArrayList<Image> = ArrayList(newImages)
         val diffResult = DiffUtil.calculateDiff(
