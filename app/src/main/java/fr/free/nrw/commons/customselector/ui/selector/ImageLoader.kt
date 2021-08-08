@@ -13,6 +13,7 @@ import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import kotlinx.coroutines.*
 import timber.log.Timber
+import java.io.FileNotFoundException
 import java.io.IOException
 import java.net.UnknownHostException
 import java.util.*
@@ -86,6 +87,8 @@ class ImageLoader @Inject constructor(
             }
 
             val imageSHA1 = getImageSHA1(image.uri)
+            if(imageSHA1.isEmpty())
+                return@launch
             val uploadedStatus = getFromUploaded(imageSHA1)
 
             val sha1 = uploadedStatus?.let {
@@ -195,9 +198,14 @@ class ImageLoader @Inject constructor(
             mapImageSHA1[uri]?.let{
                 return@withContext it
             }
-            val result = fileUtilsWrapper.getSHA1(context.contentResolver.openInputStream(uri))
-            mapImageSHA1[uri] = result
-            result
+            try {
+                val result = fileUtilsWrapper.getSHA1(context.contentResolver.openInputStream(uri))
+                mapImageSHA1[uri] = result
+                result
+            } catch (e: FileNotFoundException){
+                e.printStackTrace()
+                ""
+            }
         }
     }
 
