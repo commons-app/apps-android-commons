@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * BHARATHESHA ALASANDEMAJALU
+* Chidananda Kampa
 * Kiranpoojary
 * Lokesha kunchadka
 * Ravi Mundkur
@@ -181,7 +182,7 @@
   <string name="cancel">ವಜಾ ಮಲ್ಪುಲೆ</string>
   <string name="navigation_drawer_open">ತೋಜಾಲೇ</string>
   <string name="navigation_drawer_close">ಮುಚ್ಚಿಲೆ</string>
-  <string name="navigation_item_home">ಮುಖ್ಯಪುಟೊ</string>
+  <string name="navigation_item_home">ಇಲ್ಲಗ್</string>
   <string name="navigation_item_upload">ದಿಂಜಾಲೆ</string>
   <string name="navigation_item_nearby">ಕೈತಲ್‍ದ</string>
   <string name="navigation_item_about">ಎಂಕ್ಲೆನ ಬಗ್ಗೆ</string>
