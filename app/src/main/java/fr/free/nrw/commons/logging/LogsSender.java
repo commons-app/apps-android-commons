@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.logging;
 
+import static org.acra.ACRA.getErrorReporter;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -62,6 +64,8 @@ public abstract class LogsSender implements ReportSender {
         final Uri logFileUri = getZippedLogFileUri(context, report);
         if (logFileUri != null) {
             sendEmail(context, logFileUri);
+        } else {
+            getErrorReporter().handleSilentException(null);
         }
     }
 

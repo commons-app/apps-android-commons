@@ -45,6 +45,7 @@ import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
 import fr.free.nrw.commons.upload.worker.UploadWorker;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -107,6 +108,10 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private Place place;
     private List<UploadableFile> uploadableFiles = Collections.emptyList();
     private int currentSelectedPosition = 0;
+    /*
+     Checks for if multiple files selected
+     */
+    private boolean isMultipleFilesSelected = false;
 
     public static final String EXTRA_FILES = "commons_image_exta";
 
@@ -399,10 +404,18 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         Timber.d("Received intent %s with action %s", intent.toString(), intent.getAction());
 
         uploadableFiles = intent.getParcelableArrayListExtra(EXTRA_FILES);
+        isMultipleFilesSelected = uploadableFiles.size() > 1;
         Timber.i("Received multiple upload %s", uploadableFiles.size());
 
         place = intent.getParcelableExtra(PLACE_OBJECT);
         resetDirectPrefs();
+    }
+
+    /**
+     * Returns if multiple files selected or not.
+     */
+    public boolean getIsMultipleFilesSelected() {
+        return isMultipleFilesSelected;
     }
 
     public void resetDirectPrefs() {
@@ -502,4 +515,20 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             uploadCategoriesFragment.setCallback(null);
         }
     }
+
+    /**
+     * Overrides the back button to make sure the user is prepared to lose their progress
+     */
+    @Override
+    public void onBackPressed() {
+        DialogUtil.showAlertDialog(this,
+            getString(R.string.back_button_warning),
+            getString(R.string.back_button_warning_desc),
+            getString(R.string.back_button_continue),
+            getString(R.string.back_button_warning),
+            null,
+            this::finish
+        );
+    }
+
 }

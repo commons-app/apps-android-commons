@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class UploadItem {
-  
+
     private final Uri mediaUri;
     private final String mimeType;
     private ImageCoordinates gpsCoords;
@@ -26,24 +26,24 @@ public class UploadItem {
     private final Uri contentUri;
 
 
-  @SuppressLint("CheckResult")
-  UploadItem(final Uri mediaUri,
-      final String mimeType,
-      final ImageCoordinates gpsCoords,
-      final Place place,
-      final long createdTimestamp,
-      final String createdTimestampSource,
-      final Uri contentUri) {
-    this.createdTimestampSource = createdTimestampSource;
-    uploadMediaDetails = new ArrayList<>(Collections.singletonList(new UploadMediaDetail()));
-    this.place = place;
-    this.mediaUri = mediaUri;
-    this.mimeType = mimeType;
-    this.gpsCoords = gpsCoords;
-    this.createdTimestamp = createdTimestamp;
-    this.contentUri = contentUri;
-    imageQuality = BehaviorSubject.createDefault(ImageUtils.IMAGE_WAIT);
-  }
+    @SuppressLint("CheckResult")
+    UploadItem(final Uri mediaUri,
+        final String mimeType,
+        final ImageCoordinates gpsCoords,
+        final Place place,
+        final long createdTimestamp,
+        final String createdTimestampSource,
+        final Uri contentUri) {
+        this.createdTimestampSource = createdTimestampSource;
+        uploadMediaDetails = new ArrayList<>(Collections.singletonList(new UploadMediaDetail()));
+        this.place = place;
+        this.mediaUri = mediaUri;
+        this.mimeType = mimeType;
+        this.gpsCoords = gpsCoords;
+        this.createdTimestamp = createdTimestamp;
+        this.contentUri = contentUri;
+        imageQuality = BehaviorSubject.createDefault(ImageUtils.IMAGE_WAIT);
+    }
 
     public String getCreatedTimestampSource() {
         return createdTimestampSource;
@@ -69,11 +69,11 @@ public class UploadItem {
         return imageQuality.getValue();
     }
 
-  public Uri getContentUri() { return contentUri; }
+    public Uri getContentUri() { return contentUri; }
 
-  public void setImageQuality(final int imageQuality) {
-    this.imageQuality.onNext(imageQuality);
-  }
+    public void setImageQuality(final int imageQuality) {
+      this.imageQuality.onNext(imageQuality);
+    }
 
     /**
      * Sets the corresponding place to the uploadItem

@@ -123,8 +123,6 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                         eventListener.onPrimaryCaptionTextChange(value.length() != 0);
                     }
                 }));
-            captionItemEditText.setText(uploadMediaDetail.getCaptionText());
-            descItemEditText.setText(uploadMediaDetail.getDescriptionText());
 
             if (position == 0) {
                 removeButton.setVisibility(View.GONE);

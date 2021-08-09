@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.profile.achievements
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.os.Looper
 import android.view.MenuItem
 import android.widget.ImageView
@@ -84,9 +83,6 @@ class AchievementsFragmentUnitTests {
     private lateinit var imageUploadedText: TextView
 
     @Mock
-    private lateinit var bitmap: Bitmap
-
-    @Mock
     private lateinit var progressBar: ProgressBar
 
     @Before
@@ -142,14 +138,6 @@ class AchievementsFragmentUnitTests {
     fun checkFragmentNotNull() {
         Assert.assertNotNull(fragment)
     }
-
-    @Test
-    @Throws(Exception::class)
-    fun testShowAlert() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.showAlert(bitmap)
-    }
-
 
     @Test
     @Throws(Exception::class)
@@ -329,16 +317,4 @@ class AchievementsFragmentUnitTests {
         method.isAccessible = true
         method.invoke(fragment)
     }
-
-    @Test
-    @Throws(Exception::class)
-    fun testShareScreen() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
-            "shareScreen", Bitmap::class.java
-        )
-        method.isAccessible = true
-        method.invoke(fragment, bitmap)
-    }
-
 }

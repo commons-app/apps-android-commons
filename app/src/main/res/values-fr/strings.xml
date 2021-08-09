@@ -403,6 +403,9 @@
   <string name="no_categories_selected_warning_desc">Les images sans catégories sont rarement utilisables. Voulez-vous vraiment continuer sans sélectionner des catégories  appropriées ?</string>
   <string name="no_depictions_selected">Aucun élément représenté sélectionné</string>
   <string name="no_depictions_selected_warning_desc">Les images avec des éléments représentés sont plus faciles à trouver et plus susceptibles d’être utilisées. Voulez-vous vraiment continuer sans sélectionner des éléments représentés ?</string>
+  <string name="back_button_warning">Annuler le téléchargement</string>
+  <string name="back_button_warning_desc">L’utilisation du bouton de retour annulera ce téléchargement et vous perdrez votre progression</string>
+  <string name="back_button_continue">Continuer le téléchargement</string>
   <string name="upload_flow_all_images_in_set">(Pour toutes les images dans le jeu)</string>
   <string name="search_this_area">Chercher dans cette zone</string>
   <string name="nearby_card_permission_title">Demande d’autorisation</string>
