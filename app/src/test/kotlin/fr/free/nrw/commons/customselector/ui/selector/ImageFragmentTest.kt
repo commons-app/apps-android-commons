@@ -3,14 +3,17 @@ package fr.free.nrw.commons.customselector.ui.selector
 import android.content.Context
 import android.os.Bundle
 import android.os.Looper
+import android.os.Looper.getMainLooper
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ProgressBar
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
@@ -29,6 +32,7 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.wikipedia.AppAdapter
@@ -51,6 +55,9 @@ class ImageFragmentTest {
     private lateinit var viewModelField: Field
 
     @Mock
+    private lateinit var layoutManager: GridLayoutManager
+
+    @Mock
     private lateinit var image: Image
 
     @Mock
@@ -71,7 +78,7 @@ class ImageFragmentTest {
         Fresco.initialize(context)
         val activity = Robolectric.buildActivity(CustomSelectorActivity::class.java).create().get()
 
-        fragment = ImageFragment.newInstance(1)
+        fragment = ImageFragment.newInstance(1,0)
         val fragmentManager: FragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(fragment, null)
@@ -130,6 +137,30 @@ class ImageFragmentTest {
         val func = fragment.javaClass.getDeclaredMethod("getSpanCount")
         func.isAccessible = true
         assertEquals(3, func.invoke(fragment))
+    }
+
+
+    /**
+     * Test onResume.
+     */
+    @Test
+    fun testOnResume() {
+        val func = fragment.javaClass.getDeclaredMethod("onResume")
+        func.isAccessible = true
+        func.invoke(fragment)
+    }
+
+    /**
+     * Test onDestroy.
+     */
+    @Test
+    fun testOnDestroy() {
+        shadowOf(getMainLooper()).idle()
+        selectorRV.layoutManager = layoutManager
+        whenever(layoutManager.findFirstVisibleItemPosition()).thenReturn(1)
+        val func = fragment.javaClass.getDeclaredMethod("onDestroy")
+        func.isAccessible = true
+        func.invoke(fragment)
     }
 
 }

@@ -69,7 +69,7 @@ class   FolderAdapter(
             }
         } else {
             val previewImage = folder.images[0]
-            Glide.with(context).load(previewImage.uri).into(holder.image)
+            Glide.with(holder.image).load(previewImage.uri).into(holder.image)
             holder.name.text = folder.name
             holder.count.text = count.toString()
             holder.itemView.setOnClickListener {

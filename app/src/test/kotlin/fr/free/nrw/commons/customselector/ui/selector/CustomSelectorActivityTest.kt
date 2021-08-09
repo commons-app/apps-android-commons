@@ -2,7 +2,11 @@ package fr.free.nrw.commons.customselector.ui.selector
 
 import android.net.Uri
 import android.os.Bundle
+import android.os.Looper
+import android.os.Looper.getMainLooper
+import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.customselector.model.Folder
 import fr.free.nrw.commons.customselector.model.Image
 import org.junit.Before
@@ -12,7 +16,11 @@ import org.junit.runner.RunWith
 import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
+import org.wikipedia.AppAdapter
+import java.lang.reflect.Method
 
 /**
  * Custom Selector Activity Test
@@ -29,6 +37,8 @@ class CustomSelectorActivityTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
+        AppAdapter.set(TestAppAdapter())
+
         activity = Robolectric.buildActivity(CustomSelectorActivity::class.java)
             .get()
         val onCreate = activity.javaClass.getDeclaredMethod("onCreate", Bundle::class.java)
@@ -62,7 +72,7 @@ class CustomSelectorActivityTest {
     @Test
     @Throws(Exception::class)
     fun testOnFolderClick() {
-        activity.onFolderClick(Folder(1, "test", arrayListOf()));
+        activity.onFolderClick(1, "test", 0);
     }
 
     /**
@@ -92,5 +102,18 @@ class CustomSelectorActivityTest {
     @Throws(Exception::class)
     fun testOnBackPressed() {
         activity.onBackPressed()
+    }
+
+    /**
+     * Test onDestroy Function.
+     */
+    @Test
+    @Throws(Exception::class)
+    fun testOnDestroy() {
+        val method: Method = CustomSelectorActivity::class.java.getDeclaredMethod(
+            "onDestroy"
+        )
+        method.isAccessible = true
+        method.invoke(activity)
     }
 }

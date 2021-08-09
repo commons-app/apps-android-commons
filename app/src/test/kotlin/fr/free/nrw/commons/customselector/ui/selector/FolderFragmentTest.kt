@@ -127,4 +127,15 @@ class FolderFragmentTest {
         func.isAccessible = true
         func.invoke(fragment, Result(CallbackStatus.SUCCESS, arrayListOf()))
     }
+
+    /**
+     * Test onResume.
+     */
+    @Test
+    fun testOnResume() {
+        val func = fragment.javaClass.getDeclaredMethod("onResume")
+        func.isAccessible = true
+        func.invoke(fragment)
+    }
+
 }
