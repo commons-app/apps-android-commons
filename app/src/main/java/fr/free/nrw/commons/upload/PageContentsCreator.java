@@ -36,7 +36,9 @@ class PageContentsCreator {
         buffer
             .append("== {{int:filedesc}} ==\n")
             .append("{{Information\n")
-            .append("|description=").append(media.getFallbackDescription()).append("\n")
+            .append("|description=").append(media.getFallbackDescription())
+            .append("{{ on Wikidata|").append(contribution.getWikidataPlace().getId()).append("}}")
+            .append("\n")
             .append("|source=").append("{{own}}\n")
             .append("|author=[[User:").append(media.getAuthor()).append("|")
             .append(media.getAuthor()).append("]]\n");
