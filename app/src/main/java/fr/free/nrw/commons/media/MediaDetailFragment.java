@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -1053,6 +1054,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             Intent intent = new Intent(getContext(), WikidataItemDetailsActivity.class);
             intent.putExtra("wikidataItemName", depictionName);
             intent.putExtra("entityId", entityId);
+            Log.d("abcde", "name "+ depictionName);
             getContext().startActivity(intent);
         });
         return item;

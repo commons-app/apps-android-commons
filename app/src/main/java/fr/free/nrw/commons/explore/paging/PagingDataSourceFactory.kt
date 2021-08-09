@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.explore.paging
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.paging.Config
 import androidx.paging.DataSource
@@ -35,6 +36,7 @@ abstract class PageableBaseDataSource<T>(private val liveDataConverter: LiveData
 
     fun onQueryUpdated(query: String) {
         this.query = query
+        Log.d("abcde", "hrwee3")
         _pagingResults.offer(
             liveDataConverter.convert(dataSourceFactoryFactory().also { currentFactory = it }) {
                 _noItemsLoadedEvent.offer(query)
