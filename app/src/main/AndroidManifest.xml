@@ -110,8 +110,11 @@
         <activity android:name=".quiz.QuizResultActivity"
             android:label="@string/result"/>
 
-        <activity android:name=".customselector.ui.selector.CustomSelectorActivity"
-          android:label="CustomSelector"/>
+        <activity
+            android:name=".customselector.ui.selector.CustomSelectorActivity"
+            android:label="@string/title_activity_custom_selector"
+            android:configChanges="screenSize|keyboard|orientation"
+            android:parentActivityName=".contributions.MainActivity" />
 
         <activity
             android:name=".category.CategoryDetailsActivity"
