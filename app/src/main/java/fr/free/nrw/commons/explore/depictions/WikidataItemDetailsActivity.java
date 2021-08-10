@@ -239,10 +239,10 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         menuInflater.inflate(R.menu.menu_wikidata_item,menu);
 
         if(getIntent().getStringExtra("fragment") != null) {
-            MenuItem item = menu.findItem(R.id.menu_bookmark_current_image);
+            MenuItem item = menu.findItem(R.id.menu_bookmark_current_item);
             item.setVisible(false);
         } else {
-            updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
+            updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_item));
         }
         return super.onCreateOptionsMenu(menu);
     }
@@ -260,7 +260,7 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
                 Uri uri = Uri.parse("https://www.wikidata.org/wiki/" + entityId);
                 Utils.handleWebUrl(this, uri);
                 return true;
-            case R.id.menu_bookmark_current_image:
+            case R.id.menu_bookmark_current_item:
                 final boolean bookmarkExists = bookmarkItemsDao.updateBookmarkItem(wikidataItem);
                 final Snackbar snackbar
                     = bookmarkExists ? Snackbar.make(findViewById(R.id.toolbar_layout),
