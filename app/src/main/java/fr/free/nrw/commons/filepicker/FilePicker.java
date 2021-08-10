@@ -53,6 +53,12 @@ public class FilePicker implements Constants {
                 .putExtra(Intent.EXTRA_ALLOW_MULTIPLE, configuration(context).allowsMultiplePickingInGallery());
     }
 
+    /**
+     * CreateCustomSectorIntent, creates intent for custom selector activity.
+     * @param context
+     * @param type
+     * @return Custom selector intent
+     */
     private static Intent createCustomSelectorIntent(@NonNull Context context, int type) {
         storeType(context, type);
         return new Intent(context, CustomSelectorActivity.class);
@@ -215,6 +221,10 @@ public class FilePicker implements Constants {
         }
     }
 
+    /**
+     * onPictureReturnedFromCustomSelector.
+     * Retrieve and forward the images to upload wizard through callback.
+     */
     private static void onPictureReturnedFromCustomSelector(Intent data, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
         try {
             List<UploadableFile> files = getFilesFromCustomSelector(data, activity);
@@ -225,6 +235,10 @@ public class FilePicker implements Constants {
         }
     }
 
+    /**
+     * Get files from custom selector
+     * Retrieve and process the selected images from the custom selector.
+     */
     private static List<UploadableFile> getFilesFromCustomSelector(Intent data, Activity activity) throws  IOException, SecurityException {
         List<UploadableFile> files = new ArrayList<>();
         ArrayList<Image> images = data.getParcelableArrayListExtra("Images");

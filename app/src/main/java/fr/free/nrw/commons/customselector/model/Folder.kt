@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.customselector.model
 
+/**
+ * Custom selector data class Folder.
+ */
 data class Folder(
     /**
     bucketId : Unique directory id, eg 540528482

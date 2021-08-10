@@ -68,6 +68,11 @@ public class CommonsApplicationModule {
         this.applicationContext = applicationContext;
     }
 
+    /**
+     * Provides ImageFileLoader used to fetch device images.
+     * @param context
+     * @return
+     */
     @Provides
     public ImageFileLoader providesImageFileLoader(Context context) {
         return new ImageFileLoader(context);

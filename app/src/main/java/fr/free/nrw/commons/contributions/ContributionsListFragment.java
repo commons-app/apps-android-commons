@@ -265,6 +265,9 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         });
     }
 
+    /**
+     * Launch Custom Selector.
+     */
     @OnClick(R.id.fab_custom_gallery)
     void launchCustomSelector(){
         controller.initiateCustomGalleryPickWithPermission(getActivity());
