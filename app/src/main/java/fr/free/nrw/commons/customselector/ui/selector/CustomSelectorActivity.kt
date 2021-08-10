@@ -16,6 +16,9 @@ import fr.free.nrw.commons.theme.BaseActivity
 import java.io.File
 import javax.inject.Inject
 
+/**
+ * Custom Selector Activity.
+ */
 class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectListener {
 
     /**

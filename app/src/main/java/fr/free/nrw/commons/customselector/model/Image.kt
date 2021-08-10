@@ -4,6 +4,9 @@ import android.net.Uri
 import android.os.Parcel
 import android.os.Parcelable
 
+/**
+ * Custom selector data class Image.
+ */
 data class Image(
     /**
     id : Unique image id, primary key of image in device, eg 104950

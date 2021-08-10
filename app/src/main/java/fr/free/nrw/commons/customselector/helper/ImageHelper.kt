@@ -6,7 +6,6 @@ import fr.free.nrw.commons.customselector.model.Image
 /**
  * Image Helper object, includes all the static functions required by custom selector.
  */
-
 object ImageHelper {
 
     /**
@@ -65,10 +64,7 @@ object ImageHelper {
      */
     fun getIndexList(list: ArrayList<Image>, masterList: ArrayList<Image>): ArrayList<Int> {
 
-        /**
-         * TODO
-         * Can be optimised as masterList is sorted by time.
-         */
+         // Can be optimised as masterList is sorted by time.
 
         val indexes = arrayListOf<Int>()
         for(image in list) {

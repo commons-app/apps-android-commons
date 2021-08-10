@@ -13,7 +13,10 @@ import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.model.Folder
 import fr.free.nrw.commons.customselector.model.Image
 
-class   FolderAdapter(
+/**
+ * Custom selector FolderAdapter.
+ */
+class FolderAdapter(
     /**
      * Application context.
      */
@@ -90,7 +93,6 @@ class   FolderAdapter(
         folders = newFolderList
         diffResult.dispatchUpdatesTo(this)
     }
-
 
     /**
      * returns item count.

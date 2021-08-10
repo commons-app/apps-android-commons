@@ -22,6 +22,9 @@ import fr.free.nrw.commons.upload.FileProcessor
 import kotlinx.android.synthetic.main.fragment_custom_selector.view.*
 import javax.inject.Inject
 
+/**
+ * Custom selector folder fragment.
+ */
 class FolderFragment : CommonsDaggerSupportFragment() {
 
     /**
