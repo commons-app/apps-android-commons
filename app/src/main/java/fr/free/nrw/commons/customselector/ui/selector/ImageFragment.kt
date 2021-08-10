@@ -48,6 +48,7 @@ class ImageFragment: CommonsDaggerSupportFragment() {
      */
     private var selectorRV: RecyclerView? = null
     private var loader: ProgressBar? = null
+    lateinit var filteredImages: ArrayList<Image>;
 
     /**
      * View model Factory.
@@ -129,8 +130,6 @@ class ImageFragment: CommonsDaggerSupportFragment() {
 
         return root
     }
-
-    lateinit var filteredImages: ArrayList<Image>;
 
     /**
      * Handle view model result.
