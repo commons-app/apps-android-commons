@@ -85,7 +85,7 @@ class ImageAdapter(
             } else {
                 holder.itemUnselected();
             }
-            Glide.with(context).load(image.uri).thumbnail(0.3f).into(holder.image)
+            Glide.with(holder.image).load(image.uri).thumbnail(0.3f).into(holder.image)
             imageLoader.queryAndSetView(holder, image)
             holder.itemView.setOnClickListener {
                 selectOrRemoveImage(holder, position)

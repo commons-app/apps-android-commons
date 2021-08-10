@@ -1,11 +1,14 @@
 package fr.free.nrw.commons.customselector.ui.adapter
 
+import android.content.ContentResolver
 import fr.free.nrw.commons.R
 import android.content.Context
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.GridLayout
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.model.Folder
@@ -15,7 +18,10 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.runner.RunWith
+import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.MockitoAnnotations
+import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
@@ -34,13 +40,21 @@ class FolderAdapterTest {
     private lateinit var folder: Folder
     private lateinit var folderList: ArrayList<Folder>
 
+    @Mock
+    private lateinit var context: Context
+
+    @Mock
+    private lateinit var mockContentResolver: ContentResolver
+
     @Before
     @Throws(Exception::class)
     fun setUp() {
+        MockitoAnnotations.initMocks(this)
+
         activity = Robolectric.buildActivity(CustomSelectorActivity::class.java).get()
         image = Image(1, "image", uri, "abc/abc", 1, "bucket1")
         folder = Folder(1, "bucket1", ArrayList(listOf(image)))
-        folderList = ArrayList(listOf(folder))
+        folderList = ArrayList(listOf(folder, folder, folder))
         folderAdapter = FolderAdapter(activity, activity as FolderClickListener)
     }
 
@@ -57,9 +71,13 @@ class FolderAdapterTest {
      */
     @Test
     fun onBindViewHolder() {
-        folderAdapter.init(folderList)
         val inflater = activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val listItemView: View = inflater.inflate(R.layout.item_custom_selector_folder, null, false)
+
+        whenever(context.contentResolver).thenReturn(mockContentResolver)
+        whenever(mockContentResolver.getType(any())).thenReturn("jpg")
+        Whitebox.setInternalState(folderAdapter, "context", context)
+        folderAdapter.init(folderList)
         folderAdapter.onBindViewHolder(FolderAdapter.FolderViewHolder(listItemView), 0)
     }
 
