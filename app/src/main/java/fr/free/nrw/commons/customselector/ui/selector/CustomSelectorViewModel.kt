@@ -11,6 +11,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 
+/**
+ * Custom Selector view model.
+ */
 class CustomSelectorViewModel(var context: Context,var imageFileLoader: ImageFileLoader) : ViewModel() {
 
     /**

@@ -16,6 +16,9 @@ import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
 
+/**
+ * Custom selector ImageAdapter.
+ */
 class ImageAdapter(
     /**
      * Application Context.

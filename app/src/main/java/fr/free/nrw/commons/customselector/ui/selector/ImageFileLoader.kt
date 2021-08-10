@@ -9,6 +9,10 @@ import kotlinx.coroutines.*
 import java.io.File
 import kotlin.coroutines.CoroutineContext
 
+/**
+ * Custom Selector Image File Loader.
+ * Loads device images.
+ */
 class ImageFileLoader(val context: Context) : CoroutineScope{
 
     /**
@@ -39,7 +43,7 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
 
 
     /**
-     * Load the device images using cursor
+     * Load Device images using cursor
      */
     private fun getImages(listener:ImageLoaderListener) {
         val cursor = context.contentResolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null, null, MediaStore.Images.Media.DATE_ADDED + " DESC")
@@ -99,7 +103,7 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
         //todo Abort loading images.
     }
 
-    /**
+    /*
      *
      * TODO
      * Sha1 for image (original image).

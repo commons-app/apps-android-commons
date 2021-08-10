@@ -69,6 +69,11 @@ public class UploadItem {
         return imageQuality.getValue();
     }
 
+    /**
+     * getContentUri.
+     * @return Uri of uploadItem
+     * Uri points to image location or name, eg content://media/external/images/camera/10495 (Android 10)
+     */
     public Uri getContentUri() { return contentUri; }
 
     public void setImageQuality(final int imageQuality) {
