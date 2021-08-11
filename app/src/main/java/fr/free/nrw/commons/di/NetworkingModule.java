@@ -223,7 +223,7 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public MediaInterface provideMediaInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, MediaInterface.class);
+        return ServiceFactory.get(commonsWikiSite, Service.COMMONS_URL, MediaInterface.class);
     }
 
     @Provides
