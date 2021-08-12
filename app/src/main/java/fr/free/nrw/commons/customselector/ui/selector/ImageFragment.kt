@@ -26,6 +26,9 @@ import java.io.FileInputStream
 import java.net.URI
 import javax.inject.Inject
 
+/**
+ * Custom Selector Image Fragment.
+ */
 class ImageFragment: CommonsDaggerSupportFragment() {
 
     /**
@@ -169,6 +172,10 @@ class ImageFragment: CommonsDaggerSupportFragment() {
         // todo change span count depending on the device orientation and other factos.
     }
 
+    /**
+     * onResume
+     * notifyDataSetChanged, rebuild the holder views to account for deleted images.
+     */
     override fun onResume() {
         imageAdapter.notifyDataSetChanged()
         super.onResume()
