@@ -68,7 +68,6 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
         if(prefs.getBoolean("customSelectorFirstLaunch", true)) {
             // show welcome dialog on first launch
             showWelcomeDialog()
-        } else {
             prefs.edit().putBoolean("customSelectorFirstLaunch", false).apply()
         }
 
