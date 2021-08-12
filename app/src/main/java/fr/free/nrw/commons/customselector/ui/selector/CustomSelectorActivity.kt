@@ -1,10 +1,13 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import android.view.Window
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +18,7 @@ import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.theme.BaseActivity
 import java.io.File
 import javax.inject.Inject
+
 
 /**
  * Custom Selector Activity.
@@ -55,9 +59,18 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
         setContentView(R.layout.activity_custom_selector)
 
         prefs =  applicationContext.getSharedPreferences("CustomSelector", MODE_PRIVATE)
-        viewModel = ViewModelProvider(this, customSelectorViewModelFactory).get(CustomSelectorViewModel::class.java)
+        viewModel = ViewModelProvider(this, customSelectorViewModelFactory).get(
+            CustomSelectorViewModel::class.java
+        )
 
         setupViews()
+
+        if(prefs.getBoolean("customSelectorFirstLaunch", true)) {
+            // show welcome dialog on first launch
+            showWelcomeDialog()
+        } else {
+            prefs.edit().putBoolean("customSelectorFirstLaunch", false).apply()
+        }
 
         // Open folder if saved in prefs.
         if(prefs.contains(FOLDER_ID)){
@@ -66,6 +79,18 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
             val lastItemId: Long = prefs.getLong(ITEM_ID, 0)
             lastOpenFolderName?.let { onFolderClick(lastOpenFolderId, it, lastItemId) }
         }
+    }
+
+    /**
+     * Show Custom Selector Welcome Dialog.
+     */
+    private fun showWelcomeDialog() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.custom_selector_info_dialog)
+        (dialog.findViewById(R.id.btn_ok) as Button).setOnClickListener { dialog.dismiss() }
+        dialog.show()
     }
 
     /**

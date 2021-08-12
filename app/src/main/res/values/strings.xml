@@ -643,5 +643,10 @@ Upload your first media by tapping on the add button.</string>
   <string name="custom_selector_empty_text">No Images</string>
   <string name="done">Done</string>
   <string name="back">Back</string>
+  <string name="welcome_custom_picture_selector_text">Welcome to Custom Picture Selector</string>
+  <string name="custom_selector_info_text1">This picker shows differently pictures that are already to Commons.</string>
+  <string name="custom_selector_info_text2">Unlike the picture on the left, the picture on the right has commons logo indicating it is already uploaded.</string>
+  <string name="welcome_custom_selector_ok">Awesome</string>
+  <string name="custom_selector_already_uploaded_image_text">This image has already been uploaded to Commons.</string>
 
 </resources>
