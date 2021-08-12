@@ -8,25 +8,40 @@
     <item quantity="one">%1$d n ufaylu yezga yettali</item>
     <item quantity="other">%1$d n ifuyla zgan ttalin</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <string name="starting_uploads">Beddu n walluy</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%d n usali iteddu</item>
+    <item quantity="other">%d n usali iteddu</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d n usali</item>
     <item quantity="other">%1$d n usali</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Beddu n %1$d n usali</item>
-    <item quantity="other">Beddu n %1$d n usali</item>
+  <plurals name="share_license_summary">
+    <item quantity="one">Tugna-a ad  tili s turagt %1$s.</item>
+    <item quantity="other">Tugniwin-a ad ilint s turagt %1$s.</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="upload_count_title">
     <item quantity="one">%1$d n usali</item>
     <item quantity="other">%1$d n usali</item>
   </plurals>
-  <string name="share_license_summary" fuzzy="true">Tugna-agi ad tili daw n turagt %1$s</string>
+  <string name="navigation_item_explore">Snirem</string>
+  <string name="preference_category_appearance">Tummant</string>
+  <string name="preference_category_general">Amatu</string>
+  <string name="preference_category_feedback">Tikti</string>
+  <string name="preference_category_privacy">Tabaḍnit</string>
   <string name="app_name">Ayen yettwasnen</string>
   <string name="menu_settings">Iɣewwaren</string>
+  <string name="intent_share_upload_label">Sali ɣer Commons</string>
   <string name="username">Isem n useqdac</string>
   <string name="password">Awal uffir</string>
+  <string name="login_credential">Qqen ɣer umiḍan-ik Commons Beta</string>
   <string name="login">Qqen</string>
+  <string name="forgot_password">Tettuḍ awal uffir?</string>
   <string name="signup">Jerred</string>
   <string name="logging_in_title">Tuqqna...</string>
   <string name="logging_in_message">Rǧu...</string>
