@@ -123,6 +123,10 @@ class FolderFragment : CommonsDaggerSupportFragment() {
         }
     }
 
+    /**
+     * onResume
+     * notifyDataSetChanged, rebuild the holder views to account for deleted images, folders.
+     */
     override fun onResume() {
         folderAdapter.notifyDataSetChanged()
         super.onResume()

@@ -266,7 +266,14 @@ class ImageLoader @Inject constructor(
         object ERROR : Result()
     }
 
+    /**
+     * Companion Object
+     */
     companion object {
+        /**
+         * Invalidate Day count.
+         * False Database Entries are invalid after INVALIDATE_DAY_COUNT and need to be re-queried.
+         */
         const val INVALIDATE_DAY_COUNT: Long = 7
     }
 

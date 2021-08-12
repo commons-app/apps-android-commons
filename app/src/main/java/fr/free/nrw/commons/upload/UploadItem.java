@@ -23,6 +23,11 @@ public class UploadItem {
     private final String createdTimestampSource;
     private final BehaviorSubject<Integer> imageQuality;
     private boolean hasInvalidLocation;
+
+    /**
+     * Uri of uploadItem
+     * Uri points to image location or name, eg content://media/external/images/camera/10495 (Android 10)
+     */
     private final Uri contentUri;
 
 
