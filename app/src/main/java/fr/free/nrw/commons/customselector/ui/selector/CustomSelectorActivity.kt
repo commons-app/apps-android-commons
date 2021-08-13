@@ -86,7 +86,6 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     private fun showWelcomeDialog() {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
         dialog.setContentView(R.layout.custom_selector_info_dialog)
         (dialog.findViewById(R.id.btn_ok) as Button).setOnClickListener { dialog.dismiss() }
         dialog.show()
