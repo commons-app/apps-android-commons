@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -99,7 +98,6 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         List<Fragment> fragmentList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
         depictionImagesListFragment = new DepictedImagesFragment();
-        Log.d("abcde", "here1");
         ChildDepictionsFragment childDepictionsFragment = new ChildDepictionsFragment();
         ParentDepictionsFragment parentDepictionsFragment = new ParentDepictionsFragment();
         wikidataItemName = getIntent().getStringExtra("wikidataItemName");
@@ -109,7 +107,6 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
             arguments.putString("wikidataItemName", wikidataItemName);
             arguments.putString("entityId", entityId);
             depictionImagesListFragment.setArguments(arguments);
-            Log.d("abcde", "here2");
             parentDepictionsFragment.setArguments(arguments);
             childDepictionsFragment.setArguments(arguments);
         }

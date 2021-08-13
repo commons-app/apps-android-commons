@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.media
 
-import android.util.Log
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.category.ContinuationClient
@@ -99,10 +98,6 @@ class MediaClient @Inject constructor(
         srlimit: Int,
         sroffset: Int
     ): Single<List<Media>> {
-        Log.d("abcde", "here4 "+query+" "+srlimit+" "+sroffset)
-        if(BuildConfig.FLAVOR == "prod"){
-            Log.d("abcde", "true")
-        }
         return responseMapper(
             mediaInterface.fetchImagesForDepictedItem(
                 "haswbstatement:" + "P180" + "=" + query,
