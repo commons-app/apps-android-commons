@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.google.gson.Gson;
 import dagger.Module;
 import dagger.Provides;
+import fr.free.nrw.commons.BetaConstants;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.actions.PageEditInterface;
@@ -223,7 +224,7 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public MediaInterface provideMediaInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return ServiceFactory.get(commonsWikiSite, Service.COMMONS_URL, MediaInterface.class);
+        return ServiceFactory.get(commonsWikiSite, BetaConstants.COMMONS_URL, MediaInterface.class);
     }
 
     @Provides

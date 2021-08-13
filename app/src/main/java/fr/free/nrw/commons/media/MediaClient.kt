@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.media
 
+import fr.free.nrw.commons.BetaConstants
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.category.ContinuationClient
@@ -100,7 +101,7 @@ class MediaClient @Inject constructor(
     ): Single<List<Media>> {
         return responseMapper(
             mediaInterface.fetchImagesForDepictedItem(
-                "haswbstatement:" + "P180" + "=" + query,
+                "haswbstatement:" + BetaConstants.DEPICTS_PROPERTY + "=" + query,
                 srlimit.toString(),
                 sroffset.toString()
             )
