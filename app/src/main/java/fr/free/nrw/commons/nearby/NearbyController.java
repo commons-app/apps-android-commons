@@ -129,8 +129,8 @@ public class NearbyController {
     }
 
     public Observable<List<Place>> queryWikiDataForMonuments(
-        LatLng latLng, String language)
-        throws IOException {
+        final LatLng latLng, final String language)
+        throws Exception {
         return nearbyPlaces.queryWikiDataForMonuments(latLng, language);
     }
 

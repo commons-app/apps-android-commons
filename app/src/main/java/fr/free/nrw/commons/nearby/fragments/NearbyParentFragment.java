@@ -889,7 +889,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 observableWikidataMonuments =
                     nearbyController
                         .queryWikiDataForMonuments(searchLatLng, Locale.getDefault().getLanguage());
-            } catch (IOException e) {
+            } catch (Exception e) {
                 Timber.e("Error fetching monuments: %s", e.getMessage());
             }
         }
@@ -928,8 +928,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             try {
                 observableWikidataMonuments = nearbyController
                     .queryWikiDataForMonuments(searchLatLng, Locale.getDefault().getLanguage());
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (final Exception e) {
+                Timber.e("Exception fetching monuments: %s", e.getMessage());
             }
         }
 
@@ -947,7 +947,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     lastFocusLocation=searchLatLng;
                 },
                 throwable -> {
-                    Timber.d(throwable);
+                    Timber.e(throwable);
                     showErrorMessage(getString(R.string.error_fetching_nearby_places)+throwable.getLocalizedMessage());
                     setProgressBarVisibility(false);
                     presenter.lockUnlockNearby(false);
