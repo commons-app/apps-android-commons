@@ -110,7 +110,7 @@ class ImageAdapter(
             }
         } else {
             if(holder.isItemUploaded()){
-                Toast.makeText(context, "Already Uploaded image", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
             } else {
                 selectedImages.add(images[position])
                 notifyItemChanged(position, ImageSelectedOrUpdated())
