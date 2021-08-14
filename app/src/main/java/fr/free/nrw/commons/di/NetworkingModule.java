@@ -236,8 +236,10 @@ public class NetworkingModule {
      */
     @Provides
     @Singleton
-    public WikidataMediaInterface provideWikidataMediaInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return ServiceFactory.get(commonsWikiSite, BetaConstants.COMMONS_URL, WikidataMediaInterface.class);
+    public WikidataMediaInterface provideWikidataMediaInterface(
+        @Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite,
+            BetaConstants.COMMONS_URL, WikidataMediaInterface.class);
     }
 
     @Provides

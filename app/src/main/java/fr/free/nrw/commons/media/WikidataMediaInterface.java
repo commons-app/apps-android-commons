@@ -16,7 +16,8 @@ public interface WikidataMediaInterface {
      * Fetches list of images from a depiction entity
      * @param query depictionEntityId
      * @param srlimit the number of items to fetch
-     * @param sroffset number od depictions already fetched, this is useful in implementing pagination
+     * @param sroffset number od depictions already fetched,
+     *                this is useful in implementing pagination
      * @return Single<MwQueryResponse>
      */
     @GET("w/api.php?action=query&format=json&formatversion=2" + //Basic parameters
