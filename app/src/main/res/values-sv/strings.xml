@@ -381,6 +381,9 @@
   <string name="no_categories_selected_warning_desc">Bilder utan kategorier används sällan. Är du säker på att du vill fortsätta utan att välja kategorier?</string>
   <string name="no_depictions_selected">Inga beskrivningar har valts</string>
   <string name="no_depictions_selected_warning_desc">Bilder med beskrivningar kan hittas lättare och kommer mer sannolikt användas. Är du säker på att du vill fortsätta utan att välja beskrivningar?</string>
+  <string name="back_button_warning">Avbryt uppladdning</string>
+  <string name="back_button_warning_desc">Bakåtknappen avbryter denna uppladdning och du förlorar dina framsteg</string>
+  <string name="back_button_continue">Fortsätt uppladdning</string>
   <string name="upload_flow_all_images_in_set">(För alla bilder i uppsättningen)</string>
   <string name="search_this_area">Sök i detta område</string>
   <string name="nearby_card_permission_title">Begäran om behörighet</string>

@@ -374,6 +374,9 @@
   <string name="no_categories_selected_warning_desc">Le plance sensa categorìa, a so da ràir dovràbij. É-lo sigur ëd vorèj continué sensa serne dle categorìe?</string>
   <string name="no_depictions_selected">Gnun-e descrission selessionà</string>
   <string name="no_depictions_selected_warning_desc">Le plance con dle descrission a l\'é pi bel fé troveje e a l\'é pi probàbil ch\'as deuvro. É-lo sigur ëd vorèj continué sensa selessioné dla descrission?</string>
+  <string name="back_button_warning">Anulé ël cariament</string>
+  <string name="back_button_warning_desc">An sgnacand an sël boton andré, ës cariament a sarà anulà e chiel a perdrà ij sò progress</string>
+  <string name="back_button_continue">Andé anans a carié</string>
   <string name="upload_flow_all_images_in_set">(Për tute le plance dl\'ansem)</string>
   <string name="search_this_area">Arserché an costa zòna</string>
   <string name="nearby_card_permission_title">Arcesta d\'autorisassion</string>

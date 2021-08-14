@@ -407,6 +407,8 @@
   <string name="no_categories_selected_warning_desc">没有类别的图像很少可用。确实要继续而不选择类别吗？</string>
   <string name="no_depictions_selected">没有选择描写</string>
   <string name="no_depictions_selected_warning_desc">带有描述的图像更容易被发现并且更可能被使用。您确定不选择描述继续吗？</string>
+  <string name="back_button_warning">取消上传</string>
+  <string name="back_button_continue">继续上传</string>
   <string name="upload_flow_all_images_in_set">（对于设置中的所有图像）</string>
   <string name="search_this_area">搜索这个区域</string>
   <string name="nearby_card_permission_title">需要许可</string>

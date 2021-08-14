@@ -406,6 +406,9 @@
   <string name="no_categories_selected_warning_desc">תמונות ללא קטגוריות בדרך כלל אינן שימושיות. להמשיך ללא בחירת קטגוריות?</string>
   <string name="no_depictions_selected">לא נבחרו מוצגים</string>
   <string name="no_depictions_selected_warning_desc">קל יותר למצוא תמונות עם מוצגים ויש סיכוי גבוה יותר שמישהו ישתמש בהן. האם ברצונך באמת להמשיך בלי לבחור מוצגים?</string>
+  <string name="back_button_warning">ביטול ההעלאה</string>
+  <string name="back_button_warning_desc">שימוש בכתפור החזרה יבטל את ההעלאה הזאת וההתקדמות שלך תלך לאיבוד</string>
+  <string name="back_button_continue">נמשך ההעלאה</string>
   <string name="upload_flow_all_images_in_set">(לכל התמונות בסדרה)</string>
   <string name="search_this_area">חיפוש באזור הזה</string>
   <string name="nearby_card_permission_title">בקשת הרשאה</string>
