@@ -313,6 +313,7 @@ public class OkHttpJsonApiClient {
    */
   public Observable<List<Place>> getNearbyMonuments(LatLng cur, String language, final double radius)
       throws IOException {
+      Timber.e("Fetching monuments at radius %s", radius);
     final String wikidataQuery = FileUtils.readFromResource("/queries/monuments_query.rq");
     if (TextUtils.isEmpty(language)) {
         language="en";

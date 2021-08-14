@@ -890,7 +890,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     nearbyController
                         .queryWikiDataForMonuments(searchLatLng, Locale.getDefault().getLanguage());
             } catch (IOException e) {
-                e.printStackTrace();
+                Timber.e("Error fetching monuments: %s", e.getMessage());
             }
         }
 
