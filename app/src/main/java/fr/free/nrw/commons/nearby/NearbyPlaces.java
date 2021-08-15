@@ -97,8 +97,7 @@ public class NearbyPlaces {
     }
 
     public Observable<List<Place>> queryWikiDataForMonuments(
-        LatLng latLng, String language)
-        throws Exception {
+        LatLng latLng, String language) {
         return okHttpJsonApiClient
             .getNearbyMonuments(latLng, language, radius);
     }

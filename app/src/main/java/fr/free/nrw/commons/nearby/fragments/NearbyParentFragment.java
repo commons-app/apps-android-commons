@@ -114,6 +114,7 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -124,6 +125,7 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 import kotlin.Unit;
+import org.jetbrains.annotations.NotNull;
 import timber.log.Timber;
 
 
@@ -885,18 +887,20 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         Observable<List<Place>> observableWikidataMonuments = Observable.empty();
         if(Utils.isMonumentsEnabled(new Date(), applicationKvStore)){
-            try {
                 observableWikidataMonuments =
                     nearbyController
                         .queryWikiDataForMonuments(searchLatLng, Locale.getDefault().getLanguage());
-            } catch (Exception e) {
-                Timber.e("Error fetching monuments: %s", e.getMessage());
-            }
+
         }
 
-        compositeDisposable.add(Observable.zip(nearbyPlacesInfoObservable, observableWikidataMonuments,
+        compositeDisposable.add(Observable.zip(nearbyPlacesInfoObservable
+            , observableWikidataMonuments.onErrorReturn(throwable -> {
+                showErrorMessage(getString(R.string.error_fetching_nearby_monuments) + throwable
+                    .getLocalizedMessage());
+                return new ArrayList<>();
+            }),
             (nearbyPlacesInfo, monuments) -> {
-                List<Place> places = mergeNearbyPlacesAndMonuments(nearbyPlacesInfo.placeList,
+                final List<Place> places = mergeNearbyPlacesAndMonuments(nearbyPlacesInfo.placeList,
                     monuments);
                 nearbyPlacesInfo.placeList.clear();
                 nearbyPlacesInfo.placeList.addAll(places);
@@ -924,18 +928,20 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .loadAttractionsFromLocation(curlatLng, searchLatLng, false, false));
 
         Observable<List<Place>> observableWikidataMonuments = Observable.empty();
-        if(Utils.isMonumentsEnabled(new Date(), applicationKvStore)){
-            try {
-                observableWikidataMonuments = nearbyController
-                    .queryWikiDataForMonuments(searchLatLng, Locale.getDefault().getLanguage());
-            } catch (final Exception e) {
-                Timber.e("Exception fetching monuments: %s", e.getMessage());
-            }
+        if (Utils.isMonumentsEnabled(new Date(), applicationKvStore)) {
+            observableWikidataMonuments = nearbyController
+                .queryWikiDataForMonuments(searchLatLng, Locale.getDefault().getLanguage());
+
         }
 
-        compositeDisposable.add(Observable.zip(nearbyPlacesInfoObservable, observableWikidataMonuments,
+        compositeDisposable.add(Observable.zip(nearbyPlacesInfoObservable
+            , observableWikidataMonuments.onErrorReturn(throwable -> {
+                showErrorMessage(getString(R.string.error_fetching_nearby_monuments) + throwable
+                    .getLocalizedMessage());
+                return new ArrayList<>();
+            }),
             (nearbyPlacesInfo, monuments) -> {
-                List<Place> places = mergeNearbyPlacesAndMonuments(nearbyPlacesInfo.placeList,
+                final List<Place> places = mergeNearbyPlacesAndMonuments(nearbyPlacesInfo.placeList,
                     monuments);
                 nearbyPlacesInfo.placeList.clear();
                 nearbyPlacesInfo.placeList.addAll(places);

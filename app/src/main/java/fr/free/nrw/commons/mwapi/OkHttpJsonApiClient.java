@@ -267,7 +267,7 @@ public class OkHttpJsonApiClient {
     public Observable<List<Place>> getNearbyPlaces(LatLng cur, String language, double radius)
         throws Exception {
 
-        Timber.e("Fetching nearby items at radius %s", radius);
+        Timber.d("Fetching nearby items at radius %s", radius);
         String wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
         String query = wikidataQuery
             .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
@@ -313,52 +313,56 @@ public class OkHttpJsonApiClient {
    * @return
    * @throws IOException
    */
-  public Observable<List<Place>> getNearbyMonuments(LatLng cur, String language, final double radius)
-      throws Exception {
+  public Observable<List<Place>> getNearbyMonuments(LatLng cur, String language, final double radius){
+      Timber.d("Fetching monuments at radius %s", radius);
+      final String wikidataQuery;
+      try {
+          wikidataQuery = FileUtils.readFromResource("/queries/monuments_query.rq");
+          if (TextUtils.isEmpty(language)) {
+              language = "en";
+          }
+          String query = wikidataQuery
+              .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
+              .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.getLatitude()))
+              .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.getLongitude()))
+              .replace("${LANG}", language);
 
-    Timber.e("Fetching monuments at radius %s", radius);
-    final String wikidataQuery = FileUtils.readFromResource("/queries/monuments_query.rq");
-    if (TextUtils.isEmpty(language)) {
-        language="en";
-    }
-    String query = wikidataQuery
-        .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
-        .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.getLatitude()))
-        .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.getLongitude()))
-        .replace("${LANG}", language);
+          HttpUrl.Builder urlBuilder = HttpUrl
+              .parse(sparqlQueryUrl)
+              .newBuilder()
+              .addQueryParameter("query", query)
+              .addQueryParameter("format", "json");
 
-    HttpUrl.Builder urlBuilder = HttpUrl
-        .parse(sparqlQueryUrl)
-        .newBuilder()
-        .addQueryParameter("query", query)
-        .addQueryParameter("format", "json");
+          Request request = new Request.Builder()
+              .url(urlBuilder.build())
+              .build();
 
-    Request request = new Request.Builder()
-        .url(urlBuilder.build())
-        .build();
+          Timber.d("Monuments URL: %s", request.url().toString());
 
-    Timber.e("Monuments URL: %s", request.url().toString());
+          return Observable.fromCallable(() -> {
+              final Response response = okHttpClient.newCall(request).execute();
+              if (response != null && response.body() != null && response.isSuccessful()) {
+                  final String json = response.body().string();
+                  if (json == null) {
+                      return new ArrayList<>();
+                  }
 
-    return Observable.fromCallable(() -> {
-      final Response response = okHttpClient.newCall(request).execute();
-      if (response != null && response.body() != null && response.isSuccessful()) {
-        final String json = response.body().string();
-        if (json == null) {
-          return new ArrayList<>();
-        }
-
-        final NearbyResponse nearbyResponse = gson.fromJson(json, NearbyResponse.class);
-        final List<NearbyResultItem> bindings = nearbyResponse.getResults().getBindings();
-        final List<Place> places = new ArrayList<>();
-        for (final NearbyResultItem item : bindings) {
-          final Place place = Place.from(item);
-          place.setMonument(true);
-          places.add(place);
-        }
-        return places;
+                  final NearbyResponse nearbyResponse = gson.fromJson(json, NearbyResponse.class);
+                  final List<NearbyResultItem> bindings = nearbyResponse.getResults().getBindings();
+                  final List<Place> places = new ArrayList<>();
+                  for (final NearbyResultItem item : bindings) {
+                      final Place place = Place.from(item);
+                      place.setMonument(true);
+                      places.add(place);
+                  }
+                  return places;
+              }
+              return new ArrayList<>();
+          });
+      } catch (final IOException e) {
+          e.printStackTrace();
+          return Observable.error(e);
       }
-      return new ArrayList<>();
-    });
   }
 
     /**

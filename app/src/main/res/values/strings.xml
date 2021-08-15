@@ -323,6 +323,7 @@
   <string name="share_app_title">Share App</string>
 
   <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
+  <string name="error_fetching_nearby_monuments">Error fetching nearby monuments.</string>
   <string name="no_recent_searches">No recent searches</string>
   <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
   <string name="delete_search_dialog">Do you want to delete this search?</string>
