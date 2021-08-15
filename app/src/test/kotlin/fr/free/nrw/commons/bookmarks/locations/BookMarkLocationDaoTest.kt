@@ -151,7 +151,7 @@ class BookMarkLocationDaoTest {
         assertTrue(testObject.updateBookmarkLocation(examplePlaceBookmark))
         verify(client).insert(eq(BASE_URI), captor.capture())
         captor.firstValue.let { cv ->
-            assertEquals(13, cv.size())
+            assertEquals(14, cv.size())
             assertEquals(examplePlaceBookmark.name, cv.getAsString(COLUMN_NAME))
             assertEquals(examplePlaceBookmark.language, cv.getAsString(COLUMN_LANGUAGE))
             assertEquals(examplePlaceBookmark.longDescription, cv.getAsString(COLUMN_DESCRIPTION))
@@ -283,7 +283,7 @@ class BookMarkLocationDaoTest {
         for (i in 0 until rowCount) {
             addRow(listOf("placeName", "en", "placeDescription", "placeCategory", exampleLabel.text, exampleLabel.icon,
                     exampleUri, builder.build().wikipediaLink, builder.build().wikidataLink, builder.build().commonsLink,
-                    exampleLocation.latitude, exampleLocation.longitude, "picName", "placeExists"))
+                    exampleLocation.latitude, exampleLocation.longitude, "picName", "placeExists", "testAddress"))
         }
     }
 }
