@@ -94,6 +94,12 @@ class ImageAdapter(
                 selectOrRemoveImage(holder, position)
             }
         }
+
+        // launch media preview on long click.
+        holder.itemView.setOnLongClickListener {
+            imageSelectListener.onLongPress(image.uri)
+            true
+        }
     }
 
     /**

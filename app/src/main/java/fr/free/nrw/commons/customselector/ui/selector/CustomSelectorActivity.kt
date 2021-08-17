@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.Window
@@ -15,6 +16,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.theme.BaseActivity
 import java.io.File
 import javax.inject.Inject
@@ -154,6 +156,15 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
 
         val done : ImageButton = findViewById(R.id.done)
         done.visibility = if (selectedImages.isEmpty()) View.INVISIBLE else View.VISIBLE
+    }
+
+    /**
+     * onLongPress
+     * @param imageUri : uri of image
+     */
+    override fun onLongPress(imageUri: Uri) {
+        val intent = Intent(this, ZoomableActivity::class.java).setData(imageUri);
+        startActivity(intent)
     }
 
     /**
