@@ -54,11 +54,7 @@ class PageContentsCreator {
         if (contribution.getWikidataPlace()!=null && contribution.getWikidataPlace().isMonumentUpload()) {
             WikidataPlace wikidataPlace = contribution.getWikidataPlace();
             buffer.append("{{Wiki Loves Monuments 2021\n|1= ")
-                .append(countryCode)
-                .append("|id =").append(wikidataPlace.getId())
-                .append("|title").append(wikidataPlace.getName())
-                .append("|place").append(media.getFallbackDescription())
-                .append("\n");
+                .append(countryCode);
         }
 
         final List<String> categories = media.getCategories();
