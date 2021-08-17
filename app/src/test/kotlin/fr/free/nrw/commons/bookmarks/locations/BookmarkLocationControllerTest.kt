@@ -1,9 +1,6 @@
 package fr.free.nrw.commons.bookmarks.locations
 
-import android.net.Uri
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.bookmarks.Bookmark
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao
 import fr.free.nrw.commons.nearby.Place
 import org.junit.Assert
 import org.junit.Before
@@ -35,9 +32,7 @@ class BookmarkLocationControllerTest {
             val list = ArrayList<Place>()
             list.add(
                 Place(
-                    "en", "a place", null, "a description", null, "a cat", null, null, true,
-                    "testAddress"
-                )
+                    "en", "a place", null, "a description", null, "a cat", null, null, true)
             )
             list.add(
                 Place(
@@ -49,8 +44,7 @@ class BookmarkLocationControllerTest {
                     "another cat",
                     null,
                     null,
-                    true,
-                    "testAddress"
+                    true
                 )
             )
             return list
