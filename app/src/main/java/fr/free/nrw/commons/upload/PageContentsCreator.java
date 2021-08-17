@@ -57,19 +57,6 @@ class PageContentsCreator {
                 .append("}}").append("\n");
         }
 
-        final List<String> categories = media.getCategories();
-        if (categories != null && categories.size() != 0) {
-            for (int i = 0; i < categories.size(); i++) {
-                buffer.append("\n[[Category:").append(categories.get(i)).append("]]");
-            }
-        } else {
-            buffer.append("{{subst:unc}}");
-        }
-
-        buffer.append("}}").append("\n");
-
-
-
         //Only add Location template (e.g. {{Location|37.51136|-77.602615}} ) if coords is not null
         final String decimalCoords = contribution.getDecimalCoords();
         if (decimalCoords != null) {
@@ -80,6 +67,7 @@ class PageContentsCreator {
             .append(licenseTemplateFor(media.getLicense())).append("\n\n")
             .append("{{Uploaded from Mobile|platform=Android|version=")
             .append(ConfigUtils.getVersionNameWithSha(context)).append("}}\n");
+        final List<String> categories = media.getCategories();
         if (categories != null && categories.size() != 0) {
             for (int i = 0; i < categories.size(); i++) {
                 buffer.append("\n[[Category:").append(categories.get(i)).append("]]");
