@@ -87,9 +87,7 @@ class BookmarkLocationFragmentUnitTests {
                     "a cat",
                     null,
                     null,
-                    true,
-                    "testAddress"
-                )
+                    true)
             )
             return list
         }
