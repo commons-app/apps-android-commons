@@ -37,8 +37,7 @@ class BookMarkLocationDaoTest {
             COLUMN_COMMONS_LINK,
             COLUMN_LAT,
             COLUMN_LONG,
-            COLUMN_PIC,
-            COLUMN_EXIST)
+            COLUMN_PIC)
     private val client: ContentProviderClient = mock()
     private val database: SQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
