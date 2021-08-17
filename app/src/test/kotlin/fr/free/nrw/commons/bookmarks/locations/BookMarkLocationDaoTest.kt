@@ -38,8 +38,7 @@ class BookMarkLocationDaoTest {
             COLUMN_LAT,
             COLUMN_LONG,
             COLUMN_PIC,
-            COLUMN_EXISTS,
-            COLUMN_ADDRESS)
+            COLUMN_EXIST)
     private val client: ContentProviderClient = mock()
     private val database: SQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
@@ -64,7 +63,7 @@ class BookMarkLocationDaoTest {
 
 
         examplePlaceBookmark = Place("en", "placeName", exampleLabel, "placeDescription"
-                , exampleLocation, "placeCategory", builder.build(),"picName",false, "testAddress")
+                , exampleLocation, "placeCategory", builder.build(),"picName",false)
         testObject = BookmarkLocationsDao { client }
     }
 
@@ -152,7 +151,7 @@ class BookMarkLocationDaoTest {
         assertTrue(testObject.updateBookmarkLocation(examplePlaceBookmark))
         verify(client).insert(eq(BASE_URI), captor.capture())
         captor.firstValue.let { cv ->
-            assertEquals(14, cv.size())
+            assertEquals(13, cv.size())
             assertEquals(examplePlaceBookmark.name, cv.getAsString(COLUMN_NAME))
             assertEquals(examplePlaceBookmark.language, cv.getAsString(COLUMN_LANGUAGE))
             assertEquals(examplePlaceBookmark.longDescription, cv.getAsString(COLUMN_DESCRIPTION))
@@ -284,7 +283,7 @@ class BookMarkLocationDaoTest {
         for (i in 0 until rowCount) {
             addRow(listOf("placeName", "en", "placeDescription", "placeCategory", exampleLabel.text, exampleLabel.icon,
                     exampleUri, builder.build().wikipediaLink, builder.build().wikidataLink, builder.build().commonsLink,
-                    exampleLocation.latitude, exampleLocation.longitude, "picName", "placeExists", "testAddress"))
+                    exampleLocation.latitude, exampleLocation.longitude, "picName", "placeExists"))
         }
     }
 }

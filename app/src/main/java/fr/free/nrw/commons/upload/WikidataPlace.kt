@@ -11,7 +11,6 @@ data class WikidataPlace(
     override val name: String,
     val imageValue: String?,
     val wikipediaArticle: String?,
-    val address: String?="",
     val location: LatLng? = null,
     val isMonumentUpload : Boolean =false
 ) :
@@ -21,7 +20,6 @@ data class WikidataPlace(
         place.name,
         place.pic.takeIf { it.isNotBlank() },
         place.siteLinks.wikipediaLink?.toString() ?: "",
-        place.address,
         place.location,
         isMonumentUpload=place.isMonument
     )

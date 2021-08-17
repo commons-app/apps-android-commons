@@ -34,11 +34,9 @@ public class Place implements Parcelable {
     public String distance;
     public final Sitelinks siteLinks;
     private boolean isMonument;
-    @Nullable
-    private String address;
 
 
-    public Place(String language,String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, Boolean exists, @Nullable String address) {
+    public Place(String language,String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, Boolean exists) {
         this.language = language;
         this.name = name;
         this.label = label;
@@ -48,7 +46,6 @@ public class Place implements Parcelable {
         this.siteLinks = siteLinks;
         this.pic = (pic == null) ? "":pic;
         this.exists = exists;
-        this.address = address;
     }
     public Place(Parcel in) {
         this.language = in.readString();
@@ -63,7 +60,6 @@ public class Place implements Parcelable {
         String existString = in.readString();
         this.exists = Boolean.parseBoolean(existString);
         this.isMonument = in.readInt() == 1;
-        this.address = in.readString();
     }
     public static Place from(NearbyResultItem item) {
         String itemClass = item.getClassName().getValue();
@@ -101,8 +97,7 @@ public class Place implements Parcelable {
                 .build(),
             item.getPic().getValue(),
             // Checking if the place exists or not
-            (item.getDestroyed().getValue() == "") && (item.getEndTime().getValue() == ""),
-            item.getAddress());
+            (item.getDestroyed().getValue() == "") && (item.getEndTime().getValue() == ""));
     }
 
     /**
@@ -136,9 +131,6 @@ public class Place implements Parcelable {
      * @return long description
      */
     public String getLongDescription() {
-        if(isMonument){
-            return name+ (TextUtils.isEmpty(address)?"": String.format("(%s)", address));
-        }
         return longDescription;
     }
 
@@ -211,11 +203,6 @@ public class Place implements Parcelable {
         return isMonument;
     }
 
-    @Nullable
-    public String getAddress() {
-        return address;
-    }
-
     /**
      * Check if we already have the exact same Place
      * @param o Place being tested
@@ -269,7 +256,6 @@ public class Place implements Parcelable {
         dest.writeString(pic);
         dest.writeString(exists.toString());
         dest.writeInt(isMonument ? 1 : 0);
-        dest.writeString(TextUtils.isEmpty(address) ? "" : address);
     }
 
     public static final Creator<Place> CREATOR = new Creator<Place>() {

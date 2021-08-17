@@ -57,7 +57,7 @@ class PageContentsCreator {
                 .append(countryCode)
                 .append("|id =").append(wikidataPlace.getId())
                 .append("|title").append(wikidataPlace.getName())
-                .append("|place").append(wikidataPlace.getAddress())
+                .append("|place").append(media.getFallbackDescription())
                 .append("\n");
         }
 

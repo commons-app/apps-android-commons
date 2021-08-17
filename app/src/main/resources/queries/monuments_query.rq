@@ -8,7 +8,6 @@ SELECT
       (SAMPLE(COALESCE(?icon0, ?icon1)) as ?icon)
       ?wikipediaArticle
       ?commonsArticle
-      (SAMPLE(?streetAddress) as ?streetAddress)
       (SAMPLE(?commonsCategory) as ?commonsCategory)
       (SAMPLE(?pic) as ?pic)
     WHERE {
@@ -26,9 +25,6 @@ SELECT
 
       # Get (P18)
       OPTIONAL { ?item wdt:P18 ?pic. }
-
-      # Get (P6375)
-      OPTIONAL { ?item wdt:P6375 ?streetAddress. }
 
       # Get the label in the preferred language of the user, or any other language if no label is available in that language.
       OPTIONAL {?item rdfs:label ?itemLabelPreferredLanguage. FILTER (lang(?itemLabelPreferredLanguage) = "${LANG}")}
