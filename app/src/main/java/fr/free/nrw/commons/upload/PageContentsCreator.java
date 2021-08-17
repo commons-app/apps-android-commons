@@ -52,9 +52,9 @@ class PageContentsCreator {
         buffer.append("}}").append("\n");
 
         if (contribution.getWikidataPlace()!=null && contribution.getWikidataPlace().isMonumentUpload()) {
-            WikidataPlace wikidataPlace = contribution.getWikidataPlace();
             buffer.append("{{Wiki Loves Monuments 2021\n|1= ")
-                .append(countryCode);
+                .append(countryCode)
+                .append("}}").append("\n");
         }
 
         final List<String> categories = media.getCategories();
