@@ -85,7 +85,7 @@ fun place(
     pic: String = "pic",
     exists: Boolean = false
 ): Place {
-    return Place(lang, name, label, longDescription, latLng, category, siteLinks, pic, exists, null)
+    return Place(lang, name, label, longDescription, latLng, category, siteLinks, pic, exists)
 }
 
 fun entityId(wikiBaseEntityValue: WikiBaseEntityValue = wikiBaseEntityValue()) =
