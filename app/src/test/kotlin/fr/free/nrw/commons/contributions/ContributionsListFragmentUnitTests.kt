@@ -88,6 +88,9 @@ class ContributionsListFragmentUnitTests {
     private lateinit var fabGallery: FloatingActionButton
 
     @Mock
+    private lateinit var fabCustomGallery: FloatingActionButton
+
+    @Mock
     private lateinit var newConfig: Configuration
 
     @Mock
@@ -119,6 +122,7 @@ class ContributionsListFragmentUnitTests {
         Whitebox.setInternalState(fragment, "fabPlus", fabPlus)
         Whitebox.setInternalState(fragment, "fabCamera", fabCamera)
         Whitebox.setInternalState(fragment, "fabGallery", fabGallery)
+        Whitebox.setInternalState(fragment, "fabCustomGallery", fabCustomGallery)
         Whitebox.setInternalState(fragment, "fab_layout", fabLayout)
         Whitebox.setInternalState(
             fragment,
