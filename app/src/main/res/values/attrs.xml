@@ -48,7 +48,6 @@
     <attr name="contributionsListTextPrimary" format="reference"/>
     <attr name="menu_item_tint" format="reference"/>
     <attr name="search_icon" format="reference"/>
-    <attr name="caption_description_text_color" format="reference" />
     <attr name="custom_selector_done" format="reference"/>
     <attr name="custom_selector_back" format="reference"/>
     <attr name="caption_description_text_color" format="reference" />
