@@ -56,7 +56,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     WikipediaInstructionsDialogFragment.Callback {
 
     private static final String RV_STATE = "rv_scroll_state";
-
+      
     @BindView(R.id.contributionsList)
     RecyclerView rvContributionsList;
     @BindView(R.id.loadingContributionsProgressBar)
