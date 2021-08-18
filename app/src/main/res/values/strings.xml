@@ -323,6 +323,7 @@
   <string name="share_app_title">Share App</string>
 
   <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
+  <string name="error_fetching_nearby_monuments">Error fetching nearby monuments.</string>
   <string name="no_recent_searches">No recent searches</string>
   <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
   <string name="delete_search_dialog">Do you want to delete this search?</string>
@@ -638,5 +639,12 @@ Upload your first media by tapping on the add button.</string>
     The shadow of the image view of the location picker</string>
   <string name="image_location">Image Location</string>
   <string name="check_whether_location_is_correct">Check whether location is correct</string>
+  <string name="place_state_wlm">WLM</string>
+  <string name="wlm_upload_info">You are contributing to Wiki Loves Monuments Campaign. Related templates will be added accordingly.</string>
+  <string name="display_monuments">Display monuments</string>
+  <string name="wlm_month_message">It\'s Wiki Loves Monuments month!</string>
+  <string name="learn_more">LEARN MORE</string>
+  <string name="wlm_campaign_title">Wiki Loves Monuments</string>
+  <string name="wlm_campaign_description">Wiki Loves Monuments is an international photo contest for monuments organised by Wikimedia</string>
 
 </resources>

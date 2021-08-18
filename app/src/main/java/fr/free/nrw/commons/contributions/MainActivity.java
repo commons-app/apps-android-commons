@@ -373,6 +373,13 @@ public class MainActivity  extends BaseActivity
         super.onDestroy();
     }
 
+    /**
+     * Public method to show nearby from the reference of this.
+     */
+    public void showNearby() {
+        tabLayout.setSelectedItemId(NavTab.NEARBY.code());
+    }
+
     public enum ActiveFragment {
         CONTRIBUTIONS,
         NEARBY,

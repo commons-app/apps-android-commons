@@ -70,7 +70,6 @@
           app:singleLineTitle="false"
           android:summary="@string/display_campaigns_explanation"
           android:title="@string/display_campaigns" />
-
     </PreferenceCategory>
 
     <PreferenceCategory

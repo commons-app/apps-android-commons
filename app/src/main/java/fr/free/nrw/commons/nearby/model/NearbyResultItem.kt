@@ -7,6 +7,7 @@ class NearbyResultItem(private val item: ResultTuple?,
                        private val commonsArticle: ResultTuple?,
                        private val location: ResultTuple?,
                        private val label: ResultTuple?,
+                       @field:SerializedName("streetAddress") private val address: ResultTuple?,
                        private val icon: ResultTuple?, @field:SerializedName("class") private val className: ResultTuple?,
                        @field:SerializedName("classLabel") private val classLabel: ResultTuple?,
                        @field:SerializedName("commonsCategory") private val commonsCategory: ResultTuple?,
@@ -65,5 +66,9 @@ class NearbyResultItem(private val item: ResultTuple?,
 
     fun getEndTime(): ResultTuple {
         return endTime ?: ResultTuple()
+    }
+
+    fun getAddress(): String {
+        return address?.value?:""
     }
 }
