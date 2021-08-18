@@ -218,6 +218,9 @@ class FilePickerTest {
                 ) {
                 }
             })
+    }
+
+    @Test
     fun testOpenCustomSelectorRequestCode() {
         `when`(PreferenceManager.getDefaultSharedPreferences(activity)).thenReturn(sharedPref)
         `when`(sharedPref.edit()).thenReturn(sharedPreferencesEditor)
