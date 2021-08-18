@@ -52,9 +52,9 @@ class PageContentsCreator {
         buffer.append("}}").append("\n");
 
         if (contribution.getWikidataPlace()!=null && contribution.getWikidataPlace().isMonumentUpload()) {
-            buffer.append("{{Wiki Loves Monuments 2021\n|1= ")
+            buffer.append("{{Wiki Loves Monuments 2021|1= ")
                 .append(countryCode)
-                .append("}}");
+                .append("}}").append("\n");
         }
 
         //Only add Location template (e.g. {{Location|37.51136|-77.602615}} ) if coords is not null
