@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
+import timber.log.Timber;
 
 class PageContentsCreator {
 
@@ -29,13 +30,15 @@ class PageContentsCreator {
         this.context = context;
     }
 
-    public String createFrom(Contribution contribution) {
+    public String createFrom(Contribution contribution, String countryCode) {
         StringBuilder buffer = new StringBuilder();
         final Media media = contribution.getMedia();
         buffer
             .append("== {{int:filedesc}} ==\n")
             .append("{{Information\n")
-            .append("|description=").append(media.getFallbackDescription()).append("\n")
+            .append("|description=").append(media.getFallbackDescription())
+            .append("{{ on Wikidata|").append(contribution.getWikidataPlace().getId()).append("}}")
+            .append("\n")
             .append("|source=").append("{{own}}\n")
             .append("|author=[[User:").append(media.getAuthor()).append("|")
             .append(media.getAuthor()).append("]]\n");
@@ -47,6 +50,12 @@ class PageContentsCreator {
         }
 
         buffer.append("}}").append("\n");
+
+        if (contribution.getWikidataPlace()!=null && contribution.getWikidataPlace().isMonumentUpload()) {
+            buffer.append("{{Wiki Loves Monuments 2021|1= ")
+                .append(countryCode)
+                .append("}}").append("\n");
+        }
 
         //Only add Location template (e.g. {{Location|37.51136|-77.602615}} ) if coords is not null
         final String decimalCoords = contribution.getDecimalCoords();
@@ -66,6 +75,7 @@ class PageContentsCreator {
         } else {
             buffer.append("{{subst:unc}}");
         }
+        Timber.d("Template: %s", buffer.toString());
         return buffer.toString();
     }
 

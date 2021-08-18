@@ -24,6 +24,12 @@ public class UploadItem {
     private final BehaviorSubject<Integer> imageQuality;
     private boolean hasInvalidLocation;
 
+    /**
+     * Uri of uploadItem
+     * Uri points to image location or name, eg content://media/external/images/camera/10495 (Android 10)
+     */
+    private final Uri contentUri;
+
 
     @SuppressLint("CheckResult")
     UploadItem(final Uri mediaUri,
@@ -31,7 +37,8 @@ public class UploadItem {
         final ImageCoordinates gpsCoords,
         final Place place,
         final long createdTimestamp,
-        final String createdTimestampSource) {
+        final String createdTimestampSource,
+        final Uri contentUri) {
         this.createdTimestampSource = createdTimestampSource;
         uploadMediaDetails = new ArrayList<>(Collections.singletonList(new UploadMediaDetail()));
         this.place = place;
@@ -39,6 +46,7 @@ public class UploadItem {
         this.mimeType = mimeType;
         this.gpsCoords = gpsCoords;
         this.createdTimestamp = createdTimestamp;
+        this.contentUri = contentUri;
         imageQuality = BehaviorSubject.createDefault(ImageUtils.IMAGE_WAIT);
     }
 
@@ -66,8 +74,15 @@ public class UploadItem {
         return imageQuality.getValue();
     }
 
+    /**
+     * getContentUri.
+     * @return Uri of uploadItem
+     * Uri points to image location or name, eg content://media/external/images/camera/10495 (Android 10)
+     */
+    public Uri getContentUri() { return contentUri; }
+
     public void setImageQuality(final int imageQuality) {
-        this.imageQuality.onNext(imageQuality);
+      this.imageQuality.onNext(imageQuality);
     }
 
     /**

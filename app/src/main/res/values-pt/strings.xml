@@ -240,6 +240,8 @@
   <string name="upload_problem_different_geolocation">Esta fotografia foi tirada num local diferente.</string>
   <string name="upload_problem_fbmd">Carregue só fotografias tiradas por si, por favor. Não carregue fotografias que encontrou na conta do Facebook de outra pessoa.</string>
   <string name="upload_problem_do_you_continue">Quer, mesmo assim, carregar esta fotografia?</string>
+  <string name="upload_connection_error_alert_title">Erro de ligação</string>
+  <string name="upload_connection_error_alert_detail">O processo de carregamento requer um acesso ativo à internet. Verifique a sua ligação de rede.</string>
   <string name="upload_problem_image">Problemas encontrados na imagem</string>
   <string name="internet_downloaded">Carregue só fotografias tiradas por si, por favor. Não carregue fotografias que tenha descarregado da Internet.</string>
   <string name="use_external_storage">Guardar fotos tiradas com a aplicação</string>
@@ -387,6 +389,9 @@
   <string name="no_categories_selected_warning_desc">As imagens sem categorias só raramente são utilizáveis. Tem a certeza de que deseja continuar sem selecionar categorias?</string>
   <string name="no_depictions_selected">Não foram selecionadas representações</string>
   <string name="no_depictions_selected_warning_desc">As imagens com representações são encontradas mais facilmente e mais propensas a serem usadas. Tem a certeza de que deseja continuar sem selecionar representações?</string>
+  <string name="back_button_warning">Cancelar carregamento</string>
+  <string name="back_button_warning_desc">Usar o botão Voltar cancelará este carregamento e perderá o seu progresso</string>
+  <string name="back_button_continue">Continuar carregamento</string>
   <string name="upload_flow_all_images_in_set">(Para todas as imagens do conjunto)</string>
   <string name="search_this_area">Pesquisar nesta área</string>
   <string name="nearby_card_permission_title">Pedido de permissões</string>
@@ -492,6 +497,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Não foi possível adicionar categorias.</string>
   <string name="category_edit_button_text">Atualizar categorias</string>
+  <string name="coordinates_edit_helper_make_edit_toast">A tentar atualizar coordenadas.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Atualização de coordenadas</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Êxito</string>
+  <string name="coordinates_edit_helper_show_edit_message">As coordenadas %1$s foram adicionadas.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Não foi possível adicionar coordenadas.</string>
+  <string name="coordinates_picking_unsuccessful">Não foi possível obter coordenadas.</string>
   <string name="share_image_via">Partilhar imagem via</string>
   <string name="no_achievements_yet">Ainda não fez nenhuma contribuição</string>
   <string name="account_created">Conta criada!</string>
@@ -586,5 +597,18 @@
   <string name="media_detail_step_title">Detalhes de multimédia</string>
   <string name="menu_view_category_page">Ver página de categoria</string>
   <string name="menu_view_item_page">Ver página do elemento</string>
+  <string name="app_ui_language">Língua da interface do utilizador da aplicação</string>
+  <string name="remove">Remove uma legenda e descrição</string>
   <string name="read_help_link">Ler mais</string>
+  <string name="media_detail_in_all_languages">Em todas as línguas</string>
+  <string name="choose_a_location">Escolher uma localização</string>
+  <string name="pan_and_zoom_to_adjust">Fazer uma panorâmica e aproximar para ajustar</string>
+  <string name="exit_location_picker">Sair do selecionador de localização</string>
+  <string name="select_location_location_picker">Selecionar localização</string>
+  <string name="show_in_map_app">Mostrar na aplicação de mapa</string>
+  <string name="modify_location">Editar localização</string>
+  <string name="location_picker_image_view">A vista de imagem do selecionador de localização</string>
+  <string name="location_picker_image_view_shadow">A sombra da vista de imagem do selecionador de localização</string>
+  <string name="image_location">Localização da imagem</string>
+  <string name="check_whether_location_is_correct">Verificar se a localização está correta</string>
 </resources>

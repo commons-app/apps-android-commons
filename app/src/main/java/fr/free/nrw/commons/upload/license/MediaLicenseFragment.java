@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -48,6 +49,8 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
     TextView tvShareLicenseSummary;
     @BindView(R.id.tooltip)
     ImageView tooltip;
+    @BindView(R.id.ll_info_monument_upload)
+    LinearLayout llInfoMonumentUpload;
 
     @Inject
     MediaLicenseContract.UserActionListener presenter;
@@ -87,6 +90,16 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
         initPresenter();
         initLicenseSpinner();
         presenter.getLicenses();
+
+        /**
+         * Show the wlm info message if the upload is a WLM upload
+         */
+        if(callback.isWLMUpload()){
+            //TODO : Update the info message logo
+            llInfoMonumentUpload.setVisibility(View.VISIBLE);
+        }else{
+            llInfoMonumentUpload.setVisibility(View.GONE);
+        }
     }
 
     /**

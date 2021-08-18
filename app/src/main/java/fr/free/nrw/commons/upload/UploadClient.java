@@ -16,9 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
@@ -212,11 +210,11 @@ public class UploadClient {
     public Observable<UploadResult> uploadFileFromStash(
         final Contribution contribution,
         final String uniqueFileName,
-        final String fileKey) {
+        final String fileKey, @Nullable String countryCode) {
         try {
             return uploadInterface
                 .uploadFileFromStash(csrfTokenClient.getTokenBlocking(),
-                    pageContentsCreator.createFrom(contribution),
+                    pageContentsCreator.createFrom(contribution, countryCode),
                     CommonsApplication.DEFAULT_EDIT_SUMMARY,
                     uniqueFileName,
                     fileKey).map(uploadResponse -> {

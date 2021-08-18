@@ -59,6 +59,20 @@ public class ContributionController {
     }
 
     /**
+     * Initiate gallery picker with permission
+     */
+    public void initiateCustomGalleryPickWithPermission(final Activity activity) {
+        setPickerConfiguration(activity,true);
+
+        PermissionUtils.checkPermissionsAndPerformAction(activity,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            () -> FilePicker.openCustomSelector(activity, 0),
+            R.string.storage_permission_title,
+            R.string.write_storage_permission_rationale);
+    }
+
+
+    /**
      * Open chooser for gallery uploads
      */
     private void initiateGalleryUpload(final Activity activity, final boolean allowMultipleUploads) {
