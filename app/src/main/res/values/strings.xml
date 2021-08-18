@@ -640,13 +640,6 @@ Upload your first media by tapping on the add button.</string>
     The shadow of the image view of the location picker</string>
   <string name="image_location">Image Location</string>
   <string name="check_whether_location_is_correct">Check whether location is correct</string>
-  <string name="place_state_wlm">WLM</string>
-  <string name="wlm_upload_info">You are contributing to Wiki Loves Monuments Campaign. Related templates will be added accordingly.</string>
-  <string name="display_monuments">Display monuments</string>
-  <string name="wlm_month_message">It\'s Wiki Loves Monuments month!</string>
-  <string name="learn_more">LEARN MORE</string>
-  <string name="wlm_campaign_title">Wiki Loves Monuments</string>
-  <string name="wlm_campaign_description">Wiki Loves Monuments is an international photo contest for monuments organised by Wikimedia</string>
   <string name="custom_selector_title">Custom Selector</string>
   <string name="custom_selector_empty_text">No Images</string>
   <string name="done">Done</string>
@@ -656,5 +649,11 @@ Upload your first media by tapping on the add button.</string>
   <string name="custom_selector_info_text2">Unlike the picture on the left, the picture on the right has the Commons logo indicating it is already uploaded.</string>
   <string name="welcome_custom_selector_ok">Awesome</string>
   <string name="custom_selector_already_uploaded_image_text">This image has already been uploaded to Commons.</string>
-
+  <string name="place_state_wlm">WLM</string>
+  <string name="wlm_upload_info">You are contributing to Wiki Loves Monuments Campaign. Related templates will be added accordingly.</string>
+  <string name="display_monuments">Display monuments</string>
+  <string name="wlm_month_message">It\'s Wiki Loves Monuments month!</string>
+  <string name="learn_more">LEARN MORE</string>
+  <string name="wlm_campaign_title">Wiki Loves Monuments</string>
+  <string name="wlm_campaign_description">Wiki Loves Monuments is an international photo contest for monuments organised by Wikimedia</string>
 </resources>
