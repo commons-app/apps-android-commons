@@ -10,6 +10,7 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 
+import io.reactivex.Observable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -127,6 +128,11 @@ public class NearbyController {
         }
     }
 
+    public Observable<List<Place>> queryWikiDataForMonuments(
+        final LatLng latLng, final String language) {
+        return nearbyPlaces.queryWikiDataForMonuments(latLng, language);
+    }
+
     /**
      * Loads attractions from location for list view, we need to return Place data type.
      *
@@ -168,6 +174,7 @@ public class NearbyController {
         VectorDrawableCompat vectorDrawable = null;
         VectorDrawableCompat vectorDrawableGreen = null;
         VectorDrawableCompat vectorDrawableGrey = null;
+        VectorDrawableCompat vectorDrawableMonuments = null;
         vectorDrawable = null;
         try {
             vectorDrawable = VectorDrawableCompat.create(
@@ -176,6 +183,9 @@ public class NearbyController {
                     context.getResources(), R.drawable.ic_custom_map_marker_green, context.getTheme());
             vectorDrawableGrey = VectorDrawableCompat.create(
                     context.getResources(), R.drawable.ic_custom_map_marker_grey, context.getTheme());
+            vectorDrawableMonuments = VectorDrawableCompat
+                .create(context.getResources(), R.drawable.ic_custom_map_marker_monuments,
+                    context.getTheme());
         } catch (Resources.NotFoundException e) {
             // ignore when running tests.
         }
@@ -183,34 +193,39 @@ public class NearbyController {
             Bitmap icon = UiUtils.getBitmap(vectorDrawable);
             Bitmap iconGreen = UiUtils.getBitmap(vectorDrawableGreen);
             Bitmap iconGrey = UiUtils.getBitmap(vectorDrawableGrey);
+            Bitmap iconMonuments = UiUtils.getBitmap(vectorDrawableMonuments);
 
             for (Place place : placeList) {
+                NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
                 String distance = formatDistanceBetween(curLatLng, place.location);
                 place.setDistance(distance);
 
-                NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
                 nearbyBaseMarker.title(place.name);
                 nearbyBaseMarker.position(
-                        new com.mapbox.mapboxsdk.geometry.LatLng(
-                                place.location.getLatitude(),
-                                place.location.getLongitude()));
+                    new com.mapbox.mapboxsdk.geometry.LatLng(
+                        place.location.getLatitude(),
+                        place.location.getLongitude()));
                 nearbyBaseMarker.place(place);
                 // Check if string is only spaces or empty, if so place doesn't have any picture
-                if (!place.pic.trim().isEmpty()) {
+
+                if (place.isMonument()) {
+                    nearbyBaseMarker.icon(IconFactory.getInstance(context)
+                        .fromBitmap(iconMonuments));
+                }
+                else if (!place.pic.trim().isEmpty()) {
                     if (iconGreen != null) {
                         nearbyBaseMarker.icon(IconFactory.getInstance(context)
-                                .fromBitmap(iconGreen));
+                            .fromBitmap(iconGreen));
                     }
                 } else if (!place.exists) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
                     if (iconGrey != null) {
                         nearbyBaseMarker.icon(IconFactory.getInstance(context)
-                                .fromBitmap(iconGrey));
+                            .fromBitmap(iconGrey));
                     }
                 } else {
                     nearbyBaseMarker.icon(IconFactory.getInstance(context)
-                            .fromBitmap(icon));
+                        .fromBitmap(icon));
                 }
-
                 baseMarkerOptions.add(nearbyBaseMarker);
             }
         }

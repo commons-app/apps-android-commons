@@ -3,12 +3,12 @@ package fr.free.nrw.commons.upload.worker
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.BitmapFactory
+import android.location.Geocoder
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.CoroutineWorker
 import androidx.work.Data
 import androidx.work.WorkerParameters
-import com.google.gson.Gson
 import com.mapbox.mapboxsdk.plugins.localization.BuildConfig
 import dagger.android.ContributesAndroidInjector
 import fr.free.nrw.commons.CommonsApplication
@@ -21,6 +21,7 @@ import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.di.ApplicationlessInjection
+import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.upload.StashUploadState
@@ -35,6 +36,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.io.IOException
 import java.util.*
 import java.util.regex.Pattern
 import javax.inject.Inject
@@ -286,8 +288,16 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
 
                     try {
                         //Upload the file from stash
+                            var countryCode: String? =null
+                            with(contribution.wikidataPlace?.location){
+                                if(contribution.wikidataPlace?.isMonumentUpload!!) {
+                                    countryCode =
+                                        reverseGeoCode(contribution.wikidataPlace?.location!!)?.toLowerCase()
+                                }
+
+                            }
                         val uploadResult = uploadClient.uploadFileFromStash(
-                            contribution, uniqueFileName, stashUploadResult.fileKey
+                            contribution, uniqueFileName, stashUploadResult.fileKey, countryCode
                         ).blockingSingle()
 
                         if (uploadResult.isSuccessful()) {
@@ -348,6 +358,26 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             contribution.state=Contribution.STATE_FAILED
             clearChunks(contribution)
         }
+    }
+
+    private fun reverseGeoCode(latLng: LatLng): String? {
+
+        val geocoder = Geocoder(
+            CommonsApplication.getInstance().applicationContext, Locale
+                .getDefault()
+        )
+        try {
+            val addresses =
+                geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
+            for (address in addresses) {
+                if (address != null && address.locale.isO3Country != null) {
+                    return address.locale.country
+                }
+            }
+        } catch (e: IOException) {
+            Timber.e(e)
+        }
+        return null
     }
 
     private fun clearChunks(contribution: Contribution) {

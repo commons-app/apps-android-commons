@@ -99,7 +99,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
     private ContributionsListAdapter adapter;
 
-    private Callback callback;
+    @Nullable private Callback callback;
 
     private final int SPAN_COUNT_LANDSCAPE = 3;
     private final int SPAN_COUNT_PORTRAIT = 1;
@@ -159,7 +159,9 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         contributionsListPresenter.contributionList.observe(this.getViewLifecycleOwner(), list -> {
             contributionsSize = list.size();
             adapter.submitList(list);
-            callback.notifyDataSetChanged();
+            if (callback != null) {
+                callback.notifyDataSetChanged();
+            }
         });
         rvContributionsList.setAdapter(adapter);
         adapter.registerAdapterDataObserver(new AdapterDataObserver() {
@@ -181,7 +183,9 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
             @Override
             public void onItemRangeChanged(final int positionStart, final int itemCount) {
                 super.onItemRangeChanged(positionStart, itemCount);
-                callback.viewPagerNotifyDataSetChanged();
+                if (callback != null) {
+                    callback.viewPagerNotifyDataSetChanged();
+                }
             }
         });
 
