@@ -6,6 +6,7 @@
 * A Retired User
 * Aefgh39622
 * Angrydog001
+* Crowley666
 * D41D8CD98F
 * Deathkon
 * GuoPC
@@ -406,6 +407,9 @@
   <string name="no_categories_selected_warning_desc">没有类别的图像很少可用。确实要继续而不选择类别吗？</string>
   <string name="no_depictions_selected">没有选择描写</string>
   <string name="no_depictions_selected_warning_desc">带有描述的图像更容易被发现并且更可能被使用。您确定不选择描述继续吗？</string>
+  <string name="back_button_warning">取消上传</string>
+  <string name="back_button_warning_desc">点击退后按钮，您将取消上传并丢失进度</string>
+  <string name="back_button_continue">继续上传</string>
   <string name="upload_flow_all_images_in_set">（对于设置中的所有图像）</string>
   <string name="search_this_area">搜索这个区域</string>
   <string name="nearby_card_permission_title">需要许可</string>
@@ -619,6 +623,10 @@
   <string name="pan_and_zoom_to_adjust">放大和做小来调整</string>
   <string name="exit_location_picker">退出位置拾取器</string>
   <string name="select_location_location_picker">选择地点</string>
+  <string name="show_in_map_app">在地图应用中显示</string>
+  <string name="modify_location">编辑位置</string>
   <string name="location_picker_image_view">位置拾取器的图像视图</string>
   <string name="location_picker_image_view_shadow">地点拾取器的照片观测视野的阴影。</string>
+  <string name="image_location">图像位置</string>
+  <string name="check_whether_location_is_correct">检查位置是否正确</string>
 </resources>

@@ -236,6 +236,7 @@
   <string name="upload_problem_different_geolocation">Tämä kuva otettiin eri paikassa.</string>
   <string name="upload_problem_fbmd">Tallenna vain kuvia, jotka olet itse ottanut. Älä tallenna kuvia, joita olet löytänyt muiden ihmisten Facebook-tileiltä.</string>
   <string name="upload_problem_do_you_continue">Haluatko silti tallentaa tämän kuvan?</string>
+  <string name="upload_connection_error_alert_title">Yhteysvirhe</string>
   <string name="upload_problem_image">Kuvasta löytyi ongelmia</string>
   <string name="internet_downloaded">Tallenna vain kuvia, jotka olet itse ottanut. Älä tallenna kuvia, joita olet ladannut internetistä.</string>
   <string name="use_external_storage">Tallenna sovelluksen sisäisiä otoksia</string>
@@ -452,6 +453,7 @@
   <string name="exif_tag_name_serialNumbers">Sarjanumerot</string>
   <string name="exif_tag_name_software">Ohjelmisto</string>
   <string name="share_text">Lähetä valokuvia suoraan Wikimedia Commonsiin puhelimestasi. Lataa Commons-appi nyt: %1$s</string>
+  <string name="share_via">Jaa sovellus...</string>
   <string name="image_info">Kuvan tiedot</string>
   <string name="no_categories_found">Luokkia ei löytynyt</string>
   <string name="upload_cancelled">Peruutettu tallennus</string>
@@ -479,6 +481,7 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Ei voitu lisätä luokkia.</string>
   <string name="category_edit_button_text">Päivitetään luokkia</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Onnistui</string>
   <string name="share_image_via">Jaa kuva</string>
   <string name="no_achievements_yet">Et ole vielä lahjoittanut mitään</string>
   <string name="account_created">Käyttäjätunnus luotu!</string>
@@ -501,6 +504,7 @@
   <string name="theme_default_name">Käytä järjestelmän</string>
   <string name="theme_dark_name">Tumma</string>
   <string name="theme_light_name">Vaalea</string>
+  <string name="ask_to_turn_location_on">Ota sijainti käyttöön?</string>
   <string name="load_more">Lataa lisää</string>
   <string name="nearby_no_results">Paikkoja ei löytynyt, yritä vaihtaa hakuehtojasi.</string>
   <string name="todo_improve">Ehdota parannuksia:</string>
@@ -547,7 +551,15 @@
   <string name="resuming_upload">Jatketaan lähettämistä...</string>
   <string name="pausing_upload">Keskeytetään lähetys...</string>
   <string name="depicts_step_title">Esittää</string>
+  <string name="license_step_title">Median lisenssi</string>
+  <string name="media_detail_step_title">Median tiedot</string>
   <string name="menu_view_category_page">Näytä luokkasivu</string>
   <string name="read_help_link">Lue lisää</string>
   <string name="media_detail_in_all_languages">Kaikilla kielillä</string>
+  <string name="choose_a_location">Valitse sijainti</string>
+  <string name="select_location_location_picker">Valitse sijainti</string>
+  <string name="show_in_map_app">Näytä karttasovelluksessa</string>
+  <string name="modify_location">Muokkaa sijaintia</string>
+  <string name="image_location">Kuvan sijainti</string>
+  <string name="check_whether_location_is_correct">Tarkista, onko sijainti oikea</string>
 </resources>

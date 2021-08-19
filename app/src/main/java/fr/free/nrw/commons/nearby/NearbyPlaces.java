@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
+import io.reactivex.Observable;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.util.Collections;
@@ -65,9 +66,9 @@ public class NearbyPlaces {
             while (radius <= maxRadius) {
                 try {
                     places = getFromWikidataQuery(curLatLng, lang, radius);
-                } catch (InterruptedIOException e) {
-                    Timber.e(e, "exception in fetching nearby places");
-                    return places;
+                } catch (final Exception e) {
+                    Timber.e(e, "Exception in fetching nearby places");
+                    break;
                 }
                 Timber.d("%d results at radius: %f", places.size(), radius);
                 if (places.size() >= minResults) {
@@ -91,7 +92,13 @@ public class NearbyPlaces {
      * @return list of places obtained
      * @throws IOException if query fails
      */
-    public List<Place> getFromWikidataQuery(LatLng cur, String lang, double radius) throws IOException {
+    public List<Place> getFromWikidataQuery(LatLng cur, String lang, double radius) throws Exception {
         return okHttpJsonApiClient.getNearbyPlaces(cur, lang, radius).blockingSingle();
+    }
+
+    public Observable<List<Place>> queryWikiDataForMonuments(
+        LatLng latLng, String language) {
+        return okHttpJsonApiClient
+            .getNearbyMonuments(latLng, language, radius);
     }
 }

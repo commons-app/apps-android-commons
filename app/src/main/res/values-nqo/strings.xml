@@ -37,7 +37,7 @@
   <string name="uploading_started">ߟߊ߬ߦߟߍ߬ߟߌ ߓߘߊ߫ ߘߊߡߌ߬ߣߊ߬߹</string>
   <string name="upload_completed_notification_title">%1$s ߟߊ߬ߦߟߍ߬ߟߌ</string>
   <string name="upload_completed_notification_text">ߊ߬ ߛߐ߲߬ߞߌ߲߫ ߞߴߌ ߟߊ߫ ߟߊ߬ߦߟߍ߬ߣߍ߲ ߠߎ߬ ߘߐߜߍ߫</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true"> %1$s ߟߊ߬ߦߟߍ߬ߟߌ ߓߘߊ߫ ߘߊߡߌ߬ߣߊ߫</string>
+  <string name="upload_progress_notification_title_start"> %1$s ߟߊ߬ߦߟߍ ߦߴߌ ߘߐ߫</string>
   <string name="upload_progress_notification_title_in_progress"> %1$s ߟߊ߬ߦߟߍ߬ߟߌ ߦߋ߫ ߛߋ߲߬ߠߊ߫</string>
   <string name="upload_progress_notification_title_finishing"> %1$s ߟߊ߬ߦߟߍ߬ߟߌ ߞߎ߲߬ߘߏ߲߬ߠߌ߲ ߦߴߌ ߘߐ߫</string>
   <string name="upload_failed_notification_title"> %1$s ߟߊ߬ߦߟߍ߬ߟߌ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
@@ -53,6 +53,7 @@
   <string name="menu_nearby">ߛߌ߬ߢߐ߲߮</string>
   <string name="provider_contributions">ߒ ߠߊ߫ ߟߊ߬ߦߟߍ߬ߣߍ߲ ߠߎ߬</string>
   <string name="menu_share">ߊ߬ ߟߊߖߍ߲ߛߍ߲߫</string>
+  <string name="menu_view_file_page">ߞߐߕߐ߮ ߞߐߜߍ ߦߋ߫</string>
   <string name="share_title_hint">ߝߍ߬ߛߓߍߟߌ (ߡߊߢߌ߬ߣߌ߲߬ߞߊ߬ߣߍ߲)</string>
   <string name="add_caption_toast">ߝߍ߬ߛߓߍߟߌ ߘߏ߫ ߡߊߛߐ߫ ߞߐߕߐ߮ ߣߌ߲߬ ߠߊ߫ ߖߊ߰ߣߌ߲߫</string>
   <string name="share_description_hint">ߞߊ߲߬ߛߓߍߟߌ</string>

@@ -376,6 +376,9 @@
   <string name="no_categories_selected_warning_desc">Некатегоризираните слики се слабо употребливи. Дали сигурно сакате да продолжите без да ставите категории?</string>
   <string name="no_depictions_selected">Немате избрано прикажувања</string>
   <string name="no_depictions_selected_warning_desc">Сликите со прикажувања се полезни за наоѓање, со што е поголема веројатноста дека ќе бидат искористени. Дали сигурно сакате да продолжите без да изберете прикажувања?</string>
+  <string name="back_button_warning">Откажи подигање</string>
+  <string name="back_button_warning_desc">Ако стиснете на копчето за одење назад, со тоа ќе го откажете подигањето и ќе го изгубите досегашниот напредок</string>
+  <string name="back_button_continue">Продолжи со подигање</string>
   <string name="upload_flow_all_images_in_set">(За сите слики во збирот)</string>
   <string name="search_this_area">Пребарај на ова подрачје</string>
   <string name="nearby_card_permission_title">Барање за дозвола</string>

@@ -2,14 +2,13 @@ package fr.free.nrw.commons.contributions;
 
 import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_PAUSED;
+import static fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.WLM_URL;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,21 +26,21 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.theme.BaseActivity;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
-import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.campaigns.Campaign;
 import fr.free.nrw.commons.campaigns.CampaignView;
 import fr.free.nrw.commons.campaigns.CampaignsPresenter;
@@ -59,10 +58,7 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
-import fr.free.nrw.commons.notification.NotificationController;
-import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.worker.UploadWorker;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -73,9 +69,6 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import java.util.List;
-import javax.inject.Inject;
-import javax.inject.Named;
 import timber.log.Timber;
 
 public class ContributionsFragment
@@ -118,6 +111,8 @@ public class ContributionsFragment
 
     public TextView notificationCount;
 
+    private Campaign wlmCampaign;
+
     @NonNull
     public static ContributionsFragment newInstance() {
         ContributionsFragment fragment = new ContributionsFragment();
@@ -137,6 +132,7 @@ public class ContributionsFragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions, container, false);
         ButterKnife.bind(this, view);
+        initWLMCampaign();
         presenter.onAttachView(this);
         contributionsPresenter.onAttachView(this);
         campaignView.setVisibility(View.GONE);
@@ -175,6 +171,15 @@ public class ContributionsFragment
         limitedConnectionEnabledLayout.setOnClickListener(toggleDescriptionListener);
         setHasOptionsMenu(true);
         return view;
+    }
+
+    /**
+     * Initialise the campaign object for WML
+     */
+    private void initWLMCampaign() {
+        wlmCampaign = new Campaign(getString(R.string.wlm_campaign_title),
+            getString(R.string.wlm_campaign_description), Utils.getWLMStartDate().toString(),
+            Utils.getWLMEndDate().toString(), WLM_URL, true);
     }
 
     @Override
@@ -518,13 +523,17 @@ public class ContributionsFragment
     }
 
     /**
-     * ask the presenter to fetch the campaigns only if user has not manually disabled it
+     * As the home screen has limited space, we have choosen to show either campaigns or WLM card.
+     * The WLM Card gets the priority over monuments, so if the WLM is going on we show that instead
+     * of campaigns on the campaigns card
      */
     private void fetchCampaigns() {
-        if (store.getBoolean("displayCampaignsCardView", true)) {
+        if (Utils.isMonumentsEnabled(new Date(), store)) {
+            campaignView.setCampaign(wlmCampaign);
+            campaignView.setVisibility(View.VISIBLE);
+        } else if (store.getBoolean(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE, true)) {
             presenter.getCampaigns();
-        }
-        else{
+        } else {
             campaignView.setVisibility(View.GONE);
         }
     }
