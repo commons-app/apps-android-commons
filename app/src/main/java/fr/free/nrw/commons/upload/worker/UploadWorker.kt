@@ -290,7 +290,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                         //Upload the file from stash
                             var countryCode: String? =null
                             with(contribution.wikidataPlace?.location){
-                                if(contribution.wikidataPlace?.isMonumentUpload!!) {
+                                if (contribution.wikidataPlace?.isMonumentUpload == true) {
                                     countryCode =
                                         reverseGeoCode(contribution.wikidataPlace?.location!!)?.toLowerCase()
                                 }

@@ -26,24 +26,28 @@ class PageContentsCreator {
     private final Context context;
 
     @Inject
-    public PageContentsCreator(Context context) {
+    public PageContentsCreator(final Context context) {
         this.context = context;
     }
 
-    public String createFrom(Contribution contribution, String countryCode) {
+    public String createFrom(final Contribution contribution, final String countryCode) {
         StringBuilder buffer = new StringBuilder();
         final Media media = contribution.getMedia();
         buffer
             .append("== {{int:filedesc}} ==\n")
             .append("{{Information\n")
-            .append("|description=").append(media.getFallbackDescription())
-            .append("{{ on Wikidata|").append(contribution.getWikidataPlace().getId()).append("}}")
+            .append("|description=").append(media.getFallbackDescription()).append("\n");
+        if (contribution.getWikidataPlace() != null) {
+            buffer.append("{{ on Wikidata|").append(contribution.getWikidataPlace().getId())
+                .append("}}");
+        }
+        buffer
             .append("\n")
             .append("|source=").append("{{own}}\n")
             .append("|author=[[User:").append(media.getAuthor()).append("|")
             .append(media.getAuthor()).append("]]\n");
 
-        String templatizedCreatedDate = getTemplatizedCreatedDate(
+        final String templatizedCreatedDate = getTemplatizedCreatedDate(
             contribution.getDateCreated(), contribution.getDateCreatedSource());
         if (!StringUtils.isBlank(templatizedCreatedDate)) {
             buffer.append("|date=").append(templatizedCreatedDate);
