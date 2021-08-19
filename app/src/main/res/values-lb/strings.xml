@@ -354,4 +354,10 @@
   <string name="media_detail_in_all_languages">An alle Sproochen</string>
   <string name="choose_a_location">Eng Plaz eraussichen</string>
   <string name="select_location_location_picker">Plaz eraussichen</string>
+  <string name="custom_selector_empty_text">Keng Biller</string>
+  <string name="done">Fäerdeg</string>
+  <string name="back">Zréck</string>
+  <string name="welcome_custom_selector_ok">Genial</string>
+  <string name="display_monuments">Monumenter weisen</string>
+  <string name="learn_more">FIR MÉI ZE WËSSEN</string>
 </resources>

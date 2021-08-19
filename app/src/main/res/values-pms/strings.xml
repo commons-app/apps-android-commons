@@ -103,6 +103,7 @@
   <string name="title_activity_settings">Paràmeter</string>
   <string name="title_activity_signup">Marchesse</string>
   <string name="title_activity_featured_images">Plance an evidensa</string>
+  <string name="title_activity_custom_selector">Seletor përsonalisà</string>
   <string name="title_activity_category_details">Categorìa</string>
   <string name="title_activity_review">Revision da par</string>
   <string name="menu_about">A propòsit</string>

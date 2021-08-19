@@ -119,6 +119,7 @@
   <string name="title_activity_settings">تنظیمات</string>
   <string name="title_activity_signup">ثبت نام</string>
   <string name="title_activity_featured_images">تصاویر برگزیده</string>
+  <string name="title_activity_custom_selector">انتخاب‌گر سفارشی</string>
   <string name="title_activity_category_details">رده</string>
   <string name="title_activity_review">بررسی هم رده</string>
   <string name="menu_about">درباره</string>
@@ -315,6 +316,7 @@
   <string name="quiz_screenshot_question">آیا این عکس از صفحه برای بارگذاری مناسب است؟</string>
   <string name="share_app_title">اشتراک اپلیکیشن</string>
   <string name="error_fetching_nearby_places">خطا در آوردن مکان‌های نزدیک.</string>
+  <string name="error_fetching_nearby_monuments">خطا در واکشی یادمان‌های نزدیک.</string>
   <string name="no_recent_searches">جستجوهای اخیر وجود ندارد</string>
   <string name="delete_recent_searches_dialog">آیا مطمئن هستید که می‌خواهید تاریخچه جستجو را حذف کنید؟</string>
   <string name="delete_search_dialog">آیا می‌خواهید این جستجو را حذف کنید؟</string>
@@ -455,4 +457,16 @@
   <string name="leaderboard_weekly">هفتگی</string>
   <string name="leaderboard_all_time">تمام وقت</string>
   <string name="leaderboard_upload">بارگذاری</string>
+  <string name="custom_selector_title">انتخاب‌گر سفارشی</string>
+  <string name="custom_selector_empty_text">فاقد تصویر</string>
+  <string name="done">انجام شد</string>
+  <string name="back">بازگشت</string>
+  <string name="welcome_custom_picture_selector_text">به انتخاب‌گر سفارشی تصویر خوش آمدید</string>
+  <string name="custom_selector_info_text2">برخلاف تصویر سمت چپ، تصویر سمت راست دارای نشان‌وارهٔ ویکی‌انبار است که نشان می‌دهد از پیش بارگذاری شده‌است.</string>
+  <string name="welcome_custom_selector_ok">عالی</string>
+  <string name="custom_selector_already_uploaded_image_text">این تصویر از پیش در ویکی‌انبار بارگذاری شده‌است.</string>
+  <string name="wlm_upload_info">شما در حال مشارکت در پویش ویکی دوست‌دار یادمان‌ها هستید. الگوهای مرتبط متعاقباً افزوده خواهند شد.</string>
+  <string name="display_monuments">نمایش یادمان‌ها</string>
+  <string name="wlm_month_message">این ماه، ماه «ویکی دوست‌دار یادمان‌ها» است!</string>
+  <string name="learn_more">بیشتر بدانید</string>
 </resources>

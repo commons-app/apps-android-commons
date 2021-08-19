@@ -132,6 +132,7 @@
   <string name="title_activity_settings">Paramètres</string>
   <string name="title_activity_signup">S’inscrire</string>
   <string name="title_activity_featured_images">Images remarquables</string>
+  <string name="title_activity_custom_selector">Sélecteur personnalisé</string>
   <string name="title_activity_category_details">Catégorie</string>
   <string name="title_activity_review">Relecture par les pairs</string>
   <string name="menu_about">À propos</string>
@@ -342,6 +343,7 @@
   <string name="quiz_screenshot_question">Cette copie d’écran est-elle correcte pour être téléversée ?</string>
   <string name="share_app_title">Partager l’application</string>
   <string name="error_fetching_nearby_places">Erreur durant la recherche d’endroits proches.</string>
+  <string name="error_fetching_nearby_monuments">Erreur de récupération des monuments à proximité.</string>
   <string name="no_recent_searches">Aucune recherche récente</string>
   <string name="delete_recent_searches_dialog">Voulez-vous vraiment effacer votre historique de recherche ?</string>
   <string name="delete_search_dialog">Voulez-vous supprimer cette recherche ?</string>
@@ -625,4 +627,18 @@
   <string name="location_picker_image_view_shadow">L’ombre de l’affichage d’image du sélecteur d’événement</string>
   <string name="image_location">Emplacement de l’image</string>
   <string name="check_whether_location_is_correct">Vérifier si l’emplacement est correct</string>
+  <string name="custom_selector_title">Sélecteur actuel</string>
+  <string name="custom_selector_empty_text">Pas d’images</string>
+  <string name="done">Fait</string>
+  <string name="back">Retour</string>
+  <string name="welcome_custom_picture_selector_text">Bienvenue au sélecteur d’images personnalisé</string>
+  <string name="custom_selector_info_text1">Ce sélecteur affiche différemment des images qui sont déjà dans Communs.</string>
+  <string name="custom_selector_info_text2">À l’inverse de l’image sur la gauche, l’image de droite a le logo Communs, indiquant qu’elle a déjà été téléchargée.</string>
+  <string name="welcome_custom_selector_ok">Génial</string>
+  <string name="custom_selector_already_uploaded_image_text">Cette image a déjà été téléchargée sur Communs.</string>
+  <string name="wlm_upload_info">Vous contribuez à la campagne de monuments aimés de Wiki. Les modèles associés seront ajoutés en accord avec cela.</string>
+  <string name="display_monuments">Afficher les monuments</string>
+  <string name="wlm_month_message">C’est le mois des monuments aimés de Wiki !</string>
+  <string name="learn_more">EN SAVOIR PLUS</string>
+  <string name="wlm_campaign_description">Monuments aimés de Wiki est un concours international de photographie de monuments, organisé par Wikimédia</string>
 </resources>

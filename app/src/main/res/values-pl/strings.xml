@@ -602,4 +602,7 @@
   <string name="license_step_title">Licencja dla mediów</string>
   <string name="media_detail_step_title">Szczegóły mediów</string>
   <string name="menu_view_category_page">Zobacz stronę kategorii</string>
+  <string name="custom_selector_title">Niestandardowy selektor</string>
+  <string name="custom_selector_empty_text">Brak obrazów</string>
+  <string name="custom_selector_already_uploaded_image_text">Tez plik został już przesłany do Commons.</string>
 </resources>

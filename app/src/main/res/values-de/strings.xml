@@ -334,6 +334,7 @@
   <string name="quiz_screenshot_question">Darf dieses Bildschirmfoto hochgeladen werden?</string>
   <string name="share_app_title">App teilen</string>
   <string name="error_fetching_nearby_places">Fehler beim Abrufen der Orte in der Nähe.</string>
+  <string name="error_fetching_nearby_monuments">Fehler beim Abrufen von Denkmälern in der Nähe.</string>
   <string name="no_recent_searches">Keine letzten Suchanfragen</string>
   <string name="delete_recent_searches_dialog">Bist du sicher, dass du deinen Suchverlauf löschen möchtest?</string>
   <string name="delete_search_dialog">Möchtest du diese Suche löschen?</string>
@@ -617,4 +618,9 @@
   <string name="location_picker_image_view_shadow">Der Schatten der Bildansicht der Ortsauswahl</string>
   <string name="image_location">Bildstandort</string>
   <string name="check_whether_location_is_correct">Überprüfe, ob der Standort korrekt ist</string>
+  <string name="wlm_upload_info">Du beiligst dich an der Wiki Loves Monuments-Kampagne. Zugehörige Vorlagen werden entsprechend hinzugefügt.</string>
+  <string name="display_monuments">Denkmäler anzeigen</string>
+  <string name="wlm_month_message">Es ist der Wiki Loves Monuments Monat!</string>
+  <string name="learn_more">MEHR ERFAHREN</string>
+  <string name="wlm_campaign_description">Wiki Loves Monuments ist ein internationaler Fotowettbewerb für Denkmäler, der von Wikimedia organisiert wird.</string>
 </resources>

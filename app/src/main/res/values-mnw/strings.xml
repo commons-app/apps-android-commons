@@ -2,6 +2,7 @@
 <!-- Authors:
 * Aue Nai
 * Htawmonzel
+* 咽頭べさ
 -->
 <resources>
   <plurals name="uploads_pending_notification_indicator">
@@ -216,4 +217,8 @@
   <string name="wrong">သွဟ် မဗၠေတ်</string>
   <string name="level" fuzzy="true">ကဆံၚ်</string>
   <string name="images_uploaded">ဗီုရုပ် မတိုန်လဝ်</string>
+  <string name="custom_selector_empty_text">ဗီုရုပ် ဟွံမွဲ</string>
+  <string name="done">တုဲဒှ်</string>
+  <string name="back">ကလေင်</string>
+  <string name="welcome_custom_selector_ok">သေသာတ်</string>
 </resources>
