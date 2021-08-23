@@ -269,7 +269,7 @@ public class OkHttpJsonApiClient {
 
         Timber.d("Fetching nearby items at radius %s", radius);
         final String wikidataQuery;
-        if (shouldQueryForMonuments) {
+        if (!shouldQueryForMonuments) {
             wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
         } else {
             wikidataQuery = FileUtils.readFromResource("/queries/nearby_query_monuments.rq");
