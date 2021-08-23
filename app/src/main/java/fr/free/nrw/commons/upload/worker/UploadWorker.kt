@@ -301,13 +301,13 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                                     "WikiDataEdit not required, upload success"
                                 )
                                 saveCompletedContribution(contribution,uploadResult)
-                                showSuccessNotification(contribution)
                             }else{
                                 Timber.d(
                                     "WikiDataEdit not required, making wikidata edit"
                                 )
                                 makeWikiDataEdit(uploadResult, contribution)
                             }
+                            showSuccessNotification(contribution)
 
                         } else {
                             Timber.e("Stash Upload failed")
