@@ -57,9 +57,9 @@ public class NearbyController {
      * @return NearbyPlacesInfo a variable holds Place list without distance information
      * and boundary coordinates of current Place List
      */
-    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng,
-        boolean returnClosestResult, boolean checkingAroundCurrentLocation,
-        boolean shouldQueryForMonuments) {
+    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng, final LatLng searchLatLng,
+        final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
+        final boolean shouldQueryForMonuments) throws Exception {
 
         Timber.d("Loading attractions near %s", searchLatLng);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();

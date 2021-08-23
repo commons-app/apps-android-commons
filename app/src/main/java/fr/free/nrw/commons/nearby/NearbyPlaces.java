@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
-import io.reactivex.Observable;
 import java.io.IOException;
-import java.io.InterruptedIOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -42,11 +40,11 @@ public class NearbyPlaces {
      * @param returnClosestResult true if only the nearest point is desired
      * @return list of places obtained
      */
-    List<Place> radiusExpander(LatLng curLatLng, String lang, boolean returnClosestResult
-        , boolean shouldQueryForMonuments) {
+    List<Place> radiusExpander(final LatLng curLatLng, final String lang, final boolean returnClosestResult
+        , final boolean shouldQueryForMonuments) throws Exception {
 
-        int minResults;
-        double maxRadius;
+        final int minResults;
+        final double maxRadius;
 
         List<Place> places = Collections.emptyList();
 
@@ -64,12 +62,7 @@ public class NearbyPlaces {
 
             // Increase the radius gradually to find a satisfactory number of nearby places
             while (radius <= maxRadius) {
-                try {
-                    places = getFromWikidataQuery(curLatLng, lang, radius, shouldQueryForMonuments);
-                } catch (final Exception e) {
-                    Timber.e(e, "Exception in fetching nearby places");
-                    break;
-                }
+                places = getFromWikidataQuery(curLatLng, lang, radius, shouldQueryForMonuments);
                 Timber.d("%d results at radius: %f", places.size(), radius);
                 if (places.size() >= minResults) {
                     break;
@@ -95,7 +88,6 @@ public class NearbyPlaces {
      */
     public List<Place> getFromWikidataQuery(final LatLng cur, final String lang,
         final double radius, final boolean shouldQueryForMonuments) throws Exception {
-        return okHttpJsonApiClient.getNearbyPlaces(cur, lang, radius, shouldQueryForMonuments)
-            .blockingSingle();
+        return okHttpJsonApiClient.getNearbyPlaces(cur, lang, radius, shouldQueryForMonuments);
     }
 }

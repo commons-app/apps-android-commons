@@ -5,6 +5,7 @@ import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.UPDAT
 
 import android.text.TextUtils;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
@@ -264,7 +265,9 @@ public class OkHttpJsonApiClient {
         });
     }
 
-    public Observable<List<Place>> getNearbyPlaces(final LatLng cur, final String language, final double radius, boolean shouldQueryForMonuments)
+    @Nullable
+    public List<Place> getNearbyPlaces(final LatLng cur, final String language, final double radius,
+        final boolean shouldQueryForMonuments)
         throws Exception {
 
         Timber.d("Fetching nearby items at radius %s", radius);
@@ -274,45 +277,40 @@ public class OkHttpJsonApiClient {
         } else {
             wikidataQuery = FileUtils.readFromResource("/queries/nearby_query_monuments.rq");
         }
-        String query = wikidataQuery
+        final String query = wikidataQuery
             .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
             .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.getLatitude()))
             .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.getLongitude()))
             .replace("${LANG}", language);
 
-        HttpUrl.Builder urlBuilder = HttpUrl
+        final HttpUrl.Builder urlBuilder = HttpUrl
             .parse(sparqlQueryUrl)
             .newBuilder()
             .addQueryParameter("query", query)
             .addQueryParameter("format", "json");
 
-        Request request = new Request.Builder()
+        final Request request = new Request.Builder()
             .url(urlBuilder.build())
             .build();
 
-        return Observable.fromCallable(() -> {
-            Response response = okHttpClient.newCall(request).execute();
-            if (response != null && response.body() != null && response.isSuccessful()) {
-                String json = response.body().string();
-                if (json == null) {
-                    return new ArrayList<>();
+        final Response response = okHttpClient.newCall(request).execute();
+        if (response.body() != null && response.isSuccessful()) {
+            final String json = response.body().string();
+            final NearbyResponse nearbyResponse = gson.fromJson(json, NearbyResponse.class);
+            final List<NearbyResultItem> bindings = nearbyResponse.getResults().getBindings();
+            final List<Place> places = new ArrayList<>();
+            for (final NearbyResultItem item : bindings) {
+                final Place placeFromNearbyItem = Place.from(item);
+                if (shouldQueryForMonuments && item.getMonument() != null) {
+                    placeFromNearbyItem.setMonument(true);
+                } else {
+                    placeFromNearbyItem.setMonument(false);
                 }
-                final NearbyResponse nearbyResponse = gson.fromJson(json, NearbyResponse.class);
-                final List<NearbyResultItem> bindings = nearbyResponse.getResults().getBindings();
-                final List<Place> places = new ArrayList<>();
-                for (final NearbyResultItem item : bindings) {
-                    final Place placeFromNearbyItem = Place.from(item);
-                    if (shouldQueryForMonuments && item.getMonument() != null) {
-                        placeFromNearbyItem.setMonument(true);
-                    } else {
-                        placeFromNearbyItem.setMonument(false);
-                    }
-                    places.add(placeFromNearbyItem);
-                }
-                return places;
+                places.add(placeFromNearbyItem);
             }
-            return new ArrayList<>();
-        });
+            return places;
+        }
+        throw new Exception(response.message());
     }
 
     /**

@@ -199,12 +199,14 @@ class FileProcessor @Inject constructor(
     private fun suggestNearbyDepictions(imageCoordinates: ImageCoordinates): Disposable {
         return Observable.fromIterable(radiiProgressionInMetres.map { it / 1000.0 })
             .concatMap {
-                okHttpJsonApiClient.getNearbyPlaces(
-                    imageCoordinates.latLng,
-                    Locale.getDefault().language,
-                    it,
-                    false
-                )
+                Observable.fromCallable {
+                    okHttpJsonApiClient.getNearbyPlaces(
+                        imageCoordinates.latLng,
+                        Locale.getDefault().language,
+                        it,
+                        false
+                    )
+                }
             }
             .subscribeOn(Schedulers.io())
             .filter { it.size >= MIN_NEARBY_RESULTS }
