@@ -288,7 +288,7 @@ public class UploadRepository {
             List<Place> fromWikidataQuery = nearbyPlaces.getFromWikidataQuery(new LatLng(
                     decLatitude, decLongitude, 0.0f),
                     Locale.getDefault().getLanguage(),
-                    NEARBY_RADIUS_IN_KILO_METERS);
+                    NEARBY_RADIUS_IN_KILO_METERS, false);
             return fromWikidataQuery.size() > 0 ? fromWikidataQuery.get(0) : null;
         }catch (final Exception e) {
             Timber.e("Error fetching nearby places: %s", e.getMessage());

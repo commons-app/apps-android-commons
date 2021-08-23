@@ -57,7 +57,9 @@ public class NearbyController {
      * @return NearbyPlacesInfo a variable holds Place list without distance information
      * and boundary coordinates of current Place List
      */
-    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean returnClosestResult, boolean checkingAroundCurrentLocation) throws IOException {
+    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng,
+        boolean returnClosestResult, boolean checkingAroundCurrentLocation,
+        boolean shouldQueryForMonuments) {
 
         Timber.d("Loading attractions near %s", searchLatLng);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
@@ -66,7 +68,9 @@ public class NearbyController {
             Timber.d("Loading attractions nearby, but curLatLng is null");
             return null;
         }
-        List<Place> places = nearbyPlaces.radiusExpander(searchLatLng, Locale.getDefault().getLanguage(), returnClosestResult);
+        List<Place> places = nearbyPlaces
+            .radiusExpander(searchLatLng, Locale.getDefault().getLanguage(), returnClosestResult,
+                shouldQueryForMonuments);
 
         if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {places.get(0).location,   // south
@@ -126,11 +130,6 @@ public class NearbyController {
         else {
             return null;
         }
-    }
-
-    public Observable<List<Place>> queryWikiDataForMonuments(
-        final LatLng latLng, final String language) {
-        return nearbyPlaces.queryWikiDataForMonuments(latLng, language);
     }
 
     /**

@@ -202,7 +202,8 @@ class FileProcessor @Inject constructor(
                 okHttpJsonApiClient.getNearbyPlaces(
                     imageCoordinates.latLng,
                     Locale.getDefault().language,
-                    it
+                    it,
+                    false
                 )
             }
             .subscribeOn(Schedulers.io())

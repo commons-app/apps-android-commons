@@ -883,29 +883,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         final Observable<NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curlatLng, searchLatLng, false, true));
+                .loadAttractionsFromLocation(curlatLng, searchLatLng,
+                    false, true, Utils.isMonumentsEnabled(new Date(), applicationKvStore)));
 
-        Observable<List<Place>> observableWikidataMonuments = Observable.empty();
-        if(Utils.isMonumentsEnabled(new Date(), applicationKvStore)){
-                observableWikidataMonuments =
-                    nearbyController
-                        .queryWikiDataForMonuments(searchLatLng, Locale.getDefault().getLanguage());
-
-        }
-
-        compositeDisposable.add(Observable.zip(nearbyPlacesInfoObservable
-            , observableWikidataMonuments.onErrorReturn(throwable -> {
-                showErrorMessage(getString(R.string.error_fetching_nearby_monuments) + throwable
-                    .getLocalizedMessage());
-                return new ArrayList<>();
-            }),
-            (nearbyPlacesInfo, monuments) -> {
-                final List<Place> places = mergeNearbyPlacesAndMonuments(nearbyPlacesInfo.placeList,
-                    monuments);
-                nearbyPlacesInfo.placeList.clear();
-                nearbyPlacesInfo.placeList.addAll(places);
-                return nearbyPlacesInfo;
-            }).subscribeOn(Schedulers.io())
+        compositeDisposable.add(nearbyPlacesInfoObservable
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(nearbyPlacesInfo -> {
                     updateMapMarkers(nearbyPlacesInfo, true);
@@ -925,28 +907,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         final Observable<NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curlatLng, searchLatLng, false, false));
+                .loadAttractionsFromLocation(curlatLng, searchLatLng,
+                    false, true, Utils.isMonumentsEnabled(new Date(), applicationKvStore)));
 
-        Observable<List<Place>> observableWikidataMonuments = Observable.empty();
-        if (Utils.isMonumentsEnabled(new Date(), applicationKvStore)) {
-            observableWikidataMonuments = nearbyController
-                .queryWikiDataForMonuments(searchLatLng, Locale.getDefault().getLanguage());
-
-        }
-
-        compositeDisposable.add(Observable.zip(nearbyPlacesInfoObservable
-            , observableWikidataMonuments.onErrorReturn(throwable -> {
-                showErrorMessage(getString(R.string.error_fetching_nearby_monuments) + throwable
-                    .getLocalizedMessage());
-                return new ArrayList<>();
-            }),
-            (nearbyPlacesInfo, monuments) -> {
-                final List<Place> places = mergeNearbyPlacesAndMonuments(nearbyPlacesInfo.placeList,
-                    monuments);
-                nearbyPlacesInfo.placeList.clear();
-                nearbyPlacesInfo.placeList.addAll(places);
-                return nearbyPlacesInfo;
-            }).subscribeOn(Schedulers.io())
+        compositeDisposable.add(nearbyPlacesInfoObservable
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(nearbyPlacesInfo -> {
                     updateMapMarkers(nearbyPlacesInfo, false);
@@ -959,25 +924,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     presenter.lockUnlockNearby(false);
                     setFilterState();
                 }));
-    }
-
-    /**
-     * If a nearby place happens to be a monument as well, don't make the Pin's overlap, instead
-     * show it as a monument
-     *
-     * @param nearbyPlaces
-     * @param monuments
-     * @return
-     */
-    private List<Place> mergeNearbyPlacesAndMonuments(List<Place> nearbyPlaces, List<Place> monuments){
-        List<Place> allPlaces= new ArrayList<>();
-        allPlaces.addAll(monuments);
-        for (Place place : nearbyPlaces){
-            if(!allPlaces.contains(place)){
-                allPlaces.add(place);
-            }
-        }
-        return allPlaces;
     }
 
     /**
