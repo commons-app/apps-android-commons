@@ -124,6 +124,7 @@
   <string name="title_activity_settings">Einstellungen</string>
   <string name="title_activity_signup">Registrieren</string>
   <string name="title_activity_featured_images">Vorgestellte Bilder</string>
+  <string name="title_activity_custom_selector">Benutzerdefinierte Auswahl</string>
   <string name="title_activity_category_details">Kategorie</string>
   <string name="title_activity_review">Peer Review</string>
   <string name="menu_about">Über</string>
@@ -618,6 +619,15 @@
   <string name="location_picker_image_view_shadow">Der Schatten der Bildansicht der Ortsauswahl</string>
   <string name="image_location">Bildstandort</string>
   <string name="check_whether_location_is_correct">Überprüfe, ob der Standort korrekt ist</string>
+  <string name="custom_selector_title">Benutzerdefinierte Auswahl</string>
+  <string name="custom_selector_empty_text">Keine Bilder</string>
+  <string name="done">Fertig</string>
+  <string name="back">Zurück</string>
+  <string name="welcome_custom_picture_selector_text">Willkommen bei der benutzerdefinierten Auswahl</string>
+  <string name="custom_selector_info_text1">Diese Auswahl zeigt verschiedene Bilder, die bereits zu Commons gehören.</string>
+  <string name="custom_selector_info_text2" fuzzy="true">Im Gegensatz zum Bild auf der linken Seite ist das Bild auf der rechten Seite mit dem Commons-Logo versehen, das anzeigt, dass es bereits hochgeladen wurde.</string>
+  <string name="welcome_custom_selector_ok">Großartig</string>
+  <string name="custom_selector_already_uploaded_image_text">Dieses Bild ist bereits auf Commons hochgeladen worden.</string>
   <string name="wlm_upload_info">Du beiligst dich an der Wiki Loves Monuments-Kampagne. Zugehörige Vorlagen werden entsprechend hinzugefügt.</string>
   <string name="display_monuments">Denkmäler anzeigen</string>
   <string name="wlm_month_message">Es ist der Wiki Loves Monuments Monat!</string>

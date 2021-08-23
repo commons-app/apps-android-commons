@@ -628,12 +628,12 @@
   <string name="image_location">Emplacement de l’image</string>
   <string name="check_whether_location_is_correct">Vérifier si l’emplacement est correct</string>
   <string name="custom_selector_title">Sélecteur actuel</string>
-  <string name="custom_selector_empty_text">Pas d’images</string>
+  <string name="custom_selector_empty_text">Pas d’image</string>
   <string name="done">Fait</string>
   <string name="back">Retour</string>
-  <string name="welcome_custom_picture_selector_text">Bienvenue au sélecteur d’images personnalisé</string>
-  <string name="custom_selector_info_text1">Ce sélecteur affiche différemment des images qui sont déjà dans Communs.</string>
-  <string name="custom_selector_info_text2">À l’inverse de l’image sur la gauche, l’image de droite a le logo Communs, indiquant qu’elle a déjà été téléchargée.</string>
+  <string name="welcome_custom_picture_selector_text">Bienvenue dans le sélecteur d’images personnalisé</string>
+  <string name="custom_selector_info_text1">Ce sélecteur affiche différemment les images qui sont déjà dans Commons.</string>
+  <string name="custom_selector_info_text2" fuzzy="true">À l’inverse de l’image sur la gauche, l’image de droite a le logo Commons, indiquant qu’elle a déjà été téléversée.</string>
   <string name="welcome_custom_selector_ok">Génial</string>
   <string name="custom_selector_already_uploaded_image_text">Cette image a déjà été téléchargée sur Communs.</string>
   <string name="wlm_upload_info">Vous contribuez à la campagne de monuments aimés de Wiki. Les modèles associés seront ajoutés en accord avec cela.</string>

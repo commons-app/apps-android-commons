@@ -626,7 +626,7 @@
   <string name="back">Geri</string>
   <string name="welcome_custom_picture_selector_text">Özel Resim Seçici\'ye Hoş Geldiniz</string>
   <string name="custom_selector_info_text1">Bu seçici, halihazırda Commons\'ta bulunan farklı resimleri gösterir.</string>
-  <string name="custom_selector_info_text2">Soldaki resimden farklı olarak, sağdaki resimde zaten yüklendiğini belirten Commons logosu var.</string>
+  <string name="custom_selector_info_text2" fuzzy="true">Soldaki resimden farklı olarak, sağdaki resimde zaten yüklendiğini belirten Commons logosu var.</string>
   <string name="welcome_custom_selector_ok">Harika</string>
   <string name="custom_selector_already_uploaded_image_text">Bu resim zaten Commons\'a yüklendi.</string>
   <string name="wlm_upload_info">Viki, Anıtları Seviyor kampanyasına katkıda bulunuyorsunuz. İlgili şablonlar buna göre eklenecektir.</string>

@@ -196,7 +196,7 @@
   <string name="nominated_for_deletion">ဗီုရုပ်ဏအ် ဒးဒုၚ်ရုဲပတိုန်သမ္တီလတ် သ္ဂောအ် ပလီုရ.</string>
   <string name="skip_login">သလာ်</string>
   <string name="navigation_item_login">လုပ်လံက်အေန်</string>
-  <string name="nearby_wikidata" fuzzy="true">ဝဳကဳဒေတ</string>
+  <string name="nearby_wikidata">ဝဳကဳဒါတာ</string>
   <string name="nearby_wikipedia" fuzzy="true">ဝဳကဳပဳဒဳယာ</string>
   <string name="nearby_commons" fuzzy="true">COMMONS</string>
   <string name="about_faq" fuzzy="true">&lt;u&gt;FAQ&lt;/u&gt;</string>

@@ -462,7 +462,7 @@
   <string name="done">انجام شد</string>
   <string name="back">بازگشت</string>
   <string name="welcome_custom_picture_selector_text">به انتخاب‌گر سفارشی تصویر خوش آمدید</string>
-  <string name="custom_selector_info_text2">برخلاف تصویر سمت چپ، تصویر سمت راست دارای نشان‌وارهٔ ویکی‌انبار است که نشان می‌دهد از پیش بارگذاری شده‌است.</string>
+  <string name="custom_selector_info_text2" fuzzy="true">برخلاف تصویر سمت چپ، تصویر سمت راست دارای نشان‌وارهٔ ویکی‌انبار است که نشان می‌دهد از پیش بارگذاری شده‌است.</string>
   <string name="welcome_custom_selector_ok">عالی</string>
   <string name="custom_selector_already_uploaded_image_text">این تصویر از پیش در ویکی‌انبار بارگذاری شده‌است.</string>
   <string name="wlm_upload_info">شما در حال مشارکت در پویش ویکی دوست‌دار یادمان‌ها هستید. الگوهای مرتبط متعاقباً افزوده خواهند شد.</string>
