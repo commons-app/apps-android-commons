@@ -173,6 +173,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @OnClick(R.id.skip_login)
     void skipLogin() {
         new AlertDialog.Builder(this).setTitle(R.string.skip_login_title)
+                .setIcon(R.drawable.ic_skip)
                 .setMessage(R.string.skip_login_message)
                 .setCancelable(false)
                 .setPositiveButton(R.string.yes, (dialog, which) -> {
