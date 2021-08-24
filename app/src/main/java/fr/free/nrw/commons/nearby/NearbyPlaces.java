@@ -17,8 +17,8 @@ import timber.log.Timber;
 @Singleton
 public class NearbyPlaces {
 
-    private static final double INITIAL_RADIUS = 1.0; // in kilometers
-    private static final double RADIUS_MULTIPLIER = 1.618;
+    private static final double INITIAL_RADIUS = 0.3; // in kilometers
+    private static final double RADIUS_MULTIPLIER = 2.0;
     public double radius = INITIAL_RADIUS;
 
     private final OkHttpJsonApiClient okHttpJsonApiClient;
@@ -55,7 +55,7 @@ public class NearbyPlaces {
             maxRadius = 5;  // Return places only in 5 km area
             radius = INITIAL_RADIUS; // refresh radius again, otherwise increased radius is grater than MAX_RADIUS, thus returns null
         } else {
-            minResults = 40;
+            minResults = 20;
             maxRadius = 300.0; // in kilometers
             radius = INITIAL_RADIUS;
         }
