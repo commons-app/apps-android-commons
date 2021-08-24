@@ -23,6 +23,8 @@ public class UploadItem {
     private final String createdTimestampSource;
     private final BehaviorSubject<Integer> imageQuality;
     private boolean hasInvalidLocation;
+    private boolean isWLMUpload = false;
+    private String countryCode;
 
 
     @SuppressLint("CheckResult")
@@ -87,6 +89,14 @@ public class UploadItem {
         this.uploadMediaDetails = uploadMediaDetails;
     }
 
+    public void setWLMUpload(final boolean WLMUpload) {
+        isWLMUpload = WLMUpload;
+    }
+
+    public boolean isWLMUpload() {
+        return isWLMUpload;
+    }
+
     @Override
     public boolean equals(@Nullable final Object obj) {
         if (!(obj instanceof UploadItem)) {
@@ -120,5 +130,14 @@ public class UploadItem {
 
     public boolean hasInvalidLocation() {
         return hasInvalidLocation;
+    }
+
+    public void setCountryCode(final String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+    @Nullable
+    public String getCountryCode() {
+        return countryCode;
     }
 }

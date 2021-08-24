@@ -210,11 +210,11 @@ public class UploadClient {
     public Observable<UploadResult> uploadFileFromStash(
         final Contribution contribution,
         final String uniqueFileName,
-        final String fileKey, @Nullable String countryCode) {
+        final String fileKey) {
         try {
             return uploadInterface
                 .uploadFileFromStash(csrfTokenClient.getTokenBlocking(),
-                    pageContentsCreator.createFrom(contribution, countryCode),
+                    pageContentsCreator.createFrom(contribution),
                     CommonsApplication.DEFAULT_EDIT_SUMMARY,
                     uniqueFileName,
                     fileKey).map(uploadResponse -> {

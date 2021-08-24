@@ -300,4 +300,8 @@ public class UploadRepository {
     public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
         uploadModel.useSimilarPictureCoordinates(imageCoordinates, uploadItemIndex);
     }
+
+    public boolean isWMLSupportedForThisPlace() {
+        return uploadModel.getItems().get(0).isWLMUpload();
+    }
 }

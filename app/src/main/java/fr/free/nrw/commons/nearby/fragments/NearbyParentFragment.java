@@ -1194,7 +1194,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         .position(new LatLng(curLatLng.getLatitude(),
                                 curLatLng.getLongitude()));
                 currentLocationMarkerOptions.setIcon(icon); // Set custom icon
-                currentLocationMarker = mapBox.addMarker(currentLocationMarkerOptions);
+                mapView.post(
+                    () -> currentLocationMarker = mapBox.addMarker(currentLocationMarkerOptions));
 
                 final List<LatLng> circle = UiUtils
                         .createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
@@ -1204,7 +1205,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         .addAll(circle)
                         .strokeColor(getResources().getColor(R.color.current_marker_stroke))
                         .fillColor(getResources().getColor(R.color.current_marker_fill));
-                currentLocationPolygon = mapBox.addPolygon(currentLocationPolygonOptions);
+                mapView.post(
+                    () -> currentLocationPolygon = mapBox
+                        .addPolygon(currentLocationPolygonOptions));
 
             });
         } else {

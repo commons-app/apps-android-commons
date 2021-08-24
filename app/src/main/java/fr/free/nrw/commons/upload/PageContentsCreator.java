@@ -30,7 +30,7 @@ class PageContentsCreator {
         this.context = context;
     }
 
-    public String createFrom(final Contribution contribution, final String countryCode) {
+    public String createFrom(final Contribution contribution) {
         StringBuilder buffer = new StringBuilder();
         final Media media = contribution.getMedia();
         buffer
@@ -57,7 +57,7 @@ class PageContentsCreator {
 
         if (contribution.getWikidataPlace()!=null && contribution.getWikidataPlace().isMonumentUpload()) {
             buffer.append("{{Wiki Loves Monuments 2021|1= ")
-                .append(countryCode)
+                .append(contribution.getCountryCode())
                 .append("}}").append("\n");
         }
 
