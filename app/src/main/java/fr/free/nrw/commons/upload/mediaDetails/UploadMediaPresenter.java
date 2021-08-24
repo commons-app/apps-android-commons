@@ -104,8 +104,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * This method checks for the nearest location that needs images and suggests it to the user.
      * @param uploadItem
      */
-    private void checkNearbyPlaces(UploadItem uploadItem) {
-        Disposable checkNearbyPlaces = Maybe.fromCallable(() -> repository
+    private void checkNearbyPlaces(final UploadItem uploadItem) {
+        final Disposable checkNearbyPlaces = Maybe.fromCallable(() -> repository
                 .checkNearbyPlaces(uploadItem.getGpsCoords().getDecLatitude(),
                         uploadItem.getGpsCoords().getDecLongitude()))
                 .subscribeOn(ioScheduler)
