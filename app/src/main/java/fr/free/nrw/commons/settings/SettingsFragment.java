@@ -105,6 +105,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             findPreference("descriptionDefaultLanguagePref").setEnabled(false);
             findPreference("displayLocationPermissionForCardView").setEnabled(false);
             findPreference("displayCampaignsCardView").setEnabled(false);
+            findPreference("managed_exif_tags").setEnabled(false);
         }
 
         findPreference("telemetryOptOut").setOnPreferenceChangeListener(
