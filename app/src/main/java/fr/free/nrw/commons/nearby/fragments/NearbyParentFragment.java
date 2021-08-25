@@ -1184,7 +1184,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void addCurrentLocationMarker(final fr.free.nrw.commons.location.LatLng curLatLng) {
         if (null != curLatLng && !isPermissionDenied) {
             ExecutorUtils.get().submit(() -> {
-                removeCurrentLocationMarker();
+                mapView.post(() -> removeCurrentLocationMarker());
                 Timber.d("Adds current location marker");
 
                 final Icon icon = IconFactory.getInstance(getContext())
@@ -1194,7 +1194,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         .position(new LatLng(curLatLng.getLatitude(),
                                 curLatLng.getLongitude()));
                 currentLocationMarkerOptions.setIcon(icon); // Set custom icon
-                currentLocationMarker = mapBox.addMarker(currentLocationMarkerOptions);
+                mapView.post(
+                    () -> currentLocationMarker = mapBox.addMarker(currentLocationMarkerOptions));
 
                 final List<LatLng> circle = UiUtils
                         .createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
@@ -1204,8 +1205,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         .addAll(circle)
                         .strokeColor(getResources().getColor(R.color.current_marker_stroke))
                         .fillColor(getResources().getColor(R.color.current_marker_fill));
-                currentLocationPolygon = mapBox.addPolygon(currentLocationPolygonOptions);
-
+                mapView.post(
+                    () -> currentLocationPolygon = mapBox
+                        .addPolygon(currentLocationPolygonOptions));
             });
         } else {
             Timber.d("not adding current location marker..current location is null");
