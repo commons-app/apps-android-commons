@@ -55,16 +55,16 @@ class PageContentsCreator {
 
         buffer.append("}}").append("\n");
 
-        if (contribution.getWikidataPlace()!=null && contribution.getWikidataPlace().isMonumentUpload()) {
-            buffer.append("{{Wiki Loves Monuments 2021|1= ")
-                .append(countryCode)
-                .append("}}").append("\n");
-        }
-
         //Only add Location template (e.g. {{Location|37.51136|-77.602615}} ) if coords is not null
         final String decimalCoords = contribution.getDecimalCoords();
         if (decimalCoords != null) {
             buffer.append("{{Location|").append(decimalCoords).append("}}").append("\n");
+        }
+
+        if (contribution.getWikidataPlace()!=null && contribution.getWikidataPlace().isMonumentUpload()) {
+            buffer.append("{{Wiki Loves Monuments 2021|1= ")
+                .append(countryCode)
+                .append("}}").append("\n");
         }
 
         buffer.append("== {{int:license-header}} ==\n")
