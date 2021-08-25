@@ -90,12 +90,15 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
         initPresenter();
         initLicenseSpinner();
         presenter.getLicenses();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
         /**
          * Show the wlm info message if the upload is a WLM upload
          */
-        if(callback.isWLMUpload()){
-            //TODO : Update the info message logo
+        if(callback.isWLMUpload() && presenter.isWLMSupportedForThisPlace()){
             llInfoMonumentUpload.setVisibility(View.VISIBLE);
         }else{
             llInfoMonumentUpload.setVisibility(View.GONE);
