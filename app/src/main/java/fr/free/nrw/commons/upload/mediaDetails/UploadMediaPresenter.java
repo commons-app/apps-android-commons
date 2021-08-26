@@ -93,7 +93,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
             repository
                 .preProcessImage(uploadableFile, place, this)
                 .map(uploadItem -> {
-                    if(place.isMonument()){
+                    if(place!=null && place.isMonument()){
                         if (place.location != null) {
                             final String countryCode = reverseGeoCode(place.location);
                             if (countryCode != null && WLM_SUPPORTED_COUNTRIES
@@ -132,8 +132,9 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
             final List<Address> addresses = geocoder
                 .getFromLocation(latLng.getLatitude(), latLng.getLongitude(), 1);
             for (final Address address : addresses) {
-                if (address != null && address.getLocale().getISO3Country() != null) {
-                    return address.getLocale().getCountry();
+                if (address != null && address.getCountryCode() != null) {
+                    String countryCode = address.getCountryCode();
+                    return countryCode;
                 }
             }
         } catch (final IOException e) {
