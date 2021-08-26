@@ -63,7 +63,7 @@ class PageContentsCreator {
 
         if (contribution.getWikidataPlace()!=null && contribution.getWikidataPlace().isMonumentUpload()) {
             buffer.append("{{Wiki Loves Monuments 2021|1= ")
-                .append(countryCode)
+                .append(contribution.getCountryCode())
                 .append("}}").append("\n");
         }
 
