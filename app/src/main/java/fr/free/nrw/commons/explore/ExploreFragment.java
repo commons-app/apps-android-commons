@@ -12,6 +12,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.github.javiersantos.appupdater.AppUpdater;
+import com.github.javiersantos.appupdater.enums.Display;
+import com.github.javiersantos.appupdater.enums.UpdateFrom;
 import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.ViewPagerAdapter;
@@ -69,8 +72,23 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         viewPager.setId(R.id.viewPager);
         tabLayout.setupWithViewPager(viewPager);
         setTabs();
+        setUpUpdatePrompt();
         setHasOptionsMenu(true);
         return view;
+    }
+
+    public void setUpUpdatePrompt() {
+        AppUpdater appUpdater = new AppUpdater(getContext());
+
+        new AppUpdater(getContext())
+            .setUpdateFrom(UpdateFrom.GOOGLE_PLAY)
+            .setDisplay(Display.DIALOG)
+            .setTitleOnUpdateAvailable("Update available")//Title of the Dialog Prompt
+            .setContentOnUpdateAvailable("Check out the latest version available of Commons Android App!")//Description of the Dialog Prompt
+            .setButtonUpdate("Update")//Updates the App
+            .setButtonDoNotShowAgain("Don't show again");//Never shows the prompt again until next release
+
+        appUpdater.start();
     }
 
     /**
