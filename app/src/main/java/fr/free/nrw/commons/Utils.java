@@ -218,12 +218,12 @@ public class Utils {
      * @param date
      * @return
      */
-    public static boolean isMonumentsEnabled(final Date date, final JsonKvStore store){
-        if(date.getDay()>=1 && date.getMonth()>=9 && date.getDay()<=30 && date.getMonth()<=9 ){
+    public static boolean isMonumentsEnabled(final Date date) {
+        if (date.getDate() >= 1 && date.getMonth() >= 8 && date.getDate() <= 30
+            && date.getMonth() <= 8) {
             return true;
         }
-
-        return store.getBoolean(CAMPAIGNS_DEFAULT_PREFERENCE) ;
+        return false;
     }
 
     /**

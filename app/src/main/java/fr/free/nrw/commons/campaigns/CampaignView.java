@@ -117,9 +117,8 @@ public class CampaignView extends SwipableCardView {
                             .parse(campaign.getStartDate());
                         final Date endDate = CommonsDateUtil.getIso8601DateFormatShort()
                             .parse(campaign.getEndDate());
-                        tvDates.setText(
-                            String.format("%1s - %2s", startDate,
-                                endDate));
+                        tvDates.setText(String.format("%1s - %2s", DateUtil.getExtraShortDateString(startDate),
+                            DateUtil.getExtraShortDateString(endDate)));
                     }
                 } catch (final ParseException e) {
                     e.printStackTrace();
