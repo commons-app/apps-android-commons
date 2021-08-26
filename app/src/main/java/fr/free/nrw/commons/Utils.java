@@ -219,8 +219,7 @@ public class Utils {
      * @return
      */
     public static boolean isMonumentsEnabled(final Date date) {
-        if (date.getDate() >= 1 && date.getMonth() >= 8 && date.getDate() <= 30
-            && date.getMonth() <= 8) {
+        if (date.getMonth() == 8) {
             return true;
         }
         return false;
