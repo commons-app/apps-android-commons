@@ -636,8 +636,12 @@
   <string name="custom_selector_empty_text">אין תמונות</string>
   <string name="done">בוצע</string>
   <string name="back">חזרה</string>
+  <string name="welcome_custom_picture_selector_text">ברוך בואך לבוחר התמונות המותאמות</string>
+  <string name="custom_selector_info_text1">הבוחר מציג תמונות שונות מאלו שכבר בוויקישיתוף.</string>
+  <string name="custom_selector_info_text2">בניגוד לתמונה מימין, על התמונה שמשמאל יש את הלוגו של ויקישיתוף שמעיד שהיא כבר הועלתה. יש לגעת ולהחזיר לקבלת תצוגה מקדימה של התמונה.</string>
   <string name="welcome_custom_selector_ok">מגניב</string>
   <string name="custom_selector_already_uploaded_image_text">התמונה הזאת כבר הועלתה לוויקישיתוף.</string>
+  <string name="wlm_upload_info">זאת תהיה תרומה למבצע ויקי אוהבת אתרי מורשת. תוספנה תבניות מתאימות.</string>
   <string name="display_monuments">הצגת אתרי מורשת</string>
   <string name="wlm_month_message">זהו חודש ויקי אוהבת אתרי מורשת!</string>
   <string name="learn_more">מידע נוסף</string>

@@ -625,7 +625,7 @@
   <string name="back">Zurück</string>
   <string name="welcome_custom_picture_selector_text">Willkommen bei der benutzerdefinierten Auswahl</string>
   <string name="custom_selector_info_text1">Diese Auswahl zeigt verschiedene Bilder, die bereits zu Commons gehören.</string>
-  <string name="custom_selector_info_text2" fuzzy="true">Im Gegensatz zum Bild auf der linken Seite ist das Bild auf der rechten Seite mit dem Commons-Logo versehen, das anzeigt, dass es bereits hochgeladen wurde.</string>
+  <string name="custom_selector_info_text2">Im Gegensatz zum Bild auf der linken Seite ist das Bild auf der rechten Seite mit dem Commons-Logo versehen, das anzeigt, dass es bereits hochgeladen wurde. Für die Bildvorschau berühren und halten.</string>
   <string name="welcome_custom_selector_ok">Großartig</string>
   <string name="custom_selector_already_uploaded_image_text">Dieses Bild ist bereits auf Commons hochgeladen worden.</string>
   <string name="wlm_upload_info">Du beiligst dich an der Wiki Loves Monuments-Kampagne. Zugehörige Vorlagen werden entsprechend hinzugefügt.</string>

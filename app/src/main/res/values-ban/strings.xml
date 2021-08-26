@@ -96,7 +96,7 @@
   <string name="title_activity_category_details">Kategori</string>
   <string name="title_activity_review">Ulasan Peer</string>
   <string name="menu_about">Indik</string>
-  <string name="about_improve">Kardi &lt;a href=\"%1$s\"&gt;isu GitHub&lt;/a&gt; anyar antuk parihindik miwah panikayan kakutu.</string>
+  <string name="about_improve">Kardi &lt;a href=\"%1$s\"&gt;isu GitHub&lt;/a&gt; anyar antuk parikanda miwah panikayan kakutu.</string>
   <string name="about_privacy_policy">Parikrama paragaan</string>
   <string name="about_credits">Krédit</string>
   <string name="title_activity_about">Indik</string>
@@ -151,6 +151,7 @@
   <string name="media_detail_license">Lisénsi</string>
   <string name="media_detail_coordinates">Koordinat</string>
   <string name="_2fa_code">Kode O2F</string>
+  <string name="logout_verification">Napiké ragané yakti jagi medal log?</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="commons_website">Situs Commons</string>
   <string name="commons_facebook">Kaca Facebook Commons</string>
