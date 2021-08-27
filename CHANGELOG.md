@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+## v3.1.0-alpha
+- Added WLM integration
+- Alpha closed testing version has no date constraint, no location constraint, and uses test template
+
 ## v3.0.2
 - Fixed crash when uploading high res image
 - Fixed crash when viewing images in Explore
