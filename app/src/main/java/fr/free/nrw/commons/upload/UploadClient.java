@@ -73,7 +73,7 @@ public class UploadClient {
             && contribution.getChunkInfo().getTotalChunks() == contribution.getChunkInfo()
             .getIndexOfNextChunkToUpload()) {
             return Observable.just(new StashUploadResult(StashUploadState.SUCCESS,
-                contribution.getChunkInfo().getUploadResult().getFilekey()));
+                contribution.getChunkInfo().getUploadResult().getFilekey(), ""));
         }
 
         CommonsApplication.pauseUploads.put(contribution.getPageId(), false);
@@ -97,6 +97,7 @@ public class UploadClient {
 
         final AtomicInteger index = new AtomicInteger();
         final AtomicBoolean failures = new AtomicBoolean();
+        final AtomicReference<String> message = new AtomicReference<>();
 
         compositeDisposable.add(Observable.fromIterable(fileChunks).forEach(chunkFile -> {
             if (CommonsApplication.pauseUploads.get(contribution.getPageId()) || failures.get()) {
@@ -135,23 +136,24 @@ public class UploadClient {
                 notificationUpdater.onChunkUploaded(contribution, chunkInfo.get());
             }, throwable -> {
                 Timber.e(throwable, "Received error in chunk upload");
+                message.set(throwable.getMessage());
                 failures.set(true);
             }));
         }));
 
         if (CommonsApplication.pauseUploads.get(contribution.getPageId())) {
             Timber.d("Upload stash paused %s", contribution.getPageId());
-            return Observable.just(new StashUploadResult(StashUploadState.PAUSED, null));
+            return Observable.just(new StashUploadResult(StashUploadState.PAUSED, null, ""));
         } else if (failures.get()) {
             Timber.d("Upload stash contains failures %s", contribution.getPageId());
-            return Observable.just(new StashUploadResult(StashUploadState.FAILED, null));
+            return Observable.just(new StashUploadResult(StashUploadState.FAILED, null, message.get()));
         } else if (chunkInfo.get() != null) {
             Timber.d("Upload stash success %s", contribution.getPageId());
             return Observable.just(new StashUploadResult(StashUploadState.SUCCESS,
-                chunkInfo.get().getUploadResult().getFilekey()));
+                chunkInfo.get().getUploadResult().getFilekey(), ""));
         } else {
             Timber.d("Upload stash failed %s", contribution.getPageId());
-            return Observable.just(new StashUploadResult(StashUploadState.FAILED, null));
+            return Observable.just(new StashUploadResult(StashUploadState.FAILED, null, message.get()));
         }
     }
 

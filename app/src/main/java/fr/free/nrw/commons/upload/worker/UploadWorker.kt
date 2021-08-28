@@ -301,7 +301,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
 
                         } else {
                             Timber.e("Stash Upload failed")
-                            showFailedNotification(contribution)
+                            showFailedNotification(contribution, "")
                             contribution.state = Contribution.STATE_FAILED
                             contribution.chunkInfo = null
                             contributionDao.save(contribution).blockingAwait()
@@ -310,7 +310,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     }catch (exception : Exception){
                         Timber.e(exception)
                         Timber.e("Upload from stash failed for contribution : $filename")
-                        showFailedNotification(contribution)
+                        showFailedNotification(contribution, "")
                         contribution.state=Contribution.STATE_FAILED
                         if (STASH_ERROR_CODES.contains(exception.message)) {
                             clearChunks(contribution)
@@ -324,7 +324,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 }
                 else -> {
                     Timber.e("""upload file to stash failed with status: ${stashUploadResult.state}""")
-                    showFailedNotification(contribution)
+                    showFailedNotification(contribution, stashUploadResult.message)
                     contribution.state = Contribution.STATE_FAILED
                     contribution.chunkInfo = null
                     contributionDao.saveSynchronous(contribution)
@@ -333,7 +333,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         }catch (exception: Exception){
             Timber.e(exception)
             Timber.e("Stash upload failed for contribution: $filename")
-            showFailedNotification(contribution)
+            showFailedNotification(contribution, "")
             contribution.state=Contribution.STATE_FAILED
             clearChunks(contribution)
         }
@@ -448,7 +448,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
      * @param contribution
      */
     @SuppressLint("StringFormatInvalid")
-    private fun showFailedNotification(contribution: Contribution) {
+    private fun showFailedNotification(contribution: Contribution, message: String) {
         val displayTitle = contribution.media.displayTitle
         curentNotification.setContentTitle(
             appContext.getString(
@@ -456,7 +456,11 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 displayTitle
             )
         )
-            .setContentText(appContext.getString(R.string.upload_failed_notification_subtitle))
+            .setContentText(
+                if(message.isBlank())
+                    appContext.getString(R.string.upload_failed_notification_subtitle)
+                else
+                    message)
             .setProgress(0, 0, false)
             .setOngoing(false)
         notificationManager?.notify(
