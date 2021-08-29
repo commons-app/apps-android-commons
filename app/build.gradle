@@ -58,8 +58,8 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp-ws:$OKHTTP_VERSION"
 
     // Logging
-    implementation 'ch.acra:acra-dialog:5.8.1-beta11'
-    implementation 'ch.acra:acra-mail:5.8.1-beta11'
+    implementation 'ch.acra:acra-dialog:5.8.4'
+    implementation 'ch.acra:acra-mail:5.8.4'
     implementation 'org.slf4j:slf4j-api:1.7.25'
     api('com.github.tony19:logback-android-classic:1.1.1-6') {
         exclude group: 'com.google.android', module: 'android'
@@ -221,7 +221,7 @@ android {
     }
 
     configurations.all {
-        resolutionStrategy.force 'androidx.annotation:annotation:1.0.2'
+        resolutionStrategy.force 'androidx.annotation:annotation:1.1.0'
         exclude module: 'okhttp-ws'
     }
     flavorDimensions 'tier'
