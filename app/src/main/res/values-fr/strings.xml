@@ -633,7 +633,7 @@
   <string name="back">Retour</string>
   <string name="welcome_custom_picture_selector_text">Bienvenue dans le sélecteur d’images personnalisé</string>
   <string name="custom_selector_info_text1">Ce sélecteur affiche différemment les images qui sont déjà dans Commons.</string>
-  <string name="custom_selector_info_text2" fuzzy="true">À l’inverse de l’image sur la gauche, l’image de droite a le logo Commons, indiquant qu’elle a déjà été téléversée.</string>
+  <string name="custom_selector_info_text2">À l’inverse de l’image sur la gauche, l’image de droite a le logo Commons, indiquant qu’elle a déjà été téléversée.\n Toucher et maintenir pour avoir un aperçu de l\'image.</string>
   <string name="welcome_custom_selector_ok">Génial</string>
   <string name="custom_selector_already_uploaded_image_text">Cette image a déjà été téléchargée sur Communs.</string>
   <string name="wlm_upload_info">Vous contribuez à la campagne de monuments aimés de Wiki. Les modèles associés seront ajoutés en accord avec cela.</string>
