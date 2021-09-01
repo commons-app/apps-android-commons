@@ -12,7 +12,7 @@ import fr.free.nrw.commons.upload.depicts.DepictsDao
  * The database for accessing the respective DAOs
  *
  */
-@Database(entities = [Contribution::class, Depicts::class], version = 8, exportSchema = false)
+@Database(entities = [Contribution::class, Depicts::class], version = 9, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun contributionDao(): ContributionDao

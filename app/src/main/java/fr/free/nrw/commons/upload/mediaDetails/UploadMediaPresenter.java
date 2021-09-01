@@ -7,9 +7,14 @@ import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
+import android.location.Address;
+import android.location.Geocoder;
+import androidx.annotation.Nullable;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.repository.UploadRepository;
 import fr.free.nrw.commons.upload.ImageCoordinates;
@@ -22,10 +27,13 @@ import io.reactivex.Maybe;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import java.io.IOException;
 import java.lang.reflect.Proxy;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.jetbrains.annotations.NotNull;
@@ -47,6 +55,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     private final JsonKvStore defaultKVStore;
     private Scheduler ioScheduler;
     private Scheduler mainThreadScheduler;
+
+    private final List<String> WLM_SUPPORTED_COUNTRIES= Arrays.asList("au","ie", "in");
 
     @Inject
     public UploadMediaPresenter(UploadRepository uploadRepository,
@@ -77,18 +87,31 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param place
      */
     @Override
-    public void receiveImage(UploadableFile uploadableFile, Place place) {
+    public void receiveImage(final UploadableFile uploadableFile, final Place place) {
         view.showProgress(true);
         compositeDisposable.add(
             repository
                 .preProcessImage(uploadableFile, place, this)
+                .map(uploadItem -> {
+                    if(place!=null && place.isMonument()){
+                        if (place.location != null) {
+                            final String countryCode = reverseGeoCode(place.location);
+                            if (countryCode != null && WLM_SUPPORTED_COUNTRIES
+                                .contains(countryCode.toLowerCase())) {
+                                uploadItem.setWLMUpload(true);
+                                uploadItem.setCountryCode(countryCode.toLowerCase());
+                            }
+                        }
+                    }
+                    return uploadItem;
+                })
                 .subscribeOn(ioScheduler)
                 .observeOn(mainThreadScheduler)
                 .subscribe(uploadItem ->
                     {
                         view.onImageProcessed(uploadItem, place);
                         view.updateMediaDetails(uploadItem.getUploadMediaDetails());
-                        ImageCoordinates gpsCoords = uploadItem.getGpsCoords();
+                        final ImageCoordinates gpsCoords = uploadItem.getGpsCoords();
                         final boolean hasImageCoordinates =
                           gpsCoords != null && gpsCoords.getImageCoordsExists();
                         view.showMapWithImageCoordinates(hasImageCoordinates);
@@ -98,6 +121,26 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                         }
                     },
                     throwable -> Timber.e(throwable, "Error occurred in processing images")));
+    }
+
+    @Nullable
+    private String reverseGeoCode(final LatLng latLng){
+        final Geocoder geocoder = new Geocoder(
+            CommonsApplication.getInstance().getApplicationContext(), Locale
+            .getDefault());
+        try {
+            final List<Address> addresses = geocoder
+                .getFromLocation(latLng.getLatitude(), latLng.getLongitude(), 1);
+            for (final Address address : addresses) {
+                if (address != null && address.getCountryCode() != null) {
+                    String countryCode = address.getCountryCode();
+                    return countryCode;
+                }
+            }
+        } catch (final IOException e) {
+            Timber.e(e);
+        }
+        return null;
     }
 
     /**

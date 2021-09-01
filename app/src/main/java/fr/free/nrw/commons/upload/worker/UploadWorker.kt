@@ -274,19 +274,10 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     Timber.d("Ensure uniqueness of filename");
                     val uniqueFileName = findUniqueFileName(filename!!)
 
-
                     try {
                         //Upload the file from stash
-                            var countryCode: String? =null
-                            with(contribution.wikidataPlace?.location){
-                                if (contribution.wikidataPlace?.isMonumentUpload == true) {
-                                    countryCode =
-                                        reverseGeoCode(contribution.wikidataPlace?.location!!)?.toLowerCase()
-                                }
-
-                            }
                         val uploadResult = uploadClient.uploadFileFromStash(
-                            contribution, uniqueFileName, stashUploadResult.fileKey, countryCode
+                            contribution, uniqueFileName, stashUploadResult.fileKey
                         ).blockingSingle()
 
                         if (uploadResult.isSuccessful()) {
@@ -347,26 +338,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             contribution.state=Contribution.STATE_FAILED
             clearChunks(contribution)
         }
-    }
-
-    private fun reverseGeoCode(latLng: LatLng): String? {
-
-        val geocoder = Geocoder(
-            CommonsApplication.getInstance().applicationContext, Locale
-                .getDefault()
-        )
-        try {
-            val addresses =
-                geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
-            for (address in addresses) {
-                if (address != null && address.locale.isO3Country != null) {
-                    return address.locale.country
-                }
-            }
-        } catch (e: IOException) {
-            Timber.e(e)
-        }
-        return null
     }
 
     private fun clearChunks(contribution: Contribution) {
