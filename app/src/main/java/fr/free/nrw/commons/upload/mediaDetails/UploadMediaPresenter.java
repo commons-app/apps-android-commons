@@ -56,7 +56,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     private Scheduler ioScheduler;
     private Scheduler mainThreadScheduler;
 
-    private final List<String> WLM_SUPPORTED_COUNTRIES= Arrays.asList("au","ie", "in");
+    private final List<String> WLM_SUPPORTED_COUNTRIES= Arrays.asList("am","at","az","br","hr","sv","fi","fr","de","gh","in","ie","il","mk","my","mt","pk","pe","pl","ru","rw","si","es","se","tw","ug","ua","us");
 
     @Inject
     public UploadMediaPresenter(UploadRepository uploadRepository,
