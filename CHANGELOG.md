@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+## v3.1.0
+- Added Wiki Loves Monuments integration for WLM 2021
+
 ## v3.0.2
 - Fixed crash when uploading high res image
 - Fixed crash when viewing images in Explore
