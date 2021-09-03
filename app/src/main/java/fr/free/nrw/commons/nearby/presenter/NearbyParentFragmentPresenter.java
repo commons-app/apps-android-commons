@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby.presenter;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.MainThread;
@@ -223,6 +224,7 @@ public class NearbyParentFragmentPresenter
             }
             lockUnlockNearby(false); // So that new location updates wont come
             nearbyParentFragmentView.setProgressBarVisibility(false);
+            Log.d("hehehe", "place3");
             nearbyParentFragmentView.updateListFragment(nearbyPlacesInfo.placeList);
             handleCenteringTaskIfAny();
         }
@@ -286,10 +288,12 @@ public class NearbyParentFragmentPresenter
             switch (state) {
                 case UNKNOWN:
                     // Do nothing
+                    Log.d("hehe", "place4.0 " + "unkown");
                     break;
                 case UNCHECKED:
                     nearbyParentFragmentView.filterOutAllMarkers();
                     nearbyParentFragmentView.setRecyclerViewAdapterItemsGreyedOut();
+                    Log.d("hehe", "place4.0 " + "uncheck");
                     break;
                 case CHECKED:
                     // Despite showing all labels NearbyFilterState still should be applied
@@ -299,9 +303,11 @@ public class NearbyParentFragmentPresenter
                         NearbyFilterState.getInstance().isWlmSelected(),
                         filterForPlaceState, false);
                     nearbyParentFragmentView.setRecyclerViewAdapterAllSelected();
+                    Log.d("hehe", "place4.0 " + "check");
                     break;
             }
         } else {
+            Log.d("hehe", "place4.0 " + "else");
             nearbyParentFragmentView.filterMarkersByLabels(selectedLabels,
                     NearbyFilterState.getInstance().isExistsSelected(),
                     NearbyFilterState.getInstance().isNeedPhotoSelected(),

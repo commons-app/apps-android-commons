@@ -3,6 +3,8 @@ package fr.free.nrw.commons.nearby.fragments;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
+import static fr.free.nrw.commons.nearby.CheckBoxTriStates.CHECKED;
+import static fr.free.nrw.commons.nearby.CheckBoxTriStates.UNCHECKED;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
@@ -246,6 +248,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * WLM URL
      */
     public static final String WLM_URL = "https://www.wikilovesmonuments.org/";
+    private List<Place> places;
 
     @NonNull
     public static NearbyParentFragment newInstance() {
@@ -357,9 +360,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void initRvNearbyList() {
+        Log.d("hehehe", "place1 ");
         rvNearbyList.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new PlaceAdapter(bookmarkLocationDao,
             place -> {
+            Log.d("hehehe", "place "+place.name);
                 centerMapToPlace(place);
                 return Unit.INSTANCE;
             },
@@ -632,10 +637,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void initFilterChips() {
         chipNeedsPhoto.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            Log.d("hehe", "place "+places.get(0).name);
             if (NearbyController.currentLocation != null) {
+                Log.d("hehe", "place0.2 "+places.get(0).name);
                 checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
                 NearbyFilterState.setNeedPhotoSelected(isChecked);
                 presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
+                updatePlaceList(chipNeedsPhoto.isChecked(),
+                    chipExists.isChecked(), chipNeedsPhoto.isChecked());
             } else {
                 chipNeedsPhoto.setChecked(!isChecked);
             }
@@ -647,6 +656,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
                 NearbyFilterState.setExistsSelected(isChecked);
                 presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
+                updatePlaceList(chipNeedsPhoto.isChecked(),
+                    chipExists.isChecked(), chipNeedsPhoto.isChecked());
             } else {
                 chipExists.setChecked(!isChecked);
             }
@@ -658,10 +669,71 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
                 NearbyFilterState.setWlmSelected(isChecked);
                 presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
+//                updatePlaceList(chipNeedsPhoto.isChecked(),
+//                    chipExists.isChecked(), chipNeedsPhoto.isChecked());
             }else{
                 chipWlm.setChecked(!isChecked);
             }
         });
+    }
+
+    private void updatePlaceList(boolean NeedsPhoto, boolean isExists, boolean isWlm) {
+        Log.d("hehe", "place5.0 " + NeedsPhoto);
+        List<Place> tempPlaces = new ArrayList<>();
+        if(NeedsPhoto || isExists || isWlm) {
+            if (NeedsPhoto) {
+                Log.d("hehe", "place2.0 " + places.size());
+                for (final Place place :
+                    places) {
+                    if (place.pic.trim().isEmpty() && !tempPlaces.contains(place)) {
+                        tempPlaces.add(place);
+                    }
+                }
+                Log.d("hehe", "place3.0 " + tempPlaces.size());
+                Log.d("hehe", "place3.0 " + tempPlaces.get(0).name);
+            }
+
+            if (isExists) {
+                Log.d("hehe", "place2.0 " + places.size());
+                for (final Place place :
+                    places) {
+                    Log.d("hehe","EXISTS "+place.exists+" place "+place.name+" contain "+tempPlaces.contains(place));
+                    if (place.exists && !tempPlaces.contains(place)) {
+                        if (NeedsPhoto && place.pic.trim().isEmpty()) {
+                            tempPlaces.add(place);
+                        } else if(!NeedsPhoto) {
+                            tempPlaces.add(place);
+                        }
+                    } else if(!place.exists && tempPlaces.contains(place)) {
+                        tempPlaces.remove(place);
+                    }
+                }
+                Log.d("hehe", "place3.0 " + tempPlaces.size());
+                Log.d("hehe", "place3.0 " + tempPlaces.get(0).name);
+            }
+
+            adapter.setItems(tempPlaces);
+            noResultsView.setVisibility(tempPlaces.isEmpty() ? View.VISIBLE : View.GONE);
+        } else {
+                adapter.setItems(places);
+                noResultsView.setVisibility(places.isEmpty() ? View.VISIBLE : View.GONE);
+
+            }
+//
+//            if (!isWlm) {
+//                Log.d("hehe", "place2.0 " + places.size());
+//                for (final Place place :
+//                    places) {
+//                    if (place.isMonument()) {
+//                        tempPlaces.remove(place);
+//                    }
+//                }
+//                Log.d("hehe", "place3.0 " + tempPlaces.size());
+//                Log.d("hehe", "place3.0 " + tempPlaces.get(0).name);
+//            }
+
+//        }
+
     }
 
     /**
@@ -785,6 +857,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void updateListFragment(final List<Place> placeList) {
+        Log.d("hehehe", "place2 ");
+        places = placeList;
         adapter.setItems(placeList);
         noResultsView.setVisibility(placeList.isEmpty() ? View.VISIBLE : View.GONE);
     }
