@@ -644,7 +644,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 NearbyFilterState.setNeedPhotoSelected(isChecked);
                 presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
                 updatePlaceList(chipNeedsPhoto.isChecked(),
-                    chipExists.isChecked(), chipNeedsPhoto.isChecked());
+                    chipExists.isChecked(), chipWlm.isChecked());
             } else {
                 chipNeedsPhoto.setChecked(!isChecked);
             }
@@ -657,7 +657,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 NearbyFilterState.setExistsSelected(isChecked);
                 presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
                 updatePlaceList(chipNeedsPhoto.isChecked(),
-                    chipExists.isChecked(), chipNeedsPhoto.isChecked());
+                    chipExists.isChecked(), chipWlm.isChecked());
             } else {
                 chipExists.setChecked(!isChecked);
             }
@@ -669,8 +669,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
                 NearbyFilterState.setWlmSelected(isChecked);
                 presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
-//                updatePlaceList(chipNeedsPhoto.isChecked(),
-//                    chipExists.isChecked(), chipNeedsPhoto.isChecked());
+                updatePlaceList(chipNeedsPhoto.isChecked(),
+                    chipExists.isChecked(), chipWlm.isChecked());
             }else{
                 chipWlm.setChecked(!isChecked);
             }
@@ -712,28 +712,33 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 Log.d("hehe", "place3.0 " + tempPlaces.get(0).name);
             }
 
+            if (isWlm) {
+                Log.d("hehe", "place2.0 " + places.size());
+                for (final Place place :
+                    places) {
+                    Log.d("hehe","MLM1 "+place.isMonument()+" place "+place.name+" contain "+tempPlaces.contains(place));
+                    if (place.isMonument() && !tempPlaces.contains(place)) {
+                        tempPlaces.add(place);
+                    }
+                }
+                Log.d("hehe", "place3.0 " + tempPlaces.size());
+                Log.d("hehe", "place3.0 " + tempPlaces.get(0).name);
+            } else if(!isWlm) {
+                for (final Place place :
+                    places) {
+                    Log.d("hehe","MLM2 "+place.isMonument()+" place "+place.name+" contain "+tempPlaces.contains(place));
+                    if (place.isMonument() && tempPlaces.contains(place)) {
+                        tempPlaces.remove(place);
+                    }
+                }
+            }
+
             adapter.setItems(tempPlaces);
             noResultsView.setVisibility(tempPlaces.isEmpty() ? View.VISIBLE : View.GONE);
         } else {
                 adapter.setItems(places);
                 noResultsView.setVisibility(places.isEmpty() ? View.VISIBLE : View.GONE);
-
-            }
-//
-//            if (!isWlm) {
-//                Log.d("hehe", "place2.0 " + places.size());
-//                for (final Place place :
-//                    places) {
-//                    if (place.isMonument()) {
-//                        tempPlaces.remove(place);
-//                    }
-//                }
-//                Log.d("hehe", "place3.0 " + tempPlaces.size());
-//                Log.d("hehe", "place3.0 " + tempPlaces.get(0).name);
-//            }
-
-//        }
-
+        }
     }
 
     /**
