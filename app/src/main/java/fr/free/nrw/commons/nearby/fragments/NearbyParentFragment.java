@@ -3,8 +3,6 @@ package fr.free.nrw.commons.nearby.fragments;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
-import static fr.free.nrw.commons.nearby.CheckBoxTriStates.CHECKED;
-import static fr.free.nrw.commons.nearby.CheckBoxTriStates.UNCHECKED;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
@@ -249,6 +247,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * WLM URL
      */
     public static final String WLM_URL = "https://www.wikilovesmonuments.org/";
+    /**
+     * Saves response of list of places for the first time
+     */
     private List<Place> places;
 
     @NonNull
