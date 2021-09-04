@@ -74,4 +74,9 @@ public class MediaLicensePresenter implements MediaLicenseContract.UserActionLis
         repository.setSelectedLicense(licenseName);
         view.updateLicenseSummary(repository.getSelectedLicense(), repository.getCount());
     }
+
+    @Override
+    public boolean isWLMSupportedForThisPlace() {
+        return repository.isWMLSupportedForThisPlace();
+    }
 }

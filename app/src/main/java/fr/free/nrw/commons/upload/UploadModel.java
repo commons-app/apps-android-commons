@@ -154,6 +154,15 @@ public class UploadModel {
                 contribution.setDateCreatedSource(item.getCreatedTimestampSource());
                 //Set the date only if you have it, else the upload service is gonna try it the other way
             }
+
+            if (contribution.getWikidataPlace() != null) {
+                if (item.isWLMUpload()) {
+                    contribution.getWikidataPlace().setMonumentUpload(true);
+                } else {
+                    contribution.getWikidataPlace().setMonumentUpload(false);
+                }
+            }
+            contribution.setCountryCode(item.getCountryCode());
             return contribution;
         });
     }

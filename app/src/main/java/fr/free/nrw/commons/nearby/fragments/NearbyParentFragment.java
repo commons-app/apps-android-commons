@@ -284,7 +284,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         isDarkTheme = systemThemeUtils.isDeviceInNightMode();
-        if (Utils.isMonumentsEnabled(new Date(), applicationKvStore)) {
+        if (Utils.isMonumentsEnabled(new Date())) {
             rlContainerWLMMonthMessage.setVisibility(View.VISIBLE);
         } else {
             rlContainerWLMMonthMessage.setVisibility(View.GONE);
@@ -513,7 +513,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         setBottomSheetCallbacks();
         decideButtonVisibilities();
         addActionToTitle();
-        if(!Utils.isMonumentsEnabled(new Date(), applicationKvStore)){
+        if (!Utils.isMonumentsEnabled(new Date())) {
             chipWlm.setVisibility(View.GONE);
         }
     }
@@ -884,7 +884,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         final Observable<NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(curlatLng, searchLatLng,
-                    false, true, Utils.isMonumentsEnabled(new Date(), applicationKvStore)));
+                    false, true, Utils.isMonumentsEnabled(new Date())));
 
         compositeDisposable.add(nearbyPlacesInfoObservable
             .subscribeOn(Schedulers.io())
@@ -908,7 +908,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         final Observable<NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(curlatLng, searchLatLng,
-                    false, true, Utils.isMonumentsEnabled(new Date(), applicationKvStore)));
+                    false, true, Utils.isMonumentsEnabled(new Date())));
 
         compositeDisposable.add(nearbyPlacesInfoObservable
             .subscribeOn(Schedulers.io())

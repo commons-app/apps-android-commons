@@ -528,7 +528,7 @@ public class ContributionsFragment
      * of campaigns on the campaigns card
      */
     private void fetchCampaigns() {
-        if (Utils.isMonumentsEnabled(new Date(), store)) {
+        if (Utils.isMonumentsEnabled(new Date())) {
             campaignView.setCampaign(wlmCampaign);
             campaignView.setVisibility(View.VISIBLE);
         } else if (store.getBoolean(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE, true)) {
