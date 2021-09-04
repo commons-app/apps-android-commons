@@ -121,6 +121,7 @@ import io.reactivex.schedulers.Schedulers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -360,11 +361,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void initRvNearbyList() {
-        Log.d("hehehe", "place1 ");
         rvNearbyList.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new PlaceAdapter(bookmarkLocationDao,
             place -> {
-            Log.d("hehehe", "place "+place.name);
                 centerMapToPlace(place);
                 return Unit.INSTANCE;
             },
@@ -637,9 +636,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void initFilterChips() {
         chipNeedsPhoto.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            Log.d("hehe", "place "+places.get(0).name);
             if (NearbyController.currentLocation != null) {
-                Log.d("hehe", "place0.2 "+places.get(0).name);
                 checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
                 NearbyFilterState.setNeedPhotoSelected(isChecked);
                 presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
@@ -677,68 +674,56 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         });
     }
 
-    private void updatePlaceList(boolean NeedsPhoto, boolean isExists, boolean isWlm) {
-        Log.d("hehe", "place5.0 " + NeedsPhoto);
-        List<Place> tempPlaces = new ArrayList<>();
-        if(NeedsPhoto || isExists || isWlm) {
-            if (NeedsPhoto) {
-                Log.d("hehe", "place2.0 " + places.size());
-                for (final Place place :
-                    places) {
-                    if (place.pic.trim().isEmpty() && !tempPlaces.contains(place)) {
-                        tempPlaces.add(place);
-                    }
-                }
-                Log.d("hehe", "place3.0 " + tempPlaces.size());
-                Log.d("hehe", "place3.0 " + tempPlaces.get(0).name);
-            }
+    /**
+     * Updates Nearby place list according to available chip states
+     *
+     * @param NeedsPhoto is chipNeedsPhoto checked
+     * @param isExists is chipExists checked
+     * @param isWlm is chipWlm checked
+     */
+    private void updatePlaceList(final boolean NeedsPhoto, final boolean isExists,
+        final boolean isWlm) {
+        final List<Place> updatedPlaces = new ArrayList<>();
 
-            if (isExists) {
-                Log.d("hehe", "place2.0 " + places.size());
-                for (final Place place :
-                    places) {
-                    Log.d("hehe","EXISTS "+place.exists+" place "+place.name+" contain "+tempPlaces.contains(place));
-                    if (place.exists && !tempPlaces.contains(place)) {
-                        if (NeedsPhoto && place.pic.trim().isEmpty()) {
-                            tempPlaces.add(place);
-                        } else if(!NeedsPhoto) {
-                            tempPlaces.add(place);
-                        }
-                    } else if(!place.exists && tempPlaces.contains(place)) {
-                        tempPlaces.remove(place);
-                    }
-                }
-                Log.d("hehe", "place3.0 " + tempPlaces.size());
-                Log.d("hehe", "place3.0 " + tempPlaces.get(0).name);
-            }
-
-            if (isWlm) {
-                Log.d("hehe", "place2.0 " + places.size());
-                for (final Place place :
-                    places) {
-                    Log.d("hehe","MLM1 "+place.isMonument()+" place "+place.name+" contain "+tempPlaces.contains(place));
-                    if (place.isMonument() && !tempPlaces.contains(place)) {
-                        tempPlaces.add(place);
-                    }
-                }
-                Log.d("hehe", "place3.0 " + tempPlaces.size());
-                Log.d("hehe", "place3.0 " + tempPlaces.get(0).name);
-            } else if(!isWlm) {
-                for (final Place place :
-                    places) {
-                    Log.d("hehe","MLM2 "+place.isMonument()+" place "+place.name+" contain "+tempPlaces.contains(place));
-                    if (place.isMonument() && tempPlaces.contains(place)) {
-                        tempPlaces.remove(place);
-                    }
+        if (NeedsPhoto) {
+            for (final Place place :
+                places) {
+                if (place.pic.trim().isEmpty() && !updatedPlaces.contains(place)) {
+                    updatedPlaces.add(place);
                 }
             }
-
-            adapter.setItems(tempPlaces);
-            noResultsView.setVisibility(tempPlaces.isEmpty() ? View.VISIBLE : View.GONE);
         } else {
-                adapter.setItems(places);
-                noResultsView.setVisibility(places.isEmpty() ? View.VISIBLE : View.GONE);
+            updatedPlaces.addAll(places);
         }
+
+        if (isExists) {
+            for(final Iterator<Place> placeIterator = updatedPlaces.iterator();
+                placeIterator.hasNext();){
+                final Place place = placeIterator.next();
+                if (!place.exists) {
+                    placeIterator.remove();
+                }
+            }
+        }
+
+        if (!isWlm) {
+            for (final Place place :
+                places) {
+                if (place.isMonument() && updatedPlaces.contains(place)) {
+                    updatedPlaces.remove(place);
+                }
+            }
+        } else {
+            for (final Place place :
+                places) {
+                if (place.isMonument() && !updatedPlaces.contains(place)) {
+                    updatedPlaces.add(place);
+                }
+            }
+        }
+
+        adapter.setItems(updatedPlaces);
+        noResultsView.setVisibility(updatedPlaces.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     /**
@@ -862,7 +847,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void updateListFragment(final List<Place> placeList) {
-        Log.d("hehehe", "place2 ");
         places = placeList;
         adapter.setItems(placeList);
         noResultsView.setVisibility(placeList.isEmpty() ? View.VISIBLE : View.GONE);
