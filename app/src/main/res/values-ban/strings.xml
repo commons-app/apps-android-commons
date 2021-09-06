@@ -103,6 +103,7 @@
   <string name="menu_feedback">Kirim umpan walik (liwat Rerepél)</string>
   <string name="provider_categories">Kategori sané mangkin kaanggén</string>
   <string name="waiting_first_sync">Ngantosang sinkronisasi kapertama…</string>
+  <string name="no_uploads_yet">Ragné durung naénin ngunggah photo</string>
   <string name="menu_retry_upload">Indayang malih</string>
   <string name="menu_cancel_upload">Wangdé</string>
   <string name="menu_download">Unduh</string>
@@ -146,10 +147,13 @@
   <string name="no">Nénten</string>
   <string name="media_detail_caption">Sesirah</string>
   <string name="media_detail_title">Murda</string>
+  <string name="media_detail_description">Déskripsi</string>
   <string name="media_detail_discussion">Pabligbagan</string>
+  <string name="media_detail_author">Pangardi</string>
   <string name="media_detail_uploaded_date">Tanggal kaunggah</string>
   <string name="media_detail_license">Lisénsi</string>
   <string name="media_detail_coordinates">Koordinat</string>
+  <string name="media_detail_coordinates_empty">Tan kaicain</string>
   <string name="_2fa_code">Kode O2F</string>
   <string name="logout_verification">Napiké ragané yakti jagi medal log?</string>
   <string name="commons_logo">Logo Commons</string>
