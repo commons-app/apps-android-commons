@@ -364,7 +364,7 @@
   <string name="deletion_reason_no_longer_want_public">من تغییر عقیده دادم، نمی‌خواهم دیگر برای همه قابل‌مشاهده باشد.</string>
   <string name="deletion_reason_not_interesting">با پوزش، این تصویر برای یک دانشنامه مناسب نیست</string>
   <string name="uploaded_by_myself">بارگذاری‌شده توسط خودم در %1$s؛ استفاده‌شده در %2$d مقاله.</string>
-  <string name="no_uploads">به کامانز خوش آمدید!\n\nاولین فایلتان را با فشردن کلید اضافه بارگذاری کنید.</string>
+  <string name="no_uploads">به ویکی‌انبار خوش آمدید!\n\nاولین فایلتان را با فشردن کلید اضافه بارگذاری کنید.</string>
   <string name="no_categories_selected">رده‌ای انتخاب نشده‌است</string>
   <string name="no_categories_selected_warning_desc">تصاویر بدون رده به ندرت قابل‌استفاده هستند. آیا مطمئنید که می‌خواهید بدون انتخاب رده ادامه دهید؟</string>
   <string name="back_button_warning">لغو بارگذاری</string>

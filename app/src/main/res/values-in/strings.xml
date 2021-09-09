@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Akmaie Ajam
 * Arifin.wijaya
 * Daud I.F. Argana
 * Farras
@@ -108,6 +109,7 @@
   <string name="title_activity_settings">Pengaturan</string>
   <string name="title_activity_signup">Mendaftar</string>
   <string name="title_activity_featured_images">Gambar Pilihan</string>
+  <string name="title_activity_custom_selector">Pemilih Kustom</string>
   <string name="title_activity_category_details">Kategori</string>
   <string name="title_activity_review">Ulasan Peer</string>
   <string name="menu_about">Tentang</string>
@@ -318,6 +320,7 @@
   <string name="quiz_screenshot_question">Apakah tangkapan layar ini OKE untuk diunggah?</string>
   <string name="share_app_title">Bagikan Aplikasi</string>
   <string name="error_fetching_nearby_places">Galat saat mengambil tempat terdekat.</string>
+  <string name="error_fetching_nearby_monuments">Galat saat mengambil monumen terdekat.</string>
   <string name="no_recent_searches">Tidak ada pencarian terbaru</string>
   <string name="delete_recent_searches_dialog">Apakah Anda yakin ingin menghapus riwayat penelusuran?</string>
   <string name="delete_search_dialog">Anda ingin menghapus pencarian ini?</string>
@@ -379,6 +382,9 @@
   <string name="no_categories_selected_warning_desc">Gambar tanpa kategori jarang dapat digunakan. Apakah Anda yakin ingin mengirim tanpa memilih kategori?</string>
   <string name="no_depictions_selected">Tidak Ada Penggambaran yang Dipilih</string>
   <string name="no_depictions_selected_warning_desc">Gambar yang punya penggambaran lebih mudah ditemukan dan kemungkinan lebih banyak digunakan. Apakah Anda yakin Anda ingin melanjurkan tanpa memilih penggambaran?</string>
+  <string name="back_button_warning">Batalkan Unggah</string>
+  <string name="back_button_warning_desc">Menggunakan tombol kembali akan membatalkan unggahan ini dan Anda akan kehilangan kemajuan Anda.</string>
+  <string name="back_button_continue">Lanjutkan Unggah</string>
   <string name="upload_flow_all_images_in_set">(Untuk semua gambar dalam set)</string>
   <string name="search_this_area">Cari area ini</string>
   <string name="nearby_card_permission_title">Permintaan Izin</string>
@@ -484,6 +490,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Tidak bisa menambahkan kategori.</string>
   <string name="category_edit_button_text">Perbarui kategori</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Mencoba memperbarui koordinat.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Pembaruan koordinat</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Sukses</string>
+  <string name="coordinates_edit_helper_show_edit_message">Koordinat %1$s sudah ditambahkan.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Tidak bisa menambahkan koordinat.</string>
+  <string name="coordinates_picking_unsuccessful">Tidak bisa mendapatkan koordinat.</string>
   <string name="share_image_via">Bagikan gambar melalui</string>
   <string name="no_achievements_yet">Anda belum membuat satu kontribusi pun</string>
   <string name="account_created">Akun dibuat!</string>
@@ -581,4 +593,29 @@
   <string name="app_ui_language">Bahasa antarmuka pengguna aplikasi</string>
   <string name="remove">Menghapus takarir dan deskripsi</string>
   <string name="read_help_link">Baca lebih lanjut</string>
+  <string name="media_detail_in_all_languages">Dalam semua bahasa</string>
+  <string name="choose_a_location">Pilih lokasi</string>
+  <string name="pan_and_zoom_to_adjust">Geser dan perbesar untuk menyesuaikan</string>
+  <string name="exit_location_picker">Keluar dari pemilih lokasi</string>
+  <string name="select_location_location_picker">Pilih lokasi</string>
+  <string name="show_in_map_app">Tampilkan di aplikasi peta</string>
+  <string name="modify_location">Sunting lokasi</string>
+  <string name="location_picker_image_view">Tampilan gambar dari pemilih lokasi</string>
+  <string name="location_picker_image_view_shadow">Bayangan dari tampilan gambar dari pemilih lokasi</string>
+  <string name="image_location">Lokasi Gambar</string>
+  <string name="check_whether_location_is_correct">Cek apakah lokasi benar</string>
+  <string name="custom_selector_title">Pemilih Kustom</string>
+  <string name="custom_selector_empty_text">Tidak Ada Gambar</string>
+  <string name="done">Selesai</string>
+  <string name="back">Kembali</string>
+  <string name="welcome_custom_picture_selector_text">Selamat datang di Pemilih Gambar Kustom</string>
+  <string name="custom_selector_info_text1">Alat pemilih ini menunjukkan perbedaan gambar yang sudah ada di Commons.</string>
+  <string name="custom_selector_info_text2">Berbeda dengan gambar di sebelah kiri, gambar di sebelah kanan memiliki logo Commons yang menandakan gambarnya sudah diunggah.\n  Sentuh dan tahan untuk pratinjau gambar.</string>
+  <string name="welcome_custom_selector_ok">Bagus</string>
+  <string name="custom_selector_already_uploaded_image_text">Gambar ini sudah diunggah di Commons.</string>
+  <string name="wlm_upload_info">Anda berkontribusi kepada Kampanye Wiki Loves Monuments (Wiki Cinta Monumen). Templat yang terkait akan ditambahkan.</string>
+  <string name="display_monuments">Tampilkan monumen</string>
+  <string name="wlm_month_message">Ini adalah bulan Wiki Loves Monuments!</string>
+  <string name="learn_more">PELAJARI LEBIH LANJUT</string>
+  <string name="wlm_campaign_description">Wiki Loves Monuments adalah lomba foto internasional untuk monumen yang diselenggarakan oleh Wikimedia</string>
 </resources>
