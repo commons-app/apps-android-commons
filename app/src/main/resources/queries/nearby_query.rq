@@ -1,5 +1,6 @@
 SELECT
   ?item
+  (SAMPLE(?location) as ?location)
   (SAMPLE(?label) AS ?label)
   (SAMPLE(?description) AS ?description)
   (SAMPLE(?class) AS ?class)
