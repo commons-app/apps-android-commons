@@ -281,7 +281,6 @@ public class OkHttpJsonApiClient {
             .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
             .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.getLatitude()))
             .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.getLongitude()))
-            .replace(language,"")
             .replace("${LANG}", language);
 
         final HttpUrl.Builder urlBuilder = HttpUrl
