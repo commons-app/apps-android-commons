@@ -35,10 +35,14 @@ import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.wikipedia.language.AppLanguageLookUpTable;
@@ -169,15 +173,17 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             Objects.requireNonNull(getContext()));
         languageNamesList = appLanguageLookUpTable.getLocalizedNames();
         languageCodesList = appLanguageLookUpTable.getCodes();
-        List<String> languageNameWithCodeList = new ArrayList<>();
+        final SortedMap<String, String> languageMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
-        for (int i = 0; i < languageNamesList.size(); i++) {
-            languageNameWithCodeList.add(languageNamesList.get(i) + "[" + languageCodesList.get(i) + "]");
+        // Add language name and codes to a sorted hash map to organize alphabetically
+        for(int i = 0; i <languageNamesList.size(); i++){
+            languageMap.put(languageNamesList.get(i), languageCodesList.get(i));
         }
 
-        final CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[0]);
-        final CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[0]);
-        // Add all languages and languages codes to lists preference as pair
+        // Convert key set / values from hash map to Array for language preference lists
+        final CharSequence[] languageNames = languageMap.keySet().toArray(new CharSequence[0]);
+        final CharSequence[] languageCodes = languageMap.values().toArray(new CharSequence[0]);
+
 
         // Gets current language code from shared preferences
         final String languageCode = getCurrentLanguageCode(keyListPreference);
