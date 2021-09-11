@@ -641,4 +641,5 @@
   <string name="modify_location">Изменить местоположение</string>
   <string name="image_location">Расположение изображения</string>
   <string name="check_whether_location_is_correct">Проверьте правильность местоположения</string>
+  <string name="back">Назад</string>
 </resources>

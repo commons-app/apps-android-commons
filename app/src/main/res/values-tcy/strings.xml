@@ -140,7 +140,7 @@
   <string name="welcome_copyright_subtext">ಇಂಟರ್ನೆಟ್ನ್‌ಡ್ತ್ ಇರ್ ತೊಜಾತ್ ಬರ್ಪಿನ ಕೃತಿಸ್ವಾಮ್ಯತ ವಸ್ತುಲೆನ್ ಅಂಚನೆ ಪೋಸ್ಟರ್ ಚಿತ್ರೊಲು, ಬೂಕುಲೆನ ವರ್ಗೊ ಇತ್ಯಾದಿ ತಪ್ಪಾತ್ ಇಪ್ಪು.</string>
   <string name="welcome_final_text">ಇರೆಗ್ ತಿಕ್ಕ್‌ಂಡ್ಂದು ಇರ್ ಭಾವಿಸುವರಾ?</string>
   <string name="welcome_final_button_text">ಅಂದ್!</string>
-  <string name="welcome_help_button_text">ಹೆಚ್ಚಿನ ಮಾಹಿತಿಲು</string>
+  <string name="welcome_help_button_text">ಜಾಸ್ತಿ ಮಾಹಿತಿ</string>
   <string name="detail_panel_cats_label">ವರ್ಗೊಲು</string>
   <string name="detail_panel_cats_loading">ದಿಂಜಾವೊಂದುಂಡು……</string>
   <string name="detail_panel_cats_none">ಒಂಜಿಲಾ ಅಯ್ಕೆ ಮಾಲ್ತಿಜ್ಜಿ.</string>
@@ -195,7 +195,7 @@
   <string name="no_description_found">ಒವೆ ವಿವರಣೆ ಇಜ್ಜಿ.</string>
   <string name="nearby_info_menu_commons_article">ಕಾಮನ್ಸ್ ಫೈಲ್ ಪುಟೊ</string>
   <string name="nearby_info_menu_wikidata_article">ವಿಕಿಡಾಟ ಐಟಂ</string>
-  <string name="nearby_info_menu_wikipedia_article">ವಿಕಿಪೀಡಿಯ ಲೇಖನೊ</string>
+  <string name="nearby_info_menu_wikipedia_article">ವಿಕಿಪೀಡಿಯ ಲೇಕನೊ</string>
   <string name="description_info">ದಯಮಾಲ್ತ್ ಸಾಧ್ಯವಾಯಿನ ಮಾಧ್ಯಮಟ್ ವಿವರಣೆ ಕೊರ್ಲೆ: ಒಲ್ಪಾ ಅಯಿನ್ ದೆಪ್ಪೊಲಿ? ಉಂದೆನ್ ಎಂಚ ತೋಜಾವೊಲಿ? ಸನ್ನಿವೇಶ ಪಂಡದಾದ? ದಯಮಾಲ್ತ್ ವಸ್ತುಲು ಅತ್ತಂದೆ ವ್ಯಕ್ತಿಲು ಸುಲಭವಾತ್ ಊಹಿಸಲು ಸಾದ್ಯ ಇಜ್ಜಿ ಮಾಹಿತಿನ್ ಬಹಿರಂಗ ಮಾಲ್ಪುಲೆ, ಉದಾಹರಣೆಗ್ ಉಂದು ಭೂದೃಶ್ಯವಾತ್ ಇತ್ತಂಡ್ ದಿನೊತ ಸಮಯ. ಮಾಧ್ಯಮೊ ಅಸಾಮಾನ್ಯವಾತ್ ಇಪ್ಪುನಯಿನ್ ತೋಜಾತ್, ಅವು ಅಸಾಮಾನ್ಯವಾತ್ ವಿವರಣೆ ಇಪ್ಪು.</string>
   <string name="upload_problem_exist">ಈ ಆಕೃತಿದ ಸಂಭಾವ್ಯ ಸಮಸ್ಯೆಲು:</string>
   <string name="upload_problem_image_dark">ಆಕೃತಿ ಮಸ್ತ್ ಕಪ್ಪಾದುಂಡು.</string>
@@ -337,8 +337,9 @@
   <string name="title_app_shortcut_setting">ಸಂಯೋಜನೆಲು</string>
   <string name="instructions_title">ಸೂಚನೆಲು</string>
   <string name="more">ನನಾತ್</string>
-  <string name="leaderboard_column_user">ಬಳಕೆದಾರೆರ್</string>
+  <string name="leaderboard_column_user">ಬಳಕೆದಾರೆ</string>
   <string name="leaderboard_nearby">ಕೈತಲ್‍ದ</string>
   <string name="read_help_link">ನನಾತ್ ಓದುಲೇ</string>
   <string name="media_detail_in_all_languages">ಮಾಂತಾ ಬಾಸೆಲೆಡ್</string>
+  <string name="done">ಆಂಡ್</string>
 </resources>

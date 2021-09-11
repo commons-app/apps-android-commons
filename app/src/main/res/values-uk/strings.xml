@@ -83,7 +83,7 @@
   <string name="uploading_queued">Завантаження додано до черги (увімкнений режим обмеженого з\'єднання)</string>
   <string name="upload_completed_notification_title">Завантажено %1$s!</string>
   <string name="upload_completed_notification_text">Торкніться, щоб переглянути Ваше завантаження</string>
-  <string name="upload_progress_notification_title_start">Вивантаження файлу: %s</string>
+  <string name="upload_progress_notification_title_start">Завантаження файлу: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s завантажується</string>
   <string name="upload_progress_notification_title_finishing">Завершення завантаження %1$s</string>
   <string name="upload_failed_notification_title">Не вдалося завантажити %1$s</string>
@@ -129,6 +129,7 @@
   <string name="title_activity_settings">Налаштування</string>
   <string name="title_activity_signup">Зареєструватися</string>
   <string name="title_activity_featured_images">Вибрані зображення</string>
+  <string name="title_activity_custom_selector">Користувацький селектор</string>
   <string name="title_activity_category_details">Категорія</string>
   <string name="title_activity_review">Перевірка колегами</string>
   <string name="menu_about">Про програму</string>
@@ -339,6 +340,7 @@
   <string name="quiz_screenshot_question">Чи можна завантажувати цей знімок?</string>
   <string name="share_app_title">Поширити програму</string>
   <string name="error_fetching_nearby_places">Помилка отримання місць поблизу.</string>
+  <string name="error_fetching_nearby_monuments">Помилка отримання пам\'ятників поблизу.</string>
   <string name="no_recent_searches">Історія пошуку порожня</string>
   <string name="delete_recent_searches_dialog">Ви впевнені, що хочете стерти історію пошукових запитів?</string>
   <string name="delete_search_dialog">Вилучити цей пошук?</string>
@@ -624,4 +626,18 @@
   <string name="location_picker_image_view_shadow">Вигляд вибору розташування як тіні зображення</string>
   <string name="image_location">Підпис зображення</string>
   <string name="check_whether_location_is_correct">Перевірте правильність розташування</string>
+  <string name="custom_selector_title">Користувацький селектор</string>
+  <string name="custom_selector_empty_text">Без зображень</string>
+  <string name="done">Готово</string>
+  <string name="back">Назад</string>
+  <string name="welcome_custom_picture_selector_text">Ласкаво просимо до користувацького вибору зображень</string>
+  <string name="custom_selector_info_text1">Цей інструмент вибору по-різному показує зображення, які вже є у спільності.</string>
+  <string name="custom_selector_info_text2" fuzzy="true">На відміну від зображення зліва, зображення праворуч має логотип Commons, яке вказує, що воно вже завантажене.</string>
+  <string name="welcome_custom_selector_ok">Чудово</string>
+  <string name="custom_selector_already_uploaded_image_text">Це зображення вже завантажено на Спільний ресурс.</string>
+  <string name="wlm_upload_info">Ви вносите свій внесок у кампанію «Вікі любить пам’ятники». Відповідні шаблони будуть додані відповідно.</string>
+  <string name="display_monuments">Показати пам’ятники</string>
+  <string name="wlm_month_message">Цей місяць Wiki Loves Monuments!</string>
+  <string name="learn_more">ДОСЛІДИТИ БІЛЬШЕ</string>
+  <string name="wlm_campaign_description">Wiki Loves Monuments — це міжнародний фотоконкурс пам’яток, організований Вікімедією</string>
 </resources>

@@ -124,6 +124,7 @@
   <string name="title_activity_settings">Nastavenia</string>
   <string name="title_activity_signup">Zaregistrovať sa</string>
   <string name="title_activity_featured_images">Najlepšie obrázky</string>
+  <string name="title_activity_custom_selector">Vlastný výber</string>
   <string name="title_activity_category_details">Kategória</string>
   <string name="title_activity_review">Kontrola</string>
   <string name="menu_about">O aplikácii</string>
@@ -334,6 +335,7 @@
   <string name="quiz_screenshot_question">Je v poriadku nahrať túto snímku obrazovky?</string>
   <string name="share_app_title">Zdieľať aplikáciu</string>
   <string name="error_fetching_nearby_places">Nastala chyba pri hľadaní miest v okolí.</string>
+  <string name="error_fetching_nearby_monuments">Nastala chyba pri načítavaní miest v okolí.</string>
   <string name="no_recent_searches">Žiadne nedávne hľadania</string>
   <string name="delete_recent_searches_dialog">Naozaj chcete odstrániť históriu vášho vyhľadávania?</string>
   <string name="delete_search_dialog">Chcete odstrániť toto hľadanie?</string>
@@ -619,4 +621,18 @@
   <string name="location_picker_image_view_shadow">Tieň obrázka pre výber polohy</string>
   <string name="image_location">Poloha obrázka</string>
   <string name="check_whether_location_is_correct">Skontrolovať či je poloha správna</string>
+  <string name="custom_selector_title">Vlastný výber</string>
+  <string name="custom_selector_empty_text">Žiadne obrázky</string>
+  <string name="done">Hotovo</string>
+  <string name="back">Späť</string>
+  <string name="welcome_custom_picture_selector_text">Vitajte vo vlastnom výbere obrázkov</string>
+  <string name="custom_selector_info_text1">Tento výber zobrazuje iné obrázky, ktoré už sú na Commons.</string>
+  <string name="custom_selector_info_text2">Na rozdiel od obrázka v ľavo, obrázkov v pravo má logo Commons, ktoré indikuje, že už je nahraný. Podržte kurzor nad obrázkom pre náhľad.</string>
+  <string name="welcome_custom_selector_ok">Úžasné</string>
+  <string name="custom_selector_already_uploaded_image_text">Tento obrázok už bol do Commons nahraný.</string>
+  <string name="wlm_upload_info">Prispievate do kampane Wiki miluje monumenty. Súvisiace šablóny budú podľa toho pridané.</string>
+  <string name="display_monuments">Zobraziť monumenty</string>
+  <string name="wlm_month_message">Je mesiac Wiki miluje monumenty!</string>
+  <string name="learn_more">ZISTIŤ VIAC</string>
+  <string name="wlm_campaign_description">Wkki miluje monumenty je medzinárodná súťaž fotografií monumentov organizovaná Wikemédiou</string>
 </resources>

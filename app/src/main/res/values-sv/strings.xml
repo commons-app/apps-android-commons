@@ -110,6 +110,7 @@
   <string name="title_activity_settings">Inställningar</string>
   <string name="title_activity_signup">Registrera</string>
   <string name="title_activity_featured_images">Utvalda bilder</string>
+  <string name="title_activity_custom_selector">Anpassad selektor</string>
   <string name="title_activity_category_details">Kategori</string>
   <string name="title_activity_review">Granskning</string>
   <string name="menu_about">Om</string>
@@ -320,6 +321,7 @@
   <string name="quiz_screenshot_question">Är det okej att ladda upp denna skärmdump?</string>
   <string name="share_app_title">Dela app</string>
   <string name="error_fetching_nearby_places">Fel uppstod när platser i närheten hämtades.</string>
+  <string name="error_fetching_nearby_monuments">Fel uppstod när monument i närheten hämtades.</string>
   <string name="no_recent_searches">Inga senaste sökningar</string>
   <string name="delete_recent_searches_dialog">Är du säker på att du vill rensa din sökhistorik?</string>
   <string name="delete_search_dialog">Vill du radera denna sökning?</string>
@@ -603,4 +605,18 @@
   <string name="location_picker_image_view_shadow">Skuggan för platsväljarens bildvisare</string>
   <string name="image_location">Bildplats</string>
   <string name="check_whether_location_is_correct">Kontrollera om platsen är korrekt</string>
+  <string name="custom_selector_title">Anpassad selektor</string>
+  <string name="custom_selector_empty_text">Inga bilder</string>
+  <string name="done">Klar</string>
+  <string name="back">Tillbaka</string>
+  <string name="welcome_custom_picture_selector_text">Välkommen till anpassade bildselektorn</string>
+  <string name="custom_selector_info_text1">Denna väljare visar olika bilder som redan finns på Commons.</string>
+  <string name="custom_selector_info_text2">Till skillnad från bilden till vänster har bilden till höger Commons-logotypen, vilket innebär att den redan är uppladdad.\n Tryck och håll ned för att förhandsgranska bilden.</string>
+  <string name="welcome_custom_selector_ok">Häftigt</string>
+  <string name="custom_selector_already_uploaded_image_text">Denna bild har redan laddats upp till Commons.</string>
+  <string name="wlm_upload_info">Du bidrar till kampanjen Wiki Loves Monuments. Relaterade mallar kommer att läggas till.</string>
+  <string name="display_monuments">Visa monument</string>
+  <string name="wlm_month_message">Det är Wiki Loves Monuments-månaden!</string>
+  <string name="learn_more">LÄS MER</string>
+  <string name="wlm_campaign_description">Wiki Loves Monuments är en internationell fototävling för monument som organiseras av Wikimedia</string>
 </resources>
