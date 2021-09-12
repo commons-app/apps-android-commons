@@ -373,8 +373,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             media = getArguments().getParcelable("media");
         }
 
-        media = detailProvider.getMediaAtPosition(index);
-
         if(media != null && applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
             enableProgressBar();
         }
