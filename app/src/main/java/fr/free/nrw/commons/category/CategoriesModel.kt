@@ -112,13 +112,14 @@ class CategoriesModel @Inject constructor(
      * @param titleList
      * @return
      */
-    private fun titleCategories(titleList: List<String>) =
+    private fun titleCategories(titleList: List<String>): Observable<List<String>> {
         if (titleList.isNotEmpty())
-            Observable.combineLatest(titleList.map { getTitleCategories(it) }) { searchResults ->
+            return Observable.combineLatest(titleList.map { getTitleCategories(it) }) { searchResults ->
                 searchResults.map { it as List<String> }.flatten()
             }
         else
-            Observable.just(emptyList())
+            return Observable.just(emptyList())
+    }
 
     /**
      * Return category for single title
