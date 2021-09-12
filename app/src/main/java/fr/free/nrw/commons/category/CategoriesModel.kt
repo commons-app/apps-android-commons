@@ -74,14 +74,13 @@ class CategoriesModel @Inject constructor(
         selectedDepictions: List<DepictedItem>
     ): Observable<List<CategoryItem>> {
         return suggestionsOrSearch(term, imageTitleList, selectedDepictions)
-            .map { it.map { CategoryItem(it, false) } }
     }
 
     private fun suggestionsOrSearch(
         term: String,
         imageTitleList: List<String>,
         selectedDepictions: List<DepictedItem>
-    ): Observable<List<String>> {
+    ): Observable<List<CategoryItem>> {
         return if (TextUtils.isEmpty(term))
             Observable.combineLatest(
                 categoriesFromDepiction(selectedDepictions),
@@ -92,7 +91,7 @@ class CategoriesModel @Inject constructor(
             )
         else
             categoryClient.searchCategoriesForPrefix(term, SEARCH_CATS_LIMIT)
-                .map { it.sortedWith(StringSortingUtils.sortBySimilarity(term)) }
+//                .map { it.sortedWith(StringSortingUtils.sortBySimilarity(term)) }
                 .toObservable()
     }
 
@@ -100,10 +99,10 @@ class CategoriesModel @Inject constructor(
         Observable.just(selectedDepictions.map { it.commonsCategories }.flatten())
 
     private fun combine(
-        depictionCategories: List<String>,
-        locationCategories: List<String>,
-        titles: List<String>,
-        recents: List<String>
+        depictionCategories: List<CategoryItem>,
+        locationCategories: List<CategoryItem>,
+        titles: List<CategoryItem>,
+        recents: List<CategoryItem>
     ) = depictionCategories + locationCategories + titles + recents
 
 
@@ -112,10 +111,10 @@ class CategoriesModel @Inject constructor(
      * @param titleList
      * @return
      */
-    private fun titleCategories(titleList: List<String>): Observable<List<String>> {
+    private fun titleCategories(titleList: List<String>): Observable<List<CategoryItem>> {
         if (titleList.isNotEmpty())
             return Observable.combineLatest(titleList.map { getTitleCategories(it) }) { searchResults ->
-                searchResults.map { it as List<String> }.flatten()
+                searchResults.map { it as List<CategoryItem> }.flatten()
             }
         else
             return Observable.just(emptyList())
