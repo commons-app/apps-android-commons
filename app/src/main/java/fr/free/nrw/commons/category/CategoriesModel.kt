@@ -125,7 +125,7 @@ class CategoriesModel @Inject constructor(
      * @param title
      * @return
      */
-    private fun getTitleCategories(title: String): Observable<List<String>> {
+    private fun getTitleCategories(title: String): Observable<List<CategoryItem>> {
         return categoryClient.searchCategories(title, SEARCH_CATS_LIMIT).toObservable()
     }
 

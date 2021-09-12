@@ -11,6 +11,6 @@ class PageableSearchCategoriesDataSource @Inject constructor(
 ) : PageableBaseDataSource<String>(liveDataConverter) {
 
     override val loadFunction = { loadSize: Int, startPosition: Int ->
-        categoryClient.searchCategories(query, loadSize, startPosition).blockingGet()
+        categoryClient.searchCategories(query, loadSize, startPosition).blockingGet().map { it.name }
     }
 }

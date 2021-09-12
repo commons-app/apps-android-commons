@@ -79,8 +79,8 @@ public class CategoryDao {
      * @return a list containing recent categories
      */
     @NonNull
-    List<String> recentCategories(int limit) {
-        List<String> items = new ArrayList<>();
+    List<CategoryItem> recentCategories(int limit) {
+        List<CategoryItem> items = new ArrayList<>();
         Cursor cursor = null;
         ContentProviderClient db = clientProvider.get();
         try {
@@ -93,7 +93,7 @@ public class CategoryDao {
             // fixme add a limit on the original query instead of falling out of the loop?
             while (cursor != null && cursor.moveToNext()
                     && cursor.getPosition() < limit) {
-                items.add(fromCursor(cursor).getName());
+                items.add(new CategoryItem(fromCursor(cursor).getName(), false));
             }
         } catch (RemoteException e) {
             throw new RuntimeException(e);
