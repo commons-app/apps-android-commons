@@ -8,7 +8,6 @@ import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.actions.PageEditInterface;
-import fr.free.nrw.commons.category.ExtendedCategoryInterface;
 import fr.free.nrw.commons.category.CategoryInterface;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -236,20 +235,7 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public CategoryInterface provideCategoryInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, CategoryInterface.class);
-    }
-
-    /**
-     * Add provider for ExtendedCategoryInterface. It creates a retrofit service for the wiki site
-     * @param commonsWikiSite wiki site
-     * @return ExtendedCategoryInterface
-     */
-    @Provides
-    @Singleton
-    public ExtendedCategoryInterface provideCategoryExtendedInterface(
-        @Named(NAMED_COMMONS_WIKI_SITE) final WikiSite commonsWikiSite) {
-        return ServiceFactory.get(commonsWikiSite,
-            Service.COMMONS_URL, ExtendedCategoryInterface.class);
+        return ServiceFactory.get(commonsWikiSite, Service.COMMONS_URL, CategoryInterface.class);
     }
 
     @Provides

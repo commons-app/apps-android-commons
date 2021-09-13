@@ -97,7 +97,8 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
                 it.filter {
                     page -> page.categoryInfo() == null || !page.categoryInfo().isHidden
                 }.map {
-                    CategoryItem(it.title().replace(CATEGORY_PREFIX, ""), false)
+                    CategoryItem(it.title().replace(CATEGORY_PREFIX, ""),
+                        it.description().toString(), it.thumbUrl().toString(), false)
                 }
             }
     }

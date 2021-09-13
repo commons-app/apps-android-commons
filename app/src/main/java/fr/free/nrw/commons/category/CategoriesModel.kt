@@ -91,7 +91,7 @@ class CategoriesModel @Inject constructor(
             )
         else
             categoryClient.searchCategoriesForPrefix(term, SEARCH_CATS_LIMIT)
-//                .map { it.sortedWith(StringSortingUtils.sortBySimilarity(term)) }
+                .map { it.sortedWith(StringSortingUtils.sortBySimilarity(term)) }
                 .toObservable()
     }
 

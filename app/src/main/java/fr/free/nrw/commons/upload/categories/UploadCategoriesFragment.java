@@ -24,7 +24,6 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryItem;
-import fr.free.nrw.commons.category.ExtendedCategoryClient;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -55,8 +54,6 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     @Inject
     CategoriesContract.UserActionListener presenter;
-    @Inject
-    ExtendedCategoryClient extendedCategoryClient;
     private UploadCategoryAdapter adapter;
     private Disposable subscribe;
 
@@ -120,7 +117,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         adapter = new UploadCategoryAdapter(categoryItem -> {
             presenter.onCategoryItemClicked(categoryItem);
             return Unit.INSTANCE;
-        }, extendedCategoryClient);
+        });
         rvCategories.setLayoutManager(new LinearLayoutManager(getContext()));
         rvCategories.setAdapter(adapter);
     }

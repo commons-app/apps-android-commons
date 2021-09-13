@@ -3,18 +3,10 @@ package fr.free.nrw.commons.upload.categories
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryItem
-import fr.free.nrw.commons.category.ExtendedCategoryClient
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.layout_upload_categories_item.*
-import org.wikipedia.dataclient.mwapi.MwQueryPage
-
-private val compositeDisposable = CompositeDisposable()
 
 fun uploadCategoryDelegate(
-    onCategoryClicked: (CategoryItem) -> Unit,
-    extendedCategoryClient: ExtendedCategoryClient
+    onCategoryClicked: (CategoryItem) -> Unit
 ) =
     adapterDelegateLayoutContainer<CategoryItem, CategoryItem>(
         R.layout.layout_upload_categories_item) {
@@ -28,16 +20,16 @@ fun uploadCategoryDelegate(
             upload_category_checkbox.isChecked = item.isSelected
             category_label.text = item.name
 
-            compositeDisposable.add(
-                extendedCategoryClient.getCategoryInfo(
-                    "Category:" + item.name
-                )
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { s: MwQueryPage? ->
-                        category_image.setImageURI(s?.thumbUrl())
-                        category_description.text = s?.description()
-                    }
-            )
+            if(item.thumbnail != "null") {
+                category_image.setImageURI(item.thumbnail)
+            } else {
+                category_image.setActualImageResource(R.drawable.ic_wikidata_logo_24dp)
+            }
+
+            if(item.description != "null") {
+                category_description.text = item.description
+            } else {
+                category_description.text = ""
+            }
         }
     }

@@ -93,7 +93,7 @@ public class CategoryDao {
             // fixme add a limit on the original query instead of falling out of the loop?
             while (cursor != null && cursor.moveToNext()
                     && cursor.getPosition() < limit) {
-                items.add(new CategoryItem(fromCursor(cursor).getName(), false));
+                items.add(new CategoryItem(fromCursor(cursor).getName(), "", "", false));
             }
         } catch (RemoteException e) {
             throw new RuntimeException(e);

@@ -53,7 +53,8 @@ data class DepictedItem constructor(
             getImageUrl(it.value, THUMB_IMAGE_SIZE)
         },
         entity[INSTANCE_OF].toIds(),
-        entity[COMMONS_CATEGORY]?.map { CategoryItem((it.mainSnak.dataValue as DataValue.ValueString).value, false) }
+        entity[COMMONS_CATEGORY]?.map { CategoryItem((it.mainSnak.dataValue as DataValue.ValueString).value,
+            "", "", false) }
             ?: emptyList(),
         false,
         entity.id()
