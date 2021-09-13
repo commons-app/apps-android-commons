@@ -9,6 +9,7 @@
     <item quantity="one">ဖိုင် %1$d ခု တင်နေသည်</item>
     <item quantity="other">ဖိုင် %1$d ခု တင်နေသည်</item>
   </plurals>
+  <string name="starting_uploads">အပ်ပလုဒ်များ စတင်ခြင်း</string>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d ခု တင်ထားသည်</item>
     <item quantity="other">%1$d ခု တင်ထားသည်</item>
@@ -204,6 +205,9 @@
   <string name="about_translate_proceed">ဆက်လက်လုပ်ဆောင်ရန်</string>
   <string name="about_translate_cancel">မလုပ်တော့ပါ</string>
   <string name="retry">ပြန်လုပ်</string>
+  <string name="showcase_view_needs_photo">ဤနေရာသည် ဓါတ်ပုံတခုလိုအပ်သည်။</string>
+  <string name="showcase_view_has_photo">ဤနေရာတွင် ဓါတ်ပုံတခုရှိနှင့်ပြီးဖြစ်သည်။</string>
+  <string name="showcase_view_no_longer_exists">ဤနေရာ မတည်ရှိတော့ပါ။</string>
   <string name="no_images_found">ရုပ်ပုံများ မတွေ့ပါ</string>
   <string name="error_loading_images">ရုပ်ပုံများကို ဝန်ဆွဲတင်နေစဉ် အမှားဖြစ်ပွားခဲ့ပါသည်။</string>
   <string name="image_uploaded_by">အက်ပလုတ်တင်သူ: %1$s</string>
@@ -220,6 +224,8 @@
   <string name="search_tab_title_categories">ကဏ္ဍများ</string>
   <string name="explore_tab_title_featured">အထူး</string>
   <string name="explore_tab_title_mobile">မိုလ်ဘိုင်းမှတဆင့် တင်ခဲ့သည်</string>
+  <string name="menu_set_wallpaper">နောက်ခံရှုခင်းအဖြစ်သတ်မှတ်ရန်</string>
+  <string name="wallpaper_set_successfully">နောက်ခံရှုခင်းအဖြစ် အောင်မြင်စွာသတ်မှတ်လိုက်သည်</string>
   <string name="quiz">ထွက်</string>
   <string name="quiz_question_string">ဤရုပ်ပုံကို တင်ရန် အဆင်ပြေပါ့မလား?</string>
   <string name="question">မေးခွန်း</string>
@@ -288,12 +294,15 @@
   <string name="send_thank_failure_title">ကျေးဇူးတင်စကားပို့ခြင်း- မအောင်မြင်ပါ</string>
   <string name="send_thank_toast">%1$ အတွက် ကျေးဇူးတင်မှု ပို့နေသည်</string>
   <string name="review_category">မှန်ကန်စွာ ကဏ္ဍခွဲထားပါသလား</string>
+  <string name="review_thanks">ပံ့ပိုးသူအား ကျေးဇူးတင်လိုပါသလား</string>
+  <string name="review_category_explanation">ဤရုပ်ပုံသည် %1$s ကဏ္ဍများအောက်တွင်ရှိသည်။</string>
   <string name="review_spam_report_question">ဘောင်ကျော်နေပါသည် အကြောင်းမှာ</string>
   <string name="review_c_violation_report_question">မူပိုင်ခွင့်ချိုးဖောက်မှုဖြစ်သည် အကြောင်းမှာ</string>
   <string name="review_thanks_yes_button_text">နောက်ရုပ်ပုံ</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">နောက်ရုပ်ပုံ</string>
+  <string name="review_thanks_no_button_text">နောက်ရုပ်ပုံ</string>
   <string name="no_notification">မဖတ်ရသေးသော အသိပေးချက်များ မရှိပါ</string>
-  <string name="no_read_notification" fuzzy="true">မော်ကွန်းတင်ပြီးသော အသိပေးချက်များ မရှိပါ</string>
+  <string name="no_read_notification">မဖတ်ရသေးသော အသိပေးချက်များ မရှိပါ</string>
+  <string name="error_occurred_in_picking_images">ရုပ်ပုံများကိုရွေးနေစဉ် အမှားဖြစ်ပွားခဲ့ပါသည်</string>
   <string name="please_wait">ကျေးဇူးပြု၍ ခဏစောင့်ပါ...</string>
   <string name="welcome_dont_upload_content_description">နမူနာရုပ်ပုံများ အက်ပလုပ်တင်ရန် မဟုတ်ပါ</string>
   <string name="skip_image">ဤရုပ်ပုံအား ကျော်သွားမည်</string>
@@ -309,12 +318,19 @@
   <string name="no_categories_found">ကဏ္ဍများ မတွေ့ရှိပါ</string>
   <string name="dialog_box_text_nomination">%1$ ဟာ ဘာကြောင့် ဖျက်သင့်သလဲ?</string>
   <string name="default_description_language">နဂို ဖော်ပြချက်ဘာသာစကား</string>
+  <string name="delete_helper_show_deletion_title">ဖျက်ပစ်ရန် အဆိုပြုထားခြင်း</string>
   <string name="delete_helper_show_deletion_title_success">အောင်မြင်</string>
+  <string name="delete_helper_show_deletion_message_if">%1$s ဖျက်ပစ်ရန် အဆိုပြုခဲ့သည်</string>
   <string name="delete_helper_show_deletion_title_failed">မအောင်မြင်ပါ</string>
   <string name="delete_helper_show_deletion_message_else">ပယ်ဖျက်ရန် မတောင်းဆိုနိုင်ပါ</string>
   <string name="delete_helper_ask_spam_blurry">မှုန်ဝါး</string>
   <string name="delete_helper_ask_spam_nonsense">အဓိပ္ပါယ်မရှိ</string>
   <string name="delete_helper_ask_reason_copyright_logo">လိုဂို</string>
+  <string name="category_edit_helper_make_edit_toast">ကဏ္ဍများမွမ်းမံရန် ကြိုးစားနေသည်။</string>
+  <string name="category_edit_helper_show_edit_title">ကဏ္ဍမွမ်းမံ</string>
+  <string name="category_edit_helper_show_edit_title_success">အောင်မြင်</string>
+  <string name="category_edit_helper_edit_message_else">ကဏ္ဍများ မပေါင်းထည့်နိုင်ခဲ့ပါ</string>
+  <string name="category_edit_button_text">ကဏ္ဍများ မွမ်းမံရန်</string>
   <string name="coordinates_edit_helper_show_edit_title">ကိုဩဒိနိတ် မွမ်းမံ</string>
   <string name="coordinates_edit_helper_show_edit_title_success">အောင်မြင်</string>
   <string name="no_achievements_yet">မည့်သည့်ပံ့ပိုးမှုမျှ မရှိသေးပါ</string>
@@ -324,6 +340,7 @@
   <string name="upload_nearby_place_found_title">အနီးအနားနေရာ တွေ့ရှိသည်</string>
   <string name="title_app_shortcut_setting">အပြင်အဆင်များ</string>
   <string name="load_more">ပို၍ ဆွဲတင်ရန်</string>
+  <string name="add_picture_to_wikipedia_article_title">ဝီကီပီးဒီးယားသို့ ပုံတစ်ခုပေါင်းထည့်ရန်</string>
   <string name="confirm">အတည်ပြု</string>
   <string name="instructions_title">လမ်းညွှန်ချက်များ</string>
   <string name="pause">ခေတ္တရပ်</string>
@@ -348,6 +365,7 @@
   <string name="license_step_title">မီဒီယာလိုင်စင်</string>
   <string name="menu_view_category_page">ကဏ္ဍစာမျက်နှာကို ကြည့်ရန်</string>
   <string name="read_help_link">ပိုမို ဖတ်ရန်</string>
+  <string name="media_detail_in_all_languages">ဘာသာစကားအားလုံးထဲတွင်</string>
   <string name="choose_a_location">တည်နေရာတစ်ခု ရွေးချယ်ရန်</string>
   <string name="select_location_location_picker">တည်နေရာ ရွေးချယ်ရန်</string>
   <string name="modify_location">တည်နေရာ ပြင်ဆင်ရန်</string>
