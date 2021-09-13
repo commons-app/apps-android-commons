@@ -113,7 +113,7 @@ class CategoriesModel @Inject constructor(
      */
     private fun titleCategories(titleList: List<String>) =
         if (titleList.isNotEmpty())
-            Observable.combineLatest(titleList.map { getTitleCategories(it) }) { searchResults: Array<out Any> ->
+            Observable.combineLatest(titleList.map { getTitleCategories(it) }) { searchResults ->
                 searchResults.map { it as List<CategoryItem> }.flatten()
             }
         else
