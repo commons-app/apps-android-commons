@@ -55,6 +55,7 @@ WHERE {
   OPTIONAL {?item p:P709 ?monument}
   OPTIONAL {?item p:P718 ?monument}
   OPTIONAL {?item p:P5694 ?monument}
+  OPTIONAL {?item p:P3426 ?monument}
 
   # Labels and descriptions
   SERVICE wikibase:label {
