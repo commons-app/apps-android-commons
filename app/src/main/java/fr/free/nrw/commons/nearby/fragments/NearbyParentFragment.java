@@ -245,7 +245,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     /**
      * WLM URL
      */
-    public static final String WLM_URL = "https://www.wikilovesmonuments.org/";
+    public static final String WLM_URL = "https://commons.wikimedia.org/wiki/Commons:Mobile_app/Contributing_to_WLM_using_the_app";
 
     @NonNull
     public static NearbyParentFragment newInstance() {
