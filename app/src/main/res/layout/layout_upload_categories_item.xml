@@ -28,7 +28,7 @@
   app:layout_constraintBottom_toBottomOf="parent"
   app:layout_constraintLeft_toRightOf="@+id/upload_category_checkbox"
   app:layout_constraintTop_toTopOf="parent"
-  app:placeholderImage="@drawable/ic_wikidata_logo_24dp" />
+  app:placeholderImage="@drawable/commons" />
 
 <LinearLayout
   android:layout_width="0dp"

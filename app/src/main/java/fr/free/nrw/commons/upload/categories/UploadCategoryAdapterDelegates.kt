@@ -23,7 +23,7 @@ fun uploadCategoryDelegate(
             if(item.thumbnail != "null") {
                 category_image.setImageURI(item.thumbnail)
             } else {
-                category_image.setActualImageResource(R.drawable.ic_wikidata_logo_24dp)
+                category_image.setActualImageResource(R.drawable.commons)
             }
 
             if(item.description != "null") {
