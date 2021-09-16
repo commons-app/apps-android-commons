@@ -483,18 +483,23 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Ei voitu lisätä luokkia.</string>
   <string name="category_edit_button_text">Päivitetään luokkia</string>
+  <string name="coordinates_edit_helper_show_edit_title">Koordinaattien päivitys</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Onnistui</string>
   <string name="coordinates_edit_helper_show_edit_message">Koordinaatit %1$s on lisätty.</string>
   <string name="coordinates_edit_helper_edit_message_else">Koordinaatteja ei voitu lisätä.</string>
+  <string name="coordinates_picking_unsuccessful">Koordinaattien haku epäonnistui.</string>
   <string name="share_image_via">Jaa kuva</string>
   <string name="no_achievements_yet">Et ole vielä lahjoittanut mitään</string>
   <string name="account_created">Käyttäjätunnus luotu!</string>
   <string name="text_copy">Teksti kopioitu leikepöydälle</string>
+  <string name="notification_mark_read">Ilmoitus merkitty luetuksi</string>
+  <string name="some_error">Tapahtui jokin virhe!</string>
   <string name="place_state">Paikan tila:</string>
   <string name="place_state_exists">Olemassa</string>
   <string name="place_state_needs_photo">Kuva uupuu</string>
   <string name="place_type">Paikkatyyppi:</string>
   <string name="nearby_search_hint">Silta, museo, hotelli jne.</string>
+  <string name="you_must_reset_your_passsword">Jokin meni pieleen kirjautumisessa, sinun on nollattava salasana !!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="upload_nearby_place_found_title">Lähipaikka löytyi</string>
   <string name="upload_nearby_place_found_description">Onko tämä kuva paikasta %1$s?</string>
@@ -558,6 +563,7 @@
   <string name="license_step_title">Median lisenssi</string>
   <string name="media_detail_step_title">Median tiedot</string>
   <string name="menu_view_category_page">Näytä luokkasivu</string>
+  <string name="app_ui_language">Sovelluksen käyttöliittymän kieli</string>
   <string name="read_help_link">Lue lisää</string>
   <string name="media_detail_in_all_languages">Kaikilla kielillä</string>
   <string name="choose_a_location">Valitse sijainti</string>
@@ -570,5 +576,6 @@
   <string name="done">Valmis</string>
   <string name="back">Takaisin</string>
   <string name="welcome_custom_selector_ok">Mahtava</string>
+  <string name="custom_selector_already_uploaded_image_text">Tämä kuva on jo ladattu Commonsiin.</string>
   <string name="learn_more">LUE LISÄÄ</string>
 </resources>
