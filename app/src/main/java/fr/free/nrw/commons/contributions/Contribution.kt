@@ -41,6 +41,7 @@ data class Contribution constructor(
     var dateModified: Date? = null,
     var hasInvalidLocation : Int =  0,
     var contentUri: Uri? = null
+    var countryCode : String? = null
 ) : Parcelable {
 
     fun completeWith(media: Media): Contribution {

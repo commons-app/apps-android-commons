@@ -12,7 +12,7 @@ data class WikidataPlace(
     val imageValue: String?,
     val wikipediaArticle: String?,
     val location: LatLng? = null,
-    val isMonumentUpload : Boolean =false
+    var isMonumentUpload : Boolean =false
 ) :
     WikidataItem, Parcelable {
     constructor(place: Place) : this(

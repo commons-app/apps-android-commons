@@ -454,7 +454,7 @@ public class ContributionsFragment
     private void updateClosestNearbyCardViewInfo() {
         curLatLng = locationManager.getLastLocation();
         compositeDisposable.add(Observable.fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curLatLng, curLatLng, true, false)) // thanks to boolean, it will only return closest result
+                .loadAttractionsFromLocation(curLatLng, curLatLng, true, false, false)) // thanks to boolean, it will only return closest result
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::updateNearbyNotification,
@@ -528,7 +528,7 @@ public class ContributionsFragment
      * of campaigns on the campaigns card
      */
     private void fetchCampaigns() {
-        if (Utils.isMonumentsEnabled(new Date(), store)) {
+        if (Utils.isMonumentsEnabled(new Date())) {
             campaignView.setCampaign(wlmCampaign);
             campaignView.setVisibility(View.VISIBLE);
         } else if (store.getBoolean(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE, true)) {
