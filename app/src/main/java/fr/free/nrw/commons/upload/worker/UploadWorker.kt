@@ -21,6 +21,7 @@ import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.upload.StashUploadResult
 import fr.free.nrw.commons.upload.StashUploadState
 import fr.free.nrw.commons.upload.UploadClient
 import fr.free.nrw.commons.upload.UploadResult
@@ -265,7 +266,9 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             //Upload the file to stash
             val stashUploadResult = uploadClient.uploadFileToStash(
                 appContext, filename, contribution, notificationProgressUpdater
-            ).blockingSingle()
+            ).onErrorReturn{
+                return@onErrorReturn StashUploadResult(StashUploadState.FAILED,fileKey = null)
+            }.blockingSingle()
 
             when (stashUploadResult.state) {
                 StashUploadState.SUCCESS -> {
@@ -278,9 +281,11 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                         //Upload the file from stash
                         val uploadResult = uploadClient.uploadFileFromStash(
                             contribution, uniqueFileName, stashUploadResult.fileKey
-                        ).blockingSingle()
+                        ).onErrorReturn {
+                            return@onErrorReturn null
+                        }.blockingSingle()
 
-                        if (uploadResult.isSuccessful()) {
+                        if (null != uploadResult && uploadResult.isSuccessful()) {
                             Timber.d(
                                 "Stash Upload success..proceeding to make wikidata edit"
                             )
@@ -313,6 +318,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                         Timber.e("Upload from stash failed for contribution : $filename")
                         showFailedNotification(contribution)
                         contribution.state=Contribution.STATE_FAILED
+                        contributionDao.saveSynchronous(contribution)
                         if (STASH_ERROR_CODES.contains(exception.message)) {
                             clearChunks(contribution)
                         }

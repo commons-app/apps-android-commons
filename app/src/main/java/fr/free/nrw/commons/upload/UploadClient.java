@@ -218,13 +218,13 @@ public class UploadClient {
                     CommonsApplication.DEFAULT_EDIT_SUMMARY,
                     uniqueFileName,
                     fileKey).map(uploadResponse -> {
-                    UploadResponse uploadResult = gson
+                    final UploadResponse uploadResult = gson
                         .fromJson(uploadResponse, UploadResponse.class);
                     if (uploadResult.getUpload() == null) {
                         final MwException exception = gson
                             .fromJson(uploadResponse, MwException.class);
                         Timber.e(exception, "Error in uploading file from stash");
-                        throw new RuntimeException(exception.getErrorCode());
+                        throw new Exception(exception.getErrorCode());
                     }
                     return uploadResult.getUpload();
                 });
