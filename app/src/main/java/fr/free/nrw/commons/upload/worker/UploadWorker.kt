@@ -23,6 +23,7 @@ import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.upload.StashUploadResult
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.upload.StashUploadState
 import fr.free.nrw.commons.upload.UploadClient
@@ -276,7 +277,9 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             //Upload the file to stash
             val stashUploadResult = uploadClient.uploadFileToStash(
                 appContext, filename, contribution, notificationProgressUpdater
-            ).blockingSingle()
+            ).onErrorReturn{
+                return@onErrorReturn StashUploadResult(StashUploadState.FAILED,fileKey = null)
+            }.blockingSingle()
 
             when (stashUploadResult.state) {
                 StashUploadState.SUCCESS -> {
@@ -285,22 +288,15 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     Timber.d("Ensure uniqueness of filename");
                     val uniqueFileName = findUniqueFileName(filename!!)
 
-
                     try {
                         //Upload the file from stash
-                            var countryCode: String? =null
-                            with(contribution.wikidataPlace?.location){
-                                if (contribution.wikidataPlace?.isMonumentUpload == true) {
-                                    countryCode =
-                                        reverseGeoCode(contribution.wikidataPlace?.location!!)?.toLowerCase()
-                                }
-
-                            }
                         val uploadResult = uploadClient.uploadFileFromStash(
-                            contribution, uniqueFileName, stashUploadResult.fileKey, countryCode
-                        ).blockingSingle()
+                            contribution, uniqueFileName, stashUploadResult.fileKey
+                        ).onErrorReturn {
+                            return@onErrorReturn null
+                        }.blockingSingle()
 
-                        if (uploadResult.isSuccessful()) {
+                        if (null != uploadResult && uploadResult.isSuccessful()) {
                             Timber.d(
                                 "Stash Upload success..proceeding to make wikidata edit"
                             )
@@ -312,13 +308,13 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                                     "WikiDataEdit not required, upload success"
                                 )
                                 saveCompletedContribution(contribution,uploadResult)
-                                showSuccessNotification(contribution)
                             }else{
                                 Timber.d(
                                     "WikiDataEdit not required, making wikidata edit"
                                 )
                                 makeWikiDataEdit(uploadResult, contribution)
                             }
+                            showSuccessNotification(contribution)
 
                         } else {
                             Timber.e("Stash Upload failed")
@@ -333,6 +329,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                         Timber.e("Upload from stash failed for contribution : $filename")
                         showFailedNotification(contribution)
                         contribution.state=Contribution.STATE_FAILED
+                        contributionDao.saveSynchronous(contribution)
                         if (STASH_ERROR_CODES.contains(exception.message)) {
                             clearChunks(contribution)
                         }
@@ -358,26 +355,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             contribution.state=Contribution.STATE_FAILED
             clearChunks(contribution)
         }
-    }
-
-    private fun reverseGeoCode(latLng: LatLng): String? {
-
-        val geocoder = Geocoder(
-            CommonsApplication.getInstance().applicationContext, Locale
-                .getDefault()
-        )
-        try {
-            val addresses =
-                geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
-            for (address in addresses) {
-                if (address != null && address.locale.isO3Country != null) {
-                    return address.locale.country
-                }
-            }
-        } catch (e: IOException) {
-            Timber.e(e)
-        }
-        return null
     }
 
     private fun clearChunks(contribution: Contribution) {

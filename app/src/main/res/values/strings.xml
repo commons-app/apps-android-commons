@@ -650,7 +650,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="welcome_custom_selector_ok">Awesome</string>
   <string name="custom_selector_already_uploaded_image_text">This image has already been uploaded to Commons.</string>
   <string name="place_state_wlm">WLM</string>
-  <string name="wlm_upload_info">You are contributing to Wiki Loves Monuments Campaign. Related templates will be added accordingly.</string>
+  <string name="wlm_upload_info">This image will be entered into the Wiki Loves Monuments 2021 contest</string>
   <string name="display_monuments">Display monuments</string>
   <string name="wlm_month_message">It\'s Wiki Loves Monuments month!</string>
   <string name="learn_more">LEARN MORE</string>

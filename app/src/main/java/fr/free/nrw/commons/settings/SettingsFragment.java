@@ -229,7 +229,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     /**
      * Changing the default app language with selected one and save it to SharedPreferences
      */
-    public void setLocale(final Activity activity, final String userSelectedValue) {
+    public void setLocale(final Activity activity, String userSelectedValue) {
+        if (userSelectedValue.equals("")) {
+            userSelectedValue = Locale.getDefault().getLanguage();
+        }
         final Locale locale = new Locale(userSelectedValue);
         Locale.setDefault(locale);
         final Configuration configuration = new Configuration();

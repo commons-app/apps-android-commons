@@ -218,12 +218,11 @@ public class Utils {
      * @param date
      * @return
      */
-    public static boolean isMonumentsEnabled(final Date date, final JsonKvStore store){
-        if(date.getDay()>=1 && date.getMonth()>=9 && date.getDay()<=31 && date.getMonth()<=10 ){
+    public static boolean isMonumentsEnabled(final Date date) {
+        if (date.getMonth() == 8) {
             return true;
         }
-
-        return store.getBoolean(CAMPAIGNS_DEFAULT_PREFERENCE) || true ;
+        return false;
     }
 
     /**
@@ -241,7 +240,7 @@ public class Utils {
      * @return
      */
     public static String getWLMEndDate() {
-        return "31 Oct";
+        return "30 Sep";
     }
 
 }
