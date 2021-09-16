@@ -1,5 +1,11 @@
 # Wikimedia Commons for Android
 
+## v3.1.1
+- Optimized Nearby query
+- Added Sweden's property for WLM 2021
+- Added link to wiki explaining how to contribute to WLM through app
+- Fixed various bugs and crashes
+
 ## v3.1.0
 - Added Wiki Loves Monuments integration for WLM 2021
 
