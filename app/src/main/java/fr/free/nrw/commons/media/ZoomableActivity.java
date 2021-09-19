@@ -1,32 +1,27 @@
 package fr.free.nrw.commons.media;
 
-import androidx.annotation.NonNull;
+import android.graphics.drawable.Animatable;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.R;
-import com.facebook.drawee.drawable.ProgressBarDrawable;
-import fr.free.nrw.commons.media.zoomControllers.zoomable.DoubleTapGestureListener;
-import fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableDraweeView;
-import timber.log.Timber;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Animatable;
-import android.net.Uri;
-import android.os.Bundle;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
+import com.facebook.drawee.drawable.ProgressBarDrawable;
 import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.interfaces.DraweeController;
-import android.view.View;
-import android.widget.ProgressBar;
-
 import com.facebook.imagepipeline.image.ImageInfo;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.media.zoomControllers.zoomable.DoubleTapGestureListener;
+import fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableDraweeView;
+import timber.log.Timber;
 
 
 public class ZoomableActivity extends AppCompatActivity {
