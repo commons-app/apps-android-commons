@@ -135,6 +135,7 @@
   <string name="title_activity_settings">הגדרות</string>
   <string name="title_activity_signup">רישום</string>
   <string name="title_activity_featured_images">תמונות מומלצות</string>
+  <string name="title_activity_custom_selector">בורר מותאם אישית</string>
   <string name="title_activity_category_details">קטגוריה</string>
   <string name="title_activity_review">ביקורת עמיתים</string>
   <string name="menu_about">אודות</string>
@@ -345,6 +346,7 @@
   <string name="quiz_screenshot_question">האם בסדר להעלות את צילום המסך הזה?</string>
   <string name="share_app_title">שיתוף היישום</string>
   <string name="error_fetching_nearby_places">שגיאה באחזור המקומות בסביבתך.</string>
+  <string name="error_fetching_nearby_monuments">שגיאה באחזור אתרים בסביבתך.</string>
   <string name="no_recent_searches">אין חיפושים אחרונים</string>
   <string name="delete_recent_searches_dialog">האם באמת ברצונך לנקות את היסטוריית החיפוש שלך?</string>
   <string name="delete_search_dialog">האם ברצונך למחוק חיפוש זה?</string>
@@ -406,6 +408,9 @@
   <string name="no_categories_selected_warning_desc">תמונות ללא קטגוריות בדרך כלל אינן שימושיות. להמשיך ללא בחירת קטגוריות?</string>
   <string name="no_depictions_selected">לא נבחרו מוצגים</string>
   <string name="no_depictions_selected_warning_desc">קל יותר למצוא תמונות עם מוצגים ויש סיכוי גבוה יותר שמישהו ישתמש בהן. האם ברצונך באמת להמשיך בלי לבחור מוצגים?</string>
+  <string name="back_button_warning">ביטול ההעלאה</string>
+  <string name="back_button_warning_desc">שימוש בכתפור החזרה יבטל את ההעלאה הזאת וההתקדמות שלך תלך לאיבוד</string>
+  <string name="back_button_continue">נמשך ההעלאה</string>
   <string name="upload_flow_all_images_in_set">(לכל התמונות בסדרה)</string>
   <string name="search_this_area">חיפוש באזור הזה</string>
   <string name="nearby_card_permission_title">בקשת הרשאה</string>
@@ -616,9 +621,29 @@
   <string name="app_ui_language">שפת ממשק המשתמש של היישום</string>
   <string name="remove">הסרת כיתוב ותיאור</string>
   <string name="read_help_link">מידע נוסף</string>
+  <string name="media_detail_in_all_languages">בכל השפות</string>
   <string name="choose_a_location">נא לבחור מיקום</string>
   <string name="pan_and_zoom_to_adjust">לצדד וקרב כדי לכוונן</string>
   <string name="exit_location_picker">יציאה מבורר המיקום</string>
   <string name="select_location_location_picker">נא לבחור מיקום</string>
+  <string name="show_in_map_app">הצגה ביישומון המפות</string>
+  <string name="modify_location">עריכת מיקום</string>
   <string name="location_picker_image_view">תצוגת תמונה של בורר המיקום</string>
+  <string name="location_picker_image_view_shadow">הצל של תצוגת תמונה של בורר המיקום</string>
+  <string name="image_location">מיקום תמונה</string>
+  <string name="check_whether_location_is_correct">לבדוק האם המיקום נכון</string>
+  <string name="custom_selector_title">בורר מותאם אישית</string>
+  <string name="custom_selector_empty_text">אין תמונות</string>
+  <string name="done">בוצע</string>
+  <string name="back">חזרה</string>
+  <string name="welcome_custom_picture_selector_text">ברוך בואך לבוחר התמונות המותאמות</string>
+  <string name="custom_selector_info_text1">הבוחר מציג תמונות שונות מאלו שכבר בוויקישיתוף.</string>
+  <string name="custom_selector_info_text2">בניגוד לתמונה מימין, על התמונה שמשמאל יש את הלוגו של ויקישיתוף שמעיד שהיא כבר הועלתה. יש לגעת ולהחזיר לקבלת תצוגה מקדימה של התמונה.</string>
+  <string name="welcome_custom_selector_ok">מגניב</string>
+  <string name="custom_selector_already_uploaded_image_text">התמונה הזאת כבר הועלתה לוויקישיתוף.</string>
+  <string name="wlm_upload_info">זאת תהיה תרומה למבצע ויקי אוהבת אתרי מורשת. תוספנה תבניות מתאימות.</string>
+  <string name="display_monuments">הצגת אתרי מורשת</string>
+  <string name="wlm_month_message">זהו חודש ויקי אוהבת אתרי מורשת!</string>
+  <string name="learn_more">מידע נוסף</string>
+  <string name="wlm_campaign_description">ויקי אוהבת אתרי מורשת היא תחרות בין־לאומית לצילום אתרי מורשת שמאורגנת על־ידי ויקימדיה</string>
 </resources>

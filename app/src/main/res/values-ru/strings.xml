@@ -23,6 +23,7 @@
 * Patriccck
 * Redredsonia
 * Rubin16
+* Thothsum
 * Vlad5250
 * VoxelJ
 * Wikisaurus
@@ -418,6 +419,9 @@
   <string name="no_categories_selected_warning_desc">Изображения без категорий используются редко. Вы уверены, что хотите продолжить, не выбрав категории?</string>
   <string name="no_depictions_selected">Описания не выбраны</string>
   <string name="no_depictions_selected_warning_desc">Изображения с описаниями будет проще найти и использовать. Вы уверены, что хотите продолжить без выбора описаний?</string>
+  <string name="back_button_warning">Отменить загрузку</string>
+  <string name="back_button_warning_desc">Использование кнопки «Назад» отменит эту загрузку</string>
+  <string name="back_button_continue">Продолжить загрузку</string>
   <string name="upload_flow_all_images_in_set">(Для всех изображений в наборе)</string>
   <string name="search_this_area">Искать в этой области</string>
   <string name="nearby_card_permission_title">Запрос разрешения</string>
@@ -525,6 +529,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Не удалось добавить категории.</string>
   <string name="category_edit_button_text">Обновить категории</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Попытка обновить координаты.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Обновление координат</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Успешно</string>
+  <string name="coordinates_edit_helper_show_edit_message">Координаты %1$s добавлены.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Не удалось добавить координаты.</string>
+  <string name="coordinates_picking_unsuccessful">Не удалось получить координаты.</string>
   <string name="share_image_via">Поделиться изображением с помощью</string>
   <string name="no_achievements_yet">Пока что от вас нет вклада</string>
   <string name="account_created">Учётная запись создана!</string>
@@ -622,4 +632,14 @@
   <string name="app_ui_language">Язык пользовательского интерфейса приложения</string>
   <string name="remove">Удаляет подпись и описание</string>
   <string name="read_help_link">Подробнее</string>
+  <string name="media_detail_in_all_languages">На всех языках</string>
+  <string name="choose_a_location">Выберите местоположение</string>
+  <string name="pan_and_zoom_to_adjust">Панорамируйте и масштабируйте для настройки</string>
+  <string name="exit_location_picker">Выйти из окна выбора местоположения</string>
+  <string name="select_location_location_picker">Выберите местоположение</string>
+  <string name="show_in_map_app">Показать в приложении карты</string>
+  <string name="modify_location">Изменить местоположение</string>
+  <string name="image_location">Расположение изображения</string>
+  <string name="check_whether_location_is_correct">Проверьте правильность местоположения</string>
+  <string name="back">Назад</string>
 </resources>

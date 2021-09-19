@@ -205,6 +205,10 @@
   <string name="nearby_info_menu_wikidata_article">Wikidata itema</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipediako artikulua</string>
   <string name="description_info">Mesedez, deskribatu multimedia elementua ahal duzun gehien: non hartu zen? zer erakusten du? zein da bere testuingurua? Mesedez, objektuak eta pertsonak deskribatu. Eman asmatzeko erraza ez den informazioa, adibidez, paisaia bat izatekotan, eguneko zein orudtan hartu den. Multimediak zerbait berezia erakusten badu, mesedez azaldu zerk egiten duen berezia.</string>
+  <string name="upload_problem_image_dark">Irudia ilunegia da.</string>
+  <string name="upload_problem_image_duplicate">Irudian Commonsen badago.</string>
+  <string name="upload_problem_different_geolocation">Irudi hau beste leku batean hartu da.</string>
+  <string name="upload_connection_error_alert_title">Konektatzeko Errorea</string>
   <string name="upload_problem_image">arazoak aurkitu dira irudian</string>
   <string name="use_external_storage">Irudiak aplikazioan gorde</string>
   <string name="use_external_storage_summary">Aplikazioaren kamerarekin ateratako argazkiak zure gailuan gorde</string>
@@ -239,6 +243,9 @@
   <string name="about_translate_cancel">Utzi</string>
   <string name="retry">Saiatu berriro</string>
   <string name="showcase_view_whole_nearby_activity">Zugandik hurbil dauden leku hauek irudiak behar dituzte beren Wikipedia artikuluak hornitzeko.\n\nSakatu \'EREMU HONETAN BILATU\' mapa zentratzeko eta kokapen horren inguruan bilaketa hasteko.</string>
+  <string name="showcase_view_needs_photo">Leku honek argazkia behar du.</string>
+  <string name="showcase_view_has_photo">Leku honek badu argazkia.</string>
+  <string name="showcase_view_no_longer_exists">Lekua hau ia ez da existitzen.</string>
   <string name="no_images_found">Ez da irudirik aurkitu!</string>
   <string name="error_loading_images">Arazo bat egon da irudiak kargatzerakoan.</string>
   <string name="image_uploaded_by">Nork igota: %1$s</string>
@@ -302,6 +309,7 @@
   <string name="contributions_fragment">Ekarpenak</string>
   <string name="nearby_fragment">Gertukoak</string>
   <string name="notifications">Jakinarazpenak</string>
+  <string name="read_notifications">Jakinarazpenak (irakurriak)</string>
   <string name="list_sheet">Zerrenda</string>
   <string name="storage_permission">Biltegiratze baimena</string>
   <string name="next">Hurrengoa</string>
@@ -311,10 +319,13 @@
   <string name="title_page_bookmarks_locations">Kokapenak</string>
   <string name="provider_bookmarks">Lastermarkak</string>
   <string name="provider_bookmarks_location">Lastermarkak</string>
+  <string name="search_this_area">Leku honetan bilatu</string>
   <string name="nominate_for_deletion_done">Egina</string>
   <string name="review_thanks_yes_button_text">Hurrengo orria</string>
   <string name="review_thanks_no_button_text">Bai, zergatik ez</string>
+  <string name="please_wait">Mesedez itxaron…</string>
   <string name="copied_successfully">Kopiatua</string>
+  <string name="skip_image">Irudi hau jauzi</string>
   <string name="exif_tag_name_author">Egilea</string>
   <string name="exif_tag_name_copyright">Egile-eskubideak</string>
   <string name="exif_tag_name_location">Kokapena</string>

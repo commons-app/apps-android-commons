@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
 import java.io.IOException;
-import java.io.InterruptedIOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,8 +17,8 @@ import timber.log.Timber;
 @Singleton
 public class NearbyPlaces {
 
-    private static final double INITIAL_RADIUS = 1.0; // in kilometers
-    private static final double RADIUS_MULTIPLIER = 1.618;
+    private static final double INITIAL_RADIUS = 0.3; // in kilometers
+    private static final double RADIUS_MULTIPLIER = 2.0;
     public double radius = INITIAL_RADIUS;
 
     private final OkHttpJsonApiClient okHttpJsonApiClient;
@@ -40,12 +39,12 @@ public class NearbyPlaces {
      * @param lang user's language
      * @param returnClosestResult true if only the nearest point is desired
      * @return list of places obtained
-     * @throws IOException if query fails
      */
-    List<Place> radiusExpander(LatLng curLatLng, String lang, boolean returnClosestResult) throws IOException {
+    List<Place> radiusExpander(final LatLng curLatLng, final String lang, final boolean returnClosestResult
+        , final boolean shouldQueryForMonuments) throws Exception {
 
-        int minResults;
-        double maxRadius;
+        final int minResults;
+        final double maxRadius;
 
         List<Place> places = Collections.emptyList();
 
@@ -56,19 +55,14 @@ public class NearbyPlaces {
             maxRadius = 5;  // Return places only in 5 km area
             radius = INITIAL_RADIUS; // refresh radius again, otherwise increased radius is grater than MAX_RADIUS, thus returns null
         } else {
-            minResults = 40;
+            minResults = 20;
             maxRadius = 300.0; // in kilometers
             radius = INITIAL_RADIUS;
         }
 
             // Increase the radius gradually to find a satisfactory number of nearby places
             while (radius <= maxRadius) {
-                try {
-                    places = getFromWikidataQuery(curLatLng, lang, radius);
-                } catch (InterruptedIOException e) {
-                    Timber.e(e, "exception in fetching nearby places");
-                    return places;
-                }
+                places = getFromWikidataQuery(curLatLng, lang, radius, shouldQueryForMonuments);
                 Timber.d("%d results at radius: %f", places.size(), radius);
                 if (places.size() >= minResults) {
                     break;
@@ -88,10 +82,12 @@ public class NearbyPlaces {
      * @param cur coordinates of search location
      * @param lang user's language
      * @param radius radius for search, as determined by radiusExpander()
+     * @param shouldQueryForMonuments should the query include properites for monuments
      * @return list of places obtained
      * @throws IOException if query fails
      */
-    public List<Place> getFromWikidataQuery(LatLng cur, String lang, double radius) throws IOException {
-        return okHttpJsonApiClient.getNearbyPlaces(cur, lang, radius).blockingSingle();
+    public List<Place> getFromWikidataQuery(final LatLng cur, final String lang,
+        final double radius, final boolean shouldQueryForMonuments) throws Exception {
+        return okHttpJsonApiClient.getNearbyPlaces(cur, lang, radius, shouldQueryForMonuments);
     }
 }

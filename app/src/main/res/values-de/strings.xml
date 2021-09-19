@@ -116,7 +116,7 @@
   <string name="display_list_button">Liste</string>
   <string name="contributions_subtitle_zero">(Noch keine hochgeladenen Dateien)</string>
   <string name="categories_not_found">Die Kategorie „%1$s“ wurde nicht gefunden</string>
-  <string name="depictions_not_found">Keine Wikidata Gegenstände gefunden für %1$s</string>
+  <string name="depictions_not_found">Kein Wikidata-Objekt für %1$s gefunden</string>
   <string name="no_child_classes">%1$s hat keine child-Klasse</string>
   <string name="no_parent_classes">%1$s hat keine parent-Klasse</string>
   <string name="categories_skip_explanation">Füge Kategorien hinzu, um deine Bilder auf Wikimedia Commons auffindbarer zu machen.\nBeginne mit der Eingabe, um Kategorien hinzuzufügen.</string>
@@ -124,6 +124,7 @@
   <string name="title_activity_settings">Einstellungen</string>
   <string name="title_activity_signup">Registrieren</string>
   <string name="title_activity_featured_images">Vorgestellte Bilder</string>
+  <string name="title_activity_custom_selector">Benutzerdefinierte Auswahl</string>
   <string name="title_activity_category_details">Kategorie</string>
   <string name="title_activity_review">Peer Review</string>
   <string name="menu_about">Über</string>
@@ -306,7 +307,7 @@
   <string name="error_loading_depictions">Beim Laden von Darstellungen ist ein Fehler aufgetreten.</string>
   <string name="search_tab_title_media">Medien</string>
   <string name="search_tab_title_categories">Kategorien</string>
-  <string name="search_tab_title_depictions">Einträge</string>
+  <string name="search_tab_title_depictions">Objekte</string>
   <string name="explore_tab_title_featured">Vorgestellt</string>
   <string name="explore_tab_title_mobile">Über mobil hochgeladen</string>
   <string name="successful_wikidata_edit">Bild zu %1$s auf Wikidata hinzugefügt!</string>
@@ -334,6 +335,7 @@
   <string name="quiz_screenshot_question">Darf dieses Bildschirmfoto hochgeladen werden?</string>
   <string name="share_app_title">App teilen</string>
   <string name="error_fetching_nearby_places">Fehler beim Abrufen der Orte in der Nähe.</string>
+  <string name="error_fetching_nearby_monuments">Fehler beim Abrufen von Denkmälern in der Nähe.</string>
   <string name="no_recent_searches">Keine letzten Suchanfragen</string>
   <string name="delete_recent_searches_dialog">Bist du sicher, dass du deinen Suchverlauf löschen möchtest?</string>
   <string name="delete_search_dialog">Möchtest du diese Suche löschen?</string>
@@ -395,6 +397,9 @@
   <string name="no_categories_selected_warning_desc">Bilder ohne Kategorien sind selten nutzbar. Bist du sicher, dass du ohne die Auswahl von Kategorien hochladen möchtest?</string>
   <string name="no_depictions_selected">Keine Motive ausgewählt</string>
   <string name="no_depictions_selected_warning_desc">Bilder mit Motive sind leichter zu finden und werden eher verwendet. Bist dusicher, dass du ohne Auswahl von Motiven fortfahren möchtest?</string>
+  <string name="back_button_warning">Hochladen abbrechen</string>
+  <string name="back_button_warning_desc">Wenn du den Zurück-Button verwendest, wird das Hochladen abgebrochen und du verlierst deine bisherigen Schritte</string>
+  <string name="back_button_continue">Hochladen fortsetzen</string>
   <string name="upload_flow_all_images_in_set">(für alle Bilder im Satz)</string>
   <string name="search_this_area">Diesen Bereich durchsuchen</string>
   <string name="nearby_card_permission_title">Berechtigungsanfrage</string>
@@ -512,10 +517,15 @@
   <string name="text_copy">Text in die Zwischenablage kopiert</string>
   <string name="notification_mark_read">Benachrichtigung als gelesen markieren</string>
   <string name="some_error">Ein Fehler ist aufgetreten!</string>
+  <string name="place_state">Zustand des Platzes:</string>
   <string name="place_state_exists">Existiert</string>
   <string name="place_state_needs_photo">Benötigt Foto</string>
+  <string name="place_type">Platztyp:</string>
   <string name="nearby_search_hint">Brücke, Museum, Hotel etc.</string>
   <string name="you_must_reset_your_passsword">Bei der Anmeldung ist etwas schief gelaufen, du musst dein Passwort zurücksetzen!</string>
+  <string name="title_for_media">MEDIA</string>
+  <string name="title_for_child_classes">CHILD CLASSES</string>
+  <string name="title_for_parent_classes">PARENT CLASSES</string>
   <string name="upload_nearby_place_found_title">Ort in der Nähe gefunden</string>
   <string name="upload_nearby_place_found_description">Ist dies ein Foto vom Ort %1$s?</string>
   <string name="title_app_shortcut_bookmark">Lesezeichen</string>
@@ -525,6 +535,7 @@
   <string name="wallpaper_set_unsuccessfully">Etwas ist schief gelaufen. Konnte das Hintergrundbild nicht einstellen</string>
   <string name="setting_wallpaper_dialog_title">Als Hintergrundbild festlegen</string>
   <string name="setting_wallpaper_dialog_message">Hintergrundbild wird festgelegt. Bitte warten...</string>
+  <string name="theme_default_name">System folgen</string>
   <string name="theme_dark_name">Dunkel</string>
   <string name="theme_light_name">Hell</string>
   <string name="cannot_open_location_settings">Die Standorteinstellungen konnten nicht geöffnet werden. Bitte schalte den Standort manuell ein</string>
@@ -546,6 +557,7 @@
   <string name="wikipedia_instructions_step_3">3. Suche einen geeigneten Abschnitt im Artikel für dein Bild</string>
   <string name="wikipedia_instructions_step_4">4. Klicken Sie auf das Symbol „Bearbeiten“ (das einem Stift ähnelt) für diesen Abschnitt.</string>
   <string name="wikipedia_instructions_step_5">5. Füge den wikitext an der entsprechenden Stelle ein.</string>
+  <string name="wikipedia_instructions_step_6">6. Bearbeite den Wikitext für eine geeignete Positionierung, falls erforderlich. Weitere Informationen findest du &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;hier&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Veröffentliche den Artikel</string>
   <string name="copy_wikicode_to_clipboard">wikicode in die Zwischenablage kopieren</string>
   <string name="pause">pausieren</string>
@@ -592,11 +604,33 @@
   <string name="license_step_title">Medienlizenz</string>
   <string name="media_detail_step_title">Mediendetails</string>
   <string name="menu_view_category_page">Kategorieseite anzeigen</string>
+  <string name="menu_view_item_page">Objektseite ansehen</string>
   <string name="app_ui_language">Benutzeroberflächensprache</string>
+  <string name="remove">Entfernt eine Beschriftung und Beschreibung</string>
   <string name="read_help_link">Mehr lesen</string>
+  <string name="media_detail_in_all_languages">In allen Sprachen</string>
   <string name="choose_a_location">Wähle einen Ort</string>
   <string name="pan_and_zoom_to_adjust">Schwenken und Zoomen zum Einstellen</string>
   <string name="exit_location_picker">Beenden der Ortswahl</string>
   <string name="select_location_location_picker">Ort auswählen</string>
-  <string name="location_picker_image_view">Ortauswahl Bildansicht</string>
+  <string name="show_in_map_app">In Karten-App anzeigen</string>
+  <string name="modify_location">Standort beabeiten</string>
+  <string name="location_picker_image_view">Die Bildansicht der Standortauswahl</string>
+  <string name="location_picker_image_view_shadow">Der Schatten der Bildansicht der Ortsauswahl</string>
+  <string name="image_location">Bildstandort</string>
+  <string name="check_whether_location_is_correct">Überprüfe, ob der Standort korrekt ist</string>
+  <string name="custom_selector_title">Benutzerdefinierte Auswahl</string>
+  <string name="custom_selector_empty_text">Keine Bilder</string>
+  <string name="done">Fertig</string>
+  <string name="back">Zurück</string>
+  <string name="welcome_custom_picture_selector_text">Willkommen bei der benutzerdefinierten Auswahl</string>
+  <string name="custom_selector_info_text1">Diese Auswahl zeigt verschiedene Bilder, die bereits zu Commons gehören.</string>
+  <string name="custom_selector_info_text2">Im Gegensatz zum Bild auf der linken Seite ist das Bild auf der rechten Seite mit dem Commons-Logo versehen, das anzeigt, dass es bereits hochgeladen wurde. Für die Bildvorschau berühren und halten.</string>
+  <string name="welcome_custom_selector_ok">Großartig</string>
+  <string name="custom_selector_already_uploaded_image_text">Dieses Bild ist bereits auf Commons hochgeladen worden.</string>
+  <string name="wlm_upload_info">Du beiligst dich an der Wiki Loves Monuments-Kampagne. Zugehörige Vorlagen werden entsprechend hinzugefügt.</string>
+  <string name="display_monuments">Denkmäler anzeigen</string>
+  <string name="wlm_month_message">Es ist der Wiki Loves Monuments Monat!</string>
+  <string name="learn_more">MEHR ERFAHREN</string>
+  <string name="wlm_campaign_description">Wiki Loves Monuments ist ein internationaler Fotowettbewerb für Denkmäler, der von Wikimedia organisiert wird.</string>
 </resources>

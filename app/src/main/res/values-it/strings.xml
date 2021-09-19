@@ -7,7 +7,9 @@
 * Davio
 * Gianfranco
 * Lorelai87
+* Lorem Ipsum
 * Nemo bis
+* Noretta93
 * S4b1nuz E.656
 * Sarah Bernabei
 * Senpremì
@@ -237,6 +239,7 @@
   <string name="upload_problem_different_geolocation">Questa foto è stata scattata in una posizione diversa.</string>
   <string name="upload_problem_fbmd">Carica solo le foto che hai scattato tu stesso. Non caricare immagini che hai trovato negli account Facebook di altre persone.</string>
   <string name="upload_problem_do_you_continue">Vuoi caricare lo stesso questa immagine?</string>
+  <string name="upload_connection_error_alert_title">Errore di connessione</string>
   <string name="upload_problem_image">Problemi trovati nell\'immagine</string>
   <string name="internet_downloaded">Carica solo le foto che hai scattato da solo. Non caricare immagini scaricate da Internet.</string>
   <string name="use_external_storage">Salva scatti in-app</string>
@@ -384,6 +387,8 @@
   <string name="no_categories_selected_warning_desc">Le immagini senza categorie sono raramente utilizzabili. Sei sicuro di voler continuare senza selezionare le categorie?</string>
   <string name="no_depictions_selected">Non sono stati selezionati elementi</string>
   <string name="no_depictions_selected_warning_desc">Le immagini con descrizioni possono essere trovate più facilmente ed è più probabile il loro utilizzo. Davvero vuoi continuare senza selezionare elementi raffigurati?</string>
+  <string name="back_button_warning">Annulla caricamento</string>
+  <string name="back_button_continue">Continua caricamento</string>
   <string name="upload_flow_all_images_in_set">(Per tutte le immagini nell\'insieme)</string>
   <string name="search_this_area">Cerca in questa area</string>
   <string name="nearby_card_permission_title">Richiesta di permesso</string>
@@ -448,6 +453,10 @@
   <string name="category_edit_helper_show_edit_title">Aggiorna la categoria</string>
   <string name="category_edit_helper_show_edit_title_success">Successo</string>
   <string name="category_edit_button_text">Aggiorna le categorie</string>
+  <string name="coordinates_edit_helper_show_edit_title">Coordinate aggiornate</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Successo</string>
+  <string name="coordinates_edit_helper_show_edit_message">Le coordinate %1$s sono state aggiunte.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Impossibile aggiungere le coordinate.</string>
   <string name="share_image_via">Condividi immagine tramite</string>
   <string name="no_achievements_yet">Non hai fatto alcun contributo ancora</string>
   <string name="account_created">Utenza creata!</string>
@@ -501,4 +510,13 @@
   <string name="leaderboard_nearby">Nelle vicinanze</string>
   <string name="leaderboard_used">Usa</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Migliora questa mappa&lt;/a&gt;</string>
+  <string name="media_detail_in_all_languages">In tutte le lingue</string>
+  <string name="choose_a_location">Scegli una posizione</string>
+  <string name="select_location_location_picker">Seleziona una posizione</string>
+  <string name="modify_location">Modifica posizione</string>
+  <string name="custom_selector_empty_text">Nessuna immagine</string>
+  <string name="done">Fatto</string>
+  <string name="back">Indietro</string>
+  <string name="welcome_custom_selector_ok">Fantastico</string>
+  <string name="learn_more">ULTERIORI INFORMAZIONI</string>
 </resources>

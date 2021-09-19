@@ -322,6 +322,7 @@
   <string name="category_edit_helper_show_edit_title_success">Succes</string>
   <string name="category_edit_helper_edit_message_else">Kunne ikke tilføje kategorier.</string>
   <string name="category_edit_button_text">Opdater kategorier</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Succes</string>
   <string name="share_image_via">Del billede via</string>
   <string name="account_created">Konto oprettet!</string>
   <string name="some_error">Der var en fejl!</string>
@@ -361,4 +362,6 @@
   <string name="limited_connection_mode">Begrænset forbindelsestilstand</string>
   <string name="statistics_quality">Kvalitetsbilleder</string>
   <string name="read_help_link">Læs mere</string>
+  <string name="back">Tilbage</string>
+  <string name="learn_more">LÆR MERE</string>
 </resources>

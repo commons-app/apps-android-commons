@@ -9,6 +9,7 @@
 * Hinaloe
 * Kkairri
 * LaMagiaaa
+* MathXplore
 * Nicolas Raoul
 * Omotecho
 * Otokoume
@@ -31,11 +32,11 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">アップロードを開始中です</string>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="other">%1$d 件のアップロードを開始中</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="other">%d 件のアップロードを処理中</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="other">%1$d 件のアップロード</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="other">%d 件のアップロード</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">この画像は%1$sライセンスのもとにアップロードされます</item>
@@ -73,7 +74,7 @@
   <string name="uploading_queued">アップロードは待機中です（接続制限モードが有効）</string>
   <string name="upload_completed_notification_title">%1$s をアップロードしました!</string>
   <string name="upload_completed_notification_text">アップロードしたものを表示するにはタップしてください</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s のアップロードを開始中</string>
+  <string name="upload_progress_notification_title_start">%s のアップロードを開始中</string>
   <string name="upload_progress_notification_title_in_progress">%1$s をアップロード中</string>
   <string name="upload_progress_notification_title_finishing">%1$s のアップロードを完了中</string>
   <string name="upload_failed_notification_title">%1$s のアップロードに失敗しました</string>
@@ -241,6 +242,8 @@
   <string name="upload_problem_different_geolocation">この画像の撮影地点は別の場所です。</string>
   <string name="upload_problem_fbmd">あなた自身の撮影したがぞうに限定してアップロードしてください。他人のFacebookアカウントの画像をアップロードすることはやめてください。</string>
   <string name="upload_problem_do_you_continue">それでもこの画像をアップロードしますか？</string>
+  <string name="upload_connection_error_alert_title">接続エラーが発生しました</string>
+  <string name="upload_connection_error_alert_detail">アップロードの過程にはインタネットアクセスへの接続が必要です。ネットワーク接続をご確認ください。</string>
   <string name="upload_problem_image">画像に問題があります</string>
   <string name="internet_downloaded">あなた自身の撮影した画像に限定してアップロードしてください。ウェブ上からダウンロードした画像はアップロードできません。</string>
   <string name="use_external_storage">アプリの画面キャプチャを保存</string>
@@ -388,6 +391,9 @@
   <string name="no_categories_selected_warning_desc">カテゴリを指定しない画像は使用されることがほとんどありません。ほんとうにカテゴリを選択しないまま作業を続けますか？</string>
   <string name="no_depictions_selected">描写を選択していません</string>
   <string name="no_depictions_selected_warning_desc">描写を添えた画像はないものよりも探しやすく利用されやすくなります。描写を選ばないまま、先に進んでよいですか？</string>
+  <string name="back_button_warning">アップロードをキャンセル</string>
+  <string name="back_button_warning_desc">バックボタンを使うとこのアップロードはキャンセルされ、これまでの進行は消失します</string>
+  <string name="back_button_continue">アップロードを続ける</string>
   <string name="upload_flow_all_images_in_set" fuzzy="true">（画像全点を組み写真にする場合）</string>
   <string name="search_this_area">この地域を検索</string>
   <string name="nearby_card_permission_title">許可を申請</string>
@@ -583,4 +589,8 @@
   <string name="license_step_title">メディアのライセンス</string>
   <string name="media_detail_step_title">メディアの詳細</string>
   <string name="menu_view_category_page">カテゴリのページを表示</string>
+  <string name="media_detail_in_all_languages">すべての言語</string>
+  <string name="show_in_map_app">地図アプリに表示</string>
+  <string name="modify_location">位置を編集</string>
+  <string name="check_whether_location_is_correct">場所が正しいかどうかを確認する</string>
 </resources>

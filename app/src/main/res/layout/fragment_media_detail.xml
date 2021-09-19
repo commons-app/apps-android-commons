@@ -177,6 +177,7 @@
                       android:layout_width="@dimen/widget_margin"
                       android:layout_height="match_parent"
                       style="@style/MediaDetailTextBody"
+                      android:textIsSelectable="true"
                       tools:text="Captions of the media" />
                 </LinearLayout>
 
@@ -201,6 +202,7 @@
                       android:padding="@dimen/small_gap"
                       android:textColor="?attr/mediaDetailsText"
                       android:textSize="@dimen/description_text_size"
+                      android:textIsSelectable="true"
                       tools:text="Description of the media goes here. This can potentially be fairly long, and will need to wrap across multiple lines. We hope it looks nice though." />
                 </LinearLayout>
 

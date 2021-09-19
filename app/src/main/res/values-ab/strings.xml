@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Envlh
+* Fraxinus.cs
 * Pupsik-ipa
 * Андрей
 -->
@@ -86,4 +87,5 @@
   <string name="navigation_item_settings">Архиарақәа</string>
   <string name="navigation_item_logout">Иҭыҵтәуп</string>
   <string name="no_description_found">ахҳаа ԥшаам</string>
+  <string name="back_button_warning">Аҭагалара аԥыхра</string>
 </resources>

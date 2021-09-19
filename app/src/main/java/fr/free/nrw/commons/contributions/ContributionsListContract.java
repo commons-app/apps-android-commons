@@ -8,17 +8,17 @@ import java.util.List;
  */
 public class ContributionsListContract {
 
-  public interface View {
+    public interface View {
 
-    void showWelcomeTip(boolean numberOfUploads);
+        void showWelcomeTip(boolean numberOfUploads);
 
-    void showProgress(boolean shouldShow);
+        void showProgress(boolean shouldShow);
 
-    void showNoContributionsUI(boolean shouldShow);
-  }
+        void showNoContributionsUI(boolean shouldShow);
+    }
 
-  public interface UserActionListener extends BasePresenter<View> {
+    public interface UserActionListener extends BasePresenter<View> {
 
-    void deleteUpload(Contribution contribution);
-  }
+        void deleteUpload(Contribution contribution);
+    }
 }

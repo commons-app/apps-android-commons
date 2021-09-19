@@ -3,7 +3,7 @@ package fr.free.nrw.commons.quiz
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.RadioButton
+import android.widget.Button
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
 import fr.free.nrw.commons.R
@@ -30,8 +30,8 @@ class QuizActivityUnitTest {
     private val SAMPLE_ALERT_MESSAGE_VALUE = "Message"
 
     private lateinit var activity: QuizActivity
-    private lateinit var positiveAnswer: RadioButton
-    private lateinit var negativeAnswer: RadioButton
+    private lateinit var positiveAnswer: Button
+    private lateinit var negativeAnswer: Button
     private lateinit var view: View
     private lateinit var context: Context
 
@@ -68,13 +68,6 @@ class QuizActivityUnitTest {
     @Test
     @Throws(Exception::class)
     fun testSetNextQuestionCaseDefault() {
-        activity.setNextQuestion()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testSetNextQuestion() {
-        activity.negativeAnswer.isChecked = true
         activity.setNextQuestion()
     }
 

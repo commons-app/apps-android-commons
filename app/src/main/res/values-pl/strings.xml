@@ -407,6 +407,9 @@
   <string name="no_categories_selected_warning_desc">Obrazy bez kategorii rzadko nadają się do użycia. Czy na pewno chcesz kontynuować bez wybierania kategorii?</string>
   <string name="no_depictions_selected">Nie wybrano żadnych obrazów</string>
   <string name="no_depictions_selected_warning_desc">Obrazy ze wskazanymi przedstawieniami są łatwiejsze do znalezienia i częściej używane. Czy na pewno chcesz kontynuować bez wybierania przedstawień?</string>
+  <string name="back_button_warning">Anuluj przesyłanie</string>
+  <string name="back_button_warning_desc">Użycie przycisku „Wstecz” spowoduje anulowanie przesyłania i utratę postępów</string>
+  <string name="back_button_continue">Kontynuuj przesyłanie</string>
   <string name="upload_flow_all_images_in_set">(Dla wszystkich obrazów w zestawie)</string>
   <string name="search_this_area">Przeszukaj ten obszar</string>
   <string name="nearby_card_permission_title">Prośba o pozwolenie</string>
@@ -449,8 +452,8 @@
   <string name="review_category_explanation">Ten obraz należy do kategorii %1$s</string>
   <string name="review_spam_report_question">Jest poza zakresem, ponieważ jest</string>
   <string name="review_c_violation_report_question">Jest to naruszeniem praw autorskich, ponieważ</string>
-  <string name="review_thanks_yes_button_text" fuzzy="true">Tak, czemu nie</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">Następny obraz</string>
+  <string name="review_thanks_yes_button_text">Następny obraz</string>
+  <string name="review_thanks_no_button_text">Tak, dlaczego nie</string>
   <string name="skip_image_explanation">Kliknięcie tego przycisku spowoduje wyświetlenie kolejnego ostatnio przesłanego obrazu z Wikimedia Commons</string>
   <string name="review_image_explanation">Możesz przeglądać obrazy i poprawiać jakość Wikimedia Commons.\n Cztery parametry przeglądu to:\n - Czy ten obraz jest objęty zakresem?\n - Czy ten obraz jest zgodny z zasadami praw autorskich?\n - Czy ten obraz jest poprawnie sklasyfikowany?\n - Jeśli wszystko pójdzie dobrze, możesz również podziękować autorowi.</string>
   <string name="no_image">Nie użyto żadnych obrazów</string>
@@ -466,6 +469,8 @@
   <string name="images_featured_explanation">Polecane zdjęcia to zdjęcia wysoko wykwalifikowanych fotografów i ilustratorów, które społeczność Wikimedia Commons wybrała jako jedne z najwyższych jakości na stronie.</string>
   <string name="images_via_nearby_explanation">Obrazy przesłane przez Pobliskie miejsca to obrazy, które są przesyłane przez odkrywanie miejsc na mapie.</string>
   <string name="thanks_received_explanation">Ta funkcja umożliwia redaktorom wysyłanie powiadomień z podziękowaniem do użytkowników, którzy dokonują przydatnych zmian - za pomocą małego linku z podziękowaniem na stronie historii lub na stronie diff.</string>
+  <string name="copy_image_caption_description">Kopiuj na kolejne nośniki</string>
+  <string name="copied_successfully">Skopiowano</string>
   <string name="welcome_do_upload_content_description">Przykłady dobrych zdjęć do przesłania na Commons</string>
   <string name="welcome_dont_upload_content_description">Przykłady obrazów, których nie można przesyłać</string>
   <string name="skip_image">Pomiń ten obraz</string>
@@ -599,4 +604,11 @@
   <string name="license_step_title">Licencja dla mediów</string>
   <string name="media_detail_step_title">Szczegóły mediów</string>
   <string name="menu_view_category_page">Zobacz stronę kategorii</string>
+  <string name="menu_view_item_page">Wyświetl stronę elementu</string>
+  <string name="read_help_link">Czytaj więcej</string>
+  <string name="custom_selector_title">Niestandardowy selektor</string>
+  <string name="custom_selector_empty_text">Brak obrazów</string>
+  <string name="custom_selector_already_uploaded_image_text">Tez plik został już przesłany do Commons.</string>
+  <string name="display_monuments">Pokaż zabytki</string>
+  <string name="learn_more">DOWIEDZ SIĘ WIĘCEJ</string>
 </resources>

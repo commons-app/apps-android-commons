@@ -105,6 +105,7 @@
   <string name="title_activity_settings">Нагодувања</string>
   <string name="title_activity_signup">Зачленување</string>
   <string name="title_activity_featured_images">Избрани слики</string>
+  <string name="title_activity_custom_selector">Прилагоден избирач</string>
   <string name="title_activity_category_details">Категорија</string>
   <string name="title_activity_review">Оценување</string>
   <string name="menu_about">За извршникот</string>
@@ -315,6 +316,7 @@
   <string name="quiz_screenshot_question">Дали оваа екранска снимка е во ред за подигање?</string>
   <string name="share_app_title">Сподели прилог</string>
   <string name="error_fetching_nearby_places">Грешка при добивањето на околните места.</string>
+  <string name="error_fetching_nearby_monuments">Грешка при добивањето на околните споменици.</string>
   <string name="no_recent_searches">Нема скорешни пребарувања</string>
   <string name="delete_recent_searches_dialog">Дали сте сигурни дека сакате да ја избришете историјата на пребарувања?</string>
   <string name="delete_search_dialog">Дали би сакале да го избришете ова пребарување?</string>
@@ -376,6 +378,9 @@
   <string name="no_categories_selected_warning_desc">Некатегоризираните слики се слабо употребливи. Дали сигурно сакате да продолжите без да ставите категории?</string>
   <string name="no_depictions_selected">Немате избрано прикажувања</string>
   <string name="no_depictions_selected_warning_desc">Сликите со прикажувања се полезни за наоѓање, со што е поголема веројатноста дека ќе бидат искористени. Дали сигурно сакате да продолжите без да изберете прикажувања?</string>
+  <string name="back_button_warning">Откажи подигање</string>
+  <string name="back_button_warning_desc">Ако стиснете на копчето за одење назад, со тоа ќе го откажете подигањето и ќе го изгубите досегашниот напредок</string>
+  <string name="back_button_continue">Продолжи со подигање</string>
   <string name="upload_flow_all_images_in_set">(За сите слики во збирот)</string>
   <string name="search_this_area">Пребарај на ова подрачје</string>
   <string name="nearby_card_permission_title">Барање за дозвола</string>
@@ -584,10 +589,29 @@
   <string name="app_ui_language">Јазик на прилогот</string>
   <string name="remove">Острани толкување и опис</string>
   <string name="read_help_link">Прочитајте повеќе</string>
+  <string name="media_detail_in_all_languages">На сите јазици</string>
   <string name="choose_a_location">Изберете местоположба</string>
   <string name="pan_and_zoom_to_adjust">Доведете го местото на картата и приближете го за да прилагодите</string>
   <string name="exit_location_picker">Излези од избирачот на местоположба</string>
   <string name="select_location_location_picker">Изберете местоположба</string>
-  <string name="location_picker_image_view">Поглед на слика за избирање местоположба</string>
-  <string name="location_picker_image_view_shadow">Сенчест поглед на слика за избирање местоположба</string>
+  <string name="show_in_map_app">Прикажи во прилог за карти</string>
+  <string name="modify_location">Уреди местоположба</string>
+  <string name="location_picker_image_view">Сликовен поглед на избирачот на местоположба</string>
+  <string name="location_picker_image_view_shadow">Сенка на сликата за избирање местоположба</string>
+  <string name="image_location">Местоположба на сликата</string>
+  <string name="check_whether_location_is_correct">Проверете дали местоположбата е точна</string>
+  <string name="custom_selector_title">Прилагоден избирач</string>
+  <string name="custom_selector_empty_text">Нема слики</string>
+  <string name="done">Готово</string>
+  <string name="back">Назад</string>
+  <string name="welcome_custom_picture_selector_text">Добре дојдовте на Прилагодениот избирач</string>
+  <string name="custom_selector_info_text1">Овој избирач ги покажува поинаку сликите кои веќе се на Ризницата.</string>
+  <string name="custom_selector_info_text2" fuzzy="true">За разлика од сликата лево, таа десно има лого на Ризницата, што значи дека веќе е подигната.</string>
+  <string name="welcome_custom_selector_ok">Одлично</string>
+  <string name="custom_selector_already_uploaded_image_text">Оваа слика е веќе подигната на Ризницата.</string>
+  <string name="wlm_upload_info">Учествувате во походот „Вики ги сака спомениците“. Поврзаните предлошки ќе бидат соодветно додадени.</string>
+  <string name="display_monuments">Прикажи споменици</string>
+  <string name="wlm_month_message">Ова е месец на „Вики ги сака спомениците“!</string>
+  <string name="learn_more">ДОЗНАЈТЕ ПОВЕЌЕ</string>
+  <string name="wlm_campaign_description">„Вики ги сака спомениците“ е меѓународен фотографски натпревар за споменици приреден од Викимедија</string>
 </resources>

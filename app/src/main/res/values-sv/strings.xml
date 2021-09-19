@@ -110,6 +110,7 @@
   <string name="title_activity_settings">Inställningar</string>
   <string name="title_activity_signup">Registrera</string>
   <string name="title_activity_featured_images">Utvalda bilder</string>
+  <string name="title_activity_custom_selector">Anpassad selektor</string>
   <string name="title_activity_category_details">Kategori</string>
   <string name="title_activity_review">Granskning</string>
   <string name="menu_about">Om</string>
@@ -320,6 +321,7 @@
   <string name="quiz_screenshot_question">Är det okej att ladda upp denna skärmdump?</string>
   <string name="share_app_title">Dela app</string>
   <string name="error_fetching_nearby_places">Fel uppstod när platser i närheten hämtades.</string>
+  <string name="error_fetching_nearby_monuments">Fel uppstod när monument i närheten hämtades.</string>
   <string name="no_recent_searches">Inga senaste sökningar</string>
   <string name="delete_recent_searches_dialog">Är du säker på att du vill rensa din sökhistorik?</string>
   <string name="delete_search_dialog">Vill du radera denna sökning?</string>
@@ -381,6 +383,9 @@
   <string name="no_categories_selected_warning_desc">Bilder utan kategorier används sällan. Är du säker på att du vill fortsätta utan att välja kategorier?</string>
   <string name="no_depictions_selected">Inga beskrivningar har valts</string>
   <string name="no_depictions_selected_warning_desc">Bilder med beskrivningar kan hittas lättare och kommer mer sannolikt användas. Är du säker på att du vill fortsätta utan att välja beskrivningar?</string>
+  <string name="back_button_warning">Avbryt uppladdning</string>
+  <string name="back_button_warning_desc">Bakåtknappen avbryter denna uppladdning och du förlorar dina framsteg</string>
+  <string name="back_button_continue">Fortsätt uppladdning</string>
   <string name="upload_flow_all_images_in_set">(För alla bilder i uppsättningen)</string>
   <string name="search_this_area">Sök i detta område</string>
   <string name="nearby_card_permission_title">Begäran om behörighet</string>
@@ -486,6 +491,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Kunde inte lägga till kategorier.</string>
   <string name="category_edit_button_text">Uppdatera kategorier</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Försöker uppdatera koordinater.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Koordinater uppdaterades</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Genomfördes</string>
+  <string name="coordinates_edit_helper_show_edit_message">Koordinaterna %1$s lades till.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Kunde inte lägga till koordinater.</string>
+  <string name="coordinates_picking_unsuccessful">Kunde inte hämta koordinater.</string>
   <string name="share_image_via">Dela bild via</string>
   <string name="no_achievements_yet">Du har ännu inte gjort några bidrag</string>
   <string name="account_created">Konto har skapats!</string>
@@ -583,4 +594,29 @@
   <string name="app_ui_language">Appens användargränssnittspråk</string>
   <string name="remove">Ta bort en bildtext och beskrivning</string>
   <string name="read_help_link">Läs mer</string>
+  <string name="media_detail_in_all_languages">På alla språk</string>
+  <string name="choose_a_location">Välj en plats</string>
+  <string name="pan_and_zoom_to_adjust">Panorera och zooma för att justera</string>
+  <string name="exit_location_picker">Avsluta platsväljaren</string>
+  <string name="select_location_location_picker">Välj plats</string>
+  <string name="show_in_map_app">Visa i kartappen</string>
+  <string name="modify_location">Redigera plats</string>
+  <string name="location_picker_image_view">Platsväljarens bildvisare</string>
+  <string name="location_picker_image_view_shadow">Skuggan för platsväljarens bildvisare</string>
+  <string name="image_location">Bildplats</string>
+  <string name="check_whether_location_is_correct">Kontrollera om platsen är korrekt</string>
+  <string name="custom_selector_title">Anpassad selektor</string>
+  <string name="custom_selector_empty_text">Inga bilder</string>
+  <string name="done">Klar</string>
+  <string name="back">Tillbaka</string>
+  <string name="welcome_custom_picture_selector_text">Välkommen till anpassade bildselektorn</string>
+  <string name="custom_selector_info_text1">Denna väljare visar olika bilder som redan finns på Commons.</string>
+  <string name="custom_selector_info_text2">Till skillnad från bilden till vänster har bilden till höger Commons-logotypen, vilket innebär att den redan är uppladdad.\n Tryck och håll ned för att förhandsgranska bilden.</string>
+  <string name="welcome_custom_selector_ok">Häftigt</string>
+  <string name="custom_selector_already_uploaded_image_text">Denna bild har redan laddats upp till Commons.</string>
+  <string name="wlm_upload_info">Du bidrar till kampanjen Wiki Loves Monuments. Relaterade mallar kommer att läggas till.</string>
+  <string name="display_monuments">Visa monument</string>
+  <string name="wlm_month_message">Det är Wiki Loves Monuments-månaden!</string>
+  <string name="learn_more">LÄS MER</string>
+  <string name="wlm_campaign_description">Wiki Loves Monuments är en internationell fototävling för monument som organiseras av Wikimedia</string>
 </resources>

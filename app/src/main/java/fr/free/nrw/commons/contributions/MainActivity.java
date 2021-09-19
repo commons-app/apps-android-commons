@@ -4,13 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -22,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.BookmarkFragment;
 import fr.free.nrw.commons.explore.ExploreFragment;
@@ -247,17 +247,23 @@ public class MainActivity  extends BaseActivity
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        String currentFragmentName = savedInstanceState.getString("activeFragment");
-        if(currentFragmentName == ActiveFragment.CONTRIBUTIONS.name()) {
+        String activeFragmentName = savedInstanceState.getString("activeFragment");
+        if(activeFragmentName != null) {
+            restoreActiveFragment(activeFragmentName);
+        }
+    }
+
+    private void restoreActiveFragment(@NonNull String fragmentName) {
+        if(fragmentName.equals(ActiveFragment.CONTRIBUTIONS.name())) {
             setTitle(getString(R.string.contributions_fragment));
             loadFragment(ContributionsFragment.newInstance(),false);
-        }else if(currentFragmentName == ActiveFragment.NEARBY.name()) {
+        }else if(fragmentName.equals(ActiveFragment.NEARBY.name())) {
             setTitle(getString(R.string.nearby_fragment));
             loadFragment(NearbyParentFragment.newInstance(),false);
-        }else if(currentFragmentName == ActiveFragment.EXPLORE.name()) {
+        }else if(fragmentName.equals(ActiveFragment.EXPLORE.name())) {
             setTitle(getString(R.string.navigation_item_explore));
             loadFragment(ExploreFragment.newInstance(),false);
-        }else if(currentFragmentName == ActiveFragment.BOOKMARK.name()) {
+        }else if(fragmentName.equals(ActiveFragment.BOOKMARK.name())) {
             setTitle(getString(R.string.favorites));
             loadFragment(BookmarkFragment.newInstance(),false);
         }
@@ -351,6 +357,11 @@ public class MainActivity  extends BaseActivity
     @Override
     protected void onResume() {
         super.onResume();
+
+        if ((applicationKvStore.getBoolean("firstrun", true)) &&
+            (!applicationKvStore.getBoolean("login_skipped"))) {
+            WelcomeActivity.startYourself(this);
+        }
     }
 
     @Override
@@ -360,6 +371,13 @@ public class MainActivity  extends BaseActivity
         // Remove ourself from hashmap to prevent memory leaks
         locationManager = null;
         super.onDestroy();
+    }
+
+    /**
+     * Public method to show nearby from the reference of this.
+     */
+    public void showNearby() {
+        tabLayout.setSelectedItemId(NavTab.NEARBY.code());
     }
 
     public enum ActiveFragment {

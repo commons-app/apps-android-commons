@@ -208,9 +208,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (applicationKvStore.getBoolean("firstrun", true)) {
-            WelcomeActivity.startYourself(this);
-        }
 
         if (sessionManager.getCurrentAccount() != null
                 && sessionManager.isUserLoggedIn()) {

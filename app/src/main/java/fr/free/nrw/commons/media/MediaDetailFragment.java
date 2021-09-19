@@ -373,8 +373,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             media = getArguments().getParcelable("media");
         }
 
-        media = detailProvider.getMediaAtPosition(index);
-
         if(media != null && applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
             enableProgressBar();
         }
@@ -546,8 +544,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         image.getHierarchy().setFailureImage(R.drawable.image_placeholder);
 
         DraweeController controller = Fresco.newDraweeControllerBuilder()
-                .setLowResImageRequest(ImageRequest.fromUri(media.getThumbUrl()))
-                .setImageRequest(ImageRequest.fromUri(media.getImageUrl()))
+                .setLowResImageRequest(ImageRequest.fromUri(media != null ? media.getThumbUrl() : null))
+                .setImageRequest(ImageRequest.fromUri(media != null ? media.getImageUrl() : null))
                 .setControllerListener(aspectRatioListener)
                 .setOldController(image.getController())
                 .build();
@@ -815,6 +813,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             .defaultLocation(new CameraPosition.Builder()
                 .target(new LatLng(defaultLatitude, defaultLongitude))
                 .zoom(16).build())
+            .activityKey("MediaActivity")
             .build(getActivity()), REQUEST_CODE);
     }
 

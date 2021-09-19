@@ -27,17 +27,6 @@
               android:textSize="18sp" />
 
             <TextView
-              android:id="@+id/more_tutorial"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_margin="12dp"
-              android:drawableStart="@drawable/ic_help_black_24dp"
-              android:drawablePadding="12dp"
-              android:padding="8dp"
-              android:text="@string/navigation_item_info"
-              android:textSize="18sp" />
-
-            <TextView
               android:id="@+id/more_feedback"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"

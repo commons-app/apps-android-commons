@@ -4,8 +4,10 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import android.text.TextUtils;
 import androidx.annotation.Nullable;
 
+import fr.free.nrw.commons.nearby.NearbyController.NearbyPlacesInfo;
 import org.apache.commons.lang3.StringUtils;
 
 import fr.free.nrw.commons.location.LatLng;
@@ -31,6 +33,7 @@ public class Place implements Parcelable {
 
     public String distance;
     public final Sitelinks siteLinks;
+    private boolean isMonument;
 
 
     public Place(String language,String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, Boolean exists) {
@@ -56,6 +59,7 @@ public class Place implements Parcelable {
         this.pic = (picString == null) ? "":picString;
         String existString = in.readString();
         this.exists = Boolean.parseBoolean(existString);
+        this.isMonument = in.readInt() == 1;
     }
     public static Place from(NearbyResultItem item) {
         String itemClass = item.getClassName().getValue();
@@ -80,20 +84,20 @@ public class Place implements Parcelable {
                 ? " (" + description + ")" : "")
             : description);
         return new Place(
-                item.getLabel().getLanguage(),
-                item.getLabel().getValue(),
-                Label.fromText(classEntityId), // list
-                description, // description and label of Wikidata item
-                PlaceUtils.latLngFromPointString(item.getLocation().getValue()),
-                item.getCommonsCategory().getValue(),
-                new Sitelinks.Builder()
-                        .setWikipediaLink(item.getWikipediaArticle().getValue())
-                        .setCommonsLink(item.getCommonsArticle().getValue())
-                        .setWikidataLink(item.getItem().getValue())
-                        .build(),
-                item.getPic().getValue(),
-                // Checking if the place exists or not
-                (item.getDestroyed().getValue() == "") && (item.getEndTime().getValue() == ""));
+            item.getLabel().getLanguage(),
+            item.getLabel().getValue(),
+            Label.fromText(classEntityId), // list
+            description, // description and label of Wikidata item
+            PlaceUtils.latLngFromPointString(item.getLocation().getValue()),
+            item.getCommonsCategory().getValue(),
+            new Sitelinks.Builder()
+                .setWikipediaLink(item.getWikipediaArticle().getValue())
+                .setCommonsLink(item.getCommonsArticle().getValue())
+                .setWikidataLink(item.getItem().getValue())
+                .build(),
+            item.getPic().getValue(),
+            // Checking if the place exists or not
+            (item.getDestroyed().getValue() == "") && (item.getEndTime().getValue() == ""));
     }
 
     /**
@@ -126,7 +130,9 @@ public class Place implements Parcelable {
      * Gets the long description of the place
      * @return long description
      */
-    public String getLongDescription() { return longDescription; }
+    public String getLongDescription() {
+        return longDescription;
+    }
 
     /**
      * Gets the Commons category of the place
@@ -182,6 +188,22 @@ public class Place implements Parcelable {
     }
 
     /**
+     * Sets that this place in nearby is a WikiData monument
+     * @param monument
+     */
+    public void setMonument(final boolean monument) {
+        isMonument = monument;
+    }
+
+    /**
+     * Returns if this place is a WikiData monument
+     * @return
+     */
+    public boolean isMonument() {
+        return isMonument;
+    }
+
+    /**
      * Check if we already have the exact same Place
      * @param o Place being tested
      * @return true if name and location of Place is exactly the same
@@ -233,6 +255,7 @@ public class Place implements Parcelable {
         dest.writeParcelable(siteLinks, 0);
         dest.writeString(pic);
         dest.writeString(exists.toString());
+        dest.writeInt(isMonument ? 1 : 0);
     }
 
     public static final Creator<Place> CREATOR = new Creator<Place>() {

@@ -2,7 +2,7 @@ package fr.free.nrw.commons.quiz;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.RadioButton;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -26,14 +26,22 @@ public class QuizActivity extends AppCompatActivity {
     @BindView(R.id.question_image) SimpleDraweeView imageView;
     @BindView(R.id.question_text) TextView questionText;
     @BindView(R.id.question_title) TextView questionTitle;
-    @BindView(R.id.quiz_positive_answer) RadioButton positiveAnswer;
-    @BindView(R.id.quiz_negative_answer) RadioButton negativeAnswer;
+    @BindView(R.id.quiz_positive_answer) Button positiveAnswer;
+    @BindView(R.id.quiz_negative_answer) Button negativeAnswer;
     @BindView(R.id.toolbar) Toolbar toolbar;
 
     private QuizController quizController = new QuizController();
     private ArrayList<QuizQuestion> quiz = new ArrayList<>();
     private int questionIndex = 0;
     private int score;
+    /**
+     * isPositiveAnswerChecked : represents yes click event
+     */
+    private boolean isPositiveAnswerChecked;
+    /**
+     * isNegativeAnswerChecked : represents no click event
+     */
+    private boolean isNegativeAnswerChecked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,25 +51,23 @@ public class QuizActivity extends AppCompatActivity {
         quizController.initialize(this);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        positiveAnswer = findViewById(R.id.quiz_positive_answer);
+        negativeAnswer = findViewById(R.id.quiz_negative_answer);
         displayQuestion();
     }
 
     /**
      * to move to next question and check whether answer is selected or not
      */
-    @OnClick(R.id.next_button)
     public void setNextQuestion(){
-        if ( questionIndex <= quiz.size() && (positiveAnswer.isChecked() || negativeAnswer.isChecked())) {
+        if ( questionIndex <= quiz.size() && (isPositiveAnswerChecked || isNegativeAnswerChecked)) {
             evaluateScore();
-        } else if ( !positiveAnswer.isChecked() && !negativeAnswer.isChecked()){
-            AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.setTitle(getResources().getString(R.string.warning));
-            alert.setMessage(getResources().getString(R.string.warning_for_no_answer));
-            alert.setPositiveButton(R.string.continue_message, (dialog, which) -> dialog.dismiss());
-            AlertDialog dialog = alert.create();
-            dialog.show();
         }
+    }
 
+    @OnClick(R.id.next_button)
+    public void notKnowAnswer(){
+        customAlert("Information", quiz.get(questionIndex).getAnswerMessage());
     }
 
     /**
@@ -98,17 +104,24 @@ public class QuizActivity extends AppCompatActivity {
                 .build());
 
         imageView.setImageURI(quiz.get(questionIndex).getUrl());
-        new RadioGroupHelper(this, R.id.quiz_positive_answer, R.id.quiz_negative_answer);
-        positiveAnswer.setChecked(false);
-        negativeAnswer.setChecked(false);
+        isPositiveAnswerChecked = false;
+        isNegativeAnswerChecked = false;
+        positiveAnswer.setOnClickListener(view -> {
+            isPositiveAnswerChecked = true;
+            setNextQuestion();
+        });
+        negativeAnswer.setOnClickListener(view -> {
+            isNegativeAnswerChecked = true;
+            setNextQuestion();
+        });
     }
 
     /**
      * to evaluate score and check whether answer is correct or wrong
      */
     public void evaluateScore() {
-        if ((quiz.get(questionIndex).isAnswer() && positiveAnswer.isChecked()) ||
-                (!quiz.get(questionIndex).isAnswer() && negativeAnswer.isChecked()) ){
+        if ((quiz.get(questionIndex).isAnswer() && isPositiveAnswerChecked) ||
+                (!quiz.get(questionIndex).isAnswer() && isNegativeAnswerChecked) ){
             customAlert(getResources().getString(R.string.correct),quiz.get(questionIndex).getAnswerMessage() );
             score++;
         } else {

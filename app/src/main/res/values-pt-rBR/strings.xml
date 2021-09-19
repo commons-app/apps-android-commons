@@ -119,6 +119,7 @@
   <string name="title_activity_settings">Configurações</string>
   <string name="title_activity_signup">Criar conta</string>
   <string name="title_activity_featured_images">Imagens destacadas</string>
+  <string name="title_activity_custom_selector">Seletor personalizado</string>
   <string name="title_activity_category_details">Categoria</string>
   <string name="title_activity_review">Revisão por pares</string>
   <string name="menu_about">Sobre</string>
@@ -329,6 +330,7 @@
   <string name="quiz_screenshot_question">Esta captura de tela pode ser carregada?</string>
   <string name="share_app_title">Compartilhar o aplicativo</string>
   <string name="error_fetching_nearby_places">Erro ao buscar lugares próximos.</string>
+  <string name="error_fetching_nearby_monuments">Erro ao buscar monumentos próximos.</string>
   <string name="no_recent_searches">Nenhuma pesquisa recente</string>
   <string name="delete_recent_searches_dialog">Tem certeza de que deseja apagar o histórico de pesquisa?</string>
   <string name="delete_search_dialog">Deseja eliminar esta pesquisa?</string>
@@ -390,6 +392,9 @@
   <string name="no_categories_selected_warning_desc">Imagens sem categorias raramente são utilizáveis. Tem certeza de que deseja continuar sem selecionar categorias?</string>
   <string name="no_depictions_selected">Nenhuma representação selecionada</string>
   <string name="no_depictions_selected_warning_desc">Imagens com representações são mais facilmente encontradas e mais propensas a serem usadas. Tem certeza de que deseja continuar sem selecionar representações?</string>
+  <string name="back_button_warning">Cancelar carregamento</string>
+  <string name="back_button_warning_desc">Usar o botão Voltar cancelará este carregamento e você perderá seu progresso</string>
+  <string name="back_button_continue">Continuar carregamento</string>
   <string name="upload_flow_all_images_in_set">(Para todas as imagens no conjunto)</string>
   <string name="search_this_area">Pesquisar nesta área</string>
   <string name="nearby_card_permission_title">Pedido de Permissão</string>
@@ -495,6 +500,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Não foi possível adicionar categorias.</string>
   <string name="category_edit_button_text">Atualizar categorias</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Tentando atualizar as coordenadas.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Atualização de coordenadas</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Sucesso</string>
+  <string name="coordinates_edit_helper_show_edit_message">Coordenadas %1$s adicionadas.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Não foi possível adicionar coordenadas.</string>
+  <string name="coordinates_picking_unsuccessful">Incapaz de obter coordenadas.</string>
   <string name="share_image_via">Compartilhar imagem via</string>
   <string name="no_achievements_yet">Você ainda não fez nenhuma contribuição</string>
   <string name="account_created">Conta criada!</string>
@@ -573,7 +584,7 @@
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Melhorar o mapa&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Modo de conexão limitada habilitado!</string>
   <string name="limited_connection_disabled">Modo de conexão limitada desativado. Os carregamentos pendentes serão retomados agora.</string>
-  <string name="limited_connection_mode">Modo de Conexão Limitada</string>
+  <string name="limited_connection_mode">Modo de conexão limitada</string>
   <string name="statistics_quality">Imagens de qualidade</string>
   <string name="quality_images_info">Imagens de qualidade são diagramas ou fotografias que atendem a certos padrões de qualidade (que são principalmente de natureza técnica) e são valiosos para projetos da Wikimedia</string>
   <string name="resuming_upload">Retomando carregamento…</string>
@@ -592,4 +603,18 @@
   <string name="app_ui_language">Idioma da interface do usuário do aplicativo</string>
   <string name="remove">Remove uma legenda e descrição</string>
   <string name="read_help_link">Leia mais</string>
+  <string name="media_detail_in_all_languages">Em todas os idiomas</string>
+  <string name="choose_a_location">Escolha uma localização</string>
+  <string name="select_location_location_picker">Selecionar localização</string>
+  <string name="show_in_map_app">Mostrar no aplicativo de mapa</string>
+  <string name="modify_location">Editar localização</string>
+  <string name="image_location">Localização da imagem</string>
+  <string name="check_whether_location_is_correct">Verifique se a localização está correta</string>
+  <string name="custom_selector_title">Seletor personalizado</string>
+  <string name="custom_selector_empty_text">Sem imagens</string>
+  <string name="done">Feito</string>
+  <string name="back">Voltar</string>
+  <string name="custom_selector_already_uploaded_image_text">Esta imagem já foi enviada para Commons.</string>
+  <string name="display_monuments">Monumentos de exibição</string>
+  <string name="learn_more">SABER MAIS</string>
 </resources>

@@ -117,6 +117,7 @@
   <string name="title_activity_settings">設定</string>
   <string name="title_activity_signup">註冊</string>
   <string name="title_activity_featured_images">特色圖片</string>
+  <string name="title_activity_custom_selector">自訂選擇器</string>
   <string name="title_activity_category_details">分類</string>
   <string name="title_activity_review">同行評審</string>
   <string name="menu_about">關於</string>
@@ -239,6 +240,8 @@
   <string name="upload_problem_different_geolocation">此圖片是在不同的地點拍攝。</string>
   <string name="upload_problem_fbmd">請僅上傳您自己拍攝的圖片。不要上傳您從別人臉書帳號裡所找到的圖片。</string>
   <string name="upload_problem_do_you_continue">您仍要上傳此圖片嗎？</string>
+  <string name="upload_connection_error_alert_title">連接錯誤</string>
+  <string name="upload_connection_error_alert_detail">更新處理需要有效的網際網路存取。請檢查您的網路連線。</string>
   <string name="upload_problem_image">在圖片裡發現問題</string>
   <string name="internet_downloaded">請僅上傳您自己拍攝的圖片。不要上傳您從網路下載來的圖片。</string>
   <string name="use_external_storage">儲存應用程式所提供的快照</string>
@@ -325,6 +328,7 @@
   <string name="quiz_screenshot_question">這張截圖可以上傳嗎？</string>
   <string name="share_app_title">分享應用程式</string>
   <string name="error_fetching_nearby_places">索取附近地點時出錯。</string>
+  <string name="error_fetching_nearby_monuments">索取附近古蹟景點時出錯。</string>
   <string name="no_recent_searches">無近期搜尋</string>
   <string name="delete_recent_searches_dialog">確定要清除搜尋歷史嗎？</string>
   <string name="delete_search_dialog">您要刪除此搜尋嗎？</string>
@@ -386,6 +390,9 @@
   <string name="no_categories_selected_warning_desc">不帶分類的圖片很難有機會被利用到，您確定您要不選擇分類來繼續嗎？</string>
   <string name="no_depictions_selected">沒有選擇描寫</string>
   <string name="no_depictions_selected_warning_desc">帶有描寫的圖片會更容易被找到，並且更可能被拿來使用。您確定您要不選擇描寫來繼續嗎？</string>
+  <string name="back_button_warning">取消上傳</string>
+  <string name="back_button_warning_desc">使用倒退按鈕將會取消此上傳，您並且會失去您的進度</string>
+  <string name="back_button_continue">繼續上傳</string>
   <string name="upload_flow_all_images_in_set">（在集合的所有圖片）</string>
   <string name="search_this_area">搜尋此區域</string>
   <string name="nearby_card_permission_title">權限請求</string>
@@ -491,6 +498,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">無法添加分類。</string>
   <string name="category_edit_button_text">更新分類</string>
+  <string name="coordinates_edit_helper_make_edit_toast">嘗試更新座標。</string>
+  <string name="coordinates_edit_helper_show_edit_title">座標更新</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">成功</string>
+  <string name="coordinates_edit_helper_show_edit_message">座標 %1$s 已添加。</string>
+  <string name="coordinates_edit_helper_edit_message_else">無法添加座標。</string>
+  <string name="coordinates_picking_unsuccessful">無法取得座標。</string>
   <string name="share_image_via">分享圖片透過</string>
   <string name="no_achievements_yet">您還沒有做出任何貢獻</string>
   <string name="account_created">已建立帳號！</string>
@@ -588,4 +601,29 @@
   <string name="app_ui_language">應用程式使用者介面語言</string>
   <string name="remove">移除說明和描述</string>
   <string name="read_help_link">延伸閱讀</string>
+  <string name="media_detail_in_all_languages">在所有語言</string>
+  <string name="choose_a_location">挑選一個位置</string>
+  <string name="pan_and_zoom_to_adjust">平移和縮放來進行調整</string>
+  <string name="exit_location_picker">離開位置點選器</string>
+  <string name="select_location_location_picker">選擇位置</string>
+  <string name="show_in_map_app">顯示在地圖應用程式</string>
+  <string name="modify_location">編輯位置</string>
+  <string name="location_picker_image_view">位置點選器的圖片檢視</string>
+  <string name="location_picker_image_view_shadow">位置點選器的圖片檢視陰影</string>
+  <string name="image_location">圖片位置</string>
+  <string name="check_whether_location_is_correct">檢查位置是否正確</string>
+  <string name="custom_selector_title">自訂選擇器</string>
+  <string name="custom_selector_empty_text">沒有圖片</string>
+  <string name="done">完成</string>
+  <string name="back">返回</string>
+  <string name="welcome_custom_picture_selector_text">歡迎來到自訂圖片選擇器</string>
+  <string name="custom_selector_info_text1">此點選器顯示已在維基共享資源上的各種不同圖片。</string>
+  <string name="custom_selector_info_text2">右邊的圖片與與左邊圖片不同，它有代表已經上傳到維基共享資源的標誌。\n請輕壓圖片來預覽。</string>
+  <string name="welcome_custom_selector_ok">棒極了</string>
+  <string name="custom_selector_already_uploaded_image_text">此圖片已上傳到維基共享資源。</string>
+  <string name="wlm_upload_info">您正在為維基愛古蹟活動做出貢獻。相關模板將會相應地添加上。</string>
+  <string name="display_monuments">顯示古蹟景點</string>
+  <string name="wlm_month_message">維基愛古蹟的月份！</string>
+  <string name="learn_more">了解更多</string>
+  <string name="wlm_campaign_description">維基愛古蹟是由維基媒體舉行的國際古蹟攝影比賽</string>
 </resources>

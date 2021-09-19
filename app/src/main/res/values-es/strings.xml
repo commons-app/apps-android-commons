@@ -2,6 +2,7 @@
 <!-- Authors:
 * 2axterix2
 * Adjen
+* Agent
 * Astroemi
 * Benfutbol10
 * Carlosmg.dg
@@ -12,6 +13,7 @@
 * Hasley
 * Ihojose
 * JO777
+* Jackiezelaya
 * Jduranboger
 * Jelou
 * Johnny243
@@ -25,6 +27,7 @@
 * Miguel2706
 * Mirzali
 * Rodney Araujo
+* Superzerocool
 * Tiberius1701
 * Vivaelcelta
 * Wizardeck
@@ -39,13 +42,13 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Comenzando las subidas</string>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Iniciando %1$d carga</item>
-    <item quantity="other">Iniciando %1$d cargas</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Procesando %d carga</item>
+    <item quantity="other">Procesando %d cargas</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d carga</item>
-    <item quantity="other">%1$d cargas</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d carga</item>
+    <item quantity="other">%1 cargas</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Esta imagen se publicará bajo la licencia %1$s</item>
@@ -84,7 +87,7 @@
   <string name="uploading_queued">Carga en cola (modo de conexión limitada activado)</string>
   <string name="upload_completed_notification_title">¡Se ha subido %1$s!</string>
   <string name="upload_completed_notification_text">Pulsa para ver tu subida</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Empezando la subida de %1$s</string>
+  <string name="upload_progress_notification_title_start">Empezando la subida de %s</string>
   <string name="upload_progress_notification_title_in_progress">Subiendo %1$s</string>
   <string name="upload_progress_notification_title_finishing">Finalizando la subida de %1$s</string>
   <string name="upload_failed_notification_title">Falló la carga de %1$s</string>
@@ -252,6 +255,8 @@
   <string name="upload_problem_different_geolocation">Esta imagen fue tomada en una ubicación diferente.</string>
   <string name="upload_problem_fbmd">Por favor sube solo fotografías que tu mismo hayas tomado. No subas imágenes o fotografías que hayas encontrado en las cuentas de Facebook de otros.</string>
   <string name="upload_problem_do_you_continue">¿Todavía quieres cargar esta imagen?</string>
+  <string name="upload_connection_error_alert_title">Error de conexión</string>
+  <string name="upload_connection_error_alert_detail">El cargar el proceso requiere acceso de internet activo. Complacer comprobar vuestra conexión de red.</string>
   <string name="upload_problem_image">Problemas encontrados en la imagen</string>
   <string name="internet_downloaded">Carga únicamente fotografías que hayas creado tú. No cargues imágenes o fotografías que hayas descargado de Internet.</string>
   <string name="use_external_storage">Guardar tomas en la aplicación</string>
@@ -398,6 +403,8 @@
   <string name="no_categories_selected">No hay categorías seleccionadas</string>
   <string name="no_categories_selected_warning_desc">Las imágenes sin categorías raramente se pueden usar. ¿Seguro que quieres continuar sin seleccionar ninguna categoría?</string>
   <string name="no_depictions_selected">No se han seleccionado representaciones</string>
+  <string name="back_button_warning">Cancelar la carga</string>
+  <string name="back_button_continue">Continuar la carga</string>
   <string name="upload_flow_all_images_in_set">(Para todas las imágenes en el conjunto)</string>
   <string name="search_this_area">Buscar en esta área</string>
   <string name="nearby_card_permission_title">Solicitud de permiso</string>
@@ -456,6 +463,7 @@
   <string name="images_featured_explanation">Las imágenes destacadas son creaciones de talentosos fotógrafos e ilustradores que la comunidad de Wikimedia Commons ha reconocido como las de mayor calidad del sitio.</string>
   <string name="images_via_nearby_explanation">Las imágenes subidas via Lugares Cercanos son las imágenes que han sido cargadas al descubrir lugares en el mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidad permite a los editores enviar una notificación de agradecimiento a aquellos usuarios que realicen ediciones útiles mediante un pequeño enlace en la página de historial o de diferencias.</string>
+  <string name="copied_successfully">Copiado</string>
   <string name="welcome_do_upload_content_description">Ejemplos de imágenes adecuadas para Commons</string>
   <string name="welcome_dont_upload_content_description">Ejemplos de imágenes que no deben cargarse</string>
   <string name="skip_image">Omitir esta imagen</string>
@@ -500,6 +508,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">No se pudieron añadir las categorías.</string>
   <string name="category_edit_button_text">Actualizar categorías</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Intentando actualizar coordenadas.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Actualización de coordenadas</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Éxito</string>
+  <string name="coordinates_edit_helper_show_edit_message">Coordenadas %1$s añadidas.</string>
+  <string name="coordinates_edit_helper_edit_message_else">No se pudo añadir coordenadas.</string>
+  <string name="coordinates_picking_unsuccessful">No se pudo conseguir las coordenadas.</string>
   <string name="share_image_via">Compartir imagen via</string>
   <string name="no_achievements_yet">No ha realizado ninguna contribución aún</string>
   <string name="account_created">Cuenta creada</string>
@@ -519,18 +533,38 @@
   <string name="theme_default_name">Seguir sistema</string>
   <string name="theme_dark_name">Oscuro</string>
   <string name="theme_light_name">Claro</string>
+  <string name="load_more">Cargar más</string>
   <string name="todo_improve">Mejoras sugeridas:</string>
+  <string name="confirm">Confirmar</string>
+  <string name="instructions_title">Instrucciones</string>
   <string name="pause">pausar</string>
   <string name="resume">reanudar</string>
   <string name="paused">En pausa</string>
+  <string name="more">Más</string>
+  <string name="favorites">Favoritos</string>
   <string name="achievements_tab_title">Logros</string>
+  <string name="leaderboard_tab_title">Tabla de posiciones</string>
   <string name="count_prefix">Recuento:</string>
   <string name="leaderboard_column_user">Usuario</string>
   <string name="menu_set_avatar">Establecer como avatar</string>
   <string name="leaderboard_yearly">Por año</string>
   <string name="leaderboard_weekly">Por semana</string>
   <string name="leaderboard_all_time">Todo el tiempo</string>
+  <string name="leaderboard_upload">Subir</string>
   <string name="limited_connection_enabled">Se activó el modo de conexión limitada.</string>
   <string name="limited_connection_disabled">Se desactivó el modo de conexión limitada. Las cargas pendientes se reanudarán ahora.</string>
-  <string name="limited_connection_mode" fuzzy="true">Conexión limitada</string>
+  <string name="limited_connection_mode">Modo de conexión limitada</string>
+  <string name="statistics_quality">Imágenes de calidad</string>
+  <string name="read_help_link">Más información</string>
+  <string name="media_detail_in_all_languages">En más idiomas</string>
+  <string name="choose_a_location">Escoge una ubicación</string>
+  <string name="pan_and_zoom_to_adjust">Haz una panorámica y acércate para ajustar</string>
+  <string name="exit_location_picker">Salir del seleccionador de ubicación</string>
+  <string name="select_location_location_picker">Seleccionar ubicación</string>
+  <string name="show_in_map_app">Mostrar en la aplicación de mapa</string>
+  <string name="modify_location">Editar ubicación</string>
+  <string name="location_picker_image_view">La vista de imagen de la ubicación picker</string>
+  <string name="location_picker_image_view_shadow">La sombra de la vista de imagen de la ubicación picker</string>
+  <string name="image_location">Posición de imagen</string>
+  <string name="check_whether_location_is_correct">Compruebe si la ubicación es correcta</string>
 </resources>
