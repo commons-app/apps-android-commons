@@ -10,8 +10,6 @@ import android.widget.Spinner
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.soloader.SoLoader
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
@@ -77,8 +75,6 @@ class LeaderboardFragmentUnitTests {
         context = RuntimeEnvironment.application.applicationContext
 
         AppAdapter.set(TestAppAdapter())
-        SoLoader.setInTestMode()
-        Fresco.initialize(RuntimeEnvironment.application.applicationContext)
 
         val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         fragment = LeaderboardFragment()
