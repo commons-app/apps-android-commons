@@ -283,13 +283,14 @@ public class UploadRepository {
      * @return
      */
     @Nullable
-    public Place checkNearbyPlaces(double decLatitude, double decLongitude) {
+    public Place checkNearbyPlaces(final double decLatitude, final double decLongitude) {
         try {
-            List<Place> fromWikidataQuery = nearbyPlaces.getFromWikidataQuery(new LatLng(
+            final List<Place> fromWikidataQuery = nearbyPlaces.getFromWikidataQuery(new LatLng(
                     decLatitude, decLongitude, 0.0f),
                     Locale.getDefault().getLanguage(),
-                    NEARBY_RADIUS_IN_KILO_METERS);
-            return fromWikidataQuery.size() > 0 ? fromWikidataQuery.get(0) : null;
+                    NEARBY_RADIUS_IN_KILO_METERS, false);
+            return (fromWikidataQuery != null && fromWikidataQuery.size() > 0) ? fromWikidataQuery
+                .get(0) : null;
         }catch (final Exception e) {
             Timber.e("Error fetching nearby places: %s", e.getMessage());
             return null;
@@ -298,5 +299,9 @@ public class UploadRepository {
 
     public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
         uploadModel.useSimilarPictureCoordinates(imageCoordinates, uploadItemIndex);
+    }
+
+    public boolean isWMLSupportedForThisPlace() {
+        return uploadModel.getItems().get(0).isWLMUpload();
     }
 }

@@ -9,6 +9,7 @@
     <item quantity="one">ဖိုင် %1$d ခု တင်နေသည်</item>
     <item quantity="other">ဖိုင် %1$d ခု တင်နေသည်</item>
   </plurals>
+  <string name="starting_uploads">အပ်ပလုဒ်များ စတင်ခြင်း</string>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d ခု တင်ထားသည်</item>
     <item quantity="other">%1$d ခု တင်ထားသည်</item>
@@ -59,8 +60,11 @@
   <string name="menu_nearby">အနီးအနား</string>
   <string name="provider_contributions">မိမိ တင်ထားသည်များ</string>
   <string name="menu_share">မျှဝေ</string>
-  <string name="share_title_hint" fuzzy="true">ခေါင်းစဉ် (လိုအပ်သည်)</string>
+  <string name="menu_view_file_page">ဖိုင်စာမျက်နှာကိုကြည့်ရန်</string>
+  <string name="share_title_hint">ပုံစာ (လိုအပ်သည်)</string>
+  <string name="add_caption_toast">ဤဖိုင်အတွက် ပုံစာသတ်မှတ်ပေးပါ</string>
   <string name="share_description_hint">ဖော်ပြချက်</string>
+  <string name="share_caption_hint">ပုံစာ</string>
   <string name="login_failed_network">လော့အင် မဝင်နိုင်ပါ - ကွန်ရက် အမှား</string>
   <string name="login_failed_throttled">မအောင်မြင်သော ကြိုးပမ်းများစွာ ရှိပါပြီ။ နောက်မိနစ်အနည်းငယ်ကြာလျင် ထပ်မံစမ်းကြည့်ပါ။</string>
   <string name="login_failed_blocked">စိတ်မကောင်းပါ၊ ဤအသုံးပြုသူအား ကွန်မွန်းစ်မှ ပိတ်ပင်ထားသည်</string>
@@ -72,7 +76,7 @@
   <string name="menu_save_categories">သိမ်းရန်</string>
   <string name="refresh_button">ပြန်လည်ဆန်းသစ်ရန်</string>
   <string name="display_list_button">စာရင်း</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">ဖိုင်မတင်ရသေးပါ</string>
+  <string name="contributions_subtitle_zero">(ဖိုင်မတင်ရသေးပါ)</string>
   <string name="categories_not_found">%1$ နှင့်ကိုက်ညီသော ကဏ္ဍများ မတွေ့ရှိပါ</string>
   <string name="categories_activity_title">ကဏ္ဍများ</string>
   <string name="title_activity_settings">အပြင်အဆင်များ</string>
@@ -80,7 +84,7 @@
   <string name="title_activity_featured_images">အထူးဓာတ်ပုံများ</string>
   <string name="title_activity_category_details">ကဏ္ဍ</string>
   <string name="menu_about">အကြောင်း</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;တကိုယ်ရည် မူဝါဒ&lt;/u&gt;</string>
+  <string name="about_privacy_policy">ကိုယ်ရေးကိုယ်တာ မူဝါဒ</string>
   <string name="title_activity_about">အကြောင်း</string>
   <string name="menu_feedback">အကြံဉာဏ် ပို့ရန် (အီးမေးလ်မှ)</string>
   <string name="provider_categories">မကြာခင်က သုံးခဲ့သော ကဏ္ဍများ</string>
@@ -113,10 +117,11 @@
   <string name="welcome_copyright_subtext">ပိုစတာရုပ်ပုံ၊ စာအုပ်မျက်နှာဖုံးကဲ့သို့သော အင်တာနက်ပေါ်ရှိ သင်တွေ့ရှိမိသမျှ မူပိုင်ပစ္စည်းများကို ရှောင်ကြဉ်ပါ။</string>
   <string name="welcome_final_text">သင် သဘောပေါက်သည်ဟု ထင်ပါသလား</string>
   <string name="welcome_final_button_text">ဟုတ်ကဲ့</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;သတင်းအချက်အလက် ပို၍&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">သတင်းအချက်အလက် ပို၍</string>
   <string name="detail_panel_cats_label">ကဏ္ဍများ</string>
   <string name="detail_panel_cats_loading">ဝန်ဆွဲတင်နေသည်...</string>
   <string name="detail_panel_cats_none">ဘာမှရွေးချယ်မထားပါ</string>
+  <string name="detail_caption_empty">ပုံစာ မရှိ</string>
   <string name="detail_description_empty">ဖော်ပြချက် မရှိ</string>
   <string name="detail_discussion_empty">ဆွေးနွေးချက် မရှိပါ</string>
   <string name="detail_license_empty">အမည်မသိရသော လိုင်စင်</string>
@@ -125,8 +130,11 @@
   <string name="location_permission_title">တည်နေရာ ခွင့်ပြုချက် တောင်းဆိုနေသည်</string>
   <string name="ok">အိုကေ</string>
   <string name="warning">သတိပေးချက်</string>
+  <string name="duplicate_image_found">ထပ်နေသောရုပ်ပုံ တွေ့ရှိသည်</string>
+  <string name="upload">အက်ပလုဒ်တင်ရန်</string>
   <string name="yes">မှန်</string>
   <string name="no">မလုပ်ပါ</string>
+  <string name="media_detail_caption">ပုံစာ</string>
   <string name="media_detail_title">ခေါင်းစဉ်</string>
   <string name="media_detail_description">ဖော်ပြချက်</string>
   <string name="media_detail_discussion">ဆွေးနွေးချက်</string>
@@ -168,6 +176,7 @@
   <string name="upload_problem_different_geolocation">ဤရုပ်ပုံအား မတူညီသောနေရာ၌ ရိုက်ကူးခဲ့သည်။</string>
   <string name="upload_problem_fbmd">သင်ကိုယ်တိုင်ရိုက်ကူးထားသော ရုပ်ပုံများကိုသာ အက်ပလုပ်တင်ပါ။ အခြားသူ၏ ဖေ့ဘုတ်အကောင့်များတွင်တွေ့သည့်ရုပ်ပုံများကို မတင်ပါနှင့်။</string>
   <string name="upload_problem_do_you_continue">ဤရုပ်ပုံအား အက်ပလုပ်တင်ချင်နေတုန်းပဲလား</string>
+  <string name="upload_connection_error_alert_title">ဆက်သွယ်မှု အမှား</string>
   <string name="internet_downloaded">သင်ကိုယ်တိုင်ရိုက်ကူးထားသော ရုပ်ပုံများကိုသာ အက်ပလုပ်တင်ပါ။ အင်တာနက်မှဒေါင်းလုတ်ဆွဲထားသည့်ရုပ်ပုံများကို မတင်ပါနှင့်။</string>
   <string name="use_external_storage" fuzzy="true">ပြင်ပြသိုလှောင်ခန်းကို သုံးမည်</string>
   <string name="login_to_your_account">သင်၏အကောင့်သို့ ဝင်ရန်</string>
@@ -196,6 +205,9 @@
   <string name="about_translate_proceed">ဆက်လက်လုပ်ဆောင်ရန်</string>
   <string name="about_translate_cancel">မလုပ်တော့ပါ</string>
   <string name="retry">ပြန်လုပ်</string>
+  <string name="showcase_view_needs_photo">ဤနေရာသည် ဓါတ်ပုံတခုလိုအပ်သည်။</string>
+  <string name="showcase_view_has_photo">ဤနေရာတွင် ဓါတ်ပုံတခုရှိနှင့်ပြီးဖြစ်သည်။</string>
+  <string name="showcase_view_no_longer_exists">ဤနေရာ မတည်ရှိတော့ပါ။</string>
   <string name="no_images_found">ရုပ်ပုံများ မတွေ့ပါ</string>
   <string name="error_loading_images">ရုပ်ပုံများကို ဝန်ဆွဲတင်နေစဉ် အမှားဖြစ်ပွားခဲ့ပါသည်။</string>
   <string name="image_uploaded_by">အက်ပလုတ်တင်သူ: %1$s</string>
@@ -212,6 +224,8 @@
   <string name="search_tab_title_categories">ကဏ္ဍများ</string>
   <string name="explore_tab_title_featured">အထူး</string>
   <string name="explore_tab_title_mobile">မိုလ်ဘိုင်းမှတဆင့် တင်ခဲ့သည်</string>
+  <string name="menu_set_wallpaper">နောက်ခံရှုခင်းအဖြစ်သတ်မှတ်ရန်</string>
+  <string name="wallpaper_set_successfully">နောက်ခံရှုခင်းအဖြစ် အောင်မြင်စွာသတ်မှတ်လိုက်သည်</string>
   <string name="quiz">ထွက်</string>
   <string name="quiz_question_string">ဤရုပ်ပုံကို တင်ရန် အဆင်ပြေပါ့မလား?</string>
   <string name="question">မေးခွန်း</string>
@@ -230,6 +244,7 @@
   <string name="nominate_delete">ဖျက်ပစ်ရန် အဆိုပြုပါ</string>
   <string name="delete">ဖျက်ရန်</string>
   <string name="Achievements">အောင်မြင်မှုပန်းတိုင်များ</string>
+  <string name="Profile">ပရိုဖိုင်</string>
   <string name="statistics">စာရင်းအင်း</string>
   <string name="statistics_thanks">ကျေးဇူးစကား လက်ခံရရှိ</string>
   <string name="statistics_featured">အထူးဓာတ်ပုံများ</string>
@@ -263,6 +278,8 @@
   <string name="deletion_reason_no_longer_want_public">စိတ်ပြောင်းသွားပါပြီ၊ ယင်းအား အများသူငှာကြည့်ရှုနိုင်စေရန် မလိုလားတော့ပါ။</string>
   <string name="deletion_reason_not_interesting">စိတ်မကောင်းပါ ဤရုပ်ပုံသည် စွယ်စုံကျမ်းအတွက် စိတ်ဝင်စားဖွယ်မကောင်းပါ</string>
   <string name="no_categories_selected">ကဏ္ဍများ မရွေးချယ်ထားပါ</string>
+  <string name="back_button_warning">အက်ပလုဒ် ပယ်ဖျက်</string>
+  <string name="back_button_continue">အက်ပလုဒ် ဆက်လုပ်ရန်</string>
   <string name="search_this_area">ဤဧရိယာကို ရှာဖွေပါ</string>
   <string name="nearby_card_permission_title">ခွင့်ပြုချက် တောင်းခံရန်</string>
   <string name="never_ask_again">နောက်တခါ ထပ်မမေးပါနှင့်</string>
@@ -277,11 +294,15 @@
   <string name="send_thank_failure_title">ကျေးဇူးတင်စကားပို့ခြင်း- မအောင်မြင်ပါ</string>
   <string name="send_thank_toast">%1$ အတွက် ကျေးဇူးတင်မှု ပို့နေသည်</string>
   <string name="review_category">မှန်ကန်စွာ ကဏ္ဍခွဲထားပါသလား</string>
+  <string name="review_thanks">ပံ့ပိုးသူအား ကျေးဇူးတင်လိုပါသလား</string>
+  <string name="review_category_explanation">ဤရုပ်ပုံသည် %1$s ကဏ္ဍများအောက်တွင်ရှိသည်။</string>
   <string name="review_spam_report_question">ဘောင်ကျော်နေပါသည် အကြောင်းမှာ</string>
   <string name="review_c_violation_report_question">မူပိုင်ခွင့်ချိုးဖောက်မှုဖြစ်သည် အကြောင်းမှာ</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">နောက်ရုပ်ပုံ</string>
+  <string name="review_thanks_yes_button_text">နောက်ရုပ်ပုံ</string>
+  <string name="review_thanks_no_button_text">နောက်ရုပ်ပုံ</string>
   <string name="no_notification">မဖတ်ရသေးသော အသိပေးချက်များ မရှိပါ</string>
-  <string name="no_read_notification" fuzzy="true">မော်ကွန်းတင်ပြီးသော အသိပေးချက်များ မရှိပါ</string>
+  <string name="no_read_notification">မဖတ်ရသေးသော အသိပေးချက်များ မရှိပါ</string>
+  <string name="error_occurred_in_picking_images">ရုပ်ပုံများကိုရွေးနေစဉ် အမှားဖြစ်ပွားခဲ့ပါသည်</string>
   <string name="please_wait">ကျေးဇူးပြု၍ ခဏစောင့်ပါ...</string>
   <string name="welcome_dont_upload_content_description">နမူနာရုပ်ပုံများ အက်ပလုပ်တင်ရန် မဟုတ်ပါ</string>
   <string name="skip_image">ဤရုပ်ပုံအား ကျော်သွားမည်</string>
@@ -297,19 +318,61 @@
   <string name="no_categories_found">ကဏ္ဍများ မတွေ့ရှိပါ</string>
   <string name="dialog_box_text_nomination">%1$ ဟာ ဘာကြောင့် ဖျက်သင့်သလဲ?</string>
   <string name="default_description_language">နဂို ဖော်ပြချက်ဘာသာစကား</string>
+  <string name="delete_helper_show_deletion_title">ဖျက်ပစ်ရန် အဆိုပြုထားခြင်း</string>
   <string name="delete_helper_show_deletion_title_success">အောင်မြင်</string>
+  <string name="delete_helper_show_deletion_message_if">%1$s ဖျက်ပစ်ရန် အဆိုပြုခဲ့သည်</string>
   <string name="delete_helper_show_deletion_title_failed">မအောင်မြင်ပါ</string>
   <string name="delete_helper_show_deletion_message_else">ပယ်ဖျက်ရန် မတောင်းဆိုနိုင်ပါ</string>
   <string name="delete_helper_ask_spam_blurry">မှုန်ဝါး</string>
   <string name="delete_helper_ask_spam_nonsense">အဓိပ္ပါယ်မရှိ</string>
   <string name="delete_helper_ask_reason_copyright_logo">လိုဂို</string>
+  <string name="category_edit_helper_make_edit_toast">ကဏ္ဍများမွမ်းမံရန် ကြိုးစားနေသည်။</string>
+  <string name="category_edit_helper_show_edit_title">ကဏ္ဍမွမ်းမံ</string>
+  <string name="category_edit_helper_show_edit_title_success">အောင်မြင်</string>
+  <string name="category_edit_helper_edit_message_else">ကဏ္ဍများ မပေါင်းထည့်နိုင်ခဲ့ပါ</string>
+  <string name="category_edit_button_text">ကဏ္ဍများ မွမ်းမံရန်</string>
+  <string name="coordinates_edit_helper_show_edit_title">ကိုဩဒိနိတ် မွမ်းမံ</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">အောင်မြင်</string>
   <string name="no_achievements_yet">မည့်သည့်ပံ့ပိုးမှုမျှ မရှိသေးပါ</string>
   <string name="account_created">အကောင့်ဖန်တီးပြီးပါပြီ</string>
   <string name="notification_mark_read">အသိပေးချက်ကို ဖတ်ပြီးကြောင်းမှတ်သားပြီးပြီ</string>
   <string name="some_error">အမှားအယွင်းအချို့ရှိခဲ့သည်</string>
   <string name="upload_nearby_place_found_title">အနီးအနားနေရာ တွေ့ရှိသည်</string>
+  <string name="title_app_shortcut_setting">အပြင်အဆင်များ</string>
+  <string name="load_more">ပို၍ ဆွဲတင်ရန်</string>
+  <string name="add_picture_to_wikipedia_article_title">ဝီကီပီးဒီးယားသို့ ပုံတစ်ခုပေါင်းထည့်ရန်</string>
+  <string name="confirm">အတည်ပြု</string>
+  <string name="instructions_title">လမ်းညွှန်ချက်များ</string>
   <string name="pause">ခေတ္တရပ်</string>
   <string name="resume">ခေတ္တရပ်နားရာမှ ပြန်လုပ်ရန်</string>
   <string name="paused">ခေတ္တရပ်ပြီး</string>
+  <string name="more">ပို၍</string>
+  <string name="favorites">ကြိုက်နှစ်သက်သည်များ</string>
+  <string name="achievements_tab_title">အောင်မြင်မှုပန်းတိုင်များ</string>
+  <string name="leaderboard_tab_title">အကြီးအကဲခုံရုံး</string>
+  <string name="rank_prefix">အဆင့်-</string>
+  <string name="count_prefix">အရေအတွက်-</string>
+  <string name="leaderboard_column_rank">အဆင့်</string>
+  <string name="leaderboard_column_user">အသုံးပြုသူ</string>
+  <string name="leaderboard_column_count">အရေအတွက်</string>
+  <string name="leaderboard_yearly">နှစ်စဉ်</string>
+  <string name="leaderboard_weekly">အပတ်စဉ်</string>
+  <string name="leaderboard_all_time">တချိန်လုံး</string>
+  <string name="leaderboard_upload">တင်ရန်</string>
+  <string name="leaderboard_nearby">အနီးအနား</string>
+  <string name="leaderboard_used">အသုံးပြု</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;ဤမြေပုံအား ပိုမိုကောင်းမွန်အောင်ပြုလုပ်ရန်&lt;/a&gt;</string>
+  <string name="license_step_title">မီဒီယာလိုင်စင်</string>
+  <string name="menu_view_category_page">ကဏ္ဍစာမျက်နှာကို ကြည့်ရန်</string>
   <string name="read_help_link">ပိုမို ဖတ်ရန်</string>
+  <string name="media_detail_in_all_languages">ဘာသာစကားအားလုံးထဲတွင်</string>
+  <string name="choose_a_location">တည်နေရာတစ်ခု ရွေးချယ်ရန်</string>
+  <string name="select_location_location_picker">တည်နေရာ ရွေးချယ်ရန်</string>
+  <string name="modify_location">တည်နေရာ ပြင်ဆင်ရန်</string>
+  <string name="image_location">ရုပ်ပုံ တည်နေရာ</string>
+  <string name="custom_selector_empty_text">ရုပ်ပုံများမရှိ</string>
+  <string name="done">ပြီးပြီ</string>
+  <string name="back">နောက်သို့</string>
+  <string name="custom_selector_already_uploaded_image_text">ဤရုပ်ပုံအား ကွန်မွန်းစ်သို့ အက်ပလုဒ်တင်ပြီးသားဖြစ်ပါသည်။</string>
+  <string name="learn_more">ပိုမိုလေ့လာရန်</string>
 </resources>

@@ -31,11 +31,20 @@ public class MwException extends RuntimeException {
         return error;
     }
 
-    @Nullable public String getTitle() {
-        return error.getTitle();
+    @Nullable
+    public String getTitle() {
+        if (error != null) {
+            return error.getTitle();
+        }
+        return errors != null ? errors.get(0).getTitle() : null;
     }
 
-    @Override @Nullable public String getMessage() {
-        return error.getDetails();
+    @Override
+    @Nullable
+    public String getMessage() {
+        if (error != null) {
+            return error.getDetails();
+        }
+        return errors != null ? errors.get(0).getDetails() : null;
     }
 }

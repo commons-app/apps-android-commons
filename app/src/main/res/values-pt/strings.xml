@@ -118,6 +118,7 @@
   <string name="title_activity_settings">Configurações</string>
   <string name="title_activity_signup">Registar-se</string>
   <string name="title_activity_featured_images">Imagens destacadas</string>
+  <string name="title_activity_custom_selector">Seletor personalizado</string>
   <string name="title_activity_category_details">Categoria</string>
   <string name="title_activity_review">Revisão por pares</string>
   <string name="menu_about">Sobre</string>
@@ -328,6 +329,7 @@
   <string name="quiz_screenshot_question">Esta captura de ecrã pode ser carregada?</string>
   <string name="share_app_title">Partilhar aplicação</string>
   <string name="error_fetching_nearby_places">Erro ao procurar locais próximos.</string>
+  <string name="error_fetching_nearby_monuments">Erro ao procurar monumentos próximos.</string>
   <string name="no_recent_searches">Não há pesquisas recentes</string>
   <string name="delete_recent_searches_dialog">Tem a certeza de que deseja limpar o historial de pesquisas?</string>
   <string name="delete_search_dialog">Deseja eliminar esta pesquisa?</string>
@@ -611,4 +613,18 @@
   <string name="location_picker_image_view_shadow">A sombra da vista de imagem do selecionador de localização</string>
   <string name="image_location">Localização da imagem</string>
   <string name="check_whether_location_is_correct">Verificar se a localização está correta</string>
+  <string name="custom_selector_title">Seletor personalizado</string>
+  <string name="custom_selector_empty_text">Não existem imagens</string>
+  <string name="done">Concluído</string>
+  <string name="back">Voltar</string>
+  <string name="welcome_custom_picture_selector_text">Bem-vindo ao seletor de imagens personalizado</string>
+  <string name="custom_selector_info_text1">Este seletor mostra de forma diferente imagens que já estão na wiki Commons.</string>
+  <string name="custom_selector_info_text2">Ao contrário da imagem à esquerda, a imagem à direita tem o logótipo da wiki Commons que indica que ela já foi carregada.\n Tocar e manter para uma antevisão da imagem.</string>
+  <string name="welcome_custom_selector_ok">Excecional</string>
+  <string name="custom_selector_already_uploaded_image_text">Esta imagem já foi carregada na wiki Commons.</string>
+  <string name="wlm_upload_info">Está a participar na campanha Wiki Loves Monuments. As predefinições associadas serão adicionadas.</string>
+  <string name="display_monuments">Mostrar monumentos</string>
+  <string name="wlm_month_message">É o mês da Wiki Loves Monuments!</string>
+  <string name="learn_more">SABER MAIS</string>
+  <string name="wlm_campaign_description">Wiki Loves Monuments é um concurso internacional de fotografias de monumentos, organizado pela Wikimedia</string>
 </resources>
