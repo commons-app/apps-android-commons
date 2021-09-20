@@ -1,12 +1,3 @@
-{
-    "fixes": [
-        "/home/runner/work/apps-android-commons/apps-android-commons>/::"
-    ],
-    "codecov": {
-        "disable_default_path_fixes": true
-    }
-}
-
 name: Android CI
 
 on:
