@@ -306,7 +306,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
 
         ButterKnife.bind(this,view);
-        Utils.setUnderlinedText(seeMore, R.string.nominated_see_more, container.getContext());
+        Utils.setUnderlinedText(seeMore, R.string.nominated_see_more, requireContext());
 
         if (isCategoryImage){
             authorLayout.setVisibility(VISIBLE);
