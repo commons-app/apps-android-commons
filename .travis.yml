@@ -23,7 +23,7 @@ android:
   licenses:
   - android-sdk-license-.+
 script:
-- "./gradlew -Pcoverage testBetaDebugUnitTestReport"
+- "./gradlew -Pcoverage testBetaDebugUnitTestCoverage"
 - if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
   mkdir -p app/src/prodRelease/play/release-notes/en-US;
   fi
