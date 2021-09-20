@@ -2,8 +2,6 @@ package fr.free.nrw.commons.upload
 
 import android.content.Context
 import android.content.Intent
-import androidx.work.Configuration
-import androidx.work.WorkManager
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
@@ -161,8 +159,6 @@ class UploadActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testMakeUploadRequest() {
-        val config: Configuration = Configuration.Builder().build()
-        WorkManager.initialize(context, config)
         activity.makeUploadRequest()
     }
 
