@@ -1,7 +1,19 @@
+{
+    "fixes": [
+        "/home/runner/work/apps-android-commons/apps-android-commons>/::"
+    ],
+    "codecov": {
+        "disable_default_path_fixes": true
+    }
+}
+
 name: Android CI
 
 on:
-  push
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
@@ -15,3 +27,19 @@ jobs:
         java-version: 1.8
     - name: Build with Gradle
       run: ./gradlew -Pcoverage testBetaDebugUnitTestCoverage
+
+    - name: Generate Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: report 
+        path: app/build/reports/coverage/debug
+
+
+    - name: Download Test Reports Folder
+      uses: actions/download-artifact@v2
+      with:
+        name: report
+        path: app/build/reports/coverage/debug
+
+    - name: Upload Test Report
+      run:  bash <(curl -s https://codecov.io/bash) -f "app/build/reports/coverage/debug/report.xml"
