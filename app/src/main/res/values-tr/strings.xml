@@ -629,7 +629,7 @@
   <string name="custom_selector_info_text2" fuzzy="true">Soldaki resimden farklı olarak, sağdaki resimde zaten yüklendiğini belirten Commons logosu var.</string>
   <string name="welcome_custom_selector_ok">Harika</string>
   <string name="custom_selector_already_uploaded_image_text">Bu resim zaten Commons\'a yüklendi.</string>
-  <string name="wlm_upload_info">Viki, Anıtları Seviyor kampanyasına katkıda bulunuyorsunuz. İlgili şablonlar buna göre eklenecektir.</string>
+  <string name="wlm_upload_info" fuzzy="true">Viki, Anıtları Seviyor kampanyasına katkıda bulunuyorsunuz. İlgili şablonlar buna göre eklenecektir.</string>
   <string name="display_monuments">Anıtları göster</string>
   <string name="wlm_month_message">Viki, Anıtları Seviyor ayı!</string>
   <string name="learn_more">DAHA FAZLA BİLGİ EDİN</string>
