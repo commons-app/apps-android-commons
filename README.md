@@ -1,5 +1,4 @@
 # Wikimedia Commons Android app
-[![Build status](https://api.travis-ci.org/commons-app/apps-android-commons.svg?branch=master)](https://travis-ci.org/commons-app/apps-android-commons)
 [![Build status](https://github.com/commons-app/apps-android-commons/actions/workflows/android.yml/badge.svg?branch=master)](https://github.com/commons-app/apps-android-commons/actions?query=branch%3Amaster)
 [![Preview the app](https://img.shields.io/badge/Preview-Appetize.io-orange.svg)](https://appetize.io/app/8ywtpe9f8tb8h6bey11c92vkcw)
 [![codecov](https://codecov.io/gh/commons-app/apps-android-commons/branch/master/graph/badge.svg)](https://codecov.io/gh/commons-app/apps-android-commons)
