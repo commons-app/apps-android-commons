@@ -635,7 +635,7 @@
   <string name="custom_selector_info_text2" fuzzy="true">На відміну від зображення зліва, зображення праворуч має логотип Commons, яке вказує, що воно вже завантажене.</string>
   <string name="welcome_custom_selector_ok">Чудово</string>
   <string name="custom_selector_already_uploaded_image_text">Це зображення вже завантажено на Спільний ресурс.</string>
-  <string name="wlm_upload_info">Ви вносите свій внесок у кампанію «Вікі любить пам’ятники». Відповідні шаблони будуть додані відповідно.</string>
+  <string name="wlm_upload_info" fuzzy="true">Ви вносите свій внесок у кампанію «Вікі любить пам’ятники». Відповідні шаблони будуть додані відповідно.</string>
   <string name="display_monuments">Показати пам’ятники</string>
   <string name="wlm_month_message">Цей місяць Wiki Loves Monuments!</string>
   <string name="learn_more">ДОСЛІДИТИ БІЛЬШЕ</string>
