@@ -607,7 +607,7 @@
   <string name="custom_selector_info_text2" fuzzy="true">A diferensa da la plancia a snistra, la plancia a drita a la marca Comun ch\'a mostra ch\'a l\'é già stàita carià.</string>
   <string name="welcome_custom_selector_ok">Fiamengh</string>
   <string name="custom_selector_already_uploaded_image_text">La plancia a l\'é già stàita carià su Comun.</string>
-  <string name="wlm_upload_info">Chiel a contribuiss a la campagna ëd Wiki a-j veul bin ai monument. Jë stamp associà a saran giontà an acòrd con sòn.</string>
+  <string name="wlm_upload_info" fuzzy="true">Chiel a contribuiss a la campagna ëd Wiki a-j veul bin ai monument. Jë stamp associà a saran giontà an acòrd con sòn.</string>
   <string name="display_monuments">Smon-e ij monument</string>
   <string name="wlm_month_message">A l\'é ël mèis ëd Wiki a-j veul bin ai monument!</string>
   <string name="learn_more">SAVÈJNE ËD PI</string>

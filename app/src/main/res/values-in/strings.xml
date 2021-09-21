@@ -613,7 +613,7 @@
   <string name="custom_selector_info_text2">Berbeda dengan gambar di sebelah kiri, gambar di sebelah kanan memiliki logo Commons yang menandakan gambarnya sudah diunggah.\n  Sentuh dan tahan untuk pratinjau gambar.</string>
   <string name="welcome_custom_selector_ok">Bagus</string>
   <string name="custom_selector_already_uploaded_image_text">Gambar ini sudah diunggah di Commons.</string>
-  <string name="wlm_upload_info">Anda berkontribusi kepada Kampanye Wiki Loves Monuments (Wiki Cinta Monumen). Templat yang terkait akan ditambahkan.</string>
+  <string name="wlm_upload_info" fuzzy="true">Anda berkontribusi kepada Kampanye Wiki Loves Monuments (Wiki Cinta Monumen). Templat yang terkait akan ditambahkan.</string>
   <string name="display_monuments">Tampilkan monumen</string>
   <string name="wlm_month_message">Ini adalah bulan Wiki Loves Monuments!</string>
   <string name="learn_more">PELAJARI LEBIH LANJUT</string>
