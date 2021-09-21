@@ -1,7 +1,6 @@
 name: Android CI
 
-on:
-  push
+on: [push, pull_request]
 
 jobs:
   build:
@@ -14,4 +13,6 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Gradle
-      run: ./gradlew -Pcoverage jacocoTestBetaDebugUnitTestReport
+      run: ./gradlew -Pcoverage testBetaDebugUnitTestCoverage
+    - name: Upload Test Report
+      run:  bash <(curl -s https://codecov.io/bash) -f "app/build/reports/jacoco/testBetaDebugUnitTestCoverage/testBetaDebugUnitTestCoverage.xml"

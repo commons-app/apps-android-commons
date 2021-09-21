@@ -466,7 +466,7 @@
   <string name="custom_selector_info_text2">برخلاف تصویر سمت چپ، تصویر سمت راست دارای نشان‌وارهٔ ویکی‌انبار است که نشان می‌دهد از پیش بارگذاری شده‌است.\nبرای مشاهدهٔ تصویر، صفحه را لمس کنید و نگه دارید.</string>
   <string name="welcome_custom_selector_ok">عالی</string>
   <string name="custom_selector_already_uploaded_image_text">این تصویر از پیش در ویکی‌انبار بارگذاری شده‌است.</string>
-  <string name="wlm_upload_info">شما در حال مشارکت در پویش ویکی دوست‌دار یادمان‌ها هستید. الگوهای مرتبط متعاقباً افزوده خواهند شد.</string>
+  <string name="wlm_upload_info" fuzzy="true">شما در حال مشارکت در پویش ویکی دوست‌دار یادمان‌ها هستید. الگوهای مرتبط متعاقباً افزوده خواهند شد.</string>
   <string name="display_monuments">نمایش یادمان‌ها</string>
   <string name="wlm_month_message">این ماه، ماه «ویکی دوست‌دار یادمان‌ها» است!</string>
   <string name="learn_more">بیشتر بدانید</string>

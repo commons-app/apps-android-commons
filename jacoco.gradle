@@ -1,0 +1,61 @@
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "0.8.7"
+}
+
+android {
+    testOptions {
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses = true
+            }
+        }
+    }
+}
+
+project.afterEvaluate {
+
+    android.applicationVariants.all { variant ->
+        def name = variant.name
+        def testTaskName = "test${name.capitalize()}UnitTest"
+
+        tasks.create(name: "${testTaskName}Coverage", type: JacocoReport, dependsOn: "$testTaskName") {
+            group = "Reporting"
+            description = "Generate Jacoco coverage reports for the ${name.capitalize()} build."
+
+            def fileFilter = ['**/R.class',
+                              '**/R$*.class',
+                              '**/*$ViewInjector*.*',
+                              '**/*$ViewBinder*.*',
+                              '**/BuildConfig.*',
+                              '**/Manifest*.*',
+                              '**/*Test*.*',
+                              'android/**/*.*']
+
+            //java compiled classes
+            def javaTree = fileTree(
+                    dir: "${buildDir}/intermediates/classes/${name}",
+                    excludes: fileFilter
+            )
+            //kotlin compiled classes
+            def kotlinTree = fileTree(
+                    dir: "${buildDir}/tmp/kotlin-classes/${name}",
+                    excludes: fileFilter
+            )
+            def mainSrc = "${project.projectDir}/src/main/java"
+
+            sourceDirectories.setFrom(files([mainSrc]))
+            classDirectories.setFrom(files([javaTree, kotlinTree]))
+            executionData.setFrom(fileTree(dir: "${buildDir}", includes: [
+                    "jacoco/${testTaskName}.exec",
+                    "outputs/code-coverage/connected/*coverage.ec"
+            ]))
+
+            reports {
+                xml.enabled = true
+                html.enabled = true
+            }
+        }
+    }
+}
