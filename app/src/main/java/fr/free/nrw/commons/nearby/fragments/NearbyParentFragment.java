@@ -1623,6 +1623,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (fabGallery.isShown()) {
                 Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString());
                 storeSharedPrefs(selectedPlace);
+                
                 controller.initiateGalleryPick(getActivity(), chipWlm.isChecked());
             }
         });
