@@ -630,7 +630,7 @@
   <string name="custom_selector_info_text2">Na rozdiel od obrázka v ľavo, obrázkov v pravo má logo Commons, ktoré indikuje, že už je nahraný. Podržte kurzor nad obrázkom pre náhľad.</string>
   <string name="welcome_custom_selector_ok">Úžasné</string>
   <string name="custom_selector_already_uploaded_image_text">Tento obrázok už bol do Commons nahraný.</string>
-  <string name="wlm_upload_info">Prispievate do kampane Wiki miluje monumenty. Súvisiace šablóny budú podľa toho pridané.</string>
+  <string name="wlm_upload_info" fuzzy="true">Prispievate do kampane Wiki miluje monumenty. Súvisiace šablóny budú podľa toho pridané.</string>
   <string name="display_monuments">Zobraziť monumenty</string>
   <string name="wlm_month_message">Je mesiac Wiki miluje monumenty!</string>
   <string name="learn_more">ZISTIŤ VIAC</string>

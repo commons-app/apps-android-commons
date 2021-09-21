@@ -621,7 +621,7 @@
   <string name="custom_selector_info_text2">右邊的圖片與與左邊圖片不同，它有代表已經上傳到維基共享資源的標誌。\n請輕壓圖片來預覽。</string>
   <string name="welcome_custom_selector_ok">棒極了</string>
   <string name="custom_selector_already_uploaded_image_text">此圖片已上傳到維基共享資源。</string>
-  <string name="wlm_upload_info">您正在為維基愛古蹟活動做出貢獻。相關模板將會相應地添加上。</string>
+  <string name="wlm_upload_info" fuzzy="true">您正在為維基愛古蹟活動做出貢獻。相關模板將會相應地添加上。</string>
   <string name="display_monuments">顯示古蹟景點</string>
   <string name="wlm_month_message">維基愛古蹟的月份！</string>
   <string name="learn_more">了解更多</string>

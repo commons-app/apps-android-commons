@@ -609,7 +609,7 @@
   <string name="custom_selector_info_text2" fuzzy="true">За разлика од сликата лево, таа десно има лого на Ризницата, што значи дека веќе е подигната.</string>
   <string name="welcome_custom_selector_ok">Одлично</string>
   <string name="custom_selector_already_uploaded_image_text">Оваа слика е веќе подигната на Ризницата.</string>
-  <string name="wlm_upload_info">Учествувате во походот „Вики ги сака спомениците“. Поврзаните предлошки ќе бидат соодветно додадени.</string>
+  <string name="wlm_upload_info" fuzzy="true">Учествувате во походот „Вики ги сака спомениците“. Поврзаните предлошки ќе бидат соодветно додадени.</string>
   <string name="display_monuments">Прикажи споменици</string>
   <string name="wlm_month_message">Ова е месец на „Вики ги сака спомениците“!</string>
   <string name="learn_more">ДОЗНАЈТЕ ПОВЕЌЕ</string>

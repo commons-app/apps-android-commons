@@ -614,7 +614,7 @@
   <string name="custom_selector_info_text2">Till skillnad från bilden till vänster har bilden till höger Commons-logotypen, vilket innebär att den redan är uppladdad.\n Tryck och håll ned för att förhandsgranska bilden.</string>
   <string name="welcome_custom_selector_ok">Häftigt</string>
   <string name="custom_selector_already_uploaded_image_text">Denna bild har redan laddats upp till Commons.</string>
-  <string name="wlm_upload_info">Du bidrar till kampanjen Wiki Loves Monuments. Relaterade mallar kommer att läggas till.</string>
+  <string name="wlm_upload_info" fuzzy="true">Du bidrar till kampanjen Wiki Loves Monuments. Relaterade mallar kommer att läggas till.</string>
   <string name="display_monuments">Visa monument</string>
   <string name="wlm_month_message">Det är Wiki Loves Monuments-månaden!</string>
   <string name="learn_more">LÄS MER</string>

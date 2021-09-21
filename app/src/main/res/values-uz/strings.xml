@@ -2,6 +2,7 @@
 <!-- Authors:
 * Malikxan
 * Zafar Shamsiddinov
+* Шоҳидахоним
 -->
 <resources>
   <plurals name="contributions_subtitle">
@@ -33,7 +34,7 @@
   <string name="preference_category_appearance">Koʻrinishi</string>
   <string name="preference_category_general">Asosiy</string>
   <string name="preference_category_feedback">Fikr-mulohazalar</string>
-  <string name="preference_category_privacy">Konfidensiallik</string>
+  <string name="preference_category_privacy">Maxfiylik</string>
   <string name="app_name">Vikiombor</string>
   <string name="menu_settings">Tanlovlar</string>
   <string name="intent_share_upload_label">Vikiomborga yuklash</string>
