@@ -448,7 +448,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
      * @param contribution
      */
     @SuppressLint("StringFormatInvalid")
-    private fun showFailedNotification(contribution: Contribution, message: String) {
+    private fun showFailedNotification(contribution: Contribution, message: String = "") {
         val displayTitle = contribution.media.displayTitle
         curentNotification.setContentTitle(
             appContext.getString(
