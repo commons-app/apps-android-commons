@@ -567,7 +567,7 @@
   <string name="resume">reprendre</string>
   <string name="paused">En pause</string>
   <string name="more">Plus</string>
-  <string name="favorites">Favoris</string>
+  <string name="bookmarks">Favoris</string>
   <string name="achievements_tab_title">Réussites</string>
   <string name="leaderboard_tab_title">Tableau de classement</string>
   <string name="rank_prefix">Rang :</string>

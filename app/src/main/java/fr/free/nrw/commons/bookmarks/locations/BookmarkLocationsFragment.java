@@ -82,7 +82,7 @@ public class BookmarkLocationsFragment extends DaggerFragment {
      * Initialize the recycler view with bookmarked locations
      */
     private void initList() {
-        List<Place> places = controller.loadFavoritesLocations();
+        List<Place> places = controller.loadBookmarksLocations();
         adapter.setItems(places);
         progressBar.setVisibility(View.GONE);
         if (places.size() <= 0) {

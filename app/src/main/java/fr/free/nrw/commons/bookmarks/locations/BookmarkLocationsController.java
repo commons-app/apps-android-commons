@@ -20,7 +20,7 @@ public class BookmarkLocationsController {
      * Load from DB the bookmarked locations
      * @return a list of Place objects.
      */
-    public List<Place> loadFavoritesLocations() {
+    public List<Place> loadBookmarksLocations() {
         return bookmarkLocationDao.getAllBookmarksLocations();
     }
 }

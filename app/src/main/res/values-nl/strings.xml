@@ -551,7 +551,7 @@
   <string name="resume">hervatten</string>
   <string name="paused">Gepauzeerd</string>
   <string name="more">Meer</string>
-  <string name="favorites">Favorieten</string>
+  <string name="bookmarks">Favorieten</string>
   <string name="achievements_tab_title">Prestaties</string>
   <string name="leaderboard_tab_title">Scorebord</string>
   <string name="rank_prefix">Ranking:</string>

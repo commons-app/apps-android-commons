@@ -518,7 +518,7 @@
   <string name="resume">jatka</string>
   <string name="paused">Pysäytetty</string>
   <string name="more">Lisää</string>
-  <string name="favorites">Suosikit</string>
+  <string name="bookmarks">Suosikit</string>
   <string name="achievements_tab_title">Saavutukset</string>
   <string name="leaderboard_tab_title">Pistetaulukko</string>
   <string name="rank_prefix">Sija:</string>

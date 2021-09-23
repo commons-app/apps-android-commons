@@ -544,7 +544,7 @@
   <string name="resume">継続</string>
   <string name="paused">一時停止</string>
   <string name="more">もっと見る</string>
-  <string name="favorites">お気に入り</string>
+  <string name="bookmarks">お気に入り</string>
   <string name="achievements_tab_title">貢献</string>
   <string name="leaderboard_tab_title">リーダーボード</string>
   <string name="rank_prefix">順位</string>

@@ -121,7 +121,7 @@ class BookmarkLocationFragmentUnitTests {
      */
     @Test
     fun testInitNonEmpty(){
-        whenever(controller.loadFavoritesLocations()).thenReturn(mockBookmarkList)
+        whenever(controller.loadBookmarksLocations()).thenReturn(mockBookmarkList)
         val method: Method =
             BookmarkLocationsFragment::class.java.getDeclaredMethod("initList")
         method.isAccessible = true
