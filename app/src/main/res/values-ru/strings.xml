@@ -646,5 +646,6 @@
   <string name="back">Назад</string>
   <string name="welcome_custom_selector_ok">Потрясающе</string>
   <string name="custom_selector_already_uploaded_image_text">Это изображение уже было загружено на Викисклад.</string>
+  <string name="wlm_upload_info">Это изображение будет участвовать в конкурсе «Вики любит памятники — 2021».</string>
   <string name="learn_more">УЗНАТЬ ПОДРОБНЕЕ</string>
 </resources>
