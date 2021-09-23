@@ -8,14 +8,17 @@ import com.mapbox.mapboxsdk.annotations.BaseMarkerOptions;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import java.util.Objects;
 
 public class NearbyBaseMarker extends BaseMarkerOptions<NearbyMarker, NearbyBaseMarker> {
 
     public static final Parcelable.Creator<NearbyBaseMarker> CREATOR = new Parcelable.Creator<NearbyBaseMarker>() {
+        @Override
         public NearbyBaseMarker createFromParcel(Parcel in) {
             return new NearbyBaseMarker(in);
         }
 
+        @Override
         public NearbyBaseMarker[] newArray(int size) {
             return new NearbyBaseMarker[size];
         }
@@ -69,5 +72,22 @@ public class NearbyBaseMarker extends BaseMarkerOptions<NearbyMarker, NearbyBase
         dest.writeParcelable(icon.getBitmap(), flags);
         dest.writeString(title);
         dest.writeParcelable(place, 0);
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final NearbyBaseMarker that = (NearbyBaseMarker) o;
+        return Objects.equals(place.location, that.place.location);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(place);
     }
 }

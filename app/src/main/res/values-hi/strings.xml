@@ -82,6 +82,7 @@
   <string name="menu_share">साझा करें</string>
   <string name="share_title_hint" fuzzy="true">शीर्षक (आवश्यक)</string>
   <string name="share_description_hint">विवरण</string>
+  <string name="share_caption_hint">शीर्षक</string>
   <string name="login_failed_network">प्रवेश नहीं हो रहा - नेटवर्क विफल</string>
   <string name="login_failed_throttled">ढेर सारे असफल प्रयास होने के कारण कुछ मिनटों के बाद प्रयास करें।</string>
   <string name="login_failed_blocked">क्षमा करें, यह सदस्य कॉमन्स में अवरोधित है</string>
@@ -280,6 +281,7 @@
   <string name="delete_recent_searches_dialog">क्या आप सचमुच अपना खोज इतिहास मिटाना चाहते हैं?</string>
   <string name="search_history_deleted">खोज इतिहास मिट गया</string>
   <string name="nominate_delete">हटाने के लिये नामांकन करें</string>
+  <string name="delete">हटाएँ</string>
   <string name="Achievements">उपलब्धियाँ</string>
   <string name="statistics">सांख्यिकी</string>
   <string name="statistics_thanks">धन्यवाद प्राप्त किया</string>

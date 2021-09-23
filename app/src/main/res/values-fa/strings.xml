@@ -5,6 +5,7 @@
 * Amirsara
 * Arash.pt
 * BaRaN6161 TURK
+* Darafsh
 * Ebraminio
 * Eshagh79
 * FarsiNevis
@@ -119,6 +120,7 @@
   <string name="title_activity_settings">تنظیمات</string>
   <string name="title_activity_signup">ثبت نام</string>
   <string name="title_activity_featured_images">تصاویر برگزیده</string>
+  <string name="title_activity_custom_selector">انتخاب‌گر سفارشی</string>
   <string name="title_activity_category_details">رده</string>
   <string name="title_activity_review">بررسی هم رده</string>
   <string name="menu_about">درباره</string>
@@ -315,6 +317,7 @@
   <string name="quiz_screenshot_question">آیا این عکس از صفحه برای بارگذاری مناسب است؟</string>
   <string name="share_app_title">اشتراک اپلیکیشن</string>
   <string name="error_fetching_nearby_places">خطا در آوردن مکان‌های نزدیک.</string>
+  <string name="error_fetching_nearby_monuments">خطا در واکشی یادمان‌های نزدیک.</string>
   <string name="no_recent_searches">جستجوهای اخیر وجود ندارد</string>
   <string name="delete_recent_searches_dialog">آیا مطمئن هستید که می‌خواهید تاریخچه جستجو را حذف کنید؟</string>
   <string name="delete_search_dialog">آیا می‌خواهید این جستجو را حذف کنید؟</string>
@@ -361,7 +364,7 @@
   <string name="deletion_reason_no_longer_want_public">من تغییر عقیده دادم، نمی‌خواهم دیگر برای همه قابل‌مشاهده باشد.</string>
   <string name="deletion_reason_not_interesting">با پوزش، این تصویر برای یک دانشنامه مناسب نیست</string>
   <string name="uploaded_by_myself">بارگذاری‌شده توسط خودم در %1$s؛ استفاده‌شده در %2$d مقاله.</string>
-  <string name="no_uploads">به کامانز خوش آمدید!\n\nاولین فایلتان را با فشردن کلید اضافه بارگذاری کنید.</string>
+  <string name="no_uploads">به ویکی‌انبار خوش آمدید!\n\nاولین فایلتان را با فشردن کلید اضافه بارگذاری کنید.</string>
   <string name="no_categories_selected">رده‌ای انتخاب نشده‌است</string>
   <string name="no_categories_selected_warning_desc">تصاویر بدون رده به ندرت قابل‌استفاده هستند. آیا مطمئنید که می‌خواهید بدون انتخاب رده ادامه دهید؟</string>
   <string name="back_button_warning">لغو بارگذاری</string>
@@ -455,4 +458,16 @@
   <string name="leaderboard_weekly">هفتگی</string>
   <string name="leaderboard_all_time">تمام وقت</string>
   <string name="leaderboard_upload">بارگذاری</string>
+  <string name="custom_selector_title">انتخاب‌گر سفارشی</string>
+  <string name="custom_selector_empty_text">فاقد تصویر</string>
+  <string name="done">انجام شد</string>
+  <string name="back">بازگشت</string>
+  <string name="welcome_custom_picture_selector_text">به انتخاب‌گر سفارشی تصویر خوش آمدید</string>
+  <string name="custom_selector_info_text2">برخلاف تصویر سمت چپ، تصویر سمت راست دارای نشان‌وارهٔ ویکی‌انبار است که نشان می‌دهد از پیش بارگذاری شده‌است.\nبرای مشاهدهٔ تصویر، صفحه را لمس کنید و نگه دارید.</string>
+  <string name="welcome_custom_selector_ok">عالی</string>
+  <string name="custom_selector_already_uploaded_image_text">این تصویر از پیش در ویکی‌انبار بارگذاری شده‌است.</string>
+  <string name="wlm_upload_info" fuzzy="true">شما در حال مشارکت در پویش ویکی دوست‌دار یادمان‌ها هستید. الگوهای مرتبط متعاقباً افزوده خواهند شد.</string>
+  <string name="display_monuments">نمایش یادمان‌ها</string>
+  <string name="wlm_month_message">این ماه، ماه «ویکی دوست‌دار یادمان‌ها» است!</string>
+  <string name="learn_more">بیشتر بدانید</string>
 </resources>

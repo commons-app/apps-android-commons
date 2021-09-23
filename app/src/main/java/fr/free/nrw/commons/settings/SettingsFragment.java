@@ -8,11 +8,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceGroupAdapter;
 import androidx.preference.PreferenceScreen;
@@ -25,6 +27,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.TelemetryDefinition;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.campaigns.CampaignView;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -104,7 +107,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             findPreference("displayNearbyCardView").setEnabled(false);
             findPreference("descriptionDefaultLanguagePref").setEnabled(false);
             findPreference("displayLocationPermissionForCardView").setEnabled(false);
-            findPreference("displayCampaignsCardView").setEnabled(false);
+            findPreference(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE).setEnabled(false);
             findPreference("managed_exif_tags").setEnabled(false);
         }
 
@@ -128,7 +131,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     @Override
-    protected Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
+    protected Adapter onCreateAdapter(final PreferenceScreen preferenceScreen) {
         return new PreferenceGroupAdapter(preferenceScreen) {
             @Override
             public void onBindViewHolder(PreferenceViewHolder holder, int position) {
@@ -227,7 +230,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     /**
      * Changing the default app language with selected one and save it to SharedPreferences
      */
-    public void setLocale(final Activity activity, final String userSelectedValue) {
+    public void setLocale(final Activity activity, String userSelectedValue) {
+        if (userSelectedValue.equals("")) {
+            userSelectedValue = Locale.getDefault().getLanguage();
+        }
         final Locale locale = new Locale(userSelectedValue);
         Locale.setDefault(locale);
         final Configuration configuration = new Configuration();

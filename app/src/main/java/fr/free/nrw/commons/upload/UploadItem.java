@@ -23,6 +23,14 @@ public class UploadItem {
     private final String createdTimestampSource;
     private final BehaviorSubject<Integer> imageQuality;
     private boolean hasInvalidLocation;
+    private boolean isWLMUpload = false;
+    private String countryCode;
+
+    /**
+     * Uri of uploadItem
+     * Uri points to image location or name, eg content://media/external/images/camera/10495 (Android 10)
+     */
+    private final Uri contentUri;
 
 
     @SuppressLint("CheckResult")
@@ -31,7 +39,8 @@ public class UploadItem {
         final ImageCoordinates gpsCoords,
         final Place place,
         final long createdTimestamp,
-        final String createdTimestampSource) {
+        final String createdTimestampSource,
+        final Uri contentUri) {
         this.createdTimestampSource = createdTimestampSource;
         uploadMediaDetails = new ArrayList<>(Collections.singletonList(new UploadMediaDetail()));
         this.place = place;
@@ -39,6 +48,7 @@ public class UploadItem {
         this.mimeType = mimeType;
         this.gpsCoords = gpsCoords;
         this.createdTimestamp = createdTimestamp;
+        this.contentUri = contentUri;
         imageQuality = BehaviorSubject.createDefault(ImageUtils.IMAGE_WAIT);
     }
 
@@ -66,8 +76,15 @@ public class UploadItem {
         return imageQuality.getValue();
     }
 
+    /**
+     * getContentUri.
+     * @return Uri of uploadItem
+     * Uri points to image location or name, eg content://media/external/images/camera/10495 (Android 10)
+     */
+    public Uri getContentUri() { return contentUri; }
+
     public void setImageQuality(final int imageQuality) {
-        this.imageQuality.onNext(imageQuality);
+      this.imageQuality.onNext(imageQuality);
     }
 
     /**
@@ -85,6 +102,14 @@ public class UploadItem {
 
     public void setMediaDetails(final List<UploadMediaDetail> uploadMediaDetails) {
         this.uploadMediaDetails = uploadMediaDetails;
+    }
+
+    public void setWLMUpload(final boolean WLMUpload) {
+        isWLMUpload = WLMUpload;
+    }
+
+    public boolean isWLMUpload() {
+        return isWLMUpload;
     }
 
     @Override
@@ -120,5 +145,14 @@ public class UploadItem {
 
     public boolean hasInvalidLocation() {
         return hasInvalidLocation;
+    }
+
+    public void setCountryCode(final String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+    @Nullable
+    public String getCountryCode() {
+        return countryCode;
     }
 }

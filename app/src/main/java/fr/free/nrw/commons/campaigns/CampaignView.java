@@ -4,11 +4,13 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import fr.free.nrw.commons.theme.BaseActivity;
 import org.wikipedia.util.DateUtil;
 
 import java.text.ParseException;
@@ -27,8 +29,13 @@ import fr.free.nrw.commons.utils.ViewUtil;
  * A view which represents a single campaign
  */
 public class CampaignView extends SwipableCardView {
-    Campaign campaign = null;
+    Campaign campaign;
     private ViewHolder viewHolder;
+
+    public static final String CAMPAIGNS_DEFAULT_PREFERENCE = "displayCampaignsCardView";
+    public static final String WLM_CARD_PREFERENCE = "displayWLMCardView";
+
+    private String campaignPreference = CAMPAIGNS_DEFAULT_PREFERENCE;
 
     public CampaignView(@NonNull Context context) {
         super(context);
@@ -45,37 +52,46 @@ public class CampaignView extends SwipableCardView {
         init();
     }
 
-    public void setCampaign(Campaign campaign) {
+    public void setCampaign(final Campaign campaign) {
         this.campaign = campaign;
         if (campaign != null) {
-            this.setVisibility(View.VISIBLE);
+            if (campaign.isWLMCampaign()) {
+                campaignPreference = WLM_CARD_PREFERENCE;
+            }
+            setVisibility(View.VISIBLE);
             viewHolder.init();
         } else {
             this.setVisibility(View.GONE);
         }
     }
 
-    @Override public boolean onSwipe(View view) {
+    @Override public boolean onSwipe(final View view) {
         view.setVisibility(View.GONE);
-        ((MainActivity) getContext()).defaultKvStore
-                .putBoolean("displayCampaignsCardView", false);
+        ((BaseActivity) getContext()).defaultKvStore
+            .putBoolean(campaignPreference, false);
         ViewUtil.showLongToast(getContext(),
             getResources().getString(R.string.nearby_campaign_dismiss_message));
         return true;
     }
 
     private void init() {
-        View rootView = inflate(getContext(), R.layout.layout_campagin, this);
+        final View rootView = inflate(getContext(), R.layout.layout_campagin, this);
         viewHolder = new ViewHolder(rootView);
         setOnClickListener(view -> {
             if (campaign != null) {
-                Utils.handleWebUrl(getContext(), Uri.parse(campaign.getLink()));
+                if (campaign.isWLMCampaign()) {
+                    ((MainActivity)(getContext())).showNearby();
+                } else {
+                    Utils.handleWebUrl(getContext(), Uri.parse(campaign.getLink()));
+                }
             }
         });
     }
 
     public class ViewHolder {
 
+        @BindView(R.id.iv_campaign)
+        ImageView ivCampaign;
         @BindView(R.id.tv_title) TextView tvTitle;
         @BindView(R.id.tv_description) TextView tvDescription;
         @BindView(R.id.tv_dates) TextView tvDates;
@@ -86,14 +102,25 @@ public class CampaignView extends SwipableCardView {
 
         public void init() {
             if (campaign != null) {
+                ivCampaign.setImageDrawable(
+                    getResources().getDrawable(R.drawable.ic_campaign));
+
                 tvTitle.setText(campaign.getTitle());
                 tvDescription.setText(campaign.getDescription());
                 try {
-                    Date startDate = CommonsDateUtil.getIso8601DateFormatShort().parse(campaign.getStartDate());
-                    Date endDate = CommonsDateUtil.getIso8601DateFormatShort().parse(campaign.getEndDate());
-                    tvDates.setText(String.format("%1s - %2s", DateUtil.getExtraShortDateString(startDate),
+                    if (campaign.isWLMCampaign()) {
+                        tvDates.setText(
+                            String.format("%1s - %2s", campaign.getStartDate(),
+                                campaign.getEndDate()));
+                    } else {
+                        final Date startDate = CommonsDateUtil.getIso8601DateFormatShort()
+                            .parse(campaign.getStartDate());
+                        final Date endDate = CommonsDateUtil.getIso8601DateFormatShort()
+                            .parse(campaign.getEndDate());
+                        tvDates.setText(String.format("%1s - %2s", DateUtil.getExtraShortDateString(startDate),
                             DateUtil.getExtraShortDateString(endDate)));
-                } catch (ParseException e) {
+                    }
+                } catch (final ParseException e) {
                     e.printStackTrace();
                 }
             }

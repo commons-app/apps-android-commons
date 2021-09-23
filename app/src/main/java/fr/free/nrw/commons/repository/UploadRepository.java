@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.repository;
 
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -26,6 +27,7 @@ import java.util.Locale;
 import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import timber.log.Timber;
 
 /**
  * The repository class for UploadActivity
@@ -280,19 +282,26 @@ public class UploadRepository {
      * @param decLongitude
      * @return
      */
-    public Place checkNearbyPlaces(double decLatitude, double decLongitude) {
+    @Nullable
+    public Place checkNearbyPlaces(final double decLatitude, final double decLongitude) {
         try {
-            List<Place> fromWikidataQuery = nearbyPlaces.getFromWikidataQuery(new LatLng(
+            final List<Place> fromWikidataQuery = nearbyPlaces.getFromWikidataQuery(new LatLng(
                     decLatitude, decLongitude, 0.0f),
                     Locale.getDefault().getLanguage(),
-                    NEARBY_RADIUS_IN_KILO_METERS);
-            return fromWikidataQuery.size() > 0 ? fromWikidataQuery.get(0) : null;
-        } catch (IOException e) {
+                    NEARBY_RADIUS_IN_KILO_METERS, false);
+            return (fromWikidataQuery != null && fromWikidataQuery.size() > 0) ? fromWikidataQuery
+                .get(0) : null;
+        }catch (final Exception e) {
+            Timber.e("Error fetching nearby places: %s", e.getMessage());
             return null;
         }
     }
 
     public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
         uploadModel.useSimilarPictureCoordinates(imageCoordinates, uploadItemIndex);
+    }
+
+    public boolean isWMLSupportedForThisPlace() {
+        return uploadModel.getItems().get(0).isWLMUpload();
     }
 }
