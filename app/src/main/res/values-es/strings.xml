@@ -8,6 +8,7 @@
 * Carlosmg.dg
 * Ciencia Al Poder
 * DannyS712
+* Destinid10 2
 * Fewasser Traduce
 * Fitoschido
 * Gastonsaenz
@@ -578,22 +579,22 @@
   <string name="leaderboard_column_count">Recuento</string>
   <string name="setting_avatar_dialog_title">Establecer como avatar marcador</string>
   <string name="setting_avatar_dialog_message">Estableciendo como avatar, espera por favor</string>
-  <string name="avatar_set_successfully">avatar establecido</string>
+  <string name="avatar_set_successfully">Avatar establecido</string>
   <string name="avatar_set_unsuccessfully">Hubo un error estableciendo el nuevo avatar, por favor intenta de nuevo</string>
   <string name="menu_set_avatar">Establecer como avatar</string>
   <string name="leaderboard_yearly">Por año</string>
   <string name="leaderboard_weekly">Por semana</string>
   <string name="leaderboard_all_time">Todo el tiempo</string>
   <string name="leaderboard_upload">Subir</string>
-  <string name="leaderboard_nearby">próximo</string>
+  <string name="leaderboard_nearby">Próximo</string>
   <string name="leaderboard_used">Utilizado</string>
-  <string name="leaderboard_my_rank_button_text">Mi posicionamiento</string>
+  <string name="leaderboard_my_rank_button_text">Mi Posicionamiento</string>
   <string name="limited_connection_enabled">Se activó el modo de conexión limitada.</string>
   <string name="limited_connection_disabled">Se desactivó el modo de conexión limitada. Las cargas pendientes se reanudarán ahora.</string>
   <string name="limited_connection_mode">Modo de conexión limitada</string>
   <string name="statistics_quality">Imágenes de calidad</string>
-  <string name="resuming_upload">Reanudando carga</string>
-  <string name="pausing_upload">Pausando carga</string>
+  <string name="resuming_upload">Reanudando carga...</string>
+  <string name="pausing_upload">Pausando carga...</string>
   <string name="limited_connection_explanation">Has habilitado el modo de conexión limitada. Todas las cargas están pausadas y se reanudarán cuando deshabilites este modo.</string>
   <string name="limited_connection_is_on">El modo de conexión limitada está encendido.</string>
   <string name="media_details_tooltip">Por favor escribe un pie de foto corto que diga qué muesta tu imagen. En la descripción, indica qué hace interesante o típica o rara a la imagen, y explica el contexto, visible o no. Emplea terminología exacta tanto como sea posible.</string>
@@ -611,17 +612,17 @@
   <string name="location_picker_image_view_shadow">La sombra de la vista de imagen de la ubicación picker</string>
   <string name="image_location">Posición de imagen</string>
   <string name="check_whether_location_is_correct">Compruebe si la ubicación es correcta</string>
-  <string name="custom_selector_title">selector personalizado</string>
-  <string name="custom_selector_empty_text">sin imagen</string>
-  <string name="done">hecho</string>
+  <string name="custom_selector_title">Selector Personalizado</string>
+  <string name="custom_selector_empty_text">Sin Imágenes</string>
+  <string name="done">Hecho</string>
   <string name="back">Atrás</string>
-  <string name="welcome_custom_picture_selector_text">Bienvenido al selector de imagen personalizado</string>
+  <string name="welcome_custom_picture_selector_text">Bienvenido al Selector de Imagen Personalizado</string>
   <string name="custom_selector_info_text2">A diferencia de la imagen de la izquierda, la imagen de la derecha tiene el logo de Commons que indica que ha sido cargado. \nPara previsualizar la imagen toca y mantén</string>
   <string name="welcome_custom_selector_ok">Magnífico</string>
-  <string name="custom_selector_already_uploaded_image_text">Esta imagen ya se ha subido a Commons</string>
+  <string name="custom_selector_already_uploaded_image_text">Esta imagen ya se ha subido a Commons.</string>
   <string name="wlm_upload_info">Esta imagen será introducida al concurso Wiki Loves Monuments 2021</string>
   <string name="display_monuments">Mostrar monumentos</string>
-  <string name="wlm_month_message">¡Es el mes de Wiki loves monuments!</string>
-  <string name="learn_more">Aprende más</string>
+  <string name="wlm_month_message">¡Es el mes de Wiki Loves Monuments!</string>
+  <string name="learn_more">APRENDE MÁS</string>
   <string name="wlm_campaign_description">Wiki loves monuments es un consurso internacional de fotografías de monumentos organizado por Wikimedia</string>
 </resources>
