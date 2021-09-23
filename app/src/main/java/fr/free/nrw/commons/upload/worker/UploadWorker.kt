@@ -3,12 +3,12 @@ package fr.free.nrw.commons.upload.worker
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.BitmapFactory
+import android.location.Geocoder
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.CoroutineWorker
 import androidx.work.Data
 import androidx.work.WorkerParameters
-import com.google.gson.Gson
 import com.mapbox.mapboxsdk.plugins.localization.BuildConfig
 import dagger.android.ContributesAndroidInjector
 import fr.free.nrw.commons.CommonsApplication
@@ -18,18 +18,26 @@ import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
+import fr.free.nrw.commons.customselector.database.UploadedStatus
+import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.di.ApplicationlessInjection
+import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.upload.StashUploadResult
+import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.upload.StashUploadState
 import fr.free.nrw.commons.upload.UploadClient
 import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.wikidata.WikidataEditService
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.io.IOException
 import java.util.*
 import java.util.regex.Pattern
 import javax.inject.Inject
@@ -50,10 +58,16 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     lateinit var contributionDao: ContributionDao
 
     @Inject
+    lateinit var uploadedStatusDao: UploadedStatusDao
+
+    @Inject
     lateinit var uploadClient: UploadClient
 
     @Inject
     lateinit var mediaClient: MediaClient
+
+    @Inject
+    lateinit var fileUtilsWrapper: FileUtilsWrapper
 
     private val PROCESSING_UPLOADS_NOTIFICATION_TAG = BuildConfig.APPLICATION_ID + " : upload_tag"
 
@@ -263,7 +277,9 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             //Upload the file to stash
             val stashUploadResult = uploadClient.uploadFileToStash(
                 appContext, filename, contribution, notificationProgressUpdater
-            ).blockingSingle()
+            ).onErrorReturn{
+                return@onErrorReturn StashUploadResult(StashUploadState.FAILED,fileKey = null)
+            }.blockingSingle()
 
             when (stashUploadResult.state) {
                 StashUploadState.SUCCESS -> {
@@ -272,14 +288,15 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     Timber.d("Ensure uniqueness of filename");
                     val uniqueFileName = findUniqueFileName(filename!!)
 
-
                     try {
                         //Upload the file from stash
                         val uploadResult = uploadClient.uploadFileFromStash(
                             contribution, uniqueFileName, stashUploadResult.fileKey
-                        ).blockingSingle()
+                        ).onErrorReturn {
+                            return@onErrorReturn null
+                        }.blockingSingle()
 
-                        if (uploadResult.isSuccessful()) {
+                        if (null != uploadResult && uploadResult.isSuccessful()) {
                             Timber.d(
                                 "Stash Upload success..proceeding to make wikidata edit"
                             )
@@ -291,13 +308,13 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                                     "WikiDataEdit not required, upload success"
                                 )
                                 saveCompletedContribution(contribution,uploadResult)
-                                showSuccessNotification(contribution)
                             }else{
                                 Timber.d(
                                     "WikiDataEdit not required, making wikidata edit"
                                 )
                                 makeWikiDataEdit(uploadResult, contribution)
                             }
+                            showSuccessNotification(contribution)
 
                         } else {
                             Timber.e("Stash Upload failed")
@@ -312,6 +329,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                         Timber.e("Upload from stash failed for contribution : $filename")
                         showFailedNotification(contribution, "")
                         contribution.state=Contribution.STATE_FAILED
+                        contributionDao.saveSynchronous(contribution)
                         if (STASH_ERROR_CODES.contains(exception.message)) {
                             clearChunks(contribution)
                         }
@@ -387,6 +405,29 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             .blockingGet()
         contributionFromUpload.dateModified=Date()
         contributionDao.deleteAndSaveContribution(contribution, contributionFromUpload)
+
+        // Upload success, save to uploaded status.
+        saveIntoUploadedStatus(contribution)
+    }
+
+    /**
+     * Save to uploadedStatusDao.
+     */
+    private fun saveIntoUploadedStatus(contribution: Contribution) {
+        contribution.contentUri?.let {
+            val imageSha1 = fileUtilsWrapper.getSHA1(appContext.contentResolver.openInputStream(it))
+            val modifiedSha1 = fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(contribution.localUri?.path))
+            MainScope().launch {
+                uploadedStatusDao.insertUploaded(
+                    UploadedStatus(
+                        imageSha1,
+                        modifiedSha1,
+                        imageSha1 == modifiedSha1,
+                        true
+                    )
+                );
+            }
+        }
     }
 
     private fun findUniqueFileName(fileName: String): String {

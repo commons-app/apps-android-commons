@@ -77,7 +77,7 @@ class FileProcessor @Inject constructor(
      *
      * @return tags to be redacted
      */
-    private fun getExifTagsToRedact(): Set<String> {
+    fun getExifTagsToRedact(): Set<String> {
         val prefManageEXIFTags =
             defaultKvStore.getStringSet(Prefs.MANAGED_EXIF_TAGS) ?: emptySet()
         val redactTags: Set<String> =
@@ -91,7 +91,7 @@ class FileProcessor @Inject constructor(
      * @param exifInterface ExifInterface object
      * @param redactTags    tags to be redacted
      */
-    private fun redactExifTags(exifInterface: ExifInterface?, redactTags: Set<String>) {
+    fun redactExifTags(exifInterface: ExifInterface?, redactTags: Set<String>) {
         compositeDisposable.add(
             Observable.fromIterable(redactTags)
                 .flatMap { Observable.fromArray(*FileMetadataUtils.getTagsFromPref(it)) }
@@ -199,11 +199,14 @@ class FileProcessor @Inject constructor(
     private fun suggestNearbyDepictions(imageCoordinates: ImageCoordinates): Disposable {
         return Observable.fromIterable(radiiProgressionInMetres.map { it / 1000.0 })
             .concatMap {
-                okHttpJsonApiClient.getNearbyPlaces(
-                    imageCoordinates.latLng,
-                    Locale.getDefault().language,
-                    it
-                )
+                Observable.fromCallable {
+                    okHttpJsonApiClient.getNearbyPlaces(
+                        imageCoordinates.latLng,
+                        Locale.getDefault().language,
+                        it,
+                        false
+                    )
+                }
             }
             .subscribeOn(Schedulers.io())
             .filter { it.size >= MIN_NEARBY_RESULTS }

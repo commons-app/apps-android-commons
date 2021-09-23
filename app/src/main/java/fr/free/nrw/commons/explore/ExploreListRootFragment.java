@@ -40,7 +40,7 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
         featuredArguments.putString("categoryName", title);
         listFragment.setArguments(featuredArguments);
     }
-
+  
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater,

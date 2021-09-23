@@ -15,6 +15,8 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import fr.free.nrw.commons.customselector.model.Image;
+import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -49,6 +51,17 @@ public class FilePicker implements Constants {
         storeType(context, type);
         return plainGalleryPickerIntent()
                 .putExtra(Intent.EXTRA_ALLOW_MULTIPLE, configuration(context).allowsMultiplePickingInGallery());
+    }
+
+    /**
+     * CreateCustomSectorIntent, creates intent for custom selector activity.
+     * @param context
+     * @param type
+     * @return Custom selector intent
+     */
+    private static Intent createCustomSelectorIntent(@NonNull Context context, int type) {
+        storeType(context, type);
+        return new Intent(context, CustomSelectorActivity.class);
     }
 
     private static Intent createCameraForImageIntent(@NonNull Context context, int type) {
@@ -98,6 +111,14 @@ public class FilePicker implements Constants {
     }
 
     /**
+     * Opens Custom Selector
+     */
+    public static void openCustomSelector(Activity activity, int type) {
+        Intent intent = createCustomSelectorIntent(activity, type);
+        activity.startActivityForResult(intent, RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR);
+    }
+
+    /**
      * Opens the camera app to pick image clicked by user 
      */
     public static void openCameraForImage(Activity activity, int type) {
@@ -135,12 +156,15 @@ public class FilePicker implements Constants {
             if (requestCode == RequestCodes.PICK_PICTURE_FROM_GALLERY ||
                     requestCode == RequestCodes.TAKE_PICTURE ||
                     requestCode == RequestCodes.CAPTURE_VIDEO ||
-                    requestCode == RequestCodes.PICK_PICTURE_FROM_DOCUMENTS) {
+                    requestCode == RequestCodes.PICK_PICTURE_FROM_DOCUMENTS ||
+                    requestCode == RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR) {
                 if (resultCode == Activity.RESULT_OK) {
                     if (requestCode == RequestCodes.PICK_PICTURE_FROM_DOCUMENTS && !isPhoto(data)) {
                         onPictureReturnedFromDocuments(data, activity, callbacks);
                     } else if (requestCode == RequestCodes.PICK_PICTURE_FROM_GALLERY && !isPhoto(data)) {
                         onPictureReturnedFromGallery(data, activity, callbacks);
+                    } else if (requestCode == RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR) {
+                        onPictureReturnedFromCustomSelector(data, activity, callbacks);
                     } else if (requestCode == RequestCodes.TAKE_PICTURE) {
                         onPictureReturnedFromCamera(activity, callbacks);
                     } else if (requestCode == RequestCodes.CAPTURE_VIDEO) {
@@ -195,6 +219,40 @@ public class FilePicker implements Constants {
             e.printStackTrace();
             callbacks.onImagePickerError(e, FilePicker.ImageSource.DOCUMENTS, restoreType(activity));
         }
+    }
+
+    /**
+     * onPictureReturnedFromCustomSelector.
+     * Retrieve and forward the images to upload wizard through callback.
+     */
+    private static void onPictureReturnedFromCustomSelector(Intent data, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
+        try {
+            List<UploadableFile> files = getFilesFromCustomSelector(data, activity);
+            callbacks.onImagesPicked(files, ImageSource.CUSTOM_SELECTOR, restoreType(activity));
+        } catch (Exception e) {
+            e.printStackTrace();
+            callbacks.onImagePickerError(e, ImageSource.CUSTOM_SELECTOR, restoreType(activity));
+        }
+    }
+
+    /**
+     * Get files from custom selector
+     * Retrieve and process the selected images from the custom selector.
+     */
+    private static List<UploadableFile> getFilesFromCustomSelector(Intent data, Activity activity) throws  IOException, SecurityException {
+        List<UploadableFile> files = new ArrayList<>();
+        ArrayList<Image> images = data.getParcelableArrayListExtra("Images");
+        for(Image image : images) {
+            Uri uri = image.getUri();
+            UploadableFile file = PickedFiles.pickedExistingPicture(activity, uri);
+            files.add(file);
+        }
+
+        if (configuration(activity).shouldCopyPickedImagesToPublicGalleryAppFolder()) {
+            PickedFiles.copyFilesInSeparateThread(activity, files);
+        }
+
+        return files;
     }
 
     private static void onPictureReturnedFromGallery(Intent data, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
@@ -301,7 +359,7 @@ public class FilePicker implements Constants {
 
 
     public enum ImageSource {
-        GALLERY, DOCUMENTS, CAMERA_IMAGE, CAMERA_VIDEO
+        GALLERY, DOCUMENTS, CAMERA_IMAGE, CAMERA_VIDEO, CUSTOM_SELECTOR
     }
 
     public interface Callbacks {
