@@ -110,7 +110,7 @@ class DepictedItemTest {
                         )
                     )
                 )
-            ).commonsCategories,
+            ).commonsCategories.map { it.name },
             listOf("1", "2"))
     }
 

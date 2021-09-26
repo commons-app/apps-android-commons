@@ -241,7 +241,7 @@ class CategoryDaoTest {
         val result = testObject.recentCategories(10)
 
         assertEquals(1, result.size)
-        assertEquals("showImageWithItem", result[0])
+        assertEquals("showImageWithItem", result[0].name)
 
         verify(client).query(
                 eq(BASE_URI),
