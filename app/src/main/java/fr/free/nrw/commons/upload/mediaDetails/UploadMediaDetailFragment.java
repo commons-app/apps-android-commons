@@ -145,19 +145,21 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         presenter.receiveImage(uploadableFile, place);
         initRecyclerView();
 
-        if (callback.getIndexInViewFlipper(this) == 0) {
-            btnPrevious.setEnabled(false);
-            btnPrevious.setAlpha(0.5f);
-        } else {
-            btnPrevious.setEnabled(true);
-            btnPrevious.setAlpha(1.0f);
-        }
+        if (callback != null) {
+            if (callback.getIndexInViewFlipper(this) == 0) {
+                btnPrevious.setEnabled(false);
+                btnPrevious.setAlpha(0.5f);
+            } else {
+                btnPrevious.setEnabled(true);
+                btnPrevious.setAlpha(1.0f);
+            }
 
-        //If this is the last media, we have nothing to copy, lets not show the button
-        if (callback.getIndexInViewFlipper(this) == callback.getTotalNumberOfSteps()-4) {
-            btnCopyToSubsequentMedia.setVisibility(View.GONE);
-        } else {
-            btnCopyToSubsequentMedia.setVisibility(View.VISIBLE);
+            //If this is the last media, we have nothing to copy, lets not show the button
+            if (callback.getIndexInViewFlipper(this) == callback.getTotalNumberOfSteps() - 4) {
+                btnCopyToSubsequentMedia.setVisibility(View.GONE);
+            } else {
+                btnCopyToSubsequentMedia.setVisibility(View.VISIBLE);
+            }
         }
 
         attachImageViewScaleChangeListener();
