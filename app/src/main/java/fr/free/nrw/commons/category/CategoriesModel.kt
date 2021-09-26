@@ -74,6 +74,7 @@ class CategoriesModel @Inject constructor(
         selectedDepictions: List<DepictedItem>
     ): Observable<List<CategoryItem>> {
         return suggestionsOrSearch(term, imageTitleList, selectedDepictions)
+            .map { it.map { CategoryItem(it.name, it.description, it.thumbnail, false) } }
     }
 
     private fun suggestionsOrSearch(
