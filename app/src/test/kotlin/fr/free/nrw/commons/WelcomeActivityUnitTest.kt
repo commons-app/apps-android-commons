@@ -3,8 +3,8 @@ package fr.free.nrw.commons
 import android.content.Intent
 import android.widget.TextView
 import fr.free.nrw.commons.quiz.QuizActivity
-import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertNotNull
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
