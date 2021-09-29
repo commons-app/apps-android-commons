@@ -204,6 +204,16 @@
                       android:textSize="@dimen/description_text_size"
                       android:textIsSelectable="true"
                       tools:text="Description of the media goes here. This can potentially be fairly long, and will need to wrap across multiple lines. We hope it looks nice though." />
+
+                    <Button
+                      android:id="@+id/description_edit"
+                      android:layout_width="24dp"
+                      android:layout_height="24dp"
+                      android:layout_marginTop="@dimen/standard_gap"
+                      android:layout_marginBottom="@dimen/standard_gap"
+                      android:layout_gravity="end"
+                      android:background="@drawable/ic_baseline_edit_24" />
+
                 </LinearLayout>
 
                 <TextView

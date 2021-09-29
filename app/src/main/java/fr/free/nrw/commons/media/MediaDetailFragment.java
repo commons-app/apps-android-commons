@@ -794,6 +794,22 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         goToLocationPickerActivity();
     }
 
+    @OnClick(R.id.description_edit)
+    public void onUpdateDescriptionClicked(){
+        updateDescription();
+    }
+
+    private void updateDescription() {
+//        compositeDisposable.add(coordinateEditHelper.makeCoordinatesEdit(getContext(), media,
+//            Latitude, Longitude, Accuracy)
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe(s -> {
+//                Timber.d("Coordinates are added.");
+//                coordinates.setText(prettyCoordinates(media));
+//            }));
+    }
+
     /**
      * Start location picker activity with a request code and get the coordinates from the activity.
      */
