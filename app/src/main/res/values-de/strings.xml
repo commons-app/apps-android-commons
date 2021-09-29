@@ -628,7 +628,7 @@
   <string name="custom_selector_info_text2">Im Gegensatz zum Bild auf der linken Seite ist das Bild auf der rechten Seite mit dem Commons-Logo versehen, das anzeigt, dass es bereits hochgeladen wurde. Für die Bildvorschau berühren und halten.</string>
   <string name="welcome_custom_selector_ok">Großartig</string>
   <string name="custom_selector_already_uploaded_image_text">Dieses Bild ist bereits auf Commons hochgeladen worden.</string>
-  <string name="wlm_upload_info">Du beiligst dich an der Wiki Loves Monuments-Kampagne. Zugehörige Vorlagen werden entsprechend hinzugefügt.</string>
+  <string name="wlm_upload_info">Dieses Bild wird am Wettbewerb Wiki Loves Monuments 2021 teilnehmen</string>
   <string name="display_monuments">Denkmäler anzeigen</string>
   <string name="wlm_month_message">Es ist der Wiki Loves Monuments Monat!</string>
   <string name="learn_more">MEHR ERFAHREN</string>

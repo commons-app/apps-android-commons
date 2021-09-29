@@ -246,7 +246,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     /**
      * WLM URL
      */
-    public static final String WLM_URL = "https://www.wikilovesmonuments.org/";
+    public static final String WLM_URL = "https://commons.wikimedia.org/wiki/Commons:Mobile_app/Contributing_to_WLM_using_the_app";
     /**
      * Saves response of list of places for the first time
      */
@@ -289,7 +289,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         isDarkTheme = systemThemeUtils.isDeviceInNightMode();
-        if (Utils.isMonumentsEnabled(new Date(), applicationKvStore)) {
+        if (Utils.isMonumentsEnabled(new Date())) {
             rlContainerWLMMonthMessage.setVisibility(View.VISIBLE);
         } else {
             rlContainerWLMMonthMessage.setVisibility(View.GONE);
@@ -518,7 +518,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         setBottomSheetCallbacks();
         decideButtonVisibilities();
         addActionToTitle();
-        if(!Utils.isMonumentsEnabled(new Date(), applicationKvStore)){
+        if (!Utils.isMonumentsEnabled(new Date())) {
             chipWlm.setVisibility(View.GONE);
         }
     }
@@ -947,29 +947,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         final Observable<NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curlatLng, searchLatLng, false, true));
+                .loadAttractionsFromLocation(curlatLng, searchLatLng,
+                    false, true, Utils.isMonumentsEnabled(new Date())));
 
-        Observable<List<Place>> observableWikidataMonuments = Observable.empty();
-        if(Utils.isMonumentsEnabled(new Date(), applicationKvStore)){
-                observableWikidataMonuments =
-                    nearbyController
-                        .queryWikiDataForMonuments(searchLatLng, Locale.getDefault().getLanguage());
-
-        }
-
-        compositeDisposable.add(Observable.zip(nearbyPlacesInfoObservable
-            , observableWikidataMonuments.onErrorReturn(throwable -> {
-                showErrorMessage(getString(R.string.error_fetching_nearby_monuments) + throwable
-                    .getLocalizedMessage());
-                return new ArrayList<>();
-            }),
-            (nearbyPlacesInfo, monuments) -> {
-                final List<Place> places = mergeNearbyPlacesAndMonuments(nearbyPlacesInfo.placeList,
-                    monuments);
-                nearbyPlacesInfo.placeList.clear();
-                nearbyPlacesInfo.placeList.addAll(places);
-                return nearbyPlacesInfo;
-            }).subscribeOn(Schedulers.io())
+        compositeDisposable.add(nearbyPlacesInfoObservable
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(nearbyPlacesInfo -> {
                     updateMapMarkers(nearbyPlacesInfo, true);
@@ -989,28 +971,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         final Observable<NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curlatLng, searchLatLng, false, false));
+                .loadAttractionsFromLocation(curlatLng, searchLatLng,
+                    false, true, Utils.isMonumentsEnabled(new Date())));
 
-        Observable<List<Place>> observableWikidataMonuments = Observable.empty();
-        if (Utils.isMonumentsEnabled(new Date(), applicationKvStore)) {
-            observableWikidataMonuments = nearbyController
-                .queryWikiDataForMonuments(searchLatLng, Locale.getDefault().getLanguage());
-
-        }
-
-        compositeDisposable.add(Observable.zip(nearbyPlacesInfoObservable
-            , observableWikidataMonuments.onErrorReturn(throwable -> {
-                showErrorMessage(getString(R.string.error_fetching_nearby_monuments) + throwable
-                    .getLocalizedMessage());
-                return new ArrayList<>();
-            }),
-            (nearbyPlacesInfo, monuments) -> {
-                final List<Place> places = mergeNearbyPlacesAndMonuments(nearbyPlacesInfo.placeList,
-                    monuments);
-                nearbyPlacesInfo.placeList.clear();
-                nearbyPlacesInfo.placeList.addAll(places);
-                return nearbyPlacesInfo;
-            }).subscribeOn(Schedulers.io())
+        compositeDisposable.add(nearbyPlacesInfoObservable
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(nearbyPlacesInfo -> {
                     updateMapMarkers(nearbyPlacesInfo, false);
@@ -1023,25 +988,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     presenter.lockUnlockNearby(false);
                     setFilterState();
                 }));
-    }
-
-    /**
-     * If a nearby place happens to be a monument as well, don't make the Pin's overlap, instead
-     * show it as a monument
-     *
-     * @param nearbyPlaces
-     * @param monuments
-     * @return
-     */
-    private List<Place> mergeNearbyPlacesAndMonuments(List<Place> nearbyPlaces, List<Place> monuments){
-        List<Place> allPlaces= new ArrayList<>();
-        allPlaces.addAll(monuments);
-        for (Place place : nearbyPlaces){
-            if(!allPlaces.contains(place)){
-                allPlaces.add(place);
-            }
-        }
-        return allPlaces;
     }
 
     /**
@@ -1312,8 +1258,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         .position(new LatLng(curLatLng.getLatitude(),
                                 curLatLng.getLongitude()));
                 currentLocationMarkerOptions.setIcon(icon); // Set custom icon
-                mapView.post(() -> currentLocationMarker = mapBox.addMarker(currentLocationMarkerOptions));
-
+                mapView.post(
+                    () -> currentLocationMarker = mapBox.addMarker(currentLocationMarkerOptions));
 
                 final List<LatLng> circle = UiUtils
                         .createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
@@ -1323,8 +1269,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         .addAll(circle)
                         .strokeColor(getResources().getColor(R.color.current_marker_stroke))
                         .fillColor(getResources().getColor(R.color.current_marker_fill));
-                mapView.post(() -> currentLocationPolygon = mapBox.addPolygon(currentLocationPolygonOptions));
-
+                mapView.post(
+                    () -> currentLocationPolygon = mapBox
+                        .addPolygon(currentLocationPolygonOptions));
             });
         } else {
             Timber.d("not adding current location marker..current location is null");

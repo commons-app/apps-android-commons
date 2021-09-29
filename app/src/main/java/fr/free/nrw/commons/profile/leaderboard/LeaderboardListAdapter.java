@@ -20,7 +20,7 @@ import fr.free.nrw.commons.Utils;
  */
 public class LeaderboardListAdapter extends PagedListAdapter<LeaderboardList, LeaderboardListAdapter.ListViewHolder> {
 
-    protected LeaderboardListAdapter() {
+    public LeaderboardListAdapter() {
         super(LeaderboardList.DIFF_CALLBACK);
     }
 

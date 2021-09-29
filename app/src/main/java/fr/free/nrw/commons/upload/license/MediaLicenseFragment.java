@@ -90,16 +90,11 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
         initPresenter();
         initLicenseSpinner();
         presenter.getLicenses();
+    }
 
-        /**
-         * Show the wlm info message if the upload is a WLM upload
-         */
-        if(callback.isWLMUpload()){
-            //TODO : Update the info message logo
-            llInfoMonumentUpload.setVisibility(View.VISIBLE);
-        }else{
-            llInfoMonumentUpload.setVisibility(View.GONE);
-        }
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     /**
@@ -229,4 +224,16 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
         callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
     }
 
+    @Override
+    protected void onBecameVisible() {
+        super.onBecameVisible();
+        /**
+         * Show the wlm info message if the upload is a WLM upload
+         */
+        if(callback.isWLMUpload() && presenter.isWLMSupportedForThisPlace()){
+            llInfoMonumentUpload.setVisibility(View.VISIBLE);
+        }else{
+            llInfoMonumentUpload.setVisibility(View.GONE);
+        }
+    }
 }
