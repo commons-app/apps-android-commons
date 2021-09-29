@@ -678,15 +678,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     /**
      * Updates Nearby place list according to available chip states
      *
-     * @param NeedsPhoto is chipNeedsPhoto checked
-     * @param isExists is chipExists checked
+     * @param needsPhoto is chipNeedsPhoto checked
+     * @param exists is chipExists checked
      * @param isWlm is chipWlm checked
      */
-    private void updatePlaceList(final boolean NeedsPhoto, final boolean isExists,
+    private void updatePlaceList(final boolean needsPhoto, final boolean exists,
         final boolean isWlm) {
         final List<Place> updatedPlaces = new ArrayList<>();
 
-        if (NeedsPhoto) {
+        if (needsPhoto) {
             for (final Place place :
                 places) {
                 if (place.pic.trim().isEmpty() && !updatedPlaces.contains(place)) {
@@ -697,7 +697,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             updatedPlaces.addAll(places);
         }
 
-        if (isExists) {
+        if (exists) {
             for(final Iterator<Place> placeIterator = updatedPlaces.iterator();
                 placeIterator.hasNext();){
                 final Place place = placeIterator.next();
