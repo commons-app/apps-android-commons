@@ -530,9 +530,14 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         )
     }
 
-    private fun getPendingIntent(classType:Class<out BaseActivity> ,params:ArrayList<String>? = null):PendingIntent
+    /**
+     * Method used to get Pending intent for opening different screen after clicking on notification
+     * @param toClass
+     * @param params
+     */
+    private fun getPendingIntent(toClass:Class<out BaseActivity> ,params:ArrayList<String>? = null):PendingIntent
     {
-        val intent=Intent(appContext,classType)
+        val intent=Intent(appContext,toClass)
         params.let {
             intent.putStringArrayListExtra("params",params)
         }
