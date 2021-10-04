@@ -80,11 +80,11 @@ public class RecentSearchesDao {
                     Timber.e(e, "query deleted");
                     throw new RuntimeException(e);
                 } finally {
-                    db.release();
+                    db.close();
                 }
             }
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            Timber.e(e, "Error while clearing history");
         } finally {
             if (cursor != null) {
                 cursor.close();
