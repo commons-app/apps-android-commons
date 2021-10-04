@@ -274,37 +274,26 @@ public class BookmarkLocationsDao {
                 onUpdate(db, from, to);
                 return;
             }
-            if (from == 10) {
-                //This is safe, and can be called clean, as we/I do not remember the appropriate version for this
-                //We are anyways switching to room, these things won't be necessary then
-                try {
-                    db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_pic STRING;");
-                }catch (SQLiteException exception){
-                    Timber.e(exception);//
-                }
-                return;
+
+            //We've been seeing many cases where one of these seem to have missed to added and its
+            // hard to find the exact version knowing which version the user is going to upgrade from,
+            //before until this version (18), we want to make sure that these column do exist
+            if (from <= 17) {
+                addColumn(db, "location_pic", "STRING");
+                addColumn(db, "location_destroyed", "STRING");
+                addColumn(db, "location_language", "STRING");
+                addColumn(db, "location_exists", "STRING");
             }
-            if (from >= 12) {
-                try {
-                    db.execSQL(
-                        "ALTER TABLE bookmarksLocations ADD COLUMN location_destroyed STRING;");
-                } catch (SQLiteException exception) {
-                    Timber.e(exception);
-                }
-            }
-            if (from >= 13){
-                try {
-                    db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_language STRING;");
-                } catch (SQLiteException exception){
-                    Timber.e(exception);
-                }
-            }
-            if (from >= 14){
-                try {
-                    db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_exists STRING;");
-                } catch (SQLiteException exception){
-                    Timber.e(exception);
-                }
+        }
+
+        private static void addColumn(final SQLiteDatabase db, final String columnName,
+            final String type){
+            try {
+                db.execSQL(
+                    String.format("ALTER TABLE bookmarksLocations ADD COLUMN %s %s;", columnName,
+                        type));
+            } catch (final SQLiteException exception) {
+                Timber.e(exception);
             }
         }
     }
