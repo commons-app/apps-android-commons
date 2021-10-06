@@ -178,8 +178,8 @@ public class ContributionsFragment
      */
     private void initWLMCampaign() {
         wlmCampaign = new Campaign(getString(R.string.wlm_campaign_title),
-            getString(R.string.wlm_campaign_description), Utils.getWLMStartDate().toString(),
-            Utils.getWLMEndDate().toString(), WLM_URL, true);
+            getString(R.string.wlm_campaign_description), Utils.wLMStartDate,
+            Utils.wLMEndDate, WLM_URL, true);
     }
 
     @Override

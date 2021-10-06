@@ -13,7 +13,6 @@ import com.google.gson.Gson;
 import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionDao;
@@ -23,7 +22,7 @@ import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
-import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.settings.Licenses;
 import fr.free.nrw.commons.upload.UploadController;
 import fr.free.nrw.commons.upload.depicts.DepictsDao;
 import fr.free.nrw.commons.utils.ConfigUtils;
@@ -32,8 +31,6 @@ import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -90,26 +87,14 @@ public class CommonsApplicationModule {
 
     @Provides
     @Named("licenses")
-    public List<String> provideLicenses(Context context) {
-        List<String> licenseItems = new ArrayList<>();
-        licenseItems.add(context.getString(R.string.license_name_cc0));
-        licenseItems.add(context.getString(R.string.license_name_cc_by));
-        licenseItems.add(context.getString(R.string.license_name_cc_by_sa));
-        licenseItems.add(context.getString(R.string.license_name_cc_by_four));
-        licenseItems.add(context.getString(R.string.license_name_cc_by_sa_four));
-        return licenseItems;
+    public List<String> provideLicenses(final Context context) {
+        return Licenses.Companion.names(context);
     }
 
     @Provides
     @Named("licenses_by_name")
     public Map<String, String> provideLicensesByName(Context context) {
-        Map<String, String> byName = new HashMap<>();
-        byName.put(context.getString(R.string.license_name_cc0), Prefs.Licenses.CC0);
-        byName.put(context.getString(R.string.license_name_cc_by), Prefs.Licenses.CC_BY_3);
-        byName.put(context.getString(R.string.license_name_cc_by_sa), Prefs.Licenses.CC_BY_SA_3);
-        byName.put(context.getString(R.string.license_name_cc_by_four), Prefs.Licenses.CC_BY_4);
-        byName.put(context.getString(R.string.license_name_cc_by_sa_four), Prefs.Licenses.CC_BY_SA_4);
-        return byName;
+        return Licenses.Companion.mapByName(context);
     }
 
     @Provides

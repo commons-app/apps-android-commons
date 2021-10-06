@@ -2,32 +2,21 @@ package fr.free.nrw.commons.upload;
 
 import android.accounts.Account;
 import android.annotation.SuppressLint;
-import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.IBinder;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.settings.Licenses.CC_BY_SA_3;
 import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.upload.worker.UploadWorker;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -84,7 +73,7 @@ public class UploadController {
             media.setFallbackDescription("");
         }
 
-        final String license = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
+        final String license = store.getString(Prefs.DEFAULT_LICENSE, CC_BY_SA_3.INSTANCE.getId());
         media.setLicense(license);
 
         buildUpload(contribution);

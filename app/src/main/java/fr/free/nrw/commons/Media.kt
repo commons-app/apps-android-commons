@@ -111,7 +111,7 @@ class Media constructor(
      * Gets file page title
      * @return New media page title
      */
-    val pageTitle: PageTitle get() = Utils.getPageTitle(filename!!)
+    val pageTitle: PageTitle get() = getPageTitle(filename!!)
 
     /**
      * Returns wikicode to use the media file on a MediaWiki site

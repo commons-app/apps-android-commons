@@ -8,9 +8,10 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.handleGeoCoordinates
+import fr.free.nrw.commons.handleWebUrl
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ActivityUtils
@@ -64,7 +65,7 @@ class CommonPlaceClickActions @Inject constructor(
     }
 
     fun onDirectionsClicked(): (Place) -> Unit = {
-        Utils.handleGeoCoordinates(activity, it.getLocation())
+        handleGeoCoordinates(activity, it.getLocation())
     }
 
     private fun storeSharedPrefs(selectedPlace: Place) {
@@ -73,7 +74,7 @@ class CommonPlaceClickActions @Inject constructor(
     }
 
     private fun openWebView(link: Uri): Boolean {
-        Utils.handleWebUrl(activity, link)
+        handleWebUrl(activity, link)
         return true;
     }
 

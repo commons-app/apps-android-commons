@@ -7,8 +7,8 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.settings.Licenses.CC_BY_SA_3;
 import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -51,7 +51,7 @@ public class UploadModel {
             final ImageProcessingService imageProcessingService) {
         this.licenses = licenses;
         this.store = store;
-        this.license = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
+        this.license = store.getString(Prefs.DEFAULT_LICENSE, CC_BY_SA_3.INSTANCE.getId());
         this.licensesByName = licensesByName;
         this.context = context;
         this.sessionManager = sessionManager;

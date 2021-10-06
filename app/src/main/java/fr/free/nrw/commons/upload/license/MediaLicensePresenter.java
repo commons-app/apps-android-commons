@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload.license;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.repository.UploadRepository;
+import fr.free.nrw.commons.settings.Licenses.CC_BY_SA_4;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.license.MediaLicenseContract.View;
 import java.lang.reflect.Proxy;
@@ -51,17 +52,17 @@ public class MediaLicensePresenter implements MediaLicenseContract.UserActionLis
         List<String> licenses = repository.getLicenses();
         view.setLicenses(licenses);
 
-        String selectedLicense = defaultKVStore.getString(Prefs.DEFAULT_LICENSE,
-                Prefs.Licenses.CC_BY_SA_4);//CC_BY_SA_4 is the default one used by the commons web app
+        //CC_BY_SA_4 is the default one used by the commons web app
+        final String defaultLicenseId = CC_BY_SA_4.INSTANCE.getId();
+        String selectedLicense = defaultKVStore.getString(Prefs.DEFAULT_LICENSE, defaultLicenseId);
         try {//I have to make sure that the stored default license was not one of the deprecated one's
             Utils.licenseNameFor(selectedLicense);
         } catch (IllegalStateException exception) {
             Timber.e(exception.getMessage());
-            selectedLicense = Prefs.Licenses.CC_BY_SA_4;
-            defaultKVStore.putString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_4);
+            selectedLicense = defaultLicenseId;
+            defaultKVStore.putString(Prefs.DEFAULT_LICENSE, defaultLicenseId);
         }
         view.setSelectedLicense(selectedLicense);
-
     }
 
     /**

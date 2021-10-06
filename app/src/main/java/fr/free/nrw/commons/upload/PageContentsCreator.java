@@ -1,11 +1,10 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
 import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile.DateTimeWithSource;
-import fr.free.nrw.commons.settings.Prefs.Licenses;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -68,7 +67,7 @@ class PageContentsCreator {
         }
 
         buffer.append("== {{int:license-header}} ==\n")
-            .append(licenseTemplateFor(media.getLicense())).append("\n\n")
+            .append(Utils.licenseTemplateFor(media.getLicense())).append("\n\n")
             .append("{{Uploaded from Mobile|platform=Android|version=")
             .append(ConfigUtils.getVersionNameWithSha(context)).append("}}\n");
         final List<String> categories = media.getCategories();
@@ -103,23 +102,5 @@ class PageContentsCreator {
 
     private boolean isExif(String dateCreatedSource) {
         return DateTimeWithSource.EXIF_SOURCE.equals(dateCreatedSource);
-    }
-
-    @NonNull
-    private String licenseTemplateFor(String license) {
-        switch (license) {
-            case Licenses.CC_BY_3:
-                return "{{self|cc-by-3.0}}";
-            case Licenses.CC_BY_4:
-                return "{{self|cc-by-4.0}}";
-            case Licenses.CC_BY_SA_3:
-                return "{{self|cc-by-sa-3.0}}";
-            case Licenses.CC_BY_SA_4:
-                return "{{self|cc-by-sa-4.0}}";
-            case Licenses.CC0:
-                return "{{self|cc-zero}}";
-        }
-
-        throw new RuntimeException("Unrecognized license value: " + license);
     }
 }
