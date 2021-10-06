@@ -144,7 +144,7 @@ public class UploadableFile implements Parcelable {
     /**
      * This class contains the epochDate along with the source from which it was extracted
      */
-    public class DateTimeWithSource {
+    public static class DateTimeWithSource {
         public static final String CP_SOURCE = "contentProvider";
         public static final String EXIF_SOURCE = "exif";
 

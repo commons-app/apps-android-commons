@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import android.content.Context;
 import android.net.Uri;
+import androidx.annotation.VisibleForTesting;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
@@ -12,7 +13,6 @@ import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.disposables.CompositeDisposable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -33,7 +33,6 @@ public class UploadModel {
     private String license;
     private final Map<String, String> licensesByName;
     private final List<UploadItem> items = new ArrayList<>();
-    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private final SessionManager sessionManager;
     private final FileProcessor fileProcessor;
@@ -63,14 +62,13 @@ public class UploadModel {
      * cleanup the resources, I am Singleton, preparing for fresh upload
      */
     public void cleanUp() {
-        compositeDisposable.clear();
         fileProcessor.cleanup();
         items.clear();
         selectedCategories.clear();
         selectedDepictions.clear();
     }
 
-    public void setSelectedCategories(List<String> selectedCategories) {
+    public void setSelectedCategories(final List<String> selectedCategories) {
         this.selectedCategories.clear();
         this.selectedCategories.addAll(selectedCategories);
     }
@@ -134,7 +132,7 @@ public class UploadModel {
     }
 
     public void setSelectedLicense(final String licenseName) {
-        this.license = licensesByName.get(licenseName);
+        license = licensesByName.get(licenseName);
         store.putString(Prefs.DEFAULT_LICENSE, license);
     }
 
@@ -153,16 +151,14 @@ public class UploadModel {
             if (item.getCreatedTimestamp() != -1L) {
                 contribution.setDateCreated(new Date(item.getCreatedTimestamp()));
                 contribution.setDateCreatedSource(item.getCreatedTimestampSource());
-                //Set the date only if you have it, else the upload service is gonna try it the other way
+                // Set the date only if you have it, else the upload
+                // service is gonna try it the other way
             }
 
             if (contribution.getWikidataPlace() != null) {
-                if (item.isWLMUpload()) {
-                    contribution.getWikidataPlace().setMonumentUpload(true);
-                } else {
-                    contribution.getWikidataPlace().setMonumentUpload(false);
-                }
+                contribution.getWikidataPlace().setMonumentUpload(item.isWLMUpload());
             }
+
             contribution.setCountryCode(item.getCountryCode());
             return contribution;
         });
@@ -185,7 +181,7 @@ public class UploadModel {
         return items;
     }
 
-    public void onDepictItemClicked(DepictedItem depictedItem) {
+    public void onDepictItemClicked(final DepictedItem depictedItem) {
         if (depictedItem.isSelected()) {
             selectedDepictions.add(depictedItem);
         } else {
@@ -207,4 +203,8 @@ public class UploadModel {
         return selectedDepictions;
     }
 
+    @VisibleForTesting
+    public List<String> getSelectedCategories() {
+        return selectedCategories;
+    }
 }
