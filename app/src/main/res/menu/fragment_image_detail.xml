@@ -29,5 +29,9 @@
       android:id="@+id/menu_set_as_avatar"
       android:title="@string/menu_set_avatar"
       app:showAsAction="never" />
+    <item
+      android:id="@+id/menu_view_user_page"
+      android:title="@string/view_user_page"
+      app:showAsAction="never" />
 
 </menu>

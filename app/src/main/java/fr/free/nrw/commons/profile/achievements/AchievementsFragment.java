@@ -3,10 +3,14 @@ package fr.free.nrw.commons.profile.achievements;
 import android.accounts.Account;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +19,24 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.FileProvider;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+
+import com.dinuscxj.progressbar.CircleProgressBar;
+import fr.free.nrw.commons.profile.ProfileActivity;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Objects;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -114,6 +133,9 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.wikidata_edits)
     TextView wikidataEditsText;
 
+    @BindView(R.id.tv_achievements_of_user)
+    AppCompatTextView tvAchievementsOfUser;
+
     @Inject
     SessionManager sessionManager;
 
@@ -127,6 +149,16 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
     // menu item for action bar
     private MenuItem item;
+
+    private String userName;
+
+    @Override
+    public void onCreate(@Nullable final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            userName = getArguments().getString(ProfileActivity.KEY_USERNAME);
+        }
+    }
 
     /**
      * This method helps in the creation Achievement screen and
@@ -157,9 +189,83 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
         // Set the initial value of WikiData edits to 0
         wikidataEditsText.setText("0");
+        if(sessionManager.getUserName().equals(userName)){
+            tvAchievementsOfUser.setVisibility(View.GONE);
+        }else{
+            tvAchievementsOfUser.setVisibility(View.VISIBLE);
+            tvAchievementsOfUser.setText(getString(R.string.achievements_of_user,userName));
+        }
         setWikidataEditCount();
         setAchievements();
         return rootView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        super.onCreateOptionsMenu(menu, menuInflater);
+        menuInflater.inflate(R.menu.menu_about, menu);
+        item = menu.getItem(0);
+        item.setVisible(false);
+    }
+
+    /**
+     * To receive the id of selected item and handle further logic for that selected item
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        // take screenshot in form of bitmap and show it in Alert Dialog
+        if (id == R.id.share_app_icon) {
+            View rootView = getActivity().getWindow().getDecorView().findViewById(android.R.id.content);
+            Bitmap screenShot = Utils.getScreenShot(rootView);
+            showAlert(screenShot);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * It displays the alertDialog with Image of screenshot
+     * @param screenshot
+     */
+    public void showAlert(Bitmap screenshot){
+        AlertDialog.Builder alertadd = new AlertDialog.Builder(getActivity());
+        LayoutInflater factory = LayoutInflater.from(getActivity());
+        final View view = factory.inflate(R.layout.image_alert_layout, null);
+        ImageView screenShotImage = view.findViewById(R.id.alert_image);
+        screenShotImage.setImageBitmap(screenshot);
+        TextView shareMessage = view.findViewById(R.id.alert_text);
+        shareMessage.setText(R.string.achievements_share_message);
+        alertadd.setView(view);
+        alertadd.setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> shareScreen(screenshot));
+        alertadd.setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.cancel());
+        alertadd.show();
+    }
+
+    /**
+     * To take bitmap and store it temporary storage and share it
+     * @param bitmap
+     */
+    void shareScreen(Bitmap bitmap) {
+        try {
+            File file = new File(getActivity().getExternalCacheDir(), "screen.png");
+            FileOutputStream fOut = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+            fOut.flush();
+            fOut.close();
+            file.setReadable(true, false);
+            Uri fileUri = FileProvider
+                .getUriForFile(getActivity().getApplicationContext(), getActivity().getPackageName()+".provider", file);
+            getActivity().grantUriPermission(getActivity().getPackageName(), fileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra(Intent.EXTRA_STREAM, fileUri);
+            intent.setType("image/png");
+            startActivity(Intent.createChooser(intent, getString(R.string.share_image_via)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -182,7 +288,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
             try{
 
                 compositeDisposable.add(okHttpJsonApiClient
-                        .getAchievements(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
+                        .getAchievements(Objects.requireNonNull(userName))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -225,7 +331,6 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      *  in the form of JavaRx Single object<JSONobject>
      */
     private void setWikidataEditCount() {
-        String userName = sessionManager.getUserName();
         if (StringUtils.isBlank(userName)) {
             return;
         }
@@ -274,7 +379,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     private void setUploadCount(Achievements achievements) {
         if (checkAccount()) {
             compositeDisposable.add(okHttpJsonApiClient
-                    .getUploadCount(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
+                    .getUploadCount(Objects.requireNonNull(userName))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
@@ -314,10 +419,14 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     }
 
     private void setZeroAchievements() {
-        AlertDialog.Builder builder=new AlertDialog.Builder(getActivity())
-                .setMessage(getString(R.string.no_achievements_yet))
-                .setPositiveButton(getString(R.string.ok), (dialog, which) -> {
-                });
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+            .setMessage(
+                !sessionManager.getUserName().equals(userName) ?
+                    getString(R.string.no_achievements_yet, userName) :
+                    getString(R.string.you_have_no_achievements_yet)
+            )
+            .setPositiveButton(getString(R.string.ok), (dialog, which) -> {
+            });
         AlertDialog dialog = builder.create();
         dialog.show();
         imagesUploadedProgressbar.setVisibility(View.INVISIBLE);
