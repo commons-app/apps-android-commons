@@ -205,25 +205,32 @@
                       android:textIsSelectable="true"
                       tools:text="Description of the media goes here. This can potentially be fairly long, and will need to wrap across multiple lines. We hope it looks nice though." />
 
+                </LinearLayout>
+
+                <LinearLayout
+                  android:paddingStart="@dimen/quarter_standard_height"
+                  android:paddingEnd="@dimen/quarter_standard_height"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+
+                    <TextView
+                      android:id="@+id/show_caption_description_textview"
+                      style="@style/MediaDetailTextLabelGeneric"
+                      android:layout_width="match_parent"
+                      android:gravity="center"
+                      android:layout_height="wrap_content"
+                      android:layout_marginBottom="@dimen/dimen_10"
+                      android:text="@string/media_detail_in_all_languages" />
+
                     <Button
                       android:id="@+id/description_edit"
                       android:layout_width="24dp"
                       android:layout_height="24dp"
-                      android:layout_marginTop="@dimen/standard_gap"
-                      android:layout_marginBottom="@dimen/standard_gap"
                       android:layout_gravity="end"
                       android:background="@drawable/ic_baseline_edit_24" />
 
                 </LinearLayout>
-
-                <TextView
-                  android:id="@+id/show_caption_description_textview"
-                  style="@style/MediaDetailTextLabelGeneric"
-                  android:layout_width="match_parent"
-                  android:gravity="center"
-                  android:layout_height="wrap_content"
-                  android:layout_marginBottom="@dimen/dimen_10"
-                  android:text="@string/media_detail_in_all_languages" />
 
                 <View
                   android:background="?attr/mediaDetailSpacerColor"

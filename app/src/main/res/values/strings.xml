@@ -371,7 +371,7 @@
   <string name="next">Next</string>
   <string name="previous">Previous</string>
   <string name="submit">Submit</string>
-  <string formatted="true" name="upload_title_duplicate">A file with the file name %1$s exists. Are you sure you want to proceed?\n\nNote: A suitable suffix will be added to the file name automatically.</string>
+  <string name="upload_title_duplicate" formatted="true">A file with the file name %1$s exists. Are you sure you want to proceed?\n\nNote: A suitable suffix will be added to the file name automatically.</string>
   <string name="map_application_missing">No compatible map application could be found on your device. Please install a map application to use this feature.</string>
   <string name="title_page_bookmarks_pictures">Pictures</string>
   <string name="title_page_bookmarks_locations">Locations</string>

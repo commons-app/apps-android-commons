@@ -157,6 +157,12 @@ class MediaClient @Inject constructor(
     fun resetUserNameContinuation(userName: String) =
         resetUserContinuation("user_", userName)
 
+    fun getCurrentWikiText(title: String): Single<String?> {
+        return mediaDetailInterface.getWikiText(title).map {
+            it.query()?.pages()?.get(0)?.revisions()?.get(0)?.content()
+        }
+    }
+
     override fun responseMapper(
         networkResult: Single<MwQueryResponse>,
         key: String?

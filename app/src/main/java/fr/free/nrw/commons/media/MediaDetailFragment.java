@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,6 +83,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -347,6 +349,76 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 new Intent(ctx, ZoomableActivity.class).setData(Uri.parse(media.getImageUrl()))
             );
         }
+    }
+
+    @OnClick(R.id.description_edit)
+    public void editDescriptionAndCaption(View view) {
+        Log.d("hoho", "language+ languageCaption");
+        getDescriptionList();
+
+    }
+
+    private void getDescriptionList() {
+        compositeDisposable.add(mediaDataExtractor.getCurrentWikiText(media.getFilename())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(this::extractCaptionDescription, Timber::e));
+    }
+
+    private void extractCaptionDescription(String s) {
+        final HashMap<String,String> descriptions = getDescriptions(s);
+        final HashMap<String,String> captions = getCaptionsList();
+
+
+
+    }
+
+    private HashMap<String,String> getDescriptions(String s) {
+        Log.d("WikiText","yyyyyy"+ s);
+        int descriptionIndex = s.indexOf("description=");
+        if(descriptionIndex == -1){
+            descriptionIndex = s.indexOf("Description=");
+        }
+        Log.d("WikiText", "descriptionIndex"+descriptionIndex);
+
+        if( descriptionIndex == -1 ){
+            return new HashMap<String,String>();
+        } else {
+            String descriptionToEnd = s.substring(descriptionIndex+12);
+            int descriptionEndIndex = descriptionToEnd.indexOf("\n");
+            Log.d("WikiText", "descriptionEndIndex"+descriptionEndIndex);
+            Log.d("WikiText", "descriptionEndIndex"+descriptionToEnd);
+            String description = s.substring(descriptionIndex+12, descriptionIndex+12+descriptionEndIndex);
+            Log.d("WikiText",description);
+            String[] arr = description.trim().split(",");
+            HashMap<String,String> descriptionList = new HashMap<>();
+            for (String string :
+                arr) {
+                int startCode = string.indexOf("{{");
+                int endCode = string.indexOf("|");
+                String languageCode = string.substring(startCode+2, endCode).trim();
+                Log.d("WikiText","languageCode "+languageCode);
+                int startDescription = string.indexOf("=");
+                int endDescription = string.indexOf("}}");
+                String languageDescription = string.substring(startDescription+1, endDescription);
+                Log.d("WikiText","languageDescription "+languageDescription);
+
+                descriptionList.put(languageCode, languageDescription);
+            }
+            return descriptionList;
+        }
+    }
+
+    private HashMap<String, String> getCaptionsList() {
+        HashMap<String, String> captionList = new HashMap<>();
+        Map<String, String> captions = media.getCaptions();
+        AppLanguageLookUpTable appLanguageLookUpTable = new AppLanguageLookUpTable(getContext());
+        for (Map.Entry<String, String> map : captions.entrySet()) {
+            String language = map.getKey();
+            String languageCaption = map.getValue();
+            captionList.put(language, languageCaption);
+        }
+        return captionList;
     }
 
     @Override
@@ -1118,8 +1190,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             return multilingualDesc;
         }
         for (String description : descriptions.values()) {
+            Log.d("hehe", "dxxxx "+ description);
             return description;
         }
+
+        for (String lang : descriptions.keySet()) {
+            Log.d("hehe", "lxxxxx "+ lang);
+        }
+
         return media.getFallbackDescription();
     }
 
@@ -1186,6 +1264,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         if (descriptionHtmlCode == null) {
             progressBar.setVisibility(VISIBLE);
         }
+//
+//        for (Caption c :
+//            captions) {
+//
+//        }
 
         getDescription();
         CaptionListViewAdapter adapter = new CaptionListViewAdapter(captions);
@@ -1227,8 +1310,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         int end = s.indexOf("</td>", start);
         descriptionHtmlCode = "";
         for (int i = start; i < end; i++) {
+            Log.d("hehe", "uuuu"+s.toCharArray()[i]);
             descriptionHtmlCode = descriptionHtmlCode + s.toCharArray()[i];
         }
+        Log.d("hehe", s);
 
         descriptionWebView
             .loadDataWithBaseURL(null, descriptionHtmlCode, "text/html", "utf-8", null);
