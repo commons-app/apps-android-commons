@@ -3,6 +3,7 @@
 * Alexander Yukal
 * Alexandr Efremov
 * Av6
+* DDPAT
 * Eleferen
 * Envlh
 * Facenapalm
@@ -148,6 +149,7 @@
   <string name="title_activity_settings">Настройки</string>
   <string name="title_activity_signup">Регистрация</string>
   <string name="title_activity_featured_images">Избранные изображения</string>
+  <string name="title_activity_custom_selector">Пользовательский селектор</string>
   <string name="title_activity_category_details">Категория</string>
   <string name="title_activity_review">Проверка</string>
   <string name="menu_about">О приложении</string>
@@ -358,6 +360,7 @@
   <string name="quiz_screenshot_question">Этот скриншот подходит для загрузки на Викисклад?</string>
   <string name="share_app_title">Поделиться приложением</string>
   <string name="error_fetching_nearby_places">Ошибка получения мест поблизости</string>
+  <string name="error_fetching_nearby_monuments">Ошибка получения мест поблизости.</string>
   <string name="no_recent_searches">История поиска пуста</string>
   <string name="delete_recent_searches_dialog">Вы уверены, что хотите очистить историю поисковых запросов?</string>
   <string name="delete_search_dialog">Удалить этот поиск?</string>
@@ -639,12 +642,22 @@
   <string name="select_location_location_picker">Выберите местоположение</string>
   <string name="show_in_map_app">Показать в приложении карты</string>
   <string name="modify_location">Изменить местоположение</string>
+  <string name="location_picker_image_view">Представление изображения средства выбора местоположения</string>
+  <string name="location_picker_image_view_shadow">\n    Тень изображения средства выбора местоположения</string>
   <string name="image_location">Расположение изображения</string>
   <string name="check_whether_location_is_correct">Проверьте правильность местоположения</string>
+  <string name="custom_selector_title">Пользовательский селектор</string>
   <string name="custom_selector_empty_text">Нет изображений</string>
   <string name="done">Готово</string>
   <string name="back">Назад</string>
+  <string name="welcome_custom_picture_selector_text">Добро пожаловать в Custom Picture Selector</string>
+  <string name="custom_selector_info_text1">Этот сборщик по-другому показывает изображения, которые уже есть в Викискладе.</string>
+  <string name="custom_selector_info_text2">В отличие от изображения слева, изображение справа имеет логотип Commons, указывающий, что оно уже загружено.\n Нажмите и удерживайте для предварительного просмотра изображения.</string>
   <string name="welcome_custom_selector_ok">Потрясающе</string>
   <string name="custom_selector_already_uploaded_image_text">Это изображение уже было загружено на Викисклад.</string>
+  <string name="wlm_upload_info">Это изображение будет участвовать в конкурсе «Вики любит памятники — 2021».</string>
+  <string name="display_monuments">Показать памятники</string>
+  <string name="wlm_month_message">Это месяц «Вики любит памятники»!</string>
   <string name="learn_more">УЗНАТЬ ПОДРОБНЕЕ</string>
+  <string name="wlm_campaign_description">«Вики любит памятники» — международный фотоконкурс памятников, организованный Викимедиа</string>
 </resources>

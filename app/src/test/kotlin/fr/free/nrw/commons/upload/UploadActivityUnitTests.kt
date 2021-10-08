@@ -12,6 +12,7 @@ import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment
 import org.junit.Assert
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -157,6 +158,7 @@ class UploadActivityUnitTests {
     }
 
     @Test
+    @Ignore()
     @Throws(Exception::class)
     fun testMakeUploadRequest() {
         activity.makeUploadRequest()

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Olve Utne
+-->
+<resources>
+  <string name="crash_dialog_title">Commons lä våvvdåm</string>
+  <string name="crash_dialog_ok_toast">Gijtov ane!</string>
+</resources>
