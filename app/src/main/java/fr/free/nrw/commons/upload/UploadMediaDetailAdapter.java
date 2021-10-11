@@ -10,14 +10,12 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText;
 import fr.free.nrw.commons.utils.AbstractTextWatcher;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,13 +91,13 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         Spinner spinnerDescriptionLanguages;
 
         @BindView(R.id.description_item_edit_text)
-        TextInputEditText descItemEditText;
+        PasteSensitiveTextInputEditText descItemEditText;
 
         @BindView(R.id.description_item_edit_text_input_layout)
         TextInputLayout descInputLayout;
 
         @BindView(R.id.caption_item_edit_text)
-        TextInputEditText captionItemEditText;
+        PasteSensitiveTextInputEditText captionItemEditText;
 
         @BindView(R.id.caption_item_edit_text_input_layout)
         TextInputLayout captionInputLayout;
