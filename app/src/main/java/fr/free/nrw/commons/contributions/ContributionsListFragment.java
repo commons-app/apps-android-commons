@@ -278,6 +278,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         animateFAB(isFabOpen);
     }
 
+    public void scrollToTop() {
+        rvContributionsList.smoothScrollToPosition(0);
+    }
+
     private void animateFAB(final boolean isFabOpen) {
         this.isFabOpen = !isFabOpen;
         if (fabPlus.isShown()) {

@@ -163,7 +163,9 @@ public class MainActivity  extends BaseActivity
         //showBottom so that we do not show the bottom tray again when constructing
         //from the saved instance state.
         if (fragment instanceof ContributionsFragment) {
-            if (activeFragment == ActiveFragment.CONTRIBUTIONS) { // Do nothing if same tab
+            if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
+                // scroll to top if already on the Contributions tab
+                contributionsFragment.scrollToTop();
                 return true;
             }
             contributionsFragment = (ContributionsFragment) fragment;
