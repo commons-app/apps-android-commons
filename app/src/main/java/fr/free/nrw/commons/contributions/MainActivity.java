@@ -138,7 +138,7 @@ public class MainActivity  extends BaseActivity
 
     private void setUpPager() {
         tabLayout.setOnNavigationItemSelectedListener(item -> {
-            if (!item.getTitle().equals(getString(R.string.more))) {
+            if (!item.getTitle().equals("More")) {
                 // do not change title for more fragment
                 setTitle(item.getTitle());
             }
@@ -150,7 +150,7 @@ public class MainActivity  extends BaseActivity
     private void setUpLoggedOutPager() {
         loadFragment(ExploreFragment.newInstance(),false);
         tabLayout.setOnNavigationItemSelectedListener(item -> {
-            if (!item.getTitle().equals(getString(R.string.more))) {
+            if (!item.getTitle().equals("More")) {
                 // do not change title for more fragment
                 setTitle(item.getTitle());
             }
