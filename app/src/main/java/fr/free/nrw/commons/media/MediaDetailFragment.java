@@ -21,7 +21,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -1264,14 +1263,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             return multilingualDesc;
         }
         for (String description : descriptions.values()) {
-            Log.d("hehe", "dxxxx "+ description);
             return description;
         }
-
-        for (String lang : descriptions.keySet()) {
-            Log.d("hehe", "lxxxxx "+ lang);
-        }
-
         return media.getFallbackDescription();
     }
 
@@ -1338,11 +1331,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         if (descriptionHtmlCode == null) {
             progressBar.setVisibility(VISIBLE);
         }
-//
-//        for (Caption c :
-//            captions) {
-//
-//        }
 
         getDescription();
         CaptionListViewAdapter adapter = new CaptionListViewAdapter(captions);
@@ -1384,10 +1372,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         int end = s.indexOf("</td>", start);
         descriptionHtmlCode = "";
         for (int i = start; i < end; i++) {
-            Log.d("hehe", "uuuu"+s.toCharArray()[i]);
             descriptionHtmlCode = descriptionHtmlCode + s.toCharArray()[i];
         }
-        Log.d("hehe", s);
 
         descriptionWebView
             .loadDataWithBaseURL(null, descriptionHtmlCode, "text/html", "utf-8", null);

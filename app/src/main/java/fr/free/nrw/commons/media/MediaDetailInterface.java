@@ -38,6 +38,11 @@ public interface MediaDetailInterface {
     @GET("/w/api.php?action=wbgetentities&props=labels&format=json&languagefallback=1&sites=commonswiki")
     Observable<Entities> getEntityForImage(@Query("languages") String language, @Query("ids") String wikibaseIdentifier);
 
+    /**
+     * Fetches current wikitext
+     * @param title file name
+     * @return Single<MwQueryResponse>
+     */
     @GET(
         Service.MW_API_PREFIX +
             "action=query&prop=revisions&rvprop=content|timestamp&rvlimit=1&converttitles="

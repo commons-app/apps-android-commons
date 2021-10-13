@@ -135,7 +135,6 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
             captionItemEditText.setText(uploadMediaDetail.getCaptionText());
             descItemEditText.setText(uploadMediaDetail.getDescriptionText());
 
-
             if (position == 0) {
                 removeButton.setVisibility(View.GONE);
                 captionInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);

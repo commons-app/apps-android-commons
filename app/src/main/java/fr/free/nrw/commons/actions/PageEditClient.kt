@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.actions
 
-import android.util.Log
 import io.reactivex.Observable
 import io.reactivex.Single
 import org.wikipedia.csrf.CsrfTokenClient
@@ -26,8 +25,6 @@ class PageEditClient(
      */
     fun edit(pageTitle: String, text: String, summary: String): Observable<Boolean> {
         return try {
-            Log.d("hehe", csrfTokenClient.tokenBlocking)
-            Log.d("hehe", text)
             pageEditInterface.postEdit(pageTitle, summary, text, csrfTokenClient.tokenBlocking)
                 .map { editResponse -> editResponse.edit()!!.editSucceeded() }
         } catch (throwable: Throwable) {

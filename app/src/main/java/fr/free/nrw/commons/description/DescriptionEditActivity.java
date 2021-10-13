@@ -23,21 +23,39 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+/**
+ * Activity for populating and editing existing description and caption
+ */
 public class DescriptionEditActivity extends AppCompatActivity implements
     UploadMediaDetailAdapter.EventListener {
 
+    /**
+     * Adapter for showing UploadMediaDetail in the activity
+     */
     private UploadMediaDetailAdapter uploadMediaDetailAdapter;
 
+    /**
+     * For getting default preference
+     */
     @Inject
     @Named("default_preferences")
     JsonKvStore defaultKvStore;
 
+    /**
+     * Recyclerview for recycling data in views
+     */
     @BindView(R.id.rv_descriptions_captions)
     RecyclerView rvDescriptions;
 
+    /**
+     * Submit button for submitting new wikiText
+     */
     @BindView(R.id.btn_edit_submit)
     AppCompatButton btnSubmit;
 
+    /**
+     * Current wikitext
+     */
     String wikiText;
 
     @Override

@@ -6,7 +6,6 @@ import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -205,12 +204,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
-        List<UploadMediaDetail> a = uploadMediaDetailAdapter.getItems();
-        for (UploadMediaDetail u :
-            a) {
-            Log.d("UploadMediaDetail", "des " + u.getDescriptionText() + " cap "
-                + u.getCaptionText() + " lan " + u.getLanguageCode());
-        }
         presenter.verifyImageQuality(callback.getIndexInViewFlipper(this));
     }
 
