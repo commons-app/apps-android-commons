@@ -101,6 +101,11 @@ public class DescriptionEditActivity extends AppCompatActivity implements
 
     }
 
+    @OnClick(R.id.mapbox_place_picker_toolbar_back_button)
+    public void onBackButtonClicked(){
+        onBackPressed();
+    }
+
     @OnClick(R.id.btn_add_description)
     public void onButtonAddDescriptionClicked() {
         final UploadMediaDetail uploadMediaDetail = new UploadMediaDetail();

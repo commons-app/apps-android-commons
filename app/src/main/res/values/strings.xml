@@ -529,6 +529,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="description_edit_helper_edit_message_else">Could not add descriptions.</string>
   <string name="coordinates_picking_unsuccessful">Unable to get coordinates.</string>
   <string name="descriptions_picking_unsuccessful">Unable to get descriptions.</string>
+  <string name="description_activity_title">Edit descriptions and captions</string>
 
   <string name="share_image_via">Share image via</string>
   <string name="no_achievements_yet">You haven\'t made any contributions yet</string>

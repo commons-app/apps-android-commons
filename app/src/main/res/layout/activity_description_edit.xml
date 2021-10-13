@@ -6,14 +6,52 @@
   android:layout_height="match_parent"
   tools:context=".description.DescriptionEditActivity">
 
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/primaryColor"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <TextView
+      android:id="@+id/toolbar_text_view"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="72dp"
+      android:text="@string/description_activity_title"
+      android:textColor="@color/white"
+      android:textSize="20sp"
+      android:layout_marginTop="15dp"
+      android:layout_marginBottom="15dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_chainStyle="packed" />
+
+    <ImageView
+      android:id="@+id/toolbar_back_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:contentDescription="@string/exit_location_picker"
+      android:tint="@color/white"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/ic_arrow_back_white" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/rv_descriptions_captions"
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    app:layout_constraintBottom_toTopOf="@id/edit_bottom_layout"
+    app:layout_constraintBottom_toTopOf="@+id/edit_bottom_layout"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
   <RelativeLayout
     android:id="@+id/edit_bottom_layout"
