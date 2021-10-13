@@ -57,7 +57,6 @@ import com.jakewharton.rxbinding2.widget.RxSearchView;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import fr.free.nrw.commons.LocationPicker.LocationPicker;
-import fr.free.nrw.commons.LocationPicker.LocationPickerConstants;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
@@ -73,7 +72,6 @@ import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
-import fr.free.nrw.commons.description.DescriptionAndCaption;
 import fr.free.nrw.commons.description.DescriptionEditActivity;
 import fr.free.nrw.commons.description.DescriptionEditHelper;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
@@ -362,162 +360,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 new Intent(ctx, ZoomableActivity.class).setData(Uri.parse(media.getImageUrl()))
             );
         }
-    }
-
-    @OnClick(R.id.description_edit)
-    public void editDescriptionAndCaption(View view) {
-        Log.d("hoho", "language+ languageCaption");
-        progressBarEditDescription.setVisibility(VISIBLE);
-        editDescription.setVisibility(GONE);
-        getDescriptionList();
-
-    }
-
-    private void getDescriptionList() {
-        compositeDisposable.add(mediaDataExtractor.getCurrentWikiText(media.getFilename())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(this::extractCaptionDescription, Timber::e));
-    }
-
-    private void extractCaptionDescription(String s) {
-        final LinkedHashMap<String,String> descriptions = getDescriptions(s);
-        final HashMap<String,String> captions = getCaptionsList();
-
-        ArrayList<UploadMediaDetail> descriptionAndCaptions = new ArrayList<>();
-//        for (final Map.Entry mapElement: captions.entrySet()){
-//
-//            String language = (String) mapElement.getKey();
-//            Log.d("DescriptionAndCaption", "language "+language);
-////            Log.d("DescriptionAndCaption", "des "+descriptions.get(language));
-//            Log.d("DescriptionAndCaption", "cap "+captions.get(language));
-//            Log.d("DescriptionAndCaption", "capMap "+mapElement.getValue());
-//        }
-//        for (final Map.Entry mapElement: descriptions.entrySet()){
-//
-//            String language = (String) mapElement.getKey();
-//            Log.d("DescriptionAndCaption", "language "+language);
-//            Log.d("DescriptionAndCaption", "des "+descriptions.get(language));
-////            Log.d("DescriptionAndCaption", "cap "+captions.get(language));
-//            Log.d("DescriptionAndCaption", "desMap "+mapElement.getValue());
-//        }
-        if(captions.size() >= descriptions.size()) {
-            Log.d("DescriptionAndCaption", "size " + captions.size());
-            for (final Map.Entry mapElement : captions.entrySet()) {
-
-                String language = (String) mapElement.getKey();
-                Log.d("DescriptionAndCaption", "language " + language);
-//            Log.d("DescriptionAndCaption", "des "+descriptions.get(language));
-                Log.d("DescriptionAndCaption", "cap " + captions.get(language));
-                Log.d("DescriptionAndCaption", "capMap " + mapElement.getValue());
-                if (descriptions.containsKey(language)) {
-                    Log.d("DescriptionAndCaption", "des ");
-                    descriptionAndCaptions.add(
-                        new UploadMediaDetail(language, descriptions.get(language),
-                            (String) mapElement.getValue())
-                    );
-                } else {
-                    Log.d("DescriptionAndCaption", "no des ");
-                    descriptionAndCaptions.add(
-                        new UploadMediaDetail(language, "",
-                            (String) mapElement.getValue())
-                    );
-                }
-            }
-        } else {
-            Log.d("CaptionDescriptionAnd", "size " + captions.size());
-            for (final Map.Entry mapElement : descriptions.entrySet()) {
-
-                String language = (String) mapElement.getKey();
-                Log.d("CaptionDescriptionAnd", "language " + language);
-//            Log.d("DescriptionAndCaption", "des "+descriptions.get(language));
-                Log.d("CaptionDescriptionAnd", "cap " + captions.get(language));
-                Log.d("CaptionDescriptionAnd", "capMap " + mapElement.getValue());
-                if (captions.containsKey(language)) {
-                    Log.d("CaptionDescriptionAnd", "des ");
-                    descriptionAndCaptions.add(
-                        new UploadMediaDetail(language, (String) mapElement.getValue(),
-                            captions.get(language))
-                    );
-                } else {
-                    Log.d("CaptionDescriptionAnd", "no des ");
-                    descriptionAndCaptions.add(
-                        new UploadMediaDetail(language, (String) mapElement.getValue(),
-                            "")
-                    );
-                }
-            }
-        }
-
-        for (UploadMediaDetail d :
-            descriptionAndCaptions) {
-            Log.d("CaptionDescriptionAnd", "des "+d.getDescriptionText()+" cap "
-                +d.getCaptionText()+" lan "+d.getLanguageCode());
-        }
-
-        Intent intent = new Intent(requireContext(), DescriptionEditActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("mylist", descriptionAndCaptions);
-        Log.d("wikiText", s);
-        bundle.putString("wikiText", s);
-        intent.putExtras(bundle);
-        startActivityForResult(intent, REQUEST_CODE_EDIT_DESCRIPTION);
-
-    }
-
-    private LinkedHashMap<String,String> getDescriptions(String s) {
-        Log.d("WikiText","yyyyyy"+ s);
-        int descriptionIndex = s.indexOf("description=");
-        if(descriptionIndex == -1){
-            descriptionIndex = s.indexOf("Description=");
-        }
-        Log.d("WikiText", "descriptionIndex"+descriptionIndex);
-
-        if( descriptionIndex == -1 ){
-            return new LinkedHashMap<String,String>();
-        } else {
-            String descriptionToEnd = s.substring(descriptionIndex+12);
-            int descriptionEndIndex = descriptionToEnd.indexOf("\n");
-            Log.d("WikiText", "descriptionEndIndex"+descriptionEndIndex);
-            Log.d("WikiText", "descriptionEndIndex"+descriptionToEnd);
-            String description = s.substring(descriptionIndex+12, descriptionIndex+12+descriptionEndIndex);
-            Log.d("WikiText",description);
-            String[] arr = description.trim().split(",");
-            LinkedHashMap<String,String> descriptionList = new LinkedHashMap<>();
-            for (String string :
-                arr) {
-                int startCode = string.indexOf("{{");
-                int endCode = string.indexOf("|");
-                String languageCode = string.substring(startCode+2, endCode).trim();
-                Log.d("WikiText","languageCode "+languageCode);
-                int startDescription = string.indexOf("=");
-                int endDescription = string.indexOf("}}");
-                String languageDescription = string.substring(startDescription+1, endDescription);
-                Log.d("WikiText","languageDescription "+languageDescription);
-
-                descriptionList.put(languageCode, languageDescription);
-            }
-            for (final Map.Entry mapElement : descriptionList.entrySet()) {
-
-                String language = (String) mapElement.getKey();
-                Log.d("WikiText", "language " + language);
-                Log.d("WikiText", "capMap " + mapElement.getValue());
-
-            }
-            return descriptionList;
-        }
-    }
-
-    private HashMap<String, String> getCaptionsList() {
-        HashMap<String, String> captionList = new HashMap<>();
-        Map<String, String> captions = media.getCaptions();
-        AppLanguageLookUpTable appLanguageLookUpTable = new AppLanguageLookUpTable(getContext());
-        for (Map.Entry<String, String> map : captions.entrySet()) {
-            String language = map.getKey();
-            String languageCaption = map.getValue();
-            captionList.put(language, languageCaption);
-        }
-        return captionList;
     }
 
     @Override
@@ -965,22 +807,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         goToLocationPickerActivity();
     }
 
-    @OnClick(R.id.description_edit)
-    public void onUpdateDescriptionClicked(){
-        updateDescription();
-    }
-
-    private void updateDescription() {
-//        compositeDisposable.add(coordinateEditHelper.makeCoordinatesEdit(getContext(), media,
-//            Latitude, Longitude, Accuracy)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe(s -> {
-//                Timber.d("Coordinates are added.");
-//                coordinates.setText(prettyCoordinates(media));
-//            }));
-    }
-
     /**
      * Start location picker activity with a request code and get the coordinates from the activity.
      */
@@ -1002,6 +828,149 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 .zoom(16).build())
             .activityKey("MediaActivity")
             .build(getActivity()), REQUEST_CODE);
+    }
+
+    @OnClick(R.id.description_edit)
+    public void onClickDescriptionEdit(View view) {
+        Log.d("hoho", "language+ languageCaption");
+        progressBarEditDescription.setVisibility(VISIBLE);
+        editDescription.setVisibility(GONE);
+        getDescriptionList();
+    }
+
+    private void getDescriptionList() {
+        compositeDisposable.add(mediaDataExtractor.getCurrentWikiText(media.getFilename())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(this::extractCaptionDescription, Timber::e));
+    }
+
+    private void extractCaptionDescription(String s) {
+        final LinkedHashMap<String,String> descriptions = getDescriptions(s);
+        final HashMap<String,String> captions = getCaptionsList();
+
+        ArrayList<UploadMediaDetail> descriptionAndCaptions = new ArrayList<>();
+
+        if(captions.size() >= descriptions.size()) {
+            Log.d("DescriptionAndCaption", "size " + captions.size());
+            for (final Map.Entry mapElement : captions.entrySet()) {
+
+                String language = (String) mapElement.getKey();
+                Log.d("DescriptionAndCaption", "language " + language);
+//            Log.d("DescriptionAndCaption", "des "+descriptions.get(language));
+                Log.d("DescriptionAndCaption", "cap " + captions.get(language));
+                Log.d("DescriptionAndCaption", "capMap " + mapElement.getValue());
+                if (descriptions.containsKey(language)) {
+                    Log.d("DescriptionAndCaption", "des ");
+                    descriptionAndCaptions.add(
+                        new UploadMediaDetail(language, descriptions.get(language),
+                            (String) mapElement.getValue())
+                    );
+                } else {
+                    Log.d("DescriptionAndCaption", "no des ");
+                    descriptionAndCaptions.add(
+                        new UploadMediaDetail(language, "",
+                            (String) mapElement.getValue())
+                    );
+                }
+            }
+        } else {
+            Log.d("CaptionDescriptionAnd", "size " + captions.size());
+            for (final Map.Entry mapElement : descriptions.entrySet()) {
+
+                String language = (String) mapElement.getKey();
+                Log.d("CaptionDescriptionAnd", "language " + language);
+//            Log.d("DescriptionAndCaption", "des "+descriptions.get(language));
+                Log.d("CaptionDescriptionAnd", "cap " + captions.get(language));
+                Log.d("CaptionDescriptionAnd", "capMap " + mapElement.getValue());
+                if (captions.containsKey(language)) {
+                    Log.d("CaptionDescriptionAnd", "des ");
+                    descriptionAndCaptions.add(
+                        new UploadMediaDetail(language, (String) mapElement.getValue(),
+                            captions.get(language))
+                    );
+                } else {
+                    Log.d("CaptionDescriptionAnd", "no des ");
+                    descriptionAndCaptions.add(
+                        new UploadMediaDetail(language, (String) mapElement.getValue(),
+                            "")
+                    );
+                }
+            }
+        }
+
+        for (UploadMediaDetail d :
+            descriptionAndCaptions) {
+            Log.d("CaptionDescriptionAnd", "des "+d.getDescriptionText()+" cap "
+                +d.getCaptionText()+" lan "+d.getLanguageCode());
+        }
+
+        Intent intent = new Intent(requireContext(), DescriptionEditActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("mylist", descriptionAndCaptions);
+        Log.d("wikiText1", "ddd");
+        bundle.putString("wikiText", s);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, REQUEST_CODE_EDIT_DESCRIPTION);
+
+    }
+
+    private LinkedHashMap<String,String> getDescriptions(String s) {
+        Log.d("WikiText","yyyyyy"+ s);
+        int descriptionIndex = s.indexOf("description=");
+        if(descriptionIndex == -1){
+            descriptionIndex = s.indexOf("Description=");
+        }
+        Log.d("WikiText", "descriptionIndex"+descriptionIndex);
+
+        if( descriptionIndex == -1 ){
+            return new LinkedHashMap<String,String>();
+        }
+        String descriptionToEnd = s.substring(descriptionIndex+12);
+        int descriptionEndIndex = descriptionToEnd.indexOf("\n");
+        Log.d("WikiText", "descriptionEndIndex"+descriptionEndIndex);
+        Log.d("WikiText", "descriptionEndIndex"+descriptionToEnd);
+        String description = s.substring(descriptionIndex+12, descriptionIndex+12+descriptionEndIndex);
+        Log.d("WikiText",description);
+        String[] arr = description.trim().split(",");
+        LinkedHashMap<String,String> descriptionList = new LinkedHashMap<>();
+
+        if(!description.equals("")) {
+            for (String string :
+                arr) {
+                int startCode = string.indexOf("{{");
+                int endCode = string.indexOf("|");
+                String languageCode = string.substring(startCode + 2, endCode).trim();
+                Log.d("WikiText", "languageCode " + languageCode);
+                int startDescription = string.indexOf("=");
+                int endDescription = string.indexOf("}}");
+                String languageDescription = string
+                    .substring(startDescription + 1, endDescription);
+                Log.d("WikiText", "languageDescription " + languageDescription);
+
+                descriptionList.put(languageCode, languageDescription);
+            }
+            for (final Map.Entry mapElement : descriptionList.entrySet()) {
+
+                String language = (String) mapElement.getKey();
+                Log.d("WikiText", "language " + language);
+                Log.d("WikiText", "capMap " + mapElement.getValue());
+
+            }
+        }
+        return descriptionList;
+    }
+
+    private HashMap<String, String> getCaptionsList() {
+        HashMap<String, String> captionList = new HashMap<>();
+        Map<String, String> captions = media.getCaptions();
+        AppLanguageLookUpTable appLanguageLookUpTable = new AppLanguageLookUpTable(getContext());
+        for (Map.Entry<String, String> map : captions.entrySet()) {
+            String language = map.getKey();
+            String languageCaption = map.getValue();
+            captionList.put(language, languageCaption);
+        }
+        return captionList;
     }
 
     /**
@@ -1046,7 +1015,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         } else  if (requestCode == REQUEST_CODE_EDIT_DESCRIPTION && resultCode == RESULT_OK) {
             String updatedWikiText = data.getStringExtra("updatedWikiText");
             Log.d("EditDes", "Updated "+updatedWikiText);
-            compositeDisposable.add(descriptionEditHelper.addDescription(media,
+            compositeDisposable.add(descriptionEditHelper.addDescription(getContext(), media,
                 updatedWikiText)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -1,26 +1,20 @@
 package fr.free.nrw.commons.description;
 
 import android.content.Intent;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import fr.free.nrw.commons.LocationPicker.LocationPickerConstants;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
 import fr.free.nrw.commons.utils.DialogUtil;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -43,25 +37,19 @@ public class DescriptionEditActivity extends AppCompatActivity implements
     String wikiText;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description_edit);
 
         ButterKnife.bind(this, this);
-        Bundle bundle = getIntent().getExtras();
-        ArrayList<UploadMediaDetail> descriptionAndCaptions = bundle.getParcelableArrayList("mylist");
+        final Bundle bundle = getIntent().getExtras();
+        final ArrayList<UploadMediaDetail> descriptionAndCaptions = bundle.getParcelableArrayList("mylist");
         wikiText = bundle.getString("wikiText");
-
-        for (UploadMediaDetail d :
-            descriptionAndCaptions) {
-            Log.d("DescriptionAndCaption", "des1 "+d.getDescriptionText()+" cap1 "
-                +d.getCaptionText()+" lan1 "+d.getLanguageCode());
-        }
 
         initRecyclerView(descriptionAndCaptions);
     }
 
-    private void initRecyclerView(ArrayList<UploadMediaDetail> descriptionAndCaptions) {
+    private void initRecyclerView(final ArrayList<UploadMediaDetail> descriptionAndCaptions) {
         uploadMediaDetailAdapter = new UploadMediaDetailAdapter("en",descriptionAndCaptions);
         uploadMediaDetailAdapter.setCallback(this::showInfoAlert);
         uploadMediaDetailAdapter.setEventListener(this);
@@ -71,21 +59,21 @@ public class DescriptionEditActivity extends AppCompatActivity implements
 
     /**
      * show dialog with info
-     * @param titleStringID
-     * @param messageStringId
+     * @param titleStringID Title ID
+     * @param messageStringId Message ID
      */
-    private void showInfoAlert(int titleStringID, int messageStringId) {
+    private void showInfoAlert(final int titleStringID, final int messageStringId) {
         DialogUtil.showAlertDialog(this, getString(titleStringID), getString(messageStringId), getString(android.R.string.ok), null, true);
     }
 
     @Override
-    public void onPrimaryCaptionTextChange(boolean isNotEmpty) {
+    public void onPrimaryCaptionTextChange(final boolean isNotEmpty) {
 
     }
 
     @OnClick(R.id.btn_add_description)
     public void onButtonAddDescriptionClicked() {
-        UploadMediaDetail uploadMediaDetail = new UploadMediaDetail();
+        final UploadMediaDetail uploadMediaDetail = new UploadMediaDetail();
         uploadMediaDetail.setManuallyAdded(true);//This was manually added by the user
         uploadMediaDetailAdapter.addDescription(uploadMediaDetail);
         rvDescriptions.smoothScrollToPosition(uploadMediaDetailAdapter.getItemCount()-1);
@@ -94,43 +82,30 @@ public class DescriptionEditActivity extends AppCompatActivity implements
 
     @OnClick(R.id.btn_edit_submit)
     public void onSubmitButtonClicked(){
-        List<UploadMediaDetail> uploadMediaDetails = uploadMediaDetailAdapter.getItems();
-
-        Log.d("DescriptionAndCaption", "clicked");
-        for (UploadMediaDetail d :
-            uploadMediaDetails) {
-            Log.d("DescriptionAndCaption", "des2 "+d.getDescriptionText()+" cap2 "
-                +d.getCaptionText()+" lan2 "+d.getLanguageCode());
-        }
-
+        final List<UploadMediaDetail> uploadMediaDetails = uploadMediaDetailAdapter.getItems();
         updateDescription(uploadMediaDetails);
-
         finish();
     }
 
-    private void updateDescription(List<UploadMediaDetail> uploadMediaDetails) {
+    private void updateDescription(final List<UploadMediaDetail> uploadMediaDetails) {
         int descriptionIndex = wikiText.indexOf("description=");
         if(descriptionIndex == -1){
             descriptionIndex = wikiText.indexOf("Description=");
         }
-        Log.d("DescriptionAndCaption", "descriptionIndex"+descriptionIndex);
 
         final StringBuilder buffer = new StringBuilder();
 
-        if( descriptionIndex == -1 ){
+        if( descriptionIndex != -1 ) {
 
-        } else {
-
-            String descriptionStart = wikiText.substring(0, descriptionIndex + 12);
-            Log.d("DescriptionAndCaption", "descriptionStart"+descriptionStart);
-            String descriptionToEnd = wikiText.substring(descriptionIndex+12);
-            int descriptionEndIndex = descriptionToEnd.indexOf("\n");
-            String descriptionEnd = wikiText.substring(descriptionStart.length()+descriptionEndIndex);
-            Log.d("DescriptionAndCaption", "descriptionEnd"+descriptionEnd);
+            final String descriptionStart = wikiText.substring(0, descriptionIndex + 12);
+            final String descriptionToEnd = wikiText.substring(descriptionIndex+12);
+            final int descriptionEndIndex = descriptionToEnd.indexOf("\n");
+            final String descriptionEnd = wikiText.substring(descriptionStart.length()
+                +descriptionEndIndex);
 
             buffer.append(descriptionStart);
             for (int i=0; i<uploadMediaDetails.size(); i++) {
-                UploadMediaDetail uploadDetails = uploadMediaDetails.get(i);
+                final UploadMediaDetail uploadDetails = uploadMediaDetails.get(i);
                 if(!uploadDetails.getDescriptionText().equals("")) {
                     if (i == uploadMediaDetails.size() - 1) {
                         buffer.append("{{");
@@ -149,7 +124,6 @@ public class DescriptionEditActivity extends AppCompatActivity implements
             }
             buffer.append(descriptionEnd);
         }
-        Log.d("EditDes", buffer.toString());
         final Intent returningIntent = new Intent();
         returningIntent.putExtra("updatedWikiText",
             buffer.toString());

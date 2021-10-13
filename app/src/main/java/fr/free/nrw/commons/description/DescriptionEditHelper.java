@@ -10,7 +10,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.notification.NotificationHelper;
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -37,16 +37,22 @@ public class DescriptionEditHelper {
 
     /**
      * Replaces new descriptions
+     *
+     * @param context context
      * @param media to be added
      * @param appendText to be added
      * @return Observable<Boolean>
      */
-    public Observable<Boolean> addDescription(final Media media, final String appendText) {
+    public Single<Boolean> addDescription(final Context context, final Media media,
+        final String appendText) {
         Timber.d("thread is description adding %s", Thread.currentThread().getName());
         final String summary = "Updating Description";
 
         return pageEditClient.edit(Objects.requireNonNull(media.getFilename()),
-            appendText, summary);
+            appendText, summary)
+            .flatMapSingle(result -> Single.just(showDescriptionEditNotification(context,
+                media, result)))
+            .firstOrError();
     }
 
     /**
