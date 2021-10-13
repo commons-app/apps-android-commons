@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload;
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,7 +37,8 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         this.savedLanguageValue = savedLanguageValue;
     }
 
-    public UploadMediaDetailAdapter(String savedLanguageValue, List<UploadMediaDetail> uploadMediaDetails) {
+    public UploadMediaDetailAdapter(final String savedLanguageValue,
+        List<UploadMediaDetail> uploadMediaDetails) {
         this.uploadMediaDetails = uploadMediaDetails;
         selectedLanguages = new HashMap<>();
         this.savedLanguageValue = savedLanguageValue;
@@ -190,28 +188,16 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int position,
                                            long l) {
-                    Log.d("Spinner", "default "+description.getLanguageCode());
-//                    if(description.getLanguageCode() != null){
-//                        description.setSelectedLanguageIndex(position);
-//                        String languageCode = description.getLanguageCode();
-//                        selectedLanguages.remove(adapterView);
-//                        selectedLanguages.put(adapterView, languageCode);
-//                        ((SpinnerLanguagesAdapter) adapterView
-//                            .getAdapter()).setSelectedLangCode(languageCode);
-//                        spinnerDescriptionLanguages.setSelection(position);
-//                        Timber.d("Description language code is: " + languageCode);
-//                    } else {
-                        description.setSelectedLanguageIndex(position);
-                        String languageCode = ((SpinnerLanguagesAdapter) adapterView.getAdapter())
-                            .getLanguageCode(position);
-                        description.setLanguageCode(languageCode);
-                        selectedLanguages.remove(adapterView);
-                        selectedLanguages.put(adapterView, languageCode);
-                        ((SpinnerLanguagesAdapter) adapterView
-                            .getAdapter()).setSelectedLangCode(languageCode);
-                        spinnerDescriptionLanguages.setSelection(position);
-                        Timber.d("Description language code is: " + languageCode);
-//                    }
+                    description.setSelectedLanguageIndex(position);
+                    String languageCode = ((SpinnerLanguagesAdapter) adapterView.getAdapter())
+                        .getLanguageCode(position);
+                    description.setLanguageCode(languageCode);
+                    selectedLanguages.remove(adapterView);
+                    selectedLanguages.put(adapterView, languageCode);
+                    ((SpinnerLanguagesAdapter) adapterView
+                        .getAdapter()).setSelectedLangCode(languageCode);
+                    spinnerDescriptionLanguages.setSelection(position);
+                    Timber.d("Description language code is: " + languageCode);
                 }
 
                 @Override
@@ -221,9 +207,17 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
 
 
             if (description.getSelectedLanguageIndex() == -1) {
-                if (!TextUtils.isEmpty(description.getLanguageCode())) {
+                if (!TextUtils.isEmpty(savedLanguageValue)) {
                     // If user has chosen a default language from settings activity
                     // savedLanguageValue is not null
+                    if(!TextUtils.isEmpty(description.getLanguageCode())) {
+                        spinnerDescriptionLanguages.setSelection(languagesAdapter
+                            .getIndexOfLanguageCode(description.getLanguageCode()));
+                    } else {
+                        spinnerDescriptionLanguages.setSelection(languagesAdapter
+                            .getIndexOfLanguageCode(savedLanguageValue));
+                    }
+                } else if (!TextUtils.isEmpty(description.getLanguageCode())) {
                     spinnerDescriptionLanguages.setSelection(languagesAdapter
                         .getIndexOfLanguageCode(description.getLanguageCode()));
                 } else {

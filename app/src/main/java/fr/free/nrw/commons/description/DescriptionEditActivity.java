@@ -1,5 +1,9 @@
 package fr.free.nrw.commons.description;
 
+import static fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_DESCRIPTION_AND_CAPTION;
+import static fr.free.nrw.commons.description.EditDescriptionConstants.UPDATED_WIKITEXT;
+import static fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT;
+
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,14 +47,20 @@ public class DescriptionEditActivity extends AppCompatActivity implements
 
         ButterKnife.bind(this, this);
         final Bundle bundle = getIntent().getExtras();
-        final ArrayList<UploadMediaDetail> descriptionAndCaptions = bundle.getParcelableArrayList("mylist");
-        wikiText = bundle.getString("wikiText");
+        final ArrayList<UploadMediaDetail> descriptionAndCaptions
+            = bundle.getParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION);
+        wikiText = bundle.getString(WIKITEXT);
 
         initRecyclerView(descriptionAndCaptions);
     }
 
+    /**
+     * Initializes the RecyclerView
+     * @param descriptionAndCaptions list of description and caption
+     */
     private void initRecyclerView(final ArrayList<UploadMediaDetail> descriptionAndCaptions) {
-        uploadMediaDetailAdapter = new UploadMediaDetailAdapter("en",descriptionAndCaptions);
+        uploadMediaDetailAdapter
+            = new UploadMediaDetailAdapter("en",descriptionAndCaptions);
         uploadMediaDetailAdapter.setCallback(this::showInfoAlert);
         uploadMediaDetailAdapter.setEventListener(this);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(this));
@@ -63,7 +73,9 @@ public class DescriptionEditActivity extends AppCompatActivity implements
      * @param messageStringId Message ID
      */
     private void showInfoAlert(final int titleStringID, final int messageStringId) {
-        DialogUtil.showAlertDialog(this, getString(titleStringID), getString(messageStringId), getString(android.R.string.ok), null, true);
+        DialogUtil.showAlertDialog(this, getString(titleStringID),
+            getString(messageStringId), getString(android.R.string.ok),
+            null, true);
     }
 
     @Override
@@ -87,15 +99,19 @@ public class DescriptionEditActivity extends AppCompatActivity implements
         finish();
     }
 
+    /**
+     * Updates newly added descriptions in the wikiText and send to calling fragment
+     * @param uploadMediaDetails descriptions and captions
+     */
     private void updateDescription(final List<UploadMediaDetail> uploadMediaDetails) {
         int descriptionIndex = wikiText.indexOf("description=");
-        if(descriptionIndex == -1){
+        if (descriptionIndex == -1){
             descriptionIndex = wikiText.indexOf("Description=");
         }
 
         final StringBuilder buffer = new StringBuilder();
 
-        if( descriptionIndex != -1 ) {
+        if (descriptionIndex != -1) {
 
             final String descriptionStart = wikiText.substring(0, descriptionIndex + 12);
             final String descriptionToEnd = wikiText.substring(descriptionIndex+12);
@@ -106,7 +122,7 @@ public class DescriptionEditActivity extends AppCompatActivity implements
             buffer.append(descriptionStart);
             for (int i=0; i<uploadMediaDetails.size(); i++) {
                 final UploadMediaDetail uploadDetails = uploadMediaDetails.get(i);
-                if(!uploadDetails.getDescriptionText().equals("")) {
+                if (!uploadDetails.getDescriptionText().equals("")) {
                     if (i == uploadMediaDetails.size() - 1) {
                         buffer.append("{{");
                         buffer.append(uploadDetails.getLanguageCode());
@@ -125,8 +141,7 @@ public class DescriptionEditActivity extends AppCompatActivity implements
             buffer.append(descriptionEnd);
         }
         final Intent returningIntent = new Intent();
-        returningIntent.putExtra("updatedWikiText",
-            buffer.toString());
+        returningIntent.putExtra(UPDATED_WIKITEXT, buffer.toString());
         setResult(RESULT_OK, returningIntent);
         finish();
     }
