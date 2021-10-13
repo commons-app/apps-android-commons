@@ -57,6 +57,7 @@ import com.jakewharton.rxbinding2.widget.RxSearchView;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import fr.free.nrw.commons.LocationPicker.LocationPicker;
+import fr.free.nrw.commons.LocationPicker.LocationPickerConstants;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
@@ -72,11 +73,15 @@ import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
+import fr.free.nrw.commons.description.DescriptionAndCaption;
+import fr.free.nrw.commons.description.DescriptionEditActivity;
+import fr.free.nrw.commons.description.DescriptionEditHelper;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
+import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -84,6 +89,7 @@ import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -100,6 +106,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     CategoryEditHelper.Callback {
 
     private static final int REQUEST_CODE = 1001 ;
+    private static final int REQUEST_CODE_EDIT_DESCRIPTION = 1002 ;
     private boolean editable;
     private boolean isCategoryImage;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
@@ -138,6 +145,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     CategoryEditHelper categoryEditHelper;
     @Inject
     CoordinateEditHelper coordinateEditHelper;
+    @Inject
+    DescriptionEditHelper descriptionEditHelper;
     @Inject
     ViewUtilWrapper viewUtil;
     @Inject
@@ -226,6 +235,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     String descriptionHtmlCode;
     @BindView(R.id.progressBarDeletion)
     ProgressBar progressBarDeletion;
+    @BindView(R.id.progressBarEdit)
+    ProgressBar progressBarEditDescription;
+    @BindView(R.id.description_edit)
+    Button editDescription;
 
     private ArrayList<String> categoryNames = new ArrayList<>();
     private String categorySearchQuery;
@@ -354,6 +367,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @OnClick(R.id.description_edit)
     public void editDescriptionAndCaption(View view) {
         Log.d("hoho", "language+ languageCaption");
+        progressBarEditDescription.setVisibility(VISIBLE);
+        editDescription.setVisibility(GONE);
         getDescriptionList();
 
     }
@@ -366,14 +381,91 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     private void extractCaptionDescription(String s) {
-        final HashMap<String,String> descriptions = getDescriptions(s);
+        final LinkedHashMap<String,String> descriptions = getDescriptions(s);
         final HashMap<String,String> captions = getCaptionsList();
 
+        ArrayList<UploadMediaDetail> descriptionAndCaptions = new ArrayList<>();
+//        for (final Map.Entry mapElement: captions.entrySet()){
+//
+//            String language = (String) mapElement.getKey();
+//            Log.d("DescriptionAndCaption", "language "+language);
+////            Log.d("DescriptionAndCaption", "des "+descriptions.get(language));
+//            Log.d("DescriptionAndCaption", "cap "+captions.get(language));
+//            Log.d("DescriptionAndCaption", "capMap "+mapElement.getValue());
+//        }
+//        for (final Map.Entry mapElement: descriptions.entrySet()){
+//
+//            String language = (String) mapElement.getKey();
+//            Log.d("DescriptionAndCaption", "language "+language);
+//            Log.d("DescriptionAndCaption", "des "+descriptions.get(language));
+////            Log.d("DescriptionAndCaption", "cap "+captions.get(language));
+//            Log.d("DescriptionAndCaption", "desMap "+mapElement.getValue());
+//        }
+        if(captions.size() >= descriptions.size()) {
+            Log.d("DescriptionAndCaption", "size " + captions.size());
+            for (final Map.Entry mapElement : captions.entrySet()) {
 
+                String language = (String) mapElement.getKey();
+                Log.d("DescriptionAndCaption", "language " + language);
+//            Log.d("DescriptionAndCaption", "des "+descriptions.get(language));
+                Log.d("DescriptionAndCaption", "cap " + captions.get(language));
+                Log.d("DescriptionAndCaption", "capMap " + mapElement.getValue());
+                if (descriptions.containsKey(language)) {
+                    Log.d("DescriptionAndCaption", "des ");
+                    descriptionAndCaptions.add(
+                        new UploadMediaDetail(language, descriptions.get(language),
+                            (String) mapElement.getValue())
+                    );
+                } else {
+                    Log.d("DescriptionAndCaption", "no des ");
+                    descriptionAndCaptions.add(
+                        new UploadMediaDetail(language, "",
+                            (String) mapElement.getValue())
+                    );
+                }
+            }
+        } else {
+            Log.d("CaptionDescriptionAnd", "size " + captions.size());
+            for (final Map.Entry mapElement : descriptions.entrySet()) {
+
+                String language = (String) mapElement.getKey();
+                Log.d("CaptionDescriptionAnd", "language " + language);
+//            Log.d("DescriptionAndCaption", "des "+descriptions.get(language));
+                Log.d("CaptionDescriptionAnd", "cap " + captions.get(language));
+                Log.d("CaptionDescriptionAnd", "capMap " + mapElement.getValue());
+                if (captions.containsKey(language)) {
+                    Log.d("CaptionDescriptionAnd", "des ");
+                    descriptionAndCaptions.add(
+                        new UploadMediaDetail(language, (String) mapElement.getValue(),
+                            captions.get(language))
+                    );
+                } else {
+                    Log.d("CaptionDescriptionAnd", "no des ");
+                    descriptionAndCaptions.add(
+                        new UploadMediaDetail(language, (String) mapElement.getValue(),
+                            "")
+                    );
+                }
+            }
+        }
+
+        for (UploadMediaDetail d :
+            descriptionAndCaptions) {
+            Log.d("CaptionDescriptionAnd", "des "+d.getDescriptionText()+" cap "
+                +d.getCaptionText()+" lan "+d.getLanguageCode());
+        }
+
+        Intent intent = new Intent(requireContext(), DescriptionEditActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("mylist", descriptionAndCaptions);
+        Log.d("wikiText", s);
+        bundle.putString("wikiText", s);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, REQUEST_CODE_EDIT_DESCRIPTION);
 
     }
 
-    private HashMap<String,String> getDescriptions(String s) {
+    private LinkedHashMap<String,String> getDescriptions(String s) {
         Log.d("WikiText","yyyyyy"+ s);
         int descriptionIndex = s.indexOf("description=");
         if(descriptionIndex == -1){
@@ -382,7 +474,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         Log.d("WikiText", "descriptionIndex"+descriptionIndex);
 
         if( descriptionIndex == -1 ){
-            return new HashMap<String,String>();
+            return new LinkedHashMap<String,String>();
         } else {
             String descriptionToEnd = s.substring(descriptionIndex+12);
             int descriptionEndIndex = descriptionToEnd.indexOf("\n");
@@ -391,7 +483,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             String description = s.substring(descriptionIndex+12, descriptionIndex+12+descriptionEndIndex);
             Log.d("WikiText",description);
             String[] arr = description.trim().split(",");
-            HashMap<String,String> descriptionList = new HashMap<>();
+            LinkedHashMap<String,String> descriptionList = new LinkedHashMap<>();
             for (String string :
                 arr) {
                 int startCode = string.indexOf("{{");
@@ -404,6 +496,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 Log.d("WikiText","languageDescription "+languageDescription);
 
                 descriptionList.put(languageCode, languageDescription);
+            }
+            for (final Map.Entry mapElement : descriptionList.entrySet()) {
+
+                String language = (String) mapElement.getKey();
+                Log.d("WikiText", "language " + language);
+                Log.d("WikiText", "capMap " + mapElement.getValue());
+
             }
             return descriptionList;
         }
@@ -921,6 +1020,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             assert data != null;
             final CameraPosition cameraPosition = LocationPicker.getCameraPosition(data);
 
+            Log.d("testing","nullii ");
+            Log.d("testing","nullii "+cameraPosition);
+
+
             if (cameraPosition != null) {
 
                 final String latitude = String.valueOf(cameraPosition.target.getLatitude());
@@ -940,10 +1043,30 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                     updateCoordinates(latitude, longitude, accuracy);
                 }
             }
-        } else if (resultCode == RESULT_CANCELED) {
+        } else  if (requestCode == REQUEST_CODE_EDIT_DESCRIPTION && resultCode == RESULT_OK) {
+            String updatedWikiText = data.getStringExtra("updatedWikiText");
+            Log.d("EditDes", "Updated "+updatedWikiText);
+            compositeDisposable.add(descriptionEditHelper.addDescription(media,
+                updatedWikiText)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s -> {
+                    Timber.d("Descriptions are added.");
+                }));
+            progressBarEditDescription.setVisibility(GONE);
+            editDescription.setVisibility(VISIBLE);
+
+        } else if (requestCode == REQUEST_CODE && resultCode == RESULT_CANCELED) {
             viewUtil.showShortToast(getContext(),
                 Objects.requireNonNull(getContext())
                     .getString(R.string.coordinates_picking_unsuccessful));
+        } else if (requestCode == REQUEST_CODE_EDIT_DESCRIPTION && resultCode == RESULT_CANCELED) {
+            progressBarEditDescription.setVisibility(GONE);
+            editDescription.setVisibility(VISIBLE);
+
+            viewUtil.showShortToast(getContext(),
+                Objects.requireNonNull(getContext())
+                    .getString(R.string.descriptions_picking_unsuccessful));
         }
     }
 

@@ -6,4 +6,37 @@
   android:layout_height="match_parent"
   tools:context=".description.DescriptionEditActivity">
 
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rv_descriptions_captions"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toTopOf="@id/edit_bottom_layout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <RelativeLayout
+    android:id="@+id/edit_bottom_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
+
+    <androidx.appcompat.widget.AppCompatButton
+      android:id="@+id/btn_add_description"
+      style="@style/Widget.AppCompat.Button.Borderless"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:minWidth="@dimen/fragment_height"
+      android:text="+" />
+
+    <androidx.appcompat.widget.AppCompatButton
+      android:id="@+id/btn_edit_submit"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:text="@string/submit"
+      android:textColor="@android:color/white" />
+  </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

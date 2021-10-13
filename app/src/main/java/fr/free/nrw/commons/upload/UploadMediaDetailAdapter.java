@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,12 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         this.savedLanguageValue = savedLanguageValue;
     }
 
+    public UploadMediaDetailAdapter(String savedLanguageValue, List<UploadMediaDetail> uploadMediaDetails) {
+        this.uploadMediaDetails = uploadMediaDetails;
+        selectedLanguages = new HashMap<>();
+        this.savedLanguageValue = savedLanguageValue;
+    }
+
     public void setCallback(Callback callback) {
         this.callback = callback;
     }
@@ -51,6 +58,10 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         this.uploadMediaDetails = uploadMediaDetails;
         selectedLanguages = new HashMap<>();
         notifyDataSetChanged();
+    }
+
+    public List<UploadMediaDetail> getItems(){
+        return uploadMediaDetails;
     }
 
     @NonNull
@@ -126,6 +137,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
             captionItemEditText.setText(uploadMediaDetail.getCaptionText());
             descItemEditText.setText(uploadMediaDetail.getDescriptionText());
 
+
             if (position == 0) {
                 removeButton.setVisibility(View.GONE);
                 captionInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
@@ -178,16 +190,28 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int position,
                                            long l) {
-                    description.setSelectedLanguageIndex(position);
-                    String languageCode = ((SpinnerLanguagesAdapter) adapterView.getAdapter())
+                    Log.d("Spinner", "default "+description.getLanguageCode());
+//                    if(description.getLanguageCode() != null){
+//                        description.setSelectedLanguageIndex(position);
+//                        String languageCode = description.getLanguageCode();
+//                        selectedLanguages.remove(adapterView);
+//                        selectedLanguages.put(adapterView, languageCode);
+//                        ((SpinnerLanguagesAdapter) adapterView
+//                            .getAdapter()).setSelectedLangCode(languageCode);
+//                        spinnerDescriptionLanguages.setSelection(position);
+//                        Timber.d("Description language code is: " + languageCode);
+//                    } else {
+                        description.setSelectedLanguageIndex(position);
+                        String languageCode = ((SpinnerLanguagesAdapter) adapterView.getAdapter())
                             .getLanguageCode(position);
-                    description.setLanguageCode(languageCode);
-                    selectedLanguages.remove(adapterView);
-                    selectedLanguages.put(adapterView, languageCode);
-                    ((SpinnerLanguagesAdapter) adapterView
+                        description.setLanguageCode(languageCode);
+                        selectedLanguages.remove(adapterView);
+                        selectedLanguages.put(adapterView, languageCode);
+                        ((SpinnerLanguagesAdapter) adapterView
                             .getAdapter()).setSelectedLangCode(languageCode);
-                    spinnerDescriptionLanguages.setSelection(position);
-                    Timber.d("Description language code is: "+languageCode);
+                        spinnerDescriptionLanguages.setSelection(position);
+                        Timber.d("Description language code is: " + languageCode);
+//                    }
                 }
 
                 @Override
@@ -197,11 +221,11 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
 
 
             if (description.getSelectedLanguageIndex() == -1) {
-                if (!TextUtils.isEmpty(savedLanguageValue)) {
+                if (!TextUtils.isEmpty(description.getLanguageCode())) {
                     // If user has chosen a default language from settings activity
                     // savedLanguageValue is not null
                     spinnerDescriptionLanguages.setSelection(languagesAdapter
-                        .getIndexOfLanguageCode(savedLanguageValue));
+                        .getIndexOfLanguageCode(description.getLanguageCode()));
                 } else {
                     //Checking whether Language Code attribute is null or not.
                     if (uploadMediaDetails.get(position).getLanguageCode() != null) {
