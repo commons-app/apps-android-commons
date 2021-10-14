@@ -15,4 +15,4 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew -Pcoverage testBetaDebugUnitTestCoverage
     - name: Upload Test Report
-      run:  bash <(curl -s https://codecov.io/bash) -f "app/build/reports/jacoco/testBetaDebugUnitTestCoverage/testBetaDebugUnitTestCoverage.xml"
+      run: bash <(curl -Os https://uploader.codecov.io/latest/linux/codecov) -f "app/build/reports/jacoco/testBetaDebugUnitTestCoverage/testBetaDebugUnitTestCoverage.xml"
