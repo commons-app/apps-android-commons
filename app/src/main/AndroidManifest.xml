@@ -33,6 +33,7 @@
         android:supportsRtl="true"
         tools:replace="android:appComponentFactory"
         android:appComponentFactory="commons"
+        android:requestLegacyExternalStorage = "true"
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity android:name="org.acra.dialog.CrashReportDialog"
