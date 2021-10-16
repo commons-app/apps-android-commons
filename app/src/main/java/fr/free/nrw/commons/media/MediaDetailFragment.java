@@ -118,7 +118,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     public static MediaDetailFragment forMedia(int index, boolean editable, boolean isCategoryImage, boolean isWikipediaButtonDisplayed) {
         MediaDetailFragment mf = new MediaDetailFragment();
-
         Bundle state = new Bundle();
         state.putBoolean("editable", editable);
         state.putBoolean("isCategoryImage", isCategoryImage);
@@ -126,7 +125,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         state.putInt("listIndex", 0);
         state.putInt("listTop", 0);
         state.putBoolean("isWikipediaButtonDisplayed", isWikipediaButtonDisplayed);
-
         mf.setArguments(state);
 
         return mf;
@@ -212,6 +210,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     RecyclerView categoryRecyclerView;
     @BindView(R.id.update_categories_button)
     Button updateCategoriesButton;
+    @BindView(R.id.coordinate_edit)
+    Button coordinateEditButton;
     @BindView(R.id.dummy_category_edit_container)
     LinearLayout dummyCategoryEditContainer;
     @BindView(R.id.pb_categories)
@@ -335,6 +335,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         if(applicationKvStore.getBoolean("login_skipped")){
             delete.setVisibility(GONE);
+            coordinateEditButton.setVisibility(GONE);
         }
 
         handleBackEvent(view);
