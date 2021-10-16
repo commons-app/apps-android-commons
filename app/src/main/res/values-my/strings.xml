@@ -45,11 +45,12 @@
   <string name="authentication_failed">စစ်ဆေးခြင်း မအောင်မြင်ပါ၊ ထပ်မံ၍ လော့အင်ဝင်ပါ။</string>
   <string name="uploading_started">Upload စတင်ပါပြီ</string>
   <string name="upload_completed_notification_title">%1$s တင်ပြီးပြီ</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">ဖိုင်တင်မှု %1$s စတင်နေသည်</string>
+  <string name="upload_progress_notification_title_start">ဖိုင်အက်ပလုဒ်တင်နေသည်- %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ဖိုင်တင်နေသည်</string>
   <string name="upload_progress_notification_title_finishing">ဖိုင်တင်ခြင်း ပြီးဆုံးမှု %1$s</string>
   <string name="upload_failed_notification_title">ဖိုင်တင်ခြင်း %1$s မအောင်မြင်ပါ</string>
   <string name="upload_paused_notification_title">ဖိုင်တင်ခြင်း %1$s မအောင်မြင်ပါ</string>
+  <string name="upload_failed_notification_subtitle">ကြည့်ရန်နှိပ်ပါ</string>
   <string name="upload_paused_notification_subtitle">ကြည့်ရန်နှိပ်ပါ</string>
   <string name="title_activity_contributions">မကြာသေးခင်က မိမိတင်ထားသည်များ</string>
   <string name="contribution_state_failed">မအောင်မြင်ပါ</string>
@@ -93,7 +94,7 @@
   <string name="menu_cancel_upload">မလုပ်တော့</string>
   <string name="menu_download">ဒေါင်းလုပ်ယူရန်</string>
   <string name="preference_license">နဂို လိုင်စင်</string>
-  <string name="use_previous" fuzzy="true">ယခင် ခေါင်းစဉ်/ဖော်ပြချက် သုံးမည်</string>
+  <string name="use_previous">ယခင် ခေါင်းစဉ်နှင့်ဖော်ပြချက် သုံးမည်</string>
   <string name="preference_theme" fuzzy="true">ညကြည့်ပုံစံ</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
@@ -184,7 +185,7 @@
   <string name="null_url">အမှား! URL မတွေ့ရှိပါ</string>
   <string name="nominate_deletion">ဖျက်ပစ်ရန် အဆိုပြုပါ</string>
   <string name="nominated_for_deletion">ဤရုပ်ပုံအား ဖျက်ပစ်ရန် အဆိုပြုခံထားရသည်။</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;အသေးစိတ်အတွက် ဝဘ်စာမျက်ကိုကြည့်ပါ&lt;/u&gt;</string>
+  <string name="nominated_see_more">အသေးစိတ်အတွက် ဝဘ်စာမျက်ကိုကြည့်ပါ</string>
   <string name="skip_login">ကျော်ရန်</string>
   <string name="navigation_item_login">အကောင့်ဝင်ရန်</string>
   <string name="skip_login_title">အကောင့်ထဲဝင်ခြင်းကို အမှန်တကယ် ကျော်သွားလိုပါသလား</string>
@@ -259,7 +260,7 @@
   <string name="contributions_fragment">ဆောင်ရွက်ချက်များ</string>
   <string name="nearby_fragment">အနီးအနား</string>
   <string name="notifications">အသိပေးချက်များ</string>
-  <string name="read_notifications" fuzzy="true">အသိပေးချက်များ (မော်ကွန်းတင်ပြီး)</string>
+  <string name="read_notifications">အသိပေးချက်များ (ဖတ်ပြီး)</string>
   <string name="display_nearby_notification">အနီးအနားအသိပေးချက်ကို ပြသရန်</string>
   <string name="list_sheet">စာရင်း</string>
   <string name="storage_permission">သိုလှောင်ခန်း ခွင်ပြုချက်</string>
@@ -339,6 +340,9 @@
   <string name="some_error">အမှားအယွင်းအချို့ရှိခဲ့သည်</string>
   <string name="upload_nearby_place_found_title">အနီးအနားနေရာ တွေ့ရှိသည်</string>
   <string name="title_app_shortcut_setting">အပြင်အဆင်များ</string>
+  <string name="theme_dark_name">အမှောင်</string>
+  <string name="theme_light_name">အလင်း</string>
+  <string name="ask_to_turn_location_on">တည်နေရာ ဖွင့်မည်လော</string>
   <string name="load_more">ပို၍ ဆွဲတင်ရန်</string>
   <string name="add_picture_to_wikipedia_article_title">ဝီကီပီးဒီးယားသို့ ပုံတစ်ခုပေါင်းထည့်ရန်</string>
   <string name="confirm">အတည်ပြု</string>
@@ -363,6 +367,7 @@
   <string name="leaderboard_used">အသုံးပြု</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;ဤမြေပုံအား ပိုမိုကောင်းမွန်အောင်ပြုလုပ်ရန်&lt;/a&gt;</string>
   <string name="license_step_title">မီဒီယာလိုင်စင်</string>
+  <string name="media_detail_step_title">မီဒီယာ အသေးစိတ်များ</string>
   <string name="menu_view_category_page">ကဏ္ဍစာမျက်နှာကို ကြည့်ရန်</string>
   <string name="read_help_link">ပိုမို ဖတ်ရန်</string>
   <string name="media_detail_in_all_languages">ဘာသာစကားအားလုံးထဲတွင်</string>
@@ -373,6 +378,7 @@
   <string name="custom_selector_empty_text">ရုပ်ပုံများမရှိ</string>
   <string name="done">ပြီးပြီ</string>
   <string name="back">နောက်သို့</string>
+  <string name="welcome_custom_selector_ok">လန်းသည်</string>
   <string name="custom_selector_already_uploaded_image_text">ဤရုပ်ပုံအား ကွန်မွန်းစ်သို့ အက်ပလုဒ်တင်ပြီးသားဖြစ်ပါသည်။</string>
   <string name="learn_more">ပိုမိုလေ့လာရန်</string>
 </resources>

@@ -2,6 +2,7 @@
 <!-- Authors:
 * Arya sarhan
 * Cwtiyar
+* Halbast
 * Épine
 -->
 <resources>
@@ -44,7 +45,7 @@
   <string name="categories_search_text_hint">پۆلەکان بگەڕێ</string>
   <string name="menu_save_categories">پاشەکەوت</string>
   <string name="refresh_button">نوێکردنەوە</string>
-  <string name="display_list_button">پێرست</string>
+  <string name="display_list_button">پێڕست</string>
   <string name="title_activity_settings">ڕێکخستنەکان</string>
   <string name="title_activity_signup">خۆ تۆمارکردن</string>
   <string name="title_activity_category_details">پۆل</string>

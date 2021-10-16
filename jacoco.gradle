@@ -53,7 +53,7 @@ project.afterEvaluate {
                             '**/Dagger*Component.class',
                             '**/Dagger*Component$Builder.class',
                             '**/*Module_*Factory.class',
-                            '**/di/module/*',
+                            '**/di/*',
                             '**/*_Factory*.*',
                             '**/*Module*.*',
                             '**/*Dagger*.*',
