@@ -119,6 +119,7 @@ import io.reactivex.schedulers.Schedulers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -246,6 +247,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * WLM URL
      */
     public static final String WLM_URL = "https://commons.wikimedia.org/wiki/Commons:Mobile_app/Contributing_to_WLM_using_the_app";
+    /**
+     * Saves response of list of places for the first time
+     */
+    private List<Place> places;
 
     @NonNull
     public static NearbyParentFragment newInstance() {
@@ -636,6 +641,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
                 NearbyFilterState.setNeedPhotoSelected(isChecked);
                 presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
+                updatePlaceList(chipNeedsPhoto.isChecked(),
+                    chipExists.isChecked(), chipWlm.isChecked());
             } else {
                 chipNeedsPhoto.setChecked(!isChecked);
             }
@@ -647,6 +654,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
                 NearbyFilterState.setExistsSelected(isChecked);
                 presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
+                updatePlaceList(chipNeedsPhoto.isChecked(),
+                    chipExists.isChecked(), chipWlm.isChecked());
             } else {
                 chipExists.setChecked(!isChecked);
             }
@@ -658,10 +667,64 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
                 NearbyFilterState.setWlmSelected(isChecked);
                 presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
+                updatePlaceList(chipNeedsPhoto.isChecked(),
+                    chipExists.isChecked(), chipWlm.isChecked());
             }else{
                 chipWlm.setChecked(!isChecked);
             }
         });
+    }
+
+    /**
+     * Updates Nearby place list according to available chip states
+     *
+     * @param needsPhoto is chipNeedsPhoto checked
+     * @param exists is chipExists checked
+     * @param isWlm is chipWlm checked
+     */
+    private void updatePlaceList(final boolean needsPhoto, final boolean exists,
+        final boolean isWlm) {
+        final List<Place> updatedPlaces = new ArrayList<>();
+
+        if (needsPhoto) {
+            for (final Place place :
+                places) {
+                if (place.pic.trim().isEmpty() && !updatedPlaces.contains(place)) {
+                    updatedPlaces.add(place);
+                }
+            }
+        } else {
+            updatedPlaces.addAll(places);
+        }
+
+        if (exists) {
+            for(final Iterator<Place> placeIterator = updatedPlaces.iterator();
+                placeIterator.hasNext();){
+                final Place place = placeIterator.next();
+                if (!place.exists) {
+                    placeIterator.remove();
+                }
+            }
+        }
+
+        if (!isWlm) {
+            for (final Place place :
+                places) {
+                if (place.isMonument() && updatedPlaces.contains(place)) {
+                    updatedPlaces.remove(place);
+                }
+            }
+        } else {
+            for (final Place place :
+                places) {
+                if (place.isMonument() && !updatedPlaces.contains(place)) {
+                    updatedPlaces.add(place);
+                }
+            }
+        }
+
+        adapter.setItems(updatedPlaces);
+        noResultsView.setVisibility(updatedPlaces.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     /**
@@ -785,6 +848,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void updateListFragment(final List<Place> placeList) {
+        places = placeList;
         adapter.setItems(placeList);
         noResultsView.setVisibility(placeList.isEmpty() ? View.VISIBLE : View.GONE);
     }
