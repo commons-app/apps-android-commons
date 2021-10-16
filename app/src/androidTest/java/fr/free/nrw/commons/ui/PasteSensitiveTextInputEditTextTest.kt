@@ -1,52 +1,44 @@
-package fr.free.nrw.commons.ui;
+package fr.free.nrw.commons.ui
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import android.R
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.runner.AndroidJUnit4
+import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
+import org.junit.Assert
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import java.lang.Exception
+import kotlin.Throws
 
-import android.content.Context;
-import androidx.test.core.app.ApplicationProvider;
-import androidx.test.runner.AndroidJUnitRunner;
-import java.lang.reflect.Field;
-import org.junit.Before;
-import org.junit.Test;
+@RunWith(AndroidJUnit4::class)
+class PasteSensitiveTextInputEditTextTest {
 
-import androidx.test.runner.AndroidJUnit4;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-
-@RunWith(AndroidJUnit4.class)
-public class PasteSensitiveTextInputEditTextTest {
-
-    private Context context;
-    private PasteSensitiveTextInputEditText textView;
+    private var context: Context? = null
+    private var textView: PasteSensitiveTextInputEditText? = null
 
     @Before
-    public void setup(){
-        context = ApplicationProvider.getApplicationContext();
-        textView = new PasteSensitiveTextInputEditText(context);
+    fun setup() {
+        context = ApplicationProvider.getApplicationContext()
+        textView = PasteSensitiveTextInputEditText(context)
     }
 
     @Test
-    public void onTextContextMenuItem() {
-
-        textView.setText("Text");
-        textView.onTextContextMenuItem(android.R.id.paste);
-        assertEquals("Text", textView.getText().toString());
+    fun onTextContextMenuItem() {
+        textView!!.setText("Text")
+        textView!!.onTextContextMenuItem(R.id.paste)
+        Assert.assertEquals("Text", textView!!.text.toString())
     }
 
     @Test
-    public void setFormattingAllowed() throws Exception {
-
-        Field fieldFormattingAllowed = textView.getClass().getDeclaredField("formattingAllowed");
-        fieldFormattingAllowed.setAccessible(true);
-
-        textView.setFormattingAllowed(true);
-        assertTrue(fieldFormattingAllowed.getBoolean(textView));
-
-        textView.setFormattingAllowed(false);
-        assertFalse(fieldFormattingAllowed.getBoolean(textView));
+    @Throws(Exception::class)
+    fun setFormattingAllowed() {
+        val fieldFormattingAllowed = textView!!.javaClass.getDeclaredField("formattingAllowed")
+        fieldFormattingAllowed.isAccessible = true
+        textView!!.setFormattingAllowed(true)
+        Assert.assertTrue(fieldFormattingAllowed.getBoolean(textView))
+        textView!!.setFormattingAllowed(false)
+        Assert.assertFalse(fieldFormattingAllowed.getBoolean(textView))
     }
-
-
 }

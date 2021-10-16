@@ -36,7 +36,7 @@ public class PasteSensitiveTextInputEditText extends TextInputEditText {
             proceeded = super.onTextContextMenuItem(android.R.id.pasteAsPlainText);
         }else {
             proceeded = super.onTextContextMenuItem(id);
-            if (getText() != null) {
+            if (proceeded && getText() != null) {
                 // rewrite with plain text so formatting is lost
                 setText(getText().toString());
                 setSelection(getText().length());
