@@ -73,6 +73,17 @@ interface PageEditInterface {
         @Field("token") token: String
     ): Observable<Edit>
 
+
+    @FormUrlEncoded
+    @Headers("Cache-Control: no-cache")
+    @POST(Service.MW_API_PREFIX + "action=wbsetlabel&format=json&site=commonswiki&formatversion=2")
+    fun setCaptions(
+        @Field("summary") summary: String,
+        @Field("language") title: String,
+        @Field("value") prependText: String,
+        @Field("token") token: String
+    ): Observable<Edit>
+
     /**
      * Get wiki text for provided file names
      * @param titles : Name of the file
