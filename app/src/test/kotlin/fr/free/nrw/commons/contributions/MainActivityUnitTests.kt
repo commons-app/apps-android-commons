@@ -212,6 +212,16 @@ class MainActivityUnitTests {
 
     @Test
     @Throws(Exception::class)
+    fun testSetUpPager() {
+        val method: Method = MainActivity::class.java.getDeclaredMethod(
+            "setUpPager"
+        )
+        method.isAccessible = true
+        method.invoke(activity)
+    }
+
+    @Test
+    @Throws(Exception::class)
     fun testSetUpLoggedOutPager() {
         val method: Method = MainActivity::class.java.getDeclaredMethod(
             "setUpLoggedOutPager"
