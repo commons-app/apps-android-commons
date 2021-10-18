@@ -80,7 +80,7 @@ class ProfileActivityTest {
     @Test
     @Throws(Exception::class)
     fun testStartYourself() {
-        ProfileActivity.startYourself(activity)
+        ProfileActivity.startYourself(activity, "test", false)
     }
 
     @Test

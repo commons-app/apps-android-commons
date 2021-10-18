@@ -527,7 +527,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="coordinates_picking_unsuccessful">Unable to get coordinates.</string>
 
   <string name="share_image_via">Share image via</string>
-  <string name="no_achievements_yet">You haven\'t made any contributions yet</string>
+  <string name="you_have_no_achievements_yet">You haven\'t made any contributions yet</string>
+  <string name="no_achievements_yet">%s has not made any contributions yet</string>
   <string name="account_created">Account created!</string>
   <string name="text_copy">Text copied to clipboard</string>
   <string name="notification_mark_read">Notification marked as read</string>
@@ -656,4 +657,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="learn_more">LEARN MORE</string>
   <string name="wlm_campaign_title">Wiki Loves Monuments</string>
   <string name="wlm_campaign_description">Wiki Loves Monuments is an international photo contest for monuments organised by Wikimedia</string>
+  <string name="contributions_of_user">Contributions of User: %s</string>
+  <string name="achievements_of_user">Achievements of User: %s</string>
+  <string name="menu_view_user_page">View user page</string>
 </resources>

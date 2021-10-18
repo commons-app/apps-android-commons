@@ -32,6 +32,9 @@ class ContributionsListPresenterTest {
     @Mock
     internal lateinit var repository: ContributionsRepository
 
+    @Mock
+    internal lateinit var remoteDataSource: ContributionsRemoteDataSource
+
     @Rule
     @JvmField
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -49,7 +52,12 @@ class ContributionsListPresenterTest {
         MockitoAnnotations.initMocks(this)
         scheduler = Schedulers.trampoline()
         contributionsListPresenter =
-            ContributionsListPresenter(contributionBoundaryCallback, repository, scheduler);
+            ContributionsListPresenter(
+                contributionBoundaryCallback,
+                remoteDataSource,
+                repository,
+                scheduler
+            );
     }
 
     @Test
