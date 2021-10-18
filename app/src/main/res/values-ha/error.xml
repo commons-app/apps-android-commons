@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Umar-askirason
+-->
+<resources>
+  <string name="crash_dialog_title">Commons sun baci</string>
+  <string name="crash_dialog_text">Oops. wani abu ya samu matsala</string>
+  <string name="crash_dialog_comment_prompt">Gaya mana abunda kuke yi, Saboda ha ku shirya shi zuwa imel din mu. Zai taimake mu wajen gyara shi</string>
+  <string name="crash_dialog_ok_toast">Mun gode!</string>
+</resources>

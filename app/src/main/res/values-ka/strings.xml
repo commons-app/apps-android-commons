@@ -8,20 +8,24 @@
     <item quantity="one">%1$d ფაილი იტვირთება</item>
     <item quantity="other">%1$d ფაილი იტვირთება</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <string name="starting_uploads">ატვირთვის დაწყება</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">მუშავდება %d ატვირთვა</item>
+    <item quantity="other">მუშავდება %d ატვირთვა</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d ატვირთვა</item>
+    <item quantity="other">%d ატვირთვები</item>
+  </plurals>
+  <string name="share_license_summary">ეს სურათი გავრცელდება %1$s ლიცენზიით</string>
+  <plurals name="upload_count_title">
     <item quantity="one">%1$d ატვირთვა</item>
     <item quantity="other">%1$d ატვირთვა</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">იწყება %1$d ატვირთვა</item>
-    <item quantity="other">იწყება %1$d ატვირთვა</item>
-  </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d ატვირთვა</item>
-    <item quantity="other">%1$d ატვირთვები</item>
-  </plurals>
-  <string name="share_license_summary">ეს სურათი გავრცელდება %1$s ლიცენზიით</string>
   <string name="navigation_item_explore">აღმოაჩინე</string>
   <string name="preference_category_appearance">იერსახე</string>
   <string name="preference_category_general">მთავარი</string>
@@ -44,13 +48,16 @@
   <string name="upload_failed">ფაილი არ მოიძებნა. გთხოვთ, სცადოთ სხვა ფაილი.</string>
   <string name="authentication_failed">ავთენტიფიკაცია ვერ მოხერხდა, გთხოვთ შედით ხელახლა</string>
   <string name="uploading_started">ატვირთვა დაიწყო!</string>
+  <string name="uploading_queued">ატვირთვა რიგშია (შეზღუდული კავშირის რეჟიმი ჩართულია)</string>
   <string name="upload_completed_notification_title">%1$ ატვირთულია!</string>
   <string name="upload_completed_notification_text">დააჭირეთ თქვენი ატვირთვის სანახავად</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">დაიწყო %1$ ატვირთვა</string>
+  <string name="upload_progress_notification_title_start">ფაილის ატვირთვა: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$ ატვირთვა</string>
   <string name="upload_progress_notification_title_finishing">ატვირთვის დასრულება %1$</string>
   <string name="upload_failed_notification_title">%1$ ატვირთვა ვერ მოხერხდა</string>
+  <string name="upload_paused_notification_title">%1$s-ის ატვირთვა შეჩერებულია</string>
   <string name="upload_failed_notification_subtitle">დააჭირეთ სანახავად</string>
+  <string name="upload_paused_notification_subtitle">სანახავად დააჭირეთ</string>
   <string name="title_activity_contributions">ჩემი ბოლო ატვირთვები</string>
   <string name="contribution_state_queued">რიგი</string>
   <string name="contribution_state_failed">ვერ მოხერხდა</string>
@@ -61,8 +68,11 @@
   <string name="menu_nearby">ახლოს</string>
   <string name="provider_contributions">ჩემი ატვირთვები</string>
   <string name="menu_share">გაზიარება</string>
-  <string name="share_title_hint" fuzzy="true">სათაური (საჭიროა)</string>
+  <string name="menu_view_file_page">ფაილის გვერდის ნახვა</string>
+  <string name="share_title_hint">წარწერა (სავალდებულო)</string>
+  <string name="add_caption_toast">გთხოვთ, მიუთითოთ ამ ფაილის წარწერა</string>
   <string name="share_description_hint">აღწერა</string>
+  <string name="share_caption_hint">წარწერა</string>
   <string name="login_failed_network">შესვლა ვერ ხერხდება - ქსელის შეცდომა</string>
   <string name="login_failed_throttled">ძალიან ბევრი წარუმატებელი მცდელობა. გთხოვთ, რამდენიმე წუთში სცადეთ კვლავ.</string>
   <string name="login_failed_blocked">უკაცრავად, ეს მომხმარებელი დაბლოკილია ვიკისაწყობში</string>
@@ -76,7 +86,7 @@
   <string name="menu_save_categories">შენახვა</string>
   <string name="refresh_button">განახლება</string>
   <string name="display_list_button">სია</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">ატვირთვები არ არის</string>
+  <string name="contributions_subtitle_zero">(ატვირთვები არ არის)</string>
   <string name="categories_not_found">შესატყვისი კატეგორიები „%1$s“ ვერ მოიძებნა</string>
   <string name="categories_skip_explanation">დაამატეთ კატეგორიები, რომ თქვენი სურათები უფრო აღმოსაჩენი იყოს ვიკისაწყობში.\nდაიწყეთ წერა კატეგორიების დასამატებლად.</string>
   <string name="categories_activity_title">კატეგორია</string>
@@ -197,7 +207,7 @@
   <string name="upload_problem_image_duplicate">სურათი უკვე არის ვიკისაწყობში.</string>
   <string name="upload_problem_different_geolocation">ეს სურათი სხვა ადგილას არის გადაღებული.</string>
   <string name="upload_problem_do_you_continue">მაინც გსურთ ამ სურათის ატვირთვა?</string>
-  <string name="use_external_storage" fuzzy="true">გარე მეხსიერების გამოყენება</string>
+  <string name="use_external_storage">აპლიკაციით გადაღებულის შენახვა</string>
   <string name="null_url">შეცდომა! URL ვერ მოიძებნა</string>
   <string name="nominate_deletion">წაშლაზე ნომინირება</string>
   <string name="nominated_for_deletion">ეს სურათი წარდგენილია წაშლაზე</string>
@@ -260,10 +270,10 @@
   <string name="contributions_fragment">წვლილი</string>
   <string name="nearby_fragment">ახლოს</string>
   <string name="notifications">შეტყობინებები</string>
-  <string name="read_notifications" fuzzy="true">შეტყობინებები (არქივი)</string>
+  <string name="read_notifications">შეტყობინებები (წაკითხვა)</string>
   <string name="list_sheet">სია</string>
   <string name="storage_permission">მეხსიერების ნებართვა</string>
-  <string name="step_count" fuzzy="true">ნაბიჯი %1$d %2$d-დან</string>
+  <string name="step_count">ნაბიჯი %1$d %2$d-დან: %3$s</string>
   <string name="next">შემდეგი</string>
   <string name="previous">წინა</string>
   <string name="submit">გაგზავნა</string>
@@ -287,4 +297,10 @@
   <string name="delete_helper_ask_reason_copyright_internet_photo">შემთხვევითი ფოტო ინტერნეტიდან</string>
   <string name="delete_helper_ask_reason_copyright_logo">ლოგო</string>
   <string name="account_created">ანგარიში შეიქმნა!</string>
+  <string name="theme_dark_name">მუქი</string>
+  <string name="theme_light_name">ღია</string>
+  <string name="done">გაკეთდა</string>
+  <string name="back">უკან</string>
+  <string name="welcome_custom_selector_ok">შესანიშნავია</string>
+  <string name="learn_more">მეტის გაგება</string>
 </resources>
