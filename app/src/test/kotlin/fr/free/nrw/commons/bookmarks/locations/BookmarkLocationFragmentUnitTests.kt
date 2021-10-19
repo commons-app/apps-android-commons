@@ -77,7 +77,18 @@ class BookmarkLocationFragmentUnitTests {
     private val mockBookmarkList: List<Place>
         private get() {
             val list = ArrayList<Place>()
-            list.add(Place("en","a place",null,"a description",null,"a cat",null,null,true))
+            list.add(
+                Place(
+                    "en",
+                    "a place",
+                    null,
+                    "a description",
+                    null,
+                    "a cat",
+                    null,
+                    null,
+                    true)
+            )
             return list
         }
 

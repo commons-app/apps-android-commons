@@ -117,6 +117,7 @@
   <string name="title_activity_settings">設定</string>
   <string name="title_activity_signup">註冊</string>
   <string name="title_activity_featured_images">特色圖片</string>
+  <string name="title_activity_custom_selector">自訂選擇器</string>
   <string name="title_activity_category_details">分類</string>
   <string name="title_activity_review">同行評審</string>
   <string name="menu_about">關於</string>
@@ -327,6 +328,7 @@
   <string name="quiz_screenshot_question">這張截圖可以上傳嗎？</string>
   <string name="share_app_title">分享應用程式</string>
   <string name="error_fetching_nearby_places">索取附近地點時出錯。</string>
+  <string name="error_fetching_nearby_monuments">索取附近古蹟景點時出錯。</string>
   <string name="no_recent_searches">無近期搜尋</string>
   <string name="delete_recent_searches_dialog">確定要清除搜尋歷史嗎？</string>
   <string name="delete_search_dialog">您要刪除此搜尋嗎？</string>
@@ -610,4 +612,18 @@
   <string name="location_picker_image_view_shadow">位置點選器的圖片檢視陰影</string>
   <string name="image_location">圖片位置</string>
   <string name="check_whether_location_is_correct">檢查位置是否正確</string>
+  <string name="custom_selector_title">自訂選擇器</string>
+  <string name="custom_selector_empty_text">沒有圖片</string>
+  <string name="done">完成</string>
+  <string name="back">返回</string>
+  <string name="welcome_custom_picture_selector_text">歡迎來到自訂圖片選擇器</string>
+  <string name="custom_selector_info_text1">此點選器顯示已在維基共享資源上的各種不同圖片。</string>
+  <string name="custom_selector_info_text2">右邊的圖片與與左邊圖片不同，它有代表已經上傳到維基共享資源的標誌。\n請輕壓圖片來預覽。</string>
+  <string name="welcome_custom_selector_ok">棒極了</string>
+  <string name="custom_selector_already_uploaded_image_text">此圖片已上傳到維基共享資源。</string>
+  <string name="wlm_upload_info">此圖片會進入2021年維基愛古蹟競賽</string>
+  <string name="display_monuments">顯示古蹟景點</string>
+  <string name="wlm_month_message">維基愛古蹟的月份！</string>
+  <string name="learn_more">了解更多</string>
+  <string name="wlm_campaign_description">維基愛古蹟是由維基媒體舉行的國際古蹟攝影比賽</string>
 </resources>

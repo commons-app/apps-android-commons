@@ -21,6 +21,8 @@ public interface MediaLicenseContract {
         void getLicenses();
 
         void selectLicense(String licenseName);
+
+        boolean isWLMSupportedForThisPlace();
     }
 
 }

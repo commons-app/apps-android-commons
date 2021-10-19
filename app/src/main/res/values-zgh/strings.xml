@@ -20,11 +20,11 @@
   <string name="upload_failed">ⴰⴼⴰⵢⵍⵓ ⵓⵔ ⵉⵜⵜⵢⵓⴼⴰ. ⴰⵎⵓⵔ ⵏⵏⴽ ⴰⵔⵎ ⴰⴼⴰⵢⵍⵓ ⵢⴰⴹⵏ.</string>
   <string name="uploading_started">ⴰⵙⴽⵜⵔ ⵉⵙⵙⵏⵜⵉ!</string>
   <string name="upload_completed_notification_title">ⵉⵜⵜⵓⵙⴽⵜⵔ%1$s!</string>
-  <string name="upload_completed_notification_text">ⴰⴽⵍ ⴰⴼⴰⴷ ⴰⴷ ⵜⵥⵔⴷ ⴰⵙⴽⵜⵔ ⵏⵏⴽ</string>
+  <string name="upload_completed_notification_text">ⴰⴷⵔ ⵃⵎⴰ ⴰⴷ ⵜⵙⴽⵏⴷ ⴰⵙⴽⵜⵔ ⵏⵏⴽ</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">ⵉⵙⵙⵏⵜⵉ ⵓⵙⵙⴽⵜⵔ ⵏ %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">ⴷⴰ ⵉⵜⵜⵓⵙⴽⵜⴰⵔ %1$s</string>
+  <string name="upload_progress_notification_title_in_progress">ⴰⵙⴽⵜⵓⵔ ⵏ %1$s</string>
   <string name="upload_failed_notification_title">ⴰⵙⵙⴽⵜⵔ ⵏ %1$s ⵉⵣⴳⵍ</string>
-  <string name="upload_failed_notification_subtitle">ⴰⴽⵍ ⴰⴼⴰⴷ ⴰⴷ ⵜⵥⵔⴷ</string>
+  <string name="upload_failed_notification_subtitle">ⴰⴽⵍ ⴰⴼⴰⴷ ⴰⴷ ⵜⵙⴽⵏⴷ</string>
   <string name="title_activity_contributions">ⵉⵙⴽⵜⴰⵔⵏ ⵉⵏⵓ ⵉⵎⴳⴳⵓⵔⴰ</string>
   <string name="contribution_state_in_progress">ⵉⵙⵎⴷ %1$d%%</string>
   <string name="contribution_state_starting">ⴰⵙⵙⴽⵜⵔ</string>

@@ -66,6 +66,9 @@ class UploadCategoriesFragmentUnitTests {
     private lateinit var tvTitle: TextView
 
     @Mock
+    private lateinit var tvSubTitle: TextView
+
+    @Mock
     private lateinit var tooltip: ImageView
 
     @Mock
@@ -104,6 +107,7 @@ class UploadCategoriesFragmentUnitTests {
         Whitebox.setInternalState(fragment, "rvCategories", rvCategories)
         Whitebox.setInternalState(fragment, "tvTitle", tvTitle)
         Whitebox.setInternalState(fragment, "tooltip", tooltip)
+        Whitebox.setInternalState(fragment, "tvSubTitle", tvSubTitle)
     }
 
     @Test

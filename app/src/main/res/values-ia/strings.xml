@@ -33,7 +33,7 @@
   <string name="menu_from_gallery">Del galeria</string>
   <string name="menu_from_camera">Prender photo</string>
   <string name="provider_contributions">Mi incargamentos</string>
-  <string name="menu_share">Divider</string>
+  <string name="menu_share">Condivider</string>
   <string name="write_storage_permission_rationale">Permission necessari: Scriber sur immagazinage externe. Le app non pote acceder a tu camera/galeria sin isto.</string>
   <string name="upload_connection_error_alert_title">Error de connexion</string>
   <string name="upload_connection_error_alert_detail">Le processo de incargamento require un accesso a internet active. Per favor verifica tu connexion al rete.</string>

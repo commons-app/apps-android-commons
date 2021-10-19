@@ -37,7 +37,7 @@ fun <T> createMockDataSourceFactory(itemList: List<T>): DataSource.Factory<Int, 
 /**
  * Provides a mocked Room SQL query
  */
-private fun mockQuery(): RoomSQLiteQuery? {
+private fun mockQuery(): RoomSQLiteQuery {
     val query = mock(RoomSQLiteQuery::class.java);
     whenever(query.sql).thenReturn("");
     return query;
@@ -46,7 +46,7 @@ private fun mockQuery(): RoomSQLiteQuery? {
 /**
  * Provides a mocked Room DB
  */
-private fun mockDb(): RoomDatabase? {
+private fun mockDb(): RoomDatabase {
     val roomDatabase = mock(RoomDatabase::class.java);
     val invalidationTracker = mock(InvalidationTracker::class.java)
     whenever(roomDatabase.invalidationTracker).thenReturn(invalidationTracker);
@@ -57,8 +57,10 @@ private fun mockDb(): RoomDatabase? {
  * Class that defines the mocked data source
  */
 class MockLimitDataSource<T>(private val itemList: List<T>) :
-    LimitOffsetDataSource<T>(mockDb(), mockQuery(), false, null) {
-    override fun convertRows(cursor: Cursor?): MutableList<T> = itemList.toMutableList()
+    LimitOffsetDataSource<T>(mockDb(), mockQuery(), false, "") {
+    override fun convertRows(cursor: Cursor): MutableList<T> {
+        return itemList.toMutableList()
+    }
     override fun countItems(): Int = itemList.count()
     override fun isInvalid(): Boolean = false
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<T>) {

@@ -413,4 +413,10 @@
   <string name="statistics_quality">ߖߌ߬ߦߊ߬ߓߍ ߛߎ߯ߦߊ</string>
   <string name="pausing_upload">ߟߊ߬ߦߟߍ߬ߟߌ ߟߊߟߐ߭ ߦߴߌ ߘߐ߫...</string>
   <string name="media_detail_step_title">ߡߋߘߌߦߊ ߝߊߙߊ߲ߝߊ߯ߛߌ</string>
+  <string name="read_help_link">ߘߏ߫ ߜߘߍ߫ ߟߎ߫ ߘߐߞߊ߬ߙߊ߲߬</string>
+  <string name="media_detail_in_all_languages">ߞߊ߲ ߠߎ߬ ߓߍ߯ ߘߐ߫</string>
+  <string name="choose_a_location">ߘߌ߲߬ߞߌߙߊ ߘߏ߫ ߛߎߥߊ߲ߘߌ߫</string>
+  <string name="custom_selector_empty_text">ߖߌ߬ߦߊ߬ߓߍ߫ ߕߴߦߋ߲߬</string>
+  <string name="back">ߌ ߞߐߛߊ߬ߦߌ߬</string>
+  <string name="custom_selector_already_uploaded_image_text">ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߓߘߊ߫ ߓߊ߲߫ ߠߊߦߟߍ߬ ߟߊ߫ ߞߐߡߐ߲ߛ ߞߣߐ߫ ߞߘߐ߬ߡߊ߲߫</string>
 </resources>

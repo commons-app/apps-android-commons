@@ -6,8 +6,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: "com.hiya.jacoco-android"
-apply from: 'quality.gradle'
+apply from: "$rootDir/jacoco.gradle"
 
 def isRunningOnTravisAndIsNotPRBuild = System.getenv("CI") == "true" && file('../play.p12').exists()
 
@@ -58,8 +57,8 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp-ws:$OKHTTP_VERSION"
 
     // Logging
-    implementation 'ch.acra:acra-dialog:5.8.1-beta11'
-    implementation 'ch.acra:acra-mail:5.8.1-beta11'
+    implementation 'ch.acra:acra-dialog:5.8.4'
+    implementation 'ch.acra:acra-mail:5.8.4'
     implementation 'org.slf4j:slf4j-api:1.7.25'
     api('com.github.tony19:logback-android-classic:1.1.1-6') {
         exclude group: 'com.google.android', module: 'android'
@@ -93,6 +92,7 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.3.1"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.3.1"
     testImplementation 'com.facebook.soloader:soloader:0.9.0'
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2"
 
     // Android testing
     androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
@@ -142,16 +142,20 @@ dependencies {
     def work_version = "2.4.0"
     // Kotlin + coroutines
     implementation "androidx.work:work-runtime-ktx:$work_version"
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 }
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         //applicationId 'fr.free.nrw.commons'
 
-        versionCode 1021
-        versionName '3.0.2'
+        versionCode 1025
+        versionName '3.1.1'
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
         minSdkVersion 19
@@ -204,7 +208,7 @@ android {
             }
         }
         debug {
-            minifyEnabled true
+            minifyEnabled false
             testCoverageEnabled project.hasProperty('coverage')
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             testProguardFile 'test-proguard-rules.txt'
@@ -221,7 +225,7 @@ android {
     }
 
     configurations.all {
-        resolutionStrategy.force 'androidx.annotation:annotation:1.0.2'
+        resolutionStrategy.force 'androidx.annotation:annotation:1.1.0'
         exclude module: 'okhttp-ws'
     }
     flavorDimensions 'tier'

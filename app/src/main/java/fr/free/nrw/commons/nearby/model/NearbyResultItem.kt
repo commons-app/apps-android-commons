@@ -7,13 +7,15 @@ class NearbyResultItem(private val item: ResultTuple?,
                        private val commonsArticle: ResultTuple?,
                        private val location: ResultTuple?,
                        private val label: ResultTuple?,
+                       @field:SerializedName("streetAddress") private val address: ResultTuple?,
                        private val icon: ResultTuple?, @field:SerializedName("class") private val className: ResultTuple?,
                        @field:SerializedName("classLabel") private val classLabel: ResultTuple?,
                        @field:SerializedName("commonsCategory") private val commonsCategory: ResultTuple?,
                        @field:SerializedName("pic") private val pic: ResultTuple?,
                        @field:SerializedName("destroyed") private val destroyed: ResultTuple?,
                        @field:SerializedName("description") private val description: ResultTuple?,
-                       @field:SerializedName("endTime") private val endTime: ResultTuple?) {
+                       @field:SerializedName("endTime") private val endTime: ResultTuple?,
+                       @field:SerializedName("monument") private val monument: ResultTuple?) {
 
     fun getItem(): ResultTuple {
         return item ?: ResultTuple()
@@ -65,5 +67,13 @@ class NearbyResultItem(private val item: ResultTuple?,
 
     fun getEndTime(): ResultTuple {
         return endTime ?: ResultTuple()
+    }
+
+    fun getAddress(): String {
+        return address?.value?:""
+    }
+
+    fun getMonument():ResultTuple?{
+        return monument
     }
 }

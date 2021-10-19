@@ -451,4 +451,8 @@
   <string name="leaderboard_yearly">Годишње</string>
   <string name="leaderboard_weekly">Недељно</string>
   <string name="leaderboard_nearby">У близини</string>
+  <string name="custom_selector_empty_text">Нема слика</string>
+  <string name="done">Готово</string>
+  <string name="back">Назад</string>
+  <string name="custom_selector_already_uploaded_image_text">Ова слика је већ отпремљена на Оставу.</string>
 </resources>

@@ -36,21 +36,24 @@
   <string name="username">Korisničko ime</string>
   <string name="password">Lozinka</string>
   <string name="login">Prijavi se</string>
+  <string name="forgot_password">Zaboravili ste lozinku?</string>
   <string name="signup">Napravi korisnički račun</string>
   <string name="logging_in_title">Prijavljivanje</string>
   <string name="logging_in_message">Sačekajte…</string>
   <string name="login_success">Prijavljivanje uspješno!</string>
   <string name="login_failed">Prijavljivanje nije uspjelo!</string>
   <string name="upload_failed">Datoteka nije pronađena. Pokušajte drugu.</string>
-  <string name="authentication_failed" fuzzy="true">Provjera identiteta nije uspjela!</string>
+  <string name="authentication_failed">Provjera identiteta nije uspjela. Prijavite se ponovo.</string>
   <string name="uploading_started">Postavljanje je započelo!</string>
   <string name="upload_completed_notification_title">Datoteka %1$s je postavljena!</string>
   <string name="upload_completed_notification_text">Dodirnite da biste vidjeli datoteku</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Započinjem postavljanje datoteke %1$s</string>
+  <string name="upload_progress_notification_title_start">Postavljam datoteku: %s</string>
   <string name="upload_progress_notification_title_in_progress">Postavljanje datoteke %1$s u toku</string>
   <string name="upload_progress_notification_title_finishing">Postavljanje datoteke %1$s završeno</string>
   <string name="upload_failed_notification_title">Postavljanje datoteke %1$s nije uspjelo</string>
+  <string name="upload_paused_notification_title">Postavljanje %1$s pauzirano</string>
   <string name="upload_failed_notification_subtitle">Dodirnite da biste vidjeli</string>
+  <string name="upload_paused_notification_subtitle">Dodirnite da biste vidjeli</string>
   <string name="title_activity_contributions">Moje nedavno postavljene datoteke</string>
   <string name="contribution_state_queued">Na čekanju</string>
   <string name="contribution_state_failed">Nije uspjelo</string>
@@ -76,12 +79,15 @@
   <string name="menu_save_categories">Sačuvaj</string>
   <string name="refresh_button">Osvježi</string>
   <string name="display_list_button">Spisak</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Zasad nema postavljenih datoteka</string>
+  <string name="contributions_subtitle_zero">(Zasad nema postavljenih datoteka)</string>
   <string name="categories_not_found">Nema kategorija koje odgovoraju %1$s</string>
+  <string name="no_child_classes">%1$s nema zavisnih klasa</string>
+  <string name="no_parent_classes">%1$s nema matičnih klasa</string>
   <string name="categories_skip_explanation">Dodajte kategorije da biste korisnicima olakšali pronalaženje slika na Wikimedia Commonsu.\nPočnite pisati da biste dodali kategoriju.</string>
   <string name="categories_activity_title">Kategorije</string>
   <string name="title_activity_settings">Postavke</string>
   <string name="title_activity_signup">Registracija</string>
+  <string name="title_activity_featured_images">Izabrane slike</string>
   <string name="title_activity_category_details">Kategorija</string>
   <string name="menu_about">O</string>
   <string name="about_license" fuzzy="true">Program otvorenog kod objavljen pod licencom &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache v2&lt;/a&gt;. Wikimedia Commons i njen logo zaštitni su znaci Zadužbine Wikimedia i koriste se s njenom dozvolom. Nismo povezani niti nas podržava Zadužbina Wikimedia.</string>
@@ -97,7 +103,7 @@
   <string name="menu_retry_upload">Pokušaj ponovo</string>
   <string name="menu_cancel_upload">Otkaži</string>
   <string name="menu_download">Preuzmi</string>
-  <string name="preference_license" fuzzy="true">Licenca</string>
+  <string name="preference_license">Predodređena licenca</string>
   <string name="use_previous">Koristi prethodni naziv i opis</string>
   <string name="preference_theme">Tema</string>
   <string name="license_name_cc_by_sa_four">Autorstvo-Dijeliti pod istim uslovima 4.0</string>
@@ -114,6 +120,8 @@
   <string name="tutorial_2_text">Postavljajte slike koje su u potpunosti Vaše djelo:</string>
   <string name="tutorial_3_text">NE postavljajte:</string>
   <string name="tutorial_4_text">Primjer postavljanja:</string>
+  <string name="tutorial_4_subtext_1">Naslov: Sidnijska opera</string>
+  <string name="tutorial_4_subtext_2">Opis: Sidnijska opera, pogled preko zaliva</string>
   <string name="welcome_wikipedia_text">Podijelite vaše slike. Pomozite člancima na Wikipediji da zažive!</string>
   <string name="welcome_wikipedia_subtext">Slike na Wikipediji se uzimaju sa Wikimedia Commonsa.</string>
   <string name="welcome_copyright_text">Vaše slike pomažu u obrazovanju ljudi širom svijeta.</string>

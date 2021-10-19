@@ -106,7 +106,8 @@ public class UploadModel {
         final UploadItem uploadItem = new UploadItem(
             Uri.parse(uploadableFile.getFilePath()),
                 uploadableFile.getMimeType(context), imageCoordinates, place, fileCreatedDate,
-                createdTimestampSource);
+                createdTimestampSource,
+                uploadableFile.getContentUri());
         if (place != null) {
             uploadItem.getUploadMediaDetails().set(0, new UploadMediaDetail(place));
         }
@@ -154,6 +155,15 @@ public class UploadModel {
                 contribution.setDateCreatedSource(item.getCreatedTimestampSource());
                 //Set the date only if you have it, else the upload service is gonna try it the other way
             }
+
+            if (contribution.getWikidataPlace() != null) {
+                if (item.isWLMUpload()) {
+                    contribution.getWikidataPlace().setMonumentUpload(true);
+                } else {
+                    contribution.getWikidataPlace().setMonumentUpload(false);
+                }
+            }
+            contribution.setCountryCode(item.getCountryCode());
             return contribution;
         });
     }

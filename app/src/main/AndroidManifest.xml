@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="fr.free.nrw.commons">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -32,6 +33,7 @@
         android:supportsRtl="true"
         tools:replace="android:appComponentFactory"
         android:appComponentFactory="commons"
+        android:requestLegacyExternalStorage = "true"
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity android:name="org.acra.dialog.CrashReportDialog"
@@ -108,6 +110,12 @@
 
         <activity android:name=".quiz.QuizResultActivity"
             android:label="@string/result"/>
+
+        <activity
+            android:name=".customselector.ui.selector.CustomSelectorActivity"
+            android:label="@string/title_activity_custom_selector"
+            android:configChanges="screenSize|keyboard|orientation"
+            android:parentActivityName=".contributions.MainActivity" />
 
         <activity
             android:name=".category.CategoryDetailsActivity"

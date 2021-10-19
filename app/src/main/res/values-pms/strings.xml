@@ -103,6 +103,7 @@
   <string name="title_activity_settings">Paràmeter</string>
   <string name="title_activity_signup">Marchesse</string>
   <string name="title_activity_featured_images">Plance an evidensa</string>
+  <string name="title_activity_custom_selector">Seletor përsonalisà</string>
   <string name="title_activity_category_details">Categorìa</string>
   <string name="title_activity_review">Revision da par</string>
   <string name="menu_about">A propòsit</string>
@@ -313,6 +314,7 @@
   <string name="quiz_screenshot_question">Costa schermà a va bin da carié?</string>
   <string name="share_app_title">Partagé j\'aplicassion</string>
   <string name="error_fetching_nearby_places">Eror durant l\'esplorassion dj\'anviron.</string>
+  <string name="error_fetching_nearby_monuments">Eror d\'arcuperassion dij monument davzin.</string>
   <string name="no_recent_searches">Gnun-e arserche recente</string>
   <string name="delete_recent_searches_dialog">É-lo sigur ëd vorèj dëscancelé lë stòrich ëd soe arserche?</string>
   <string name="delete_search_dialog">Veul-lo dëscancelé costa arserca?</string>
@@ -596,4 +598,18 @@
   <string name="location_picker_image_view_shadow">L\'ombra dla vista dla plancia dël selessionator ëd pòst</string>
   <string name="image_location">Pòst ëd la plancia</string>
   <string name="check_whether_location_is_correct">Controlé si ël pòst a l\'é giust</string>
+  <string name="custom_selector_title">Seletor përsonalisà</string>
+  <string name="custom_selector_empty_text">Gnun-e plance</string>
+  <string name="done">Fàit</string>
+  <string name="back">André</string>
+  <string name="welcome_custom_picture_selector_text">Bin-ëvnù ant ël seletor ëd plance përsonalisà</string>
+  <string name="custom_selector_info_text1">Ës seletor a smon ëd fasson diferenta dle plance ch\'a son già an Comun</string>
+  <string name="custom_selector_info_text2" fuzzy="true">A diferensa da la plancia a snistra, la plancia a drita a la marca Comun ch\'a mostra ch\'a l\'é già stàita carià.</string>
+  <string name="welcome_custom_selector_ok">Fiamengh</string>
+  <string name="custom_selector_already_uploaded_image_text">La plancia a l\'é già stàita carià su Comun.</string>
+  <string name="wlm_upload_info" fuzzy="true">Chiel a contribuiss a la campagna ëd Wiki a-j veul bin ai monument. Jë stamp associà a saran giontà an acòrd con sòn.</string>
+  <string name="display_monuments">Smon-e ij monument</string>
+  <string name="wlm_month_message">A l\'é ël mèis ëd Wiki a-j veul bin ai monument!</string>
+  <string name="learn_more">SAVÈJNE ËD PI</string>
+  <string name="wlm_campaign_description">Wiki a-j veul bin ai monument a l\'é un concors antërnassional ëd fotografìa ëd monument organisà da Wikimedia</string>
 </resources>

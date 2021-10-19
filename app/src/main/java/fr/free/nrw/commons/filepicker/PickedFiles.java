@@ -24,19 +24,38 @@ import java.util.UUID;
 
 import timber.log.Timber;
 
+/**
+ * PickedFiles.
+ * Process the upload items.
+ */
+public class PickedFiles implements Constants {
 
-class PickedFiles implements Constants {
-
+    /**
+     * Get Folder Name
+     * @param context
+     * @return default application folder name.
+     */
     private static String getFolderName(@NonNull Context context) {
         return FilePicker.configuration(context).getFolderName();
     }
 
+    /**
+     * tempImageDirectory
+     * @param context
+     * @return temporary image directory to copy and perform exif changes.
+     */
     private static File tempImageDirectory(@NonNull Context context) {
         File privateTempDir = new File(context.getCacheDir(), DEFAULT_FOLDER_NAME);
         if (!privateTempDir.exists()) privateTempDir.mkdirs();
         return privateTempDir;
     }
 
+    /**
+     * writeToFile
+     * writes inputStream data to the destination file.
+     * @param in input stream of source file.
+     * @param file destination file
+     */
     private static void writeToFile(InputStream in, File file) {
         try {
             OutputStream out = new FileOutputStream(file);
@@ -52,11 +71,24 @@ class PickedFiles implements Constants {
         }
     }
 
+    /**
+     * Copy file function.
+     * Copies source file to destination file.
+     * @param src source file
+     * @param dst destination file
+     * @throws IOException (File input stream exception)
+     */
     private static void copyFile(File src, File dst) throws IOException {
         InputStream in = new FileInputStream(src);
         writeToFile(in, dst);
     }
 
+    /**
+     * Copy files in separate thread.
+     * Copies all the uploadable files to the temp image folder on background thread.
+     * @param context
+     * @param filesToCopy uploadable file list to be copied.
+     */
     static void copyFilesInSeparateThread(final Context context, final List<UploadableFile> filesToCopy) {
         new Thread(() -> {
             List<File> copiedFiles = new ArrayList<>();
@@ -64,7 +96,9 @@ class PickedFiles implements Constants {
             for (UploadableFile uploadableFile : filesToCopy) {
                 File fileToCopy = uploadableFile.getFile();
                 File dstDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), getFolderName(context));
-                if (!dstDir.exists()) dstDir.mkdirs();
+                if (!dstDir.exists()) {
+                    dstDir.mkdirs();
+                }
 
                 String[] filenameSplit = fileToCopy.getName().split("\\.");
                 String extension = "." + filenameSplit[filenameSplit.length - 1];
@@ -84,12 +118,24 @@ class PickedFiles implements Constants {
         }).run();
     }
 
+    /**
+     * singleFileList.
+     * converts a single uploadableFile to list of uploadableFile.
+     * @param file uploadable file
+     * @return
+     */
     static List<UploadableFile> singleFileList(UploadableFile file) {
         List<UploadableFile> list = new ArrayList<>();
         list.add(file);
         return list;
     }
 
+    /**
+     * ScanCopiedImages
+     * Scan copied images metadata using media scanner.
+     * @param context
+     * @param copiedImages copied images list.
+     */
     static void scanCopiedImages(Context context, List<File> copiedImages) {
         String[] paths = new String[copiedImages.size()];
         for (int i = 0; i < copiedImages.size(); i++) {
@@ -104,7 +150,13 @@ class PickedFiles implements Constants {
                 });
     }
 
-    static UploadableFile pickedExistingPicture(@NonNull Context context, Uri photoUri) throws IOException, SecurityException {// SecurityException for those file providers who share URI but forget to grant necessary permissions
+    /**
+     * pickedExistingPicture
+     * convert the image into uploadable file.
+     * @param photoUri Uri of the image.
+     * @return Uploadable file ready for tag redaction.
+     */
+    public static UploadableFile pickedExistingPicture(@NonNull Context context, Uri photoUri) throws IOException, SecurityException {// SecurityException for those file providers who share URI but forget to grant necessary permissions
         InputStream pictureInputStream = context.getContentResolver().openInputStream(photoUri);
         File directory = tempImageDirectory(context);
         File photoFile = new File(directory, UUID.randomUUID().toString() + "." + getMimeType(context, photoUri));
@@ -116,6 +168,9 @@ class PickedFiles implements Constants {
         return new UploadableFile(photoUri, photoFile);
     }
 
+    /**
+     * getCameraPictureLocation
+     */
     static File getCameraPicturesLocation(@NonNull Context context) throws IOException {
         File dir = tempImageDirectory(context);
         return File.createTempFile(UUID.randomUUID().toString(), ".jpg", dir);
@@ -142,6 +197,11 @@ class PickedFiles implements Constants {
         return extension;
     }
 
+    /**
+     * GetUriToFile
+     * @param file get uri of file
+     * @return uri of requested file.
+     */
     static Uri getUriToFile(@NonNull Context context, @NonNull File file) {
         String packageName = context.getApplicationContext().getPackageName();
         String authority = packageName + ".provider";
