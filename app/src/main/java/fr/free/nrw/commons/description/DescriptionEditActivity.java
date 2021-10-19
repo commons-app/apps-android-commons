@@ -6,6 +6,8 @@ import static fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Optional;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
@@ -52,6 +55,10 @@ public class DescriptionEditActivity extends AppCompatActivity implements
      */
     @BindView(R.id.btn_edit_submit)
     AppCompatButton btnSubmit;
+
+//    @BindView(R.id.mapbox_place_picker_toolbar_back_button)
+//    ImageView backButton;
+
 
     /**
      * Current wikitext
@@ -101,6 +108,7 @@ public class DescriptionEditActivity extends AppCompatActivity implements
 
     }
 
+    @Optional
     @OnClick(R.id.mapbox_place_picker_toolbar_back_button)
     public void onBackButtonClicked(){
         onBackPressed();
@@ -165,6 +173,8 @@ public class DescriptionEditActivity extends AppCompatActivity implements
         }
         final Intent returningIntent = new Intent();
         returningIntent.putExtra(UPDATED_WIKITEXT, buffer.toString());
+        returningIntent.putParcelableArrayListExtra(LIST_OF_DESCRIPTION_AND_CAPTION,
+            (ArrayList<? extends Parcelable>) uploadMediaDetails);
         setResult(RESULT_OK, returningIntent);
         finish();
     }

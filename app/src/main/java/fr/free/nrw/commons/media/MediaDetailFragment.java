@@ -1003,6 +1003,22 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 .subscribe(s -> {
                     Timber.d("Descriptions are added.");
                 }));
+
+            final ArrayList<UploadMediaDetail> uploadMediaDetails
+                = data.getParcelableArrayListExtra(LIST_OF_DESCRIPTION_AND_CAPTION);
+
+            Map<String, String> updatedCaptions = new LinkedHashMap<>();
+            for (UploadMediaDetail mediaDetail:
+            uploadMediaDetails) {
+                compositeDisposable.add(descriptionEditHelper.addCaption(getContext(), media,
+                    mediaDetail.getLanguageCode(), mediaDetail.getCaptionText())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(s -> {
+                        updateCaptions(mediaDetail, updatedCaptions);
+                        Timber.d("Caption is added.");
+                    }));
+            }
             progressBarEditDescription.setVisibility(GONE);
             editDescription.setVisibility(VISIBLE);
 
@@ -1019,6 +1035,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 Objects.requireNonNull(getContext())
                     .getString(R.string.descriptions_picking_unsuccessful));
         }
+    }
+
+    private void updateCaptions(UploadMediaDetail mediaDetail,
+        Map<String, String> updatedCaptions) {
+        updatedCaptions.put(mediaDetail.getLanguageCode(), mediaDetail.getCaptionText());
+        media.setCaptions(updatedCaptions);
     }
 
     @OnClick(R.id.update_categories_button)

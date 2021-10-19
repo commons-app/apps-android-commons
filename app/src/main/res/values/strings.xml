@@ -522,11 +522,14 @@ Upload your first media by tapping on the add button.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Trying to update coordinates.</string>
   <string name="coordinates_edit_helper_show_edit_title">Coordinates update</string>
   <string name="description_edit_helper_show_edit_title">Description update</string>
+  <string name="caption_edit_helper_show_edit_title">Caption update</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Success</string>
   <string name="coordinates_edit_helper_show_edit_message">Coordinates %1$s are added.</string>
   <string name="description_edit_helper_show_edit_message">Descriptions are added.</string>
+  <string name="caption_edit_helper_show_edit_message">Caption is added.</string>
   <string name="coordinates_edit_helper_edit_message_else">Could not add coordinates.</string>
   <string name="description_edit_helper_edit_message_else">Could not add descriptions.</string>
+  <string name="caption_edit_helper_edit_message_else">Could not add caption.</string>
   <string name="coordinates_picking_unsuccessful">Unable to get coordinates.</string>
   <string name="descriptions_picking_unsuccessful">Unable to get descriptions.</string>
   <string name="description_activity_title">Edit descriptions and captions</string>

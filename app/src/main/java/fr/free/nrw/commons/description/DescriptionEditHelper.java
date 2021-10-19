@@ -58,6 +58,39 @@ public class DescriptionEditHelper {
             .firstOrError();
     }
 
+    public Single<Boolean> addCaption(final Context context, final Media media,
+        final String language, final String value) {
+        Timber.d("thread is caption adding %s", Thread.currentThread().getName());
+        final String summary = "Updating Caption";
+
+        return pageEditClient.setCaptions(summary, Objects.requireNonNull(media.getFilename()),
+            language, value)
+            .flatMapSingle(result -> Single.just(showCaptionEditNotification(context,
+                media, result)))
+            .firstOrError();
+    }
+
+    private boolean showCaptionEditNotification(final Context context, final Media media,
+        final int result) {
+        final String message;
+        String title = context.getString(R.string.caption_edit_helper_show_edit_title);
+
+        if (result == 1) {
+            title += ": " + context
+                .getString(R.string.coordinates_edit_helper_show_edit_title_success);
+            message = context.getString(R.string.caption_edit_helper_show_edit_message);
+        } else {
+            title += ": " + context.getString(R.string.caption_edit_helper_show_edit_title);
+            message = context.getString(R.string.caption_edit_helper_edit_message_else) ;
+        }
+
+        final String urlForFile = BuildConfig.COMMONS_URL + "/wiki/" + media.getFilename();
+        final Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlForFile));
+        notificationHelper.showNotification(context, title, message, NOTIFICATION_EDIT_DESCRIPTION,
+            browserIntent);
+        return result == 1;
+    }
+
     /**
      * Update descriptions and shows notification about descriptions update
      * @param context to be added

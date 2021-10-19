@@ -3,6 +3,7 @@ package fr.free.nrw.commons.actions
 import io.reactivex.Observable
 import io.reactivex.Single
 import org.wikipedia.csrf.CsrfTokenClient
+import retrofit2.http.Field
 
 /**
  * This class acts as a Client to facilitate wiki page editing
@@ -61,6 +62,16 @@ class PageEditClient(
                 .map { editResponse -> editResponse.edit()!!.editSucceeded() }
         } catch (throwable: Throwable) {
             Observable.just(false)
+        }
+    }
+
+    fun setCaptions(summary: String, title: String,
+                    language: String, value: String) : Observable<Int>{
+        return try {
+            pageEditInterface.postCaptions(summary, title, language, value, csrfTokenClient.tokenBlocking)
+                .map { it.success }
+        } catch (throwable: Throwable) {
+            Observable.just(0)
         }
     }
 
