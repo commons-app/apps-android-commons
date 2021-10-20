@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -156,6 +157,9 @@ public class DescriptionEditActivity extends AppCompatActivity implements
             buffer.append(descriptionStart);
             for (int i=0; i<uploadMediaDetails.size(); i++) {
                 final UploadMediaDetail uploadDetails = uploadMediaDetails.get(i);
+                Log.d("TAG", "updateDescription: "+uploadDetails.getDescriptionText());
+                Log.d("TAG", "updateDescription1: "+uploadDetails.getCaptionText());
+                Log.d("TAG", "updateDescription:2 "+uploadDetails.getLanguageCode());
                 if (!uploadDetails.getDescriptionText().equals("")) {
                     buffer.append("{{");
                     buffer.append(uploadDetails.getLanguageCode());
