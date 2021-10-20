@@ -4,6 +4,7 @@ import static fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_D
 import static fr.free.nrw.commons.description.EditDescriptionConstants.UPDATED_WIKITEXT;
 import static fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -64,6 +65,7 @@ public class DescriptionEditActivity extends AppCompatActivity implements
      * Current wikitext
      */
     String wikiText;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -125,6 +127,7 @@ public class DescriptionEditActivity extends AppCompatActivity implements
 
     @OnClick(R.id.btn_edit_submit)
     public void onSubmitButtonClicked(){
+        showLoggingProgressBar();
         final List<UploadMediaDetail> uploadMediaDetails = uploadMediaDetailAdapter.getItems();
         updateDescription(uploadMediaDetails);
         finish();
@@ -154,21 +157,15 @@ public class DescriptionEditActivity extends AppCompatActivity implements
             for (int i=0; i<uploadMediaDetails.size(); i++) {
                 final UploadMediaDetail uploadDetails = uploadMediaDetails.get(i);
                 if (!uploadDetails.getDescriptionText().equals("")) {
-                    if (i == uploadMediaDetails.size() - 1) {
-                        buffer.append("{{");
-                        buffer.append(uploadDetails.getLanguageCode());
-                        buffer.append("|1=");
-                        buffer.append(uploadDetails.getDescriptionText());
-                        buffer.append("}}");
-                    } else {
-                        buffer.append("{{");
-                        buffer.append(uploadDetails.getLanguageCode());
-                        buffer.append("|1=");
-                        buffer.append(uploadDetails.getDescriptionText());
-                        buffer.append("}}, ");
-                    }
+                    buffer.append("{{");
+                    buffer.append(uploadDetails.getLanguageCode());
+                    buffer.append("|1=");
+                    buffer.append(uploadDetails.getDescriptionText());
+                    buffer.append("}}, ");
                 }
             }
+            buffer.deleteCharAt(buffer.length()-1);
+            buffer.deleteCharAt(buffer.length()-1);
             buffer.append(descriptionEnd);
         }
         final Intent returningIntent = new Intent();
@@ -177,5 +174,14 @@ public class DescriptionEditActivity extends AppCompatActivity implements
             (ArrayList<? extends Parcelable>) uploadMediaDetails);
         setResult(RESULT_OK, returningIntent);
         finish();
+    }
+
+    private void showLoggingProgressBar() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setTitle(getString(R.string.updating_caption_title));
+        progressDialog.setMessage(getString(R.string.updating_caption_message));
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
     }
 }

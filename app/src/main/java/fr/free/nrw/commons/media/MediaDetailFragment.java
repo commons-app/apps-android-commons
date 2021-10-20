@@ -1007,7 +1007,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             final ArrayList<UploadMediaDetail> uploadMediaDetails
                 = data.getParcelableArrayListExtra(LIST_OF_DESCRIPTION_AND_CAPTION);
 
-            Map<String, String> updatedCaptions = new LinkedHashMap<>();
+            LinkedHashMap<String, String> updatedCaptions = new LinkedHashMap<>();
             for (UploadMediaDetail mediaDetail:
             uploadMediaDetails) {
                 compositeDisposable.add(descriptionEditHelper.addCaption(getContext(), media,
@@ -1038,7 +1038,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     private void updateCaptions(UploadMediaDetail mediaDetail,
-        Map<String, String> updatedCaptions) {
+        LinkedHashMap<String, String> updatedCaptions) {
         updatedCaptions.put(mediaDetail.getLanguageCode(), mediaDetail.getCaptionText());
         media.setCaptions(updatedCaptions);
     }

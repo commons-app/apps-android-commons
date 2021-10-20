@@ -46,6 +46,8 @@
   <string name="signup">Sign up</string>
   <string name="logging_in_title">Logging in</string>
   <string name="logging_in_message">Please wait…</string>
+  <string name="updating_caption_title">Updating captions and descriptions</string>
+  <string name="updating_caption_message">Please wait…</string>
   <string name="login_success">Login success!</string>
   <string name="login_failed">Login failed!</string>
   <string name="upload_failed">File not found. Please try another file.</string>
