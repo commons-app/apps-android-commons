@@ -3,7 +3,6 @@ package fr.free.nrw.commons.actions
 import io.reactivex.Observable
 import io.reactivex.Single
 import org.wikipedia.csrf.CsrfTokenClient
-import retrofit2.http.Field
 
 /**
  * This class acts as a Client to facilitate wiki page editing
