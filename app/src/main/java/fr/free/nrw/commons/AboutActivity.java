@@ -24,6 +24,11 @@ import java.util.List;
  */
 public class AboutActivity extends BaseActivity {
 
+    /*
+      This View Binding class is auto-generated for each xml file. The format is usually the name
+      of the file with PascalCasing (The underscore characters will be ignored).
+      More information is available at https://developer.android.com/topic/libraries/view-binding
+     */
     private ActivityAboutBinding binding;
 
     /**
@@ -35,6 +40,10 @@ public class AboutActivity extends BaseActivity {
     @SuppressLint("StringFormatInvalid")
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /*
+          Instead of just setting the view with the xml file. We need to use View Binding class.
+         */
         binding = ActivityAboutBinding.inflate(getLayoutInflater());
         final View view = binding.getRoot();
         setContentView(view);
@@ -42,6 +51,10 @@ public class AboutActivity extends BaseActivity {
         setSupportActionBar(binding.toolbarBinding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         final String aboutText = getString(R.string.about_license);
+        /*
+          We can then access all the views by just using the id names like this.
+          Same PascalCasing is used with underscore characters being ignored.
+         */
         binding.aboutLicense.setHtmlText(aboutText);
 
         @SuppressLint("StringFormatMatches")
@@ -55,6 +68,9 @@ public class AboutActivity extends BaseActivity {
         Utils.setUnderlinedText(binding.aboutTranslate, R.string.about_translate, getApplicationContext());
         Utils.setUnderlinedText(binding.aboutCredits, R.string.about_credits, getApplicationContext());
 
+        /*
+          To set listeners, we can create a separate method and use lambda syntax.
+        */
         binding.facebookLaunchIcon.setOnClickListener(this::launchFacebook);
         binding.githubLaunchIcon.setOnClickListener(this::launchGithub);
         binding.websiteLaunchIcon.setOnClickListener(this::launchWebsite);
