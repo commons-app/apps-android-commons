@@ -166,6 +166,7 @@
   <string name="log_collection_started">\"Send log file\" is {{msg-wm|Commons-android-strings-send log file}}.</string>
   <string name="nominate_for_deletion_done">{{Identical|Done}}</string>
   <string name="review_category_explanation">\'%1$s\' is replaced by a formatted number (of categories).</string>
+  <string name="please_wait">{{Identical|Please wait}}</string>
   <string name="exif_tag_name_author">{{Identical|Author}}</string>
   <string name="exif_tag_name_location">{{Identical|Location}}</string>
   <string name="title_app_shortcut_bookmark">{{identical|Bookmark}}</string>
