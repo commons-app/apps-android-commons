@@ -880,6 +880,17 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                     );
                 }
             }
+            for (final Map.Entry mapElement : descriptions.entrySet()) {
+
+                final String language = (String) mapElement.getKey();
+                if (!captions.containsKey(language)) {
+                    descriptionAndCaptions.add(
+                        new UploadMediaDetail(language,
+                            Objects.requireNonNull(descriptions.get(language)),
+                            "")
+                    );
+                }
+            }
         } else {
             for (final Map.Entry mapElement : descriptions.entrySet()) {
 
@@ -893,6 +904,17 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                     descriptionAndCaptions.add(
                         new UploadMediaDetail(language, (String) mapElement.getValue(),
                             "")
+                    );
+                }
+            }
+            for (final Map.Entry mapElement : captions.entrySet()) {
+
+                final String language = (String) mapElement.getKey();
+                if (!descriptions.containsKey(language)) {
+                    descriptionAndCaptions.add(
+                        new UploadMediaDetail(language,
+                            "",
+                            Objects.requireNonNull(descriptions.get(language)))
                     );
                 }
             }
@@ -1037,6 +1059,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         }
     }
 
+    /**
+     * Adds caption to the map and updates captions
+     * @param mediaDetail UploadMediaDetail
+     * @param updatedCaptions updated captionds
+     */
     private void updateCaptions(UploadMediaDetail mediaDetail,
         LinkedHashMap<String, String> updatedCaptions) {
         updatedCaptions.put(mediaDetail.getLanguageCode(), mediaDetail.getCaptionText());

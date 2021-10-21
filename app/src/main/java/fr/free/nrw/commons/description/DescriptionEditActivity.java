@@ -8,8 +8,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.util.Log;
-import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -58,14 +56,13 @@ public class DescriptionEditActivity extends AppCompatActivity implements
     @BindView(R.id.btn_edit_submit)
     AppCompatButton btnSubmit;
 
-//    @BindView(R.id.mapbox_place_picker_toolbar_back_button)
-//    ImageView backButton;
-
-
     /**
      * Current wikitext
      */
     String wikiText;
+    /**
+     * For showing progress dialog
+     */
     ProgressDialog progressDialog;
 
     @Override
@@ -157,9 +154,6 @@ public class DescriptionEditActivity extends AppCompatActivity implements
             buffer.append(descriptionStart);
             for (int i=0; i<uploadMediaDetails.size(); i++) {
                 final UploadMediaDetail uploadDetails = uploadMediaDetails.get(i);
-                Log.d("TAG", "updateDescription: "+uploadDetails.getDescriptionText());
-                Log.d("TAG", "updateDescription1: "+uploadDetails.getCaptionText());
-                Log.d("TAG", "updateDescription:2 "+uploadDetails.getLanguageCode());
                 if (!uploadDetails.getDescriptionText().equals("")) {
                     buffer.append("{{");
                     buffer.append(uploadDetails.getLanguageCode());

@@ -58,6 +58,15 @@ public class DescriptionEditHelper {
             .firstOrError();
     }
 
+    /**
+     * Adds new captions
+     *
+     * @param context context
+     * @param media to be added
+     * @param language to be added
+     * @param value to be added
+     * @return Observable<Boolean>
+     */
     public Single<Boolean> addCaption(final Context context, final Media media,
         final String language, final String value) {
         Timber.d("thread is caption adding %s", Thread.currentThread().getName());
@@ -70,6 +79,13 @@ public class DescriptionEditHelper {
             .firstOrError();
     }
 
+    /**
+     * Update captions and shows notification about captions update
+     * @param context to be added
+     * @param media to be added
+     * @param result to be added
+     * @return boolean
+     */
     private boolean showCaptionEditNotification(final Context context, final Media media,
         final int result) {
         final String message;
