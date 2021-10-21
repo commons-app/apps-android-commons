@@ -311,6 +311,11 @@ android {
     }
 
     buildToolsVersion buildToolsVersion
+
+    buildFeatures {
+        viewBinding true
+    }
+
 }
 
 if (isRunningOnTravisAndIsNotPRBuild) {
