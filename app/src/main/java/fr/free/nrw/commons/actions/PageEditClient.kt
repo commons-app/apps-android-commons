@@ -64,6 +64,16 @@ class PageEditClient(
         }
     }
 
+    fun setCaptions(summary: String, title: String,
+                    language: String, value: String) : Observable<Int>{
+        return try {
+            pageEditInterface.postCaptions(summary, title, language, value, csrfTokenClient.tokenBlocking)
+                .map { it.success }
+        } catch (throwable: Throwable) {
+            Observable.just(0)
+        }
+    }
+
     /**
      * Get whole WikiText of required file
      * @param title : Name of the file

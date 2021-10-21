@@ -5,6 +5,7 @@ import io.reactivex.Single
 import org.wikipedia.dataclient.Service
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import org.wikipedia.edit.Edit
+import org.wikipedia.wikidata.Entities
 import retrofit2.http.*
 
 /**
@@ -77,12 +78,13 @@ interface PageEditInterface {
     @FormUrlEncoded
     @Headers("Cache-Control: no-cache")
     @POST(Service.MW_API_PREFIX + "action=wbsetlabel&format=json&site=commonswiki&formatversion=2")
-    fun setCaptions(
+    fun postCaptions(
         @Field("summary") summary: String,
-        @Field("language") title: String,
-        @Field("value") prependText: String,
+        @Field("title") title: String,
+        @Field("language") language: String,
+        @Field("value") value: String,
         @Field("token") token: String
-    ): Observable<Edit>
+    ): Observable<Entities>
 
     /**
      * Get wiki text for provided file names

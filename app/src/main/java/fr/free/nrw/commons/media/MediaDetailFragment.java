@@ -880,6 +880,17 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                     );
                 }
             }
+            for (final Map.Entry mapElement : descriptions.entrySet()) {
+
+                final String language = (String) mapElement.getKey();
+                if (!captions.containsKey(language)) {
+                    descriptionAndCaptions.add(
+                        new UploadMediaDetail(language,
+                            Objects.requireNonNull(descriptions.get(language)),
+                            "")
+                    );
+                }
+            }
         } else {
             for (final Map.Entry mapElement : descriptions.entrySet()) {
 
@@ -893,6 +904,17 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                     descriptionAndCaptions.add(
                         new UploadMediaDetail(language, (String) mapElement.getValue(),
                             "")
+                    );
+                }
+            }
+            for (final Map.Entry mapElement : captions.entrySet()) {
+
+                final String language = (String) mapElement.getKey();
+                if (!descriptions.containsKey(language)) {
+                    descriptionAndCaptions.add(
+                        new UploadMediaDetail(language,
+                            "",
+                            Objects.requireNonNull(descriptions.get(language)))
                     );
                 }
             }
@@ -1003,6 +1025,22 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 .subscribe(s -> {
                     Timber.d("Descriptions are added.");
                 }));
+
+            final ArrayList<UploadMediaDetail> uploadMediaDetails
+                = data.getParcelableArrayListExtra(LIST_OF_DESCRIPTION_AND_CAPTION);
+
+            LinkedHashMap<String, String> updatedCaptions = new LinkedHashMap<>();
+            for (UploadMediaDetail mediaDetail:
+            uploadMediaDetails) {
+                compositeDisposable.add(descriptionEditHelper.addCaption(getContext(), media,
+                    mediaDetail.getLanguageCode(), mediaDetail.getCaptionText())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(s -> {
+                        updateCaptions(mediaDetail, updatedCaptions);
+                        Timber.d("Caption is added.");
+                    }));
+            }
             progressBarEditDescription.setVisibility(GONE);
             editDescription.setVisibility(VISIBLE);
 
@@ -1019,6 +1057,17 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 Objects.requireNonNull(getContext())
                     .getString(R.string.descriptions_picking_unsuccessful));
         }
+    }
+
+    /**
+     * Adds caption to the map and updates captions
+     * @param mediaDetail UploadMediaDetail
+     * @param updatedCaptions updated captionds
+     */
+    private void updateCaptions(UploadMediaDetail mediaDetail,
+        LinkedHashMap<String, String> updatedCaptions) {
+        updatedCaptions.put(mediaDetail.getLanguageCode(), mediaDetail.getCaptionText());
+        media.setCaptions(updatedCaptions);
     }
 
     @OnClick(R.id.update_categories_button)

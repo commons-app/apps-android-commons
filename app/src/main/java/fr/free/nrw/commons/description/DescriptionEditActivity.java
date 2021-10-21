@@ -4,9 +4,10 @@ import static fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_D
 import static fr.free.nrw.commons.description.EditDescriptionConstants.UPDATED_WIKITEXT;
 import static fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Parcelable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Optional;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
@@ -58,6 +60,10 @@ public class DescriptionEditActivity extends AppCompatActivity implements
      * Current wikitext
      */
     String wikiText;
+    /**
+     * For showing progress dialog
+     */
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -102,10 +108,11 @@ public class DescriptionEditActivity extends AppCompatActivity implements
 
     }
 
-//    @OnClick(R.id.mapbox_place_picker_toolbar_back_button)
-//    public void onBackButtonClicked(){
-//        onBackPressed();
-//    }
+    @Optional
+    @OnClick(R.id.mapbox_place_picker_toolbar_back_button)
+    public void onBackButtonClicked(){
+        onBackPressed();
+    }
 
     @OnClick(R.id.btn_add_description)
     public void onButtonAddDescriptionClicked() {
@@ -118,6 +125,7 @@ public class DescriptionEditActivity extends AppCompatActivity implements
 
     @OnClick(R.id.btn_edit_submit)
     public void onSubmitButtonClicked(){
+        showLoggingProgressBar();
         final List<UploadMediaDetail> uploadMediaDetails = uploadMediaDetailAdapter.getItems();
         updateDescription(uploadMediaDetails);
         finish();
@@ -146,30 +154,32 @@ public class DescriptionEditActivity extends AppCompatActivity implements
             buffer.append(descriptionStart);
             for (int i=0; i<uploadMediaDetails.size(); i++) {
                 final UploadMediaDetail uploadDetails = uploadMediaDetails.get(i);
-                Log.d("TAG", "updateDescription: "+uploadDetails.getDescriptionText());
-                Log.d("TAG", "updateDescription1: "+uploadDetails.getCaptionText());
-                Log.d("TAG", "updateDescription:2 "+uploadDetails.getLanguageCode());
                 if (!uploadDetails.getDescriptionText().equals("")) {
-                    if (i == uploadMediaDetails.size() - 1) {
-                        buffer.append("{{");
-                        buffer.append(uploadDetails.getLanguageCode());
-                        buffer.append("|1=");
-                        buffer.append(uploadDetails.getDescriptionText());
-                        buffer.append("}}");
-                    } else {
-                        buffer.append("{{");
-                        buffer.append(uploadDetails.getLanguageCode());
-                        buffer.append("|1=");
-                        buffer.append(uploadDetails.getDescriptionText());
-                        buffer.append("}}, ");
-                    }
+                    buffer.append("{{");
+                    buffer.append(uploadDetails.getLanguageCode());
+                    buffer.append("|1=");
+                    buffer.append(uploadDetails.getDescriptionText());
+                    buffer.append("}}, ");
                 }
             }
+            buffer.deleteCharAt(buffer.length()-1);
+            buffer.deleteCharAt(buffer.length()-1);
             buffer.append(descriptionEnd);
         }
         final Intent returningIntent = new Intent();
         returningIntent.putExtra(UPDATED_WIKITEXT, buffer.toString());
+        returningIntent.putParcelableArrayListExtra(LIST_OF_DESCRIPTION_AND_CAPTION,
+            (ArrayList<? extends Parcelable>) uploadMediaDetails);
         setResult(RESULT_OK, returningIntent);
         finish();
+    }
+
+    private void showLoggingProgressBar() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setTitle(getString(R.string.updating_caption_title));
+        progressDialog.setMessage(getString(R.string.updating_caption_message));
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
     }
 }

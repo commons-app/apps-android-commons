@@ -46,6 +46,8 @@
   <string name="signup">Sign up</string>
   <string name="logging_in_title">Logging in</string>
   <string name="logging_in_message">Please wait…</string>
+  <string name="updating_caption_title">Updating captions and descriptions</string>
+  <string name="updating_caption_message">Please wait…</string>
   <string name="login_success">Login success!</string>
   <string name="login_failed">Login failed!</string>
   <string name="upload_failed">File not found. Please try another file.</string>
@@ -522,11 +524,14 @@ Upload your first media by tapping on the add button.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Trying to update coordinates.</string>
   <string name="coordinates_edit_helper_show_edit_title">Coordinates update</string>
   <string name="description_edit_helper_show_edit_title">Description update</string>
+  <string name="caption_edit_helper_show_edit_title">Caption update</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Success</string>
   <string name="coordinates_edit_helper_show_edit_message">Coordinates %1$s are added.</string>
   <string name="description_edit_helper_show_edit_message">Descriptions are added.</string>
+  <string name="caption_edit_helper_show_edit_message">Caption is added.</string>
   <string name="coordinates_edit_helper_edit_message_else">Could not add coordinates.</string>
   <string name="description_edit_helper_edit_message_else">Could not add descriptions.</string>
+  <string name="caption_edit_helper_edit_message_else">Could not add caption.</string>
   <string name="coordinates_picking_unsuccessful">Unable to get coordinates.</string>
   <string name="descriptions_picking_unsuccessful">Unable to get descriptions.</string>
   <string name="description_activity_title">Edit descriptions and captions</string>
