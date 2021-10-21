@@ -53,7 +53,7 @@ public class AboutActivity extends BaseActivity {
         final String aboutText = getString(R.string.about_license);
         /*
           We can then access all the views by just using the id names like this.
-          Same PascalCasing is used with underscore characters being ignored.
+          camelCasing is used with underscore characters being ignored.
          */
         binding.aboutLicense.setHtmlText(aboutText);
 
