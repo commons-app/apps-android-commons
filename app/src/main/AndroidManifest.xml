@@ -149,8 +149,8 @@
             android:label="@string/title_activity_review" />
 
         <activity
-            android:name=".LocationPicker.LocationPickerActivity"
-            android:label="Location Picker" />
+          android:name=".LocationPicker.LocationPickerActivity"
+          android:label="Location Picker" />
 
         <service
             android:name=".auth.WikiAccountAuthenticatorService"
