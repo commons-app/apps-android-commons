@@ -32,11 +32,11 @@
   <string name="preference_category_appearance">حليو</string>
   <string name="preference_category_general">عام</string>
   <string name="preference_category_feedback">پذيرائي</string>
-  <string name="preference_category_privacy">ذاتيات</string>
+  <string name="preference_category_privacy">نويڪلائي</string>
   <string name="app_name">العام</string>
   <string name="bullet">•</string>
   <string name="menu_settings">ترتيبون</string>
-  <string name="intent_share_upload_label">ڪامنز ۾ چاڙهيو</string>
+  <string name="intent_share_upload_label">العام ۾ چاڙهيو</string>
   <string name="username">واپرائيندڙ-نانءُ</string>
   <string name="password">ڳجھولفظ</string>
   <string name="login_credential">وڪي ڪامنز جي آزمائشي کاتي ۾ داخل ٿيو</string>
@@ -91,7 +91,7 @@
   <string name="title_activity_featured_images">چونڊ تصويرون</string>
   <string name="title_activity_category_details">زمرو</string>
   <string name="menu_about">بابت</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;ذاتيات پاليسي&lt;/u&gt;</string>
+  <string name="about_privacy_policy">نويڪلائي نِيَمَ</string>
   <string name="about_credits" fuzzy="true">&lt;u&gt;ساراھون&lt;/u&gt;</string>
   <string name="title_activity_about">بابت</string>
   <string name="menu_feedback">پذيرائي موڪليو (برقٽپال ذريعي)</string>
@@ -153,8 +153,8 @@
   <string name="media_detail_coordinates">مڪانيت</string>
   <string name="become_a_tester_title">آزمائشي آزمائيندڙ ٿيو</string>
   <string name="logout_verification">ڇا توھان سچ ۾ خارج ٿيڻ ٿا چاھيو؟</string>
-  <string name="commons_logo">العام جي سڃاڻپ جو نشان (Commons Logo)</string>
-  <string name="commons_website">العام ويب-سرزمين</string>
+  <string name="commons_logo">العام لوگو</string>
+  <string name="commons_website">العام ويبسائيٽ</string>
   <string name="commons_facebook">العام فيسبڪ صفحو</string>
   <string name="welcome_image_rainbow_bridge">انڊلٺ پل</string>
   <string name="welcome_image_tulip">گل لالا (ٽيولپ)</string>
@@ -166,7 +166,7 @@
   <string name="navigation_drawer_close">بند ڪريو</string>
   <string name="navigation_item_home">مکيه صفحو</string>
   <string name="navigation_item_upload">چاڙهيو</string>
-  <string name="navigation_item_nearby">ويجھا</string>
+  <string name="navigation_item_nearby">ويجها</string>
   <string name="navigation_item_about">بابت</string>
   <string name="navigation_item_settings">ترتيبون (سيٽنگس)</string>
   <string name="navigation_item_feedback">اوهان جي راءِ</string>
@@ -175,7 +175,7 @@
   <string name="navigation_item_notification">نوٽيفيڪيشنس</string>
   <string name="navigation_item_review">جائزو</string>
   <string name="no_description_found">ڪابہ تشريح نہ لڌي</string>
-  <string name="nearby_info_menu_commons_article">ڪامن فائيل جو ورق</string>
+  <string name="nearby_info_menu_commons_article">العام فائيل جو صفحو</string>
   <string name="nearby_info_menu_wikidata_article">وڪيڊيٽا آئٽم</string>
   <string name="nearby_info_menu_wikipedia_article">وڪيپيڊيا مضمون</string>
   <string name="use_external_storage" fuzzy="true">ٻاھري سنڀار استعمال ڪريو</string>
@@ -214,7 +214,7 @@
   <string name="appwidget_img">اڄ جي تصوير</string>
   <string name="app_widget_heading">اڄ جي تصوير</string>
   <string name="menu_search_button">ڳوليو</string>
-  <string name="search_commons">ڪامنز ۾ ڳولا</string>
+  <string name="search_commons">العام ۾ ڳوليو</string>
   <string name="title_activity_search">ڳوليو</string>
   <string name="search_recent_header">تازيون ڳولائون:</string>
   <string name="provider_searches">تازه ڳوليل فقرا</string>
@@ -226,7 +226,7 @@
   <string name="wallpaper_set_successfully">وال پيپر ڪاميابيءَ سان لڳي ويو!</string>
   <string name="question">سوال</string>
   <string name="result">نتيجو</string>
-  <string name="user_not_logged_in">لاگ اِن سيشن ايڪسپائير ٿي ويو آهي، مهرباني ڪري وري لاڳ اِن ٿيو.</string>
+  <string name="user_not_logged_in">داخل-ٿيڻ سيشن جو مدو پورو ٿي ويو، مھرباني ڪري وري داخل ٿيو.</string>
   <string name="continue_message">جاري رکو</string>
   <string name="correct">درست جواب</string>
   <string name="wrong">غلط جواب</string>
@@ -246,7 +246,7 @@
   <string name="achievements_share_message">پنھنجون ڪاميابيون پنھنجن دوست سان ونڊيو!</string>
   <string name="error_occurred">خلل ٿيو!</string>
   <string name="contributions_fragment">ڀاڱيداريون</string>
-  <string name="nearby_fragment">ويجھا</string>
+  <string name="nearby_fragment">ويجها</string>
   <string name="notifications">اطلاع</string>
   <string name="list_sheet">فھرست</string>
   <string name="write_storage_permission_rationale_for_image_share">اسان کي اوهان جي ڊوائس جي اسٽورج جي اجازت گھرجي جيئن تصويرون چاڙهي سگھجن.</string>
