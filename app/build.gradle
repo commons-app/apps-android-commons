@@ -48,7 +48,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
-    implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:$ADAPTER_DELEGATES_VERSION"
+    implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$ADAPTER_DELEGATES_VERSION"
     implementation "com.hannesdorfmann:adapterdelegates4-pagination:$ADAPTER_DELEGATES_VERSION"
     implementation "androidx.paging:paging-runtime-ktx:$PAGING_VERSION"
     testImplementation "androidx.paging:paging-common-ktx:$PAGING_VERSION"

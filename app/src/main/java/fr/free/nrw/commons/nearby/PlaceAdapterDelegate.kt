@@ -5,12 +5,11 @@ import android.view.View.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
-import com.hannesdorfmann.adapterdelegates4.dsl.AdapterDelegateLayoutContainerViewHolder
-import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
+import com.hannesdorfmann.adapterdelegates4.dsl.AdapterDelegateViewBindingViewHolder
+import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
-import kotlinx.android.synthetic.main.item_place.*
-import kotlinx.android.synthetic.main.nearby_row_button.*
+import fr.free.nrw.commons.databinding.ItemPlaceBinding
 
 
 fun placeAdapterDelegate(
@@ -21,29 +20,33 @@ fun placeAdapterDelegate(
     onBookmarkClicked: (Place, Boolean) -> Unit,
     onOverflowIconClicked: (Place, View) -> Unit,
     onDirectionsClicked: (Place) -> Unit
-) =
-    adapterDelegateLayoutContainer<Place, Place>(R.layout.item_place) {
-        containerView.setOnClickListener { _: View? ->
+) = adapterDelegateViewBinding<Place, Place, ItemPlaceBinding>({ layoutInflater, parent ->
+    ItemPlaceBinding.inflate(layoutInflater, parent, false)
+}) {
+    with(binding) {
+        root.setOnClickListener { _: View? ->
             showOrHideAndScrollToIfLast()
             onItemClick?.invoke(item)
         }
-        containerView.setOnFocusChangeListener { view1: View?, hasFocus: Boolean ->
-            if (!hasFocus && buttonLayout.isShown) {
-                buttonLayout.visibility = GONE
-            } else if (hasFocus && !buttonLayout.isShown) {
+        root.setOnFocusChangeListener { view1: View?, hasFocus: Boolean ->
+            if (!hasFocus && nearbyButtonLayout.buttonLayout.isShown) {
+                nearbyButtonLayout.buttonLayout.visibility = GONE
+            } else if (hasFocus && !nearbyButtonLayout.buttonLayout.isShown) {
                 showOrHideAndScrollToIfLast()
                 onItemClick?.invoke(item)
             }
         }
-        cameraButton.setOnClickListener { onCameraClicked(item) }
-        galleryButton.setOnClickListener { onGalleryClicked(item) }
+        nearbyButtonLayout.cameraButton.setOnClickListener { onCameraClicked(item) }
+        nearbyButtonLayout.galleryButton.setOnClickListener { onGalleryClicked(item) }
         bookmarkButtonImage.setOnClickListener {
             val isBookmarked = bookmarkLocationDao.updateBookmarkLocation(item)
-            bookmarkButtonImage.setImageResource(if (isBookmarked) R.drawable.ic_round_star_filled_24px else R.drawable.ic_round_star_border_24px)
+            bookmarkButtonImage.setImageResource(
+                if (isBookmarked) R.drawable.ic_round_star_filled_24px else R.drawable.ic_round_star_border_24px
+            )
             onBookmarkClicked(item, isBookmarked)
         }
-        iconOverflow.setOnClickListener { onOverflowIconClicked(item, it) }
-        directionsButton.setOnClickListener { onDirectionsClicked(item) }
+        nearbyButtonLayout.iconOverflow.setOnClickListener { onOverflowIconClicked(item, it) }
+        nearbyButtonLayout.directionsButton.setOnClickListener { onDirectionsClicked(item) }
         bind {
             tvName.text = item.name
             val descriptionText: String = item.longDescription
@@ -52,11 +55,13 @@ fun placeAdapterDelegate(
                 tvDesc.visibility = INVISIBLE
             } else {
                 // Remove the label and display only texts inside pharentheses (description) since too long
-                tvDesc.text = descriptionText.substringAfter(tvName.text.toString() + " (").substringBeforeLast(")");
+                tvDesc.text =
+                    descriptionText.substringAfter(tvName.text.toString() + " (")
+                        .substringBeforeLast(")");
             }
             distance.text = item.distance
             icon.setImageResource(item.label.icon)
-            iconOverflow.visibility =
+            nearbyButtonLayout.iconOverflow.visibility =
                 if (item.hasCommonsLink() || item.hasWikidataLink()) VISIBLE
                 else GONE
 
@@ -68,18 +73,24 @@ fun placeAdapterDelegate(
             )
         }
     }
+}
 
-private fun AdapterDelegateLayoutContainerViewHolder<Place>.showOrHideAndScrollToIfLast() {
-    TransitionManager.beginDelayedTransition(buttonLayout)
-    if (buttonLayout.isShown) {
-        buttonLayout.visibility = GONE
-    } else {
-        buttonLayout.visibility = VISIBLE
-        val recyclerView = containerView.parent as RecyclerView
-        val lastPosition = recyclerView.adapter!!.itemCount - 1
-        if (recyclerView.getChildLayoutPosition(containerView) == lastPosition) {
-            (recyclerView.layoutManager as LinearLayoutManager?)
-                ?.scrollToPositionWithOffset(lastPosition, buttonLayout.height)
+private fun AdapterDelegateViewBindingViewHolder<Place, ItemPlaceBinding>.showOrHideAndScrollToIfLast() {
+    with(binding) {
+        TransitionManager.beginDelayedTransition(nearbyButtonLayout.buttonLayout)
+        if (nearbyButtonLayout.buttonLayout.isShown) {
+            nearbyButtonLayout.buttonLayout.visibility = GONE
+        } else {
+            nearbyButtonLayout.buttonLayout.visibility = VISIBLE
+            val recyclerView = root.parent as RecyclerView
+            val lastPosition = recyclerView.adapter!!.itemCount - 1
+            if (recyclerView.getChildLayoutPosition(root) == lastPosition) {
+                (recyclerView.layoutManager as LinearLayoutManager?)
+                    ?.scrollToPositionWithOffset(
+                        lastPosition,
+                        nearbyButtonLayout.buttonLayout.height
+                    )
+            }
         }
     }
 }
