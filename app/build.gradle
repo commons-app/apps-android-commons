@@ -142,6 +142,7 @@ dependencies {
     def work_version = "2.4.0"
     // Kotlin + coroutines
     implementation "androidx.work:work-runtime-ktx:$work_version"
+    testImplementation "androidx.work:work-testing:$work_version"
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'

@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.os.Looper
 import androidx.fragment.app.Fragment
 import androidx.work.Configuration
-import androidx.work.WorkManager
+import androidx.work.testing.WorkManagerTestInitHelper
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
@@ -105,6 +105,9 @@ class MainActivityUnitTests {
             MainActivity::class.java.getDeclaredField("contributionsFragment")
         fieldContributionsFragment.isAccessible = true
         fieldContributionsFragment.set(activity, contributionsFragment)
+
+        val config: Configuration = Configuration.Builder().build()
+        WorkManagerTestInitHelper.initializeTestWorkManager(context, config)
     }
 
     @Test
@@ -199,8 +202,6 @@ class MainActivityUnitTests {
     @Throws(Exception::class)
     fun testToggleLimitedConnectionMode() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val config: Configuration = Configuration.Builder().build()
-        WorkManager.initialize(context, config)
         `when`(
             defaultKvStore.getBoolean(
                 CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false
