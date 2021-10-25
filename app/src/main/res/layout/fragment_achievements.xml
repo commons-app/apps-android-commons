@@ -144,6 +144,7 @@
               app:progress_start_color="#3A3381"
               app:progress_stroke_width="@dimen/progressbar_stroke"
               app:progress_text_format_pattern="573/110"
+              android:visibility="gone"
               app:progress_text_color="@color/secondaryColor"
               app:style="solid_line" />
 
@@ -211,6 +212,7 @@
               android:layout_marginRight="@dimen/large_gap"
               android:layout_marginEnd="@dimen/large_gap"
               android:progress="50"
+              android:visibility="gone"
               android:id="@+id/image_reverts_progressbar"
               app:progress_end_color="#8C8B98"
               app:progress_start_color="#3A3381"
@@ -278,6 +280,7 @@
               app:progress_end_color="#8C8B98"
               app:progress_start_color="#3A3381"
               app:progress_stroke_width="2.5dp"
+              android:visibility="gone"
               app:progress_text_color="@color/secondaryColor"
               app:progress_text_format_pattern="12/24"
               app:style="solid_line" />

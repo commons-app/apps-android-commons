@@ -30,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -137,7 +138,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         ButterKnife.bind(this, view);
         contributionsListPresenter.onAttachView(this);
 
-        if (sessionManager.getUserName().equals(userName)) {
+        if (Objects.equals(sessionManager.getUserName(), userName)) {
             tvContributionsOfUser.setVisibility(GONE);
             fab_layout.setVisibility(VISIBLE);
         } else {
@@ -300,6 +301,15 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
             controller.initiateGalleryPick(getActivity(), true);
             animateFAB(isFabOpen);
         });
+    }
+
+    /**
+     * Launch Custom Selector.
+     */
+    @OnClick(R.id.fab_custom_gallery)
+    void launchCustomSelector(){
+        controller.initiateCustomGalleryPickWithPermission(getActivity());
+        animateFAB(isFabOpen);
     }
 
     private void animateFAB(final boolean isFabOpen) {

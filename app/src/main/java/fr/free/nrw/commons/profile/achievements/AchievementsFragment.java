@@ -325,7 +325,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         if (uploadCount==0){
             setZeroAchievements();
         }else {
-
+            imagesUploadedProgressbar.setVisibility(View.VISIBLE);
             imagesUploadedProgressbar.setProgress
                     (100*uploadCount/levelInfo.getMaxUploadCount());
             imagesUploadedProgressbar.setProgressTextFormatPattern
@@ -337,7 +337,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     private void setZeroAchievements() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
             .setMessage(
-                !sessionManager.getUserName().equals(userName) ?
+                !Objects.equals(sessionManager.getUserName(), userName) ?
                     getString(R.string.no_achievements_yet, userName) :
                     getString(R.string.you_have_no_achievements_yet)
             )
@@ -361,6 +361,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      * @param notRevertPercentage
      */
     private void setImageRevertPercentage(int notRevertPercentage){
+        imageRevertsProgressbar.setVisibility(View.VISIBLE);
         imageRevertsProgressbar.setProgress(notRevertPercentage);
         String revertPercentage = Integer.toString(notRevertPercentage);
         imageRevertsProgressbar.setProgressTextFormatPattern(revertPercentage + "%%");
@@ -373,6 +374,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      * @param achievements
      */
     private void inflateAchievements(Achievements achievements) {
+        imagesUsedByWikiProgressBar.setVisibility(View.VISIBLE);
         thanksReceived.setText(String.valueOf(achievements.getThanksReceived()));
         imagesUsedByWikiProgressBar.setProgress
                 (100 * achievements.getUniqueUsedImages() / levelInfo.getMaxUniqueImages());
