@@ -11,12 +11,14 @@ import androidx.fragment.app.FragmentTransaction
 import com.dinuscxj.progressbar.CircleProgressBar
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.profile.ProfileActivity
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
@@ -85,6 +87,9 @@ class AchievementsFragmentUnitTests {
     @Mock
     private lateinit var progressBar: ProgressBar
 
+    @Mock
+    private lateinit var sessionManager: SessionManager
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
@@ -131,6 +136,10 @@ class AchievementsFragmentUnitTests {
         Whitebox.setInternalState(fragment, "progressBar", progressBar)
         Whitebox.setInternalState(fragment, "imagesRevertLimitText", imagesRevertLimitText)
         Whitebox.setInternalState(fragment, "item", menuItem)
+        Whitebox.setInternalState(fragment, "sessionManager", sessionManager)
+
+        Mockito.`when`(sessionManager.userName).thenReturn("Test")
+
     }
 
     @Test
