@@ -12,6 +12,7 @@ import fr.free.nrw.commons.customselector.ui.selector.FolderFragment;
 import fr.free.nrw.commons.customselector.ui.selector.ImageFragment;
 import fr.free.nrw.commons.explore.ExploreFragment;
 import fr.free.nrw.commons.explore.ExploreListRootFragment;
+import fr.free.nrw.commons.explore.ExploreNearbyUploadsFragment;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment;
 import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment;
@@ -125,6 +126,9 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract ExploreListRootFragment bindExploreFeaturedRootFragment();
+
+    @ContributesAndroidInjector
+    abstract ExploreNearbyUploadsFragment bindExploreNearbyUploadsFragment();
 
     @ContributesAndroidInjector
     abstract BookmarkListRootFragment bindBookmarkListRootFragment();

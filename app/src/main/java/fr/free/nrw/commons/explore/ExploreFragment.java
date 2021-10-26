@@ -38,6 +38,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     ViewPagerAdapter viewPagerAdapter;
     private ExploreListRootFragment featuredRootFragment;
     private ExploreListRootFragment mobileRootFragment;
+    private ExploreNearbyUploadsFragment mapRootFragment;
     @Inject
     @Named("default_preferences")
     public JsonKvStore applicationKvStore;
@@ -88,11 +89,15 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
 
         featuredRootFragment = new ExploreListRootFragment(featuredArguments);
         mobileRootFragment = new ExploreListRootFragment(mobileArguments);
+        mapRootFragment = new ExploreNearbyUploadsFragment();
         fragmentList.add(featuredRootFragment);
         titleList.add(getString(R.string.explore_tab_title_featured).toUpperCase());
 
         fragmentList.add(mobileRootFragment);
         titleList.add(getString(R.string.explore_tab_title_mobile).toUpperCase());
+
+        fragmentList.add(mapRootFragment);
+        titleList.add(getString(R.string.explore_tab_title_map).toUpperCase());
 
         ((MainActivity)getActivity()).showTabs();
         ((BaseActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
