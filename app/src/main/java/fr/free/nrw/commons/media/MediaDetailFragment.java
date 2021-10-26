@@ -80,6 +80,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Label;
+import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
@@ -1222,6 +1223,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         if (nominatedForDeletion.getVisibility() == VISIBLE && getActivity() != null) {
             Utils.handleWebUrl(getActivity(), Uri.parse(media.getPageTitle().getMobileUri()));
         }
+    }
+
+    @OnClick(R.id.mediaDetailAuthor)
+    public void onAuthorViewClicked() {
+        if (media == null || media.getUser() == null) {
+            return;
+        }
+        ProfileActivity.startYourself(getActivity(), media.getUser(), !Objects
+            .equals(sessionManager.getUserName(), media.getUser()));
     }
 
     /**

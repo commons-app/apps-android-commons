@@ -20,13 +20,13 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">S\'està iniciant %1$d càrrega</item>
-    <item quantity="other">S\'estan iniciant %1$d càrregues</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">S\'està processant %1$d càrrega</item>
+    <item quantity="other">S\'estan processant %1$d càrregues</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d càrrega</item>
-    <item quantity="other">%1$d càrregues</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d càrrega</item>
+    <item quantity="other">%d càrregues</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Aquesta imatge quedarà sota llicència %1$s</item>
@@ -59,7 +59,7 @@
   <string name="uploading_started">Ha començat la càrrega!</string>
   <string name="upload_completed_notification_title">S’ha pujat %1$s.</string>
   <string name="upload_completed_notification_text">Prem per veure la teva càrrega</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Començant la càrrega al servidor de  %1$s</string>
+  <string name="upload_progress_notification_title_start">Pujant el fitxer: %s</string>
   <string name="upload_progress_notification_title_in_progress">Carregant %1$s</string>
   <string name="upload_progress_notification_title_finishing">Acabant la càrrega al servidor de %1$s</string>
   <string name="upload_failed_notification_title">Error al carregar %1$s</string>
@@ -350,8 +350,8 @@
   <string name="review_category_explanation">Aquesta imatge està sota les categories %1$s.</string>
   <string name="review_spam_report_question">És fora d\'abast perquè és</string>
   <string name="review_c_violation_report_question">És una violació de drets d\'autor perquè és</string>
-  <string name="review_thanks_yes_button_text" fuzzy="true">I tant</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">Imatge següent</string>
+  <string name="review_thanks_yes_button_text">Imatge següent</string>
+  <string name="review_thanks_no_button_text">Imatge següent</string>
   <string name="no_image">No s\'ha utilitzat cap imatge</string>
   <string name="no_image_reverted">No s\'ha revertit cap imatge</string>
   <string name="no_image_uploaded">No s\'ha carregat cap imatge</string>

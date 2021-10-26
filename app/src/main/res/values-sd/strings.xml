@@ -31,7 +31,7 @@
   <string name="navigation_item_explore">تلاش ڪريو</string>
   <string name="preference_category_appearance">حليو</string>
   <string name="preference_category_general">عام</string>
-  <string name="preference_category_feedback">پذيرائي</string>
+  <string name="preference_category_feedback">موٽ</string>
   <string name="preference_category_privacy">نويڪلائي</string>
   <string name="app_name">العام</string>
   <string name="bullet">•</string>
@@ -84,7 +84,7 @@
   <string name="display_list_button">فھرست</string>
   <string name="contributions_subtitle_zero" fuzzy="true">اڃا تائين ڪوبہ چاڙھ ناھي</string>
   <string name="categories_not_found">%1$s سان ملندڙ ڪوبہ زمرو نہ لڌو</string>
-  <string name="categories_skip_explanation">پنھنجي عڪسن ۾ زمرا وجھو تہ جيئن وڪيميڊيا العام تي وڌيڪ ڳولا لائق ٿي سگھن.\n\nزمرا وجھڻ لاءِ لکڻ شروع ڪريو.</string>
+  <string name="categories_skip_explanation">پنھنجي عڪسن ۾ زمرا وجهو تہ جيئن اھي وڪيميڊيا العام تي وڌيڪ ڳولا لائق ٿي سگهن.\nزمرا وجهڻ لاءِ لکڻ شروع ڪريو.</string>
   <string name="categories_activity_title">زمرا</string>
   <string name="title_activity_settings">ترتيبون</string>
   <string name="title_activity_signup">کاتو کوليو</string>
@@ -94,7 +94,7 @@
   <string name="about_privacy_policy">نويڪلائي نِيَمَ</string>
   <string name="about_credits" fuzzy="true">&lt;u&gt;ساراھون&lt;/u&gt;</string>
   <string name="title_activity_about">بابت</string>
-  <string name="menu_feedback">پذيرائي موڪليو (برقٽپال ذريعي)</string>
+  <string name="menu_feedback">موٽ موڪليو (ايميل ذريعي)</string>
   <string name="no_email_client">ڪوبہ برقٽپال ڪلائينٽ تنصيبيل ناھي</string>
   <string name="provider_categories">تازو استعمال ڪيل زمرا</string>
   <string name="waiting_first_sync">پھرين سائنڪ جو انتظار ڪندي…</string>
@@ -158,7 +158,7 @@
   <string name="commons_facebook">العام فيسبڪ صفحو</string>
   <string name="welcome_image_rainbow_bridge">انڊلٺ پل</string>
   <string name="welcome_image_tulip">گل لالا (ٽيولپ)</string>
-  <string name="welcome_image_welcome_wikipedia">وڪيپيڊيا تي ڀليڪار</string>
+  <string name="welcome_image_welcome_wikipedia">وڪيپيڊيا ۾ ڀليڪار</string>
   <string name="welcome_image_welcome_copyright">حقن ۽ واسطن جي آجيان (ويلڪم ڪاپي رائيٽ)</string>
   <string name="welcome_image_sydney_opera_house">سڊني اوپيرا هائوس</string>
   <string name="cancel">رد</string>
@@ -171,7 +171,7 @@
   <string name="navigation_item_settings">ترتيبون (سيٽنگس)</string>
   <string name="navigation_item_feedback">اوهان جي راءِ</string>
   <string name="navigation_item_logout">ٻاهر نڪرو</string>
-  <string name="navigation_item_info">سکيا (ٽيوٽوريل)</string>
+  <string name="navigation_item_info">سکيانامو</string>
   <string name="navigation_item_notification">نوٽيفيڪيشنس</string>
   <string name="navigation_item_review">جائزو</string>
   <string name="no_description_found">ڪابہ تشريح نہ لڌي</string>
@@ -191,16 +191,16 @@
   <string name="navigation_item_login">داخل ٿيو</string>
   <string name="skip_login_title">ڇا توھان سچ ۾ داخل-ٿيڻ ڇڏڻ چاھيو ٿا؟</string>
   <string name="skip_login_message">توھان کي تصويرون چاڙھڻ لاءِ مستقبل ۾ داخل ٿيڻو پوندو.</string>
-  <string name="login_alert_message">هن خصوصيت جي استعمال لاءِ داخل ٿيو</string>
+  <string name="login_alert_message">مھرباني فرمائي هن خصوصيت کي استعمال ڪرڻ لاءِ داخل ٿيو</string>
   <string name="nearby_location_not_available" fuzzy="true">مڪانيت موجود ناھي.</string>
   <string name="location_permission_rationale_nearby">ويجھين جڳھن جي فھرست ڏيکارڻ لاءِ اجازت گھربل آھي</string>
   <string name="nearby_directions">طرف</string>
   <string name="nearby_wikidata">وڪيڊيٽا</string>
   <string name="nearby_wikipedia">وڪيپيڊيا</string>
   <string name="nearby_commons">العام</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;پذيرائي ڏيو&lt;/u&gt;</string>
+  <string name="about_rate_us">اسان کي موٽ ڏيو</string>
   <string name="about_faq" fuzzy="true">&lt;u&gt;عام سوال&lt;/u&gt;</string>
-  <string name="welcome_skip_button">سبق کي ڇڏيو</string>
+  <string name="welcome_skip_button">سکيانامي کي ڇڏيو</string>
   <string name="no_internet">انٽرنيٽ ناهي</string>
   <string name="no_notifications">اطلاع نہ لڌا</string>
   <string name="about_translate" fuzzy="true">&lt;u&gt;ترجمو&lt;/u&gt;</string>

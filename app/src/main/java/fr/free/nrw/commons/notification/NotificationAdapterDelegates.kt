@@ -1,18 +1,18 @@
 package fr.free.nrw.commons.notification
 
-import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
-import fr.free.nrw.commons.R
-import kotlinx.android.synthetic.main.activity_login.title
-import kotlinx.android.synthetic.main.item_notification.*
+import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
+import fr.free.nrw.commons.databinding.ItemNotificationBinding
 import org.wikipedia.util.StringUtil
 
 
 fun notificationDelegate(onNotificationClicked: (Notification) -> Unit) =
-    adapterDelegateLayoutContainer<Notification, Notification>(R.layout.item_notification) {
-        containerView.setOnClickListener { onNotificationClicked(item) }
+    adapterDelegateViewBinding<Notification, Notification, ItemNotificationBinding>({ layoutInflater, parent ->
+        ItemNotificationBinding.inflate(layoutInflater, parent, false)
+    }) {
+        binding.root.setOnClickListener { onNotificationClicked(item) }
         bind {
-            title.text = item.processedNotificationText
-            time.text = item.date
+            binding.title.text = item.processedNotificationText
+            binding.time.text = item.date
         }
 
     }
