@@ -22,6 +22,7 @@ import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment;
 import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment;
+import fr.free.nrw.commons.explore.map.ExploreMapFragment;
 import fr.free.nrw.commons.explore.media.SearchMediaFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
@@ -57,7 +58,7 @@ public class SearchActivity extends BaseActivity
 
     private SearchMediaFragment searchMediaFragment;
     private SearchCategoryFragment searchCategoryFragment;
-    private ExploreNearbyUploadsFragment searchMapFragment;
+    private ExploreMapFragment searchMapFragment;
     private SearchDepictionsFragment searchDepictionsFragment;
     private RecentSearchesFragment recentSearchesFragment;
     private FragmentManager supportFragmentManager;
@@ -105,7 +106,7 @@ public class SearchActivity extends BaseActivity
         searchMediaFragment = new SearchMediaFragment();
         searchDepictionsFragment = new SearchDepictionsFragment();
         searchCategoryFragment= new SearchCategoryFragment();
-        searchMapFragment= new ExploreNearbyUploadsFragment();
+        searchMapFragment= new ExploreMapFragment();
         fragmentList.add(searchMediaFragment);
         titleList.add(getResources().getString(R.string.search_tab_title_media).toUpperCase());
         fragmentList.add(searchCategoryFragment);

@@ -17,6 +17,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.explore.map.ExploreMapFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.ActivityUtils;
@@ -38,7 +39,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     ViewPagerAdapter viewPagerAdapter;
     private ExploreListRootFragment featuredRootFragment;
     private ExploreListRootFragment mobileRootFragment;
-    private ExploreNearbyUploadsFragment mapRootFragment;
+    private ExploreMapFragment mapRootFragment;
     @Inject
     @Named("default_preferences")
     public JsonKvStore applicationKvStore;
@@ -89,7 +90,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
 
         featuredRootFragment = new ExploreListRootFragment(featuredArguments);
         mobileRootFragment = new ExploreListRootFragment(mobileArguments);
-        mapRootFragment = new ExploreNearbyUploadsFragment();
+        mapRootFragment = new ExploreMapFragment();
         fragmentList.add(featuredRootFragment);
         titleList.add(getString(R.string.explore_tab_title_featured).toUpperCase());
 

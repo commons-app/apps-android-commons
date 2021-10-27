@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/coordinator_layout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+    <!--  I have done this intentionally, the mapview because of some elevation or something,
+    sometimes hangs over the drawer layout and sometimes draws its onPaused state over the contributions, this seems to be the probable fix  -->
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@id/rl_container_wlm_month_message">
+
+      <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent" />
+
+      <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_attribution"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/map_attribution"
+        android:textAlignment="center"
+        android:textSize="10sp" />
+
+    </RelativeLayout>
+
+
+    <Button
+      android:id="@+id/search_this_area_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:layout_gravity="center_horizontal"
+      android:layout_margin="@dimen/activity_margin_horizontal"
+      android:background="@color/white"
+      android:padding="@dimen/activity_margin_horizontal"
+      android:singleLine="true"
+      android:text="@string/search_this_area"
+      android:textColor="@color/status_bar_blue"
+      android:visibility="gone"
+      app:elevation="@dimen/dimen_6"
+      android:layout_below="@id/rl_container_wlm_month_message"
+      />
+
+  <include
+    android:id="@+id/bottom_sheet_details"
+    layout="@layout/bottom_sheet_details" />
+
+  <ProgressBar
+    android:id="@+id/map_progress_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    app:elevation="@dimen/dimen_6"
+    android:visibility="gone" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
