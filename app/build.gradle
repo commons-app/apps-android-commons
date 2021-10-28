@@ -139,13 +139,13 @@ dependencies {
 
     implementation "androidx.multidex:multidex:$MULTIDEX_VERSION"
 
-    def work_version = "2.6.0"
+    def work_version = "2.4.0"
     // Kotlin + coroutines
     implementation "androidx.work:work-runtime-ktx:$work_version"
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 28
 
     defaultConfig {
         //applicationId 'fr.free.nrw.commons'
@@ -155,7 +155,7 @@ android {
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
         minSdkVersion 19
-        targetSdkVersion 30
+        targetSdkVersion 29
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
 

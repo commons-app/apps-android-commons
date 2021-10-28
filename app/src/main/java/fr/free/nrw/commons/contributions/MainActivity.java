@@ -1,13 +1,9 @@
 package fr.free.nrw.commons.contributions;
 
-import android.Manifest.permission;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,7 +42,6 @@ import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.worker.UploadWorker;
-import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -143,29 +138,13 @@ public class MainActivity  extends BaseActivity
 
     private void setUpPager() {
         tabLayout.setOnNavigationItemSelectedListener(item -> {
-            if (VERSION.SDK_INT >= VERSION_CODES.M) {
-                if (item.getTitle().equals(getString(R.string.nearby_fragment))
-                    && checkSelfPermission(permission.READ_PHONE_STATE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                    requestPhoneStatePermission(() -> {
-                        tabLayout.setSelectedItemId(NavTab.NEARBY.code());
-                    });
-                    return false;
-                }
-            }
             if (!item.getTitle().equals("More")) {
                 // do not change title for more fragment
                 setTitle(item.getTitle());
             }
             Fragment fragment = NavTab.of(item.getOrder()).newInstance();
-            return loadFragment(fragment, true);
+            return loadFragment(fragment,true);
         });
-    }
-
-    private void requestPhoneStatePermission(final Runnable runnable) {
-        PermissionUtils.checkPermissionsAndPerformAction(this,
-            android.Manifest.permission.READ_PHONE_STATE, (Runnable) runnable::run, (Runnable) () -> {
-            }, R.string.need_permission, R.string.read_phone_state_permission_message);
     }
 
     private void setUpLoggedOutPager() {
