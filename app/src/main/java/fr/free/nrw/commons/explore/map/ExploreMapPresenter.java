@@ -46,7 +46,7 @@ public class ExploreMapPresenter
     }
 
     @Override
-    public void attachView(View view) {
+    public void attachView(ExploreMapContract.View view) {
 
     }
 

@@ -121,7 +121,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         presenter.attachView(this);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(mapBoxMap -> {
-            mapBox =mapBoxMap;
+            mapBox = mapBoxMap;
             initViews();
             presenter.setActionListeners(applicationKvStore);
             mapBoxMap.setStyle(isDarkTheme? Style.DARK:Style.OUTDOORS, style -> {
