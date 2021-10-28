@@ -7,8 +7,6 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
-import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract.View;
 import java.util.List;
 
 public class ExploreMapContract {
@@ -44,7 +42,7 @@ public class ExploreMapContract {
     interface UserActions {
         void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType);
         void lockUnlockNearby(boolean isNearbyLocked);
-        void attachView(NearbyParentFragmentContract.View view);
+        void attachView(View view);
         void detachView();
         void setActionListeners(JsonKvStore applicationKvStore);
         void removeNearbyPreferences(JsonKvStore applicationKvStore);

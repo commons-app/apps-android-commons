@@ -2,12 +2,15 @@ package fr.free.nrw.commons.explore.map;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.snackbar.Snackbar;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -53,14 +57,19 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     private static final float ZOOM_LEVEL = 14f;
     private static final float ZOOM_OUT = 0f;
+    private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
+
+    private BottomSheetBehavior bottomSheetDetailsBehavior;
     private BroadcastReceiver broadcastReceiver;
     private boolean isNetworkErrorOccurred;
     private Snackbar snackbar;
     private boolean isDarkTheme;
+    private boolean isPermissionDenied;
     private MapboxMap.OnCameraMoveListener cameraMoveListener;
     private MapboxMap mapBox;
     private boolean isMapBoxReady;
     private ExploreFragmentInstanceReadyCallback exploreFragmentInstanceReadyCallback;
+    IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
 
 
     @Inject
@@ -76,6 +85,9 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     @BindView(R.id.map_view)
     MapView mapView;
+    @BindView(R.id.bottom_sheet_details)
+    View bottomSheetDetails;
+
 
     private View view;
     private ExploreMapPresenter presenter;
@@ -104,8 +116,9 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         isDarkTheme = systemThemeUtils.isDeviceInNightMode();
+        isPermissionDenied = false;
         cameraMoveListener= () -> presenter.onCameraMove(mapBox.getCameraPosition().target);
-        // presenter.attachView(this); TODO fix this
+        presenter.attachView(this);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(mapBoxMap -> {
             mapBox =mapBoxMap;
@@ -147,18 +160,33 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     @Override
     public void onResume() {
         super.onResume();
-        /** // TODO nesli
         mapView.onResume();
         presenter.attachView(this);
         registerNetworkReceiver();
-        if (isResumed() && ((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY) {
-            if(!isPermissionDenied && !applicationKvStore.getBoolean("doNotAskForLocationPermission", false)){
+        if (isResumed() && ((MainActivity)getActivity()).activeFragment == ActiveFragment.EXPLORE) {
+            if (!isPermissionDenied && !applicationKvStore
+                .getBoolean("doNotAskForLocationPermission", false)) {
                 startTheMap();
-            }else{
+            } else {
                 startMapWithoutPermission();
             }
         }
-         **/
+    }
+
+    private void startTheMap() {
+        mapView.onStart();
+        performMapReadyActions();
+    }
+
+    private void startMapWithoutPermission() {
+        mapView.onStart();
+        // TODO nesli
+    }
+
+    private void registerNetworkReceiver() {
+        if (getActivity() != null) {
+            getActivity().registerReceiver(broadcastReceiver, intentFilter);
+        }
     }
 
     private void performMapReadyActions() {
@@ -168,7 +196,37 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     private void initViews() {
         Timber.d("init views called");
         initBottomSheets();
-        setBottomSheetCallbacks();
+        // TODO nesli setBottomSheetCallbacks();
+    }
+
+    /**
+     * a) Creates bottom sheet behaviours from bottom sheet, sets initial states and visibility
+     * b) Gets the touch event on the map to perform following actions:
+     *      if bottom sheet details are expanded then collapse bottom sheet details.
+     *      if bottom sheet details are collapsed then hide the bottom sheet details.
+     */
+    @SuppressLint("ClickableViewAccessibility")
+    private void initBottomSheets() {
+        bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
+        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        bottomSheetDetails.setVisibility(View.VISIBLE);
+
+        mapView.setOnTouchListener((v, event) -> {
+
+            // Motion event is triggered two times on a touch event, one as ACTION_UP
+            // and other as ACTION_DOWN, we only want one trigger per touch event.
+
+            if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (bottomSheetDetailsBehavior.getState()
+                    == BottomSheetBehavior.STATE_EXPANDED) {
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                } else if (bottomSheetDetailsBehavior.getState()
+                    == BottomSheetBehavior.STATE_COLLAPSED) {
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                }
+            }
+            return false;
+        });
     }
 
         @Override
