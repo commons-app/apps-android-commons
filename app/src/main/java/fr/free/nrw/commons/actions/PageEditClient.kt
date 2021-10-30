@@ -64,10 +64,19 @@ class PageEditClient(
         }
     }
 
+    /**
+     * Set new labels to Wikibase server of commons
+     * @param summary   Edit summary
+     * @param title Title of the page to edit
+     * @param language  Corresponding language of label
+     * @param value label
+     * @return 1 when the edit was successful
+     */
     fun setCaptions(summary: String, title: String,
                     language: String, value: String) : Observable<Int>{
         return try {
-            pageEditInterface.postCaptions(summary, title, language, value, csrfTokenClient.tokenBlocking)
+            pageEditInterface.postCaptions(summary, title, language,
+                value, csrfTokenClient.tokenBlocking)
                 .map { it.success }
         } catch (throwable: Throwable) {
             Observable.just(0)
