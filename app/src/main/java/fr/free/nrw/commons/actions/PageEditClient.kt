@@ -76,8 +76,7 @@ class PageEditClient(
                     language: String, value: String) : Observable<Int>{
         return try {
             pageEditInterface.postCaptions(summary, title, language,
-                value, csrfTokenClient.tokenBlocking)
-                .map { it.success }
+                value, csrfTokenClient.tokenBlocking).map { it.success }
         } catch (throwable: Throwable) {
             Observable.just(0)
         }
