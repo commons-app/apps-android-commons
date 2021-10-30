@@ -18,8 +18,8 @@
     <item quantity="other">%d uploads</item>
   </plurals>
   <plurals name="share_license_summary">
-    <item quantity="one">This image will be licensed under %1$s</item>
-    <item quantity="other">These images will be licensed under %1$s</item>
+    <item quantity="one">This image will be licensed under</item>
+    <item quantity="other">These images will be licensed under</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d Upload</item>
