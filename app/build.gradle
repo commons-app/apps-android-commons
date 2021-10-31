@@ -139,7 +139,7 @@ dependencies {
 
     implementation "androidx.multidex:multidex:$MULTIDEX_VERSION"
 
-    def work_version = "2.4.0"
+    def work_version = "2.6.0"
     // Kotlin + coroutines
     implementation "androidx.work:work-runtime-ktx:$work_version"
 }
