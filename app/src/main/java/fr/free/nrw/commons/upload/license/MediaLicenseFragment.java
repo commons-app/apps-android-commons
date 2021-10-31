@@ -161,13 +161,12 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
     }
 
     @Override
-    public void updateLicenseSummary(String licenseSummary, int numberOfItems) {
+    public void updateLicenseSummary(final String licenseSummary, final int numberOfItems) {
         String licenseHyperLink = "<a href='" + Utils.licenseUrlFor(licenseSummary) + "'>" +
                 getString(Utils.licenseNameFor(licenseSummary)) + "</a><br>";
 
-        setTextViewHTML(tvShareLicenseSummary, getResources()
-                .getQuantityString(R.plurals.share_license_summary, numberOfItems,
-                        licenseHyperLink));
+        setTextViewHTML(tvShareLicenseSummary, String.format("%s%s", getResources()
+            .getQuantityString(R.plurals.share_license_summary, numberOfItems), licenseHyperLink));
     }
 
     private void setTextViewHTML(TextView textView, String text) {
