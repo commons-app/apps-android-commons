@@ -2,6 +2,8 @@ package fr.free.nrw.commons.upload
 
 import android.content.Context
 import android.content.Intent
+import androidx.work.Configuration
+import androidx.work.testing.WorkManagerTestInitHelper
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
@@ -62,6 +64,9 @@ class UploadActivityUnitTests {
         Whitebox.setInternalState(activity, "fragments", mutableListOf(uploadBaseFragment))
         Whitebox.setInternalState(activity, "presenter", presenter)
         Whitebox.setInternalState(activity, "contributionController", contributionController)
+
+        val config: Configuration = Configuration.Builder().build()
+        WorkManagerTestInitHelper.initializeTestWorkManager(context, config)
     }
 
     @Test
@@ -158,7 +163,6 @@ class UploadActivityUnitTests {
     }
 
     @Test
-    @Ignore()
     @Throws(Exception::class)
     fun testMakeUploadRequest() {
         activity.makeUploadRequest()

@@ -30,4 +30,9 @@
       android:title="@string/menu_set_avatar"
       app:showAsAction="never" />
 
+    <item
+      android:id="@+id/menu_view_user_page"
+      android:title="@string/menu_view_user_page"
+      app:showAsAction="never" />
+
 </menu>
