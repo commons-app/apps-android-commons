@@ -497,7 +497,7 @@
   <string name="category_edit_helper_edit_message_else">カテゴリを付与できませんでした。</string>
   <string name="category_edit_button_text">カテゴリを更新</string>
   <string name="share_image_via">画像をシェア</string>
-  <string name="no_achievements_yet">まだ投稿をしたことがありません</string>
+  <string name="no_achievements_yet" fuzzy="true">まだ投稿をしたことがありません</string>
   <string name="account_created">アカウントを作成しました</string>
   <string name="text_copy">テキストをクリップボードにコピー済み</string>
   <string name="notification_mark_read">通知を既読にしました</string>

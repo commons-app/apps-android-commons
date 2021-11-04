@@ -489,7 +489,8 @@
   <string name="coordinates_edit_helper_edit_message_else">Koordinaatteja ei voitu lisätä.</string>
   <string name="coordinates_picking_unsuccessful">Koordinaattien haku epäonnistui.</string>
   <string name="share_image_via">Jaa kuva</string>
-  <string name="no_achievements_yet">Et ole vielä lahjoittanut mitään</string>
+  <string name="you_have_no_achievements_yet">Et ole vielä tehnyt muokkauksia</string>
+  <string name="no_achievements_yet">%s ei ole vielä tehnyt muokkauksia</string>
   <string name="account_created">Käyttäjätunnus luotu!</string>
   <string name="text_copy">Teksti kopioitu leikepöydälle</string>
   <string name="notification_mark_read">Ilmoitus merkitty luetuksi</string>
@@ -578,4 +579,5 @@
   <string name="welcome_custom_selector_ok">Mahtava</string>
   <string name="custom_selector_already_uploaded_image_text">Tämä kuva on jo ladattu Commonsiin.</string>
   <string name="learn_more">LUE LISÄÄ</string>
+  <string name="menu_view_user_page">Näytä käyttäjäsivu</string>
 </resources>

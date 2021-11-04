@@ -334,7 +334,7 @@
   <string name="category_edit_button_text">ကဏ္ဍများ မွမ်းမံရန်</string>
   <string name="coordinates_edit_helper_show_edit_title">ကိုဩဒိနိတ် မွမ်းမံ</string>
   <string name="coordinates_edit_helper_show_edit_title_success">အောင်မြင်</string>
-  <string name="no_achievements_yet">မည့်သည့်ပံ့ပိုးမှုမျှ မရှိသေးပါ</string>
+  <string name="no_achievements_yet" fuzzy="true">မည့်သည့်ပံ့ပိုးမှုမျှ မရှိသေးပါ</string>
   <string name="account_created">အကောင့်ဖန်တီးပြီးပါပြီ</string>
   <string name="notification_mark_read">အသိပေးချက်ကို ဖတ်ပြီးကြောင်းမှတ်သားပြီးပြီ</string>
   <string name="some_error">အမှားအယွင်းအချို့ရှိခဲ့သည်</string>

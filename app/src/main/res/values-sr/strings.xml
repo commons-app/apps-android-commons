@@ -426,7 +426,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Зато што је то</string>
   <string name="share_image_via">Подели слику преко</string>
-  <string name="no_achievements_yet">Још нисте допринели</string>
+  <string name="no_achievements_yet" fuzzy="true">Још нисте допринели</string>
   <string name="account_created">Налог је отворен.</string>
   <string name="text_copy">Текст је копиран у оставу</string>
   <string name="notification_mark_read">Обавештење је означено прочитаним</string>

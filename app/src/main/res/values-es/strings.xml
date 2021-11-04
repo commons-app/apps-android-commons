@@ -5,6 +5,8 @@
 * Agent
 * Astroemi
 * Benfutbol10
+* Biancailin
+* Bruno44101
 * Carlosmg.dg
 * Ciencia Al Poder
 * DannyS712
@@ -520,7 +522,8 @@
   <string name="coordinates_edit_helper_edit_message_else">No se pudo añadir coordenadas.</string>
   <string name="coordinates_picking_unsuccessful">No se pudo conseguir las coordenadas.</string>
   <string name="share_image_via">Compartir imagen via</string>
-  <string name="no_achievements_yet">No ha realizado ninguna contribución aún</string>
+  <string name="you_have_no_achievements_yet">Todavía no has hecho ninguna contribución.</string>
+  <string name="no_achievements_yet">%s Aún no ha realizado ninguna contribución</string>
   <string name="account_created">Cuenta creada</string>
   <string name="text_copy">Texto copiado en el portapapeles.</string>
   <string name="notification_mark_read">Notificación: marcar como leída</string>
@@ -625,4 +628,5 @@
   <string name="wlm_month_message">¡Es el mes de Wiki Loves Monuments!</string>
   <string name="learn_more">APRENDE MÁS</string>
   <string name="wlm_campaign_description">Wiki loves monuments es un consurso internacional de fotografías de monumentos organizado por Wikimedia</string>
+  <string name="achievements_of_user">Logros del usuario: %s</string>
 </resources>

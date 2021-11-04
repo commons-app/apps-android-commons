@@ -363,7 +363,7 @@
   <string name="category_edit_helper_edit_message_else">ߦߌߟߡߊ ߟߎ߬ ߕߴߛߋ߫ ߝߙߊ߬ ߟߊ߫.</string>
   <string name="category_edit_button_text">ߦߌߟߡߊ ߟߎ߬ ߟߏ߲ߘߐߦߊߟߌ</string>
   <string name="share_image_via">ߖߌ߬ߦߊ߬ߓߍ ߟߊߖߍ߲ߛߍ߲߫ ߞߊߕߙߍ߬</string>
-  <string name="no_achievements_yet">ߌ ߡߊ߫ ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲ ߛߌ߫ ߞߍ߫ ߡߎߣߎ߲߬</string>
+  <string name="no_achievements_yet" fuzzy="true">ߌ ߡߊ߫ ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲ ߛߌ߫ ߞߍ߫ ߡߎߣߎ߲߬</string>
   <string name="account_created">ߖߊ߬ߕߋ߬ߘߊ ߓߘߊ߫ ߛߌ߲ߘߌ߫߹</string>
   <string name="text_copy">ߛߓߍߟߌ ߓߘߊ߫ ߓߊߓߌ߬ߟߊ߬ ߛߓߍߝߌߘߊ߫-ߜߍ߬ߙߍ߲߬ߘߍ߬ߣߍ߲ ߞߊ߲߬.</string>
   <string name="some_error">ߝߎ߬ߕߎ߲߬ߕߌ ߘߏ߫ ߕߘߍ߬ ߦߋ߫ ߦߋ߲߬߹</string>
