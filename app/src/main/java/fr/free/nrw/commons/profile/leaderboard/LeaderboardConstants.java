@@ -8,7 +8,7 @@ public class LeaderboardConstants {
     /**
      * This is the size of the page i.e. number items to load in a batch when pagination is performed
      */
-    public static final int PAGE_SIZE = 10;
+    public static final int PAGE_SIZE = 100;
 
     /**
      * This is the starting offset, we set it to 0 to start loading from rank 1
