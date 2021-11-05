@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import androidx.annotation.Nullable;
 
-import fr.free.nrw.commons.nearby.NearbyController.NearbyPlacesInfo;
 import org.apache.commons.lang3.StringUtils;
 
 import fr.free.nrw.commons.location.LatLng;

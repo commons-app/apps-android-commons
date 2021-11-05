@@ -94,7 +94,6 @@ import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.NearbyController;
-import fr.free.nrw.commons.nearby.NearbyController.NearbyPlacesInfo;
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
 import fr.free.nrw.commons.nearby.NearbyMarker;
@@ -945,7 +944,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void populatePlacesForCurrentLocation(final fr.free.nrw.commons.location.LatLng curlatLng,
                                                   final fr.free.nrw.commons.location.LatLng searchLatLng){
 
-        final Observable<NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
+        final Observable<NearbyController.NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(curlatLng, searchLatLng,
                     false, true, Utils.isMonumentsEnabled(new Date())));
@@ -969,7 +968,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void populatePlacesForAnotherLocation(final fr.free.nrw.commons.location.LatLng curlatLng,
                                                   final fr.free.nrw.commons.location.LatLng searchLatLng){
 
-        final Observable<NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
+        final Observable<NearbyController.NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(curlatLng, searchLatLng,
                     false, true, Utils.isMonumentsEnabled(new Date())));

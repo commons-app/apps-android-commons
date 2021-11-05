@@ -10,8 +10,7 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 
-import io.reactivex.Observable;
-import java.io.IOException;
+import fr.free.nrw.commons.MapController;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -30,7 +29,7 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
-public class NearbyController {
+public class NearbyController extends MapController {
     private static final int MAX_RESULTS = 1000;
     private final NearbyPlaces nearbyPlaces;
     public static double currentLocationSearchRadius = 10.0; //in kilometers
@@ -57,6 +56,7 @@ public class NearbyController {
      * @return NearbyPlacesInfo a variable holds Place list without distance information
      * and boundary coordinates of current Place List
      */
+    @Override
     public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng, final LatLng searchLatLng,
         final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
         final boolean shouldQueryForMonuments) throws Exception {
@@ -230,16 +230,6 @@ public class NearbyController {
         }
 
         return baseMarkerOptions;
-    }
-
-    /**
-     * We pass this variable as a group of placeList and boundaryCoordinates
-     */
-    public class NearbyPlacesInfo {
-        public List<Place> placeList; // List of nearby places
-        public LatLng[] boundaryCoordinates; // Corners of nearby area
-        public LatLng curLatLng; // Current location when this places are populated
-        public LatLng searchLatLng; // Search location for finding this places
     }
 
     /**

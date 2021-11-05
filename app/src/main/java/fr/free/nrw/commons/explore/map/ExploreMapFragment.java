@@ -2,26 +2,31 @@ package fr.free.nrw.commons.explore.map;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.Style;
@@ -38,14 +43,17 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
-import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
-import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
-import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback;
+import fr.free.nrw.commons.utils.LocationUtils;
+import fr.free.nrw.commons.utils.MapUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
+import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
@@ -55,21 +63,24 @@ import timber.log.Timber;
 public class ExploreMapFragment extends CommonsDaggerSupportFragment
     implements ExploreMapContract.View, LocationUpdateListener {
 
-    private static final float ZOOM_LEVEL = 14f;
-    private static final float ZOOM_OUT = 0f;
-    private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
-
     private BottomSheetBehavior bottomSheetDetailsBehavior;
     private BroadcastReceiver broadcastReceiver;
     private boolean isNetworkErrorOccurred;
     private Snackbar snackbar;
     private boolean isDarkTheme;
     private boolean isPermissionDenied;
+    private fr.free.nrw.commons.location.LatLng lastKnownLocation;
+    private fr.free.nrw.commons.location.LatLng lastFocusLocation;
+    private boolean recenterToUserLocation;
+
+
     private MapboxMap.OnCameraMoveListener cameraMoveListener;
     private MapboxMap mapBox;
+    private Place lastPlaceToCenter;
     private boolean isMapBoxReady;
+    private Marker selectedMarker;
     private ExploreFragmentInstanceReadyCallback exploreFragmentInstanceReadyCallback;
-    IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
+    IntentFilter intentFilter = new IntentFilter(MapUtils.NETWORK_INTENT_ACTION);
 
 
     @Inject
@@ -87,6 +98,10 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     MapView mapView;
     @BindView(R.id.bottom_sheet_details)
     View bottomSheetDetails;
+    @BindView(R.id.map_progress_bar)
+    ProgressBar progressBar;
+    @BindView(R.id.fab_recenter)
+    FloatingActionButton fabRecenter;
 
 
     private View view;
@@ -119,6 +134,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         isPermissionDenied = false;
         cameraMoveListener= () -> presenter.onCameraMove(mapBox.getCameraPosition().target);
         presenter.attachView(this);
+        recenterToUserLocation = false;
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(mapBoxMap -> {
             mapBox = mapBoxMap;
@@ -138,7 +154,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 performMapReadyActions();
                 final CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(new com.mapbox.mapboxsdk.geometry.LatLng(51.50550, -0.07520))
-                    .zoom(ZOOM_OUT)
+                    .zoom(MapUtils.ZOOM_OUT)
                     .build();
                 mapBoxMap.setCameraPosition(cameraPosition);
 
@@ -180,7 +196,15 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     private void startMapWithoutPermission() {
         mapView.onStart();
-        // TODO nesli
+
+        applicationKvStore.putBoolean("doNotAskForLocationPermission", true);
+        lastKnownLocation = MapUtils.defaultLatLng;
+        MapUtils.centerMapToDefaultLatLng(mapBox);
+        if (mapBox != null) {
+            addOnCameraMoveListener();
+        }
+        presenter.onMapReady();
+        // TODO nesli removeCurrentLocationMarker();
     }
 
     private void registerNetworkReceiver() {
@@ -190,7 +214,15 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     }
 
     private void performMapReadyActions() {
-        //TODO fill this Nesli
+        if (((MainActivity)getActivity()).activeFragment == ActiveFragment.EXPLORE && isMapBoxReady) {
+            if(!applicationKvStore.getBoolean("doNotAskForLocationPermission", false) ||
+                PermissionUtils.hasPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)){
+                checkPermissionsAndPerformAction();
+            }else{
+                isPermissionDenied = true;
+                addOnCameraMoveListener();
+            }
+        }
     }
 
     private void initViews() {
@@ -246,17 +278,123 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public boolean isNetworkConnectionEstablished() {
-        return false;
+        return NetworkUtils.isInternetConnectionEstablished(getActivity());
     }
 
     @Override
     public void populatePlaces(LatLng curlatLng) {
+        if (curlatLng.equals(lastFocusLocation) || lastFocusLocation == null || recenterToUserLocation) { // Means we are checking around current location
+            populatePlacesForCurrentLocation(lastKnownLocation, curlatLng);
+        } else {
+            populatePlacesForAnotherLocation(lastKnownLocation, curlatLng);
+        }
+        if(recenterToUserLocation) {
+            recenterToUserLocation = false;
+        }
+    }
 
+    private void populatePlacesForCurrentLocation(final fr.free.nrw.commons.location.LatLng curlatLng,
+        final fr.free.nrw.commons.location.LatLng searchLatLng){
+
+        final Observable<ExploreMapController.NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
+            .fromCallable(() -> exploreMapController
+                .loadAttractionsFromLocation(curlatLng, searchLatLng,
+                    false, true, Utils.isMonumentsEnabled(new Date())));
+
+        compositeDisposable.add(nearbyPlacesInfoObservable
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(nearbyPlacesInfo -> {
+                    updateMapMarkers(nearbyPlacesInfo, true);
+                    lastFocusLocation=searchLatLng;
+                },
+                throwable -> {
+                    Timber.d(throwable);
+                    showErrorMessage(getString(R.string.error_fetching_nearby_places)+throwable.getLocalizedMessage());
+                    setProgressBarVisibility(false);
+                    presenter.lockUnlockNearby(false);
+                }));
+    }
+
+    private void populatePlacesForAnotherLocation(final fr.free.nrw.commons.location.LatLng curlatLng,
+        final fr.free.nrw.commons.location.LatLng searchLatLng){
+
+        final Observable<ExploreMapController.NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
+            .fromCallable(() -> exploreMapController
+                .loadAttractionsFromLocation(curlatLng, searchLatLng,
+                    false, true, Utils.isMonumentsEnabled(new Date())));
+
+        compositeDisposable.add(nearbyPlacesInfoObservable
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(nearbyPlacesInfo -> {
+                    updateMapMarkers(nearbyPlacesInfo, false);
+                    lastFocusLocation = searchLatLng;
+                },
+                throwable -> {
+                    Timber.e(throwable);
+                    showErrorMessage(getString(R.string.error_fetching_nearby_places)+throwable.getLocalizedMessage());
+                    setProgressBarVisibility(false);
+                    presenter.lockUnlockNearby(false);
+                }));
+    }
+
+    /**
+     * Populates places for your location, should be used for finding nearby places around a
+     * location where you are.
+     * @param nearbyPlacesInfo This variable has place list information and distances.
+     */
+    private void updateMapMarkers(final ExploreMapController.NearbyPlacesInfo nearbyPlacesInfo, final boolean shouldUpdateSelectedMarker) {
+        presenter.updateMapMarkers(nearbyPlacesInfo, selectedMarker,shouldUpdateSelectedMarker);
+    }
+
+    private void showErrorMessage(final String message) {
+        ViewUtil.showLongToast(getActivity(), message);
     }
 
     @Override
     public void checkPermissionsAndPerformAction() {
+        Timber.d("Checking permission and perfoming action");
+        PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            () -> locationPermissionGranted(),
+            () -> isPermissionDenied = true,
+            R.string.location_permission_title,
+            R.string.location_permission_rationale_nearby);
+    }
 
+    private void locationPermissionGranted() {
+        isPermissionDenied = false;
+
+        applicationKvStore.putBoolean("doNotAskForLocationPermission", false);
+        lastKnownLocation = locationManager.getLastLocation();
+        fr.free.nrw.commons.location.LatLng target=lastFocusLocation;
+        if(null == lastFocusLocation){
+            target = lastKnownLocation;
+        }
+        if (lastKnownLocation != null) {
+            final CameraPosition position = new CameraPosition.Builder()
+                .target(LocationUtils.commonsLatLngToMapBoxLatLng(target)) // Sets the new camera position
+                .zoom(MapUtils.ZOOM_LEVEL) // Same zoom level
+                .build();
+            mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
+        }
+        else if(locationManager.isGPSProviderEnabled()||locationManager.isNetworkProviderEnabled()){
+            locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
+            locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
+            setProgressBarVisibility(true);
+        }
+        else {
+            Toast.makeText(getContext(), getString(R.string.nearby_location_not_available), Toast.LENGTH_LONG).show();
+        }
+        presenter.onMapReady();
+        registerUnregisterLocationListener(false);
+        addOnCameraMoveListener();
+    }
+
+    public void registerUnregisterLocationListener(final boolean removeLocationListener) {
+        // TODO: do the same for nearby map
+        MapUtils.registerUnregisterLocationListener(removeLocationListener, locationManager, this);
     }
 
     @Override
@@ -286,7 +424,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void addOnCameraMoveListener() {
-
+        mapBox.addOnCameraMoveListener(cameraMoveListener);
     }
 
     @Override
@@ -301,7 +439,11 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void setProgressBarVisibility(boolean isVisible) {
-
+        if (isVisible) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -341,19 +483,18 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void centerMapToPlace(Place placeToCenter) {
-
+        MapUtils.centerMapToPlace(placeToCenter, mapBox, lastPlaceToCenter, getActivity());
     }
 
     @Override
     public LatLng getLastLocation() {
-        return null;
+        return lastKnownLocation;
     }
 
     @Override
     public com.mapbox.mapboxsdk.geometry.LatLng getLastFocusLocation() {
-        return null;
+        return lastFocusLocation == null? null : LocationUtils.commonsLatLngToMapBoxLatLng(lastFocusLocation);
     }
-
     @Override
     public boolean isCurrentLocationMarkerVisible() {
         return false;
@@ -362,6 +503,16 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     @Override
     public void setProjectorLatLngBounds() {
 
+    }
+
+    @Override
+    public void disableFABRecenter() {
+        fabRecenter.setEnabled(false);
+    }
+
+    @Override
+    public void enableFABRecenter() {
+        fabRecenter.setEnabled(true);
     }
 
     public interface  ExploreFragmentInstanceReadyCallback{
@@ -383,7 +534,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 if (getActivity() != null) {
                     if (NetworkUtils.isInternetConnectionEstablished(getActivity())) {
                         if (isNetworkErrorOccurred) {
-                            presenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
+                            presenter.updateMap(LOCATION_SIGNIFICANTLY_CHANGED);
                             isNetworkErrorOccurred = false;
                         }
 

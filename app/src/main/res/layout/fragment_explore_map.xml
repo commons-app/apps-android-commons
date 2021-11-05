@@ -55,6 +55,22 @@
       android:layout_below="@id/rl_container_wlm_month_message"
       />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/fab_recenter"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_alignParentRight="true"
+      android:layout_below="@id/rl_container_wlm_month_message"
+      android:clickable="true"
+      android:visibility="visible"
+      app:backgroundTint="@color/main_background_light"
+      app:elevation="@dimen/dimen_6"
+      app:fabSize="normal"
+      app:layout_anchorGravity="top|right|end"
+      app:srcCompat="@drawable/ic_my_location_black_24dp"
+      app:useCompatPadding="true" />
+
   <include
     android:id="@+id/bottom_sheet_details"
     layout="@layout/bottom_sheet_details" />

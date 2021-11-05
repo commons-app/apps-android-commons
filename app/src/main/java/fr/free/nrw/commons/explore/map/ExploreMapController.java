@@ -1,10 +1,11 @@
 package fr.free.nrw.commons.explore.map;
 
+import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 import javax.inject.Inject;
 
-public class ExploreMapController {
+public class ExploreMapController extends MapController {
     private static final int MAX_RESULTS = 1000;
     private final ExplorePlaces explorePlaces;
     public static double currentLocationSearchRadius = 10.0; //in kilometers
@@ -16,5 +17,12 @@ public class ExploreMapController {
     @Inject
     public ExploreMapController(ExplorePlaces explorePlaces) {
         this.explorePlaces = explorePlaces;
+    }
+
+    @Override
+    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng,
+        LatLng searchLatLng, boolean returnClosestResult,
+        boolean checkingAroundCurrentLocation, boolean shouldQueryForMonuments) {
+        return null;
     }
 }

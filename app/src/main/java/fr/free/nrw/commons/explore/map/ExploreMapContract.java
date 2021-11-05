@@ -37,10 +37,12 @@ public class ExploreMapContract {
         com.mapbox.mapboxsdk.geometry.LatLng getLastFocusLocation();
         boolean isCurrentLocationMarkerVisible();
         void setProjectorLatLngBounds();
+        void disableFABRecenter();
+        void enableFABRecenter();
     }
 
     interface UserActions {
-        void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType);
+        void updateMap(LocationServiceManager.LocationChangeType locationChangeType);
         void lockUnlockNearby(boolean isNearbyLocked);
         void attachView(View view);
         void detachView();
