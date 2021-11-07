@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
@@ -25,6 +26,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.contributions.ContributionsListFragment;
 import fr.free.nrw.commons.profile.achievements.AchievementsFragment;
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
@@ -49,9 +51,6 @@ public class ProfileActivity extends BaseActivity {
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-
     @Inject
     SessionManager sessionManager;
 
@@ -59,14 +58,31 @@ public class ProfileActivity extends BaseActivity {
     private AchievementsFragment achievementsFragment;
     private LeaderboardFragment leaderboardFragment;
 
+    public static final String KEY_USERNAME ="username";
+    public static final String KEY_SHOULD_SHOW_CONTRIBUTIONS ="shouldShowContributions";
+
+    String userName;
+    private boolean  shouldShowContributions;
+
+    @Override
+    protected void onRestoreInstanceState(final Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null) {
+            userName = savedInstanceState.getString(KEY_USERNAME);
+            shouldShowContributions = savedInstanceState.getBoolean(KEY_SHOULD_SHOW_CONTRIBUTIONS);
+        }
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(sessionManager.getUserName());
+
+        userName = getIntent().getStringExtra(KEY_USERNAME);
+        shouldShowContributions = getIntent().getBooleanExtra(KEY_SHOULD_SHOW_CONTRIBUTIONS, false);
 
         supportFragmentManager = getSupportFragmentManager();
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -87,11 +103,15 @@ public class ProfileActivity extends BaseActivity {
 
     /**
      * Creates a way to change current activity to AchievementActivity
+     *
      * @param context
      */
-    public static void startYourself(Context context) {
+    public static void startYourself(final Context context, final String userName,
+        final boolean shouldShowContributions) {
         Intent intent = new Intent(context, ProfileActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.putExtra(KEY_USERNAME, userName);
+        intent.putExtra(KEY_SHOULD_SHOW_CONTRIBUTIONS, shouldShowContributions);
         context.startActivity(intent);
     }
 
@@ -102,11 +122,28 @@ public class ProfileActivity extends BaseActivity {
         List<Fragment> fragmentList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
         achievementsFragment = new AchievementsFragment();
+        Bundle achievementsBundle = new Bundle();
+        achievementsBundle.putString(KEY_USERNAME, userName);
+        achievementsFragment.setArguments(achievementsBundle);
         fragmentList.add(achievementsFragment);
+
         titleList.add(getResources().getString(R.string.achievements_tab_title).toUpperCase());
         leaderboardFragment = new LeaderboardFragment();
+        Bundle leaderBoardBundle = new Bundle();
+        leaderBoardBundle.putString(KEY_USERNAME, userName);
+        leaderboardFragment.setArguments(leaderBoardBundle);
+
         fragmentList.add(leaderboardFragment);
         titleList.add(getResources().getString(R.string.leaderboard_tab_title).toUpperCase());
+
+        if (shouldShowContributions) {
+            ContributionsListFragment contributionsListFragment = new ContributionsListFragment();
+            Bundle contributionsListBundle = new Bundle();
+            contributionsListBundle.putString(KEY_USERNAME, userName);
+            contributionsListFragment.setArguments(contributionsListBundle);
+            fragmentList.add(contributionsListFragment);
+            titleList.add(getString(R.string.contributions_fragment).toUpperCase());
+        }
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
 
@@ -190,5 +227,11 @@ public class ProfileActivity extends BaseActivity {
         } catch (final IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull final Bundle outState) {
+        outState.putString(KEY_USERNAME, userName);
+        super.onSaveInstanceState(outState);
     }
 }
