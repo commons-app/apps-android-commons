@@ -462,7 +462,8 @@
   <string name="coordinates_edit_helper_show_edit_title_success">성공</string>
   <string name="coordinates_picking_unsuccessful">좌표를 가져올 수 없습니다.</string>
   <string name="share_image_via">다음을 통해 이미지 공유</string>
-  <string name="no_achievements_yet">아직 기여가 없습니다</string>
+  <string name="you_have_no_achievements_yet">아직 기여가 없습니다</string>
+  <string name="no_achievements_yet">%s님은 아직 기여가 없습니다</string>
   <string name="account_created">계정을 만들었습니다!</string>
   <string name="text_copy">텍스트가 클립보드에 복사되었습니다</string>
   <string name="notification_mark_read">알림을 읽은 것으로 표시</string>
@@ -530,4 +531,7 @@
   <string name="modify_location">위치 편집</string>
   <string name="image_location">이미지 위치</string>
   <string name="check_whether_location_is_correct">위치가 올바른지 확인</string>
+  <string name="need_permission">권한 필요</string>
+  <string name="contributions_of_user">사용자의 기여: %s</string>
+  <string name="menu_view_user_page">사용자 문서 보기</string>
 </resources>

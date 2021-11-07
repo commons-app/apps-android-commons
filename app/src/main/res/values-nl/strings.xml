@@ -9,6 +9,7 @@
 * KlaasZ4usV
 * Mainframe98
 * Mar(c)
+* McDutchie
 * Nickthijssen1994
 * Optilete
 * Patio
@@ -503,7 +504,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Kan geen coördinaten toevoegen.</string>
   <string name="coordinates_picking_unsuccessful">Kan coördinaten niet opvragen.</string>
   <string name="share_image_via">Deel afbeelding via</string>
-  <string name="no_achievements_yet">U heeft nog geen bijdragen gedaan</string>
+  <string name="no_achievements_yet">%s heeft nog geen bijdragen gedaan</string>
   <string name="account_created">Profiel gemaakt!</string>
   <string name="text_copy">De tekst is gekopieerd naar het klembord.</string>
   <string name="notification_mark_read">Melding gemarkeerd als gelezen</string>

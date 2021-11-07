@@ -505,7 +505,8 @@
   <string name="coordinates_edit_helper_edit_message_else">無法添加座標。</string>
   <string name="coordinates_picking_unsuccessful">無法取得座標。</string>
   <string name="share_image_via">分享圖片透過</string>
-  <string name="no_achievements_yet">您還沒有做出任何貢獻</string>
+  <string name="you_have_no_achievements_yet">您還沒有做出任何貢獻</string>
+  <string name="no_achievements_yet">%s還沒有做出任何貢獻</string>
   <string name="account_created">已建立帳號！</string>
   <string name="text_copy">文字已複製至剪貼簿</string>
   <string name="notification_mark_read">通知標記為已讀</string>
@@ -626,4 +627,9 @@
   <string name="wlm_month_message">維基愛古蹟的月份！</string>
   <string name="learn_more">了解更多</string>
   <string name="wlm_campaign_description">維基愛古蹟是由維基媒體舉行的國際古蹟攝影比賽</string>
+  <string name="need_permission">需要\'權限</string>
+  <string name="read_phone_state_permission_message">附近地圖需要讀取手機狀態來正常運作</string>
+  <string name="contributions_of_user">使用者貢獻：%s</string>
+  <string name="achievements_of_user">使用者成果：%s</string>
+  <string name="menu_view_user_page">檢視使用者頁面</string>
 </resources>

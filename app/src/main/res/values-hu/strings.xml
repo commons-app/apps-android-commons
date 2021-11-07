@@ -20,10 +20,9 @@
     <item quantity="one">%1$d fájl feltöltése folyamatban</item>
     <item quantity="other">%1$d fájl feltöltése folyamatban</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d feltöltés</item>
-    <item quantity="other">%1$d feltöltés</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Feltöltések indítása</string>
   <plurals name="starting_multiple_uploads">
@@ -75,7 +74,9 @@
   <string name="upload_progress_notification_title_in_progress">%1$s feltöltése</string>
   <string name="upload_progress_notification_title_finishing">%1$s feltöltése befejezve</string>
   <string name="upload_failed_notification_title">%1$s feltöltése sikertelen</string>
+  <string name="upload_paused_notification_title">%1$s feltöltés megállítva</string>
   <string name="upload_failed_notification_subtitle">Érintsd meg a megtekintéshez</string>
+  <string name="upload_paused_notification_subtitle">Megnézéshez koppints</string>
   <string name="title_activity_contributions">Legutóbbi feltöltéseim</string>
   <string name="contribution_state_queued">Várólistán</string>
   <string name="contribution_state_failed">Sikertelen.</string>
@@ -448,7 +449,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logó</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Azért, mert</string>
   <string name="share_image_via">Kép megosztása ezen keresztül:</string>
-  <string name="no_achievements_yet">Még nincs közreműködésed</string>
+  <string name="no_achievements_yet" fuzzy="true">Még nincs közreműködésed</string>
   <string name="account_created">Fiók létrehozva!</string>
   <string name="text_copy">Szöveg a vágólapra másolva</string>
   <string name="notification_mark_read">Értesítés olvasottként megjelölve</string>

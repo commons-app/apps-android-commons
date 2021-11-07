@@ -484,7 +484,7 @@
   <string name="category_edit_helper_edit_message_else">Kategorij ni mogoče dodati.</string>
   <string name="category_edit_button_text">Pododobi kategorije</string>
   <string name="share_image_via">Deli slike prek ...</string>
-  <string name="no_achievements_yet">Opravili niste še nobenega prispevka</string>
+  <string name="no_achievements_yet" fuzzy="true">Opravili niste še nobenega prispevka</string>
   <string name="account_created">Račun ustvarjen!</string>
   <string name="text_copy">Besedilo skopirano na odložišče</string>
   <string name="notification_mark_read">Obvestilo označeno kot prebrano</string>
