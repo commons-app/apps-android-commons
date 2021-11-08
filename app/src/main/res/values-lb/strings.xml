@@ -362,5 +362,6 @@
   <string name="learn_more">FIR MÉI ZE WËSSEN</string>
   <string name="need_permission">Autorisatioun gëtt gebraucht</string>
   <string name="contributions_of_user">Kontributioune vum Benotzer: %s</string>
+  <string name="achievements_of_user">Leeschtunge vum Benotzer: %s</string>
   <string name="menu_view_user_page">Benotzersäit weisen</string>
 </resources>
