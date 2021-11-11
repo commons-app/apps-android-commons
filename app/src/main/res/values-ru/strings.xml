@@ -539,7 +539,8 @@
   <string name="coordinates_edit_helper_edit_message_else">Не удалось добавить координаты.</string>
   <string name="coordinates_picking_unsuccessful">Не удалось получить координаты.</string>
   <string name="share_image_via">Поделиться изображением с помощью</string>
-  <string name="no_achievements_yet">Пока что от вас нет вклада</string>
+  <string name="you_have_no_achievements_yet">Вы пока что не внесли вклада.</string>
+  <string name="no_achievements_yet">У %s пока ещё нет вклада</string>
   <string name="account_created">Учётная запись создана!</string>
   <string name="text_copy">Текст скопирован в буфер обмена</string>
   <string name="notification_mark_read">Оповещения маркированы как \"прочитанные\"</string>
@@ -660,4 +661,9 @@
   <string name="wlm_month_message">Это месяц «Вики любит памятники»!</string>
   <string name="learn_more">УЗНАТЬ ПОДРОБНЕЕ</string>
   <string name="wlm_campaign_description">«Вики любит памятники» — международный фотоконкурс памятников, организованный Викимедиа</string>
+  <string name="need_permission">Нужно разрешение</string>
+  <string name="read_phone_state_permission_message">Для правильной работы картам поблизости необходимо иметь доступ к СОСТОЯНИЮ ТЕЛЕФОНА.</string>
+  <string name="contributions_of_user">Вклад участника: %s</string>
+  <string name="achievements_of_user">Достижения участника: %s</string>
+  <string name="menu_view_user_page">Посмотреть страницу участника</string>
 </resources>

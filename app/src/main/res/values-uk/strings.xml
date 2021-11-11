@@ -519,7 +519,8 @@
   <string name="coordinates_edit_helper_edit_message_else">Не вдалося додати координати.</string>
   <string name="coordinates_picking_unsuccessful">Не вдалося отримати координати.</string>
   <string name="share_image_via">Поширити зображення через</string>
-  <string name="no_achievements_yet">Ви ще не зробили жодного внеску</string>
+  <string name="you_have_no_achievements_yet">Ви ще не зробили жодного внеску</string>
+  <string name="no_achievements_yet">%s ще не зробив жодного внеску</string>
   <string name="account_created">Обліковий запис створено!</string>
   <string name="text_copy">Текст скопійовано до буферу обміну</string>
   <string name="notification_mark_read">Сповіщення позначено прочитаним</string>
@@ -640,4 +641,9 @@
   <string name="wlm_month_message">Цей місяць Wiki Loves Monuments!</string>
   <string name="learn_more">ДОСЛІДИТИ БІЛЬШЕ</string>
   <string name="wlm_campaign_description">Wiki Loves Monuments — це міжнародний фотоконкурс пам’яток, організований Вікімедією</string>
+  <string name="need_permission">Потрібен дозвіл</string>
+  <string name="read_phone_state_permission_message">Для належної роботи мапи поблизу мають відображати стан PHONE STATE</string>
+  <string name="contributions_of_user">Внесок користувача: %s</string>
+  <string name="achievements_of_user">Досягнення користувача: %s</string>
+  <string name="menu_view_user_page">Переглянути сторінку користувача</string>
 </resources>

@@ -507,7 +507,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Não foi possível adicionar coordenadas.</string>
   <string name="coordinates_picking_unsuccessful">Incapaz de obter coordenadas.</string>
   <string name="share_image_via">Compartilhar imagem via</string>
-  <string name="no_achievements_yet">Você ainda não fez nenhuma contribuição</string>
+  <string name="no_achievements_yet" fuzzy="true">Você ainda não fez nenhuma contribuição</string>
   <string name="account_created">Conta criada!</string>
   <string name="text_copy">Texto copiado para a área de transferência</string>
   <string name="notification_mark_read">Notificação marcada como lida</string>

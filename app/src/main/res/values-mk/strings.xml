@@ -493,7 +493,8 @@
   <string name="coordinates_edit_helper_edit_message_else">Не можев да додадам координати.</string>
   <string name="coordinates_picking_unsuccessful">Не можев да добијам координати.</string>
   <string name="share_image_via">Сподели ја сликата преку</string>
-  <string name="no_achievements_yet">Засега немате придонеси</string>
+  <string name="you_have_no_achievements_yet">Засега немате придонеси</string>
+  <string name="no_achievements_yet">%s засега нема придонеси</string>
   <string name="account_created">Сметката е создадена!</string>
   <string name="text_copy">Текстот е ставен во меѓускладот</string>
   <string name="notification_mark_read">Известувањето е означено како прочитано</string>
@@ -606,12 +607,19 @@
   <string name="back">Назад</string>
   <string name="welcome_custom_picture_selector_text">Добре дојдовте на Прилагодениот избирач</string>
   <string name="custom_selector_info_text1">Овој избирач ги покажува поинаку сликите кои веќе се на Ризницата.</string>
-  <string name="custom_selector_info_text2" fuzzy="true">За разлика од сликата лево, таа десно има лого на Ризницата, што значи дека веќе е подигната.</string>
+  <string name="custom_selector_info_text2">За разлика од сликата лево, таа десно има лого на Ризницата, што значи дека веќе е подигната. \n Допрете и држете за да ја погледате сликата.</string>
   <string name="welcome_custom_selector_ok">Одлично</string>
   <string name="custom_selector_already_uploaded_image_text">Оваа слика е веќе подигната на Ризницата.</string>
-  <string name="wlm_upload_info" fuzzy="true">Учествувате во походот „Вики ги сака спомениците“. Поврзаните предлошки ќе бидат соодветно додадени.</string>
+  <string name="place_state_wlm">WLM</string>
+  <string name="wlm_upload_info">Оваа слика ќе учествува во натпреварот „Вики ги сака спомениците 2021“</string>
   <string name="display_monuments">Прикажи споменици</string>
   <string name="wlm_month_message">Ова е месец на „Вики ги сака спомениците“!</string>
   <string name="learn_more">ДОЗНАЈТЕ ПОВЕЌЕ</string>
+  <string name="wlm_campaign_title">Вики ги сака спомениците</string>
   <string name="wlm_campaign_description">„Вики ги сака спомениците“ е меѓународен фотографски натпревар за споменици приреден од Викимедија</string>
+  <string name="need_permission">Се бара дозвола</string>
+  <string name="read_phone_state_permission_message">Картите со блиски места треба можат да ја прочитаат СОСТОЈБАТА НА ТЕЛЕФОНОТ за да работат правилно</string>
+  <string name="contributions_of_user">Придонеси на корисникот: %s</string>
+  <string name="achievements_of_user">Достигнувања на корисникот: %s</string>
+  <string name="menu_view_user_page">Преглед на корисничката страница</string>
 </resources>

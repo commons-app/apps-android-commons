@@ -491,7 +491,8 @@
   <string name="coordinates_edit_helper_edit_message_else">Impossìbil gionté lé coordinà.</string>
   <string name="coordinates_picking_unsuccessful">Impossìbil oten-e le coordinà.</string>
   <string name="share_image_via">Partagé la plancia via</string>
-  <string name="no_achievements_yet">A l\'ha pa ancor fàit ëd contribussion</string>
+  <string name="you_have_no_achievements_yet">A l\'ha pa ancor fàit ëd contribussion</string>
+  <string name="no_achievements_yet">%s a l\'ha pa ancor fàit ëd contribussion</string>
   <string name="account_created">Cont creà!</string>
   <string name="text_copy">Test copià an sla taulëtta</string>
   <string name="notification_mark_read">Notìfica marcà coma lesùa</string>
@@ -604,12 +605,17 @@
   <string name="back">André</string>
   <string name="welcome_custom_picture_selector_text">Bin-ëvnù ant ël seletor ëd plance përsonalisà</string>
   <string name="custom_selector_info_text1">Ës seletor a smon ëd fasson diferenta dle plance ch\'a son già an Comun</string>
-  <string name="custom_selector_info_text2" fuzzy="true">A diferensa da la plancia a snistra, la plancia a drita a la marca Comun ch\'a mostra ch\'a l\'é già stàita carià.</string>
+  <string name="custom_selector_info_text2">A diferensa da la plancia a snistra, la plancia a drita a la marca Comun ch\'a mostra ch\'a l\'é già stàita carià.\n Toché e ten-e për avèj na previsualisassion ëd la plancia.</string>
   <string name="welcome_custom_selector_ok">Fiamengh</string>
   <string name="custom_selector_already_uploaded_image_text">La plancia a l\'é già stàita carià su Comun.</string>
-  <string name="wlm_upload_info" fuzzy="true">Chiel a contribuiss a la campagna ëd Wiki a-j veul bin ai monument. Jë stamp associà a saran giontà an acòrd con sòn.</string>
+  <string name="wlm_upload_info">Costa plancia a sarà giontà al concors Wiki a-j veul bin ai monument.</string>
   <string name="display_monuments">Smon-e ij monument</string>
   <string name="wlm_month_message">A l\'é ël mèis ëd Wiki a-j veul bin ai monument!</string>
   <string name="learn_more">SAVÈJNE ËD PI</string>
   <string name="wlm_campaign_description">Wiki a-j veul bin ai monument a l\'é un concors antërnassional ëd fotografìa ëd monument organisà da Wikimedia</string>
+  <string name="need_permission">A-i é damanca dël përmess</string>
+  <string name="read_phone_state_permission_message">Le carte dj\'anviron a l\'han damanca ëd lese lë STAT DËL TELÉFON për marcé për da bin</string>
+  <string name="contributions_of_user">Contribussion ëd l\'utent: %s</string>
+  <string name="achievements_of_user">Arzultà ëd l\'utent: %s</string>
+  <string name="menu_view_user_page">Vëdde la pàgina ëd l\'utent</string>
 </resources>

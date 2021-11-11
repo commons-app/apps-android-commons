@@ -512,7 +512,8 @@
   <string name="coordinates_edit_helper_edit_message_else">Koordinaten konnten nicht hinzugefügt werden.</string>
   <string name="coordinates_picking_unsuccessful">Es können keine Koordinaten abgerufen werden.</string>
   <string name="share_image_via">Bild teilen via</string>
-  <string name="no_achievements_yet">Du hast noch keine Beiträge geleistet</string>
+  <string name="you_have_no_achievements_yet">Du hast noch keine Beiträge verfasst.</string>
+  <string name="no_achievements_yet">%s hat noch keine Beiträge geleistet</string>
   <string name="account_created">Benutzerkonto erstellt!</string>
   <string name="text_copy">Text in die Zwischenablage kopiert</string>
   <string name="notification_mark_read">Benachrichtigung als gelesen markieren</string>
@@ -633,4 +634,9 @@
   <string name="wlm_month_message">Es ist der Wiki Loves Monuments Monat!</string>
   <string name="learn_more">MEHR ERFAHREN</string>
   <string name="wlm_campaign_description">Wiki Loves Monuments ist ein internationaler Fotowettbewerb für Denkmäler, der von Wikimedia organisiert wird.</string>
+  <string name="need_permission">Erlaubnis erforderlich</string>
+  <string name="read_phone_state_permission_message">Karten in der Nähe müssen den Telefonstatus lesen können, um richtig zu funktionieren</string>
+  <string name="contributions_of_user">Beiträge von Benutzer: %s</string>
+  <string name="achievements_of_user">Leistungen von Benutzer: %s</string>
+  <string name="menu_view_user_page">Benutzerseite ansehen</string>
 </resources>

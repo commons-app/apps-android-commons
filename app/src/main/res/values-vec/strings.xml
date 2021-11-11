@@ -443,7 +443,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Parché el xé</string>
   <string name="share_image_via">Spartisi in jiro tra imajine co</string>
-  <string name="no_achievements_yet">No te ghe njiancora contribuìo</string>
+  <string name="no_achievements_yet" fuzzy="true">No te ghe njiancora contribuìo</string>
   <string name="account_created">Te ghè creà l\'uxuario</string>
   <string name="text_copy">Testo tolto xò in tei aponti</string>
   <string name="notification_mark_read">Nodifega segnà come lexesta</string>

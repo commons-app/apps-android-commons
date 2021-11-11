@@ -525,7 +525,8 @@
   <string name="coordinates_edit_helper_edit_message_else">לא היה אפשר להוסיף נקודות ציון.</string>
   <string name="coordinates_picking_unsuccessful">לא ניתן לעדכן נקודות ציון.</string>
   <string name="share_image_via">שיתוף תמונה דרך</string>
-  <string name="no_achievements_yet">לא תרמת שום דבר עדיין</string>
+  <string name="you_have_no_achievements_yet">לא תרמת בינתיים שום דבר</string>
+  <string name="no_achievements_yet">%s עדיין לא תרם שום דבר</string>
   <string name="account_created">חשבון נוצר!</string>
   <string name="text_copy">הטקסט הועתק ללוח</string>
   <string name="notification_mark_read">התראה סומנה כנקראה</string>
@@ -646,4 +647,9 @@
   <string name="wlm_month_message">זהו חודש ויקי אוהבת אתרי מורשת!</string>
   <string name="learn_more">מידע נוסף</string>
   <string name="wlm_campaign_description">ויקי אוהבת אתרי מורשת היא תחרות בין־לאומית לצילום אתרי מורשת שמאורגנת על־ידי ויקימדיה</string>
+  <string name="need_permission">נדרשת הרשאה</string>
+  <string name="read_phone_state_permission_message">מפות בסביבה זקוקות להרשאה מצב הטלפון כדי לפעול כראוי</string>
+  <string name="contributions_of_user">תרומות של המשתמש: %s</string>
+  <string name="achievements_of_user">הישגי המשתמש: %s</string>
+  <string name="menu_view_user_page">הצגת דף המשתמש</string>
 </resources>
