@@ -150,7 +150,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private void initProgressDialog() {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getString(R.string.please_wait));
-        progressDialog.setCancelable(false);
     }
 
     private void initThumbnailsRecyclerView() {
