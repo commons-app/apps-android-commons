@@ -13,6 +13,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -29,6 +31,7 @@ import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
@@ -51,11 +54,16 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     RecyclerView rvCategories;
     @BindView(R.id.tooltip)
     ImageView tooltip;
+    @BindView(R.id.btn_next)
+    AppCompatButton btnNext;
+    @BindView(R.id.btn_previous)
+    AppCompatButton btnPrevious;
 
     @Inject
     CategoriesContract.UserActionListener presenter;
     private UploadCategoryAdapter adapter;
     private Disposable subscribe;
+    private ArrayList existingCategories;
 
     @Nullable
     @Override
@@ -68,12 +76,23 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+
+        Bundle bundle = getArguments();
+        existingCategories = bundle.getStringArrayList("Existing_Categories");
+        Log.d("iwantactivity", "after "+existingCategories.size());
         init();
     }
 
     private void init() {
-        tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
-            callback.getTotalNumberOfSteps(), getString(R.string.categories_activity_title)));
+        if(existingCategories.size() == 0) {
+            tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
+                callback.getTotalNumberOfSteps(), getString(R.string.categories_activity_title)));
+        } else {
+            tvTitle.setText("Edit Categories");
+            tvSubTitle.setVisibility(View.GONE);
+            btnNext.setText("Save");
+            btnPrevious.setText("Cancel");
+        }
         setTvSubTitle();
         tooltip.setOnClickListener(new OnClickListener() {
             @Override
@@ -117,7 +136,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         adapter = new UploadCategoryAdapter(categoryItem -> {
             presenter.onCategoryItemClicked(categoryItem);
             return Unit.INSTANCE;
-        });
+        }, existingCategories);
         rvCategories.setLayoutManager(new LinearLayoutManager(getContext()));
         rvCategories.setAdapter(adapter);
     }
@@ -188,5 +207,16 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         if (text != null) {
             presenter.searchForCategories(text.toString());
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
     }
 }
