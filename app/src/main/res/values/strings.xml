@@ -560,7 +560,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="recommend_high_accuracy_mode">For best results, choose the High Accuracy mode.</string>
   <string name="ask_to_turn_location_on">Turn on location?</string>
   <string name="nearby_needs_location">Nearby needs location enabled to work properly</string>
-  <string name="use_location_from_similar_image">Did you shoot these two pictures at the same place? Do you want to use the latitude/longitude of the picture on the right?</string>
+  <string name="use_location_from_similar_image">Did you shoot these two pictures at the same place? Do you want to use the latitude/longitude of the picture on the right? The coordinates are not the exact coordinates, but the person who uploaded this picture thinks they close enough.</string>
   <string name="load_more">Load More</string>
   <string name="nearby_no_results">No places found, try changing your search criteria.</string>
 
