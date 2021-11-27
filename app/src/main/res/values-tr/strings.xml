@@ -125,6 +125,7 @@
   <string name="title_activity_settings">Ayarlar</string>
   <string name="title_activity_signup">Kaydol</string>
   <string name="title_activity_featured_images">Seçkin Resimler</string>
+  <string name="title_activity_custom_selector">Özel Seçici</string>
   <string name="title_activity_category_details">Kategori</string>
   <string name="title_activity_review">Hakem Denetimi</string>
   <string name="menu_about">Hakkında</string>
@@ -335,6 +336,7 @@
   <string name="quiz_screenshot_question">Bu ekran görüntüsü yüklemeye uygun mu?</string>
   <string name="share_app_title">Uygulamayı Paylaş</string>
   <string name="error_fetching_nearby_places">Yakındaki yerler getirilirken hata oluştu.</string>
+  <string name="error_fetching_nearby_monuments">Yakındaki anıtlar getirilirken hata oluştu.</string>
   <string name="no_recent_searches">Son arama yok</string>
   <string name="delete_recent_searches_dialog">Arama geçmişinizi silmek istediğinizden emin misiniz?</string>
   <string name="delete_search_dialog">Bu aramayı silmek istiyor musunuz?</string>
@@ -511,7 +513,8 @@
   <string name="coordinates_edit_helper_edit_message_else">Koordinatlar eklenemedi.</string>
   <string name="coordinates_picking_unsuccessful">Koordinatlar alınamadı.</string>
   <string name="share_image_via">Resmi şununla paylaş</string>
-  <string name="no_achievements_yet">Henüz bir katkı yapmadınız</string>
+  <string name="you_have_no_achievements_yet">Henüz bir katkı yapmadınız</string>
+  <string name="no_achievements_yet">%s henüz bir katkı yapmadı</string>
   <string name="account_created">Hesap oluşturuldu!</string>
   <string name="text_copy">Metin panoya kopyalandı</string>
   <string name="notification_mark_read">Bildirim okundu olarak işaretlendi</string>
@@ -618,4 +621,23 @@
   <string name="location_picker_image_view_shadow">Konum seçicinin resim görünümünün gölgesi</string>
   <string name="image_location">Görüntü Konumu</string>
   <string name="check_whether_location_is_correct">Konumun doğru olup olmadığını kontrol edin</string>
+  <string name="custom_selector_title">Özel Seçici</string>
+  <string name="custom_selector_empty_text">Resim Yok</string>
+  <string name="done">Yapıldı</string>
+  <string name="back">Geri</string>
+  <string name="welcome_custom_picture_selector_text">Özel Resim Seçici\'ye Hoş Geldiniz</string>
+  <string name="custom_selector_info_text1">Bu seçici, halihazırda Commons\'ta bulunan farklı resimleri gösterir.</string>
+  <string name="custom_selector_info_text2">Soldaki resimden farklı olarak, sağdaki resimde zaten yüklendiğini belirten Commons logosu var.\n Resim ön izlemesi için dokunup basılı tutun.</string>
+  <string name="welcome_custom_selector_ok">Harika</string>
+  <string name="custom_selector_already_uploaded_image_text">Bu resim zaten Commons\'a yüklendi.</string>
+  <string name="wlm_upload_info">Bu resim Viki, Anıtları Seviyor 2021 yarışmasına katılacaktır</string>
+  <string name="display_monuments">Anıtları göster</string>
+  <string name="wlm_month_message">Viki, Anıtları Seviyor ayı!</string>
+  <string name="learn_more">DAHA FAZLA BİLGİ EDİN</string>
+  <string name="wlm_campaign_description">Viki, Anıtları Seviyor; Wikimedia tarafından düzenlenen anıtlar için uluslararası bir fotoğraf yarışmasıdır.</string>
+  <string name="need_permission">İzin Gerekiyor</string>
+  <string name="read_phone_state_permission_message">Yakındaki haritalar düzgün çalışmak için TELEFON DURUMUNU okumaya ihtiyaç duyuyor</string>
+  <string name="contributions_of_user">Kullanıcının katkıları: %s</string>
+  <string name="achievements_of_user">Kullanıcının başarıları: %s</string>
+  <string name="menu_view_user_page">Kullanıcı sayfasını görüntüle</string>
 </resources>

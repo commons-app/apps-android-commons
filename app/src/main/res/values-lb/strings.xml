@@ -9,18 +9,17 @@
     <item quantity="one">ee Fichier eroplueden</item>
     <item quantity="other">%1$d Fichieren eroplueden</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">N@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Ugefaang 1 Fichier eropzelueden</item>
-    <item quantity="other">Ugefaang %1$d Fichieren eropzelueden</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Ugefaangen %d Fichier eropzelueden</item>
+    <item quantity="other">Ugefaangen %d Fichieren eropzelueden</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">Ee Fichier eropgelueden</item>
-    <item quantity="other">%1$d Fichieren eropgelueden</item>
+    <item quantity="other">%d Fichieren eropgelueden</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Dëst Bild gëtt ënner %1$s lizenzéiert</item>
@@ -50,7 +49,7 @@
   <string name="uploading_started">D\'Eroplueden huet ugefaang!</string>
   <string name="upload_completed_notification_title">%1$s eropgelueden!</string>
   <string name="upload_completed_notification_text">Dréckt fir de Fichier ze gesinn deen Dir eropgelueden hutt</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">D\'Eropluede vu(n) %1$s ufänken</string>
+  <string name="upload_progress_notification_title_start">Fichier eroplueden: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s gëtt eropgelueden</string>
   <string name="upload_progress_notification_title_finishing">Eroplueden vu(n) %1$s ofschléissen</string>
   <string name="upload_failed_notification_title">D\'Eropluede vu(n) %1$s huet net funktionéiert</string>
@@ -79,7 +78,7 @@
   <string name="menu_save_categories">Späicheren</string>
   <string name="refresh_button">Aktualiséieren</string>
   <string name="display_list_button">Lëscht</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Nach keng eropgeluede Fichieren</string>
+  <string name="contributions_subtitle_zero">(Nach keng eropgeluede Fichieren)</string>
   <string name="categories_not_found">D\'Kategorie %1$s gouf net fonnt</string>
   <string name="categories_skip_explanation">Setzt Kategorien derbäi fir datt Är Biller méi einfach op Wikimedia Commons ze fanne sinn.\n\nFänkt u mat Kategorien derbäizesetzen.</string>
   <string name="categories_activity_title">Kategorien</string>
@@ -261,7 +260,7 @@
   <string name="nearby_fragment">Nobäi</string>
   <string name="notifications">Notifikatiounen</string>
   <string name="list_sheet">Lëscht</string>
-  <string name="step_count" fuzzy="true">Schrëtt %1$d vu(n) %2$d</string>
+  <string name="step_count">Schrëtt %1$d vu(n) %2$d: %3$s</string>
   <string name="next">Weider</string>
   <string name="previous">Vireg</string>
   <string name="submit">Späicheren</string>
@@ -279,7 +278,7 @@
   <string name="nominate_for_deletion_done">Fäerdeg</string>
   <string name="review_category">Ass dëst richteg kategoriséiert?</string>
   <string name="review_thanks_yes_button_text">Nächst Bild</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">Nächst BILD</string>
+  <string name="review_thanks_no_button_text">Jo, firwat net</string>
   <string name="no_image">Keng Biller benotzt</string>
   <string name="no_image_uploaded">Keng Biller eropgelueden</string>
   <string name="no_read_notification">Dir hutt keng net-geliest Notifikatiounen</string>
@@ -354,4 +353,15 @@
   <string name="media_detail_in_all_languages">An alle Sproochen</string>
   <string name="choose_a_location">Eng Plaz eraussichen</string>
   <string name="select_location_location_picker">Plaz eraussichen</string>
+  <string name="custom_selector_empty_text">Keng Biller</string>
+  <string name="done">Fäerdeg</string>
+  <string name="back">Zréck</string>
+  <string name="welcome_custom_selector_ok">Genial</string>
+  <string name="wlm_upload_info">Dëst Bild wäert beim Concours Wiki Loves Monuments 2021 agereecht ginn.</string>
+  <string name="display_monuments">Monumenter weisen</string>
+  <string name="learn_more">FIR MÉI ZE WËSSEN</string>
+  <string name="need_permission">Autorisatioun gëtt gebraucht</string>
+  <string name="contributions_of_user">Kontributioune vum Benotzer: %s</string>
+  <string name="achievements_of_user">Leeschtunge vum Benotzer: %s</string>
+  <string name="menu_view_user_page">Benotzersäit weisen</string>
 </resources>

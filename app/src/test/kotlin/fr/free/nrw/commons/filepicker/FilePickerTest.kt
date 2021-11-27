@@ -10,7 +10,7 @@ import androidx.preference.PreferenceManager
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.filepicker.Constants.RequestCodes
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

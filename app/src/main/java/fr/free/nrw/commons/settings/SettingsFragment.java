@@ -108,6 +108,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             findPreference("descriptionDefaultLanguagePref").setEnabled(false);
             findPreference("displayLocationPermissionForCardView").setEnabled(false);
             findPreference(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE).setEnabled(false);
+            findPreference("managed_exif_tags").setEnabled(false);
         }
 
         findPreference("telemetryOptOut").setOnPreferenceChangeListener(
@@ -229,7 +230,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     /**
      * Changing the default app language with selected one and save it to SharedPreferences
      */
-    public void setLocale(final Activity activity, final String userSelectedValue) {
+    public void setLocale(final Activity activity, String userSelectedValue) {
+        if (userSelectedValue.equals("")) {
+            userSelectedValue = Locale.getDefault().getLanguage();
+        }
         final Locale locale = new Locale(userSelectedValue);
         Locale.setDefault(locale);
         final Configuration configuration = new Configuration();

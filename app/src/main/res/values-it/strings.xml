@@ -9,6 +9,7 @@
 * Lorelai87
 * Lorem Ipsum
 * Nemo bis
+* Noretta93
 * S4b1nuz E.656
 * Sarah Bernabei
 * Senpremì
@@ -457,7 +458,7 @@
   <string name="coordinates_edit_helper_show_edit_message">Le coordinate %1$s sono state aggiunte.</string>
   <string name="coordinates_edit_helper_edit_message_else">Impossibile aggiungere le coordinate.</string>
   <string name="share_image_via">Condividi immagine tramite</string>
-  <string name="no_achievements_yet">Non hai fatto alcun contributo ancora</string>
+  <string name="no_achievements_yet">%s non ha fatto alcun contributo ancora</string>
   <string name="account_created">Utenza creata!</string>
   <string name="text_copy">Testo copiato negli appunti</string>
   <string name="notification_mark_read">Notifica segnata come letta</string>
@@ -513,4 +514,9 @@
   <string name="choose_a_location">Scegli una posizione</string>
   <string name="select_location_location_picker">Seleziona una posizione</string>
   <string name="modify_location">Modifica posizione</string>
+  <string name="custom_selector_empty_text">Nessuna immagine</string>
+  <string name="done">Fatto</string>
+  <string name="back">Indietro</string>
+  <string name="welcome_custom_selector_ok">Fantastico</string>
+  <string name="learn_more">ULTERIORI INFORMAZIONI</string>
 </resources>

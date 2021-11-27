@@ -19,7 +19,9 @@
 * Shizhao
 * Shuiwater
 * Si109
+* SkyEye FAST
 * SomeyaMako
+* Tranve
 * Vikarna
 * VulpesVulpes825
 * Wxyveronica
@@ -277,8 +279,8 @@
   <string name="skip_login_title">你真的不要登录吗？</string>
   <string name="skip_login_message">您在未来将需要登陆才能上传图片。</string>
   <string name="login_alert_message">请登录后使用这个功能</string>
-  <string name="copy_wikicode">复制维基文本到剪贴板</string>
-  <string name="wikicode_copied">维基文本已经复制到剪贴板</string>
+  <string name="copy_wikicode">复制wikitext到剪贴板</string>
+  <string name="wikicode_copied">wikitext已经复制到剪贴板</string>
   <string name="nearby_location_not_available">附近可能无法正常工作，位置不可用。</string>
   <string name="location_permission_rationale_nearby">需要权限以显示附近地点列表</string>
   <string name="nearby_directions">方向</string>
@@ -522,7 +524,7 @@
   <string name="coordinates_edit_helper_edit_message_else">无法添加坐标。</string>
   <string name="coordinates_picking_unsuccessful">无法获取坐标。</string>
   <string name="share_image_via">分享图片透过</string>
-  <string name="no_achievements_yet">您目前还没有作出任何贡献</string>
+  <string name="no_achievements_yet">%s还没有作出任何贡献</string>
   <string name="account_created">账户已创建！</string>
   <string name="text_copy">文本已复制至剪贴板</string>
   <string name="notification_mark_read">通知已标记为已读</string>
@@ -562,12 +564,12 @@
   <string name="add_picture_to_wikipedia_article_desc">您想将此图像添加至$1s维基百科条目中吗？</string>
   <string name="confirm">确认</string>
   <string name="instructions_title">说明</string>
-  <string name="wikipedia_instructions_step_1">1. 使用下列维基文本：</string>
+  <string name="wikipedia_instructions_step_1">1. 使用下列wikitext：</string>
   <string name="wikipedia_instructions_step_2">2. 点击确认将会打开维基百科条目</string>
   <string name="wikipedia_instructions_step_3">3. 寻找条目中适合您的图像的章节</string>
   <string name="wikipedia_instructions_step_4">4. 点击该章节的编辑图标（类似铅笔形状的图标）。</string>
-  <string name="wikipedia_instructions_step_5">5. 将维基文本粘贴到合适的位置。</string>
-  <string name="wikipedia_instructions_step_6">6. 如果必要，在合适的位置编辑维基文本。参阅&lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;此处&lt;/a&gt;以获得更多信息。</string>
+  <string name="wikipedia_instructions_step_5">5. 将wikitext粘贴到合适的位置。</string>
+  <string name="wikipedia_instructions_step_6">6. 如果必要，在合适的位置编辑wikitext。参阅&lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;此处&lt;/a&gt;以获得更多信息。</string>
   <string name="wikipedia_instructions_step_7">7. 发布条目</string>
   <string name="copy_wikicode_to_clipboard">复制维基代码到剪贴板</string>
   <string name="pause">暂停</string>
@@ -629,4 +631,8 @@
   <string name="location_picker_image_view_shadow">地点拾取器的照片观测视野的阴影。</string>
   <string name="image_location">图像位置</string>
   <string name="check_whether_location_is_correct">检查位置是否正确</string>
+  <string name="custom_selector_empty_text">无图片</string>
+  <string name="done">完成</string>
+  <string name="back">返回</string>
+  <string name="learn_more">了解更多</string>
 </resources>

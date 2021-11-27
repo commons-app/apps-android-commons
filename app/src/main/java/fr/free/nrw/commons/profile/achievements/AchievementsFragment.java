@@ -15,7 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import butterknife.BindView;
@@ -28,6 +30,7 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.profile.ProfileActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -114,6 +117,9 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.wikidata_edits)
     TextView wikidataEditsText;
 
+    @BindView(R.id.tv_achievements_of_user)
+    AppCompatTextView tvAchievementsOfUser;
+
     @Inject
     SessionManager sessionManager;
 
@@ -127,6 +133,16 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
     // menu item for action bar
     private MenuItem item;
+
+    private String userName;
+
+    @Override
+    public void onCreate(@Nullable final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            userName = getArguments().getString(ProfileActivity.KEY_USERNAME);
+        }
+    }
 
     /**
      * This method helps in the creation Achievement screen and
@@ -157,6 +173,12 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
         // Set the initial value of WikiData edits to 0
         wikidataEditsText.setText("0");
+        if(sessionManager.getUserName().equals(userName)){
+            tvAchievementsOfUser.setVisibility(View.GONE);
+        }else{
+            tvAchievementsOfUser.setVisibility(View.VISIBLE);
+            tvAchievementsOfUser.setText(getString(R.string.achievements_of_user,userName));
+        }
         setWikidataEditCount();
         setAchievements();
         return rootView;
@@ -182,7 +204,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
             try{
 
                 compositeDisposable.add(okHttpJsonApiClient
-                        .getAchievements(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
+                        .getAchievements(Objects.requireNonNull(userName))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -225,7 +247,6 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      *  in the form of JavaRx Single object<JSONobject>
      */
     private void setWikidataEditCount() {
-        String userName = sessionManager.getUserName();
         if (StringUtils.isBlank(userName)) {
             return;
         }
@@ -274,7 +295,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     private void setUploadCount(Achievements achievements) {
         if (checkAccount()) {
             compositeDisposable.add(okHttpJsonApiClient
-                    .getUploadCount(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
+                    .getUploadCount(Objects.requireNonNull(userName))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
@@ -304,7 +325,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         if (uploadCount==0){
             setZeroAchievements();
         }else {
-
+            imagesUploadedProgressbar.setVisibility(View.VISIBLE);
             imagesUploadedProgressbar.setProgress
                     (100*uploadCount/levelInfo.getMaxUploadCount());
             imagesUploadedProgressbar.setProgressTextFormatPattern
@@ -314,10 +335,14 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     }
 
     private void setZeroAchievements() {
-        AlertDialog.Builder builder=new AlertDialog.Builder(getActivity())
-                .setMessage(getString(R.string.no_achievements_yet))
-                .setPositiveButton(getString(R.string.ok), (dialog, which) -> {
-                });
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+            .setMessage(
+                !Objects.equals(sessionManager.getUserName(), userName) ?
+                    getString(R.string.no_achievements_yet, userName) :
+                    getString(R.string.you_have_no_achievements_yet)
+            )
+            .setPositiveButton(getString(R.string.ok), (dialog, which) -> {
+            });
         AlertDialog dialog = builder.create();
         dialog.show();
         imagesUploadedProgressbar.setVisibility(View.INVISIBLE);
@@ -336,6 +361,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      * @param notRevertPercentage
      */
     private void setImageRevertPercentage(int notRevertPercentage){
+        imageRevertsProgressbar.setVisibility(View.VISIBLE);
         imageRevertsProgressbar.setProgress(notRevertPercentage);
         String revertPercentage = Integer.toString(notRevertPercentage);
         imageRevertsProgressbar.setProgressTextFormatPattern(revertPercentage + "%%");
@@ -348,6 +374,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      * @param achievements
      */
     private void inflateAchievements(Achievements achievements) {
+        imagesUsedByWikiProgressBar.setVisibility(View.VISIBLE);
         thanksReceived.setText(String.valueOf(achievements.getThanksReceived()));
         imagesUsedByWikiProgressBar.setProgress
                 (100 * achievements.getUniqueUsedImages() / levelInfo.getMaxUniqueImages());
@@ -481,5 +508,4 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         }
         return true;
     }
-
 }

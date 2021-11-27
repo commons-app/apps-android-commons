@@ -82,5 +82,5 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         />
 
-    <include layout="@layout/nearby_row_button" />
+    <include android:id="@+id/nearby_button_layout" layout="@layout/nearby_row_button" />
 </RelativeLayout>

@@ -235,7 +235,7 @@
   <string name="delete_helper_show_deletion_title_success">सफल</string>
   <string name="delete_helper_show_deletion_title_failed">असफल</string>
   <string name="delete_helper_ask_reason_copyright_logo">लोगो</string>
-  <string name="no_achievements_yet">तपाईले हालसम्म कुनैपनि सम्पादन गर्नु भएकाे छैन</string>
+  <string name="no_achievements_yet" fuzzy="true">तपाईले हालसम्म कुनैपनि सम्पादन गर्नु भएकाे छैन</string>
   <string name="account_created">खाता सृजना गरियो!</string>
   <string name="upload_nearby_place_found_title">नजिकैको स्थान भेटियो</string>
   <string name="title_app_shortcut_bookmark">पुस्तक चिनोहरू</string>

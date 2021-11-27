@@ -294,7 +294,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Çıkı wıniyo</string>
   <string name="share_image_via">Resımi vıla kerê pê</string>
-  <string name="no_achievements_yet">Hewna to iştirak nêkerdo</string>
+  <string name="no_achievements_yet" fuzzy="true">Hewna to iştirak nêkerdo</string>
   <string name="account_created">Hesab vıraziya!</string>
   <string name="text_copy">Metın kopyayê panoyi biyo</string>
   <string name="notification_mark_read">Pêhesnayışi wanaye nışan bıkerê</string>

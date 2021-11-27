@@ -75,6 +75,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Label;
+import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
@@ -109,7 +110,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     public static MediaDetailFragment forMedia(int index, boolean editable, boolean isCategoryImage, boolean isWikipediaButtonDisplayed) {
         MediaDetailFragment mf = new MediaDetailFragment();
-
         Bundle state = new Bundle();
         state.putBoolean("editable", editable);
         state.putBoolean("isCategoryImage", isCategoryImage);
@@ -117,7 +117,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         state.putInt("listIndex", 0);
         state.putInt("listTop", 0);
         state.putBoolean("isWikipediaButtonDisplayed", isWikipediaButtonDisplayed);
-
         mf.setArguments(state);
 
         return mf;
@@ -201,6 +200,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     RecyclerView categoryRecyclerView;
     @BindView(R.id.update_categories_button)
     Button updateCategoriesButton;
+    @BindView(R.id.coordinate_edit)
+    Button coordinateEditButton;
     @BindView(R.id.dummy_category_edit_container)
     LinearLayout dummyCategoryEditContainer;
     @BindView(R.id.pb_categories)
@@ -306,7 +307,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
 
         ButterKnife.bind(this,view);
-        Utils.setUnderlinedText(seeMore, R.string.nominated_see_more, container.getContext());
+        Utils.setUnderlinedText(seeMore, R.string.nominated_see_more, requireContext());
 
         if (isCategoryImage){
             authorLayout.setVisibility(VISIBLE);
@@ -320,6 +321,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         if(applicationKvStore.getBoolean("login_skipped")){
             delete.setVisibility(GONE);
+            coordinateEditButton.setVisibility(GONE);
         }
 
         handleBackEvent(view);
@@ -372,8 +374,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         } else {
             media = getArguments().getParcelable("media");
         }
-
-        media = detailProvider.getMediaAtPosition(index);
 
         if(media != null && applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
             enableProgressBar();
@@ -1013,6 +1013,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         if (nominatedForDeletion.getVisibility() == VISIBLE && getActivity() != null) {
             Utils.handleWebUrl(getActivity(), Uri.parse(media.getPageTitle().getMobileUri()));
         }
+    }
+
+    @OnClick(R.id.mediaDetailAuthor)
+    public void onAuthorViewClicked() {
+        if (media == null || media.getUser() == null) {
+            return;
+        }
+        ProfileActivity.startYourself(getActivity(), media.getUser(), !Objects
+            .equals(sessionManager.getUserName(), media.getUser()));
     }
 
     /**

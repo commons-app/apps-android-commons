@@ -2,33 +2,66 @@
 <!-- Authors:
 * Malikxan
 * Zafar Shamsiddinov
+* Шоҳидахоним
 -->
 <resources>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
   <string name="starting_uploads">Yuklashni boshlash</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">%d yuklandi</item>
     <item quantity="other">%d yuklandi</item>
   </plurals>
-  <string name="preference_category_privacy">Konfidensiallik</string>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d yuklandi</item>
+    <item quantity="other">%d yuklandi</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Ushbu rasm %1$s litsenziyasi asosidadir</item>
+    <item quantity="other">Ushbu rasmlar %1$s litsenziyasi asosidadir</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d yuklandi</item>
+    <item quantity="other">%1$d yuklandi</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Umumiy tarkibni qabul qilish. Rasmning oʻlchamiga va qurilmangizga qarab tasvirni qayta ishlash biroz vaqt talab qilishi mumkin</item>
+    <item quantity="other">Umumiy tarkibni qabul qilish. Rasmlarning oʻlchamiga va qurilmangizga qarab tasvirni qayta ishlash biroz vaqt talab qilishi mumkin</item>
+  </plurals>
+  <string name="navigation_item_explore">Kezish</string>
+  <string name="preference_category_appearance">Koʻrinishi</string>
+  <string name="preference_category_general">Asosiy</string>
+  <string name="preference_category_feedback">Fikr-mulohazalar</string>
+  <string name="preference_category_privacy">Maxfiylik</string>
   <string name="app_name">Vikiombor</string>
-  <string name="menu_settings">Sozlamalar</string>
+  <string name="menu_settings">Tanlovlar</string>
   <string name="intent_share_upload_label">Vikiomborga yuklash</string>
   <string name="username">Foydalanuvchi nomi</string>
   <string name="password">Parol</string>
-  <string name="login_credential">Vikiombor Beta hisobga kirish</string>
+  <string name="login_credential">Vikiombor Beta hisobiga kirish</string>
   <string name="login">Kirish</string>
   <string name="forgot_password">Parolni unutdingizmi?</string>
   <string name="signup">Roʻyxatdan oʻtish</string>
   <string name="logging_in_title">Kirish</string>
   <string name="logging_in_message">Iltimos kuting...</string>
-  <string name="login_success">Kirish muvaffaqiyatli!</string>
+  <string name="login_success">Kirish muvaffaqiyatli bajarildi!</string>
   <string name="login_failed">Kirish muvaffaqiyatsiz yakunlandi!</string>
   <string name="upload_failed">Fayl topilmadi. Iltimos, boshqa faylni izlab koʻring.</string>
+  <string name="authentication_failed">Kirib boʻlmadi. Qaytadan urinib koʻring</string>
   <string name="uploading_started">Yuklash boshlandi!</string>
+  <string name="upload_progress_notification_title_in_progress">%1$s yuklanmoqda</string>
+  <string name="upload_progress_notification_title_finishing">%1$s yuklab boʻlindi</string>
+  <string name="upload_failed_notification_title">%1$sʼni yuklab boʻlmadi</string>
+  <string name="upload_paused_notification_title">%1$sʼni yuklash toʻxtatildi</string>
   <string name="upload_failed_notification_subtitle">Razm solish uchun bosing</string>
   <string name="upload_paused_notification_subtitle">Razm solish uchun bosing</string>
   <string name="title_activity_contributions">Soʻnggi yuklanmalarim</string>
   <string name="contribution_state_queued">Navbatda</string>
+  <string name="contribution_state_failed">Bajarilmadi</string>
+  <string name="contribution_state_in_progress">%1$d%% bajarildi</string>
+  <string name="contribution_state_starting">Joylanmoqda</string>
   <string name="menu_from_gallery">Gallereyadan</string>
   <string name="menu_from_camera">Rasmga olish</string>
   <string name="menu_nearby">Yonida</string>
@@ -45,6 +78,8 @@
   <string name="menu_save_categories">Saqlash</string>
   <string name="refresh_button">Yangila</string>
   <string name="display_list_button">Roʻyxat</string>
+  <string name="contributions_subtitle_zero">(Hali joylashuvlar yoʻq)</string>
+  <string name="categories_not_found">%1$sʼga mos keluvchi kategoriyalar yoʻq</string>
   <string name="categories_activity_title">Turkumlar</string>
   <string name="title_activity_settings">Sozlamalar</string>
   <string name="title_activity_signup">Roʻyxatdan oʻtish</string>
@@ -54,6 +89,7 @@
   <string name="about_license">Vikiombor (Wikimedia Commons) ilovasi — bu Vikipediya hamjamiyati koʻngillilari tomonidan yaratilgan hamda qoʻllab-quvvatlanadigan ochiq manbali ilova. Vikimedia Jamgʻarmasi ushbu ilovani yaratish, ishlab chiqish yoki unga xizmat koʻrsatishda ishtirok etmaydi.</string>
   <string name="about_improve">Xatolar haqida hisobot va takliflar uchun yangi &lt;a href=\"%1$s\"&gt;GitHub issue&lt;/a&gt; yarating.</string>
   <string name="about_privacy_policy">Maxfiylik siyosati</string>
+  <string name="about_credits">Mualliflar</string>
   <string name="title_activity_about">Haqida</string>
   <string name="menu_feedback">Fikr-mulohazalar yuborish (email orqali)</string>
   <string name="no_uploads_yet">Siz hali hech qanaqa rasm joylamagansiz.</string>

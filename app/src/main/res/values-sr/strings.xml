@@ -426,7 +426,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Зато што је то</string>
   <string name="share_image_via">Подели слику преко</string>
-  <string name="no_achievements_yet">Још нисте допринели</string>
+  <string name="no_achievements_yet" fuzzy="true">Још нисте допринели</string>
   <string name="account_created">Налог је отворен.</string>
   <string name="text_copy">Текст је копиран у оставу</string>
   <string name="notification_mark_read">Обавештење је означено прочитаним</string>
@@ -451,4 +451,8 @@
   <string name="leaderboard_yearly">Годишње</string>
   <string name="leaderboard_weekly">Недељно</string>
   <string name="leaderboard_nearby">У близини</string>
+  <string name="custom_selector_empty_text">Нема слика</string>
+  <string name="done">Готово</string>
+  <string name="back">Назад</string>
+  <string name="custom_selector_already_uploaded_image_text">Ова слика је већ отпремљена на Оставу.</string>
 </resources>

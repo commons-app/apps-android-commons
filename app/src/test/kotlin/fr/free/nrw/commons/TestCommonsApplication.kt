@@ -25,6 +25,7 @@ class TestCommonsApplication : Application() {
                     .build()
         }
         super.onCreate()
+        setTheme(R.style.Theme_AppCompat)
         context=applicationContext
     }
 

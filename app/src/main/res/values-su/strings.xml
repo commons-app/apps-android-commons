@@ -14,13 +14,13 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Mitembeyan Ngamuat</string>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Ngamimitian saunjalan</item>
-    <item quantity="other">Ngamimitian %1$d unjalan</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Ngolah %d muatan</item>
+    <item quantity="other">Ngolah %d muatan</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d unggahan</item>
-    <item quantity="other">%1$d unggahan</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d muatan</item>
+    <item quantity="other">%1$d muatan</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Ieu gambar bakal dilisénsi %1$s</item>
@@ -59,7 +59,7 @@
   <string name="uploading_queued">Muatan geus ngantri (sambungan diwates dijalankeun)</string>
   <string name="upload_completed_notification_title">%1$s diunjal!</string>
   <string name="upload_completed_notification_text">Toél pikeun némpo unjalan anjeun</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Ngamimitian %1$s ngunjal</string>
+  <string name="upload_progress_notification_title_start">Ngamuat berkas: %s</string>
   <string name="upload_progress_notification_title_in_progress">Ngunjal %1$s</string>
   <string name="upload_progress_notification_title_finishing">Méréskeun unjalan %1$s</string>
   <string name="upload_failed_notification_title">Ngunjal %1$s gagal</string>
@@ -76,10 +76,11 @@
   <string name="menu_nearby">Sabudeureun</string>
   <string name="provider_contributions">Unjalan kami</string>
   <string name="menu_share">Bagikeun</string>
+  <string name="menu_view_file_page">Tempo kaca berkas</string>
   <string name="share_title_hint">Judul (Kudu)</string>
   <string name="add_caption_toast">Sadiakeun pertélaan pikeun ieu berkas</string>
   <string name="share_description_hint">Pedaran</string>
-  <string name="share_caption_hint" fuzzy="true">Pertélaan (wates 255 karakter)</string>
+  <string name="share_caption_hint">Takarir</string>
   <string name="login_failed_network">Teu bisa login - gangguan jaringan</string>
   <string name="login_failed_throttled">Loba teuing nu gagalna. Mangga cobian sababaraha menit deui mah</string>
   <string name="login_failed_blocked">Punten, ieu kontributor geus diblokir di Commons</string>

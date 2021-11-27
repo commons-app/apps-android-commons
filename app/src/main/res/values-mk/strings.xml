@@ -105,6 +105,7 @@
   <string name="title_activity_settings">Нагодувања</string>
   <string name="title_activity_signup">Зачленување</string>
   <string name="title_activity_featured_images">Избрани слики</string>
+  <string name="title_activity_custom_selector">Прилагоден избирач</string>
   <string name="title_activity_category_details">Категорија</string>
   <string name="title_activity_review">Оценување</string>
   <string name="menu_about">За извршникот</string>
@@ -315,6 +316,7 @@
   <string name="quiz_screenshot_question">Дали оваа екранска снимка е во ред за подигање?</string>
   <string name="share_app_title">Сподели прилог</string>
   <string name="error_fetching_nearby_places">Грешка при добивањето на околните места.</string>
+  <string name="error_fetching_nearby_monuments">Грешка при добивањето на околните споменици.</string>
   <string name="no_recent_searches">Нема скорешни пребарувања</string>
   <string name="delete_recent_searches_dialog">Дали сте сигурни дека сакате да ја избришете историјата на пребарувања?</string>
   <string name="delete_search_dialog">Дали би сакале да го избришете ова пребарување?</string>
@@ -491,7 +493,8 @@
   <string name="coordinates_edit_helper_edit_message_else">Не можев да додадам координати.</string>
   <string name="coordinates_picking_unsuccessful">Не можев да добијам координати.</string>
   <string name="share_image_via">Сподели ја сликата преку</string>
-  <string name="no_achievements_yet">Засега немате придонеси</string>
+  <string name="you_have_no_achievements_yet">Засега немате придонеси</string>
+  <string name="no_achievements_yet">%s засега нема придонеси</string>
   <string name="account_created">Сметката е создадена!</string>
   <string name="text_copy">Текстот е ставен во меѓускладот</string>
   <string name="notification_mark_read">Известувањето е означено како прочитано</string>
@@ -598,4 +601,25 @@
   <string name="location_picker_image_view_shadow">Сенка на сликата за избирање местоположба</string>
   <string name="image_location">Местоположба на сликата</string>
   <string name="check_whether_location_is_correct">Проверете дали местоположбата е точна</string>
+  <string name="custom_selector_title">Прилагоден избирач</string>
+  <string name="custom_selector_empty_text">Нема слики</string>
+  <string name="done">Готово</string>
+  <string name="back">Назад</string>
+  <string name="welcome_custom_picture_selector_text">Добре дојдовте на Прилагодениот избирач</string>
+  <string name="custom_selector_info_text1">Овој избирач ги покажува поинаку сликите кои веќе се на Ризницата.</string>
+  <string name="custom_selector_info_text2">За разлика од сликата лево, таа десно има лого на Ризницата, што значи дека веќе е подигната. \n Допрете и држете за да ја погледате сликата.</string>
+  <string name="welcome_custom_selector_ok">Одлично</string>
+  <string name="custom_selector_already_uploaded_image_text">Оваа слика е веќе подигната на Ризницата.</string>
+  <string name="place_state_wlm">WLM</string>
+  <string name="wlm_upload_info">Оваа слика ќе учествува во натпреварот „Вики ги сака спомениците 2021“</string>
+  <string name="display_monuments">Прикажи споменици</string>
+  <string name="wlm_month_message">Ова е месец на „Вики ги сака спомениците“!</string>
+  <string name="learn_more">ДОЗНАЈТЕ ПОВЕЌЕ</string>
+  <string name="wlm_campaign_title">Вики ги сака спомениците</string>
+  <string name="wlm_campaign_description">„Вики ги сака спомениците“ е меѓународен фотографски натпревар за споменици приреден од Викимедија</string>
+  <string name="need_permission">Се бара дозвола</string>
+  <string name="read_phone_state_permission_message">Картите со блиски места треба можат да ја прочитаат СОСТОЈБАТА НА ТЕЛЕФОНОТ за да работат правилно</string>
+  <string name="contributions_of_user">Придонеси на корисникот: %s</string>
+  <string name="achievements_of_user">Достигнувања на корисникот: %s</string>
+  <string name="menu_view_user_page">Преглед на корисничката страница</string>
 </resources>

@@ -132,6 +132,7 @@
   <string name="title_activity_settings">Paramètres</string>
   <string name="title_activity_signup">S’inscrire</string>
   <string name="title_activity_featured_images">Images remarquables</string>
+  <string name="title_activity_custom_selector">Sélecteur personnalisé</string>
   <string name="title_activity_category_details">Catégorie</string>
   <string name="title_activity_review">Relecture par les pairs</string>
   <string name="menu_about">À propos</string>
@@ -342,6 +343,7 @@
   <string name="quiz_screenshot_question">Cette copie d’écran est-elle correcte pour être téléversée ?</string>
   <string name="share_app_title">Partager l’application</string>
   <string name="error_fetching_nearby_places">Erreur durant la recherche d’endroits proches.</string>
+  <string name="error_fetching_nearby_monuments">Erreur de récupération des monuments à proximité.</string>
   <string name="no_recent_searches">Aucune recherche récente</string>
   <string name="delete_recent_searches_dialog">Voulez-vous vraiment effacer votre historique de recherche ?</string>
   <string name="delete_search_dialog">Voulez-vous supprimer cette recherche ?</string>
@@ -465,7 +467,7 @@
   <string name="images_featured_explanation">Les images en vedette sont des images de photographes et d’illustrateurs très doués que la communauté de Wikimédia Commons a choisies comme étant de la meilleure qualité pour le site.</string>
   <string name="images_via_nearby_explanation">Les images téléversées par « Lieux à proximité » sont les images téléversées lors de la découverte de lieux sur la carte.</string>
   <string name="thanks_received_explanation">Cette fonctionnalité permet aux contributeurs d’envoyer une notification de remerciement aux utilisateurs qui font des modifications utiles ― en utilisant un petit lien de remerciement sur la page historique ou sur celle du diff.</string>
-  <string name="copy_image_caption_description">Copier vers le média subséquent</string>
+  <string name="copy_image_caption_description">Copier vers les medias subséquents</string>
   <string name="copied_successfully">Copié</string>
   <string name="welcome_do_upload_content_description">Exemples de bonnes images à téléverser sur Commons</string>
   <string name="welcome_dont_upload_content_description">Exemples d’images à ne pas téléverser</string>
@@ -518,7 +520,8 @@
   <string name="coordinates_edit_helper_edit_message_else">Impossible d’ajouter des coordonnées.</string>
   <string name="coordinates_picking_unsuccessful">Impossible d’obtenir les coordonnées.</string>
   <string name="share_image_via">Partager l’image via</string>
-  <string name="no_achievements_yet">Vous n’avez encore fait aucune contribution</string>
+  <string name="you_have_no_achievements_yet">Vous n’avez encore fait aucune contribution</string>
+  <string name="no_achievements_yet">%s n’a encore fait aucune contribution</string>
   <string name="account_created">Compte créé !</string>
   <string name="text_copy">Texte copié dans le presse-papier</string>
   <string name="notification_mark_read">Notification marquée comme lue</string>
@@ -625,4 +628,23 @@
   <string name="location_picker_image_view_shadow">L’ombre de l’affichage d’image du sélecteur d’événement</string>
   <string name="image_location">Emplacement de l’image</string>
   <string name="check_whether_location_is_correct">Vérifier si l’emplacement est correct</string>
+  <string name="custom_selector_title">Sélecteur actuel</string>
+  <string name="custom_selector_empty_text">Pas d’image</string>
+  <string name="done">Fait</string>
+  <string name="back">Retour</string>
+  <string name="welcome_custom_picture_selector_text">Bienvenue dans le sélecteur d’images personnalisé</string>
+  <string name="custom_selector_info_text1">Ce sélecteur affiche différemment les images qui sont déjà dans Commons.</string>
+  <string name="custom_selector_info_text2">À l’inverse de l’image sur la gauche, l’image de droite a le logo Commons, indiquant qu’elle a déjà été téléversée.\n Toucher et maintenir pour avoir un aperçu de l\'image.</string>
+  <string name="welcome_custom_selector_ok">Génial</string>
+  <string name="custom_selector_already_uploaded_image_text">Cette image a déjà été téléchargée sur Communs.</string>
+  <string name="wlm_upload_info">Cette image sera entrée dans le concours des Monuments aimés de Wiki 2021</string>
+  <string name="display_monuments">Afficher les monuments</string>
+  <string name="wlm_month_message">C’est le mois des monuments aimés de Wiki !</string>
+  <string name="learn_more">EN SAVOIR PLUS</string>
+  <string name="wlm_campaign_description">Monuments aimés de Wiki est un concours international de photographie de monuments, organisé par Wikimédia</string>
+  <string name="need_permission">Nécessite une permission</string>
+  <string name="read_phone_state_permission_message">Les cartes proches doivent lire l’ÉTAT DU TÉLÉPHONE pour fonctionner correctement</string>
+  <string name="contributions_of_user">Contributions de l’utilisateur : %s</string>
+  <string name="achievements_of_user">Réussites de l’utilisateur : %s</string>
+  <string name="menu_view_user_page">Afficher la page utilisateur</string>
 </resources>

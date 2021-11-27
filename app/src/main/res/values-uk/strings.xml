@@ -83,7 +83,7 @@
   <string name="uploading_queued">Завантаження додано до черги (увімкнений режим обмеженого з\'єднання)</string>
   <string name="upload_completed_notification_title">Завантажено %1$s!</string>
   <string name="upload_completed_notification_text">Торкніться, щоб переглянути Ваше завантаження</string>
-  <string name="upload_progress_notification_title_start">Вивантаження файлу: %s</string>
+  <string name="upload_progress_notification_title_start">Завантаження файлу: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s завантажується</string>
   <string name="upload_progress_notification_title_finishing">Завершення завантаження %1$s</string>
   <string name="upload_failed_notification_title">Не вдалося завантажити %1$s</string>
@@ -129,6 +129,7 @@
   <string name="title_activity_settings">Налаштування</string>
   <string name="title_activity_signup">Зареєструватися</string>
   <string name="title_activity_featured_images">Вибрані зображення</string>
+  <string name="title_activity_custom_selector">Користувацький селектор</string>
   <string name="title_activity_category_details">Категорія</string>
   <string name="title_activity_review">Перевірка колегами</string>
   <string name="menu_about">Про програму</string>
@@ -339,6 +340,7 @@
   <string name="quiz_screenshot_question">Чи можна завантажувати цей знімок?</string>
   <string name="share_app_title">Поширити програму</string>
   <string name="error_fetching_nearby_places">Помилка отримання місць поблизу.</string>
+  <string name="error_fetching_nearby_monuments">Помилка отримання пам\'ятників поблизу.</string>
   <string name="no_recent_searches">Історія пошуку порожня</string>
   <string name="delete_recent_searches_dialog">Ви впевнені, що хочете стерти історію пошукових запитів?</string>
   <string name="delete_search_dialog">Вилучити цей пошук?</string>
@@ -415,7 +417,7 @@
   <string name="achievements_fetch_failed_ultimate_achievement">Ви зробили так багато, що наша система підрахунку досягнень не може впоратись зі своїм завданням. Це — абсолютне досягнення.</string>
   <string name="ends_on">Завершується:</string>
   <string name="display_campaigns">Показати кампанії</string>
-  <string name="display_campaigns_explanation">Чинні компанії</string>
+  <string name="display_campaigns_explanation">Чинні кампанії</string>
   <string name="nearby_campaign_dismiss_message">Ви більше не бачитимете кампаній. Однак Ви можете увімкнути це сповіщення повторно в своїх налаштуваннях, якщо забажаєте.</string>
   <string name="this_function_needs_network_connection">Ця функція вимагає доступу до інтернету. Будь ласка, перевірте своє з\'єднання.</string>
   <string name="error_processing_image">Сталася помилка при обробці зображення. Будь ласка, спробуйте ще раз!</string>
@@ -517,7 +519,8 @@
   <string name="coordinates_edit_helper_edit_message_else">Не вдалося додати координати.</string>
   <string name="coordinates_picking_unsuccessful">Не вдалося отримати координати.</string>
   <string name="share_image_via">Поширити зображення через</string>
-  <string name="no_achievements_yet">Ви ще не зробили жодного внеску</string>
+  <string name="you_have_no_achievements_yet">Ви ще не зробили жодного внеску</string>
+  <string name="no_achievements_yet">%s ще не зробив жодного внеску</string>
   <string name="account_created">Обліковий запис створено!</string>
   <string name="text_copy">Текст скопійовано до буферу обміну</string>
   <string name="notification_mark_read">Сповіщення позначено прочитаним</string>
@@ -624,4 +627,23 @@
   <string name="location_picker_image_view_shadow">Вигляд вибору розташування як тіні зображення</string>
   <string name="image_location">Підпис зображення</string>
   <string name="check_whether_location_is_correct">Перевірте правильність розташування</string>
+  <string name="custom_selector_title">Користувацький селектор</string>
+  <string name="custom_selector_empty_text">Без зображень</string>
+  <string name="done">Готово</string>
+  <string name="back">Назад</string>
+  <string name="welcome_custom_picture_selector_text">Ласкаво просимо до користувацького вибору зображень</string>
+  <string name="custom_selector_info_text1">Цей інструмент вибору по-різному показує зображення, які вже є у спільності.</string>
+  <string name="custom_selector_info_text2">На відміну від зображення зліва, зображення праворуч має логотип Commons, яке вказує, що воно вже завантажене.\n  Натисніть і утримуйте для попереднього перегляду зображення.</string>
+  <string name="welcome_custom_selector_ok">Чудово</string>
+  <string name="custom_selector_already_uploaded_image_text">Це зображення вже завантажено на Спільний ресурс.</string>
+  <string name="wlm_upload_info">Це зображення буде брати участь у конкурсі Wiki Loves Monuments 2021</string>
+  <string name="display_monuments">Показати пам’ятники</string>
+  <string name="wlm_month_message">Цей місяць Wiki Loves Monuments!</string>
+  <string name="learn_more">ДОСЛІДИТИ БІЛЬШЕ</string>
+  <string name="wlm_campaign_description">Wiki Loves Monuments — це міжнародний фотоконкурс пам’яток, організований Вікімедією</string>
+  <string name="need_permission">Потрібен дозвіл</string>
+  <string name="read_phone_state_permission_message">Для належної роботи мапи поблизу мають відображати стан PHONE STATE</string>
+  <string name="contributions_of_user">Внесок користувача: %s</string>
+  <string name="achievements_of_user">Досягнення користувача: %s</string>
+  <string name="menu_view_user_page">Переглянути сторінку користувача</string>
 </resources>

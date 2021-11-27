@@ -9,6 +9,7 @@
 * KlaasZ4usV
 * Mainframe98
 * Mar(c)
+* McDutchie
 * Nickthijssen1994
 * Optilete
 * Patio
@@ -390,6 +391,7 @@
   <string name="no_categories_selected_warning_desc">Afbeeldingen zonder categorieën zijn zelden bruikbaar. Weet je zeker dat je verder wilt gaan zonder categorieën te selecteren?</string>
   <string name="no_depictions_selected">Geen beschrijvingen geselecteerd</string>
   <string name="no_depictions_selected_warning_desc">Afbeeldingen met beschrijvingen zijn gemakkelijker te vinden en zullen eerder worden gebruikt. Weet u zeker dat u wilt doorgaan zonder beschrijvingen te selecteren?</string>
+  <string name="back_button_continue">Doorgaan Met Uploaden</string>
   <string name="upload_flow_all_images_in_set">(Voor alle afbeelding(en) in set)</string>
   <string name="search_this_area">Zoek in dit gebied</string>
   <string name="nearby_card_permission_title">Machtigingsverzoek</string>
@@ -502,7 +504,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Kan geen coördinaten toevoegen.</string>
   <string name="coordinates_picking_unsuccessful">Kan coördinaten niet opvragen.</string>
   <string name="share_image_via">Deel afbeelding via</string>
-  <string name="no_achievements_yet">U heeft nog geen bijdragen gedaan</string>
+  <string name="no_achievements_yet">%s heeft nog geen bijdragen gedaan</string>
   <string name="account_created">Profiel gemaakt!</string>
   <string name="text_copy">De tekst is gekopieerd naar het klembord.</string>
   <string name="notification_mark_read">Melding gemarkeerd als gelezen</string>
@@ -606,4 +608,6 @@
   <string name="location_picker_image_view_shadow">De schaduw van de afbeeldingsweergave van de locatiekiezer</string>
   <string name="image_location">Afbeeldingslocatie</string>
   <string name="check_whether_location_is_correct">Controleer of de locatie correct is</string>
+  <string name="back">Terug</string>
+  <string name="display_monuments">Monumenten weergeven</string>
 </resources>

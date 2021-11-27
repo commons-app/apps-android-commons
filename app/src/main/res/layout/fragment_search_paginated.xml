@@ -18,8 +18,9 @@
     android:id="@+id/paginatedSearchResultsList"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbarSize="@dimen/standard_gap"
-    android:scrollbars="vertical" />
+    android:scrollbarSize="6dp"
+    android:scrollbars="vertical"
+    android:scrollbarThumbVertical="@color/primaryColor"/>
 
   <ProgressBar
     android:id="@+id/paginatedSearchInitialLoadProgress"

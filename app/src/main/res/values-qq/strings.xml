@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Ajeje Brazorf
 * Amire80
 * LeGuyanaisPure
 * Liuxinyu970226
@@ -155,6 +156,7 @@
   <string name="successful_wikidata_edit">Message shown in a dialog (\"success toast\") after a contribution by the user.\n\nParameter:\n* %1$s - title of the target page on Wikidata</string>
   <string name="question">{{Identical|Question}}</string>
   <string name="result">{{Identical|Result}}</string>
+  <string name="delete">{{Identical|Delete}}</string>
   <string name="statistics">Èstatistik</string>
   <string name="statistics_featured">To see the correct translation for your language, please go to https://commons.wikimedia.org/wiki/Commons:Featured_pictures and select your language in \"This project page in other languages\".</string>
   <string name="nearby_fragment">{{Identical|Nearby}}</string>
@@ -164,6 +166,7 @@
   <string name="log_collection_started">\"Send log file\" is {{msg-wm|Commons-android-strings-send log file}}.</string>
   <string name="nominate_for_deletion_done">{{Identical|Done}}</string>
   <string name="review_category_explanation">\'%1$s\' is replaced by a formatted number (of categories).</string>
+  <string name="please_wait">{{Identical|Please wait}}</string>
   <string name="exif_tag_name_author">{{Identical|Author}}</string>
   <string name="exif_tag_name_location">{{Identical|Location}}</string>
   <string name="title_app_shortcut_bookmark">{{identical|Bookmark}}</string>
@@ -171,4 +174,5 @@
   <string name="favorites">{{Identical|Favorite}}</string>
   <string name="map_attribution">&lt;code&gt;&amp;amp;#169;&lt;/code&gt;  is the copyright symbol (©).</string>
   <string name="location_picker_image_view_shadow">A description of a visual element, location picker image shadow. Used for accesibility usually.</string>
+  <string name="done">{{identical|Done}}</string>
 </resources>
