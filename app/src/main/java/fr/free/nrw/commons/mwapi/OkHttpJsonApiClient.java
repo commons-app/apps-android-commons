@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.gson.Gson;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.location.LatLng;
@@ -267,12 +268,14 @@ public class OkHttpJsonApiClient {
 
     @Nullable
     public List<Place> getNearbyPlaces(final LatLng cur, final String language, final double radius,
-        final boolean shouldQueryForMonuments)
+        final boolean shouldQueryForMonuments, final String customQuery)
         throws Exception {
 
         Timber.d("Fetching nearby items at radius %s", radius);
         final String wikidataQuery;
-        if (!shouldQueryForMonuments) {
+        if (customQuery != null) {
+            wikidataQuery = customQuery;
+        } else if (!shouldQueryForMonuments) {
             wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
         } else {
             wikidataQuery = FileUtils.readFromResource("/queries/nearby_query_monuments.rq");

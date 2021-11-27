@@ -2,13 +2,14 @@ package fr.free.nrw.commons.nearby.contract;
 
 import android.content.Context;
 
+import androidx.annotation.Nullable;
 import com.mapbox.mapboxsdk.annotations.Marker;
 
+import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
 import java.util.List;
 
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.Place;
@@ -19,6 +20,7 @@ public interface NearbyParentFragmentContract {
         boolean isNetworkConnectionEstablished();
         void listOptionMenuItemClicked();
         void populatePlaces(LatLng curlatLng);
+        void populatePlaces(LatLng curlatLng, String customQuery);
         boolean isListBottomSheetExpanded();
         void checkPermissionsAndPerformAction();
         void displayLoginSkippedWarning();
@@ -62,7 +64,7 @@ public interface NearbyParentFragmentContract {
 
         LatLng getCameraTarget();
 
-        void centerMapToPlace(Place placeToCenter);
+        void centerMapToPlace(@Nullable Place placeToCenter);
 
         void updateListFragment(List<Place> placeList);
 
@@ -72,6 +74,12 @@ public interface NearbyParentFragmentContract {
 
         boolean isCurrentLocationMarkerVisible();
         void setProjectorLatLngBounds();
+
+        boolean isAdvancedQueryFragmentVisible();
+
+        void showHideAdvancedQueryFragment(boolean shouldShow);
+
+        void centerMapToPosition(@Nullable LatLng searchLatLng);
     }
 
     interface NearbyListView {
@@ -79,7 +87,7 @@ public interface NearbyParentFragmentContract {
     }
 
     interface UserActions {
-        void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType);
+        void updateMapAndList(LocationChangeType locationChangeType);
         void lockUnlockNearby(boolean isNearbyLocked);
 
         void attachView(View view);
@@ -96,5 +104,7 @@ public interface NearbyParentFragmentContract {
 
         void searchViewGainedFocus();
         void setCheckboxUnknown();
+
+        void setAdvancedQuery(String query);
     }
 }

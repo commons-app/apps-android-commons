@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 
 import androidx.annotation.MainThread;
+import androidx.annotation.Nullable;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
@@ -59,7 +60,7 @@ public class NearbyController {
      */
     public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng, final LatLng searchLatLng,
         final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
-        final boolean shouldQueryForMonuments) throws Exception {
+        final boolean shouldQueryForMonuments, @Nullable final String customQuery) throws Exception {
 
         Timber.d("Loading attractions near %s", searchLatLng);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
@@ -70,7 +71,7 @@ public class NearbyController {
         }
         List<Place> places = nearbyPlaces
             .radiusExpander(searchLatLng, Locale.getDefault().getLanguage(), returnClosestResult,
-                shouldQueryForMonuments);
+                shouldQueryForMonuments, customQuery);
 
         if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {places.get(0).location,   // south
@@ -128,7 +129,7 @@ public class NearbyController {
             return nearbyPlacesInfo;
         }
         else {
-            return null;
+            return nearbyPlacesInfo;
         }
     }
 
