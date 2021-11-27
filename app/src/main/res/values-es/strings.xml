@@ -31,6 +31,7 @@
 * MarionaDSR
 * Miguel2706
 * Mirzali
+* Pompilos
 * Rodney Araujo
 * Superzerocool
 * Tiberius1701
@@ -349,6 +350,7 @@
   <string name="quiz_screenshot_question">¿Esta captura de pantalla esta bien para ser subida?</string>
   <string name="share_app_title">Compartir aplicación</string>
   <string name="error_fetching_nearby_places">Error al recuperar los lugares cercanos.</string>
+  <string name="error_fetching_nearby_monuments">Error al encontrar monumentos cercanos.</string>
   <string name="no_recent_searches">No hay búsquedas recientes</string>
   <string name="delete_recent_searches_dialog">¿Confirmas que quieres vaciar el historial de búsquedas?</string>
   <string name="delete_search_dialog">¿Quieres eliminar esta búsqueda?</string>
@@ -409,6 +411,7 @@
   <string name="no_categories_selected">No hay categorías seleccionadas</string>
   <string name="no_categories_selected_warning_desc">Las imágenes sin categorías raramente se pueden usar. ¿Seguro que quieres continuar sin seleccionar ninguna categoría?</string>
   <string name="no_depictions_selected">No se han seleccionado representaciones</string>
+  <string name="no_depictions_selected_warning_desc">Las imágenes con dibujos se encuentran más fácilmente y es más probable que se usen. ¿Está seguro de que quieres seguir sin seleccionar dibujos?</string>
   <string name="back_button_warning">Cancelar la carga</string>
   <string name="back_button_warning_desc">usar el botón de retroceso cancelará esta carga y perderá el progreso</string>
   <string name="back_button_continue">Continuar la carga</string>
@@ -421,6 +424,7 @@
   <string name="display_location_permission_title">Pedir permiso de ubicación</string>
   <string name="display_location_permission_explanation">Pida permiso de ubicación cuando sea necesario para ver la tarjeta de notificación cercana.</string>
   <string name="achievements_fetch_failed">Algo salió mal, no pudimos obtener tus logros</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">Has hecho tantas contribuciones que nuestro sistema de recuento de contribuciones no puede contarlas. Este es el último recuento.</string>
   <string name="ends_on">Finaliza el:</string>
   <string name="display_campaigns">Mostrar campañas</string>
   <string name="display_campaigns_explanation">Ver las campañas en curso</string>
@@ -470,6 +474,7 @@
   <string name="images_featured_explanation">Las imágenes destacadas son creaciones de talentosos fotógrafos e ilustradores que la comunidad de Wikimedia Commons ha reconocido como las de mayor calidad del sitio.</string>
   <string name="images_via_nearby_explanation">Las imágenes subidas via Lugares Cercanos son las imágenes que han sido cargadas al descubrir lugares en el mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidad permite a los editores enviar una notificación de agradecimiento a aquellos usuarios que realicen ediciones útiles mediante un pequeño enlace en la página de historial o de diferencias.</string>
+  <string name="copy_image_caption_description">Copia a medios de comunicación subsiguientes</string>
   <string name="copied_successfully">Copiado</string>
   <string name="welcome_do_upload_content_description">Ejemplos de imágenes adecuadas para Commons</string>
   <string name="welcome_dont_upload_content_description">Ejemplos de imágenes que no deben cargarse</string>
@@ -535,7 +540,10 @@
   <string name="nearby_search_hint">Puente, museo, hotel…</string>
   <string name="you_must_reset_your_passsword">Hubo un error con el inicio de sesión, debe restablecer su contraseña !!</string>
   <string name="title_for_media">MULTIMEDIA</string>
+  <string name="title_for_child_classes">CLASES HIJAS</string>
+  <string name="title_for_parent_classes">CLASES PADRES</string>
   <string name="upload_nearby_place_found_title">Lugar cercano encontrado</string>
+  <string name="upload_nearby_place_found_description">¿Esta es una foto del Lugar %1$s?</string>
   <string name="title_app_shortcut_bookmark">Marcadores</string>
   <string name="title_app_shortcut_setting">Configuración</string>
   <string name="remove_bookmark">removido de marcadores</string>
@@ -592,17 +600,27 @@
   <string name="leaderboard_nearby">Próximo</string>
   <string name="leaderboard_used">Utilizado</string>
   <string name="leaderboard_my_rank_button_text">Mi Posicionamiento</string>
+  <string name="mapbox_telemetry">Mapbox Telemetría</string>
+  <string name="telemetry_opt_out_summary">Envía anonimizados la ubicación y el uso de datos a Mapbox cuando se usa la característica Cercano</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Mejora este mapa&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Se activó el modo de conexión limitada.</string>
   <string name="limited_connection_disabled">Se desactivó el modo de conexión limitada. Las cargas pendientes se reanudarán ahora.</string>
   <string name="limited_connection_mode">Modo de conexión limitada</string>
   <string name="statistics_quality">Imágenes de calidad</string>
+  <string name="quality_images_info">Las imágenes de calidad son diagramas o fotografías que cumplen determinados estándares de calidad (mayormente de carácter técnico) y que son valiosas para proyectos de Wikimedia</string>
   <string name="resuming_upload">Reanudando carga...</string>
   <string name="pausing_upload">Pausando carga...</string>
   <string name="limited_connection_explanation">Has habilitado el modo de conexión limitada. Todas las cargas están pausadas y se reanudarán cuando deshabilites este modo.</string>
   <string name="limited_connection_is_on">El modo de conexión limitada está encendido.</string>
   <string name="media_details_tooltip">Por favor escribe un pie de foto corto que diga qué muesta tu imagen. En la descripción, indica qué hace interesante o típica o rara a la imagen, y explica el contexto, visible o no. Emplea terminología exacta tanto como sea posible.</string>
   <string name="depicts_tooltip">Por favor halla y selecciona todos los conceptos que esta imagen muestra. Sé específico tanto como puedas. Si la imagen tiene varios elementos, escógelos razonablemente. No selecciones etiquetas genéricas si hay unas más específicas.</string>
+  <string name="categories_tooltip">Por favor selecciona la categoría apropiada. A diferencia de las representaciones, las categorías son solo en inglés.</string>
   <string name="license_tooltip">Commons hace que tus imágenes sean reusables y adaptadas por todos ¿Quieres renunciar a todos los derechos?¿quieres ser reconocido?¿quieres que las adaptaciones empleen las mismas licencias?</string>
+  <string name="depicts_step_title">Representa</string>
+  <string name="menu_view_category_page">Ver página de categoría</string>
+  <string name="menu_view_item_page">Ver página de elementos</string>
+  <string name="app_ui_language">Idioma de interfaz de usuario</string>
+  <string name="remove">Elimina un título y una descripción</string>
   <string name="read_help_link">Más información</string>
   <string name="media_detail_in_all_languages">En más idiomas</string>
   <string name="choose_a_location">Escoge una ubicación</string>
@@ -620,6 +638,7 @@
   <string name="done">Hecho</string>
   <string name="back">Atrás</string>
   <string name="welcome_custom_picture_selector_text">Bienvenido al Selector de Imagen Personalizado</string>
+  <string name="custom_selector_info_text1">Este selector muestra de manera diferente imágenes que ya están en Commons.</string>
   <string name="custom_selector_info_text2">A diferencia de la imagen de la izquierda, la imagen de la derecha tiene el logo de Commons que indica que ha sido cargado. \nPara previsualizar la imagen toca y mantén</string>
   <string name="welcome_custom_selector_ok">Magnífico</string>
   <string name="custom_selector_already_uploaded_image_text">Esta imagen ya se ha subido a Commons.</string>
@@ -628,6 +647,7 @@
   <string name="wlm_month_message">¡Es el mes de Wiki Loves Monuments!</string>
   <string name="learn_more">APRENDE MÁS</string>
   <string name="wlm_campaign_description">Wiki loves monuments es un consurso internacional de fotografías de monumentos organizado por Wikimedia</string>
+  <string name="need_permission">Necesita Permiso</string>
   <string name="read_phone_state_permission_message">Los mapas cercanos necesitan leer ESTADO DEL TELÉFONO para funcionar correctamente</string>
   <string name="contributions_of_user">Contribuciones del usuario: %s</string>
   <string name="achievements_of_user">Logros del usuario: %s</string>
