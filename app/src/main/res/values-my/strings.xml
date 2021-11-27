@@ -178,6 +178,7 @@
   <string name="upload_problem_fbmd">သင်ကိုယ်တိုင်ရိုက်ကူးထားသော ရုပ်ပုံများကိုသာ အက်ပလုပ်တင်ပါ။ အခြားသူ၏ ဖေ့ဘုတ်အကောင့်များတွင်တွေ့သည့်ရုပ်ပုံများကို မတင်ပါနှင့်။</string>
   <string name="upload_problem_do_you_continue">ဤရုပ်ပုံအား အက်ပလုပ်တင်ချင်နေတုန်းပဲလား</string>
   <string name="upload_connection_error_alert_title">ဆက်သွယ်မှု အမှား</string>
+  <string name="upload_problem_image">ရုပ်ပုံတွင် ပြဿနာများတွေ့ရှိခဲ့သည်</string>
   <string name="internet_downloaded">သင်ကိုယ်တိုင်ရိုက်ကူးထားသော ရုပ်ပုံများကိုသာ အက်ပလုပ်တင်ပါ။ အင်တာနက်မှဒေါင်းလုတ်ဆွဲထားသည့်ရုပ်ပုံများကို မတင်ပါနှင့်။</string>
   <string name="use_external_storage" fuzzy="true">ပြင်ပြသိုလှောင်ခန်းကို သုံးမည်</string>
   <string name="login_to_your_account">သင်၏အကောင့်သို့ ဝင်ရန်</string>
@@ -191,17 +192,17 @@
   <string name="skip_login_title">အကောင့်ထဲဝင်ခြင်းကို အမှန်တကယ် ကျော်သွားလိုပါသလား</string>
   <string name="skip_login_message">အနာဂတ်ကာလတွင် ရုပ်ပုံများတင်ရန် အကောင့်ထဲဝင်ရပါမည်။</string>
   <string name="login_alert_message">ဤအင်္ဂါရပ်ကို အသုံးပြုရန် အကောင့်ထဲသို့ဝင်ပါ</string>
-  <string name="nearby_location_not_available" fuzzy="true">တည်နေရာ မရရှိနိုင်ပါ</string>
+  <string name="nearby_location_not_available">အနီးအနား ကောင်းမွန်စွာ အလုပ်မလုပ်ပါ၊ တည်နေရာ မရရှိနိုင်ပါ။</string>
   <string name="location_permission_rationale_nearby">အနီးအနားနေရာများစာရင်းကို ပြသပေးရန် ခွင့်ပြုချက် လိုအပ်ပါသည်</string>
   <string name="nearby_directions">လမ်းညွှန်များ</string>
   <string name="nearby_wikidata">ဝီကီဒေတာ</string>
   <string name="nearby_wikipedia">ဝီကီပီးဒီးယား</string>
   <string name="nearby_commons">ကွန်မွန်းစ်</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;မေးလေ့ရှိသည့် မေးခွန်းများ&lt;/u&gt;</string>
+  <string name="about_faq">မေးလေ့ရှိကြသည်များ</string>
   <string name="welcome_skip_button">သင်ခန်းစာကို ကျော်သွားရန်</string>
   <string name="no_internet">အင်တာနက် မရရှိပါ</string>
   <string name="no_notifications">အသိပေးချက်များ မတွေ့ပါ</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;ဘာသာပြန်ပါ&lt;/u&gt;</string>
+  <string name="about_translate">ဘာသာပြန်ပါ</string>
   <string name="about_translate_title">ဘာသာစကားများ</string>
   <string name="about_translate_proceed">ဆက်လက်လုပ်ဆောင်ရန်</string>
   <string name="about_translate_cancel">မလုပ်တော့ပါ</string>
@@ -234,6 +235,7 @@
   <string name="construction_event_answer">နည်းပညာ သို့မဟုတ် ယဉ်ကျေးမှုကိုပြသသော ရုပ်ပုံများသည် ကွန်မွန်းစ်ပေါ်တွင် အလွန်ကြိုဆိုပါသည်။</string>
   <string name="congratulatory_message_quiz">အဖြေများ၏ %$s ကို မှန်ကန်စွာဖြေခဲ့သည်။ ဂုဏ်ယူပါ၏။</string>
   <string name="warning_for_no_answer">မေးခွန်းကိုဖြေဆိုရန် ရွေးစရာနှစ်ခုထဲမှ တစ်ခုကို ရွေးချယ်ပါ</string>
+  <string name="user_not_logged_in">လော့ဂ်အင်ကာလ သက်တမ်းကုန်သွားသည်၊ ထပ်မံလော့ဂ်အင်ပြန်ဝင်ပေးပါ။</string>
   <string name="quiz_result_share_message">သင်၏ဉာဏ်စမ်းများကို မိတ်ဆွေများနှင့် မျှဝေပါ။</string>
   <string name="continue_message">ဆက်လက်</string>
   <string name="correct">အဖြေမှန်</string>
@@ -334,7 +336,7 @@
   <string name="category_edit_button_text">ကဏ္ဍများ မွမ်းမံရန်</string>
   <string name="coordinates_edit_helper_show_edit_title">ကိုဩဒိနိတ် မွမ်းမံ</string>
   <string name="coordinates_edit_helper_show_edit_title_success">အောင်မြင်</string>
-  <string name="no_achievements_yet" fuzzy="true">မည့်သည့်ပံ့ပိုးမှုမျှ မရှိသေးပါ</string>
+  <string name="no_achievements_yet">%s သည် မည့်သည့်ပံ့ပိုးမှုမျှ မရှိသေးပါ</string>
   <string name="account_created">အကောင့်ဖန်တီးပြီးပါပြီ</string>
   <string name="notification_mark_read">အသိပေးချက်ကို ဖတ်ပြီးကြောင်းမှတ်သားပြီးပြီ</string>
   <string name="some_error">အမှားအယွင်းအချို့ရှိခဲ့သည်</string>
@@ -381,4 +383,8 @@
   <string name="welcome_custom_selector_ok">လန်းသည်</string>
   <string name="custom_selector_already_uploaded_image_text">ဤရုပ်ပုံအား ကွန်မွန်းစ်သို့ အက်ပလုဒ်တင်ပြီးသားဖြစ်ပါသည်။</string>
   <string name="learn_more">ပိုမိုလေ့လာရန်</string>
+  <string name="need_permission">ခွင့်ပြုချက် လိုအပ်</string>
+  <string name="contributions_of_user">အသုံးပြုသူ၏ ပံ့ပိုးမှုများ- %s</string>
+  <string name="achievements_of_user">အသုံးပြုသူ၏ အောင်မြင်မှုများ- %s</string>
+  <string name="menu_view_user_page">အသုံးပြုသူ၏ စာမျက်နှာကို ကြည့်ရန်</string>
 </resources>
