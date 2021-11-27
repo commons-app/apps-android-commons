@@ -520,7 +520,8 @@
   <string name="coordinates_edit_helper_edit_message_else">Impossible d’ajouter des coordonnées.</string>
   <string name="coordinates_picking_unsuccessful">Impossible d’obtenir les coordonnées.</string>
   <string name="share_image_via">Partager l’image via</string>
-  <string name="no_achievements_yet">Vous n’avez encore fait aucune contribution</string>
+  <string name="you_have_no_achievements_yet">Vous n’avez encore fait aucune contribution</string>
+  <string name="no_achievements_yet">%s n’a encore fait aucune contribution</string>
   <string name="account_created">Compte créé !</string>
   <string name="text_copy">Texte copié dans le presse-papier</string>
   <string name="notification_mark_read">Notification marquée comme lue</string>
@@ -636,9 +637,14 @@
   <string name="custom_selector_info_text2">À l’inverse de l’image sur la gauche, l’image de droite a le logo Commons, indiquant qu’elle a déjà été téléversée.\n Toucher et maintenir pour avoir un aperçu de l\'image.</string>
   <string name="welcome_custom_selector_ok">Génial</string>
   <string name="custom_selector_already_uploaded_image_text">Cette image a déjà été téléchargée sur Communs.</string>
-  <string name="wlm_upload_info" fuzzy="true">Vous contribuez à la campagne de monuments aimés de Wiki. Les modèles associés seront ajoutés en accord avec cela.</string>
+  <string name="wlm_upload_info">Cette image sera entrée dans le concours des Monuments aimés de Wiki 2021</string>
   <string name="display_monuments">Afficher les monuments</string>
   <string name="wlm_month_message">C’est le mois des monuments aimés de Wiki !</string>
   <string name="learn_more">EN SAVOIR PLUS</string>
   <string name="wlm_campaign_description">Monuments aimés de Wiki est un concours international de photographie de monuments, organisé par Wikimédia</string>
+  <string name="need_permission">Nécessite une permission</string>
+  <string name="read_phone_state_permission_message">Les cartes proches doivent lire l’ÉTAT DU TÉLÉPHONE pour fonctionner correctement</string>
+  <string name="contributions_of_user">Contributions de l’utilisateur : %s</string>
+  <string name="achievements_of_user">Réussites de l’utilisateur : %s</string>
+  <string name="menu_view_user_page">Afficher la page utilisateur</string>
 </resources>

@@ -466,7 +466,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Fordi det er</string>
   <string name="share_image_via">Del bilde via</string>
-  <string name="no_achievements_yet">Du har ikke gjort noen bidrag ennå</string>
+  <string name="no_achievements_yet" fuzzy="true">Du har ikke gjort noen bidrag ennå</string>
   <string name="account_created">Konto opprettet!</string>
   <string name="text_copy">Tekst kopiert til utklippstavlen</string>
   <string name="notification_mark_read">Varsel merket som lest</string>

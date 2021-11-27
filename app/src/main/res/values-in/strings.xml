@@ -497,7 +497,8 @@
   <string name="coordinates_edit_helper_edit_message_else">Tidak bisa menambahkan koordinat.</string>
   <string name="coordinates_picking_unsuccessful">Tidak bisa mendapatkan koordinat.</string>
   <string name="share_image_via">Bagikan gambar melalui</string>
-  <string name="no_achievements_yet">Anda belum membuat satu kontribusi pun</string>
+  <string name="you_have_no_achievements_yet">Anda belum membuat kontribusi apapun</string>
+  <string name="no_achievements_yet">%s belum membuat kontribusi apapun untuk sekarang</string>
   <string name="account_created">Akun dibuat!</string>
   <string name="text_copy">Teks disalin ke papan klip</string>
   <string name="notification_mark_read">Notifikasi ditandai sudah dibaca</string>
@@ -613,9 +614,14 @@
   <string name="custom_selector_info_text2">Berbeda dengan gambar di sebelah kiri, gambar di sebelah kanan memiliki logo Commons yang menandakan gambarnya sudah diunggah.\n  Sentuh dan tahan untuk pratinjau gambar.</string>
   <string name="welcome_custom_selector_ok">Bagus</string>
   <string name="custom_selector_already_uploaded_image_text">Gambar ini sudah diunggah di Commons.</string>
-  <string name="wlm_upload_info" fuzzy="true">Anda berkontribusi kepada Kampanye Wiki Loves Monuments (Wiki Cinta Monumen). Templat yang terkait akan ditambahkan.</string>
+  <string name="wlm_upload_info">Gambar ini akan dimasukkan ke dalam kontes Wiki Loves Monuents 2021</string>
   <string name="display_monuments">Tampilkan monumen</string>
   <string name="wlm_month_message">Ini adalah bulan Wiki Loves Monuments!</string>
   <string name="learn_more">PELAJARI LEBIH LANJUT</string>
   <string name="wlm_campaign_description">Wiki Loves Monuments adalah lomba foto internasional untuk monumen yang diselenggarakan oleh Wikimedia</string>
+  <string name="need_permission">Membutuhkan Izin</string>
+  <string name="read_phone_state_permission_message">Peta Sekitar harus membaca STATUS TELEPON untuk berfungsi dengan benar</string>
+  <string name="contributions_of_user">Kontribusi Pengguna: %s</string>
+  <string name="achievements_of_user">Pencapaian Pengguna: %s</string>
+  <string name="menu_view_user_page">Lihat halaman pengguna</string>
 </resources>

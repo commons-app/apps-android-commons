@@ -513,7 +513,7 @@
   <string name="category_edit_button_text">Aktualizuj kategorie</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Powodzenie</string>
   <string name="share_image_via">Udostępnij obraz przez</string>
-  <string name="no_achievements_yet">Nie wykonałeś jeszcze żadnej edycji</string>
+  <string name="no_achievements_yet" fuzzy="true">Nie wykonałeś jeszcze żadnej edycji</string>
   <string name="account_created">Konto zostało utworzone!</string>
   <string name="text_copy">Skopiowano tekst do schowka</string>
   <string name="notification_mark_read">Oznaczono powiadomienia jako przeczytane</string>

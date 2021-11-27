@@ -460,7 +460,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque ye</string>
   <string name="share_image_via">Compartir imaxe per</string>
-  <string name="no_achievements_yet">Inda nun ficisti nenguna contribución</string>
+  <string name="no_achievements_yet" fuzzy="true">Inda nun ficisti nenguna contribución</string>
   <string name="account_created">¡Cuenta creada!</string>
   <string name="text_copy">Testu copiáu al cartafueyu</string>
   <string name="notification_mark_read">Notificación marcada como lleida</string>

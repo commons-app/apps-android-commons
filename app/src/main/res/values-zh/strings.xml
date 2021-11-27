@@ -524,7 +524,7 @@
   <string name="coordinates_edit_helper_edit_message_else">无法添加坐标。</string>
   <string name="coordinates_picking_unsuccessful">无法获取坐标。</string>
   <string name="share_image_via">分享图片透过</string>
-  <string name="no_achievements_yet">您目前还没有作出任何贡献</string>
+  <string name="no_achievements_yet">%s还没有作出任何贡献</string>
   <string name="account_created">账户已创建！</string>
   <string name="text_copy">文本已复制至剪贴板</string>
   <string name="notification_mark_read">通知已标记为已读</string>

@@ -427,7 +427,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">لوگو</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">چون</string>
   <string name="share_image_via">هم‌رسانی تصویر از طریق</string>
-  <string name="no_achievements_yet">هنوز مشارکتی نکرده‌اید</string>
+  <string name="no_achievements_yet" fuzzy="true">هنوز مشارکتی نکرده‌اید</string>
   <string name="account_created">حساب ساخته شد!</string>
   <string name="text_copy">متن در حافظهٔ موقت کپی شد.</string>
   <string name="notification_mark_read">علامت زدن اعلان به عنوان خوانده‌شده</string>
@@ -470,4 +470,5 @@
   <string name="display_monuments">نمایش یادمان‌ها</string>
   <string name="wlm_month_message">این ماه، ماه «ویکی دوست‌دار یادمان‌ها» است!</string>
   <string name="learn_more">بیشتر بدانید</string>
+  <string name="menu_view_user_page">نمایش صفحهٔ کاربر</string>
 </resources>

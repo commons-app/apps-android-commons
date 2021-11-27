@@ -59,6 +59,9 @@
   <string name="upload_paused_notification_subtitle">Razm solish uchun bosing</string>
   <string name="title_activity_contributions">Soʻnggi yuklanmalarim</string>
   <string name="contribution_state_queued">Navbatda</string>
+  <string name="contribution_state_failed">Bajarilmadi</string>
+  <string name="contribution_state_in_progress">%1$d%% bajarildi</string>
+  <string name="contribution_state_starting">Joylanmoqda</string>
   <string name="menu_from_gallery">Gallereyadan</string>
   <string name="menu_from_camera">Rasmga olish</string>
   <string name="menu_nearby">Yonida</string>
@@ -75,6 +78,8 @@
   <string name="menu_save_categories">Saqlash</string>
   <string name="refresh_button">Yangila</string>
   <string name="display_list_button">Roʻyxat</string>
+  <string name="contributions_subtitle_zero">(Hali joylashuvlar yoʻq)</string>
+  <string name="categories_not_found">%1$sʼga mos keluvchi kategoriyalar yoʻq</string>
   <string name="categories_activity_title">Turkumlar</string>
   <string name="title_activity_settings">Sozlamalar</string>
   <string name="title_activity_signup">Roʻyxatdan oʻtish</string>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Adam N.
 * Aktron
 * Chmee2
 * Clon
@@ -475,6 +476,7 @@
   <string name="delete_helper_ask_alert_set_positive_button_reason">Pretože to je</string>
   <string name="category_edit_helper_show_edit_title_success">Úspěch</string>
   <string name="share_image_via">Sdílet obrázek pomocí</string>
+  <string name="you_have_no_achievements_yet">Zatím nemáte žádné příspěvky</string>
   <string name="no_achievements_yet">Zatím nemáte žádné příspěvky</string>
   <string name="account_created">Účet byl založen!</string>
   <string name="text_copy">Text byl zkopírován do schránky.</string>
@@ -532,4 +534,6 @@
   <string name="leaderboard_weekly">Týdně</string>
   <string name="leaderboard_upload">Nahrát</string>
   <string name="read_help_link">Číst dál</string>
+  <string name="need_permission">Zobrazit oprávnění</string>
+  <string name="menu_view_user_page">Prohlédnout si uživatelskou stránku</string>
 </resources>

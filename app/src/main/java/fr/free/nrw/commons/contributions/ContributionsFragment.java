@@ -204,6 +204,12 @@ public class ContributionsFragment
                 throwable -> Timber.e(throwable, "Error occurred while loading notifications")));
     }
 
+    public void scrollToTop( ){
+        if (contributionsListFragment != null) {
+            contributionsListFragment.scrollToTop();
+        }
+    }
+
     private void initNotificationViews(List<Notification> notificationList) {
         Timber.d("Number of notifications is %d", notificationList.size());
         if (notificationList.isEmpty()) {

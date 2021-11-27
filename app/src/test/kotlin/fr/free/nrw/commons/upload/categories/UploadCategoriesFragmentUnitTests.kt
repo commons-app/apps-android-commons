@@ -168,7 +168,6 @@ class UploadCategoriesFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSetCategoriesCaseNonNull() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.setCategories(listOf())
     }
 
