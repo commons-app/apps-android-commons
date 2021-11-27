@@ -1,11 +1,10 @@
 package fr.free.nrw.commons.upload.categories
 
 import fr.free.nrw.commons.category.CategoryItem
-import java.util.ArrayList
 
 class UploadCategoryAdapter(
     onCategoryClicked: (CategoryItem) -> Unit,
-    existingCategories: ArrayList<String>
+    existingCategories: List<String>
 ) :
     BaseDelegateAdapter<CategoryItem>(
         uploadCategoryDelegate(onCategoryClicked, existingCategories),

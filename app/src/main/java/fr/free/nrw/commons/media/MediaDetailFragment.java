@@ -767,14 +767,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @OnClick(R.id.categoryEditButton)
     public void onCategoryEditButtonClicked(){
-        Fragment newFragment = new UploadCategoriesFragment();
-
-        Bundle bundle = new Bundle();
-        bundle.putStringArrayList("Existing_Categories", new ArrayList<>(media.getCategories()));
-        Log.d("iwantactivity", "before "+media.getCategories().size());
-        newFragment.setArguments(bundle);
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.mediaDetailFrameLayout, newFragment);
+        final Fragment uploadCategoriesFragment = new UploadCategoriesFragment();
+        final Bundle bundle = new Bundle();
+        bundle.putParcelable("Existing_Categories", media);
+        uploadCategoriesFragment.setArguments(bundle);
+        final FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.mediaDetailFrameLayout, uploadCategoriesFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -885,8 +883,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         displayHideCategorySearch();
     }
 
-    public void updateCategories(List<String> selectedCategories) {
-        compositeDisposable.add(categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories, this)
+    public void updateCategories(final List<String> selectedCategories) {
+        compositeDisposable.add(categoryEditHelper.makeCategoryEdit(getContext(), media,
+            selectedCategories)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(s -> {

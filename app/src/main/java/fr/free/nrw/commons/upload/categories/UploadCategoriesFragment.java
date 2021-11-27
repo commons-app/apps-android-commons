@@ -1,9 +1,10 @@
 package fr.free.nrw.commons.upload.categories;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +25,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.upload.UploadActivity;
@@ -63,7 +65,14 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     CategoriesContract.UserActionListener presenter;
     private UploadCategoryAdapter adapter;
     private Disposable subscribe;
-    private ArrayList existingCategories;
+    /**
+     * media, passed from MediaFragment
+     */
+    private Media media;
+    /**
+     * Shows and dismisses the ProgressBar
+     */
+    ProgressDialog progressDialog;
 
     @Nullable
     @Override
@@ -78,13 +87,14 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         ButterKnife.bind(this, view);
 
         Bundle bundle = getArguments();
-        existingCategories = bundle.getStringArrayList("Existing_Categories");
-        Log.d("iwantactivity", "after "+existingCategories.size());
+        if (bundle != null) {
+            media = bundle.getParcelable("Existing_Categories");
+        }
         init();
     }
 
     private void init() {
-        if(existingCategories.size() == 0) {
+        if(media == null) {
             tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
                 callback.getTotalNumberOfSteps(), getString(R.string.categories_activity_title)));
         } else {
@@ -133,10 +143,17 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     }
 
     private void initRecyclerView() {
-        adapter = new UploadCategoryAdapter(categoryItem -> {
-            presenter.onCategoryItemClicked(categoryItem);
-            return Unit.INSTANCE;
-        }, existingCategories);
+        if (media == null) {
+            adapter = new UploadCategoryAdapter(categoryItem -> {
+                presenter.onCategoryItemClicked(categoryItem);
+                return Unit.INSTANCE;
+            }, new ArrayList<>());
+        } else {
+            adapter = new UploadCategoryAdapter(categoryItem -> {
+                presenter.onCategoryItemClicked(categoryItem);
+                return Unit.INSTANCE;
+            }, media.getCategories());
+        }
         rvCategories.setLayoutManager(new LinearLayoutManager(getContext()));
         rvCategories.setAdapter(adapter);
     }
@@ -179,6 +196,11 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     }
 
     @Override
+    public void goBackToPreviousScreen() {
+        getFragmentManager().popBackStack();
+    }
+
+    @Override
     public void showNoCategorySelected() {
         DialogUtil.showAlertDialog(getActivity(),
                 getString(R.string.no_categories_selected),
@@ -192,12 +214,20 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
-        presenter.verifyCategories();
+        if (media != null) {
+            presenter.updateCategories(media);
+        } else {
+            presenter.verifyCategories();
+        }
     }
 
     @OnClick(R.id.btn_previous)
     public void onPreviousButtonClicked() {
-        callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+        if (media != null) {
+            getFragmentManager().popBackStack();
+        } else {
+            callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+        }
     }
 
     @Override
@@ -209,14 +239,52 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         }
     }
 
+    /**
+     * Hides the action bar while opening editing fragment
+     */
     @Override
     public void onResume() {
         super.onResume();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        if (media != null) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        }
     }
+
+    /**
+     * Shows the action bar while closing editing fragment
+     */
     @Override
     public void onStop() {
         super.onStop();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+        if (media != null) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        }
+    }
+
+    /**
+     * Shows the progress dialog
+     */
+    @Override
+    public void showProgressDialog() {
+        progressDialog = new ProgressDialog(requireContext());
+        progressDialog.setMessage(getString(R.string.please_wait));
+        progressDialog.show();
+    }
+
+    /**
+     * Hides the progress dialog
+     */
+    @Override
+    public void dismissProgressDialog() {
+        progressDialog.dismiss();
+    }
+
+    /**
+     * Gets context
+     * @return
+     */
+    @Override
+    public Context getFragmentContext() {
+        return requireContext();
     }
 }

@@ -44,7 +44,7 @@ public class CategoryEditHelper {
      * @param categories
      * @return
      */
-    public Single<Boolean> makeCategoryEdit(Context context, Media media, List<String> categories, Callback callback) {
+    public Single<Boolean> makeCategoryEdit(Context context, Media media, List<String> categories) {
         viewUtil.showShortToast(context, context.getString(R.string.category_edit_helper_make_edit_toast));
         return addCategory(media, categories)
             .flatMapSingle(result -> Single.just(showCategoryEditNotification(context, media, result)))

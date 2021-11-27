@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.upload.categories;
 
+import android.content.Context;
+import fr.free.nrw.commons.Media;
 import java.util.List;
 
 import fr.free.nrw.commons.BasePresenter;
@@ -22,7 +24,15 @@ public interface CategoriesContract {
 
         void goToNextScreen();
 
+        void goBackToPreviousScreen();
+
         void showNoCategorySelected();
+
+        void showProgressDialog();
+
+        void dismissProgressDialog();
+
+        Context getFragmentContext();
 
     }
 
@@ -31,6 +41,8 @@ public interface CategoriesContract {
         void searchForCategories(String query);
 
         void verifyCategories();
+
+        void updateCategories(Media media);
 
         void onCategoryItemClicked(CategoryItem categoryItem);
     }

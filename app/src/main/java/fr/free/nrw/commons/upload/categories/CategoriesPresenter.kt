@@ -1,13 +1,17 @@
 package fr.free.nrw.commons.upload.categories
 
 import android.text.TextUtils
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.category.CategoryEditHelper
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.proxy
 import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
 import javax.inject.Inject
@@ -28,6 +32,11 @@ class CategoriesPresenter @Inject constructor(
         private val DUMMY: CategoriesContract.View = proxy()
     }
 
+    /**
+     * Helper class for editing categories
+     */
+    @Inject
+    lateinit var categoryEditHelper: CategoryEditHelper
     var view = DUMMY
     private val compositeDisposable = CompositeDisposable()
     private val searchTerms = PublishSubject.create<String>()
@@ -95,6 +104,39 @@ class CategoriesPresenter @Inject constructor(
         if (selectedCategories.isNotEmpty()) {
             repository.setSelectedCategories(selectedCategories.map { it.name })
             view.goToNextScreen()
+        } else {
+            view.showNoCategorySelected()
+        }
+    }
+
+    /**
+     * Take the categories selected and merge them with old categories and update those in the
+     * commons server
+     *
+     * @param media Media of edited categories
+     */
+    override fun updateCategories(media: Media) {
+        view.showProgressDialog()
+        val selectedCategories = repository.selectedCategories.map { it.name }
+        if (selectedCategories.isNotEmpty()) {
+            val allCategories = media.categories?.plus(selectedCategories)
+            compositeDisposable.add(categoryEditHelper.makeCategoryEdit(
+                view.fragmentContext,
+                media,
+                allCategories
+            )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    media.categories = allCategories
+                    view.goBackToPreviousScreen()
+                    view.dismissProgressDialog()
+                }) {
+                    Timber.e(
+                        "Failed to update categories"
+                    )
+                }
+            )
         } else {
             view.showNoCategorySelected()
         }
