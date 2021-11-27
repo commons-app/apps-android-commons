@@ -15,7 +15,7 @@ import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.Label
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.Sitelinks
-import junit.framework.Assert.*
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -91,8 +91,8 @@ class BookMarkLocationDaoTest {
                 assertEquals("placeName", it.name)
                 assertEquals(Label.FOREST, it.label)
                 assertEquals("placeDescription", it.longDescription)
-                assertEquals(40.0, it.location.latitude)
-                assertEquals(51.4, it.location.longitude)
+                assertEquals(40.0, it.location.latitude, 0.001)
+                assertEquals(51.4, it.location.longitude, 0.001)
                 assertEquals("placeCategory", it.category)
                 assertEquals(builder.build().wikipediaLink, it.siteLinks.wikipediaLink)
                 assertEquals(builder.build().wikidataLink, it.siteLinks.wikidataLink)
@@ -157,8 +157,8 @@ class BookMarkLocationDaoTest {
             assertEquals(examplePlaceBookmark.longDescription, cv.getAsString(COLUMN_DESCRIPTION))
             assertEquals(examplePlaceBookmark.label.text, cv.getAsString(COLUMN_LABEL_TEXT))
             assertEquals(examplePlaceBookmark.category, cv.getAsString(COLUMN_CATEGORY))
-            assertEquals(examplePlaceBookmark.location.latitude, cv.getAsDouble(COLUMN_LAT))
-            assertEquals(examplePlaceBookmark.location.longitude, cv.getAsDouble(COLUMN_LONG))
+            assertEquals(examplePlaceBookmark.location.latitude, cv.getAsDouble(COLUMN_LAT), 0.001)
+            assertEquals(examplePlaceBookmark.location.longitude, cv.getAsDouble(COLUMN_LONG), 0.001)
             assertEquals(examplePlaceBookmark.siteLinks.wikipediaLink.toString(), cv.getAsString(COLUMN_WIKIPEDIA_LINK))
             assertEquals(examplePlaceBookmark.siteLinks.wikidataLink.toString(), cv.getAsString(COLUMN_WIKIDATA_LINK))
             assertEquals(examplePlaceBookmark.siteLinks.commonsLink.toString(), cv.getAsString(COLUMN_COMMONS_LINK))

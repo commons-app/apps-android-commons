@@ -32,6 +32,7 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.DownloadUtils;
 import fr.free.nrw.commons.utils.ImageUtils;
@@ -201,6 +202,11 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 // Set avatar
                 setAvatar(m);
                 return true;
+            case R.id.menu_view_user_page:
+                if (m != null && m.getUser() != null) {
+                    ProfileActivity.startYourself(getActivity(), m.getUser(),
+                        !Objects.equals(sessionManager.getUserName(), m.getUser()));
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -258,7 +264,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_bookmark_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(true).setVisible(true);
-
+                    if (m.getUser() != null) {
+                        menu.findItem(R.id.menu_view_user_page).setEnabled(true).setVisible(true);
+                    }
                     // Initialize bookmark object
                     bookmark = new Bookmark(
                             m.getFilename(),

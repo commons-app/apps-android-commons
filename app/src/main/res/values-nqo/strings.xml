@@ -167,6 +167,7 @@
   <string name="navigation_item_feedback">ߞߙߐ߬ߛߌ߬ߕߊ</string>
   <string name="navigation_item_logout">ߌ ߜߊ߲߬ߞߎ߲߬ߣߍ߲ ߓߐ߫</string>
   <string name="navigation_item_info">ߟߞߊ߬ߙߊ߲߬ߠߌ߲</string>
+  <string name="navigation_item_notification">ߖߊ߲߬ߓߌ߬ߟߊ߬ߟߌ ߟߎ߬</string>
   <string name="no_description_found">ߞߊ߲߬ߛߓߍ߬ߟߌ߬ ߡߊ߫ ߛߐ߬ߘߐ߲߬</string>
   <string name="nearby_info_menu_commons_article">ߞߐߡߐ߲ ߞߐߕߐ߯ ߞߐߜߍ</string>
   <string name="nearby_info_menu_wikidata_article">ߥߞߌߘߕߊ ߞߎߡߘߊ</string>
@@ -177,6 +178,7 @@
   <string name="upload_problem_different_geolocation">ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߕߊ߬ߣߍ߲߬ ߦߋ߫ ߦߙߐ߫ ߜߘߍ߫ ߟߋ߬</string>
   <string name="upload_problem_fbmd">ߌ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߋ߬ ߟߊߦߍ߬ߟߍ߫ ߖߊ߰ߣߌ߲߫ ߌ ߖߍ߬ߘߍ ߞߊ߬ ߡߍ߲ ߠߎ߬ ߕߊ߬. ߒ߬ߞߊ߬ ߌ ߞߊ߫ ߖߌ߬ߦߊ߬ߓߍ߫ ߟߊߦߍ߬ߟߍ߫ ߡߎ߰ߡߍ߫ ߌ ߞߊ߬ ߡߍ߲ ߠߎ߬ ߕߊ߬ ߡߐ߱ ߟߎ߬ ߟߊ߫ ߝߋߛߑߓߎߞ ߞߊ߲߬.</string>
   <string name="upload_problem_do_you_continue">ߌ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߠߊߦߟߍ߬ ߡߎߣߎ߲߬؟</string>
+  <string name="upload_connection_error_alert_title">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߝߎ߬ߕߎ߲߬ߕߌ</string>
   <string name="upload_problem_image">ߝߙߋߞߋ ߓߘߊ߫ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߊ߫</string>
   <string name="internet_downloaded">ߖߊ߰ߣߌ߲߬ ߌ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ߬ ߟߎ߫ ߟߋ߬ ߟߊߦߟߍ߬ ߌ ߖߍ߬ߘߍ ߞߊ߬ ߡߍ߲ ߠߎ߬ ߕߊ߬. ߞߏ߬ߣߌ߲߬ ߌ ߞߊߣߊ߬ ߖߌ߬ߦߊ߬ߓߍ߬ ߟߊߦߟߍ߬ ߌ ߣߊ߬ ߡߍ߲ ߠߊߖߌ߰ ߟߴߌ ߞߎ߲߬ ߓߟߐߟߐ ߟߊ߫.</string>
   <string name="use_external_storage">ߊ߬ ߟߊߞߎ߲߬ߘߎ߫ ߟߥߊ߬ߟߌ߬ߟߊ߲ ߘߐ߫ ߜߍ߲ߜߍߘߍ߲߫</string>
@@ -195,6 +197,7 @@
   <string name="copy_wikicode">ߥߞߌߛߓߍߟߌ ߓߊߓߌ߬ߟߊ߬ ߛߓߍߝߌߘߊ-ߜߍ߬ߙߍ߲߬ߘߍ߬ߣߍ߲ ߘߐ߫</string>
   <string name="wikicode_copied">ߥߞߌߛߓߍߟߌ ߓߘߊ߫ ߓߊ߲߫ ߓߊߓߌ߬ߟߊ߬ ߟߊ߫ ߛߓߍߝߌߘߊ-ߜߍ߬ߙߍ߲߬ߘߍ߬ߣߍ߲ ߘߐ߫</string>
   <string name="nearby_location_not_available">ߕߙߐ߬ߝߍ߬ߟߊ ߓߊ߯ߙߊߣߍ߲߫ ߕߍ߫ ߞߍ߫ ߟߴߊ߬ ߢߊߓߘߍ ߡߊ߬߸ ߘߌ߲߬ߞߌߙߊ ߕߴߦߋ߲߬.</string>
+  <string name="location_permission_rationale_nearby">ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ ߢߌ߬ߣߌ߲߬ߞߊ߬ߣߍ߲߫ ߦߋ߫ ߞߊ߬ ߛߌ߬ߢߐ߲߰ߦߊ߫ ߛߙߍߘߍ ߟߎ߬ ߟߊߓߊ߯ߙߊ߫</string>
   <string name="nearby_directions">ߞߎ߲߬ߕߋߟߋ߲</string>
   <string name="nearby_wikidata">ߥߞߌߘߕߊ</string>
   <string name="nearby_wikipedia">ߥߞߌߔߋߘߌߦߊ߫</string>
@@ -277,14 +280,23 @@
   <string name="images_reverted_explanation">ߌ ߓߘߊ߫ ߖߌ߬ߦߊ߬ߓߍ ߗߡߍ߬ߘߐ߬ߦߊ ߡߍ߲ ߠߊߦߟߍ߬ ߞߐ߲ߡߐ߲ߛ ߞߊ߲߬߸ ߏ߬ ߡߊ߫ ߖߏ߰ߛߌ߫.</string>
   <string name="images_used_explanation">ߌ ߓߘߊ߫ ߖߌ߬ߦߊ߬ߓߍ ߡߍ߲ ߠߎ߬ ߟߊߦߟߍ߬ ߞߐ߲ߡߐ߲ߛ ߞߊ߲߬ ߣߴߊ߬ߟߎ߬ ߓߘߊ߫ ߟߊߓߊ߯ߙߊ߫ ߥߞߌߔߋߘߌߦߊ߫ ߞߎߡߘߊ ߟߎ߬ ߟߊ߫.</string>
   <string name="error_occurred">ߝߎ߬ߕߎ߲߬ߕߌ ߓߘߊ߫ ߓߌ߬ߟߵߊ߬ ߘߐ߫߹</string>
+  <string name="notifications_channel_name_all">ߞߐߡߐ߲ߛ ߖߊ߲߬ߓߌ߬ߟߊ߬ߟߌ</string>
+  <string name="preference_author_name_toggle">ߞߐߡߐ߲ߛ ߛߓߍߦߟߊ߫ ߕߐ߮ ߟߊߓߊ߯ߙߊ߫</string>
+  <string name="preference_author_name_toggle_summary">ߘߊ߬ߙߌ߬ߒߠߊ߫ ߛߓߍߦߟߊ߫ ߕߐ߮ ߟߊߓߊ߯ߙߊ߫߸ ߣߴߊ߬ ߘߌ߫ ߓߍ߲߬ ߊ߬ ߞߴߌ ߟߊ߫ ߟߊ߬ߓߊ߰ߙߊ߬ߟߌ߬ ߕߐ߮ ߘߌ߫ ߞߋߟߋ߲ߘߌ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߎ߬ ߟߊߦߟߍ߬ ߕߎߡߊ ߟߊ߫</string>
+  <string name="preference_author_name">ߘߊ߬ߙߌ߬ߒߠߊ߫ ߛߓߍߦߊߟߌ߫ ߕߐ߮</string>
   <string name="contributions_fragment">ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲ ߠߎ߬</string>
   <string name="nearby_fragment">ߛߌ߰ߢߐ߲߮</string>
+  <string name="notifications">ߖߊ߲߬ߓߌ߬ߟߊ߬ߟߌ ߟߎ߬</string>
+  <string name="read_notifications">ߖߊ߲߬ߓߌ߬ߟߊ߬ߟߌ߫ (ߞߊ߬ߙߊ߲߬ߣߍ߲) ߠߎ߬</string>
+  <string name="display_nearby_notification">ߛߌ߰ߢߐ߲߰ߦߊ ߖߊ߲߬ߓߌ߬ߟߊ߬ߟߌ ߟߊߓߊ߯ߙߊ߫</string>
+  <string name="display_nearby_notification_summary">ߞߙߍ߬ߝߍ߬ ߘߌ߲ߞߌߙߊ ߡߍ߲ ߠߎ߬ ߡߊ߬ߞߏ ߓߊ߯ ߞߍ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߎ߬ ߟߊ߫߸ ߏ߬ ߟߎ߫ ߦߌ߬ߘߊ߬ ߖߊ߲߬ߓߌ߬ߟߊ߬ߟߌ ߘߐ߫ ߟߥߊ߬ߟߌ߬ߟߊ߲-ߠߊ߫</string>
   <string name="list_sheet">ߛߙߍߘߍ</string>
   <string name="next">ߢߍߕߊ</string>
   <string name="previous">ߟߊ߬ߕߎ߲߰ߠߊ ߟߎ߬</string>
   <string name="submit">ߊ߬ ߞߘߊߡߊ߫</string>
   <string name="upload_title_duplicate" fuzzy="true">ߞߐߕߐ߮ ߣߌ߲߬ ߕߐ߮ ߦߋ߫ ߦߋ߲߬ %1$s ߞߘߐ߬ߡߊ߲߫. ߌ ߦߴߊ߬ ߝߍ߬ ߞߵߊ߬ ߘߊߓߊ߲߫ ߓߊ߬؟</string>
   <string name="title_page_bookmarks_pictures">ߖߌ߬ߦߊ߬ߓߍ ߟߎ߬</string>
+  <string name="title_page_bookmarks_locations">ߘߌ߲߬ߞߌߙߊ ߟߎ߬</string>
   <string name="deletion_reason_uploaded_by_mistake">ߒ ߣߵߊ߬ ߟߊߦߟߍ߬ ߟߊ߫ ߢߌ߬ߣߊ߬ ߓߟߏ ߟߋ߬ ߡߊ߬</string>
   <string name="deletion_reason_publicly_visible">ߒ ߕߎ߲߬ ߡߴߊ߬ ߟߐ߲߫ ߞߴߊ߬ ߘߌ߫ ߞߍ߫ ߟߊ߬ߥߊ߲߬ߞߊ߬ߟߌ߬ ߦߋߕߊ߫ ߘߌ߫</string>
   <string name="deletion_reason_no_longer_want_public">ߒ ߓߘߊ߫ ߒ ߡߙߌߦߊ ߡߊߝߊ߬ߟߋ߲߬߸ ߒ ߕߴߊ߬ ߝߵߊ߬ ߦߋ߫ ߜߍߘߐ߫ ߦߋߕߊ߫ ߘߴߏ߬ ߞߐ߫ ߡߎ߰ߡߍ߫</string>
@@ -293,6 +305,9 @@
   <string name="no_uploads">ߌ ߣߌ߫ ߛߣߍ߫ ߞߐߡߐ߲ߛ ߞߊ߲߬߹ \nߌ ߟߊ߫ ߡߋߘߌߦߊ߫ ߝߟߐ ߟߊߦߟߍ߬ ߝߙߊ߬ߟߌ ߞߎ߬ߘߎ ߛߐ߲߬ߞߌ߲ ߠߊ߫.</string>
   <string name="no_categories_selected">ߦߌߟߡߊ߫ ߡߊ߫ ߓߊߕߐ߬ߡߐ߲߬</string>
   <string name="no_categories_selected_warning_desc">ߦߌߟߡߊ߫ ߕߍ߫ ߖߌ߬ߦߊ߬ߓߍ ߡߍ߲ ߠߊ߫߸ ߏ߬ ߟߊߓߊ߯ߙߊ ߜߟߍ߬ߡߊ߲߫. ߌ ߦߴߊ߬ ߝߍ߬ ߞߵߊ߬ ߞߘߊߡߊ߫ ߓߊ߬ ߞߵߊ߬ ߕߘߍ߬ ߌ ߡߊ߫ ߦߌߟߡߊ ߘߏ߫ ߓߊߕߐ߬ߡߐ߲߬؟</string>
+  <string name="back_button_warning">ߟߊ߬ߦߟߍ߬ߟߌ ߘߊߓߌ߬ߟߊ߬</string>
+  <string name="back_button_warning_desc">ߞߐߛߊߦߌ߲ߠߌ߲ ߞߎ߬ߘߎ ߟߊߓߊ߯ߙߊ ߘߴߌ ߟߊ߫ ߟߊ߬ߦߟߍ߬ߟߌ ߘߊߓߌ߬ߟߊ߬ ߏ߬ ߘߏ߲߬ ߘߴߌ ߓߣߐ߬ ߌ ߟߊ߫ ߖߊ߲߬ߝߊ߬ߣߍ߲ ߠߎ߬ ߘߐ߫</string>
+  <string name="back_button_continue">ߟߊ߬ߦߟߍ߬ߟߌ ߘߊߓߊ߲߫</string>
   <string name="search_this_area">ߘߌ߲߬ߞߌߙߊ ߣߌ߲߬ ߢߌߣߌ߲߫</string>
   <string name="nearby_card_permission_title">ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ ߞߊ߬ߣߌ߲߬ߣߍ߲</string>
   <string name="nearby_card_permission_explanation">ߊ߬ ߞߊߘߴߌ ߦߋ߫ ߓߊ߬ ߞߊ߬ ߞߵߌ ߘߌ߲߬ߞߌߙߊ ߢߌ߲߬ ߠߊߓߊ߯ߙߊ߫ ߌ ߡߊߛߎߘߎ߲ߧߊ߫ ߦߙߐ ߘߌ߫ ߡߍ߲ ߡߊ߬ߞߏ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߊ߫؟</string>
@@ -321,11 +336,14 @@
   <string name="review_no_category">ߐ߲߬ߤߐ߲߯߹ ߣߌ߲߬ ߝߊ߲߭ ߡߊ߫ ߦߌߟߡߊߦߊ߫ ߟߋ߬߹</string>
   <string name="review_category_explanation">ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߦߋ߫ %1$s ߦߌߟߡߊ ߟߎ߬ ߞߘߐ߫.</string>
   <string name="review_c_violation_report_question">ߊ߬ ߦߋ߫ ߓߊߦߟߍߡߊ߲ߠߌ߲ ߤߊߞߍ ߞߎ߬ߙߎ߲߬ߘߎ ߕߌߢߍ ߟߋ߬ ߘߌ߫ ߓߊߏ߬ ߊ߬ ߦߋ߫</string>
-  <string name="review_thanks_yes_button_text" fuzzy="true">ߐ߲߬ߐ߲ߐ߲߫߸ ߡߎ߲߬ߠߊ߫ ߍ߲߬ߍ߲߫</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">ߖߌ߬ߦߊ߬ߓߍ ߣߊ߬ߕߐ</string>
+  <string name="review_thanks_yes_button_text">ߖߌ߬ߦߊ߬ߓߍ ߣߊ߬ߕߐ</string>
+  <string name="review_thanks_no_button_text">ߐ߲߬ߐ߲߬ߐ߲߫߸ ߡߎ߲߬ߠߊ߫ ߍ߲߬ߍ߲߫</string>
+  <string name="skip_image_explanation">ߣߴߌ ߞߊ߬ ߞߎ߬ߘߎ ߣߌ߲߬ ߛߐ߲߬ߞߌ߲߫߸ ߊ߬ ߘߌ߫ ߖߌ߬ߦߊ߬ߓߍ߫ ߟߊߦߟߍ߬ߣߍ߲߫ ߞߎߘߊ ߘߏ߫ ߘߴߌ ߡߊ߬ ߞߊ߬ ߝߘߊ߫ ߥߞߌߡߋߘߌߦߊ߫ ߞߐߡߐ߲ߛ ߟߊ߫</string>
   <string name="no_image">ߖߌ߬ߦߊ߬ߓߍ߬ ߡߊ߫ ߟߊߓߊ߯ߙߊ߫</string>
   <string name="no_image_reverted">ߖߌ߬ߦߊ߬ߓߍ߫ ߡߐ߬ߟߐ߲߬ߡߊ߫ ߕߴߦߋ߲߬</string>
   <string name="no_image_uploaded">ߖߌ߬ߦߊ߬ߓߍ߫ ߡߊ߫ ߟߊߦߟߍ߬</string>
+  <string name="no_notification">ߖߊ߲߬ߓߌ߬ߟߊ߬ߟߌ߫ ߘߐߞߊ߬ߙߊ߲߬ߓߊߟߌ ߝߋ߲߫ ߕߴߌ ߓߟߏ߫</string>
+  <string name="no_read_notification">ߖߊ߲߬ߓߌ߬ߟߊ߬ߟߌ߫ ߘߐߞߊ߬ߙߊ߲߬ߣߍ߲߫ ߛߌ߫ ߕߴߌ ߓߟߏ߫</string>
   <string name="menu_option_read">ߘߐ߬ߞߊ߬ߙߊ߲߬ߣߍ߲ ߠߎ߬ ߦߋ߫</string>
   <string name="menu_option_unread">ߘߐ߬ߞߊ߬ߙߊ߲߬ߓߊߟߌ ߟߎ߬ ߦߋ߫</string>
   <string name="error_occurred_in_picking_images">ߝߎ߬ߕߎ߲߬ߕߌ ߓߌ߬ߟߊ߬ߣߍ߲߫ ߊ߬ ߘߐ߫ ߞߵߌ ߕߏ߫ ߖߌ߬ߦߊ߬ߓߍ ߓߊߕߐ߬ߡߐ߲ ߞߊ߲߬.</string>
@@ -363,7 +381,8 @@
   <string name="category_edit_helper_edit_message_else">ߦߌߟߡߊ ߟߎ߬ ߕߴߛߋ߫ ߝߙߊ߬ ߟߊ߫.</string>
   <string name="category_edit_button_text">ߦߌߟߡߊ ߟߎ߬ ߟߏ߲ߘߐߦߊߟߌ</string>
   <string name="share_image_via">ߖߌ߬ߦߊ߬ߓߍ ߟߊߖߍ߲ߛߍ߲߫ ߞߊߕߙߍ߬</string>
-  <string name="no_achievements_yet">ߌ ߡߊ߫ ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲ ߛߌ߫ ߞߍ߫ ߡߎߣߎ߲߬</string>
+  <string name="you_have_no_achievements_yet">ߌ ߡߊ߫ ߓߟߏߡߊߜߍ߲߫ ߛߌ߫ ߛߌ߲ߘߌ߫ ߡߎߣߎ߲߬</string>
+  <string name="no_achievements_yet" fuzzy="true">ߌ ߡߊ߫ ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲ ߛߌ߫ ߞߍ߫ ߡߎߣߎ߲߬</string>
   <string name="account_created">ߖߊ߬ߕߋ߬ߘߊ ߓߘߊ߫ ߛߌ߲ߘߌ߫߹</string>
   <string name="text_copy">ߛߓߍߟߌ ߓߘߊ߫ ߓߊߓߌ߬ߟߊ߬ ߛߓߍߝߌߘߊ߫-ߜߍ߬ߙߍ߲߬ߘߍ߬ߣߍ߲ ߞߊ߲߬.</string>
   <string name="some_error">ߝߎ߬ߕߎ߲߬ߕߌ ߘߏ߫ ߕߘߍ߬ ߦߋ߫ ߦߋ߲߬߹</string>
@@ -413,7 +432,22 @@
   <string name="statistics_quality">ߖߌ߬ߦߊ߬ߓߍ ߛߎ߯ߦߊ</string>
   <string name="pausing_upload">ߟߊ߬ߦߟߍ߬ߟߌ ߟߊߟߐ߭ ߦߴߌ ߘߐ߫...</string>
   <string name="media_detail_step_title">ߡߋߘߌߦߊ ߝߊߙߊ߲ߝߊ߯ߛߌ</string>
+  <string name="app_ui_language">ߟߥߊ߬ߟߌ߬ߟߊ߲ ߟߊߓߊ߯ߙߊߟߌ ߞߊ߲ ߠߎ߬ ߢߐ߲߯ߕߍߞߣߍ</string>
+  <string name="read_help_link">ߘߏ߫ ߜߘߍ߫ ߟߎ߫ ߘߐߞߊ߬ߙߊ߲߬</string>
+  <string name="media_detail_in_all_languages">ߞߊ߲ ߠߎ߬ ߓߍ߯ ߘߐ߫</string>
+  <string name="choose_a_location">ߘߌ߲߬ߞߌߙߊ ߘߏ߫ ߛߎߥߊ߲ߘߌ߫</string>
+  <string name="image_location">ߖߌ߬ߦߊ߬ߓߍ ߘߌ߲߬ߞߌߙߊ</string>
+  <string name="check_whether_location_is_correct">ߊ߬ ߡߊߝߟߍ߫ ߓߊ߫ ߣߌ߫ ߘߌ߲߬ߞߌߙߊ ߓߍ߲߬ߣߍ߲߫ ߞߍ߫ ߘߊ߫</string>
   <string name="custom_selector_empty_text">ߖߌ߬ߦߊ߬ߓߍ߫ ߕߴߦߋ߲߬</string>
   <string name="back">ߌ ߞߐߛߊ߬ߦߌ߬</string>
   <string name="custom_selector_already_uploaded_image_text">ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߓߘߊ߫ ߓߊ߲߫ ߠߊߦߟߍ߬ ߟߊ߫ ߞߐߡߐ߲ߛ ߞߣߐ߫ ߞߘߐ߬ߡߊ߲߫</string>
+  <string name="wlm_upload_info">ߖߌ߬ߦߊߓߍ ߣߌ߲߬ ߓߍߣߊ߬ ߟߊߕߘߍ߬ ߥߞߌ ߝߙߎߕߎ ߞߊ߬ߣߌ߲߬ߓߊ߮ ߂߀߂߁ ߜߊ߬ߛߊ ߘߐ߫</string>
+  <string name="display_monuments">ߝߙߎߕߎ ߟߎ߬ ߟߊߓߊ߯ߙߊ߫</string>
+  <string name="wlm_month_message">ߝߙߎߕߎ ߞߊ߬ߣߌ߲߬ߓߊ߯ ߥߞߌ ߟߎ߬ ߞߊߙߏ ߟߋ߬ ߦߋ߫ ߣߌ߲߬߹</string>
+  <string name="learn_more">ߘߏߜߘߍ߫ ߟߎ߫ ߘߐߞߊ߬ߙߊ߲߬</string>
+  <string name="wlm_campaign_description">ߥߞߌ ߝߙߎߕߎ ߞߊ߬ߣߌ߲߬ߓߊ߮ ߟߎ߬ ߦߋ߫ ߡߊ߲߬ߕߏ߲߬ߕߍ߬ߦߊ ߖߌ߬ߦߊ߬ߓߍ ߛߊ߲ߞߊߢߐ߲߯ߦߊ ߟߋ߬ ߘߌ߫ ߡߍ߲ ߛߌ߲߬ߝߏ߲߬ߧߊ߬ߣߍ߲߫ ߦߋ߫ ߥߞߌߡߋߘߌߦߊ ߓߟߏ߫</string>
+  <string name="need_permission">ߡߊ߬ߞߏ ߦߋ߫ ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ ߟߊ߫</string>
+  <string name="read_phone_state_permission_message">ߞߙߍ߬ߝߍ߬ ߔߊߔߘߊ (ߡߊߔߛ) ߡߊ߬ߞߏ ߦߋ߫ ߜߋߟߋ߲ߜߋߟߋ߲ ߞߊ߬ߝߏ ߘߐߞߊ߬ߙߊ߲ ߠߊ߫ ߞߊ߬ ߛߋ߫ ߓߊ߯ߙߊ߫ ߟߴߊ߬ ߢߊߓߘߍ ߡߊ߬</string>
+  <string name="contributions_of_user">ߟߊ߬ߓߊ߰ߙߊ߬ߟߊ %s: ߟߊ߫ ߓߟߏߡߊߜߍ߲</string>
+  <string name="achievements_of_user">ߟߊ߬ߓߊ߰ߙߊ߬ߟߊ %s: ߟߊ߫ ߞߎ߲߬ߝߊ߰ߟߌ ߟߎ߬</string>
 </resources>
