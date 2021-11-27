@@ -1,35 +1,33 @@
 package fr.free.nrw.commons.upload.categories
 
-import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
+import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryItem
-import kotlinx.android.synthetic.main.layout_upload_categories_item.*
+import fr.free.nrw.commons.databinding.LayoutUploadCategoriesItemBinding
 
-fun uploadCategoryDelegate(
-    onCategoryClicked: (CategoryItem) -> Unit
-) =
-    adapterDelegateLayoutContainer<CategoryItem, CategoryItem>(
-        R.layout.layout_upload_categories_item) {
-        containerView.setOnClickListener {
+fun uploadCategoryDelegate(onCategoryClicked: (CategoryItem) -> Unit) =
+    adapterDelegateViewBinding<CategoryItem, CategoryItem, LayoutUploadCategoriesItemBinding>({ layoutInflater, root ->
+        LayoutUploadCategoriesItemBinding.inflate(layoutInflater, root, false)
+    }) {
+        binding.root.setOnClickListener {
             item.isSelected = !item.isSelected
-            upload_category_checkbox.isChecked = item.isSelected
+            binding.uploadCategoryCheckbox.isChecked = item.isSelected
             onCategoryClicked(item)
         }
 
         bind {
-            upload_category_checkbox.isChecked = item.isSelected
-            category_label.text = item.name
-
+            binding.uploadCategoryCheckbox.isChecked = item.isSelected
+            binding.uploadCategoryCheckbox.text = item.name
             if(item.thumbnail != "null") {
-                category_image.setImageURI(item.thumbnail)
+                binding.categoryImage.setImageURI(item.thumbnail)
             } else {
-                category_image.setActualImageResource(R.drawable.commons)
+                binding.categoryImage.setActualImageResource(R.drawable.commons)
             }
 
             if(item.description != "null") {
-                category_description.text = item.description
+                binding.categoryDescription.text = item.description
             } else {
-                category_description.text = ""
+                binding.categoryDescription.text = ""
             }
         }
     }
