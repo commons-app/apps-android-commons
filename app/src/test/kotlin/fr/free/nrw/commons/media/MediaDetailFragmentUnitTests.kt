@@ -19,7 +19,6 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter
 import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng

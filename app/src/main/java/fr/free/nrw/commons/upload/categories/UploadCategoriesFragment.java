@@ -287,4 +287,6 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     public Context getFragmentContext() {
         return requireContext();
     }
+
+    
 }

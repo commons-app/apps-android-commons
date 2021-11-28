@@ -123,7 +123,6 @@ class WikidataItemDetailsActivityUnitTests {
     @Throws(Exception::class)
     fun testOnBackPressedCaseReturn() {
         `when`(supportFragmentManager.backStackEntryCount).thenReturn(1)
-        `when`(mediaDetailPagerFragment.backButtonClicked()).thenReturn(true)
         activity.onBackPressed()
     }
 
