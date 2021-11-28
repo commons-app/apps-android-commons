@@ -10,7 +10,6 @@ import android.webkit.WebView
 import android.widget.*
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.recyclerview.widget.RecyclerView
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.view.SimpleDraweeView
@@ -79,9 +78,6 @@ class MediaDetailFragmentUnitTests {
     private lateinit var genericDraweeHierarchy: GenericDraweeHierarchy
 
     @Mock
-    private lateinit var button: Button
-
-    @Mock
     private lateinit var detailProvider: MediaDetailPagerFragment.MediaDetailProvider
 
     @Mock
@@ -95,9 +91,6 @@ class MediaDetailFragmentUnitTests {
 
     @Mock
     private lateinit var listView: ListView
-
-    @Mock
-    private lateinit var searchView: SearchView
 
     @Before
     fun setUp() {
@@ -145,11 +138,8 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "depictsLayout", linearLayout)
         Whitebox.setInternalState(fragment, "depictionContainer", linearLayout)
         Whitebox.setInternalState(fragment, "toDoLayout", linearLayout)
-        Whitebox.setInternalState(fragment, "dummyCategoryEditContainer", linearLayout)
         Whitebox.setInternalState(fragment, "showCaptionAndDescriptionContainer", linearLayout)
-        Whitebox.setInternalState(fragment, "updateCategoriesButton", button)
         Whitebox.setInternalState(fragment, "categoryContainer", linearLayout)
-        Whitebox.setInternalState(fragment, "categorySearchView", searchView)
         Whitebox.setInternalState(fragment, "mediaDiscussion", textView)
 
         `when`(simpleDraweeView.hierarchy).thenReturn(genericDraweeHierarchy)
