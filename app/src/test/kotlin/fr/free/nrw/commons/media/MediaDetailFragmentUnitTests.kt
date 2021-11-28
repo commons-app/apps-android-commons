@@ -64,9 +64,6 @@ class MediaDetailFragmentUnitTests {
     private lateinit var media: Media
 
     @Mock
-    private lateinit var categoryRecyclerView: RecyclerView
-
-    @Mock
     private lateinit var simpleDraweeView: SimpleDraweeView
 
     @Mock
@@ -130,10 +127,6 @@ class MediaDetailFragmentUnitTests {
 
         scrollView = view.findViewById(R.id.mediaDetailScrollView)
         Whitebox.setInternalState(fragment, "scrollView", scrollView)
-
-        categoryRecyclerView = view.findViewById(R.id.rv_categories)
-        Whitebox.setInternalState(fragment, "categoryRecyclerView", categoryRecyclerView)
-
         Whitebox.setInternalState(fragment, "media", media)
         Whitebox.setInternalState(fragment, "progressBar", progressBar)
         Whitebox.setInternalState(fragment, "captionsListView", listView)
