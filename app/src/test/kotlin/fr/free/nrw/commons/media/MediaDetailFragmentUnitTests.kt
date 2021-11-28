@@ -55,9 +55,6 @@ class MediaDetailFragmentUnitTests {
     private lateinit var context: Context
 
     @Mock
-    private lateinit var categoryEditSearchRecyclerViewAdapter: CategoryEditSearchRecyclerViewAdapter
-
-    @Mock
     private lateinit var savedInstanceState: Bundle
 
     @Mock
@@ -161,11 +158,6 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "categoryContainer", linearLayout)
         Whitebox.setInternalState(fragment, "categorySearchView", searchView)
         Whitebox.setInternalState(fragment, "mediaDiscussion", textView)
-        Whitebox.setInternalState(
-            fragment,
-            "categoryEditSearchRecyclerViewAdapter",
-            categoryEditSearchRecyclerViewAdapter
-        )
 
         `when`(simpleDraweeView.hierarchy).thenReturn(genericDraweeHierarchy)
         val map = HashMap<String, String>()
