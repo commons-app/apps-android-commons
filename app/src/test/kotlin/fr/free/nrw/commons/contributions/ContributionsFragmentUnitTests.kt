@@ -14,8 +14,11 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.campaigns.Campaign
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView
 import fr.free.nrw.commons.notification.Notification
 import fr.free.nrw.commons.notification.NotificationController
@@ -28,6 +31,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.*
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
@@ -88,6 +92,15 @@ class ContributionsFragmentUnitTests {
     @Mock
     private lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
 
+    @Mock
+    private lateinit var nearbyController: NearbyController
+
+    @Mock
+    private lateinit var location: LatLng
+
+    @Mock
+    private lateinit var locationManager: LocationServiceManager
+
     private lateinit var fragment: ContributionsFragment
     private lateinit var context: Context
     private lateinit var view: View
@@ -129,6 +142,8 @@ class ContributionsFragmentUnitTests {
         Whitebox.setInternalState(fragment, "notificationController", notificationController)
         Whitebox.setInternalState(fragment, "compositeDisposable", compositeDisposable)
         Whitebox.setInternalState(fragment, "okHttpJsonApiClient", okHttpJsonApiClient)
+        Whitebox.setInternalState(fragment, "nearbyController", okHttpJsonApiClient)
+        Whitebox.setInternalState(fragment, "locationManager", locationManager)
         Whitebox.setInternalState(
             fragment,
             "nearbyNotificationCardView",
@@ -231,6 +246,22 @@ class ContributionsFragmentUnitTests {
     fun testOnAttach() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onAttach(context)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnLocationChange() {
+        Mockito.`when`(locationManager.lastLocation).thenReturn(location)
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.onLocationChangedSignificantly(location)
+        verify(nearbyController).loadAttractionsFromLocation(
+            any(),
+            any(),
+            any(),
+            anyBoolean(),
+            anyBoolean(),
+            anyString()
+        )
     }
 
     @Test
