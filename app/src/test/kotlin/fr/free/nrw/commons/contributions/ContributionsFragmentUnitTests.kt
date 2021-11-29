@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.RxImmediateSchedulerRule
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.campaigns.Campaign
@@ -23,15 +24,17 @@ import fr.free.nrw.commons.nearby.NearbyNotificationCardView
 import fr.free.nrw.commons.notification.Notification
 import fr.free.nrw.commons.notification.NotificationController
 import fr.free.nrw.commons.notification.NotificationType
+import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.TestScheduler
 import org.junit.Assert
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.*
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
@@ -101,12 +104,16 @@ class ContributionsFragmentUnitTests {
     @Mock
     private lateinit var locationManager: LocationServiceManager
 
+    @Rule
+    @JvmField var testSchedulerRule = RxImmediateSchedulerRule()
+
     private lateinit var fragment: ContributionsFragment
     private lateinit var context: Context
     private lateinit var view: View
     private lateinit var activity: MainActivity
     private lateinit var nearbyNotificationCardView: NearbyNotificationCardView
     private lateinit var campaignView: CampaignView
+    private lateinit var scheduler: Scheduler
 
     @Before
     fun setUp() {
@@ -142,7 +149,7 @@ class ContributionsFragmentUnitTests {
         Whitebox.setInternalState(fragment, "notificationController", notificationController)
         Whitebox.setInternalState(fragment, "compositeDisposable", compositeDisposable)
         Whitebox.setInternalState(fragment, "okHttpJsonApiClient", okHttpJsonApiClient)
-        Whitebox.setInternalState(fragment, "nearbyController", okHttpJsonApiClient)
+        Whitebox.setInternalState(fragment, "nearbyController", nearbyController)
         Whitebox.setInternalState(fragment, "locationManager", locationManager)
         Whitebox.setInternalState(
             fragment,
@@ -150,6 +157,9 @@ class ContributionsFragmentUnitTests {
             nearbyNotificationCardView
         )
         Whitebox.setInternalState(fragment, "campaignView", campaignView)
+        scheduler = TestScheduler()
+        Whitebox.setInternalState(fragment, "ioScheduler", scheduler)
+        Whitebox.setInternalState(fragment, "mainThreadScheduler", scheduler)
     }
 
     @Test
@@ -251,13 +261,14 @@ class ContributionsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnLocationChange() {
-        Mockito.`when`(locationManager.lastLocation).thenReturn(location)
         Shadows.shadowOf(Looper.getMainLooper()).idle()
+        `when`(locationManager.lastLocation).thenReturn(location)
+        fragment.locationManager = locationManager
         fragment.onLocationChangedSignificantly(location)
         verify(nearbyController).loadAttractionsFromLocation(
             any(),
             any(),
-            any(),
+            anyBoolean(),
             anyBoolean(),
             anyBoolean(),
             anyString()

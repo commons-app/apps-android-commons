@@ -2,6 +2,8 @@ package fr.free.nrw.commons.contributions;
 
 import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_PAUSED;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 import static fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.WLM_URL;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
@@ -31,6 +33,7 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.theme.BaseActivity;
+import io.reactivex.Scheduler;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -84,6 +87,10 @@ public class ContributionsFragment
     @Inject CampaignsPresenter presenter;
     @Inject LocationServiceManager locationManager;
     @Inject NotificationController notificationController;
+    @Named(IO_THREAD)
+    Scheduler ioScheduler;
+    @Named(MAIN_THREAD)
+    Scheduler mainThreadScheduler;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -461,8 +468,8 @@ public class ContributionsFragment
         curLatLng = locationManager.getLastLocation();
         compositeDisposable.add(Observable.fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(curLatLng, curLatLng, true, false, false, null)) // thanks to boolean, it will only return closest result
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(ioScheduler)
+                .observeOn(mainThreadScheduler)
                 .subscribe(this::updateNearbyNotification,
                         throwable -> {
                             Timber.d(throwable);
