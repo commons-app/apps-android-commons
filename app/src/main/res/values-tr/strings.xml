@@ -566,7 +566,7 @@
   <string name="resume">devam et</string>
   <string name="paused">Durduruldu</string>
   <string name="more">Daha fazla</string>
-  <string name="favorites">Favoriler</string>
+  <string name="bookmarks">Favoriler</string>
   <string name="achievements_tab_title">Başarılar</string>
   <string name="leaderboard_tab_title">Liderlik sıralaması</string>
   <string name="rank_prefix">Sıra:</string>

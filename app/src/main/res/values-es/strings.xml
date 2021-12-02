@@ -580,7 +580,7 @@
   <string name="resume">reanudar</string>
   <string name="paused">En pausa</string>
   <string name="more">Más</string>
-  <string name="favorites">Favoritos</string>
+  <string name="bookmarks">Favoritos</string>
   <string name="achievements_tab_title">Logros</string>
   <string name="leaderboard_tab_title">Tabla de posiciones</string>
   <string name="rank_prefix">Clasificación</string>

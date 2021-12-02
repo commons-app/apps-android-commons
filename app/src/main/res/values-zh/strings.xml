@@ -576,7 +576,7 @@
   <string name="resume">继续</string>
   <string name="paused">已暂停</string>
   <string name="more">更多</string>
-  <string name="favorites">我的收藏</string>
+  <string name="bookmarks">我的收藏</string>
   <string name="achievements_tab_title">成就</string>
   <string name="leaderboard_tab_title">排行榜</string>
   <string name="rank_prefix">排名：</string>
