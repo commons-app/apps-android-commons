@@ -117,8 +117,13 @@ class CategoriesPresenter @Inject constructor(
      */
     override fun updateCategories(media: Media) {
         view.showProgressDialog()
-        val selectedCategories = repository.selectedCategories.map { it.name }
+        val selectedCategories: MutableList<String> = repository.selectedCategories.map { it.name }.toMutableList()
         if (selectedCategories.isNotEmpty()) {
+            for (category in selectedCategories){
+                if(media.categories?.contains(category) == true){
+                    selectedCategories.remove(category)
+                }
+            }
             val allCategories = media.categories?.plus(selectedCategories)
             compositeDisposable.add(categoryEditHelper.makeCategoryEdit(
                 view.fragmentContext,
