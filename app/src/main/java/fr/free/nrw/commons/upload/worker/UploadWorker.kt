@@ -125,6 +125,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                         false
                     )
             }
+            notificationManager?.cancel(PROCESSING_UPLOADS_NOTIFICATION_TAG, PROCESSING_UPLOADS_NOTIFICATION_ID)
             notificationManager?.notify(
                 currentNotificationTag,
                 currentNotificationID,
