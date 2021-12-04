@@ -1,11 +1,14 @@
 package fr.free.nrw.commons.upload.worker
 
 import android.annotation.SuppressLint
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.location.Geocoder
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.app.TaskStackBuilder
 import androidx.work.CoroutineWorker
 import androidx.work.Data
 import androidx.work.WorkerParameters
@@ -18,6 +21,7 @@ import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
+import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.di.ApplicationlessInjection
@@ -469,12 +473,20 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     private fun showSuccessNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
         contribution.state=Contribution.STATE_COMPLETED
+
+        val resultIntent = Intent(appContext, MainActivity::class.java)
+        val stackBuilder: TaskStackBuilder = TaskStackBuilder.create(appContext)
+        stackBuilder.addNextIntentWithParentStack(resultIntent)
+        val resultPendingIntent: PendingIntent? =
+            stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+
         curentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_completed_notification_title,
                 displayTitle
             )
         )
+            .setContentIntent(resultPendingIntent)
             .setContentText(appContext.getString(R.string.upload_completed_notification_text))
             .setProgress(0, 0, false)
             .setOngoing(false)
@@ -491,12 +503,20 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     @SuppressLint("StringFormatInvalid")
     private fun showFailedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
+
+        val resultIntent = Intent(appContext, MainActivity::class.java)
+        val stackBuilder: TaskStackBuilder = TaskStackBuilder.create(appContext)
+        stackBuilder.addNextIntentWithParentStack(resultIntent)
+        val resultPendingIntent: PendingIntent? =
+            stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+
         curentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_failed_notification_title,
                 displayTitle
             )
         )
+            .setContentIntent(resultPendingIntent)
             .setContentText(appContext.getString(R.string.upload_failed_notification_subtitle))
             .setProgress(0, 0, false)
             .setOngoing(false)
