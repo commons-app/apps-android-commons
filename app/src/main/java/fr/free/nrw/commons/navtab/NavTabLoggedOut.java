@@ -20,7 +20,7 @@ public enum NavTabLoggedOut implements EnumCode {
             return ExploreFragment.newInstance();
         }
     },
-    FAVORITES(R.string.bookmarks, R.drawable.ic_round_star_border_24px) {
+    BOOKMARKS(R.string.bookmarks, R.drawable.ic_round_star_border_24px) {
         @NonNull
         @Override
         public Fragment newInstance() {
