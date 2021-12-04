@@ -441,7 +441,7 @@
   <string name="delete_helper_show_deletion_title">Proposte per la cancellazione</string>
   <string name="delete_helper_show_deletion_title_success">Successo</string>
   <string name="delete_helper_show_deletion_message_if">Proponi %1$s per la cancellazione.</string>
-  <string name="delete_helper_show_deletion_title_failed">Fallito</string>
+  <string name="delete_helper_show_deletion_title_failed">Non riuscito</string>
   <string name="delete_helper_show_deletion_message_else">Impossibile richiedere la cancellazione.</string>
   <string name="delete_helper_ask_spam_selfie">Un selfie</string>
   <string name="delete_helper_ask_spam_blurry">Sfocato</string>
