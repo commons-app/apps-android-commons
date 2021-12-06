@@ -118,7 +118,9 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -320,10 +322,20 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     nearbyParentFragmentInstanceReadyCallback.onReady();
                 }
                 performMapReadyActions();
-                final CameraPosition cameraPosition = new CameraPosition.Builder()
+                List<String> locationLatLng =  new ArrayList<>(applicationKvStore.getStringSet("LastLocation"));
+                final CameraPosition cameraPosition;
+                if(!locationLatLng.isEmpty()) { // Checking for last searched location
+                    cameraPosition = new CameraPosition.Builder()
+                        .target(new LatLng(Double.valueOf(locationLatLng.get(0)),
+                            Double.valueOf(locationLatLng.get(1))))
+                        .zoom(ZOOM_LEVEL)
+                        .build();
+                }else {
+                    cameraPosition = new CameraPosition.Builder()
                         .target(new LatLng(51.50550, -0.07520))
                         .zoom(ZOOM_OUT)
                         .build();
+                }
                 mapBoxMap.setCameraPosition(cameraPosition);
 
                 final ScaleBarPlugin scaleBarPlugin = new ScaleBarPlugin(mapView, mapBoxMap);
@@ -337,6 +349,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     .setMarginLeft(R.dimen.tiny_padding)
                     .setTextBarMargin(R.dimen.tiny_padding);
                 scaleBarPlugin.create(scaleBarOptions);
+                onResume();
             });
         });
 
@@ -441,17 +454,27 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         mapView.onStart();
 
         applicationKvStore.putBoolean("doNotAskForLocationPermission", true);
-        lastKnownLocation = new fr.free.nrw.commons.location.LatLng(51.50550,-0.07520,1f);
-        final CameraPosition position = new CameraPosition.Builder()
-            .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation))
-            .zoom(ZOOM_OUT)
-            .build();
+        final CameraPosition position;
+        List<String> locationLatLng =  new ArrayList<>(applicationKvStore.getStringSet("LastLocation"));
+        if(!locationLatLng.isEmpty()) { // Checking for last searched location
+            lastKnownLocation = new fr.free.nrw.commons.location.LatLng(Double.valueOf(locationLatLng.get(0)), Double.valueOf(locationLatLng.get(1)), 1f);
+            position = new CameraPosition.Builder()
+                .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation))
+                .zoom(ZOOM_LEVEL)
+                .build();
+        }else {
+            lastKnownLocation = new fr.free.nrw.commons.location.LatLng(51.50550,-0.07520,1f);
+            position = new CameraPosition.Builder()
+                .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation))
+                .zoom(ZOOM_OUT)
+                .build();
+        }
         if(mapBox != null){
             mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
             addOnCameraMoveListener();
+            presenter.onMapReady();
+            removeCurrentLocationMarker();
         }
-        presenter.onMapReady();
-        removeCurrentLocationMarker();
     }
 
     private void registerNetworkReceiver() {
@@ -978,6 +1001,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(nearbyPlacesInfo -> {
+                    // Updating last searched location
+                    applicationKvStore.putStringSet("LastLocation", new HashSet<>(Arrays.asList(Double.toString(searchLatLng.getLatitude()), Double.toString(searchLatLng.getLongitude()))));
                     updateMapMarkers(nearbyPlacesInfo, false);
                     lastFocusLocation=searchLatLng;
                 },
