@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Ajeje Brazorf
 * Albe Albe 460
 * Albe Albe460
 * Ale.salmo
@@ -493,6 +494,7 @@
   <string name="pause">pausa</string>
   <string name="resume">riprendi</string>
   <string name="paused">In pausa</string>
+  <string name="more">Altro</string>
   <string name="achievements_tab_title">Risultati</string>
   <string name="leaderboard_tab_title">Classifica</string>
   <string name="rank_prefix">Posizione:</string>
