@@ -74,7 +74,7 @@ class CommonPlaceClickActions @Inject constructor(
 
     private fun openWebView(link: Uri): Boolean {
         Utils.handleWebUrl(activity, link)
-        return true;
+        return true
     }
 
     private fun PopupMenu.enableBy(menuId: Int, hasLink: Boolean) {
@@ -85,15 +85,19 @@ class CommonPlaceClickActions @Inject constructor(
         AlertDialog.Builder(activity)
             .setMessage(R.string.login_alert_message)
             .setPositiveButton(R.string.login) { dialog, which ->
-                ActivityUtils.startActivityWithFlags(
-                    activity,
-                    LoginActivity::class.java,
-                    Intent.FLAG_ACTIVITY_CLEAR_TOP,
-                    Intent.FLAG_ACTIVITY_SINGLE_TOP
-                )
-                applicationKvStore.putBoolean("login_skipped", false)
-                activity.finish()
+                setPositiveButton()
             }
             .show()
+    }
+
+    private fun setPositiveButton() {
+        ActivityUtils.startActivityWithFlags(
+            activity,
+            LoginActivity::class.java,
+            Intent.FLAG_ACTIVITY_CLEAR_TOP,
+            Intent.FLAG_ACTIVITY_SINGLE_TOP
+        )
+        applicationKvStore.putBoolean("login_skipped", false)
+        activity.finish()
     }
 }
