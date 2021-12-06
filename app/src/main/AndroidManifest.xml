@@ -36,6 +36,10 @@
         android:requestLegacyExternalStorage = "true"
         tools:ignore="GoogleAppIndexingWarning">
 
+        <activity
+            android:name=".description.DescriptionEditActivity"
+            android:exported="true" />
+
         <activity android:name="org.acra.dialog.CrashReportDialog"
             android:process=":acra"
             android:launchMode="singleInstance"
