@@ -26,6 +26,13 @@ public interface WikiBaseInterface {
                                               @NonNull @Field("token") String editToken,
                                               @NonNull @Field("data") String data);
 
+    @Headers("Cache-Control: no-cache")
+    @FormUrlEncoded
+    @POST(MW_API_PREFIX + "action=wbeditentity&site=commonswiki")
+    Observable<MwPostResponse> postEditEntityByFilename(@NonNull @Field("title") String fileEntityId,
+        @NonNull @Field("token") String editToken,
+        @NonNull @Field("data") String data);
+
     @GET(MW_API_PREFIX + "action=query&prop=info")
     Observable<MwQueryResponse> getFileEntityId(@Query("titles") String fileName);
 

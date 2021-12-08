@@ -39,6 +39,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -77,6 +79,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
+import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -158,6 +161,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     LinearLayout captionLayout;
     @BindView(R.id.depicts_layout)
     LinearLayout depictsLayout;
+    @BindView(R.id.depictEditButton)
+    Button depictEditButton;
     @BindView(R.id.media_detail_caption)
     TextView mediaCaption;
     @BindView(R.id.mediaDetailDesc)
@@ -487,7 +492,23 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     private void onDepictionsLoaded(List<IdAndCaptions> idAndCaptions){
       depictsLayout.setVisibility(idAndCaptions.isEmpty() ? GONE : VISIBLE);
+      depictEditButton.setVisibility(idAndCaptions.isEmpty() ? GONE : VISIBLE);
       buildDepictionList(idAndCaptions);
+    }
+
+    @OnClick(R.id.depictEditButton)
+    public void onDepictEditButtonClicked() {
+        ((ContributionsFragment) (getParentFragment()
+            .getParentFragment())).nearbyNotificationCardView
+            .setVisibility(View.GONE);
+        final Fragment depictsFragment = new DepictsFragment();
+        final Bundle bundle = new Bundle();
+        bundle.putParcelable("Existing_Depicts", media);
+        depictsFragment.setArguments(bundle);
+        final FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.mediaDetailFrameLayout, depictsFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
     /**
      * The imageSpacer is Basically a transparent overlay for the SimpleDraweeView

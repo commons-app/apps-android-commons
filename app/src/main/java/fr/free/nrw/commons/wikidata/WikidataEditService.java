@@ -13,6 +13,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.upload.UploadResult;
 import fr.free.nrw.commons.upload.WikidataItem;
 import fr.free.nrw.commons.upload.WikidataPlace;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -86,6 +87,31 @@ public class WikidataEditService {
                     Timber.d("DEPICTS property was set successfully for %s", fileEntityId);
                 } else {
                     Timber.d("Unable to set DEPICTS property for %s", fileEntityId);
+                }
+            })
+            .doOnError(throwable -> {
+                Timber.e(throwable, "Error occurred while setting DEPICTS property");
+                ViewUtil.showLongToast(context, throwable.toString());
+            })
+            .subscribeOn(Schedulers.io());
+    }
+
+    @SuppressLint("CheckResult")
+    private Observable<Boolean> updateDepictsProperty(final String filename,
+        final String depictedItem) {
+
+        final EditClaim data = editClaim(
+            ConfigUtils.isBetaFlavour() ? "Q10" // Wikipedia:Sandbox (Q10)
+                : depictedItem
+        );
+
+        return wikiBaseClient.postEditEntityByFilename(PAGE_ID_PREFIX + filename,
+            gson.toJson(data))
+            .doOnNext(success -> {
+                if (success) {
+                    Timber.d("DEPICTS property was set successfully for %s", filename);
+                } else {
+                    Timber.d("Unable to set DEPICTS property for %s", filename);
                 }
             })
             .doOnError(throwable -> {
@@ -211,5 +237,10 @@ public class WikidataEditService {
     private Observable<Boolean> depictionEdits(Contribution contribution, Long fileEntityId) {
         return Observable.fromIterable(contribution.getDepictedItems())
             .concatMap(wikidataItem -> addDepictsProperty(fileEntityId.toString(), wikidataItem));
+    }
+
+    public Observable<Boolean> editDepiction(List<String> depictedItems, String filename) {
+        return Observable.fromIterable(depictedItems)
+            .concatMap(wikidataItem -> updateDepictsProperty(filename, wikidataItem));
     }
 }

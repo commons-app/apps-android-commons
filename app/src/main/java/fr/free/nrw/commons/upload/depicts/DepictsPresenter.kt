@@ -2,14 +2,17 @@ package fr.free.nrw.commons.upload.depicts
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.WikidataDisambiguationItems
 import io.reactivex.Flowable
 import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.PublishProcessor
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import java.lang.reflect.Proxy
 import java.util.*
@@ -36,7 +39,9 @@ class DepictsPresenter @Inject constructor(
     private val searchTerm: PublishProcessor<String> = PublishProcessor.create()
     private val depictedItems: MutableLiveData<List<DepictedItem>> = MutableLiveData()
     @Inject
-    lateinit var depictsDao: DepictsDao;
+    lateinit var depictsDao: DepictsDao
+    @Inject
+    lateinit var depictsHelper: DepictEditHelper
 
     override fun onAttachView(view: DepictsContract.View) {
         this.view = view
@@ -146,6 +151,46 @@ class DepictsPresenter @Inject constructor(
             view.goToNextScreen()
         } else {
             view.noDepictionSelected()
+        }
+    }
+
+    override fun updateDepicts(media: Media) {
+        view.showProgressDialog()
+        if (repository.selectedDepictions.isNotEmpty()) {
+            val selectedDepictions: MutableList<String> =
+                repository.selectedDepictions.map { it.id }.toMutableList()
+
+            if (selectedDepictions.isNotEmpty()) {
+                for (depicts in selectedDepictions) {
+                    if (media.depictionIds.contains(depicts)) {
+                        selectedDepictions.remove(depicts)
+                    }
+                }
+                val allDepicts = media.depictionIds.plus(selectedDepictions)
+                if (::depictsDao.isInitialized) {
+                    //save all the selected Depicted item in room Database
+                    depictsDao.savingDepictsInRoomDataBase(repository.selectedDepictions)
+                }
+                compositeDisposable.add(depictsHelper.makeDepictEdit(
+                    view.fragmentContext,
+                    media,
+                    allDepicts
+                )
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        media.depictionIds = allDepicts
+                        view.goBackToPreviousScreen()
+                        view.dismissProgressDialog()
+                    }) {
+                        Timber.e(
+                            "Failed to update depicts"
+                        )
+                    }
+                )
+            } else {
+                view.noDepictionSelected()
+            }
         }
     }
 

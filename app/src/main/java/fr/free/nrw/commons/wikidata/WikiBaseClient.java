@@ -35,8 +35,20 @@ public class WikiBaseClient {
                 .map(response -> (response.getSuccessVal() == 1)));
     }
 
+    public Observable<Boolean> postEditEntityByFilename(String filename, String data) {
+        return csrfToken()
+            .switchMap(editToken -> wikiBaseInterface.postEditEntityByFilename(filename,
+                editToken, data)
+                .map(response -> (response.getSuccessVal() == 1)));
+    }
+
     public Observable<Long> getFileEntityId(UploadResult uploadResult) {
         return wikiBaseInterface.getFileEntityId(uploadResult.createCanonicalFileName())
+            .map(response -> (long) (response.query().pages().get(0).pageId()));
+    }
+
+    public Observable<Long> getFileEntityIdByFileName(String fileName) {
+        return wikiBaseInterface.getFileEntityId(fileName)
             .map(response -> (long) (response.query().pages().get(0).pageId()));
     }
 

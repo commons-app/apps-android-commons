@@ -308,6 +308,14 @@
                       android:orientation="vertical" />
                 </LinearLayout>
 
+                <Button
+                  android:id="@+id/depictEditButton"
+                  android:layout_width="24dp"
+                  android:layout_height="24dp"
+                  android:layout_margin="@dimen/standard_gap"
+                  android:layout_gravity="end"
+                  android:background="@drawable/ic_baseline_edit_24" />
+
                 <LinearLayout
                   style="@style/MediaDetailContainer"
                   android:layout_width="match_parent"

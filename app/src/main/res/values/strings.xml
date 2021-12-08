@@ -519,6 +519,15 @@ Upload your first media by tapping on the add button.</string>
   <string name="category_edit_helper_edit_message_else">Could not add categories.</string>
   <string name="category_edit_button_text">Update categories</string>
 
+  <string name="depict_edit_helper_make_edit_toast">Trying to update depicts.</string>
+  <string name="depict_edit_helper_show_edit_title">Depict update</string>
+  <plurals name="depict_edit_helper_show_edit_message_if">
+    <item quantity="one">Depict %1$s is added.</item>
+    <item quantity="other">Depicts %1$s are added.</item>
+  </plurals>
+  <string name="depict_edit_helper_edit_message_else">Could not add depicts.</string>
+  <string name="depict_edit_button_text">Update depicts</string>
+
   <string name="coordinates_edit_helper_make_edit_toast">Trying to update coordinates.</string>
   <string name="coordinates_edit_helper_show_edit_title">Coordinates update</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Success</string>

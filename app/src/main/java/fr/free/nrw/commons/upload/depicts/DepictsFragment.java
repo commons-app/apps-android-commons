@@ -1,15 +1,19 @@
 package fr.free.nrw.commons.upload.depicts;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -19,6 +23,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
@@ -52,11 +57,18 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     RecyclerView depictsRecyclerView;
     @BindView(R.id.tooltip)
     ImageView tooltip;
+    @BindView(R.id.depicts_next)
+    Button btnNext;
+    @BindView(R.id.depicts_previous)
+    Button btnPrevious;
 
     @Inject
     DepictsContract.UserActionListener presenter;
     private UploadDepictsAdapter adapter;
     private Disposable subscribe;
+    private Media media;
+    private ProgressDialog progressDialog;
+
     @Nullable
     @Override
     public android.view.View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -68,6 +80,12 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     public void onViewCreated(@NonNull android.view.View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            media = bundle.getParcelable("Existing_Depicts");
+        }
+
         init();
         presenter.getDepictedItems().observe(getViewLifecycleOwner(), this::setDepictsList);
     }
@@ -76,8 +94,18 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      * Initialize presenter and views
      */
     private void init() {
-        depictsTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
-            callback.getTotalNumberOfSteps(), getString(R.string.depicts_step_title)));
+
+        if(media == null) {
+            depictsTitle
+                .setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
+                    callback.getTotalNumberOfSteps(), getString(R.string.depicts_step_title)));
+        } else {
+            depictsTitle.setText("Edit Depicts");
+            depictsSubTitle.setVisibility(View.GONE);
+            btnNext.setText("Save");
+            btnPrevious.setText("Cancel");
+        }
+
         setDepictsSubTitle();
         tooltip.setOnClickListener(v -> DialogUtil
             .showAlertDialog(getActivity(), getString(R.string.depicts_step_title),
@@ -170,14 +198,50 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         depictsRecyclerView.smoothScrollToPosition(0);
     }
 
+    @Override
+    public Context getFragmentContext(){
+        return requireContext();
+    }
+
+    @Override
+    public void goBackToPreviousScreen() {
+        getFragmentManager().popBackStack();
+    }
+
+    /**
+     * Shows the progress dialog
+     */
+    @Override
+    public void showProgressDialog() {
+        progressDialog = new ProgressDialog(requireContext());
+        progressDialog.setMessage(getString(R.string.please_wait));
+        progressDialog.show();
+    }
+
+    /**
+     * Hides the progress dialog
+     */
+    @Override
+    public void dismissProgressDialog() {
+        progressDialog.dismiss();
+    }
+
     @OnClick(R.id.depicts_next)
     public void onNextButtonClicked() {
-        presenter.verifyDepictions();
+        if(media != null){
+            presenter.updateDepicts(media);
+        } else {
+            presenter.verifyDepictions();
+        }
     }
 
     @OnClick(R.id.depicts_previous)
     public void onPreviousButtonClicked() {
-        callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+        if(media != null){
+            getFragmentManager().popBackStack();
+        } else {
+            callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+        }
     }
 
     /**
@@ -199,5 +263,29 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      */
     private void searchForDepictions(final String query) {
         presenter.searchForDepictions(query);
+    }
+
+
+
+    /**
+     * Hides the action bar while opening editing fragment
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (media != null) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        }
+    }
+
+    /**
+     * Shows the action bar while closing editing fragment
+     */
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (media != null) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        }
     }
 }
