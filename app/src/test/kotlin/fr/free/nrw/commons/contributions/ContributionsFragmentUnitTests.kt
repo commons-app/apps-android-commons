@@ -9,28 +9,21 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.RxImmediateSchedulerRule
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.campaigns.Campaign
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.location.LatLng
-import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
-import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView
 import fr.free.nrw.commons.notification.Notification
 import fr.free.nrw.commons.notification.NotificationController
 import fr.free.nrw.commons.notification.NotificationType
-import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.TestScheduler
 import org.junit.Assert
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.*
@@ -95,25 +88,12 @@ class ContributionsFragmentUnitTests {
     @Mock
     private lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
 
-    @Mock
-    private lateinit var nearbyController: NearbyController
-
-    @Mock
-    private lateinit var location: LatLng
-
-    @Mock
-    private lateinit var locationManager: LocationServiceManager
-
-    @Rule
-    @JvmField var testSchedulerRule = RxImmediateSchedulerRule()
-
     private lateinit var fragment: ContributionsFragment
     private lateinit var context: Context
     private lateinit var view: View
     private lateinit var activity: MainActivity
     private lateinit var nearbyNotificationCardView: NearbyNotificationCardView
     private lateinit var campaignView: CampaignView
-    private lateinit var scheduler: Scheduler
 
     @Before
     fun setUp() {
@@ -149,17 +129,12 @@ class ContributionsFragmentUnitTests {
         Whitebox.setInternalState(fragment, "notificationController", notificationController)
         Whitebox.setInternalState(fragment, "compositeDisposable", compositeDisposable)
         Whitebox.setInternalState(fragment, "okHttpJsonApiClient", okHttpJsonApiClient)
-        Whitebox.setInternalState(fragment, "nearbyController", nearbyController)
-        Whitebox.setInternalState(fragment, "locationManager", locationManager)
         Whitebox.setInternalState(
             fragment,
             "nearbyNotificationCardView",
             nearbyNotificationCardView
         )
         Whitebox.setInternalState(fragment, "campaignView", campaignView)
-        scheduler = TestScheduler()
-        Whitebox.setInternalState(fragment, "ioScheduler", scheduler)
-        Whitebox.setInternalState(fragment, "mainThreadScheduler", scheduler)
     }
 
     @Test
