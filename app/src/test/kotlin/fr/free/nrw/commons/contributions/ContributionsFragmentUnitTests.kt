@@ -260,23 +260,6 @@ class ContributionsFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnLocationChange() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        `when`(locationManager.lastLocation).thenReturn(location)
-        fragment.locationManager = locationManager
-        fragment.onLocationChangedSignificantly(location)
-        verify(nearbyController).loadAttractionsFromLocation(
-            any(),
-            any(),
-            anyBoolean(),
-            anyBoolean(),
-            anyBoolean(),
-            anyString()
-        )
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testNotifyDataSetChanged() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         Whitebox.setInternalState(fragment, "mediaDetailPagerFragment", mediaDetailPagerFragment)
