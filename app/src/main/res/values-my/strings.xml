@@ -39,6 +39,7 @@
   <string name="signup">မှတ်ပုံတင်ရန်</string>
   <string name="logging_in_title">လော့ဂ်အင် ဝင်ရောက်နေသည်...</string>
   <string name="logging_in_message">ခေတ္တစောင့်ပါ...</string>
+  <string name="updating_caption_message">ကျေးဇူးပြု၍ ခဏစောင့်ပါ...</string>
   <string name="login_success">လော့အင် အောင်မြင်သည်</string>
   <string name="login_failed">လော့အင် မအောင်မြင်ပါ</string>
   <string name="upload_failed">ဖိုင်မတွေ့ပါ၊ အခြးဖိုင်တစ်ခု စမ်းကြည့်ပါ။</string>
@@ -336,6 +337,7 @@
   <string name="category_edit_button_text">ကဏ္ဍများ မွမ်းမံရန်</string>
   <string name="coordinates_edit_helper_show_edit_title">ကိုဩဒိနိတ် မွမ်းမံ</string>
   <string name="coordinates_edit_helper_show_edit_title_success">အောင်မြင်</string>
+  <string name="description_edit_helper_show_edit_message">ဖော်ပြချက်များ ပေါင်းထည့်ခဲ့သည်။</string>
   <string name="no_achievements_yet">%s သည် မည့်သည့်ပံ့ပိုးမှုမျှ မရှိသေးပါ</string>
   <string name="account_created">အကောင့်ဖန်တီးပြီးပါပြီ</string>
   <string name="notification_mark_read">အသိပေးချက်ကို ဖတ်ပြီးကြောင်းမှတ်သားပြီးပြီ</string>

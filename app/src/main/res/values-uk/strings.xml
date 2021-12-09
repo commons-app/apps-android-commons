@@ -8,6 +8,7 @@
 * Movses
 * Mykola Swarnyk
 * Piramidion
+* Renvoy
 * SimondR
 * Viiictorrr
 * Vlad5250
@@ -75,6 +76,8 @@
   <string name="signup">Зареєструватися</string>
   <string name="logging_in_title">Вхід до системи</string>
   <string name="logging_in_message">Будь ласка, зачекайте…</string>
+  <string name="updating_caption_title">Оновлення заголовків та описів</string>
+  <string name="updating_caption_message">Будь ласка, зачекайте…</string>
   <string name="login_success">Ви успішно увійшли!</string>
   <string name="login_failed">Не вдалося увійти</string>
   <string name="upload_failed">Файл не знайдено. Будь ласка, спробуйте інший файл.</string>
@@ -514,10 +517,18 @@
   <string name="category_edit_button_text">Оновити категорії</string>
   <string name="coordinates_edit_helper_make_edit_toast">Спроба оновити координати.</string>
   <string name="coordinates_edit_helper_show_edit_title">Оновлення координат</string>
+  <string name="description_edit_helper_show_edit_title">Оновити опис</string>
+  <string name="caption_edit_helper_show_edit_title">Оновити заголовок</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Успіх</string>
   <string name="coordinates_edit_helper_show_edit_message">Координати %1$s додані.</string>
+  <string name="description_edit_helper_show_edit_message">Описи додаються.</string>
+  <string name="caption_edit_helper_show_edit_message">Заголовок додається.</string>
   <string name="coordinates_edit_helper_edit_message_else">Не вдалося додати координати.</string>
+  <string name="description_edit_helper_edit_message_else">Не вдалося додати описи.</string>
+  <string name="caption_edit_helper_edit_message_else">Не вдалося додати заголовок.</string>
   <string name="coordinates_picking_unsuccessful">Не вдалося отримати координати.</string>
+  <string name="descriptions_picking_unsuccessful">Не вдається отримати описи.</string>
+  <string name="description_activity_title">Редагувати описи та заголовки</string>
   <string name="share_image_via">Поширити зображення через</string>
   <string name="you_have_no_achievements_yet">Ви ще не зробили жодного внеску</string>
   <string name="no_achievements_yet">%s ще не зробив жодного внеску</string>
