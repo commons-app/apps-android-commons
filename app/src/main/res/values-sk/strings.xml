@@ -567,7 +567,7 @@
   <string name="resume">pokračovať</string>
   <string name="paused">Pozastavené</string>
   <string name="more">Viac</string>
-  <string name="bookmarks">Obľúbené</string>
+  <string name="favorites">Obľúbené</string>
   <string name="achievements_tab_title">Úspechy</string>
   <string name="leaderboard_tab_title">Výsledková tabuľka</string>
   <string name="rank_prefix">Poradie:</string>

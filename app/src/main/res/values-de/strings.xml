@@ -565,7 +565,7 @@
   <string name="resume">fortfahren</string>
   <string name="paused">Pausiert</string>
   <string name="more">Weitere</string>
-  <string name="bookmarks">Favoriten</string>
+  <string name="favorites">Favoriten</string>
   <string name="achievements_tab_title">Errungenschaften</string>
   <string name="leaderboard_tab_title">Bestenliste</string>
   <string name="rank_prefix">Rang:</string>

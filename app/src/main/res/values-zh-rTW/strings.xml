@@ -558,7 +558,7 @@
   <string name="resume">繼續</string>
   <string name="paused">已暫停</string>
   <string name="more">更多</string>
-  <string name="bookmarks">個人最愛</string>
+  <string name="favorites">個人最愛</string>
   <string name="achievements_tab_title">成果</string>
   <string name="leaderboard_tab_title">排行榜</string>
   <string name="rank_prefix">排名：</string>

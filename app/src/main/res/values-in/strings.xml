@@ -550,7 +550,7 @@
   <string name="resume">lanjut</string>
   <string name="paused">Dijeda</string>
   <string name="more">Lainnya</string>
-  <string name="bookmarks">Favorit</string>
+  <string name="favorites">Favorit</string>
   <string name="achievements_tab_title">Pencapaian</string>
   <string name="leaderboard_tab_title">Papan peringkat</string>
   <string name="rank_prefix">Peringkat:</string>

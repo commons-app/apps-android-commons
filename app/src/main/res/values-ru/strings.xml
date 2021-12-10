@@ -592,7 +592,7 @@
   <string name="resume">продолжить</string>
   <string name="paused">Приостановлено</string>
   <string name="more">Ещё</string>
-  <string name="bookmarks">Избранное</string>
+  <string name="favorites">Избранное</string>
   <string name="achievements_tab_title">Достижения</string>
   <string name="leaderboard_tab_title">Таблица лидеров</string>
   <string name="rank_prefix">Ранг:</string>

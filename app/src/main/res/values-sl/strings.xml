@@ -536,7 +536,7 @@
   <string name="resume">nadaljuj</string>
   <string name="paused">Premor</string>
   <string name="more">Več</string>
-  <string name="bookmarks">Priljubljene</string>
+  <string name="favorites">Priljubljene</string>
   <string name="achievements_tab_title">Dosežki</string>
   <string name="leaderboard_tab_title">Lestvica</string>
   <string name="rank_prefix">Mesto:</string>

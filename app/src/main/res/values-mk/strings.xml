@@ -546,7 +546,7 @@
   <string name="resume">продолжи</string>
   <string name="paused">Запрено</string>
   <string name="more">Повеќе</string>
-  <string name="bookmarks">Омилени</string>
+  <string name="favorites">Омилени</string>
   <string name="achievements_tab_title">Достигнувања</string>
   <string name="leaderboard_tab_title">Предводници</string>
   <string name="rank_prefix">Место:</string>
