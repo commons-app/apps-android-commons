@@ -41,6 +41,7 @@ dependencies {
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.1.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-localization-v8:0.11.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-scalebar-v9:0.4.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-telemetry:6.1.0'
     implementation 'com.github.deano2390:MaterialShowcaseView:1.2.0'
     implementation 'com.dinuscxj:circleprogressbar:1.1.1'
     implementation 'com.karumi:dexter:5.0.0'

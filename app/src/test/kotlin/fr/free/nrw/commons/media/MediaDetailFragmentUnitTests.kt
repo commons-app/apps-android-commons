@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.media
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -47,6 +49,9 @@ import kotlin.collections.HashMap
 @LooperMode(LooperMode.Mode.PAUSED)
 class MediaDetailFragmentUnitTests {
 
+
+    private val REQUEST_CODE = 1001
+    private val REQUEST_CODE_EDIT_DESCRIPTION = 1002
     private lateinit var fragment: MediaDetailFragment
     private lateinit var fragmentManager: FragmentManager
     private lateinit var layoutInflater: LayoutInflater
@@ -91,6 +96,12 @@ class MediaDetailFragmentUnitTests {
 
     @Mock
     private lateinit var listView: ListView
+  
+    @Mock
+    private lateinit var searchView: SearchView
+
+    @Mock
+    private lateinit var intent: Intent
 
     @Before
     fun setUp() {
@@ -122,6 +133,7 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "scrollView", scrollView)
         Whitebox.setInternalState(fragment, "media", media)
         Whitebox.setInternalState(fragment, "progressBar", progressBar)
+        Whitebox.setInternalState(fragment, "progressBarEditDescription", progressBar)
         Whitebox.setInternalState(fragment, "captionsListView", listView)
         Whitebox.setInternalState(fragment, "descriptionWebView", webView)
         Whitebox.setInternalState(fragment, "detailProvider", detailProvider)
@@ -139,6 +151,8 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "depictionContainer", linearLayout)
         Whitebox.setInternalState(fragment, "toDoLayout", linearLayout)
         Whitebox.setInternalState(fragment, "showCaptionAndDescriptionContainer", linearLayout)
+        Whitebox.setInternalState(fragment, "updateCategoriesButton", button)
+        Whitebox.setInternalState(fragment, "editDescription", button)
         Whitebox.setInternalState(fragment, "categoryContainer", linearLayout)
         Whitebox.setInternalState(fragment, "mediaDiscussion", textView)
 
@@ -160,6 +174,24 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "applicationKvStore", applicationKvStore)
         `when`(applicationKvStore.getBoolean("login_skipped")).thenReturn(true)
         fragment.onCreateView(layoutInflater, null, savedInstanceState)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnActivityResultLocationPickerActivity() {
+        fragment.onActivityResult(REQUEST_CODE, Activity.RESULT_CANCELED, intent)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `test OnActivity Result Cancelled LocationPickerActivity`() {
+        fragment.onActivityResult(REQUEST_CODE, Activity.RESULT_CANCELED, intent)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `test OnActivity Result Cancelled DescriptionEditActivity`() {
+        fragment.onActivityResult(REQUEST_CODE, Activity.RESULT_OK, intent)
     }
 
     @Test
@@ -228,6 +260,17 @@ class MediaDetailFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
+    fun testGetDescriptionList() {
+        `when`(media.filename).thenReturn("")
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
+            "getDescriptionList"
+        )
+        method.isAccessible = true
+        method.invoke(fragment)
+    }
+
+    @Test
+    @Throws(Exception::class)
     fun testGetCaptions() {
         `when`(media.captions).thenReturn(mapOf(Pair("a", "b")))
         val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
@@ -273,6 +316,15 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testUpdateCategoryDisplayCaseNonNull() {
         Assert.assertEquals(fragment.updateCategoryDisplay(listOf()), true)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testDescriptionEditClicked() {
+        `when`(progressBar.visibility).thenReturn(View.VISIBLE)
+        `when`(button.visibility).thenReturn(View.GONE)
+        `when`(media.filename).thenReturn("")
+        fragment.onDescriptionEditClicked()
     }
 
     @Test
@@ -365,6 +417,28 @@ class MediaDetailFragmentUnitTests {
     fun testPrettyDiscussion() {
         val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
             "prettyDiscussion",
+            String::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, "mock")
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testExtractCaptionDescription() {
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
+            "extractCaptionDescription",
+            String::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, "mock")
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGetDescriptions() {
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
+            "getDescriptions",
             String::class.java
         )
         method.isAccessible = true

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Ajeje Brazorf
 * Albe Albe 460
 * Albe Albe460
 * Ale.salmo
@@ -441,7 +442,7 @@
   <string name="delete_helper_show_deletion_title">Proposte per la cancellazione</string>
   <string name="delete_helper_show_deletion_title_success">Successo</string>
   <string name="delete_helper_show_deletion_message_if">Proponi %1$s per la cancellazione.</string>
-  <string name="delete_helper_show_deletion_title_failed">Fallito</string>
+  <string name="delete_helper_show_deletion_title_failed">Non riuscito</string>
   <string name="delete_helper_show_deletion_message_else">Impossibile richiedere la cancellazione.</string>
   <string name="delete_helper_ask_spam_selfie">Un selfie</string>
   <string name="delete_helper_ask_spam_blurry">Sfocato</string>
@@ -493,6 +494,7 @@
   <string name="pause">pausa</string>
   <string name="resume">riprendi</string>
   <string name="paused">In pausa</string>
+  <string name="more">Altro</string>
   <string name="achievements_tab_title">Risultati</string>
   <string name="leaderboard_tab_title">Classifica</string>
   <string name="rank_prefix">Posizione:</string>

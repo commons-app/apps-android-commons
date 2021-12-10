@@ -63,6 +63,7 @@
   <string name="signup">Rekisteröidy</string>
   <string name="logging_in_title">Kirjaudutaan</string>
   <string name="logging_in_message">Odota…</string>
+  <string name="updating_caption_message">Odota...</string>
   <string name="login_success">Kirjautuminen onnistui!</string>
   <string name="login_failed">Kirjautuminen epäonnistui!</string>
   <string name="upload_failed">Tiedostoa ei löytynyt. Yritä toista tiedostoa.</string>
@@ -495,6 +496,7 @@
   <string name="coordinates_edit_helper_show_edit_title_success">Onnistui</string>
   <string name="coordinates_edit_helper_show_edit_message">Koordinaatit %1$s on lisätty.</string>
   <string name="coordinates_edit_helper_edit_message_else">Koordinaatteja ei voitu lisätä.</string>
+  <string name="description_edit_helper_edit_message_else">Kuvauksia ei voitu lisätä.</string>
   <string name="coordinates_picking_unsuccessful">Koordinaattien haku epäonnistui.</string>
   <string name="share_image_via">Jaa kuva</string>
   <string name="you_have_no_achievements_yet">Et ole vielä tehnyt muokkauksia</string>

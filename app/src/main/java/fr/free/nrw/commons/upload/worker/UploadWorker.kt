@@ -1,9 +1,11 @@
 package fr.free.nrw.commons.upload.worker
 
 import android.annotation.SuppressLint
+import android.app.PendingIntent
+import android.app.TaskStackBuilder
 import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
-import android.location.Geocoder
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.CoroutineWorker
@@ -18,11 +20,12 @@ import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
+import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.di.ApplicationlessInjection
-import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.StashUploadResult
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.upload.StashUploadState
@@ -37,7 +40,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import java.io.IOException
 import java.util.*
 import java.util.regex.Pattern
 import javax.inject.Inject
@@ -125,6 +127,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                         false
                     )
             }
+            notificationManager?.cancel(PROCESSING_UPLOADS_NOTIFICATION_TAG, PROCESSING_UPLOADS_NOTIFICATION_ID)
             notificationManager?.notify(
                 currentNotificationTag,
                 currentNotificationID,
@@ -491,6 +494,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     @SuppressLint("StringFormatInvalid")
     private fun showFailedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
+        curentNotification.setContentIntent(getPendingIntent(MainActivity::class.java))
         curentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_failed_notification_title,
@@ -526,4 +530,18 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             curentNotification.build()
         )
     }
+
+    /**
+     * Method used to get Pending intent for opening different screen after clicking on notification
+     * @param toClass
+     */
+    private fun getPendingIntent(toClass:Class<out BaseActivity>):PendingIntent
+    {
+        val intent = Intent(appContext,toClass)
+        return TaskStackBuilder.create(appContext).run {
+             addNextIntentWithParentStack(intent)
+             getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+         };
+    }
+
 }
