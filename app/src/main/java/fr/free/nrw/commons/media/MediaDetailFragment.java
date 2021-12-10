@@ -971,29 +971,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         media.setCaptions(updatedCaptions);
     }
 
-    @OnClick(R.id.update_categories_button)
-    public void onUpdateCategoriesClicked() {
-        updateCategories(categoryEditSearchRecyclerViewAdapter.getNewCategories());
-        displayHideCategorySearch();
-    }
-
-    @OnClick(R.id.cancel_categories_button)
-    public void onCancelCategoriesClicked() {
-        displayHideCategorySearch();
-    }
-
-    public void updateCategories(List<String> selectedCategories) {
-        compositeDisposable.add(categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories, this)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(s -> {
-                Timber.d("Categories are added.");
-                onOutsideOfCategoryEditClicked();
-                media.setAddedCategories(selectedCategories);
-                updateCategoryList();
-            }));
-    }
-
     /**
      * Fetched coordinates are replaced with existing coordinates by a POST API call.
      * @param Latitude to be added

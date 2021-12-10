@@ -103,6 +103,9 @@ class MediaDetailFragmentUnitTests {
     @Mock
     private lateinit var intent: Intent
 
+    @Mock
+    private lateinit var button: Button
+
     @Before
     fun setUp() {
 
@@ -151,7 +154,6 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "depictionContainer", linearLayout)
         Whitebox.setInternalState(fragment, "toDoLayout", linearLayout)
         Whitebox.setInternalState(fragment, "showCaptionAndDescriptionContainer", linearLayout)
-        Whitebox.setInternalState(fragment, "updateCategoriesButton", button)
         Whitebox.setInternalState(fragment, "editDescription", button)
         Whitebox.setInternalState(fragment, "categoryContainer", linearLayout)
         Whitebox.setInternalState(fragment, "mediaDiscussion", textView)
