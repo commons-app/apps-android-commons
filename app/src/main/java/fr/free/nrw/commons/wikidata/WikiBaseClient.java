@@ -1,9 +1,8 @@
 package fr.free.nrw.commons.wikidata;
 
-import static fr.free.nrw.commons.media.MediaClientKt.PAGE_ID_PREFIX;
 import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF;
+import static fr.free.nrw.commons.media.MediaClientKt.PAGE_ID_PREFIX;
 
-import android.util.Log;
 import fr.free.nrw.commons.upload.UploadResult;
 import fr.free.nrw.commons.upload.WikiBaseInterface;
 import io.reactivex.Observable;

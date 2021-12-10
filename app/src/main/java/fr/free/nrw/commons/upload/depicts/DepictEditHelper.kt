@@ -15,7 +15,8 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class DepictEditHelper @Inject constructor (notificationHelper: NotificationHelper,
-                                            wikidataEditService: WikidataEditService, viewUtilWrapper: ViewUtilWrapper) {
+                                            wikidataEditService: WikidataEditService,
+                                            viewUtilWrapper: ViewUtilWrapper) {
 
     /**
      * Class for making post operations

@@ -14,11 +14,9 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.upload.UploadResult;
 import fr.free.nrw.commons.upload.WikidataItem;
 import fr.free.nrw.commons.upload.WikidataPlace;
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -250,7 +248,7 @@ public class WikidataEditService {
 
     /**
      * Takes the selected items as a parameter and iterate through every item and send each item
-     * for post opration
+     * for post operation
      *
      * @param depictedItems selected depict items
      * @param filename name of the file

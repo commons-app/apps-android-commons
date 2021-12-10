@@ -33,6 +33,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import kotlin.Unit;
@@ -101,10 +102,10 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
                 .setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
                     callback.getTotalNumberOfSteps(), getString(R.string.depicts_step_title)));
         } else {
-            depictsTitle.setText("Edit Depicts");
+            depictsTitle.setText(R.string.edit_depicts);
             depictsSubTitle.setVisibility(View.GONE);
-            btnNext.setText("Save");
-            btnPrevious.setText("Cancel");
+            btnNext.setText(R.string.menu_save_categories);
+            btnPrevious.setText(R.string.menu_cancel_upload);
         }
 
         setDepictsSubTitle();
@@ -252,6 +253,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     @OnClick(R.id.depicts_previous)
     public void onPreviousButtonClicked() {
         if(media != null){
+            assert getFragmentManager() != null;
             getFragmentManager().popBackStack();
         } else {
             callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
@@ -288,7 +290,9 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     public void onResume() {
         super.onResume();
         if (media != null) {
-            ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+            Objects.requireNonNull(
+                ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar())
+                .hide();
         }
     }
 
@@ -299,7 +303,9 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     public void onStop() {
         super.onStop();
         if (media != null) {
-            ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+            Objects.requireNonNull(
+                ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar())
+                .show();
         }
     }
 }
