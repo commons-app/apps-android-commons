@@ -6,6 +6,9 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_NEEDING_CATEGORIES;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_UNCATEGORISED;
+import static fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_DESCRIPTION_AND_CAPTION;
+import static fr.free.nrw.commons.description.EditDescriptionConstants.UPDATED_WIKITEXT;
+import static fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -73,6 +76,8 @@ import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
+import fr.free.nrw.commons.description.DescriptionEditActivity;
+import fr.free.nrw.commons.description.DescriptionEditHelper;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -80,12 +85,15 @@ import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.upload.depicts.DepictsFragment;
+import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -102,6 +110,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     CategoryEditHelper.Callback {
 
     private static final int REQUEST_CODE = 1001 ;
+    private static final int REQUEST_CODE_EDIT_DESCRIPTION = 1002 ;
     private boolean editable;
     private boolean isCategoryImage;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
@@ -138,6 +147,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     CategoryEditHelper categoryEditHelper;
     @Inject
     CoordinateEditHelper coordinateEditHelper;
+    @Inject
+    DescriptionEditHelper descriptionEditHelper;
     @Inject
     ViewUtilWrapper viewUtil;
     @Inject
@@ -230,6 +241,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     String descriptionHtmlCode;
     @BindView(R.id.progressBarDeletion)
     ProgressBar progressBarDeletion;
+    @BindView(R.id.progressBarEdit)
+    ProgressBar progressBarEditDescription;
+    @BindView(R.id.description_edit)
+    Button editDescription;
 
     private ArrayList<String> categoryNames = new ArrayList<>();
     private String categorySearchQuery;
@@ -841,8 +856,155 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             .build(getActivity()), REQUEST_CODE);
     }
 
+    @OnClick(R.id.description_edit)
+    public void onDescriptionEditClicked() {
+        progressBarEditDescription.setVisibility(VISIBLE);
+        editDescription.setVisibility(GONE);
+        getDescriptionList();
+    }
+
     /**
-     * Get the coordinates and update the existing coordinates.
+     * Gets descriptions from wikitext
+     */
+    private void getDescriptionList() {
+        compositeDisposable.add(mediaDataExtractor.getCurrentWikiText(
+            Objects.requireNonNull(media.getFilename()))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(this::extractCaptionDescription, Timber::e));
+    }
+
+    /**
+     * Gets captions and descriptions and merge them according to language code and arranges it in a
+     * single list.
+     * Send the list to DescriptionEditActivity
+     * @param s wikitext
+     */
+    private void extractCaptionDescription(final String s) {
+        final LinkedHashMap<String,String> descriptions = getDescriptions(s);
+        final LinkedHashMap<String,String> captions = getCaptionsList();
+
+        final ArrayList<UploadMediaDetail> descriptionAndCaptions = new ArrayList<>();
+
+        if(captions.size() >= descriptions.size()) {
+            for (final Map.Entry mapElement : captions.entrySet()) {
+
+                final String language = (String) mapElement.getKey();
+                if (descriptions.containsKey(language)) {
+                    descriptionAndCaptions.add(
+                        new UploadMediaDetail(language,
+                            Objects.requireNonNull(descriptions.get(language)),
+                            (String) mapElement.getValue())
+                    );
+                } else {
+                    descriptionAndCaptions.add(
+                        new UploadMediaDetail(language, "",
+                            (String) mapElement.getValue())
+                    );
+                }
+            }
+            for (final Map.Entry mapElement : descriptions.entrySet()) {
+
+                final String language = (String) mapElement.getKey();
+                if (!captions.containsKey(language)) {
+                    descriptionAndCaptions.add(
+                        new UploadMediaDetail(language,
+                            Objects.requireNonNull(descriptions.get(language)),
+                            "")
+                    );
+                }
+            }
+        } else {
+            for (final Map.Entry mapElement : descriptions.entrySet()) {
+
+                final String language = (String) mapElement.getKey();
+                if (captions.containsKey(language)) {
+                    descriptionAndCaptions.add(
+                        new UploadMediaDetail(language, (String) mapElement.getValue(),
+                            Objects.requireNonNull(captions.get(language)))
+                    );
+                } else {
+                    descriptionAndCaptions.add(
+                        new UploadMediaDetail(language, (String) mapElement.getValue(),
+                            "")
+                    );
+                }
+            }
+            for (final Map.Entry mapElement : captions.entrySet()) {
+
+                final String language = (String) mapElement.getKey();
+                if (!descriptions.containsKey(language)) {
+                    descriptionAndCaptions.add(
+                        new UploadMediaDetail(language,
+                            "",
+                            Objects.requireNonNull(descriptions.get(language)))
+                    );
+                }
+            }
+        }
+        final Intent intent = new Intent(requireContext(), DescriptionEditActivity.class);
+        final Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION, descriptionAndCaptions);
+        bundle.putString(WIKITEXT, s);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, REQUEST_CODE_EDIT_DESCRIPTION);
+    }
+
+    /**
+     * Filters descriptions from current wikiText and arranges it in LinkedHashmap according to the
+     * language code
+     * @param s wikitext
+     * @return LinkedHashMap<LanguageCode,Description>
+     */
+    private LinkedHashMap<String,String> getDescriptions(String s) {
+        int descriptionIndex = s.indexOf("description=");
+        if(descriptionIndex == -1){
+            descriptionIndex = s.indexOf("Description=");
+        }
+
+        if( descriptionIndex == -1 ){
+            return new LinkedHashMap<>();
+        }
+        final String descriptionToEnd = s.substring(descriptionIndex+12);
+        final int descriptionEndIndex = descriptionToEnd.indexOf("\n");
+        final String description = s.substring(descriptionIndex+12, descriptionIndex+12+descriptionEndIndex);
+
+        final String[] arr = description.trim().split(",");
+        final LinkedHashMap<String,String> descriptionList = new LinkedHashMap<>();
+
+        if (!description.equals("")) {
+            for (final String string :
+                arr) {
+                final int startCode = string.indexOf("{{");
+                final int endCode = string.indexOf("|");
+                final String languageCode = string.substring(startCode + 2, endCode).trim();
+                final int startDescription = string.indexOf("=");
+                final int endDescription = string.indexOf("}}");
+                final String languageDescription = string
+                    .substring(startDescription + 1, endDescription);
+                descriptionList.put(languageCode, languageDescription);
+            }
+        }
+        return descriptionList;
+    }
+
+    /**
+     * Gets list of caption and arranges it in a LinkedHashmap according to the language code
+     * @return LinkedHashMap<LanguageCode,Caption>
+     */
+    private LinkedHashMap<String,String> getCaptionsList() {
+        final LinkedHashMap<String, String> captionList = new LinkedHashMap<>();
+        final Map<String, String> captions = media.getCaptions();
+        for (final Map.Entry<String, String> map : captions.entrySet()) {
+            final String language = map.getKey();
+            final String languageCaption = map.getValue();
+            captionList.put(language, languageCaption);
+        }
+        return captionList;
+    }
+
+    /**
+     * Get the result from another activity and act accordingly.
      * @param requestCode
      * @param resultCode
      * @param data
@@ -876,11 +1038,59 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                     updateCoordinates(latitude, longitude, accuracy);
                 }
             }
-        } else if (resultCode == RESULT_CANCELED) {
+
+        } else if (requestCode == REQUEST_CODE_EDIT_DESCRIPTION && resultCode == RESULT_OK) {
+            final String updatedWikiText = data.getStringExtra(UPDATED_WIKITEXT);
+            compositeDisposable.add(descriptionEditHelper.addDescription(getContext(), media,
+                updatedWikiText)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s -> {
+                    Timber.d("Descriptions are added.");
+                }));
+
+            final ArrayList<UploadMediaDetail> uploadMediaDetails
+                = data.getParcelableArrayListExtra(LIST_OF_DESCRIPTION_AND_CAPTION);
+
+            LinkedHashMap<String, String> updatedCaptions = new LinkedHashMap<>();
+            for (UploadMediaDetail mediaDetail:
+            uploadMediaDetails) {
+                compositeDisposable.add(descriptionEditHelper.addCaption(getContext(), media,
+                    mediaDetail.getLanguageCode(), mediaDetail.getCaptionText())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(s -> {
+                        updateCaptions(mediaDetail, updatedCaptions);
+                        Timber.d("Caption is added.");
+                    }));
+            }
+            progressBarEditDescription.setVisibility(GONE);
+            editDescription.setVisibility(VISIBLE);
+
+        } else if (requestCode == REQUEST_CODE && resultCode == RESULT_CANCELED) {
             viewUtil.showShortToast(getContext(),
                 Objects.requireNonNull(getContext())
                     .getString(R.string.coordinates_picking_unsuccessful));
+
+        } else if (requestCode == REQUEST_CODE_EDIT_DESCRIPTION && resultCode == RESULT_CANCELED) {
+            progressBarEditDescription.setVisibility(GONE);
+            editDescription.setVisibility(VISIBLE);
+
+            viewUtil.showShortToast(getContext(),
+                Objects.requireNonNull(getContext())
+                    .getString(R.string.descriptions_picking_unsuccessful));
         }
+    }
+
+    /**
+     * Adds caption to the map and updates captions
+     * @param mediaDetail UploadMediaDetail
+     * @param updatedCaptions updated captionds
+     */
+    private void updateCaptions(UploadMediaDetail mediaDetail,
+        LinkedHashMap<String, String> updatedCaptions) {
+        updatedCaptions.put(mediaDetail.getLanguageCode(), mediaDetail.getCaptionText());
+        media.setCaptions(updatedCaptions);
     }
 
     @OnClick(R.id.update_categories_button)

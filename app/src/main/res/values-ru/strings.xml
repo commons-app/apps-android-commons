@@ -95,6 +95,7 @@
   <string name="signup">Регистрация</string>
   <string name="logging_in_title">Вход в систему</string>
   <string name="logging_in_message">Пожалуйста, подождите…</string>
+  <string name="updating_caption_message">Пожалуйста, подождите…</string>
   <string name="login_success">Вход выполнен успешно!</string>
   <string name="login_failed">Ошибка входа в систему!</string>
   <string name="upload_failed">Файл не найден. Попробуйте другой файл.</string>

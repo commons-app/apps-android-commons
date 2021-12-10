@@ -1,43 +1,38 @@
 package fr.free.nrw.commons.explore.categories
 
-import android.view.View
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import fr.free.nrw.commons.R
+import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.category.CATEGORY_PREFIX
-import fr.free.nrw.commons.explore.paging.BaseViewHolder
-import fr.free.nrw.commons.explore.paging.inflate
-import kotlinx.android.synthetic.main.item_recent_searches.*
+import fr.free.nrw.commons.databinding.ItemRecentSearchesBinding
 
+class PagedSearchCategoriesAdapter(private val onCategoryClicked: (String) -> Unit) :
+    PagedListAdapter<String, CategoryItemViewHolder>(PagedSearchCategoriesDiffUtilCallback) {
 
-class PagedSearchCategoriesAdapter(val onCategoryClicked: (String) -> Unit) :
-    PagedListAdapter<String, CategoryItemViewHolder>(
-        object : DiffUtil.ItemCallback<String>() {
-            override fun areItemsTheSame(oldItem: String, newItem: String) =
-                oldItem == newItem
-
-            override fun areContentsTheSame(oldItem: String, newItem: String) =
-                oldItem == newItem
-        }
-    ) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryItemViewHolder {
-        return CategoryItemViewHolder(
-            parent.inflate(R.layout.item_recent_searches),
-            onCategoryClicked
-        )
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CategoryItemViewHolder(
+        ItemRecentSearchesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    )
 
     override fun onBindViewHolder(holder: CategoryItemViewHolder, position: Int) {
-        holder.bind(getItem(position)!!)
+        holder.bind(getItem(position)!!, onCategoryClicked)
     }
 }
 
-class CategoryItemViewHolder(containerView: View, val onCategoryClicked: (String) -> Unit) :
-    BaseViewHolder<String>(containerView) {
-
-    override fun bind(item: String) {
-        containerView.setOnClickListener { onCategoryClicked(item) }
+class CategoryItemViewHolder(
+    private val binding: ItemRecentSearchesBinding
+) : RecyclerView.ViewHolder(binding.root) {
+    fun bind(item: String, onCategoryClicked: (String) -> Unit) = with(binding) {
+        root.setOnClickListener { onCategoryClicked(item) }
         textView1.text = item.substringAfter(CATEGORY_PREFIX)
     }
+}
+
+private object PagedSearchCategoriesDiffUtilCallback : DiffUtil.ItemCallback<String>() {
+    override fun areItemsTheSame(oldItem: String, newItem: String) =
+        oldItem == newItem
+
+    override fun areContentsTheSame(oldItem: String, newItem: String) =
+        oldItem == newItem
 }
