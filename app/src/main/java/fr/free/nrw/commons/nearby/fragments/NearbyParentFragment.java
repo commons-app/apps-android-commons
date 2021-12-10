@@ -118,9 +118,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -322,12 +320,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     nearbyParentFragmentInstanceReadyCallback.onReady();
                 }
                 performMapReadyActions();
-                List<String> locationLatLng =  new ArrayList<>(applicationKvStore.getStringSet("LastLocation"));
                 final CameraPosition cameraPosition;
-                if(!locationLatLng.isEmpty()) { // Checking for last searched location
+                if(applicationKvStore.getString("LastLocation")!=null) { // Checking for last searched location
+                    String[] locationLatLng = applicationKvStore.getString("LastLocation").split(",");
                     cameraPosition = new CameraPosition.Builder()
-                        .target(new LatLng(Double.valueOf(locationLatLng.get(0)),
-                            Double.valueOf(locationLatLng.get(1))))
+                        .target(new LatLng(Double.valueOf(locationLatLng[0]),
+                            Double.valueOf(locationLatLng[1])))
                         .zoom(ZOOM_LEVEL)
                         .build();
                 }else {
@@ -455,9 +453,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         applicationKvStore.putBoolean("doNotAskForLocationPermission", true);
         final CameraPosition position;
-        List<String> locationLatLng =  new ArrayList<>(applicationKvStore.getStringSet("LastLocation"));
-        if(!locationLatLng.isEmpty()) { // Checking for last searched location
-            lastKnownLocation = new fr.free.nrw.commons.location.LatLng(Double.valueOf(locationLatLng.get(0)), Double.valueOf(locationLatLng.get(1)), 1f);
+        if(applicationKvStore.getString("LastLocation")!=null) { // Checking for last searched location
+            String[] locationLatLng = applicationKvStore.getString("LastLocation").split(",");
+            lastKnownLocation = new fr.free.nrw.commons.location.LatLng(Double.valueOf(locationLatLng[0]), Double.valueOf(locationLatLng[1]), 1f);
             position = new CameraPosition.Builder()
                 .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation))
                 .zoom(ZOOM_LEVEL)
@@ -1002,7 +1000,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(nearbyPlacesInfo -> {
                     // Updating last searched location
-                    applicationKvStore.putStringSet("LastLocation", new HashSet<>(Arrays.asList(Double.toString(searchLatLng.getLatitude()), Double.toString(searchLatLng.getLongitude()))));
+                    applicationKvStore.putString("LastLocation", searchLatLng.getLatitude() + "," + searchLatLng.getLongitude());
                     updateMapMarkers(nearbyPlacesInfo, false);
                     lastFocusLocation=searchLatLng;
                 },
