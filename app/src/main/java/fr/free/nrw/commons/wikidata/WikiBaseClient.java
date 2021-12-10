@@ -3,6 +3,7 @@ package fr.free.nrw.commons.wikidata;
 import static fr.free.nrw.commons.media.MediaClientKt.PAGE_ID_PREFIX;
 import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF;
 
+import android.util.Log;
 import fr.free.nrw.commons.upload.UploadResult;
 import fr.free.nrw.commons.upload.WikiBaseInterface;
 import io.reactivex.Observable;
@@ -35,7 +36,14 @@ public class WikiBaseClient {
                 .map(response -> (response.getSuccessVal() == 1)));
     }
 
-    public Observable<Boolean> postEditEntityByFilename(String filename, String data) {
+    /**
+     * Makes the server call for posting new depicts
+     *
+     * @param filename name of the file
+     * @param data data of the depicts to be uploaded
+     * @return Observable<Boolean>
+     */
+    public Observable<Boolean> postEditEntityByFilename(final String filename, final String data) {
         return csrfToken()
             .switchMap(editToken -> wikiBaseInterface.postEditEntityByFilename(filename,
                 editToken, data)

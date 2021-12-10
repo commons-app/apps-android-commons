@@ -7,35 +7,41 @@ import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.notification.NotificationHelper
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.utils.ViewUtilWrapper
 import fr.free.nrw.commons.wikidata.WikidataEditService
 import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.SingleSource
-import io.reactivex.functions.Function
 import timber.log.Timber
-import java.lang.StringBuilder
 import javax.inject.Inject
 
 class DepictEditHelper @Inject constructor (notificationHelper: NotificationHelper,
-                       wikidataEditService: WikidataEditService, viewUtilWrapper: ViewUtilWrapper) {
+                                            wikidataEditService: WikidataEditService, viewUtilWrapper: ViewUtilWrapper) {
 
+    /**
+     * Class for making post operations
+     */
     @Inject
     lateinit var wikidataEditService: WikidataEditService
 
+    /**
+     * Class for creating notification
+     */
     @Inject
     lateinit var notificationHelper: NotificationHelper
 
+    /**
+     * Class for showing toast
+     */
     @Inject
     lateinit var viewUtilWrapper: ViewUtilWrapper
 
     /**
-     * Public interface to edit categories
-     * @param context
-     * @param media
-     * @param categories
-     * @return
+     * Public interface to edit depicts
+     *
+     * @param context context
+     * @param media media
+     * @param depicts selected depicts to be added
+     * @return Single<Boolean>
      */
     fun makeDepictEdit(
         context: Context,
@@ -56,16 +62,25 @@ class DepictEditHelper @Inject constructor (notificationHelper: NotificationHelp
     }
 
     /**
-     * Appends new categories
-     * @param media
-     * @param categories to be added
-     * @return
+     * Appends new depicts
+     *
+     * @param media media
+     * @param depicts to be added
+     * @return Observable<Boolean>
      */
     private fun addCategory(media: Media, depicts: List<String>): Observable<Boolean> {
         Timber.d("thread is depict adding %s", Thread.currentThread().name)
         return wikidataEditService.editDepiction(depicts, media.filename)
     }
 
+    /**
+     * Helps to create notification about condition of editing depicts
+     *
+     * @param context context
+     * @param media media
+     * @param result response of result
+     * @return Single<Boolean>
+     */
     private fun showCategoryEditNotification(
         context: Context,
         media: Media,
@@ -104,6 +119,4 @@ class DepictEditHelper @Inject constructor (notificationHelper: NotificationHelp
         )
         return result
     }
-
-
 }

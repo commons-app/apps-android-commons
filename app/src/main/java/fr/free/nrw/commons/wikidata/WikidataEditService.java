@@ -5,6 +5,7 @@ import static fr.free.nrw.commons.media.MediaClientKt.PAGE_ID_PREFIX;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import fr.free.nrw.commons.R;
@@ -75,7 +76,7 @@ public class WikidataEditService {
     @SuppressLint("CheckResult")
     private Observable<Boolean> addDepictsProperty(final String fileEntityId,
         final WikidataItem depictedItem) {
-
+        Log.d("hhhh", "getDepictedItems: "+ depictedItem.getId());
         final EditClaim data = editClaim(
             ConfigUtils.isBetaFlavour() ? "Q10" // Wikipedia:Sandbox (Q10)
                 : depictedItem.getId()
@@ -96,8 +97,16 @@ public class WikidataEditService {
             .subscribeOn(Schedulers.io());
     }
 
+    /**
+     * Takes depicts ID as a parameter and create a uploadable data with the Id
+     * and send the data for POST operation
+     *
+     * @param filename name of the file
+     * @param depictedItem ID of the selected depict item
+     * @return Observable<Boolean>
+     */
     @SuppressLint("CheckResult")
-    private Observable<Boolean> updateDepictsProperty(final String filename,
+    public Observable<Boolean> updateDepictsProperty(final String filename,
         final String depictedItem) {
 
         final EditClaim data = editClaim(
@@ -105,7 +114,7 @@ public class WikidataEditService {
                 : depictedItem
         );
 
-        return wikiBaseClient.postEditEntityByFilename(PAGE_ID_PREFIX + filename,
+        return wikiBaseClient.postEditEntityByFilename(filename,
             gson.toJson(data))
             .doOnNext(success -> {
                 if (success) {
@@ -239,7 +248,16 @@ public class WikidataEditService {
             .concatMap(wikidataItem -> addDepictsProperty(fileEntityId.toString(), wikidataItem));
     }
 
-    public Observable<Boolean> editDepiction(List<String> depictedItems, String filename) {
+    /**
+     * Takes the selected items as a parameter and iterate through every item and send each item
+     * for post opration
+     *
+     * @param depictedItems selected depict items
+     * @param filename name of the file
+     * @return Observable<Boolean>
+     */
+    public Observable<Boolean> editDepiction(final List<String> depictedItems,
+        final String filename) {
         return Observable.fromIterable(depictedItems)
             .concatMap(wikidataItem -> updateDepictsProperty(filename, wikidataItem));
     }

@@ -31,6 +31,7 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
@@ -133,10 +134,17 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      * Initialise recyclerView and set adapter
      */
     private void initRecyclerView() {
-        adapter = new UploadDepictsAdapter(item -> {
-            presenter.onDepictItemClicked(item);
-            return Unit.INSTANCE;
-        });
+        if (media == null) {
+            adapter = new UploadDepictsAdapter(categoryItem -> {
+                presenter.onDepictItemClicked(categoryItem);
+                return Unit.INSTANCE;
+            }, new ArrayList<>());
+        } else {
+            adapter = new UploadDepictsAdapter(item -> {
+                presenter.onDepictItemClicked(item);
+                return Unit.INSTANCE;
+            }, media.getDepictionIds());
+        }
         depictsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         depictsRecyclerView.setAdapter(adapter);
     }
@@ -226,6 +234,9 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         progressDialog.dismiss();
     }
 
+    /**
+     * Determines the calling fragment by media nullability and act accordingly
+     */
     @OnClick(R.id.depicts_next)
     public void onNextButtonClicked() {
         if(media != null){
@@ -235,6 +246,9 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         }
     }
 
+    /**
+     * Determines the calling fragment by media nullability and act accordingly
+     */
     @OnClick(R.id.depicts_previous)
     public void onPreviousButtonClicked() {
         if(media != null){

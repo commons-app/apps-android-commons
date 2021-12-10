@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload.depicts
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
@@ -154,6 +155,10 @@ class DepictsPresenter @Inject constructor(
         }
     }
 
+    /**
+     * Gets the selected depicts and send them for posting to the server
+     * and saves them in local storage
+     */
     override fun updateDepicts(media: Media) {
         view.showProgressDialog()
         if (repository.selectedDepictions.isNotEmpty()) {
@@ -171,10 +176,11 @@ class DepictsPresenter @Inject constructor(
                     //save all the selected Depicted item in room Database
                     depictsDao.savingDepictsInRoomDataBase(repository.selectedDepictions)
                 }
+
                 compositeDisposable.add(depictsHelper.makeDepictEdit(
                     view.fragmentContext,
                     media,
-                    allDepicts
+                    selectedDepictions
                 )
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

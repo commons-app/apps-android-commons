@@ -496,11 +496,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
       buildDepictionList(idAndCaptions);
     }
 
+    /**
+     * By clicking on the edit depicts button, it will send user to depict fragment
+     */
     @OnClick(R.id.depictEditButton)
     public void onDepictEditButtonClicked() {
-        ((ContributionsFragment) (getParentFragment()
-            .getParentFragment())).nearbyNotificationCardView
-            .setVisibility(View.GONE);
         final Fragment depictsFragment = new DepictsFragment();
         final Bundle bundle = new Bundle();
         bundle.putParcelable("Existing_Depicts", media);
@@ -510,6 +510,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
     /**
      * The imageSpacer is Basically a transparent overlay for the SimpleDraweeView
      * which holds the image to be displayed( moreover this image is out of
