@@ -39,13 +39,14 @@
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
               android:id="@+id/caption_item_edit_text"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:hint="@string/share_caption_hint"
               android:imeOptions="actionNext|flagNoExtractUi"
-              android:inputType="textMultiLine" />
+              android:inputType="textMultiLine"
+              app:allowFormatting="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -56,13 +57,14 @@
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
               android:id="@+id/description_item_edit_text"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:hint="@string/share_description_hint"
               android:imeOptions="actionNext|flagNoExtractUi"
-              android:inputType="textMultiLine" />
+              android:inputType="textMultiLine"
+              app:allowFormatting="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

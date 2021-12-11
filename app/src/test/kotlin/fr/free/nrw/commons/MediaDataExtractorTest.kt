@@ -1,5 +1,6 @@
 package fr.free.nrw.commons
 
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Single
 import org.junit.Assert.assertTrue
@@ -11,6 +12,7 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
+import org.wikipedia.dataclient.mwapi.MwQueryResponse
 
 /**
  * Test methods in media data extractor
@@ -48,5 +50,11 @@ class MediaDataExtractorTest {
         //val fetchMediaDetails = mediaDataExtractor?.fetchMediaDetails("File:Test.jpg", null)
 
         //assertTrue(fetchMediaDetails is Media)
+    }
+
+    @Test
+    fun getWikiText() {
+        `when`(mediaDataExtractor?.getCurrentWikiText(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just("Test"))
     }
 }

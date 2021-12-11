@@ -115,6 +115,7 @@
   <string name="menu_refresh">Label for menu item that refreshes current list of images.\n{{Identical|Refresh}}</string>
   <string name="ok">{{Identical|OK}}</string>
   <string name="warning">{{Identical|Warning}}</string>
+  <string name="upload">{{Identical|Upload}}</string>
   <string name="yes">{{Identical|Yes}}</string>
   <string name="no">{{Identical|No}}</string>
   <string name="media_detail_title">{{Identical|Title}}</string>
@@ -137,6 +138,7 @@
   <string name="navigation_item_home">{{Identical|Home}}</string>
   <string name="navigation_item_upload">{{Identical|Upload}}</string>
   <string name="navigation_item_nearby">{{Identical|Nearby}}</string>
+  <string name="navigation_item_about">{{Identical|About}}</string>
   <string name="navigation_item_info">{{Identical|Tutorial}}</string>
   <string name="navigation_item_notification">{{Identical|Notification}}</string>
   <string name="navigation_item_review">{{Identical|Review}}</string>
