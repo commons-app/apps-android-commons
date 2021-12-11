@@ -223,13 +223,16 @@ public class NearbyParentFragmentPresenter
     }
 
     private LatLng deriveUpdatedLocationFromSearchQuery(String customQuery) {
+        LatLng latLng = null;
         final int indexOfPrefix = customQuery.indexOf("Point(");
         if (indexOfPrefix == -1) {
             Timber.e("Invalid prefix index - Seems like user has entered an invalid query");
+            return latLng;
         }
         final int indexOfSuffix = customQuery.indexOf(")\"", indexOfPrefix);
         if (indexOfSuffix == -1) {
             Timber.e("Invalid suffix index - Seems like user has entered an invalid query");
+            return latLng;
         }
         String latLngString = customQuery.substring(indexOfPrefix+"Point(".length(), indexOfSuffix);
         if (latLngString.isEmpty()) {
@@ -241,7 +244,6 @@ public class NearbyParentFragmentPresenter
             return null;
         }
 
-        LatLng latLng = null;
         try {
             latLng = new LatLng(Double.parseDouble(latLngArray[1].trim()),
                 Double.parseDouble(latLngArray[0].trim()), 1f);

@@ -393,6 +393,14 @@ class NearbyParentFragmentPresenterTest {
     }
 
     @Test
+    fun testBackButtonClickedWhenAdvancedFragmentIsVisible() {
+        whenever(nearbyParentFragmentView.isAdvancedQueryFragmentVisible()).thenReturn(true)
+        val hasNearbyHandledBackPress = nearbyPresenter.backButtonClicked()
+        verify(nearbyParentFragmentView).showHideAdvancedQueryFragment(false)
+        assertTrue(hasNearbyHandledBackPress)
+    }
+
+    @Test
     fun testMarkerUnselected() {
         nearbyPresenter.markerUnselected()
         verify(nearbyParentFragmentView).hideBottomSheet();
@@ -430,6 +438,29 @@ class NearbyParentFragmentPresenterTest {
     }
 
     @Test
+    fun testOnLocationChangeTypeCustomQuery() {
+        nearbyPresenter.setAdvancedQuery("Point(17.865 82.343)\"")
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
+        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
+        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
+        expectMapAndListUpdate()
+        verify(nearbyParentFragmentView).setProgressBarVisibility(true)
+        verify(nearbyParentFragmentView).populatePlaces(any(), any())
+    }
+
+    @Test
+    fun testOnLocationChangeTypeCustomQueryInvalidQuery() {
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
+        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
+        nearbyPresenter.setAdvancedQuery("")
+        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
+        expectMapAndListUpdate()
+        nearbyPresenter.setAdvancedQuery("Point(")
+        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
+        expectMapAndListUpdate()
+    }
+
+    @Test
     fun testOnCameraMoveWhenSearchLocationNull() {
         NearbyController.latestSearchLocation = null
         nearbyPresenter.onCameraMove(Mockito.mock(com.mapbox.mapboxsdk.geometry.LatLng::class.java))
@@ -455,5 +486,10 @@ class NearbyParentFragmentPresenterTest {
         verify(nearbyParentFragmentView).setProjectorLatLngBounds()
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
         verifyZeroInteractions(nearbyParentFragmentView)
+    }
+
+    @Test
+    fun testSetAdvancedQuery(){
+        nearbyPresenter.setAdvancedQuery("test")
     }
 }
