@@ -271,7 +271,7 @@ public class MainActivity  extends BaseActivity
             setTitle(getString(R.string.navigation_item_explore));
             loadFragment(ExploreFragment.newInstance(),false);
         }else if(fragmentName.equals(ActiveFragment.BOOKMARK.name())) {
-            setTitle(getString(R.string.favorites));
+            setTitle(getString(R.string.bookmarks));
             loadFragment(BookmarkFragment.newInstance(),false);
         }
     }
