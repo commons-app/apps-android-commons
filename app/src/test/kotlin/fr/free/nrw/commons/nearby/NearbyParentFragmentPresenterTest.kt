@@ -450,8 +450,8 @@ class NearbyParentFragmentPresenterTest {
 
     @Test
     fun testOnLocationChangeTypeCustomQueryInvalidQuery() {
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
-        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
+        whenever(nearbyParentFragmentView.lastLocation).thenReturn(latestLocation)
         nearbyPresenter.setAdvancedQuery("")
         nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
         expectMapAndListUpdate()

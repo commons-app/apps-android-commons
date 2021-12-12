@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.fragment.app.Fragment
 import fr.free.nrw.commons.R
 import kotlinx.android.synthetic.main.fragment_advance_query.*
@@ -14,6 +16,9 @@ class AdvanceQueryFragment : Fragment() {
 
     lateinit var originalQuery: String
     lateinit var callback: Callback
+    lateinit var etQuery: AppCompatEditText
+    lateinit var btnApply: AppCompatButton
+    lateinit var btnReset: AppCompatButton
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,28 +32,33 @@ class AdvanceQueryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        et_query.setText(originalQuery)
-        btn_reset.setOnClickListener {
-            btn_reset.post {
-                et_query.setText(originalQuery)
-                et_query.clearFocus()
+        etQuery = view.findViewById(R.id.et_query)
+        btnApply = view.findViewById(R.id.btn_apply)
+        btnReset = view.findViewById(R.id.btn_reset)
+
+        etQuery.setText(originalQuery)
+        btnReset.setOnClickListener {
+            btnReset.post {
+                etQuery.setText(originalQuery)
+                etQuery.clearFocus()
                 hideKeyBoard()
                 callback.reset()
             }
         }
 
-        btn_apply.setOnClickListener {
-            btn_apply.post {
-                et_query.clearFocus()
+        btnApply.setOnClickListener {
+            btnApply.post {
+                etQuery.clearFocus()
                 hideKeyBoard()
-                callback.apply(et_query.text.toString())
+                callback.apply(etQuery.text.toString())
                 callback.close()
             }
         }
     }
 
-    fun hideKeyBoard(){
-        val inputMethodManager = context?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+    fun hideKeyBoard() {
+        val inputMethodManager =
+            context?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
