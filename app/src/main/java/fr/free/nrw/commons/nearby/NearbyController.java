@@ -55,6 +55,7 @@ public class NearbyController {
      * @param curLatLng current location for user
      * @param searchLatLng the location user wants to search around
      * @param returnClosestResult if this search is done to find closest result or all results
+     * @param customQuery if this search is done via an advanced query
      * @return NearbyPlacesInfo a variable holds Place list without distance information
      * and boundary coordinates of current Place List
      */
@@ -131,6 +132,23 @@ public class NearbyController {
         else {
             return nearbyPlacesInfo;
         }
+    }
+
+    /**
+     * Prepares Place list to make their distance information update later.
+     *
+     * @param curLatLng           current location for user
+     * @param searchLatLng        the location user wants to search around
+     * @param returnClosestResult if this search is done to find closest result or all results
+     * @return NearbyPlacesInfo a variable holds Place list without distance information and
+     * boundary coordinates of current Place List
+     */
+    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng,
+        final LatLng searchLatLng,
+        final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
+        final boolean shouldQueryForMonuments) throws Exception {
+        return loadAttractionsFromLocation(curLatLng, searchLatLng, returnClosestResult,
+            checkingAroundCurrentLocation, shouldQueryForMonuments, null);
     }
 
     /**

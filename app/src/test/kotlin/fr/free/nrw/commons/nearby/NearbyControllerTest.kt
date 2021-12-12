@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.nearby
 
 import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.eq
 import fr.free.nrw.commons.location.LatLng
 import org.junit.Before
@@ -46,6 +47,27 @@ class NearbyControllerTest {
             eq(false),
             eq(true),
             eq(customQuery)
+        )
+    }
+
+    @Test
+    fun testLoadAttractionsForLocationTestNoQuery() {
+        Mockito.`when`(nearbyPlaces.radiusExpander(any(), any(), any(), any(), anyOrNull()))
+            .thenReturn(Collections.emptyList())
+        nearbyController.loadAttractionsFromLocation(
+            searchLatLong,
+            currentLatLng,
+            false,
+            false,
+            true,
+            null
+        )
+        Mockito.verify(nearbyPlaces).radiusExpander(
+            eq(currentLatLng),
+            any(String::class.java),
+            eq(false),
+            eq(true),
+            eq(null)
         )
     }
 
