@@ -467,19 +467,19 @@ class NearbyParentFragmentPresenterTest {
     fun testOnLocationChangeTypeCustomQueryUnParsableQuery() {
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
         whenever(nearbyParentFragmentView.lastLocation).thenReturn(latestLocation)
-        nearbyPresenter.setAdvancedQuery("Point()")
+        nearbyPresenter.setAdvancedQuery("Point()\"")
         nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
         expectMapAndListUpdate()
 
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
         whenever(nearbyParentFragmentView.lastLocation).thenReturn(latestLocation)
-        nearbyPresenter.setAdvancedQuery("Point(ab)")
+        nearbyPresenter.setAdvancedQuery("Point(ab)\"")
         nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
         expectMapAndListUpdate()
 
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
         whenever(nearbyParentFragmentView.lastLocation).thenReturn(latestLocation)
-        nearbyPresenter.setAdvancedQuery("Point(ab ab)")
+        nearbyPresenter.setAdvancedQuery("Point(ab ab)\"")
         nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
         expectMapAndListUpdate()
     }
