@@ -58,8 +58,8 @@ class AdvanceQueryFragment : Fragment() {
 
     fun hideKeyBoard() {
         val inputMethodManager =
-            context?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
+            context?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
+        inputMethodManager?.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
     interface Callback {

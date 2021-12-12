@@ -15,6 +15,7 @@ import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
+import java.util.*
 
 /**
  * The unit test class for NearbyParentFragmentPresenter
@@ -32,6 +33,8 @@ class NearbyParentFragmentPresenterTest {
     internal lateinit var selectedLabels: List<Label>
     @Mock
     internal lateinit var marker: Marker
+    @Mock
+    internal lateinit var nearbyPlaces: NearbyPlaces
 
     private lateinit var nearbyPresenter: NearbyParentFragmentPresenter
     private lateinit var mapboxCameraTarget: com.mapbox.mapboxsdk.geometry.LatLng
@@ -512,5 +515,23 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun testSetAdvancedQuery(){
         nearbyPresenter.setAdvancedQuery("test")
+    }
+
+    @Test
+    fun testUpdateMapMarkers(){
+        var nearbyPlacesInfo = NearbyController(nearbyPlaces).NearbyPlacesInfo()
+        nearbyPlacesInfo.boundaryCoordinates= arrayOf()
+        nearbyPlacesInfo.curLatLng=latestLocation
+        nearbyPlacesInfo.searchLatLng=latestLocation
+        nearbyPlacesInfo.placeList = null
+
+        whenever(bookmarkLocationsDao.allBookmarksLocations).thenReturn(Collections.emptyList())
+        nearbyPresenter.updateMapMarkers(nearbyPlacesInfo, marker, true)
+        Mockito.verify(nearbyParentFragmentView).updateMapMarkers(any(), eq(marker))
+        Mockito.verify(nearbyParentFragmentView).addCurrentLocationMarker(latestLocation)
+        Mockito.verify(nearbyParentFragmentView).updateMapToTrackPosition(latestLocation)
+        Mockito.verify(nearbyParentFragmentView).setProgressBarVisibility(false)
+        Mockito.verify(nearbyParentFragmentView).centerMapToPosition(latestLocation)
+
     }
 }
