@@ -57,15 +57,28 @@ class OkHttpJsonApiClientTests {
             campaignsUrl,
             gson
         )
+        Mockito.`when`(okhttpClient.newCall(any())).thenReturn(call)
+        Mockito.`when`(call.execute()).thenReturn(response)
+    }
+
+    @Test
+    fun testGetNearbyPlacesCustomQuery() {
+        Mockito.`when`(response.message()).thenReturn("test")
+        try {
+            okHttpJsonApiClient.getNearbyPlaces(latLng, "test", 10.0, true, "test")
+        } catch (e: Exception) {
+            assert(e.message.equals("test"))
+        }
+        verify(okhttpClient).newCall(any())
+        verify(call).execute()
+
     }
 
     @Test
     fun testGetNearbyPlaces() {
-        Mockito.`when`(okhttpClient.newCall(any())).thenReturn(call)
-        Mockito.`when`(call.execute()).thenReturn(response)
         Mockito.`when`(response.message()).thenReturn("test")
         try {
-            okHttpJsonApiClient.getNearbyPlaces(latLng, "test", 10.0, true, "test")
+            okHttpJsonApiClient.getNearbyPlaces(latLng, "test", 10.0, true)
         } catch (e: Exception) {
             assert(e.message.equals("test"))
         }

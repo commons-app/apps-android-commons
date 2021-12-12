@@ -204,8 +204,7 @@ class FileProcessor @Inject constructor(
                         imageCoordinates.latLng,
                         Locale.getDefault().language,
                         it,
-                        false,
-                        null
+                        false
                     )
                 }
             }

@@ -266,6 +266,16 @@ public class OkHttpJsonApiClient {
         });
     }
 
+    /**
+     * Make API Call to get Nearby Places
+     *
+     * @param cur                     Search lat long
+     * @param language                Language
+     * @param radius                  Search Radius
+     * @param shouldQueryForMonuments : Should we query for monuments
+     * @return
+     * @throws Exception
+     */
     @Nullable
     public List<Place> getNearbyPlaces(final LatLng cur, final String language, final double radius,
         final boolean shouldQueryForMonuments, final String customQuery)
@@ -315,6 +325,23 @@ public class OkHttpJsonApiClient {
             return places;
         }
         throw new Exception(response.message());
+    }
+
+    /**
+     * Make API Call to get Nearby Places Implementation does not expects a custom query
+     *
+     * @param cur                     Search lat long
+     * @param language                Language
+     * @param radius                  Search Radius
+     * @param shouldQueryForMonuments : Should we query for monuments
+     * @return
+     * @throws Exception
+     */
+    @Nullable
+    public List<Place> getNearbyPlaces(final LatLng cur, final String language, final double radius,
+        final boolean shouldQueryForMonuments)
+        throws Exception {
+        return getNearbyPlaces(cur, language, radius, shouldQueryForMonuments, null);
     }
 
     /**

@@ -61,6 +61,9 @@ class AdvanceQueryFragmentUnitTests {
     @Mock
     private lateinit var btnApply: AppCompatButton
 
+    @Mock
+    private lateinit var bundle: Bundle
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
@@ -70,10 +73,10 @@ class AdvanceQueryFragmentUnitTests {
         activity = Robolectric.buildActivity(MainActivity::class.java).create().get()
         viewGroup = FrameLayout(context)
 
+        Mockito.`when`(bundle.getString("query")).thenReturn("test")
+
         fragment = AdvanceQueryFragment()
         fragment.callback = callback
-        val bundle = Bundle()
-        bundle.putString("query", "test")
         fragment.arguments = bundle
 
         val fragmentManager: FragmentManager = activity.supportFragmentManager
@@ -97,9 +100,6 @@ class AdvanceQueryFragmentUnitTests {
 
     @Test
     fun testOnCreateView() {
-        val bundle = Bundle()
-        bundle.putString("query", "test")
-        fragment.arguments = bundle
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onCreateView(layoutInflater, viewGroup, bundle)
         verify(layoutInflater).inflate(R.layout.fragment_advance_query, viewGroup, false)
@@ -107,11 +107,9 @@ class AdvanceQueryFragmentUnitTests {
 
     @Test
     fun testOnViewCreated() {
-        val bundle = Bundle()
-        bundle.putString("query", "test")
-        fragment.arguments = bundle
         fragment.onCreateView(layoutInflater, viewGroup, bundle)
         fragment.onViewCreated(view, bundle)
+        verify(etQuery).setText("test")
 
         Mockito.`when`(btnReset.post(any())).thenAnswer {
             it.getArgument(0, Runnable::class.java).run()
@@ -121,7 +119,11 @@ class AdvanceQueryFragmentUnitTests {
             it.getArgument(0, Runnable::class.java).run()
         }
         btnReset.performClick()
-        verify(etQuery).setText("test")
         btnApply.performClick()
+    }
+
+    @Test
+    fun testHideKeyboard() {
+        fragment.hideKeyBoard()
     }
 }

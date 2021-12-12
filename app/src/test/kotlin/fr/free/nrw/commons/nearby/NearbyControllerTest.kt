@@ -59,8 +59,7 @@ class NearbyControllerTest {
             currentLatLng,
             false,
             false,
-            true,
-            null
+            true
         )
         Mockito.verify(nearbyPlaces).radiusExpander(
             eq(currentLatLng),
