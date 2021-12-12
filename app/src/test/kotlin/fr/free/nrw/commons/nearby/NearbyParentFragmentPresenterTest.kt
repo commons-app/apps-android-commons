@@ -461,6 +461,27 @@ class NearbyParentFragmentPresenterTest {
     }
 
     @Test
+    fun testOnLocationChangeTypeCustomQueryUnParsableQuery() {
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
+        whenever(nearbyParentFragmentView.lastLocation).thenReturn(latestLocation)
+        nearbyPresenter.setAdvancedQuery("Point()")
+        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
+        expectMapAndListUpdate()
+
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
+        whenever(nearbyParentFragmentView.lastLocation).thenReturn(latestLocation)
+        nearbyPresenter.setAdvancedQuery("Point(ab)")
+        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
+        expectMapAndListUpdate()
+
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
+        whenever(nearbyParentFragmentView.lastLocation).thenReturn(latestLocation)
+        nearbyPresenter.setAdvancedQuery("Point(ab ab)")
+        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
+        expectMapAndListUpdate()
+    }
+
+    @Test
     fun testOnCameraMoveWhenSearchLocationNull() {
         NearbyController.latestSearchLocation = null
         nearbyPresenter.onCameraMove(Mockito.mock(com.mapbox.mapboxsdk.geometry.LatLng::class.java))
