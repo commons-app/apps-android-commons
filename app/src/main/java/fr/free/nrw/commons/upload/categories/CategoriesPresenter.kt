@@ -165,7 +165,7 @@ class CategoriesPresenter @Inject constructor(
         }
         if (allCategories.isEmpty()) {
             // Stick in a filler element.
-            allCategories.add(getString(R.string.detail_panel_cats_none))
+            allCategories.add(view.fragmentContext.getString(R.string.detail_panel_cats_none))
         }
         rebuildCatList(allCategories)
     }
