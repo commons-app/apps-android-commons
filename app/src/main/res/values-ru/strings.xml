@@ -535,10 +535,13 @@
   <string name="category_edit_button_text">Обновить категории</string>
   <string name="coordinates_edit_helper_make_edit_toast">Попытка обновить координаты.</string>
   <string name="coordinates_edit_helper_show_edit_title">Обновление координат</string>
+  <string name="description_edit_helper_show_edit_title">Обновление описания</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Успешно</string>
   <string name="coordinates_edit_helper_show_edit_message">Координаты %1$s добавлены.</string>
+  <string name="description_edit_helper_show_edit_message">Описания добавлены.</string>
   <string name="coordinates_edit_helper_edit_message_else">Не удалось добавить координаты.</string>
   <string name="coordinates_picking_unsuccessful">Не удалось получить координаты.</string>
+  <string name="descriptions_picking_unsuccessful">Не удалось получить описания.</string>
   <string name="share_image_via">Поделиться изображением с помощью</string>
   <string name="you_have_no_achievements_yet">Вы пока что не внесли вклада.</string>
   <string name="no_achievements_yet">У %s пока ещё нет вклада</string>
@@ -593,7 +596,7 @@
   <string name="resume">продолжить</string>
   <string name="paused">Приостановлено</string>
   <string name="more">Ещё</string>
-  <string name="favorites">Избранное</string>
+  <string name="bookmarks">Закладки</string>
   <string name="achievements_tab_title">Достижения</string>
   <string name="leaderboard_tab_title">Таблица лидеров</string>
   <string name="rank_prefix">Ранг:</string>
