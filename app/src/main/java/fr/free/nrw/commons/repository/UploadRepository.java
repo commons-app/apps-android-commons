@@ -19,7 +19,6 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -288,7 +287,7 @@ public class UploadRepository {
             final List<Place> fromWikidataQuery = nearbyPlaces.getFromWikidataQuery(new LatLng(
                     decLatitude, decLongitude, 0.0f),
                     Locale.getDefault().getLanguage(),
-                    NEARBY_RADIUS_IN_KILO_METERS, false);
+                    NEARBY_RADIUS_IN_KILO_METERS, false, null);
             return (fromWikidataQuery != null && fromWikidataQuery.size() > 0) ? fromWikidataQuery
                 .get(0) : null;
         }catch (final Exception e) {
