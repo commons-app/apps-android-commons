@@ -135,7 +135,7 @@ class CategoriesPresenter @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     media.addedCategories = selectedCategories
-                    updateCategoryList()
+                    updateCategoryList(media)
                     view.goBackToPreviousScreen()
                     view.dismissProgressDialog()
                 }) {
@@ -149,19 +149,19 @@ class CategoriesPresenter @Inject constructor(
         }
     }
 
-    private fun updateCategoryList() {
+    private fun updateCategoryList(media: Media) {
         val allCategories: MutableList<String> = ArrayList<String>(media.categories)
         if (media.addedCategories != null) {
             // TODO this added categories logic should be removed.
             //  It is just a short term hack. Categories should be fetch everytime they are updated.
             // if media.getCategories contains addedCategory, then do not re-add them
-            for (addedCategory in media.addedCategories) {
+            for (addedCategory in media.addedCategories!!) {
                 if (allCategories.contains(addedCategory)) {
                     media.addedCategories = null
                     break
                 }
             }
-            allCategories.addAll(media.addedCategories)
+            allCategories.addAll(media.addedCategories!!)
         }
         if (allCategories.isEmpty()) {
             // Stick in a filler element.
