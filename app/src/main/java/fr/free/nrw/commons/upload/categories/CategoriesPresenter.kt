@@ -14,6 +14,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
+import java.util.ArrayList
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -133,7 +134,8 @@ class CategoriesPresenter @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    media.categories = allCategories
+                    media.addedCategories = selectedCategories
+                    updateCategoryList()
                     view.goBackToPreviousScreen()
                     view.dismissProgressDialog()
                 }) {
@@ -145,6 +147,27 @@ class CategoriesPresenter @Inject constructor(
         } else {
             view.showNoCategorySelected()
         }
+    }
+
+    private fun updateCategoryList() {
+        val allCategories: MutableList<String> = ArrayList<String>(media.categories)
+        if (media.addedCategories != null) {
+            // TODO this added categories logic should be removed.
+            //  It is just a short term hack. Categories should be fetch everytime they are updated.
+            // if media.getCategories contains addedCategory, then do not re-add them
+            for (addedCategory in media.addedCategories) {
+                if (allCategories.contains(addedCategory)) {
+                    media.addedCategories = null
+                    break
+                }
+            }
+            allCategories.addAll(media.addedCategories)
+        }
+        if (allCategories.isEmpty()) {
+            // Stick in a filler element.
+            allCategories.add(getString(R.string.detail_panel_cats_none))
+        }
+        rebuildCatList(allCategories)
     }
 
     /**
