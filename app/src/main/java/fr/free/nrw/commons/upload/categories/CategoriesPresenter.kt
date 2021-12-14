@@ -1,22 +1,11 @@
 package fr.free.nrw.commons.upload.categories
 
-import android.content.Intent
 import android.text.TextUtils
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.category.CategoryDetailsActivity
 import fr.free.nrw.commons.category.CategoryEditHelper
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.di.CommonsApplicationModule
-import fr.free.nrw.commons.di.FragmentBuilderModule_BindCategoriesMediaFragment
-import fr.free.nrw.commons.di.FragmentBuilderModule_BindMediaDetailFragment
-import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity
-import fr.free.nrw.commons.media.MediaDetailFragment
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.proxy
 import io.reactivex.Scheduler
@@ -25,7 +14,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
-import java.util.ArrayList
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
