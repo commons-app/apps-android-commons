@@ -34,6 +34,8 @@ public interface CategoriesContract {
 
         Context getFragmentContext();
 
+        void updateList(List<String> categories);
+
     }
 
     interface UserActionListener extends BasePresenter<View> {

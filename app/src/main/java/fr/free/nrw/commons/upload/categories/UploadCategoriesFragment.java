@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -28,6 +29,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryItem;
+import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -288,5 +290,12 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         return requireContext();
     }
 
-    
+    @Override
+    public void updateList(final List<String> categories) {
+        final MediaDetailFragment mediaDetailFragment = (MediaDetailFragment) getParentFragment();
+        assert mediaDetailFragment != null;
+        mediaDetailFragment.rebuildCatList(categories);
+    }
+
 }
+

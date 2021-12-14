@@ -75,6 +75,7 @@ import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
+import fr.free.nrw.commons.upload.categories.CategoriesContract;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
@@ -1120,7 +1121,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         isDeleted = true;
     }
 
-    private void rebuildCatList(List<String> categories) {
+    public void rebuildCatList(List<String> categories) {
         categoryContainer.removeAllViews();
         for (String category : categories) {
             categoryContainer.addView(buildCatLabel(sanitise(category), categoryContainer));
