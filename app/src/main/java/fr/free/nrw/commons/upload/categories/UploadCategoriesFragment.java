@@ -290,6 +290,11 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         return requireContext();
     }
 
+    /**
+     * update all categories in category layout of MediaDetailFragment
+     *
+     * @param categories all categories
+     */
     @Override
     public void updateList(final List<String> categories) {
         final MediaDetailFragment mediaDetailFragment = (MediaDetailFragment) getParentFragment();
