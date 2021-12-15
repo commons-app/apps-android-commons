@@ -73,7 +73,7 @@
           android:layout_height="wrap_content"
           android:layout_marginTop="@dimen/small_gap"
           android:padding="8px"
-          />
+          android:scrollbars="vertical" />
 
     </LinearLayout>
   </androidx.cardview.widget.CardView>

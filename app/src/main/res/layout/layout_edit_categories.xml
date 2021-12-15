@@ -86,7 +86,8 @@
         android:id="@+id/rv_categories"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_200"
-        android:background="?attr/mainBackground"/>
+        android:background="?attr/mainBackground"
+        android:scrollbars="vertical" />
 
       <LinearLayout
         android:layout_width="match_parent"

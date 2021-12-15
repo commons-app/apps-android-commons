@@ -41,7 +41,8 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/filters" />
+    app:layout_constraintTop_toBottomOf="@+id/filters"
+    android:scrollbars="vertical" />
 
   <Button
     android:text="@string/leaderboard_my_rank_button_text"

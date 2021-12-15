@@ -113,7 +113,8 @@
         android:layout_marginEnd="@dimen/standard_gap"
         android:layout_marginRight="@dimen/standard_gap"
         android:layout_above="@+id/button_divider"
-        android:layout_below="@id/depicts_search_layout" />
+        android:layout_below="@id/depicts_search_layout"
+        android:scrollbars="vertical" />
     </LinearLayout>
 
     <View

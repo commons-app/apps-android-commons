@@ -85,7 +85,8 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_above="@+id/button_divider"
-      android:layout_below="@id/category_search_layout"/>
+      android:layout_below="@id/category_search_layout"
+      android:scrollbars="vertical" />
 
   </LinearLayout>
 
