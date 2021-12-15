@@ -187,6 +187,7 @@ class DepictsPresenter @Inject constructor(
                         media.depictionIds = allDepicts
                         view.goBackToPreviousScreen()
                         view.dismissProgressDialog()
+                        view.updateDepicts()
                     }) {
                         Timber.e(
                             "Failed to update depicts"

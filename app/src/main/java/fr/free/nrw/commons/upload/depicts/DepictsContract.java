@@ -50,6 +50,8 @@ public interface DepictsContract {
         void showProgressDialog();
 
         void dismissProgressDialog();
+
+        void updateDepicts();
     }
 
     interface UserActionListener extends BasePresenter<View> {

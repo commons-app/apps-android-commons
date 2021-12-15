@@ -25,6 +25,7 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
@@ -233,6 +234,16 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     @Override
     public void dismissProgressDialog() {
         progressDialog.dismiss();
+    }
+
+    /**
+     * Update the depicts
+     */
+    @Override
+    public void updateDepicts() {
+        final MediaDetailFragment mediaDetailFragment = (MediaDetailFragment) getParentFragment();
+        assert mediaDetailFragment != null;
+        mediaDetailFragment.onResume();
     }
 
     /**
