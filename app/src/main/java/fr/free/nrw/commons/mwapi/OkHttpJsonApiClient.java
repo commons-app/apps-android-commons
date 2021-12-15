@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.gson.Gson;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.location.LatLng;
@@ -265,14 +266,27 @@ public class OkHttpJsonApiClient {
         });
     }
 
+    /**
+     * Make API Call to get Nearby Places
+     *
+     * @param cur                     Search lat long
+     * @param language                Language
+     * @param radius                  Search Radius
+     * @param shouldQueryForMonuments : Should we query for monuments
+     * @return
+     * @throws Exception
+     */
     @Nullable
     public List<Place> getNearbyPlaces(final LatLng cur, final String language, final double radius,
-        final boolean shouldQueryForMonuments)
+        final boolean shouldQueryForMonuments, final String customQuery)
         throws Exception {
 
         Timber.d("Fetching nearby items at radius %s", radius);
+        Timber.d("CUSTOM_SPARQL%s", String.valueOf(customQuery != null));
         final String wikidataQuery;
-        if (!shouldQueryForMonuments) {
+        if (customQuery != null) {
+            wikidataQuery = customQuery;
+        } else if (!shouldQueryForMonuments) {
             wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
         } else {
             wikidataQuery = FileUtils.readFromResource("/queries/nearby_query_monuments.rq");
@@ -311,6 +325,23 @@ public class OkHttpJsonApiClient {
             return places;
         }
         throw new Exception(response.message());
+    }
+
+    /**
+     * Make API Call to get Nearby Places Implementation does not expects a custom query
+     *
+     * @param cur                     Search lat long
+     * @param language                Language
+     * @param radius                  Search Radius
+     * @param shouldQueryForMonuments : Should we query for monuments
+     * @return
+     * @throws Exception
+     */
+    @Nullable
+    public List<Place> getNearbyPlaces(final LatLng cur, final String language, final double radius,
+        final boolean shouldQueryForMonuments)
+        throws Exception {
+        return getNearbyPlaces(cur, language, radius, shouldQueryForMonuments, null);
     }
 
     /**

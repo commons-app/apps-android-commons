@@ -268,6 +268,7 @@ public class LocationServiceManager implements LocationListener {
         LOCATION_NOT_CHANGED,
         PERMISSION_JUST_GRANTED,
         MAP_UPDATED,
-        SEARCH_CUSTOM_AREA
+        SEARCH_CUSTOM_AREA,
+        CUSTOM_QUERY
     }
 }

@@ -326,6 +326,7 @@
   <string name="share_app_title">Share App</string>
 
   <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
+  <string name="no_nearby_places_around">No nearby places around</string>
   <string name="error_fetching_nearby_monuments">Error fetching nearby monuments.</string>
   <string name="no_recent_searches">No recent searches</string>
   <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
@@ -683,4 +684,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="achievements_of_user">Achievements of User: %s</string>
   <string name="menu_view_user_page">View user page</string>
   <string name="edit_depicts">Edit Depicts</string>
+  <string name="advanced_options">Advanced Options</string>
+  <string name="advanced_query_info_text">You can customize the Nearby query. If you get errors, reset and apply.</string>
+  <string name="apply">Apply</string>
+  <string name="reset">Reset</string>
 </resources>

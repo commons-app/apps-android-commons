@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* DDPAT
 * Envlh
 * Fraxinus.cs
 * Pupsik-ipa
@@ -40,7 +41,7 @@
   <string name="categories_search_text_hint">Актегориа алхра</string>
   <string name="menu_save_categories">Еиқәырхатәуп</string>
   <string name="refresh_button">Ирҿыцтәуп</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Аҭагаламҭақәа макьана иҟам</string>
+  <string name="contributions_subtitle_zero">(Аҭагаламҭақәа макьана иҟам)</string>
   <string name="categories_activity_title">Акатегориақәа</string>
   <string name="title_activity_settings">Архиарақәа</string>
   <string name="title_activity_signup">Арегистрациа ҟаҵатәуп</string>
