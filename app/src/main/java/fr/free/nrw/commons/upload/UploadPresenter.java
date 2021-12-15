@@ -1,12 +1,14 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.repository.UploadRepository;
+import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -32,6 +34,9 @@ public class UploadPresenter implements UploadContract.UserActionListener {
     private UploadContract.View view = DUMMY;
 
     private CompositeDisposable compositeDisposable;
+    public static final String COUNTER_OF_NO_LOCATION
+        = "how_many_consecutive_uploads_have_no_coordinates";
+
 
     @Inject
     UploadPresenter(UploadRepository uploadRepository,
@@ -69,6 +74,13 @@ public class UploadPresenter implements UploadContract.UserActionListener {
 
                         @Override
                         public void onNext(Contribution contribution) {
+                            if(contribution.getDecimalCoords() == null){
+                                final int recentCount
+                                    = defaultKvStore.getInt(COUNTER_OF_NO_LOCATION, 0);
+                                defaultKvStore.putInt(COUNTER_OF_NO_LOCATION, recentCount + 1);
+                            } else {
+                                defaultKvStore.putInt(COUNTER_OF_NO_LOCATION, 0);
+                            }
                             repository.prepareMedia(contribution);
                             contribution.setState(Contribution.STATE_QUEUED);
                             repository.saveContribution(contribution);

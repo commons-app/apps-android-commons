@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
+import static fr.free.nrw.commons.upload.UploadPresenter.COUNTER_OF_NO_LOCATION;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 import android.Manifest;
@@ -47,6 +48,7 @@ import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
 import fr.free.nrw.commons.upload.worker.UploadWorker;
 import fr.free.nrw.commons.utils.DialogUtil;
+import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -469,7 +471,18 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             vpUpload.setCurrentItem(index + 1, false);
             fragments.get(index + 1).onBecameVisible();
         } else {
-            presenter.handleSubmit();
+            if(defaultKvStore.getInt(COUNTER_OF_NO_LOCATION, 0) == 10){
+                DialogUtil.showAlertDialog(this,
+                    getString(R.string.turn_on_camera_location_title),
+                    getString(R.string.turn_on_camera_location_message),
+                    getString(R.string.ok),
+                    () -> {
+                        defaultKvStore.putInt(COUNTER_OF_NO_LOCATION, 0);
+                        presenter.handleSubmit();
+                    }, false);
+            } else {
+                presenter.handleSubmit();
+            }
         }
     }
 
