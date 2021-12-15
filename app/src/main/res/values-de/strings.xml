@@ -70,6 +70,7 @@
   <string name="signup">Registrieren</string>
   <string name="logging_in_title">Anmelden</string>
   <string name="logging_in_message">Bitte warten …</string>
+  <string name="updating_caption_message">Bitte warten …</string>
   <string name="login_success">Anmeldung erfolgreich!</string>
   <string name="login_failed">Anmeldung fehlgeschlagen!</string>
   <string name="upload_failed">Datei nicht gefunden. Bitte versuche es mit einer anderen Datei.</string>
@@ -507,10 +508,13 @@
   <string name="category_edit_button_text">Kategorien aktualisieren</string>
   <string name="coordinates_edit_helper_make_edit_toast">Versuche, die Koordinaten zu aktualisieren.</string>
   <string name="coordinates_edit_helper_show_edit_title">Koordinaten aktualisieren</string>
+  <string name="description_edit_helper_show_edit_title">Beschreibung aktualieren</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Erfolgreich</string>
   <string name="coordinates_edit_helper_show_edit_message">Koordinaten %1$s werden hinzugefügt.</string>
+  <string name="description_edit_helper_show_edit_message">Beschreibungen werden hinzugefügt.</string>
   <string name="coordinates_edit_helper_edit_message_else">Koordinaten konnten nicht hinzugefügt werden.</string>
   <string name="coordinates_picking_unsuccessful">Es können keine Koordinaten abgerufen werden.</string>
+  <string name="descriptions_picking_unsuccessful">Beschreibungen können nicht abgerufen werden</string>
   <string name="share_image_via">Bild teilen via</string>
   <string name="you_have_no_achievements_yet">Du hast noch keine Beiträge verfasst.</string>
   <string name="no_achievements_yet">%s hat noch keine Beiträge geleistet</string>
@@ -565,7 +569,7 @@
   <string name="resume">fortfahren</string>
   <string name="paused">Pausiert</string>
   <string name="more">Weitere</string>
-  <string name="favorites">Favoriten</string>
+  <string name="bookmarks">Lesezeichen</string>
   <string name="achievements_tab_title">Errungenschaften</string>
   <string name="leaderboard_tab_title">Bestenliste</string>
   <string name="rank_prefix">Rang:</string>

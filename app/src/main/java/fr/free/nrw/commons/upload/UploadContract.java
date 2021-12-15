@@ -16,6 +16,8 @@ public interface UploadContract {
 
         void finish();
 
+        void returnToMainActivity();
+
         void askUserToLogIn();
 
         void showProgress(boolean shouldShow);

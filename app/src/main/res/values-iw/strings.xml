@@ -80,7 +80,9 @@
   <string name="forgot_password">שכחת את הסיסמה?</string>
   <string name="signup">רישום</string>
   <string name="logging_in_title">כניסה לחשבון</string>
-  <string name="logging_in_message">נא להמתין…</string>
+  <string name="logging_in_message">נא להמתין...</string>
+  <string name="updating_caption_title">עדכון כיתובים ותיאורים</string>
+  <string name="updating_caption_message">נא להמתין...</string>
   <string name="login_success">הכניסה הצליחה!</string>
   <string name="login_failed">הכניסה נכשלה!</string>
   <string name="upload_failed">הקובץ לא נמצא. נא לנסות קובץ אחר.</string>
@@ -466,7 +468,7 @@
   <string name="menu_option_read">הצגת התראות שנקראו</string>
   <string name="menu_option_unread">הצגת התראות שלא נקראו</string>
   <string name="error_occurred_in_picking_images">אירעה שגיאה בעת בחירת תמונות</string>
-  <string name="please_wait">נא להמתין…</string>
+  <string name="please_wait">נא להמתין...</string>
   <string name="images_featured_explanation">תמונות מובילות הן תמונות של צלמים ומאיירים מיומנים אותם בחרה קהילת ויקישיתוף בזכות איכות התוצר שהם תורמים לאתר.</string>
   <string name="images_via_nearby_explanation">תמונות שהועלו דרך מקומות בסביבה הן התמונות שנשלחות על ידי גילוי מקומות במפה.</string>
   <string name="thanks_received_explanation">תכונה זו מאפשרת לעורכים לשלוח מסרי תודה למשתמשים שביצעו עריכות מועילות - על ידי שימוש בקישור תודה בעמוד ההיסטוריה או עמוד ההבדלים.</string>
@@ -520,10 +522,18 @@
   <string name="category_edit_button_text">עדכון קטגוריות</string>
   <string name="coordinates_edit_helper_make_edit_toast">מנסים לעדכן נקודות ציון.</string>
   <string name="coordinates_edit_helper_show_edit_title">עדכון נקודות ציון</string>
+  <string name="description_edit_helper_show_edit_title">עדכון תיאור</string>
+  <string name="caption_edit_helper_show_edit_title">עדכון כיתוב</string>
   <string name="coordinates_edit_helper_show_edit_title_success">זה עבד</string>
   <string name="coordinates_edit_helper_show_edit_message">נקודות הציון %1$s נוספות.</string>
+  <string name="description_edit_helper_show_edit_message">התיאורים נוספים.</string>
+  <string name="caption_edit_helper_show_edit_message">הכיתוב נוסף.</string>
   <string name="coordinates_edit_helper_edit_message_else">לא היה אפשר להוסיף נקודות ציון.</string>
+  <string name="description_edit_helper_edit_message_else">לא היה אפשר להוסיף תיאורים.</string>
+  <string name="caption_edit_helper_edit_message_else">לא היה אפשר להוסיף כיתוב.</string>
   <string name="coordinates_picking_unsuccessful">לא ניתן לעדכן נקודות ציון.</string>
+  <string name="descriptions_picking_unsuccessful">אי־אפשר לקבל תיאורים.</string>
+  <string name="description_activity_title">עריכת תיאורים וכיתובים</string>
   <string name="share_image_via">שיתוף תמונה דרך</string>
   <string name="you_have_no_achievements_yet">לא תרמת בינתיים שום דבר</string>
   <string name="no_achievements_yet">%s עדיין לא תרם שום דבר</string>
@@ -578,7 +588,7 @@
   <string name="resume">להמשיך</string>
   <string name="paused">מושהה</string>
   <string name="more">עוד</string>
-  <string name="favorites">מועדפים</string>
+  <string name="bookmarks">סימניות</string>
   <string name="achievements_tab_title">הישגים</string>
   <string name="leaderboard_tab_title">לוח מובילים</string>
   <string name="rank_prefix">דירוג:</string>
