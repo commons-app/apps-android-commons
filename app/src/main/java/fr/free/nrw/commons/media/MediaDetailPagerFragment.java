@@ -103,13 +103,16 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         pager.addOnPageChangeListener(this);
 
         adapter = new MediaDetailAdapter(getChildFragmentManager());
-        ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (getActivity() != null) {
             final ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
             if (actionBar != null) {
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
+        }
+
+        if (getActivity() instanceof ProfileActivity) {
+            ((ProfileActivity)getActivity()).tabLayout.setVisibility(View.GONE);
         }
 
         pager.setAdapter(adapter);

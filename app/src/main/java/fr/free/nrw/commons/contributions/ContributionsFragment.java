@@ -3,6 +3,7 @@ package fr.free.nrw.commons.contributions;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_PAUSED;
 import static fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.WLM_URL;
+import static fr.free.nrw.commons.profile.ProfileActivity.KEY_USERNAME;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 import android.Manifest;
@@ -30,6 +31,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
+import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
 import java.text.ParseException;
 import java.util.Date;
@@ -113,6 +115,9 @@ public class ContributionsFragment
 
     private Campaign wlmCampaign;
 
+    String userName;
+    private boolean isUserProfile;
+
     @NonNull
     public static ContributionsFragment newInstance() {
         ContributionsFragment fragment = new ContributionsFragment();
@@ -125,6 +130,10 @@ public class ContributionsFragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            userName = getArguments().getString(KEY_USERNAME);
+            isUserProfile = true;
+        }
     }
 
     @Nullable
@@ -154,7 +163,11 @@ public class ContributionsFragment
         }
 
         initFragments();
-        upDateUploadCount();
+        if(isUserProfile) {
+            limitedConnectionEnabledLayout.setVisibility(View.GONE);
+        }else {
+            upDateUploadCount();
+        }
         if(shouldShowMediaDetailsFragment){
             showMediaDetailPagerFragment();
         }else{
@@ -165,7 +178,7 @@ public class ContributionsFragment
         }
 
         if (!ConfigUtils.isBetaFlavour() && sessionManager.isUserLoggedIn()
-            && sessionManager.getCurrentAccount() != null) {
+            && sessionManager.getCurrentAccount() != null && !isUserProfile) {
             setUploadCount();
         }
         limitedConnectionEnabledLayout.setOnClickListener(toggleDescriptionListener);
@@ -269,7 +282,7 @@ public class ContributionsFragment
      */
     private void showContributionsListFragment() {
         // show nearby card view on contributions list is visible
-        if (nearbyNotificationCardView != null) {
+        if (nearbyNotificationCardView != null && !isUserProfile) {
             if (store.getBoolean("displayNearbyCardView", true)) {
                 if (nearbyNotificationCardView.cardViewVisibilityState
                     == NearbyNotificationCardView.CardViewVisibilityState.READY) {
@@ -301,6 +314,9 @@ public class ContributionsFragment
     private void initFragments() {
         if (null == contributionsListFragment) {
             contributionsListFragment = new ContributionsListFragment();
+            Bundle contributionsListBundle = new Bundle();
+            contributionsListBundle.putString(KEY_USERNAME, userName);
+            contributionsListFragment.setArguments(contributionsListBundle);
         }
 
         if (shouldShowMediaDetailsFragment) {
@@ -398,7 +414,7 @@ public class ContributionsFragment
         });
 
         // Notification cards should only be seen on contributions list, not in media details
-        if (mediaDetailPagerFragment == null) {
+        if (mediaDetailPagerFragment == null && !isUserProfile) {
             if (store.getBoolean("displayNearbyCardView", true)) {
                 checkPermissionsAndShowNearbyCardView();
                 if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
@@ -410,8 +426,10 @@ public class ContributionsFragment
                 nearbyNotificationCardView.setVisibility(View.GONE);
             }
 
-            setNotificationCount();
-            fetchCampaigns();
+            if(!isUserProfile) {
+                setNotificationCount();
+                fetchCampaigns();
+            }
         }
     }
 
@@ -549,7 +567,7 @@ public class ContributionsFragment
     }
 
     @Override public void showCampaigns(Campaign campaign) {
-        if (campaign != null) {
+        if (campaign != null && !isUserProfile) {
             campaignView.setCampaign(campaign);
         }
     }
@@ -619,6 +637,9 @@ public class ContributionsFragment
     public void showDetail(int position, boolean isWikipediaButtonDisplayed) {
         if (mediaDetailPagerFragment == null || !mediaDetailPagerFragment.isVisible()) {
             mediaDetailPagerFragment = new MediaDetailPagerFragment();
+            if(isUserProfile) {
+                ((ProfileActivity)getActivity()).setScroll(false);
+            }
             showMediaDetailPagerFragment();
         }
         mediaDetailPagerFragment.showImage(position, isWikipediaButtonDisplayed);
@@ -641,7 +662,7 @@ public class ContributionsFragment
 
     public boolean backButtonClicked() {
         if (null != mediaDetailPagerFragment && mediaDetailPagerFragment.isVisible()) {
-            if (store.getBoolean("displayNearbyCardView", true)) {
+            if (store.getBoolean("displayNearbyCardView", true) && !isUserProfile) {
                 if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
                     nearbyNotificationCardView.setVisibility(View.VISIBLE);
                 }
@@ -650,9 +671,15 @@ public class ContributionsFragment
             }
             removeFragment(mediaDetailPagerFragment);
             showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG, mediaDetailPagerFragment);
-            ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            ((MainActivity)getActivity()).showTabs();
-            fetchCampaigns();
+            //((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            if(isUserProfile) {
+                ((ProfileActivity)getActivity()).setScroll(true);
+            }else {
+                fetchCampaigns();
+            }
+            if(getActivity() instanceof MainActivity) {
+                ((MainActivity)getActivity()).showTabs();
+            }
             return true;
         }
         return false;
