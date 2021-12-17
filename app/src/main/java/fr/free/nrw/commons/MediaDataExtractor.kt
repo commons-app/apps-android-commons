@@ -50,4 +50,9 @@ class MediaDataExtractor @Inject constructor(private val mediaClient: MediaClien
     }
 
     fun getHtmlOfPage(title: String) = mediaClient.getPageHtml(title);
+
+    /**
+     * Fetches wikitext from mediaClient
+     */
+    fun getCurrentWikiText(title: String) = mediaClient.getCurrentWikiText(title);
 }

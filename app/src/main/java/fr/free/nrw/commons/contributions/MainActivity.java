@@ -143,29 +143,13 @@ public class MainActivity  extends BaseActivity
 
     private void setUpPager() {
         tabLayout.setOnNavigationItemSelectedListener(item -> {
-            if (VERSION.SDK_INT >= VERSION_CODES.M) {
-                if (item.getTitle().equals(getString(R.string.nearby_fragment))
-                    && checkSelfPermission(permission.READ_PHONE_STATE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                    requestPhoneStatePermission(() -> {
-                        tabLayout.setSelectedItemId(NavTab.NEARBY.code());
-                    });
-                    return false;
-                }
-            }
             if (!item.getTitle().equals(getString(R.string.more))) {
                 // do not change title for more fragment
                 setTitle(item.getTitle());
             }
-            Fragment fragment = NavTab.of(item.getOrder()).newInstance();
+            final Fragment fragment = NavTab.of(item.getOrder()).newInstance();
             return loadFragment(fragment, true);
         });
-    }
-
-    private void requestPhoneStatePermission(final Runnable runnable) {
-        PermissionUtils.checkPermissionsAndPerformAction(this,
-            android.Manifest.permission.READ_PHONE_STATE, (Runnable) runnable::run, (Runnable) () -> {
-            }, R.string.need_permission, R.string.read_phone_state_permission_message);
     }
 
     private void setUpLoggedOutPager() {
@@ -287,7 +271,7 @@ public class MainActivity  extends BaseActivity
             setTitle(getString(R.string.navigation_item_explore));
             loadFragment(ExploreFragment.newInstance(),false);
         }else if(fragmentName.equals(ActiveFragment.BOOKMARK.name())) {
-            setTitle(getString(R.string.favorites));
+            setTitle(getString(R.string.bookmarks));
             loadFragment(BookmarkFragment.newInstance(),false);
         }
     }

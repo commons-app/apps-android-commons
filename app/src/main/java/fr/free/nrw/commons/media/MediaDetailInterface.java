@@ -2,6 +2,8 @@ package fr.free.nrw.commons.media;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import org.wikipedia.dataclient.Service;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import org.wikipedia.wikidata.Entities;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -35,4 +37,18 @@ public interface MediaDetailInterface {
      */
     @GET("/w/api.php?action=wbgetentities&props=labels&format=json&languagefallback=1&sites=commonswiki")
     Observable<Entities> getEntityForImage(@Query("languages") String language, @Query("ids") String wikibaseIdentifier);
+
+    /**
+     * Fetches current wikitext
+     * @param title file name
+     * @return Single<MwQueryResponse>
+     */
+    @GET(
+        Service.MW_API_PREFIX +
+            "action=query&prop=revisions&rvprop=content|timestamp&rvlimit=1&converttitles="
+    )
+    Single<MwQueryResponse> getWikiText(
+        @Query("titles") String title
+    );
+
 }

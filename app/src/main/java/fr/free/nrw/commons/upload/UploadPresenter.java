@@ -78,7 +78,7 @@ public class UploadPresenter implements UploadContract.UserActionListener {
                         public void onError(Throwable e) {
                             view.showMessage(R.string.upload_failed);
                             repository.cleanup();
-                            view.finish();
+                            view.returnToMainActivity();
                             compositeDisposable.clear();
                             Timber.e("failed to upload: " + e.getMessage());
                         }
@@ -87,7 +87,7 @@ public class UploadPresenter implements UploadContract.UserActionListener {
                         public void onComplete() {
                             view.makeUploadRequest();
                             repository.cleanup();
-                            view.finish();
+                            view.returnToMainActivity();
                             compositeDisposable.clear();
                         }
                     });
