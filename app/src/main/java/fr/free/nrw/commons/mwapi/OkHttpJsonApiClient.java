@@ -216,6 +216,8 @@ public class OkHttpJsonApiClient {
                 if (json == null) {
                     return 0;
                 }
+                // Extract JSON from response
+                json = json.substring(json.indexOf('{'));
                 GetWikidataEditCountResponse countResponse = gson
                     .fromJson(json, GetWikidataEditCountResponse.class);
                 if (null != countResponse) {
@@ -253,6 +255,8 @@ public class OkHttpJsonApiClient {
                 if (json == null) {
                     return null;
                 }
+                // Extract JSON from response
+                json = json.substring(json.indexOf('{'));
                 Timber.d("Response for achievements is %s", json);
                 try {
                     return gson.fromJson(json, FeedbackResponse.class);
