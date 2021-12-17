@@ -1093,7 +1093,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         compositeDisposable.add(nearbyPlacesInfoObservable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(nearbyPlacesInfo -> {                    
+            .subscribe(nearbyPlacesInfo -> {
                     if (nearbyPlacesInfo.placeList == null || nearbyPlacesInfo.placeList.isEmpty()) {
                         showErrorMessage(getString(R.string.no_nearby_places_around));
                     } else {
