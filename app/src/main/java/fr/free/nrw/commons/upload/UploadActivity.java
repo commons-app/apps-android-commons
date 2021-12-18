@@ -471,7 +471,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             vpUpload.setCurrentItem(index + 1, false);
             fragments.get(index + 1).onBecameVisible();
         } else {
-            if(defaultKvStore.getInt(COUNTER_OF_NO_LOCATION, 0) == 10){
+            if(defaultKvStore.getInt(COUNTER_OF_NO_LOCATION, 0) >= 10){
                 DialogUtil.showAlertDialog(this,
                     getString(R.string.turn_on_camera_location_title),
                     getString(R.string.turn_on_camera_location_message),
