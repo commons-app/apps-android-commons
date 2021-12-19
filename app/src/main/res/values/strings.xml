@@ -678,6 +678,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="advanced_query_info_text">You can customize the Nearby query. If you get errors, reset and apply.</string>
   <string name="apply">Apply</string>
   <string name="reset">Reset</string>
-  <string name="turn_on_camera_location_title">Turn on location in your camera app\'s settings</string>
-  <string name="turn_on_camera_location_message">Location data helps Wiki editors find your picture, making it much more useful.\nYour recent uploads have no location.\nWe suggest you turn on location in your camera app\'s settings.\nThank you for uploading!</string>
+  <string name="location_message">Location data helps Wiki editors find your picture, making it much more useful.\nYour recent uploads have no location.\nWe suggest you turn on location in your camera app\'s settings.\nThank you for uploading!</string>
 </resources>

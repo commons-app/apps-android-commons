@@ -48,7 +48,6 @@ import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
 import fr.free.nrw.commons.upload.worker.UploadWorker;
 import fr.free.nrw.commons.utils.DialogUtil;
-import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -473,8 +472,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         } else {
             if(defaultKvStore.getInt(COUNTER_OF_NO_LOCATION, 0) >= 10){
                 DialogUtil.showAlertDialog(this,
-                    getString(R.string.turn_on_camera_location_title),
-                    getString(R.string.turn_on_camera_location_message),
+                    "",
+                    getString(R.string.location_message),
                     getString(R.string.ok),
                     () -> {
                         defaultKvStore.putInt(COUNTER_OF_NO_LOCATION, 0);
