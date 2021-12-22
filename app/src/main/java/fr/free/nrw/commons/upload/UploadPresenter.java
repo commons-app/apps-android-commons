@@ -32,6 +32,9 @@ public class UploadPresenter implements UploadContract.UserActionListener {
     private UploadContract.View view = DUMMY;
 
     private CompositeDisposable compositeDisposable;
+    public static final String COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES
+        = "number_of_consecutive_uploads_without_coordinates";
+
 
     @Inject
     UploadPresenter(UploadRepository uploadRepository,
@@ -69,6 +72,16 @@ public class UploadPresenter implements UploadContract.UserActionListener {
 
                         @Override
                         public void onNext(Contribution contribution) {
+                            if(contribution.getDecimalCoords() == null){
+                                final int recentCount
+                                    = defaultKvStore.getInt(
+                                    COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0);
+                                defaultKvStore.putInt(
+                                    COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, recentCount + 1);
+                            } else {
+                                defaultKvStore.putInt(
+                                    COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0);
+                            }
                             repository.prepareMedia(contribution);
                             contribution.setState(Contribution.STATE_QUEUED);
                             repository.saveContribution(contribution);
