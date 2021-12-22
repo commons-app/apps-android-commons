@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
-import static fr.free.nrw.commons.upload.UploadPresenter.COUNTER_OF_NO_LOCATION;
+import static fr.free.nrw.commons.upload.UploadPresenter.COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 import android.Manifest;
@@ -470,13 +470,13 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             vpUpload.setCurrentItem(index + 1, false);
             fragments.get(index + 1).onBecameVisible();
         } else {
-            if(defaultKvStore.getInt(COUNTER_OF_NO_LOCATION, 0) >= 10){
+            if(defaultKvStore.getInt(COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0) >= 10){
                 DialogUtil.showAlertDialog(this,
                     "",
                     getString(R.string.location_message),
                     getString(R.string.ok),
                     () -> {
-                        defaultKvStore.putInt(COUNTER_OF_NO_LOCATION, 0);
+                        defaultKvStore.putInt(COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0);
                         presenter.handleSubmit();
                     }, false);
             } else {
