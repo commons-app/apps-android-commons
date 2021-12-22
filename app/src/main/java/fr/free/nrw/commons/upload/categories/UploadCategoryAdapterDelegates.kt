@@ -17,7 +17,7 @@ fun uploadCategoryDelegate(onCategoryClicked: (CategoryItem) -> Unit) =
 
         bind {
             binding.uploadCategoryCheckbox.isChecked = item.isSelected
-            binding.uploadCategoryCheckbox.text = item.name
+            binding.categoryLabel.text = item.name
             if(item.thumbnail != "null") {
                 binding.categoryImage.setImageURI(item.thumbnail)
             } else {
