@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
+import androidx.annotation.Nullable;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -38,10 +39,12 @@ public class NearbyPlaces {
      * @param curLatLng coordinates of search location
      * @param lang user's language
      * @param returnClosestResult true if only the nearest point is desired
+     * @param customQuery
      * @return list of places obtained
      */
-    List<Place> radiusExpander(final LatLng curLatLng, final String lang, final boolean returnClosestResult
-        , final boolean shouldQueryForMonuments) throws Exception {
+    List<Place> radiusExpander(final LatLng curLatLng, final String lang,
+        final boolean returnClosestResult
+        , final boolean shouldQueryForMonuments, @Nullable final String customQuery) throws Exception {
 
         final int minResults;
         final double maxRadius;
@@ -62,13 +65,12 @@ public class NearbyPlaces {
 
             // Increase the radius gradually to find a satisfactory number of nearby places
             while (radius <= maxRadius) {
-                places = getFromWikidataQuery(curLatLng, lang, radius, shouldQueryForMonuments);
+                places = getFromWikidataQuery(curLatLng, lang, radius, shouldQueryForMonuments, customQuery);
                 Timber.d("%d results at radius: %f", places.size(), radius);
                 if (places.size() >= minResults) {
                     break;
-                } else {
-                    radius *= RADIUS_MULTIPLIER;
                 }
+                radius *= RADIUS_MULTIPLIER;
             }
         // make sure we will be able to send at least one request next time
         if (radius > maxRadius) {
@@ -83,11 +85,14 @@ public class NearbyPlaces {
      * @param lang user's language
      * @param radius radius for search, as determined by radiusExpander()
      * @param shouldQueryForMonuments should the query include properites for monuments
+     * @param customQuery
      * @return list of places obtained
      * @throws IOException if query fails
      */
     public List<Place> getFromWikidataQuery(final LatLng cur, final String lang,
-        final double radius, final boolean shouldQueryForMonuments) throws Exception {
-        return okHttpJsonApiClient.getNearbyPlaces(cur, lang, radius, shouldQueryForMonuments);
+        final double radius, final boolean shouldQueryForMonuments,
+        @Nullable final String customQuery) throws Exception {
+        return okHttpJsonApiClient
+            .getNearbyPlaces(cur, lang, radius, shouldQueryForMonuments, customQuery);
     }
 }

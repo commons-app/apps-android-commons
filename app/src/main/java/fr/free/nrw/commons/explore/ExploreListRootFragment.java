@@ -112,6 +112,7 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
         container.setVisibility(View.VISIBLE);
         ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.GONE);
         mediaDetails = new MediaDetailPagerFragment(false, true);
+        ((ExploreFragment) getParentFragment()).setScroll(false);
         setFragment(mediaDetails, listFragment);
         mediaDetails.showImage(position);
     }
