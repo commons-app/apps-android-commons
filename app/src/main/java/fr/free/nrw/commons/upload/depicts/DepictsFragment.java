@@ -19,13 +19,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.media.MediaDetailFragment;
+import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
@@ -53,7 +53,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     @BindView(R.id.depicts_search_container)
     TextInputLayout depictsSearchContainer;
     @BindView(R.id.depicts_search)
-    TextInputEditText depictsSearch;
+    PasteSensitiveTextInputEditText depictsSearch;
     @BindView(R.id.depictsSearchInProgress)
     ProgressBar depictsSearchInProgress;
     @BindView(R.id.depicts_recycler_view)
