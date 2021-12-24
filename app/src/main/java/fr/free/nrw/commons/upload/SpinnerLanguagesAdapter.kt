@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Filter
 import androidx.annotation.LayoutRes
 import androidx.core.os.ConfigurationCompat
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.utils.LangCodeUtils
-import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.row_item_languages_spinner.*
+import kotlinx.android.synthetic.main.row_item_languages_spinner.view.*
 import org.apache.commons.lang3.StringUtils
 import org.wikipedia.language.AppLanguageLookUpTable
 import java.util.*
@@ -24,17 +25,13 @@ import java.util.*
  */
 class SpinnerLanguagesAdapter constructor(
     context: Context,
-    private val selectedLanguages: HashMap<*, String>
-) : ArrayAdapter<Any?>(context, -1) {
-
-    private val languageNamesList: List<String>
+    private val selectedLanguages: HashMap<*, String>,
+    private var languageNamesList: List<String>,
     private val languageCodesList: List<String>
-    var language: AppLanguageLookUpTable = AppLanguageLookUpTable(context)
-    init {
-        languageNamesList = language.localizedNames;
-        languageCodesList = language.codes;
-    }
+) : ArrayAdapter<String?>(context, R.layout.row_item_languages_spinner) {
 
+    var language: AppLanguageLookUpTable = AppLanguageLookUpTable(context)
+    private val filter = LanguageFilter()
     var selectedLangCode = ""
 
     override fun isEnabled(position: Int) = languageCodesList[position].let {
@@ -43,42 +40,23 @@ class SpinnerLanguagesAdapter constructor(
 
     override fun getCount() = languageNamesList.size
 
-    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup) =
-        (convertView ?: parent.inflate(R.layout.row_item_languages_spinner).also {
-            it.tag = DropDownViewHolder(it)
-        }).apply {
-            (tag as DropDownViewHolder).init(
-                languageCodesList[position],
-                languageNamesList[position],
-                isEnabled(position)
-            )
-        }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup) =
-        (convertView ?: parent.inflate(R.layout.row_item_languages_spinner).also {
-            it.tag = SpinnerViewHolder(it)
-        }).apply { (tag as SpinnerViewHolder).init(languageCodesList[position]) }
-
-    class SpinnerViewHolder(override val containerView: View) : LayoutContainer {
-        fun init(languageCode: String) {
-            LangCodeUtils.fixLanguageCode(languageCode).let {
-                tv_language.text = if (it.length > 2) it.take(2) else it
-            }
-        }
-    }
-
-    class DropDownViewHolder(override val containerView: View) : LayoutContainer {
-        fun init(languageCode: String, languageName: String, enabled: Boolean) {
-            tv_language.isEnabled = enabled
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val rowView = parent.inflate(R.layout.row_item_languages_spinner)
+        val languageCode = languageCodesList[position]
+        val languageName = languageNamesList[position]
+        rowView.tv_language.let {
+            it.isEnabled = isEnabled(position)
             if (languageCode.isEmpty()) {
-                tv_language.text = StringUtils.capitalize(languageName)
-                tv_language.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                it.text = StringUtils.capitalize(languageName)
+                it.textAlignment = View.TEXT_ALIGNMENT_CENTER
             } else {
-                tv_language.text =
+                it.text =
                     "${StringUtils.capitalize(languageName)}" +
                             " [${LangCodeUtils.fixLanguageCode(languageCode)}]"
             }
         }
+        return rowView
     }
 
     fun getLanguageCode(position: Int): String {
@@ -92,6 +70,44 @@ class SpinnerLanguagesAdapter constructor(
     fun getIndexOfLanguageCode(languageCode: String): Int {
         return languageCodesList.indexOf(languageCode)
     }
+
+
+    override fun getFilter() = filter
+
+    inner class LanguageFilter() : Filter() {
+
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
+            val filterResults = FilterResults()
+            val tempList: ArrayList<String> = ArrayList<String>()
+            if (constraint != null && language.localizedNames != null) {
+                val length: Int = language.localizedNames.size
+                var i = 0
+                while (i < length) {
+                    val item: String = language.localizedNames.get(i)
+                    val uilang = getIndexOfUserDefaultLocale(context)
+                    if(item.contains(constraint, true) || Locale(languageCodesList[i]).getDisplayName(
+                            Locale(languageCodesList[uilang])).contains(constraint, true))
+                        tempList.add(item)
+                    i++
+                }
+                filterResults.values = tempList
+                filterResults.count = tempList.size
+            }
+            return filterResults
+        }
+
+        override fun publishResults(constraint: CharSequence?, results: FilterResults) {
+            languageNamesList = results.values as List<String>
+            if (results.count > 0) {
+                notifyDataSetChanged()
+            } else {
+                notifyDataSetInvalidated()
+            }
+
+        }
+
+    }
+
 }
 
 private fun ViewGroup.inflate(@LayoutRes resId: Int) =

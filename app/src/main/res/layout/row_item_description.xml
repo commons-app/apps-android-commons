@@ -23,11 +23,12 @@
           app:layout_constraintEnd_toEndOf="parent"
           app:srcCompat="@drawable/ic_remove" />
 
-        <Spinner
+        <TextView
           android:id="@+id/spinner_description_languages"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:spinnerMode="dialog"
+          android:text="en"
+          android:clickable="true"
           app:layout_constraintBottom_toTopOf="@+id/caption_item_edit_text_input_layout"
           app:layout_constraintStart_toStartOf="parent" />
 
