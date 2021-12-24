@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
     android:elevation="@dimen/activity_margin_horizontal"
     android:background="@color/white">
 
@@ -26,7 +26,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/dimen_10"
-        android:scrollbars="vertical"
-      />
+        android:scrollbars="vertical"/>
+        android:paddingBottom="48dp"/>
 
+    <androidx.appcompat.widget.AppCompatButton
+      android:id="@+id/btn_advanced_options"
+      android:layout_width="match_parent"
+      android:background="@color/status_bar_blue"
+      android:text="@string/advanced_options"
+      android:textColor="@color/white"
+      android:layout_marginTop="-48dp"
+      android:layout_height="48dp"/>
 </LinearLayout>

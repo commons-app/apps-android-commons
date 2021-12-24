@@ -51,6 +51,8 @@
   <string name="signup">Зачленување</string>
   <string name="logging_in_title">Најава</string>
   <string name="logging_in_message">Почекајте…</string>
+  <string name="updating_caption_title">Поднова на толкувања и описи</string>
+  <string name="updating_caption_message">Почекајте...</string>
   <string name="login_success">Најавата е успешна!</string>
   <string name="login_failed">Најавата не успеа!</string>
   <string name="upload_failed">Не ја пронајдов податотеката. Пробајте со друга.</string>
@@ -77,10 +79,10 @@
   <string name="provider_contributions">Мои подигања</string>
   <string name="menu_share">Сподели</string>
   <string name="menu_view_file_page">Погл. податотечната страница</string>
-  <string name="share_title_hint">Опис (задолж.)</string>
-  <string name="add_caption_toast">Ставете ѝ опис на податотеката</string>
+  <string name="share_title_hint">Толкување (задолж.)</string>
+  <string name="add_caption_toast">Ставете ѝ толкување на податотеката</string>
   <string name="share_description_hint">Опис</string>
-  <string name="share_caption_hint">Опис</string>
+  <string name="share_caption_hint">Толкување</string>
   <string name="login_failed_network">Не можам да Ве најавам — мрежата не работи</string>
   <string name="login_failed_throttled">Направени се премногу неуспешни обиди. Обидете се пак за некоја минута.</string>
   <string name="login_failed_blocked">За жал, корисникот е блокиран на Ризницата</string>
@@ -159,7 +161,7 @@
   <string name="detail_panel_cats_label">Категории</string>
   <string name="detail_panel_cats_loading">Вчитувам…</string>
   <string name="detail_panel_cats_none">Ништо не е одбрано</string>
-  <string name="detail_caption_empty">Нема опис</string>
+  <string name="detail_caption_empty">Нема толкување</string>
   <string name="detail_description_empty">Нема опис</string>
   <string name="detail_discussion_empty">Нема разговор</string>
   <string name="detail_license_empty">Непозната лиценца</string>
@@ -174,7 +176,7 @@
   <string name="upload">Подигни</string>
   <string name="yes">Да</string>
   <string name="no">Не</string>
-  <string name="media_detail_caption">Опис</string>
+  <string name="media_detail_caption">Толкување</string>
   <string name="media_detail_title">Наслов</string>
   <string name="media_detail_depiction">Прикажувања</string>
   <string name="media_detail_description">Опис</string>
@@ -220,7 +222,7 @@
   <string name="nearby_info_menu_wikidata_article">Предмет на Википодатоците</string>
   <string name="nearby_info_menu_wikipedia_article">Статија на Википедија</string>
   <string name="description_info">Објаснете ја податотеката што подобро можете: Каде е направена? Што е прикажано на неа? Кој е контекстот? Опишете ги предметите, објектите и личностите. Дајте сознанија што не можат лесно да се погодат, како на пр. време од денот ако се работи за природен предел. Ако на неа е претставено нешто необично, објаснете зошто прикажаното е необично.</string>
-  <string name="caption_info">Ставете краток опис на сликата. Првиот опис ќе се користи како наслов на сликата. Допуштени се највеќе 255 знаци.</string>
+  <string name="caption_info">Ставете кратко толкување на сликата. Првото толкување ќе се користи како наслов на сликата. Допуштени се највеќе 255 знаци.</string>
   <string name="upload_problem_exist">Потенцијални проблеми со сликава:</string>
   <string name="upload_problem_image_dark">Сликата е претемна.</string>
   <string name="upload_problem_image_blurry">Сликата е матна.</string>
@@ -488,10 +490,18 @@
   <string name="category_edit_button_text">Поднови категории</string>
   <string name="coordinates_edit_helper_make_edit_toast">Се обидувам да ги подоновам координатите.</string>
   <string name="coordinates_edit_helper_show_edit_title">Поднова на координати</string>
+  <string name="description_edit_helper_show_edit_title">Поднова на опис</string>
+  <string name="caption_edit_helper_show_edit_title">Поднова на толкување</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Успеа</string>
   <string name="coordinates_edit_helper_show_edit_message">Координатите %1$s се додадени.</string>
+  <string name="description_edit_helper_show_edit_message">Описите се додадени.</string>
+  <string name="caption_edit_helper_show_edit_message">Толкувањата се додадени.</string>
   <string name="coordinates_edit_helper_edit_message_else">Не можев да додадам координати.</string>
+  <string name="description_edit_helper_edit_message_else">Не можев да додадам описи.</string>
+  <string name="caption_edit_helper_edit_message_else">Не можев да додадам толкување.</string>
   <string name="coordinates_picking_unsuccessful">Не можев да добијам координати.</string>
+  <string name="descriptions_picking_unsuccessful">Не можам да добијам описи.</string>
+  <string name="description_activity_title">Уреди описи и толкувања</string>
   <string name="share_image_via">Сподели ја сликата преку</string>
   <string name="you_have_no_achievements_yet">Засега немате придонеси</string>
   <string name="no_achievements_yet">%s засега нема придонеси</string>
@@ -546,7 +556,7 @@
   <string name="resume">продолжи</string>
   <string name="paused">Запрено</string>
   <string name="more">Повеќе</string>
-  <string name="favorites">Омилени</string>
+  <string name="bookmarks">Обележани</string>
   <string name="achievements_tab_title">Достигнувања</string>
   <string name="leaderboard_tab_title">Предводници</string>
   <string name="rank_prefix">Место:</string>
@@ -578,7 +588,7 @@
   <string name="pausing_upload">Го паузирам подигањето…</string>
   <string name="limited_connection_explanation">Овозможивте режим на ограничена врска. Сите подигања се времено запреми и ќе продолжат штом ќе го оневозможите овој режим.</string>
   <string name="limited_connection_is_on">Работи режимот на ограничена врска.</string>
-  <string name="media_details_tooltip">Напишете краток опис кој кажува што е прикажано на сликата. Во него образложете зошто сликата е интересна, типична или ретка, и објаснете го контекстот, било да е видлив или не. Користете што поточни поими, секогаш кога можете.</string>
+  <string name="media_details_tooltip">Напишете кратко толкување кое кажува што е прикажано на сликата. Во него образложете зошто сликата е интересна, типична или ретка, и објаснете го контекстот, било да е видлив или не. Користете што поточни поими, секогаш кога можете.</string>
   <string name="depicts_tooltip">Најдете ги и изберете ги сите концепти претставени на сликава. Настојувајте да биде што поуточнето. Ако сликата прикажува повеќе предмети, изберете ги сите, во рамките на разумноста. Не избирајте општи ознаки ако имате на располагање поуточнети.</string>
   <string name="categories_tooltip">Изберете ги прикладните категории. За разлика од приказите, категориите се исклучиво на англиски.</string>
   <string name="license_tooltip">Ризницата ги става вашите дела на располагање за употреба и преработка за секого. Дали сакате да се одречете од сите права? Дали сакате делото да ви се припишува? Дали сакате преработените дела да ја имаат истата лиценца?</string>

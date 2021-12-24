@@ -63,6 +63,8 @@
   <string name="signup">Rekisteröidy</string>
   <string name="logging_in_title">Kirjaudutaan</string>
   <string name="logging_in_message">Odota…</string>
+  <string name="updating_caption_title">Päivitetään kuvatekstejä ja kuvauksia</string>
+  <string name="updating_caption_message">Odota...</string>
   <string name="login_success">Kirjautuminen onnistui!</string>
   <string name="login_failed">Kirjautuminen epäonnistui!</string>
   <string name="upload_failed">Tiedostoa ei löytynyt. Yritä toista tiedostoa.</string>
@@ -466,6 +468,7 @@
   <string name="share_via">Jaa sovellus...</string>
   <string name="image_info">Kuvan tiedot</string>
   <string name="no_categories_found">Luokkia ei löytynyt</string>
+  <string name="no_depiction_found">Kuvauksia ei löytynyt</string>
   <string name="upload_cancelled">Peruutettu tallennus</string>
   <string name="dialog_box_text_nomination">Miksi %1$s tulisi poistaa?</string>
   <string name="review_is_uploaded_by">%1$s oli lähettänyt: %2$s</string>
@@ -491,11 +494,20 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Ei voitu lisätä luokkia.</string>
   <string name="category_edit_button_text">Päivitetään luokkia</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Yritetään päivittää koordinaatit.</string>
   <string name="coordinates_edit_helper_show_edit_title">Koordinaattien päivitys</string>
+  <string name="description_edit_helper_show_edit_title">Kuvaus päivitetty</string>
+  <string name="caption_edit_helper_show_edit_title">Kuvateksti päivitetty</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Onnistui</string>
   <string name="coordinates_edit_helper_show_edit_message">Koordinaatit %1$s on lisätty.</string>
+  <string name="description_edit_helper_show_edit_message">Kuvaukset on lisätty.</string>
+  <string name="caption_edit_helper_show_edit_message">Kuvatekstit on lisätty.</string>
   <string name="coordinates_edit_helper_edit_message_else">Koordinaatteja ei voitu lisätä.</string>
+  <string name="description_edit_helper_edit_message_else">Kuvauksia ei voitu lisätä.</string>
+  <string name="caption_edit_helper_edit_message_else">Kuvatekstiä ei voitu lisätä.</string>
   <string name="coordinates_picking_unsuccessful">Koordinaattien haku epäonnistui.</string>
+  <string name="descriptions_picking_unsuccessful">Kuvauksia ei voitu hakea.</string>
+  <string name="description_activity_title">Muokkaa kuvauksia ja kuvatekstejä</string>
   <string name="share_image_via">Jaa kuva</string>
   <string name="you_have_no_achievements_yet">Et ole vielä tehnyt muokkauksia</string>
   <string name="no_achievements_yet">%s ei ole vielä tehnyt muokkauksia</string>
@@ -522,6 +534,7 @@
   <string name="theme_default_name">Käytä järjestelmän</string>
   <string name="theme_dark_name">Tumma</string>
   <string name="theme_light_name">Vaalea</string>
+  <string name="cannot_open_location_settings">Sijaintiasetusten avaaminen epäonnistui. Ota sijainti käyttöön manuaalisesti</string>
   <string name="ask_to_turn_location_on">Ota sijainti käyttöön?</string>
   <string name="load_more">Lataa lisää</string>
   <string name="nearby_no_results">Paikkoja ei löytynyt, yritä vaihtaa hakuehtojasi.</string>
@@ -532,6 +545,7 @@
   <string name="confirm">Vahvista</string>
   <string name="instructions_title">Ohjeet</string>
   <string name="wikipedia_instructions_step_1">1. Käytä seuraavaa wikitekstiä:</string>
+  <string name="wikipedia_instructions_step_2">2. Klikkaamalla \"Vahvista\" Wikipedia-artikkeli avautuu</string>
   <string name="wikipedia_instructions_step_4">4. Klikkaa Muokkaa-ikonia (se kynältä näyttävä) siitä osasta.</string>
   <string name="wikipedia_instructions_step_5">5. Liitä wikiteksti sopivaan paikkaan.</string>
   <string name="wikipedia_instructions_step_7">7. Julkaise artikkeli</string>
@@ -540,7 +554,7 @@
   <string name="resume">jatka</string>
   <string name="paused">Pysäytetty</string>
   <string name="more">Lisää</string>
-  <string name="favorites">Suosikit</string>
+  <string name="bookmarks">Kirjanmerkit</string>
   <string name="achievements_tab_title">Saavutukset</string>
   <string name="leaderboard_tab_title">Pistetaulukko</string>
   <string name="rank_prefix">Sija:</string>
@@ -594,6 +608,7 @@
   <string name="welcome_custom_selector_ok">Mahtava</string>
   <string name="custom_selector_already_uploaded_image_text">Tämä kuva on jo ladattu Commonsiin.</string>
   <string name="learn_more">LUE LISÄÄ</string>
+  <string name="need_permission">Tarvitaan käyttöoikeus</string>
   <string name="contributions_of_user">Käyttäjän muokkaukset: %s</string>
   <string name="achievements_of_user">Käyttäjän saavutukset: %s</string>
   <string name="menu_view_user_page">Näytä käyttäjäsivu</string>
