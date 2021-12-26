@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Joao Xavier
+-->
+<resources>
+  <string name="crash_dialog_title">Commons faliis</string>
+  <string name="crash_dialog_text">Ho! Ulu faliis!</string>
+  <string name="crash_dialog_comment_prompt">Dicez a ni per e-posto quon vu facabis kande la falio eventis. To posibligos ke ni korektigos ol!</string>
+  <string name="crash_dialog_ok_toast">Danko!</string>
+</resources>
