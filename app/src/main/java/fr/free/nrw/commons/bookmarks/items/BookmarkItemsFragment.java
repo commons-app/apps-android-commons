@@ -22,7 +22,7 @@ import javax.inject.Inject;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Tab fragment to show list of Wikidata Items
+ * Tab fragment to show list of bookmarked Wikidata Items
  */
 public class BookmarkItemsFragment extends DaggerFragment {
 

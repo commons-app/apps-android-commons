@@ -17,7 +17,7 @@ import javax.inject.Inject;
 import timber.log.Timber;
 
 /**
- * Handles private storage for Bookmark pictures
+ * Handles private storage for bookmarked items
  */
 public class BookmarkItemsContentProvider extends CommonsDaggerContentProvider {
 
