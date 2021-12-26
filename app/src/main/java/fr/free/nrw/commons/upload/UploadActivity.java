@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
+import static fr.free.nrw.commons.upload.UploadPresenter.COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 import android.Manifest;
@@ -34,6 +35,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.UserClient;
@@ -150,6 +152,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private void initProgressDialog() {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getString(R.string.please_wait));
+        progressDialog.setCancelable(false);
     }
 
     private void initThumbnailsRecyclerView() {
@@ -233,6 +236,13 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     @Override
     protected void onStop() {
         super.onStop();
+    }
+
+    @Override
+    public void returnToMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     /**
@@ -460,7 +470,18 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             vpUpload.setCurrentItem(index + 1, false);
             fragments.get(index + 1).onBecameVisible();
         } else {
-            presenter.handleSubmit();
+            if(defaultKvStore.getInt(COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0) >= 10){
+                DialogUtil.showAlertDialog(this,
+                    "",
+                    getString(R.string.location_message),
+                    getString(R.string.ok),
+                    () -> {
+                        defaultKvStore.putInt(COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0);
+                        presenter.handleSubmit();
+                    }, false);
+            } else {
+                presenter.handleSubmit();
+            }
         }
     }
 

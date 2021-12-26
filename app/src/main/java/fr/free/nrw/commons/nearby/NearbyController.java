@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 
 import androidx.annotation.MainThread;
+import androidx.annotation.Nullable;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
@@ -54,12 +55,13 @@ public class NearbyController {
      * @param curLatLng current location for user
      * @param searchLatLng the location user wants to search around
      * @param returnClosestResult if this search is done to find closest result or all results
+     * @param customQuery if this search is done via an advanced query
      * @return NearbyPlacesInfo a variable holds Place list without distance information
      * and boundary coordinates of current Place List
      */
     public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng, final LatLng searchLatLng,
         final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
-        final boolean shouldQueryForMonuments) throws Exception {
+        final boolean shouldQueryForMonuments, @Nullable final String customQuery) throws Exception {
 
         Timber.d("Loading attractions near %s", searchLatLng);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
@@ -70,7 +72,7 @@ public class NearbyController {
         }
         List<Place> places = nearbyPlaces
             .radiusExpander(searchLatLng, Locale.getDefault().getLanguage(), returnClosestResult,
-                shouldQueryForMonuments);
+                shouldQueryForMonuments, customQuery);
 
         if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {places.get(0).location,   // south
@@ -128,8 +130,25 @@ public class NearbyController {
             return nearbyPlacesInfo;
         }
         else {
-            return null;
+            return nearbyPlacesInfo;
         }
+    }
+
+    /**
+     * Prepares Place list to make their distance information update later.
+     *
+     * @param curLatLng           current location for user
+     * @param searchLatLng        the location user wants to search around
+     * @param returnClosestResult if this search is done to find closest result or all results
+     * @return NearbyPlacesInfo a variable holds Place list without distance information and
+     * boundary coordinates of current Place List
+     */
+    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng,
+        final LatLng searchLatLng,
+        final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
+        final boolean shouldQueryForMonuments) throws Exception {
+        return loadAttractionsFromLocation(curLatLng, searchLatLng, returnClosestResult,
+            checkingAroundCurrentLocation, shouldQueryForMonuments, null);
     }
 
     /**

@@ -18,6 +18,7 @@
   <string name="signup">Reģistrēties</string>
   <string name="logging_in_title">Pieslēdzas</string>
   <string name="logging_in_message">Lūdzu, uzgaidiet…</string>
+  <string name="updating_caption_message">Lūdzu, uzgaidi...</string>
   <string name="login_success">Ieiešana veiksmīga</string>
   <string name="login_failed">Pieteikšanās neizdevās.</string>
   <string name="authentication_failed" fuzzy="true">Autentifikācija neizdevās!</string>

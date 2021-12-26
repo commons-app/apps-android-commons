@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import fr.free.nrw.commons.bookmarks.BookmarkFragment;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.explore.ExploreFragment;
-import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import org.wikipedia.model.EnumCode;
 import org.wikipedia.model.EnumCodeMap;
@@ -38,7 +37,7 @@ public enum NavTab implements EnumCode {
             return ExploreFragment.newInstance();
         }
     },
-    FAVORITES(R.string.favorites, R.drawable.ic_round_star_border_24px) {
+    BOOKMARKS(R.string.bookmarks, R.drawable.ic_round_star_border_24px) {
         @NonNull
         @Override
         public Fragment newInstance() {
