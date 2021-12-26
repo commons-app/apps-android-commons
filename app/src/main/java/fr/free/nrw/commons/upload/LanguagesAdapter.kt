@@ -15,22 +15,30 @@ import kotlinx.android.synthetic.main.row_item_languages_spinner.view.*
 import org.apache.commons.lang3.StringUtils
 import org.wikipedia.language.AppLanguageLookUpTable
 import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.LinkedHashMap
 
 /**
- * This class handles the display of language spinners and their dropdown views for UploadMediaDetailFragment
+ * This class handles the display of language dialog and their views for UploadMediaDetailFragment
  *
- * @property selectedLanguages - controls the enabled state of dropdown views
+ * @property selectedLanguages - controls the enabled state of item views
  *
  * @param context - required by super constructor
  */
-class SpinnerLanguagesAdapter constructor(
+class LanguagesAdapter constructor(
     context: Context,
-    private val selectedLanguages: HashMap<*, String>,
-    private var languageNamesList: List<String>,
-    private val languageCodesList: List<String>
+    private val selectedLanguages: HashMap<*, String>
 ) : ArrayAdapter<String?>(context, R.layout.row_item_languages_spinner) {
 
+    private var languageNamesList: List<String>
+    private var languageCodesList: List<String>
+
     var language: AppLanguageLookUpTable = AppLanguageLookUpTable(context)
+    init {
+        languageNamesList = language.localizedNames
+        languageCodesList = language.codes
+    }
+
     private val filter = LanguageFilter()
     var selectedLangCode = ""
 
@@ -64,7 +72,7 @@ class SpinnerLanguagesAdapter constructor(
     }
 
     fun getIndexOfUserDefaultLocale(context: Context): Int {
-        return languageCodesList.indexOf(context.locale.language)
+        return language.codes.indexOf(context.locale.language)
     }
 
     fun getIndexOfLanguageCode(languageCode: String): Int {
@@ -74,34 +82,40 @@ class SpinnerLanguagesAdapter constructor(
 
     override fun getFilter() = filter
 
-    inner class LanguageFilter() : Filter() {
+    inner class LanguageFilter : Filter() {
 
         override fun performFiltering(constraint: CharSequence?): FilterResults {
             val filterResults = FilterResults()
-            val tempList: ArrayList<String> = ArrayList<String>()
+            val temp: LinkedHashMap<String, String> = LinkedHashMap()
             if (constraint != null && language.localizedNames != null) {
                 val length: Int = language.localizedNames.size
                 var i = 0
                 while (i < length) {
-                    val item: String = language.localizedNames.get(i)
-                    val uilang = getIndexOfUserDefaultLocale(context)
-                    if(item.contains(constraint, true) || Locale(languageCodesList[i]).getDisplayName(
-                            Locale(languageCodesList[uilang])).contains(constraint, true))
-                        tempList.add(item)
+                    val key: String = language.codes[i]
+                    val value: String = language.localizedNames[i]
+                    val defaultlanguagecode = getIndexOfUserDefaultLocale(context)
+                    if(value.contains(constraint, true) || Locale(key).getDisplayName(
+                            Locale(language.codes[defaultlanguagecode])).contains(constraint, true))
+                        temp[key] = value
                     i++
                 }
-                filterResults.values = tempList
-                filterResults.count = tempList.size
+                filterResults.values = temp
+                filterResults.count = temp.size
             }
             return filterResults
         }
 
         override fun publishResults(constraint: CharSequence?, results: FilterResults) {
-            languageNamesList = results.values as List<String>
             if (results.count > 0) {
+                languageCodesList =
+                    ArrayList((results.values as LinkedHashMap<String, String>).keys)
+                languageNamesList =
+                    ArrayList((results.values as LinkedHashMap<String, String>).values)
                 notifyDataSetChanged()
             } else {
-                notifyDataSetInvalidated()
+                languageCodesList = ArrayList()
+                languageNamesList = ArrayList()
+                notifyDataSetChanged()
             }
 
         }
