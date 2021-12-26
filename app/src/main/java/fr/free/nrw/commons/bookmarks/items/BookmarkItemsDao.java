@@ -61,7 +61,7 @@ public class BookmarkItemsDao {
      * @return boolean : is bookmark now favorite ?
      */
     public boolean updateBookmarkItem(final DepictedItem depictedItem) {
-        final boolean bookmarkExists = findBookmarkItem(depictedItem);
+        final boolean bookmarkExists = findBookmarkItem(depictedItem.getId());
         if (bookmarkExists) {
             deleteBookmarkItem(depictedItem);
         } else {
@@ -102,11 +102,11 @@ public class BookmarkItemsDao {
 
     /**
      * Find a bookmark from database based on its name
-     * @param depictedItem : Bookmark to find
+     * @param depictedItemID : Bookmark to find
      * @return boolean : is bookmark in database ?
      */
-    public boolean findBookmarkItem(final DepictedItem depictedItem) {
-        if (depictedItem == null) { //Avoiding NPE's
+    public boolean findBookmarkItem(final String depictedItemID) {
+        if (depictedItemID == null) { //Avoiding NPE's
             return false;
         }
         final ContentProviderClient db = clientProvider.get();
@@ -114,7 +114,7 @@ public class BookmarkItemsDao {
             BookmarkItemsContentProvider.BASE_URI,
             Table.ALL_FIELDS,
             Table.COLUMN_ID + "=?",
-            new String[]{depictedItem.getId()},
+            new String[]{depictedItemID},
             null
         )) {
             if (cursor != null && cursor.moveToFirst()) {

@@ -28,8 +28,12 @@ import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment;
 import fr.free.nrw.commons.explore.depictions.parent.ParentDepictionsFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.upload.structure.depictions.DepictModel;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.wikidata.WikidataConstants;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -49,6 +53,9 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
      */
 
     @Inject BookmarkItemsDao bookmarkItemsDao;
+    private CompositeDisposable compositeDisposable;
+    @Inject
+    DepictModel depictModel;
     private String wikidataItemName;
     @BindView(R.id.mediaContainer)
     FrameLayout mediaContainer;
@@ -67,6 +74,7 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wikidata_item_details);
         ButterKnife.bind(this);
+        compositeDisposable = new CompositeDisposable();
         supportFragmentManager = getSupportFragmentManager();
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
@@ -238,12 +246,8 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         MenuInflater menuInflater=getMenuInflater();
         menuInflater.inflate(R.menu.menu_wikidata_item,menu);
 
-        if(getIntent().getStringExtra("fragment") != null) {
-            MenuItem item = menu.findItem(R.id.menu_bookmark_current_item);
-            item.setVisible(false);
-        } else {
-            updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_item));
-        }
+        updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_item));
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -261,15 +265,38 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
                 Utils.handleWebUrl(this, uri);
                 return true;
             case R.id.menu_bookmark_current_item:
-                final boolean bookmarkExists = bookmarkItemsDao.updateBookmarkItem(wikidataItem);
-                final Snackbar snackbar
-                    = bookmarkExists ? Snackbar.make(findViewById(R.id.toolbar_layout),
-                    R.string.add_bookmark, Snackbar.LENGTH_LONG)
-                    : Snackbar.make(findViewById(R.id.toolbar_layout), R.string.remove_bookmark,
-                        Snackbar.LENGTH_LONG);
 
-                snackbar.show();
-                updateBookmarkState(item);
+                if(getIntent().getStringExtra("fragment") != null) {
+                    compositeDisposable.add(depictModel.getDepictions(
+                        getIntent().getStringExtra("entityId")
+                    ).subscribeOn(Schedulers.io())
+                     .observeOn(AndroidSchedulers.mainThread())
+                     .subscribe(depictedItems -> {
+                         final boolean bookmarkExists = bookmarkItemsDao.updateBookmarkItem(
+                             depictedItems.get(0));
+                         final Snackbar snackbar
+                             = bookmarkExists ? Snackbar.make(findViewById(R.id.toolbar_layout),
+                             R.string.add_bookmark, Snackbar.LENGTH_LONG)
+                             : Snackbar.make(findViewById(R.id.toolbar_layout),
+                                 R.string.remove_bookmark,
+                                 Snackbar.LENGTH_LONG);
+
+                         snackbar.show();
+                         updateBookmarkState(item);
+                     }));
+
+                } else {
+                    final boolean bookmarkExists
+                        = bookmarkItemsDao.updateBookmarkItem(wikidataItem);
+                    final Snackbar snackbar
+                        = bookmarkExists ? Snackbar.make(findViewById(R.id.toolbar_layout),
+                        R.string.add_bookmark, Snackbar.LENGTH_LONG)
+                        : Snackbar.make(findViewById(R.id.toolbar_layout), R.string.remove_bookmark,
+                            Snackbar.LENGTH_LONG);
+
+                    snackbar.show();
+                    updateBookmarkState(item);
+                }
                 return true;
             case  android.R.id.home:
                 onBackPressed();
@@ -280,7 +307,13 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     }
 
     private void updateBookmarkState(final MenuItem item) {
-        final boolean isBookmarked = bookmarkItemsDao.findBookmarkItem(wikidataItem);
+        final boolean isBookmarked;
+        if(getIntent().getStringExtra("fragment") != null) {
+            isBookmarked
+                = bookmarkItemsDao.findBookmarkItem(getIntent().getStringExtra("entityId"));
+        } else {
+            isBookmarked = bookmarkItemsDao.findBookmarkItem(wikidataItem.getId());
+        }
         final int icon
             = isBookmarked ? R.drawable.menu_ic_round_star_filled_24px
             : R.drawable.menu_ic_round_star_border_24px;
