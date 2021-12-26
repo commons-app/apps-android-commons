@@ -10,12 +10,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,11 +24,8 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText;
 import fr.free.nrw.commons.utils.AbstractTextWatcher;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import org.wikipedia.language.AppLanguageLookUpTable;
 import timber.log.Timber;
 
 public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDetailAdapter.ViewHolder> {
@@ -261,6 +255,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                         selectedLanguages.remove(position);
                         selectedLanguages.put(position, description.getLanguageCode());
                     } else {
+                        description.setLanguageCode(savedLanguageValue);
                         descriptionLanguages.setText(savedLanguageValue);
                         selectedLanguages.remove(position);
                         selectedLanguages.put(position, savedLanguageValue);
@@ -287,9 +282,11 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                                     .getContext());
                             descriptionLanguages
                                 .setText(languagesAdapter.getLanguageCode(defaultLocaleIndex));
+                            description.setLanguageCode(languagesAdapter.getLanguageCode(defaultLocaleIndex));
                             selectedLanguages.remove(position);
                             selectedLanguages.put(position, languagesAdapter.getLanguageCode(defaultLocaleIndex));
                         } else {
+                            description.setLanguageCode("en");
                             descriptionLanguages.setText("en");
                             selectedLanguages.remove(position);
                             selectedLanguages.put(position, "en");
