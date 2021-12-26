@@ -86,7 +86,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
     }
 
     public void addDescription(UploadMediaDetail uploadMediaDetail) {
-        selectedLanguages.put(uploadMediaDetails.size(),"en");
+        selectedLanguages.put(uploadMediaDetails.size(), "en");
         this.uploadMediaDetails.add(uploadMediaDetail);
         notifyItemInserted(uploadMediaDetails.size());
     }
@@ -286,10 +286,10 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                             selectedLanguages.remove(position);
                             selectedLanguages.put(position, languagesAdapter.getLanguageCode(defaultLocaleIndex));
                         } else {
-                            description.setLanguageCode("en");
-                            descriptionLanguages.setText("en");
+                            description.setLanguageCode(languagesAdapter.getLanguageCode(0));
+                            descriptionLanguages.setText(languagesAdapter.getLanguageCode(0));
                             selectedLanguages.remove(position);
-                            selectedLanguages.put(position, "en");
+                            selectedLanguages.put(position, languagesAdapter.getLanguageCode(0));
                         }
                     }
                 }
@@ -299,9 +299,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                 selectedLanguages.remove(position);
                 selectedLanguages.put(position, description.getLanguageCode());
             }
-
         }
-
     }
 
     public interface Callback {
