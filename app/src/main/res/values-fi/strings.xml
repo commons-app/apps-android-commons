@@ -612,4 +612,8 @@
   <string name="contributions_of_user">Käyttäjän muokkaukset: %s</string>
   <string name="achievements_of_user">Käyttäjän saavutukset: %s</string>
   <string name="menu_view_user_page">Näytä käyttäjäsivu</string>
+  <string name="advanced_options">Lisäasetukset</string>
+  <string name="apply">Käytä</string>
+  <string name="reset">Nollaa</string>
+  <string name="location_message">Sijaintitiedot auttavat wikin muokkaajia löytämään kuvasi, mikä tekee siitä paljon hyödyllisemmän.\nViimeaikaisissa tallennuksissasi ei ole sijaintia.\nSuosittelemme, että otat sijainnin käyttöön kamerasovelluksesi asetuksista.\nKiitos latauksesta!</string>
 </resources>

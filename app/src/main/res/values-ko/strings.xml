@@ -327,6 +327,7 @@
   <string name="quiz_screenshot_question">이 스크린샷을 올리시겠습니까?</string>
   <string name="share_app_title">앱 공유</string>
   <string name="error_fetching_nearby_places">주변 장소를 가져오는데 오류가 있습니다.</string>
+  <string name="no_nearby_places_around">근처에 장소가 없습니다</string>
   <string name="no_recent_searches">최근 검색 없음</string>
   <string name="delete_recent_searches_dialog">검색 기록을 지우겠습니까?</string>
   <string name="delete_search_dialog">이 검색을 삭제하시겠습니까?</string>
@@ -545,4 +546,7 @@
   <string name="need_permission">권한 필요</string>
   <string name="contributions_of_user">사용자의 기여: %s</string>
   <string name="menu_view_user_page">사용자 문서 보기</string>
+  <string name="advanced_options">고급 옵션</string>
+  <string name="apply">적용</string>
+  <string name="reset">재설정</string>
 </resources>

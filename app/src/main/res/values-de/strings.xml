@@ -20,6 +20,7 @@
 * Tobi 406
 * Ubahnverleih
 * Umherirrender
+* Umlaut
 * WikiBayer
 * Zauberzunge2000
 -->
@@ -70,6 +71,7 @@
   <string name="signup">Registrieren</string>
   <string name="logging_in_title">Anmelden</string>
   <string name="logging_in_message">Bitte warten …</string>
+  <string name="updating_caption_title">Überschriften und Beschreibungen aktualisieren</string>
   <string name="updating_caption_message">Bitte warten …</string>
   <string name="login_success">Anmeldung erfolgreich!</string>
   <string name="login_failed">Anmeldung fehlgeschlagen!</string>
@@ -336,6 +338,7 @@
   <string name="quiz_screenshot_question">Darf dieses Bildschirmfoto hochgeladen werden?</string>
   <string name="share_app_title">App teilen</string>
   <string name="error_fetching_nearby_places">Fehler beim Abrufen der Orte in der Nähe.</string>
+  <string name="no_nearby_places_around">Keine Orte in der Nähe gefunden</string>
   <string name="error_fetching_nearby_monuments">Fehler beim Abrufen von Denkmälern in der Nähe.</string>
   <string name="no_recent_searches">Keine letzten Suchanfragen</string>
   <string name="delete_recent_searches_dialog">Bist du sicher, dass du deinen Suchverlauf löschen möchtest?</string>
@@ -512,9 +515,13 @@
   <string name="coordinates_edit_helper_show_edit_title_success">Erfolgreich</string>
   <string name="coordinates_edit_helper_show_edit_message">Koordinaten %1$s werden hinzugefügt.</string>
   <string name="description_edit_helper_show_edit_message">Beschreibungen werden hinzugefügt.</string>
+  <string name="caption_edit_helper_show_edit_message">Die Überschrift wurde hinzugefügt.</string>
   <string name="coordinates_edit_helper_edit_message_else">Koordinaten konnten nicht hinzugefügt werden.</string>
+  <string name="description_edit_helper_edit_message_else">Es konnten keine Beschreibungen hinzugefügt werden.</string>
+  <string name="caption_edit_helper_edit_message_else">Es konnte keine Überschrift hinzugefügt werden.</string>
   <string name="coordinates_picking_unsuccessful">Es können keine Koordinaten abgerufen werden.</string>
   <string name="descriptions_picking_unsuccessful">Beschreibungen können nicht abgerufen werden</string>
+  <string name="description_activity_title">Beschreibungen und Überschriften bearbeiten</string>
   <string name="share_image_via">Bild teilen via</string>
   <string name="you_have_no_achievements_yet">Du hast noch keine Beiträge verfasst.</string>
   <string name="no_achievements_yet">%s hat noch keine Beiträge geleistet</string>
@@ -643,4 +650,7 @@
   <string name="contributions_of_user">Beiträge von Benutzer: %s</string>
   <string name="achievements_of_user">Leistungen von Benutzer: %s</string>
   <string name="menu_view_user_page">Benutzerseite ansehen</string>
+  <string name="advanced_options">Erweiterte Optionen</string>
+  <string name="apply">Anwenden</string>
+  <string name="reset">Zurücksetzen</string>
 </resources>

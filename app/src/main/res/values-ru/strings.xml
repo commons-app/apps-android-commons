@@ -670,4 +670,6 @@
   <string name="contributions_of_user">Вклад участника: %s</string>
   <string name="achievements_of_user">Достижения участника: %s</string>
   <string name="menu_view_user_page">Посмотреть страницу участника</string>
+  <string name="apply">Применить</string>
+  <string name="reset">Сбросить</string>
 </resources>
