@@ -124,8 +124,8 @@ public class CategoryDao {
     private ContentValues toContentValues(Category category) {
         ContentValues cv = new ContentValues();
         cv.put(CategoryDao.Table.COLUMN_NAME, category.getName());
-        cv.put(Table.COLUMN_DESCRIPTION, category.getName());
-        cv.put(Table.COLUMN_THUMBNAIL, category.getName());
+        cv.put(Table.COLUMN_DESCRIPTION, category.getDescription());
+        cv.put(Table.COLUMN_THUMBNAIL, category.getThumbnail());
         cv.put(CategoryDao.Table.COLUMN_LAST_USED, category.getLastUsed().getTime());
         cv.put(CategoryDao.Table.COLUMN_TIMES_USED, category.getTimesUsed());
         return cv;
