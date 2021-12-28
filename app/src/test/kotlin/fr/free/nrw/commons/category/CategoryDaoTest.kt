@@ -24,7 +24,8 @@ import java.util.*
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class CategoryDaoTest {
 
-    private val columns = arrayOf(COLUMN_ID, COLUMN_NAME, COLUMN_LAST_USED, COLUMN_TIMES_USED)
+    private val columns = arrayOf(COLUMN_ID, COLUMN_NAME, COLUMN_DESCRIPTION,
+        COLUMN_THUMBNAIL, COLUMN_LAST_USED, COLUMN_TIMES_USED)
     private val client: ContentProviderClient = mock()
     private val database: SQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
@@ -122,8 +123,10 @@ class CategoryDaoTest {
 
             verify(client).update(eq(category.contentUri), captor.capture(), isNull(), isNull())
             captor.firstValue.let { cv ->
-                assertEquals(3, cv.size())
+                assertEquals(5, cv.size())
                 assertEquals(category.name, cv.getAsString(COLUMN_NAME))
+                assertEquals(category.description, cv.getAsString(COLUMN_DESCRIPTION))
+                assertEquals(category.thumbnail, cv.getAsString(COLUMN_THUMBNAIL))
                 assertEquals(category.lastUsed.time, cv.getAsLong(COLUMN_LAST_USED))
                 assertEquals(category.timesUsed, cv.getAsInteger(COLUMN_TIMES_USED))
             }
@@ -134,14 +137,17 @@ class CategoryDaoTest {
     fun saveNewCategory() {
         val contentUri = CategoryContentProvider.uriForId(111)
         whenever(client.insert(isA(), isA())).thenReturn(contentUri)
-        val category = Category(null, "showImageWithItem", Date(234L), 1)
+        val category = Category(null, "showImageWithItem", "description",
+            "image", Date(234L), 1)
 
         testObject.save(category)
 
         verify(client).insert(eq(BASE_URI), captor.capture())
         captor.firstValue.let { cv ->
-            assertEquals(3, cv.size())
+            assertEquals(5, cv.size())
             assertEquals(category.name, cv.getAsString(COLUMN_NAME))
+            assertEquals(category.description, cv.getAsString(COLUMN_DESCRIPTION))
+            assertEquals(category.thumbnail, cv.getAsString(COLUMN_THUMBNAIL))
             assertEquals(category.lastUsed.time, cv.getAsLong(COLUMN_LAST_USED))
             assertEquals(category.timesUsed, cv.getAsInteger(COLUMN_TIMES_USED))
             assertEquals(contentUri, category.contentUri)
@@ -186,6 +192,8 @@ class CategoryDaoTest {
 
         assertEquals(uriForId(1), category?.contentUri)
         assertEquals("showImageWithItem", category?.name)
+        assertEquals("description", category?.description)
+        assertEquals("image", category?.thumbnail)
         assertEquals(123L, category?.lastUsed?.time)
         assertEquals(2, category?.timesUsed)
 
@@ -264,7 +272,7 @@ class CategoryDaoTest {
 
     private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
         for (i in 0 until rowCount) {
-            addRow(listOf("1", "showImageWithItem", "123", "2"))
+            addRow(listOf("1", "showImageWithItem", "description", "image", "123", "2"))
         }
     }
 
