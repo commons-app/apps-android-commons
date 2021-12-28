@@ -38,7 +38,7 @@ class BookmarkItemsAdapter (val list: List<DepictedItem>, val context: Context) 
         holder.depictsLabel.text = depictedItem.name
         holder.description.text = depictedItem.description
 
-        if (depictedItem.imageUrl?.isNotBlank()!!) {
+        if (depictedItem.imageUrl?.isNotBlank() == true) {
             holder.depictsImage.setImageURI(depictedItem.imageUrl)
         } else {
             holder.depictsImage.setActualImageResource(R.drawable.ic_wikidata_logo_24dp)
