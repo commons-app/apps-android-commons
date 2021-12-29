@@ -42,6 +42,7 @@
   <string name="signup">Schreift Iech an</string>
   <string name="logging_in_title">Aloggen</string>
   <string name="logging_in_message">Waart wgl. …</string>
+  <string name="updating_caption_message">Waart wgl. ...</string>
   <string name="login_success">Umeldung huet geklappt!</string>
   <string name="login_failed">D\'Aloggen huet net funktionéiert</string>
   <string name="upload_failed">Fichier net fonnt. probéiert wgl. en anere Fichier.</string>
@@ -328,6 +329,7 @@
   <string name="resume">virufueren</string>
   <string name="paused">Ënnerbrach</string>
   <string name="more">Méi</string>
+  <string name="bookmarks">Lieszeechen</string>
   <string name="achievements_tab_title">Realisatiounen</string>
   <string name="leaderboard_tab_title">Leaderboard</string>
   <string name="rank_prefix">Klassement:</string>
@@ -363,4 +365,7 @@
   <string name="contributions_of_user">Kontributioune vum Benotzer: %s</string>
   <string name="achievements_of_user">Leeschtunge vum Benotzer: %s</string>
   <string name="menu_view_user_page">Benotzersäit weisen</string>
+  <string name="advanced_options">Erweidert Optiounen</string>
+  <string name="apply">Uwenden</string>
+  <string name="reset">Zrécksetzen</string>
 </resources>

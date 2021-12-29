@@ -14,8 +14,7 @@
     <item quantity="one">1 dosya bar bena</item>
     <item quantity="other">%1$d dosyeyi bar benê</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -53,6 +52,7 @@
   <string name="signup">Qeyd be</string>
   <string name="logging_in_title">Kewno cı</string>
   <string name="logging_in_message">Kerem kerên, bıpawên...</string>
+  <string name="updating_caption_message">Kerem ke, bıpawe...</string>
   <string name="login_success">Cıkewtış hewl bi.</string>
   <string name="login_failed">Nidekeweya de</string>
   <string name="upload_failed">Dosya nêvineya. Dosyê da bine bıcerebnê.</string>
@@ -76,6 +76,7 @@
   <string name="menu_nearby">Nezdıra</string>
   <string name="provider_contributions">Barkerdışê mı</string>
   <string name="menu_share">Vıla ke</string>
+  <string name="menu_view_file_page">Pela dosya bıvêne</string>
   <string name="share_title_hint">Bınnuşte (lazımo)</string>
   <string name="add_caption_toast">Kerem ke, seba na dosya rê yew bınnuşte cı ke</string>
   <string name="share_description_hint">Şınasnayış</string>
@@ -286,6 +287,10 @@
   <string name="menu_option_unread">Nêwendeyan bıvêne</string>
   <string name="please_wait">Kerem kerên, bıpawên...</string>
   <string name="skip_image">Nê resımi raviyarnê</string>
+  <string name="exif_tag_name_author">Nuştekar</string>
+  <string name="exif_tag_name_copyright">Heqa telifi</string>
+  <string name="exif_tag_name_location">Herune</string>
+  <string name="exif_tag_name_cameraModel">Modelê kamera</string>
   <string name="image_info">Melumatê resımi</string>
   <string name="delete_helper_ask_spam_blurry">Xesratın</string>
   <string name="delete_helper_ask_spam_nonsense">Bêmena</string>
@@ -329,4 +334,6 @@
   <string name="mapbox_telemetry" fuzzy="true">Telemetreyi Devre ra vece</string>
   <string name="license_step_title">Lisansê Medya</string>
   <string name="media_detail_step_title">Teferuatê medya</string>
+  <string name="read_help_link">Tayêna bıwane</string>
+  <string name="reset">Raçarne</string>
 </resources>

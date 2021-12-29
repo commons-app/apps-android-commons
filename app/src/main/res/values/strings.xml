@@ -661,6 +661,7 @@ Upload your first media by tapping on the add button.</string>
     The shadow of the image view of the location picker</string>
   <string name="image_location">Image Location</string>
   <string name="check_whether_location_is_correct">Check whether location is correct</string>
+  <string name="title_page_bookmarks_items">Items</string>
   <string name="custom_selector_title">Custom Selector</string>
   <string name="custom_selector_empty_text">No Images</string>
   <string name="done">Done</string>
@@ -688,4 +689,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="advanced_query_info_text">You can customize the Nearby query. If you get errors, reset and apply.</string>
   <string name="apply">Apply</string>
   <string name="reset">Reset</string>
+  <string name="location_message">Location data helps Wiki editors find your picture, making it much more useful.\nYour recent uploads have no location.\nWe suggest you turn on location in your camera app\'s settings.\nThank you for uploading!</string>
 </resources>

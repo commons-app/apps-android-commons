@@ -330,6 +330,7 @@
   <string name="quiz_screenshot_question">這張截圖可以上傳嗎？</string>
   <string name="share_app_title">分享應用程式</string>
   <string name="error_fetching_nearby_places">索取附近地點時出錯。</string>
+  <string name="no_nearby_places_around">找不到附近地點</string>
   <string name="error_fetching_nearby_monuments">索取附近古蹟景點時出錯。</string>
   <string name="no_recent_searches">無近期搜尋</string>
   <string name="delete_recent_searches_dialog">確定要清除搜尋歷史嗎？</string>
@@ -642,4 +643,8 @@
   <string name="contributions_of_user">使用者貢獻：%s</string>
   <string name="achievements_of_user">使用者成果：%s</string>
   <string name="menu_view_user_page">檢視使用者頁面</string>
+  <string name="advanced_options">進階選項</string>
+  <string name="advanced_query_info_text">您可以自定義附近查詢。若發生錯誤，請重新設定並套用。</string>
+  <string name="apply">套用</string>
+  <string name="reset">重新設定</string>
 </resources>
