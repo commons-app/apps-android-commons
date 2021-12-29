@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.explore.depictions
 
-import android.util.Log
 import fr.free.nrw.commons.mwapi.Binding
 import fr.free.nrw.commons.mwapi.SparqlResponse
 import fr.free.nrw.commons.upload.depicts.DepictsInterface
