@@ -47,6 +47,8 @@ public interface DepictsContract {
 
         void goBackToPreviousScreen();
 
+        List<String> getExistingDepicts();
+
         void showProgressDialog();
 
         void dismissProgressDialog();

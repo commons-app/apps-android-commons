@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.repository;
 
+import android.os.Build.VERSION_CODES;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -273,6 +275,19 @@ public class UploadRepository {
             }
         }
         return depictModel.getPlaceDepictions(new ArrayList<>(places));
+    }
+
+    /**
+     * Takes depict IDs as a parameter, converts into a slash separated String and Gets DepictItem
+     * from the server
+     *
+     * @param depictIDs IDs of Depiction
+     * @return Flowable<List<DepictedItem>>
+     */
+    @RequiresApi(api = VERSION_CODES.O)
+    public Flowable<List<DepictedItem>> getDepictions(final List<String> depictIDs){
+        final String ids = String.join("|", depictIDs);
+        return depictModel.getDepictions(ids).toFlowable();
     }
 
     /**

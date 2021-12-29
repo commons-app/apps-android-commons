@@ -218,6 +218,11 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         getFragmentManager().popBackStack();
     }
 
+    @Override
+    public List<String> getExistingDepicts(){
+        return media.getDepictionIds();
+    }
+
     /**
      * Shows the progress dialog
      */

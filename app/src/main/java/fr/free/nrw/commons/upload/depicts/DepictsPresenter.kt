@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.upload.depicts
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import fr.free.nrw.commons.Media
@@ -11,6 +13,8 @@ import io.reactivex.Flowable
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.functions.BiFunction
+import io.reactivex.functions.Function3
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -66,23 +70,34 @@ class DepictsPresenter @Inject constructor(
         )
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun searchResultsWithTerm(term: String): Flowable<Pair<List<DepictedItem>, String>> {
         return searchResults(term).map { Pair(it, term) }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun searchResults(querystring: String): Flowable<List<DepictedItem>> {
         var recentDepictedItemList: MutableList<DepictedItem> = ArrayList();
         //show recentDepictedItemList when queryString is empty
         if (querystring.isEmpty()) {
             recentDepictedItemList = getRecentDepictedItems();
         }
-        return repository.searchAllEntities(querystring)
+        return Flowable.zip(repository.searchAllEntities(querystring),
+            repository.getDepictions(view.existingDepicts)
+                .map { list ->
+                    list.map {
+                        DepictedItem(it.name, it.description, it.imageUrl,
+                            it.instanceOfs, it.commonsCategories, true, it.id) }
+            },
+            { it1, it2 ->
+                it1 + it2
+            }
+        )
             .subscribeOn(ioScheduler)
             .map { repository.selectedDepictions + it + recentDepictedItemList }
             .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
             .map { it.distinctBy(DepictedItem::id) }
     }
-
 
     override fun onDetachView() {
         view = DUMMY
