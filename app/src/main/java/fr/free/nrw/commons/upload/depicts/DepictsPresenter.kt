@@ -83,12 +83,7 @@ class DepictsPresenter @Inject constructor(
             recentDepictedItemList = getRecentDepictedItems();
         }
         return Flowable.zip(repository.searchAllEntities(querystring),
-            repository.getDepictions(view.existingDepicts)
-                .map { list ->
-                    list.map {
-                        DepictedItem(it.name, it.description, it.imageUrl,
-                            it.instanceOfs, it.commonsCategories, true, it.id) }
-            },
+            repository.getDepictions(view.existingDepicts),
             { it1, it2 ->
                 it1 + it2
             }
