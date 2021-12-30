@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +80,19 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         return inflater.inflate(R.layout.upload_depicts_fragment, container, false);
     }
 
+    private void handleBackEvent(View view) {
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener((view1, keycode, keyEvent) -> {
+            if (keycode == KeyEvent.KEYCODE_BACK) {
+                assert getFragmentManager() != null;
+                getFragmentManager().popBackStack();
+                return true;
+            }
+            return false;
+        });
+    }
+
     @Override
     public void onViewCreated(@NonNull android.view.View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -87,6 +101,10 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         Bundle bundle = getArguments();
         if (bundle != null) {
             media = bundle.getParcelable("Existing_Depicts");
+        }
+
+        if(media != null) {
+            handleBackEvent(view);
         }
 
         init();
@@ -246,6 +264,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      */
     @Override
     public void updateDepicts() {
+        onDestroyView();
         final MediaDetailFragment mediaDetailFragment = (MediaDetailFragment) getParentFragment();
         assert mediaDetailFragment != null;
         mediaDetailFragment.onResume();
