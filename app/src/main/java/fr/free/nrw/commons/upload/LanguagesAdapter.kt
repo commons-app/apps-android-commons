@@ -6,11 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Filter
-import androidx.annotation.LayoutRes
 import androidx.core.os.ConfigurationCompat
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.utils.LangCodeUtils
-import kotlinx.android.synthetic.main.row_item_languages_spinner.*
 import kotlinx.android.synthetic.main.row_item_languages_spinner.view.*
 import org.apache.commons.lang3.StringUtils
 import org.wikipedia.language.AppLanguageLookUpTable
@@ -50,7 +48,12 @@ class LanguagesAdapter constructor(
 
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val rowView = parent.inflate(R.layout.row_item_languages_spinner)
+        var rowView: View
+        if(convertView != null) {
+            rowView =  convertView
+        }else {
+            rowView = LayoutInflater.from(context).inflate(R.layout.row_item_languages_spinner, parent, false)
+        }
         val languageCode = languageCodesList[position]
         val languageName = languageNamesList[position]
         rowView.tv_language.let {
@@ -123,9 +126,6 @@ class LanguagesAdapter constructor(
     }
 
 }
-
-private fun ViewGroup.inflate(@LayoutRes resId: Int) =
-    LayoutInflater.from(context).inflate(resId, this, false)
 
 private val Context.locale: Locale
     get() = ConfigurationCompat.getLocales(resources.configuration)[0]
