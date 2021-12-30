@@ -92,9 +92,6 @@ class DepictsPresenterTest {
         testScheduler.triggerActions()
         verify(view).showProgress(false)
         verify(view).showError(true)
-        depictsPresenter.depictedItems
-            .test()
-            .assertValue(emptyList())
     }
 
     @Test
