@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload.depicts
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsController
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
@@ -36,7 +37,13 @@ class DepictsPresenter @Inject constructor(
     private val searchTerm: PublishProcessor<String> = PublishProcessor.create()
     private val depictedItems: MutableLiveData<List<DepictedItem>> = MutableLiveData()
     @Inject
-    lateinit var depictsDao: DepictsDao;
+    lateinit var depictsDao: DepictsDao
+
+    /**
+     * Helps to get all bookmarked items
+     */
+    @Inject
+    lateinit var controller: BookmarkItemsController
 
     override fun onAttachView(view: DepictsContract.View) {
         this.view = view
@@ -73,7 +80,8 @@ class DepictsPresenter @Inject constructor(
         }
         return repository.searchAllEntities(querystring)
             .subscribeOn(ioScheduler)
-            .map { repository.selectedDepictions + it + recentDepictedItemList }
+            .map { repository.selectedDepictions + it + recentDepictedItemList +
+                    controller.loadFavoritesItems()}
             .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
             .map { it.distinctBy(DepictedItem::id) }
     }
