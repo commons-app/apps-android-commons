@@ -316,6 +316,7 @@
   <string name="quiz_screenshot_question">Costa schermà a va bin da carié?</string>
   <string name="share_app_title">Partagé j\'aplicassion</string>
   <string name="error_fetching_nearby_places">Eror durant l\'esplorassion dj\'anviron.</string>
+  <string name="no_nearby_places_around">Gnun pòst sì-davzin</string>
   <string name="error_fetching_nearby_monuments">Eror d\'arcuperassion dij monument davzin.</string>
   <string name="no_recent_searches">Gnun-e arserche recente</string>
   <string name="delete_recent_searches_dialog">É-lo sigur ëd vorèj dëscancelé lë stòrich ëd soe arserche?</string>
@@ -609,6 +610,7 @@
   <string name="location_picker_image_view_shadow">L\'ombra dla vista dla plancia dël selessionator ëd pòst</string>
   <string name="image_location">Pòst ëd la plancia</string>
   <string name="check_whether_location_is_correct">Controlé si ël pòst a l\'é giust</string>
+  <string name="title_page_bookmarks_items">Element</string>
   <string name="custom_selector_title">Seletor përsonalisà</string>
   <string name="custom_selector_empty_text">Gnun-e plance</string>
   <string name="done">Fàit</string>
@@ -628,4 +630,9 @@
   <string name="contributions_of_user">Contribussion ëd l\'utent: %s</string>
   <string name="achievements_of_user">Arzultà ëd l\'utent: %s</string>
   <string name="menu_view_user_page">Vëdde la pàgina ëd l\'utent</string>
+  <string name="advanced_options">Opsion avansà</string>
+  <string name="advanced_query_info_text">A peul përsonalisé l\'arserca ant j\'anviron. S\'a oten dj\'eror, ch\'a ri-inissialisa e ch\'a àplica.</string>
+  <string name="apply">Apliché</string>
+  <string name="reset">Aseré</string>
+  <string name="location_message">Ij dàit ëd localisassion a giuto j\'editor ëd Wiki a trové soa fòto, lòn ch\'a la rend pi ùtil.\nSò cariament recent a l\'han gnun-a localisassion.\nI-j sugerioma d\'ativé la localisassion ant ij paràmeter ëd soa aplicassion ëd màchina fòto.\nMersì d\'avèj carià!</string>
 </resources>

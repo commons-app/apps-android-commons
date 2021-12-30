@@ -602,6 +602,7 @@
   <string name="modify_location">Muokkaa sijaintia</string>
   <string name="image_location">Kuvan sijainti</string>
   <string name="check_whether_location_is_correct">Tarkista, onko sijainti oikea</string>
+  <string name="title_page_bookmarks_items">Kohteet</string>
   <string name="custom_selector_empty_text">Ei kuvia</string>
   <string name="done">Valmis</string>
   <string name="back">Takaisin</string>
@@ -612,4 +613,8 @@
   <string name="contributions_of_user">Käyttäjän muokkaukset: %s</string>
   <string name="achievements_of_user">Käyttäjän saavutukset: %s</string>
   <string name="menu_view_user_page">Näytä käyttäjäsivu</string>
+  <string name="advanced_options">Lisäasetukset</string>
+  <string name="apply">Käytä</string>
+  <string name="reset">Nollaa</string>
+  <string name="location_message">Sijaintitiedot auttavat wikin muokkaajia löytämään kuvasi, mikä tekee siitä paljon hyödyllisemmän.\nViimeaikaisissa tallennuksissasi ei ole sijaintia.\nSuosittelemme, että otat sijainnin käyttöön kamerasovelluksesi asetuksista.\nKiitos latauksesta!</string>
 </resources>

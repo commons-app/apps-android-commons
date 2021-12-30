@@ -71,6 +71,8 @@
   <string name="signup">Kaydol</string>
   <string name="logging_in_title">Oturum açılıyor</string>
   <string name="logging_in_message">Lütfen bekleyin…</string>
+  <string name="updating_caption_title">Başlıklar ve açıklamalar güncelleniyor</string>
+  <string name="updating_caption_message">Lütfen bekleyin…</string>
   <string name="login_success">Oturum açma başarılı!</string>
   <string name="login_failed">Oturum açma başarısız oldu!</string>
   <string name="upload_failed">Dosya bulunamadı. Lütfen başka bir dosya deneyin.</string>
@@ -336,6 +338,7 @@
   <string name="quiz_screenshot_question">Bu ekran görüntüsü yüklemeye uygun mu?</string>
   <string name="share_app_title">Uygulamayı Paylaş</string>
   <string name="error_fetching_nearby_places">Yakındaki yerler getirilirken hata oluştu.</string>
+  <string name="no_nearby_places_around">Yakınlarda yer bulunamadı</string>
   <string name="error_fetching_nearby_monuments">Yakındaki anıtlar getirilirken hata oluştu.</string>
   <string name="no_recent_searches">Son arama yok</string>
   <string name="delete_recent_searches_dialog">Arama geçmişinizi silmek istediğinizden emin misiniz?</string>
@@ -508,10 +511,18 @@
   <string name="category_edit_button_text">Kategorileri güncelle</string>
   <string name="coordinates_edit_helper_make_edit_toast">Koordinatlar güncellenmeye çalışılıyor.</string>
   <string name="coordinates_edit_helper_show_edit_title">Koordinat güncellemesi</string>
+  <string name="description_edit_helper_show_edit_title">Açıklama güncellemesi</string>
+  <string name="caption_edit_helper_show_edit_title">Başlık güncellemesi</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Başarılı</string>
   <string name="coordinates_edit_helper_show_edit_message">%1$s koordinatları eklendi.</string>
+  <string name="description_edit_helper_show_edit_message">Açıklamalar eklendi.</string>
+  <string name="caption_edit_helper_show_edit_message">Başlık eklendi.</string>
   <string name="coordinates_edit_helper_edit_message_else">Koordinatlar eklenemedi.</string>
+  <string name="description_edit_helper_edit_message_else">Açıklamalar eklenemedi.</string>
+  <string name="caption_edit_helper_edit_message_else">Başlık eklenemedi.</string>
   <string name="coordinates_picking_unsuccessful">Koordinatlar alınamadı.</string>
+  <string name="descriptions_picking_unsuccessful">Açıklamalar alınamadı.</string>
+  <string name="description_activity_title">Açıklamaları ve başlıkları düzenle</string>
   <string name="share_image_via">Resmi şununla paylaş</string>
   <string name="you_have_no_achievements_yet">Henüz bir katkı yapmadınız</string>
   <string name="no_achievements_yet">%s henüz bir katkı yapmadı</string>
@@ -566,6 +577,7 @@
   <string name="resume">devam et</string>
   <string name="paused">Durduruldu</string>
   <string name="more">Daha fazla</string>
+  <string name="bookmarks">Yer imleri</string>
   <string name="achievements_tab_title">Başarılar</string>
   <string name="leaderboard_tab_title">Liderlik sıralaması</string>
   <string name="rank_prefix">Sıra:</string>
@@ -639,4 +651,8 @@
   <string name="contributions_of_user">Kullanıcının katkıları: %s</string>
   <string name="achievements_of_user">Kullanıcının başarıları: %s</string>
   <string name="menu_view_user_page">Kullanıcı sayfasını görüntüle</string>
+  <string name="advanced_options">Gelişmiş Seçenekler</string>
+  <string name="advanced_query_info_text">Yakınlardakiler sorgusunu özelleştirebilirsiniz. Hata alırsanız, sıfırlayın ve uygulayın.</string>
+  <string name="apply">Uygula</string>
+  <string name="reset">Sıfırla</string>
 </resources>

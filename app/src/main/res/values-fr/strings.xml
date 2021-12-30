@@ -18,6 +18,7 @@
 * Mirzali
 * Nicolas Raoul
 * Orikrin1998
+* Paraboule
 * Patrick Star
 * Robins7
 * Sherbrooke
@@ -345,6 +346,7 @@
   <string name="quiz_screenshot_question">Cette copie d’écran est-elle correcte pour être téléversée ?</string>
   <string name="share_app_title">Partager l’application</string>
   <string name="error_fetching_nearby_places">Erreur durant la recherche d’endroits proches.</string>
+  <string name="no_nearby_places_around">Aucun endroit à proximité aux alentours</string>
   <string name="error_fetching_nearby_monuments">Erreur de récupération des monuments à proximité.</string>
   <string name="no_recent_searches">Aucune recherche récente</string>
   <string name="delete_recent_searches_dialog">Voulez-vous vraiment effacer votre historique de recherche ?</string>
@@ -583,6 +585,7 @@
   <string name="resume">reprendre</string>
   <string name="paused">En pause</string>
   <string name="more">Plus</string>
+  <string name="bookmarks">Favoris</string>
   <string name="achievements_tab_title">Réussites</string>
   <string name="leaderboard_tab_title">Tableau de classement</string>
   <string name="rank_prefix">Rang :</string>
@@ -656,4 +659,9 @@
   <string name="contributions_of_user">Contributions de l’utilisateur : %s</string>
   <string name="achievements_of_user">Réussites de l’utilisateur : %s</string>
   <string name="menu_view_user_page">Afficher la page utilisateur</string>
+  <string name="advanced_options">Options avancées</string>
+  <string name="advanced_query_info_text">Vous pouvez personnaliser la requête de proximité. Si vous avez des erreurs, réinitialisez et appliquez.</string>
+  <string name="apply">Appliquer</string>
+  <string name="reset">Réinitialiser</string>
+  <string name="location_message">Les données de localisation aident les éditeurs de Wiki à trouver votre photo, ce qui la rend beaucoup plus utile.\nVos téléchargements récents n\'ont pas de localisation.\nNous vous suggérons d\'activer la localisation dans les paramètres de votre application appareil photo.\nMerci d\'avoir téléchargé !</string>
 </resources>

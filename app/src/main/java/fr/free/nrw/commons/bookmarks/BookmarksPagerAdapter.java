@@ -44,6 +44,11 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
             pages.add(new BookmarkPages(
                 new BookmarkListRootFragment(locationBundle, this),
                 context.getString(R.string.title_page_bookmarks_locations)));
+
+            locationBundle.putInt("orderItem", 2);
+            pages.add(new BookmarkPages(
+                new BookmarkListRootFragment(locationBundle, this),
+                context.getString(R.string.title_page_bookmarks_items)));
         }
         notifyDataSetChanged();
     }

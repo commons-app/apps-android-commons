@@ -318,6 +318,7 @@
   <string name="quiz_screenshot_question">Дали оваа екранска снимка е во ред за подигање?</string>
   <string name="share_app_title">Сподели прилог</string>
   <string name="error_fetching_nearby_places">Грешка при добивањето на околните места.</string>
+  <string name="no_nearby_places_around">Не најдов околни места</string>
   <string name="error_fetching_nearby_monuments">Грешка при добивањето на околните споменици.</string>
   <string name="no_recent_searches">Нема скорешни пребарувања</string>
   <string name="delete_recent_searches_dialog">Дали сте сигурни дека сакате да ја избришете историјата на пребарувања?</string>
@@ -611,6 +612,7 @@
   <string name="location_picker_image_view_shadow">Сенка на сликата за избирање местоположба</string>
   <string name="image_location">Местоположба на сликата</string>
   <string name="check_whether_location_is_correct">Проверете дали местоположбата е точна</string>
+  <string name="title_page_bookmarks_items">Предмети</string>
   <string name="custom_selector_title">Прилагоден избирач</string>
   <string name="custom_selector_empty_text">Нема слики</string>
   <string name="done">Готово</string>
@@ -632,4 +634,9 @@
   <string name="contributions_of_user">Придонеси на корисникот: %s</string>
   <string name="achievements_of_user">Достигнувања на корисникот: %s</string>
   <string name="menu_view_user_page">Преглед на корисничката страница</string>
+  <string name="advanced_options">Напредни можности</string>
+  <string name="advanced_query_info_text">Можете да го прилагодите барањето „Во близина“. Ако добиете грешки, вратете одново и применете.</string>
+  <string name="apply">Примени</string>
+  <string name="reset">Одново</string>
+  <string name="location_message">Податоците за местоположбата им помагаат на викиуредниците да ја пронајдат вашата слика, што ја прави многу покорисна.\nСликите што неодамна ги подигнавте немаат местоположба.\nВи предлагаме да ја вклучите можноста за местонаоѓање во поставките на прилогот на камерата.\nВи благодариме за подигањето!</string>
 </resources>
