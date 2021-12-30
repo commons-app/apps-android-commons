@@ -175,5 +175,6 @@
   <string name="more">{{Identical|More}}</string>
   <string name="map_attribution">&lt;code&gt;&amp;amp;#169;&lt;/code&gt;  is the copyright symbol (©).</string>
   <string name="location_picker_image_view_shadow">A description of a visual element, location picker image shadow. Used for accesibility usually.</string>
+  <string name="title_page_bookmarks_items">{{Identical|Item}}</string>
   <string name="done">{{identical|Done}}</string>
 </resources>
