@@ -26,6 +26,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText;
 import fr.free.nrw.commons.upload.UploadActivity;
@@ -39,6 +40,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
+import javax.inject.Named;
 import kotlin.Unit;
 import timber.log.Timber;
 
@@ -66,6 +68,10 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     Button btnNext;
     @BindView(R.id.depicts_previous)
     Button btnPrevious;
+    @Inject
+    @Named("default_preferences")
+    public
+    JsonKvStore applicationKvStore;
 
     @Inject
     DepictsContract.UserActionListener presenter;
@@ -73,6 +79,10 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     private Disposable subscribe;
     private Media media;
     private ProgressDialog progressDialog;
+    /**
+     * Determines each encounter of edit depicts
+     */
+    private int count;
 
     @Nullable
     @Override
@@ -98,7 +108,6 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     public void onViewCreated(@NonNull android.view.View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-
         Bundle bundle = getArguments();
         if (bundle != null) {
             media = bundle.getParcelable("Existing_Depicts");
@@ -223,7 +232,19 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     @Override
     public void setDepictsList(List<DepictedItem> depictedItemList) {
-        adapter.setItems(depictedItemList);
+
+        if (applicationKvStore.getBoolean("first_edit_depict")) {
+            count = 1;
+            applicationKvStore.putBoolean("first_edit_depict", false);
+            adapter.setItems(depictedItemList);
+        } else {
+            if ((count == 0) && (!depictedItemList.isEmpty())) {
+                adapter.setItems(null);
+                count = 1;
+            } else {
+                adapter.setItems(depictedItemList);
+            }
+        }
         depictsRecyclerView.smoothScrollToPosition(0);
     }
 

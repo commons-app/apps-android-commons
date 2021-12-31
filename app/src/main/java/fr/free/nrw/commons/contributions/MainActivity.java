@@ -124,6 +124,7 @@ public class MainActivity  extends BaseActivity
         toolbar.setNavigationOnClickListener(view -> {
             onSupportNavigateUp();
         });
+        applicationKvStore.putBoolean("first_edit_depict", true);
         if (applicationKvStore.getBoolean("login_skipped") == true) {
             setTitle(getString(R.string.navigation_item_explore));
             setUpLoggedOutPager();
