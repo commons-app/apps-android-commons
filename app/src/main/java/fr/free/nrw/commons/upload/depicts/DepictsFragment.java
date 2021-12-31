@@ -107,6 +107,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     @Override
     public void onViewCreated(@NonNull android.view.View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         ButterKnife.bind(this, view);
         Bundle bundle = getArguments();
         if (bundle != null) {
