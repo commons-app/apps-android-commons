@@ -64,6 +64,7 @@ public class BookmarkItemsDao {
      * @param depictedItem : Bookmark object
      * @return boolean : is bookmark now favorite ?
      */
+    @RequiresApi(api = VERSION_CODES.N)
     public boolean updateBookmarkItem(final DepictedItem depictedItem) {
         final boolean bookmarkExists = findBookmarkItem(depictedItem.getId());
         if (bookmarkExists) {
@@ -78,6 +79,7 @@ public class BookmarkItemsDao {
      * Add a Bookmark to database
      * @param depictedItem : Bookmark to add
      */
+    @RequiresApi(api = VERSION_CODES.N)
     private void addBookmarkItem(final DepictedItem depictedItem) {
         final ContentProviderClient db = clientProvider.get();
         try {
@@ -145,9 +147,17 @@ public class BookmarkItemsDao {
         final String instanceListString
             = cursor.getString(cursor.getColumnIndex(Table.COLUMN_INSTANCE_LIST));
         final List<String> instanceList = StringToArray(instanceListString);
-        final String categoryListString = cursor.getString(cursor
-            .getColumnIndex(Table.COLUMN_CATEGORIES_LIST));
-        final List<String> categoryList = StringToArray(categoryListString);
+        final String categoryNameListString = cursor.getString(cursor
+            .getColumnIndex(Table.COLUMN_CATEGORIES_NAME_LIST));
+        final List<String> categoryNameList = StringToArray(categoryNameListString);
+        final String categoryDescriptionListString = cursor.getString(cursor
+            .getColumnIndex(Table.COLUMN_CATEGORIES_DESCRIPTION_LIST));
+        final List<String> categoryDescriptionList = StringToArray(categoryDescriptionListString);
+        final String categoryThumbnailListString = cursor.getString(cursor
+            .getColumnIndex(Table.COLUMN_CATEGORIES_THUMBNAIL_LIST));
+        final List<String> categoryThumbnailList = StringToArray(categoryThumbnailListString);
+        final List<CategoryItem> categoryList = convertToCategoryItems(categoryNameList,
+            categoryDescriptionList, categoryThumbnailList);
         final boolean isSelected
             = Boolean.parseBoolean(cursor.getString(cursor
             .getColumnIndex(Table.COLUMN_IS_SELECTED)));
@@ -162,6 +172,17 @@ public class BookmarkItemsDao {
             isSelected,
             id
         );
+    }
+
+    private List<CategoryItem> convertToCategoryItems(List<String> categoryNameList,
+        List<String> categoryDescriptionList, List<String> categoryThumbnailList) {
+        List<CategoryItem> categoryItems = new ArrayList<>();
+        for(int i=0; i<categoryNameList.size(); i++){
+            categoryItems.add(new CategoryItem(categoryNameList.get(i),
+                categoryDescriptionList.get(i),
+                categoryThumbnailList.get(i), false));
+        }
+        return categoryItems;
     }
 
     /**
@@ -200,12 +221,10 @@ public class BookmarkItemsDao {
         cv.put(Table.COLUMN_INSTANCE_LIST, ArrayToString(depictedItem.getInstanceOfs()));
         cv.put(Table.COLUMN_CATEGORIES_NAME_LIST, ArrayToString(depictedItem.getCommonsCategories()
             .stream().map(CategoryItem::getName).collect(Collectors.toList())));
-        cv.put(Table.COLUMN_CATEGORIES_NAME_LIST, ArrayToString(depictedItem.getCommonsCategories()
-            .stream().map(CategoryItem::getName).collect(Collectors.toList())));
-        cv.put(Table.COLUMN_CATEGORIES_NAME_LIST, ArrayToString(depictedItem.getCommonsCategories()
-            .stream().map(CategoryItem::getName).collect(Collectors.toList())));
-        cv.put(Table.COLUMN_CATEGORIES_NAME_LIST, ArrayToString(depictedItem.getCommonsCategories()
-            .stream().map(CategoryItem::getName).collect(Collectors.toList())));
+        cv.put(Table.COLUMN_CATEGORIES_DESCRIPTION_LIST, ArrayToString(depictedItem.getCommonsCategories()
+            .stream().map(CategoryItem::getDescription).collect(Collectors.toList())));
+        cv.put(Table.COLUMN_CATEGORIES_THUMBNAIL_LIST, ArrayToString(depictedItem.getCommonsCategories()
+            .stream().map(CategoryItem::getThumbnail).collect(Collectors.toList())));
         cv.put(Table.COLUMN_IS_SELECTED, depictedItem.isSelected());
         cv.put(Table.COLUMN_ID, depictedItem.getId());
         return cv;
@@ -223,7 +242,6 @@ public class BookmarkItemsDao {
         public static final String COLUMN_CATEGORIES_NAME_LIST = "item_name_categories";
         public static final String COLUMN_CATEGORIES_DESCRIPTION_LIST = "item_description_categories";
         public static final String COLUMN_CATEGORIES_THUMBNAIL_LIST = "item_thumbnail_categories";
-        public static final String COLUMN_CATEGORIES_IS_SELECTED_LIST = "item_is_selected_categories";
         public static final String COLUMN_IS_SELECTED = "item_is_selected";
         public static final String COLUMN_ID = "item_id";
 
@@ -235,7 +253,6 @@ public class BookmarkItemsDao {
             COLUMN_CATEGORIES_NAME_LIST,
             COLUMN_CATEGORIES_DESCRIPTION_LIST,
             COLUMN_CATEGORIES_THUMBNAIL_LIST,
-            COLUMN_CATEGORIES_IS_SELECTED_LIST,
             COLUMN_IS_SELECTED,
             COLUMN_ID
         };
@@ -249,7 +266,6 @@ public class BookmarkItemsDao {
             + COLUMN_CATEGORIES_NAME_LIST + " STRING,"
             + COLUMN_CATEGORIES_DESCRIPTION_LIST + " STRING,"
             + COLUMN_CATEGORIES_THUMBNAIL_LIST + " STRING,"
-            + COLUMN_CATEGORIES_IS_SELECTED_LIST + " STRING,"
             + COLUMN_IS_SELECTED + " STRING,"
             + COLUMN_ID + " STRING PRIMARY KEY"
             + ");";
