@@ -17,7 +17,6 @@
     <uses-permission android:name="com.google.android.apps.photos.permission.GOOGLE_PHOTOS" />
     <uses-permission android:name="android.permission.SET_WALLPAPER"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
 
 
@@ -35,6 +34,10 @@
         android:appComponentFactory="commons"
         android:requestLegacyExternalStorage = "true"
         tools:ignore="GoogleAppIndexingWarning">
+
+        <activity
+            android:name=".description.DescriptionEditActivity"
+            android:exported="true" />
 
         <activity android:name="org.acra.dialog.CrashReportDialog"
             android:process=":acra"
@@ -205,7 +208,14 @@
             android:label="@string/provider_bookmarks_location"
             android:syncable="false" />
 
-        <receiver android:name=".widget.PicOfDayAppWidget">
+        <provider
+          android:name=".bookmarks.items.BookmarkItemsContentProvider"
+          android:authorities="${applicationId}.bookmarks.items.contentprovider"
+          android:exported="false"
+          android:label="@string/provider_bookmarks_location"
+          android:syncable="false" />
+
+      <receiver android:name=".widget.PicOfDayAppWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

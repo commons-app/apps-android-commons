@@ -18,6 +18,7 @@
 * Mirzali
 * Nicolas Raoul
 * Orikrin1998
+* Paraboule
 * Patrick Star
 * Robins7
 * Sherbrooke
@@ -78,6 +79,8 @@
   <string name="signup">S’inscrire</string>
   <string name="logging_in_title">Connexion</string>
   <string name="logging_in_message">Veuillez patienter...</string>
+  <string name="updating_caption_title">Mise à jour des légendes et des descriptions</string>
+  <string name="updating_caption_message">Veuillez attendre…</string>
   <string name="login_success">Connexion réussie !</string>
   <string name="login_failed">Échec de la connexion !</string>
   <string name="upload_failed">Fichier non trouvé. Veuillez en essayer un autre.</string>
@@ -343,6 +346,7 @@
   <string name="quiz_screenshot_question">Cette copie d’écran est-elle correcte pour être téléversée ?</string>
   <string name="share_app_title">Partager l’application</string>
   <string name="error_fetching_nearby_places">Erreur durant la recherche d’endroits proches.</string>
+  <string name="no_nearby_places_around">Aucun endroit à proximité aux alentours</string>
   <string name="error_fetching_nearby_monuments">Erreur de récupération des monuments à proximité.</string>
   <string name="no_recent_searches">Aucune recherche récente</string>
   <string name="delete_recent_searches_dialog">Voulez-vous vraiment effacer votre historique de recherche ?</string>
@@ -515,10 +519,18 @@
   <string name="category_edit_button_text">Mettre à jour les catégories</string>
   <string name="coordinates_edit_helper_make_edit_toast">Essai de mise à jour des coordonnées.</string>
   <string name="coordinates_edit_helper_show_edit_title">Mise à jour des coordonnées</string>
+  <string name="description_edit_helper_show_edit_title">Mise à jour de la description</string>
+  <string name="caption_edit_helper_show_edit_title">Mise à jour de la légende</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Succès</string>
   <string name="coordinates_edit_helper_show_edit_message">Les coordonnées %1$s sont ajoutées.</string>
+  <string name="description_edit_helper_show_edit_message">Les descriptions sont ajoutées.</string>
+  <string name="caption_edit_helper_show_edit_message">La légende est ajoutée.</string>
   <string name="coordinates_edit_helper_edit_message_else">Impossible d’ajouter des coordonnées.</string>
+  <string name="description_edit_helper_edit_message_else">Impossible d’ajouter des descriptions.</string>
+  <string name="caption_edit_helper_edit_message_else">Impossible d’ajouter la légende.</string>
   <string name="coordinates_picking_unsuccessful">Impossible d’obtenir les coordonnées.</string>
+  <string name="descriptions_picking_unsuccessful">Impossible d’obtenir les descriptions.</string>
+  <string name="description_activity_title">Modifier les descriptions et les légendes</string>
   <string name="share_image_via">Partager l’image via</string>
   <string name="you_have_no_achievements_yet">Vous n’avez encore fait aucune contribution</string>
   <string name="no_achievements_yet">%s n’a encore fait aucune contribution</string>
@@ -573,7 +585,7 @@
   <string name="resume">reprendre</string>
   <string name="paused">En pause</string>
   <string name="more">Plus</string>
-  <string name="favorites">Favoris</string>
+  <string name="bookmarks">Favoris</string>
   <string name="achievements_tab_title">Réussites</string>
   <string name="leaderboard_tab_title">Tableau de classement</string>
   <string name="rank_prefix">Rang :</string>
@@ -647,4 +659,9 @@
   <string name="contributions_of_user">Contributions de l’utilisateur : %s</string>
   <string name="achievements_of_user">Réussites de l’utilisateur : %s</string>
   <string name="menu_view_user_page">Afficher la page utilisateur</string>
+  <string name="advanced_options">Options avancées</string>
+  <string name="advanced_query_info_text">Vous pouvez personnaliser la requête de proximité. Si vous avez des erreurs, réinitialisez et appliquez.</string>
+  <string name="apply">Appliquer</string>
+  <string name="reset">Réinitialiser</string>
+  <string name="location_message">Les données de localisation aident les éditeurs de Wiki à trouver votre photo, ce qui la rend beaucoup plus utile.\nVos téléchargements récents n\'ont pas de localisation.\nNous vous suggérons d\'activer la localisation dans les paramètres de votre application appareil photo.\nMerci d\'avoir téléchargé !</string>
 </resources>

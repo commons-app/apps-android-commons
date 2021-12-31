@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsFragment;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
@@ -48,10 +49,14 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
     public BookmarkListRootFragment(Bundle bundle, BookmarksPagerAdapter bookmarksPagerAdapter) {
         String title = bundle.getString("categoryName");
         int order = bundle.getInt("order");
+        final int orderItem = bundle.getInt("orderItem");
         if (order == 0) {
             listFragment = new BookmarkPicturesFragment();
         } else {
             listFragment = new BookmarkLocationsFragment();
+            if(orderItem == 2) {
+                listFragment = new BookmarkItemsFragment();
+            }
         }
         Bundle featuredArguments = new Bundle();
         featuredArguments.putString("categoryName", title);
