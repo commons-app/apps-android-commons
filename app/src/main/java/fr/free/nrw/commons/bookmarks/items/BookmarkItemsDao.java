@@ -4,11 +4,15 @@ import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build.VERSION_CODES;
 import android.os.RemoteException;
+import androidx.annotation.RequiresApi;
+import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
@@ -187,13 +191,21 @@ public class BookmarkItemsDao {
      * @param depictedItem depicted item
      * @return ContentValues
      */
+    @RequiresApi(api = VERSION_CODES.N)
     private ContentValues toContentValues(final DepictedItem depictedItem) {
         final ContentValues cv = new ContentValues();
         cv.put(Table.COLUMN_NAME, depictedItem.getName());
         cv.put(Table.COLUMN_DESCRIPTION, depictedItem.getDescription());
         cv.put(Table.COLUMN_IMAGE, depictedItem.getImageUrl());
         cv.put(Table.COLUMN_INSTANCE_LIST, ArrayToString(depictedItem.getInstanceOfs()));
-        cv.put(Table.COLUMN_CATEGORIES_LIST, ArrayToString(depictedItem.getCommonsCategories()));
+        cv.put(Table.COLUMN_CATEGORIES_NAME_LIST, ArrayToString(depictedItem.getCommonsCategories()
+            .stream().map(CategoryItem::getName).collect(Collectors.toList())));
+        cv.put(Table.COLUMN_CATEGORIES_NAME_LIST, ArrayToString(depictedItem.getCommonsCategories()
+            .stream().map(CategoryItem::getName).collect(Collectors.toList())));
+        cv.put(Table.COLUMN_CATEGORIES_NAME_LIST, ArrayToString(depictedItem.getCommonsCategories()
+            .stream().map(CategoryItem::getName).collect(Collectors.toList())));
+        cv.put(Table.COLUMN_CATEGORIES_NAME_LIST, ArrayToString(depictedItem.getCommonsCategories()
+            .stream().map(CategoryItem::getName).collect(Collectors.toList())));
         cv.put(Table.COLUMN_IS_SELECTED, depictedItem.isSelected());
         cv.put(Table.COLUMN_ID, depictedItem.getId());
         return cv;
@@ -208,7 +220,10 @@ public class BookmarkItemsDao {
         public static final String COLUMN_DESCRIPTION = "item_description";
         public static final String COLUMN_IMAGE = "item_image_url";
         public static final String COLUMN_INSTANCE_LIST = "item_instance_of";
-        public static final String COLUMN_CATEGORIES_LIST = "item_categories";
+        public static final String COLUMN_CATEGORIES_NAME_LIST = "item_name_categories";
+        public static final String COLUMN_CATEGORIES_DESCRIPTION_LIST = "item_description_categories";
+        public static final String COLUMN_CATEGORIES_THUMBNAIL_LIST = "item_thumbnail_categories";
+        public static final String COLUMN_CATEGORIES_IS_SELECTED_LIST = "item_is_selected_categories";
         public static final String COLUMN_IS_SELECTED = "item_is_selected";
         public static final String COLUMN_ID = "item_id";
 
@@ -217,7 +232,10 @@ public class BookmarkItemsDao {
             COLUMN_DESCRIPTION,
             COLUMN_IMAGE,
             COLUMN_INSTANCE_LIST,
-            COLUMN_CATEGORIES_LIST,
+            COLUMN_CATEGORIES_NAME_LIST,
+            COLUMN_CATEGORIES_DESCRIPTION_LIST,
+            COLUMN_CATEGORIES_THUMBNAIL_LIST,
+            COLUMN_CATEGORIES_IS_SELECTED_LIST,
             COLUMN_IS_SELECTED,
             COLUMN_ID
         };
@@ -228,7 +246,10 @@ public class BookmarkItemsDao {
             + COLUMN_DESCRIPTION + " STRING,"
             + COLUMN_IMAGE + " STRING,"
             + COLUMN_INSTANCE_LIST + " STRING,"
-            + COLUMN_CATEGORIES_LIST + " STRING,"
+            + COLUMN_CATEGORIES_NAME_LIST + " STRING,"
+            + COLUMN_CATEGORIES_DESCRIPTION_LIST + " STRING,"
+            + COLUMN_CATEGORIES_THUMBNAIL_LIST + " STRING,"
+            + COLUMN_CATEGORIES_IS_SELECTED_LIST + " STRING,"
             + COLUMN_IS_SELECTED + " STRING,"
             + COLUMN_ID + " STRING PRIMARY KEY"
             + ");";
