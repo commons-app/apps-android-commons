@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload.depicts
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
