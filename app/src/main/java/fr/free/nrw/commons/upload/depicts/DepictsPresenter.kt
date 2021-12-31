@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload.depicts
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -82,16 +83,27 @@ class DepictsPresenter @Inject constructor(
         if (querystring.isEmpty()) {
             recentDepictedItemList = getRecentDepictedItems();
         }
-        return Flowable.zip(repository.searchAllEntities(querystring),
-            repository.getDepictions(view.existingDepicts),
-            { it1, it2 ->
-                it1 + it2
-            }
-        )
-            .subscribeOn(ioScheduler)
-            .map { repository.selectedDepictions + it + recentDepictedItemList }
-            .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
-            .map { it.distinctBy(DepictedItem::id) }
+
+        if(view.existingDepicts == null) {
+            return repository.searchAllEntities(querystring)
+                .subscribeOn(ioScheduler)
+                .map { repository.selectedDepictions + it + recentDepictedItemList }
+                .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
+                .map { it.distinctBy(DepictedItem::id) }
+
+        } else {
+            return Flowable.zip(repository.searchAllEntities(querystring),
+                repository.getDepictions(view.existingDepicts),
+                { it1, it2 ->
+                    it1 + it2
+                }
+            )
+                .subscribeOn(ioScheduler)
+                .map { repository.selectedDepictions + it + recentDepictedItemList }
+                .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
+                .map { it.distinctBy(DepictedItem::id) }
+
+        }
     }
 
     override fun onDetachView() {

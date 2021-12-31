@@ -239,7 +239,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     @Override
     public List<String> getExistingDepicts(){
-        return media.getDepictionIds();
+        return (media == null) ? null : media.getDepictionIds();
     }
 
     /**
