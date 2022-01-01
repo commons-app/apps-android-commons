@@ -98,6 +98,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
             if (keycode == KeyEvent.KEYCODE_BACK) {
                 assert getFragmentManager() != null;
                 getFragmentManager().popBackStack();
+                presenter.clearPreviousSelection();
                 return true;
             }
             return false;
@@ -287,7 +288,6 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      */
     @Override
     public void updateDepicts() {
-        onDestroyView();
         final MediaDetailFragment mediaDetailFragment = (MediaDetailFragment) getParentFragment();
         assert mediaDetailFragment != null;
         mediaDetailFragment.onResume();
@@ -313,6 +313,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         if(media != null){
             assert getFragmentManager() != null;
             getFragmentManager().popBackStack();
+            presenter.clearPreviousSelection();
         } else {
             callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
         }

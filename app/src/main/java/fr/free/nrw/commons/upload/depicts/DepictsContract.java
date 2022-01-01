@@ -85,6 +85,11 @@ public interface DepictsContract {
          */
         void verifyDepictions();
 
+        /**
+         * Clears previous selections
+         */
+        void clearPreviousSelection();
+
         LiveData<List<DepictedItem>> getDepictedItems();
 
         void updateDepicts(Media media);

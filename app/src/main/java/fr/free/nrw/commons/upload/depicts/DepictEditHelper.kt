@@ -47,19 +47,18 @@ class DepictEditHelper @Inject constructor (notificationHelper: NotificationHelp
     fun makeDepictEdit(
         context: Context,
         media: Media,
-        depicts: List<String>
-    ): Single<Boolean> {
+        depict: String
+    ): Observable<Boolean>? {
         viewUtilWrapper.showShortToast(
             context,
             context.getString(R.string.depict_edit_helper_make_edit_toast)
         )
-        return addCategory(media, depicts)
-            .flatMapSingle { result: Boolean ->
-                Single.just(
+        return addCategory(media, depict)
+            ?.flatMap { result: Boolean ->
+                Observable.just(
                     showCategoryEditNotification(context, media, result)
                 )
             }
-            .firstOrError()
     }
 
     /**
@@ -69,9 +68,9 @@ class DepictEditHelper @Inject constructor (notificationHelper: NotificationHelp
      * @param depicts to be added
      * @return Observable<Boolean>
      */
-    private fun addCategory(media: Media, depicts: List<String>): Observable<Boolean> {
+     private fun addCategory(media: Media, depict: String): Observable<Boolean>? {
         Timber.d("thread is depict adding %s", Thread.currentThread().name)
-        return wikidataEditService.editDepiction(depicts, media.filename)
+        return wikidataEditService.updateDepictsProperty(media.filename, depict)
     }
 
     /**

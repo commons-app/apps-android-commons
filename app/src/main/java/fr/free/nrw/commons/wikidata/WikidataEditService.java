@@ -245,18 +245,5 @@ public class WikidataEditService {
         return Observable.fromIterable(contribution.getDepictedItems())
             .concatMap(wikidataItem -> addDepictsProperty(fileEntityId.toString(), wikidataItem));
     }
-
-    /**
-     * Takes the selected items as a parameter and iterate through every item and send each item
-     * for post operation
-     *
-     * @param depictedItems selected depict items
-     * @param filename name of the file
-     * @return Observable<Boolean>
-     */
-    public Observable<Boolean> editDepiction(final List<String> depictedItems,
-        final String filename) {
-        return Observable.fromIterable(depictedItems)
-            .concatMap(wikidataItem -> updateDepictsProperty(filename, wikidataItem));
-    }
 }
+
