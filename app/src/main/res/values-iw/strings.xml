@@ -348,6 +348,7 @@
   <string name="quiz_screenshot_question">האם בסדר להעלות את צילום המסך הזה?</string>
   <string name="share_app_title">שיתוף היישום</string>
   <string name="error_fetching_nearby_places">שגיאה באחזור המקומות בסביבתך.</string>
+  <string name="no_nearby_places_around">אין מקומות בסביבה</string>
   <string name="error_fetching_nearby_monuments">שגיאה באחזור אתרים בסביבתך.</string>
   <string name="no_recent_searches">אין חיפושים אחרונים</string>
   <string name="delete_recent_searches_dialog">האם באמת ברצונך לנקות את היסטוריית החיפוש שלך?</string>
@@ -662,4 +663,9 @@
   <string name="contributions_of_user">תרומות של המשתמש: %s</string>
   <string name="achievements_of_user">הישגי המשתמש: %s</string>
   <string name="menu_view_user_page">הצגת דף המשתמש</string>
+  <string name="advanced_options">אפשרויות מתקדמות</string>
+  <string name="advanced_query_info_text">באפשרותך לעשות התאמה אישית של שאילתת \"בסביבה\". אם זה מייצר לך שגיאות, נא לאפס ולנסות שוב.</string>
+  <string name="apply">החלה</string>
+  <string name="reset">איפוס</string>
+  <string name="location_message">נתוני מיקום עוזרים לעורכי ויקי למצוא את התמונה שלך, וזה גורם לה להיות הרבה יותר שימושית.\nבהעלאות האחרונות שלך אין מיקום.\nאנחנו ממליצים לך להפעיל את המיקום בהגדרות יישום המצלמה שלך.\nתודה על ההעלאה!</string>
 </resources>

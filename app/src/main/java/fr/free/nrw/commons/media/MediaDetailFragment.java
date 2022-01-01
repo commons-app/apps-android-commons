@@ -1149,6 +1149,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             Intent intent = new Intent(getContext(), WikidataItemDetailsActivity.class);
             intent.putExtra("wikidataItemName", depictionName);
             intent.putExtra("entityId", entityId);
+            intent.putExtra("fragment", "MediaDetailFragment");
             getContext().startActivity(intent);
         });
         return item;

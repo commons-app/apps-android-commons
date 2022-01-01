@@ -651,6 +651,7 @@
   <string name="location_picker_image_view_shadow">\n    Тень изображения средства выбора местоположения</string>
   <string name="image_location">Расположение изображения</string>
   <string name="check_whether_location_is_correct">Проверьте правильность местоположения</string>
+  <string name="title_page_bookmarks_items">Элементы</string>
   <string name="custom_selector_title">Пользовательский селектор</string>
   <string name="custom_selector_empty_text">Нет изображений</string>
   <string name="done">Готово</string>
@@ -670,4 +671,6 @@
   <string name="contributions_of_user">Вклад участника: %s</string>
   <string name="achievements_of_user">Достижения участника: %s</string>
   <string name="menu_view_user_page">Посмотреть страницу участника</string>
+  <string name="apply">Применить</string>
+  <string name="reset">Сбросить</string>
 </resources>

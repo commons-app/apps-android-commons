@@ -343,6 +343,7 @@
   <string name="quiz_screenshot_question">Чи можна завантажувати цей знімок?</string>
   <string name="share_app_title">Поширити програму</string>
   <string name="error_fetching_nearby_places">Помилка отримання місць поблизу.</string>
+  <string name="no_nearby_places_around">Не знайдено місць поблизу</string>
   <string name="error_fetching_nearby_monuments">Помилка отримання пам\'ятників поблизу.</string>
   <string name="no_recent_searches">Історія пошуку порожня</string>
   <string name="delete_recent_searches_dialog">Ви впевнені, що хочете стерти історію пошукових запитів?</string>
@@ -638,6 +639,7 @@
   <string name="location_picker_image_view_shadow">Вигляд вибору розташування як тіні зображення</string>
   <string name="image_location">Підпис зображення</string>
   <string name="check_whether_location_is_correct">Перевірте правильність розташування</string>
+  <string name="title_page_bookmarks_items">Елементи</string>
   <string name="custom_selector_title">Користувацький селектор</string>
   <string name="custom_selector_empty_text">Без зображень</string>
   <string name="done">Готово</string>
@@ -657,4 +659,9 @@
   <string name="contributions_of_user">Внесок користувача: %s</string>
   <string name="achievements_of_user">Досягнення користувача: %s</string>
   <string name="menu_view_user_page">Переглянути сторінку користувача</string>
+  <string name="advanced_options">Розширені параметри</string>
+  <string name="advanced_query_info_text">Ви можете налаштувати запит поблизу. Якщо ви отримуєте помилки, скиньте налаштування та застосуйте.</string>
+  <string name="apply">Застосувати</string>
+  <string name="reset">Скинути</string>
+  <string name="location_message">Дані про місцезнаходження допомагають редакторам Вікі знайти ваше зображення, що робить його набагато кориснішим.\nВаші останні завантаження не мають місцезнаходження.\nПропонуємо ввімкнути місцезнаходження в налаштуваннях програми камери.\nДякуємо за завантаження!</string>
 </resources>
