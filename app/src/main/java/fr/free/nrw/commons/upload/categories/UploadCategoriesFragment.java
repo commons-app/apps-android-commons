@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload.categories;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,6 +38,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import kotlin.Unit;
@@ -301,5 +304,17 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         mediaDetailFragment.rebuildCatList(categories);
     }
 
+    @Override
+    public List<CategoryItem> getExistingCategories() {
+        if (media != null) {
+            final List<CategoryItem> categoryItems = new ArrayList<>();
+            for (final String name :
+                Objects.requireNonNull(media.getCategories())) {
+                categoryItems.add(new CategoryItem(name, false));
+            }
+            return categoryItems;
+        }
+        return null;
+    }
 }
 

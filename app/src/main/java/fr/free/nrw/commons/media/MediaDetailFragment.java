@@ -694,7 +694,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @OnClick(R.id.categoryEditButton)
     public void onCategoryEditButtonClicked(){
         ((ContributionsFragment) (getParentFragment()
-            .getParentFragment())).nearbyNotificationCardView
+            .getParentFragment().getParentFragment())).nearbyNotificationCardView
             .setVisibility(View.GONE);
         final Fragment uploadCategoriesFragment = new UploadCategoriesFragment();
         final Bundle bundle = new Bundle();

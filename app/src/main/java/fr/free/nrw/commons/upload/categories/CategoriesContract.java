@@ -36,6 +36,8 @@ public interface CategoriesContract {
 
         void updateList(List<String> categories);
 
+        List<CategoryItem> getExistingCategories();
+
     }
 
     interface UserActionListener extends BasePresenter<View> {

@@ -53,7 +53,7 @@ class CategoriesPresenter @Inject constructor(
                     view.setCategories(null)
                 }
                 .switchMap(::searchResults)
-                .map { repository.selectedCategories + it }
+                .map { view.existingCategories + repository.selectedCategories + it }
                 .map { it.distinctBy { categoryItem -> categoryItem.name } }
                 .observeOn(mainThreadScheduler)
                 .subscribe(
