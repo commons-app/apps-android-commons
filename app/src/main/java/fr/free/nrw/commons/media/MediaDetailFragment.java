@@ -237,7 +237,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @BindView(R.id.description_label)
     TextView descriptionLabel;
     @BindView(R.id.pb_circular)
-     ProgressBar progressBar;
+    ProgressBar progressBar;
     String descriptionHtmlCode;
     @BindView(R.id.progressBarDeletion)
     ProgressBar progressBarDeletion;
@@ -456,10 +456,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     private void displayMediaDetails() {
         setTextFields(media);
         compositeDisposable.addAll(
-            mediaDataExtractor.fetchDepictionIdsAndLabels(media)
+            mediaDataExtractor.refresh(media)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onDepictionsLoaded, Timber::e),
+                .subscribe(this::onMediaRefreshed, Timber::e),
             mediaDataExtractor.checkDeletionRequestExists(media)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -467,15 +467,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             mediaDataExtractor.fetchDiscussion(media)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onDiscussionLoaded, Timber::e),
-            mediaDataExtractor.refresh(media)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onMediaRefreshed, Timber::e)
+                .subscribe(this::onDiscussionLoaded, Timber::e)
         );
     }
 
     private void onMediaRefreshed(Media media) {
+        this.media = media;
         setTextFields(media);
         compositeDisposable.addAll(
             mediaDataExtractor.fetchDepictionIdsAndLabels(media)
@@ -506,9 +503,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     private void onDepictionsLoaded(List<IdAndCaptions> idAndCaptions){
-      depictsLayout.setVisibility(idAndCaptions.isEmpty() ? GONE : VISIBLE);
-      depictEditButton.setVisibility(idAndCaptions.isEmpty() ? GONE : VISIBLE);
-      buildDepictionList(idAndCaptions);
+        depictsLayout.setVisibility(idAndCaptions.isEmpty() ? GONE : VISIBLE);
+        depictEditButton.setVisibility(idAndCaptions.isEmpty() ? GONE : VISIBLE);
+        buildDepictionList(idAndCaptions);
     }
 
     /**
@@ -583,11 +580,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         image.getHierarchy().setFailureImage(R.drawable.image_placeholder);
 
         DraweeController controller = Fresco.newDraweeControllerBuilder()
-                .setLowResImageRequest(ImageRequest.fromUri(media != null ? media.getThumbUrl() : null))
-                .setImageRequest(ImageRequest.fromUri(media != null ? media.getImageUrl() : null))
-                .setControllerListener(aspectRatioListener)
-                .setOldController(image.getController())
-                .build();
+            .setLowResImageRequest(ImageRequest.fromUri(media != null ? media.getThumbUrl() : null))
+            .setImageRequest(ImageRequest.fromUri(media != null ? media.getImageUrl() : null))
+            .setControllerListener(aspectRatioListener)
+            .setOldController(image.getController())
+            .build();
         image.setController(controller);
     }
 
@@ -746,11 +743,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         depictionContainer.removeAllViews();
         String locale = Locale.getDefault().getLanguage();
         for (IdAndCaptions idAndCaption : idAndCaptions) {
-                depictionContainer.addView(buildDepictLabel(
-                    getDepictionCaption(idAndCaption, locale),
-                    idAndCaption.getId(),
-                    depictionContainer
-                ));
+            depictionContainer.addView(buildDepictLabel(
+                getDepictionCaption(idAndCaption, locale),
+                idAndCaption.getId(),
+                depictionContainer
+            ));
         }
     }
 
@@ -1054,7 +1051,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
             LinkedHashMap<String, String> updatedCaptions = new LinkedHashMap<>();
             for (UploadMediaDetail mediaDetail:
-            uploadMediaDetails) {
+                uploadMediaDetails) {
                 compositeDisposable.add(descriptionEditHelper.addCaption(getContext(), media,
                     mediaDetail.getLanguageCode(), mediaDetail.getCaptionText())
                     .subscribeOn(Schedulers.io())
@@ -1137,73 +1134,73 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @SuppressLint("StringFormatInvalid")
     @OnClick(R.id.nominateDeletion)
     public void onDeleteButtonClicked(){
-            if (AccountUtil.getUserName(getContext()) != null && AccountUtil.getUserName(getContext()).equals(media.getAuthor())) {
-                final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(getActivity(),
-                    R.layout.simple_spinner_dropdown_list, reasonList);
-                final Spinner spinner = new Spinner(getActivity());
-                spinner.setLayoutParams(
-                    new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT));
-                spinner.setAdapter(languageAdapter);
-                spinner.setGravity(17);
+        if (AccountUtil.getUserName(getContext()) != null && AccountUtil.getUserName(getContext()).equals(media.getAuthor())) {
+            final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(getActivity(),
+                R.layout.simple_spinner_dropdown_list, reasonList);
+            final Spinner spinner = new Spinner(getActivity());
+            spinner.setLayoutParams(
+                new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+            spinner.setAdapter(languageAdapter);
+            spinner.setGravity(17);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setView(spinner);
-                builder.setTitle(R.string.nominate_delete)
-                    .setPositiveButton(R.string.about_translate_proceed,
-                        (dialog, which) -> onDeleteClicked(spinner));
-                builder.setNegativeButton(R.string.about_translate_cancel,
-                    (dialog, which) -> dialog.dismiss());
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                if (isDeleted) {
-                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-                }
-            }
-            //Reviewer correct me if i have misunderstood something over here
-            //But how does this  if (delete.getVisibility() == View.VISIBLE) {
-            //            enableDeleteButton(true);   makes sense ?
-            else {
-                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                alert.setMessage(
-                    getString(R.string.dialog_box_text_nomination, media.getDisplayTitle()));
-                final EditText input = new EditText(getActivity());
-                alert.setView(input);
-                input.requestFocus();
-                alert.setPositiveButton(R.string.ok, (dialog1, whichButton) -> {
-                    String reason = input.getText().toString();
-                    onDeleteClickeddialogtext(reason);
-                });
-                alert.setNegativeButton(R.string.cancel, (dialog12, whichButton) -> {
-                });
-                AlertDialog d = alert.create();
-                input.addTextChangedListener(new TextWatcher() {
-                    private void handleText() {
-                        final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
-                        if (input.getText().length() == 0 || isDeleted) {
-                            okButton.setEnabled(false);
-                        } else {
-                            okButton.setEnabled(true);
-                        }
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable arg0) {
-                        handleText();
-                    }
-
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    }
-                });
-                d.show();
-                d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setView(spinner);
+            builder.setTitle(R.string.nominate_delete)
+                .setPositiveButton(R.string.about_translate_proceed,
+                    (dialog, which) -> onDeleteClicked(spinner));
+            builder.setNegativeButton(R.string.about_translate_cancel,
+                (dialog, which) -> dialog.dismiss());
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            if (isDeleted) {
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
             }
         }
+        //Reviewer correct me if i have misunderstood something over here
+        //But how does this  if (delete.getVisibility() == View.VISIBLE) {
+        //            enableDeleteButton(true);   makes sense ?
+        else {
+            AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+            alert.setMessage(
+                getString(R.string.dialog_box_text_nomination, media.getDisplayTitle()));
+            final EditText input = new EditText(getActivity());
+            alert.setView(input);
+            input.requestFocus();
+            alert.setPositiveButton(R.string.ok, (dialog1, whichButton) -> {
+                String reason = input.getText().toString();
+                onDeleteClickeddialogtext(reason);
+            });
+            alert.setNegativeButton(R.string.cancel, (dialog12, whichButton) -> {
+            });
+            AlertDialog d = alert.create();
+            input.addTextChangedListener(new TextWatcher() {
+                private void handleText() {
+                    final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
+                    if (input.getText().length() == 0 || isDeleted) {
+                        okButton.setEnabled(false);
+                    } else {
+                        okButton.setEnabled(true);
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable arg0) {
+                    handleText();
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                }
+            });
+            d.show();
+            d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+        }
+    }
 
     @SuppressLint("CheckResult")
     private void onDeleteClicked(Spinner spinner) {
@@ -1211,7 +1208,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         enableProgressBar();
         String reason = spinner.getSelectedItem().toString();
         Single<Boolean> resultSingle = reasonBuilder.getReason(media, reason)
-                .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
+            .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
         resultSingle
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -1228,7 +1225,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         applicationKvStore.putBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), true);
         enableProgressBar();
         Single<Boolean> resultSingletext = reasonBuilder.getReason(media, reason)
-                .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
+            .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
         resultSingletext
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -1317,7 +1314,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     /**
-    * Returns captions for media details
+     * Returns captions for media details
      *
      * @param media object of class media
      * @return caption as string
