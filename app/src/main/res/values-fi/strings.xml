@@ -602,6 +602,7 @@
   <string name="modify_location">Muokkaa sijaintia</string>
   <string name="image_location">Kuvan sijainti</string>
   <string name="check_whether_location_is_correct">Tarkista, onko sijainti oikea</string>
+  <string name="title_page_bookmarks_items">Kohteet</string>
   <string name="custom_selector_empty_text">Ei kuvia</string>
   <string name="done">Valmis</string>
   <string name="back">Takaisin</string>
