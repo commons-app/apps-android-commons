@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -153,6 +154,10 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
                 return Unit.INSTANCE;
             }, new ArrayList<>());
         } else {
+            for (String s :
+                media.getCategories()) {
+                Log.d("haha", "initRecyclerView: "+s);
+            }
             adapter = new UploadCategoryAdapter(categoryItem -> {
                 presenter.onCategoryItemClicked(categoryItem);
                 return Unit.INSTANCE;
@@ -229,6 +234,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     public void onPreviousButtonClicked() {
         if (media != null) {
             getFragmentManager().popBackStack();
+            presenter.clearPreviousSelection();
         } else {
             callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
         }

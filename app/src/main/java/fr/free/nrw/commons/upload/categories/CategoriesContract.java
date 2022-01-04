@@ -49,6 +49,8 @@ public interface CategoriesContract {
         void updateCategories(Media media);
 
         void onCategoryItemClicked(CategoryItem categoryItem);
+
+        void clearPreviousSelection();
     }
 
 

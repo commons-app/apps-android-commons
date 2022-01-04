@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -441,6 +442,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     private void onMediaRefreshed(Media media) {
+        this.media = media;
+        categoryNames.clear();
+        categoryNames.addAll(media.getCategories());
+        updateCategoryList();
         setTextFields(media);
         compositeDisposable.addAll(
             mediaDataExtractor.fetchDepictionIdsAndLabels(media)
@@ -605,9 +610,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             mediaCaption.setText(prettyCaption(media));
         }
 
-        categoryNames.clear();
-        categoryNames.addAll(media.getCategories());
-        updateCategoryList();
 
         if (media.getAuthor() == null || media.getAuthor().equals("")) {
             authorLayout.setVisibility(GONE);
@@ -693,9 +695,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @OnClick(R.id.categoryEditButton)
     public void onCategoryEditButtonClicked(){
-        ((ContributionsFragment) (getParentFragment()
-            .getParentFragment().getParentFragment())).nearbyNotificationCardView
-            .setVisibility(View.GONE);
+//        ((ContributionsFragment) (getParentFragment()
+//            .getParentFragment().getParentFragment())).nearbyNotificationCardView
+//            .setVisibility(View.GONE);
         final Fragment uploadCategoriesFragment = new UploadCategoriesFragment();
         final Bundle bundle = new Bundle();
         bundle.putParcelable("Existing_Categories", media);
@@ -1244,6 +1246,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         if (categories == null) {
             return false;
         } else {
+            Log.d("haha", "updateCategoryDisplay: ");
             rebuildCatList(categories);
             return true;
         }

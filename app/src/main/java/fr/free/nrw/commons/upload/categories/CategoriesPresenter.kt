@@ -137,6 +137,7 @@ class CategoriesPresenter @Inject constructor(
                     view.goBackToPreviousScreen()
                     view.dismissProgressDialog()
                     updateCategoryList(media)
+                    repository.cleanup()
                 }) {
                     Timber.e(
                         "Failed to update categories"
@@ -183,5 +184,9 @@ class CategoriesPresenter @Inject constructor(
      */
     override fun onCategoryItemClicked(categoryItem: CategoryItem) {
         repository.onCategoryClicked(categoryItem)
+    }
+
+    override fun clearPreviousSelection() {
+        repository.cleanup()
     }
 }
