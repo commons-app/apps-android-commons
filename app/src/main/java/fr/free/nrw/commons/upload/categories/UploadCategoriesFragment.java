@@ -7,6 +7,7 @@ import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -95,6 +96,11 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         if (bundle != null) {
             media = bundle.getParcelable("Existing_Categories");
         }
+
+        if (media != null) {
+            handleBackEvent(view);
+        }
+
         init();
     }
 
@@ -321,6 +327,20 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
             return categoryItems;
         }
         return null;
+    }
+
+    private void handleBackEvent(View view) {
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener((view1, keycode, keyEvent) -> {
+            if (keycode == KeyEvent.KEYCODE_BACK) {
+                assert getFragmentManager() != null;
+                getFragmentManager().popBackStack();
+                presenter.clearPreviousSelection();
+                return true;
+            }
+            return false;
+        });
     }
 }
 

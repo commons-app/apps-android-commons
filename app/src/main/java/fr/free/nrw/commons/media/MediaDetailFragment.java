@@ -1123,6 +1123,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     public void rebuildCatList(List<String> categories) {
+        media.setCategories(categories);
         categoryContainer.removeAllViews();
         for (String category : categories) {
             categoryContainer.addView(buildCatLabel(sanitise(category), categoryContainer));
