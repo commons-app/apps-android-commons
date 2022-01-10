@@ -61,5 +61,4 @@ abstract class BasePagingPresenter<T>(
     override fun onQueryUpdated(query: String) {
         pageableBaseDataSource.onQueryUpdated(query)
     }
-
 }

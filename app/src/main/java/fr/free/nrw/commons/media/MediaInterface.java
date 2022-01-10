@@ -12,7 +12,7 @@ import retrofit2.http.QueryMap;
  * Interface for interacting with Commons media related APIs
  */
 public interface MediaInterface {
-    String MEDIA_PARAMS="&prop=imageinfo&iiprop=url|extmetadata|user&&iiurlwidth=640" +
+    String MEDIA_PARAMS="&prop=imageinfo|coordinates&iiprop=url|extmetadata|user&&iiurlwidth=640" +
             "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal" +
             "|Artist|LicenseShortName|LicenseUrl";
 
@@ -73,6 +73,7 @@ public interface MediaInterface {
             "&generator=search&gsrwhat=text&gsrnamespace=6" + //Search parameters
             MEDIA_PARAMS)
     Single<MwQueryResponse> getMediaListFromSearch(@Query("gsrsearch") String keyword, @Query("gsrlimit") int itemLimit, @Query("gsroffset") int offset);
+
 
     /**
      * Fetches Media object from the imageInfo API
