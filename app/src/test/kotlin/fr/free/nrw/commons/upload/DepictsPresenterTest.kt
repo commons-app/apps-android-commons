@@ -12,6 +12,7 @@ import fr.free.nrw.commons.upload.depicts.DepictsPresenter
 import fr.free.nrw.commons.wikidata.WikidataDisambiguationItems
 import io.reactivex.Flowable
 import io.reactivex.schedulers.TestScheduler
+import media
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -113,7 +114,7 @@ class DepictsPresenterTest {
     fun `onDepictItemClicked calls repository`() {
         val depictedItem = depictedItem()
         depictsPresenter.onDepictItemClicked(depictedItem)
-        verify(repository).onDepictItemClicked(depictedItem)
+        verify(repository).onDepictItemClicked(depictedItem, null)
     }
 
     @Test
