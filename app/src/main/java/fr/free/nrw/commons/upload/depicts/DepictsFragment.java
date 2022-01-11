@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -96,9 +97,9 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         view.requestFocus();
         view.setOnKeyListener((view1, keycode, keyEvent) -> {
             if (keycode == KeyEvent.KEYCODE_BACK) {
-                assert getFragmentManager() != null;
-                getFragmentManager().popBackStack();
                 presenter.clearPreviousSelection();
+                updateDepicts();
+                goBackToPreviousScreen();
                 return true;
             }
             return false;
@@ -128,7 +129,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      */
     private void init() {
 
-        if(media == null) {
+        if (media == null) {
             depictsTitle
                 .setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
                     callback.getTotalNumberOfSteps(), getString(R.string.depicts_step_title)));
@@ -143,7 +144,11 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         tooltip.setOnClickListener(v -> DialogUtil
             .showAlertDialog(getActivity(), getString(R.string.depicts_step_title),
                 getString(R.string.depicts_tooltip), getString(android.R.string.ok), null, true));
-        presenter.onAttachView(this);
+        if (media == null) {
+            presenter.onAttachView(this);
+        } else {
+            presenter.onAttachViewWithMedia(this, media);
+        }
         initRecyclerView();
         addTextChangeListenerToSearchBox();
     }
@@ -170,12 +175,12 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
             adapter = new UploadDepictsAdapter(categoryItem -> {
                 presenter.onDepictItemClicked(categoryItem);
                 return Unit.INSTANCE;
-            }, new ArrayList<>());
+            });
         } else {
             adapter = new UploadDepictsAdapter(item -> {
                 presenter.onDepictItemClicked(item);
                 return Unit.INSTANCE;
-            }, media.getDepictionIds());
+            });
         }
         depictsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         depictsRecyclerView.setAdapter(adapter);
@@ -201,19 +206,28 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     @Override
     public void noDepictionSelected() {
-        DialogUtil.showAlertDialog(getActivity(),
-            getString(R.string.no_depictions_selected),
-            getString(R.string.no_depictions_selected_warning_desc),
-            getString(R.string.continue_message),
-            getString(R.string.cancel),
-            this::goToNextScreen,
-            null
-        );
+        if (media == null) {
+            DialogUtil.showAlertDialog(getActivity(),
+                getString(R.string.no_depictions_selected),
+                getString(R.string.no_depictions_selected_warning_desc),
+                getString(R.string.continue_message),
+                getString(R.string.cancel),
+                this::goToNextScreen,
+                null
+            );
+        } else {
+            Toast.makeText(requireContext(), getString(R.string.no_depictions_selected),
+                Toast.LENGTH_SHORT).show();
+            presenter.clearPreviousSelection();
+            updateDepicts();
+            goBackToPreviousScreen();
+        }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        media = null;
         presenter.onDetachView();
         subscribe.dispose();
     }
@@ -311,9 +325,9 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     @OnClick(R.id.depicts_previous)
     public void onPreviousButtonClicked() {
         if(media != null){
-            assert getFragmentManager() != null;
-            getFragmentManager().popBackStack();
             presenter.clearPreviousSelection();
+            updateDepicts();
+            goBackToPreviousScreen();
         } else {
             callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
         }

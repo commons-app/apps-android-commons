@@ -4,11 +4,10 @@ import fr.free.nrw.commons.upload.categories.BaseDelegateAdapter
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 
 class UploadDepictsAdapter(
-    onDepictsClicked: (DepictedItem) -> Unit,
-    existingDepictionIds: MutableList<String>
+    onDepictsClicked: (DepictedItem) -> Unit
 ) :
     BaseDelegateAdapter<DepictedItem>(
-        uploadDepictsDelegate(onDepictsClicked, existingDepictionIds),
+        uploadDepictsDelegate(onDepictsClicked),
         areItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
         areContentsTheSame = { itemA, itemB -> itemA.isSelected == itemB.isSelected}
     )

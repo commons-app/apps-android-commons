@@ -42,6 +42,7 @@ class DepictsPresenter @Inject constructor(
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     private val searchTerm: PublishProcessor<String> = PublishProcessor.create()
     private val depictedItems: MutableLiveData<List<DepictedItem>> = MutableLiveData()
+    private var media: Media? = null
     @Inject
     lateinit var depictsDao: DepictsDao
     @Inject
@@ -83,7 +84,7 @@ class DepictsPresenter @Inject constructor(
             recentDepictedItemList = getRecentDepictedItems();
         }
 
-        if(view.existingDepicts == null) {
+        if (media == null) {
             return repository.searchAllEntities(querystring)
                 .subscribeOn(ioScheduler)
                 .map { repository.selectedDepictions + it + recentDepictedItemList }
@@ -91,7 +92,12 @@ class DepictsPresenter @Inject constructor(
                 .map { it.distinctBy(DepictedItem::id) }
 
         } else {
-            return Flowable.zip(repository.getDepictions(view.existingDepicts),
+            return Flowable.zip(repository.getDepictions(repository.selectedExistingDepictions)
+                .map { list -> list.map {
+                    DepictedItem(it.name, it.description, it.imageUrl, it.instanceOfs,
+                        it.commonsCategories, true, it.id)
+                }
+            },
                 repository.searchAllEntities(querystring),
                 { it1, it2 ->
                     it1 + it2
@@ -107,6 +113,7 @@ class DepictsPresenter @Inject constructor(
 
     override fun onDetachView() {
         view = DUMMY
+        media = null
         compositeDisposable.clear()
     }
 
@@ -128,7 +135,7 @@ class DepictsPresenter @Inject constructor(
     private fun selectNewDepictions(toSelect: List<DepictedItem>) {
         toSelect.forEach {
             it.isSelected = true
-            repository.onDepictItemClicked(it)
+            repository.onDepictItemClicked(it, media)
         }
 
         // Add the new selections to the list of depicted items so that the selections appear
@@ -148,7 +155,7 @@ class DepictsPresenter @Inject constructor(
     }
 
     override fun onDepictItemClicked(depictedItem: DepictedItem) {
-        repository.onDepictItemClicked(depictedItem)
+        repository.onDepictItemClicked(depictedItem, media)
     }
 
     override fun getDepictedItems(): LiveData<List<DepictedItem>> {
@@ -185,49 +192,68 @@ class DepictsPresenter @Inject constructor(
      */
     @SuppressLint("CheckResult")
     override fun updateDepicts(media: Media) {
-        view.showProgressDialog()
-        if (repository.selectedDepictions.isNotEmpty()) {
+        if (repository.selectedDepictions.isNotEmpty()
+            || repository.selectedExistingDepictions.size != view.existingDepicts.size
+        ) {
+            view.showProgressDialog()
             val selectedDepictions: MutableList<String> =
-                repository.selectedDepictions.map { it.id }.toMutableList()
+                (repository.selectedDepictions.map { it.id }.toMutableList()
+                        + repository.selectedExistingDepictions).toMutableList()
 
             if (selectedDepictions.isNotEmpty()) {
-                for (depicts in selectedDepictions) {
-                    if (media.depictionIds.contains(depicts)) {
-                        selectedDepictions.remove(depicts)
-                    }
-                }
-                val allDepicts = media.depictionIds.plus(selectedDepictions)
                 if (::depictsDao.isInitialized) {
                     //save all the selected Depicted item in room Database
                     depictsDao.savingDepictsInRoomDataBase(repository.selectedDepictions)
                 }
 
-                Observable.fromIterable(selectedDepictions)
-                    .concatMap {
-                        depictsHelper.makeDepictEdit( view.fragmentContext, media, it)?.map { it1 ->
-                            if (it1) {
-                                media.depictionIds = media.depictionIds + it
-                            }
+                compositeDisposable.add(
+                    depictsHelper.makeDepictEdit(view.fragmentContext, media, selectedDepictions )
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({
+                            media.depictionIds = selectedDepictions
+                            repository.cleanup()
+                            view.dismissProgressDialog()
+                            view.updateDepicts()
+                            view.goBackToPreviousScreen()
+                        })
+                        {
+                            Timber.e(
+                                "Failed to update depicts"
+                            )
                         }
-                    }.toList()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({
-                        repository.cleanup()
-                        view.dismissProgressDialog()
-                        view.updateDepicts()
-                        view.goBackToPreviousScreen()
-                    })
-                    {
-                        Timber.e(
-                            "Failed to update depicts"
-                        )
-                    }
+                )
 
-            } else {
-                view.noDepictionSelected()
             }
+        } else {
+            repository.cleanup()
+            view.noDepictionSelected()
         }
+    }
+
+    override fun onAttachViewWithMedia(view: DepictsContract.View, media: Media) {
+        this.view = view
+        this.media = media
+        repository.selectedExistingDepictions = view.existingDepicts
+        compositeDisposable.add(
+            searchTerm
+                .observeOn(mainThreadScheduler)
+                .doOnNext { view.showProgress(true) }
+                .switchMap(::searchResultsWithTerm)
+                .observeOn(mainThreadScheduler)
+                .subscribe(
+                    { (results, term) ->
+                        view.showProgress(false)
+                        view.showError(results.isEmpty() && term.isNotEmpty())
+                        depictedItems.value = results
+                    },
+                    { t: Throwable? ->
+                        view.showProgress(false)
+                        view.showError(true)
+                        Timber.e(t)
+                    }
+                )
+        )
     }
 
     /**

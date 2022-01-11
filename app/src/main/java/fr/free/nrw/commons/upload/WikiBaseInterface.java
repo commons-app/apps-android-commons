@@ -36,7 +36,7 @@ public interface WikiBaseInterface {
      */
     @Headers("Cache-Control: no-cache")
     @FormUrlEncoded
-    @POST(MW_API_PREFIX + "action=wbeditentity&site=commonswiki")
+    @POST(MW_API_PREFIX + "action=wbeditentity&site=commonswiki&clear=1")
     Observable<MwPostResponse> postEditEntityByFilename(@NonNull @Field("title") String filename,
         @NonNull @Field("token") String editToken,
         @NonNull @Field("data") String data);

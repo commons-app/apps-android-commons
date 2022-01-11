@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload.depicts;
 
 import android.content.Context;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.Media;
@@ -93,5 +94,7 @@ public interface DepictsContract {
         LiveData<List<DepictedItem>> getDepictedItems();
 
         void updateDepicts(Media media);
+
+        void onAttachViewWithMedia(@NonNull View view, Media media);
     }
 }

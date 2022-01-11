@@ -10,7 +10,6 @@ import fr.free.nrw.commons.notification.NotificationHelper
 import fr.free.nrw.commons.utils.ViewUtilWrapper
 import fr.free.nrw.commons.wikidata.WikidataEditService
 import io.reactivex.Observable
-import io.reactivex.Single
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -47,16 +46,16 @@ class DepictEditHelper @Inject constructor (notificationHelper: NotificationHelp
     fun makeDepictEdit(
         context: Context,
         media: Media,
-        depict: String
-    ): Observable<Boolean>? {
+        depicts: List<String>
+    ): Observable<Boolean> {
         viewUtilWrapper.showShortToast(
             context,
             context.getString(R.string.depict_edit_helper_make_edit_toast)
         )
-        return addCategory(media, depict)
-            ?.flatMap { result: Boolean ->
+        return addDepiction(media, depicts)
+            .flatMap { result: Boolean ->
                 Observable.just(
-                    showCategoryEditNotification(context, media, result)
+                    showDepictionEditNotification(context, media, result)
                 )
             }
     }
@@ -68,9 +67,9 @@ class DepictEditHelper @Inject constructor (notificationHelper: NotificationHelp
      * @param depicts to be added
      * @return Observable<Boolean>
      */
-     private fun addCategory(media: Media, depict: String): Observable<Boolean>? {
+     private fun addDepiction(media: Media, depicts: List<String>): Observable<Boolean> {
         Timber.d("thread is depict adding %s", Thread.currentThread().name)
-        return wikidataEditService.updateDepictsProperty(media.filename, depict)
+        return wikidataEditService.updateDepictsProperty(media.filename, depicts)
     }
 
     /**
@@ -81,7 +80,7 @@ class DepictEditHelper @Inject constructor (notificationHelper: NotificationHelp
      * @param result response of result
      * @return Single<Boolean>
      */
-    private fun showCategoryEditNotification(
+    private fun showDepictionEditNotification(
         context: Context,
         media: Media,
         result: Boolean
@@ -90,19 +89,19 @@ class DepictEditHelper @Inject constructor (notificationHelper: NotificationHelp
         var title = context.getString(R.string.depict_edit_helper_show_edit_title)
         if (result) {
             title += ": " + context.getString(R.string.category_edit_helper_show_edit_title_success)
-            val categoriesInMessage = StringBuilder()
+            val depictsInMessage = StringBuilder()
             val depictIdList = media.depictionIds
-            for (category in depictIdList) {
-                categoriesInMessage.append(category)
-                if (category == depictIdList[depictIdList.size - 1]) {
+            for (depiction in depictIdList) {
+                depictsInMessage.append(depiction)
+                if (depiction == depictIdList[depictIdList.size - 1]) {
                     continue
                 }
-                categoriesInMessage.append(",")
+                depictsInMessage.append(",")
             }
             message = context.resources.getQuantityString(
                 R.plurals.depict_edit_helper_show_edit_message_if,
                 depictIdList.size,
-                categoriesInMessage.toString()
+                depictsInMessage.toString()
             )
         } else {
             title += ": " + context.getString(R.string.depict_edit_helper_show_edit_title)

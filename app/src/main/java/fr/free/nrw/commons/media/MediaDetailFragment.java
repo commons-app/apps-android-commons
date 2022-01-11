@@ -513,6 +513,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
      */
     @OnClick(R.id.depictEditButton)
     public void onDepictEditButtonClicked() {
+        depictionContainer.removeAllViews();
+        depictEditButton.setVisibility(GONE);
         final Fragment depictsFragment = new DepictsFragment();
         final Bundle bundle = new Bundle();
         bundle.putParcelable("Existing_Depicts", media);

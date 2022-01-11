@@ -9,21 +9,16 @@ import fr.free.nrw.commons.databinding.LayoutUploadDepictsItemBinding
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 
 
-fun uploadDepictsDelegate(onDepictClicked: (DepictedItem) -> Unit,
-                          existingDepictionIds: MutableList<String>) =
+fun uploadDepictsDelegate(onDepictClicked: (DepictedItem) -> Unit) =
     adapterDelegateViewBinding<DepictedItem,
             DepictedItem,
             LayoutUploadDepictsItemBinding>({ layoutInflater, parent ->
         LayoutUploadDepictsItemBinding.inflate(layoutInflater, parent, false)
     }) {
         val onClickListener = { _: View? ->
-            if(existingDepictionIds.contains(item.id)){
-                binding.depictCheckbox.isChecked = true
-            } else {
-                item.isSelected = !item.isSelected
-                binding.depictCheckbox.isChecked = item.isSelected
-                onDepictClicked(item)
-            }
+            item.isSelected = !item.isSelected
+            binding.depictCheckbox.isChecked = item.isSelected
+            onDepictClicked(item)
         }
         binding.root.setOnClickListener(onClickListener)
         binding.depictCheckbox.setOnClickListener(onClickListener)
@@ -36,9 +31,6 @@ fun uploadDepictsDelegate(onDepictClicked: (DepictedItem) -> Unit,
                 binding.depictedImage.setActualImageResource(R.drawable.ic_wikidata_logo_24dp)
             } else {
                 binding.depictedImage.setImageURI(Uri.parse(imageUrl))
-            }
-            if(existingDepictionIds.contains(item.id)) {
-                binding.depictCheckbox.isChecked = true
             }
         }
     }

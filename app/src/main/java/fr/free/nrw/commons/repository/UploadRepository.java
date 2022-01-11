@@ -3,6 +3,7 @@ package fr.free.nrw.commons.repository;
 import android.os.Build.VERSION_CODES;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -235,8 +236,8 @@ public class UploadRepository {
         uploadModel.setSelectedLicense(licenseName);
     }
 
-    public void onDepictItemClicked(DepictedItem depictedItem) {
-        uploadModel.onDepictItemClicked(depictedItem);
+    public void onDepictItemClicked(DepictedItem depictedItem, final Media media) {
+        uploadModel.onDepictItemClicked(depictedItem, media);
     }
 
     /**
@@ -249,6 +250,23 @@ public class UploadRepository {
         return uploadModel.getSelectedDepictions();
     }
 
+    /**
+     * Provides selected existing depicts
+     *
+     * @return selected existing depicts
+     */
+    public List<String> getSelectedExistingDepictions() {
+        return uploadModel.getSelectedExistingDepictions();
+    }
+
+    /**
+     * Initialize existing depicts
+     *
+     * @param selectedExistingDepictions existing depicts
+     */
+    public void setSelectedExistingDepictions(final List<String> selectedExistingDepictions) {
+        uploadModel.setSelectedExistingDepictions(selectedExistingDepictions);
+    }
     /**
      * Search all depictions from
      *

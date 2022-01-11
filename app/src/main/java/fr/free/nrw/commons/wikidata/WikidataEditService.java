@@ -5,7 +5,6 @@ import static fr.free.nrw.commons.media.MediaClientKt.PAGE_ID_PREFIX;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import fr.free.nrw.commons.R;
@@ -73,11 +72,12 @@ public class WikidataEditService {
      */
     @SuppressLint("CheckResult")
     private Observable<Boolean> addDepictsProperty(final String fileEntityId,
-        final WikidataItem depictedItem) {
-        Log.d("hhhh", "getDepictedItems: "+ depictedItem.getId());
+        final List<String> depictedItems) {
+
         final EditClaim data = editClaim(
-            ConfigUtils.isBetaFlavour() ? "Q10" // Wikipedia:Sandbox (Q10)
-                : depictedItem.getId()
+            ConfigUtils.isBetaFlavour() ? Collections.singletonList("Q10")
+                // Wikipedia:Sandbox (Q10)
+                : depictedItems
         );
 
         return wikiBaseClient.postEditEntity(PAGE_ID_PREFIX + fileEntityId, gson.toJson(data))
@@ -100,16 +100,17 @@ public class WikidataEditService {
      * and send the data for POST operation
      *
      * @param filename name of the file
-     * @param depictedItem ID of the selected depict item
+     * @param depictedItems ID of the selected depict item
      * @return Observable<Boolean>
      */
     @SuppressLint("CheckResult")
     public Observable<Boolean> updateDepictsProperty(final String filename,
-        final String depictedItem) {
+        final List<String> depictedItems) {
 
         final EditClaim data = editClaim(
-            ConfigUtils.isBetaFlavour() ? "Q10" // Wikipedia:Sandbox (Q10)
-                : depictedItem
+            ConfigUtils.isBetaFlavour() ? Collections.singletonList("Q10")
+                // Wikipedia:Sandbox (Q10)
+                : depictedItems
         );
 
         return wikiBaseClient.postEditEntityByFilename(filename,
@@ -128,8 +129,8 @@ public class WikidataEditService {
             .subscribeOn(Schedulers.io());
     }
 
-    private EditClaim editClaim(final String entityId) {
-        return EditClaim.from(entityId, WikidataProperties.DEPICTS.getPropertyName());
+    private EditClaim editClaim(final List<String> entityIds) {
+        return EditClaim.from(entityIds, WikidataProperties.DEPICTS.getPropertyName());
     }
 
     /**
@@ -242,8 +243,12 @@ public class WikidataEditService {
     }
 
     private Observable<Boolean> depictionEdits(Contribution contribution, Long fileEntityId) {
-        return Observable.fromIterable(contribution.getDepictedItems())
-            .concatMap(wikidataItem -> addDepictsProperty(fileEntityId.toString(), wikidataItem));
+        final List<String> depictIDs = new ArrayList<>();
+        for (final WikidataItem wikidataItem :
+            contribution.getDepictedItems()) {
+            depictIDs.add(wikidataItem.getId());
+        }
+        return addDepictsProperty(fileEntityId.toString(), depictIDs);
     }
 }
 
