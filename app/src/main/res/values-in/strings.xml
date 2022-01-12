@@ -55,6 +55,8 @@
   <string name="signup">Daftar</string>
   <string name="logging_in_title">Memasuki log</string>
   <string name="logging_in_message">Silakan tunggu…</string>
+  <string name="updating_caption_title">Memperbarui takarir dan deskripsi</string>
+  <string name="updating_caption_message">Harap tunggu...</string>
   <string name="login_success">Berhasil masuk log!</string>
   <string name="login_failed">Masuk log gagal!</string>
   <string name="upload_failed">Berkas tidak ditemukan. Silakan coba berkas lain.</string>
@@ -320,6 +322,7 @@
   <string name="quiz_screenshot_question">Apakah tangkapan layar ini OKE untuk diunggah?</string>
   <string name="share_app_title">Bagikan Aplikasi</string>
   <string name="error_fetching_nearby_places">Galat saat mengambil tempat terdekat.</string>
+  <string name="no_nearby_places_around">Tidak ditemukan tempat yang dekat</string>
   <string name="error_fetching_nearby_monuments">Galat saat mengambil monumen terdekat.</string>
   <string name="no_recent_searches">Tidak ada pencarian terbaru</string>
   <string name="delete_recent_searches_dialog">Apakah Anda yakin ingin menghapus riwayat penelusuran?</string>
@@ -492,10 +495,18 @@
   <string name="category_edit_button_text">Perbarui kategori</string>
   <string name="coordinates_edit_helper_make_edit_toast">Mencoba memperbarui koordinat.</string>
   <string name="coordinates_edit_helper_show_edit_title">Pembaruan koordinat</string>
+  <string name="description_edit_helper_show_edit_title">Pembaruan deskripsi</string>
+  <string name="caption_edit_helper_show_edit_title">Pembaruan takarir</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Sukses</string>
   <string name="coordinates_edit_helper_show_edit_message">Koordinat %1$s sudah ditambahkan.</string>
+  <string name="description_edit_helper_show_edit_message">Deskripsi ditambahkan.</string>
+  <string name="caption_edit_helper_show_edit_message">Takarir ditambahkan.</string>
   <string name="coordinates_edit_helper_edit_message_else">Tidak bisa menambahkan koordinat.</string>
+  <string name="description_edit_helper_edit_message_else">Tidak bisa menambahkan deskripsi.</string>
+  <string name="caption_edit_helper_edit_message_else">Tidak bisa menambahkan takarir.</string>
   <string name="coordinates_picking_unsuccessful">Tidak bisa mendapatkan koordinat.</string>
+  <string name="descriptions_picking_unsuccessful">Tidak bisa memperoleh deskripsi.</string>
+  <string name="description_activity_title">Sunting deskripsi dan takarir</string>
   <string name="share_image_via">Bagikan gambar melalui</string>
   <string name="you_have_no_achievements_yet">Anda belum membuat kontribusi apapun</string>
   <string name="no_achievements_yet">%s belum membuat kontribusi apapun untuk sekarang</string>
@@ -550,7 +561,7 @@
   <string name="resume">lanjut</string>
   <string name="paused">Dijeda</string>
   <string name="more">Lainnya</string>
-  <string name="favorites">Favorit</string>
+  <string name="bookmarks">Markah</string>
   <string name="achievements_tab_title">Pencapaian</string>
   <string name="leaderboard_tab_title">Papan peringkat</string>
   <string name="rank_prefix">Peringkat:</string>
@@ -605,6 +616,7 @@
   <string name="location_picker_image_view_shadow">Bayangan dari tampilan gambar dari pemilih lokasi</string>
   <string name="image_location">Lokasi Gambar</string>
   <string name="check_whether_location_is_correct">Cek apakah lokasi benar</string>
+  <string name="title_page_bookmarks_items">Butir</string>
   <string name="custom_selector_title">Pemilih Kustom</string>
   <string name="custom_selector_empty_text">Tidak Ada Gambar</string>
   <string name="done">Selesai</string>
@@ -624,4 +636,9 @@
   <string name="contributions_of_user">Kontribusi Pengguna: %s</string>
   <string name="achievements_of_user">Pencapaian Pengguna: %s</string>
   <string name="menu_view_user_page">Lihat halaman pengguna</string>
+  <string name="advanced_options">Opsi Lanjutan</string>
+  <string name="advanced_query_info_text">Anda bisa menyesuaikan kueri Sekitar. Jika Anda mendapatkan galat, atur ulang dan terapkan.</string>
+  <string name="apply">Terapkan</string>
+  <string name="reset">Atur ulang</string>
+  <string name="location_message">Data lokasi membantu penyunting Wiki menemukan gambar Anda, sehingga menjadi lebih berguna.\nUnggahan terbaru Anda tidak punya informasi lokasi.\nKami menyarankan Anda menyalakan lokasi di setelan aplikasi kamera Anda.\nTerima kasih karena telah mengunggah!</string>
 </resources>

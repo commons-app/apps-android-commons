@@ -51,6 +51,18 @@ class DepictModel @Inject constructor(private val depictsClient: DepictsClient) 
             else Single.just(emptyList())
         }
 
+    fun getDepictions(ids: String): Single<List<DepictedItem>> =
+        if (ids.isNotEmpty())
+            depictsClient.getEntities(ids)
+                .map{
+                    it.entities()
+                        .values
+                        .mapIndexed { _, entity ->  DepictedItem(entity)}
+                }
+                .onErrorResumeWithEmptyList()
+        else Single.just(emptyList())
+
+
     private fun networkItems(query: String): Flowable<List<DepictedItem>> {
         return depictsClient.searchForDepictions(query, SEARCH_DEPICTS_LIMIT, 0)
             .onErrorResumeWithEmptyList()

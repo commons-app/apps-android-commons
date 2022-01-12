@@ -81,4 +81,15 @@ class PageEditClientTest {
         pageEditClient.prependEdit("test", "test", "test")
         verify(pageEditInterface).postPrependEdit(eq("test"), eq("test"), eq("test"), eq("test"))
     }
+
+    /**
+     * Test setCaptions
+     */
+    @Test
+    fun testSetCaptions() {
+        Mockito.`when`(csrfTokenClient.tokenBlocking).thenReturn("test")
+        pageEditClient.setCaptions("test", "test", "en", "test")
+        verify(pageEditInterface).postCaptions(eq("test"), eq("test"), eq("en"),
+            eq("test"), eq("test"))
+    }
 }

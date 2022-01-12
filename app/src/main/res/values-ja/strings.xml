@@ -549,7 +549,6 @@
   <string name="resume">継続</string>
   <string name="paused">一時停止</string>
   <string name="more">もっと見る</string>
-  <string name="favorites">お気に入り</string>
   <string name="achievements_tab_title">貢献</string>
   <string name="leaderboard_tab_title">リーダーボード</string>
   <string name="rank_prefix">順位</string>
@@ -593,4 +592,5 @@
   <string name="show_in_map_app">地図アプリに表示</string>
   <string name="modify_location">位置を編集</string>
   <string name="check_whether_location_is_correct">場所が正しいかどうかを確認する</string>
+  <string name="title_page_bookmarks_items">項目</string>
 </resources>

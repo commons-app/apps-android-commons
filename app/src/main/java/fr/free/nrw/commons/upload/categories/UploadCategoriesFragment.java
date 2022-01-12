@@ -3,7 +3,6 @@ package fr.free.nrw.commons.upload.categories;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,12 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryItem;
+import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -44,7 +43,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     @BindView(R.id.til_container_search)
     TextInputLayout tilContainerEtSearch;
     @BindView(R.id.et_search)
-    TextInputEditText etSearch;
+    PasteSensitiveTextInputEditText etSearch;
     @BindView(R.id.pb_categories)
     ProgressBar pbCategories;
     @BindView(R.id.rv_categories)

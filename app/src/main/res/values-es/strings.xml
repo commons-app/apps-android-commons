@@ -9,6 +9,7 @@
 * Bruno44101
 * Carlosmg.dg
 * Ciencia Al Poder
+* Danniel07
 * DannyS712
 * Destinid10 2
 * Fewasser Traduce
@@ -543,7 +544,7 @@
   <string name="title_for_child_classes">CLASES HIJAS</string>
   <string name="title_for_parent_classes">CLASES PADRES</string>
   <string name="upload_nearby_place_found_title">Lugar cercano encontrado</string>
-  <string name="upload_nearby_place_found_description">¿Esta es una foto del Lugar %1$s?</string>
+  <string name="upload_nearby_place_found_description">¿Esta es una foto del lugar %1$s?</string>
   <string name="title_app_shortcut_bookmark">Marcadores</string>
   <string name="title_app_shortcut_setting">Configuración</string>
   <string name="remove_bookmark">removido de marcadores</string>
@@ -580,7 +581,6 @@
   <string name="resume">reanudar</string>
   <string name="paused">En pausa</string>
   <string name="more">Más</string>
-  <string name="favorites">Favoritos</string>
   <string name="achievements_tab_title">Logros</string>
   <string name="leaderboard_tab_title">Tabla de posiciones</string>
   <string name="rank_prefix">Clasificación</string>

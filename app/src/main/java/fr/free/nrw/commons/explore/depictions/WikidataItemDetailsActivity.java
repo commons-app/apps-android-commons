@@ -15,20 +15,28 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.ViewPagerAdapter;
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.depictions.child.ChildDepictionsFragment;
 import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment;
 import fr.free.nrw.commons.explore.depictions.parent.ParentDepictionsFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.upload.structure.depictions.DepictModel;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
+import fr.free.nrw.commons.wikidata.WikidataConstants;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 
 /**
  * Activity to show depiction media, parent classes and child classes of depicted items in Explore
@@ -38,10 +46,16 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     private FragmentManager supportFragmentManager;
     private DepictedImagesFragment depictionImagesListFragment;
     private MediaDetailPagerFragment mediaDetailPagerFragment;
+
     /**
      * Name of the depicted item
      * Ex: Rabbit
      */
+
+    @Inject BookmarkItemsDao bookmarkItemsDao;
+    private CompositeDisposable compositeDisposable;
+    @Inject
+    DepictModel depictModel;
     private String wikidataItemName;
     @BindView(R.id.mediaContainer)
     FrameLayout mediaContainer;
@@ -53,17 +67,23 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     Toolbar toolbar;
 
     ViewPagerAdapter viewPagerAdapter;
+    private DepictedItem wikidataItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wikidata_item_details);
         ButterKnife.bind(this);
+        compositeDisposable = new CompositeDisposable();
         supportFragmentManager = getSupportFragmentManager();
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setOffscreenPageLimit(2);
         tabLayout.setupWithViewPager(viewPager);
+
+        final DepictedItem depictedItem = getIntent().getParcelableExtra(
+            WikidataConstants.BOOKMARKS_ITEMS);
+        wikidataItem = depictedItem;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTabs();
@@ -214,6 +234,7 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         Intent intent = new Intent(context, WikidataItemDetailsActivity.class);
         intent.putExtra("wikidataItemName", depictedItem.getName());
         intent.putExtra("entityId", depictedItem.getId());
+        intent.putExtra(WikidataConstants.BOOKMARKS_ITEMS, depictedItem);
         context.startActivity(intent);
     }
 
@@ -224,6 +245,9 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater=getMenuInflater();
         menuInflater.inflate(R.menu.menu_wikidata_item,menu);
+
+        updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_item));
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -233,11 +257,46 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()){
             case R.id.browser_actions_menu_items:
                 String entityId=getIntent().getStringExtra("entityId");
                 Uri uri = Uri.parse("https://www.wikidata.org/wiki/" + entityId);
                 Utils.handleWebUrl(this, uri);
+                return true;
+            case R.id.menu_bookmark_current_item:
+
+                if(getIntent().getStringExtra("fragment") != null) {
+                    compositeDisposable.add(depictModel.getDepictions(
+                        getIntent().getStringExtra("entityId")
+                    ).subscribeOn(Schedulers.io())
+                     .observeOn(AndroidSchedulers.mainThread())
+                     .subscribe(depictedItems -> {
+                         final boolean bookmarkExists = bookmarkItemsDao.updateBookmarkItem(
+                             depictedItems.get(0));
+                         final Snackbar snackbar
+                             = bookmarkExists ? Snackbar.make(findViewById(R.id.toolbar_layout),
+                             R.string.add_bookmark, Snackbar.LENGTH_LONG)
+                             : Snackbar.make(findViewById(R.id.toolbar_layout),
+                                 R.string.remove_bookmark,
+                                 Snackbar.LENGTH_LONG);
+
+                         snackbar.show();
+                         updateBookmarkState(item);
+                     }));
+
+                } else {
+                    final boolean bookmarkExists
+                        = bookmarkItemsDao.updateBookmarkItem(wikidataItem);
+                    final Snackbar snackbar
+                        = bookmarkExists ? Snackbar.make(findViewById(R.id.toolbar_layout),
+                        R.string.add_bookmark, Snackbar.LENGTH_LONG)
+                        : Snackbar.make(findViewById(R.id.toolbar_layout), R.string.remove_bookmark,
+                            Snackbar.LENGTH_LONG);
+
+                    snackbar.show();
+                    updateBookmarkState(item);
+                }
                 return true;
             case  android.R.id.home:
                 onBackPressed();
@@ -245,5 +304,19 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void updateBookmarkState(final MenuItem item) {
+        final boolean isBookmarked;
+        if(getIntent().getStringExtra("fragment") != null) {
+            isBookmarked
+                = bookmarkItemsDao.findBookmarkItem(getIntent().getStringExtra("entityId"));
+        } else {
+            isBookmarked = bookmarkItemsDao.findBookmarkItem(wikidataItem.getId());
+        }
+        final int icon
+            = isBookmarked ? R.drawable.menu_ic_round_star_filled_24px
+            : R.drawable.menu_ic_round_star_border_24px;
+        item.setIcon(icon);
     }
 }

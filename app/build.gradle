@@ -41,6 +41,7 @@ dependencies {
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.1.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-localization-v8:0.11.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-scalebar-v9:0.4.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-telemetry:6.1.0'
     implementation 'com.github.deano2390:MaterialShowcaseView:1.2.0'
     implementation 'com.dinuscxj:circleprogressbar:1.1.1'
     implementation 'com.karumi:dexter:5.0.0'
@@ -257,6 +258,7 @@ android {
             buildConfigField "String", "RECENT_SEARCH_AUTHORITY", "\"fr.free.nrw.commons.explore.recentsearches.contentprovider\""
             buildConfigField "String", "BOOKMARK_AUTHORITY", "\"fr.free.nrw.commons.bookmarks.contentprovider\""
             buildConfigField "String", "BOOKMARK_LOCATIONS_AUTHORITY", "\"fr.free.nrw.commons.bookmarks.locations.contentprovider\""
+            buildConfigField "String", "BOOKMARK_ITEMS_AUTHORITY", "\"fr.free.nrw.commons.bookmarks.items.contentprovider\""
             buildConfigField "String", "COMMIT_SHA", "\"" + getBuildVersion().toString() + "\""
             buildConfigField "String", "TEST_USERNAME", "\"" + System.getenv("test_user_name") + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + System.getenv("test_user_password") + "\""
@@ -291,6 +293,7 @@ android {
             buildConfigField "String", "RECENT_SEARCH_AUTHORITY", "\"fr.free.nrw.commons.beta.explore.recentsearches.contentprovider\""
             buildConfigField "String", "BOOKMARK_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.contentprovider\""
             buildConfigField "String", "BOOKMARK_LOCATIONS_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.locations.contentprovider\""
+            buildConfigField "String", "BOOKMARK_ITEMS_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.items.contentprovider\""
             buildConfigField "String", "COMMIT_SHA", "\"" + getBuildVersion().toString() + "\""
             buildConfigField "String", "TEST_USERNAME", "\"" + System.getenv("test_user_name") + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + System.getenv("test_user_password") + "\""
