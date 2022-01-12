@@ -14,9 +14,9 @@ public interface WikidataMediaInterface {
 
     /**
      * Fetches list of images from a depiction entity
-     * @param query depictionEntityId
+     * @param query depictionEntityId ex. haswbstatement:P180=Q9394
      * @param srlimit the number of items to fetch
-     * @param sroffset number od depictions already fetched,
+     * @param sroffset number of depictions already fetched,
      *                this is useful in implementing pagination
      * @return Single<MwQueryResponse>
      */
