@@ -19,6 +19,9 @@ public class WelcomeActivity extends BaseActivity {
 
     private ActivityWelcomeBinding binding;
 
+    ViewPager pager;
+    CirclePageIndicator indicator;
+
     private WelcomePagerAdapter adapter = new WelcomePagerAdapter();
     private boolean isQuiz;
 
@@ -30,10 +33,6 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        binding = ActivityWelcomeBinding.inflate(getLayoutInflater());
-        final View view = binding.getRoot();
-        setContentView(view);
 
         if (getIntent() != null) {
             Bundle bundle = getIntent().getExtras();
@@ -49,7 +48,17 @@ public class WelcomeActivity extends BaseActivity {
             findViewById(R.id.finishTutorialButton).setVisibility(View.VISIBLE);
         }
 
+        binding = ActivityWelcomeBinding.inflate(getLayoutInflater());
+        final View view = binding.getRoot();
+        setContentView(view);
 
+        pager = binding.welcomePager;
+        indicator = binding.welcomePagerIndicator;
+
+        pager.setAdapter(adapter);
+        indicator.setViewPager(pager);
+
+        pager.setOnClickListener(this::finishTutorial);
     }
 
     /**
@@ -90,8 +99,7 @@ public class WelcomeActivity extends BaseActivity {
         }
     }
 
-    @OnClick(R.id.finishTutorialButton)
-    public void finishTutorial() {
+    public void finishTutorial(View view) {
         defaultKvStore.putBoolean("firstrun", false);
         finish();
     }

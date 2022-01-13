@@ -55,7 +55,7 @@ public class WelcomePagerAdapter extends PagerAdapter {
 
             // Handle click of finishTutorialButton ("YES!" button) inside layout
             layout.findViewById(R.id.finishTutorialButton)
-                    .setOnClickListener(view -> ((WelcomeActivity) container.getContext()).finishTutorial());
+                    .setOnClickListener(view -> ((WelcomeActivity) container.getContext()).finishTutorial(view));
         }
 
         container.addView(layout);
