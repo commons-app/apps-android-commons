@@ -6,22 +6,18 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.viewpager.widget.ViewPager;
+import fr.free.nrw.commons.databinding.ActivityWelcomeBinding;
+import fr.free.nrw.commons.utils.ConfigUtils;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import fr.free.nrw.commons.quiz.QuizActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.utils.ConfigUtils;
 
 public class WelcomeActivity extends BaseActivity {
 
-    @BindView(R.id.welcomePager)
-    ViewPager pager;
-    @BindView(R.id.welcomePagerIndicator)
-    CirclePageIndicator indicator;
+    private ActivityWelcomeBinding binding;
 
     private WelcomePagerAdapter adapter = new WelcomePagerAdapter();
     private boolean isQuiz;
@@ -34,7 +30,10 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+
+        binding = ActivityWelcomeBinding.inflate(getLayoutInflater());
+        final View view = binding.getRoot();
+        setContentView(view);
 
         if (getIntent() != null) {
             Bundle bundle = getIntent().getExtras();
@@ -50,10 +49,7 @@ public class WelcomeActivity extends BaseActivity {
             findViewById(R.id.finishTutorialButton).setVisibility(View.VISIBLE);
         }
 
-        ButterKnife.bind(this);
 
-        pager.setAdapter(adapter);
-        indicator.setViewPager(pager);
     }
 
     /**
