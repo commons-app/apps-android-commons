@@ -15,6 +15,7 @@
 * Sarah Bernabei
 * Senpremì
 * Una giornata uggiosa '94
+* Valerio Bozzolan
 * Wim b
 -->
 <resources>
@@ -602,6 +603,7 @@
   <string name="pausing_upload">Caricamento in pausa…</string>
   <string name="limited_connection_explanation">Hai abilitato la modalità di connessione limitata. Tutti i caricamenti vengono ora messi in pausa e riprenderanno quando disabiliterai questa modalità.</string>
   <string name="limited_connection_is_on">La modalità di connessione limitata è attiva.</string>
+  <string name="media_details_tooltip">Per favore scrivi una breve descrizione su cosa è ritratto nella tua immagine. Nella descrizione, indica che cosa rende l\'immagine interessante, tipica o rara, e spiega il contesto, visibile o non. Impiega il più possibile una terminologia esatta.</string>
   <string name="license_step_title">Licenza per il file</string>
   <string name="media_detail_step_title">Dettagli sul file</string>
   <string name="menu_view_category_page">Vedi la pagina della categoria</string>

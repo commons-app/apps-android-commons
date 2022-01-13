@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Lizalizaufa
+* MR973
 * Sagan
 * Рустам Нурыев
 -->
@@ -9,10 +10,9 @@
     <item quantity="one">%1$d файл тейәлә</item>
     <item quantity="other">%1$d файл тейәлә</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d тейәү</item>
-    <item quantity="other">%1$d тейәүҙәр</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d тейәү башлана</item>
@@ -169,4 +169,13 @@
   <string name="login_to_your_account">Шәхси теркәү яҙмаһына ин</string>
   <string name="send_log_file">Теркәлеү файлын ебәр</string>
   <string name="send_log_file_description" fuzzy="true">Теркәлеү файлын эл-почта аша ҡораусыларға ебәр</string>
+  <string name="nearby_wikipedia">Википедия</string>
+  <string name="nearby_commons">Викимилек</string>
+  <string name="about_rate_us">Беҙҙе баһалағыҙ</string>
+  <string name="about_faq">FAQ</string>
+  <string name="no_internet">Интернетҡа инеп булмай</string>
+  <string name="about_translate">Тәржемә итергә</string>
+  <string name="about_translate_title">Телдәр</string>
+  <string name="about_translate_cancel">Кире алыу</string>
+  <string name="retry">Ҡабатлау</string>
 </resources>

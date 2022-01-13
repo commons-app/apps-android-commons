@@ -71,7 +71,7 @@
   <string name="signup">Kaydol</string>
   <string name="logging_in_title">Oturum açılıyor</string>
   <string name="logging_in_message">Lütfen bekleyin…</string>
-  <string name="updating_caption_title">Başlıklar ve açıklamalar güncelleniyor</string>
+  <string name="updating_caption_title">Altyazılar ve açıklamalar güncelleniyor</string>
   <string name="updating_caption_message">Lütfen bekleyin…</string>
   <string name="login_success">Oturum açma başarılı!</string>
   <string name="login_failed">Oturum açma başarısız oldu!</string>
