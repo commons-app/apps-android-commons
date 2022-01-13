@@ -102,6 +102,7 @@
               android:id="@+id/login_username"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:autofillHints="username"
               android:hint="@string/username"
               android:imeOptions="flagNoExtractUi"
               android:inputType="textNoSuggestions">
@@ -129,6 +130,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:hint="@string/password"
+              android:autofillHints="password"
               android:imeOptions="flagNoExtractUi"
               android:inputType="textPassword" />
 
