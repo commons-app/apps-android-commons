@@ -24,7 +24,7 @@ class WikidataMediaClient @Inject constructor(
     /**
      * Fetch images for depict ID
      *
-     * @param query depictionEntityId ex. Q9394
+     * @param query depictionEntityId ex. "Q9394"
      * @param srlimit the number of items to fetch
      * @param sroffset number of depictions already fetched,
      *                this is useful in implementing pagination
@@ -81,7 +81,7 @@ class WikidataMediaClient @Inject constructor(
     /**
      * Gets Entities from IDs
      *
-     * @param entityIds list of IDs of pages/entities ex. [M4254154, M11413343]
+     * @param entityIds list of IDs of pages/entities ex. {"M4254154", "M11413343"}
      */
     fun getEntities(entityIds: List<String>): Single<Entities> {
         return if (entityIds.isEmpty())
