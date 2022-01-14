@@ -592,4 +592,5 @@
   <string name="show_in_map_app">地図アプリに表示</string>
   <string name="modify_location">位置を編集</string>
   <string name="check_whether_location_is_correct">場所が正しいかどうかを確認する</string>
+  <string name="title_page_bookmarks_items">項目</string>
 </resources>
