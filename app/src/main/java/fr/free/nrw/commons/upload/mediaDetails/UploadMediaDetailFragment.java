@@ -30,10 +30,12 @@ import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageDialogFragment;
+import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.UploadItem;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
@@ -41,6 +43,7 @@ import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
@@ -259,7 +262,15 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         this.uploadItem = uploadItem;
         showNearbyFound = true;
         if(callback.getIndexInViewFlipper(this) == 0) {
-            showNearbyPlaceFound(nearbyPlace);
+            if (UploadActivity.existingPlaces.containsKey(nearbyPlace)) {
+                final boolean response = UploadActivity.existingPlaces.get(nearbyPlace);
+                if (response) {
+                    presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace,
+                        callback.getIndexInViewFlipper(this));
+                }
+            } else {
+                showNearbyPlaceFound(nearbyPlace);
+            }
             showNearbyFound = false;
         }
     }
@@ -279,10 +290,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 getString(R.string.upload_nearby_place_found_description),
                 place.getName()),
             () -> {
+                UploadActivity.existingPlaces.put(place, true);
                 presenter.onUserConfirmedUploadIsOfPlace(place, callback.getIndexInViewFlipper(this));
             },
             () -> {
-
+                UploadActivity.existingPlaces.put(place, false);
             },
             customLayout, true);
     }
@@ -305,7 +317,15 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         super.onBecameVisible();
         presenter.fetchTitleAndDescription(callback.getIndexInViewFlipper(this));
         if(showNearbyFound) {
-            showNearbyPlaceFound(nearbyPlace);
+            if (UploadActivity.existingPlaces.containsKey(nearbyPlace)) {
+                final boolean response = UploadActivity.existingPlaces.get(nearbyPlace);
+                if (response) {
+                    presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace,
+                        callback.getIndexInViewFlipper(this));
+                }
+            } else {
+                showNearbyPlaceFound(nearbyPlace);
+            }
             showNearbyFound = false;
         }
     }
