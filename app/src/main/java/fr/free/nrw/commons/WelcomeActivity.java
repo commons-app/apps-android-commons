@@ -34,6 +34,10 @@ public class WelcomeActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        binding = ActivityWelcomeBinding.inflate(getLayoutInflater());
+        final View view = binding.getRoot();
+        setContentView(view);
+
         if (getIntent() != null) {
             Bundle bundle = getIntent().getExtras();
             if (bundle != null) {
@@ -45,21 +49,13 @@ public class WelcomeActivity extends BaseActivity {
 
         // Enable skip button if beta flavor
         if (ConfigUtils.isBetaFlavour()) {
-            findViewById(R.id.finishTutorialButton).setVisibility(View.VISIBLE);
+            binding.finishTutorialButton.setVisibility(View.VISIBLE);
         }
 
-        binding = ActivityWelcomeBinding.inflate(getLayoutInflater());
-        final View view = binding.getRoot();
-        setContentView(view);
+        binding.welcomePager.setAdapter(adapter);
+        binding.welcomePagerIndicator.setViewPager(pager);
 
-        pager = binding.welcomePager;
-        indicator = binding.welcomePagerIndicator;
-
-        pager.setAdapter(adapter);
-        indicator.setViewPager(pager);
-
-        pager.setOnClickListener(this::finishTutorial);
-    }
+        binding.finishTutorialButton.setOnClickListener(v -> finishTutorial());    }
 
     /**
      * References WelcomePageAdapter to null before the activity is destroyed
@@ -88,8 +84,8 @@ public class WelcomeActivity extends BaseActivity {
      */
     @Override
     public void onBackPressed() {
-        if (pager.getCurrentItem() != 0) {
-            pager.setCurrentItem(pager.getCurrentItem() - 1, true);
+        if (binding.welcomePager.getCurrentItem() != 0) {
+            binding.welcomePager.setCurrentItem(binding.welcomePager.getCurrentItem() - 1, true);
         } else {
             if (defaultKvStore.getBoolean("firstrun", true)) {
                 finishAffinity();
@@ -99,7 +95,7 @@ public class WelcomeActivity extends BaseActivity {
         }
     }
 
-    public void finishTutorial(View view) {
+    public void finishTutorial() {
         defaultKvStore.putBoolean("firstrun", false);
         finish();
     }
