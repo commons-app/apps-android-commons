@@ -117,6 +117,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private boolean isMultipleFilesSelected = false;
 
     public static final String EXTRA_FILES = "commons_image_exta";
+
     /**
      * Stores all nearby places found and related users response for
      * each place while uploading media
