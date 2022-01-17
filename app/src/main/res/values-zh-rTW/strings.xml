@@ -9,6 +9,7 @@
 * S099001
 * Simon Shek
 * StephDC
+* Tranve
 * Wwycheuk
 * ZhaoGang
 * 列维劳德
@@ -261,8 +262,8 @@
   <string name="skip_login_title">您確定要略過登入嗎？</string>
   <string name="skip_login_message">在功能裡您需要登入來上傳圖片。</string>
   <string name="login_alert_message">請登入來使用此功能</string>
-  <string name="copy_wikicode">複製 wiki 語法到剪貼簿</string>
-  <string name="wikicode_copied">Wiki 文字已複製到剪貼簿</string>
+  <string name="copy_wikicode">複製 wikitext 到剪貼簿</string>
+  <string name="wikicode_copied">Wikitext 已複製到剪貼簿</string>
   <string name="nearby_location_not_available">附近可能無法正常運作。位置無效。</string>
   <string name="location_permission_rationale_nearby">需權限來顯示附近地點清單</string>
   <string name="nearby_directions">方向</string>
@@ -557,12 +558,12 @@
   <string name="add_picture_to_wikipedia_article_desc">您想要添加此圖片到%1$s維基百科條目上嗎？</string>
   <string name="confirm">確認</string>
   <string name="instructions_title">說明</string>
-  <string name="wikipedia_instructions_step_1">1. 使用以下維基語法：</string>
+  <string name="wikipedia_instructions_step_1">1. 使用以下wikitext：</string>
   <string name="wikipedia_instructions_step_2">2. 點擊確認後會開啟維基百科條目。</string>
   <string name="wikipedia_instructions_step_3">3. 尋找適合插入您的圖片的章節。</string>
   <string name="wikipedia_instructions_step_4">4. 點擊章節裡的編輯按鈕（為筆狀模樣的圖案）。</string>
-  <string name="wikipedia_instructions_step_5">5. 將維基語法貼到適當的位置。</string>
-  <string name="wikipedia_instructions_step_6">6. 若有需要，可編輯維基語法來調整到適當的定位。更多相關資訊請查看&lt;a href=\"https://zh.wikipedia.org/wiki/Help:%E5%9B%BE%E5%83%8F\"&gt;此頁面&lt;/a&gt;。</string>
+  <string name="wikipedia_instructions_step_5">5. 將wikitext貼到適當的位置。</string>
+  <string name="wikipedia_instructions_step_6">6. 若有需要，可編輯wikitext來調整到適當的定位。更多相關資訊請查看&lt;a href=\"https://zh.wikipedia.org/wiki/Help:%E5%9B%BE%E5%83%8F\"&gt;此頁面&lt;/a&gt;。</string>
   <string name="wikipedia_instructions_step_7">7. 發布條目</string>
   <string name="copy_wikicode_to_clipboard">複製維基代碼到剪貼簿</string>
   <string name="pause">暫停</string>
