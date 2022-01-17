@@ -61,7 +61,7 @@
                   android:layout_marginEnd="@dimen/standard_gap"
                   android:layout_marginRight="@dimen/standard_gap"
                   android:layout_toLeftOf="@id/ib_expand_collapse"
-                  android:visibility="gone"
+                  android:visibility="visible"
                   app:srcCompat="@drawable/ic_map_white_24dp"
                   tools:visibility="visible" />
 
@@ -127,8 +127,8 @@
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_alignParentRight="true"
-                      android:enabled="false"
                       android:alpha=".5"
+                      android:enabled="false"
                       android:text="@string/next"
                       android:textColor="@android:color/white" />
 
