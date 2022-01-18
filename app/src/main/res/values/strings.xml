@@ -681,6 +681,6 @@ Upload your first media by tapping on the add button.</string>
   <string name="reset">Reset</string>
   <string name="location_message">Location data helps Wiki editors find your picture, making it much more useful.\nYour recent uploads have no location.\nWe suggest you turn on location in your camera app\'s settings.\nThank you for uploading!</string>
   <string name="no_location_found_title">No location found</string>
-  <string name="no_location_found_message">Location data helps Wiki editors find your picture, making it much more useful.\nThis image has no location. We suggest you add location for this image</string>
+  <string name="no_location_found_message">How about adding the place where this image was taken?\nLocation data helps Wiki editors find your picture, making it much more useful.\nThank you!</string>
   <string name="add_location">Add location</string>
 </resources>
