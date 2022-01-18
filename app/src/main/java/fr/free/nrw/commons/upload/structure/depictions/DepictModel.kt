@@ -31,14 +31,14 @@ class DepictModel @Inject constructor(private val depictsClient: DepictsClient) 
         return if (query.isBlank()) {
             nearbyPlaces.switchMap { places: List<Place> ->
                 val qids = mutableSetOf<String>()
-                repository.uploads.forEach {
-                    if(it.gpsCoords != null && it.gpsCoords.imageCoordsExists) {
-                        qids.add("Q"+ Coordinates2Country.countryQID(it.gpsCoords.decLatitude,
-                            it.gpsCoords.decLongitude))
-                    }
-                }
                 for(place in  places) {
                     place.wikiDataEntityId?.let { qids.add(it) }
+                }
+                repository.uploads.forEach { item ->
+                    if(item.gpsCoords != null && item.gpsCoords.imageCoordsExists) {
+                        Coordinates2Country.countryQID(item.gpsCoords.decLatitude,
+                            item.gpsCoords.decLongitude)?.let { qids.add("Q$it") }
+                    }
                 }
                 getPlaceDepictions(ArrayList(qids)).toFlowable()
             }
