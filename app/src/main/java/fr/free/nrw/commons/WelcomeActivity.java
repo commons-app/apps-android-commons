@@ -19,9 +19,6 @@ public class WelcomeActivity extends BaseActivity {
 
     private ActivityWelcomeBinding binding;
 
-    ViewPager pager;
-    CirclePageIndicator indicator;
-
     private WelcomePagerAdapter adapter = new WelcomePagerAdapter();
     private boolean isQuiz;
 
@@ -51,6 +48,7 @@ public class WelcomeActivity extends BaseActivity {
         if (ConfigUtils.isBetaFlavour()) {
             binding.finishTutorialButton.setVisibility(View.VISIBLE);
         }
+
 
         binding.welcomePager.setAdapter(adapter);
         binding.welcomePagerIndicator.setViewPager(binding.welcomePager);
