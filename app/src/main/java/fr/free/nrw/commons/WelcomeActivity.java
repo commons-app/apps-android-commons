@@ -53,7 +53,7 @@ public class WelcomeActivity extends BaseActivity {
         }
 
         binding.welcomePager.setAdapter(adapter);
-        binding.welcomePagerIndicator.setViewPager(pager);
+        binding.welcomePagerIndicator.setViewPager(binding.welcomePager);
 
         binding.finishTutorialButton.setOnClickListener(v -> finishTutorial());    }
 
