@@ -130,7 +130,7 @@ public class ContributionsFragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (getArguments() != null && getArguments().getString(KEY_USERNAME) != null) {
             userName = getArguments().getString(KEY_USERNAME);
             isUserProfile = true;
         }
