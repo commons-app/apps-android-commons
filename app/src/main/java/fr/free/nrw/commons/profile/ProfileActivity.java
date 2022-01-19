@@ -245,6 +245,7 @@ public class ProfileActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
+        // Checking if MediaDetailPagerFragment is visible, If visible then show ContributionListFragment else close the ProfileActivity
         if(contributionsFragment != null && contributionsFragment.getMediaDetailPagerFragment() != null && contributionsFragment.getMediaDetailPagerFragment().isVisible()) {
             contributionsFragment.backButtonClicked();
             tabLayout.setVisibility(View.VISIBLE);

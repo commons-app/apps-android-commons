@@ -111,6 +111,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             }
         }
 
+        // If fragment is associated with ProfileActivity, then hide the tabLayout
         if (getActivity() instanceof ProfileActivity) {
             ((ProfileActivity)getActivity()).tabLayout.setVisibility(View.GONE);
         }

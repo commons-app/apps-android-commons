@@ -426,6 +426,7 @@ public class ContributionsFragment
                 nearbyNotificationCardView.setVisibility(View.GONE);
             }
 
+            // Notification Count and Campaigns should not be set, if it is used in User Profile
             if(!isUserProfile) {
                 setNotificationCount();
                 fetchCampaigns();
@@ -671,13 +672,15 @@ public class ContributionsFragment
             }
             removeFragment(mediaDetailPagerFragment);
             showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG, mediaDetailPagerFragment);
-            //((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             if(isUserProfile) {
+                // Fragment is associated with ProfileActivity
+                // Enable ParentViewPager Scroll
                 ((ProfileActivity)getActivity()).setScroll(true);
             }else {
                 fetchCampaigns();
             }
             if(getActivity() instanceof MainActivity) {
+                // Fragment is associated with MainActivity
                 ((MainActivity)getActivity()).showTabs();
             }
             return true;
