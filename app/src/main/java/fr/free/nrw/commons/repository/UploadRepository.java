@@ -255,7 +255,7 @@ public class UploadRepository {
      */
 
     public Flowable<List<DepictedItem>> searchAllEntities(String query) {
-        return depictModel.searchAllEntities(query);
+        return depictModel.searchAllEntities(query, this);
     }
 
     /**
@@ -265,14 +265,14 @@ public class UploadRepository {
      * @return a single that provides the depictions
      */
     public Single<List<DepictedItem>> getPlaceDepictions() {
-        final Set<Place> places = new HashSet<>();
+        final Set<String> qids = new HashSet<>();
         for (final UploadItem item : getUploads()) {
             final Place place = item.getPlace();
             if (place != null) {
-                places.add(place);
+                qids.add(place.getWikiDataEntityId());
             }
         }
-        return depictModel.getPlaceDepictions(new ArrayList<>(places));
+        return depictModel.getPlaceDepictions(new ArrayList<>(qids));
     }
 
     /**
