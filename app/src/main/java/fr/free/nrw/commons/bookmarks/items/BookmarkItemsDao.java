@@ -4,15 +4,12 @@ import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build.VERSION_CODES;
 import android.os.RemoteException;
-import androidx.annotation.RequiresApi;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
@@ -64,7 +61,6 @@ public class BookmarkItemsDao {
      * @param depictedItem : Bookmark object
      * @return boolean : is bookmark now favorite ?
      */
-    @RequiresApi(api = VERSION_CODES.N)
     public boolean updateBookmarkItem(final DepictedItem depictedItem) {
         final boolean bookmarkExists = findBookmarkItem(depictedItem.getId());
         if (bookmarkExists) {
@@ -79,7 +75,6 @@ public class BookmarkItemsDao {
      * Add a Bookmark to database
      * @param depictedItem : Bookmark to add
      */
-    @RequiresApi(api = VERSION_CODES.N)
     private void addBookmarkItem(final DepictedItem depictedItem) {
         final ContentProviderClient db = clientProvider.get();
         try {
@@ -212,19 +207,36 @@ public class BookmarkItemsDao {
      * @param depictedItem depicted item
      * @return ContentValues
      */
-    @RequiresApi(api = VERSION_CODES.N)
     private ContentValues toContentValues(final DepictedItem depictedItem) {
+
+        final List<String> namesOfCommonsCategories = new ArrayList<>();
+        for (final CategoryItem category :
+            depictedItem.getCommonsCategories()) {
+            namesOfCommonsCategories.add(category.getName());
+        }
+
+        final List<String> descriptionsOfCommonsCategories = new ArrayList<>();
+        for (final CategoryItem category :
+            depictedItem.getCommonsCategories()) {
+            descriptionsOfCommonsCategories.add(category.getDescription());
+        }
+
+        final List<String> thumbnailsOfCommonsCategories = new ArrayList<>();
+        for (final CategoryItem category :
+            depictedItem.getCommonsCategories()) {
+            thumbnailsOfCommonsCategories.add(category.getThumbnail());
+        }
+
         final ContentValues cv = new ContentValues();
         cv.put(Table.COLUMN_NAME, depictedItem.getName());
         cv.put(Table.COLUMN_DESCRIPTION, depictedItem.getDescription());
         cv.put(Table.COLUMN_IMAGE, depictedItem.getImageUrl());
         cv.put(Table.COLUMN_INSTANCE_LIST, ArrayToString(depictedItem.getInstanceOfs()));
-        cv.put(Table.COLUMN_CATEGORIES_NAME_LIST, ArrayToString(depictedItem.getCommonsCategories()
-            .stream().map(CategoryItem::getName).collect(Collectors.toList())));
-        cv.put(Table.COLUMN_CATEGORIES_DESCRIPTION_LIST, ArrayToString(depictedItem.getCommonsCategories()
-            .stream().map(CategoryItem::getDescription).collect(Collectors.toList())));
-        cv.put(Table.COLUMN_CATEGORIES_THUMBNAIL_LIST, ArrayToString(depictedItem.getCommonsCategories()
-            .stream().map(CategoryItem::getThumbnail).collect(Collectors.toList())));
+        cv.put(Table.COLUMN_CATEGORIES_NAME_LIST, ArrayToString(namesOfCommonsCategories));
+        cv.put(Table.COLUMN_CATEGORIES_DESCRIPTION_LIST,
+            ArrayToString(descriptionsOfCommonsCategories));
+        cv.put(Table.COLUMN_CATEGORIES_THUMBNAIL_LIST,
+            ArrayToString(thumbnailsOfCommonsCategories));
         cv.put(Table.COLUMN_IS_SELECTED, depictedItem.isSelected());
         cv.put(Table.COLUMN_ID, depictedItem.getId());
         return cv;

@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.category;
 
 import android.content.Context;
-import android.os.Build.VERSION_CODES;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +11,12 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter.RecyclerViewHolder;
 import fr.free.nrw.commons.nearby.Label;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CategoryEditSearchRecyclerViewAdapter
     extends RecyclerView.Adapter<RecyclerViewHolder>
@@ -94,15 +91,17 @@ public class CategoryEditSearchRecyclerViewAdapter
     public Filter getFilter() {
         return new Filter() {
 
-            @RequiresApi(api = VERSION_CODES.N)
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults results = new FilterResults();
                 List<CategoryItem> resultCategories = categoryClient
                     .searchCategories(constraint.toString(), 10).blockingGet();
-                results.values = resultCategories.stream()
-                    .map(CategoryItem::getName)
-                    .collect(Collectors.toList());
+                final List<String> namesOfCommonsCategories = new ArrayList<>();
+                for (final CategoryItem category :
+                    resultCategories) {
+                    namesOfCommonsCategories.add(category.getName());
+                }
+                results.values = namesOfCommonsCategories;
                 results.count = resultCategories.size();
                 return results;
             }
