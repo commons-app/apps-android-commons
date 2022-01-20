@@ -334,7 +334,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     }catch (exception : Exception){
                         Timber.e(exception)
                         Timber.e("Upload from stash failed for contribution : $filename")
-                        showFailedNotification(contribution, "")
+                        showFailedNotification(contribution, exception.message.toString())
                         contribution.state=Contribution.STATE_FAILED
                         contributionDao.saveSynchronous(contribution)
                         if (STASH_ERROR_CODES.contains(exception.message)) {
@@ -358,7 +358,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         }catch (exception: Exception){
             Timber.e(exception)
             Timber.e("Stash upload failed for contribution: $filename")
-            showFailedNotification(contribution, "")
+            showFailedNotification(contribution, exception.message.toString())
             contribution.state=Contribution.STATE_FAILED
             clearChunks(contribution)
         }
