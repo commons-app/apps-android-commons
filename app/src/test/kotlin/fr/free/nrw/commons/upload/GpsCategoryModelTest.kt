@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload
 
+import fr.free.nrw.commons.category.CategoryItem
 import org.junit.Before
 import org.junit.Test
 
@@ -18,7 +19,8 @@ class GpsCategoryModelTest {
 
     @Test
     fun `setCategoriesFromLocation emits the new value`() {
-        val expectedList = listOf("category")
+        val expectedList = listOf(
+            CategoryItem("category", "", "", false))
         gpsCategoryModel.categoriesFromLocation.test()
             .also { gpsCategoryModel.setCategoriesFromLocation(expectedList) }
             .assertValues(emptyList(), expectedList)

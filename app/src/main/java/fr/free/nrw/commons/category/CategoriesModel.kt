@@ -56,7 +56,7 @@ class CategoriesModel @Inject constructor(
 
         // Newly used category...
         if (category == null) {
-            category = Category(null, item.name, Date(), 0)
+            category = Category(null, item.name, item.description, item.thumbnail, Date(), 0)
         }
         category.incTimesUsed()
         categoryDao.save(category)
@@ -74,14 +74,14 @@ class CategoriesModel @Inject constructor(
         selectedDepictions: List<DepictedItem>
     ): Observable<List<CategoryItem>> {
         return suggestionsOrSearch(term, imageTitleList, selectedDepictions)
-            .map { it.map { CategoryItem(it, false) } }
+            .map { it.map { CategoryItem(it.name, it.description, it.thumbnail, false) } }
     }
 
     private fun suggestionsOrSearch(
         term: String,
         imageTitleList: List<String>,
         selectedDepictions: List<DepictedItem>
-    ): Observable<List<String>> {
+    ): Observable<List<CategoryItem>> {
         return if (TextUtils.isEmpty(term))
             Observable.combineLatest(
                 categoriesFromDepiction(selectedDepictions),
@@ -100,10 +100,10 @@ class CategoriesModel @Inject constructor(
         Observable.just(selectedDepictions.map { it.commonsCategories }.flatten())
 
     private fun combine(
-        depictionCategories: List<String>,
-        locationCategories: List<String>,
-        titles: List<String>,
-        recents: List<String>
+        depictionCategories: List<CategoryItem>,
+        locationCategories: List<CategoryItem>,
+        titles: List<CategoryItem>,
+        recents: List<CategoryItem>
     ) = depictionCategories + locationCategories + titles + recents
 
 
@@ -115,7 +115,7 @@ class CategoriesModel @Inject constructor(
     private fun titleCategories(titleList: List<String>) =
         if (titleList.isNotEmpty())
             Observable.combineLatest(titleList.map { getTitleCategories(it) }) { searchResults ->
-                searchResults.map { it as List<String> }.flatten()
+                searchResults.map { it as List<CategoryItem> }.flatten()
             }
         else
             Observable.just(emptyList())
@@ -125,7 +125,7 @@ class CategoriesModel @Inject constructor(
      * @param title
      * @return
      */
-    private fun getTitleCategories(title: String): Observable<List<String>> {
+    private fun getTitleCategories(title: String): Observable<List<CategoryItem>> {
         return categoryClient.searchCategories(title, SEARCH_CATS_LIMIT).toObservable()
     }
 

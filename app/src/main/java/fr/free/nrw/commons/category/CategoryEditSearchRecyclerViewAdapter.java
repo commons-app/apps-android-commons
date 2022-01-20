@@ -94,8 +94,14 @@ public class CategoryEditSearchRecyclerViewAdapter
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults results = new FilterResults();
-                List<String> resultCategories = categoryClient.searchCategories(constraint.toString(), 10).blockingGet();
-                results.values = resultCategories;
+                List<CategoryItem> resultCategories = categoryClient
+                    .searchCategories(constraint.toString(), 10).blockingGet();
+                final List<String> namesOfCommonsCategories = new ArrayList<>();
+                for (final CategoryItem category :
+                    resultCategories) {
+                    namesOfCommonsCategories.add(category.getName());
+                }
+                results.values = namesOfCommonsCategories;
                 results.count = resultCategories.size();
                 return results;
             }
