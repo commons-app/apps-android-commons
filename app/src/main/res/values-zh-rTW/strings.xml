@@ -9,6 +9,7 @@
 * S099001
 * Simon Shek
 * StephDC
+* Tranve
 * Wwycheuk
 * ZhaoGang
 * 列维劳德
@@ -261,8 +262,8 @@
   <string name="skip_login_title">您確定要略過登入嗎？</string>
   <string name="skip_login_message">在功能裡您需要登入來上傳圖片。</string>
   <string name="login_alert_message">請登入來使用此功能</string>
-  <string name="copy_wikicode">複製 wiki 語法到剪貼簿</string>
-  <string name="wikicode_copied">Wiki 文字已複製到剪貼簿</string>
+  <string name="copy_wikicode">複製 wikitext 到剪貼簿</string>
+  <string name="wikicode_copied">Wikitext 已複製到剪貼簿</string>
   <string name="nearby_location_not_available">附近可能無法正常運作。位置無效。</string>
   <string name="location_permission_rationale_nearby">需權限來顯示附近地點清單</string>
   <string name="nearby_directions">方向</string>
@@ -557,12 +558,12 @@
   <string name="add_picture_to_wikipedia_article_desc">您想要添加此圖片到%1$s維基百科條目上嗎？</string>
   <string name="confirm">確認</string>
   <string name="instructions_title">說明</string>
-  <string name="wikipedia_instructions_step_1">1. 使用以下維基語法：</string>
+  <string name="wikipedia_instructions_step_1">1. 使用以下wikitext：</string>
   <string name="wikipedia_instructions_step_2">2. 點擊確認後會開啟維基百科條目。</string>
   <string name="wikipedia_instructions_step_3">3. 尋找適合插入您的圖片的章節。</string>
   <string name="wikipedia_instructions_step_4">4. 點擊章節裡的編輯按鈕（為筆狀模樣的圖案）。</string>
-  <string name="wikipedia_instructions_step_5">5. 將維基語法貼到適當的位置。</string>
-  <string name="wikipedia_instructions_step_6">6. 若有需要，可編輯維基語法來調整到適當的定位。更多相關資訊請查看&lt;a href=\"https://zh.wikipedia.org/wiki/Help:%E5%9B%BE%E5%83%8F\"&gt;此頁面&lt;/a&gt;。</string>
+  <string name="wikipedia_instructions_step_5">5. 將wikitext貼到適當的位置。</string>
+  <string name="wikipedia_instructions_step_6">6. 若有需要，可編輯wikitext來調整到適當的定位。更多相關資訊請查看&lt;a href=\"https://zh.wikipedia.org/wiki/Help:%E5%9B%BE%E5%83%8F\"&gt;此頁面&lt;/a&gt;。</string>
   <string name="wikipedia_instructions_step_7">7. 發布條目</string>
   <string name="copy_wikicode_to_clipboard">複製維基代碼到剪貼簿</string>
   <string name="pause">暫停</string>
@@ -624,6 +625,7 @@
   <string name="location_picker_image_view_shadow">位置點選器的圖片檢視陰影</string>
   <string name="image_location">圖片位置</string>
   <string name="check_whether_location_is_correct">檢查位置是否正確</string>
+  <string name="title_page_bookmarks_items">項目</string>
   <string name="custom_selector_title">自訂選擇器</string>
   <string name="custom_selector_empty_text">沒有圖片</string>
   <string name="done">完成</string>
@@ -647,4 +649,5 @@
   <string name="advanced_query_info_text">您可以自定義附近查詢。若發生錯誤，請重新設定並套用。</string>
   <string name="apply">套用</string>
   <string name="reset">重新設定</string>
+  <string name="location_message">位置資料能幫助 Wiki 編輯者來找到您的圖片，來讓圖片更有用。\n您近期上傳的內容沒有位置。\n因此我們建議您啟動在您的相機應用程式設定裡的位置。\n非常感謝您的上傳！</string>
 </resources>

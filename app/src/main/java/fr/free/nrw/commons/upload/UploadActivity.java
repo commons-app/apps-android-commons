@@ -469,6 +469,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         if (index < fragments.size() - 1) {
             vpUpload.setCurrentItem(index + 1, false);
             fragments.get(index + 1).onBecameVisible();
+            ((LinearLayoutManager) rvThumbnails.getLayoutManager())
+                .scrollToPositionWithOffset((index > 0) ? index-1 : 0, 0);
         } else {
             if(defaultKvStore.getInt(COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0) >= 10){
                 DialogUtil.showAlertDialog(this,
@@ -490,6 +492,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         if (index != 0) {
             vpUpload.setCurrentItem(index - 1, true);
             fragments.get(index - 1).onBecameVisible();
+            ((LinearLayoutManager) rvThumbnails.getLayoutManager())
+                .scrollToPositionWithOffset((index > 3) ? index-2 : 0, 0);
         }
     }
 

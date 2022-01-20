@@ -616,6 +616,7 @@
   <string name="location_picker_image_view_shadow">Bayangan dari tampilan gambar dari pemilih lokasi</string>
   <string name="image_location">Lokasi Gambar</string>
   <string name="check_whether_location_is_correct">Cek apakah lokasi benar</string>
+  <string name="title_page_bookmarks_items">Butir</string>
   <string name="custom_selector_title">Pemilih Kustom</string>
   <string name="custom_selector_empty_text">Tidak Ada Gambar</string>
   <string name="done">Selesai</string>

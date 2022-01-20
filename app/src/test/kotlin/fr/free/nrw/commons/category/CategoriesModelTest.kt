@@ -34,7 +34,8 @@ class CategoriesModelTest {
     fun searchAllFoundCaseTest() {
         val categoriesModel = CategoriesModel(categoryClient, mock(), mock())
 
-        val expectedList = listOf("Test")
+        val expectedList = listOf(CategoryItem(
+            "Test", "", "", false))
         whenever(
             categoryClient.searchCategoriesForPrefix(
                 ArgumentMatchers.anyString(),
@@ -45,7 +46,8 @@ class CategoriesModelTest {
             .thenReturn(Single.just(expectedList))
 
         // Checking if both return "Test"
-        val expectedItems = expectedList.map { CategoryItem(it, false) }
+        val expectedItems = expectedList.map { CategoryItem(
+            it.name, it.description, it.thumbnail, false) }
         var categoryTerm = "Test"
         categoriesModel.searchAll(categoryTerm, emptyList(), emptyList())
             .test()
@@ -65,10 +67,12 @@ class CategoriesModelTest {
     @Test
     fun `searchAll with empty search terms creates results from gps, title search & recents`() {
         val gpsCategoryModel: GpsCategoryModel = mock()
-        val depictedItem = depictedItem(commonsCategories = listOf("depictionCategory"))
+        val depictedItem = depictedItem(commonsCategories = listOf(CategoryItem(
+            "depictionCategory", "", "", false)))
 
         whenever(gpsCategoryModel.categoriesFromLocation)
-            .thenReturn(BehaviorSubject.createDefault(listOf("gpsCategory")))
+            .thenReturn(BehaviorSubject.createDefault(listOf(CategoryItem(
+                "gpsCategory", "", "", false))))
         whenever(
             categoryClient.searchCategories(
                 ArgumentMatchers.anyString(),
@@ -76,8 +80,10 @@ class CategoriesModelTest {
                 ArgumentMatchers.anyInt()
             )
         )
-            .thenReturn(Single.just(listOf("titleSearch")))
-        whenever(categoryDao.recentCategories(25)).thenReturn(listOf("recentCategories"))
+            .thenReturn(Single.just(listOf(CategoryItem(
+                "titleSearch", "", "", false))))
+        whenever(categoryDao.recentCategories(25)).thenReturn(listOf(CategoryItem(
+            "recentCategories","","", false)))
         val imageTitleList = listOf("Test")
         CategoriesModel(categoryClient, categoryDao, gpsCategoryModel)
             .searchAll("", imageTitleList, listOf(depictedItem))

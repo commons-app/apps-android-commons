@@ -10,15 +10,19 @@ import java.util.Date;
 public class Category {
     private Uri contentUri;
     private String name;
+    private String description;
+    private String thumbnail;
     private Date lastUsed;
     private int timesUsed;
 
     public Category() {
     }
 
-    public Category(Uri contentUri, String name, Date lastUsed, int timesUsed) {
+    public Category(Uri contentUri, String name, String description, String thumbnail, Date lastUsed, int timesUsed) {
         this.contentUri = contentUri;
         this.name = name;
+        this.description = description;
+        this.thumbnail = thumbnail;
         this.lastUsed = lastUsed;
         this.timesUsed = timesUsed;
     }
@@ -93,4 +97,19 @@ public class Category {
         this.contentUri = contentUri;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setDescription(final String description) {
+        this.description = description;
+    }
+
+    public void setThumbnail(final String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
 }

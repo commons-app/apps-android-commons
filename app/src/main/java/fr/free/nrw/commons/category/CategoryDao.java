@@ -79,8 +79,8 @@ public class CategoryDao {
      * @return a list containing recent categories
      */
     @NonNull
-    List<String> recentCategories(int limit) {
-        List<String> items = new ArrayList<>();
+    List<CategoryItem> recentCategories(int limit) {
+        List<CategoryItem> items = new ArrayList<>();
         Cursor cursor = null;
         ContentProviderClient db = clientProvider.get();
         try {
@@ -93,7 +93,9 @@ public class CategoryDao {
             // fixme add a limit on the original query instead of falling out of the loop?
             while (cursor != null && cursor.moveToNext()
                     && cursor.getPosition() < limit) {
-                items.add(fromCursor(cursor).getName());
+                items.add(new CategoryItem(fromCursor(cursor).getName(),
+                    fromCursor(cursor).getDescription(), fromCursor(cursor).getThumbnail(),
+                    false));
             }
         } catch (RemoteException e) {
             throw new RuntimeException(e);
@@ -112,6 +114,8 @@ public class CategoryDao {
         return new Category(
                 CategoryContentProvider.uriForId(cursor.getInt(cursor.getColumnIndex(Table.COLUMN_ID))),
                 cursor.getString(cursor.getColumnIndex(Table.COLUMN_NAME)),
+                cursor.getString(cursor.getColumnIndex(Table.COLUMN_DESCRIPTION)),
+                cursor.getString(cursor.getColumnIndex(Table.COLUMN_THUMBNAIL)),
                 new Date(cursor.getLong(cursor.getColumnIndex(Table.COLUMN_LAST_USED))),
                 cursor.getInt(cursor.getColumnIndex(Table.COLUMN_TIMES_USED))
         );
@@ -120,6 +124,8 @@ public class CategoryDao {
     private ContentValues toContentValues(Category category) {
         ContentValues cv = new ContentValues();
         cv.put(CategoryDao.Table.COLUMN_NAME, category.getName());
+        cv.put(Table.COLUMN_DESCRIPTION, category.getDescription());
+        cv.put(Table.COLUMN_THUMBNAIL, category.getThumbnail());
         cv.put(CategoryDao.Table.COLUMN_LAST_USED, category.getLastUsed().getTime());
         cv.put(CategoryDao.Table.COLUMN_TIMES_USED, category.getTimesUsed());
         return cv;
@@ -130,6 +136,8 @@ public class CategoryDao {
 
         public static final String COLUMN_ID = "_id";
         static final String COLUMN_NAME = "name";
+        static final String COLUMN_DESCRIPTION = "description";
+        static final String COLUMN_THUMBNAIL = "thumbnail";
         static final String COLUMN_LAST_USED = "last_used";
         static final String COLUMN_TIMES_USED = "times_used";
 
@@ -137,6 +145,8 @@ public class CategoryDao {
         public static final String[] ALL_FIELDS = {
                 COLUMN_ID,
                 COLUMN_NAME,
+                COLUMN_DESCRIPTION,
+                COLUMN_THUMBNAIL,
                 COLUMN_LAST_USED,
                 COLUMN_TIMES_USED
         };
@@ -146,6 +156,8 @@ public class CategoryDao {
         static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
                 + COLUMN_ID + " INTEGER PRIMARY KEY,"
                 + COLUMN_NAME + " STRING,"
+                + COLUMN_DESCRIPTION + " STRING,"
+                + COLUMN_THUMBNAIL + " STRING,"
                 + COLUMN_LAST_USED + " INTEGER,"
                 + COLUMN_TIMES_USED + " INTEGER"
                 + ");";

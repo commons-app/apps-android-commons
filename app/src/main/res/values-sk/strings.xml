@@ -633,6 +633,7 @@
   <string name="location_picker_image_view_shadow">Tieň obrázka pre výber polohy</string>
   <string name="image_location">Poloha obrázka</string>
   <string name="check_whether_location_is_correct">Skontrolovať či je poloha správna</string>
+  <string name="title_page_bookmarks_items">Položky</string>
   <string name="custom_selector_title">Vlastný výber</string>
   <string name="custom_selector_empty_text">Žiadne obrázky</string>
   <string name="done">Hotovo</string>
@@ -656,4 +657,5 @@
   <string name="advanced_query_info_text">Blízke miesta si môžete upraviť podľa seba. Ak sa vyskytne chyba, vynulujte nastavenia.</string>
   <string name="apply">Požiadať</string>
   <string name="reset">Vynulovať</string>
+  <string name="location_message">Údaje o polohe pomáhajú editorom nájsť Váš obrázok a spraviť ho viac užitočným. \nVaše nedávne nahrávania nemajú polohu.\nOdporúčame Vám zapnúť zisťovanie polohy v nastaveniach Vašej kamery. \nĎakujeme!</string>
 </resources>

@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload.structure.depictions
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.upload.WikidataItem
 import fr.free.nrw.commons.wikidata.WikidataProperties
@@ -28,7 +29,7 @@ data class DepictedItem constructor(
     val description: String?,
     val imageUrl: String?,
     val instanceOfs: List<String>,
-    val commonsCategories: List<String>,
+    val commonsCategories: List<CategoryItem>,
     var isSelected: Boolean,
    @PrimaryKey override val id: String
 ) : WikidataItem, Parcelable {
@@ -52,7 +53,8 @@ data class DepictedItem constructor(
             getImageUrl(it.value, THUMB_IMAGE_SIZE)
         },
         entity[INSTANCE_OF].toIds(),
-        entity[COMMONS_CATEGORY]?.map { (it.mainSnak.dataValue as DataValue.ValueString).value }
+        entity[COMMONS_CATEGORY]?.map { CategoryItem((it.mainSnak.dataValue as DataValue.ValueString).value,
+            "", "", false) }
             ?: emptyList(),
         false,
         entity.id()

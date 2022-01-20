@@ -10,6 +10,7 @@ import android.os.RemoteException
 import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.*
+import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import org.junit.Assert
 import org.junit.Before
@@ -26,7 +27,9 @@ class BookmarkItemsDaoTest {
         COLUMN_DESCRIPTION,
         COLUMN_IMAGE,
         COLUMN_INSTANCE_LIST,
-        COLUMN_CATEGORIES_LIST,
+        COLUMN_CATEGORIES_NAME_LIST,
+        COLUMN_CATEGORIES_DESCRIPTION_LIST,
+        COLUMN_CATEGORIES_THUMBNAIL_LIST,
         COLUMN_IS_SELECTED,
         COLUMN_ID,
     )
@@ -43,7 +46,10 @@ class BookmarkItemsDaoTest {
     @Before
     fun setUp() {
         exampleItemBookmark = DepictedItem("itemName", "itemDescription",
-            "itemImageUrl", listOf("instance"), listOf("categories"), false,
+            "itemImageUrl", listOf("instance"), listOf(
+                CategoryItem("category name", "category description",
+                "category thumbnail", false)
+            ), false,
             "itemID")
         testObject = BookmarkItemsDao { client }
     }
@@ -72,7 +78,9 @@ class BookmarkItemsDaoTest {
                 Assert.assertEquals("itemDescription", it.description)
                 Assert.assertEquals("itemImageUrl", it.imageUrl)
                 Assert.assertEquals(listOf("instance"), it.instanceOfs)
-                Assert.assertEquals(listOf("categories"), it.commonsCategories)
+                Assert.assertEquals(listOf(CategoryItem("category name",
+                    "category description",
+                    "category thumbnail", false)), it.commonsCategories)
                 Assert.assertEquals(false, it.isSelected)
                 Assert.assertEquals("itemID", it.id)
             }
@@ -131,7 +139,7 @@ class BookmarkItemsDaoTest {
         Assert.assertTrue(testObject.updateBookmarkItem(exampleItemBookmark))
         verify(client).insert(eq(BookmarkItemsContentProvider.BASE_URI), captor.capture())
         captor.firstValue.let { cv ->
-            Assert.assertEquals(7, cv.size())
+            Assert.assertEquals(9, cv.size())
             Assert.assertEquals(
                 exampleItemBookmark.name,
                 cv.getAsString(COLUMN_NAME)
@@ -149,8 +157,16 @@ class BookmarkItemsDaoTest {
                 cv.getAsString(COLUMN_INSTANCE_LIST)
             )
             Assert.assertEquals(
-                exampleItemBookmark.commonsCategories[0],
-                cv.getAsString(COLUMN_CATEGORIES_LIST)
+                exampleItemBookmark.commonsCategories[0].name,
+                cv.getAsString(COLUMN_CATEGORIES_NAME_LIST)
+            )
+            Assert.assertEquals(
+                exampleItemBookmark.commonsCategories[0].description,
+                cv.getAsString(COLUMN_CATEGORIES_DESCRIPTION_LIST)
+            )
+            Assert.assertEquals(
+                exampleItemBookmark.commonsCategories[0].thumbnail,
+                cv.getAsString(COLUMN_CATEGORIES_THUMBNAIL_LIST)
             )
             Assert.assertEquals(
                 exampleItemBookmark.isSelected,
@@ -263,8 +279,8 @@ class BookmarkItemsDaoTest {
 
         for (i in 0 until rowCount) {
             addRow(listOf("itemName", "itemDescription",
-                "itemImageUrl", "instance", "categories", false,
-                "itemID"))
+                "itemImageUrl", "instance", "category name", "category description",
+                "category thumbnail", false, "itemID"))
         }
     }
 }
