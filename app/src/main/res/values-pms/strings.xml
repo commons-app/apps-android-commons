@@ -610,6 +610,8 @@
   <string name="location_picker_image_view_shadow">L\'ombra dla vista dla plancia dël selessionator ëd pòst</string>
   <string name="image_location">Pòst ëd la plancia</string>
   <string name="check_whether_location_is_correct">Controlé si ël pòst a l\'é giust</string>
+  <string name="label">Tichëtta</string>
+  <string name="description">Descrission</string>
   <string name="title_page_bookmarks_items">Element</string>
   <string name="custom_selector_title">Seletor përsonalisà</string>
   <string name="custom_selector_empty_text">Gnun-e plance</string>

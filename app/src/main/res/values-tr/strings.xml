@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * BaRaN6161 TURK
+* Can
 * Chansey
 * Dual
 * Emperyan
@@ -632,6 +633,7 @@
   <string name="location_picker_image_view_shadow">Konum seçicinin resim görünümünün gölgesi</string>
   <string name="image_location">Görüntü Konumu</string>
   <string name="check_whether_location_is_correct">Konumun doğru olup olmadığını kontrol edin</string>
+  <string name="title_page_bookmarks_items">Ögeler</string>
   <string name="custom_selector_title">Özel Seçici</string>
   <string name="custom_selector_empty_text">Resim Yok</string>
   <string name="done">Yapıldı</string>

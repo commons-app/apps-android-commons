@@ -641,6 +641,8 @@
   <string name="location_picker_image_view_shadow">L’ombre de l’affichage d’image du sélecteur d’événement</string>
   <string name="image_location">Emplacement de l’image</string>
   <string name="check_whether_location_is_correct">Vérifier si l’emplacement est correct</string>
+  <string name="label">Libellé</string>
+  <string name="description">Description</string>
   <string name="title_page_bookmarks_items">Éléments</string>
   <string name="custom_selector_title">Sélecteur actuel</string>
   <string name="custom_selector_empty_text">Pas d’image</string>
