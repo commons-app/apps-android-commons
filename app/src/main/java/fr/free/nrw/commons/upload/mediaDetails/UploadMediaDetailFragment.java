@@ -260,8 +260,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         this.uploadItem = uploadItem;
         showNearbyFound = true;
         if(callback.getIndexInViewFlipper(this) == 0) {
-            if (UploadActivity.existingPlaces.containsKey(nearbyPlace)) {
-                final boolean response = UploadActivity.existingPlaces.get(nearbyPlace);
+            if (UploadActivity.nearbyPopupAnswers.containsKey(nearbyPlace)) {
+                final boolean response = UploadActivity.nearbyPopupAnswers.get(nearbyPlace);
                 if (response) {
                     presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace,
                         callback.getIndexInViewFlipper(this));
@@ -288,11 +288,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 getString(R.string.upload_nearby_place_found_description),
                 place.getName()),
             () -> {
-                UploadActivity.existingPlaces.put(place, true);
+                UploadActivity.nearbyPopupAnswers.put(place, true);
                 presenter.onUserConfirmedUploadIsOfPlace(place, callback.getIndexInViewFlipper(this));
             },
             () -> {
-                UploadActivity.existingPlaces.put(place, false);
+                UploadActivity.nearbyPopupAnswers.put(place, false);
             },
             customLayout, true);
     }
@@ -315,8 +315,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         super.onBecameVisible();
         presenter.fetchTitleAndDescription(callback.getIndexInViewFlipper(this));
         if(showNearbyFound) {
-            if (UploadActivity.existingPlaces.containsKey(nearbyPlace)) {
-                final boolean response = UploadActivity.existingPlaces.get(nearbyPlace);
+            if (UploadActivity.nearbyPopupAnswers.containsKey(nearbyPlace)) {
+                final boolean response = UploadActivity.nearbyPopupAnswers.get(nearbyPlace);
                 if (response) {
                     presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace,
                         callback.getIndexInViewFlipper(this));

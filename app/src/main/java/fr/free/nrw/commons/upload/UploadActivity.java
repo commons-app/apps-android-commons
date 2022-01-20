@@ -122,7 +122,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      * Stores all nearby places found and related users response for
      * each place while uploading media
      */
-    public static HashMap<Place,Boolean> existingPlaces;
+    public static HashMap<Place,Boolean> nearbyPopupAnswers;
 
     @SuppressLint("CheckResult")
     @Override
@@ -134,7 +134,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         ButterKnife.bind(this);
         compositeDisposable = new CompositeDisposable();
         init();
-        existingPlaces = new HashMap<>();
+        nearbyPopupAnswers = new HashMap<>();
 
         PermissionUtils.checkPermissionsAndPerformAction(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
