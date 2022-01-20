@@ -7,6 +7,7 @@
 * Einstein2
 * Envlh
 * Hanna Tardos
+* Luckylukee81
 * MeskoBalazs
 * Misibacsi
 * Máté
@@ -20,10 +21,9 @@
     <item quantity="one">%1$d fájl feltöltése folyamatban</item>
     <item quantity="other">%1$d fájl feltöltése folyamatban</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d feltöltés</item>
-    <item quantity="other">%1$d feltöltés</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Feltöltések indítása</string>
   <plurals name="starting_multiple_uploads">
@@ -75,7 +75,9 @@
   <string name="upload_progress_notification_title_in_progress">%1$s feltöltése</string>
   <string name="upload_progress_notification_title_finishing">%1$s feltöltése befejezve</string>
   <string name="upload_failed_notification_title">%1$s feltöltése sikertelen</string>
+  <string name="upload_paused_notification_title">%1$s feltöltés megállítva</string>
   <string name="upload_failed_notification_subtitle">Érintsd meg a megtekintéshez</string>
+  <string name="upload_paused_notification_subtitle">Megnézéshez koppints</string>
   <string name="title_activity_contributions">Legutóbbi feltöltéseim</string>
   <string name="contribution_state_queued">Várólistán</string>
   <string name="contribution_state_failed">Sikertelen.</string>
@@ -113,7 +115,7 @@
   <string name="about_license">A Wikimedia Commons applikáció egy nyílt forráskódú szoftver, amit a Wikimedia-közösség önkéntesei készítettek és tartanak karban. A Wikimédia Alapítvány nem vesz részt az applikáció megalkotásában, fejlesztésében és üzemeltetésében.</string>
   <string name="about_improve">Nyiss egy új &lt;a href=\"%1$s\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
   <string name="about_privacy_policy">Adatvédelmi irányelvek</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;Köszönetnyilvánítás&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Köszönetnyilvánítás&lt;/u&gt;</string>
   <string name="title_activity_about">Névjegy</string>
   <string name="menu_feedback">Visszajelzés küldése (e-mailben)</string>
   <string name="no_email_client">Nincs telepített levelezőprogram</string>
@@ -226,7 +228,7 @@
   <string name="upload_problem_do_you_continue">Biztosan fel akarod tölteni ezt a képet?</string>
   <string name="upload_connection_error_alert_title">Kapcsolódási hiba</string>
   <string name="internet_downloaded">Csak saját magad által készített képeket töltsél fel. Ne tölts fel az Internetről letöltött képeket.</string>
-  <string name="use_external_storage" fuzzy="true">Külső tárhely használata</string>
+  <string name="use_external_storage">Külső tárhely használata</string>
   <string name="use_external_storage_summary">Az alkalmazáson belüli kamerával készült képek mentése az eszközre</string>
   <string name="login_to_your_account">Bejelentkezés a fiókodba</string>
   <string name="send_log_file">Naplófájl küldése</string>
@@ -331,7 +333,7 @@
   <string name="contributions_fragment">Közreműködések</string>
   <string name="nearby_fragment">Közelben</string>
   <string name="notifications">Értesítések</string>
-  <string name="read_notifications" fuzzy="true">Archivált értesítések</string>
+  <string name="read_notifications">Archivált értesítések</string>
   <string name="display_nearby_notification">Közeli értesítések megjelenítése</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Tárolási engedély</string>
@@ -341,7 +343,7 @@
   <string name="next">Következő</string>
   <string name="previous">Előző</string>
   <string name="submit">Küldés</string>
-  <string name="upload_title_duplicate" fuzzy="true">Már létezik \"%1$s\" nevű fájl. Biztosan folytatod?</string>
+  <string name="upload_title_duplicate">Létezik %1$s nevű fájl. Biztosan folytatja? Megjegyzés: A megfelelő utótag automatikusan hozzáadódik a fájlnévhez.</string>
   <string name="map_application_missing">Nem található kompatibilis térképalkalmazás az eszközödön. Kérjük rakj fel ilyen appot a funkció használatához.</string>
   <string name="title_page_bookmarks_pictures">Képek</string>
   <string name="title_page_bookmarks_locations">Helyszínek</string>
@@ -406,8 +408,8 @@
   <string name="no_image_reverted">Nincs visszavont kép</string>
   <string name="no_image_uploaded">Nincs feltöltött kép</string>
   <string name="no_notification">Nincs olvasatlan üzenet</string>
-  <string name="no_read_notification" fuzzy="true">Nincs archivált üzenet</string>
-  <string name="menu_option_read" fuzzy="true">Archiváltak megtekintése</string>
+  <string name="no_read_notification">Nincs archivált üzenet</string>
+  <string name="menu_option_read">Archiváltak megtekintése</string>
   <string name="menu_option_unread">Olvasatlanok megtekintése</string>
   <string name="error_occurred_in_picking_images">Hiba történt a képek betöltése során</string>
   <string name="please_wait">Kérlek várj…</string>

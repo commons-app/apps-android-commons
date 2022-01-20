@@ -1,9 +1,13 @@
 package fr.free.nrw.commons.contributions;
 
+import android.Manifest.permission;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,6 +46,7 @@ import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.worker.UploadWorker;
+import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -138,19 +143,19 @@ public class MainActivity  extends BaseActivity
 
     private void setUpPager() {
         tabLayout.setOnNavigationItemSelectedListener(item -> {
-            if (!item.getTitle().equals("More")) {
+            if (!item.getTitle().equals(getString(R.string.more))) {
                 // do not change title for more fragment
                 setTitle(item.getTitle());
             }
-            Fragment fragment = NavTab.of(item.getOrder()).newInstance();
-            return loadFragment(fragment,true);
+            final Fragment fragment = NavTab.of(item.getOrder()).newInstance();
+            return loadFragment(fragment, true);
         });
     }
 
     private void setUpLoggedOutPager() {
         loadFragment(ExploreFragment.newInstance(),false);
         tabLayout.setOnNavigationItemSelectedListener(item -> {
-            if (!item.getTitle().equals("More")) {
+            if (!item.getTitle().equals(getString(R.string.more))) {
                 // do not change title for more fragment
                 setTitle(item.getTitle());
             }
@@ -163,7 +168,9 @@ public class MainActivity  extends BaseActivity
         //showBottom so that we do not show the bottom tray again when constructing
         //from the saved instance state.
         if (fragment instanceof ContributionsFragment) {
-            if (activeFragment == ActiveFragment.CONTRIBUTIONS) { // Do nothing if same tab
+            if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
+                // scroll to top if already on the Contributions tab
+                contributionsFragment.scrollToTop();
                 return true;
             }
             contributionsFragment = (ContributionsFragment) fragment;
@@ -264,7 +271,7 @@ public class MainActivity  extends BaseActivity
             setTitle(getString(R.string.navigation_item_explore));
             loadFragment(ExploreFragment.newInstance(),false);
         }else if(fragmentName.equals(ActiveFragment.BOOKMARK.name())) {
-            setTitle(getString(R.string.favorites));
+            setTitle(getString(R.string.bookmarks));
             loadFragment(BookmarkFragment.newInstance(),false);
         }
     }

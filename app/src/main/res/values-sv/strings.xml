@@ -498,7 +498,8 @@
   <string name="coordinates_edit_helper_edit_message_else">Kunde inte lägga till koordinater.</string>
   <string name="coordinates_picking_unsuccessful">Kunde inte hämta koordinater.</string>
   <string name="share_image_via">Dela bild via</string>
-  <string name="no_achievements_yet">Du har ännu inte gjort några bidrag</string>
+  <string name="you_have_no_achievements_yet">Du har ännu inte gjort några bidrag</string>
+  <string name="no_achievements_yet">%s har ännu inte gjort några bidrag</string>
   <string name="account_created">Konto har skapats!</string>
   <string name="text_copy">Texten kopierades till urklipp</string>
   <string name="notification_mark_read">Avisering markerades som läst</string>
@@ -550,7 +551,6 @@
   <string name="resume">återuppta</string>
   <string name="paused">Pausad</string>
   <string name="more">Mer</string>
-  <string name="favorites">Favoriter</string>
   <string name="achievements_tab_title">Prestationer</string>
   <string name="leaderboard_tab_title">Topplista</string>
   <string name="rank_prefix">Rang:</string>
@@ -614,9 +614,14 @@
   <string name="custom_selector_info_text2">Till skillnad från bilden till vänster har bilden till höger Commons-logotypen, vilket innebär att den redan är uppladdad.\n Tryck och håll ned för att förhandsgranska bilden.</string>
   <string name="welcome_custom_selector_ok">Häftigt</string>
   <string name="custom_selector_already_uploaded_image_text">Denna bild har redan laddats upp till Commons.</string>
-  <string name="wlm_upload_info" fuzzy="true">Du bidrar till kampanjen Wiki Loves Monuments. Relaterade mallar kommer att läggas till.</string>
+  <string name="wlm_upload_info">Denna bild kommer att skickas in till tävlingen Wiki Loves Monuments 2021</string>
   <string name="display_monuments">Visa monument</string>
   <string name="wlm_month_message">Det är Wiki Loves Monuments-månaden!</string>
   <string name="learn_more">LÄS MER</string>
   <string name="wlm_campaign_description">Wiki Loves Monuments är en internationell fototävling för monument som organiseras av Wikimedia</string>
+  <string name="need_permission">Behöver behörighet</string>
+  <string name="read_phone_state_permission_message">Kartor i närheten behöver läsa TELEFONENS TILLSTÅND för att fungera ordentligt</string>
+  <string name="contributions_of_user">Bidrag av användare: %s</string>
+  <string name="achievements_of_user">Prestationer av användare: %s</string>
+  <string name="menu_view_user_page">Visa användarsida</string>
 </resources>

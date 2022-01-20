@@ -2,6 +2,8 @@ package fr.free.nrw.commons.upload
 
 import android.content.Context
 import android.content.Intent
+import androidx.work.Configuration
+import androidx.work.testing.WorkManagerTestInitHelper
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
@@ -12,6 +14,7 @@ import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment
 import org.junit.Assert
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -61,6 +64,9 @@ class UploadActivityUnitTests {
         Whitebox.setInternalState(activity, "fragments", mutableListOf(uploadBaseFragment))
         Whitebox.setInternalState(activity, "presenter", presenter)
         Whitebox.setInternalState(activity, "contributionController", contributionController)
+
+        val config: Configuration = Configuration.Builder().build()
+        WorkManagerTestInitHelper.initializeTestWorkManager(context, config)
     }
 
     @Test

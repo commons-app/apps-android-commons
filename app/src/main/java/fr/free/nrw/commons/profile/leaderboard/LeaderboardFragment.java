@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.MergeAdapter;
@@ -27,6 +28,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -103,6 +105,16 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      * This variable represents if user wants to scroll to his rank or not
      */
     private boolean scrollToRank;
+
+    private String userName;
+
+    @Override
+    public void onCreate(@Nullable final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            userName = getArguments().getString(ProfileActivity.KEY_USERNAME);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -220,7 +232,7 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
         if (checkAccount()) {
             try {
                 compositeDisposable.add(okHttpJsonApiClient
-                    .getLeaderboard(Objects.requireNonNull(sessionManager.getCurrentAccount()).name,
+                    .getLeaderboard(Objects.requireNonNull(userName),
                         duration, category, null, null)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

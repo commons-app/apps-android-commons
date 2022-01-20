@@ -2,6 +2,7 @@
 <!-- Authors:
 * Bluetpp
 * Harriettruong3
+* Keo010122
 * Leducthn
 * Leduyquang753
 * Minh Nguyen
@@ -50,6 +51,7 @@
   <string name="signup">Mở tài khoản</string>
   <string name="logging_in_title">Đang đăng nhập</string>
   <string name="logging_in_message">Vui lòng chờ…</string>
+  <string name="updating_caption_message">Vui lòng chờ…</string>
   <string name="login_success">Đã đăng nhập thành công!</string>
   <string name="login_failed">Đăng nhập thất bại!</string>
   <string name="upload_failed">Không tìm thấy tập tin. Xin vui lòng thử tập tin khác.</string>
@@ -246,7 +248,9 @@
   <string name="category_edit_helper_show_edit_title_success">Thành công</string>
   <string name="category_edit_helper_edit_message_else">Không thể thêm danh mục.</string>
   <string name="category_edit_button_text">Cập nhật danh mục</string>
+  <string name="description_edit_helper_edit_message_else">Không thể thêm mô tả.</string>
   <string name="todo_improve">Các cải thiện được đề xuất:</string>
   <string name="missing_category">- Thêm danh mục vào hình ảnh này để cải thiện khả năng sử dụng.</string>
   <string name="missing_article">- Thêm hình ảnh này vào bài viết Wikipedia được liên kết không có hình ảnh.</string>
+  <string name="bookmarks">Dấu trang</string>
 </resources>

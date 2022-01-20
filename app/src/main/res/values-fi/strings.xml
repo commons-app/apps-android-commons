@@ -18,6 +18,7 @@
 * Silvonen
 * Stryn
 * Surjection
+* Veikk0.ma
 -->
 <resources>
   <plurals name="uploads_pending_notification_indicator">
@@ -62,17 +63,21 @@
   <string name="signup">Rekisteröidy</string>
   <string name="logging_in_title">Kirjaudutaan</string>
   <string name="logging_in_message">Odota…</string>
+  <string name="updating_caption_title">Päivitetään kuvatekstejä ja kuvauksia</string>
+  <string name="updating_caption_message">Odota...</string>
   <string name="login_success">Kirjautuminen onnistui!</string>
   <string name="login_failed">Kirjautuminen epäonnistui!</string>
   <string name="upload_failed">Tiedostoa ei löytynyt. Yritä toista tiedostoa.</string>
   <string name="authentication_failed">Tunnistautuminen epäonnistui, kirjaudu uudelleen sisään</string>
   <string name="uploading_started">Tallentaminen aloitettiin!</string>
+  <string name="uploading_queued">Lataus jonossa (rajoitettu yhteystila käytössä)</string>
   <string name="upload_completed_notification_title">%1$s tallennettiin!</string>
   <string name="upload_completed_notification_text">Napauta katsoaksesi tallennusta</string>
   <string name="upload_progress_notification_title_start">Kopioidaan palvelimelle: %s</string>
   <string name="upload_progress_notification_title_in_progress">Tallennetaan %1$s</string>
   <string name="upload_progress_notification_title_finishing">%1$s tallennettu</string>
   <string name="upload_failed_notification_title">Tiedoston %1$s tallentaminen epäonnistui</string>
+  <string name="upload_paused_notification_title">Tiedoston %1$s tallentaminen pysäytetty</string>
   <string name="upload_failed_notification_subtitle">Napauta katsoaksesi</string>
   <string name="upload_paused_notification_subtitle">Paina nähdäksesi</string>
   <string name="title_activity_contributions">Viimeaikaiset tallennukseni</string>
@@ -237,6 +242,7 @@
   <string name="upload_problem_fbmd">Tallenna vain kuvia, jotka olet itse ottanut. Älä tallenna kuvia, joita olet löytänyt muiden ihmisten Facebook-tileiltä.</string>
   <string name="upload_problem_do_you_continue">Haluatko silti tallentaa tämän kuvan?</string>
   <string name="upload_connection_error_alert_title">Yhteysvirhe</string>
+  <string name="upload_connection_error_alert_detail">Tallennusprosessi vaatii aktiivisen internet-yhteyden. Tarkista verkkoyhteytesi tila.</string>
   <string name="upload_problem_image">Kuvasta löytyi ongelmia</string>
   <string name="internet_downloaded">Tallenna vain kuvia, jotka olet itse ottanut. Älä tallenna kuvia, joita olet ladannut internetistä.</string>
   <string name="use_external_storage">Tallenna sovelluksen sisäisiä otoksia</string>
@@ -302,12 +308,14 @@
   <string name="wikidata_edit_failure">Vastaavaa Wikidata-kohdetta ei voitu päivittää!</string>
   <string name="menu_set_wallpaper">Aseta taustakuvaksi</string>
   <string name="wallpaper_set_successfully">Taustakuva asetettu!</string>
-  <string name="quiz">Tietokilpailu</string>
+  <string name="quiz">Tietovisa</string>
   <string name="quiz_question_string">Onko tämä kuva OK tallennettavaksi?</string>
   <string name="question">Kysymys</string>
   <string name="result">Tulos</string>
   <string name="quiz_back_button">Jos jatkat poistettavien kuvien lataamista, tilisi todennäköisesti kielletään. Haluatko varmasti lopettaa tietokilpailun?</string>
+  <string name="quiz_alert_message">Yli %1$s tallentamistasi kuvista on poistettu. Mikäli jatkat poistamista vaativien kuvien lataamista, tilisi todennäköisesti estetään.\n\nHaluatko tutustua oppaaseen uudelleen ja tehdä sen jälkeen tietovisan oppiaksesi minkälaisia kuvia saa ja ei saa tallentaa?</string>
   <string name="selfie_answer">Selfieillä ei ole paljoa arvoa tietosanakirjassa. Älä tallenna kuvaa itsestäsi, ellei sinusta jo ole Wikipedia-artikkelia.</string>
+  <string name="taj_mahal_answer">Monumenteista ja maisemista otetut kuvat ovat hyväksyttäviä tallennettavaksi useimmissa maissa. Huomaa kuitenkin että ulkotiloihin sijoitetut väliaikaiset tilataideteokset ovat usein suojattu tekijänoikeudella ja niistä otettuja kuvia ei usein saa tallentaa.</string>
   <string name="screenshot_answer">Kuvakaappauksia sivustoista tulkitaan jäljennöksiksi ja ovat täten sivuston kopiosuojan piirissä. Kuvia voidaan käyttää asianmukaisella tekijältä saadulta luvalla. Ilman kyseistä lupaa, mitä tahansa heidän materiaalistaan tuottamaa tuotosta tulkitaan alkuperäisen tekijän näkökulmasta luvattomaksi kopioksi.</string>
   <string name="blurry_image_answer">Yksi Commonsin päämääristä on kerätä hyvänlaatuisia kuvia. Täten sumeita kuvia ei pitäisi lähettää. Ota aina hyviä kuvia hyvällä valaistuksella.</string>
   <string name="construction_event_answer">Kuvat, jotka esittävät teknologiaa tai kulttuuria ovat erittäin tervetulleita Commonsiin.</string>
@@ -321,6 +329,7 @@
   <string name="quiz_screenshot_question">Onko tämä kuvakaappaus OK tallennettavaksi?</string>
   <string name="share_app_title">Jaa sovellus</string>
   <string name="error_fetching_nearby_places">Virhe paikkoja haettaessa.</string>
+  <string name="error_fetching_nearby_monuments">Virhe läheisiä monumentteja haettaessa.</string>
   <string name="no_recent_searches">Ei viimeaikaisia hakuja</string>
   <string name="delete_recent_searches_dialog">Haluatko varmasti tyhjentää hakuhistoriasi?</string>
   <string name="delete_search_dialog">Haluatko poistaa tämän haun?</string>
@@ -383,6 +392,7 @@
   <string name="no_depictions_selected">Kuvauksia ei valittu</string>
   <string name="no_depictions_selected_warning_desc">Kuvat, joissa on kuvatekstejä, löytyvät helpommin ja todennäköisemmin niitä käytetään. Haluatko varmasti jatkaa valitsematta kuvatekstejä?</string>
   <string name="back_button_warning">Peruuta tallennus</string>
+  <string name="back_button_warning_desc">Takaisin-napin painaminen peruuttaa tämän tallennuksen ja poistaa tallentamasi tiedot</string>
   <string name="back_button_continue">Jatka tallennusta</string>
   <string name="upload_flow_all_images_in_set">(Kaikille sarjan kuville)</string>
   <string name="search_this_area">Hae tältä alueelta</string>
@@ -458,6 +468,7 @@
   <string name="share_via">Jaa sovellus...</string>
   <string name="image_info">Kuvan tiedot</string>
   <string name="no_categories_found">Luokkia ei löytynyt</string>
+  <string name="no_depiction_found">Kuvauksia ei löytynyt</string>
   <string name="upload_cancelled">Peruutettu tallennus</string>
   <string name="dialog_box_text_nomination">Miksi %1$s tulisi poistaa?</string>
   <string name="review_is_uploaded_by">%1$s oli lähettänyt: %2$s</string>
@@ -483,13 +494,23 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Ei voitu lisätä luokkia.</string>
   <string name="category_edit_button_text">Päivitetään luokkia</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Yritetään päivittää koordinaatit.</string>
   <string name="coordinates_edit_helper_show_edit_title">Koordinaattien päivitys</string>
+  <string name="description_edit_helper_show_edit_title">Kuvaus päivitetty</string>
+  <string name="caption_edit_helper_show_edit_title">Kuvateksti päivitetty</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Onnistui</string>
   <string name="coordinates_edit_helper_show_edit_message">Koordinaatit %1$s on lisätty.</string>
+  <string name="description_edit_helper_show_edit_message">Kuvaukset on lisätty.</string>
+  <string name="caption_edit_helper_show_edit_message">Kuvatekstit on lisätty.</string>
   <string name="coordinates_edit_helper_edit_message_else">Koordinaatteja ei voitu lisätä.</string>
+  <string name="description_edit_helper_edit_message_else">Kuvauksia ei voitu lisätä.</string>
+  <string name="caption_edit_helper_edit_message_else">Kuvatekstiä ei voitu lisätä.</string>
   <string name="coordinates_picking_unsuccessful">Koordinaattien haku epäonnistui.</string>
+  <string name="descriptions_picking_unsuccessful">Kuvauksia ei voitu hakea.</string>
+  <string name="description_activity_title">Muokkaa kuvauksia ja kuvatekstejä</string>
   <string name="share_image_via">Jaa kuva</string>
-  <string name="no_achievements_yet">Et ole vielä lahjoittanut mitään</string>
+  <string name="you_have_no_achievements_yet">Et ole vielä tehnyt muokkauksia</string>
+  <string name="no_achievements_yet">%s ei ole vielä tehnyt muokkauksia</string>
   <string name="account_created">Käyttäjätunnus luotu!</string>
   <string name="text_copy">Teksti kopioitu leikepöydälle</string>
   <string name="notification_mark_read">Ilmoitus merkitty luetuksi</string>
@@ -513,6 +534,7 @@
   <string name="theme_default_name">Käytä järjestelmän</string>
   <string name="theme_dark_name">Tumma</string>
   <string name="theme_light_name">Vaalea</string>
+  <string name="cannot_open_location_settings">Sijaintiasetusten avaaminen epäonnistui. Ota sijainti käyttöön manuaalisesti</string>
   <string name="ask_to_turn_location_on">Ota sijainti käyttöön?</string>
   <string name="load_more">Lataa lisää</string>
   <string name="nearby_no_results">Paikkoja ei löytynyt, yritä vaihtaa hakuehtojasi.</string>
@@ -523,6 +545,7 @@
   <string name="confirm">Vahvista</string>
   <string name="instructions_title">Ohjeet</string>
   <string name="wikipedia_instructions_step_1">1. Käytä seuraavaa wikitekstiä:</string>
+  <string name="wikipedia_instructions_step_2">2. Klikkaamalla \"Vahvista\" Wikipedia-artikkeli avautuu</string>
   <string name="wikipedia_instructions_step_4">4. Klikkaa Muokkaa-ikonia (se kynältä näyttävä) siitä osasta.</string>
   <string name="wikipedia_instructions_step_5">5. Liitä wikiteksti sopivaan paikkaan.</string>
   <string name="wikipedia_instructions_step_7">7. Julkaise artikkeli</string>
@@ -531,7 +554,7 @@
   <string name="resume">jatka</string>
   <string name="paused">Pysäytetty</string>
   <string name="more">Lisää</string>
-  <string name="favorites">Suosikit</string>
+  <string name="bookmarks">Kirjanmerkit</string>
   <string name="achievements_tab_title">Saavutukset</string>
   <string name="leaderboard_tab_title">Pistetaulukko</string>
   <string name="rank_prefix">Sija:</string>
@@ -559,11 +582,18 @@
   <string name="statistics_quality">Laatukuvat</string>
   <string name="resuming_upload">Jatketaan lähettämistä...</string>
   <string name="pausing_upload">Keskeytetään lähetys...</string>
+  <string name="limited_connection_is_on">Rajoitettu yhteystila on päällä.</string>
+  <string name="media_details_tooltip">Kirjoita lyhyt kuvateksti. Kerro miksi kuva on kiinnostava, tyypillinen tai harvinainen ja selitä asiayhteys, näkyy se kuvassa tai ei. Käytä mahdollisimman tarkkaa terminologiaa.</string>
+  <string name="depicts_tooltip">Etsi ja valitse kaikki tämän kuvan kuvaamat käsitteet. Ole mahdollisimman tarkka. Mikäli kuvattuna on monta kohdetta, valitse ne kaikki kohtuullisuuden rajoissa. Älä valitse yleisiä tunnisteita mikäli tarkempia on saatavilla.</string>
+  <string name="categories_tooltip">Valitse sopivat luokat. Toisin kuin kuvaukset, luokkien nimet ovat vain englanniksi.</string>
+  <string name="license_tooltip">Kuka tahansa saa käyttää ja muokata Commonsiin lataamiasi kuvia. Haluatko luovuttaa kuviesi kaikki oikeudet? Haluatko tulla nimetyksi kuvien tekijänä? Haluatko kuviesi muokattujen versioiden julkaistavan samalla lisenssillä?</string>
   <string name="depicts_step_title">Esittää</string>
   <string name="license_step_title">Median lisenssi</string>
   <string name="media_detail_step_title">Median tiedot</string>
   <string name="menu_view_category_page">Näytä luokkasivu</string>
+  <string name="menu_view_item_page">Näytä kohdesivu</string>
   <string name="app_ui_language">Sovelluksen käyttöliittymän kieli</string>
+  <string name="remove">Poistaa kuvatekstin ja kuvauksen</string>
   <string name="read_help_link">Lue lisää</string>
   <string name="media_detail_in_all_languages">Kaikilla kielillä</string>
   <string name="choose_a_location">Valitse sijainti</string>
@@ -572,10 +602,19 @@
   <string name="modify_location">Muokkaa sijaintia</string>
   <string name="image_location">Kuvan sijainti</string>
   <string name="check_whether_location_is_correct">Tarkista, onko sijainti oikea</string>
+  <string name="title_page_bookmarks_items">Kohteet</string>
   <string name="custom_selector_empty_text">Ei kuvia</string>
   <string name="done">Valmis</string>
   <string name="back">Takaisin</string>
   <string name="welcome_custom_selector_ok">Mahtava</string>
   <string name="custom_selector_already_uploaded_image_text">Tämä kuva on jo ladattu Commonsiin.</string>
   <string name="learn_more">LUE LISÄÄ</string>
+  <string name="need_permission">Tarvitaan käyttöoikeus</string>
+  <string name="contributions_of_user">Käyttäjän muokkaukset: %s</string>
+  <string name="achievements_of_user">Käyttäjän saavutukset: %s</string>
+  <string name="menu_view_user_page">Näytä käyttäjäsivu</string>
+  <string name="advanced_options">Lisäasetukset</string>
+  <string name="apply">Käytä</string>
+  <string name="reset">Nollaa</string>
+  <string name="location_message">Sijaintitiedot auttavat wikin muokkaajia löytämään kuvasi, mikä tekee siitä paljon hyödyllisemmän.\nViimeaikaisissa tallennuksissasi ei ole sijaintia.\nSuosittelemme, että otat sijainnin käyttöön kamerasovelluksesi asetuksista.\nKiitos latauksesta!</string>
 </resources>

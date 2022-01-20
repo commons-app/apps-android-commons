@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -16,19 +15,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
-import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
@@ -48,7 +45,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     @BindView(R.id.depicts_search_container)
     TextInputLayout depictsSearchContainer;
     @BindView(R.id.depicts_search)
-    TextInputEditText depictsSearch;
+    PasteSensitiveTextInputEditText depictsSearch;
     @BindView(R.id.depictsSearchInProgress)
     ProgressBar depictsSearchInProgress;
     @BindView(R.id.depicts_recycler_view)
@@ -82,12 +79,9 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         depictsTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
             callback.getTotalNumberOfSteps(), getString(R.string.depicts_step_title)));
         setDepictsSubTitle();
-        tooltip.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogUtil.showAlertDialog(getActivity(), getString(R.string.depicts_step_title), getString(R.string.depicts_tooltip), getString(android.R.string.ok), null, true);
-            }
-        });
+        tooltip.setOnClickListener(v -> DialogUtil
+            .showAlertDialog(getActivity(), getString(R.string.depicts_step_title),
+                getString(R.string.depicts_tooltip), getString(android.R.string.ok), null, true));
         presenter.onAttachView(this);
         initRecyclerView();
         addTextChangeListenerToSearchBox();

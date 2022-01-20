@@ -11,11 +11,11 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadBaseFragment
 import io.reactivex.disposables.Disposable
@@ -57,7 +57,7 @@ class UploadCategoriesFragmentUnitTests {
     private lateinit var tilContainerEtSearch: TextInputLayout
 
     @Mock
-    private lateinit var etSearch: TextInputEditText
+    private lateinit var etSearch: PasteSensitiveTextInputEditText
 
     @Mock
     private lateinit var rvCategories: RecyclerView
@@ -168,7 +168,6 @@ class UploadCategoriesFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSetCategoriesCaseNonNull() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.setCategories(listOf())
     }
 

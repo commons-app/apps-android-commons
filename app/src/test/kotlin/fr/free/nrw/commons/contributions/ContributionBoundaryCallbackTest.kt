@@ -49,7 +49,8 @@ class ContributionBoundaryCallbackTest {
         MockitoAnnotations.initMocks(this)
         scheduler = Schedulers.trampoline()
         contributionBoundaryCallback =
-            ContributionBoundaryCallback(repository, sessionManager, mediaClient, scheduler);
+            ContributionBoundaryCallback(repository, sessionManager, mediaClient, scheduler)
+        contributionBoundaryCallback.userName = "test"
     }
 
     @Test

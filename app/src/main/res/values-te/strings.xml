@@ -454,7 +454,7 @@
   <string name="category_edit_helper_edit_message_else">వర్గాలను చేర్చలేకపోయాం.</string>
   <string name="category_edit_button_text">వర్గాలను తాజాకరించు</string>
   <string name="share_image_via">బొమ్మను దీని ద్వారా పంచుకోండి</string>
-  <string name="no_achievements_yet">మీరు ఇంకా తోడ్పాటేమీ చెయ్యలేదు</string>
+  <string name="no_achievements_yet">%s  ఇంకా తోడ్పాటేమీ చెయ్యలేదు</string>
   <string name="account_created">ఖాతాను సృష్టించాం!</string>
   <string name="text_copy">పాఠ్యాన్ని క్లిప్‌బోర్డుకు కాపీ చేసాం</string>
   <string name="notification_mark_read">గమనింపును చదివినట్లుగా గుర్తించాం</string>
@@ -472,10 +472,10 @@
   <string name="instructions_title">సూచనలు</string>
   <string name="wikipedia_instructions_step_7">7. వ్యాసాన్ని ప్రచురించండి</string>
   <string name="more">మరిన్ని</string>
-  <string name="favorites">ఇష్టాంశాలు</string>
   <string name="leaderboard_column_user">వాడుకరి</string>
   <string name="statistics_quality">నాణ్యమైన బొమ్మలు</string>
   <string name="license_step_title">మాధ్యమ లైసెన్సు</string>
   <string name="media_detail_step_title">మాధ్యమ వివరాలు</string>
   <string name="read_help_link">ఇంకా చదవండి</string>
+  <string name="need_permission">అనుమతి కావాలి</string>
 </resources>

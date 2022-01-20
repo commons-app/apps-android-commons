@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Angpradesh
+-->
+<resources>
+  <string name="crash_dialog_title">कॉमन्स क्रैश होय गेलौ छै</string>
+  <string name="crash_dialog_text">हे ब ल, कुछ गलत होलो छै !</string>
+  <string name="crash_dialog_comment_prompt">हमरा बताबौ कि आपनै की करी रहलौ छेलियै, फेरू एकरा हमरा सथें ईमेल के माध्यम सँ साझा करौ। हम्में एकरा ठीक करै मँ मदद करबै!</string>
+  <string name="crash_dialog_ok_toast">धन्यवाद!</string>
+</resources>
