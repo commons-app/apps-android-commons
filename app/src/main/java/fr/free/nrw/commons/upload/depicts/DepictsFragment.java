@@ -92,20 +92,6 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         return inflater.inflate(R.layout.upload_depicts_fragment, container, false);
     }
 
-    private void handleBackEvent(View view) {
-        view.setFocusableInTouchMode(true);
-        view.requestFocus();
-        view.setOnKeyListener((view1, keycode, keyEvent) -> {
-            if (keycode == KeyEvent.KEYCODE_BACK) {
-                presenter.clearPreviousSelection();
-                updateDepicts();
-                goBackToPreviousScreen();
-                return true;
-            }
-            return false;
-        });
-    }
-
     @Override
     public void onViewCreated(@NonNull android.view.View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -114,10 +100,6 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         Bundle bundle = getArguments();
         if (bundle != null) {
             media = bundle.getParcelable("Existing_Depicts");
-        }
-
-        if(media != null) {
-            handleBackEvent(view);
         }
 
         init();
@@ -362,7 +344,31 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     @Override
     public void onResume() {
         super.onResume();
+
         if (media != null) {
+            depictsSearch.setOnKeyListener((v, keyCode, event) -> {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    depictsSearch.clearFocus();
+                    presenter.clearPreviousSelection();
+                    updateDepicts();
+                    goBackToPreviousScreen();
+                    return true;
+                }
+                return false;
+            });
+
+            Objects.requireNonNull(getView()).setFocusableInTouchMode(true);
+            getView().requestFocus();
+            getView().setOnKeyListener((v, keyCode, event) -> {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    presenter.clearPreviousSelection();
+                    updateDepicts();
+                    goBackToPreviousScreen();
+                    return true;
+                }
+                return false;
+            });
+
             Objects.requireNonNull(
                 ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar())
                 .hide();
