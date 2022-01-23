@@ -67,13 +67,15 @@ class CategoriesPresenterTest {
             )
         whenever(repository.containsYear("selected")).thenReturn(false)
         whenever(repository.containsYear("doesContainYear")).thenReturn(true)
-        whenever(repository.selectedCategories).thenReturn(listOf(categoryItem("selected", true)))
+        whenever(repository.selectedCategories).thenReturn(listOf(
+            categoryItem("selected", "", "",true)))
         categoriesPresenter.searchForCategories("test")
         testScheduler.triggerActions()
         verify(view).showProgress(true)
         verify(view).showError(null)
         verify(view).setCategories(null)
-        verify(view).setCategories(listOf(categoryItem("selected", true)))
+        verify(view).setCategories(listOf(
+            categoryItem("selected", "", "", true)))
         verify(view).showProgress(false)
         verifyNoMoreInteractions(view)
     }

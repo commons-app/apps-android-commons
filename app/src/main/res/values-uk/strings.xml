@@ -8,6 +8,7 @@
 * Movses
 * Mykola Swarnyk
 * Piramidion
+* Renvoy
 * SimondR
 * Viiictorrr
 * Vlad5250
@@ -75,6 +76,8 @@
   <string name="signup">Зареєструватися</string>
   <string name="logging_in_title">Вхід до системи</string>
   <string name="logging_in_message">Будь ласка, зачекайте…</string>
+  <string name="updating_caption_title">Оновлення заголовків та описів</string>
+  <string name="updating_caption_message">Будь ласка, зачекайте…</string>
   <string name="login_success">Ви успішно увійшли!</string>
   <string name="login_failed">Не вдалося увійти</string>
   <string name="upload_failed">Файл не знайдено. Будь ласка, спробуйте інший файл.</string>
@@ -340,6 +343,7 @@
   <string name="quiz_screenshot_question">Чи можна завантажувати цей знімок?</string>
   <string name="share_app_title">Поширити програму</string>
   <string name="error_fetching_nearby_places">Помилка отримання місць поблизу.</string>
+  <string name="no_nearby_places_around">Не знайдено місць поблизу</string>
   <string name="error_fetching_nearby_monuments">Помилка отримання пам\'ятників поблизу.</string>
   <string name="no_recent_searches">Історія пошуку порожня</string>
   <string name="delete_recent_searches_dialog">Ви впевнені, що хочете стерти історію пошукових запитів?</string>
@@ -514,12 +518,21 @@
   <string name="category_edit_button_text">Оновити категорії</string>
   <string name="coordinates_edit_helper_make_edit_toast">Спроба оновити координати.</string>
   <string name="coordinates_edit_helper_show_edit_title">Оновлення координат</string>
+  <string name="description_edit_helper_show_edit_title">Оновити опис</string>
+  <string name="caption_edit_helper_show_edit_title">Оновити заголовок</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Успіх</string>
   <string name="coordinates_edit_helper_show_edit_message">Координати %1$s додані.</string>
+  <string name="description_edit_helper_show_edit_message">Описи додаються.</string>
+  <string name="caption_edit_helper_show_edit_message">Заголовок додається.</string>
   <string name="coordinates_edit_helper_edit_message_else">Не вдалося додати координати.</string>
+  <string name="description_edit_helper_edit_message_else">Не вдалося додати описи.</string>
+  <string name="caption_edit_helper_edit_message_else">Не вдалося додати заголовок.</string>
   <string name="coordinates_picking_unsuccessful">Не вдалося отримати координати.</string>
+  <string name="descriptions_picking_unsuccessful">Не вдається отримати описи.</string>
+  <string name="description_activity_title">Редагувати описи та заголовки</string>
   <string name="share_image_via">Поширити зображення через</string>
-  <string name="no_achievements_yet">Ви ще не зробили жодного внеску</string>
+  <string name="you_have_no_achievements_yet">Ви ще не зробили жодного внеску</string>
+  <string name="no_achievements_yet">%s ще не зробив жодного внеску</string>
   <string name="account_created">Обліковий запис створено!</string>
   <string name="text_copy">Текст скопійовано до буферу обміну</string>
   <string name="notification_mark_read">Сповіщення позначено прочитаним</string>
@@ -571,7 +584,7 @@
   <string name="resume">продовжити</string>
   <string name="paused">Призупинено</string>
   <string name="more">Більше</string>
-  <string name="favorites">Улюблені</string>
+  <string name="bookmarks">Закладки</string>
   <string name="achievements_tab_title">Досягнення</string>
   <string name="leaderboard_tab_title">Таблиця лідерів</string>
   <string name="rank_prefix">Ранг:</string>
@@ -626,6 +639,7 @@
   <string name="location_picker_image_view_shadow">Вигляд вибору розташування як тіні зображення</string>
   <string name="image_location">Підпис зображення</string>
   <string name="check_whether_location_is_correct">Перевірте правильність розташування</string>
+  <string name="title_page_bookmarks_items">Елементи</string>
   <string name="custom_selector_title">Користувацький селектор</string>
   <string name="custom_selector_empty_text">Без зображень</string>
   <string name="done">Готово</string>
@@ -640,4 +654,14 @@
   <string name="wlm_month_message">Цей місяць Wiki Loves Monuments!</string>
   <string name="learn_more">ДОСЛІДИТИ БІЛЬШЕ</string>
   <string name="wlm_campaign_description">Wiki Loves Monuments — це міжнародний фотоконкурс пам’яток, організований Вікімедією</string>
+  <string name="need_permission">Потрібен дозвіл</string>
+  <string name="read_phone_state_permission_message">Для належної роботи мапи поблизу мають відображати стан PHONE STATE</string>
+  <string name="contributions_of_user">Внесок користувача: %s</string>
+  <string name="achievements_of_user">Досягнення користувача: %s</string>
+  <string name="menu_view_user_page">Переглянути сторінку користувача</string>
+  <string name="advanced_options">Розширені параметри</string>
+  <string name="advanced_query_info_text">Ви можете налаштувати запит поблизу. Якщо ви отримуєте помилки, скиньте налаштування та застосуйте.</string>
+  <string name="apply">Застосувати</string>
+  <string name="reset">Скинути</string>
+  <string name="location_message">Дані про місцезнаходження допомагають редакторам Вікі знайти ваше зображення, що робить його набагато кориснішим.\nВаші останні завантаження не мають місцезнаходження.\nПропонуємо ввімкнути місцезнаходження в налаштуваннях програми камери.\nДякуємо за завантаження!</string>
 </resources>

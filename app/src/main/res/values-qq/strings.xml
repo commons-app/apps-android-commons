@@ -115,6 +115,7 @@
   <string name="menu_refresh">Label for menu item that refreshes current list of images.\n{{Identical|Refresh}}</string>
   <string name="ok">{{Identical|OK}}</string>
   <string name="warning">{{Identical|Warning}}</string>
+  <string name="upload">{{Identical|Upload}}</string>
   <string name="yes">{{Identical|Yes}}</string>
   <string name="no">{{Identical|No}}</string>
   <string name="media_detail_title">{{Identical|Title}}</string>
@@ -137,6 +138,7 @@
   <string name="navigation_item_home">{{Identical|Home}}</string>
   <string name="navigation_item_upload">{{Identical|Upload}}</string>
   <string name="navigation_item_nearby">{{Identical|Nearby}}</string>
+  <string name="navigation_item_about">{{Identical|About}}</string>
   <string name="navigation_item_info">{{Identical|Tutorial}}</string>
   <string name="navigation_item_notification">{{Identical|Notification}}</string>
   <string name="navigation_item_review">{{Identical|Review}}</string>
@@ -171,8 +173,8 @@
   <string name="exif_tag_name_location">{{Identical|Location}}</string>
   <string name="title_app_shortcut_bookmark">{{identical|Bookmark}}</string>
   <string name="more">{{Identical|More}}</string>
-  <string name="favorites">{{Identical|Favorite}}</string>
   <string name="map_attribution">&lt;code&gt;&amp;amp;#169;&lt;/code&gt;  is the copyright symbol (©).</string>
   <string name="location_picker_image_view_shadow">A description of a visual element, location picker image shadow. Used for accesibility usually.</string>
+  <string name="title_page_bookmarks_items">{{Identical|Item}}</string>
   <string name="done">{{identical|Done}}</string>
 </resources>

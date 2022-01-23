@@ -142,6 +142,10 @@ public class SearchActivity extends BaseActivity
                                 searchCategoryFragment.onQueryUpdated(query.toString());
                             }
 
+                            if (FragmentUtils.isFragmentUIActive(searchMapFragment)) {
+                                searchMapFragment.onQueryUpdated(query.toString());
+                            }
+
                         } else {
                             //Open RecentSearchesFragment
                             recentSearchesFragment.updateRecentSearches();

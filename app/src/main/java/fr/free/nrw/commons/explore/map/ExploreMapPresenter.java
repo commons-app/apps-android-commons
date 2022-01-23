@@ -4,8 +4,15 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.SEARCH_CUSTOM_AREA;
 
+import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import com.mapbox.mapboxsdk.annotations.Marker;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
+import fr.free.nrw.commons.explore.paging.FooterItem;
+import fr.free.nrw.commons.explore.paging.PagingContract;
+import fr.free.nrw.commons.explore.paging.PagingContract.View;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
@@ -18,7 +25,8 @@ import timber.log.Timber;
 
 public class ExploreMapPresenter
     implements ExploreMapContract.UserActions,
-    LocationUpdateListener {
+    LocationUpdateListener,
+    PagingContract.Presenter<Media>{
     BookmarkLocationsDao bookmarkLocationDao;
     private boolean isNearbyLocked;
     private boolean placesLoadedOnce;
@@ -46,7 +54,7 @@ public class ExploreMapPresenter
                 }
             }
         );
-    private ExploreMapContract.View nearbyParentFragmentView = DUMMY;
+    private ExploreMapContract.View exploreMapFragmentView = DUMMY;
 
     public ExploreMapPresenter(BookmarkLocationsDao bookmarkLocationDao){
         this.bookmarkLocationDao = bookmarkLocationDao;
@@ -70,18 +78,20 @@ public class ExploreMapPresenter
     @Override
     public void updateMap(LocationChangeType locationChangeType) {
         //TODO: write inside of all methods nesli
-        Timber.d("Presenter updates map and list");
+        Timber.d("Presenter updates map and list" + locationChangeType.toString());
         if (isNearbyLocked) {
             Timber.d("Nearby is locked, so updateMapAndList returns");
             return;
         }
 
-        if (!nearbyParentFragmentView.isNetworkConnectionEstablished()) {
+        if (!exploreMapFragmentView.isNetworkConnectionEstablished()) {
             //TODO nesli they are closed for now, open later Timber.d("Network connection is not established");
             //TODO nesli they are closed for now, open later and add alert for network return;
+            Timber.d("Network connection is not established");
+            return;
         }
 
-        LatLng lastLocation = nearbyParentFragmentView.getLastLocation();
+        LatLng lastLocation = exploreMapFragmentView.getLastLocation();
         curLatLng = lastLocation;
 
         if (curLatLng == null) {
@@ -97,18 +107,18 @@ public class ExploreMapPresenter
             || locationChangeType.equals(MAP_UPDATED)) {
             Timber.d("LOCATION_SIGNIFICANTLY_CHANGED");
             lockUnlockNearby(true);
-            nearbyParentFragmentView.setProgressBarVisibility(true);
-            nearbyParentFragmentView.populatePlaces(lastLocation);
+            exploreMapFragmentView.setProgressBarVisibility(true);
+            exploreMapFragmentView.populatePlaces(lastLocation);
 
         } else if (locationChangeType.equals(SEARCH_CUSTOM_AREA)) {
             Timber.d("SEARCH_CUSTOM_AREA");
             lockUnlockNearby(true);
-            nearbyParentFragmentView.setProgressBarVisibility(true);
-            nearbyParentFragmentView.populatePlaces(nearbyParentFragmentView.getCameraTarget());
+            exploreMapFragmentView.setProgressBarVisibility(true);
+            exploreMapFragmentView.populatePlaces(exploreMapFragmentView.getCameraTarget());
         } else { // Means location changed slightly, ie user is walking or driving.
             Timber.d("Means location changed slightly");
-            if (nearbyParentFragmentView.isCurrentLocationMarkerVisible()){ // Means user wants to see their live location
-                nearbyParentFragmentView.recenterMap(curLatLng);
+            if (exploreMapFragmentView.isCurrentLocationMarkerVisible()){ // Means user wants to see their live location
+                exploreMapFragmentView.recenterMap(curLatLng);
             }
         }
     }
@@ -122,20 +132,21 @@ public class ExploreMapPresenter
     public void lockUnlockNearby(boolean isNearbyLocked) {
         this.isNearbyLocked = isNearbyLocked;
         if (isNearbyLocked) {
-            nearbyParentFragmentView.disableFABRecenter();
+            exploreMapFragmentView.disableFABRecenter();
         } else {
-            nearbyParentFragmentView.enableFABRecenter();
+            exploreMapFragmentView.enableFABRecenter();
         }
     }
 
     @Override
     public void attachView(ExploreMapContract.View view) {
-
+        exploreMapFragmentView = view;
+        //TODO we have two attach detach method, give better namings
     }
 
     @Override
     public void detachView() {
-
+        exploreMapFragmentView = DUMMY;
     }
 
     @Override
@@ -169,8 +180,8 @@ public class ExploreMapPresenter
     }
 
     public void onMapReady() {
-        if(null != nearbyParentFragmentView) {
-            nearbyParentFragmentView.addSearchThisAreaButtonAction();
+        if(null != exploreMapFragmentView) {
+            exploreMapFragmentView.addSearchThisAreaButtonAction();
             initializeMapOperations();
         }
     }
@@ -178,7 +189,7 @@ public class ExploreMapPresenter
     public void initializeMapOperations() {
         lockUnlockNearby(false);
         updateMap(LOCATION_SIGNIFICANTLY_CHANGED);
-        nearbyParentFragmentView.addSearchThisAreaButtonAction();
+        exploreMapFragmentView.addSearchThisAreaButtonAction();
     }
 
     /**
@@ -188,19 +199,19 @@ public class ExploreMapPresenter
      */
     public void updateMapMarkers(
         NearbyController.NearbyPlacesInfo nearbyPlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
-        if(null!=nearbyParentFragmentView) {
+        if(null!= exploreMapFragmentView) {
             List<NearbyBaseMarker> nearbyBaseMarkers = NearbyController
                 .loadAttractionsFromLocationToBaseMarkerOptions(nearbyPlacesInfo.curLatLng, // Curlatlang will be used to calculate distances
                     nearbyPlacesInfo.placeList,
-                    nearbyParentFragmentView.getContext(),
+                    exploreMapFragmentView.getContext(),
                     bookmarkLocationDao.getAllBookmarksLocations());
-            nearbyParentFragmentView.updateMapMarkers(nearbyBaseMarkers, selectedMarker);
-            nearbyParentFragmentView.addCurrentLocationMarker(nearbyPlacesInfo.curLatLng);
+            exploreMapFragmentView.updateMapMarkers(nearbyBaseMarkers, selectedMarker);
+            exploreMapFragmentView.addCurrentLocationMarker(nearbyPlacesInfo.curLatLng);
             if(shouldTrackPosition){
-                nearbyParentFragmentView.updateMapToTrackPosition(nearbyPlacesInfo.curLatLng);
+                exploreMapFragmentView.updateMapToTrackPosition(nearbyPlacesInfo.curLatLng);
             }
             lockUnlockNearby(false); // So that new location updates wont come
-            nearbyParentFragmentView.setProgressBarVisibility(false);
+            exploreMapFragmentView.setProgressBarVisibility(false);
             handleCenteringTaskIfAny();
         }
     }
@@ -212,7 +223,33 @@ public class ExploreMapPresenter
     private void handleCenteringTaskIfAny() {
         if (!placesLoadedOnce) {
             placesLoadedOnce = true;
-            nearbyParentFragmentView.centerMapToPlace(null);
+            exploreMapFragmentView.centerMapToPlace(null);
         }
+    }
+
+    @Override
+    public void onAttachView(@NonNull View<Media> view) {
+
+    }
+
+    @Override
+    public void onDetachView() {
+
+    }
+
+    @NonNull
+    @Override
+    public LiveData<List<FooterItem>> getListFooterData() {
+        return null;
+    }
+
+    @Override
+    public void onQueryUpdated(@NonNull String query) {
+        Log.d("Nesli", "onQueryUpdated");
+    }
+
+    @Override
+    public void retryFailedRequest() {
+
     }
 }

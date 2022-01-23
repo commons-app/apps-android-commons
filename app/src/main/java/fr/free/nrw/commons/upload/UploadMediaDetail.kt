@@ -1,10 +1,13 @@
 package fr.free.nrw.commons.upload
 
+import android.os.Parcelable
 import fr.free.nrw.commons.nearby.Place
+import kotlinx.android.parcel.Parcelize
 
 /**
  * Holds a description of an item being uploaded by [UploadActivity]
  */
+@Parcelize
 data class UploadMediaDetail constructor(
     /**
      * @return The language code ie. "en" or "fr"
@@ -15,7 +18,7 @@ data class UploadMediaDetail constructor(
     var languageCode: String? = null,
     var descriptionText: String = "",
     var captionText: String = ""
-) {
+) : Parcelable {
     fun javaCopy() = copy()
 
     constructor(place: Place) : this(

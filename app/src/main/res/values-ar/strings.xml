@@ -93,6 +93,7 @@
   <string name="signup">أنشئ حسابا</string>
   <string name="logging_in_title">يجري الدخول</string>
   <string name="logging_in_message">الرجاء الانتظار…</string>
+  <string name="updating_caption_message">يرجى الانتظار...</string>
   <string name="login_success">تم الدخول بشكل صحيح!</string>
   <string name="login_failed">فشل تسجيل الدخول</string>
   <string name="upload_failed">الملف غير موجود. فضلا اختر ملفا آخر.</string>
@@ -509,7 +510,7 @@
   <string name="category_edit_button_text">تحديث التصنيفات</string>
   <string name="coordinates_edit_helper_show_edit_title_success">نجاح</string>
   <string name="share_image_via">مشاركة الصور عبر</string>
-  <string name="no_achievements_yet">أنت لم تقدم أية مساهمات حتى الآن</string>
+  <string name="no_achievements_yet" fuzzy="true">أنت لم تقدم أية مساهمات حتى الآن</string>
   <string name="account_created">تم إنشاء الحساب!</string>
   <string name="text_copy">تم نسخ النص  إلى الحافظة.</string>
   <string name="notification_mark_read">تم تعليم الإخطار كمقروء</string>

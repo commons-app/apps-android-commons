@@ -24,6 +24,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import org.powermock.api.mockito.PowerMockito
 import org.robolectric.Robolectric
@@ -241,6 +242,21 @@ class MainActivityUnitTests {
         )
         method.isAccessible = true
         method.invoke(activity, contributionsFragment, false)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testLoadFragmentCaseContributionsFragmentCaseTrue() {
+        activeFragment = ActiveFragment.CONTRIBUTIONS
+        activity.activeFragment = activeFragment
+        val method: Method = MainActivity::class.java.getDeclaredMethod(
+            "loadFragment",
+            Fragment::class.java,
+            Boolean::class.java
+        )
+        method.isAccessible = true
+        method.invoke(activity, contributionsFragment, false)
+        verify(contributionsFragment).scrollToTop();
     }
 
     @Test

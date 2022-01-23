@@ -51,6 +51,9 @@ class WikidataItemDetailsActivityUnitTests {
     private lateinit var depictedItem: DepictedItem
 
     @Mock
+    private lateinit var wikidataItem: DepictedItem
+
+    @Mock
     private lateinit var mediaContainer: FrameLayout
 
     @Mock
@@ -91,6 +94,9 @@ class WikidataItemDetailsActivityUnitTests {
 
         viewPager = parent.findViewById(R.id.viewPager)
         Whitebox.setInternalState(activity, "viewPager", viewPager)
+
+        Whitebox.setInternalState(activity, "wikidataItem", wikidataItem)
+
 
     }
 

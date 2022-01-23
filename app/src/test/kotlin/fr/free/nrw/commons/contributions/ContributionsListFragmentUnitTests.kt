@@ -24,6 +24,7 @@ import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
@@ -158,6 +159,14 @@ class ContributionsListFragmentUnitTests {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(adapter.getContributionForPosition(anyInt())).thenReturn(contribution)
         fragment.getContributionStateAt(0)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnScrollToTop() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.scrollToTop()
+        verify(rvContributionsList).smoothScrollToPosition(0)
     }
 
     @Test

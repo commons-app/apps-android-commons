@@ -29,6 +29,7 @@ import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.*
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
@@ -215,6 +216,14 @@ class ContributionsFragmentUnitTests {
         `when`(menuItem.actionView).thenReturn(notification)
         `when`(store.getBoolean(anyString(), anyBoolean())).thenReturn(true)
         fragment.updateLimitedConnectionToggle(menu)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testScrollToTop(){
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.scrollToTop()
+        verify(contributionsListFragment).scrollToTop()
     }
 
     @Test

@@ -507,7 +507,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Nu s-au putut adăuga coordonate.</string>
   <string name="coordinates_picking_unsuccessful">Nu se pot obține coordonatele.</string>
   <string name="share_image_via">Partajează imaginea prin</string>
-  <string name="no_achievements_yet">Încă nu ați făcut contribuții</string>
+  <string name="no_achievements_yet" fuzzy="true">Încă nu ați făcut contribuții</string>
   <string name="account_created">Cont creat!</string>
   <string name="text_copy">Text copiat în clipboard</string>
   <string name="notification_mark_read">Notificare marcată ca citită</string>
@@ -557,7 +557,6 @@
   <string name="resume">reia</string>
   <string name="paused">întrerupt</string>
   <string name="more">Mai mult</string>
-  <string name="favorites">Favorite</string>
   <string name="achievements_tab_title">Realizări</string>
   <string name="leaderboard_tab_title">Clasament</string>
   <string name="rank_prefix">Loc:</string>

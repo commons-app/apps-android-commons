@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.paging.PagedListAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -33,16 +35,21 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.maps.UiSettings;
 import com.mapbox.pluginscalebar.ScaleBarOptions;
 import com.mapbox.pluginscalebar.ScaleBarPlugin;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.explore.media.PageableMediaFragment;
+import fr.free.nrw.commons.explore.paging.BasePagingFragment;
+import fr.free.nrw.commons.explore.paging.PagingContract.Presenter;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
+import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.LocationUtils;
@@ -60,8 +67,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
 
-public class ExploreMapFragment extends CommonsDaggerSupportFragment
-    implements ExploreMapContract.View, LocationUpdateListener {
+public class ExploreMapFragment extends BasePagingFragment<Media>
+    implements ExploreMapContract.View, LocationUpdateListener, MediaDetailProvider {
 
     private BottomSheetBehavior bottomSheetDetailsBehavior;
     private BroadcastReceiver broadcastReceiver;
@@ -323,6 +330,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             .fromCallable(() -> exploreMapController
                 .loadAttractionsFromLocation(curlatLng, searchLatLng,
                     false, true, Utils.isMonumentsEnabled(new Date())));
+        // TODO: check loadAttractionsromLocation with query parameter
 
         compositeDisposable.add(nearbyPlacesInfoObservable
             .subscribeOn(Schedulers.io())
@@ -468,12 +476,12 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void updateMapToTrackPosition(LatLng curLatLng) {
-
+        Log.d("test","updateMapToTrackPosition");
     }
 
     @Override
     public void updateMapMarkers(List<NearbyBaseMarker> nearbyBaseMarkers, Marker selectedMarker) {
-
+        Log.d("test","updateMapMarkers");
     }
 
     @Override
@@ -513,6 +521,50 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     @Override
     public void enableFABRecenter() {
         fabRecenter.setEnabled(true);
+    }
+
+    @NonNull
+    @Override
+    public Presenter<Media> getInjectedPresenter() {
+        return presenter;
+    }
+
+    @NonNull
+    @Override
+    public PagedListAdapter<Media, ?> getPagedListAdapter() {
+        // TODO: nesli fill overridens
+        return null;
+    }
+
+    @Override
+    public int getErrorTextId() {
+        return 0;
+    }
+
+    @NonNull
+    @Override
+    public String getEmptyText(@NonNull String query) {
+        return null;
+    }
+
+    @Override
+    public Media getMediaAtPosition(int i) {
+        return null;
+    }
+
+    @Override
+    public int getTotalMediaCount() {
+        return 0;
+    }
+
+    @Override
+    public Integer getContributionStateAt(int position) {
+        return null;
+    }
+
+    @Override
+    public void refreshNominatedMedia(int index) {
+
     }
 
     public interface  ExploreFragmentInstanceReadyCallback{
@@ -556,4 +608,5 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             }
         };
     }
+
 }

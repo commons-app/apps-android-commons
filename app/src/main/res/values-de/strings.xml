@@ -20,6 +20,7 @@
 * Tobi 406
 * Ubahnverleih
 * Umherirrender
+* Umlaut
 * WikiBayer
 * Zauberzunge2000
 -->
@@ -70,6 +71,8 @@
   <string name="signup">Registrieren</string>
   <string name="logging_in_title">Anmelden</string>
   <string name="logging_in_message">Bitte warten …</string>
+  <string name="updating_caption_title">Überschriften und Beschreibungen aktualisieren</string>
+  <string name="updating_caption_message">Bitte warten …</string>
   <string name="login_success">Anmeldung erfolgreich!</string>
   <string name="login_failed">Anmeldung fehlgeschlagen!</string>
   <string name="upload_failed">Datei nicht gefunden. Bitte versuche es mit einer anderen Datei.</string>
@@ -335,6 +338,7 @@
   <string name="quiz_screenshot_question">Darf dieses Bildschirmfoto hochgeladen werden?</string>
   <string name="share_app_title">App teilen</string>
   <string name="error_fetching_nearby_places">Fehler beim Abrufen der Orte in der Nähe.</string>
+  <string name="no_nearby_places_around">Keine Orte in der Nähe gefunden</string>
   <string name="error_fetching_nearby_monuments">Fehler beim Abrufen von Denkmälern in der Nähe.</string>
   <string name="no_recent_searches">Keine letzten Suchanfragen</string>
   <string name="delete_recent_searches_dialog">Bist du sicher, dass du deinen Suchverlauf löschen möchtest?</string>
@@ -507,12 +511,21 @@
   <string name="category_edit_button_text">Kategorien aktualisieren</string>
   <string name="coordinates_edit_helper_make_edit_toast">Versuche, die Koordinaten zu aktualisieren.</string>
   <string name="coordinates_edit_helper_show_edit_title">Koordinaten aktualisieren</string>
+  <string name="description_edit_helper_show_edit_title">Beschreibung aktualieren</string>
+  <string name="caption_edit_helper_show_edit_title">Aktualisierung der Beschriftung</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Erfolgreich</string>
   <string name="coordinates_edit_helper_show_edit_message">Koordinaten %1$s werden hinzugefügt.</string>
+  <string name="description_edit_helper_show_edit_message">Beschreibungen werden hinzugefügt.</string>
+  <string name="caption_edit_helper_show_edit_message">Die Überschrift wurde hinzugefügt.</string>
   <string name="coordinates_edit_helper_edit_message_else">Koordinaten konnten nicht hinzugefügt werden.</string>
+  <string name="description_edit_helper_edit_message_else">Es konnten keine Beschreibungen hinzugefügt werden.</string>
+  <string name="caption_edit_helper_edit_message_else">Es konnte keine Überschrift hinzugefügt werden.</string>
   <string name="coordinates_picking_unsuccessful">Es können keine Koordinaten abgerufen werden.</string>
+  <string name="descriptions_picking_unsuccessful">Beschreibungen können nicht abgerufen werden</string>
+  <string name="description_activity_title">Beschreibungen und Überschriften bearbeiten</string>
   <string name="share_image_via">Bild teilen via</string>
-  <string name="no_achievements_yet">Du hast noch keine Beiträge geleistet</string>
+  <string name="you_have_no_achievements_yet">Du hast noch keine Beiträge verfasst.</string>
+  <string name="no_achievements_yet">%s hat noch keine Beiträge geleistet</string>
   <string name="account_created">Benutzerkonto erstellt!</string>
   <string name="text_copy">Text in die Zwischenablage kopiert</string>
   <string name="notification_mark_read">Benachrichtigung als gelesen markieren</string>
@@ -564,7 +577,7 @@
   <string name="resume">fortfahren</string>
   <string name="paused">Pausiert</string>
   <string name="more">Weitere</string>
-  <string name="favorites">Favoriten</string>
+  <string name="bookmarks">Lesezeichen</string>
   <string name="achievements_tab_title">Errungenschaften</string>
   <string name="leaderboard_tab_title">Bestenliste</string>
   <string name="rank_prefix">Rang:</string>
@@ -619,6 +632,7 @@
   <string name="location_picker_image_view_shadow">Der Schatten der Bildansicht der Ortsauswahl</string>
   <string name="image_location">Bildstandort</string>
   <string name="check_whether_location_is_correct">Überprüfe, ob der Standort korrekt ist</string>
+  <string name="title_page_bookmarks_items">Einträge</string>
   <string name="custom_selector_title">Benutzerdefinierte Auswahl</string>
   <string name="custom_selector_empty_text">Keine Bilder</string>
   <string name="done">Fertig</string>
@@ -633,4 +647,14 @@
   <string name="wlm_month_message">Es ist der Wiki Loves Monuments Monat!</string>
   <string name="learn_more">MEHR ERFAHREN</string>
   <string name="wlm_campaign_description">Wiki Loves Monuments ist ein internationaler Fotowettbewerb für Denkmäler, der von Wikimedia organisiert wird.</string>
+  <string name="need_permission">Erlaubnis erforderlich</string>
+  <string name="read_phone_state_permission_message">Karten in der Nähe müssen den Telefonstatus lesen können, um richtig zu funktionieren</string>
+  <string name="contributions_of_user">Beiträge von Benutzer: %s</string>
+  <string name="achievements_of_user">Leistungen von Benutzer: %s</string>
+  <string name="menu_view_user_page">Benutzerseite ansehen</string>
+  <string name="advanced_options">Erweiterte Optionen</string>
+  <string name="advanced_query_info_text">Du kannst die In-der-Nähe-Abfrage anpassen. Wenn du Fehler erhältst, setze zurück und versuche es erneut.</string>
+  <string name="apply">Anwenden</string>
+  <string name="reset">Zurücksetzen</string>
+  <string name="location_message">Standortdaten helfen den Wiki-Benutzern, dein Bild zu finden, was es viel nützlicher macht.\nDeine zuletzt hochgaldenen Fotos haben keinen Standort.\nWir empfehlen dir, den Standort in den Einstellungen deiner Kamera-App zu aktivieren.\nVielen Dank für das Hochladen!</string>
 </resources>

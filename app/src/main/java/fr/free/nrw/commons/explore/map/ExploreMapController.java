@@ -3,7 +3,11 @@ package fr.free.nrw.commons.explore.map;
 import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
+import fr.free.nrw.commons.nearby.Place;
+import java.util.List;
+import java.util.Locale;
 import javax.inject.Inject;
+import timber.log.Timber;
 
 public class ExploreMapController extends MapController {
     private static final int MAX_RESULTS = 1000;
@@ -23,6 +27,13 @@ public class ExploreMapController extends MapController {
     public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng,
         LatLng searchLatLng, boolean returnClosestResult,
         boolean checkingAroundCurrentLocation, boolean shouldQueryForMonuments) {
+
+        if (searchLatLng == null) {
+            Timber.d("Loading attractions nearby, but curLatLng is null");
+            return null;
+        }
+        List<Place> places = explorePlaces.radiusExpander(searchLatLng, Locale.getDefault().getLanguage(), returnClosestResult,
+                shouldQueryForMonuments, customQuery);
         return null;
     }
 }

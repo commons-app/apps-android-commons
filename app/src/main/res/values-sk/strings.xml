@@ -70,6 +70,8 @@
   <string name="signup">Zaregistrovať sa</string>
   <string name="logging_in_title">Prihlasovanie</string>
   <string name="logging_in_message">Čakajte prosím…</string>
+  <string name="updating_caption_title">Aktualizovanie tituliek a popisov</string>
+  <string name="updating_caption_message">Čakajte prosím…</string>
   <string name="login_success">Prihlásenie úspešné</string>
   <string name="login_failed">Prihlásenie zlyhalo!</string>
   <string name="upload_failed">Súbor nebol nájdený. Skúste, prosím, iný súbor.</string>
@@ -335,6 +337,7 @@
   <string name="quiz_screenshot_question">Je v poriadku nahrať túto snímku obrazovky?</string>
   <string name="share_app_title">Zdieľať aplikáciu</string>
   <string name="error_fetching_nearby_places">Nastala chyba pri hľadaní miest v okolí.</string>
+  <string name="no_nearby_places_around">V okolí sa nenašli žiadne miesta</string>
   <string name="error_fetching_nearby_monuments">Nastala chyba pri načítavaní miest v okolí.</string>
   <string name="no_recent_searches">Žiadne nedávne hľadania</string>
   <string name="delete_recent_searches_dialog">Naozaj chcete odstrániť históriu vášho vyhľadávania?</string>
@@ -509,12 +512,21 @@
   <string name="category_edit_button_text">Aktualizovať kategórie</string>
   <string name="coordinates_edit_helper_make_edit_toast">Pokus o aktualizáciu súradníc.</string>
   <string name="coordinates_edit_helper_show_edit_title">Aktualizácia súradníc</string>
+  <string name="description_edit_helper_show_edit_title">Aktualizácia popisu</string>
+  <string name="caption_edit_helper_show_edit_title">Aktualizácia tituliek</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Úspech</string>
   <string name="coordinates_edit_helper_show_edit_message">Súradnice %1$s sú pridané.</string>
+  <string name="description_edit_helper_show_edit_message">Popisy boli pridané.</string>
+  <string name="caption_edit_helper_show_edit_message">Titulky boli pridané.</string>
   <string name="coordinates_edit_helper_edit_message_else">Nepodarilo sa pridať súradnice.</string>
+  <string name="description_edit_helper_edit_message_else">Nepodarilo sa pridať popisy.</string>
+  <string name="caption_edit_helper_edit_message_else">Nepodarilo sa pridať titulky.</string>
   <string name="coordinates_picking_unsuccessful">Nepodarilo sa získať súradnice.</string>
+  <string name="descriptions_picking_unsuccessful">Nepodarilo sa získať popisy.</string>
+  <string name="description_activity_title">Upraviť popisy a titulky</string>
   <string name="share_image_via">Zdieľať obrázok cez</string>
-  <string name="no_achievements_yet">Nemáte zatiaľ žiadne príspevky</string>
+  <string name="you_have_no_achievements_yet">Nemáte zatiaľ žiadne príspevky</string>
+  <string name="no_achievements_yet">%s  zatiaľ nevytvoril/a žiadne príspevky</string>
   <string name="account_created">Účet bol vytvorený!</string>
   <string name="text_copy">Text bol skopírovaný do schránky.</string>
   <string name="notification_mark_read">Oznámenie označené ako prečítané</string>
@@ -566,7 +578,7 @@
   <string name="resume">pokračovať</string>
   <string name="paused">Pozastavené</string>
   <string name="more">Viac</string>
-  <string name="favorites">Obľúbené</string>
+  <string name="bookmarks">Záložky</string>
   <string name="achievements_tab_title">Úspechy</string>
   <string name="leaderboard_tab_title">Výsledková tabuľka</string>
   <string name="rank_prefix">Poradie:</string>
@@ -621,6 +633,7 @@
   <string name="location_picker_image_view_shadow">Tieň obrázka pre výber polohy</string>
   <string name="image_location">Poloha obrázka</string>
   <string name="check_whether_location_is_correct">Skontrolovať či je poloha správna</string>
+  <string name="title_page_bookmarks_items">Položky</string>
   <string name="custom_selector_title">Vlastný výber</string>
   <string name="custom_selector_empty_text">Žiadne obrázky</string>
   <string name="done">Hotovo</string>
@@ -630,9 +643,19 @@
   <string name="custom_selector_info_text2">Na rozdiel od obrázka v ľavo, obrázkov v pravo má logo Commons, ktoré indikuje, že už je nahraný. Podržte kurzor nad obrázkom pre náhľad.</string>
   <string name="welcome_custom_selector_ok">Úžasné</string>
   <string name="custom_selector_already_uploaded_image_text">Tento obrázok už bol do Commons nahraný.</string>
-  <string name="wlm_upload_info" fuzzy="true">Prispievate do kampane Wiki miluje monumenty. Súvisiace šablóny budú podľa toho pridané.</string>
+  <string name="wlm_upload_info">Tento obrázok bude zaradený do súťaže Wiki miluje monumenty 2021</string>
   <string name="display_monuments">Zobraziť monumenty</string>
   <string name="wlm_month_message">Je mesiac Wiki miluje monumenty!</string>
   <string name="learn_more">ZISTIŤ VIAC</string>
   <string name="wlm_campaign_description">Wkki miluje monumenty je medzinárodná súťaž fotografií monumentov organizovaná Wikemédiou</string>
+  <string name="need_permission">Potrebné povolenie</string>
+  <string name="read_phone_state_permission_message">Blízke mapy potrebujú mať prístup k polohe telefónu, aby správne fungovali</string>
+  <string name="contributions_of_user">Príspevky používateľa:  %s</string>
+  <string name="achievements_of_user">Úspechy používateľa: %s</string>
+  <string name="menu_view_user_page">Zobraziť stránku používateľa</string>
+  <string name="advanced_options">Rozšírené možnosti</string>
+  <string name="advanced_query_info_text">Blízke miesta si môžete upraviť podľa seba. Ak sa vyskytne chyba, vynulujte nastavenia.</string>
+  <string name="apply">Požiadať</string>
+  <string name="reset">Vynulovať</string>
+  <string name="location_message">Údaje o polohe pomáhajú editorom nájsť Váš obrázok a spraviť ho viac užitočným. \nVaše nedávne nahrávania nemajú polohu.\nOdporúčame Vám zapnúť zisťovanie polohy v nastaveniach Vašej kamery. \nĎakujeme!</string>
 </resources>
