@@ -644,6 +644,8 @@
   <string name="location_picker_image_view_shadow">הצל של תצוגת תמונה של בורר המיקום</string>
   <string name="image_location">מיקום תמונה</string>
   <string name="check_whether_location_is_correct">לבדוק האם המיקום נכון</string>
+  <string name="label">תווית</string>
+  <string name="description">תיאור</string>
   <string name="title_page_bookmarks_items">פריטים</string>
   <string name="custom_selector_title">בורר מותאם אישית</string>
   <string name="custom_selector_empty_text">אין תמונות</string>

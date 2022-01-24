@@ -24,6 +24,7 @@
 * Tranve
 * Vikarna
 * VulpesVulpes825
+* Willy1018
 * Wxyveronica
 * Yfdyh000
 * Zhang8569
@@ -630,6 +631,7 @@
   <string name="location_picker_image_view_shadow">地点拾取器的照片观测视野的阴影。</string>
   <string name="image_location">图像位置</string>
   <string name="check_whether_location_is_correct">检查位置是否正确</string>
+  <string name="label">标签</string>
   <string name="custom_selector_empty_text">无图片</string>
   <string name="done">完成</string>
   <string name="back">返回</string>
