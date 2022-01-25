@@ -248,8 +248,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     @Override
     public void returnToMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
         finish();
     }
 
