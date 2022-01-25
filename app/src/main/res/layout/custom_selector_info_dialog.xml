@@ -105,7 +105,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:srcCompat="@drawable/commons"
-                />
+                android:contentDescription="@string/icon" />
             </androidx.constraintlayout.widget.ConstraintLayout>
           </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>

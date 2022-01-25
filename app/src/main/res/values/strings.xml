@@ -29,6 +29,13 @@
     <item quantity="one">Receiving shared content. Processing the image might take some time depending on the size of the image and your device</item>
     <item quantity="other">Receiving shared content. Processing the images might take some time depending on the size of the images and your device</item>
   </plurals>
+
+  <!--accessibility UI description strings-->
+  <string name="icon">Icon</string>
+  <string name="bookmark_Button_Image">Bookmark Button</string>
+  <string name="nearby_Item_Image">Nearby Item</string>
+
+  <!--Other strings-->
   <string name="navigation_item_explore">Explore</string>
   <string name="preference_category_appearance">Appearance</string>
   <string name="preference_category_general">General</string>

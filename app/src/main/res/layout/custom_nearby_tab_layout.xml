@@ -21,5 +21,5 @@
         android:layout_marginStart="@dimen/standard_gap"
         android:layout_marginLeft="@dimen/standard_gap"
         app:srcCompat="@drawable/ic_info_outline_24dp"
-        />
+        android:contentDescription="@string/nearby_fragment" />
 </LinearLayout>

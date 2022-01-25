@@ -26,9 +26,9 @@
                 android:layout_height="wrap_content" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/listView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+              android:id="@+id/listView"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" />
 
         </RelativeLayout>
 
@@ -47,7 +47,8 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:srcCompat="@drawable/ic_notifications_off_black_24dp" />
+                app:srcCompat="@drawable/ic_notifications_off_black_24dp"
+                android:contentDescription="@string/no_notification" />
 
             <TextView
                 android:id="@+id/no_notification_text"

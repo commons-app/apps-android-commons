@@ -25,7 +25,8 @@
       android:layout_height="wrap_content"
       android:layout_weight="0"
       android:scaleType="fitCenter"
-      app:srcCompat="@drawable/ic_custom_map_marker" />
+      app:srcCompat="@drawable/ic_custom_map_marker"
+      android:contentDescription="@string/showcase_view_needs_photo" />
 
     <TextView
       android:layout_width="wrap_content"
@@ -44,7 +45,8 @@
     android:layout_height="wrap_content"
     android:layout_weight="0"
     android:scaleType="fitCenter"
-    app:srcCompat="@drawable/ic_custom_map_marker_green" />
+    app:srcCompat="@drawable/ic_custom_map_marker_green"
+    android:contentDescription="@string/showcase_view_has_photo" />
 
   <TextView
     android:layout_width="wrap_content"
@@ -63,7 +65,8 @@
       android:layout_height="wrap_content"
       android:layout_weight="0"
       android:scaleType="fitCenter"
-      app:srcCompat="@drawable/ic_custom_map_marker_grey" />
+      app:srcCompat="@drawable/ic_custom_map_marker_grey"
+      android:contentDescription="@string/showcase_view_no_longer_exists" />
 
     <TextView
       android:layout_width="wrap_content"
