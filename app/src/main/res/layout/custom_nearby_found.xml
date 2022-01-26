@@ -13,6 +13,6 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    android:contentDescription="@string/nearby_Item_Image" />
+    android:contentDescription="@string/nearby_item_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

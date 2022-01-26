@@ -32,8 +32,19 @@
 
   <!--accessibility UI description strings-->
   <string name="icon">Icon</string>
-  <string name="bookmark_Button_Image">Bookmark Button</string>
-  <string name="nearby_Item_Image">Nearby Item</string>
+  <string name="bookmark_button_image">Bookmark Button</string>
+  <string name="nearby_item_image">Nearby Item</string>
+  <string name="achievements_info">Achievements Info</string>
+  <string name="achievements_badge_image">Achievements Image</string>
+  <string name="images_nearby_info_icon">Images Nearby Icon</string>
+  <string name="images_featured_info_icon">Images Featured Icon</string>
+  <string name="quality_images_info_icon">Quality Images Icon</string>
+  <string name="fab_camera">Fab Camera</string>
+  <string name="fab_gallery">Fab Gallery</string>
+  <string name="fab_plus">Fab Plus</string>
+  <string name="fab_custom_gallery">Fab Custom Gallery</string>
+  <string name="statistics_thanks_info_icon">Thanks Info Icon</string>
+  <string name="fab_recenter">Fab Recenter</string>
 
   <!--Other strings-->
   <string name="navigation_item_explore">Explore</string>

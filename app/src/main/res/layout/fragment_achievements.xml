@@ -53,6 +53,7 @@
             android:layout_alignParentEnd="true"
             app:srcCompat="@drawable/ic_info_outline_24dp"
             android:tint="@color/black"
+            android:contentDescription="@string/achievements_info"
             android:layout_marginVertical="@dimen/activity_margin_vertical" />
 
           <androidx.constraintlayout.widget.ConstraintLayout
@@ -69,6 +70,7 @@
               app:layout_constraintLeft_toLeftOf="parent"
               app:layout_constraintRight_toRightOf="parent"
               app:layout_constraintTop_toTopOf="parent"
+              android:contentDescription="@string/achievements_badge_image"
               app:srcCompat="@drawable/badge" />
 
             <TextView
@@ -123,6 +125,7 @@
                 android:layout_toEndOf="@+id/images_upload_text_param"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
                 android:tint="@color/primaryDarkColor"
+                android:contentDescription="@string/images_uploaded"
                 android:layout_marginLeft="@dimen/activity_margin_horizontal"
                 android:layout_marginStart="@dimen/activity_margin_horizontal"/>
 
@@ -187,6 +190,7 @@
                 android:layout_toEndOf="@+id/images_reverted_text"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
                 android:tint="@color/primaryDarkColor"
+                android:contentDescription="@string/image_reverts"
                 android:layout_marginLeft="@dimen/activity_margin_horizontal"
                 android:layout_marginStart="@dimen/activity_margin_horizontal"/>
 
@@ -262,6 +266,7 @@
                 android:layout_toEndOf="@+id/images_used_by_wiki_text"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
                 android:tint="@color/primaryDarkColor"
+                android:contentDescription="@string/images_used_by_wiki"
                 android:layout_marginLeft="@dimen/activity_margin_horizontal"
                 android:layout_marginStart="@dimen/activity_margin_horizontal"/>
 
@@ -338,6 +343,7 @@
                 android:layout_height="@dimen/overflow_icon_dimen"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/statistics_wikidata_edits"
                 app:srcCompat="@drawable/ic_custom_map_marker" />
 
               <TextView
@@ -367,6 +373,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
+                android:contentDescription="@string/images_nearby_info_icon"
                 android:tint="@color/primaryDarkColor" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -417,6 +424,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/featured"
+                android:contentDescription="@string/statistics_featured"
                 android:scaleType="centerCrop" />
 
               <TextView
@@ -445,6 +453,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_gravity="top"
+                android:contentDescription="@string/images_featured_info_icon"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
                 android:tint="@color/primaryDarkColor" />
 
@@ -495,6 +504,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_quality_images_logo"
+                android:contentDescription="@string/statistics_quality"
                 android:scaleType="centerInside" />
 
               <TextView
@@ -523,6 +533,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_gravity="top"
+                android:contentDescription="@string/quality_images_info_icon"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
                 android:tint="@color/primaryDarkColor" />
 
@@ -574,6 +585,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_thanks"
+                android:contentDescription="@string/statistics_thanks"
                 android:scaleType="centerCrop" />
 
               <TextView
@@ -602,6 +614,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_gravity="top"
+                android:contentDescription="@string/statistics_thanks_info_icon"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
                 android:tint="@color/primaryDarkColor" />
 

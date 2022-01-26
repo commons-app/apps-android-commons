@@ -79,7 +79,7 @@
                 android:layout_gravity="center_horizontal"
                 app:srcCompat="@drawable/ic_round_star_border_24px"
                 android:tint="?attr/rowButtonColor"
-              android:contentDescription="@string/bookmark_Button_Image" />
+              android:contentDescription="@string/bookmark_button_image" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

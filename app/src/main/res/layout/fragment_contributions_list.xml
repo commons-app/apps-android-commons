@@ -73,7 +73,8 @@
             app:useCompatPadding="true"
             app:elevation="@dimen/tiny_margin"
             app:fabSize="mini"
-            app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
+            app:srcCompat="@drawable/ic_photo_camera_white_24dp"
+          android:contentDescription="@string/fab_camera" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_gallery"
@@ -85,7 +86,8 @@
             app:useCompatPadding="true"
             app:elevation="@dimen/tiny_margin"
             app:fabSize="mini"
-            app:srcCompat="@drawable/ic_photo_white_24dp" />
+            app:srcCompat="@drawable/ic_photo_white_24dp"
+            android:contentDescription="@string/fab_gallery" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_custom_gallery"
@@ -98,6 +100,7 @@
             app:elevation="@dimen/tiny_margin"
             app:fabSize="mini"
             app:srcCompat="@drawable/ic_custom_image_picker"
+            android:contentDescription="@string/fab_custom_gallery"
             android:background="@drawable/commons"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -109,6 +112,7 @@
             app:backgroundTint="@color/status_bar_blue"
             app:useCompatPadding="true"
             app:elevation="@dimen/tiny_margin"
+          android:contentDescription="@string/fab_plus"
             app:srcCompat="@drawable/ic_add_white_24dp" />
 
     </LinearLayout>
