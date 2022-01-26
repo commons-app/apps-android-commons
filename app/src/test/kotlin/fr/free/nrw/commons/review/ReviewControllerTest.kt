@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Looper
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
@@ -24,6 +25,7 @@ import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.wikipedia.AppAdapter
+import org.wikipedia.dataclient.mwapi.MwQueryPage
 import java.lang.reflect.Method
 import java.util.*
 
@@ -42,6 +44,9 @@ class ReviewControllerTest {
 
     @Mock
     private lateinit var reviewCallback: ReviewController.ReviewCallback
+
+    @Mock
+    private lateinit var firstRevision: MwQueryPage.Revision
 
     @Before
     @Throws(Exception::class)
@@ -104,6 +109,14 @@ class ReviewControllerTest {
 
     @Test
     fun testSendThanks() {
+        shadowOf(Looper.getMainLooper()).idle()
+        whenever(firstRevision.revisionId).thenReturn(1)
+        Whitebox.setInternalState(controller, "firstRevision", firstRevision)
+        controller.sendThanks(activity)
+    }
+
+    @Test
+    fun testSendThanksCaseNull() {
         shadowOf(Looper.getMainLooper()).idle()
         controller.sendThanks(activity)
     }
