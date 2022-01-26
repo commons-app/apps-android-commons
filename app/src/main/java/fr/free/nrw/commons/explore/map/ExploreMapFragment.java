@@ -35,6 +35,8 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.maps.UiSettings;
 import com.mapbox.pluginscalebar.ScaleBarOptions;
 import com.mapbox.pluginscalebar.ScaleBarPlugin;
+import fr.free.nrw.commons.MapController;
+import fr.free.nrw.commons.MapController.NearbyPlacesInfo;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -44,6 +46,7 @@ import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.media.PageableMediaFragment;
 import fr.free.nrw.commons.explore.paging.BasePagingFragment;
+import fr.free.nrw.commons.explore.paging.PagingContract;
 import fr.free.nrw.commons.explore.paging.PagingContract.Presenter;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
@@ -113,6 +116,7 @@ public class ExploreMapFragment extends BasePagingFragment<Media>
 
     private View view;
     private ExploreMapPresenter presenter;
+    private String customQuery;
 
 
     @NonNull
@@ -306,7 +310,7 @@ public class ExploreMapFragment extends BasePagingFragment<Media>
         final Observable<ExploreMapController.NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> exploreMapController
                 .loadAttractionsFromLocation(curlatLng, searchLatLng,
-                    false, true, Utils.isMonumentsEnabled(new Date())));
+                    false, true, Utils.isMonumentsEnabled(new Date()), customQuery));
 
         compositeDisposable.add(nearbyPlacesInfoObservable
             .subscribeOn(Schedulers.io())
@@ -329,7 +333,7 @@ public class ExploreMapFragment extends BasePagingFragment<Media>
         final Observable<ExploreMapController.NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> exploreMapController
                 .loadAttractionsFromLocation(curlatLng, searchLatLng,
-                    false, true, Utils.isMonumentsEnabled(new Date())));
+                    false, true, Utils.isMonumentsEnabled(new Date()), customQuery));
         // TODO: check loadAttractionsromLocation with query parameter
 
         compositeDisposable.add(nearbyPlacesInfoObservable
@@ -521,6 +525,11 @@ public class ExploreMapFragment extends BasePagingFragment<Media>
     @Override
     public void enableFABRecenter() {
         fabRecenter.setEnabled(true);
+    }
+
+    @Override
+    public void setCustomQuery(String customQuery) {
+        this.customQuery = customQuery;
     }
 
     @NonNull

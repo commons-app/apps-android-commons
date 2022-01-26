@@ -246,6 +246,7 @@ public class ExploreMapPresenter
     @Override
     public void onQueryUpdated(@NonNull String query) {
         Log.d("Nesli", "onQueryUpdated");
+        exploreMapFragmentView.setCustomQuery(query);
     }
 
     @Override
