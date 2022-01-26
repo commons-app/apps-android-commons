@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/dimen_20"
             android:layout_alignParentEnd="true"
+            android:contentDescription="@string/app_widget_heading"
             android:src="@drawable/ic_photo_camera_white_24dp" />
 
     </RelativeLayout>

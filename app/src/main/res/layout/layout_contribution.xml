@@ -78,7 +78,8 @@
           android:layout_height="wrap_content"
           android:padding="12dp"
           android:scaleType="centerInside"
-          app:srcCompat="@drawable/ic_baseline_person_14"/>
+          app:srcCompat="@drawable/ic_baseline_person_14"
+          android:contentDescription="@string/image_author" />
 
         <TextView
           android:id="@+id/authorView"
@@ -112,6 +113,7 @@
         android:layout_toStartOf="@id/cancelButton"
         android:background="@android:color/transparent"
         android:tag="@string/pause"
+        android:contentDescription="@string/pause"
         app:srcCompat="@drawable/pause_icon" />
 
       <ImageButton
@@ -124,7 +126,8 @@
         android:padding="@dimen/activity_margin_horizontal"
         android:src="@drawable/ic_cancel_white"
         android:tint="?attr/contributionsListTextSecondary"
-        android:text="@string/menu_cancel_upload" />
+        android:text="@string/menu_cancel_upload"
+        android:contentDescription="@string/cancel" />
 
       <ImageButton
         android:id="@+id/retryButton"
@@ -136,6 +139,7 @@
         android:padding="@dimen/activity_margin_horizontal"
         android:src="@drawable/ic_retry_white"
         android:tint="?attr/contributionsListTextSecondary"
+        android:contentDescription="@string/menu_retry_upload"
         android:text="@string/menu_retry_upload" />
 
       <ImageButton
@@ -149,7 +153,8 @@
         android:src="@drawable/ic_wikipedia"
         android:tint="?attr/contributionsListTextSecondary"
         android:text="@string/menu_cancel_upload"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:contentDescription="@string/menu_cancel_upload" />
 
     </RelativeLayout>
 

@@ -12,7 +12,8 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/standard_gap"
       android:tint="?attr/rowButtonColor"
-      app:srcCompat="@drawable/ic_round_star_border_24px" />
+      app:srcCompat="@drawable/ic_round_star_border_24px"
+      android:contentDescription="@string/bookmark_button_image" />
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/icon"
@@ -46,8 +47,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/standard_gap"
         android:layout_marginTop="@dimen/large_gap"
-
-        />
+        android:contentDescription="@string/toggle_arrow" />
 
     <TextView
         android:id="@+id/tvName"

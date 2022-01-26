@@ -49,7 +49,7 @@
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/ic_location_white_24dp"
             android:tint="?attr/card_item_color"
-          />
+            android:contentDescription="@string/icon" />
 
 
         <LinearLayout

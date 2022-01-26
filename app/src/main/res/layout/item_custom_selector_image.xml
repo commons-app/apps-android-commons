@@ -73,7 +73,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:srcCompat="@drawable/commons"
-        />
+        android:contentDescription="@string/overlay_icon" />
 
       <androidx.constraintlayout.widget.Group
         android:id="@+id/uploaded_group"

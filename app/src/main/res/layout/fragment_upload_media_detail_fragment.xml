@@ -50,7 +50,8 @@
                       android:id="@+id/tooltip"
                       android:layout_width="wrap_content"
                       android:layout_height="match_parent"
-                      android:src="@drawable/mapbox_info_icon_default"/>
+                      android:src="@drawable/mapbox_info_icon_default"
+                      android:contentDescription="@string/categories_tooltip" />
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatImageButton

@@ -25,5 +25,6 @@
     android:layout_gravity="end"
     android:visibility="gone"
     app:srcCompat="@drawable/ic_error_red_24dp"
-    tools:visibility="visible"/>
+    tools:visibility="visible"
+    android:contentDescription="@string/error_occurred" />
 </RelativeLayout>

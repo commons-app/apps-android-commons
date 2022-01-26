@@ -25,7 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             app:srcCompat="@drawable/ic_photo_camera_white_24dp"
-            android:tint="?attr/bookmarkButtonColor"/>
+            android:tint="?attr/bookmarkButtonColor"
+          android:contentDescription="@string/menu_from_camera" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,6 +53,7 @@
             android:layout_gravity="center_horizontal"
             app:srcCompat="@drawable/ic_photo_white_24dp"
             android:tint="?attr/bookmarkButtonColor"
+            android:contentDescription="@string/fab_gallery"
             android:duplicateParentState="true"/>
         <TextView
             android:layout_width="wrap_content"
@@ -81,6 +83,7 @@
             android:layout_gravity="center_horizontal"
             app:srcCompat="@drawable/ic_directions_black_24dp"
             android:tint="?attr/bookmarkButtonColor"
+            android:contentDescription="@string/nearby_directions"
             android:duplicateParentState="true"/>
         <TextView
             android:layout_width="wrap_content"
@@ -109,7 +112,8 @@
             android:layout_gravity="center_horizontal"
             app:srcCompat="@drawable/ic_overflow"
             android:tint="?attr/bookmarkButtonColor"
-            android:duplicateParentState="true"/>
+            android:duplicateParentState="true"
+          android:contentDescription="@string/more" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

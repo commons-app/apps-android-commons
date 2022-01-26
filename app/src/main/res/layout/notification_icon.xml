@@ -17,7 +17,8 @@
         android:layout_marginEnd="@dimen/activity_margin_horizontal"
         android:gravity="center"
         android:layout_marginRight="@dimen/activity_margin_horizontal"
-        app:srcCompat="?attr/notification_icon_drawable" />
+        app:srcCompat="?attr/notification_icon_drawable"
+        android:contentDescription="@string/image_info" />
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/notification_count_badge"

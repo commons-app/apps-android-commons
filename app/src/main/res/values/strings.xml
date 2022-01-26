@@ -45,6 +45,10 @@
   <string name="fab_custom_gallery">Fab Custom Gallery</string>
   <string name="statistics_thanks_info_icon">Thanks Info Icon</string>
   <string name="fab_recenter">Fab Recenter</string>
+  <string name="overlay_icon">Overlay Icon</string>
+  <string name="toggle_arrow">toggle Arrow</string>
+  <string name="image_author">Image Author</string>
+  <string name="place_icon">Place Icon</string>
 
   <!--Other strings-->
   <string name="navigation_item_explore">Explore</string>

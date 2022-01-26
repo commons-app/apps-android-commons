@@ -9,7 +9,8 @@
         android:layout_margin="@dimen/activity_margin_horizontal"
         android:layout_width="@dimen/dimen_140"
         android:layout_height="@dimen/dimen_200"
-        android:id="@+id/alert_image" />
+        android:id="@+id/alert_image"
+      android:contentDescription="@string/login_alert_message" />
 
     <TextView
         android:layout_width="wrap_content"
