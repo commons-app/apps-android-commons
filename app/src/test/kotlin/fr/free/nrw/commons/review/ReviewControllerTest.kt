@@ -22,12 +22,14 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
+import org.robolectric.annotation.LooperMode
 import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
+@LooperMode(LooperMode.Mode.PAUSED)
 class ReviewControllerTest {
 
     private lateinit var controller: ReviewController
