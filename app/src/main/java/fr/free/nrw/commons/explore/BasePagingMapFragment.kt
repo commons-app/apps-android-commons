@@ -20,7 +20,7 @@ import fr.free.nrw.commons.utils.ViewUtil
 import kotlinx.android.synthetic.main.fragment_search_paginated.*
 
 
-abstract class BasePagingFragment<T> : CommonsDaggerSupportFragment(),
+abstract class BasePagingMapFragment<T> : CommonsDaggerSupportFragment(),
     PagingContract.View<T> {
 
     abstract val pagedListAdapter: PagedListAdapter<T, *>
@@ -34,18 +34,18 @@ abstract class BasePagingFragment<T> : CommonsDaggerSupportFragment(),
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_search_paginated, container, false)
+    ) = inflater.inflate(R.layout.fragment_search_map_paginated, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        paginatedSearchResultsList.apply {
+        /*paginatedSearchResultsList.apply {
             layoutManager = GridLayoutManager(context, if (isPortrait) 1 else 2)
             adapter = mergeAdapter
-        }
-        injectedPresenter.listFooterData.observe(
+        }*/
+        /*injectedPresenter.listFooterData.observe(
             viewLifecycleOwner,
             Observer(loadingAdapter::submitList)
-        )
+        )*/
     }
 
     /**
@@ -53,9 +53,9 @@ abstract class BasePagingFragment<T> : CommonsDaggerSupportFragment(),
      */
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        paginatedSearchResultsList.apply {
+        /*paginatedSearchResultsList.apply {
             layoutManager = GridLayoutManager(context, if (isPortrait) 1 else 2)
-        }
+        }*/
     }
 
     override fun observePagingResults(searchResults: LiveData<PagedList<T>>) {

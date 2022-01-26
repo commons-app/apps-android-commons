@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.explore.map;
 
 import fr.free.nrw.commons.MapController;
+import fr.free.nrw.commons.MapController.NearbyPlacesInfo;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.nearby.Place;
 import java.util.List;
 import java.util.Locale;
@@ -23,17 +23,21 @@ public class ExploreMapController extends MapController {
         this.explorePlaces = explorePlaces;
     }
 
-    @Override
     public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng,
         LatLng searchLatLng, boolean returnClosestResult,
-        boolean checkingAroundCurrentLocation, boolean shouldQueryForMonuments) {
+        boolean checkingAroundCurrentLocation, boolean shouldQueryForMonuments, String customQuery) {
 
         if (searchLatLng == null) {
             Timber.d("Loading attractions nearby, but curLatLng is null");
             return null;
         }
-        List<Place> places = explorePlaces.radiusExpander(searchLatLng, Locale.getDefault().getLanguage(), returnClosestResult,
-                shouldQueryForMonuments, customQuery);
+        try {
+            List<Place> places = explorePlaces.radiusExpander(searchLatLng, Locale.getDefault().getLanguage(),
+                    shouldQueryForMonuments, customQuery);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
+
 }

@@ -30,6 +30,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
 
     private static final String FEATURED_IMAGES_CATEGORY = "Featured_pictures_on_Wikimedia_Commons";
     private static final String MOBILE_UPLOADS_CATEGORY = "Uploaded_with_Mobile/Android";
+    private static final String EXPLORE_MAP = "Map";
     private static final String MEDIA_DETAILS_FRAGMENT_TAG = "MediaDetailsFragment";
 
     @BindView(R.id.tab_layout)
@@ -39,7 +40,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     ViewPagerAdapter viewPagerAdapter;
     private ExploreListRootFragment featuredRootFragment;
     private ExploreListRootFragment mobileRootFragment;
-    private ExploreMapFragment mapRootFragment;
+    private ExploreMapRootFragment mapRootFragment;
     @Inject
     @Named("default_preferences")
     public JsonKvStore applicationKvStore;
@@ -88,9 +89,12 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         Bundle mobileArguments = new Bundle();
         mobileArguments.putString("categoryName", MOBILE_UPLOADS_CATEGORY);
 
+        Bundle mapArguments = new Bundle();
+        mapArguments.putString("categoryName", EXPLORE_MAP);
+
         featuredRootFragment = new ExploreListRootFragment(featuredArguments);
         mobileRootFragment = new ExploreListRootFragment(mobileArguments);
-        mapRootFragment = new ExploreMapFragment();
+        mapRootFragment = new ExploreMapRootFragment(mapArguments);
         fragmentList.add(featuredRootFragment);
         titleList.add(getString(R.string.explore_tab_title_featured).toUpperCase());
 

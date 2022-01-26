@@ -9,10 +9,11 @@ import fr.free.nrw.commons.category.CategoryImagesCallback
 import fr.free.nrw.commons.explore.media.PagedMediaAdapter
 import fr.free.nrw.commons.explore.media.SimpleDataObserver
 import fr.free.nrw.commons.explore.paging.BasePagingFragment
+import fr.free.nrw.commons.explore.paging.BasePagingMapFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import kotlinx.android.synthetic.main.fragment_search_paginated.*
 
-abstract class PageableExploreMapFragment : BasePagingFragment<Media>(),
+abstract class PageableExploreMapRootFragment : BasePagingMapFragment<Media>(),
     MediaDetailPagerFragment.MediaDetailProvider {
     override val pagedListAdapter by lazy {
         PagedMediaAdapter(categoryImagesCallback::onMediaClicked)

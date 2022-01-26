@@ -39,6 +39,7 @@ public class ExploreMapContract {
         void setProjectorLatLngBounds();
         void disableFABRecenter();
         void enableFABRecenter();
+        void setCustomQuery(String customQuery);
     }
 
     interface UserActions {

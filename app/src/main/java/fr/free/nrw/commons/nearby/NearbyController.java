@@ -142,7 +142,6 @@ public class NearbyController extends MapController {
      * @return NearbyPlacesInfo a variable holds Place list without distance information and
      * boundary coordinates of current Place List
      */
-    @Override
     public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng,
         final LatLng searchLatLng,
         final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,

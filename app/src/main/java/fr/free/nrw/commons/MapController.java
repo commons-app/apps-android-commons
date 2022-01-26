@@ -5,9 +5,6 @@ import fr.free.nrw.commons.nearby.Place;
 import java.util.List;
 
 public abstract class MapController {
-    public abstract NearbyPlacesInfo loadAttractionsFromLocation (final LatLng curLatLng, final LatLng searchLatLng,
-        final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
-        final boolean shouldQueryForMonuments) throws Exception;
 
     /**
      * We pass this variable as a group of placeList and boundaryCoordinates

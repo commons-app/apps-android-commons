@@ -16,8 +16,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.explore.ExploreFragment;
-import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
+import fr.free.nrw.commons.explore.map.ExploreMapFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.navtab.NavTab;
 
@@ -25,7 +24,7 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
     MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
 
     private MediaDetailPagerFragment mediaDetails;
-    private ExploreMapFragment listFragment;
+    private ExploreMapFragment mapFragment;
 
     @BindView(R.id.explore_container)
     FrameLayout container;
@@ -36,10 +35,10 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
 
     public ExploreMapRootFragment(Bundle bundle) {
         String title = bundle.getString("categoryName");
-        listFragment = new ExploreMapFragment();
+        mapFragment = new ExploreMapFragment();
         Bundle featuredArguments = new Bundle();
         featuredArguments.putString("categoryName", title);
-        listFragment.setArguments(featuredArguments);
+        mapFragment.setArguments(featuredArguments);
     }
 
     @Nullable
@@ -57,7 +56,7 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (savedInstanceState == null) {
-            setFragment(listFragment, mediaDetails);
+            setFragment(mapFragment, mediaDetails);
         }
     }
 
@@ -114,7 +113,7 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
         ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.GONE);
         mediaDetails = new MediaDetailPagerFragment(false, true);
         ((ExploreFragment) getParentFragment()).setScroll(false);
-        setFragment(mediaDetails, listFragment);
+        setFragment(mediaDetails, mapFragment);
         mediaDetails.showImage(position);
     }
 
@@ -127,8 +126,8 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
      */
     @Override
     public Media getMediaAtPosition(int i) {
-        if (listFragment != null) {
-            return listFragment.getMediaAtPosition(i);
+        if (mapFragment != null) {
+            return mapFragment.getMediaAtPosition(i);
         } else {
             return null;
         }
@@ -142,8 +141,8 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
      */
     @Override
     public int getTotalMediaCount() {
-        if (listFragment != null) {
-            return listFragment.getTotalMediaCount();
+        if (mapFragment != null) {
+            return mapFragment.getTotalMediaCount();
         } else {
             return 0;
         }
@@ -161,7 +160,7 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
      */
     @Override
     public void refreshNominatedMedia(int index) {
-        if (mediaDetails != null && !listFragment.isVisible()) {
+        if (mediaDetails != null && !mapFragment.isVisible()) {
             removeFragment(mediaDetails);
             onMediaClicked(index);
         }
@@ -194,7 +193,7 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
                 ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
                 removeFragment(mediaDetails);
                 ((ExploreFragment) getParentFragment()).setScroll(true);
-                setFragment(listFragment, mediaDetails);
+                setFragment(mapFragment, mediaDetails);
                 ((MainActivity) getActivity()).showTabs();
                 return true;
             }
