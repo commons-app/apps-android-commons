@@ -682,4 +682,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="apply">Apply</string>
   <string name="reset">Reset</string>
   <string name="location_message">Location data helps Wiki editors find your picture, making it much more useful.\nYour recent uploads have no location.\nWe suggest you turn on location in your camera app\'s settings.\nThank you for uploading!</string>
+  <string name="feedback_sharing_data_alert">Please remove from this email any information that you are not comfortable sharing publicly</string>
 </resources>

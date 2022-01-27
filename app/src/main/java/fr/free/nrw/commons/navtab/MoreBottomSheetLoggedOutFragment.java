@@ -11,13 +11,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -40,7 +40,8 @@ public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment 
     public View onCreateView(@NonNull final LayoutInflater inflater,
         @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        final View view = inflater.inflate(R.layout.fragment_more_bottom_sheet_logged_out, container, false);
+        final View view = inflater
+            .inflate(R.layout.fragment_more_bottom_sheet_logged_out, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -64,6 +65,20 @@ public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment 
 
     @OnClick(R.id.more_feedback)
     public void onFeedbackClicked() {
+        showAlertDialog();
+    }
+
+    private void showAlertDialog() {
+        new AlertDialog.Builder(getActivity())
+            .setMessage(R.string.feedback_sharing_data_alert)
+            .setCancelable(false)
+            .setPositiveButton(R.string.ok, (dialog, which) -> {
+                sendFeedback();
+            })
+            .show();
+    }
+
+    private void sendFeedback() {
         final String technicalInfo = commonsLogSender.getExtraInfo();
 
         final Intent feedbackIntent = new Intent(Intent.ACTION_SENDTO);
