@@ -496,6 +496,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    /**
+     * Starts the map without GPS
+     * By default it points to 51.50550,-0.07520 this coordinates
+     */
     private void startMapWithoutGPS() {
         mapView.onStart();
         final CameraPosition position;
