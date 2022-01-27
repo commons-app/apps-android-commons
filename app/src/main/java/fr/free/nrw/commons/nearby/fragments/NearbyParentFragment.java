@@ -485,10 +485,45 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         registerNetworkReceiver();
         if (isResumed() && ((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY) {
             if(!isPermissionDenied && !applicationKvStore.getBoolean("doNotAskForLocationPermission", false)){
-                startTheMap();
+                if (!locationManager.isGPSProviderEnabled()) {
+                    startMapWithoutGPS();
+                } else {
+                    startTheMap();
+                }
             }else{
                 startMapWithoutPermission();
             }
+        }
+    }
+
+    private void startMapWithoutGPS() {
+        mapView.onStart();
+        final CameraPosition position;
+        if (applicationKvStore.getString("LastLocation")!=null) {
+            final String[] locationLatLng
+                = applicationKvStore.getString("LastLocation").split(",");
+            lastKnownLocation
+                = new fr.free.nrw.commons.location.LatLng(Double.parseDouble(locationLatLng[0]),
+                Double.parseDouble(locationLatLng[1]), 1f);
+            position = new CameraPosition.Builder()
+                .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation))
+                .zoom(ZOOM_LEVEL)
+                .build();
+
+        } else {
+            lastKnownLocation = new fr.free.nrw.commons.location.LatLng(51.50550,
+                -0.07520,1f);
+            position = new CameraPosition.Builder()
+                .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation))
+                .zoom(ZOOM_OUT)
+                .build();
+        }
+
+        if(mapBox != null){
+            mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
+            addOnCameraMoveListener();
+            presenter.onMapReady();
+            removeCurrentLocationMarker();
         }
     }
 
@@ -1368,7 +1403,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     @Override
     public void addCurrentLocationMarker(final fr.free.nrw.commons.location.LatLng curLatLng) {
-        if (null != curLatLng && !isPermissionDenied) {
+        if (null != curLatLng && !isPermissionDenied && locationManager.isGPSProviderEnabled()) {
             ExecutorUtils.get().submit(() -> {
                 mapView.post(() -> removeCurrentLocationMarker());
                 Timber.d("Adds current location marker");
