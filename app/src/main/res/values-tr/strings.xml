@@ -659,4 +659,5 @@
   <string name="advanced_query_info_text">Yakınlardakiler sorgusunu özelleştirebilirsiniz. Hata alırsanız, sıfırlayın ve uygulayın.</string>
   <string name="apply">Uygula</string>
   <string name="reset">Sıfırla</string>
+  <string name="location_message">Konum verisi Viki editörlerine, daha kullanışlı hale getirerek, fotoğrafınızı bulmaya yardımcı olur.\nSon yüklemelerinizde konum yok.\nKamera uygulamanızın ayarlarından konum seçeneğini etkinleştirmenizi öneririz.\nYükleme için teşekkürler!</string>
 </resources>
