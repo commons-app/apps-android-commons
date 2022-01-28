@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.repository;
 
-import android.os.Build.VERSION_CODES;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
@@ -302,10 +300,30 @@ public class UploadRepository {
      * @param depictIDs IDs of Depiction
      * @return Flowable<List<DepictedItem>>
      */
-    @RequiresApi(api = VERSION_CODES.O)
     public Flowable<List<DepictedItem>> getDepictions(final List<String> depictIDs){
-        final String ids = String.join("|", depictIDs);
+        final String ids = joinIDs(depictIDs);
         return depictModel.getDepictions(ids).toFlowable();
+    }
+
+    /**
+     * Builds a string by joining all IDs divided by "|"
+     *
+     * @param depictIDs IDs of depiction ex. ["Q11023","Q1356"]
+     * @return string ex. "Q11023|Q1356"
+     */
+    private String joinIDs(final List<String> depictIDs) {
+        if (depictIDs != null && !depictIDs.isEmpty()) {
+            final StringBuilder buffer = new StringBuilder(depictIDs.get(0));
+
+            if (depictIDs.size() > 1) {
+                for (int i = 1; i < depictIDs.size(); i++) {
+                    buffer.append("|");
+                    buffer.append(depictIDs.get(i));
+                }
+            }
+            return buffer.toString();
+        }
+        return null;
     }
 
     /**

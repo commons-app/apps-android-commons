@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.upload.depicts
 
 import android.annotation.SuppressLint
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import fr.free.nrw.commons.Media
@@ -71,12 +69,10 @@ class DepictsPresenter @Inject constructor(
         )
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun searchResultsWithTerm(term: String): Flowable<Pair<List<DepictedItem>, String>> {
         return searchResults(term).map { Pair(it, term) }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun searchResults(querystring: String): Flowable<List<DepictedItem>> {
         var recentDepictedItemList: MutableList<DepictedItem> = ArrayList();
         //show recentDepictedItemList when queryString is empty
