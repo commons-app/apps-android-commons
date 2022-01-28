@@ -9,7 +9,6 @@ import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.WikidataDisambiguationItems
 import io.reactivex.Flowable
-import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
