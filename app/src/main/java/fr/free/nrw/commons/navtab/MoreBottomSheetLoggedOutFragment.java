@@ -40,8 +40,7 @@ public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment 
     public View onCreateView(@NonNull final LayoutInflater inflater,
         @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        final View view = inflater
-            .inflate(R.layout.fragment_more_bottom_sheet_logged_out, container, false);
+        final View view = inflater.inflate(R.layout.fragment_more_bottom_sheet_logged_out, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -68,6 +67,9 @@ public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment 
         showAlertDialog();
     }
 
+    /**
+     * This method shows the alert dialog when a user wants to send feedback about the app.
+     */
     private void showAlertDialog() {
         new AlertDialog.Builder(getActivity())
             .setMessage(R.string.feedback_sharing_data_alert)
@@ -78,6 +80,10 @@ public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment 
             .show();
     }
 
+    /**
+     * This method collects the feedback message and starts and activity with implicit intent
+     * to available email client.
+     */
     private void sendFeedback() {
         final String technicalInfo = commonsLogSender.getExtraInfo();
 
