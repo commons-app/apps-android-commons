@@ -2,25 +2,20 @@ package fr.free.nrw.commons.category
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
-import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.nearby.Label
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
-import org.robolectric.annotation.Config
 
-@RunWith(RobolectricTestRunner::class)
-@Config(sdk = [21], application = TestCommonsApplication::class)
 class CategoryEditSearchRecyclerViewAdapterUnitTest {
 
-    private lateinit var context: Context
     private lateinit var adapter: CategoryEditSearchRecyclerViewAdapter
+
+    @Mock
+    private lateinit var context: Context
 
     @Mock
     private lateinit var labels: ArrayList<Label>
@@ -37,7 +32,6 @@ class CategoryEditSearchRecyclerViewAdapterUnitTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.application.applicationContext
         adapter =
             CategoryEditSearchRecyclerViewAdapter(
                 context,
