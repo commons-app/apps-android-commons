@@ -446,4 +446,5 @@
   <string name="delete_helper_ask_reason_copyright_logo">Emblemo</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Ĉar ĝi estas</string>
   <string name="mapbox_telemetry">Mapbox Telemetry</string>
+  <string name="description">Priskribo</string>
 </resources>

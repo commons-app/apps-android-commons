@@ -651,6 +651,8 @@
   <string name="location_picker_image_view_shadow">\n    Тень изображения средства выбора местоположения</string>
   <string name="image_location">Расположение изображения</string>
   <string name="check_whether_location_is_correct">Проверьте правильность местоположения</string>
+  <string name="label">Метка</string>
+  <string name="description">Описание</string>
   <string name="title_page_bookmarks_items">Элементы</string>
   <string name="custom_selector_title">Пользовательский селектор</string>
   <string name="custom_selector_empty_text">Нет изображений</string>

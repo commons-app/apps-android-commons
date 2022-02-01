@@ -639,6 +639,8 @@
   <string name="location_picker_image_view_shadow">Вигляд вибору розташування як тіні зображення</string>
   <string name="image_location">Підпис зображення</string>
   <string name="check_whether_location_is_correct">Перевірте правильність розташування</string>
+  <string name="label">Мітка</string>
+  <string name="description">Опис</string>
   <string name="title_page_bookmarks_items">Елементи</string>
   <string name="custom_selector_title">Користувацький селектор</string>
   <string name="custom_selector_empty_text">Без зображень</string>
