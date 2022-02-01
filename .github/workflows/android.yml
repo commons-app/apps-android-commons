@@ -2,6 +2,10 @@ name: Android CI
 
 on: [push, pull_request]
 
+concurrency:
+  group: build-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-18.04
@@ -12,11 +16,7 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-        
-    - name: Cancel Previous Runs
-      uses: styfle/cancel-workflow-action@0.9.1
-      with:
-        access_token: ${{ github.token }}    
+ 
         
     - name: Build with Gradle
       run: ./gradlew -Pcoverage testBetaDebugUnitTestCoverage
