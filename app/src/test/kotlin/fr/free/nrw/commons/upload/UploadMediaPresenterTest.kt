@@ -45,6 +45,9 @@ class UploadMediaPresenterTest {
     private lateinit var uploadItem: UploadItem
 
     @Mock
+    private lateinit var imageCoordinates: ImageCoordinates
+
+    @Mock
     private lateinit var uploadMediaDetails: List<UploadMediaDetail>
 
     private lateinit var testObservableUploadItem: Observable<UploadItem>
@@ -101,10 +104,14 @@ class UploadMediaPresenterTest {
         whenever(repository.getImageQuality(uploadItem))
             .thenReturn(testSingleImageResult)
         whenever(uploadItem.imageQuality).thenReturn(0)
+        whenever(uploadItem.gpsCoords)
+            .thenReturn(imageCoordinates)
+        whenever(uploadItem.gpsCoords.decimalCoords)
+            .thenReturn("imageCoordinates")
         uploadMediaPresenter.verifyImageQuality(0)
-//        verify(view).showProgress(true)
+        verify(view).showProgress(true)
         testScheduler.triggerActions()
-//        verify(view).showProgress(false)
+        verify(view).showProgress(false)
     }
 
     /**

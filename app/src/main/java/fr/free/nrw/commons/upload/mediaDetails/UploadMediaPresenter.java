@@ -170,7 +170,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     public void verifyImageQuality(int uploadItemIndex) {
       final UploadItem uploadItem = repository.getUploads().get(uploadItemIndex);
 
-      if (uploadItem.getGpsCoords() == null) {
+      if (uploadItem.getGpsCoords().getDecimalCoords() == null) {
           final Runnable onSkipClicked = () -> {
               view.showProgress(true);
               compositeDisposable.add(
