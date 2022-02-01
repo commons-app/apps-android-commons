@@ -20,9 +20,11 @@ public interface CategoryInterface {
      * @return
      */
     @GET("w/api.php?action=query&format=json&formatversion=2"
-            + "&generator=search&gsrnamespace=14")
+            + "&generator=search&prop=description|pageimages&piprop=thumbnail&pithumbsize=70"
+            + "&gsrnamespace=14")
     Single<MwQueryResponse> searchCategories(@Query("gsrsearch") String filter,
-                                                 @Query("gsrlimit") int itemLimit, @Query("gsroffset") int offset);
+                                                 @Query("gsrlimit") int itemLimit,
+                                                 @Query("gsroffset") int offset);
 
     /**
      * Searches for categories starting with the specified prefix.
@@ -32,9 +34,11 @@ public interface CategoryInterface {
      * @return
      */
     @GET("w/api.php?action=query&format=json&formatversion=2"
-            + "&generator=allcategories&prop=categoryinfo")
+            + "&generator=allcategories&prop=categoryinfo|description|pageimages&piprop=thumbnail"
+            + "&pithumbsize=70")
     Single<MwQueryResponse> searchCategoriesForPrefix(@Query("gacprefix") String prefix,
-                                                          @Query("gaclimit") int itemLimit, @Query("gacoffset") int offset);
+                                                          @Query("gaclimit") int itemLimit,
+                                                          @Query("gacoffset") int offset);
 
     @GET("w/api.php?action=query&format=json&formatversion=2"
             + "&generator=categorymembers&gcmtype=subcat"

@@ -652,6 +652,8 @@ Upload your first media by tapping on the add button.</string>
     The shadow of the image view of the location picker</string>
   <string name="image_location">Image Location</string>
   <string name="check_whether_location_is_correct">Check whether location is correct</string>
+  <string name="label">Label</string>
+  <string name="description">Description</string>
   <string name="title_page_bookmarks_items">Items</string>
   <string name="custom_selector_title">Custom Selector</string>
   <string name="custom_selector_empty_text">No Images</string>
@@ -683,4 +685,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="no_location_found_title">No location found</string>
   <string name="no_location_found_message">How about adding the place where this image was taken?\nLocation data helps Wiki editors find your picture, making it much more useful.\nThank you!</string>
   <string name="add_location">Add location</string>
+  <string name="feedback_sharing_data_alert">Please remove from this email any information that you are not comfortable sharing publicly. Also, please be aware that your email address with which you are posting, and the associated name and profile picture, will be visible publicly.</string>
 </resources>

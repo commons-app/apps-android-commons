@@ -34,10 +34,10 @@ class CategoryClientTest {
             .thenReturn(Single.just(mockResponse))
         categoryClient.searchCategories("tes", 10)
             .test()
-            .assertValues(listOf("Test"))
+            .assertValues(listOf(CategoryItem("Test", "", "", false)))
         categoryClient.searchCategories("tes", 10, 10)
             .test()
-            .assertValues(listOf("Test"))
+            .assertValues(listOf(CategoryItem("Test", "", "", false)))
     }
 
     @Test
@@ -59,10 +59,10 @@ class CategoryClientTest {
             .thenReturn(Single.just(mockResponse))
         categoryClient.searchCategoriesForPrefix("tes", 10)
             .test()
-            .assertValues(listOf("Test"))
+            .assertValues(listOf(CategoryItem("Test", "", "", false)))
         categoryClient.searchCategoriesForPrefix("tes", 10, 10)
             .test()
-            .assertValues(listOf("Test"))
+            .assertValues(listOf(CategoryItem("Test", "", "", false)))
     }
 
     @Test
@@ -84,7 +84,7 @@ class CategoryClientTest {
             .thenReturn(Single.just(mockResponse))
         categoryClient.getParentCategoryList("tes")
             .test()
-            .assertValues(listOf("Test"))
+            .assertValues(listOf(CategoryItem("Test", "", "", false)))
     }
 
     @Test
@@ -104,7 +104,7 @@ class CategoryClientTest {
             .thenReturn(Single.just(mockResponse))
         categoryClient.getSubCategoryList("tes")
             .test()
-            .assertValues(listOf("Test"))
+            .assertValues(listOf(CategoryItem("Test", "", "", false)))
     }
 
     @Test

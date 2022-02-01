@@ -16,7 +16,7 @@ fun depictedItem(
     description: String = "desc",
     imageUrl: String = "",
     instanceOfs: List<String> = listOf(),
-    commonsCategories: List<String> = listOf(),
+    commonsCategories: List<CategoryItem> = listOf(),
     isSelected: Boolean = false,
     id: String = "entityId"
 ) = DepictedItem(
@@ -29,8 +29,9 @@ fun depictedItem(
     id = id
 )
 
-fun categoryItem(name: String = "name", selected: Boolean = false) =
-    CategoryItem(name, selected)
+fun categoryItem(name: String = "name", description: String = "desc",
+                 thumbUrl: String = "thumbUrl", selected: Boolean = false) =
+    CategoryItem(name, description, thumbUrl, selected)
 
 fun media(
     thumbUrl: String? = "thumbUrl",

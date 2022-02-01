@@ -5,6 +5,7 @@
 * Bugoslav
 * MaGa
 * Neptune, the Mystic
+* Ponor
 -->
 <resources>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
@@ -68,7 +69,7 @@
   <string name="menu_share">Podijeli</string>
   <string name="share_title_hint" fuzzy="true">Naziv (obavezno)</string>
   <string name="share_description_hint">Opis</string>
-  <string name="login_failed_network">Prijava nije moguća - mrežna pogrješka</string>
+  <string name="login_failed_network">Prijava nije moguća – mrežna pogreška</string>
   <string name="login_failed_throttled">Previše neuspješnih pokušaja, molimo probajte opet za par minuta.</string>
   <string name="login_failed_blocked">Ispričavamo se, ovaj je suradnik blokiran na Zajedničkom poslužitelju</string>
   <string name="login_failed_2fa_needed">Morate upisati autetifikacijski kôd od dva faktora</string>
@@ -160,7 +161,7 @@
   <string name="media_detail_license">Licencija</string>
   <string name="media_detail_coordinates">Koordinate</string>
   <string name="media_detail_coordinates_empty">Ništa nije navedeno</string>
-  <string name="become_a_tester_title">Postani beta tester</string>
+  <string name="become_a_tester_title">Postani beta-tester</string>
   <string name="become_a_tester_description">Prijavite se na naš beta-kanal na Google Playu i dobijte raniji pristup novim mogućnostima i ispravkama pogrješaka</string>
   <string name="_2fa_code">Kôd za provjeru u 2 koraka</string>
   <string name="logout_verification">Zaista se želite odjaviti?</string>
@@ -209,7 +210,7 @@
   <string name="send_log_file">Pošalji zapisnik</string>
   <string name="send_log_file_description" fuzzy="true">Pošalji zapisnik elektroničkom poštom razvijateljima</string>
   <string name="no_web_browser">Preglednik nije pronađen</string>
-  <string name="null_url">Pogrješka! URL nije pronađen</string>
+  <string name="null_url">Pogreška! URL nije pronađen</string>
   <string name="nominate_deletion">Predloži za brisanje</string>
   <string name="nominated_for_deletion">Slika je predložena za brisanje</string>
   <string name="nominated_see_more">Pogledajte mrežnu stranicu za više informacija</string>
@@ -265,7 +266,7 @@
   <string name="wrong">Pogrešan odgovor</string>
   <string name="quiz_screenshot_question">Želite li postaviti ovu snimku zaslona?</string>
   <string name="share_app_title">Aplikacija za dijeljenje</string>
-  <string name="error_fetching_nearby_places">Pogrješka prilikom dohvaćanja mjesta u blizini.</string>
+  <string name="error_fetching_nearby_places">Pogreška prilikom dohvaćanja mjesta u blizini.</string>
   <string name="delete_search_dialog">Želite li izbrisati ovu pretragu?</string>
   <string name="nominate_delete">Predloži za brisanje</string>
   <string name="delete">Izbriši</string>

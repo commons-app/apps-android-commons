@@ -104,6 +104,27 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
 
     @OnClick(R.id.more_feedback)
     public void onFeedbackClicked() {
+        showAlertDialog();
+    }
+
+    /**
+     * This method shows the alert dialog when a user wants to send feedback about the app.
+     */
+    private void showAlertDialog() {
+        new AlertDialog.Builder(getActivity())
+            .setMessage(R.string.feedback_sharing_data_alert)
+            .setCancelable(false)
+            .setPositiveButton(R.string.ok, (dialog, which) -> {
+                sendFeedback();
+            })
+            .show();
+    }
+
+    /**
+     * This method collects the feedback message and starts the activity with implicit intent
+     * to available email client.
+     */
+    private void sendFeedback() {
         final String technicalInfo = commonsLogSender.getExtraInfo();
 
         final Intent feedbackIntent = new Intent(Intent.ACTION_SENDTO);

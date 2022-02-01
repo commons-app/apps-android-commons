@@ -625,6 +625,8 @@
   <string name="location_picker_image_view_shadow">位置點選器的圖片檢視陰影</string>
   <string name="image_location">圖片位置</string>
   <string name="check_whether_location_is_correct">檢查位置是否正確</string>
+  <string name="label">標籤</string>
+  <string name="description">描述</string>
   <string name="title_page_bookmarks_items">項目</string>
   <string name="custom_selector_title">自訂選擇器</string>
   <string name="custom_selector_empty_text">沒有圖片</string>

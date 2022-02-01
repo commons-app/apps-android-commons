@@ -24,6 +24,7 @@
 * Tranve
 * Vikarna
 * VulpesVulpes825
+* Willy1018
 * Wxyveronica
 * Yfdyh000
 * Zhang8569
@@ -84,6 +85,8 @@
   <string name="signup">注册</string>
   <string name="logging_in_title">正在登录</string>
   <string name="logging_in_message">请稍候……</string>
+  <string name="updating_caption_title">正在更新说明与描述</string>
+  <string name="updating_caption_message">请稍候……</string>
   <string name="login_success">登录成功！</string>
   <string name="login_failed">登录失败！</string>
   <string name="upload_failed">找不到文件。请尝试其他文件。</string>
@@ -138,6 +141,7 @@
   <string name="title_activity_settings">设置</string>
   <string name="title_activity_signup">注册</string>
   <string name="title_activity_featured_images">特色图片</string>
+  <string name="title_activity_custom_selector">自定义选择器</string>
   <string name="title_activity_category_details">分类</string>
   <string name="title_activity_review">同行评审</string>
   <string name="menu_about">关于</string>
@@ -348,6 +352,8 @@
   <string name="quiz_screenshot_question">这个屏幕截图可以上传吗？</string>
   <string name="share_app_title">分享应用</string>
   <string name="error_fetching_nearby_places">检索附近地点时出错。</string>
+  <string name="no_nearby_places_around">找不到附近地点</string>
+  <string name="error_fetching_nearby_monuments">检索附近古迹时出错。</string>
   <string name="no_recent_searches">还没有最近搜索</string>
   <string name="delete_recent_searches_dialog">您确认要清除您的搜索历史？</string>
   <string name="delete_search_dialog">你想删除本次检索吗？</string>
@@ -519,11 +525,20 @@
   <string name="category_edit_button_text">更新分类</string>
   <string name="coordinates_edit_helper_make_edit_toast">尝试更新坐标。</string>
   <string name="coordinates_edit_helper_show_edit_title">坐标更新</string>
+  <string name="description_edit_helper_show_edit_title">描述更新</string>
+  <string name="caption_edit_helper_show_edit_title">说明更新</string>
   <string name="coordinates_edit_helper_show_edit_title_success">完成</string>
   <string name="coordinates_edit_helper_show_edit_message">坐标 %1$s 已被添加。</string>
+  <string name="description_edit_helper_show_edit_message">描述已添加。</string>
+  <string name="caption_edit_helper_show_edit_message">说明已添加。</string>
   <string name="coordinates_edit_helper_edit_message_else">无法添加坐标。</string>
+  <string name="description_edit_helper_edit_message_else">无法添加描述。</string>
+  <string name="caption_edit_helper_edit_message_else">无法添加说明。</string>
   <string name="coordinates_picking_unsuccessful">无法获取坐标。</string>
+  <string name="descriptions_picking_unsuccessful">无法获取描述。</string>
+  <string name="description_activity_title">编辑描述和说明。</string>
   <string name="share_image_via">分享图片透过</string>
+  <string name="you_have_no_achievements_yet">您还没有做出任何贡献</string>
   <string name="no_achievements_yet">%s还没有作出任何贡献</string>
   <string name="account_created">账户已创建！</string>
   <string name="text_copy">文本已复制至剪贴板</string>
@@ -576,6 +591,7 @@
   <string name="resume">继续</string>
   <string name="paused">已暂停</string>
   <string name="more">更多</string>
+  <string name="bookmarks">书签</string>
   <string name="achievements_tab_title">成就</string>
   <string name="leaderboard_tab_title">排行榜</string>
   <string name="rank_prefix">排名：</string>
@@ -630,8 +646,31 @@
   <string name="location_picker_image_view_shadow">地点拾取器的照片观测视野的阴影。</string>
   <string name="image_location">图像位置</string>
   <string name="check_whether_location_is_correct">检查位置是否正确</string>
+  <string name="label">标签</string>
+  <string name="description">描述</string>
+  <string name="title_page_bookmarks_items">项目</string>
+  <string name="custom_selector_title">自定义选择器</string>
   <string name="custom_selector_empty_text">无图片</string>
   <string name="done">完成</string>
   <string name="back">返回</string>
+  <string name="welcome_custom_picture_selector_text">欢迎来到自定义图片选择器</string>
+  <string name="custom_selector_info_text1">此拾取器显示已在维基共享资源上的各种不同图片。</string>
+  <string name="custom_selector_info_text2">右边的图片与左边的不同，它具有已上传至维基共享资源的标志。\n点击并长按来预览图像。</string>
+  <string name="welcome_custom_selector_ok">棒极了</string>
+  <string name="custom_selector_already_uploaded_image_text">此图像已上传至维基共享资源。</string>
+  <string name="wlm_upload_info">此图像将会进入2021年维基爱古迹竞赛</string>
+  <string name="display_monuments">显示古迹</string>
+  <string name="wlm_month_message">维基爱古迹的月份！</string>
   <string name="learn_more">了解更多</string>
+  <string name="wlm_campaign_description">维基爱古迹是由维基媒体举行的国际古迹摄影比赛</string>
+  <string name="need_permission">需要权限</string>
+  <string name="read_phone_state_permission_message">附近的地图需要读取手机状态以正常运作</string>
+  <string name="contributions_of_user">用户贡献：%s</string>
+  <string name="achievements_of_user">用户成就：%s</string>
+  <string name="menu_view_user_page">查看用户页面</string>
+  <string name="advanced_options">高级选项</string>
+  <string name="advanced_query_info_text">您可以自定义附近查询。如果发生错误，请重置并应用。</string>
+  <string name="apply">应用</string>
+  <string name="reset">重置</string>
+  <string name="location_message">位置数据能帮助 Wiki 编辑者来找到您的图片，让他更加有用。\n您近期上传的内容没有位置。\n我们建议您在相机应用程序设置里打开位置。\n感谢您的上传！</string>
 </resources>

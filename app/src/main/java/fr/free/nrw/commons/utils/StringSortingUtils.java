@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.utils;
 
+import fr.free.nrw.commons.category.CategoryItem;
 import java.util.Comparator;
 
 public class StringSortingUtils {
@@ -16,10 +17,10 @@ public class StringSortingUtils {
      * @param filter String to compare similarity with
      * @return Comparator with string similarity
      */
-    public static Comparator<String> sortBySimilarity(final String filter) {
+    public static Comparator<CategoryItem> sortBySimilarity(final String filter) {
         return (firstItem, secondItem) -> {
-            double firstItemSimilarity = calculateSimilarity(firstItem, filter);
-            double secondItemSimilarity = calculateSimilarity(secondItem, filter);
+            double firstItemSimilarity = calculateSimilarity(firstItem.getName(), filter);
+            double secondItemSimilarity = calculateSimilarity(secondItem.getName(), filter);
             return (int) Math.signum(secondItemSimilarity - firstItemSimilarity);
         };
     }
