@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.explore.paging
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import fr.free.nrw.commons.upload.depicts.proxy
 import io.reactivex.Scheduler
@@ -59,6 +60,7 @@ abstract class BasePagingPresenter<T>(
     }
 
     override fun onQueryUpdated(query: String) {
+        Log.d("nesli","test query:"+query)
         pageableBaseDataSource.onQueryUpdated(query)
     }
 }

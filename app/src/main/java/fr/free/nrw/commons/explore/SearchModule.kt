@@ -25,4 +25,6 @@ abstract class SearchModule {
     @Binds
     abstract fun SearchMediaFragmentPresenterImpl.bindsSearchMediaFragmentPresenter()
             : SearchMediaFragmentPresenter
+
+    //TODO: add explore map thing here
 }

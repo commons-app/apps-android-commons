@@ -42,10 +42,10 @@ abstract class BasePagingMapFragment<T> : CommonsDaggerSupportFragment(),
             layoutManager = GridLayoutManager(context, if (isPortrait) 1 else 2)
             adapter = mergeAdapter
         }*/
-        /*injectedPresenter.listFooterData.observe(
+        injectedPresenter.listFooterData.observe(
             viewLifecycleOwner,
             Observer(loadingAdapter::submitList)
-        )*/
+        )
     }
 
     /**

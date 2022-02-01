@@ -25,8 +25,7 @@ import timber.log.Timber;
 
 public class ExploreMapPresenter
     implements ExploreMapContract.UserActions,
-    LocationUpdateListener,
-    PagingContract.Presenter<Media>{
+    LocationUpdateListener{
     BookmarkLocationsDao bookmarkLocationDao;
     private boolean isNearbyLocked;
     private boolean placesLoadedOnce;
@@ -225,32 +224,5 @@ public class ExploreMapPresenter
             placesLoadedOnce = true;
             exploreMapFragmentView.centerMapToPlace(null);
         }
-    }
-
-    @Override
-    public void onAttachView(@NonNull View<Media> view) {
-
-    }
-
-    @Override
-    public void onDetachView() {
-
-    }
-
-    @NonNull
-    @Override
-    public LiveData<List<FooterItem>> getListFooterData() {
-        return null;
-    }
-
-    @Override
-    public void onQueryUpdated(@NonNull String query) {
-        Log.d("Nesli", "onQueryUpdated");
-        exploreMapFragmentView.setCustomQuery(query);
-    }
-
-    @Override
-    public void retryFailedRequest() {
-
     }
 }

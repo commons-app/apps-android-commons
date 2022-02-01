@@ -41,6 +41,7 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment;
+import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.paging.PagingContract.Presenter;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
@@ -63,7 +64,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
 
-public class ExploreMapFragment extends PageableExploreMapRootFragment
+public class ExploreMapFragment extends PageableMapFragment
     implements ExploreMapContract.View, LocationUpdateListener, CategoryImagesCallback {
 
     private BottomSheetBehavior bottomSheetDetailsBehavior;
@@ -86,6 +87,8 @@ public class ExploreMapFragment extends PageableExploreMapRootFragment
     IntentFilter intentFilter = new IntentFilter(MapUtils.NETWORK_INTENT_ACTION);
 
 
+    @Inject
+    ExploreMapMediaPresenter mediaPresenter;
     @Inject
     LocationServiceManager locationManager;
     @Inject
@@ -137,6 +140,9 @@ public class ExploreMapFragment extends PageableExploreMapRootFragment
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (savedInstanceState != null) {
+            onQueryUpdated(savedInstanceState.getString("placeName") + "map query");
+        }
         isDarkTheme = systemThemeUtils.isDeviceInNightMode();
         isPermissionDenied = false;
         cameraMoveListener= () -> presenter.onCameraMove(mapBox.getCameraPosition().target);
@@ -186,14 +192,14 @@ public class ExploreMapFragment extends PageableExploreMapRootFragment
         mapView.onResume();
         presenter.attachView(this);
         registerNetworkReceiver();
-        if (isResumed() && ((MainActivity)getActivity()).activeFragment == ActiveFragment.EXPLORE) {
-            if (!isPermissionDenied && !applicationKvStore
-                .getBoolean("doNotAskForLocationPermission", false)) {
-                startTheMap();
-            } else {
-                startMapWithoutPermission();
+            if (isResumed()) {
+                if (!isPermissionDenied && !applicationKvStore
+                    .getBoolean("doNotAskForLocationPermission", false)) {
+                    startTheMap();
+                } else {
+                    startMapWithoutPermission();
+                }
             }
-        }
     }
 
     private void startTheMap() {
@@ -221,7 +227,7 @@ public class ExploreMapFragment extends PageableExploreMapRootFragment
     }
 
     private void performMapReadyActions() {
-        if (((MainActivity)getActivity()).activeFragment == ActiveFragment.EXPLORE && isMapBoxReady) {
+        if (isMapBoxReady) {
             if(!applicationKvStore.getBoolean("doNotAskForLocationPermission", false) ||
                 PermissionUtils.hasPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)){
                 checkPermissionsAndPerformAction();
@@ -531,12 +537,7 @@ public class ExploreMapFragment extends PageableExploreMapRootFragment
     @NonNull
     @Override
     public Presenter<Media> getInjectedPresenter() {
-        if (presenter != null) {
-            return presenter;
-        } else {
-            presenter = new ExploreMapPresenter(bookmarkLocationDao);
-            return presenter;
-        }
+            return mediaPresenter;
     }
 
     @Override
