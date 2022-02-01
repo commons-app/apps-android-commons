@@ -340,13 +340,6 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testShowMapWithImageCoordinates() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.showMapWithImageCoordinates(true)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testShowExternalMap() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
