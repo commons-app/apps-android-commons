@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out code
       - uses: actions/checkout@v2.4.0
+      - name: Check out code
 
       - name: Set up JDK
         uses: actions/setup-java@v2.5.0
