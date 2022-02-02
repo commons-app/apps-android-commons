@@ -45,7 +45,7 @@ jobs:
       - name: Upload betaDebug APK
         uses: actions/upload-artifact@v2.3.1
         with:
-          name: betaDebugAPK-PR${{ github.event.pull_request.number || github.ref }}
+          name: betaDebugAPK
           path: app/build/outputs/apk/beta/debug/app-*.apk
 
       - name: Generate prodDebug APK
@@ -54,5 +54,5 @@ jobs:
       - name: Upload prodDebug APK
         uses: actions/upload-artifact@v2.3.1
         with:
-          name: prodDebugAPK-PR${{ github.event.pull_request.number || github.ref }}
+          name: prodDebugAPK
           path: app/build/outputs/apk/prod/debug/app-*.apk
