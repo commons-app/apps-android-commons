@@ -439,7 +439,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                     .target(
                         new com.mapbox.mapboxsdk.geometry.LatLng(defaultLatitude, defaultLongitude))
                     .zoom(16).build())
-                .activityKey("MediaActivity")
+                .activityKey("NoLocationUploadActivity")
                 .build(getActivity()), REQUEST_CODE);
         }
     }
