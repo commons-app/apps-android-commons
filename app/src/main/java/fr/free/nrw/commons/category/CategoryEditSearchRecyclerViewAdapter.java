@@ -47,29 +47,9 @@ public class CategoryEditSearchRecyclerViewAdapter
         }
     }
 
-    public void addToCategories(String categoryToBeAdded) {
-        if (!categories.contains(categoryToBeAdded)) {
-            categories.add(categoryToBeAdded);
-        }
-    }
-
-    public void removeFromCategories(String categoryToBeRemoved) {
-        if (categories.contains(categoryToBeRemoved)) {
-            categories.remove(categoryToBeRemoved);
-        }
-    }
-
     public void removeFromNewCategories(String categoryToBeRemoved) {
         if (newCategories.contains(categoryToBeRemoved)) {
             newCategories.remove(categoryToBeRemoved);
-        }
-    }
-
-    public void addToNewCategories(List<String> newCategories) {
-        for(String category : newCategories) {
-            if (!this.newCategories.contains(category)) {
-                this.newCategories.add(category);
-            }
         }
     }
 
