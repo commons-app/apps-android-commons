@@ -54,6 +54,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     UploadMediaDetailsContract.View, UploadMediaDetailAdapter.EventListener {
 
     private static final int REQUEST_CODE = 1211;
+    public static final String LAST_LOCATION = "last_location_while_uploading";
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.ib_map)
@@ -427,6 +428,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 .activityKey("UploadActivity")
                 .build(getActivity()), REQUEST_CODE);
         } else {
+            if (defaultKvStore.getString(LAST_LOCATION) != null) {
+                final String[] locationLatLng
+                    = defaultKvStore.getString(LAST_LOCATION).split(",");
+                defaultLatitude = Double.parseDouble(locationLatLng[0]);
+                defaultLongitude = Double.parseDouble(locationLatLng[1]);
+            }
             startActivityForResult(new LocationPicker.IntentBuilder()
                 .defaultLocation(new CameraPosition.Builder()
                     .target(
