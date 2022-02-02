@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.profile.leaderboard;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import butterknife.internal.DebouncingOnClickListener;
 import com.facebook.drawee.view.SimpleDraweeView;
 import fr.free.nrw.commons.R;
 
@@ -67,7 +69,7 @@ public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.Da
      * @param position
      */
     @Override
-    public void onBindViewHolder(@NonNull UserDetailAdapter.DataViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DataViewHolder holder, int position) {
         TextView rank = holder.rank;
         SimpleDraweeView avatar = holder.avatar;
         TextView username = holder.username;
@@ -83,6 +85,17 @@ public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.Da
         count.setText(String.format("%s %d",
             holder.getContext().getResources().getString(R.string.count_prefix),
             leaderboardResponse.getCategoryCount()));
+
+        avatar.setOnClickListener(new DebouncingOnClickListener() {
+            @Override
+            public void doClick(final View v) {
+                new AlertDialog.Builder(v.getContext())
+                    .setMessage(R.string.leaderboard_avatar_setup)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.ok, (dialog, which) -> {})
+                    .show();
+            }
+        });
 
     }
 
