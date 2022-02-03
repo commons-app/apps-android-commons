@@ -637,4 +637,5 @@
   <string name="apply">Apliché</string>
   <string name="reset">Aseré</string>
   <string name="location_message">Ij dàit ëd localisassion a giuto j\'editor ëd Wiki a trové soa fòto, lòn ch\'a la rend pi ùtil.\nSò cariament recent a l\'han gnun-a localisassion.\nI-j sugerioma d\'ativé la localisassion ant ij paràmeter ëd soa aplicassion ëd màchina fòto.\nMersì d\'avèj carià!</string>
+  <string name="feedback_sharing_data_alert">Për piasì, ch\'a gava da \'s mëssage ògni anformassion ch\'a veul nen ch\'a sia spantià an manera pùblica. Ch\'a ten-a ëdcò da ment che l\'adrëssa ëd pòsta eletrònica con la qual chiel a pùblica e ël nòm e la plancia ëd profil assossià a saran visìbil publicaman.</string>
 </resources>

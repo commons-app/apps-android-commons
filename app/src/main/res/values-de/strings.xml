@@ -632,6 +632,8 @@
   <string name="location_picker_image_view_shadow">Der Schatten der Bildansicht der Ortsauswahl</string>
   <string name="image_location">Bildstandort</string>
   <string name="check_whether_location_is_correct">Überprüfe, ob der Standort korrekt ist</string>
+  <string name="label">Bezeichnung</string>
+  <string name="description">Beschreibung</string>
   <string name="title_page_bookmarks_items">Einträge</string>
   <string name="custom_selector_title">Benutzerdefinierte Auswahl</string>
   <string name="custom_selector_empty_text">Keine Bilder</string>

@@ -56,6 +56,8 @@
   <string name="signup">Registrera</string>
   <string name="logging_in_title">Loggar in</string>
   <string name="logging_in_message">Var god vänta…</string>
+  <string name="updating_caption_title">Uppdatera bildtexter och beskrivningar</string>
+  <string name="updating_caption_message">Var god vänta…</string>
   <string name="login_success">Inloggningen lyckades!</string>
   <string name="login_failed">Det gick inte att logga in!</string>
   <string name="upload_failed">Filen hittades inte. Försök med en annan fil.</string>
@@ -321,6 +323,7 @@
   <string name="quiz_screenshot_question">Är det okej att ladda upp denna skärmdump?</string>
   <string name="share_app_title">Dela app</string>
   <string name="error_fetching_nearby_places">Fel uppstod när platser i närheten hämtades.</string>
+  <string name="no_nearby_places_around">Inga platser i närheten</string>
   <string name="error_fetching_nearby_monuments">Fel uppstod när monument i närheten hämtades.</string>
   <string name="no_recent_searches">Inga senaste sökningar</string>
   <string name="delete_recent_searches_dialog">Är du säker på att du vill rensa din sökhistorik?</string>
@@ -493,10 +496,18 @@
   <string name="category_edit_button_text">Uppdatera kategorier</string>
   <string name="coordinates_edit_helper_make_edit_toast">Försöker uppdatera koordinater.</string>
   <string name="coordinates_edit_helper_show_edit_title">Koordinater uppdaterades</string>
+  <string name="description_edit_helper_show_edit_title">Uppdaterade beskrivning</string>
+  <string name="caption_edit_helper_show_edit_title">Uppdaterade bildtext</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Genomfördes</string>
   <string name="coordinates_edit_helper_show_edit_message">Koordinaterna %1$s lades till.</string>
+  <string name="description_edit_helper_show_edit_message">Lade till beskrivningar.</string>
+  <string name="caption_edit_helper_show_edit_message">Lade till bildtext.</string>
   <string name="coordinates_edit_helper_edit_message_else">Kunde inte lägga till koordinater.</string>
+  <string name="description_edit_helper_edit_message_else">Kunde inte lägga till beskrivningar.</string>
+  <string name="caption_edit_helper_edit_message_else">Kunde inte lägga till bildtext.</string>
   <string name="coordinates_picking_unsuccessful">Kunde inte hämta koordinater.</string>
+  <string name="descriptions_picking_unsuccessful">Kunde inte hämta beskrivningar.</string>
+  <string name="description_activity_title">Redigera beskrivningar och bildtexter</string>
   <string name="share_image_via">Dela bild via</string>
   <string name="you_have_no_achievements_yet">Du har ännu inte gjort några bidrag</string>
   <string name="no_achievements_yet">%s har ännu inte gjort några bidrag</string>
@@ -551,6 +562,7 @@
   <string name="resume">återuppta</string>
   <string name="paused">Pausad</string>
   <string name="more">Mer</string>
+  <string name="bookmarks">Bokmärken</string>
   <string name="achievements_tab_title">Prestationer</string>
   <string name="leaderboard_tab_title">Topplista</string>
   <string name="rank_prefix">Rang:</string>
@@ -605,6 +617,9 @@
   <string name="location_picker_image_view_shadow">Skuggan för platsväljarens bildvisare</string>
   <string name="image_location">Bildplats</string>
   <string name="check_whether_location_is_correct">Kontrollera om platsen är korrekt</string>
+  <string name="label">Etikett</string>
+  <string name="description">Beskrivning</string>
+  <string name="title_page_bookmarks_items">Objekt</string>
   <string name="custom_selector_title">Anpassad selektor</string>
   <string name="custom_selector_empty_text">Inga bilder</string>
   <string name="done">Klar</string>
@@ -624,4 +639,10 @@
   <string name="contributions_of_user">Bidrag av användare: %s</string>
   <string name="achievements_of_user">Prestationer av användare: %s</string>
   <string name="menu_view_user_page">Visa användarsida</string>
+  <string name="advanced_options">Avancerade alternativ</string>
+  <string name="advanced_query_info_text">Du kan anpassa begäran för \"I närheten\". Om du får felmeddelanden kan du återställa och verkställa.</string>
+  <string name="apply">Verkställ</string>
+  <string name="reset">Återställ</string>
+  <string name="location_message">Platsdata hjälper wikiredigerare att hitta din bild för att göra den mer användbar.\nDina nyliga uppladdningar har ingen plats.\nVi föreslår att du aktiverar platsen i dina kamerainställningar.\nTack för att du laddar upp!</string>
+  <string name="feedback_sharing_data_alert">Var god ta bort all information från detta e-postmeddelande som du inte är bekväm med att dela offentligt. Observera även att e-postadressen du använder samt det associerade namnet och profilbilden kommer att synas offentligt.</string>
 </resources>

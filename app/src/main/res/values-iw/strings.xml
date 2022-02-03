@@ -644,6 +644,8 @@
   <string name="location_picker_image_view_shadow">הצל של תצוגת תמונה של בורר המיקום</string>
   <string name="image_location">מיקום תמונה</string>
   <string name="check_whether_location_is_correct">לבדוק האם המיקום נכון</string>
+  <string name="label">תווית</string>
+  <string name="description">תיאור</string>
   <string name="title_page_bookmarks_items">פריטים</string>
   <string name="custom_selector_title">בורר מותאם אישית</string>
   <string name="custom_selector_empty_text">אין תמונות</string>
@@ -669,4 +671,5 @@
   <string name="apply">החלה</string>
   <string name="reset">איפוס</string>
   <string name="location_message">נתוני מיקום עוזרים לעורכי ויקי למצוא את התמונה שלך, וזה גורם לה להיות הרבה יותר שימושית.\nבהעלאות האחרונות שלך אין מיקום.\nאנחנו ממליצים לך להפעיל את המיקום בהגדרות יישום המצלמה שלך.\nתודה על ההעלאה!</string>
+  <string name="feedback_sharing_data_alert">נא להסיר מהמכתב הזה כל מידע שאינך רוצה לשתף באופן פומבי. כמו־כן, נא לזכור שכתובת הדוא\"ל שמכתב נשלח ממנה, השם המשויך והתמונה, יהיו מוצגות ציבורית.</string>
 </resources>
