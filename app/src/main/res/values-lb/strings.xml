@@ -44,8 +44,8 @@
   <string name="logging_in_message">Waart wgl. …</string>
   <string name="updating_caption_message">Waart wgl. ...</string>
   <string name="login_success">Umeldung huet geklappt!</string>
-  <string name="login_failed">D\'Aloggen huet net funktionéiert</string>
-  <string name="upload_failed">Fichier net fonnt. probéiert wgl. en anere Fichier.</string>
+  <string name="login_failed">D\'Aloggen huet net funktionéiert!</string>
+  <string name="upload_failed">Fichier net fonnt. Probéiert wgl. en anere Fichier.</string>
   <string name="authentication_failed">Authentifizéierung huet net funktionéiert, loggt Iech wgl. nach eng Kéier an.</string>
   <string name="uploading_started">D\'Eroplueden huet ugefaang!</string>
   <string name="upload_completed_notification_title">%1$s eropgelueden!</string>

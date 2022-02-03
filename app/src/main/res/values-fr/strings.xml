@@ -668,4 +668,5 @@
   <string name="apply">Appliquer</string>
   <string name="reset">Réinitialiser</string>
   <string name="location_message">Les données de localisation aident les éditeurs de Wiki à trouver votre photo, ce qui la rend beaucoup plus utile.\nVos téléchargements récents n\'ont pas de localisation.\nNous vous suggérons d\'activer la localisation dans les paramètres de votre application appareil photo.\nMerci d\'avoir téléchargé !</string>
+  <string name="feedback_sharing_data_alert">Veuillez supprimer de ce courriel toute information que vous n’aimeriez pas diffuser publiquement. Veuillez aussi prendre note que votre adresse de messagerie avec laquelle vous publiez, et les nom et image de profil associés, seront visibles publiquement.</string>
 </resources>
