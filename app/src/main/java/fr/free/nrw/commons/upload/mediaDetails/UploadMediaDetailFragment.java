@@ -54,6 +54,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     UploadMediaDetailsContract.View, UploadMediaDetailAdapter.EventListener {
 
     private static final int REQUEST_CODE = 1211;
+    /**
+     * Location of last UploadItem's location ex. 12.3433,54.78897
+     */
     public static final String LAST_LOCATION = "last_location_while_uploading";
     @BindView(R.id.tv_title)
     TextView tvTitle;
