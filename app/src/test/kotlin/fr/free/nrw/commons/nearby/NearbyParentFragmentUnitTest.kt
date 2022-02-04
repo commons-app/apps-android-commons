@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.nearby
 
+import com.mapbox.mapboxsdk.camera.CameraPosition
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
+import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import fr.free.nrw.commons.TestCommonsApplication
@@ -10,7 +13,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
+import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.RobolectricTestRunner
@@ -55,6 +58,18 @@ class NearbyParentFragmentUnitTest {
         )
         method.isAccessible = true
         method.invoke(fragment)
+        verify(mapView, times(1)).onStart()
+        verify(applicationKvStore, times(1)).getString("LastLocation")
+        verify(presenter, times(1)).onMapReady()
+        val position = CameraPosition.Builder()
+            .target(LatLng(
+                51.50550,
+                -0.07520, 0.0
+            ))
+            .zoom(0.0)
+            .build()
+        verify(mapBox, times(1))
+            .moveCamera(CameraUpdateFactory.newCameraPosition(position))
     }
 
     @Test
@@ -66,5 +81,17 @@ class NearbyParentFragmentUnitTest {
         )
         method.isAccessible = true
         method.invoke(fragment)
+        verify(mapView, times(1)).onStart()
+        verify(applicationKvStore, times(2)).getString("LastLocation")
+        verify(presenter, times(1)).onMapReady()
+        val position = CameraPosition.Builder()
+            .target(LatLng(
+                23.76,
+                56.876, 0.0
+            ))
+            .zoom(14.0)
+            .build()
+        verify(mapBox, times(1))
+            .moveCamera(CameraUpdateFactory.newCameraPosition(position))
     }
 }
