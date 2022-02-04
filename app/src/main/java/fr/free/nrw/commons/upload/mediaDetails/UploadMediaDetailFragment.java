@@ -55,7 +55,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     private static final int REQUEST_CODE = 1211;
     /**
-     * Location of last UploadItem's location ex. 12.3433,54.78897
+     * A key for applicationKvStore.
+     * By this key we can retrieve the location of last UploadItem ex. 12.3433,54.78897
+     * from applicationKvStore.
      */
     public static final String LAST_LOCATION = "last_location_while_uploading";
     @BindView(R.id.tv_title)
