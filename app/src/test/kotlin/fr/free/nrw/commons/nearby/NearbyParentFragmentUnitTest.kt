@@ -54,10 +54,11 @@ class NearbyParentFragmentUnitTest {
     @Throws(Exception::class)
     fun `Start map without gps test when last location known`() {
         val method: Method = NearbyParentFragment::class.java.getDeclaredMethod(
-            "startMapWithoutGPS"
+            "startMapWithCondition",
+            String::class.java
         )
         method.isAccessible = true
-        method.invoke(fragment)
+        method.invoke(fragment, "Without GPS")
         verify(mapView, times(1)).onStart()
         verify(applicationKvStore, times(1)).getString("LastLocation")
         verify(presenter, times(1)).onMapReady()
@@ -77,12 +78,64 @@ class NearbyParentFragmentUnitTest {
     fun `Start map without gps test when last location unknown`() {
         `when`(applicationKvStore.getString("LastLocation")).thenReturn("23.76,56.876")
         val method: Method = NearbyParentFragment::class.java.getDeclaredMethod(
-            "startMapWithoutGPS"
+            "startMapWithCondition",
+            String::class.java
         )
         method.isAccessible = true
-        method.invoke(fragment)
+        method.invoke(fragment, "Without GPS")
         verify(mapView, times(1)).onStart()
         verify(applicationKvStore, times(2)).getString("LastLocation")
+        verify(presenter, times(1)).onMapReady()
+        val position = CameraPosition.Builder()
+            .target(LatLng(
+                23.76,
+                56.876, 0.0
+            ))
+            .zoom(14.0)
+            .build()
+        verify(mapBox, times(1))
+            .moveCamera(CameraUpdateFactory.newCameraPosition(position))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Start map without location permission test when last location known`() {
+        val method: Method = NearbyParentFragment::class.java.getDeclaredMethod(
+            "startMapWithCondition",
+            String::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, "Without Permission")
+        verify(mapView, times(1)).onStart()
+        verify(applicationKvStore, times(1)).getString("LastLocation")
+        verify(applicationKvStore, times(1))
+            .putBoolean("doNotAskForLocationPermission", true)
+        verify(presenter, times(1)).onMapReady()
+        val position = CameraPosition.Builder()
+            .target(LatLng(
+                51.50550,
+                -0.07520, 0.0
+            ))
+            .zoom(0.0)
+            .build()
+        verify(mapBox, times(1))
+            .moveCamera(CameraUpdateFactory.newCameraPosition(position))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Start map without location permission test when last location unknown`() {
+        `when`(applicationKvStore.getString("LastLocation")).thenReturn("23.76,56.876")
+        val method: Method = NearbyParentFragment::class.java.getDeclaredMethod(
+            "startMapWithCondition",
+            String::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, "Without Permission")
+        verify(mapView, times(1)).onStart()
+        verify(applicationKvStore, times(2)).getString("LastLocation")
+        verify(applicationKvStore, times(1))
+            .putBoolean("doNotAskForLocationPermission", true)
         verify(presenter, times(1)).onMapReady()
         val position = CameraPosition.Builder()
             .target(LatLng(

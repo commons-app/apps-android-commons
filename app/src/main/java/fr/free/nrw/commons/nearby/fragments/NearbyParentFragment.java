@@ -486,22 +486,30 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (isResumed() && ((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY) {
             if(!isPermissionDenied && !applicationKvStore.getBoolean("doNotAskForLocationPermission", false)){
                 if (!locationManager.isGPSProviderEnabled()) {
-                    startMapWithoutGPS();
+                    startMapWithCondition("Without GPS");
                 } else {
                     startTheMap();
                 }
             }else{
-                startMapWithoutPermission();
+                startMapWithCondition("Without Permission");
             }
         }
     }
 
     /**
-     * Starts the map without GPS
-     * By default it points to 51.50550,-0.07520 this coordinates
+     * Starts the map without GPS and without permission
+     * By default it points to 51.50550,-0.07520 coordinates, other than that it points to the
+     * last known location which can be get by the key "LastLocation" from applicationKvStore
+     *
+     * @param condition : for which condition the map should start
      */
-    private void startMapWithoutGPS() {
+    private void startMapWithCondition(final String condition) {
         mapView.onStart();
+
+        if (condition.equals("Without Permission")) {
+            applicationKvStore.putBoolean("doNotAskForLocationPermission", true);
+        }
+
         final CameraPosition position;
         if (applicationKvStore.getString("LastLocation")!=null) {
             final String[] locationLatLng
@@ -523,33 +531,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .build();
         }
 
-        if(mapBox != null){
-            mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
-            addOnCameraMoveListener();
-            presenter.onMapReady();
-            removeCurrentLocationMarker();
-        }
-    }
-
-    private void startMapWithoutPermission() {
-        mapView.onStart();
-
-        applicationKvStore.putBoolean("doNotAskForLocationPermission", true);
-        final CameraPosition position;
-        if(applicationKvStore.getString("LastLocation")!=null) { // Checking for last searched location
-            String[] locationLatLng = applicationKvStore.getString("LastLocation").split(",");
-            lastKnownLocation = new fr.free.nrw.commons.location.LatLng(Double.valueOf(locationLatLng[0]), Double.valueOf(locationLatLng[1]), 1f);
-            position = new CameraPosition.Builder()
-                .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation))
-                .zoom(ZOOM_LEVEL)
-                .build();
-        }else {
-            lastKnownLocation = new fr.free.nrw.commons.location.LatLng(51.50550,-0.07520,1f);
-            position = new CameraPosition.Builder()
-                .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation))
-                .zoom(ZOOM_OUT)
-                .build();
-        }
         if(mapBox != null){
             mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
             addOnCameraMoveListener();
