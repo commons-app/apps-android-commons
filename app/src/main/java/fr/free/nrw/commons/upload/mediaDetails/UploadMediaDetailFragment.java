@@ -44,6 +44,7 @@ import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
@@ -53,6 +54,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     UploadMediaDetailsContract.View, UploadMediaDetailAdapter.EventListener {
 
     private static final int REQUEST_CODE = 1211;
+    /**
+     * A key for applicationKvStore.
+     * By this key we can retrieve the location of last UploadItem ex. 12.3433,54.78897
+     * from applicationKvStore.
+     */
+    public static final String LAST_LOCATION = "last_location_while_uploading";
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.ib_map)
@@ -397,10 +404,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             () -> {}, true);
     }
 
-    @Override public void showMapWithImageCoordinates(boolean shouldShow) {
-        ibMap.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
-    }
-
     @Override
     public void showExternalMap(final UploadItem uploadItem) {
         goToLocationPickerActivity(uploadItem);
@@ -414,14 +417,36 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private void goToLocationPickerActivity(final UploadItem uploadItem) {
 
         editableUploadItem = uploadItem;
-        startActivityForResult(new LocationPicker.IntentBuilder()
-            .defaultLocation(new CameraPosition.Builder()
-                .target(new com.mapbox.mapboxsdk.geometry.LatLng(uploadItem.getGpsCoords()
-                    .getDecLatitude(),
-                    uploadItem.getGpsCoords().getDecLongitude()))
-                .zoom(16).build())
-            .activityKey("UploadActivity")
-            .build(getActivity()), REQUEST_CODE);
+        double defaultLatitude = 37.773972;
+        double defaultLongitude = -122.431297;
+
+        if (uploadItem.getGpsCoords()
+            .getDecLatitude() != 0.0 && uploadItem.getGpsCoords().getDecLongitude() != 0.0) {
+            defaultLatitude = uploadItem.getGpsCoords()
+                .getDecLatitude();
+            defaultLongitude = uploadItem.getGpsCoords().getDecLongitude();
+            startActivityForResult(new LocationPicker.IntentBuilder()
+                .defaultLocation(new CameraPosition.Builder()
+                    .target(
+                        new com.mapbox.mapboxsdk.geometry.LatLng(defaultLatitude, defaultLongitude))
+                    .zoom(16).build())
+                .activityKey("UploadActivity")
+                .build(getActivity()), REQUEST_CODE);
+        } else {
+            if (defaultKvStore.getString(LAST_LOCATION) != null) {
+                final String[] locationLatLng
+                    = defaultKvStore.getString(LAST_LOCATION).split(",");
+                defaultLatitude = Double.parseDouble(locationLatLng[0]);
+                defaultLongitude = Double.parseDouble(locationLatLng[1]);
+            }
+            startActivityForResult(new LocationPicker.IntentBuilder()
+                .defaultLocation(new CameraPosition.Builder()
+                    .target(
+                        new com.mapbox.mapboxsdk.geometry.LatLng(defaultLatitude, defaultLongitude))
+                    .zoom(16).build())
+                .activityKey("NoLocationUploadActivity")
+                .build(getActivity()), REQUEST_CODE);
+        }
     }
 
     /**
@@ -468,6 +493,22 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void updateMediaDetails(List<UploadMediaDetail> uploadMediaDetails) {
         uploadMediaDetailAdapter.setItems(uploadMediaDetails);
+    }
+
+    /**
+     * Showing dialog for adding location
+     *
+     * @param onSkipClicked proceed for verifying image quality
+     */
+    @Override
+    public void displayAddLocationDialog(final Runnable onSkipClicked) {
+        DialogUtil.showAlertDialog(Objects.requireNonNull(getActivity()),
+            getString(R.string.no_location_found_title),
+            getString(R.string.no_location_found_message),
+            getString(R.string.add_location),
+            getString(R.string.skip_login),
+            this::onIbMapClicked,
+            onSkipClicked);
     }
 
     private void deleteThisPicture() {
