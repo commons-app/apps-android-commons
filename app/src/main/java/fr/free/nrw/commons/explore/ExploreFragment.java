@@ -90,7 +90,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         mobileArguments.putString("categoryName", MOBILE_UPLOADS_CATEGORY);
 
         Bundle mapArguments = new Bundle();
-        mapArguments.putString("placeName", EXPLORE_MAP);
+        mapArguments.putString("categoryName", EXPLORE_MAP);
 
         featuredRootFragment = new ExploreListRootFragment(featuredArguments);
         mobileRootFragment = new ExploreListRootFragment(mobileArguments);

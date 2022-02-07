@@ -14,5 +14,6 @@ public abstract class MapController {
         public LatLng[] boundaryCoordinates; // Corners of nearby area
         public LatLng curLatLng; // Current location when this places are populated
         public LatLng searchLatLng; // Search location for finding this places
+        public List<Media> mediaList; // Search location for finding this places
     }
 }

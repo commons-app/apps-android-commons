@@ -91,6 +91,18 @@ class MediaClient @Inject constructor(
         responseMapper(mediaInterface.getMediaListFromSearch(keyword, limit, offset))
 
     /**
+     * This method takes a keyword as input and returns a list of  Media objects filtered using image generator query
+     * It uses the generator query API to get the images searched using a query, 10 at a time.
+     *
+     * @param coordinate the search keyword
+     * @param limit
+     * @param offset
+     * @return
+     */
+    fun getMediaListFromGeoSearch(coordinate: String?, limit: Int) =
+        responseMapper(mediaInterface.getMediaListFromGeoSearch(coordinate, limit))
+
+    /**
      * @return list of images for a particular depict entity
      */
     fun fetchImagesForDepictedItem(

@@ -74,6 +74,18 @@ public interface MediaInterface {
             MEDIA_PARAMS)
     Single<MwQueryResponse> getMediaListFromSearch(@Query("gsrsearch") String keyword, @Query("gsrlimit") int itemLimit, @Query("gsroffset") int offset);
 
+    /**
+     * This method retrieves a list of Media objects filtered using list geosearch query
+     *
+     * @param location     the search location
+     * @param itemLimit    how many images are returned
+     * @return
+     */
+    @GET("w/api.php?action=query&format=json&formatversion=2" + //Basic parameters
+        "&list=geosearch&gsnamespace=6" + //Search parameters
+        MEDIA_PARAMS)
+    Single<MwQueryResponse> getMediaListFromGeoSearch(@Query("gsbbox") String location, @Query("gslimit") int itemLimit);
+
 
     /**
      * Fetches Media object from the imageInfo API

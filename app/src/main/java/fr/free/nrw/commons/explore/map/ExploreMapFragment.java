@@ -140,9 +140,9 @@ public class ExploreMapFragment extends PageableMapFragment
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (savedInstanceState != null) {
+        /*if (savedInstanceState != null) {
             onQueryUpdated(savedInstanceState.getString("placeName") + "map query");
-        }
+        }*/
         isDarkTheme = systemThemeUtils.isDeviceInNightMode();
         isPermissionDenied = false;
         cameraMoveListener= () -> presenter.onCameraMove(mapBox.getCameraPosition().target);
@@ -311,8 +311,7 @@ public class ExploreMapFragment extends PageableMapFragment
 
         final Observable<ExploreMapController.NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> exploreMapController
-                .loadAttractionsFromLocation(curlatLng, searchLatLng,
-                    false, true, Utils.isMonumentsEnabled(new Date()), customQuery));
+                .loadAttractionsFromLocation(curlatLng, searchLatLng,true));
 
         compositeDisposable.add(nearbyPlacesInfoObservable
             .subscribeOn(Schedulers.io())
@@ -334,8 +333,7 @@ public class ExploreMapFragment extends PageableMapFragment
 
         final Observable<ExploreMapController.NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> exploreMapController
-                .loadAttractionsFromLocation(curlatLng, searchLatLng,
-                    false, true, Utils.isMonumentsEnabled(new Date()), customQuery));
+                .loadAttractionsFromLocation(curlatLng, searchLatLng,false));
         // TODO: check loadAttractionsromLocation with query parameter
 
         compositeDisposable.add(nearbyPlacesInfoObservable

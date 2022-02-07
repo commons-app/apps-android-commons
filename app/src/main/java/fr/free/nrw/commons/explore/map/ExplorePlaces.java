@@ -1,9 +1,11 @@
 package fr.free.nrw.commons.explore.map;
 
 import androidx.annotation.Nullable;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.nearby.Place;
+import io.reactivex.Single;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -12,76 +14,52 @@ import timber.log.Timber;
 
 public class ExplorePlaces {
 
-    private static final double INITIAL_RADIUS = 0.3; // in kilometers
-    private static final double RADIUS_MULTIPLIER = 2.0;
-    public double radius = INITIAL_RADIUS;
+    private static final int MAX_LIMIT = 60000;
+    private static final int LIMIT_MULTIPLIER = 2;
 
-    private final OkHttpJsonApiClient okHttpJsonApiClient;
-
-    /**
-     * Reads Wikidata query to check nearby wikidata items which needs picture, with a circular
-     * search. As a point is center of a circle with a radius will be set later.
-     *
-     * @param okHttpJsonApiClient
-     */
     @Inject
-    public ExplorePlaces(OkHttpJsonApiClient okHttpJsonApiClient) {
-        this.okHttpJsonApiClient = okHttpJsonApiClient;
-    }
+    MediaClient mediaClient;
 
     /**
      * Expands the radius as needed for the Wikidata query
      *
      * @param curLatLng           coordinates of search location
-     * @param lang                user's language
-     * @param customQuery
      * @return list of places obtained
      */
-    List<Place> radiusExpander(final LatLng curLatLng, final String lang
-        , final boolean shouldQueryForMonuments, @Nullable final String customQuery)
+    List<Media> limitExpander(final LatLng curLatLng, int limit)
         throws Exception {
 
         final int minResults;
-        final double maxRadius;
 
-        List<Place> places = Collections.emptyList();
+        Single<List<Media>> mediaList = null;
 
-        minResults = 20;
-        maxRadius = 300.0; // in kilometers
-        radius = INITIAL_RADIUS;
+        minResults = 5;
 
         // Increase the radius gradually to find a satisfactory number of nearby places
-        while (radius <= maxRadius) {
-            places = getFromWikidataQuery(curLatLng, lang, radius, shouldQueryForMonuments,
-                customQuery);
-            Timber.d("%d results at radius: %f", places.size(), radius);
-            if (places.size() >= minResults) {
+        while (limit <= MAX_LIMIT) {
+            mediaList = getFromCommonsQuery(curLatLng, limit);
+            Timber.d("%d results at limit: %d", mediaList.blockingGet().size(), limit);
+            if (mediaList.blockingGet().size() >= minResults) {
                 break;
             }
-            radius *= RADIUS_MULTIPLIER;
+            limit *= LIMIT_MULTIPLIER;
         }
         // make sure we will be able to send at least one request next time
-        if (radius > maxRadius) {
-            radius = maxRadius;
+        if (limit > MAX_LIMIT) {
+            limit = MAX_LIMIT;
         }
-        return places;
+        return mediaList.blockingGet();
     }
 
     /**
      * Runs the Wikidata query to populate the Places around search location
      *
      * @param cur                     coordinates of search location
-     * @param lang                    user's language
-     * @param radius                  radius for search, as determined by radiusExpander()
-     * @param shouldQueryForMonuments should the query include properites for monuments
-     * @param customQuery
      * @return list of places obtained
      * @throws IOException if query fails
      */
-    public List<Place> getFromWikidataQuery(final LatLng cur, final String lang,
-        final double radius, final boolean shouldQueryForMonuments,
-        @Nullable final String customQuery) throws Exception {
-        return okHttpJsonApiClient
-            .getNearbyPlaces(cur, lang, radius, shouldQueryForMonuments, customQuery);
+    public Single<List<Media>> getFromCommonsQuery(final LatLng cur, final int limit) throws Exception {
+        String coordinates = cur.getLatitude() + "|" + cur.getLongitude();
+        return mediaClient.getMediaListFromGeoSearch(coordinates, limit);
     }
 }
