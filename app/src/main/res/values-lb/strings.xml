@@ -371,4 +371,5 @@
   <string name="advanced_options">Erweidert Optiounen</string>
   <string name="apply">Uwenden</string>
   <string name="reset">Zrécksetzen</string>
+  <string name="no_location_found_title">Keng Plaz fonnt</string>
 </resources>
