@@ -1,12 +1,17 @@
 package fr.free.nrw.commons.explore.depictions
 
+import android.annotation.SuppressLint
 import fr.free.nrw.commons.mwapi.Binding
 import fr.free.nrw.commons.mwapi.SparqlResponse
 import fr.free.nrw.commons.upload.depicts.DepictsInterface
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import fr.free.nrw.commons.upload.structure.depictions.get
+import fr.free.nrw.commons.wikidata.WikidataProperties
 import fr.free.nrw.commons.wikidata.model.DepictSearchItem
 import io.reactivex.Single
+import org.wikipedia.wikidata.DataValue
 import org.wikipedia.wikidata.Entities
+import org.wikipedia.wikidata.Statement_partial
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -38,7 +43,45 @@ class DepictsClient @Inject constructor(private val depictsInterface: DepictsInt
         }.mapToDepictions()
     }
 
+    /**
+     * Fetches Entities from ids ex. "Q1233|Q546" and converts them into DepictedItem
+     */
+    @SuppressLint("CheckResult")
     private fun Single<String>.mapToDepictions() =
         flatMap(::getEntities)
-        .map { it.entities().values.map(::DepictedItem) }
+        .map { entities ->
+            entities.entities().values.map { entity ->
+                if (entity.descriptions().byLanguageOrFirstOrEmpty() == "") {
+                    val entities: Entities = getEntities(entity[WikidataProperties.INSTANCE_OF]
+                        .toIds()[0]).blockingGet()
+                    val nameAsDescription = entities.entities().values.first().labels()
+                        .byLanguageOrFirstOrEmpty()
+                    DepictedItem(entity,
+                        entity.labels().byLanguageOrFirstOrEmpty(),
+                        nameAsDescription)
+                } else {
+                DepictedItem(entity,
+                    entity.labels().byLanguageOrFirstOrEmpty(),
+                    entity.descriptions().byLanguageOrFirstOrEmpty())
+                }
+            }
+        }
+
+    /**
+     * Tries to get Entities.Label by default language from the map if this returns null, Tries to
+     * retrieve first element from the map, if this still returns null, function returns ""
+     */
+    private fun Map<String, Entities.Label>.byLanguageOrFirstOrEmpty() =
+        let {
+            it[Locale.getDefault().language] ?: it.values.firstOrNull() }?.value() ?: ""
+
+    /**
+     * returns list of id ex. "Q2323" from Statement_partial
+     */
+    private fun List<Statement_partial>?.toIds(): List<String> {
+        return this?.map { it.mainSnak.dataValue }
+            ?.filterIsInstance<DataValue.EntityId>()
+            ?.map { it.value.id }
+            ?: emptyList()
+    }
 }

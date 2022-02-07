@@ -46,7 +46,7 @@ data class DepictedItem constructor(
         place.longDescription
     )
 
-    private constructor(entity: Entities.Entity, name: String, description: String) : this(
+    constructor(entity: Entities.Entity, name: String, description: String) : this(
         name,
         description,
         entity[IMAGE].primaryImageValue?.let {
