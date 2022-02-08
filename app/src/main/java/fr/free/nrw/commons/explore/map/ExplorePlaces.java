@@ -4,14 +4,17 @@ import androidx.annotation.Nullable;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.nearby.Place;
 import io.reactivex.Single;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import timber.log.Timber;
 
+@Singleton
 public class ExplorePlaces {
 
     private static final int MAX_LIMIT = 60000;
@@ -19,6 +22,10 @@ public class ExplorePlaces {
 
     @Inject
     MediaClient mediaClient;
+
+    @Inject
+    public ExplorePlaces() {
+    }
 
     /**
      * Expands the radius as needed for the Wikidata query

@@ -18,9 +18,8 @@ public class ExploreMapController extends MapController {
     public static LatLng latestSearchLocation; // Can be current and camera target on search this area button is used
     public static double latestSearchRadius = 10.0; // Any last search radius except closest result search
 
-    @Inject
-    MediaClient mediaClient;
 
+    @Inject
     public ExploreMapController(ExplorePlaces explorePlaces) {
         this.explorePlaces = explorePlaces;
     }
@@ -48,5 +47,4 @@ public class ExploreMapController extends MapController {
     private List<Place> mediaToExplorePlace( List<Media> mediaList) {
         return null;
     }
-
 }

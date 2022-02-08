@@ -4,21 +4,14 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.SEARCH_CUSTOM_AREA;
 
-import android.util.Log;
-import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
+
 import com.mapbox.mapboxsdk.annotations.Marker;
-import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
-import fr.free.nrw.commons.explore.paging.FooterItem;
-import fr.free.nrw.commons.explore.paging.PagingContract;
-import fr.free.nrw.commons.explore.paging.PagingContract.View;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
-import fr.free.nrw.commons.nearby.NearbyController;
 import java.lang.reflect.Proxy;
 import java.util.List;
 import timber.log.Timber;
@@ -197,9 +190,10 @@ public class ExploreMapPresenter
      * @param nearbyPlacesInfo This variable has placeToCenter list information and distances.
      */
     public void updateMapMarkers(
-        NearbyController.NearbyPlacesInfo nearbyPlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
-        if(null!= exploreMapFragmentView) {
-            List<NearbyBaseMarker> nearbyBaseMarkers = NearbyController
+
+        ExploreMapController.NearbyPlacesInfo nearbyPlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
+        /*if(null!= exploreMapFragmentView) {
+            List<NearbyBaseMarker> nearbyBaseMarkers = ExploreMapController
                 .loadAttractionsFromLocationToBaseMarkerOptions(nearbyPlacesInfo.curLatLng, // Curlatlang will be used to calculate distances
                     nearbyPlacesInfo.placeList,
                     exploreMapFragmentView.getContext(),
@@ -213,6 +207,7 @@ public class ExploreMapPresenter
             exploreMapFragmentView.setProgressBarVisibility(false);
             handleCenteringTaskIfAny();
         }
+        */
     }
 
     /**
