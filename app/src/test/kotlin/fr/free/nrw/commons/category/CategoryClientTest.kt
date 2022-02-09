@@ -77,6 +77,40 @@ class CategoryClientTest {
             .test()
             .assertValues(emptyList())
     }
+
+    @Test
+    fun getCategoriesByNameFound() {
+        val mockResponse = withMockResponse("Category:Test")
+        whenever(categoryInterface.getCategoriesByName(anyString(), anyString(),
+            anyInt(), anyInt()))
+            .thenReturn(Single.just(mockResponse))
+        categoryClient.getCategoriesByName("tes", "tes", 10)
+            .test()
+            .assertValues(listOf(CategoryItem("Test", "",
+                "", false)))
+        categoryClient.getCategoriesByName("tes" , "tes",
+            10, 10)
+            .test()
+            .assertValues(listOf(CategoryItem("Test", "",
+                "", false)))
+    }
+
+    @Test
+    fun getCategoriesByNameNull() {
+        val mockResponse = withNullPages()
+        whenever(categoryInterface.getCategoriesByName(anyString(), anyString(),
+            anyInt(), anyInt()))
+            .thenReturn(Single.just(mockResponse))
+        categoryClient.getCategoriesByName("tes", "tes",
+            10)
+            .test()
+            .assertValues(emptyList())
+        categoryClient.getCategoriesByName("tes", "tes",
+            10, 10)
+            .test()
+            .assertValues(emptyList())
+    }
+
     @Test
     fun getParentCategoryListFound() {
         val mockResponse = withMockResponse("Category:Test")
