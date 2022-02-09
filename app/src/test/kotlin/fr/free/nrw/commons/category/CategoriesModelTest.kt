@@ -84,13 +84,16 @@ class CategoriesModelTest {
                 "titleSearch", "", "", false))))
         whenever(categoryDao.recentCategories(25)).thenReturn(listOf(CategoryItem(
             "recentCategories","","", false)))
+        whenever(categoryClient.getCategoriesByName("depictionCategory",
+            "depictionCategory", 25)).thenReturn(Single.just(listOf(CategoryItem(
+            "commonsCategories","","", false))))
         val imageTitleList = listOf("Test")
         CategoriesModel(categoryClient, categoryDao, gpsCategoryModel)
             .searchAll("", imageTitleList, listOf(depictedItem))
             .test()
             .assertValue(
                 listOf(
-                    categoryItem("depictionCategory"),
+                    categoryItem("commonsCategories"),
                     categoryItem("gpsCategory"),
                     categoryItem("titleSearch"),
                     categoryItem("recentCategories")
