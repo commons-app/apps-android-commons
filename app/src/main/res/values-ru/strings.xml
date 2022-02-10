@@ -24,6 +24,7 @@
 * Patriccck
 * Redredsonia
 * Rubin16
+* Tanzun
 * Thothsum
 * Vlad5250
 * VoxelJ
@@ -542,6 +543,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Не удалось добавить координаты.</string>
   <string name="coordinates_picking_unsuccessful">Не удалось получить координаты.</string>
   <string name="descriptions_picking_unsuccessful">Не удалось получить описания.</string>
+  <string name="description_activity_title">Редактировать описания и подписи</string>
   <string name="share_image_via">Поделиться изображением с помощью</string>
   <string name="you_have_no_achievements_yet">Вы пока что не внесли вклада.</string>
   <string name="no_achievements_yet">У %s пока ещё нет вклада</string>
@@ -676,4 +678,7 @@
   <string name="advanced_options">Расширенные настройки</string>
   <string name="apply">Применить</string>
   <string name="reset">Сбросить</string>
+  <string name="no_location_found_title">Местоположение не найдено</string>
+  <string name="add_location">Добавить местоположение</string>
+  <string name="feedback_sharing_data_alert">Пожалуйста, удалите из этого письма любую информацию, которой вы не желаете делиться с другими. Кроме того, имейте в виду, что адрес вашей электронной почты, с которого вы отправляете сообщения, а также связанное с ним имя и изображение профиля, будут видны всем.</string>
 </resources>

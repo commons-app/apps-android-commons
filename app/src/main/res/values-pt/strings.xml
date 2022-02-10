@@ -625,6 +625,8 @@
   <string name="location_picker_image_view_shadow">A sombra da vista de imagem do selecionador de localização</string>
   <string name="image_location">Localização da imagem</string>
   <string name="check_whether_location_is_correct">Verificar se a localização está correta</string>
+  <string name="label">Etiqueta</string>
+  <string name="description">Descrição</string>
   <string name="title_page_bookmarks_items">Elementos</string>
   <string name="custom_selector_title">Seletor personalizado</string>
   <string name="custom_selector_empty_text">Não existem imagens</string>
@@ -650,4 +652,8 @@
   <string name="apply">Aplicar</string>
   <string name="reset">Reiniciar</string>
   <string name="location_message">Os dados de localização ajudam os utilizadores da wiki a encontrar a sua imagem, tornando-a muito mais útil.\nOs seus carregamentos recentes não têm localização.\nSugerimos que ative a localização nos parâmetros da aplicação da sua câmara.\nObrigado pelo carregamento!</string>
+  <string name="no_location_found_title">Não foi encontrada nenhuma localização</string>
+  <string name="no_location_found_message">Que tal adicionar o local onde a imagem foi tirada?\nOs dados de localização ajudam os editores da wiki a encontrarem a sua fotografia, tornando-a muito mais útil.\nObrigado!</string>
+  <string name="add_location">Adicionar localização</string>
+  <string name="feedback_sharing_data_alert">Remova desta mensagem de correio todas as informações que não se sinta à vontade em partilhar publicamente, por favor. Adicionalmente, esteja consciente de que o seu endereço de correio eletrónico, com o qual está a fazer esta publicação, e o nome e imagem de perfil a ele associados, serão visíveis pelo público geral.</string>
 </resources>
