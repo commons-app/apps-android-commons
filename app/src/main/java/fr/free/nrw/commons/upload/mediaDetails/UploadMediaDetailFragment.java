@@ -366,7 +366,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 getString(R.string.cancel),
                 () -> {
                     uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
-                    onNextButtonClicked();
+                    onImageValidationSuccess();
                 }, null,
                 checkBoxView,
                 false);
@@ -388,7 +388,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 getString(R.string.cancel),
                 () -> {
                     uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
-                    onNextButtonClicked();
+                    /*
+                        This "onNextButtonClicked();" function creating the issue #4806
+
+                        user skipped the warning of low quality image but, onNextButtonClicked
+                        function again checking the quality of image, that's why replacing it with
+                        below function solves the issue.
+                    */
+                    onImageValidationSuccess();
                 },
                 () -> deleteThisPicture()
             );
