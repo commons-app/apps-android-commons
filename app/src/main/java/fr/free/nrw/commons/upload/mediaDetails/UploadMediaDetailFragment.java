@@ -391,9 +391,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                     /*
                         This "onNextButtonClicked();" function creating the issue #4806
 
-                        user skipped the warning of low quality image but, onNextButtonClicked
-                        function again checking the quality of image, that's why replacing it with
-                        below function solves the issue.
+                        User skipped the warning of low quality image, so we call
+                        onImageValidationSuccess rather than onNextButtonClicked to avoid showing
+                        other warning popups again.
+
                     */
                     onImageValidationSuccess();
                 },
