@@ -114,7 +114,7 @@ class MoreBottomSheetFragmentUnitTests {
         val intentForResult: ShadowActivity.IntentForResult =
             shadowActivity.nextStartedActivityForResult
         val nextActivity: ComponentName? = intentForResult.intent.component
-        Assert.assertEquals("fr.free.nrw.commons.AboutActivity", nextActivity?.shortClassName)
+        Assert.assertEquals(nextActivity?.className?.contains(".AboutActivity"), true)
     }
 
     @Test
@@ -126,7 +126,7 @@ class MoreBottomSheetFragmentUnitTests {
         val intentForResult: ShadowActivity.IntentForResult =
             shadowActivity.nextStartedActivityForResult
         val nextActivity: ComponentName? = intentForResult.intent.component
-        Assert.assertEquals("fr.free.nrw.commons.WelcomeActivity", nextActivity?.shortClassName)
+        Assert.assertEquals(nextActivity?.className?.contains(".WelcomeActivity"), true)
     }
 
     @Test
@@ -138,7 +138,7 @@ class MoreBottomSheetFragmentUnitTests {
         val intentForResult: ShadowActivity.IntentForResult =
             shadowActivity.nextStartedActivityForResult
         val nextActivity: ComponentName? = intentForResult.intent.component
-        Assert.assertEquals("fr.free.nrw.commons.SettingsActivity", nextActivity?.shortClassName)
+        Assert.assertEquals(nextActivity?.className?.contains(".SettingsActivity"), true)
     }
 
     @Test
@@ -150,7 +150,7 @@ class MoreBottomSheetFragmentUnitTests {
         val intentForResult: ShadowActivity.IntentForResult =
             shadowActivity.nextStartedActivityForResult
         val nextActivity: ComponentName? = intentForResult.intent.component
-        Assert.assertEquals("fr.free.nrw.commons.ProfileActivity", nextActivity?.shortClassName)
+        Assert.assertEquals(nextActivity?.className?.contains(".ProfileActivity"), true)
     }
 
     @Test
@@ -162,7 +162,7 @@ class MoreBottomSheetFragmentUnitTests {
         val intentForResult: ShadowActivity.IntentForResult =
             shadowActivity.nextStartedActivityForResult
         val nextActivity: ComponentName? = intentForResult.intent.component
-        Assert.assertEquals("fr.free.nrw.commons.ReviewActivity", nextActivity?.shortClassName)
+        Assert.assertEquals(nextActivity?.className?.contains(".ReviewActivity"), true)
     }
 
     @Test
