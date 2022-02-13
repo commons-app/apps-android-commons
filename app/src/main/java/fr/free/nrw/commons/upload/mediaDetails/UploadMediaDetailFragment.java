@@ -389,8 +389,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 () -> {
                     uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
                     /*
-                        This "onNextButtonClicked();" function creating the issue #4806
-
                         User skipped the warning of low quality image, so we call
                         onImageValidationSuccess rather than onNextButtonClicked to avoid showing
                         other warning popups again.
