@@ -9,6 +9,7 @@ import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_UNCATEGORIS
 import static fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_DESCRIPTION_AND_CAPTION;
 import static fr.free.nrw.commons.description.EditDescriptionConstants.UPDATED_WIKITEXT;
 import static fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT;
+import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -821,11 +822,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
          */
         double defaultLatitude = 37.773972;
         double defaultLongitude = -122.431297;
-
         if (media.getCoordinates() != null) {
             defaultLatitude = media.getCoordinates().getLatitude();
             defaultLongitude = media.getCoordinates().getLongitude();
+        } else if (applicationKvStore.getString(LAST_LOCATION) != null) {
+            String[] lastLocation = applicationKvStore.getString(LAST_LOCATION).split(",");
+            defaultLatitude = Double.parseDouble(lastLocation[0]);
+            defaultLongitude = Double.parseDouble(lastLocation[1]);
         }
+
         startActivityForResult(new LocationPicker.IntentBuilder()
             .defaultLocation(new CameraPosition.Builder()
                 .target(new LatLng(defaultLatitude, defaultLongitude))
