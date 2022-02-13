@@ -392,7 +392,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                         User skipped the warning of low quality image, so we call
                         onImageValidationSuccess rather than onNextButtonClicked to avoid showing
                         other warning popups again.
-
                     */
                     onImageValidationSuccess();
                 },
