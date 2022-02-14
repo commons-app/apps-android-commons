@@ -7,6 +7,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacem
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION;
+import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -382,6 +383,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
                 mapboxMap.getCameraPosition().target.getLatitude()
                     + ","
                     + mapboxMap.getCameraPosition().target.getLongitude());
+            applicationKvStore.putString(LAST_ZOOM,mapboxMap.getCameraPosition().zoom + "");
         }
         final Intent returningIntent = new Intent();
         returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION,
