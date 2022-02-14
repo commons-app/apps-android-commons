@@ -236,8 +236,7 @@ class MediaDetailFragmentUnitTests {
     fun testOnUpdateCoordinatesClicked() {
         `when`(media.coordinates).thenReturn(null)
         `when`(applicationKvStore.getString(LAST_LOCATION)).thenReturn("37.773972,-122.431297")
-
-        fragment.launchZoomActivity(view)
+        fragment.onUpdateCoordinatesClicked()
     }
 
     @Test
