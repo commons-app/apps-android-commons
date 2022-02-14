@@ -127,7 +127,6 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
     public
     JsonKvStore applicationKvStore;
 
-
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
