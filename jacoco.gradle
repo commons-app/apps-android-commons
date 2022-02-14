@@ -83,6 +83,8 @@ project.afterEvaluate {
                             '**/concurrency/*',
                             // kvstore
                             '**/kvstore/*',
+                            // db
+                            '**/db/*',
                     ]
 
                     def javaClasses = fileTree(dir: variant.javaCompileProvider.get().destinationDir,
