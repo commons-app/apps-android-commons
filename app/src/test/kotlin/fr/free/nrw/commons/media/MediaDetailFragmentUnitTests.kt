@@ -26,6 +26,7 @@ import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.ui.widget.HtmlTextView
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -53,6 +54,7 @@ class MediaDetailFragmentUnitTests {
 
 
     private val REQUEST_CODE = 1001
+    private val LAST_LOCATION = "last_location_while_uploading"
     private val REQUEST_CODE_EDIT_DESCRIPTION = 1002
     private lateinit var fragment: MediaDetailFragment
     private lateinit var fragmentManager: FragmentManager
@@ -226,6 +228,15 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testLaunchZoomActivity() {
         `when`(media.imageUrl).thenReturn("")
+        fragment.launchZoomActivity(view)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnUpdateCoordinatesClicked() {
+        `when`(media.coordinates).thenReturn(null)
+        `when`(applicationKvStore.getString(LAST_LOCATION)).thenReturn("37.773972,-122.431297")
+
         fragment.launchZoomActivity(view)
     }
 
