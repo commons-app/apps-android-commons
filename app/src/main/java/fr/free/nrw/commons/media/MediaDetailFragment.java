@@ -825,8 +825,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         if (media.getCoordinates() != null) {
             defaultLatitude = media.getCoordinates().getLatitude();
             defaultLongitude = media.getCoordinates().getLongitude();
-        } else if (applicationKvStore.getString(LAST_LOCATION, defaultLatitude + "," + defaultLongitude) != null) {
-            String[] lastLocation = applicationKvStore.getString(LAST_LOCATION).split(",");
+        } else {
+            String[] lastLocation = applicationKvStore.getString(LAST_LOCATION,(defaultLatitude + "," + defaultLongitude)).split(",");
             defaultLatitude = Double.parseDouble(lastLocation[0]);
             defaultLongitude = Double.parseDouble(lastLocation[1]);
         }

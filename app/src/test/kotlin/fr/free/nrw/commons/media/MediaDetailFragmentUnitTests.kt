@@ -241,14 +241,6 @@ class MediaDetailFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnUpdateCoordinatesClickedWithLastLocation() {
-        `when`(media.coordinates).thenReturn(null)
-        `when`(applicationKvStore.getString(LAST_LOCATION)).thenReturn("37.773972,-122.431297")
-        fragment.onUpdateCoordinatesClicked()
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testOnUpdateCoordinatesClickedNotNullValue() {
         `when`(media.coordinates).thenReturn(LatLng(-0.000001, -0.999999, 0f))
         `when`(applicationKvStore.getString(LAST_LOCATION)).thenReturn("37.773972,-122.431297")
