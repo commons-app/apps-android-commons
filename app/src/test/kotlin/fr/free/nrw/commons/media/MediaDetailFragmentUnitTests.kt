@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.media
 
+import org.robolectric.shadows.ShadowActivity
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -17,7 +18,9 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
+import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import fr.free.nrw.commons.Media
+import org.robolectric.Shadows.shadowOf
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
@@ -25,13 +28,16 @@ import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter
 import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.quiz.QuizActivity
 import fr.free.nrw.commons.ui.widget.HtmlTextView
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
@@ -39,9 +45,14 @@ import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
+import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.robolectric.shadows.ShadowIntent
 import org.wikipedia.AppAdapter
+import org.wikipedia.edit.EditClient
+import org.wikipedia.edit.EditSuccessResult
+import retrofit2.Call
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 import java.util.*
@@ -116,6 +127,8 @@ class MediaDetailFragmentUnitTests {
     @Mock
     private lateinit var intent: Intent
 
+    private lateinit var activity: SearchActivity
+
     @Before
     fun setUp() {
 
@@ -129,7 +142,7 @@ class MediaDetailFragmentUnitTests {
 
         Fresco.initialize(RuntimeEnvironment.application.applicationContext)
 
-        val activity = Robolectric.buildActivity(SearchActivity::class.java).create().get()
+        activity = Robolectric.buildActivity(SearchActivity::class.java).create().get()
 
         fragment = MediaDetailFragment()
         fragmentManager = activity.supportFragmentManager
@@ -237,6 +250,11 @@ class MediaDetailFragmentUnitTests {
         `when`(media.coordinates).thenReturn(null)
         `when`(applicationKvStore.getString(LAST_LOCATION)).thenReturn("37.773972,-122.431297")
         fragment.onUpdateCoordinatesClicked()
+        Mockito.verify(media, Mockito.times(1)).coordinates
+        val shadowActivity: ShadowActivity = shadowOf(activity)
+        val startedIntent = shadowActivity.nextStartedActivity
+        val shadowIntent: ShadowIntent = shadowOf(startedIntent)
+        Assert.assertEquals(shadowIntent.intentClass, LocationPickerActivity::class.java)
     }
 
     @Test
@@ -245,6 +263,11 @@ class MediaDetailFragmentUnitTests {
         `when`(media.coordinates).thenReturn(LatLng(-0.000001, -0.999999, 0f))
         `when`(applicationKvStore.getString(LAST_LOCATION)).thenReturn("37.773972,-122.431297")
         fragment.onUpdateCoordinatesClicked()
+        Mockito.verify(media, Mockito.times(3)).coordinates
+        val shadowActivity: ShadowActivity = shadowOf(activity)
+        val startedIntent = shadowActivity.nextStartedActivity
+        val shadowIntent: ShadowIntent = shadowOf(startedIntent)
+        Assert.assertEquals(shadowIntent.intentClass, LocationPickerActivity::class.java)
     }
 
     @Test
