@@ -1,6 +1,5 @@
 package fr.free.nrw.commons
 
-import android.content.Context
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.auth.SessionManager
@@ -8,24 +7,15 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
-import org.robolectric.annotation.Config
-import org.robolectric.annotation.LooperMode
 import org.wikipedia.dataclient.SharedPreferenceCookieManager
 import org.wikipedia.json.GsonMarshaller
 import org.wikipedia.login.LoginResult
 
-@RunWith(RobolectricTestRunner::class)
-@Config(sdk = [21], application = TestCommonsApplication::class)
-@LooperMode(LooperMode.Mode.PAUSED)
 class CommonsAppAdapterUnitTest {
 
     private lateinit var adapter: CommonsAppAdapter
-    private lateinit var context: Context
 
     @Mock
     private lateinit var sessionManager: SessionManager
@@ -43,7 +33,6 @@ class CommonsAppAdapterUnitTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         adapter = CommonsAppAdapter(sessionManager, preferences)
-        context = RuntimeEnvironment.application.applicationContext
     }
 
     @Test
