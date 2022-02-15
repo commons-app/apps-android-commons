@@ -438,7 +438,10 @@ class UploadMediaDetailFragmentUnitTest {
     fun testRememberedZoomLevel(){
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         Whitebox.setInternalState(fragment, "defaultKvStore", defaultKvStore)
-        `when`(defaultKvStore.getString("last_zoom_level_while_uploading", )).thenReturn("16.0")
+        Whitebox.setInternalState(fragment, "editableUploadItem", uploadItem)
+        `when`(defaultKvStore.getString("last_zoom_level_while_uploading"))
+            .thenReturn("16.0")
+        `when`(imageCoordinates.zoomLevel).thenReturn(16.0)
     }
 
 }
