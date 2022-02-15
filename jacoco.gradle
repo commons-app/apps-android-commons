@@ -79,6 +79,8 @@ project.afterEvaluate {
                             // sealed and data classes
                             '**/*$Result.*',
                             '**/*$Result$*.*',
+                            // model
+                            '**/**/model/*',
                             // concurrency
                             '**/concurrency/*',
                             // kvstore
