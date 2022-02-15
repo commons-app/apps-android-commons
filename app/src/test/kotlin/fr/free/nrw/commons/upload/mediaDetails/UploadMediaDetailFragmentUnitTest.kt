@@ -21,6 +21,7 @@ import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.nhaarman.mockitokotlin2.mock
 import fr.free.nrw.commons.LocationPicker.LocationPicker
+import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
@@ -346,6 +347,7 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         `when`(imageCoordinates.decLatitude).thenReturn(0.0)
         `when`(imageCoordinates.decLongitude).thenReturn(0.0)
+        `when`(imageCoordinates.zoomLevel).thenReturn(16.0)
         fragment.showExternalMap(uploadItem)
     }
 
@@ -429,6 +431,14 @@ class UploadMediaDetailFragmentUnitTest {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         runnable = Runnable {  }
         fragment.displayAddLocationDialog(runnable)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testRememberedZoomLevel(){
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Whitebox.setInternalState(fragment, "defaultKvStore", defaultKvStore)
+        `when`(defaultKvStore.getString("last_zoom_level_while_uploading", )).thenReturn("16.0")
     }
 
 }

@@ -383,7 +383,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
                 mapboxMap.getCameraPosition().target.getLatitude()
                     + ","
                     + mapboxMap.getCameraPosition().target.getLongitude());
-            applicationKvStore.putString(LAST_ZOOM,mapboxMap.getCameraPosition().zoom + "");
+            applicationKvStore.putString(LAST_ZOOM, mapboxMap.getCameraPosition().zoom + "");
         }
         final Intent returningIntent = new Intent();
         returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION,
