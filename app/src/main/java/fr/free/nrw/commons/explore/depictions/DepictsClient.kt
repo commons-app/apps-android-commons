@@ -56,20 +56,25 @@ class DepictsClient @Inject constructor(private val depictsInterface: DepictsInt
                         .toIds()[0]).blockingGet()
                     val nameAsDescription = entities.entities().values.first().labels()
                         .byLanguageOrFirstOrEmpty()
-                    DepictedItem(entity,
+                    DepictedItem(
+                        entity,
                         entity.labels().byLanguageOrFirstOrEmpty(),
-                        nameAsDescription)
+                        nameAsDescription
+                    )
                 } else {
-                DepictedItem(entity,
-                    entity.labels().byLanguageOrFirstOrEmpty(),
-                    entity.descriptions().byLanguageOrFirstOrEmpty())
+                    DepictedItem(
+                        entity,
+                        entity.labels().byLanguageOrFirstOrEmpty(),
+                        entity.descriptions().byLanguageOrFirstOrEmpty()
+                    )
                 }
             }
         }
 
     /**
-     * Tries to get Entities.Label by default language from the map if this returns null, Tries to
-     * retrieve first element from the map, if this still returns null, function returns ""
+     * Tries to get Entities.Label by default language from the map.
+     * If that returns null, Tries to retrieve first element from the map.
+     * If that still returns null, function returns "".
      */
     private fun Map<String, Entities.Label>.byLanguageOrFirstOrEmpty() =
         let {

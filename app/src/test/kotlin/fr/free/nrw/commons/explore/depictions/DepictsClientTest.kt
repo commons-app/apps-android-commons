@@ -29,7 +29,6 @@ class DepictsClientTest {
     }
 
     @Test
-    @Ignore()
     fun searchForDepictions() {
         val depictSearchResponse = mock<DepictSearchResponse>()
         whenever(depictsInterface.searchForDepicts("query", "1", "en", "en", "0"))
@@ -62,8 +61,10 @@ class DepictsClientTest {
         whenever(binding1.id).thenReturn("1")
         whenever(binding2.id).thenReturn("2")
         val entities = mock<Entities>()
+        val entity = mock<Entities.Entity>()
         whenever(depictsInterface.getEntities("1|2")).thenReturn(Single.just(entities))
         whenever(entities.entities()).thenReturn(emptyMap())
+        whenever(entity.descriptions()).thenReturn(emptyMap())
         depictsClient.toDepictions(Single.just(sparqlResponse))
             .test()
             .assertValue(emptyList())
