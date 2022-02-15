@@ -85,6 +85,8 @@ project.afterEvaluate {
                             '**/kvstore/*',
                             // db
                             '**/db/*',
+                            // data
+                            '**/data/*',
                     ]
 
                     def javaClasses = fileTree(dir: variant.javaCompileProvider.get().destinationDir,
