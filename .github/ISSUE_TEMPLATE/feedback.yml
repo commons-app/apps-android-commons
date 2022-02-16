@@ -1,0 +1,46 @@
+name: "\U0001F4AC Feedback"
+description: Share your feedback about the app
+labels: ["feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        - Before creating an issue, please search the existing issues to see if a similar one has already been created.
+        - You can search issues by specific labels (e.g. `label:nearby`) or just by typing keywords into the search filter.
+  - type: textarea
+    attributes:
+      label: Feedback
+      description: Share your feedback about the app.
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Wiki username
+      placeholder: Jimbo Wales
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: |
+        # Device information
+  - type: input
+    attributes:
+      label: Device name
+      description: What make and model device did you encounter this on?
+      placeholder: Samsung J7
+    validations:
+      required: false
+  - type: input
+    attributes:
+      label: Android version
+      description: What Android version (e.g., Android 6.0 Marshmallow or Android 11) are you running? Is it the stock version from the manufacturer or a custom ROM ?
+      placeholder: Android 10
+    validations:
+      required: false
+  - type: input
+    attributes:
+      label: Commons app version
+      description: You can find this information by clicking the right-most menu in the bottom navigation bar in the app and tapping 'About'. If you are building from our codebase instead of downloading the app, please also mention the branch and build variant (e.g. `master` and `prodDebug`).
+      placeholder: 3.1.1
+    validations:
+      required: true

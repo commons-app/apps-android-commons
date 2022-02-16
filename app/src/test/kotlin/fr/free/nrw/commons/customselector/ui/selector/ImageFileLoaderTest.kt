@@ -75,7 +75,7 @@ class ImageFileLoaderTest {
      */
     @Test
     fun testLoadDeviceImages() {
-        imageFileLoader.loadDeviceImages(imageLoaderListener, coroutineScope)
+        imageFileLoader.loadDeviceImages(imageLoaderListener)
     }
 
     /**

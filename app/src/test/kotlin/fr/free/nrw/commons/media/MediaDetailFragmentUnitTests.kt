@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.media
 
+import org.robolectric.shadows.ShadowActivity
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -17,7 +18,9 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
+import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import fr.free.nrw.commons.Media
+import org.robolectric.Shadows.shadowOf
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
@@ -31,6 +34,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
@@ -40,6 +44,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.robolectric.shadows.ShadowIntent
 import org.wikipedia.AppAdapter
 import java.lang.reflect.Field
 import java.lang.reflect.Method
@@ -53,6 +58,7 @@ class MediaDetailFragmentUnitTests {
 
 
     private val REQUEST_CODE = 1001
+    private val LAST_LOCATION = "last_location_while_uploading"
     private val REQUEST_CODE_EDIT_DESCRIPTION = 1002
     private lateinit var fragment: MediaDetailFragment
     private lateinit var fragmentManager: FragmentManager
@@ -114,6 +120,8 @@ class MediaDetailFragmentUnitTests {
     @Mock
     private lateinit var intent: Intent
 
+    private lateinit var activity: SearchActivity
+
     @Before
     fun setUp() {
 
@@ -127,7 +135,7 @@ class MediaDetailFragmentUnitTests {
 
         Fresco.initialize(RuntimeEnvironment.application.applicationContext)
 
-        val activity = Robolectric.buildActivity(SearchActivity::class.java).create().get()
+        activity = Robolectric.buildActivity(SearchActivity::class.java).create().get()
 
         fragment = MediaDetailFragment()
         fragmentManager = activity.supportFragmentManager
@@ -227,6 +235,32 @@ class MediaDetailFragmentUnitTests {
     fun testLaunchZoomActivity() {
         `when`(media.imageUrl).thenReturn("")
         fragment.launchZoomActivity(view)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnUpdateCoordinatesClicked() {
+        `when`(media.coordinates).thenReturn(null)
+        `when`(applicationKvStore.getString(LAST_LOCATION)).thenReturn("37.773972,-122.431297")
+        fragment.onUpdateCoordinatesClicked()
+        Mockito.verify(media, Mockito.times(1)).coordinates
+        val shadowActivity: ShadowActivity = shadowOf(activity)
+        val startedIntent = shadowActivity.nextStartedActivity
+        val shadowIntent: ShadowIntent = shadowOf(startedIntent)
+        Assert.assertEquals(shadowIntent.intentClass, LocationPickerActivity::class.java)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnUpdateCoordinatesClickedNotNullValue() {
+        `when`(media.coordinates).thenReturn(LatLng(-0.000001, -0.999999, 0f))
+        `when`(applicationKvStore.getString(LAST_LOCATION)).thenReturn("37.773972,-122.431297")
+        fragment.onUpdateCoordinatesClicked()
+        Mockito.verify(media, Mockito.times(3)).coordinates
+        val shadowActivity: ShadowActivity = shadowOf(activity)
+        val startedIntent = shadowActivity.nextStartedActivity
+        val shadowIntent: ShadowIntent = shadowOf(startedIntent)
+        Assert.assertEquals(shadowIntent.intentClass, LocationPickerActivity::class.java)
     }
 
     @Test
