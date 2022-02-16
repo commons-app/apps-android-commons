@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.upload
 
+import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.category.CategoriesModel
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.contributions.Contribution
@@ -207,8 +209,8 @@ class UploadRepositoryUnitTest {
     @Test
     fun testOnDepictItemClicked() {
         assertEquals(
-            repository.onDepictItemClicked(depictedItem),
-            uploadModel.onDepictItemClicked(depictedItem)
+            repository.onDepictItemClicked(depictedItem, mock()),
+            uploadModel.onDepictItemClicked(depictedItem, mock())
         )
     }
 
