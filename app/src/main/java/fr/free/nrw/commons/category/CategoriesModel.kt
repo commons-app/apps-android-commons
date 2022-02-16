@@ -5,6 +5,7 @@ import fr.free.nrw.commons.upload.GpsCategoryModel
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.utils.StringSortingUtils
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.functions.Function4
 import timber.log.Timber
 import java.util.*
@@ -96,8 +97,27 @@ class CategoriesModel @Inject constructor(
                 .toObservable()
     }
 
-    private fun categoriesFromDepiction(selectedDepictions: List<DepictedItem>) =
-        Observable.just(selectedDepictions.map { it.commonsCategories }.flatten())
+    /**
+     * Fetches details of every category associated with selected depictions, converts them into
+     * CategoryItem and returns them in a list.
+     *
+     * @param selectedDepictions selected DepictItems
+     * @return List of CategoryItem associated with selected depictions
+     */
+    private fun categoriesFromDepiction(selectedDepictions: List<DepictedItem>):
+            Observable<MutableList<CategoryItem>>? {
+        return Observable.fromIterable(
+                selectedDepictions.map { it.commonsCategories }.flatten())
+                .map { categoryItem ->
+                    categoryClient.getCategoriesByName(categoryItem.name,
+                        categoryItem.name, SEARCH_CATS_LIMIT).map {
+
+                        CategoryItem(it[0].name, it[0].description,
+                            it[0].thumbnail, it[0].isSelected)
+
+                    }.blockingGet()
+                }.toList().toObservable()
+    }
 
     private fun combine(
         depictionCategories: List<CategoryItem>,

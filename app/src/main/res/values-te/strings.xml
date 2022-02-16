@@ -13,11 +13,12 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
+  <string name="starting_uploads">ఎక్కింపులను మొదలుపెడుతున్నాం</string>
+  <plurals name="starting_multiple_uploads">
     <item quantity="one">%1$d ఎక్కింపును మొదలు పెడుతున్నాం</item>
     <item quantity="other">%1$d ఎక్కింపులను మొదలు పెడుతున్నాం</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d ఎక్కింపు</item>
     <item quantity="other">%1$d ఎక్కింపులు</item>
   </plurals>
@@ -50,18 +51,23 @@
   <string name="signup">నమోదవ్వండి</string>
   <string name="logging_in_title">లాగినవుతున్నారు</string>
   <string name="logging_in_message">వేచివుండండి…</string>
+  <string name="updating_caption_title">ఉల్లేఖనలను, వివరణలనూ తాజాకరిస్తున్నాం</string>
+  <string name="updating_caption_message">వేచి ఉండండి…</string>
   <string name="login_success">లాగిన్ విజయవంతమైంది!</string>
   <string name="login_failed">లాగిన్ విఫలమైంది!</string>
   <string name="upload_failed">ఫైలు కనబడలేదు. మరో ఫైలు కోసం ప్రయత్నించండి.</string>
   <string name="authentication_failed">అథీకరణ విఫలమైంది, మళ్ళీ ప్రయత్నించండి</string>
   <string name="uploading_started">ఎక్కింపు మొదలైంది!</string>
+  <string name="uploading_queued">ఎక్కింపు వరుసలో ఉంది (పరిమిత కనెక్షన్ల మోడ్ చేతనంగా ఉంది)</string>
   <string name="upload_completed_notification_title">%1$s ను ఎక్కించాం!</string>
   <string name="upload_completed_notification_text">మీ ఎక్కింపును చూసేందుకు నొక్కండి</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s ఎక్కింపును మొదలుపెడుతున్నాం</string>
+  <string name="upload_progress_notification_title_start">దస్త్రాన్ని ఎక్కిస్తున్నాం: $s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ను ఎక్కిస్తున్నాం</string>
   <string name="upload_progress_notification_title_finishing">%1$s ఎక్కింపు పూర్తికావస్తోంది</string>
   <string name="upload_failed_notification_title">%1$s ఎక్కింపు విఫలమైంది</string>
+  <string name="upload_paused_notification_title">%1$s ఎక్కింపు నిలిచింది</string>
   <string name="upload_failed_notification_subtitle">చూసేందుకు నొక్కండి</string>
+  <string name="upload_paused_notification_subtitle">చూసేందుకు నొక్కండి</string>
   <string name="title_activity_contributions">ఇటీవలి నా ఎక్కింపులు</string>
   <string name="contribution_state_queued">క్యూలో ఉంది</string>
   <string name="contribution_state_failed">విఫలమైంది</string>
@@ -72,6 +78,7 @@
   <string name="menu_nearby">చుట్టుపక్కల</string>
   <string name="provider_contributions">నా ఎక్కింపులు</string>
   <string name="menu_share">పంచుకోండి</string>
+  <string name="menu_view_file_page">దస్త్రం పేజీని చూడండి</string>
   <string name="share_title_hint">శీర్షిక (తప్పనిసరి)</string>
   <string name="add_caption_toast">ఈ ఫైలుకు ఒక శీర్షిక ఇవ్వండి</string>
   <string name="share_description_hint">వివరణ</string>
@@ -86,11 +93,15 @@
   <string name="provider_modifications">మార్పులు</string>
   <string name="menu_upload_single">ఎక్కించు</string>
   <string name="categories_search_text_hint">వర్గాల్లో వెతకండి</string>
+  <string name="depicts_search_text_hint">మీ మీడియా చూపించే డేటా కోసం వెతకండి (పర్వతం, తాజ్ మహల్ మొదలైనవి)</string>
   <string name="menu_save_categories">భద్రపరచు</string>
   <string name="refresh_button">తాజాకరించు</string>
   <string name="display_list_button">జాబితా</string>
   <string name="contributions_subtitle_zero">(ఇంకా ఎక్కింపులేమీ లేవు)</string>
   <string name="categories_not_found">%1$s తో సరిపోలే వర్గాలేమీ లేవు</string>
+  <string name="depictions_not_found">%1$s కు సరిపోలే వికీడేటా అంశాలేమీ కనబడలేదు</string>
+  <string name="no_child_classes">%1$s కు చైల్డ్ క్లాసులేమీ లేవు</string>
+  <string name="no_parent_classes">%1$s కు పేరెంటు క్లాసులేమీ లేవు</string>
   <string name="categories_skip_explanation">వికీమీడియా కామన్స్ లో వెతికేటపుడు మీ బొమ్మలు మరింత సులువుగా కనబడేందుకు వాటికి వర్గాలను చేర్చండి.</string>
   <string name="categories_activity_title">వర్గాలు</string>
   <string name="title_activity_settings">అమరికలు</string>
@@ -158,6 +169,7 @@
   <string name="location_permission_title">స్థల అనుమతి కోరుతున్నాం</string>
   <string name="ok">సరే</string>
   <string name="warning">హెచ్చరిక</string>
+  <string name="duplicate_image_found">నకలు బొమ్మ కనబడింది</string>
   <string name="upload">ఎక్కించు</string>
   <string name="yes">అవును</string>
   <string name="no">వద్దు</string>
@@ -206,6 +218,7 @@
   <string name="nearby_info_menu_wikidata_article">వికీడేటా అంశం</string>
   <string name="nearby_info_menu_wikipedia_article">వికీపీడియా వ్యాసం</string>
   <string name="description_info">మీడియా గురించి వీలైనంత ఎక్కువ వివరించండి: ఎక్కడ తీసారు? సందర్భం ఏమిటి? ఇందులో ఉన్న వస్తువులు, వ్యక్తుల గురించి చెప్పండి. చూడగానే తట్టని సమాచారాన్ని తెలియజెయ్యండి. ఉదా: ఏ సమయంలో ఈ ఫోటో తీసారు. మీ ఫోటో ఏదైనా అసాధారణ విషయాన్ని చూపిస్తోంటే, ఆ అసాధారణమేంటో వివరించండి.</string>
+  <string name="caption_info">బొమ్మ గురించి క్లుప్తంగా వివరణ రాయండి. మొదటి వ్యాఖ్యను బొమ్మ శీర్షికగా వాడుతారు. 255 కారెక్టర్ల వరకు ఉండొచ్చు.</string>
   <string name="upload_problem_exist">ఈ బొమ్మలో ఉన్న సమస్యలు :</string>
   <string name="upload_problem_image_dark">బొమ్మ మరీ అంధకారంగా ఉంది.</string>
   <string name="upload_problem_image_blurry">బొమ్మ అలుక్కుపోయినట్లు ఉంది.</string>
@@ -213,9 +226,12 @@
   <string name="upload_problem_different_geolocation">బొమ్మ వేరే స్థలంలో తీసారు.</string>
   <string name="upload_problem_fbmd">మీరు తీసిన బొమ్మలను మాత్రమే ఎక్కించండి. ఇతర వ్యక్తుల ఫేస్‌బుక్ ఖాతాల్లో కనిపించిన బొమ్మలను ఎక్కించకండి.</string>
   <string name="upload_problem_do_you_continue">అయినా సరే.. ఈ బొమ్మను ఎక్కించాలనే నిశ్చయించుకున్నారా?</string>
+  <string name="upload_connection_error_alert_title">కనెక్షను లోపం</string>
+  <string name="upload_connection_error_alert_detail">ఎక్కించడానికి పనిచేసే అంతర్జాల కనెక్షను ఉండాలి. మీ నెట్‌వర్కు కనెక్షన్ను సరిచూసుకోండి.</string>
+  <string name="upload_problem_image">బొమ్మలో సమస్యలు కనబడ్డాయి</string>
   <string name="internet_downloaded">మీరు తీసిన బొమ్మలను మాత్రమే ఎక్కించండి. అంతర్జాలం నుండి దించుకున్న బొమ్మలను ఎక్కించకండి.</string>
-  <string name="use_external_storage" fuzzy="true">బయటి స్టోరేజిని వాడండి</string>
-  <string name="use_external_storage_summary" fuzzy="true">యాప్‌లోని కెమెరాను వాడి తీసిన ఫోటోలను మీ పరికరంలో భద్రపరచండి</string>
+  <string name="use_external_storage">యాప్‌లో తీసిన ఫోటోలను భద్రపరచండి</string>
+  <string name="use_external_storage_summary">యాప్‌లోని కెమెరాను వాడి తీసిన ఫోటోలను మీ పరికరంలో భద్రపరచండి</string>
   <string name="login_to_your_account">మీ ఖాతాలోకి లాగినవండి</string>
   <string name="send_log_file">లాగ్ ఫైలును పంపించు</string>
   <string name="send_log_file_description">లాగ్ ఫైలును ఈమెయిలు ద్వారా డెవలపర్లకు పంపించి, యాప్ లోని సమస్యలను పరిష్కరించేందుకు సాయపడండి. గమనిక: లాగ్‌లలో మీ గుర్తింపు సమాచారం ఉండే అవకాశం ఉంది</string>
@@ -223,7 +239,7 @@
   <string name="null_url">లోపం! URL కనబడలేదు</string>
   <string name="nominate_deletion">తొలగించేందుకు నామినేటు చెయ్యండి</string>
   <string name="nominated_for_deletion">ఆ బొమ్మను తొలగించేందుకు నామినేటు చేసాం.</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;వివరాల కోసం వెబ్‌పేజీని చూడండి&lt;/u&gt;</string>
+  <string name="nominated_see_more">వివరాల కోసం వెబ్‌పేజీని చూడండి</string>
   <string name="skip_login">దాటవేయి</string>
   <string name="navigation_item_login">లాగినవండి</string>
   <string name="skip_login_title">నిజంగానే లాగినవరా?</string>
@@ -231,14 +247,14 @@
   <string name="login_alert_message">ఈ అంశాన్ని వాడాలంటే లాగినవండి</string>
   <string name="copy_wikicode">వికీటెక్స్టును క్లిప్‌బోర్డుకు కాపీ చెయ్యి</string>
   <string name="wikicode_copied">వికీటెక్స్టును క్లిప్‌బోర్డుకు కాపీ చేసాం</string>
-  <string name="nearby_location_not_available" fuzzy="true">స్థలం అందుబాటులో లేదు.</string>
+  <string name="nearby_location_not_available">స్థలం అందుబాటులో లేదు. \"సమీపంలోని సరిగ్గా పనిచెయ్యక పోవచ్చు.</string>
   <string name="location_permission_rationale_nearby">చుట్టుపక్కల స్థలాలను చూపించాలంటే అనుమతి కావాలి</string>
   <string name="nearby_directions">మార్గ సూచనలు</string>
   <string name="nearby_wikidata">వికీడేటా</string>
   <string name="nearby_wikipedia">వికీపీడియా</string>
   <string name="nearby_commons">కామన్స్</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;మమ్మల్ని మూల్యాంకన చెయ్యండి&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_rate_us">మమ్మల్ని మూల్యాంకన చెయ్యండి</string>
+  <string name="about_faq">FAQ</string>
   <string name="welcome_skip_button">ట్యుటోరియల్‌ను దాటవెయ్యి</string>
   <string name="no_internet">అంతర్జాలం అందుబాటులో లేదు</string>
   <string name="error_notifications">గమనింపులు తేవడంలో లోపం</string>
@@ -251,6 +267,9 @@
   <string name="about_translate_cancel">రద్దుచేయి</string>
   <string name="retry">మళ్ళీ ప్రయత్నించు</string>
   <string name="showcase_view_whole_nearby_activity">మీ చుట్టుపక్కల ఈ స్థలాల గురించిన వికీపీడియా వ్యాసాల్లో బొమ్మలు అవసరం.\n\n\'ఈ ప్రాంతంలో వెతుకు\' నొక్కితే, మ్యాపును లాక్ చేసి, ఈ స్థలం చుట్టుపట్ల వెతకడం మొదలు పెడుతుంది.</string>
+  <string name="showcase_view_needs_photo">ఈ స్థలానికి ఒక ఫొటో కావాలి.</string>
+  <string name="showcase_view_has_photo">ఈ స్థలానికి ఈసరికే ఒక ఫొటో ఉంది.</string>
+  <string name="showcase_view_no_longer_exists">ఈ స్థలం ఇప్పుడు ఉనికిలో లేదు.</string>
   <string name="no_images_found">బొమ్మలేమీ కనబడలేదు!</string>
   <string name="error_loading_images">బొమ్మలను లోడు చేసేటపుడు లోపం దొర్లింది.</string>
   <string name="image_uploaded_by">ఎక్కించినవారు: %1$s</string>
@@ -294,6 +313,8 @@
   <string name="quiz_screenshot_question">ఈ తెరపట్టును ఎక్కించేందుకు బానే ఉందా?</string>
   <string name="share_app_title">యాప్‌ను పంచుకోండి</string>
   <string name="error_fetching_nearby_places">చుట్టుపక్కల స్థలాలను తేవడంలో లోపం.</string>
+  <string name="no_nearby_places_around">సమీపంలో స్థలాలేమీ లేవు</string>
+  <string name="error_fetching_nearby_monuments">సమీపం లోని నిర్మాణాలను తేవడంలో లోపం.</string>
   <string name="no_recent_searches">ఇటీవలి వెతుకులాటలేమీ లేవు</string>
   <string name="delete_recent_searches_dialog">మీ వెతుకులాట చరిత్రను నిజంగానే తుడిచివేయాలనుకుంటున్నారా?</string>
   <string name="delete_search_dialog">ఈ వెతుకులాటను తొలగించాలను అనుకుంటున్నారా?</string>
@@ -326,7 +347,7 @@
   <string name="notifications">గమనింపులు</string>
   <string name="read_notifications">గమనింపులు (చదివినవి)</string>
   <string name="display_nearby_notification">చుట్టుపక్కల గమనింపును చూపించు</string>
-  <string name="display_nearby_notification_summary" fuzzy="true">బొమ్మలు అవసరమైన చుట్టుపక్కల స్థలాన్ని చూసేందుకు ఇక్కడ నొక్కండి</string>
+  <string name="display_nearby_notification_summary">బొమ్మలు అవసరమైన అతి సమీపంలోని స్థలం కోసం యాప్‌ గమనింపు చూపించు</string>
   <string name="list_sheet">జాబితా</string>
   <string name="storage_permission">స్టోరేజి అనుమతి</string>
   <string name="write_storage_permission_rationale_for_image_share">బొమ్మలను ఎక్కించేందుకు గాను మీ బయటి స్టోరేజిని చూసే అనుమతులు కావాలి</string>
@@ -335,7 +356,7 @@
   <string name="next">తదుపరి</string>
   <string name="previous">మునుపటి</string>
   <string name="submit">పంపించు</string>
-  <string name="upload_title_duplicate" fuzzy="true">%1$s పేరుతో ఒక ఫైలు ఈసరికే ఉంది. ఈ పేరుతోటే ముందుకు పోతారా?</string>
+  <string name="upload_title_duplicate">%1$s పేరుతో ఒక దస్త్రం ఈసరికే ఉంది. ఈ పేరుతోటే ముందుకు పోతారా?\n\nగమనిక: దస్త్రం పేరుకు ఆటోమాటిగ్గా సరిపడే ఒక అంత్య పదాన్ని చేరుస్తుంది.</string>
   <string name="map_application_missing">దీనికి సరిపడే మ్యాపు అప్లికేషనేదీ మీ పరికరంలో కనబడలేదు. ఈ విశేషాన్ని వాడాలంటే, దీనికి సరిపడే మ్యాపు అప్లికేషన్ను స్థాపించుకోండి.</string>
   <string name="title_page_bookmarks_pictures">బొమ్మలు</string>
   <string name="title_page_bookmarks_locations">స్థలాలు</string>
@@ -352,7 +373,10 @@
   <string name="uploaded_by_myself">%1$s న నేనే ఎక్కించాను, %2$d వ్యాసాల్లో వాడారు.</string>
   <string name="no_uploads">కామన్స్‌కు స్వాగతం!\n\nచేర్చు బొత్తాన్ని నొక్కి మీ మొదటి మీడియాను ఎక్కించండి.</string>
   <string name="no_categories_selected">వర్గాలేమీ ఎంచుకోలేదు</string>
-  <string name="no_categories_selected_warning_desc" fuzzy="true">వర్గాల్లేని బొమ్మలను అరుదుగా వాడగలం. వర్గాలేమీ ఎంచుకోకుండానే ఎక్కించాలని అనుకుంటున్నారా?</string>
+  <string name="no_categories_selected_warning_desc">వర్గాల్లేని బొమ్మలను అరుదుగా వాడగలం. వర్గాలేమీ ఎంచుకోకుండానే కొనసాగాలని అనుకుంటున్నారా?</string>
+  <string name="back_button_warning">ఎక్కింపును రద్దుచెయ్యి</string>
+  <string name="back_button_warning_desc">బ్యాక్ బొత్తాం నొక్కితే ఈ ఎక్కింపు రద్దౌతుంది, ఇప్పటి వరకు వచ్చిన పురోగతి పోతుంది.</string>
+  <string name="back_button_continue">ఎక్కింపును కొనసాగించు</string>
   <string name="upload_flow_all_images_in_set">(సెట్టులో ఉన్న బొమ్మలన్నిటికీ)</string>
   <string name="search_this_area">ఈ ప్రాంతంలో వెతుకు</string>
   <string name="nearby_card_permission_title">అనుమతి అభ్యర్ధన</string>
@@ -362,6 +386,7 @@
   <string name="display_location_permission_title">స్థాన అనుమతి కోసం అడుగు</string>
   <string name="display_location_permission_explanation">చుట్టుపక్కల స్థలం గమనింపును చూపించేందుకు, అవసరమైనప్పుడల్లా స్థలపు అనుమతి అడుగు</string>
   <string name="achievements_fetch_failed">ఏదో లోపం జరిగింది, మీరు సాధించిన వాటిని తేలేక పోయాం</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">మా మూల్యాంకన వ్యవస్థ అందుకోలేని స్థాయిలో మీరు తోడ్పాట్లు చేసారు. ఇది అత్యున్నత స్థాయి తోడ్పాటు.</string>
   <string name="ends_on">ముగిసే సమయం:</string>
   <string name="display_campaigns">ప్రచారాలను చూపించు</string>
   <string name="display_campaigns_explanation">ప్రస్తుతం నడుస్తున్న ప్రచారాలను చూడండి</string>
@@ -446,6 +471,8 @@
   <string name="delete_helper_ask_reason_copyright_internet_photo">అంతర్జాలం నుండి సంగ్రహించిన ఫోటో</string>
   <string name="delete_helper_ask_reason_copyright_logo">లోగో</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">ఎందుకంటే అది</string>
+  <string name="category_edit_helper_make_edit_toast">వర్గాలను తాజాకరించే ప్రయత్నం చేస్తున్నాం.</string>
+  <string name="category_edit_helper_show_edit_title">వర్గం తాజాకరణ</string>
   <string name="category_edit_helper_show_edit_title_success">విజయవంతం</string>
   <plurals name="category_edit_helper_show_edit_message_if">
     <item quantity="one">వర్గం %1$s చేర్చబడింది.</item>
@@ -453,7 +480,21 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">వర్గాలను చేర్చలేకపోయాం.</string>
   <string name="category_edit_button_text">వర్గాలను తాజాకరించు</string>
+  <string name="coordinates_edit_helper_make_edit_toast">నిర్దేశాంకాలను తాజాకరించే ప్రయత్నం చేస్తున్నాం.</string>
+  <string name="coordinates_edit_helper_show_edit_title">నిర్దేశాంకాల తాజాకరణ</string>
+  <string name="caption_edit_helper_show_edit_title">వ్యాఖ్య తాజాకరణ</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">విజయవంతం</string>
+  <string name="coordinates_edit_helper_show_edit_message">%1$s నిర్దేశాంకాలను చేర్చాం.</string>
+  <string name="description_edit_helper_show_edit_message">వివరణలను చేర్చాం.</string>
+  <string name="caption_edit_helper_show_edit_message">వ్యాఖ్యను చేర్చాం.</string>
+  <string name="coordinates_edit_helper_edit_message_else">నిర్దేశాంకాలను చేర్చలేకపోయాం.</string>
+  <string name="description_edit_helper_edit_message_else">వివరణలను చేర్చలేకపోయాం.</string>
+  <string name="caption_edit_helper_edit_message_else">వ్యాఖ్యను చేర్చలేకపోయాం.</string>
+  <string name="coordinates_picking_unsuccessful">నిర్దేశాంకాలను తేలేకపోయాం.</string>
+  <string name="descriptions_picking_unsuccessful">వివరణలను తేలేకపోయాం.</string>
+  <string name="description_activity_title">వివరణలు, వ్యాఖ్యలను సరిదిద్దండి</string>
   <string name="share_image_via">బొమ్మను దీని ద్వారా పంచుకోండి</string>
+  <string name="you_have_no_achievements_yet">మీరింకా తోడ్పాటులేమీ చెయ్యలేదు</string>
   <string name="no_achievements_yet">%s  ఇంకా తోడ్పాటేమీ చెయ్యలేదు</string>
   <string name="account_created">ఖాతాను సృష్టించాం!</string>
   <string name="text_copy">పాఠ్యాన్ని క్లిప్‌బోర్డుకు కాపీ చేసాం</string>
@@ -466,16 +507,112 @@
   <string name="nearby_search_hint">వంతెన, మ్యూజియమ్, హోటలు వగైరా.</string>
   <string name="you_must_reset_your_passsword">లాగినవడంలో ఏదో లోపం జరిగింది, మీ సంకేతపదాన్ని మార్చుకోవాలి !!</string>
   <string name="title_for_media">మాధ్యమం</string>
+  <string name="title_for_child_classes">చైల్డ్ క్లాస్</string>
+  <string name="title_for_parent_classes">పేరెంట్ క్లాస్</string>
+  <string name="upload_nearby_place_found_title">సమీపంలోని స్థలాలు కనబడ్డాయి</string>
   <string name="upload_nearby_place_found_description">ఇది %1$s ప్రాంతపు ఫొటోనా?</string>
   <string name="title_app_shortcut_bookmark">ఇష్టాంశాలు</string>
   <string name="title_app_shortcut_setting">అమరికలు</string>
+  <string name="remove_bookmark">బుక్‌మార్కుల నుండి తీసేసాం</string>
+  <string name="add_bookmark">బుక్‌మార్కులకు చేర్చాం</string>
+  <string name="wallpaper_set_unsuccessfully">ఏదో లోపం జరిగింది. వాల్‌పేపరును సెట్ చెయ్యలేకపోయాం</string>
+  <string name="setting_wallpaper_dialog_title">వాల్‌పేపరుగా అమర్చు</string>
+  <string name="setting_wallpaper_dialog_message">వాల్‌పేపరుగా సెట్ చేస్తున్నాం. కాస్త ఆగండి...</string>
+  <string name="theme_dark_name">నల్లటి</string>
+  <string name="theme_light_name">వెలుగుతో</string>
+  <string name="cannot_open_location_settings">స్థానపు సెట్టింగులను తెరవడం విఫలమైంది. స్థానాన్ని మానవికంగా ఆన్ చెయ్యండి</string>
+  <string name="recommend_high_accuracy_mode">మంచి ఫలితాల కోసం హై యాక్యురసీ మోడ్‌ను ఎంచుకోండి.</string>
+  <string name="ask_to_turn_location_on">స్థానాన్ని ఆన్ చెయ్యాలా?</string>
+  <string name="nearby_needs_location">సమీపంలోని సరిగ్గా పనిచెయ్యాలంటే స్థానం చేతనమై ఉండాలి</string>
+  <string name="use_location_from_similar_image">ఈ రెండు ఫొటోలనూ ఒకే చోట తీసారా? కుడి పక్క బొమ్మకున్న అక్షాంశ రేఖాంశాలనే వాడమంటారా?</string>
+  <string name="load_more">మరిన్ని లోడుచెయ్యి</string>
+  <string name="nearby_no_results">స్థలాలేమీ కనబడలేదు. వెతుకులాట పదాలను మార్చి చూడండి.</string>
+  <string name="todo_improve">మెరుగుదలకు సూచనలు:</string>
+  <string name="missing_category">- ఈ బొమ్మ వాడుకను మెరుగుపరచేందుకు గాను, దీనికి వర్గాలను చేర్చండి.</string>
+  <string name="missing_article">- ఈ బొమ్మను సంబంధిత వికీపీడియా వ్యాసంలో - బొమ్మలు లేని దానిలో - చేర్చండి.</string>
+  <string name="add_picture_to_wikipedia_article_title">బొమ్మను వికీపీడియాలో పెట్టండి</string>
+  <string name="add_picture_to_wikipedia_article_desc">ఈ బొమ్మను %1$s భాష వికీపీడియా వ్యాసంలో చేర్చాలని అనుకుంటున్నారా?</string>
+  <string name="confirm">నిర్ధారించండి</string>
   <string name="instructions_title">సూచనలు</string>
+  <string name="wikipedia_instructions_step_1">1. కింది వికీటెక్స్టును వాడండి:</string>
+  <string name="wikipedia_instructions_step_2">2. నిర్థారించండి నొక్కితే వికీపీడియా వ్యాసం తెరుచుకుంటుంది</string>
+  <string name="wikipedia_instructions_step_3">3. వ్యాసంలో, ఈ బొమ్మకు తగిన విభాగం ఏదో చూడండి</string>
+  <string name="wikipedia_instructions_step_4">4. ఆ విభాగానికి సంబంధించిన మార్చు ఐకన్ను (పెన్సిల్లాగా ఉండేది) నొక్కండి.</string>
+  <string name="wikipedia_instructions_step_5">5. సరైన స్థానంలో వికీటెక్స్టును అతికించండి.</string>
+  <string name="wikipedia_instructions_step_6">6. సముచితమైన స్థానంలో పెట్టేందుకు అవసరమైతే వికీటెక్స్టును మార్చండి. మరింత సమాచారం కోసం &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;ఇక్కడ చూడండి&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. వ్యాసాన్ని ప్రచురించండి</string>
+  <string name="copy_wikicode_to_clipboard">వికీకోడ్‌ను క్లిప్‌బోర్డు లోకి కాపీ చేసుకోండి</string>
+  <string name="pause">నిలుపు</string>
+  <string name="resume">కొనసాగించు</string>
+  <string name="paused">నిలిపాం</string>
   <string name="more">మరిన్ని</string>
+  <string name="bookmarks">బుక్‌మార్కులు</string>
+  <string name="achievements_tab_title">సాధించినవి</string>
+  <string name="leaderboard_tab_title">అగ్రగాములు</string>
+  <string name="rank_prefix">ర్యాంకు:</string>
+  <string name="count_prefix">లెక్క:</string>
+  <string name="leaderboard_column_rank">ర్యాంకు</string>
   <string name="leaderboard_column_user">వాడుకరి</string>
+  <string name="leaderboard_column_count">లెక్క</string>
+  <string name="setting_avatar_dialog_title">అగ్రగామి అవతార్‌గా పెట్టు</string>
+  <string name="setting_avatar_dialog_message">అవతార్‌గా పెడుతున్నాం, కాస్త ఆగండి</string>
+  <string name="avatar_set_successfully">అవతార్‌ను పెట్టేసాం</string>
+  <string name="avatar_set_unsuccessfully">కొత్త అవతార్‌ను పెట్టడంలో లోపం, మళ్ళీ ప్రయత్నించండి</string>
+  <string name="menu_set_avatar">అవతార్‌గా సెట్ చెయ్యి</string>
+  <string name="leaderboard_yearly">వార్షికంగా</string>
+  <string name="leaderboard_weekly">వారం వారీగా</string>
+  <string name="leaderboard_all_time">ఇప్పటివరకూ</string>
+  <string name="leaderboard_upload">ఎక్కించు</string>
+  <string name="leaderboard_nearby">సమీపంలో</string>
+  <string name="leaderboard_used">వాడినవి</string>
+  <string name="leaderboard_my_rank_button_text">నా ర్యాంకు</string>
+  <string name="mapbox_telemetry">మ్యాప్‌బాక్స్ టెలిమెట్రీ</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;ఈ మ్యాపును మెరుగుపరచండి&lt;/a&gt;</string>
+  <string name="limited_connection_enabled">పరిమిత కనెక్షను మోడ్ చేతనంగా ఉంది!</string>
+  <string name="limited_connection_disabled">పరిమిత కనెక్షను మోడ్‌ను అచేతనం చేసాం. పెండింగులో ఉన్న ఎక్కింపులు తిరిగి మొదలౌతాయి.</string>
+  <string name="limited_connection_mode">పరిమిత కనెక్షను మోడ్</string>
   <string name="statistics_quality">నాణ్యమైన బొమ్మలు</string>
+  <string name="resuming_upload">ఎక్కింపును తిరిగి మొదలెడుతున్నాం...</string>
+  <string name="pausing_upload">ఎక్కింపును నిలుపుతున్నాం...</string>
+  <string name="limited_connection_explanation">మీరు పరిమిత కనెక్షను మోడ్‌ను చేతనం చేసారు. ఎక్కింపులన్నీ నిలిచిపోయాయి. మీరు ఈ మోడ్‌ను అచేతనం చెయ్యగానే అవి తిరిగి మొదలౌతాయి.</string>
+  <string name="limited_connection_is_on">పరిమిత కనెక్షను మోడ్ ఆన్ అయింది.</string>
+  <string name="license_tooltip">కామన్స్, మీ బొమ్మలను ఎవరైనా మళ్ళీ మళ్ళీ వాడేలా, మార్చుకునేలా చేస్తుంది. మీరు హక్కులన్నిటినీ వదులుకుంటారా? మీకు శ్రేయస్సు ఆపాదించాలా? మార్పుచేర్పులు కూడా అదే లైసెన్సు వాడాలని భావిస్తున్నారా?</string>
   <string name="license_step_title">మాధ్యమ లైసెన్సు</string>
   <string name="media_detail_step_title">మాధ్యమ వివరాలు</string>
+  <string name="menu_view_category_page">వర్గపు పేజీ చూడండి</string>
+  <string name="menu_view_item_page">అంశం పేజీని చూడండి</string>
+  <string name="app_ui_language">యాప్ యూజర్ ఇంటర్‌ఫేసు భాష</string>
+  <string name="remove">వ్యాఖ్యనో వివరణనో తీసెయ్యండి</string>
   <string name="read_help_link">ఇంకా చదవండి</string>
+  <string name="media_detail_in_all_languages">అన్ని భాషల్లోనూ</string>
+  <string name="choose_a_location">ఓ స్థానాన్ని ఎంచుకోండి</string>
+  <string name="exit_location_picker">స్థానం ఎంపిక నుండి నిష్క్రమించు</string>
+  <string name="select_location_location_picker">స్థానాన్ని ఎంచుకోండి</string>
+  <string name="show_in_map_app">మ్యాప్ యాప్‌లో చూపించు</string>
+  <string name="modify_location">స్థానాన్ని సరిదిద్దు</string>
+  <string name="image_location">బొమ్మ స్థానం</string>
+  <string name="check_whether_location_is_correct">స్థానం సరైనదో కాదో చూడండి</string>
+  <string name="label">సూచిక</string>
+  <string name="description">వివరణ</string>
+  <string name="title_page_bookmarks_items">అంశాలు</string>
+  <string name="custom_selector_empty_text">బొమ్మల్లేవు</string>
+  <string name="done">అయిపోయింది</string>
+  <string name="back">వెనక్కి</string>
+  <string name="custom_selector_info_text2">ఎడమ వైపున ఉన్న బొమ్మ లాగా కాకుండా, కుడి వైపున ఉన్న దానికి కామన్స్ లోగో ఉంది. అంటే దాన్ని ఈసరికే ఎక్కించారని అర్థం.\n బొమ్మ మునుజూపు కోసం తాకి పట్టుకోండి.</string>
+  <string name="welcome_custom_selector_ok">అదరహో</string>
+  <string name="custom_selector_already_uploaded_image_text">ఈ బొమ్మను ఈసరికే కామన్స్ లోకి ఎక్కించారు.</string>
+  <string name="learn_more">మరింత తెలుసుకోండి</string>
   <string name="need_permission">అనుమతి కావాలి</string>
+  <string name="contributions_of_user">వాడుకరి తోడ్పాట్లు: %s</string>
+  <string name="achievements_of_user">వాడుకరి సాధించినవి: %s</string>
+  <string name="menu_view_user_page">వాడుకరి పేజీ చూడండి</string>
+  <string name="advanced_options">ఉన్నత ఎంపికలు</string>
+  <string name="advanced_query_info_text">సమీపంలోని క్వెరీని మీరు ఇష్టానుసారం పెట్టుకోవచ్చు. లోపాలేమైనా ఎదురైతే, రిసెట్ చేసి, అప్లై చెయ్యండి.</string>
+  <string name="apply">వర్తింపజేయి</string>
+  <string name="reset">రీసెట్ చెయ్యి</string>
+  <string name="location_message">స్థానం డేటా, వికీ ఎడిటర్లు మీ బొమ్మను వెతకడంలో సాయపడుతుంది. దాని వలన బొమ్మ ఉపయోగం పెరుగుతుంది.\nమీరు ఇటీవల ఎక్కించిన బొమ్మలకు స్థానం లేదు.\nమీ కెమెరా యాప్ సెట్టింగుల్లో స్థానాన్ని చేతనం చేసుకొమ్మని సూచిస్తున్నాం.\nఎక్కించినందుకు ధన్యవాదాలతో!</string>
+  <string name="no_location_found_title">స్థానం ఏదీ కనబడలేదు</string>
+  <string name="no_location_found_message">ఈ బొమ్మను తీసిన స్థానాన్ని దీనికి చేరిస్తే బావుంటుంది గదా.\nస్థానం డేటా ఉంటే అది, ఈ బొమ్మను కనుక్కోవడంలో వికీ ఎడిటర్లకు సాయపడుతుంది. ఆ విధంగా బొమ్మ ఉపయోగం పెరుగుతుంది.\nధన్యవాదాలు!</string>
+  <string name="add_location">స్థానాన్ని చేర్చండి</string>
+  <string name="feedback_sharing_data_alert">బహిరంగంగా పంచుకోలేని సమాచారం ఏదైనా ఈ ఈమెయిల్లో ఉంటే దాన్ని తీసెయ్యండి. అలాగే, మీరు పోస్టు చేస్తున్న ఈమెయిలు చిరునామా, దానికి సంబంధించిన పేరు, ప్రొఫైలు బొమ్మా బహిరంగంగా అందరికీ కనిపిస్తాయని గమనంలో ఉంచుకోండి.</string>
 </resources>

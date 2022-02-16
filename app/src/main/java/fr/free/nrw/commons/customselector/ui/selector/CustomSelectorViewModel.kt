@@ -45,7 +45,7 @@ class CustomSelectorViewModel(var context: Context,var imageFileLoader: ImageFil
             override fun onFailed(throwable: Throwable) {
                 result.postValue(Result(CallbackStatus.SUCCESS, arrayListOf()))
             }
-        },scope)
+        })
     }
 
     /**

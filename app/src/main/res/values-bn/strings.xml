@@ -5,6 +5,7 @@
 * Elias Ahmmad
 * Leemon2010
 * Md. Golam Mukit Khan
+* MdsShakil
 * Mohammed Galib Hasan
 * Muktogayn
 * NahidHossain
@@ -339,4 +340,6 @@
   <string name="leaderboard_my_rank_button_text">আমার স্থান</string>
   <string name="license_step_title">মিডিয়ার লাইসেন্স</string>
   <string name="menu_view_category_page">বিষয়শ্রেণীর পাতাটি দেখুন</string>
+  <string name="no_location_found_title">কোন অবস্থান পাওয়া যায়নি</string>
+  <string name="add_location">অবস্থান যোগ করুন</string>
 </resources>

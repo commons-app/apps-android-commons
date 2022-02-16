@@ -58,6 +58,7 @@ class UploadMediaDetailFragmentUnitTest {
     private lateinit var context: Context
     private lateinit var layoutInflater: LayoutInflater
     private lateinit var view: View
+    private lateinit var runnable: Runnable
 
     private lateinit var tvTitle: TextView
     private lateinit var tooltip: ImageView
@@ -340,13 +341,6 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testShowMapWithImageCoordinates() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.showMapWithImageCoordinates(true)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testShowExternalMap() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
@@ -427,6 +421,14 @@ class UploadMediaDetailFragmentUnitTest {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         Whitebox.setInternalState(fragment, "presenter", presenter)
         fragment.onButtonCopyTitleDescToSubsequentMedia()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testDisplayAddLocationDialog() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        runnable = Runnable {  }
+        fragment.displayAddLocationDialog(runnable)
     }
 
 }
