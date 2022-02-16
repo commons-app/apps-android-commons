@@ -28,6 +28,7 @@ import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter
 import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.ui.widget.HtmlTextView
 import org.junit.Assert
 import org.junit.Before
@@ -65,6 +66,9 @@ class MediaDetailFragmentUnitTests {
     private lateinit var layoutInflater: LayoutInflater
     private lateinit var view: View
     private lateinit var context: Context
+
+    @Mock
+    private lateinit var locationManager: LocationServiceManager
 
     @Mock
     private lateinit var categoryEditSearchRecyclerViewAdapter: CategoryEditSearchRecyclerViewAdapter
@@ -180,6 +184,7 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "categoryContainer", linearLayout)
         Whitebox.setInternalState(fragment, "categorySearchView", searchView)
         Whitebox.setInternalState(fragment, "mediaDiscussion", textView)
+        Whitebox.setInternalState(fragment, "locationManager", locationManager)
         Whitebox.setInternalState(
             fragment,
             "categoryEditSearchRecyclerViewAdapter",
@@ -239,11 +244,13 @@ class MediaDetailFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnUpdateCoordinatesClicked() {
+    fun testOnUpdateCoordinatesClickedCurrentLocationNull() {
         `when`(media.coordinates).thenReturn(null)
+        `when`(locationManager.lastLocation).thenReturn(null)
         `when`(applicationKvStore.getString(LAST_LOCATION)).thenReturn("37.773972,-122.431297")
         fragment.onUpdateCoordinatesClicked()
         Mockito.verify(media, Mockito.times(1)).coordinates
+        Mockito.verify(locationManager, Mockito.times(1)).lastLocation
         val shadowActivity: ShadowActivity = shadowOf(activity)
         val startedIntent = shadowActivity.nextStartedActivity
         val shadowIntent: ShadowIntent = shadowOf(startedIntent)
@@ -257,6 +264,21 @@ class MediaDetailFragmentUnitTests {
         `when`(applicationKvStore.getString(LAST_LOCATION)).thenReturn("37.773972,-122.431297")
         fragment.onUpdateCoordinatesClicked()
         Mockito.verify(media, Mockito.times(3)).coordinates
+        val shadowActivity: ShadowActivity = shadowOf(activity)
+        val startedIntent = shadowActivity.nextStartedActivity
+        val shadowIntent: ShadowIntent = shadowOf(startedIntent)
+        Assert.assertEquals(shadowIntent.intentClass, LocationPickerActivity::class.java)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnUpdateCoordinatesClickedCurrentLocationNotNull() {
+        `when`(media.coordinates).thenReturn(null)
+        `when`(locationManager.lastLocation).thenReturn(LatLng(-0.000001, -0.999999, 0f))
+        `when`(applicationKvStore.getString(LAST_LOCATION)).thenReturn("37.773972,-122.431297")
+
+        fragment.onUpdateCoordinatesClicked()
+        Mockito.verify(locationManager, Mockito.times(3)).lastLocation
         val shadowActivity: ShadowActivity = shadowOf(activity)
         val startedIntent = shadowActivity.nextStartedActivity
         val shadowIntent: ShadowIntent = shadowOf(startedIntent)
