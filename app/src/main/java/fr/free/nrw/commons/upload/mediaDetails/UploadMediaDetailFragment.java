@@ -117,6 +117,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         this.callback = callback;
     }
 
+    private double defaultZoom = 16.0;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -425,7 +427,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         editableUploadItem = uploadItem;
         double defaultLatitude = 37.773972;
         double defaultLongitude = -122.431297;
-        double defaultZoom = 16.0;
 
         if (uploadItem.getGpsCoords()
             .getDecLatitude() != 0.0 && uploadItem.getGpsCoords().getDecLongitude() != 0.0) {

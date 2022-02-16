@@ -48,6 +48,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -437,13 +438,10 @@ class UploadMediaDetailFragmentUnitTest {
     @Throws(Exception::class)
     fun testRememberedZoomLevel(){
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Whitebox.setInternalState(fragment, "defaultKvStore", defaultKvStore)
-        Whitebox.setInternalState(fragment, "editableUploadItem", uploadItem)
-        imageCoordinates.zoomLevel = 11.0
-        defaultKvStore.putString("last_zoom_level_while_uploading","5.63")
-        `when`(defaultKvStore.getString("last_zoom_level_while_uploading","16.0"))
-            .thenReturn("5.63")
-        `when`(imageCoordinates.zoomLevel).thenReturn(11.0)
+        `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
+        `when`(defaultKvStore.getString(LAST_ZOOM)).thenReturn("16.0")
+        fragment.showExternalMap(uploadItem)
+        Mockito.verify(uploadItem,Mockito.times(1)).gpsCoords
     }
 
 }
