@@ -9,6 +9,7 @@ import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_UNCATEGORIS
 import static fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_DESCRIPTION_AND_CAPTION;
 import static fr.free.nrw.commons.description.EditDescriptionConstants.UPDATED_WIKITEXT;
 import static fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT;
+import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -79,6 +80,7 @@ import fr.free.nrw.commons.description.DescriptionEditHelper;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
@@ -115,6 +117,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     private boolean isDeleted = false;
     private boolean isWikipediaButtonDisplayed;
     private Callback callback;
+
+    @Inject
+    LocationServiceManager locationManager;
 
 
     public static MediaDetailFragment forMedia(int index, boolean editable, boolean isCategoryImage, boolean isWikipediaButtonDisplayed) {
@@ -821,11 +826,20 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
          */
         double defaultLatitude = 37.773972;
         double defaultLongitude = -122.431297;
-
         if (media.getCoordinates() != null) {
             defaultLatitude = media.getCoordinates().getLatitude();
             defaultLongitude = media.getCoordinates().getLongitude();
+        } else {
+            if(locationManager.getLastLocation()!=null) {
+                defaultLatitude = locationManager.getLastLocation().getLatitude();
+                defaultLongitude = locationManager.getLastLocation().getLongitude();
+            } else {
+                String[] lastLocation = applicationKvStore.getString(LAST_LOCATION,(defaultLatitude + "," + defaultLongitude)).split(",");
+                defaultLatitude = Double.parseDouble(lastLocation[0]);
+                defaultLongitude = Double.parseDouble(lastLocation[1]);
+            }
         }
+
         startActivityForResult(new LocationPicker.IntentBuilder()
             .defaultLocation(new CameraPosition.Builder()
                 .target(new LatLng(defaultLatitude, defaultLongitude))

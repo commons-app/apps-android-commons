@@ -40,6 +40,23 @@ public interface CategoryInterface {
                                                           @Query("gaclimit") int itemLimit,
                                                           @Query("gacoffset") int offset);
 
+    /**
+     * Fetches categories starting and ending with a specified name.
+     *
+     * @param startingCategory Name of the category to start
+     * @param endingCategory Name of the category to end
+     * @param itemLimit How many categories to return
+     * @param offset offset
+     * @return MwQueryResponse
+     */
+    @GET("w/api.php?action=query&format=json&formatversion=2"
+        + "&generator=allcategories&prop=categoryinfo|description|pageimages&piprop=thumbnail"
+        + "&pithumbsize=70")
+    Single<MwQueryResponse> getCategoriesByName(@Query("gacfrom") String startingCategory,
+        @Query("gacto") String endingCategory,
+        @Query("gaclimit") int itemLimit,
+        @Query("gacoffset") int offset);
+
     @GET("w/api.php?action=query&format=json&formatversion=2"
             + "&generator=categorymembers&gcmtype=subcat"
             + "&prop=info&gcmlimit=50")

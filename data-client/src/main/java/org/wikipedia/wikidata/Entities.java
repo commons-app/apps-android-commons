@@ -78,6 +78,11 @@ public class Entities extends MwResponse implements PostProcessingTypeAdapter.Po
         @Nullable private String language;
         @Nullable private String value;
 
+        public Label(@Nullable final String language, @Nullable final String value) {
+            this.language = language;
+            this.value = value;
+        }
+
         @NonNull public String language() {
             return StringUtils.defaultString(language);
         }
