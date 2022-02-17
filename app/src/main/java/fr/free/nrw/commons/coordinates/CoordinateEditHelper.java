@@ -142,17 +142,7 @@ public class CoordinateEditHelper {
 
             return wikiText + editedLocation;
         }
-        if (!wikiText.contains("filedesc") && !wikiText.contains("Location")) {
-
-            return "== {{int:filedesc}} ==" + editedLocation + wikiText;
-
-        }
-        if (!wikiText.contains("filedesc") && wikiText.contains("Location")) {
-
-            return "== {{int:filedesc}} ==" + editedLocation + wikiText;
-
-        }
-        return null;
+        return "== {{int:filedesc}} ==" + editedLocation + wikiText;
     }
 
     /**

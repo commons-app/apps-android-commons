@@ -177,4 +177,7 @@
   <string name="no_categories_found">ಯಾವುದೇ ವರ್ಗಗಳು ಸಿಗಲಿಲ್ಲ</string>
   <string name="delete_helper_show_deletion_title_success">ಯಶಸ್ವಿ</string>
   <string name="read_help_link">ಇನ್ನೂ ಓದಿ</string>
+  <string name="no_location_found_title">ಯಾವುದೇ ಸ್ಥಳ ಕಂಡುಬಂದಿಲ್ಲ</string>
+  <string name="no_location_found_message">ಈ ಚಿತ್ರವನ್ನು ತೆಗೆದ ಸ್ಥಳವನ್ನು ಸೇರಿಸಿ?\nಸ್ಥಳ ಡೇಟಾವು ವಿಕಿ ಸಂಪಾದಕರಿಗೆ ನಿಮ್ಮ ಚಿತ್ರವನ್ನು ಹುಡುಕಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ, ಇದು ಹೆಚ್ಚು ಉಪಯುಕ್ತವಾಗಿದೆ.\nಧನ್ಯವಾದಗಳು.</string>
+  <string name="add_location">ಸ್ಥಳ ಸೇರಿಸಿ</string>
 </resources>

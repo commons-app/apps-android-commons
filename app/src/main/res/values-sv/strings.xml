@@ -644,5 +644,8 @@
   <string name="apply">Verkställ</string>
   <string name="reset">Återställ</string>
   <string name="location_message">Platsdata hjälper wikiredigerare att hitta din bild för att göra den mer användbar.\nDina nyliga uppladdningar har ingen plats.\nVi föreslår att du aktiverar platsen i dina kamerainställningar.\nTack för att du laddar upp!</string>
+  <string name="no_location_found_title">Ingen plats hittades</string>
+  <string name="no_location_found_message">Vad sägs om att lägga till platsen där denna bild togs?\nPlatsdata hjälper wikiredigerare att hitta din bild och göra den mycket mer användbar.\nTack!</string>
+  <string name="add_location">Lägg till plats</string>
   <string name="feedback_sharing_data_alert">Var god ta bort all information från detta e-postmeddelande som du inte är bekväm med att dela offentligt. Observera även att e-postadressen du använder samt det associerade namnet och profilbilden kommer att synas offentligt.</string>
 </resources>

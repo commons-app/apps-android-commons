@@ -366,7 +366,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 getString(R.string.cancel),
                 () -> {
                     uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
-                    onNextButtonClicked();
+                    onImageValidationSuccess();
                 }, null,
                 checkBoxView,
                 false);
@@ -388,7 +388,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 getString(R.string.cancel),
                 () -> {
                     uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
-                    onNextButtonClicked();
+                    /*
+                        User skipped the warning of low quality image, so we call
+                        onImageValidationSuccess rather than onNextButtonClicked to avoid showing
+                        other warning popups again.
+                    */
+                    onImageValidationSuccess();
                 },
                 () -> deleteThisPicture()
             );

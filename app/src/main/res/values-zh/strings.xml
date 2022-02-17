@@ -18,6 +18,7 @@
 * Qiyue2001
 * Shizhao
 * Shuiwater
+* ShuyanW
 * Si109
 * SkyEye FAST
 * SomeyaMako
@@ -673,4 +674,6 @@
   <string name="apply">应用</string>
   <string name="reset">重置</string>
   <string name="location_message">位置数据能帮助 Wiki 编辑者来找到您的图片，让他更加有用。\n您近期上传的内容没有位置。\n我们建议您在相机应用程序设置里打开位置。\n感谢您的上传！</string>
+  <string name="no_location_found_title">没有找到位置</string>
+  <string name="add_location">添加位置</string>
 </resources>

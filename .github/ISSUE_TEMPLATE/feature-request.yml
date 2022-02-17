@@ -1,0 +1,30 @@
+name: "⭐️ Feature request"
+description: Suggest an idea for this project
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        - Please do your best to search for duplicate issues before filing a new issue so we can keep our issue board clean.
+        - Every issue should have exactly one feature request described in it. Please do not file feedback list tickets as it is difficult to parse them and address their individual points.
+        - Feature Requests are better when they’re open-ended instead of demanding a specific solution e.g: “I want an easier way to do X” instead of “add Y”.
+  - type: textarea
+    attributes:
+      label: What is the user problem or growth opportunity you want to see solved?
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: How do you know that this problem exists today? Why is this important?
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Who will benefit from it?
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Anything else you would like to add?
+    validations:
+      required: false
