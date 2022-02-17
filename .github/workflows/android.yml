@@ -52,7 +52,7 @@ jobs:
           disable-animations: false
           script: echo "Generated AVD snapshot for caching."
 
-      - name: Run tests
+      - name: Run Instrumentation tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
@@ -60,7 +60,10 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           profile: Nexus 6
-          script: ./gradlew -Pcoverage testBetaDebugUnitTestCoverage --stacktrace
+          script: ./gradlew connectedBetaDebugAndroidTest --stacktrace
+
+      - name: Run Unit tests
+        run: ./gradlew -Pcoverage testBetaDebugUnitTestCoverage --stacktrace
 
       - name: Upload Test Report to Codecov
         run: |
