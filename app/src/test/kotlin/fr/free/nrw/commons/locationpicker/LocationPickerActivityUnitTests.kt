@@ -2,17 +2,12 @@ package fr.free.nrw.commons.locationpicker
 
 import android.content.Context
 import android.os.Looper
-import android.view.View
-import android.widget.Button
-import android.widget.ImageView
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
-import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
@@ -50,17 +45,7 @@ class LocationPickerActivityUnitTests {
     private lateinit var mapboxMap: MapboxMap
 
     @Mock
-    private lateinit var modifyLocationButton: Button
-
-    @Mock
     private lateinit var cameraPosition: CameraPosition
-
-    @Mock
-    private lateinit var markerImage: ImageView
-
-    @Mock
-    private lateinit var mapView: MapView
-
 
     @Before
     fun setUp() {
@@ -70,10 +55,7 @@ class LocationPickerActivityUnitTests {
 
         Whitebox.setInternalState(activity, "mapboxMap", mapboxMap)
         Whitebox.setInternalState(activity, "applicationKvStore", applicationKvStore)
-        Whitebox.setInternalState(activity, "modifyLocationButton", modifyLocationButton)
         Whitebox.setInternalState(activity, "cameraPosition", cameraPosition)
-        Whitebox.setInternalState(activity, "markerImage", markerImage)
-        Whitebox.setInternalState(activity, "mapView", mapView)
     }
 
     @Test
@@ -95,7 +77,6 @@ class LocationPickerActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnMapReady() {
-        whenever(modifyLocationButton.visibility).thenReturn(View.VISIBLE)
         val method: Method = LocationPickerActivity::class.java.getDeclaredMethod(
             "onMapReady",
             MapboxMap::class.java
