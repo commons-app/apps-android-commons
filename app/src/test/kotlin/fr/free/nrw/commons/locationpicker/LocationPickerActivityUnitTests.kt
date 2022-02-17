@@ -6,9 +6,13 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import com.mapbox.mapboxsdk.camera.CameraPosition
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
+import com.mapbox.mapboxsdk.maps.Style
+import com.nhaarman.mockitokotlin2.times
+import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import fr.free.nrw.commons.TestCommonsApplication
@@ -107,6 +111,7 @@ class LocationPickerActivityUnitTests {
         )
         method.isAccessible = true
         method.invoke(activity)
+        verify(mapboxMap, times(1)).moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
 
     @Test
