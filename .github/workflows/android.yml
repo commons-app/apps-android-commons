@@ -8,8 +8,8 @@ concurrency:
 
 jobs:
   build:
-    name: Build APK and Run Unit Tests
-    runs-on: ubuntu-latest
+    name: Run tests and generate APK
+    runs-on: macos-latest
     strategy:
       matrix:
         api-level: [29]
@@ -52,7 +52,7 @@ jobs:
           disable-animations: false
           script: echo "Generated AVD snapshot for caching."
 
-      - name: Execute Instrumentation Tests
+      - name: Run Instrumentation tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
@@ -62,7 +62,7 @@ jobs:
           profile: Nexus 6
           script: ./gradlew connectedBetaDebugAndroidTest --stacktrace
 
-      - name: Build with Gradle and run Unit Tests
+      - name: Run Unit tests
         run: ./gradlew -Pcoverage testBetaDebugUnitTestCoverage --stacktrace
 
       - name: Upload Test Report to Codecov
@@ -79,12 +79,3 @@ jobs:
         with:
           name: betaDebugAPK
           path: app/build/outputs/apk/beta/debug/app-*.apk
-
-      - name: Generate prodDebug APK
-        run: bash ./gradlew assembleProdDebug --stacktrace
-
-      - name: Upload prodDebug APK
-        uses: actions/upload-artifact@v2.3.1
-        with:
-          name: prodDebugAPK
-          path: app/build/outputs/apk/prod/debug/app-*.apk
