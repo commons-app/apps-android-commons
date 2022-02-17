@@ -619,4 +619,6 @@
   <string name="apply">Käytä</string>
   <string name="reset">Nollaa</string>
   <string name="location_message">Sijaintitiedot auttavat wikin muokkaajia löytämään kuvasi, mikä tekee siitä paljon hyödyllisemmän.\nViimeaikaisissa tallennuksissasi ei ole sijaintia.\nSuosittelemme, että otat sijainnin käyttöön kamerasovelluksesi asetuksista.\nKiitos latauksesta!</string>
+  <string name="no_location_found_title">Paikkaa ei löytynyt</string>
+  <string name="add_location">Lisää paikka</string>
 </resources>
