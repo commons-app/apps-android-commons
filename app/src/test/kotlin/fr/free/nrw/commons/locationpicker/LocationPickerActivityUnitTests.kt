@@ -10,13 +10,14 @@ import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
-import com.mapbox.mapboxsdk.maps.Style
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -111,7 +112,8 @@ class LocationPickerActivityUnitTests {
         )
         method.isAccessible = true
         method.invoke(activity)
-        verify(mapboxMap, times(1)).moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+        verify(mapboxMap, times(1))
+            .moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
 
     @Test
@@ -143,6 +145,14 @@ class LocationPickerActivityUnitTests {
         )
         method.isAccessible = true
         method.invoke(activity)
+        verify(applicationKvStore, times(1))
+            .putString(LAST_LOCATION, position.target.latitude.toString()
+                    + ","
+                    + position.target.longitude
+            )
+        verify(applicationKvStore, times(1))
+            .putString(LAST_ZOOM, position.zoom.toString())
+        verify(mapboxMap, times(4)).cameraPosition
     }
 
 }
