@@ -172,6 +172,9 @@ android {
         testOptions {
             execution 'ANDROIDX_TEST_ORCHESTRATOR'
         }
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -181,6 +184,8 @@ android {
     }
 
     testOptions {
+        animationsDisabled true
+
         unitTests.returnDefaultValues = true
         unitTests.includeAndroidResources = true
 
@@ -213,7 +218,7 @@ android {
         }
         debug {
             minifyEnabled false
-            testCoverageEnabled project.hasProperty('coverage')
+            testCoverageEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             testProguardFile 'test-proguard-rules.txt'
             versionNameSuffix "-debug-" + getBranchName()
