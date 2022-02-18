@@ -11,7 +11,6 @@ import androidx.test.rule.ActivityTestRule
 import androidx.viewpager.widget.ViewPager
 import fr.free.nrw.commons.utils.ConfigUtils
 import org.hamcrest.core.IsNot.not
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,11 +22,10 @@ class WelcomeActivityTest {
     var activityRule: ActivityTestRule<*> = ActivityTestRule(WelcomeActivity::class.java)
 
     @Test
-    @Ignore("Fix Failing Test")
     fun ifBetaShowsSkipButton() {
         if (ConfigUtils.isBetaFlavour) {
             onView(withId(R.id.finishTutorialButton))
-                    .check(matches(isDisplayed()))
+                .check(matches(isDisplayed()))
         }
     }
 
@@ -35,73 +33,72 @@ class WelcomeActivityTest {
     fun ifProdHidesSkipButton() {
         if (!ConfigUtils.isBetaFlavour) {
             onView(withId(R.id.finishTutorialButton))
-                    .check(matches(not(isDisplayed())))
+                .check(matches(not(isDisplayed())))
         }
     }
 
     @Test
-    @Ignore("Fix Failing Test")
     fun testBetaSkipButton() {
         if (ConfigUtils.isBetaFlavour) {
             onView(withId(R.id.finishTutorialButton))
-                    .perform(ViewActions.click())
+                .perform(ViewActions.click())
             assert(activityRule.activity.isDestroyed)
         }
     }
 
     @Test
-    @Ignore("Fix Failing Test")
     fun testSwipingOnce() {
         onView(withId(R.id.welcomePager))
-                .perform(ViewActions.swipeLeft())
+            .perform(ViewActions.swipeLeft())
         assert(true)
         onView(withId(R.id.welcomePager))
-                .perform(ViewActions.swipeRight())
+            .perform(ViewActions.swipeRight())
         assert(true)
     }
 
     @Test
-    @Ignore("Fix Failing Test")
     fun testSwipingWholeTutorial() {
         onView(withId(R.id.welcomePager))
-                .perform(ViewActions.swipeLeft())
-                .perform(ViewActions.swipeLeft())
-                .perform(ViewActions.swipeLeft())
-                .perform(ViewActions.swipeLeft())
+            .perform(ViewActions.swipeLeft())
+            .perform(ViewActions.swipeLeft())
+            .perform(ViewActions.swipeLeft())
+            .perform(ViewActions.swipeLeft())
         assert(true)
         onView(withId(R.id.welcomePager))
-                .perform(ViewActions.swipeRight())
-                .perform(ViewActions.swipeRight())
-                .perform(ViewActions.swipeRight())
-                .perform(ViewActions.swipeRight())
+            .perform(ViewActions.swipeRight())
+            .perform(ViewActions.swipeRight())
+            .perform(ViewActions.swipeRight())
+            .perform(ViewActions.swipeRight())
         assert(true)
     }
 
     @Test
-    fun swipeBeyondBounds(){
-            var  view_pager=activityRule.activity.findViewById<ViewPager>(R.id.welcomePager)
+    fun swipeBeyondBounds() {
+        val viewPager = activityRule.activity.findViewById<ViewPager>(R.id.welcomePager)
 
-            view_pager.adapter?.let {  view_pager.currentItem == view_pager.adapter?.count?.minus(1)
-                if (view_pager.currentItem==3){
-                    onView(withId(R.id.welcomePager))
-                            .perform(ViewActions.swipeLeft())
-                    assert(true)
-                    onView(withId(R.id.welcomePager))
-                            .perform(ViewActions.swipeRight())
-                    assert(false)
-                }}
+        viewPager.adapter?.let {
+            if (viewPager.currentItem == 3) {
+                onView(withId(R.id.welcomePager))
+                    .perform(ViewActions.swipeLeft())
+                assert(true)
+                onView(withId(R.id.welcomePager))
+                    .perform(ViewActions.swipeRight())
+                assert(false)
+            }
+        }
     }
 
     @Test
-    fun swipeTillLastAndFinish(){
-            var  view_pager=activityRule.activity.findViewById<ViewPager>(R.id.welcomePager)
+    fun swipeTillLastAndFinish() {
+        val viewPager = activityRule.activity.findViewById<ViewPager>(R.id.welcomePager)
 
-            view_pager.adapter?.let {  view_pager.currentItem == view_pager.adapter?.count?.minus(1)
-                if (view_pager.currentItem==3){
-                    onView(withId(R.id.finishTutorialButton))
-                            .perform(ViewActions.click())
-                    assert(activityRule.activity.isDestroyed)
-                }}
+        viewPager.adapter?.let {
+            if (viewPager.currentItem == 3) {
+                onView(withId(R.id.finishTutorialButton))
+                    .perform(ViewActions.click())
+                assert(activityRule.activity.isDestroyed)
+            }
+        }
     }
 
     @Test
