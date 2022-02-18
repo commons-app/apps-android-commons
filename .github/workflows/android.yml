@@ -34,9 +34,12 @@ jobs:
           restore-keys: gradle-packages-${{ runner.os }}
 
       - name: Access test login credentials
+        env:
+            TEST_USER_NAME: ${{ secrets.TEST_USER_NAME }}
+            TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
         run: |
-          echo TEST_USER_NAME=${{ secrets.TEST_USER_NAME }} >> local.properties
-          echo TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }} >> local.properties
+          echo TEST_USER_NAME=$TEST_USER_NAME >> local.properties
+          echo TEST_USER_PASSWORD=$TEST_USER_PASSWORD >> local.properties
           cat local.properties
 
       - name: AVD cache
