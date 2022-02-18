@@ -123,6 +123,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
                 if (transferred == 0 || transferred >= total) {
                     progressView.setIndeterminate(true);
                 } else {
+                    progressView.setIndeterminate(false);
                     progressView.setProgress((int) (((double) transferred / (double) total) * 100));
                 }
                 break;
