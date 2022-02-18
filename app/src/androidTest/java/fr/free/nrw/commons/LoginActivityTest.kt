@@ -38,7 +38,6 @@ class LoginActivityTest {
     }
 
     @Test
-    @Ignore("Fix Failing Test")
     fun testLogin() {
         UITestHelper.loginUser()
         Intents.intended(hasComponent(MainActivity::class.java.name))
