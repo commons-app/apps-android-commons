@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         api-level: [23]
-
+    environment: CI
     steps:
       - uses: actions/checkout@v2.4.0
 
@@ -35,8 +35,8 @@ jobs:
 
       - name: Access test login credentials
         env:
-            TEST_USER_NAME: ${{ secrets.TEST_USER_NAME }}
-            TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
+          TEST_USER_NAME: ${{ secrets.TEST_USER_NAME }}
+          TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
         run: |
           echo "TEST_USER_NAME=$TEST_USER_NAME" >> local.properties
           echo "TEST_USER_PASSWORD=$TEST_USER_PASSWORD" >> local.properties
