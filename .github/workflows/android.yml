@@ -17,13 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2.4.0
 
-      - name: Access test login credentials
-        run: |
-          touch unittest.properties
-          echo TEST_USER_NAME=${{ secrets.TEST_USER_NAME }} >> unittest.properties
-          echo TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }} >> unittest.properties
-          cat unittest.properties
-
       - name: Set up JDK
         uses: actions/setup-java@v2.5.0
         with:
@@ -39,6 +32,12 @@ jobs:
             ~/.gradle/wrapper
           key: gradle-packages-${{ runner.os }}-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', 'gradle.properties') }}
           restore-keys: gradle-packages-${{ runner.os }}
+
+      - name: Access test login credentials
+        run: |
+          echo TEST_USER_NAME=${{ secrets.TEST_USER_NAME }} >> local.properties
+          echo TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }} >> local.properties
+          cat local.properties
 
       - name: AVD cache
         uses: actions/cache@v2
