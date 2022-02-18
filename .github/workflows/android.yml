@@ -21,7 +21,9 @@ jobs:
         env:
           TEST_USER_NAME: ${{ secrets.TEST_USER_NAME }}
           TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
-        run: echo TEST_USER_NAME=\"$TEST_USER_NAME\"\nTEST_USER_PASSWORD=\"$TEST_USER_PASSWORD\" > ./local.properties
+        run: |
+          echo TEST_USER_NAME=\"$TEST_USER_NAME\" > ./local.properties
+          echo TEST_USER_PASSWORD=\"$TEST_USER_PASSWORD\" > ./local.properties
 
       - name: Set up JDK
         uses: actions/setup-java@v2.5.0
