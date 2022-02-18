@@ -483,7 +483,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 final double zoom = cameraPosition.zoom;
 
                 editLocation(latitude, longitude,zoom);
-                if(editableUploadItem.getUploadMediaDetails().get(0).getCaptionText().length() != 0){
+                if(editableUploadItem.getUploadMediaDetails().get(0).getCaptionText()
+                    .length() != 0 && editableUploadItem.getUploadMediaDetails().get(0)
+                    .getDescriptionText().length() != 0){
                     onNextButtonClicked();
                 }
             }
