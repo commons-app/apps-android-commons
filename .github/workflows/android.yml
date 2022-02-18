@@ -57,7 +57,7 @@ jobs:
           api-level: ${{ matrix.api-level }}
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
+          disable-animations: false
           script: echo "Generated AVD snapshot for caching."
 
       - name: Run Instrumentation tests
@@ -67,7 +67,7 @@ jobs:
           api-level: ${{ matrix.api-level }}
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
+          disable-animations: false
           profile: Nexus 6
           script: ./gradlew connectedBetaDebugAndroidTest --stacktrace
 
