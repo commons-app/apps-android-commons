@@ -2,6 +2,8 @@ package fr.free.nrw.commons
 
 import android.app.Activity
 import android.content.pm.ActivityInfo
+import android.view.View
+import android.view.ViewGroup
 import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.NoMatchingViewException
@@ -9,9 +11,7 @@ import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.rule.ActivityTestRule
 import org.apache.commons.lang3.StringUtils
-import org.hamcrest.BaseMatcher
-import org.hamcrest.Description
-import org.hamcrest.Matcher
+import org.hamcrest.*
 import timber.log.Timber
 
 
@@ -21,7 +21,7 @@ class UITestHelper {
             try {
                 //Skip tutorial
                 onView(ViewMatchers.withId(R.id.finishTutorialButton))
-                        .perform(ViewActions.click())
+                    .perform(ViewActions.click())
             } catch (ignored: NoMatchingViewException) {
             }
         }
@@ -31,14 +31,14 @@ class UITestHelper {
                 //Perform Login
                 sleep(3000)
                 onView(ViewMatchers.withId(R.id.login_username))
-                        .perform(ViewActions.clearText(), ViewActions.typeText(getTestUsername()))
+                    .perform(ViewActions.clearText(), ViewActions.typeText(getTestUsername()))
                 closeSoftKeyboard()
                 sleep(1000)
                 onView(ViewMatchers.withId(R.id.login_password))
                     .perform(ViewActions.replaceText(getTestUserPassword()))
                 closeSoftKeyboard()
                 onView(ViewMatchers.withId(R.id.login_button))
-                        .perform(ViewActions.click())
+                    .perform(ViewActions.click())
                 sleep(10000)
             } catch (ignored: NoMatchingViewException) {
             }
@@ -46,19 +46,43 @@ class UITestHelper {
         }
 
         fun logoutUser() {
-            try {
-                //Perform Login
-                sleep(3000)
-                onView(ViewMatchers.withId(R.id.finishTutorialButton))
-                    .perform(ViewActions.click())
-                onView(ViewMatchers.withId(R.id.more_logout))
-                    .perform(ViewActions.scrollTo(), ViewActions.click())
-                onView(ViewMatchers.withId(android.R.id.button1))
-                    .perform(ViewActions.scrollTo(), ViewActions.click())
-                sleep(10000)
-            } catch (ignored: NoMatchingViewException) {
-            }
+            sleep(3000)
+            onView(
+                Matchers.allOf(
+                    ViewMatchers.withContentDescription("More"),
+                    childAtPosition(
+                        childAtPosition(
+                            ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
+                            0
+                        ),
+                        4
+                    ),
+                    ViewMatchers.isDisplayed()
+                )
+            ).perform(ViewActions.click())
+            onView(ViewMatchers.withId(R.id.more_logout))
+                .perform(ViewActions.scrollTo(), ViewActions.click())
+            onView(ViewMatchers.withId(android.R.id.button1))
+                .perform(ViewActions.scrollTo(), ViewActions.click())
+            sleep(10000)
+        }
 
+        private fun childAtPosition(
+            parentMatcher: Matcher<View>, position: Int
+        ): Matcher<View> {
+
+            return object : TypeSafeMatcher<View>() {
+                override fun describeTo(description: Description) {
+                    description.appendText("Child at position $position in parent ")
+                    parentMatcher.describeTo(description)
+                }
+
+                public override fun matchesSafely(view: View): Boolean {
+                    val parent = view.parent
+                    return parent is ViewGroup && parentMatcher.matches(parent)
+                            && view == parent.getChildAt(position)
+                }
+            }
         }
 
         fun sleep(timeInMillis: Long) {
@@ -83,7 +107,8 @@ class UITestHelper {
                 throw NotImplementedError("Configure your beta account's password")
             } else return password
         }
-        fun <T: Activity> changeOrientation(activityRule: ActivityTestRule<T>){
+
+        fun <T : Activity> changeOrientation(activityRule: ActivityTestRule<T>) {
             activityRule.activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
             assert(activityRule.activity.requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
             activityRule.activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
