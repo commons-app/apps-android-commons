@@ -38,9 +38,8 @@ jobs:
             TEST_USER_NAME: ${{ secrets.TEST_USER_NAME }}
             TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
         run: |
-          echo TEST_USER_NAME=$TEST_USER_NAME >> local.properties
-          echo TEST_USER_PASSWORD=$TEST_USER_PASSWORD >> local.properties
-          cat local.properties
+          echo "TEST_USER_NAME=$TEST_USER_NAME" >> local.properties
+          echo "TEST_USER_PASSWORD=$TEST_USER_PASSWORD" >> local.properties
 
       - name: AVD cache
         uses: actions/cache@v2
