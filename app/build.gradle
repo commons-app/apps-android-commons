@@ -300,8 +300,8 @@ android {
             buildConfigField "String", "BOOKMARK_LOCATIONS_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.locations.contentprovider\""
             buildConfigField "String", "BOOKMARK_ITEMS_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.items.contentprovider\""
             buildConfigField "String", "COMMIT_SHA", "\"" + getBuildVersion().toString() + "\""
-            buildConfigField "String", "TEST_USERNAME", "\"" + System.getenv("test_user_name") + "\""
-            buildConfigField "String", "TEST_PASSWORD", "\"" + System.getenv("test_user_password") + "\""
+            buildConfigField "String", "TEST_USERNAME", "\"" + getTestUserName() + "\""
+            buildConfigField "String", "TEST_PASSWORD", "\"" + getTestPassword() + "\""
             buildConfigField "String", "DEPICTS_PROPERTY", "\"P245962\""
 
             dimension 'tier'
@@ -325,6 +325,20 @@ android {
         viewBinding true
     }
 
+}
+
+String getTestUserName() {
+    def propFile = rootProject.file("./local.properties")
+    def properties = new Properties()
+    properties.load(new FileInputStream(propFile))
+    return properties['TEST_USER_NAME']
+}
+
+String getTestPassword() {
+    def propFile = rootProject.file("./local.properties")
+    def properties = new Properties()
+    properties.load(new FileInputStream(propFile))
+    return properties['TEST_USER_PASSWORD']
 }
 
 if (isRunningOnTravisAndIsNotPRBuild) {
