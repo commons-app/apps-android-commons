@@ -54,6 +54,9 @@ jobs:
 
       - name: Run Instrumentation tests
         uses: reactivecircus/android-emulator-runner@v2
+        env:
+          test_user_name: ${{ secrets.TEST_USER_NAME }}
+          test_user_password: ${{ secrets.TEST_USER_PASSWORD }}
         with:
           api-level: ${{ matrix.api-level }}
           force-avd-creation: false
