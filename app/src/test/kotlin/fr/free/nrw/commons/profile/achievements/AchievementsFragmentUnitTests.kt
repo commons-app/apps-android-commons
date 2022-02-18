@@ -326,4 +326,16 @@ class AchievementsFragmentUnitTests {
         method.isAccessible = true
         method.invoke(fragment)
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun testMenuVisibilityOverrideNoContext() {
+        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
+            "setMenuVisibility",
+            Boolean::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, true)
+    }
+
 }
