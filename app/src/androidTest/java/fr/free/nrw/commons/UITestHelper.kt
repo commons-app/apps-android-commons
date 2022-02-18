@@ -61,9 +61,9 @@ class UITestHelper {
                 )
             ).perform(ViewActions.click())
             onView(ViewMatchers.withId(R.id.more_logout))
-                .perform(ViewActions.scrollTo(), ViewActions.click())
+                .perform(ViewActions.click())
             onView(ViewMatchers.withId(android.R.id.button1))
-                .perform(ViewActions.scrollTo(), ViewActions.click())
+                .perform(ViewActions.click())
             sleep(10000)
         }
 
