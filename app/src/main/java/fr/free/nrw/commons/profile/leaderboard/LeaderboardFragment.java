@@ -7,6 +7,7 @@ import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.START
 
 import android.accounts.Account;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.profile.ProfileActivity;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -121,8 +123,16 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
         View rootView = inflater.inflate(R.layout.fragment_leaderboard, container, false);
         ButterKnife.bind(this, rootView);
 
-        progressBar.setVisibility(View.VISIBLE);
         hideLayouts();
+
+        // Leaderboard currently unimplemented in Beta flavor. Skip all API calls and disable menu
+        if(ConfigUtils.isBetaFlavour()) {
+            progressBar.setVisibility(View.GONE);
+            scrollButton.setVisibility(View.GONE);
+            return rootView;
+        }
+
+        progressBar.setVisibility(View.VISIBLE);
         setSpinners();
 
         /**
@@ -172,6 +182,19 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
 
 
         return rootView;
+    }
+
+    @Override
+    public void setMenuVisibility(boolean visible) {
+        super.setMenuVisibility(visible);
+
+        // Whenever this fragment is revealed in a menu,
+        // notify Beta users the page data is unavailable
+        if(ConfigUtils.isBetaFlavour() && visible && getContext() != null) {
+            Toast.makeText(getContext(),
+                R.string.leaderboard_unavailable_beta,
+                Toast.LENGTH_LONG).show();
+        }
     }
 
     /**

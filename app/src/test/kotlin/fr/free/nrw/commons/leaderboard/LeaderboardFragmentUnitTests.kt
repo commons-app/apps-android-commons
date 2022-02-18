@@ -18,6 +18,7 @@ import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardListAdapter
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardListViewModel
+import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -198,6 +199,17 @@ class LeaderboardFragmentUnitTests {
         )
         method.isAccessible = true
         method.invoke(fragment)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testMenuVisibilityOverrideNoContext() {
+        val method: Method = LeaderboardFragment::class.java.getDeclaredMethod(
+            "setMenuVisibility",
+            Boolean::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, true)
     }
 
 }
