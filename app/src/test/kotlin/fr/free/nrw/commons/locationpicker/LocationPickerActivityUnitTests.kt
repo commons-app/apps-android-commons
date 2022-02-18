@@ -2,12 +2,21 @@ package fr.free.nrw.commons.locationpicker
 
 import android.content.Context
 import android.os.Looper
+import android.view.View
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapboxMap
+import com.mapbox.mapboxsdk.maps.Style
+import com.mapbox.mapboxsdk.maps.UiSettings
+import com.mapbox.mapboxsdk.style.layers.Layer
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
@@ -47,6 +56,33 @@ class LocationPickerActivityUnitTests {
     @Mock
     private lateinit var cameraPosition: CameraPosition
 
+    @Mock
+    private lateinit var modifyLocationButton: Button
+
+    @Mock
+    private lateinit var placeSelectedButton: FloatingActionButton
+
+    @Mock
+    private lateinit var showInMapButton: TextView
+
+    @Mock
+    private lateinit var droppedMarkerLayer: Layer
+
+    @Mock
+    private lateinit var markerImage: ImageView
+
+    @Mock
+    private lateinit var shadow: ImageView
+
+    @Mock
+    private lateinit var largeToolbarText: TextView
+
+    @Mock
+    private lateinit var smallToolbarText: TextView
+
+    @Mock
+    private lateinit var style: Style
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
@@ -56,6 +92,15 @@ class LocationPickerActivityUnitTests {
         Whitebox.setInternalState(activity, "mapboxMap", mapboxMap)
         Whitebox.setInternalState(activity, "applicationKvStore", applicationKvStore)
         Whitebox.setInternalState(activity, "cameraPosition", cameraPosition)
+        Whitebox.setInternalState(activity, "modifyLocationButton", modifyLocationButton)
+        Whitebox.setInternalState(activity, "placeSelectedButton", placeSelectedButton)
+        Whitebox.setInternalState(activity, "showInMapButton", showInMapButton)
+        Whitebox.setInternalState(activity, "droppedMarkerLayer", droppedMarkerLayer)
+        Whitebox.setInternalState(activity, "markerImage", markerImage)
+        Whitebox.setInternalState(activity, "shadow", shadow)
+        Whitebox.setInternalState(activity, "largeToolbarText", largeToolbarText)
+        Whitebox.setInternalState(activity, "smallToolbarText", smallToolbarText)
+
     }
 
     @Test
@@ -72,6 +117,8 @@ class LocationPickerActivityUnitTests {
         )
         method.isAccessible = true
         method.invoke(activity)
+        verify(mapboxMap, times(1)).addOnCameraMoveStartedListener(activity)
+        verify(mapboxMap, times(1)).addOnCameraIdleListener(activity)
     }
 
     @Test
@@ -106,6 +153,45 @@ class LocationPickerActivityUnitTests {
         )
         method.isAccessible = true
         method.invoke(activity, mock(CameraPosition::class.java))
+        verify(mapboxMap, times(0)).cameraPosition
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnStyleLoaded() {
+        whenever(modifyLocationButton.visibility).thenReturn(View.INVISIBLE)
+        whenever(mapboxMap.uiSettings).thenReturn(mock(UiSettings::class.java))
+        val method: Method = LocationPickerActivity::class.java.getDeclaredMethod(
+            "onStyleLoaded",
+            Style::class.java
+        )
+        method.isAccessible = true
+        method.invoke(activity, style)
+        verify(modifyLocationButton, times(1)).visibility
+        verify(mapboxMap, times(1))
+            .moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+        verify(mapboxMap, times(1)).uiSettings
+        verify(mapboxMap, times(1)).addOnCameraMoveStartedListener(activity)
+        verify(mapboxMap, times(1)).addOnCameraIdleListener(activity)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnClickModifyLocation() {
+        val method: Method = LocationPickerActivity::class.java.getDeclaredMethod(
+            "onClickModifyLocation"
+        )
+        method.isAccessible = true
+        method.invoke(activity)
+        verify(placeSelectedButton, times(1)).visibility = View.VISIBLE
+        verify(modifyLocationButton, times(1)).visibility = View.GONE
+        verify(showInMapButton, times(1)).visibility = View.GONE
+        verify(markerImage, times(1)).visibility = View.VISIBLE
+        verify(shadow, times(1)).visibility = View.VISIBLE
+        verify(largeToolbarText, times(1)).text = "Choose a location"
+        verify(smallToolbarText, times(1)).text = "Pan and zoom to adjust"
+        verify(mapboxMap, times(1)).addOnCameraMoveStartedListener(activity)
+        verify(mapboxMap, times(1)).addOnCameraIdleListener(activity)
     }
 
     @Test
