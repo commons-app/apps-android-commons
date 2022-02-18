@@ -19,8 +19,8 @@ jobs:
 
       - name: Access test login credentials
         run: |
-          echo "TEST_USER_NAME=${{ secrets.TEST_USER_NAME }}" >> local.properties
-          echo "TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }}" >> local.properties
+          echo TEST_USER_NAME=${{ secrets.TEST_USER_NAME }} >> local.properties
+          echo TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }} >> local.properties
           cat local.properties
 
       - name: Set up JDK
