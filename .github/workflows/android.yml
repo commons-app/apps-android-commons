@@ -10,10 +10,7 @@ jobs:
   build:
     name: Run tests and generate APK
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        api-level: [23]
-
+    environment: CI
     steps:
       - uses: actions/checkout@v2.4.0
 
@@ -21,7 +18,7 @@ jobs:
         uses: actions/setup-java@v2.5.0
         with:
           distribution: "temurin"
-          java-version: 8
+          java-version: 11
 
       - name: Cache packages
         id: cache-packages
@@ -33,6 +30,14 @@ jobs:
           key: gradle-packages-${{ runner.os }}-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', 'gradle.properties') }}
           restore-keys: gradle-packages-${{ runner.os }}
 
+      - name: Access test login credentials
+        env:
+          TEST_USER_NAME: ${{ secrets.TEST_USER_NAME }}
+          TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
+        run: |
+          echo "TEST_USER_NAME=$TEST_USER_NAME" >> local.properties
+          echo "TEST_USER_PASSWORD=$TEST_USER_PASSWORD" >> local.properties
+
       - name: AVD cache
         uses: actions/cache@v2
         id: avd-cache
@@ -40,27 +45,30 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-${{ matrix.api-level }}
+          key: avd-api-24
 
       - name: Create AVD and generate snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: ${{ matrix.api-level }}
+          api-level: 24
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
+          disable-animations: true
           script: echo "Generated AVD snapshot for caching."
 
       - name: Run Instrumentation tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: ${{ matrix.api-level }}
+          api-level: 24
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          profile: Nexus 6
-          script: ./gradlew connectedBetaDebugAndroidTest --stacktrace
+          profile: 13.5in Freeform
+          script: |
+            adb shell content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0
+            adb shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
+            ./gradlew connectedBetaDebugAndroidTest --stacktrace
 
       - name: Run Unit tests
         run: ./gradlew -Pcoverage testBetaDebugUnitTestCoverage --stacktrace
