@@ -94,6 +94,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private Place place;
 
     private boolean isExpanded = true;
+    public boolean isNoLocationDialog;
 
     /**
      * showNearbyFound will be true, if any nearby location found that needs pictures and the nearby popup is yet to be shown
@@ -483,6 +484,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 final double zoom = cameraPosition.zoom;
 
                 editLocation(latitude, longitude,zoom);
+
+                if(isNoLocationDialog){
+                    isNoLocationDialog = false;
+                    onNextButtonClicked();
+                }
             }
         }
     }
@@ -515,6 +521,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     @Override
     public void displayAddLocationDialog(final Runnable onSkipClicked) {
+        isNoLocationDialog = true;
         DialogUtil.showAlertDialog(Objects.requireNonNull(getActivity()),
             getString(R.string.no_location_found_title),
             getString(R.string.no_location_found_message),
