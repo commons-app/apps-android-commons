@@ -31,12 +31,16 @@ class UITestHelper {
                 //Perform Login
                 sleep(3000)
                 onView(ViewMatchers.withId(R.id.login_username))
-                    .perform(ViewActions.clearText(), ViewActions.typeText(getTestUsername()))
-                closeSoftKeyboard()
+                    .perform(
+                        ViewActions.replaceText(getTestUsername()),
+                        ViewActions.closeSoftKeyboard()
+                    )
                 sleep(2000)
                 onView(ViewMatchers.withId(R.id.login_password))
-                    .perform(ViewActions.replaceText(getTestUserPassword()))
-                closeSoftKeyboard()
+                    .perform(
+                        ViewActions.replaceText(getTestUserPassword()),
+                        ViewActions.closeSoftKeyboard()
+                    )
                 sleep(2000)
                 onView(ViewMatchers.withId(R.id.login_button))
                     .perform(ViewActions.click())
