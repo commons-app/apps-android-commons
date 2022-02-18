@@ -45,6 +45,22 @@ class UITestHelper {
 
         }
 
+        fun logoutUser() {
+            try {
+                //Perform Login
+                sleep(3000)
+                onView(ViewMatchers.withId(R.id.finishTutorialButton))
+                    .perform(ViewActions.click())
+                onView(ViewMatchers.withId(R.id.more_logout))
+                    .perform(ViewActions.scrollTo(), ViewActions.click())
+                onView(ViewMatchers.withId(android.R.id.button1))
+                    .perform(ViewActions.scrollTo(), ViewActions.click())
+                sleep(10000)
+            } catch (ignored: NoMatchingViewException) {
+            }
+
+        }
+
         fun sleep(timeInMillis: Long) {
             try {
                 Timber.d("Sleeping for %d", timeInMillis)
