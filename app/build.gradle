@@ -328,14 +328,14 @@ android {
 }
 
 String getTestUserName() {
-    def propFile = rootProject.file("./local.properties")
+    def propFile = rootProject.file("./unittest.properties")
     def properties = new Properties()
     properties.load(new FileInputStream(propFile))
     return properties['TEST_USER_NAME']
 }
 
 String getTestPassword() {
-    def propFile = rootProject.file("./local.properties")
+    def propFile = rootProject.file("./unittest.properties")
     def properties = new Properties()
     properties.load(new FileInputStream(propFile))
     return properties['TEST_USER_PASSWORD']
