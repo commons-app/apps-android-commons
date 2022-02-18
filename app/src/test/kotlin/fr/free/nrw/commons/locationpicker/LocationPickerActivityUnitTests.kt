@@ -27,8 +27,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
+import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
@@ -188,6 +187,7 @@ class LocationPickerActivityUnitTests {
         verify(showInMapButton, times(1)).visibility = View.GONE
         verify(markerImage, times(1)).visibility = View.VISIBLE
         verify(shadow, times(1)).visibility = View.VISIBLE
+        verify(droppedMarkerLayer, times(1)).setProperties(any())
         verify(largeToolbarText, times(1)).text = "Choose a location"
         verify(smallToolbarText, times(1)).text = "Pan and zoom to adjust"
         verify(mapboxMap, times(1)).addOnCameraMoveStartedListener(activity)
