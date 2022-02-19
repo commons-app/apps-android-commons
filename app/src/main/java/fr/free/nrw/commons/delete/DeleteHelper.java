@@ -192,7 +192,7 @@ public class DeleteHelper {
 
             String reason = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_alert_set_positive_button_reason) + " ";
             for (int j = 0; j < mUserReason.size(); j++) {
-                reason = reason + reasonList[mUserReason.get(j)];
+                reason = reason + reasonListEnglish[mUserReason.get(j)];
                 if (j != mUserReason.size() - 1) {
                     reason = reason + ", ";
                 }
