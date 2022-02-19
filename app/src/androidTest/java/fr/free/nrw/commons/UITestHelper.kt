@@ -2,6 +2,7 @@ package fr.free.nrw.commons
 
 import android.app.Activity
 import android.content.pm.ActivityInfo
+import android.text.method.Touch.scrollTo
 import android.view.View
 import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
@@ -67,6 +68,7 @@ class UITestHelper {
                 ).perform(ViewActions.click())
                 sleep(2000)
                 onView(ViewMatchers.withId(R.id.more_logout))
+                    .perform(ViewActions.scrollTo())
                     .perform(ViewActions.click())
                 sleep(2000)
                 onView(ViewMatchers.withId(android.R.id.button1))
