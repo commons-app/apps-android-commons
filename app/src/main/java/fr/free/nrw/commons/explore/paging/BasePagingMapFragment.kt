@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -14,6 +15,10 @@ import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.MergeAdapter
+import butterknife.BindView
+import butterknife.ButterKnife
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.mapbox.mapboxsdk.maps.MapView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.utils.ViewUtil
@@ -26,6 +31,10 @@ abstract class BasePagingMapFragment<T> : CommonsDaggerSupportFragment(),
     abstract val pagedListAdapter: PagedListAdapter<T, *>
     abstract val injectedPresenter: PagingContract.Presenter<T>
     abstract val errorTextId: Int
+    @BindView(R.id.map_view) lateinit var mapView: MapView
+    @BindView(R.id.bottom_sheet_details) lateinit var bottomSheetDetails: View
+    @BindView(R.id.map_progress_bar) lateinit var progressBar: ProgressBar
+    @BindView(R.id.fab_recenter) lateinit var fabRecenter: FloatingActionButton
     private val loadingAdapter by lazy { FooterAdapter { injectedPresenter.retryFailedRequest() } }
     private val mergeAdapter by lazy { MergeAdapter(pagedListAdapter, loadingAdapter) }
     private var searchResults: LiveData<PagedList<T>>? = null
@@ -36,17 +45,25 @@ abstract class BasePagingMapFragment<T> : CommonsDaggerSupportFragment(),
         savedInstanceState: Bundle?
     ) = inflater.inflate(R.layout.fragment_search_map_paginated, container, false)
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         /*paginatedSearchResultsList.apply {
             layoutManager = GridLayoutManager(context, if (isPortrait) 1 else 2)
             adapter = mergeAdapter
         }*/
+        ButterKnife.bind(this, view!!)
+        mapView.onStart();
         injectedPresenter.listFooterData.observe(
             viewLifecycleOwner,
             Observer(loadingAdapter::submitList)
         )
     }
+
+    protected abstract fun getLayoutResource(): Int
 
     /**
      * Called on configuration change, update the spanCount according to the orientation state.

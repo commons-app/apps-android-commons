@@ -1,11 +1,15 @@
 package fr.free.nrw.commons.media
 
+import android.util.Log
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.category.ContinuationClient
 import fr.free.nrw.commons.explore.media.MediaConverter
 import fr.free.nrw.commons.utils.CommonsDateUtil
 import io.reactivex.Single
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.wikipedia.dataclient.mwapi.MwQueryPage
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import org.wikipedia.wikidata.Entities
@@ -100,7 +104,8 @@ class MediaClient @Inject constructor(
      * @return
      */
     fun getMediaListFromGeoSearch(coordinate: String?, limit: Int) =
-        responseMapper(mediaInterface.getMediaListFromGeoSearch(coordinate, limit))
+        //TODO radius and coords are hardcoded
+        responseMapper(mediaInterface.getMediaListFromGeoSearch(coordinate, 30, 10000))
 
     /**
      * @return list of images for a particular depict entity
@@ -184,6 +189,9 @@ class MediaClient @Inject constructor(
         networkResult: Single<MwQueryResponse>,
         key: String?
     ): Single<List<Media>> {
+        GlobalScope.launch(Dispatchers.IO) {
+            Log.d("nesli","network result is:" + networkResult.blockingGet())
+        }
         return networkResult.map {
             handleContinuationResponse(it.continuation(), key)
             it.query()?.pages() ?: emptyList()
@@ -191,9 +199,16 @@ class MediaClient @Inject constructor(
     }
 
     private fun mediaFromPageAndEntity(pages: List<MwQueryPage>): Single<List<Media>> {
-        return if (pages.isEmpty())
+        return if (pages.isEmpty()) {
+            GlobalScope.launch(Dispatchers.IO) {
+                Log.d("nesli", "media from page entity pages empty:" + pages.size)
+            }
             Single.just(emptyList())
-        else
+        } else {
+            GlobalScope.launch(Dispatchers.IO) {
+                Log.d("nesli", "media from page entity pages:" + pages.get(0))
+            }
+
             getEntities(pages.map { "$PAGE_ID_PREFIX${it.pageId()}" })
                 .map {
                     pages.zip(it.entities().values)
@@ -203,5 +218,7 @@ class MediaClient @Inject constructor(
                             }
                         }
                 }
+        }
+
     }
 }

@@ -34,6 +34,17 @@ public class Place implements Parcelable {
     public final Sitelinks siteLinks;
     private boolean isMonument;
 
+    public Place() {
+        language = null;
+        name = null;
+        label = null;
+        longDescription = null;
+        location = null;
+        category = null;
+        pic = null;
+        exists = null;
+        siteLinks = null;
+    }
 
     public Place(String language,String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, Boolean exists) {
         this.language = language;

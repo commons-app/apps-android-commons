@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.explore.map;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
+import static fr.free.nrw.commons.utils.MapUtils.ZOOM_LEVEL;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -25,15 +26,23 @@ import butterknife.ButterKnife;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.mapbox.mapboxsdk.annotations.Icon;
+import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.annotations.Polygon;
+import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdate;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.maps.UiSettings;
 import com.mapbox.pluginscalebar.ScaleBarOptions;
 import com.mapbox.pluginscalebar.ScaleBarPlugin;
+import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -49,15 +58,18 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.utils.ExecutorUtils;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.MapUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
+import fr.free.nrw.commons.utils.UiUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
@@ -83,6 +95,9 @@ public class ExploreMapFragment extends PageableMapFragment
     private Place lastPlaceToCenter;
     private boolean isMapBoxReady;
     private Marker selectedMarker;
+    private LatLngBounds latLngBounds;
+    private Marker currentLocationMarker;
+    private Polygon currentLocationPolygon;
     private ExploreFragmentInstanceReadyCallback exploreFragmentInstanceReadyCallback;
     IntentFilter intentFilter = new IntentFilter(MapUtils.NETWORK_INTENT_ACTION);
 
@@ -100,17 +115,17 @@ public class ExploreMapFragment extends PageableMapFragment
     @Inject
     SystemThemeUtils systemThemeUtils;
 
-    @BindView(R.id.map_view)
+    /*@BindView(R.id.map_view)
     MapView mapView;
     @BindView(R.id.bottom_sheet_details)
     View bottomSheetDetails;
     @BindView(R.id.map_progress_bar)
     ProgressBar progressBar;
     @BindView(R.id.fab_recenter)
-    FloatingActionButton fabRecenter;
+    FloatingActionButton fabRecenter;*/
 
 
-    private View view;
+    //private View view;
     private ExploreMapPresenter presenter;
     private String customQuery;
 
@@ -123,19 +138,21 @@ public class ExploreMapFragment extends PageableMapFragment
     }
 
     @Override
-    public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
-        final Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_explore_map, container, false);
-        ButterKnife.bind(this, view);
-        initNetworkBroadCastReceiver();
-        if (presenter == null) {
-            presenter = new ExploreMapPresenter(bookmarkLocationDao);
-        }
-        presenterReady(getContext());
-        setHasOptionsMenu(true);
-        // Inflate the layout for this fragment
-        return view;
+    protected int getLayoutResource() {
+        return R.layout.fragment_search_map_paginated;
     }
+
+    //@Override
+    //public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
+        //final Bundle savedInstanceState) {
+        //super.onCreateView(inflater, container, savedInstanceState);
+        //view = inflater.inflate(R.layout.fragment_explore_map, container, false);
+        //ButterKnife.bind(this, getView());
+
+
+        // Inflate the layout for this fragmentz
+        //return getView();
+    //}
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
@@ -143,6 +160,14 @@ public class ExploreMapFragment extends PageableMapFragment
         /*if (savedInstanceState != null) {
             onQueryUpdated(savedInstanceState.getString("placeName") + "map query");
         }*/
+
+        initNetworkBroadCastReceiver();
+        if (presenter == null) {
+            presenter = new ExploreMapPresenter(bookmarkLocationDao);
+        }
+        presenterReady(getContext());
+        setHasOptionsMenu(true);
+
         isDarkTheme = systemThemeUtils.isDeviceInNightMode();
         isPermissionDenied = false;
         cameraMoveListener= () -> presenter.onCameraMove(mapBox.getCameraPosition().target);
@@ -297,8 +322,10 @@ public class ExploreMapFragment extends PageableMapFragment
     @Override
     public void populatePlaces(LatLng curlatLng) {
         if (curlatLng.equals(lastFocusLocation) || lastFocusLocation == null || recenterToUserLocation) { // Means we are checking around current location
+            Log.d("nesli2","populate places populatePlacesForCurrentLocation called");
             populatePlacesForCurrentLocation(lastKnownLocation, curlatLng);
         } else {
+            Log.d("nesli2","populate places populatePlacesForAnotherLocation called");
             populatePlacesForAnotherLocation(lastKnownLocation, curlatLng);
         }
         if(recenterToUserLocation) {
@@ -309,7 +336,7 @@ public class ExploreMapFragment extends PageableMapFragment
     private void populatePlacesForCurrentLocation(final fr.free.nrw.commons.location.LatLng curlatLng,
         final fr.free.nrw.commons.location.LatLng searchLatLng){
 
-        final Observable<ExploreMapController.NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
+        final Observable<MapController.ExplorePlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> exploreMapController
                 .loadAttractionsFromLocation(curlatLng, searchLatLng,true));
 
@@ -331,7 +358,7 @@ public class ExploreMapFragment extends PageableMapFragment
     private void populatePlacesForAnotherLocation(final fr.free.nrw.commons.location.LatLng curlatLng,
         final fr.free.nrw.commons.location.LatLng searchLatLng){
 
-        final Observable<ExploreMapController.NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
+        final Observable<MapController.ExplorePlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> exploreMapController
                 .loadAttractionsFromLocation(curlatLng, searchLatLng,false));
         // TODO: check loadAttractionsromLocation with query parameter
@@ -354,10 +381,11 @@ public class ExploreMapFragment extends PageableMapFragment
     /**
      * Populates places for your location, should be used for finding nearby places around a
      * location where you are.
-     * @param nearbyPlacesInfo This variable has place list information and distances.
+     * @param explorePlacesInfo This variable has place list information and distances.
      */
-    private void updateMapMarkers(final ExploreMapController.NearbyPlacesInfo nearbyPlacesInfo, final boolean shouldUpdateSelectedMarker) {
-        presenter.updateMapMarkers(nearbyPlacesInfo, selectedMarker,shouldUpdateSelectedMarker);
+    private void updateMapMarkers(final MapController.ExplorePlacesInfo explorePlacesInfo, final boolean shouldUpdateSelectedMarker) {
+        Log.d("nesli2","updateMapMarkers1");
+        presenter.updateMapMarkers(explorePlacesInfo, selectedMarker,shouldUpdateSelectedMarker);
     }
 
     private void showErrorMessage(final String message) {
@@ -387,7 +415,7 @@ public class ExploreMapFragment extends PageableMapFragment
         if (lastKnownLocation != null) {
             final CameraPosition position = new CameraPosition.Builder()
                 .target(LocationUtils.commonsLatLngToMapBoxLatLng(target)) // Sets the new camera position
-                .zoom(MapUtils.ZOOM_LEVEL) // Same zoom level
+                .zoom(ZOOM_LEVEL) // Same zoom level
                 .build();
             mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
         }
@@ -453,8 +481,10 @@ public class ExploreMapFragment extends PageableMapFragment
     public void setProgressBarVisibility(boolean isVisible) {
         if (isVisible) {
             progressBar.setVisibility(View.VISIBLE);
+            showInitialLoadInProgress();
         } else {
             progressBar.setVisibility(View.GONE);
+            hideInitialLoadProgress();
         }
     }
 
@@ -475,17 +505,85 @@ public class ExploreMapFragment extends PageableMapFragment
 
     @Override
     public void addCurrentLocationMarker(LatLng curLatLng) {
+        if (null != curLatLng && !isPermissionDenied) {
+            ExecutorUtils.get().submit(() -> {
+                mapView.post(() -> removeCurrentLocationMarker());
+                Timber.d("Adds current location marker");
 
+                final Icon icon = IconFactory.getInstance(getContext())
+                    .fromResource(R.drawable.current_location_marker);
+
+                final MarkerOptions currentLocationMarkerOptions = new MarkerOptions()
+                    .position(new com.mapbox.mapboxsdk.geometry.LatLng(curLatLng.getLatitude(),
+                        curLatLng.getLongitude()));
+                currentLocationMarkerOptions.setIcon(icon); // Set custom icon
+                mapView.post(
+                    () -> currentLocationMarker = mapBox.addMarker(currentLocationMarkerOptions));
+
+                final List<com.mapbox.mapboxsdk.geometry.LatLng> circle = UiUtils
+                    .createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
+                        curLatLng.getAccuracy() * 2, 100);
+
+                final PolygonOptions currentLocationPolygonOptions = new PolygonOptions()
+                    .addAll(circle)
+                    .strokeColor(getResources().getColor(R.color.current_marker_stroke))
+                    .fillColor(getResources().getColor(R.color.current_marker_fill));
+                mapView.post(
+                    () -> currentLocationPolygon = mapBox
+                        .addPolygon(currentLocationPolygonOptions));
+            });
+        } else {
+            Timber.d("not adding current location marker..current location is null");
+        }
+    }
+
+    @Override
+    public boolean isCurrentLocationMarkerVisible() {
+        if (latLngBounds == null || currentLocationMarker==null) {
+            Timber.d("Map projection bounds are null");
+            return false;
+        } else {
+            Timber.d("Current location marker %s" , latLngBounds.contains(currentLocationMarker.getPosition()) ? "visible" : "invisible");
+            return latLngBounds.contains(currentLocationMarker.getPosition());
+        }
+    }
+
+    @Override
+    public void setProjectorLatLngBounds() {
+        latLngBounds = mapBox.getProjection().getVisibleRegion().latLngBounds;
+    }
+
+    private void removeCurrentLocationMarker() {
+        if (currentLocationMarker != null && mapBox!=null) {
+            mapBox.removeMarker(currentLocationMarker);
+            if (currentLocationPolygon != null) {
+                mapBox.removePolygon(currentLocationPolygon);
+            }
+        }
     }
 
     @Override
     public void updateMapToTrackPosition(LatLng curLatLng) {
         Log.d("test","updateMapToTrackPosition");
+        Timber.d("Updates map camera to track user position");
+        final CameraPosition cameraPosition;
+        if(isPermissionDenied){
+            cameraPosition = new CameraPosition.Builder().target
+                (LocationUtils.commonsLatLngToMapBoxLatLng(curLatLng)).build();
+        }else{
+            cameraPosition = new CameraPosition.Builder().target
+                (LocationUtils.commonsLatLngToMapBoxLatLng(curLatLng)).build();
+        }
+        if(null!=mapBox) {
+            mapBox.setCameraPosition(cameraPosition);
+            mapBox.animateCamera(CameraUpdateFactory
+                .newCameraPosition(cameraPosition), 1000);
+        }
     }
 
     @Override
     public void updateMapMarkers(List<NearbyBaseMarker> nearbyBaseMarkers, Marker selectedMarker) {
-        Log.d("test","updateMapMarkers");
+        Log.d("test","updateMapMarkers2");
     }
 
     @Override
@@ -507,15 +605,6 @@ public class ExploreMapFragment extends PageableMapFragment
     public com.mapbox.mapboxsdk.geometry.LatLng getLastFocusLocation() {
         return lastFocusLocation == null? null : LocationUtils.commonsLatLngToMapBoxLatLng(lastFocusLocation);
     }
-    @Override
-    public boolean isCurrentLocationMarkerVisible() {
-        return false;
-    }
-
-    @Override
-    public void setProjectorLatLngBounds() {
-
-    }
 
     @Override
     public void disableFABRecenter() {
@@ -530,6 +619,22 @@ public class ExploreMapFragment extends PageableMapFragment
     @Override
     public void setCustomQuery(String customQuery) {
         this.customQuery = customQuery;
+    }
+
+    @Override
+    public void addNearbyMarkersToMapBoxMap(List<NearbyBaseMarker> nearbyBaseMarkers,
+        Marker selectedMarker) {
+        if (isMapBoxReady && mapBox != null) {
+            //allMarkers = new ArrayList<>(nearbyBaseMarkers);
+            mapBox.addMarkers(nearbyBaseMarkers);
+            //setMapMarkerActions(selectedMarker);
+            presenter.updateMapMarkersToController(nearbyBaseMarkers);
+        }
+    }
+
+    @Override
+    public void setMapBoundaries(CameraUpdate cameaUpdate) {
+        mapBox.easeCamera(cameaUpdate);
     }
 
     @NonNull
@@ -582,7 +687,7 @@ public class ExploreMapFragment extends PageableMapFragment
                         }
                     } else {
                         if (snackbar == null) {
-                            snackbar = Snackbar.make(view, R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
+                            snackbar = Snackbar.make(getView(), R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
                             setSearchThisAreaButtonVisibility(false);
                             setProgressBarVisibility(false);
                         }

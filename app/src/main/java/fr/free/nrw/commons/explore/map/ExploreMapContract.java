@@ -2,6 +2,7 @@ package fr.free.nrw.commons.explore.map;
 
 import android.content.Context;
 import com.mapbox.mapboxsdk.annotations.Marker;
+import com.mapbox.mapboxsdk.camera.CameraUpdate;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -40,6 +41,8 @@ public class ExploreMapContract {
         void disableFABRecenter();
         void enableFABRecenter();
         void setCustomQuery(String customQuery);
+        void addNearbyMarkersToMapBoxMap(final List<NearbyBaseMarker> nearbyBaseMarkers, final Marker selectedMarker);
+        void setMapBoundaries(CameraUpdate cameaUpdate);
     }
 
     interface UserActions {

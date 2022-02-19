@@ -5,13 +5,18 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.SEARCH_CUSTOM_AREA;
 
 
+import android.util.Log;
 import com.mapbox.mapboxsdk.annotations.Marker;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.geometry.LatLngBounds;
+import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
+import fr.free.nrw.commons.utils.LocationUtils;
 import java.lang.reflect.Proxy;
 import java.util.List;
 import timber.log.Timber;
@@ -54,7 +59,7 @@ public class ExploreMapPresenter
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
-
+        updateMap(LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
     @Override
@@ -70,6 +75,7 @@ public class ExploreMapPresenter
     @Override
     public void updateMap(LocationChangeType locationChangeType) {
         //TODO: write inside of all methods nesli
+        Log.d("nesli2","updteMap");
         Timber.d("Presenter updates map and list" + locationChangeType.toString());
         if (isNearbyLocked) {
             Timber.d("Nearby is locked, so updateMapAndList returns");
@@ -95,11 +101,11 @@ public class ExploreMapPresenter
          * Significant changed - Markers and current location will be updated together
          * Slightly changed - Only current position marker will be updated
          */
-        if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)
-            || locationChangeType.equals(MAP_UPDATED)) {
+        if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)) {
             Timber.d("LOCATION_SIGNIFICANTLY_CHANGED");
+            Log.d("nesli2", "location significany changed");
             lockUnlockNearby(true);
-            exploreMapFragmentView.setProgressBarVisibility(true);
+            //exploreMapFragmentView.setProgressBarVisibility(true);
             exploreMapFragmentView.populatePlaces(lastLocation);
 
         } else if (locationChangeType.equals(SEARCH_CUSTOM_AREA)) {
@@ -158,7 +164,21 @@ public class ExploreMapPresenter
 
     @Override
     public void onCameraMove(com.mapbox.mapboxsdk.geometry.LatLng latLng) {
-
+        exploreMapFragmentView.setProjectorLatLngBounds();
+        // If our nearby markers are calculated at least once
+        if (ExploreMapController.latestSearchLocation != null) {
+            double distance = latLng.distanceTo
+                (LocationUtils.commonsLatLngToMapBoxLatLng(ExploreMapController.latestSearchLocation));
+            if (exploreMapFragmentView.isNetworkConnectionEstablished()) {
+                if (distance > ExploreMapController.latestSearchRadius) {
+                    exploreMapFragmentView.setSearchThisAreaButtonVisibility(true);
+                } else {
+                    exploreMapFragmentView.setSearchThisAreaButtonVisibility(false);
+                }
+            }
+        } else {
+            exploreMapFragmentView.setSearchThisAreaButtonVisibility(false);
+        }
     }
 
     @Override
@@ -187,27 +207,37 @@ public class ExploreMapPresenter
     /**
      * Populates places for custom location, should be used for finding nearby places around a
      * location where you are not at.
-     * @param nearbyPlacesInfo This variable has placeToCenter list information and distances.
+     * @param explorePlacesInfo This variable has placeToCenter list information and distances.
      */
     public void updateMapMarkers(
-
-        ExploreMapController.NearbyPlacesInfo nearbyPlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
-        /*if(null!= exploreMapFragmentView) {
+        MapController.ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
+        Log.d("nesli2","updateMap marker with nearby place info:" + explorePlacesInfo);
+        exploreMapFragmentView.setMapBoundaries(CameraUpdateFactory.newLatLngBounds(getLatLngBounds(explorePlacesInfo.boundaryCoordinates), 10));
+        if(null != exploreMapFragmentView) {
             List<NearbyBaseMarker> nearbyBaseMarkers = ExploreMapController
-                .loadAttractionsFromLocationToBaseMarkerOptions(nearbyPlacesInfo.curLatLng, // Curlatlang will be used to calculate distances
-                    nearbyPlacesInfo.placeList,
+                .loadAttractionsFromLocationToBaseMarkerOptions(explorePlacesInfo.curLatLng, // Curlatlang will be used to calculate distances
+                    explorePlacesInfo.explorePlaceList,
                     exploreMapFragmentView.getContext(),
                     bookmarkLocationDao.getAllBookmarksLocations());
-            exploreMapFragmentView.updateMapMarkers(nearbyBaseMarkers, selectedMarker);
-            exploreMapFragmentView.addCurrentLocationMarker(nearbyPlacesInfo.curLatLng);
+            exploreMapFragmentView.addNearbyMarkersToMapBoxMap(nearbyBaseMarkers, selectedMarker);
+            exploreMapFragmentView.addCurrentLocationMarker(explorePlacesInfo.curLatLng);
             if(shouldTrackPosition){
-                exploreMapFragmentView.updateMapToTrackPosition(nearbyPlacesInfo.curLatLng);
+                exploreMapFragmentView.updateMapToTrackPosition(explorePlacesInfo.curLatLng);
             }
             lockUnlockNearby(false); // So that new location updates wont come
             exploreMapFragmentView.setProgressBarVisibility(false);
             handleCenteringTaskIfAny();
         }
-        */
+    }
+
+    private LatLngBounds getLatLngBounds(LatLng[] boundaries) {
+        LatLngBounds latLngBounds = new LatLngBounds.Builder()
+            .include(LocationUtils.commonsLatLngToMapBoxLatLng(boundaries[0]))
+            .include(LocationUtils.commonsLatLngToMapBoxLatLng(boundaries[1]))
+            .include(LocationUtils.commonsLatLngToMapBoxLatLng(boundaries[2]))
+            .include(LocationUtils.commonsLatLngToMapBoxLatLng(boundaries[3]))
+            .build();
+        return latLngBounds;
     }
 
     /**
