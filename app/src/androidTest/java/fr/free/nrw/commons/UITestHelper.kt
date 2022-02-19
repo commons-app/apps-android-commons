@@ -72,7 +72,7 @@ class UITestHelper {
                         ViewMatchers.withId(R.id.more_logout), ViewMatchers.withText("Logout"),
                         childAtPosition(
                             childAtPosition(
-                                ViewMatchers.withClassName(Matchers.`is`("android.widget.ScrollView")),
+                                ViewMatchers.withId(R.id.scroll_view_more_bottom_sheet),
                                 0
                             ),
                             6
