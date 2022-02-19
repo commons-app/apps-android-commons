@@ -42,7 +42,6 @@ class LoginActivityTest {
         UITestHelper.loginUser()
         UITestHelper.skipWelcome()
         Intents.intended(hasComponent(MainActivity::class.java.name))
-        UITestHelper.logoutUser()
     }
 
     @Test
