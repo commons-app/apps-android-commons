@@ -25,6 +25,11 @@ public class LangCodeUtils {
             return code;
         }
     }
+
+    /**
+     * Returns configuration for locale of
+     * our choice regardless of user's device settings
+     */
     public static Resources getLocalizedResources(Context context, Locale desiredLocale) {
         Configuration conf = context.getResources().getConfiguration();
         conf = new Configuration(conf);

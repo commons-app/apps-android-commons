@@ -306,7 +306,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         reasonList.add(getString(R.string.deletion_reason_not_interesting));
         reasonList.add(getString(R.string.deletion_reason_no_longer_want_public));
         reasonList.add(getString(R.string.deletion_reason_bad_for_my_privacy));
-        //add corresponding mappings in english locale so that we can upload it in deletion request
+        // Add corresponding mappings in english locale so that we can upload it in deletion request
         reasonListEnglishMappings = new ArrayList<>();
         reasonListEnglishMappings.add(getLocalizedResources(getContext(), Locale.ENGLISH).getString(R.string.deletion_reason_uploaded_by_mistake));
         reasonListEnglishMappings.add(getLocalizedResources(getContext(), Locale.ENGLISH).getString(R.string.deletion_reason_publicly_visible));

@@ -158,6 +158,7 @@ public class DeleteHelper {
         ArrayList<Integer> mUserReason = new ArrayList<>();
 
         String[] reasonList = {"Reason 1", "Reason 2", "Reason 3"};
+        // Messages posted on-wiki should not be in the app user's locale, but rather in Commons' lingua franca English.
         String[] reasonListEnglish = {"Eng1", "Eng2", "Eng3"};
 
 
