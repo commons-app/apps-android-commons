@@ -94,7 +94,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private Place place;
 
     private boolean isExpanded = true;
-    public boolean isNoLocationDialog;
+
+    /**
+     * isNoLocationDialog will be true, if user add location through add location dialog
+     */
+    private boolean isNoLocationDialog;
 
     /**
      * showNearbyFound will be true, if any nearby location found that needs pictures and the nearby popup is yet to be shown
@@ -484,7 +488,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 final double zoom = cameraPosition.zoom;
 
                 editLocation(latitude, longitude,zoom);
-
+                /*
+                       if isNoLocationDialog is true then the user will redirect to the next screen
+                       otherwise user will redirect back to the upload screen
+                 */
                 if(isNoLocationDialog){
                     isNoLocationDialog = false;
                     onNextButtonClicked();
