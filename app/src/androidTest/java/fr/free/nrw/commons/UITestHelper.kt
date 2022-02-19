@@ -67,12 +67,31 @@ class UITestHelper {
                     )
                 ).perform(ViewActions.click())
                 sleep(2000)
-                onView(ViewMatchers.withId(R.id.more_logout))
-                    .perform(ViewActions.scrollTo())
-                    .perform(ViewActions.click())
+                onView(
+                    Matchers.allOf(
+                        ViewMatchers.withId(R.id.more_logout), ViewMatchers.withText("Logout"),
+                        childAtPosition(
+                            childAtPosition(
+                                ViewMatchers.withClassName(Matchers.`is`("android.widget.ScrollView")),
+                                0
+                            ),
+                            6
+                        )
+                    )
+                ).perform(ViewActions.scrollTo(), ViewActions.click())
                 sleep(2000)
-                onView(ViewMatchers.withId(android.R.id.button1))
-                    .perform(ViewActions.click())
+                onView(
+                    Matchers.allOf(
+                        ViewMatchers.withId(android.R.id.button1), ViewMatchers.withText("Yes"),
+                        childAtPosition(
+                            childAtPosition(
+                                ViewMatchers.withId(R.id.buttonPanel),
+                                0
+                            ),
+                            3
+                        )
+                    )
+                ).perform(ViewActions.scrollTo(), ViewActions.click())
                 sleep(10000)
             } catch (ignored: NoMatchingViewException) {
             }
