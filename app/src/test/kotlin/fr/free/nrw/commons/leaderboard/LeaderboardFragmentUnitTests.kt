@@ -4,6 +4,7 @@ import android.accounts.Account
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Spinner
@@ -32,6 +33,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.robolectric.shadows.ShadowToast
 import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
@@ -70,6 +72,9 @@ class LeaderboardFragmentUnitTests {
     @Mock
     private lateinit var button: Button
 
+    @Mock
+    private lateinit var parentView: ViewGroup
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
@@ -94,6 +99,7 @@ class LeaderboardFragmentUnitTests {
         Whitebox.setInternalState(fragment, "viewModel", viewModel)
         Whitebox.setInternalState(fragment, "scrollButton", button)
         Whitebox.setInternalState(fragment, "leaderboardListRecyclerView", recyclerView)
+        Whitebox.setInternalState(fragment, "mView", parentView)
     }
 
     @Test
@@ -203,13 +209,39 @@ class LeaderboardFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testMenuVisibilityOverrideNoContext() {
+    fun testMenuVisibilityOverrideNotVisible() {
+        val method: Method = LeaderboardFragment::class.java.getDeclaredMethod(
+            "setMenuVisibility",
+            Boolean::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, false)
+        Assert.assertNull(ShadowToast.getLatestToast())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testMenuVisibilityOverrideVisibleNoContext() {
         val method: Method = LeaderboardFragment::class.java.getDeclaredMethod(
             "setMenuVisibility",
             Boolean::class.java
         )
         method.isAccessible = true
         method.invoke(fragment, true)
+        Assert.assertNull(ShadowToast.getLatestToast())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testMenuVisibilityOverrideVisibleWithContext() {
+        `when`(parentView.context).thenReturn(context)
+        val method: Method = LeaderboardFragment::class.java.getDeclaredMethod(
+            "setMenuVisibility",
+            Boolean::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, true)
+        Assert.assertEquals(ShadowToast.getTextOfLatestToast().toString(), context.getString(R.string.leaderboard_unavailable_beta))
     }
 
 }
