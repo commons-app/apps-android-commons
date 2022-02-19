@@ -359,8 +359,8 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testOnActivityResult() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
+    fun testOnActivityResultOnMapIconClicked() {
+        shadowOf(Looper.getMainLooper()).idle()
         Mockito.mock(LocationPicker::class.java)
         val intent = Mockito.mock(Intent::class.java)
         val cameraPosition = Mockito.mock(CameraPosition::class.java)
@@ -374,6 +374,29 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(latLng.longitude).thenReturn(0.0)
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         fragment.onActivityResult(1211, Activity.RESULT_OK, intent)
+        Mockito.verify(presenter, Mockito.times(0)).verifyImageQuality(0)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnActivityResultAddLocationDialog() {
+        shadowOf(Looper.getMainLooper()).idle()
+        Mockito.mock(LocationPicker::class.java)
+        val intent = Mockito.mock(Intent::class.java)
+        val cameraPosition = Mockito.mock(CameraPosition::class.java)
+        val latLng = Mockito.mock(LatLng::class.java)
+
+        Whitebox.setInternalState(cameraPosition, "target", latLng)
+        Whitebox.setInternalState(fragment, "editableUploadItem", uploadItem)
+        Whitebox.setInternalState(fragment,"isMissingLocationDialog",true)
+        Whitebox.setInternalState(fragment, "presenter", presenter)
+
+        `when`(LocationPicker.getCameraPosition(intent)).thenReturn(cameraPosition)
+        `when`(latLng.latitude).thenReturn(0.0)
+        `when`(latLng.longitude).thenReturn(0.0)
+        `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
+        fragment.onActivityResult(1211, Activity.RESULT_OK, intent)
+        Mockito.verify(presenter, Mockito.times(1)).verifyImageQuality(0)
     }
 
     @Test
