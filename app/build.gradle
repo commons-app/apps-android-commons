@@ -162,7 +162,8 @@ task disableAnimations(type: Exec) {
 }
 
 project.gradle.taskGraph.whenReady {
-    connectedDebugAndroidTest.dependsOn disableAnimations
+    connectedBetaDebugAndroidTest.dependsOn disableAnimations
+    connectedProdDebugAndroidTest.dependsOn disableAnimations
 }
 
 android {
