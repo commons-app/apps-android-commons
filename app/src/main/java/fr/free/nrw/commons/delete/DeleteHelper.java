@@ -83,7 +83,6 @@ public class DeleteHelper {
                 "|year=" + calendar.get(Calendar.YEAR) +
                 "}}";
 
-        System.out.println("Delete: "+fileDeleteString);
 
         String subpageString = "=== [[:" + media.getFilename() + "]] ===\n" +
                 reason +
