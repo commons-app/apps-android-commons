@@ -166,7 +166,7 @@ public class DeleteHelper {
             reasonList[0] = context.getString(R.string.delete_helper_ask_reason_copyright_press_photo);
             reasonList[1] = context.getString(R.string.delete_helper_ask_reason_copyright_internet_photo);
             reasonList[2] = context.getString(R.string.delete_helper_ask_reason_copyright_logo);
-            reasonList[3] = context.getString(R.string.delete_helper_ask_reason_copyright_breach_of_freedom_of_panorama_rules);
+            reasonList[3] = context.getString(R.string.delete_helper_ask_reason_copyright_no_freedom_of_panorama);
         }
 
         alert.setMultiChoiceItems(reasonList, checkedItems, (dialogInterface, position, isChecked) -> {
