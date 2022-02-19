@@ -10,9 +10,6 @@ jobs:
   build:
     name: Run tests and generate APK
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        api-level: [23]
     environment: CI
     steps:
       - uses: actions/checkout@v2.4.0
@@ -41,32 +38,12 @@ jobs:
           echo "TEST_USER_NAME=$TEST_USER_NAME" >> local.properties
           echo "TEST_USER_PASSWORD=$TEST_USER_PASSWORD" >> local.properties
 
-      - name: AVD cache
-        uses: actions/cache@v2
-        id: avd-cache
-        with:
-          path: |
-            ~/.android/avd/*
-            ~/.android/adb*
-          key: avd-${{ matrix.api-level }}
-
-      - name: Create AVD and generate snapshot for caching
-        if: steps.avd-cache.outputs.cache-hit != 'true'
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: ${{ matrix.api-level }}
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
-          script: echo "Generated AVD snapshot for caching."
-
       - name: Run Instrumentation tests
         uses: reactivecircus/android-emulator-runner@v2
 
         with:
-          api-level: ${{ matrix.api-level }}
-          force-avd-creation: false
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          api-level: 23
+          emulator-options: -no-snapshot -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           profile: Nexus 6
           script: ./gradlew connectedBetaDebugAndroidTest --stacktrace
