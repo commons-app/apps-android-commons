@@ -3,6 +3,7 @@ package fr.free.nrw.commons.profile.achievements;
 import android.accounts.Account;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -206,10 +207,18 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
         // Whenever this fragment is revealed in a menu,
         // notify Beta users the page data is unavailable
-        if(ConfigUtils.isBetaFlavour() && visible && getView().getContext() != null) {
-            Toast.makeText(getView().getContext(),
-                R.string.achievements_unavailable_beta,
-                Toast.LENGTH_LONG).show();
+        if(ConfigUtils.isBetaFlavour() && visible) {
+            Context ctx = null;
+            if(getContext() != null) {
+                ctx = getContext();
+            } else if(getView() != null && getView().getContext() != null) {
+                ctx = getView().getContext();
+            }
+            if(ctx != null) {
+                Toast.makeText(ctx,
+                    R.string.achievements_unavailable_beta,
+                    Toast.LENGTH_LONG).show();
+            }
         }
     }
 

@@ -6,6 +6,7 @@ import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.PAGE_
 import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.START_OFFSET;
 
 import android.accounts.Account;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -189,10 +190,18 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
 
         // Whenever this fragment is revealed in a menu,
         // notify Beta users the page data is unavailable
-        if(ConfigUtils.isBetaFlavour() && visible && getView().getContext() != null) {
-            Toast.makeText(getView().getContext(),
-                R.string.leaderboard_unavailable_beta,
-                Toast.LENGTH_LONG).show();
+        if(ConfigUtils.isBetaFlavour() && visible) {
+            Context ctx = null;
+            if(getContext() != null) {
+                ctx = getContext();
+            } else if(getView() != null && getView().getContext() != null) {
+                ctx = getView().getContext();
+            }
+            if(ctx != null) {
+                Toast.makeText(ctx,
+                    R.string.leaderboard_unavailable_beta,
+                    Toast.LENGTH_LONG).show();
+            }
         }
     }
 

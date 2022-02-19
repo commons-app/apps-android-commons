@@ -348,18 +348,6 @@ class AchievementsFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testMenuVisibilityOverrideVisibleNoContext() {
-        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
-            "setMenuVisibility",
-            Boolean::class.java
-        )
-        method.isAccessible = true
-        method.invoke(fragment, true)
-        Assert.assertNull(ShadowToast.getLatestToast())
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testMenuVisibilityOverrideVisibleWithContext() {
         Mockito.`when`(parentView.context).thenReturn(context)
         val method: Method = AchievementsFragment::class.java.getDeclaredMethod(

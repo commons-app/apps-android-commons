@@ -221,18 +221,6 @@ class LeaderboardFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testMenuVisibilityOverrideVisibleNoContext() {
-        val method: Method = LeaderboardFragment::class.java.getDeclaredMethod(
-            "setMenuVisibility",
-            Boolean::class.java
-        )
-        method.isAccessible = true
-        method.invoke(fragment, true)
-        Assert.assertNull(ShadowToast.getLatestToast())
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testMenuVisibilityOverrideVisibleWithContext() {
         `when`(parentView.context).thenReturn(context)
         val method: Method = LeaderboardFragment::class.java.getDeclaredMethod(
