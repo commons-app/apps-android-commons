@@ -6,12 +6,14 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_NEEDING_CATEGORIES;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_UNCATEGORISED;
+import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -80,6 +82,7 @@ import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -243,6 +246,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     //Had to make this class variable, to implement various onClicks, which access the media, also I fell why make separate variables when one can serve the purpose
     private Media media;
     private ArrayList<String> reasonList;
+    private ArrayList<String> reasonListEnglishMappings;
 
     /**
      * Height stores the height of the frame layout as soon as it is initialised and updates itself on
@@ -302,6 +306,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         reasonList.add(getString(R.string.deletion_reason_not_interesting));
         reasonList.add(getString(R.string.deletion_reason_no_longer_want_public));
         reasonList.add(getString(R.string.deletion_reason_bad_for_my_privacy));
+        //add corresponding mappings in english locale so that we can upload it in deletion request
+        reasonListEnglishMappings = new ArrayList<>();
+        reasonListEnglishMappings.add(getLocalizedResources(getContext(), Locale.ENGLISH).getString(R.string.deletion_reason_uploaded_by_mistake));
+        reasonListEnglishMappings.add(getLocalizedResources(getContext(), Locale.ENGLISH).getString(R.string.deletion_reason_publicly_visible));
+        reasonListEnglishMappings.add(getLocalizedResources(getContext(), Locale.ENGLISH).getString(R.string.deletion_reason_not_interesting));
+        reasonListEnglishMappings.add(getLocalizedResources(getContext(), Locale.ENGLISH).getString(R.string.deletion_reason_no_longer_want_public));
+        reasonListEnglishMappings.add(getLocalizedResources(getContext(), Locale.ENGLISH).getString(R.string.deletion_reason_bad_for_my_privacy));
 
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
 
@@ -975,9 +986,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     private void onDeleteClicked(Spinner spinner) {
         applicationKvStore.putBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), true);
         enableProgressBar();
-        String reason = spinner.getSelectedItem().toString();
+        String reason = reasonListEnglishMappings.get(spinner.getSelectedItemPosition());
+
+        String finalReason = reason;
         Single<Boolean> resultSingle = reasonBuilder.getReason(media, reason)
-                .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
+                .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, finalReason));
         resultSingle
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

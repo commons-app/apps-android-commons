@@ -1,5 +1,10 @@
 package fr.free.nrw.commons.utils;
 
+import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import java.util.Locale;
+
 /**
  * Utilities class for miscellaneous strings
  */
@@ -20,4 +25,12 @@ public class LangCodeUtils {
             return code;
         }
     }
+    public static Resources getLocalizedResources(Context context, Locale desiredLocale) {
+        Configuration conf = context.getResources().getConfiguration();
+        conf = new Configuration(conf);
+        conf.setLocale(desiredLocale);
+        Context localizedContext = context.createConfigurationContext(conf);
+        return localizedContext.getResources();
+    }
+
 }

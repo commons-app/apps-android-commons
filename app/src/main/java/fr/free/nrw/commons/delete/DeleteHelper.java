@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.delete;
 
 import static fr.free.nrw.commons.notification.NotificationHelper.NOTIFICATION_DELETE;
+import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -78,9 +79,11 @@ public class DeleteHelper {
         String fileDeleteString = "{{delete|reason=" + reason +
                 "|subpage=" + media.getFilename() +
                 "|day=" + calendar.get(Calendar.DAY_OF_MONTH) +
-                "|month=" + calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) +
+                "|month=" + calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH) +
                 "|year=" + calendar.get(Calendar.YEAR) +
                 "}}";
+
+        System.out.println("Delete: "+fileDeleteString);
 
         String subpageString = "=== [[:" + media.getFilename() + "]] ===\n" +
                 reason +
@@ -156,16 +159,24 @@ public class DeleteHelper {
         ArrayList<Integer> mUserReason = new ArrayList<>();
 
         String[] reasonList = {"Reason 1", "Reason 2", "Reason 3"};
+        String[] reasonListEnglish = {"Eng1", "Eng2", "Eng3"};
 
 
         if (problem == ReviewController.DeleteReason.SPAM) {
             reasonList[0] = context.getString(R.string.delete_helper_ask_spam_selfie);
             reasonList[1] = context.getString(R.string.delete_helper_ask_spam_blurry);
             reasonList[2] = context.getString(R.string.delete_helper_ask_spam_nonsense);
+            reasonListEnglish[0] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_spam_selfie);
+            reasonListEnglish[1] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_spam_blurry);
+            reasonListEnglish[2] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_spam_nonsense);
+
         } else if (problem == ReviewController.DeleteReason.COPYRIGHT_VIOLATION) {
             reasonList[0] = context.getString(R.string.delete_helper_ask_reason_copyright_press_photo);
             reasonList[1] = context.getString(R.string.delete_helper_ask_reason_copyright_internet_photo);
             reasonList[2] = context.getString(R.string.delete_helper_ask_reason_copyright_logo);
+            reasonListEnglish[0] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_press_photo);
+            reasonListEnglish[1] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_internet_photo);
+            reasonListEnglish[2] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_logo);
         }
 
         alert.setMultiChoiceItems(reasonList, checkedItems, (dialogInterface, position, isChecked) -> {
@@ -178,7 +189,8 @@ public class DeleteHelper {
 
         alert.setPositiveButton(context.getString(R.string.ok), (dialogInterface, i) -> {
 
-            String reason = context.getString(R.string.delete_helper_ask_alert_set_positive_button_reason) + " ";
+
+            String reason = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_alert_set_positive_button_reason) + " ";
             for (int j = 0; j < mUserReason.size(); j++) {
                 reason = reason + reasonList[mUserReason.get(j)];
                 if (j != mUserReason.size() - 1) {
