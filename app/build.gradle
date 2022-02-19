@@ -154,6 +154,17 @@ dependencies {
     implementation("io.github.coordinates2country:coordinates2country-android:1.2") {  exclude group: 'com.google.android', module: 'android' }
 }
 
+task disableAnimations(type: Exec) {
+    def adb = "$System.env.ANDROID_HOME/platform-tools/adb"
+    commandLine "$adb", 'shell', 'settings', 'put', 'global', 'window_animation_scale', '0'
+    commandLine "$adb", 'shell', 'settings', 'put', 'global', 'transition_animation_scale', '0'
+    commandLine "$adb", 'shell', 'settings', 'put', 'global', 'animator_duration_scale', '0'
+}
+
+project.gradle.taskGraph.whenReady {
+    connectedDebugAndroidTest.dependsOn disableAnimations
+}
+
 android {
     compileSdkVersion 30
 
@@ -182,7 +193,7 @@ android {
     }
 
     testOptions {
-        animationsDisabled false
+        animationsDisabled true
 
         unitTests.returnDefaultValues = true
         unitTests.includeAndroidResources = true
