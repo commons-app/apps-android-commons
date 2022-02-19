@@ -3,12 +3,14 @@ package fr.free.nrw.commons.profile.achievements
 import android.content.Context
 import android.os.Looper
 import android.view.MenuItem
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.dinuscxj.progressbar.CircleProgressBar
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.SessionManager
@@ -28,6 +30,7 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenuItem
+import org.robolectric.shadows.ShadowToast
 import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
@@ -90,6 +93,9 @@ class AchievementsFragmentUnitTests {
     @Mock
     private lateinit var sessionManager: SessionManager
 
+    @Mock
+    private lateinit var parentView: ViewGroup
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
@@ -137,6 +143,7 @@ class AchievementsFragmentUnitTests {
         Whitebox.setInternalState(fragment, "imagesRevertLimitText", imagesRevertLimitText)
         Whitebox.setInternalState(fragment, "item", menuItem)
         Whitebox.setInternalState(fragment, "sessionManager", sessionManager)
+        Whitebox.setInternalState(fragment, "mView", parentView)
 
         Mockito.`when`(sessionManager.userName).thenReturn("Test")
 
@@ -329,13 +336,39 @@ class AchievementsFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testMenuVisibilityOverrideNoContext() {
+    fun testMenuVisibilityOverrideNotVisible() {
+        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
+            "setMenuVisibility",
+            Boolean::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, false)
+        Assert.assertNull(ShadowToast.getLatestToast())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testMenuVisibilityOverrideVisibleNoContext() {
         val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
             "setMenuVisibility",
             Boolean::class.java
         )
         method.isAccessible = true
         method.invoke(fragment, true)
+        Assert.assertNull(ShadowToast.getLatestToast())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testMenuVisibilityOverrideVisibleWithContext() {
+        Mockito.`when`(parentView.context).thenReturn(context)
+        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
+            "setMenuVisibility",
+            Boolean::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, true)
+        Assert.assertEquals(ShadowToast.getTextOfLatestToast().toString(), context.getString(R.string.achievements_unavailable_beta))
     }
 
 }

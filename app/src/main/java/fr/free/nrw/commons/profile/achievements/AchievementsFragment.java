@@ -206,8 +206,8 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
         // Whenever this fragment is revealed in a menu,
         // notify Beta users the page data is unavailable
-        if(ConfigUtils.isBetaFlavour() && visible && getContext() != null) {
-            Toast.makeText(getContext(),
+        if(ConfigUtils.isBetaFlavour() && visible && getView().getContext() != null) {
+            Toast.makeText(getView().getContext(),
                 R.string.achievements_unavailable_beta,
                 Toast.LENGTH_LONG).show();
         }
