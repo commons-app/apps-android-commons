@@ -577,4 +577,5 @@
   <string name="leaderboard_my_rank_button_text">Rank-ul meu</string>
   <string name="mapbox_telemetry">Telemetrie Mapbox</string>
   <string name="telemetry_opt_out_summary">Trimiteți date anonimizate despre locație și utilizare către Mapbox atunci când utilizați funcția În apropiere</string>
+  <string name="your_feedback">Your Feedback</string>
 </resources>

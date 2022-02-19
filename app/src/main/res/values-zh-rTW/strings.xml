@@ -656,4 +656,5 @@
   <string name="no_location_found_message">要不加入這張圖片拍攝的地點吧？\n位置資料有助於 Wiki 編輯者找到您的圖片，使其更有用。\n謝謝！</string>
   <string name="add_location">新增位置</string>
   <string name="feedback_sharing_data_alert">請移除來自此電子郵件中您無意公開分享的任何資訊。另外請注意，您用來發布訊息的電子郵件地址、關聯名稱、與個人資料圖片會公開顯示。</string>
+  <string name="your_feedback">Your Feedback</string>
 </resources>

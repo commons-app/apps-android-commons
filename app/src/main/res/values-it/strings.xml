@@ -641,4 +641,5 @@
   <string name="advanced_query_info_text">Puoi personalizzare la ricerca nelle vicinanze. In caso di errore, reimposta e applica.</string>
   <string name="apply">Applica</string>
   <string name="reset">Reimposta</string>
+  <string name="your_feedback">Your Feedback</string>
 </resources>

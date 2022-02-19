@@ -661,4 +661,5 @@
   <string name="feedback_sharing_data_alert">Remova desta mensagem de correio todas as informações que não se sinta à vontade em partilhar publicamente, por favor. Adicionalmente, esteja consciente de que o seu endereço de correio eletrónico, com o qual está a fazer esta publicação, e o nome e imagem de perfil a ele associados, serão visíveis pelo público geral.</string>
   <string name="achievements_unavailable_beta">As realizações só estão disponíveis no sabor de produção.</string>
   <string name="leaderboard_unavailable_beta">A tabela de classificação só está disponível no sabor de produção.</string>
+  <string name="your_feedback">Your Feedback</string>
 </resources>

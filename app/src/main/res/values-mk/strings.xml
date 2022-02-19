@@ -651,4 +651,5 @@
   <string name="achievements_unavailable_beta">Достигнувањата се достапни само во производниот вкус.</string>
   <string name="leaderboard_unavailable_beta">Предводниците се достапни само во производниот вкус.</string>
   <string name="copyright_popup">Подигајте само слики што сте ги направиле самите. Подигачите на слики заштитени со авторски права ќе бидат блокирани. Ова важи и за бета-верзијата. Ви благодариме што го испробувате прилогот!</string>
+  <string name="your_feedback">Your Feedback</string>
 </resources>

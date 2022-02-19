@@ -641,4 +641,5 @@
   <string name="no_location_found_message">Përché nen gionté ël pòst andoa costa plancia a l\'é stàita fàita?\nIj dàit dij leu a giuto ij contibutor dle wiki a trové soa plancia, rendend-la pi ùtil.\nMersì!</string>
   <string name="add_location">Gionté un pòst</string>
   <string name="feedback_sharing_data_alert">Për piasì, ch\'a gava da \'s mëssage ògni anformassion ch\'a veul nen ch\'a sia spantià an manera pùblica. Ch\'a ten-a ëdcò da ment che l\'adrëssa ëd pòsta eletrònica con la qual chiel a pùblica e ël nòm e la plancia ëd profil assossià a saran visìbil publicaman.</string>
+  <string name="your_feedback">Your Feedback</string>
 </resources>

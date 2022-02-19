@@ -363,4 +363,5 @@
   <string name="check_category_success_message">Versoek kategorie-toets vir %1$s</string>
   <string name="upload_nearby_place_found_title">Nabygeleë plek gevind</string>
   <string name="upload_nearby_place_found_description">Is dit \'n foto van Plek %1$s?</string>
+  <string name="your_feedback">Your Feedback</string>
 </resources>
