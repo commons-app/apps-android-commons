@@ -155,7 +155,7 @@ public class DeleteHelper {
         boolean[] checkedItems = {false, false, false, false};
         ArrayList<Integer> mUserReason = new ArrayList<>();
 
-        String[] reasonList = {"Reason 1", "Reason 2", "Reason 3"};
+        String[] reasonList = {"Reason 1", "Reason 2", "Reason 3", "Reason 4"};
 
 
         if (problem == ReviewController.DeleteReason.SPAM) {
@@ -166,6 +166,7 @@ public class DeleteHelper {
             reasonList[0] = context.getString(R.string.delete_helper_ask_reason_copyright_press_photo);
             reasonList[1] = context.getString(R.string.delete_helper_ask_reason_copyright_internet_photo);
             reasonList[2] = context.getString(R.string.delete_helper_ask_reason_copyright_logo);
+            reasonList[3] = context.getString(R.string.delete_helper_ask_reason_copyright_breach_of_freedom_of_panorama_rules);
         }
 
         alert.setMultiChoiceItems(reasonList, checkedItems, (dialogInterface, position, isChecked) -> {
