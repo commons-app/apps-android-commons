@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.pm.ActivityInfo
 import android.view.View
 import android.view.ViewGroup
-import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.action.ViewActions
@@ -51,25 +50,28 @@ class UITestHelper {
         }
 
         fun logoutUser() {
-            sleep(3000)
-            onView(
-                Matchers.allOf(
-                    ViewMatchers.withContentDescription("More"),
-                    childAtPosition(
+            try {
+                sleep(3000)
+                onView(
+                    Matchers.allOf(
+                        ViewMatchers.withContentDescription("More"),
                         childAtPosition(
-                            ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
-                            0
+                            childAtPosition(
+                                ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
+                                0
+                            ),
+                            4
                         ),
-                        4
-                    ),
-                    ViewMatchers.isDisplayed()
-                )
-            ).perform(ViewActions.click())
-            onView(ViewMatchers.withId(R.id.more_logout))
-                .perform(ViewActions.click())
-            onView(ViewMatchers.withId(android.R.id.button1))
-                .perform(ViewActions.click())
-            sleep(10000)
+                        ViewMatchers.isDisplayed()
+                    )
+                ).perform(ViewActions.click())
+                onView(ViewMatchers.withId(R.id.more_logout))
+                    .perform(ViewActions.click())
+                onView(ViewMatchers.withId(android.R.id.button1))
+                    .perform(ViewActions.click())
+                sleep(10000)
+            } catch (ignored: NoMatchingViewException) {
+            }
         }
 
         private fun childAtPosition(
