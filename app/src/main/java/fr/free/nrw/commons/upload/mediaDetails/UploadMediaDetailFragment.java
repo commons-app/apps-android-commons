@@ -96,9 +96,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private boolean isExpanded = true;
 
     /**
-     * isNoLocationDialog will be true, if user add location through add location dialog
+     * True if location is added via the "missing location" popup dialog (which appears after tapping
+     * "Next" if the picture has no geographical coordinates).
      */
-    private boolean isNoLocationDialog;
+    private boolean isMissingLocationDialog;
 
     /**
      * showNearbyFound will be true, if any nearby location found that needs pictures and the nearby popup is yet to be shown
@@ -489,11 +490,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
                 editLocation(latitude, longitude,zoom);
                 /*
-                       if isNoLocationDialog is true then the user will redirect to the next screen
-                       otherwise user will redirect back to the upload screen
+                       If isMissingLocationDialog is true, it means that the user has already tapped the
+                       "Next" button, so go directly to the next step.
                  */
-                if(isNoLocationDialog){
-                    isNoLocationDialog = false;
+                if(isMissingLocationDialog){
+                    isMissingLocationDialog = false;
                     onNextButtonClicked();
                 }
             }
@@ -528,7 +529,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     @Override
     public void displayAddLocationDialog(final Runnable onSkipClicked) {
-        isNoLocationDialog = true;
+        isMissingLocationDialog = true;
         DialogUtil.showAlertDialog(Objects.requireNonNull(getActivity()),
             getString(R.string.no_location_found_title),
             getString(R.string.no_location_found_message),

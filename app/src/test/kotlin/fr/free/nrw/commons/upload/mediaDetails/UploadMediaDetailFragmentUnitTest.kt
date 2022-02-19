@@ -388,7 +388,7 @@ class UploadMediaDetailFragmentUnitTest {
 
         Whitebox.setInternalState(cameraPosition, "target", latLng)
         Whitebox.setInternalState(fragment, "editableUploadItem", uploadItem)
-        Whitebox.setInternalState(fragment,"isNoLocationDialog",true)
+        Whitebox.setInternalState(fragment,"isMissingLocationDialog",true)
         Whitebox.setInternalState(fragment, "presenter", presenter)
 
         `when`(LocationPicker.getCameraPosition(intent)).thenReturn(cameraPosition)
