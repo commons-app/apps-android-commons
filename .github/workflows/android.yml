@@ -10,7 +10,6 @@ jobs:
   build:
     name: Run tests and generate APK
     runs-on: ubuntu-latest
-    environment: CI
     steps:
       - uses: actions/checkout@v2.4.0
 
@@ -31,12 +30,9 @@ jobs:
           restore-keys: gradle-packages-${{ runner.os }}
 
       - name: Access test login credentials
-        env:
-          TEST_USER_NAME: ${{ secrets.TEST_USER_NAME }}
-          TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
         run: |
-          echo "TEST_USER_NAME=$TEST_USER_NAME" >> local.properties
-          echo "TEST_USER_PASSWORD=$TEST_USER_PASSWORD" >> local.properties
+          echo "TEST_USER_NAME=${{ secrets.TEST_USER_NAME }}" >> local.properties
+          echo "TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }}" >> local.properties
 
       - name: AVD cache
         uses: actions/cache@v2
