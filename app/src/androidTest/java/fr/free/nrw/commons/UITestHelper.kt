@@ -66,17 +66,32 @@ class UITestHelper {
                         ViewMatchers.isDisplayed()
                     )
                 ).perform(ViewActions.click())
-                sleep(3000)
+                sleep(2000)
                 onView(
                     Matchers.allOf(
                         ViewMatchers.withId(R.id.more_logout), ViewMatchers.withText("Logout"),
+                        childAtPosition(
+                            childAtPosition(
+                                ViewMatchers.withId(R.id.scroll_view_more_bottom_sheet),
+                                0
+                            ),
+                            6
+                        )
                     )
-                ).perform(ViewActions.click())
+                ).perform(ViewActions.scrollTo(), ViewActions.click())
+                sleep(2000)
                 onView(
                     Matchers.allOf(
                         ViewMatchers.withId(android.R.id.button1), ViewMatchers.withText("Yes"),
+                        childAtPosition(
+                            childAtPosition(
+                                ViewMatchers.withId(R.id.buttonPanel),
+                                0
+                            ),
+                            3
+                        )
                     )
-                ).perform(ViewActions.click())
+                ).perform(ViewActions.scrollTo(), ViewActions.click())
                 sleep(10000)
             } catch (ignored: NoMatchingViewException) {
             }
