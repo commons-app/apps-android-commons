@@ -5,11 +5,10 @@
     android:theme="?attr/more_bottom_sheet_style"
     android:orientation="vertical">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
       android:id="@+id/scroll_view_more_bottom_sheet"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:nestedScrollingEnabled="true">
+      android:layout_height="match_parent">
 
         <LinearLayout
           android:layout_width="match_parent"
@@ -95,6 +94,6 @@
 
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
