@@ -65,7 +65,8 @@ class ProfileActivityTest {
         )
         Intents.intended(hasComponent(ProfileActivity::class.java.name))
         onView(isRoot()).perform(pressBack())
-        sleep(1000)
+        device.setOrientationNatural()
+        device.freezeRotation()
         onView(Matchers.allOf(withId(R.id.more_logout))).perform(
             ViewActions.scrollTo(),
             ViewActions.click()
