@@ -79,7 +79,7 @@ class ProfileActivityTest {
         sleep(1000)
         onView(
             Matchers.allOf(
-                withId(R.id.more_logout), ViewMatchers.withText("Logout"),
+                withId(R.id.more_logout),
                 childAtPosition(
                     Matchers.allOf(
                         withId(R.id.linear_layout_more_bottom_sheet),
@@ -94,7 +94,7 @@ class ProfileActivityTest {
         ).perform(ViewActions.scrollTo(), ViewActions.click())
         onView(
             Matchers.allOf(
-                withId(android.R.id.button1), ViewMatchers.withText("Yes"),
+                withId(android.R.id.button1),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.buttonPanel),
@@ -104,7 +104,7 @@ class ProfileActivityTest {
                 )
             )
         ).perform(ViewActions.scrollTo(), ViewActions.click())
-        UITestHelper.sleep(5000)
+        sleep(5000)
     }
 
 }
