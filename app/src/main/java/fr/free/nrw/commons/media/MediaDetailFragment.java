@@ -1209,7 +1209,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         }
 
     @SuppressLint("CheckResult")
-    private void onDeleteClicked(Spinner spinner) {
+    public void onDeleteClicked(Spinner spinner) {
         applicationKvStore.putBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), true);
         enableProgressBar();
         String reason = reasonListEnglishMappings.get(spinner.getSelectedItemPosition());
