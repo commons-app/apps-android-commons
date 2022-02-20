@@ -9,7 +9,7 @@ concurrency:
 jobs:
   build:
     name: Run tests and generate APK
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     environment: CI
     steps:
       - uses: actions/checkout@v2.4.0
@@ -64,7 +64,7 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          profile: Nexus 6
+          profile: 7in WSVGA (Tablet)
           script: |
             adb shell content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0
             adb shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
