@@ -18,6 +18,7 @@ import android.os.Build;
 import android.os.Process;
 import android.util.Log;
 import androidx.annotation.NonNull;
+import androidx.multidex.BuildConfig;
 import androidx.multidex.MultiDexApplication;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipeline;
@@ -135,7 +136,7 @@ public class CommonsApplication extends MultiDexApplication {
     ContributionDao contributionDao;
 
     /**
-     * In memory list of contributios whose uploads ahve been paused by the user
+     *  In memory list of contribution whose uploads have been paused by the user
      */
     public static Map<String, Boolean> pauseUploads = new HashMap<>();
 
