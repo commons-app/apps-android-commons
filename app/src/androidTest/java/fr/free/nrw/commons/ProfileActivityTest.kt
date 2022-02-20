@@ -13,6 +13,8 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isRoot
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
+import androidx.test.uiautomator.UiDevice
 import fr.free.nrw.commons.UITestHelper.Companion.childAtPosition
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.profile.ProfileActivity
@@ -29,8 +31,12 @@ class ProfileActivityTest {
     @get:Rule
     var activityRule = IntentsTestRule(LoginActivity::class.java)
 
+    private val device: UiDevice = UiDevice.getInstance(getInstrumentation())
+
     @Before
     fun setup() {
+        device.setOrientationNatural()
+        device.freezeRotation()
         UITestHelper.loginUser()
         UITestHelper.skipWelcome()
         Intents.intending(CoreMatchers.not(IntentMatchers.isInternal()))
