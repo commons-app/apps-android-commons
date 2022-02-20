@@ -16,6 +16,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.uiautomator.UiDevice
 import fr.free.nrw.commons.UITestHelper.Companion.childAtPosition
+import fr.free.nrw.commons.UITestHelper.Companion.sleep
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.profile.ProfileActivity
 import org.hamcrest.CoreMatchers
@@ -75,6 +76,7 @@ class ProfileActivityTest {
         ).perform(ViewActions.scrollTo(), ViewActions.click())
         Intents.intended(hasComponent(ProfileActivity::class.java.name))
         onView(isRoot()).perform(pressBack())
+        sleep(1000)
         onView(
             Matchers.allOf(
                 withId(R.id.more_logout), ViewMatchers.withText("Logout"),
