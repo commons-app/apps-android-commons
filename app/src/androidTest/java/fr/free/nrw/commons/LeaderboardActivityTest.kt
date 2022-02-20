@@ -15,7 +15,7 @@ import androidx.test.espresso.intent.matcher.IntentMatchers.isInternal
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.google.android.material.tabs.TabLayout
 import fr.free.nrw.commons.auth.LoginActivity
@@ -27,7 +27,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4ClassRunner::class)
+@RunWith(AndroidJUnit4::class)
 class LeaderboardActivityTest {
     @get:Rule
     var activityRule = ActivityTestRule(LoginActivity::class.java)

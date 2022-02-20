@@ -6,14 +6,17 @@ import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.Intents.intended
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SignupActivity
-import org.junit.*
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4ClassRunner::class)
+@RunWith(AndroidJUnit4::class)
 class SignupTest {
     @get:Rule
     var activityRule: ActivityTestRule<*> = ActivityTestRule(LoginActivity::class.java)

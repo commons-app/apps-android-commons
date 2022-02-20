@@ -11,7 +11,7 @@ import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.matcher.IntentMatchers
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import org.hamcrest.CoreMatchers
@@ -21,7 +21,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4ClassRunner::class)
+@RunWith(AndroidJUnit4::class)
 class AboutActivityTest {
     @get:Rule
     var activityRule: ActivityTestRule<*> = ActivityTestRule(AboutActivity::class.java)

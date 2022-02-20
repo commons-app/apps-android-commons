@@ -12,7 +12,7 @@ import androidx.test.espresso.intent.rule.IntentsTestRule
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isRoot
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import fr.free.nrw.commons.UITestHelper.Companion.childAtPosition
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.profile.ProfileActivity
@@ -23,7 +23,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4ClassRunner::class)
+@RunWith(AndroidJUnit4::class)
 class ProfileActivityTest {
 
     @get:Rule

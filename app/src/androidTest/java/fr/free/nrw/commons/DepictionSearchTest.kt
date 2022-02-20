@@ -4,7 +4,7 @@ import android.net.Uri
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import fr.free.nrw.commons.upload.UploadActivity
 import org.hamcrest.Matchers
@@ -14,7 +14,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4ClassRunner::class)
+@RunWith(AndroidJUnit4::class)
 class DepictionSearchTest {
     @get:Rule
     var activityRule = ActivityTestRule(UploadActivity::class.java)
