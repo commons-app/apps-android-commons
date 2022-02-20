@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
@@ -80,6 +81,9 @@ class LocationPickerActivityUnitTests {
     private lateinit var smallToolbarText: TextView
 
     @Mock
+    private lateinit var tvAttribution: AppCompatTextView
+
+    @Mock
     private lateinit var style: Style
 
     @Before
@@ -99,7 +103,7 @@ class LocationPickerActivityUnitTests {
         Whitebox.setInternalState(activity, "shadow", shadow)
         Whitebox.setInternalState(activity, "largeToolbarText", largeToolbarText)
         Whitebox.setInternalState(activity, "smallToolbarText", smallToolbarText)
-
+        Whitebox.setInternalState(activity, "tvAttribution", tvAttribution)
     }
 
     @Test
@@ -129,6 +133,18 @@ class LocationPickerActivityUnitTests {
         )
         method.isAccessible = true
         method.invoke(activity, mapboxMap)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testAddCredits() {
+        val method: Method = LocationPickerActivity::class.java.getDeclaredMethod(
+            "addCredits"
+        )
+        method.isAccessible = true
+        method.invoke(activity)
+        verify(tvAttribution).text = any()
+        verify(tvAttribution).movementMethod = any()
     }
 
     @Test
