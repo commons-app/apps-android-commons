@@ -9,7 +9,7 @@ concurrency:
 jobs:
   build:
     name: Run tests and generate APK
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     environment: CI
     steps:
       - uses: actions/checkout@v2.4.0
