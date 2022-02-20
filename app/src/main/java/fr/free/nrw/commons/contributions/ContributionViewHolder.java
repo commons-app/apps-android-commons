@@ -132,7 +132,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
                 stateView.setText(R.string.paused);
                 setResume();
                 progressView.setVisibility(View.GONE);
-                cancelButton.setVisibility(View.GONE);
+                cancelButton.setVisibility(View.VISIBLE);
                 retryButton.setVisibility(View.GONE);
                 pauseResumeButton.setVisibility(View.VISIBLE);
                 imageOptions.setVisibility(View.VISIBLE);
@@ -254,7 +254,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
      */
     private void setPaused() {
         pauseResumeButton.setImageResource(R.drawable.pause_icon);
-        pauseResumeButton.setTag(R.string.pause);
+        pauseResumeButton.setTag("pause");
     }
 
     /**
@@ -262,6 +262,6 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
      */
     private void setResume() {
         pauseResumeButton.setImageResource(R.drawable.play_icon);
-        pauseResumeButton.setTag(R.string.resume);
+        pauseResumeButton.setTag("resume");
     }
 }
