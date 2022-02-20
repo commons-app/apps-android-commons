@@ -97,7 +97,7 @@ class UITestHelper {
             }
         }
 
-        private fun childAtPosition(
+        fun childAtPosition(
             parentMatcher: Matcher<View>, position: Int
         ): Matcher<View> {
 
