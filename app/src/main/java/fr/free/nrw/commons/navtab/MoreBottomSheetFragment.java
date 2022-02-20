@@ -26,6 +26,11 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.feedback.Feedback;
+import fr.free.nrw.commons.feedback.FeedbackClient;
+import fr.free.nrw.commons.feedback.FeedbackController;
+import fr.free.nrw.commons.feedback.FeedbackDialog;
+import fr.free.nrw.commons.feedback.OnFeedbackSubmitCallback;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.profile.ProfileActivity;
@@ -33,6 +38,7 @@ import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.wikipedia.csrf.CsrfTokenClient;
 import timber.log.Timber;
 
 public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
@@ -46,6 +52,9 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
 
     @Inject @Named("default_preferences")
     JsonKvStore store;
+
+    @Inject
+    FeedbackController feedbackController;
 
     @Nullable
     @Override
@@ -104,7 +113,16 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
 
     @OnClick(R.id.more_feedback)
     public void onFeedbackClicked() {
-        showAlertDialog();
+        showFeedbackDialog();
+    }
+
+    private void showFeedbackDialog() {
+        new FeedbackDialog(getContext(), new OnFeedbackSubmitCallback() {
+            @Override
+            public void onFeedbackSubmit(Feedback feedback) {
+                feedbackController.postFeedback(MoreBottomSheetFragment.this, feedback);
+            }
+        }).show();
     }
 
     /**
