@@ -127,9 +127,4 @@ class AboutActivityTest {
             )
         )
     }
-
-    @Test
-    fun orientationChange() {
-        UITestHelper.changeOrientation(activityRule)
-    }
 }
