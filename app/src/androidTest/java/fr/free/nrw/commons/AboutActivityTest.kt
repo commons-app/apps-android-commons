@@ -12,7 +12,9 @@ import androidx.test.espresso.intent.matcher.IntentMatchers
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import androidx.test.uiautomator.UiDevice
 import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import org.hamcrest.CoreMatchers
 import org.junit.After
@@ -23,11 +25,16 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class AboutActivityTest {
+
     @get:Rule
     var activityRule: ActivityTestRule<*> = ActivityTestRule(AboutActivity::class.java)
 
+    private val device: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+
     @Before
     fun setup() {
+        device.setOrientationNatural()
+        device.freezeRotation()
         Intents.init()
         Intents.intending(CoreMatchers.not(IntentMatchers.isInternal()))
             .respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, null))

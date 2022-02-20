@@ -12,6 +12,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import androidx.test.uiautomator.UiDevice
 import com.google.gson.Gson
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.settings.SettingsActivity
@@ -26,13 +27,18 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class SettingsActivityTest {
+
     private lateinit var defaultKvStore: JsonKvStore
 
     @get:Rule
     var activityRule: ActivityTestRule<*> = ActivityTestRule(SettingsActivity::class.java)
 
+    private val device: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+
     @Before
     fun setup() {
+        device.setOrientationNatural()
+        device.freezeRotation()
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val storeName = context.packageName + "_preferences"
         defaultKvStore = JsonKvStore(context, storeName, Gson())

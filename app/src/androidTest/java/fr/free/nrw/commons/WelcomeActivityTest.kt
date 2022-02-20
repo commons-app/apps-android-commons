@@ -7,10 +7,13 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import androidx.test.uiautomator.UiDevice
 import androidx.viewpager.widget.ViewPager
 import fr.free.nrw.commons.utils.ConfigUtils
 import org.hamcrest.core.IsNot.not
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,8 +21,17 @@ import org.junit.runner.RunWith
 @LargeTest
 @RunWith(AndroidJUnit4::class)
 class WelcomeActivityTest {
+
     @get:Rule
     var activityRule: ActivityTestRule<*> = ActivityTestRule(WelcomeActivity::class.java)
+
+    private val device: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+
+    @Before
+    fun setup() {
+        device.setOrientationNatural()
+        device.freezeRotation()
+    }
 
     @Test
     fun ifBetaShowsSkipButton() {

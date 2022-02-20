@@ -2,18 +2,13 @@ package fr.free.nrw.commons.ui
 
 import android.R
 import android.content.Context
-import android.os.Build
 import android.util.AttributeSet
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.runner.AndroidJUnit4
-import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Assert
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.lang.Exception
-import kotlin.Throws
 
 @RunWith(AndroidJUnit4::class)
 class PasteSensitiveTextInputEditTextTest {
@@ -28,7 +23,6 @@ class PasteSensitiveTextInputEditTextTest {
     }
 
     @Test
-    @Ignore("Fix Failing Test")
     fun onTextContextMenuItemPasteFormattingDisabled() {
         textView!!.setFormattingAllowed(false);
         textView!!.setText("Text")
@@ -37,7 +31,6 @@ class PasteSensitiveTextInputEditTextTest {
     }
 
     @Test
-    @Ignore("Fix Failing Test")
     fun onTextContextMenuItemPasteFormattingAllowed() {
         textView!!.setFormattingAllowed(true);
         textView!!.setText("Text")
@@ -46,7 +39,6 @@ class PasteSensitiveTextInputEditTextTest {
     }
 
     @Test
-    @Ignore("Fix Failing Test")
     fun onTextContextMenuItemPaste() {
         textView!!.setText("Text")
         textView!!.onTextContextMenuItem(R.id.paste)
@@ -55,7 +47,6 @@ class PasteSensitiveTextInputEditTextTest {
 
 
     @Test
-    @Ignore("Fix Failing Test")
     fun onTextContextMenuItemNotPaste() {
         textView!!.setText("Text")
         textView!!.onTextContextMenuItem(R.id.copy)
