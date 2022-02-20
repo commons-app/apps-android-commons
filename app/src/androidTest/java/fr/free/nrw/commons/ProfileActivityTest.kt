@@ -59,39 +59,17 @@ class ProfileActivityTest {
                 ViewMatchers.isDisplayed()
             )
         ).perform(ViewActions.click())
-        onView(
-            Matchers.allOf(
-                withId(R.id.more_profile),
-                childAtPosition(
-                    Matchers.allOf(
-                        withId(R.id.linear_layout_more_bottom_sheet),
-                        childAtPosition(
-                            withId(R.id.scroll_view_more_bottom_sheet),
-                            0
-                        )
-                    ),
-                    0
-                )
-            )
-        ).perform(ViewActions.scrollTo(), ViewActions.click())
+        onView(Matchers.allOf(withId(R.id.more_profile))).perform(
+            ViewActions.scrollTo(),
+            ViewActions.click()
+        )
         Intents.intended(hasComponent(ProfileActivity::class.java.name))
         onView(isRoot()).perform(pressBack())
         sleep(1000)
-        onView(
-            Matchers.allOf(
-                withId(R.id.more_logout),
-                childAtPosition(
-                    Matchers.allOf(
-                        withId(R.id.linear_layout_more_bottom_sheet),
-                        childAtPosition(
-                            withId(R.id.scroll_view_more_bottom_sheet),
-                            0
-                        )
-                    ),
-                    6
-                )
-            )
-        ).perform(ViewActions.scrollTo(), ViewActions.click())
+        onView(Matchers.allOf(withId(R.id.more_logout))).perform(
+            ViewActions.scrollTo(),
+            ViewActions.click()
+        )
         onView(
             Matchers.allOf(
                 withId(android.R.id.button1),
