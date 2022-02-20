@@ -68,22 +68,6 @@ class ProfileActivityTest {
         onView(isRoot()).perform(pressBack())
         device.setOrientationNatural()
         device.freezeRotation()
-        try {
-            onView(
-                Matchers.allOf(
-                    ViewMatchers.withContentDescription("More"),
-                    childAtPosition(
-                        childAtPosition(
-                            withId(R.id.fragment_main_nav_tab_layout),
-                            0
-                        ),
-                        4
-                    ),
-                    ViewMatchers.isDisplayed()
-                )
-            ).perform(ViewActions.click())
-        } catch (ignored: NoMatchingViewException) {
-        }
         onView(Matchers.allOf(withId(R.id.more_logout))).perform(
             ViewActions.scrollTo(),
             ViewActions.click()
