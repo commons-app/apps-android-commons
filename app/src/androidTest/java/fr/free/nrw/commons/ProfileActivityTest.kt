@@ -3,6 +3,7 @@ package fr.free.nrw.commons
 import android.app.Activity
 import android.app.Instrumentation
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.pressBack
 import androidx.test.espresso.intent.Intents
@@ -67,6 +68,22 @@ class ProfileActivityTest {
         onView(isRoot()).perform(pressBack())
         device.setOrientationNatural()
         device.freezeRotation()
+        try {
+            onView(
+                Matchers.allOf(
+                    ViewMatchers.withContentDescription("More"),
+                    childAtPosition(
+                        childAtPosition(
+                            withId(R.id.fragment_main_nav_tab_layout),
+                            0
+                        ),
+                        4
+                    ),
+                    ViewMatchers.isDisplayed()
+                )
+            ).perform(ViewActions.click())
+        } catch (ignored: NoMatchingViewException) {
+        }
         onView(Matchers.allOf(withId(R.id.more_logout))).perform(
             ViewActions.scrollTo(),
             ViewActions.click()
