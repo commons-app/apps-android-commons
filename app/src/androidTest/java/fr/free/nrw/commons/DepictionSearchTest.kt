@@ -1,20 +1,20 @@
 package fr.free.nrw.commons
 
-import androidx.test.runner.AndroidJUnit4
-import org.junit.Rule
-import org.junit.runner.RunWith
 import android.net.Uri
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
 import fr.free.nrw.commons.upload.UploadActivity
 import org.hamcrest.Matchers
 import org.hamcrest.core.AllOf
 import org.junit.Ignore
+import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4ClassRunner::class)
 class DepictionSearchTest {
     @get:Rule
     var activityRule = ActivityTestRule(UploadActivity::class.java)

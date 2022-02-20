@@ -44,7 +44,7 @@ class UITestHelper {
                 sleep(2000)
                 onView(ViewMatchers.withId(R.id.login_button))
                     .perform(ViewActions.click())
-                sleep(10000)
+                sleep(8000)
             } catch (ignored: NoMatchingViewException) {
             }
 
@@ -52,7 +52,6 @@ class UITestHelper {
 
         fun logoutUser() {
             try {
-                sleep(3000)
                 onView(
                     Matchers.allOf(
                         ViewMatchers.withContentDescription("More"),
@@ -66,7 +65,6 @@ class UITestHelper {
                         ViewMatchers.isDisplayed()
                     )
                 ).perform(ViewActions.click())
-                sleep(2000)
                 onView(
                     Matchers.allOf(
                         ViewMatchers.withId(R.id.more_logout), ViewMatchers.withText("Logout"),
@@ -79,7 +77,6 @@ class UITestHelper {
                         )
                     )
                 ).perform(ViewActions.scrollTo(), ViewActions.click())
-                sleep(2000)
                 onView(
                     Matchers.allOf(
                         ViewMatchers.withId(android.R.id.button1), ViewMatchers.withText("Yes"),
@@ -92,7 +89,7 @@ class UITestHelper {
                         )
                     )
                 ).perform(ViewActions.scrollTo(), ViewActions.click())
-                sleep(10000)
+                sleep(5000)
             } catch (ignored: NoMatchingViewException) {
             }
         }

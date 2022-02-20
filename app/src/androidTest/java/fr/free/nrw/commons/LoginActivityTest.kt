@@ -8,13 +8,11 @@ import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.Intents.intending
 import androidx.test.espresso.intent.matcher.IntentMatchers
-import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.espresso.intent.matcher.IntentMatchers.isInternal
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
 import fr.free.nrw.commons.auth.LoginActivity
-import fr.free.nrw.commons.contributions.MainActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.not
 import org.junit.*
@@ -38,14 +36,6 @@ class LoginActivityTest {
     }
 
     @Test
-    fun testLogin() {
-        UITestHelper.loginUser()
-        UITestHelper.skipWelcome()
-        Intents.intended(hasComponent(MainActivity::class.java.name))
-        UITestHelper.logoutUser()
-    }
-
-    @Test
     fun testForgotPassword() {
         Espresso.onView(ViewMatchers.withId(R.id.forgot_password)).perform(ViewActions.click())
         Intents.intended(
@@ -57,7 +47,6 @@ class LoginActivityTest {
     }
 
     @Test
-    @Ignore("Fix this test")
     fun orientationChange() {
         UITestHelper.changeOrientation(activityRule)
     }

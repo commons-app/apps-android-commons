@@ -30,7 +30,6 @@ class SignupTest {
     }
 
     @Test
-    @Ignore("Fix Failing Test")
     fun testSignupButton() {
         Espresso.onView(withId(R.id.sign_up_button)).perform(click())
         intended(hasComponent(SignupActivity::class.java.name))

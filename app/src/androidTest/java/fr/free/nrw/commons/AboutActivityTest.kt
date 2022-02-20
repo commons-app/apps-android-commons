@@ -62,9 +62,9 @@ class AboutActivityTest {
     @Test
     fun testLaunchFacebook() {
         Espresso.onView(ViewMatchers.withId(R.id.facebook_launch_icon)).perform(ViewActions.click())
-        Intents.intended(IntentMatchers.hasAction(Intent.ACTION_VIEW))
         Intents.intended(
             CoreMatchers.anyOf(
+                IntentMatchers.hasAction(Intent.ACTION_VIEW),
                 IntentMatchers.hasData(Urls.FACEBOOK_WEB_URL),
                 IntentMatchers.hasPackage(Urls.FACEBOOK_PACKAGE_NAME)
             )
