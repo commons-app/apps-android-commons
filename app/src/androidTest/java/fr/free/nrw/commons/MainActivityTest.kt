@@ -9,6 +9,7 @@ import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.matcher.IntentMatchers
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
@@ -25,6 +26,7 @@ import org.hamcrest.Matchers
 import org.junit.*
 import org.junit.runner.RunWith
 
+@LargeTest
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
 
@@ -187,6 +189,7 @@ class MainActivityTest {
             ViewActions.click()
         )
         Intents.intended(IntentMatchers.hasComponent(SettingsActivity::class.java.name))
+        Espresso.pressBack()
         UITestHelper.sleep(1000)
     }
 
@@ -210,6 +213,7 @@ class MainActivityTest {
             ViewActions.click()
         )
         Intents.intended(IntentMatchers.hasComponent(ReviewActivity::class.java.name))
+        Espresso.pressBack()
         UITestHelper.sleep(1000)
     }
 

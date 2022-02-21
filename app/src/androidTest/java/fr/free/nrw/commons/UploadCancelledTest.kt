@@ -20,7 +20,6 @@ import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.upload.UploadActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers.allOf
-import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -49,16 +48,9 @@ class UploadCancelledTest {
         device.freezeRotation()
         UITestHelper.loginUser()
         UITestHelper.skipWelcome()
-        Intents.init()
         Intents.intending(CoreMatchers.not(IntentMatchers.isInternal()))
             .respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, null))
     }
-
-    @After
-    fun cleanUp() {
-        Intents.release()
-    }
-
     @Test
     fun uploadCancelledAfterLocationPickedTest() {
 
