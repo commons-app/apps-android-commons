@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * 2axterix2
+* AVIADOR71
 * Adjen
 * Agent
 * Astroemi
@@ -441,11 +442,11 @@
   <string name="check_category_failure_message">No se puede pedir el control de categoría para %1$s</string>
   <string name="check_category_toast">Pidiendo control de categoría para %1$s</string>
   <string name="nominate_for_deletion_done">Hecho</string>
-  <string name="send_thank_success_title">Enviando Agradecimientos: Éxito</string>
+  <string name="send_thank_success_title">Enviando agradecimiento: éxito</string>
   <string name="send_thank_success_message">Los agradecimientos a %1$s se enviaron satisfactoriamente</string>
-  <string name="send_thank_failure_message">Falló al enviar agradecimientos a %1$s</string>
-  <string name="send_thank_failure_title">Enviando Agradecimientos: Falló</string>
-  <string name="send_thank_toast">Enviando agradecimientos por %1$s</string>
+  <string name="send_thank_failure_message">Falló el envío de agradecimiento a %1$s</string>
+  <string name="send_thank_failure_title">Enviando agradecimiento: falló</string>
+  <string name="send_thank_toast">Enviando agradecimiento a %1$s</string>
   <string name="review_copyright">¿Esto cumple con las reglas del copyright?</string>
   <string name="review_category">¿Está correctamente categorizado?</string>
   <string name="review_spam">¿Está dentro de los objetivos del proyecto?</string>
