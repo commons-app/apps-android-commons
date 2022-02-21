@@ -1,7 +1,5 @@
 package fr.free.nrw.commons
 
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions.click
@@ -14,12 +12,10 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import androidx.test.uiautomator.UiDevice
 import com.google.gson.Gson
+import fr.free.nrw.commons.UITestHelper.Companion.childAtPosition
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.settings.SettingsActivity
 import org.hamcrest.CoreMatchers.allOf
-import org.hamcrest.Description
-import org.hamcrest.Matcher
-import org.hamcrest.TypeSafeMatcher
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -70,22 +66,4 @@ class SettingsActivityTest {
     fun orientationChange() {
         UITestHelper.changeOrientation(activityRule)
     }
-
-    private fun childAtPosition(
-        parentMatcher: Matcher<View>, position: Int
-    ): Matcher<View?> {
-        return object : TypeSafeMatcher<View?>() {
-            override fun describeTo(description: Description) {
-                description.appendText("Child at position $position in parent ")
-                parentMatcher.describeTo(description)
-            }
-
-            override fun matchesSafely(view: View?): Boolean {
-                val parent = view?.parent
-                return (parent is ViewGroup && parentMatcher.matches(parent)
-                        && view == parent.getChildAt(position))
-            }
-        }
-    }
-
 }

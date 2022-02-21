@@ -71,6 +71,7 @@ project.afterEvaluate {
                         '**/*$Result$*.*',
                         // model
                         '**/**/model/*',
+                        '**/model/*',
                         // concurrency
                         '**/concurrency/*',
                         // kvstore
