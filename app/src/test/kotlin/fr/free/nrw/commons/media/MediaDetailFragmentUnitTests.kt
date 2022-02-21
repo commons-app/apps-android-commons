@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewTreeObserver
@@ -33,6 +34,7 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.contributions.ContributionViewHolder
 import fr.free.nrw.commons.delete.DeleteHelper
 import fr.free.nrw.commons.delete.ReasonBuilder
 import fr.free.nrw.commons.utils.ImageUtils
@@ -45,6 +47,7 @@ import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
+import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowIntent
@@ -628,6 +631,7 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnDeleteClickedNull() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         val spinner = mock(Spinner::class.java)
         `when`(media.imageUrl).thenReturn("test@example.com")
         `when`(spinner.selectedItemPosition).thenReturn(0)
@@ -638,7 +642,12 @@ class MediaDetailFragmentUnitTests {
 
         doReturn(Single.just("")).`when`(reasonBuilder).getReason(ArgumentMatchers.any(), ArgumentMatchers.any())
 
-        fragment.onDeleteClicked(spinner)
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
+            "onDeleteClicked",
+            Spinner::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, spinner)
     }
 
     @Test
