@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Instrumentation
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.swipeRight
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.matcher.IntentMatchers
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
@@ -61,6 +62,8 @@ class ProfileActivityTest {
             ViewActions.click()
         )
         Intents.intended(hasComponent(ProfileActivity::class.java.name))
+        swipeRight()
+        UITestHelper.sleep(2000)
     }
 
 }

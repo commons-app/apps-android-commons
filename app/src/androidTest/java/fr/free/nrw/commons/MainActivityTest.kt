@@ -143,8 +143,9 @@ class MainActivityTest {
                 ViewMatchers.isDisplayed()
             )
         ).perform(ViewActions.click())
-        Espresso.pressBack()
         Intents.intended(IntentMatchers.hasComponent(NotificationActivity::class.java.name))
+        Espresso.pressBack()
+        UITestHelper.sleep(1000)
     }
 
     @Test
