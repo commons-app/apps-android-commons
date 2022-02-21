@@ -53,32 +53,10 @@ class UploadCancelledTest {
     @Test
     fun uploadCancelledAfterLocationPickedTest() {
 
-        val floatingActionButton = onView(
-            allOf(
-                withId(R.id.fab_plus),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.fab_layout),
-                    ),
-                    3
-                ),
-                isDisplayed()
-            )
-        )
+        val floatingActionButton = onView(allOf(withId(R.id.fab_plus), isDisplayed()))
         floatingActionButton.perform(click())
-
-        val floatingActionButton2 = onView(
-            allOf(
-                withId(R.id.fab_camera),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.fab_layout),
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
+        UITestHelper.sleep(1000)
+        val floatingActionButton2 = onView(allOf(withId(R.id.fab_camera), isDisplayed()))
         floatingActionButton2.perform(click())
 
         val pasteSensitiveTextInputEditText = onView(
