@@ -52,13 +52,11 @@ class UploadCancelledTest {
             .respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, null))
     }
     @Test
-    @Ignore("Fix Failing Test")
     fun uploadCancelledAfterLocationPickedTest() {
 
-        val floatingActionButton = onView(allOf(withId(R.id.fab_plus), isDisplayed()))
+        val floatingActionButton = onView(allOf(withId(R.id.fab_plus)))
         floatingActionButton.perform(click())
-        UITestHelper.sleep(1000)
-        val floatingActionButton2 = onView(allOf(withId(R.id.fab_camera), isDisplayed()))
+        val floatingActionButton2 = onView(allOf(withId(R.id.fab_camera)))
         floatingActionButton2.perform(click())
 
         val pasteSensitiveTextInputEditText = onView(
