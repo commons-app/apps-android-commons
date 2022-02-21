@@ -17,7 +17,6 @@ import androidx.test.uiautomator.UiDevice
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import fr.free.nrw.commons.UITestHelper.Companion.childAtPosition
 import fr.free.nrw.commons.auth.LoginActivity
-import fr.free.nrw.commons.upload.UploadActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers.allOf
 import org.junit.Before
@@ -81,8 +80,6 @@ class UploadCancelledTest {
             )
         )
         floatingActionButton2.perform(click())
-
-        Intents.intended(IntentMatchers.hasComponent(UploadActivity::class.java.name))
 
         val pasteSensitiveTextInputEditText = onView(
             allOf(
