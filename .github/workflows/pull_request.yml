@@ -1,17 +1,29 @@
-name: Android CI
+name: Pull Request CI
 
-on: [push, pull_request]
+on: [pull_request, pull_request_target]
 
 concurrency:
-  group: build-${{ github.event.pull_request.number || github.ref }}
+  group: build-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 jobs:
+  approve:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Approve
+        run: echo "For security reasons, all pull requests need to be approved first before running any automated CI."
   build:
     name: Run tests and generate APK
     runs-on: ubuntu-latest
+
+    needs: [approve]
+
     steps:
-      - uses: actions/checkout@v2.4.0
+      - name: Checkout code
+        uses: actions/checkout@v2.4.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Set up JDK
         uses: actions/setup-java@v2.5.0
