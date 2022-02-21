@@ -74,6 +74,7 @@ class MainActivityTest {
         ).perform(ViewActions.click())
         Espresso.onView(ViewMatchers.withId(R.id.fragmentContainer))
             .check(matches(ViewMatchers.isDisplayed()))
+        UITestHelper.sleep(10000)
     }
 
     @Test
@@ -92,6 +93,7 @@ class MainActivityTest {
         ).perform(ViewActions.click())
         Espresso.onView(ViewMatchers.withId(R.id.fragmentContainer))
             .check(matches(ViewMatchers.isDisplayed()))
+        UITestHelper.sleep(1000)
     }
 
     @Test
@@ -108,6 +110,7 @@ class MainActivityTest {
                 ViewMatchers.isDisplayed()
             )
         ).perform(ViewActions.click())
+        UITestHelper.sleep(1000)
     }
 
     @Test
@@ -126,6 +129,7 @@ class MainActivityTest {
         ).perform(ViewActions.click())
         Espresso.onView(ViewMatchers.withId(R.id.fragmentContainer))
             .check(matches(ViewMatchers.isDisplayed()))
+        UITestHelper.sleep(1000)
     }
 
     @Test
@@ -165,6 +169,7 @@ class MainActivityTest {
                 ViewMatchers.isDisplayed()
             )
         ).perform(ViewActions.click())
+        UITestHelper.sleep(1000)
         if (isEnabled) {
             Assert.assertFalse(
                 defaultKvStore
