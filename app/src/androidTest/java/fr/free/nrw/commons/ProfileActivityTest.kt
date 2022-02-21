@@ -63,6 +63,7 @@ class ProfileActivityTest {
         )
         Intents.intended(hasComponent(ProfileActivity::class.java.name))
         swipeRight()
+        swipeRight()
         UITestHelper.sleep(2000)
     }
 
