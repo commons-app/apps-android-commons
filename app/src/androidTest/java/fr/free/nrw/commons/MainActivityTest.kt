@@ -77,6 +77,21 @@ class MainActivityTest {
         Espresso.onView(ViewMatchers.withId(R.id.fragmentContainer))
             .check(matches(ViewMatchers.isDisplayed()))
         UITestHelper.sleep(10000)
+        val actionMenuItemView2 = Espresso.onView(
+            Matchers.allOf(
+                ViewMatchers.withId(R.id.list_sheet), ViewMatchers.withContentDescription("List"),
+                childAtPosition(
+                    childAtPosition(
+                        ViewMatchers.withId(R.id.toolbar),
+                        1
+                    ),
+                    0
+                ),
+                ViewMatchers.isDisplayed()
+            )
+        )
+        actionMenuItemView2.perform(ViewActions.click())
+        UITestHelper.sleep(1000)
     }
 
     @Test
@@ -95,23 +110,6 @@ class MainActivityTest {
         ).perform(ViewActions.click())
         Espresso.onView(ViewMatchers.withId(R.id.fragmentContainer))
             .check(matches(ViewMatchers.isDisplayed()))
-        UITestHelper.sleep(1000)
-    }
-
-    @Test
-    fun testBookmarks() {
-        Espresso.onView(
-            Matchers.allOf(
-                childAtPosition(
-                    childAtPosition(
-                        ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
-                        0
-                    ),
-                    3
-                ),
-                ViewMatchers.isDisplayed()
-            )
-        ).perform(ViewActions.click())
         UITestHelper.sleep(1000)
     }
 
@@ -140,6 +138,37 @@ class MainActivityTest {
                         0
                     ),
                     1
+                ),
+                ViewMatchers.isDisplayed()
+            )
+        ).perform(ViewActions.click())
+        val actionMenuItemView = Espresso.onView(
+            Matchers.allOf(
+                ViewMatchers.withId(R.id.menu_bookmark_current_image),
+                childAtPosition(
+                    childAtPosition(
+                        ViewMatchers.withId(R.id.toolbar),
+                        1
+                    ),
+                    0
+                ),
+                ViewMatchers.isDisplayed()
+            )
+        )
+        actionMenuItemView.perform(ViewActions.click())
+        UITestHelper.sleep(1000)
+    }
+
+    @Test
+    fun testBookmarks() {
+        Espresso.onView(
+            Matchers.allOf(
+                childAtPosition(
+                    childAtPosition(
+                        ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
+                        0
+                    ),
+                    3
                 ),
                 ViewMatchers.isDisplayed()
             )
