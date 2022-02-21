@@ -129,6 +129,19 @@ class MainActivityTest {
         ).perform(ViewActions.click())
         Espresso.onView(ViewMatchers.withId(R.id.fragmentContainer))
             .check(matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(
+            Matchers.allOf(
+                ViewMatchers.withId(R.id.contributionImage),
+                childAtPosition(
+                    childAtPosition(
+                        ViewMatchers.withId(R.id.contributionsList),
+                        0
+                    ),
+                    1
+                ),
+                ViewMatchers.isDisplayed()
+            )
+        ).perform(ViewActions.click())
         UITestHelper.sleep(1000)
     }
 
