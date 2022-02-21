@@ -1,29 +1,18 @@
-name: Pull Request CI
+name: Android CI
 
-on: [pull_request, pull_request_target]
+on: [push, pull_request]
 
 concurrency:
-  group: build-${{ github.event.pull_request.number }}
+  group: build-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
-  approve:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Approve
-        run: echo "For security reasons, all pull requests need to be approved first before running any automated CI."
   build:
     name: Run tests and generate APK
     runs-on: ubuntu-latest
-
-    needs: [approve]
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2.4.0
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Set up JDK
         uses: actions/setup-java@v2.5.0
@@ -42,11 +31,13 @@ jobs:
           restore-keys: gradle-packages-${{ runner.os }}
 
       - name: Access test login credentials
+        if: github.event_name != 'pull_request'
         run: |
           echo "TEST_USER_NAME=${{ secrets.TEST_USER_NAME }}" >> local.properties
           echo "TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }}" >> local.properties
 
       - name: AVD cache
+        if: github.event_name != 'pull_request'
         uses: actions/cache@v2
         id: avd-cache
         with:
@@ -56,7 +47,7 @@ jobs:
           key: avd-api-24
 
       - name: Create AVD and generate snapshot for caching
-        if: steps.avd-cache.outputs.cache-hit != 'true'
+        if: steps.avd-cache.outputs.cache-hit != 'true' && github.event_name != 'pull_request'
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 24
@@ -66,6 +57,7 @@ jobs:
           script: echo "Generated AVD snapshot for caching."
 
       - name: Run Instrumentation tests
+        if: github.event_name != 'pull_request'
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 24
@@ -78,7 +70,12 @@ jobs:
             adb shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
             ./gradlew connectedBetaDebugAndroidTest --stacktrace
 
-      - name: Run Unit tests
+      - name: Run Unit tests with unified coverage
+        if: github.event_name != 'pull_request'
+        run: ./gradlew -Pcoverage testBetaDebugUnitTestUnifiedCoverage --stacktrace
+
+      - name: Run Unit tests without unified coverage
+        if: github.event_name == 'pull_request'
         run: ./gradlew -Pcoverage testBetaDebugUnitTestCoverage --stacktrace
 
       - name: Upload Test Report to Codecov
@@ -86,7 +83,6 @@ jobs:
           curl -Os https://uploader.codecov.io/latest/linux/codecov
           chmod +x codecov
           ./codecov -f "app/build/reports/jacoco/testBetaDebugUnitTestCoverage/testBetaDebugUnitTestCoverage.xml" -Z
-
       - name: Generate betaDebug APK
         run: bash ./gradlew assembleBetaDebug --stacktrace
 
