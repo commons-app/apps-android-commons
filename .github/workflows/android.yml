@@ -82,7 +82,7 @@ jobs:
         run: |
           curl -Os https://uploader.codecov.io/latest/linux/codecov
           chmod +x codecov
-          ./codecov -f "app/build/reports/jacoco/testBetaDebugUnitTestCoverage/testBetaDebugUnitTestCoverage.xml" -Z
+          ./codecov -f "app/build/reports/jacoco/testBetaDebugUnitTestUnifiedCoverage/testBetaDebugUnitTestUnifiedCoverage.xml" -Z
 
       - name: Generate betaDebug APK
         run: bash ./gradlew assembleBetaDebug --stacktrace
