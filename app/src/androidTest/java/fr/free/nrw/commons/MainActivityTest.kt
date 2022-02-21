@@ -19,8 +19,6 @@ import fr.free.nrw.commons.UITestHelper.Companion.childAtPosition
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.notification.NotificationActivity
-import fr.free.nrw.commons.review.ReviewActivity
-import fr.free.nrw.commons.settings.SettingsActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers
 import org.junit.*
@@ -166,29 +164,6 @@ class MainActivityTest {
         ).perform(ViewActions.click())
         Intents.intended(IntentMatchers.hasComponent(NotificationActivity::class.java.name))
         Espresso.pressBack()
-        UITestHelper.sleep(1000)
-    }
-
-    @Test
-    fun testSettings() {
-        Espresso.onView(
-            Matchers.allOf(
-                ViewMatchers.withContentDescription("More"),
-                childAtPosition(
-                    childAtPosition(
-                        ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
-                        0
-                    ),
-                    4
-                ),
-                ViewMatchers.isDisplayed()
-            )
-        ).perform(ViewActions.click())
-        Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.more_settings))).perform(
-            ViewActions.scrollTo(),
-            ViewActions.click()
-        )
-        Intents.intended(IntentMatchers.hasComponent(SettingsActivity::class.java.name))
         UITestHelper.sleep(1000)
     }
 
