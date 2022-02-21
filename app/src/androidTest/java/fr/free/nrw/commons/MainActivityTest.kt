@@ -62,7 +62,6 @@ class MainActivityTest {
     fun testNearby() {
         Espresso.onView(
             Matchers.allOf(
-                ViewMatchers.withContentDescription("Nearby"),
                 childAtPosition(
                     childAtPosition(
                         ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
@@ -81,7 +80,6 @@ class MainActivityTest {
     fun testExplore() {
         Espresso.onView(
             Matchers.allOf(
-                ViewMatchers.withContentDescription("Explore"),
                 childAtPosition(
                     childAtPosition(
                         ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
@@ -100,7 +98,6 @@ class MainActivityTest {
     fun testBookmarks() {
         Espresso.onView(
             Matchers.allOf(
-                ViewMatchers.withContentDescription("Bookmarks"),
                 childAtPosition(
                     childAtPosition(
                         ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
@@ -117,7 +114,6 @@ class MainActivityTest {
     fun testContributions() {
         Espresso.onView(
             Matchers.allOf(
-                ViewMatchers.withContentDescription("Contributions"),
                 childAtPosition(
                     childAtPosition(
                         ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
@@ -158,7 +154,6 @@ class MainActivityTest {
         Espresso.onView(
             Matchers.allOf(
                 ViewMatchers.withId(R.id.toggle_limited_connection_mode),
-                ViewMatchers.withContentDescription("Limited Connection Mode"),
                 childAtPosition(
                     childAtPosition(
                         ViewMatchers.withId(R.id.toolbar),
