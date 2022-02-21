@@ -7,6 +7,7 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.FakeContextWrapper
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.actions.PageEditClient
 import fr.free.nrw.commons.contributions.ContributionsListFragment
 import fr.free.nrw.commons.review.ReviewController
@@ -24,11 +25,15 @@ import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
+import org.robolectric.annotation.Config
+import org.robolectric.annotation.LooperMode
 
 /**
  * Tests for delete helper
  */
 @RunWith(RobolectricTestRunner::class)
+@Config(sdk = [21], application = TestCommonsApplication::class)
+@LooperMode(LooperMode.Mode.PAUSED)
 class DeleteHelperTest {
 
     @Mock
