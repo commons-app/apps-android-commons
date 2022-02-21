@@ -31,7 +31,6 @@ jobs:
           restore-keys: gradle-packages-${{ runner.os }}
 
       - name: Access test login credentials
-        if: github.event_name != 'pull_request'
         run: |
           echo "TEST_USER_NAME=${{ secrets.TEST_USER_NAME }}" >> local.properties
           echo "TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }}" >> local.properties
@@ -79,10 +78,12 @@ jobs:
         run: ./gradlew -Pcoverage testBetaDebugUnitTestCoverage --stacktrace
 
       - name: Upload Test Report to Codecov
+        if: github.event_name != 'pull_request'
         run: |
           curl -Os https://uploader.codecov.io/latest/linux/codecov
           chmod +x codecov
           ./codecov -f "app/build/reports/jacoco/testBetaDebugUnitTestCoverage/testBetaDebugUnitTestCoverage.xml" -Z
+
       - name: Generate betaDebug APK
         run: bash ./gradlew assembleBetaDebug --stacktrace
 
