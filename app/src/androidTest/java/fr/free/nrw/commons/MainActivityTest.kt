@@ -189,31 +189,6 @@ class MainActivityTest {
             ViewActions.click()
         )
         Intents.intended(IntentMatchers.hasComponent(SettingsActivity::class.java.name))
-        Espresso.pressBack()
-        UITestHelper.sleep(1000)
-    }
-
-    @Test
-    fun testReview() {
-        Espresso.onView(
-            Matchers.allOf(
-                ViewMatchers.withContentDescription("More"),
-                childAtPosition(
-                    childAtPosition(
-                        ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
-                        0
-                    ),
-                    4
-                ),
-                ViewMatchers.isDisplayed()
-            )
-        ).perform(ViewActions.click())
-        Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.more_peer_review))).perform(
-            ViewActions.scrollTo(),
-            ViewActions.click()
-        )
-        Intents.intended(IntentMatchers.hasComponent(ReviewActivity::class.java.name))
-        Espresso.pressBack()
         UITestHelper.sleep(1000)
     }
 

@@ -44,7 +44,7 @@ class UITestHelper {
                 sleep(2000)
                 onView(ViewMatchers.withId(R.id.login_button))
                     .perform(ViewActions.click())
-                sleep(8000)
+                sleep(10000)
             } catch (ignored: NoMatchingViewException) {
             }
 
