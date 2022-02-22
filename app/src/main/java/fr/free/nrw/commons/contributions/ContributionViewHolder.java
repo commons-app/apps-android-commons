@@ -128,14 +128,14 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
                 }
                 break;
             case Contribution.STATE_PAUSED:
+                progressView.setVisibility(View.GONE);
                 stateView.setVisibility(View.VISIBLE);
                 stateView.setText(R.string.paused);
-                setResume();
-                progressView.setVisibility(View.GONE);
                 cancelButton.setVisibility(View.VISIBLE);
                 retryButton.setVisibility(View.GONE);
                 pauseResumeButton.setVisibility(View.VISIBLE);
                 imageOptions.setVisibility(View.VISIBLE);
+                setResume();
                 break;
             case Contribution.STATE_FAILED:
                 stateView.setVisibility(View.VISIBLE);
