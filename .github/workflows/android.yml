@@ -43,7 +43,7 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-api-24
+          key: avd-tablet-api-24
 
       - name: Create AVD and generate snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true' && github.event_name != 'pull_request'
@@ -63,7 +63,7 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          profile: 13.5in Freeform
+          profile: Nexus 10
           script: |
             adb shell content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0
             adb shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0

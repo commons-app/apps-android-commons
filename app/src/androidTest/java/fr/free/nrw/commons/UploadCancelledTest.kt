@@ -19,9 +19,7 @@ import fr.free.nrw.commons.UITestHelper.Companion.childAtPosition
 import fr.free.nrw.commons.auth.LoginActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers.allOf
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
+import org.junit.*
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
@@ -43,6 +41,7 @@ class UploadCancelledTest {
 
     @Before
     fun setup() {
+        Intents.init()
         device.setOrientationNatural()
         device.freezeRotation()
         UITestHelper.loginUser()
@@ -50,12 +49,17 @@ class UploadCancelledTest {
         Intents.intending(CoreMatchers.not(IntentMatchers.isInternal()))
             .respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, null))
     }
+
+    @After
+    fun teardown() {
+        Intents.release()
+    }
+
     @Test
     fun uploadCancelledAfterLocationPickedTest() {
 
         val floatingActionButton = onView(allOf(withId(R.id.fab_plus)))
         floatingActionButton.perform(click())
-        UITestHelper.sleep(5000)
         val floatingActionButton2 = onView(allOf(withId(R.id.fab_camera)))
         floatingActionButton2.perform(click())
 
