@@ -22,6 +22,7 @@ import fr.free.nrw.commons.media.MediaClient;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
@@ -142,6 +143,9 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
                 pauseResumeButton.setVisibility(View.VISIBLE);
                 imageOptions.setVisibility(View.VISIBLE);
                 setResume();
+                if(pausingPopUp.isShowing()){
+                    pausingPopUp.hide();
+                }
                 break;
             case Contribution.STATE_FAILED:
                 stateView.setVisibility(View.VISIBLE);
@@ -270,8 +274,5 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     private void setResume() {
         pauseResumeButton.setImageResource(R.drawable.play_icon);
         pauseResumeButton.setTag("resume");
-        if(pausingPopUp.isShowing()){
-            pausingPopUp.hide();
-        }
     }
 }
