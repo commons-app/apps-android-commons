@@ -4,7 +4,6 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static fr.free.nrw.commons.di.NetworkingModule.NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -116,9 +115,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     private int contributionsSize;
     String userName;
 
-    private ProgressDialog pausingPopUp;
-
-
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,10 +136,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         final View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
         ButterKnife.bind(this, view);
         contributionsListPresenter.onAttachView(this);
-
-        // setting the pausingPopUp properties
-        pausingPopUp = new ProgressDialog(getContext());
-        pausingPopUp.setMessage(getString(R.string.pausing_upload));
 
         if (Objects.equals(sessionManager.getUserName(), userName)) {
             tvContributionsOfUser.setVisibility(GONE);
@@ -226,10 +218,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
                 super.onItemRangeChanged(positionStart, itemCount);
                 if (callback != null) {
                     callback.viewPagerNotifyDataSetChanged();
-                }
-                // check for the pausingPopUp if it's visible then hide
-                if(pausingPopUp.isShowing()){
-                    pausingPopUp.hide();
                 }
             }
         });
@@ -445,7 +433,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
      */
     @Override
     public void pauseUpload(Contribution contribution) {
-        pausingPopUp.show();
         ViewUtil.showShortToast(getContext(), R.string.pausing_upload);
         callback.pauseUpload(contribution);
     }

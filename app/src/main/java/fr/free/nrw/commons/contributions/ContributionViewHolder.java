@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
+import android.app.ProgressDialog;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
@@ -54,6 +55,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private final MediaClient mediaClient;
     private boolean isWikipediaButtonDisplayed;
+    private ProgressDialog pausingPopUp;
 
     ContributionViewHolder(final View parent, final Callback callback,
         final MediaClient mediaClient) {
@@ -61,6 +63,10 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         this.mediaClient = mediaClient;
         ButterKnife.bind(this, parent);
         this.callback = callback;
+
+        // setting the pausingPopUp properties
+        pausingPopUp = new ProgressDialog(parent.getContext());
+        pausingPopUp.setMessage(parent.getContext().getString(R.string.pausing_upload));
     }
 
     public void init(final int position, final Contribution contribution) {
@@ -245,6 +251,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void pause() {
+        pausingPopUp.show();
         callback.pauseUpload(contribution);
         setResume();
     }
@@ -263,5 +270,8 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     private void setResume() {
         pauseResumeButton.setImageResource(R.drawable.play_icon);
         pauseResumeButton.setTag("resume");
+        if(pausingPopUp.isShowing()){
+            pausingPopUp.hide();
+        }
     }
 }
