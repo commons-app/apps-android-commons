@@ -44,11 +44,6 @@ class SearchActivityTest {
     }
 
     @Test
-    fun orientationChange() {
-        UITestHelper.changeOrientation(activityRule)
-    }
-
-    @Test
     fun exploreActivityTest() {
         val searchAutoComplete = Espresso.onView(
             Matchers.allOf(
