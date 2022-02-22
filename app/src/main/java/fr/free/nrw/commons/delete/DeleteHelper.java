@@ -157,7 +157,6 @@ public class DeleteHelper {
 
         String[] reasonList = {"Reason 1", "Reason 2", "Reason 3", "Reason 4"};
 
-
         if (problem == ReviewController.DeleteReason.SPAM) {
             reasonList[0] = context.getString(R.string.delete_helper_ask_spam_selfie);
             reasonList[1] = context.getString(R.string.delete_helper_ask_spam_blurry);
