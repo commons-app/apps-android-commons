@@ -61,10 +61,12 @@ class ProfileActivityTest {
             ViewActions.scrollTo(),
             ViewActions.click()
         )
+        swipeRight()
+        swipeRight()
+        swipeRight()
+        swipeRight()
+        UITestHelper.sleep(5000)
         Intents.intended(hasComponent(ProfileActivity::class.java.name))
-        swipeRight()
-        swipeRight()
-        UITestHelper.sleep(2000)
     }
 
 }
