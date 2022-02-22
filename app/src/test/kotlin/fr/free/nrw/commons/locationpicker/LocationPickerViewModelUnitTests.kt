@@ -46,7 +46,7 @@ class LocationPickerViewModelUnitTests {
         viewModel.onResponse(call, response)
         verify(call, times(0)).isExecuted
         verify(response, times(1)).body()
-        verify(result, times(1)).value = any()
+        verify(result, times(1)).value = null
     }
 
     @Test
