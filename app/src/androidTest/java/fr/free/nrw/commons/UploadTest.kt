@@ -63,8 +63,8 @@ class UploadTest {
         } catch (ex: IllegalStateException) {
 
         }
-        UITestHelper.skipWelcome()
         UITestHelper.loginUser()
+        UITestHelper.skipWelcome()
     }
 
     @After

@@ -1,13 +1,11 @@
 package fr.free.nrw.commons.ui
 
-import android.R
 import android.content.Context
 import android.util.AttributeSet
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Assert
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -21,41 +19,6 @@ class PasteSensitiveTextInputEditTextTest {
     fun setup() {
         context = ApplicationProvider.getApplicationContext()
         textView = PasteSensitiveTextInputEditText(context)
-    }
-
-    @Test
-    @Ignore("Fix Failing Test")
-    fun onTextContextMenuItemPasteFormattingDisabled() {
-        textView!!.setFormattingAllowed(false);
-        textView!!.setText("Text")
-        textView!!.onTextContextMenuItem(R.id.paste)
-        Assert.assertEquals("Text", textView!!.text.toString())
-    }
-
-    @Test
-    @Ignore("Fix Failing Test")
-    fun onTextContextMenuItemPasteFormattingAllowed() {
-        textView!!.setFormattingAllowed(true);
-        textView!!.setText("Text")
-        textView!!.onTextContextMenuItem(R.id.paste)
-        Assert.assertEquals("Text", textView!!.text.toString())
-    }
-
-    @Test
-    @Ignore("Fix Failing Test")
-    fun onTextContextMenuItemPaste() {
-        textView!!.setText("Text")
-        textView!!.onTextContextMenuItem(R.id.paste)
-        Assert.assertEquals("Text", textView!!.text.toString())
-    }
-
-
-    @Test
-    @Ignore("Fix Failing Test")
-    fun onTextContextMenuItemNotPaste() {
-        textView!!.setText("Text")
-        textView!!.onTextContextMenuItem(R.id.copy)
-        Assert.assertEquals("Text", textView!!.text.toString())
     }
 
     // this test has no real value, just % for test code coverage
