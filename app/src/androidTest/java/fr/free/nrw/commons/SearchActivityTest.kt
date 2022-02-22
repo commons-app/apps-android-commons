@@ -1,20 +1,14 @@
 package fr.free.nrw.commons
 
-import android.app.Activity
-import android.app.Instrumentation
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.intent.Intents
-import androidx.test.espresso.intent.matcher.IntentMatchers
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import androidx.test.uiautomator.UiDevice
 import fr.free.nrw.commons.explore.SearchActivity
-import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers
-import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -33,14 +27,6 @@ class SearchActivityTest {
     fun setup() {
         device.setOrientationNatural()
         device.freezeRotation()
-        Intents.init()
-        Intents.intending(CoreMatchers.not(IntentMatchers.isInternal()))
-            .respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, null))
-    }
-
-    @After
-    fun cleanUp() {
-        Intents.release()
     }
 
     @Test
