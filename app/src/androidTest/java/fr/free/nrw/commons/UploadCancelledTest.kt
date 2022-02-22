@@ -46,7 +46,8 @@ class UploadCancelledTest {
         } catch (ex: IllegalStateException) {
 
         }
-        device.setOrientationLeft()
+        device.unfreezeRotation()
+        device.setOrientationNatural()
         device.freezeRotation()
         UITestHelper.loginUser()
         UITestHelper.skipWelcome()
