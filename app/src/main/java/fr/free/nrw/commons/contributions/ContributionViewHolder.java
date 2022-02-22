@@ -9,6 +9,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,7 +58,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private final MediaClient mediaClient;
     private boolean isWikipediaButtonDisplayed;
-    private ProgressDialog pausingPopUp;
+    private AlertDialog pausingPopUp;
 
     ContributionViewHolder(final View parent, final Callback callback,
         final MediaClient mediaClient) {
@@ -65,9 +67,11 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, parent);
         this.callback = callback;
 
-        // setting the pausingPopUp properties
-        pausingPopUp = new ProgressDialog(parent.getContext());
-        pausingPopUp.setMessage(parent.getContext().getString(R.string.pausing_upload));
+        // setting the pausingPopUp dialog
+        AlertDialog.Builder builder = new Builder(parent.getContext());
+        builder.setCancelable(false);
+        builder.setView(R.layout.progress_dialog);
+        pausingPopUp = builder.create();
     }
 
     public void init(final int position, final Contribution contribution) {
