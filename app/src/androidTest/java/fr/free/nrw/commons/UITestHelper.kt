@@ -26,6 +26,34 @@ class UITestHelper {
             }
         }
 
+        fun skipLogin() {
+            try {
+                //Skip Login
+                val htmlTextView = onView(
+                    Matchers.allOf(
+                        ViewMatchers.withId(R.id.skip_login), ViewMatchers.withText("Skip"),
+                        ViewMatchers.isDisplayed()
+                    )
+                )
+                htmlTextView.perform(ViewActions.click())
+
+                val appCompatButton = onView(
+                    Matchers.allOf(
+                        ViewMatchers.withId(android.R.id.button1), ViewMatchers.withText("Yes"),
+                        childAtPosition(
+                            childAtPosition(
+                                ViewMatchers.withId(R.id.buttonPanel),
+                                0
+                            ),
+                            3
+                        )
+                    )
+                )
+                appCompatButton.perform(ViewActions.scrollTo(), ViewActions.click())
+            } catch (ignored: NoMatchingViewException) {
+            }
+        }
+
         fun loginUser() {
             try {
                 //Perform Login
