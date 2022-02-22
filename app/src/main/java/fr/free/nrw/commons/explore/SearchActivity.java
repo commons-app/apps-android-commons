@@ -78,7 +78,7 @@ public class SearchActivity extends BaseActivity
         setSearchHistoryFragment();
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
-        viewPager.setOffscreenPageLimit(2); // Because we want all the fragments to be alive
+        viewPager.setOffscreenPageLimit(4); // Because we want all the fragments to be alive
         tabLayout.setupWithViewPager(viewPager);
         setTabs();
         searchView.setQueryHint(getString(R.string.search_commons));
