@@ -19,7 +19,7 @@ public class FeedbackContentCreator {
      */
     public void init() {
         stringBuilder = new StringBuilder();
-        stringBuilder.append("Feedback for version").append(feedback.getVersion());
+        stringBuilder.append("== ").append("Feedback for version").append(feedback.getVersion()).append(" ==");
         stringBuilder.append("\n");
         stringBuilder.append(feedback.getTitle());
         stringBuilder.append("\n");
@@ -50,6 +50,8 @@ public class FeedbackContentCreator {
             stringBuilder.append("* ").append("Network type: ").append(feedback.getNetworkType());
             stringBuilder.append("\n");
         }
+        stringBuilder.append("~~~~");
+        stringBuilder.append("\n");
     }
 
     @Override

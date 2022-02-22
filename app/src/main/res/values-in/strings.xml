@@ -651,5 +651,4 @@
   <string name="no_location_found_message">Bagaimana jika Anda menambahkan tempat di mana gambar ini diambil?\nData lokasi membantu para penyunting Wiki menemukan gambar Anda, sehingga ia menjadi lebih berguna.\nTerima kasih!</string>
   <string name="add_location">Tambahkan lokasi</string>
   <string name="feedback_sharing_data_alert">Silakan hapus informasi yang menurut Anda tidak layak disebarkan ke masyarakat umum dari surel ini. Selain itu, perlu diperhatikan bahwa alamat surel yang Anda unggah, beserta foto penggunanya, akan dapat dilihat oleh masyarakat umum.</string>
-  <string name="your_feedback">Your Feedback</string>
 </resources>

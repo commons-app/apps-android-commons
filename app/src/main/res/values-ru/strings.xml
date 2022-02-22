@@ -685,5 +685,4 @@
   <string name="no_location_found_title">Местоположение не найдено</string>
   <string name="add_location">Добавить местоположение</string>
   <string name="feedback_sharing_data_alert">Пожалуйста, удалите из этого письма любую информацию, которой вы не желаете делиться с другими. Кроме того, имейте в виду, что адрес вашей электронной почты, с которого вы отправляете сообщения, а также связанное с ним имя и изображение профиля, будут видны всем.</string>
-  <string name="your_feedback">Your Feedback</string>
 </resources>

@@ -11,8 +11,8 @@ public class Feedback {
     private String networkType;
 
     public Feedback(final String version, final String apiLevel, final String title, final String androidVersion,
-        final String deviceModel, final String deviceManufacturer, final String device, final String networkType,
-        final String timeStamp) {
+        final String deviceModel, final String deviceManufacturer, final String device, final String networkType
+        ) {
         this.version = version;
         this.apiLevel = apiLevel;
         this.title = title;

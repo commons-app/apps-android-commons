@@ -36,6 +36,11 @@ import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
+import io.reactivex.Single;
+import io.reactivex.SingleSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import java.util.concurrent.Callable;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.wikipedia.csrf.CsrfTokenClient;
@@ -113,17 +118,33 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
 
     @OnClick(R.id.more_feedback)
     public void onFeedbackClicked() {
-        showFeedbackDialog();
+        showAlertDialog();
     }
 
     private void showFeedbackDialog() {
-        new FeedbackDialog(getContext(), new OnFeedbackSubmitCallback() {
-            @Override
-            public void onFeedbackSubmit(Feedback feedback) {
-                feedbackController.postFeedback(MoreBottomSheetFragment.this, feedback);
-            }
-        }).show();
+        new FeedbackDialog(getContext(), onFeedbackSubmitCallback).show();
     }
+
+    private OnFeedbackSubmitCallback onFeedbackSubmitCallback = new OnFeedbackSubmitCallback() {
+        @Override
+        public void onFeedbackSubmit(Feedback feedback) {
+            Single<Boolean> single = feedbackController
+                .postFeedback(MoreBottomSheetFragment.this, feedback)
+                .flatMapSingle(result -> Single.just(result))
+                .firstOrError();
+
+            Single.defer((Callable<SingleSource<Boolean>>) () -> single)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(aBoolean -> {
+                    if (aBoolean) {
+                        System.out.println("SUCCESS");
+                    } else {
+                        System.out.println("FAILURE");
+                    }
+                });
+        }
+    };
 
     /**
      * This method shows the alert dialog when a user wants to send feedback about the app.

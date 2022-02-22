@@ -667,5 +667,4 @@
   <string name="no_location_found_message">Bu görüntünün çekildiği yeri eklemeye ne dersiniz?\nKonum verileri, Wiki düzenleyicilerinin resminizi bulmasına yardımcı olarak onu çok daha kullanışlı hale getirir.\nTeşekkürler!</string>
   <string name="add_location">Konum ekle</string>
   <string name="feedback_sharing_data_alert">Lütfen herkese açık olarak paylaşmaktan çekindiğiniz tüm bilgileri bu e-postadan kaldırın. Ayrıca gönderi paylaştığınız e-posta adresinizin ve ilgili ad ve profil resminizin herkese açık olarak görüneceğini lütfen unutmayın.</string>
-  <string name="your_feedback">Your Feedback</string>
 </resources>

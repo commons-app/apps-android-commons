@@ -19,6 +19,8 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.navtab.MoreBottomSheetFragment;
 import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText;
+import fr.free.nrw.commons.utils.ConfigUtils;
+import fr.free.nrw.commons.utils.DeviceInfoUtil;
 import java.util.Date;
 import javax.inject.Inject;
 import org.wikipedia.csrf.CsrfTokenClient;
@@ -42,8 +44,6 @@ public class FeedbackDialog extends Dialog {
     CheckBox deviceName;
     @BindView(R.id.network_type_checkbox)
     CheckBox networkType;
-    @BindView(R.id.app_version_name_checkbox)
-    CheckBox appVersionName;
     @BindView(R.id.username_checkbox)
     CheckBox userName;
     @BindView(R.id.feedback_item_edit_text)
@@ -52,12 +52,10 @@ public class FeedbackDialog extends Dialog {
     @Inject
     FeedbackController feedbackController;
 
-    private MoreBottomSheetFragment moreBottomSheetFragment;
     private OnFeedbackSubmitCallback onFeedbackSubmitCallback;
 
     public FeedbackDialog(Context context, OnFeedbackSubmitCallback onFeedbackSubmitCallback) {
         super(context);
-        this.moreBottomSheetFragment = moreBottomSheetFragment;
         this.onFeedbackSubmitCallback = onFeedbackSubmitCallback;
     }
 
@@ -71,8 +69,19 @@ public class FeedbackDialog extends Dialog {
 
     @OnClick(R.id.btn_submit_feedback)
     void submitFeedback() {
-        System.out.println("INSIDE");
-        onFeedbackSubmitCallback.onFeedbackSubmit(new Feedback("1.1", "28", "testing", "28", "redmit", "redmi", "device", "wigi", new Date().toString()));
+        if(feedbackDescription.getText().toString().equals("")) {
+            feedbackDescription.setError("Enter description");
+            return;
+        }
+        String mAppVersionVersion = ConfigUtils.getVersionNameWithSha(getContext());
+        String mAndroidVersion = androidVersion.isChecked() ? DeviceInfoUtil.getAndroidVersion() : null;
+        String mAPILevel = apiLevel.isChecked() ? DeviceInfoUtil.getAPILevel() : null;
+        String mDeviceManufacturer = deviceManufacturer.isChecked() ? DeviceInfoUtil.getDeviceManufacturer() : null;
+        String mDeviceModel = deviceModel.isChecked() ? DeviceInfoUtil.getDeviceModel() : null;
+        String mDeviceName = deviceName.isChecked() ? DeviceInfoUtil.getDevice() : null;
+        String mNetworkType = networkType.isChecked() ? DeviceInfoUtil.getConnectionType(getContext()).toString() : null;
+        Feedback feedback = new Feedback(mAppVersionVersion,mAPILevel, feedbackDescription.getText().toString(), mAndroidVersion, mDeviceModel, mDeviceManufacturer, mDeviceName, mNetworkType);;
+        onFeedbackSubmitCallback.onFeedbackSubmit(feedback);
     }
 
 }

@@ -17,7 +17,7 @@ public class FeedbackClient {
 
             retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl(Service.COMMONS_URL).build();
+                .baseUrl("https://commons.wikimedia.beta.wmflabs.org/").build();
         }
         return retrofit;
     }

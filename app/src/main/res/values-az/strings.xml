@@ -92,5 +92,4 @@
   <string name="send_thank_failure_title">Təşəkkür göndərilir: Xəta</string>
   <string name="send_thank_toast">%1$s üçün təşəkkür göndərişi</string>
   <string name="notification_mark_read">Bildiriş oxunmuş olaraq işarələndi</string>
-  <string name="your_feedback">Your Feedback</string>
 </resources>
