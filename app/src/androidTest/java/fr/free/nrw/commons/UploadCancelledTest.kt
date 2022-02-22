@@ -20,7 +20,6 @@ import fr.free.nrw.commons.auth.LoginActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers.allOf
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -56,6 +55,7 @@ class UploadCancelledTest {
 
         val floatingActionButton = onView(allOf(withId(R.id.fab_plus)))
         floatingActionButton.perform(click())
+        UITestHelper.sleep(5000)
         val floatingActionButton2 = onView(allOf(withId(R.id.fab_camera)))
         floatingActionButton2.perform(click())
 
