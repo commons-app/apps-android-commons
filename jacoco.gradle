@@ -80,6 +80,8 @@ project.afterEvaluate {
                         '**/db/*',
                         // data
                         '**/data/*',
+                        // zoom controllers are part of external library
+                        '**/**/zoomControllers/*',
                 ]
 
                 tasks.create(name: "${unitTestTask}UnifiedCoverage", type: JacocoReport, dependsOn: [
