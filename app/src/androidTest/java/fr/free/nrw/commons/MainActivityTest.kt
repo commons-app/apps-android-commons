@@ -14,10 +14,12 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiSelector
 import com.google.gson.Gson
 import fr.free.nrw.commons.UITestHelper.Companion.childAtPosition
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.notification.NotificationActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers
@@ -156,7 +158,14 @@ class MainActivityTest {
             )
         )
         actionMenuItemView.perform(ViewActions.click())
-        UITestHelper.sleep(1000)
+        val linearLayout3 = Espresso.onView(
+            Matchers.allOf(
+                ViewMatchers.withId(R.id.mediaDetailImageViewSpacer),
+            )
+        )
+        linearLayout3.perform(ViewActions.scrollTo(), ViewActions.click())
+        Intents.intended(IntentMatchers.hasComponent(ZoomableActivity::class.java.name))
+        UITestHelper.sleep(3000)
     }
 
     @Test
