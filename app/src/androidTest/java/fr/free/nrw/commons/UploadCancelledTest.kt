@@ -70,7 +70,7 @@ class UploadCancelledTest {
         val floatingActionButton = onView(allOf(withId(R.id.fab_plus)))
         floatingActionButton.perform(click())
         val floatingActionButton2 = onView(allOf(withId(R.id.fab_camera)))
-        floatingActionButton2.perform(click())
+        floatingActionButton2.perform(longClick())
 
         val pasteSensitiveTextInputEditText = onView(
             allOf(
