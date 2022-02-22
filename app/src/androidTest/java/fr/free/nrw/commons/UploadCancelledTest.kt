@@ -41,18 +41,12 @@ class UploadCancelledTest {
 
     @Before
     fun setup() {
-        Intents.init()
         device.setOrientationNatural()
         device.freezeRotation()
         UITestHelper.loginUser()
         UITestHelper.skipWelcome()
         Intents.intending(CoreMatchers.not(IntentMatchers.isInternal()))
             .respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, null))
-    }
-
-    @After
-    fun teardown() {
-        Intents.release()
     }
 
     @Test
