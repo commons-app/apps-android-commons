@@ -1,10 +1,11 @@
 package fr.free.nrw.commons
 
-
 import android.app.Activity
 import android.app.Instrumentation
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.matcher.IntentMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -19,7 +20,10 @@ import fr.free.nrw.commons.UITestHelper.Companion.childAtPosition
 import fr.free.nrw.commons.auth.LoginActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers.allOf
-import org.junit.*
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
@@ -67,10 +71,62 @@ class UploadCancelledTest {
     @Test
     fun uploadCancelledAfterLocationPickedTest() {
 
-        val floatingActionButton = onView(allOf(withId(R.id.fab_plus)))
-        floatingActionButton.perform(click())
-        val floatingActionButton2 = onView(allOf(withId(R.id.fab_camera)))
-        floatingActionButton2.perform(longClick())
+        val bottomNavigationItemView = onView(
+            allOf(
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.fragment_main_nav_tab_layout),
+                        0
+                    ),
+                    1
+                ),
+                isDisplayed()
+            )
+        )
+        bottomNavigationItemView.perform(click())
+
+        UITestHelper.sleep(12000)
+
+        val actionMenuItemView = onView(
+            allOf(
+                withId(R.id.list_sheet),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.toolbar),
+                        1
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        actionMenuItemView.perform(click())
+
+        val recyclerView = onView(
+            allOf(
+                withId(R.id.rv_nearby_list),
+            )
+        )
+        recyclerView.perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                0,
+                click()
+            )
+        )
+
+        val linearLayout3 = onView(
+            allOf(
+                withId(R.id.cameraButton),
+                childAtPosition(
+                    allOf(
+                        withId(R.id.nearby_button_layout),
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        linearLayout3.perform(click())
 
         val pasteSensitiveTextInputEditText = onView(
             allOf(
