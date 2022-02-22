@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewTreeObserver
@@ -18,12 +19,9 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
+import fr.free.nrw.commons.*
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
-import fr.free.nrw.commons.Media
 import org.robolectric.Shadows.shadowOf
-import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
-import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter
 import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.kvstore.JsonKvStore
@@ -32,17 +30,24 @@ import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.ui.widget.HtmlTextView
 import org.junit.Assert
 import org.junit.Before
+import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.TestAppAdapter
+import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.contributions.ContributionViewHolder
+import fr.free.nrw.commons.delete.DeleteHelper
+import fr.free.nrw.commons.delete.ReasonBuilder
+import fr.free.nrw.commons.utils.ImageUtils
+import io.reactivex.Single
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
-import org.mockito.MockitoAnnotations
+import org.mockito.*
+import org.mockito.Mockito.*
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
+import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowIntent
@@ -50,13 +55,13 @@ import org.wikipedia.AppAdapter
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class MediaDetailFragmentUnitTests {
-
 
     private val REQUEST_CODE = 1001
     private val LAST_LOCATION = "last_location_while_uploading"
@@ -66,6 +71,30 @@ class MediaDetailFragmentUnitTests {
     private lateinit var layoutInflater: LayoutInflater
     private lateinit var view: View
     private lateinit var context: Context
+
+    private val NOMINATING_FOR_DELETION_MEDIA = "Nominating for deletion %s"
+
+
+    @Mock
+    private lateinit var deleteHelper: DeleteHelper
+
+    @Mock
+    private lateinit var reasonBuilder: ReasonBuilder
+
+    @Mock
+    private lateinit var progressBarDeletion: ProgressBar
+
+    @Mock
+    private lateinit var delete: Button
+
+
+    private var isDeleted = true
+
+    @Mock
+    private var reasonList: ArrayList<String>? = null
+
+    @Mock
+    private var reasonListEnglishMappings: ArrayList<String>? = null
 
     @Mock
     private lateinit var locationManager: LocationServiceManager
@@ -156,9 +185,16 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "scrollView", scrollView)
 
         categoryRecyclerView = view.findViewById(R.id.rv_categories)
+        progressBarDeletion = view.findViewById(R.id.progressBarDeletion)
+        delete = view.findViewById(R.id.nominateDeletion)
         Whitebox.setInternalState(fragment, "categoryRecyclerView", categoryRecyclerView)
 
         Whitebox.setInternalState(fragment, "media", media)
+        Whitebox.setInternalState(fragment, "isDeleted", isDeleted)
+        Whitebox.setInternalState(fragment, "reasonList", reasonList)
+        Whitebox.setInternalState(fragment, "reasonListEnglishMappings", reasonListEnglishMappings)
+        Whitebox.setInternalState(fragment, "reasonBuilder", reasonBuilder)
+        Whitebox.setInternalState(fragment, "deleteHelper", deleteHelper)
         Whitebox.setInternalState(fragment, "progressBar", progressBar)
         Whitebox.setInternalState(fragment, "progressBarEditDescription", progressBar)
         Whitebox.setInternalState(fragment, "captionsListView", listView)
@@ -175,6 +211,7 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "mediaCaption", textView)
         Whitebox.setInternalState(fragment, "captionLayout", linearLayout)
         Whitebox.setInternalState(fragment, "depictsLayout", linearLayout)
+        Whitebox.setInternalState(fragment, "delete", delete)
         Whitebox.setInternalState(fragment, "depictionContainer", linearLayout)
         Whitebox.setInternalState(fragment, "toDoLayout", linearLayout)
         Whitebox.setInternalState(fragment, "dummyCategoryEditContainer", linearLayout)
@@ -183,6 +220,7 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "editDescription", button)
         Whitebox.setInternalState(fragment, "categoryContainer", linearLayout)
         Whitebox.setInternalState(fragment, "categorySearchView", searchView)
+        Whitebox.setInternalState(fragment, "progressBarDeletion", progressBarDeletion)
         Whitebox.setInternalState(fragment, "mediaDiscussion", textView)
         Whitebox.setInternalState(fragment, "locationManager", locationManager)
         Whitebox.setInternalState(
@@ -588,6 +626,28 @@ class MediaDetailFragmentUnitTests {
         )
         method.isAccessible = true
         method.invoke(fragment, "")
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnDeleteClickedNull() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        val spinner = mock(Spinner::class.java)
+        `when`(media.imageUrl).thenReturn("test@example.com")
+        `when`(spinner.selectedItemPosition).thenReturn(0)
+        `when`(reasonListEnglishMappings?.get(spinner.selectedItemPosition)).thenReturn("TESTING")
+        `when`(applicationKvStore.getBoolean(String.format(MediaDetailFragment.NOMINATING_FOR_DELETION_MEDIA,media.imageUrl
+                ))).thenReturn(true)
+        doReturn(Single.just(true)).`when`(deleteHelper).makeDeletion(ArgumentMatchers.any(),ArgumentMatchers.any(), ArgumentMatchers.any())
+
+        doReturn(Single.just("")).`when`(reasonBuilder).getReason(ArgumentMatchers.any(), ArgumentMatchers.any())
+
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
+            "onDeleteClicked",
+            Spinner::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, spinner)
     }
 
     @Test
