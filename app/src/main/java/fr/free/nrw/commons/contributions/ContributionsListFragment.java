@@ -389,7 +389,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     @Override
     public void deleteUpload(final Contribution contribution) {
         DialogUtil.showAlertDialog(getActivity(),
-            "Cancel Upload",
+            String.format(getString(R.string.cancelling_upload),
+                Locale.getDefault().getDisplayLanguage()),
             String.format(getString(R.string.cancel_upload_dialog),
                 Locale.getDefault().getDisplayLanguage()),
             "YES", "NO",
@@ -397,7 +398,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
                 ViewUtil.showShortToast(getContext(), R.string.cancelling_upload);
                 contributionsListPresenter.deleteUpload(contribution);
             }, () -> {
-                ///do nothing
+                // Do nothing
             });
     }
 

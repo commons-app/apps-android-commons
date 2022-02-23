@@ -67,7 +67,8 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, parent);
         this.callback = callback;
 
-        // setting the pausingPopUp dialog
+        /* Set a dialog indicating that the upload is being paused. This is needed because pausing
+        an upload might take a dozen seconds. */
         AlertDialog.Builder builder = new Builder(parent.getContext());
         builder.setCancelable(false);
         builder.setView(R.layout.progress_dialog);

@@ -627,6 +627,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="resuming_upload">Resuming upload…</string>
   <string name="pausing_upload">Pausing upload…</string>
   <string name="cancelling_upload">Cancelling upload…</string>
+  <string name="cancel_upload">Cancel Upload</string>
   <string name="limited_connection_explanation">You have enabled limited connection mode. All uploads are paused and will resume once you disable this mode.</string>
   <string name="limited_connection_is_on">Limited connection mode is on.</string>
 
