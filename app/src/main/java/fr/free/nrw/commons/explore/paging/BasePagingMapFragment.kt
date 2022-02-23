@@ -3,6 +3,7 @@ package fr.free.nrw.commons.explore.paging
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
@@ -21,6 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mapbox.mapboxsdk.maps.MapView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
+import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.utils.ViewUtil
 import kotlinx.android.synthetic.main.fragment_search_paginated.*
 
@@ -55,12 +57,16 @@ abstract class BasePagingMapFragment<T> : CommonsDaggerSupportFragment(),
             layoutManager = GridLayoutManager(context, if (isPortrait) 1 else 2)
             adapter = mergeAdapter
         }*/
-        ButterKnife.bind(this, view!!)
-        mapView.onStart();
-        injectedPresenter.listFooterData.observe(
-            viewLifecycleOwner,
-            Observer(loadingAdapter::submitList)
-        )
+        // TODO: if parent activity is search activity
+            ButterKnife.bind(this, view!!)
+            mapView.onStart();
+        //if (activity is SearchActivity) {
+            injectedPresenter.listFooterData.observe(
+                viewLifecycleOwner,
+                Observer(loadingAdapter::submitList)
+            )
+        //}
+         // Else it is a general explore activity
     }
 
     protected abstract fun getLayoutResource(): Int
@@ -76,18 +82,18 @@ abstract class BasePagingMapFragment<T> : CommonsDaggerSupportFragment(),
     }
 
     override fun observePagingResults(searchResults: LiveData<PagedList<T>>) {
-        this.searchResults?.removeObservers(viewLifecycleOwner)
-        this.searchResults = searchResults
-        searchResults.observe(viewLifecycleOwner, Observer {
-            pagedListAdapter.submitList(it)
-        })
+            this.searchResults?.removeObservers(viewLifecycleOwner)
+            this.searchResults = searchResults
+            searchResults.observe(viewLifecycleOwner, Observer {
+                pagedListAdapter.submitList(it)
+            })
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        injectedPresenter?.let {
-            injectedPresenter.onAttachView(this)
-        }
+            injectedPresenter?.let {
+                injectedPresenter.onAttachView(this)
+            }
     }
 
     override fun onDetach() {
@@ -108,7 +114,10 @@ abstract class BasePagingMapFragment<T> : CommonsDaggerSupportFragment(),
     }
 
     fun onQueryUpdated(query: String) {
-        injectedPresenter.onQueryUpdated(query)
+        //if (activity is SearchActivity) {
+            Log.d("nesli3", "on query updated base paging");
+            injectedPresenter.onQueryUpdated(query)
+        //}
     }
 
     override fun showEmptyText(query: String) {

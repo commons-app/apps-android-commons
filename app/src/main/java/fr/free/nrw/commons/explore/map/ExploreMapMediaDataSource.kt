@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.explore.map
 
+import android.util.Log
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.explore.depictions.search.LoadFunction
 import fr.free.nrw.commons.explore.paging.LiveDataConverter
@@ -15,6 +16,6 @@ class ExploreMapMediaDataSource @Inject constructor(
     override val loadFunction: LoadFunction<Media> = { loadSize: Int, startPosition: Int ->
         //TODO: change this method
         // TODO: filter this result by location or display all of them on map
-        mediaClient.getMediaListFromSearch(query, loadSize, startPosition).blockingGet()
+        mediaClient.getMediaListFromSearchWithLocation(query, loadSize, startPosition).blockingGet()
     }
 }

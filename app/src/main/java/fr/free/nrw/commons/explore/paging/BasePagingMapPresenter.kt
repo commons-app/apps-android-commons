@@ -21,6 +21,7 @@ private val compositeDisposable = CompositeDisposable()
 
     override fun onAttachView(view: PagingContract.View<T>) {
     this.view = view
+        // TODO nesli cast view to exploreMapFragment here and
     compositeDisposable.addAll(
     pageableBaseDataSource.pagingResults.subscribe(view::observePagingResults),
     pageableBaseDataSource.loadingStates
@@ -60,7 +61,7 @@ private fun onLoadingState(it: LoadingState) = when (it) {
     }
 
     override fun onQueryUpdated(query: String) {
-    Log.d("nesli","test query:"+query)
+    Log.d("nesli3","test query:"+query)
     pageableBaseDataSource.onQueryUpdated(query)
     }
 }

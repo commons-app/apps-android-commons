@@ -11,14 +11,15 @@ public class ExplorePlace extends Place {
     public String pic;
     public String commonsURL;
     public String distance;
+    public String thumb;
 
     public ExplorePlace(final String name, final String longDescription,
-        final LatLng location, final String pic, final String commonsURL) {
+        final LatLng location, final String pic, final String commonsURL, final String thumb) {
         this.name = name;
         this.longDescription = longDescription;
         this.location = location;
         this.pic = pic;
-        this.commonsURL = commonsURL;
+        this.thumb = thumb;
     }
 
     @Override
@@ -30,6 +31,7 @@ public class ExplorePlace extends Place {
             ", pic='" + pic + '\'' +
             ", commonsURL='" + commonsURL + '\'' +
             ", distance='" + distance + '\'' +
+            ", thumb='" + thumb + '\'' +
             '}';
     }
 }

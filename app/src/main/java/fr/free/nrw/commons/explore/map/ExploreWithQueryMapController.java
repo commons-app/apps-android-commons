@@ -37,17 +37,17 @@ import java.util.concurrent.ExecutionException;
 import javax.inject.Inject;
 import timber.log.Timber;
 
-public class ExploreMapController extends MapController {
+public class ExploreWithQueryMapController extends MapController {
     private static final int MAX_RESULTS = 1000;
-    private final ExplorePlaces explorePlaces;
+    private final ExploreWithQueryPlaces exploreWithQueryPlaces;
     public static LatLng latestSearchLocation; // Can be current and camera target on search this area button is used
     public static double latestSearchRadius = 10.0; // Any last search radius except closest result search
     public static double farthestDistance;
 
 
     @Inject
-    public ExploreMapController(ExplorePlaces explorePlaces) {
-        this.explorePlaces = explorePlaces;
+    public ExploreWithQueryMapController(ExploreWithQueryPlaces exploreWithQueryPlaces) {
+        this.exploreWithQueryPlaces = exploreWithQueryPlaces;
     }
 
     public ExplorePlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean checkingAroundCurrentLocation) {
@@ -63,7 +63,7 @@ public class ExploreMapController extends MapController {
         try {
             explorePlacesInfo.curLatLng = curLatLng;
             latestSearchLocation = searchLatLng;
-            List<Media> mediaList = explorePlaces.callCommonsQuery(searchLatLng, 30);
+            List<Media> mediaList = exploreWithQueryPlaces.callCommonsQuery(searchLatLng, 30);
 
             LatLng[] boundaryCoordinates = {mediaList.get(0).getCoordinates(),   // south
                 mediaList.get(0).getCoordinates(), // north

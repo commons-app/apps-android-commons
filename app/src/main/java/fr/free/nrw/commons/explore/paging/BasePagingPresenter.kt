@@ -60,7 +60,6 @@ abstract class BasePagingPresenter<T>(
     }
 
     override fun onQueryUpdated(query: String) {
-        Log.d("nesli","test query, wrong place:"+query)
         pageableBaseDataSource.onQueryUpdated(query)
     }
 }

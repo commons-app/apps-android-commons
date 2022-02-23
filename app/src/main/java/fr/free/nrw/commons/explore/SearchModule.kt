@@ -6,6 +6,8 @@ import fr.free.nrw.commons.explore.categories.search.SearchCategoriesFragmentPre
 import fr.free.nrw.commons.explore.categories.search.SearchCategoriesFragmentPresenterImpl
 import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragmentPresenter
 import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragmentPresenterImpl
+import fr.free.nrw.commons.explore.map.ExploreMapMediaPresenter
+import fr.free.nrw.commons.explore.map.ExploreMapMediaPresenterIml
 import fr.free.nrw.commons.explore.media.SearchMediaFragmentPresenter
 import fr.free.nrw.commons.explore.media.SearchMediaFragmentPresenterImpl
 
@@ -26,5 +28,4 @@ abstract class SearchModule {
     abstract fun SearchMediaFragmentPresenterImpl.bindsSearchMediaFragmentPresenter()
             : SearchMediaFragmentPresenter
 
-    //TODO: add explore map thing here
 }

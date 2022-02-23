@@ -17,7 +17,7 @@ import javax.inject.Singleton;
 import timber.log.Timber;
 
 @Singleton
-public class ExplorePlaces {
+public class ExploreWithQueryPlaces {
 
     private static final int MAX_LIMIT = 10000;
     private static final int LIMIT_MULTIPLIER = 2;
@@ -26,7 +26,7 @@ public class ExplorePlaces {
     MediaClient mediaClient;
 
     @Inject
-    public ExplorePlaces() {
+    public ExploreWithQueryPlaces() {
     }
 
     /**
@@ -45,16 +45,16 @@ public class ExplorePlaces {
 
         // Increase the radius gradually to find a satisfactory number of nearby places
         //while (limit <= MAX_LIMIT) {
-            mediaList = getFromCommonsQuery(curLatLng, limit);
-            Timber.d("%d results at limit: %d", mediaList.blockingGet().size(), limit);
-            //if (mediaList.blockingGet().size() >= minResults) {
-              //  break;
-            //}
-            //limit *= LIMIT_MULTIPLIER;
+        mediaList = getFromCommonsQueryWithSearch(curLatLng, limit);
+        Timber.d("%d results at limit: %d", mediaList.blockingGet().size(), limit);
+        //if (mediaList.blockingGet().size() >= minResults) {
+        //  break;
+        //}
+        //limit *= LIMIT_MULTIPLIER;
         //}
         // make sure we will be able to send at least one request next time
 
-       ExploreMapController.farthestDistance = farthestDistance;
+        ExploreMapController.farthestDistance = farthestDistance;
         return mediaList.blockingGet();
     }
 
@@ -65,9 +65,11 @@ public class ExplorePlaces {
      * @return list of places obtained
      * @throws IOException if query fails
      */
-    public Single<List<Media>> getFromCommonsQuery(final LatLng cur, final int limit) throws Exception {
+    public Single<List<Media>> getFromCommonsQueryWithSearch(final LatLng cur, final int limit) throws Exception {
         Log.d("nesli","lat long is"+ cur.getLatitude() + "-" + cur.getLongitude());
         String coordinates = cur.getLatitude() + "|" + cur.getLongitude();
-        return mediaClient.getMediaListFromGeoSearch(coordinates, limit);
+        // TODO search key falan eklenmeli
+        //return mediaClient.getMediaListFromSearchWithLocation(coordinates, limit);
+        return null;
     }
 }

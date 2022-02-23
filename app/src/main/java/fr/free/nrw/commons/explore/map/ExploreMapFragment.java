@@ -108,12 +108,16 @@ public class ExploreMapFragment extends PageableMapFragment
     LocationServiceManager locationManager;
     @Inject
     ExploreMapController exploreMapController;
+    @Inject
+    ExploreWithQueryMapController exploreWithQueryMapController;
     @Inject @Named("default_preferences")
     JsonKvStore applicationKvStore;
     @Inject
     BookmarkLocationsDao bookmarkLocationDao;
     @Inject
     SystemThemeUtils systemThemeUtils;
+
+    private boolean isFromSearchActivity;
 
     /*@BindView(R.id.map_view)
     MapView mapView;
@@ -160,6 +164,12 @@ public class ExploreMapFragment extends PageableMapFragment
         /*if (savedInstanceState != null) {
             onQueryUpdated(savedInstanceState.getString("placeName") + "map query");
         }*/
+
+        if (getActivity() instanceof SearchActivity) {
+            isFromSearchActivity = true;
+        } else {
+            isFromSearchActivity = false;
+        }
 
         initNetworkBroadCastReceiver();
         if (presenter == null) {
@@ -335,10 +345,18 @@ public class ExploreMapFragment extends PageableMapFragment
 
     private void populatePlacesForCurrentLocation(final fr.free.nrw.commons.location.LatLng curlatLng,
         final fr.free.nrw.commons.location.LatLng searchLatLng){
+        final Observable<MapController.ExplorePlacesInfo> nearbyPlacesInfoObservable;
+        if (!isFromSearchActivity) {
+            nearbyPlacesInfoObservable = Observable
+                .fromCallable(() -> exploreMapController
+                    .loadAttractionsFromLocation(curlatLng, searchLatLng,true));
 
-        final Observable<MapController.ExplorePlacesInfo> nearbyPlacesInfoObservable = Observable
-            .fromCallable(() -> exploreMapController
-                .loadAttractionsFromLocation(curlatLng, searchLatLng,true));
+        } else {
+            //Log.d("nesli3","presenters data source is:"+getPagedListAdapter().getCurrentList().snapshot());
+            nearbyPlacesInfoObservable = Observable
+                .fromCallable(() -> exploreWithQueryMapController
+                    .loadAttractionsFromLocation(curlatLng, searchLatLng,true));
+        }
 
         compositeDisposable.add(nearbyPlacesInfoObservable
             .subscribeOn(Schedulers.io())
