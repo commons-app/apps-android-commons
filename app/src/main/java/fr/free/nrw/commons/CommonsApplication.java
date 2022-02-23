@@ -136,7 +136,7 @@ public class CommonsApplication extends MultiDexApplication {
     ContributionDao contributionDao;
 
     /**
-     *  In memory list of contribution whose uploads have been paused by the user
+     *  In-memory list of contributions whose uploads have been paused by the user
      */
     public static Map<String, Boolean> pauseUploads = new HashMap<>();
 
