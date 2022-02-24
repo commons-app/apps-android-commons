@@ -686,4 +686,6 @@ Upload your first media by tapping on the add button.</string>
   <string name="no_location_found_message">How about adding the place where this image was taken?\nLocation data helps Wiki editors find your picture, making it much more useful.\nThank you!</string>
   <string name="add_location">Add location</string>
   <string name="feedback_sharing_data_alert">Please remove from this email any information that you are not comfortable sharing publicly. Also, please be aware that your email address with which you are posting, and the associated name and profile picture, will be visible publicly.</string>
+  <string name="achievements_unavailable_beta">Achievements are only available in the prod flavor.</string>
+  <string name="leaderboard_unavailable_beta">The leaderboard is only available in the prod flavor.</string>
 </resources>
