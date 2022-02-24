@@ -2,7 +2,9 @@ package fr.free.nrw.commons.profile.achievements
 
 import android.content.Context
 import android.os.Looper
+import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -47,6 +49,10 @@ class AchievementsFragmentUnitTests {
     private lateinit var menuItem: MenuItem
 
     private lateinit var achievements: Achievements
+
+    private lateinit var view: View
+
+    private lateinit var layoutInflater: LayoutInflater
 
     @Mock
     private lateinit var imageView: ImageView
@@ -107,7 +113,11 @@ class AchievementsFragmentUnitTests {
         val fragmentManager: FragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(fragment, null)
-        fragmentTransaction.commit()
+        fragmentTransaction.commitNowAllowingStateLoss()
+
+        layoutInflater = LayoutInflater.from(activity)
+        view = LayoutInflater.from(activity)
+            .inflate(R.layout.fragment_achievements, null) as View
 
         achievements = Achievements(0, 0, 0, 0, 0, 0, 0)
 
@@ -147,6 +157,12 @@ class AchievementsFragmentUnitTests {
 
         Mockito.`when`(sessionManager.userName).thenReturn("Test")
 
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnCreateView() {
+        fragment.onCreateView(layoutInflater, null, null)
     }
 
     @Test
