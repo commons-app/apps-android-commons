@@ -675,4 +675,6 @@
   <string name="no_location_found_message">מה עם להוסיף את המקום שהתמונה הזאת צולמה בו?\nנתוני מיקום עוזרים לעורכי ויקי למצוא את התמונה שלך, והופכים אותה לשימושית יותר.\nתודה!</string>
   <string name="add_location">הוספת מיקום</string>
   <string name="feedback_sharing_data_alert">נא להסיר מהמכתב הזה כל מידע שאינך רוצה לשתף באופן פומבי. כמו־כן, נא לזכור שכתובת הדוא\"ל שמכתב נשלח ממנה, השם המשויך והתמונה, יהיו מוצגות ציבורית.</string>
+  <string name="achievements_unavailable_beta">ההישגים זמינים רק בגרסה הראשית.</string>
+  <string name="leaderboard_unavailable_beta">לוח המובילים זמין רק בגרסה הראשית.</string>
 </resources>
