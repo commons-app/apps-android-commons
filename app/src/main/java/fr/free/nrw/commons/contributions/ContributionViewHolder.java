@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.contributions;
 
-import android.app.ProgressDialog;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
@@ -24,7 +23,6 @@ import fr.free.nrw.commons.media.MediaClient;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import timber.log.Timber;
 
 public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
@@ -59,10 +57,12 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     private final MediaClient mediaClient;
     private boolean isWikipediaButtonDisplayed;
     private AlertDialog pausingPopUp;
+    private View parent;
 
     ContributionViewHolder(final View parent, final Callback callback,
         final MediaClient mediaClient) {
         super(parent);
+        this.parent = parent;
         this.mediaClient = mediaClient;
         ButterKnife.bind(this, parent);
         this.callback = callback;
@@ -117,8 +117,8 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
                 break;
             case Contribution.STATE_QUEUED:
             case Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE:
-                stateView.setVisibility(View.VISIBLE);
                 progressView.setVisibility(View.GONE);
+                stateView.setVisibility(View.VISIBLE);
                 stateView.setText(R.string.contribution_state_queued);
                 imageOptions.setVisibility(View.GONE);
                 break;
@@ -270,7 +270,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
      */
     private void setPaused() {
         pauseResumeButton.setImageResource(R.drawable.pause_icon);
-        pauseResumeButton.setTag("pause");
+        pauseResumeButton.setTag(parent.getContext().getString(R.string.pause));
     }
 
     /**
@@ -278,6 +278,6 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
      */
     private void setResume() {
         pauseResumeButton.setImageResource(R.drawable.play_icon);
-        pauseResumeButton.setTag("resume");
+        pauseResumeButton.setTag(parent.getContext().getString(R.string.resume));
     }
 }
