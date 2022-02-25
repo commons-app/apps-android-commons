@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentTransaction
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.campaigns.Campaign
+import fr.free.nrw.commons.data.models.Campaign
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.media.MediaDetailPagerFragment

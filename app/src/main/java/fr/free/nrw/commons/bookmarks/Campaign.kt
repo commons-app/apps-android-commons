@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.campaigns
+package fr.free.nrw.commons.data.models
 
 /**
  * A data class to hold a campaign

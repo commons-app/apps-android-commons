@@ -5,6 +5,7 @@ import android.view.View
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.data.models.Campaign
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test

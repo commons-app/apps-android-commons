@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.campaigns
 
 import com.google.gson.annotations.SerializedName
+import fr.free.nrw.commons.data.models.Campaign
 
 /**
  * Data class to hold the response from the campaigns api
