@@ -4,12 +4,15 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
+import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.R
@@ -74,12 +77,41 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
         }
 
         // Open folder if saved in prefs.
-        if(prefs.contains(FOLDER_ID)){
+        if(prefs.contains(FOLDER_ID)) {
             val lastOpenFolderId: Long = prefs.getLong(FOLDER_ID, 0L)
             val lastOpenFolderName: String? = prefs.getString(FOLDER_NAME, null)
             val lastItemId: Long = prefs.getLong(ITEM_ID, 0)
             lastOpenFolderName?.let { onFolderClick(lastOpenFolderId, it, lastItemId) }
         }
+
+            if(isImageGalleryEmpty())
+        {
+            val linearLayout: LinearLayout = findViewById<View>(R.id.linear_layout_noimage) as LinearLayout
+            val textView = TextView(this)
+            textView.text = "No Image Found"
+            textView.textSize = 20f
+            linearLayout.addView(textView)
+        }
+    }
+
+    /**
+     * Checks for no image in gallery.
+     */
+        private fun isImageGalleryEmpty(): Boolean {
+        try {
+            val projection = arrayOf(MediaStore.Images.Media._ID)
+            val cursor: Cursor? = contentResolver.query(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                projection, null, null, null
+            )
+
+            val size: Int? = cursor?.count
+            // If size is 0, there are no images on the SD Card.
+            return size == 0
+
+        } catch (e: Exception) {
+        }
+        return false
     }
 
     /**
