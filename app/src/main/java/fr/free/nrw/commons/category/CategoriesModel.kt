@@ -1,11 +1,11 @@
 package fr.free.nrw.commons.category
 
 import android.text.TextUtils
+import fr.free.nrw.commons.data.models.Category
 import fr.free.nrw.commons.upload.GpsCategoryModel
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.utils.StringSortingUtils
 import io.reactivex.Observable
-import io.reactivex.Single
 import io.reactivex.functions.Function4
 import timber.log.Timber
 import java.util.*
@@ -57,7 +57,14 @@ class CategoriesModel @Inject constructor(
 
         // Newly used category...
         if (category == null) {
-            category = Category(null, item.name, item.description, item.thumbnail, Date(), 0)
+            category = Category(
+                null,
+                item.name,
+                item.description,
+                item.thumbnail,
+                Date(),
+                0
+            )
         }
         category.incTimesUsed()
         categoryDao.save(category)

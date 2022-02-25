@@ -7,11 +7,11 @@ import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.RemoteException
 import com.nhaarman.mockitokotlin2.*
-import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.category.CategoryContentProvider.BASE_URI
 import fr.free.nrw.commons.category.CategoryContentProvider.uriForId
 import fr.free.nrw.commons.category.CategoryDao.Table.*
+import fr.free.nrw.commons.data.models.Category
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -137,8 +137,10 @@ class CategoryDaoTest {
     fun saveNewCategory() {
         val contentUri = CategoryContentProvider.uriForId(111)
         whenever(client.insert(isA(), isA())).thenReturn(contentUri)
-        val category = Category(null, "showImageWithItem", "description",
-            "image", Date(234L), 1)
+        val category = Category(
+            null, "showImageWithItem", "description",
+            "image", Date(234L), 1
+        )
 
         testObject.save(category)
 
