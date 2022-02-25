@@ -2,13 +2,17 @@ package fr.free.nrw.commons.profile.achievements
 
 import android.content.Context
 import android.os.Looper
+import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.dinuscxj.progressbar.CircleProgressBar
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.SessionManager
@@ -28,6 +32,7 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenuItem
+import org.robolectric.shadows.ShadowToast
 import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
@@ -44,6 +49,10 @@ class AchievementsFragmentUnitTests {
     private lateinit var menuItem: MenuItem
 
     private lateinit var achievements: Achievements
+
+    private lateinit var view: View
+
+    private lateinit var layoutInflater: LayoutInflater
 
     @Mock
     private lateinit var imageView: ImageView
@@ -90,6 +99,9 @@ class AchievementsFragmentUnitTests {
     @Mock
     private lateinit var sessionManager: SessionManager
 
+    @Mock
+    private lateinit var parentView: ViewGroup
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
@@ -101,7 +113,11 @@ class AchievementsFragmentUnitTests {
         val fragmentManager: FragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(fragment, null)
-        fragmentTransaction.commit()
+        fragmentTransaction.commitNowAllowingStateLoss()
+
+        layoutInflater = LayoutInflater.from(activity)
+        view = LayoutInflater.from(activity)
+            .inflate(R.layout.fragment_achievements, null) as View
 
         achievements = Achievements(0, 0, 0, 0, 0, 0, 0)
 
@@ -137,9 +153,16 @@ class AchievementsFragmentUnitTests {
         Whitebox.setInternalState(fragment, "imagesRevertLimitText", imagesRevertLimitText)
         Whitebox.setInternalState(fragment, "item", menuItem)
         Whitebox.setInternalState(fragment, "sessionManager", sessionManager)
+        Whitebox.setInternalState(fragment, "mView", parentView)
 
         Mockito.`when`(sessionManager.userName).thenReturn("Test")
 
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnCreateView() {
+        fragment.onCreateView(layoutInflater, null, null)
     }
 
     @Test
@@ -326,4 +349,30 @@ class AchievementsFragmentUnitTests {
         method.isAccessible = true
         method.invoke(fragment)
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun testMenuVisibilityOverrideNotVisible() {
+        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
+            "setMenuVisibility",
+            Boolean::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, false)
+        Assert.assertNull(ShadowToast.getLatestToast())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testMenuVisibilityOverrideVisibleWithContext() {
+        Mockito.`when`(parentView.context).thenReturn(context)
+        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
+            "setMenuVisibility",
+            Boolean::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, true)
+        Assert.assertEquals(ShadowToast.getTextOfLatestToast().toString(), context.getString(R.string.achievements_unavailable_beta))
+    }
+
 }
