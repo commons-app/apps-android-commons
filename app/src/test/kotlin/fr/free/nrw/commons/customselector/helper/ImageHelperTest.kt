@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.customselector.helper
 
 import android.net.Uri
-import fr.free.nrw.commons.customselector.model.Folder
-import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.data.models.model.Folder
+import fr.free.nrw.commons.data.models.model.Image
 import org.junit.jupiter.api.Assertions.*
 
 import org.junit.jupiter.api.Test

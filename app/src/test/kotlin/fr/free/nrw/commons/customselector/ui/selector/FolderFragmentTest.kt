@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
-import fr.free.nrw.commons.customselector.model.Result
+import fr.free.nrw.commons.data.models.model.Result
 import android.widget.ProgressBar
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -15,7 +15,7 @@ import com.facebook.soloader.SoLoader
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.customselector.model.CallbackStatus
+import fr.free.nrw.commons.data.models.model.CallbackStatus
 import fr.free.nrw.commons.customselector.ui.adapter.FolderAdapter
 import org.junit.Before
 import org.junit.Test

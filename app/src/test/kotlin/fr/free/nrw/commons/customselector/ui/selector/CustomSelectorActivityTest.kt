@@ -2,13 +2,9 @@ package fr.free.nrw.commons.customselector.ui.selector
 
 import android.net.Uri
 import android.os.Bundle
-import android.os.Looper
-import android.os.Looper.getMainLooper
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.contributions.MainActivity
-import fr.free.nrw.commons.customselector.model.Folder
-import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.data.models.model.Image
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertNotNull
@@ -16,8 +12,6 @@ import org.junit.runner.RunWith
 import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.Shadows
-import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.wikipedia.AppAdapter
 import java.lang.reflect.Method

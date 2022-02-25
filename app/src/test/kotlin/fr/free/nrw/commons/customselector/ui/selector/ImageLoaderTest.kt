@@ -5,9 +5,9 @@ import android.content.Context
 import android.net.Uri
 import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.customselector.database.UploadedStatus
+import fr.free.nrw.commons.data.models.model.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
-import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.data.models.model.Image
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
 import fr.free.nrw.commons.filepicker.PickedFiles
 import fr.free.nrw.commons.filepicker.UploadableFile

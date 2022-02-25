@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.customselector.database
 
 import androidx.room.*
+import fr.free.nrw.commons.data.models.model.UploadedStatus
 import java.util.*
 
 /**
@@ -50,7 +51,7 @@ abstract class UploadedStatusDao {
     /**
      * Asynchronous image sha1 query.
      */
-    suspend fun getUploadedFromImageSHA1(imageSHA1: String):UploadedStatus? {
+    suspend fun getUploadedFromImageSHA1(imageSHA1: String): UploadedStatus? {
         return getFromImageSHA1(imageSHA1)
     }
 }

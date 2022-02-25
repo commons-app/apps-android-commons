@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,16 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
-import fr.free.nrw.commons.customselector.model.CallbackStatus
-import fr.free.nrw.commons.customselector.model.Image
-import fr.free.nrw.commons.customselector.model.Result
+import fr.free.nrw.commons.data.models.model.CallbackStatus
+import fr.free.nrw.commons.data.models.model.Image
+import fr.free.nrw.commons.data.models.model.Result
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.theme.BaseActivity
 import kotlinx.android.synthetic.main.fragment_custom_selector.view.*
-import java.io.File
-import java.io.FileInputStream
-import java.net.URI
 import javax.inject.Inject
 
 /**

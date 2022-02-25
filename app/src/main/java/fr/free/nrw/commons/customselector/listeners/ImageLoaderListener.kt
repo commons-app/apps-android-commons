@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.customselector.listeners
 
-import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.data.models.model.Image
 
 /**
  * Custom Selector Image Loader Listener
