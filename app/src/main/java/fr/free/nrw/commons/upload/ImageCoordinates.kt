@@ -18,6 +18,10 @@ class ImageCoordinates internal constructor(exif: ExifInterface?) {
      * @return string of `"[decLatitude]|[decLongitude]"` or null if coordinates do not exist
      */
     var decimalCoords: String? = null
+    var zoomLevel : Double = 16.0
+    /**
+     *  @return double value of zoom or 16.0 by default
+     */
 
     /**
      * Construct from a stream.

@@ -10,8 +10,10 @@ import static fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_D
 import static fr.free.nrw.commons.description.EditDescriptionConstants.UPDATED_WIKITEXT;
 import static fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT;
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION;
-
+import android.content.res.Resources;
+import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
 import android.annotation.SuppressLint;
+import java.lang.reflect.Field;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -82,6 +84,7 @@ import fr.free.nrw.commons.description.DescriptionEditHelper;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
@@ -119,6 +122,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     private boolean isDeleted = false;
     private boolean isWikipediaButtonDisplayed;
     private Callback callback;
+
+    @Inject
+    LocationServiceManager locationManager;
 
 
     public static MediaDetailFragment forMedia(int index, boolean editable, boolean isCategoryImage, boolean isWikipediaButtonDisplayed) {
@@ -265,6 +271,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     //Had to make this class variable, to implement various onClicks, which access the media, also I fell why make separate variables when one can serve the purpose
     private Media media;
     private ArrayList<String> reasonList;
+    private ArrayList<String> reasonListEnglishMappings;
 
     /**
      * Height stores the height of the frame layout as soon as it is initialised and updates itself on
@@ -324,6 +331,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         reasonList.add(getString(R.string.deletion_reason_not_interesting));
         reasonList.add(getString(R.string.deletion_reason_no_longer_want_public));
         reasonList.add(getString(R.string.deletion_reason_bad_for_my_privacy));
+
+        // Add corresponding mappings in english locale so that we can upload it in deletion request
+        reasonListEnglishMappings = new ArrayList<>();
+        reasonListEnglishMappings.add(getLocalizedResources(getContext(), Locale.ENGLISH).getString(R.string.deletion_reason_uploaded_by_mistake));
+        reasonListEnglishMappings.add(getLocalizedResources(getContext(), Locale.ENGLISH).getString(R.string.deletion_reason_publicly_visible));
+        reasonListEnglishMappings.add(getLocalizedResources(getContext(), Locale.ENGLISH).getString(R.string.deletion_reason_not_interesting));
+        reasonListEnglishMappings.add(getLocalizedResources(getContext(), Locale.ENGLISH).getString(R.string.deletion_reason_no_longer_want_public));
+        reasonListEnglishMappings.add(getLocalizedResources(getContext(), Locale.ENGLISH).getString(R.string.deletion_reason_bad_for_my_privacy));
 
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
 
@@ -847,9 +862,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             defaultLatitude = media.getCoordinates().getLatitude();
             defaultLongitude = media.getCoordinates().getLongitude();
         } else {
-            String[] lastLocation = applicationKvStore.getString(LAST_LOCATION,(defaultLatitude + "," + defaultLongitude)).split(",");
-            defaultLatitude = Double.parseDouble(lastLocation[0]);
-            defaultLongitude = Double.parseDouble(lastLocation[1]);
+            if(locationManager.getLastLocation()!=null) {
+                defaultLatitude = locationManager.getLastLocation().getLatitude();
+                defaultLongitude = locationManager.getLastLocation().getLongitude();
+            } else {
+                String[] lastLocation = applicationKvStore.getString(LAST_LOCATION,(defaultLatitude + "," + defaultLongitude)).split(",");
+                defaultLatitude = Double.parseDouble(lastLocation[0]);
+                defaultLongitude = Double.parseDouble(lastLocation[1]);
+            }
         }
 
         startActivityForResult(new LocationPicker.IntentBuilder()
@@ -1213,9 +1233,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     private void onDeleteClicked(Spinner spinner) {
         applicationKvStore.putBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), true);
         enableProgressBar();
-        String reason = spinner.getSelectedItem().toString();
+        String reason = reasonListEnglishMappings.get(spinner.getSelectedItemPosition());
+        String finalReason = reason;
         Single<Boolean> resultSingle = reasonBuilder.getReason(media, reason)
-            .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
+                .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, finalReason));
         resultSingle
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

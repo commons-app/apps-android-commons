@@ -534,6 +534,8 @@
   <string name="nearby_search_hint">Brug, museum, hotel, enz.</string>
   <string name="you_must_reset_your_passsword">Er is iets misgegaan met inloggen, u moet uw wachtwoord opnieuw instellen !!</string>
   <string name="title_for_media">MEDIA</string>
+  <string name="title_for_child_classes">SUBKLASSEN</string>
+  <string name="title_for_parent_classes">HOOFDKLASSEN</string>
   <string name="upload_nearby_place_found_title">Plaats in de buurt gevonden</string>
   <string name="upload_nearby_place_found_description">Is dit een foto van plaats %1$s?</string>
   <string name="title_app_shortcut_bookmark">Bladwijzers</string>
@@ -656,4 +658,8 @@
   <string name="apply">Toepassen</string>
   <string name="reset">Opnieuw instellen</string>
   <string name="location_message">Locatiegegevens helpen wiki-bewerkers om uw foto te vinden, waardoor deze veel nuttiger wordt.\nUw recente uploads hebben geen locatie.\nWe raden u aan om de locatie in de instellingen van uw camera-app in te schakelen.\nBedankt voor het uploaden!</string>
+  <string name="no_location_found_title">Geen locatie gevonden</string>
+  <string name="no_location_found_message">Misschien kunt u aangeven waar deze foto is genomen?\nLocatie data helpt Wiki redacteurs om uw afbeelding te vinden, waardoor deze veel nuttiger wordt.\nAlvast bedankt!</string>
+  <string name="add_location">Locatie toevoegen</string>
+  <string name="feedback_sharing_data_alert">Verwijder alstublieft informatie uit deze email die u liever niet openbaar wilt maken. Wees er ook van op de hoogte dat het emailadres en de bijbehorende gebruikersnaam en profielafbeelding die u gebruikt openbaar zichtbaar zullen zijn.</string>
 </resources>

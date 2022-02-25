@@ -60,6 +60,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * from applicationKvStore.
      */
     public static final String LAST_LOCATION = "last_location_while_uploading";
+    public static final String LAST_ZOOM = "last_zoom_level_while_uploading";
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.ib_map)
@@ -93,6 +94,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private Place place;
 
     private boolean isExpanded = true;
+
+    /**
+     * True if location is added via the "missing location" popup dialog (which appears after tapping
+     * "Next" if the picture has no geographical coordinates).
+     */
+    private boolean isMissingLocationDialog;
 
     /**
      * showNearbyFound will be true, if any nearby location found that needs pictures and the nearby popup is yet to be shown
@@ -424,17 +431,19 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         editableUploadItem = uploadItem;
         double defaultLatitude = 37.773972;
         double defaultLongitude = -122.431297;
+        double defaultZoom = 16.0;
 
-        if (uploadItem.getGpsCoords()
+        if (uploadItem.getGpsCoords() != null && uploadItem.getGpsCoords()
             .getDecLatitude() != 0.0 && uploadItem.getGpsCoords().getDecLongitude() != 0.0) {
             defaultLatitude = uploadItem.getGpsCoords()
                 .getDecLatitude();
             defaultLongitude = uploadItem.getGpsCoords().getDecLongitude();
+            defaultZoom = uploadItem.getGpsCoords().getZoomLevel();
             startActivityForResult(new LocationPicker.IntentBuilder()
                 .defaultLocation(new CameraPosition.Builder()
                     .target(
                         new com.mapbox.mapboxsdk.geometry.LatLng(defaultLatitude, defaultLongitude))
-                    .zoom(16).build())
+                    .zoom(defaultZoom).build())
                 .activityKey("UploadActivity")
                 .build(getActivity()), REQUEST_CODE);
         } else {
@@ -444,11 +453,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 defaultLatitude = Double.parseDouble(locationLatLng[0]);
                 defaultLongitude = Double.parseDouble(locationLatLng[1]);
             }
+            if(defaultKvStore.getString(LAST_ZOOM) != null){
+                defaultZoom = Double.parseDouble(defaultKvStore.getString(LAST_ZOOM));
+            }
             startActivityForResult(new LocationPicker.IntentBuilder()
                 .defaultLocation(new CameraPosition.Builder()
                     .target(
                         new com.mapbox.mapboxsdk.geometry.LatLng(defaultLatitude, defaultLongitude))
-                    .zoom(16).build())
+                    .zoom(defaultZoom).build())
                 .activityKey("NoLocationUploadActivity")
                 .build(getActivity()), REQUEST_CODE);
         }
@@ -474,8 +486,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
                 final String latitude = String.valueOf(cameraPosition.target.getLatitude());
                 final String longitude = String.valueOf(cameraPosition.target.getLongitude());
+                final double zoom = cameraPosition.zoom;
 
-                editLocation(latitude, longitude);
+                editLocation(latitude, longitude,zoom);
+                /*
+                       If isMissingLocationDialog is true, it means that the user has already tapped the
+                       "Next" button, so go directly to the next step.
+                 */
+                if(isMissingLocationDialog){
+                    isMissingLocationDialog = false;
+                    onNextButtonClicked();
+                }
             }
         }
     }
@@ -485,12 +506,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * @param latitude new latitude
      * @param longitude new longitude
      */
-    public void editLocation(final String latitude, final String longitude){
+    public void editLocation(final String latitude, final String longitude, final double zoom){
 
         editableUploadItem.getGpsCoords().setDecLatitude(Double.parseDouble(latitude));
         editableUploadItem.getGpsCoords().setDecLongitude(Double.parseDouble(longitude));
         editableUploadItem.getGpsCoords().setDecimalCoords(latitude+"|"+longitude);
         editableUploadItem.getGpsCoords().setImageCoordsExists(true);
+        editableUploadItem.getGpsCoords().setZoomLevel(zoom);
         Toast.makeText(getContext(), "Location Updated", Toast.LENGTH_LONG).show();
 
     }
@@ -507,6 +529,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     @Override
     public void displayAddLocationDialog(final Runnable onSkipClicked) {
+        isMissingLocationDialog = true;
         DialogUtil.showAlertDialog(Objects.requireNonNull(getActivity()),
             getString(R.string.no_location_found_title),
             getString(R.string.no_location_found_message),

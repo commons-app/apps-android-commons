@@ -2,6 +2,7 @@
 <!-- Authors:
 * BPX-web
 * Bjarncraft
+* Brettchenweber
 * Bxalber
 * Elliot
 * Envlh
@@ -660,7 +661,7 @@
   <string name="reset">Zurücksetzen</string>
   <string name="location_message">Standortdaten helfen den Wiki-Benutzern, dein Bild zu finden, was es viel nützlicher macht.\nDeine zuletzt hochgaldenen Fotos haben keinen Standort.\nWir empfehlen dir, den Standort in den Einstellungen deiner Kamera-App zu aktivieren.\nVielen Dank für das Hochladen!</string>
   <string name="no_location_found_title">Kein Standort gefunden</string>
-  <string name="no_location_found_message">Wie wäre es, den Ort hinzuzufügen, an dem das Bild aufgenommen wurde?\nOrtsangaben helfen Wiki-Benutzern, dein Bild zu finden, und machen es so viel nützlicher.\nDankeschön!</string>
+  <string name="no_location_found_message">Wie wäre es, den Ort hinzuzufügen, an dem das Bild aufgenommen wurde?\nOrtsangaben helfen Wiki-Benutzern, dein Bild zu finden, und machen es so viel nützlicher.\nDanke schön!</string>
   <string name="add_location">Standort hinzufügen</string>
   <string name="feedback_sharing_data_alert">Bitte entferne aus dieser E-Mail alle Informationen, die du nicht öffentlich mitteilen möchtest. Bitte beachte auch, dass deine E-Mail-Adresse, mit der du schreibst, sowie der dazugehörige Name und das Profilbild öffentlich sichtbar sind.</string>
 </resources>
