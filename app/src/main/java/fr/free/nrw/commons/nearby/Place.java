@@ -4,13 +4,11 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import android.text.TextUtils;
 import androidx.annotation.Nullable;
 
-import fr.free.nrw.commons.nearby.NearbyController.NearbyPlacesInfo;
 import org.apache.commons.lang3.StringUtils;
 
-import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.data.models.location.LatLng;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.utils.PlaceUtils;
 import timber.log.Timber;

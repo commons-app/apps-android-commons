@@ -3,7 +3,7 @@ package fr.free.nrw.commons.nearby
 import com.mapbox.mapboxsdk.annotations.Marker
 import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
-import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.data.models.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
@@ -202,7 +202,13 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testSearchThisAreaButtonVisibleWhenMoveToFarPosition() {
-        NearbyController.latestSearchLocation = Mockito.spy(LatLng(2.0,1.0,0.0F))
+        NearbyController.latestSearchLocation = Mockito.spy(
+            LatLng(
+                2.0,
+                1.0,
+                0.0F
+            )
+        )
         mapboxCameraTarget = Mockito.spy(com.mapbox.mapboxsdk.geometry.LatLng(1.0,1.0,0.0))
         // Distance between these two point is 111.19 km
         NearbyController.latestSearchRadius = 111.0*1000 // To meter
@@ -219,7 +225,13 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testSearchThisAreaButtonInvisibleWhenMoveToClosePosition() {
-        NearbyController.latestSearchLocation = Mockito.spy(LatLng(2.0,1.0,0.0F))
+        NearbyController.latestSearchLocation = Mockito.spy(
+            LatLng(
+                2.0,
+                1.0,
+                0.0F
+            )
+        )
         mapboxCameraTarget = Mockito.spy(com.mapbox.mapboxsdk.geometry.LatLng(1.0,1.0,0.0))
         // Distance between these two point is 111.19 km
         NearbyController.latestSearchRadius = 112.0*1000 // To meter
@@ -337,7 +349,13 @@ class NearbyParentFragmentPresenterTest {
         whenever(nearbyParentFragmentView.getLastFocusLocation()).
             thenReturn(com.mapbox.mapboxsdk.geometry.LatLng(1.0,1.0,0.0))
         whenever(nearbyParentFragmentView.getCameraTarget()).
-                thenReturn(LatLng(2.0,1.0,0.0F))
+                thenReturn(
+                    LatLng(
+                        2.0,
+                        1.0,
+                        0.0F
+                    )
+                )
         //111.19 km real distance, return false if 148306.444306 >  currentLocationSearchRadius
         NearbyController.currentLocationSearchRadius = 148306.0
         val isClose = nearbyPresenter?.searchCloseToCurrentLocation()
@@ -352,7 +370,13 @@ class NearbyParentFragmentPresenterTest {
         whenever(nearbyParentFragmentView.getLastFocusLocation()).
             thenReturn(com.mapbox.mapboxsdk.geometry.LatLng(1.0,1.0,0.0))
         whenever(nearbyParentFragmentView.getCameraTarget()).
-            thenReturn(LatLng(2.0,1.0,0.0F))
+            thenReturn(
+                LatLng(
+                    2.0,
+                    1.0,
+                    0.0F
+                )
+            )
         //111.19 km real distance, return false if 148253.333 >  currentLocationSearchRadius
         NearbyController.currentLocationSearchRadius = 148307.0
         val isClose = nearbyPresenter?.searchCloseToCurrentLocation()

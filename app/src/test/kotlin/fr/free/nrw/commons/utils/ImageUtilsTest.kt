@@ -4,7 +4,7 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.graphics.Bitmap
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.data.models.location.LatLng
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import io.reactivex.disposables.CompositeDisposable
 import org.junit.Assert

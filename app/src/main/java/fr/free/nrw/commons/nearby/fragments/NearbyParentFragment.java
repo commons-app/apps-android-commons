@@ -233,10 +233,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private Marker currentLocationMarker;
     private Polygon currentLocationPolygon;
     private Place lastPlaceToCenter;
-    private fr.free.nrw.commons.location.LatLng lastKnownLocation;
+    private fr.free.nrw.commons.data.models.location.LatLng lastKnownLocation;
     private boolean isVisibleToUser;
     private MapboxMap.OnCameraMoveListener cameraMoveListener;
-    private fr.free.nrw.commons.location.LatLng lastFocusLocation;
+    private fr.free.nrw.commons.data.models.location.LatLng lastFocusLocation;
     private LatLngBounds latLngBounds;
     private PlaceAdapter adapter;
     private NearbyParentFragmentInstanceReadyCallback nearbyParentFragmentInstanceReadyCallback;
@@ -453,7 +453,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         applicationKvStore.putBoolean("doNotAskForLocationPermission", false);
         lastKnownLocation = locationManager.getLastLocation();
-        fr.free.nrw.commons.location.LatLng target=lastFocusLocation;
+        fr.free.nrw.commons.data.models.location.LatLng target=lastFocusLocation;
         if(null==lastFocusLocation){
             target=lastKnownLocation;
         }
@@ -515,7 +515,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             final String[] locationLatLng
                 = applicationKvStore.getString("LastLocation").split(",");
             lastKnownLocation
-                = new fr.free.nrw.commons.location.LatLng(Double.parseDouble(locationLatLng[0]),
+                = new fr.free.nrw.commons.data.models.location.LatLng(Double.parseDouble(locationLatLng[0]),
                 Double.parseDouble(locationLatLng[1]), 1f);
             position = new CameraPosition.Builder()
                 .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation))
@@ -523,7 +523,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .build();
 
         } else {
-            lastKnownLocation = new fr.free.nrw.commons.location.LatLng(51.50550,
+            lastKnownLocation = new fr.free.nrw.commons.data.models.location.LatLng(51.50550,
                 -0.07520,1f);
             position = new CameraPosition.Builder()
                 .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation))
@@ -922,7 +922,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
             final CameraPosition position = new CameraPosition.Builder()
                     .target(LocationUtils.commonsLatLngToMapBoxLatLng(
-                            new fr.free.nrw.commons.location.LatLng(lastPlaceToCenter.location.getLatitude() - cameraShift,
+                            new fr.free.nrw.commons.data.models.location.LatLng(lastPlaceToCenter.location.getLatitude() - cameraShift,
                                     lastPlaceToCenter.getLocation().getLongitude(),
                                     0))) // Sets the new camera position
                     .zoom(ZOOM_LEVEL) // Same zoom level
@@ -940,7 +940,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public fr.free.nrw.commons.location.LatLng getLastLocation() {
+    public fr.free.nrw.commons.data.models.location.LatLng getLastLocation() {
         return lastKnownLocation;
     }
 
@@ -978,7 +978,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void centerMapToPosition(fr.free.nrw.commons.location.LatLng searchLatLng) {
+    public void centerMapToPosition(fr.free.nrw.commons.data.models.location.LatLng searchLatLng) {
         final CameraPosition cameraPosition = mapBox.getCameraPosition();
         if (null != searchLatLng && !(
             cameraPosition.target.getLatitude() == searchLatLng.getLatitude()
@@ -1043,7 +1043,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void populatePlaces(final fr.free.nrw.commons.location.LatLng curlatLng) {
+    public void populatePlaces(final fr.free.nrw.commons.data.models.location.LatLng curlatLng) {
         if (curlatLng.equals(lastFocusLocation) || lastFocusLocation == null || recenterToUserLocation) { // Means we are checking around current location
             populatePlacesForCurrentLocation(lastKnownLocation, curlatLng, null);
         } else {
@@ -1055,7 +1055,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void populatePlaces(final fr.free.nrw.commons.location.LatLng curlatLng,
+    public void populatePlaces(final fr.free.nrw.commons.data.models.location.LatLng curlatLng,
         @Nullable final String customQuery) {
         if (customQuery == null || customQuery.isEmpty()) {
             populatePlaces(curlatLng);
@@ -1074,8 +1074,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void populatePlacesForCurrentLocation(
-        final fr.free.nrw.commons.location.LatLng curlatLng,
-        final fr.free.nrw.commons.location.LatLng searchLatLng, @Nullable final String customQuery){
+        final fr.free.nrw.commons.data.models.location.LatLng curlatLng,
+        final fr.free.nrw.commons.data.models.location.LatLng searchLatLng, @Nullable final String customQuery){
 
         final Observable<NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
@@ -1103,8 +1103,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void populatePlacesForAnotherLocation(
-        final fr.free.nrw.commons.location.LatLng curlatLng,
-        final fr.free.nrw.commons.location.LatLng searchLatLng, @Nullable final String customQuery){
+        final fr.free.nrw.commons.data.models.location.LatLng curlatLng,
+        final fr.free.nrw.commons.data.models.location.LatLng searchLatLng, @Nullable final String customQuery){
         final Observable<NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(curlatLng, searchLatLng,
@@ -1301,7 +1301,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
     }
 
-    private void handleLocationUpdate(final fr.free.nrw.commons.location.LatLng latLng, final LocationServiceManager.LocationChangeType locationChangeType){
+    private void handleLocationUpdate(final fr.free.nrw.commons.data.models.location.LatLng latLng, final LocationServiceManager.LocationChangeType locationChangeType){
         lastKnownLocation = latLng;
         NearbyController.currentLocation = lastKnownLocation;
         presenter.updateMapAndList(locationChangeType);
@@ -1313,7 +1313,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void onLocationChangedSignificantly(final fr.free.nrw.commons.location.LatLng latLng) {
+    public void onLocationChangedSignificantly(final fr.free.nrw.commons.data.models.location.LatLng latLng) {
         Timber.d("Location significantly changed");
         if (isMapBoxReady && latLng != null &&!isUserBrowsing()) {
             handleLocationUpdate(latLng,LOCATION_SIGNIFICANTLY_CHANGED);
@@ -1321,7 +1321,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void onLocationChangedSlightly(final fr.free.nrw.commons.location.LatLng latLng) {
+    public void onLocationChangedSlightly(final fr.free.nrw.commons.data.models.location.LatLng latLng) {
         Timber.d("Location slightly changed");
         if (isMapBoxReady && latLng != null &&!isUserBrowsing()) {//If the map has never ever shown the current location, lets do it know
             handleLocationUpdate(latLng,LOCATION_SLIGHTLY_CHANGED);
@@ -1329,7 +1329,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void onLocationChangedMedium(final fr.free.nrw.commons.location.LatLng latLng) {
+    public void onLocationChangedMedium(final fr.free.nrw.commons.data.models.location.LatLng latLng) {
         Timber.d("Location changed medium");
         if (isMapBoxReady && latLng != null && !isUserBrowsing()) {//If the map has never ever shown the current location, lets do it know
             handleLocationUpdate(latLng, LOCATION_SIGNIFICANTLY_CHANGED);
@@ -1387,7 +1387,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param curLatLng current location
      */
     @Override
-    public void addCurrentLocationMarker(final fr.free.nrw.commons.location.LatLng curLatLng) {
+    public void addCurrentLocationMarker(final fr.free.nrw.commons.data.models.location.LatLng curLatLng) {
         if (null != curLatLng && !isPermissionDenied && locationManager.isGPSProviderEnabled()) {
             ExecutorUtils.get().submit(() -> {
                 mapView.post(() -> removeCurrentLocationMarker());
@@ -1435,7 +1435,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param curLatLng current location of user
      */
     @Override
-    public void updateMapToTrackPosition(final fr.free.nrw.commons.location.LatLng curLatLng) {
+    public void updateMapToTrackPosition(final fr.free.nrw.commons.data.models.location.LatLng curLatLng) {
         Timber.d("Updates map camera to track user position");
         final CameraPosition cameraPosition;
         if(isPermissionDenied){
@@ -1550,7 +1550,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public fr.free.nrw.commons.location.LatLng getCameraTarget() {
+    public fr.free.nrw.commons.data.models.location.LatLng getCameraTarget() {
         return mapBox==null?null:LocationUtils.mapBoxLatLngToCommonsLatLng(mapBox.getCameraPosition().target);
     }
 
@@ -1560,7 +1560,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param place
      * @param curLatLng current location
      */
-    public void updateMarker(final boolean isBookmarked, final Place place, @Nullable final fr.free.nrw.commons.location.LatLng curLatLng) {
+    public void updateMarker(final boolean isBookmarked, final Place place, @Nullable final fr.free.nrw.commons.data.models.location.LatLng curLatLng) {
         VectorDrawableCompat vectorDrawable = VectorDrawableCompat.create(
             getContext().getResources(), getIconFor(place, isBookmarked), getContext().getTheme());
 
@@ -1661,7 +1661,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void recenterMap(fr.free.nrw.commons.location.LatLng curLatLng) {
+    public void recenterMap(fr.free.nrw.commons.data.models.location.LatLng curLatLng) {
         if (isPermissionDenied || curLatLng == null) {
             recenterToUserLocation = true;
             checkPermissionsAndPerformAction();

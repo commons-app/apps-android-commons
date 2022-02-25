@@ -7,7 +7,7 @@ import com.google.gson.reflect.TypeToken;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.contributions.ChunkInfo;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.data.models.location.LatLng;
 import fr.free.nrw.commons.upload.WikidataPlace;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import java.util.Date;

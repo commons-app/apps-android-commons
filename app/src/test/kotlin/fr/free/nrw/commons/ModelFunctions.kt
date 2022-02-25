@@ -2,7 +2,7 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.category.CategoryItem
-import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.data.models.location.LatLng
 import fr.free.nrw.commons.nearby.Label
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.Sitelinks
@@ -45,7 +45,11 @@ fun media(
     user:String?="user",
     pageId: String = "pageId",
     categories: List<String>? = listOf("categories"),
-    coordinates: LatLng? = LatLng(0.0, 0.0, 0.0f),
+    coordinates: LatLng? = LatLng(
+        0.0,
+        0.0,
+        0.0f
+    ),
     captions: Map<String, String> = mapOf("en" to "caption"),
     descriptions: Map<String, String> = mapOf("en" to "description"),
     depictionIds: List<String> = listOf("depictionId")

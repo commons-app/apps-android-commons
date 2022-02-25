@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.utils
 
-import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.data.models.location.LatLng
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 
@@ -25,7 +25,13 @@ class LocationUtilsTest {
      */
     @Test
     fun testCommonsLatLngToMapBoxLatLng() {
-        val geoLatLngTest = LocationUtils.commonsLatLngToMapBoxLatLng(LatLng(0.0, 0.0, 0f))
+        val geoLatLngTest = LocationUtils.commonsLatLngToMapBoxLatLng(
+            LatLng(
+                0.0,
+                0.0,
+                0f
+            )
+        )
         assertEquals(0.0, geoLatLngTest.latitude)
         assertEquals(0.0, geoLatLngTest.longitude)
         assertEquals(0.0, geoLatLngTest.altitude)

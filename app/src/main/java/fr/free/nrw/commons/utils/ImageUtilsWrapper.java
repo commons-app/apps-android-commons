@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.utils;
 
-import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.data.models.location.LatLng;
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
 import javax.inject.Inject;

@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.explore.media
 
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.data.models.location.LatLng
 import fr.free.nrw.commons.upload.structure.depictions.get
 import fr.free.nrw.commons.utils.CommonsDateUtil
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil
@@ -92,6 +92,10 @@ private val ExtMetadata.prefixedLicenseUrl: String
 
 private val ExtMetadata.latLng: LatLng?
     get() = if (!StringUtils.isBlank(gpsLatitude) && !StringUtils.isBlank(gpsLongitude))
-        LatLng(gpsLatitude.toDouble(), gpsLongitude.toDouble(), 0.0f)
+        LatLng(
+            gpsLatitude.toDouble(),
+            gpsLongitude.toDouble(),
+            0.0f
+        )
     else
         null

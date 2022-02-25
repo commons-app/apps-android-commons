@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.upload
 
 import androidx.exifinterface.media.ExifInterface
-import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.data.models.location.LatLng
 import timber.log.Timber
 import java.io.IOException
 import java.io.InputStream
@@ -65,7 +65,11 @@ class ImageCoordinates internal constructor(exif: ExifInterface?) {
         }
     }
 
-    val latLng: LatLng? get() = LatLng(decLatitude, decLongitude, -1.0f)
+    val latLng: LatLng? get() = LatLng(
+        decLatitude,
+        decLongitude,
+        -1.0f
+    )
 
     /**
      * Convert a string to an accurate Degree

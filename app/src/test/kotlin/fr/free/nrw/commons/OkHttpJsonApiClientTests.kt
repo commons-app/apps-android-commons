@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.explore.depictions.DepictsClient
-import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.data.models.location.LatLng
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import okhttp3.Call
 import okhttp3.HttpUrl

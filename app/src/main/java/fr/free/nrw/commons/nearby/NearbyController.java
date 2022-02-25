@@ -12,7 +12,7 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.data.models.location.LatLng;
 import fr.free.nrw.commons.utils.UiUtils;
 import java.util.ArrayList;
 import java.util.Collections;

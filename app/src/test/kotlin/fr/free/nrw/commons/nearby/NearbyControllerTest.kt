@@ -5,7 +5,7 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.eq
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.data.models.location.LatLng
 import fr.free.nrw.commons.nearby.NearbyController.loadAttractionsFromLocationToBaseMarkerOptions
 import fr.free.nrw.commons.nearby.NearbyController.updateMarkerLabelListBookmark
 import org.junit.Before
@@ -126,7 +126,11 @@ class NearbyControllerTest {
             "placeName",
             Label.FOREST,
             "placeDescription",
-            LatLng(-40.69, -74.04, 1.0F),
+            LatLng(
+                -40.69,
+                -74.04,
+                1.0F
+            ),
             "placeCategory",
             Sitelinks.Builder().build(),
             "picName",

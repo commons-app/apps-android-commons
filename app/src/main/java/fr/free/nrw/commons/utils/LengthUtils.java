@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import java.text.NumberFormat;
 
-import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.data.models.location.LatLng;
 
 public class LengthUtils {
     /**

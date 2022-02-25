@@ -1,6 +1,6 @@
 package fr.free.nrw.commons
 
-import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.data.models.location.LatLng
 import fr.free.nrw.commons.nearby.NearbyController.loadAttractionsFromLocationToBaseMarkerOptions
 import androidx.test.core.app.ApplicationProvider
 import org.junit.Assert.assertEquals
@@ -15,7 +15,8 @@ class NearbyControllerTest {
 
     @Test
     fun testNullAttractions() {
-        val location = LatLng(0.0, 0.0, 0f)
+        val location =
+            LatLng(0.0, 0.0, 0f)
 
         val options = loadAttractionsFromLocationToBaseMarkerOptions(
                 location, null, ApplicationProvider.getApplicationContext(), null)
@@ -25,7 +26,8 @@ class NearbyControllerTest {
 
     @Test
     fun testEmptyList() {
-        val location = LatLng(0.0, 0.0, 0f)
+        val location =
+            LatLng(0.0, 0.0, 0f)
 
         val options = loadAttractionsFromLocationToBaseMarkerOptions(
                 location, emptyList(), ApplicationProvider.getApplicationContext(), emptyList())

@@ -19,13 +19,12 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
-import fr.free.nrw.commons.*
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import org.robolectric.Shadows.shadowOf
 import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter
 import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.data.models.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.ui.widget.HtmlTextView
 import org.junit.Assert
@@ -34,10 +33,8 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.contributions.ContributionViewHolder
 import fr.free.nrw.commons.delete.DeleteHelper
 import fr.free.nrw.commons.delete.ReasonBuilder
-import fr.free.nrw.commons.utils.ImageUtils
 import io.reactivex.Single
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -298,7 +295,13 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnUpdateCoordinatesClickedNotNullValue() {
-        `when`(media.coordinates).thenReturn(LatLng(-0.000001, -0.999999, 0f))
+        `when`(media.coordinates).thenReturn(
+            LatLng(
+                -0.000001,
+                -0.999999,
+                0f
+            )
+        )
         `when`(applicationKvStore.getString(LAST_LOCATION)).thenReturn("37.773972,-122.431297")
         fragment.onUpdateCoordinatesClicked()
         Mockito.verify(media, Mockito.times(3)).coordinates
@@ -312,7 +315,13 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnUpdateCoordinatesClickedCurrentLocationNotNull() {
         `when`(media.coordinates).thenReturn(null)
-        `when`(locationManager.lastLocation).thenReturn(LatLng(-0.000001, -0.999999, 0f))
+        `when`(locationManager.lastLocation).thenReturn(
+            LatLng(
+                -0.000001,
+                -0.999999,
+                0f
+            )
+        )
         `when`(applicationKvStore.getString(LAST_LOCATION)).thenReturn("37.773972,-122.431297")
 
         fragment.onUpdateCoordinatesClicked()
@@ -471,7 +480,13 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testPrettyCoordinates() {
-        `when`(media.coordinates).thenReturn(LatLng(-0.000001, -0.999999, 0f))
+        `when`(media.coordinates).thenReturn(
+            LatLng(
+                -0.000001,
+                -0.999999,
+                0f
+            )
+        )
         val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
             "prettyCoordinates",
             Media::class.java

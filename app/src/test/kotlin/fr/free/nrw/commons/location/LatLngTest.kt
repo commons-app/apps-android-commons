@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.location
 
+import fr.free.nrw.commons.data.models.location.LatLng
 import org.junit.Before
 import org.junit.Test
 
@@ -14,25 +15,29 @@ class LatLngTest {
 
     @Test
     fun testConstructorSmallLongitude() {
-        latLng1 = LatLng(0.0, -181.0, 0.0f)
+        latLng1 =
+            LatLng(0.0, -181.0, 0.0f)
         assert(latLng1.longitude == 179.0)
     }
 
     @Test
     fun testConstructorBigLongitude() {
-        latLng1 = LatLng(0.0, 181.0, 0.0f)
+        latLng1 =
+            LatLng(0.0, 181.0, 0.0f)
         assert(latLng1.longitude == -179.0)
     }
 
     @Test
     fun testConstructorSmallLatitude() {
-        latLng1 = LatLng(-91.0, 0.0, 0.0f)
+        latLng1 =
+            LatLng(-91.0, 0.0, 0.0f)
         assert(latLng1.latitude == -90.0)
     }
 
     @Test
     fun testConstructorBigLatitude() {
-        latLng1 = LatLng(91.0, 0.0, 0.0f)
+        latLng1 =
+            LatLng(91.0, 0.0, 0.0f)
         assert(latLng1.latitude == 90.0)
     }
 

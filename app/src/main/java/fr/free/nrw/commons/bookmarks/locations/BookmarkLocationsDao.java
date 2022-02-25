@@ -17,7 +17,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 
-import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.data.models.location.LatLng;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.Sitelinks;

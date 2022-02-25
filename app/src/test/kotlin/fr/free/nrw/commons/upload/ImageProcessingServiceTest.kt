@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.upload
 
 import android.net.Uri
-import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.data.models.location.LatLng
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ImageUtils
@@ -68,7 +68,8 @@ class u {
         `when`(imageUtilsWrapper?.checkIfImageIsTooDark(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(ImageUtils.IMAGE_OK))
 
-        `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(LatLng::class.java)))
+        `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(
+            LatLng::class.java)))
                 .thenReturn(Single.just(ImageUtils.IMAGE_OK))
 
         `when`(fileUtilsWrapper!!.getFileInputStream(ArgumentMatchers.anyString()))
@@ -116,7 +117,8 @@ class u {
 
     @Test
     fun validateImageForWrongGeoLocation() {
-        `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(LatLng::class.java)))
+        `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(
+            LatLng::class.java)))
                 .thenReturn(Single.just(ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
         val validateImage = imageProcessingService!!.validateImage(uploadItem)
         assertEquals(ImageUtils.IMAGE_GEOLOCATION_DIFFERENT, validateImage.blockingGet())

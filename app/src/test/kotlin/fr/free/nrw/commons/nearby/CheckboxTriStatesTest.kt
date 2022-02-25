@@ -5,7 +5,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.data.models.location.LatLng
 import fr.free.nrw.commons.nearby.CheckBoxTriStates.CHECKED
 import fr.free.nrw.commons.nearby.CheckBoxTriStates.UNCHECKED
 import org.junit.Before
@@ -52,7 +52,8 @@ class CheckBoxTriStatesTest {
      */
     @Test
     fun testSetStateWhenDiffState() {
-        NearbyController.currentLocation = LatLng(0.0,0.0,0.0f)
+        NearbyController.currentLocation =
+            LatLng(0.0, 0.0, 0.0f)
         checkBoxTriStates.state = CHECKED
         checkBoxTriStates.setState(UNCHECKED)
         verify(callback).filterByMarkerType(null, UNCHECKED, false, true)

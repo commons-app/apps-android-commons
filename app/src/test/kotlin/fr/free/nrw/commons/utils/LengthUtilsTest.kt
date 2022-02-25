@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.utils
 
-import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.data.models.location.LatLng
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
@@ -10,36 +10,46 @@ class LengthUtilsTest {
 
     @Test
     fun testFormattedDistanceBetweenSamePoints() {
-        val pointA = LatLng(0.0, 0.0, 0f)
-        val pointB = LatLng(0.0, 0.0, 0f)
+        val pointA =
+            LatLng(0.0, 0.0, 0f)
+        val pointB =
+            LatLng(0.0, 0.0, 0f)
         assertFormattedDistanceBetween("0m", pointA, pointB)
     }
 
     @Test
     fun testFormattedOneDegreeOnEquator() {
-        val pointA = LatLng(0.0, 0.0, 0f)
-        val pointB = LatLng(0.0, 1.0, 0f)
+        val pointA =
+            LatLng(0.0, 0.0, 0f)
+        val pointB =
+            LatLng(0.0, 1.0, 0f)
         assertFormattedDistanceBetween("111.2km", pointA, pointB)
     }
 
     @Test
     fun testFormattedOneDegreeFortyFiveDegrees() {
-        val pointA = LatLng(45.0, 0.0, 0f)
-        val pointB = LatLng(45.0, 1.0, 0f)
+        val pointA =
+            LatLng(45.0, 0.0, 0f)
+        val pointB =
+            LatLng(45.0, 1.0, 0f)
         assertFormattedDistanceBetween("78.6km", pointA, pointB)
     }
 
     @Test
     fun testFormattedOneDegreeSouthPole() {
-        val pointA = LatLng(-90.0, 0.0, 0f)
-        val pointB = LatLng(-90.0, 1.0, 0f)
+        val pointA =
+            LatLng(-90.0, 0.0, 0f)
+        val pointB =
+            LatLng(-90.0, 1.0, 0f)
         assertFormattedDistanceBetween("0m", pointA, pointB)
     }
 
     @Test
     fun testFormattedPoleToPole() {
-        val pointA = LatLng(90.0, 0.0, 0f)
-        val pointB = LatLng(-90.0, 0.0, 0f)
+        val pointA =
+            LatLng(90.0, 0.0, 0f)
+        val pointB =
+            LatLng(-90.0, 0.0, 0f)
         assertFormattedDistanceBetween("20,015.1km", pointA, pointB)
     }
 
@@ -73,36 +83,46 @@ class LengthUtilsTest {
 
     @Test
     fun testDistanceBetweenSamePoints() {
-        val pointA = LatLng(0.0, 0.0, 0f)
-        val pointB = LatLng(0.0, 0.0, 0f)
+        val pointA =
+            LatLng(0.0, 0.0, 0f)
+        val pointB =
+            LatLng(0.0, 0.0, 0f)
         assertDistanceBetween(0.0, pointA, pointB)
     }
 
     @Test
     fun testDistanceOneDegreeOnEquator() {
-        val pointA = LatLng(0.0, 0.0, 0f)
-        val pointB = LatLng(0.0, 1.0, 0f)
+        val pointA =
+            LatLng(0.0, 0.0, 0f)
+        val pointB =
+            LatLng(0.0, 1.0, 0f)
         assertDistanceBetween(111195.08, pointA, pointB)
     }
 
     @Test
     fun testDistanceOneDegreeFortyFiveDegrees() {
-        val pointA = LatLng(45.0, 0.0, 0f)
-        val pointB = LatLng(45.0, 1.0, 0f)
+        val pointA =
+            LatLng(45.0, 0.0, 0f)
+        val pointB =
+            LatLng(45.0, 1.0, 0f)
         assertDistanceBetween(78626.30, pointA, pointB)
     }
 
     @Test
     fun testDistanceOneDegreeSouthPole() {
-        val pointA = LatLng(-90.0, 0.0, 0f)
-        val pointB = LatLng(-90.0, 1.0, 0f)
+        val pointA =
+            LatLng(-90.0, 0.0, 0f)
+        val pointB =
+            LatLng(-90.0, 1.0, 0f)
         assertDistanceBetween(0.0, pointA, pointB)
     }
 
     @Test
     fun testDistancePoleToPole() {
-        val pointA = LatLng(90.0, 0.0, 0f)
-        val pointB = LatLng(-90.0, 0.0, 0f)
+        val pointA =
+            LatLng(90.0, 0.0, 0f)
+        val pointB =
+            LatLng(-90.0, 0.0, 0f)
         assertDistanceBetween(20015115.07, pointA, pointB)
     }
 

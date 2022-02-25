@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.utils;
 
-import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.data.models.location.LatLng;
 
 public class LocationUtils {
     public static LatLng mapBoxLatLngToCommonsLatLng(com.mapbox.mapboxsdk.geometry.LatLng mapBoxLatLng) {

@@ -11,7 +11,7 @@ import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsContentProvider.BASE_URI
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.*
-import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.data.models.location.LatLng
 import fr.free.nrw.commons.nearby.Label
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.Sitelinks
@@ -54,7 +54,8 @@ class BookMarkLocationDaoTest {
     fun setUp() {
         exampleLabel = Label.FOREST
         exampleUri = Uri.parse("wikimedia/uri")
-        exampleLocation = LatLng(40.0,51.4, 1f)
+        exampleLocation =
+            LatLng(40.0, 51.4, 1f)
 
         builder = Sitelinks.Builder()
         builder.setWikipediaLink("wikipediaLink")

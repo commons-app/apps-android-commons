@@ -9,6 +9,7 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.actions.PageEditClient;
+import fr.free.nrw.commons.data.models.location.LatLng;
 import fr.free.nrw.commons.notification.NotificationHelper;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Observable;
@@ -163,7 +164,7 @@ public class CoordinateEditHelper {
 
         if (result) {
             media.setCoordinates(
-                new fr.free.nrw.commons.location.LatLng(Double.parseDouble(latitude),
+                new LatLng(Double.parseDouble(latitude),
                     Double.parseDouble(longitude),
                     Float.parseFloat(Accuracy)));
             title += ": " + context
