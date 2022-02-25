@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.contributions.ChunkInfo;
-import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.data.models.Contribution;
 import fr.free.nrw.commons.upload.worker.UploadWorker.NotificationUpdateProgressListener;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;

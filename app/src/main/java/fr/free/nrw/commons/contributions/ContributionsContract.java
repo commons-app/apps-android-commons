@@ -2,6 +2,7 @@ package fr.free.nrw.commons.contributions;
 
 import android.content.Context;
 import fr.free.nrw.commons.BasePresenter;
+import fr.free.nrw.commons.data.models.Contribution;
 
 /**
  * The contract for Contributions View & Presenter

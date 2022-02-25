@@ -3,7 +3,7 @@ package fr.free.nrw.commons.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.data.models.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao

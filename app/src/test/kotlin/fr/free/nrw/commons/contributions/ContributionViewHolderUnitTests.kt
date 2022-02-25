@@ -14,6 +14,7 @@ import com.facebook.soloader.SoLoader
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.data.models.Contribution
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.profile.ProfileActivity
 import io.reactivex.disposables.CompositeDisposable

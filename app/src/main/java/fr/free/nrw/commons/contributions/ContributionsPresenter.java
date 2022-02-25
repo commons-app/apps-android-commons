@@ -5,14 +5,11 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.contributions.ContributionsContract.UserActionListener;
+import fr.free.nrw.commons.data.models.Contribution;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.upload.worker.UploadWorker;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
-import java.util.Collections;
-import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 

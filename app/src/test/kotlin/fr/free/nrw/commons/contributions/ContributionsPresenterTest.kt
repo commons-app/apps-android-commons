@@ -8,6 +8,7 @@ import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import fr.free.nrw.commons.data.models.Contribution
 import io.reactivex.Completable
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before

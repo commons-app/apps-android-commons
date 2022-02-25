@@ -5,7 +5,7 @@ import android.content.Context
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.data.models.Contribution
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import org.junit.Before
 import org.junit.Test

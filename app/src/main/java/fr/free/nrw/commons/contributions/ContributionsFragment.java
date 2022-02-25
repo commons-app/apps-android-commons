@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.contributions;
 
-import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
-import static fr.free.nrw.commons.contributions.Contribution.STATE_PAUSED;
+import static fr.free.nrw.commons.data.models.Contribution.STATE_FAILED;
+import static fr.free.nrw.commons.data.models.Contribution.STATE_PAUSED;
 import static fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.WLM_URL;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
@@ -28,10 +28,10 @@ import androidx.fragment.app.FragmentTransaction;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.data.models.Contribution;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.theme.BaseActivity;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;

@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.contributions
+package fr.free.nrw.commons.data.models
 
 import android.net.Uri
 import android.os.Parcelable
@@ -7,10 +7,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.WikidataPlace
-import fr.free.nrw.commons.upload.WikidataPlace.Companion.from
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import kotlinx.android.parcel.Parcelize
 import java.util.*
@@ -66,7 +66,7 @@ data class Contribution constructor(
         decimalCoords = item.gpsCoords.decimalCoords,
         dateCreatedSource = "",
         depictedItems = depictedItems,
-        wikidataPlace = from(item.place),
+        wikidataPlace = WikidataPlace.from(item.place),
         contentUri = item.contentUri
     )
 

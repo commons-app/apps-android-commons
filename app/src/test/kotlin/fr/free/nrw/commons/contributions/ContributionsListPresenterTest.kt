@@ -7,6 +7,7 @@ import com.nhaarman.mockitokotlin2.verifyZeroInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.data.models.Contribution
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Completable
 import io.reactivex.Scheduler

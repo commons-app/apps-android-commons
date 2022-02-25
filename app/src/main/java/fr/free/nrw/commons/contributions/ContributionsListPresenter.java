@@ -7,6 +7,7 @@ import androidx.paging.DataSource.Factory;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 import fr.free.nrw.commons.contributions.ContributionsListContract.UserActionListener;
+import fr.free.nrw.commons.data.models.Contribution;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;

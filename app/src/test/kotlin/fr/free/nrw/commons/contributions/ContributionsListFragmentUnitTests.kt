@@ -16,6 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.data.models.Contribution
 import fr.free.nrw.commons.upload.WikidataPlace
 import org.junit.Assert
 import org.junit.Before

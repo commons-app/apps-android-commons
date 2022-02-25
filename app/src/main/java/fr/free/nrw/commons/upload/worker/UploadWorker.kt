@@ -18,7 +18,7 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ChunkInfo
-import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.data.models.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.customselector.database.UploadedStatus
@@ -191,7 +191,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             so that the next one does not process these contribution again
              */
             queuedContributions.forEach {
-                it.state=Contribution.STATE_IN_PROGRESS
+                it.state= Contribution.STATE_IN_PROGRESS
                 contributionDao.saveSynchronous(it)
             }
 
@@ -331,7 +331,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                         Timber.e(exception)
                         Timber.e("Upload from stash failed for contribution : $filename")
                         showFailedNotification(contribution)
-                        contribution.state=Contribution.STATE_FAILED
+                        contribution.state= Contribution.STATE_FAILED
                         contributionDao.saveSynchronous(contribution)
                         if (STASH_ERROR_CODES.contains(exception.message)) {
                             clearChunks(contribution)
@@ -355,7 +355,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             Timber.e(exception)
             Timber.e("Stash upload failed for contribution: $filename")
             showFailedNotification(contribution)
-            contribution.state=Contribution.STATE_FAILED
+            contribution.state= Contribution.STATE_FAILED
             clearChunks(contribution)
         }
     }
@@ -471,7 +471,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     @SuppressLint("StringFormatInvalid")
     private fun showSuccessNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
-        contribution.state=Contribution.STATE_COMPLETED
+        contribution.state= Contribution.STATE_COMPLETED
         curentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_completed_notification_title,

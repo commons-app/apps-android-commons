@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.data.models.Contribution;
 import fr.free.nrw.commons.media.MediaClient;
 
     /**

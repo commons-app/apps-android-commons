@@ -2,6 +2,7 @@ package fr.free.nrw.commons.contributions
 
 import androidx.paging.PagedList.BoundaryCallback
 import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.data.models.Contribution
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Scheduler
