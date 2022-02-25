@@ -59,7 +59,7 @@
   <string name="upload_progress_notification_title_start">Uploading file: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s uploading</string>
   <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
-  <string name="upload_failed_notification_title">Uploading %1$s failed</string>
+  <string name="upload_failed_notification_title">Failed to upload %1$s</string>
   <string name="upload_paused_notification_title">Uploading %1$s paused</string>
   <string name="upload_failed_notification_subtitle">Tap to view</string>
   <string name="upload_paused_notification_subtitle">Tap to view</string>
