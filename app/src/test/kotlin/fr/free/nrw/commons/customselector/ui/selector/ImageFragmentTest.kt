@@ -17,9 +17,9 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.data.models.model.CallbackStatus
-import fr.free.nrw.commons.data.models.model.Image
-import fr.free.nrw.commons.data.models.model.Result
+import fr.free.nrw.commons.data.models.customselector.CallbackStatus
+import fr.free.nrw.commons.data.models.customselector.Image
+import fr.free.nrw.commons.data.models.customselector.Result
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
 import org.junit.Before
 import org.junit.Test

@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.data.models.model
+package fr.free.nrw.commons.data.models.customselector
 
 /**
  * Custom selector data class Folder.

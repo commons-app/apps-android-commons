@@ -4,7 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.data.models.model.Image
+import fr.free.nrw.commons.data.models.customselector.Image
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertNotNull

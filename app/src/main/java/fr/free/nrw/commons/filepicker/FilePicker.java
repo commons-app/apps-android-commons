@@ -15,7 +15,7 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import fr.free.nrw.commons.data.models.model.Image;
+import fr.free.nrw.commons.data.models.customselector.Image;
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity;
 import java.io.File;
 import java.io.IOException;

@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
-import fr.free.nrw.commons.data.models.model.CallbackStatus
-import fr.free.nrw.commons.data.models.model.Image
-import fr.free.nrw.commons.data.models.model.Result
+import fr.free.nrw.commons.data.models.customselector.CallbackStatus
+import fr.free.nrw.commons.data.models.customselector.Image
+import fr.free.nrw.commons.data.models.customselector.Result
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.theme.BaseActivity
@@ -132,7 +132,7 @@ class ImageFragment: CommonsDaggerSupportFragment() {
     /**
      * Handle view model result.
      */
-    private fun handleResult(result:Result){
+    private fun handleResult(result: Result){
         if(result.status is CallbackStatus.SUCCESS){
             val images = result.images
             if(images.isNotEmpty()) {

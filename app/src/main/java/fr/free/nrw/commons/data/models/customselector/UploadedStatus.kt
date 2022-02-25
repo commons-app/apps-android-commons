@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.data.models.model
+package fr.free.nrw.commons.data.models.customselector
 
 import androidx.room.Entity
 import androidx.room.Index
