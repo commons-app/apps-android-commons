@@ -9,6 +9,7 @@ import android.os.RemoteException;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import fr.free.nrw.commons.data.models.RecentSearch;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
