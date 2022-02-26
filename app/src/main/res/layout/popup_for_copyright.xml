@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/popup_relative_layout"
+  android:layout_width="350dp"
+  android:layout_height="450dp"
+  android:layout_gravity="center">
+
+  <ImageView
+    android:id="@+id/copyright_icon"
+    android:layout_width="193dp"
+    android:layout_height="181dp"
+    android:layout_centerHorizontal="true"
+    android:contentDescription="@string/welcome_copyright_text"
+    app:srcCompat="@drawable/copyright" />
+
+  <TextView
+    android:id="@+id/copyright_messege"
+    android:layout_width="331dp"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/copyright_icon"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="21dp"
+    android:text="@string/please_only_upload_pictures_you_have_taken_by_yourself_uploaders_of_copyrighted_images_will_be_blocked_this_applies_to_the_beta_flavor_too_thank_you_for_testing_the_app"
+    android:textSize="20sp"
+    android:textStyle="bold" />
+
+  <Button
+    android:id="@+id/button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/copyright_messege"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="37dp"
+    android:text="@string/ok" />
+</RelativeLayout>
