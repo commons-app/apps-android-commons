@@ -98,7 +98,7 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     /**
      * Checks for no image in gallery.
      */
-        private fun isImageGalleryEmpty(): Boolean {
+    private fun isImageGalleryEmpty(): Boolean {
         try {
             val projection = arrayOf(MediaStore.Images.Media._ID)
             val cursor: Cursor? = contentResolver.query(
