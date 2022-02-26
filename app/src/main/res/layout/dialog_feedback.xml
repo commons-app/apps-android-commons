@@ -26,7 +26,7 @@
       android:id="@+id/feedback_item_edit_text"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:hint="@string/your_feedback"
+      android:hint="Your Feedback"
       android:imeOptions="actionNext|flagNoExtractUi"
       android:lines="4"
       android:inputType="text|textMultiLine"
