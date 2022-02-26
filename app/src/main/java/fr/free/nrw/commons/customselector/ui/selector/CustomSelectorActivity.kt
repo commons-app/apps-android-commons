@@ -84,6 +84,7 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
             lastOpenFolderName?.let { onFolderClick(lastOpenFolderId, it, lastItemId) }
         }
 
+        // Checks if the Image gallery is empty.
             if(isImageGalleryEmpty())
         {
             val linearLayout: LinearLayout = findViewById<View>(R.id.linear_layout_noimage) as LinearLayout

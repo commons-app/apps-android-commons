@@ -27,6 +27,6 @@
       app:layout_constraintHorizontal_bias="0.66"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="@+id/fragment_container"
-      app:layout_constraintVertical_bias="0.481"></LinearLayout>
+      app:layout_constraintVertical_bias="0.481"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
