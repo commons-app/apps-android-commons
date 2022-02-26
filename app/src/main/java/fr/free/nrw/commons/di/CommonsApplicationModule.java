@@ -169,6 +169,12 @@ public class CommonsApplicationModule {
         return context.getContentResolver().acquireContentProviderClient(BuildConfig.BOOKMARK_ITEMS_AUTHORITY);
     }
 
+    @Provides
+    @Named("recent_languages")
+    public ContentProviderClient provideRecentLanguagesContentProviderClient(Context context) {
+        return context.getContentResolver().acquireContentProviderClient(BuildConfig.BOOKMARK_ITEMS_AUTHORITY);
+    }
+
     /**
      * Provides a Json store instance(JsonKvStore) which keeps
      * the provided Gson in it's instance
